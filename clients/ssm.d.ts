@@ -1253,6 +1253,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export type AssociationComplianceSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"UNSPECIFIED"|string;
   export interface AssociationDescription {
@@ -1356,6 +1360,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1592,6 +1600,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
   export interface AttachmentContent {
@@ -2489,6 +2501,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association.
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2569,6 +2585,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association. For example, if you specified a cron schedule of cron(0 0 ? * THU#2 *), you could specify an offset of 3 to run the association each Sunday after the second Thursday of the month. For more information about cron schedules for associations, see Reference: Cron and rate expressions for Systems Manager in the Amazon Web Services Systems Manager User Guide.   To use offsets, you must specify the ApplyOnlyAtCronInterval parameter. This option tells the system not to run an association immediately after you create it.  
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export interface CreateAssociationResult {
     /**
@@ -4455,7 +4475,7 @@ declare namespace SSM {
      */
     InstanceId: InstanceId;
     /**
-     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents (SSM documents). For example, aws:RunShellScript is a plugin. To find the PluginName, check the document content and find the name of the plugin. Alternatively, use ListCommandInvocations with the CommandId and Details parameters. The PluginName is the Name attribute of the CommandPlugin object in the CommandPlugins list.
+     * The name of the step for which you want detailed results. If the document contains only one step, you can omit the name and details for that step. If the document contains more than one step, you must specify the name of the step for which you want to view details. Be sure to specify the name of the step, not the name of a plugin like aws:RunShellScript. To find the PluginName, check the document content and find the name of the step you want details for. Alternatively, use ListCommandInvocations with the CommandId and Details parameters. The PluginName is the Name attribute of the CommandPlugin object in the CommandPlugins list.
      */
     PluginName?: CommandPluginName;
   }
@@ -8420,6 +8440,10 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
+     * A key-value mapping of runbook parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
+    /**
      * The MaxConcurrency value specified by the user when the operation started, indicating the maximum number of resources that the runbook operation can run on at the same time.
      */
     MaxConcurrency?: MaxConcurrency;
@@ -9157,6 +9181,10 @@ declare namespace SSM {
      * Number of days to wait after the scheduled day to run an association. For example, if you specified a cron schedule of cron(0 0 ? * THU#2 *), you could specify an offset of 3 to run the association each Sunday after the second Thursday of the month. For more information about cron schedules for associations, see Reference: Cron and rate expressions for Systems Manager in the Amazon Web Services Systems Manager User Guide.   To use offsets, you must specify the ApplyOnlyAtCronInterval parameter. This option tells the system not to run an association immediately after you create it.  
      */
     ScheduleOffset?: ScheduleOffset;
+    /**
+     * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
+     */
+    TargetMaps?: TargetMaps;
   }
   export interface UpdateAssociationResult {
     /**

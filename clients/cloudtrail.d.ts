@@ -12,11 +12,11 @@ declare class CloudTrail extends Service {
   constructor(options?: CloudTrail.Types.ClientConfiguration)
   config: Config & CloudTrail.Types.ClientConfiguration;
   /**
-   * Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all Amazon Web Services Regions only from the Region in which the trail was created (also known as its home region).
+   * Adds one or more tags to a trail or event data store, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
    */
   addTags(params: CloudTrail.Types.AddTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all Amazon Web Services Regions only from the Region in which the trail was created (also known as its home region).
+   * Adds one or more tags to a trail or event data store, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class CloudTrail extends Service {
    */
   listQueries(callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
   /**
-   * Lists the tags for the trail in the current region.
+   * Lists the tags for the trail or event data store in the current region.
    */
   listTags(params: CloudTrail.Types.ListTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
-   * Lists the tags for the trail in the current region.
+   * Lists the tags for the trail or event data store in the current region.
    */
   listTags(callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class CloudTrail extends Service {
    */
   putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
-   * Removes the specified tags from a trail.
+   * Removes the specified tags from a trail or event data store.
    */
   removeTags(params: CloudTrail.Types.RemoveTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
-   * Removes the specified tags from a trail.
+   * Removes the specified tags from a trail or event data store.
    */
   removeTags(callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
@@ -247,7 +247,7 @@ declare class CloudTrail extends Service {
 declare namespace CloudTrail {
   export interface AddTagsRequest {
     /**
-     * Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail or event data store to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     ResourceId: String;
     /**
@@ -619,35 +619,35 @@ declare namespace CloudTrail {
      */
     Name?: EventDataStoreName;
     /**
-     * Indicates whether the event data store is protected from termination.
+     * This field is being deprecated. Indicates whether the event data store is protected from termination.
      */
     TerminationProtectionEnabled?: TerminationProtectionEnabled;
     /**
-     * The status of an event data store. Values are ENABLED and PENDING_DELETION.
+     * This field is being deprecated. The status of an event data store. Values are ENABLED and PENDING_DELETION.
      */
     Status?: EventDataStoreStatus;
     /**
-     * The advanced event selectors that were used to select events for the data store.
+     * This field is being deprecated. The advanced event selectors that were used to select events for the data store.
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     * This field is being deprecated. Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
-     * Indicates that an event data store is collecting logged events for an organization.
+     * This field is being deprecated. Indicates that an event data store is collecting logged events for an organization.
      */
     OrganizationEnabled?: Boolean;
     /**
-     * The retention period, in days.
+     * This field is being deprecated. The retention period, in days.
      */
     RetentionPeriod?: RetentionPeriod;
     /**
-     * The timestamp of the event data store's creation.
+     * This field is being deprecated. The timestamp of the event data store's creation.
      */
     CreatedTimestamp?: _Date;
     /**
-     * The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     * This field is being deprecated. The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
      */
     UpdatedTimestamp?: _Date;
   }
@@ -978,7 +978,7 @@ declare namespace CloudTrail {
   }
   export interface ListTagsRequest {
     /**
-     * Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     * Specifies a list of trail and event data store ARNs whose tags will be listed. The list has a limit of 20 ARNs.
      */
     ResourceIdList: ResourceIdList;
     /**
@@ -1195,7 +1195,7 @@ declare namespace CloudTrail {
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
   export interface RemoveTagsRequest {
     /**
-     * Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail or event data store from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE 
      */
     ResourceId: String;
     /**

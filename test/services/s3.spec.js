@@ -3477,7 +3477,7 @@ describe('AWS.S3', function() {
         request.send(function(err, data) {
           expect(err).to.exist;
           expect(err.name).to.equal('InvalidARN');
-          expect(err.message).to.equal('ARN region is empty');
+          expect(err.message).to.contain('ARN region is empty');
           done();
         });
       });

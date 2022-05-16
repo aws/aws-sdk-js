@@ -324,11 +324,11 @@ declare class WorkSpacesWeb extends Service {
    */
   updateBrowserSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateBrowserSettingsResponse) => void): Request<WorkSpacesWeb.Types.UpdateBrowserSettingsResponse, AWSError>;
   /**
-   * Updates the identity provider.
+   * Updates the identity provider. 
    */
   updateIdentityProvider(params: WorkSpacesWeb.Types.UpdateIdentityProviderRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateIdentityProviderResponse) => void): Request<WorkSpacesWeb.Types.UpdateIdentityProviderResponse, AWSError>;
   /**
-   * Updates the identity provider.
+   * Updates the identity provider. 
    */
   updateIdentityProvider(callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateIdentityProviderResponse) => void): Request<WorkSpacesWeb.Types.UpdateIdentityProviderResponse, AWSError>;
   /**
@@ -559,7 +559,7 @@ declare namespace WorkSpacesWeb {
      */
     clientToken?: ClientToken;
     /**
-     * The identity provider details. The following list describes the provider detail keys for each identity provider type.    For Google and Login with Amazon:    client_id     client_secret     authorize_scopes      For Facebook:    client_id     client_secret     authorize_scopes     api_version      For Sign in with Apple:    client_id     team_id     key_id     private_key     authorize_scopes      For OIDC providers:    client_id     client_secret     attributes_request_method     oidc_issuer     authorize_scopes     authorize_url if not available from discovery URL specified by oidc_issuer key     token_url if not available from discovery URL specified by oidc_issuer key     attributes_url if not available from discovery URL specified by oidc_issuer key     jwks_uri if not available from discovery URL specified by oidc_issuer key      For SAML providers:    MetadataFile OR MetadataURL     IDPSignout optional     
+     * The identity provider details. The following list describes the provider detail keys for each identity provider type.    For Google and Login with Amazon:    client_id     client_secret     authorize_scopes      For Facebook:    client_id     client_secret     authorize_scopes     api_version      For Sign in with Apple:    client_id     team_id     key_id     private_key     authorize_scopes      For OIDC providers:    client_id     client_secret     attributes_request_method     oidc_issuer     authorize_scopes     authorize_url if not available from discovery URL specified by oidc_issuer key     token_url if not available from discovery URL specified by oidc_issuer key     attributes_url if not available from discovery URL specified by oidc_issuer key     jwks_uri if not available from discovery URL specified by oidc_issuer key      For SAML providers:    MetadataFile OR MetadataURL     IDPSignout (boolean) optional     
      */
     identityProviderDetails: IdentityProviderDetails;
     /**
@@ -671,9 +671,17 @@ declare namespace WorkSpacesWeb {
      */
     copyAllowed: EnabledType;
     /**
+     * The amount of time that a streaming session remains active after users disconnect.
+     */
+    disconnectTimeoutInMinutes?: DisconnectTimeoutInMinutes;
+    /**
      * Specifies whether the user can download files from the streaming session to the local device.
      */
     downloadAllowed: EnabledType;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.
+     */
+    idleDisconnectTimeoutInMinutes?: IdleDisconnectTimeoutInMinutes;
     /**
      * Specifies whether the user can paste text from the local device to the streaming session.
      */
@@ -777,6 +785,7 @@ declare namespace WorkSpacesWeb {
   }
   export interface DisassociateUserSettingsResponse {
   }
+  export type DisconnectTimeoutInMinutes = number;
   export type DisplayName = string;
   export type EnabledType = "Disabled"|"Enabled"|string;
   export type EncryptionContextMap = {[key: string]: StringType};
@@ -924,6 +933,7 @@ declare namespace WorkSpacesWeb {
     identityProviderType?: IdentityProviderType;
   }
   export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
+  export type IdleDisconnectTimeoutInMinutes = number;
   export interface ListBrowserSettingsRequest {
     /**
      * The maximum number of results to be included in the next page.
@@ -1320,7 +1330,7 @@ declare namespace WorkSpacesWeb {
      */
     identityProviderArn: ARN;
     /**
-     * The details of the identity provider.
+     * The details of the identity provider. The following list describes the provider detail keys for each identity provider type.    For Google and Login with Amazon:    client_id     client_secret     authorize_scopes      For Facebook:    client_id     client_secret     authorize_scopes     api_version      For Sign in with Apple:    client_id     team_id     key_id     private_key     authorize_scopes      For OIDC providers:    client_id     client_secret     attributes_request_method     oidc_issuer     authorize_scopes     authorize_url if not available from discovery URL specified by oidc_issuer key     token_url if not available from discovery URL specified by oidc_issuer key     attributes_url if not available from discovery URL specified by oidc_issuer key     jwks_uri if not available from discovery URL specified by oidc_issuer key      For SAML providers:    MetadataFile OR MetadataURL     IDPSignout (boolean) optional     
      */
     identityProviderDetails?: IdentityProviderDetails;
     /**
@@ -1416,9 +1426,17 @@ declare namespace WorkSpacesWeb {
      */
     copyAllowed?: EnabledType;
     /**
+     * The amount of time that a streaming session remains active after users disconnect.
+     */
+    disconnectTimeoutInMinutes?: DisconnectTimeoutInMinutes;
+    /**
      * Specifies whether the user can download files from the streaming session to the local device.
      */
     downloadAllowed?: EnabledType;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.
+     */
+    idleDisconnectTimeoutInMinutes?: IdleDisconnectTimeoutInMinutes;
     /**
      * Specifies whether the user can paste text from the local device to the streaming session.
      */
@@ -1452,9 +1470,17 @@ declare namespace WorkSpacesWeb {
      */
     copyAllowed?: EnabledType;
     /**
+     * The amount of time that a streaming session remains active after users disconnect.
+     */
+    disconnectTimeoutInMinutes?: DisconnectTimeoutInMinutes;
+    /**
      * Specifies whether the user can download files from the streaming session to the local device.
      */
     downloadAllowed?: EnabledType;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.
+     */
+    idleDisconnectTimeoutInMinutes?: IdleDisconnectTimeoutInMinutes;
     /**
      * Specifies whether the user can paste text from the local device to the streaming session.
      */
@@ -1479,9 +1505,17 @@ declare namespace WorkSpacesWeb {
      */
     copyAllowed?: EnabledType;
     /**
+     * The amount of time that a streaming session remains active after users disconnect.
+     */
+    disconnectTimeoutInMinutes?: DisconnectTimeoutInMinutes;
+    /**
      * Specifies whether the user can download files from the streaming session to the local device.
      */
     downloadAllowed?: EnabledType;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.
+     */
+    idleDisconnectTimeoutInMinutes?: IdleDisconnectTimeoutInMinutes;
     /**
      * Specifies whether the user can paste text from the local device to the streaming session.
      */

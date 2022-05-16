@@ -1,6 +1,93 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1121.0-->
+<!--LATEST=2.1136.0-->
 <!--ENTRYINSERT-->
+
+## 2.1136.0
+* feature: CloudFront: Introduced a new error (TooLongCSPInResponseHeadersPolicy) that is returned when the value of the Content-Security-Policy header in a response headers policy exceeds the maximum allowed length.
+* feature: Discovery: Add Migration Evaluator Collector details to the GetDiscoverySummary API response
+* feature: Resiliencehub: In this release, we are introducing support for Amazon Elastic Container Service, Amazon Route 53, AWS Elastic Disaster Recovery, AWS Backup in addition to the existing supported Services.  This release also supports Terraform file input from S3 and scheduling daily assessments
+* feature: WorkSpacesWeb: Amazon WorkSpaces Web now supports Administrator timeout control
+
+## 2.1135.0
+* feature: Grafana: This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.
+
+## 2.1134.0
+* feature: EC2: This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.
+* feature: Kendra: Amazon Kendra now provides a data source connector for Jira. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html
+* feature: Lambda: Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.
+* feature: Lightsail: This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.
+* feature: SSMIncidents: Adding support for dynamic SSM Runbook parameter values. Updating validation pattern for engagements. Adding ConflictException to UpdateReplicationSet API contract.
+* feature: WorkSpaces: Increased the character limit of the login message from 600 to 850 characters.
+
+## 2.1133.0
+* feature: EC2: This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.
+
+## 2.1132.0
+* feature: EC2: Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
+* feature: EKS: Adds BOTTLEROCKET_ARM_64_NVIDIA and BOTTLEROCKET_x86_64_NVIDIA AMI types to EKS managed nodegroups
+* feature: EMR: This release updates the Amazon EMR ModifyInstanceGroups API to support "MERGE" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request.
+
+## 2.1131.0
+* feature: CloudControl: SDK release for Cloud Control API to include paginators for Python SDK.
+* feature: Evidently: Add detail message inside GetExperimentResults API response to indicate experiment result availability
+
+## 2.1130.0
+* feature: EC2: Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.
+* feature: Location: Amazon Location Service now includes a MaxResults parameter for ListGeofences requests.
+* feature: MediaPackage: This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints.
+* feature: Redshift: Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
+
+## 2.1129.0
+* feature: DataSync: AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.
+* feature: EC2: Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage
+* feature: Iot: AWS IoT Jobs now allows you to create up to 100,000 active continuous and snapshot jobs by using concurrency control.
+* feature: Kendra: AWS Kendra now supports hierarchical facets for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+
+## 2.1128.0
+* feature: Backup: Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup
+* feature: IoTSecureTunneling: This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens
+* feature: SSM: This release adds the TargetMaps parameter in SSM State Manager API.
+
+## 2.1127.0
+* feature: EC2: Adds support for allocating Dedicated Hosts on AWS  Outposts. The AllocateHosts API now accepts an OutpostArn request  parameter, and the DescribeHosts API now includes an OutpostArn response parameter.
+* feature: KinesisVideo: Add support for multiple image feature related APIs for configuring image generation and notification of a video stream. Add "GET_IMAGES" to the list of supported API names for the GetDataEndpoint API.
+* feature: KinesisVideoArchivedMedia: Add support for GetImages API  for retrieving images from a video stream
+* feature: SageMaker: SageMaker Autopilot adds new metrics for all candidate models generated by Autopilot experiments; RStudio on SageMaker now allows users to bring your own development environment in a custom image.
+
+## 2.1126.0
+* feature: Organizations: This release adds the INVALID_PAYMENT_INSTRUMENT as a fail reason and an error message.
+* feature: Outposts: This release adds a new API called ListAssets to the Outposts SDK, which lists the hardware assets in an Outpost.
+* feature: Synthetics: CloudWatch Synthetics has introduced a new feature to provide customers with an option to delete the underlying resources that Synthetics canary creates when the user chooses to delete the canary.
+
+## 2.1125.0
+* feature: CodeGuruReviewer: Amazon CodeGuru Reviewer now supports suppressing recommendations from being generated on specific files and directories.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK nows supports creation of Dolby Vision profile 8.1, the ability to generate black frames of video, and introduces audio-only DASH and CMAF support.
+* feature: RDS: Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.
+* feature: SSM: Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter
+* feature: WAFV2: You can now inspect all request headers and all cookies. You can now specify how to handle oversize body contents in your rules that inspect the body.
+
+## 2.1124.0
+* feature: Braket: This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances.
+* feature: Connect: This release introduces an API for changing the current agent status of a user in Connect.
+* feature: EC2: This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair.
+* feature: NetworkFirewall: AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.
+
+## 2.1123.0
+* feature: ChimeSDKMediaPipelines: For Amazon Chime SDK meetings, the Amazon Chime Media Pipelines SDK allows builders to capture audio, video, and content share streams. You can also capture meeting events, live transcripts, and data messages. The pipelines save the artifacts to an Amazon S3 bucket that you designate.
+* feature: CloudTrail: Increases the retention period maximum to 2557 days. Deprecates unused fields of the ListEventDataStores API response. Updates documentation.
+* feature: IoTWireless: Add list support for event configurations, allow to get and update event configurations by resource type, support LoRaWAN events; Make NetworkAnalyzerConfiguration as a resource, add List, Create, Delete API support; Add FCntStart attribute support for ABP WirelessDevice.
+* feature: LookoutEquipment: This release adds the following new features: 1) Introduces an option for automatic schema creation 2) Now allows for Ingestion of data containing most common errors and allows automatic data cleaning 3) Introduces new API ListSensorStatistics that gives further information about the ingested data
+* feature: Rekognition: This release adds support to configure stream-processor resources for label detections on streaming-videos. UpateStreamProcessor API is also launched with this release, which could be used to update an existing stream-processor.
+* feature: SageMaker: Amazon SageMaker Autopilot adds support for custom validation dataset and validation ratio through the CreateAutoMLJob and DescribeAutoMLJob APIs.
+
+## 2.1122.0
+* feature: CloudFront: CloudFront now supports the Server-Timing header in HTTP responses sent from CloudFront. You can use this header to view metrics that help you gain insights about the behavior and performance of CloudFront. To use this header, enable it in a response headers policy.
+* feature: EventBridge: Throw runtime error when unsupported parameter EndpointId is supplied with PutEvents API
+* feature: Ivschat: Adds new APIs for IVS Chat, a feature for building interactive chat experiences alongside an IVS broadcast.
+* feature: Lightsail: This release adds support for Lightsail load balancer HTTP to HTTPS redirect and TLS policy configuration.
+* feature: NetworkFirewall: AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.
+* feature: S3: Add error message to try v3 SDK when customer uses multi-regional ARN in s3
+* feature: SageMaker: SageMaker Inference Recommender now accepts customer KMS key ID for encryption of endpoints and compilation outputs created during inference recommendation.
 
 ## 2.1121.0
 * feature: Connect: This release adds SearchUsers API which can be used to search for users with a Connect Instance

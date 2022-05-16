@@ -36,11 +36,11 @@ declare class Location extends Service {
    */
   batchDeleteGeofence(callback?: (err: AWSError, data: Location.Types.BatchDeleteGeofenceResponse) => void): Request<Location.Types.BatchDeleteGeofenceResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate. 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate.   The DeviceID is used as a string to represent the device. You do not need to have a Tracker associated with the DeviceID. 
    */
   batchEvaluateGeofences(params: Location.Types.BatchEvaluateGeofencesRequest, callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate. 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.   Geofence evaluation uses the given device position. It does not account for the optional Accuracy of a DevicePositionUpdate.   The DeviceID is used as a string to represent the device. You do not need to have a Tracker associated with the DeviceID. 
    */
   batchEvaluateGeofences(callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
@@ -768,7 +768,7 @@ declare namespace Location {
      */
     DepartNow?: Boolean;
     /**
-     * The start position for the route. Defined in WGS 84 format: [longitude, latitude].   For example, [-123.115, 49.285]     If you specify a departure that's not located on a road, Amazon Location moves the position to the nearest road. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a 400 RoutesValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
+     * The start position for the route. Defined in World Geodetic System (WGS 84) format: [longitude, latitude].   For example, [-123.115, 49.285]     If you specify a departure that's not located on a road, Amazon Location moves the position to the nearest road. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a 400 RoutesValidationException error.  Valid Values: [-180 to 180,-90 to 90] 
      */
     DeparturePosition: Position;
     /**
@@ -776,7 +776,7 @@ declare namespace Location {
      */
     DepartureTime?: Timestamp;
     /**
-     * The finish position for the route. Defined in WGS 84 format: [longitude, latitude].    For example, [-122.339, 47.615]     If you specify a destination that's not located on a road, Amazon Location moves the position to the nearest road.   Valid Values: [-180 to 180,-90 to 90] 
+     * The finish position for the route. Defined in World Geodetic System (WGS 84) format: [longitude, latitude].    For example, [-122.339, 47.615]     If you specify a destination that's not located on a road, Amazon Location moves the position to the nearest road.   Valid Values: [-180 to 180,-90 to 90] 
      */
     DestinationPosition: Position;
     /**
@@ -1753,10 +1753,15 @@ declare namespace Location {
      */
     CollectionName: ResourceName;
     /**
+     * An optional limit for the number of geofences returned in a single call.  Default value: 100 
+     */
+    MaxResults?: ListGeofencesRequestMaxResultsInteger;
+    /**
      * The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.  Default value: null 
      */
     NextToken?: Token;
   }
+  export type ListGeofencesRequestMaxResultsInteger = number;
   export interface ListGeofencesResponse {
     /**
      * Contains a list of geofences stored in the geofence collection.
@@ -2171,7 +2176,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. It does not change which results are returned. If the language is not specified, or not supported for a particular result, the partner automatically chooses a language for the result.
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the language parameter set to en. The city in the results will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the city in the results will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
     Language?: LanguageTag;
     /**
@@ -2229,7 +2234,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. It does not change which results are returned. If the language is not specified, or not supported for a particular result, the partner automatically chooses a language for the result. Used only when the partner selected is Here.
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for Athens, Gr to get suggestions with the language parameter set to en. The results found will most likely be returned as Athens, Greece. If you set the language parameter to el, for Greek, then the result found will more likely be returned as Αθήνα, Ελλάδα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
     Language?: LanguageTag;
     /**
@@ -2239,9 +2244,10 @@ declare namespace Location {
     /**
      * The free-form partial text to use to generate place suggestions. For example, eiffel tow.
      */
-    Text: SyntheticSearchPlaceIndexForSuggestionsRequestString;
+    Text: SearchPlaceIndexForSuggestionsRequestTextString;
   }
   export type SearchPlaceIndexForSuggestionsRequestMaxResultsInteger = number;
+  export type SearchPlaceIndexForSuggestionsRequestTextString = string;
   export interface SearchPlaceIndexForSuggestionsResponse {
     /**
      * A list of place suggestions that best match the search text.
@@ -2280,7 +2286,7 @@ declare namespace Location {
     /**
      * The free-form partial text input specified in the request.
      */
-    Text: SyntheticSearchPlaceIndexForSuggestionsSummaryString;
+    Text: SensitiveString;
   }
   export interface SearchPlaceIndexForTextRequest {
     /**
@@ -2300,7 +2306,7 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
-     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. It does not change which results are returned. If the language is not specified, or not supported for a particular result, the partner automatically chooses a language for the result.
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for Athens, Greece, with the language parameter set to en. The result found will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the result found will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
     Language?: LanguageTag;
     /**
@@ -2310,11 +2316,12 @@ declare namespace Location {
     /**
      * The address, name, city, or region to be used in the search in free-form text format. For example, 123 Any Street.
      */
-    Text: SyntheticSearchPlaceIndexForTextRequestString;
+    Text: SearchPlaceIndexForTextRequestTextString;
   }
+  export type SearchPlaceIndexForTextRequestTextString = string;
   export interface SearchPlaceIndexForTextResponse {
     /**
-     * A list of Places matching the input text. Each result contains additional information about the specific point of interest. 
+     * A list of Places matching the input text. Each result contains additional information about the specific point of interest.  Not all response properties are included with all responses. Some properties may only be returned by specific data partners.
      */
     Results: SearchForTextResultList;
     /**
@@ -2354,8 +2361,9 @@ declare namespace Location {
     /**
      * The search text specified in the request.
      */
-    Text: SyntheticSearchPlaceIndexForTextSummaryString;
+    Text: SensitiveString;
   }
+  export type SensitiveString = string;
   export interface Step {
     /**
      * The travel distance between the step's StartPosition and EndPosition.
@@ -2383,10 +2391,6 @@ declare namespace Location {
   export type StepGeometryOffsetInteger = number;
   export type StepList = Step[];
   export type String = string;
-  export type SyntheticSearchPlaceIndexForSuggestionsRequestString = string;
-  export type SyntheticSearchPlaceIndexForSuggestionsSummaryString = string;
-  export type SyntheticSearchPlaceIndexForTextRequestString = string;
-  export type SyntheticSearchPlaceIndexForTextSummaryString = string;
   export type TagKey = string;
   export type TagKeys = String[];
   export type TagMap = {[key: string]: TagValue};

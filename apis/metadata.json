@@ -1152,5 +1152,12 @@
   "pinpointsmsvoicev2": {
     "prefix": "pinpoint-sms-voice-v2",
     "name": "PinpointSMSVoiceV2"
+  },
+  "ivschat": {
+    "name": "Ivschat"
+  },
+  "chimesdkmediapipelines": {
+    "prefix": "chime-sdk-media-pipelines",
+    "name": "ChimeSDKMediaPipelines"
   }
 }

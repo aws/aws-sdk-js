@@ -1,0 +1,330 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2021-07-15",
+    "endpointPrefix": "media-pipelines-chime",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon Chime SDK Media Pipelines",
+    "serviceId": "Chime SDK Media Pipelines",
+    "signatureVersion": "v4",
+    "signingName": "chime",
+    "uid": "chime-sdk-media-pipelines-2021-07-15"
+  },
+  "operations": {
+    "CreateMediaCapturePipeline": {
+      "http": {
+        "requestUri": "/sdk-media-capture-pipelines",
+        "responseCode": 201
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "SourceType",
+          "SourceArn",
+          "SinkType",
+          "SinkArn"
+        ],
+        "members": {
+          "SourceType": {},
+          "SourceArn": {
+            "shape": "S3"
+          },
+          "SinkType": {},
+          "SinkArn": {
+            "shape": "S3"
+          },
+          "ClientRequestToken": {
+            "idempotencyToken": true,
+            "type": "string",
+            "sensitive": true
+          },
+          "ChimeSdkMeetingConfiguration": {
+            "shape": "S6"
+          },
+          "Tags": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "MediaCapturePipeline": {
+            "shape": "Sq"
+          }
+        }
+      }
+    },
+    "DeleteMediaCapturePipeline": {
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/sdk-media-capture-pipelines/{mediaPipelineId}",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "MediaPipelineId"
+        ],
+        "members": {
+          "MediaPipelineId": {
+            "location": "uri",
+            "locationName": "mediaPipelineId"
+          }
+        }
+      }
+    },
+    "GetMediaCapturePipeline": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/sdk-media-capture-pipelines/{mediaPipelineId}",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "MediaPipelineId"
+        ],
+        "members": {
+          "MediaPipelineId": {
+            "location": "uri",
+            "locationName": "mediaPipelineId"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "MediaCapturePipeline": {
+            "shape": "Sq"
+          }
+        }
+      }
+    },
+    "ListMediaCapturePipelines": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/sdk-media-capture-pipelines",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {
+            "location": "querystring",
+            "locationName": "next-token"
+          },
+          "MaxResults": {
+            "location": "querystring",
+            "locationName": "max-results",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "MediaCapturePipelines": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "MediaPipelineId": {},
+                "MediaPipelineArn": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN"
+        ],
+        "members": {
+          "ResourceARN": {
+            "location": "querystring",
+            "locationName": "arn"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "Sl"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "http": {
+        "requestUri": "/tags?operation=tag-resource",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "Tags": {
+            "shape": "Sl"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "http": {
+        "requestUri": "/tags?operation=untag-resource",
+        "responseCode": 204
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceARN": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    }
+  },
+  "shapes": {
+    "S3": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S6": {
+      "type": "structure",
+      "members": {
+        "SourceConfiguration": {
+          "type": "structure",
+          "members": {
+            "SelectedVideoStreams": {
+              "type": "structure",
+              "members": {
+                "AttendeeIds": {
+                  "type": "list",
+                  "member": {}
+                },
+                "ExternalUserIds": {
+                  "type": "list",
+                  "member": {
+                    "type": "string",
+                    "sensitive": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ArtifactsConfiguration": {
+          "type": "structure",
+          "required": [
+            "Audio",
+            "Video",
+            "Content"
+          ],
+          "members": {
+            "Audio": {
+              "type": "structure",
+              "required": [
+                "MuxType"
+              ],
+              "members": {
+                "MuxType": {}
+              }
+            },
+            "Video": {
+              "type": "structure",
+              "required": [
+                "State"
+              ],
+              "members": {
+                "State": {},
+                "MuxType": {}
+              }
+            },
+            "Content": {
+              "type": "structure",
+              "required": [
+                "State"
+              ],
+              "members": {
+                "State": {},
+                "MuxType": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "Sl": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "Sq": {
+      "type": "structure",
+      "members": {
+        "MediaPipelineId": {},
+        "MediaPipelineArn": {},
+        "SourceType": {},
+        "SourceArn": {
+          "shape": "S3"
+        },
+        "Status": {},
+        "SinkType": {},
+        "SinkArn": {
+          "shape": "S3"
+        },
+        "CreatedTimestamp": {
+          "shape": "St"
+        },
+        "UpdatedTimestamp": {
+          "shape": "St"
+        },
+        "ChimeSdkMeetingConfiguration": {
+          "shape": "S6"
+        }
+      }
+    },
+    "St": {
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
+    }
+  }
+}

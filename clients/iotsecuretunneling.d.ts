@@ -12,19 +12,19 @@ declare class IoTSecureTunneling extends Service {
   constructor(options?: IoTSecureTunneling.Types.ClientConfiguration)
   config: Config & IoTSecureTunneling.Types.ClientConfiguration;
   /**
-   * Closes a tunnel identified by the unique tunnel id. When a CloseTunnel request is received, we close the WebSocket connections between the client and proxy server so no data can be transmitted.
+   * Closes a tunnel identified by the unique tunnel id. When a CloseTunnel request is received, we close the WebSocket connections between the client and proxy server so no data can be transmitted. Requires permission to access the CloseTunnel action.
    */
   closeTunnel(params: IoTSecureTunneling.Types.CloseTunnelRequest, callback?: (err: AWSError, data: IoTSecureTunneling.Types.CloseTunnelResponse) => void): Request<IoTSecureTunneling.Types.CloseTunnelResponse, AWSError>;
   /**
-   * Closes a tunnel identified by the unique tunnel id. When a CloseTunnel request is received, we close the WebSocket connections between the client and proxy server so no data can be transmitted.
+   * Closes a tunnel identified by the unique tunnel id. When a CloseTunnel request is received, we close the WebSocket connections between the client and proxy server so no data can be transmitted. Requires permission to access the CloseTunnel action.
    */
   closeTunnel(callback?: (err: AWSError, data: IoTSecureTunneling.Types.CloseTunnelResponse) => void): Request<IoTSecureTunneling.Types.CloseTunnelResponse, AWSError>;
   /**
-   * Gets information about a tunnel identified by the unique tunnel id.
+   * Gets information about a tunnel identified by the unique tunnel id. Requires permission to access the DescribeTunnel action.
    */
   describeTunnel(params: IoTSecureTunneling.Types.DescribeTunnelRequest, callback?: (err: AWSError, data: IoTSecureTunneling.Types.DescribeTunnelResponse) => void): Request<IoTSecureTunneling.Types.DescribeTunnelResponse, AWSError>;
   /**
-   * Gets information about a tunnel identified by the unique tunnel id.
+   * Gets information about a tunnel identified by the unique tunnel id. Requires permission to access the DescribeTunnel action.
    */
   describeTunnel(callback?: (err: AWSError, data: IoTSecureTunneling.Types.DescribeTunnelResponse) => void): Request<IoTSecureTunneling.Types.DescribeTunnelResponse, AWSError>;
   /**
@@ -36,21 +36,29 @@ declare class IoTSecureTunneling extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTSecureTunneling.Types.ListTagsForResourceResponse) => void): Request<IoTSecureTunneling.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List all tunnels for an AWS account. Tunnels are listed by creation time in descending order, newer tunnels will be listed before older tunnels.
+   * List all tunnels for an Amazon Web Services account. Tunnels are listed by creation time in descending order, newer tunnels will be listed before older tunnels. Requires permission to access the ListTunnels action.
    */
   listTunnels(params: IoTSecureTunneling.Types.ListTunnelsRequest, callback?: (err: AWSError, data: IoTSecureTunneling.Types.ListTunnelsResponse) => void): Request<IoTSecureTunneling.Types.ListTunnelsResponse, AWSError>;
   /**
-   * List all tunnels for an AWS account. Tunnels are listed by creation time in descending order, newer tunnels will be listed before older tunnels.
+   * List all tunnels for an Amazon Web Services account. Tunnels are listed by creation time in descending order, newer tunnels will be listed before older tunnels. Requires permission to access the ListTunnels action.
    */
   listTunnels(callback?: (err: AWSError, data: IoTSecureTunneling.Types.ListTunnelsResponse) => void): Request<IoTSecureTunneling.Types.ListTunnelsResponse, AWSError>;
   /**
-   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.
+   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the IoT Secure Tunneling proxy server. Requires permission to access the OpenTunnel action.
    */
   openTunnel(params: IoTSecureTunneling.Types.OpenTunnelRequest, callback?: (err: AWSError, data: IoTSecureTunneling.Types.OpenTunnelResponse) => void): Request<IoTSecureTunneling.Types.OpenTunnelResponse, AWSError>;
   /**
-   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.
+   * Creates a new tunnel, and returns two client access tokens for clients to use to connect to the IoT Secure Tunneling proxy server. Requires permission to access the OpenTunnel action.
    */
   openTunnel(callback?: (err: AWSError, data: IoTSecureTunneling.Types.OpenTunnelResponse) => void): Request<IoTSecureTunneling.Types.OpenTunnelResponse, AWSError>;
+  /**
+   * Revokes the current client access token (CAT) and returns new CAT for clients to use when reconnecting to secure tunneling to access the same tunnel. Requires permission to access the RotateTunnelAccessToken action.  Rotating the CAT doesn't extend the tunnel duration. For example, say the tunnel duration is 12 hours and the tunnel has already been open for 4 hours. When you rotate the access tokens, the new tokens that are generated can only be used for the remaining 8 hours. 
+   */
+  rotateTunnelAccessToken(params: IoTSecureTunneling.Types.RotateTunnelAccessTokenRequest, callback?: (err: AWSError, data: IoTSecureTunneling.Types.RotateTunnelAccessTokenResponse) => void): Request<IoTSecureTunneling.Types.RotateTunnelAccessTokenResponse, AWSError>;
+  /**
+   * Revokes the current client access token (CAT) and returns new CAT for clients to use when reconnecting to secure tunneling to access the same tunnel. Requires permission to access the RotateTunnelAccessToken action.  Rotating the CAT doesn't extend the tunnel duration. For example, say the tunnel duration is 12 hours and the tunnel has already been open for 4 hours. When you rotate the access tokens, the new tokens that are generated can only be used for the remaining 8 hours. 
+   */
+  rotateTunnelAccessToken(callback?: (err: AWSError, data: IoTSecureTunneling.Types.RotateTunnelAccessTokenResponse) => void): Request<IoTSecureTunneling.Types.RotateTunnelAccessTokenResponse, AWSError>;
   /**
    * A resource tag.
    */
@@ -71,13 +79,14 @@ declare class IoTSecureTunneling extends Service {
 declare namespace IoTSecureTunneling {
   export type AmazonResourceName = string;
   export type ClientAccessToken = string;
+  export type ClientMode = "SOURCE"|"DESTINATION"|"ALL"|string;
   export interface CloseTunnelRequest {
     /**
      * The ID of the tunnel to close.
      */
     tunnelId: TunnelId;
     /**
-     * When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.
+     * When set to true, IoT Secure Tunneling deletes the tunnel data immediately.
      */
     delete?: DeleteFlag;
   }
@@ -115,7 +124,7 @@ declare namespace IoTSecureTunneling {
      */
     thingName?: ThingName;
     /**
-     * A list of service names that identity the target application. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.
+     * A list of service names that identify the target application. The IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The IoT client instantiates the local proxy, which uses this information to connect to the destination application.
      */
     services: ServiceList;
   }
@@ -141,17 +150,17 @@ declare namespace IoTSecureTunneling {
      */
     maxResults?: MaxResults;
     /**
-     * A token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
   }
   export interface ListTunnelsResponse {
     /**
-     * A short description of the tunnels in an AWS account.
+     * A short description of the tunnels in an Amazon Web Services account.
      */
     tunnelSummaries?: TunnelSummaryList;
     /**
-     * A token to used to retrieve the next set of results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -181,15 +190,40 @@ declare namespace IoTSecureTunneling {
      */
     tunnelId?: TunnelId;
     /**
-     * The Amazon Resource Name for the tunnel. The tunnel ARN format is arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt; 
+     * The Amazon Resource Name for the tunnel.
      */
     tunnelArn?: TunnelArn;
     /**
-     * The access token the source local proxy uses to connect to AWS IoT Secure Tunneling.
+     * The access token the source local proxy uses to connect to IoT Secure Tunneling.
      */
     sourceAccessToken?: ClientAccessToken;
     /**
-     * The access token the destination local proxy uses to connect to AWS IoT Secure Tunneling.
+     * The access token the destination local proxy uses to connect to IoT Secure Tunneling.
+     */
+    destinationAccessToken?: ClientAccessToken;
+  }
+  export interface RotateTunnelAccessTokenRequest {
+    /**
+     * The tunnel for which you want to rotate the access tokens.
+     */
+    tunnelId: TunnelId;
+    /**
+     * The mode of the client that will use the client token, which can be either the source or destination, or both source and destination.
+     */
+    clientMode: ClientMode;
+    destinationConfig?: DestinationConfig;
+  }
+  export interface RotateTunnelAccessTokenResponse {
+    /**
+     * The Amazon Resource Name for the tunnel.
+     */
+    tunnelArn?: TunnelArn;
+    /**
+     * The client access token that the source local proxy uses to connect to IoT Secure Tunneling.
+     */
+    sourceAccessToken?: ClientAccessToken;
+    /**
+     * The client access token that the destination local proxy uses to connect to IoT Secure Tunneling.
      */
     destinationAccessToken?: ClientAccessToken;
   }
@@ -235,7 +269,7 @@ declare namespace IoTSecureTunneling {
      */
     tunnelId?: TunnelId;
     /**
-     * The Amazon Resource Name (ARN) of a tunnel. The tunnel ARN format is arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt; 
+     * The Amazon Resource Name (ARN) of a tunnel.
      */
     tunnelArn?: TunnelArn;
     /**
@@ -284,7 +318,7 @@ declare namespace IoTSecureTunneling {
      */
     tunnelId?: TunnelId;
     /**
-     * The Amazon Resource Name of the tunnel. The tunnel ARN format is arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt; 
+     * The Amazon Resource Name of the tunnel. 
      */
     tunnelArn?: TunnelArn;
     /**

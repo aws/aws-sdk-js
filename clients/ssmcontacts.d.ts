@@ -164,11 +164,11 @@ declare class SSMContacts extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: SSMContacts.Types.ListTagsForResourceResult) => void): Request<SSMContacts.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Adds a resource to the specified contact or escalation plan.
+   * Adds a resource policy to the specified contact or escalation plan. The resource policy is used to share the contact or escalation plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
    */
   putContactPolicy(params: SSMContacts.Types.PutContactPolicyRequest, callback?: (err: AWSError, data: SSMContacts.Types.PutContactPolicyResult) => void): Request<SSMContacts.Types.PutContactPolicyResult, AWSError>;
   /**
-   * Adds a resource to the specified contact or escalation plan.
+   * Adds a resource policy to the specified contact or escalation plan. The resource policy is used to share the contact or escalation plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
    */
   putContactPolicy(callback?: (err: AWSError, data: SSMContacts.Types.PutContactPolicyResult) => void): Request<SSMContacts.Types.PutContactPolicyResult, AWSError>;
   /**

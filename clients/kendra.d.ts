@@ -1340,6 +1340,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Quip as your data source.
      */
     QuipConfiguration?: QuipConfiguration;
+    /**
+     * Provides the configuration information to connect to Jira as your data source.
+     */
+    JiraConfiguration?: JiraConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1475,7 +1479,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -2175,13 +2179,17 @@ declare namespace Kendra {
   }
   export interface DocumentAttributeValueCountPair {
     /**
-     * The value of the attribute. For example, "HR."
+     * The value of the attribute. For example, "HR".
      */
     DocumentAttributeValue?: DocumentAttributeValue;
     /**
      * The number of documents in the response that have the attribute value for the key.
      */
     Count?: Integer;
+    /**
+     * Contains the results of a document attribute that is a nested facet. A FacetResult contains the counts for each facet nested within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.
+     */
+    FacetResults?: FacetResultList;
   }
   export type DocumentAttributeValueCountPairList = DocumentAttributeValueCountPair[];
   export type DocumentAttributeValueType = "STRING_VALUE"|"STRING_LIST_VALUE"|"LONG_VALUE"|"DATE_VALUE"|string;
@@ -2359,6 +2367,14 @@ declare namespace Kendra {
      * The unique key for the document attribute.
      */
     DocumentAttributeKey?: DocumentAttributeKey;
+    /**
+     * An array of document attributes that are nested facets within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. This helps your users further narrow their search. You can only have one nested facet within a facet. If you want to increase this limit, contact Support.
+     */
+    Facets?: FacetList;
+    /**
+     * Maximum number of facet values per facet. The default is 10. You can use this to limit the number of facet values to less than 10. If you want to increase the default, contact Support.
+     */
+    MaxResults?: TopDocumentAttributeValueCountPairsSize;
   }
   export type FacetList = Facet[];
   export interface FacetResult {
@@ -2715,7 +2731,74 @@ declare namespace Kendra {
   export type InlineCustomDocumentEnrichmentConfigurationList = InlineCustomDocumentEnrichmentConfiguration[];
   export type Integer = number;
   export type Interval = "THIS_MONTH"|"THIS_WEEK"|"ONE_WEEK_AGO"|"TWO_WEEKS_AGO"|"ONE_MONTH_AGO"|"TWO_MONTHS_AGO"|string;
+  export type IssueSubEntity = "COMMENTS"|"ATTACHMENTS"|"WORKLOGS"|string;
+  export type IssueSubEntityFilter = IssueSubEntity[];
+  export type IssueType = String[];
   export type Issuer = string;
+  export type JiraAccountUrl = string;
+  export interface JiraConfiguration {
+    /**
+     * The URL of the Jira account. For example, company.attlassian.net or https://jira.company.com. You can find your Jira account URL in the URL of your profile page for Jira desktop.
+     */
+    JiraAccountUrl: JiraAccountUrl;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Jira data source. The secret must contain a JSON structure with the following keys:   jira-id—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com.   jiraCredentials—The password of the Jira account user.  
+     */
+    SecretArn: SecretArn;
+    /**
+     * Specify to use the change log option to update your index.
+     */
+    UseChangeLog?: Boolean;
+    /**
+     * Specify which projects to crawl in your Jira data source. You can specify one or more Jira project IDs.
+     */
+    Project?: Project;
+    /**
+     * Specify which issue types to crawl in your Jira data source. You can specify one or more of these options to crawl.
+     */
+    IssueType?: IssueType;
+    /**
+     * Specify which statuses to crawl in your Jira data source. You can specify one or more of these options to crawl.
+     */
+    Status?: JiraStatus;
+    /**
+     * Specify whether to crawl comments, attachments, and work logs. You can specify one or more of these options.
+     */
+    IssueSubEntityFilter?: IssueSubEntityFilter;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    AttachmentFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira comments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    CommentFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira issues to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    IssueFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira projects to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    ProjectFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Jira work logs to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Jira fields. For more information, see  Mapping data source fields. The Jira data source field names must exist in your Jira custom metadata.
+     */
+    WorkLogFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of regular expression patterns to include certain file paths, file names, and file types in your Jira data source. Files that match the patterns are included in the index. Files that don't match the patterns are excluded from the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns to exclude certain file paths, file names, and file types in your Jira data source. Files that match the patterns are excluded from the index. Files that don’t match the patterns are included in the index. If a file matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your Jira. Your Jira account must reside inside your VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
+  }
+  export type JiraStatus = String[];
   export interface JsonTokenTypeConfiguration {
     /**
      * The user name attribute field.
@@ -3163,6 +3246,7 @@ declare namespace Kendra {
   export type PrincipalOrderingId = number;
   export type PrincipalType = "USER"|"GROUP"|string;
   export type PrivateChannelFilter = String[];
+  export type Project = String[];
   export interface ProxyConfiguration {
     /**
      * The name of the website host you want to connect to via a web proxy server. For example, the host name of https://a.example.com/page1.html is "a.example.com".
@@ -3221,11 +3305,11 @@ declare namespace Kendra {
      */
     AttributeFilter?: AttributeFilter;
     /**
-     * An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. You can use this information to help narrow the search for your user.
+     * An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. This helps your users narrow their search.
      */
     Facets?: FacetList;
     /**
-     * An array of document attributes to include in the response. No other document attributes are included in the response. By default all document attributes are included in the response. 
+     * An array of document attributes to include in the response. You can limit the response to include certain document attributes. By default all document attributes are included in the response.
      */
     RequestedDocumentAttributes?: DocumentAttributeKeyList;
     /**
@@ -3317,7 +3401,7 @@ declare namespace Kendra {
      */
     DocumentURI?: Url;
     /**
-     * An array of document attributes for the document that the query result maps to. For example, the document author (Author) or the source URI (SourceUri) of the document.
+     * An array of document attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
      */
     DocumentAttributes?: DocumentAttributeList;
     /**
@@ -3366,23 +3450,23 @@ declare namespace Kendra {
   export type QueryText = string;
   export interface QuipConfiguration {
     /**
-     * The configuration information to connect to your Quip data source domain.
+     * The Quip site domain.
      */
     Domain: Domain;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip file system. Windows is currently the only supported type. The secret must contain a JSON structure with the following keys:   username—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com. The Active Directory user account must have read and mounting access to the Quip file system for Windows.   password—The password of the Active Directory user account with read and mounting access to the Quip Windows file system.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip. The secret must contain a JSON structure with the following keys:   accessToken—The token created in Quip. For more information, see Authentication for a Quip data source.  
      */
     SecretArn: SecretArn;
     /**
-     * Specify whether to crawl file comments in your Quip data source. You can specify one or more of these options.
+     * Specify whether to crawl file comments in Quip. You can specify one or more of these options.
      */
     CrawlFileComments?: Boolean;
     /**
-     * Specify whether to crawl chat rooms in your Quip data source. You can specify one or more of these options.
+     * Specify whether to crawl chat rooms in Quip. You can specify one or more of these options.
      */
     CrawlChatRooms?: Boolean;
     /**
-     * Specify whether to crawl attachments in your Quip data source. You can specify one or more of these options.
+     * Specify whether to crawl attachments in Quip. You can specify one or more of these options.
      */
     CrawlAttachments?: Boolean;
     /**
@@ -3390,15 +3474,15 @@ declare namespace Kendra {
      */
     FolderIds?: FolderIdList;
     /**
-     * A list of field mappings to apply when indexing Quip threads.
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Quip threads to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Quip fields. For more information, see Mapping data source fields. The Quip field names must exist in your Quip custom metadata.
      */
     ThreadFieldMappings?: DataSourceToIndexFieldMappingList;
     /**
-     * A list of field mappings to apply when indexing Quip messages.
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Quip messages to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Quip fields. For more information, see Mapping data source fields. The Quip field names must exist in your Quip custom metadata.
      */
     MessageFieldMappings?: DataSourceToIndexFieldMappingList;
     /**
-     * A list of field mappings to apply when indexing Quip attachments.
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of Quip attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Quip fields. For more information, see Mapping data source fields. The Quip field names must exist in your Quip custom metadata.
      */
     AttachmentFieldMappings?: DataSourceToIndexFieldMappingList;
     /**
@@ -3410,7 +3494,7 @@ declare namespace Kendra {
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * Configuration information for connecting to an Amazon Virtual Private Cloud (VPC) for your Quip. Your Quip instance must reside inside your VPC.
+     * Configuration information for an Amazon Virtual Private Cloud (VPC) to connect to your Quip. For more information, see Configuring a VPC.
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
   }
@@ -4103,6 +4187,7 @@ declare namespace Kendra {
   export type Timestamp = Date;
   export type Title = string;
   export type Token = string;
+  export type TopDocumentAttributeValueCountPairsSize = number;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.

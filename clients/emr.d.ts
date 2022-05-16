@@ -840,6 +840,10 @@ declare namespace EMR {
      * Placement group configured for an Amazon EMR cluster.
      */
     PlacementGroups?: PlacementGroupConfigList;
+    /**
+     * The Amazon Linux release specified in a cluster launch RunJobFlow request. If no Amazon Linux release was specified, the default Amazon Linux release is shown in the response.
+     */
+    OSReleaseLabel?: String;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -1178,6 +1182,10 @@ declare namespace EMR {
      * The pagination token. Reserved for future use. Currently set to null.
      */
     NextToken?: String;
+    /**
+     * The list of available Amazon Linux release versions for an Amazon EMR release. Contains a Label field that is formatted as shown in  Amazon Linux 2 Release Notes . For example, 2.0.20220218.1.
+     */
+    AvailableOSReleases?: OSReleaseList;
   }
   export interface DescribeSecurityConfigurationInput {
     /**
@@ -1831,6 +1839,10 @@ declare namespace EMR {
      * Policy for customizing shrink operations.
      */
     ShrinkPolicy?: ShrinkPolicy;
+    /**
+     * Type of reconfiguration requested. Valid values are MERGE and OVERWRITE.
+     */
+    ReconfigurationType?: ReconfigurationType;
     /**
      * A list of new or modified configurations to apply for an instance group.
      */
@@ -2662,6 +2674,13 @@ declare namespace EMR {
     EndTime?: _Date;
   }
   export type NotebookExecutionSummaryList = NotebookExecutionSummary[];
+  export interface OSRelease {
+    /**
+     * The Amazon Linux release specified for a cluster in the RunJobFlow request. The format is as shown in  Amazon Linux 2 Release Notes . For example, 2.0.20220218.1.
+     */
+    Label?: String;
+  }
+  export type OSReleaseList = OSRelease[];
   export interface OnDemandCapacityReservationOptions {
     /**
      * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price). If you do not specify a value, the fleet fulfills the On-Demand capacity according to the chosen On-Demand allocation strategy.
@@ -2788,6 +2807,7 @@ declare namespace EMR {
   }
   export interface PutManagedScalingPolicyOutput {
   }
+  export type ReconfigurationType = "OVERWRITE"|"MERGE"|string;
   export interface ReleaseLabelFilter {
     /**
      * Optional release label version prefix filter. For example, emr-5.
@@ -2950,6 +2970,10 @@ declare namespace EMR {
      */
     PlacementGroupConfigs?: PlacementGroupConfigList;
     AutoTerminationPolicy?: AutoTerminationPolicy;
+    /**
+     * Specifies a particular Amazon Linux release for all nodes in a cluster launch RunJobFlow request. If a release is not specified, Amazon EMR uses the latest validated Amazon Linux release for cluster launch.
+     */
+    OSReleaseLabel?: XmlStringMaxLen256;
   }
   export interface RunJobFlowOutput {
     /**

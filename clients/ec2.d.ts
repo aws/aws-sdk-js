@@ -549,11 +549,11 @@ declare class EC2 extends Service {
    */
   createIpamScope(callback?: (err: AWSError, data: EC2.Types.CreateIpamScopeResult) => void): Request<EC2.Types.CreateIpamScopeResult, AWSError>;
   /**
-   * Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an ED25519 or 2048-bit RSA key pair with the specified name and in the specified PEM or PPK format. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key or an unencrypted PPK formatted private key for use with PuTTY. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(params: EC2.Types.CreateKeyPairRequest, callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an ED25519 or 2048-bit RSA key pair with the specified name and in the specified PEM or PPK format. Amazon EC2 stores the public key and displays the private key for you to save to a file. The private key is returned as an unencrypted PEM encoded PKCS#1 private key or an unencrypted PPK formatted private key for use with PuTTY. If a key with the specified name already exists, Amazon EC2 returns an error. The key pair returned to you is available only in the Amazon Web Services Region in which you create it. If you prefer, you can create your own key pair using a third-party tool and upload it to any Region using ImportKeyPair. You can have up to 5,000 key pairs per Amazon Web Services Region. For more information, see Amazon EC2 key pairs in the Amazon Elastic Compute Cloud User Guide.
    */
   createKeyPair(callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
@@ -797,11 +797,11 @@ declare class EC2 extends Service {
    */
   createTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorSessionResult) => void): Request<EC2.Types.CreateTrafficMirrorSessionResult, AWSError>;
   /**
-   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, a Network Load Balancer, or a Gateway Load Balancer endpoint. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
    */
   createTrafficMirrorTarget(params: EC2.Types.CreateTrafficMirrorTargetRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
   /**
-   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, a Network Load Balancer, or a Gateway Load Balancer endpoint. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
    */
   createTrafficMirrorTarget(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
   /**
@@ -2997,6 +2997,14 @@ declare class EC2 extends Service {
    */
   getInstanceTypesFromInstanceRequirements(callback?: (err: AWSError, data: EC2.Types.GetInstanceTypesFromInstanceRequirementsResult) => void): Request<EC2.Types.GetInstanceTypesFromInstanceRequirementsResult, AWSError>;
   /**
+   * A binary representation of the UEFI variable store. Only non-volatile variables are stored. This is a base64 encoded and zlib compressed binary value that must be properly encoded. When you use register-image to create an AMI, you can create an exact copy of your variable store by passing the UEFI data in the UefiData parameter. You can modify the UEFI data by using the python-uefivars tool on GitHub. You can use the tool to convert the UEFI data into a human-readable format (JSON), which you can inspect and modify, and then convert back into the binary format to use with register-image. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
+   */
+  getInstanceUefiData(params: EC2.Types.GetInstanceUefiDataRequest, callback?: (err: AWSError, data: EC2.Types.GetInstanceUefiDataResult) => void): Request<EC2.Types.GetInstanceUefiDataResult, AWSError>;
+  /**
+   * A binary representation of the UEFI variable store. Only non-volatile variables are stored. This is a base64 encoded and zlib compressed binary value that must be properly encoded. When you use register-image to create an AMI, you can create an exact copy of your variable store by passing the UEFI data in the UefiData parameter. You can modify the UEFI data by using the python-uefivars tool on GitHub. You can use the tool to convert the UEFI data into a human-readable format (JSON), which you can inspect and modify, and then convert back into the binary format to use with register-image. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
+   */
+  getInstanceUefiData(callback?: (err: AWSError, data: EC2.Types.GetInstanceUefiDataResult) => void): Request<EC2.Types.GetInstanceUefiDataResult, AWSError>;
+  /**
    * Retrieve historical information about a CIDR within an IPAM scope. For more information, see View the history of IP addresses in the Amazon VPC IPAM User Guide.
    */
   getIpamAddressHistory(params: EC2.Types.GetIpamAddressHistoryRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
@@ -4117,11 +4125,11 @@ declare class EC2 extends Service {
    */
   startVpcEndpointServicePrivateDnsVerification(callback?: (err: AWSError, data: EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult) => void): Request<EC2.Types.StartVpcEndpointServicePrivateDnsVerificationResult, AWSError>;
   /**
-   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
+   * Stops an Amazon EBS-backed instance. For more information, see Stop and start your instance in the Amazon EC2 User Guide. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
    */
   stopInstances(params: EC2.Types.StopInstancesRequest, callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
   /**
-   * Stops an Amazon EBS-backed instance. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
+   * Stops an Amazon EBS-backed instance. For more information, see Stop and start your instance in the Amazon EC2 User Guide. You can use the Stop action to hibernate an instance if the instance is enabled for hibernation and it meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. We don't charge usage for a stopped instance, or data transfer fees; however, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. You can't stop or hibernate instance store-backed instances. You can't use the Stop action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate Spot Instances when they are interrupted. For more information, see Hibernating interrupted Spot Instances in the Amazon EC2 User Guide. When you stop or hibernate an instance, we shut it down. You can restart your instance at any time. Before stopping or hibernating an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM, but hibernating an instance does preserve data stored in RAM. If an instance cannot hibernate successfully, a normal shutdown occurs. Stopping and hibernating an instance is different to rebooting or terminating it. For example, when you stop or hibernate an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, the root device and any other devices attached during the instance launch are automatically deleted. For more information about the differences between rebooting, stopping, hibernating, and terminating instances, see Instance lifecycle in the Amazon EC2 User Guide. When you stop an instance, we attempt to shut it down forcibly after a short while. If your instance appears stuck in the stopping state after a period of time, there may be an issue with the underlying host computer. For more information, see Troubleshoot stopping your instance in the Amazon EC2 User Guide.
    */
   stopInstances(callback?: (err: AWSError, data: EC2.Types.StopInstancesResult) => void): Request<EC2.Types.StopInstancesResult, AWSError>;
   /**
@@ -4930,6 +4938,10 @@ declare namespace EC2 {
      * Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default. For more information, see  Host recovery in the Amazon EC2 User Guide. Default: off 
      */
     HostRecovery?: HostRecovery;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.
+     */
+    OutpostArn?: String;
   }
   export interface AllocateHostsResult {
     /**
@@ -8281,6 +8293,10 @@ declare namespace EC2 {
      * The tags to apply to the new key pair.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The format of the key pair. Default: pem 
+     */
+    KeyFormat?: KeyFormat;
   }
   export interface CreateLaunchTemplateRequest {
     /**
@@ -9065,10 +9081,6 @@ declare namespace EC2 {
   }
   export interface CreateSubnetCidrReservationRequest {
     /**
-     * The tags to assign to the subnet CIDR reservation.
-     */
-    TagSpecifications?: TagSpecificationList;
-    /**
      * The ID of the subnet.
      */
     SubnetId: SubnetId;
@@ -9088,6 +9100,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The tags to assign to the subnet CIDR reservation.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateSubnetCidrReservationResult {
     /**
@@ -9318,6 +9334,10 @@ declare namespace EC2 {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
+    /**
+     * The ID of the Gateway Load Balancer endpoint.
+     */
+    GatewayLoadBalancerEndpointId?: VpcEndpointId;
   }
   export interface CreateTrafficMirrorTargetResult {
     /**
@@ -9756,6 +9776,14 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptionsSpecification;
+    /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
@@ -9799,6 +9827,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
      */
     GatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The supported IP address types. The possible values are ipv4 and ipv6.
+     */
+    SupportedIpAddressTypes?: ValueStringList;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
@@ -12969,6 +13001,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * If true, the public key material is included in the response. Default: false 
+     */
+    IncludePublicKey?: Boolean;
   }
   export interface DescribeKeyPairsResult {
     /**
@@ -15192,7 +15228,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -15224,7 +15260,7 @@ declare namespace EC2 {
      */
     ServiceIds?: VpcEndpointServiceIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -15288,7 +15324,7 @@ declare namespace EC2 {
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -15324,7 +15360,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: VpcEndpointIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -16176,6 +16212,19 @@ declare namespace EC2 {
   }
   export type DnsEntrySet = DnsEntry[];
   export type DnsNameState = "pendingVerification"|"verified"|"failed"|string;
+  export interface DnsOptions {
+    /**
+     * The DNS records created for the endpoint.
+     */
+    DnsRecordIpType?: DnsRecordIpType;
+  }
+  export interface DnsOptionsSpecification {
+    /**
+     * The DNS records created for the endpoint.
+     */
+    DnsRecordIpType?: DnsRecordIpType;
+  }
+  export type DnsRecordIpType = "ipv4"|"dualstack"|"ipv6"|"service-defined"|string;
   export interface DnsServersOptionsModifyStructure {
     /**
      * The IPv4 address range, in CIDR notation, of the DNS servers to be used. You can specify up to two DNS servers. Ensure that the DNS servers can be reached by the clients. The specified values overwrite the existing values.
@@ -18179,6 +18228,26 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface GetInstanceUefiDataRequest {
+    /**
+     * The ID of the instance from which to retrieve the UEFI data.
+     */
+    InstanceId: InstanceId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetInstanceUefiDataResult {
+    /**
+     * The ID of the instance from which to retrieve the UEFI data.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store.
+     */
+    UefiData?: String;
+  }
   export interface GetIpamAddressHistoryRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -19017,6 +19086,10 @@ declare namespace EC2 {
      * Indicates whether the Dedicated Host is in a host resource group. If memberOfServiceLinkedResourceGroup is true, the host is in a host resource group; otherwise, it is not.
      */
     MemberOfServiceLinkedResourceGroup?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which the Dedicated Host is allocated.
+     */
+    OutpostArn?: String;
   }
   export interface HostInstance {
     /**
@@ -19349,6 +19422,10 @@ declare namespace EC2 {
      */
     BootMode?: BootModeValues;
     /**
+     * If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     */
+    TpmSupport?: TpmSupportValues;
+    /**
      * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.
      */
     DeprecationTime?: String;
@@ -19391,11 +19468,19 @@ declare namespace EC2 {
      */
     BootMode?: AttributeValue;
     /**
+     * If the image is configured for NitroTPM support, the value is v2.0.
+     */
+    TpmSupport?: AttributeValue;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UefiData?: AttributeValue;
+    /**
      * The date and time, in ISO 8601 date-time format, when the AMI was last used to launch an EC2 instance. When the AMI is used, there is a 24-hour delay before that usage is reported.   lastLaunchedTime data is available starting April 2017. 
      */
     LastLaunchedTime?: AttributeValue;
   }
-  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"lastLaunchedTime"|string;
+  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"tpmSupport"|"uefiData"|"lastLaunchedTime"|string;
   export interface ImageDiskContainer {
     /**
      * The description of the disk image.
@@ -20220,6 +20305,10 @@ declare namespace EC2 {
      * The IPv6 address assigned to the instance.
      */
     Ipv6Address?: String;
+    /**
+     * If the instance is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon EC2 User Guide.
+     */
+    TpmSupport?: String;
     /**
      * Provides information on the recovery and maintenance options of your instance.
      */
@@ -21199,7 +21288,7 @@ declare namespace EC2 {
      */
     IncludeAllTagsOfInstance?: Boolean;
   }
-  export type InstanceType = "a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6g.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gd.metal"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"c6i.32xlarge"|"c6i.metal"|"cc1.4xlarge"|"cc2.8xlarge"|"cg1.4xlarge"|"cr1.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"dl1.24xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.12xlarge"|"g5.16xlarge"|"g5.24xlarge"|"g5.48xlarge"|"g5g.xlarge"|"g5g.2xlarge"|"g5g.4xlarge"|"g5g.8xlarge"|"g5g.16xlarge"|"g5g.metal"|"hi1.4xlarge"|"hpc6a.48xlarge"|"hs1.8xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"im4gn.large"|"im4gn.xlarge"|"im4gn.2xlarge"|"im4gn.4xlarge"|"im4gn.8xlarge"|"im4gn.16xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"is4gen.medium"|"is4gen.large"|"is4gen.xlarge"|"is4gen.2xlarge"|"is4gen.4xlarge"|"is4gen.8xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"m6a.large"|"m6a.xlarge"|"m6a.2xlarge"|"m6a.4xlarge"|"m6a.8xlarge"|"m6a.12xlarge"|"m6a.16xlarge"|"m6a.24xlarge"|"m6a.32xlarge"|"m6a.48xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"m6i.metal"|"mac1.metal"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6g.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"r6gd.metal"|"r6i.large"|"r6i.xlarge"|"r6i.2xlarge"|"r6i.4xlarge"|"r6i.8xlarge"|"r6i.12xlarge"|"r6i.16xlarge"|"r6i.24xlarge"|"r6i.32xlarge"|"r6i.metal"|"t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"x2iezn.2xlarge"|"x2iezn.4xlarge"|"x2iezn.6xlarge"|"x2iezn.8xlarge"|"x2iezn.12xlarge"|"x2iezn.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"x2idn.16xlarge"|"x2idn.24xlarge"|"x2idn.32xlarge"|"x2iedn.xlarge"|"x2iedn.2xlarge"|"x2iedn.4xlarge"|"x2iedn.8xlarge"|"x2iedn.16xlarge"|"x2iedn.24xlarge"|"x2iedn.32xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6a.32xlarge"|"c6a.48xlarge"|"c6a.metal"|"m6a.metal"|string;
+  export type InstanceType = "a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6g.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gd.metal"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"c6i.32xlarge"|"c6i.metal"|"cc1.4xlarge"|"cc2.8xlarge"|"cg1.4xlarge"|"cr1.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"dl1.24xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.12xlarge"|"g5.16xlarge"|"g5.24xlarge"|"g5.48xlarge"|"g5g.xlarge"|"g5g.2xlarge"|"g5g.4xlarge"|"g5g.8xlarge"|"g5g.16xlarge"|"g5g.metal"|"hi1.4xlarge"|"hpc6a.48xlarge"|"hs1.8xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"im4gn.large"|"im4gn.xlarge"|"im4gn.2xlarge"|"im4gn.4xlarge"|"im4gn.8xlarge"|"im4gn.16xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"is4gen.medium"|"is4gen.large"|"is4gen.xlarge"|"is4gen.2xlarge"|"is4gen.4xlarge"|"is4gen.8xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"m6a.large"|"m6a.xlarge"|"m6a.2xlarge"|"m6a.4xlarge"|"m6a.8xlarge"|"m6a.12xlarge"|"m6a.16xlarge"|"m6a.24xlarge"|"m6a.32xlarge"|"m6a.48xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"m6i.metal"|"mac1.metal"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6g.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"r6gd.metal"|"r6i.large"|"r6i.xlarge"|"r6i.2xlarge"|"r6i.4xlarge"|"r6i.8xlarge"|"r6i.12xlarge"|"r6i.16xlarge"|"r6i.24xlarge"|"r6i.32xlarge"|"r6i.metal"|"t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"x2iezn.2xlarge"|"x2iezn.4xlarge"|"x2iezn.6xlarge"|"x2iezn.8xlarge"|"x2iezn.12xlarge"|"x2iezn.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"x2idn.16xlarge"|"x2idn.24xlarge"|"x2idn.32xlarge"|"x2iedn.xlarge"|"x2iedn.2xlarge"|"x2iedn.4xlarge"|"x2iedn.8xlarge"|"x2iedn.16xlarge"|"x2iedn.24xlarge"|"x2iedn.32xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6a.32xlarge"|"c6a.48xlarge"|"c6a.metal"|"m6a.metal"|"i4i.large"|"i4i.xlarge"|"i4i.2xlarge"|"i4i.4xlarge"|"i4i.8xlarge"|"i4i.16xlarge"|"i4i.32xlarge"|string;
   export type InstanceTypeHypervisor = "nitro"|"xen"|string;
   export interface InstanceTypeInfo {
     /**
@@ -21379,6 +21468,7 @@ declare namespace EC2 {
   export type InternetGatewayList = InternetGateway[];
   export type IpAddress = string;
   export type IpAddressList = IpAddress[];
+  export type IpAddressType = "ipv4"|"dualstack"|"ipv6"|string;
   export interface IpPermission {
     /**
      * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
@@ -21695,7 +21785,7 @@ declare namespace EC2 {
   export type IpamPoolCidrState = "pending-provision"|"provisioned"|"failed-provision"|"pending-deprovision"|"deprovisioned"|"failed-deprovision"|"pending-import"|"failed-import"|string;
   export type IpamPoolId = string;
   export type IpamPoolSet = IpamPool[];
-  export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export interface IpamResourceCidr {
     /**
      * The IPAM ID for an IPAM resource.
@@ -21819,10 +21909,10 @@ declare namespace EC2 {
   }
   export type IpamScopeId = string;
   export type IpamScopeSet = IpamScope[];
-  export type IpamScopeState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamScopeState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export type IpamScopeType = "public"|"private"|string;
   export type IpamSet = Ipam[];
-  export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
+  export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export type Ipv4PoolCoipId = string;
   export type Ipv4PoolEc2Id = string;
   export type Ipv4PrefixList = Ipv4PrefixSpecificationRequest[];
@@ -21923,6 +22013,7 @@ declare namespace EC2 {
   export type Ipv6RangeList = Ipv6Range[];
   export type Ipv6SupportValue = "enable"|"disable"|string;
   export type KernelId = string;
+  export type KeyFormat = "pem"|"ppk"|string;
   export type KeyNameStringList = KeyPairName[];
   export interface KeyPair {
     /**
@@ -21969,6 +22060,14 @@ declare namespace EC2 {
      * Any tags applied to the key pair.
      */
     Tags?: TagList;
+    /**
+     * The public key material.
+     */
+    PublicKey?: String;
+    /**
+     * If you used Amazon EC2 to create the key pair, this is the date and time when the key was created, in ISO 8601 date-time format, in the UTC time zone. If you imported an existing key pair to Amazon EC2, this is the date and time the key was imported, in ISO 8601 date-time format, in the UTC time zone.
+     */
+    CreateTime?: MillisecondDateTime;
   }
   export type KeyPairList = KeyPairInfo[];
   export type KeyPairName = string;
@@ -24764,6 +24863,14 @@ declare namespace EC2 {
      */
     RemoveSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptionsSpecification;
+    /**
      * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
     PrivateDnsEnabled?: Boolean;
@@ -24811,6 +24918,14 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your service configuration.
      */
     RemoveGatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The IP address types to add to your service configuration.
+     */
+    AddSupportedIpAddressTypes?: ValueStringList;
+    /**
+     * The IP address types to remove from your service configuration.
+     */
+    RemoveSupportedIpAddressTypes?: ValueStringList;
   }
   export interface ModifyVpcEndpointServiceConfigurationResult {
     /**
@@ -26985,6 +27100,14 @@ declare namespace EC2 {
      * The boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
      */
     BootMode?: BootModeValues;
+    /**
+     * Set to v2.0 to enable Trusted Platform Module (TPM) support. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     */
+    TpmSupport?: TpmSupportValues;
+    /**
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UefiData?: StringType;
   }
   export interface RegisterImageResult {
     /**
@@ -29737,6 +29860,10 @@ declare namespace EC2 {
      */
     GatewayLoadBalancerArns?: ValueStringList;
     /**
+     * The supported IP address types.
+     */
+    SupportedIpAddressTypes?: SupportedIpAddressTypes;
+    /**
      * The DNS names for the service.
      */
     BaseEndpointDnsNames?: ValueStringList;
@@ -29758,6 +29885,7 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type ServiceConfigurationSet = ServiceConfiguration[];
+  export type ServiceConnectivityType = "ipv4"|"ipv6"|string;
   export interface ServiceDetail {
     /**
      * The Amazon Resource Name (ARN) of the service.
@@ -29815,6 +29943,10 @@ declare namespace EC2 {
      * The verification state of the VPC endpoint service. Consumers of the endpoint service cannot use the private name when the state is not verified.
      */
     PrivateDnsNameVerificationState?: DnsNameState;
+    /**
+     * The supported IP address types.
+     */
+    SupportedIpAddressTypes?: SupportedIpAddressTypes;
   }
   export type ServiceDetailSet = ServiceDetail[];
   export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
@@ -30901,6 +31033,7 @@ declare namespace EC2 {
   export type StoreImageTaskResultSet = StoreImageTaskResult[];
   export type String = string;
   export type StringList = String[];
+  export type StringType = string;
   export interface Subnet {
     /**
      * The Availability Zone of the subnet.
@@ -31077,6 +31210,7 @@ declare namespace EC2 {
   }
   export type SuccessfulQueuedPurchaseDeletionSet = SuccessfulQueuedPurchaseDeletion[];
   export type SummaryStatus = "ok"|"impaired"|"insufficient-data"|"not-applicable"|"initializing"|string;
+  export type SupportedIpAddressTypes = ServiceConnectivityType[];
   export interface Tag {
     /**
      * The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
@@ -31339,6 +31473,7 @@ declare namespace EC2 {
      */
     Max?: Double;
   }
+  export type TpmSupportValues = "v2.0"|string;
   export type TrafficDirection = "ingress"|"egress"|string;
   export interface TrafficMirrorFilter {
     /**
@@ -31518,11 +31653,15 @@ declare namespace EC2 {
      * The tags assigned to the Traffic Mirror target.
      */
     Tags?: TagList;
+    /**
+     * The ID of the Gateway Load Balancer endpoint.
+     */
+    GatewayLoadBalancerEndpointId?: String;
   }
   export type TrafficMirrorTargetId = string;
   export type TrafficMirrorTargetIdList = TrafficMirrorTargetId[];
   export type TrafficMirrorTargetSet = TrafficMirrorTarget[];
-  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|string;
+  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|"gateway-load-balancer-endpoint"|string;
   export type TrafficMirroringMaxResults = number;
   export type TrafficType = "ACCEPT"|"REJECT"|"ALL"|string;
   export type TransitAssociationGatewayId = string;
@@ -33160,7 +33299,7 @@ declare namespace EC2 {
   export type VpcClassicLinkList = VpcClassicLink[];
   export interface VpcEndpoint {
     /**
-     * The ID of the VPC endpoint.
+     * The ID of the endpoint.
      */
     VpcEndpointId?: String;
     /**
@@ -33176,7 +33315,7 @@ declare namespace EC2 {
      */
     ServiceName?: String;
     /**
-     * The state of the VPC endpoint.
+     * The state of the endpoint.
      */
     State?: State;
     /**
@@ -33188,7 +33327,7 @@ declare namespace EC2 {
      */
     RouteTableIds?: ValueStringList;
     /**
-     * (Interface endpoint) One or more subnets in which the endpoint is located.
+     * (Interface endpoint) The subnets for the endpoint.
      */
     SubnetIds?: ValueStringList;
     /**
@@ -33196,11 +33335,19 @@ declare namespace EC2 {
      */
     Groups?: GroupIdentifierSet;
     /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
+    /**
+     * The DNS options for the endpoint.
+     */
+    DnsOptions?: DnsOptions;
+    /**
      * (Interface endpoint) Indicates whether the VPC is associated with a private hosted zone.
      */
     PrivateDnsEnabled?: Boolean;
     /**
-     * Indicates whether the VPC endpoint is being managed by its service.
+     * Indicates whether the endpoint is being managed by its service.
      */
     RequesterManaged?: Boolean;
     /**
@@ -33212,19 +33359,19 @@ declare namespace EC2 {
      */
     DnsEntries?: DnsEntrySet;
     /**
-     * The date and time that the VPC endpoint was created.
+     * The date and time that the endpoint was created.
      */
     CreationTimestamp?: MillisecondDateTime;
     /**
-     * Any tags assigned to the VPC endpoint.
+     * Any tags assigned to the endpoint.
      */
     Tags?: TagList;
     /**
-     * The ID of the Amazon Web Services account that owns the VPC endpoint.
+     * The ID of the Amazon Web Services account that owns the endpoint.
      */
     OwnerId?: String;
     /**
-     * The last error that occurred for VPC endpoint.
+     * The last error that occurred for endpoint.
      */
     LastError?: LastError;
   }
@@ -33261,6 +33408,10 @@ declare namespace EC2 {
      * The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
      */
     GatewayLoadBalancerArns?: ValueStringList;
+    /**
+     * The IP address type for the endpoint.
+     */
+    IpAddressType?: IpAddressType;
   }
   export type VpcEndpointConnectionSet = VpcEndpointConnection[];
   export type VpcEndpointId = string;
