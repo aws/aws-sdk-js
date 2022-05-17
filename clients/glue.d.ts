@@ -1505,7 +1505,82 @@ declare namespace Glue {
     CrawlerName?: NameString;
   }
   export type ActionList = Action[];
+  export type AdditionalOptions = {[key: string]: EnclosedInStringProperty};
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
+  export type AggFunction = "avg"|"countDistinct"|"count"|"first"|"last"|"kurtosis"|"max"|"min"|"skewness"|"stddev_samp"|"stddev_pop"|"sum"|"sumDistinct"|"var_samp"|"var_pop"|string;
+  export interface Aggregate {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * Specifies the fields and rows to use as inputs for the aggregate transform.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies the fields to group by.
+     */
+    Groups: GlueStudioPathList;
+    /**
+     * Specifies the aggregate functions to be performed on specified fields. 
+     */
+    Aggs: AggregateOperations;
+  }
+  export interface AggregateOperation {
+    /**
+     * Specifies the column on the data set on which the aggregation function will be applied.
+     */
+    Column: EnclosedInStringProperties;
+    /**
+     * Specifies the aggregation function to apply. Possible aggregation functions include: avg countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+     */
+    AggFunc: AggFunction;
+  }
+  export type AggregateOperations = AggregateOperation[];
+  export interface ApplyMapping {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies the mapping of data property keys in the data source to data property keys in the data target.
+     */
+    Mapping: Mappings;
+  }
+  export interface AthenaConnectorSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the connection that is associated with the connector.
+     */
+    ConnectionName: EnclosedInStringProperty;
+    /**
+     * The name of a connector that assists with accessing the data store in Glue Studio.
+     */
+    ConnectorName: EnclosedInStringProperty;
+    /**
+     * The type of connection, such as marketplace.athena or custom.athena, designating a connection to an Amazon Athena data store.
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * The name of the table in the data source.
+     */
+    ConnectionTable?: EnclosedInStringPropertyWithQuote;
+    /**
+     * The name of the Cloudwatch log group to read from. For example, /aws-glue/jobs/output.
+     */
+    SchemaName: EnclosedInStringProperty;
+    /**
+     * Specifies the data schema for the custom Athena source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
   export type AttemptCount = number;
   export type AuditColumnNamesList = ColumnNameString[];
   export interface AuditContext {
@@ -1536,6 +1611,24 @@ declare namespace Glue {
   export type BackfillErrorCode = "ENCRYPTED_PARTITION_ERROR"|"INTERNAL_ERROR"|"INVALID_PARTITION_TYPE_DATA_ERROR"|"MISSING_PARTITION_VALUE_ERROR"|"UNSUPPORTED_PARTITION_CHARACTER_ERROR"|string;
   export type BackfillErroredPartitionsList = PartitionValueList[];
   export type BackfillErrors = BackfillError[];
+  export interface BasicCatalogTarget {
+    /**
+     * The name of your data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The database that contains the table you want to use as the target. This database must already exist in the Data Catalog.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The table that defines the schema of your output data. This table must already exist in the Data Catalog.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export interface BatchCreatePartitionRequest {
     /**
      * The ID of the catalog in which the partition is to be created. Currently, this should be the Amazon Web Services account ID.
@@ -2038,6 +2131,12 @@ declare namespace Glue {
   export type BooleanNullable = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
+  export type BoxedBoolean = boolean;
+  export type BoxedDoubleFraction = number;
+  export type BoxedLong = number;
+  export type BoxedNonNegativeInt = number;
+  export type BoxedNonNegativeLong = number;
+  export type BoxedPositiveInt = number;
   export interface CancelMLTaskRunRequest {
     /**
      * The unique identifier of the machine learning transform.
@@ -2105,6 +2204,90 @@ declare namespace Glue {
      * The name of the person who initiated the migration.
      */
     ImportedBy?: NameString;
+  }
+  export interface CatalogKafkaSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * The amount of time to spend processing each micro batch.
+     */
+    WindowSize?: BoxedPositiveInt;
+    /**
+     * Whether to automatically determine the schema from the incoming data.
+     */
+    DetectSchema?: BoxedBoolean;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * Specifies the streaming options.
+     */
+    StreamingOptions?: KafkaStreamingSourceOptions;
+    /**
+     * Specifies options related to data preview for viewing a sample of your data.
+     */
+    DataPreviewOptions?: StreamingDataPreviewOptions;
+  }
+  export interface CatalogKinesisSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The amount of time to spend processing each micro batch.
+     */
+    WindowSize?: BoxedPositiveInt;
+    /**
+     * Whether to automatically determine the schema from the incoming data.
+     */
+    DetectSchema?: BoxedBoolean;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * Additional options for the Kinesis streaming data source.
+     */
+    StreamingOptions?: KinesisStreamingSourceOptions;
+    /**
+     * Additional options for data preview.
+     */
+    DataPreviewOptions?: StreamingDataPreviewOptions;
+  }
+  export interface CatalogSchemaChangePolicy {
+    /**
+     * Whether to use the specified update behavior when the crawler finds a changed schema.
+     */
+    EnableUpdateCatalog?: BoxedBoolean;
+    /**
+     * The update behavior when the crawler finds a changed schema.
+     */
+    UpdateBehavior?: UpdateCatalogBehavior;
+  }
+  export interface CatalogSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
   }
   export type CatalogTablesList = NameString[];
   export interface CatalogTarget {
@@ -2176,6 +2359,203 @@ declare namespace Glue {
   export type CloudWatchEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CodeGenArgName = string;
   export type CodeGenArgValue = string;
+  export interface CodeGenConfigurationNode {
+    /**
+     * Specifies a connector to an Amazon Athena data source.
+     */
+    AthenaConnectorSource?: AthenaConnectorSource;
+    /**
+     * Specifies a connector to a JDBC data source.
+     */
+    JDBCConnectorSource?: JDBCConnectorSource;
+    /**
+     * Specifies a connector to an Apache Spark data source.
+     */
+    SparkConnectorSource?: SparkConnectorSource;
+    /**
+     * Specifies a data store in the Glue Data Catalog.
+     */
+    CatalogSource?: CatalogSource;
+    /**
+     * Specifies an Amazon Redshift data store.
+     */
+    RedshiftSource?: RedshiftSource;
+    /**
+     * Specifies an Amazon S3 data store in the Glue Data Catalog.
+     */
+    S3CatalogSource?: S3CatalogSource;
+    /**
+     * Specifies a command-separated value (CSV) data store stored in Amazon S3.
+     */
+    S3CsvSource?: S3CsvSource;
+    /**
+     * Specifies a JSON data store stored in Amazon S3.
+     */
+    S3JsonSource?: S3JsonSource;
+    /**
+     * Specifies an Apache Parquet data store stored in Amazon S3.
+     */
+    S3ParquetSource?: S3ParquetSource;
+    RelationalCatalogSource?: RelationalCatalogSource;
+    DynamoDBCatalogSource?: DynamoDBCatalogSource;
+    /**
+     * Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.
+     */
+    JDBCConnectorTarget?: JDBCConnectorTarget;
+    /**
+     * Specifies a target that uses an Apache Spark connector.
+     */
+    SparkConnectorTarget?: SparkConnectorTarget;
+    /**
+     * Specifies a target that uses a Glue Data Catalog table.
+     */
+    CatalogTarget?: BasicCatalogTarget;
+    /**
+     * Specifies a target that uses Amazon Redshift.
+     */
+    RedshiftTarget?: RedshiftTarget;
+    /**
+     * Specifies a data target that writes to Amazon S3 using the Glue Data Catalog.
+     */
+    S3CatalogTarget?: S3CatalogTarget;
+    /**
+     * Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.
+     */
+    S3GlueParquetTarget?: S3GlueParquetTarget;
+    /**
+     * Specifies a data target that writes to Amazon S3.
+     */
+    S3DirectTarget?: S3DirectTarget;
+    /**
+     * Specifies a transform that maps data property keys in the data source to data property keys in the data target. You can rename keys, modify the data types for keys, and choose which keys to drop from the dataset.
+     */
+    ApplyMapping?: ApplyMapping;
+    /**
+     * Specifies a transform that chooses the data property keys that you want to keep.
+     */
+    SelectFields?: SelectFields;
+    /**
+     * Specifies a transform that chooses the data property keys that you want to drop.
+     */
+    DropFields?: DropFields;
+    /**
+     * Specifies a transform that renames a single data property key.
+     */
+    RenameField?: RenameField;
+    /**
+     * Specifies a transform that writes samples of the data to an Amazon S3 bucket.
+     */
+    Spigot?: Spigot;
+    /**
+     * Specifies a transform that joins two datasets into one dataset using a comparison phrase on the specified data property keys. You can use inner, outer, left, right, left semi, and left anti joins.
+     */
+    Join?: Join;
+    /**
+     * Specifies a transform that splits data property keys into two DynamicFrames. The output is a collection of DynamicFrames: one with selected data property keys, and one with the remaining data property keys.
+     */
+    SplitFields?: SplitFields;
+    /**
+     * Specifies a transform that chooses one DynamicFrame from a collection of DynamicFrames. The output is the selected DynamicFrame 
+     */
+    SelectFromCollection?: SelectFromCollection;
+    /**
+     * Specifies a transform that locates records in the dataset that have missing values and adds a new field with a value determined by imputation. The input data set is used to train the machine learning model that determines what the missing value should be.
+     */
+    FillMissingValues?: FillMissingValues;
+    /**
+     * Specifies a transform that splits a dataset into two, based on a filter condition.
+     */
+    Filter?: Filter;
+    /**
+     * Specifies a transform that uses custom code you provide to perform the data transformation. The output is a collection of DynamicFrames.
+     */
+    CustomCode?: CustomCode;
+    /**
+     * Specifies a transform where you enter a SQL query using Spark SQL syntax to transform the data. The output is a single DynamicFrame.
+     */
+    SparkSQL?: SparkSQL;
+    /**
+     * Specifies a direct Amazon Kinesis data source.
+     */
+    DirectKinesisSource?: DirectKinesisSource;
+    /**
+     * Specifies an Apache Kafka data store.
+     */
+    DirectKafkaSource?: DirectKafkaSource;
+    /**
+     * Specifies a Kinesis data source in the Glue Data Catalog.
+     */
+    CatalogKinesisSource?: CatalogKinesisSource;
+    /**
+     * Specifies an Apache Kafka data store in the Data Catalog.
+     */
+    CatalogKafkaSource?: CatalogKafkaSource;
+    /**
+     * Specifies a transform that removes columns from the dataset if all values in the column are 'null'. By default, Glue Studio will recognize null objects, but some values such as empty strings, strings that are "null", -1 integers or other placeholders such as zeros, are not automatically recognized as nulls.
+     */
+    DropNullFields?: DropNullFields;
+    /**
+     * Specifies a transform that merges a DynamicFrame with a staging DynamicFrame based on the specified primary keys to identify records. Duplicate records (records with the same primary keys) are not de-duplicated. 
+     */
+    Merge?: Merge;
+    /**
+     * Specifies a transform that combines the rows from two or more datasets into a single result.
+     */
+    Union?: Union;
+    /**
+     * Specifies a transform that identifies, removes or masks PII data.
+     */
+    PIIDetection?: PIIDetection;
+    /**
+     * Specifies a transform that groups rows by chosen fields and computes the aggregated value by specified function.
+     */
+    Aggregate?: Aggregate;
+    /**
+     * Specifies a transform that removes rows of repeating data from a data set.
+     */
+    DropDuplicates?: DropDuplicates;
+    /**
+     * Specifies a data target that writes to a goverened catalog.
+     */
+    GovernedCatalogTarget?: GovernedCatalogTarget;
+    /**
+     * Specifies a data source in a goverened Data Catalog.
+     */
+    GovernedCatalogSource?: GovernedCatalogSource;
+    /**
+     * Specifies a Microsoft SQL server data source in the Glue Data Catalog.
+     */
+    MicrosoftSQLServerCatalogSource?: MicrosoftSQLServerCatalogSource;
+    /**
+     * Specifies a MySQL data source in the Glue Data Catalog.
+     */
+    MySQLCatalogSource?: MySQLCatalogSource;
+    /**
+     * Specifies an Oracle data source in the Glue Data Catalog.
+     */
+    OracleSQLCatalogSource?: OracleSQLCatalogSource;
+    /**
+     * Specifies a PostgresSQL data source in the Glue Data Catalog.
+     */
+    PostgreSQLCatalogSource?: PostgreSQLCatalogSource;
+    /**
+     * Specifies a target that uses Microsoft SQL.
+     */
+    MicrosoftSQLServerCatalogTarget?: MicrosoftSQLServerCatalogTarget;
+    /**
+     * Specifies a target that uses MySQL.
+     */
+    MySQLCatalogTarget?: MySQLCatalogTarget;
+    /**
+     * Specifies a target that uses Oracle SQL.
+     */
+    OracleSQLCatalogTarget?: OracleSQLCatalogTarget;
+    /**
+     * Specifies a target that uses Postgres SQL.
+     */
+    PostgreSQLCatalogTarget?: PostgreSQLCatalogTarget;
+  }
+  export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
     /**
      * The ID of the node at which the edge starts.
@@ -2343,6 +2723,7 @@ declare namespace Glue {
   export type CommentString = string;
   export type Comparator = "EQUALS"|"GREATER_THAN"|"LESS_THAN"|"GREATER_THAN_EQUALS"|"LESS_THAN_EQUALS"|string;
   export type Compatibility = "NONE"|"DISABLED"|"BACKWARD"|"BACKWARD_ALL"|"FORWARD"|"FORWARD_ALL"|"FULL"|"FULL_ALL"|string;
+  export type CompressionType = "gzip"|"bzip2"|string;
   export interface Condition {
     /**
      * A logical operator.
@@ -3071,6 +3452,10 @@ declare namespace Glue {
      * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
      */
     WorkerType?: WorkerType;
+    /**
+     * The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.
+     */
+    CodeGenConfigurationNodes?: CodeGenConfigurationNodes;
   }
   export interface CreateJobResponse {
     /**
@@ -3598,6 +3983,28 @@ declare namespace Glue {
   export type CsvHeader = NameString[];
   export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
   export type CsvQuoteSymbol = string;
+  export interface CustomCode {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: ManyInputs;
+    /**
+     * The custom code that is used to perform the data transformation.
+     */
+    Code: ExtendedString;
+    /**
+     * The name defined for the custom code node class.
+     */
+    ClassName: EnclosedInStringProperty;
+    /**
+     * Specifies the data schema for the custom code transform.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
   export interface CustomEntityType {
     /**
      * A name for the custom pattern that allows it to be retrieved or deleted later. This name must be unique per Amazon Web Services account.
@@ -3707,6 +4114,16 @@ declare namespace Glue {
   }
   export type DatabaseList = Database[];
   export type DatabaseName = string;
+  export interface Datatype {
+    /**
+     * The datatype of the value.
+     */
+    Id: GenericLimitedString;
+    /**
+     * A label assigned to the datatype.
+     */
+    Label: GenericLimitedString;
+  }
   export interface DateColumnStatisticsData {
     /**
      * The lowest value in the column.
@@ -4239,6 +4656,68 @@ declare namespace Glue {
   export type DevEndpointList = DevEndpoint[];
   export type DevEndpointNameList = NameString[];
   export type DevEndpointNames = GenericString[];
+  export interface DirectKafkaSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * Specifies the streaming options.
+     */
+    StreamingOptions?: KafkaStreamingSourceOptions;
+    /**
+     * The amount of time to spend processing each micro batch.
+     */
+    WindowSize?: BoxedPositiveInt;
+    /**
+     * Whether to automatically determine the schema from the incoming data.
+     */
+    DetectSchema?: BoxedBoolean;
+    /**
+     * Specifies options related to data preview for viewing a sample of your data.
+     */
+    DataPreviewOptions?: StreamingDataPreviewOptions;
+  }
+  export interface DirectKinesisSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The amount of time to spend processing each micro batch.
+     */
+    WindowSize?: BoxedPositiveInt;
+    /**
+     * Whether to automatically determine the schema from the incoming data.
+     */
+    DetectSchema?: BoxedBoolean;
+    /**
+     * Additional options for the Kinesis streaming data source.
+     */
+    StreamingOptions?: KinesisStreamingSourceOptions;
+    /**
+     * Additional options for data preview.
+     */
+    DataPreviewOptions?: StreamingDataPreviewOptions;
+  }
+  export interface DirectSchemaChangePolicy {
+    /**
+     * Whether to use the specified update behavior when the crawler finds a changed schema.
+     */
+    EnableUpdateCatalog?: BoxedBoolean;
+    /**
+     * The update behavior when the crawler finds a changed schema.
+     */
+    UpdateBehavior?: UpdateCatalogBehavior;
+    /**
+     * Specifies the table in the database that the schema change policy applies to.
+     */
+    Table?: EnclosedInStringProperty;
+    /**
+     * Specifies the database that the schema change policy applies to.
+     */
+    Database?: EnclosedInStringProperty;
+  }
   export type Double = number;
   export interface DoubleColumnStatisticsData {
     /**
@@ -4259,6 +4738,66 @@ declare namespace Glue {
     NumberOfDistinctValues: NonNegativeLong;
   }
   export type DoubleValue = number;
+  export interface DropDuplicates {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the columns to be merged or removed if repeating.
+     */
+    Columns?: LimitedPathList;
+  }
+  export interface DropFields {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A JSON path to a variable in the data structure.
+     */
+    Paths: GlueStudioPathList;
+  }
+  export interface DropNullFields {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A structure that represents whether certain values are recognized as null values for removal.
+     */
+    NullCheckBoxList?: NullCheckBoxList;
+    /**
+     * A structure that specifies a list of NullValueField structures that represent a custom null value such as zero or other value being used as a null placeholder unique to the dataset. The DropNullFields transform removes custom null values only if both the value of the null placeholder and the datatype match the data.
+     */
+    NullTextList?: NullValueFields;
+  }
+  export interface DynamoDBCatalogSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export interface DynamoDBTarget {
     /**
      * The name of the DynamoDB table to crawl.
@@ -4286,6 +4825,10 @@ declare namespace Glue {
   }
   export type EdgeList = Edge[];
   export type EnableHybridValues = "TRUE"|"FALSE"|string;
+  export type EnclosedInStringProperties = EnclosedInStringProperty[];
+  export type EnclosedInStringPropertiesMinOne = EnclosedInStringProperty[];
+  export type EnclosedInStringProperty = string;
+  export type EnclosedInStringPropertyWithQuote = string;
   export interface EncryptionAtRest {
     /**
      * The encryption-at-rest mode for encrypting Data Catalog data.
@@ -4369,8 +4912,74 @@ declare namespace Glue {
      */
     OutputS3Path?: UriString;
   }
+  export type ExtendedString = string;
   export type FieldType = string;
+  export interface FillMissingValues {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A JSON path to a variable in the data structure for the dataset that is imputed.
+     */
+    ImputedPath: EnclosedInStringProperty;
+    /**
+     * A JSON path to a variable in the data structure for the dataset that is filled.
+     */
+    FilledPath?: EnclosedInStringProperty;
+  }
+  export interface Filter {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * The operator used to filter rows by comparing the key value to a specified value.
+     */
+    LogicalOperator: FilterLogicalOperator;
+    /**
+     * Specifies a filter expression.
+     */
+    Filters: FilterExpressions;
+  }
+  export interface FilterExpression {
+    /**
+     * The type of operation to perform in the expression.
+     */
+    Operation: FilterOperation;
+    /**
+     * Whether the expression is to be negated.
+     */
+    Negated?: BoxedBoolean;
+    /**
+     * A list of filter values.
+     */
+    Values: FilterValues;
+  }
+  export type FilterExpressions = FilterExpression[];
+  export type FilterLogicalOperator = "AND"|"OR"|string;
+  export type FilterOperation = "EQ"|"LT"|"GT"|"LTE"|"GTE"|"REGEX"|"ISNULL"|string;
   export type FilterString = string;
+  export interface FilterValue {
+    /**
+     * The type of filter value.
+     */
+    Type: FilterValueType;
+    /**
+     * The value to be associated.
+     */
+    Value: EnclosedInStringProperties;
+  }
+  export type FilterValueType = "COLUMNEXTRACTED"|"CONSTANT"|string;
+  export type FilterValues = FilterValue[];
   export interface FindMatchesMetrics {
     /**
      * The area under the precision/recall curve (AUPRC) is a single number measuring the overall quality of the transform, that is independent of the choice made for precision vs. recall. Higher values indicate that you have a more attractive precision vs. recall tradeoff. For more information, see Precision and recall in Wikipedia.
@@ -4432,6 +5041,7 @@ declare namespace Glue {
   export type FormatString = string;
   export type Generic512CharString = string;
   export type GenericBoundedDouble = number;
+  export type GenericLimitedString = string;
   export type GenericMap = {[key: string]: GenericString};
   export type GenericString = string;
   export interface GetBlueprintRequest {
@@ -5958,7 +6568,28 @@ declare namespace Glue {
      */
     UpdateTime?: Timestamp;
   }
+  export type GlueRecordType = "DATE"|"STRING"|"TIMESTAMP"|"INT"|"FLOAT"|"LONG"|"BIGDECIMAL"|"BYTE"|"SHORT"|"DOUBLE"|string;
   export type GlueResourceArn = string;
+  export interface GlueSchema {
+    /**
+     * Specifies the column definitions that make up a Glue schema.
+     */
+    Columns?: GlueStudioSchemaColumnList;
+  }
+  export type GlueSchemas = GlueSchema[];
+  export type GlueStudioColumnNameString = string;
+  export type GlueStudioPathList = EnclosedInStringProperties[];
+  export interface GlueStudioSchemaColumn {
+    /**
+     * The name of the column in the Glue Studio schema.
+     */
+    Name: GlueStudioColumnNameString;
+    /**
+     * The hive type for this column in the Glue Studio schema.
+     */
+    Type?: ColumnTypeString;
+  }
+  export type GlueStudioSchemaColumnList = GlueStudioSchemaColumn[];
   export interface GlueTable {
     /**
      * A database name in the Glue Data Catalog.
@@ -5979,6 +6610,54 @@ declare namespace Glue {
   }
   export type GlueTables = GlueTable[];
   export type GlueVersionString = string;
+  export interface GovernedCatalogSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * The database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The database table to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted. Set to "" – empty by default.
+     */
+    PartitionPredicate?: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalOptions?: S3SourceAdditionalOptions;
+  }
+  export interface GovernedCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * A policy that specifies update behavior for the governed catalog.
+     */
+    SchemaChangePolicy?: CatalogSchemaChangePolicy;
+  }
   export interface GrokClassifier {
     /**
      * The name of the classifier.
@@ -6034,6 +6713,110 @@ declare namespace Glue {
   export type IntegerFlag = number;
   export type IntegerValue = number;
   export type IsVersionValid = boolean;
+  export interface JDBCConnectorOptions {
+    /**
+     * Extra condition clause to filter data from source. For example:  BillingCity='Mountain View'  When using a query instead of a table name, you should validate that the query works with the specified filterPredicate.
+     */
+    FilterPredicate?: EnclosedInStringProperty;
+    /**
+     * The name of an integer column that is used for partitioning. This option works only when it's included with lowerBound, upperBound, and numPartitions. This option works the same way as in the Spark SQL JDBC reader.
+     */
+    PartitionColumn?: EnclosedInStringProperty;
+    /**
+     * The minimum value of partitionColumn that is used to decide partition stride.
+     */
+    LowerBound?: BoxedNonNegativeLong;
+    /**
+     * The maximum value of partitionColumn that is used to decide partition stride.
+     */
+    UpperBound?: BoxedNonNegativeLong;
+    /**
+     * The number of partitions. This value, along with lowerBound (inclusive) and upperBound (exclusive), form partition strides for generated WHERE clause expressions that are used to split the partitionColumn.
+     */
+    NumPartitions?: BoxedNonNegativeLong;
+    /**
+     * The name of the job bookmark keys on which to sort.
+     */
+    JobBookmarkKeys?: EnclosedInStringProperties;
+    /**
+     * Specifies an ascending or descending sort order.
+     */
+    JobBookmarkKeysSortOrder?: EnclosedInStringProperty;
+    /**
+     * Custom data type mapping that builds a mapping from a JDBC data type to an Glue data type. For example, the option "dataTypeMapping":{"FLOAT":"STRING"} maps data fields of JDBC type FLOAT into the Java String type by calling the ResultSet.getString() method of the driver, and uses it to build the Glue record. The ResultSet object is implemented by each driver, so the behavior is specific to the driver you use. Refer to the documentation for your JDBC driver to understand how the driver performs the conversions.
+     */
+    DataTypeMapping?: JDBCDataTypeMapping;
+  }
+  export interface JDBCConnectorSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the connection that is associated with the connector.
+     */
+    ConnectionName: EnclosedInStringProperty;
+    /**
+     * The name of a connector that assists with accessing the data store in Glue Studio.
+     */
+    ConnectorName: EnclosedInStringProperty;
+    /**
+     * The type of connection, such as marketplace.jdbc or custom.jdbc, designating a connection to a JDBC data store.
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * Additional connection options for the connector.
+     */
+    AdditionalOptions?: JDBCConnectorOptions;
+    /**
+     * The name of the table in the data source.
+     */
+    ConnectionTable?: EnclosedInStringPropertyWithQuote;
+    /**
+     * The table or SQL query to get the data from. You can specify either ConnectionTable or query, but not both.
+     */
+    Query?: SqlQuery;
+    /**
+     * Specifies the data schema for the custom JDBC source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface JDBCConnectorTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the connection that is associated with the connector.
+     */
+    ConnectionName: EnclosedInStringProperty;
+    /**
+     * The name of the table in the data target.
+     */
+    ConnectionTable: EnclosedInStringPropertyWithQuote;
+    /**
+     * The name of a connector that will be used.
+     */
+    ConnectorName: EnclosedInStringProperty;
+    /**
+     * The type of connection, such as marketplace.jdbc or custom.jdbc, designating a connection to a JDBC data target.
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * Additional connection options for the connector.
+     */
+    AdditionalOptions?: AdditionalOptions;
+    /**
+     * Specifies the data schema for the JDBC target.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export type JDBCDataType = "ARRAY"|"BIGINT"|"BINARY"|"BIT"|"BLOB"|"BOOLEAN"|"CHAR"|"CLOB"|"DATALINK"|"DATE"|"DECIMAL"|"DISTINCT"|"DOUBLE"|"FLOAT"|"INTEGER"|"JAVA_OBJECT"|"LONGNVARCHAR"|"LONGVARBINARY"|"LONGVARCHAR"|"NCHAR"|"NCLOB"|"NULL"|"NUMERIC"|"NVARCHAR"|"OTHER"|"REAL"|"REF"|"REF_CURSOR"|"ROWID"|"SMALLINT"|"SQLXML"|"STRUCT"|"TIME"|"TIME_WITH_TIMEZONE"|"TIMESTAMP"|"TIMESTAMP_WITH_TIMEZONE"|"TINYINT"|"VARBINARY"|"VARCHAR"|string;
+  export type JDBCDataTypeMapping = {[key: string]: GlueRecordType};
   export interface JdbcTarget {
     /**
      * The name of the connection to use to connect to the JDBC target.
@@ -6130,6 +6913,10 @@ declare namespace Glue {
      * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
      */
     GlueVersion?: GlueVersionString;
+    /**
+     * The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.
+     */
+    CodeGenConfigurationNodes?: CodeGenConfigurationNodes;
   }
   export interface JobBookmarkEntry {
     /**
@@ -6360,7 +7147,41 @@ declare namespace Glue {
      * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide.
      */
     GlueVersion?: GlueVersionString;
+    /**
+     * The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.
+     */
+    CodeGenConfigurationNodes?: CodeGenConfigurationNodes;
   }
+  export interface Join {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: TwoInputs;
+    /**
+     * Specifies the type of join to be performed on the datasets.
+     */
+    JoinType: JoinType;
+    /**
+     * A list of the two columns to be joined.
+     */
+    Columns: JoinColumns;
+  }
+  export interface JoinColumn {
+    /**
+     * The column to be joined.
+     */
+    From: EnclosedInStringProperty;
+    /**
+     * The key of the column to be joined.
+     */
+    Keys: GlueStudioPathList;
+  }
+  export type JoinColumns = JoinColumn[];
+  export type JoinType = "equijoin"|"left"|"right"|"outer"|"leftsemi"|"leftanti"|string;
   export interface JsonClassifier {
     /**
      * The name of the classifier.
@@ -6385,6 +7206,68 @@ declare namespace Glue {
   }
   export type JsonPath = string;
   export type JsonValue = string;
+  export interface KafkaStreamingSourceOptions {
+    /**
+     * A list of bootstrap server URLs, for example, as b-1.vpc-test-2.o4q88o.c6.kafka.us-east-1.amazonaws.com:9094. This option must be specified in the API call or defined in the table metadata in the Data Catalog.
+     */
+    BootstrapServers?: EnclosedInStringProperty;
+    /**
+     * The protocol used to communicate with brokers. The possible values are "SSL" or "PLAINTEXT".
+     */
+    SecurityProtocol?: EnclosedInStringProperty;
+    /**
+     * The name of the connection.
+     */
+    ConnectionName?: EnclosedInStringProperty;
+    /**
+     * The topic name as specified in Apache Kafka. You must specify at least one of "topicName", "assign" or "subscribePattern".
+     */
+    TopicName?: EnclosedInStringProperty;
+    /**
+     * The specific TopicPartitions to consume. You must specify at least one of "topicName", "assign" or "subscribePattern".
+     */
+    Assign?: EnclosedInStringProperty;
+    /**
+     * A Java regex string that identifies the topic list to subscribe to. You must specify at least one of "topicName", "assign" or "subscribePattern".
+     */
+    SubscribePattern?: EnclosedInStringProperty;
+    /**
+     * An optional classification.
+     */
+    Classification?: EnclosedInStringProperty;
+    /**
+     * Specifies the delimiter character.
+     */
+    Delimiter?: EnclosedInStringProperty;
+    /**
+     * The starting position in the Kafka topic to read data from. The possible values are "earliest" or "latest". The default value is "latest".
+     */
+    StartingOffsets?: EnclosedInStringProperty;
+    /**
+     * The end point when a batch query is ended. Possible values are either "latest" or a JSON string that specifies an ending offset for each TopicPartition.
+     */
+    EndingOffsets?: EnclosedInStringProperty;
+    /**
+     * The timeout in milliseconds to poll data from Kafka in Spark job executors. The default value is 512.
+     */
+    PollTimeoutMs?: BoxedNonNegativeLong;
+    /**
+     * The number of times to retry before failing to fetch Kafka offsets. The default value is 3.
+     */
+    NumRetries?: BoxedNonNegativeInt;
+    /**
+     * The time in milliseconds to wait before retrying to fetch Kafka offsets. The default value is 10.
+     */
+    RetryIntervalMs?: BoxedNonNegativeLong;
+    /**
+     * The rate limit on the maximum number of offsets that are processed per trigger interval. The specified total number of offsets is proportionally split across topicPartitions of different volumes. The default value is null, which means that the consumer reads all offsets until the known latest offset.
+     */
+    MaxOffsetsPerTrigger?: BoxedNonNegativeLong;
+    /**
+     * The desired minimum number of partitions to read from Kafka. The default value is null, which means that the number of spark partitions is equal to the number of Kafka partitions.
+     */
+    MinPartitions?: BoxedNonNegativeInt;
+  }
   export type KeyList = NameString[];
   export interface KeySchemaElement {
     /**
@@ -6398,6 +7281,80 @@ declare namespace Glue {
   }
   export type KeySchemaElementList = KeySchemaElement[];
   export type KeyString = string;
+  export interface KinesisStreamingSourceOptions {
+    /**
+     * The URL of the Kinesis endpoint.
+     */
+    EndpointUrl?: EnclosedInStringProperty;
+    /**
+     * The name of the Kinesis data stream.
+     */
+    StreamName?: EnclosedInStringProperty;
+    /**
+     * An optional classification.
+     */
+    Classification?: EnclosedInStringProperty;
+    /**
+     * Specifies the delimiter character.
+     */
+    Delimiter?: EnclosedInStringProperty;
+    /**
+     * The starting position in the Kinesis data stream to read data from. The possible values are "latest", "trim_horizon", or "earliest". The default value is "latest".
+     */
+    StartingPosition?: StartingPosition;
+    /**
+     * The maximum time spent in the job executor to fetch a record from the Kinesis data stream per shard, specified in milliseconds (ms). The default value is 1000.
+     */
+    MaxFetchTimeInMs?: BoxedNonNegativeLong;
+    /**
+     * The maximum number of records to fetch per shard in the Kinesis data stream. The default value is 100000.
+     */
+    MaxFetchRecordsPerShard?: BoxedNonNegativeLong;
+    /**
+     * The maximum number of records to fetch from the Kinesis data stream in each getRecords operation. The default value is 10000.
+     */
+    MaxRecordPerRead?: BoxedNonNegativeLong;
+    /**
+     * Adds a time delay between two consecutive getRecords operations. The default value is "False". This option is only configurable for Glue version 2.0 and above.
+     */
+    AddIdleTimeBetweenReads?: BoxedBoolean;
+    /**
+     * The minimum time delay between two consecutive getRecords operations, specified in ms. The default value is 1000. This option is only configurable for Glue version 2.0 and above.
+     */
+    IdleTimeBetweenReadsInMs?: BoxedNonNegativeLong;
+    /**
+     * The minimum time interval between two ListShards API calls for your script to consider resharding. The default value is 1s.
+     */
+    DescribeShardInterval?: BoxedNonNegativeLong;
+    /**
+     * The maximum number of retries for Kinesis Data Streams API requests. The default value is 3.
+     */
+    NumRetries?: BoxedNonNegativeInt;
+    /**
+     * The cool-off time period (specified in ms) before retrying the Kinesis Data Streams API call. The default value is 1000.
+     */
+    RetryIntervalMs?: BoxedNonNegativeLong;
+    /**
+     * The maximum cool-off time period (specified in ms) between two retries of a Kinesis Data Streams API call. The default value is 10000.
+     */
+    MaxRetryIntervalMs?: BoxedNonNegativeLong;
+    /**
+     * Avoids creating an empty microbatch job by checking for unread data in the Kinesis data stream before the batch is started. The default value is "False".
+     */
+    AvoidEmptyBatches?: BoxedBoolean;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis data stream.
+     */
+    StreamArn?: EnclosedInStringProperty;
+    /**
+     * The Amazon Resource Name (ARN) of the role to assume using AWS Security Token Service (AWS STS). This role must have permissions for describe or read record operations for the Kinesis data stream. You must use this parameter when accessing a data stream in a different account. Used in conjunction with "awsSTSSessionName".
+     */
+    RoleArn?: EnclosedInStringProperty;
+    /**
+     * An identifier for the session assuming the role using AWS STS. You must use this parameter when accessing a data stream in a different account. Used in conjunction with "awsSTSRoleARN".
+     */
+    RoleSessionName?: EnclosedInStringProperty;
+  }
   export type KmsKeyArn = string;
   export type LabelCount = number;
   export interface LabelingSetGenerationTaskRunProperties {
@@ -6467,6 +7424,8 @@ declare namespace Glue {
   }
   export type LastCrawlStatus = "SUCCEEDED"|"CANCELLED"|"FAILED"|string;
   export type LatestSchemaVersionBoolean = boolean;
+  export type LimitedPathList = LimitedStringList[];
+  export type LimitedStringList = GenericLimitedString[];
   export interface LineageConfiguration {
     /**
      * Specifies whether data lineage is enabled for the crawler. Valid values are:   ENABLE: enables data lineage for the crawler   DISABLE: disables data lineage for the crawler  
@@ -6917,7 +7876,34 @@ declare namespace Glue {
     KmsKeyId?: NameString;
   }
   export type MLUserDataEncryptionModeString = "DISABLED"|"SSE-KMS"|string;
+  export type ManyInputs = NodeId[];
   export type MapValue = {[key: string]: GenericString};
+  export interface Mapping {
+    /**
+     * After the apply mapping, what the name of the column should be. Can be the same as FromPath.
+     */
+    ToKey?: EnclosedInStringProperty;
+    /**
+     * The table or column to be modified.
+     */
+    FromPath?: EnclosedInStringProperties;
+    /**
+     * The type of the data to be modified.
+     */
+    FromType?: EnclosedInStringProperty;
+    /**
+     * The data type that the data is to be modified to.
+     */
+    ToType?: EnclosedInStringProperty;
+    /**
+     * If true, then the column is removed.
+     */
+    Dropped?: BoxedBoolean;
+    /**
+     * Only applicable to nested data structures. If you want to change the parent structure, but also one of its children, you can fill out this data strucutre. It is also Mapping, but its FromPath will be the parent's FromPath plus the FromPath from this structure. For the children part, suppose you have the structure:  { "FromPath": "OuterStructure", "ToKey": "OuterStructure", "ToType": "Struct", "Dropped": false, "Chidlren": [{ "FromPath": "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, }] }  You can specify a Mapping that looks like:  { "FromPath": "OuterStructure", "ToKey": "OuterStructure", "ToType": "Struct", "Dropped": false, "Chidlren": [{ "FromPath": "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, }] } 
+     */
+    Children?: Mappings;
+  }
   export interface MappingEntry {
     /**
      * The name of the source table.
@@ -6945,10 +7931,30 @@ declare namespace Glue {
     TargetType?: FieldType;
   }
   export type MappingList = MappingEntry[];
+  export type Mappings = Mapping[];
+  export type MaskValue = string;
   export type MatchCriteria = NameString[];
   export type MaxConcurrentRuns = number;
   export type MaxResultsNumber = number;
   export type MaxRetries = number;
+  export interface Merge {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: TwoInputs;
+    /**
+     * The source DynamicFrame that will be merged with a staging DynamicFrame.
+     */
+    Source: NodeId;
+    /**
+     * The list of primary key fields to match records from the source and staging dynamic frames.
+     */
+    PrimaryKeys: GlueStudioPathList;
+  }
   export type MessagePrefix = string;
   export type MessageString = string;
   export interface MetadataInfo {
@@ -6979,6 +7985,38 @@ declare namespace Glue {
   }
   export type MetadataList = MetadataKeyValuePair[];
   export type MetadataValueString = string;
+  export interface MicrosoftSQLServerCatalogSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+  }
+  export interface MicrosoftSQLServerCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export type MillisecondsCount = number;
   export interface MongoDBTarget {
     /**
@@ -6995,6 +8033,38 @@ declare namespace Glue {
     ScanAll?: NullableBoolean;
   }
   export type MongoDBTargetList = MongoDBTarget[];
+  export interface MySQLCatalogSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+  }
+  export interface MySQLCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export type NameString = string;
   export type NameStringList = NameString[];
   export interface Node {
@@ -7023,10 +8093,13 @@ declare namespace Glue {
      */
     CrawlerDetails?: CrawlerNodeDetails;
   }
+  export type NodeId = string;
   export type NodeIdList = NameString[];
   export type NodeList = Node[];
+  export type NodeName = string;
   export type NodeType = "CRAWLER"|"JOB"|"TRIGGER"|string;
   export type NonNegativeDouble = number;
+  export type NonNegativeInt = number;
   export type NonNegativeInteger = number;
   export type NonNegativeLong = number;
   export interface NotificationProperty {
@@ -7036,9 +8109,67 @@ declare namespace Glue {
     NotifyDelayAfter?: NotifyDelayAfter;
   }
   export type NotifyDelayAfter = number;
+  export interface NullCheckBoxList {
+    /**
+     * Specifies that an empty string is considered as a null value.
+     */
+    IsEmpty?: BoxedBoolean;
+    /**
+     * Specifies that a value spelling out the word 'null' is considered as a null value.
+     */
+    IsNullString?: BoxedBoolean;
+    /**
+     * Specifies that an integer value of -1 is considered as a null value.
+     */
+    IsNegOne?: BoxedBoolean;
+  }
+  export interface NullValueField {
+    /**
+     * The value of the null placeholder.
+     */
+    Value: EnclosedInStringProperty;
+    /**
+     * The datatype of the value.
+     */
+    Datatype: Datatype;
+  }
+  export type NullValueFields = NullValueField[];
   export type NullableBoolean = boolean;
   export type NullableDouble = number;
   export type NullableInteger = number;
+  export type OneInput = NodeId[];
+  export interface OracleSQLCatalogSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+  }
+  export interface OracleSQLCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export type OrchestrationArgumentsMap = {[key: string]: OrchestrationArgumentsValue};
   export type OrchestrationArgumentsValue = string;
   export type OrchestrationIAMRoleArn = string;
@@ -7070,10 +8201,45 @@ declare namespace Glue {
      */
     CreatedTime?: CreatedTimestamp;
   }
+  export interface PIIDetection {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The node ID inputs to the transform.
+     */
+    Inputs: OneInput;
+    /**
+     * Indicates the type of PIIDetection transform. 
+     */
+    PiiType: PiiType;
+    /**
+     * Indicates the types of entities the PIIDetection transform will identify as PII data.   PII type entities include: PERSON_NAME, DATE, USA_SNN, EMAIL, USA_ITIN, USA_PASSPORT_NUMBER, PHONE_NUMBER, BANK_ACCOUNT, IP_ADDRESS, MAC_ADDRESS, USA_CPT_CODE, USA_HCPCS_CODE, USA_NATIONAL_DRUG_CODE, USA_MEDICARE_BENEFICIARY_IDENTIFIER, USA_HEALTH_INSURANCE_CLAIM_NUMBER,CREDIT_CARD,USA_NATIONAL_PROVIDER_IDENTIFIER,USA_DEA_NUMBER,USA_DRIVING_LICENSE 
+     */
+    EntityTypesToDetect: EnclosedInStringProperties;
+    /**
+     * Indicates the output column name that will contain any entity type detected in that row. 
+     */
+    OutputColumnName?: EnclosedInStringProperty;
+    /**
+     * Indicates the fraction of the data to sample when scanning for PII entities. 
+     */
+    SampleFraction?: BoxedDoubleFraction;
+    /**
+     * Indicates the fraction of the data that must be met in order for a column to be identified as PII data. 
+     */
+    ThresholdFraction?: BoxedDoubleFraction;
+    /**
+     * Indicates the value that will replace the detected entity. 
+     */
+    MaskValue?: MaskValue;
+  }
   export type PageSize = number;
   export type PaginationToken = string;
   export type ParametersMap = {[key: string]: ParametersMapValue};
   export type ParametersMapValue = string;
+  export type ParquetCompressionType = "snappy"|"lzo"|"gzip"|"uncompressed"|"none"|string;
   export interface Partition {
     /**
      * The values of the partition.
@@ -7204,7 +8370,42 @@ declare namespace Glue {
      */
     AvailabilityZone?: NameString;
   }
+  export type PiiType = "RowAudit"|"RowMasking"|"ColumnAudit"|"ColumnMasking"|string;
   export type PolicyJsonString = string;
+  export type PollingTime = number;
+  export type PositiveLong = number;
+  export interface PostgreSQLCatalogSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+  }
+  export interface PostgreSQLCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export interface Predecessor {
     /**
      * The name of the job definition used by the predecessor job run.
@@ -7239,6 +8440,7 @@ declare namespace Glue {
   }
   export type PrincipalPermissionsList = PrincipalPermissions[];
   export type PrincipalType = "USER"|"ROLE"|"GROUP"|string;
+  export type Prob = number;
   export interface PropertyPredicate {
     /**
      * The key of the property.
@@ -7405,6 +8607,7 @@ declare namespace Glue {
      */
     NextToken?: SchemaRegistryTokenString;
   }
+  export type QuoteChar = "quote"|"quillemet"|"single_quote"|"disabled"|string;
   export type RecordsCount = number;
   export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|"CRAWL_EVENT_MODE"|string;
   export interface RecrawlPolicy {
@@ -7412,6 +8615,58 @@ declare namespace Glue {
      * Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run. A value of CRAWL_EVENT_MODE specifies crawling only the changes identified by Amazon S3 events.
      */
     RecrawlBehavior?: RecrawlBehavior;
+  }
+  export interface RedshiftSource {
+    /**
+     * The name of the Amazon Redshift data store.
+     */
+    Name: NodeName;
+    /**
+     * The database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The database table to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The Amazon S3 path where temporary data can be staged when copying out of the database.
+     */
+    RedshiftTmpDir?: EnclosedInStringProperty;
+    /**
+     * The IAM role with permissions.
+     */
+    TmpDirIAMRole?: EnclosedInStringProperty;
+  }
+  export interface RedshiftTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The Amazon S3 path where temporary data can be staged when copying out of the database.
+     */
+    RedshiftTmpDir?: EnclosedInStringProperty;
+    /**
+     * The IAM role with permissions.
+     */
+    TmpDirIAMRole?: EnclosedInStringProperty;
+    /**
+     * The set of options to configure an upsert operation when writing to a Redshift target.
+     */
+    UpsertRedshiftOptions?: UpsertRedshiftTargetOptions;
   }
   export interface RegisterSchemaVersionInput {
     /**
@@ -7475,6 +8730,20 @@ declare namespace Glue {
     UpdatedTime?: UpdatedTimestamp;
   }
   export type RegistryStatus = "AVAILABLE"|"DELETING"|string;
+  export interface RelationalCatalogSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+  }
   export interface RemoveSchemaVersionMetadataInput {
     /**
      * A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
@@ -7526,6 +8795,24 @@ declare namespace Glue {
      * The value of the metadata key.
      */
     MetadataValue?: MetadataValueString;
+  }
+  export interface RenameField {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A JSON path to a variable in the data structure for the source data.
+     */
+    SourcePath: EnclosedInStringProperties;
+    /**
+     * A JSON path to a variable in the data structure for the target data.
+     */
+    TargetPath: EnclosedInStringProperties;
   }
   export type ReplaceBoolean = boolean;
   export interface ResetJobBookmarkRequest {
@@ -7606,6 +8893,180 @@ declare namespace Glue {
      */
     Id?: IntegerValue;
   }
+  export interface S3CatalogSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * The database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The database table to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted. Set to "" – empty by default.
+     */
+    PartitionPredicate?: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalOptions?: S3SourceAdditionalOptions;
+  }
+  export interface S3CatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
+    SchemaChangePolicy?: CatalogSchemaChangePolicy;
+  }
+  export interface S3CsvSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * A list of the Amazon S3 paths to read from.
+     */
+    Paths: EnclosedInStringProperties;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    CompressionType?: CompressionType;
+    /**
+     * A string containing a JSON list of Unix-style glob patterns to exclude. For example, "[\"**.pdf\"]" excludes all PDF files. 
+     */
+    Exclusions?: EnclosedInStringProperties;
+    /**
+     * The target group size in bytes. The default is computed based on the input data size and the size of your cluster. When there are fewer than 50,000 input files, "groupFiles" must be set to "inPartition" for this to take effect.
+     */
+    GroupSize?: EnclosedInStringProperty;
+    /**
+     * Grouping files is turned on by default when the input contains more than 50,000 files. To turn on grouping with fewer than 50,000 files, set this parameter to "inPartition". To disable grouping when there are more than 50,000 files, set this parameter to "none".
+     */
+    GroupFiles?: EnclosedInStringProperty;
+    /**
+     * If set to true, recursively reads files in all subdirectories under the specified paths.
+     */
+    Recurse?: BoxedBoolean;
+    /**
+     * This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.
+     */
+    MaxBand?: BoxedNonNegativeInt;
+    /**
+     * This option specifies the maximum number of files to save from the last maxBand seconds. If this number is exceeded, extra files are skipped and only processed in the next job run.
+     */
+    MaxFilesInBand?: BoxedNonNegativeInt;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalOptions?: S3DirectSourceAdditionalOptions;
+    /**
+     * Specifies the delimiter character. The default is a comma: ",", but any other character can be specified.
+     */
+    Separator: Separator;
+    /**
+     * Specifies a character to use for escaping. This option is used only when reading CSV files. The default value is none. If enabled, the character which immediately follows is used as-is, except for a small set of well-known escapes (\n, \r, \t, and \0).
+     */
+    Escaper?: EnclosedInStringPropertyWithQuote;
+    /**
+     * Specifies the character to use for quoting. The default is a double quote: '"'. Set this to -1 to turn off quoting entirely.
+     */
+    QuoteChar: QuoteChar;
+    /**
+     * A Boolean value that specifies whether a single record can span multiple lines. This can occur when a field contains a quoted new-line character. You must set this option to True if any record spans multiple lines. The default value is False, which allows for more aggressive file-splitting during parsing.
+     */
+    Multiline?: BoxedBoolean;
+    /**
+     * A Boolean value that specifies whether to treat the first line as a header. The default value is False.
+     */
+    WithHeader?: BoxedBoolean;
+    /**
+     * A Boolean value that specifies whether to write the header to output. The default value is True. 
+     */
+    WriteHeader?: BoxedBoolean;
+    /**
+     * A Boolean value that specifies whether to skip the first data line. The default value is False.
+     */
+    SkipFirst?: BoxedBoolean;
+    /**
+     * A Boolean value that specifies whether to use the advanced SIMD CSV reader along with Apache Arrow based columnar memory formats. Only available in Glue version 3.0.
+     */
+    OptimizePerformance?: BooleanValue;
+    /**
+     * Specifies the data schema for the S3 CSV source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface S3DirectSourceAdditionalOptions {
+    /**
+     * Sets the upper limit for the target size of the dataset in bytes that will be processed.
+     */
+    BoundedSize?: BoxedLong;
+    /**
+     * Sets the upper limit for the target number of files that will be processed.
+     */
+    BoundedFiles?: BoxedLong;
+    /**
+     * Sets option to enable a sample path.
+     */
+    EnableSamplePath?: BoxedBoolean;
+    /**
+     * If enabled, specifies the sample path.
+     */
+    SamplePath?: EnclosedInStringProperty;
+  }
+  export interface S3DirectTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * A single Amazon S3 path to write to.
+     */
+    Path: EnclosedInStringProperty;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    Compression?: EnclosedInStringProperty;
+    /**
+     * Specifies the data output format for the target.
+     */
+    Format: TargetFormat;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
+    SchemaChangePolicy?: DirectSchemaChangePolicy;
+  }
   export interface S3Encryption {
     /**
      * The encryption mode to use for Amazon S3 data.
@@ -7618,6 +9079,142 @@ declare namespace Glue {
   }
   export type S3EncryptionList = S3Encryption[];
   export type S3EncryptionMode = "DISABLED"|"SSE-KMS"|"SSE-S3"|string;
+  export interface S3GlueParquetTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * A single Amazon S3 path to write to.
+     */
+    Path: EnclosedInStringProperty;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    Compression?: ParquetCompressionType;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
+    SchemaChangePolicy?: DirectSchemaChangePolicy;
+  }
+  export interface S3JsonSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * A list of the Amazon S3 paths to read from.
+     */
+    Paths: EnclosedInStringProperties;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    CompressionType?: CompressionType;
+    /**
+     * A string containing a JSON list of Unix-style glob patterns to exclude. For example, "[\"**.pdf\"]" excludes all PDF files. 
+     */
+    Exclusions?: EnclosedInStringProperties;
+    /**
+     * The target group size in bytes. The default is computed based on the input data size and the size of your cluster. When there are fewer than 50,000 input files, "groupFiles" must be set to "inPartition" for this to take effect.
+     */
+    GroupSize?: EnclosedInStringProperty;
+    /**
+     * Grouping files is turned on by default when the input contains more than 50,000 files. To turn on grouping with fewer than 50,000 files, set this parameter to "inPartition". To disable grouping when there are more than 50,000 files, set this parameter to "none".
+     */
+    GroupFiles?: EnclosedInStringProperty;
+    /**
+     * If set to true, recursively reads files in all subdirectories under the specified paths.
+     */
+    Recurse?: BoxedBoolean;
+    /**
+     * This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.
+     */
+    MaxBand?: BoxedNonNegativeInt;
+    /**
+     * This option specifies the maximum number of files to save from the last maxBand seconds. If this number is exceeded, extra files are skipped and only processed in the next job run.
+     */
+    MaxFilesInBand?: BoxedNonNegativeInt;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalOptions?: S3DirectSourceAdditionalOptions;
+    /**
+     * A JsonPath string defining the JSON data.
+     */
+    JsonPath?: EnclosedInStringProperty;
+    /**
+     * A Boolean value that specifies whether a single record can span multiple lines. This can occur when a field contains a quoted new-line character. You must set this option to True if any record spans multiple lines. The default value is False, which allows for more aggressive file-splitting during parsing.
+     */
+    Multiline?: BoxedBoolean;
+    /**
+     * Specifies the data schema for the S3 JSON source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface S3ParquetSource {
+    /**
+     * The name of the data store.
+     */
+    Name: NodeName;
+    /**
+     * A list of the Amazon S3 paths to read from.
+     */
+    Paths: EnclosedInStringProperties;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    CompressionType?: ParquetCompressionType;
+    /**
+     * A string containing a JSON list of Unix-style glob patterns to exclude. For example, "[\"**.pdf\"]" excludes all PDF files. 
+     */
+    Exclusions?: EnclosedInStringProperties;
+    /**
+     * The target group size in bytes. The default is computed based on the input data size and the size of your cluster. When there are fewer than 50,000 input files, "groupFiles" must be set to "inPartition" for this to take effect.
+     */
+    GroupSize?: EnclosedInStringProperty;
+    /**
+     * Grouping files is turned on by default when the input contains more than 50,000 files. To turn on grouping with fewer than 50,000 files, set this parameter to "inPartition". To disable grouping when there are more than 50,000 files, set this parameter to "none".
+     */
+    GroupFiles?: EnclosedInStringProperty;
+    /**
+     * If set to true, recursively reads files in all subdirectories under the specified paths.
+     */
+    Recurse?: BoxedBoolean;
+    /**
+     * This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.
+     */
+    MaxBand?: BoxedNonNegativeInt;
+    /**
+     * This option specifies the maximum number of files to save from the last maxBand seconds. If this number is exceeded, extra files are skipped and only processed in the next job run.
+     */
+    MaxFilesInBand?: BoxedNonNegativeInt;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalOptions?: S3DirectSourceAdditionalOptions;
+    /**
+     * Specifies the data schema for the S3 Parquet source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface S3SourceAdditionalOptions {
+    /**
+     * Sets the upper limit for the target size of the dataset in bytes that will be processed.
+     */
+    BoundedSize?: BoxedLong;
+    /**
+     * Sets the upper limit for the target number of files that will be processed.
+     */
+    BoundedFiles?: BoxedLong;
+  }
   export interface S3Target {
     /**
      * The path to the Amazon S3 target.
@@ -7859,6 +9456,35 @@ declare namespace Glue {
      */
     TotalSegments: TotalSegmentsInteger;
   }
+  export interface SelectFields {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A JSON path to a variable in the data structure.
+     */
+    Paths: GlueStudioPathList;
+  }
+  export interface SelectFromCollection {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * The index for the DynamicFrame to be selected.
+     */
+    Index: NonNegativeInt;
+  }
+  export type Separator = "comma"|"ctrla"|"pipe"|"semicolon"|"tab"|string;
   export interface SerDeInfo {
     /**
      * Name of the SerDe.
@@ -7967,6 +9593,132 @@ declare namespace Glue {
     Sort?: Sort;
   }
   export type SortDirectionType = "DESCENDING"|"ASCENDING"|string;
+  export interface SparkConnectorSource {
+    /**
+     * The name of the data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the connection that is associated with the connector.
+     */
+    ConnectionName: EnclosedInStringProperty;
+    /**
+     * The name of a connector that assists with accessing the data store in Glue Studio.
+     */
+    ConnectorName: EnclosedInStringProperty;
+    /**
+     * The type of connection, such as marketplace.spark or custom.spark, designating a connection to an Apache Spark data store.
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * Additional connection options for the connector.
+     */
+    AdditionalOptions?: AdditionalOptions;
+    /**
+     * Specifies data schema for the custom spark source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface SparkConnectorTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The name of a connection for an Apache Spark connector.
+     */
+    ConnectionName: EnclosedInStringProperty;
+    /**
+     * The name of an Apache Spark connector.
+     */
+    ConnectorName: EnclosedInStringProperty;
+    /**
+     * The type of connection, such as marketplace.spark or custom.spark, designating a connection to an Apache Spark data store.
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * Additional connection options for the connector.
+     */
+    AdditionalOptions?: AdditionalOptions;
+    /**
+     * Specifies the data schema for the custom spark target.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface SparkSQL {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names. You can associate a table name with each input node to use in the SQL query. The name you choose must meet the Spark SQL naming restrictions.
+     */
+    Inputs: ManyInputs;
+    /**
+     * A SQL query that must use Spark SQL syntax and return a single data set.
+     */
+    SqlQuery: SqlQuery;
+    /**
+     * A list of aliases. An alias allows you to specify what name to use in the SQL for a given input. For example, you have a datasource named "MyDataSource". If you specify From as MyDataSource, and Alias as SqlName, then in your SQL you can do:  select * from SqlName  and that gets data from MyDataSource.
+     */
+    SqlAliases: SqlAliases;
+    /**
+     * Specifies the data schema for the SparkSQL transform.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface Spigot {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A path in Amazon S3 where the transform will write a subset of records from the dataset to a JSON file in an Amazon S3 bucket.
+     */
+    Path: EnclosedInStringProperty;
+    /**
+     * Specifies a number of records to write starting from the beginning of the dataset.
+     */
+    Topk?: Topk;
+    /**
+     * The probability (a decimal value with a maximum value of 1) of picking any given record. A value of 1 indicates that each row read from the dataset should be included in the sample output.
+     */
+    Prob?: Prob;
+  }
+  export interface SplitFields {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The data inputs identified by their node names.
+     */
+    Inputs: OneInput;
+    /**
+     * A JSON path to a variable in the data structure.
+     */
+    Paths: GlueStudioPathList;
+  }
+  export interface SqlAlias {
+    /**
+     * A table, or a column in a table.
+     */
+    From: NodeId;
+    /**
+     * A temporary name given to a table, or a column in a table.
+     */
+    Alias: EnclosedInStringPropertyWithQuote;
+  }
+  export type SqlAliases = SqlAlias[];
+  export type SqlQuery = string;
   export interface StartBlueprintRunRequest {
     /**
      * The name of the blueprint.
@@ -8153,6 +9905,7 @@ declare namespace Glue {
      */
     BatchWindow?: NullableInteger;
   }
+  export type StartingPosition = "latest"|"trim_horizon"|"earliest"|string;
   export interface Statement {
     /**
      * The ID of the statement.
@@ -8327,6 +10080,16 @@ declare namespace Glue {
      * An object that references a schema stored in the Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.
      */
     SchemaReference?: SchemaReference;
+  }
+  export interface StreamingDataPreviewOptions {
+    /**
+     * The polling time in milliseconds.
+     */
+    PollingTime?: PollingTime;
+    /**
+     * The limit to the number of records polled.
+     */
+    RecordPollingLimit?: PositiveLong;
   }
   export interface StringColumnStatisticsData {
     /**
@@ -8550,6 +10313,7 @@ declare namespace Glue {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
+  export type TargetFormat = "json"|"csv"|"avro"|"orc"|"parquet"|string;
   export interface TaskRun {
     /**
      * The unique identifier for the transform.
@@ -8650,6 +10414,7 @@ declare namespace Glue {
   export type Timestamp = Date;
   export type TimestampValue = Date;
   export type Token = string;
+  export type Topk = number;
   export type TotalSegmentsInteger = number;
   export type TransactionIdString = string;
   export interface TransformEncryption {
@@ -8804,6 +10569,7 @@ declare namespace Glue {
      */
     EventBatchingCondition?: EventBatchingCondition;
   }
+  export type TwoInputs = NodeId[];
   export type TypeString = string;
   export type URI = string;
   export interface UnfilteredPartition {
@@ -8812,6 +10578,21 @@ declare namespace Glue {
     IsRegisteredWithLakeFormation?: Boolean;
   }
   export type UnfilteredPartitionList = UnfilteredPartition[];
+  export interface Union {
+    /**
+     * The name of the transform node.
+     */
+    Name: NodeName;
+    /**
+     * The node ID inputs to the transform.
+     */
+    Inputs: TwoInputs;
+    /**
+     * Indicates the type of Union transform.  Specify ALL to join all rows from data sources to the resulting DynamicFrame. The resulting union does not remove duplicate rows. Specify DISTINCT to remove duplicate rows in the resulting DynamicFrame.
+     */
+    UnionType: UnionType;
+  }
+  export type UnionType = "ALL"|"DISTINCT"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource from which to remove the tags.
@@ -8845,6 +10626,7 @@ declare namespace Glue {
      */
     Name?: NameString;
   }
+  export type UpdateCatalogBehavior = "UPDATE_IN_DATABASE"|"LOG"|string;
   export interface UpdateClassifierRequest {
     /**
      * A GrokClassifier object with updated fields.
@@ -9357,6 +11139,20 @@ declare namespace Glue {
     RowTag?: RowTag;
   }
   export type UpdatedTimestamp = string;
+  export interface UpsertRedshiftTargetOptions {
+    /**
+     * The physical location of the Redshift table.
+     */
+    TableLocation?: EnclosedInStringProperty;
+    /**
+     * The name of the connection to use to write to Redshift.
+     */
+    ConnectionName?: EnclosedInStringProperty;
+    /**
+     * The keys used to determine whether to perform an update or insert.
+     */
+    UpsertKeys?: EnclosedInStringPropertiesMinOne;
+  }
   export type UriString = string;
   export interface UserDefinedFunction {
     /**
