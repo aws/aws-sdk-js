@@ -219,7 +219,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in the AWS App Mesh User Guide.</p>",
+      "documentation": "<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in the App Mesh User Guide.</p>",
       "idempotent": true
     },
     "CreateVirtualRouter": {
@@ -1507,7 +1507,7 @@
           "documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.</p>"
         }
       },
-      "documentation": "<p>An object that represents the Cloud Map attribute information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>"
+      "documentation": "<p>An object that represents the Cloud Map attribute information for your virtual node.</p> <note> <p>Cloud Map is not available in the eu-south-1 Region.</p> </note>"
     },
     "AwsCloudMapInstanceAttributeKey": {
       "type": "string",
@@ -1542,6 +1542,10 @@
         "attributes": {
           "shape": "AwsCloudMapInstanceAttributes",
           "documentation": "<p>A string map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all of the specified key/value pairs will be returned.</p>"
+        },
+        "ipPreference": {
+          "shape": "IpPreference",
+          "documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
         },
         "namespaceName": {
           "shape": "AwsCloudMapName",
@@ -1670,7 +1674,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -1765,7 +1769,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -1825,7 +1829,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -1877,7 +1881,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -1931,7 +1935,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -1985,7 +1989,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2047,7 +2051,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2117,7 +2121,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2165,7 +2169,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2205,7 +2209,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2247,7 +2251,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2289,7 +2293,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2338,7 +2342,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2377,7 +2381,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         }
@@ -2414,7 +2418,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2462,7 +2466,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2502,7 +2506,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2544,7 +2548,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2586,7 +2590,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -2629,6 +2633,10 @@
         "hostname": {
           "shape": "Hostname",
           "documentation": "<p>Specifies the DNS service discovery hostname for the virtual node. </p>"
+        },
+        "ipPreference": {
+          "shape": "IpPreference",
+          "documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
         },
         "responseType": {
           "shape": "DnsResponseType",
@@ -2696,7 +2704,7 @@
       "members": {
         "path": {
           "shape": "FilePath",
-          "documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send access logs to standard out and configure your Envoy container to use a log driver, such as <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.</p> <note> <p>The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.</p> </note>"
+          "documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send access logs to standard out and configure your Envoy container to use a log driver, such as <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.</p> <pre><code> &lt;note&gt; &lt;p&gt;The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.&lt;/p&gt; &lt;/note&gt; </code></pre>"
         }
       },
       "documentation": "<p>An object that represents an access log file.</p>"
@@ -2815,11 +2823,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "version": {
           "shape": "Long",
@@ -3338,7 +3346,8 @@
           "documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
         },
         "match": {
-          "shape": "HeaderMatchMethod"
+          "shape": "HeaderMatchMethod",
+          "documentation": "<p>An object that represents the method and value to match with the header value sent in a request. Specify one match method.</p>"
         },
         "name": {
           "shape": "HeaderName",
@@ -3653,6 +3662,15 @@
       },
       "documentation": "<p>An object that represents types of timeouts. </p>"
     },
+    "IpPreference": {
+      "type": "string",
+      "enum": [
+        "IPv6_PREFERRED",
+        "IPv4_PREFERRED",
+        "IPv4_ONLY",
+        "IPv6_ONLY"
+      ]
+    },
     "ListGatewayRoutesInput": {
       "type": "structure",
       "required": [
@@ -3674,7 +3692,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -3776,7 +3794,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -3882,7 +3900,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -3936,7 +3954,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -3992,7 +4010,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -4048,7 +4066,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -4173,14 +4191,14 @@
           "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
         }
       },
-      "documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+      "documentation": "<p>An object that represents an Certificate Manager certificate.</p>"
     },
     "ListenerTlsCertificate": {
       "type": "structure",
       "members": {
         "acm": {
           "shape": "ListenerTlsAcmCertificate",
-          "documentation": "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+          "documentation": "<p>A reference to an object that represents an Certificate Manager certificate.</p>"
         },
         "file": {
           "shape": "ListenerTlsFileCertificate",
@@ -4269,9 +4287,7 @@
       "type": "list",
       "member": {
         "shape": "Listener"
-      },
-      "max": 1,
-      "min": 0
+      }
     },
     "Logging": {
       "type": "structure",
@@ -4386,11 +4402,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "version": {
           "shape": "Long",
@@ -4399,12 +4415,25 @@
       },
       "documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
     },
+    "MeshServiceDiscovery": {
+      "type": "structure",
+      "members": {
+        "ipPreference": {
+          "shape": "IpPreference",
+          "documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the service discovery information for a service mesh.</p>"
+    },
     "MeshSpec": {
       "type": "structure",
       "members": {
         "egressFilter": {
           "shape": "EgressFilter",
           "documentation": "<p>The egress filter rules for the service mesh.</p>"
+        },
+        "serviceDiscovery": {
+          "shape": "MeshServiceDiscovery"
         }
       },
       "documentation": "<p>An object that represents the specification of a service mesh.</p>"
@@ -4553,11 +4582,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "uid": {
           "shape": "String",
@@ -4657,11 +4686,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "routeName": {
           "shape": "ResourceName",
@@ -5051,7 +5080,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -5139,7 +5168,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -5197,7 +5226,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -5247,7 +5276,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -5299,7 +5328,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -5351,7 +5380,7 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
           "location": "querystring",
           "locationName": "meshOwner"
         },
@@ -5788,9 +5817,7 @@
       "type": "list",
       "member": {
         "shape": "VirtualGatewayListener"
-      },
-      "max": 1,
-      "min": 0
+      }
     },
     "VirtualGatewayLogging": {
       "type": "structure",
@@ -5859,11 +5886,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "version": {
           "shape": "Long",
@@ -6132,11 +6159,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "version": {
           "shape": "Long",
@@ -6277,9 +6304,7 @@
       "type": "list",
       "member": {
         "shape": "VirtualRouterListener"
-      },
-      "max": 1,
-      "min": 1
+      }
     },
     "VirtualRouterRef": {
       "type": "structure",
@@ -6312,11 +6337,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "version": {
           "shape": "Long",
@@ -6474,11 +6499,11 @@
         },
         "meshOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
+          "documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>"
         },
         "version": {
           "shape": "Long",

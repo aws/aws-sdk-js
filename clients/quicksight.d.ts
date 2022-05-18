@@ -492,19 +492,19 @@ declare class QuickSight extends Service {
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
   /**
-   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.    You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   generateEmbedUrlForAnonymousUser(params: QuickSight.Types.GenerateEmbedUrlForAnonymousUserRequest, callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse, AWSError>;
   /**
-   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.    You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   generateEmbedUrlForAnonymousUser(callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse, AWSError>;
   /**
-   * Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   generateEmbedUrlForRegisteredUser(params: QuickSight.Types.GenerateEmbedUrlForRegisteredUserRequest, callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse, AWSError>;
   /**
-   * Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   generateEmbedUrlForRegisteredUser(callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse, AWSError>;
   /**
@@ -892,6 +892,14 @@ declare class QuickSight extends Service {
    */
   updateIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
   /**
+   * Use the UpdatePublicSharingSettings operation to enable or disable the public sharing settings of an Amazon QuickSight dashboard. To use this operation, enable session capacity pricing on your Amazon QuickSight account. Before you can enable public sharing on your account, you need to allow public sharing permissions to an administrative user in the IAM console. For more information on using IAM with Amazon QuickSight, see Using Amazon QuickSight with IAM.
+   */
+  updatePublicSharingSettings(params: QuickSight.Types.UpdatePublicSharingSettingsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdatePublicSharingSettingsResponse) => void): Request<QuickSight.Types.UpdatePublicSharingSettingsResponse, AWSError>;
+  /**
+   * Use the UpdatePublicSharingSettings operation to enable or disable the public sharing settings of an Amazon QuickSight dashboard. To use this operation, enable session capacity pricing on your Amazon QuickSight account. Before you can enable public sharing on your account, you need to allow public sharing permissions to an administrative user in the IAM console. For more information on using IAM with Amazon QuickSight, see Using Amazon QuickSight with IAM.
+   */
+  updatePublicSharingSettings(callback?: (err: AWSError, data: QuickSight.Types.UpdatePublicSharingSettingsResponse) => void): Request<QuickSight.Types.UpdatePublicSharingSettingsResponse, AWSError>;
+  /**
    * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
   updateTemplate(params: QuickSight.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateResponse) => void): Request<QuickSight.Types.UpdateTemplateResponse, AWSError>;
@@ -976,6 +984,10 @@ declare namespace QuickSight {
      * The main notification email for your Amazon QuickSight subscription.
      */
     NotificationEmail?: String;
+    /**
+     * A boolean that indicates whether or not public sharing is enabled on an Amazon QuickSight account. For more information about enabling public sharing, see UpdatePublicSharingSettings.
+     */
+    PublicSharingEnabled?: Boolean;
   }
   export type ActionList = String[];
   export interface ActiveIAMPolicyAssignment {
@@ -4103,7 +4115,7 @@ declare namespace QuickSight {
      */
     SessionTags?: SessionTagList;
     /**
-     * The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose Dashboard embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view.
+     * The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose Dashboard embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view. Currently, you can pass up to 25 dashboard ARNs in each API call.
      */
     AuthorizedResourceArns: ArnList;
     /**
@@ -7264,6 +7276,26 @@ declare namespace QuickSight {
     Status?: StatusCode;
   }
   export type UpdateLinkPermissionList = ResourcePermission[];
+  export interface UpdatePublicSharingSettingsRequest {
+    /**
+     * The Amazon Web Services account ID associated with your Amazon QuickSight subscription.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * A boolean that indicates whether or not public sharing is enabled on a Amazon QuickSight account.
+     */
+    PublicSharingEnabled?: Boolean;
+  }
+  export interface UpdatePublicSharingSettingsResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export type UpdateResourcePermissionList = ResourcePermission[];
   export interface UpdateTemplateAliasRequest {
     /**
