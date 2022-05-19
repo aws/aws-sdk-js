@@ -1550,6 +1550,10 @@ declare namespace LookoutMetrics {
      * The ARN of the target SNS topic.
      */
     SnsTopicArn: Arn;
+    /**
+     * The text format for alerts.
+     */
+    SnsFormat?: SnsFormat;
   }
   export interface SampleDataS3SourceConfig {
     /**
@@ -1572,6 +1576,7 @@ declare namespace LookoutMetrics {
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export type SensitivityThreshold = number;
+  export type SnsFormat = "LONG_TEXT"|"SHORT_TEXT"|"JSON"|string;
   export type StringAttributeValue = string;
   export type StringListAttributeValue = StringAttributeValue[];
   export type SubnetId = string;

@@ -2964,6 +2964,10 @@
         "SnsTopicArn": {
           "shape": "Arn",
           "documentation": "<p>The ARN of the target SNS topic.</p>"
+        },
+        "SnsFormat": {
+          "shape": "SnsFormat",
+          "documentation": "<p>The text format for alerts.</p>"
         }
       },
       "documentation": "<p>Contains information about the SNS topic to which you want to send your alerts and the IAM role that has access to that topic.</p>"
@@ -3026,6 +3030,14 @@
       "type": "integer",
       "max": 100,
       "min": 0
+    },
+    "SnsFormat": {
+      "type": "string",
+      "enum": [
+        "LONG_TEXT",
+        "SHORT_TEXT",
+        "JSON"
+      ]
     },
     "StringAttributeValue": {
       "type": "string"

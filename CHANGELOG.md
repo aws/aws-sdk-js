@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1138.0-->
+<!--LATEST=2.1139.0-->
 <!--ENTRYINSERT-->
+
+## 2.1139.0
+* feature: GameSparks: This release adds an optional DeploymentResult field in the responses of GetStageDeploymentIntegrationTests and ListStageDeploymentIntegrationTests APIs.
+* feature: LookoutMetrics: In this release we added SnsFormat to SNSConfiguration to support human readable alert.
 
 ## 2.1138.0
 * feature: AppMesh: This release updates the existing Create and Update APIs for meshes and virtual nodes by adding a new IP preference field. This new IP preference field can be used to control the IP versions being used with the mesh and allows for IPv6 support within App Mesh.

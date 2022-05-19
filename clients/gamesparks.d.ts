@@ -388,6 +388,16 @@ declare namespace GameSparks {
   }
   export type DeploymentAction = "DEPLOY"|"UNDEPLOY"|string;
   export type DeploymentId = string;
+  export interface DeploymentResult {
+    /**
+     * Details about the deployment result.
+     */
+    Message?: Message;
+    /**
+     * The type of deployment result.
+     */
+    ResultCode?: ResultCode;
+  }
   export type DeploymentState = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
   export interface DisconnectPlayerRequest {
     /**
@@ -952,12 +962,14 @@ declare namespace GameSparks {
   }
   export type LogGroupName = string;
   export type MaxResults = number;
+  export type Message = string;
   export type NextToken = string;
   export type Operation = "ADD"|"REMOVE"|"REPLACE"|string;
   export type Path = string;
   export type PlayerId = string;
   export type RawGameConfigurationData = Buffer|Uint8Array|Blob|string;
   export type ResourceArn = string;
+  export type ResultCode = "SUCCESS"|"INVALID_ROLE_FAILURE"|"UNSPECIFIED_FAILURE"|string;
   export type RoleARN = string;
   export type S3PresignedUrl = string;
   export interface Section {
@@ -1053,6 +1065,10 @@ declare namespace GameSparks {
      */
     DeploymentId?: DeploymentId;
     /**
+     * The result of the deployment.
+     */
+    DeploymentResult?: DeploymentResult;
+    /**
      * The state of the deployment.
      */
     DeploymentState?: DeploymentState;
@@ -1075,6 +1091,10 @@ declare namespace GameSparks {
      * The identifier of the deployment.
      */
     DeploymentId?: DeploymentId;
+    /**
+     * The result of the deployment.
+     */
+    DeploymentResult?: DeploymentResult;
     /**
      * The state of the deployment.
      */
