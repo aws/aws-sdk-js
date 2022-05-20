@@ -160,20 +160,6 @@
       request.on('extractData', function(resp) {
         return resp.data = (resp.httpResponse.body || '').toString();
       });
-      request.on(
-        'error',
-        function (err, response) {
-          response.error = err;
-          let errorCodeMapping = response.request.service.api.errorCodeMapping;
-          if (response.error && response.error.code && errorCodeMapping) {
-            var mapping = errorCodeMapping[response.error.code];
-            if (mapping) {
-              response.error.code = mapping.code;
-              return response.error
-            }
-          }
-          return response.error
-        });
       return request.on('extractError', function(resp) {
         return resp.error = {
           code: (resp.httpResponse.body || '').toString() || resp.httpResponse.statusCode,
