@@ -76,11 +76,11 @@ declare class Comprehend extends Service {
    */
   createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
-   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model 
+   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model For information about endpoints, see Managing endpoints.
    */
   createEndpoint(params: Comprehend.Types.CreateEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
   /**
-   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model 
+   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model For information about endpoints, see Managing endpoints.
    */
   createEndpoint(callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class Comprehend extends Service {
    */
   deleteDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
   /**
-   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted. For information about endpoints, see Managing endpoints.
    */
   deleteEndpoint(params: Comprehend.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteEndpointResponse) => void): Request<Comprehend.Types.DeleteEndpointResponse, AWSError>;
   /**
-   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted. For information about endpoints, see Managing endpoints.
    */
   deleteEndpoint(callback?: (err: AWSError, data: Comprehend.Types.DeleteEndpointResponse) => void): Request<Comprehend.Types.DeleteEndpointResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Comprehend extends Service {
    */
   describeDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
   /**
-   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint. For information about endpoints, see Managing endpoints.
    */
   describeEndpoint(params: Comprehend.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEndpointResponse) => void): Request<Comprehend.Types.DescribeEndpointResponse, AWSError>;
   /**
-   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint. For information about endpoints, see Managing endpoints.
    */
   describeEndpoint(callback?: (err: AWSError, data: Comprehend.Types.DescribeEndpointResponse) => void): Request<Comprehend.Types.DescribeEndpointResponse, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class Comprehend extends Service {
    */
   listDominantLanguageDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
   /**
-   * Gets a list of all existing endpoints that you've created.
+   * Gets a list of all existing endpoints that you've created. For information about endpoints, see Managing endpoints.
    */
   listEndpoints(params: Comprehend.Types.ListEndpointsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEndpointsResponse) => void): Request<Comprehend.Types.ListEndpointsResponse, AWSError>;
   /**
-   * Gets a list of all existing endpoints that you've created.
+   * Gets a list of all existing endpoints that you've created. For information about endpoints, see Managing endpoints.
    */
   listEndpoints(callback?: (err: AWSError, data: Comprehend.Types.ListEndpointsResponse) => void): Request<Comprehend.Types.ListEndpointsResponse, AWSError>;
   /**
@@ -524,19 +524,19 @@ declare class Comprehend extends Service {
    */
   stopPiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopPiiEntitiesDetectionJobResponse, AWSError>;
   /**
-   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
+   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS, the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopSentimentDetectionJob(params: Comprehend.Types.StopSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
   /**
-   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
+   * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS, the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
   /**
-   * Stops a targeted sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
+   * Stops a targeted sentiment detection job in progress. If the job state is IN_PROGRESS, the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopTargetedSentimentDetectionJob(params: Comprehend.Types.StopTargetedSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopTargetedSentimentDetectionJobResponse, AWSError>;
   /**
-   * Stops a targeted sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
+   * Stops a targeted sentiment detection job in progress. If the job state is IN_PROGRESS, the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopTargetedSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopTargetedSentimentDetectionJobResponse, AWSError>;
   /**
@@ -572,11 +572,11 @@ declare class Comprehend extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Comprehend.Types.UntagResourceResponse) => void): Request<Comprehend.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates information about the specified endpoint.
+   * Updates information about the specified endpoint. For information about endpoints, see Managing endpoints.
    */
   updateEndpoint(params: Comprehend.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Updates information about the specified endpoint.
+   * Updates information about the specified endpoint. For information about endpoints, see Managing endpoints.
    */
   updateEndpoint(callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
 }
@@ -679,7 +679,7 @@ declare namespace Comprehend {
   }
   export interface BatchDetectKeyPhrasesRequest {
     /**
-     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded characters.
      */
     TextList: CustomerInputStringList;
     /**
@@ -834,7 +834,7 @@ declare namespace Comprehend {
      */
     Text: CustomerInputString;
     /**
-     * The Amazon Resource Number (ARN) of the endpoint.
+     * The Amazon Resource Number (ARN) of the endpoint. For information about endpoints, see Managing endpoints.
      */
     EndpointArn: DocumentClassifierEndpointArn;
   }
@@ -860,7 +860,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents.
+     * The language of the input documents. Currently, English is the only valid language.
      */
     LanguageCode: LanguageCode;
   }
@@ -1239,7 +1239,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name of an endpoint that is associated with a custom entity recognition model. Provide an endpoint if you want to detect entities by using your own custom model instead of the default model that is used by Amazon Comprehend. If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you provide in your request.
+     * The Amazon Resource Name of an endpoint that is associated with a custom entity recognition model. Provide an endpoint if you want to detect entities by using your own custom model instead of the default model that is used by Amazon Comprehend. If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you provide in your request. For information about endpoints, see Managing endpoints.
      */
     EndpointArn?: EntityRecognizerEndpointArn;
   }
@@ -1271,7 +1271,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents.
+     * The language of the input documents. Currently, English is the only valid language.
      */
     LanguageCode: LanguageCode;
   }
@@ -2768,7 +2768,7 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
-  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|string;
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|"LICENSE_PLATE"|"VEHICLE_IDENTIFICATION_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"IN_PERMANENT_ACCOUNT_NUMBER"|"IN_NREGA"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"CA_HEALTH_NUMBER"|"IN_AADHAAR"|"IN_VOTER_NUMBER"|string;
   export interface PiiOutputDataConfig {
     /**
      * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data.   For a PII entity detection job, the output file is plain text, not a compressed archive. The output file name is the same as the input file, with .out appended at the end. 
@@ -3193,7 +3193,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents.
+     * The language of the input documents. Currently, English is the only valid language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -3286,7 +3286,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
+     * The language of the input documents. Currently, English is the only valid language.
      */
     LanguageCode: LanguageCode;
     /**

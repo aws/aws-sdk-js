@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1139.0-->
+<!--LATEST=2.1140.0-->
 <!--ENTRYINSERT-->
+
+## 2.1140.0
+* feature: Comprehend: Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.
 
 ## 2.1139.0
 * feature: GameSparks: This release adds an optional DeploymentResult field in the responses of GetStageDeploymentIntegrationTests and ListStageDeploymentIntegrationTests APIs.
