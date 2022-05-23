@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1140.0-->
+<!--LATEST=2.1141.0-->
 <!--ENTRYINSERT-->
+
+## 2.1141.0
+* feature: ElastiCache: Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later.
+* feature: ForecastService: New APIs for Monitor that help you understand how your predictors perform over time.
+* feature: Personalize: Adding modelMetrics as part of DescribeRecommender API response for Personalize.
 
 ## 2.1140.0
 * feature: Comprehend: Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.
