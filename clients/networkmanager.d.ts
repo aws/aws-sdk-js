@@ -28,11 +28,11 @@ declare class NetworkManager extends Service {
    */
   associateConnectPeer(callback?: (err: AWSError, data: NetworkManager.Types.AssociateConnectPeerResponse) => void): Request<NetworkManager.Types.AssociateConnectPeerResponse, AWSError>;
   /**
-   * Associates a customer gateway with a device and optionally, with a link. If you specify a link, it must be associated with the specified device.  You can only associate customer gateways that are connected to a VPN attachment on a transit gateway. The transit gateway must be registered in your global network. When you register a transit gateway, customer gateways that are connected to the transit gateway are automatically included in the global network. To list customer gateways that are connected to a transit gateway, use the DescribeVpnConnections EC2 API and filter by transit-gateway-id. You cannot associate a customer gateway with more than one device and link. 
+   * Associates a customer gateway with a device and optionally, with a link. If you specify a link, it must be associated with the specified device.  You can only associate customer gateways that are connected to a VPN attachment on a transit gateway or core network registered in your global network. When you register a transit gateway or core network, customer gateways that are connected to the transit gateway are automatically included in the global network. To list customer gateways that are connected to a transit gateway, use the DescribeVpnConnections EC2 API and filter by transit-gateway-id. You cannot associate a customer gateway with more than one device and link. 
    */
   associateCustomerGateway(params: NetworkManager.Types.AssociateCustomerGatewayRequest, callback?: (err: AWSError, data: NetworkManager.Types.AssociateCustomerGatewayResponse) => void): Request<NetworkManager.Types.AssociateCustomerGatewayResponse, AWSError>;
   /**
-   * Associates a customer gateway with a device and optionally, with a link. If you specify a link, it must be associated with the specified device.  You can only associate customer gateways that are connected to a VPN attachment on a transit gateway. The transit gateway must be registered in your global network. When you register a transit gateway, customer gateways that are connected to the transit gateway are automatically included in the global network. To list customer gateways that are connected to a transit gateway, use the DescribeVpnConnections EC2 API and filter by transit-gateway-id. You cannot associate a customer gateway with more than one device and link. 
+   * Associates a customer gateway with a device and optionally, with a link. If you specify a link, it must be associated with the specified device.  You can only associate customer gateways that are connected to a VPN attachment on a transit gateway or core network registered in your global network. When you register a transit gateway or core network, customer gateways that are connected to the transit gateway are automatically included in the global network. To list customer gateways that are connected to a transit gateway, use the DescribeVpnConnections EC2 API and filter by transit-gateway-id. You cannot associate a customer gateway with more than one device and link. 
    */
   associateCustomerGateway(callback?: (err: AWSError, data: NetworkManager.Types.AssociateCustomerGatewayResponse) => void): Request<NetworkManager.Types.AssociateCustomerGatewayResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class NetworkManager extends Service {
    */
   createConnectAttachment(callback?: (err: AWSError, data: NetworkManager.Types.CreateConnectAttachmentResponse) => void): Request<NetworkManager.Types.CreateConnectAttachmentResponse, AWSError>;
   /**
-   * Creates a core network connect peer for a specified core network connect attachment between a core network and an appliance. The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).
+   * Creates a core network Connect peer for a specified core network connect attachment between a core network and an appliance. The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).
    */
   createConnectPeer(params: NetworkManager.Types.CreateConnectPeerRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateConnectPeerResponse) => void): Request<NetworkManager.Types.CreateConnectPeerResponse, AWSError>;
   /**
-   * Creates a core network connect peer for a specified core network connect attachment between a core network and an appliance. The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).
+   * Creates a core network Connect peer for a specified core network connect attachment between a core network and an appliance. The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).
    */
   createConnectPeer(callback?: (err: AWSError, data: NetworkManager.Types.CreateConnectPeerResponse) => void): Request<NetworkManager.Types.CreateConnectPeerResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class NetworkManager extends Service {
    */
   createSite(callback?: (err: AWSError, data: NetworkManager.Types.CreateSiteResponse) => void): Request<NetworkManager.Types.CreateSiteResponse, AWSError>;
   /**
-   * Creates a site-to-site VPN attachment on an edge location of a core network.
+   * Creates an Amazon Web Services site-to-site VPN attachment on an edge location of a core network.
    */
   createSiteToSiteVpnAttachment(params: NetworkManager.Types.CreateSiteToSiteVpnAttachmentRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateSiteToSiteVpnAttachmentResponse) => void): Request<NetworkManager.Types.CreateSiteToSiteVpnAttachmentResponse, AWSError>;
   /**
-   * Creates a site-to-site VPN attachment on an edge location of a core network.
+   * Creates an Amazon Web Services site-to-site VPN attachment on an edge location of a core network.
    */
   createSiteToSiteVpnAttachment(callback?: (err: AWSError, data: NetworkManager.Types.CreateSiteToSiteVpnAttachmentResponse) => void): Request<NetworkManager.Types.CreateSiteToSiteVpnAttachmentResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class NetworkManager extends Service {
    */
   deleteDevice(callback?: (err: AWSError, data: NetworkManager.Types.DeleteDeviceResponse) => void): Request<NetworkManager.Types.DeleteDeviceResponse, AWSError>;
   /**
-   * Deletes an existing global network. You must first delete all global network objects (devices, links, and sites) and deregister all transit gateways.
+   * Deletes an existing global network. You must first delete all global network objects (devices, links, and sites), deregister all transit gateways, and delete any core networks.
    */
   deleteGlobalNetwork(params: NetworkManager.Types.DeleteGlobalNetworkRequest, callback?: (err: AWSError, data: NetworkManager.Types.DeleteGlobalNetworkResponse) => void): Request<NetworkManager.Types.DeleteGlobalNetworkResponse, AWSError>;
   /**
-   * Deletes an existing global network. You must first delete all global network objects (devices, links, and sites) and deregister all transit gateways.
+   * Deletes an existing global network. You must first delete all global network objects (devices, links, and sites), deregister all transit gateways, and delete any core networks.
    */
   deleteGlobalNetwork(callback?: (err: AWSError, data: NetworkManager.Types.DeleteGlobalNetworkResponse) => void): Request<NetworkManager.Types.DeleteGlobalNetworkResponse, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class NetworkManager extends Service {
    */
   getConnections(callback?: (err: AWSError, data: NetworkManager.Types.GetConnectionsResponse) => void): Request<NetworkManager.Types.GetConnectionsResponse, AWSError>;
   /**
-   * Returns information about a core network. By default it returns the LIVE policy.
+   * Returns information about the LIVE policy for a core network.
    */
   getCoreNetwork(params: NetworkManager.Types.GetCoreNetworkRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkResponse) => void): Request<NetworkManager.Types.GetCoreNetworkResponse, AWSError>;
   /**
-   * Returns information about a core network. By default it returns the LIVE policy.
+   * Returns information about the LIVE policy for a core network.
    */
   getCoreNetwork(callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkResponse) => void): Request<NetworkManager.Types.GetCoreNetworkResponse, AWSError>;
   /**
@@ -484,6 +484,14 @@ declare class NetworkManager extends Service {
    */
   listCoreNetworks(callback?: (err: AWSError, data: NetworkManager.Types.ListCoreNetworksResponse) => void): Request<NetworkManager.Types.ListCoreNetworksResponse, AWSError>;
   /**
+   * 
+   */
+  listOrganizationServiceAccessStatus(params: NetworkManager.Types.ListOrganizationServiceAccessStatusRequest, callback?: (err: AWSError, data: NetworkManager.Types.ListOrganizationServiceAccessStatusResponse) => void): Request<NetworkManager.Types.ListOrganizationServiceAccessStatusResponse, AWSError>;
+  /**
+   * 
+   */
+  listOrganizationServiceAccessStatus(callback?: (err: AWSError, data: NetworkManager.Types.ListOrganizationServiceAccessStatusResponse) => void): Request<NetworkManager.Types.ListOrganizationServiceAccessStatusResponse, AWSError>;
+  /**
    * Lists the tags for a specified resource.
    */
   listTagsForResource(params: NetworkManager.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: NetworkManager.Types.ListTagsForResourceResponse) => void): Request<NetworkManager.Types.ListTagsForResourceResponse, AWSError>;
@@ -531,6 +539,14 @@ declare class NetworkManager extends Service {
    * Restores a previous policy version as a new, immutable version of a core network policy. A subsequent change set is created showing the differences between the LIVE policy and restored policy.
    */
   restoreCoreNetworkPolicyVersion(callback?: (err: AWSError, data: NetworkManager.Types.RestoreCoreNetworkPolicyVersionResponse) => void): Request<NetworkManager.Types.RestoreCoreNetworkPolicyVersionResponse, AWSError>;
+  /**
+   * 
+   */
+  startOrganizationServiceAccessUpdate(params: NetworkManager.Types.StartOrganizationServiceAccessUpdateRequest, callback?: (err: AWSError, data: NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse) => void): Request<NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse, AWSError>;
+  /**
+   * 
+   */
+  startOrganizationServiceAccessUpdate(callback?: (err: AWSError, data: NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse) => void): Request<NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse, AWSError>;
   /**
    * Starts analyzing the routing path between the specified source and destination. For more information, see Route Analyzer.
    */
@@ -644,6 +660,13 @@ declare namespace NetworkManager {
      */
     Attachment?: Attachment;
   }
+  export type AccountId = string;
+  export interface AccountStatus {
+    AccountId?: AccountId;
+    SLRDeploymentStatus?: SLRDeploymentStatus;
+  }
+  export type AccountStatusList = AccountStatus[];
+  export type Action = string;
   export interface AssociateConnectPeerRequest {
     /**
      * The ID of your global network.
@@ -2812,6 +2835,14 @@ declare namespace NetworkManager {
      */
     NextToken?: NextToken;
   }
+  export interface ListOrganizationServiceAccessStatusRequest {
+    MaxResults?: MaxResults;
+    NextToken?: NextToken;
+  }
+  export interface ListOrganizationServiceAccessStatusResponse {
+    OrganizationStatus?: OrganizationStatus;
+    NextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -3015,6 +3046,14 @@ declare namespace NetworkManager {
   }
   export type NetworkTelemetryList = NetworkTelemetry[];
   export type NextToken = string;
+  export type OrganizationAwsServiceAccessStatus = string;
+  export type OrganizationId = string;
+  export interface OrganizationStatus {
+    OrganizationId?: OrganizationId;
+    OrganizationAwsServiceAccessStatus?: OrganizationAwsServiceAccessStatus;
+    SLRDeploymentStatus?: SLRDeploymentStatus;
+    AccountStatusList?: AccountStatusList;
+  }
   export interface PathComponent {
     /**
      * The sequence number in the path. The destination is 0.
@@ -3256,6 +3295,7 @@ declare namespace NetworkManager {
   export type RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"|"CORE_NETWORK_SEGMENT"|string;
   export type RouteType = "PROPAGATED"|"STATIC"|string;
   export type RouteTypeList = RouteType[];
+  export type SLRDeploymentStatus = string;
   export type ServerSideString = string;
   export interface Site {
     /**
@@ -3305,6 +3345,12 @@ declare namespace NetworkManager {
      * The ARN of the site-to-site VPN attachment. 
      */
     VpnConnectionArn?: VpnConnectionArn;
+  }
+  export interface StartOrganizationServiceAccessUpdateRequest {
+    Action: Action;
+  }
+  export interface StartOrganizationServiceAccessUpdateResponse {
+    OrganizationStatus?: OrganizationStatus;
   }
   export interface StartRouteAnalysisRequest {
     /**

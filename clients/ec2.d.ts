@@ -557,19 +557,19 @@ declare class EC2 extends Service {
    */
   createKeyPair(callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing launch template as the basis for creating a new launch template, you can use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template. For more information, see Create a launch template from an existing launch template in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launch an instance from a launch template in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing launch template as the basis for creating a new launch template, you can use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template. For more information, see Create a launch template from an existing launch template in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(params: EC2.Types.CreateLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch template in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing launch template as the basis for creating a new launch template, you can use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template. For more information, see Create a launch template from an existing launch template in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launch an instance from a launch template in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing launch template as the basis for creating a new launch template, you can use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template. For more information, see Create a launch template from an existing launch template in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. For more information, see Managing launch template versionsin the Amazon Elastic Compute Cloud User Guide.
+   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. Launch templates are immutable; after you create a launch template, you can't modify it. Instead, you can create a new version of the launch template that includes any changes you require. For more information, see Modify a launch template (manage launch template versions)in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplateVersion(params: EC2.Types.CreateLaunchTemplateVersionRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
-   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. For more information, see Managing launch template versionsin the Amazon Elastic Compute Cloud User Guide.
+   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. Launch templates are immutable; after you create a launch template, you can't modify it. Instead, you can create a new version of the launch template that includes any changes you require. For more information, see Modify a launch template (manage launch template versions)in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplateVersion(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
@@ -8304,7 +8304,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraint: Maximum 128 ASCII characters.
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency. Constraint: Maximum 128 ASCII characters.
      */
     ClientToken?: String;
     /**
@@ -8340,7 +8340,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraint: Maximum 128 ASCII characters.
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency. Constraint: Maximum 128 ASCII characters.
      */
     ClientToken?: String;
     /**
@@ -20379,8 +20379,12 @@ declare namespace EC2 {
      * The user data.
      */
     UserData?: AttributeValue;
+    /**
+     * To enable the instance for Amazon Web Services Stop Protection, set this parameter to true; otherwise, set it to false.
+     */
+    DisableApiStop?: AttributeBooleanValue;
   }
-  export type InstanceAttributeName = "instanceType"|"kernel"|"ramdisk"|"userData"|"disableApiTermination"|"instanceInitiatedShutdownBehavior"|"rootDeviceName"|"blockDeviceMapping"|"productCodes"|"sourceDestCheck"|"groupSet"|"ebsOptimized"|"sriovNetSupport"|"enaSupport"|"enclaveOptions"|string;
+  export type InstanceAttributeName = "instanceType"|"kernel"|"ramdisk"|"userData"|"disableApiTermination"|"instanceInitiatedShutdownBehavior"|"rootDeviceName"|"blockDeviceMapping"|"productCodes"|"sourceDestCheck"|"groupSet"|"ebsOptimized"|"sriovNetSupport"|"enaSupport"|"enclaveOptions"|"disableApiStop"|string;
   export type InstanceAutoRecoveryState = "disabled"|"default"|string;
   export interface InstanceBlockDeviceMapping {
     /**
@@ -23867,6 +23871,10 @@ declare namespace EC2 {
      * A new value for the attribute. Use only with the kernel, ramdisk, userData, disableApiTermination, or instanceInitiatedShutdownBehavior attribute.
      */
     Value?: String;
+    /**
+     * Indicates whether an instance is enabled for stop protection. For more information, see Stop Protection. 
+     */
+    DisableApiStop?: AttributeBooleanValue;
   }
   export interface ModifyInstanceCapacityReservationAttributesRequest {
     /**
@@ -24196,7 +24204,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraint: Maximum 128 ASCII characters.
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring idempotency. Constraint: Maximum 128 ASCII characters.
      */
     ClientToken?: String;
     /**
@@ -27629,7 +27637,7 @@ declare namespace EC2 {
   export type RequestIpamResourceTagList = RequestIpamResourceTag[];
   export interface RequestLaunchTemplateData {
     /**
-     * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
+     * The ID of the kernel.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User provided kernels in the Amazon Elastic Compute Cloud User Guide. 
      */
     KernelId?: KernelId;
     /**
@@ -27653,7 +27661,7 @@ declare namespace EC2 {
      */
     ImageId?: ImageId;
     /**
-     * The instance type. For more information, see Instance Types in the Amazon Elastic Compute Cloud User Guide. If you specify InstanceTypes, you can't specify InstanceRequirements.
+     * The instance type. For more information, see Instance types in the Amazon Elastic Compute Cloud User Guide. If you specify InstanceTypes, you can't specify InstanceRequirements.
      */
     InstanceType?: InstanceType;
     /**
@@ -27669,7 +27677,7 @@ declare namespace EC2 {
      */
     Placement?: LaunchTemplatePlacementRequest;
     /**
-     * The ID of the RAM disk.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User Provided Kernels in the Amazon Elastic Compute Cloud User Guide. 
+     * The ID of the RAM disk.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see User provided kernels in the Amazon Elastic Compute Cloud User Guide. 
      */
     RamDiskId?: RamdiskId;
     /**
@@ -27681,7 +27689,7 @@ declare namespace EC2 {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see Running Commands on Your Linux Instance at Launch (Linux) or Adding User Data (Windows). If you are creating the launch template for use with Batch, the user data must be provided in the  MIME multi-part archive format. For more information, see Amazon EC2 user data in launch templates in the Batch User Guide.
+     * The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see Run commands on your Linux instance at launch (Linux) or Work with instance user data (Windows) in the Amazon Elastic Compute Cloud User Guide. If you are creating the launch template for use with Batch, the user data must be provided in the  MIME multi-part archive format. For more information, see Amazon EC2 user data in launch templates in the Batch User Guide.
      */
     UserData?: String;
     /**
@@ -27748,6 +27756,10 @@ declare namespace EC2 {
      * The maintenance options for the instance.
      */
     MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptionsRequest;
+    /**
+     * Indicates whether to enable the instance for stop protection. For more information, see Stop Protection.
+     */
+    DisableApiStop?: Boolean;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -28520,6 +28532,10 @@ declare namespace EC2 {
      * The maintenance options for your instance.
      */
     MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptions;
+    /**
+     * Indicates whether the instance is enabled for stop protection. For more information, see Stop Protection.
+     */
+    DisableApiStop?: Boolean;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -29116,6 +29132,10 @@ declare namespace EC2 {
      * The maintenance and recovery options for the instance.
      */
     MaintenanceOptions?: InstanceMaintenanceOptionsRequest;
+    /**
+     * Indicates whether an instance is enabled for stop protection. For more information, see Stop Protection. 
+     */
+    DisableApiStop?: Boolean;
   }
   export type RunInstancesUserData = string;
   export interface RunScheduledInstancesRequest {
@@ -32868,11 +32888,11 @@ declare namespace EC2 {
   }
   export interface ValidationError {
     /**
-     * The error code that indicates why the parameter or parameter combination is not valid. For more information about error codes, see Error Codes.
+     * The error code that indicates why the parameter or parameter combination is not valid. For more information about error codes, see Error codes.
      */
     Code?: String;
     /**
-     * The error message that describes why the parameter or parameter combination is not valid. For more information about error messages, see Error Codes.
+     * The error message that describes why the parameter or parameter combination is not valid. For more information about error messages, see Error codes.
      */
     Message?: String;
   }

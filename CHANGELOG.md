@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1141.0-->
+<!--LATEST=2.1142.0-->
 <!--ENTRYINSERT-->
+
+## 2.1142.0
+* feature: CognitoIdentityServiceProvider: Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.
+* feature: EC2: Stop Protection feature enables customers to protect their instances from accidental stop actions.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
+* feature: NetworkManager: This release adds Multi Account API support for a TGW Global Network, to enable and disable AWSServiceAccess with AwsOrganizations for Network Manager service and dependency CloudFormation StackSets service.
 
 ## 2.1141.0
 * feature: ElastiCache: Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later.

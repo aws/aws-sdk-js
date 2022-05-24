@@ -344,7 +344,7 @@ declare namespace Ivschat {
   export type MessageID = string;
   export interface MessageReviewHandler {
     /**
-     * Specifies the fallback behavior (whether the message is allowed or denied) if the handler does not return a valid response, encounters an error or times out. If allowed, the message is delivered with returned content to all users connected to the room. If denied, the message is not delivered to any user. Default: ALLOW.
+     * Specifies the fallback behavior (whether the message is allowed or denied) if the handler does not return a valid response, encounters an error, or times out. (For the timeout period, see  Service Quotas.) If allowed, the message is delivered with returned content to all users connected to the room. If denied, the message is not delivered to any user. Default: ALLOW.
      */
     fallbackResult?: FallbackResult;
     /**
