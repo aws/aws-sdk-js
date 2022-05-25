@@ -189,7 +189,7 @@ declare namespace VoiceID {
      */
     AcceptanceThreshold: Score;
   }
-  export type AuthenticationDecision = "ACCEPT"|"REJECT"|"NOT_ENOUGH_SPEECH"|"SPEAKER_NOT_ENROLLED"|"SPEAKER_OPTED_OUT"|"SPEAKER_ID_NOT_PROVIDED"|string;
+  export type AuthenticationDecision = "ACCEPT"|"REJECT"|"NOT_ENOUGH_SPEECH"|"SPEAKER_NOT_ENROLLED"|"SPEAKER_OPTED_OUT"|"SPEAKER_ID_NOT_PROVIDED"|"SPEAKER_EXPIRED"|string;
   export interface AuthenticationResult {
     /**
      * A timestamp indicating when audio aggregation ended for this authentication result.
@@ -853,6 +853,10 @@ declare namespace VoiceID {
      */
     GeneratedSpeakerId?: GeneratedSpeakerId;
     /**
+     * The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.
+     */
+    LastAccessedAt?: Timestamp;
+    /**
      * The current status of the speaker.
      */
     Status?: SpeakerStatus;
@@ -967,6 +971,10 @@ declare namespace VoiceID {
      * The service-generated identifier for the speaker. 
      */
     GeneratedSpeakerId?: GeneratedSpeakerId;
+    /**
+     * The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.
+     */
+    LastAccessedAt?: Timestamp;
     /**
      * The current status of the speaker.
      */

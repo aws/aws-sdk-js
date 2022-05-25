@@ -276,11 +276,11 @@ declare class FSx extends Service {
    */
   updateDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.UpdateDataRepositoryAssociationResponse) => void): Request<FSx.Types.UpdateDataRepositoryAssociationResponse, AWSError>;
   /**
-   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For Amazon FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     StorageCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for NetApp ONTAP file systems, you can update the following properties:    AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For the Amazon FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     ThroughputCapacity     WeeklyMaintenanceStartTime   
+   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For Amazon FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for NetApp ONTAP file systems, you can update the following properties:    AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For the Amazon FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
   updateFileSystem(params: FSx.Types.UpdateFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
-   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For Amazon FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     StorageCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for NetApp ONTAP file systems, you can update the following properties:    AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For the Amazon FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     ThroughputCapacity     WeeklyMaintenanceStartTime   
+   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For Amazon FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for NetApp ONTAP file systems, you can update the following properties:    AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For the Amazon FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
   updateFileSystem(callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
@@ -689,12 +689,16 @@ declare namespace FSx {
      * The Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs.
      */
     LogConfiguration?: LustreLogCreateConfiguration;
+    /**
+     * The Lustre root squash configuration used when creating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user.
+     */
+    RootSquashConfiguration?: LustreRootSquashConfiguration;
   }
   export interface CreateFileSystemOntapConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment. 
+     * Specifies the FSx for ONTAP file system deployment type to use in creating the file system.     MULTI_AZ_1 - (Default) A high availability file system configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.     SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.   For information about the use cases for Multi-AZ and Single-AZ deployments, refer to Choosing a file system deployment type. 
      */
     DeploymentType: OntapDeploymentType;
     /**
@@ -1794,6 +1798,10 @@ declare namespace FSx {
      * The Lustre logging configuration. Lustre logging writes the enabled log events for your file system to Amazon CloudWatch Logs.
      */
     LogConfiguration?: LustreLogConfiguration;
+    /**
+     * The Lustre root squash configuration for an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user.
+     */
+    RootSquashConfiguration?: LustreRootSquashConfiguration;
   }
   export type LustreFileSystemMountName = string;
   export interface LustreLogConfiguration {
@@ -1815,6 +1823,19 @@ declare namespace FSx {
      * The Amazon Resource Name (ARN) that specifies the destination of the logs. The destination can be any Amazon CloudWatch Logs log group ARN, with the following requirements:   The destination ARN that you provide must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.   The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix.   If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.   If Destination is provided and the resource does not exist, the request will fail with a BadRequest error.   If Level is set to DISABLED, you cannot specify a destination in Destination.  
      */
     Destination?: GeneralARN;
+  }
+  export type LustreNoSquashNid = string;
+  export type LustreNoSquashNids = LustreNoSquashNid[];
+  export type LustreRootSquash = string;
+  export interface LustreRootSquashConfiguration {
+    /**
+     * You enable root squash by setting a user ID (UID) and group ID (GID) for the file system in the format UID:GID (for example, 365534:65534). The UID and GID values can range from 0 to 4294967294:   A non-zero value for UID and GID enables root squash. The UID and GID values can be different, but each must be a non-zero value.   A value of 0 (zero) for UID and GID indicates root, and therefore disables root squash.   When root squash is enabled, the user ID and group ID of a root user accessing the file system are re-mapped to the UID and GID you provide.
+     */
+    RootSquash?: LustreRootSquash;
+    /**
+     * When root squash is enabled, you can optionally specify an array of NIDs of clients for which root squash does not apply. A client NID is a Lustre Network Identifier used to uniquely identify a client. You can specify the NID as either a single address or a range of addresses:   A single address is described in standard Lustre NID format by specifying the client’s IP address followed by the Lustre network ID (for example, 10.0.1.6@tcp).   An address range is described using a dash to separate the range (for example, 10.0.[2-10].[1-255]@tcp).  
+     */
+    NoSquashNids?: LustreNoSquashNids;
   }
   export type MaxResults = number;
   export type Megabytes = number;
@@ -2403,6 +2424,10 @@ declare namespace FSx {
      * The Lustre logging configuration used when updating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs.
      */
     LogConfiguration?: LustreLogCreateConfiguration;
+    /**
+     * The Lustre root squash configuration used when updating an Amazon FSx for Lustre file system. When enabled, root squash restricts root-level access from clients that try to access your file system as a root user.
+     */
+    RootSquashConfiguration?: LustreRootSquashConfiguration;
   }
   export interface UpdateFileSystemOntapConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;

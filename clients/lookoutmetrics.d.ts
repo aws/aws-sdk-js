@@ -488,6 +488,41 @@ declare namespace LookoutMetrics {
     FlowName?: FlowName;
   }
   export type Arn = string;
+  export type AthenaDataCatalog = string;
+  export type AthenaDatabaseName = string;
+  export type AthenaS3ResultsPath = string;
+  export interface AthenaSourceConfig {
+    /**
+     * An IAM role that gives Amazon Lookout for Metrics permission to access the data.
+     */
+    RoleArn?: Arn;
+    /**
+     * The database's name.
+     */
+    DatabaseName?: AthenaDatabaseName;
+    /**
+     * The database's data catalog.
+     */
+    DataCatalog?: AthenaDataCatalog;
+    /**
+     * The database's table name.
+     */
+    TableName?: AthenaTableName;
+    /**
+     * The database's work group name.
+     */
+    WorkGroupName?: AthenaWorkGroupName;
+    /**
+     * The database's results path.
+     */
+    S3ResultsPath?: AthenaS3ResultsPath;
+    /**
+     * Settings for backtest mode.
+     */
+    BackTestConfiguration?: BackTestConfiguration;
+  }
+  export type AthenaTableName = string;
+  export type AthenaWorkGroupName = string;
   export interface AttributeValue {
     /**
      * A string.
@@ -537,6 +572,12 @@ declare namespace LookoutMetrics {
     AnomalyDetectorArn: Arn;
   }
   export interface BackTestAnomalyDetectorResponse {
+  }
+  export interface BackTestConfiguration {
+    /**
+     * Run a backtest instead of monitoring new data.
+     */
+    RunBackTestMode: Boolean;
   }
   export type BinaryAttributeValue = string;
   export type BinaryListAttributeValue = BinaryAttributeValue[];
@@ -1413,21 +1454,25 @@ declare namespace LookoutMetrics {
   export interface MetricSource {
     S3SourceConfig?: S3SourceConfig;
     /**
-     * An object containing information about the AppFlow configuration.
+     * Details about an AppFlow datasource.
      */
     AppFlowConfig?: AppFlowConfig;
     /**
-     * An object containing information about the Amazon CloudWatch monitoring configuration.
+     * Details about an Amazon CloudWatch monitoring datasource.
      */
     CloudWatchConfig?: CloudWatchConfig;
     /**
-     * An object containing information about the Amazon Relational Database Service (RDS) configuration.
+     * Details about an Amazon Relational Database Service (RDS) datasource.
      */
     RDSSourceConfig?: RDSSourceConfig;
     /**
-     * An object containing information about the Amazon Redshift database configuration.
+     * Details about an Amazon Redshift database datasource.
      */
     RedshiftSourceConfig?: RedshiftSourceConfig;
+    /**
+     * Details about an Amazon Athena datasource.
+     */
+    AthenaSourceConfig?: AthenaSourceConfig;
   }
   export type MetricValue = number;
   export type MetricValueList = MetricValue[];
@@ -1551,7 +1596,7 @@ declare namespace LookoutMetrics {
      */
     SnsTopicArn: Arn;
     /**
-     * The text format for alerts.
+     * The format of the SNS topic.
      */
     SnsFormat?: SnsFormat;
   }

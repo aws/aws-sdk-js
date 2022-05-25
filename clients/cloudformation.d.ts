@@ -109,11 +109,11 @@ declare class CloudFormation extends Service {
    */
   deleteStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackInstancesOutput) => void): Request<CloudFormation.Types.DeleteStackInstancesOutput, AWSError>;
   /**
-   * Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see DeleteStackInstances.
+   * Deletes a stack set. Before you can delete a stack set, all its member stack instances must be deleted. For more information about how to complete this, see DeleteStackInstances.
    */
   deleteStackSet(params: CloudFormation.Types.DeleteStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackSetOutput) => void): Request<CloudFormation.Types.DeleteStackSetOutput, AWSError>;
   /**
-   * Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see DeleteStackInstances.
+   * Deletes a stack set. Before you can delete a stack set, all its member stack instances must be deleted. For more information about how to complete this, see DeleteStackInstances.
    */
   deleteStackSet(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackSetOutput) => void): Request<CloudFormation.Types.DeleteStackSetOutput, AWSError>;
   /**
@@ -149,19 +149,19 @@ declare class CloudFormation extends Service {
    */
   describeChangeSetHooks(callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetHooksOutput) => void): Request<CloudFormation.Types.DescribeChangeSetHooksOutput, AWSError>;
   /**
-   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information on registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
+   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
    */
   describePublisher(params: CloudFormation.Types.DescribePublisherInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
   /**
-   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information on registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
+   * Returns information about a CloudFormation extension publisher. If you don't supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account. For more information about registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
    */
   describePublisher(callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
   /**
-   * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
+   * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information about stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
    */
   describeStackDriftDetectionStatus(params: CloudFormation.Types.DescribeStackDriftDetectionStatusInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackDriftDetectionStatusOutput) => void): Request<CloudFormation.Types.DescribeStackDriftDetectionStatusOutput, AWSError>;
   /**
-   * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
+   * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information about stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
    */
   describeStackDriftDetectionStatus(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackDriftDetectionStatusOutput) => void): Request<CloudFormation.Types.DescribeStackDriftDetectionStatusOutput, AWSError>;
   /**
@@ -261,11 +261,11 @@ declare class CloudFormation extends Service {
    */
   detectStackResourceDrift(callback?: (err: AWSError, data: CloudFormation.Types.DetectStackResourceDriftOutput) => void): Request<CloudFormation.Types.DetectStackResourceDriftOutput, AWSError>;
   /**
-   * Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see How CloudFormation performs drift detection on a stack set.  DetectStackSetDrift returns the OperationId of the stack set drift detection operation. Use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, in addition to the number of resources included in each stack. Once the operation has completed, use the following actions to return drift information:   Use  DescribeStackSet  to return detailed information about the stack set, including detailed information about the last completed drift operation performed on the stack set. (Information about drift operations that are in progress isn't included.)   Use  ListStackInstances  to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.   Use  DescribeStackInstance  to return detailed information about a specific stack instance, including its drift status and last drift time checked.   For more information on performing a drift detection operation on a stack set, see Detecting unmanaged changes in stack sets. You can only run a single drift detection operation on a given stack set at one time. To stop a drift detection stack set operation, use  StopStackSetOperation .
+   * Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see How CloudFormation performs drift detection on a stack set.  DetectStackSetDrift returns the OperationId of the stack set drift detection operation. Use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, in addition to the number of resources included in each stack. Once the operation has completed, use the following actions to return drift information:   Use  DescribeStackSet  to return detailed information about the stack set, including detailed information about the last completed drift operation performed on the stack set. (Information about drift operations that are in progress isn't included.)   Use  ListStackInstances  to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.   Use  DescribeStackInstance  to return detailed information about a specific stack instance, including its drift status and last drift time checked.   For more information about performing a drift detection operation on a stack set, see Detecting unmanaged changes in stack sets. You can only run a single drift detection operation on a given stack set at one time. To stop a drift detection stack set operation, use  StopStackSetOperation .
    */
   detectStackSetDrift(params: CloudFormation.Types.DetectStackSetDriftInput, callback?: (err: AWSError, data: CloudFormation.Types.DetectStackSetDriftOutput) => void): Request<CloudFormation.Types.DetectStackSetDriftOutput, AWSError>;
   /**
-   * Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see How CloudFormation performs drift detection on a stack set.  DetectStackSetDrift returns the OperationId of the stack set drift detection operation. Use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, in addition to the number of resources included in each stack. Once the operation has completed, use the following actions to return drift information:   Use  DescribeStackSet  to return detailed information about the stack set, including detailed information about the last completed drift operation performed on the stack set. (Information about drift operations that are in progress isn't included.)   Use  ListStackInstances  to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.   Use  DescribeStackInstance  to return detailed information about a specific stack instance, including its drift status and last drift time checked.   For more information on performing a drift detection operation on a stack set, see Detecting unmanaged changes in stack sets. You can only run a single drift detection operation on a given stack set at one time. To stop a drift detection stack set operation, use  StopStackSetOperation .
+   * Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see How CloudFormation performs drift detection on a stack set.  DetectStackSetDrift returns the OperationId of the stack set drift detection operation. Use this operation id with  DescribeStackSetOperation  to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, in addition to the number of resources included in each stack. Once the operation has completed, use the following actions to return drift information:   Use  DescribeStackSet  to return detailed information about the stack set, including detailed information about the last completed drift operation performed on the stack set. (Information about drift operations that are in progress isn't included.)   Use  ListStackInstances  to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.   Use  DescribeStackInstance  to return detailed information about a specific stack instance, including its drift status and last drift time checked.   For more information about performing a drift detection operation on a stack set, see Detecting unmanaged changes in stack sets. You can only run a single drift detection operation on a given stack set at one time. To stop a drift detection stack set operation, use  StopStackSetOperation .
    */
   detectStackSetDrift(callback?: (err: AWSError, data: CloudFormation.Types.DetectStackSetDriftOutput) => void): Request<CloudFormation.Types.DetectStackSetDriftOutput, AWSError>;
   /**
@@ -413,11 +413,11 @@ declare class CloudFormation extends Service {
    */
   listTypes(callback?: (err: AWSError, data: CloudFormation.Types.ListTypesOutput) => void): Request<CloudFormation.Types.ListTypesOutput, AWSError>;
   /**
-   * Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information on publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
+   * Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
    */
   publishType(params: CloudFormation.Types.PublishTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.PublishTypeOutput) => void): Request<CloudFormation.Types.PublishTypeOutput, AWSError>;
   /**
-   * Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information on publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
+   * Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
    */
   publishType(callback?: (err: AWSError, data: CloudFormation.Types.PublishTypeOutput) => void): Request<CloudFormation.Types.PublishTypeOutput, AWSError>;
   /**
@@ -429,19 +429,19 @@ declare class CloudFormation extends Service {
    */
   recordHandlerProgress(callback?: (err: AWSError, data: CloudFormation.Types.RecordHandlerProgressOutput) => void): Request<CloudFormation.Types.RecordHandlerProgressOutput, AWSError>;
   /**
-   * Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all Amazon Web Services Regions. For information on requirements for registering as a public extension publisher, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide. 
+   * Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all Amazon Web Services Regions. For information about requirements for registering as a public extension publisher, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide. 
    */
   registerPublisher(params: CloudFormation.Types.RegisterPublisherInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterPublisherOutput) => void): Request<CloudFormation.Types.RegisterPublisherOutput, AWSError>;
   /**
-   * Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all Amazon Web Services Regions. For information on requirements for registering as a public extension publisher, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide. 
+   * Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all Amazon Web Services Regions. For information about requirements for registering as a public extension publisher, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide. 
    */
   registerPublisher(callback?: (err: AWSError, data: CloudFormation.Types.RegisterPublisherOutput) => void): Request<CloudFormation.Types.RegisterPublisherOutput, AWSError>;
   /**
-   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information on how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request. Once you have registered a private extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information about how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request. Once you have registered a private extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   registerType(params: CloudFormation.Types.RegisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
-   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information on how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request. Once you have registered a private extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:   Validating the extension schema.   Determining which handlers, if any, have been specified for the extension.   Making the extension available for use in your account.   For more information about how to develop extensions and ready them for registration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request. Once you have registered a private extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   registerType(callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
@@ -639,7 +639,7 @@ declare namespace CloudFormation {
      */
     Type?: ThirdPartyType;
     /**
-     * The Amazon Resource Number (ARN) of the public extension. Conditional: You must specify PublicTypeArn, or TypeName, Type, and PublisherId.
+     * The Amazon Resource Name (ARN) of the public extension. Conditional: You must specify PublicTypeArn, or TypeName, Type, and PublisherId.
      */
     PublicTypeArn?: ThirdPartyTypeArn;
     /**
@@ -674,7 +674,7 @@ declare namespace CloudFormation {
   }
   export interface ActivateTypeOutput {
     /**
-     * The Amazon Resource Number (ARN) of the activated extension, in this account and region.
+     * The Amazon Resource Name (ARN) of the activated extension, in this account and region.
      */
     Arn?: PrivateTypeArn;
   }
@@ -916,7 +916,7 @@ declare namespace CloudFormation {
      */
     Parameters?: Parameters;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM resources in CloudFormation templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation.  This capacity doesn't apply to creating change sets, and specifying it when creating change sets has no effect. If you want to create a stack from a stack template that contains macros and nested stacks, you must create or update the stack directly from the template using the CreateStack or UpdateStack action, and specifying this capability.  For more information on macros, see Using CloudFormation macros to perform custom processing on templates.  
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM resources in CloudFormation templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually creating the stack. If your stack template contains one or more macros, and you choose to create a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation.  This capacity doesn't apply to creating change sets, and specifying it when creating change sets has no effect. If you want to create a stack from a stack template that contains macros and nested stacks, you must create or update the stack directly from the template using the CreateStack or UpdateStack action, and specifying this capability.  For more information about macros, see Using CloudFormation macros to perform custom processing on templates.  
      */
     Capabilities?: Capabilities;
     /**
@@ -1108,7 +1108,7 @@ declare namespace CloudFormation {
      */
     TemplateURL?: TemplateURL;
     /**
-     * The stack ID you are importing into a new stack set. Specify the Amazon Resource Number (ARN) of the stack.
+     * The stack ID you are importing into a new stack set. Specify the Amazon Resource Name (ARN) of the stack.
      */
     StackId?: StackId;
     /**
@@ -1124,7 +1124,7 @@ declare namespace CloudFormation {
      */
     Tags?: Tags;
     /**
-     * The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Prerequisites: Granting Permissions for Stack Set Operations in the CloudFormation User Guide.
+     * The Amazon Resource Name (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Prerequisites: Granting Permissions for Stack Set Operations in the CloudFormation User Guide.
      */
     AdministrationRoleARN?: RoleARN;
     /**
@@ -1577,7 +1577,7 @@ declare namespace CloudFormation {
      */
     StackResourceDrifts: StackResourceDrifts;
     /**
-     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call DescribeStackResourceDrifts again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call DescribeStackResourceDrifts again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
      */
     NextToken?: NextToken;
   }
@@ -1691,7 +1691,7 @@ declare namespace CloudFormation {
      */
     VersionId?: TypeVersionId;
     /**
-     * The publisher ID of the extension publisher. Extensions provided by Amazon are not assigned a publisher ID.
+     * The publisher ID of the extension publisher. Extensions provided by Amazon Web Services are not assigned a publisher ID.
      */
     PublisherId?: PublisherId;
     /**
@@ -1713,19 +1713,19 @@ declare namespace CloudFormation {
      */
     TypeName?: TypeName;
     /**
-     * The ID of the default version of the extension. The default version is used when the extension version isn't specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see RegisterType. To set the default version of an extension, use  SetTypeDefaultVersion .
+     * The ID of the default version of the extension. The default version is used when the extension version isn't specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon Web Services and published by third parties, CloudFormation returns null. For more information, see RegisterType. To set the default version of an extension, use  SetTypeDefaultVersion .
      */
     DefaultVersionId?: TypeVersionId;
     /**
-     * Whether the specified extension version is set as the default version. This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns null.
+     * Whether the specified extension version is set as the default version. This applies only to private extensions you have registered in your account, and extensions published by Amazon Web Services. For public third-party extensions, whether they are activated in your account, CloudFormation returns null.
      */
     IsDefaultVersion?: IsDefaultVersion;
     /**
-     * The contract test status of the registered extension version. To return the extension test status of a specific extension version, you must specify VersionId. This applies only to registered private extension versions. CloudFormation doesn't return this information for public extensions, whether or not they are activated in your account.    PASSED: The extension has passed all its contract tests. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation Command Line Interface User Guide.    FAILED: The extension has failed one or more contract tests.    IN_PROGRESS: Contract tests are currently being performed on the extension.    NOT_TESTED: Contract tests haven't been performed on the extension.  
+     * The contract test status of the registered extension version. To return the extension test status of a specific extension version, you must specify VersionId. This applies only to registered private extension versions. CloudFormation doesn't return this information for public extensions, whether they are activated in your account.    PASSED: The extension has passed all its contract tests. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation Command Line Interface User Guide.    FAILED: The extension has failed one or more contract tests.    IN_PROGRESS: Contract tests are currently being performed on the extension.    NOT_TESTED: Contract tests haven't been performed on the extension.  
      */
     TypeTestsStatus?: TypeTestsStatus;
     /**
-     * The description of the test status. To return the extension test status of a specific extension version, you must specify VersionId. This applies only to registered private extension versions. CloudFormation doesn't return this information for public extensions, whether or not they are activated in your account.
+     * The description of the test status. To return the extension test status of a specific extension version, you must specify VersionId. This applies only to registered private extension versions. CloudFormation doesn't return this information for public extensions, whether they are activated in your account.
      */
     TypeTestsStatusDescription?: TypeTestsStatusDescription;
     /**
@@ -1733,7 +1733,7 @@ declare namespace CloudFormation {
      */
     Description?: Description;
     /**
-     * The schema that defines the extension. For more information on extension schemas, see Resource Provider Schema in the CloudFormation CLI User Guide.
+     * The schema that defines the extension. For more information about extension schemas, see Resource Provider Schema in the CloudFormation CLI User Guide.
      */
     Schema?: TypeSchema;
     /**
@@ -1745,7 +1745,7 @@ declare namespace CloudFormation {
      */
     DeprecatedStatus?: DeprecatedStatus;
     /**
-     * Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see RegisterType.
+     * Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon Web Services and published by third parties, CloudFormation returns null. For more information, see RegisterType.
      */
     LoggingConfig?: LoggingConfig;
     /**
@@ -1753,11 +1753,11 @@ declare namespace CloudFormation {
      */
     RequiredActivatedTypes?: RequiredActivatedTypes;
     /**
-     * The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see RegisterType.  If the registered extension calls any Amazon Web Services APIs, you must create an  IAM execution role  that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.
+     * The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see RegisterType. If the registered extension calls any Amazon Web Services APIs, you must create an  IAM execution role  that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.
      */
     ExecutionRoleArn?: RoleArn;
     /**
-     * The scope at which the extension is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The extension is only visible and usable within the account in which it is registered. CloudFormation marks any extensions you register as PRIVATE.    PUBLIC: The extension is publicly visible and usable within any Amazon account.  
+     * The scope at which the extension is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The extension is only visible and usable within the account in which it is registered. CloudFormation marks any extensions you register as PRIVATE.    PUBLIC: The extension is publicly visible and usable within any Amazon Web Services account.  
      */
     Visibility?: Visibility;
     /**
@@ -1801,7 +1801,7 @@ declare namespace CloudFormation {
      */
     LatestPublicVersion?: PublicVersionNumber;
     /**
-     * Whether or not the extension is activated in the account and region. This only applies to public third-party extensions. For all other extensions, CloudFormation returns null.
+     * Whether the extension is activated in the account and region. This only applies to public third-party extensions. For all other extensions, CloudFormation returns null.
      */
     IsActivated?: IsActivated;
     /**
@@ -2172,7 +2172,7 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetName;
     /**
-     * If the previous request didn't return all of the remaining results, the response's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackInstances again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     * If the previous request didn't return all the remaining results, the response's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackInstances again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
      */
     NextToken?: NextToken;
     /**
@@ -2236,7 +2236,7 @@ declare namespace CloudFormation {
      */
     OperationId: ClientRequestToken;
     /**
-     * If the previous request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackSetOperationResults again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     * If the previous request didn't return all the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call ListStackSetOperationResults again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
      */
     NextToken?: NextToken;
     /**
@@ -2366,7 +2366,7 @@ declare namespace CloudFormation {
      */
     RegistrationTokenList?: RegistrationTokenList;
     /**
-     * If the request doesn't return all of the remaining results, NextToken is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
+     * If the request doesn't return all the remaining results, NextToken is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If the request returns all results, NextToken is set to null.
      */
     NextToken?: NextToken;
   }
@@ -2412,7 +2412,7 @@ declare namespace CloudFormation {
   }
   export interface ListTypesInput {
     /**
-     * The scope at which the extensions are visible and usable in CloudFormation operations. Valid values include:    PRIVATE: Extensions that are visible and usable within this account and region. This includes:   Private extensions you have registered in this account and region.   Public extensions that you have activated in this account and region.      PUBLIC: Extensions that are publicly visible and available to be activated within any Amazon account. This includes extensions from Amazon, as well as third-party publishers.   The default is PRIVATE.
+     * The scope at which the extensions are visible and usable in CloudFormation operations. Valid values include:    PRIVATE: Extensions that are visible and usable within this account and region. This includes:   Private extensions you have registered in this account and region.   Public extensions that you have activated in this account and region.      PUBLIC: Extensions that are publicly visible and available to be activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to third-party publishers.   The default is PRIVATE.
      */
     Visibility?: Visibility;
     /**
@@ -2436,7 +2436,7 @@ declare namespace CloudFormation {
      */
     MaxResults?: MaxResults;
     /**
-     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     * If the previous paginated request didn't return all the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
      */
     NextToken?: NextToken;
   }
@@ -2617,7 +2617,7 @@ declare namespace CloudFormation {
      */
     Type?: ThirdPartyType;
     /**
-     * The Amazon Resource Number (ARN) of the extension. Conditional: You must specify Arn, or TypeName and Type.
+     * The Amazon Resource Name (ARN) of the extension. Conditional: You must specify Arn, or TypeName and Type.
      */
     Arn?: PrivateTypeArn;
     /**
@@ -2631,7 +2631,7 @@ declare namespace CloudFormation {
   }
   export interface PublishTypeOutput {
     /**
-     * The Amazon Resource Number (ARN) assigned to the public extension upon publication.
+     * The Amazon Resource Name (ARN) assigned to the public extension upon publication.
      */
     PublicTypeArn?: TypeArn;
   }
@@ -2697,11 +2697,11 @@ declare namespace CloudFormation {
      */
     Type?: RegistryType;
     /**
-     * The name of the extension being registered. We recommend that extension names adhere to the following patterns:   For resource types, company_or_organization::service::type.   For modules, company_or_organization::service::type::MODULE.    The following organization namespaces are reserved and can't be used in your extension names:    Alexa     AMZN     Amazon     AWS     Custom     Dev    
+     * The name of the extension being registered. We suggest that extension names adhere to the following patterns:   For resource types, company_or_organization::service::type.   For modules, company_or_organization::service::type::MODULE.   For hooks, MyCompany::Testing::MyTestHook.    The following organization namespaces are reserved and can't be used in your extension names:    Alexa     AMZN     Amazon     AWS     Custom     Dev    
      */
     TypeName: TypeName;
     /**
-     * A URL to the S3 bucket containing the extension project package that contains the necessary files for the extension you want to register. For information on generating a schema handler package for the extension you want to register, see submit in the CloudFormation CLI User Guide.  The user registering the extension must be able to access the package in the S3 bucket. That's, the user needs to have GetObject permissions for the schema handler package. For more information, see Actions, Resources, and Condition Keys for Amazon S3 in the Identity and Access Management User Guide. 
+     * A URL to the S3 bucket containing the extension project package that contains the necessary files for the extension you want to register. For information about generating a schema handler package for the extension you want to register, see submit in the CloudFormation CLI User Guide.  The user registering the extension must be able to access the package in the S3 bucket. That's, the user needs to have GetObject permissions for the schema handler package. For more information, see Actions, Resources, and Condition Keys for Amazon S3 in the Identity and Access Management User Guide. 
      */
     SchemaHandlerPackage: S3Url;
     /**
@@ -2709,7 +2709,7 @@ declare namespace CloudFormation {
      */
     LoggingConfig?: LoggingConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (resources.cloudformation.amazonaws.com). For more information on adding trust relationships, see Modifying a role trust policy in the Identity and Access Management User Guide. If your extension calls Amazon Web Services APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.
+     * The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (resources.cloudformation.amazonaws.com). For more information about adding trust relationships, see Modifying a role trust policy in the Identity and Access Management User Guide. If your extension calls Amazon Web Services APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.
      */
     ExecutionRoleArn?: RoleArn;
     /**
@@ -3069,7 +3069,7 @@ declare namespace CloudFormation {
      */
     Tags?: Tags;
     /**
-     * Whether termination protection is enabled for the stack. For nested stacks, termination protection is set on the root stack and cannot be changed directly on the nested stack. For more information, see Protecting a Stack From Being Deleted in the CloudFormation User Guide.
+     * Whether termination protection is enabled for the stack. For nested stacks, termination protection is set on the root stack and can't be changed directly on the nested stack. For more information, see Protecting a Stack From Being Deleted in the CloudFormation User Guide.
      */
     EnableTerminationProtection?: EnableTerminationProtection;
     /**
@@ -3081,7 +3081,7 @@ declare namespace CloudFormation {
      */
     RootId?: StackId;
     /**
-     * Information on whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     * Information about whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
      */
     DriftInformation?: StackDriftInformation;
   }
@@ -3449,7 +3449,7 @@ declare namespace CloudFormation {
   }
   export interface StackResourceDriftInformationSummary {
     /**
-     * Status of the resource's actual configuration compared to its expected configuration.    DELETED: The resource differs from its expected configuration in that it has been deleted.    MODIFIED: The resource differs from its expected configuration.    NOT_CHECKED: CloudFormation hasn't checked if the resource differs from its expected configuration. Any resources that don't currently support drift detection have a status of NOT_CHECKED. For more information, see Resources that Support Drift Detection. If you performed an ContinueUpdateRollback operation on a stack, any resources included in ResourcesToSkip will also have a status of NOT_CHECKED. For more information on skipping resources during rollback operations, see Continue Rolling Back an Update in the CloudFormation User Guide.    IN_SYNC: The resource's actual configuration matches its expected configuration.  
+     * Status of the resource's actual configuration compared to its expected configuration.    DELETED: The resource differs from its expected configuration in that it has been deleted.    MODIFIED: The resource differs from its expected configuration.    NOT_CHECKED: CloudFormation hasn't checked if the resource differs from its expected configuration. Any resources that don't currently support drift detection have a status of NOT_CHECKED. For more information, see Resources that Support Drift Detection. If you performed an ContinueUpdateRollback operation on a stack, any resources included in ResourcesToSkip will also have a status of NOT_CHECKED. For more information about skipping resources during rollback operations, see Continue Rolling Back an Update in the CloudFormation User Guide.    IN_SYNC: The resource's actual configuration matches its expected configuration.  
      */
     StackResourceDriftStatus: StackResourceDriftStatus;
     /**
@@ -3530,11 +3530,11 @@ declare namespace CloudFormation {
      */
     Tags?: Tags;
     /**
-     * The Amazon Resource Number (ARN) of the stack set.
+     * The Amazon Resource Name (ARN) of the stack set.
      */
     StackSetARN?: StackSetARN;
     /**
-     * The Amazon Resource Number (ARN) of the IAM role used to create or update the stack set. Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Prerequisites: Granting Permissions for Stack Set Operations in the CloudFormation User Guide.
+     * The Amazon Resource Name (ARN) of the IAM role used to create or update the stack set. Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Prerequisites: Granting Permissions for Stack Set Operations in the CloudFormation User Guide.
      */
     AdministrationRoleARN?: RoleARN;
     /**
@@ -3628,7 +3628,7 @@ declare namespace CloudFormation {
      */
     RetainStacks?: RetainStacksNullable;
     /**
-     * The Amazon Resource Number (ARN) of the IAM role used to perform this stack set operation. Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Define Permissions for Multiple Administrators in the CloudFormation User Guide.
+     * The Amazon Resource Name (ARN) of the IAM role used to perform this stack set operation. Use customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Define Permissions for Multiple Administrators in the CloudFormation User Guide.
      */
     AdministrationRoleARN?: RoleARN;
     /**
@@ -3651,6 +3651,10 @@ declare namespace CloudFormation {
      * Detailed information about the drift status of the stack set. This includes information about drift operations currently being performed on the stack set. This information will only be present for stack set operations whose Action type is DETECT_DRIFT. For more information, see Detecting Unmanaged Changes in Stack Sets in the CloudFormation User Guide.
      */
     StackSetDriftDetectionDetails?: StackSetDriftDetectionDetails;
+    /**
+     * The status of the operation in details.
+     */
+    StatusReason?: StackSetOperationStatusReason;
   }
   export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|"DETECT_DRIFT"|string;
   export interface StackSetOperationPreferences {
@@ -3708,6 +3712,7 @@ declare namespace CloudFormation {
     OrganizationalUnitId?: OrganizationalUnitId;
   }
   export type StackSetOperationStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"STOPPING"|"STOPPED"|"QUEUED"|string;
+  export type StackSetOperationStatusReason = string;
   export type StackSetOperationSummaries = StackSetOperationSummary[];
   export interface StackSetOperationSummary {
     /**
@@ -3730,6 +3735,10 @@ declare namespace CloudFormation {
      * The time at which the stack set operation ended, across all accounts and Regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or Region.
      */
     EndTimestamp?: Timestamp;
+    /**
+     * The status of the operation in details.
+     */
+    StatusReason?: StackSetOperationStatusReason;
   }
   export type StackSetStatus = "ACTIVE"|"DELETED"|string;
   export type StackSetSummaries = StackSetSummary[];
@@ -3817,7 +3826,7 @@ declare namespace CloudFormation {
      */
     RootId?: StackId;
     /**
-     * Summarizes information on whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
+     * Summarizes information about whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see Detecting Unregulated Configuration Changes to Stacks and Resources.
      */
     DriftInformation?: StackDriftInformationSummary;
   }
@@ -3944,7 +3953,7 @@ declare namespace CloudFormation {
      */
     TypeName?: TypeName;
     /**
-     * Whether or not this configuration data is the default configuration for the extension.
+     * Whether this configuration data is the default configuration for the extension.
      */
     IsDefaultConfiguration?: IsDefaultConfiguration;
   }
@@ -4041,7 +4050,7 @@ declare namespace CloudFormation {
      */
     PublisherName?: PublisherName;
     /**
-     * Whether or not the extension is activated for this account and region. This applies only to third-party public extensions. Extensions published by Amazon are activated by default.
+     * Whether the extension is activated for this account and region. This applies only to third-party public extensions. Extensions published by Amazon are activated by default.
      */
     IsActivated?: IsActivated;
   }
@@ -4102,11 +4111,11 @@ declare namespace CloudFormation {
      */
     UsePreviousTemplate?: UsePreviousTemplate;
     /**
-     * Structure containing the temporary overriding stack policy body. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.
+     * Structure containing the temporary overriding stack policy body. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you don't specify a stack policy, the current policy that is associated with the stack will be used.
      */
     StackPolicyDuringUpdateBody?: StackPolicyDuringUpdateBody;
     /**
-     * Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.
+     * Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you don't specify a stack policy, the current policy that is associated with the stack will be used.
      */
     StackPolicyDuringUpdateURL?: StackPolicyDuringUpdateURL;
     /**
@@ -4114,7 +4123,7 @@ declare namespace CloudFormation {
      */
     Parameters?: Parameters;
     /**
-     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we recommend that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually updating the stack. If your stack template contains one or more macros, and you choose to update a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation. If you want to update a stack from a stack template that contains macros and nested stacks, you must update the stack directly from the template using this capability.  You should only update stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.  
+     * In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack.    CAPABILITY_IAM and CAPABILITY_NAMED_IAM  Some stack templates might include resources that can affect permissions in your Amazon Web Services account; for example, by creating new Identity and Access Management (IAM) users. For those stacks, you must explicitly acknowledge this by specifying one of these capabilities. The following IAM resources require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.   If you have IAM resources, you can specify either capability.   If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.   If you don't specify either of these capabilities, CloudFormation returns an InsufficientCapabilities error.   If your stack template contains these resources, we suggest that you review all permissions associated with them and edit their permissions if necessary.     AWS::IAM::AccessKey      AWS::IAM::Group     AWS::IAM::InstanceProfile      AWS::IAM::Policy      AWS::IAM::Role      AWS::IAM::User     AWS::IAM::UserToGroupAddition    For more information, see Acknowledging IAM Resources in CloudFormation Templates.    CAPABILITY_AUTO_EXPAND  Some template contain macros. Macros perform custom processing on templates; this can include simple actions like find-and-replace operations, all the way to extensive transformations of entire templates. Because of this, users typically create a change set from the processed template, so that they can review the changes resulting from the macros before actually updating the stack. If your stack template contains one or more macros, and you choose to update a stack directly from the processed template, without first reviewing the resulting changes in a change set, you must acknowledge this capability. This includes the AWS::Include and AWS::Serverless transforms, which are macros hosted by CloudFormation. If you want to update a stack from a stack template that contains macros and nested stacks, you must update the stack directly from the template using this capability.  You should only update stacks directly from a stack template that contains macros if you know what processing the macro performs. Each macro relies on an underlying Lambda service function for processing stack templates. Be aware that the Lambda function owner can update the function operation without CloudFormation being notified.  For more information, see Using CloudFormation Macros to Perform Custom Processing on Templates.  
      */
     Capabilities?: Capabilities;
     /**
@@ -4238,7 +4247,7 @@ declare namespace CloudFormation {
      */
     OperationPreferences?: StackSetOperationPreferences;
     /**
-     * The Amazon Resource Number (ARN) of the IAM role to use to update this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Granting Permissions for Stack Set Operations in the CloudFormation User Guide. If you specified a customized administrator role when you created the stack set, you must specify a customized administrator role, even if it is the same customized administrator role used with this stack set previously.
+     * The Amazon Resource Name (ARN) of the IAM role to use to update this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account. For more information, see Granting Permissions for Stack Set Operations in the CloudFormation User Guide. If you specified a customized administrator role when you created the stack set, you must specify a customized administrator role, even if it is the same customized administrator role used with this stack set previously.
      */
     AdministrationRoleARN?: RoleARN;
     /**

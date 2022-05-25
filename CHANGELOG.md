@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1142.0-->
+<!--LATEST=2.1143.0-->
 <!--ENTRYINSERT-->
+
+## 2.1143.0
+* feature: CloudFormation: Add a new parameter statusReason to DescribeStackSetOperation output for additional details
+* feature: FSx: This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions.
+* feature: LookoutMetrics: Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.
+* feature: SageMaker: Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API.
+* feature: VoiceID: VoiceID will now automatically expire Speakers if they haven't been accessed for Enrollment, Re-enrollment or Successful Auth for three years. The Speaker APIs now return a "LastAccessedAt" time for Speakers, and the EvaluateSession API returns "SPEAKER_EXPIRED" Auth Decision for EXPIRED Speakers.
 
 ## 2.1142.0
 * feature: CognitoIdentityServiceProvider: Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.

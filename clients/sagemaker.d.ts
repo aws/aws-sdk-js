@@ -2665,6 +2665,12 @@ declare namespace SageMaker {
      */
     CandidateProperties?: CandidateProperties;
   }
+  export interface AutoMLCandidateGenerationConfig {
+    /**
+     * A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job (optional). This file should be in json format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. The key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] is case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.
+     */
+    FeatureSpecificationS3Uri?: S3Uri;
+  }
   export interface AutoMLCandidateStep {
     /**
      * Whether the candidate is at the transform, training, or processing step.
@@ -2698,7 +2704,7 @@ declare namespace SageMaker {
      */
     ContentType?: ContentType;
     /**
-     * The channel type (optional) is an enum string. The default value is training. Channels for training and validation must share the same ContentType and TargetAttributeName.
+     * The channel type (optional) is an enum string. The default value is training. Channels for training and validation must share the same ContentType and TargetAttributeName. For information on specifying training and validation channel types, see  How to specify training and validation datasets .
      */
     ChannelType?: AutoMLChannelType;
   }
@@ -2726,7 +2732,7 @@ declare namespace SageMaker {
   }
   export interface AutoMLDataSplitConfig {
     /**
-     * The validation fraction (optional) is a float that specifies the portion of the training dataset to be used for validation. The default value is 0.2, and values can range from 0 to 1. We recommend setting this value to be less than 0.5.
+     * The validation fraction (optional) is a float that specifies the portion of the training dataset to be used for validation. The default value is 0.2, and values must be greater than 0 and less than 1. We recommend setting this value to be less than 0.5.
      */
     ValidationFraction?: ValidationFraction;
   }
@@ -2770,6 +2776,10 @@ declare namespace SageMaker {
      * The configuration for splitting the input training dataset. Type: AutoMLDataSplitConfig
      */
     DataSplitConfig?: AutoMLDataSplitConfig;
+    /**
+     * The configuration for generating a candidate for an AutoML job (optional). 
+     */
+    CandidateGenerationConfig?: AutoMLCandidateGenerationConfig;
   }
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
@@ -3025,18 +3035,18 @@ declare namespace SageMaker {
   export type CapacitySizeValue = number;
   export interface CaptureContentTypeHeader {
     /**
-     * 
+     * The list of all content type headers that SageMaker will treat as CSV and capture accordingly.
      */
     CsvContentTypes?: CsvContentTypes;
     /**
-     * 
+     * The list of all content type headers that SageMaker will treat as JSON and capture accordingly.
      */
     JsonContentTypes?: JsonContentTypes;
   }
   export type CaptureMode = "Input"|"Output"|string;
   export interface CaptureOption {
     /**
-     * 
+     * Specify the boundary of data to capture.
      */
     CaptureMode: CaptureMode;
   }
@@ -3592,7 +3602,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to InputDataConfig supported by . Format(s) supported: CSV. Minimum of 500 rows.
+     * An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to InputDataConfig supported by . Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the training dataset. There is not a minimum number of rows required for the validation dataset.
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
@@ -3600,7 +3610,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the type of supervised learning available for the candidates. Options include: BinaryClassification, MulticlassClassification, and Regression. For more information, see  Amazon SageMaker Autopilot problem types and algorithm support.
+     * Defines the type of supervised learning available for the candidates. For more information, see  Amazon SageMaker Autopilot problem types and algorithm support.
      */
     ProblemType?: ProblemType;
     /**
@@ -3608,7 +3618,7 @@ declare namespace SageMaker {
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
-     * Contains CompletionCriteria and SecurityConfig settings for the AutoML job.
+     * A collection of settings used to configure an AutoML job.
      */
     AutoMLJobConfig?: AutoMLJobConfig;
     /**
@@ -4417,7 +4427,7 @@ declare namespace SageMaker {
      */
     Domain?: String;
     /**
-     * The machine learning task your model package accomplishes. Common machine learning tasks include object detection and image classification.
+     * The machine learning task your model package accomplishes. Common machine learning tasks include object detection and image classification. The following tasks are supported by Inference Recommender: "IMAGE_CLASSIFICATION" | "OBJECT_DETECTION" | "TEXT_GENERATION" |"IMAGE_SEGMENTATION" | "FILL_MASK" | "CLASSIFICATION" | "REGRESSION" | "OTHER". Specify "OTHER" if none of the tasks listed fit your use case.
      */
     Task?: String;
     /**
@@ -5091,49 +5101,49 @@ declare namespace SageMaker {
   export type CustomerMetadataValue = string;
   export interface DataCaptureConfig {
     /**
-     * 
+     * Whether data capture should be enabled or disabled (defaults to enabled).
      */
     EnableCapture?: EnableCapture;
     /**
-     * 
+     * The percentage of requests SageMaker will capture. A lower value is recommended for Endpoints with high traffic.
      */
     InitialSamplingPercentage: SamplingPercentage;
     /**
-     * 
+     * The Amazon S3 location used to capture the data.
      */
     DestinationS3Uri: DestinationS3Uri;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * 
+     * Specifies data Model Monitor will capture. You can configure whether to collect only input, only output, or both
      */
     CaptureOptions: CaptureOptionList;
     /**
-     * 
+     * Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.
      */
     CaptureContentTypeHeader?: CaptureContentTypeHeader;
   }
   export interface DataCaptureConfigSummary {
     /**
-     * 
+     * Whether data capture is enabled or disabled.
      */
     EnableCapture: EnableCapture;
     /**
-     * 
+     * Whether data capture is currently functional.
      */
     CaptureStatus: CaptureStatus;
     /**
-     * 
+     * The percentage of requests being captured by your Endpoint.
      */
     CurrentSamplingPercentage: SamplingPercentage;
     /**
-     * 
+     * The Amazon S3 location being used to capture the data.
      */
     DestinationS3Uri: DestinationS3Uri;
     /**
-     * 
+     * The KMS key being used to encrypt the data in Amazon S3.
      */
     KmsKeyId: KmsKeyId;
   }
@@ -12812,7 +12822,7 @@ declare namespace SageMaker {
      */
     Set?: MetricSetSource;
     /**
-     * The name of the standard metric.
+     * The name of the standard metric.   For definitions of the standard metrics, see  Autopilot candidate metrics . 
      */
     StandardMetricName?: AutoMLMetricExtendedEnum;
   }
