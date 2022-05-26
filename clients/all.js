@@ -305,5 +305,6 @@ module.exports = {
   GameSparks: require('./gamesparks'),
   PinpointSMSVoiceV2: require('./pinpointsmsvoicev2'),
   Ivschat: require('./ivschat'),
-  ChimeSDKMediaPipelines: require('./chimesdkmediapipelines')
+  ChimeSDKMediaPipelines: require('./chimesdkmediapipelines'),
+  EMRServerless: require('./emrserverless')
 };

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1143.0-->
+<!--LATEST=2.1144.0-->
 <!--ENTRYINSERT-->
+
+## 2.1144.0
+* feature: EC2: C7g instances, powered by the latest generation AWS Graviton3 processors, provide the best price performance in Amazon EC2 for compute-intensive workloads.
+* feature: EMRServerless: This release adds support for Amazon EMR Serverless, a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive.
+* feature: ForecastService: Introduced a new field in Auto Predictor as Time Alignment Boundary. It helps in aligning the timestamps generated during Forecast exports
+* feature: Lightsail: Amazon Lightsail now supports the ability to configure a Lightsail Container Service to pull images from Amazon ECR private repositories in your account.
 
 ## 2.1143.0
 * feature: CloudFormation: Add a new parameter statusReason to DescribeStackSetOperation output for additional details

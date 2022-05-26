@@ -2181,6 +2181,10 @@ declare namespace Lightsail {
      * The publicly accessible URL of the container service. If no public endpoint is specified in the currentDeployment, this URL returns a 404 response.
      */
     url?: string;
+    /**
+     * An object that describes the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. For more information, see Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service in the Amazon Lightsail Developer Guide.
+     */
+    privateRegistryAccess?: PrivateRegistryAccess;
   }
   export interface ContainerServiceDeployment {
     /**
@@ -2216,6 +2220,22 @@ declare namespace Lightsail {
     publicEndpoint?: EndpointRequest;
   }
   export type ContainerServiceDeploymentState = "ACTIVATING"|"ACTIVE"|"INACTIVE"|"FAILED"|string;
+  export interface ContainerServiceECRImagePullerRole {
+    /**
+     * A Boolean value that indicates whether the role is activated.
+     */
+    isActive?: boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the role, if it is activated.
+     */
+    principalArn?: string;
+  }
+  export interface ContainerServiceECRImagePullerRoleRequest {
+    /**
+     * A Boolean value that indicates whether to activate the role.
+     */
+    isActive?: boolean;
+  }
   export interface ContainerServiceEndpoint {
     /**
      * The name of the container entry of the deployment that the endpoint configuration applies to.
@@ -2535,6 +2555,10 @@ declare namespace Lightsail {
      * An object that describes a deployment for the container service. A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.
      */
     deployment?: ContainerServiceDeploymentRequest;
+    /**
+     * An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. For more information, see Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service in the Amazon Lightsail Developer Guide.
+     */
+    privateRegistryAccess?: PrivateRegistryAccessRequest;
   }
   export interface CreateContainerServiceResult {
     /**
@@ -6064,6 +6088,18 @@ declare namespace Lightsail {
   export type PortList = Port[];
   export type PortMap = {[key: string]: ContainerServiceProtocol};
   export type PortState = "open"|"closed"|string;
+  export interface PrivateRegistryAccess {
+    /**
+     * An object that describes the activation status of the role that you can use to grant a Lightsail container service access to Amazon ECR private repositories. If the role is activated, the Amazon Resource Name (ARN) of the role is also listed.
+     */
+    ecrImagePullerRole?: ContainerServiceECRImagePullerRole;
+  }
+  export interface PrivateRegistryAccessRequest {
+    /**
+     * An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.
+     */
+    ecrImagePullerRole?: ContainerServiceECRImagePullerRoleRequest;
+  }
   export interface PutAlarmRequest {
     /**
      * The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.
@@ -6927,6 +6963,10 @@ declare namespace Lightsail {
      * The public domain names to use with the container service, such as example.com and www.example.com. You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service. If you don't specify public domain names, then you can use the default domain of the container service.  You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the CreateCertificate action to create a certificate for the public domain names you want to use with your container service.  You can specify public domain names using a string to array map as shown in the example later on this page.
      */
     publicDomainNames?: ContainerServicePublicDomains;
+    /**
+     * An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. For more information, see Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service in the Amazon Lightsail Developer Guide.
+     */
+    privateRegistryAccess?: PrivateRegistryAccessRequest;
   }
   export interface UpdateContainerServiceResult {
     /**

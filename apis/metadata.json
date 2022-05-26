@@ -1159,5 +1159,9 @@
   "chimesdkmediapipelines": {
     "prefix": "chime-sdk-media-pipelines",
     "name": "ChimeSDKMediaPipelines"
+  },
+  "emrserverless": {
+    "prefix": "emr-serverless",
+    "name": "EMRServerless"
   }
 }

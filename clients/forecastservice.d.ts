@@ -340,11 +340,11 @@ declare class ForecastService extends Service {
    */
   listForecasts(callback?: (err: AWSError, data: ForecastService.Types.ListForecastsResponse) => void): Request<ForecastService.Types.ListForecastsResponse, AWSError>;
   /**
-   * Returns a list of the monitoring evaluation results and predictor events collected by the monitor resource during different windows of time. For information about monitoring see Viewing Monitoring Results. For more information about retrieving monitoring results see Viewing Monitoring Results.
+   * Returns a list of the monitoring evaluation results and predictor events collected by the monitor resource during different windows of time. For information about monitoring see predictor-monitoring. For more information about retrieving monitoring results see Viewing Monitoring Results.
    */
   listMonitorEvaluations(params: ForecastService.Types.ListMonitorEvaluationsRequest, callback?: (err: AWSError, data: ForecastService.Types.ListMonitorEvaluationsResponse) => void): Request<ForecastService.Types.ListMonitorEvaluationsResponse, AWSError>;
   /**
-   * Returns a list of the monitoring evaluation results and predictor events collected by the monitor resource during different windows of time. For information about monitoring see Viewing Monitoring Results. For more information about retrieving monitoring results see Viewing Monitoring Results.
+   * Returns a list of the monitoring evaluation results and predictor events collected by the monitor resource during different windows of time. For information about monitoring see predictor-monitoring. For more information about retrieving monitoring results see Viewing Monitoring Results.
    */
   listMonitorEvaluations(callback?: (err: AWSError, data: ForecastService.Types.ListMonitorEvaluationsResponse) => void): Request<ForecastService.Types.ListMonitorEvaluationsResponse, AWSError>;
   /**
@@ -542,6 +542,10 @@ declare namespace ForecastService {
      * The configuration details for predictor monitoring. Provide a name for the monitor resource to enable predictor monitoring. Predictor monitoring allows you to see how your predictor's performance changes over time. For more information, see Predictor Monitoring.
      */
     MonitorConfig?: MonitorConfig;
+    /**
+     * The time boundary Forecast uses to align and aggregate any data that doesn't align with your forecast frequency. Provide the unit of time and the time boundary as a key value pair. For more information on specifying a time boundary, see Specifying a Time Boundary. If you don't provide a time boundary, Forecast uses a set of Default Time Boundaries.
+     */
+    TimeAlignmentBoundary?: TimeAlignmentBoundary;
   }
   export interface CreateAutoPredictorResponse {
     /**
@@ -969,6 +973,8 @@ declare namespace ForecastService {
   }
   export type DatasetType = "TARGET_TIME_SERIES"|"RELATED_TIME_SERIES"|"ITEM_METADATA"|string;
   export type Datasets = DatasetSummary[];
+  export type DayOfMonth = number;
+  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
   export interface DeleteDatasetGroupRequest {
     /**
      * The Amazon Resource Name (ARN) of the dataset group to delete.
@@ -1111,6 +1117,10 @@ declare namespace ForecastService {
      * A object with the Amazon Resource Name (ARN) and status of the monitor resource.
      */
     MonitorInfo?: MonitorInfo;
+    /**
+     * The time boundary Forecast uses when aggregating data.
+     */
+    TimeAlignmentBoundary?: TimeAlignmentBoundary;
   }
   export interface DescribeDatasetGroupRequest {
     /**
@@ -1936,6 +1946,7 @@ declare namespace ForecastService {
      */
     OptimizationMetric?: OptimizationMetric;
   }
+  export type Hour = number;
   export interface HyperParameterTuningJobConfig {
     /**
      * Specifies the ranges of valid values for the hyperparameters.
@@ -2336,6 +2347,7 @@ declare namespace ForecastService {
     LastModificationTime?: Timestamp;
   }
   export type Monitors = MonitorSummary[];
+  export type Month = "JANUARY"|"FEBRUARY"|"MARCH"|"APRIL"|"MAY"|"JUNE"|"JULY"|"AUGUST"|"SEPTEMBER"|"OCTOBER"|"NOVEMBER"|"DECEMBER"|string;
   export type Name = string;
   export type NextToken = string;
   export type OptimizationMetric = "WAPE"|"RMSE"|"AverageWeightedQuantileLoss"|"MASE"|"MAPE"|string;
@@ -2418,7 +2430,13 @@ declare namespace ForecastService {
   }
   export type PredictorExecutions = PredictorExecution[];
   export interface PredictorMonitorEvaluation {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to monitor.
+     */
     ResourceArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the monitor resource.
+     */
     MonitorArn?: Arn;
     /**
      * The timestamp that indicates when the monitor evaluation was started. 
@@ -2662,6 +2680,24 @@ declare namespace ForecastService {
     Message?: ErrorMessage;
   }
   export type TestWindows = WindowSummary[];
+  export interface TimeAlignmentBoundary {
+    /**
+     * The month to use for time alignment during aggregation. The month must be in uppercase.
+     */
+    Month?: Month;
+    /**
+     * The day of the month to use for time alignment during aggregation.
+     */
+    DayOfMonth?: DayOfMonth;
+    /**
+     * The day of week to use for time alignment during aggregation. The day must be in uppercase.
+     */
+    DayOfWeek?: DayOfWeek;
+    /**
+     * The hour of day to use for time alignment during aggregation.
+     */
+    Hour?: Hour;
+  }
   export type TimePointGranularity = "ALL"|"SPECIFIC"|string;
   export type TimeSeriesGranularity = "ALL"|"SPECIFIC"|string;
   export type TimeZone = string;

@@ -306,6 +306,7 @@ export abstract class ConfigurationServicePlaceholders {
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
   ivschat?: AWS.Ivschat.Types.ClientConfiguration;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
+  emrserverless?: AWS.EMRServerless.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -614,4 +615,5 @@ export interface ConfigurationServiceApiVersions {
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
   ivschat?: AWS.Ivschat.Types.apiVersion;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;
+  emrserverless?: AWS.EMRServerless.Types.apiVersion;
 }
