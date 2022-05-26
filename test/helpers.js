@@ -167,7 +167,7 @@
         };
       });
     }
-  }
+  };
 
   MockService = AWS.Service.defineService('mock', {
     ...mockServiceParams,

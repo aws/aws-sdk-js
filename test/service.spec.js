@@ -22,7 +22,7 @@
       awsQueryCompatible: {
         ...mapping
       }
-    }
+    };
 
     beforeEach(function(done) {
       let CustomService = MockServiceFromApi(api);
