@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "AwsQueryCompatible",
+  "description": "Add awsQueryCompatible trait support to service"
+}
