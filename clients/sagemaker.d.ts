@@ -2271,11 +2271,11 @@ declare namespace SageMaker {
   export type AlgorithmSortBy = "Name"|"CreationTime"|string;
   export interface AlgorithmSpecification {
     /**
-     * The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see Algorithms Provided by Amazon SageMaker: Common Parameters. SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see Using Your Own Algorithms with Amazon SageMaker.
+     * The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for SageMaker built-in algorithms, see Docker Registry Paths and Example Code in the Amazon SageMaker developer guide. SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information about using your custom training container, see Using Your Own Algorithms with Amazon SageMaker.  You must specify either the algorithm name to the AlgorithmName parameter or the image URI of the algorithm container to the TrainingImage parameter. For more information, see the note in the AlgorithmName parameter description. 
      */
     TrainingImage?: AlgorithmImage;
     /**
-     * The name of the algorithm resource to use for the training job. This must be an algorithm resource that you created or subscribe to on Amazon Web Services Marketplace. If you specify a value for this parameter, you can't specify a value for TrainingImage.
+     * The name of the algorithm resource to use for the training job. This must be an algorithm resource that you created or subscribe to on Amazon Web Services Marketplace.  You must specify either the algorithm name to the AlgorithmName parameter or the image URI of the algorithm container to the TrainingImage parameter. Note that the AlgorithmName parameter is mutually exclusive with the TrainingImage parameter. If you specify a value for the AlgorithmName parameter, you can't specify a value for TrainingImage, and vice versa. If you specify values for both parameters, the training job might break; if you don't specify any value for both parameters, the training job might raise a null error. 
      */
     AlgorithmName?: ArnOrName;
     TrainingInputMode: TrainingInputMode;
@@ -2421,7 +2421,7 @@ declare namespace SageMaker {
   export type AppImageConfigList = AppImageConfigDetails[];
   export type AppImageConfigName = string;
   export type AppImageConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
-  export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|string;
+  export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|string;
   export type AppList = AppDetails[];
   export type AppManaged = boolean;
   export type AppName = string;
@@ -4565,6 +4565,10 @@ declare namespace SageMaker {
      * The platform identifier of the notebook instance runtime environment.
      */
     PlatformIdentifier?: PlatformIdentifier;
+    /**
+     * Information on the IMDS configuration of the notebook instance
+     */
+    InstanceMetadataServiceConfiguration?: InstanceMetadataServiceConfiguration;
   }
   export interface CreateNotebookInstanceLifecycleConfigInput {
     /**
@@ -7545,6 +7549,10 @@ declare namespace SageMaker {
      * The platform identifier of the notebook instance runtime environment.
      */
     PlatformIdentifier?: PlatformIdentifier;
+    /**
+     * Information on the IMDS configuration of the notebook instance
+     */
+    InstanceMetadataServiceConfiguration?: InstanceMetadataServiceConfiguration;
   }
   export interface DescribePipelineDefinitionForExecutionRequest {
     /**
@@ -9920,6 +9928,12 @@ declare namespace SageMaker {
   export type InputDataConfig = Channel[];
   export type InputMode = "Pipe"|"File"|string;
   export type InputModes = TrainingInputMode[];
+  export interface InstanceMetadataServiceConfiguration {
+    /**
+     * Indicates the minimum IMDS version that the notebook instance supports. When passed as part of CreateNotebookInstance, if no value is selected, then it defaults to IMDSv1. This means that both IMDSv1 and IMDSv2 are supported. If passed as part of UpdateNotebookInstance, there is no default.
+     */
+    MinimumInstanceMetadataServiceVersion: MinimumInstanceMetadataServiceVersion;
+  }
   export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|string;
   export type Integer = number;
   export interface IntegerParameterRange {
@@ -12855,6 +12869,7 @@ declare namespace SageMaker {
      */
     S3Uri: S3Uri;
   }
+  export type MinimumInstanceMetadataServiceVersion = string;
   export type ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval"|string;
   export type ModelArn = string;
   export interface ModelArtifacts {
@@ -17320,6 +17335,10 @@ declare namespace SageMaker {
      * Whether root access is enabled or disabled for users of the notebook instance. The default value is Enabled.  If you set this to Disabled, users don't have root access on the notebook instance, but lifecycle configuration scripts still run with root permissions. 
      */
     RootAccess?: RootAccess;
+    /**
+     * Information on the IMDS configuration of the notebook instance
+     */
+    InstanceMetadataServiceConfiguration?: InstanceMetadataServiceConfiguration;
   }
   export interface UpdateNotebookInstanceLifecycleConfigInput {
     /**
