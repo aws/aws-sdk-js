@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "util",
+  "description": "set the X-Amzn-Trace-Id header if lambda function name and trace id environmental variables are set"
+}
