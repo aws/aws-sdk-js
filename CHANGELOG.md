@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1145.0-->
+<!--LATEST=2.1146.0-->
 <!--ENTRYINSERT-->
+
+## 2.1146.0
+* feature: CognitoIdentityServiceProvider: Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).
+* feature: Drs: Changed existing APIs and added new APIs to accommodate using multiple AWS accounts with AWS Elastic Disaster Recovery.
+* feature: IoTSiteWise: This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription.
+* feature: LookoutMetrics: Adding backtest mode to detectors using the Cloudwatch data source.
+* feature: SageMaker: Amazon SageMaker Notebook Instances now support Jupyter Lab 3.
+* feature: TranscribeService: Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.
 
 ## 2.1145.0
 * feature: Appflow: Adding the following features/changes: Parquet output that preserves typing from the source connector, Failed executions threshold before deactivation for scheduled flows, increasing max size of access and refresh token from 2048 to 4096

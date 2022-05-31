@@ -589,6 +589,10 @@ declare namespace LookoutMetrics {
      * An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.
      */
     RoleArn?: Arn;
+    /**
+     * Settings for backtest mode.
+     */
+    BackTestConfiguration?: BackTestConfiguration;
   }
   export type ColumnName = string;
   export type Confidence = "HIGH"|"LOW"|"NONE"|string;

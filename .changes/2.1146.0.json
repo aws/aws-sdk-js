@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword)."
+    },
+    {
+        "type": "feature",
+        "category": "Drs",
+        "description": "Changed existing APIs and added new APIs to accommodate using multiple AWS accounts with AWS Elastic Disaster Recovery."
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutMetrics",
+        "description": "Adding backtest mode to detectors using the Cloudwatch data source."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Notebook Instances now support Jupyter Lab 3."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode."
+    }
+]

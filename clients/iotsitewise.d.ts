@@ -1007,6 +1007,10 @@ declare namespace IoTSiteWise {
      * A list of asset hierarchies that each contain a hierarchyId. A hierarchy specifies allowed parent/child asset relationships.
      */
     hierarchies: AssetHierarchies;
+    /**
+     * A description for the asset.
+     */
+    description?: Description;
   }
   export interface AssociateAssetsRequest {
     /**
@@ -1078,6 +1082,10 @@ declare namespace IoTSiteWise {
      * A list of asset hierarchies that each contain a hierarchyId. A hierarchy specifies allowed parent/child asset relationships.
      */
     hierarchies: AssetHierarchies;
+    /**
+     * A description for the asset.
+     */
+    description?: Description;
   }
   export interface Attribute {
     /**
@@ -1643,6 +1651,10 @@ declare namespace IoTSiteWise {
      * A list of key-value pairs that contain metadata for the asset. For more information, see Tagging your IoT SiteWise resources in the IoT SiteWise User Guide.
      */
     tags?: TagMap;
+    /**
+     * A description for the asset.
+     */
+    assetDescription?: Description;
   }
   export interface CreateAssetResponse {
     /**
@@ -2120,6 +2132,10 @@ declare namespace IoTSiteWise {
      * The current status of the asset, which contains a state and any error message.
      */
     assetStatus: AssetStatus;
+    /**
+     * A description for the asset.
+     */
+    assetDescription?: Description;
   }
   export interface DescribeDashboardRequest {
     /**
@@ -2357,7 +2373,7 @@ declare namespace IoTSiteWise {
   }
   export interface DescribeStorageConfigurationResponse {
     /**
-     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the cold tier. The cold tier is a customer-managed Amazon S3 bucket.  
+     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.  
      */
     storageType: StorageType;
     /**
@@ -3424,7 +3440,7 @@ declare namespace IoTSiteWise {
   }
   export interface PutStorageConfigurationRequest {
     /**
-     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the cold tier. The cold tier is a customer-managed Amazon S3 bucket.  
+     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.  
      */
     storageType: StorageType;
     /**
@@ -3439,7 +3455,7 @@ declare namespace IoTSiteWise {
   }
   export interface PutStorageConfigurationResponse {
     /**
-     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the cold tier. The cold tier is a customer-managed Amazon S3 bucket.  
+     * The storage tier that you specified for your data. The storageType parameter can be one of the following values:    SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.    MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.  
      */
     storageType: StorageType;
     /**
@@ -3686,6 +3702,10 @@ declare namespace IoTSiteWise {
      * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
      */
     clientToken?: ClientToken;
+    /**
+     * A description for the asset.
+     */
+    assetDescription?: Description;
   }
   export interface UpdateAssetResponse {
     /**

@@ -12,6 +12,14 @@ declare class Drs extends Service {
   constructor(options?: Drs.Types.ClientConfiguration)
   config: Config & Drs.Types.ClientConfiguration;
   /**
+   * Create an extended source server in the target Account based on the source server in staging account.
+   */
+  createExtendedSourceServer(params: Drs.Types.CreateExtendedSourceServerRequest, callback?: (err: AWSError, data: Drs.Types.CreateExtendedSourceServerResponse) => void): Request<Drs.Types.CreateExtendedSourceServerResponse, AWSError>;
+  /**
+   * Create an extended source server in the target Account based on the source server in staging account.
+   */
+  createExtendedSourceServer(callback?: (err: AWSError, data: Drs.Types.CreateExtendedSourceServerResponse) => void): Request<Drs.Types.CreateExtendedSourceServerResponse, AWSError>;
+  /**
    * Creates a new ReplicationConfigurationTemplate.
    */
   createReplicationConfigurationTemplate(params: Drs.Types.CreateReplicationConfigurationTemplateRequest, callback?: (err: AWSError, data: Drs.Types.ReplicationConfigurationTemplate) => void): Request<Drs.Types.ReplicationConfigurationTemplate, AWSError>;
@@ -148,6 +156,22 @@ declare class Drs extends Service {
    */
   initializeService(callback?: (err: AWSError, data: Drs.Types.InitializeServiceResponse) => void): Request<Drs.Types.InitializeServiceResponse, AWSError>;
   /**
+   * Returns a list of source servers on a staging account that are extensible, which means that: a. The source server is not already extended into this Account. b. The source server on the Account we’re reading from is not an extension of another source server. 
+   */
+  listExtensibleSourceServers(params: Drs.Types.ListExtensibleSourceServersRequest, callback?: (err: AWSError, data: Drs.Types.ListExtensibleSourceServersResponse) => void): Request<Drs.Types.ListExtensibleSourceServersResponse, AWSError>;
+  /**
+   * Returns a list of source servers on a staging account that are extensible, which means that: a. The source server is not already extended into this Account. b. The source server on the Account we’re reading from is not an extension of another source server. 
+   */
+  listExtensibleSourceServers(callback?: (err: AWSError, data: Drs.Types.ListExtensibleSourceServersResponse) => void): Request<Drs.Types.ListExtensibleSourceServersResponse, AWSError>;
+  /**
+   * Returns an array of staging accounts for existing extended source servers.
+   */
+  listStagingAccounts(params: Drs.Types.ListStagingAccountsRequest, callback?: (err: AWSError, data: Drs.Types.ListStagingAccountsResponse) => void): Request<Drs.Types.ListStagingAccountsResponse, AWSError>;
+  /**
+   * Returns an array of staging accounts for existing extended source servers.
+   */
+  listStagingAccounts(callback?: (err: AWSError, data: Drs.Types.ListStagingAccountsResponse) => void): Request<Drs.Types.ListStagingAccountsResponse, AWSError>;
+  /**
    * List all tags for your Elastic Disaster Recovery resources.
    */
   listTagsForResource(params: Drs.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Drs.Types.ListTagsForResourceResponse) => void): Request<Drs.Types.ListTagsForResourceResponse, AWSError>;
@@ -246,6 +270,15 @@ declare class Drs extends Service {
 }
 declare namespace Drs {
   export type ARN = string;
+  export interface Account {
+    /**
+     * Account ID of AWS account.
+     */
+    accountID?: AccountID;
+  }
+  export type AccountID = string;
+  export type AccountIDs = AccountID[];
+  export type Accounts = Account[];
   export type Boolean = boolean;
   export type BoundedString = string;
   export interface CPU {
@@ -258,7 +291,46 @@ declare namespace Drs {
      */
     modelName?: BoundedString;
   }
+  export type ConversionMap = {[key: string]: ebsSnapshot};
+  export interface ConversionProperties {
+    /**
+     * The timestamp of when the snapshot being converted was taken
+     */
+    dataTimestamp?: LargeBoundedString;
+    /**
+     * Whether the volume being converted uses UEFI or not
+     */
+    forceUefi?: Boolean;
+    /**
+     * The root volume name of a conversion job
+     */
+    rootVolumeName?: LargeBoundedString;
+    /**
+     * A mapping between the volumes being converted and the converted snapshot ids
+     */
+    volumeToConversionMap?: VolumeToConversionMap;
+    /**
+     * A mapping between the volumes and their sizes
+     */
+    volumeToVolumeSize?: VolumeToSizeMap;
+  }
   export type Cpus = CPU[];
+  export interface CreateExtendedSourceServerRequest {
+    /**
+     * This defines the ARN of the source server in staging Account based on which you want to create an extended source server.
+     */
+    sourceServerArn: SourceServerARN;
+    /**
+     * A list of tags associated with the extended source server.
+     */
+    tags?: TagsMap;
+  }
+  export interface CreateExtendedSourceServerResponse {
+    /**
+     * Created extended source server.
+     */
+    sourceServer?: SourceServer;
+  }
   export interface CreateReplicationConfigurationTemplateRequest {
     /**
      * Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
@@ -463,7 +535,7 @@ declare namespace Drs {
     /**
      * A set of filters by which to return Jobs.
      */
-    filters: DescribeJobsRequestFilters;
+    filters?: DescribeJobsRequestFilters;
     /**
      * Maximum number of Jobs to retrieve.
      */
@@ -503,7 +575,7 @@ declare namespace Drs {
     /**
      * A set of filters by which to return Recovery Instances.
      */
-    filters: DescribeRecoveryInstancesRequestFilters;
+    filters?: DescribeRecoveryInstancesRequestFilters;
     /**
      * Maximum number of Recovery Instances to retrieve.
      */
@@ -587,7 +659,7 @@ declare namespace Drs {
     /**
      * The IDs of the Replication Configuration Templates to retrieve. An empty list means all Replication Configuration Templates.
      */
-    replicationConfigurationTemplateIDs: ReplicationConfigurationTemplateIDs;
+    replicationConfigurationTemplateIDs?: ReplicationConfigurationTemplateIDs;
   }
   export interface DescribeReplicationConfigurationTemplatesResponse {
     /**
@@ -603,7 +675,7 @@ declare namespace Drs {
     /**
      * A set of filters by which to return Source Servers.
      */
-    filters: DescribeSourceServersRequestFilters;
+    filters?: DescribeSourceServersRequestFilters;
     /**
      * Maximum number of Source Servers to retrieve.
      */
@@ -622,6 +694,10 @@ declare namespace Drs {
      * An array of Source Servers IDs that should be returned. An empty array means all Source Servers.
      */
     sourceServerIDs?: DescribeSourceServersRequestFiltersIDs;
+    /**
+     * An array of staging account IDs that extended source servers belong to. An empty array means all source servers will be shown.
+     */
+    stagingAccountIDs?: AccountIDs;
   }
   export type DescribeSourceServersRequestFiltersIDs = SourceServerID[];
   export interface DescribeSourceServersResponse {
@@ -662,6 +738,7 @@ declare namespace Drs {
   export type EC2InstanceType = string;
   export type EbsSnapshotsList = ebsSnapshot[];
   export type EbsVolumeID = string;
+  export type ExtensionStatus = "EXTENDED"|"EXTENSION_ERROR"|"NOT_EXTENDED"|string;
   export type FailbackReplicationError = "AGENT_NOT_SEEN"|"FAILBACK_CLIENT_NOT_SEEN"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"|"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|string;
   export type FailbackState = "FAILBACK_NOT_STARTED"|"FAILBACK_IN_PROGRESS"|"FAILBACK_READY_FOR_LAUNCH"|"FAILBACK_COMPLETED"|"FAILBACK_ERROR"|string;
   export interface GetFailbackReplicationConfigurationRequest {
@@ -724,7 +801,7 @@ declare namespace Drs {
   }
   export interface InitializeServiceResponse {
   }
-  export type InitiatedBy = "START_RECOVERY"|"START_DRILL"|"FAILBACK"|"DIAGNOSTIC"|"TERMINATE_RECOVERY_INSTANCES"|string;
+  export type InitiatedBy = "START_RECOVERY"|"START_DRILL"|"FAILBACK"|"DIAGNOSTIC"|"TERMINATE_RECOVERY_INSTANCES"|"TARGET_ACCOUNT"|string;
   export interface Job {
     /**
      * The ARN of a Job.
@@ -781,6 +858,10 @@ declare namespace Drs {
   export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"USING_PREVIOUS_SNAPSHOT_FAILED"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END"|string;
   export interface JobLogEventData {
     /**
+     * Properties of a conversion job
+     */
+    conversionProperties?: ConversionProperties;
+    /**
      * The ID of a conversion server.
      */
     conversionServerID?: EC2InstanceID;
@@ -799,7 +880,7 @@ declare namespace Drs {
   }
   export type JobLogs = JobLog[];
   export type JobStatus = "PENDING"|"STARTED"|"COMPLETED"|string;
-  export type JobType = "LAUNCH"|"TERMINATE"|string;
+  export type JobType = "LAUNCH"|"TERMINATE"|"CREATE_CONVERTED_SNAPSHOT"|string;
   export type JobsList = Job[];
   export type LargeBoundedString = string;
   export type LastLaunchResult = "NOT_STARTED"|"PENDING"|"SUCCEEDED"|"FAILED"|string;
@@ -888,6 +969,51 @@ declare namespace Drs {
      */
     type?: LastLaunchType;
   }
+  export interface ListExtensibleSourceServersRequest {
+    /**
+     * The maximum number of extensible source servers to retrieve.
+     */
+    maxResults?: MaxResultsReplicatingSourceServers;
+    /**
+     * The token of the next extensible source server to retrieve.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The Id of the staging Account to retrieve extensible source servers from.
+     */
+    stagingAccountID: AccountID;
+  }
+  export interface ListExtensibleSourceServersResponse {
+    /**
+     * A list of source servers on a staging Account that are extensible.
+     */
+    items?: StagingSourceServersList;
+    /**
+     * The token of the next extensible source server to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListStagingAccountsRequest {
+    /**
+     * The maximum number of staging Accounts to retrieve.
+     */
+    maxResults?: ListStagingAccountsRequestMaxResultsInteger;
+    /**
+     * The token of the next staging Account to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
+  export type ListStagingAccountsRequestMaxResultsInteger = number;
+  export interface ListStagingAccountsResponse {
+    /**
+     * An array of staging AWS Accounts.
+     */
+    accounts?: Accounts;
+    /**
+     * The token of the next staging Account to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource whose tags should be returned.
@@ -900,6 +1026,7 @@ declare namespace Drs {
      */
     tags?: TagsMap;
   }
+  export type MaxResultsReplicatingSourceServers = number;
   export interface NetworkInterface {
     /**
      * Network interface IPs.
@@ -1441,13 +1568,51 @@ declare namespace Drs {
      */
     sourceServerID?: SourceServerID;
     /**
+     * The staging area of the source server.
+     */
+    stagingArea?: StagingArea;
+    /**
      * The tags associated with the Source Server.
      */
     tags?: TagsMap;
   }
+  export type SourceServerARN = string;
   export type SourceServerID = string;
   export type SourceServerIDs = SourceServerID[];
   export type SourceServersList = SourceServer[];
+  export interface StagingArea {
+    /**
+     * Shows an error message that occurred when DRS tried to access the staging source server. In this case StagingArea$status will have value EXTENSION_ERROR
+     */
+    errorMessage?: LargeBoundedString;
+    /**
+     * Account ID of the account to which source server belongs. If this source server is extended - shows Account ID of staging source server.
+     */
+    stagingAccountID?: AccountID;
+    /**
+     * Arn of the staging source server if this source server is extended
+     */
+    stagingSourceServerArn?: ARN;
+    /**
+     * Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is a source server that is replicating in the current account. (b) EXTENDED - Source server is extended from a staging source server. In this case, the value of stagingSourceServerArn is pointing to the Arn of the source server in the staging account. (c) EXTENSION_ERROR - Some issue occurred when accessing staging source server. In this case, errorMessage field will contain an error message that explains what happened.
+     */
+    status?: ExtensionStatus;
+  }
+  export interface StagingSourceServer {
+    /**
+     * The ARN of the source server.
+     */
+    arn?: SourceServerARN;
+    /**
+     * Hostname of staging source server.
+     */
+    hostname?: BoundedString;
+    /**
+     * A list of tags associated with the staging source server.
+     */
+    tags?: TagsMap;
+  }
+  export type StagingSourceServersList = StagingSourceServer[];
   export interface StartFailbackLaunchRequest {
     /**
      * The IDs of the Recovery Instance whose failback launch we want to request.
@@ -1717,6 +1882,8 @@ declare namespace Drs {
      */
     useDedicatedReplicationServer?: Boolean;
   }
+  export type VolumeToConversionMap = {[key: string]: ConversionMap};
+  export type VolumeToSizeMap = {[key: string]: PositiveInteger};
   export type ebsSnapshot = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
