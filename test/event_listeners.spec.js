@@ -435,6 +435,58 @@
           });
         });
       });
+
+      describe('adds X-Amzn-Trace-Id header', function() {
+        if (AWS.util.isNode()) {
+          var originalEnv = process.env;
+          beforeEach(function() {
+            process.env = {};
+          });
+
+          afterEach(function() {
+            process.env = originalEnv;
+          });
+
+          it('when AWS_LAMBDA_FUNCTION_NAME and _X_AMZN_TRACE_ID env exists', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              'AWS_LAMBDA_FUNCTION_NAME': 'some-function',
+              '_X_AMZN_TRACE_ID': 'Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2',
+            };
+            var request = sendRequest();
+            request.send(function (err) {
+              expect(err).to.equal(null);
+              expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal('Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2');
+            });
+          });
+
+          it('should not set trace id header when AWS_LAMBDA_FUNCTION_NAME is not set', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              '_X_AMZN_TRACE_ID': 'Root=1-5759e988-bd862e3fe1be46a994272793;Parent=53995c3f42cd8ad8;Sampled=1;lineage=a87bd80c:0,68fd508a:5,c512fbe3:2',
+            };
+            var request = sendRequest();
+            request.send(function (err) {
+              expect(err).to.equal(null);
+              expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal(undefined);
+            });
+          });
+
+          it('should not set trace id header when the header is already set', function () {
+            helpers.mockHttpResponse(200, {}, '');
+            process.env = {
+              'AWS_LAMBDA_FUNCTION_NAME': 'some-function',
+              '_X_AMZN_TRACE_ID': 'EnvValue'
+            };
+            request = makeRequest();
+            request.on('build', function(req) {
+              req.httpRequest.headers['X-Amzn-Trace-Id'] = 'OriginalValue';
+            });
+            response = request.send(function() {});
+            expect(request.httpRequest.headers['X-Amzn-Trace-Id']).to.equal('OriginalValue');
+          });
+        }
+      });
     });
 
     describe('restart', function() {
