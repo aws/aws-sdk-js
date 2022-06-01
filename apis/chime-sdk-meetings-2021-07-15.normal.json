@@ -54,6 +54,38 @@
       ],
       "documentation": "<p>Creates up to 100 attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
+    "BatchUpdateAttendeeCapabilitiesExcept": {
+      "name": "BatchUpdateAttendeeCapabilitiesExcept",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/meetings/{MeetingId}/attendees/capabilities?operation=batch-update-except",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchUpdateAttendeeCapabilitiesExceptRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates <code>AttendeeCapabilities</code> except the capabilities listed in an <code>ExcludedAttendeeIds</code> table.</p>"
+    },
     "CreateAttendee": {
       "name": "CreateAttendee",
       "http": {
@@ -431,6 +463,40 @@
         }
       ],
       "documentation": "<p>Stops transcription for the specified <code>meetingId</code>.</p>"
+    },
+    "UpdateAttendeeCapabilities": {
+      "name": "UpdateAttendeeCapabilities",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/meetings/{MeetingId}/attendees/{AttendeeId}/capabilities"
+      },
+      "input": {
+        "shape": "UpdateAttendeeCapabilitiesRequest"
+      },
+      "output": {
+        "shape": "UpdateAttendeeCapabilitiesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>The capabilties that you want to update.</p>"
     }
   },
   "shapes": {
@@ -455,9 +521,57 @@
         "JoinToken": {
           "shape": "JoinTokenString",
           "documentation": "<p>The join token used by the Amazon Chime SDK attendee.</p>"
+        },
+        "Capabilities": {
+          "shape": "AttendeeCapabilities",
+          "documentation": "<p>The capabilities (audio, video, or content) assigned to an attendee.</p>"
         }
       },
       "documentation": "<p>An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code>. The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends, or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting. </p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>"
+    },
+    "AttendeeCapabilities": {
+      "type": "structure",
+      "required": [
+        "Audio",
+        "Video",
+        "Content"
+      ],
+      "members": {
+        "Audio": {
+          "shape": "MediaCapabilities",
+          "documentation": "<p>The audio capability assigned to an attendee.</p>"
+        },
+        "Video": {
+          "shape": "MediaCapabilities",
+          "documentation": "<p>The video capability assigned to an attendee.</p>"
+        },
+        "Content": {
+          "shape": "MediaCapabilities",
+          "documentation": "<p>The content capability assigned to an attendee.</p>"
+        }
+      },
+      "documentation": "<p>The media capabilities of an attendee, including audio, video and content. </p>"
+    },
+    "AttendeeIdItem": {
+      "type": "structure",
+      "required": [
+        "AttendeeId"
+      ],
+      "members": {
+        "AttendeeId": {
+          "shape": "GuidString",
+          "documentation": "<p>A list of one or more attendee IDs.</p>"
+        }
+      },
+      "documentation": "<p>A structure that contains one or more attendee IDs.</p>"
+    },
+    "AttendeeIdsList": {
+      "type": "list",
+      "member": {
+        "shape": "AttendeeIdItem"
+      },
+      "max": 250,
+      "min": 1
     },
     "AttendeeList": {
       "type": "list",
@@ -513,6 +627,30 @@
         }
       }
     },
+    "BatchUpdateAttendeeCapabilitiesExceptRequest": {
+      "type": "structure",
+      "required": [
+        "MeetingId",
+        "ExcludedAttendeeIds",
+        "Capabilities"
+      ],
+      "members": {
+        "MeetingId": {
+          "shape": "GuidString",
+          "documentation": "<p>The ID of the meeting associated with the update request.</p>",
+          "location": "uri",
+          "locationName": "MeetingId"
+        },
+        "ExcludedAttendeeIds": {
+          "shape": "AttendeeIdsList",
+          "documentation": "<p>The <code>AttendeeIDs</code> that you want to exclude from one or more capabilities.</p>"
+        },
+        "Capabilities": {
+          "shape": "AttendeeCapabilities",
+          "documentation": "<p>The capabilities (<code>audio</code>, <code>video</code>, or <code>content</code>) that you want to update.</p>"
+        }
+      }
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -557,6 +695,10 @@
         "ExternalUserId": {
           "shape": "ExternalUserId",
           "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.</p>"
+        },
+        "Capabilities": {
+          "shape": "AttendeeCapabilities",
+          "documentation": "<p>The capabilities (<code>audio</code>, <code>video</code>, or <code>content</code>) that you want to grant an attendee. If you don't specify capabilities, all users have send and receive capabilities on all media channels by default.</p>"
         }
       }
     },
@@ -569,6 +711,10 @@
         "ExternalUserId": {
           "shape": "ExternalUserId",
           "documentation": "<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.</p>"
+        },
+        "Capabilities": {
+          "shape": "AttendeeCapabilities",
+          "documentation": "<p>A list of one or more capabilities.</p>"
         }
       },
       "documentation": "<p>The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee action.</p>"
@@ -953,6 +1099,15 @@
         }
       }
     },
+    "MediaCapabilities": {
+      "type": "string",
+      "enum": [
+        "SendReceive",
+        "Send",
+        "Receive",
+        "None"
+      ]
+    },
     "MediaPlacement": {
       "type": "structure",
       "members": {
@@ -1247,6 +1402,40 @@
         }
       },
       "documentation": "<p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>"
+    },
+    "UpdateAttendeeCapabilitiesRequest": {
+      "type": "structure",
+      "required": [
+        "MeetingId",
+        "AttendeeId",
+        "Capabilities"
+      ],
+      "members": {
+        "MeetingId": {
+          "shape": "GuidString",
+          "documentation": "<p>The ID of the meeting associated with the update request.</p>",
+          "location": "uri",
+          "locationName": "MeetingId"
+        },
+        "AttendeeId": {
+          "shape": "GuidString",
+          "documentation": "<p>The ID of the attendee associated with the update request.</p>",
+          "location": "uri",
+          "locationName": "AttendeeId"
+        },
+        "Capabilities": {
+          "shape": "AttendeeCapabilities",
+          "documentation": "<p>The capabilties that you want to update.</p>"
+        }
+      }
+    },
+    "UpdateAttendeeCapabilitiesResponse": {
+      "type": "structure",
+      "members": {
+        "Attendee": {
+          "shape": "Attendee"
+        }
+      }
     }
   },
   "documentation": "<p>The Amazon Chime SDK meetings APIs in this section allow software developers to create Amazon Chime SDK meetings, set the AWS Regions for meetings, create and manage users, and send and receive meeting notifications. For more information about the meeting APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html\">Amazon Chime SDK meetings</a>.</p>"

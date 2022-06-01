@@ -29,6 +29,14 @@ declare class Route53 extends Service {
    */
   associateVPCWithHostedZone(callback?: (err: AWSError, data: Route53.Types.AssociateVPCWithHostedZoneResponse) => void): Request<Route53.Types.AssociateVPCWithHostedZoneResponse, AWSError>;
   /**
+   * Creates, changes, or deletes CIDR blocks within a collection. Contains authoritative IP information mapping blocks to one or multiple locations. A change request can update multiple locations in a collection at a time, which is helpful if you want to move one or more CIDR blocks from one location to another in one transaction, without downtime.   Limits  The max number of CIDR blocks included in the request is 1000. As a result, big updates require multiple API calls.   PUT and DELETE_IF_EXISTS  Use ChangeCidrCollection to perform the following actions:    PUT: Create a CIDR block within the specified collection.     DELETE_IF_EXISTS: Delete an existing CIDR block from the collection.  
+   */
+  changeCidrCollection(params: Route53.Types.ChangeCidrCollectionRequest, callback?: (err: AWSError, data: Route53.Types.ChangeCidrCollectionResponse) => void): Request<Route53.Types.ChangeCidrCollectionResponse, AWSError>;
+  /**
+   * Creates, changes, or deletes CIDR blocks within a collection. Contains authoritative IP information mapping blocks to one or multiple locations. A change request can update multiple locations in a collection at a time, which is helpful if you want to move one or more CIDR blocks from one location to another in one transaction, without downtime.   Limits  The max number of CIDR blocks included in the request is 1000. As a result, big updates require multiple API calls.   PUT and DELETE_IF_EXISTS  Use ChangeCidrCollection to perform the following actions:    PUT: Create a CIDR block within the specified collection.     DELETE_IF_EXISTS: Delete an existing CIDR block from the collection.  
+   */
+  changeCidrCollection(callback?: (err: AWSError, data: Route53.Types.ChangeCidrCollectionResponse) => void): Request<Route53.Types.ChangeCidrCollectionResponse, AWSError>;
+  /**
    * Creates, changes, or deletes a resource record set, which contains authoritative DNS information for a specified domain name or subdomain name. For example, you can use ChangeResourceRecordSets to create a resource record set that routes traffic for test.example.com to a web server that has an IP address of 192.0.2.44.  Deleting Resource Record Sets  To delete a resource record set, you must specify all the same values that you specified when you created it.  Change Batches and Transactional Changes  The request body must include a document with a ChangeResourceRecordSetsRequest element. The request body contains a list of change items, known as a change batch. Change batches are considered transactional changes. Route 53 validates the changes in the request and then either makes all or none of the changes in the change batch request. This ensures that DNS routing isn't adversely affected by partial changes to the resource record sets in a hosted zone.  For example, suppose a change batch request contains two changes: it deletes the CNAME resource record set for www.example.com and creates an alias resource record set for www.example.com. If validation for both records succeeds, Route 53 deletes the first resource record set and creates the second resource record set in a single operation. If validation for either the DELETE or the CREATE action fails, then the request is canceled, and the original CNAME record continues to exist.  If you try to delete the same resource record set more than once in a single change batch, Route 53 returns an InvalidChangeBatch error.   Traffic Flow  To create resource record sets for complex routing configurations, use either the traffic flow visual editor in the Route 53 console or the API actions for traffic policies and traffic policy instances. Save the configuration as a traffic policy, then associate the traffic policy with one or more domain names (such as example.com) or subdomain names (such as www.example.com), in the same hosted zone or in multiple hosted zones. You can roll back the updates if the new configuration isn't performing as expected. For more information, see Using Traffic Flow to Route DNS Traffic in the Amazon Route 53 Developer Guide.  Create, Delete, and Upsert  Use ChangeResourceRecordsSetsRequest to perform the following actions:    CREATE: Creates a resource record set that has the specified values.    DELETE: Deletes an existing resource record set that has the specified values.    UPSERT: If a resource set exists Route 53 updates it with the values in the request.     Syntaxes for Creating, Updating, and Deleting Resource Record Sets  The syntax for a request depends on the type of resource record set that you want to create, delete, or update, such as weighted, alias, or failover. The XML elements in your request must appear in the order listed in the syntax.  For an example for each type of resource record set, see "Examples." Don't refer to the syntax in the "Parameter Syntax" section, which includes all of the elements for every kind of resource record set that you can create, delete, or update by using ChangeResourceRecordSets.   Change Propagation to Route 53 DNS Servers  When you submit a ChangeResourceRecordSets request, Route 53 propagates your changes to all of the Route 53 authoritative DNS servers. While your changes are propagating, GetChange returns a status of PENDING. When propagation is complete, GetChange returns a status of INSYNC. Changes generally propagate to all Route 53 name servers within 60 seconds. For more information, see GetChange.  Limits on ChangeResourceRecordSets Requests  For information about the limits on a ChangeResourceRecordSets request, see Limits in the Amazon Route 53 Developer Guide.
    */
   changeResourceRecordSets(params: Route53.Types.ChangeResourceRecordSetsRequest, callback?: (err: AWSError, data: Route53.Types.ChangeResourceRecordSetsResponse) => void): Request<Route53.Types.ChangeResourceRecordSetsResponse, AWSError>;
@@ -45,6 +53,14 @@ declare class Route53 extends Service {
    */
   changeTagsForResource(callback?: (err: AWSError, data: Route53.Types.ChangeTagsForResourceResponse) => void): Request<Route53.Types.ChangeTagsForResourceResponse, AWSError>;
   /**
+   * Creates a CIDR collection in the current Amazon Web Services account.
+   */
+  createCidrCollection(params: Route53.Types.CreateCidrCollectionRequest, callback?: (err: AWSError, data: Route53.Types.CreateCidrCollectionResponse) => void): Request<Route53.Types.CreateCidrCollectionResponse, AWSError>;
+  /**
+   * Creates a CIDR collection in the current Amazon Web Services account.
+   */
+  createCidrCollection(callback?: (err: AWSError, data: Route53.Types.CreateCidrCollectionResponse) => void): Request<Route53.Types.CreateCidrCollectionResponse, AWSError>;
+  /**
    * Creates a new health check. For information about adding health checks to resource record sets, see HealthCheckId in ChangeResourceRecordSets.   ELB Load Balancers  If you're registering EC2 instances with an Elastic Load Balancing (ELB) load balancer, do not create Amazon Route 53 health checks for the EC2 instances. When you register an EC2 instance with a load balancer, you configure settings for an ELB health check, which performs a similar function to a Route 53 health check.  Private Hosted Zones  You can associate health checks with failover resource record sets in a private hosted zone. Note the following:   Route 53 health checkers are outside the VPC. To check the health of an endpoint within a VPC by IP address, you must assign a public IP address to the instance in the VPC.   You can configure a health checker to check the health of an external resource that the instance relies on, such as a database server.   You can create a CloudWatch metric, associate an alarm with the metric, and then create a health check that is based on the state of the alarm. For example, you might create a CloudWatch metric that checks the status of the Amazon EC2 StatusCheckFailed metric, add an alarm to the metric, and then create a health check that is based on the state of the alarm. For information about creating CloudWatch metrics and alarms by using the CloudWatch console, see the Amazon CloudWatch User Guide.  
    */
   createHealthCheck(params: Route53.Types.CreateHealthCheckRequest, callback?: (err: AWSError, data: Route53.Types.CreateHealthCheckResponse) => void): Request<Route53.Types.CreateHealthCheckResponse, AWSError>;
@@ -53,11 +69,11 @@ declare class Route53 extends Service {
    */
   createHealthCheck(callback?: (err: AWSError, data: Route53.Types.CreateHealthCheckResponse) => void): Request<Route53.Types.CreateHealthCheckResponse, AWSError>;
   /**
-   * Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs).   You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.  For more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You can't create a hosted zone for a top-level domain (TLD) such as .com.   For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide. If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the DelegationSetId element.   If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see Migrating DNS Service for an Existing Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide.    When you submit a CreateHostedZone request, the initial status of the hosted zone is PENDING. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to INSYNC. The CreateHostedZone request requires the caller to have an ec2:DescribeVpcs permission.  When creating private hosted zones, the Amazon VPC must belong to the same partition where the hosted zone is created. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition. The following are the supported partitions:    aws - Amazon Web Services Regions    aws-cn - China Regions    aws-us-gov - Amazon Web Services GovCloud (US) Region   For more information, see Access Management in the Amazon Web Services General Reference. 
+   * Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs).   You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.  For more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You can't create a hosted zone for a top-level domain (TLD) such as .com.   For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide. If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the DelegationSetId element.   If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see Migrating DNS Service for an Existing Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide.    When you submit a CreateHostedZone request, the initial status of the hosted zone is PENDING. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to INSYNC. The CreateHostedZone request requires the caller to have an ec2:DescribeVpcs permission.  When creating private hosted zones, the Amazon VPC must belong to the same partition where the hosted zone is created. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition. The following are the supported partitions:    aws - Amazon Web Services Regions    aws-cn - China Regions    aws-us-gov - Amazon Web Services GovCloud (US) Region   For more information, see Access Management in the Amazon Web Services General Reference. 
    */
   createHostedZone(params: Route53.Types.CreateHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.CreateHostedZoneResponse) => void): Request<Route53.Types.CreateHostedZoneResponse, AWSError>;
   /**
-   * Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs).   You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.  For more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You can't create a hosted zone for a top-level domain (TLD) such as .com.   For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide. If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the DelegationSetId element.   If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see Migrating DNS Service for an Existing Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide.    When you submit a CreateHostedZone request, the initial status of the hosted zone is PENDING. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to INSYNC. The CreateHostedZone request requires the caller to have an ec2:DescribeVpcs permission.  When creating private hosted zones, the Amazon VPC must belong to the same partition where the hosted zone is created. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition. The following are the supported partitions:    aws - Amazon Web Services Regions    aws-cn - China Regions    aws-us-gov - Amazon Web Services GovCloud (US) Region   For more information, see Access Management in the Amazon Web Services General Reference. 
+   * Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs).   You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.  For more information about charges for hosted zones, see Amazon Route 53 Pricing. Note the following:   You can't create a hosted zone for a top-level domain (TLD) such as .com.   For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see NS and SOA Records that Route 53 Creates for a Hosted Zone in the Amazon Route 53 Developer Guide. If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the DelegationSetId element.   If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see Migrating DNS Service for an Existing Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide.    When you submit a CreateHostedZone request, the initial status of the hosted zone is PENDING. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to INSYNC. The CreateHostedZone request requires the caller to have an ec2:DescribeVpcs permission.  When creating private hosted zones, the Amazon VPC must belong to the same partition where the hosted zone is created. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition. The following are the supported partitions:    aws - Amazon Web Services Regions    aws-cn - China Regions    aws-us-gov - Amazon Web Services GovCloud (US) Region   For more information, see Access Management in the Amazon Web Services General Reference. 
    */
   createHostedZone(callback?: (err: AWSError, data: Route53.Types.CreateHostedZoneResponse) => void): Request<Route53.Types.CreateHostedZoneResponse, AWSError>;
   /**
@@ -125,6 +141,14 @@ declare class Route53 extends Service {
    */
   deactivateKeySigningKey(callback?: (err: AWSError, data: Route53.Types.DeactivateKeySigningKeyResponse) => void): Request<Route53.Types.DeactivateKeySigningKeyResponse, AWSError>;
   /**
+   * Deletes a CIDR collection in the current Amazon Web Services account. The collection must be empty before it can be deleted.
+   */
+  deleteCidrCollection(params: Route53.Types.DeleteCidrCollectionRequest, callback?: (err: AWSError, data: Route53.Types.DeleteCidrCollectionResponse) => void): Request<Route53.Types.DeleteCidrCollectionResponse, AWSError>;
+  /**
+   * Deletes a CIDR collection in the current Amazon Web Services account. The collection must be empty before it can be deleted.
+   */
+  deleteCidrCollection(callback?: (err: AWSError, data: Route53.Types.DeleteCidrCollectionResponse) => void): Request<Route53.Types.DeleteCidrCollectionResponse, AWSError>;
+  /**
    * Deletes a health check.  Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check can't be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see Replacing and Deleting Health Checks in the Amazon Route 53 Developer Guide.  If you're using Cloud Map and you configured Cloud Map to create a Route 53 health check when you register an instance, you can't use the Route 53 DeleteHealthCheck command to delete the health check. The health check is deleted automatically when you deregister the instance; there can be a delay of several hours before the health check is deleted from Route 53. 
    */
   deleteHealthCheck(params: Route53.Types.DeleteHealthCheckRequest, callback?: (err: AWSError, data: Route53.Types.DeleteHealthCheckResponse) => void): Request<Route53.Types.DeleteHealthCheckResponse, AWSError>;
@@ -133,11 +157,11 @@ declare class Route53 extends Service {
    */
   deleteHealthCheck(callback?: (err: AWSError, data: Route53.Types.DeleteHealthCheckResponse) => void): Request<Route53.Types.DeleteHealthCheckResponse, AWSError>;
   /**
-   * Deletes a hosted zone. If the hosted zone was created by another service, such as Cloud Map, see Deleting Public Hosted Zones That Were Created by Another Service in the Amazon Route 53 Developer Guide for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.) If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.  If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.  If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see UpdateDomainNameservers for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on "free DNS service." You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a HostedZoneNotEmpty error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets. To verify that the hosted zone has been deleted, do one of the following:   Use the GetHostedZone action to request information about the hosted zone.   Use the ListHostedZones action to get a list of the hosted zones associated with the current Amazon Web Services account.  
+   * Deletes a hosted zone. If the hosted zone was created by another service, such as Cloud Map, see Deleting Public Hosted Zones That Were Created by Another Service in the Amazon Route 53 Developer Guide for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.) If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.  If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.  If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see UpdateDomainNameservers for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on "free DNS service." You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a HostedZoneNotEmpty error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets. To verify that the hosted zone has been deleted, do one of the following:   Use the GetHostedZone action to request information about the hosted zone.   Use the ListHostedZones action to get a list of the hosted zones associated with the current Amazon Web Services account.  
    */
   deleteHostedZone(params: Route53.Types.DeleteHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.DeleteHostedZoneResponse) => void): Request<Route53.Types.DeleteHostedZoneResponse, AWSError>;
   /**
-   * Deletes a hosted zone. If the hosted zone was created by another service, such as Cloud Map, see Deleting Public Hosted Zones That Were Created by Another Service in the Amazon Route 53 Developer Guide for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.) If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.  If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.  If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see UpdateDomainNameservers for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on "free DNS service." You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a HostedZoneNotEmpty error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets. To verify that the hosted zone has been deleted, do one of the following:   Use the GetHostedZone action to request information about the hosted zone.   Use the ListHostedZones action to get a list of the hosted zones associated with the current Amazon Web Services account.  
+   * Deletes a hosted zone. If the hosted zone was created by another service, such as Cloud Map, see Deleting Public Hosted Zones That Were Created by Another Service in the Amazon Route 53 Developer Guide for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.) If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.  If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.  If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see UpdateDomainNameservers for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on "free DNS service." You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a HostedZoneNotEmpty error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets. To verify that the hosted zone has been deleted, do one of the following:   Use the GetHostedZone action to request information about the hosted zone.   Use the ListHostedZones action to get a list of the hosted zones associated with the current Amazon Web Services account.  
    */
   deleteHostedZone(callback?: (err: AWSError, data: Route53.Types.DeleteHostedZoneResponse) => void): Request<Route53.Types.DeleteHostedZoneResponse, AWSError>;
   /**
@@ -357,6 +381,30 @@ declare class Route53 extends Service {
    */
   getTrafficPolicyInstanceCount(callback?: (err: AWSError, data: Route53.Types.GetTrafficPolicyInstanceCountResponse) => void): Request<Route53.Types.GetTrafficPolicyInstanceCountResponse, AWSError>;
   /**
+   * Returns a paginated list of location objects and their CIDR blocks.
+   */
+  listCidrBlocks(params: Route53.Types.ListCidrBlocksRequest, callback?: (err: AWSError, data: Route53.Types.ListCidrBlocksResponse) => void): Request<Route53.Types.ListCidrBlocksResponse, AWSError>;
+  /**
+   * Returns a paginated list of location objects and their CIDR blocks.
+   */
+  listCidrBlocks(callback?: (err: AWSError, data: Route53.Types.ListCidrBlocksResponse) => void): Request<Route53.Types.ListCidrBlocksResponse, AWSError>;
+  /**
+   * Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only).
+   */
+  listCidrCollections(params: Route53.Types.ListCidrCollectionsRequest, callback?: (err: AWSError, data: Route53.Types.ListCidrCollectionsResponse) => void): Request<Route53.Types.ListCidrCollectionsResponse, AWSError>;
+  /**
+   * Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only).
+   */
+  listCidrCollections(callback?: (err: AWSError, data: Route53.Types.ListCidrCollectionsResponse) => void): Request<Route53.Types.ListCidrCollectionsResponse, AWSError>;
+  /**
+   * Returns a paginated list of CIDR locations for the given collection (metadata only, does not include CIDR blocks).
+   */
+  listCidrLocations(params: Route53.Types.ListCidrLocationsRequest, callback?: (err: AWSError, data: Route53.Types.ListCidrLocationsResponse) => void): Request<Route53.Types.ListCidrLocationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of CIDR locations for the given collection (metadata only, does not include CIDR blocks).
+   */
+  listCidrLocations(callback?: (err: AWSError, data: Route53.Types.ListCidrLocationsResponse) => void): Request<Route53.Types.ListCidrLocationsResponse, AWSError>;
+  /**
    * Retrieves a list of supported geographic locations. Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), the subdivisions for that country are listed in alphabetical order immediately after the corresponding country. Route 53 does not perform authorization for this API because it retrieves information that is already available to the public. For a list of supported geolocation codes, see the GeoLocation data type.
    */
   listGeoLocations(params: Route53.Types.ListGeoLocationsRequest, callback?: (err: AWSError, data: Route53.Types.ListGeoLocationsResponse) => void): Request<Route53.Types.ListGeoLocationsResponse, AWSError>;
@@ -534,6 +582,7 @@ declare class Route53 extends Service {
   waitFor(state: "resourceRecordSetsChanged", callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
 }
 declare namespace Route53 {
+  export type ARN = string;
   export type AWSAccountID = string;
   export interface AccountLimit {
     /**
@@ -627,6 +676,27 @@ declare namespace Route53 {
      */
     Changes: Changes;
   }
+  export interface ChangeCidrCollectionRequest {
+    /**
+     * The UUID of the CIDR collection to update.
+     */
+    Id: UUID;
+    /**
+     * A sequential counter that Amazon Route 53 sets to 1 when you create a collection and increments it by 1 each time you update the collection. We recommend that you use ListCidrCollection to get the current value of CollectionVersion for the collection that you want to update, and then include that value with the change request. This prevents Route 53 from overwriting an intervening update:    If the value in the request matches the value of CollectionVersion in the collection, Route 53 updates the collection.   If the value of CollectionVersion in the collection is greater than the value in the request, the collection was changed after you got the version number. Route 53 does not update the collection, and it returns a CidrCollectionVersionMismatch error.   
+     */
+    CollectionVersion?: CollectionVersion;
+    /**
+     *  Information about changes to a CIDR collection.
+     */
+    Changes: CidrCollectionChanges;
+  }
+  export interface ChangeCidrCollectionResponse {
+    /**
+     * The ID that is returned by ChangeCidrCollection. You can use it as input to GetChange to see if a CIDR collection change has propagated or not.
+     */
+    Id: ChangeId;
+  }
+  export type ChangeId = string;
   export interface ChangeInfo {
     /**
      * This element contains an ID that you use when performing a GetChange action to get detailed information about the change.
@@ -685,6 +755,66 @@ declare namespace Route53 {
   export type Changes = Change[];
   export type CheckerIpRanges = IPAddressCidr[];
   export type ChildHealthCheckList = HealthCheckId[];
+  export type Cidr = string;
+  export type CidrBlockSummaries = CidrBlockSummary[];
+  export interface CidrBlockSummary {
+    /**
+     * Value for the CIDR block.
+     */
+    CidrBlock?: Cidr;
+    /**
+     * The location name of the CIDR block.
+     */
+    LocationName?: CidrLocationNameDefaultNotAllowed;
+  }
+  export interface CidrCollection {
+    /**
+     * The ARN of the collection. Can be used to reference the collection in IAM policy or in another Amazon Web Services account.
+     */
+    Arn?: ARN;
+    /**
+     * The unique ID of the CIDR collection.
+     */
+    Id?: UUID;
+    /**
+     * The name of a CIDR collection.
+     */
+    Name?: CollectionName;
+    /**
+     * A sequential counter that Route 53 sets to 1 when you create a CIDR collection and increments by 1 each time you update settings for the CIDR collection.
+     */
+    Version?: CollectionVersion;
+  }
+  export interface CidrCollectionChange {
+    /**
+     * Name of the location that is associated with the CIDR collection.
+     */
+    LocationName: CidrLocationNameDefaultNotAllowed;
+    /**
+     * CIDR collection change action. 
+     */
+    Action: CidrCollectionChangeAction;
+    /**
+     * List of CIDR blocks.
+     */
+    CidrList: CidrList;
+  }
+  export type CidrCollectionChangeAction = "PUT"|"DELETE_IF_EXISTS"|string;
+  export type CidrCollectionChanges = CidrCollectionChange[];
+  export type CidrList = Cidr[];
+  export type CidrLocationNameDefaultAllowed = string;
+  export type CidrLocationNameDefaultNotAllowed = string;
+  export type CidrNonce = string;
+  export interface CidrRoutingConfig {
+    /**
+     * The CIDR collection ID.
+     */
+    CollectionId: UUID;
+    /**
+     * The CIDR collection location name.
+     */
+    LocationName: CidrLocationNameDefaultAllowed;
+  }
   export interface CloudWatchAlarmConfiguration {
     /**
      * For the metric that the CloudWatch alarm is associated with, the number of periods that the metric is compared to the threshold.
@@ -721,7 +851,48 @@ declare namespace Route53 {
   }
   export type CloudWatchLogsLogGroupArn = string;
   export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"ap-east-1"|"me-south-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"cn-northwest-1"|"cn-north-1"|"af-south-1"|"eu-south-1"|"us-gov-west-1"|"us-gov-east-1"|"us-iso-east-1"|"us-iso-west-1"|"us-isob-east-1"|string;
+  export type CollectionName = string;
+  export type CollectionSummaries = CollectionSummary[];
+  export interface CollectionSummary {
+    /**
+     * The ARN of the collection summary. Can be used to reference the collection in IAM policy or cross-account.
+     */
+    Arn?: ARN;
+    /**
+     * Unique ID for the CIDR collection.
+     */
+    Id?: UUID;
+    /**
+     * The name of a CIDR collection.
+     */
+    Name?: CollectionName;
+    /**
+     * A sequential counter that Route 53 sets to 1 when you create a CIDR collection and increments by 1 each time you update settings for the CIDR collection.
+     */
+    Version?: CollectionVersion;
+  }
+  export type CollectionVersion = number;
   export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export interface CreateCidrCollectionRequest {
+    /**
+     * A unique identifier for the account that can be used to reference the collection from other API calls.
+     */
+    Name: CollectionName;
+    /**
+     * A client-specific token that allows requests to be securely retried so that the intended outcome will only occur once, retries receive a similar response, and there are no additional edge cases to handle.
+     */
+    CallerReference: CidrNonce;
+  }
+  export interface CreateCidrCollectionResponse {
+    /**
+     * A complex type that contains information about the CIDR collection.
+     */
+    Collection?: CidrCollection;
+    /**
+     * A unique URL that represents the location for the CIDR collection.
+     */
+    Location?: ResourceURI;
+  }
   export interface CreateHealthCheckRequest {
     /**
      * A unique string that identifies the request and that allows you to retry a failed CreateHealthCheck request without the risk of creating two identical health checks:   If you send a CreateHealthCheck request with the same CallerReference and settings as a previous request, and if the health check doesn't exist, Amazon Route 53 creates the health check. If the health check does exist, Route 53 returns the settings for the existing health check.   If you send a CreateHealthCheck request with the same CallerReference as a deleted health check, regardless of the settings, Route 53 returns a HealthCheckAlreadyExists error.   If you send a CreateHealthCheck request with the same CallerReference as an existing health check but with different settings, Route 53 returns a HealthCheckAlreadyExists error.   If you send a CreateHealthCheck request with a unique CallerReference but settings identical to an existing health check, Route 53 creates the health check.  
@@ -744,7 +915,7 @@ declare namespace Route53 {
   }
   export interface CreateHostedZoneRequest {
     /**
-     * The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical. If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that CreateHostedZone returns in DelegationSet.
+     * The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical. If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that CreateHostedZone returns in DelegationSet.
      */
     Name: DNSName;
     /**
@@ -760,7 +931,7 @@ declare namespace Route53 {
      */
     HostedZoneConfig?: HostedZoneConfig;
     /**
-     * If you want to associate a reusable delegation set with this hosted zone, the ID that Amazon Route 53 assigned to the reusable delegation set when you created it. For more information about reusable delegation sets, see CreateReusableDelegationSet.
+     * If you want to associate a reusable delegation set with this hosted zone, the ID that Amazon Route 53 assigned to the reusable delegation set when you created it. For more information about reusable delegation sets, see CreateReusableDelegationSet.
      */
     DelegationSetId?: ResourceId;
   }
@@ -1000,6 +1171,14 @@ declare namespace Route53 {
   }
   export type DelegationSetNameServers = DNSName[];
   export type DelegationSets = DelegationSet[];
+  export interface DeleteCidrCollectionRequest {
+    /**
+     * The UUID of the collection to delete.
+     */
+    Id: UUID;
+  }
+  export interface DeleteCidrCollectionResponse {
+  }
   export interface DeleteHealthCheckRequest {
     /**
      * The ID of the health check that you want to delete.
@@ -1204,7 +1383,7 @@ declare namespace Route53 {
     /**
      * The ID of the change batch request. The value that you specify here is the value that ChangeResourceRecordSets returned in the Id element when you submitted the request.
      */
-    Id: ResourceId;
+    Id: ChangeId;
   }
   export interface GetChangeResponse {
     /**
@@ -1710,6 +1889,78 @@ declare namespace Route53 {
      * If the health check or hosted zone was created by another service, an optional description that can be provided by the other service. When a resource is created by another service, you can't edit or delete it using Amazon Route 53. 
      */
     Description?: ResourceDescription;
+  }
+  export interface ListCidrBlocksRequest {
+    /**
+     * The UUID of the CIDR collection.
+     */
+    CollectionId: UUID;
+    /**
+     * The name of the CIDR collection location.
+     */
+    LocationName?: CidrLocationNameDefaultNotAllowed;
+    /**
+     * An opaque pagination token to indicate where the service is to begin enumerating results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Maximum number of results you want returned.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListCidrBlocksResponse {
+    /**
+     * An opaque pagination token to indicate where the service is to begin enumerating results.  If no value is provided, the listing of results starts from the beginning.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * A complex type that contains information about the CIDR blocks.
+     */
+    CidrBlocks?: CidrBlockSummaries;
+  }
+  export interface ListCidrCollectionsRequest {
+    /**
+     * An opaque pagination token to indicate where the service is to begin enumerating results. If no value is provided, the listing of results starts from the beginning.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of CIDR collections to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListCidrCollectionsResponse {
+    /**
+     * An opaque pagination token to indicate where the service is to begin enumerating results. If no value is provided, the listing of results starts from the beginning.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * A complex type with information about the CIDR collection.
+     */
+    CidrCollections?: CollectionSummaries;
+  }
+  export interface ListCidrLocationsRequest {
+    /**
+     * The CIDR collection ID.
+     */
+    CollectionId: UUID;
+    /**
+     * An opaque pagination token to indicate where the service is to begin enumerating results. If no value is provided, the listing of results starts from the beginning.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of CIDR collection locations to return in the response.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListCidrLocationsResponse {
+    /**
+     * An opaque pagination token to indicate where the service is to begin enumerating results. If no value is provided, the listing of results starts from the beginning.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * A complex type that contains information about the list of CIDR locations.
+     */
+    CidrLocations?: LocationSummaries;
   }
   export interface ListGeoLocationsRequest {
     /**
@@ -2259,6 +2510,13 @@ declare namespace Route53 {
      */
     VPCs: VPCs;
   }
+  export type LocationSummaries = LocationSummary[];
+  export interface LocationSummary {
+    /**
+     * A string that specifies a location name.
+     */
+    LocationName?: CidrLocationNameDefaultAllowed;
+  }
   export type MaxResults = string;
   export type MeasureLatency = boolean;
   export type Message = string;
@@ -2357,6 +2615,7 @@ declare namespace Route53 {
      * When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set. TrafficPolicyInstanceId is the ID of the traffic policy instance that Route 53 created this resource record set for.  To delete the resource record set that is associated with a traffic policy instance, use DeleteTrafficPolicyInstance. Route 53 will delete the resource record set automatically. If you delete the resource record set by using ChangeResourceRecordSets, Route 53 doesn't automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no longer in use.  
      */
     TrafficPolicyInstanceId?: TrafficPolicyInstanceId;
+    CidrRoutingConfig?: CidrRoutingConfig;
   }
   export type ResourceRecordSetFailover = "PRIMARY"|"SECONDARY"|string;
   export type ResourceRecordSetIdentifier = string;
@@ -2586,6 +2845,7 @@ declare namespace Route53 {
   export type TrafficPolicyVersion = number;
   export type TrafficPolicyVersionMarker = string;
   export type TransportProtocol = string;
+  export type UUID = string;
   export interface UpdateHealthCheckRequest {
     /**
      * The ID for the health check for which you want detailed information. When you created the health check, CreateHealthCheck returned the ID in the response, in the HealthCheckId element.

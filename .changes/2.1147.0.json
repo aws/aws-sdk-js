@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "BackupGateway",
+        "description": "Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API"
+    },
+    {
+        "type": "feature",
+        "category": "ChimeSDKMeetings",
+        "description": "Adds support for centrally controlling each participant's ability to send and receive audio, video and screen share within a WebRTC session.  Attendee capabilities can be specified when the attendee is created and updated during the session with the new BatchUpdateAttendeeCapabilitiesExcept API."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Add new APIs to support Route 53 IP Based Routing"
+    },
+    {
+        "type": "feature",
+        "category": "util",
+        "description": "set the X-Amzn-Trace-Id header if lambda function name and trace id environmental variables are set"
+    }
+]

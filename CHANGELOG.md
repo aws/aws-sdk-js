@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1146.0-->
+<!--LATEST=2.1147.0-->
 <!--ENTRYINSERT-->
+
+## 2.1147.0
+* feature: BackupGateway: Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API
+* feature: ChimeSDKMeetings: Adds support for centrally controlling each participant's ability to send and receive audio, video and screen share within a WebRTC session.  Attendee capabilities can be specified when the attendee is created and updated during the session with the new BatchUpdateAttendeeCapabilitiesExcept API.
+* feature: ForecastService: Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API.
+* feature: Route53: Add new APIs to support Route 53 IP Based Routing
+* feature: util: set the X-Amzn-Trace-Id header if lambda function name and trace id environmental variables are set
 
 ## 2.1146.0
 * feature: CognitoIdentityServiceProvider: Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).

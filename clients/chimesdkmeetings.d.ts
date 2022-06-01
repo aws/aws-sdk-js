@@ -20,6 +20,14 @@ declare class ChimeSDKMeetings extends Service {
    */
   batchCreateAttendee(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.BatchCreateAttendeeResponse) => void): Request<ChimeSDKMeetings.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
+   * Updates AttendeeCapabilities except the capabilities listed in an ExcludedAttendeeIds table.
+   */
+  batchUpdateAttendeeCapabilitiesExcept(params: ChimeSDKMeetings.Types.BatchUpdateAttendeeCapabilitiesExceptRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates AttendeeCapabilities except the capabilities listed in an ExcludedAttendeeIds table.
+   */
+  batchUpdateAttendeeCapabilitiesExcept(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   createAttendee(params: ChimeSDKMeetings.Types.CreateAttendeeRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.CreateAttendeeResponse) => void): Request<ChimeSDKMeetings.Types.CreateAttendeeResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class ChimeSDKMeetings extends Service {
    * Stops transcription for the specified meetingId.
    */
   stopMeetingTranscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * The capabilties that you want to update.
+   */
+  updateAttendeeCapabilities(params: ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse) => void): Request<ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse, AWSError>;
+  /**
+   * The capabilties that you want to update.
+   */
+  updateAttendeeCapabilities(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse) => void): Request<ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse, AWSError>;
 }
 declare namespace ChimeSDKMeetings {
   export type Arn = string;
@@ -115,7 +131,32 @@ declare namespace ChimeSDKMeetings {
      * The join token used by the Amazon Chime SDK attendee.
      */
     JoinToken?: JoinTokenString;
+    /**
+     * The capabilities (audio, video, or content) assigned to an attendee.
+     */
+    Capabilities?: AttendeeCapabilities;
   }
+  export interface AttendeeCapabilities {
+    /**
+     * The audio capability assigned to an attendee.
+     */
+    Audio: MediaCapabilities;
+    /**
+     * The video capability assigned to an attendee.
+     */
+    Video: MediaCapabilities;
+    /**
+     * The content capability assigned to an attendee.
+     */
+    Content: MediaCapabilities;
+  }
+  export interface AttendeeIdItem {
+    /**
+     * A list of one or more attendee IDs.
+     */
+    AttendeeId: GuidString;
+  }
+  export type AttendeeIdsList = AttendeeIdItem[];
   export type AttendeeList = Attendee[];
   export interface AudioFeatures {
     /**
@@ -144,6 +185,20 @@ declare namespace ChimeSDKMeetings {
      */
     Errors?: BatchCreateAttendeeErrorList;
   }
+  export interface BatchUpdateAttendeeCapabilitiesExceptRequest {
+    /**
+     * The ID of the meeting associated with the update request.
+     */
+    MeetingId: GuidString;
+    /**
+     * The AttendeeIDs that you want to exclude from one or more capabilities.
+     */
+    ExcludedAttendeeIds: AttendeeIdsList;
+    /**
+     * The capabilities (audio, video, or content) that you want to update.
+     */
+    Capabilities: AttendeeCapabilities;
+  }
   export type Boolean = boolean;
   export type ClientRequestToken = string;
   export interface CreateAttendeeError {
@@ -169,12 +224,20 @@ declare namespace ChimeSDKMeetings {
      * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserId;
+    /**
+     * The capabilities (audio, video, or content) that you want to grant an attendee. If you don't specify capabilities, all users have send and receive capabilities on all media channels by default.
+     */
+    Capabilities?: AttendeeCapabilities;
   }
   export interface CreateAttendeeRequestItem {
     /**
      * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserId;
+    /**
+     * A list of one or more capabilities.
+     */
+    Capabilities?: AttendeeCapabilities;
   }
   export type CreateAttendeeRequestItemList = CreateAttendeeRequestItem[];
   export interface CreateAttendeeResponse {
@@ -424,6 +487,7 @@ declare namespace ChimeSDKMeetings {
      */
     NextToken?: String;
   }
+  export type MediaCapabilities = "SendReceive"|"Send"|"Receive"|"None"|string;
   export interface MediaPlacement {
     /**
      * The audio host URL.
@@ -552,6 +616,23 @@ declare namespace ChimeSDKMeetings {
      * The transcription configuration settings passed to Amazon Transcribe Medical.
      */
     EngineTranscribeMedicalSettings?: EngineTranscribeMedicalSettings;
+  }
+  export interface UpdateAttendeeCapabilitiesRequest {
+    /**
+     * The ID of the meeting associated with the update request.
+     */
+    MeetingId: GuidString;
+    /**
+     * The ID of the attendee associated with the update request.
+     */
+    AttendeeId: GuidString;
+    /**
+     * The capabilties that you want to update.
+     */
+    Capabilities: AttendeeCapabilities;
+  }
+  export interface UpdateAttendeeCapabilitiesResponse {
+    Attendee?: Attendee;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

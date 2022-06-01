@@ -52,6 +52,14 @@ declare class BackupGateway extends Service {
    */
   disassociateGatewayFromServer(callback?: (err: AWSError, data: BackupGateway.Types.DisassociateGatewayFromServerOutput) => void): Request<BackupGateway.Types.DisassociateGatewayFromServerOutput, AWSError>;
   /**
+   * By providing the ARN (Amazon Resource Name), this API returns the gateway.
+   */
+  getGateway(params: BackupGateway.Types.GetGatewayInput, callback?: (err: AWSError, data: BackupGateway.Types.GetGatewayOutput) => void): Request<BackupGateway.Types.GetGatewayOutput, AWSError>;
+  /**
+   * By providing the ARN (Amazon Resource Name), this API returns the gateway.
+   */
+  getGateway(callback?: (err: AWSError, data: BackupGateway.Types.GetGatewayOutput) => void): Request<BackupGateway.Types.GetGatewayOutput, AWSError>;
+  /**
    * Connect to a hypervisor by importing its configuration.
    */
   importHypervisorConfiguration(params: BackupGateway.Types.ImportHypervisorConfigurationInput, callback?: (err: AWSError, data: BackupGateway.Types.ImportHypervisorConfigurationOutput) => void): Request<BackupGateway.Types.ImportHypervisorConfigurationOutput, AWSError>;
@@ -131,6 +139,14 @@ declare class BackupGateway extends Service {
    * Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name (ARN) of the gateway in your request.
    */
   updateGatewayInformation(callback?: (err: AWSError, data: BackupGateway.Types.UpdateGatewayInformationOutput) => void): Request<BackupGateway.Types.UpdateGatewayInformationOutput, AWSError>;
+  /**
+   * Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.  When you make this request, you get a 200 OK success response immediately. However, it might take some time for the update to complete. 
+   */
+  updateGatewaySoftwareNow(params: BackupGateway.Types.UpdateGatewaySoftwareNowInput, callback?: (err: AWSError, data: BackupGateway.Types.UpdateGatewaySoftwareNowOutput) => void): Request<BackupGateway.Types.UpdateGatewaySoftwareNowOutput, AWSError>;
+  /**
+   * Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.  When you make this request, you get a 200 OK success response immediately. However, it might take some time for the update to complete. 
+   */
+  updateGatewaySoftwareNow(callback?: (err: AWSError, data: BackupGateway.Types.UpdateGatewaySoftwareNowOutput) => void): Request<BackupGateway.Types.UpdateGatewaySoftwareNowOutput, AWSError>;
   /**
    * Updates a hypervisor metadata, including its host, username, and password. Specify which hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your request.
    */
@@ -243,8 +259,50 @@ declare namespace BackupGateway {
     LastSeenTime?: Time;
   }
   export type GatewayArn = string;
+  export interface GatewayDetails {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and Amazon Web Services Region.
+     */
+    GatewayArn?: GatewayArn;
+    /**
+     * The display name of the gateway.
+     */
+    GatewayDisplayName?: Name;
+    /**
+     * The type of the gateway type.
+     */
+    GatewayType?: GatewayType;
+    /**
+     * The hypervisor ID of the gateway.
+     */
+    HypervisorId?: HypervisorId;
+    /**
+     * Details showing the last time Backup gateway communicated with the cloud, in Unix format and UTC time.
+     */
+    LastSeenTime?: Time;
+    /**
+     * Details showing the next update availability time of the gateway.
+     */
+    NextUpdateAvailabilityTime?: Time;
+    /**
+     * The DNS name for the virtual private cloud (VPC) endpoint the gateway uses to connect to the cloud for backup gateway.
+     */
+    VpcEndpoint?: VpcEndpoint;
+  }
   export type GatewayType = "BACKUP_VM"|string;
   export type Gateways = Gateway[];
+  export interface GetGatewayInput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway.
+     */
+    GatewayArn: GatewayArn;
+  }
+  export interface GetGatewayOutput {
+    /**
+     * By providing the ARN (Amazon Resource Name), this API returns the gateway.
+     */
+    Gateway?: GatewayDetails;
+  }
   export type Host = string;
   export type HourOfDay = number;
   export interface Hypervisor {
@@ -423,7 +481,7 @@ declare namespace BackupGateway {
      */
     Key: TagKey;
     /**
-     * The key part of a value's key-value pair.
+     * The value part of a tag's key-value pair.
      */
     Value: TagValue;
   }
@@ -500,6 +558,18 @@ declare namespace BackupGateway {
      */
     GatewayArn?: GatewayArn;
   }
+  export interface UpdateGatewaySoftwareNowInput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway to be updated.
+     */
+    GatewayArn: GatewayArn;
+  }
+  export interface UpdateGatewaySoftwareNowOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway you updated.
+     */
+    GatewayArn?: GatewayArn;
+  }
   export interface UpdateHypervisorInput {
     /**
      * The updated host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
@@ -509,6 +579,10 @@ declare namespace BackupGateway {
      * The Amazon Resource Name (ARN) of the hypervisor to update.
      */
     HypervisorArn: ServerArn;
+    /**
+     * The updated name for the hypervisor
+     */
+    Name?: Name;
     /**
      * The updated password for the hypervisor.
      */
@@ -547,11 +621,12 @@ declare namespace BackupGateway {
      */
     Path?: Path;
     /**
-     * The Amazon Resource Name (ARN) of the virtual machine.
+     * The Amazon Resource Name (ARN) of the virtual machine. For example, arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
      */
     ResourceArn?: ResourceArn;
   }
   export type VirtualMachines = VirtualMachine[];
+  export type VpcEndpoint = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

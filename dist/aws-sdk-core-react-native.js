@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1146.0',
+	  VERSION: '2.1147.0',
 
 	  /**
 	   * @api private
@@ -7022,7 +7022,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var AWS = __webpack_require__(1);
+	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
 	var SequentialExecutor = __webpack_require__(41);
 	var DISCOVER_ENDPOINT = __webpack_require__(51).discoverEndpoint;
 	/**
@@ -7233,6 +7233,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    add('SET_HTTP_HOST', 'afterBuild', function SET_HTTP_HOST(req) {
 	      req.httpRequest.headers['Host'] = req.httpRequest.endpoint.host;
+	    });
+
+	    add('SET_TRACE_ID', 'afterBuild', function SET_TRACE_ID(req) {
+	      var traceIdHeaderName = 'X-Amzn-Trace-Id';
+	      if (AWS.util.isNode() && !Object.hasOwnProperty.call(req.httpRequest.headers, traceIdHeaderName)) {
+	        var ENV_LAMBDA_FUNCTION_NAME = 'AWS_LAMBDA_FUNCTION_NAME';
+	        var ENV_TRACE_ID = '_X_AMZN_TRACE_ID';
+	        var functionName = process.env[ENV_LAMBDA_FUNCTION_NAME];
+	        var traceId = process.env[ENV_TRACE_ID];
+	        if (
+	          typeof functionName === 'string' &&
+	          functionName.length > 0 &&
+	          typeof traceId === 'string' &&
+	          traceId.length > 0
+	        ) {
+	          req.httpRequest.headers[traceIdHeaderName] = traceId;
+	        }
+	      }
 	    });
 
 	    add('RESTART', 'restart', function RESTART() {
@@ -7672,6 +7690,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  })
 	};
 
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
 /* 51 */
