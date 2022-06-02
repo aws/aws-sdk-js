@@ -180,6 +180,14 @@ declare class Connect extends Service {
    */
   createSecurityProfile(callback?: (err: AWSError, data: Connect.Types.CreateSecurityProfileResponse) => void): Request<Connect.Types.CreateSecurityProfileResponse, AWSError>;
   /**
+   * Creates a new task template in the specified Amazon Connect instance.
+   */
+  createTaskTemplate(params: Connect.Types.CreateTaskTemplateRequest, callback?: (err: AWSError, data: Connect.Types.CreateTaskTemplateResponse) => void): Request<Connect.Types.CreateTaskTemplateResponse, AWSError>;
+  /**
+   * Creates a new task template in the specified Amazon Connect instance.
+   */
+  createTaskTemplate(callback?: (err: AWSError, data: Connect.Types.CreateTaskTemplateResponse) => void): Request<Connect.Types.CreateTaskTemplateResponse, AWSError>;
+  /**
    * Creates a use case for an integration association.
    */
   createUseCase(params: Connect.Types.CreateUseCaseRequest, callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
@@ -267,6 +275,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Deletes a security profile.
    */
   deleteSecurityProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the task template.
+   */
+  deleteTaskTemplate(params: Connect.Types.DeleteTaskTemplateRequest, callback?: (err: AWSError, data: Connect.Types.DeleteTaskTemplateResponse) => void): Request<Connect.Types.DeleteTaskTemplateResponse, AWSError>;
+  /**
+   * Deletes the task template.
+   */
+  deleteTaskTemplate(callback?: (err: AWSError, data: Connect.Types.DeleteTaskTemplateResponse) => void): Request<Connect.Types.DeleteTaskTemplateResponse, AWSError>;
   /**
    * Deletes a use case from an integration association.
    */
@@ -540,6 +556,14 @@ declare class Connect extends Service {
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
+   * Gets details about a specific task template in the specified Amazon Connect instance.
+   */
+  getTaskTemplate(params: Connect.Types.GetTaskTemplateRequest, callback?: (err: AWSError, data: Connect.Types.GetTaskTemplateResponse) => void): Request<Connect.Types.GetTaskTemplateResponse, AWSError>;
+  /**
+   * Gets details about a specific task template in the specified Amazon Connect instance.
+   */
+  getTaskTemplate(callback?: (err: AWSError, data: Connect.Types.GetTaskTemplateResponse) => void): Request<Connect.Types.GetTaskTemplateResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Lists agent statuses.
    */
   listAgentStatuses(params: Connect.Types.ListAgentStatusRequest, callback?: (err: AWSError, data: Connect.Types.ListAgentStatusResponse) => void): Request<Connect.Types.ListAgentStatusResponse, AWSError>;
@@ -748,6 +772,14 @@ declare class Connect extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Lists task templates for the specified Amazon Connect instance.
+   */
+  listTaskTemplates(params: Connect.Types.ListTaskTemplatesRequest, callback?: (err: AWSError, data: Connect.Types.ListTaskTemplatesResponse) => void): Request<Connect.Types.ListTaskTemplatesResponse, AWSError>;
+  /**
+   * Lists task templates for the specified Amazon Connect instance.
+   */
+  listTaskTemplates(callback?: (err: AWSError, data: Connect.Types.ListTaskTemplatesResponse) => void): Request<Connect.Types.ListTaskTemplatesResponse, AWSError>;
+  /**
    * Lists the use cases for the integration association. 
    */
   listUseCases(params: Connect.Types.ListUseCasesRequest, callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
@@ -892,13 +924,21 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, and phone number. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, phone number, security profiles, and task templates. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, and phone number. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, phone number, security profiles, and task templates. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the contact flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following contact flow types are supported: Inbound contact flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
+   */
+  transferContact(params: Connect.Types.TransferContactRequest, callback?: (err: AWSError, data: Connect.Types.TransferContactResponse) => void): Request<Connect.Types.TransferContactResponse, AWSError>;
+  /**
+   * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the contact flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following contact flow types are supported: Inbound contact flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
+   */
+  transferContact(callback?: (err: AWSError, data: Connect.Types.TransferContactResponse) => void): Request<Connect.Types.TransferContactResponse, AWSError>;
   /**
    * Removes the specified tags from the specified resource.
    */
@@ -1107,6 +1147,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Updates a security profile.
    */
   updateSecurityProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates details about a specific task template in the specified Amazon Connect instance. This operation does not support partial updates. Instead it does a full update of template content.
+   */
+  updateTaskTemplate(params: Connect.Types.UpdateTaskTemplateRequest, callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
+  /**
+   * Updates details about a specific task template in the specified Amazon Connect instance. This operation does not support partial updates. Instead it does a full update of template content.
+   */
+  updateTaskTemplate(callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
   /**
    * Assigns the specified hierarchy group to the specified user.
    */
@@ -1395,11 +1443,11 @@ declare namespace Connect {
      */
     Name?: ReferenceKey;
     /**
-     * Contains the location path of the attachment reference.
+     * The location path of the attachment reference.
      */
     Value?: ReferenceValue;
     /**
-     * Status of an attachment reference type.
+     * Status of the attachment reference type.
      */
     Status?: ReferenceStatus;
   }
@@ -2099,6 +2147,54 @@ declare namespace Connect {
      */
     SecurityProfileArn?: ARN;
   }
+  export interface CreateTaskTemplateRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the task template.
+     */
+    Name: TaskTemplateName;
+    /**
+     * The description of the task template.
+     */
+    Description?: TaskTemplateDescription;
+    /**
+     * The identifier of the flow that runs by default when a task is created by referencing this template.
+     */
+    ContactFlowId?: ContactFlowId;
+    /**
+     * Constraints that are applicable to the fields listed.
+     */
+    Constraints?: TaskTemplateConstraints;
+    /**
+     * The default values for fields when a task is created by referencing this template.
+     */
+    Defaults?: TaskTemplateDefaults;
+    /**
+     * Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only be created from ACTIVE templates. If a template is marked as INACTIVE, then a task that refers to this template cannot be created. 
+     */
+    Status?: TaskTemplateStatus;
+    /**
+     * Fields that are part of the template.
+     */
+    Fields: TaskTemplateFields;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateTaskTemplateResponse {
+    /**
+     * The identifier of the task template resource.
+     */
+    Id: TaskTemplateId;
+    /**
+     * The Amazon Resource Name (ARN) for the task template resource.
+     */
+    Arn: TaskTemplateArn;
+  }
   export interface CreateUseCaseRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2299,6 +2395,16 @@ declare namespace Connect {
   }
   export type CurrentMetricResults = CurrentMetricResult[];
   export type CurrentMetrics = CurrentMetric[];
+  export interface DateReference {
+    /**
+     * Identifier of the date reference.
+     */
+    Name?: ReferenceKey;
+    /**
+     * A valid date.
+     */
+    Value?: ReferenceValue;
+  }
   export interface DefaultVocabulary {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2386,6 +2492,18 @@ declare namespace Connect {
      * The identifier for the security profle.
      */
     SecurityProfileId: SecurityProfileId;
+  }
+  export interface DeleteTaskTemplateRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the task template.
+     */
+    TaskTemplateId: TaskTemplateId;
+  }
+  export interface DeleteTaskTemplateResponse {
   }
   export interface DeleteUseCaseRequest {
     /**
@@ -2833,6 +2951,16 @@ declare namespace Connect {
   }
   export type DisplayName = string;
   export type Email = string;
+  export interface EmailReference {
+    /**
+     * Identifier of the email reference.
+     */
+    Name?: ReferenceKey;
+    /**
+     * A valid email address.
+     */
+    Value?: ReferenceValue;
+  }
   export interface EncryptionConfig {
     /**
      * The type of encryption.
@@ -2967,6 +3095,74 @@ declare namespace Connect {
      * Information about the historical metrics. If no grouping is specified, a summary of metric data is returned.
      */
     MetricResults?: HistoricalMetricResults;
+  }
+  export interface GetTaskTemplateRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the task template.
+     */
+    TaskTemplateId: TaskTemplateId;
+    /**
+     * The system generated version of a task template that is associated with a task, when the task is created.
+     */
+    SnapshotVersion?: SnapshotVersion;
+  }
+  export interface GetTaskTemplateResponse {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * A unique identifier for the task template.
+     */
+    Id: TaskTemplateId;
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    Arn: TaskTemplateArn;
+    /**
+     * The name of the task template.
+     */
+    Name: TaskTemplateName;
+    /**
+     * The description of the task template.
+     */
+    Description?: TaskTemplateDescription;
+    /**
+     * The identifier of the flow that runs by default when a task is created by referencing this template.
+     */
+    ContactFlowId?: ContactFlowId;
+    /**
+     * Constraints that are applicable to the fields listed.
+     */
+    Constraints?: TaskTemplateConstraints;
+    /**
+     * The default values for fields when a task is created by referencing this template.
+     */
+    Defaults?: TaskTemplateDefaults;
+    /**
+     * Fields that are part of the template.
+     */
+    Fields?: TaskTemplateFields;
+    /**
+     * Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only be created from ACTIVE templates. If a template is marked as INACTIVE, then a task that refers to this template cannot be created.
+     */
+    Status?: TaskTemplateStatus;
+    /**
+     * The timestamp when the task template was last modified.
+     */
+    LastModifiedTime?: timestamp;
+    /**
+     * The timestamp when the task template was created.
+     */
+    CreatedTime?: timestamp;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
   }
   export type Grouping = "QUEUE"|"CHANNEL"|string;
   export type Groupings = Grouping[];
@@ -3387,6 +3583,13 @@ declare namespace Connect {
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
   export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|string;
+  export interface InvisibleFieldInfo {
+    /**
+     * Identifier of the invisible field.
+     */
+    Id?: TaskTemplateFieldIdentifier;
+  }
+  export type InvisibleTaskTemplateFields = InvisibleFieldInfo[];
   export type KeyId = string;
   export interface KinesisFirehoseConfig {
     /**
@@ -4149,6 +4352,38 @@ declare namespace Connect {
      */
     tags?: TagMap;
   }
+  export interface ListTaskTemplatesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.  It is not expected that you set this because the value returned in the previous response is always null. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.  It is not expected that you set this. 
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only be created from ACTIVE templates. If a template is marked as INACTIVE, then a task that refers to this template cannot be created.
+     */
+    Status?: TaskTemplateStatus;
+    /**
+     * The name of the task template.
+     */
+    Name?: TaskTemplateName;
+  }
+  export interface ListTaskTemplatesResponse {
+    /**
+     * Provides details about a list of task templates belonging to an instance.
+     */
+    TaskTemplates?: TaskTemplateList;
+    /**
+     * If there are additional results, this is the token for the next set of results.  This is always returned as a null in the response. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListUseCasesRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -4246,6 +4481,16 @@ declare namespace Connect {
   export type Name = string;
   export type NextToken = string;
   export type NextToken2500 = string;
+  export interface NumberReference {
+    /**
+     * Identifier of the number reference.
+     */
+    Name?: ReferenceKey;
+    /**
+     * A valid number.
+     */
+    Value?: ReferenceValue;
+  }
   export type Origin = string;
   export type OriginsList = Origin[];
   export interface OutboundCallerConfig {
@@ -4524,13 +4769,20 @@ declare namespace Connect {
   export type QuickConnectType = "USER"|"QUEUE"|"PHONE_NUMBER"|string;
   export type QuickConnectTypes = QuickConnectType[];
   export type QuickConnectsList = QuickConnectId[];
+  export interface ReadOnlyFieldInfo {
+    /**
+     * Identifier of the read-only field.
+     */
+    Id?: TaskTemplateFieldIdentifier;
+  }
+  export type ReadOnlyTaskTemplateFields = ReadOnlyFieldInfo[];
   export interface Reference {
     /**
      * A valid value for the reference. For example, for a URL reference, a formatted URL that is displayed to an agent in the Contact Control Panel (CCP).
      */
     Value: ReferenceValue;
     /**
-     * The type of the reference. Only URL type can be added or updated on a contact.
+     * The type of the reference.
      */
     Type: ReferenceType;
   }
@@ -4538,16 +4790,32 @@ declare namespace Connect {
   export type ReferenceStatus = "APPROVED"|"REJECTED"|string;
   export interface ReferenceSummary {
     /**
-     * Information about the URL reference if the referenceType is URL. Otherwise, null.
+     * Information about the reference when the referenceType is URL. Otherwise, null.
      */
     Url?: UrlReference;
     /**
-     * Information about the attachment reference if the referenceType is ATTACHMENT. Otherwise, null.
+     * Information about the reference when the referenceType is ATTACHMENT. Otherwise, null.
      */
     Attachment?: AttachmentReference;
+    /**
+     * Information about a reference when the referenceType is STRING. Otherwise, null.
+     */
+    String?: StringReference;
+    /**
+     * Information about a reference when the referenceType is NUMBER. Otherwise, null.
+     */
+    Number?: NumberReference;
+    /**
+     * Information about a reference when the referenceType is DATE. Otherwise, null.
+     */
+    Date?: DateReference;
+    /**
+     * Information about a reference when the referenceType is EMAIL. Otherwise, null.
+     */
+    Email?: EmailReference;
   }
   export type ReferenceSummaryList = ReferenceSummary[];
-  export type ReferenceType = "URL"|"ATTACHMENT"|string;
+  export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
   export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
   export interface ReleasePhoneNumberRequest {
@@ -4560,6 +4828,13 @@ declare namespace Connect {
      */
     ClientToken?: ClientToken;
   }
+  export interface RequiredFieldInfo {
+    /**
+     * The unique identifier for the field.
+     */
+    Id?: TaskTemplateFieldIdentifier;
+  }
+  export type RequiredTaskTemplateFields = RequiredFieldInfo[];
   export interface ResumeContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -4862,6 +5137,8 @@ declare namespace Connect {
   }
   export type SecurityProfileSummaryList = SecurityProfileSummary[];
   export type SecurityToken = string;
+  export type SingleSelectOptions = TaskTemplateSingleSelectOption[];
+  export type SnapshotVersion = string;
   export type SourceApplicationName = string;
   export type SourceType = "SALESFORCE"|"ZENDESK"|string;
   export interface StartChatContactRequest {
@@ -5016,7 +5293,7 @@ declare namespace Connect {
     /**
      * The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
-    ContactFlowId: ContactFlowId;
+    ContactFlowId?: ContactFlowId;
     /**
      * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
@@ -5041,6 +5318,14 @@ declare namespace Connect {
      * The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
      */
     ScheduledTime?: Timestamp;
+    /**
+     * A unique identifier for the task template.
+     */
+    TaskTemplateId?: TaskTemplateId;
+    /**
+     * The identifier for the quick connect.
+     */
+    QuickConnectId?: QuickConnectId;
   }
   export interface StartTaskContactResponse {
     /**
@@ -5111,6 +5396,16 @@ declare namespace Connect {
      */
     ComparisonType?: StringComparisonType;
   }
+  export interface StringReference {
+    /**
+     * Identifier of the string reference.
+     */
+    Name?: ReferenceKey;
+    /**
+     * A valid string.
+     */
+    Value?: ReferenceValue;
+  }
   export type SupportedMessagingContentType = string;
   export type SupportedMessagingContentTypes = SupportedMessagingContentType[];
   export interface SuspendContactRecordingRequest {
@@ -5155,6 +5450,103 @@ declare namespace Connect {
     tags: TagMap;
   }
   export type TagValue = string;
+  export type TaskTemplateArn = string;
+  export interface TaskTemplateConstraints {
+    /**
+     * Lists the fields that are required to be filled by agents.
+     */
+    RequiredFields?: RequiredTaskTemplateFields;
+    /**
+     * Lists the fields that are read-only to agents, and cannot be edited.
+     */
+    ReadOnlyFields?: ReadOnlyTaskTemplateFields;
+    /**
+     * Lists the fields that are invisible to agents.
+     */
+    InvisibleFields?: InvisibleTaskTemplateFields;
+  }
+  export interface TaskTemplateDefaultFieldValue {
+    /**
+     * Identifier of a field. 
+     */
+    Id?: TaskTemplateFieldIdentifier;
+    /**
+     * Default value for the field.
+     */
+    DefaultValue?: TaskTemplateFieldValue;
+  }
+  export type TaskTemplateDefaultFieldValueList = TaskTemplateDefaultFieldValue[];
+  export interface TaskTemplateDefaults {
+    /**
+     * Default value for the field.
+     */
+    DefaultFieldValues?: TaskTemplateDefaultFieldValueList;
+  }
+  export type TaskTemplateDescription = string;
+  export interface TaskTemplateField {
+    /**
+     * The unique identifier for the field.
+     */
+    Id: TaskTemplateFieldIdentifier;
+    /**
+     * The description of the field.
+     */
+    Description?: TaskTemplateFieldDescription;
+    /**
+     * Indicates the type of field.
+     */
+    Type?: TaskTemplateFieldType;
+    /**
+     * A list of options for a single select field.
+     */
+    SingleSelectOptions?: SingleSelectOptions;
+  }
+  export type TaskTemplateFieldDescription = string;
+  export interface TaskTemplateFieldIdentifier {
+    /**
+     * The name of the task template field.
+     */
+    Name?: TaskTemplateFieldName;
+  }
+  export type TaskTemplateFieldName = string;
+  export type TaskTemplateFieldType = "NAME"|"DESCRIPTION"|"SCHEDULED_TIME"|"QUICK_CONNECT"|"URL"|"NUMBER"|"TEXT"|"TEXT_AREA"|"DATE_TIME"|"BOOLEAN"|"SINGLE_SELECT"|"EMAIL"|string;
+  export type TaskTemplateFieldValue = string;
+  export type TaskTemplateFields = TaskTemplateField[];
+  export type TaskTemplateId = string;
+  export type TaskTemplateList = TaskTemplateMetadata[];
+  export interface TaskTemplateMetadata {
+    /**
+     * A unique identifier for the task template.
+     */
+    Id?: TaskTemplateId;
+    /**
+     * The Amazon Resource Name (ARN) of the task template.
+     */
+    Arn?: TaskTemplateArn;
+    /**
+     * The name of the task template.
+     */
+    Name?: TaskTemplateName;
+    /**
+     * The description of the task template.
+     */
+    Description?: TaskTemplateDescription;
+    /**
+     * Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only be created from ACTIVE templates. If a template is marked as INACTIVE, then a task that refers to this template cannot be created.
+     */
+    Status?: TaskTemplateStatus;
+    /**
+     * The timestamp when the task template was last modified.
+     */
+    LastModifiedTime?: timestamp;
+    /**
+     * The timestamp when the task template was created.
+     */
+    CreatedTime?: timestamp;
+  }
+  export type TaskTemplateName = string;
+  export type TaskTemplateSingleSelectOption = string;
+  export type TaskTemplateStatus = "ACTIVE"|"INACTIVE"|string;
   export interface Threshold {
     /**
      * The type of comparison. Only "less than" (LT) comparisons are supported.
@@ -5169,6 +5561,42 @@ declare namespace Connect {
   export type TimeZone = string;
   export type Timestamp = Date;
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
+  export interface TransferContactRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact in this instance of Amazon Connect 
+     */
+    ContactId: ContactId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId?: QueueId;
+    /**
+     * The identifier for the user.
+     */
+    UserId?: AgentResourceId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface TransferContactResponse {
+    /**
+     * The identifier of the contact in this instance of Amazon Connect 
+     */
+    ContactId?: ContactId;
+    /**
+     * The Amazon Resource Name (ARN) of the contact.
+     */
+    ContactArn?: ARN;
+  }
   export type URI = string;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
   export interface UntagResourceRequest {
@@ -5340,7 +5768,7 @@ declare namespace Connect {
      */
     Description?: Description;
     /**
-     * A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+     * Well-formed data on contact, shown to agents on Contact Control Panel (CCP).
      */
     References?: ContactReferences;
   }
@@ -5626,6 +6054,94 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
+  }
+  export interface UpdateTaskTemplateRequest {
+    /**
+     * A unique identifier for the task template.
+     */
+    TaskTemplateId: TaskTemplateId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the task template.
+     */
+    Name?: TaskTemplateName;
+    /**
+     * The description of the task template.
+     */
+    Description?: TaskTemplateDescription;
+    /**
+     * The identifier of the flow that runs by default when a task is created by referencing this template.
+     */
+    ContactFlowId?: ContactFlowId;
+    /**
+     * Constraints that are applicable to the fields listed.
+     */
+    Constraints?: TaskTemplateConstraints;
+    /**
+     * The default values for fields when a task is created by referencing this template.
+     */
+    Defaults?: TaskTemplateDefaults;
+    /**
+     * Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only be created from ACTIVE templates. If a template is marked as INACTIVE, then a task that refers to this template cannot be created.
+     */
+    Status?: TaskTemplateStatus;
+    /**
+     * Fields that are part of the template.
+     */
+    Fields?: TaskTemplateFields;
+  }
+  export interface UpdateTaskTemplateResponse {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The identifier of the task template resource.
+     */
+    Id?: TaskTemplateId;
+    /**
+     * The Amazon Resource Name (ARN) for the task template resource.
+     */
+    Arn?: TaskTemplateArn;
+    /**
+     * The name of the task template.
+     */
+    Name?: TaskTemplateName;
+    /**
+     * The description of the task template.
+     */
+    Description?: TaskTemplateDescription;
+    /**
+     * The identifier of the flow that runs by default when a task is created by referencing this template.
+     */
+    ContactFlowId?: ContactFlowId;
+    /**
+     * Constraints that are applicable to the fields listed.
+     */
+    Constraints?: TaskTemplateConstraints;
+    /**
+     * The default values for fields when a task is created by referencing this template.
+     */
+    Defaults?: TaskTemplateDefaults;
+    /**
+     * Fields that are part of the template.
+     */
+    Fields?: TaskTemplateFields;
+    /**
+     * Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only be created from ACTIVE templates. If a template is marked as INACTIVE, then a task that refers to this template cannot be created.
+     */
+    Status?: TaskTemplateStatus;
+    /**
+     * The timestamp when the task template was last modified.
+     */
+    LastModifiedTime?: timestamp;
+    /**
+     * The timestamp when the task template was created.
+     */
+    CreatedTime?: timestamp;
   }
   export interface UpdateUserHierarchyGroupNameRequest {
     /**

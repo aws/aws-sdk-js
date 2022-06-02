@@ -1344,6 +1344,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Jira as your data source.
      */
     JiraConfiguration?: JiraConfiguration;
+    /**
+     * Provides the configuration information to connect to GitHub as your data source.
+     */
+    GitHubConfiguration?: GitHubConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1479,7 +1483,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|"GITHUB"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -2087,7 +2091,7 @@ declare namespace Kendra {
   }
   export interface Document {
     /**
-     * A unique identifier of the document in the index.
+     * A unique identifier of the document in the index. Note, each document ID must be unique per index. You cannot create a data source to index your documents with their unique IDs and then use the BatchPutDocument API to index the same documents, or vice versa. You can delete a data source and then use the BatchPutDocument API to index the same documents, or vice versa.
      */
     Id: DocumentId;
     /**
@@ -2545,6 +2549,126 @@ declare namespace Kendra {
      */
     NextToken?: NextToken;
   }
+  export interface GitHubConfiguration {
+    /**
+     * Configuration information to connect to GitHub Enterprise Cloud (SaaS).
+     */
+    SaaSConfiguration?: SaaSConfiguration;
+    /**
+     * Configuration information to connect to GitHub Enterprise Server (on premises).
+     */
+    OnPremiseConfiguration?: OnPremiseConfiguration;
+    /**
+     * The type of GitHub service you want to connect to—GitHub Enterprise Cloud (SaaS) or GitHub Enterprise Server (on premises).
+     */
+    Type?: Type;
+    /**
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your GitHub. The secret must contain a JSON structure with the following keys:   githubToken—The access token created in GitHub. For more information on creating a token in GitHub, see Authentication for a GitHub data source.  
+     */
+    SecretArn: SecretArn;
+    /**
+     *  TRUE to use the GitHub change log to determine which documents require updating in the index. Depending on the GitHub change log's size, it may take longer for Amazon Kendra to use the change log than to scan all of your documents in GitHub.
+     */
+    UseChangeLog?: Boolean;
+    /**
+     * Configuration information to include certain types of GitHub content. You can configure to index repository files only, or also include issues and pull requests, comments, and comment attachments.
+     */
+    GitHubDocumentCrawlProperties?: GitHubDocumentCrawlProperties;
+    /**
+     * A list of names of the specific repositories you want to index.
+     */
+    RepositoryFilter?: RepositoryNames;
+    /**
+     * A list of regular expression patterns to include certain folder names in your GitHub repository or repositories. Folder names that match the patterns are included in the index. Folder names that don't match the patterns are excluded from the index. If a folder matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the folder isn't included in the index.
+     */
+    InclusionFolderNamePatterns?: StringList;
+    /**
+     * A list of regular expression patterns to include certain file types in your GitHub repository or repositories. File types that match the patterns are included in the index. File types that don't match the patterns are excluded from the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    InclusionFileTypePatterns?: StringList;
+    /**
+     * A list of regular expression patterns to include certain file names in your GitHub repository or repositories. File names that match the patterns are included in the index. File names that don't match the patterns are excluded from the index. If a file matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    InclusionFileNamePatterns?: StringList;
+    /**
+     * A list of regular expression patterns to exclude certain folder names in your GitHub repository or repositories. Folder names that match the patterns are excluded from the index. Folder names that don't match the patterns are included in the index. If a folder matches both an exclusion and inclusion pattern, the exclusion pattern takes precedence and the folder isn't included in the index.
+     */
+    ExclusionFolderNamePatterns?: StringList;
+    /**
+     * A list of regular expression patterns to exclude certain file types in your GitHub repository or repositories. File types that match the patterns are excluded from the index. File types that don't match the patterns are included in the index. If a file matches both an exclusion and inclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    ExclusionFileTypePatterns?: StringList;
+    /**
+     * A list of regular expression patterns to exclude certain file names in your GitHub repository or repositories. File names that match the patterns are excluded from the index. File names that don't match the patterns are included in the index. If a file matches both an exclusion and inclusion pattern, the exclusion pattern takes precedence and the file isn't included in the index.
+     */
+    ExclusionFileNamePatterns?: StringList;
+    /**
+     * Configuration information of an Amazon Virtual Private Cloud to connect to your GitHub. For more information, see Configuring a VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map GitHub repository attributes or field names to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubRepositoryConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub commits to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubCommitConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub issues to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubIssueDocumentConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub issue comments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubIssueCommentConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub issue attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubIssueAttachmentConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub pull request comments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubPullRequestCommentConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub pull requests to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubPullRequestDocumentConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map attributes or field names of GitHub pull request attachments to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to GitHub fields. For more information, see Mapping data source fields. The GitHub data source field names must exist in your GitHub custom metadata.
+     */
+    GitHubPullRequestDocumentAttachmentConfigurationFieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export interface GitHubDocumentCrawlProperties {
+    /**
+     *  TRUE to index all files with a repository.
+     */
+    CrawlRepositoryDocuments?: Boolean;
+    /**
+     *  TRUE to index all issues within a repository.
+     */
+    CrawlIssue?: Boolean;
+    /**
+     *  TRUE to index all comments on issues.
+     */
+    CrawlIssueComment?: Boolean;
+    /**
+     *  TRUE to include all comment attachments for issues.
+     */
+    CrawlIssueCommentAttachment?: Boolean;
+    /**
+     *  TRUE to index all pull requests within a repository.
+     */
+    CrawlPullRequest?: Boolean;
+    /**
+     *  TRUE to index all comments on pull requests.
+     */
+    CrawlPullRequestComment?: Boolean;
+    /**
+     *  TRUE to include all comment attachments for pull requests.
+     */
+    CrawlPullRequestCommentAttachment?: Boolean;
+  }
   export interface GoogleDriveConfiguration {
     /**
      * The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the credentials required to connect to Google Drive. For more information, see Using a Google Workspace Drive data source.
@@ -2742,7 +2866,7 @@ declare namespace Kendra {
      */
     JiraAccountUrl: JiraAccountUrl;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Jira data source. The secret must contain a JSON structure with the following keys:   jira-id—The Active Directory user name, along with the Domain Name System (DNS) domain name. For example, user@corp.example.com.   jiraCredentials—The password of the Jira account user.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Jira data source. The secret must contain a JSON structure with the following keys:   jira-id—The ID of the Jira account.   jiraCredentials—The password of the Jira account user.  
      */
     SecretArn: SecretArn;
     /**
@@ -3157,6 +3281,20 @@ declare namespace Kendra {
   export type NameType = string;
   export type NextToken = string;
   export type ObjectBoolean = boolean;
+  export interface OnPremiseConfiguration {
+    /**
+     * The GitHub host URL or API endpoint URL. For example, https://on-prem-host-url/api/v3/ 
+     */
+    HostUrl: Url;
+    /**
+     * The name of the organization of the GitHub Enterprise Server (in-premise) account you want to connect to. You can find your organization name by logging into GitHub desktop and selecting Your organizations under your profile picture dropdown.
+     */
+    OrganizationName: OrganizationName;
+    /**
+     * Information required to find a specific file in an Amazon S3 bucket.
+     */
+    SslCertificateS3Path: S3Path;
+  }
   export interface OneDriveConfiguration {
     /**
      * The Azure Active Directory domain of the organization. 
@@ -3201,6 +3339,7 @@ declare namespace Kendra {
   }
   export type Order = "ASCENDING"|"DESCENDING"|string;
   export type OrganizationId = string;
+  export type OrganizationName = string;
   export type Persona = "OWNER"|"VIEWER"|string;
   export interface PersonasSummary {
     /**
@@ -3533,6 +3672,8 @@ declare namespace Kendra {
   }
   export type RelevanceFeedbackList = RelevanceFeedback[];
   export type RelevanceType = "RELEVANT"|"NOT_RELEVANT"|string;
+  export type RepositoryName = string;
+  export type RepositoryNames = RepositoryName[];
   export type ResultId = string;
   export type RoleArn = string;
   export type S3BucketName = string;
@@ -3569,6 +3710,16 @@ declare namespace Kendra {
      * The name of the file.
      */
     Key: S3ObjectKey;
+  }
+  export interface SaaSConfiguration {
+    /**
+     * The name of the organization of the GitHub Enterprise Cloud (SaaS) account you want to connect to. You can find your organization name by logging into GitHub desktop and selecting Your organizations under your profile picture dropdown.
+     */
+    OrganizationName: OrganizationName;
+    /**
+     * The GitHub host URL or API endpoint URL. For example, https://api.github.com.
+     */
+    HostUrl: Url;
   }
   export interface SalesforceChatterFeedConfiguration {
     /**
@@ -3750,7 +3901,7 @@ declare namespace Kendra {
   export type SeedUrlList = SeedUrl[];
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMS key. Amazon Kendra doesn't support asymmetric keys.
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -4039,6 +4190,7 @@ declare namespace Kendra {
   }
   export type StorageCapacityUnit = number;
   export type String = string;
+  export type StringList = String[];
   export interface SubmitFeedbackRequest {
     /**
      * The identifier of the index that was queried.
@@ -4188,6 +4340,7 @@ declare namespace Kendra {
   export type Title = string;
   export type Token = string;
   export type TopDocumentAttributeValueCountPairsSize = number;
+  export type Type = "SAAS"|"ON_PREMISE"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.

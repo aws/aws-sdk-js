@@ -20,27 +20,27 @@ declare class VoiceID extends Service {
    */
   createDomain(callback?: (err: AWSError, data: VoiceID.Types.CreateDomainResponse) => void): Request<VoiceID.Types.CreateDomainResponse, AWSError>;
   /**
-   * Deletes the specified domain from the Amazon Connect Voice ID system.
+   * Deletes the specified domain from Voice ID.
    */
   deleteDomain(params: VoiceID.Types.DeleteDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified domain from the Amazon Connect Voice ID system.
+   * Deletes the specified domain from Voice ID.
    */
   deleteDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified fraudster from the Amazon Connect Voice ID system.
+   * Deletes the specified fraudster from Voice ID.
    */
   deleteFraudster(params: VoiceID.Types.DeleteFraudsterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified fraudster from the Amazon Connect Voice ID system.
+   * Deletes the specified fraudster from Voice ID.
    */
   deleteFraudster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified speaker from the Amazon Connect Voice ID system.
+   * Deletes the specified speaker from Voice ID.
    */
   deleteSpeaker(params: VoiceID.Types.DeleteSpeakerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified speaker from the Amazon Connect Voice ID system.
+   * Deletes the specified speaker from Voice ID.
    */
   deleteSpeaker(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class VoiceID extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: VoiceID.Types.ListTagsForResourceResponse) => void): Request<VoiceID.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Opts out a speaker from Voice ID system. A speaker can be opted out regardless of whether or not they already exist in the system. If they don't yet exist, a new speaker is created in an opted out state. If they already exist, their existing status is overridden and they are opted out. Enrollment and evaluation authentication requests are rejected for opted out speakers, and opted out speakers have no voice embeddings stored in the system.
+   * Opts out a speaker from Voice ID. A speaker can be opted out regardless of whether or not they already exist in Voice ID. If they don't yet exist, a new speaker is created in an opted out state. If they already exist, their existing status is overridden and they are opted out. Enrollment and evaluation authentication requests are rejected for opted out speakers, and opted out speakers have no voice embeddings stored in Voice ID.
    */
   optOutSpeaker(params: VoiceID.Types.OptOutSpeakerRequest, callback?: (err: AWSError, data: VoiceID.Types.OptOutSpeakerResponse) => void): Request<VoiceID.Types.OptOutSpeakerResponse, AWSError>;
   /**
-   * Opts out a speaker from Voice ID system. A speaker can be opted out regardless of whether or not they already exist in the system. If they don't yet exist, a new speaker is created in an opted out state. If they already exist, their existing status is overridden and they are opted out. Enrollment and evaluation authentication requests are rejected for opted out speakers, and opted out speakers have no voice embeddings stored in the system.
+   * Opts out a speaker from Voice ID. A speaker can be opted out regardless of whether or not they already exist in Voice ID. If they don't yet exist, a new speaker is created in an opted out state. If they already exist, their existing status is overridden and they are opted out. Enrollment and evaluation authentication requests are rejected for opted out speakers, and opted out speakers have no voice embeddings stored in Voice ID.
    */
   optOutSpeaker(callback?: (err: AWSError, data: VoiceID.Types.OptOutSpeakerResponse) => void): Request<VoiceID.Types.OptOutSpeakerResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class VoiceID extends Service {
    */
   startSpeakerEnrollmentJob(callback?: (err: AWSError, data: VoiceID.Types.StartSpeakerEnrollmentJobResponse) => void): Request<VoiceID.Types.StartSpeakerEnrollmentJobResponse, AWSError>;
   /**
-   * Tags an Amazon Connect Voice ID resource with the provided list of tags.
+   * Tags a Voice ID resource with the provided list of tags.
    */
   tagResource(params: VoiceID.Types.TagResourceRequest, callback?: (err: AWSError, data: VoiceID.Types.TagResourceResponse) => void): Request<VoiceID.Types.TagResourceResponse, AWSError>;
   /**
-   * Tags an Amazon Connect Voice ID resource with the provided list of tags.
+   * Tags a Voice ID resource with the provided list of tags.
    */
   tagResource(callback?: (err: AWSError, data: VoiceID.Types.TagResourceResponse) => void): Request<VoiceID.Types.TagResourceResponse, AWSError>;
   /**
@@ -239,7 +239,7 @@ declare namespace VoiceID {
      */
     Name: DomainName;
     /**
-     * The configuration, containing the KMS Key Identifier, to be used by Voice ID for the server-side encryption of your data. Refer to  Amazon Connect VoiceID encryption at rest for more details on how the KMS Key is used. 
+     * The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data. Refer to  Amazon Connect Voice ID encryption at rest for more details on how the KMS key is used. 
      */
     ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
     /**
@@ -383,9 +383,13 @@ declare namespace VoiceID {
      */
     Name?: DomainName;
     /**
-     * The server-side encryption configuration containing the KMS Key Identifier you want Voice ID to use to encrypt your data.
+     * The server-side encryption configuration containing the KMS key identifier you want Voice ID to use to encrypt your data.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+    /**
+     * Details about the most recent server-side encryption configuration update. When the server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is complete, the domain's data can only be accessed using the new KMS key.
+     */
+    ServerSideEncryptionUpdateDetails?: ServerSideEncryptionUpdateDetails;
     /**
      * The timestamp showing the domain's last update.
      */
@@ -421,9 +425,13 @@ declare namespace VoiceID {
      */
     Name?: DomainName;
     /**
-     * The server-side encryption configuration containing the KMS Key Identifier you want Voice ID to use to encrypt your data..
+     * The server-side encryption configuration containing the KMS key identifier you want Voice ID to use to encrypt your data.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+    /**
+     * Details about the most recent server-side encryption configuration update. When the server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is complete, the domain’s data can only be accessed using the new KMS key.
+     */
+    ServerSideEncryptionUpdateDetails?: ServerSideEncryptionUpdateDetails;
     /**
      * The timestamp showing the domain's last update.
      */
@@ -482,7 +490,7 @@ declare namespace VoiceID {
      */
     SessionName?: SessionName;
     /**
-     * The current status of audio streaming for this session. This field is useful to infer next steps when the Authentication or Fraud Detection results are empty or the decision is NOT_ENOUGH_SPEECH. In this situation, if the StreamingStatus is ONGOING/PENDING_CONFIGURATION, it can mean that the client should call the API again later, once Voice ID has enough audio to produce a result. If the decision remains NOT_ENOUGH_SPEECH even after StreamingStatus is ENDED, it means that the previously streamed session did not have enough speech to perform evaluation, and a new streaming session is needed to try again.
+     * The current status of audio streaming for this session. This field is useful to infer next steps when the Authentication or Fraud Detection results are empty or the decision is NOT_ENOUGH_SPEECH. In this situation, if the StreamingStatus is ONGOING/PENDING_CONFIGURATION, it can mean that the client should call the API again later, after Voice ID has enough audio to produce a result. If the decision remains NOT_ENOUGH_SPEECH even after StreamingStatus is ENDED, it means that the previously streamed session did not have enough speech to perform evaluation, and a new streaming session is needed to try again.
      */
     StreamingStatus?: StreamingStatus;
   }
@@ -588,7 +596,7 @@ declare namespace VoiceID {
      */
     JobId?: JobId;
     /**
-     * The client-provied name for the fraudster registration job.
+     * The client-provided name for the fraudster registration job.
      */
     JobName?: JobName;
     /**
@@ -600,7 +608,7 @@ declare namespace VoiceID {
      */
     JobStatus?: FraudsterRegistrationJobStatus;
     /**
-     * The output data config containing the S3 location where you want Voice ID to write your job output file; you must also include a KMS Key ID in order to encrypt the file.
+     * The output data config containing the S3 location where you want Voice ID to write your job output file; you must also include a KMS key iD in order to encrypt the file.
      */
     OutputDataConfig?: OutputDataConfig;
     /**
@@ -810,7 +818,7 @@ declare namespace VoiceID {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The S3 path of the folder to which Voice ID writes the job output file, which has a *.out extension. For example, if the input file name is input-file.json and the output folder path is s3://output-bucket/output-folder, the full output file path is s3://output-bucket/output-folder/job-Id/input-file.json.out.
+     * The S3 path of the folder where Voice ID writes the job output file. It has a *.out extension. For example, if the input file name is input-file.json and the output folder path is s3://output-bucket/output-folder, the full output file path is s3://output-bucket/output-folder/job-Id/input-file.json.out.
      */
     S3Uri: S3Uri;
   }
@@ -828,10 +836,25 @@ declare namespace VoiceID {
   export type Score = number;
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The identifier of the KMS Key you want Voice ID to use to encrypt your data.
+     * The identifier of the KMS key you want Voice ID to use to encrypt your data.
      */
     KmsKeyId: KmsKeyId;
   }
+  export interface ServerSideEncryptionUpdateDetails {
+    /**
+     * Message explaining the current UpdateStatus. When the UpdateStatus is FAILED, this message explains the cause of the failure.
+     */
+    Message?: String;
+    /**
+     * The previous KMS key ID the domain was encrypted with, before ServerSideEncryptionConfiguration was updated to a new KMS key ID.
+     */
+    OldKmsKeyId?: KmsKeyId;
+    /**
+     * Status of the server-side encryption update. During an update, if there is an issue with the domain's current or old KMS key ID, such as an inaccessible or disabled key, then the status is FAILED. In order to resolve this, the key needs to be made accessible, and then an UpdateDomain call with the existing server-side encryption configuration will re-attempt this update process.
+     */
+    UpdateStatus?: ServerSideEncryptionUpdateStatus;
+  }
+  export type ServerSideEncryptionUpdateStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
   export type SessionId = string;
   export type SessionName = string;
   export type SessionNameOrId = string;
@@ -911,7 +934,7 @@ declare namespace VoiceID {
      */
     JobStatus?: SpeakerEnrollmentJobStatus;
     /**
-     * The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS Key ID to encrypt the file.
+     * The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS key ID to encrypt the file.
      */
     OutputDataConfig?: OutputDataConfig;
   }
@@ -1006,7 +1029,7 @@ declare namespace VoiceID {
      */
     JobName?: JobName;
     /**
-     * The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS Key ID to encrypt the file.
+     * The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS key ID to encrypt the file.
      */
     OutputDataConfig: OutputDataConfig;
     /**
@@ -1034,7 +1057,7 @@ declare namespace VoiceID {
      */
     DomainId: DomainId;
     /**
-     * The enrollment config that contains details such as the action to take when a speaker is already enrolled in the Voice ID system or when a speaker is identified as a fraudster.
+     * The enrollment config that contains details such as the action to take when a speaker is already enrolled in Voice ID or when a speaker is identified as a fraudster.
      */
     EnrollmentConfig?: EnrollmentConfig;
     /**
@@ -1046,7 +1069,7 @@ declare namespace VoiceID {
      */
     JobName?: JobName;
     /**
-     * The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS Key ID to encrypt the file.
+     * The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS key ID to encrypt the file.
      */
     OutputDataConfig: OutputDataConfig;
   }
@@ -1112,7 +1135,7 @@ declare namespace VoiceID {
      */
     Name: DomainName;
     /**
-     * The configuration, containing the KMS Key Identifier, to be used by Voice ID for the server-side encryption of your data. Note that all the existing data in the domain are still encrypted using the existing key, only the data added to domain after updating the key is encrypted using the new key. 
+     * The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data. Note that all the existing data in the domain are still encrypted using the existing key, only the data added to domain after updating the key is encrypted using the new key. 
      */
     ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
   }

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1147.0-->
+<!--LATEST=2.1148.0-->
 <!--ENTRYINSERT-->
+
+## 2.1148.0
+* feature: ApplicationInsights: Provide Account Level onboarding support through CFN/CLI
+* feature: Connect: This release adds the following features: 1) New APIs to manage (create, list, update) task template resources, 2) Updates to startTaskContact API to support task templates, and 3) new TransferContact API to programmatically transfer in-progress tasks via a contact flow.
+* feature: Kendra: Amazon Kendra now provides a data source connector for GitHub. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html
+* feature: Proton: Add new "Components" API to enable users to Create, Delete and Update AWS Proton components.
+* feature: VoiceID: Added a new attribute ServerSideEncryptionUpdateDetails to Domain and DomainSummary.
 
 ## 2.1147.0
 * feature: BackupGateway: Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API

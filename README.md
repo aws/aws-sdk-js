@@ -29,7 +29,7 @@ For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/ma
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1147.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1148.0.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of

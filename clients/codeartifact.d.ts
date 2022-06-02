@@ -29,11 +29,11 @@ declare class CodeArtifact extends Service {
    */
   copyPackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.CopyPackageVersionsResult) => void): Request<CodeArtifact.Types.CopyPackageVersionsResult, AWSError>;
   /**
-   *  Creates a domain. CodeArtifact domains make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different AWS accounts. An asset is stored only once in a domain, even if it's in multiple repositories.  Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. 
+   *  Creates a domain. CodeArtifact domains make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different Amazon Web Services accounts. An asset is stored only once in a domain, even if it's in multiple repositories.  Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. 
    */
   createDomain(params: CodeArtifact.Types.CreateDomainRequest, callback?: (err: AWSError, data: CodeArtifact.Types.CreateDomainResult) => void): Request<CodeArtifact.Types.CreateDomainResult, AWSError>;
   /**
-   *  Creates a domain. CodeArtifact domains make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different AWS accounts. An asset is stored only once in a domain, even if it's in multiple repositories.  Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. 
+   *  Creates a domain. CodeArtifact domains make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different Amazon Web Services accounts. An asset is stored only once in a domain, even if it's in multiple repositories.  Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. 
    */
   createDomain(callback?: (err: AWSError, data: CodeArtifact.Types.CreateDomainResult) => void): Request<CodeArtifact.Types.CreateDomainResult, AWSError>;
   /**
@@ -77,11 +77,11 @@ declare class CodeArtifact extends Service {
    */
   deleteRepository(callback?: (err: AWSError, data: CodeArtifact.Types.DeleteRepositoryResult) => void): Request<CodeArtifact.Types.DeleteRepositoryResult, AWSError>;
   /**
-   *  Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.    Use DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted, AWS users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy.  
+   *  Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.    Use DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted, Amazon Web Services users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy.  
    */
   deleteRepositoryPermissionsPolicy(params: CodeArtifact.Types.DeleteRepositoryPermissionsPolicyRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DeleteRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.DeleteRepositoryPermissionsPolicyResult, AWSError>;
   /**
-   *  Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.    Use DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted, AWS users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy.  
+   *  Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.    Use DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted, Amazon Web Services users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy.  
    */
   deleteRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.DeleteRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.DeleteRepositoryPermissionsPolicyResult, AWSError>;
   /**
@@ -125,19 +125,19 @@ declare class CodeArtifact extends Service {
    */
   disposePackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.DisposePackageVersionsResult) => void): Request<CodeArtifact.Types.DisposePackageVersionsResult, AWSError>;
   /**
-   *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see AWS CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
+   *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
    */
   getAuthorizationToken(params: CodeArtifact.Types.GetAuthorizationTokenRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetAuthorizationTokenResult) => void): Request<CodeArtifact.Types.GetAuthorizationTokenResult, AWSError>;
   /**
-   *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see AWS CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
+   *  Generates a temporary authorization token for accessing repositories in the domain. This API requires the codeartifact:GetAuthorizationToken and sts:GetServiceBearerToken permissions. For more information about authorization tokens, see CodeArtifact authentication and tokens.   CodeArtifact authorization tokens are valid for a period of 12 hours when created with the login command. You can call login periodically to refresh the token. When you create an authorization token with the GetAuthorizationToken API, you can set a custom authorization period, up to a maximum of 12 hours, with the durationSeconds parameter. The authorization period begins after login or GetAuthorizationToken is called. If login or GetAuthorizationToken is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call sts assume-role and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration. See Using IAM Roles for more information on controlling session duration.  
    */
   getAuthorizationToken(callback?: (err: AWSError, data: CodeArtifact.Types.GetAuthorizationTokenResult) => void): Request<CodeArtifact.Types.GetAuthorizationTokenResult, AWSError>;
   /**
-   *  Returns the resource policy attached to the specified domain.    The policy is a resource-based policy, not an identity-based policy. For more information, see Identity-based policies and resource-based policies  in the AWS Identity and Access Management User Guide.  
+   *  Returns the resource policy attached to the specified domain.    The policy is a resource-based policy, not an identity-based policy. For more information, see Identity-based policies and resource-based policies  in the IAM User Guide.  
    */
   getDomainPermissionsPolicy(params: CodeArtifact.Types.GetDomainPermissionsPolicyRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetDomainPermissionsPolicyResult) => void): Request<CodeArtifact.Types.GetDomainPermissionsPolicyResult, AWSError>;
   /**
-   *  Returns the resource policy attached to the specified domain.    The policy is a resource-based policy, not an identity-based policy. For more information, see Identity-based policies and resource-based policies  in the AWS Identity and Access Management User Guide.  
+   *  Returns the resource policy attached to the specified domain.    The policy is a resource-based policy, not an identity-based policy. For more information, see Identity-based policies and resource-based policies  in the IAM User Guide.  
    */
   getDomainPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.GetDomainPermissionsPolicyResult) => void): Request<CodeArtifact.Types.GetDomainPermissionsPolicyResult, AWSError>;
   /**
@@ -149,19 +149,19 @@ declare class CodeArtifact extends Service {
    */
   getPackageVersionAsset(callback?: (err: AWSError, data: CodeArtifact.Types.GetPackageVersionAssetResult) => void): Request<CodeArtifact.Types.GetPackageVersionAssetResult, AWSError>;
   /**
-   *  Gets the readme file or descriptive text for a package version. For packages that do not contain a readme file, CodeArtifact extracts a description from a metadata file. For example, from the &lt;description&gt; element in the pom.xml file of a Maven package.   The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. 
+   *  Gets the readme file or descriptive text for a package version.   The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. 
    */
   getPackageVersionReadme(params: CodeArtifact.Types.GetPackageVersionReadmeRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetPackageVersionReadmeResult) => void): Request<CodeArtifact.Types.GetPackageVersionReadmeResult, AWSError>;
   /**
-   *  Gets the readme file or descriptive text for a package version. For packages that do not contain a readme file, CodeArtifact extracts a description from a metadata file. For example, from the &lt;description&gt; element in the pom.xml file of a Maven package.   The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. 
+   *  Gets the readme file or descriptive text for a package version.   The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. 
    */
   getPackageVersionReadme(callback?: (err: AWSError, data: CodeArtifact.Types.GetPackageVersionReadmeResult) => void): Request<CodeArtifact.Types.GetPackageVersionReadmeResult, AWSError>;
   /**
-   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     npm     pypi     maven   
+   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     maven     npm     nuget     pypi   
    */
   getRepositoryEndpoint(params: CodeArtifact.Types.GetRepositoryEndpointRequest, callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryEndpointResult) => void): Request<CodeArtifact.Types.GetRepositoryEndpointResult, AWSError>;
   /**
-   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     npm     pypi     maven   
+   *  Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format:     maven     npm     nuget     pypi   
    */
   getRepositoryEndpoint(callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryEndpointResult) => void): Request<CodeArtifact.Types.GetRepositoryEndpointResult, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class CodeArtifact extends Service {
    */
   getRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.GetRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.GetRepositoryPermissionsPolicyResult, AWSError>;
   /**
-   *  Returns a list of DomainSummary objects for all domains owned by the AWS account that makes this call. Each returned DomainSummary object contains information about a domain. 
+   *  Returns a list of DomainSummary objects for all domains owned by the Amazon Web Services account that makes this call. Each returned DomainSummary object contains information about a domain. 
    */
   listDomains(params: CodeArtifact.Types.ListDomainsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
   /**
-   *  Returns a list of DomainSummary objects for all domains owned by the AWS account that makes this call. Each returned DomainSummary object contains information about a domain. 
+   *  Returns a list of DomainSummary objects for all domains owned by the Amazon Web Services account that makes this call. Each returned DomainSummary object contains information about a domain. 
    */
   listDomains(callback?: (err: AWSError, data: CodeArtifact.Types.ListDomainsResult) => void): Request<CodeArtifact.Types.ListDomainsResult, AWSError>;
   /**
@@ -213,11 +213,11 @@ declare class CodeArtifact extends Service {
    */
   listPackages(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackagesResult) => void): Request<CodeArtifact.Types.ListPackagesResult, AWSError>;
   /**
-   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified AWS account and that matches the input parameters. 
+   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified Amazon Web Services account and that matches the input parameters. 
    */
   listRepositories(params: CodeArtifact.Types.ListRepositoriesRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesResult) => void): Request<CodeArtifact.Types.ListRepositoriesResult, AWSError>;
   /**
-   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified AWS account and that matches the input parameters. 
+   *  Returns a list of RepositorySummary objects. Each RepositorySummary contains information about a repository in the specified Amazon Web Services account and that matches the input parameters. 
    */
   listRepositories(callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesResult) => void): Request<CodeArtifact.Types.ListRepositoriesResult, AWSError>;
   /**
@@ -229,11 +229,11 @@ declare class CodeArtifact extends Service {
    */
   listRepositoriesInDomain(callback?: (err: AWSError, data: CodeArtifact.Types.ListRepositoriesInDomainResult) => void): Request<CodeArtifact.Types.ListRepositoriesInDomainResult, AWSError>;
   /**
-   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.
+   * Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in CodeArtifact.
    */
   listTagsForResource(params: CodeArtifact.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListTagsForResourceResult) => void): Request<CodeArtifact.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.
+   * Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in CodeArtifact.
    */
   listTagsForResource(callback?: (err: AWSError, data: CodeArtifact.Types.ListTagsForResourceResult) => void): Request<CodeArtifact.Types.ListTagsForResourceResult, AWSError>;
   /**
@@ -253,27 +253,27 @@ declare class CodeArtifact extends Service {
    */
   putRepositoryPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.PutRepositoryPermissionsPolicyResult) => void): Request<CodeArtifact.Types.PutRepositoryPermissionsPolicyResult, AWSError>;
   /**
-   * Adds or updates tags for a resource in AWS CodeArtifact.
+   * Adds or updates tags for a resource in CodeArtifact.
    */
   tagResource(params: CodeArtifact.Types.TagResourceRequest, callback?: (err: AWSError, data: CodeArtifact.Types.TagResourceResult) => void): Request<CodeArtifact.Types.TagResourceResult, AWSError>;
   /**
-   * Adds or updates tags for a resource in AWS CodeArtifact.
+   * Adds or updates tags for a resource in CodeArtifact.
    */
   tagResource(callback?: (err: AWSError, data: CodeArtifact.Types.TagResourceResult) => void): Request<CodeArtifact.Types.TagResourceResult, AWSError>;
   /**
-   * Removes tags from a resource in AWS CodeArtifact.
+   * Removes tags from a resource in CodeArtifact.
    */
   untagResource(params: CodeArtifact.Types.UntagResourceRequest, callback?: (err: AWSError, data: CodeArtifact.Types.UntagResourceResult) => void): Request<CodeArtifact.Types.UntagResourceResult, AWSError>;
   /**
-   * Removes tags from a resource in AWS CodeArtifact.
+   * Removes tags from a resource in CodeArtifact.
    */
   untagResource(callback?: (err: AWSError, data: CodeArtifact.Types.UntagResourceResult) => void): Request<CodeArtifact.Types.UntagResourceResult, AWSError>;
   /**
-   *  Updates the status of one or more versions of a package. 
+   *  Updates the status of one or more versions of a package. Using UpdatePackageVersionsStatus, you can update the status of package versions to Archived, Published, or Unlisted. To set the status of a package version to Disposed, use DisposePackageVersions. 
    */
   updatePackageVersionsStatus(params: CodeArtifact.Types.UpdatePackageVersionsStatusRequest, callback?: (err: AWSError, data: CodeArtifact.Types.UpdatePackageVersionsStatusResult) => void): Request<CodeArtifact.Types.UpdatePackageVersionsStatusResult, AWSError>;
   /**
-   *  Updates the status of one or more versions of a package. 
+   *  Updates the status of one or more versions of a package. Using UpdatePackageVersionsStatus, you can update the status of package versions to Archived, Published, or Unlisted. To set the status of a package version to Disposed, use DisposePackageVersions. 
    */
   updatePackageVersionsStatus(callback?: (err: AWSError, data: CodeArtifact.Types.UpdatePackageVersionsStatusResult) => void): Request<CodeArtifact.Types.UpdatePackageVersionsStatusResult, AWSError>;
   /**
@@ -312,7 +312,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -320,7 +320,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The name of the external connection to add to the repository. The following values are supported:     public:npmjs - for the npm public repository.     public:pypi - for the Python Package Index.     public:maven-central - for Maven Central.     public:maven-googleandroid - for the Google Android repository.     public:maven-gradleplugins - for the Gradle plugins repository.     public:maven-commonsware - for the CommonsWare Android repository.   
+     *  The name of the external connection to add to the repository. The following values are supported:     public:npmjs - for the npm public repository.     public:nuget-org - for the NuGet Gallery.     public:pypi - for the Python Package Index.     public:maven-central - for Maven Central.     public:maven-googleandroid - for the Google Android repository.     public:maven-gradleplugins - for the Gradle plugins repository.     public:maven-commonsware - for the CommonsWare Android repository.   
      */
     externalConnection: ExternalConnectionName;
   }
@@ -338,7 +338,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -350,7 +350,7 @@ declare namespace CodeArtifact {
      */
     destinationRepository: RepositoryName;
     /**
-     *  The format of the package that is copied. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The format of the package that is copied. 
      */
     format: PackageFormat;
     /**
@@ -390,11 +390,11 @@ declare namespace CodeArtifact {
   }
   export interface CreateDomainRequest {
     /**
-     *  The name of the domain to create. All domain names in an AWS Region that are in the same AWS account must be unique. The domain name is used as the prefix in DNS hostnames. Do not use sensitive information in a domain name because it is publicly discoverable. 
+     *  The name of the domain to create. All domain names in an Amazon Web Services Region that are in the same Amazon Web Services account must be unique. The domain name is used as the prefix in DNS hostnames. Do not use sensitive information in a domain name because it is publicly discoverable. 
      */
     domain: DomainName;
     /**
-     *  The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an encryptionKey, your IAM role must have kms:DescribeKey and kms:CreateGrant permissions on the encryption key that is used. For more information, see DescribeKey in the AWS Key Management Service API Reference and AWS KMS API Permissions Reference in the AWS Key Management Service Developer Guide.    CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see Using symmetric and asymmetric keys in the AWS Key Management Service Developer Guide.  
+     *  The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an encryptionKey, your IAM role must have kms:DescribeKey and kms:CreateGrant permissions on the encryption key that is used. For more information, see DescribeKey in the Key Management Service API Reference and Key Management Service API Permissions Reference in the Key Management Service Developer Guide.    CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see Using symmetric and asymmetric keys in the Key Management Service Developer Guide.  
      */
     encryptionKey?: Arn;
     /**
@@ -414,7 +414,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -426,7 +426,7 @@ declare namespace CodeArtifact {
      */
     description?: Description;
     /**
-     *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
+     *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
      */
     upstreams?: UpstreamRepositoryList;
     /**
@@ -446,7 +446,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -466,7 +466,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
   }
@@ -482,7 +482,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -490,7 +490,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the package versions to delete. The valid values are:     npm     pypi     maven   
+     *  The format of the package versions to delete. 
      */
     format: PackageFormat;
     /**
@@ -506,13 +506,13 @@ declare namespace CodeArtifact {
      */
     versions: PackageVersionList;
     /**
-     *  The expected status of the package version to delete. Valid values are:     Published     Unfinished     Unlisted     Archived     Disposed   
+     *  The expected status of the package version to delete. 
      */
     expectedStatus?: PackageVersionStatus;
   }
   export interface DeletePackageVersionsResult {
     /**
-     *  A list of the package versions that were successfully deleted. 
+     *  A list of the package versions that were successfully deleted. The status of every successful version will be Deleted. 
      */
     successfulVersions?: SuccessfulPackageVersionInfoMap;
     /**
@@ -526,7 +526,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -550,7 +550,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -570,7 +570,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
   }
@@ -583,7 +583,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -591,7 +591,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the requested package version. The valid values are:     npm     pypi     maven   
+     *  A format that specifies the type of the requested package version. 
      */
     format: PackageFormat;
     /**
@@ -619,7 +619,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -640,7 +640,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -664,7 +664,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -672,7 +672,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of package versions you want to dispose. The valid values are:     npm     pypi     maven   
+     *  A format that specifies the type of package versions you want to dispose. 
      */
     format: PackageFormat;
     /**
@@ -692,7 +692,7 @@ declare namespace CodeArtifact {
      */
     versionRevisions?: PackageVersionRevisionMap;
     /**
-     *  The expected status of the package version to dispose. Valid values are:     Published     Unfinished     Unlisted     Archived     Disposed   
+     *  The expected status of the package version to dispose. 
      */
     expectedStatus?: PackageVersionStatus;
   }
@@ -712,7 +712,7 @@ declare namespace CodeArtifact {
      */
     name?: DomainName;
     /**
-     *  The AWS account ID that owns the domain. 
+     *  The Amazon Web Services account ID that owns the domain. 
      */
     owner?: AccountId;
     /**
@@ -720,7 +720,7 @@ declare namespace CodeArtifact {
      */
     arn?: Arn;
     /**
-     *  The current status of a domain. The valid values are     Active     Deleted   
+     *  The current status of a domain. 
      */
     status?: DomainStatus;
     /**
@@ -728,7 +728,7 @@ declare namespace CodeArtifact {
      */
     createdTime?: Timestamp;
     /**
-     *  The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain. 
+     *  The ARN of an Key Management Service (KMS) key associated with a domain. 
      */
     encryptionKey?: Arn;
     /**
@@ -752,7 +752,7 @@ declare namespace CodeArtifact {
      */
     name?: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     owner?: AccountId;
     /**
@@ -760,7 +760,7 @@ declare namespace CodeArtifact {
      */
     arn?: Arn;
     /**
-     *  A string that contains the status of the domain. The valid values are:     Active     Deleted   
+     *  A string that contains the status of the domain. 
      */
     status?: DomainStatus;
     /**
@@ -782,7 +782,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -806,7 +806,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
   }
@@ -822,7 +822,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -830,7 +830,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the package version with the requested asset file. The valid values are:     npm     pypi     maven   
+     *  A format that specifies the type of the package version with the requested asset file. 
      */
     format: PackageFormat;
     /**
@@ -878,7 +878,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -886,7 +886,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the package version with the requested readme file. The valid values are:     npm     pypi     maven   
+     *  A format that specifies the type of the package version with the requested readme file.   Although maven is listed as a valid value, CodeArtifact does not support displaying readme files for Maven packages. 
      */
     format: PackageFormat;
     /**
@@ -904,7 +904,7 @@ declare namespace CodeArtifact {
   }
   export interface GetPackageVersionReadmeResult {
     /**
-     *  The format of the package with the requested readme file. Valid format types are:     npm     pypi     maven   
+     *  The format of the package with the requested readme file. 
      */
     format?: PackageFormat;
     /**
@@ -934,7 +934,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain that contains the repository. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -942,7 +942,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  Returns which endpoint of a repository to return. A repository has one endpoint for each package format:     npm     pypi     maven   
+     *  Returns which endpoint of a repository to return. A repository has one endpoint for each package format. 
      */
     format: PackageFormat;
   }
@@ -958,7 +958,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1014,7 +1014,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1022,7 +1022,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the package that contains the returned package version assets. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The format of the package that contains the returned package version assets. 
      */
     format: PackageFormat;
     /**
@@ -1082,7 +1082,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1090,7 +1090,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the package with the requested dependencies. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The format of the package with the requested dependencies. 
      */
     format: PackageFormat;
     /**
@@ -1112,7 +1112,7 @@ declare namespace CodeArtifact {
   }
   export interface ListPackageVersionDependenciesResult {
     /**
-     *  A format that specifies the type of the package that contains the returned dependencies. The valid values are:     npm     pypi     maven   
+     *  A format that specifies the type of the package that contains the returned dependencies. 
      */
     format?: PackageFormat;
     /**
@@ -1147,7 +1147,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1155,7 +1155,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the returned packages. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The format of the returned packages. 
      */
     format: PackageFormat;
     /**
@@ -1167,7 +1167,7 @@ declare namespace CodeArtifact {
      */
     package: PackageName;
     /**
-     *  A string that specifies the status of the package versions to include in the returned list. It can be one of the following:     Published     Unfinished     Unlisted     Archived     Disposed   
+     *  A string that specifies the status of the package versions to include in the returned list. 
      */
     status?: PackageVersionStatus;
     /**
@@ -1189,7 +1189,7 @@ declare namespace CodeArtifact {
      */
     defaultDisplayVersion?: PackageVersion;
     /**
-     *  A format of the package. Valid package format values are:     npm     pypi     maven   
+     *  A format of the package. 
      */
     format?: PackageFormat;
     /**
@@ -1216,7 +1216,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1224,7 +1224,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The format of the packages. The valid package types are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The format of the packages. 
      */
     format?: PackageFormat;
     /**
@@ -1261,11 +1261,11 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
-     *  Filter the list of repositories to only include those that are managed by the AWS account ID. 
+     *  Filter the list of repositories to only include those that are managed by the Amazon Web Services account ID. 
      */
     administratorAccount?: AccountId;
     /**
@@ -1354,7 +1354,7 @@ declare namespace CodeArtifact {
   export type PackageNamespace = string;
   export interface PackageSummary {
     /**
-     *  The format of the package. Valid values are:     npm     pypi     maven   
+     *  The format of the package. 
      */
     format?: PackageFormat;
     /**
@@ -1370,7 +1370,7 @@ declare namespace CodeArtifact {
   export type PackageVersion = string;
   export interface PackageVersionDescription {
     /**
-     *  The format of the package version. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The format of the package version. 
      */
     format?: PackageFormat;
     /**
@@ -1414,7 +1414,7 @@ declare namespace CodeArtifact {
      */
     revision?: PackageVersionRevision;
     /**
-     *  A string that contains the status of the package version. It can be one of the following:     Published     Unfinished     Unlisted     Archived     Disposed   
+     *  A string that contains the status of the package version. 
      */
     status?: PackageVersionStatus;
   }
@@ -1445,7 +1445,7 @@ declare namespace CodeArtifact {
      */
     revision?: PackageVersionRevision;
     /**
-     *  A string that contains the status of the package version. It can be one of the following:     Published     Unfinished     Unlisted     Archived     Disposed   
+     *  A string that contains the status of the package version. It can be one of the following: 
      */
     status: PackageVersionStatus;
   }
@@ -1459,7 +1459,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1483,7 +1483,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1511,7 +1511,7 @@ declare namespace CodeArtifact {
      */
     name?: RepositoryName;
     /**
-     *  The 12-digit account number of the AWS account that manages the repository. 
+     *  The 12-digit account number of the Amazon Web Services account that manages the repository. 
      */
     administratorAccount?: AccountId;
     /**
@@ -1519,7 +1519,7 @@ declare namespace CodeArtifact {
      */
     domainName?: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain that contains the repository. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1531,7 +1531,7 @@ declare namespace CodeArtifact {
      */
     description?: Description;
     /**
-     *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
+     *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
      */
     upstreams?: UpstreamRepositoryInfoList;
     /**
@@ -1545,7 +1545,7 @@ declare namespace CodeArtifact {
      */
     externalConnectionName?: ExternalConnectionName;
     /**
-     *  The package format associated with a repository's external connection. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.   
+     *  The package format associated with a repository's external connection. The valid package formats are:     npm: A Node Package Manager (npm) package.     pypi: A Python Package Index (PyPI) package.     maven: A Maven package that contains compiled code in a distributable format, such as a JAR file.     nuget: A NuGet package.   
      */
     packageFormat?: PackageFormat;
     /**
@@ -1561,7 +1561,7 @@ declare namespace CodeArtifact {
      */
     name?: RepositoryName;
     /**
-     *  The AWS account ID that manages the repository. 
+     *  The Amazon Web Services account ID that manages the repository. 
      */
     administratorAccount?: AccountId;
     /**
@@ -1569,7 +1569,7 @@ declare namespace CodeArtifact {
      */
     domainName?: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1604,7 +1604,7 @@ declare namespace CodeArtifact {
      */
     revision?: String;
     /**
-     *  The status of a package version. Valid statuses are:     Published     Unfinished     Unlisted     Archived     Disposed   
+     *  The status of a package version. 
      */
     status?: PackageVersionStatus;
   }
@@ -1654,7 +1654,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1662,7 +1662,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  A format that specifies the type of the package with the statuses to update. The valid values are:     npm     pypi     maven   
+     *  A format that specifies the type of the package with the statuses to update. 
      */
     format: PackageFormat;
     /**
@@ -1706,7 +1706,7 @@ declare namespace CodeArtifact {
      */
     domain: DomainName;
     /**
-     *  The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. 
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
      */
     domainOwner?: AccountId;
     /**
@@ -1718,7 +1718,7 @@ declare namespace CodeArtifact {
      */
     description?: Description;
     /**
-     *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
+     *  A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see Working with upstream repositories. 
      */
     upstreams?: UpstreamRepositoryList;
   }
