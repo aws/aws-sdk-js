@@ -540,6 +540,14 @@ declare class Connect extends Service {
    */
   getCurrentMetricData(callback?: (err: AWSError, data: Connect.Types.GetCurrentMetricDataResponse) => void): Request<Connect.Types.GetCurrentMetricDataResponse, AWSError>;
   /**
+   * Gets the real-time active user data from the specified Amazon Connect instance. 
+   */
+  getCurrentUserData(params: Connect.Types.GetCurrentUserDataRequest, callback?: (err: AWSError, data: Connect.Types.GetCurrentUserDataResponse) => void): Request<Connect.Types.GetCurrentUserDataResponse, AWSError>;
+  /**
+   * Gets the real-time active user data from the specified Amazon Connect instance. 
+   */
+  getCurrentUserData(callback?: (err: AWSError, data: Connect.Types.GetCurrentUserDataResponse) => void): Request<Connect.Types.GetCurrentUserDataResponse, AWSError>;
+  /**
    * Retrieves a token for federation.  This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
    */
   getFederationToken(params: Connect.Types.GetFederationTokenRequest, callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
@@ -1215,6 +1223,34 @@ declare class Connect extends Service {
 declare namespace Connect {
   export type ARN = string;
   export type AfterContactWorkTimeLimit = number;
+  export interface AgentContactReference {
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId?: ContactId;
+    /**
+     * The channel of the contact.
+     */
+    Channel?: Channel;
+    /**
+     * How the contact was initiated.
+     */
+    InitiationMethod?: ContactInitiationMethod;
+    /**
+     * The state of the contact.
+     */
+    AgentContactState?: ContactState;
+    /**
+     * The epoch timestamp when the contact state started.
+     */
+    StateStartTimestamp?: Timestamp;
+    /**
+     * The time at which the contact was connected to an agent.
+     */
+    ConnectedToAgentTimestamp?: Timestamp;
+    Queue?: QueueReference;
+  }
+  export type AgentContactReferenceList = AgentContactReference[];
   export type AgentFirstName = string;
   export interface AgentInfo {
     /**
@@ -1266,6 +1302,16 @@ declare namespace Connect {
   export type AgentStatusId = string;
   export type AgentStatusName = string;
   export type AgentStatusOrderNumber = number;
+  export interface AgentStatusReference {
+    /**
+     * The start timestamp of the agent's status.
+     */
+    StatusStartTimestamp?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the agent's status.
+     */
+    StatusArn?: ARN;
+  }
   export type AgentStatusState = "ENABLED"|"DISABLED"|string;
   export interface AgentStatusSummary {
     /**
@@ -1486,6 +1532,7 @@ declare namespace Connect {
   export type BucketName = string;
   export type CampaignId = string;
   export type Channel = "VOICE"|"CHAT"|"TASK"|string;
+  export type ChannelToCountMap = {[key: string]: IntegerCount};
   export type Channels = Channel[];
   export type ChatContent = string;
   export type ChatContentType = string;
@@ -1639,6 +1686,12 @@ declare namespace Connect {
      */
     ScheduledTimestamp?: timestamp;
   }
+  export interface ContactFilter {
+    /**
+     * A list of up to 9 contact states.
+     */
+    ContactStates?: ContactStates;
+  }
   export interface ContactFlow {
     /**
      * The Amazon Resource Name (ARN) of the contact flow.
@@ -1765,6 +1818,8 @@ declare namespace Connect {
   export type ContactId = string;
   export type ContactInitiationMethod = "INBOUND"|"OUTBOUND"|"TRANSFER"|"QUEUE_TRANSFER"|"CALLBACK"|"API"|string;
   export type ContactReferences = {[key: string]: Reference};
+  export type ContactState = "INCOMING"|"PENDING"|"CONNECTING"|"CONNECTED"|"CONNECTED_ONHOLD"|"MISSED"|"ERROR"|"ENDED"|"REJECTED"|string;
+  export type ContactStates = ContactState[];
   export interface ControlPlaneTagFilter {
     /**
      * A list of conditions which would be applied together with an OR condition. 
@@ -3040,6 +3095,34 @@ declare namespace Connect {
      */
     DataSnapshotTime?: timestamp;
   }
+  export interface GetCurrentUserDataRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * Filters up to 100 Queues, or up to 9 ContactStates. The user data is retrieved only for those users who are associated with the queues and have contacts that are in the specified ContactState. 
+     */
+    Filters: UserDataFilters;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+  }
+  export interface GetCurrentUserDataResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of the user data that is returned.
+     */
+    UserDataList?: UserDataList;
+  }
   export interface GetFederationTokenRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -3220,6 +3303,16 @@ declare namespace Connect {
     Name?: HierarchyGroupName;
   }
   export type HierarchyGroupSummaryList = HierarchyGroupSummary[];
+  export interface HierarchyGroupSummaryReference {
+    /**
+     * The unique identifier for the hierarchy group.
+     */
+    Id?: HierarchyGroupId;
+    /**
+     * The Amazon Resource Name (ARN) for the hierarchy group. 
+     */
+    Arn?: ARN;
+  }
   export interface HierarchyLevel {
     /**
      * The identifier of the hierarchy level.
@@ -3263,6 +3356,28 @@ declare namespace Connect {
      * Information about level five.
      */
     LevelFive?: HierarchyGroupSummary;
+  }
+  export interface HierarchyPathReference {
+    /**
+     * Information about level one.
+     */
+    LevelOne?: HierarchyGroupSummaryReference;
+    /**
+     * Information about level two.
+     */
+    LevelTwo?: HierarchyGroupSummaryReference;
+    /**
+     * Information about level three.
+     */
+    LevelThree?: HierarchyGroupSummaryReference;
+    /**
+     * Information about level four.
+     */
+    LevelFour?: HierarchyGroupSummaryReference;
+    /**
+     * Information about level five.
+     */
+    LevelFive?: HierarchyGroupSummaryReference;
   }
   export interface HierarchyStructure {
     /**
@@ -3546,6 +3661,7 @@ declare namespace Connect {
     OutboundCallsEnabled?: OutboundCallsEnabled;
   }
   export type InstanceSummaryList = InstanceSummary[];
+  export type IntegerCount = number;
   export type IntegrationAssociationId = string;
   export interface IntegrationAssociationSummary {
     /**
@@ -4941,6 +5057,16 @@ declare namespace Connect {
     Channel: Channel;
   }
   export type RoutingProfileQueueReferenceList = RoutingProfileQueueReference[];
+  export interface RoutingProfileReference {
+    /**
+     * The identifier of the routing profile.
+     */
+    Id?: RoutingProfileId;
+    /**
+     * The Amazon Resource Name (ARN) of the routing profile.
+     */
+    Arn?: ARN;
+  }
   export interface RoutingProfileSummary {
     /**
      * The identifier of the routing profile.
@@ -5567,7 +5693,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact in this instance of Amazon Connect 
+     * The identifier of the contact in this instance of Amazon Connect. 
      */
     ContactId: ContactId;
     /**
@@ -5589,7 +5715,7 @@ declare namespace Connect {
   }
   export interface TransferContactResponse {
     /**
-     * The identifier of the contact in this instance of Amazon Connect 
+     * The identifier of the contact in this instance of Amazon Connect. 
      */
     ContactId?: ContactId;
     /**
@@ -6306,6 +6432,51 @@ declare namespace Connect {
      */
     Tags?: TagMap;
   }
+  export interface UserData {
+    /**
+     * Information about the user for the data that is returned. It contains resourceId and ARN of the user. 
+     */
+    User?: UserReference;
+    /**
+     * Information about the routing profile that is assigned to the user.
+     */
+    RoutingProfile?: RoutingProfileReference;
+    /**
+     * Contains information about the levels of a hierarchy group assigned to a user.
+     */
+    HierarchyPath?: HierarchyPathReference;
+    /**
+     * The status of the agent that they manually set in their Contact Control Panel (CCP), or that the supervisor manually changes in the real-time metrics report.
+     */
+    Status?: AgentStatusReference;
+    /**
+     * A map of available slots by channel. The key is a channel name. The value is an integer: the available number of slots. 
+     */
+    AvailableSlotsByChannel?: ChannelToCountMap;
+    /**
+     * A map of maximum slots by channel. The key is a channel name. The value is an integer: the maximum number of slots. This is calculated from MediaConcurrency of the RoutingProfile assigned to the agent. 
+     */
+    MaxSlotsByChannel?: ChannelToCountMap;
+    /**
+     *  A map of active slots by channel. The key is a channel name. The value is an integer: the number of active slots. 
+     */
+    ActiveSlotsByChannel?: ChannelToCountMap;
+    /**
+     * A list of contact reference information.
+     */
+    Contacts?: AgentContactReferenceList;
+  }
+  export interface UserDataFilters {
+    /**
+     * Contains information about a queue resource for which metrics are returned.
+     */
+    Queues?: Queues;
+    /**
+     * A filter for the user data based on the contact information that is associated to the user. It contains a list of contact states. 
+     */
+    ContactFilter?: ContactFilter;
+  }
+  export type UserDataList = UserData[];
   export type UserId = string;
   export interface UserIdentityInfo {
     /**
@@ -6358,6 +6529,16 @@ declare namespace Connect {
      * The identifier of the contact flow.
      */
     ContactFlowId: ContactFlowId;
+  }
+  export interface UserReference {
+    /**
+     * The unique identifier for the user.
+     */
+    Id?: UserId;
+    /**
+     * The Amazon Resource Name (ARN) for the user.
+     */
+    Arn?: ARN;
   }
   export type UserSearchConditionList = UserSearchCriteria[];
   export interface UserSearchCriteria {

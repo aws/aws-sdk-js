@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1148.0-->
+<!--LATEST=2.1149.0-->
 <!--ENTRYINSERT-->
+
+## 2.1149.0
+* feature: ChimeSDKMessaging: This release adds support for searching channels by members via the SearchChannels API, removes required restrictions for Name and Mode in UpdateChannel API and enhances CreateChannel API by exposing member and moderator list as well as channel id as optional parameters.
+* feature: Connect: This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
 
 ## 2.1148.0
 * feature: ApplicationInsights: Provide Account Level onboarding support through CFN/CLI

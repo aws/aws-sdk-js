@@ -316,6 +316,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   redactChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.RedactChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.RedactChannelMessageResponse, AWSError>;
   /**
+   * Allows an AppInstanceUser to search the channels that they belong to. The AppInstanceUser can search by membership or external ID. An AppInstanceAdmin can search across all channels within the AppInstance.
+   */
+  searchChannels(params: ChimeSDKMessaging.Types.SearchChannelsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SearchChannelsResponse) => void): Request<ChimeSDKMessaging.Types.SearchChannelsResponse, AWSError>;
+  /**
+   * Allows an AppInstanceUser to search the channels that they belong to. The AppInstanceUser can search by membership or external ID. An AppInstanceAdmin can search across all channels within the AppInstance.
+   */
+  searchChannels(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SearchChannelsResponse) => void): Request<ChimeSDKMessaging.Types.SearchChannelsResponse, AWSError>;
+  /**
    * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
    */
   sendChannelMessage(params: ChimeSDKMessaging.Types.SendChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SendChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.SendChannelMessageResponse, AWSError>;
@@ -380,7 +388,7 @@ declare namespace ChimeSDKMessaging {
      */
     Type?: ChannelMembershipType;
     /**
-     * The time at which a message was last read.
+     * The time at which an AppInstanceUser last marked a channel as read.
      */
     ReadMarkerTimestamp?: Timestamp;
   }
@@ -616,6 +624,8 @@ declare namespace ChimeSDKMessaging {
     Processors?: ProcessorList;
   }
   export type ChannelFlowSummaryList = ChannelFlowSummary[];
+  export type ChannelId = string;
+  export type ChannelMemberArns = ChimeArn[];
   export interface ChannelMembership {
     /**
      * The identifier of the member who invited another member.
@@ -829,6 +839,7 @@ declare namespace ChimeSDKMessaging {
      */
     CreatedBy?: Identity;
   }
+  export type ChannelModeratorArns = ChimeArn[];
   export interface ChannelModeratorSummary {
     /**
      * The data for a moderator.
@@ -1004,6 +1015,18 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the channel in the request.
+     */
+    ChannelId?: ChannelId;
+    /**
+     * The ARNs of the channel members in the request.
+     */
+    MemberArns?: ChannelMemberArns;
+    /**
+     * The ARNs of the channel moderators in the request.
+     */
+    ModeratorArns?: ChannelModeratorArns;
   }
   export interface CreateChannelResponse {
     /**
@@ -1247,6 +1270,9 @@ declare namespace ChimeSDKMessaging {
      * The ARN of the channel.
      */
     ChannelArn?: ChimeArn;
+    /**
+     * The details of a user.
+     */
     Member?: Identity;
     /**
      * The channel membership preferences for an AppInstanceUser .
@@ -1399,7 +1425,7 @@ declare namespace ChimeSDKMessaging {
   }
   export interface ListChannelMembershipsForAppInstanceUserResponse {
     /**
-     * The token passed by previous API calls until all requested users are returned.
+     * The information for the requested channel memberships.
      */
     ChannelMemberships?: ChannelMembershipForAppInstanceUserSummaryList;
     /**
@@ -1686,7 +1712,7 @@ declare namespace ChimeSDKMessaging {
      */
     AllowNotifications: AllowNotifications;
     /**
-     * The simple JSON object used to send a subset of a push notification to the requsted member.
+     * The simple JSON object used to send a subset of a push notification to the requested member.
      */
     FilterRule?: FilterRule;
   }
@@ -1715,6 +1741,9 @@ declare namespace ChimeSDKMessaging {
      * The ARN of the channel.
      */
     ChannelArn?: ChimeArn;
+    /**
+     * The details of a user.
+     */
     Member?: Identity;
     /**
      * The ARN and metadata of the member being added.
@@ -1746,6 +1775,53 @@ declare namespace ChimeSDKMessaging {
     MessageId?: MessageId;
   }
   export type ResourceName = string;
+  export interface SearchChannelsRequest {
+    /**
+     * The AppInstanceUserArn of the user making the API call.
+     */
+    ChimeBearer?: ChimeArn;
+    /**
+     * A list of the Field objects in the channel being searched.
+     */
+    Fields: SearchFields;
+    /**
+     * The maximum number of channels that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token returned from previous API requests until the number of channels is reached.
+     */
+    NextToken?: NextToken;
+  }
+  export interface SearchChannelsResponse {
+    /**
+     * A list of the channels in the request.
+     */
+    Channels?: ChannelSummaryList;
+    /**
+     * The token returned from previous API responses until the number of channels is reached.
+     */
+    NextToken?: NextToken;
+  }
+  export interface SearchField {
+    /**
+     * An enum value that indicates the key to search the channel on. MEMBERS allows you to search channels based on memberships. You can use it with the EQUALS operator to get channels whose memberships are equal to the specified values, and with the INCLUDES operator to get channels whose memberships include the specified values.
+     */
+    Key: SearchFieldKey;
+    /**
+     * The values that you want to search for, a list of strings. The values must be AppInstanceUserArns specified as a list of strings.  This operation isn't supported for AppInstanceUsers with large number of memberships. 
+     */
+    Values: SearchFieldValues;
+    /**
+     * The operator used to compare field values, currently EQUALS or INCLUDES. Use the EQUALS operator to find channels whose memberships equal the specified values. Use the INCLUDES operator to find channels whose memberships include the specified values.
+     */
+    Operator: SearchFieldOperator;
+  }
+  export type SearchFieldKey = "MEMBERS"|string;
+  export type SearchFieldOperator = "EQUALS"|"INCLUDES"|string;
+  export type SearchFieldValue = string;
+  export type SearchFieldValues = SearchFieldValue[];
+  export type SearchFields = SearchField[];
   export interface SendChannelMessageRequest {
     /**
      * The ARN of the channel.
@@ -1916,11 +1992,11 @@ declare namespace ChimeSDKMessaging {
     /**
      * The name of the channel.
      */
-    Name: NonEmptyResourceName;
+    Name?: NonEmptyResourceName;
     /**
      * The mode of the update request.
      */
-    Mode: ChannelMode;
+    Mode?: ChannelMode;
     /**
      * The metadata for the update request.
      */
