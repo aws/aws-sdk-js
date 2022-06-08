@@ -1163,5 +1163,12 @@
   "emrserverless": {
     "prefix": "emr-serverless",
     "name": "EMRServerless"
+  },
+  "m2": {
+    "name": "M2"
+  },
+  "redshiftserverless": {
+    "prefix": "redshift-serverless",
+    "name": "RedshiftServerless"
   }
 }

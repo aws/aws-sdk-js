@@ -306,5 +306,7 @@ module.exports = {
   PinpointSMSVoiceV2: require('./pinpointsmsvoicev2'),
   Ivschat: require('./ivschat'),
   ChimeSDKMediaPipelines: require('./chimesdkmediapipelines'),
-  EMRServerless: require('./emrserverless')
+  EMRServerless: require('./emrserverless'),
+  M2: require('./m2'),
+  RedshiftServerless: require('./redshiftserverless')
 };

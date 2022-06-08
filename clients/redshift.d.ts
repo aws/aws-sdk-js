@@ -697,6 +697,14 @@ declare class Redshift extends Service {
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
+   * Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity. For more information about IAM identities, see IAM Identities (users, user groups, and roles) in the Amazon Web Services Identity and Access Management User Guide. The Identity and Access Management (IAM) identity that runs this operation must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Using identity-based policies (IAM policies) in the Amazon Redshift Cluster Management Guide. 
+   */
+  getClusterCredentialsWithIAM(params: Redshift.Types.GetClusterCredentialsWithIAMMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterExtendedCredentials) => void): Request<Redshift.Types.ClusterExtendedCredentials, AWSError>;
+  /**
+   * Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity. For more information about IAM identities, see IAM Identities (users, user groups, and roles) in the Amazon Web Services Identity and Access Management User Guide. The Identity and Access Management (IAM) identity that runs this operation must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Using identity-based policies (IAM policies) in the Amazon Redshift Cluster Management Guide. 
+   */
+  getClusterCredentialsWithIAM(callback?: (err: AWSError, data: Redshift.Types.ClusterExtendedCredentials) => void): Request<Redshift.Types.ClusterExtendedCredentials, AWSError>;
+  /**
    * Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.
    */
   getReservedNodeExchangeConfigurationOptions(params: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage, AWSError>;
@@ -1468,6 +1476,24 @@ declare namespace Redshift {
      * A list of revisions.
      */
     ClusterDbRevisions?: ClusterDbRevisionsList;
+  }
+  export interface ClusterExtendedCredentials {
+    /**
+     * A database user name that you provide when you connect to a database. The database user is mapped 1:1 to the source IAM identity. 
+     */
+    DbUser?: String;
+    /**
+     * A temporary password that you provide when you connect to a database.
+     */
+    DbPassword?: SensitiveString;
+    /**
+     * The time (UTC) when the temporary password expires. After this timestamp, a log in with the temporary password fails.
+     */
+    Expiration?: TStamp;
+    /**
+     * Reserved for future use.
+     */
+    NextRefreshTime?: TStamp;
   }
   export interface ClusterIamRole {
     /**
@@ -3584,7 +3610,7 @@ declare namespace Redshift {
      */
     DbName?: String;
     /**
-     * The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.
+     * The unique identifier of the cluster that contains the database for which you are requesting credentials. This parameter is case sensitive.
      */
     ClusterIdentifier: String;
     /**
@@ -3599,6 +3625,20 @@ declare namespace Redshift {
      * A list of the names of existing database groups that the user named in DbUser will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC. Database group name constraints   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbGroups?: DbGroupList;
+  }
+  export interface GetClusterCredentialsWithIAMMessage {
+    /**
+     * The name of the database for which you are requesting credentials. If the database name is specified, the IAM policy must allow access to the resource dbname for the specified database name. If the database name is not specified, access to all databases is allowed.
+     */
+    DbName?: String;
+    /**
+     * The unique identifier of the cluster that contains the database for which you are requesting credentials. 
+     */
+    ClusterIdentifier: String;
+    /**
+     * The number of seconds until the returned temporary password expires. Range: 900-3600. Default: 900.
+     */
+    DurationSeconds?: IntegerOptional;
   }
   export interface GetReservedNodeExchangeConfigurationOptionsInputMessage {
     /**

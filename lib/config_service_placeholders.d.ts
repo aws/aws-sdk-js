@@ -307,6 +307,8 @@ export abstract class ConfigurationServicePlaceholders {
   ivschat?: AWS.Ivschat.Types.ClientConfiguration;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
   emrserverless?: AWS.EMRServerless.Types.ClientConfiguration;
+  m2?: AWS.M2.Types.ClientConfiguration;
+  redshiftserverless?: AWS.RedshiftServerless.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -616,4 +618,6 @@ export interface ConfigurationServiceApiVersions {
   ivschat?: AWS.Ivschat.Types.apiVersion;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;
   emrserverless?: AWS.EMRServerless.Types.apiVersion;
+  m2?: AWS.M2.Types.apiVersion;
+  redshiftserverless?: AWS.RedshiftServerless.Types.apiVersion;
 }
