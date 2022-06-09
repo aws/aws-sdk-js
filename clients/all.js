@@ -307,6 +307,5 @@ module.exports = {
   Ivschat: require('./ivschat'),
   ChimeSDKMediaPipelines: require('./chimesdkmediapipelines'),
   EMRServerless: require('./emrserverless'),
-  M2: require('./m2'),
-  RedshiftServerless: require('./redshiftserverless')
+  M2: require('./m2')
 };
