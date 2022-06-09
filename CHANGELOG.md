@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1151.0-->
+<!--LATEST=2.1152.0-->
 <!--ENTRYINSERT-->
+
+## 2.1152.0
+* feature: ChimeSDKMeetings: Adds support for live transcription in AWS GovCloud (US) Regions.
 
 ## 2.1151.0
 * feature: DMS: This release adds DMS Fleet Advisor APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to create and modify fleet advisor instances, and to collect and analyze information about the local data infrastructure.
