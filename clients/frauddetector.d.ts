@@ -100,11 +100,11 @@ declare class FraudDetector extends Service {
    */
   createVariable(callback?: (err: AWSError, data: FraudDetector.Types.CreateVariableResult) => void): Request<FraudDetector.Types.CreateVariableResult, AWSError>;
   /**
-   * Deletes data that was batch imported to Amazon Fraud Detector. 
+   * Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. 
    */
   deleteBatchImportJob(params: FraudDetector.Types.DeleteBatchImportJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchImportJobResult) => void): Request<FraudDetector.Types.DeleteBatchImportJobResult, AWSError>;
   /**
-   * Deletes data that was batch imported to Amazon Fraud Detector. 
+   * Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. 
    */
   deleteBatchImportJob(callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchImportJobResult) => void): Request<FraudDetector.Types.DeleteBatchImportJobResult, AWSError>;
   /**
@@ -520,11 +520,11 @@ declare class FraudDetector extends Service {
    */
   updateModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionResult) => void): Request<FraudDetector.Types.UpdateModelVersionResult, AWSError>;
   /**
-   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
+   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED.   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
    */
   updateModelVersionStatus(params: FraudDetector.Types.UpdateModelVersionStatusRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionStatusResult) => void): Request<FraudDetector.Types.UpdateModelVersionStatusResult, AWSError>;
   /**
-   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
+   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED.   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
    */
   updateModelVersionStatus(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionStatusResult) => void): Request<FraudDetector.Types.UpdateModelVersionStatusResult, AWSError>;
   /**
@@ -1790,7 +1790,7 @@ declare namespace FraudDetector {
      */
     detectorVersionId: wholeNumberVersionString;
     /**
-     *  The timestamp that defines when the prediction was generated. 
+     *  The timestamp that defines when the prediction was generated. The timestamp must be specified using ISO 8601 standard in UTC. We recommend calling ListEventPredictions first, and using the predictionTimestamp value in the response to provide an accurate prediction timestamp value.
      */
     predictionTimestamp: time;
   }

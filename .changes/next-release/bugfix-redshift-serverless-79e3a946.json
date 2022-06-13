@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "redshift-serverless",
-  "description": "remove redshift-serverless client"
-}

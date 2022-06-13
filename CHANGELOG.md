@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1152.0-->
+<!--LATEST=2.1153.0-->
 <!--ENTRYINSERT-->
+
+## 2.1153.0
+* bugfix: redshift-serverless: remove redshift-serverless client
+* feature: Outposts: This release adds API operations AWS uses to install Outpost servers.
 
 ## 2.1152.0
 * feature: ChimeSDKMeetings: Adds support for live transcription in AWS GovCloud (US) Regions.

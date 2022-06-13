@@ -68,6 +68,14 @@ declare class Outposts extends Service {
    */
   getCatalogItem(callback?: (err: AWSError, data: Outposts.Types.GetCatalogItemOutput) => void): Request<Outposts.Types.GetCatalogItemOutput, AWSError>;
   /**
+   *   Amazon Web Services uses this action to install Outpost servers.   Gets information about a specified connection.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
+   */
+  getConnection(params: Outposts.Types.GetConnectionRequest, callback?: (err: AWSError, data: Outposts.Types.GetConnectionResponse) => void): Request<Outposts.Types.GetConnectionResponse, AWSError>;
+  /**
+   *   Amazon Web Services uses this action to install Outpost servers.   Gets information about a specified connection.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
+   */
+  getConnection(callback?: (err: AWSError, data: Outposts.Types.GetConnectionResponse) => void): Request<Outposts.Types.GetConnectionResponse, AWSError>;
+  /**
    * Gets an order.
    */
   getOrder(params: Outposts.Types.GetOrderInput, callback?: (err: AWSError, data: Outposts.Types.GetOrderOutput) => void): Request<Outposts.Types.GetOrderOutput, AWSError>;
@@ -155,6 +163,14 @@ declare class Outposts extends Service {
    * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Outposts.Types.ListTagsForResourceResponse) => void): Request<Outposts.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *   Amazon Web Services uses this action to install Outpost servers.   Starts the connection required for Outpost server installation.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
+   */
+  startConnection(params: Outposts.Types.StartConnectionRequest, callback?: (err: AWSError, data: Outposts.Types.StartConnectionResponse) => void): Request<Outposts.Types.StartConnectionResponse, AWSError>;
+  /**
+   *   Amazon Web Services uses this action to install Outpost servers.   Starts the connection required for Outpost server installation.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
+   */
+  startConnection(callback?: (err: AWSError, data: Outposts.Types.StartConnectionResponse) => void): Request<Outposts.Types.StartConnectionResponse, AWSError>;
   /**
    * Adds tags to the specified resource.
    */
@@ -282,6 +298,8 @@ declare namespace Outposts {
   export type AvailabilityZoneId = string;
   export type AvailabilityZoneIdList = AvailabilityZoneId[];
   export type AvailabilityZoneList = AvailabilityZone[];
+  export type CIDR = string;
+  export type CIDRList = CIDR[];
   export interface CancelOrderInput {
     /**
      *  The ID of the order to cancel. 
@@ -334,6 +352,33 @@ declare namespace Outposts {
      */
     HostId?: HostId;
   }
+  export interface ConnectionDetails {
+    /**
+     *  The public key of the client. 
+     */
+    ClientPublicKey?: WireGuardPublicKey;
+    /**
+     *  The public key of the server. 
+     */
+    ServerPublicKey?: WireGuardPublicKey;
+    /**
+     *  The endpoint for the server. 
+     */
+    ServerEndpoint?: ServerEndpoint;
+    /**
+     *  The client tunnel address. 
+     */
+    ClientTunnelAddress?: CIDR;
+    /**
+     *  The server tunnel address. 
+     */
+    ServerTunnelAddress?: CIDR;
+    /**
+     *  The allowed IP addresses. 
+     */
+    AllowedIps?: CIDRList;
+  }
+  export type ConnectionId = string;
   export type ContactName = string;
   export type ContactPhoneNumber = string;
   export type CountryCode = string;
@@ -426,6 +471,7 @@ declare namespace Outposts {
   }
   export interface DeleteSiteOutput {
   }
+  export type DeviceSerialNumber = string;
   export type DistrictOrCounty = string;
   export interface EC2Capacity {
     /**
@@ -456,6 +502,22 @@ declare namespace Outposts {
      * Information about this catalog item.
      */
     CatalogItem?: CatalogItem;
+  }
+  export interface GetConnectionRequest {
+    /**
+     *  The ID of the connection you request. 
+     */
+    ConnectionId: ConnectionId;
+  }
+  export interface GetConnectionResponse {
+    /**
+     *  The ID of the connection you receive. 
+     */
+    ConnectionId?: ConnectionId;
+    /**
+     *  Information about a connection. 
+     */
+    ConnectionDetails?: ConnectionDetails;
   }
   export interface GetOrderInput {
     /**
@@ -679,6 +741,7 @@ declare namespace Outposts {
   export type MaxSize = string;
   export type MaximumSupportedWeightLbs = "NO_LIMIT"|"MAX_1400_LBS"|"MAX_1600_LBS"|"MAX_1800_LBS"|"MAX_2000_LBS"|string;
   export type Municipality = string;
+  export type NetworkInterfaceDeviceIndex = number;
   export type OpticalStandard = "OPTIC_10GBASE_SR"|"OPTIC_10GBASE_IR"|"OPTIC_10GBASE_LR"|"OPTIC_40GBASE_SR"|"OPTIC_40GBASE_ESR"|"OPTIC_40GBASE_IR4_LR4L"|"OPTIC_40GBASE_LR4"|"OPTIC_100GBASE_SR4"|"OPTIC_100GBASE_CWDM4"|"OPTIC_100GBASE_LR4"|"OPTIC_100G_PSM4_MSA"|"OPTIC_1000BASE_LX"|"OPTIC_1000BASE_SX"|string;
   export interface Order {
     /**
@@ -821,6 +884,7 @@ declare namespace Outposts {
      */
     MaximumSupportedWeightLbs?: MaximumSupportedWeightLbs;
   }
+  export type ServerEndpoint = string;
   export interface Site {
     SiteId?: SiteId;
     AccountId?: AccountId;
@@ -858,6 +922,34 @@ declare namespace Outposts {
   export type SiteName = string;
   export type SiteNotes = string;
   export type SkuCode = string;
+  export interface StartConnectionRequest {
+    /**
+     *  The serial number of the dongle. 
+     */
+    DeviceSerialNumber: DeviceSerialNumber;
+    /**
+     *  The ID of the Outpost server. 
+     */
+    AssetId: AssetId;
+    /**
+     *  The public key of the client. 
+     */
+    ClientPublicKey: WireGuardPublicKey;
+    /**
+     *  The device index of the network interface on the Outpost server. 
+     */
+    NetworkInterfaceDeviceIndex: NetworkInterfaceDeviceIndex;
+  }
+  export interface StartConnectionResponse {
+    /**
+     *  The ID of the connection. 
+     */
+    ConnectionId?: ConnectionId;
+    /**
+     *  The underlay IP address. 
+     */
+    UnderlayIpAddress?: UnderlayIpAddress;
+  }
   export type StateOrRegion = string;
   export type StateOrRegionList = StateOrRegion[];
   export type SupportedHardwareType = "RACK"|"SERVER"|string;
@@ -882,6 +974,7 @@ declare namespace Outposts {
   }
   export type TagValue = string;
   export type Token = string;
+  export type UnderlayIpAddress = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -995,6 +1088,7 @@ declare namespace Outposts {
   }
   export type UplinkCount = "UPLINK_COUNT_1"|"UPLINK_COUNT_2"|"UPLINK_COUNT_3"|"UPLINK_COUNT_4"|"UPLINK_COUNT_5"|"UPLINK_COUNT_6"|"UPLINK_COUNT_7"|"UPLINK_COUNT_8"|"UPLINK_COUNT_12"|"UPLINK_COUNT_16"|string;
   export type UplinkGbps = "UPLINK_1G"|"UPLINK_10G"|"UPLINK_40G"|"UPLINK_100G"|string;
+  export type WireGuardPublicKey = string;
   export type outpostListDefinition = Outpost[];
   export type siteListDefinition = Site[];
   /**
