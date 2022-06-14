@@ -220,6 +220,14 @@ declare class LookoutMetrics extends Service {
    */
   untagResource(callback?: (err: AWSError, data: LookoutMetrics.Types.UntagResourceResponse) => void): Request<LookoutMetrics.Types.UntagResourceResponse, AWSError>;
   /**
+   * Make changes to an existing alert.
+   */
+  updateAlert(params: LookoutMetrics.Types.UpdateAlertRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.UpdateAlertResponse) => void): Request<LookoutMetrics.Types.UpdateAlertResponse, AWSError>;
+  /**
+   * Make changes to an existing alert.
+   */
+  updateAlert(callback?: (err: AWSError, data: LookoutMetrics.Types.UpdateAlertResponse) => void): Request<LookoutMetrics.Types.UpdateAlertResponse, AWSError>;
+  /**
    * Updates a detector. After activation, you can only change a detector's ingestion delay and description.
    */
   updateAnomalyDetector(params: LookoutMetrics.Types.UpdateAnomalyDetectorRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.UpdateAnomalyDetectorResponse) => void): Request<LookoutMetrics.Types.UpdateAnomalyDetectorResponse, AWSError>;
@@ -297,8 +305,22 @@ declare namespace LookoutMetrics {
      * The time at which the alert was created.
      */
     CreationTime?: Timestamp;
+    /**
+     * The configuration of the alert filters, containing MetricList and DimensionFilter.
+     */
+    AlertFilters?: AlertFilters;
   }
   export type AlertDescription = string;
+  export interface AlertFilters {
+    /**
+     * The list of measures that you want to get alerts for.
+     */
+    MetricList?: MetricNameList;
+    /**
+     * The list of DimensionFilter objects that are used for dimension-based filtering.
+     */
+    DimensionFilterList?: DimensionFilterList;
+  }
   export type AlertName = string;
   export type AlertStatus = "ACTIVE"|"INACTIVE"|string;
   export interface AlertSummary {
@@ -610,7 +632,7 @@ declare namespace LookoutMetrics {
     /**
      * An integer from 0 to 100 specifying the alert sensitivity threshold.
      */
-    AlertSensitivityThreshold: SensitivityThreshold;
+    AlertSensitivityThreshold?: SensitivityThreshold;
     /**
      * A description of the alert.
      */
@@ -627,6 +649,10 @@ declare namespace LookoutMetrics {
      * A list of tags to apply to the alert.
      */
     Tags?: TagMap;
+    /**
+     * The configuration of the alert filters, containing MetricList and DimensionFilterList.
+     */
+    AlertFilters?: AlertFilters;
   }
   export interface CreateAlertResponse {
     /**
@@ -1030,6 +1056,17 @@ declare namespace LookoutMetrics {
     DimensionValueContributionList?: DimensionValueContributionList;
   }
   export type DimensionContributionList = DimensionContribution[];
+  export interface DimensionFilter {
+    /**
+     * The name of the dimension to filter on.
+     */
+    DimensionName?: ColumnName;
+    /**
+     * The list of values for the dimension specified in DimensionName that you want to filter on.
+     */
+    DimensionValueList?: DimensionValueList;
+  }
+  export type DimensionFilterList = DimensionFilter[];
   export type DimensionList = ColumnName[];
   export interface DimensionNameValue {
     /**
@@ -1054,6 +1091,7 @@ declare namespace LookoutMetrics {
     ContributionScore?: Score;
   }
   export type DimensionValueContributionList = DimensionValueContribution[];
+  export type DimensionValueList = DimensionValue[];
   export type ErrorMessage = string;
   export type ExecutionList = ExecutionStatus[];
   export interface ExecutionStatus {
@@ -1422,6 +1460,7 @@ declare namespace LookoutMetrics {
   export type MetricLevelImpactList = MetricLevelImpact[];
   export type MetricList = Metric[];
   export type MetricName = string;
+  export type MetricNameList = MetricName[];
   export type MetricSetDescription = string;
   export type MetricSetName = string;
   export interface MetricSetSummary {
@@ -1600,7 +1639,7 @@ declare namespace LookoutMetrics {
      */
     SnsTopicArn: Arn;
     /**
-     * The format of the SNS topic.
+     * The format of the SNS topic.    JSON – Send JSON alerts with an anomaly ID and a link to the anomaly detail page. This is the default.    LONG_TEXT – Send human-readable alerts with information about the impacted timeseries and a link to the anomaly detail page. We recommend this for email.    SHORT_TEXT – Send human-readable alerts with a link to the anomaly detail page. We recommend this for SMS.  
      */
     SnsFormat?: SnsFormat;
   }
@@ -1702,6 +1741,34 @@ declare namespace LookoutMetrics {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAlertRequest {
+    /**
+     * The ARN of the alert to update.
+     */
+    AlertArn: Arn;
+    /**
+     * A description of the alert.
+     */
+    AlertDescription?: AlertDescription;
+    /**
+     * An integer from 0 to 100 specifying the alert sensitivity threshold.
+     */
+    AlertSensitivityThreshold?: SensitivityThreshold;
+    /**
+     * Action that will be triggered when there is an alert.
+     */
+    Action?: Action;
+    /**
+     * The configuration of the alert filters, containing MetricList and DimensionFilterList.
+     */
+    AlertFilters?: AlertFilters;
+  }
+  export interface UpdateAlertResponse {
+    /**
+     * The ARN of the updated alert.
+     */
+    AlertArn?: Arn;
   }
   export interface UpdateAnomalyDetectorRequest {
     /**

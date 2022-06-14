@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1153.0-->
+<!--LATEST=2.1154.0-->
 <!--ENTRYINSERT-->
+
+## 2.1154.0
+* feature: Budgets: Add a budgets ThrottlingException. Update the CostFilters value pattern.
+* feature: LookoutMetrics: Adding filters to Alert and adding new UpdateAlert API.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
 
 ## 2.1153.0
 * bugfix: redshift-serverless: remove redshift-serverless client
