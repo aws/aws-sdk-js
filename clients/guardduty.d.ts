@@ -12,6 +12,14 @@ declare class GuardDuty extends Service {
   constructor(options?: GuardDuty.Types.ClientConfiguration)
   config: Config & GuardDuty.Types.ClientConfiguration;
   /**
+   * Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.
+   */
+  acceptAdministratorInvitation(params: GuardDuty.Types.AcceptAdministratorInvitationRequest, callback?: (err: AWSError, data: GuardDuty.Types.AcceptAdministratorInvitationResponse) => void): Request<GuardDuty.Types.AcceptAdministratorInvitationResponse, AWSError>;
+  /**
+   * Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.
+   */
+  acceptAdministratorInvitation(callback?: (err: AWSError, data: GuardDuty.Types.AcceptAdministratorInvitationResponse) => void): Request<GuardDuty.Types.AcceptAdministratorInvitationResponse, AWSError>;
+  /**
    * Accepts the invitation to be monitored by a GuardDuty administrator account.
    */
   acceptInvitation(params: GuardDuty.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
@@ -174,17 +182,25 @@ declare class GuardDuty extends Service {
   /**
    * Disassociates the current GuardDuty member account from its administrator account.
    */
+  disassociateFromAdministratorAccount(params: GuardDuty.Types.DisassociateFromAdministratorAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromAdministratorAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * Disassociates the current GuardDuty member account from its administrator account.
+   */
+  disassociateFromAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromAdministratorAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * Disassociates the current GuardDuty member account from its administrator account.
+   */
   disassociateFromMasterAccount(params: GuardDuty.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
    * Disassociates the current GuardDuty member account from its administrator account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. Member accounts added through Invitation get deleted from the current GuardDuty administrator account after 30 days of disassociation.
+   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   disassociateMembers(params: GuardDuty.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. Member accounts added through Invitation get deleted from the current GuardDuty administrator account after 30 days of disassociation.
+   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   disassociateMembers(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
@@ -195,6 +211,14 @@ declare class GuardDuty extends Service {
    * Enables an Amazon Web Services account within the organization as the GuardDuty delegated administrator.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: GuardDuty.Types.EnableOrganizationAdminAccountResponse) => void): Request<GuardDuty.Types.EnableOrganizationAdminAccountResponse, AWSError>;
+  /**
+   * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
+   */
+  getAdministratorAccount(params: GuardDuty.Types.GetAdministratorAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetAdministratorAccountResponse) => void): Request<GuardDuty.Types.GetAdministratorAccountResponse, AWSError>;
+  /**
+   * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
+   */
+  getAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetAdministratorAccountResponse) => void): Request<GuardDuty.Types.GetAdministratorAccountResponse, AWSError>;
   /**
    * Retrieves an Amazon GuardDuty detector specified by the detectorId.
    */
@@ -268,6 +292,14 @@ declare class GuardDuty extends Service {
    */
   getMembers(callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
+   * Provides the number of days left for each data source used in the free trial period.
+   */
+  getRemainingFreeTrialDays(params: GuardDuty.Types.GetRemainingFreeTrialDaysRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetRemainingFreeTrialDaysResponse) => void): Request<GuardDuty.Types.GetRemainingFreeTrialDaysResponse, AWSError>;
+  /**
+   * Provides the number of days left for each data source used in the free trial period.
+   */
+  getRemainingFreeTrialDays(callback?: (err: AWSError, data: GuardDuty.Types.GetRemainingFreeTrialDaysResponse) => void): Request<GuardDuty.Types.GetRemainingFreeTrialDaysResponse, AWSError>;
+  /**
    * Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
    */
   getThreatIntelSet(params: GuardDuty.Types.GetThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
@@ -276,11 +308,11 @@ declare class GuardDuty extends Service {
    */
   getThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see Understanding How Usage Costs are Calculated.
+   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources, the cost returned will include only the usage so far under 30 days. This may differ from the cost metrics in the console, which project usage over 30 days to provide a monthly cost estimate. For more information, see Understanding How Usage Costs are Calculated.
    */
   getUsageStatistics(params: GuardDuty.Types.GetUsageStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see Understanding How Usage Costs are Calculated.
+   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources, the cost returned will include only the usage so far under 30 days. This may differ from the cost metrics in the console, which project usage over 30 days to provide a monthly cost estimate. For more information, see Understanding How Usage Costs are Calculated.
    */
   getUsageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
   /**
@@ -477,6 +509,22 @@ declare class GuardDuty extends Service {
   updateThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.UpdateThreatIntelSetResponse) => void): Request<GuardDuty.Types.UpdateThreatIntelSetResponse, AWSError>;
 }
 declare namespace GuardDuty {
+  export interface AcceptAdministratorInvitationRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+    /**
+     * The account ID of the GuardDuty administrator account whose invitation you're accepting.
+     */
+    AdministratorId: String;
+    /**
+     * The value that is used to validate the administrator account to the member account.
+     */
+    InvitationId: String;
+  }
+  export interface AcceptAdministratorInvitationResponse {
+  }
   export interface AcceptInvitationRequest {
     /**
      * The unique ID of the detector of the GuardDuty member account.
@@ -532,6 +580,17 @@ declare namespace GuardDuty {
     Email: Email;
   }
   export type AccountDetails = AccountDetail[];
+  export interface AccountFreeTrialInfo {
+    /**
+     * The account identifier of the GuardDuty member account.
+     */
+    AccountId?: String;
+    /**
+     * Describes the data source enabled for the GuardDuty member account.
+     */
+    DataSources?: DataSourcesFreeTrial;
+  }
+  export type AccountFreeTrialInfos = AccountFreeTrialInfo[];
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export interface AccountLevelPermissions {
@@ -578,6 +637,25 @@ declare namespace GuardDuty {
   }
   export type AdminAccounts = AdminAccount[];
   export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
+  export interface Administrator {
+    /**
+     * The ID of the account used as the administrator account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The value that is used to validate the administrator account to the member account.
+     */
+    InvitationId?: String;
+    /**
+     * The status of the relationship between the administrator and member accounts.
+     */
+    RelationshipStatus?: String;
+    /**
+     * The timestamp when the invitation was sent.
+     */
+    InvitedAt?: String;
+  }
+  export type AffectedResources = {[key: string]: String};
   export interface ArchiveFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
@@ -623,6 +701,10 @@ declare namespace GuardDuty {
      * The details of the Amazon Web Services account that made the API call. This field appears if the call was made from outside your account.
      */
     RemoteAccountDetails?: RemoteAccountDetails;
+    /**
+     * The details of the Amazon Web Services account that made the API call. This field identifies the resources that were affected by this API call.
+     */
+    AffectedResources?: AffectedResources;
   }
   export interface BlockPublicAccess {
     /**
@@ -1004,8 +1086,36 @@ declare namespace GuardDuty {
      */
     Kubernetes?: KubernetesConfigurationResult;
   }
+  export interface DataSourceFreeTrial {
+    /**
+     * A value that specifies the number of days left to use each enabled data source.
+     */
+    FreeTrialDaysRemaining?: Integer;
+  }
   export type DataSourceList = DataSource[];
   export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
+  export interface DataSourcesFreeTrial {
+    /**
+     * Describes whether any AWS CloudTrail management event logs are enabled as data sources.
+     */
+    CloudTrail?: DataSourceFreeTrial;
+    /**
+     * Describes whether any DNS logs are enabled as data sources.
+     */
+    DnsLogs?: DataSourceFreeTrial;
+    /**
+     * Describes whether any VPC Flow logs are enabled as data sources.
+     */
+    FlowLogs?: DataSourceFreeTrial;
+    /**
+     * Describes whether any S3 data event logs are enabled as data sources.
+     */
+    S3Logs?: DataSourceFreeTrial;
+    /**
+     * Describes whether any Kubernetes logs are enabled as data sources.
+     */
+    Kubernetes?: KubernetesDataSourceFreeTrial;
+  }
   export interface DeclineInvitationsRequest {
     /**
      * A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.
@@ -1201,6 +1311,14 @@ declare namespace GuardDuty {
   }
   export interface DisableOrganizationAdminAccountResponse {
   }
+  export interface DisassociateFromAdministratorAccountRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+  }
+  export interface DisassociateFromAdministratorAccountResponse {
+  }
   export interface DisassociateFromMasterAccountRequest {
     /**
      * The unique ID of the detector of the GuardDuty member account.
@@ -1230,6 +1348,14 @@ declare namespace GuardDuty {
      * The domain information for the API request.
      */
     Domain?: String;
+    /**
+     * The network connection protocol observed in the activity that prompted GuardDuty to generate the finding.
+     */
+    Protocol?: String;
+    /**
+     * Indicates whether the targeted port is blocked.
+     */
+    Blocked?: Boolean;
   }
   export interface DomainDetails {
     /**
@@ -1378,6 +1504,18 @@ declare namespace GuardDuty {
      * The longitude information of the remote IP address.
      */
     Lon?: Double;
+  }
+  export interface GetAdministratorAccountRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+  }
+  export interface GetAdministratorAccountResponse {
+    /**
+     * The administrator account details.
+     */
+    Administrator: Administrator;
   }
   export interface GetDetectorRequest {
     /**
@@ -1582,6 +1720,26 @@ declare namespace GuardDuty {
      * A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
+  }
+  export interface GetRemainingFreeTrialDaysRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+    /**
+     * A list of account identifiers of the GuardDuty member account.
+     */
+    AccountIds?: AccountIds;
+  }
+  export interface GetRemainingFreeTrialDaysResponse {
+    /**
+     * The member accounts which were included in a request and were processed successfully.
+     */
+    Accounts?: AccountFreeTrialInfos;
+    /**
+     * The member account that was included in a request but for which the request could not be processed.
+     */
+    UnprocessedAccounts?: UnprocessedAccounts;
   }
   export interface GetThreatIntelSetRequest {
     /**
@@ -1821,6 +1979,12 @@ declare namespace GuardDuty {
      * Describes whether Kubernetes audit logs are enabled as a data source.
      */
     AuditLogs: KubernetesAuditLogsConfigurationResult;
+  }
+  export interface KubernetesDataSourceFreeTrial {
+    /**
+     * Describes whether Kubernetes audit logs are enabled as a data source.
+     */
+    AuditLogs?: DataSourceFreeTrial;
   }
   export interface KubernetesDetails {
     /**
@@ -2170,6 +2334,10 @@ declare namespace GuardDuty {
      * The last-updated timestamp of the member.
      */
     UpdatedAt: String;
+    /**
+     * The administrator account ID.
+     */
+    AdministratorId?: String;
   }
   export interface MemberDataSourceConfiguration {
     /**
@@ -2582,6 +2750,20 @@ declare namespace GuardDuty {
      * Feedback that was submitted about the finding.
      */
     UserFeedback?: String;
+    /**
+     * Contains additional information about the generated finding.
+     */
+    AdditionalInfo?: ServiceAdditionalInfo;
+  }
+  export interface ServiceAdditionalInfo {
+    /**
+     * This field specifies the value of the additional information.
+     */
+    Value?: String;
+    /**
+     * Describes the type of the additional information.
+     */
+    Type?: String;
   }
   export interface SortCriteria {
     /**

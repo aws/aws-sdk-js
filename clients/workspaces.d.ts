@@ -863,7 +863,7 @@ declare namespace WorkSpaces {
   export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
   export interface DefaultClientBrandingAttributes {
     /**
-     * The logo URL. This is the link where users can download the logo image. The only supported image format is .png.
+     * The logo URL. The only image format accepted is a binary data object that is converted from a .png file.
      */
     LogoUrl?: ClientUrl;
     /**
@@ -885,7 +885,7 @@ declare namespace WorkSpaces {
   }
   export interface DefaultImportClientBrandingAttributes {
     /**
-     * The logo. This is the link where users can download the logo image. The only image format accepted is .png.
+     * The logo. The only image format accepted is a binary data object that is converted from a .png file.
      */
     Logo?: DefaultLogo;
     /**
@@ -1505,7 +1505,7 @@ declare namespace WorkSpaces {
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled images (bundles other than Graphics.g4dn, GraphicsPro.g4dn, Graphics, or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.  Use BYOL_GRAPHICS_G4DN ingestion for both Graphics.g4dn and GraphicsPro.g4dn. 
+     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -1521,7 +1521,7 @@ declare namespace WorkSpaces {
      */
     Tags?: TagList;
     /**
-     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.    Although this parameter is an array, only one item is allowed at this time   Microsoft Office 2016 application subscription through AWS is currently not supported for Graphics.g4dn Bring Your Own License (BYOL) images   
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
      */
     Applications?: ApplicationList;
   }
@@ -1535,15 +1535,15 @@ declare namespace WorkSpaces {
   export type Ios3XLogo = Buffer|Uint8Array|Blob|string;
   export interface IosClientBrandingAttributes {
     /**
-     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     * The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a .png file.
      */
     LogoUrl?: ClientUrl;
     /**
-     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo2xUrl?: ClientUrl;
     /**
-     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo3xUrl?: ClientUrl;
     /**
@@ -1565,15 +1565,15 @@ declare namespace WorkSpaces {
   }
   export interface IosImportClientBrandingAttributes {
     /**
-     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     * The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a .png file.
      */
     Logo?: IosLogo;
     /**
-     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo2x?: Ios2XLogo;
     /**
-     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo3x?: Ios3XLogo;
     /**
