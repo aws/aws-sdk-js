@@ -306,3 +306,4 @@ export import Ivschat = require('./ivschat');
 export import ChimeSDKMediaPipelines = require('./chimesdkmediapipelines');
 export import EMRServerless = require('./emrserverless');
 export import M2 = require('./m2');
+export import RedshiftServerless = require('./redshiftserverless');

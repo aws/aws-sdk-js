@@ -1417,6 +1417,89 @@ declare namespace SecurityHub {
      */
     Value?: NonEmptyString;
   }
+  export interface AwsCloudFormationStackDetails {
+    /**
+     * The capabilities allowed in the stack. 
+     */
+    Capabilities?: NonEmptyStringList;
+    /**
+     * The time at which the stack was created. 
+     */
+    CreationTime?: NonEmptyString;
+    /**
+     * A user-defined description associated with the stack. 
+     */
+    Description?: NonEmptyString;
+    /**
+     * Boolean to enable or disable rollback on stack creation failures. 
+     */
+    DisableRollback?: Boolean;
+    /**
+     * Information about whether a stack's actual configuration differs, or has drifted, from its expected configuration, as defined in the stack template and any values specified as template parameters. 
+     */
+    DriftInformation?: AwsCloudFormationStackDriftInformationDetails;
+    /**
+     * Whether termination protection is enabled for the stack. 
+     */
+    EnableTerminationProtection?: Boolean;
+    /**
+     * The time the nested stack was last updated. This field will only be returned if the stack has been updated at least once.
+     */
+    LastUpdatedTime?: NonEmptyString;
+    /**
+     * The Amazon Resource Names (ARNs) of the Amazon SNS topic to which stack-related events are published. 
+     */
+    NotificationArns?: NonEmptyStringList;
+    /**
+     * A list of output structures. 
+     */
+    Outputs?: AwsCloudFormationStackOutputsList;
+    /**
+     * The ARN of an IAM role that's associated with the stack. 
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     * Unique identifier of the stack. 
+     */
+    StackId?: NonEmptyString;
+    /**
+     * The name associated with the stack. 
+     */
+    StackName?: NonEmptyString;
+    /**
+     * Current status of the stack. 
+     */
+    StackStatus?: NonEmptyString;
+    /**
+     * Success or failure message associated with the stack status. 
+     */
+    StackStatusReason?: NonEmptyString;
+    /**
+     * The length of time, in minutes, that CloudFormation waits for the nested stack to reach the CREATE_COMPLETE state. 
+     */
+    TimeoutInMinutes?: Integer;
+  }
+  export interface AwsCloudFormationStackDriftInformationDetails {
+    /**
+     * Status of the stack's actual configuration compared to its expected template configuration. 
+     */
+    StackDriftStatus?: NonEmptyString;
+  }
+  export interface AwsCloudFormationStackOutputsDetails {
+    /**
+     * A user-defined description associated with the output. 
+     */
+    Description?: NonEmptyString;
+    /**
+     * The key associated with the output. 
+     */
+    OutputKey?: NonEmptyString;
+    /**
+     * The value associated with the output. 
+     */
+    OutputValue?: NonEmptyString;
+  }
+  export type AwsCloudFormationStackOutputsList = AwsCloudFormationStackOutputsDetails[];
   export interface AwsCloudFrontDistributionCacheBehavior {
     /**
      * The protocol that viewers can use to access the files in an origin. You can specify the following options:    allow-all - Viewers can use HTTP or HTTPS.    redirect-to-https - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.    https-only - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).  
@@ -1504,6 +1587,32 @@ declare namespace SecurityHub {
      */
     Prefix?: NonEmptyString;
   }
+  export interface AwsCloudFrontDistributionOriginCustomOriginConfig {
+    /**
+     * The HTTP port that CloudFront uses to connect to the origin. 
+     */
+    HttpPort?: Integer;
+    /**
+     * The HTTPS port that CloudFront uses to connect to the origin. 
+     */
+    HttpsPort?: Integer;
+    /**
+     * Specifies how long, in seconds, CloudFront persists its connection to the origin. 
+     */
+    OriginKeepaliveTimeout?: Integer;
+    /**
+     * Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. 
+     */
+    OriginProtocolPolicy?: NonEmptyString;
+    /**
+     * Specifies how long, in seconds, CloudFront waits for a response from the origin. 
+     */
+    OriginReadTimeout?: Integer;
+    /**
+     * Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. 
+     */
+    OriginSslProtocols?: AwsCloudFrontDistributionOriginSslProtocols;
+  }
   export interface AwsCloudFrontDistributionOriginGroup {
     /**
      * Provides the criteria for an origin group to fail over.
@@ -1551,6 +1660,10 @@ declare namespace SecurityHub {
      * An origin that is an S3 bucket that is not configured with static website hosting.
      */
     S3OriginConfig?: AwsCloudFrontDistributionOriginS3OriginConfig;
+    /**
+     * An origin that is not an Amazon S3 bucket, with one exception. If the Amazon S3 bucket is configured with static website hosting, use this attribute. If the Amazon S3 bucket is not configured with static website hosting, use the S3OriginConfig type instead. 
+     */
+    CustomOriginConfig?: AwsCloudFrontDistributionOriginCustomOriginConfig;
   }
   export type AwsCloudFrontDistributionOriginItemList = AwsCloudFrontDistributionOriginItem[];
   export interface AwsCloudFrontDistributionOriginS3OriginConfig {
@@ -1558,6 +1671,16 @@ declare namespace SecurityHub {
      * The CloudFront origin access identity to associate with the origin.
      */
     OriginAccessIdentity?: NonEmptyString;
+  }
+  export interface AwsCloudFrontDistributionOriginSslProtocols {
+    /**
+     * A list that contains allowed SSL/TLS protocols for this distribution. 
+     */
+    Items?: NonEmptyStringList;
+    /**
+     * The number of SSL/TLS protocols that you want to allow CloudFront to use when establishing an HTTPS connection with this origin. 
+     */
+    Quantity?: Integer;
   }
   export interface AwsCloudFrontDistributionOrigins {
     /**
@@ -1657,6 +1780,107 @@ declare namespace SecurityHub {
      */
     TrailArn?: NonEmptyString;
   }
+  export interface AwsCloudWatchAlarmDetails {
+    /**
+     * Indicates whether actions should be executed during any changes to the alarm state. 
+     */
+    ActionsEnabled?: Boolean;
+    /**
+     * The list of actions, specified as Amazon Resource Names (ARNs) to execute when this alarm transitions into an ALARM state from any other state. 
+     */
+    AlarmActions?: NonEmptyStringList;
+    /**
+     * The ARN of the alarm. 
+     */
+    AlarmArn?: NonEmptyString;
+    /**
+     * The time stamp of the last update to the alarm configuration. 
+     */
+    AlarmConfigurationUpdatedTimestamp?: NonEmptyString;
+    /**
+     * The description of the alarm. 
+     */
+    AlarmDescription?: NonEmptyString;
+    /**
+     * The name of the alarm. If you don't specify a name, CloudFront generates a unique physical ID and uses that ID for the alarm name. 
+     */
+    AlarmName?: NonEmptyString;
+    /**
+     * The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand. 
+     */
+    ComparisonOperator?: NonEmptyString;
+    /**
+     * The number of datapoints that must be breaching to trigger the alarm. 
+     */
+    DatapointsToAlarm?: Integer;
+    /**
+     * The dimensions for the metric associated with the alarm. 
+     */
+    Dimensions?: AwsCloudWatchAlarmDimensionsList;
+    /**
+     * Used only for alarms based on percentiles. If ignore, the alarm state does not change during periods with too few data points to be statistically significant. If evaluate or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available. 
+     */
+    EvaluateLowSampleCountPercentile?: NonEmptyString;
+    /**
+     * The number of periods over which data is compared to the specified threshold. 
+     */
+    EvaluationPeriods?: Integer;
+    /**
+     * The percentile statistic for the metric associated with the alarm. 
+     */
+    ExtendedStatistic?: NonEmptyString;
+    /**
+     * The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. 
+     */
+    InsufficientDataActions?: NonEmptyStringList;
+    /**
+     * The name of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you use Metrics instead and you can't specify MetricName. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify Namespace and you use Metrics instead. 
+     */
+    Namespace?: NonEmptyString;
+    /**
+     * The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an ARN. 
+     */
+    OkActions?: NonEmptyStringList;
+    /**
+     * The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. 
+     */
+    Period?: Integer;
+    /**
+     * The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ExtendedStatistic. For an alarm based on a metric, you must specify either Statistic or ExtendedStatistic but not both. For an alarm based on a math expression, you can't specify Statistic. Instead, you use Metrics.
+     */
+    Statistic?: NonEmptyString;
+    /**
+     * The value to compare with the specified statistic. 
+     */
+    Threshold?: Double;
+    /**
+     * n an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm. 
+     */
+    ThresholdMetricId?: NonEmptyString;
+    /**
+     * Sets how this alarm is to handle missing data points. 
+     */
+    TreatMissingData?: NonEmptyString;
+    /**
+     * The unit of the metric associated with the alarm. 
+     */
+    Unit?: NonEmptyString;
+  }
+  export interface AwsCloudWatchAlarmDimensionsDetails {
+    /**
+     * The name of a dimension. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The value of a dimension. 
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsCloudWatchAlarmDimensionsList = AwsCloudWatchAlarmDimensionsDetails[];
   export interface AwsCodeBuildProjectArtifactsDetails {
     /**
      * An identifier for the artifact definition.
@@ -2254,6 +2478,36 @@ declare namespace SecurityHub {
      * The identifiers of the network interfaces for the EC2 instance. The details for each network interface are in a corresponding AwsEc2NetworkInterfacesDetails object.
      */
     NetworkInterfaces?: AwsEc2InstanceNetworkInterfacesList;
+    /**
+     * The virtualization type of the Amazon Machine Image (AMI) required to launch the instance. 
+     */
+    VirtualizationType?: NonEmptyString;
+    /**
+     * Details about the metadata options for the Amazon EC2 instance. 
+     */
+    MetadataOptions?: AwsEc2InstanceMetadataOptions;
+  }
+  export interface AwsEc2InstanceMetadataOptions {
+    /**
+     * Enables or disables the HTTP metadata endpoint on the instance. 
+     */
+    HttpEndpoint?: NonEmptyString;
+    /**
+     * Enables or disables the IPv6 endpoint for the instance metadata service. 
+     */
+    HttpProtocolIpv6?: NonEmptyString;
+    /**
+     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. 
+     */
+    HttpPutResponseHopLimit?: Integer;
+    /**
+     * The state of token usage for your instance metadata requests. 
+     */
+    HttpTokens?: NonEmptyString;
+    /**
+     * Specifies whether to allow access to instance tags from the instance metadata. 
+     */
+    InstanceMetadataTags?: NonEmptyString;
   }
   export interface AwsEc2InstanceNetworkInterfacesDetails {
     /**
@@ -2590,6 +2844,56 @@ declare namespace SecurityHub {
      */
     Ipv6CidrBlockAssociationSet?: Ipv6CidrBlockAssociationList;
   }
+  export interface AwsEc2TransitGatewayDetails {
+    /**
+     * The ID of the transit gateway. 
+     */
+    Id?: NonEmptyString;
+    /**
+     * The description of the transit gateway. 
+     */
+    Description?: NonEmptyString;
+    /**
+     * Turn on or turn off automatic propagation of routes to the default propagation route table. 
+     */
+    DefaultRouteTablePropagation?: NonEmptyString;
+    /**
+     * Turn on or turn off automatic acceptance of attachment requests. 
+     */
+    AutoAcceptSharedAttachments?: NonEmptyString;
+    /**
+     * Turn on or turn off automatic association with the default association route table. 
+     */
+    DefaultRouteTableAssociation?: NonEmptyString;
+    /**
+     * The transit gateway Classless Inter-Domain Routing (CIDR) blocks. 
+     */
+    TransitGatewayCidrBlocks?: NonEmptyStringList;
+    /**
+     * The ID of the default association route table. 
+     */
+    AssociationDefaultRouteTableId?: NonEmptyString;
+    /**
+     * The ID of the default propagation route table. 
+     */
+    PropagationDefaultRouteTableId?: NonEmptyString;
+    /**
+     * Turn on or turn off Equal Cost Multipath Protocol (ECMP) support. 
+     */
+    VpnEcmpSupport?: NonEmptyString;
+    /**
+     * Turn on or turn off DNS support. 
+     */
+    DnsSupport?: NonEmptyString;
+    /**
+     * Indicates whether multicast is supported on the transit gateway. 
+     */
+    MulticastSupport?: NonEmptyString;
+    /**
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. 
+     */
+    AmazonSideAsn?: Integer;
+  }
   export interface AwsEc2VolumeAttachment {
     /**
      * The datetime when the attachment initiated.
@@ -2615,7 +2919,11 @@ declare namespace SecurityHub {
      */
     CreateTime?: NonEmptyString;
     /**
-     * Whether the volume is encrypted.
+     * The device name for the volume that is attached to the instance. 
+     */
+    DeviceName?: NonEmptyString;
+    /**
+     * Specifies whether the volume is encrypted.
      */
     Encrypted?: Boolean;
     /**
@@ -2638,6 +2946,18 @@ declare namespace SecurityHub {
      * The volume attachments.
      */
     Attachments?: AwsEc2VolumeAttachmentList;
+    /**
+     * The ID of the volume. 
+     */
+    VolumeId?: NonEmptyString;
+    /**
+     * The volume type. 
+     */
+    VolumeType?: NonEmptyString;
+    /**
+     * Indicates whether the volume was scanned or skipped. 
+     */
+    VolumeScanStatus?: NonEmptyString;
   }
   export interface AwsEc2VpcDetails {
     /**
@@ -2710,6 +3030,68 @@ declare namespace SecurityHub {
     ServiceType?: NonEmptyString;
   }
   export type AwsEc2VpcEndpointServiceServiceTypeList = AwsEc2VpcEndpointServiceServiceTypeDetails[];
+  export interface AwsEc2VpcPeeringConnectionDetails {
+    /**
+     * Information about the accepter VPC. 
+     */
+    AccepterVpcInfo?: AwsEc2VpcPeeringConnectionVpcInfoDetails;
+    /**
+     * The time at which an unaccepted VPC peering connection will expire. 
+     */
+    ExpirationTime?: NonEmptyString;
+    /**
+     * Information about the requester VPC. 
+     */
+    RequesterVpcInfo?: AwsEc2VpcPeeringConnectionVpcInfoDetails;
+    /**
+     * The status of the VPC peering connection. 
+     */
+    Status?: AwsEc2VpcPeeringConnectionStatusDetails;
+    /**
+     * The ID of the VPC peering connection. 
+     */
+    VpcPeeringConnectionId?: NonEmptyString;
+  }
+  export interface AwsEc2VpcPeeringConnectionStatusDetails {
+    /**
+     * The status of the VPC peering connection. 
+     */
+    Code?: NonEmptyString;
+    /**
+     * A message that provides more information about the status, if applicable. 
+     */
+    Message?: NonEmptyString;
+  }
+  export interface AwsEc2VpcPeeringConnectionVpcInfoDetails {
+    /**
+     * The IPv4 CIDR block for the VPC. 
+     */
+    CidrBlock?: NonEmptyString;
+    /**
+     * Information about the IPv4 CIDR blocks for the VPC. 
+     */
+    CidrBlockSet?: VpcInfoCidrBlockSetList;
+    /**
+     * The IPv6 CIDR block for the VPC. 
+     */
+    Ipv6CidrBlockSet?: VpcInfoIpv6CidrBlockSetList;
+    /**
+     * The ID of the Amazon Web Services account that owns the VPC. 
+     */
+    OwnerId?: NonEmptyString;
+    /**
+     * Information about the VPC peering connection options for the accepter or requester VPC. 
+     */
+    PeeringOptions?: VpcInfoPeeringOptionsDetails;
+    /**
+     * The Amazon Web Services Region in which the VPC is located. 
+     */
+    Region?: NonEmptyString;
+    /**
+     * The ID of the VPC. 
+     */
+    VpcId?: NonEmptyString;
+  }
   export interface AwsEc2VpnConnectionDetails {
     /**
      * The identifier of the VPN connection.
@@ -3009,6 +3391,14 @@ declare namespace SecurityHub {
   export type AwsEcsClusterDefaultCapacityProviderStrategyList = AwsEcsClusterDefaultCapacityProviderStrategyDetails[];
   export interface AwsEcsClusterDetails {
     /**
+     * The Amazon Resource Name (ARN) that identifies the cluster. 
+     */
+    ClusterArn?: NonEmptyString;
+    /**
+     * The number of services that are running on the cluster in an ACTIVE state. You can view these services with the Amazon ECS  ListServices  API operation. 
+     */
+    ActiveServicesCount?: Integer;
+    /**
      * The short name of one or more capacity providers to associate with the cluster.
      */
     CapacityProviders?: NonEmptyStringList;
@@ -3024,7 +3414,42 @@ declare namespace SecurityHub {
      * The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.
      */
     DefaultCapacityProviderStrategy?: AwsEcsClusterDefaultCapacityProviderStrategyList;
+    /**
+     * A name that you use to identify your cluster. 
+     */
+    ClusterName?: NonEmptyString;
+    /**
+     * The number of container instances registered into the cluster. This includes container instances in both ACTIVE and DRAINING status. 
+     */
+    RegisteredContainerInstancesCount?: Integer;
+    /**
+     * The number of tasks in the cluster that are in the RUNNING state. 
+     */
+    RunningTasksCount?: Integer;
+    /**
+     * The status of the cluster. 
+     */
+    Status?: NonEmptyString;
   }
+  export interface AwsEcsContainerDetails {
+    /**
+     * The name of the container. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The image used for the container. 
+     */
+    Image?: NonEmptyString;
+    /**
+     * The mount points for data volumes in your container. 
+     */
+    MountPoints?: AwsMountPointList;
+    /**
+     * When this parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). 
+     */
+    Privileged?: Boolean;
+  }
+  export type AwsEcsContainerDetailsList = AwsEcsContainerDetails[];
   export interface AwsEcsServiceCapacityProviderStrategyDetails {
     /**
      * The minimum number of tasks to run on the capacity provider. Only one strategy item can specify a value for Base. The value must be between 0 and 100000.
@@ -3849,6 +4274,125 @@ declare namespace SecurityHub {
     SourcePath?: NonEmptyString;
   }
   export type AwsEcsTaskDefinitionVolumesList = AwsEcsTaskDefinitionVolumesDetails[];
+  export interface AwsEcsTaskDetails {
+    /**
+     * The Amazon Resource Name (ARN) of the cluster that hosts the task. 
+     */
+    ClusterArn?: NonEmptyString;
+    /**
+     * The ARN of the task definition that creates the task. 
+     */
+    TaskDefinitionArn?: NonEmptyString;
+    /**
+     * The version counter for the task. 
+     */
+    Version?: NonEmptyString;
+    /**
+     * The Unix timestamp for the time when the task was created. More specifically, it's for the time when the task entered the PENDING state. 
+     */
+    CreatedAt?: NonEmptyString;
+    /**
+     * The Unix timestamp for the time when the task started. More specifically, it's for the time when the task transitioned from the PENDING state to the RUNNING state. 
+     */
+    StartedAt?: NonEmptyString;
+    /**
+     * The tag specified when a task is started. If an Amazon ECS service started the task, the startedBy parameter contains the deployment ID of that service. 
+     */
+    StartedBy?: NonEmptyString;
+    /**
+     * The name of the task group that's associated with the task. 
+     */
+    Group?: NonEmptyString;
+    /**
+     * Details about the data volume that is used in a task definition. 
+     */
+    Volumes?: AwsEcsTaskVolumeDetailsList;
+    /**
+     * The containers that are associated with the task. 
+     */
+    Containers?: AwsEcsContainerDetailsList;
+  }
+  export interface AwsEcsTaskVolumeDetails {
+    /**
+     * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * This parameter is specified when you use bind mount host volumes. The contents of the host parameter determine whether your bind mount host volume persists on the host container instance and where it's stored. 
+     */
+    Host?: AwsEcsTaskVolumeHostDetails;
+  }
+  export type AwsEcsTaskVolumeDetailsList = AwsEcsTaskVolumeDetails[];
+  export interface AwsEcsTaskVolumeHostDetails {
+    /**
+     * When the host parameter is used, specify a sourcePath to declare the path on the host container instance that's presented to the container. 
+     */
+    SourcePath?: NonEmptyString;
+  }
+  export interface AwsEfsAccessPointDetails {
+    /**
+     * The ID of the Amazon EFS access point. 
+     */
+    AccessPointId?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon EFS access point. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     * The opaque string specified in the request to ensure idempotent creation. 
+     */
+    ClientToken?: NonEmptyString;
+    /**
+     * The ID of the Amazon EFS file system that the access point applies to. 
+     */
+    FileSystemId?: NonEmptyString;
+    /**
+     * The full POSIX identity, including the user ID, group ID, and secondary group IDs on the access point, that is used for all file operations by NFS clients using the access point. 
+     */
+    PosixUser?: AwsEfsAccessPointPosixUserDetails;
+    /**
+     * The directory on the Amazon EFS file system that the access point exposes as the root directory to NFS clients using the access point. 
+     */
+    RootDirectory?: AwsEfsAccessPointRootDirectoryDetails;
+  }
+  export interface AwsEfsAccessPointPosixUserDetails {
+    /**
+     * The POSIX group ID used for all file system operations using this access point. 
+     */
+    Gid?: NonEmptyString;
+    /**
+     * Secondary POSIX group IDs used for all file system operations using this access point. 
+     */
+    SecondaryGids?: NonEmptyStringList;
+    /**
+     * The POSIX user ID used for all file system operations using this access point. 
+     */
+    Uid?: NonEmptyString;
+  }
+  export interface AwsEfsAccessPointRootDirectoryCreationInfoDetails {
+    /**
+     * Specifies the POSIX group ID to apply to the root directory. 
+     */
+    OwnerGid?: NonEmptyString;
+    /**
+     * Specifies the POSIX user ID to apply to the root directory. 
+     */
+    OwnerUid?: NonEmptyString;
+    /**
+     * Specifies the POSIX permissions to apply to the root directory, in the format of an octal number representing the file's mode bits. 
+     */
+    Permissions?: NonEmptyString;
+  }
+  export interface AwsEfsAccessPointRootDirectoryDetails {
+    /**
+     * Specifies the POSIX IDs and permissions to apply to the access point's root directory. 
+     */
+    CreationInfo?: AwsEfsAccessPointRootDirectoryCreationInfoDetails;
+    /**
+     * Specifies the path on the Amazon EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide CreationInfo. 
+     */
+    Path?: NonEmptyString;
+  }
   export interface AwsEksClusterDetails {
     /**
      * The ARN of the cluster.
@@ -4866,6 +5410,38 @@ declare namespace SecurityHub {
     PolicyName?: NonEmptyString;
   }
   export type AwsIamUserPolicyList = AwsIamUserPolicy[];
+  export interface AwsKinesisStreamDetails {
+    /**
+     * The name of the Kinesis stream. If you don't specify a name, CloudFront generates a unique physical ID and uses that ID for the stream name. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis data stream. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     * When specified, enables or updates server-side encryption using an KMS key for a specified stream. Removing this property from your stack template and updating your stack disables encryption. 
+     */
+    StreamEncryption?: AwsKinesisStreamStreamEncryptionDetails;
+    /**
+     * The number of shards that the stream uses. 
+     */
+    ShardCount?: Integer;
+    /**
+     * The number of hours for the data records that are stored in shards to remain accessible. 
+     */
+    RetentionPeriodHours?: Integer;
+  }
+  export interface AwsKinesisStreamStreamEncryptionDetails {
+    /**
+     * The encryption type to use. 
+     */
+    EncryptionType?: NonEmptyString;
+    /**
+     * The globally unique identifier for the customer-managed KMS key to use for encryption. 
+     */
+    KeyId?: NonEmptyString;
+  }
   export interface AwsKmsKeyDetails {
     /**
      * The twelve-digit account ID of the Amazon Web Services account that owns the KMS key.
@@ -4892,7 +5468,7 @@ declare namespace SecurityHub {
      */
     Origin?: NonEmptyString;
     /**
-     * A description of the key.
+     * A description of the KMS key.
      */
     Description?: NonEmptyString;
     /**
@@ -5064,6 +5640,17 @@ declare namespace SecurityHub {
     CreatedDate?: NonEmptyString;
   }
   export type AwsLambdaLayerVersionNumber = number;
+  export interface AwsMountPoint {
+    /**
+     * The name of the volume to mount. Must be a volume name referenced in the name parameter of task definition volume. 
+     */
+    SourceVolume?: NonEmptyString;
+    /**
+     * The path on the container to mount the host volume at. 
+     */
+    ContainerPath?: NonEmptyString;
+  }
+  export type AwsMountPointList = AwsMountPoint[];
   export interface AwsNetworkFirewallFirewallDetails {
     /**
      * Whether the firewall is protected from deletion. If set to true, then the firewall cannot be deleted.
@@ -5164,6 +5751,20 @@ declare namespace SecurityHub {
      * The type of rule group. A rule group can be stateful or stateless.
      */
     Type?: NonEmptyString;
+  }
+  export interface AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails {
+    /**
+     * Enables fine-grained access control. 
+     */
+    Enabled?: Boolean;
+    /**
+     * Enables the internal user database. 
+     */
+    InternalUserDatabaseEnabled?: Boolean;
+    /**
+     * Specifies information about the master user of the domain. 
+     */
+    MasterUserOptions?: AwsOpenSearchServiceDomainMasterUserOptionsDetails;
   }
   export interface AwsOpenSearchServiceDomainClusterConfigDetails {
     /**
@@ -5270,6 +5871,10 @@ declare namespace SecurityHub {
      * The domain endpoints. Used if the OpenSearch domain resides in a VPC. This is a map of key-value pairs. The key is always vpc. The value is the endpoint.
      */
     DomainEndpoints?: FieldMap;
+    /**
+     * Specifies options for fine-grained access control. 
+     */
+    AdvancedSecurityOptions?: AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails;
   }
   export interface AwsOpenSearchServiceDomainDomainEndpointOptionsDetails {
     /**
@@ -5326,6 +5931,20 @@ declare namespace SecurityHub {
      * Configures the OpenSearch audit logs publishing.
      */
     AuditLogs?: AwsOpenSearchServiceDomainLogPublishingOption;
+  }
+  export interface AwsOpenSearchServiceDomainMasterUserOptionsDetails {
+    /**
+     * The Amazon Resource Name (ARN) for the master user. 
+     */
+    MasterUserArn?: NonEmptyString;
+    /**
+     * The username for the master user. 
+     */
+    MasterUserName?: NonEmptyString;
+    /**
+     * The password for the master user. 
+     */
+    MasterUserPassword?: NonEmptyString;
   }
   export interface AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails {
     /**
@@ -7290,6 +7909,10 @@ declare namespace SecurityHub {
      */
     Process?: ProcessDetails;
     /**
+     * Details about the threat detected in a security finding and the file paths that were affected by the threat. 
+     */
+    Threats?: ThreatList;
+    /**
      * Threat intelligence details related to a finding.
      */
     ThreatIntelIndicators?: ThreatIntelIndicatorList;
@@ -7746,17 +8369,45 @@ declare namespace SecurityHub {
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
-     * Subscription is an embedded property that describes the subscription endpoints of an SNS topic.
+     * Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic.
      */
     Subscription?: AwsSnsTopicSubscriptionList;
     /**
-     * The name of the topic.
+     * The name of the Amazon SNS topic.
      */
     TopicName?: NonEmptyString;
     /**
      * The subscription's owner.
      */
     Owner?: NonEmptyString;
+    /**
+     * Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an Amazon SQS endpoint. 
+     */
+    SqsSuccessFeedbackRoleArn?: NonEmptyString;
+    /**
+     * Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an Amazon SQS endpoint. 
+     */
+    SqsFailureFeedbackRoleArn?: NonEmptyString;
+    /**
+     * Indicates failed message delivery status for an Amazon SNS topic that is subscribed to a platform application endpoint. 
+     */
+    ApplicationSuccessFeedbackRoleArn?: NonEmptyString;
+    /**
+     * Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an Amazon Kinesis Data Firehose endpoint. 
+     */
+    FirehoseSuccessFeedbackRoleArn?: NonEmptyString;
+    /**
+     * Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an Amazon Kinesis Data Firehose endpoint. 
+     */
+    FirehoseFailureFeedbackRoleArn?: NonEmptyString;
+    /**
+     * Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an HTTP endpoint. 
+     */
+    HttpSuccessFeedbackRoleArn?: NonEmptyString;
+    /**
+     * Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an HTTP endpoint. 
+     */
+    HttpFailureFeedbackRoleArn?: NonEmptyString;
   }
   export interface AwsSnsTopicSubscription {
     /**
@@ -7955,21 +8606,230 @@ declare namespace SecurityHub {
     Type?: NonEmptyString;
   }
   export type AwsWafRegionalRateBasedRuleMatchPredicateList = AwsWafRegionalRateBasedRuleMatchPredicate[];
-  export interface AwsWafWebAclDetails {
+  export interface AwsWafRegionalRuleDetails {
     /**
-     * A friendly name or description of the WebACL. You can't change the name of a WebACL after you create it.
+     * A name for the metrics for the rule. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * A descriptive name for the rule. 
      */
     Name?: NonEmptyString;
     /**
-     * The action to perform if none of the rules contained in the WebACL match.
+     * Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you want to add to a rule and, for each object, indicates whether you want to negate the settings. 
+     */
+    PredicateList?: AwsWafRegionalRulePredicateList;
+    /**
+     * The ID of the rule. 
+     */
+    RuleId?: NonEmptyString;
+  }
+  export interface AwsWafRegionalRuleGroupDetails {
+    /**
+     * A name for the metrics for this rule group. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * The descriptive name of the rule group. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The ID of the rule group. 
+     */
+    RuleGroupId?: NonEmptyString;
+    /**
+     * Provides information about the rule statements used to identify the web requests that you want to allow, block, or count. 
+     */
+    Rules?: AwsWafRegionalRuleGroupRulesList;
+  }
+  export interface AwsWafRegionalRuleGroupRulesActionDetails {
+    /**
+     * Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you want to add to a rule and, for each object, indicates whether you want to negate the settings.
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafRegionalRuleGroupRulesDetails {
+    /**
+     * The action that WAF should take on a web request when it matches the criteria defined in the rule. 
+     */
+    Action?: AwsWafRegionalRuleGroupRulesActionDetails;
+    /**
+     * If you define more than one rule in a web ACL, WAF evaluates each request against the rules in order based on the value of Priority. 
+     */
+    Priority?: Integer;
+    /**
+     * The ID for a rule. 
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * The type of rule in the rule group. 
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsWafRegionalRuleGroupRulesList = AwsWafRegionalRuleGroupRulesDetails[];
+  export type AwsWafRegionalRulePredicateList = AwsWafRegionalRulePredicateListDetails[];
+  export interface AwsWafRegionalRulePredicateListDetails {
+    /**
+     * A unique identifier for a predicate in a rule, such as ByteMatchSetId or IPSetId. 
+     */
+    DataId?: NonEmptyString;
+    /**
+     * Specifies if you want WAF to allow, block, or count requests based on the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. 
+     */
+    Negated?: Boolean;
+    /**
+     * The type of predicate in a rule, such as ByteMatch or IPSet. 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafRegionalWebAclDetails {
+    /**
+     * The action to perform if none of the rules contained in the web ACL match. 
      */
     DefaultAction?: NonEmptyString;
     /**
-     * An array that contains the action for each rule in a WebACL, the priority of the rule, and the ID of the rule.
+     * A name for the metrics for this web ACL. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * A descriptive name for the web ACL. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * An array that contains the action for each rule in a web ACL, the priority of the rule, and the ID of the rule. 
+     */
+    RulesList?: AwsWafRegionalWebAclRulesList;
+    /**
+     * The ID of the web ACL. 
+     */
+    WebAclId?: NonEmptyString;
+  }
+  export type AwsWafRegionalWebAclRulesList = AwsWafRegionalWebAclRulesListDetails[];
+  export interface AwsWafRegionalWebAclRulesListActionDetails {
+    /**
+     * For actions that are associated with a rule, the action that WAF takes when a web request matches all conditions in a rule. 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafRegionalWebAclRulesListDetails {
+    /**
+     * The action that AWS WAF takes when a web request matches all conditions in the rule, such as allow, block, or count the request. 
+     */
+    Action?: AwsWafRegionalWebAclRulesListActionDetails;
+    /**
+     * Overrides the rule evaluation result in the rule group. 
+     */
+    OverrideAction?: AwsWafRegionalWebAclRulesListOverrideActionDetails;
+    /**
+     * The order in which WAF evaluates the rules in a web ACL. 
+     */
+    Priority?: Integer;
+    /**
+     * The ID of an WAF Regional rule to associate with a web ACL. 
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * For actions that are associated with a rule, the action that WAF takes when a web request matches all conditions in a rule. 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafRegionalWebAclRulesListOverrideActionDetails {
+    /**
+     * Overrides the rule evaluation result in the rule group. 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafRuleDetails {
+    /**
+     * The name of the metrics for this rule. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * A descriptive name for the rule. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you want to add to a rule and, for each object, indicates whether you want to negate the settings. 
+     */
+    PredicateList?: AwsWafRulePredicateList;
+    /**
+     * The ID of the WAF rule. 
+     */
+    RuleId?: NonEmptyString;
+  }
+  export interface AwsWafRuleGroupDetails {
+    /**
+     * The name of the metrics for this rule group. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     * The name of the rule group. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The ID of the rule group. 
+     */
+    RuleGroupId?: NonEmptyString;
+    /**
+     * Provides information about the rules attached to the rule group. These rules identify the web requests that you want to allow, block, or count. 
+     */
+    Rules?: AwsWafRuleGroupRulesList;
+  }
+  export interface AwsWafRuleGroupRulesActionDetails {
+    /**
+     * The action that WAF should take on a web request when it matches the rule's statement.
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafRuleGroupRulesDetails {
+    /**
+     * Provides information about what action WAF should take on a web request when it matches the criteria defined in the rule. 
+     */
+    Action?: AwsWafRuleGroupRulesActionDetails;
+    /**
+     * If you define more than one rule in a web ACL, WAF evaluates each request against the rules in order based on the value of Priority.
+     */
+    Priority?: Integer;
+    /**
+     * The rule ID for a rule. 
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * The type of rule. 
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsWafRuleGroupRulesList = AwsWafRuleGroupRulesDetails[];
+  export type AwsWafRulePredicateList = AwsWafRulePredicateListDetails[];
+  export interface AwsWafRulePredicateListDetails {
+    /**
+     * A unique identifier for a predicate in a rule, such as ByteMatchSetId or IPSetId. 
+     */
+    DataId?: NonEmptyString;
+    /**
+     * Specifies if you want WAF to allow, block, or count requests based on the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. 
+     */
+    Negated?: Boolean;
+    /**
+     * The type of predicate in a rule, such as ByteMatch or IPSet. 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsWafWebAclDetails {
+    /**
+     * A friendly name or description of the web ACL. You can't change the name of a web ACL after you create it.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The action to perform if none of the rules contained in the web ACL match.
+     */
+    DefaultAction?: NonEmptyString;
+    /**
+     * An array that contains the action for each rule in a web ACL, the priority of the rule, and the ID of the rule.
      */
     Rules?: AwsWafWebAclRuleList;
     /**
-     * A unique identifier for a WebACL.
+     * A unique identifier for a web ACL.
      */
     WebAclId?: NonEmptyString;
   }
@@ -7983,11 +8843,11 @@ declare namespace SecurityHub {
      */
     ExcludedRules?: WafExcludedRuleList;
     /**
-     * Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction to None, the RuleGroup blocks a request if any individual rule in the RuleGroup matches the request and is configured to block that request. However, if you first want to test the RuleGroup, set the OverrideAction to Count. The RuleGroup then overrides any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests are counted.  ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use ActivatedRule|Action. For all other update requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction. 
+     * Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can potentially block a request. If you set the OverrideAction to None, the RuleGroup blocks a request if any individual rule in the RuleGroup matches the request and is configured to block that request. However, if you first want to test the RuleGroup, set the OverrideAction to Count. The RuleGroup then overrides any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests are counted.  ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to a web ACL. In this case you do not use ActivatedRule Action. For all other update requests, ActivatedRule Action is used instead of ActivatedRule OverrideAction.
      */
     OverrideAction?: WafOverrideAction;
     /**
-     * Specifies the order in which the rules in a WebACL are evaluated. Rules with a lower value for Priority are evaluated before rules with a higher value. The value must be a unique integer. If you add multiple rules to a WebACL, the values do not need to be consecutive.
+     * Specifies the order in which the rules in a web ACL are evaluated. Rules with a lower value for Priority are evaluated before rules with a higher value. The value must be a unique integer. If you add multiple rules to a web ACL, the values do not need to be consecutive.
      */
     Priority?: Integer;
     /**
@@ -8225,21 +9085,33 @@ declare namespace SecurityHub {
   export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE"|string;
   export interface ContainerDetails {
     /**
+     * The runtime of the container. 
+     */
+    ContainerRuntime?: NonEmptyString;
+    /**
      * The name of the container related to a finding.
      */
     Name?: NonEmptyString;
     /**
-     * The identifier of the image related to a finding.
+     * The identifier of the container image related to a finding.
      */
     ImageId?: NonEmptyString;
     /**
-     * The name of the image related to a finding.
+     * The name of the container image related to a finding.
      */
     ImageName?: NonEmptyString;
     /**
      * Indicates when the container started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
+    /**
+     * Provides information about the mounting of a volume in a container. 
+     */
+    VolumeMounts?: VolumeMountList;
+    /**
+     * When this parameter is true, the container is given elevated privileges on the host container instance (similar to the root user). 
+     */
+    Privileged?: Boolean;
   }
   export type ControlStatus = "ENABLED"|"DISABLED"|string;
   export interface Country {
@@ -8701,6 +9573,25 @@ declare namespace SecurityHub {
   export interface EnableSecurityHubResponse {
   }
   export type FieldMap = {[key: string]: NonEmptyString};
+  export type FilePathList = FilePaths[];
+  export interface FilePaths {
+    /**
+     * Path to the infected or suspicious file on the resource it was detected on. 
+     */
+    FilePath?: NonEmptyString;
+    /**
+     * The name of the infected or suspicious file corresponding to the hash. 
+     */
+    FileName?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the resource on which the threat was detected. 
+     */
+    ResourceId?: NonEmptyString;
+    /**
+     * The hash value for the infected or suspicious file. 
+     */
+    Hash?: NonEmptyString;
+  }
   export interface FindingAggregator {
     /**
      * The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and delete the finding aggregator.
@@ -9772,11 +10663,11 @@ declare namespace SecurityHub {
      */
     AwsEc2SecurityGroup?: AwsEc2SecurityGroupDetails;
     /**
-     * Details for an EC2 volume.
+     * Details for an Amazon EC2 volume.
      */
     AwsEc2Volume?: AwsEc2VolumeDetails;
     /**
-     * Details for an EC2 VPC.
+     * Details for an Amazon EC2 VPC.
      */
     AwsEc2Vpc?: AwsEc2VpcDetails;
     /**
@@ -9904,7 +10795,7 @@ declare namespace SecurityHub {
      */
     AwsSqsQueue?: AwsSqsQueueDetails;
     /**
-     * Details for an WAF WebACL.
+     * Details for an WAF web ACL.
      */
     AwsWafWebAcl?: AwsWafWebAclDetails;
     /**
@@ -9920,9 +10811,13 @@ declare namespace SecurityHub {
      */
     AwsRdsDbCluster?: AwsRdsDbClusterDetails;
     /**
-     * Details about an ECS cluster.
+     * Details about an Amazon ECS cluster.
      */
     AwsEcsCluster?: AwsEcsClusterDetails;
+    /**
+     * Provides information about a Docker container that's part of a task. 
+     */
+    AwsEcsContainer?: AwsEcsContainerDetails;
     /**
      * Details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.
      */
@@ -9948,7 +10843,7 @@ declare namespace SecurityHub {
      */
     AwsAutoScalingLaunchConfiguration?: AwsAutoScalingLaunchConfigurationDetails;
     /**
-     * Details about an EC2 VPN connection.
+     * Details about an Amazon EC2 VPN connection.
      */
     AwsEc2VpnConnection?: AwsEc2VpnConnectionDetails;
     /**
@@ -9999,6 +10894,54 @@ declare namespace SecurityHub {
      * Details about an Amazon RDS DB security group.
      */
     AwsRdsDbSecurityGroup?: AwsRdsDbSecurityGroupDetails;
+    /**
+     * Details about an Amazon Kinesis data stream.
+     */
+    AwsKinesisStream?: AwsKinesisStreamDetails;
+    /**
+     * Details about an Amazon EC2 transit gateway that interconnects your virtual private clouds (VPC) and on-premises networks.
+     */
+    AwsEc2TransitGateway?: AwsEc2TransitGatewayDetails;
+    /**
+     * Details about an Amazon EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. 
+     */
+    AwsEfsAccessPoint?: AwsEfsAccessPointDetails;
+    /**
+     * Details about an CloudFormation stack. A stack is a collection of Amazon Web Services resources that you can manage as a single unit.
+     */
+    AwsCloudFormationStack?: AwsCloudFormationStackDetails;
+    /**
+     * Details about an Amazon CloudWatch alarm. An alarm allows you to monitor and receive alerts about your Amazon Web Services resources and applications across multiple Regions.
+     */
+    AwsCloudWatchAlarm?: AwsCloudWatchAlarmDetails;
+    /**
+     * Details about an Amazon EC2 VPC peering connection. A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them privately. 
+     */
+    AwsEc2VpcPeeringConnection?: AwsEc2VpcPeeringConnectionDetails;
+    /**
+     * Details about an WAF rule group for Regional resources. 
+     */
+    AwsWafRegionalRuleGroup?: AwsWafRegionalRuleGroupDetails;
+    /**
+     * Details about an WAF rule for Regional resources. 
+     */
+    AwsWafRegionalRule?: AwsWafRegionalRuleDetails;
+    /**
+     * Details about an WAF web access control list (web ACL) for Regional resources. 
+     */
+    AwsWafRegionalWebAcl?: AwsWafRegionalWebAclDetails;
+    /**
+     * Details about an WAF rule for global resources. 
+     */
+    AwsWafRule?: AwsWafRuleDetails;
+    /**
+     * Details about an WAF rule group for global resources. 
+     */
+    AwsWafRuleGroup?: AwsWafRuleGroupDetails;
+    /**
+     * Details about a task in a cluster. 
+     */
+    AwsEcsTask?: AwsEcsTaskDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
@@ -10519,6 +11462,24 @@ declare namespace SecurityHub {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface Threat {
+    /**
+     * The name of the threat. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The severity of the threat. 
+     */
+    Severity?: NonEmptyString;
+    /**
+     * This total number of items in which the threat has been detected. 
+     */
+    ItemCount?: Integer;
+    /**
+     * Provides information about the file paths that were affected by the threat. 
+     */
+    FilePaths?: FilePathList;
+  }
   export interface ThreatIntelIndicator {
     /**
      * The type of threat intelligence indicator.
@@ -10548,6 +11509,7 @@ declare namespace SecurityHub {
   export type ThreatIntelIndicatorCategory = "BACKDOOR"|"CARD_STEALER"|"COMMAND_AND_CONTROL"|"DROP_SITE"|"EXPLOIT_SITE"|"KEYLOGGER"|string;
   export type ThreatIntelIndicatorList = ThreatIntelIndicator[];
   export type ThreatIntelIndicatorType = "DOMAIN"|"EMAIL_ADDRESS"|"HASH_MD5"|"HASH_SHA1"|"HASH_SHA256"|"HASH_SHA512"|"IPV4_ADDRESS"|"IPV6_ADDRESS"|"MUTEX"|"PROCESS"|"URL"|string;
+  export type ThreatList = Threat[];
   export type Timestamp = Date;
   export type TypeList = NonEmptyString[];
   export interface UntagResourceRequest {
@@ -10683,6 +11645,45 @@ declare namespace SecurityHub {
   export interface UpdateStandardsControlResponse {
   }
   export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
+  export interface VolumeMount {
+    /**
+     * The name of the volume. 
+     */
+    Name?: NonEmptyString;
+    /**
+     * The path in the container at which the volume should be mounted. 
+     */
+    MountPath?: NonEmptyString;
+  }
+  export type VolumeMountList = VolumeMount[];
+  export interface VpcInfoCidrBlockSetDetails {
+    /**
+     * The IPv4 CIDR block for the VPC. 
+     */
+    CidrBlock?: NonEmptyString;
+  }
+  export type VpcInfoCidrBlockSetList = VpcInfoCidrBlockSetDetails[];
+  export interface VpcInfoIpv6CidrBlockSetDetails {
+    /**
+     * The IPv6 CIDR block for the VPC. 
+     */
+    Ipv6CidrBlock?: NonEmptyString;
+  }
+  export type VpcInfoIpv6CidrBlockSetList = VpcInfoIpv6CidrBlockSetDetails[];
+  export interface VpcInfoPeeringOptionsDetails {
+    /**
+     * Indicates whether a local VPC can resolve public DNS hostnames to private IP addresses when queried from instances in a peer VPC. 
+     */
+    AllowDnsResolutionFromRemoteVpc?: Boolean;
+    /**
+     * Indicates whether a local ClassicLink connection can communicate with the peer VPC over the VPC peering connection. 
+     */
+    AllowEgressFromLocalClassicLinkToRemoteVpc?: Boolean;
+    /**
+     * Indicates whether a local VPC can communicate with a ClassicLink connection in the peer VPC over the VPC peering connection. 
+     */
+    AllowEgressFromLocalVpcToRemoteClassicLink?: Boolean;
+  }
   export interface Vulnerability {
     /**
      * The identifier of the vulnerability.
@@ -10734,7 +11735,7 @@ declare namespace SecurityHub {
   }
   export interface WafAction {
     /**
-     * Specifies how you want WAF to respond to requests that match the settings in a rule. Valid settings include the following:    ALLOW - WAF allows requests    BLOCK - WAF blocks requests    COUNT - WAF increments a counter of the requests that match all of the conditions in the rule. WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  
+     * Specifies how you want WAF to respond to requests that match the settings in a rule. Valid settings include the following:    ALLOW - WAF allows requests    BLOCK - WAF blocks requests    COUNT - WAF increments a counter of the requests that match all of the conditions in the rule. WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a web ACL.  
      */
     Type?: NonEmptyString;
   }
