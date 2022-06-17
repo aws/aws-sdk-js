@@ -1169,5 +1169,8 @@
   },
   "redshiftserverless": {
     "name": "RedshiftServerless"
+  },
+  "connectcampaigns": {
+    "name": "ConnectCampaigns"
   }
 }

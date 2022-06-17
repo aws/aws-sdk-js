@@ -161,7 +161,7 @@
         },
         "L": {
           "shape": "ListAttributeValue",
-          "documentation": "<p>An attribute of type List. For example:</p> <p> <code>\"L\": [ {\"S\": \"Cookies\"} , {\"S\": \"Coffee\"}, {\"N\", \"3.14159\"}]</code> </p>"
+          "documentation": "<p>An attribute of type List. For example:</p> <p> <code>\"L\": [ {\"S\": \"Cookies\"} , {\"S\": \"Coffee\"}, {\"N\": \"3.14159\"}]</code> </p>"
         },
         "NULL": {
           "shape": "NullAttributeValue",

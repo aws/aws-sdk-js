@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1156.0-->
+<!--LATEST=2.1157.0-->
 <!--ENTRYINSERT-->
+
+## 2.1157.0
+* feature: Connect: This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable High volume outbound communications using attribute type HIGH_VOLUME_OUTBOUND on the specified Amazon Connect instance.
+* feature: ConnectCampaigns: Added Amazon Connect high volume outbound communications SDK.
 
 ## 2.1156.0
 * feature: RedshiftData: This release adds a new --workgroup-name field to operations that connect to an endpoint. Customers can now execute queries against their serverless workgroups.
