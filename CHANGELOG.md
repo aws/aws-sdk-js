@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1157.0-->
+<!--LATEST=2.1158.0-->
 <!--ENTRYINSERT-->
+
+## 2.1158.0
+* feature: DirectoryService: This release adds support for describing and updating AWS Managed Microsoft AD settings
+* feature: Outposts: This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.
 
 ## 2.1157.0
 * feature: Connect: This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable High volume outbound communications using attribute type HIGH_VOLUME_OUTBOUND on the specified Amazon Connect instance.

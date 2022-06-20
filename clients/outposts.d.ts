@@ -291,8 +291,18 @@ declare namespace Outposts {
      *  Information about compute hardware assets. 
      */
     ComputeAttributes?: ComputeAttributes;
+    /**
+     *  The position of an asset in a rack. 
+     */
+    AssetLocation?: AssetLocation;
   }
   export type AssetListDefinition = AssetInfo[];
+  export interface AssetLocation {
+    /**
+     *  The position of an asset in a rack measured in rack units. 
+     */
+    RackElevation?: RackElevation;
+  }
   export type AssetType = "COMPUTE"|string;
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
@@ -845,6 +855,7 @@ declare namespace Outposts {
   export type PowerFeedDrop = "ABOVE_RACK"|"BELOW_RACK"|string;
   export type PowerPhase = "SINGLE_PHASE"|"THREE_PHASE"|string;
   export type Quantity = string;
+  export type RackElevation = number;
   export type RackId = string;
   export interface RackPhysicalProperties {
     /**
