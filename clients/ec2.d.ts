@@ -429,11 +429,11 @@ declare class EC2 extends Service {
    */
   createClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
   /**
-   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
+   * Provides information to Amazon Web Services about your customer gateway device. The customer gateway device is the appliance at your end of the VPN connection. You must provide the IP address of the customer gateway device’s external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
    */
   createCustomerGateway(params: EC2.Types.CreateCustomerGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
-   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
+   * Provides information to Amazon Web Services about your customer gateway device. The customer gateway device is the appliance at your end of the VPN connection. You must provide the IP address of the customer gateway device’s external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
    */
   createCustomerGateway(callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
@@ -7712,7 +7712,7 @@ declare namespace EC2 {
      */
     BgpAsn: Integer;
     /**
-     * The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
+     *  This member has been deprecated. The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
      */
     PublicIp?: String;
     /**
@@ -7731,6 +7731,10 @@ declare namespace EC2 {
      * A name for the customer gateway device. Length Constraints: Up to 255 characters.
      */
     DeviceName?: String;
+    /**
+     *  IPv4 address for the customer gateway device's outside interface. The address must be static. 
+     */
+    IpAddress?: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -10036,7 +10040,7 @@ declare namespace EC2 {
      */
     CustomerGatewayId?: String;
     /**
-     * The Internet-routable IP address of the customer gateway's outside interface.
+     * The IP address of the customer gateway device's outside interface.
      */
     IpAddress?: String;
     /**
@@ -11779,7 +11783,7 @@ declare namespace EC2 {
      */
     CustomerGatewayIds?: CustomerGatewayIdStringList;
     /**
-     * One or more filters.    bgp-asn - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).    customer-gateway-id - The ID of the customer gateway.    ip-address - The IP address of the customer gateway's Internet-routable external interface.    state - The state of the customer gateway (pending | available | deleting | deleted).    type - The type of customer gateway. Currently, the only supported type is ipsec.1.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    bgp-asn - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).    customer-gateway-id - The ID of the customer gateway.    ip-address - The IP address of the customer gateway device's external interface.    state - The state of the customer gateway (pending | available | deleting | deleted).    type - The type of customer gateway. Currently, the only supported type is ipsec.1.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -33668,6 +33672,14 @@ declare namespace EC2 {
      */
     RemoteIpv6NetworkCidr?: String;
     /**
+     * The type of IPv4 address assigned to the outside interface of the customer gateway. Valid values: PrivateIpv4 | PublicIpv4  Default: PublicIpv4 
+     */
+    OutsideIpAddressType?: String;
+    /**
+     * The transit gateway attachment ID in use for the VPN tunnel.
+     */
+    TransportTransitGatewayAttachmentId?: String;
+    /**
      * Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
      */
     TunnelInsideIpVersion?: TunnelInsideIpVersion;
@@ -33709,6 +33721,14 @@ declare namespace EC2 {
      * The IPv6 CIDR on the Amazon Web Services side of the VPN connection. Default: ::/0 
      */
     RemoteIpv6NetworkCidr?: String;
+    /**
+     * The type of IPv4 address assigned to the outside interface of the customer gateway device. Valid values: PrivateIpv4 | PublicIpv4  Default: PublicIpv4 
+     */
+    OutsideIpAddressType?: String;
+    /**
+     * The transit gateway attachment ID to use for the VPN tunnel. Required if OutsideIpAddressType is set to PrivateIpv4.
+     */
+    TransportTransitGatewayAttachmentId?: TransitGatewayAttachmentId;
   }
   export type VpnEcmpSupportValue = "enable"|"disable"|string;
   export interface VpnGateway {

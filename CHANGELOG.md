@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1158.0-->
+<!--LATEST=2.1159.0-->
 <!--ENTRYINSERT-->
+
+## 2.1159.0
+* feature: EC2: This release adds support for Private IP VPNs, a new feature allowing S2S VPN connections to use private ip addresses as the tunnel outside ip address over Direct Connect as transport.
+* feature: WellArchitected: Adds support for lens tagging, Adds support for multiple helpful-resource urls and multiple improvement-plan urls.
 
 ## 2.1158.0
 * feature: DirectoryService: This release adds support for describing and updating AWS Managed Microsoft AD settings
