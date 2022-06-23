@@ -308,7 +308,6 @@ export abstract class ConfigurationServicePlaceholders {
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
   emrserverless?: AWS.EMRServerless.Types.ClientConfiguration;
   m2?: AWS.M2.Types.ClientConfiguration;
-  redshiftserverless?: AWS.RedshiftServerless.Types.ClientConfiguration;
   connectcampaigns?: AWS.ConnectCampaigns.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
@@ -620,6 +619,5 @@ export interface ConfigurationServiceApiVersions {
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;
   emrserverless?: AWS.EMRServerless.Types.apiVersion;
   m2?: AWS.M2.Types.apiVersion;
-  redshiftserverless?: AWS.RedshiftServerless.Types.apiVersion;
   connectcampaigns?: AWS.ConnectCampaigns.Types.apiVersion;
 }

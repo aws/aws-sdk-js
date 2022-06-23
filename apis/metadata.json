@@ -1167,9 +1167,6 @@
   "m2": {
     "name": "M2"
   },
-  "redshiftserverless": {
-    "name": "RedshiftServerless"
-  },
   "connectcampaigns": {
     "name": "ConnectCampaigns"
   }
