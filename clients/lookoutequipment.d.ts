@@ -108,6 +108,14 @@ declare class LookoutEquipment extends Service {
    */
   listDatasets(callback?: (err: AWSError, data: LookoutEquipment.Types.ListDatasetsResponse) => void): Request<LookoutEquipment.Types.ListDatasetsResponse, AWSError>;
   /**
+   *  Lists all inference events that have been found for the specified inference scheduler. 
+   */
+  listInferenceEvents(params: LookoutEquipment.Types.ListInferenceEventsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListInferenceEventsResponse) => void): Request<LookoutEquipment.Types.ListInferenceEventsResponse, AWSError>;
+  /**
+   *  Lists all inference events that have been found for the specified inference scheduler. 
+   */
+  listInferenceEvents(callback?: (err: AWSError, data: LookoutEquipment.Types.ListInferenceEventsResponse) => void): Request<LookoutEquipment.Types.ListInferenceEventsResponse, AWSError>;
+  /**
    *  Lists all inference executions that have been performed by the specified inference scheduler. 
    */
   listInferenceExecutions(params: LookoutEquipment.Types.ListInferenceExecutionsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListInferenceExecutionsResponse) => void): Request<LookoutEquipment.Types.ListInferenceExecutionsResponse, AWSError>;
@@ -556,7 +564,7 @@ declare namespace LookoutEquipment {
      */
     DatasetArn?: DatasetArn;
     /**
-     * Specifies the time the dataset was created in Amazon Lookout for Equipment. 
+     * Specifies the time the dataset was created in Lookout for Equipment. 
      */
     CreatedAt?: Timestamp;
     /**
@@ -758,10 +766,38 @@ declare namespace LookoutEquipment {
      */
     TotalNumberOfDuplicateTimestamps: Integer;
   }
+  export type EventDurationInSeconds = number;
   export type FileNameTimestampFormat = string;
   export type Float = number;
   export type IamRoleArn = string;
   export type IdempotenceToken = string;
+  export type InferenceEventSummaries = InferenceEventSummary[];
+  export interface InferenceEventSummary {
+    /**
+     *  The Amazon Resource Name (ARN) of the inference scheduler being used for the inference event. 
+     */
+    InferenceSchedulerArn?: InferenceSchedulerArn;
+    /**
+     * The name of the inference scheduler being used for the inference events. 
+     */
+    InferenceSchedulerName?: InferenceSchedulerName;
+    /**
+     * Indicates the starting time of an inference event. 
+     */
+    EventStartTime?: Timestamp;
+    /**
+     * Indicates the ending time of an inference event. 
+     */
+    EventEndTime?: Timestamp;
+    /**
+     *  An array which specifies the names and values of all sensors contributing to an inference event.
+     */
+    Diagnostics?: ModelMetrics;
+    /**
+     *  Indicates the size of an inference event in seconds. 
+     */
+    EventDurationInSeconds?: EventDurationInSeconds;
+  }
   export type InferenceExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
   export type InferenceExecutionSummaries = InferenceExecutionSummary[];
   export interface InferenceExecutionSummary {
@@ -1044,6 +1080,38 @@ declare namespace LookoutEquipment {
      * Provides information about the specified dataset, including creation time, dataset ARN, and status. 
      */
     DatasetSummaries?: DatasetSummaries;
+  }
+  export interface ListInferenceEventsRequest {
+    /**
+     * An opaque pagination token indicating where to continue the listing of inference events.
+     */
+    NextToken?: NextToken;
+    /**
+     * Specifies the maximum number of inference events to list. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The name of the inference scheduler for the inference events listed. 
+     */
+    InferenceSchedulerName: InferenceSchedulerIdentifier;
+    /**
+     *  Lookout for Equipment will return all the inference events with start time equal to or greater than the start time given.
+     */
+    IntervalStartTime: Timestamp;
+    /**
+     * Lookout for Equipment will return all the inference events with end time equal to or less than the end time given.
+     */
+    IntervalEndTime: Timestamp;
+  }
+  export interface ListInferenceEventsResponse {
+    /**
+     * An opaque pagination token indicating where to continue the listing of inference executions. 
+     */
+    NextToken?: NextToken;
+    /**
+     * Provides an array of information about the individual inference events returned from the ListInferenceEvents operation, including scheduler used, event start time, event end time, diagnostics, and so on. 
+     */
+    InferenceEventSummaries?: InferenceEventSummaries;
   }
   export interface ListInferenceExecutionsRequest {
     /**

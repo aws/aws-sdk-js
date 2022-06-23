@@ -22,6 +22,14 @@ declare class Mgn extends Service {
   /**
    * Creates a new ReplicationConfigurationTemplate.
    */
+  createLaunchConfigurationTemplate(params: Mgn.Types.CreateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  createLaunchConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
   createReplicationConfigurationTemplate(params: Mgn.Types.CreateReplicationConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.ReplicationConfigurationTemplate) => void): Request<Mgn.Types.ReplicationConfigurationTemplate, AWSError>;
   /**
    * Creates a new ReplicationConfigurationTemplate.
@@ -35,6 +43,14 @@ declare class Mgn extends Service {
    * Deletes a single Job by ID.
    */
   deleteJob(callback?: (err: AWSError, data: Mgn.Types.DeleteJobResponse) => void): Request<Mgn.Types.DeleteJobResponse, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  deleteLaunchConfigurationTemplate(params: Mgn.Types.DeleteLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.DeleteLaunchConfigurationTemplateResponse) => void): Request<Mgn.Types.DeleteLaunchConfigurationTemplateResponse, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  deleteLaunchConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.DeleteLaunchConfigurationTemplateResponse) => void): Request<Mgn.Types.DeleteLaunchConfigurationTemplateResponse, AWSError>;
   /**
    * Deletes a single Replication Configuration Template by ID
    */
@@ -75,6 +91,14 @@ declare class Mgn extends Service {
    * Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
    */
   describeJobs(callback?: (err: AWSError, data: Mgn.Types.DescribeJobsResponse) => void): Request<Mgn.Types.DescribeJobsResponse, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  describeLaunchConfigurationTemplates(params: Mgn.Types.DescribeLaunchConfigurationTemplatesRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeLaunchConfigurationTemplatesResponse) => void): Request<Mgn.Types.DescribeLaunchConfigurationTemplatesResponse, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  describeLaunchConfigurationTemplates(callback?: (err: AWSError, data: Mgn.Types.DescribeLaunchConfigurationTemplatesResponse) => void): Request<Mgn.Types.DescribeLaunchConfigurationTemplatesResponse, AWSError>;
   /**
    * Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
    */
@@ -220,6 +244,14 @@ declare class Mgn extends Service {
    */
   updateLaunchConfiguration(callback?: (err: AWSError, data: Mgn.Types.LaunchConfiguration) => void): Request<Mgn.Types.LaunchConfiguration, AWSError>;
   /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  updateLaunchConfigurationTemplate(params: Mgn.Types.UpdateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
+  /**
+   * Creates a new ReplicationConfigurationTemplate.
+   */
+  updateLaunchConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
+  /**
    * Allows you to update multiple ReplicationConfigurations by Source Server ID.
    */
   updateReplicationConfiguration(params: Mgn.Types.UpdateReplicationConfigurationRequest, callback?: (err: AWSError, data: Mgn.Types.ReplicationConfiguration) => void): Request<Mgn.Types.ReplicationConfiguration, AWSError>;
@@ -276,7 +308,18 @@ declare namespace Mgn {
     state: ChangeServerLifeCycleStateSourceServerLifecycleState;
   }
   export type ChangeServerLifeCycleStateSourceServerLifecycleState = "READY_FOR_TEST"|"READY_FOR_CUTOVER"|"CUTOVER"|string;
+  export type CloudWatchLogGroupName = string;
   export type Cpus = CPU[];
+  export interface CreateLaunchConfigurationTemplateRequest {
+    /**
+     * Request to associate the default Application Migration Service Security group with the Replication Settings template.
+     */
+    postLaunchActions?: PostLaunchActions;
+    /**
+     * Request to associate the default Application Migration Service Security group with the Replication Settings template.
+     */
+    tags?: TagsMap;
+  }
   export interface CreateReplicationConfigurationTemplateRequest {
     /**
      * Request to associate the default Application Migration Service Security group with the Replication Settings template.
@@ -362,7 +405,7 @@ declare namespace Mgn {
     /**
      * Request to query data replication lag duration.
      */
-    lagDuration?: ISO8601DatetimeString;
+    lagDuration?: ISO8601DurationString;
     /**
      * Request to query data replication last snapshot time.
      */
@@ -430,6 +473,14 @@ declare namespace Mgn {
     jobID: JobID;
   }
   export interface DeleteJobResponse {
+  }
+  export interface DeleteLaunchConfigurationTemplateRequest {
+    /**
+     * ID of resource to be deleted.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+  }
+  export interface DeleteLaunchConfigurationTemplateResponse {
   }
   export interface DeleteReplicationConfigurationTemplateRequest {
     /**
@@ -513,6 +564,30 @@ declare namespace Mgn {
     items?: JobsList;
     /**
      * Request to describe Job response by next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeLaunchConfigurationTemplatesRequest {
+    /**
+     * Request to disconnect Source Server from service by Server ID.
+     */
+    launchConfigurationTemplateIDs?: LaunchConfigurationTemplateIDs;
+    /**
+     * Request to disconnect Source Server from service by Server ID.
+     */
+    maxResults?: StrictlyPositiveInteger;
+    /**
+     * Request to disconnect Source Server from service by Server ID.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeLaunchConfigurationTemplatesResponse {
+    /**
+     * Request to disconnect Source Server from service by Server ID.
+     */
+    items?: LaunchConfigurationTemplates;
+    /**
+     * Request to disconnect Source Server from service by Server ID.
      */
     nextToken?: PaginationToken;
   }
@@ -643,6 +718,7 @@ declare namespace Mgn {
   }
   export type IPsList = BoundedString[];
   export type ISO8601DatetimeString = string;
+  export type ISO8601DurationString = string;
   export interface IdentificationHints {
     /**
      * AWS Instance ID identification hint.
@@ -743,6 +819,28 @@ declare namespace Mgn {
     targetInstanceID?: EC2InstanceID;
   }
   export type JobLogs = JobLog[];
+  export interface JobPostLaunchActionsLaunchStatus {
+    /**
+     * Job type.
+     */
+    executionID?: BoundedString;
+    /**
+     * Job type.
+     */
+    executionStatus?: PostLaunchActionExecutionStatus;
+    /**
+     * Job type.
+     */
+    failureReason?: BoundedString;
+    /**
+     * Job type.
+     */
+    ssmDocument?: SsmDocument;
+    /**
+     * Job type.
+     */
+    ssmDocumentType?: SsmDocumentType;
+  }
   export type JobStatus = "PENDING"|"STARTED"|"COMPLETED"|string;
   export type JobType = "LAUNCH"|"TERMINATE"|string;
   export type JobsList = Job[];
@@ -776,6 +874,7 @@ declare namespace Mgn {
      * Launch configuration name.
      */
     name?: SmallBoundedString;
+    postLaunchActions?: PostLaunchActions;
     /**
      * Launch configuration Source Server ID.
      */
@@ -785,6 +884,27 @@ declare namespace Mgn {
      */
     targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
   }
+  export interface LaunchConfigurationTemplate {
+    /**
+     * Copy Private IP during Launch Configuration.
+     */
+    arn?: ARN;
+    /**
+     * Copy Private IP during Launch Configuration.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+    /**
+     * Copy Private IP during Launch Configuration.
+     */
+    postLaunchActions?: PostLaunchActions;
+    /**
+     * Copy Private IP during Launch Configuration.
+     */
+    tags?: TagsMap;
+  }
+  export type LaunchConfigurationTemplateID = string;
+  export type LaunchConfigurationTemplateIDs = LaunchConfigurationTemplateID[];
+  export type LaunchConfigurationTemplates = LaunchConfigurationTemplate[];
   export type LaunchDisposition = "STOPPED"|"STARTED"|string;
   export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
   export interface LaunchedInstance {
@@ -815,7 +935,7 @@ declare namespace Mgn {
     /**
      * Lifecycle elapsed time and duration.
      */
-    elapsedReplicationDuration?: ISO8601DatetimeString;
+    elapsedReplicationDuration?: ISO8601DurationString;
     /**
      * Lifecycle replication initiation date and time.
      */
@@ -959,10 +1079,53 @@ declare namespace Mgn {
     /**
      * Participating server Source Server ID.
      */
-    sourceServerID?: SourceServerID;
+    launchedEc2InstanceID?: EC2InstanceID;
+    /**
+     * Participating server Source Server ID.
+     */
+    postLaunchActionsStatus?: PostLaunchActionsStatus;
+    /**
+     * Participating server Source Server ID.
+     */
+    sourceServerID: SourceServerID;
   }
   export type ParticipatingServers = ParticipatingServer[];
   export type PositiveInteger = number;
+  export type PostLaunchActionExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
+  export interface PostLaunchActions {
+    /**
+     * Server participating in Job.
+     */
+    cloudWatchLogGroupName?: CloudWatchLogGroupName;
+    /**
+     * Server participating in Job.
+     */
+    deployment?: PostLaunchActionsDeploymentType;
+    /**
+     * Server participating in Job.
+     */
+    s3LogBucket?: S3LogBucketName;
+    /**
+     * Server participating in Job.
+     */
+    s3OutputKeyPrefix?: BoundedString;
+    /**
+     * Server participating in Job.
+     */
+    ssmDocuments?: SsmDocuments;
+  }
+  export type PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"|"CUTOVER_ONLY"|string;
+  export type PostLaunchActionsLaunchStatusList = JobPostLaunchActionsLaunchStatus[];
+  export interface PostLaunchActionsStatus {
+    /**
+     * Server participating in Job.
+     */
+    postLaunchActionsLaunchStatusList?: PostLaunchActionsLaunchStatusList;
+    /**
+     * Server participating in Job.
+     */
+    ssmAgentDiscoveryDatetime?: ISO8601DatetimeString;
+  }
   export interface ReplicationConfiguration {
     /**
      * Replication Configuration associate default Application Migration Service Security Group.
@@ -1126,6 +1289,7 @@ declare namespace Mgn {
      */
     sourceServerID: SourceServerID;
   }
+  export type S3LogBucketName = string;
   export type SecurityGroupID = string;
   export type SmallBoundedString = string;
   export interface SourceProperties {
@@ -1206,6 +1370,46 @@ declare namespace Mgn {
   }
   export type SourceServerID = string;
   export type SourceServersList = SourceServer[];
+  export interface SsmDocument {
+    /**
+     * Source server replication type.
+     */
+    actionName: BoundedString;
+    /**
+     * Source server replication type.
+     */
+    mustSucceedForCutover?: Boolean;
+    /**
+     * Source server replication type.
+     */
+    parameters?: SsmDocumentParameters;
+    /**
+     * Source server replication type.
+     */
+    ssmDocumentName: SsmDocumentName;
+    /**
+     * Source server replication type.
+     */
+    timeoutSeconds?: StrictlyPositiveInteger;
+  }
+  export type SsmDocumentName = string;
+  export type SsmDocumentParameterName = string;
+  export type SsmDocumentParameters = {[key: string]: SsmParameterStoreParameters};
+  export type SsmDocumentType = "AUTOMATION"|"COMMAND"|string;
+  export type SsmDocuments = SsmDocument[];
+  export interface SsmParameterStoreParameter {
+    /**
+     * Source server replication type.
+     */
+    parameterName: SsmParameterStoreParameterName;
+    /**
+     * Source server replication type.
+     */
+    parameterType: SsmParameterStoreParameterType;
+  }
+  export type SsmParameterStoreParameterName = string;
+  export type SsmParameterStoreParameterType = "STRING"|string;
+  export type SsmParameterStoreParameters = SsmParameterStoreParameter[];
   export interface StartCutoverRequest {
     /**
      * Start Cutover by Source Server IDs.
@@ -1315,6 +1519,7 @@ declare namespace Mgn {
      * Update Launch configuration name request.
      */
     name?: SmallBoundedString;
+    postLaunchActions?: PostLaunchActions;
     /**
      * Update Launch configuration by Source Server ID request.
      */
@@ -1323,6 +1528,16 @@ declare namespace Mgn {
      * Update Launch configuration Target instance right sizing request.
      */
     targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
+  }
+  export interface UpdateLaunchConfigurationTemplateRequest {
+    /**
+     * Update Launch configuration Target instance right sizing request.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+    /**
+     * Update Launch configuration Target instance right sizing request.
+     */
+    postLaunchActions?: PostLaunchActions;
   }
   export interface UpdateReplicationConfigurationRequest {
     /**

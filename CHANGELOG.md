@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1160.0-->
+<!--LATEST=2.1161.0-->
 <!--ENTRYINSERT-->
+
+## 2.1161.0
+* feature: LookoutEquipment: This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers.
+* feature: Mgn: New and modified APIs for the Post-Migration Framework
+* feature: MigrationHubRefactorSpaces: This release adds the new API UpdateRoute that allows route to be updated to ACTIVE/INACTIVE state. In addition, CreateRoute API will now allow users to create route in ACTIVE/INACTIVE state.
+* feature: SageMaker: SageMaker Ground Truth now supports Virtual Private Cloud. Customers can launch labeling jobs and access to their private workforce in VPC mode.
 
 ## 2.1160.0
 * feature: Pricing: This release introduces 1 update to the GetProducts API. The serviceCode attribute is now required when you use the GetProductsRequest.

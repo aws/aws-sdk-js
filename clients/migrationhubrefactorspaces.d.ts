@@ -28,11 +28,11 @@ declare class MigrationHubRefactorSpaces extends Service {
    */
   createEnvironment(callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.CreateEnvironmentResponse) => void): Request<MigrationHubRefactorSpaces.Types.CreateEnvironmentResponse, AWSError>;
   /**
-   * Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the environment owner, regardless of which account creates the route. Routes target a service in the application. If an application does not have any routes, then the first route must be created as a DEFAULT RouteType. When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic to the target service as follows:   If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link.    If the service has a URL endpoint, and the endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet.   If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function's resource policy to allow the application's API Gateway to invoke the function.   A one-time health check is performed on the service when the route is created. If the health check fails, the route transitions to FAILED, and no traffic is sent to the service. For Lambda functions, the Lambda function state is checked. If the function is not active, the function configuration is updated so that Lambda resources are provisioned. If the Lambda state is Failed, then the route creation fails. For more information, see the GetFunctionConfiguration's State response parameter in the Lambda Developer Guide. For public URLs, a connection is opened to the public endpoint. If the URL is not reachable, the health check fails. For private URLs, a target group is created and the target group health check is run. The HealthCheckProtocol, HealthCheckPort, and HealthCheckPath are the same protocol, port, and path specified in the URL or health URL, if used. All other settings use the default values, as described in Health checks for your target groups. The health check is considered successful if at least one target within the target group transitions to a healthy state. Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private Certificate Authorities (CAs) are permitted only if the CA's domain is publicly resolvable.
+   * Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the environment owner, regardless of which account creates the route. Routes target a service in the application. If an application does not have any routes, then the first route must be created as a DEFAULT RouteType. When created, the default route defaults to an active state so state is not a required input. However, like all other state values the state of the default route can be updated after creation, but only when all other routes are also inactive. Conversely, no route can be active without the default route also being active. When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic to the target service as follows:   If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link.    If the service has a URL endpoint, and the endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet.   If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function's resource policy to allow the application's API Gateway to invoke the function.   A one-time health check is performed on the service when either the route is updated from inactive to active, or when it is created with an active state. If the health check fails, the route transitions the route state to FAILED, an error code of SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE is provided, and no traffic is sent to the service. For Lambda functions, the Lambda function state is checked. If the function is not active, the function configuration is updated so that Lambda resources are provisioned. If the Lambda state is Failed, then the route creation fails. For more information, see the GetFunctionConfiguration's State response parameter in the Lambda Developer Guide. For Lambda endpoints, a check is performed to determine that a Lambda function with the specified ARN exists. If it does not exist, the health check fails. For public URLs, a connection is opened to the public endpoint. If the URL is not reachable, the health check fails.  For private URLS, a target group is created on the Elastic Load Balancing and the target group health check is run. The HealthCheckProtocol, HealthCheckPort, and HealthCheckPath are the same protocol, port, and path specified in the URL or health URL, if used. All other settings use the default values, as described in Health checks for your target groups. The health check is considered successful if at least one target within the target group transitions to a healthy state. Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private Certificate Authorities (CAs) are permitted only if the CA's domain is also publicly resolvable.
    */
   createRoute(params: MigrationHubRefactorSpaces.Types.CreateRouteRequest, callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.CreateRouteResponse) => void): Request<MigrationHubRefactorSpaces.Types.CreateRouteResponse, AWSError>;
   /**
-   * Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the environment owner, regardless of which account creates the route. Routes target a service in the application. If an application does not have any routes, then the first route must be created as a DEFAULT RouteType. When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic to the target service as follows:   If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link.    If the service has a URL endpoint, and the endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet.   If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function's resource policy to allow the application's API Gateway to invoke the function.   A one-time health check is performed on the service when the route is created. If the health check fails, the route transitions to FAILED, and no traffic is sent to the service. For Lambda functions, the Lambda function state is checked. If the function is not active, the function configuration is updated so that Lambda resources are provisioned. If the Lambda state is Failed, then the route creation fails. For more information, see the GetFunctionConfiguration's State response parameter in the Lambda Developer Guide. For public URLs, a connection is opened to the public endpoint. If the URL is not reachable, the health check fails. For private URLs, a target group is created and the target group health check is run. The HealthCheckProtocol, HealthCheckPort, and HealthCheckPath are the same protocol, port, and path specified in the URL or health URL, if used. All other settings use the default values, as described in Health checks for your target groups. The health check is considered successful if at least one target within the target group transitions to a healthy state. Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private Certificate Authorities (CAs) are permitted only if the CA's domain is publicly resolvable.
+   * Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the environment owner, regardless of which account creates the route. Routes target a service in the application. If an application does not have any routes, then the first route must be created as a DEFAULT RouteType. When created, the default route defaults to an active state so state is not a required input. However, like all other state values the state of the default route can be updated after creation, but only when all other routes are also inactive. Conversely, no route can be active without the default route also being active. When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic to the target service as follows:   If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link.    If the service has a URL endpoint, and the endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet.   If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function's resource policy to allow the application's API Gateway to invoke the function.   A one-time health check is performed on the service when either the route is updated from inactive to active, or when it is created with an active state. If the health check fails, the route transitions the route state to FAILED, an error code of SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE is provided, and no traffic is sent to the service. For Lambda functions, the Lambda function state is checked. If the function is not active, the function configuration is updated so that Lambda resources are provisioned. If the Lambda state is Failed, then the route creation fails. For more information, see the GetFunctionConfiguration's State response parameter in the Lambda Developer Guide. For Lambda endpoints, a check is performed to determine that a Lambda function with the specified ARN exists. If it does not exist, the health check fails. For public URLs, a connection is opened to the public endpoint. If the URL is not reachable, the health check fails.  For private URLS, a target group is created on the Elastic Load Balancing and the target group health check is run. The HealthCheckProtocol, HealthCheckPort, and HealthCheckPath are the same protocol, port, and path specified in the URL or health URL, if used. All other settings use the default values, as described in Health checks for your target groups. The health check is considered successful if at least one target within the target group transitions to a healthy state. Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private Certificate Authorities (CAs) are permitted only if the CA's domain is also publicly resolvable.
    */
   createRoute(callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.CreateRouteResponse) => void): Request<MigrationHubRefactorSpaces.Types.CreateRouteResponse, AWSError>;
   /**
@@ -195,6 +195,14 @@ declare class MigrationHubRefactorSpaces extends Service {
    * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource. To untag a resource, the caller account must be the same as the resource’s OwnerAccountId. Untagging resources across accounts is not supported. 
    */
   untagResource(callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.UntagResourceResponse) => void): Request<MigrationHubRefactorSpaces.Types.UntagResourceResponse, AWSError>;
+  /**
+   *  Updates an Amazon Web Services Migration Hub Refactor Spaces route. 
+   */
+  updateRoute(params: MigrationHubRefactorSpaces.Types.UpdateRouteRequest, callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.UpdateRouteResponse) => void): Request<MigrationHubRefactorSpaces.Types.UpdateRouteResponse, AWSError>;
+  /**
+   *  Updates an Amazon Web Services Migration Hub Refactor Spaces route. 
+   */
+  updateRoute(callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.UpdateRouteResponse) => void): Request<MigrationHubRefactorSpaces.Types.UpdateRouteResponse, AWSError>;
 }
 declare namespace MigrationHubRefactorSpaces {
   export type AccountId = string;
@@ -497,6 +505,10 @@ declare namespace MigrationHubRefactorSpaces {
      */
     ClientToken?: ClientToken;
     /**
+     *  Configuration for the default route type. 
+     */
+    DefaultRoute?: DefaultRouteInput;
+    /**
      * The ID of the environment in which the route is created.
      */
     EnvironmentIdentifier: EnvironmentId;
@@ -555,7 +567,7 @@ declare namespace MigrationHubRefactorSpaces {
      */
     ServiceId?: ServiceId;
     /**
-     * The current state of the route. 
+     * The current state of the route. Activation state only allows ACTIVE or INACTIVE as user inputs. FAILED is a route state that is system generated.
      */
     State?: RouteState;
     /**
@@ -563,7 +575,7 @@ declare namespace MigrationHubRefactorSpaces {
      */
     Tags?: TagMap;
     /**
-     * onfiguration for the URI path route type. 
+     * Configuration for the URI path route type. 
      */
     UriPathRoute?: UriPathRouteInput;
   }
@@ -674,6 +686,12 @@ declare namespace MigrationHubRefactorSpaces {
      * The ID of the VPC. 
      */
     VpcId?: VpcId;
+  }
+  export interface DefaultRouteInput {
+    /**
+     * If set to ACTIVE, traffic is forwarded to this route’s service after the route is created. 
+     */
+    ActivationState?: RouteActivationState;
   }
   export interface DeleteApplicationRequest {
     /**
@@ -1433,7 +1451,7 @@ declare namespace MigrationHubRefactorSpaces {
   export type ResourceArn = string;
   export type ResourceIdentifier = string;
   export type ResourcePolicyIdentifier = string;
-  export type RouteActivationState = "ACTIVE"|string;
+  export type RouteActivationState = "ACTIVE"|"INACTIVE"|string;
   export type RouteId = string;
   export type RouteState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"INACTIVE"|string;
   export type RouteSummaries = RouteSummary[];
@@ -1591,11 +1609,11 @@ declare namespace MigrationHubRefactorSpaces {
   export type TagMapValueString = string;
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource
+     * The Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn: String;
     /**
-     * The new or modified tags for the resource. 
+     * The new or modified tags for the resource.
      */
     Tags: TagMap;
   }
@@ -1615,11 +1633,55 @@ declare namespace MigrationHubRefactorSpaces {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateRouteRequest {
+    /**
+     *  If set to ACTIVE, traffic is forwarded to this route’s service after the route is updated. 
+     */
+    ActivationState: RouteActivationState;
+    /**
+     *  The ID of the application within which the route is being updated. 
+     */
+    ApplicationIdentifier: ApplicationId;
+    /**
+     *  The ID of the environment in which the route is being updated. 
+     */
+    EnvironmentIdentifier: EnvironmentId;
+    /**
+     *  The unique identifier of the route to update. 
+     */
+    RouteIdentifier: RouteId;
+  }
+  export interface UpdateRouteResponse {
+    /**
+     *  The ID of the application in which the route is being updated. 
+     */
+    ApplicationId?: ApplicationId;
+    /**
+     *  The Amazon Resource Name (ARN) of the route. The format for this ARN is arn:aws:refactor-spaces:region:account-id:resource-type/resource-id . For more information about ARNs, see  Amazon Resource Names (ARNs) in the Amazon Web Services General Reference. 
+     */
+    Arn?: ResourceArn;
+    /**
+     *  A timestamp that indicates when the route was last updated. 
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     *  The unique identifier of the route. 
+     */
+    RouteId?: RouteId;
+    /**
+     *  The ID of service in which the route was created. Traffic that matches this route is forwarded to this service. 
+     */
+    ServiceId?: ServiceId;
+    /**
+     *  The current state of the route. 
+     */
+    State?: RouteState;
+  }
   export type Uri = string;
   export type UriPath = string;
   export interface UriPathRouteInput {
     /**
-     * Indicates whether traffic is forwarded to this route’s service after the route is created. 
+     * If set to ACTIVE, traffic is forwarded to this route’s service after the route is created. 
      */
     ActivationState: RouteActivationState;
     /**

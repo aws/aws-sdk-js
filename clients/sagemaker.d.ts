@@ -237,11 +237,11 @@ declare class SageMaker extends Service {
    */
   createLabelingJob(callback?: (err: AWSError, data: SageMaker.Types.CreateLabelingJobResponse) => void): Request<SageMaker.Types.CreateLabelingJobResponse, AWSError>;
   /**
-   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  For an example that calls this method when deploying a model to SageMaker hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
+   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  For an example that calls this method when deploying a model to SageMaker hosting services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)).  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
    */
   createModel(params: SageMaker.Types.CreateModelInput, callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
-   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  For an example that calls this method when deploying a model to SageMaker hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
+   * Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions. Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job. To host your model, you create an endpoint configuration with the CreateEndpointConfig API, and then create an endpoint with the CreateEndpoint API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment.  For an example that calls this method when deploying a model to SageMaker hosting services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)).  To run a batch transform using your model, you start a job with the CreateTransformJob API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location. In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.
    */
   createModel(callback?: (err: AWSError, data: SageMaker.Types.CreateModelOutput) => void): Request<SageMaker.Types.CreateModelOutput, AWSError>;
   /**
@@ -2005,11 +2005,11 @@ declare class SageMaker extends Service {
    */
   updateUserProfile(callback?: (err: AWSError, data: SageMaker.Types.UpdateUserProfileResponse) => void): Request<SageMaker.Types.UpdateUserProfileResponse, AWSError>;
   /**
-   * Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.  Use SourceIpConfig to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a Not Found error message on the worker portal. Use OidcConfig to update the configuration of a workforce created using your own OIDC IdP.   You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.  After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.  This operation only applies to private workforces. 
+   * Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration. The worker portal is now supported in VPC and public internet.  Use SourceIpConfig to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a Not Found error message on the worker portal. To restrict access to all the workers in public internet, add the SourceIpConfig CIDR value as "0.0.0.0/0".  Amazon SageMaker does not support Source Ip restriction for worker portals in VPC.  Use OidcConfig to update the configuration of a workforce created using your own OIDC IdP.   You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.  After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.  This operation only applies to private workforces. 
    */
   updateWorkforce(params: SageMaker.Types.UpdateWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateWorkforceResponse) => void): Request<SageMaker.Types.UpdateWorkforceResponse, AWSError>;
   /**
-   * Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.  Use SourceIpConfig to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a Not Found error message on the worker portal. Use OidcConfig to update the configuration of a workforce created using your own OIDC IdP.   You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.  After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.  This operation only applies to private workforces. 
+   * Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration. The worker portal is now supported in VPC and public internet.  Use SourceIpConfig to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a Not Found error message on the worker portal. To restrict access to all the workers in public internet, add the SourceIpConfig CIDR value as "0.0.0.0/0".  Amazon SageMaker does not support Source Ip restriction for worker portals in VPC.  Use OidcConfig to update the configuration of a workforce created using your own OIDC IdP.   You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.  After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.  This operation only applies to private workforces. 
    */
   updateWorkforce(callback?: (err: AWSError, data: SageMaker.Types.UpdateWorkforceResponse) => void): Request<SageMaker.Types.UpdateWorkforceResponse, AWSError>;
   /**
@@ -2726,7 +2726,7 @@ declare namespace SageMaker {
   export type AutoMLContainerDefinitions = AutoMLContainerDefinition[];
   export interface AutoMLDataSource {
     /**
-     * The Amazon S3 location of the input data.  The input data must be in CSV format and contain at least 500 rows. 
+     * The Amazon S3 location of the input data.
      */
     S3DataSource: AutoMLS3DataSource;
   }
@@ -2853,7 +2853,7 @@ declare namespace SageMaker {
   export type AutoMLPartialFailureReasons = AutoMLPartialFailureReason[];
   export interface AutoMLS3DataSource {
     /**
-     * The data type.
+     * The data type. A ManifestFile should have the format shown below:  [ {"prefix": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},    "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",   "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",   ... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]  An S3Prefix should have the following format:   s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE 
      */
     S3DataType: AutoMLS3DataType;
     /**
@@ -3557,7 +3557,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+     * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.  The value of InstanceType passed as part of the ResourceSpec in the CreateApp call overrides the value passed as part of the ResourceSpec configured for the user profile or the domain. If InstanceType is not specified in any of those three ResourceSpec values for a KernelGateway app, the CreateApp call fails with a request validation error. 
      */
     ResourceSpec?: ResourceSpec;
   }
@@ -5042,6 +5042,10 @@ declare namespace SageMaker {
      * An array of key-value pairs that contain metadata to help you categorize and organize our workforce. Each tag consists of a key and a value, both of which you define.
      */
     Tags?: TagList;
+    /**
+     * Use this parameter to configure a workforce using VPC.
+     */
+    WorkforceVpcConfig?: WorkforceVpcConfigRequest;
   }
   export interface CreateWorkforceResponse {
     /**
@@ -10162,6 +10166,7 @@ declare namespace SageMaker {
      * The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training and inference jobs used for automated data labeling.  You can only specify a VolumeKmsKeyId when you create a labeling job with automated data labeling enabled using the API operation CreateLabelingJob. You cannot specify an Amazon Web Services KMS key to encrypt the storage volume used for automated data labeling model training and inference when you create a labeling job using the console. To learn more, see Output Data and Storage Volume Encryption. The VolumeKmsKeyId can be any of the following formats:   KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     VolumeKmsKeyId?: KmsKeyId;
+    VpcConfig?: VpcConfig;
   }
   export interface LabelingJobS3DataSource {
     /**
@@ -15479,7 +15484,7 @@ declare namespace SageMaker {
      */
     SageMakerImageVersionArn?: ImageVersionArn;
     /**
-     * The instance type that the image version runs on.  JupyterServer Apps only support the system value. KernelGateway Apps do not support the system value, but support all other values for available instance types. 
+     * The instance type that the image version runs on.   JupyterServer apps only support the system value. For KernelGateway apps, the system value is translated to ml.t3.medium. KernelGateway apps also support all other values for available instance types. 
      */
     InstanceType?: AppInstanceType;
     /**
@@ -17563,6 +17568,10 @@ declare namespace SageMaker {
      * Use this parameter to update your OIDC Identity Provider (IdP) configuration for a workforce made using your own IdP.
      */
     OidcConfig?: OidcConfig;
+    /**
+     * Use this parameter to update your VPC configuration for a workforce.
+     */
+    WorkforceVpcConfig?: WorkforceVpcConfigRequest;
   }
   export interface UpdateWorkforceResponse {
     /**
@@ -17747,9 +17756,61 @@ declare namespace SageMaker {
      * The date that the workforce is created.
      */
     CreateDate?: Timestamp;
+    /**
+     * The configuration of a VPC workforce.
+     */
+    WorkforceVpcConfig?: WorkforceVpcConfigResponse;
+    /**
+     * The status of your workforce.
+     */
+    Status?: WorkforceStatus;
+    /**
+     * The reason your workforce failed.
+     */
+    FailureReason?: WorkforceFailureReason;
   }
   export type WorkforceArn = string;
+  export type WorkforceFailureReason = string;
   export type WorkforceName = string;
+  export type WorkforceSecurityGroupId = string;
+  export type WorkforceSecurityGroupIds = WorkforceSecurityGroupId[];
+  export type WorkforceStatus = "Initializing"|"Updating"|"Deleting"|"Failed"|"Active"|string;
+  export type WorkforceSubnetId = string;
+  export type WorkforceSubnets = WorkforceSubnetId[];
+  export interface WorkforceVpcConfigRequest {
+    /**
+     * The ID of the VPC that the workforce uses for communication.
+     */
+    VpcId?: WorkforceVpcId;
+    /**
+     * The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.
+     */
+    SecurityGroupIds?: WorkforceSecurityGroupIds;
+    /**
+     * The ID of the subnets in the VPC that you want to connect.
+     */
+    Subnets?: WorkforceSubnets;
+  }
+  export interface WorkforceVpcConfigResponse {
+    /**
+     * The ID of the VPC that the workforce uses for communication.
+     */
+    VpcId: WorkforceVpcId;
+    /**
+     * The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.
+     */
+    SecurityGroupIds: WorkforceSecurityGroupIds;
+    /**
+     * The ID of the subnets in the VPC that you want to connect.
+     */
+    Subnets: WorkforceSubnets;
+    /**
+     * The IDs for the VPC service endpoints of your VPC workforce when it is created and updated.
+     */
+    VpcEndpointId?: WorkforceVpcEndpointId;
+  }
+  export type WorkforceVpcEndpointId = string;
+  export type WorkforceVpcId = string;
   export type Workforces = Workforce[];
   export interface Workteam {
     /**
