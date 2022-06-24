@@ -88,7 +88,11 @@ export namespace DocumentClient {
          */
         params?: {[key: string]: any}
         /**
-         * An optional pre-configured instance of the AWS.DynamoDB service object to use for requests. The object may bound parameters used by the document client.
+         * An optional pre-configured instance
+         * of the AWS.DynamoDB service object. This instance's config will be
+         * copied to a new instance used by this client. You should not need to
+         * retain a reference to the input object, and may destroy it or allow it
+         * to be garbage collected.
          */
         service?: DynamoDB
     }
