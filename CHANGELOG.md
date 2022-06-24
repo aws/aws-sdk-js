@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1161.0-->
+<!--LATEST=2.1162.0-->
 <!--ENTRYINSERT-->
+
+## 2.1162.0
+* bugfix: redshiftserverless: remove redshiftserverless client
+* feature: Glue: This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history.
 
 ## 2.1161.0
 * feature: LookoutEquipment: This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers.

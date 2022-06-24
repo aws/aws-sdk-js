@@ -12,11 +12,11 @@ declare class RDSDataService extends Service {
   constructor(options?: RDSDataService.Types.ClientConfiguration)
   config: Config & RDSDataService.Types.ClientConfiguration;
   /**
-   * Runs a batch SQL statement over an array of data. You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically. 
+   * Runs a batch SQL statement over an array of data. You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically. There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and the size of each parameter set. The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated. 
    */
   batchExecuteStatement(params: RDSDataService.Types.BatchExecuteStatementRequest, callback?: (err: AWSError, data: RDSDataService.Types.BatchExecuteStatementResponse) => void): Request<RDSDataService.Types.BatchExecuteStatementResponse, AWSError>;
   /**
-   * Runs a batch SQL statement over an array of data. You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically. 
+   * Runs a batch SQL statement over an array of data. You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically. There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and the size of each parameter set. The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated. 
    */
   batchExecuteStatement(callback?: (err: AWSError, data: RDSDataService.Types.BatchExecuteStatementResponse) => void): Request<RDSDataService.Types.BatchExecuteStatementResponse, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class RDSDataService extends Service {
    */
   executeSql(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
   /**
-   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically.  If the binary response data from the database is more than 1 MB, the call is terminated.
+   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically. If the binary response data from the database is more than 1 MB, the call is terminated. 
    */
   executeStatement(params: RDSDataService.Types.ExecuteStatementRequest, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteStatementResponse) => void): Request<RDSDataService.Types.ExecuteStatementResponse, AWSError>;
   /**
-   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically.  If the binary response data from the database is more than 1 MB, the call is terminated.
+   * Runs a SQL statement against a database.  If a call isn't part of a transaction because it doesn't include the transactionID parameter, changes that result from the call are committed automatically. If the binary response data from the database is more than 1 MB, the call is terminated. 
    */
   executeStatement(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteStatementResponse) => void): Request<RDSDataService.Types.ExecuteStatementResponse, AWSError>;
   /**
@@ -104,11 +104,11 @@ declare namespace RDSDataService {
      */
     schema?: DbName;
     /**
-     * The name or ARN of the secret that enables access to the DB cluster.
+     * The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret. For information about creating the secret, see Create a database secret.
      */
     secretArn: Arn;
     /**
-     * The SQL statement to run.
+     * The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.
      */
     sql: SqlStatement;
     /**
@@ -237,7 +237,7 @@ declare namespace RDSDataService {
   export type DoubleArray = BoxedDouble[];
   export interface ExecuteSqlRequest {
     /**
-     * The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
+     * The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret. For information about creating the secret, see Create a database secret.
      */
     awsSecretStoreArn: Arn;
     /**
@@ -297,7 +297,7 @@ declare namespace RDSDataService {
      */
     schema?: DbName;
     /**
-     * The name or ARN of the secret that enables access to the DB cluster.
+     * The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret. For information about creating the secret, see Create a database secret.
      */
     secretArn: Arn;
     /**

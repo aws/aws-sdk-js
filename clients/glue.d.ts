@@ -1020,6 +1020,14 @@ declare class Glue extends Service {
    */
   listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
+   * Returns all the crawls of a specified crawler. Returns only the crawls that have occurred since the launch date of the crawler history feature, and only retains up to 12 months of crawls. Older crawls will not be returned. You may use this API to:   Retrive all the crawls of a specified crawler.   Retrieve all the crawls of a specified crawler within a limited count.   Retrieve all the crawls of a specified crawler in a specific time range.   Retrieve all the crawls of a specified crawler with a particular state, crawl ID, or DPU hour value.  
+   */
+  listCrawls(params: Glue.Types.ListCrawlsRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlsResponse) => void): Request<Glue.Types.ListCrawlsResponse, AWSError>;
+  /**
+   * Returns all the crawls of a specified crawler. Returns only the crawls that have occurred since the launch date of the crawler history feature, and only retains up to 12 months of crawls. Older crawls will not be returned. You may use this API to:   Retrive all the crawls of a specified crawler.   Retrieve all the crawls of a specified crawler within a limited count.   Retrieve all the crawls of a specified crawler in a specific time range.   Retrieve all the crawls of a specified crawler with a particular state, crawl ID, or DPU hour value.  
+   */
+  listCrawls(callback?: (err: AWSError, data: Glue.Types.ListCrawlsResponse) => void): Request<Glue.Types.ListCrawlsResponse, AWSError>;
+  /**
    * Lists all the custom patterns that have been created.
    */
   listCustomEntityTypes(params: Glue.Types.ListCustomEntityTypesRequest, callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
@@ -2877,6 +2885,7 @@ declare namespace Glue {
      */
     LogStream?: LogStream;
   }
+  export type CrawlId = string;
   export type CrawlList = Crawl[];
   export type CrawlState = "RUNNING"|"CANCELLING"|"CANCELLED"|"SUCCEEDED"|"FAILED"|string;
   export interface Crawler {
@@ -2957,11 +2966,55 @@ declare namespace Glue {
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
     /**
-     * Specifies whether the crawler should use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.
+     * Specifies whether the crawler should use Lake Formation credentials for the crawler instead of the IAM role credentials.
      */
     LakeFormationConfiguration?: LakeFormationConfiguration;
   }
   export type CrawlerConfiguration = string;
+  export interface CrawlerHistory {
+    /**
+     * A UUID identifier for each crawl.
+     */
+    CrawlId?: CrawlId;
+    /**
+     * The state of the crawl.
+     */
+    State?: CrawlerHistoryState;
+    /**
+     * The date and time on which the crawl started.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The date and time on which the crawl ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * A run summary for the specific crawl in JSON. Contains the catalog tables and partitions that were added, updated, or deleted.
+     */
+    Summary?: NameString;
+    /**
+     * If an error occurred, the error message associated with the crawl.
+     */
+    ErrorMessage?: DescriptionString;
+    /**
+     * The log group associated with the crawl.
+     */
+    LogGroup?: LogGroup;
+    /**
+     * The log stream associated with the crawl.
+     */
+    LogStream?: LogStream;
+    /**
+     * The prefix for a CloudWatch message about this crawl.
+     */
+    MessagePrefix?: MessagePrefix;
+    /**
+     * The number of data processing units (DPU) used in hours for the crawl.
+     */
+    DPUHour?: NonNegativeDouble;
+  }
+  export type CrawlerHistoryList = CrawlerHistory[];
+  export type CrawlerHistoryState = "RUNNING"|"COMPLETED"|"FAILED"|"STOPPED"|string;
   export type CrawlerLineageSettings = "ENABLE"|"DISABLE"|string;
   export type CrawlerList = Crawler[];
   export interface CrawlerMetrics {
@@ -3034,6 +3087,21 @@ declare namespace Glue {
      */
     DeltaTargets?: DeltaTargetList;
   }
+  export interface CrawlsFilter {
+    /**
+     * A key used to filter the crawler runs for a specified crawler. Valid values for each of the field names are:    CRAWL_ID: A string representing the UUID identifier for a crawl.    STATE: A string representing the state of the crawl.    START_TIME and END_TIME: The epoch timestamp in milliseconds.    DPU_HOUR: The number of data processing unit (DPU) hours used for the crawl.  
+     */
+    FieldName?: FieldName;
+    /**
+     * A defined comparator that operates on the value. The available operators are:    GT: Greater than.    GE: Greater than or equal to.    LT: Less than.    LE: Less than or equal to.    EQ: Equal to.    NE: Not equal to.  
+     */
+    FilterOperator?: FilterOperator;
+    /**
+     * The value provided for comparison on the crawl field. 
+     */
+    FieldValue?: GenericString;
+  }
+  export type CrawlsFilterList = CrawlsFilter[];
   export interface CreateBlueprintRequest {
     /**
      * The name of the blueprint.
@@ -3139,6 +3207,9 @@ declare namespace Glue {
      * Specifies data lineage configuration settings for the crawler.
      */
     LineageConfiguration?: LineageConfiguration;
+    /**
+     * Specifies Lake Formation configuration settings for the crawler.
+     */
     LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
@@ -4913,6 +4984,7 @@ declare namespace Glue {
     OutputS3Path?: UriString;
   }
   export type ExtendedString = string;
+  export type FieldName = "CRAWL_ID"|"STATE"|"START_TIME"|"END_TIME"|"DPU_HOUR"|string;
   export type FieldType = string;
   export interface FillMissingValues {
     /**
@@ -4967,6 +5039,7 @@ declare namespace Glue {
   export type FilterExpressions = FilterExpression[];
   export type FilterLogicalOperator = "AND"|"OR"|string;
   export type FilterOperation = "EQ"|"LT"|"GT"|"LTE"|"GTE"|"REGEX"|"ISNULL"|string;
+  export type FilterOperator = "GT"|"GE"|"LT"|"LE"|"EQ"|"NE"|string;
   export type FilterString = string;
   export interface FilterValue {
     /**
@@ -7365,7 +7438,7 @@ declare namespace Glue {
   }
   export interface LakeFormationConfiguration {
     /**
-     * Specifies whether to use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.
+     * Specifies whether to use Lake Formation credentials for the crawler instead of the IAM role credentials.
      */
     UseLakeFormationCredentials?: NullableBoolean;
     /**
@@ -7477,6 +7550,34 @@ declare namespace Glue {
     CrawlerNames?: CrawlerNameList;
     /**
      * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: Token;
+  }
+  export interface ListCrawlsRequest {
+    /**
+     * The name of the crawler whose runs you want to retrieve.
+     */
+    CrawlerName: NameString;
+    /**
+     * The maximum number of results to return. The default is 20, and maximum is 100.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Filters the crawls by the criteria you specify in a list of CrawlsFilter objects.
+     */
+    Filters?: CrawlsFilterList;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: Token;
+  }
+  export interface ListCrawlsResponse {
+    /**
+     * A list of CrawlerHistory objects representing the crawl runs that meet your criteria.
+     */
+    Crawls?: CrawlerHistoryList;
+    /**
+     * A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
      */
     NextToken?: Token;
   }
@@ -10761,6 +10862,9 @@ declare namespace Glue {
      * Specifies data lineage configuration settings for the crawler.
      */
     LineageConfiguration?: LineageConfiguration;
+    /**
+     * Specifies Lake Formation configuration settings for the crawler.
+     */
     LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
