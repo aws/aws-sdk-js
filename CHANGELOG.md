@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1162.0-->
+<!--LATEST=2.1163.0-->
 <!--ENTRYINSERT-->
+
+## 2.1163.0
+* feature: Iot: This release ease the restriction for the input of tag value to align with AWS standard, now instead of min length 1, we change it to min length 0.
 
 ## 2.1162.0
 * bugfix: redshiftserverless: remove redshiftserverless client
