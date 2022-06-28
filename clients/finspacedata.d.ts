@@ -124,6 +124,14 @@ declare class Finspacedata extends Service {
    */
   getDataset(callback?: (err: AWSError, data: Finspacedata.Types.GetDatasetResponse) => void): Request<Finspacedata.Types.GetDatasetResponse, AWSError>;
   /**
+   * Returns the credentials to access the external Dataview from an S3 location. To call this API:   You must retrieve the programmatic credentials.   You must be a member of a FinSpace user group, where the dataset that you want to access has Read Dataset Data permissions.  
+   */
+  getExternalDataViewAccessDetails(params: Finspacedata.Types.GetExternalDataViewAccessDetailsRequest, callback?: (err: AWSError, data: Finspacedata.Types.GetExternalDataViewAccessDetailsResponse) => void): Request<Finspacedata.Types.GetExternalDataViewAccessDetailsResponse, AWSError>;
+  /**
+   * Returns the credentials to access the external Dataview from an S3 location. To call this API:   You must retrieve the programmatic credentials.   You must be a member of a FinSpace user group, where the dataset that you want to access has Read Dataset Data permissions.  
+   */
+  getExternalDataViewAccessDetails(callback?: (err: AWSError, data: Finspacedata.Types.GetExternalDataViewAccessDetailsResponse) => void): Request<Finspacedata.Types.GetExternalDataViewAccessDetailsResponse, AWSError>;
+  /**
    * Retrieves the details of a specific permission group.
    */
   getPermissionGroup(params: Finspacedata.Types.GetPermissionGroupRequest, callback?: (err: AWSError, data: Finspacedata.Types.GetPermissionGroupResponse) => void): Request<Finspacedata.Types.GetPermissionGroupResponse, AWSError>;
@@ -253,6 +261,7 @@ declare class Finspacedata extends Service {
   updateUser(callback?: (err: AWSError, data: Finspacedata.Types.UpdateUserResponse) => void): Request<Finspacedata.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace Finspacedata {
+  export type AccessKeyId = string;
   export type AliasString = string;
   export type ApiAccess = "ENABLED"|"DISABLED"|string;
   export type ApplicationPermission = "CreateDataset"|"ManageClusters"|"ManageUsersAndGroups"|"ManageAttributeSets"|"ViewAuditData"|"AccessNotebooks"|"GetTemporaryCredentials"|string;
@@ -276,6 +285,24 @@ declare namespace Finspacedata {
      * The returned status code of the response.
      */
     statusCode?: StatusCode;
+  }
+  export interface AwsCredentials {
+    /**
+     *  The unique identifier for the security credentials.
+     */
+    accessKeyId?: AccessKeyId;
+    /**
+     *  The secret access key that can be used to sign requests.
+     */
+    secretAccessKey?: SecretAccessKey;
+    /**
+     *  The token that users must pass to use the credentials.
+     */
+    sessionToken?: SessionToken;
+    /**
+     *  The Epoch time when the current credentials expire.
+     */
+    expiration?: TimestampEpoch;
   }
   export type Boolean = boolean;
   export type ChangeType = "REPLACE"|"APPEND"|"MODIFY"|string;
@@ -488,7 +515,7 @@ declare namespace Finspacedata {
      */
     description?: PermissionGroupDescription;
     /**
-     * The option to indicate FinSpace application permissions that are granted to a specific group.    CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
+     * The option to indicate FinSpace application permissions that are granted to a specific group.  When assigning application permissions, be aware that the permission ManageUsersAndGroups allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.     CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
      */
     applicationPermissions: ApplicationPermissionList;
     /**
@@ -956,6 +983,26 @@ declare namespace Finspacedata {
      */
     status?: DatasetStatus;
   }
+  export interface GetExternalDataViewAccessDetailsRequest {
+    /**
+     * The unique identifier for the Dataview that you want to access.
+     */
+    dataViewId: DataViewId;
+    /**
+     * The unique identifier for the Dataset.
+     */
+    datasetId: DatasetId;
+  }
+  export interface GetExternalDataViewAccessDetailsResponse {
+    /**
+     * The credentials required to access the external Dataview from the S3 location.
+     */
+    credentials?: AwsCredentials;
+    /**
+     * The location where the external Dataview is stored.
+     */
+    s3Location?: S3Location;
+  }
   export interface GetPermissionGroupRequest {
     /**
      * The unique identifier for the permission group.
@@ -1242,7 +1289,7 @@ declare namespace Finspacedata {
      */
     description?: PermissionGroupDescription;
     /**
-     * Indicates the permissions that are granted to a specific group for accessing the FinSpace application.    CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
+     * Indicates the permissions that are granted to a specific group for accessing the FinSpace application.  When assigning application permissions, be aware that the permission ManageUsersAndGroups allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.     CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
      */
     applicationPermissions?: ApplicationPermissionList;
     /**
@@ -1318,7 +1365,19 @@ declare namespace Finspacedata {
   export type ResourcePermissionsList = ResourcePermission[];
   export type ResultLimit = number;
   export type RoleArn = string;
+  export type S3BucketName = string;
   export type S3DestinationFormatOptions = {[key: string]: StringMapValue};
+  export type S3Key = string;
+  export interface S3Location {
+    /**
+     *  The name of the S3 bucket.
+     */
+    bucket: S3BucketName;
+    /**
+     *  The path of the folder, within the S3 bucket that contains the Dataset.
+     */
+    key: S3Key;
+  }
   export interface SchemaDefinition {
     /**
      * List of column definitions.
@@ -1335,7 +1394,9 @@ declare namespace Finspacedata {
      */
     tabularSchemaConfig?: SchemaDefinition;
   }
+  export type SecretAccessKey = string;
   export type SessionDuration = number;
+  export type SessionToken = string;
   export type SortColumnList = StringValueLength1to255[];
   export type SourceParams = {[key: string]: StringMapValue};
   export type StatusCode = number;
@@ -1426,7 +1487,7 @@ declare namespace Finspacedata {
      */
     description?: PermissionGroupDescription;
     /**
-     * The permissions that are granted to a specific group for accessing the FinSpace application.    CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
+     * The permissions that are granted to a specific group for accessing the FinSpace application.  When assigning application permissions, be aware that the permission ManageUsersAndGroups allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.     CreateDataset – Group members can create new datasets.    ManageClusters – Group members can manage Apache Spark clusters from FinSpace notebooks.    ManageUsersAndGroups – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.    ManageAttributeSets – Group members can manage attribute sets.    ViewAuditData – Group members can view audit data.    AccessNotebooks – Group members will have access to FinSpace notebooks.    GetTemporaryCredentials – Group members can get temporary API credentials.  
      */
     applicationPermissions?: ApplicationPermissionList;
     /**

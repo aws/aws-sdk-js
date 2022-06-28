@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1163.0-->
+<!--LATEST=2.1164.0-->
 <!--ENTRYINSERT-->
+
+## 2.1164.0
+* feature: DataSync: AWS DataSync now supports Amazon FSx for NetApp ONTAP locations.
+* feature: EC2: This release adds a new spread placement group to EC2 Placement Groups: host level spread, which spread instances between physical hosts, available to Outpost customers only. CreatePlacementGroup and DescribePlacementGroups APIs were updated with a new parameter: SpreadLevel to support this feature.
+* feature: Finspacedata: Release new API GetExternalDataViewAccessDetails
+* feature: Polly: Add 4 new neural voices - Pedro (es-US), Liam (fr-CA), Daniel (de-DE) and Arthur (en-GB).
 
 ## 2.1163.0
 * feature: Iot: This release ease the restriction for the input of tag value to align with AWS standard, now instead of min length 1, we change it to min length 0.
