@@ -1981,6 +1981,25 @@
       ],
       "documentation": "<p>Use this operation to describe a <code>FeatureGroup</code>. The response includes information on the creation time, <code>FeatureGroup</code> name, the unique identifier for each <code>FeatureGroup</code>, and more.</p>"
     },
+    "DescribeFeatureMetadata": {
+      "name": "DescribeFeatureMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFeatureMetadataRequest"
+      },
+      "output": {
+        "shape": "DescribeFeatureMetadataResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Shows the metadata for a feature within a feature group.</p>"
+    },
     "DescribeFlowDefinition": {
       "name": "DescribeFlowDefinition",
       "http": {
@@ -4116,6 +4135,41 @@
       ],
       "documentation": "<p>Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.</p>"
     },
+    "UpdateFeatureGroup": {
+      "name": "UpdateFeatureGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFeatureGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateFeatureGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Updates the feature group.</p>"
+    },
+    "UpdateFeatureMetadata": {
+      "name": "UpdateFeatureMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFeatureMetadataRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Updates the description and parameters of the feature group.</p>"
+    },
     "UpdateImage": {
       "name": "UpdateImage",
       "http": {
@@ -6065,10 +6119,12 @@
           "documentation": "<p>The bias report for a model</p>"
         },
         "PreTrainingReport": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The pre-training bias report for a model.</p>"
         },
         "PostTrainingReport": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The post-training bias report for a model.</p>"
         }
       },
       "documentation": "<p>Contains bias metrics for a model.</p>"
@@ -11703,6 +11759,10 @@
           "shape": "CreationTime",
           "documentation": "<p>A timestamp indicating when SageMaker created the <code>FeatureGroup</code>.</p>"
         },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating when the feature group was last updated.</p>"
+        },
         "OnlineStoreConfig": {
           "shape": "OnlineStoreConfig",
           "documentation": "<p>The configuration for the <code>OnlineStore</code>.</p>"
@@ -11723,6 +11783,10 @@
           "shape": "OfflineStoreStatus",
           "documentation": "<p>The status of the <code>OfflineStore</code>. Notifies you if replicating data into the <code>OfflineStore</code> has failed. Returns either: <code>Active</code> or <code>Blocked</code> </p>"
         },
+        "LastUpdateStatus": {
+          "shape": "LastUpdateStatus",
+          "documentation": "<p>A value indicating whether the update made to the feature group was successful.</p>"
+        },
         "FailureReason": {
           "shape": "FailureReason",
           "documentation": "<p>The reason that the <code>FeatureGroup</code> failed to be replicated in the <code>OfflineStore</code>. This is failure can occur because:</p> <ul> <li> <p>The <code>FeatureGroup</code> could not be created in the <code>OfflineStore</code>.</p> </li> <li> <p>The <code>FeatureGroup</code> could not be deleted from the <code>OfflineStore</code>.</p> </li> </ul>"
@@ -11734,6 +11798,72 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>A token to resume pagination of the list of <code>Features</code> (<code>FeatureDefinitions</code>).</p>"
+        },
+        "OnlineStoreTotalSizeBytes": {
+          "shape": "OnlineStoreTotalSizeBytes",
+          "documentation": "<p>The size of the <code>OnlineStore</code> in bytes.</p>"
+        }
+      }
+    },
+    "DescribeFeatureMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "FeatureName"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group containing the feature.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of the feature.</p>"
+        }
+      }
+    },
+    "DescribeFeatureMetadataResponse": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupArn",
+        "FeatureGroupName",
+        "FeatureName",
+        "FeatureType",
+        "CreationTime",
+        "LastModifiedTime"
+      ],
+      "members": {
+        "FeatureGroupArn": {
+          "shape": "FeatureGroupArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the feature group that contains the feature.</p>"
+        },
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group that you've specified.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of the feature that you've specified.</p>"
+        },
+        "FeatureType": {
+          "shape": "FeatureType",
+          "documentation": "<p>The data type of the feature.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime",
+          "documentation": "<p>A timestamp indicating when the feature was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating when the metadata for the feature group was modified. For example, if you add a parameter describing the feature, the timestamp changes to reflect the last time you </p>"
+        },
+        "Description": {
+          "shape": "FeatureDescription",
+          "documentation": "<p>The description you added to describe the feature.</p>"
+        },
+        "Parameters": {
+          "shape": "FeatureParameters",
+          "documentation": "<p>The key-value pairs that you added to describe the feature.</p>"
         }
       }
     },
@@ -14273,10 +14403,12 @@
           "documentation": "<p>The bias config file for a model.</p>"
         },
         "PreTrainingConstraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The pre-training constraints.</p>"
         },
         "PostTrainingConstraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The post-training constraints.</p>"
         }
       },
       "documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is set using the model package.</p>"
@@ -14285,7 +14417,8 @@
       "type": "structure",
       "members": {
         "Constraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check explainability constraints.</p>"
         },
         "ConfigFile": {
           "shape": "FileSource",
@@ -14298,10 +14431,12 @@
       "type": "structure",
       "members": {
         "Statistics": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model data quality statistics.</p>"
         },
         "Constraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model data quality constraints.</p>"
         }
       },
       "documentation": "<p>Represents the drift check data quality baselines that can be used when the model monitor is set using the model package. </p>"
@@ -14310,10 +14445,12 @@
       "type": "structure",
       "members": {
         "Statistics": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model quality statistics.</p>"
         },
         "Constraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model quality constraints.</p>"
         }
       },
       "documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using the model package. </p>"
@@ -15178,6 +15315,14 @@
       "type": "string",
       "max": 1024
     },
+    "FeatureAdditions": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureDefinition"
+      },
+      "max": 100,
+      "min": 1
+    },
     "FeatureDefinition": {
       "type": "structure",
       "members": {
@@ -15199,6 +15344,12 @@
       },
       "max": 2500,
       "min": 1
+    },
+    "FeatureDescription": {
+      "type": "string",
+      "max": 255,
+      "min": 0,
+      "pattern": ".*"
     },
     "FeatureGroup": {
       "type": "structure",
@@ -15227,6 +15378,10 @@
           "shape": "CreationTime",
           "documentation": "<p>The time a <code>FeatureGroup</code> was created.</p>"
         },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating the last time you updated the feature group.</p>"
+        },
         "OnlineStoreConfig": {
           "shape": "OnlineStoreConfig"
         },
@@ -15243,6 +15398,10 @@
         },
         "OfflineStoreStatus": {
           "shape": "OfflineStoreStatus"
+        },
+        "LastUpdateStatus": {
+          "shape": "LastUpdateStatus",
+          "documentation": "<p>A value that indicates whether the feature group was updated successfully.</p>"
         },
         "FailureReason": {
           "shape": "FailureReason",
@@ -15343,11 +15502,97 @@
       },
       "documentation": "<p>The name, Arn, <code>CreationTime</code>, <code>FeatureGroup</code> values, <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a <code>FeatureGroup</code>.</p>"
     },
+    "FeatureMetadata": {
+      "type": "structure",
+      "members": {
+        "FeatureGroupArn": {
+          "shape": "FeatureGroupArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the feature group.</p>"
+        },
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group containing the feature.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of feature.</p>"
+        },
+        "FeatureType": {
+          "shape": "FeatureType",
+          "documentation": "<p>The data type of the feature.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime",
+          "documentation": "<p>A timestamp indicating when the feature was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating when the feature was last modified.</p>"
+        },
+        "Description": {
+          "shape": "FeatureDescription",
+          "documentation": "<p>An optional description that you specify to better describe the feature.</p>"
+        },
+        "Parameters": {
+          "shape": "FeatureParameters",
+          "documentation": "<p>Optional key-value pairs that you specify to better describe the feature.</p>"
+        }
+      },
+      "documentation": "<p>The metadata for a feature. It can either be metadata that you specify, or metadata that is updated automatically.</p>"
+    },
     "FeatureName": {
       "type": "string",
       "max": 64,
       "min": 1,
       "pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}"
+    },
+    "FeatureParameter": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "FeatureParameterKey",
+          "documentation": "<p>A key that must contain a value to describe the feature.</p>"
+        },
+        "Value": {
+          "shape": "FeatureParameterValue",
+          "documentation": "<p>The value that belongs to a key.</p>"
+        }
+      },
+      "documentation": "<p>A key-value pair that you specify to describe the feature.</p>"
+    },
+    "FeatureParameterAdditions": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureParameter"
+      },
+      "max": 25
+    },
+    "FeatureParameterKey": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$"
+    },
+    "FeatureParameterRemovals": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureParameterKey"
+      },
+      "max": 25
+    },
+    "FeatureParameterValue": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$"
+    },
+    "FeatureParameters": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureParameter"
+      },
+      "max": 25,
+      "min": 0
     },
     "FeatureType": {
       "type": "string",
@@ -17635,6 +17880,31 @@
     },
     "LastModifiedTime": {
       "type": "timestamp"
+    },
+    "LastUpdateStatus": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "LastUpdateStatusValue",
+          "documentation": "<p>A value that indicates whether the update was made successful.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If the update wasn't successful, indicates the reason why it failed.</p>"
+        }
+      },
+      "documentation": "<p>A value that indicates whether the update was successful.</p>"
+    },
+    "LastUpdateStatusValue": {
+      "type": "string",
+      "enum": [
+        "Successful",
+        "Failed",
+        "InProgress"
+      ]
     },
     "LifecycleConfigArns": {
       "type": "list",
@@ -20972,18 +21242,18 @@
       "members": {
         "ContentType": {
           "shape": "ContentType",
-          "documentation": "<p/>"
+          "documentation": "<p>The metric source content type.</p>"
         },
         "ContentDigest": {
           "shape": "ContentDigest",
-          "documentation": "<p/>"
+          "documentation": "<p>The hash key used for the metrics source.</p>"
         },
         "S3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p/>"
+          "documentation": "<p>The S3 URI for the metrics source.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Details about the metrics source.</p>"
     },
     "MinimumInstanceMetadataServiceVersion": {
       "type": "string",
@@ -21382,20 +21652,24 @@
           "documentation": "<p>The time that the model package was created.</p>"
         },
         "InferenceSpecification": {
-          "shape": "InferenceSpecification"
+          "shape": "InferenceSpecification",
+          "documentation": "<p>Defines how to perform inference generation after a training job is run.</p>"
         },
         "SourceAlgorithmSpecification": {
-          "shape": "SourceAlgorithmSpecification"
+          "shape": "SourceAlgorithmSpecification",
+          "documentation": "<p>A list of algorithms that were used to create a model package.</p>"
         },
         "ValidationSpecification": {
-          "shape": "ModelPackageValidationSpecification"
+          "shape": "ModelPackageValidationSpecification",
+          "documentation": "<p>Specifies batch transform jobs that SageMaker runs to validate your model package.</p>"
         },
         "ModelPackageStatus": {
           "shape": "ModelPackageStatus",
           "documentation": "<p>The status of the model package. This can be one of the following values.</p> <ul> <li> <p> <code>PENDING</code> - The model package is pending being created.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The model package is in the process of being created.</p> </li> <li> <p> <code>COMPLETED</code> - The model package was successfully created.</p> </li> <li> <p> <code>FAILED</code> - The model package failed.</p> </li> <li> <p> <code>DELETING</code> - The model package is in the process of being deleted.</p> </li> </ul>"
         },
         "ModelPackageStatusDetails": {
-          "shape": "ModelPackageStatusDetails"
+          "shape": "ModelPackageStatusDetails",
+          "documentation": "<p>Specifies the validation and image scan statuses of the model package.</p>"
         },
         "CertifyForMarketplace": {
           "shape": "CertifyForMarketplace",
@@ -21406,10 +21680,12 @@
           "documentation": "<p>The approval status of the model. This can be one of the following values.</p> <ul> <li> <p> <code>APPROVED</code> - The model is approved</p> </li> <li> <p> <code>REJECTED</code> - The model is rejected.</p> </li> <li> <p> <code>PENDING_MANUAL_APPROVAL</code> - The model is waiting for manual approval.</p> </li> </ul>"
         },
         "CreatedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
         },
         "MetadataProperties": {
-          "shape": "MetadataProperties"
+          "shape": "MetadataProperties",
+          "documentation": "<p>Metadata properties of the tracking entity, trial, or trial component.</p>"
         },
         "ModelMetrics": {
           "shape": "ModelMetrics",
@@ -21420,7 +21696,8 @@
           "documentation": "<p>The last time the model package was modified.</p>"
         },
         "LastModifiedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
         },
         "ApprovalDescription": {
           "shape": "ApprovalDescription",
@@ -23066,6 +23343,9 @@
         }
       },
       "documentation": "<p>The security configuration for <code>OnlineStore</code>.</p>"
+    },
+    "OnlineStoreTotalSizeBytes": {
+      "type": "long"
     },
     "Operator": {
       "type": "string",
@@ -25771,7 +26051,8 @@
         "Pipeline",
         "PipelineExecution",
         "FeatureGroup",
-        "Project"
+        "Project",
+        "FeatureMetadata"
       ]
     },
     "ResponseMIMEType": {
@@ -26063,6 +26344,10 @@
         "Project": {
           "shape": "Project",
           "documentation": "<p>The properties of a project.</p>"
+        },
+        "FeatureMetadata": {
+          "shape": "FeatureMetadata",
+          "documentation": "<p>The feature metadata used to search through the features.</p>"
         }
       },
       "documentation": "<p>A single resource returned as part of the <a>Search</a> API response.</p>"
@@ -28987,6 +29272,63 @@
         "ExperimentArn": {
           "shape": "ExperimentArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the experiment.</p>"
+        }
+      }
+    },
+    "UpdateFeatureGroupRequest": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group that you're updating.</p>"
+        },
+        "FeatureAdditions": {
+          "shape": "FeatureAdditions",
+          "documentation": "<p>A list of the features that you're adding to the feature group.</p>"
+        }
+      }
+    },
+    "UpdateFeatureGroupResponse": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupArn"
+      ],
+      "members": {
+        "FeatureGroupArn": {
+          "shape": "FeatureGroupArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the feature group that you're updating.</p>"
+        }
+      }
+    },
+    "UpdateFeatureMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "FeatureName"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group containing the feature that you're updating.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of the feature that you're updating.</p>"
+        },
+        "Description": {
+          "shape": "FeatureDescription",
+          "documentation": "<p>A description that you can write to better describe the feature.</p>"
+        },
+        "ParameterAdditions": {
+          "shape": "FeatureParameterAdditions",
+          "documentation": "<p>A list of key-value pairs that you can add to better describe the feature.</p>"
+        },
+        "ParameterRemovals": {
+          "shape": "FeatureParameterRemovals",
+          "documentation": "<p>A list of parameter keys that you can specify to remove parameters that describe your feature.</p>"
         }
       }
     },

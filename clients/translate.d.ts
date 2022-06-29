@@ -60,13 +60,21 @@ declare class Translate extends Service {
    */
   getTerminology(callback?: (err: AWSError, data: Translate.Types.GetTerminologyResponse) => void): Request<Translate.Types.GetTerminologyResponse, AWSError>;
   /**
-   * Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name. If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.
+   * Creates or updates a custom terminology, depending on whether one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. The only supported merge strategy is OVERWRITE, where the imported terminology overwrites the existing terminology of the same name. If you import a terminology that overwrites an existing one, the new terminology takes up to 10 minutes to fully propagate. After that, translations have access to the new terminology.
    */
   importTerminology(params: Translate.Types.ImportTerminologyRequest, callback?: (err: AWSError, data: Translate.Types.ImportTerminologyResponse) => void): Request<Translate.Types.ImportTerminologyResponse, AWSError>;
   /**
-   * Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name. If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.
+   * Creates or updates a custom terminology, depending on whether one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. The only supported merge strategy is OVERWRITE, where the imported terminology overwrites the existing terminology of the same name. If you import a terminology that overwrites an existing one, the new terminology takes up to 10 minutes to fully propagate. After that, translations have access to the new terminology.
    */
   importTerminology(callback?: (err: AWSError, data: Translate.Types.ImportTerminologyResponse) => void): Request<Translate.Types.ImportTerminologyResponse, AWSError>;
+  /**
+   * Provides a list of languages (RFC-5646 codes and names) that Amazon Translate supports.
+   */
+  listLanguages(params: Translate.Types.ListLanguagesRequest, callback?: (err: AWSError, data: Translate.Types.ListLanguagesResponse) => void): Request<Translate.Types.ListLanguagesResponse, AWSError>;
+  /**
+   * Provides a list of languages (RFC-5646 codes and names) that Amazon Translate supports.
+   */
+  listLanguages(callback?: (err: AWSError, data: Translate.Types.ListLanguagesResponse) => void): Request<Translate.Types.ListLanguagesResponse, AWSError>;
   /**
    * Provides a list of your parallel data resources in Amazon Translate.
    */
@@ -204,6 +212,7 @@ declare namespace Translate {
   }
   export type Description = string;
   export type Directionality = "UNI"|"MULTI"|string;
+  export type DisplayLanguageCode = "de"|"en"|"es"|"fr"|"it"|"ja"|"ko"|"pt"|"zh"|"zh-TW"|string;
   export interface EncryptionKey {
     /**
      * The type of encryption key used by Amazon Translate to encrypt this object.
@@ -229,15 +238,15 @@ declare namespace Translate {
      */
     ParallelDataProperties?: ParallelDataProperties;
     /**
-     * The Amazon S3 location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
+     * The Amazon S3 location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30-minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     DataLocation?: ParallelDataDataLocation;
     /**
-     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30-minute expiration.
      */
     AuxiliaryDataLocation?: ParallelDataDataLocation;
     /**
-     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30-minute expiration.
      */
     LatestUpdateAttemptAuxiliaryDataLocation?: ParallelDataDataLocation;
   }
@@ -247,7 +256,7 @@ declare namespace Translate {
      */
     Name: ResourceName;
     /**
-     * The data format of the custom terminology being retrieved. If you don't specify this parameter, Amazon Translate returns a file that has the same format as the file that was imported to create the terminology.  If you specify this parameter when you retrieve a multi-directional terminology resource, you must specify the same format as that of the input file that was imported to create it. Otherwise, Amazon Translate throws an error.
+     * The data format of the custom terminology being retrieved. If you don't specify this parameter, Amazon Translate returns a file with the same format as the file that was imported to create the terminology.  If you specify this parameter when you retrieve a multi-directional terminology resource, you must specify the same format as the input file that was imported to create it. Otherwise, Amazon Translate throws an error.
      */
     TerminologyDataFormat?: TerminologyDataFormat;
   }
@@ -257,11 +266,11 @@ declare namespace Translate {
      */
     TerminologyProperties?: TerminologyProperties;
     /**
-     * The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
+     * The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30-minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     TerminologyDataLocation?: TerminologyDataLocation;
     /**
-     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+     * The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a terminology resource. The location is returned as a presigned URL to that has a 30-minute expiration.
      */
     AuxiliaryDataLocation?: TerminologyDataLocation;
   }
@@ -300,7 +309,7 @@ declare namespace Translate {
   }
   export interface InputDataConfig {
     /**
-     * The URI of the AWS S3 folder that contains the input file. The folder must be in the same Region as the API endpoint you are calling.
+     * The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the files in the folder. The folder must be in the same Region as the API endpoint you are calling.  The URI can also point to a single input document, or it can provide the prefix for a collection of input documents. For example. if you use the URI S3://bucketName/prefix and the prefix is a single file, Amazon Translate uses that files as input. If more than one file begins with the prefix, Amazon Translate uses all of them as input. 
      */
     S3Uri: S3Uri;
     /**
@@ -326,8 +335,47 @@ declare namespace Translate {
   export type JobId = string;
   export type JobName = string;
   export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export interface Language {
+    /**
+     * Language name of the supported language.
+     */
+    LanguageName: LocalizedNameString;
+    /**
+     * Language code for the supported language.
+     */
+    LanguageCode: LanguageCodeString;
+  }
   export type LanguageCodeString = string;
   export type LanguageCodeStringList = LanguageCodeString[];
+  export type LanguagesList = Language[];
+  export interface ListLanguagesRequest {
+    /**
+     * The language code for the language to use to display the language names in the response. The language code is en by default. 
+     */
+    DisplayLanguageCode?: DisplayLanguageCode;
+    /**
+     * Include the NextToken value to fetch the next group of supported languages. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in each response.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListLanguagesResponse {
+    /**
+     * The list of supported languages.
+     */
+    Languages?: LanguagesList;
+    /**
+     * The language code passed in with the request.
+     */
+    DisplayLanguageCode?: DisplayLanguageCode;
+    /**
+     *  If the response does not include all remaining results, use the NextToken in the next request to fetch the next group of supported languages.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListParallelDataRequest {
     /**
      * A string that specifies the next page of results to return in a paginated response.
@@ -392,6 +440,7 @@ declare namespace Translate {
      */
     NextToken?: NextToken;
   }
+  export type LocalizedNameString = string;
   export type Long = number;
   export type MaxResultsInteger = number;
   export type MergeStrategy = "OVERWRITE"|string;
@@ -420,7 +469,7 @@ declare namespace Translate {
      */
     RepositoryType: String;
     /**
-     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
+     * The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30-minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     Location: String;
   }
@@ -504,7 +553,7 @@ declare namespace Translate {
      */
     JobName?: JobName;
     /**
-     * Specifies the format and S3 location of the input documents for the translation job.
+     * Specifies the format and location of the input documents for the translation job.
      */
     InputDataConfig: InputDataConfig;
     /**
@@ -532,11 +581,11 @@ declare namespace Translate {
      */
     ParallelDataNames?: ResourceNameList;
     /**
-     * A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
+     * A unique identifier for the request. This token is generated for you when using the Amazon Translate SDK.
      */
     ClientToken: ClientTokenString;
     /**
-     * Settings to configure your translation output, including the option to mask profane words and phrases.
+     * Settings to configure your translation output, including the option to mask profane words and phrases. StartTextTranslationJob does not support the formality setting.
      */
     Settings?: TranslationSettings;
   }
@@ -590,7 +639,7 @@ declare namespace Translate {
      */
     Format: TerminologyDataFormat;
     /**
-     * The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).  UNI  The terminology resource has one source language (for example, the first column in a CSV file), and all of its other languages are target languages.   MULTI  Any language in the terminology resource can be the source language or a target language. A single multi-directional terminology resource can be used for jobs that translate different language pairs. For example, if the terminology contains terms in English and Spanish, then it can be used for jobs that translate English to Spanish and jobs that translate Spanish to English.   When you create a custom terminology resource without specifying the directionality, it behaves as uni-directional terminology, although this parameter will have a null value.
+     * The directionality of your terminology resource indicates whether it has one source language (uni-directional) or multiple (multi-directional).  UNI  The terminology resource has one source language (for example, the first column in a CSV file), and all of its other languages are target languages.   MULTI  Any language in the terminology resource can be the source language or a target language. A single multi-directional terminology resource can be used for jobs that translate different language pairs. For example, if the terminology contains English and Spanish terms, it can be used for jobs that translate English to Spanish and Spanish to English.   When you create a custom terminology resource without specifying the directionality, it behaves as uni-directional terminology, although this parameter will have a null value.
      */
     Directionality?: Directionality;
   }
@@ -601,7 +650,7 @@ declare namespace Translate {
      */
     RepositoryType: String;
     /**
-     * The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
+     * The Amazon S3 location of the most recent custom terminology input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30-minute expiration .  Amazon Translate doesn't scan all input files for the risk of CSV injection attacks.  CSV injection occurs when a .csv or .tsv file is altered so that a record contains malicious code. The record begins with a special character, such as =, +, -, or @. When the file is opened in a spreadsheet program, the program might interpret the record as a formula and run the code within it. Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator. 
      */
     Location: String;
   }
@@ -757,7 +806,7 @@ declare namespace Translate {
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see what-is-languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.
+     * The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see what-is-languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.  If you specify auto, you must send the TranslateText request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported.  
      */
     SourceLanguageCode: LanguageCodeString;
     /**
@@ -765,7 +814,7 @@ declare namespace Translate {
      */
     TargetLanguageCode: LanguageCodeString;
     /**
-     * Settings to configure your translation output, including the option to mask profane words and phrases.
+     * Settings to configure your translation output, including the option to set the formality level of the output text and the option to mask profane words and phrases.
      */
     Settings?: TranslationSettings;
   }
@@ -792,9 +841,12 @@ declare namespace Translate {
     AppliedSettings?: TranslationSettings;
   }
   export interface TranslationSettings {
+    /**
+     * You can optionally specify the desired level of formality for real-time translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting. Note that asynchronous translation jobs don't support formality. If you provide a value for formality, the StartTextTranslationJob API throws an exception (InvalidRequestException). For target languages that support formality, see Supported Languages and Language Codes in the Amazon Translate Developer Guide.
+     */
     Formality?: Formality;
     /**
-     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate does not detect profanity in all of its supported languages. For languages that support profanity detection, see Supported Languages and Language Codes in the Amazon Translate Developer Guide.
+     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that support profanity detection, see Supported Languages and Language Codes in the Amazon Translate Developer Guide.
      */
     Profanity?: Profanity;
   }

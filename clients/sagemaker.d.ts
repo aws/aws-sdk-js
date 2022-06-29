@@ -869,6 +869,14 @@ declare class SageMaker extends Service {
    */
   describeFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.DescribeFeatureGroupResponse) => void): Request<SageMaker.Types.DescribeFeatureGroupResponse, AWSError>;
   /**
+   * Shows the metadata for a feature within a feature group.
+   */
+  describeFeatureMetadata(params: SageMaker.Types.DescribeFeatureMetadataRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeFeatureMetadataResponse) => void): Request<SageMaker.Types.DescribeFeatureMetadataResponse, AWSError>;
+  /**
+   * Shows the metadata for a feature within a feature group.
+   */
+  describeFeatureMetadata(callback?: (err: AWSError, data: SageMaker.Types.DescribeFeatureMetadataResponse) => void): Request<SageMaker.Types.DescribeFeatureMetadataResponse, AWSError>;
+  /**
    * Returns information about the specified flow definition.
    */
   describeFlowDefinition(params: SageMaker.Types.DescribeFlowDefinitionRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeFlowDefinitionResponse) => void): Request<SageMaker.Types.DescribeFlowDefinitionResponse, AWSError>;
@@ -1908,6 +1916,22 @@ declare class SageMaker extends Service {
    * Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.
    */
   updateExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateExperimentResponse) => void): Request<SageMaker.Types.UpdateExperimentResponse, AWSError>;
+  /**
+   * Updates the feature group.
+   */
+  updateFeatureGroup(params: SageMaker.Types.UpdateFeatureGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateFeatureGroupResponse) => void): Request<SageMaker.Types.UpdateFeatureGroupResponse, AWSError>;
+  /**
+   * Updates the feature group.
+   */
+  updateFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.UpdateFeatureGroupResponse) => void): Request<SageMaker.Types.UpdateFeatureGroupResponse, AWSError>;
+  /**
+   * Updates the description and parameters of the feature group.
+   */
+  updateFeatureMetadata(params: SageMaker.Types.UpdateFeatureMetadataRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the description and parameters of the feature group.
+   */
+  updateFeatureMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the properties of a SageMaker image. To change the image's tags, use the AddTags and DeleteTags APIs.
    */
@@ -2949,7 +2973,13 @@ declare namespace SageMaker {
      * The bias report for a model
      */
     Report?: MetricsSource;
+    /**
+     * The pre-training bias report for a model.
+     */
     PreTrainingReport?: MetricsSource;
+    /**
+     * The post-training bias report for a model.
+     */
     PostTrainingReport?: MetricsSource;
   }
   export type BillableTimeInSeconds = number;
@@ -6642,6 +6672,10 @@ declare namespace SageMaker {
      */
     CreationTime: CreationTime;
     /**
+     * A timestamp indicating when the feature group was last updated.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
      * The configuration for the OnlineStore.
      */
     OnlineStoreConfig?: OnlineStoreConfig;
@@ -6662,6 +6696,10 @@ declare namespace SageMaker {
      */
     OfflineStoreStatus?: OfflineStoreStatus;
     /**
+     * A value indicating whether the update made to the feature group was successful.
+     */
+    LastUpdateStatus?: LastUpdateStatus;
+    /**
      * The reason that the FeatureGroup failed to be replicated in the OfflineStore. This is failure can occur because:   The FeatureGroup could not be created in the OfflineStore.   The FeatureGroup could not be deleted from the OfflineStore.  
      */
     FailureReason?: FailureReason;
@@ -6673,6 +6711,54 @@ declare namespace SageMaker {
      * A token to resume pagination of the list of Features (FeatureDefinitions).
      */
     NextToken: NextToken;
+    /**
+     * The size of the OnlineStore in bytes.
+     */
+    OnlineStoreTotalSizeBytes?: OnlineStoreTotalSizeBytes;
+  }
+  export interface DescribeFeatureMetadataRequest {
+    /**
+     * The name of the feature group containing the feature.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * The name of the feature.
+     */
+    FeatureName: FeatureName;
+  }
+  export interface DescribeFeatureMetadataResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the feature group that contains the feature.
+     */
+    FeatureGroupArn: FeatureGroupArn;
+    /**
+     * The name of the feature group that you've specified.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * The name of the feature that you've specified.
+     */
+    FeatureName: FeatureName;
+    /**
+     * The data type of the feature.
+     */
+    FeatureType: FeatureType;
+    /**
+     * A timestamp indicating when the feature was created.
+     */
+    CreationTime: CreationTime;
+    /**
+     * A timestamp indicating when the metadata for the feature group was modified. For example, if you add a parameter describing the feature, the timestamp changes to reflect the last time you 
+     */
+    LastModifiedTime: LastModifiedTime;
+    /**
+     * The description you added to describe the feature.
+     */
+    Description?: FeatureDescription;
+    /**
+     * The key-value pairs that you added to describe the feature.
+     */
+    Parameters?: FeatureParameters;
   }
   export interface DescribeFlowDefinitionRequest {
     /**
@@ -8507,10 +8593,19 @@ declare namespace SageMaker {
      * The bias config file for a model.
      */
     ConfigFile?: FileSource;
+    /**
+     * The pre-training constraints.
+     */
     PreTrainingConstraints?: MetricsSource;
+    /**
+     * The post-training constraints.
+     */
     PostTrainingConstraints?: MetricsSource;
   }
   export interface DriftCheckExplainability {
+    /**
+     * The drift check explainability constraints.
+     */
     Constraints?: MetricsSource;
     /**
      * The explainability config file for the model.
@@ -8518,11 +8613,23 @@ declare namespace SageMaker {
     ConfigFile?: FileSource;
   }
   export interface DriftCheckModelDataQuality {
+    /**
+     * The drift check model data quality statistics.
+     */
     Statistics?: MetricsSource;
+    /**
+     * The drift check model data quality constraints.
+     */
     Constraints?: MetricsSource;
   }
   export interface DriftCheckModelQuality {
+    /**
+     * The drift check model quality statistics.
+     */
     Statistics?: MetricsSource;
+    /**
+     * The drift check model quality constraints.
+     */
     Constraints?: MetricsSource;
   }
   export interface EMRStepMetadata {
@@ -8996,6 +9103,7 @@ declare namespace SageMaker {
     ErrorMessage?: String3072;
   }
   export type FailureReason = string;
+  export type FeatureAdditions = FeatureDefinition[];
   export interface FeatureDefinition {
     /**
      * The name of a feature. The type must be a string. FeatureName cannot be any of the following: is_deleted, write_time, api_invocation_time.
@@ -9007,6 +9115,7 @@ declare namespace SageMaker {
     FeatureType?: FeatureType;
   }
   export type FeatureDefinitions = FeatureDefinition[];
+  export type FeatureDescription = string;
   export interface FeatureGroup {
     /**
      * The Amazon Resource Name (ARN) of a FeatureGroup.
@@ -9032,6 +9141,10 @@ declare namespace SageMaker {
      * The time a FeatureGroup was created.
      */
     CreationTime?: CreationTime;
+    /**
+     * A timestamp indicating the last time you updated the feature group.
+     */
+    LastModifiedTime?: LastModifiedTime;
     OnlineStoreConfig?: OnlineStoreConfig;
     OfflineStoreConfig?: OfflineStoreConfig;
     /**
@@ -9043,6 +9156,10 @@ declare namespace SageMaker {
      */
     FeatureGroupStatus?: FeatureGroupStatus;
     OfflineStoreStatus?: OfflineStoreStatus;
+    /**
+     * A value that indicates whether the feature group was updated successfully.
+     */
+    LastUpdateStatus?: LastUpdateStatus;
     /**
      * The reason that the FeatureGroup failed to be replicated in the OfflineStore. This is failure may be due to a failure to create a FeatureGroup in or delete a FeatureGroup from the OfflineStore.
      */
@@ -9086,7 +9203,56 @@ declare namespace SageMaker {
      */
     OfflineStoreStatus?: OfflineStoreStatus;
   }
+  export interface FeatureMetadata {
+    /**
+     * The Amazon Resource Number (ARN) of the feature group.
+     */
+    FeatureGroupArn?: FeatureGroupArn;
+    /**
+     * The name of the feature group containing the feature.
+     */
+    FeatureGroupName?: FeatureGroupName;
+    /**
+     * The name of feature.
+     */
+    FeatureName?: FeatureName;
+    /**
+     * The data type of the feature.
+     */
+    FeatureType?: FeatureType;
+    /**
+     * A timestamp indicating when the feature was created.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * A timestamp indicating when the feature was last modified.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * An optional description that you specify to better describe the feature.
+     */
+    Description?: FeatureDescription;
+    /**
+     * Optional key-value pairs that you specify to better describe the feature.
+     */
+    Parameters?: FeatureParameters;
+  }
   export type FeatureName = string;
+  export interface FeatureParameter {
+    /**
+     * A key that must contain a value to describe the feature.
+     */
+    Key?: FeatureParameterKey;
+    /**
+     * The value that belongs to a key.
+     */
+    Value?: FeatureParameterValue;
+  }
+  export type FeatureParameterAdditions = FeatureParameter[];
+  export type FeatureParameterKey = string;
+  export type FeatureParameterRemovals = FeatureParameterKey[];
+  export type FeatureParameterValue = string;
+  export type FeatureParameters = FeatureParameter[];
   export type FeatureType = "Integral"|"Fractional"|"String"|string;
   export interface FileSource {
     /**
@@ -10254,6 +10420,17 @@ declare namespace SageMaker {
     OutputParameters?: OutputParameterList;
   }
   export type LastModifiedTime = Date;
+  export interface LastUpdateStatus {
+    /**
+     * A value that indicates whether the update was made successful.
+     */
+    Status: LastUpdateStatusValue;
+    /**
+     * If the update wasn't successful, indicates the reason why it failed.
+     */
+    FailureReason?: FailureReason;
+  }
+  export type LastUpdateStatusValue = "Successful"|"Failed"|"InProgress"|string;
   export type LifecycleConfigArns = StudioLifecycleConfigArn[];
   export type LineageEntityParameters = {[key: string]: StringParameterValue};
   export type LineageGroupArn = string;
@@ -12862,15 +13039,15 @@ declare namespace SageMaker {
   export type MetricValue = number;
   export interface MetricsSource {
     /**
-     * 
+     * The metric source content type.
      */
     ContentType: ContentType;
     /**
-     * 
+     * The hash key used for the metrics source.
      */
     ContentDigest?: ContentDigest;
     /**
-     * 
+     * The S3 URI for the metrics source.
      */
     S3Uri: S3Uri;
   }
@@ -13092,13 +13269,25 @@ declare namespace SageMaker {
      * The time that the model package was created.
      */
     CreationTime?: CreationTime;
+    /**
+     * Defines how to perform inference generation after a training job is run.
+     */
     InferenceSpecification?: InferenceSpecification;
+    /**
+     * A list of algorithms that were used to create a model package.
+     */
     SourceAlgorithmSpecification?: SourceAlgorithmSpecification;
+    /**
+     * Specifies batch transform jobs that SageMaker runs to validate your model package.
+     */
     ValidationSpecification?: ModelPackageValidationSpecification;
     /**
      * The status of the model package. This can be one of the following values.    PENDING - The model package is pending being created.    IN_PROGRESS - The model package is in the process of being created.    COMPLETED - The model package was successfully created.    FAILED - The model package failed.    DELETING - The model package is in the process of being deleted.  
      */
     ModelPackageStatus?: ModelPackageStatus;
+    /**
+     * Specifies the validation and image scan statuses of the model package.
+     */
     ModelPackageStatusDetails?: ModelPackageStatusDetails;
     /**
      * Whether the model package is to be certified to be listed on Amazon Web Services Marketplace. For information about listing model packages on Amazon Web Services Marketplace, see List Your Algorithm or Model Package on Amazon Web Services Marketplace.
@@ -13108,7 +13297,13 @@ declare namespace SageMaker {
      * The approval status of the model. This can be one of the following values.    APPROVED - The model is approved    REJECTED - The model is rejected.    PENDING_MANUAL_APPROVAL - The model is waiting for manual approval.  
      */
     ModelApprovalStatus?: ModelApprovalStatus;
+    /**
+     * Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.
+     */
     CreatedBy?: UserContext;
+    /**
+     * Metadata properties of the tracking entity, trial, or trial component.
+     */
     MetadataProperties?: MetadataProperties;
     /**
      * Metrics for the model.
@@ -13118,6 +13313,9 @@ declare namespace SageMaker {
      * The last time the model package was modified.
      */
     LastModifiedTime?: Timestamp;
+    /**
+     * Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.
+     */
     LastModifiedBy?: UserContext;
     /**
      * A description provided when the model approval is set.
@@ -14021,6 +14219,7 @@ declare namespace SageMaker {
      */
     KmsKeyId?: KmsKeyId;
   }
+  export type OnlineStoreTotalSizeBytes = number;
   export type Operator = "Equals"|"NotEquals"|"GreaterThan"|"GreaterThanOrEqualTo"|"LessThan"|"LessThanOrEqualTo"|"Contains"|"Exists"|"NotExists"|"In"|string;
   export type OptionalDouble = number;
   export type OptionalInteger = number;
@@ -15492,7 +15691,7 @@ declare namespace SageMaker {
      */
     LifecycleConfigArn?: StudioLifecycleConfigArn;
   }
-  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|string;
+  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|"FeatureMetadata"|string;
   export type ResponseMIMEType = string;
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
@@ -15624,6 +15823,10 @@ declare namespace SageMaker {
      * The properties of a project.
      */
     Project?: Project;
+    /**
+     * The feature metadata used to search through the features.
+     */
+    FeatureMetadata?: FeatureMetadata;
   }
   export interface SearchRequest {
     /**
@@ -17210,6 +17413,44 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the experiment.
      */
     ExperimentArn?: ExperimentArn;
+  }
+  export interface UpdateFeatureGroupRequest {
+    /**
+     * The name of the feature group that you're updating.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * A list of the features that you're adding to the feature group.
+     */
+    FeatureAdditions?: FeatureAdditions;
+  }
+  export interface UpdateFeatureGroupResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the feature group that you're updating.
+     */
+    FeatureGroupArn: FeatureGroupArn;
+  }
+  export interface UpdateFeatureMetadataRequest {
+    /**
+     * The name of the feature group containing the feature that you're updating.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * The name of the feature that you're updating.
+     */
+    FeatureName: FeatureName;
+    /**
+     * A description that you can write to better describe the feature.
+     */
+    Description?: FeatureDescription;
+    /**
+     * A list of key-value pairs that you can add to better describe the feature.
+     */
+    ParameterAdditions?: FeatureParameterAdditions;
+    /**
+     * A list of parameter keys that you can specify to remove parameters that describe your feature.
+     */
+    ParameterRemovals?: FeatureParameterRemovals;
   }
   export interface UpdateImageRequest {
     /**

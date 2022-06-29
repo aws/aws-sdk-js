@@ -509,11 +509,11 @@ declare class AppStream extends Service {
    */
   updateEntitlement(callback?: (err: AWSError, data: AppStream.Types.UpdateEntitlementResult) => void): Request<AppStream.Types.UpdateEntitlementResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, SessionScriptS3Location and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the following based on the fleet type:   Always-On and On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes.   Elastic fleet type You can update the DisplayName, IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds, MaxConcurrentSessions, SessionScriptS3Location and UsbDeviceFilterStrings attributes.   If the fleet is in the STARTING or STOPPED state, you can't update it.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
@@ -1167,6 +1167,10 @@ declare namespace AppStream {
      * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. 
      */
     EmbedHostDomains?: EmbedHostDomains;
+    /**
+     * The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+     */
+    StreamingExperienceSettings?: StreamingExperienceSettings;
   }
   export interface CreateStackResult {
     /**
@@ -2315,6 +2319,7 @@ declare namespace AppStream {
   export type Permission = "ENABLED"|"DISABLED"|string;
   export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"AMAZON_LINUX2"|string;
   export type Platforms = PlatformType[];
+  export type PreferredProtocol = "TCP"|"UDP"|string;
   export type RedirectURL = string;
   export type RegionName = string;
   export interface ResourceError {
@@ -2484,8 +2489,12 @@ declare namespace AppStream {
      * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
      */
     EmbedHostDomains?: EmbedHostDomains;
+    /**
+     * The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+     */
+    StreamingExperienceSettings?: StreamingExperienceSettings;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|"EMBED_HOST_DOMAINS"|"IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|"EMBED_HOST_DOMAINS"|"IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|"STREAMING_EXPERIENCE_SETTINGS"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -2561,6 +2570,12 @@ declare namespace AppStream {
   export type StorageConnectorList = StorageConnector[];
   export type StorageConnectorType = "HOMEFOLDERS"|"GOOGLE_DRIVE"|"ONE_DRIVE"|string;
   export type StreamView = "APP"|"DESKTOP"|string;
+  export interface StreamingExperienceSettings {
+    /**
+     * The preferred protocol that you want to use while streaming your application.
+     */
+    PreferredProtocol?: PreferredProtocol;
+  }
   export type StreamingUrlUserId = string;
   export type String = string;
   export type StringList = String[];
@@ -2840,6 +2855,10 @@ declare namespace AppStream {
      * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. 
      */
     EmbedHostDomains?: EmbedHostDomains;
+    /**
+     * The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.
+     */
+    StreamingExperienceSettings?: StreamingExperienceSettings;
   }
   export interface UpdateStackResult {
     /**

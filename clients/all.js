@@ -308,5 +308,6 @@ module.exports = {
   ChimeSDKMediaPipelines: require('./chimesdkmediapipelines'),
   EMRServerless: require('./emrserverless'),
   M2: require('./m2'),
-  ConnectCampaigns: require('./connectcampaigns')
+  ConnectCampaigns: require('./connectcampaigns'),
+  RedshiftServerless: require('./redshiftserverless')
 };

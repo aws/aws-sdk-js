@@ -1239,7 +1239,7 @@ declare namespace EMR {
   export type EC2InstanceIdsToTerminateList = InstanceId[];
   export interface EbsBlockDevice {
     /**
-     * EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.
+     * EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.
      */
     VolumeSpecification?: VolumeSpecification;
     /**
@@ -1249,11 +1249,11 @@ declare namespace EMR {
   }
   export interface EbsBlockDeviceConfig {
     /**
-     * EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.
+     * EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.
      */
     VolumeSpecification: VolumeSpecification;
     /**
-     * Number of EBS volumes with a specific volume configuration that will be associated with every instance in the instance group
+     * Number of EBS volumes with a specific volume configuration that are associated with every instance in the instance group
      */
     VolumesPerInstance?: Integer;
   }
@@ -3507,6 +3507,7 @@ declare namespace EMR {
      */
     JobFlowIds: XmlStringList;
   }
+  export type ThroughputVal = number;
   export type Unit = "NONE"|"SECONDS"|"MICRO_SECONDS"|"MILLI_SECONDS"|"BYTES"|"KILO_BYTES"|"MEGA_BYTES"|"GIGA_BYTES"|"TERA_BYTES"|"BITS"|"KILO_BITS"|"MEGA_BITS"|"GIGA_BITS"|"TERA_BITS"|"PERCENT"|"COUNT"|"BYTES_PER_SECOND"|"KILO_BYTES_PER_SECOND"|"MEGA_BYTES_PER_SECOND"|"GIGA_BYTES_PER_SECOND"|"TERA_BYTES_PER_SECOND"|"BITS_PER_SECOND"|"KILO_BITS_PER_SECOND"|"MEGA_BITS_PER_SECOND"|"GIGA_BITS_PER_SECOND"|"TERA_BITS_PER_SECOND"|"COUNT_PER_SECOND"|string;
   export interface UpdateStudioInput {
     /**
@@ -3565,6 +3566,10 @@ declare namespace EMR {
      * The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume type is EBS-optimized, the minimum value is 10.
      */
     SizeInGB: Integer;
+    /**
+     * The throughput, in mebibyte per second (MiB/s). This optional parameter can be a number from 125 - 1000 and is valid only for gp3 volumes.
+     */
+    Throughput?: ThroughputVal;
   }
   export type WholeNumber = number;
   export type XmlString = string;

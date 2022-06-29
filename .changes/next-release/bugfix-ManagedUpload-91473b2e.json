@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ManagedUpload",
-  "description": "fix MalformedXML error for relatively large file via managed upload"
-}

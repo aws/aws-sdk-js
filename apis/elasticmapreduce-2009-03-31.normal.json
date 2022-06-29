@@ -2257,7 +2257,7 @@
       "members": {
         "VolumeSpecification": {
           "shape": "VolumeSpecification",
-          "documentation": "<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+          "documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
         },
         "Device": {
           "shape": "String",
@@ -2274,14 +2274,14 @@
       "members": {
         "VolumeSpecification": {
           "shape": "VolumeSpecification",
-          "documentation": "<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+          "documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
         },
         "VolumesPerInstance": {
           "shape": "Integer",
-          "documentation": "<p>Number of EBS volumes with a specific volume configuration that will be associated with every instance in the instance group</p>"
+          "documentation": "<p>Number of EBS volumes with a specific volume configuration that are associated with every instance in the instance group</p>"
         }
       },
-      "documentation": "<p>Configuration of requested EBS block device associated with the instance group with count of volumes that will be associated to every instance.</p>"
+      "documentation": "<p>Configuration of requested EBS block device associated with the instance group with count of volumes that are associated to every instance.</p>"
     },
     "EbsBlockDeviceConfigList": {
       "type": "list",
@@ -5648,6 +5648,10 @@
       },
       "documentation": "<p> Input to the <a>TerminateJobFlows</a> operation. </p>"
     },
+    "ThroughputVal": {
+      "type": "integer",
+      "min": 0
+    },
     "Unit": {
       "type": "string",
       "enum": [
@@ -5756,9 +5760,13 @@
         "SizeInGB": {
           "shape": "Integer",
           "documentation": "<p>The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume type is EBS-optimized, the minimum value is 10.</p>"
+        },
+        "Throughput": {
+          "shape": "ThroughputVal",
+          "documentation": "<p>The throughput, in mebibyte per second (MiB/s). This optional parameter can be a number from 125 - 1000 and is valid only for gp3 volumes.</p>"
         }
       },
-      "documentation": "<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+      "documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
     },
     "WholeNumber": {
       "type": "integer",

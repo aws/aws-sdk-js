@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1164.0-->
+<!--LATEST=2.1165.0-->
 <!--ENTRYINSERT-->
+
+## 2.1165.0
+* bugfix: ManagedUpload: fix MalformedXML error for relatively large file via managed upload
+* feature: AppStream: Includes support for StreamingExperienceSettings in CreateStack and UpdateStack APIs
+* feature: EMR: This release introduces additional optional parameter "Throughput" to VolumeSpecification to enable user to configure throughput for gp3 ebs volumes.
+* feature: MediaLive: This release adds support for automatic renewal of MediaLive reservations at the end of each reservation term. Automatic renewal is optional. This release also adds support for labelling accessibility-focused audio and caption tracks in HLS outputs.
+* feature: RedshiftServerless: Add new API operations for Amazon Redshift Serverless, a new way of using Amazon Redshift without needing to manually manage provisioned clusters. The new operations let you interact with Redshift Serverless resources, such as create snapshots, list VPC endpoints, delete resource policies, and more.
+* feature: SageMaker: This release adds: UpdateFeatureGroup, UpdateFeatureMetadata, DescribeFeatureMetadata APIs; FeatureMetadata type in Search API; LastModifiedTime, LastUpdateStatus, OnlineStoreTotalSizeBytes in DescribeFeatureGroup API.
+* feature: Translate: Added ListLanguages API which can be used to list the languages supported by Translate.
 
 ## 2.1164.0
 * feature: DataSync: AWS DataSync now supports Amazon FSx for NetApp ONTAP locations.

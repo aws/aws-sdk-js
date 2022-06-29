@@ -649,6 +649,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export interface AcceptInputDeviceTransferResponse {
   }
+  export type AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"|"IMPLEMENTS_ACCESSIBILITY_FEATURES"|string;
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
   export interface AncillarySourceSettings {
     /**
@@ -758,7 +759,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
      */
-    Name: __string;
+    Name: __stringMax255;
     /**
      * Settings that control how input audio channels are remixed into the output audio channels.
      */
@@ -1189,6 +1190,10 @@ Alternate rendition that the client will not try to play back by default. Repres
   export interface CancelInputDeviceTransferResponse {
   }
   export interface CaptionDescription {
+    /**
+     * Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
+     */
+    Accessibility?: AccessibilityType;
     /**
      * Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
      */
@@ -1880,6 +1885,10 @@ one destination per packager.
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -2374,6 +2383,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -2417,7 +2430,7 @@ during input switch actions. Presently, this functionality only works with MP4_F
     ScheduleActions?: __listOfScheduleAction;
   }
   export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
-  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|string;
+  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -4016,7 +4029,7 @@ to.
     /**
      * Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".
      */
-    Uri: __string;
+    Uri: __stringMax2048;
     /**
      * Documentation update needed
      */
@@ -5556,6 +5569,10 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     OfferingId: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
      */
     RequestId?: __string;
@@ -5599,6 +5616,16 @@ When this field is defined, ConstantBitrate must be undefined.
 Valid values: 1, 2, 4, 6, 8
      */
     ChannelsOut?: __integerMin1Max8;
+  }
+  export interface RenewalSettings {
+    /**
+     * Automatic renewal status for the reservation
+     */
+    AutomaticRenewal?: ReservationAutomaticRenewal;
+    /**
+     * Count for the reservation renewal
+     */
+    RenewalCount?: __integerMin1;
   }
   export interface Reservation {
     /**
@@ -5650,6 +5677,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -5674,6 +5705,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     UsagePrice?: __double;
   }
+  export type ReservationAutomaticRenewal = "DISABLED"|"ENABLED"|"UNAVAILABLE"|string;
   export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|"LINK"|string;
   export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
   export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
@@ -6716,6 +6748,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     Name?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId: __string;
@@ -6994,6 +7030,8 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __longMin0Max86400000 = number;
   export type __string = string;
   export type __stringMax1000 = string;
+  export type __stringMax2048 = string;
+  export type __stringMax255 = string;
   export type __stringMax256 = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;
