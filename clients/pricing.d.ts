@@ -152,14 +152,14 @@ declare namespace Pricing {
     /**
      * The list of products that match your filters. The list contains both the product metadata and the price information.
      */
-    PriceList?: PriceList;
+    PriceList?: PriceListJsonItems;
     /**
      * The pagination token that indicates the next set of results to retrieve.
      */
     NextToken?: String;
   }
-  export type PriceList = PriceListItemJSON[];
-  export type PriceListItemJSON = string;
+  export type PriceListJsonItem = string;
+  export type PriceListJsonItems = PriceListJsonItem[];
   export interface Service {
     /**
      * The code for the Amazon Web Services service.

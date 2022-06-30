@@ -20,6 +20,14 @@ declare class Athena extends Service {
    */
   batchGetNamedQuery(callback?: (err: AWSError, data: Athena.Types.BatchGetNamedQueryOutput) => void): Request<Athena.Types.BatchGetNamedQueryOutput, AWSError>;
   /**
+   * Returns the details of a single prepared statement or a list of up to 256 prepared statements for the array of prepared statement names that you provide. Requires you to have access to the workgroup to which the prepared statements belong. If a prepared statement cannot be retrieved for the name specified, the statement is listed in UnprocessedPreparedStatementNames.
+   */
+  batchGetPreparedStatement(params: Athena.Types.BatchGetPreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.BatchGetPreparedStatementOutput) => void): Request<Athena.Types.BatchGetPreparedStatementOutput, AWSError>;
+  /**
+   * Returns the details of a single prepared statement or a list of up to 256 prepared statements for the array of prepared statement names that you provide. Requires you to have access to the workgroup to which the prepared statements belong. If a prepared statement cannot be retrieved for the name specified, the statement is listed in UnprocessedPreparedStatementNames.
+   */
+  batchGetPreparedStatement(callback?: (err: AWSError, data: Athena.Types.BatchGetPreparedStatementOutput) => void): Request<Athena.Types.BatchGetPreparedStatementOutput, AWSError>;
+  /**
    * Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use ListQueryExecutionsInput$WorkGroup. Query executions differ from named (saved) queries. Use BatchGetNamedQueryInput to get details about named queries.
    */
   batchGetQueryExecution(params: Athena.Types.BatchGetQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
@@ -188,11 +196,11 @@ declare class Athena extends Service {
    */
   listNamedQueries(callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
-   * Lists the prepared statements in the specfied workgroup.
+   * Lists the prepared statements in the specified workgroup.
    */
   listPreparedStatements(params: Athena.Types.ListPreparedStatementsInput, callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
   /**
-   * Lists the prepared statements in the specfied workgroup.
+   * Lists the prepared statements in the specified workgroup.
    */
   listPreparedStatements(callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
   /**
@@ -333,6 +341,26 @@ declare namespace Athena {
      * Information about provided query IDs.
      */
     UnprocessedNamedQueryIds?: UnprocessedNamedQueryIdList;
+  }
+  export interface BatchGetPreparedStatementInput {
+    /**
+     * A list of prepared statement names to return.
+     */
+    PreparedStatementNames: PreparedStatementNameList;
+    /**
+     * The name of the workgroup to which the prepared statements belong.
+     */
+    WorkGroup: WorkGroupName;
+  }
+  export interface BatchGetPreparedStatementOutput {
+    /**
+     * The list of prepared statements returned.
+     */
+    PreparedStatements?: PreparedStatementDetailsList;
+    /**
+     * A list of one or more prepared statements that were requested but could not be returned.
+     */
+    UnprocessedPreparedStatementNames?: UnprocessedPreparedStatementNameList;
   }
   export interface BatchGetQueryExecutionInput {
     /**
@@ -630,6 +658,8 @@ declare namespace Athena {
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export type ErrorType = number;
+  export type ExecutionParameter = string;
+  export type ExecutionParameters = ExecutionParameter[];
   export type ExpressionString = string;
   export interface GetDataCatalogInput {
     /**
@@ -1040,6 +1070,8 @@ declare namespace Athena {
      */
     LastModifiedTime?: _Date;
   }
+  export type PreparedStatementDetailsList = PreparedStatement[];
+  export type PreparedStatementNameList = StatementName[];
   export interface PreparedStatementSummary {
     /**
      * The name of the prepared statement.
@@ -1088,6 +1120,10 @@ declare namespace Athena {
      * The engine version that executed the query.
      */
     EngineVersion?: EngineVersion;
+    /**
+     * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
+     */
+    ExecutionParameters?: ExecutionParameters;
   }
   export interface QueryExecutionContext {
     /**
@@ -1253,6 +1289,10 @@ declare namespace Athena {
      * The name of the workgroup in which the query is being started.
      */
     WorkGroup?: WorkGroupName;
+    /**
+     * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
+     */
+    ExecutionParameters?: ExecutionParameters;
   }
   export interface StartQueryExecutionOutput {
     /**
@@ -1347,6 +1387,21 @@ declare namespace Athena {
     ErrorMessage?: ErrorMessage;
   }
   export type UnprocessedNamedQueryIdList = UnprocessedNamedQueryId[];
+  export interface UnprocessedPreparedStatementName {
+    /**
+     * The name of a prepared statement that could not be returned due to an error.
+     */
+    StatementName?: StatementName;
+    /**
+     * The error code returned when the request for the prepared statement failed.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * The error message containing the reason why the prepared statement could not be returned. The following error messages are possible:    INVALID_INPUT - The name of the prepared statement that was provided is not valid (for example, the name is too long).    STATEMENT_NOT_FOUND - A prepared statement with the name provided could not be found.    UNAUTHORIZED - The requester does not have permission to access the workgroup that contains the prepared statement.  
+     */
+    ErrorMessage?: ErrorMessage;
+  }
+  export type UnprocessedPreparedStatementNameList = UnprocessedPreparedStatementName[];
   export interface UnprocessedQueryExecutionId {
     /**
      * The unique identifier of the query execution.

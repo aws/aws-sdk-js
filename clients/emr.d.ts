@@ -512,6 +512,10 @@ declare namespace EMR {
      *  A list of StepConfig to be executed by the job flow. 
      */
     Steps: StepConfigList;
+    /**
+     * The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, and role type using the following format: arn:partition:service:region:account:resource.  For example, arn:aws:iam::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
+     */
+    ExecutionRoleArn?: ArnType;
   }
   export interface AddJobFlowStepsOutput {
     /**
@@ -3247,6 +3251,10 @@ declare namespace EMR {
      * The current execution status details of the cluster step.
      */
     Status?: StepStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, and role type using the following format: arn:partition:service:region:account:resource.  For example, arn:aws:iam::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
+     */
+    ExecutionRoleArn?: OptionalArnType;
   }
   export type StepCancellationOption = "SEND_INTERRUPT"|"TERMINATE_PROCESS"|string;
   export interface StepConfig {

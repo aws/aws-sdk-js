@@ -324,7 +324,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
     /**
-     * A searchable identifier of a customer profile.
+     * A searchable identifier of a customer profile. The predefined keys you can use include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.
      */
     KeyName: name;
     /**
@@ -472,6 +472,10 @@ declare namespace CustomerProfiles {
      * How the auto-merging process should resolve conflicts between different profiles. For example, if Profile A and Profile B have the same FirstName and LastName (and that is the matching criteria), which EmailAddress should be used? 
      */
     ConflictResolution?: ConflictResolution;
+    /**
+     * A number between 0 and 1 that represents the minimum confidence score required for profiles within a matching group to be merged during the auto-merge process. A higher score means higher similarity required to merge profiles. 
+     */
+    MinAllowedConfidenceScoreForMerging?: Double0To1;
   }
   export interface Batch {
     /**
@@ -862,6 +866,7 @@ declare namespace CustomerProfiles {
     TotalSize?: long;
   }
   export type Double = number;
+  export type Double0To1 = number;
   export interface ExportingConfig {
     /**
      * The S3 location where Identity Resolution Jobs write result files.
@@ -1005,6 +1010,10 @@ declare namespace CustomerProfiles {
      * How the auto-merging process should resolve conflicts between different profiles.
      */
     ConflictResolution: ConflictResolution;
+    /**
+     * Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.
+     */
+    MinAllowedConfidenceScoreForMerging?: Double0To1;
   }
   export interface GetAutoMergingPreviewResponse {
     /**
@@ -1830,7 +1839,7 @@ declare namespace CustomerProfiles {
      */
     ProfileIds?: ProfileIdList;
     /**
-     * A number between 0 and 1 that represents the confidence level of assigning profiles to a matching group. A score of 1 likely indicates an exact match.
+     * A number between 0 and 1, where a higher score means higher similarity. Examining match confidence scores lets you distinguish between groups of similar records in which the system is highly confident (which you may decide to merge), groups of similar records about which the system is uncertain (which you may decide to have reviewed by a human), and groups of similar records that the system deems to be unlikely (which you may decide to reject). Given confidence scores vary as per the data input, it should not be used an absolute measure of matching quality.
      */
     ConfidenceScore?: Double;
   }
@@ -2127,7 +2136,7 @@ declare namespace CustomerProfiles {
      */
     Description: text;
     /**
-     * A unique identifier for the object template.
+     * A unique identifier for the object template. For some attributes in the request, the service will use the default value from the object template when TemplateId is present. If these attributes are present in the request, the service may return a BadRequestException. These attributes include: AllowProfileCreation, SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if AllowProfileCreation is set to true when TemplateId is set, the service may return a BadRequestException.
      */
     TemplateId?: name;
     /**

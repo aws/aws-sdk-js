@@ -284,6 +284,14 @@ declare class WellArchitected extends Service {
    */
   updateAnswer(callback?: (err: AWSError, data: WellArchitected.Types.UpdateAnswerOutput) => void): Request<WellArchitected.Types.UpdateAnswerOutput, AWSError>;
   /**
+   * Updates whether the Amazon Web Services account is opted into organization sharing features.
+   */
+  updateGlobalSettings(params: WellArchitected.Types.UpdateGlobalSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates whether the Amazon Web Services account is opted into organization sharing features.
+   */
+  updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Update lens review.
    */
   updateLensReview(params: WellArchitected.Types.UpdateLensReviewInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateLensReviewOutput) => void): Request<WellArchitected.Types.UpdateLensReviewOutput, AWSError>;
@@ -811,6 +819,10 @@ declare namespace WellArchitected {
     ShareId?: ShareId;
     SharedWith?: SharedWith;
     Status?: ShareStatus;
+    /**
+     * Optional message to compliment the Status field.
+     */
+    StatusMessage?: StatusMessage;
   }
   export type LensStatus = "CURRENT"|"NOT_CURRENT"|"DEPRECATED"|"DELETED"|"UNSHARED"|string;
   export type LensStatusType = "ALL"|"DRAFT"|"PUBLISHED"|string;
@@ -927,6 +939,7 @@ declare namespace WellArchitected {
      * The maximum number of results to return for this request.
      */
     MaxResults?: ListWorkloadSharesMaxResults;
+    Status?: ShareStatus;
   }
   export interface ListLensSharesOutput {
     /**
@@ -1022,6 +1035,7 @@ declare namespace WellArchitected {
      * The maximum number of results to return for this request.
      */
     MaxResults?: ListWorkloadSharesMaxResults;
+    Status?: ShareStatus;
   }
   export type ListWorkloadSharesMaxResults = number;
   export interface ListWorkloadSharesOutput {
@@ -1072,6 +1086,7 @@ declare namespace WellArchitected {
     LensUpgradeSummary?: LensUpgradeSummary;
   }
   export type NotificationType = "LENS_VERSION_UPGRADED"|"LENS_VERSION_DEPRECATED"|string;
+  export type OrganizationSharingStatus = "ENABLED"|"DISABLED"|string;
   export type PermissionType = "READONLY"|"CONTRIBUTOR"|string;
   export interface PillarDifference {
     PillarId?: PillarId;
@@ -1152,9 +1167,10 @@ declare namespace WellArchitected {
     LensArn?: LensArn;
   }
   export type ShareResourceType = "WORKLOAD"|"LENS"|string;
-  export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|string;
+  export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|"ASSOCIATING"|"ASSOCIATED"|"FAILED"|string;
   export type SharedWith = string;
   export type SharedWithPrefix = string;
+  export type StatusMessage = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -1202,6 +1218,12 @@ declare namespace WellArchitected {
      */
     LensArn?: LensArn;
     Answer?: Answer;
+  }
+  export interface UpdateGlobalSettingsInput {
+    /**
+     * The status of organization sharing settings.
+     */
+    OrganizationSharingStatus?: OrganizationSharingStatus;
   }
   export interface UpdateLensReviewInput {
     WorkloadId: WorkloadId;
@@ -1337,6 +1359,10 @@ declare namespace WellArchitected {
     SharedWith?: SharedWith;
     PermissionType?: PermissionType;
     Status?: ShareStatus;
+    /**
+     * Optional message to compliment the Status field.
+     */
+    StatusMessage?: StatusMessage;
   }
   export type WorkloadSummaries = WorkloadSummary[];
   export interface WorkloadSummary {

@@ -44,6 +44,14 @@ declare class WorkMail extends Service {
    */
   createAlias(callback?: (err: AWSError, data: WorkMail.Types.CreateAliasResponse) => void): Request<WorkMail.Types.CreateAliasResponse, AWSError>;
   /**
+   * Creates an AvailabilityConfiguration for the given WorkMail organization and domain.
+   */
+  createAvailabilityConfiguration(params: WorkMail.Types.CreateAvailabilityConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.CreateAvailabilityConfigurationResponse, AWSError>;
+  /**
+   * Creates an AvailabilityConfiguration for the given WorkMail organization and domain.
+   */
+  createAvailabilityConfiguration(callback?: (err: AWSError, data: WorkMail.Types.CreateAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.CreateAvailabilityConfigurationResponse, AWSError>;
+  /**
    * Creates a group that can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
    */
   createGroup(params: WorkMail.Types.CreateGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateGroupResponse) => void): Request<WorkMail.Types.CreateGroupResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class WorkMail extends Service {
    * Remove one or more specified aliases from a set of aliases for a given user.
    */
   deleteAlias(callback?: (err: AWSError, data: WorkMail.Types.DeleteAliasResponse) => void): Request<WorkMail.Types.DeleteAliasResponse, AWSError>;
+  /**
+   * Deletes the AvailabilityConfiguration for the given WorkMail organization and domain.
+   */
+  deleteAvailabilityConfiguration(params: WorkMail.Types.DeleteAvailabilityConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.DeleteAvailabilityConfigurationResponse, AWSError>;
+  /**
+   * Deletes the AvailabilityConfiguration for the given WorkMail organization and domain.
+   */
+  deleteAvailabilityConfiguration(callback?: (err: AWSError, data: WorkMail.Types.DeleteAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.DeleteAvailabilityConfigurationResponse, AWSError>;
   /**
    * Deletes the email monitoring configuration for a specified organization.
    */
@@ -324,6 +340,14 @@ declare class WorkMail extends Service {
    */
   listAliases(callback?: (err: AWSError, data: WorkMail.Types.ListAliasesResponse) => void): Request<WorkMail.Types.ListAliasesResponse, AWSError>;
   /**
+   * List all the AvailabilityConfiguration's for the given WorkMail organization.
+   */
+  listAvailabilityConfigurations(params: WorkMail.Types.ListAvailabilityConfigurationsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListAvailabilityConfigurationsResponse) => void): Request<WorkMail.Types.ListAvailabilityConfigurationsResponse, AWSError>;
+  /**
+   * List all the AvailabilityConfiguration's for the given WorkMail organization.
+   */
+  listAvailabilityConfigurations(callback?: (err: AWSError, data: WorkMail.Types.ListAvailabilityConfigurationsResponse) => void): Request<WorkMail.Types.ListAvailabilityConfigurationsResponse, AWSError>;
+  /**
    * Returns an overview of the members of a group. Users and groups can be members of a group.
    */
   listGroupMembers(params: WorkMail.Types.ListGroupMembersRequest, callback?: (err: AWSError, data: WorkMail.Types.ListGroupMembersResponse) => void): Request<WorkMail.Types.ListGroupMembersResponse, AWSError>;
@@ -508,6 +532,14 @@ declare class WorkMail extends Service {
    */
   tagResource(callback?: (err: AWSError, data: WorkMail.Types.TagResourceResponse) => void): Request<WorkMail.Types.TagResourceResponse, AWSError>;
   /**
+   * Performs a test on an availability provider to ensure that access is allowed. For EWS, it verifies the provided credentials can be used to successfully log in. For Lambda, it verifies that the Lambda function can be invoked and that the resource access policy was configured to deny anonymous access. An anonymous invocation is one done without providing either a SourceArn or SourceAccount header.  The request must contain either one provider definition (EwsProvider or LambdaProvider) or the DomainName parameter. If the DomainName parameter is provided, the configuration stored under the DomainName will be tested.  
+   */
+  testAvailabilityConfiguration(params: WorkMail.Types.TestAvailabilityConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.TestAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.TestAvailabilityConfigurationResponse, AWSError>;
+  /**
+   * Performs a test on an availability provider to ensure that access is allowed. For EWS, it verifies the provided credentials can be used to successfully log in. For Lambda, it verifies that the Lambda function can be invoked and that the resource access policy was configured to deny anonymous access. An anonymous invocation is one done without providing either a SourceArn or SourceAccount header.  The request must contain either one provider definition (EwsProvider or LambdaProvider) or the DomainName parameter. If the DomainName parameter is provided, the configuration stored under the DomainName will be tested.  
+   */
+  testAvailabilityConfiguration(callback?: (err: AWSError, data: WorkMail.Types.TestAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.TestAvailabilityConfigurationResponse, AWSError>;
+  /**
    * Untags the specified tags from the specified Amazon WorkMail organization resource.
    */
   untagResource(params: WorkMail.Types.UntagResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.UntagResourceResponse) => void): Request<WorkMail.Types.UntagResourceResponse, AWSError>;
@@ -515,6 +547,14 @@ declare class WorkMail extends Service {
    * Untags the specified tags from the specified Amazon WorkMail organization resource.
    */
   untagResource(callback?: (err: AWSError, data: WorkMail.Types.UntagResourceResponse) => void): Request<WorkMail.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an existing AvailabilityConfiguration for the given WorkMail organization and domain.
+   */
+  updateAvailabilityConfiguration(params: WorkMail.Types.UpdateAvailabilityConfigurationRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.UpdateAvailabilityConfigurationResponse, AWSError>;
+  /**
+   * Updates an existing AvailabilityConfiguration for the given WorkMail organization and domain.
+   */
+  updateAvailabilityConfiguration(callback?: (err: AWSError, data: WorkMail.Types.UpdateAvailabilityConfigurationResponse) => void): Request<WorkMail.Types.UpdateAvailabilityConfigurationResponse, AWSError>;
   /**
    * Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.
    */
@@ -644,6 +684,34 @@ declare namespace WorkMail {
   }
   export interface AssociateMemberToGroupResponse {
   }
+  export interface AvailabilityConfiguration {
+    /**
+     * Displays the domain to which the provider applies.
+     */
+    DomainName?: DomainName;
+    /**
+     * Displays the provider type that applies to this domain.
+     */
+    ProviderType?: AvailabilityProviderType;
+    /**
+     * If ProviderType is EWS, then this field contains RedactedEwsAvailabilityProvider. Otherwise, it is not requried.
+     */
+    EwsProvider?: RedactedEwsAvailabilityProvider;
+    /**
+     * If ProviderType is LAMBDA then this field contains LambdaAvailabilityProvider. Otherwise, it is not required.
+     */
+    LambdaProvider?: LambdaAvailabilityProvider;
+    /**
+     * The date and time at which the availability configuration was created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date and time at which the availability configuration was last modified.
+     */
+    DateModified?: Timestamp;
+  }
+  export type AvailabilityConfigurationList = AvailabilityConfiguration[];
+  export type AvailabilityProviderType = "EWS"|"LAMBDA"|string;
   export interface BookingOptions {
     /**
      * The resource's ability to automatically reply to requests. If disabled, delegates must be associated to the resource.
@@ -691,6 +759,30 @@ declare namespace WorkMail {
     Alias: EmailAddress;
   }
   export interface CreateAliasResponse {
+  }
+  export interface CreateAvailabilityConfigurationRequest {
+    /**
+     * An idempotent token that ensures that an API request is executed only once.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The Amazon WorkMail organization for which the AvailabilityConfiguration will be created.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain to which the provider applies.
+     */
+    DomainName: DomainName;
+    /**
+     * Exchange Web Services (EWS) availability provider definition. The request must contain exactly one provider definition, either EwsProvider or LambdaProvider.
+     */
+    EwsProvider?: EwsAvailabilityProvider;
+    /**
+     * Lambda availability provider definition. The request must contain exactly one provider definition, either EwsProvider or LambdaProvider.
+     */
+    LambdaProvider?: LambdaAvailabilityProvider;
+  }
+  export interface CreateAvailabilityConfigurationResponse {
   }
   export interface CreateGroupRequest {
     /**
@@ -881,6 +973,18 @@ declare namespace WorkMail {
     Alias: EmailAddress;
   }
   export interface DeleteAliasResponse {
+  }
+  export interface DeleteAvailabilityConfigurationRequest {
+    /**
+     * The Amazon WorkMail organization for which the AvailabilityConfiguration will be deleted.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain for which the AvailabilityConfiguration will be deleted.
+     */
+    DomainName: DomainName;
+  }
+  export interface DeleteAvailabilityConfigurationResponse {
   }
   export interface DeleteEmailMonitoringConfigurationRequest {
     /**
@@ -1360,6 +1464,21 @@ declare namespace WorkMail {
   export type EmailAddress = string;
   export type EntityIdentifier = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export interface EwsAvailabilityProvider {
+    /**
+     * The endpoint of the remote EWS server.
+     */
+    EwsEndpoint: Url;
+    /**
+     * The username used to authenticate the remote EWS server.
+     */
+    EwsUsername: ExternalUserName;
+    /**
+     * The password used to authenticate the remote EWS server.
+     */
+    EwsPassword: Password;
+  }
+  export type ExternalUserName = string;
   export interface FolderConfiguration {
     /**
      * The folder name.
@@ -1587,6 +1706,13 @@ declare namespace WorkMail {
   export type IpRangeList = IpRange[];
   export type Jobs = MailboxExportJob[];
   export type KmsKeyArn = string;
+  export type LambdaArn = string;
+  export interface LambdaAvailabilityProvider {
+    /**
+     * The Amazon Resource Name (ARN) of the Lambda that acts as the availability provider.
+     */
+    LambdaArn: LambdaArn;
+  }
   export interface ListAccessControlRulesRequest {
     /**
      * The identifier for the organization.
@@ -1624,6 +1750,30 @@ declare namespace WorkMail {
     Aliases?: Aliases;
     /**
      * The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAvailabilityConfigurationsRequest {
+    /**
+     * The Amazon WorkMail organization for which the AvailabilityConfiguration's will be listed.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not require a token.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAvailabilityConfigurationsResponse {
+    /**
+     * The list of AvailabilityConfiguration's that exist for the specified Amazon WorkMail organization.
+     */
+    AvailabilityConfigurations?: AvailabilityConfigurationList;
+    /**
+     * The token to use to retrieve the next page of results. The value is null when there are no further results to return.
      */
     NextToken?: NextToken;
   }
@@ -2278,6 +2428,16 @@ declare namespace WorkMail {
   }
   export interface PutRetentionPolicyResponse {
   }
+  export interface RedactedEwsAvailabilityProvider {
+    /**
+     * The endpoint of the remote EWS server.
+     */
+    EwsEndpoint?: Url;
+    /**
+     * The username used to authenticate the remote EWS server.
+     */
+    EwsUsername?: ExternalUserName;
+  }
   export interface RegisterMailDomainRequest {
     /**
      * Idempotency token used when retrying requests.
@@ -2434,6 +2594,28 @@ declare namespace WorkMail {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TestAvailabilityConfigurationRequest {
+    /**
+     * The Amazon WorkMail organization where the availability provider will be tested.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain to which the provider applies. If this field is provided, a stored availability provider associated to this domain name will be tested.
+     */
+    DomainName?: DomainName;
+    EwsProvider?: EwsAvailabilityProvider;
+    LambdaProvider?: LambdaAvailabilityProvider;
+  }
+  export interface TestAvailabilityConfigurationResponse {
+    /**
+     * Boolean indicating whether the test passed or failed.
+     */
+    TestPassed?: Boolean;
+    /**
+     * String containing the reason for a failed test if TestPassed is false.
+     */
+    FailureReason?: String;
+  }
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -2446,6 +2628,26 @@ declare namespace WorkMail {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAvailabilityConfigurationRequest {
+    /**
+     * The Amazon WorkMail organization for which the AvailabilityConfiguration will be updated.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The domain to which the provider applies the availability configuration.
+     */
+    DomainName: DomainName;
+    /**
+     * The EWS availability provider definition. The request must contain exactly one provider definition, either EwsProvider or LambdaProvider. The previously stored provider will be overridden by the one provided.
+     */
+    EwsProvider?: EwsAvailabilityProvider;
+    /**
+     * The Lambda availability provider definition. The request must contain exactly one provider definition, either EwsProvider or LambdaProvider. The previously stored provider will be overridden by the one provided.
+     */
+    LambdaProvider?: LambdaAvailabilityProvider;
+  }
+  export interface UpdateAvailabilityConfigurationResponse {
   }
   export interface UpdateDefaultMailDomainRequest {
     /**
@@ -2567,6 +2769,7 @@ declare namespace WorkMail {
   }
   export interface UpdateResourceResponse {
   }
+  export type Url = string;
   export interface User {
     /**
      * The identifier of the user.

@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1165.0',
+	  VERSION: '2.1166.0',
 
 	  /**
 	   * @api private
@@ -4064,6 +4064,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    property(this, 'documentation', api.documentation);
 	    property(this, 'documentationUrl', api.documentationUrl);
 	  }
+	  property(this, 'errorCodeMapping', api.awsQueryCompatible);
 	}
 
 	/**
@@ -7330,6 +7331,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	          {code: 'UnknownError', message: 'An unknown error occurred.'});
 	      }
 	    });
+
+	    add('ERROR', 'error', function ERROR(err, resp) {
+	      var errorCodeMapping = resp.request.service.api.errorCodeMapping;
+	      if (errorCodeMapping && err && err.code) {
+	        var mapping = errorCodeMapping[err.code];
+	        if (mapping) {
+	          resp.error.code = mapping.code;
+	        }
+	      }
+	    }, true);
 
 	    addAsync('SEND', 'send', function SEND(resp, done) {
 	      resp.httpResponse._abortCallback = done;
