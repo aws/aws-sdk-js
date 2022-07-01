@@ -1662,7 +1662,7 @@ declare namespace DMS {
   }
   export interface DescribeFleetAdvisorDatabasesRequest {
     /**
-     *  If you specify any of the following filters, the output includes information for only those databases that meet the filter criteria:     database-id – The ID of the database, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.    database-name – The name of the database.    database-engine – The name of the database engine.    server-ip-address – The IP address of the database server.    database-ip-address – The IP address of the database.    collector-name – The name of the associated Fleet Advisor collector.   An example is: describe-fleet-advisor-databases --filter Name="database-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d" 
+     *  If you specify any of the following filters, the output includes information for only those databases that meet the filter criteria:     database-id – The ID of the database.    database-name – The name of the database.    database-engine – The name of the database engine.    server-ip-address – The IP address of the database server.    database-ip-address – The IP address of the database.    collector-name – The name of the associated Fleet Advisor collector.   An example is: describe-fleet-advisor-databases --filter Name="database-id",Values="45" 
      */
     Filters?: FilterList;
     /**
@@ -2129,6 +2129,10 @@ declare namespace DMS {
      * The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.
      */
     ErrorRetryDuration?: IntegerOptional;
+    /**
+     * Set this option to true for DMS to migrate documentation using the documentation type _doc. OpenSearch and an Elasticsearch cluster only support the _doc documentation type in versions 7. x and later. The default value is false.
+     */
+    UseNewMappingType?: BooleanOptional;
   }
   export type EncodingTypeValue = "plain"|"plain-dictionary"|"rle-dictionary"|string;
   export type EncryptionModeValue = "sse-s3"|"sse-kms"|string;
@@ -2768,6 +2772,10 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the SQL Server endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     */
+    TrimSpaceInChar?: BooleanOptional;
   }
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
   export interface ModifyEndpointMessage {
@@ -3375,6 +3383,10 @@ declare namespace DMS {
      * Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret that contains the Oracle ASM connection details for the Oracle endpoint.
      */
     SecretsManagerOracleAsmSecretId?: String;
+    /**
+     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     */
+    TrimSpaceInChar?: BooleanOptional;
   }
   export interface OrderableReplicationInstance {
     /**
@@ -3518,6 +3530,10 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the PostgreSQL endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     */
+    TrimSpaceInChar?: BooleanOptional;
   }
   export interface RebootReplicationInstanceMessage {
     /**
@@ -3957,7 +3973,7 @@ declare namespace DMS {
      */
     LastFailureMessage?: String;
     /**
-     * The reason the replication task was stopped. This response parameter can return one of the following values:    "STOP_REASON_FULL_LOAD_COMPLETED" – Full-load migration completed.    "STOP_REASON_CACHED_CHANGES_APPLIED" – Change data capture (CDC) load completed.    "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a full-load and CDC migration, the full load stopped as specified before starting the CDC migration.    "STOP_REASON_SERVER_TIME" – The migration stopped at the specified server time.  
+     * The reason the replication task was stopped. This response parameter can return one of the following values:    "Stop Reason NORMAL"     "Stop Reason RECOVERABLE_ERROR"     "Stop Reason FATAL_ERROR"     "Stop Reason FULL_LOAD_ONLY_FINISHED"     "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load completed, with cached changes not applied    "Stop Reason STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes applied    "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"     "Stop Reason STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied    "Stop Reason STOPPED_DUE_TO_LOW_MEMORY"     "Stop Reason STOPPED_DUE_TO_LOW_DISK"     "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping task    "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for stopping task    "Stop Reason RECONFIGURATION_RESTART"     "Stop Reason RECYCLE_TASK"   
      */
     StopReason?: String;
     /**
@@ -4332,6 +4348,14 @@ declare namespace DMS {
      * When creating an S3 target endpoint, set DatePartitionTimezone to convert the current UTC time into a specified time zone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The time zone format is Area/Location. Use this parameter when DatePartitionedEnabled is set to true, as shown in the following example.  s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence": "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH", "DatePartitionTimezone":"Asia/Seoul", "BucketName": "dms-nattarat-test"}' 
      */
     DatePartitionTimezone?: String;
+    /**
+     * Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on string data. The default value is false.
+     */
+    AddTrailingPaddingCharacter?: BooleanOptional;
+    /**
+     * To specify a bucket owner and prevent sniping, you can use the ExpectedBucketOwner endpoint setting.  Example: --s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}'  When you make a request to test a connection or perform a migration, S3 checks the account ID of the bucket owner against the specified parameter.
+     */
+    ExpectedBucketOwner?: String;
   }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
   export type SchemaList = String[];

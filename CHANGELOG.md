@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1166.0-->
+<!--LATEST=2.1167.0-->
 <!--ENTRYINSERT-->
+
+## 2.1167.0
+* feature: DMS: Added new features for AWS DMS version 3.4.7 that includes new endpoint settings for S3, OpenSearch, Postgres, SQLServer and Oracle.
 
 ## 2.1166.0
 * feature: Athena: This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.
