@@ -310,6 +310,7 @@ export abstract class ConfigurationServicePlaceholders {
   m2?: AWS.M2.Types.ClientConfiguration;
   connectcampaigns?: AWS.ConnectCampaigns.Types.ClientConfiguration;
   redshiftserverless?: AWS.RedshiftServerless.Types.ClientConfiguration;
+  rolesanywhere?: AWS.RolesAnywhere.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -622,4 +623,5 @@ export interface ConfigurationServiceApiVersions {
   m2?: AWS.M2.Types.apiVersion;
   connectcampaigns?: AWS.ConnectCampaigns.Types.apiVersion;
   redshiftserverless?: AWS.RedshiftServerless.Types.apiVersion;
+  rolesanywhere?: AWS.RolesAnywhere.Types.apiVersion;
 }

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1167.0-->
+<!--LATEST=2.1168.0-->
 <!--ENTRYINSERT-->
+
+## 2.1168.0
+* feature: LexModelsV2: This release introduces additional optional parameters "messageSelectionStrategy" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.
+* feature: QuickSight: This release allows customers to programmatically create QuickSight accounts with Enterprise and Enterprise + Q editions. It also releases allowlisting domains for embedding QuickSight dashboards at runtime through the embedding APIs.
+* feature: RDS: Adds waiters support for DBCluster.
+* feature: RolesAnywhere: IAM Roles Anywhere allows your workloads such as servers, containers, and applications to obtain temporary AWS credentials and use the same IAM roles and policies that you have configured for your AWS workloads to access AWS resources.
+* feature: SSMIncidents: Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan.
 
 ## 2.1167.0
 * feature: DMS: Added new features for AWS DMS version 3.4.7 that includes new endpoint settings for S3, OpenSearch, Postgres, SQLServer and Oracle.

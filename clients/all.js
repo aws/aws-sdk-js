@@ -309,5 +309,6 @@ module.exports = {
   EMRServerless: require('./emrserverless'),
   M2: require('./m2'),
   ConnectCampaigns: require('./connectcampaigns'),
-  RedshiftServerless: require('./redshiftserverless')
+  RedshiftServerless: require('./redshiftserverless'),
+  RolesAnywhere: require('./rolesanywhere')
 };

@@ -3886,6 +3886,7 @@ declare namespace LexModelsV2 {
     variations?: MessageVariationsList;
   }
   export type MessageGroupsList = MessageGroup[];
+  export type MessageSelectionStrategy = "Random"|"Ordered"|string;
   export type MessageVariationsList = Message[];
   export type MissedCount = number;
   export interface MultipleValuesSetting {
@@ -3971,6 +3972,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the user can interrupt a speech prompt from the bot.
      */
     allowInterrupt?: BoxedBoolean;
+    /**
+     * Indicates how a message is selected from a message group among retries.
+     */
+    messageSelectionStrategy?: MessageSelectionStrategy;
   }
   export type QueryFilterString = string;
   export type RecommendedAction = string;

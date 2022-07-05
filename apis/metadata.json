@@ -1173,5 +1173,8 @@
   "redshiftserverless": {
     "prefix": "redshift-serverless",
     "name": "RedshiftServerless"
+  },
+  "rolesanywhere": {
+    "name": "RolesAnywhere"
   }
 }

@@ -308,3 +308,4 @@ export import EMRServerless = require('./emrserverless');
 export import M2 = require('./m2');
 export import ConnectCampaigns = require('./connectcampaigns');
 export import RedshiftServerless = require('./redshiftserverless');
+export import RolesAnywhere = require('./rolesanywhere');
