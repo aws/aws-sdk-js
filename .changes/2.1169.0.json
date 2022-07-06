@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation"
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "This release introduces Group feature, which enables users to group cross-region canaries."
+    }
+]

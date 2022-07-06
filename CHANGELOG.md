@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1168.0-->
+<!--LATEST=2.1169.0-->
 <!--ENTRYINSERT-->
+
+## 2.1169.0
+* feature: CloudFormation: My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation
+* feature: Synthetics: This release introduces Group feature, which enables users to group cross-region canaries.
 
 ## 2.1168.0
 * feature: LexModelsV2: This release introduces additional optional parameters "messageSelectionStrategy" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.

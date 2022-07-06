@@ -608,6 +608,7 @@ declare class CloudFormation extends Service {
 declare namespace CloudFormation {
   export type AcceptTermsAndConditions = boolean;
   export type Account = string;
+  export type AccountFilterType = "NONE"|"INTERSECTION"|"DIFFERENCE"|"UNION"|string;
   export interface AccountGateResult {
     /**
      * The status of the account gate function.    SUCCEEDED: The account gate function has determined that the account and Region passes any requirements for a stack set operation to occur. CloudFormation proceeds with the stack operation in that account and Region.    FAILED: The account gate function has determined that the account and Region doesn't meet the requirements for a stack set operation to occur. CloudFormation cancels the stack set operation in that account and Region, and sets the stack set operation result status for that account and Region to FAILED.    SKIPPED: CloudFormation has skipped calling the account gate function for this account and Region, for one of the following reasons:   An account gate function hasn't been specified for the account and Region. CloudFormation proceeds with the stack set operation in this account and Region.   The AWSCloudFormationStackSetExecutionRole of the stack set administration account lacks permissions to invoke the function. CloudFormation proceeds with the stack set operation in this account and Region.   Either no action is necessary, or no action is possible, on the stack. CloudFormation skips the stack set operation in this account and Region.    
@@ -1271,6 +1272,10 @@ declare namespace CloudFormation {
      * The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
+    /**
+     * Limit deployment targets to individual accounts or include additional accounts with provided OUs. The following is a list of possible values for the AccountFilterType operation.    INTERSECTION: StackSets deploys to the accounts specified in Accounts parameter.     DIFFERENCE: StackSets excludes the accounts specified in Accounts parameter. This enables user to avoid certain accounts within an OU such as suspended accounts.    UNION: (default value) StackSets includes additional accounts deployment targets.  This is the default value if AccountFilterType is not provided. This enables user to update an entire OU and individual accounts from a different OU in one request, which used to be two separate requests.    NONE: Deploys to all the accounts in specified organizational units (OU).  
+     */
+    AccountFilterType?: AccountFilterType;
   }
   export type DeprecatedStatus = "LIVE"|"DEPRECATED"|string;
   export interface DeregisterTypeInput {
