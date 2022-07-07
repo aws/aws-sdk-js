@@ -316,11 +316,11 @@ declare class IoTWireless extends Service {
    */
   getDeviceProfile(callback?: (err: AWSError, data: IoTWireless.Types.GetDeviceProfileResponse) => void): Request<IoTWireless.Types.GetDeviceProfileResponse, AWSError>;
   /**
-   * Get the event configuration by resource types.
+   * Get the event configuration based on resource types.
    */
   getEventConfigurationByResourceTypes(params: IoTWireless.Types.GetEventConfigurationByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetEventConfigurationByResourceTypesResponse) => void): Request<IoTWireless.Types.GetEventConfigurationByResourceTypesResponse, AWSError>;
   /**
-   * Get the event configuration by resource types.
+   * Get the event configuration based on resource types.
    */
   getEventConfigurationByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.GetEventConfigurationByResourceTypesResponse) => void): Request<IoTWireless.Types.GetEventConfigurationByResourceTypesResponse, AWSError>;
   /**
@@ -371,6 +371,22 @@ declare class IoTWireless extends Service {
    * Gets information about a partner account. If PartnerAccountId and PartnerType are null, returns all partner accounts.
    */
   getPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
+  /**
+   * Get the position information for a given resource.
+   */
+  getPosition(params: IoTWireless.Types.GetPositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPositionResponse) => void): Request<IoTWireless.Types.GetPositionResponse, AWSError>;
+  /**
+   * Get the position information for a given resource.
+   */
+  getPosition(callback?: (err: AWSError, data: IoTWireless.Types.GetPositionResponse) => void): Request<IoTWireless.Types.GetPositionResponse, AWSError>;
+  /**
+   * Get position configuration for a given resource.
+   */
+  getPositionConfiguration(params: IoTWireless.Types.GetPositionConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPositionConfigurationResponse) => void): Request<IoTWireless.Types.GetPositionConfigurationResponse, AWSError>;
+  /**
+   * Get position configuration for a given resource.
+   */
+  getPositionConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.GetPositionConfigurationResponse) => void): Request<IoTWireless.Types.GetPositionConfigurationResponse, AWSError>;
   /**
    * Get the event configuration for a particular resource identifier.
    */
@@ -532,6 +548,14 @@ declare class IoTWireless extends Service {
    */
   listPartnerAccounts(callback?: (err: AWSError, data: IoTWireless.Types.ListPartnerAccountsResponse) => void): Request<IoTWireless.Types.ListPartnerAccountsResponse, AWSError>;
   /**
+   * List position configurations for a given resource, such as positioning solvers.
+   */
+  listPositionConfigurations(params: IoTWireless.Types.ListPositionConfigurationsRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListPositionConfigurationsResponse) => void): Request<IoTWireless.Types.ListPositionConfigurationsResponse, AWSError>;
+  /**
+   * List position configurations for a given resource, such as positioning solvers.
+   */
+  listPositionConfigurations(callback?: (err: AWSError, data: IoTWireless.Types.ListPositionConfigurationsResponse) => void): Request<IoTWireless.Types.ListPositionConfigurationsResponse, AWSError>;
+  /**
    * List queued messages in the downlink queue.
    */
   listQueuedMessages(params: IoTWireless.Types.ListQueuedMessagesRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListQueuedMessagesResponse) => void): Request<IoTWireless.Types.ListQueuedMessagesResponse, AWSError>;
@@ -579,6 +603,14 @@ declare class IoTWireless extends Service {
    * Lists the wireless gateways registered to your AWS account.
    */
   listWirelessGateways(callback?: (err: AWSError, data: IoTWireless.Types.ListWirelessGatewaysResponse) => void): Request<IoTWireless.Types.ListWirelessGatewaysResponse, AWSError>;
+  /**
+   * Put position configuration for a given resource.
+   */
+  putPositionConfiguration(params: IoTWireless.Types.PutPositionConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.PutPositionConfigurationResponse) => void): Request<IoTWireless.Types.PutPositionConfigurationResponse, AWSError>;
+  /**
+   * Put position configuration for a given resource.
+   */
+  putPositionConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.PutPositionConfigurationResponse) => void): Request<IoTWireless.Types.PutPositionConfigurationResponse, AWSError>;
   /**
    * Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway or a wireless device. A limit of 200 log level override can be set per account.
    */
@@ -684,11 +716,11 @@ declare class IoTWireless extends Service {
    */
   updateDestination(callback?: (err: AWSError, data: IoTWireless.Types.UpdateDestinationResponse) => void): Request<IoTWireless.Types.UpdateDestinationResponse, AWSError>;
   /**
-   * Update the event configuration by resource types.
+   * Update the event configuration based on resource types.
    */
   updateEventConfigurationByResourceTypes(params: IoTWireless.Types.UpdateEventConfigurationByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateEventConfigurationByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateEventConfigurationByResourceTypesResponse, AWSError>;
   /**
-   * Update the event configuration by resource types.
+   * Update the event configuration based on resource types.
    */
   updateEventConfigurationByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.UpdateEventConfigurationByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateEventConfigurationByResourceTypesResponse, AWSError>;
   /**
@@ -731,6 +763,14 @@ declare class IoTWireless extends Service {
    * Updates properties of a partner account.
    */
   updatePartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.UpdatePartnerAccountResponse) => void): Request<IoTWireless.Types.UpdatePartnerAccountResponse, AWSError>;
+  /**
+   * Update the position information of a resource.
+   */
+  updatePosition(params: IoTWireless.Types.UpdatePositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdatePositionResponse) => void): Request<IoTWireless.Types.UpdatePositionResponse, AWSError>;
+  /**
+   * Update the position information of a resource.
+   */
+  updatePosition(callback?: (err: AWSError, data: IoTWireless.Types.UpdatePositionResponse) => void): Request<IoTWireless.Types.UpdatePositionResponse, AWSError>;
   /**
    * Update the event configuration for a particular resource identifier.
    */
@@ -786,6 +826,16 @@ declare namespace IoTWireless {
     FCntStart?: FCntStart;
   }
   export type AccountLinked = boolean;
+  export interface Accuracy {
+    /**
+     * The horizontal accuracy of the estimated position in meters.
+     */
+    HorizontalAccuracy?: HorizontalAccuracy;
+    /**
+     * The vertical accuracy of the estimated position in meters.
+     */
+    VerticalAccuracy?: VerticalAccuracy;
+  }
   export type AddGwMetadata = boolean;
   export type AmazonId = string;
   export type AmazonResourceName = string;
@@ -905,7 +955,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANConnectionStatusEventNotificationConfigurations;
     /**
-     * Enum to denote whether the wireless gateway id connection status event topic is enabled or disabled .
+     * Enum to denote whether the wireless gateway ID connection status event topic is enabled or disabled.
      */
     WirelessGatewayIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -1472,6 +1522,10 @@ declare namespace IoTWireless {
     Fuota?: FPort;
     Multicast?: FPort;
     ClockSync?: FPort;
+    /**
+     * FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
+     */
+    Positioning?: Positioning;
   }
   export type FactoryPresetFreqsList = PresetFreq[];
   export type Fingerprint = string;
@@ -1550,19 +1604,19 @@ declare namespace IoTWireless {
   }
   export interface GetEventConfigurationByResourceTypesResponse {
     /**
-     * Resource type event configuration for the device registration state event
+     * Resource type event configuration for the device registration state event.
      */
     DeviceRegistrationState?: DeviceRegistrationStateResourceTypeEventConfiguration;
     /**
-     * Resource type event configuration for the proximity event
+     * Resource type event configuration for the proximity event.
      */
     Proximity?: ProximityResourceTypeEventConfiguration;
     /**
-     * Resource type event configuration for the join event
+     * Resource type event configuration for the join event.
      */
     Join?: JoinResourceTypeEventConfiguration;
     /**
-     * Resource type event configuration for the connection status event
+     * Resource type event configuration for the connection status event.
      */
     ConnectionStatus?: ConnectionStatusResourceTypeEventConfiguration;
   }
@@ -1645,6 +1699,62 @@ declare namespace IoTWireless {
      */
     AccountLinked?: AccountLinked;
   }
+  export interface GetPositionConfigurationRequest {
+    /**
+     * Resource identifier used in a position configuration.
+     */
+    ResourceIdentifier: PositionResourceIdentifier;
+    /**
+     * Resource type of the resource for which position configuration is retrieved.
+     */
+    ResourceType: PositionResourceType;
+  }
+  export interface GetPositionConfigurationResponse {
+    /**
+     * The wrapper for the solver configuration details object.
+     */
+    Solvers?: PositionSolverDetails;
+    /**
+     * The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+     */
+    Destination?: DestinationName;
+  }
+  export interface GetPositionRequest {
+    /**
+     * Resource identifier used to retrieve the position information.
+     */
+    ResourceIdentifier: PositionResourceIdentifier;
+    /**
+     * Resource type of the resource for which position information is retrieved.
+     */
+    ResourceType: PositionResourceType;
+  }
+  export interface GetPositionResponse {
+    /**
+     * The position information of the resource.
+     */
+    Position?: PositionCoordinate;
+    /**
+     * The accuracy of the estimated position in meters. An empty value indicates that no position data is available. A value of ‘0.0’ value indicates that position data is available. This data corresponds to the position information that you specified instead of the position computed by solver.
+     */
+    Accuracy?: Accuracy;
+    /**
+     * The type of solver used to identify the position of the resource.
+     */
+    SolverType?: PositionSolverType;
+    /**
+     * The vendor of the positioning solver.
+     */
+    SolverProvider?: PositionSolverProvider;
+    /**
+     * The version of the positioning solver.
+     */
+    SolverVersion?: PositionSolverVersion;
+    /**
+     * The timestamp at which the device's position was determined.
+     */
+    Timestamp?: ISODateTimeString;
+  }
   export interface GetResourceEventConfigurationRequest {
     /**
      * Resource identifier to opt in for event messaging.
@@ -1661,11 +1771,11 @@ declare namespace IoTWireless {
   }
   export interface GetResourceEventConfigurationResponse {
     /**
-     * Event configuration for the device registration state event
+     * Event configuration for the device registration state event.
      */
     DeviceRegistrationState?: DeviceRegistrationStateEventConfiguration;
     /**
-     * Event configuration for the Proximity event
+     * Event configuration for the proximity event.
      */
     Proximity?: ProximityEventConfiguration;
     /**
@@ -1947,6 +2057,7 @@ declare namespace IoTWireless {
      */
     Status?: WirelessGatewayTaskStatus;
   }
+  export type HorizontalAccuracy = number;
   export type HrAllowed = boolean;
   export type ISODateTimeString = string;
   export type Identifier = string;
@@ -2113,6 +2224,27 @@ declare namespace IoTWireless {
      */
     Sidewalk?: SidewalkAccountList;
   }
+  export interface ListPositionConfigurationsRequest {
+    /**
+     * Resource type for which position configurations are listed.
+     */
+    ResourceType?: PositionResourceType;
+    MaxResults?: MaxResults;
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPositionConfigurationsResponse {
+    /**
+     * A list of position configurations.
+     */
+    PositionConfigurationList?: PositionConfigurationList;
+    /**
+     * The token to use to get the next set of results, or null if there are no additional results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListQueuedMessagesRequest {
     /**
      * The ID of a given wireless device which the downlink message packets are being sent.
@@ -2257,7 +2389,7 @@ declare namespace IoTWireless {
   }
   export interface LoRaWANConnectionStatusEventNotificationConfigurations {
     /**
-     * Enum to denote whether the gateway eui connection status event topic is enabled or disabled.
+     * Enum to denote whether the gateway EUI connection status event topic is enabled or disabled.
      */
     GatewayEuiEventTopic?: EventNotificationTopicStatus;
   }
@@ -2537,7 +2669,7 @@ declare namespace IoTWireless {
   }
   export interface LoRaWANJoinEventNotificationConfigurations {
     /**
-     * Enum to denote whether the dev eui join event topic is enabled or disabled.
+     * Enum to denote whether the Dev EUI join event topic is enabled or disabled.
      */
     DevEuiEventTopic?: EventNotificationTopicStatus;
   }
@@ -2601,6 +2733,10 @@ declare namespace IoTWireless {
      * ABP device object for update APIs for v1.0.x
      */
     AbpV1_0_x?: UpdateAbpV1_0_x;
+    /**
+     * FPorts object for the positioning information of the device.
+     */
+    FPorts?: UpdateFPorts;
   }
   export interface LoRaWANUpdateGatewayTaskCreate {
     /**
@@ -2714,6 +2850,51 @@ declare namespace IoTWireless {
   export type PingSlotDr = number;
   export type PingSlotFreq = number;
   export type PingSlotPeriod = number;
+  export type PositionConfigurationFec = "ROSE"|"NONE"|string;
+  export interface PositionConfigurationItem {
+    /**
+     * Resource identifier for the position configuration.
+     */
+    ResourceIdentifier?: PositionResourceIdentifier;
+    /**
+     * Resource type of the resource for the position configuration.
+     */
+    ResourceType?: PositionResourceType;
+    /**
+     * The details of the positioning solver object used to compute the location.
+     */
+    Solvers?: PositionSolverDetails;
+    /**
+     * The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+     */
+    Destination?: DestinationName;
+  }
+  export type PositionConfigurationList = PositionConfigurationItem[];
+  export type PositionConfigurationStatus = "Enabled"|"Disabled"|string;
+  export type PositionCoordinate = PositionCoordinateValue[];
+  export type PositionCoordinateValue = number;
+  export type PositionResourceIdentifier = string;
+  export type PositionResourceType = "WirelessDevice"|"WirelessGateway"|string;
+  export interface PositionSolverConfigurations {
+    /**
+     * The Semtech GNSS solver configuration object.
+     */
+    SemtechGnss?: SemtechGnssConfiguration;
+  }
+  export interface PositionSolverDetails {
+    /**
+     * The Semtech GNSS solver object details.
+     */
+    SemtechGnss?: SemtechGnssDetail;
+  }
+  export type PositionSolverProvider = "Semtech"|string;
+  export type PositionSolverType = "GNSS"|string;
+  export type PositionSolverVersion = string;
+  export interface Positioning {
+    ClockSync?: FPort;
+    Stream?: FPort;
+    Gnss?: FPort;
+  }
   export type PrAllowed = boolean;
   export type PresetFreq = number;
   export interface ProximityEventConfiguration {
@@ -2731,6 +2912,26 @@ declare namespace IoTWireless {
      * Proximity resource type event configuration object for enabling and disabling wireless device topic.
      */
     Sidewalk?: SidewalkResourceTypeEventConfiguration;
+  }
+  export interface PutPositionConfigurationRequest {
+    /**
+     * Resource identifier used to update the position configuration.
+     */
+    ResourceIdentifier: PositionResourceIdentifier;
+    /**
+     * Resource type of the resource for which you want to update the position configuration.
+     */
+    ResourceType: PositionResourceType;
+    /**
+     * The positioning solvers used to update the position configuration of the resource.
+     */
+    Solvers?: PositionSolverConfigurations;
+    /**
+     * The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+     */
+    Destination?: DestinationName;
+  }
+  export interface PutPositionConfigurationResponse {
   }
   export interface PutResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
@@ -2770,6 +2971,34 @@ declare namespace IoTWireless {
   export type RxDrOffset1 = number;
   export type RxFreq2 = number;
   export type SNwkSIntKey = string;
+  export interface SemtechGnssConfiguration {
+    /**
+     * The status indicating whether the solver is enabled.
+     */
+    Status: PositionConfigurationStatus;
+    /**
+     * Whether forward error correction is enabled.
+     */
+    Fec: PositionConfigurationFec;
+  }
+  export interface SemtechGnssDetail {
+    /**
+     * The vendor of the solver object.
+     */
+    Provider?: PositionSolverProvider;
+    /**
+     * The type of positioning solver used.
+     */
+    Type?: PositionSolverType;
+    /**
+     * The status indicating whether the solver is enabled.
+     */
+    Status?: PositionConfigurationStatus;
+    /**
+     * Whether forward error correction is enabled.
+     */
+    Fec?: PositionConfigurationFec;
+  }
   export interface SendDataToMulticastGroupRequest {
     Id: MulticastGroupId;
     PayloadData: PayloadData;
@@ -3105,6 +3334,12 @@ declare namespace IoTWireless {
   }
   export interface UpdateEventConfigurationByResourceTypesResponse {
   }
+  export interface UpdateFPorts {
+    /**
+     * Positioning FPorts for the ClockSync, Stream, and GNSS functions.
+     */
+    Positioning?: Positioning;
+  }
   export interface UpdateFuotaTaskRequest {
     Id: FuotaTaskId;
     Name?: FuotaTaskName;
@@ -3169,6 +3404,22 @@ declare namespace IoTWireless {
   }
   export interface UpdatePartnerAccountResponse {
   }
+  export interface UpdatePositionRequest {
+    /**
+     * Resource identifier of the resource for which position is updated.
+     */
+    ResourceIdentifier: PositionResourceIdentifier;
+    /**
+     * Resource type of the resource for which position is updated.
+     */
+    ResourceType: PositionResourceType;
+    /**
+     * The position information of the resource.
+     */
+    Position: PositionCoordinate;
+  }
+  export interface UpdatePositionResponse {
+  }
   export interface UpdateResourceEventConfigurationRequest {
     /**
      * Resource identifier to opt in for event messaging.
@@ -3179,23 +3430,23 @@ declare namespace IoTWireless {
      */
     IdentifierType: IdentifierType;
     /**
-     * Partner type of the resource if the identifier type is PartnerAccountId
+     * Partner type of the resource if the identifier type is PartnerAccountId 
      */
     PartnerType?: EventNotificationPartnerType;
     /**
-     * Event configuration for the device registration state event
+     * Event configuration for the device registration state event.
      */
     DeviceRegistrationState?: DeviceRegistrationStateEventConfiguration;
     /**
-     * Event configuration for the Proximity event
+     * Event configuration for the proximity event.
      */
     Proximity?: ProximityEventConfiguration;
     /**
-     * Event configuration for the join event
+     * Event configuration for the join event.
      */
     Join?: JoinEventConfiguration;
     /**
-     * Event configuration for the connection status event
+     * Event configuration for the connection status event.
      */
     ConnectionStatus?: ConnectionStatusEventConfiguration;
   }
@@ -3272,6 +3523,7 @@ declare namespace IoTWireless {
      */
     Arn?: WirelessGatewayTaskDefinitionArn;
   }
+  export type VerticalAccuracy = number;
   export type WirelessDeviceArn = string;
   export type WirelessDeviceEvent = "Join"|"Rejoin"|"Uplink_Data"|"Downlink_Data"|"Registration"|string;
   export interface WirelessDeviceEventLogOption {

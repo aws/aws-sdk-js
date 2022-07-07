@@ -521,6 +521,14 @@ declare class DMS extends Service {
    */
   testConnection(callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
   /**
+   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
+   */
+  updateSubscriptionsToEventBridge(params: DMS.Types.UpdateSubscriptionsToEventBridgeMessage, callback?: (err: AWSError, data: DMS.Types.UpdateSubscriptionsToEventBridgeResponse) => void): Request<DMS.Types.UpdateSubscriptionsToEventBridgeResponse, AWSError>;
+  /**
+   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
+   */
+  updateSubscriptionsToEventBridge(callback?: (err: AWSError, data: DMS.Types.UpdateSubscriptionsToEventBridgeResponse) => void): Request<DMS.Types.UpdateSubscriptionsToEventBridgeResponse, AWSError>;
+  /**
    * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.describeConnectionsoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
    */
   waitFor(state: "testConnectionSucceeds", params: DMS.Types.DescribeConnectionsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
@@ -4724,6 +4732,18 @@ declare namespace DMS {
      * The connection tested.
      */
     Connection?: Connection;
+  }
+  export interface UpdateSubscriptionsToEventBridgeMessage {
+    /**
+     * When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.6 or higher. 
+     */
+    ForceMove?: BooleanOptional;
+  }
+  export interface UpdateSubscriptionsToEventBridgeResponse {
+    /**
+     * A string that indicates how many event subscriptions were migrated and how many remain to be migrated.
+     */
+    Result?: String;
   }
   export type VersionStatus = "UP_TO_DATE"|"OUTDATED"|"UNSUPPORTED"|string;
   export type VpcSecurityGroupIdList = String[];
