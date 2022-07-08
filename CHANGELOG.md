@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1170.0-->
+<!--LATEST=2.1171.0-->
 <!--ENTRYINSERT-->
+
+## 2.1171.0
+* feature: Backup: This release adds support for authentication using IAM user identity instead of passed IAM role, identified by excluding the IamRoleArn field in the StartRestoreJob API. This feature applies to only resource clients with a destructive restore nature (e.g. SAP HANA).
 
 ## 2.1170.0
 * feature: ChimeSDKMeetings: Adds support for AppKeys and TenantIds in Amazon Chime SDK WebRTC sessions
