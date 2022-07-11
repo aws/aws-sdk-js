@@ -1140,7 +1140,11 @@ declare namespace Redshift {
     /**
      * The identifier of the snapshot the account is authorized to restore.
      */
-    SnapshotIdentifier: String;
+    SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot to authorize access to.
+     */
+    SnapshotArn?: String;
     /**
      * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
@@ -1866,7 +1870,7 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier?: String;
     /**
-     * The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to Supported Platforms to Launch Your Cluster in the Amazon Redshift Cluster Management Guide.
+     * The Elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a publicly accessible cluster with AvailabilityZoneRelocation turned on. Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to Supported Platforms to Launch Your Cluster in the Amazon Redshift Cluster Management Guide.
      */
     ElasticIp?: String;
     /**
@@ -2571,6 +2575,10 @@ declare namespace Redshift {
      */
     SnapshotIdentifier?: String;
     /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to describe cluster snapshots.
+     */
+    SnapshotArn?: String;
+    /**
      * The type of snapshots for which you are requesting information. By default, snapshots of all types are returned. Valid Values: automated | manual 
      */
     SnapshotType?: String;
@@ -2953,6 +2961,10 @@ declare namespace Redshift {
      * The identifier of the snapshot to evaluate for possible node configurations.
      */
     SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.
+     */
+    SnapshotArn?: String;
     /**
      * The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
      */
@@ -4810,7 +4822,11 @@ declare namespace Redshift {
     /**
      * The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive. Example: my-snapshot-id 
      */
-    SnapshotIdentifier: String;
+    SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster.
+     */
+    SnapshotArn?: String;
     /**
      * The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
@@ -4848,7 +4864,7 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier?: String;
     /**
-     * The elastic IP (EIP) address for the cluster.
+     * The elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a publicly accessible cluster with AvailabilityZoneRelocation turned on.
      */
     ElasticIp?: String;
     /**
@@ -5069,7 +5085,11 @@ declare namespace Redshift {
     /**
      * The identifier of the snapshot that the account can no longer access.
      */
-    SnapshotIdentifier: String;
+    SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to revoke access.
+     */
+    SnapshotArn?: String;
     /**
      * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */

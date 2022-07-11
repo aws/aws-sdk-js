@@ -189,6 +189,14 @@ declare class EC2 extends Service {
    */
   associateTransitGatewayMulticastDomain(callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayMulticastDomainResult) => void): Request<EC2.Types.AssociateTransitGatewayMulticastDomainResult, AWSError>;
   /**
+   * Associates the specified transit gateway attachment with a transit gateway policy table.
+   */
+  associateTransitGatewayPolicyTable(params: EC2.Types.AssociateTransitGatewayPolicyTableRequest, callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayPolicyTableResult) => void): Request<EC2.Types.AssociateTransitGatewayPolicyTableResult, AWSError>;
+  /**
+   * Associates the specified transit gateway attachment with a transit gateway policy table.
+   */
+  associateTransitGatewayPolicyTable(callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayPolicyTableResult) => void): Request<EC2.Types.AssociateTransitGatewayPolicyTableResult, AWSError>;
+  /**
    * Associates the specified attachment with the specified transit gateway route table. You can associate only one route table with an attachment.
    */
   associateTransitGatewayRouteTable(params: EC2.Types.AssociateTransitGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.AssociateTransitGatewayRouteTableResult, AWSError>;
@@ -837,13 +845,21 @@ declare class EC2 extends Service {
    */
   createTransitGatewayMulticastDomain(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayMulticastDomainResult) => void): Request<EC2.Types.CreateTransitGatewayMulticastDomainResult, AWSError>;
   /**
-   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
+   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
    */
   createTransitGatewayPeeringAttachment(params: EC2.Types.CreateTransitGatewayPeeringAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
-   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
+   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
    */
   createTransitGatewayPeeringAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
+  /**
+   * Creates a transit gateway policy table.
+   */
+  createTransitGatewayPolicyTable(params: EC2.Types.CreateTransitGatewayPolicyTableRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPolicyTableResult) => void): Request<EC2.Types.CreateTransitGatewayPolicyTableResult, AWSError>;
+  /**
+   * Creates a transit gateway policy table.
+   */
+  createTransitGatewayPolicyTable(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPolicyTableResult) => void): Request<EC2.Types.CreateTransitGatewayPolicyTableResult, AWSError>;
   /**
    * Creates a reference (route) to a prefix list in a specified transit gateway route table.
    */
@@ -868,6 +884,14 @@ declare class EC2 extends Service {
    * Creates a route table for the specified transit gateway.
    */
   createTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteTableResult) => void): Request<EC2.Types.CreateTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Advertises a new transit gateway route table.
+   */
+  createTransitGatewayRouteTableAnnouncement(params: EC2.Types.CreateTransitGatewayRouteTableAnnouncementRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteTableAnnouncementResult) => void): Request<EC2.Types.CreateTransitGatewayRouteTableAnnouncementResult, AWSError>;
+  /**
+   * Advertises a new transit gateway route table.
+   */
+  createTransitGatewayRouteTableAnnouncement(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteTableAnnouncementResult) => void): Request<EC2.Types.CreateTransitGatewayRouteTableAnnouncementResult, AWSError>;
   /**
    * Attaches the specified VPC to the specified transit gateway. If you attach a VPC with a CIDR range that overlaps the CIDR range of a VPC that is already attached, the new VPC CIDR range is not propagated to the default propagation route table. To send VPC traffic to an attached transit gateway, add a route to the VPC route table using CreateRoute.
    */
@@ -1341,6 +1365,14 @@ declare class EC2 extends Service {
    */
   deleteTransitGatewayPeeringAttachment(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.DeleteTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
+   * Deletes the specified transit gateway policy table.
+   */
+  deleteTransitGatewayPolicyTable(params: EC2.Types.DeleteTransitGatewayPolicyTableRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPolicyTableResult) => void): Request<EC2.Types.DeleteTransitGatewayPolicyTableResult, AWSError>;
+  /**
+   * Deletes the specified transit gateway policy table.
+   */
+  deleteTransitGatewayPolicyTable(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPolicyTableResult) => void): Request<EC2.Types.DeleteTransitGatewayPolicyTableResult, AWSError>;
+  /**
    * Deletes a reference (route) to a prefix list in a specified transit gateway route table.
    */
   deleteTransitGatewayPrefixListReference(params: EC2.Types.DeleteTransitGatewayPrefixListReferenceRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.DeleteTransitGatewayPrefixListReferenceResult, AWSError>;
@@ -1364,6 +1396,14 @@ declare class EC2 extends Service {
    * Deletes the specified transit gateway route table. You must disassociate the route table from any transit gateway route tables before you can delete it.
    */
   deleteTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableResult, AWSError>;
+  /**
+   * Advertises to the transit gateway that a transit gateway route table is deleted.
+   */
+  deleteTransitGatewayRouteTableAnnouncement(params: EC2.Types.DeleteTransitGatewayRouteTableAnnouncementRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableAnnouncementResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableAnnouncementResult, AWSError>;
+  /**
+   * Advertises to the transit gateway that a transit gateway route table is deleted.
+   */
+  deleteTransitGatewayRouteTableAnnouncement(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteTableAnnouncementResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteTableAnnouncementResult, AWSError>;
   /**
    * Deletes the specified VPC attachment.
    */
@@ -2397,6 +2437,22 @@ declare class EC2 extends Service {
    */
   describeTransitGatewayPeeringAttachments(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayPeeringAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayPeeringAttachmentsResult, AWSError>;
   /**
+   * Describes one or more transit gateway route policy tables. 
+   */
+  describeTransitGatewayPolicyTables(params: EC2.Types.DescribeTransitGatewayPolicyTablesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayPolicyTablesResult) => void): Request<EC2.Types.DescribeTransitGatewayPolicyTablesResult, AWSError>;
+  /**
+   * Describes one or more transit gateway route policy tables. 
+   */
+  describeTransitGatewayPolicyTables(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayPolicyTablesResult) => void): Request<EC2.Types.DescribeTransitGatewayPolicyTablesResult, AWSError>;
+  /**
+   * Describes one or more transit gateway route table advertisements.
+   */
+  describeTransitGatewayRouteTableAnnouncements(params: EC2.Types.DescribeTransitGatewayRouteTableAnnouncementsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayRouteTableAnnouncementsResult) => void): Request<EC2.Types.DescribeTransitGatewayRouteTableAnnouncementsResult, AWSError>;
+  /**
+   * Describes one or more transit gateway route table advertisements.
+   */
+  describeTransitGatewayRouteTableAnnouncements(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayRouteTableAnnouncementsResult) => void): Request<EC2.Types.DescribeTransitGatewayRouteTableAnnouncementsResult, AWSError>;
+  /**
    * Describes one or more transit gateway route tables. By default, all transit gateway route tables are described. Alternatively, you can filter the results.
    */
   describeTransitGatewayRouteTables(params: EC2.Types.DescribeTransitGatewayRouteTablesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayRouteTablesResult) => void): Request<EC2.Types.DescribeTransitGatewayRouteTablesResult, AWSError>;
@@ -2748,6 +2804,14 @@ declare class EC2 extends Service {
    * Disassociates the specified subnets from the transit gateway multicast domain. 
    */
   disassociateTransitGatewayMulticastDomain(callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayMulticastDomainResult) => void): Request<EC2.Types.DisassociateTransitGatewayMulticastDomainResult, AWSError>;
+  /**
+   * Removes the association between an an attachment and a policy table.
+   */
+  disassociateTransitGatewayPolicyTable(params: EC2.Types.DisassociateTransitGatewayPolicyTableRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayPolicyTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayPolicyTableResult, AWSError>;
+  /**
+   * Removes the association between an an attachment and a policy table.
+   */
+  disassociateTransitGatewayPolicyTable(callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayPolicyTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayPolicyTableResult, AWSError>;
   /**
    * Disassociates a resource attachment from a transit gateway route table.
    */
@@ -3132,6 +3196,22 @@ declare class EC2 extends Service {
    * Gets information about the associations for the transit gateway multicast domain.
    */
   getTransitGatewayMulticastDomainAssociations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayMulticastDomainAssociationsResult) => void): Request<EC2.Types.GetTransitGatewayMulticastDomainAssociationsResult, AWSError>;
+  /**
+   * Gets a list of the transit gateway policy table associations.
+   */
+  getTransitGatewayPolicyTableAssociations(params: EC2.Types.GetTransitGatewayPolicyTableAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayPolicyTableAssociationsResult) => void): Request<EC2.Types.GetTransitGatewayPolicyTableAssociationsResult, AWSError>;
+  /**
+   * Gets a list of the transit gateway policy table associations.
+   */
+  getTransitGatewayPolicyTableAssociations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayPolicyTableAssociationsResult) => void): Request<EC2.Types.GetTransitGatewayPolicyTableAssociationsResult, AWSError>;
+  /**
+   * Returns a list of transit gateway policy table entries.
+   */
+  getTransitGatewayPolicyTableEntries(params: EC2.Types.GetTransitGatewayPolicyTableEntriesRequest, callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayPolicyTableEntriesResult) => void): Request<EC2.Types.GetTransitGatewayPolicyTableEntriesResult, AWSError>;
+  /**
+   * Returns a list of transit gateway policy table entries.
+   */
+  getTransitGatewayPolicyTableEntries(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayPolicyTableEntriesResult) => void): Request<EC2.Types.GetTransitGatewayPolicyTableEntriesResult, AWSError>;
   /**
    * Gets information about the prefix list references in a specified transit gateway route table.
    */
@@ -5503,6 +5583,26 @@ declare namespace EC2 {
      * Information about the transit gateway multicast domain associations.
      */
     Associations?: TransitGatewayMulticastDomainAssociations;
+  }
+  export interface AssociateTransitGatewayPolicyTableRequest {
+    /**
+     * The ID of the transit gateway policy table to associate with the transit gateway attachment.
+     */
+    TransitGatewayPolicyTableId: TransitGatewayPolicyTableId;
+    /**
+     * The ID of the transit gateway attachment to associate with the policy table.
+     */
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssociateTransitGatewayPolicyTableResult {
+    /**
+     * Describes the association of a transit gateway and a transit gateway policy table.
+     */
+    Association?: TransitGatewayPolicyTableAssociation;
   }
   export interface AssociateTransitGatewayRouteTableRequest {
     /**
@@ -9478,6 +9578,7 @@ declare namespace EC2 {
      * The Region where the peer transit gateway is located.
      */
     PeerRegion: String;
+    Options?: CreateTransitGatewayPeeringAttachmentRequestOptions;
     /**
      * The tags to apply to the transit gateway peering attachment.
      */
@@ -9487,11 +9588,34 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface CreateTransitGatewayPeeringAttachmentRequestOptions {
+    DynamicRouting?: DynamicRoutingValue;
+  }
   export interface CreateTransitGatewayPeeringAttachmentResult {
     /**
      * The transit gateway peering attachment.
      */
     TransitGatewayPeeringAttachment?: TransitGatewayPeeringAttachment;
+  }
+  export interface CreateTransitGatewayPolicyTableRequest {
+    /**
+     * The ID of the transit gateway used for the policy table.
+     */
+    TransitGatewayId: TransitGatewayId;
+    /**
+     * The tags specification for the transit gateway policy table created during the request.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayPolicyTableResult {
+    /**
+     * Describes the created transit gateway policy table.
+     */
+    TransitGatewayPolicyTable?: TransitGatewayPolicyTable;
   }
   export interface CreateTransitGatewayPrefixListReferenceRequest {
     /**
@@ -9572,6 +9696,30 @@ declare namespace EC2 {
      * Information about the route.
      */
     Route?: TransitGatewayRoute;
+  }
+  export interface CreateTransitGatewayRouteTableAnnouncementRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
+    /**
+     * The ID of the peering attachment.
+     */
+    PeeringAttachmentId: TransitGatewayAttachmentId;
+    /**
+     * The tags specifications applied to the transit gateway route table announcement.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayRouteTableAnnouncementResult {
+    /**
+     * Provides details about the transit gateway route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncement?: TransitGatewayRouteTableAnnouncement;
   }
   export interface CreateTransitGatewayRouteTableRequest {
     /**
@@ -10924,6 +11072,22 @@ declare namespace EC2 {
      */
     TransitGatewayPeeringAttachment?: TransitGatewayPeeringAttachment;
   }
+  export interface DeleteTransitGatewayPolicyTableRequest {
+    /**
+     * The transit gateway policy table to delete.
+     */
+    TransitGatewayPolicyTableId: TransitGatewayPolicyTableId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayPolicyTableResult {
+    /**
+     * Provides details about the deleted transit gateway policy table.
+     */
+    TransitGatewayPolicyTable?: TransitGatewayPolicyTable;
+  }
   export interface DeleteTransitGatewayPrefixListReferenceRequest {
     /**
      * The ID of the route table.
@@ -10979,6 +11143,22 @@ declare namespace EC2 {
      * Information about the route.
      */
     Route?: TransitGatewayRoute;
+  }
+  export interface DeleteTransitGatewayRouteTableAnnouncementRequest {
+    /**
+     * The transit gateway route table ID that's being deleted. 
+     */
+    TransitGatewayRouteTableAnnouncementId: TransitGatewayRouteTableAnnouncementId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayRouteTableAnnouncementResult {
+    /**
+     * Provides details about a deleted transit gateway route table.
+     */
+    TransitGatewayRouteTableAnnouncement?: TransitGatewayRouteTableAnnouncement;
   }
   export interface DeleteTransitGatewayRouteTableRequest {
     /**
@@ -14871,6 +15051,70 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeTransitGatewayPolicyTablesRequest {
+    /**
+     * The IDs of the transit gateway policy tables.
+     */
+    TransitGatewayPolicyTableIds?: TransitGatewayPolicyTableIdStringList;
+    /**
+     * The filters associated with the transit gateway policy table.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayPolicyTablesResult {
+    /**
+     * Describes the transit gateway policy tables.
+     */
+    TransitGatewayPolicyTables?: TransitGatewayPolicyTableList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTransitGatewayRouteTableAnnouncementsRequest {
+    /**
+     * The IDs of the transit gateway route tables that are being advertised.
+     */
+    TransitGatewayRouteTableAnnouncementIds?: TransitGatewayRouteTableAnnouncementIdStringList;
+    /**
+     * The filters associated with the transit gateway policy table.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeTransitGatewayRouteTableAnnouncementsResult {
+    /**
+     * Describes the transit gateway route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncements?: TransitGatewayRouteTableAnnouncementList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface DescribeTransitGatewayRouteTablesRequest {
     /**
      * The IDs of the transit gateway route tables.
@@ -15874,11 +16118,15 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The ID of the route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
   }
   export interface DisableTransitGatewayRouteTablePropagationResult {
     /**
@@ -16068,6 +16316,26 @@ declare namespace EC2 {
      */
     Associations?: TransitGatewayMulticastDomainAssociations;
   }
+  export interface DisassociateTransitGatewayPolicyTableRequest {
+    /**
+     * The ID of the disassociated policy table.
+     */
+    TransitGatewayPolicyTableId: TransitGatewayPolicyTableId;
+    /**
+     * The ID of the transit gateway attachment to disassociate from the policy table.
+     */
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisassociateTransitGatewayPolicyTableResult {
+    /**
+     * Returns details about the transit gateway policy table disassociation.
+     */
+    Association?: TransitGatewayPolicyTableAssociation;
+  }
   export interface DisassociateTransitGatewayRouteTableRequest {
     /**
      * The ID of the transit gateway route table.
@@ -16247,6 +16515,7 @@ declare namespace EC2 {
   export type DomainType = "vpc"|"standard"|string;
   export type Double = number;
   export type DoubleWithConstraints = number;
+  export type DynamicRoutingValue = "enable"|"disable"|string;
   export interface EbsBlockDevice {
     /**
      * Indicates whether the EBS volume is deleted on instance termination. For more information, see Preserving Amazon EBS volumes on instance termination in the Amazon EC2 User Guide.
@@ -16727,11 +16996,15 @@ declare namespace EC2 {
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The ID of the transit gateway route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
   }
   export interface EnableTransitGatewayRouteTablePropagationResult {
     /**
@@ -18783,6 +19056,66 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
+  }
+  export interface GetTransitGatewayPolicyTableAssociationsRequest {
+    /**
+     * The ID of the transit gateway policy table.
+     */
+    TransitGatewayPolicyTableId: TransitGatewayPolicyTableId;
+    /**
+     * The filters associated with the transit gateway policy table.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetTransitGatewayPolicyTableAssociationsResult {
+    /**
+     * Returns details about the transit gateway policy table association.
+     */
+    Associations?: TransitGatewayPolicyTableAssociationList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface GetTransitGatewayPolicyTableEntriesRequest {
+    /**
+     * The ID of the transit gateway policy table.
+     */
+    TransitGatewayPolicyTableId: TransitGatewayPolicyTableId;
+    /**
+     * The filters associated with the transit gateway policy table.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetTransitGatewayPolicyTableEntriesResult {
+    /**
+     * The entries for the transit gateway policy table.
+     */
+    TransitGatewayPolicyTableEntries?: TransitGatewayPolicyTableEntryList;
   }
   export interface GetTransitGatewayPrefixListReferencesRequest {
     /**
@@ -24657,6 +24990,10 @@ declare namespace EC2 {
      * The ID of the default propagation route table.
      */
     PropagationDefaultRouteTableId?: TransitGatewayRouteTableId;
+    /**
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+     */
+    AmazonSideAsn?: Long;
   }
   export interface ModifyTransitGatewayPrefixListReferenceRequest {
     /**
@@ -26255,6 +26592,7 @@ declare namespace EC2 {
      * The ID of the transit gateway.
      */
     TransitGatewayId?: String;
+    CoreNetworkId?: String;
     /**
      * The ID of the Amazon Web Services account that owns the transit gateway.
      */
@@ -28413,7 +28751,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -32203,6 +32541,10 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentId?: String;
     /**
+     * The ID of the accepter transit gateway attachment.
+     */
+    AccepterTransitGatewayAttachmentId?: String;
+    /**
      * Information about the requester transit gateway.
      */
     RequesterTgwInfo?: PeeringTgwInfo;
@@ -32210,6 +32552,7 @@ declare namespace EC2 {
      * Information about the accepter transit gateway.
      */
     AccepterTgwInfo?: PeeringTgwInfo;
+    Options?: TransitGatewayPeeringAttachmentOptions;
     /**
      * The status of the transit gateway peering attachment.
      */
@@ -32228,6 +32571,109 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type TransitGatewayPeeringAttachmentList = TransitGatewayPeeringAttachment[];
+  export interface TransitGatewayPeeringAttachmentOptions {
+    DynamicRouting?: DynamicRoutingValue;
+  }
+  export interface TransitGatewayPolicyRule {
+    /**
+     * The source CIDR block for the transit gateway policy rule.
+     */
+    SourceCidrBlock?: String;
+    /**
+     * The port range for the transit gateway policy rule. Currently this is set to * (all).
+     */
+    SourcePortRange?: String;
+    /**
+     * The destination CIDR block for the transit gateway policy rule.
+     */
+    DestinationCidrBlock?: String;
+    /**
+     * The port range for the transit gateway policy rule. Currently this is set to * (all).
+     */
+    DestinationPortRange?: String;
+    /**
+     * The protocol used by the transit gateway policy rule.
+     */
+    Protocol?: String;
+    /**
+     * The meta data tags used for the transit gateway policy rule.
+     */
+    MetaData?: TransitGatewayPolicyRuleMetaData;
+  }
+  export interface TransitGatewayPolicyRuleMetaData {
+    /**
+     * The key name for the transit gateway policy rule meta data tag.
+     */
+    MetaDataKey?: String;
+    /**
+     * The value of the key for the transit gateway policy rule meta data tag.
+     */
+    MetaDataValue?: String;
+  }
+  export interface TransitGatewayPolicyTable {
+    /**
+     * The ID of the transit gateway policy table.
+     */
+    TransitGatewayPolicyTableId?: TransitGatewayPolicyTableId;
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: TransitGatewayId;
+    /**
+     * The state of the transit gateway policy table
+     */
+    State?: TransitGatewayPolicyTableState;
+    /**
+     * The timestamp when the transit gateway policy table was created.
+     */
+    CreationTime?: DateTime;
+    /**
+     * he key-value pairs associated with the transit gateway policy table.
+     */
+    Tags?: TagList;
+  }
+  export interface TransitGatewayPolicyTableAssociation {
+    /**
+     * The ID of the transit gateway policy table.
+     */
+    TransitGatewayPolicyTableId?: TransitGatewayPolicyTableId;
+    /**
+     * The ID of the transit gateway attachment.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The resource ID of the transit gateway attachment.
+     */
+    ResourceId?: String;
+    /**
+     * The resource type for the transit gateway policy table association.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The state of the transit gateway policy table association.
+     */
+    State?: TransitGatewayAssociationState;
+  }
+  export type TransitGatewayPolicyTableAssociationList = TransitGatewayPolicyTableAssociation[];
+  export interface TransitGatewayPolicyTableEntry {
+    /**
+     * The rule number for the transit gateway policy table entry.
+     */
+    PolicyRuleNumber?: String;
+    /**
+     * The policy rule associated with the transit gateway policy table.
+     */
+    PolicyRule?: TransitGatewayPolicyRule;
+    /**
+     * The ID of the target route table.
+     */
+    TargetRouteTableId?: TransitGatewayRouteTableId;
+  }
+  export type TransitGatewayPolicyTableEntryList = TransitGatewayPolicyTableEntry[];
+  export type TransitGatewayPolicyTableId = string;
+  export type TransitGatewayPolicyTableIdStringList = TransitGatewayPolicyTableId[];
+  export type TransitGatewayPolicyTableList = TransitGatewayPolicyTable[];
+  export type TransitGatewayPolicyTableState = "pending"|"available"|"deleting"|"deleted"|string;
   export interface TransitGatewayPrefixListAttachment {
     /**
      * The ID of the attachment.
@@ -32291,6 +32737,10 @@ declare namespace EC2 {
      * The state.
      */
     State?: TransitGatewayPropagationState;
+    /**
+     * The ID of the transit gateway route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
   }
   export type TransitGatewayPropagationState = "enabling"|"enabled"|"disabling"|"disabled"|string;
   export interface TransitGatewayRequestOptions {
@@ -32336,6 +32786,7 @@ declare namespace EC2 {
      * The ID of the prefix list used for destination matches.
      */
     PrefixListId?: PrefixListResourceId;
+    TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
     /**
      * The attachments.
      */
@@ -32396,6 +32847,51 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export interface TransitGatewayRouteTableAnnouncement {
+    /**
+     * The ID of the transit gateway route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId?: TransitGatewayId;
+    CoreNetworkId?: String;
+    /**
+     * The ID of the peer transit gateway.
+     */
+    PeerTransitGatewayId?: TransitGatewayId;
+    PeerCoreNetworkId?: String;
+    /**
+     * The ID of the peering attachment.
+     */
+    PeeringAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The direction for the route table announcement.
+     */
+    AnnouncementDirection?: TransitGatewayRouteTableAnnouncementDirection;
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId?: TransitGatewayRouteTableId;
+    /**
+     * The state of the transit gateway announcement.
+     */
+    State?: TransitGatewayRouteTableAnnouncementState;
+    /**
+     * The timestamp when the transit gateway route table announcement was created.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The key-value pairs associated with the route table announcement.
+     */
+    Tags?: TagList;
+  }
+  export type TransitGatewayRouteTableAnnouncementDirection = "outgoing"|"incoming"|string;
+  export type TransitGatewayRouteTableAnnouncementId = string;
+  export type TransitGatewayRouteTableAnnouncementIdStringList = TransitGatewayRouteTableAnnouncementId[];
+  export type TransitGatewayRouteTableAnnouncementList = TransitGatewayRouteTableAnnouncement[];
+  export type TransitGatewayRouteTableAnnouncementState = "available"|"pending"|"failing"|"failed"|"deleting"|"deleted"|string;
   export interface TransitGatewayRouteTableAssociation {
     /**
      * The ID of the attachment.
@@ -32435,6 +32931,10 @@ declare namespace EC2 {
      * The state of the resource.
      */
     State?: TransitGatewayPropagationState;
+    /**
+     * The ID of the transit gateway route table announcement.
+     */
+    TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
   }
   export type TransitGatewayRouteTablePropagationList = TransitGatewayRouteTablePropagation[];
   export interface TransitGatewayRouteTableRoute {
