@@ -124,6 +124,22 @@ declare class NetworkManager extends Service {
    */
   createSiteToSiteVpnAttachment(callback?: (err: AWSError, data: NetworkManager.Types.CreateSiteToSiteVpnAttachmentResponse) => void): Request<NetworkManager.Types.CreateSiteToSiteVpnAttachmentResponse, AWSError>;
   /**
+   * Creates a transit gateway peering connection.
+   */
+  createTransitGatewayPeering(params: NetworkManager.Types.CreateTransitGatewayPeeringRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateTransitGatewayPeeringResponse) => void): Request<NetworkManager.Types.CreateTransitGatewayPeeringResponse, AWSError>;
+  /**
+   * Creates a transit gateway peering connection.
+   */
+  createTransitGatewayPeering(callback?: (err: AWSError, data: NetworkManager.Types.CreateTransitGatewayPeeringResponse) => void): Request<NetworkManager.Types.CreateTransitGatewayPeeringResponse, AWSError>;
+  /**
+   * Creates a transit gateway route table attachment.
+   */
+  createTransitGatewayRouteTableAttachment(params: NetworkManager.Types.CreateTransitGatewayRouteTableAttachmentRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateTransitGatewayRouteTableAttachmentResponse) => void): Request<NetworkManager.Types.CreateTransitGatewayRouteTableAttachmentResponse, AWSError>;
+  /**
+   * Creates a transit gateway route table attachment.
+   */
+  createTransitGatewayRouteTableAttachment(callback?: (err: AWSError, data: NetworkManager.Types.CreateTransitGatewayRouteTableAttachmentResponse) => void): Request<NetworkManager.Types.CreateTransitGatewayRouteTableAttachmentResponse, AWSError>;
+  /**
    * Creates a VPC attachment on an edge location of a core network.
    */
   createVpcAttachment(params: NetworkManager.Types.CreateVpcAttachmentRequest, callback?: (err: AWSError, data: NetworkManager.Types.CreateVpcAttachmentResponse) => void): Request<NetworkManager.Types.CreateVpcAttachmentResponse, AWSError>;
@@ -195,6 +211,14 @@ declare class NetworkManager extends Service {
    * Deletes an existing link. You must first disassociate the link from any devices and customer gateways.
    */
   deleteLink(callback?: (err: AWSError, data: NetworkManager.Types.DeleteLinkResponse) => void): Request<NetworkManager.Types.DeleteLinkResponse, AWSError>;
+  /**
+   * Deletes an existing peering connection.
+   */
+  deletePeering(params: NetworkManager.Types.DeletePeeringRequest, callback?: (err: AWSError, data: NetworkManager.Types.DeletePeeringResponse) => void): Request<NetworkManager.Types.DeletePeeringResponse, AWSError>;
+  /**
+   * Deletes an existing peering connection.
+   */
+  deletePeering(callback?: (err: AWSError, data: NetworkManager.Types.DeletePeeringResponse) => void): Request<NetworkManager.Types.DeletePeeringResponse, AWSError>;
   /**
    * Deletes a resource policy for the specified resource. This revokes the access of the principals specified in the resource policy.
    */
@@ -308,6 +332,14 @@ declare class NetworkManager extends Service {
    */
   getCoreNetwork(callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkResponse) => void): Request<NetworkManager.Types.GetCoreNetworkResponse, AWSError>;
   /**
+   * Returns information about a core network change event.
+   */
+  getCoreNetworkChangeEvents(params: NetworkManager.Types.GetCoreNetworkChangeEventsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkChangeEventsResponse) => void): Request<NetworkManager.Types.GetCoreNetworkChangeEventsResponse, AWSError>;
+  /**
+   * Returns information about a core network change event.
+   */
+  getCoreNetworkChangeEvents(callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkChangeEventsResponse) => void): Request<NetworkManager.Types.GetCoreNetworkChangeEventsResponse, AWSError>;
+  /**
    * Returns a change set between the LIVE core network policy and a submitted policy.
    */
   getCoreNetworkChangeSet(params: NetworkManager.Types.GetCoreNetworkChangeSetRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkChangeSetResponse) => void): Request<NetworkManager.Types.GetCoreNetworkChangeSetResponse, AWSError>;
@@ -316,11 +348,11 @@ declare class NetworkManager extends Service {
    */
   getCoreNetworkChangeSet(callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkChangeSetResponse) => void): Request<NetworkManager.Types.GetCoreNetworkChangeSetResponse, AWSError>;
   /**
-   * Gets details about a core network policy. You can get details about your current live policy or any previous policy version.
+   * Returns details about a core network policy. You can get details about your current live policy or any previous policy version.
    */
   getCoreNetworkPolicy(params: NetworkManager.Types.GetCoreNetworkPolicyRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkPolicyResponse) => void): Request<NetworkManager.Types.GetCoreNetworkPolicyResponse, AWSError>;
   /**
-   * Gets details about a core network policy. You can get details about your current live policy or any previous policy version.
+   * Returns details about a core network policy. You can get details about your current live policy or any previous policy version.
    */
   getCoreNetworkPolicy(callback?: (err: AWSError, data: NetworkManager.Types.GetCoreNetworkPolicyResponse) => void): Request<NetworkManager.Types.GetCoreNetworkPolicyResponse, AWSError>;
   /**
@@ -436,6 +468,14 @@ declare class NetworkManager extends Service {
    */
   getTransitGatewayConnectPeerAssociations(callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsResponse) => void): Request<NetworkManager.Types.GetTransitGatewayConnectPeerAssociationsResponse, AWSError>;
   /**
+   * Returns information about a transit gateway peer.
+   */
+  getTransitGatewayPeering(params: NetworkManager.Types.GetTransitGatewayPeeringRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayPeeringResponse) => void): Request<NetworkManager.Types.GetTransitGatewayPeeringResponse, AWSError>;
+  /**
+   * Returns information about a transit gateway peer.
+   */
+  getTransitGatewayPeering(callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayPeeringResponse) => void): Request<NetworkManager.Types.GetTransitGatewayPeeringResponse, AWSError>;
+  /**
    * Gets information about the transit gateway registrations in a specified global network.
    */
   getTransitGatewayRegistrations(params: NetworkManager.Types.GetTransitGatewayRegistrationsRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayRegistrationsResponse) => void): Request<NetworkManager.Types.GetTransitGatewayRegistrationsResponse, AWSError>;
@@ -443,6 +483,14 @@ declare class NetworkManager extends Service {
    * Gets information about the transit gateway registrations in a specified global network.
    */
   getTransitGatewayRegistrations(callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayRegistrationsResponse) => void): Request<NetworkManager.Types.GetTransitGatewayRegistrationsResponse, AWSError>;
+  /**
+   * Returns information about a transit gateway route table attachment.
+   */
+  getTransitGatewayRouteTableAttachment(params: NetworkManager.Types.GetTransitGatewayRouteTableAttachmentRequest, callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayRouteTableAttachmentResponse) => void): Request<NetworkManager.Types.GetTransitGatewayRouteTableAttachmentResponse, AWSError>;
+  /**
+   * Returns information about a transit gateway route table attachment.
+   */
+  getTransitGatewayRouteTableAttachment(callback?: (err: AWSError, data: NetworkManager.Types.GetTransitGatewayRouteTableAttachmentResponse) => void): Request<NetworkManager.Types.GetTransitGatewayRouteTableAttachmentResponse, AWSError>;
   /**
    * Returns information about a VPC attachment.
    */
@@ -484,13 +532,21 @@ declare class NetworkManager extends Service {
    */
   listCoreNetworks(callback?: (err: AWSError, data: NetworkManager.Types.ListCoreNetworksResponse) => void): Request<NetworkManager.Types.ListCoreNetworksResponse, AWSError>;
   /**
-   * 
+   * Gets the status of the Service Linked Role (SLR) deployment for the accounts in a given Amazon Web Services Organization.
    */
   listOrganizationServiceAccessStatus(params: NetworkManager.Types.ListOrganizationServiceAccessStatusRequest, callback?: (err: AWSError, data: NetworkManager.Types.ListOrganizationServiceAccessStatusResponse) => void): Request<NetworkManager.Types.ListOrganizationServiceAccessStatusResponse, AWSError>;
   /**
-   * 
+   * Gets the status of the Service Linked Role (SLR) deployment for the accounts in a given Amazon Web Services Organization.
    */
   listOrganizationServiceAccessStatus(callback?: (err: AWSError, data: NetworkManager.Types.ListOrganizationServiceAccessStatusResponse) => void): Request<NetworkManager.Types.ListOrganizationServiceAccessStatusResponse, AWSError>;
+  /**
+   * Lists the peerings for a core network.
+   */
+  listPeerings(params: NetworkManager.Types.ListPeeringsRequest, callback?: (err: AWSError, data: NetworkManager.Types.ListPeeringsResponse) => void): Request<NetworkManager.Types.ListPeeringsResponse, AWSError>;
+  /**
+   * Lists the peerings for a core network.
+   */
+  listPeerings(callback?: (err: AWSError, data: NetworkManager.Types.ListPeeringsResponse) => void): Request<NetworkManager.Types.ListPeeringsResponse, AWSError>;
   /**
    * Lists the tags for a specified resource.
    */
@@ -540,11 +596,11 @@ declare class NetworkManager extends Service {
    */
   restoreCoreNetworkPolicyVersion(callback?: (err: AWSError, data: NetworkManager.Types.RestoreCoreNetworkPolicyVersionResponse) => void): Request<NetworkManager.Types.RestoreCoreNetworkPolicyVersionResponse, AWSError>;
   /**
-   * 
+   * Enables for the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. 
    */
   startOrganizationServiceAccessUpdate(params: NetworkManager.Types.StartOrganizationServiceAccessUpdateRequest, callback?: (err: AWSError, data: NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse) => void): Request<NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse, AWSError>;
   /**
-   * 
+   * Enables for the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. 
    */
   startOrganizationServiceAccessUpdate(callback?: (err: AWSError, data: NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse) => void): Request<NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse, AWSError>;
   /**
@@ -662,7 +718,13 @@ declare namespace NetworkManager {
   }
   export type AccountId = string;
   export interface AccountStatus {
+    /**
+     * The ID of an account within the Amazon Web Services Organization.
+     */
     AccountId?: AccountId;
+    /**
+     * The status of SLR deployment for the account.
+     */
     SLRDeploymentStatus?: SLRDeploymentStatus;
   }
   export type AccountStatusList = AccountStatus[];
@@ -761,7 +823,7 @@ declare namespace NetworkManager {
   }
   export interface Attachment {
     /**
-     * A core network ID.
+     * The ID of a core network.
      */
     CoreNetworkId?: CoreNetworkId;
     /**
@@ -820,7 +882,7 @@ declare namespace NetworkManager {
   export type AttachmentId = string;
   export type AttachmentList = Attachment[];
   export type AttachmentState = "REJECTED"|"PENDING_ATTACHMENT_ACCEPTANCE"|"CREATING"|"FAILED"|"AVAILABLE"|"UPDATING"|"PENDING_NETWORK_UPDATE"|"PENDING_TAG_ACCEPTANCE"|"DELETING"|string;
-  export type AttachmentType = "CONNECT"|"SITE_TO_SITE_VPN"|"VPC"|string;
+  export type AttachmentType = "CONNECT"|"SITE_TO_SITE_VPN"|"VPC"|"TRANSIT_GATEWAY_ROUTE_TABLE"|string;
   export interface Bandwidth {
     /**
      * Upload speed in Mbps.
@@ -840,7 +902,8 @@ declare namespace NetworkManager {
   export type Boolean = boolean;
   export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
   export type ChangeSetState = "PENDING_GENERATION"|"FAILED_GENERATION"|"READY_TO_EXECUTE"|"EXECUTING"|"EXECUTION_SUCCEEDED"|"OUT_OF_DATE"|string;
-  export type ChangeType = "CORE_NETWORK_SEGMENT"|"CORE_NETWORK_EDGE"|"ATTACHMENT_MAPPING"|"ATTACHMENT_ROUTE_PROPAGATION"|"ATTACHMENT_ROUTE_STATIC"|string;
+  export type ChangeStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export type ChangeType = "CORE_NETWORK_SEGMENT"|"CORE_NETWORK_EDGE"|"ATTACHMENT_MAPPING"|"ATTACHMENT_ROUTE_PROPAGATION"|"ATTACHMENT_ROUTE_STATIC"|"CORE_NETWORK_CONFIGURATION"|"SEGMENTS_CONFIGURATION"|"SEGMENT_ACTIONS_CONFIGURATION"|"ATTACHMENT_POLICIES_CONFIGURATION"|string;
   export type ClientToken = string;
   export interface ConnectAttachment {
     /**
@@ -892,7 +955,7 @@ declare namespace NetworkManager {
      */
     Configuration?: ConnectPeerConfiguration;
     /**
-     * The tags associated with the Connect peer.
+     * The list of key-value tags associated with the Connect peer.
      */
     Tags?: TagList;
   }
@@ -990,7 +1053,7 @@ declare namespace NetworkManager {
      */
     CreatedAt?: DateTime;
     /**
-     * The tags associated with a Connect peer summary.
+     * The list of key-value tags associated with the Connect peer summary.
      */
     Tags?: TagList;
   }
@@ -1098,7 +1161,7 @@ declare namespace NetworkManager {
      */
     Edges?: CoreNetworkEdgeList;
     /**
-     * The tags associated with a core network.
+     * The list of key-value tags associated with a core network.
      */
     Tags?: TagList;
   }
@@ -1124,6 +1187,55 @@ declare namespace NetworkManager {
      * The new value for a core network
      */
     NewValues?: CoreNetworkChangeValues;
+    /**
+     * Uniquely identifies the path for a change within the changeset. For example, the IdentifierPath for a core network segment change might be "CORE_NETWORK_SEGMENT/us-east-1/devsegment".
+     */
+    IdentifierPath?: ConstrainedString;
+  }
+  export interface CoreNetworkChangeEvent {
+    /**
+     * Describes the type of change event. 
+     */
+    Type?: ChangeType;
+    /**
+     * The action taken for the change event.
+     */
+    Action?: ChangeAction;
+    /**
+     * Uniquely identifies the path for a change within the changeset. For example, the IdentifierPath for a core network segment change might be "CORE_NETWORK_SEGMENT/us-east-1/devsegment".
+     */
+    IdentifierPath?: ConstrainedString;
+    /**
+     * The timestamp for an event change in status.
+     */
+    EventTime?: DateTime;
+    /**
+     * The status of the core network change event.
+     */
+    Status?: ChangeStatus;
+    /**
+     * Details of the change event.
+     */
+    Values?: CoreNetworkChangeEventValues;
+  }
+  export type CoreNetworkChangeEventList = CoreNetworkChangeEvent[];
+  export interface CoreNetworkChangeEventValues {
+    /**
+     * The edge location for the core network change event.
+     */
+    EdgeLocation?: ExternalRegionCode;
+    /**
+     * The segment name if the change event is associated with a segment.
+     */
+    SegmentName?: ConstrainedString;
+    /**
+     * The ID of the attachment if the change event is associated with an attachment. 
+     */
+    AttachmentId?: AttachmentId;
+    /**
+     * For a STATIC_ROUTE event, this is the IP address.
+     */
+    Cidr?: ConstrainedString;
   }
   export type CoreNetworkChangeList = CoreNetworkChange[];
   export interface CoreNetworkChangeValues {
@@ -1591,6 +1703,54 @@ declare namespace NetworkManager {
      */
     SiteToSiteVpnAttachment?: SiteToSiteVpnAttachment;
   }
+  export interface CreateTransitGatewayPeeringRequest {
+    /**
+     * The ID of a core network.
+     */
+    CoreNetworkId: CoreNetworkId;
+    /**
+     * The ARN of the transit gateway for the peering request.
+     */
+    TransitGatewayArn: TransitGatewayArn;
+    /**
+     * The list of key-value tags associated with the request.
+     */
+    Tags?: TagList;
+    /**
+     * The client token associated with the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateTransitGatewayPeeringResponse {
+    /**
+     * Returns information about the transit gateway peering connection request.
+     */
+    TransitGatewayPeering?: TransitGatewayPeering;
+  }
+  export interface CreateTransitGatewayRouteTableAttachmentRequest {
+    /**
+     * The ID of the peer for the 
+     */
+    PeeringId: PeeringId;
+    /**
+     * The ARN of the transit gateway route table for the attachment request.
+     */
+    TransitGatewayRouteTableArn: TransitGatewayRouteTableArn;
+    /**
+     * The list of key-value tags associated with the request.
+     */
+    Tags?: TagList;
+    /**
+     * The client token associated with the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateTransitGatewayRouteTableAttachmentResponse {
+    /**
+     * The route table associated with the create transit gateway route table attachment request.
+     */
+    TransitGatewayRouteTableAttachment?: TransitGatewayRouteTableAttachment;
+  }
   export interface CreateVpcAttachmentRequest {
     /**
      * The ID of a core network for the VPC attachment.
@@ -1761,6 +1921,18 @@ declare namespace NetworkManager {
      * Information about the link.
      */
     Link?: Link;
+  }
+  export interface DeletePeeringRequest {
+    /**
+     * The ID of the peering connection to delete.
+     */
+    PeeringId: PeeringId;
+  }
+  export interface DeletePeeringResponse {
+    /**
+     * Information about a deleted peering connection.
+     */
+    Peering?: Peering;
   }
   export interface DeleteResourcePolicyRequest {
     /**
@@ -2056,6 +2228,34 @@ declare namespace NetworkManager {
     Connections?: ConnectionList;
     /**
      * The token to use for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetCoreNetworkChangeEventsRequest {
+    /**
+     * The ID of a core network.
+     */
+    CoreNetworkId: CoreNetworkId;
+    /**
+     * The ID of the policy version.
+     */
+    PolicyVersionId: Integer;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetCoreNetworkChangeEventsResponse {
+    /**
+     * The response to GetCoreNetworkChangeEventsRequest.
+     */
+    CoreNetworkChangeEvents?: CoreNetworkChangeEventList;
+    /**
+     * The token for the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -2583,6 +2783,18 @@ declare namespace NetworkManager {
      */
     NextToken?: NextToken;
   }
+  export interface GetTransitGatewayPeeringRequest {
+    /**
+     * The ID of the peering request.
+     */
+    PeeringId: PeeringId;
+  }
+  export interface GetTransitGatewayPeeringResponse {
+    /**
+     * Returns information about a transit gateway peering. 
+     */
+    TransitGatewayPeering?: TransitGatewayPeering;
+  }
   export interface GetTransitGatewayRegistrationsRequest {
     /**
      * The ID of the global network.
@@ -2610,6 +2822,18 @@ declare namespace NetworkManager {
      * The token for the next page of results.
      */
     NextToken?: NextToken;
+  }
+  export interface GetTransitGatewayRouteTableAttachmentRequest {
+    /**
+     * The ID of the transit gateway route table attachment.
+     */
+    AttachmentId: AttachmentId;
+  }
+  export interface GetTransitGatewayRouteTableAttachmentResponse {
+    /**
+     * Returns information about the transit gateway route table attachment.
+     */
+    TransitGatewayRouteTableAttachment?: TransitGatewayRouteTableAttachment;
   }
   export interface GetVpcAttachmentRequest {
     /**
@@ -2836,11 +3060,59 @@ declare namespace NetworkManager {
     NextToken?: NextToken;
   }
   export interface ListOrganizationServiceAccessStatusRequest {
+    /**
+     * The maximum number of results to return.
+     */
     MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
     NextToken?: NextToken;
   }
   export interface ListOrganizationServiceAccessStatusResponse {
+    /**
+     * Displays the status of an Amazon Web Services Organization.
+     */
     OrganizationStatus?: OrganizationStatus;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPeeringsRequest {
+    /**
+     * The ID of a core network.
+     */
+    CoreNetworkId?: CoreNetworkId;
+    /**
+     * Returns a list of a peering requests.
+     */
+    PeeringType?: PeeringType;
+    /**
+     * Returns a list edge locations for the 
+     */
+    EdgeLocation?: ExternalRegionCode;
+    /**
+     * Returns a list of the peering request states.
+     */
+    State?: PeeringState;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPeeringsResponse {
+    /**
+     * Lists the transit gateway peerings for the ListPeerings request.
+     */
+    Peerings?: PeeringList;
+    /**
+     * The token for the next page of results.
+     */
     NextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
@@ -2877,7 +3149,7 @@ declare namespace NetworkManager {
      */
     RegisteredGatewayArn?: ResourceArn;
     /**
-     * a core network ID.
+     * The ID of a core network.
      */
     CoreNetworkId?: CoreNetworkId;
     /**
@@ -3049,9 +3321,21 @@ declare namespace NetworkManager {
   export type OrganizationAwsServiceAccessStatus = string;
   export type OrganizationId = string;
   export interface OrganizationStatus {
+    /**
+     * The ID of an Amazon Web Services Organization.
+     */
     OrganizationId?: OrganizationId;
+    /**
+     * The status of the organization's AWS service access. This will be ENABLED or DISABLED.
+     */
     OrganizationAwsServiceAccessStatus?: OrganizationAwsServiceAccessStatus;
+    /**
+     * The status of the SLR deployment for the account. This will be either SUCCEEDED or IN_PROGRESS.
+     */
     SLRDeploymentStatus?: SLRDeploymentStatus;
+    /**
+     * The current service-linked role (SLR) deployment status for an Amazon Web Services Organization's accounts. This will be either SUCCEEDED or IN_PROGRESS.
+     */
     AccountStatusList?: AccountStatusList;
   }
   export interface PathComponent {
@@ -3069,9 +3353,55 @@ declare namespace NetworkManager {
     DestinationCidrBlock?: ConstrainedString;
   }
   export type PathComponentList = PathComponent[];
+  export interface Peering {
+    /**
+     * The ID of the core network for the peering request.
+     */
+    CoreNetworkId?: CoreNetworkId;
+    /**
+     * The ARN of a core network.
+     */
+    CoreNetworkArn?: CoreNetworkArn;
+    /**
+     * The ID of the peering attachment. 
+     */
+    PeeringId?: PeeringId;
+    /**
+     * The ID of the account owner.
+     */
+    OwnerAccountId?: AWSAccountId;
+    /**
+     * The type of peering. This will be TRANSIT_GATEWAY.
+     */
+    PeeringType?: PeeringType;
+    /**
+     * The current state of the peering connection. 
+     */
+    State?: PeeringState;
+    /**
+     * The edge location for the peer.
+     */
+    EdgeLocation?: ExternalRegionCode;
+    /**
+     * The resource ARN of the peer.
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     * The list of key-value tags associated with the peering.
+     */
+    Tags?: TagList;
+    /**
+     * The timestamp when the attachment peer was created.
+     */
+    CreatedAt?: DateTime;
+  }
+  export type PeeringId = string;
+  export type PeeringList = Peering[];
+  export type PeeringState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string;
+  export type PeeringType = "TRANSIT_GATEWAY"|string;
   export interface ProposedSegmentChange {
     /**
-     * The key-value tags that changed for the segment.
+     * The list of key-value tags that changed for the segment.
      */
     Tags?: TagList;
     /**
@@ -3347,9 +3677,15 @@ declare namespace NetworkManager {
     VpnConnectionArn?: VpnConnectionArn;
   }
   export interface StartOrganizationServiceAccessUpdateRequest {
+    /**
+     * The action to take for the update request. This can be either ENABLE or DISABLE.
+     */
     Action: Action;
   }
   export interface StartOrganizationServiceAccessUpdateResponse {
+    /**
+     * The status of the service access update request for an Amazon Web Services Organization.
+     */
     OrganizationStatus?: OrganizationStatus;
   }
   export interface StartRouteAnalysisRequest {
@@ -3438,6 +3774,16 @@ declare namespace NetworkManager {
   }
   export type TransitGatewayConnectPeerAssociationList = TransitGatewayConnectPeerAssociation[];
   export type TransitGatewayConnectPeerAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
+  export interface TransitGatewayPeering {
+    /**
+     * Describes a transit gateway peer connection.
+     */
+    Peering?: Peering;
+    /**
+     * The ARN of the transit gateway.
+     */
+    TransitGatewayArn?: TransitGatewayArn;
+  }
   export interface TransitGatewayRegistration {
     /**
      * The ID of the global network.
@@ -3465,6 +3811,17 @@ declare namespace NetworkManager {
     Message?: ConstrainedString;
   }
   export type TransitGatewayRouteTableArn = string;
+  export interface TransitGatewayRouteTableAttachment {
+    Attachment?: Attachment;
+    /**
+     * The ID of the peering attachment.
+     */
+    PeeringId?: PeeringId;
+    /**
+     * The ARN of the transit gateway attachment route table.
+     */
+    TransitGatewayRouteTableArn?: TransitGatewayRouteTableArn;
+  }
   export type TunnelProtocol = "GRE"|string;
   export interface UntagResourceRequest {
     /**

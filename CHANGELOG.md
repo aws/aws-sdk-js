@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1172.0-->
+<!--LATEST=2.1173.0-->
 <!--ENTRYINSERT-->
+
+## 2.1173.0
+* feature: NetworkManager: This release adds general availability API support for AWS Cloud WAN.
 
 ## 2.1172.0
 * feature: EC2: Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.
