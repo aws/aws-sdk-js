@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1173.0-->
+<!--LATEST=2.1174.0-->
 <!--ENTRYINSERT-->
+
+## 2.1174.0
+* bugfix: Dependency: Add node's Util module
+* feature: AppConfig: Adding Create, Get, Update, Delete, and List APIs for new two new resources: Extensions and ExtensionAssociations.
 
 ## 2.1173.0
 * feature: NetworkManager: This release adds general availability API support for AWS Cloud WAN.
