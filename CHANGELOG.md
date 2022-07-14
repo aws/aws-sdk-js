@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1174.0-->
+<!--LATEST=2.1175.0-->
 <!--ENTRYINSERT-->
+
+## 2.1175.0
+* feature: Athena: This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.
+* feature: CodeArtifact: This release introduces Package Origin Controls, a mechanism used to counteract Dependency Confusion attacks. Adds two new APIs, PutPackageOriginConfiguration and DescribePackage, and updates the ListPackage, DescribePackageVersion and ListPackageVersion APIs in support of the feature.
+* feature: ConfigService: Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types
+* feature: EC2: This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways.
+* feature: FMS: Adds support for strict ordering in stateful rule groups in Network Firewall policies.
+* feature: Glue: This release adds an additional worker type for Glue Streaming jobs.
+* feature: Inspector2: This release adds support for Inspector V2 scan configurations through the get and update configuration APIs. Currently this allows configuring ECR automated re-scan duration to lifetime or 180 days or 30 days.
+* feature: Kendra: This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.
+* feature: Nimble: Amazon Nimble Studio adds support for IAM-based access to AWS resources for Nimble Studio components and custom studio components. Studio Component scripts use these roles on Nimble Studio workstation to mount filesystems, access S3 buckets, or other configured resources in the Studio's AWS account
+* feature: Outposts: This release adds the ShipmentInformation and AssetInformationList fields to the GetOrder API response.
+* feature: SageMaker: This release adds support for G5, P4d, and C6i instance types in Amazon SageMaker Inference and increases the number of hyperparameters that can be searched from 20 to 30 in Amazon SageMaker Automatic Model Tuning
 
 ## 2.1174.0
 * bugfix: Dependency: Add node's Util module

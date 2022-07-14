@@ -253,11 +253,11 @@ declare class Nimble extends Service {
    */
   listStreamingImages(callback?: (err: AWSError, data: Nimble.Types.ListStreamingImagesResponse) => void): Request<Nimble.Types.ListStreamingImagesResponse, AWSError>;
   /**
-   * Lists the streaming image resources in a studio.
+   * Lists the streaming sessions in a studio.
    */
   listStreamingSessions(params: Nimble.Types.ListStreamingSessionsRequest, callback?: (err: AWSError, data: Nimble.Types.ListStreamingSessionsResponse) => void): Request<Nimble.Types.ListStreamingSessionsResponse, AWSError>;
   /**
-   * Lists the streaming image resources in a studio.
+   * Lists the streaming sessions in a studio.
    */
   listStreamingSessions(callback?: (err: AWSError, data: Nimble.Types.ListStreamingSessionsResponse) => void): Request<Nimble.Types.ListStreamingSessionsResponse, AWSError>;
   /**
@@ -545,7 +545,7 @@ declare namespace Nimble {
     /**
      * The endpoint of the ComputeFarm that is accessed by the studio component resource.
      */
-    endpoint?: SyntheticComputeFarmConfigurationString;
+    endpoint?: SensitiveString;
   }
   export interface CreateLaunchProfileRequest {
     /**
@@ -599,7 +599,7 @@ declare namespace Nimble {
     /**
      * A human-readable description of the streaming image.
      */
-    description?: SyntheticCreateStreamingImageRequestStreamingImageDescription;
+    description?: StreamingImageDescription;
     /**
      * The ID of an EC2 machine image with which to create this streaming image.
      */
@@ -607,7 +607,7 @@ declare namespace Nimble {
     /**
      * A friendly name for a streaming image resource.
      */
-    name: SyntheticCreateStreamingImageRequestStreamingImageName;
+    name: StreamingImageName;
     /**
      * The studio ID. 
      */
@@ -709,9 +709,17 @@ declare namespace Nimble {
      */
     name: StudioComponentName;
     /**
+     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     */
+    runtimeRoleArn?: RoleArn;
+    /**
      * Parameters for the studio component scripts.
      */
     scriptParameters?: StudioComponentScriptParameterKeyValueList;
+    /**
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     */
+    secureInitializationRoleArn?: RoleArn;
     /**
      * The studio ID. 
      */
@@ -739,7 +747,7 @@ declare namespace Nimble {
     /**
      * The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
      */
-    adminRoleArn: String;
+    adminRoleArn: RoleArn;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
@@ -747,7 +755,7 @@ declare namespace Nimble {
     /**
      * A friendly name for the studio.
      */
-    displayName: SyntheticCreateStudioRequestStudioDisplayName;
+    displayName: StudioDisplayName;
     /**
      * The studio encryption configuration.
      */
@@ -763,7 +771,7 @@ declare namespace Nimble {
     /**
      * The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
      */
-    userRoleArn: String;
+    userRoleArn: RoleArn;
   }
   export interface CreateStudioResponse {
     /**
@@ -1295,9 +1303,17 @@ declare namespace Nimble {
   }
   export interface LaunchProfileInitializationScript {
     /**
+     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     */
+    runtimeRoleArn?: RoleArn;
+    /**
      * The initialization script.
      */
     script?: StudioComponentInitializationScriptContent;
+    /**
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     */
+    secureInitializationRoleArn?: RoleArn;
     /**
      * The unique identifier for a studio component resource.
      */
@@ -1347,7 +1363,7 @@ declare namespace Nimble {
     /**
      * The endpoint of the license service that is accessed by the studio component resource.
      */
-    endpoint?: SyntheticLicenseServiceConfigurationString;
+    endpoint?: SensitiveString;
   }
   export type LinuxMountPoint = string;
   export interface ListEulaAcceptancesRequest {
@@ -1662,6 +1678,7 @@ declare namespace Nimble {
   export interface PutStudioMembersResponse {
   }
   export type Region = string;
+  export type RoleArn = string;
   export type ScriptParameterKey = string;
   export interface ScriptParameterKeyValue {
     /**
@@ -1675,11 +1692,12 @@ declare namespace Nimble {
   }
   export type ScriptParameterValue = string;
   export type SecurityGroupId = string;
+  export type SensitiveString = string;
   export interface SharedFileSystemConfiguration {
     /**
      * The endpoint of the shared file system that is accessed by the studio component resource.
      */
-    endpoint?: SyntheticSharedFileSystemConfigurationString;
+    endpoint?: SensitiveString;
     /**
      * The unique identifier for a file system.
      */
@@ -1691,7 +1709,7 @@ declare namespace Nimble {
     /**
      * The name of the file share.
      */
-    shareName?: SyntheticSharedFileSystemConfigurationString;
+    shareName?: SensitiveString;
     /**
      * The mount location for a shared file system on a Windows virtual workstation.
      */
@@ -1761,7 +1779,7 @@ declare namespace Nimble {
      */
     maxSessionLengthInMinutes?: StreamConfigurationMaxSessionLengthInMinutes;
     /**
-     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated by AWS (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped by AWS (instead of terminated).
+     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped (instead of terminated).
      */
     maxStoppedSessionLengthInMinutes?: StreamConfigurationMaxStoppedSessionLengthInMinutes;
     /**
@@ -1787,7 +1805,7 @@ declare namespace Nimble {
      */
     maxSessionLengthInMinutes?: StreamConfigurationMaxSessionLengthInMinutes;
     /**
-     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated by AWS (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped by AWS (instead of terminated).
+     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped (instead of terminated).
      */
     maxStoppedSessionLengthInMinutes?: StreamConfigurationMaxStoppedSessionLengthInMinutes;
     /**
@@ -1820,7 +1838,7 @@ declare namespace Nimble {
     /**
      * A human-readable description of the streaming image.
      */
-    description?: SyntheticStreamingImageStreamingImageDescription;
+    description?: StreamingImageDescription;
     /**
      * The ID of an EC2 machine image with which to create the streaming image.
      */
@@ -1836,7 +1854,7 @@ declare namespace Nimble {
     /**
      * A friendly name for a streaming image resource.
      */
-    name?: SyntheticStreamingImageStreamingImageName;
+    name?: StreamingImageName;
     /**
      * The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.
      */
@@ -1866,6 +1884,7 @@ declare namespace Nimble {
      */
     tags?: Tags;
   }
+  export type StreamingImageDescription = string;
   export interface StreamingImageEncryptionConfiguration {
     /**
      * The ARN for a KMS key that is used to encrypt studio data.
@@ -1881,6 +1900,7 @@ declare namespace Nimble {
   export type StreamingImageId = string;
   export type StreamingImageIdList = StreamingImageId[];
   export type StreamingImageList = StreamingImage[];
+  export type StreamingImageName = string;
   export type StreamingImageOwner = string;
   export type StreamingImagePlatform = string;
   export type StreamingImageState = "CREATE_IN_PROGRESS"|"READY"|"DELETE_IN_PROGRESS"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
@@ -2019,7 +2039,7 @@ declare namespace Nimble {
     /**
      * The URL to connect to this stream using the DCV client.
      */
-    url?: SyntheticStreamingSessionStreamString;
+    url?: SensitiveString;
   }
   export type StreamingSessionStreamExpirationInSeconds = number;
   export type StreamingSessionStreamState = "READY"|"CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
@@ -2030,7 +2050,7 @@ declare namespace Nimble {
     /**
      * The IAM role that studio admins assume when logging in to the Nimble Studio portal.
      */
-    adminRoleArn?: String;
+    adminRoleArn?: RoleArn;
     /**
      * The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
      */
@@ -2042,7 +2062,7 @@ declare namespace Nimble {
     /**
      * A friendly name for the studio.
      */
-    displayName?: SyntheticStudioStudioDisplayName;
+    displayName?: StudioDisplayName;
     /**
      * The Amazon Web Services Region where the studio resource is located.
      */
@@ -2090,7 +2110,7 @@ declare namespace Nimble {
     /**
      * The IAM role that studio users assume when logging in to the Nimble Studio portal.
      */
-    userRoleArn?: String;
+    userRoleArn?: RoleArn;
   }
   export interface StudioComponent {
     /**
@@ -2126,9 +2146,17 @@ declare namespace Nimble {
      */
     name?: StudioComponentName;
     /**
+     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     */
+    runtimeRoleArn?: RoleArn;
+    /**
      * Parameters for the studio component scripts.
      */
     scriptParameters?: StudioComponentScriptParameterKeyValueList;
+    /**
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     */
+    secureInitializationRoleArn?: RoleArn;
     /**
      * The current state.
      */
@@ -2256,6 +2284,7 @@ declare namespace Nimble {
   export type StudioComponentSummaryList = StudioComponentSummary[];
   export type StudioComponentType = "ACTIVE_DIRECTORY"|"SHARED_FILE_SYSTEM"|"COMPUTE_FARM"|"LICENSE_SERVICE"|"CUSTOM"|string;
   export type StudioComponentTypeList = StudioComponentType[];
+  export type StudioDisplayName = string;
   export interface StudioEncryptionConfiguration {
     /**
      * The ARN for a KMS key that is used to encrypt studio data.
@@ -2292,19 +2321,6 @@ declare namespace Nimble {
   export type StudioPersona = "ADMINISTRATOR"|string;
   export type StudioState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
   export type StudioStatusCode = "STUDIO_CREATED"|"STUDIO_DELETED"|"STUDIO_UPDATED"|"STUDIO_CREATE_IN_PROGRESS"|"STUDIO_UPDATE_IN_PROGRESS"|"STUDIO_DELETE_IN_PROGRESS"|"STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED"|"STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED"|"STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED"|"AWS_SSO_NOT_ENABLED"|"AWS_SSO_ACCESS_DENIED"|"ROLE_NOT_OWNED_BY_STUDIO_OWNER"|"ROLE_COULD_NOT_BE_ASSUMED"|"INTERNAL_ERROR"|"ENCRYPTION_KEY_NOT_FOUND"|"ENCRYPTION_KEY_ACCESS_DENIED"|"AWS_SSO_CONFIGURATION_REPAIRED"|"AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"|string;
-  export type SyntheticComputeFarmConfigurationString = string;
-  export type SyntheticCreateStreamingImageRequestStreamingImageDescription = string;
-  export type SyntheticCreateStreamingImageRequestStreamingImageName = string;
-  export type SyntheticCreateStudioRequestStudioDisplayName = string;
-  export type SyntheticLicenseServiceConfigurationString = string;
-  export type SyntheticSharedFileSystemConfigurationString = string;
-  export type SyntheticStreamingImageStreamingImageDescription = string;
-  export type SyntheticStreamingImageStreamingImageName = string;
-  export type SyntheticStreamingSessionStreamString = string;
-  export type SyntheticStudioStudioDisplayName = string;
-  export type SyntheticUpdateStreamingImageRequestStreamingImageDescription = string;
-  export type SyntheticUpdateStreamingImageRequestStreamingImageName = string;
-  export type SyntheticUpdateStudioRequestStudioDisplayName = string;
   export interface TagResourceRequest {
     /**
      *  The Amazon Resource Name (ARN) of the resource you want to add tags to. 
@@ -2407,11 +2423,11 @@ declare namespace Nimble {
     /**
      * The description.
      */
-    description?: SyntheticUpdateStreamingImageRequestStreamingImageDescription;
+    description?: StreamingImageDescription;
     /**
      * The name for the streaming image.
      */
-    name?: SyntheticUpdateStreamingImageRequestStreamingImageName;
+    name?: StreamingImageName;
     /**
      * The streaming image ID.
      */
@@ -2450,9 +2466,17 @@ declare namespace Nimble {
      */
     name?: StudioComponentName;
     /**
+     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     */
+    runtimeRoleArn?: RoleArn;
+    /**
      * Parameters for the studio component scripts.
      */
     scriptParameters?: StudioComponentScriptParameterKeyValueList;
+    /**
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     */
+    secureInitializationRoleArn?: RoleArn;
     /**
      * The studio component ID.
      */
@@ -2480,7 +2504,7 @@ declare namespace Nimble {
     /**
      * The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
      */
-    adminRoleArn?: String;
+    adminRoleArn?: RoleArn;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
@@ -2488,7 +2512,7 @@ declare namespace Nimble {
     /**
      * A friendly name for the studio.
      */
-    displayName?: SyntheticUpdateStudioRequestStudioDisplayName;
+    displayName?: StudioDisplayName;
     /**
      * The studio ID. 
      */
@@ -2496,7 +2520,7 @@ declare namespace Nimble {
     /**
      * The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
      */
-    userRoleArn?: String;
+    userRoleArn?: RoleArn;
   }
   export interface UpdateStudioResponse {
     /**

@@ -116,6 +116,14 @@ declare class Inspector2 extends Service {
    */
   enableDelegatedAdminAccount(callback?: (err: AWSError, data: Inspector2.Types.EnableDelegatedAdminAccountResponse) => void): Request<Inspector2.Types.EnableDelegatedAdminAccountResponse, AWSError>;
   /**
+   * Retrieves setting configurations for Inspector scans.
+   */
+  getConfiguration(params: Inspector2.Types.GetConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.GetConfigurationResponse) => void): Request<Inspector2.Types.GetConfigurationResponse, AWSError>;
+  /**
+   * Retrieves setting configurations for Inspector scans.
+   */
+  getConfiguration(callback?: (err: AWSError, data: Inspector2.Types.GetConfigurationResponse) => void): Request<Inspector2.Types.GetConfigurationResponse, AWSError>;
+  /**
    * Retrieves information about the Amazon Inspector delegated administrator for your organization.
    */
   getDelegatedAdminAccount(params: Inspector2.Types.GetDelegatedAdminAccountRequest, callback?: (err: AWSError, data: Inspector2.Types.GetDelegatedAdminAccountResponse) => void): Request<Inspector2.Types.GetDelegatedAdminAccountResponse, AWSError>;
@@ -235,6 +243,14 @@ declare class Inspector2 extends Service {
    * Removes tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: Inspector2.Types.UntagResourceResponse) => void): Request<Inspector2.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates setting configurations for your Amazon Inspector account. When you use this API as an Amazon Inspector delegated administrator this updates the setting for all accounts you manage. Member accounts in an organization cannot update this setting.
+   */
+  updateConfiguration(params: Inspector2.Types.UpdateConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateConfigurationResponse) => void): Request<Inspector2.Types.UpdateConfigurationResponse, AWSError>;
+  /**
+   * Updates setting configurations for your Amazon Inspector account. When you use this API as an Amazon Inspector delegated administrator this updates the setting for all accounts you manage. Member accounts in an organization cannot update this setting.
+   */
+  updateConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateConfigurationResponse) => void): Request<Inspector2.Types.UpdateConfigurationResponse, AWSError>;
   /**
    * Specifies the action that is to be applied to the findings that match the filter.
    */
@@ -671,7 +687,7 @@ declare namespace Inspector2 {
      */
     resourceId?: CoverageStringFilterList;
     /**
-     * An array of Amazon Web Services resource types to return coverage statistics for.
+     * An array of Amazon Web Services resource types to return coverage statistics for. The values can be AWS_EC2_INSTANCE or AWS_ECR_REPOSITORY.
      */
     resourceType?: CoverageStringFilterList;
     /**
@@ -761,6 +777,10 @@ declare namespace Inspector2 {
      * The name of the filter. Minimum length of 3. Maximum length of 64. Valid characters include alphanumeric characters, dot (.), underscore (_), and dash (-). Spaces are not allowed.
      */
     name: FilterName;
+    /**
+     * The reason for creating the filter.
+     */
+    reason?: FilterReason;
     /**
      * A list of tags for the filter.
      */
@@ -1039,6 +1059,18 @@ declare namespace Inspector2 {
     tags?: TagMap;
   }
   export type Ec2Platform = "WINDOWS"|"LINUX"|"UNKNOWN"|string;
+  export interface EcrConfiguration {
+    /**
+     * The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes inactive and all associated findings are scheduled for closure.
+     */
+    rescanDuration: EcrRescanDuration;
+  }
+  export interface EcrConfigurationState {
+    /**
+     * An object that contains details about the state of the ECR automated re-scan setting.
+     */
+    rescanDurationState?: EcrRescanDurationState;
+  }
   export interface EcrContainerImageMetadata {
     /**
      * Tags associated with the Amazon ECR image metadata.
@@ -1055,6 +1087,22 @@ declare namespace Inspector2 {
      */
     scanFrequency?: EcrScanFrequency;
   }
+  export type EcrRescanDuration = "LIFETIME"|"DAYS_30"|"DAYS_180"|string;
+  export interface EcrRescanDurationState {
+    /**
+     * The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes inactive and all associated findings are scheduled for closure.
+     */
+    rescanDuration?: EcrRescanDuration;
+    /**
+     * The status of changes to the ECR automated re-scan duration.
+     */
+    status?: EcrRescanDurationStatus;
+    /**
+     * A timestamp representing when the last time the ECR scan duration setting was changed.
+     */
+    updatedAt?: DateTimeTimestamp;
+  }
+  export type EcrRescanDurationStatus = "SUCCESS"|"PENDING"|"FAILED"|string;
   export type EcrScanFrequency = "MANUAL"|"SCAN_ON_PUSH"|"CONTINUOUS_SCAN"|string;
   export interface EnableDelegatedAdminAccountRequest {
     /**
@@ -1097,7 +1145,7 @@ declare namespace Inspector2 {
      */
     failedAccounts?: FailedAccountList;
   }
-  export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|string;
+  export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED"|string;
   export type ErrorMessage = string;
   export type ExternalReportStatus = "SUCCEEDED"|"IN_PROGRESS"|"CANCELLED"|"FAILED"|string;
   export interface FailedAccount {
@@ -1448,6 +1496,14 @@ declare namespace Inspector2 {
   export type FreeTrialInfoList = FreeTrialInfo[];
   export type FreeTrialStatus = "ACTIVE"|"INACTIVE"|string;
   export type FreeTrialType = "EC2"|"ECR"|string;
+  export interface GetConfigurationRequest {
+  }
+  export interface GetConfigurationResponse {
+    /**
+     * Specifies how the ECR automated re-scan duration is currently configured for your environment.
+     */
+    ecrConfiguration?: EcrConfigurationState;
+  }
   export interface GetDelegatedAdminAccountRequest {
   }
   export interface GetDelegatedAdminAccountResponse {
@@ -1949,7 +2005,7 @@ declare namespace Inspector2 {
     version?: StringFilter;
   }
   export type PackageFilterList = PackageFilter[];
-  export type PackageManager = "BUNDLER"|"CARGO"|"COMPOSER"|"NPM"|"NUGET"|"PIPENV"|"POETRY"|"YARN"|"GOBINARY"|"GOMOD"|"JAR"|"OS"|string;
+  export type PackageManager = "BUNDLER"|"CARGO"|"COMPOSER"|"NPM"|"NUGET"|"PIPENV"|"POETRY"|"YARN"|"GOBINARY"|"GOMOD"|"JAR"|"OS"|"PIP"|"PYTHONPKG"|"NODEPKG"|"POM"|string;
   export type PackageName = string;
   export type PackageRelease = string;
   export type PackageSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
@@ -2049,7 +2105,7 @@ declare namespace Inspector2 {
   }
   export type ReportFormat = "CSV"|"JSON"|string;
   export type ReportId = string;
-  export type ReportingErrorCode = "INTERNAL_ERROR"|"INVALID_PERMISSIONS"|string;
+  export type ReportingErrorCode = "INTERNAL_ERROR"|"INVALID_PERMISSIONS"|"NO_FINDINGS_FOUND"|"BUCKET_NOT_FOUND"|"INCOMPATIBLE_BUCKET_REGION"|"MALFORMED_KMS_KEY"|string;
   export interface RepositoryAggregation {
     /**
      * The names of repositories to aggregate findings on.
@@ -2168,7 +2224,7 @@ declare namespace Inspector2 {
     statusCode: ScanStatusCode;
   }
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
-  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|string;
+  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|string;
   export type ScanType = "NETWORK"|"PACKAGE"|string;
   export type Service = "EC2"|"ECR"|string;
   export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNTRIAGED"|string;
@@ -2314,6 +2370,14 @@ declare namespace Inspector2 {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateConfigurationRequest {
+    /**
+     * Specifies how the ECR automated re-scan will be updated for your environment.
+     */
+    ecrConfiguration: EcrConfiguration;
+  }
+  export interface UpdateConfigurationResponse {
+  }
   export interface UpdateFilterRequest {
     /**
      * Specifies the action that is to be applied to the findings that match the filter.
@@ -2335,6 +2399,10 @@ declare namespace Inspector2 {
      * The name of the filter.
      */
     name?: FilterName;
+    /**
+     * The reason the filter was updated.
+     */
+    reason?: FilterReason;
   }
   export interface UpdateFilterResponse {
     /**

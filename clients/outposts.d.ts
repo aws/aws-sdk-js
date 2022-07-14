@@ -621,7 +621,26 @@ declare namespace Outposts {
      * The status of the line item.
      */
     Status?: LineItemStatus;
+    /**
+     *  Information about a line item shipment. 
+     */
+    ShipmentInformation?: ShipmentInformation;
+    /**
+     *  Information about assets. 
+     */
+    AssetInformationList?: LineItemAssetInformationList;
   }
+  export interface LineItemAssetInformation {
+    /**
+     *  The ID of the asset. 
+     */
+    AssetId?: AssetId;
+    /**
+     *  MAC addresses of the asset. 
+     */
+    MacAddressList?: MacAddressList;
+  }
+  export type LineItemAssetInformationList = LineItemAssetInformation[];
   export type LineItemId = string;
   export type LineItemListDefinition = LineItem[];
   export type LineItemQuantity = number;
@@ -747,6 +766,8 @@ declare namespace Outposts {
      */
     Tags?: TagMap;
   }
+  export type MacAddress = string;
+  export type MacAddressList = MacAddress[];
   export type MaxResults1000 = number;
   export type MaxSize = string;
   export type MaximumSupportedWeightLbs = "NO_LIMIT"|"MAX_1400_LBS"|"MAX_1600_LBS"|"MAX_1800_LBS"|"MAX_2000_LBS"|string;
@@ -896,6 +917,17 @@ declare namespace Outposts {
     MaximumSupportedWeightLbs?: MaximumSupportedWeightLbs;
   }
   export type ServerEndpoint = string;
+  export type ShipmentCarrier = "DHL"|"DBS"|"FEDEX"|"UPS"|string;
+  export interface ShipmentInformation {
+    /**
+     *  The tracking number of the shipment. 
+     */
+    ShipmentTrackingNumber?: TrackingId;
+    /**
+     *  The carrier of the shipment. 
+     */
+    ShipmentCarrier?: ShipmentCarrier;
+  }
   export interface Site {
     SiteId?: SiteId;
     AccountId?: AccountId;
@@ -985,6 +1017,7 @@ declare namespace Outposts {
   }
   export type TagValue = string;
   export type Token = string;
+  export type TrackingId = string;
   export type UnderlayIpAddress = string;
   export interface UntagResourceRequest {
     /**

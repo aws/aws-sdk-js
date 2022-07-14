@@ -8068,7 +8068,7 @@ declare namespace EC2 {
     /**
      * The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.
      */
-    TrafficType: TrafficType;
+    TrafficType?: TrafficType;
     /**
      * The type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data to Amazon S3, specify s3. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName. Default: cloud-watch-logs 
      */
@@ -18028,7 +18028,7 @@ declare namespace EC2 {
   export type FlowLogResourceId = string;
   export type FlowLogResourceIds = FlowLogResourceId[];
   export type FlowLogSet = FlowLog[];
-  export type FlowLogsResourceType = "VPC"|"Subnet"|"NetworkInterface"|string;
+  export type FlowLogsResourceType = "VPC"|"Subnet"|"NetworkInterface"|"TransitGateway"|"TransitGatewayAttachment"|string;
   export type FpgaDeviceCount = number;
   export interface FpgaDeviceInfo {
     /**
