@@ -108,11 +108,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Creates a task. A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer. When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region. You can transfer data between commercial Amazon Web Services Regions except for China, or between Amazon Web Services GovCloud (US) Regions.  When you use DataSync to copy files or objects between Amazon Web Services Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see Data Transfer pricing.  
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options). When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of your locations must reside in the Region where you're using DataSync. For more information, see the following topics:    Working with DataSync locations     Configure DataSync task settings   
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Creates a task. A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer. When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region. You can transfer data between commercial Amazon Web Services Regions except for China, or between Amazon Web Services GovCloud (US) Regions.  When you use DataSync to copy files or objects between Amazon Web Services Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see Data Transfer pricing.  
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options). When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of your locations must reside in the Region where you're using DataSync. For more information, see the following topics:    Working with DataSync locations     Configure DataSync task settings   
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class DataSync extends Service {
    */
   listTaskExecutions(callback?: (err: AWSError, data: DataSync.Types.ListTaskExecutionsResponse) => void): Request<DataSync.Types.ListTaskExecutionsResponse, AWSError>;
   /**
-   * Returns a list of all the tasks.
+   * Returns a list of the DataSync tasks you created.
    */
   listTasks(params: DataSync.Types.ListTasksRequest, callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
-   * Returns a list of all the tasks.
+   * Returns a list of the DataSync tasks you created.
    */
   listTasks(callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
@@ -489,7 +489,7 @@ declare namespace DataSync {
   export interface CreateLocationFsxOntapRequest {
     Protocol: FsxProtocol;
     /**
-     * Specifies the security groups that DataSync can use to access your FSx for ONTAP file system. You must configure the security groups to allow outbound traffic on the following ports (depending on the protocol that you're using):    Network File System (NFS): TCP port 2049    Server Message Block (SMB): TCP port 445   Your file system's security groups must also allow inbound traffic on the same port.
+     * Specifies the Amazon EC2 security groups that provide access to your file system's preferred subnet. The security groups must allow outbound traffic on the following ports (depending on the protocol you use):    Network File System (NFS): TCP ports 111, 635, and 2049    Server Message Block (SMB): TCP port 445   Your file system's security groups must also allow inbound traffic on the same ports.
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
@@ -541,37 +541,37 @@ declare namespace DataSync {
   }
   export interface CreateLocationFsxWindowsRequest {
     /**
-     * A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows File Server file system is used to read data from the Amazon FSx for Windows File Server source location or write data to the FSx for Windows File Server destination.
+     * Specifies a mount path for your file system using forward slashes. This is where DataSync reads or writes data (depending on if this is a source or destination location).
      */
     Subdirectory?: FsxWindowsSubdirectory;
     /**
-     * The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
+     * Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
      */
     FsxFilesystemArn: FsxFilesystemArn;
     /**
-     * The ARNs of the security groups that are used to configure the FSx for Windows File Server file system.
+     * Specifies the ARNs of the security groups that provide access to your file system's preferred subnet.  If you choose a security group that doesn't allow connections from within itself, do one of the following:   Configure the security group to allow it to communicate within itself.   Choose a different security group that can communicate with the mount target's security group.   
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
-     * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
      */
     Tags?: InputTagList;
     /**
-     * The user who has the permissions to access files and folders in the FSx for Windows File Server file system. For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see user.
+     * Specifies the user who has the permissions to access files and folders in the file system. For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see user.
      */
     User: SmbUser;
     /**
-     * The name of the Windows domain that the FSx for Windows File Server belongs to.
+     * Specifies the name of the Windows domain that the FSx for Windows File Server belongs to.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who has the permissions to access files and folders in the FSx for Windows File Server file system.
+     * Specifies the password of the user who has the permissions to access files and folders in the file system.
      */
     Password: SmbPassword;
   }
   export interface CreateLocationFsxWindowsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location you created.
+     * The ARN of the FSx for Windows File Server file system location you created.
      */
     LocationArn?: LocationArn;
   }
@@ -1401,7 +1401,7 @@ declare namespace DataSync {
      */
     Password: SmbPassword;
     /**
-     * Specifies a user who has permission to access your SVM.
+     * Specifies a user name that can mount the location and access the files, folders, and metadata that you need in the SVM. If you provide a user in your Active Directory, note the following:   If you're using Directory Service for Microsoft Active Directory, the user must be a member of the Amazon Web Services Delegated FSx Administrators group.   If you're using a self-managed Active Directory, the user must be a member of either the Domain Admins group or a custom group that you specified for file system administration when you created your file system.   Make sure that the user has the permissions it needs to copy the data you want:    SE_TCB_NAME: Required to set object ownership and file metadata. With this privilege, you also can copy NTFS discretionary access lists (DACLs).    SE_SECURITY_NAME: May be needed to copy NTFS system access control lists (SACLs). This operation specifically requires the Windows privilege, which is granted to members of the Domain Admins group. If you configure your task to copy SACLs, make sure that the user has the required privileges. For information about copying SACLs, see Ownership and permissions-related options.  
      */
     User: SmbUser;
   }
@@ -1560,7 +1560,7 @@ declare namespace DataSync {
      */
     Values: FilterValues;
     /**
-     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see API filters for ListTasks and ListLocations.
+     * The operator that is used to compare filter values (for example, Equals or Contains).
      */
     Operator: Operator;
   }
@@ -1837,7 +1837,7 @@ declare namespace DataSync {
      */
     Values: FilterValues;
     /**
-     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see API filters for ListTasks and ListLocations.
+     * The operator that is used to compare filter values (for example, Equals or Contains).
      */
     Operator: Operator;
   }

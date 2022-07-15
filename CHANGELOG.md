@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1175.0-->
+<!--LATEST=2.1176.0-->
 <!--ENTRYINSERT-->
+
+## 2.1176.0
+* feature: Drs: Changed existing APIs to allow choosing a dynamic volume type for replicating volumes, to reduce costs for customers.
+* feature: Evidently: This release adds support for the new segmentation feature.
+* feature: WAFV2: This SDK release provide customers ability to add sensitivity level for WAF SQLI Match Statements.
 
 ## 2.1175.0
 * feature: Athena: This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.

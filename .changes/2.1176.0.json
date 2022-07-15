@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Drs",
+        "description": "Changed existing APIs to allow choosing a dynamic volume type for replicating volumes, to reduce costs for customers."
+    },
+    {
+        "type": "feature",
+        "category": "Evidently",
+        "description": "This release adds support for the new segmentation feature."
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "This SDK release provide customers ability to add sensitivity level for WAF SQLI Match Statements."
+    }
+]

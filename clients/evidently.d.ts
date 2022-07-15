@@ -20,11 +20,11 @@ declare class Evidently extends Service {
    */
   batchEvaluateFeature(callback?: (err: AWSError, data: Evidently.Types.BatchEvaluateFeatureResponse) => void): Request<Evidently.Types.BatchEvaluateFeatureResponse, AWSError>;
   /**
-   * Creates an Evidently experiment. Before you create an experiment, you must create the feature to use for the experiment. An experiment helps you make feature design decisions based on evidence and data. An experiment can test as many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides clear recommendations about which variations perform better. Don't use this operation to update an existing experiment. Instead, use UpdateExperiment. 
+   * Creates an Evidently experiment. Before you create an experiment, you must create the feature to use for the experiment. An experiment helps you make feature design decisions based on evidence and data. An experiment can test as many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides clear recommendations about which variations perform better. You can optionally specify a segment to have the experiment consider only certain audience types in the experiment, such as using only user sessions from a certain location or who use a certain internet browser. Don't use this operation to update an existing experiment. Instead, use UpdateExperiment. 
    */
   createExperiment(params: Evidently.Types.CreateExperimentRequest, callback?: (err: AWSError, data: Evidently.Types.CreateExperimentResponse) => void): Request<Evidently.Types.CreateExperimentResponse, AWSError>;
   /**
-   * Creates an Evidently experiment. Before you create an experiment, you must create the feature to use for the experiment. An experiment helps you make feature design decisions based on evidence and data. An experiment can test as many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides clear recommendations about which variations perform better. Don't use this operation to update an existing experiment. Instead, use UpdateExperiment. 
+   * Creates an Evidently experiment. Before you create an experiment, you must create the feature to use for the experiment. An experiment helps you make feature design decisions based on evidence and data. An experiment can test as many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides clear recommendations about which variations perform better. You can optionally specify a segment to have the experiment consider only certain audience types in the experiment, such as using only user sessions from a certain location or who use a certain internet browser. Don't use this operation to update an existing experiment. Instead, use UpdateExperiment. 
    */
   createExperiment(callback?: (err: AWSError, data: Evidently.Types.CreateExperimentResponse) => void): Request<Evidently.Types.CreateExperimentResponse, AWSError>;
   /**
@@ -51,6 +51,14 @@ declare class Evidently extends Service {
    * Creates a project, which is the logical object in Evidently that can contain features, launches, and experiments. Use projects to group similar features together. To update an existing project, use UpdateProject.
    */
   createProject(callback?: (err: AWSError, data: Evidently.Types.CreateProjectResponse) => void): Request<Evidently.Types.CreateProjectResponse, AWSError>;
+  /**
+   * Use this operation to define a segment of your audience. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age. Using a segment in an experiment limits that experiment to evaluate only the users who match the segment criteria. Using one or more segments in a launch allow you to define different traffic splits for the different audience segments.  &lt;p&gt;For more information about segment pattern syntax, see &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html&quot;&gt; Segment rule pattern syntax&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;The pattern that you define for a segment is matched against the value of &lt;code&gt;evaluationContext&lt;/code&gt;, which is passed into Evidently in the &lt;a href=&quot;https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html&quot;&gt;EvaluateFeature&lt;/a&gt; operation, when Evidently assigns a feature variation to a user.&lt;/p&gt; 
+   */
+  createSegment(params: Evidently.Types.CreateSegmentRequest, callback?: (err: AWSError, data: Evidently.Types.CreateSegmentResponse) => void): Request<Evidently.Types.CreateSegmentResponse, AWSError>;
+  /**
+   * Use this operation to define a segment of your audience. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age. Using a segment in an experiment limits that experiment to evaluate only the users who match the segment criteria. Using one or more segments in a launch allow you to define different traffic splits for the different audience segments.  &lt;p&gt;For more information about segment pattern syntax, see &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html&quot;&gt; Segment rule pattern syntax&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;The pattern that you define for a segment is matched against the value of &lt;code&gt;evaluationContext&lt;/code&gt;, which is passed into Evidently in the &lt;a href=&quot;https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html&quot;&gt;EvaluateFeature&lt;/a&gt; operation, when Evidently assigns a feature variation to a user.&lt;/p&gt; 
+   */
+  createSegment(callback?: (err: AWSError, data: Evidently.Types.CreateSegmentResponse) => void): Request<Evidently.Types.CreateSegmentResponse, AWSError>;
   /**
    * Deletes an Evidently experiment. The feature used for the experiment is not deleted. To stop an experiment without deleting it, use StopExperiment. 
    */
@@ -84,11 +92,19 @@ declare class Evidently extends Service {
    */
   deleteProject(callback?: (err: AWSError, data: Evidently.Types.DeleteProjectResponse) => void): Request<Evidently.Types.DeleteProjectResponse, AWSError>;
   /**
-   * This operation assigns a feature variation to one given user session. You pass in an entityID that represents the user. Evidently then checks the evaluation rules and assigns the variation. The first rules that are evaluated are the override rules. If the user's entityID matches an override rule, the user is served the variation specified by that rule. Next, if there is a launch of the feature, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch. If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment. If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment.  If the user is not assigned to a launch or experiment, they are served the default variation.
+   * Deletes a segment. You can't delete a segment that is being used in a launch or experiment, even if that launch or experiment is not currently running.
+   */
+  deleteSegment(params: Evidently.Types.DeleteSegmentRequest, callback?: (err: AWSError, data: Evidently.Types.DeleteSegmentResponse) => void): Request<Evidently.Types.DeleteSegmentResponse, AWSError>;
+  /**
+   * Deletes a segment. You can't delete a segment that is being used in a launch or experiment, even if that launch or experiment is not currently running.
+   */
+  deleteSegment(callback?: (err: AWSError, data: Evidently.Types.DeleteSegmentResponse) => void): Request<Evidently.Types.DeleteSegmentResponse, AWSError>;
+  /**
+   * This operation assigns a feature variation to one given user session. You pass in an entityID that represents the user. Evidently then checks the evaluation rules and assigns the variation. The first rules that are evaluated are the override rules. If the user's entityID matches an override rule, the user is served the variation specified by that rule.  &lt;p&gt;If there is a current launch with this feature that uses segment overrides, and if the user session's &lt;code&gt;evaluationContext&lt;/code&gt; matches a segment rule defined in a segment override, the configuration in the segment overrides is used. For more information about segments, see &lt;a href=&quot;https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html&quot;&gt;CreateSegment&lt;/a&gt; and &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html&quot;&gt;Use segments to focus your audience&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;If there is a launch with no segment overrides, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch.&lt;/p&gt; &lt;p&gt;If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment.&lt;/p&gt; &lt;p&gt;If the experiment uses a segment, then only user sessions with &lt;code&gt;evaluationContext&lt;/code&gt; values that match the segment rule are used in the experiment.&lt;/p&gt; &lt;p&gt;If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment. &lt;/p&gt; &lt;p&gt;If the user is not assigned to a launch or experiment, they are served the default variation.&lt;/p&gt; 
    */
   evaluateFeature(params: Evidently.Types.EvaluateFeatureRequest, callback?: (err: AWSError, data: Evidently.Types.EvaluateFeatureResponse) => void): Request<Evidently.Types.EvaluateFeatureResponse, AWSError>;
   /**
-   * This operation assigns a feature variation to one given user session. You pass in an entityID that represents the user. Evidently then checks the evaluation rules and assigns the variation. The first rules that are evaluated are the override rules. If the user's entityID matches an override rule, the user is served the variation specified by that rule. Next, if there is a launch of the feature, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch. If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment. If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment.  If the user is not assigned to a launch or experiment, they are served the default variation.
+   * This operation assigns a feature variation to one given user session. You pass in an entityID that represents the user. Evidently then checks the evaluation rules and assigns the variation. The first rules that are evaluated are the override rules. If the user's entityID matches an override rule, the user is served the variation specified by that rule.  &lt;p&gt;If there is a current launch with this feature that uses segment overrides, and if the user session's &lt;code&gt;evaluationContext&lt;/code&gt; matches a segment rule defined in a segment override, the configuration in the segment overrides is used. For more information about segments, see &lt;a href=&quot;https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html&quot;&gt;CreateSegment&lt;/a&gt; and &lt;a href=&quot;https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html&quot;&gt;Use segments to focus your audience&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;If there is a launch with no segment overrides, the user might be assigned to a variation in the launch. The chance of this depends on the percentage of users that are allocated to that launch. If the user is enrolled in the launch, the variation they are served depends on the allocation of the various feature variations used for the launch.&lt;/p&gt; &lt;p&gt;If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might be assigned to a variation in the experiment. The chance of this depends on the percentage of users that are allocated to that experiment.&lt;/p&gt; &lt;p&gt;If the experiment uses a segment, then only user sessions with &lt;code&gt;evaluationContext&lt;/code&gt; values that match the segment rule are used in the experiment.&lt;/p&gt; &lt;p&gt;If the user is enrolled in the experiment, the variation they are served depends on the allocation of the various feature variations used for the experiment. &lt;/p&gt; &lt;p&gt;If the user is not assigned to a launch or experiment, they are served the default variation.&lt;/p&gt; 
    */
   evaluateFeature(callback?: (err: AWSError, data: Evidently.Types.EvaluateFeatureResponse) => void): Request<Evidently.Types.EvaluateFeatureResponse, AWSError>;
   /**
@@ -132,6 +148,14 @@ declare class Evidently extends Service {
    */
   getProject(callback?: (err: AWSError, data: Evidently.Types.GetProjectResponse) => void): Request<Evidently.Types.GetProjectResponse, AWSError>;
   /**
+   * Returns information about the specified segment. Specify the segment you want to view by specifying its ARN.
+   */
+  getSegment(params: Evidently.Types.GetSegmentRequest, callback?: (err: AWSError, data: Evidently.Types.GetSegmentResponse) => void): Request<Evidently.Types.GetSegmentResponse, AWSError>;
+  /**
+   * Returns information about the specified segment. Specify the segment you want to view by specifying its ARN.
+   */
+  getSegment(callback?: (err: AWSError, data: Evidently.Types.GetSegmentResponse) => void): Request<Evidently.Types.GetSegmentResponse, AWSError>;
+  /**
    * Returns configuration details about all the experiments in the specified project.
    */
   listExperiments(params: Evidently.Types.ListExperimentsRequest, callback?: (err: AWSError, data: Evidently.Types.ListExperimentsResponse) => void): Request<Evidently.Types.ListExperimentsResponse, AWSError>;
@@ -163,6 +187,22 @@ declare class Evidently extends Service {
    * Returns configuration details about all the projects in the current Region in your account.
    */
   listProjects(callback?: (err: AWSError, data: Evidently.Types.ListProjectsResponse) => void): Request<Evidently.Types.ListProjectsResponse, AWSError>;
+  /**
+   * Use this operation to find which experiments or launches are using a specified segment.
+   */
+  listSegmentReferences(params: Evidently.Types.ListSegmentReferencesRequest, callback?: (err: AWSError, data: Evidently.Types.ListSegmentReferencesResponse) => void): Request<Evidently.Types.ListSegmentReferencesResponse, AWSError>;
+  /**
+   * Use this operation to find which experiments or launches are using a specified segment.
+   */
+  listSegmentReferences(callback?: (err: AWSError, data: Evidently.Types.ListSegmentReferencesResponse) => void): Request<Evidently.Types.ListSegmentReferencesResponse, AWSError>;
+  /**
+   * Returns a list of audience segments that you have created in your account in this Region.
+   */
+  listSegments(params: Evidently.Types.ListSegmentsRequest, callback?: (err: AWSError, data: Evidently.Types.ListSegmentsResponse) => void): Request<Evidently.Types.ListSegmentsResponse, AWSError>;
+  /**
+   * Returns a list of audience segments that you have created in your account in this Region.
+   */
+  listSegments(callback?: (err: AWSError, data: Evidently.Types.ListSegmentsResponse) => void): Request<Evidently.Types.ListSegmentsResponse, AWSError>;
   /**
    * Displays the tags associated with an Evidently resource.
    */
@@ -219,6 +259,14 @@ declare class Evidently extends Service {
    * Assigns one or more tags (key-value pairs) to the specified CloudWatch Evidently resource. Projects, features, launches, and experiments can be tagged. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. For more information, see Tagging Amazon Web Services resources.
    */
   tagResource(callback?: (err: AWSError, data: Evidently.Types.TagResourceResponse) => void): Request<Evidently.Types.TagResourceResponse, AWSError>;
+  /**
+   * Use this operation to test a rules pattern that you plan to use to create an audience segment. For more information about segments, see CreateSegment.
+   */
+  testSegmentPattern(params: Evidently.Types.TestSegmentPatternRequest, callback?: (err: AWSError, data: Evidently.Types.TestSegmentPatternResponse) => void): Request<Evidently.Types.TestSegmentPatternResponse, AWSError>;
+  /**
+   * Use this operation to test a rules pattern that you plan to use to create an audience segment. For more information about segments, see CreateSegment.
+   */
+  testSegmentPattern(callback?: (err: AWSError, data: Evidently.Types.TestSegmentPatternResponse) => void): Request<Evidently.Types.TestSegmentPatternResponse, AWSError>;
   /**
    * Removes one or more tags from the specified resource.
    */
@@ -330,6 +378,10 @@ declare namespace Evidently {
      */
     samplingRate?: SplitWeight;
     /**
+     * Specifies an audience segment to use in the experiment. When a segment is used in an experiment, only user sessions that match the segment pattern are used in the experiment.
+     */
+    segment?: SegmentRef;
+    /**
      * Assigns one or more tags (key-value pairs) to the experiment. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.  &lt;p&gt;You can associate as many as 50 tags with an experiment.&lt;/p&gt; &lt;p&gt;For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html&quot;&gt;Tagging Amazon Web Services resources&lt;/a&gt;.&lt;/p&gt; 
      */
     tags?: TagMap;
@@ -406,7 +458,7 @@ declare namespace Evidently {
      */
     project: ProjectRef;
     /**
-     * When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and randomizationSalt. If you omit randomizationSalt, Evidently uses the launch name as the randomizationsSalt.
+     * When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served. This randomization ID is a combination of the entity ID and randomizationSalt. If you omit randomizationSalt, Evidently uses the launch name as the randomizationSalt.
      */
     randomizationSalt?: RandomizationSalt;
     /**
@@ -447,6 +499,30 @@ declare namespace Evidently {
      * A structure that contains information about the created project.
      */
     project: Project;
+  }
+  export interface CreateSegmentRequest {
+    /**
+     * An optional description for this segment.
+     */
+    description?: Description;
+    /**
+     * A name for the segment.
+     */
+    name: SegmentName;
+    /**
+     * The pattern to use for the segment. For more information about pattern syntax, see  Segment rule pattern syntax.
+     */
+    pattern: SegmentPattern;
+    /**
+     * Assigns one or more tags (key-value pairs) to the segment. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.  &lt;p&gt;You can associate as many as 50 tags with a segment.&lt;/p&gt; &lt;p&gt;For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html&quot;&gt;Tagging Amazon Web Services resources&lt;/a&gt;.&lt;/p&gt; 
+     */
+    tags?: TagMap;
+  }
+  export interface CreateSegmentResponse {
+    /**
+     * A structure that contains the complete information about the segment that was just created.
+     */
+    segment: Segment;
   }
   export type CwDimensionSafeName = string;
   export type CwLogGroupSafeName = string;
@@ -494,6 +570,14 @@ declare namespace Evidently {
   }
   export interface DeleteProjectResponse {
   }
+  export interface DeleteSegmentRequest {
+    /**
+     * Specifies the segment to delete.
+     */
+    segment: SegmentRef;
+  }
+  export interface DeleteSegmentResponse {
+  }
   export type Description = string;
   export type Double = number;
   export type DoubleValueList = Double[];
@@ -507,7 +591,7 @@ declare namespace Evidently {
      */
     entityId: EntityId;
     /**
-     * A JSON block of attributes that you can optionally pass in. This JSON block is included in the evaluation events sent to Evidently from the user session. 
+     * A JSON object of attributes that you can optionally pass in as part of the evaluation event sent to Evidently from the user session. Evidently can use this value to match user sessions with defined audience segments. For more information, see Use segments to focus your audience.  &lt;p&gt;If you include this parameter, the value must be a JSON object. A JSON array is not supported.&lt;/p&gt; 
      */
     evaluationContext?: JsonValue;
     /**
@@ -659,6 +743,10 @@ declare namespace Evidently {
      * A structure that contains the time and date that Evidently completed the analysis of the experiment.
      */
     schedule?: ExperimentSchedule;
+    /**
+     * The audience segment being used for the experiment, if a segment is being used.
+     */
+    segment?: SegmentArn;
     /**
      * The current state of the experiment.
      */
@@ -972,6 +1060,18 @@ declare namespace Evidently {
      */
     project: Project;
   }
+  export interface GetSegmentRequest {
+    /**
+     * The ARN of the segment to return information for.
+     */
+    segment: SegmentRef;
+  }
+  export interface GetSegmentResponse {
+    /**
+     * A structure that contains the complete information about the segment.
+     */
+    segment: Segment;
+  }
   export type GroupName = string;
   export type GroupToWeightMap = {[key: string]: SplitWeight};
   export type Integer = number;
@@ -1189,6 +1289,54 @@ declare namespace Evidently {
      */
     projects?: ProjectSummariesList;
   }
+  export interface ListSegmentReferencesRequest {
+    /**
+     * The maximum number of results to include in the response. If you omit this, the default of 50 is used.
+     */
+    maxResults?: MaxReferences;
+    /**
+     * The token to use when requesting the next set of results. You received this token from a previous ListSegmentReferences operation.
+     */
+    nextToken?: NextToken;
+    /**
+     * The ARN of the segment that you want to view information for.
+     */
+    segment: SegmentRef;
+    /**
+     * Specifies whether to return information about launches or experiments that use this segment.
+     */
+    type: SegmentReferenceResourceType;
+  }
+  export interface ListSegmentReferencesResponse {
+    /**
+     * The token to use in a subsequent ListSegmentReferences operation to return the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * An array of structures, where each structure contains information about one experiment or launch that uses this segment. 
+     */
+    referencedBy?: RefResourceList;
+  }
+  export interface ListSegmentsRequest {
+    /**
+     * The maximum number of results to include in the response. If you omit this, the default of 50 is used.
+     */
+    maxResults?: MaxSegments;
+    /**
+     * The token to use when requesting the next set of results. You received this token from a previous ListSegments operation.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSegmentsResponse {
+    /**
+     * The token to use in a subsequent ListSegments operation to return the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * An array of structures that contain information about the segments in this Region.
+     */
+    segments?: SegmentList;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource that you want to see the tags of.
@@ -1206,6 +1354,8 @@ declare namespace Evidently {
   export type MaxFeatures = number;
   export type MaxLaunches = number;
   export type MaxProjects = number;
+  export type MaxReferences = number;
+  export type MaxSegments = number;
   export interface MetricDefinition {
     /**
      * The entity, such as a user or session, that does an action that causes a metric value to be recorded.
@@ -1310,6 +1460,7 @@ declare namespace Evidently {
      */
     treatmentWeights?: TreatmentToWeightMap;
   }
+  export type PrimitiveBoolean = boolean;
   export interface Project {
     /**
      * The number of ongoing experiments currently in the project.
@@ -1475,6 +1626,37 @@ declare namespace Evidently {
   }
   export type PutProjectEventsResultEntryList = PutProjectEventsResultEntry[];
   export type RandomizationSalt = string;
+  export interface RefResource {
+    /**
+     * The ARN of the experiment or launch.
+     */
+    arn?: String;
+    /**
+     * The day and time that this experiment or launch ended.
+     */
+    endTime?: String;
+    /**
+     * The day and time that this experiment or launch was most recently updated.
+     */
+    lastUpdatedOn?: String;
+    /**
+     * The name of the experiment or launch.
+     */
+    name: String;
+    /**
+     * The day and time that this experiment or launch started.
+     */
+    startTime?: String;
+    /**
+     * The status of the experiment or launch.
+     */
+    status?: String;
+    /**
+     * Specifies whether the resource that this structure contains information about is an experiment or a launch.
+     */
+    type: String;
+  }
+  export type RefResourceList = RefResource[];
   export type ResultsPeriod = number;
   export type RuleName = string;
   export type RuleType = string;
@@ -1502,9 +1684,13 @@ declare namespace Evidently {
   export type S3PrefixSafeName = string;
   export interface ScheduledSplit {
     /**
-     * The traffic allocation percentages among the feature variations during one step of a launch. This is a set of key-value pairs. The keys are variation names. The values represent the percentage of traffic to allocate to that variation during this step.
+     * The traffic allocation percentages among the feature variations during one step of a launch. This is a set of key-value pairs. The keys are variation names. The values represent the percentage of traffic to allocate to that variation during this step. The values is expressed in thousandths of a percent, so assigning a weight of 50000 assigns 50% of traffic to that variation. If the sum of the weights for all the variations in a segment override does not add up to 100,000, then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves on to the next segment override or the default traffic split.
      */
     groupWeights?: GroupToWeightMap;
+    /**
+     * Use this parameter to specify different traffic splits for one or more audience segments. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age. This parameter is an array of up to six segment override objects. Each of these objects specifies a segment that you have already created, and defines the traffic split for that segment.
+     */
+    segmentOverrides?: SegmentOverridesList;
     /**
      * The date and time that this step of the launch starts.
      */
@@ -1512,9 +1698,13 @@ declare namespace Evidently {
   }
   export interface ScheduledSplitConfig {
     /**
-     * The traffic allocation percentages among the feature variations during one step of a launch. This is a set of key-value pairs. The keys are variation names. The values represent the percentage of traffic to allocate to that variation during this step.
+     * The traffic allocation percentages among the feature variations during one step of a launch. This is a set of key-value pairs. The keys are variation names. The values represent the percentage of traffic to allocate to that variation during this step.  &lt;p&gt;The values is expressed in thousandths of a percent, so assigning a weight of 50000 assigns 50% of traffic to that variation.&lt;/p&gt; &lt;p&gt;If the sum of the weights for all the variations in a segment override does not add up to 100,000, then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves on to the next segment override or the default traffic split.&lt;/p&gt; 
      */
     groupWeights: GroupToWeightMap;
+    /**
+     * Use this parameter to specify different traffic splits for one or more audience segments. A segment is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects, such as age. This parameter is an array of up to six segment override objects. Each of these objects specifies a segment that you have already created, and defines the traffic split for that segment.
+     */
+    segmentOverrides?: SegmentOverridesList;
     /**
      * The date and time that this step of the launch starts.
      */
@@ -1534,6 +1724,65 @@ declare namespace Evidently {
     steps?: ScheduledStepList;
   }
   export type ScheduledStepList = ScheduledSplit[];
+  export interface Segment {
+    /**
+     * The ARN of the segment.
+     */
+    arn: SegmentArn;
+    /**
+     * The date and time that this segment was created.
+     */
+    createdTime: Timestamp;
+    /**
+     * The customer-created description for this segment.
+     */
+    description?: Description;
+    /**
+     * The number of experiments that this segment is used in. This count includes all current experiments, not just those that are currently running.
+     */
+    experimentCount?: Long;
+    /**
+     * The date and time that this segment was most recently updated.
+     */
+    lastUpdatedTime: Timestamp;
+    /**
+     * The number of launches that this segment is used in. This count includes all current launches, not just those that are currently running.
+     */
+    launchCount?: Long;
+    /**
+     * The name of the segment.
+     */
+    name: SegmentName;
+    /**
+     * 
+     */
+    pattern: SegmentPattern;
+    /**
+     * The list of tag keys and values associated with this launch.
+     */
+    tags?: TagMap;
+  }
+  export type SegmentArn = string;
+  export type SegmentList = Segment[];
+  export type SegmentName = string;
+  export interface SegmentOverride {
+    /**
+     * A number indicating the order to use to evaluate segment overrides, if there are more than one. Segment overrides with lower numbers are evaluated first.
+     */
+    evaluationOrder: Long;
+    /**
+     * The ARN of the segment to use.
+     */
+    segment: SegmentRef;
+    /**
+     * The traffic allocation percentages among the feature variations to assign to this segment. This is a set of key-value pairs. The keys are variation names. The values represent the amount of traffic to allocate to that variation for this segment. This is expressed in thousandths of a percent, so a weight of 50000 represents 50% of traffic.
+     */
+    weights: GroupToWeightMap;
+  }
+  export type SegmentOverridesList = SegmentOverride[];
+  export type SegmentPattern = string;
+  export type SegmentRef = string;
+  export type SegmentReferenceResourceType = "EXPERIMENT"|"LAUNCH"|string;
   export type SplitWeight = number;
   export interface StartExperimentRequest {
     /**
@@ -1636,6 +1885,22 @@ declare namespace Evidently {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TestSegmentPatternRequest {
+    /**
+     * The pattern to test.
+     */
+    pattern: SegmentPattern;
+    /**
+     * A sample evaluationContext JSON block to test against the specified pattern.
+     */
+    payload: JsonValue;
+  }
+  export interface TestSegmentPatternResponse {
+    /**
+     * Returns true if the pattern matches the payload.
+     */
+    match: Boolean;
+  }
   export type Timestamp = Date;
   export type TimestampList = Timestamp[];
   export interface Treatment {
@@ -1713,9 +1978,17 @@ declare namespace Evidently {
      */
     randomizationSalt?: RandomizationSalt;
     /**
+     * Removes a segment from being used in an experiment. You can't use this parameter if the experiment is currently running.
+     */
+    removeSegment?: PrimitiveBoolean;
+    /**
      * The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience is the total audience minus the audience that you have allocated to overrides or current launches of this feature. This is represented in thousandths of a percent. For example, specify 20,000 to allocate 20% of the available audience.
      */
     samplingRate?: SplitWeight;
+    /**
+     * Adds an audience segment to an experiment. When a segment is used in an experiment, only user sessions that match the segment pattern are used in the experiment. You can't use this parameter if the experiment is currently running.
+     */
+    segment?: SegmentRef;
     /**
      * An array of structures that define the variations being tested in the experiment.
      */

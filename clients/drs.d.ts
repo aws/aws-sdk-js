@@ -487,7 +487,7 @@ declare namespace Drs {
   }
   export interface DeleteRecoveryInstanceRequest {
     /**
-     * RThe ID of the Recovery Instance to be deleted.
+     * The ID of the Recovery Instance to be deleted.
      */
     recoveryInstanceID: RecoveryInstanceID;
   }
@@ -1400,7 +1400,7 @@ declare namespace Drs {
     useDedicatedReplicationServer?: Boolean;
   }
   export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
-  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"GP3"|"ST1"|string;
+  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"GP3"|"ST1"|"AUTO"|string;
   export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|string;
   export interface ReplicationConfigurationReplicatedDisk {
     /**
@@ -1415,6 +1415,10 @@ declare namespace Drs {
      * Whether to boot from this disk or not.
      */
     isBootDisk?: Boolean;
+    /**
+     * The Staging Disk EBS volume type to be used during replication when stagingDiskType is set to Auto. This is a read-only field.
+     */
+    optimizedStagingDiskType?: ReplicationConfigurationReplicatedDiskStagingDiskType;
     /**
      * The Staging Disk EBS volume type to be used during replication.
      */
