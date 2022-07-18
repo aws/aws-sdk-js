@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1176.0-->
+<!--LATEST=2.1177.0-->
 <!--ENTRYINSERT-->
+
+## 2.1177.0
+* feature: Discovery: Add AWS Agentless Collector details to the GetDiscoverySummary API response
+* feature: ElastiCache: Adding AutoMinorVersionUpgrade in the DescribeReplicationGroups API
+* feature: KMS: Added support for the SM2 KeySpec in China Partition Regions
+* feature: MediaPackage: This release adds "IncludeIframeOnlyStream" for Dash endpoints and increases the number of supported video and audio encryption presets for Speke v2
+* feature: SSOAdmin: AWS SSO now supports attaching customer managed policies and a permissions boundary to your permission sets. This release adds new API operations to manage and view the customer managed policies and the permissions boundary for a given permission set.
+* feature: SageMaker: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
 
 ## 2.1176.0
 * feature: Drs: Changed existing APIs to allow choosing a dynamic volume type for replicating volumes, to reduce costs for customers.

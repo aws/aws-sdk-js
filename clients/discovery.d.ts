@@ -455,6 +455,15 @@ declare namespace Discovery {
      */
     unknownAgents: Integer;
   }
+  export interface CustomerAgentlessCollectorInfo {
+    activeAgentlessCollectors: Integer;
+    healthyAgentlessCollectors: Integer;
+    denyListedAgentlessCollectors: Integer;
+    shutdownAgentlessCollectors: Integer;
+    unhealthyAgentlessCollectors: Integer;
+    totalAgentlessCollectors: Integer;
+    unknownAgentlessCollectors: Integer;
+  }
   export interface CustomerConnectorInfo {
     /**
      * Number of active discovery connectors.
@@ -829,6 +838,7 @@ declare namespace Discovery {
      *  Details about Migration Evaluator collectors, including collector status and health. 
      */
     meCollectorSummary?: CustomerMeCollectorInfo;
+    agentlessCollectorSummary?: CustomerAgentlessCollectorInfo;
   }
   export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_COMPLETE_WITH_ERRORS"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|"INTERNAL_ERROR"|string;
   export interface ImportTask {

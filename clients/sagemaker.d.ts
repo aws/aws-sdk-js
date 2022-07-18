@@ -141,6 +141,22 @@ declare class SageMaker extends Service {
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
+   * Creates an edge deployment plan, consisting of multiple stages. Each stage may have a different deployment configuration and devices.
+   */
+  createEdgeDeploymentPlan(params: SageMaker.Types.CreateEdgeDeploymentPlanRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateEdgeDeploymentPlanResponse) => void): Request<SageMaker.Types.CreateEdgeDeploymentPlanResponse, AWSError>;
+  /**
+   * Creates an edge deployment plan, consisting of multiple stages. Each stage may have a different deployment configuration and devices.
+   */
+  createEdgeDeploymentPlan(callback?: (err: AWSError, data: SageMaker.Types.CreateEdgeDeploymentPlanResponse) => void): Request<SageMaker.Types.CreateEdgeDeploymentPlanResponse, AWSError>;
+  /**
+   * Creates a new stage in an existing edge deployment plan.
+   */
+  createEdgeDeploymentStage(params: SageMaker.Types.CreateEdgeDeploymentStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a new stage in an existing edge deployment plan.
+   */
+  createEdgeDeploymentStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Starts a SageMaker Edge Manager model packaging job. Edge Manager will use the model artifacts from the Amazon Simple Storage Service bucket that you specify. After the model has been packaged, Amazon SageMaker saves the resulting artifacts to an S3 bucket that you specify.
    */
   createEdgePackagingJob(params: SageMaker.Types.CreateEdgePackagingJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -501,6 +517,22 @@ declare class SageMaker extends Service {
    */
   deleteDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an edge deployment plan if (and only if) all the stages in the plan are inactive or there are no stages in the plan.
+   */
+  deleteEdgeDeploymentPlan(params: SageMaker.Types.DeleteEdgeDeploymentPlanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an edge deployment plan if (and only if) all the stages in the plan are inactive or there are no stages in the plan.
+   */
+  deleteEdgeDeploymentPlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a stage in an edge deployment plan if (and only if) the stage is inactive.
+   */
+  deleteEdgeDeploymentStage(params: SageMaker.Types.DeleteEdgeDeploymentStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a stage in an edge deployment plan if (and only if) the stage is inactive.
+   */
+  deleteEdgeDeploymentStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an endpoint. SageMaker frees up all of the resources that were deployed when the endpoint was created.  SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't need to use the RevokeGrant API call. When you delete your endpoint, SageMaker asynchronously deletes associated endpoint resources such as KMS key grants. You might still see these resources in your account for a few minutes after deleting your endpoint. Do not delete or revoke the permissions for your  ExecutionRoleArn , otherwise SageMaker cannot delete these resources.
    */
   deleteEndpoint(params: SageMaker.Types.DeleteEndpointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -828,6 +860,14 @@ declare class SageMaker extends Service {
    * The description of the domain.
    */
   describeDomain(callback?: (err: AWSError, data: SageMaker.Types.DescribeDomainResponse) => void): Request<SageMaker.Types.DescribeDomainResponse, AWSError>;
+  /**
+   * Describes an edge deployment plan with deployment status per stage.
+   */
+  describeEdgeDeploymentPlan(params: SageMaker.Types.DescribeEdgeDeploymentPlanRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeEdgeDeploymentPlanResponse) => void): Request<SageMaker.Types.DescribeEdgeDeploymentPlanResponse, AWSError>;
+  /**
+   * Describes an edge deployment plan with deployment status per stage.
+   */
+  describeEdgeDeploymentPlan(callback?: (err: AWSError, data: SageMaker.Types.DescribeEdgeDeploymentPlanResponse) => void): Request<SageMaker.Types.DescribeEdgeDeploymentPlanResponse, AWSError>;
   /**
    * A description of edge packaging jobs.
    */
@@ -1309,6 +1349,14 @@ declare class SageMaker extends Service {
    */
   listDomains(callback?: (err: AWSError, data: SageMaker.Types.ListDomainsResponse) => void): Request<SageMaker.Types.ListDomainsResponse, AWSError>;
   /**
+   * Lists all edge deployment plans.
+   */
+  listEdgeDeploymentPlans(params: SageMaker.Types.ListEdgeDeploymentPlansRequest, callback?: (err: AWSError, data: SageMaker.Types.ListEdgeDeploymentPlansResponse) => void): Request<SageMaker.Types.ListEdgeDeploymentPlansResponse, AWSError>;
+  /**
+   * Lists all edge deployment plans.
+   */
+  listEdgeDeploymentPlans(callback?: (err: AWSError, data: SageMaker.Types.ListEdgeDeploymentPlansResponse) => void): Request<SageMaker.Types.ListEdgeDeploymentPlansResponse, AWSError>;
+  /**
    * Returns a list of edge packaging jobs.
    */
   listEdgePackagingJobs(params: SageMaker.Types.ListEdgePackagingJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListEdgePackagingJobsResponse) => void): Request<SageMaker.Types.ListEdgePackagingJobsResponse, AWSError>;
@@ -1557,6 +1605,14 @@ declare class SageMaker extends Service {
    */
   listProjects(callback?: (err: AWSError, data: SageMaker.Types.ListProjectsOutput) => void): Request<SageMaker.Types.ListProjectsOutput, AWSError>;
   /**
+   * Lists devices allocated to the stage, containing detailed device information and deployment status.
+   */
+  listStageDevices(params: SageMaker.Types.ListStageDevicesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListStageDevicesResponse) => void): Request<SageMaker.Types.ListStageDevicesResponse, AWSError>;
+  /**
+   * Lists devices allocated to the stage, containing detailed device information and deployment status.
+   */
+  listStageDevices(callback?: (err: AWSError, data: SageMaker.Types.ListStageDevicesResponse) => void): Request<SageMaker.Types.ListStageDevicesResponse, AWSError>;
+  /**
    * Lists the Studio Lifecycle Configurations in your Amazon Web Services Account.
    */
   listStudioLifecycleConfigs(params: SageMaker.Types.ListStudioLifecycleConfigsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListStudioLifecycleConfigsResponse) => void): Request<SageMaker.Types.ListStudioLifecycleConfigsResponse, AWSError>;
@@ -1709,6 +1765,14 @@ declare class SageMaker extends Service {
    */
   sendPipelineExecutionStepSuccess(callback?: (err: AWSError, data: SageMaker.Types.SendPipelineExecutionStepSuccessResponse) => void): Request<SageMaker.Types.SendPipelineExecutionStepSuccessResponse, AWSError>;
   /**
+   * Starts a stage in an edge deployment plan.
+   */
+  startEdgeDeploymentStage(params: SageMaker.Types.StartEdgeDeploymentStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a stage in an edge deployment plan.
+   */
+  startEdgeDeploymentStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Starts a previously stopped monitoring schedule.  By default, when you successfully create a new schedule, the status of a monitoring schedule is scheduled. 
    */
   startMonitoringSchedule(params: SageMaker.Types.StartMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1748,6 +1812,14 @@ declare class SageMaker extends Service {
    * Stops a model compilation job.  To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal. This gracefully shuts the job down. If the job hasn't stopped, it sends the SIGKILL signal. When it receives a StopCompilationJob request, Amazon SageMaker changes the CompilationJobSummary$CompilationJobStatus of the job to Stopping. After Amazon SageMaker stops the job, it sets the CompilationJobSummary$CompilationJobStatus to Stopped. 
    */
   stopCompilationJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a stage in an edge deployment plan.
+   */
+  stopEdgeDeploymentStage(params: SageMaker.Types.StopEdgeDeploymentStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a stage in an edge deployment plan.
+   */
+  stopEdgeDeploymentStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Request to stop an edge packaging job.
    */
@@ -3887,6 +3959,44 @@ declare namespace SageMaker {
      */
     Url?: String1024;
   }
+  export interface CreateEdgeDeploymentPlanRequest {
+    /**
+     * The name of the edge deployment plan.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * List of models associated with the edge deployment plan.
+     */
+    ModelConfigs: EdgeDeploymentModelConfigs;
+    /**
+     * The device fleet used for this edge deployment plan.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * List of stages of the edge deployment plan. The number of stages is limited to 10 per deployment.
+     */
+    Stages?: DeploymentStages;
+    /**
+     * List of tags with which to tag the edge deployment plan.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateEdgeDeploymentPlanResponse {
+    /**
+     * The ARN of the edge deployment plan.
+     */
+    EdgeDeploymentPlanArn: EdgeDeploymentPlanArn;
+  }
+  export interface CreateEdgeDeploymentStageRequest {
+    /**
+     * The name of the edge deployment plan.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * List of stages to be added to the edge deployment plan.
+     */
+    Stages: DeploymentStages;
+  }
   export interface CreateEdgePackagingJobRequest {
     /**
      * The name of the edge packaging job.
@@ -5472,6 +5582,22 @@ declare namespace SageMaker {
      */
     RetentionPolicy?: RetentionPolicy;
   }
+  export interface DeleteEdgeDeploymentPlanRequest {
+    /**
+     * The name of the edge deployment plan to delete.
+     */
+    EdgeDeploymentPlanName: EntityName;
+  }
+  export interface DeleteEdgeDeploymentStageRequest {
+    /**
+     * The name of the edge deployment plan from which the stage will be deleted.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * The name of the stage.
+     */
+    StageName: EntityName;
+  }
   export interface DeleteEndpointConfigInput {
     /**
      * The name of the endpoint configuration that you want to delete.
@@ -5717,6 +5843,41 @@ declare namespace SageMaker {
      */
     AutoRollbackConfiguration?: AutoRollbackConfig;
   }
+  export interface DeploymentStage {
+    /**
+     * The name of the stage.
+     */
+    StageName: EntityName;
+    /**
+     * Configuration of the devices in the stage.
+     */
+    DeviceSelectionConfig: DeviceSelectionConfig;
+    /**
+     * Configuration of the deployment details.
+     */
+    DeploymentConfig?: EdgeDeploymentConfig;
+  }
+  export type DeploymentStageMaxResults = number;
+  export type DeploymentStageStatusSummaries = DeploymentStageStatusSummary[];
+  export interface DeploymentStageStatusSummary {
+    /**
+     * The name of the stage.
+     */
+    StageName: EntityName;
+    /**
+     * Configuration of the devices in the stage.
+     */
+    DeviceSelectionConfig: DeviceSelectionConfig;
+    /**
+     * Configuration of the deployment details.
+     */
+    DeploymentConfig: EdgeDeploymentConfig;
+    /**
+     * General status of the current state.
+     */
+    DeploymentStatus: EdgeDeploymentStatus;
+  }
+  export type DeploymentStages = DeploymentStage[];
   export interface DeregisterDevicesRequest {
     /**
      * The name of the fleet the devices belong to.
@@ -6437,6 +6598,66 @@ declare namespace SageMaker {
      * The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
      */
     SecurityGroupIdForDomainBoundary?: SecurityGroupId;
+  }
+  export interface DescribeEdgeDeploymentPlanRequest {
+    /**
+     * The name of the deployment plan to describe.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * If the edge deployment plan has enough stages to require tokening, then this is the response from the last list of stages returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to select (50 by default).
+     */
+    MaxResults?: DeploymentStageMaxResults;
+  }
+  export interface DescribeEdgeDeploymentPlanResponse {
+    /**
+     * The ARN of edge deployment plan.
+     */
+    EdgeDeploymentPlanArn: EdgeDeploymentPlanArn;
+    /**
+     * The name of the edge deployment plan.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * List of models associated with the edge deployment plan.
+     */
+    ModelConfigs: EdgeDeploymentModelConfigs;
+    /**
+     * The device fleet used for this edge deployment plan.
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The number of edge devices with the successful deployment.
+     */
+    EdgeDeploymentSuccess?: Integer;
+    /**
+     * The number of edge devices yet to pick up deployment, or in progress.
+     */
+    EdgeDeploymentPending?: Integer;
+    /**
+     * The number of edge devices that failed the deployment.
+     */
+    EdgeDeploymentFailed?: Integer;
+    /**
+     * List of stages in the edge deployment plan.
+     */
+    Stages: DeploymentStageStatusSummaries;
+    /**
+     * Token to use when calling the next set of stages in the edge deployment plan.
+     */
+    NextToken?: NextToken;
+    /**
+     * The time when the edge deployment plan was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time when the edge deployment plan was last updated.
+     */
+    LastModifiedTime?: Timestamp;
   }
   export interface DescribeEdgePackagingJobRequest {
     /**
@@ -8410,6 +8631,54 @@ declare namespace SageMaker {
     IotThingName?: ThingName;
   }
   export type DeviceArn = string;
+  export type DeviceDeploymentStatus = "READYTODEPLOY"|"INPROGRESS"|"DEPLOYED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export type DeviceDeploymentSummaries = DeviceDeploymentSummary[];
+  export interface DeviceDeploymentSummary {
+    /**
+     * The ARN of the edge deployment plan.
+     */
+    EdgeDeploymentPlanArn: EdgeDeploymentPlanArn;
+    /**
+     * The name of the edge deployment plan.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * The name of the stage in the edge deployment plan.
+     */
+    StageName: EntityName;
+    /**
+     * The name of the deployed stage.
+     */
+    DeployedStageName?: EntityName;
+    /**
+     * The name of the fleet to which the device belongs to.
+     */
+    DeviceFleetName?: EntityName;
+    /**
+     * The name of the device.
+     */
+    DeviceName: DeviceName;
+    /**
+     * The ARN of the device.
+     */
+    DeviceArn: DeviceArn;
+    /**
+     * The deployment status of the device.
+     */
+    DeviceDeploymentStatus?: DeviceDeploymentStatus;
+    /**
+     * The detailed error message for the deployoment status result.
+     */
+    DeviceDeploymentStatusMessage?: String;
+    /**
+     * The description of the device.
+     */
+    Description?: DeviceDescription;
+    /**
+     * The time when the deployment on the device started.
+     */
+    DeploymentStartTime?: Timestamp;
+  }
   export type DeviceDescription = string;
   export type DeviceFleetArn = string;
   export type DeviceFleetDescription = string;
@@ -8434,6 +8703,24 @@ declare namespace SageMaker {
   }
   export type DeviceName = string;
   export type DeviceNames = DeviceName[];
+  export interface DeviceSelectionConfig {
+    /**
+     * Type of device subsets to deploy to the current stage.
+     */
+    DeviceSubsetType: DeviceSubsetType;
+    /**
+     * Percentage of devices in the fleet to deploy to the current stage.
+     */
+    Percentage?: Percentage;
+    /**
+     * List of devices chosen to deploy.
+     */
+    DeviceNames?: DeviceNames;
+    /**
+     * A filter to select devices with names containing this name.
+     */
+    DeviceNameContains?: DeviceName;
+  }
   export interface DeviceStats {
     /**
      * The number of devices connected with a heartbeat.
@@ -8444,6 +8731,7 @@ declare namespace SageMaker {
      */
     RegisteredDeviceCount: Long;
   }
+  export type DeviceSubsetType = "PERCENTAGE"|"SELECTION"|"NAMECONTAINS"|string;
   export type DeviceSummaries = DeviceSummary[];
   export interface DeviceSummary {
     /**
@@ -8663,6 +8951,85 @@ declare namespace SageMaker {
      * The type of the Association(Edge) between the source and destination. For example ContributedTo, Produced, or DerivedFrom.
      */
     AssociationType?: AssociationEdgeType;
+  }
+  export interface EdgeDeploymentConfig {
+    /**
+     * Toggle that determines whether to rollback to previous configuration if the current deployment fails. By default this is turned on. You may turn this off if you want to investigate the errors yourself.
+     */
+    FailureHandlingPolicy: FailureHandlingPolicy;
+  }
+  export interface EdgeDeploymentModelConfig {
+    /**
+     * The name the device application uses to reference this model.
+     */
+    ModelHandle: EntityName;
+    /**
+     * The edge packaging job associated with this deployment.
+     */
+    EdgePackagingJobName: EntityName;
+  }
+  export type EdgeDeploymentModelConfigs = EdgeDeploymentModelConfig[];
+  export type EdgeDeploymentPlanArn = string;
+  export type EdgeDeploymentPlanSummaries = EdgeDeploymentPlanSummary[];
+  export interface EdgeDeploymentPlanSummary {
+    /**
+     * The ARN of the edge deployment plan.
+     */
+    EdgeDeploymentPlanArn: EdgeDeploymentPlanArn;
+    /**
+     * The name of the edge deployment plan.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * The name of the device fleet used for the deployment. 
+     */
+    DeviceFleetName: EntityName;
+    /**
+     * The number of edge devices with the successful deployment.
+     */
+    EdgeDeploymentSuccess: Integer;
+    /**
+     * The number of edge devices yet to pick up the deployment, or in progress.
+     */
+    EdgeDeploymentPending: Integer;
+    /**
+     * The number of edge devices that failed the deployment.
+     */
+    EdgeDeploymentFailed: Integer;
+    /**
+     * The time when the edge deployment plan was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time when the edge deployment plan was last updated.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export interface EdgeDeploymentStatus {
+    /**
+     * The general status of the current stage.
+     */
+    StageStatus: StageStatus;
+    /**
+     * The number of edge devices with the successful deployment in the current stage.
+     */
+    EdgeDeploymentSuccessInStage: Integer;
+    /**
+     * The number of edge devices yet to pick up the deployment in current stage, or in progress.
+     */
+    EdgeDeploymentPendingInStage: Integer;
+    /**
+     * The number of edge devices that failed the deployment in current stage.
+     */
+    EdgeDeploymentFailedInStage: Integer;
+    /**
+     * A detailed message about deployment status in current stage.
+     */
+    EdgeDeploymentStatusMessage?: String;
+    /**
+     * The time when the deployment API started.
+     */
+    EdgeDeploymentStageStartTime?: Timestamp;
   }
   export interface EdgeModel {
     /**
@@ -9102,6 +9469,7 @@ declare namespace SageMaker {
      */
     ErrorMessage?: String3072;
   }
+  export type FailureHandlingPolicy = "ROLLBACK_ON_FAILURE"|"DO_NOTHING"|string;
   export type FailureReason = string;
   export type FeatureAdditions = FeatureDefinition[];
   export interface FeatureDefinition {
@@ -11126,6 +11494,59 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListEdgeDeploymentPlansRequest {
+    /**
+     * The response from the last list when returning a list large enough to need tokening.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to select (50 by default).
+     */
+    MaxResults?: ListMaxResults;
+    /**
+     * Selects edge deployment plans created after this time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Selects edge deployment plans created before this time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Selects edge deployment plans that were last updated after this time.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * Selects edge deployment plans that were last updated before this time.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * Selects edge deployment plans with names containing this name.
+     */
+    NameContains?: NameContains;
+    /**
+     * Selects edge deployment plans with a device fleet name containing this name.
+     */
+    DeviceFleetNameContains?: NameContains;
+    /**
+     * The column by which to sort the edge deployment plans. Can be one of NAME, DEVICEFLEETNAME, CREATIONTIME, LASTMODIFIEDTIME.
+     */
+    SortBy?: ListEdgeDeploymentPlansSortBy;
+    /**
+     * The direction of the sorting (ascending or descending).
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListEdgeDeploymentPlansResponse {
+    /**
+     * List of summaries of edge deployment plans.
+     */
+    EdgeDeploymentPlanSummaries: EdgeDeploymentPlanSummaries;
+    /**
+     * The token to use when calling the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export type ListEdgeDeploymentPlansSortBy = "NAME"|"DEVICE_FLEET_NAME"|"CREATION_TIME"|"LAST_MODIFIED_TIME"|string;
   export interface ListEdgePackagingJobsRequest {
     /**
      * The response from the last list when returning a list large enough to need tokening.
@@ -12516,6 +12937,38 @@ declare namespace SageMaker {
     ProjectSummaryList: ProjectSummaryList;
     /**
      * If the result of the previous ListCompilationJobs request was truncated, the response includes a NextToken. To retrieve the next set of model compilation jobs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListStageDevicesRequest {
+    /**
+     * The response from the last list when returning a list large enough to neeed tokening.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of requests to select.
+     */
+    MaxResults?: ListMaxResults;
+    /**
+     * The name of the edge deployment plan.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * Toggle for excluding devices deployed in other stages.
+     */
+    ExcludeDevicesDeployedInOtherStage?: Boolean;
+    /**
+     * The name of the stage in the deployment.
+     */
+    StageName: EntityName;
+  }
+  export interface ListStageDevicesResponse {
+    /**
+     * List of summaries of devices allocated to the stage.
+     */
+    DeviceDeploymentSummaries: DeviceDeploymentSummaries;
+    /**
+     * The token to use when calling the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -14415,6 +14868,7 @@ declare namespace SageMaker {
     DesiredServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export type PendingProductionVariantSummaryList = PendingProductionVariantSummary[];
+  export type Percentage = number;
   export interface Phase {
     /**
      * Specifies how many concurrent users to start with.
@@ -16058,6 +16512,17 @@ declare namespace SageMaker {
   export type SourceUri = string;
   export type SpawnRate = number;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
+  export type StageStatus = "CREATING"|"READYTODEPLOY"|"STARTING"|"INPROGRESS"|"DEPLOYED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export interface StartEdgeDeploymentStageRequest {
+    /**
+     * The name of the edge deployment plan to start.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * The name of the stage to start.
+     */
+    StageName: EntityName;
+  }
   export interface StartMonitoringScheduleRequest {
     /**
      * The name of the schedule to start.
@@ -16119,6 +16584,16 @@ declare namespace SageMaker {
      * The name of the model compilation job to stop.
      */
     CompilationJobName: EntityName;
+  }
+  export interface StopEdgeDeploymentStageRequest {
+    /**
+     * The name of the edge deployment plan to stop.
+     */
+    EdgeDeploymentPlanName: EntityName;
+    /**
+     * The name of the stage to stop.
+     */
+    StageName: EntityName;
   }
   export interface StopEdgePackagingJobRequest {
     /**

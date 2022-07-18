@@ -1296,6 +1296,41 @@
       },
       "documentation": "<p>Inventory data for installed discovery agents.</p>"
     },
+    "CustomerAgentlessCollectorInfo": {
+      "type": "structure",
+      "required": [
+        "activeAgentlessCollectors",
+        "healthyAgentlessCollectors",
+        "denyListedAgentlessCollectors",
+        "shutdownAgentlessCollectors",
+        "unhealthyAgentlessCollectors",
+        "totalAgentlessCollectors",
+        "unknownAgentlessCollectors"
+      ],
+      "members": {
+        "activeAgentlessCollectors": {
+          "shape": "Integer"
+        },
+        "healthyAgentlessCollectors": {
+          "shape": "Integer"
+        },
+        "denyListedAgentlessCollectors": {
+          "shape": "Integer"
+        },
+        "shutdownAgentlessCollectors": {
+          "shape": "Integer"
+        },
+        "unhealthyAgentlessCollectors": {
+          "shape": "Integer"
+        },
+        "totalAgentlessCollectors": {
+          "shape": "Integer"
+        },
+        "unknownAgentlessCollectors": {
+          "shape": "Integer"
+        }
+      }
+    },
     "CustomerConnectorInfo": {
       "type": "structure",
       "required": [
@@ -1892,6 +1927,9 @@
         "meCollectorSummary": {
           "shape": "CustomerMeCollectorInfo",
           "documentation": "<p> Details about Migration Evaluator collectors, including collector status and health. </p>"
+        },
+        "agentlessCollectorSummary": {
+          "shape": "CustomerAgentlessCollectorInfo"
         }
       }
     },
@@ -2025,7 +2063,7 @@
       "type": "string",
       "max": 4000,
       "min": 1,
-      "pattern": "\\S+:\\/\\/\\S+\\/[\\s\\S]*\\S[\\s\\S]*"
+      "pattern": "\\S+://\\S+/[\\s\\S]*\\S[\\s\\S]*"
     },
     "Integer": {
       "type": "integer"

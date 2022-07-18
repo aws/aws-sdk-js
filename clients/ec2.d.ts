@@ -573,11 +573,11 @@ declare class EC2 extends Service {
    */
   createLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. Launch templates are immutable; after you create a launch template, you can't modify it. Instead, you can create a new version of the launch template that includes any changes you require. For more information, see Modify a launch template (manage launch template versions)in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a new version of a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. Launch templates are immutable; after you create a launch template, you can't modify it. Instead, you can create a new version of the launch template that includes any changes you require. For more information, see Modify a launch template (manage launch template versions) in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplateVersion(params: EC2.Types.CreateLaunchTemplateVersionRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
-   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. Launch templates are immutable; after you create a launch template, you can't modify it. Instead, you can create a new version of the launch template that includes any changes you require. For more information, see Modify a launch template (manage launch template versions)in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a new version of a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. Launch templates are immutable; after you create a launch template, you can't modify it. Instead, you can create a new version of the launch template that includes any changes you require. For more information, see Modify a launch template (manage launch template versions) in the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplateVersion(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
@@ -773,11 +773,11 @@ declare class EC2 extends Service {
    */
   createSubnetCidrReservation(callback?: (err: AWSError, data: EC2.Types.CreateSubnetCidrReservationResult) => void): Request<EC2.Types.CreateSubnetCidrReservationResult, AWSError>;
   /**
-   * Adds or overwrites only the specified tags for the specified Amazon EC2 resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide. For more information about creating IAM policies that control users' access to resources based on tags, see Supported Resource-Level Permissions for Amazon EC2 API Actions in the Amazon Elastic Compute Cloud User Guide.
+   * Adds or overwrites only the specified tags for the specified Amazon EC2 resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource. For more information about tags, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information about creating IAM policies that control users' access to resources based on tags, see Supported resource-level permissions for Amazon EC2 API actions in the Amazon Elastic Compute Cloud User Guide.
    */
   createTags(params: EC2.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or overwrites only the specified tags for the specified Amazon EC2 resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide. For more information about creating IAM policies that control users' access to resources based on tags, see Supported Resource-Level Permissions for Amazon EC2 API Actions in the Amazon Elastic Compute Cloud User Guide.
+   * Adds or overwrites only the specified tags for the specified Amazon EC2 resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource. For more information about tags, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information about creating IAM policies that control users' access to resources based on tags, see Supported resource-level permissions for Amazon EC2 API actions in the Amazon Elastic Compute Cloud User Guide.
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -845,11 +845,11 @@ declare class EC2 extends Service {
    */
   createTransitGatewayMulticastDomain(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayMulticastDomainResult) => void): Request<EC2.Types.CreateTransitGatewayMulticastDomainResult, AWSError>;
   /**
-   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
+   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
    */
   createTransitGatewayPeeringAttachment(params: EC2.Types.CreateTransitGatewayPeeringAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
-   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
+   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
    */
   createTransitGatewayPeeringAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
@@ -1285,11 +1285,11 @@ declare class EC2 extends Service {
    */
   deleteSubnetCidrReservation(callback?: (err: AWSError, data: EC2.Types.DeleteSubnetCidrReservationResult) => void): Request<EC2.Types.DeleteSubnetCidrReservationResult, AWSError>;
   /**
-   * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteTags(params: EC2.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2365,11 +2365,11 @@ declare class EC2 extends Service {
    */
   describeSubnets(callback?: (err: AWSError, data: EC2.Types.DescribeSubnetsResult) => void): Request<EC2.Types.DescribeSubnetsResult, AWSError>;
   /**
-   * Describes the specified tags for your EC2 resources. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the specified tags for your EC2 resources. For more information about tags, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide.
    */
   describeTags(params: EC2.Types.DescribeTagsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTagsResult) => void): Request<EC2.Types.DescribeTagsResult, AWSError>;
   /**
-   * Describes the specified tags for your EC2 resources. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the specified tags for your EC2 resources. For more information about tags, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide.
    */
   describeTags(callback?: (err: AWSError, data: EC2.Types.DescribeTagsResult) => void): Request<EC2.Types.DescribeTagsResult, AWSError>;
   /**
@@ -3837,11 +3837,11 @@ declare class EC2 extends Service {
    */
   rebootInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself. We recommend that you always use CreateImage unless you have a specific reason to use RegisterImage.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
    */
   registerImage(params: EC2.Types.RegisterImageRequest, callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself. We recommend that you always use CreateImage unless you have a specific reason to use RegisterImage.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
@@ -8448,11 +8448,11 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The ID of the launch template. You must specify either the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
@@ -9578,6 +9578,9 @@ declare namespace EC2 {
      * The Region where the peer transit gateway is located.
      */
     PeerRegion: String;
+    /**
+     * Requests a transit gateway peering attachment.
+     */
     Options?: CreateTransitGatewayPeeringAttachmentRequestOptions;
     /**
      * The tags to apply to the transit gateway peering attachment.
@@ -9589,6 +9592,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface CreateTransitGatewayPeeringAttachmentRequestOptions {
+    /**
+     * Indicates whether dynamic routing is enabled or disabled.
+     */
     DynamicRouting?: DynamicRoutingValue;
   }
   export interface CreateTransitGatewayPeeringAttachmentResult {
@@ -10170,13 +10176,13 @@ declare namespace EC2 {
   }
   export interface CreditSpecification {
     /**
-     * The credit option for CPU usage of a T2, T3, or T3a instance. Valid values are standard and unlimited.
+     * The credit option for CPU usage of a T instance. Valid values: standard | unlimited 
      */
     CpuCredits?: String;
   }
   export interface CreditSpecificationRequest {
     /**
-     * The credit option for CPU usage of a T2, T3, or T3a instance. Valid values are standard and unlimited.
+     * The credit option for CPU usage of a T instance. Valid values: standard | unlimited 
      */
     CpuCredits: String;
   }
@@ -10518,11 +10524,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The ID of the launch template. You must specify either the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The name of the launch template. You must specify either the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: LaunchTemplateName;
   }
@@ -10538,11 +10544,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The ID of the launch template. You must specify either the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The name of the launch template. You must specify either the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
@@ -13206,15 +13212,15 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the launch template. To describe one or more versions of a specified launch template, you must specify either the launch template ID or the launch template name in the request. To describe all the latest or default launch template versions in your account, you must omit this parameter.
+     * The ID of the launch template. To describe one or more versions of a specified launch template, you must specify either the LaunchTemplateId or the LaunchTemplateName, but not both. To describe all the latest or default launch template versions in your account, you must omit this parameter.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. To describe one or more versions of a specified launch template, you must specify either the launch template ID or the launch template name in the request. To describe all the latest or default launch template versions in your account, you must omit this parameter.
+     * The name of the launch template. To describe one or more versions of a specified launch template, you must specify either the LaunchTemplateName or the LaunchTemplateId, but not both. To describe all the latest or default launch template versions in your account, you must omit this parameter.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
-     * One or more versions of the launch template. Valid values depend on whether you are describing a specified launch template (by ID or name) or all launch templates in your account. To describe one or more versions of a specified launch template, valid values are $Latest, $Default, and numbers. To describe all launch templates in your account that are defined as the latest version, the valid value is $Latest. To describe all launch templates in your account that are defined as the default version, the valid value is $Default. You can specify $Latest and $Default in the same call. You cannot specify numbers.
+     * One or more versions of the launch template. Valid values depend on whether you are describing a specified launch template (by ID or name) or all launch templates in your account. To describe one or more versions of a specified launch template, valid values are $Latest, $Default, and numbers. To describe all launch templates in your account that are defined as the latest version, the valid value is $Latest. To describe all launch templates in your account that are defined as the default version, the valid value is $Default. You can specify $Latest and $Default in the same request. You cannot specify numbers.
      */
     Versions?: VersionStringList;
     /**
@@ -17832,7 +17838,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * The maximum price per unit hour that you are willing to pay for a Spot Instance.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.   If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxPrice?: String;
     /**
@@ -17868,7 +17874,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * The maximum price per unit hour that you are willing to pay for a Spot Instance.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.   If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxPrice?: String;
     /**
@@ -17898,11 +17904,11 @@ declare namespace EC2 {
   }
   export interface FleetLaunchTemplateSpecification {
     /**
-     * The ID of the launch template. If you specify the template ID, you can't specify the template name.
+     * The ID of the launch template. You must specify the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: String;
     /**
-     * The name of the launch template. If you specify the template name, you can't specify the template ID.
+     * The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
@@ -17912,11 +17918,11 @@ declare namespace EC2 {
   }
   export interface FleetLaunchTemplateSpecificationRequest {
     /**
-     * The ID of the launch template. If you specify the template ID, you can't specify the template name.
+     * The ID of the launch template. You must specify the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. If you specify the template name, you can't specify the template ID.
+     * The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
@@ -21323,11 +21329,11 @@ declare namespace EC2 {
      */
     InstanceGenerations?: InstanceGenerationSet;
     /**
-     * The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 100 
+     * The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 100 
      */
     SpotMaxPricePercentageOverLowestPrice?: Integer;
     /**
-     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 20 
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 20 
      */
     OnDemandMaxPricePercentageOverLowestPrice?: Integer;
     /**
@@ -21409,11 +21415,11 @@ declare namespace EC2 {
      */
     InstanceGenerations?: InstanceGenerationSet;
     /**
-     * The price protection threshold for Spot Instance. This is the maximum you’ll pay for an Spot Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 100 
+     * The price protection threshold for Spot Instance. This is the maximum you’ll pay for an Spot Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 100 
      */
     SpotMaxPricePercentageOverLowestPrice?: Integer;
     /**
-     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 20 
+     * The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. To turn off price protection, specify a high value, such as 999999. This parameter is not supported for GetSpotPlacementScores and GetInstanceTypesFromInstanceRequirements.  If you set TargetCapacityUnitType to vcpu or memory-mib, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.  Default: 20 
      */
     OnDemandMaxPricePercentageOverLowestPrice?: Integer;
     /**
@@ -22173,7 +22179,7 @@ declare namespace EC2 {
      */
     ResourceTags?: IpamResourceTagList;
     /**
-     * The IP address space in the IPAM pool that is allocated to this resource. To convert the decimal to a percentage, multiply the decimal by 100.
+     * The percentage of IP address space in use. To convert the decimal to a percentage, multiply the decimal by 100. Note the following:   For a resources that are VPCs, this is the percentage of IP address space in the VPC that's taken up by subnet CIDRs.    For resources that are subnets, if the subnet has an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the percentage of IPv6 address space in use is not represented. The percentage of IPv6 address space in use cannot currently be calculated.    For resources that are public IPv4 pools, this is the percentage of IP address space in the pool that's been allocated to Elastic IP addresses (EIPs).   
      */
     IpUsage?: BoxedDouble;
     /**
@@ -22851,7 +22857,7 @@ declare namespace EC2 {
      */
     HttpTokens?: LaunchTemplateHttpTokensState;
     /**
-     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Default: 1 Possible values: Integers from 1 to 64
+     * The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Default: 1  Possible values: Integers from 1 to 64
      */
     HttpPutResponseHopLimit?: Integer;
     /**
@@ -23050,7 +23056,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * The maximum price per unit hour that you are willing to pay for a Spot Instance.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     SpotPrice?: String;
     /**
@@ -23174,11 +23180,11 @@ declare namespace EC2 {
   export type LaunchTemplateSet = LaunchTemplate[];
   export interface LaunchTemplateSpecification {
     /**
-     * The ID of the launch template.
+     * The ID of the launch template. You must specify the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template.
+     * The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: String;
     /**
@@ -23188,7 +23194,7 @@ declare namespace EC2 {
   }
   export interface LaunchTemplateSpotMarketOptions {
     /**
-     * The maximum hourly price you're willing to pay for the Spot Instances.
+     * The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxPrice?: String;
     /**
@@ -23210,7 +23216,7 @@ declare namespace EC2 {
   }
   export interface LaunchTemplateSpotMarketOptionsRequest {
     /**
-     * The maximum hourly price you're willing to pay for the Spot Instances.
+     * The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxPrice?: String;
     /**
@@ -23218,11 +23224,11 @@ declare namespace EC2 {
      */
     SpotInstanceType?: SpotInstanceType;
     /**
-     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+     * Deprecated.
      */
     BlockDurationMinutes?: Integer;
     /**
-     * The end date of the request. For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached. The default end date is 7 days from the current date.
+     * The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.   For a persistent request, the request remains active until the ValidUntil date and time is reached. Otherwise, the request remains active until you cancel it.   For a one-time request, ValidUntil is not supported. The request remains active until all instances launch or you cancel the request.   Default: 7 days from the current date
      */
     ValidUntil?: DateTime;
     /**
@@ -24549,11 +24555,11 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The ID of the launch template. You must specify either the LaunchTemplateId or the LaunchTemplateName, but not both.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The name of the launch template. You must specify either the LaunchTemplateName or the LaunchTemplateId, but not both.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
@@ -26592,6 +26598,9 @@ declare namespace EC2 {
      * The ID of the transit gateway.
      */
     TransitGatewayId?: String;
+    /**
+     * The ID of the core network where the transit gateway peer is located.
+     */
     CoreNetworkId?: String;
     /**
      * The ID of the Amazon Web Services account that owns the transit gateway.
@@ -28160,7 +28169,7 @@ declare namespace EC2 {
      */
     LaunchSpecification?: RequestSpotLaunchSpecification;
     /**
-     * The maximum price per hour that you are willing to pay for a Spot Instance. The default is the On-Demand price.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     SpotPrice?: String;
     /**
@@ -29438,7 +29447,7 @@ declare namespace EC2 {
      */
     ElasticInferenceAccelerators?: ElasticInferenceAccelerators;
     /**
-     * The tags to apply to the resources during launch. You can only tag instances and volumes on launch. The specified tags are applied to all instances or volumes that are created during launch. To tag a resource after it has been created, see CreateTags.
+     * The tags to apply to the resources that are created during instance launch. You can specify tags for the following resources only:   Instances   Volumes   Elastic graphics   Spot Instance requests   Network interfaces   To tag a resource after it has been created, see CreateTags.
      */
     TagSpecifications?: TagSpecificationList;
     /**
@@ -29486,7 +29495,7 @@ declare namespace EC2 {
      */
     MaintenanceOptions?: InstanceMaintenanceOptionsRequest;
     /**
-     * Indicates whether an instance is enabled for stop protection. For more information, see Stop Protection. 
+     * Indicates whether an instance is enabled for stop protection. For more information, see Stop protection. 
      */
     DisableApiStop?: Boolean;
   }
@@ -30261,7 +30270,7 @@ declare namespace EC2 {
   export type ServiceConnectivityType = "ipv4"|"ipv6"|string;
   export interface ServiceDetail {
     /**
-     * The Amazon Resource Name (ARN) of the service.
+     * The name of the service.
      */
     ServiceName?: String;
     /**
@@ -30741,7 +30750,7 @@ declare namespace EC2 {
      */
     RamdiskId?: String;
     /**
-     * The maximum price per unit hour that you are willing to pay for a Spot Instance. If this value is not specified, the default is the Spot price specified for the fleet. To determine the Spot price per unit hour, divide the Spot price by the value of WeightedCapacity.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     SpotPrice?: String;
     /**
@@ -30839,7 +30848,7 @@ declare namespace EC2 {
      */
     LaunchTemplateConfigs?: LaunchTemplateConfigList;
     /**
-     * The maximum price per unit hour that you are willing to pay for a Spot Instance. The default is the On-Demand price.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     SpotPrice?: String;
     /**
@@ -30964,7 +30973,7 @@ declare namespace EC2 {
      */
     SpotInstanceRequestId?: String;
     /**
-     * The maximum price per hour that you are willing to pay for a Spot Instance.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     SpotPrice?: String;
     /**
@@ -31033,7 +31042,7 @@ declare namespace EC2 {
   }
   export interface SpotMarketOptions {
     /**
-     * The maximum hourly price you're willing to pay for the Spot Instances. The default is the On-Demand price.
+     * The maximum hourly price that you're willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxPrice?: String;
     /**
@@ -31083,7 +31092,7 @@ declare namespace EC2 {
      */
     MinTargetCapacity?: Integer;
     /**
-     * The maximum amount per hour for Spot Instances that you're willing to pay.
+     * The maximum amount per hour for Spot Instances that you're willing to pay. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxTotalPrice?: String;
   }
@@ -31117,7 +31126,7 @@ declare namespace EC2 {
      */
     MinTargetCapacity?: Integer;
     /**
-     * The maximum amount per hour for Spot Instances that you're willing to pay.
+     * The maximum amount per hour for Spot Instances that you're willing to pay. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     MaxTotalPrice?: String;
   }
@@ -31166,7 +31175,7 @@ declare namespace EC2 {
      */
     ProductDescription?: RIProductDescription;
     /**
-     * The maximum price per hour that you are willing to pay for a Spot Instance.
+     * The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.  If you specify a maximum price, your instances will be interrupted more frequently than if you do not specify this parameter. 
      */
     SpotPrice?: String;
     /**
@@ -32552,6 +32561,9 @@ declare namespace EC2 {
      * Information about the accepter transit gateway.
      */
     AccepterTgwInfo?: PeeringTgwInfo;
+    /**
+     * Details about the transit gateway peering attachment.
+     */
     Options?: TransitGatewayPeeringAttachmentOptions;
     /**
      * The status of the transit gateway peering attachment.
@@ -32572,6 +32584,9 @@ declare namespace EC2 {
   }
   export type TransitGatewayPeeringAttachmentList = TransitGatewayPeeringAttachment[];
   export interface TransitGatewayPeeringAttachmentOptions {
+    /**
+     * Describes whether dynamic routing is enabled or disabled for the transit gateway peering attachment.
+     */
     DynamicRouting?: DynamicRoutingValue;
   }
   export interface TransitGatewayPolicyRule {
@@ -32786,6 +32801,9 @@ declare namespace EC2 {
      * The ID of the prefix list used for destination matches.
      */
     PrefixListId?: PrefixListResourceId;
+    /**
+     * The ID of the transit gateway route table announcement. 
+     */
     TransitGatewayRouteTableAnnouncementId?: TransitGatewayRouteTableAnnouncementId;
     /**
      * The attachments.
@@ -32856,11 +32874,17 @@ declare namespace EC2 {
      * The ID of the transit gateway.
      */
     TransitGatewayId?: TransitGatewayId;
+    /**
+     * The ID of the core network for the transit gateway route table announcement.
+     */
     CoreNetworkId?: String;
     /**
      * The ID of the peer transit gateway.
      */
     PeerTransitGatewayId?: TransitGatewayId;
+    /**
+     * The ID of the core network ID for the peer.
+     */
     PeerCoreNetworkId?: String;
     /**
      * The ID of the peering attachment.
