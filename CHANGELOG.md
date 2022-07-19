@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1177.0-->
+<!--LATEST=2.1178.0-->
 <!--ENTRYINSERT-->
+
+## 2.1178.0
+* feature: DevOpsGuru: Added new APIs for log anomaly detection feature.
+* feature: SageMaker: Fixed an issue with cross account QueryLineage
+* feature: SagemakerEdge: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
+* feature: WorkSpaces: Increased the character limit of the login message from 850 to 2000 characters.
 
 ## 2.1177.0
 * feature: Discovery: Add AWS Agentless Collector details to the GetDiscoverySummary API response

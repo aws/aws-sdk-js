@@ -15833,7 +15833,7 @@ declare namespace SageMaker {
     /**
      * A list of resource Amazon Resource Name (ARN) that represent the starting point for your lineage query.
      */
-    StartArns: QueryLineageStartArns;
+    StartArns?: QueryLineageStartArns;
     /**
      * Associations between lineage entities have a direction. This parameter determines the direction from the StartArn(s) that the query traverses.
      */
