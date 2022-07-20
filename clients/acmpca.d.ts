@@ -451,7 +451,7 @@ declare namespace ACMPCA {
      */
     IdempotencyToken?: IdempotencyToken;
     /**
-     * Specifies a cryptographic key management compliance standard used for handling CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: FIPS_140_2_LEVEL_3_OR_HIGHER is not supported in Region ap-northeast-3. When creating a CA in the ap-northeast-3, you must provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard. Failure to do this results in an InvalidArgsException with the message, "A certificate authority cannot be created in this region with the specified security standard."
+     * Specifies a cryptographic key management compliance standard used for handling CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER  Note: FIPS_140_2_LEVEL_3_OR_HIGHER is not supported in the following Regions:   ap-northeast-3   ap-southeast-3   When creating a CA in these Regions, you must provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard. Failure to do this results in an InvalidArgsException with the message, "A certificate authority cannot be created in this region with the specified security standard."
      */
     KeyStorageSecurityStandard?: KeyStorageSecurityStandard;
     /**
@@ -651,7 +651,7 @@ declare namespace ACMPCA {
      */
     SubjectAlternativeNames?: GeneralNameList;
     /**
-     *  Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the Global OID reference database.   The OID value of a CustomExtension must not match the OID of a predefined extension. 
+     *  Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the Global OID reference database. 
      */
     CustomExtensions?: CustomExtensionList;
   }

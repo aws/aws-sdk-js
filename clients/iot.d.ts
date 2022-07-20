@@ -52,11 +52,11 @@ declare class Iot extends Service {
    */
   attachPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This action is deprecated. Please use AttachPolicy instead. Requires permission to access the AttachPrincipalPolicy action.
+   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use AttachPolicy instead. Requires permission to access the AttachPrincipalPolicy action.
    */
   attachPrincipalPolicy(params: Iot.Types.AttachPrincipalPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This action is deprecated. Please use AttachPolicy instead. Requires permission to access the AttachPrincipalPolicy action.
+   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use AttachPolicy instead. Requires permission to access the AttachPrincipalPolicy action.
    */
   attachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -6395,6 +6395,12 @@ declare namespace Iot {
   export type IndexNamesList = IndexName[];
   export type IndexSchema = string;
   export type IndexStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
+  export interface IndexingFilter {
+    /**
+     * The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase the limit, see Amazon Web Services IoT Device Management Quotas in the Amazon Web Services General Reference. 
+     */
+    namedShadowNames?: NamedShadowNamesFilter;
+  }
   export type InlineDocument = string;
   export type InputName = string;
   export interface IotAnalyticsAction {
@@ -8574,6 +8580,7 @@ declare namespace Iot {
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
   export type MqttUsername = string;
   export type NamedShadowIndexingMode = "OFF"|"ON"|string;
+  export type NamedShadowNamesFilter = ShadowName[];
   export type NamespaceId = string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
@@ -9539,6 +9546,7 @@ declare namespace Iot {
      */
     disableAllLogs?: DisableAllLogs;
   }
+  export type ShadowName = string;
   export interface SigV4Authorization {
     /**
      * The signing region.
@@ -10219,6 +10227,10 @@ declare namespace Iot {
      * Contains custom field names and their data type.
      */
     customFields?: Fields;
+    /**
+     * Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set namedShadowIndexingMode to be ON and specify your shadow names in filter.
+     */
+    filter?: IndexingFilter;
   }
   export type ThingIndexingMode = "OFF"|"REGISTRY"|"REGISTRY_AND_SHADOW"|string;
   export type ThingName = string;

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1178.0-->
+<!--LATEST=2.1179.0-->
 <!--ENTRYINSERT-->
+
+## 2.1179.0
+* feature: Iot: GA release the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs. This includes Named Shadow Selection as a part of the UpdateIndexingConfiguration API.
 
 ## 2.1178.0
 * feature: DevOpsGuru: Added new APIs for log anomaly detection feature.
