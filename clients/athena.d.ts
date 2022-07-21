@@ -148,6 +148,14 @@ declare class Athena extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+   */
+  getQueryRuntimeStatistics(params: Athena.Types.GetQueryRuntimeStatisticsInput, callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
+  /**
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+   */
+  getQueryRuntimeStatistics(callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
+  /**
    * Returns table metadata for the specified catalog, database, and table.
    */
   getTableMetadata(params: Athena.Types.GetTableMetadataInput, callback?: (err: AWSError, data: Athena.Types.GetTableMetadataOutput) => void): Request<Athena.Types.GetTableMetadataOutput, AWSError>;
@@ -758,6 +766,18 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
+  export interface GetQueryRuntimeStatisticsInput {
+    /**
+     * The unique ID of the query execution.
+     */
+    QueryExecutionId: QueryExecutionId;
+  }
+  export interface GetQueryRuntimeStatisticsOutput {
+    /**
+     * Runtime statistics about the query execution.
+     */
+    QueryRuntimeStatistics?: QueryRuntimeStatistics;
+  }
   export interface GetTableMetadataInput {
     /**
      * The name of the data catalog that contains the database and table metadata to return.
@@ -1192,6 +1212,112 @@ declare namespace Athena {
      */
     AthenaError?: AthenaError;
   }
+  export interface QueryRuntimeStatistics {
+    Timeline?: QueryRuntimeStatisticsTimeline;
+    Rows?: QueryRuntimeStatisticsRows;
+    /**
+     * Stage statistics such as input and output rows and bytes, execution time, and stage state. This information also includes substages and the query stage plan.
+     */
+    OutputStage?: QueryStage;
+  }
+  export interface QueryRuntimeStatisticsRows {
+    /**
+     * The number of rows read to execute the query.
+     */
+    InputRows?: Long;
+    /**
+     * The number of bytes read to execute the query.
+     */
+    InputBytes?: Long;
+    /**
+     * The number of bytes returned by the query.
+     */
+    OutputBytes?: Long;
+    /**
+     * The number of rows returned by the query.
+     */
+    OutputRows?: Long;
+  }
+  export interface QueryRuntimeStatisticsTimeline {
+    /**
+     * The number of milliseconds that the query was in your query queue waiting for resources. Note that if transient errors occur, Athena might automatically add the query back to the queue.
+     */
+    QueryQueueTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that Athena took to plan the query processing flow. This includes the time spent retrieving table partitions from the data source. Note that because the query engine performs the query planning, query planning time is a subset of engine processing time.
+     */
+    QueryPlanningTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that the query took to execute.
+     */
+    EngineExecutionTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that Athena took to finalize and publish the query results after the query engine finished running the query.
+     */
+    ServiceProcessingTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that Athena took to run the query.
+     */
+    TotalExecutionTimeInMillis?: Long;
+  }
+  export interface QueryStage {
+    /**
+     * The identifier for a stage.
+     */
+    StageId?: Long;
+    /**
+     * State of the stage after query execution.
+     */
+    State?: String;
+    /**
+     * The number of bytes output from the stage after execution.
+     */
+    OutputBytes?: Long;
+    /**
+     * The number of rows output from the stage after execution.
+     */
+    OutputRows?: Long;
+    /**
+     * The number of bytes input into the stage for execution.
+     */
+    InputBytes?: Long;
+    /**
+     * The number of rows input into the stage for execution.
+     */
+    InputRows?: Long;
+    /**
+     * Time taken to execute this stage.
+     */
+    ExecutionTime?: Long;
+    /**
+     * Stage plan information such as name, identifier, sub plans, and source stages.
+     */
+    QueryStagePlan?: QueryStagePlanNode;
+    /**
+     * List of sub query stages that form this stage execution plan.
+     */
+    SubStages?: QueryStages;
+  }
+  export interface QueryStagePlanNode {
+    /**
+     * Name of the query stage plan that describes the operation this stage is performing as part of query execution.
+     */
+    Name?: String;
+    /**
+     * Information about the operation this query stage plan node is performing.
+     */
+    Identifier?: String;
+    /**
+     * Stage plan information such as name, identifier, sub plans, and remote sources of child plan nodes/
+     */
+    Children?: QueryStagePlanNodes;
+    /**
+     * Source plan node IDs.
+     */
+    RemoteSources?: StringList;
+  }
+  export type QueryStagePlanNodes = QueryStagePlanNode[];
+  export type QueryStages = QueryStage[];
   export type QueryString = string;
   export interface ResultConfiguration {
     /**
@@ -1313,6 +1439,7 @@ declare namespace Athena {
   export interface StopQueryExecutionOutput {
   }
   export type String = string;
+  export type StringList = String[];
   export interface TableMetadata {
     /**
      * The name of the table.

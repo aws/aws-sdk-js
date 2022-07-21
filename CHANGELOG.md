@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1179.0-->
+<!--LATEST=2.1180.0-->
 <!--ENTRYINSERT-->
+
+## 2.1180.0
+* feature: Athena: This feature allows customers to retrieve runtime statistics for completed queries
+* feature: CloudWatch: Adding support for the suppression of Composite Alarm actions
+* feature: DocDB: Enable copy-on-write restore type
+* feature: EC2InstanceConnect: This release includes a new exception type "EC2InstanceUnavailableException" for SendSSHPublicKey and SendSerialConsoleSSHPublicKey APIs.
+* feature: FraudDetector: The release introduces Account Takeover Insights (ATI) model. The ATI model detects fraud relating to account takeover. This release also adds support for new variable types: ARE_CREDENTIALS_VALID and SESSION_ID and adds new structures to Model Version APIs.
+* feature: IoTSiteWise: Added asynchronous API to ingest bulk historical and current data into IoT SiteWise.
+* feature: Kendra: Amazon Kendra now provides Oauth2 support for SharePoint Online. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
+* feature: NetworkFirewall: Network Firewall now supports referencing dynamic IP sets from stateful rule groups, for IP sets stored in Amazon VPC prefix lists.
 
 ## 2.1179.0
 * feature: Iot: GA release the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs. This includes Named Shadow Selection as a part of the UpdateIndexingConfiguration API.

@@ -101,6 +101,14 @@ declare class IoTSiteWise extends Service {
    */
   createAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAssetModelResponse) => void): Request<IoTSiteWise.Types.CreateAssetModelResponse, AWSError>;
   /**
+   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see Create a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.  You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see PutStorageConfiguration. 
+   */
+  createBulkImportJob(params: IoTSiteWise.Types.CreateBulkImportJobRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateBulkImportJobResponse) => void): Request<IoTSiteWise.Types.CreateBulkImportJobResponse, AWSError>;
+  /**
+   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see Create a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.  You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see PutStorageConfiguration. 
+   */
+  createBulkImportJob(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateBulkImportJobResponse) => void): Request<IoTSiteWise.Types.CreateBulkImportJobResponse, AWSError>;
+  /**
    * Creates a dashboard in an IoT SiteWise Monitor project.
    */
   createDashboard(params: IoTSiteWise.Types.CreateDashboardRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateDashboardResponse) => void): Request<IoTSiteWise.Types.CreateDashboardResponse, AWSError>;
@@ -228,6 +236,14 @@ declare class IoTSiteWise extends Service {
    * Retrieves information about an asset property.  When you call this operation for an attribute property, this response includes the default attribute value that you define in the asset model. If you update the default value in the model, this operation's response includes the new default value.  This operation doesn't return the value of the asset property. To get the value of an asset property, use GetAssetPropertyValue.
    */
   describeAssetProperty(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAssetPropertyResponse) => void): Request<IoTSiteWise.Types.DescribeAssetPropertyResponse, AWSError>;
+  /**
+   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves information about a bulk import job request. For more information, see Describe a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.
+   */
+  describeBulkImportJob(params: IoTSiteWise.Types.DescribeBulkImportJobRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeBulkImportJobResponse) => void): Request<IoTSiteWise.Types.DescribeBulkImportJobResponse, AWSError>;
+  /**
+   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves information about a bulk import job request. For more information, see Describe a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.
+   */
+  describeBulkImportJob(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeBulkImportJobResponse) => void): Request<IoTSiteWise.Types.DescribeBulkImportJobResponse, AWSError>;
   /**
    * Retrieves information about a dashboard.
    */
@@ -388,6 +404,14 @@ declare class IoTSiteWise extends Service {
    * Retrieves a paginated list of associated assets. You can use this operation to do the following:   List child assets associated to a parent asset by a hierarchy that you specify.   List an asset's parent asset.  
    */
   listAssociatedAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssociatedAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssociatedAssetsResponse, AWSError>;
+  /**
+   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves a paginated list of bulk import job requests. For more information, see List bulk import jobs (CLI) in the Amazon Simple Storage Service User Guide.
+   */
+  listBulkImportJobs(params: IoTSiteWise.Types.ListBulkImportJobsRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListBulkImportJobsResponse) => void): Request<IoTSiteWise.Types.ListBulkImportJobsResponse, AWSError>;
+  /**
+   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves a paginated list of bulk import job requests. For more information, see List bulk import jobs (CLI) in the Amazon Simple Storage Service User Guide.
+   */
+  listBulkImportJobs(callback?: (err: AWSError, data: IoTSiteWise.Types.ListBulkImportJobsResponse) => void): Request<IoTSiteWise.Types.ListBulkImportJobsResponse, AWSError>;
   /**
    * Retrieves a paginated list of dashboards for an IoT SiteWise Monitor project.
    */
@@ -1520,10 +1544,13 @@ declare namespace IoTSiteWise {
      */
     errorEntries: BatchPutAssetPropertyErrorEntries;
   }
+  export type Bucket = string;
   export type CapabilityConfiguration = string;
   export type CapabilityNamespace = string;
   export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|"UNKNOWN"|string;
   export type ClientToken = string;
+  export type ColumnName = "ALIAS"|"ASSET_ID"|"PROPERTY_ID"|"DATA_TYPE"|"TIMESTAMP_SECONDS"|"TIMESTAMP_NANO_OFFSET"|"QUALITY"|"VALUE"|string;
+  export type ColumnNames = ColumnName[];
   export interface CompositeModelProperty {
     /**
      * The name of the property.
@@ -1669,6 +1696,42 @@ declare namespace IoTSiteWise {
      * The status of the asset, which contains a state (CREATING after successfully calling this operation) and any error message.
      */
     assetStatus: AssetStatus;
+  }
+  export interface CreateBulkImportJobRequest {
+    /**
+     * The unique name that helps identify the job request.
+     */
+    jobName: Name;
+    /**
+     * The ARN of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+     */
+    jobRoleArn: ARN;
+    /**
+     * The files in the specified Amazon S3 bucket that contain your data.
+     */
+    files: Files;
+    /**
+     * The Amazon S3 destination where errors associated with the job creation request are saved.
+     */
+    errorReportLocation: ErrorReportLocation;
+    /**
+     * Contains the configuration information of a job, such as the file format used to save data in Amazon S3.
+     */
+    jobConfiguration: JobConfiguration;
+  }
+  export interface CreateBulkImportJobResponse {
+    /**
+     * The ID of the job.
+     */
+    jobId: ID;
+    /**
+     * The unique name that helps identify the job request.
+     */
+    jobName: Name;
+    /**
+     * The status of the bulk import job can be one of following values.    PENDING – IoT SiteWise is waiting for the current bulk import job to finish.    CANCELLED – The bulk import job has been canceled.    RUNNING – IoT SiteWise is processing your request to import your data from Amazon S3.    COMPLETED – IoT SiteWise successfully completed your request to import data from Amazon S3.    FAILED – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.    COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.  
+     */
+    jobStatus: JobStatus;
   }
   export interface CreateDashboardRequest {
     /**
@@ -1825,6 +1888,12 @@ declare namespace IoTSiteWise {
      * The ARN of the project, which has the following format.  arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId} 
      */
     projectArn: ARN;
+  }
+  export interface Csv {
+    /**
+     * The column names specified in the .csv file.
+     */
+    columnNames?: ColumnNames;
   }
   export interface CustomerManagedS3Storage {
     /**
@@ -2136,6 +2205,50 @@ declare namespace IoTSiteWise {
      * A description for the asset.
      */
     assetDescription?: Description;
+  }
+  export interface DescribeBulkImportJobRequest {
+    /**
+     * The ID of the job.
+     */
+    jobId: ID;
+  }
+  export interface DescribeBulkImportJobResponse {
+    /**
+     * The ID of the job.
+     */
+    jobId: ID;
+    /**
+     * The unique name that helps identify the job request.
+     */
+    jobName: Name;
+    /**
+     * The status of the bulk import job can be one of following values.    PENDING – IoT SiteWise is waiting for the current bulk import job to finish.    CANCELLED – The bulk import job has been canceled.    RUNNING – IoT SiteWise is processing your request to import your data from Amazon S3.    COMPLETED – IoT SiteWise successfully completed your request to import data from Amazon S3.    FAILED – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.    COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.  
+     */
+    jobStatus: JobStatus;
+    /**
+     * The ARN of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+     */
+    jobRoleArn: ARN;
+    /**
+     * The files in the specified Amazon S3 bucket that contain your data.
+     */
+    files: Files;
+    /**
+     * The Amazon S3 destination where errors associated with the job creation request are saved.
+     */
+    errorReportLocation: ErrorReportLocation;
+    /**
+     * Contains the configuration information of a job, such as the file format used to save data in Amazon S3.
+     */
+    jobConfiguration: JobConfiguration;
+    /**
+     * The date the job was created, in Unix epoch TIME.
+     */
+    jobCreationDate: Timestamp;
+    /**
+     * The date the job was last updated, in Unix epoch time.
+     */
+    jobLastUpdateDate: Timestamp;
   }
   export interface DescribeDashboardRequest {
     /**
@@ -2512,6 +2625,16 @@ declare namespace IoTSiteWise {
     details?: DetailedErrors;
   }
   export type ErrorMessage = string;
+  export interface ErrorReportLocation {
+    /**
+     * The name of the Amazon S3 bucket to which errors associated with the bulk import job are sent.
+     */
+    bucket: Bucket;
+    /**
+     * Amazon S3 uses the prefix as a folder name to organize data in the bucket. Each Amazon S3 object has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). For more information, see Organizing objects using prefixes in the Amazon Simple Storage Service User Guide.
+     */
+    prefix: String;
+  }
   export type Expression = string;
   export interface ExpressionVariable {
     /**
@@ -2524,6 +2647,27 @@ declare namespace IoTSiteWise {
     value: VariableValue;
   }
   export type ExpressionVariables = ExpressionVariable[];
+  export interface File {
+    /**
+     * The name of the Amazon S3 bucket from which data is imported.
+     */
+    bucket: Bucket;
+    /**
+     * The key of the Amazon S3 object that contains your data. Each object has a key that is a unique identifier. Each object has exactly one key.
+     */
+    key: String;
+    /**
+     * The version ID to identify a specific version of the Amazon S3 object that contains your data.
+     */
+    versionId?: String;
+  }
+  export interface FileFormat {
+    /**
+     * The .csv file format.
+     */
+    csv?: Csv;
+  }
+  export type Files = File[];
   export interface ForwardingConfig {
     /**
      * The forwarding state for the given property. 
@@ -2854,6 +2998,28 @@ declare namespace IoTSiteWise {
   export type Interval = string;
   export type IntervalInSeconds = number;
   export type IntervalWindowInSeconds = number;
+  export interface JobConfiguration {
+    /**
+     * The file format of the data in Amazon S3.
+     */
+    fileFormat: FileFormat;
+  }
+  export type JobStatus = "PENDING"|"CANCELLED"|"RUNNING"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string;
+  export type JobSummaries = JobSummary[];
+  export interface JobSummary {
+    /**
+     * The ID of the job.
+     */
+    id: ID;
+    /**
+     * The unique name that helps identify the job request.
+     */
+    name: Name;
+    /**
+     * The status of the bulk import job can be one of following values.    PENDING – IoT SiteWise is waiting for the current bulk import job to finish.    CANCELLED – The bulk import job has been canceled.    RUNNING – IoT SiteWise is processing your request to import your data from Amazon S3.    COMPLETED – IoT SiteWise successfully completed your request to import data from Amazon S3.    FAILED – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.    COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.  
+     */
+    status: JobStatus;
+  }
   export type KmsKeyId = string;
   export interface ListAccessPoliciesRequest {
     /**
@@ -2999,6 +3165,31 @@ declare namespace IoTSiteWise {
      * A list that summarizes the associated assets.
      */
     assetSummaries: AssociatedAssetsSummaries;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export type ListBulkImportJobsFilter = "ALL"|"PENDING"|"RUNNING"|"CANCELLED"|"FAILED"|"COMPLETED_WITH_FAILURES"|"COMPLETED"|string;
+  export interface ListBulkImportJobsRequest {
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return for each paginated request.
+     */
+    maxResults?: MaxResults;
+    /**
+     * You can use a filter to select the bulk import jobs that you want to retrieve.
+     */
+    filter?: ListBulkImportJobsFilter;
+  }
+  export interface ListBulkImportJobsResponse {
+    /**
+     * One or more job summaries to list.
+     */
+    jobSummaries: JobSummaries;
     /**
      * The token for the next set of results, or null if there are no additional results.
      */
@@ -3495,6 +3686,7 @@ declare namespace IoTSiteWise {
   }
   export type SSOApplicationId = string;
   export type StorageType = "SITEWISE_DEFAULT_STORAGE"|"MULTI_LAYER_STORAGE"|string;
+  export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};

@@ -321,6 +321,8 @@ declare namespace CloudWatch {
   export type AccountId = string;
   export type ActionPrefix = string;
   export type ActionsEnabled = boolean;
+  export type ActionsSuppressedBy = "WaitPeriod"|"ExtensionPeriod"|"Alarm"|string;
+  export type ActionsSuppressedReason = string;
   export type AlarmArn = string;
   export type AlarmDescription = string;
   export interface AlarmHistoryItem {
@@ -456,13 +458,37 @@ declare namespace CloudWatch {
      */
     StateReasonData?: StateReasonData;
     /**
-     * The time stamp of the last update to the alarm state.
+     * Tracks the timestamp of any state update, even if StateValue doesn't change.
      */
     StateUpdatedTimestamp?: Timestamp;
     /**
      * The state value for the alarm.
      */
     StateValue?: StateValue;
+    /**
+     *  The timestamp of the last change to the alarm's StateValue. 
+     */
+    StateTransitionedTimestamp?: Timestamp;
+    /**
+     *  When the value is ALARM, it means that the actions are suppressed because the suppressor alarm is in ALARM When the value is WaitPeriod, it means that the actions are suppressed because the composite alarm is waiting for the suppressor alarm to go into into the ALARM state. The maximum waiting time is as specified in ActionsSuppressorWaitPeriod. After this time, the composite alarm performs its actions. When the value is ExtensionPeriod, it means that the actions are suppressed because the composite alarm is waiting after the suppressor alarm went out of the ALARM state. The maximum waiting time is as specified in ActionsSuppressorExtensionPeriod. After this time, the composite alarm performs its actions. 
+     */
+    ActionsSuppressedBy?: ActionsSuppressedBy;
+    /**
+     *  Captures the reason for action suppression. 
+     */
+    ActionsSuppressedReason?: ActionsSuppressedReason;
+    /**
+     *  Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. 
+     */
+    ActionsSuppressor?: AlarmArn;
+    /**
+     *  The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the ALARM state. After this time, the composite alarm performs its actions.    WaitPeriod is required only when ActionsSuppressor is specified.  
+     */
+    ActionsSuppressorWaitPeriod?: SuppressorPeriod;
+    /**
+     *  The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.    ExtensionPeriod is required only when ActionsSuppressor is specified.  
+     */
+    ActionsSuppressorExtensionPeriod?: SuppressorPeriod;
   }
   export type CompositeAlarms = CompositeAlarm[];
   export type Counts = DatapointValue[];
@@ -1711,6 +1737,18 @@ declare namespace CloudWatch {
      * A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.
      */
     Tags?: TagList;
+    /**
+     *  Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. 
+     */
+    ActionsSuppressor?: AlarmArn;
+    /**
+     *  The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the ALARM state. After this time, the composite alarm performs its actions.    WaitPeriod is required only when ActionsSuppressor is specified.  
+     */
+    ActionsSuppressorWaitPeriod?: SuppressorPeriod;
+    /**
+     *  The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.    ExtensionPeriod is required only when ActionsSuppressor is specified.  
+     */
+    ActionsSuppressorExtensionPeriod?: SuppressorPeriod;
   }
   export interface PutDashboardInput {
     /**
@@ -1983,6 +2021,7 @@ declare namespace CloudWatch {
   export interface StopMetricStreamsOutput {
   }
   export type StorageResolution = number;
+  export type SuppressorPeriod = number;
   export interface Tag {
     /**
      * A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
