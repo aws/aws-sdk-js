@@ -358,6 +358,14 @@ declare class MediaLive extends Service {
    */
   purchaseOffering(callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
   /**
+   * Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.
+   */
+  rebootInputDevice(params: MediaLive.Types.RebootInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.RebootInputDeviceResponse) => void): Request<MediaLive.Types.RebootInputDeviceResponse, AWSError>;
+  /**
+   * Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.
+   */
+  rebootInputDevice(callback?: (err: AWSError, data: MediaLive.Types.RebootInputDeviceResponse) => void): Request<MediaLive.Types.RebootInputDeviceResponse, AWSError>;
+  /**
    * Reject the transfer of the specified input device to your AWS account.
    */
   rejectInputDeviceTransfer(params: MediaLive.Types.RejectInputDeviceTransferRequest, callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
@@ -373,6 +381,14 @@ declare class MediaLive extends Service {
    * Starts an existing channel
    */
   startChannel(callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
+  /**
+   * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
+   */
+  startInputDeviceMaintenanceWindow(params: MediaLive.Types.StartInputDeviceMaintenanceWindowRequest, callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
+  /**
+   * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
+   */
+  startInputDeviceMaintenanceWindow(callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
   /**
    * Start (run) the multiplex. Starting the multiplex does not start the channels. You must explicitly start each channel.
    */
@@ -5590,6 +5606,19 @@ When this field is defined, ConstantBitrate must be undefined.
   }
   export interface RawSettings {
   }
+  export type RebootInputDeviceForce = "NO"|"YES"|string;
+  export interface RebootInputDeviceRequest {
+    /**
+     * Force a reboot of an input device. If the device is streaming, it will stop streaming and begin rebooting within a few seconds of sending the command. If the device was streaming prior to the reboot, the device will resume streaming when the reboot completes.
+     */
+    Force?: RebootInputDeviceForce;
+    /**
+     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface RebootInputDeviceResponse {
+  }
   export interface Rec601Settings {
   }
   export interface Rec709Settings {
@@ -6144,6 +6173,14 @@ one destination per packager.
      * Settings for VPC output
      */
     Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface StartInputDeviceMaintenanceWindowRequest {
+    /**
+     * The unique ID of the input device to start a maintenance window for. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StartInputDeviceMaintenanceWindowResponse {
   }
   export interface StartMultiplexRequest {
     /**

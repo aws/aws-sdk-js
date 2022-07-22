@@ -718,6 +718,14 @@ declare class RDS extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: RDS.Types.TagListMessage) => void): Request<RDS.Types.TagListMessage, AWSError>;
   /**
+   * Changes the audit policy state of a database activity stream to either locked (default) or unlocked. A locked policy is read-only, whereas an unlocked policy is read/write. If your activity stream is started and locked, you can unlock it, customize your audit policy, and then lock your activity stream. Restarting the activity stream isn't required. For more information, see  Modifying a database activity stream in the Amazon RDS User Guide.  This operation is supported for RDS for Oracle only.
+   */
+  modifyActivityStream(params: RDS.Types.ModifyActivityStreamRequest, callback?: (err: AWSError, data: RDS.Types.ModifyActivityStreamResponse) => void): Request<RDS.Types.ModifyActivityStreamResponse, AWSError>;
+  /**
+   * Changes the audit policy state of a database activity stream to either locked (default) or unlocked. A locked policy is read-only, whereas an unlocked policy is read/write. If your activity stream is started and locked, you can unlock it, customize your audit policy, and then lock your activity stream. Restarting the activity stream isn't required. For more information, see  Modifying a database activity stream in the Amazon RDS User Guide.  This operation is supported for RDS for Oracle only.
+   */
+  modifyActivityStream(callback?: (err: AWSError, data: RDS.Types.ModifyActivityStreamResponse) => void): Request<RDS.Types.ModifyActivityStreamResponse, AWSError>;
+  /**
    * Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or remove the override. By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS. You might need to override the default certificate in the following situations:   You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified Amazon Web Services Region.   RDS has already moved to a new default CA certificate for the specified Amazon Web Services Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.   For more information about rotating your SSL/TLS certificate for RDS DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon RDS User Guide. For more information about rotating your SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate in the Amazon Aurora User Guide.
    */
   modifyCertificates(params: RDS.Types.ModifyCertificatesMessage, callback?: (err: AWSError, data: RDS.Types.ModifyCertificatesResult) => void): Request<RDS.Types.ModifyCertificatesResult, AWSError>;
@@ -1185,6 +1193,7 @@ declare namespace RDS {
   export type AccountQuotaList = AccountQuota[];
   export type ActivityStreamMode = "sync"|"async"|string;
   export type ActivityStreamModeList = String[];
+  export type ActivityStreamPolicyStatus = "locked"|"unlocked"|"locking-policy"|"unlocking-policy"|string;
   export type ActivityStreamStatus = "stopped"|"starting"|"started"|"stopping"|string;
   export interface AddRoleToDBClusterMessage {
     /**
@@ -1256,6 +1265,7 @@ declare namespace RDS {
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
   export type AttributeValueList = String[];
+  export type AuditPolicyState = "locked"|"unlocked"|string;
   export type AuthScheme = "SECRETS"|string;
   export interface AuthorizeDBSecurityGroupIngressMessage {
     /**
@@ -2272,7 +2282,7 @@ declare namespace RDS {
      */
     DBProxyName: String;
     /**
-     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL.
+     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. For Aurora MySQL and RDS for MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL databases, specify POSTGRESQL.
      */
     EngineFamily: EngineFamily;
     /**
@@ -3468,6 +3478,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide and  Working with a DB instance in a VPC in the Amazon Aurora User Guide. 
      */
     NetworkType?: String;
+    /**
+     * The status of the policy state of the activity stream.
+     */
+    ActivityStreamPolicyStatus?: ActivityStreamPolicyStatus;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -3712,7 +3726,7 @@ declare namespace RDS {
      */
     Status?: DBProxyStatus;
     /**
-     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. MYSQL supports Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases. POSTGRESQL supports Aurora PostgreSQL and RDS for PostgreSQL databases.
+     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. MYSQL supports Aurora MySQL and RDS for MySQL databases. POSTGRESQL supports Aurora PostgreSQL and RDS for PostgreSQL databases.
      */
     EngineFamily?: String;
     /**
@@ -5694,6 +5708,42 @@ declare namespace RDS {
     MinimumEngineVersion?: String;
   }
   export type MinimumEngineVersionPerAllowedValueList = MinimumEngineVersionPerAllowedValue[];
+  export interface ModifyActivityStreamRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the RDS for Oracle DB instance, for example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db.
+     */
+    ResourceArn?: String;
+    /**
+     * The audit policy state. When a policy is unlocked, it is read/write. When it is locked, it is read-only. You can edit your audit policy only when the activity stream is unlocked or stopped.
+     */
+    AuditPolicyState?: AuditPolicyState;
+  }
+  export interface ModifyActivityStreamResponse {
+    /**
+     * The Amazon Web Services KMS key identifier for encryption of messages in the database activity stream.
+     */
+    KmsKeyId?: String;
+    /**
+     * The name of the Amazon Kinesis data stream to be used for the database activity stream.
+     */
+    KinesisStreamName?: String;
+    /**
+     * The status of the modification to the database activity stream.
+     */
+    Status?: ActivityStreamStatus;
+    /**
+     * The mode of the database activity stream.
+     */
+    Mode?: ActivityStreamMode;
+    /**
+     * Indicates whether engine-native audit fields are included in the database activity stream.
+     */
+    EngineNativeAuditFieldsIncluded?: BooleanOptional;
+    /**
+     * The status of the modification to the policy state of the database activity stream.
+     */
+    PolicyStatus?: ActivityStreamPolicyStatus;
+  }
   export interface ModifyCertificatesMessage {
     /**
      * The new default certificate identifier to override the current one with. To determine the valid values, use the describe-certificates CLI command or the DescribeCertificates API operation.
