@@ -144,6 +144,10 @@ function ServiceCollector(services) {
 
   var invalidModules = [];
   services.split(',').sort().forEach(function(name) {
+    if (['cognitoidentity', 'sts'].indexOf(name) >= 0) {
+      // these service has been included via browser credentials already
+      return;
+    }
     try {
       serviceCode += buildService(name, usingDefaultServicesToggle) + '\n';
     } catch (e) {
