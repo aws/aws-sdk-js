@@ -125,11 +125,11 @@ declare class LookoutVision extends Service {
    */
   listModels(callback?: (err: AWSError, data: LookoutVision.Types.ListModelsResponse) => void): Request<LookoutVision.Types.ListModelsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
+   * Lists the Amazon Lookout for Vision projects in your AWS account that are in the AWS Region in which you call ListProjects. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(params: LookoutVision.Types.ListProjectsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
+   * Lists the Amazon Lookout for Vision projects in your AWS account that are in the AWS Region in which you call ListProjects. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
@@ -759,6 +759,14 @@ declare namespace LookoutVision {
      * The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model during training.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The minimum number of inference units used by the model. For more information, see StartModel 
+     */
+    MinInferenceUnits?: InferenceUnits;
+    /**
+     * The maximum number of inference units Amazon Lookout for Vision uses to auto-scale the model. For more information, see StartModel.
+     */
+    MaxInferenceUnits?: InferenceUnits;
   }
   export type ModelDescriptionMessage = string;
   export type ModelHostingStatus = "STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|string;
@@ -1030,6 +1038,10 @@ declare namespace LookoutVision {
      * ClientToken is an idempotency token that ensures a call to StartModel completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from StartModel. In this case, safely retry your call to StartModel by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple start requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StartModel. An idempotency token is active for 8 hours. 
      */
     ClientToken?: ClientToken;
+    /**
+     * The maximum number of inference units to use for auto-scaling the model. If you don't specify a value, Amazon Lookout for Vision doesn't auto-scale the model.
+     */
+    MaxInferenceUnits?: InferenceUnits;
   }
   export interface StartModelResponse {
     /**

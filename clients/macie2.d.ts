@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -292,6 +293,30 @@ declare class Macie2 extends Service {
    */
   getMember(callback?: (err: AWSError, data: Macie2.Types.GetMemberResponse) => void): Request<Macie2.Types.GetMemberResponse, AWSError>;
   /**
+   * Retrieves the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   */
+  getRevealConfiguration(params: Macie2.Types.GetRevealConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetRevealConfigurationResponse) => void): Request<Macie2.Types.GetRevealConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   */
+  getRevealConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetRevealConfigurationResponse) => void): Request<Macie2.Types.GetRevealConfigurationResponse, AWSError>;
+  /**
+   * Retrieves (reveals) occurrences of sensitive data reported by a finding.
+   */
+  getSensitiveDataOccurrences(params: Macie2.Types.GetSensitiveDataOccurrencesRequest, callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesResponse, AWSError>;
+  /**
+   * Retrieves (reveals) occurrences of sensitive data reported by a finding.
+   */
+  getSensitiveDataOccurrences(callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesResponse, AWSError>;
+  /**
+   * Checks whether occurrences of sensitive data can be retrieved (revealed) for a finding.
+   */
+  getSensitiveDataOccurrencesAvailability(params: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityRequest, callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse, AWSError>;
+  /**
+   * Checks whether occurrences of sensitive data can be retrieved (revealed) for a finding.
+   */
+  getSensitiveDataOccurrencesAvailability(callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse, AWSError>;
+  /**
    * Retrieves (queries) quotas and aggregated usage data for one or more accounts.
    */
   getUsageStatistics(params: Macie2.Types.GetUsageStatisticsRequest, callback?: (err: AWSError, data: Macie2.Types.GetUsageStatisticsResponse) => void): Request<Macie2.Types.GetUsageStatisticsResponse, AWSError>;
@@ -467,6 +492,22 @@ declare class Macie2 extends Service {
    * Updates the Amazon Macie configuration settings for an organization in Organizations.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
+  /**
+   * Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   */
+  updateRevealConfiguration(params: Macie2.Types.UpdateRevealConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateRevealConfigurationResponse) => void): Request<Macie2.Types.UpdateRevealConfigurationResponse, AWSError>;
+  /**
+   * Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   */
+  updateRevealConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateRevealConfigurationResponse) => void): Request<Macie2.Types.UpdateRevealConfigurationResponse, AWSError>;
+  /**
+   * Waits for the findingRevealed state by periodically calling the underlying Macie2.getSensitiveDataOccurrencesoperation every 2 seconds (at most 60 times). Wait until the sensitive data occurrences are ready.
+   */
+  waitFor(state: "findingRevealed", params: Macie2.Types.GetSensitiveDataOccurrencesRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesResponse, AWSError>;
+  /**
+   * Waits for the findingRevealed state by periodically calling the underlying Macie2.getSensitiveDataOccurrencesoperation every 2 seconds (at most 60 times). Wait until the sensitive data occurrences are ready.
+   */
+  waitFor(state: "findingRevealed", callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesResponse, AWSError>;
 }
 declare namespace Macie2 {
   export interface AcceptInvitationRequest {
@@ -563,6 +604,7 @@ declare namespace Macie2 {
      */
     sessionContext?: SessionContext;
   }
+  export type AvailabilityCode = "AVAILABLE"|"UNAVAILABLE"|string;
   export interface AwsAccount {
     /**
      * The unique identifier for the Amazon Web Services account.
@@ -1058,11 +1100,11 @@ declare namespace Macie2 {
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must precede and be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.
+     * The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. The distance can be 1-300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -1414,7 +1456,7 @@ declare namespace Macie2 {
      */
     lastRunErrorStatus?: LastRunErrorStatus;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started.
+     * The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started or, if the job hasn't run yet, when the job was created.
      */
     lastRunTime?: __timestampIso8601;
     /**
@@ -1465,6 +1507,12 @@ declare namespace Macie2 {
      * Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.
      */
     maxAccountLimitReached?: __boolean;
+  }
+  export interface DetectedDataDetails {
+    /**
+     * An occurrence of the specified type of sensitive data. Each occurrence can contain 1-128 characters.
+     */
+    value: __stringMin1Max128;
   }
   export interface DisableMacieRequest {
   }
@@ -1803,11 +1851,11 @@ declare namespace Macie2 {
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must precede and be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression.
+     * The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. Otherwise, Macie excludes the result.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -1999,6 +2047,50 @@ declare namespace Macie2 {
      */
     updatedAt?: __timestampIso8601;
   }
+  export interface GetRevealConfigurationRequest {
+  }
+  export interface GetRevealConfigurationResponse {
+    /**
+     * The current configuration settings and the status of the configuration for the account.
+     */
+    configuration?: RevealConfiguration;
+  }
+  export interface GetSensitiveDataOccurrencesAvailabilityRequest {
+    /**
+     * The unique identifier for the finding.
+     */
+    findingId: __string;
+  }
+  export interface GetSensitiveDataOccurrencesAvailabilityResponse {
+    /**
+     * Specifies whether occurrences of sensitive data can be retrieved for the finding. Possible values are: AVAILABLE, the sensitive data can be retrieved; and, UNAVAILABLE, the sensitive data can't be retrieved. If this value is UNAVAILABLE, the reasons array indicates why the data can't be retrieved.
+     */
+    code?: AvailabilityCode;
+    /**
+     * Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are: INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format. OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data. OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Amazon Macie created the finding. UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding. UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data. This value is null if sensitive data can be retrieved for the finding.
+     */
+    reasons?: __listOfUnavailabilityReasonCode;
+  }
+  export interface GetSensitiveDataOccurrencesRequest {
+    /**
+     * The unique identifier for the finding.
+     */
+    findingId: __string;
+  }
+  export interface GetSensitiveDataOccurrencesResponse {
+    /**
+     * If an error occurred when Amazon Macie attempted to retrieve occurrences of sensitive data reported by the finding, a description of the error that occurred. This value is null if the status (status) of the request is PROCESSING or SUCCESS.
+     */
+    error?: __string;
+    /**
+     * A map that specifies 1-100 types of sensitive data reported by the finding and, for each type, 1-10 occurrences of sensitive data.
+     */
+    sensitiveDataOccurrences?: SensitiveDataOccurrences;
+    /**
+     * The status of the request to retrieve occurrences of sensitive data reported by the finding. Possible values are: ERROR - An error occurred when Amazon Macie attempted to locate, retrieve, or encrypt the sensitive data. The error value indicates the nature of the error that occurred. PROCESSING - Macie is processing the request. SUCCESS - Macie successfully located, retrieved, and encrypted the sensitive data.
+     */
+    status?: RevealRequestStatus;
+  }
   export interface GetUsageStatisticsRequest {
     /**
      * An array of objects, one for each condition to use to filter the query results. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.
@@ -2169,7 +2261,7 @@ declare namespace Macie2 {
   export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|"STARTS_WITH"|string;
   export interface JobDetails {
     /**
-     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket. 
+     * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
      */
     isDefinedInJob?: IsDefinedInJob;
     /**
@@ -2774,6 +2866,18 @@ declare namespace Macie2 {
      */
     s3Object?: S3Object;
   }
+  export interface RevealConfiguration {
+    /**
+     * The Amazon Resource Name (ARN), ID, or alias of the KMS key to use to encrypt sensitive data that's retrieved. The key must be an existing, customer managed, symmetric encryption key that's in the same Amazon Web Services Region as the Amazon Macie account. If this value specifies an alias, it must include the following prefix: alias/. If this value specifies a key that's owned by another Amazon Web Services account, it must specify the ARN of the key or the ARN of the key's alias.
+     */
+    kmsKeyId?: __stringMin1Max2048;
+    /**
+     * The status of the configuration for the Amazon Macie account. In a request, valid values are: ENABLED, enable the configuration for the account; and, DISABLED, disable the configuration for the account. In a response, possible values are: ENABLED, the configuration is currently enabled for the account; and, DISABLED, the configuration is currently disabled for the account.
+     */
+    status: RevealStatus;
+  }
+  export type RevealRequestStatus = "SUCCESS"|"PROCESSING"|"ERROR"|string;
+  export type RevealStatus = "ENABLED"|"DISABLED"|string;
   export interface S3Bucket {
     /**
      * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of objects.
@@ -2848,7 +2952,7 @@ declare namespace Macie2 {
      */
     keyPrefix?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric, customer managed KMS key that's in the same Amazon Web Services Region as the bucket.
+     * The Amazon Resource Name (ARN) of the customer managed KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric encryption KMS key that's in the same Amazon Web Services Region as the bucket.
      */
     kmsKeyArn: __string;
   }
@@ -3054,6 +3158,7 @@ declare namespace Macie2 {
     totalCount?: __long;
   }
   export type SensitiveDataItemCategory = "FINANCIAL_INFORMATION"|"PERSONAL_INFORMATION"|"CREDENTIALS"|"CUSTOM_IDENTIFIER"|string;
+  export type SensitiveDataOccurrences = {[key: string]: __listOfDetectedDataDetails};
   export interface ServerSideEncryption {
     /**
      * The server-side encryption algorithm that's used when storing data in the bucket or object. If default encryption is disabled for the bucket or the object isn't encrypted using server-side encryption, this value is NONE.
@@ -3261,11 +3366,11 @@ declare namespace Macie2 {
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must precede and be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.
+     * The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. The distance can be 1-300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -3285,6 +3390,7 @@ declare namespace Macie2 {
   }
   export type TimeRange = "MONTH_TO_DATE"|"PAST_30_DAYS"|string;
   export type Type = "NONE"|"AES256"|"aws:kms"|string;
+  export type UnavailabilityReasonCode = "OBJECT_EXCEEDS_SIZE_QUOTA"|"UNSUPPORTED_OBJECT_TYPE"|"UNSUPPORTED_FINDING_TYPE"|"INVALID_CLASSIFICATION_RESULT"|"OBJECT_UNAVAILABLE"|string;
   export type Unit = "TERABYTES"|string;
   export interface UnprocessedAccount {
     /**
@@ -3395,6 +3501,18 @@ declare namespace Macie2 {
     autoEnable: __boolean;
   }
   export interface UpdateOrganizationConfigurationResponse {
+  }
+  export interface UpdateRevealConfigurationRequest {
+    /**
+     * The new configuration settings and the status of the configuration for the account.
+     */
+    configuration: RevealConfiguration;
+  }
+  export interface UpdateRevealConfigurationResponse {
+    /**
+     * The new configuration settings and the status of the configuration for the account.
+     */
+    configuration?: RevealConfiguration;
   }
   export interface UsageByAccount {
     /**
@@ -3543,6 +3661,7 @@ declare namespace Macie2 {
   export type __listOfBucketMetadata = BucketMetadata[];
   export type __listOfCriteriaForJob = CriteriaForJob[];
   export type __listOfCustomDataIdentifierSummary = CustomDataIdentifierSummary[];
+  export type __listOfDetectedDataDetails = DetectedDataDetails[];
   export type __listOfFinding = Finding[];
   export type __listOfFindingType = FindingType[];
   export type __listOfFindingsFilterListItem = FindingsFilterListItem[];
@@ -3560,6 +3679,7 @@ declare namespace Macie2 {
   export type __listOfSearchResourcesTagCriterionPair = SearchResourcesTagCriterionPair[];
   export type __listOfTagCriterionPairForJob = TagCriterionPairForJob[];
   export type __listOfTagValuePair = TagValuePair[];
+  export type __listOfUnavailabilityReasonCode = UnavailabilityReasonCode[];
   export type __listOfUnprocessedAccount = UnprocessedAccount[];
   export type __listOfUsageByAccount = UsageByAccount[];
   export type __listOfUsageRecord = UsageRecord[];
@@ -3568,6 +3688,8 @@ declare namespace Macie2 {
   export type __listOf__string = __string[];
   export type __long = number;
   export type __string = string;
+  export type __stringMin1Max128 = string;
+  export type __stringMin1Max2048 = string;
   export type __timestampIso8601 = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

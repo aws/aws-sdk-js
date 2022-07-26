@@ -20,6 +20,22 @@ declare class Detective extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Gets data source package information for the behavior graph.
+   */
+  batchGetGraphMemberDatasources(params: Detective.Types.BatchGetGraphMemberDatasourcesRequest, callback?: (err: AWSError, data: Detective.Types.BatchGetGraphMemberDatasourcesResponse) => void): Request<Detective.Types.BatchGetGraphMemberDatasourcesResponse, AWSError>;
+  /**
+   * Gets data source package information for the behavior graph.
+   */
+  batchGetGraphMemberDatasources(callback?: (err: AWSError, data: Detective.Types.BatchGetGraphMemberDatasourcesResponse) => void): Request<Detective.Types.BatchGetGraphMemberDatasourcesResponse, AWSError>;
+  /**
+   * Gets information on the data source package history for an account.
+   */
+  batchGetMembershipDatasources(params: Detective.Types.BatchGetMembershipDatasourcesRequest, callback?: (err: AWSError, data: Detective.Types.BatchGetMembershipDatasourcesResponse) => void): Request<Detective.Types.BatchGetMembershipDatasourcesResponse, AWSError>;
+  /**
+   * Gets information on the data source package history for an account.
+   */
+  batchGetMembershipDatasources(callback?: (err: AWSError, data: Detective.Types.BatchGetMembershipDatasourcesResponse) => void): Request<Detective.Types.BatchGetMembershipDatasourcesResponse, AWSError>;
+  /**
    * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
    */
   createGraph(params: Detective.Types.CreateGraphRequest, callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
@@ -60,7 +76,7 @@ declare class Detective extends Service {
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: Detective.Types.DescribeOrganizationConfigurationResponse) => void): Request<Detective.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Removes the Detective administrator account for the organization in the current Region. Deletes the behavior graph for that account. Can only be called by the organization management account. Before you can select a different Detective administrator account, you must remove the Detective administrator account in all Regions.
+   * Removes the Detective administrator account in the current Region. Deletes the organization behavior graph. Can only be called by the organization management account. Removing the Detective administrator account does not affect the delegated administrator account for Detective in Organizations. To remove the delegated administrator account in Organizations, use the Organizations API. Removing the delegated administrator account also removes the Detective administrator account in all Regions, except for Regions where the Detective administrator account is the organization management account.
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -72,11 +88,11 @@ declare class Detective extends Service {
    */
   disassociateMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Designates the Detective administrator account for the organization in the current Region. If the account does not have Detective enabled, then enables Detective for that account and creates a new behavior graph. Can only be called by the organization management account. The Detective administrator account for an organization must be the same in all Regions. If you already designated a Detective administrator account in another Region, then you must designate the same account.
+   * Designates the Detective administrator account for the organization in the current Region. If the account does not have Detective enabled, then enables Detective for that account and creates a new behavior graph. Can only be called by the organization management account. If the organization has a delegated administrator account in Organizations, then the Detective administrator account must be either the delegated administrator account or the organization management account. If the organization does not have a delegated administrator account in Organizations, then you can choose any account in the organization. If you choose an account other than the organization management account, Detective calls Organizations to make that account the delegated administrator account for Detective. The organization management account cannot be the delegated administrator account.
    */
   enableOrganizationAdminAccount(params: Detective.Types.EnableOrganizationAdminAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Designates the Detective administrator account for the organization in the current Region. If the account does not have Detective enabled, then enables Detective for that account and creates a new behavior graph. Can only be called by the organization management account. The Detective administrator account for an organization must be the same in all Regions. If you already designated a Detective administrator account in another Region, then you must designate the same account.
+   * Designates the Detective administrator account for the organization in the current Region. If the account does not have Detective enabled, then enables Detective for that account and creates a new behavior graph. Can only be called by the organization management account. If the organization has a delegated administrator account in Organizations, then the Detective administrator account must be either the delegated administrator account or the organization management account. If the organization does not have a delegated administrator account in Organizations, then you can choose any account in the organization. If you choose an account other than the organization management account, Detective calls Organizations to make that account the delegated administrator account for Detective. The organization management account cannot be the delegated administrator account.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -87,6 +103,14 @@ declare class Detective extends Service {
    * Returns the membership details for specified member accounts for a behavior graph.
    */
   getMembers(callback?: (err: AWSError, data: Detective.Types.GetMembersResponse) => void): Request<Detective.Types.GetMembersResponse, AWSError>;
+  /**
+   * Lists data source packages in the behavior graph.
+   */
+  listDatasourcePackages(params: Detective.Types.ListDatasourcePackagesRequest, callback?: (err: AWSError, data: Detective.Types.ListDatasourcePackagesResponse) => void): Request<Detective.Types.ListDatasourcePackagesResponse, AWSError>;
+  /**
+   * Lists data source packages in the behavior graph.
+   */
+  listDatasourcePackages(callback?: (err: AWSError, data: Detective.Types.ListDatasourcePackagesResponse) => void): Request<Detective.Types.ListDatasourcePackagesResponse, AWSError>;
   /**
    * Returns the list of behavior graphs that the calling account is an administrator account of. This operation can only be called by an administrator account. Because an account can currently only be the administrator of one behavior graph within a Region, the results always contain a single behavior graph.
    */
@@ -160,6 +184,14 @@ declare class Detective extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Detective.Types.UntagResourceResponse) => void): Request<Detective.Types.UntagResourceResponse, AWSError>;
   /**
+   * Starts a data source packages for the behavior graph.
+   */
+  updateDatasourcePackages(params: Detective.Types.UpdateDatasourcePackagesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a data source packages for the behavior graph.
+   */
+  updateDatasourcePackages(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the configuration for the Organizations integration in the current Region. Can only be called by the Detective administrator account for the organization.
    */
   updateOrganizationConfiguration(params: Detective.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -186,6 +218,7 @@ declare namespace Detective {
     EmailAddress: EmailAddress;
   }
   export type AccountId = string;
+  export type AccountIdExtendedList = AccountId[];
   export type AccountIdList = AccountId[];
   export type AccountList = Account[];
   export interface Administrator {
@@ -203,6 +236,42 @@ declare namespace Detective {
     DelegationTime?: Timestamp;
   }
   export type AdministratorList = Administrator[];
+  export interface BatchGetGraphMemberDatasourcesRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The list of Amazon Web Services accounts to get data source package information on.
+     */
+    AccountIds: AccountIdExtendedList;
+  }
+  export interface BatchGetGraphMemberDatasourcesResponse {
+    /**
+     * Details on the status of data source packages for members of the behavior graph.
+     */
+    MemberDatasources?: MembershipDatasourcesList;
+    /**
+     * Accounts that data source package information could not be retrieved for.
+     */
+    UnprocessedAccounts?: UnprocessedAccountList;
+  }
+  export interface BatchGetMembershipDatasourcesRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArns: GraphArnList;
+  }
+  export interface BatchGetMembershipDatasourcesResponse {
+    /**
+     * Details on the data source package history for an member of the behavior graph.
+     */
+    MembershipDatasources?: MembershipDatasourcesList;
+    /**
+     * Graphs that data source package information could not be retrieved for.
+     */
+    UnprocessedGraphs?: UnprocessedGraphList;
+  }
   export type Boolean = boolean;
   export type ByteValue = number;
   export interface CreateGraphRequest {
@@ -244,6 +313,32 @@ declare namespace Detective {
      * The list of accounts for which Detective was unable to process the invitation or enablement request. For each account, the list provides the reason why the request could not be processed. The list includes accounts that are already member accounts in the behavior graph.
      */
     UnprocessedAccounts?: UnprocessedAccountList;
+  }
+  export type DatasourcePackage = "DETECTIVE_CORE"|"EKS_AUDIT"|string;
+  export interface DatasourcePackageIngestDetail {
+    /**
+     * Details on which data source packages are ingested for a member account.
+     */
+    DatasourcePackageIngestState?: DatasourcePackageIngestState;
+    /**
+     * The date a data source package was enabled for this account
+     */
+    LastIngestStateChange?: LastIngestStateChangeDates;
+  }
+  export type DatasourcePackageIngestDetails = {[key: string]: DatasourcePackageIngestDetail};
+  export type DatasourcePackageIngestHistory = {[key: string]: LastIngestStateChangeDates};
+  export type DatasourcePackageIngestState = "STARTED"|"STOPPED"|"DISABLED"|string;
+  export type DatasourcePackageIngestStates = {[key: string]: DatasourcePackageIngestState};
+  export type DatasourcePackageList = DatasourcePackage[];
+  export interface DatasourcePackageUsageInfo {
+    /**
+     * Total volume of data in bytes per day ingested for a given data source package.
+     */
+    VolumeUsageInBytes?: ByteValue;
+    /**
+     * The data and time when the member account data volume was last updated. The value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+     */
+    VolumeUsageUpdateTime?: Timestamp;
   }
   export interface DeleteGraphRequest {
     /**
@@ -328,8 +423,34 @@ declare namespace Detective {
     CreatedTime?: Timestamp;
   }
   export type GraphArn = string;
+  export type GraphArnList = GraphArn[];
   export type GraphList = Graph[];
   export type InvitationType = "INVITATION"|"ORGANIZATION"|string;
+  export type LastIngestStateChangeDates = {[key: string]: TimestampForCollection};
+  export interface ListDatasourcePackagesRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MemberResultsLimit;
+  }
+  export interface ListDatasourcePackagesResponse {
+    /**
+     * Details on the data source packages active in the behavior graph.
+     */
+    DatasourcePackages?: DatasourcePackageIngestDetails;
+    /**
+     * For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListGraphsRequest {
     /**
      * For requests to get the next page of results, the pagination token that was returned with the previous set of results. The initial request does not include a pagination token.
@@ -406,7 +527,7 @@ declare namespace Detective {
   }
   export interface ListOrganizationAdminAccountsResponse {
     /**
-     * The list of delegated administrator accounts.
+     * The list of Detective administrator accounts.
      */
     Administrators?: AdministratorList;
     /**
@@ -483,11 +604,34 @@ declare namespace Detective {
      * The type of behavior graph membership. For an organization account in the organization behavior graph, the type is ORGANIZATION. For an account that was invited to a behavior graph, the type is INVITATION. 
      */
     InvitationType?: InvitationType;
+    /**
+     * Details on the volume of usage for each data source package in a behavior graph.
+     */
+    VolumeUsageByDatasourcePackage?: VolumeUsageByDatasourcePackage;
+    /**
+     * The state of a data source package for the behavior graph.
+     */
+    DatasourcePackageIngestStates?: DatasourcePackageIngestStates;
   }
   export type MemberDetailList = MemberDetail[];
   export type MemberDisabledReason = "VOLUME_TOO_HIGH"|"VOLUME_UNKNOWN"|string;
   export type MemberResultsLimit = number;
   export type MemberStatus = "INVITED"|"VERIFICATION_IN_PROGRESS"|"VERIFICATION_FAILED"|"ENABLED"|"ACCEPTED_BUT_DISABLED"|string;
+  export interface MembershipDatasources {
+    /**
+     * The account identifier of the Amazon Web Services account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The ARN of the organization behavior graph.
+     */
+    GraphArn?: GraphArn;
+    /**
+     * Details on when a data source package was added to a behavior graph.
+     */
+    DatasourcePackageIngestHistory?: DatasourcePackageIngestHistory;
+  }
+  export type MembershipDatasourcesList = MembershipDatasources[];
   export type PaginationToken = string;
   export type Percentage = number;
   export interface RejectInvitationRequest {
@@ -523,6 +667,12 @@ declare namespace Detective {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export interface TimestampForCollection {
+    /**
+     * The data and time when data collection began for a source package. The value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+     */
+    Timestamp?: Timestamp;
+  }
   export interface UnprocessedAccount {
     /**
      * The Amazon Web Services account identifier of the member account that was not processed.
@@ -534,6 +684,17 @@ declare namespace Detective {
     Reason?: UnprocessedReason;
   }
   export type UnprocessedAccountList = UnprocessedAccount[];
+  export interface UnprocessedGraph {
+    /**
+     * The ARN of the organization behavior graph.
+     */
+    GraphArn?: GraphArn;
+    /**
+     * The reason data source package information could not be processed for a behavior graph.
+     */
+    Reason?: UnprocessedReason;
+  }
+  export type UnprocessedGraphList = UnprocessedGraph[];
   export type UnprocessedReason = string;
   export interface UntagResourceRequest {
     /**
@@ -547,6 +708,16 @@ declare namespace Detective {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateDatasourcePackagesRequest {
+    /**
+     * The ARN of the behavior graph.
+     */
+    GraphArn: GraphArn;
+    /**
+     * The data source package start for the behavior graph.
+     */
+    DatasourcePackages: DatasourcePackageList;
+  }
   export interface UpdateOrganizationConfigurationRequest {
     /**
      * The ARN of the organization behavior graph.
@@ -557,6 +728,7 @@ declare namespace Detective {
      */
     AutoEnable?: Boolean;
   }
+  export type VolumeUsageByDatasourcePackage = {[key: string]: DatasourcePackageUsageInfo};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

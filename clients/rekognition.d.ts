@@ -405,11 +405,11 @@ declare class Rekognition extends Service {
    */
   startPersonTracking(callback?: (err: AWSError, data: Rekognition.Types.StartPersonTrackingResponse) => void): Request<Rekognition.Types.StartPersonTrackingResponse, AWSError>;
   /**
-   * Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  This operation requires permissions to perform the rekognition:StartProjectVersion action.
+   * Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  For more information, see Running a trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom Labels Guide. This operation requires permissions to perform the rekognition:StartProjectVersion action.
    */
   startProjectVersion(params: Rekognition.Types.StartProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.StartProjectVersionResponse) => void): Request<Rekognition.Types.StartProjectVersionResponse, AWSError>;
   /**
-   * Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  This operation requires permissions to perform the rekognition:StartProjectVersion action.
+   * Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  For more information, see Running a trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom Labels Guide. This operation requires permissions to perform the rekognition:StartProjectVersion action.
    */
   startProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.StartProjectVersionResponse) => void): Request<Rekognition.Types.StartProjectVersionResponse, AWSError>;
   /**
@@ -911,7 +911,7 @@ declare namespace Rekognition {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     *  Specifies locations in the frames where Amazon Rekognition checks for objects or people. You can specify up to 10 regions of interest. This is an optional parameter for label detection stream processors and should not be used to create a face search stream processor. 
+     *  Specifies locations in the frames where Amazon Rekognition checks for objects or people. You can specify up to 10 regions of interest, and each region has either a polygon or a bounding box. This is an optional parameter for label detection stream processors and should not be used to create a face search stream processor. 
      */
     RegionsOfInterest?: RegionsOfInterest;
     /**
@@ -2590,6 +2590,10 @@ declare namespace Rekognition {
      * The identifer for the AWS Key Management Service key (AWS KMS key) that was used to encrypt the model during training. 
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The maximum number of inference units Amazon Rekognition Custom Labels uses to auto-scale the model. For more information, see StartProjectVersion.
+     */
+    MaxInferenceUnits?: InferenceUnits;
   }
   export type ProjectVersionDescriptions = ProjectVersionDescription[];
   export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|string;
@@ -3049,9 +3053,13 @@ declare namespace Rekognition {
      */
     ProjectVersionArn: ProjectVersionArn;
     /**
-     * The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. 
+     * The minimum number of inference units to use. A single inference unit represents 1 hour of processing.  For information about the number of transactions per second (TPS) that an inference unit can support, see Running a trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom Labels Guide.  Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. 
      */
     MinInferenceUnits: InferenceUnits;
+    /**
+     * The maximum number of inference units to use for auto-scaling the model. If you don't specify a value, Amazon Rekognition Custom Labels doesn't auto-scale the model.
+     */
+    MaxInferenceUnits?: InferenceUnits;
   }
   export interface StartProjectVersionResponse {
     /**

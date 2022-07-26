@@ -156,6 +156,14 @@ declare class AppSync extends Service {
    */
   disassociateApi(callback?: (err: AWSError, data: AppSync.Types.DisassociateApiResponse) => void): Request<AppSync.Types.DisassociateApiResponse, AWSError>;
   /**
+   * Evaluates a given template and returns the response. The mapping template can be a request or response template. Request templates take the incoming request after a GraphQL operation is parsed and convert it into a request configuration for the selected data source operation. Response templates interpret responses from the data source and map it to the shape of the GraphQL field output type. Mapping templates are written in the Apache Velocity Template Language (VTL).
+   */
+  evaluateMappingTemplate(params: AppSync.Types.EvaluateMappingTemplateRequest, callback?: (err: AWSError, data: AppSync.Types.EvaluateMappingTemplateResponse) => void): Request<AppSync.Types.EvaluateMappingTemplateResponse, AWSError>;
+  /**
+   * Evaluates a given template and returns the response. The mapping template can be a request or response template. Request templates take the incoming request after a GraphQL operation is parsed and convert it into a request configuration for the selected data source operation. Response templates interpret responses from the data source and map it to the shape of the GraphQL field output type. Mapping templates are written in the Apache Velocity Template Language (VTL).
+   */
+  evaluateMappingTemplate(callback?: (err: AWSError, data: AppSync.Types.EvaluateMappingTemplateResponse) => void): Request<AppSync.Types.EvaluateMappingTemplateResponse, AWSError>;
+  /**
    * Flushes an ApiCache object.
    */
   flushApiCache(params: AppSync.Types.FlushApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.FlushApiCacheResponse) => void): Request<AppSync.Types.FlushApiCacheResponse, AWSError>;
@@ -536,7 +544,7 @@ declare namespace AppSync {
     /**
      * The TTL in seconds for a resolver that has caching activated. Valid values are 1–3,600 seconds.
      */
-    ttl?: Long;
+    ttl: Long;
     /**
      * The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
      */
@@ -554,12 +562,13 @@ declare namespace AppSync {
      */
     awsRegion: String;
     /**
-     * A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+     * A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn't set, no filtering is applied.
      */
     appIdClientRegex?: String;
   }
   export type ConflictDetectionType = "VERSION"|"NONE"|string;
   export type ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
+  export type Context = string;
   export interface CreateApiCacheRequest {
     /**
      * The GraphQL API ID.
@@ -1057,6 +1066,34 @@ declare namespace AppSync {
      */
     awsRegion: String;
   }
+  export interface ErrorDetail {
+    /**
+     * The error payload.
+     */
+    message?: ErrorMessage;
+  }
+  export type ErrorMessage = string;
+  export interface EvaluateMappingTemplateRequest {
+    /**
+     * The mapping template; this can be a request or response template. A template is required for this action.
+     */
+    template: Template;
+    /**
+     * The map that holds all of the contextual information for your resolver invocation. A context is required for this action.
+     */
+    context: Context;
+  }
+  export interface EvaluateMappingTemplateResponse {
+    /**
+     * The mapping template; this can be a request or response template.
+     */
+    evaluationResult?: EvaluationResult;
+    /**
+     * The ErrorDetail object.
+     */
+    error?: ErrorDetail;
+  }
+  export type EvaluationResult = string;
   export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
   export interface FlushApiCacheRequest {
     /**
@@ -1749,6 +1786,7 @@ declare namespace AppSync {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type Template = string;
   export interface Type {
     /**
      * The type name.
@@ -2080,7 +2118,7 @@ declare namespace AppSync {
      */
     defaultAction: DefaultAction;
     /**
-     * A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+     * A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn't set, no filtering is applied.
      */
     appIdClientRegex?: String;
   }
