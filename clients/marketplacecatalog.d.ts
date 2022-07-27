@@ -233,7 +233,7 @@ declare namespace MarketplaceCatalog {
      */
     EntityIdentifier?: Identifier;
     /**
-     * The ARN associated to the unique identifier for the change set referenced in this request.
+     * The ARN associated to the unique identifier for the entity referenced in this request.
      */
     EntityArn?: ARN;
     /**

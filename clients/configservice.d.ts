@@ -504,6 +504,14 @@ declare class ConfigService extends Service {
    */
   listAggregateDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListAggregateDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListAggregateDiscoveredResourcesResponse, AWSError>;
   /**
+   * Returns a list of conformance pack compliance scores. A compliance score is the percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack. This metric provides you with a high-level view of the compliance state of your conformance packs, and can be used to identify, investigate, and understand compliance deviations in your conformance packs.
+   */
+  listConformancePackComplianceScores(params: ConfigService.Types.ListConformancePackComplianceScoresRequest, callback?: (err: AWSError, data: ConfigService.Types.ListConformancePackComplianceScoresResponse) => void): Request<ConfigService.Types.ListConformancePackComplianceScoresResponse, AWSError>;
+  /**
+   * Returns a list of conformance pack compliance scores. A compliance score is the percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack. This metric provides you with a high-level view of the compliance state of your conformance packs, and can be used to identify, investigate, and understand compliance deviations in your conformance packs.
+   */
+  listConformancePackComplianceScores(callback?: (err: AWSError, data: ConfigService.Types.ListConformancePackComplianceScoresResponse) => void): Request<ConfigService.Types.ListConformancePackComplianceScoresResponse, AWSError>;
+  /**
    * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that Config has discovered, including those that Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
    */
   listDiscoveredResources(params: ConfigService.Types.ListDiscoveredResourcesRequest, callback?: (err: AWSError, data: ConfigService.Types.ListDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListDiscoveredResourcesResponse, AWSError>;
@@ -1108,6 +1116,7 @@ declare namespace ConfigService {
     CapExceeded?: Boolean;
   }
   export type ComplianceResourceTypes = StringWithCharLimit256[];
+  export type ComplianceScore = string;
   export type ComplianceSummariesByResourceType = ComplianceSummaryByResourceType[];
   export interface ComplianceSummary {
     /**
@@ -1500,6 +1509,27 @@ declare namespace ConfigService {
     ComplianceType?: ConformancePackComplianceType;
   }
   export type ConformancePackComplianceResourceIds = StringWithCharLimit256[];
+  export interface ConformancePackComplianceScore {
+    /**
+     * Compliance score for the conformance pack.
+     */
+    Score?: ComplianceScore;
+    /**
+     * The name of the conformance pack.
+     */
+    ConformancePackName?: ConformancePackName;
+    /**
+     * The time that the conformance pack compliance score was last updated.
+     */
+    LastUpdatedTime?: LastUpdatedTime;
+  }
+  export type ConformancePackComplianceScores = ConformancePackComplianceScore[];
+  export interface ConformancePackComplianceScoresFilters {
+    /**
+     * The name of a conformance pack whose score should be included in the compliance score result.
+     */
+    ConformancePackNames: ConformancePackNameFilter;
+  }
   export interface ConformancePackComplianceSummary {
     /**
      * The name of the conformance pack name.
@@ -1598,6 +1628,7 @@ declare namespace ConfigService {
   }
   export type ConformancePackInputParameters = ConformancePackInputParameter[];
   export type ConformancePackName = string;
+  export type ConformancePackNameFilter = ConformancePackName[];
   export type ConformancePackNamesList = ConformancePackName[];
   export type ConformancePackNamesToSummarizeList = ConformancePackName[];
   export interface ConformancePackRuleCompliance {
@@ -3039,6 +3070,7 @@ declare namespace ConfigService {
   export type GroupedResourceCountList = GroupedResourceCount[];
   export type IncludeGlobalResourceTypes = boolean;
   export type Integer = number;
+  export type LastUpdatedTime = Date;
   export type LaterTime = Date;
   export type Limit = number;
   export interface ListAggregateDiscoveredResourcesRequest {
@@ -3072,6 +3104,38 @@ declare namespace ConfigService {
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: NextToken;
+  }
+  export interface ListConformancePackComplianceScoresRequest {
+    /**
+     * Filters the results based on the ConformancePackComplianceScoresFilters.
+     */
+    Filters?: ConformancePackComplianceScoresFilters;
+    /**
+     * Determines the order in which conformance pack compliance scores are sorted. Either in ascending or descending order.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * Sorts your conformance pack compliance scores in either ascending or descending order, depending on SortOrder.
+     */
+    SortBy?: SortBy;
+    /**
+     * The maximum number of conformance pack compliance scores returned on each page.
+     */
+    Limit?: PageSizeLimit;
+    /**
+     * The nextToken string in a prior request that you can use to get the paginated response for next set of conformance pack compliance scores.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListConformancePackComplianceScoresResponse {
+    /**
+     * The nextToken string that you can use to get the next page of results in a paginated response.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of ConformancePackComplianceScore objects
+     */
+    ConformancePackComplianceScores: ConformancePackComplianceScores;
   }
   export interface ListDiscoveredResourcesRequest {
     /**
@@ -4199,6 +4263,8 @@ declare namespace ConfigService {
      */
     NextToken?: NextToken;
   }
+  export type SortBy = "SCORE"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface Source {
     /**
      * Indicates whether Amazon Web Services or the customer owns and manages the Config rule. Config Managed Rules are predefined rules owned by Amazon Web Services. For more information, see Config Managed Rules in the Config developer guide. Config Custom Rules are rules that you can develop either with Guard (CUSTOM_POLICY) or Lambda (CUSTOM_LAMBDA). For more information, see Config Custom Rules  in the Config developer guide.

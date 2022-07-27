@@ -92,6 +92,14 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
   /**
+   * Creates a new WorkSpace image from an existing WorkSpace.
+   */
+  createWorkspaceImage(params: WorkSpaces.Types.CreateWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
+  /**
+   * Creates a new WorkSpace image from an existing WorkSpace.
+   */
+  createWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
+  /**
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
@@ -840,6 +848,58 @@ declare namespace WorkSpaces {
   export interface CreateWorkspaceBundleResult {
     WorkspaceBundle?: WorkspaceBundle;
   }
+  export interface CreateWorkspaceImageRequest {
+    /**
+     * The name of the new WorkSpace image.
+     */
+    Name: WorkspaceImageName;
+    /**
+     * The description of the new WorkSpace image.
+     */
+    Description: WorkspaceImageDescription;
+    /**
+     * The identifier of the source WorkSpace
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The tags that you want to add to the new WorkSpace image. To add tags when you're creating the image, you must create an IAM policy that grants your IAM user permission to use workspaces:CreateTags.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateWorkspaceImageResult {
+    /**
+     * The identifier of the new WorkSpace image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The name of the image.
+     */
+    Name?: WorkspaceImageName;
+    /**
+     * The description of the image.
+     */
+    Description?: WorkspaceImageDescription;
+    /**
+     * The operating system that the image is running.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
+     * The availability status of the image.
+     */
+    State?: WorkspaceImageState;
+    /**
+     * Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more information, see  Bring Your Own Windows Desktop Images. 
+     */
+    RequiredTenancy?: WorkspaceImageRequiredTenancy;
+    /**
+     * The date when the image was created.
+     */
+    Created?: Timestamp;
+    /**
+     * The identifier of the AWS account that owns the image.
+     */
+    OwnerAccountId?: AwsAccount;
+  }
   export interface CreateWorkspacesRequest {
     /**
      * The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -863,7 +923,7 @@ declare namespace WorkSpaces {
   export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
   export interface DefaultClientBrandingAttributes {
     /**
-     * The logo URL. The only image format accepted is a binary data object that is converted from a .png file.
+     * The logo. The only image format accepted is a binary data object that is converted from a .png file.
      */
     LogoUrl?: ClientUrl;
     /**
@@ -879,7 +939,7 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
@@ -901,7 +961,7 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
@@ -1559,7 +1619,7 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
@@ -1589,7 +1649,7 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
