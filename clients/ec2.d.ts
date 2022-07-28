@@ -269,19 +269,19 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * [VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * Adds the specified inbound (ingress) rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address range, or from the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group quotas, see Amazon VPC quotas.
+   * Adds the specified inbound (ingress) rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address range, or from the instances that are associated with the specified destination security groups. When specifying an inbound rule for your security group in a VPC, the IpPermissions must include a source for the traffic. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group quotas, see Amazon VPC quotas.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   authorizeSecurityGroupIngress(params: EC2.Types.AuthorizeSecurityGroupIngressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupIngressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupIngressResult, AWSError>;
   /**
-   * Adds the specified inbound (ingress) rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address range, or from the instances that are associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group quotas, see Amazon VPC quotas.
+   * Adds the specified inbound (ingress) rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address range, or from the instances that are associated with the specified destination security groups. When specifying an inbound rule for your security group in a VPC, the IpPermissions must include a source for the traffic. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group quotas, see Amazon VPC quotas.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   authorizeSecurityGroupIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupIngressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupIngressResult, AWSError>;
   /**
@@ -717,11 +717,11 @@ declare class EC2 extends Service {
    */
   createRouteTable(callback?: (err: AWSError, data: EC2.Types.CreateRouteTableResult) => void): Request<EC2.Types.CreateRouteTableResult, AWSError>;
   /**
-   * Creates a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide. When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress. For more information about VPC security group limits, see Amazon VPC Limits.
+   * Creates a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide. When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress. For more information about VPC security group limits, see Amazon VPC Limits.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   createSecurityGroup(params: EC2.Types.CreateSecurityGroupRequest, callback?: (err: AWSError, data: EC2.Types.CreateSecurityGroupResult) => void): Request<EC2.Types.CreateSecurityGroupResult, AWSError>;
   /**
-   * Creates a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide. When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress. For more information about VPC security group limits, see Amazon VPC Limits.
+   * Creates a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide. When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress. For more information about VPC security group limits, see Amazon VPC Limits.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   createSecurityGroup(callback?: (err: AWSError, data: EC2.Types.CreateSecurityGroupResult) => void): Request<EC2.Types.CreateSecurityGroupResult, AWSError>;
   /**
@@ -1245,11 +1245,11 @@ declare class EC2 extends Service {
    */
   deleteRouteTable(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a security group. If you attempt to delete a security group that is associated with an instance, or is referenced by another security group, the operation fails with InvalidGroup.InUse in EC2-Classic or DependencyViolation in EC2-VPC.
+   * Deletes a security group. If you attempt to delete a security group that is associated with an instance, or is referenced by another security group, the operation fails with InvalidGroup.InUse in EC2-Classic or DependencyViolation in EC2-VPC.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   deleteSecurityGroup(params: EC2.Types.DeleteSecurityGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a security group. If you attempt to delete a security group that is associated with an instance, or is referenced by another security group, the operation fails with InvalidGroup.InUse in EC2-Classic or DependencyViolation in EC2-VPC.
+   * Deletes a security group. If you attempt to delete a security group that is associated with an instance, or is referenced by another security group, the operation fails with InvalidGroup.InUse in EC2-Classic or DependencyViolation in EC2-VPC.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   deleteSecurityGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1541,11 +1541,11 @@ declare class EC2 extends Service {
    */
   deregisterTransitGatewayMulticastGroupSources(callback?: (err: AWSError, data: EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult) => void): Request<EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult, AWSError>;
   /**
-   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
+   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.    We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 User Guide. 
    */
   describeAccountAttributes(params: EC2.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.  
+   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.    We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 User Guide. 
    */
   describeAccountAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
@@ -2261,11 +2261,11 @@ declare class EC2 extends Service {
    */
   describeSecurityGroupRules(callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupRulesResult) => void): Request<EC2.Types.DescribeSecurityGroupRulesResult, AWSError>;
   /**
-   * Describes the specified security groups or all of your security groups. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes the specified security groups or all of your security groups. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   describeSecurityGroups(params: EC2.Types.DescribeSecurityGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupsResult) => void): Request<EC2.Types.DescribeSecurityGroupsResult, AWSError>;
   /**
-   * Describes the specified security groups or all of your security groups. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide.
+   * Describes the specified security groups or all of your security groups. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 security groups in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC in the Amazon Virtual Private Cloud User Guide.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   describeSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupsResult) => void): Request<EC2.Types.DescribeSecurityGroupsResult, AWSError>;
   /**
@@ -4117,11 +4117,11 @@ declare class EC2 extends Service {
    */
   revokeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupEgressResult) => void): Request<EC2.Types.RevokeSecurityGroupEgressResult, AWSError>;
   /**
-   * Removes the specified inbound (ingress) rules from a security group. You can specify rules using either rule IDs or security group rule properties. If you use rule properties, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, security group, or prefix list). For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not need to specify the description to revoke the rule. [EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked. Amazon Web Services recommends that you describe the security group to verify that the rules were removed. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified inbound (ingress) rules from a security group. You can specify rules using either rule IDs or security group rule properties. If you use rule properties, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, security group, or prefix list). For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not need to specify the description to revoke the rule. [EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked. Amazon Web Services recommends that you describe the security group to verify that the rules were removed. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   revokeSecurityGroupIngress(params: EC2.Types.RevokeSecurityGroupIngressRequest, callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupIngressResult) => void): Request<EC2.Types.RevokeSecurityGroupIngressResult, AWSError>;
   /**
-   * Removes the specified inbound (ingress) rules from a security group. You can specify rules using either rule IDs or security group rule properties. If you use rule properties, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, security group, or prefix list). For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not need to specify the description to revoke the rule. [EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked. Amazon Web Services recommends that you describe the security group to verify that the rules were removed. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified inbound (ingress) rules from a security group. You can specify rules using either rule IDs or security group rule properties. If you use rule properties, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule has a protocol, from and to ports, and source (CIDR range, security group, or prefix list). For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not need to specify the description to revoke the rule. [EC2-Classic, default VPC] If the values you specify do not match the existing rule's values, no error is returned, and the output describes the security group rules that were not revoked. Amazon Web Services recommends that you describe the security group to verify that the rules were removed. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: EC2.Types.RevokeSecurityGroupIngressResult) => void): Request<EC2.Types.RevokeSecurityGroupIngressResult, AWSError>;
   /**
@@ -17365,7 +17365,7 @@ declare namespace EC2 {
      */
     ImageId: ImageId;
     /**
-     * Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist.
      */
     S3ExportLocation: ExportTaskS3LocationRequest;
     /**
@@ -17520,7 +17520,7 @@ declare namespace EC2 {
      */
     DiskImageFormat?: DiskImageFormat;
     /**
-     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist and have an access control list (ACL) attached that specifies the Region-specific canonical account ID for the Grantee. For more information about the ACL to your S3 bucket, see Prerequisites in the VM Import/Export User Guide.
      */
     S3Bucket?: String;
     /**
@@ -17538,7 +17538,7 @@ declare namespace EC2 {
      */
     DiskImageFormat?: DiskImageFormat;
     /**
-     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist and have an access control list (ACL) attached that specifies the Region-specific canonical account ID for the Grantee. For more information about the ACL to your S3 bucket, see Prerequisites in the VM Import/Export User Guide.
      */
     S3Bucket?: String;
     /**
@@ -19823,7 +19823,7 @@ declare namespace EC2 {
      */
     UefiData?: AttributeValue;
     /**
-     * The date and time, in ISO 8601 date-time format, when the AMI was last used to launch an EC2 instance. When the AMI is used, there is a 24-hour delay before that usage is reported.   lastLaunchedTime data is available starting April 2017. 
+     * The date and time, in ISO 8601 date-time format, when the AMI was last used to launch an EC2 instance. When the AMI is used to launch an instance, there is a 24-hour delay before that usage is reported.   lastLaunchedTime data is available starting April 2017. 
      */
     LastLaunchedTime?: AttributeValue;
   }
@@ -20794,7 +20794,7 @@ declare namespace EC2 {
      */
     InstanceId?: String;
     /**
-     * The credit option for CPU usage of the instance. Valid values are standard and unlimited.
+     * The credit option for CPU usage of the instance. Valid values: standard | unlimited 
      */
     CpuCredits?: String;
   }
@@ -20806,7 +20806,7 @@ declare namespace EC2 {
      */
     InstanceId?: InstanceId;
     /**
-     * The credit option for CPU usage of the instance. Valid values are standard and unlimited. T3 instances with host tenancy do not support the unlimited CPU credit option.
+     * The credit option for CPU usage of the instance. Valid values: standard | unlimited  T3 instances with host tenancy do not support the unlimited CPU credit option.
      */
     CpuCredits?: String;
   }
@@ -21255,7 +21255,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * Indicates whether to assign a carrier IP address to the network interface. You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the Amazon Web Services Wavelength Developer Guide.
+     * Indicates whether to assign a carrier IP address to the network interface. You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP address in the Amazon Web Services Wavelength Developer Guide.
      */
     AssociateCarrierIpAddress?: Boolean;
     /**
@@ -28071,7 +28071,7 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: SecurityGroupIdStringList;
     /**
-     * [EC2-Classic, default VPC] One or more security group names. For a nondefault VPC, you must use security group IDs instead. You cannot specify both a security group ID and security name in the same request.
+     * One or more security group names. For a nondefault VPC, you must use security group IDs instead. You cannot specify both a security group ID and security name in the same request.
      */
     SecurityGroups?: SecurityGroupStringList;
     /**
@@ -29459,7 +29459,7 @@ declare namespace EC2 {
      */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
     /**
-     * The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited. To change this attribute after launch, use  ModifyInstanceCreditSpecification. For more information, see Burstable performance instances in the Amazon EC2 User Guide. Default: standard (T2 instances) or unlimited (T3/T3a instances) For T3 instances with host tenancy, only standard is supported.
+     * The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited. To change this attribute after launch, use  ModifyInstanceCreditSpecification. For more information, see Burstable performance instances in the Amazon EC2 User Guide. Default: standard (T2 instances) or unlimited (T3/T3a/T4g instances) For T3 instances with host tenancy, only standard is supported.
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
