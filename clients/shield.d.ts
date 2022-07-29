@@ -44,11 +44,11 @@ declare class Shield extends Service {
    */
   associateProactiveEngagementDetails(callback?: (err: AWSError, data: Shield.Types.AssociateProactiveEngagementDetailsResponse) => void): Request<Shield.Types.AssociateProactiveEngagementDetailsResponse, AWSError>;
   /**
-   * Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. You can add protection to multiple resources at once through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information see Getting Started with Shield Advanced and Adding Shield Advanced protection to Amazon Web Services resources.
+   * Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Amazon Route 53 hosted zone, Global Accelerator standard accelerator, Elastic IP Address, Application Load Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and Network Load Balancers by association with protected Amazon EC2 Elastic IP addresses. You can add protection to only a single resource with each CreateProtection request. You can add protection to multiple resources at once through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information see Getting Started with Shield Advanced and Adding Shield Advanced protection to Amazon Web Services resources.
    */
   createProtection(params: Shield.Types.CreateProtectionRequest, callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
   /**
-   * Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. You can add protection to multiple resources at once through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information see Getting Started with Shield Advanced and Adding Shield Advanced protection to Amazon Web Services resources.
+   * Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Amazon Route 53 hosted zone, Global Accelerator standard accelerator, Elastic IP Address, Application Load Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and Network Load Balancers by association with protected Amazon EC2 Elastic IP addresses. You can add protection to only a single resource with each CreateProtection request. You can add protection to multiple resources at once through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information see Getting Started with Shield Advanced and Adding Shield Advanced protection to Amazon Web Services resources.
    */
   createProtection(callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class Shield extends Service {
    */
   createProtectionGroup(callback?: (err: AWSError, data: Shield.Types.CreateProtectionGroupResponse) => void): Request<Shield.Types.CreateProtectionGroupResponse, AWSError>;
   /**
-   * Activates Shield Advanced for an account. When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
+   * Activates Shield Advanced for an account.  For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account, regardless of whether the payer account itself is subscribed.   When you initially create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
    */
   createSubscription(params: Shield.Types.CreateSubscriptionRequest, callback?: (err: AWSError, data: Shield.Types.CreateSubscriptionResponse) => void): Request<Shield.Types.CreateSubscriptionResponse, AWSError>;
   /**
-   * Activates Shield Advanced for an account. When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
+   * Activates Shield Advanced for an account.  For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account, regardless of whether the payer account itself is subscribed.   When you initially create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
    */
   createSubscription(callback?: (err: AWSError, data: Shield.Types.CreateSubscriptionResponse) => void): Request<Shield.Types.CreateSubscriptionResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Shield extends Service {
    */
   describeSubscription(callback?: (err: AWSError, data: Shield.Types.DescribeSubscriptionResponse) => void): Request<Shield.Types.DescribeSubscriptionResponse, AWSError>;
   /**
-   * Disable the Shield Advanced automatic application layer DDoS mitigation feature for the resource. This stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. 
+   * Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource. This stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. 
    */
   disableApplicationLayerAutomaticResponse(params: Shield.Types.DisableApplicationLayerAutomaticResponseRequest, callback?: (err: AWSError, data: Shield.Types.DisableApplicationLayerAutomaticResponseResponse) => void): Request<Shield.Types.DisableApplicationLayerAutomaticResponseResponse, AWSError>;
   /**
-   * Disable the Shield Advanced automatic application layer DDoS mitigation feature for the resource. This stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. 
+   * Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource. This stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. 
    */
   disableApplicationLayerAutomaticResponse(callback?: (err: AWSError, data: Shield.Types.DisableApplicationLayerAutomaticResponseResponse) => void): Request<Shield.Types.DisableApplicationLayerAutomaticResponseResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Shield extends Service {
    */
   disassociateHealthCheck(callback?: (err: AWSError, data: Shield.Types.DisassociateHealthCheckResponse) => void): Request<Shield.Types.DisassociateHealthCheckResponse, AWSError>;
   /**
-   * Enable the Shield Advanced automatic application layer DDoS mitigation for the resource.   This feature is available for Amazon CloudFront distributions only.  This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you've associated with the resource. For information about how automatic mitigation works and the requirements for using it, see Shield Advanced automatic application layer DDoS mitigation. Don't use this action to make changes to automatic mitigation settings when it's already enabled for a resource. Instead, use UpdateApplicationLayerAutomaticResponse. To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information, see Getting Started with Shield Advanced. You can also do this through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see WAF Developer Guide.
+   * Enable the Shield Advanced automatic application layer DDoS mitigation for the protected resource.   This feature is available for Amazon CloudFront distributions and Application Load Balancers only.  This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you've associated with the resource. For information about how automatic mitigation works and the requirements for using it, see Shield Advanced automatic application layer DDoS mitigation.  Don't use this action to make changes to automatic mitigation settings when it's already enabled for a resource. Instead, use UpdateApplicationLayerAutomaticResponse.  To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information, see Getting Started with Shield Advanced. You can also associate the web ACL to the resource through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see WAF Developer Guide.
    */
   enableApplicationLayerAutomaticResponse(params: Shield.Types.EnableApplicationLayerAutomaticResponseRequest, callback?: (err: AWSError, data: Shield.Types.EnableApplicationLayerAutomaticResponseResponse) => void): Request<Shield.Types.EnableApplicationLayerAutomaticResponseResponse, AWSError>;
   /**
-   * Enable the Shield Advanced automatic application layer DDoS mitigation for the resource.   This feature is available for Amazon CloudFront distributions only.  This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you've associated with the resource. For information about how automatic mitigation works and the requirements for using it, see Shield Advanced automatic application layer DDoS mitigation. Don't use this action to make changes to automatic mitigation settings when it's already enabled for a resource. Instead, use UpdateApplicationLayerAutomaticResponse. To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information, see Getting Started with Shield Advanced. You can also do this through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see WAF Developer Guide.
+   * Enable the Shield Advanced automatic application layer DDoS mitigation for the protected resource.   This feature is available for Amazon CloudFront distributions and Application Load Balancers only.  This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you've associated with the resource. For information about how automatic mitigation works and the requirements for using it, see Shield Advanced automatic application layer DDoS mitigation.  Don't use this action to make changes to automatic mitigation settings when it's already enabled for a resource. Instead, use UpdateApplicationLayerAutomaticResponse.  To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console at https://console.aws.amazon.com/wafv2/shieldv2#/. For more information, see Getting Started with Shield Advanced. You can also associate the web ACL to the resource through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see WAF Developer Guide.
    */
   enableApplicationLayerAutomaticResponse(callback?: (err: AWSError, data: Shield.Types.EnableApplicationLayerAutomaticResponseResponse) => void): Request<Shield.Types.EnableApplicationLayerAutomaticResponseResponse, AWSError>;
   /**
@@ -220,19 +220,19 @@ declare class Shield extends Service {
    */
   listAttacks(callback?: (err: AWSError, data: Shield.Types.ListAttacksResponse) => void): Request<Shield.Types.ListAttacksResponse, AWSError>;
   /**
-   * Retrieves the ProtectionGroup objects for the account.
+   * Retrieves ProtectionGroup objects for the account. You can retrieve all protection groups or you can provide filtering criteria and retrieve just the subset of protection groups that match the criteria. 
    */
   listProtectionGroups(params: Shield.Types.ListProtectionGroupsRequest, callback?: (err: AWSError, data: Shield.Types.ListProtectionGroupsResponse) => void): Request<Shield.Types.ListProtectionGroupsResponse, AWSError>;
   /**
-   * Retrieves the ProtectionGroup objects for the account.
+   * Retrieves ProtectionGroup objects for the account. You can retrieve all protection groups or you can provide filtering criteria and retrieve just the subset of protection groups that match the criteria. 
    */
   listProtectionGroups(callback?: (err: AWSError, data: Shield.Types.ListProtectionGroupsResponse) => void): Request<Shield.Types.ListProtectionGroupsResponse, AWSError>;
   /**
-   * Lists all Protection objects for the account.
+   * Retrieves Protection objects for the account. You can retrieve all protections or you can provide filtering criteria and retrieve just the subset of protections that match the criteria. 
    */
   listProtections(params: Shield.Types.ListProtectionsRequest, callback?: (err: AWSError, data: Shield.Types.ListProtectionsResponse) => void): Request<Shield.Types.ListProtectionsResponse, AWSError>;
   /**
-   * Lists all Protection objects for the account.
+   * Retrieves Protection objects for the account. You can retrieve all protections or you can provide filtering criteria and retrieve just the subset of protections that match the criteria. 
    */
   listProtections(callback?: (err: AWSError, data: Shield.Types.ListProtectionsResponse) => void): Request<Shield.Types.ListProtectionsResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class Shield extends Service {
    */
   updateProtectionGroup(callback?: (err: AWSError, data: Shield.Types.UpdateProtectionGroupResponse) => void): Request<Shield.Types.UpdateProtectionGroupResponse, AWSError>;
   /**
-   * Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.
+   * Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.  For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account, regardless of whether the payer account itself is subscribed.  
    */
   updateSubscription(params: Shield.Types.UpdateSubscriptionRequest, callback?: (err: AWSError, data: Shield.Types.UpdateSubscriptionResponse) => void): Request<Shield.Types.UpdateSubscriptionResponse, AWSError>;
   /**
-   * Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.
+   * Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.  For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account, regardless of whether the payer account itself is subscribed.  
    */
   updateSubscription(callback?: (err: AWSError, data: Shield.Types.UpdateSubscriptionResponse) => void): Request<Shield.Types.UpdateSubscriptionResponse, AWSError>;
 }
@@ -306,6 +306,9 @@ declare namespace Shield {
      * Indicates whether automatic application layer DDoS mitigation is enabled for the protection. 
      */
     Status: ApplicationLayerAutomaticResponseStatus;
+    /**
+     * Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. 
+     */
     Action: ResponseAction;
   }
   export type ApplicationLayerAutomaticResponseStatus = "ENABLED"|"DISABLED"|string;
@@ -517,7 +520,7 @@ declare namespace Shield {
      */
     Name: ProtectionName;
     /**
-     * The ARN (Amazon Resource Name) of the resource to be protected. The ARN should be in one of the following formats:   For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id     For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name     For an Amazon CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id     For an Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id     For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id     For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id    
+     * The ARN (Amazon Resource Name) of the resource to be protected. The ARN should be in one of the following formats:   For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id     For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name     For an Amazon CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id     For an Global Accelerator standard accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id     For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id     For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id    
      */
     ResourceArn: ResourceArn;
     /**
@@ -563,13 +566,16 @@ declare namespace Shield {
   }
   export interface DescribeAttackResponse {
     /**
-     * The attack that is described.
+     * The attack that you requested. 
      */
     Attack?: AttackDetail;
   }
   export interface DescribeAttackStatisticsRequest {
   }
   export interface DescribeAttackStatisticsResponse {
+    /**
+     * The time range of the attack.
+     */
     TimeRange: TimeRange;
     /**
      * The data that describes the attacks detected during the time period.
@@ -610,17 +616,17 @@ declare namespace Shield {
   }
   export interface DescribeProtectionRequest {
     /**
-     * The unique identifier (ID) for the Protection object that is described. When submitting the DescribeProtection request you must provide either the ResourceArn or the ProtectionID, but not both.
+     * The unique identifier (ID) for the Protection object to describe. You must provide either the ResourceArn of the protected resource or the ProtectionID of the protection, but not both.
      */
     ProtectionId?: ProtectionId;
     /**
-     * The ARN (Amazon Resource Name) of the Amazon Web Services resource for the Protection object that is described. When submitting the DescribeProtection request you must provide either the ResourceArn or the ProtectionID, but not both.
+     * The ARN (Amazon Resource Name) of the protected Amazon Web Services resource. You must provide either the ResourceArn of the protected resource or the ProtectionID of the protection, but not both.
      */
     ResourceArn?: ResourceArn;
   }
   export interface DescribeProtectionResponse {
     /**
-     * The Protection object that is described.
+     * The Protection that you requested. 
      */
     Protection?: Protection;
   }
@@ -634,7 +640,7 @@ declare namespace Shield {
   }
   export interface DisableApplicationLayerAutomaticResponseRequest {
     /**
-     * The ARN (Amazon Resource Name) of the resource.
+     * The ARN (Amazon Resource Name) of the protected resource.
      */
     ResourceArn: ResourceArn;
   }
@@ -688,7 +694,7 @@ declare namespace Shield {
   export type EmergencyContactList = EmergencyContact[];
   export interface EnableApplicationLayerAutomaticResponseRequest {
     /**
-     * The ARN (Amazon Resource Name) of the resource.
+     * The ARN (Amazon Resource Name) of the protected resource.
      */
     ResourceArn: ResourceArn;
     /**
@@ -713,6 +719,38 @@ declare namespace Shield {
   export type HealthCheckArn = string;
   export type HealthCheckId = string;
   export type HealthCheckIds = HealthCheckId[];
+  export interface InclusionProtectionFilters {
+    /**
+     * The ARN (Amazon Resource Name) of the resource whose protection you want to retrieve. 
+     */
+    ResourceArns?: ResourceArnFilters;
+    /**
+     * The name of the protection that you want to retrieve. 
+     */
+    ProtectionNames?: ProtectionNameFilters;
+    /**
+     * The type of protected resource whose protections you want to retrieve. 
+     */
+    ResourceTypes?: ProtectedResourceTypeFilters;
+  }
+  export interface InclusionProtectionGroupFilters {
+    /**
+     * The ID of the protection group that you want to retrieve. 
+     */
+    ProtectionGroupIds?: ProtectionGroupIdFilters;
+    /**
+     * The pattern specification of the protection groups that you want to retrieve. 
+     */
+    Patterns?: ProtectionGroupPatternFilters;
+    /**
+     * The resource type configuration of the protection groups that you want to retrieve. In the protection group configuration, you specify the resource type when you set the group's Pattern to BY_RESOURCE_TYPE. 
+     */
+    ResourceTypes?: ProtectedResourceTypeFilters;
+    /**
+     * The aggregation setting of the protection groups that you want to retrieve. 
+     */
+    Aggregations?: ProtectionGroupAggregationFilters;
+  }
   export type Integer = number;
   export interface Limit {
     /**
@@ -766,6 +804,10 @@ declare namespace Shield {
      * The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a NextToken value in the response. The default setting is 20.
      */
     MaxResults?: MaxResults;
+    /**
+     * Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with specific pattern or aggregation settings. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.
+     */
+    InclusionFilters?: InclusionProtectionGroupFilters;
   }
   export interface ListProtectionGroupsResponse {
     /**
@@ -786,6 +828,10 @@ declare namespace Shield {
      * The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a NextToken value in the response. The default setting is 20.
      */
     MaxResults?: MaxResults;
+    /**
+     * Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.
+     */
+    InclusionFilters?: InclusionProtectionFilters;
   }
   export interface ListProtectionsResponse {
     /**
@@ -847,6 +893,7 @@ declare namespace Shield {
   export type PhoneNumber = string;
   export type ProactiveEngagementStatus = "ENABLED"|"DISABLED"|"PENDING"|string;
   export type ProtectedResourceType = "CLOUDFRONT_DISTRIBUTION"|"ROUTE_53_HOSTED_ZONE"|"ELASTIC_IP_ALLOCATION"|"CLASSIC_LOAD_BALANCER"|"APPLICATION_LOAD_BALANCER"|"GLOBAL_ACCELERATOR"|string;
+  export type ProtectedResourceTypeFilters = ProtectedResourceType[];
   export interface Protection {
     /**
      * The unique identifier (ID) of the protection.
@@ -883,7 +930,7 @@ declare namespace Shield {
      */
     Aggregation: ProtectionGroupAggregation;
     /**
-     * The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.
+     * The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource ARNs (Amazon Resource Names), or include all resources of a specified resource type.
      */
     Pattern: ProtectionGroupPattern;
     /**
@@ -891,7 +938,7 @@ declare namespace Shield {
      */
     ResourceType?: ProtectedResourceType;
     /**
-     * The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set Pattern to ARBITRARY and you must not set it for any other Pattern setting. 
+     * The ARNs (Amazon Resource Names) of the resources to include in the protection group. You must set this when you set Pattern to ARBITRARY and you must not set it for any other Pattern setting. 
      */
     Members: ProtectionGroupMembers;
     /**
@@ -900,6 +947,7 @@ declare namespace Shield {
     ProtectionGroupArn?: ResourceArn;
   }
   export type ProtectionGroupAggregation = "SUM"|"MEAN"|"MAX"|string;
+  export type ProtectionGroupAggregationFilters = ProtectionGroupAggregation[];
   export interface ProtectionGroupArbitraryPatternLimits {
     /**
      * The maximum number of resources you can specify for a single arbitrary pattern in a protection group.
@@ -907,6 +955,7 @@ declare namespace Shield {
     MaxMembers: Long;
   }
   export type ProtectionGroupId = string;
+  export type ProtectionGroupIdFilters = ProtectionGroupId[];
   export interface ProtectionGroupLimits {
     /**
      * The maximum number of protection groups that you can have at one time. 
@@ -919,6 +968,7 @@ declare namespace Shield {
   }
   export type ProtectionGroupMembers = ResourceArn[];
   export type ProtectionGroupPattern = "ALL"|"ARBITRARY"|"BY_RESOURCE_TYPE"|string;
+  export type ProtectionGroupPatternFilters = ProtectionGroupPattern[];
   export interface ProtectionGroupPatternTypeLimits {
     /**
      * Limits settings on protection groups with arbitrary pattern type. 
@@ -934,9 +984,11 @@ declare namespace Shield {
     ProtectedResourceTypeLimits: Limits;
   }
   export type ProtectionName = string;
+  export type ProtectionNameFilters = ProtectionName[];
   export type Protections = Protection[];
   export type ResourceArn = string;
   export type ResourceArnFilterList = ResourceArn[];
+  export type ResourceArnFilters = ResourceArn[];
   export type ResourceArnList = ResourceArn[];
   export interface ResponseAction {
     /**

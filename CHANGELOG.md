@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1184.0-->
+<!--LATEST=2.1185.0-->
 <!--ENTRYINSERT-->
+
+## 2.1185.0
+* feature: EC2: Documentation updates for Amazon EC2.
+* feature: Shield: AWS Shield Advanced now supports filtering for ListProtections and ListProtectionGroups.
 
 ## 2.1184.0
 * feature: ES: This release adds support for gp3 EBS (Elastic Block Store) storage.

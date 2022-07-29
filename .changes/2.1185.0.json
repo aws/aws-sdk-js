@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for Amazon EC2."
+    },
+    {
+        "type": "feature",
+        "category": "Shield",
+        "description": "AWS Shield Advanced now supports filtering for ListProtections and ListProtectionGroups."
+    }
+]
