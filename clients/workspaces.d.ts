@@ -364,6 +364,14 @@ declare class WorkSpaces extends Service {
    */
   modifyClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
   /**
+   * Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+   */
+  modifySamlProperties(params: WorkSpaces.Types.ModifySamlPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifySamlPropertiesResult) => void): Request<WorkSpaces.Types.ModifySamlPropertiesResult, AWSError>;
+  /**
+   * Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+   */
+  modifySamlProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifySamlPropertiesResult) => void): Request<WorkSpaces.Types.ModifySamlPropertiesResult, AWSError>;
+  /**
    * Modifies the self-service WorkSpace management capabilities for your users. For more information, see Enable Self-Service WorkSpace Management Capabilities for Your Users.
    */
   modifySelfservicePermissions(params: WorkSpaces.Types.ModifySelfservicePermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifySelfservicePermissionsResult) => void): Request<WorkSpaces.Types.ModifySelfservicePermissionsResult, AWSError>;
@@ -993,6 +1001,8 @@ declare namespace WorkSpaces {
      */
     EnableMaintenanceMode?: BooleanObject;
   }
+  export type DeletableSamlPropertiesList = DeletableSamlProperty[];
+  export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string;
   export interface DeleteClientBrandingRequest {
     /**
      * The directory identifier of the WorkSpace for which you want to delete client branding.
@@ -1758,6 +1768,22 @@ declare namespace WorkSpaces {
   }
   export interface ModifyClientPropertiesResult {
   }
+  export interface ModifySamlPropertiesRequest {
+    /**
+     * The directory identifier for which you want to configure SAML properties.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The properties for configuring SAML 2.0 authentication.
+     */
+    SamlProperties?: SamlProperties;
+    /**
+     * The SAML properties to delete as part of your request. Specify one of the following options:    SAML_PROPERTIES_USER_ACCESS_URL to delete the user access URL.    SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME to delete the relay state parameter name.  
+     */
+    PropertiesToDelete?: DeletableSamlPropertiesList;
+  }
+  export interface ModifySamlPropertiesResult {
+  }
   export interface ModifySelfservicePermissionsRequest {
     /**
      * The identifier of the directory.
@@ -1926,6 +1952,22 @@ declare namespace WorkSpaces {
   export type RootVolumeSizeGib = number;
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
+  export interface SamlProperties {
+    /**
+     * Indicates the status of SAML 2.0 authentication. These statuses include the following.   If the setting is DISABLED, end users will be directed to login with their directory credentials.   If the setting is ENABLED, end users will be directed to login via the user access URL. Users attempting to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to connect.   If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will be directed to login via the user access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication from connecting as if SAML 2.0 authentication was disabled.  
+     */
+    Status?: SamlStatusEnum;
+    /**
+     * The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP) bindings.
+     */
+    UserAccessUrl?: SamlUserAccessUrl;
+    /**
+     * The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query parameter to the URL along with the relay state endpoint to return the user to the client application session. To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state URL. Consult your IdP documentation for more information.
+     */
+    RelayStateParameterName?: NonEmptyString;
+  }
+  export type SamlStatusEnum = "DISABLED"|"ENABLED"|"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"|string;
+  export type SamlUserAccessUrl = string;
   export type SecurityGroupId = string;
   export interface SelfservicePermissions {
     /**
@@ -2374,6 +2416,10 @@ declare namespace WorkSpaces {
      * The default self-service permissions for WorkSpaces in the directory.
      */
     SelfservicePermissions?: SelfservicePermissions;
+    /**
+     * Describes the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+     */
+    SamlProperties?: SamlProperties;
   }
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
   export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;

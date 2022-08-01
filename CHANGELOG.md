@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1185.0-->
+<!--LATEST=2.1186.0-->
 <!--ENTRYINSERT-->
+
+## 2.1186.0
+* feature: WorkSpaces: This release introduces ModifySamlProperties, a new API that allows control of SAML properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return SAML properties in its responses.
 
 ## 2.1185.0
 * feature: EC2: Documentation updates for Amazon EC2.
