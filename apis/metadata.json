@@ -1176,5 +1176,9 @@
   },
   "rolesanywhere": {
     "name": "RolesAnywhere"
+  },
+  "licensemanagerusersubscriptions": {
+    "prefix": "license-manager-user-subscriptions",
+    "name": "LicenseManagerUserSubscriptions"
   }
 }

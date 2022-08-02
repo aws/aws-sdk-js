@@ -310,5 +310,6 @@ module.exports = {
   M2: require('./m2'),
   ConnectCampaigns: require('./connectcampaigns'),
   RedshiftServerless: require('./redshiftserverless'),
-  RolesAnywhere: require('./rolesanywhere')
+  RolesAnywhere: require('./rolesanywhere'),
+  LicenseManagerUserSubscriptions: require('./licensemanagerusersubscriptions')
 };

@@ -60,11 +60,11 @@ declare class Personalize extends Service {
    */
   createDatasetGroup(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetGroupResponse) => void): Request<Personalize.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an IAM service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it internally. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.   The dataset import job replaces any existing data in the dataset that you imported in bulk.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
+   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an IAM service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it internally. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.   By default, a dataset import job replaces any existing data in the dataset that you imported in bulk. To add new records without replacing existing data, specify INCREMENTAL for the import mode in the CreateDatasetImportJob operation.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
    */
   createDatasetImportJob(params: Personalize.Types.CreateDatasetImportJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetImportJobResponse) => void): Request<Personalize.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an IAM service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it internally. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.   The dataset import job replaces any existing data in the dataset that you imported in bulk.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
+   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an IAM service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it internally. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.   By default, a dataset import job replaces any existing data in the dataset that you imported in bulk. To add new records without replacing existing data, specify INCREMENTAL for the import mode in the CreateDatasetImportJob operation.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
    */
   createDatasetImportJob(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetImportJobResponse) => void): Request<Personalize.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
@@ -1082,6 +1082,10 @@ declare namespace Personalize {
      * A list of tags to apply to the dataset import job.
      */
     tags?: Tags;
+    /**
+     * Specify how to add the new records to an existing dataset. The default import mode is FULL. If you haven't imported bulk records into the dataset previously, you can only specify FULL.   Specify FULL to overwrite all existing bulk data in your dataset. Data you imported individually is not replaced.   Specify INCREMENTAL to append the new records to the existing data in your dataset. Amazon Personalize replaces any record with the same ID with the new one.  
+     */
+    importMode?: ImportMode;
   }
   export interface CreateDatasetImportJobResponse {
     /**
@@ -1491,6 +1495,10 @@ declare namespace Personalize {
      * If a dataset import job fails, provides the reason why.
      */
     failureReason?: FailureReason;
+    /**
+     * The import mode used by the dataset import job to import new records.
+     */
+    importMode?: ImportMode;
   }
   export interface DatasetImportJobSummary {
     /**
@@ -1517,6 +1525,10 @@ declare namespace Personalize {
      * If a dataset import job fails, the reason behind the failure.
      */
     failureReason?: FailureReason;
+    /**
+     * The import mode the dataset import job used to update the data in the dataset. For more information see Updating existing bulk data. 
+     */
+    importMode?: ImportMode;
   }
   export type DatasetImportJobs = DatasetImportJobSummary[];
   export interface DatasetSchema {
@@ -2131,6 +2143,7 @@ declare namespace Personalize {
     categoricalHyperParameterRanges?: CategoricalHyperParameterRanges;
   }
   export type HyperParameters = {[key: string]: ParameterValue};
+  export type ImportMode = "FULL"|"INCREMENTAL"|string;
   export type IngestionMode = "BULK"|"PUT"|"ALL"|string;
   export interface IntegerHyperParameterRange {
     /**

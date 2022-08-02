@@ -309,3 +309,4 @@ export import M2 = require('./m2');
 export import ConnectCampaigns = require('./connectcampaigns');
 export import RedshiftServerless = require('./redshiftserverless');
 export import RolesAnywhere = require('./rolesanywhere');
+export import LicenseManagerUserSubscriptions = require('./licensemanagerusersubscriptions');
