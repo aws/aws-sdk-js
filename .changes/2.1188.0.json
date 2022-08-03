@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Add a new exception type, ForbiddenException, that is returned when request is not allowed"
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "You can now associate an AWS WAF web ACL with an Amazon Cognito user pool."
+    }
+]

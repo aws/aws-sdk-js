@@ -228,11 +228,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminUserGlobalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
-   * Begins setup of time-based one-time password multi-factor authentication (TOTP MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP. 
+   * Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP. 
    */
   associateSoftwareToken(params: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
   /**
-   * Begins setup of time-based one-time password multi-factor authentication (TOTP MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP. 
+   * Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response. You can authorize an AssociateSoftwareToken request with either the user's access token, or a session string from a challenge response that you received from Amazon Cognito.  Amazon Cognito disassociates an existing software token when you verify the new token in a  VerifySoftwareToken API request. If you don't verify the software token and your user pool doesn't require MFA, the user can then authenticate with user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs. Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you set up software token MFA for your user, Amazon Cognito generates a SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge with your user's TOTP. 
    */
   associateSoftwareToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
   /**
@@ -1512,7 +1512,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AssociateSoftwareTokenResponse {
     /**
-     * A unique generated shared secret code that is used in the time-based one-time password (TOTP) algorithm to generate a one-time code.
+     * A unique generated shared secret code that is used in the TOTP algorithm to generate a one-time code.
      */
     SecretCode?: SecretCodeType;
     /**
@@ -1715,11 +1715,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Username: UsernameType;
     /**
-     * The confirmation code sent by a user's request to retrieve a forgotten password. For more information, see ForgotPassword.
+     * The confirmation code from your user's request to reset their password. For more information, see ForgotPassword.
      */
     ConfirmationCode: ConfirmationCodeType;
     /**
-     * The password sent by a user's request to retrieve a forgotten password.
+     * The new password that your user wants to set.
      */
     Password: PasswordType;
     /**
@@ -1938,11 +1938,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     WriteAttributes?: ClientPermissionListType;
     /**
-     * The authentication flows that are supported by the user pool clients. Flow names without the ALLOW_ prefix are no longer supported, in favor of new names with the ALLOW_ prefix.  Values with ALLOW_ prefix must be used only along with the ALLOW_ prefix.  Valid values include:    ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, Amazon Cognito receives the password in the request instead of using the Secure Remote Password (SRP) protocol to verify passwords.    ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.    ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.    ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.    ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.   If you don't specify a value for ExplicitAuthFlows, your app client activates the ALLOW_USER_SRP_AUTH and ALLOW_CUSTOM_AUTH authentication flows.
+     * The authentication flows that are supported by the user pool clients. Flow names without the ALLOW_ prefix are no longer supported, in favor of new names with the ALLOW_ prefix.  Values with ALLOW_ prefix must be used only along with the ALLOW_ prefix.  Valid values include:  ALLOW_ADMIN_USER_PASSWORD_AUTH  Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, Amazon Cognito receives the password in the request instead of using the Secure Remote Password (SRP) protocol to verify passwords.  ALLOW_CUSTOM_AUTH  Enable Lambda trigger based authentication.  ALLOW_USER_PASSWORD_AUTH  Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.  ALLOW_USER_SRP_AUTH  Enable SRP-based authentication.  ALLOW_REFRESH_TOKEN_AUTH  Enable the authflow that refreshes tokens.   If you don't specify a value for ExplicitAuthFlows, your user client supports ALLOW_USER_SRP_AUTH and ALLOW_CUSTOM_AUTH.
      */
     ExplicitAuthFlows?: ExplicitAuthFlowsListType;
     /**
-     * A list of provider names for the IdPs that this client supports. The following are supported: COGNITO, Facebook, Google LoginWithAmazon, and the names of your own SAML and OIDC providers.
+     * A list of provider names for the identity providers (IdPs) that are supported on this client. The following are supported: COGNITO, Facebook, Google, SignInWithApple, and LoginWithAmazon. You can also specify the names that you configured for the SAML and OIDC IdPs in your user pool, for example MySAMLIdP or MyOIDCIdP.
      */
     SupportedIdentityProviders?: SupportedIdentityProvidersListType;
     /**
@@ -2062,11 +2062,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     MfaConfiguration?: UserPoolMfaType;
     /**
-     * The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see  Verifying updates to to email addresses and phone numbers.
+     * The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see  Verifying updates to email addresses and phone numbers.
      */
     UserAttributeUpdateSettings?: UserAttributeUpdateSettingsType;
     /**
-     * The device configuration.
+     * The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.  When you provide a value for any DeviceConfiguration field, you activate the Amazon Cognito device-remembering feature. 
      */
     DeviceConfiguration?: DeviceConfigurationType;
     /**
@@ -2325,11 +2325,11 @@ declare namespace CognitoIdentityServiceProvider {
   export type DescriptionType = string;
   export interface DeviceConfigurationType {
     /**
-     * When true, device authentication can replace SMS and time-based one-time password (TOTP) factors for multi-factor authentication (MFA).  Users that sign in with devices that have not been confirmed or remembered will still have to provide a second factor, whether or not ChallengeRequiredOnNewDevice is true, when your user pool requires MFA. 
+     * When true, device authentication can replace SMS and time-based one-time password (TOTP) factors for multi-factor authentication (MFA).  Regardless of the value of this field, users that sign in with new devices that have not been confirmed or remembered must provide a second factor if your user pool requires MFA. 
      */
     ChallengeRequiredOnNewDevice?: BooleanType;
     /**
-     * When true, users can opt in to remembering their device. Your app code must use callback functions to return the user's choice.
+     * When true, Amazon Cognito doesn't remember newly-confirmed devices. Users who want to authenticate with their device can instead opt in to remembering their device. To collect a choice from your user, create an input prompt in your app and return the value that the user chooses in an UpdateDeviceStatus API request.
      */
     DeviceOnlyRememberedOnUserPrompt?: BooleanType;
   }
@@ -2658,15 +2658,15 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface GetUserPoolMfaConfigResponse {
     /**
-     * The SMS text message multi-factor (MFA) configuration.
+     * The SMS text message multi-factor authentication (MFA) configuration.
      */
     SmsMfaConfiguration?: SmsMfaConfigType;
     /**
-     * The software token multi-factor (MFA) configuration.
+     * The software token multi-factor authentication (MFA) configuration.
      */
     SoftwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
     /**
-     * The multi-factor (MFA) configuration. Valid values include:    OFF MFA won't be used for any users.    ON MFA is required for all users to sign in.    OPTIONAL MFA will be required only for individual users who have an MFA factor activated.  
+     * The multi-factor authentication (MFA) configuration. Valid values include:    OFF MFA won't be used for any users.    ON MFA is required for all users to sign in.    OPTIONAL MFA will be required only for individual users who have an MFA factor activated.  
      */
     MfaConfiguration?: UserPoolMfaType;
   }
@@ -3582,7 +3582,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SMSMfaSettings?: SMSMfaSettingsType;
     /**
-     * The time-based one-time password software token MFA settings.
+     * The time-based one-time password (TOTP) software token MFA settings.
      */
     SoftwareTokenMfaSettings?: SoftwareTokenMfaSettingsType;
     /**
@@ -4031,7 +4031,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ExplicitAuthFlows?: ExplicitAuthFlowsListType;
     /**
-     * A list of provider names for the IdPs that this client supports. The following are supported: COGNITO, Facebook, Google LoginWithAmazon, and the names of your own SAML and OIDC providers.
+     * A list of provider names for the IdPs that this client supports. The following are supported: COGNITO, Facebook, Google, SignInWithApple, LoginWithAmazon, and the names of your own SAML and OIDC providers.
      */
     SupportedIdentityProviders?: SupportedIdentityProvidersListType;
     /**
@@ -4139,7 +4139,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SmsAuthenticationMessage?: SmsVerificationMessageType;
     /**
-     * The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see  Verifying updates to to email addresses and phone numbers.
+     * The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see  Verifying updates to email addresses and phone numbers.
      */
     UserAttributeUpdateSettings?: UserAttributeUpdateSettingsType;
     /**
@@ -4147,7 +4147,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     MfaConfiguration?: UserPoolMfaType;
     /**
-     * Device configuration.
+     * The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.  When you provide a value for any DeviceConfiguration field, you activate the Amazon Cognito device-remembering feature. 
      */
     DeviceConfiguration?: DeviceConfigurationType;
     /**
@@ -4328,7 +4328,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ExplicitAuthFlows?: ExplicitAuthFlowsListType;
     /**
-     * A list of provider names for the IdPs that this client supports. The following are supported: COGNITO, Facebook, Google LoginWithAmazon, and the names of your own SAML and OIDC providers.
+     * A list of provider names for the IdPs that this client supports. The following are supported: COGNITO, Facebook, Google, SignInWithApple, LoginWithAmazon, and the names of your own SAML and OIDC providers.
      */
     SupportedIdentityProviders?: SupportedIdentityProvidersListType;
     /**
@@ -4476,7 +4476,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SmsAuthenticationMessage?: SmsVerificationMessageType;
     /**
-     * The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see  Verifying updates to to email addresses and phone numbers.
+     * The settings for updates to user attributes. These settings include the property AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For more information, see  Verifying updates to email addresses and phone numbers.
      */
     UserAttributeUpdateSettings?: UserAttributeUpdateSettingsType;
     /**
@@ -4484,7 +4484,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     MfaConfiguration?: UserPoolMfaType;
     /**
-     * The device configuration.
+     * The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.  When you provide a value for any DeviceConfiguration field, you activate the Amazon Cognito device-remembering feature. 
      */
     DeviceConfiguration?: DeviceConfigurationType;
     /**

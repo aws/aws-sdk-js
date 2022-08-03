@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1187.0-->
+<!--LATEST=2.1188.0-->
 <!--ENTRYINSERT-->
+
+## 2.1188.0
+* feature: CognitoIdentityServiceProvider: Add a new exception type, ForbiddenException, that is returned when request is not allowed
+* feature: WAFV2: You can now associate an AWS WAF web ACL with an Amazon Cognito user pool.
 
 ## 2.1187.0
 * feature: LicenseManagerUserSubscriptions: This release supports user based subscription for Microsoft Visual Studio Professional and Enterprise on EC2.
