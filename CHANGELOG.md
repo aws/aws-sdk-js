@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1188.0-->
+<!--LATEST=2.1189.0-->
 <!--ENTRYINSERT-->
+
+## 2.1189.0
+* feature: ChimeSDKMeetings: Adds support for Tags on Amazon Chime SDK WebRTC sessions
+* feature: ConfigService: Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types
+* feature: Iot: The release is to support attach a provisioning template to CACert for JITP function,  Customer now doesn't have to hardcode a roleArn and templateBody during register a CACert to enable JITP.
 
 ## 2.1188.0
 * feature: CognitoIdentityServiceProvider: Add a new exception type, ForbiddenException, that is returned when request is not allowed
