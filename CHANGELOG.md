@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1189.0-->
+<!--LATEST=2.1190.0-->
 <!--ENTRYINSERT-->
+
+## 2.1190.0
+* feature: Glue: Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity
+* feature: IoTWireless: AWS IoT Wireless release support for sidewalk data reliability.
+* feature: Pinpoint: Adds support for Advance Quiet Time in Journeys. Adds RefreshOnSegmentUpdate and WaitForQuietTime to JourneyResponse.
 
 ## 2.1189.0
 * feature: ChimeSDKMeetings: Adds support for Tags on Amazon Chime SDK WebRTC sessions

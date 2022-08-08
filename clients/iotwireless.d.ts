@@ -836,6 +836,7 @@ declare namespace IoTWireless {
      */
     VerticalAccuracy?: VerticalAccuracy;
   }
+  export type AckModeRetryDurationSecs = number;
   export type AddGwMetadata = boolean;
   export type AmazonId = string;
   export type AmazonResourceName = string;
@@ -1473,7 +1474,9 @@ declare namespace IoTWireless {
   }
   export type DownlinkQueueMessagesList = DownlinkQueueMessage[];
   export type DrMax = number;
+  export type DrMaxBox = number;
   export type DrMin = number;
+  export type DrMinBox = number;
   export type EndPoint = string;
   export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string;
   export interface EventConfigurationItem {
@@ -1509,6 +1512,10 @@ declare namespace IoTWireless {
      * Connection status event configuration for an event configuration item.
      */
     ConnectionStatus?: ConnectionStatusEventConfiguration;
+    /**
+     * Message delivery status event configuration for an event configuration item.
+     */
+    MessageDeliveryStatus?: MessageDeliveryStatusEventConfiguration;
   }
   export type EventNotificationPartnerType = "Sidewalk"|string;
   export type EventNotificationResourceType = "SidewalkAccount"|"WirelessDevice"|"WirelessGateway"|string;
@@ -1619,6 +1626,10 @@ declare namespace IoTWireless {
      * Resource type event configuration for the connection status event.
      */
     ConnectionStatus?: ConnectionStatusResourceTypeEventConfiguration;
+    /**
+     * Resource type event configuration object for the message delivery status event.
+     */
+    MessageDeliveryStatus?: MessageDeliveryStatusResourceTypeEventConfiguration;
   }
   export interface GetFuotaTaskRequest {
     Id: FuotaTaskId;
@@ -1786,6 +1797,10 @@ declare namespace IoTWireless {
      * Event configuration for the connection status event.
      */
     ConnectionStatus?: ConnectionStatusEventConfiguration;
+    /**
+     * Event configuration for the message delivery status event.
+     */
+    MessageDeliveryStatus?: MessageDeliveryStatusEventConfiguration;
   }
   export interface GetResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
@@ -2712,6 +2727,14 @@ declare namespace IoTWireless {
      * The AddGWMetaData value.
      */
     AddGwMetadata?: AddGwMetadata;
+    /**
+     * The DrMin value.
+     */
+    DrMin?: DrMinBox;
+    /**
+     * The DrMax value.
+     */
+    DrMax?: DrMaxBox;
   }
   export interface LoRaWANStartFuotaTask {
     StartTime?: StartTime;
@@ -2772,6 +2795,16 @@ declare namespace IoTWireless {
   export type MaxEirp = number;
   export type MaxResults = number;
   export type McGroupId = number;
+  export interface MessageDeliveryStatusEventConfiguration {
+    Sidewalk?: SidewalkEventNotificationConfigurations;
+    /**
+     * Enum to denote whether the wireless device id device registration state event topic is enabled or disabled.
+     */
+    WirelessDeviceIdEventTopic?: EventNotificationTopicStatus;
+  }
+  export interface MessageDeliveryStatusResourceTypeEventConfiguration {
+    Sidewalk?: SidewalkResourceTypeEventConfiguration;
+  }
   export type MessageId = string;
   export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
   export type MinGwDiversity = number;
@@ -3173,6 +3206,10 @@ declare namespace IoTWireless {
      */
     Seq?: Seq;
     MessageType?: MessageType;
+    /**
+     * The duration of time in seconds for which you want to retry sending the ACK.
+     */
+    AckModeRetryDurationSecs?: AckModeRetryDurationSecs;
   }
   export interface SidewalkUpdateAccount {
     /**
@@ -3331,6 +3368,10 @@ declare namespace IoTWireless {
      * Connection status resource type event configuration object for enabling and disabling wireless gateway topic.
      */
     ConnectionStatus?: ConnectionStatusResourceTypeEventConfiguration;
+    /**
+     * Message delivery status resource type event configuration object for enabling and disabling wireless device topic.
+     */
+    MessageDeliveryStatus?: MessageDeliveryStatusResourceTypeEventConfiguration;
   }
   export interface UpdateEventConfigurationByResourceTypesResponse {
   }
@@ -3449,6 +3490,10 @@ declare namespace IoTWireless {
      * Event configuration for the connection status event.
      */
     ConnectionStatus?: ConnectionStatusEventConfiguration;
+    /**
+     * Event configuration for the message delivery status event.
+     */
+    MessageDeliveryStatus?: MessageDeliveryStatusEventConfiguration;
   }
   export interface UpdateResourceEventConfigurationResponse {
   }

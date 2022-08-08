@@ -2887,7 +2887,7 @@ declare namespace Glue {
   }
   export type CrawlId = string;
   export type CrawlList = Crawl[];
-  export type CrawlState = "RUNNING"|"CANCELLING"|"CANCELLED"|"SUCCEEDED"|"FAILED"|string;
+  export type CrawlState = "RUNNING"|"CANCELLING"|"CANCELLED"|"SUCCEEDED"|"FAILED"|"ERROR"|string;
   export interface Crawler {
     /**
      * The name of the crawler.
@@ -3531,6 +3531,10 @@ declare namespace Glue {
      * The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.
      */
     CodeGenConfigurationNodes?: CodeGenConfigurationNodes;
+    /**
+     * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
+     */
+    ExecutionClass?: ExecutionClass;
   }
   export interface CreateJobResponse {
     /**
@@ -4973,6 +4977,7 @@ declare namespace Glue {
     BatchWindow?: BatchWindow;
   }
   export type EventQueueArn = string;
+  export type ExecutionClass = "FLEX"|"STANDARD"|string;
   export interface ExecutionProperty {
     /**
      * The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
@@ -6994,6 +6999,10 @@ declare namespace Glue {
      * The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.
      */
     CodeGenConfigurationNodes?: CodeGenConfigurationNodes;
+    /**
+     * Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
+     */
+    ExecutionClass?: ExecutionClass;
   }
   export interface JobBookmarkEntry {
     /**
@@ -7152,9 +7161,13 @@ declare namespace Glue {
      * This field populates only for Auto Scaling job runs, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for G.1X, 2 for G.2X, or 0.25 for G.025X workers). This value may be different than the executionEngineRuntime * MaxCapacity as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the MaxCapacity. Therefore, it is possible that the value of DPUSeconds is less than executionEngineRuntime * MaxCapacity.
      */
     DPUSeconds?: NullableDouble;
+    /**
+     * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
+     */
+    ExecutionClass?: ExecutionClass;
   }
   export type JobRunList = JobRun[];
-  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
+  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|"ERROR"|"WAITING"|string;
   export interface JobUpdate {
     /**
      * Description of the job being defined.
@@ -7228,6 +7241,10 @@ declare namespace Glue {
      * The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.
      */
     CodeGenConfigurationNodes?: CodeGenConfigurationNodes;
+    /**
+     * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
+     */
+    ExecutionClass?: ExecutionClass;
   }
   export interface Join {
     /**
@@ -9943,6 +9960,10 @@ declare namespace Glue {
      * The number of workers of a defined workerType that are allocated when a job runs.
      */
     NumberOfWorkers?: NullableInteger;
+    /**
+     * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
+     */
+    ExecutionClass?: ExecutionClass;
   }
   export interface StartJobRunResponse {
     /**
@@ -11463,6 +11484,14 @@ declare namespace Glue {
      * Total number Actions in running state.
      */
     RunningActions?: IntegerValue;
+    /**
+     * Indicates the count of job runs in the ERROR state in the workflow run.
+     */
+    ErroredActions?: IntegerValue;
+    /**
+     * Indicates the count of job runs in WAITING state in the workflow run.
+     */
+    WaitingActions?: IntegerValue;
   }
   export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|"STOPPING"|"STOPPED"|"ERROR"|string;
   export type WorkflowRuns = WorkflowRun[];
