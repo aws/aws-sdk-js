@@ -3627,7 +3627,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The KernelGatewayImageConfig.
+     * The KernelGatewayImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel will be shown to users before the image starts. Once the image runs, all kernels are visible in JupyterLab.
      */
     KernelGatewayImageConfig?: KernelGatewayImageConfig;
   }
@@ -10081,9 +10081,9 @@ declare namespace SageMaker {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The resources, including the compute instances and storage volumes, to use for the training jobs that the tuning job launches. Storage volumes store model artifacts and incremental states. Training algorithms might also use storage volumes for scratch space. If you want SageMaker to use the storage volume to store the training data, choose File as the TrainingInputMode in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.
+     * The resources, including the compute instances and storage volumes, to use for the training jobs that the tuning job launches. Storage volumes store model artifacts and incremental states. Training algorithms might also use storage volumes for scratch space. If you want SageMaker to use the storage volume to store the training data, choose File as the TrainingInputMode in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.  If you want to use hyperparameter optimization with instance type flexibility, use HyperParameterTuningResourceConfig instead. 
      */
-    ResourceConfig: ResourceConfig;
+    ResourceConfig?: ResourceConfig;
     /**
      * Specifies a limit to how long a model hyperparameter training job can run. It also specifies how long a managed spot training job has to complete. When the job reaches the time limit, SageMaker ends the training job. Use this API to cap model training costs.
      */
@@ -10105,6 +10105,10 @@ declare namespace SageMaker {
      * The number of times to retry the job when the job fails due to an InternalServerError.
      */
     RetryStrategy?: RetryStrategy;
+    /**
+     * The configuration for the hyperparameter tuning resources, including the compute instances and storage volumes, used for training jobs launched by the tuning job. By default, storage volumes hold model artifacts and incremental states. Choose File for TrainingInputMode in the AlgorithmSpecificationparameter to additionally store training data in the storage volume (optional).
+     */
+    HyperParameterTuningResourceConfig?: HyperParameterTuningResourceConfig;
   }
   export type HyperParameterTrainingJobDefinitionName = string;
   export type HyperParameterTrainingJobDefinitions = HyperParameterTrainingJobDefinition[];
@@ -10159,6 +10163,22 @@ declare namespace SageMaker {
      */
     ObjectiveStatus?: ObjectiveStatus;
   }
+  export type HyperParameterTuningAllocationStrategy = "Prioritized"|string;
+  export interface HyperParameterTuningInstanceConfig {
+    /**
+     * The instance type used for processing of hyperparameter optimization jobs. Choose from general purpose (no GPUs) instance types: ml.m5.xlarge, ml.m5.2xlarge, and ml.m5.4xlarge or compute optimized (no GPUs) instance types: ml.c5.xlarge and ml.c5.2xlarge. For more information about instance types, see instance type descriptions.
+     */
+    InstanceType: TrainingInstanceType;
+    /**
+     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See SageMaker distributed training jobs for more information.
+     */
+    InstanceCount: TrainingInstanceCount;
+    /**
+     * The volume size in GB of the data to be processed for hyperparameter optimization (optional).
+     */
+    VolumeSizeInGB: VolumeSizeInGB;
+  }
+  export type HyperParameterTuningInstanceConfigs = HyperParameterTuningInstanceConfig[];
   export type HyperParameterTuningJobArn = string;
   export interface HyperParameterTuningJobConfig {
     /**
@@ -10256,6 +10276,32 @@ declare namespace SageMaker {
     WarmStartType: HyperParameterTuningJobWarmStartType;
   }
   export type HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"|string;
+  export interface HyperParameterTuningResourceConfig {
+    /**
+     * The instance type used to run hyperparameter optimization tuning jobs. See  descriptions of instance types for more information.
+     */
+    InstanceType?: TrainingInstanceType;
+    /**
+     * The number of compute instances of type InstanceType to use. For distributed training, select a value greater than 1.
+     */
+    InstanceCount?: TrainingInstanceCount;
+    /**
+     * The volume size in GB for the storage volume to be used in processing hyperparameter optimization jobs (optional). These volumes store model artifacts, incremental states and optionally, scratch space for training algorithms. Do not provide a value for this parameter if a value for InstanceConfigs is also specified. Some instance types have a fixed total local storage size. If you select one of these instances for training, VolumeSizeInGB cannot be greater than this total size. For a list of instance types with local instance storage and their sizes, see instance store volumes.  SageMaker supports only the General Purpose SSD (gp2) storage volume type. 
+     */
+    VolumeSizeInGB?: OptionalVolumeSizeInGB;
+    /**
+     * A key used by AWS Key Management Service to encrypt data on the storage volume attached to the compute instances used to run the training job. You can use either of the following formats to specify a key. KMS Key ID:  "1234abcd-12ab-34cd-56ef-1234567890ab"  Amazon Resource Name (ARN) of a AWS KMS key:  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"  Some instances use local storage, which use a hardware module to encrypt storage volumes. If you choose one of these instance types, you cannot request a VolumeKmsKeyId. For a list of instance types that use local storage, see instance store volumes. For more information about AWS Key Management Service, see AWS KMS encryption for more information.
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * The strategy that determines the order of preference for resources specified in InstanceConfigs used in hyperparameter optimization.
+     */
+    AllocationStrategy?: HyperParameterTuningAllocationStrategy;
+    /**
+     * A list containing the configuration(s) for one or more resources for processing hyperparameter jobs. These resources include compute instances and storage volumes to use in model training jobs launched by hyperparameter tuning jobs. The AllocationStrategy controls the order in which multiple configurations provided in InstanceConfigs are used.  If you only want to use a single InstanceConfig inside the HyperParameterTuningResourceConfig API, do not provide a value for InstanceConfigs. Instead, use InstanceType, VolumeSizeInGB and InstanceCount. If you use InstanceConfigs, do not provide values for InstanceType, VolumeSizeInGB or InstanceCount. 
+     */
+    InstanceConfigs?: HyperParameterTuningInstanceConfigs;
+  }
   export type HyperParameterValue = string;
   export type HyperParameters = {[key: string]: HyperParameterValue};
   export type IdempotencyToken = string;
@@ -17920,7 +17966,7 @@ declare namespace SageMaker {
      */
     FeatureGroupName: FeatureGroupName;
     /**
-     * A list of the features that you're adding to the feature group.
+     * Updates the feature group. Updating a feature group is an asynchronous operation. When you get an HTTP 200 response, you've made a valid request. It takes some time after you've made a valid request for Feature Store to update the feature group.
      */
     FeatureAdditions?: FeatureAdditions;
   }
@@ -18178,7 +18224,7 @@ declare namespace SageMaker {
      */
     ServiceCatalogProvisioningUpdateDetails?: ServiceCatalogProvisioningUpdateDetails;
     /**
-     * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web Services Resources.
+     * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web Services Resources. In addition, the project must have tag update constraints set in order to include this parameter in the request. For more information, see Amazon Web Services Service Catalog Tag Update Constraints.
      */
     Tags?: TagList;
   }

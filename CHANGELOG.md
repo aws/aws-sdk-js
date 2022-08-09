@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1190.0-->
+<!--LATEST=2.1191.0-->
 <!--ENTRYINSERT-->
+
+## 2.1191.0
+* feature: AugmentedAIRuntime: Fix bug with parsing ISO-8601 CreationTime in Java SDK in DescribeHumanLoop
+* feature: CloudWatch: Various quota increases related to dimensions and custom metrics
+* feature: Location: Amazon Location Service now allows circular geofences in BatchPutGeofence, PutGeofence, and GetGeofence  APIs.
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now supports specifying multiple alternate EC2 instance types to make tuning jobs more robust when the preferred instance type is not available due to insufficient capacity.
 
 ## 2.1190.0
 * feature: Glue: Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity
