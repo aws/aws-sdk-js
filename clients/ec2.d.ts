@@ -21498,6 +21498,7 @@ declare namespace EC2 {
      * Excludes the root volume from being snapshotted.
      */
     ExcludeBootVolume?: Boolean;
+    ExcludeDataVolumeIds?: VolumeIdStringList;
   }
   export interface InstanceState {
     /**

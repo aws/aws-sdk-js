@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1191.0-->
+<!--LATEST=2.1192.0-->
 <!--ENTRYINSERT-->
+
+## 2.1192.0
+* feature: DLM: This release adds support for excluding specific data (non-boot) volumes from multi-volume snapshot sets created by snapshot lifecycle policies
+* feature: EC2: This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances.
 
 ## 2.1191.0
 * feature: AugmentedAIRuntime: Fix bug with parsing ISO-8601 CreationTime in Java SDK in DescribeHumanLoop
