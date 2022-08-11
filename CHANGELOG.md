@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1192.0-->
+<!--LATEST=2.1193.0-->
 <!--ENTRYINSERT-->
+
+## 2.1193.0
+* feature: BackupStorage: This is the first public release of AWS Backup Storage. We are exposing some previously-internal APIs for use by external services. These APIs are not meant to be used directly by customers.
+* feature: Glue: Add support for Python 3.9 AWS Glue Python Shell jobs
+* feature: PrivateNetworks: This is the initial SDK release for AWS Private 5G. AWS Private 5G is a managed service that makes it easy to deploy, operate, and scale your own private mobile network at your on-premises location.
 
 ## 2.1192.0
 * feature: DLM: This release adds support for excluding specific data (non-boot) volumes from multi-volume snapshot sets created by snapshot lifecycle policies

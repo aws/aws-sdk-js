@@ -1180,5 +1180,11 @@
   "licensemanagerusersubscriptions": {
     "prefix": "license-manager-user-subscriptions",
     "name": "LicenseManagerUserSubscriptions"
+  },
+  "backupstorage": {
+    "name": "BackupStorage"
+  },
+  "privatenetworks": {
+    "name": "PrivateNetworks"
   }
 }

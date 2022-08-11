@@ -310,3 +310,5 @@ export import ConnectCampaigns = require('./connectcampaigns');
 export import RedshiftServerless = require('./redshiftserverless');
 export import RolesAnywhere = require('./rolesanywhere');
 export import LicenseManagerUserSubscriptions = require('./licensemanagerusersubscriptions');
+export import BackupStorage = require('./backupstorage');
+export import PrivateNetworks = require('./privatenetworks');
