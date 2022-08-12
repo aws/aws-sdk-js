@@ -292,6 +292,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   listChannelsModeratedByAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
   /**
+   * Lists all the SubChannels in an elastic channel when given a channel ID. Available only to the app instance admins and channel moderators of elastic channels.
+   */
+  listSubChannels(params: ChimeSDKMessaging.Types.ListSubChannelsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListSubChannelsResponse) => void): Request<ChimeSDKMessaging.Types.ListSubChannelsResponse, AWSError>;
+  /**
+   * Lists all the SubChannels in an elastic channel when given a channel ID. Available only to the app instance admins and channel moderators of elastic channels.
+   */
+  listSubChannels(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListSubChannelsResponse) => void): Request<ChimeSDKMessaging.Types.ListSubChannelsResponse, AWSError>;
+  /**
    * Lists the tags applied to an Amazon Chime SDK messaging resource.
    */
   listTagsForResource(params: ChimeSDKMessaging.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMessaging.Types.ListTagsForResourceResponse, AWSError>;
@@ -391,6 +399,10 @@ declare namespace ChimeSDKMessaging {
      * The time at which an AppInstanceUser last marked a channel as read.
      */
     ReadMarkerTimestamp?: Timestamp;
+    /**
+     * The ID of the SubChannel that the AppInstanceUser is a member of.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface AssociateChannelFlowRequest {
     /**
@@ -423,6 +435,10 @@ declare namespace ChimeSDKMessaging {
      * The ARN of the channel to which you're adding users.
      */
     ChannelArn?: ChimeArn;
+    /**
+     * The ID of the SubChannel.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface BatchCreateChannelMembershipError {
     /**
@@ -456,6 +472,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.   Only required when creating membership in a SubChannel for a moderator in an elastic channel. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface BatchCreateChannelMembershipResponse {
     /**
@@ -509,6 +529,10 @@ declare namespace ChimeSDKMessaging {
      * The ARN of the channel flow.
      */
     ChannelFlowArn?: ChimeArn;
+    /**
+     * The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
+     */
+    ElasticChannelConfiguration?: ElasticChannelConfiguration;
   }
   export interface ChannelAssociatedWithFlowSummary {
     /**
@@ -651,6 +675,10 @@ declare namespace ChimeSDKMessaging {
      * The time at which a channel membership was last updated.
      */
     LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The ID of the SubChannel that a user belongs to.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface ChannelMembershipForAppInstanceUserSummary {
     /**
@@ -730,6 +758,10 @@ declare namespace ChimeSDKMessaging {
      * The attributes for the message, used for message filtering along with a FilterRule defined in the PushNotificationPreferences.
      */
     MessageAttributes?: MessageAttributeMap;
+    /**
+     * The ID of the SubChannel.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface ChannelMessageCallback {
     /**
@@ -752,6 +784,10 @@ declare namespace ChimeSDKMessaging {
      * The attributes for the message, used for message filtering along with a FilterRule defined in the PushNotificationPreferences. 
      */
     MessageAttributes?: MessageAttributeMap;
+    /**
+     * The ID of the SubChannel.
+     */
+    SubChannelId?: SubChannelId;
   }
   export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
   export type ChannelMessageStatus = "SENT"|"PENDING"|"FAILED"|"DENIED"|string;
@@ -947,6 +983,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when creating membership in a SubChannel for a moderator in an elastic channel. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface CreateChannelMembershipResponse {
     /**
@@ -957,6 +997,10 @@ declare namespace ChimeSDKMessaging {
      * The ARN and metadata of the member being added.
      */
     Member?: Identity;
+    /**
+     * The ID of the SubChannel in the response.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface CreateChannelModeratorRequest {
     /**
@@ -1027,6 +1071,10 @@ declare namespace ChimeSDKMessaging {
      * The ARNs of the channel moderators in the request.
      */
     ModeratorArns?: ChannelModeratorArns;
+    /**
+     * The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million users, excluding moderators.
+     */
+    ElasticChannelConfiguration?: ElasticChannelConfiguration;
   }
   export interface CreateChannelResponse {
     /**
@@ -1067,6 +1115,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only for use by moderators. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface DeleteChannelMessageRequest {
     /**
@@ -1081,6 +1133,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when deleting messages in a SubChannel that the user belongs to. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface DeleteChannelModeratorRequest {
     /**
@@ -1105,6 +1161,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface DescribeChannelBanRequest {
     /**
@@ -1171,6 +1231,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request. The response contains an ElasticChannelConfiguration object.  Only required to get a user’s SubChannel membership details. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface DescribeChannelMembershipResponse {
     /**
@@ -1248,6 +1312,20 @@ declare namespace ChimeSDKMessaging {
      */
     ChimeBearer: ChimeArn;
   }
+  export interface ElasticChannelConfiguration {
+    /**
+     * The maximum number of SubChannels that you want to allow in the elastic channel.
+     */
+    MaximumSubChannels: MaximumSubChannels;
+    /**
+     * The maximum number of members allowed in a SubChannel.
+     */
+    TargetMembershipsPerSubChannel: TargetMembershipsPerSubChannel;
+    /**
+     * The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of the calculated value is used in balancing members among SubChannels of the elastic channel.
+     */
+    MinimumMembershipPercentage: MinimumMembershipPercentage;
+  }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
   export type FallbackAction = "CONTINUE"|"ABORT"|string;
   export type FilterRule = string;
@@ -1292,6 +1370,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when getting messages in a SubChannel that the user belongs to. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface GetChannelMessageResponse {
     /**
@@ -1312,6 +1394,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user making the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when getting message status in a SubChannel that the user belongs to. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface GetChannelMessageStatusResponse {
     /**
@@ -1454,6 +1540,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when listing a user's memberships in a particular sub-channel of an elastic channel. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface ListChannelMembershipsResponse {
     /**
@@ -1498,6 +1588,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when listing the messages in a SubChannel that the user belongs to. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface ListChannelMessagesResponse {
     /**
@@ -1512,6 +1606,10 @@ declare namespace ChimeSDKMessaging {
      * The information about, and content of, each requested message.
      */
     ChannelMessages?: ChannelMessageSummaryList;
+    /**
+     * The ID of the SubChannel in the response.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface ListChannelModeratorsRequest {
     /**
@@ -1629,6 +1727,38 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
   }
+  export interface ListSubChannelsRequest {
+    /**
+     * The ARN of elastic channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user making the API call.
+     */
+    ChimeBearer: ChimeArn;
+    /**
+     * The maximum number of sub-channels that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested sub-channels are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSubChannelsResponse {
+    /**
+     * The ARN of elastic channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The information about each sub-channel.
+     */
+    SubChannels?: SubChannelSummaryList;
+    /**
+     * The token passed by previous API calls until all requested sub-channels are returned.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource.
@@ -1642,8 +1772,10 @@ declare namespace ChimeSDKMessaging {
     Tags?: TagList;
   }
   export type MaxResults = number;
+  export type MaximumSubChannels = number;
   export type MemberArns = ChimeArn[];
   export type Members = Identity[];
+  export type MembershipCount = number;
   export type MessageAttributeMap = {[key: string]: MessageAttributeValue};
   export type MessageAttributeName = string;
   export type MessageAttributeStringValue = string;
@@ -1662,6 +1794,7 @@ declare namespace ChimeSDKMessaging {
     Url?: UrlType;
   }
   export type Metadata = string;
+  export type MinimumMembershipPercentage = number;
   export type NextToken = string;
   export type NonEmptyContent = string;
   export type NonEmptyResourceName = string;
@@ -1763,6 +1896,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface RedactChannelMessageResponse {
     /**
@@ -1773,6 +1910,10 @@ declare namespace ChimeSDKMessaging {
      * The ID of the message being redacted.
      */
     MessageId?: MessageId;
+    /**
+     * The ID of the SubChannel in the response.  Only required when redacting messages in a SubChannel that the user belongs to. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export type ResourceName = string;
   export interface SearchChannelsRequest {
@@ -1859,6 +2000,10 @@ declare namespace ChimeSDKMessaging {
      * The attributes for the message, used for message filtering along with a FilterRule defined in the PushNotificationPreferences.
      */
     MessageAttributes?: MessageAttributeMap;
+    /**
+     * The ID of the SubChannel in the request.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface SendChannelMessageResponse {
     /**
@@ -1873,10 +2018,26 @@ declare namespace ChimeSDKMessaging {
      * The status of the channel message.
      */
     Status?: ChannelMessageStatusStructure;
+    /**
+     * The ID of the SubChannel in the response.
+     */
+    SubChannelId?: SubChannelId;
   }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type StatusDetail = string;
   export type String = string;
+  export type SubChannelId = string;
+  export interface SubChannelSummary {
+    /**
+     * The unique ID of a SubChannel.
+     */
+    SubChannelId?: SubChannelId;
+    /**
+     * The number of members in a SubChannel.
+     */
+    MembershipCount?: MembershipCount;
+  }
+  export type SubChannelSummaryList = SubChannelSummary[];
   export interface Tag {
     /**
      * The key in a tag.
@@ -1901,6 +2062,7 @@ declare namespace ChimeSDKMessaging {
     Tags: TagList;
   }
   export type TagValue = string;
+  export type TargetMembershipsPerSubChannel = number;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -1953,6 +2115,10 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.  Only required when updating messages in a SubChannel that the user belongs to. 
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface UpdateChannelMessageResponse {
     /**
@@ -1967,6 +2133,10 @@ declare namespace ChimeSDKMessaging {
      * The status of the message update.
      */
     Status?: ChannelMessageStatusStructure;
+    /**
+     * The ID of the SubChannel in the response.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface UpdateChannelReadMarkerRequest {
     /**
@@ -1977,12 +2147,20 @@ declare namespace ChimeSDKMessaging {
      * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer: ChimeArn;
+    /**
+     * The ID of the SubChannel in the request.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface UpdateChannelReadMarkerResponse {
     /**
      * The ARN of the channel.
      */
     ChannelArn?: ChimeArn;
+    /**
+     * The ID of the SubChannel in the response.
+     */
+    SubChannelId?: SubChannelId;
   }
   export interface UpdateChannelRequest {
     /**

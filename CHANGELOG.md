@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1193.0-->
+<!--LATEST=2.1194.0-->
 <!--ENTRYINSERT-->
+
+## 2.1194.0
+* feature: Amp: This release adds log APIs that allow customers to manage logging for their Amazon Managed Service for Prometheus workspaces.
+* feature: ChimeSDKMessaging: The Amazon Chime SDK now supports channels with up to one million participants with elastic channels.
+* feature: IVS: Updates various list api MaxResults ranges
+* feature: PersonalizeRuntime: This release provides support for promotions in AWS Personalize runtime.
 
 ## 2.1193.0
 * feature: BackupStorage: This is the first public release of AWS Backup Storage. We are exposing some previously-internal APIs for use by external services. These APIs are not meant to be used directly by customers.
