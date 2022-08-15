@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Adds Http 3 support to distributions"
+    },
+    {
+        "type": "feature",
+        "category": "Wisdom",
+        "description": "This release introduces a new API PutFeedback that allows submitting feedback to Wisdom on content relevance."
+    }
+]

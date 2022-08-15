@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1194.0-->
+<!--LATEST=2.1195.0-->
 <!--ENTRYINSERT-->
+
+## 2.1195.0
+* feature: CloudFront: Adds Http 3 support to distributions
+* feature: Wisdom: This release introduces a new API PutFeedback that allows submitting feedback to Wisdom on content relevance.
 
 ## 2.1194.0
 * feature: Amp: This release adds log APIs that allow customers to manage logging for their Amazon Managed Service for Prometheus workspaces.
