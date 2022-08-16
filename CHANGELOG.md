@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1195.0-->
+<!--LATEST=2.1196.0-->
 <!--ENTRYINSERT-->
+
+## 2.1196.0
+* feature: Rekognition: This release adds APIs which support copying an Amazon Rekognition Custom Labels model and managing project policies across AWS account.
 
 ## 2.1195.0
 * feature: CloudFront: Adds Http 3 support to distributions

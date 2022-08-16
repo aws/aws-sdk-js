@@ -21,6 +21,14 @@ declare class Rekognition extends Service {
    */
   compareFaces(callback?: (err: AWSError, data: Rekognition.Types.CompareFacesResponse) => void): Request<Rekognition.Types.CompareFacesResponse, AWSError>;
   /**
+   * Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and destination projects can be in different AWS accounts but must be in the same AWS Region. You can't copy a model to another AWS service.  To copy a model version to a different AWS account, you need to create a resource-based policy known as a project policy. You attach the project policy to the source project by calling PutProjectPolicy. The project policy gives permission to copy the model version from a trusting AWS account to a trusted account. For more information creating and attaching a project policy, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.  To copy a model, the destination project, source project, and source model version must already exist.  Copying a model version takes a while to complete. To get the current status, call DescribeProjectVersions and check the value of Status in the ProjectVersionDescription object. The copy operation has finished when the value of Status is COPYING_COMPLETED.
+   */
+  copyProjectVersion(params: Rekognition.Types.CopyProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.CopyProjectVersionResponse) => void): Request<Rekognition.Types.CopyProjectVersionResponse, AWSError>;
+  /**
+   * Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and destination projects can be in different AWS accounts but must be in the same AWS Region. You can't copy a model to another AWS service.  To copy a model version to a different AWS account, you need to create a resource-based policy known as a project policy. You attach the project policy to the source project by calling PutProjectPolicy. The project policy gives permission to copy the model version from a trusting AWS account to a trusted account. For more information creating and attaching a project policy, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.  To copy a model, the destination project, source project, and source model version must already exist.  Copying a model version takes a while to complete. To get the current status, call DescribeProjectVersions and check the value of Status in the ProjectVersionDescription object. The copy operation has finished when the value of Status is COPYING_COMPLETED.
+   */
+  copyProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.CopyProjectVersionResponse) => void): Request<Rekognition.Types.CopyProjectVersionResponse, AWSError>;
+  /**
    * Creates a collection in an AWS Region. You can add faces to the collection using the IndexFaces operation.  For example, you might create collections, one for each of your application users. A user can then index faces using the IndexFaces operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.  When you create a collection, it is associated with the latest version of the face model version.  Collection names are case-sensitive.  This operation requires permissions to perform the rekognition:CreateCollection action. If you want to tag your collection, you also require permission to perform the rekognition:TagResource operation.
    */
   createCollection(params: Rekognition.Types.CreateCollectionRequest, callback?: (err: AWSError, data: Rekognition.Types.CreateCollectionResponse) => void): Request<Rekognition.Types.CreateCollectionResponse, AWSError>;
@@ -85,13 +93,21 @@ declare class Rekognition extends Service {
    */
   deleteFaces(callback?: (err: AWSError, data: Rekognition.Types.DeleteFacesResponse) => void): Request<Rekognition.Types.DeleteFacesResponse, AWSError>;
   /**
-   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see DeleteProjectVersion.  DeleteProject is an asynchronous operation. To check if the project is deleted, call DescribeProjects. The project is deleted when the project no longer appears in the response. This operation requires permissions to perform the rekognition:DeleteProject action. 
+   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see DeleteProjectVersion.  DeleteProject is an asynchronous operation. To check if the project is deleted, call DescribeProjects. The project is deleted when the project no longer appears in the response. Be aware that deleting a given project will also delete any ProjectPolicies associated with that project. This operation requires permissions to perform the rekognition:DeleteProject action. 
    */
   deleteProject(params: Rekognition.Types.DeleteProjectRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectResponse) => void): Request<Rekognition.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see DeleteProjectVersion.  DeleteProject is an asynchronous operation. To check if the project is deleted, call DescribeProjects. The project is deleted when the project no longer appears in the response. This operation requires permissions to perform the rekognition:DeleteProject action. 
+   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see DeleteProjectVersion.  DeleteProject is an asynchronous operation. To check if the project is deleted, call DescribeProjects. The project is deleted when the project no longer appears in the response. Be aware that deleting a given project will also delete any ProjectPolicies associated with that project. This operation requires permissions to perform the rekognition:DeleteProject action. 
    */
   deleteProject(callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectResponse) => void): Request<Rekognition.Types.DeleteProjectResponse, AWSError>;
+  /**
+   * Deletes an existing project policy. To get a list of project policies attached to a project, call ListProjectPolicies. To attach a project policy to a project, call PutProjectPolicy.
+   */
+  deleteProjectPolicy(params: Rekognition.Types.DeleteProjectPolicyRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectPolicyResponse) => void): Request<Rekognition.Types.DeleteProjectPolicyResponse, AWSError>;
+  /**
+   * Deletes an existing project policy. To get a list of project policies attached to a project, call ListProjectPolicies. To attach a project policy to a project, call PutProjectPolicy.
+   */
+  deleteProjectPolicy(callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectPolicyResponse) => void): Request<Rekognition.Types.DeleteProjectPolicyResponse, AWSError>;
   /**
    * Deletes an Amazon Rekognition Custom Labels model.  You can't delete a model if it is running or if it is training. To check the status of a model, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion. If the model is training, wait until it finishes. This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
    */
@@ -317,6 +333,14 @@ declare class Rekognition extends Service {
    */
   listFaces(callback?: (err: AWSError, data: Rekognition.Types.ListFacesResponse) => void): Request<Rekognition.Types.ListFacesResponse, AWSError>;
   /**
+   * Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy.
+   */
+  listProjectPolicies(params: Rekognition.Types.ListProjectPoliciesRequest, callback?: (err: AWSError, data: Rekognition.Types.ListProjectPoliciesResponse) => void): Request<Rekognition.Types.ListProjectPoliciesResponse, AWSError>;
+  /**
+   * Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy.
+   */
+  listProjectPolicies(callback?: (err: AWSError, data: Rekognition.Types.ListProjectPoliciesResponse) => void): Request<Rekognition.Types.ListProjectPoliciesResponse, AWSError>;
+  /**
    * Gets a list of stream processors that you have created with CreateStreamProcessor. 
    */
   listStreamProcessors(params: Rekognition.Types.ListStreamProcessorsRequest, callback?: (err: AWSError, data: Rekognition.Types.ListStreamProcessorsResponse) => void): Request<Rekognition.Types.ListStreamProcessorsResponse, AWSError>;
@@ -332,6 +356,14 @@ declare class Rekognition extends Service {
    *  Returns a list of tags in an Amazon Rekognition collection, stream processor, or Custom Labels model.  This operation requires permissions to perform the rekognition:ListTagsForResource action. 
    */
   listTagsForResource(callback?: (err: AWSError, data: Rekognition.Types.ListTagsForResourceResponse) => void): Request<Rekognition.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A project policy specifies that a trusted AWS account can copy a model version from a trusting AWS account to a project in the trusted AWS account. To copy a model version you use the CopyProjectVersion operation. For more information about the format of a project policy document, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  The response from PutProjectPolicy is a revision ID for the project policy. You can attach multiple project policies to a project. You can also update an existing project policy by specifying the policy revision ID of the existing policy. To remove a project policy from a project, call DeleteProjectPolicy. To get a list of project policies attached to a project, call ListProjectPolicies.  You copy a model version by calling CopyProjectVersion.
+   */
+  putProjectPolicy(params: Rekognition.Types.PutProjectPolicyRequest, callback?: (err: AWSError, data: Rekognition.Types.PutProjectPolicyResponse) => void): Request<Rekognition.Types.PutProjectPolicyResponse, AWSError>;
+  /**
+   * Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A project policy specifies that a trusted AWS account can copy a model version from a trusting AWS account to a project in the trusted AWS account. To copy a model version you use the CopyProjectVersion operation. For more information about the format of a project policy document, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  The response from PutProjectPolicy is a revision ID for the project policy. You can attach multiple project policies to a project. You can also update an existing project policy by specifying the policy revision ID of the existing policy. To remove a project policy from a project, call DeleteProjectPolicy. To get a list of project policies attached to a project, call ListProjectPolicies.  You copy a model version by calling CopyProjectVersion.
+   */
+  putProjectPolicy(callback?: (err: AWSError, data: Rekognition.Types.PutProjectPolicyResponse) => void): Request<Rekognition.Types.PutProjectPolicyResponse, AWSError>;
   /**
    * Returns an array of celebrities recognized in the input image. For more information, see Recognizing celebrities in the Amazon Rekognition Developer Guide.   RecognizeCelebrities returns the 64 largest faces in the image. It lists the recognized celebrities in the CelebrityFaces array and any unrecognized faces in the UnrecognizedFaces array. RecognizeCelebrities doesn't return celebrities whose faces aren't among the largest 64 faces in the image. For each celebrity recognized, RecognizeCelebrities returns a Celebrity object. The Celebrity object contains the celebrity name, ID, URL links to additional information, match confidence, and a ComparedFace object that you can use to locate the celebrity's face on the image. Amazon Rekognition doesn't retain information about which images a celebrity has been recognized in. Your application must store this information and use the Celebrity ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by RecognizeCelebrities, you will need the ID to identify the celebrity in a call to the GetCelebrityInfo operation. You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  For an example, see Recognizing celebrities in an image in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:RecognizeCelebrities operation.
    */
@@ -778,6 +810,42 @@ declare namespace Rekognition {
   }
   export type ContentModerationDetections = ContentModerationDetection[];
   export type ContentModerationSortBy = "NAME"|"TIMESTAMP"|string;
+  export interface CopyProjectVersionRequest {
+    /**
+     * The ARN of the source project in the trusting AWS account.
+     */
+    SourceProjectArn: ProjectArn;
+    /**
+     * The ARN of the model version in the source project that you want to copy to a destination project.
+     */
+    SourceProjectVersionArn: ProjectVersionArn;
+    /**
+     * The ARN of the project in the trusted AWS account that you want to copy the model version to. 
+     */
+    DestinationProjectArn: ProjectArn;
+    /**
+     * A name for the version of the model that's copied to the destination project.
+     */
+    VersionName: VersionName;
+    /**
+     * The S3 bucket and folder location where the training output for the source model version is placed.
+     */
+    OutputConfig: OutputConfig;
+    /**
+     * The key-value tags to assign to the model version. 
+     */
+    Tags?: TagMap;
+    /**
+     * The identifier for your AWS Key Management Service key (AWS KMS key). You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN. The key is used to encrypt training results and manifest files written to the output Amazon S3 bucket (OutputConfig). If you choose to use your own KMS key, you need the following permissions on the KMS key.   kms:CreateGrant   kms:DescribeKey   kms:GenerateDataKey   kms:Decrypt   If you don't specify a value for KmsKeyId, images copied into the service are encrypted using a key that AWS owns and manages.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface CopyProjectVersionResponse {
+    /**
+     * The ARN of the copied model version in the destination project. 
+     */
+    ProjectVersionArn?: ProjectVersionArn;
+  }
   export interface CoversBodyPart {
     /**
      * The confidence that Amazon Rekognition has in the value of Value.
@@ -1090,6 +1158,22 @@ declare namespace Rekognition {
      * An array of strings (face IDs) of the faces that were deleted.
      */
     DeletedFaces?: FaceIdList;
+  }
+  export interface DeleteProjectPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the project that the project policy you want to delete is attached to.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * The name of the policy that you want to delete.
+     */
+    PolicyName: ProjectPolicyName;
+    /**
+     * The ID of the project policy revision that you want to delete.
+     */
+    PolicyRevisionId?: ProjectPolicyRevisionId;
+  }
+  export interface DeleteProjectPolicyResponse {
   }
   export interface DeleteProjectRequest {
     /**
@@ -2342,6 +2426,31 @@ declare namespace Rekognition {
      */
     FaceModelVersion?: String;
   }
+  export type ListProjectPoliciesPageSize = number;
+  export interface ListProjectPoliciesRequest {
+    /**
+     * The ARN of the project for which you want to list the project policies.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. 
+     */
+    NextToken?: ExtendedPaginationToken;
+    /**
+     * The maximum number of results to return per paginated call. The largest value you can specify is 5. If you specify a value greater than 5, a ValidationException error occurs. The default value is 5. 
+     */
+    MaxResults?: ListProjectPoliciesPageSize;
+  }
+  export interface ListProjectPoliciesResponse {
+    /**
+     * A list of project policies attached to the project.
+     */
+    ProjectPolicies?: ProjectPolicies;
+    /**
+     * If the response is truncated, Amazon Rekognition returns this token that you can use in the subsequent request to retrieve the next set of project policies.
+     */
+    NextToken?: ExtendedPaginationToken;
+  }
   export interface ListStreamProcessorsRequest {
     /**
      * If the previous response was incomplete (because there are more stream processors to retrieve), Amazon Rekognition Video returns a pagination token in the response. You can use this pagination token to retrieve the next set of stream processors. 
@@ -2535,6 +2644,36 @@ declare namespace Rekognition {
   export type ProjectDescriptions = ProjectDescription[];
   export type ProjectName = string;
   export type ProjectNames = ProjectName[];
+  export type ProjectPolicies = ProjectPolicy[];
+  export interface ProjectPolicy {
+    /**
+     * The Amazon Resource Name (ARN) of the project to which the project policy is attached.
+     */
+    ProjectArn?: ProjectArn;
+    /**
+     * The name of the project policy.
+     */
+    PolicyName?: ProjectPolicyName;
+    /**
+     * The revision ID of the project policy.
+     */
+    PolicyRevisionId?: ProjectPolicyRevisionId;
+    /**
+     * The JSON document for the project policy.
+     */
+    PolicyDocument?: ProjectPolicyDocument;
+    /**
+     * The Unix datetime for the creation of the project policy.
+     */
+    CreationTimestamp?: DateTime;
+    /**
+     * The Unix datetime for when the project policy was last updated. 
+     */
+    LastUpdatedTimestamp?: DateTime;
+  }
+  export type ProjectPolicyDocument = string;
+  export type ProjectPolicyName = string;
+  export type ProjectPolicyRevisionId = string;
   export type ProjectStatus = "CREATING"|"CREATED"|"DELETING"|string;
   export type ProjectVersionArn = string;
   export interface ProjectVersionDescription {
@@ -2594,9 +2733,13 @@ declare namespace Rekognition {
      * The maximum number of inference units Amazon Rekognition Custom Labels uses to auto-scale the model. For more information, see StartProjectVersion.
      */
     MaxInferenceUnits?: InferenceUnits;
+    /**
+     * If the model version was copied from a different project, SourceProjectVersionArn contains the ARN of the source model version. 
+     */
+    SourceProjectVersionArn?: ProjectVersionArn;
   }
   export type ProjectVersionDescriptions = ProjectVersionDescription[];
-  export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|string;
+  export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|"COPYING_IN_PROGRESS"|"COPYING_COMPLETED"|"COPYING_FAILED"|string;
   export type ProjectVersionsPageSize = number;
   export type ProjectsPageSize = number;
   export interface ProtectiveEquipmentBodyPart {
@@ -2659,6 +2802,30 @@ declare namespace Rekognition {
   }
   export type ProtectiveEquipmentType = "FACE_COVER"|"HAND_COVER"|"HEAD_COVER"|string;
   export type ProtectiveEquipmentTypes = ProtectiveEquipmentType[];
+  export interface PutProjectPolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the project that the project policy is attached to.
+     */
+    ProjectArn: ProjectArn;
+    /**
+     * A name for the policy.
+     */
+    PolicyName: ProjectPolicyName;
+    /**
+     * The revision ID for the Project Policy. Each time you modify a policy, Amazon Rekognition Custom Labels generates and assigns a new PolicyRevisionId and then deletes the previous version of the policy.
+     */
+    PolicyRevisionId?: ProjectPolicyRevisionId;
+    /**
+     * A resource policy to add to the model. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see IAM JSON policy reference. 
+     */
+    PolicyDocument: ProjectPolicyDocument;
+  }
+  export interface PutProjectPolicyResponse {
+    /**
+     * The ID of the project policy.
+     */
+    PolicyRevisionId?: ProjectPolicyRevisionId;
+  }
   export type QualityFilter = "NONE"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|string;
   export type QueryString = string;
   export type Reason = "EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string;
