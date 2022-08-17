@@ -504,7 +504,7 @@ declare namespace Kendra {
   export type AccessControlConfigurationSummaryList = AccessControlConfigurationSummary[];
   export interface AccessControlListConfiguration {
     /**
-     * Path to the Amazon Web Services S3 bucket that contains the ACL files.
+     * Path to the Amazon S3 bucket that contains the ACL files.
      */
     KeyPath?: S3ObjectKey;
   }
@@ -1003,6 +1003,10 @@ declare namespace Kendra {
      * A list of regular expression patterns to exclude certain blog posts, pages, spaces, or attachments in your Confluence. Content that matches the patterns are excluded from the index. Content that doesn't match the patterns is included in the index. If content matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the content isn't included in the index.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Configuration information to connect to your Confluence URL instance via a web proxy. You can use this option for Confluence Server. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication of user name and password. To store web proxy credentials, you use a secret in Secrets Manager. It is recommended that you follow best security practices when configuring your web proxy. This includes setting up throttling, setting up logging and monitoring, and applying security patches on a regular basis. If you use your web proxy with multiple data sources, sync jobs that occur at the same time could strain the load on your proxy. It is recommended you prepare your proxy beforehand for any security and load requirements.
+     */
+    ProxyConfiguration?: ProxyConfiguration;
   }
   export interface ConfluencePageConfiguration {
     /**
@@ -1158,7 +1162,7 @@ declare namespace Kendra {
   }
   export interface CreateDataSourceRequest {
     /**
-     * A unique name for the data source connector. A data source name can't be changed without deleting and recreating the data source connector.
+     * A name for the data source connector.
      */
     Name: DataSourceName;
     /**
@@ -1173,6 +1177,10 @@ declare namespace Kendra {
      * Configuration information to connect to your data source repository. You can't specify the Configuration parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The Configuration parameter is required for all other data sources.
      */
     Configuration?: DataSourceConfiguration;
+    /**
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your data source. For more information, see Configuring a VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
     /**
      * A description for the data source connector.
      */
@@ -1488,6 +1496,10 @@ declare namespace Kendra {
      * Provides the configuration information to connect to Alfresco as your data source.
      */
     AlfrescoConfiguration?: AlfrescoConfiguration;
+    /**
+     * Provides a template for the configuration information to connect to your data source.
+     */
+    TemplateConfiguration?: TemplateConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -1623,7 +1635,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|"GITHUB"|"ALFRESCO"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|"GITHUB"|"ALFRESCO"|"TEMPLATE"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1801,7 +1813,7 @@ declare namespace Kendra {
      */
     IndexId?: IndexId;
     /**
-     * The name that you gave the data source when it was created.
+     * The name for the data source.
      */
     Name?: DataSourceName;
     /**
@@ -1812,6 +1824,10 @@ declare namespace Kendra {
      * Configuration details for the data source. This shows how the data source is configured. The configuration options for a data source depend on the data source provider.
      */
     Configuration?: DataSourceConfiguration;
+    /**
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your data source. For more information, see Configuring a VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
     /**
      * The Unix timestamp of when the data source was created.
      */
@@ -3826,7 +3842,7 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * The identifiers of the Quip folders you want to index.
+     * The identifiers of the Quip folders you want to index. You can find in your browser URL when you access your folder in Quip. For example, https://quip-company.com/zlLuOVNSarTL/folder-name.
      */
     FolderIds?: FolderIdList;
     /**
@@ -4261,6 +4277,10 @@ declare namespace Kendra {
      * Whether you want to connect to SharePoint using basic authentication of user name and password, or OAuth authentication of user name, password, client ID, and client secret. You can use OAuth authentication for SharePoint Online.
      */
     AuthenticationType?: SharePointOnlineAuthenticationType;
+    /**
+     * Configuration information to connect to your Microsoft SharePoint site URLs via instance via a web proxy. You can use this option for SharePoint Server. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication of user name and password. To store web proxy credentials, you use a secret in Secrets Manager. It is recommended that you follow best security practices when configuring your web proxy. This includes setting up throttling, setting up logging and monitoring, and applying security patches on a regular basis. If you use your web proxy with multiple data sources, sync jobs that occur at the same time could strain the load on your proxy. It is recommended you prepare your proxy beforehand for any security and load requirements.
+     */
+    ProxyConfiguration?: ProxyConfiguration;
   }
   export type SharePointOnlineAuthenticationType = "HTTP_BASIC"|"OAUTH2"|string;
   export type SharePointUrlList = Url[];
@@ -4509,6 +4529,14 @@ declare namespace Kendra {
   }
   export type TagValue = string;
   export type TeamId = string;
+  export interface Template {
+  }
+  export interface TemplateConfiguration {
+    /**
+     * The template schema used for the data source. The following links to the template schema for data sources where templates are supported:    Zendesk template schema   
+     */
+    Template?: Template;
+  }
   export type TenantDomain = string;
   export interface TextDocumentStatistics {
     /**
@@ -4617,7 +4645,7 @@ declare namespace Kendra {
      */
     Id: DataSourceId;
     /**
-     * A new name for the data source connector. You must first delete the data source and re-create it to change the name of the data source.
+     * A new name for the data source connector.
      */
     Name?: DataSourceName;
     /**
@@ -4628,6 +4656,10 @@ declare namespace Kendra {
      * Configuration information you want to update for the data source connector.
      */
     Configuration?: DataSourceConfiguration;
+    /**
+     * Configuration information for an Amazon Virtual Private Cloud to connect to your data source. For more information, see Configuring a VPC.
+     */
+    VpcConfiguration?: DataSourceVpcConfiguration;
     /**
      * A new description for the data source connector.
      */

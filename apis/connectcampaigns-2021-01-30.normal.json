@@ -191,6 +191,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "ValidationException"
+        },
+        {
           "shape": "AccessDeniedException"
         },
         {
@@ -363,6 +366,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "ValidationException"
+        },
+        {
           "shape": "ConflictException"
         },
         {
@@ -434,6 +440,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "ValidationException"
+        },
+        {
           "shape": "ConflictException"
         },
         {
@@ -464,6 +473,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
         },
         {
           "shape": "ConflictException"
@@ -532,6 +544,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
         },
         {
           "shape": "ConflictException"

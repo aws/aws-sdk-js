@@ -345,7 +345,7 @@ declare namespace AppMesh {
      */
     attributes?: AwsCloudMapInstanceAttributes;
     /**
-     * The IP version to use to control traffic within the mesh.
+     * The preferred IP version that this virtual node uses. Setting the IP preference on the virtual node only overrides the IP preference set for the mesh on this specific node.
      */
     ipPreference?: IpPreference;
     /**
@@ -922,7 +922,7 @@ declare namespace AppMesh {
      */
     hostname: Hostname;
     /**
-     * The IP version to use to control traffic within the mesh.
+     * The preferred IP version that this virtual node uses. Setting the IP preference on the virtual node only overrides the IP preference set for the mesh on this specific node.
      */
     ipPreference?: IpPreference;
     /**
@@ -951,6 +951,10 @@ declare namespace AppMesh {
   export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
   export type ExactHostName = string;
   export interface FileAccessLog {
+    /**
+     * The specified format for the logs. The format is either json_format or text_format.
+     */
+    format?: LoggingFormat;
     /**
      * The file path to write access logs to. You can use /dev/stdout to send access logs to standard out and configure your Envoy container to use a log driver, such as awslogs, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.  &lt;note&gt; &lt;p&gt;The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.&lt;/p&gt; &lt;/note&gt; 
      */
@@ -1063,6 +1067,10 @@ declare namespace AppMesh {
   export type GatewayRouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
   export interface GatewayRouteTarget {
     /**
+     * The port number of the gateway route target.
+     */
+    port?: ListenerPort;
+    /**
      * An object that represents a virtual service gateway route target.
      */
     virtualService: GatewayRouteVirtualService;
@@ -1102,6 +1110,10 @@ declare namespace AppMesh {
      * The gateway route metadata to be matched on.
      */
     metadata?: GrpcGatewayRouteMetadataList;
+    /**
+     * The port number to match from the request.
+     */
+    port?: ListenerPort;
     /**
      * The fully qualified domain name for the service to match from the request.
      */
@@ -1204,6 +1216,10 @@ declare namespace AppMesh {
      * The method name to match from the request. If you specify a name, you must also specify a serviceName.
      */
     methodName?: MethodName;
+    /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
     /**
      * The fully qualified domain name for the service to match from the request.
      */
@@ -1367,6 +1383,10 @@ declare namespace AppMesh {
      */
     path?: HttpPathMatch;
     /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
+    /**
      * Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is my-service.local and you want the route to match requests to my-service.local/metrics, your prefix should be /metrics.
      */
     prefix?: String;
@@ -1503,6 +1523,10 @@ declare namespace AppMesh {
      */
     path?: HttpPathMatch;
     /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
+    /**
      * Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is my-service.local and you want the route to match requests to my-service.local/metrics, your prefix should be /metrics.
      */
     prefix?: String;
@@ -1527,6 +1551,19 @@ declare namespace AppMesh {
     perRequest?: Duration;
   }
   export type IpPreference = "IPv6_PREFERRED"|"IPv4_PREFERRED"|"IPv4_ONLY"|"IPv6_ONLY"|string;
+  export type JsonFormat = JsonFormatRef[];
+  export interface JsonFormatRef {
+    /**
+     * The specified key for the JSON.
+     */
+    key: JsonKey;
+    /**
+     * The specified value for the JSON.
+     */
+    value: JsonValue;
+  }
+  export type JsonKey = string;
+  export type JsonValue = string;
   export interface ListGatewayRoutesInput {
     /**
      * The maximum number of results returned by ListGatewayRoutes in paginated output. When you use this parameter, ListGatewayRoutes returns only limit results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListGatewayRoutes request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListGatewayRoutes returns up to 100 results and a nextToken value if applicable.
@@ -1780,6 +1817,7 @@ declare namespace AppMesh {
      */
     tls?: ListenerTls;
   }
+  export type ListenerPort = number;
   export interface ListenerTimeout {
     /**
      * An object that represents types of timeouts. 
@@ -1875,6 +1913,16 @@ declare namespace AppMesh {
      * The access log configuration for a virtual node.
      */
     accessLog?: AccessLog;
+  }
+  export interface LoggingFormat {
+    /**
+     * 
+     */
+    json?: JsonFormat;
+    /**
+     * 
+     */
+    text?: TextFormat;
   }
   export type Long = number;
   export interface MatchRange {
@@ -2191,6 +2239,10 @@ declare namespace AppMesh {
      */
     action: TcpRouteAction;
     /**
+     * An object that represents the criteria for determining a request match.
+     */
+    match?: TcpRouteMatch;
+    /**
      * An object that represents types of timeouts. 
      */
     timeout?: TcpTimeout;
@@ -2201,16 +2253,23 @@ declare namespace AppMesh {
      */
     weightedTargets: WeightedTargets;
   }
+  export interface TcpRouteMatch {
+    /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
+  }
   export interface TcpTimeout {
     /**
      * An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.
      */
     idle?: Duration;
   }
+  export type TextFormat = string;
   export type Timestamp = Date;
   export interface TlsValidationContext {
     /**
-     * A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.
+     * A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context. If you don't specify SANs on the terminating mesh endpoint, the Envoy proxy for that node doesn't verify the SAN on a peer client certificate. If you don't specify SANs on the originating mesh endpoint, the SAN on the certificate provided by the terminating endpoint must match the mesh endpoint service discovery configuration. Since SPIRE vended certificates have a SPIFFE ID as a name, you must set the SAN since the name doesn't match the service discovery name.
      */
     subjectAlternativeNames?: SubjectAlternativeNames;
     /**
@@ -2536,6 +2595,10 @@ declare namespace AppMesh {
     virtualGatewayName: ResourceName;
   }
   export interface VirtualGatewayFileAccessLog {
+    /**
+     * The specified format for the virtual gateway access logs. It can be either json_format or text_format.
+     */
+    format?: LoggingFormat;
     /**
      * The file path to write access logs to. You can use /dev/stdout to send access logs to standard out and configure your Envoy container to use a log driver, such as awslogs, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.
      */
@@ -3105,6 +3168,10 @@ declare namespace AppMesh {
   }
   export type VirtualServiceStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
   export interface WeightedTarget {
+    /**
+     * The targeted port of the weighted object.
+     */
+    port?: ListenerPort;
     /**
      * The virtual node to associate with the weighted target.
      */

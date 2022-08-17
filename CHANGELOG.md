@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1196.0-->
+<!--LATEST=2.1197.0-->
 <!--ENTRYINSERT-->
+
+## 2.1197.0
+* feature: AppMesh: AWS App Mesh release to support Multiple Listener and Access Log Format feature
+* feature: ConnectCampaigns: Updated exceptions for Amazon Connect Outbound Campaign api's.
+* feature: Kendra: This release adds Zendesk connector (which allows you to specify Zendesk SAAS platform as data source), Proxy Support for Sharepoint and Confluence Server (which allows you to specify the proxy configuration if proxy is required to connect to your Sharepoint/Confluence Server as data source).
+* feature: LakeFormation: This release adds a new API support "AssumeDecoratedRoleWithSAML" and also release updates the corresponding documentation.
+* feature: Lambda: Added support for customization of Consumer Group ID for MSK and Kafka Event Source Mappings.
+* feature: LexModelsV2: This release introduces support for enhanced conversation design with the ability to define custom conversation flows with conditional branching and new bot responses.
+* feature: RDS: Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
 
 ## 2.1196.0
 * feature: Rekognition: This release adds APIs which support copying an Amazon Rekognition Custom Labels model and managing project policies across AWS account.

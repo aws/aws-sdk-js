@@ -1087,11 +1087,48 @@ declare namespace LexModelsV2 {
   export interface CodeHookSpecification {
     lambdaCodeHook: LambdaCodeHook;
   }
+  export interface Condition {
+    /**
+     * The expression string that is evaluated. 
+     */
+    expressionString: ConditionExpression;
+  }
+  export type ConditionExpression = string;
   export type ConditionKey = string;
   export type ConditionKeyValueMap = {[key: string]: ConditionValue};
   export type ConditionMap = {[key: string]: ConditionKeyValueMap};
   export type ConditionOperator = string;
   export type ConditionValue = string;
+  export interface ConditionalBranch {
+    /**
+     * The name of the branch. 
+     */
+    name: Name;
+    /**
+     * Contains the expression to evaluate. If the condition is true, the branch's actions are taken.
+     */
+    condition: Condition;
+    /**
+     * The next step in the conversation.
+     */
+    nextStep: DialogState;
+    response?: ResponseSpecification;
+  }
+  export type ConditionalBranches = ConditionalBranch[];
+  export interface ConditionalSpecification {
+    /**
+     * Determines whether a conditional branch is active. When active is false, the conditions are not evaluated.
+     */
+    active: BoxedBoolean;
+    /**
+     * A list of conditional branches. A conditional branch is made up of a condition, a response and a next step. The response and next step are executed when the condition is true.
+     */
+    conditionalBranches: ConditionalBranches;
+    /**
+     * The conditional branch that should be followed when the conditions for other branches are not satisfied. A conditional branch is made up of a condition, a response and a next step.
+     */
+    defaultBranch: DefaultConditionalBranch;
+  }
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
@@ -1449,6 +1486,10 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
+    /**
+     * Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface CreateIntentResponse {
     /**
@@ -1515,6 +1556,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the intent was created.
      */
     creationDateTime?: Timestamp;
+    /**
+     * Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface CreateResourcePolicyRequest {
     /**
@@ -1815,6 +1860,13 @@ declare namespace LexModelsV2 {
      * A timestamp indicating the end date for the date range filter.
      */
     endDateTime: Timestamp;
+  }
+  export interface DefaultConditionalBranch {
+    /**
+     * The next step in the conversation.
+     */
+    nextStep?: DialogState;
+    response?: ResponseSpecification;
   }
   export interface DeleteBotAliasRequest {
     /**
@@ -2622,6 +2674,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the intent was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * 
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface DescribeResourcePolicyRequest {
     /**
@@ -2785,14 +2841,65 @@ declare namespace LexModelsV2 {
     externalSourceSetting?: ExternalSourceSetting;
   }
   export type Description = string;
+  export interface DialogAction {
+    /**
+     * The action that the bot should execute. 
+     */
+    type: DialogActionType;
+    /**
+     * If the dialog action is ElicitSlot, defines the slot to elicit from the user.
+     */
+    slotToElicit?: Name;
+    /**
+     * When true the next message for the intent is not used.
+     */
+    suppressNextMessage?: BoxedBoolean;
+  }
+  export type DialogActionType = "ElicitIntent"|"StartIntent"|"ElicitSlot"|"EvaluateConditional"|"InvokeDialogCodeHook"|"ConfirmIntent"|"FulfillIntent"|"CloseIntent"|"EndConversation"|string;
+  export interface DialogCodeHookInvocationSetting {
+    /**
+     * Indicates whether a Lambda function should be invoked for the dialog.
+     */
+    enableCodeHookInvocation: BoxedBoolean;
+    /**
+     * Determines whether a dialog code hook is used when the intent is activated.
+     */
+    active: BoxedBoolean;
+    /**
+     * A label that indicates the dialog step from which the dialog code hook is happening.
+     */
+    invocationLabel?: Name;
+    /**
+     * Contains the responses and actions that Amazon Lex takes after the Lambda function is complete.
+     */
+    postCodeHookSpecification: PostDialogCodeHookInvocationSpecification;
+  }
   export interface DialogCodeHookSettings {
     /**
      * Enables the dialog code hook so that it processes user requests.
      */
     enabled: Boolean;
   }
+  export interface DialogState {
+    dialogAction?: DialogAction;
+    intent?: IntentOverride;
+    /**
+     * Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex and a client application.
+     */
+    sessionAttributes?: StringMap;
+  }
   export type DraftBotVersion = string;
   export type Effect = "Allow"|"Deny"|string;
+  export interface ElicitationCodeHookInvocationSetting {
+    /**
+     * Indicates whether a Lambda function should be invoked for the dialog.
+     */
+    enableCodeHookInvocation: BoxedBoolean;
+    /**
+     * A label that indicates the dialog step from which the dialog code hook is happening.
+     */
+    invocationLabel?: Name;
+  }
   export interface EncryptionSetting {
     /**
      * The KMS key ARN used to encrypt the metadata associated with the bot recommendation.
@@ -2901,6 +3008,10 @@ declare namespace LexModelsV2 {
      * Provides settings for update messages sent to the user for long-running Lambda fulfillment functions. Fulfillment updates can be used only with streaming conversations.
      */
     fulfillmentUpdatesSpecification?: FulfillmentUpdatesSpecification;
+    /**
+     * Determines whether the fulfillment code hook is used. When active is false, the code hook doesn't run.
+     */
+    active?: BoxedBoolean;
   }
   export type FulfillmentStartResponseDelay = number;
   export interface FulfillmentStartResponseSpecification {
@@ -3070,6 +3181,15 @@ declare namespace LexModelsV2 {
   }
   export type ImportSummaryList = ImportSummary[];
   export type ImportedResourceId = string;
+  export interface InitialResponseSetting {
+    initialResponse?: ResponseSpecification;
+    /**
+     * The next step in the conversation.
+     */
+    nextStep?: DialogState;
+    conditional?: ConditionalSpecification;
+    codeHook?: DialogCodeHookInvocationSetting;
+  }
   export interface InputContext {
     /**
      * The name of the context.
@@ -3081,11 +3201,19 @@ declare namespace LexModelsV2 {
     /**
      * The response that Amazon Lex sends to the user when the intent is complete.
      */
-    closingResponse: ResponseSpecification;
+    closingResponse?: ResponseSpecification;
     /**
      * Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
+    /**
+     * Specifies the next step that the bot executes after playing the intent's closing response.
+     */
+    nextStep?: DialogState;
+    /**
+     * A list of conditional branches associated with the intent's closing response. These branches are executed when the nextStep attribute is set to EvalutateConditional.
+     */
+    conditional?: ConditionalSpecification;
   }
   export interface IntentConfirmationSetting {
     /**
@@ -3095,11 +3223,42 @@ declare namespace LexModelsV2 {
     /**
      * When the user answers "no" to the question defined in promptSpecification, Amazon Lex responds with this response to acknowledge that the intent was canceled. 
      */
-    declinationResponse: ResponseSpecification;
+    declinationResponse?: ResponseSpecification;
     /**
      * Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
+    confirmationResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot executes when the customer confirms the intent.
+     */
+    confirmationNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the intent is closed.
+     */
+    confirmationConditional?: ConditionalSpecification;
+    /**
+     * Specifies the next step that the bot executes when the customer declines the intent.
+     */
+    declinationNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the intent is declined.
+     */
+    declinationConditional?: ConditionalSpecification;
+    failureResponse?: ResponseSpecification;
+    /**
+     * The next step to take in the conversation if the confirmation step fails.
+     */
+    failureNextStep?: DialogState;
+    failureConditional?: ConditionalSpecification;
+    /**
+     * The DialogCodeHookInvocationSetting object associated with intent's confirmation step. The dialog code hook is triggered based on these invocation settings when the confirmation next step or declination next step or failure next step is InvokeDialogCodeHook. 
+     */
+    codeHook?: DialogCodeHookInvocationSetting;
+    /**
+     * The DialogCodeHookInvocationSetting used when the code hook is invoked during confirmation prompt retries.
+     */
+    elicitationCodeHook?: ElicitationCodeHookInvocationSetting;
   }
   export interface IntentFilter {
     /**
@@ -3118,6 +3277,16 @@ declare namespace LexModelsV2 {
   export type IntentFilterName = "IntentName"|string;
   export type IntentFilterOperator = "CO"|"EQ"|string;
   export type IntentFilters = IntentFilter[];
+  export interface IntentOverride {
+    /**
+     * The name of the intent. Only required when you're switching intents.
+     */
+    name?: Name;
+    /**
+     * A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren't overridden.,
+     */
+    slots?: SlotValueOverrideMap;
+  }
   export type IntentSignature = string;
   export type IntentSortAttribute = "IntentName"|"LastUpdatedDateTime"|string;
   export interface IntentSortBy {
@@ -3898,6 +4067,7 @@ declare namespace LexModelsV2 {
   export type Name = string;
   export type NextIndex = number;
   export type NextToken = string;
+  export type NonEmptyString = string;
   export type NumericalBotVersion = string;
   export interface ObfuscationSetting {
     /**
@@ -3939,10 +4109,63 @@ declare namespace LexModelsV2 {
   }
   export type PlainTextMessageValue = string;
   export type Policy = string;
+  export interface PostDialogCodeHookInvocationSpecification {
+    successResponse?: ResponseSpecification;
+    /**
+     * Specifics the next step the bot runs after the dialog code hook finishes successfully. 
+     */
+    successNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the dialog code hook finishes successfully.
+     */
+    successConditional?: ConditionalSpecification;
+    failureResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step the bot runs after the dialog code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the dialog code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureConditional?: ConditionalSpecification;
+    timeoutResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot runs when the code hook times out.
+     */
+    timeoutNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate if the code hook times out.
+     */
+    timeoutConditional?: ConditionalSpecification;
+  }
   export interface PostFulfillmentStatusSpecification {
     successResponse?: ResponseSpecification;
     failureResponse?: ResponseSpecification;
     timeoutResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step in the conversation that Amazon Lex invokes when the fulfillment code hook completes successfully.
+     */
+    successNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the fulfillment code hook finishes successfully.
+     */
+    successConditional?: ConditionalSpecification;
+    /**
+     * Specifies the next step the bot runs after the fulfillment code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the fulfillment code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureConditional?: ConditionalSpecification;
+    /**
+     * Specifies the next step that the bot runs when the fulfillment code hook times out.
+     */
+    timeoutNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate if the fulfillment code hook times out.
+     */
+    timeoutConditional?: ConditionalSpecification;
   }
   export type PresignedS3Url = string;
   export interface Principal {
@@ -4154,6 +4377,34 @@ declare namespace LexModelsV2 {
   export type SessionId = string;
   export type SessionTTL = number;
   export type SkipResourceInUseCheck = boolean;
+  export interface SlotCaptureSetting {
+    captureResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot runs when the slot value is captured before the code hook times out.
+     */
+    captureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the slot value is captured.
+     */
+    captureConditional?: ConditionalSpecification;
+    failureResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot runs when the slot value code is not recognized.
+     */
+    failureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate when the slot value isn't captured.
+     */
+    failureConditional?: ConditionalSpecification;
+    /**
+     * Code hook called after Amazon Lex successfully captures a slot value.
+     */
+    codeHook?: DialogCodeHookInvocationSetting;
+    /**
+     * Code hook called when Amazon Lex doesn't capture a slot value.
+     */
+    elicitationCodeHook?: ElicitationCodeHookInvocationSetting;
+  }
   export type SlotConstraint = "Required"|"Optional"|string;
   export interface SlotDefaultValue {
     /**
@@ -4197,6 +4448,7 @@ declare namespace LexModelsV2 {
      */
     slotId: Id;
   }
+  export type SlotShape = "Scalar"|"List"|string;
   export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime"|string;
   export interface SlotSortBy {
     /**
@@ -4313,6 +4565,12 @@ declare namespace LexModelsV2 {
     synonyms?: SynonymList;
   }
   export type SlotTypeValues = SlotTypeValue[];
+  export interface SlotValue {
+    /**
+     * The value that Amazon Lex determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex choose the first value in the resolvedValues list.
+     */
+    interpretedValue?: NonEmptyString;
+  }
   export interface SlotValueElicitationSetting {
     /**
      * A list of default values for a slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, session attributes, and defined values.
@@ -4331,7 +4589,26 @@ declare namespace LexModelsV2 {
      */
     sampleUtterances?: SampleUtterancesList;
     waitAndContinueSpecification?: WaitAndContinueSpecification;
+    /**
+     * Specifies the settings that Amazon Lex uses when a slot value is successfully entered by a user.
+     */
+    slotCaptureSetting?: SlotCaptureSetting;
   }
+  export interface SlotValueOverride {
+    /**
+     * When the shape value is List, it indicates that the values field contains a list of slot values. When the value is Scalar, it indicates that the value field contains a single value.
+     */
+    shape?: SlotShape;
+    /**
+     * The current value of the slot.
+     */
+    value?: SlotValue;
+    /**
+     * A list of one or more values that the user provided for the slot. For example, for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple."
+     */
+    values?: SlotValues;
+  }
+  export type SlotValueOverrideMap = {[key: string]: SlotValueOverride};
   export interface SlotValueRegexFilter {
     /**
      * A regular expression used to validate the value of a slot.  Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:    A-Z, a-z   0-9   Unicode characters ("\ u&lt;Unicode&gt;")    Represent Unicode characters with four digits, for example "\u0041" or "\u005A".   The following regular expression operators are not supported:    Infinite repeaters: *, +, or {x,} with no upper bound.   Wild card (.)  
@@ -4353,6 +4630,7 @@ declare namespace LexModelsV2 {
      */
     advancedRecognitionSetting?: AdvancedRecognitionSetting;
   }
+  export type SlotValues = SlotValueOverride[];
   export type SortOrder = "Ascending"|"Descending"|string;
   export interface StartBotRecommendationRequest {
     /**
@@ -4470,6 +4748,8 @@ declare namespace LexModelsV2 {
     allowInterrupt?: BoxedBoolean;
   }
   export type StillWaitingResponseTimeout = number;
+  export type String = string;
+  export type StringMap = {[key: string]: String};
   export type SynonymList = SampleValue[];
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -4905,6 +5185,10 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
+    /**
+     * 
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface UpdateIntentResponse {
     /**
@@ -4979,6 +5263,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the last time that the intent was modified.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * 
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface UpdateResourcePolicyRequest {
     /**
