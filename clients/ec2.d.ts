@@ -7185,6 +7185,35 @@ declare namespace EC2 {
   }
   export type ClientVpnRouteStatusCode = "creating"|"active"|"failed"|"deleting"|string;
   export type ClientVpnSecurityGroupIdSet = SecurityGroupId[];
+  export type CloudWatchLogGroupArn = string;
+  export interface CloudWatchLogOptions {
+    /**
+     * Status of VPN tunnel logging feature. Default value is False. Valid values: True | False 
+     */
+    LogEnabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+     */
+    LogGroupArn?: String;
+    /**
+     * Configured log format. Default format is json. Valid values: json | text 
+     */
+    LogOutputFormat?: String;
+  }
+  export interface CloudWatchLogOptionsSpecification {
+    /**
+     * Enable or disable VPN tunnel logging feature. Default value is False. Valid values: True | False 
+     */
+    LogEnabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+     */
+    LogGroupArn?: CloudWatchLogGroupArn;
+    /**
+     * Set log format. Default format is json. Valid values: json | text 
+     */
+    LogOutputFormat?: String;
+  }
   export interface CoipAddressUsage {
     /**
      * The allocation ID of the address.
@@ -25550,6 +25579,10 @@ declare namespace EC2 {
      * The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for Amazon Web Services to initiate the IKE negotiation. Valid Values: add | start  Default: add 
      */
     StartupAction?: String;
+    /**
+     * Options for logging VPN tunnel activity.
+     */
+    LogOptions?: VpnTunnelLogOptionsSpecification;
   }
   export interface MonitorInstancesRequest {
     /**
@@ -33161,6 +33194,10 @@ declare namespace EC2 {
      * The action to take when the establishing the VPN tunnels for a VPN connection.
      */
     StartupAction?: String;
+    /**
+     * Options for logging VPN tunnel activity.
+     */
+    LogOptions?: VpnTunnelLogOptions;
   }
   export type TunnelOptionsList = TunnelOption[];
   export interface UnassignIpv6AddressesRequest {
@@ -34319,6 +34356,18 @@ declare namespace EC2 {
   }
   export type VpnStaticRouteList = VpnStaticRoute[];
   export type VpnStaticRouteSource = "Static"|string;
+  export interface VpnTunnelLogOptions {
+    /**
+     * Options for sending VPN tunnel logs to CloudWatch.
+     */
+    CloudWatchLogOptions?: CloudWatchLogOptions;
+  }
+  export interface VpnTunnelLogOptionsSpecification {
+    /**
+     * Options for sending VPN tunnel logs to CloudWatch.
+     */
+    CloudWatchLogOptions?: CloudWatchLogOptionsSpecification;
+  }
   export interface VpnTunnelOptionsSpecification {
     /**
      * The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway.  Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The following CIDR blocks are reserved and cannot be used:    169.254.0.0/30     169.254.1.0/30     169.254.2.0/30     169.254.3.0/30     169.254.4.0/30     169.254.5.0/30     169.254.169.252/30   
@@ -34392,6 +34441,10 @@ declare namespace EC2 {
      * The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for Amazon Web Services to initiate the IKE negotiation. Valid Values: add | start  Default: add 
      */
     StartupAction?: String;
+    /**
+     * Options for logging VPN tunnel activity.
+     */
+    LogOptions?: VpnTunnelLogOptionsSpecification;
   }
   export type VpnTunnelOptionsSpecificationsList = VpnTunnelOptionsSpecification[];
   export type WeekDay = "sunday"|"monday"|"tuesday"|"wednesday"|"thursday"|"friday"|"saturday"|string;

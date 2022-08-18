@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1197.0-->
+<!--LATEST=2.1198.0-->
 <!--ENTRYINSERT-->
+
+## 2.1198.0
+* feature: ChimeSDKMediaPipelines: The Amazon Chime SDK now supports live streaming of real-time video from the Amazon Chime SDK sessions to streaming platforms such as Amazon IVS and Amazon Elemental MediaLive. We have also added support for concatenation to create a single media capture file.
+* feature: CloudWatch: Add support for managed Contributor Insights Rules
+* feature: DynamoDB: This release adds support for importing data from S3 into a new DynamoDB table
+* feature: EC2: This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs
+* feature: NetworkManager: Add TransitGatewayPeeringAttachmentId property to TransitGatewayPeering Model
 
 ## 2.1197.0
 * feature: AppMesh: AWS App Mesh release to support Multiple Listener and Access Log Format feature

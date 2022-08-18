@@ -3783,7 +3783,12 @@ declare namespace NetworkManager {
      * The ARN of the transit gateway.
      */
     TransitGatewayArn?: TransitGatewayArn;
+    /**
+     * The ID of the transit gateway peering attachment.
+     */
+    TransitGatewayPeeringAttachmentId?: TransitGatewayPeeringAttachmentId;
   }
+  export type TransitGatewayPeeringAttachmentId = string;
   export interface TransitGatewayRegistration {
     /**
      * The ID of the global network.

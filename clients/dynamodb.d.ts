@@ -143,6 +143,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
+   *  Represents the properties of the import. 
+   */
+  describeImport(params: DynamoDB.Types.DescribeImportInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeImportOutput) => void): Request<DynamoDB.Types.DescribeImportOutput, AWSError>;
+  /**
+   *  Represents the properties of the import. 
+   */
+  describeImport(callback?: (err: AWSError, data: DynamoDB.Types.DescribeImportOutput) => void): Request<DynamoDB.Types.DescribeImportOutput, AWSError>;
+  /**
    * Returns information about the status of Kinesis streaming.
    */
   describeKinesisStreamingDestination(params: DynamoDB.Types.DescribeKinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.DescribeKinesisStreamingDestinationOutput, AWSError>;
@@ -231,6 +239,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   getItem(callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
   /**
+   *  Imports table data from an S3 bucket. 
+   */
+  importTable(params: DynamoDB.Types.ImportTableInput, callback?: (err: AWSError, data: DynamoDB.Types.ImportTableOutput) => void): Request<DynamoDB.Types.ImportTableOutput, AWSError>;
+  /**
+   *  Imports table data from an S3 bucket. 
+   */
+  importTable(callback?: (err: AWSError, data: DynamoDB.Types.ImportTableOutput) => void): Request<DynamoDB.Types.ImportTableOutput, AWSError>;
+  /**
    * List backups associated with an Amazon Web Services account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
    */
   listBackups(params: DynamoDB.Types.ListBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
@@ -262,6 +278,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Lists all global tables that have a replica in the specified Region.  This operation only applies to Version 2017.11.29 of global tables. 
    */
   listGlobalTables(callback?: (err: AWSError, data: DynamoDB.Types.ListGlobalTablesOutput) => void): Request<DynamoDB.Types.ListGlobalTablesOutput, AWSError>;
+  /**
+   *  Lists completed imports within the past 90 days. 
+   */
+  listImports(params: DynamoDB.Types.ListImportsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListImportsOutput) => void): Request<DynamoDB.Types.ListImportsOutput, AWSError>;
+  /**
+   *  Lists completed imports within the past 90 days. 
+   */
+  listImports(callback?: (err: AWSError, data: DynamoDB.Types.ListImportsOutput) => void): Request<DynamoDB.Types.ListImportsOutput, AWSError>;
   /**
    * Returns an array of table names associated with the current account and endpoint. The output from ListTables is paginated, with each page returning a maximum of 100 table names.
    */
@@ -765,7 +789,7 @@ declare namespace DynamoDB {
      */
     Code?: BatchStatementErrorCodeEnum;
     /**
-     *  The error message associated with the PartiQL batch resposne. 
+     *  The error message associated with the PartiQL batch response. 
      */
     Message?: String;
   }
@@ -856,6 +880,7 @@ declare namespace DynamoDB {
   }
   export type ClientRequestToken = string;
   export type ClientToken = string;
+  export type CloudWatchLogGroupArn = string;
   export type ComparisonOperator = "EQ"|"NE"|"IN"|"LE"|"LT"|"GE"|"GT"|"BETWEEN"|"NOT_NULL"|"NULL"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|string;
   export interface Condition {
     /**
@@ -1087,6 +1112,19 @@ declare namespace DynamoDB {
      * Represents the properties of the table.
      */
     TableDescription?: TableDescription;
+  }
+  export type CsvDelimiter = string;
+  export type CsvHeader = string;
+  export type CsvHeaderList = CsvHeader[];
+  export interface CsvOptions {
+    /**
+     *  The delimiter used for separating items in the CSV file being imported. 
+     */
+    Delimiter?: CsvDelimiter;
+    /**
+     *  List of the headers used to specify a common header for all source CSV files being imported. If this field is specified then the first line of each CSV file is treated as data instead of the header. If this field is not specified the the first line of each CSV file is treated as the header. 
+     */
+    HeaderList?: CsvHeaderList;
   }
   export type _Date = Date;
   export interface Delete {
@@ -1324,6 +1362,18 @@ declare namespace DynamoDB {
      */
     ReplicaSettings?: ReplicaSettingsDescriptionList;
   }
+  export interface DescribeImportInput {
+    /**
+     *  The Amazon Resource Name (ARN) associated with the table you're importing to. 
+     */
+    ImportArn: ImportArn;
+  }
+  export interface DescribeImportOutput {
+    /**
+     *  Represents the properties of the table created for the import, and parameters of the import. The import parameters include import status, how many items were processed, and how many errors were encountered. 
+     */
+    ImportTableDescription: ImportTableDescription;
+  }
   export interface DescribeKinesisStreamingDestinationInput {
     /**
      * The name of the table being described.
@@ -1409,6 +1459,7 @@ declare namespace DynamoDB {
     CachePeriodInMinutes: Long;
   }
   export type Endpoints = Endpoint[];
+  export type ErrorCount = number;
   export type ExceptionDescription = string;
   export type ExceptionName = string;
   export interface ExecuteStatementInput {
@@ -1598,7 +1649,7 @@ declare namespace DynamoDB {
      */
     ExportTime?: ExportTime;
     /**
-     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an ImportConflictException.
      */
     ClientToken?: ClientToken;
     /**
@@ -1855,8 +1906,167 @@ declare namespace DynamoDB {
   export type GlobalTableGlobalSecondaryIndexSettingsUpdateList = GlobalTableGlobalSecondaryIndexSettingsUpdate[];
   export type GlobalTableList = GlobalTable[];
   export type GlobalTableStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|string;
+  export type ImportArn = string;
+  export type ImportEndTime = Date;
+  export type ImportNextToken = string;
+  export type ImportStartTime = Date;
+  export type ImportStatus = "IN_PROGRESS"|"COMPLETED"|"CANCELLING"|"CANCELLED"|"FAILED"|string;
+  export interface ImportSummary {
+    /**
+     *  The Amazon Resource Number (ARN) corresponding to the import request. 
+     */
+    ImportArn?: ImportArn;
+    /**
+     *  The status of the import operation. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The Amazon Resource Number (ARN) of the table being imported into. 
+     */
+    TableArn?: TableArn;
+    /**
+     *  The path and S3 bucket of the source file that is being imported. This includes the S3Bucket (required), S3KeyPrefix (optional) and S3BucketOwner (optional if the bucket is owned by the requester). 
+     */
+    S3BucketSource?: S3BucketSource;
+    /**
+     *  The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with this import task. 
+     */
+    CloudWatchLogGroupArn?: CloudWatchLogGroupArn;
+    /**
+     *  The format of the source data. Valid values are CSV, DYNAMODB_JSON or ION.
+     */
+    InputFormat?: InputFormat;
+    /**
+     *  The time at which this import task began. 
+     */
+    StartTime?: ImportStartTime;
+    /**
+     *  The time at which this import task ended. (Does this include the successful complete creation of the table it was imported to?) 
+     */
+    EndTime?: ImportEndTime;
+  }
+  export type ImportSummaryList = ImportSummary[];
+  export interface ImportTableDescription {
+    /**
+     *  The Amazon Resource Number (ARN) corresponding to the import request. 
+     */
+    ImportArn?: ImportArn;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The Amazon Resource Number (ARN) of the table being imported into. 
+     */
+    TableArn?: TableArn;
+    /**
+     *  The table id corresponding to the table created by import table process. 
+     */
+    TableId?: TableId;
+    /**
+     *  The client token that was provided for the import task. Reusing the client token on retry makes a call to ImportTable idempotent. 
+     */
+    ClientToken?: ClientToken;
+    /**
+     *  Values for the S3 bucket the source file is imported from. Includes bucket name (required), key prefix (optional) and bucket account owner ID (optional). 
+     */
+    S3BucketSource?: S3BucketSource;
+    /**
+     *  The number of errors occurred on importing the source file into the target table. 
+     */
+    ErrorCount?: ErrorCount;
+    /**
+     *  The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with the target table. 
+     */
+    CloudWatchLogGroupArn?: CloudWatchLogGroupArn;
+    /**
+     *  The format of the source data going into the target table. 
+     */
+    InputFormat?: InputFormat;
+    /**
+     *  The format options for the data that was imported into the target table. There is one value, CsvOption. 
+     */
+    InputFormatOptions?: InputFormatOptions;
+    /**
+     *  The compression options for the data that has been imported into the target table. The values are NONE, GZIP, or ZSTD. 
+     */
+    InputCompressionType?: InputCompressionType;
+    /**
+     *  The parameters for the new table that is being imported into. 
+     */
+    TableCreationParameters?: TableCreationParameters;
+    /**
+     *  The time when this import task started. 
+     */
+    StartTime?: ImportStartTime;
+    /**
+     *  The time at which the creation of the table associated with this import task completed. 
+     */
+    EndTime?: ImportEndTime;
+    /**
+     *  The total size of data processed from the source file, in Bytes. 
+     */
+    ProcessedSizeBytes?: Long;
+    /**
+     *  The total number of items processed from the source file. 
+     */
+    ProcessedItemCount?: ProcessedItemCount;
+    /**
+     *  The number of items successfully imported into the new table. 
+     */
+    ImportedItemCount?: ImportedItemCount;
+    /**
+     *  The error code corresponding to the failure that the import job ran into during execution. 
+     */
+    FailureCode?: FailureCode;
+    /**
+     *  The error message corresponding to the failure that the import job ran into during execution. 
+     */
+    FailureMessage?: FailureMessage;
+  }
+  export interface ImportTableInput {
+    /**
+     * Providing a ClientToken makes the call to ImportTableInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     */
+    ClientToken?: ClientToken;
+    /**
+     *  The S3 bucket that provides the source for the import. 
+     */
+    S3BucketSource: S3BucketSource;
+    /**
+     *  The format of the source data. Valid values for ImportFormat are CSV, DYNAMODB_JSON or ION. 
+     */
+    InputFormat: InputFormat;
+    /**
+     *  Additional properties that specify how the input is formatted, 
+     */
+    InputFormatOptions?: InputFormatOptions;
+    /**
+     *  Type of compression to be used on the input coming from the imported table. 
+     */
+    InputCompressionType?: InputCompressionType;
+    /**
+     * Parameters for the table to import the data into. 
+     */
+    TableCreationParameters: TableCreationParameters;
+  }
+  export interface ImportTableOutput {
+    /**
+     *  Represents the properties of the table created for the import, and parameters of the import. The import parameters include import status, how many items were processed, and how many errors were encountered. 
+     */
+    ImportTableDescription: ImportTableDescription;
+  }
+  export type ImportedItemCount = number;
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type InputCompressionType = "GZIP"|"ZSTD"|"NONE"|string;
+  export type InputFormat = "DYNAMODB_JSON"|"ION"|"CSV"|string;
+  export interface InputFormatOptions {
+    /**
+     *  The options for imported source files in CSV format. The values are Delimiter and HeaderList. 
+     */
+    Csv?: CsvOptions;
+  }
   export type Integer = number;
   export type IntegerObject = number;
   export type ItemCollectionKeyAttributeMap = {[key: string]: AttributeValue};
@@ -2075,6 +2285,31 @@ declare namespace DynamoDB {
      */
     LastEvaluatedGlobalTableName?: TableName;
   }
+  export interface ListImportsInput {
+    /**
+     *  The Amazon Resource Name (ARN) associated with the table that was imported to. 
+     */
+    TableArn?: TableArn;
+    /**
+     *  The number of ImportSummary objects returned in a single page. 
+     */
+    PageSize?: ListImportsMaxLimit;
+    /**
+     *  An optional string that, if supplied, must be copied from the output of a previous call to ListImports. When provided in this manner, the API fetches the next page of results. 
+     */
+    NextToken?: ImportNextToken;
+  }
+  export type ListImportsMaxLimit = number;
+  export interface ListImportsOutput {
+    /**
+     *  A list of ImportSummary objects. 
+     */
+    ImportSummaryList?: ImportSummaryList;
+    /**
+     *  If this value is returned, there are additional results to be displayed. To retrieve them, call ListImports again, with NextToken set to this value. 
+     */
+    NextToken?: ImportNextToken;
+  }
   export interface ListTablesInput {
     /**
      * The first table name that this operation will evaluate. Use the value that was returned for LastEvaluatedTableName in a previous operation, so that you can obtain the next page of results.
@@ -2221,6 +2456,7 @@ declare namespace DynamoDB {
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
   export type PreparedStatementParameters = AttributeValue[];
+  export type ProcessedItemCount = number;
   export interface Projection {
     /**
      * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  
@@ -2802,6 +3038,20 @@ declare namespace DynamoDB {
   export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
   export type S3Bucket = string;
   export type S3BucketOwner = string;
+  export interface S3BucketSource {
+    /**
+     *  The account number of the S3 bucket that is being imported from. If the bucket is owned by the requester this is optional. 
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     *  The S3 bucket that is being imported from. 
+     */
+    S3Bucket: S3Bucket;
+    /**
+     *  The key prefix shared by all S3 Objects that are being imported. 
+     */
+    S3KeyPrefix?: S3Prefix;
+  }
   export type S3Prefix = string;
   export type S3SseAlgorithm = "AES256"|"KMS"|string;
   export type S3SseKmsKeyId = string;
@@ -3033,6 +3283,30 @@ declare namespace DynamoDB {
     LastUpdateDateTime?: _Date;
   }
   export type TableCreationDateTime = Date;
+  export interface TableCreationParameters {
+    /**
+     *  The name of the table created as part of the import operation. 
+     */
+    TableName: TableName;
+    /**
+     *  The attributes of the table created as part of the import operation. 
+     */
+    AttributeDefinitions: AttributeDefinitions;
+    /**
+     *  The primary key and option sort key of the table created as part of the import operation. 
+     */
+    KeySchema: KeySchema;
+    /**
+     *  The billing mode for provisioning the table created as part of the import operation. 
+     */
+    BillingMode?: BillingMode;
+    ProvisionedThroughput?: ProvisionedThroughput;
+    SSESpecification?: SSESpecification;
+    /**
+     *  The Global Secondary Indexes (GSI) of the table to be created as part of the import operation. 
+     */
+    GlobalSecondaryIndexes?: GlobalSecondaryIndexList;
+  }
   export interface TableDescription {
     /**
      * An array of AttributeDefinition objects. Each of these objects describes one attribute in the table and index key schema. Each AttributeDefinition object in this array is composed of:    AttributeName - The name of the attribute.    AttributeType - The data type for the attribute.  

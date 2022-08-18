@@ -181,6 +181,14 @@ declare class CloudWatch extends Service {
    */
   listDashboards(callback?: (err: AWSError, data: CloudWatch.Types.ListDashboardsOutput) => void): Request<CloudWatch.Types.ListDashboardsOutput, AWSError>;
   /**
+   *  Returns a list that contains the number of managed Contributor Insights rules in your account. 
+   */
+  listManagedInsightRules(params: CloudWatch.Types.ListManagedInsightRulesInput, callback?: (err: AWSError, data: CloudWatch.Types.ListManagedInsightRulesOutput) => void): Request<CloudWatch.Types.ListManagedInsightRulesOutput, AWSError>;
+  /**
+   *  Returns a list that contains the number of managed Contributor Insights rules in your account. 
+   */
+  listManagedInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.ListManagedInsightRulesOutput) => void): Request<CloudWatch.Types.ListManagedInsightRulesOutput, AWSError>;
+  /**
    * Returns a list of metric streams in this account.
    */
   listMetricStreams(params: CloudWatch.Types.ListMetricStreamsInput, callback?: (err: AWSError, data: CloudWatch.Types.ListMetricStreamsOutput) => void): Request<CloudWatch.Types.ListMetricStreamsOutput, AWSError>;
@@ -236,6 +244,14 @@ declare class CloudWatch extends Service {
    * Creates a Contributor Insights rule. Rules evaluate log events in a CloudWatch Logs log group, enabling you to find contributor data for the log events in that log group. For more information, see Using Contributor Insights to Analyze High-Cardinality Data. If you create a rule, delete it, and then re-create it with the same name, historical data from the first time the rule was created might not be available.
    */
   putInsightRule(callback?: (err: AWSError, data: CloudWatch.Types.PutInsightRuleOutput) => void): Request<CloudWatch.Types.PutInsightRuleOutput, AWSError>;
+  /**
+   *  Creates a managed Contributor Insights rule for a specified Amazon Web Services resource. When you enable a managed rule, you create a Contributor Insights rule that collects data from Amazon Web Services services. You cannot edit these rules with PutInsightRule. The rules can be enabled, disabled, and deleted using EnableInsightRules, DisableInsightRules, and DeleteInsightRules. If a previously created managed rule is currently disabled, a subsequent call to this API will re-enable it. Use ListManagedInsightRules to describe all available rules. 
+   */
+  putManagedInsightRules(params: CloudWatch.Types.PutManagedInsightRulesInput, callback?: (err: AWSError, data: CloudWatch.Types.PutManagedInsightRulesOutput) => void): Request<CloudWatch.Types.PutManagedInsightRulesOutput, AWSError>;
+  /**
+   *  Creates a managed Contributor Insights rule for a specified Amazon Web Services resource. When you enable a managed rule, you create a Contributor Insights rule that collects data from Amazon Web Services services. You cannot edit these rules with PutInsightRule. The rules can be enabled, disabled, and deleted using EnableInsightRules, DisableInsightRules, and DeleteInsightRules. If a previously created managed rule is currently disabled, a subsequent call to this API will re-enable it. Use ListManagedInsightRules to describe all available rules. 
+   */
+  putManagedInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.PutManagedInsightRulesOutput) => void): Request<CloudWatch.Types.PutManagedInsightRulesOutput, AWSError>;
   /**
    * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon Web Services service-linked role.  Cross-account alarms  You can set an alarm on metrics in the current account, or in another account. To create a cross-account alarm that watches a metric in a different account, you must have completed the following pre-requisites:   The account where the metrics are located (the sharing account) must already have a sharing role named CloudWatch-CrossAccountSharingRole. If it does not already have this role, you must create it using the instructions in Set up a sharing account in  Cross-account cross-Region CloudWatch console. The policy for that role must grant access to the ID of the account where you are creating the alarm.    The account where you are creating the alarm (the monitoring account) must already have a service-linked role named AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in Set up a monitoring account in  Cross-account cross-Region CloudWatch console.  
    */
@@ -1099,7 +1115,7 @@ declare namespace CloudWatch {
      */
     LastUpdateDate?: Timestamp;
     /**
-     * The output format for the stream. Valid values are json and opentelemetry0.7. For more information about metric stream output formats, see  Metric streams output formats.
+     * The output format for the stream. Valid values are json and opentelemetry0.7. For more information about metric stream output formats, see Metric streams output formats.
      */
     OutputFormat?: MetricStreamOutputFormat;
     /**
@@ -1143,6 +1159,10 @@ declare namespace CloudWatch {
      * The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see Contributor Insights Rule Syntax.
      */
     Definition: InsightRuleDefinition;
+    /**
+     *  An optional built-in rule that Amazon Web Services manages. 
+     */
+    ManagedRule?: InsightRuleIsManaged;
   }
   export type InsightRuleAggregationStatistic = string;
   export interface InsightRuleContributor {
@@ -1176,6 +1196,7 @@ declare namespace CloudWatch {
   export type InsightRuleContributorKeys = InsightRuleContributorKey[];
   export type InsightRuleContributors = InsightRuleContributor[];
   export type InsightRuleDefinition = string;
+  export type InsightRuleIsManaged = boolean;
   export type InsightRuleMaxResults = number;
   export interface InsightRuleMetricDatapoint {
     /**
@@ -1250,6 +1271,30 @@ declare namespace CloudWatch {
      */
     NextToken?: NextToken;
   }
+  export interface ListManagedInsightRulesInput {
+    /**
+     *  The ARN of an Amazon Web Services resource that has managed Contributor Insights rules. 
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     *  Include this value to get the next set of rules if the value was returned by the previous operation. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  The maximum number of results to return in one operation. If you omit this parameter, the default number is used. The default number is 100. 
+     */
+    MaxResults?: InsightRuleMaxResults;
+  }
+  export interface ListManagedInsightRulesOutput {
+    /**
+     *  The managed rules that are available for the specified Amazon Web Services resource. 
+     */
+    ManagedRules?: ManagedRuleDescriptions;
+    /**
+     *  Include this value to get the next set of rules if the value was returned by the previous operation. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListMetricStreamsInput {
     /**
      * Include this value, if it was returned by the previous call, to get the next set of metric streams.
@@ -1315,6 +1360,46 @@ declare namespace CloudWatch {
      */
     Tags?: TagList;
   }
+  export interface ManagedRule {
+    /**
+     *  The template name for the managed Contributor Insights rule, as returned by ListManagedInsightRules. 
+     */
+    TemplateName: TemplateName;
+    /**
+     *  The ARN of an Amazon Web Services resource that has managed Contributor Insights rules. 
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     *  A list of key-value pairs that you can associate with a managed Contributor Insights rule. You can associate as many as 50 tags with a rule. Tags can help you organize and categorize your resources. You also can use them to scope user permissions by granting a user permission to access or change only the resources that have certain tag values. To associate tags with a rule, you must have the cloudwatch:TagResource permission in addition to the cloudwatch:PutInsightRule permission. If you are using this operation to update an existing Contributor Insights rule, any tags that you specify in this parameter are ignored. To change the tags of an existing rule, use TagResource. 
+     */
+    Tags?: TagList;
+  }
+  export interface ManagedRuleDescription {
+    /**
+     *  The template name for the managed rule. Used to enable managed rules using PutManagedInsightRules. 
+     */
+    TemplateName?: TemplateName;
+    /**
+     *  If a managed rule is enabled, this is the ARN for the related Amazon Web Services resource. 
+     */
+    ResourceARN?: AmazonResourceName;
+    /**
+     *  Describes the state of a managed rule. If present, it contains information about the Contributor Insights rule that contains information about the related Amazon Web Services resource. 
+     */
+    RuleState?: ManagedRuleState;
+  }
+  export type ManagedRuleDescriptions = ManagedRuleDescription[];
+  export interface ManagedRuleState {
+    /**
+     *  The name of the Contributor Insights rule that contains data for the specified Amazon Web Services resource. 
+     */
+    RuleName: InsightRuleName;
+    /**
+     *  Indicates whether the rule is enabled or disabled. 
+     */
+    State: InsightRuleState;
+  }
+  export type ManagedRules = ManagedRule[];
   export type MaxRecords = number;
   export type MaxReturnedResultsCount = number;
   export type Message = string;
@@ -1537,7 +1622,7 @@ declare namespace CloudWatch {
      */
     StatisticValues?: StatisticSet;
     /**
-     * Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the Counts array specifies the number of times that value occurred during the period. You can include up to 500 unique values in each PutMetricData action that specifies a Values array. Although the Values array accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.
+     * Array of numbers representing the values for the metric during the period. Each unique value is listed just once in this array, and the corresponding number in the Counts array specifies the number of times that value occurred during the period. You can include up to 150 unique values in each PutMetricData action that specifies a Values array. Although the Values array accepts numbers of type Double, CloudWatch rejects values that are either too small or too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.
      */
     Values?: Values;
     /**
@@ -1785,6 +1870,18 @@ declare namespace CloudWatch {
     Tags?: TagList;
   }
   export interface PutInsightRuleOutput {
+  }
+  export interface PutManagedInsightRulesInput {
+    /**
+     *  A list of ManagedRules to enable. 
+     */
+    ManagedRules: ManagedRules;
+  }
+  export interface PutManagedInsightRulesOutput {
+    /**
+     *  An array that lists the rules that could not be enabled. 
+     */
+    Failures?: BatchFailures;
   }
   export interface PutMetricAlarmInput {
     /**
@@ -2048,6 +2145,7 @@ declare namespace CloudWatch {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type TemplateName = string;
   export type Threshold = number;
   export type Timestamp = Date;
   export type Timestamps = Timestamp[];

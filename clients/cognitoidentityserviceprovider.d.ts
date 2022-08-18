@@ -2475,7 +2475,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type EventFilterType = "SIGN_IN"|"PASSWORD_CHANGE"|"SIGN_UP"|string;
   export type EventFiltersType = EventFilterType[];
   export type EventIdType = string;
-  export type EventResponseType = "Success"|"Failure"|string;
+  export type EventResponseType = "Pass"|"Fail"|"InProgress"|string;
   export interface EventRiskType {
     /**
      * The risk decision.
@@ -2490,7 +2490,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CompromisedCredentialsDetected?: WrappedBooleanType;
   }
-  export type EventType = "SignIn"|"SignUp"|"ForgotPassword"|string;
+  export type EventType = "SignIn"|"SignUp"|"ForgotPassword"|"PasswordChange"|"ResendCode"|string;
   export type ExplicitAuthFlowsListType = ExplicitAuthFlowsType[];
   export type ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"|"CUSTOM_AUTH_FLOW_ONLY"|"USER_PASSWORD_AUTH"|"ALLOW_ADMIN_USER_PASSWORD_AUTH"|"ALLOW_CUSTOM_AUTH"|"ALLOW_USER_PASSWORD_AUTH"|"ALLOW_USER_SRP_AUTH"|"ALLOW_REFRESH_TOKEN_AUTH"|string;
   export type FeedbackValueType = "Valid"|"Invalid"|string;
