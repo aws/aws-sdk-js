@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1198.0-->
+<!--LATEST=2.1199.0-->
 <!--ENTRYINSERT-->
+
+## 2.1199.0
+* feature: Connect: This release adds SearchSecurityProfiles API which can be used to search for Security Profile resources within a Connect Instance.
+* feature: Kendra: This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.
+* feature: LookoutMetrics: This release is to make GetDataQualityMetrics API publicly available.
 
 ## 2.1198.0
 * feature: ChimeSDKMediaPipelines: The Amazon Chime SDK now supports live streaming of real-time video from the Amazon Chime SDK sessions to streaming platforms such as Amazon IVS and Amazon Elemental MediaLive. We have also added support for concatenation to create a single media capture file.

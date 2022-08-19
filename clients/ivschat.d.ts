@@ -167,7 +167,7 @@ declare namespace Ivschat {
      */
     name?: RoomName;
     /**
-     * Tags to attach to the resource. Array of maps, each of the form string:string (key:value). 
+     * Tags to attach to the resource. Array of maps, each of the form string:string (key:value). See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.
      */
     tags?: Tags;
   }
@@ -336,7 +336,7 @@ declare namespace Ivschat {
   }
   export interface ListTagsForResourceResponse {
     /**
-     * Tags to attach to the resource. Array of maps, each of the form string:string (key:value).
+     * Tags attached to the resource, from the request.
      */
     tags: Tags;
   }
@@ -384,7 +384,7 @@ declare namespace Ivschat {
      */
     name?: RoomName;
     /**
-     * Tags attached to the resource. 
+     * Tags attached to the resource. See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.
      */
     tags?: Tags;
     /**
@@ -422,7 +422,7 @@ declare namespace Ivschat {
      */
     resourceArn: ResourceArn;
     /**
-     * Array of tags to be added or updated.
+     * Array of tags to be added or updated. See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.
      */
     tags: Tags;
   }
@@ -437,7 +437,7 @@ declare namespace Ivschat {
      */
     resourceArn: ResourceArn;
     /**
-     * Array of tags to be removed.
+     * Array of tags to be removed. See Tagging AWS Resources for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.
      */
     tagKeys: TagKeyList;
   }

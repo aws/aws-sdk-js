@@ -60,11 +60,11 @@ declare class Connect extends Service {
    */
   associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a contact flow with a phone number claimed to your Amazon Connect instance.
+   * Associates a flow with a phone number claimed to your Amazon Connect instance.
    */
   associatePhoneNumberContactFlow(params: Connect.Types.AssociatePhoneNumberContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a contact flow with a phone number claimed to your Amazon Connect instance.
+   * Associates a flow with a phone number claimed to your Amazon Connect instance.
    */
   associatePhoneNumberContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -108,19 +108,19 @@ declare class Connect extends Service {
    */
   createAgentStatus(callback?: (err: AWSError, data: Connect.Types.CreateAgentStatusResponse) => void): Request<Connect.Types.CreateAgentStatusResponse, AWSError>;
   /**
-   * Creates a contact flow for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language.
+   * Creates a flow for the specified Amazon Connect instance. You can also create and update flows using the Amazon Connect Flow language.
    */
   createContactFlow(params: Connect.Types.CreateContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
   /**
-   * Creates a contact flow for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language.
+   * Creates a flow for the specified Amazon Connect instance. You can also create and update flows using the Amazon Connect Flow language.
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
   /**
-   * Creates a contact flow module for the specified Amazon Connect instance. 
+   * Creates a flow module for the specified Amazon Connect instance. 
    */
   createContactFlowModule(params: Connect.Types.CreateContactFlowModuleRequest, callback?: (err: AWSError, data: Connect.Types.CreateContactFlowModuleResponse) => void): Request<Connect.Types.CreateContactFlowModuleResponse, AWSError>;
   /**
-   * Creates a contact flow module for the specified Amazon Connect instance. 
+   * Creates a flow module for the specified Amazon Connect instance. 
    */
   createContactFlowModule(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowModuleResponse) => void): Request<Connect.Types.CreateContactFlowModuleResponse, AWSError>;
   /**
@@ -220,19 +220,19 @@ declare class Connect extends Service {
    */
   createVocabulary(callback?: (err: AWSError, data: Connect.Types.CreateVocabularyResponse) => void): Request<Connect.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Deletes a contact flow for the specified Amazon Connect instance.
+   * Deletes a flow for the specified Amazon Connect instance.
    */
   deleteContactFlow(params: Connect.Types.DeleteContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a contact flow for the specified Amazon Connect instance.
+   * Deletes a flow for the specified Amazon Connect instance.
    */
   deleteContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified contact flow module.
+   * Deletes the specified flow module.
    */
   deleteContactFlowModule(params: Connect.Types.DeleteContactFlowModuleRequest, callback?: (err: AWSError, data: Connect.Types.DeleteContactFlowModuleResponse) => void): Request<Connect.Types.DeleteContactFlowModuleResponse, AWSError>;
   /**
-   * Deletes the specified contact flow module.
+   * Deletes the specified flow module.
    */
   deleteContactFlowModule(callback?: (err: AWSError, data: Connect.Types.DeleteContactFlowModuleResponse) => void): Request<Connect.Types.DeleteContactFlowModuleResponse, AWSError>;
   /**
@@ -332,19 +332,19 @@ declare class Connect extends Service {
    */
   describeContact(callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
   /**
-   * Describes the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
+   * Describes the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   describeContactFlow(params: Connect.Types.DescribeContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
   /**
-   * Describes the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
+   * Describes the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   describeContactFlow(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
   /**
-   * Describes the specified contact flow module.
+   * Describes the specified flow module.
    */
   describeContactFlowModule(params: Connect.Types.DescribeContactFlowModuleRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowModuleResponse) => void): Request<Connect.Types.DescribeContactFlowModuleResponse, AWSError>;
   /**
-   * Describes the specified contact flow module.
+   * Describes the specified flow module.
    */
   describeContactFlowModule(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowModuleResponse) => void): Request<Connect.Types.DescribeContactFlowModuleResponse, AWSError>;
   /**
@@ -476,11 +476,11 @@ declare class Connect extends Service {
    */
   disassociateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the dropdown options available in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the dropdown options available in the relevant flow blocks.
    */
   disassociateLambdaFunction(params: Connect.Types.DisassociateLambdaFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the dropdown options available in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Remove the Lambda function from the dropdown options available in the relevant flow blocks.
    */
   disassociateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class Connect extends Service {
    */
   disassociateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if a contact flow association exists.
+   * Removes the flow association from a phone number claimed to your Amazon Connect instance, if a flow association exists.
    */
   disassociatePhoneNumberContactFlow(params: Connect.Types.DisassociatePhoneNumberContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if a contact flow association exists.
+   * Removes the flow association from a phone number claimed to your Amazon Connect instance, if a flow association exists.
    */
   disassociatePhoneNumberContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -596,19 +596,19 @@ declare class Connect extends Service {
    */
   listBots(callback?: (err: AWSError, data: Connect.Types.ListBotsResponse) => void): Request<Connect.Types.ListBotsResponse, AWSError>;
   /**
-   * Provides information about the contact flow modules for the specified Amazon Connect instance.
+   * Provides information about the flow modules for the specified Amazon Connect instance.
    */
   listContactFlowModules(params: Connect.Types.ListContactFlowModulesRequest, callback?: (err: AWSError, data: Connect.Types.ListContactFlowModulesResponse) => void): Request<Connect.Types.ListContactFlowModulesResponse, AWSError>;
   /**
-   * Provides information about the contact flow modules for the specified Amazon Connect instance.
+   * Provides information about the flow modules for the specified Amazon Connect instance.
    */
   listContactFlowModules(callback?: (err: AWSError, data: Connect.Types.ListContactFlowModulesResponse) => void): Request<Connect.Types.ListContactFlowModulesResponse, AWSError>;
   /**
-   * Provides information about the contact flows for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language. For more information about contact flows, see Contact Flows in the Amazon Connect Administrator Guide.
+   * Provides information about the flows for the specified Amazon Connect instance. You can also create and update flows using the Amazon Connect Flow language. For more information about flows, see Flows in the Amazon Connect Administrator Guide.
    */
   listContactFlows(params: Connect.Types.ListContactFlowsRequest, callback?: (err: AWSError, data: Connect.Types.ListContactFlowsResponse) => void): Request<Connect.Types.ListContactFlowsResponse, AWSError>;
   /**
-   * Provides information about the contact flows for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language. For more information about contact flows, see Contact Flows in the Amazon Connect Administrator Guide.
+   * Provides information about the flows for the specified Amazon Connect instance. You can also create and update flows using the Amazon Connect Flow language. For more information about flows, see Flows in the Amazon Connect Administrator Guide.
    */
   listContactFlows(callback?: (err: AWSError, data: Connect.Types.ListContactFlowsResponse) => void): Request<Connect.Types.ListContactFlowsResponse, AWSError>;
   /**
@@ -668,11 +668,11 @@ declare class Connect extends Service {
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant flow blocks.
    */
   listLambdaFunctions(params: Connect.Types.ListLambdaFunctionsRequest, callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant contact flow blocks.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all Lambda functions that display in the dropdown options in the relevant flow blocks.
    */
   listLambdaFunctions(callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
@@ -844,6 +844,14 @@ declare class Connect extends Service {
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Searches security profiles in an Amazon Connect instance, with optional filtering.
+   */
+  searchSecurityProfiles(params: Connect.Types.SearchSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Searches security profiles in an Amazon Connect instance, with optional filtering.
+   */
+  searchSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
+  /**
    * Searches users in an Amazon Connect instance, with optional filtering.
    */
   searchUsers(params: Connect.Types.SearchUsersRequest, callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
@@ -860,11 +868,11 @@ declare class Connect extends Service {
    */
   searchVocabularies(callback?: (err: AWSError, data: Connect.Types.SearchVocabulariesResponse) => void): Request<Connect.Types.SearchVocabulariesResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in the following situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   If you use the ChatDurationInMinutes parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.  For more information about chat, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in the following situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   If you use the ChatDurationInMinutes parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.  For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(params: Connect.Types.StartChatContactRequest, callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in the following situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   If you use the ChatDurationInMinutes parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.  For more information about chat, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in the following situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   If you use the ChatDurationInMinutes parameter and receive a 400 error, your account may not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.  For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
@@ -884,19 +892,19 @@ declare class Connect extends Service {
    */
   startContactStreaming(callback?: (err: AWSError, data: Connect.Types.StartContactStreamingResponse) => void): Request<Connect.Types.StartContactStreamingResponse, AWSError>;
   /**
-   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
+   * Places an outbound call to a contact, and then initiates the flow. It performs the actions in the flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request to the quota Amazon Connect campaigns.  
    */
   startOutboundVoiceContact(params: Connect.Types.StartOutboundVoiceContactRequest, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
+   * Places an outbound call to a contact, and then initiates the flow. It performs the actions in the flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request to the quota Amazon Connect campaigns.  
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new task.
+   * Initiates a flow to start a new task.
    */
   startTaskContact(params: Connect.Types.StartTaskContactRequest, callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new task.
+   * Initiates a flow to start a new task.
    */
   startTaskContact(callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
@@ -932,19 +940,19 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, phone number, security profiles, and task templates. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. Some of the supported resource types are agents, routing profiles, queues, quick connects, contact flows, agent statuses, hours of operation, phone numbers, security profiles, and task templates. For a complete list, see Tagging resources in Amazon Connect. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, hours of operation, phone number, security profiles, and task templates. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. Some of the supported resource types are agents, routing profiles, queues, quick connects, contact flows, agent statuses, hours of operation, phone numbers, security profiles, and task templates. For a complete list, see Tagging resources in Amazon Connect. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the contact flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following contact flow types are supported: Inbound contact flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
+   * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
    */
   transferContact(params: Connect.Types.TransferContactRequest, callback?: (err: AWSError, data: Connect.Types.TransferContactResponse) => void): Request<Connect.Types.TransferContactResponse, AWSError>;
   /**
-   * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the contact flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following contact flow types are supported: Inbound contact flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
+   * Transfers contacts from one agent or queue to another agent or queue at any point after a contact is created. You can transfer a contact to another queue by providing the flow which orchestrates the contact to the destination queue. This gives you more control over contact handling and helps you adhere to the service level agreement (SLA) guaranteed to your customers. Note the following requirements:   Transfer is supported for only TASK contacts.   Do not use both QueueId and UserId in the same call.   The following flow types are supported: Inbound flow, Transfer to agent flow, and Transfer to queue flow.   The TransferContact API can be called only on active contacts.   A contact cannot be transferred more than 11 times.  
    */
   transferContact(callback?: (err: AWSError, data: Connect.Types.TransferContactResponse) => void): Request<Connect.Types.TransferContactResponse, AWSError>;
   /**
@@ -972,51 +980,51 @@ declare class Connect extends Service {
    */
   updateContact(callback?: (err: AWSError, data: Connect.Types.UpdateContactResponse) => void): Request<Connect.Types.UpdateContactResponse, AWSError>;
   /**
-   * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about CTR retention and the maximum size of the CTR attributes section, see Feature specifications in the Amazon Connect Administrator Guide.   Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about contact record retention and the maximum size of the contact record attributes section, see Feature specifications in the Amazon Connect Administrator Guide. 
    */
   updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
-   * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about CTR retention and the maximum size of the CTR attributes section, see Feature specifications in the Amazon Connect Administrator Guide.   Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about contact record retention and the maximum size of the contact record attributes section, see Feature specifications in the Amazon Connect Administrator Guide. 
    */
   updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
-   * Updates the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
+   * Updates the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   updateContactFlowContent(params: Connect.Types.UpdateContactFlowContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
+   * Updates the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   updateContactFlowContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates metadata about specified contact flow.
+   * Updates metadata about specified flow.
    */
   updateContactFlowMetadata(params: Connect.Types.UpdateContactFlowMetadataRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates metadata about specified contact flow.
+   * Updates metadata about specified flow.
    */
   updateContactFlowMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates specified contact flow module for the specified Amazon Connect instance. 
+   * Updates specified flow module for the specified Amazon Connect instance. 
    */
   updateContactFlowModuleContent(params: Connect.Types.UpdateContactFlowModuleContentRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowModuleContentResponse) => void): Request<Connect.Types.UpdateContactFlowModuleContentResponse, AWSError>;
   /**
-   * Updates specified contact flow module for the specified Amazon Connect instance. 
+   * Updates specified flow module for the specified Amazon Connect instance. 
    */
   updateContactFlowModuleContent(callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowModuleContentResponse) => void): Request<Connect.Types.UpdateContactFlowModuleContentResponse, AWSError>;
   /**
-   * Updates metadata about specified contact flow module.
+   * Updates metadata about specified flow module.
    */
   updateContactFlowModuleMetadata(params: Connect.Types.UpdateContactFlowModuleMetadataRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowModuleMetadataResponse) => void): Request<Connect.Types.UpdateContactFlowModuleMetadataResponse, AWSError>;
   /**
-   * Updates metadata about specified contact flow module.
+   * Updates metadata about specified flow module.
    */
   updateContactFlowModuleMetadata(callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowModuleMetadataResponse) => void): Request<Connect.Types.UpdateContactFlowModuleMetadataResponse, AWSError>;
   /**
-   * The name of the contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
+   * The name of the flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   updateContactFlowName(params: Connect.Types.UpdateContactFlowNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * The name of the contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
+   * The name of the flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1294,7 +1302,7 @@ declare namespace Connect {
      */
     State?: AgentStatusState;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -1434,7 +1442,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
   }
@@ -1568,7 +1576,7 @@ declare namespace Connect {
      */
     PhoneNumberDescription?: PhoneNumberDescription;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -1616,7 +1624,7 @@ declare namespace Connect {
      */
     TargetArn?: ARN;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -1694,35 +1702,35 @@ declare namespace Connect {
   }
   export interface ContactFlow {
     /**
-     * The Amazon Resource Name (ARN) of the contact flow.
+     * The Amazon Resource Name (ARN) of the flow.
      */
     Arn?: ARN;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     Id?: ContactFlowId;
     /**
-     * The name of the contact flow.
+     * The name of the flow.
      */
     Name?: ContactFlowName;
     /**
-     * The type of the contact flow. For descriptions of the available types, see Choose a Contact Flow Type in the Amazon Connect Administrator Guide.
+     * The type of the flow. For descriptions of the available types, see Choose a flow type in the Amazon Connect Administrator Guide.
      */
     Type?: ContactFlowType;
     /**
-     * The type of contact flow.
+     * The type of flow.
      */
     State?: ContactFlowState;
     /**
-     * The description of the contact flow.
+     * The description of the flow.
      */
     Description?: ContactFlowDescription;
     /**
-     * The content of the contact flow.
+     * The content of the flow.
      */
     Content?: ContactFlowContent;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -1735,31 +1743,31 @@ declare namespace Connect {
      */
     Arn?: ARN;
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     Id?: ContactFlowModuleId;
     /**
-     * The name of the contact flow module.
+     * The name of the flow module.
      */
     Name?: ContactFlowModuleName;
     /**
-     * The content of the contact flow module.
+     * The content of the flow module.
      */
     Content?: ContactFlowModuleContent;
     /**
-     * The description of the contact flow module.
+     * The description of the flow module.
      */
     Description?: ContactFlowModuleDescription;
     /**
-     * The type of contact flow module.
+     * The type of flow module.
      */
     State?: ContactFlowModuleState;
     /**
-     * The status of the contact flow module.
+     * The status of the flow module.
      */
     Status?: ContactFlowModuleStatus;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -1771,19 +1779,19 @@ declare namespace Connect {
   export type ContactFlowModuleStatus = "PUBLISHED"|"SAVED"|string;
   export interface ContactFlowModuleSummary {
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     Id?: ContactFlowModuleId;
     /**
-     * The Amazon Resource Name (ARN) of the contact flow module.
+     * The Amazon Resource Name (ARN) of the flow module.
      */
     Arn?: ARN;
     /**
-     * The name of the contact flow module.
+     * The name of the flow module.
      */
     Name?: ContactFlowModuleName;
     /**
-     * The type of contact flow module.
+     * The type of flow module.
      */
     State?: ContactFlowModuleState;
   }
@@ -1792,23 +1800,23 @@ declare namespace Connect {
   export type ContactFlowState = "ACTIVE"|"ARCHIVED"|string;
   export interface ContactFlowSummary {
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     Id?: ContactFlowId;
     /**
-     * The Amazon Resource Name (ARN) of the contact flow.
+     * The Amazon Resource Name (ARN) of the flow.
      */
     Arn?: ARN;
     /**
-     * The name of the contact flow.
+     * The name of the flow.
      */
     Name?: ContactFlowName;
     /**
-     * The type of contact flow.
+     * The type of flow.
      */
     ContactFlowType?: ContactFlowType;
     /**
-     * The type of contact flow.
+     * The type of flow.
      */
     ContactFlowState?: ContactFlowState;
   }
@@ -1856,7 +1864,7 @@ declare namespace Connect {
      */
     DisplayOrder?: AgentStatusOrderNumber;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -1876,19 +1884,19 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The name of the contact flow module.
+     * The name of the flow module.
      */
     Name: ContactFlowModuleName;
     /**
-     * The description of the contact flow module. 
+     * The description of the flow module. 
      */
     Description?: ContactFlowModuleDescription;
     /**
-     * The content of the contact flow module.
+     * The content of the flow module.
      */
     Content: ContactFlowModuleContent;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -1898,11 +1906,11 @@ declare namespace Connect {
   }
   export interface CreateContactFlowModuleResponse {
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     Id?: ContactFlowModuleId;
     /**
-     * The Amazon Resource Name (ARN) of the contact flow module.
+     * The Amazon Resource Name (ARN) of the flow module.
      */
     Arn?: ARN;
   }
@@ -1912,33 +1920,33 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The name of the contact flow.
+     * The name of the flow.
      */
     Name: ContactFlowName;
     /**
-     * The type of the contact flow. For descriptions of the available types, see Choose a Contact Flow Type in the Amazon Connect Administrator Guide.
+     * The type of the flow. For descriptions of the available types, see Choose a flow type in the Amazon Connect Administrator Guide.
      */
     Type: ContactFlowType;
     /**
-     * The description of the contact flow. 
+     * The description of the flow. 
      */
     Description?: ContactFlowDescription;
     /**
-     * The content of the contact flow. 
+     * The content of the flow. 
      */
     Content: ContactFlowContent;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
   export interface CreateContactFlowResponse {
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId?: ContactFlowId;
     /**
-     * The Amazon Resource Name (ARN) of the contact flow.
+     * The Amazon Resource Name (ARN) of the flow.
      */
     ContactFlowArn?: ARN;
   }
@@ -1964,7 +1972,7 @@ declare namespace Connect {
      */
     Config: HoursOfOperationConfigList;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2024,7 +2032,7 @@ declare namespace Connect {
      */
     IntegrationType: IntegrationType;
     /**
-     * The Amazon Resource Name (ARN) of the integration.
+     * The Amazon Resource Name (ARN) of the integration.  When integrating with Amazon Pinpoint, the Amazon Connect and Amazon Pinpoint instances must be in the same account. 
      */
     IntegrationArn: ARN;
     /**
@@ -2040,7 +2048,7 @@ declare namespace Connect {
      */
     SourceType?: SourceType;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2084,7 +2092,7 @@ declare namespace Connect {
      */
     QuickConnectIds?: QuickConnectsList;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2116,7 +2124,7 @@ declare namespace Connect {
      */
     QuickConnectConfig: QuickConnectConfig;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2156,7 +2164,7 @@ declare namespace Connect {
      */
     MediaConcurrencies: MediaConcurrencies;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2188,7 +2196,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2264,7 +2272,7 @@ declare namespace Connect {
      */
     UseCaseType: UseCaseType;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2292,7 +2300,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2344,7 +2352,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2380,7 +2388,7 @@ declare namespace Connect {
      */
     Content: VocabularyContent;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -2486,7 +2494,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     ContactFlowModuleId: ContactFlowModuleId;
   }
@@ -2498,7 +2506,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
   }
@@ -2640,13 +2648,13 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     ContactFlowModuleId: ContactFlowModuleId;
   }
   export interface DescribeContactFlowModuleResponse {
     /**
-     * Information about the contact flow module.
+     * Information about the flow module.
      */
     ContactFlowModule?: ContactFlowModule;
   }
@@ -2656,13 +2664,13 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
   }
   export interface DescribeContactFlowResponse {
     /**
-     * Information about the contact flow.
+     * Information about the flow.
      */
     ContactFlow?: ContactFlow;
   }
@@ -3243,7 +3251,7 @@ declare namespace Connect {
      */
     CreatedTime?: timestamp;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3271,7 +3279,7 @@ declare namespace Connect {
      */
     HierarchyPath?: HierarchyPath;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3493,7 +3501,7 @@ declare namespace Connect {
      */
     Config?: HoursOfOperationConfigList;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -3855,13 +3863,13 @@ declare namespace Connect {
      */
     MaxResults?: MaxResult1000;
     /**
-     * The state of the contact flow module.
+     * The state of the flow module.
      */
     ContactFlowModuleState?: ContactFlowModuleState;
   }
   export interface ListContactFlowModulesResponse {
     /**
-     * Information about the contact flow module.
+     * Information about the flow module.
      */
     ContactFlowModulesSummaryList?: ContactFlowModulesSummaryList;
     /**
@@ -3875,7 +3883,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of contact flow.
+     * The type of flow.
      */
     ContactFlowTypes?: ContactFlowTypes;
     /**
@@ -3883,13 +3891,13 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
   export interface ListContactFlowsResponse {
     /**
-     * Information about the contact flows.
+     * Information about the flows.
      */
     ContactFlowSummaryList?: ContactFlowSummaryList;
     /**
@@ -3917,7 +3925,7 @@ declare namespace Connect {
   }
   export interface ListContactReferencesResponse {
     /**
-     * Information about the contact flows.
+     * Information about the flows.
      */
     ReferenceSummaryList?: ReferenceSummaryList;
     /**
@@ -3963,7 +3971,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4143,7 +4151,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4230,7 +4238,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4258,7 +4266,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult100;
   }
@@ -4286,7 +4294,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4310,7 +4318,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
     /**
@@ -4342,7 +4350,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult100;
   }
@@ -4366,7 +4374,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4442,7 +4450,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4538,7 +4546,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4562,7 +4570,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return per page.
+     * The maximum number of results to return per page. The default MaxResult size is 100.
      */
     MaxResults?: MaxResult1000;
   }
@@ -4755,7 +4763,7 @@ declare namespace Connect {
      */
     Status?: QueueStatus;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -4779,7 +4787,7 @@ declare namespace Connect {
      */
     QueueId: QueueId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
   }
@@ -4838,7 +4846,7 @@ declare namespace Connect {
      */
     QuickConnectConfig?: QuickConnectConfig;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -4997,7 +5005,7 @@ declare namespace Connect {
      */
     DefaultOutboundQueueId?: QueueId;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -5132,6 +5140,42 @@ declare namespace Connect {
      */
     AvailableNumbersList?: AvailableNumbersList;
   }
+  export interface SearchSecurityProfilesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * The search criteria to be used to return security profiles.
+     */
+    SearchCriteria?: SecurityProfileSearchCriteria;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: SecurityProfilesSearchFilter;
+  }
+  export interface SearchSecurityProfilesResponse {
+    /**
+     * Information about the security profiles.
+     */
+    SecurityProfiles?: SecurityProfilesSearchSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of security profiles which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
   export interface SearchUsersRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -5238,7 +5282,7 @@ declare namespace Connect {
      */
     Description?: SecurityProfileDescription;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -5247,6 +5291,44 @@ declare namespace Connect {
   export type SecurityProfileIds = SecurityProfileId[];
   export type SecurityProfileName = string;
   export type SecurityProfilePermission = string;
+  export type SecurityProfileSearchConditionList = SecurityProfileSearchCriteria[];
+  export interface SecurityProfileSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: SecurityProfileSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: SecurityProfileSearchConditionList;
+    StringCondition?: StringCondition;
+  }
+  export interface SecurityProfileSearchSummary {
+    /**
+     * The identifier of the security profile.
+     */
+    Id?: SecurityProfileId;
+    /**
+     * The organization resource identifier.
+     */
+    OrganizationResourceId?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the security profile.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the security profile.
+     */
+    SecurityProfileName?: SecurityProfileName;
+    /**
+     * The description of the security profile.
+     */
+    Description?: SecurityProfileDescription;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
   export interface SecurityProfileSummary {
     /**
      * The identifier of the security profile.
@@ -5262,6 +5344,10 @@ declare namespace Connect {
     Name?: SecurityProfileName;
   }
   export type SecurityProfileSummaryList = SecurityProfileSummary[];
+  export interface SecurityProfilesSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
+  }
+  export type SecurityProfilesSearchSummaryList = SecurityProfileSearchSummary[];
   export type SecurityToken = string;
   export type SingleSelectOptions = TaskTemplateSingleSelectOption[];
   export type SnapshotVersion = string;
@@ -5273,11 +5359,11 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow for initiating the chat. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
+     * The identifier of the flow for initiating the chat. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the flow. On the flow page, under the name of the flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
     ContactFlowId: ContactFlowId;
     /**
-     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in contact flows just like any other contact attributes.  There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
+     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in flows just like any other contact attributes.  There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
     Attributes?: Attributes;
     /**
@@ -5365,7 +5451,7 @@ declare namespace Connect {
      */
     DestinationPhoneNumber: PhoneNumber;
     /**
-     * The identifier of the contact flow for the outbound call. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
+     * The identifier of the flow for the outbound call. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the flow. On the flow page, under the name of the flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
     ContactFlowId: ContactFlowId;
     /**
@@ -5381,11 +5467,11 @@ declare namespace Connect {
      */
     SourcePhoneNumber?: PhoneNumber;
     /**
-     * The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.
+     * The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the flow is used. If you do not specify a queue, you must specify a source phone number.
      */
     QueueId?: QueueId;
     /**
-     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
+     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
     Attributes?: Attributes;
     /**
@@ -5417,11 +5503,11 @@ declare namespace Connect {
      */
     PreviousContactId?: ContactId;
     /**
-     * The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
+     * The identifier of the flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the flow. On the flow page, under the name of the flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
     ContactFlowId?: ContactFlowId;
     /**
-     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
+     * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
     Attributes?: Attributes;
     /**
@@ -5441,7 +5527,7 @@ declare namespace Connect {
      */
     ClientToken?: ClientToken;
     /**
-     * The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
+     * The timestamp, in Unix Epoch seconds format, at which to start running the inbound flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
      */
     ScheduledTime?: Timestamp;
     /**
@@ -5571,7 +5657,7 @@ declare namespace Connect {
      */
     resourceArn: ARN;
     /**
-     * One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     tags: TagMap;
   }
@@ -5705,7 +5791,7 @@ declare namespace Connect {
      */
     UserId?: AgentResourceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
     /**
@@ -5776,7 +5862,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The Amazon Connect attributes. These attributes can be accessed in contact flows just like any other contact attributes. You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
+     * The Amazon Connect attributes. These attributes can be accessed in flows just like any other contact attributes. You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
     Attributes: Attributes;
   }
@@ -5788,11 +5874,11 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The JSON string that represents contact flow’s content. For an example, see Example contact flow in Amazon Connect Flow language in the Amazon Connect Administrator Guide. 
+     * The JSON string that represents flow's content. For an example, see Example contact flow in Amazon Connect Flow language in the Amazon Connect Administrator Guide. 
      */
     Content: ContactFlowContent;
   }
@@ -5802,19 +5888,19 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
     /**
-     * TThe name of the contact flow.
+     * TThe name of the flow.
      */
     Name?: ContactFlowName;
     /**
-     * The description of the contact flow.
+     * The description of the flow.
      */
     Description?: ContactFlowDescription;
     /**
-     * The state of contact flow.
+     * The state of flow.
      */
     ContactFlowState?: ContactFlowState;
   }
@@ -5824,11 +5910,11 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     ContactFlowModuleId: ContactFlowModuleId;
     /**
-     * The content of the contact flow module.
+     * The content of the flow module.
      */
     Content: ContactFlowModuleContent;
   }
@@ -5840,19 +5926,19 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow module.
+     * The identifier of the flow module.
      */
     ContactFlowModuleId: ContactFlowModuleId;
     /**
-     * The name of the contact flow module.
+     * The name of the flow module.
      */
     Name?: ContactFlowModuleName;
     /**
-     * The description of the contact flow module.
+     * The description of the flow module.
      */
     Description?: ContactFlowModuleDescription;
     /**
-     * The state of contact flow module.
+     * The state of flow module.
      */
     State?: ContactFlowModuleState;
   }
@@ -5864,15 +5950,15 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The name of the contact flow.
+     * The name of the flow.
      */
     Name?: ContactFlowName;
     /**
-     * The description of the contact flow.
+     * The description of the flow.
      */
     Description?: ContactFlowDescription;
   }
@@ -5910,7 +5996,7 @@ declare namespace Connect {
      */
     ContactId: ContactId;
     /**
-     * The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
+     * The timestamp, in Unix Epoch seconds format, at which to start running the inbound flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. 
      */
     ScheduledTime: Timestamp;
   }
@@ -6526,7 +6612,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the contact flow.
+     * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
   }
@@ -6593,7 +6679,7 @@ declare namespace Connect {
      */
     SecurityProfileIds?: SecurityProfileIds;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
@@ -6652,7 +6738,7 @@ declare namespace Connect {
      */
     Content?: VocabularyContent;
     /**
-     * The tags used to organize, track, or control access for this resource.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }

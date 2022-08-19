@@ -124,6 +124,14 @@ declare class LookoutMetrics extends Service {
    */
   getAnomalyGroup(callback?: (err: AWSError, data: LookoutMetrics.Types.GetAnomalyGroupResponse) => void): Request<LookoutMetrics.Types.GetAnomalyGroupResponse, AWSError>;
   /**
+   * Returns details about the requested data quality metrics.
+   */
+  getDataQualityMetrics(params: LookoutMetrics.Types.GetDataQualityMetricsRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.GetDataQualityMetricsResponse) => void): Request<LookoutMetrics.Types.GetDataQualityMetricsResponse, AWSError>;
+  /**
+   * Returns details about the requested data quality metrics.
+   */
+  getDataQualityMetrics(callback?: (err: AWSError, data: LookoutMetrics.Types.GetDataQualityMetricsResponse) => void): Request<LookoutMetrics.Types.GetDataQualityMetricsResponse, AWSError>;
+  /**
    * Get feedback for an anomaly group.
    */
   getFeedback(params: LookoutMetrics.Types.GetFeedbackRequest, callback?: (err: AWSError, data: LookoutMetrics.Types.GetFeedbackResponse) => void): Request<LookoutMetrics.Types.GetFeedbackResponse, AWSError>;
@@ -377,6 +385,17 @@ declare namespace LookoutMetrics {
      */
     AnomalyDetectorFrequency?: Frequency;
   }
+  export interface AnomalyDetectorDataQualityMetric {
+    /**
+     * The start time for the data quality metrics collection.
+     */
+    StartTimestamp?: Timestamp;
+    /**
+     * An array of DataQualityMetricList objects. Each object in the array contains information about a data quality metric.
+     */
+    MetricSetDataQualityMetricList?: MetricSetDataQualityMetricList;
+  }
+  export type AnomalyDetectorDataQualityMetricList = AnomalyDetectorDataQualityMetric[];
   export type AnomalyDetectorDescription = string;
   export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|"DEACTIVATION_FAILURE"|string;
   export type AnomalyDetectorName = string;
@@ -706,7 +725,7 @@ declare namespace LookoutMetrics {
      */
     MetricList: MetricList;
     /**
-     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.
      */
     Offset?: Offset;
     /**
@@ -767,6 +786,27 @@ declare namespace LookoutMetrics {
     QuoteSymbol?: QuoteSymbol;
   }
   export type DataItem = string;
+  export interface DataQualityMetric {
+    /**
+     * The name of the data quality metric.
+     */
+    MetricType?: DataQualityMetricType;
+    /**
+     * A description of the data quality metric.
+     */
+    MetricDescription?: DataQualityMetricDescription;
+    /**
+     * The column that is being monitored.
+     */
+    RelatedColumnName?: RelatedColumnName;
+    /**
+     * The value of the data quality metric.
+     */
+    MetricValue?: Double;
+  }
+  export type DataQualityMetricDescription = string;
+  export type DataQualityMetricList = DataQualityMetric[];
+  export type DataQualityMetricType = "COLUMN_COMPLETENESS"|"DIMENSION_UNIQUENESS"|"TIME_SERIES_COUNT"|"ROWS_PROCESSED"|"ROWS_PARTIAL_COMPLIANCE"|"INVALID_ROWS_COMPLIANCE"|"BACKTEST_TRAINING_DATA_START_TIME_STAMP"|"BACKTEST_TRAINING_DATA_END_TIME_STAMP"|"BACKTEST_INFERENCE_DATA_START_TIME_STAMP"|"BACKTEST_INFERENCE_DATA_END_TIME_STAMP"|string;
   export type DatabaseHost = string;
   export type DatabasePort = number;
   export type DateTimeFormat = string;
@@ -915,7 +955,7 @@ declare namespace LookoutMetrics {
      */
     LastModificationTime?: Timestamp;
     /**
-     * The offset in seconds. Only supported for S3 and Redshift datasources.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.
      */
     Offset?: Offset;
     /**
@@ -1092,6 +1132,7 @@ declare namespace LookoutMetrics {
   }
   export type DimensionValueContributionList = DimensionValueContribution[];
   export type DimensionValueList = DimensionValue[];
+  export type Double = number;
   export type ErrorMessage = string;
   export type ExecutionList = ExecutionStatus[];
   export interface ExecutionStatus {
@@ -1135,6 +1176,22 @@ declare namespace LookoutMetrics {
      * Details about the anomaly group.
      */
     AnomalyGroup?: AnomalyGroup;
+  }
+  export interface GetDataQualityMetricsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the anomaly detector that you want to investigate.
+     */
+    AnomalyDetectorArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of a specific data quality metric set.
+     */
+    MetricSetArn?: Arn;
+  }
+  export interface GetDataQualityMetricsResponse {
+    /**
+     * A list of the data quality metrics for the AnomalyDetectorArn that you requested.
+     */
+    AnomalyDetectorDataQualityMetricList?: AnomalyDetectorDataQualityMetricList;
   }
   export interface GetFeedbackRequest {
     /**
@@ -1461,6 +1518,17 @@ declare namespace LookoutMetrics {
   export type MetricList = Metric[];
   export type MetricName = string;
   export type MetricNameList = MetricName[];
+  export interface MetricSetDataQualityMetric {
+    /**
+     * The Amazon Resource Name (ARN) of the data quality metric array.
+     */
+    MetricSetArn?: Arn;
+    /**
+     * The array of data quality metrics contained in the data quality metric set.
+     */
+    DataQualityMetricList?: DataQualityMetricList;
+  }
+  export type MetricSetDataQualityMetricList = MetricSetDataQualityMetric[];
   export type MetricSetDescription = string;
   export type MetricSetName = string;
   export interface MetricSetSummary {
@@ -1610,6 +1678,7 @@ declare namespace LookoutMetrics {
      */
     VpcConfiguration?: VpcConfiguration;
   }
+  export type RelatedColumnName = string;
   export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string;
   export interface S3SourceConfig {
     /**
@@ -1808,7 +1877,7 @@ declare namespace LookoutMetrics {
      */
     MetricList?: MetricList;
     /**
-     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.
+     * After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.
      */
     Offset?: Offset;
     /**

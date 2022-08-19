@@ -68,11 +68,11 @@ declare class Kendra extends Service {
    */
   createAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.CreateAccessControlConfigurationResponse) => void): Request<Kendra.Types.CreateAccessControlConfigurationResponse, AWSError>;
   /**
-   * Creates a data source that you want to use with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. Amazon S3 and custom data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
+   * Creates a data source connector that you want to use with an Amazon Kendra index. You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. Amazon S3 and custom data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
   createDataSource(params: Kendra.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates a data source that you want to use with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. Amazon S3 and custom data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
+   * Creates a data source connector that you want to use with an Amazon Kendra index. You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. Amazon S3 and custom data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
   createDataSource(callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Kendra extends Service {
    */
   deleteAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.DeleteAccessControlConfigurationResponse) => void): Request<Kendra.Types.DeleteAccessControlConfigurationResponse, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source connector. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(params: Kendra.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source connector. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
    */
   deleteDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Kendra extends Service {
    */
   describeAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.DescribeAccessControlConfigurationResponse) => void): Request<Kendra.Types.DescribeAccessControlConfigurationResponse, AWSError>;
   /**
-   * Gets information about an Amazon Kendra data source.
+   * Gets information about an Amazon Kendra data source connector.
    */
   describeDataSource(params: Kendra.Types.DescribeDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeDataSourceResponse) => void): Request<Kendra.Types.DescribeDataSourceResponse, AWSError>;
   /**
-   * Gets information about an Amazon Kendra data source.
+   * Gets information about an Amazon Kendra data source connector.
    */
   describeDataSource(callback?: (err: AWSError, data: Kendra.Types.DescribeDataSourceResponse) => void): Request<Kendra.Types.DescribeDataSourceResponse, AWSError>;
   /**
@@ -292,19 +292,19 @@ declare class Kendra extends Service {
    */
   listAccessControlConfigurations(callback?: (err: AWSError, data: Kendra.Types.ListAccessControlConfigurationsResponse) => void): Request<Kendra.Types.ListAccessControlConfigurationsResponse, AWSError>;
   /**
-   * Gets statistics about synchronizing Amazon Kendra with a data source.
+   * Gets statistics about synchronizing a data source connector.
    */
   listDataSourceSyncJobs(params: Kendra.Types.ListDataSourceSyncJobsRequest, callback?: (err: AWSError, data: Kendra.Types.ListDataSourceSyncJobsResponse) => void): Request<Kendra.Types.ListDataSourceSyncJobsResponse, AWSError>;
   /**
-   * Gets statistics about synchronizing Amazon Kendra with a data source.
+   * Gets statistics about synchronizing a data source connector.
    */
   listDataSourceSyncJobs(callback?: (err: AWSError, data: Kendra.Types.ListDataSourceSyncJobsResponse) => void): Request<Kendra.Types.ListDataSourceSyncJobsResponse, AWSError>;
   /**
-   * Lists the data sources that you have created.
+   * Lists the data source connectors that you have created.
    */
   listDataSources(params: Kendra.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: Kendra.Types.ListDataSourcesResponse) => void): Request<Kendra.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * Lists the data sources that you have created.
+   * Lists the data source connectors that you have created.
    */
   listDataSources(callback?: (err: AWSError, data: Kendra.Types.ListDataSourcesResponse) => void): Request<Kendra.Types.ListDataSourcesResponse, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class Kendra extends Service {
    */
   query(callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Starts a synchronization job for a data source. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
+   * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
    */
   startDataSourceSyncJob(params: Kendra.Types.StartDataSourceSyncJobRequest, callback?: (err: AWSError, data: Kendra.Types.StartDataSourceSyncJobResponse) => void): Request<Kendra.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
-   * Starts a synchronization job for a data source. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
+   * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
    */
   startDataSourceSyncJob(callback?: (err: AWSError, data: Kendra.Types.StartDataSourceSyncJobResponse) => void): Request<Kendra.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
@@ -444,11 +444,11 @@ declare class Kendra extends Service {
    */
   updateAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.UpdateAccessControlConfigurationResponse) => void): Request<Kendra.Types.UpdateAccessControlConfigurationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kendra data source.
+   * Updates an existing Amazon Kendra data source connector.
    */
   updateDataSource(params: Kendra.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing Amazon Kendra data source.
+   * Updates an existing Amazon Kendra data source connector.
    */
   updateDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -550,7 +550,7 @@ declare namespace Kendra {
      */
     SecretArn: SecretArn;
     /**
-     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to Alfresco.
+     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to Alfresco if you require a secure SSL connection. You can simply generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see Create and sign an X509 certificate.
      */
     SslCertificateS3Path: S3Path;
     /**
@@ -940,6 +940,7 @@ declare namespace Kendra {
      */
     IndexFieldName?: IndexFieldName;
   }
+  export type ConfluenceAuthenticationType = "HTTP_BASIC"|"PAT"|string;
   export interface ConfluenceBlogConfiguration {
     /**
      * Maps attributes or field names of Confluence blogs to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Confluence fields. For more information, see Mapping data source fields. The Confluence data source field names must exist in your Confluence custom metadata. If you specify the BlogFieldMappings parameter, you must specify at least one field mapping.
@@ -968,7 +969,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the Confluence instance. If you use Confluence cloud, you use a generated API token as the password. For more information, see Using a Confluence data source.
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the Confluence instance. If you use Confluence Cloud, you use a generated API token as the password. For more information, see Using a Confluence data source. You can also provide authentication credentials in the form of a personal access token. For more information, see Authentication for a Confluence data source.
      */
     SecretArn: SecretArn;
     /**
@@ -1007,6 +1008,10 @@ declare namespace Kendra {
      * Configuration information to connect to your Confluence URL instance via a web proxy. You can use this option for Confluence Server. You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is "a.example.com" and the port is 443, the standard port for HTTPS. Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication of user name and password. To store web proxy credentials, you use a secret in Secrets Manager. It is recommended that you follow best security practices when configuring your web proxy. This includes setting up throttling, setting up logging and monitoring, and applying security patches on a regular basis. If you use your web proxy with multiple data sources, sync jobs that occur at the same time could strain the load on your proxy. It is recommended you prepare your proxy beforehand for any security and load requirements.
      */
     ProxyConfiguration?: ProxyConfiguration;
+    /**
+     * Whether you want to connect to Confluence using basic authentication of user name and password, or a personal access token. You can use a personal access token for Confluence Server.
+     */
+    AuthenticationType?: ConfluenceAuthenticationType;
   }
   export interface ConfluencePageConfiguration {
     /**
@@ -1190,7 +1195,7 @@ declare namespace Kendra {
      */
     Schedule?: ScanSchedule;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM Roles for Amazon Kendra. You can't specify the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The RoleArn parameter is required for all other data sources.
+     * The Amazon Resource Name (ARN) of a role with permission to access the data source and required resources. For more information, see IAM roles for Amazon Kendra. You can't specify the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The RoleArn parameter is required for all other data sources.
      */
     RoleArn?: RoleArn;
     /**
@@ -1687,11 +1692,11 @@ declare namespace Kendra {
   }
   export interface DeleteDataSourceRequest {
     /**
-     * The identifier of the data source you want to delete.
+     * The identifier of the data source connector you want to delete.
      */
     Id: DataSourceId;
     /**
-     * The identifier of the index used with the data source.
+     * The identifier of the index used with the data source connector.
      */
     IndexId: IndexId;
   }
@@ -1795,33 +1800,33 @@ declare namespace Kendra {
   }
   export interface DescribeDataSourceRequest {
     /**
-     * The identifier of the data source.
+     * The identifier of the data source connector.
      */
     Id: DataSourceId;
     /**
-     * The identifier of the index used with the data source.
+     * The identifier of the index used with the data source connector.
      */
     IndexId: IndexId;
   }
   export interface DescribeDataSourceResponse {
     /**
-     * The identifier of the data source.
+     * The identifier of the data source connector.
      */
     Id?: DataSourceId;
     /**
-     * The identifier of the index that contains the data source.
+     * The identifier of the index used with the data source connector.
      */
     IndexId?: IndexId;
     /**
-     * The name for the data source.
+     * The name for the data source connector.
      */
     Name?: DataSourceName;
     /**
-     * The type of the data source.
+     * The type of the data source. For example, SHAREPOINT.
      */
     Type?: DataSourceType;
     /**
-     * Configuration details for the data source. This shows how the data source is configured. The configuration options for a data source depend on the data source provider.
+     * Configuration details for the data source connector. This shows how the data source is configured. The configuration options for a data source depend on the data source provider.
      */
     Configuration?: DataSourceConfiguration;
     /**
@@ -1829,19 +1834,19 @@ declare namespace Kendra {
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
-     * The Unix timestamp of when the data source was created.
+     * The Unix timestamp of when the data source connector was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The Unix timestamp of when the data source was last updated.
+     * The Unix timestamp of when the data source connector was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
-     * The description for the data source.
+     * The description for the data source connector.
      */
     Description?: Description;
     /**
-     * The current status of the data source. When the status is ACTIVE the data source is ready to use. When the status is FAILED, the ErrorMessage field contains the reason that the data source failed.
+     * The current status of the data source connector. When the status is ACTIVE the data source is ready to use. When the status is FAILED, the ErrorMessage field contains the reason that the data source failed.
      */
     Status?: DataSourceStatus;
     /**
@@ -1849,7 +1854,7 @@ declare namespace Kendra {
      */
     Schedule?: ScanSchedule;
     /**
-     * The Amazon Resource Name (ARN) of the role that enables the data source to access its resources.
+     * The Amazon Resource Name (ARN) of the role with permission to access the data source and required resources.
      */
     RoleArn?: RoleArn;
     /**
@@ -3201,11 +3206,11 @@ declare namespace Kendra {
   }
   export interface ListDataSourceSyncJobsRequest {
     /**
-     * The identifier of the data source.
+     * The identifier of the data source connector.
      */
     Id: DataSourceId;
     /**
-     * The identifier of the index used with the data source.
+     * The identifier of the index used with the data source connector.
      */
     IndexId: IndexId;
     /**
@@ -3217,17 +3222,17 @@ declare namespace Kendra {
      */
     MaxResults?: MaxResultsIntegerForListDataSourceSyncJobsRequest;
     /**
-     * When specified, the synchronization jobs returned in the list are limited to jobs between the specified dates. 
+     * When specified, the synchronization jobs returned in the list are limited to jobs between the specified dates.
      */
     StartTimeFilter?: TimeRange;
     /**
-     * When specified, only returns synchronization jobs with the Status field equal to the specified status.
+     * Only returns synchronization jobs with the Status field equal to the specified status.
      */
     StatusFilter?: DataSourceSyncJobStatus;
   }
   export interface ListDataSourceSyncJobsResponse {
     /**
-     * A history of synchronization jobs for the data source.
+     * A history of synchronization jobs for the data source connector.
      */
     History?: DataSourceSyncJobHistoryList;
     /**
@@ -3237,25 +3242,25 @@ declare namespace Kendra {
   }
   export interface ListDataSourcesRequest {
     /**
-     * The identifier of the index used with one or more data sources.
+     * The identifier of the index used with one or more data source connectors.
      */
     IndexId: IndexId;
     /**
-     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of data sources (DataSourceSummaryItems). 
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of data source connectors (DataSourceSummaryItems). 
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of data sources to return.
+     * The maximum number of data source connectors to return.
      */
     MaxResults?: MaxResultsIntegerForListDataSourcesRequest;
   }
   export interface ListDataSourcesResponse {
     /**
-     * An array of summary information for one or more data sources.
+     * An array of summary information for one or more data source connector.
      */
     SummaryItems?: DataSourceSummaryList;
     /**
-     * If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of data sources. 
+     * If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of data source connectors.
      */
     NextToken?: NextToken;
   }
@@ -3524,7 +3529,7 @@ declare namespace Kendra {
      */
     OrganizationName: OrganizationName;
     /**
-     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to GitHub. 
+     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to GitHub if you require a secure SSL connection. You can simply generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see Create and sign an X509 certificate.
      */
     SslCertificateS3Path: S3Path;
   }
@@ -3822,7 +3827,7 @@ declare namespace Kendra {
   export type QueryText = string;
   export interface QuipConfiguration {
     /**
-     * The Quip site domain.
+     * The Quip site domain. For example, https://quip-company.quipdomain.com/browse. The domain in this example is "quipdomain".
      */
     Domain: Domain;
     /**
@@ -3842,7 +3847,7 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * The identifiers of the Quip folders you want to index. You can find in your browser URL when you access your folder in Quip. For example, https://quip-company.com/zlLuOVNSarTL/folder-name.
+     * The identifiers of the Quip folders you want to index. You can find the folder ID in your browser URL when you access your folder in Quip. For example, https://quip-company.quipdomain.com/zlLuOVNSarTL/folder-name. The folder ID in this example is "zlLuOVNSarTL".
      */
     FolderIds?: FolderIdList;
     /**
@@ -4230,7 +4235,7 @@ declare namespace Kendra {
      */
     SharePointVersion: SharePointVersion;
     /**
-     * The Microsoft SharePoint site URLs for the documents you want to indext.
+     * The Microsoft SharePoint site URLs for the documents you want to index.
      */
     Urls: SharePointUrlList;
     /**
@@ -4270,7 +4275,7 @@ declare namespace Kendra {
      */
     DisableLocalGroups?: Boolean;
     /**
-     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to SharePoint.
+     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to SharePoint Server if you require a secure SSL connection. You can simply generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see Create and sign an X509 certificate.
      */
     SslCertificateS3Path?: S3Path;
     /**
@@ -4396,11 +4401,11 @@ declare namespace Kendra {
   }
   export interface StartDataSourceSyncJobRequest {
     /**
-     * The identifier of the data source to synchronize.
+     * The identifier of the data source connector to synchronize.
      */
     Id: DataSourceId;
     /**
-     * The identifier of the index that contains the data source.
+     * The identifier of the index used with the data source connector.
      */
     IndexId: IndexId;
   }
@@ -4430,11 +4435,11 @@ declare namespace Kendra {
   }
   export interface StopDataSourceSyncJobRequest {
     /**
-     * The identifier of the data source for which to stop the synchronization jobs.
+     * The identifier of the data source connector for which to stop the synchronization jobs.
      */
     Id: DataSourceId;
     /**
-     * The identifier of the index that contains the data source.
+     * The identifier of the index used with the data source connector.
      */
     IndexId: IndexId;
   }
@@ -4641,7 +4646,7 @@ declare namespace Kendra {
   }
   export interface UpdateDataSourceRequest {
     /**
-     * The identifier of the data source you want to update.
+     * The identifier of the data source connector you want to update.
      */
     Id: DataSourceId;
     /**
@@ -4669,7 +4674,7 @@ declare namespace Kendra {
      */
     Schedule?: ScanSchedule;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see IAM Roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role with permission to access the data source and required resources. For more information, see IAM roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
