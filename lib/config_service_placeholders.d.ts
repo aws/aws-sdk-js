@@ -314,6 +314,7 @@ export abstract class ConfigurationServicePlaceholders {
   licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.ClientConfiguration;
   backupstorage?: AWS.BackupStorage.Types.ClientConfiguration;
   privatenetworks?: AWS.PrivateNetworks.Types.ClientConfiguration;
+  supportapp?: AWS.SupportApp.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -630,4 +631,5 @@ export interface ConfigurationServiceApiVersions {
   licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.apiVersion;
   backupstorage?: AWS.BackupStorage.Types.apiVersion;
   privatenetworks?: AWS.PrivateNetworks.Types.apiVersion;
+  supportapp?: AWS.SupportApp.Types.apiVersion;
 }

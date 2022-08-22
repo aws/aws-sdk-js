@@ -26,6 +26,9 @@
           "shape": "InvalidRequestException"
         },
         {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {

@@ -1186,5 +1186,9 @@
   },
   "privatenetworks": {
     "name": "PrivateNetworks"
+  },
+  "supportapp": {
+    "prefix": "support-app",
+    "name": "SupportApp"
   }
 }

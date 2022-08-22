@@ -984,7 +984,7 @@ declare namespace SecurityHub {
      */
     LoadBalancerNames?: StringList;
     /**
-     * The service to use for the health checks.
+     * The service to use for the health checks. Valid values are EC2 or ELB.
      */
     HealthCheckType?: NonEmptyString;
     /**
@@ -1038,7 +1038,7 @@ declare namespace SecurityHub {
   }
   export interface AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails {
     /**
-     * How to allocate instance types to fulfill On-Demand capacity.
+     * How to allocate instance types to fulfill On-Demand capacity. The valid value is prioritized.
      */
     OnDemandAllocationStrategy?: NonEmptyString;
     /**
@@ -1050,7 +1050,7 @@ declare namespace SecurityHub {
      */
     OnDemandPercentageAboveBaseCapacity?: Integer;
     /**
-     * How to allocate instances across Spot Instance pools.
+     * How to allocate instances across Spot Instance pools. Valid values are as follows:    lowest-price     capacity-optimized     capacity-optimized-prioritized   
      */
     SpotAllocationStrategy?: NonEmptyString;
     /**
@@ -1137,7 +1137,7 @@ declare namespace SecurityHub {
      */
     VolumeSize?: Integer;
     /**
-     * The volume type.
+     * The volume type. Valid values are as follows:    gp2     gp3     io1     sc1     st1     standard   
      */
     VolumeType?: NonEmptyString;
   }
@@ -1239,6 +1239,257 @@ declare namespace SecurityHub {
      * Indicates whether token usage is required or optional for metadata requests. By default, token usage is optional.
      */
     HttpTokens?: NonEmptyString;
+  }
+  export interface AwsBackupBackupPlanAdvancedBackupSettingsDetails {
+    /**
+     * Specifies the backup option for a selected resource. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid values are as follows:   Set to WindowsVSS: enabled to enable the WindowsVSS backup option and create a Windows VSS backup.   Set to WindowsVSS: disabled to create a regular backup. The WindowsVSS option is not enabled by default.  
+     */
+    BackupOptions?: FieldMap;
+    /**
+     * The name of a resource type. The only supported resource type is Amazon EC2 instances with Windows VSS. The only valid value is EC2.
+     */
+    ResourceType?: NonEmptyString;
+  }
+  export type AwsBackupBackupPlanAdvancedBackupSettingsList = AwsBackupBackupPlanAdvancedBackupSettingsDetails[];
+  export interface AwsBackupBackupPlanBackupPlanDetails {
+    /**
+     * The display name of a backup plan. 
+     */
+    BackupPlanName?: NonEmptyString;
+    /**
+     * A list of backup options for each resource type. 
+     */
+    AdvancedBackupSettings?: AwsBackupBackupPlanAdvancedBackupSettingsList;
+    /**
+     * An array of BackupRule objects, each of which specifies a scheduled task that is used to back up a selection of resources. 
+     */
+    BackupPlanRule?: AwsBackupBackupPlanRuleList;
+  }
+  export interface AwsBackupBackupPlanDetails {
+    /**
+     * Uniquely identifies the backup plan to be associated with the selection of resources. 
+     */
+    BackupPlan?: AwsBackupBackupPlanBackupPlanDetails;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies the backup plan. 
+     */
+    BackupPlanArn?: NonEmptyString;
+    /**
+     * A unique ID for the backup plan. 
+     */
+    BackupPlanId?: NonEmptyString;
+    /**
+     * Unique, randomly generated, Unicode, UTF-8 encoded strings. Version IDs cannot be edited. 
+     */
+    VersionId?: NonEmptyString;
+  }
+  export interface AwsBackupBackupPlanLifecycleDetails {
+    /**
+     * Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus MoveToColdStorageAfterDays. 
+     */
+    DeleteAfterDays?: Long;
+    /**
+     * Specifies the number of days after creation that a recovery point is moved to cold storage. 
+     */
+    MoveToColdStorageAfterDays?: Long;
+  }
+  export interface AwsBackupBackupPlanRuleCopyActionsDetails {
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. 
+     */
+    DestinationBackupVaultArn?: NonEmptyString;
+    /**
+     * Defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. If you do not specify a lifecycle, Backup applies the lifecycle policy of the source backup to the destination backup. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days.
+     */
+    Lifecycle?: AwsBackupBackupPlanLifecycleDetails;
+  }
+  export type AwsBackupBackupPlanRuleCopyActionsList = AwsBackupBackupPlanRuleCopyActionsDetails[];
+  export interface AwsBackupBackupPlanRuleDetails {
+    /**
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the Amazon Web Services account used to create them and the Amazon Web Services Region where they are created. They consist of letters, numbers, and hyphens. 
+     */
+    TargetBackupVault?: NonEmptyString;
+    /**
+     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. 
+     */
+    StartWindowMinutes?: Long;
+    /**
+     * A cron expression in UTC specifying when Backup initiates a backup job. 
+     */
+    ScheduleExpression?: NonEmptyString;
+    /**
+     * A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.' characters. 
+     */
+    RuleName?: NonEmptyString;
+    /**
+     * Uniquely identifies a rule that is used to schedule the backup of a selection of resources. 
+     */
+    RuleId?: NonEmptyString;
+    /**
+     * Specifies whether Backup creates continuous backups capable of point-in-time restore (PITR). 
+     */
+    EnableContinuousBackup?: Boolean;
+    /**
+     * A value in minutes after a backup job is successfully started before it must be completed, or it is canceled by Backup. 
+     */
+    CompletionWindowMinutes?: Long;
+    /**
+     * An array of CopyAction objects, which contains the details of the copy operation. 
+     */
+    CopyActions?: AwsBackupBackupPlanRuleCopyActionsList;
+    /**
+     * Defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. If you do not specify a lifecycle, Backup applies the lifecycle policy of the source backup to the destination backup. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days.
+     */
+    Lifecycle?: AwsBackupBackupPlanLifecycleDetails;
+  }
+  export type AwsBackupBackupPlanRuleList = AwsBackupBackupPlanRuleDetails[];
+  export interface AwsBackupBackupVaultDetails {
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a backup vault. 
+     */
+    BackupVaultArn?: NonEmptyString;
+    /**
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the Amazon Web Services account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens. 
+     */
+    BackupVaultName?: NonEmptyString;
+    /**
+     * The unique ARN associated with the server-side encryption key. You can specify a key to encrypt your backups from services that support full Backup management. If you do not specify a key, Backup creates an KMS key for you by default. 
+     */
+    EncryptionKeyArn?: NonEmptyString;
+    /**
+     * The Amazon SNS event notifications for the specified backup vault. 
+     */
+    Notifications?: AwsBackupBackupVaultNotificationsDetails;
+    /**
+     * A resource-based policy that is used to manage access permissions on the target backup vault. 
+     */
+    AccessPolicy?: NonEmptyString;
+  }
+  export interface AwsBackupBackupVaultNotificationsDetails {
+    /**
+     * An array of events that indicate the status of jobs to back up resources to the backup vault. The following events are supported:    BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED     COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED     RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED     S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED   
+     */
+    BackupVaultEvents?: NonEmptyStringList;
+    /**
+     * An ARN that uniquely identifies the Amazon SNS topic for a backup vault’s events. 
+     */
+    SnsTopicArn?: NonEmptyString;
+  }
+  export interface AwsBackupRecoveryPointCalculatedLifecycleDetails {
+    /**
+     * Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus MoveToColdStorageAfterDays. 
+     */
+    DeleteAt?: NonEmptyString;
+    /**
+     * Specifies the number of days after creation that a recovery point is moved to cold storage. 
+     */
+    MoveToColdStorageAt?: NonEmptyString;
+  }
+  export interface AwsBackupRecoveryPointCreatedByDetails {
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a backup plan. 
+     */
+    BackupPlanArn?: NonEmptyString;
+    /**
+     * Uniquely identifies a backup plan. 
+     */
+    BackupPlanId?: NonEmptyString;
+    /**
+     * Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited. 
+     */
+    BackupPlanVersion?: NonEmptyString;
+    /**
+     * Uniquely identifies a rule used to schedule the backup of a selection of resources. 
+     */
+    BackupRuleId?: NonEmptyString;
+  }
+  export interface AwsBackupRecoveryPointDetails {
+    /**
+     * The size, in bytes, of a backup. 
+     */
+    BackupSizeInBytes?: Long;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a backup vault. 
+     */
+    BackupVaultArn?: NonEmptyString;
+    /**
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the Amazon Web Services account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens. 
+     */
+    BackupVaultName?: NonEmptyString;
+    /**
+     * A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt timestamps. 
+     */
+    CalculatedLifecycle?: AwsBackupRecoveryPointCalculatedLifecycleDetails;
+    /**
+     * The date and time that a job to create a recovery point is completed, in Unix format and UTC. The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     */
+    CompletionDate?: NonEmptyString;
+    /**
+     * Contains identifying information about the creation of a recovery point, including the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId of the backup plan that is used to create it. 
+     */
+    CreatedBy?: AwsBackupRecoveryPointCreatedByDetails;
+    /**
+     * The date and time a recovery point is created, in Unix format and UTC. The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     */
+    CreationDate?: NonEmptyString;
+    /**
+     * The ARN for the server-side encryption key that is used to protect your backups. 
+     */
+    EncryptionKeyArn?: NonEmptyString;
+    /**
+     * Specifies the IAM role ARN used to create the target recovery point 
+     */
+    IamRoleArn?: NonEmptyString;
+    /**
+     * A Boolean value that is returned as TRUE if the specified recovery point is encrypted, or FALSE if the recovery point is not encrypted. 
+     */
+    IsEncrypted?: Boolean;
+    /**
+     * The date and time that a recovery point was last restored, in Unix format and UTC. The value of LastRestoreTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     */
+    LastRestoreTime?: NonEmptyString;
+    /**
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define 
+     */
+    Lifecycle?: AwsBackupRecoveryPointLifecycleDetails;
+    /**
+     * An ARN that uniquely identifies a recovery point. 
+     */
+    RecoveryPointArn?: NonEmptyString;
+    /**
+     * An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type. 
+     */
+    ResourceArn?: NonEmptyString;
+    /**
+     * The type of Amazon Web Services resource saved as a recovery point, such as an Amazon EBS volume or an Amazon RDS database. 
+     */
+    ResourceType?: NonEmptyString;
+    /**
+     * The ARN for the backup vault where the recovery point was originally copied from. If the recovery point is restored to the same account, this value will be null. 
+     */
+    SourceBackupVaultArn?: NonEmptyString;
+    /**
+     * A status code specifying the state of the recovery point. Valid values are as follows:    COMPLETED     DELETING     EXPIRED     PARTIAL   
+     */
+    Status?: NonEmptyString;
+    /**
+     * A message explaining the reason of the recovery point deletion failure. 
+     */
+    StatusMessage?: NonEmptyString;
+    /**
+     * Specifies the storage class of the recovery point. Valid values are as follows:    COLD     DELETED     WARM   
+     */
+    StorageClass?: NonEmptyString;
+  }
+  export interface AwsBackupRecoveryPointLifecycleDetails {
+    /**
+     * Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus MoveToColdStorageAfterDays. 
+     */
+    DeleteAfterDays?: Long;
+    /**
+     * Specifies the number of days after creation that a recovery point is moved to cold storage. 
+     */
+    MoveToColdStorageAfterDays?: Long;
   }
   export interface AwsCertificateManagerCertificateDetails {
     /**
@@ -1395,7 +1646,7 @@ declare namespace SecurityHub {
      */
     RenewalStatus?: NonEmptyString;
     /**
-     * The reason that a renewal request was unsuccessful. Valid values: NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS | PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER 
+     * The reason that a renewal request was unsuccessful. This attribute is used only when RenewalStatus is FAILED. Valid values: NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS | PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER 
      */
     RenewalStatusReason?: NonEmptyString;
     /**
@@ -2200,7 +2451,7 @@ declare namespace SecurityHub {
      */
     TableSizeBytes?: SizeBytes;
     /**
-     * The current status of the table.
+     * The current status of the table. Valid values are as follows:    ACTIVE     ARCHIVED     ARCHIVING     CREATING     DELETING     INACCESSIBLE_ENCRYPTION_CREDENTIALS     UPDATING   
      */
     TableStatus?: NonEmptyString;
   }
@@ -2222,7 +2473,7 @@ declare namespace SecurityHub {
      */
     IndexSizeBytes?: SizeBytes;
     /**
-     * The current status of the index.
+     * The current status of the index.    ACTIVE     CREATING     DELETING     UPDATING   
      */
     IndexStatus?: NonEmptyString;
     /**
@@ -2249,7 +2500,7 @@ declare namespace SecurityHub {
      */
     AttributeName?: NonEmptyString;
     /**
-     * The type of key used for the key schema attribute.
+     * The type of key used for the key schema attribute. Valid values are HASH or RANGE.
      */
     KeyType?: NonEmptyString;
   }
@@ -2279,7 +2530,7 @@ declare namespace SecurityHub {
      */
     NonKeyAttributes?: StringList;
     /**
-     * The types of attributes that are projected into the index.
+     * The types of attributes that are projected into the index. Valid values are as follows:    ALL     INCLUDE     KEYS_ONLY   
      */
     ProjectionType?: NonEmptyString;
   }
@@ -2329,7 +2580,7 @@ declare namespace SecurityHub {
      */
     RegionName?: NonEmptyString;
     /**
-     * The current status of the replica.
+     * The current status of the replica. Valid values are as follows:    ACTIVE     CREATING     CREATION_FAILED     DELETING     UPDATING   
      */
     ReplicaStatus?: NonEmptyString;
     /**
@@ -2824,7 +3075,7 @@ declare namespace SecurityHub {
      */
     OwnerId?: NonEmptyString;
     /**
-     * The current state of the subnet.
+     * The current state of the subnet. Valid values are available or pending.
      */
     State?: NonEmptyString;
     /**
@@ -2908,7 +3159,7 @@ declare namespace SecurityHub {
      */
     InstanceId?: NonEmptyString;
     /**
-     * The attachment state of the volume.
+     * The attachment state of the volume. Valid values are as follows:    attaching     attached     busy     detaching     detached   
      */
     Status?: NonEmptyString;
   }
@@ -2935,7 +3186,7 @@ declare namespace SecurityHub {
      */
     SnapshotId?: NonEmptyString;
     /**
-     * The volume state.
+     * The volume state. Valid values are as follows:    available     creating     deleted     deleting     error     in-use   
      */
     Status?: NonEmptyString;
     /**
@@ -2973,7 +3224,7 @@ declare namespace SecurityHub {
      */
     DhcpOptionsId?: NonEmptyString;
     /**
-     * The current state of the VPC.
+     * The current state of the VPC. Valid values are available or pending.
      */
     State?: NonEmptyString;
   }
@@ -3015,7 +3266,7 @@ declare namespace SecurityHub {
      */
     ServiceName?: NonEmptyString;
     /**
-     * The current state of the service.
+     * The current state of the service. Valid values are as follows:    Available     Deleted     Deleting     Failed     Pending   
      */
     ServiceState?: NonEmptyString;
     /**
@@ -3098,7 +3349,7 @@ declare namespace SecurityHub {
      */
     VpnConnectionId?: NonEmptyString;
     /**
-     * The current state of the VPN connection.
+     * The current state of the VPN connection. Valid values are as follows:    available     deleted     deleting     pending   
      */
     State?: NonEmptyString;
     /**
@@ -3244,7 +3495,7 @@ declare namespace SecurityHub {
      */
     OutsideIpAddress?: NonEmptyString;
     /**
-     * The status of the VPN tunnel.
+     * The status of the VPN tunnel. Valid values are DOWN or UP.
      */
     Status?: NonEmptyString;
     /**
@@ -3263,7 +3514,7 @@ declare namespace SecurityHub {
      */
     RepositoryName?: NonEmptyString;
     /**
-     * The architecture of the image.
+     * The architecture of the image. Valid values are as follows:    arm64     i386     x86_64   
      */
     Architecture?: NonEmptyString;
     /**
@@ -3289,7 +3540,7 @@ declare namespace SecurityHub {
      */
     ImageScanningConfiguration?: AwsEcrRepositoryImageScanningConfigurationDetails;
     /**
-     * The tag mutability setting for the repository.
+     * The tag mutability setting for the repository. Valid values are IMMUTABLE or MUTABLE.
      */
     ImageTagMutability?: NonEmptyString;
     /**
@@ -3323,11 +3574,11 @@ declare namespace SecurityHub {
   }
   export interface AwsEcsClusterClusterSettingsDetails {
     /**
-     * The name of the setting.
+     * The name of the setting. The valid value is containerInsights.
      */
     Name?: NonEmptyString;
     /**
-     * The value of the setting.
+     * The value of the setting. Valid values are disabled or enabled.
      */
     Value?: NonEmptyString;
   }
@@ -3667,7 +3918,7 @@ declare namespace SecurityHub {
   export type AwsEcsServiceServiceRegistriesList = AwsEcsServiceServiceRegistriesDetails[];
   export interface AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails {
     /**
-     * The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.
+     * The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start. Valid values are as follows:    COMPLETE     HEALTHY     SUCCESS     START   
      */
     Condition?: NonEmptyString;
     /**
@@ -3846,7 +4097,7 @@ declare namespace SecurityHub {
   }
   export interface AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails {
     /**
-     * The type of environment file.
+     * The type of environment file. The valid value is s3.
      */
     Type?: NonEmptyString;
     /**
@@ -3873,7 +4124,7 @@ declare namespace SecurityHub {
      */
     Options?: FieldMap;
     /**
-     * The log router to use. 
+     * The log router to use. Valid values are fluentbit or fluentd.
      */
     Type?: NonEmptyString;
   }
@@ -3901,11 +4152,11 @@ declare namespace SecurityHub {
   }
   export interface AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails {
     /**
-     * The Linux capabilities for the container that are added to the default configuration provided by Docker.
+     * The Linux capabilities for the container that are added to the default configuration provided by Docker. Valid values are as follows: Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM" 
      */
     Add?: NonEmptyStringList;
     /**
-     * The Linux capabilities for the container that are dropped from the default configuration provided by Docker.
+     * The Linux capabilities for the container that are dropped from the default configuration provided by Docker. Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM" 
      */
     Drop?: NonEmptyStringList;
   }
@@ -3960,7 +4211,7 @@ declare namespace SecurityHub {
      */
     ContainerPath?: NonEmptyString;
     /**
-     * The list of tmpfs volume mount options.
+     * The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol" 
      */
     MountOptions?: NonEmptyStringList;
     /**
@@ -3972,7 +4223,7 @@ declare namespace SecurityHub {
   export type AwsEcsTaskDefinitionContainerDefinitionsList = AwsEcsTaskDefinitionContainerDefinitionsDetails[];
   export interface AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails {
     /**
-     * The log driver to use for the container.
+     * The log driver to use for the container. Valid values on Fargate are as follows:    awsfirelens     awslogs     splunk    Valid values on Amazon EC2 are as follows:    awsfirelens     awslogs     fluentd     gelf     journald     json-file     logentries     splunk     syslog   
      */
     LogDriver?: NonEmptyString;
     /**
@@ -4033,7 +4284,7 @@ declare namespace SecurityHub {
   }
   export interface AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails {
     /**
-     * The type of resource to assign to a container.
+     * The type of resource to assign to a container. Valid values are GPU or InferenceAccelerator.
      */
     Type?: NonEmptyString;
     /**
@@ -4070,7 +4321,7 @@ declare namespace SecurityHub {
      */
     HardLimit?: Integer;
     /**
-     * The type of the ulimit.
+     * The type of the ulimit. Valid values are as follows:    core     cpu     data     fsize     locks     memlock     msgqueue     nice     nofile     nproc     rss     rtprio     rttime     sigpending     stack   
      */
     Name?: NonEmptyString;
     /**
@@ -4096,7 +4347,7 @@ declare namespace SecurityHub {
      */
     ContainerDefinitions?: AwsEcsTaskDefinitionContainerDefinitionsList;
     /**
-     * The number of CPU units used by the task.
+     * The number of CPU units used by the task.Valid values are as follows:    256 (.25 vCPU)     512 (.5 vCPU)     1024 (1 vCPU)     2048 (2 vCPU)     4096 (4 vCPU)   
      */
     Cpu?: NonEmptyString;
     /**
@@ -4112,19 +4363,19 @@ declare namespace SecurityHub {
      */
     InferenceAccelerators?: AwsEcsTaskDefinitionInferenceAcceleratorsList;
     /**
-     * The IPC resource namespace to use for the containers in the task.
+     * The inter-process communication (IPC) resource namespace to use for the containers in the task. Valid values are as follows:    host     none     task   
      */
     IpcMode?: NonEmptyString;
     /**
-     * The amount (in MiB) of memory used by the task.
+     * The amount (in MiB) of memory used by the task.  For tasks that are hosted on Amazon EC2, you can provide a task-level memory value or a container-level memory value. For tasks that are hosted on Fargate, you must use one of the specified values in the  Amazon Elastic Container Service Developer Guide , which determines your range of supported values for the Cpu and Memory parameters.
      */
     Memory?: NonEmptyString;
     /**
-     * The Docker networking mode to use for the containers in the task.
+     * The Docker networking mode to use for the containers in the task. Valid values are as follows:    awsvpc     bridge     host     none   
      */
     NetworkMode?: NonEmptyString;
     /**
-     * The process namespace to use for the containers in the task.
+     * The process namespace to use for the containers in the task. Valid values are host or task.
      */
     PidMode?: NonEmptyString;
     /**
@@ -4231,7 +4482,7 @@ declare namespace SecurityHub {
      */
     Labels?: FieldMap;
     /**
-     * The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops.
+     * The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops. Valid values are shared or task.
      */
     Scope?: NonEmptyString;
   }
@@ -4403,7 +4654,7 @@ declare namespace SecurityHub {
      */
     CertificateAuthorityData?: NonEmptyString;
     /**
-     * The status of the cluster.
+     * The status of the cluster. Valid values are as follows:    ACTIVE     CREATING     DELETING     FAILED     PENDING     UPDATING   
      */
     ClusterStatus?: NonEmptyString;
     /**
@@ -4437,7 +4688,7 @@ declare namespace SecurityHub {
      */
     Enabled?: Boolean;
     /**
-     * A list of logging types.
+     * A list of logging types. Valid values are as follows:    api     audit     authenticator     controllerManager     scheduler   
      */
     Types?: NonEmptyStringList;
   }
@@ -4512,7 +4763,7 @@ declare namespace SecurityHub {
      */
     SolutionStackName?: NonEmptyString;
     /**
-     * The current operational status of the environment.
+     * The current operational status of the environment. Valid values are as follows:    Aborting     Launching     LinkingFrom     LinkingTo     Ready     Terminated     Terminating     Updating   
      */
     Status?: NonEmptyString;
     /**
@@ -4556,11 +4807,11 @@ declare namespace SecurityHub {
   export type AwsElasticBeanstalkEnvironmentOptionSettings = AwsElasticBeanstalkEnvironmentOptionSetting[];
   export interface AwsElasticBeanstalkEnvironmentTier {
     /**
-     * The name of the environment tier.
+     * The name of the environment tier. Valid values are WebServer or Worker.
      */
     Name?: NonEmptyString;
     /**
-     * The type of environment tier.
+     * The type of environment tier. Valid values are Standard or SQS/HTTP.
      */
     Type?: NonEmptyString;
     /**
@@ -4642,7 +4893,7 @@ declare namespace SecurityHub {
      */
     DedicatedMasterEnabled?: Boolean;
     /**
-     * The hardware configuration of the computer that hosts the dedicated master node. For example, m3.medium.elasticsearch. If this attribute is specified, then DedicatedMasterEnabled must be true.
+     * The hardware configuration of the computer that hosts the dedicated master node. A sample value is m3.medium.elasticsearch. If this attribute is specified, then DedicatedMasterEnabled must be true. For a list of valid values, see Supported instance types in Amazon OpenSearch Service in the Amazon OpenSearch Service Developer Guide.
      */
     DedicatedMasterType?: NonEmptyString;
     /**
@@ -4650,7 +4901,7 @@ declare namespace SecurityHub {
      */
     InstanceCount?: Integer;
     /**
-     * The instance type for your data nodes. For example, m3.medium.elasticsearch.
+     * The instance type for your data nodes. For example, m3.medium.elasticsearch. For a list of valid values, see Supported instance types in Amazon OpenSearch Service in the Amazon OpenSearch Service Developer Guide.
      */
     InstanceType?: NonEmptyString;
     /**
@@ -4731,7 +4982,7 @@ declare namespace SecurityHub {
      */
     UpdateAvailable?: Boolean;
     /**
-     * The status of the service software update.
+     * The status of the service software update. Valid values are as follows:    COMPLETED     ELIGIBLE     IN_PROGRESS     NOT_ELIGIBLE     PENDING_UPDATE   
      */
     UpdateStatus?: NonEmptyString;
   }
@@ -5460,7 +5711,7 @@ declare namespace SecurityHub {
      */
     KeyManager?: NonEmptyString;
     /**
-     * The state of the KMS key.
+     * The state of the KMS key. Valid values are as follows:    Disabled     Enabled     PendingDeletion     PendingImport     Unavailable   
      */
     KeyState?: NonEmptyString;
     /**
@@ -5792,7 +6043,7 @@ declare namespace SecurityHub {
      */
     DedicatedMasterCount?: Integer;
     /**
-     * The instance type for your data nodes. 
+     * The instance type for your data nodes. For a list of valid values, see Supported instance types in Amazon OpenSearch Service in the Amazon OpenSearch Service Developer Guide.
      */
     InstanceType?: NonEmptyString;
     /**
@@ -5810,7 +6061,7 @@ declare namespace SecurityHub {
   }
   export interface AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails {
     /**
-     * The number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.
+     * The number of Availability Zones that the domain uses. Valid values are 2 or 3. The default is 2.
      */
     AvailabilityZoneCount?: Integer;
   }
@@ -5978,7 +6229,7 @@ declare namespace SecurityHub {
      */
     UpdateAvailable?: Boolean;
     /**
-     * The status of the service software update.
+     * The status of the service software update. Valid values are as follows:    COMPLETED     ELIGIBLE     IN_PROGRESS     NOT_ELIGIBLE     PENDING_UPDATE   
      */
     UpdateStatus?: NonEmptyString;
     /**
@@ -6002,7 +6253,7 @@ declare namespace SecurityHub {
      */
     RoleArn?: NonEmptyString;
     /**
-     * The status of the association between the IAM role and the DB cluster.
+     * The status of the association between the IAM role and the DB cluster. Valid values are as follows:    ACTIVE     INVALID     PENDING   
      */
     Status?: NonEmptyString;
   }
@@ -6045,7 +6296,7 @@ declare namespace SecurityHub {
      */
     MultiAz?: Boolean;
     /**
-     * The name of the database engine to use for this DB cluster.
+     * The name of the database engine to use for this DB cluster. Valid values are as follows:    aurora     aurora-mysql     aurora-postgresql   
      */
     Engine?: NonEmptyString;
     /**
@@ -6105,7 +6356,7 @@ declare namespace SecurityHub {
      */
     EnabledCloudWatchLogsExports?: StringList;
     /**
-     * The database engine mode of the DB cluster.
+     * The database engine mode of the DB cluster.Valid values are as follows:    global     multimaster     parallelquery     provisioned     serverless   
      */
     EngineMode?: NonEmptyString;
     /**
@@ -6117,7 +6368,7 @@ declare namespace SecurityHub {
      */
     HttpEndpointEnabled?: Boolean;
     /**
-     * The status of the database activity stream.
+     * The status of the database activity stream. Valid values are as follows:    started     starting     stopped     stopping   
      */
     ActivityStreamStatus?: NonEmptyString;
     /**
@@ -6633,7 +6884,7 @@ declare namespace SecurityHub {
   }
   export interface AwsRdsDbProcessorFeature {
     /**
-     * The name of the processor feature.
+     * The name of the processor feature. Valid values are coreCount or threadsPerCore.
      */
     Name?: NonEmptyString;
     /**
@@ -6716,7 +6967,7 @@ declare namespace SecurityHub {
      */
     SnapshotCreateTime?: NonEmptyString;
     /**
-     * The name of the database engine to use for this DB instance.
+     * The name of the database engine to use for this DB instance. Valid values are as follows:    aurora     aurora-mysql     aurora-postgresql     c     mariadb     mysql     oracle-ee     oracle-se     oracle-se1     oracle-se2     sqlserver-ee     sqlserver-ex     sqlserver-se     sqlserver-web   
      */
     Engine?: NonEmptyString;
     /**
@@ -6780,7 +7031,7 @@ declare namespace SecurityHub {
      */
     SourceDbSnapshotIdentifier?: NonEmptyString;
     /**
-     * The storage type associated with the DB snapshot.
+     * The storage type associated with the DB snapshot. Valid values are as follows:    gp2     io1     standard   
      */
     StorageType?: NonEmptyString;
     /**
@@ -7457,7 +7708,7 @@ declare namespace SecurityHub {
      */
     Tag?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails;
     /**
-     * Whether to use AND or OR to join the operands.
+     * Whether to use AND or OR to join the operands. Valid values are LifecycleAndOperator or LifecycleOrOperator.
      */
     Type?: NonEmptyString;
   }
@@ -7471,7 +7722,7 @@ declare namespace SecurityHub {
      */
     Tag?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails;
     /**
-     * The type of filter value.
+     * The type of filter value. Valid values are LifecyclePrefixPredicate or LifecycleTagPredicate.
      */
     Type?: NonEmptyString;
   }
@@ -7518,7 +7769,7 @@ declare namespace SecurityHub {
      */
     Days?: Integer;
     /**
-     * The storage class to transition the object to.
+     * The storage class to transition the object to. Valid values are as follows:    DEEP_ARCHIVE     GLACIER     INTELLIGENT_TIERING     ONEZONE_IA     STANDARD_IA   
      */
     StorageClass?: NonEmptyString;
   }
@@ -7529,7 +7780,7 @@ declare namespace SecurityHub {
      */
     IsMfaDeleteEnabled?: Boolean;
     /**
-     * The versioning status of the S3 bucket.
+     * The versioning status of the S3 bucket. Valid values are Enabled or Suspended.
      */
     Status?: NonEmptyString;
   }
@@ -7613,7 +7864,7 @@ declare namespace SecurityHub {
      */
     Destination?: NonEmptyString;
     /**
-     * Indicates the type of notification. Notifications can be generated using Lambda functions, Amazon SQS queues or Amazon SNS topics.
+     * Indicates the type of notification. Notifications can be generated using Lambda functions, Amazon SQS queues, or Amazon SNS topics, with corresponding valid values as follows:    LambdaConfiguration     QueueConfiguration     TopicConfiguration   
      */
     Type?: NonEmptyString;
   }
@@ -7645,7 +7896,7 @@ declare namespace SecurityHub {
   export type AwsS3BucketNotificationConfigurationS3KeyFilterRules = AwsS3BucketNotificationConfigurationS3KeyFilterRule[];
   export interface AwsS3BucketServerSideEncryptionByDefault {
     /**
-     * Server-side encryption algorithm to use for the default encryption.
+     * Server-side encryption algorithm to use for the default encryption. Valid values are aws: kms or AES256.
      */
     SSEAlgorithm?: NonEmptyString;
     /**
@@ -7690,7 +7941,7 @@ declare namespace SecurityHub {
      */
     Hostname?: NonEmptyString;
     /**
-     * The protocol to use when redirecting requests. By default, uses the same protocol as the original request.
+     * The protocol to use when redirecting requests. By default, this field uses the same protocol as the original request. Valid values are http or https.
      */
     Protocol?: NonEmptyString;
   }
@@ -8440,7 +8691,7 @@ declare namespace SecurityHub {
   }
   export interface AwsSsmComplianceSummary {
     /**
-     * The current patch compliance status. The possible status values are:    COMPLIANT     NON_COMPLIANT     UNSPECIFIED_DATA   
+     * The current patch compliance status. Valid values are as follows:    COMPLIANT     NON_COMPLIANT     UNSPECIFIED_DATA   
      */
     Status?: NonEmptyString;
     /**
@@ -8496,7 +8747,7 @@ declare namespace SecurityHub {
      */
     PatchBaselineId?: NonEmptyString;
     /**
-     * The highest severity for the patches.
+     * The highest severity for the patches. Valid values are as follows:    CRITICAL     HIGH     MEDIUM     LOW     INFORMATIONAL     UNSPECIFIED   
      */
     OverallSeverity?: NonEmptyString;
     /**
@@ -8560,7 +8811,7 @@ declare namespace SecurityHub {
      */
     Negated?: Boolean;
     /**
-     * The type of predicate.
+     * The type of predicate. Valid values are as follows:    ByteMatch     GeoMatch     IPMatch     RegexMatch     SizeConstraint     SqlInjectionMatch     XssMatch   
      */
     Type?: NonEmptyString;
   }
@@ -8601,7 +8852,7 @@ declare namespace SecurityHub {
      */
     Negated?: Boolean;
     /**
-     * The type of predicate.
+     * The type of predicate. Valid values are as follows:    ByteMatch     GeoMatch     IPMatch     RegexMatch     SizeConstraint     SqlInjectionMatch     XssMatch   
      */
     Type?: NonEmptyString;
   }
@@ -8866,11 +9117,11 @@ declare namespace SecurityHub {
      */
     KeyId?: NonEmptyString;
     /**
-     * The current status of the encryption configuration. When Status is UPDATING, X-Ray might use both the old and new encryption.
+     * The current status of the encryption configuration. Valid values are ACTIVE or UPDATING. When Status is equal to UPDATING, X-Ray might use both the old and new encryption.
      */
     Status?: NonEmptyString;
     /**
-     * The type of encryption. KMS indicates that the encryption uses KMS keys. NONE indicates to use the default encryption.
+     * The type of encryption. KMS indicates that the encryption uses KMS keys. NONE indicates the default encryption.
      */
     Type?: NonEmptyString;
   }
@@ -8974,7 +9225,7 @@ declare namespace SecurityHub {
      */
     FindingIdentifier: AwsSecurityFindingIdentifier;
     /**
-     * The code associated with the error. Possible values are:    ConcurrentUpdateError - Another process or request attempted to update the finding while this request was being processed    DuplicatedFindingIdentifier - The request included two or more findings with the same FindingIdentifier     FindingNotFound - The FindingIdentifier included in the request did not match an existing finding    FindingSizeExceeded - The finding size was greater than the permissible value of 240 KB    InternalFailure - An internal service failure occurred when updating the finding    InvalidInput - The finding update contained an invalid value that did not satisfy the Amazon Web Services Security Finding Format syntax  
+     * The code associated with the error. Possible values are:    ConcurrentUpdateError - Another request attempted to update the finding while this request was being processed. This error may also occur if you call  BatchUpdateFindings  and  BatchImportFindings  at the same time.    DuplicatedFindingIdentifier - The request included two or more findings with the same FindingIdentifier.    FindingNotFound - The FindingIdentifier included in the request did not match an existing finding.    FindingSizeExceeded - The finding size was greater than the permissible value of 240 KB.    InternalFailure - An internal service failure occurred when updating the finding.    InvalidInput - The finding update contained an invalid value that did not satisfy the Amazon Web Services Security Finding Format syntax.  
      */
     ErrorCode: NonEmptyString;
     /**
@@ -9980,7 +10231,7 @@ declare namespace SecurityHub {
      */
     Ipv6CidrBlock?: NonEmptyString;
     /**
-     * Information about the state of the CIDR block.
+     * Information about the state of the CIDR block. Valid values are as follows:    associating     associated     disassociating     disassociated     failed     failing   
      */
     CidrBlockState?: NonEmptyString;
   }
@@ -10942,6 +11193,18 @@ declare namespace SecurityHub {
      * Details about a task in a cluster. 
      */
     AwsEcsTask?: AwsEcsTaskDetails;
+    /**
+     * Provides details about an Backup backup vault. 
+     */
+    AwsBackupBackupVault?: AwsBackupBackupVaultDetails;
+    /**
+     * Provides details about an Backup backup plan. 
+     */
+    AwsBackupBackupPlan?: AwsBackupBackupPlanDetails;
+    /**
+     * Provides details about an Backup backup, or recovery point. 
+     */
+    AwsBackupRecoveryPoint?: AwsBackupRecoveryPointDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
@@ -11283,6 +11546,14 @@ declare namespace SecurityHub {
      * The file system path to the package manager inventory file.
      */
     FilePath?: NonEmptyString;
+    /**
+     * The version of the software package in which the vulnerability has been resolved. 
+     */
+    FixedInVersion?: NonEmptyString;
+    /**
+     * Describes the actions a customer can take to resolve the vulnerability in the software package. 
+     */
+    Remediation?: NonEmptyString;
   }
   export type SoftwarePackageList = SoftwarePackage[];
   export type SortCriteria = SortCriterion[];
@@ -11709,7 +11980,12 @@ declare namespace SecurityHub {
      * A list of URLs that provide additional information about the vulnerability.
      */
     ReferenceUrls?: StringList;
+    /**
+     * Specifies if all vulnerable packages in a finding have a value for FixedInVersion and Remediation. This field is evaluated for each vulnerability Id based on the number of vulnerable packages that have a value for both FixedInVersion and Remediation. Valid values are as follows:    YES if all vulnerable packages have a value for both FixedInVersion and Remediation     NO if no vulnerable packages have a value for FixedInVersion and Remediation     PARTIAL otherwise  
+     */
+    FixAvailable?: VulnerabilityFixAvailable;
   }
+  export type VulnerabilityFixAvailable = "YES"|"NO"|"PARTIAL"|string;
   export type VulnerabilityList = Vulnerability[];
   export interface VulnerabilityVendor {
     /**

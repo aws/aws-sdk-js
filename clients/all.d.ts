@@ -312,3 +312,4 @@ export import RolesAnywhere = require('./rolesanywhere');
 export import LicenseManagerUserSubscriptions = require('./licensemanagerusersubscriptions');
 export import BackupStorage = require('./backupstorage');
 export import PrivateNetworks = require('./privatenetworks');
+export import SupportApp = require('./supportapp');

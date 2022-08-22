@@ -452,6 +452,14 @@ declare class LexModelsV2 extends Service {
    */
   startImport(callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
   /**
+   * Stop an already running Bot Recommendation request.
+   */
+  stopBotRecommendation(params: LexModelsV2.Types.StopBotRecommendationRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StopBotRecommendationResponse) => void): Request<LexModelsV2.Types.StopBotRecommendationResponse, AWSError>;
+  /**
+   * Stop an already running Bot Recommendation request.
+   */
+  stopBotRecommendation(callback?: (err: AWSError, data: LexModelsV2.Types.StopBotRecommendationResponse) => void): Request<LexModelsV2.Types.StopBotRecommendationResponse, AWSError>;
+  /**
    * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
    */
   tagResource(params: LexModelsV2.Types.TagResourceRequest, callback?: (err: AWSError, data: LexModelsV2.Types.TagResourceResponse) => void): Request<LexModelsV2.Types.TagResourceResponse, AWSError>;
@@ -874,7 +882,7 @@ declare namespace LexModelsV2 {
      */
     statistics?: BotRecommendationResultStatistics;
   }
-  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|string;
+  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|"Stopping"|"Stopped"|string;
   export interface BotRecommendationSummary {
     /**
      * The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field. 
@@ -4748,6 +4756,46 @@ declare namespace LexModelsV2 {
     allowInterrupt?: BoxedBoolean;
   }
   export type StillWaitingResponseTimeout = number;
+  export interface StopBotRecommendationRequest {
+    /**
+     * The unique identifier of the bot containing the bot recommendation to be stopped.
+     */
+    botId: Id;
+    /**
+     * The version of the bot containing the bot recommendation.
+     */
+    botVersion: DraftBotVersion;
+    /**
+     * The identifier of the language and locale of the bot recommendation to stop. The string must match one of the supported locales. For more information, see Supported languages 
+     */
+    localeId: LocaleId;
+    /**
+     * The unique identifier of the bot recommendation to be stopped.
+     */
+    botRecommendationId: Id;
+  }
+  export interface StopBotRecommendationResponse {
+    /**
+     * The unique identifier of the bot containing the bot recommendation that is being stopped.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot containing the recommendation that is being stopped.
+     */
+    botVersion?: DraftBotVersion;
+    /**
+     * The identifier of the language and locale of the bot response to stop. The string must match one of the supported locales. For more information, see Supported languages 
+     */
+    localeId?: LocaleId;
+    /**
+     * The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field.
+     */
+    botRecommendationStatus?: BotRecommendationStatus;
+    /**
+     * The unique identifier of the bot recommendation that is being stopped.
+     */
+    botRecommendationId?: Id;
+  }
   export type String = string;
   export type StringMap = {[key: string]: String};
   export type SynonymList = SampleValue[];

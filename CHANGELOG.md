@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1199.0-->
+<!--LATEST=2.1200.0-->
 <!--ENTRYINSERT-->
+
+## 2.1200.0
+* feature: EC2: R6a instances are powered by 3rd generation AMD EPYC (Milan) processors delivering all-core turbo frequency of 3.6 GHz. C6id, M6id, and R6id instances are powered by 3rd generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz.
+* feature: ForecastQueryService: releasing What-If Analysis APIs
+* feature: ForecastService: releasing What-If Analysis APIs and update ARN regex pattern to be more strict in accordance with security recommendation
+* feature: IoTSiteWise: Enable non-unique asset names under different hierarchies
+* feature: LexModelsV2: This release introduces a new feature to stop a running BotRecommendation Job for Automated Chatbot Designer.
+* feature: SecurityHub: Added new resource details objects to ASFF, including resources for AwsBackupBackupVault, AwsBackupBackupPlan and AwsBackupRecoveryPoint. Added FixAvailable, FixedInVersion and Remediation  to Vulnerability.
+* feature: SupportApp: This is the initial SDK release for the AWS Support App in Slack.
 
 ## 2.1199.0
 * feature: Connect: This release adds SearchSecurityProfiles API which can be used to search for Security Profile resources within a Connect Instance.
