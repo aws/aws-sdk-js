@@ -1102,6 +1102,14 @@ declare class RDS extends Service {
    */
   stopDBInstanceAutomatedBackupsReplication(callback?: (err: AWSError, data: RDS.Types.StopDBInstanceAutomatedBackupsReplicationResult) => void): Request<RDS.Types.StopDBInstanceAutomatedBackupsReplicationResult, AWSError>;
   /**
+   * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the AWS Region that hosts the current standby database.
+   */
+  switchoverReadReplica(params: RDS.Types.SwitchoverReadReplicaMessage, callback?: (err: AWSError, data: RDS.Types.SwitchoverReadReplicaResult) => void): Request<RDS.Types.SwitchoverReadReplicaResult, AWSError>;
+  /**
+   * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the AWS Region that hosts the current standby database.
+   */
+  switchoverReadReplica(callback?: (err: AWSError, data: RDS.Types.SwitchoverReadReplicaResult) => void): Request<RDS.Types.SwitchoverReadReplicaResult, AWSError>;
+  /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying RDS.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "dBInstanceAvailable", params: RDS.Types.DescribeDBInstancesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: RDS.Types.DBInstanceMessage) => void): Request<RDS.Types.DBInstanceMessage, AWSError>;
@@ -4074,6 +4082,10 @@ declare namespace RDS {
      * Specifies the time of the CreateDBSnapshot operation in Coordinated Universal Time (UTC). Doesn't change when the snapshot is copied.
      */
     OriginalSnapshotCreateTime?: TStamp;
+    /**
+     * The timestamp of the most recent transaction applied to the database that you're backing up. Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed. If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than SnapshotDatabaseTime, then the replica lag is two hours. *** REVIEWERS 7/27: Switchover
+     */
+    SnapshotDatabaseTime?: TStamp;
     /**
      * Specifies where manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.
      */
@@ -8516,6 +8528,15 @@ declare namespace RDS {
   export type SubnetList = Subnet[];
   export type SupportedCharacterSetsList = CharacterSet[];
   export type SupportedTimezonesList = Timezone[];
+  export interface SwitchoverReadReplicaMessage {
+    /**
+     * The DB instance identifier of the current standby database. This value is stored as a lowercase string. Constraints:   Must match the identiﬁer of an existing Oracle read replica DB instance.  
+     */
+    DBInstanceIdentifier: String;
+  }
+  export interface SwitchoverReadReplicaResult {
+    DBInstance?: DBInstance;
+  }
   export type TStamp = Date;
   export interface Tag {
     /**

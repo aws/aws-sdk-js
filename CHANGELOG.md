@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1200.0-->
+<!--LATEST=2.1201.0-->
 <!--ENTRYINSERT-->
+
+## 2.1201.0
+* feature: RDS: RDS for Oracle supports Oracle Data Guard switchover and read replica backups.
 
 ## 2.1200.0
 * feature: EC2: R6a instances are powered by 3rd generation AMD EPYC (Milan) processors delivering all-core turbo frequency of 3.6 GHz. C6id, M6id, and R6id instances are powered by 3rd generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz.
