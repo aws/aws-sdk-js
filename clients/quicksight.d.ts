@@ -508,11 +508,11 @@ declare class QuickSight extends Service {
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
   /**
-   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard or visual in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   generateEmbedUrlForAnonymousUser(params: QuickSight.Types.GenerateEmbedUrlForAnonymousUserRequest, callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse, AWSError>;
   /**
-   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard or visual in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   generateEmbedUrlForAnonymousUser(callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse, AWSError>;
   /**
@@ -1179,11 +1179,21 @@ declare namespace QuickSight {
      */
     InitialDashboardId: RestrictiveResourceId;
   }
+  export interface AnonymousUserDashboardVisualEmbeddingConfiguration {
+    /**
+     * The visual ID for the visual that you want the user to see. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this visual. The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
+     */
+    InitialDashboardVisualId: DashboardVisualId;
+  }
   export interface AnonymousUserEmbeddingExperienceConfiguration {
     /**
      * The type of embedding experience. In this case, Amazon QuickSight dashboards.
      */
     Dashboard?: AnonymousUserDashboardEmbeddingConfiguration;
+    /**
+     * The type of embedding experience. In this case, Amazon QuickSight visuals.
+     */
+    DashboardVisual?: AnonymousUserDashboardVisualEmbeddingConfiguration;
   }
   export type Arn = string;
   export type ArnList = Arn[];
@@ -2468,6 +2478,20 @@ declare namespace QuickSight {
     Description?: VersionDescription;
   }
   export type DashboardVersionSummaryList = DashboardVersionSummary[];
+  export interface DashboardVisualId {
+    /**
+     * The ID of the dashboard that has the visual that you want to embed. The DashboardId can be found in the IDs for developers section of the Embed visual pane of the visual's on-visual menu of the Amazon QuickSight console. You can also get the DashboardId with a ListDashboards API operation.
+     */
+    DashboardId: RestrictiveResourceId;
+    /**
+     * The ID of the sheet that the has visual that you want to embed. The SheetId can be found in the IDs for developers section of the Embed visual pane of the visual's on-visual menu of the Amazon QuickSight console.
+     */
+    SheetId: RestrictiveResourceId;
+    /**
+     * The ID of the visual that you want to embed. The VisualID can be found in the IDs for developers section of the Embed visual pane of the visual's on-visual menu of the Amazon QuickSight console.
+     */
+    VisualId: RestrictiveResourceId;
+  }
   export interface DataColorPalette {
     /**
      * The hexadecimal codes for the colors.
@@ -4290,7 +4314,7 @@ declare namespace QuickSight {
      */
     UserArn: Arn;
     /**
-     * The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards or the entire Amazon QuickSight console.
+     * The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search bar, or the entire Amazon QuickSight console.
      */
     ExperienceConfiguration: RegisteredUserEmbeddingExperienceConfiguration;
     /**
@@ -4300,7 +4324,7 @@ declare namespace QuickSight {
   }
   export interface GenerateEmbedUrlForRegisteredUserResponse {
     /**
-     * The embed URL for the Amazon QuickSight dashboard or console.
+     * The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, or console.
      */
     EmbedUrl: EmbeddingUrl;
     /**
@@ -5752,6 +5776,12 @@ declare namespace QuickSight {
      */
     InitialDashboardId: RestrictiveResourceId;
   }
+  export interface RegisteredUserDashboardVisualEmbeddingConfiguration {
+    /**
+     * The visual ID for the visual that you want the user to embed. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this visual. The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
+     */
+    InitialDashboardVisualId: DashboardVisualId;
+  }
   export interface RegisteredUserEmbeddingExperienceConfiguration {
     /**
      * The configuration details for providing a dashboard embedding experience.
@@ -5765,6 +5795,10 @@ declare namespace QuickSight {
      * The configuration details for embedding the Q search bar. For more information about embedding the Q search bar, see Embedding Overview in the Amazon QuickSight User Guide.
      */
     QSearchBar?: RegisteredUserQSearchBarEmbeddingConfiguration;
+    /**
+     * The type of embedding experience. In this case, Amazon QuickSight visuals.
+     */
+    DashboardVisual?: RegisteredUserDashboardVisualEmbeddingConfiguration;
   }
   export interface RegisteredUserQSearchBarEmbeddingConfiguration {
     /**

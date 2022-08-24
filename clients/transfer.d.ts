@@ -461,15 +461,15 @@ declare namespace Transfer {
   export type Arn = string;
   export interface As2ConnectorConfig {
     /**
-     * A unique identifier for the AS2 process.
+     * A unique identifier for the AS2 local profile.
      */
     LocalProfileId?: ProfileId;
     /**
-     * A unique identifier for the partner for the connector.
+     * A unique identifier for the partner profile for the connector.
      */
     PartnerProfileId?: ProfileId;
     /**
-     * A short description to help identify the connector.
+     * Used as the Subject HTTP header attribute in AS2 messages that are being sent with the connector.
      */
     MessageSubject?: MessageSubject;
     /**
@@ -481,11 +481,11 @@ declare namespace Transfer {
      */
     EncryptionAlgorithm?: EncryptionAlg;
     /**
-     * The algorithm that is used to sign the AS2 transfers for this partner profile.
+     * The algorithm that is used to sign the AS2 messages sent with the connector.
      */
     SigningAlgorithm?: SigningAlg;
     /**
-     * The signing algorithm for the MDN response.
+     * The signing algorithm for the MDN response.  If set to DEFAULT (or not set at all), the value for SigningAlogorithm is used. 
      */
     MdnSigningAlgorithm?: MdnSigningAlg;
     /**
@@ -590,7 +590,7 @@ declare namespace Transfer {
      */
     BaseDirectory: HomeDirectory;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that grants access to at least the HomeDirectory of your users' Amazon S3 buckets.
+     * With AS2, you can send files by calling StartFileTransfer and specifying the file paths in the request parameter, SendFilePaths. We use the file’s parent directory (for example, for --send-file-paths /bucket/dir/file.txt, parent directory is /bucket/dir/) to temporarily store a processed AS2 message file, store the MDN when we receive them from the partner, and write a final JSON file containing relevant metadata of the transmission. So, the AccessRole needs to provide read and write access to the parent directory of the file location used in the StartFileTransfer request. Additionally, you need to provide read and write access to the parent directory of the files that you intend to send with StartFileTransfer.
      */
     AccessRole: Role;
     /**
@@ -638,7 +638,7 @@ declare namespace Transfer {
   }
   export interface CreateProfileRequest {
     /**
-     * The As2Id is the AS2-name, as defined in the defined in the RFC 4130. For inbound transfers, this is the AS2-From header for the AS2 messages sent from the partner. For outbound connectors, this is the AS2-To header for the AS2 messages sent to the partner using the StartFileTransfer API operation. This ID cannot include spaces.
+     * The As2Id is the AS2-name, as defined in the RFC 4130. For inbound transfers, this is the AS2-From header for the AS2 messages sent from the partner. For outbound connectors, this is the AS2-To header for the AS2 messages sent to the partner using the StartFileTransfer API operation. This ID cannot include spaces.
      */
     As2Id: As2Id;
     /**
@@ -1107,11 +1107,11 @@ declare namespace Transfer {
      */
     ServerId?: ServerId;
     /**
-     * A unique identifier for the AS2 process.
+     * A unique identifier for the AS2 local profile.
      */
     LocalProfileId?: ProfileId;
     /**
-     * A unique identifier for the partner in the agreement.
+     * A unique identifier for the partner profile used in the agreement.
      */
     PartnerProfileId?: ProfileId;
     /**
@@ -1119,7 +1119,7 @@ declare namespace Transfer {
      */
     BaseDirectory?: HomeDirectory;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that grants access to at least the HomeDirectory of your users' Amazon S3 buckets.
+     * With AS2, you can send files by calling StartFileTransfer and specifying the file paths in the request parameter, SendFilePaths. We use the file’s parent directory (for example, for --send-file-paths /bucket/dir/file.txt, parent directory is /bucket/dir/) to temporarily store a processed AS2 message file, store the MDN when we receive them from the partner, and write a final JSON file containing relevant metadata of the transmission. So, the AccessRole needs to provide read and write access to the parent directory of the file location used in the StartFileTransfer request. Additionally, you need to provide read and write access to the parent directory of the files that you intend to send with StartFileTransfer.
      */
     AccessRole?: Role;
     /**
@@ -1260,7 +1260,7 @@ declare namespace Transfer {
      */
     ProfileType?: ProfileType;
     /**
-     * The unique identifier for the AS2 process.
+     * The As2Id is the AS2-name, as defined in the RFC 4130. For inbound transfers, this is the AS2-From header for the AS2 messages sent from the partner. For outbound connectors, this is the AS2-To header for the AS2 messages sent to the partner using the StartFileTransfer API operation. This ID cannot include spaces.
      */
     As2Id?: As2Id;
     /**
@@ -1308,7 +1308,7 @@ declare namespace Transfer {
      */
     Certificate?: Certificate;
     /**
-     *  The protocol settings that are configured for your server.   Use the PassiveIp parameter to indicate passive mode. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. 
+     * The protocol settings that are configured for your server.    To indicate passive mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.    To ignore the error that is generated when the client attempts to use the SETSTAT command on a file that you are uploading to an Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer Family server ignore the SETSTAT command and upload files without needing to make any changes to your SFTP client, set the value to ENABLE_NO_OP. If you set the SetStatOption parameter to ENABLE_NO_OP, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a SETSTAT call.   To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the TlsSessionResumptionMode parameter.    As2Transports indicates the transport method for the AS2 messages. Currently, only HTTP is supported.  
      */
     ProtocolDetails?: ProtocolDetails;
     /**
@@ -1348,7 +1348,7 @@ declare namespace Transfer {
      */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer  
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
      */
     Protocols?: Protocols;
     /**
@@ -1950,11 +1950,11 @@ declare namespace Transfer {
      */
     ServerId?: ServerId;
     /**
-     * A unique identifier for the AS2 process.
+     * A unique identifier for the AS2 local profile.
      */
     LocalProfileId?: ProfileId;
     /**
-     * A unique identifier for the partner process.
+     * A unique identifier for the partner profile.
      */
     PartnerProfileId?: ProfileId;
   }
@@ -2038,7 +2038,7 @@ declare namespace Transfer {
      */
     ProfileId?: ProfileId;
     /**
-     * The unique identifier for the AS2 process.
+     * The As2Id is the AS2-name, as defined in the RFC 4130. For inbound transfers, this is the AS2-From header for the AS2 messages sent from the partner. For outbound connectors, this is the AS2-To header for the AS2 messages sent to the partner using the StartFileTransfer API operation. This ID cannot include spaces.
      */
     As2Id?: As2Id;
     /**
@@ -2474,11 +2474,11 @@ declare namespace Transfer {
      */
     Status?: AgreementStatusType;
     /**
-     * To change the local profile identifier, provide a new value here.
+     * A unique identifier for the AS2 local profile. To change the local profile identifier, provide a new value here.
      */
     LocalProfileId?: ProfileId;
     /**
-     * To change the partner profile identifier, provide a new value here.
+     * A unique identifier for the partner profile. To change the partner profile identifier, provide a new value here.
      */
     PartnerProfileId?: ProfileId;
     /**
@@ -2486,7 +2486,7 @@ declare namespace Transfer {
      */
     BaseDirectory?: HomeDirectory;
     /**
-     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that grants access to at least the HomeDirectory of your users' Amazon S3 buckets.
+     * With AS2, you can send files by calling StartFileTransfer and specifying the file paths in the request parameter, SendFilePaths. We use the file’s parent directory (for example, for --send-file-paths /bucket/dir/file.txt, parent directory is /bucket/dir/) to temporarily store a processed AS2 message file, store the MDN when we receive them from the partner, and write a final JSON file containing relevant metadata of the transmission. So, the AccessRole needs to provide read and write access to the parent directory of the file location used in the StartFileTransfer request. Additionally, you need to provide read and write access to the parent directory of the files that you intend to send with StartFileTransfer.
      */
     AccessRole?: Role;
   }
@@ -2602,7 +2602,7 @@ declare namespace Transfer {
      */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH   File Transfer Protocol Secure (FTPS): File transfer with TLS encryption   File Transfer Protocol (FTP): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in Amazon Web ServicesCertificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
      */
     Protocols?: Protocols;
     /**

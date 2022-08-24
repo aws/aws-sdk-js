@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1201.0-->
+<!--LATEST=2.1202.0-->
 <!--ENTRYINSERT-->
+
+## 2.1202.0
+* feature: CloudFront: Adds support for CloudFront origin access control (OAC), making it possible to restrict public access to S3 bucket origins in all AWS Regions, those with SSE-KMS, and more.
+* feature: ConfigService: AWS Config now supports ConformancePackTemplate documents in SSM Docs for the deployment and update of conformance packs.
+* feature: QuickSight: Added a new optional property DashboardVisual under ExperienceConfiguration parameter of GenerateEmbedUrlForAnonymousUser and GenerateEmbedUrlForRegisteredUser API operations. This supports embedding of specific visuals in QuickSight dashboards.
 
 ## 2.1201.0
 * feature: RDS: RDS for Oracle supports Oracle Data Guard switchover and read replica backups.

@@ -102,6 +102,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.CreateMonitoringSubscriptionResult) => void): Request<CloudFront.Types.CreateMonitoringSubscriptionResult, AWSError>;
   /**
+   * Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin. For an Amazon S3 origin, this makes it possible to block public access to the Amazon S3 bucket so that viewers (users) can access the content in the bucket only through CloudFront. For more information about using a CloudFront origin access control, see Restricting access to an Amazon S3 origin in the Amazon CloudFront Developer Guide.
+   */
+  createOriginAccessControl(params: CloudFront.Types.CreateOriginAccessControlRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateOriginAccessControlResult) => void): Request<CloudFront.Types.CreateOriginAccessControlResult, AWSError>;
+  /**
+   * Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin. For an Amazon S3 origin, this makes it possible to block public access to the Amazon S3 bucket so that viewers (users) can access the content in the bucket only through CloudFront. For more information about using a CloudFront origin access control, see Restricting access to an Amazon S3 origin in the Amazon CloudFront Developer Guide.
+   */
+  createOriginAccessControl(callback?: (err: AWSError, data: CloudFront.Types.CreateOriginAccessControlResult) => void): Request<CloudFront.Types.CreateOriginAccessControlResult, AWSError>;
+  /**
    * Creates an origin request policy. After you create an origin request policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the origin request policy determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:   The request body and the URL path (without the domain name) from the viewer request.   The headers that CloudFront automatically includes in every origin request, including Host, User-Agent, and X-Amz-Cf-Id.   All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.   CloudFront sends a request when it can’t find a valid object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use CachePolicy. For more information about origin request policies, see Controlling origin requests in the Amazon CloudFront Developer Guide.
    */
   createOriginRequestPolicy(params: CloudFront.Types.CreateOriginRequestPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateOriginRequestPolicyResult) => void): Request<CloudFront.Types.CreateOriginRequestPolicyResult, AWSError>;
@@ -213,6 +221,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Disables additional CloudWatch metrics for the specified CloudFront distribution.
    */
   deleteMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.DeleteMonitoringSubscriptionResult) => void): Request<CloudFront.Types.DeleteMonitoringSubscriptionResult, AWSError>;
+  /**
+   * Deletes a CloudFront origin access control. You cannot delete an origin access control if it's in use. First, update all distributions to remove the origin access control from all origins, then delete the origin access control.
+   */
+  deleteOriginAccessControl(params: CloudFront.Types.DeleteOriginAccessControlRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a CloudFront origin access control. You cannot delete an origin access control if it's in use. First, update all distributions to remove the origin access control from all origins, then delete the origin access control.
+   */
+  deleteOriginAccessControl(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an origin request policy. You cannot delete an origin request policy if it’s attached to any cache behaviors. First update your distributions to remove the origin request policy from all cache behaviors, then delete the origin request policy. To delete an origin request policy, you must provide the policy’s identifier and version. To get the identifier, you can use ListOriginRequestPolicies or GetOriginRequestPolicy.
    */
@@ -381,6 +397,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Gets information about whether additional CloudWatch metrics are enabled for the specified CloudFront distribution.
    */
   getMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.GetMonitoringSubscriptionResult) => void): Request<CloudFront.Types.GetMonitoringSubscriptionResult, AWSError>;
+  /**
+   * Gets a CloudFront origin access control.
+   */
+  getOriginAccessControl(params: CloudFront.Types.GetOriginAccessControlRequest, callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlResult) => void): Request<CloudFront.Types.GetOriginAccessControlResult, AWSError>;
+  /**
+   * Gets a CloudFront origin access control.
+   */
+  getOriginAccessControl(callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlResult) => void): Request<CloudFront.Types.GetOriginAccessControlResult, AWSError>;
+  /**
+   * Gets a CloudFront origin access control.
+   */
+  getOriginAccessControlConfig(params: CloudFront.Types.GetOriginAccessControlConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlConfigResult) => void): Request<CloudFront.Types.GetOriginAccessControlConfigResult, AWSError>;
+  /**
+   * Gets a CloudFront origin access control.
+   */
+  getOriginAccessControlConfig(callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlConfigResult) => void): Request<CloudFront.Types.GetOriginAccessControlConfigResult, AWSError>;
   /**
    * Gets an origin request policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get an origin request policy, you must provide the policy’s identifier. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
    */
@@ -574,6 +606,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listKeyGroups(callback?: (err: AWSError, data: CloudFront.Types.ListKeyGroupsResult) => void): Request<CloudFront.Types.ListKeyGroupsResult, AWSError>;
   /**
+   * Gets the list of CloudFront origin access controls in this Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send another request that specifies the NextMarker value from the current response as the Marker value in the next request.
+   */
+  listOriginAccessControls(params: CloudFront.Types.ListOriginAccessControlsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListOriginAccessControlsResult) => void): Request<CloudFront.Types.ListOriginAccessControlsResult, AWSError>;
+  /**
+   * Gets the list of CloudFront origin access controls in this Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send another request that specifies the NextMarker value from the current response as the Marker value in the next request.
+   */
+  listOriginAccessControls(callback?: (err: AWSError, data: CloudFront.Types.ListOriginAccessControlsResult) => void): Request<CloudFront.Types.ListOriginAccessControlsResult, AWSError>;
+  /**
    * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by Amazon Web Services, or only the custom policies created in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
   listOriginRequestPolicies(params: CloudFront.Types.ListOriginRequestPoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListOriginRequestPoliciesResult) => void): Request<CloudFront.Types.ListOriginRequestPoliciesResult, AWSError>;
@@ -709,6 +749,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Updates a key group. When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:   Get the current key group with GetKeyGroup or GetKeyGroupConfig.   Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.   Call UpdateKeyGroup with the entire key group object, including the fields that you modified and those that you didn’t.  
    */
   updateKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyGroupResult) => void): Request<CloudFront.Types.UpdateKeyGroupResult, AWSError>;
+  /**
+   * Updates a CloudFront origin access control.
+   */
+  updateOriginAccessControl(params: CloudFront.Types.UpdateOriginAccessControlRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateOriginAccessControlResult) => void): Request<CloudFront.Types.UpdateOriginAccessControlResult, AWSError>;
+  /**
+   * Updates a CloudFront origin access control.
+   */
+  updateOriginAccessControl(callback?: (err: AWSError, data: CloudFront.Types.UpdateOriginAccessControlResult) => void): Request<CloudFront.Types.UpdateOriginAccessControlResult, AWSError>;
   /**
    * Updates an origin request policy configuration. When you update an origin request policy configuration, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update an origin request policy configuration:   Use GetOriginRequestPolicyConfig to get the current configuration.   Locally modify the fields in the origin request policy configuration that you want to update.   Call UpdateOriginRequestPolicy by providing the entire origin request policy configuration, including the fields that you modified and those that you didn’t.  
    */
@@ -1407,6 +1455,26 @@ declare namespace CloudFront {
      */
     MonitoringSubscription?: MonitoringSubscription;
   }
+  export interface CreateOriginAccessControlRequest {
+    /**
+     * Contains the origin access control.
+     */
+    OriginAccessControlConfig: OriginAccessControlConfig;
+  }
+  export interface CreateOriginAccessControlResult {
+    /**
+     * Contains an origin access control.
+     */
+    OriginAccessControl?: OriginAccessControl;
+    /**
+     * The URL of the origin access control.
+     */
+    Location?: string;
+    /**
+     * The version identifier for the current version of the origin access control.
+     */
+    ETag?: string;
+  }
   export interface CreateOriginRequestPolicyRequest {
     /**
      * An origin request policy configuration.
@@ -1744,6 +1812,16 @@ declare namespace CloudFront {
     DistributionId: string;
   }
   export interface DeleteMonitoringSubscriptionResult {
+  }
+  export interface DeleteOriginAccessControlRequest {
+    /**
+     * The unique identifier of the origin access control that you are deleting.
+     */
+    Id: string;
+    /**
+     * The current version (ETag value) of the origin access control that you are deleting.
+     */
+    IfMatch?: string;
   }
   export interface DeleteOriginRequestPolicyRequest {
     /**
@@ -2640,6 +2718,38 @@ declare namespace CloudFront {
      */
     MonitoringSubscription?: MonitoringSubscription;
   }
+  export interface GetOriginAccessControlConfigRequest {
+    /**
+     * The unique identifier of the origin access control.
+     */
+    Id: string;
+  }
+  export interface GetOriginAccessControlConfigResult {
+    /**
+     * Contains an origin access control.
+     */
+    OriginAccessControlConfig?: OriginAccessControlConfig;
+    /**
+     * The version identifier for the current version of the origin access control.
+     */
+    ETag?: string;
+  }
+  export interface GetOriginAccessControlRequest {
+    /**
+     * The unique identifier of the origin access control.
+     */
+    Id: string;
+  }
+  export interface GetOriginAccessControlResult {
+    /**
+     * Contains an origin access control.
+     */
+    OriginAccessControl?: OriginAccessControl;
+    /**
+     * The version identifier for the current version of the origin access control.
+     */
+    ETag?: string;
+  }
   export interface GetOriginRequestPolicyConfigRequest {
     /**
      * The unique identifier for the origin request policy. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
@@ -3254,6 +3364,22 @@ declare namespace CloudFront {
      */
     KeyGroupList?: KeyGroupList;
   }
+  export interface ListOriginAccessControlsRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of origin access controls. The response includes the items in the list that occur after the marker. To get the next page of the list, set this field's value to the value of NextMarker from the current page's response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of origin access controls that you want in the response.
+     */
+    MaxItems?: string;
+  }
+  export interface ListOriginAccessControlsResult {
+    /**
+     * A list of origin access controls.
+     */
+    OriginAccessControlList?: OriginAccessControlList;
+  }
   export interface ListOriginRequestPoliciesRequest {
     /**
      * A filter to return only the specified kinds of origin request policies. Valid values are:    managed – Returns only the managed policies created by Amazon Web Services.    custom – Returns only the custom policies created in your Amazon Web Services account.  
@@ -3419,7 +3545,99 @@ declare namespace CloudFront {
      * CloudFront Origin Shield. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
      */
     OriginShield?: OriginShield;
+    /**
+     * The unique identifier of an origin access control for this origin. For more information, see Restricting access to an Amazon S3 origin in the Amazon CloudFront Developer Guide.
+     */
+    OriginAccessControlId?: string;
   }
+  export interface OriginAccessControl {
+    /**
+     * The unique identifier of the origin access control.
+     */
+    Id: string;
+    /**
+     * The origin access control.
+     */
+    OriginAccessControlConfig?: OriginAccessControlConfig;
+  }
+  export interface OriginAccessControlConfig {
+    /**
+     * A name to identify the origin access control.
+     */
+    Name: string;
+    /**
+     * A description of the origin access control.
+     */
+    Description: string;
+    /**
+     * The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is sigv4.
+     */
+    SigningProtocol: OriginAccessControlSigningProtocols;
+    /**
+     * Specifies which requests CloudFront signs (adds authentication information to). Specify always for the most common use case. For more information, see origin access control advanced settings in the Amazon CloudFront Developer Guide. This field can have one of the following values:    always – CloudFront signs all origin requests, overwriting the Authorization header from the viewer request if one exists.    never – CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.    no-override – If the viewer request doesn't contain the Authorization header, then CloudFront signs the origin request. If the viewer request contains the Authorization header, then CloudFront doesn't sign the origin request and instead passes along the Authorization header from the viewer request. WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to an origin request policy for all cache behaviors that use origins associated with this origin access control.   
+     */
+    SigningBehavior: OriginAccessControlSigningBehaviors;
+    /**
+     * The type of origin that this origin access control is for. The only valid value is s3.
+     */
+    OriginAccessControlOriginType: OriginAccessControlOriginTypes;
+  }
+  export interface OriginAccessControlList {
+    /**
+     * The value of the Marker field that was provided in the request.
+     */
+    Marker: string;
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value to use in the Marker field of another request to continue listing origin access controls.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of origin access controls requested.
+     */
+    MaxItems: integer;
+    /**
+     * If there are more items in the list than are in this response, this value is true.
+     */
+    IsTruncated: boolean;
+    /**
+     * The number of origin access controls returned in the response.
+     */
+    Quantity: integer;
+    /**
+     * Contains the origin access controls in the list.
+     */
+    Items?: OriginAccessControlSummaryList;
+  }
+  export type OriginAccessControlOriginTypes = "s3"|string;
+  export type OriginAccessControlSigningBehaviors = "never"|"always"|"no-override"|string;
+  export type OriginAccessControlSigningProtocols = "sigv4"|string;
+  export interface OriginAccessControlSummary {
+    /**
+     * The unique identifier of the origin access control.
+     */
+    Id: string;
+    /**
+     * A description of the origin access control.
+     */
+    Description: string;
+    /**
+     * A unique name that identifies the origin access control.
+     */
+    Name: string;
+    /**
+     * The signing protocol of the origin access control. The signing protocol determines how CloudFront signs (authenticates) requests. The only valid value is sigv4.
+     */
+    SigningProtocol: OriginAccessControlSigningProtocols;
+    /**
+     * A value that specifies which requests CloudFront signs (adds authentication information to). This field can have one of the following values:    never – CloudFront doesn't sign any origin requests.    always – CloudFront signs all origin requests, overwriting the Authorization header from the viewer request if necessary.    no-override – If the viewer request doesn't contain the Authorization header, CloudFront signs the origin request. If the viewer request contains the Authorization header, CloudFront doesn't sign the origin request, but instead passes along the Authorization header that it received in the viewer request.  
+     */
+    SigningBehavior: OriginAccessControlSigningBehaviors;
+    /**
+     * The type of origin that this origin access control is for. The only valid value is s3.
+     */
+    OriginAccessControlOriginType: OriginAccessControlOriginTypes;
+  }
+  export type OriginAccessControlSummaryList = OriginAccessControlSummary[];
   export interface OriginCustomHeader {
     /**
      * The name of a header that you want CloudFront to send to your origin. For more information, see Adding Custom Headers to Origin Requests in the  Amazon CloudFront Developer Guide.
@@ -3909,13 +4127,13 @@ declare namespace CloudFront {
      */
     SecurityHeadersConfig?: ResponseHeadersPolicySecurityHeadersConfig;
     /**
-     * A configuration for a set of custom HTTP response headers.
-     */
-    CustomHeadersConfig?: ResponseHeadersPolicyCustomHeadersConfig;
-    /**
      * A configuration for enabling the Server-Timing header in HTTP responses sent from CloudFront.
      */
     ServerTimingHeadersConfig?: ResponseHeadersPolicyServerTimingHeadersConfig;
+    /**
+     * A configuration for a set of custom HTTP response headers.
+     */
+    CustomHeadersConfig?: ResponseHeadersPolicyCustomHeadersConfig;
   }
   export interface ResponseHeadersPolicyContentSecurityPolicy {
     /**
@@ -4609,6 +4827,30 @@ declare namespace CloudFront {
     KeyGroup?: KeyGroup;
     /**
      * The identifier for this version of the key group.
+     */
+    ETag?: string;
+  }
+  export interface UpdateOriginAccessControlRequest {
+    /**
+     * An origin access control.
+     */
+    OriginAccessControlConfig: OriginAccessControlConfig;
+    /**
+     * The unique identifier of the origin access control that you are updating.
+     */
+    Id: string;
+    /**
+     * The current version (ETag value) of the origin access control that you are updating.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateOriginAccessControlResult {
+    /**
+     * The origin access control after it has been updated.
+     */
+    OriginAccessControl?: OriginAccessControl;
+    /**
+     * The new version of the origin access control after it has been updated.
      */
     ETag?: string;
   }

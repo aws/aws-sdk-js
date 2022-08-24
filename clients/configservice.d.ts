@@ -568,11 +568,11 @@ declare class ConfigService extends Service {
    */
   putConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization. For information on how many conformance packs you can have per account, see  Service Limits  in the Config Developer Guide. This API creates a service-linked role AWSServiceRoleForConfigConforms in your account. The service-linked role is created only when the role does not exist in your account.   You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   * Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization. For information on how many conformance packs you can have per account, see  Service Limits  in the Config Developer Guide. This API creates a service-linked role AWSServiceRoleForConfigConforms in your account. The service-linked role is created only when the role does not exist in your account.   You must specify one and only one of theTemplateS3Uri, TemplateBody or TemplateSSMDocumentDetails parameters. 
    */
   putConformancePack(params: ConfigService.Types.PutConformancePackRequest, callback?: (err: AWSError, data: ConfigService.Types.PutConformancePackResponse) => void): Request<ConfigService.Types.PutConformancePackResponse, AWSError>;
   /**
-   * Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization. For information on how many conformance packs you can have per account, see  Service Limits  in the Config Developer Guide. This API creates a service-linked role AWSServiceRoleForConfigConforms in your account. The service-linked role is created only when the role does not exist in your account.   You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   * Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization. For information on how many conformance packs you can have per account, see  Service Limits  in the Config Developer Guide. This API creates a service-linked role AWSServiceRoleForConfigConforms in your account. The service-linked role is created only when the role does not exist in your account.   You must specify one and only one of theTemplateS3Uri, TemplateBody or TemplateSSMDocumentDetails parameters. 
    */
   putConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutConformancePackResponse) => void): Request<ConfigService.Types.PutConformancePackResponse, AWSError>;
   /**
@@ -1569,13 +1569,17 @@ declare namespace ConfigService {
      */
     ConformancePackInputParameters?: ConformancePackInputParameters;
     /**
-     * Last time when conformation pack update was requested. 
+     * The last time a conformation pack update was requested. 
      */
     LastUpdateRequestedTime?: _Date;
     /**
-     * Amazon Web Services service that created the conformance pack.
+     * The Amazon Web Services service that created the conformance pack.
      */
     CreatedBy?: StringWithCharLimit256;
+    /**
+     * An object that contains the name or Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.
+     */
+    TemplateSSMDocumentDetails?: TemplateSSMDocumentDetails;
   }
   export type ConformancePackDetailList = ConformancePackDetail[];
   export interface ConformancePackEvaluationFilters {
@@ -3661,15 +3665,15 @@ declare namespace ConfigService {
   }
   export interface PutConformancePackRequest {
     /**
-     * Name of the conformance pack you want to create.
+     * The unique name of the conformance pack you want to deploy.
      */
     ConformancePackName: ConformancePackName;
     /**
-     * Location of file containing the template body (s3://bucketname/prefix). The uri must point to the conformance pack template (max size: 300 KB) that is located in an Amazon S3 bucket in the same region as the conformance pack.   You must have access to read Amazon S3 bucket. 
+     * The location of the file containing the template body (s3://bucketname/prefix). The uri must point to a conformance pack template (max size: 300 KB) that is located in an Amazon S3 bucket in the same region as the conformance pack.   You must have access to read Amazon S3 bucket. 
      */
     TemplateS3Uri?: TemplateS3Uri;
     /**
-     * A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.  You can only use a YAML template with two resource types: Config rule (AWS::Config::ConfigRule) and a remediation action (AWS::Config::RemediationConfiguration). 
+     * A string containing the full conformance pack template body. The structure containing the template body has a minimum length of 1 byte and a maximum length of 51,200 bytes.  You can only use a YAML template with two resource types: Config rule (AWS::Config::ConfigRule) and remediation action (AWS::Config::RemediationConfiguration). 
      */
     TemplateBody?: TemplateBody;
     /**
@@ -3684,6 +3688,10 @@ declare namespace ConfigService {
      * A list of ConformancePackInputParameter objects.
      */
     ConformancePackInputParameters?: ConformancePackInputParameters;
+    /**
+     * An object of type TemplateSSMDocumentDetails, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.
+     */
+    TemplateSSMDocumentDetails?: TemplateSSMDocumentDetails;
   }
   export interface PutConformancePackResponse {
     /**
@@ -4183,6 +4191,8 @@ declare namespace ConfigService {
   export type RetentionConfigurationNameList = RetentionConfigurationName[];
   export type RetentionPeriodInDays = number;
   export type RuleLimit = number;
+  export type SSMDocumentName = string;
+  export type SSMDocumentVersion = string;
   export type SchemaVersionId = string;
   export interface Scope {
     /**
@@ -4446,6 +4456,16 @@ declare namespace ConfigService {
   export type TagsList = Tag[];
   export type TemplateBody = string;
   export type TemplateS3Uri = string;
+  export interface TemplateSSMDocumentDetails {
+    /**
+     * The name or Amazon Resource Name (ARN) of the SSM document to use to create a conformance pack. If you use the Document Name, Config checks only your account and region for the SSM document. If you want to use an SSM document from another region or account, you must provide the ARN.
+     */
+    DocumentName: SSMDocumentName;
+    /**
+     * The version of the SSM document to use to create a conformance pack. By default, Config uses the latest version.  This field is optional. 
+     */
+    DocumentVersion?: SSMDocumentVersion;
+  }
   export type UnprocessedResourceIdentifierList = AggregateResourceIdentifier[];
   export interface UntagResourceRequest {
     /**
