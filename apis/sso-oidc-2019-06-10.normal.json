@@ -19,20 +19,46 @@
         "method": "POST",
         "requestUri": "/token"
       },
-      "input": {"shape": "CreateTokenRequest"},
-      "output": {"shape": "CreateTokenResponse"},
-      "errors":[
-        {"shape": "InvalidRequestException"},
-        {"shape": "InvalidClientException"},
-        {"shape": "InvalidGrantException"},
-        {"shape": "UnauthorizedClientException"},
-        {"shape": "UnsupportedGrantTypeException"},
-        {"shape": "InvalidScopeException"},
-        {"shape": "AuthorizationPendingException"},
-        {"shape": "SlowDownException"},
-        {"shape": "AccessDeniedException"},
-        {"shape": "ExpiredTokenException"},
-        {"shape": "InternalServerException"}
+      "input": {
+        "shape": "CreateTokenRequest"
+      },
+      "output": {
+        "shape": "CreateTokenResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidClientException"
+        },
+        {
+          "shape": "InvalidGrantException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "UnsupportedGrantTypeException"
+        },
+        {
+          "shape": "InvalidScopeException"
+        },
+        {
+          "shape": "AuthorizationPendingException"
+        },
+        {
+          "shape": "SlowDownException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ExpiredTokenException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
       ],
       "documentation": "<p>Creates and returns an access token for the authorized client. The access token issued will be used to fetch short-term credentials for the assigned roles in the AWS account.</p>",
       "authtype": "none"
@@ -43,13 +69,25 @@
         "method": "POST",
         "requestUri": "/client/register"
       },
-      "input": {"shape": "RegisterClientRequest"},
-      "output": {"shape": "RegisterClientResponse"},
-      "errors":[
-        {"shape": "InvalidRequestException"},
-        {"shape": "InvalidScopeException"},
-        {"shape": "InvalidClientMetadataException"},
-        {"shape": "InternalServerException"}
+      "input": {
+        "shape": "RegisterClientRequest"
+      },
+      "output": {
+        "shape": "RegisterClientResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidScopeException"
+        },
+        {
+          "shape": "InvalidClientMetadataException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
       ],
       "documentation": "<p>Registers a client with AWS SSO. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.</p>",
       "authtype": "none"
@@ -60,49 +98,55 @@
         "method": "POST",
         "requestUri": "/device_authorization"
       },
-      "input": {"shape": "StartDeviceAuthorizationRequest"},
-      "output": {"shape": "StartDeviceAuthorizationResponse"},
-      "errors":[
-        {"shape": "InvalidRequestException"},
-        {"shape": "InvalidClientException"},
-        {"shape": "UnauthorizedClientException"},
-        {"shape": "SlowDownException"},
-        {"shape": "InternalServerException"}
+      "input": {
+        "shape": "StartDeviceAuthorizationRequest"
+      },
+      "output": {
+        "shape": "StartDeviceAuthorizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "SlowDownException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
       ],
       "documentation": "<p>Initiates device authorization by requesting a pair of verification codes from the authorization service.</p>",
       "authtype": "none"
     }
   },
   "shapes": {
-    "AccessDeniedException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>You do not have sufficient access to perform this action.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "AccessToken": {
+      "type": "string"
     },
-    "AccessToken": {"type": "string"},
-    "AuthCode": {"type": "string"},
-    "AuthorizationPendingException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that a request to authorize a client with an access user session token is pending.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "AuthCode": {
+      "type": "string"
     },
-    "ClientId": {"type": "string"},
-    "ClientName": {"type": "string"},
-    "ClientSecret": {"type": "string"},
-    "ClientType": {"type": "string"},
+    "ClientId": {
+      "type": "string"
+    },
+    "ClientName": {
+      "type": "string"
+    },
+    "ClientSecret": {
+      "type": "string"
+    },
+    "ClientType": {
+      "type": "string"
+    },
     "CreateTokenRequest": {
       "type": "structure",
-      "required":[
+      "required": [
         "clientId",
         "clientSecret",
         "grantType"
@@ -167,89 +211,30 @@
         }
       }
     },
-    "DeviceCode": {"type": "string"},
-    "Error": {"type": "string"},
-    "ErrorDescription": {"type": "string"},
-    "ExpirationInSeconds": {"type": "integer"},
-    "ExpiredTokenException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the token issued by the service is expired and is no longer valid.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "DeviceCode": {
+      "type": "string"
     },
-    "GrantType": {"type": "string"},
-    "IdToken": {"type": "string"},
-    "InternalServerException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that an error from the service occurred while trying to process a request.</p>",
-      "error": {"httpStatusCode":500},
-      "exception":true,
-      "fault":true
+    "ExpirationInSeconds": {
+      "type": "integer"
     },
-    "IntervalInSeconds": {"type": "integer"},
-    "InvalidClientException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the <code>clientId</code> or <code>clientSecret</code> in the request is invalid. For example, this can occur when a client sends an incorrect <code>clientId</code> or an expired <code>clientSecret</code>.</p>",
-      "error": {"httpStatusCode":401},
-      "exception":true
+    "GrantType": {
+      "type": "string"
     },
-    "InvalidClientMetadataException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the client information sent in the request during registration is invalid.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "IdToken": {
+      "type": "string"
     },
-    "InvalidGrantException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that a request contains an invalid grant. This can occur if a client makes a <a>CreateToken</a> request with an invalid grant type.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "IntervalInSeconds": {
+      "type": "integer"
     },
-    "InvalidRequestException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that something is wrong with the input to the request. For example, a required parameter might be missing or out of range.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "LongTimeStampType": {
+      "type": "long"
     },
-    "InvalidScopeException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the scope provided in the request is invalid.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "RefreshToken": {
+      "type": "string"
     },
-    "LongTimeStampType": {"type": "long"},
-    "RefreshToken": {"type": "string"},
     "RegisterClientRequest": {
       "type": "structure",
-      "required":[
+      "required": [
         "clientName",
         "clientType"
       ],
@@ -297,24 +282,18 @@
         }
       }
     },
-    "Scope": {"type": "string"},
+    "Scope": {
+      "type": "string"
+    },
     "Scopes": {
       "type": "list",
-      "member": {"shape": "Scope"}
-    },
-    "SlowDownException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the client is making the request too frequently and is more than the service can handle. </p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+      "member": {
+        "shape": "Scope"
+      }
     },
     "StartDeviceAuthorizationRequest": {
       "type": "structure",
-      "required":[
+      "required": [
         "clientId",
         "clientSecret",
         "startUrl"
@@ -363,29 +342,15 @@
         }
       }
     },
-    "TokenType": {"type": "string"},
-    "URI": {"type": "string"},
-    "UnauthorizedClientException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the client is not currently authorized to make the request. This can happen when a <code>clientId</code> is not issued for a public client.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "TokenType": {
+      "type": "string"
     },
-    "UnsupportedGrantTypeException": {
-      "type": "structure",
-      "members": {
-        "error": {"shape": "Error"},
-        "error_description": {"shape": "ErrorDescription"}
-      },
-      "documentation": "<p>Indicates that the grant type in the request is not supported by the service.</p>",
-      "error": {"httpStatusCode":400},
-      "exception":true
+    "URI": {
+      "type": "string"
     },
-    "UserCode": {"type": "string"}
+    "UserCode": {
+      "type": "string"
+    }
   },
   "documentation": "<p>AWS Single Sign-On (SSO) OpenID Connect (OIDC) is a web service that enables a client (such as AWS CLI or a native application) to register with AWS SSO. The service also enables the client to fetch the user’s access token upon successful authentication and authorization with AWS SSO. This service conforms with the OAuth 2.0 based implementation of the device authorization grant standard (<a href=\"https://tools.ietf.org/html/rfc8628\">https://tools.ietf.org/html/rfc8628</a>).</p> <p>For general information about AWS SSO, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">What is AWS Single Sign-On?</a> in the <i>AWS SSO User Guide</i>.</p> <p>This API reference guide describes the AWS SSO OIDC operations that you can call programatically and includes detailed information on data types and errors.</p> <note> <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms such as Java, Ruby, .Net, iOS, and Android. The SDKs provide a convenient way to create programmatic access to AWS SSO and other AWS services. For more information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> </note>"
 }
