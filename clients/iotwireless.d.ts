@@ -928,6 +928,19 @@ declare namespace IoTWireless {
   }
   export type AutoCreateTasks = boolean;
   export type BatteryLevel = "normal"|"low"|"critical"|string;
+  export interface Beaconing {
+    /**
+     * The data rate for gateways that are sending the beacons.
+     */
+    DataRate?: BeaconingDataRate;
+    /**
+     * The frequency list for the gateways to send the beacons.
+     */
+    Frequencies?: BeaconingFrequencies;
+  }
+  export type BeaconingDataRate = number;
+  export type BeaconingFrequencies = BeaconingFrequency[];
+  export type BeaconingFrequency = number;
   export interface CancelMulticastGroupSessionRequest {
     Id: MulticastGroupId;
   }
@@ -956,7 +969,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANConnectionStatusEventNotificationConfigurations;
     /**
-     * Enum to denote whether the wireless gateway ID connection status event topic is enabled or disabled.
+     * Denotes whether the wireless gateway ID connection status event topic is enabled or disabled.
      */
     WirelessGatewayIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -1385,7 +1398,7 @@ declare namespace IoTWireless {
      */
     Sidewalk?: SidewalkEventNotificationConfigurations;
     /**
-     * Enum to denote whether the wireless device id device registration state event topic is enabled or disabled.
+     * Denotes whether the wireless device ID device registration state event topic is enabled or disabled.
      */
     WirelessDeviceIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -1457,6 +1470,8 @@ declare namespace IoTWireless {
   export type DlRate = number;
   export type DlRatePolicy = string;
   export type Double = number;
+  export type DownlinkFrequency = number;
+  export type DownlinkMode = "SEQUENTIAL"|"CONCURRENT"|"USING_UPLINK_GATEWAY"|string;
   export interface DownlinkQueueMessage {
     /**
      *  The message ID assigned by IoT Wireless to each downlink message, which helps identify the message.
@@ -1550,6 +1565,17 @@ declare namespace IoTWireless {
   export type FuotaTaskName = string;
   export type FuotaTaskStatus = "Pending"|"FuotaSession_Waiting"|"In_FuotaSession"|"FuotaDone"|"Delete_Waiting"|string;
   export type GatewayEui = string;
+  export type GatewayList = GatewayListItem[];
+  export interface GatewayListItem {
+    /**
+     * The ID of the wireless gateways that you want to add to the list of gateways when sending downlink messages.
+     */
+    GatewayId: WirelessGatewayId;
+    /**
+     * The frequency to use for the gateways when sending a downlink message to the wireless device.
+     */
+    DownlinkFrequency: DownlinkFrequency;
+  }
   export type GenAppKey = string;
   export interface GetDestinationRequest {
     /**
@@ -2088,7 +2114,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANJoinEventNotificationConfigurations;
     /**
-     * Enum to denote whether the wireless device id join event topic is enabled or disabled.
+     * Denotes whether the wireless device ID join event topic is enabled or disabled.
      */
     WirelessDeviceIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -2404,13 +2430,13 @@ declare namespace IoTWireless {
   }
   export interface LoRaWANConnectionStatusEventNotificationConfigurations {
     /**
-     * Enum to denote whether the gateway EUI connection status event topic is enabled or disabled.
+     * Denotes whether the gateway EUI connection status event topic is enabled or disabled.
      */
     GatewayEuiEventTopic?: EventNotificationTopicStatus;
   }
   export interface LoRaWANConnectionStatusResourceTypeEventConfiguration {
     /**
-     * Enum to denote whether the wireless gateway connection status event topic is enabled or disabled.
+     * Denotes whether the wireless gateway connection status event topic is enabled or disabled.
      */
     WirelessGatewayEventTopic?: EventNotificationTopicStatus;
   }
@@ -2568,6 +2594,10 @@ declare namespace IoTWireless {
     JoinEuiFilters?: JoinEuiFilters;
     NetIdFilters?: NetIdFilters;
     SubBands?: SubBands;
+    /**
+     * Beaconing object information, which consists of the data rate and frequency parameters.
+     */
+    Beaconing?: Beaconing;
   }
   export interface LoRaWANGatewayCurrentVersion {
     /**
@@ -2684,13 +2714,13 @@ declare namespace IoTWireless {
   }
   export interface LoRaWANJoinEventNotificationConfigurations {
     /**
-     * Enum to denote whether the Dev EUI join event topic is enabled or disabled.
+     * Denotes whether the Dev EUI join event topic is enabled or disabled.
      */
     DevEuiEventTopic?: EventNotificationTopicStatus;
   }
   export interface LoRaWANJoinResourceTypeEventConfiguration {
     /**
-     * Enum to denote whether the wireless device join event topic is enabled or disabled.
+     * Denotes whether the wireless device join event topic is enabled or disabled.
      */
     WirelessDeviceEventTopic?: EventNotificationTopicStatus;
   }
@@ -2721,6 +2751,10 @@ declare namespace IoTWireless {
   }
   export interface LoRaWANSendDataToDevice {
     FPort?: FPort;
+    /**
+     * Choose the gateways that you want to use for the downlink data traffic when the wireless device is running in class B or class C mode.
+     */
+    ParticipatingGateways?: ParticipatingGateways;
   }
   export interface LoRaWANServiceProfile {
     /**
@@ -2798,7 +2832,7 @@ declare namespace IoTWireless {
   export interface MessageDeliveryStatusEventConfiguration {
     Sidewalk?: SidewalkEventNotificationConfigurations;
     /**
-     * Enum to denote whether the wireless device id device registration state event topic is enabled or disabled.
+     * Denotes whether the wireless device ID device registration state event topic is enabled or disabled.
      */
     WirelessDeviceIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -2876,6 +2910,20 @@ declare namespace IoTWireless {
     JoinEui?: JoinEui;
   }
   export type PackageVersion = string;
+  export interface ParticipatingGateways {
+    /**
+     * Indicates whether to send the downlink message in sequential mode or concurrent mode, or to use only the chosen gateways from the previous uplink message transmission.
+     */
+    DownlinkMode: DownlinkMode;
+    /**
+     * The list of gateways that you want to use for sending the downlink data traffic.
+     */
+    GatewayList: GatewayList;
+    /**
+     * The duration of time for which AWS IoT Core for LoRaWAN will wait before transmitting the payload to the next gateway.
+     */
+    TransmissionInterval: TransmissionInterval;
+  }
   export type PartnerAccountArn = string;
   export type PartnerAccountId = string;
   export type PartnerType = "Sidewalk"|string;
@@ -2936,7 +2984,7 @@ declare namespace IoTWireless {
      */
     Sidewalk?: SidewalkEventNotificationConfigurations;
     /**
-     * Enum to denote whether the wireless device id proximity event topic is enabled or disabled.
+     * Denotes whether the wireless device ID proximity event topic is enabled or disabled.
      */
     WirelessDeviceIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -3170,7 +3218,7 @@ declare namespace IoTWireless {
   }
   export interface SidewalkEventNotificationConfigurations {
     /**
-     * Enum to denote whether amazon id event topic is enabled or disabled.
+     * Denotes whether the Amazon ID event topic is enabled or disabled.
      */
     AmazonIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -3196,7 +3244,7 @@ declare namespace IoTWireless {
   export type SidewalkManufacturingSn = string;
   export interface SidewalkResourceTypeEventConfiguration {
     /**
-     * Enum to denote whether the wireless device join event topic is enabled or disabled.
+     * Denotes whether the wireless device join event topic is enabled or disabled.
      */
     WirelessDeviceEventTopic?: EventNotificationTopicStatus;
   }
@@ -3298,6 +3346,7 @@ declare namespace IoTWireless {
     WirelessDeviceFrameInfo?: WirelessDeviceFrameInfo;
     LogLevel?: LogLevel;
   }
+  export type TransmissionInterval = number;
   export type TransmitMode = number;
   export type UlBucketSize = number;
   export type UlRate = number;

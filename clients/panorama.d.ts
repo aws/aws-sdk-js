@@ -723,6 +723,10 @@ declare namespace Panorama {
      */
     Description?: Description;
     /**
+     * A device's aggregated status. Including the device's connection status, provisioning status, and lease status.
+     */
+    DeviceAggregatedStatus?: DeviceAggregatedStatus;
+    /**
      * The device's connection status.
      */
     DeviceConnectionStatus?: DeviceConnectionStatus;
@@ -734,6 +738,10 @@ declare namespace Panorama {
      * The most recent beta software release.
      */
     LatestAlternateSoftware?: LatestAlternateSoftware;
+    /**
+     * A device's latest job. Includes the target image version, and the job status.
+     */
+    LatestDeviceJob?: LatestDeviceJob;
     /**
      * The latest software version available for the device.
      */
@@ -1054,6 +1062,18 @@ declare namespace Panorama {
      */
     CreatedTime?: CreatedTime;
     /**
+     * A device's current software.
+     */
+    CurrentSoftware?: CurrentSoftware;
+    /**
+     * A description for the device.
+     */
+    Description?: Description;
+    /**
+     * A device's aggregated status. Including the device's connection status, provisioning status, and lease status.
+     */
+    DeviceAggregatedStatus?: DeviceAggregatedStatus;
+    /**
      * The device's ID.
      */
     DeviceId?: DeviceId;
@@ -1061,6 +1081,10 @@ declare namespace Panorama {
      * When the device was updated.
      */
     LastUpdatedTime?: LastUpdatedTime;
+    /**
+     * A device's latest job. Includes the target image version, and the update job status.
+     */
+    LatestDeviceJob?: LatestDeviceJob;
     /**
      * The device's lease expiration time.
      */
@@ -1073,7 +1097,16 @@ declare namespace Panorama {
      * The device's provisioning status.
      */
     ProvisioningStatus?: DeviceStatus;
+    /**
+     * The device's tags.
+     */
+    Tags?: TagMap;
+    /**
+     * The device's type.
+     */
+    Type?: DeviceType;
   }
+  export type DeviceAggregatedStatus = "ERROR"|"AWAITING_PROVISIONING"|"PENDING"|"FAILED"|"DELETING"|"ONLINE"|"OFFLINE"|"LEASE_EXPIRED"|"UPDATE_NEEDED"|string;
   export type DeviceArn = string;
   export type DeviceBrand = "AWS_PANORAMA"|"LENOVO"|string;
   export type DeviceConnectionStatus = "ONLINE"|"OFFLINE"|"AWAITING_CREDENTIALS"|"NOT_AVAILABLE"|"ERROR"|string;
@@ -1168,6 +1201,16 @@ declare namespace Panorama {
   export type JobType = "OTA"|string;
   export type LastUpdatedTime = Date;
   export type LatestAlternateSoftware = string;
+  export interface LatestDeviceJob {
+    /**
+     * The target version of the device software.
+     */
+    ImageVersion?: ImageVersion;
+    /**
+     * Status of the latest device job.
+     */
+    Status?: UpdateProgress;
+  }
   export type LatestSoftware = string;
   export type LeaseExpirationTime = Date;
   export interface ListApplicationInstanceDependenciesRequest {
@@ -1272,13 +1315,29 @@ declare namespace Panorama {
   }
   export interface ListDevicesRequest {
     /**
+     * Filter based on a device's status.
+     */
+    DeviceAggregatedStatusFilter?: DeviceAggregatedStatus;
+    /**
      * The maximum number of devices to return in one page of results.
      */
     MaxResults?: MaxSize25;
     /**
+     * Filter based on device's name. Prefixes supported.
+     */
+    NameFilter?: NameFilter;
+    /**
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     NextToken?: NextToken;
+    /**
+     * The target column to be sorted on. Default column sort is CREATED_TIME.
+     */
+    SortBy?: ListDevicesSortBy;
+    /**
+     * The sorting order for the returned list. SortOrder is DESCENDING by default based on CREATED_TIME. Otherwise, SortOrder is ASCENDING.
+     */
+    SortOrder?: SortOrder;
   }
   export interface ListDevicesResponse {
     /**
@@ -1290,6 +1349,7 @@ declare namespace Panorama {
      */
     NextToken?: NextToken;
   }
+  export type ListDevicesSortBy = "DEVICE_ID"|"CREATED_TIME"|"NAME"|"DEVICE_AGGREGATED_STATUS"|string;
   export interface ListNodeFromTemplateJobsRequest {
     /**
      * The maximum number of node from template jobs to return in one page of results.
@@ -1420,6 +1480,7 @@ declare namespace Panorama {
   export type Mask = string;
   export type MaxConnections = number;
   export type MaxSize25 = number;
+  export type NameFilter = string;
   export type NetworkConnectionStatus = "CONNECTED"|"NOT_CONNECTED"|"CONNECTING"|string;
   export interface NetworkPayload {
     /**
@@ -1874,6 +1935,7 @@ declare namespace Panorama {
      */
     Region?: Region;
   }
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StaticIpConnectionInfo {
     /**
      * The connection's default gateway.
