@@ -50,7 +50,10 @@ var allowlist = {
         773,
         774,
         775,
-        780,
+        780
+    ],
+    '/token/sso_token_provider.js': [
+        60
     ]
 };
 
