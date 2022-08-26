@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1203.0',
+	  VERSION: '2.1204.0',
 
 	  /**
 	   * @api private
@@ -147,7 +147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(76);
 	__webpack_require__(77);
 	__webpack_require__(78);
-	__webpack_require__(86);
+	__webpack_require__(87);
 
 	/**
 	 * @readonly
@@ -5217,6 +5217,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      version = this.config.signatureVersion;
 	    } else if (authtype === 'v4' || authtype === 'v4-unsigned-body') {
 	      version = 'v4';
+	    } else if (authtype === 'bearer') {
+	      version = 'bearer';
 	    } else {
 	      version = this.api.signatureVersion;
 	    }
@@ -6158,6 +6160,82 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  /**
+	   * Loads token from the configuration object. This is used internally
+	   * by the SDK to ensure that refreshable {Token} objects are properly
+	   * refreshed and loaded when sending a request. If you want to ensure that
+	   * your token is loaded prior to a request, you can use this method
+	   * directly to provide accurate token data stored in the object.
+	   *
+	   * @note If you configure the SDK with static token, the token data should
+	   *   already be present in {token} attribute. This method is primarily necessary
+	   *   to load token from asynchronous sources, or sources that can refresh
+	   *   token periodically.
+	   * @example Getting your access token
+	   *   AWS.config.getToken(function(err) {
+	   *     if (err) console.log(err.stack); // token not loaded
+	   *     else console.log("Token:", AWS.config.token.token);
+	   *   })
+	   * @callback callback function(err)
+	   *   Called when the {token} have been properly set on the configuration object.
+	   *
+	   *   @param err [Error] if this is set, token was not successfully loaded and
+	   *     this error provides information why.
+	   * @see token
+	   */
+	  getToken: function getToken(callback) {
+	    var self = this;
+
+	    function finish(err) {
+	      callback(err, err ? null : self.token);
+	    }
+
+	    function tokenError(msg, err) {
+	      return new AWS.util.error(err || new Error(), {
+	        code: 'TokenError',
+	        message: msg,
+	        name: 'TokenError'
+	      });
+	    }
+
+	    function getAsyncToken() {
+	      self.token.get(function(err) {
+	        if (err) {
+	          var msg = 'Could not load token from ' +
+	            self.token.constructor.name;
+	          err = tokenError(msg, err);
+	        }
+	        finish(err);
+	      });
+	    }
+
+	    function getStaticToken() {
+	      var err = null;
+	      if (!self.token.token) {
+	        err = tokenError('Missing token');
+	      }
+	      finish(err);
+	    }
+
+	    if (self.token) {
+	      if (typeof self.token.get === 'function') {
+	        getAsyncToken();
+	      } else { // static token
+	        getStaticToken();
+	      }
+	    } else if (self.tokenProvider) {
+	      self.tokenProvider.resolve(function(err, token) {
+	        if (err) {
+	          err = tokenError('Could not load token from any providers', err);
+	        }
+	        self.token = token;
+	        finish(err);
+	      });
+	    } else {
+	      finish(tokenError('No token to load'));
+	    }
+	  },
+
+	  /**
 	   * @!group Loading and Setting Configuration Options
 	   */
 
@@ -6290,7 +6368,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    hostPrefixEnabled: true,
 	    stsRegionalEndpoints: 'legacy',
 	    useFipsEndpoint: false,
-	    useDualstackEndpoint: false
+	    useDualstackEndpoint: false,
+	    token: null
 	  },
 
 	  /**
@@ -7288,37 +7367,56 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var authtype = operation ? operation.authtype : '';
 	      if (!service.api.signatureVersion && !authtype && !service.config.signatureVersion) return done(); // none
 
-	      service.config.getCredentials(function (err, credentials) {
-	        if (err) {
-	          req.response.error = err;
-	          return done();
-	        }
+	      if (authtype === 'bearer' || service.config.signatureVersion === 'bearer') {
+	        service.config.getToken(function (err, token) {
+	          if (err) {
+	            req.response.error = err;
+	            return done();
+	          }
 
-	        try {
-	          var date = service.getSkewCorrectedDate();
-	          var SignerClass = service.getSignerClass(req);
-	          var signer = new SignerClass(req.httpRequest,
-	            service.getSigningName(req),
-	            {
-	              signatureCache: service.config.signatureCache,
-	              operation: operation,
-	              signatureVersion: service.api.signatureVersion
-	            });
-	          signer.setServiceClientId(service._clientId);
+	          try {
+	            var SignerClass = service.getSignerClass(req);
+	            var signer = new SignerClass(req.httpRequest);
+	            signer.addAuthorization(token);
+	          } catch (e) {
+	            req.response.error = e;
+	          }
+	          done();
+	        });
+	      } else {
+	        service.config.getCredentials(function (err, credentials) {
+	          if (err) {
+	            req.response.error = err;
+	            return done();
+	          }
 
-	          // clear old authorization headers
-	          delete req.httpRequest.headers['Authorization'];
-	          delete req.httpRequest.headers['Date'];
-	          delete req.httpRequest.headers['X-Amz-Date'];
+	          try {
+	            var date = service.getSkewCorrectedDate();
+	            var SignerClass = service.getSignerClass(req);
+	            var signer = new SignerClass(req.httpRequest,
+	              service.getSigningName(req),
+	              {
+	                signatureCache: service.config.signatureCache,
+	                operation: operation,
+	                signatureVersion: service.api.signatureVersion
+	              });
+	            signer.setServiceClientId(service._clientId);
 
-	          // add new authorization
-	          signer.addAuthorization(credentials, date);
-	          req.signedAt = date;
-	        } catch (e) {
-	          req.response.error = e;
-	        }
-	        done();
-	      });
+	            // clear old authorization headers
+	            delete req.httpRequest.headers['Authorization'];
+	            delete req.httpRequest.headers['Date'];
+	            delete req.httpRequest.headers['X-Amz-Date'];
+
+	            // add new authorization
+	            signer.addAuthorization(credentials, date);
+	            req.signedAt = date;
+	          } catch (e) {
+	            req.response.error = e;
+	          }
+	          done();
+	        });
+
+	      }
 	    });
 
 	    add('VALIDATE_RESPONSE', 'validateResponse', function VALIDATE_RESPONSE(resp) {
@@ -13185,6 +13283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    case 'v4': return AWS.Signers.V4;
 	    case 's3': return AWS.Signers.S3;
 	    case 'v3https': return AWS.Signers.V3Https;
+	    case 'bearer': return AWS.Signers.Bearer;
 	  }
 	  throw new Error('Unknown signing version ' + version);
 	};
@@ -13195,6 +13294,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(82);
 	__webpack_require__(84);
 	__webpack_require__(85);
+	__webpack_require__(86);
 
 
 /***/ }),
@@ -14000,6 +14100,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var AWS = __webpack_require__(1);
+
+	/**
+	 * @api private
+	 */
+	AWS.Signers.Bearer = AWS.util.inherit(AWS.Signers.RequestSigner, {
+	  constructor: function Bearer(request) {
+	    AWS.Signers.RequestSigner.call(this, request);
+	  },
+
+	  addAuthorization: function addAuthorization(token) {
+	    this.request.httpRequest.headers['Authorization'] = 'Bearer ' + token.token;
+	  }
+	});
+
+
+/***/ }),
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);

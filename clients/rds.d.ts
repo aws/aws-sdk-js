@@ -1102,11 +1102,11 @@ declare class RDS extends Service {
    */
   stopDBInstanceAutomatedBackupsReplication(callback?: (err: AWSError, data: RDS.Types.StopDBInstanceAutomatedBackupsReplicationResult) => void): Request<RDS.Types.StopDBInstanceAutomatedBackupsReplicationResult, AWSError>;
   /**
-   * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the AWS Region that hosts the current standby database.
+   * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the Region that hosts the current standby database.
    */
   switchoverReadReplica(params: RDS.Types.SwitchoverReadReplicaMessage, callback?: (err: AWSError, data: RDS.Types.SwitchoverReadReplicaResult) => void): Request<RDS.Types.SwitchoverReadReplicaResult, AWSError>;
   /**
-   * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the AWS Region that hosts the current standby database.
+   * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the Region that hosts the current standby database.
    */
   switchoverReadReplica(callback?: (err: AWSError, data: RDS.Types.SwitchoverReadReplicaResult) => void): Request<RDS.Types.SwitchoverReadReplicaResult, AWSError>;
   /**
@@ -1620,7 +1620,7 @@ declare namespace RDS {
      */
     DatabaseInstallationFilesS3Prefix?: String255;
     /**
-     * The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric KMS key is required for RDS Custom, but optional for Amazon RDS. If you have an existing symmetric KMS key in your account, you can use it with RDS Custom. No further action is necessary. If you don't already have a symmetric KMS key in your account, follow the instructions in  Creating symmetric KMS keys in the Amazon Web Services Key Management Service Developer Guide. You can choose the same symmetric key when you create a CEV and a DB instance, or choose different keys.
+     * The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric encryption KMS key is required for RDS Custom, but optional for Amazon RDS. If you have an existing symmetric encryption KMS key in your account, you can use it with RDS Custom. No further action is necessary. If you don't already have a symmetric encryption KMS key in your account, follow the instructions in  Creating a symmetric encryption KMS key in the Amazon Web Services Key Management Service Developer Guide. You can choose the same symmetric encryption key when you create a CEV and a DB instance, or choose different keys.
      */
     KMSKeyId: KmsKeyIdOrArn;
     /**
@@ -4083,7 +4083,7 @@ declare namespace RDS {
      */
     OriginalSnapshotCreateTime?: TStamp;
     /**
-     * The timestamp of the most recent transaction applied to the database that you're backing up. Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed. If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than SnapshotDatabaseTime, then the replica lag is two hours. *** REVIEWERS 7/27: Switchover
+     * The timestamp of the most recent transaction applied to the database that you're backing up. Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed. If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than SnapshotDatabaseTime, then the replica lag is two hours.
      */
     SnapshotDatabaseTime?: TStamp;
     /**
@@ -6018,7 +6018,7 @@ declare namespace RDS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see DB Instance Class in the Amazon RDS User Guide. For RDS Custom, see DB instance class support for RDS Custom for Oracle and DB instance class support for RDS Custom for SQL Server. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is enabled for this request.  Default: Uses existing setting
+     * The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see DB instance classes in the Amazon RDS User Guide or Aurora DB instance classes in the Amazon Aurora User Guide. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is enabled for this request. This setting doesn't apply to RDS Custom for Oracle. Default: Uses existing setting
      */
     DBInstanceClass?: String;
     /**

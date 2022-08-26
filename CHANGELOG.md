@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1203.0-->
+<!--LATEST=2.1204.0-->
 <!--ENTRYINSERT-->
+
+## 2.1204.0
+* feature: MediaPackage: This release adds Ads AdTriggers and AdsOnDeliveryRestrictions to describe calls for CMAF endpoints on MediaPackage.
+* feature: Token: Read sso data from sso-session section in SSOTokenProvider
+* feature: Token: Set token from AWS.Signers.Bearer when specified by authtype/signatureVersion
+* feature: token: Add TokenProviderChain with Token/Static/SSO
 
 ## 2.1203.0
 * feature: GameLift: This release adds support for eight EC2 local zones as fleet locations; Atlanta, Chicago, Dallas, Denver, Houston, Kansas City (us-east-1-mci-1a), Los Angeles, and Phoenix. It also adds support for C5d, C6a, C6i, and R5d EC2 instance families.

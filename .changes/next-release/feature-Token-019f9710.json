@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Token",
-  "description": "Read sso data from sso-session section in SSOTokenProvider"
-}

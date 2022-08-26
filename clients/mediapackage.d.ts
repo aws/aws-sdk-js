@@ -846,6 +846,8 @@ it will be passed through to HLS output.
      * The URL of the packaged OriginEndpoint for consumption.
      */
     Url?: __string;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
   }
   export interface HlsManifestCreateOrUpdateParameters {
     /**
