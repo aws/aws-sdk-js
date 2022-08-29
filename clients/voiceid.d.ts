@@ -231,7 +231,7 @@ declare namespace VoiceID {
      */
     ClientToken?: ClientTokenString;
     /**
-     * A brief description of this domain.
+     * A brief description of the domain.
      */
     Description?: Description;
     /**
@@ -429,7 +429,7 @@ declare namespace VoiceID {
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
-     * Details about the most recent server-side encryption configuration update. When the server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is complete, the domain’s data can only be accessed using the new KMS key.
+     * Details about the most recent server-side encryption configuration update. When the server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is complete, the domain's data can only be accessed using the new KMS key.
      */
     ServerSideEncryptionUpdateDetails?: ServerSideEncryptionUpdateDetails;
     /**
@@ -513,7 +513,7 @@ declare namespace VoiceID {
     RiskThreshold: Score;
   }
   export type FraudDetectionDecision = "HIGH_RISK"|"LOW_RISK"|"NOT_ENOUGH_SPEECH"|string;
-  export type FraudDetectionReason = "KNOWN_FRAUDSTER"|string;
+  export type FraudDetectionReason = "KNOWN_FRAUDSTER"|"VOICE_SPOOFING"|string;
   export type FraudDetectionReasons = FraudDetectionReason[];
   export interface FraudDetectionResult {
     /**
@@ -537,11 +537,11 @@ declare namespace VoiceID {
      */
     FraudDetectionResultId?: UniqueIdLarge;
     /**
-     * The reason speaker was flagged by the fraud detection system. This is only be populated if fraud detection Decision is HIGH_RISK, and only has one possible value: KNOWN_FRAUDSTER.
+     * The reason speaker was flagged by the fraud detection system. This is only be populated if fraud detection Decision is HIGH_RISK, and the following possible values: KNOWN_FRAUDSTER and VOICE_SPOOFING.
      */
     Reasons?: FraudDetectionReasons;
     /**
-     * Details about each risk analyzed for this speaker.
+     * Details about each risk analyzed for this speaker. Currently, this contains KnownFraudsterRisk and VoiceSpoofingRisk details.
      */
     RiskDetails?: FraudRiskDetails;
   }
@@ -550,6 +550,10 @@ declare namespace VoiceID {
      * The details resulting from 'Known Fraudster Risk' analysis of the speaker.
      */
     KnownFraudsterRisk: KnownFraudsterRisk;
+    /**
+     * The details resulting from 'Voice Spoofing Risk' analysis of the speaker.
+     */
+    VoiceSpoofingRisk: VoiceSpoofingRisk;
   }
   export interface Fraudster {
     /**
@@ -608,7 +612,7 @@ declare namespace VoiceID {
      */
     JobStatus?: FraudsterRegistrationJobStatus;
     /**
-     * The output data config containing the S3 location where you want Voice ID to write your job output file; you must also include a KMS key iD in order to encrypt the file.
+     * The output data config containing the S3 location where you want Voice ID to write your job output file; you must also include a KMS key ID in order to encrypt the file.
      */
     OutputDataConfig?: OutputDataConfig;
     /**
@@ -640,7 +644,7 @@ declare namespace VoiceID {
      */
     JobId?: JobId;
     /**
-     * The client-provied name for the fraudster registration job.
+     * The client-provided name for the fraudster registration job.
      */
     JobName?: JobName;
     /**
@@ -683,7 +687,7 @@ declare namespace VoiceID {
   }
   export interface ListDomainsRequest {
     /**
-     * The maximum number of results that are returned per call. You can use NextToken to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. 
+     * The maximum number of domains to list per API call.
      */
     MaxResults?: MaxResultsForListDomainFe;
     /**
@@ -814,7 +818,7 @@ declare namespace VoiceID {
   }
   export interface OutputDataConfig {
     /**
-     * the identifier of the KMS key you want Voice ID to use to encrypt the output file of the fraudster registration job.
+     * The identifier of the KMS key you want Voice ID to use to encrypt the output file of a speaker enrollment job/fraudster registration job. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -836,7 +840,7 @@ declare namespace VoiceID {
   export type Score = number;
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The identifier of the KMS key you want Voice ID to use to encrypt your data.
+     * The identifier of the KMS key to use to encrypt data stored by Voice ID. Voice ID doesn't support asymmetric customer managed keys. 
      */
     KmsKeyId: KmsKeyId;
   }
@@ -1033,7 +1037,7 @@ declare namespace VoiceID {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The registration config containing details such as the action to take when a duplicate fraudster is detected, and the similarity threshold to use for detecting a duplicate fraudster.
+     * The registration config containing details such as the action to take when a duplicate fraudster is detected, and the similarity threshold to use for detecting a duplicate fraudster. 
      */
     RegistrationConfig?: RegistrationConfig;
   }
@@ -1049,7 +1053,7 @@ declare namespace VoiceID {
      */
     ClientToken?: ClientTokenString;
     /**
-     * The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access customer's buckets to read the input manifest file and write the job output file. Refer to Batch enrollment using audio data from prior calls documentation for the permissions needed in this role.
+     * The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access customer's buckets to read the input manifest file and write the job output file. Refer to Batch enrollment using audio data from prior calls for the permissions needed in this role.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1083,11 +1087,11 @@ declare namespace VoiceID {
   export type String = string;
   export interface Tag {
     /**
-     * The first part of a key:value pair that forms a tag associated with a given resource. For example, in the tag ‘Department’:’Sales’, the key is 'Department'. 
+     * The first part of a key:value pair that forms a tag associated with a given resource. For example, in the tag 'Department':'Sales', the key is 'Department'. 
      */
     Key: TagKey;
     /**
-     * The second part of a key:value pair that forms a tag associated with a given resource. For example, in the tag ‘Department’:’Sales’, the value is 'Sales'. 
+     * The second part of a key:value pair that forms a tag associated with a given resource. For example, in the tag 'Department':'Sales', the value is 'Sales'. 
      */
     Value: TagValue;
   }
@@ -1123,7 +1127,7 @@ declare namespace VoiceID {
   }
   export interface UpdateDomainRequest {
     /**
-     * A brief description about this domain.
+     * A brief description of the domain.
      */
     Description?: Description;
     /**
@@ -1135,7 +1139,7 @@ declare namespace VoiceID {
      */
     Name: DomainName;
     /**
-     * The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data. Note that all the existing data in the domain are still encrypted using the existing key, only the data added to domain after updating the key is encrypted using the new key. 
+     * The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data. Changing the domain's associated KMS key immediately triggers an asynchronous process to remove dependency on the old KMS key, such that the domain's data can only be accessed using the new KMS key. The domain's ServerSideEncryptionUpdateDetails contains the details for this process.
      */
     ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
   }
@@ -1144,6 +1148,12 @@ declare namespace VoiceID {
      * Details about the updated domain
      */
     Domain?: Domain;
+  }
+  export interface VoiceSpoofingRisk {
+    /**
+     * The score indicating the likelihood of speaker’s voice being spoofed.
+     */
+    RiskScore: Score;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
