@@ -29,6 +29,14 @@ declare class Macie2 extends Service {
    */
   batchGetCustomDataIdentifiers(callback?: (err: AWSError, data: Macie2.Types.BatchGetCustomDataIdentifiersResponse) => void): Request<Macie2.Types.BatchGetCustomDataIdentifiersResponse, AWSError>;
   /**
+   * Creates and defines the settings for an allow list.
+   */
+  createAllowList(params: Macie2.Types.CreateAllowListRequest, callback?: (err: AWSError, data: Macie2.Types.CreateAllowListResponse) => void): Request<Macie2.Types.CreateAllowListResponse, AWSError>;
+  /**
+   * Creates and defines the settings for an allow list.
+   */
+  createAllowList(callback?: (err: AWSError, data: Macie2.Types.CreateAllowListResponse) => void): Request<Macie2.Types.CreateAllowListResponse, AWSError>;
+  /**
    * Creates and defines the settings for a classification job.
    */
   createClassificationJob(params: Macie2.Types.CreateClassificationJobRequest, callback?: (err: AWSError, data: Macie2.Types.CreateClassificationJobResponse) => void): Request<Macie2.Types.CreateClassificationJobResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class Macie2 extends Service {
    * Declines Amazon Macie membership invitations that were received from specific accounts.
    */
   declineInvitations(callback?: (err: AWSError, data: Macie2.Types.DeclineInvitationsResponse) => void): Request<Macie2.Types.DeclineInvitationsResponse, AWSError>;
+  /**
+   * Deletes an allow list.
+   */
+  deleteAllowList(params: Macie2.Types.DeleteAllowListRequest, callback?: (err: AWSError, data: Macie2.Types.DeleteAllowListResponse) => void): Request<Macie2.Types.DeleteAllowListResponse, AWSError>;
+  /**
+   * Deletes an allow list.
+   */
+  deleteAllowList(callback?: (err: AWSError, data: Macie2.Types.DeleteAllowListResponse) => void): Request<Macie2.Types.DeleteAllowListResponse, AWSError>;
   /**
    * Soft deletes a custom data identifier.
    */
@@ -205,6 +221,14 @@ declare class Macie2 extends Service {
    */
   getAdministratorAccount(callback?: (err: AWSError, data: Macie2.Types.GetAdministratorAccountResponse) => void): Request<Macie2.Types.GetAdministratorAccountResponse, AWSError>;
   /**
+   * Retrieves the settings and status of an allow list.
+   */
+  getAllowList(params: Macie2.Types.GetAllowListRequest, callback?: (err: AWSError, data: Macie2.Types.GetAllowListResponse) => void): Request<Macie2.Types.GetAllowListResponse, AWSError>;
+  /**
+   * Retrieves the settings and status of an allow list.
+   */
+  getAllowList(callback?: (err: AWSError, data: Macie2.Types.GetAllowListResponse) => void): Request<Macie2.Types.GetAllowListResponse, AWSError>;
+  /**
    * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
    */
   getBucketStatistics(params: Macie2.Types.GetBucketStatisticsRequest, callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
@@ -293,27 +317,27 @@ declare class Macie2 extends Service {
    */
   getMember(callback?: (err: AWSError, data: Macie2.Types.GetMemberResponse) => void): Request<Macie2.Types.GetMemberResponse, AWSError>;
   /**
-   * Retrieves the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   * Retrieves the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
   getRevealConfiguration(params: Macie2.Types.GetRevealConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetRevealConfigurationResponse) => void): Request<Macie2.Types.GetRevealConfigurationResponse, AWSError>;
   /**
-   * Retrieves the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   * Retrieves the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
   getRevealConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetRevealConfigurationResponse) => void): Request<Macie2.Types.GetRevealConfigurationResponse, AWSError>;
   /**
-   * Retrieves (reveals) occurrences of sensitive data reported by a finding.
+   * Retrieves occurrences of sensitive data reported by a finding.
    */
   getSensitiveDataOccurrences(params: Macie2.Types.GetSensitiveDataOccurrencesRequest, callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesResponse, AWSError>;
   /**
-   * Retrieves (reveals) occurrences of sensitive data reported by a finding.
+   * Retrieves occurrences of sensitive data reported by a finding.
    */
   getSensitiveDataOccurrences(callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesResponse, AWSError>;
   /**
-   * Checks whether occurrences of sensitive data can be retrieved (revealed) for a finding.
+   * Checks whether occurrences of sensitive data can be retrieved for a finding.
    */
   getSensitiveDataOccurrencesAvailability(params: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityRequest, callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse, AWSError>;
   /**
-   * Checks whether occurrences of sensitive data can be retrieved (revealed) for a finding.
+   * Checks whether occurrences of sensitive data can be retrieved for a finding.
    */
   getSensitiveDataOccurrencesAvailability(callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse, AWSError>;
   /**
@@ -332,6 +356,14 @@ declare class Macie2 extends Service {
    * Retrieves (queries) aggregated usage data for an account.
    */
   getUsageTotals(callback?: (err: AWSError, data: Macie2.Types.GetUsageTotalsResponse) => void): Request<Macie2.Types.GetUsageTotalsResponse, AWSError>;
+  /**
+   * Retrieves a subset of information about all the allow lists for an account.
+   */
+  listAllowLists(params: Macie2.Types.ListAllowListsRequest, callback?: (err: AWSError, data: Macie2.Types.ListAllowListsResponse) => void): Request<Macie2.Types.ListAllowListsResponse, AWSError>;
+  /**
+   * Retrieves a subset of information about all the allow lists for an account.
+   */
+  listAllowLists(callback?: (err: AWSError, data: Macie2.Types.ListAllowListsResponse) => void): Request<Macie2.Types.ListAllowListsResponse, AWSError>;
   /**
    * Retrieves a subset of information about one or more classification jobs.
    */
@@ -397,11 +429,11 @@ declare class Macie2 extends Service {
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
-   * Retrieves the tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
+   * Retrieves the tags (keys and values) that are associated with an Amazon Macie resource.
    */
   listTagsForResource(params: Macie2.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Macie2.Types.ListTagsForResourceResponse) => void): Request<Macie2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves the tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
+   * Retrieves the tags (keys and values) that are associated with an Amazon Macie resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Macie2.Types.ListTagsForResourceResponse) => void): Request<Macie2.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -429,11 +461,11 @@ declare class Macie2 extends Service {
    */
   searchResources(callback?: (err: AWSError, data: Macie2.Types.SearchResourcesResponse) => void): Request<Macie2.Types.SearchResourcesResponse, AWSError>;
   /**
-   * Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
+   * Adds or updates one or more tags (keys and values) that are associated with an Amazon Macie resource.
    */
   tagResource(params: Macie2.Types.TagResourceRequest, callback?: (err: AWSError, data: Macie2.Types.TagResourceResponse) => void): Request<Macie2.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.
+   * Adds or updates one or more tags (keys and values) that are associated with an Amazon Macie resource.
    */
   tagResource(callback?: (err: AWSError, data: Macie2.Types.TagResourceResponse) => void): Request<Macie2.Types.TagResourceResponse, AWSError>;
   /**
@@ -445,13 +477,21 @@ declare class Macie2 extends Service {
    */
   testCustomDataIdentifier(callback?: (err: AWSError, data: Macie2.Types.TestCustomDataIdentifierResponse) => void): Request<Macie2.Types.TestCustomDataIdentifierResponse, AWSError>;
   /**
-   * Removes one or more tags (keys and values) from a classification job, custom data identifier, findings filter, or member account.
+   * Removes one or more tags (keys and values) from an Amazon Macie resource.
    */
   untagResource(params: Macie2.Types.UntagResourceRequest, callback?: (err: AWSError, data: Macie2.Types.UntagResourceResponse) => void): Request<Macie2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags (keys and values) from a classification job, custom data identifier, findings filter, or member account.
+   * Removes one or more tags (keys and values) from an Amazon Macie resource.
    */
   untagResource(callback?: (err: AWSError, data: Macie2.Types.UntagResourceResponse) => void): Request<Macie2.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the settings for an allow list.
+   */
+  updateAllowList(params: Macie2.Types.UpdateAllowListRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateAllowListResponse) => void): Request<Macie2.Types.UpdateAllowListResponse, AWSError>;
+  /**
+   * Updates the settings for an allow list.
+   */
+  updateAllowList(callback?: (err: AWSError, data: Macie2.Types.UpdateAllowListResponse) => void): Request<Macie2.Types.UpdateAllowListResponse, AWSError>;
   /**
    * Changes the status of a classification job.
    */
@@ -493,11 +533,11 @@ declare class Macie2 extends Service {
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   * Updates the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
   updateRevealConfiguration(params: Macie2.Types.UpdateRevealConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateRevealConfigurationResponse) => void): Request<Macie2.Types.UpdateRevealConfigurationResponse, AWSError>;
   /**
-   * Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.
+   * Updates the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
   updateRevealConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateRevealConfigurationResponse) => void): Request<Macie2.Types.UpdateRevealConfigurationResponse, AWSError>;
   /**
@@ -563,6 +603,53 @@ declare namespace Macie2 {
     status?: AdminStatus;
   }
   export type AdminStatus = "ENABLED"|"DISABLING_IN_PROGRESS"|string;
+  export interface AllowListCriteria {
+    /**
+     * The regular expression (regex) that defines the text pattern to ignore. The expression can contain as many as 512 characters.
+     */
+    regex?: __stringMin1Max512PatternSS;
+    /**
+     * The location and name of the S3 object that lists specific text to ignore.
+     */
+    s3WordsList?: S3WordsList;
+  }
+  export interface AllowListStatus {
+    /**
+     * The current status of the allow list. If the list's criteria specify a regular expression (regex), this value is typically OK. Amazon Macie can compile the expression. If the list's criteria specify an S3 object, possible values are: OK - Macie can retrieve and parse the contents of the object. S3_OBJECT_ACCESS_DENIED - Macie isn't allowed to access the object or the object is encrypted with a customer managed KMS key that Macie isn't allowed to use. Check the bucket policy and other permissions settings for the bucket and the object. If the object is encrypted, also ensure that it's encrypted with a key that Macie is allowed to use. S3_OBJECT_EMPTY - Macie can retrieve the object but the object doesn't contain any content. Ensure that the object contains the correct entries. Also ensure that the list's criteria specify the correct bucket and object names. S3_OBJECT_NOT_FOUND - The object doesn't exist in Amazon S3. Ensure that the list's criteria specify the correct bucket and object names. S3_OBJECT_OVERSIZE - Macie can retrieve the object. However, the object contains too many entries or its storage size exceeds the quota for an allow list. Try breaking the list into multiple files and ensure that each file doesn't exceed any quotas. Then configure list settings in Macie for each file. S3_THROTTLED - Amazon S3 throttled the request to retrieve the object. Wait a few minutes and then try again. S3_USER_ACCESS_DENIED - Amazon S3 denied the request to retrieve the object. If the specified object exists, you're not allowed to access it or it's encrypted with an KMS key that you're not allowed to use. Work with your Amazon Web Services administrator to ensure that the list's criteria specify the correct bucket and object names, and you have read access to the bucket and the object. If the object is encrypted, also ensure that it's encrypted with a key that you're allowed to use. UNKNOWN_ERROR - A transient or internal error occurred when Macie attempted to retrieve or parse the object. Wait a few minutes and then try again. A list can also have this status if it's encrypted with a key that Amazon S3 and Macie can't access or use.
+     */
+    code: AllowListStatusCode;
+    /**
+     * A brief description of the status of the allow list. Amazon Macie uses this value to provide additional information about an error that occurred when Macie tried to access and use the list's criteria.
+     */
+    description?: __stringMin1Max1024PatternSS;
+  }
+  export type AllowListStatusCode = "OK"|"S3_OBJECT_NOT_FOUND"|"S3_USER_ACCESS_DENIED"|"S3_OBJECT_ACCESS_DENIED"|"S3_THROTTLED"|"S3_OBJECT_OVERSIZE"|"S3_OBJECT_EMPTY"|"UNKNOWN_ERROR"|string;
+  export interface AllowListSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the allow list.
+     */
+    arn?: __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when the allow list was created in Amazon Macie.
+     */
+    createdAt?: __timestampIso8601;
+    /**
+     * The custom description of the allow list.
+     */
+    description?: __stringMin1Max512PatternSS;
+    /**
+     * The unique identifier for the allow list.
+     */
+    id?: __stringMin22Max22PatternAZ0922;
+    /**
+     * The custom name of the allow list.
+     */
+    name?: __stringMin1Max128Pattern;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when the allow list's settings were most recently changed in Amazon Macie.
+     */
+    updatedAt?: __timestampIso8601;
+  }
   export type AllowsUnencryptedObjectUploads = "TRUE"|"FALSE"|"UNKNOWN"|string;
   export interface ApiCallDetails {
     /**
@@ -1026,7 +1113,43 @@ declare namespace Macie2 {
      */
     reason?: __string;
   }
+  export interface CreateAllowListRequest {
+    /**
+     * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
+     */
+    clientToken: __string;
+    /**
+     * The criteria that specify the text or text pattern to ignore. The criteria can be the location and name of an S3 object that lists specific text to ignore (s3WordsList), or a regular expression (regex) that defines a text pattern to ignore.
+     */
+    criteria: AllowListCriteria;
+    /**
+     * A custom description of the allow list. The description can contain as many as 512 characters.
+     */
+    description?: __stringMin1Max512PatternSS;
+    /**
+     * A custom name for the allow list. The name can contain as many as 128 characters.
+     */
+    name: __stringMin1Max128Pattern;
+    /**
+     * A map of key-value pairs that specifies the tags to associate with the allow list. An allow list can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateAllowListResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the allow list.
+     */
+    arn?: __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922;
+    /**
+     * The unique identifier for the allow list.
+     */
+    id?: __stringMin22Max22PatternAZ0922;
+  }
   export interface CreateClassificationJobRequest {
+    /**
+     * An array of unique identifiers, one for each allow list for the job to use when it analyzes data.
+     */
+    allowListIds?: __listOf__string;
     /**
      * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
      */
@@ -1040,7 +1163,7 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.If you configure the job to run only once, don't specify a value for this property.
+     * For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false. If you configure the job to run only once, don't specify a value for this property.
      */
     initialRun?: __boolean;
     /**
@@ -1048,7 +1171,7 @@ declare namespace Macie2 {
      */
     jobType: JobType;
     /**
-     * An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.
+     * An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector). To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.
      */
     managedDataIdentifierIds?: __listOf__string;
     /**
@@ -1344,9 +1467,21 @@ declare namespace Macie2 {
     type?: __string;
   }
   export type DefaultDetections = DefaultDetection[];
+  export interface DeleteAllowListRequest {
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+    /**
+     * Specifies whether to force deletion of the allow list, even if active classification jobs are configured to use the list. When you try to delete an allow list, Amazon Macie checks for classification jobs that use the list and have a status other than COMPLETE or CANCELLED. By default, Macie rejects your request if any jobs meet these criteria. To skip these checks and delete the list, set this value to true. To delete the list only if no active jobs are configured to use it, set this value to false.
+     */
+    ignoreJobChecks?: __string;
+  }
+  export interface DeleteAllowListResponse {
+  }
   export interface DeleteCustomDataIdentifierRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -1354,7 +1489,7 @@ declare namespace Macie2 {
   }
   export interface DeleteFindingsFilterRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -1374,7 +1509,7 @@ declare namespace Macie2 {
   }
   export interface DeleteMemberRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -1416,6 +1551,10 @@ declare namespace Macie2 {
   }
   export interface DescribeClassificationJobResponse {
     /**
+     * An array of unique identifiers, one for each allow list that the job uses when it analyzes data.
+     */
+    allowListIds?: __listOf__string;
+    /**
      * The token that was provided to ensure the idempotency of the request to create the job.
      */
     clientToken?: __string;
@@ -1424,7 +1563,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.
+     * An array of unique identifiers, one for each custom data identifier that the job uses when it analyzes data. This value is null if the job uses only managed data identifiers to analyze data.
      */
     customDataIdentifierIds?: __listOf__string;
     /**
@@ -1536,7 +1675,7 @@ declare namespace Macie2 {
   }
   export interface DisassociateMemberRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -1555,7 +1694,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -1739,7 +1878,7 @@ declare namespace Macie2 {
      */
     name?: __string;
     /**
-     * A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the filter.
      */
     tags?: TagMap;
   }
@@ -1750,6 +1889,50 @@ declare namespace Macie2 {
      * The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.
      */
     administrator?: Invitation;
+  }
+  export interface GetAllowListRequest {
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+  }
+  export interface GetAllowListResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the allow list.
+     */
+    arn?: __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when the allow list was created in Amazon Macie.
+     */
+    createdAt?: __timestampIso8601;
+    /**
+     * The criteria that specify the text or text pattern to ignore. The criteria can be the location and name of an S3 object that lists specific text to ignore (s3WordsList), or a regular expression (regex) that defines a text pattern to ignore.
+     */
+    criteria?: AllowListCriteria;
+    /**
+     * The custom description of the allow list.
+     */
+    description?: __stringMin1Max512PatternSS;
+    /**
+     * The unique identifier for the allow list.
+     */
+    id?: __stringMin22Max22PatternAZ0922;
+    /**
+     * The custom name of the allow list.
+     */
+    name?: __stringMin1Max128Pattern;
+    /**
+     * The current status of the allow list, which indicates whether Amazon Macie can access and use the list's criteria.
+     */
+    status?: AllowListStatus;
+    /**
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the allow list.
+     */
+    tags?: TagMap;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when the allow list's settings were most recently changed in Amazon Macie.
+     */
+    updatedAt?: __timestampIso8601;
   }
   export interface GetBucketStatisticsRequest {
     /**
@@ -1821,7 +2004,7 @@ declare namespace Macie2 {
   }
   export interface GetCustomDataIdentifierRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -1901,7 +2084,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsFilterRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -1935,7 +2118,7 @@ declare namespace Macie2 {
      */
     position?: __integer;
     /**
-     * A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the filter.
      */
     tags?: TagMap;
   }
@@ -1979,7 +2162,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -2005,7 +2188,7 @@ declare namespace Macie2 {
   }
   export interface GetMemberRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
   }
@@ -2039,7 +2222,7 @@ declare namespace Macie2 {
      */
     relationshipStatus?: RelationshipStatus;
     /**
-     * A map of key-value pairs that identifies the tags (keys and values) that are associated with the member account in Amazon Macie.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the account in Amazon Macie.
      */
     tags?: TagMap;
     /**
@@ -2067,7 +2250,7 @@ declare namespace Macie2 {
      */
     code?: AvailabilityCode;
     /**
-     * Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are: INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format. OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data. OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Amazon Macie created the finding. UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding. UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data. This value is null if sensitive data can be retrieved for the finding.
+     * Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are: INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format. OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data. OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Macie created the finding. UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding. UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data. This value is null if sensitive data can be retrieved for the finding.
      */
     reasons?: __listOfUnavailabilityReasonCode;
   }
@@ -2365,6 +2548,26 @@ declare namespace Macie2 {
     code?: LastRunErrorStatusCode;
   }
   export type LastRunErrorStatusCode = "NONE"|"ERROR"|string;
+  export interface ListAllowListsRequest {
+    /**
+     * The maximum number of items to include in each page of a paginated response.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+  }
+  export interface ListAllowListsResponse {
+    /**
+     * An array of objects, one for each allow list.
+     */
+    allowLists?: __listOfAllowListSummary;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
   export interface ListClassificationJobsRequest {
     /**
      * The criteria to use to filter the results.
@@ -2579,13 +2782,13 @@ declare namespace Macie2 {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the classification job, custom data identifier, findings filter, or member account.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     resourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * A map of key-value pairs that identifies the tags (keys and values) that are associated with the resource.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the resource.
      */
     tags?: TagMap;
   }
@@ -2692,7 +2895,7 @@ declare namespace Macie2 {
      */
     relationshipStatus?: RelationshipStatus;
     /**
-     * A map of key-value pairs that identifies the tags (keys and values) that are associated with the account in Amazon Macie.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the account in Amazon Macie.
      */
     tags?: TagMap;
     /**
@@ -2744,7 +2947,7 @@ declare namespace Macie2 {
   }
   export interface Occurrences {
     /**
-     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files.Each Cell object specifies a cell or field that contains the sensitive data.
+     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files. Each Cell object specifies a cell or field that contains the sensitive data.
      */
     cells?: Cells;
     /**
@@ -2756,7 +2959,7 @@ declare namespace Macie2 {
      */
     offsetRanges?: Ranges;
     /**
-     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files.Each Page object specifies a page that contains the sensitive data.
+     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files. Each Page object specifies a page that contains the sensitive data.
      */
     pages?: Pages;
     /**
@@ -3019,6 +3222,16 @@ declare namespace Macie2 {
      * The identifier for the affected version of the object.
      */
     versionId?: __string;
+  }
+  export interface S3WordsList {
+    /**
+     * The full name of the S3 bucket that contains the object.
+     */
+    bucketName: __stringMin3Max255PatternAZaZ093255;
+    /**
+     * The full name (key) of the object.
+     */
+    objectKey: __stringMin1Max1024PatternSS;
   }
   export type ScopeFilterKey = "OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"OBJECT_KEY"|string;
   export interface Scoping {
@@ -3321,7 +3534,7 @@ declare namespace Macie2 {
   export type TagMap = {[key: string]: __string};
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the classification job, custom data identifier, findings filter, or member account.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     resourceArn: __string;
     /**
@@ -3408,15 +3621,43 @@ declare namespace Macie2 {
   }
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the classification job, custom data identifier, findings filter, or member account.
+     * The Amazon Resource Name (ARN) of the resource.
      */
     resourceArn: __string;
     /**
-     * One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, and separate them with an ampersand (&amp;).
+     * One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, separated by an ampersand (&amp;).
      */
     tagKeys: __listOf__string;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAllowListRequest {
+    /**
+     * The criteria that specify the text or text pattern to ignore. The criteria can be the location and name of an S3 object that lists specific text to ignore (s3WordsList), or a regular expression that defines a text pattern to ignore (regex). You can change a list's underlying criteria, such as the name of the S3 object or the regular expression to use. However, you can't change the type from s3WordsList to regex or the other way around.
+     */
+    criteria: AllowListCriteria;
+    /**
+     * A custom description of the allow list. The description can contain as many as 512 characters.
+     */
+    description?: __stringMin1Max512PatternSS;
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+    /**
+     * A custom name for the allow list. The name can contain as many as 128 characters.
+     */
+    name: __stringMin1Max128Pattern;
+  }
+  export interface UpdateAllowListResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the allow list.
+     */
+    arn?: __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922;
+    /**
+     * The unique identifier for the allow list.
+     */
+    id?: __stringMin22Max22PatternAZ0922;
   }
   export interface UpdateClassificationJobRequest {
     /**
@@ -3444,7 +3685,7 @@ declare namespace Macie2 {
      */
     findingCriteria?: FindingCriteria;
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
     /**
@@ -3472,7 +3713,7 @@ declare namespace Macie2 {
   }
   export interface UpdateMacieSessionRequest {
     /**
-     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
+     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -3484,7 +3725,7 @@ declare namespace Macie2 {
   }
   export interface UpdateMemberSessionRequest {
     /**
-     * The unique identifier for the Amazon Macie resource or account that the request applies to.
+     * The unique identifier for the Amazon Macie resource that the request applies to.
      */
     id: __string;
     /**
@@ -3657,6 +3898,7 @@ declare namespace Macie2 {
   export type __double = number;
   export type __integer = number;
   export type __listOfAdminAccount = AdminAccount[];
+  export type __listOfAllowListSummary = AllowListSummary[];
   export type __listOfBatchGetCustomDataIdentifierSummary = BatchGetCustomDataIdentifierSummary[];
   export type __listOfBucketMetadata = BucketMetadata[];
   export type __listOfCriteriaForJob = CriteriaForJob[];
@@ -3688,8 +3930,14 @@ declare namespace Macie2 {
   export type __listOf__string = __string[];
   export type __long = number;
   export type __string = string;
+  export type __stringMin1Max1024PatternSS = string;
   export type __stringMin1Max128 = string;
+  export type __stringMin1Max128Pattern = string;
   export type __stringMin1Max2048 = string;
+  export type __stringMin1Max512PatternSS = string;
+  export type __stringMin22Max22PatternAZ0922 = string;
+  export type __stringMin3Max255PatternAZaZ093255 = string;
+  export type __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922 = string;
   export type __timestampIso8601 = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

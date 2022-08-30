@@ -20,27 +20,27 @@ declare class SSO extends Service {
    */
   getRoleCredentials(callback?: (err: AWSError, data: SSO.Types.GetRoleCredentialsResponse) => void): Request<SSO.Types.GetRoleCredentialsResponse, AWSError>;
   /**
-   * Lists all roles that are assigned to the user for a given Amazon Web Services account.
+   * Lists all roles that are assigned to the user for a given AWS account.
    */
   listAccountRoles(params: SSO.Types.ListAccountRolesRequest, callback?: (err: AWSError, data: SSO.Types.ListAccountRolesResponse) => void): Request<SSO.Types.ListAccountRolesResponse, AWSError>;
   /**
-   * Lists all roles that are assigned to the user for a given Amazon Web Services account.
+   * Lists all roles that are assigned to the user for a given AWS account.
    */
   listAccountRoles(callback?: (err: AWSError, data: SSO.Types.ListAccountRolesResponse) => void): Request<SSO.Types.ListAccountRolesResponse, AWSError>;
   /**
-   * Lists all Amazon Web Services accounts assigned to the user. These Amazon Web Services accounts are assigned by the administrator of the account. For more information, see Assign User Access in the Amazon Web Services SSO User Guide. This operation returns a paginated response.
+   * Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see Assign User Access in the IAM Identity Center User Guide. This operation returns a paginated response.
    */
   listAccounts(params: SSO.Types.ListAccountsRequest, callback?: (err: AWSError, data: SSO.Types.ListAccountsResponse) => void): Request<SSO.Types.ListAccountsResponse, AWSError>;
   /**
-   * Lists all Amazon Web Services accounts assigned to the user. These Amazon Web Services accounts are assigned by the administrator of the account. For more information, see Assign User Access in the Amazon Web Services SSO User Guide. This operation returns a paginated response.
+   * Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see Assign User Access in the IAM Identity Center User Guide. This operation returns a paginated response.
    */
   listAccounts(callback?: (err: AWSError, data: SSO.Types.ListAccountsResponse) => void): Request<SSO.Types.ListAccountsResponse, AWSError>;
   /**
-   * Removes the locally stored SSO tokens from the client-side cache and sends an API call to the Amazon Web Services SSO service to invalidate the corresponding server-side Amazon Web Services SSO sign in session.  If a user uses Amazon Web Services SSO to access the AWS CLI, the user’s Amazon Web Services SSO sign in session is used to obtain an IAM session, as specified in the corresponding Amazon Web Services SSO permission set. More specifically, Amazon Web Services SSO assumes an IAM role in the target account on behalf of the user, and the corresponding temporary Amazon Web Services credentials are returned to the client. After user logout, any existing IAM role sessions that were created by using Amazon Web Services SSO permission sets continue based on the duration configured in the permission set. For more information, see User authentications in the Amazon Web Services SSO User Guide. 
+   * Removes the locally stored SSO tokens from the client-side cache and sends an API call to the IAM Identity Center service to invalidate the corresponding server-side IAM Identity Center sign in session.  If a user uses IAM Identity Center to access the AWS CLI, the user’s IAM Identity Center sign in session is used to obtain an IAM session, as specified in the corresponding IAM Identity Center permission set. More specifically, IAM Identity Center assumes an IAM role in the target account on behalf of the user, and the corresponding temporary AWS credentials are returned to the client. After user logout, any existing IAM role sessions that were created by using IAM Identity Center permission sets continue based on the duration configured in the permission set. For more information, see User authentications in the IAM Identity Center User Guide. 
    */
   logout(params: SSO.Types.LogoutRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the locally stored SSO tokens from the client-side cache and sends an API call to the Amazon Web Services SSO service to invalidate the corresponding server-side Amazon Web Services SSO sign in session.  If a user uses Amazon Web Services SSO to access the AWS CLI, the user’s Amazon Web Services SSO sign in session is used to obtain an IAM session, as specified in the corresponding Amazon Web Services SSO permission set. More specifically, Amazon Web Services SSO assumes an IAM role in the target account on behalf of the user, and the corresponding temporary Amazon Web Services credentials are returned to the client. After user logout, any existing IAM role sessions that were created by using Amazon Web Services SSO permission sets continue based on the duration configured in the permission set. For more information, see User authentications in the Amazon Web Services SSO User Guide. 
+   * Removes the locally stored SSO tokens from the client-side cache and sends an API call to the IAM Identity Center service to invalidate the corresponding server-side IAM Identity Center sign in session.  If a user uses IAM Identity Center to access the AWS CLI, the user’s IAM Identity Center sign in session is used to obtain an IAM session, as specified in the corresponding IAM Identity Center permission set. More specifically, IAM Identity Center assumes an IAM role in the target account on behalf of the user, and the corresponding temporary AWS credentials are returned to the client. After user logout, any existing IAM role sessions that were created by using IAM Identity Center permission sets continue based on the duration configured in the permission set. For more information, see User authentications in the IAM Identity Center User Guide. 
    */
   logout(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -50,15 +50,15 @@ declare namespace SSO {
   export type AccountIdType = string;
   export interface AccountInfo {
     /**
-     * The identifier of the Amazon Web Services account that is assigned to the user.
+     * The identifier of the AWS account that is assigned to the user.
      */
     accountId?: AccountIdType;
     /**
-     * The display name of the Amazon Web Services account that is assigned to the user.
+     * The display name of the AWS account that is assigned to the user.
      */
     accountName?: AccountNameType;
     /**
-     * The email address of the Amazon Web Services account that is assigned to the user.
+     * The email address of the AWS account that is assigned to the user.
      */
     emailAddress?: EmailAddressType;
   }
@@ -72,11 +72,11 @@ declare namespace SSO {
      */
     roleName: RoleNameType;
     /**
-     * The identifier for the Amazon Web Services account that is assigned to the user.
+     * The identifier for the AWS account that is assigned to the user.
      */
     accountId: AccountIdType;
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the Amazon Web Services SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
   }
@@ -96,11 +96,11 @@ declare namespace SSO {
      */
     maxResults?: MaxResultType;
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the Amazon Web Services SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
     /**
-     * The identifier for the Amazon Web Services account that is assigned to the user.
+     * The identifier for the AWS account that is assigned to the user.
      */
     accountId: AccountIdType;
   }
@@ -124,7 +124,7 @@ declare namespace SSO {
      */
     maxResults?: MaxResultType;
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the Amazon Web Services SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
   }
@@ -140,7 +140,7 @@ declare namespace SSO {
   }
   export interface LogoutRequest {
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the Amazon Web Services SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
   }
@@ -148,15 +148,15 @@ declare namespace SSO {
   export type NextTokenType = string;
   export interface RoleCredentials {
     /**
-     * The identifier used for the temporary security credentials. For more information, see Using Temporary Security Credentials to Request Access to Amazon Web Services Resources in the Amazon Web Services IAM User Guide.
+     * The identifier used for the temporary security credentials. For more information, see Using Temporary Security Credentials to Request Access to AWS Resources in the AWS IAM User Guide.
      */
     accessKeyId?: AccessKeyType;
     /**
-     * The key that is used to sign the request. For more information, see Using Temporary Security Credentials to Request Access to Amazon Web Services Resources in the Amazon Web Services IAM User Guide.
+     * The key that is used to sign the request. For more information, see Using Temporary Security Credentials to Request Access to AWS Resources in the AWS IAM User Guide.
      */
     secretAccessKey?: SecretAccessKeyType;
     /**
-     * The token used for temporary credentials. For more information, see Using Temporary Security Credentials to Request Access to Amazon Web Services Resources in the Amazon Web Services IAM User Guide.
+     * The token used for temporary credentials. For more information, see Using Temporary Security Credentials to Request Access to AWS Resources in the AWS IAM User Guide.
      */
     sessionToken?: SessionTokenType;
     /**
@@ -170,7 +170,7 @@ declare namespace SSO {
      */
     roleName?: RoleNameType;
     /**
-     * The identifier of the Amazon Web Services account assigned to the user.
+     * The identifier of the AWS account assigned to the user.
      */
     accountId?: AccountIdType;
   }

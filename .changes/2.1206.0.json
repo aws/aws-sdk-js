@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "GreengrassV2",
+        "description": "Adds topologyFilter to ListInstalledComponentsRequest which allows filtration of components by ROOT or ALL (including root and dependency components). Adds lastStatusChangeTimestamp to ListInstalledComponents response to show the last time a component changed state on a device."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutEquipment",
+        "description": "This release adds new apis for providing labels."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API adds support for using allow lists to define specific text and text patterns to ignore when inspecting data sources for sensitive data."
+    }
+]

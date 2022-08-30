@@ -100,11 +100,11 @@ declare class GreengrassV2 extends Service {
    */
   disassociateServiceRoleFromAccount(callback?: (err: AWSError, data: GreengrassV2.Types.DisassociateServiceRoleFromAccountResponse) => void): Request<GreengrassV2.Types.DisassociateServiceRoleFromAccountResponse, AWSError>;
   /**
-   * Gets the recipe for a version of a component. Core devices can call this operation to identify the artifacts and requirements to install a component.
+   * Gets the recipe for a version of a component.
    */
   getComponent(params: GreengrassV2.Types.GetComponentRequest, callback?: (err: AWSError, data: GreengrassV2.Types.GetComponentResponse) => void): Request<GreengrassV2.Types.GetComponentResponse, AWSError>;
   /**
-   * Gets the recipe for a version of a component. Core devices can call this operation to identify the artifacts and requirements to install a component.
+   * Gets the recipe for a version of a component.
    */
   getComponent(callback?: (err: AWSError, data: GreengrassV2.Types.GetComponentResponse) => void): Request<GreengrassV2.Types.GetComponentResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class GreengrassV2 extends Service {
    */
   getConnectivityInfo(callback?: (err: AWSError, data: GreengrassV2.Types.GetConnectivityInfoResponse) => void): Request<GreengrassV2.Types.GetConnectivityInfoResponse, AWSError>;
   /**
-   * Retrieves metadata for a Greengrass core device.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   
+   * Retrieves metadata for a Greengrass core device.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment   
    */
   getCoreDevice(params: GreengrassV2.Types.GetCoreDeviceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.GetCoreDeviceResponse) => void): Request<GreengrassV2.Types.GetCoreDeviceResponse, AWSError>;
   /**
-   * Retrieves metadata for a Greengrass core device.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   
+   * Retrieves metadata for a Greengrass core device.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment   
    */
   getCoreDevice(callback?: (err: AWSError, data: GreengrassV2.Types.GetCoreDeviceResponse) => void): Request<GreengrassV2.Types.GetCoreDeviceResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class GreengrassV2 extends Service {
    */
   listComponents(callback?: (err: AWSError, data: GreengrassV2.Types.ListComponentsResponse) => void): Request<GreengrassV2.Types.ListComponentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of Greengrass core devices.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   
+   * Retrieves a paginated list of Greengrass core devices.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment   
    */
   listCoreDevices(params: GreengrassV2.Types.ListCoreDevicesRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListCoreDevicesResponse) => void): Request<GreengrassV2.Types.ListCoreDevicesResponse, AWSError>;
   /**
-   * Retrieves a paginated list of Greengrass core devices.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   
+   * Retrieves a paginated list of Greengrass core devices.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment   
    */
   listCoreDevices(callback?: (err: AWSError, data: GreengrassV2.Types.ListCoreDevicesResponse) => void): Request<GreengrassV2.Types.ListCoreDevicesResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class GreengrassV2 extends Service {
    */
   listEffectiveDeployments(callback?: (err: AWSError, data: GreengrassV2.Types.ListEffectiveDeploymentsResponse) => void): Request<GreengrassV2.Types.ListEffectiveDeploymentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of the components that a Greengrass core device runs. This list doesn't include components that are deployed from local deployments or components that are deployed as dependencies of other components.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   
+   * Retrieves a paginated list of the components that a Greengrass core device runs. By default, this list doesn't include components that are deployed as dependencies of other components. To include dependencies in the response, set the topologyFilter parameter to ALL.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment   
    */
   listInstalledComponents(params: GreengrassV2.Types.ListInstalledComponentsRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListInstalledComponentsResponse) => void): Request<GreengrassV2.Types.ListInstalledComponentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of the components that a Greengrass core device runs. This list doesn't include components that are deployed from local deployments or components that are deployed as dependencies of other components.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   
+   * Retrieves a paginated list of the components that a Greengrass core device runs. By default, this list doesn't include components that are deployed as dependencies of other components. To include dependencies in the response, set the topologyFilter parameter to ALL.  IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated. Core devices send status updates at the following times:   When the IoT Greengrass Core software starts   When the core device receives a deployment from the Amazon Web Services Cloud   When the status of any component on the core device becomes BROKEN    At a regular interval that you can configure, which defaults to 24 hours   For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment   
    */
   listInstalledComponents(callback?: (err: AWSError, data: GreengrassV2.Types.ListInstalledComponentsResponse) => void): Request<GreengrassV2.Types.ListInstalledComponentsResponse, AWSError>;
   /**
@@ -463,7 +463,7 @@ declare namespace GreengrassV2 {
      */
     name?: NonEmptyString;
     /**
-     * A dictionary of attributes for the platform. The IoT Greengrass Core software defines the os and platform by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the Greengrass nucleus component in the IoT Greengrass V2 Developer Guide.
+     * A dictionary of attributes for the platform. The IoT Greengrass Core software defines the os and architecture by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the Greengrass nucleus component in the IoT Greengrass V2 Developer Guide.
      */
     attributes?: PlatformAttributesMap;
   }
@@ -586,7 +586,7 @@ declare namespace GreengrassV2 {
     /**
      * The name of the deployment.
      */
-    deploymentName?: NonEmptyString;
+    deploymentName?: DeploymentNameString;
     /**
      * The components to deploy. This is a dictionary, where each key is the name of a component, and each key's value is the version and configuration to deploy for that component.
      */
@@ -707,6 +707,7 @@ declare namespace GreengrassV2 {
   }
   export type DeploymentList = Deployment[];
   export type DeploymentName = string;
+  export type DeploymentNameString = string;
   export interface DeploymentPolicies {
     /**
      * The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails. Default: ROLLBACK 
@@ -1030,9 +1031,14 @@ declare namespace GreengrassV2 {
      * Whether or not the component is a root component.
      */
     isRoot?: IsRoot;
+    /**
+     * The status of how current the data is. This response is based off of component state changes. The status reflects component disruptions and deployments. If a component only sees a configuration update during a deployment, it might not undergo a state change and this status would not be updated.
+     */
+    lastStatusChangeTimestamp?: Timestamp;
   }
   export type InstalledComponentLifecycleState = "NEW"|"INSTALLED"|"STARTING"|"RUNNING"|"STOPPING"|"ERRORED"|"BROKEN"|"FINISHED"|string;
   export type InstalledComponentList = InstalledComponent[];
+  export type InstalledComponentTopologyFilter = "ALL"|"ROOT"|string;
   export type IoTJobARN = string;
   export type IoTJobAbortAction = "CANCEL"|string;
   export interface IoTJobAbortConfig {
@@ -1207,12 +1213,11 @@ declare namespace GreengrassV2 {
     linuxProcessParams?: LambdaLinuxProcessParams;
   }
   export type LambdaFilesystemPermission = "ro"|"rw"|string;
-  export type LambdaFunctionARNWithVersionNumber = string;
   export interface LambdaFunctionRecipeSource {
     /**
      * The ARN of the Lambda function. The ARN must include the version of the function to import. You can't use version aliases like $LATEST.
      */
-    lambdaArn: LambdaFunctionARNWithVersionNumber;
+    lambdaArn: NonEmptyString;
     /**
      * The name of the component. Defaults to the name of the Lambda function.
      */
@@ -1431,10 +1436,14 @@ declare namespace GreengrassV2 {
      * The token to be used for the next set of paginated results.
      */
     nextToken?: NextTokenString;
+    /**
+     * The filter for the list of components. Choose from the following options:    ALL – The list includes all components installed on the core device.    ROOT – The list includes only root components, which are components that you specify in a deployment. When you choose this option, the list doesn't include components that the core device installs as dependencies of other components.   Default: ROOT 
+     */
+    topologyFilter?: InstalledComponentTopologyFilter;
   }
   export interface ListInstalledComponentsResponse {
     /**
-     * A list that summarizes each component on the core device.
+     * A list that summarizes each component on the core device.  Accuracy of the lastStatusChangeTimestamp response depends on Greengrass nucleus v2.7.0. It performs best on Greengrass nucleus v2.7.0 and can be inaccurate on earlier versions. 
      */
     installedComponents?: InstalledComponentList;
     /**

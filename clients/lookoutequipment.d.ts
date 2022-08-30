@@ -28,6 +28,22 @@ declare class LookoutEquipment extends Service {
    */
   createInferenceScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateInferenceSchedulerResponse) => void): Request<LookoutEquipment.Types.CreateInferenceSchedulerResponse, AWSError>;
   /**
+   *  Creates a label for an event. 
+   */
+  createLabel(params: LookoutEquipment.Types.CreateLabelRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.CreateLabelResponse) => void): Request<LookoutEquipment.Types.CreateLabelResponse, AWSError>;
+  /**
+   *  Creates a label for an event. 
+   */
+  createLabel(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateLabelResponse) => void): Request<LookoutEquipment.Types.CreateLabelResponse, AWSError>;
+  /**
+   *  Creates a group of labels. 
+   */
+  createLabelGroup(params: LookoutEquipment.Types.CreateLabelGroupRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.CreateLabelGroupResponse) => void): Request<LookoutEquipment.Types.CreateLabelGroupResponse, AWSError>;
+  /**
+   *  Creates a group of labels. 
+   */
+  createLabelGroup(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateLabelGroupResponse) => void): Request<LookoutEquipment.Types.CreateLabelGroupResponse, AWSError>;
+  /**
    * Creates an ML model for data inference.  A machine-learning (ML) model is a mathematical model that finds patterns in your data. In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal behavior that could be potential equipment failure (or maintenance events). The models are made by analyzing normal data and abnormalities in machine behavior that have already occurred. Your model is trained using a portion of the data from your dataset and uses that data to learn patterns of normal behavior and abnormal patterns that lead to equipment failure. Another portion of the data is used to evaluate the model's accuracy. 
    */
   createModel(params: LookoutEquipment.Types.CreateModelRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.CreateModelResponse) => void): Request<LookoutEquipment.Types.CreateModelResponse, AWSError>;
@@ -51,6 +67,22 @@ declare class LookoutEquipment extends Service {
    * Deletes an inference scheduler that has been set up. Already processed output results are not affected. 
    */
   deleteInferenceScheduler(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Deletes a label. 
+   */
+  deleteLabel(params: LookoutEquipment.Types.DeleteLabelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Deletes a label. 
+   */
+  deleteLabel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Deletes a group of labels. 
+   */
+  deleteLabelGroup(params: LookoutEquipment.Types.DeleteLabelGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Deletes a group of labels. 
+   */
+  deleteLabelGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an ML model currently available for Amazon Lookout for Equipment. This will prevent it from being used with an inference scheduler, even one that is already set up. 
    */
@@ -83,6 +115,22 @@ declare class LookoutEquipment extends Service {
    *  Specifies information about the inference scheduler being used, including name, model, status, and associated metadata 
    */
   describeInferenceScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeInferenceSchedulerResponse) => void): Request<LookoutEquipment.Types.DescribeInferenceSchedulerResponse, AWSError>;
+  /**
+   *  Returns the name of the label. 
+   */
+  describeLabel(params: LookoutEquipment.Types.DescribeLabelRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeLabelResponse) => void): Request<LookoutEquipment.Types.DescribeLabelResponse, AWSError>;
+  /**
+   *  Returns the name of the label. 
+   */
+  describeLabel(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeLabelResponse) => void): Request<LookoutEquipment.Types.DescribeLabelResponse, AWSError>;
+  /**
+   *  Returns information about the label group. 
+   */
+  describeLabelGroup(params: LookoutEquipment.Types.DescribeLabelGroupRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeLabelGroupResponse) => void): Request<LookoutEquipment.Types.DescribeLabelGroupResponse, AWSError>;
+  /**
+   *  Returns information about the label group. 
+   */
+  describeLabelGroup(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeLabelGroupResponse) => void): Request<LookoutEquipment.Types.DescribeLabelGroupResponse, AWSError>;
   /**
    * Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
    */
@@ -131,6 +179,22 @@ declare class LookoutEquipment extends Service {
    * Retrieves a list of all inference schedulers currently available for your account. 
    */
   listInferenceSchedulers(callback?: (err: AWSError, data: LookoutEquipment.Types.ListInferenceSchedulersResponse) => void): Request<LookoutEquipment.Types.ListInferenceSchedulersResponse, AWSError>;
+  /**
+   *  Returns a list of the label groups. 
+   */
+  listLabelGroups(params: LookoutEquipment.Types.ListLabelGroupsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListLabelGroupsResponse) => void): Request<LookoutEquipment.Types.ListLabelGroupsResponse, AWSError>;
+  /**
+   *  Returns a list of the label groups. 
+   */
+  listLabelGroups(callback?: (err: AWSError, data: LookoutEquipment.Types.ListLabelGroupsResponse) => void): Request<LookoutEquipment.Types.ListLabelGroupsResponse, AWSError>;
+  /**
+   *  Provides a list of labels. 
+   */
+  listLabels(params: LookoutEquipment.Types.ListLabelsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListLabelsResponse) => void): Request<LookoutEquipment.Types.ListLabelsResponse, AWSError>;
+  /**
+   *  Provides a list of labels. 
+   */
+  listLabels(callback?: (err: AWSError, data: LookoutEquipment.Types.ListLabelsResponse) => void): Request<LookoutEquipment.Types.ListLabelsResponse, AWSError>;
   /**
    * Generates a list of all models in the account, including model name and ARN, dataset, and status. 
    */
@@ -203,6 +267,14 @@ declare class LookoutEquipment extends Service {
    * Updates an inference scheduler. 
    */
   updateInferenceScheduler(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Updates the label group. 
+   */
+  updateLabelGroup(params: LookoutEquipment.Types.UpdateLabelGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Updates the label group. 
+   */
+  updateLabelGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace LookoutEquipment {
   export type AmazonResourceArn = string;
@@ -218,6 +290,7 @@ declare namespace LookoutEquipment {
      */
     NumberOfCategory?: Integer;
   }
+  export type Comments = string;
   export type ComponentName = string;
   export type ComponentTimestampDelimiter = string;
   export interface CountPercent {
@@ -276,11 +349,11 @@ declare namespace LookoutEquipment {
      */
     InferenceSchedulerName: InferenceSchedulerName;
     /**
-     * A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don't need to stop and restart the scheduler when uploading new data. 
+     * The interval (in minutes) of planned delay at the start of each inference segment. For example, if inference is set to run every ten minutes, the delay is set to five minutes and the time is 09:08. The inference scheduler will wake up at the configured interval (which, without a delay configured, would be 09:10) plus the additional five minute delay time (so 09:15) to check your Amazon S3 bucket. The delay provides a buffer for you to upload data at the same frequency, so that you don't have to stop and restart the scheduler when uploading new data. For more information, see Understanding the inference process.
      */
     DataDelayOffsetInMinutes?: DataDelayOffsetInMinutes;
     /**
-     *  How often data is uploaded to the source S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. 
+     *  How often data is uploaded to the source Amazon S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment runs inference on your data. For more information, see Understanding the inference process.
      */
     DataUploadFrequency: DataUploadFrequency;
     /**
@@ -321,6 +394,74 @@ declare namespace LookoutEquipment {
      * Indicates the status of the CreateInferenceScheduler operation. 
      */
     Status?: InferenceSchedulerStatus;
+  }
+  export interface CreateLabelGroupRequest {
+    /**
+     *  Names a group of labels. Data in this field will be retained for service usage. Follow best practices for the security of your data. 
+     */
+    LabelGroupName: LabelGroupName;
+    /**
+     *  The acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group. Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    FaultCodes?: FaultCodes;
+    /**
+     *  A unique identifier for the request to create a label group. If you do not set the client request token, Lookout for Equipment generates one. 
+     */
+    ClientToken: IdempotenceToken;
+    /**
+     *  Tags that provide metadata about the label group you are creating.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateLabelGroupResponse {
+    /**
+     *  The name of the label group that you have created. Data in this field will be retained for service usage. Follow best practices for the security of your data. 
+     */
+    LabelGroupName?: LabelGroupName;
+    /**
+     *  The ARN of the label group that you have created. 
+     */
+    LabelGroupArn?: LabelGroupArn;
+  }
+  export interface CreateLabelRequest {
+    /**
+     *  The name of a group of labels.  Data in this field will be retained for service usage. Follow best practices for the security of your data. 
+     */
+    LabelGroupName: LabelGroupName;
+    /**
+     *  The start time of the labeled event. 
+     */
+    StartTime: Timestamp;
+    /**
+     *  The end time of the labeled event. 
+     */
+    EndTime: Timestamp;
+    /**
+     *  Indicates whether a labeled event represents an anomaly. 
+     */
+    Rating: LabelRating;
+    /**
+     *  Provides additional information about the label. The fault code must be defined in the FaultCodes attribute of the label group. Data in this field will be retained for service usage. Follow best practices for the security of your data. 
+     */
+    FaultCode?: FaultCode;
+    /**
+     *  Metadata providing additional information about the label.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    Notes?: Comments;
+    /**
+     *  Indicates that a label pertains to a particular piece of equipment.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    Equipment?: Equipment;
+    /**
+     *  A unique identifier for the request to create a label. If you do not set the client request token, Lookout for Equipment generates one. 
+     */
+    ClientToken: IdempotenceToken;
+  }
+  export interface CreateLabelResponse {
+    /**
+     *  The ID of the label that you have created. 
+     */
+    LabelId?: LabelId;
   }
   export interface CreateModelRequest {
     /**
@@ -484,6 +625,22 @@ declare namespace LookoutEquipment {
      * The name of the inference scheduler to be deleted. 
      */
     InferenceSchedulerName: InferenceSchedulerIdentifier;
+  }
+  export interface DeleteLabelGroupRequest {
+    /**
+     *  The name of the label group that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data. 
+     */
+    LabelGroupName: LabelGroupName;
+  }
+  export interface DeleteLabelRequest {
+    /**
+     *  The name of the label group that contains the label that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data. 
+     */
+    LabelGroupName: LabelGroupName;
+    /**
+     *  The ID of the label that you want to delete. 
+     */
+    LabelId: LabelId;
   }
   export interface DeleteModelRequest {
     /**
@@ -667,6 +824,90 @@ declare namespace LookoutEquipment {
      * Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. 
      */
     ServerSideKmsKeyId?: KmsKeyArn;
+    /**
+     * Indicates whether the latest execution for the inference scheduler was Anomalous (anomalous events found) or Normal (no anomalous events found).
+     */
+    LatestInferenceResult?: LatestInferenceResult;
+  }
+  export interface DescribeLabelGroupRequest {
+    /**
+     *  Returns the name of the label group. 
+     */
+    LabelGroupName: LabelGroupName;
+  }
+  export interface DescribeLabelGroupResponse {
+    /**
+     *  The name of the label group. 
+     */
+    LabelGroupName?: LabelGroupName;
+    /**
+     *  The ARN of the label group. 
+     */
+    LabelGroupArn?: LabelGroupArn;
+    /**
+     *  Codes indicating the type of anomaly associated with the labels in the lagbel group. 
+     */
+    FaultCodes?: FaultCodes;
+    /**
+     *  The time at which the label group was created. 
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  The time at which the label group was updated. 
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface DescribeLabelRequest {
+    /**
+     *  Returns the name of the group containing the label. 
+     */
+    LabelGroupName: LabelGroupName;
+    /**
+     *  Returns the ID of the label. 
+     */
+    LabelId: LabelId;
+  }
+  export interface DescribeLabelResponse {
+    /**
+     *  The name of the requested label group. 
+     */
+    LabelGroupName?: LabelGroupName;
+    /**
+     *  The ARN of the requested label group. 
+     */
+    LabelGroupArn?: LabelGroupArn;
+    /**
+     *  The ID of the requested label. 
+     */
+    LabelId?: LabelId;
+    /**
+     *  The start time of the requested label. 
+     */
+    StartTime?: Timestamp;
+    /**
+     *  The end time of the requested label. 
+     */
+    EndTime?: Timestamp;
+    /**
+     *  Indicates whether a labeled event represents an anomaly. 
+     */
+    Rating?: LabelRating;
+    /**
+     *  Indicates the type of anomaly associated with the label.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    FaultCode?: FaultCode;
+    /**
+     * Metadata providing additional information about the label. Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    Notes?: Comments;
+    /**
+     *  Indicates that a label pertains to a particular piece of equipment. 
+     */
+    Equipment?: Equipment;
+    /**
+     *  The time at which the label was created. 
+     */
+    CreatedAt?: Timestamp;
   }
   export interface DescribeModelRequest {
     /**
@@ -766,7 +1007,10 @@ declare namespace LookoutEquipment {
      */
     TotalNumberOfDuplicateTimestamps: Integer;
   }
+  export type Equipment = string;
   export type EventDurationInSeconds = number;
+  export type FaultCode = string;
+  export type FaultCodes = FaultCode[];
   export type FileNameTimestampFormat = string;
   export type Float = number;
   export type IamRoleArn = string;
@@ -938,6 +1182,10 @@ declare namespace LookoutEquipment {
      * How often data is uploaded to the source S3 bucket for the input data. This value is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. 
      */
     DataUploadFrequency?: DataUploadFrequency;
+    /**
+     * Indicates whether the latest execution for the inference scheduler was Anomalous (anomalous events found) or Normal (no anomalous events found).
+     */
+    LatestInferenceResult?: LatestInferenceResult;
   }
   export interface IngestedFilesSummary {
     /**
@@ -999,11 +1247,77 @@ declare namespace LookoutEquipment {
   }
   export type KeyPattern = string;
   export type KmsKeyArn = string;
+  export type LabelGroupArn = string;
+  export type LabelGroupName = string;
+  export type LabelGroupSummaries = LabelGroupSummary[];
+  export interface LabelGroupSummary {
+    /**
+     *  The name of the label group. 
+     */
+    LabelGroupName?: LabelGroupName;
+    /**
+     *  The ARN of the label group. 
+     */
+    LabelGroupArn?: LabelGroupArn;
+    /**
+     *  The time at which the label group was created. 
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  The time at which the label group was updated. 
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export type LabelId = string;
+  export type LabelRating = "ANOMALY"|"NO_ANOMALY"|"NEUTRAL"|string;
+  export type LabelSummaries = LabelSummary[];
+  export interface LabelSummary {
+    /**
+     *  The name of the label group. 
+     */
+    LabelGroupName?: LabelGroupName;
+    /**
+     *  The ID of the label. 
+     */
+    LabelId?: LabelId;
+    /**
+     *  The ARN of the label group. 
+     */
+    LabelGroupArn?: LabelGroupArn;
+    /**
+     *  The timestamp indicating the start of the label. 
+     */
+    StartTime?: Timestamp;
+    /**
+     *  The timestamp indicating the end of the label. 
+     */
+    EndTime?: Timestamp;
+    /**
+     *  Indicates whether a labeled event represents an anomaly. 
+     */
+    Rating?: LabelRating;
+    /**
+     *  Indicates the type of anomaly associated with the label.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    FaultCode?: FaultCode;
+    /**
+     *  Indicates that a label pertains to a particular piece of equipment. 
+     */
+    Equipment?: Equipment;
+    /**
+     *  The time at which the label was created. 
+     */
+    CreatedAt?: Timestamp;
+  }
   export interface LabelsInputConfiguration {
     /**
      * Contains location information for the S3 location being used for label data. 
      */
-    S3InputConfiguration: LabelsS3InputConfiguration;
+    S3InputConfiguration?: LabelsS3InputConfiguration;
+    /**
+     *  The name of the label group to be used for label data. 
+     */
+    LabelGroupName?: LabelGroupName;
   }
   export interface LabelsS3InputConfiguration {
     /**
@@ -1029,13 +1343,14 @@ declare namespace LookoutEquipment {
      */
     MaxTimestampGapInDays?: Integer;
   }
+  export type LatestInferenceResult = "ANOMALOUS"|"NORMAL"|string;
   export interface ListDataIngestionJobsRequest {
     /**
      * The name of the dataset being used for the data ingestion job. 
      */
     DatasetName?: DatasetName;
     /**
-     *  An opaque pagination token indicating where to continue the listing of data ingestion jobs. 
+     * An opaque pagination token indicating where to continue the listing of data ingestion jobs. 
      */
     NextToken?: NextToken;
     /**
@@ -1095,11 +1410,11 @@ declare namespace LookoutEquipment {
      */
     InferenceSchedulerName: InferenceSchedulerIdentifier;
     /**
-     *  Lookout for Equipment will return all the inference events with start time equal to or greater than the start time given.
+     *  Lookout for Equipment will return all the inference events with an end time equal to or greater than the start time given.
      */
     IntervalStartTime: Timestamp;
     /**
-     * Lookout for Equipment will return all the inference events with end time equal to or less than the end time given.
+     * Returns all the inference events with an end start time equal to or greater than less than the end time given
      */
     IntervalEndTime: Timestamp;
   }
@@ -1177,6 +1492,70 @@ declare namespace LookoutEquipment {
      */
     InferenceSchedulerSummaries?: InferenceSchedulerSummaries;
   }
+  export interface ListLabelGroupsRequest {
+    /**
+     *  The beginning of the name of the label groups to be listed. 
+     */
+    LabelGroupNameBeginsWith?: LabelGroupName;
+    /**
+     *  An opaque pagination token indicating where to continue the listing of label groups. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  Specifies the maximum number of label groups to list. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListLabelGroupsResponse {
+    /**
+     *  An opaque pagination token indicating where to continue the listing of label groups. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  A summary of the label groups. 
+     */
+    LabelGroupSummaries?: LabelGroupSummaries;
+  }
+  export interface ListLabelsRequest {
+    /**
+     *  Retruns the name of the label group. 
+     */
+    LabelGroupName: LabelGroupName;
+    /**
+     *  Returns all the labels with a end time equal to or later than the start time given. 
+     */
+    IntervalStartTime?: Timestamp;
+    /**
+     *  Returns all labels with a start time earlier than the end time given. 
+     */
+    IntervalEndTime?: Timestamp;
+    /**
+     *  Returns labels with a particular fault code. 
+     */
+    FaultCode?: FaultCode;
+    /**
+     *  Lists the labels that pertain to a particular piece of equipment. 
+     */
+    Equipment?: Equipment;
+    /**
+     *  An opaque pagination token indicating where to continue the listing of label groups. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  Specifies the maximum number of labels to list. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListLabelsResponse {
+    /**
+     *  An opaque pagination token indicating where to continue the listing of datasets. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  A summary of the items in the label group. 
+     */
+    LabelSummaries?: LabelSummaries;
+  }
   export interface ListModelsRequest {
     /**
      *  An opaque pagination token indicating where to continue the listing of ML models. 
@@ -1220,21 +1599,21 @@ declare namespace LookoutEquipment {
      */
     IngestionJobId?: IngestionJobId;
     /**
-     *  Specifies the maximum number of sensors for which to retrieve statistics. 
+     * Specifies the maximum number of sensors for which to retrieve statistics. 
      */
     MaxResults?: MaxResults;
     /**
-     *  An opaque pagination token indicating where to continue the listing of sensor statistics. 
+     * An opaque pagination token indicating where to continue the listing of sensor statistics. 
      */
     NextToken?: NextToken;
   }
   export interface ListSensorStatisticsResponse {
     /**
-     *  Provides ingestion-based statistics regarding the specified sensor with respect to various validation types, such as whether data exists, the number and percentage of missing values, and the number and percentage of duplicate timestamps. 
+     * Provides ingestion-based statistics regarding the specified sensor with respect to various validation types, such as whether data exists, the number and percentage of missing values, and the number and percentage of duplicate timestamps. 
      */
     SensorStatisticsSummaries?: SensorStatisticsSummaries;
     /**
-     *  An opaque pagination token indicating where to continue the listing of sensor statistics. 
+     * An opaque pagination token indicating where to continue the listing of sensor statistics. 
      */
     NextToken?: NextToken;
   }
@@ -1550,6 +1929,16 @@ declare namespace LookoutEquipment {
      *  The Amazon Resource Name (ARN) of a role with permission to access the data source for the inference scheduler. 
      */
     RoleArn?: IamRoleArn;
+  }
+  export interface UpdateLabelGroupRequest {
+    /**
+     *  The name of the label group to be updated. 
+     */
+    LabelGroupName: LabelGroupName;
+    /**
+     *  Updates the code indicating the type of anomaly associated with the label.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
+     */
+    FaultCodes?: FaultCodes;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
