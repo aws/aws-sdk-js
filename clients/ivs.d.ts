@@ -421,6 +421,10 @@ declare namespace IVS {
      */
     name?: RecordingConfigurationName;
     /**
+     * If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.
+     */
+    recordingReconnectWindowSeconds?: RecordingReconnectWindowSeconds;
+    /**
      * Array of 1-50 maps, each of the form string:string (key:value). See Tagging Amazon Web Services Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
      */
     tags?: Tags;
@@ -812,6 +816,10 @@ declare namespace IVS {
      */
     name?: RecordingConfigurationName;
     /**
+     * If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.
+     */
+    recordingReconnectWindowSeconds?: RecordingReconnectWindowSeconds;
+    /**
      * Indicates the current state of the recording configuration. When the state is ACTIVE, the configuration is ready for recording a channel stream.
      */
     state: RecordingConfigurationState;
@@ -851,6 +859,7 @@ declare namespace IVS {
     tags?: Tags;
   }
   export type RecordingMode = "DISABLED"|"INTERVAL"|string;
+  export type RecordingReconnectWindowSeconds = number;
   export type ResourceArn = string;
   export type S3DestinationBucketName = string;
   export interface S3DestinationConfiguration {

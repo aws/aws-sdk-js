@@ -20,11 +20,11 @@ declare class RDSDataService extends Service {
    */
   batchExecuteStatement(callback?: (err: AWSError, data: RDSDataService.Types.BatchExecuteStatementResponse) => void): Request<RDSDataService.Types.BatchExecuteStatementResponse, AWSError>;
   /**
-   * Starts a SQL transaction.  &lt;important&gt; &lt;p&gt;A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.&lt;/p&gt; &lt;p&gt;A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.&lt;/p&gt; &lt;p&gt;DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate &lt;code&gt;ExecuteStatement&lt;/code&gt; call with &lt;code&gt;continueAfterTimeout&lt;/code&gt; enabled.&lt;/p&gt; &lt;/important&gt; 
+   * Starts a SQL transaction.  A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours. A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically. DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate ExecuteStatement call with continueAfterTimeout enabled. 
    */
   beginTransaction(params: RDSDataService.Types.BeginTransactionRequest, callback?: (err: AWSError, data: RDSDataService.Types.BeginTransactionResponse) => void): Request<RDSDataService.Types.BeginTransactionResponse, AWSError>;
   /**
-   * Starts a SQL transaction.  &lt;important&gt; &lt;p&gt;A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.&lt;/p&gt; &lt;p&gt;A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.&lt;/p&gt; &lt;p&gt;DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate &lt;code&gt;ExecuteStatement&lt;/code&gt; call with &lt;code&gt;continueAfterTimeout&lt;/code&gt; enabled.&lt;/p&gt; &lt;/important&gt; 
+   * Starts a SQL transaction.  A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours. A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically. DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate ExecuteStatement call with continueAfterTimeout enabled. 
    */
   beginTransaction(callback?: (err: AWSError, data: RDSDataService.Types.BeginTransactionResponse) => void): Request<RDSDataService.Types.BeginTransactionResponse, AWSError>;
   /**
@@ -65,44 +65,32 @@ declare namespace RDSDataService {
   export type ArrayOfArray = ArrayValue[];
   export interface ArrayValue {
     /**
-     * An array of arrays.
-     */
-    arrayValues?: ArrayOfArray;
-    /**
      * An array of Boolean values.
      */
     booleanValues?: BooleanArray;
-    /**
-     * An array of floating-point numbers.
-     */
-    doubleValues?: DoubleArray;
     /**
      * An array of integers.
      */
     longValues?: LongArray;
     /**
+     * An array of floating-point numbers.
+     */
+    doubleValues?: DoubleArray;
+    /**
      * An array of strings.
      */
     stringValues?: StringArray;
+    /**
+     * An array of arrays.
+     */
+    arrayValues?: ArrayOfArray;
   }
   export type ArrayValueList = Value[];
   export interface BatchExecuteStatementRequest {
     /**
-     * The name of the database.
-     */
-    database?: DbName;
-    /**
-     * The parameter set for the batch operation. The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:   Specify one or more empty parameter sets.   Use the ExecuteStatement operation instead of the BatchExecuteStatement operation.    Array parameters are not supported. 
-     */
-    parameterSets?: SqlParameterSets;
-    /**
      * The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
      */
     resourceArn: Arn;
-    /**
-     * The name of the database schema.
-     */
-    schema?: DbName;
     /**
      * The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret. For information about creating the secret, see Create a database secret.
      */
@@ -111,6 +99,18 @@ declare namespace RDSDataService {
      * The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.
      */
     sql: SqlStatement;
+    /**
+     * The name of the database.
+     */
+    database?: DbName;
+    /**
+     * The name of the database schema.
+     */
+    schema?: DbName;
+    /**
+     * The parameter set for the batch operation. The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:   Specify one or more empty parameter sets.   Use the ExecuteStatement operation instead of the BatchExecuteStatement operation.    Array parameters are not supported. 
+     */
+    parameterSets?: SqlParameterSets;
     /**
      * The identifier of a transaction that was started by using the BeginTransaction operation. Specify the transaction ID of the transaction that you want to include the SQL statement in. If the SQL statement is not part of a transaction, don't set this parameter.
      */
@@ -124,21 +124,21 @@ declare namespace RDSDataService {
   }
   export interface BeginTransactionRequest {
     /**
-     * The name of the database.
-     */
-    database?: DbName;
-    /**
      * The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
      */
     resourceArn: Arn;
     /**
-     * The name of the database schema.
-     */
-    schema?: DbName;
-    /**
      * The name or ARN of the secret that enables access to the DB cluster.
      */
     secretArn: Arn;
+    /**
+     * The name of the database.
+     */
+    database?: DbName;
+    /**
+     * The name of the database schema.
+     */
+    schema?: DbName;
   }
   export interface BeginTransactionResponse {
     /**
@@ -156,33 +156,45 @@ declare namespace RDSDataService {
   export type BoxedLong = number;
   export interface ColumnMetadata {
     /**
+     * The name of the column.
+     */
+    name?: String;
+    /**
      * The type of the column.
      */
-    arrayBaseColumnType?: Integer;
+    type?: Integer;
     /**
-     * A value that indicates whether the column increments automatically.
+     * The database-specific data type of the column.
      */
-    isAutoIncrement?: Boolean;
-    /**
-     * A value that indicates whether the column is case-sensitive.
-     */
-    isCaseSensitive?: Boolean;
-    /**
-     * A value that indicates whether the column contains currency values.
-     */
-    isCurrency?: Boolean;
-    /**
-     * A value that indicates whether an integer column is signed.
-     */
-    isSigned?: Boolean;
+    typeName?: String;
     /**
      * The label for the column.
      */
     label?: String;
     /**
-     * The name of the column.
+     * The name of the schema that owns the table that includes the column.
      */
-    name?: String;
+    schemaName?: String;
+    /**
+     * The name of the table that includes the column.
+     */
+    tableName?: String;
+    /**
+     * A value that indicates whether the column increments automatically.
+     */
+    isAutoIncrement?: Boolean;
+    /**
+     * A value that indicates whether an integer column is signed.
+     */
+    isSigned?: Boolean;
+    /**
+     * A value that indicates whether the column contains currency values.
+     */
+    isCurrency?: Boolean;
+    /**
+     * A value that indicates whether the column is case-sensitive.
+     */
+    isCaseSensitive?: Boolean;
     /**
      * A value that indicates whether the column is nullable.
      */
@@ -196,21 +208,9 @@ declare namespace RDSDataService {
      */
     scale?: Integer;
     /**
-     * The name of the schema that owns the table that includes the column.
-     */
-    schemaName?: String;
-    /**
-     * The name of the table that includes the column.
-     */
-    tableName?: String;
-    /**
      * The type of the column.
      */
-    type?: Integer;
-    /**
-     * The database-specific data type of the column.
-     */
-    typeName?: String;
+    arrayBaseColumnType?: Integer;
   }
   export interface CommitTransactionRequest {
     /**
@@ -237,25 +237,25 @@ declare namespace RDSDataService {
   export type DoubleArray = BoxedDouble[];
   export interface ExecuteSqlRequest {
     /**
+     * The ARN of the Aurora Serverless DB cluster.
+     */
+    dbClusterOrInstanceArn: Arn;
+    /**
      * The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret. For information about creating the secret, see Create a database secret.
      */
     awsSecretStoreArn: Arn;
+    /**
+     * One or more SQL statements to run on the DB cluster. You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. 
+     */
+    sqlStatements: SqlStatement;
     /**
      * The name of the database.
      */
     database?: DbName;
     /**
-     * The ARN of the Aurora Serverless DB cluster.
-     */
-    dbClusterOrInstanceArn: Arn;
-    /**
      * The name of the database schema.
      */
     schema?: DbName;
-    /**
-     * One or more SQL statements to run on the DB cluster. You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. 
-     */
-    sqlStatements: SqlStatement;
   }
   export interface ExecuteSqlResponse {
     /**
@@ -265,37 +265,9 @@ declare namespace RDSDataService {
   }
   export interface ExecuteStatementRequest {
     /**
-     * A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.  For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures. 
-     */
-    continueAfterTimeout?: Boolean;
-    /**
-     * The name of the database.
-     */
-    database?: DbName;
-    /**
-     * A value that indicates whether to format the result set as a single JSON string. This parameter only applies to SELECT statements and is ignored for other types of statements. Allowed values are NONE and JSON. The default value is NONE. The result is returned in the formattedRecords field. For usage information about the JSON format for result sets, see Using the Data API in the Amazon Aurora User Guide.
-     */
-    formatRecordsAs?: RecordsFormatType;
-    /**
-     * A value that indicates whether to include metadata in the results.
-     */
-    includeResultMetadata?: Boolean;
-    /**
-     * The parameters for the SQL statement.  Array parameters are not supported. 
-     */
-    parameters?: SqlParametersList;
-    /**
      * The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
      */
     resourceArn: Arn;
-    /**
-     * Options that control how the result set is returned.
-     */
-    resultSetOptions?: ResultSetOptions;
-    /**
-     * The name of the database schema.  Currently, the schema parameter isn't supported. 
-     */
-    schema?: DbName;
     /**
      * The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret. For information about creating the secret, see Create a database secret.
      */
@@ -305,61 +277,89 @@ declare namespace RDSDataService {
      */
     sql: SqlStatement;
     /**
+     * The name of the database.
+     */
+    database?: DbName;
+    /**
+     * The name of the database schema.  Currently, the schema parameter isn't supported. 
+     */
+    schema?: DbName;
+    /**
+     * The parameters for the SQL statement.  Array parameters are not supported. 
+     */
+    parameters?: SqlParametersList;
+    /**
      * The identifier of a transaction that was started by using the BeginTransaction operation. Specify the transaction ID of the transaction that you want to include the SQL statement in. If the SQL statement is not part of a transaction, don't set this parameter.
      */
     transactionId?: Id;
+    /**
+     * A value that indicates whether to include metadata in the results.
+     */
+    includeResultMetadata?: Boolean;
+    /**
+     * A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.  For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures. 
+     */
+    continueAfterTimeout?: Boolean;
+    /**
+     * Options that control how the result set is returned.
+     */
+    resultSetOptions?: ResultSetOptions;
+    /**
+     * A value that indicates whether to format the result set as a single JSON string. This parameter only applies to SELECT statements and is ignored for other types of statements. Allowed values are NONE and JSON. The default value is NONE. The result is returned in the formattedRecords field. For usage information about the JSON format for result sets, see Using the Data API in the Amazon Aurora User Guide.
+     */
+    formatRecordsAs?: RecordsFormatType;
   }
   export interface ExecuteStatementResponse {
+    /**
+     * The records returned by the SQL statement. This field is blank if the formatRecordsAs parameter is set to JSON.
+     */
+    records?: SqlRecords;
     /**
      * Metadata for the columns included in the results. This field is blank if the formatRecordsAs parameter is set to JSON.
      */
     columnMetadata?: Metadata;
     /**
-     * A string value that represents the result set of a SELECT statement in JSON format. This value is only present when the formatRecordsAs parameter is set to JSON. The size limit for this field is currently 10 MB. If the JSON-formatted string representing the result set requires more than 10 MB, the call returns an error.
+     * The number of records updated by the request.
      */
-    formattedRecords?: FormattedSqlRecords;
+    numberOfRecordsUpdated?: RecordsUpdated;
     /**
      * Values for fields generated during a DML request.  &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn't supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; 
      */
     generatedFields?: FieldList;
     /**
-     * The number of records updated by the request.
+     * A string value that represents the result set of a SELECT statement in JSON format. This value is only present when the formatRecordsAs parameter is set to JSON. The size limit for this field is currently 10 MB. If the JSON-formatted string representing the result set requires more than 10 MB, the call returns an error.
      */
-    numberOfRecordsUpdated?: RecordsUpdated;
-    /**
-     * The records returned by the SQL statement. This field is blank if the formatRecordsAs parameter is set to JSON.
-     */
-    records?: SqlRecords;
+    formattedRecords?: FormattedSqlRecords;
   }
   export interface Field {
-    /**
-     * An array of values.
-     */
-    arrayValue?: ArrayValue;
-    /**
-     * A value of BLOB data type.
-     */
-    blobValue?: _Blob;
-    /**
-     * A value of Boolean data type.
-     */
-    booleanValue?: BoxedBoolean;
-    /**
-     * A value of double data type.
-     */
-    doubleValue?: BoxedDouble;
     /**
      * A NULL value.
      */
     isNull?: BoxedBoolean;
     /**
+     * A value of Boolean data type.
+     */
+    booleanValue?: BoxedBoolean;
+    /**
      * A value of long data type.
      */
     longValue?: BoxedLong;
     /**
+     * A value of double data type.
+     */
+    doubleValue?: BoxedDouble;
+    /**
      * A value of string data type.
      */
     stringValue?: String;
+    /**
+     * A value of BLOB data type.
+     */
+    blobValue?: _Blob;
+    /**
+     * An array of values.
+     */
+    arrayValue?: ArrayValue;
   }
   export type FieldList = Field[];
   export type FormattedSqlRecords = string;
@@ -381,13 +381,13 @@ declare namespace RDSDataService {
   export type RecordsUpdated = number;
   export interface ResultFrame {
     /**
-     * The records in the result set.
-     */
-    records?: Records;
-    /**
      * The result-set metadata in the result set.
      */
     resultSetMetadata?: ResultSetMetadata;
+    /**
+     * The records in the result set.
+     */
+    records?: Records;
   }
   export interface ResultSetMetadata {
     /**
@@ -436,13 +436,13 @@ declare namespace RDSDataService {
      */
     name?: ParameterName;
     /**
-     * A hint that specifies the correct object type for data type mapping. Possible values are as follows:    DATE - The corresponding String parameter value is sent as an object of DATE type to the database. The accepted format is YYYY-MM-DD.    DECIMAL - The corresponding String parameter value is sent as an object of DECIMAL type to the database.    JSON - The corresponding String parameter value is sent as an object of JSON type to the database.    TIME - The corresponding String parameter value is sent as an object of TIME type to the database. The accepted format is HH:MM:SS[.FFF].    TIMESTAMP - The corresponding String parameter value is sent as an object of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].    UUID - The corresponding String parameter value is sent as an object of UUID type to the database.   
-     */
-    typeHint?: TypeHint;
-    /**
      * The value of the parameter.
      */
     value?: Field;
+    /**
+     * A hint that specifies the correct object type for data type mapping. Possible values are as follows:    DATE - The corresponding String parameter value is sent as an object of DATE type to the database. The accepted format is YYYY-MM-DD.    DECIMAL - The corresponding String parameter value is sent as an object of DECIMAL type to the database.    JSON - The corresponding String parameter value is sent as an object of JSON type to the database.    TIME - The corresponding String parameter value is sent as an object of TIME type to the database. The accepted format is HH:MM:SS[.FFF].    TIMESTAMP - The corresponding String parameter value is sent as an object of TIMESTAMP type to the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].    UUID - The corresponding String parameter value is sent as an object of UUID type to the database.   
+     */
+    typeHint?: TypeHint;
   }
   export type SqlParameterSets = SqlParametersList[];
   export type SqlParametersList = SqlParameter[];
@@ -450,13 +450,13 @@ declare namespace RDSDataService {
   export type SqlStatement = string;
   export interface SqlStatementResult {
     /**
-     * The number of records updated by a SQL statement.
-     */
-    numberOfRecordsUpdated?: RecordsUpdated;
-    /**
      * The result set of the SQL statement.
      */
     resultFrame?: ResultFrame;
+    /**
+     * The number of records updated by a SQL statement.
+     */
+    numberOfRecordsUpdated?: RecordsUpdated;
   }
   export type SqlStatementResults = SqlStatementResult[];
   export type String = string;
@@ -478,33 +478,25 @@ declare namespace RDSDataService {
   export type UpdateResults = UpdateResult[];
   export interface Value {
     /**
-     * An array of column values.
+     * A NULL value.
      */
-    arrayValues?: ArrayValueList;
-    /**
-     * A value for a column of big integer data type.
-     */
-    bigIntValue?: BoxedLong;
+    isNull?: BoxedBoolean;
     /**
      * A value for a column of BIT data type.
      */
     bitValue?: BoxedBoolean;
     /**
-     * A value for a column of BLOB data type.
+     * A value for a column of big integer data type.
      */
-    blobValue?: _Blob;
-    /**
-     * A value for a column of double data type.
-     */
-    doubleValue?: BoxedDouble;
+    bigIntValue?: BoxedLong;
     /**
      * A value for a column of integer data type.
      */
     intValue?: BoxedInteger;
     /**
-     * A NULL value.
+     * A value for a column of double data type.
      */
-    isNull?: BoxedBoolean;
+    doubleValue?: BoxedDouble;
     /**
      * A value for a column of real data type.
      */
@@ -513,6 +505,14 @@ declare namespace RDSDataService {
      * A value for a column of string data type.
      */
     stringValue?: String;
+    /**
+     * A value for a column of BLOB data type.
+     */
+    blobValue?: _Blob;
+    /**
+     * An array of column values.
+     */
+    arrayValues?: ArrayValueList;
     /**
      * A value for a column of STRUCT data type.
      */

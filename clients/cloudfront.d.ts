@@ -398,19 +398,19 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.GetMonitoringSubscriptionResult) => void): Request<CloudFront.Types.GetMonitoringSubscriptionResult, AWSError>;
   /**
-   * Gets a CloudFront origin access control.
+   * Gets a CloudFront origin access control, including its unique identifier.
    */
   getOriginAccessControl(params: CloudFront.Types.GetOriginAccessControlRequest, callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlResult) => void): Request<CloudFront.Types.GetOriginAccessControlResult, AWSError>;
   /**
-   * Gets a CloudFront origin access control.
+   * Gets a CloudFront origin access control, including its unique identifier.
    */
   getOriginAccessControl(callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlResult) => void): Request<CloudFront.Types.GetOriginAccessControlResult, AWSError>;
   /**
-   * Gets a CloudFront origin access control.
+   * Gets a CloudFront origin access control configuration.
    */
   getOriginAccessControlConfig(params: CloudFront.Types.GetOriginAccessControlConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlConfigResult) => void): Request<CloudFront.Types.GetOriginAccessControlConfigResult, AWSError>;
   /**
-   * Gets a CloudFront origin access control.
+   * Gets a CloudFront origin access control configuration.
    */
   getOriginAccessControlConfig(callback?: (err: AWSError, data: CloudFront.Types.GetOriginAccessControlConfigResult) => void): Request<CloudFront.Types.GetOriginAccessControlConfigResult, AWSError>;
   /**
@@ -2726,7 +2726,7 @@ declare namespace CloudFront {
   }
   export interface GetOriginAccessControlConfigResult {
     /**
-     * Contains an origin access control.
+     * Contains an origin access control configuration.
      */
     OriginAccessControlConfig?: OriginAccessControlConfig;
     /**
@@ -2742,7 +2742,7 @@ declare namespace CloudFront {
   }
   export interface GetOriginAccessControlResult {
     /**
-     * Contains an origin access control.
+     * Contains an origin access control, including its unique identifier.
      */
     OriginAccessControl?: OriginAccessControl;
     /**
@@ -3574,7 +3574,7 @@ declare namespace CloudFront {
      */
     SigningProtocol: OriginAccessControlSigningProtocols;
     /**
-     * Specifies which requests CloudFront signs (adds authentication information to). Specify always for the most common use case. For more information, see origin access control advanced settings in the Amazon CloudFront Developer Guide. This field can have one of the following values:    always – CloudFront signs all origin requests, overwriting the Authorization header from the viewer request if one exists.    never – CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.    no-override – If the viewer request doesn't contain the Authorization header, then CloudFront signs the origin request. If the viewer request contains the Authorization header, then CloudFront doesn't sign the origin request and instead passes along the Authorization header from the viewer request. WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to an origin request policy for all cache behaviors that use origins associated with this origin access control.   
+     * Specifies which requests CloudFront signs (adds authentication information to). Specify always for the most common use case. For more information, see origin access control advanced settings in the Amazon CloudFront Developer Guide. This field can have one of the following values:    always – CloudFront signs all origin requests, overwriting the Authorization header from the viewer request if one exists.    never – CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.    no-override – If the viewer request doesn't contain the Authorization header, then CloudFront signs the origin request. If the viewer request contains the Authorization header, then CloudFront doesn't sign the origin request and instead passes along the Authorization header from the viewer request. WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to a cache policy for all cache behaviors that use origins associated with this origin access control.   
      */
     SigningBehavior: OriginAccessControlSigningBehaviors;
     /**
