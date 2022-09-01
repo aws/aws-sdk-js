@@ -313,3 +313,4 @@ export import LicenseManagerUserSubscriptions = require('./licensemanagerusersub
 export import BackupStorage = require('./backupstorage');
 export import PrivateNetworks = require('./privatenetworks');
 export import SupportApp = require('./supportapp');
+export import ControlTower = require('./controltower');

@@ -314,5 +314,6 @@ module.exports = {
   LicenseManagerUserSubscriptions: require('./licensemanagerusersubscriptions'),
   BackupStorage: require('./backupstorage'),
   PrivateNetworks: require('./privatenetworks'),
-  SupportApp: require('./supportapp')
+  SupportApp: require('./supportapp'),
+  ControlTower: require('./controltower')
 };
