@@ -8849,12 +8849,20 @@ declare namespace SageMaker {
      * A collection of settings that configure the RStudioServerPro Domain-level app.
      */
     RStudioServerProDomainSettings?: RStudioServerProDomainSettings;
+    /**
+     * The configuration for attaching a SageMaker user profile name to the execution role as a  sts:SourceIdentity key.
+     */
+    ExecutionRoleIdentityConfig?: ExecutionRoleIdentityConfig;
   }
   export interface DomainSettingsForUpdate {
     /**
      * A collection of RStudioServerPro Domain-level app settings to update.
      */
     RStudioServerProDomainSettingsForUpdate?: RStudioServerProDomainSettingsForUpdate;
+    /**
+     * The configuration for attaching a SageMaker user profile name to the execution role as a  sts:SourceIdentity key. This configuration can only be modified if there are no apps in the InService or Pending state.
+     */
+    ExecutionRoleIdentityConfig?: ExecutionRoleIdentityConfig;
   }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type DoubleParameterValue = number;
@@ -9364,6 +9372,7 @@ declare namespace SageMaker {
   }
   export type EnvironmentParameters = EnvironmentParameter[];
   export type EnvironmentValue = string;
+  export type ExecutionRoleIdentityConfig = "USER_PROFILE_NAME"|"DISABLED"|string;
   export type ExecutionStatus = "Pending"|"Completed"|"CompletedWithViolations"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
   export type ExitMessage = string;
   export interface Experiment {

@@ -324,11 +324,11 @@ declare class Connect extends Service {
    */
   describeAgentStatus(callback?: (err: AWSError, data: Connect.Types.DescribeAgentStatusResponse) => void): Request<Connect.Types.DescribeAgentStatusResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information remains available in Amazon Connect for 24 months, and then it is deleted. 
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information remains available in Amazon Connect for 24 months, and then it is deleted. Only data from November 12, 2021, and later is returned by this API. 
    */
   describeContact(params: Connect.Types.DescribeContactRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information remains available in Amazon Connect for 24 months, and then it is deleted. 
+   * This API is in preview release for Amazon Connect and is subject to change. Describes the specified contact.   Contact information remains available in Amazon Connect for 24 months, and then it is deleted. Only data from November 12, 2021, and later is returned by this API. 
    */
   describeContact(callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
   /**
@@ -588,11 +588,11 @@ declare class Connect extends Service {
    */
   listApprovedOrigins(callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. 
+   * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. Use this API to returns both Amazon Lex V1 and V2 bots.
    */
   listBots(params: Connect.Types.ListBotsRequest, callback?: (err: AWSError, data: Connect.Types.ListBotsResponse) => void): Request<Connect.Types.ListBotsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. 
+   * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. Use this API to returns both Amazon Lex V1 and V2 bots.
    */
   listBots(callback?: (err: AWSError, data: Connect.Types.ListBotsResponse) => void): Request<Connect.Types.ListBotsResponse, AWSError>;
   /**
@@ -676,11 +676,11 @@ declare class Connect extends Service {
    */
   listLambdaFunctions(callback?: (err: AWSError, data: Connect.Types.ListLambdaFunctionsResponse) => void): Request<Connect.Types.ListLambdaFunctionsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Amazon Lex V1 bots currently associated with the instance. To return both Amazon Lex V1 and V2 bots, use the ListBots API. 
    */
   listLexBots(params: Connect.Types.ListLexBotsRequest, callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all the Amazon Lex V1 bots currently associated with the instance. To return both Amazon Lex V1 and V2 bots, use the ListBots API. 
    */
   listLexBots(callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
@@ -843,6 +843,22 @@ declare class Connect extends Service {
    * Searches for available phone numbers that you can claim to your Amazon Connect instance.
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Searches queues in an Amazon Connect instance, with optional filtering.
+   */
+  searchQueues(params: Connect.Types.SearchQueuesRequest, callback?: (err: AWSError, data: Connect.Types.SearchQueuesResponse) => void): Request<Connect.Types.SearchQueuesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Searches queues in an Amazon Connect instance, with optional filtering.
+   */
+  searchQueues(callback?: (err: AWSError, data: Connect.Types.SearchQueuesResponse) => void): Request<Connect.Types.SearchQueuesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Searches routing profiles in an Amazon Connect instance, with optional filtering.
+   */
+  searchRoutingProfiles(params: Connect.Types.SearchRoutingProfilesRequest, callback?: (err: AWSError, data: Connect.Types.SearchRoutingProfilesResponse) => void): Request<Connect.Types.SearchRoutingProfilesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Searches routing profiles in an Amazon Connect instance, with optional filtering.
+   */
+  searchRoutingProfiles(callback?: (err: AWSError, data: Connect.Types.SearchRoutingProfilesResponse) => void): Request<Connect.Types.SearchRoutingProfilesResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Searches security profiles in an Amazon Connect instance, with optional filtering.
    */
@@ -2188,7 +2204,7 @@ declare namespace Connect {
      */
     Description?: SecurityProfileDescription;
     /**
-     * Permissions assigned to the security profile.
+     * Permissions assigned to the security profile. For a list of valid permissions, see List of security profile permissions. 
      */
     Permissions?: PermissionsList;
     /**
@@ -4432,7 +4448,7 @@ declare namespace Connect {
   }
   export interface ListSecurityProfilePermissionsResponse {
     /**
-     * The permissions granted to the security profile.
+     * The permissions granted to the security profile. For a complete list of valid permissions, see List of security profile permissions.
      */
     Permissions?: PermissionsList;
     /**
@@ -4584,6 +4600,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export type Long = number;
   export type MaxResult10 = number;
   export type MaxResult100 = number;
   export type MaxResult1000 = number;
@@ -4801,6 +4818,26 @@ declare namespace Connect {
      */
     Arn?: ARN;
   }
+  export type QueueSearchConditionList = QueueSearchCriteria[];
+  export interface QueueSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: QueueSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: QueueSearchConditionList;
+    StringCondition?: StringCondition;
+    /**
+     * The type of queue.
+     */
+    QueueTypeCondition?: SearchableQueueType;
+  }
+  export interface QueueSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
+  }
+  export type QueueSearchSummaryList = Queue[];
   export type QueueStatus = "ENABLED"|"DISABLED"|string;
   export interface QueueSummary {
     /**
@@ -5008,9 +5045,18 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The number of associated queues in routing profile.
+     */
+    NumberOfAssociatedQueues?: Long;
+    /**
+     * The number of associated users in routing profile.
+     */
+    NumberOfAssociatedUsers?: Long;
   }
   export type RoutingProfileDescription = string;
   export type RoutingProfileId = string;
+  export type RoutingProfileList = RoutingProfile[];
   export type RoutingProfileName = string;
   export interface RoutingProfileQueueConfig {
     /**
@@ -5074,6 +5120,21 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the routing profile.
      */
     Arn?: ARN;
+  }
+  export type RoutingProfileSearchConditionList = RoutingProfileSearchCriteria[];
+  export interface RoutingProfileSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: RoutingProfileSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: RoutingProfileSearchConditionList;
+    StringCondition?: StringCondition;
+  }
+  export interface RoutingProfileSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
   }
   export interface RoutingProfileSummary {
     /**
@@ -5139,6 +5200,78 @@ declare namespace Connect {
      * A list of available phone numbers that you can claim for your Amazon Connect instance.
      */
     AvailableNumbersList?: AvailableNumbersList;
+  }
+  export interface SearchQueuesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: QueueSearchFilter;
+    /**
+     * The search criteria to be used to return queues.
+     */
+    SearchCriteria?: QueueSearchCriteria;
+  }
+  export interface SearchQueuesResponse {
+    /**
+     * Information about the queues.
+     */
+    Queues?: QueueSearchSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of queues which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
+  export interface SearchRoutingProfilesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: RoutingProfileSearchFilter;
+    /**
+     * The search criteria to be used to return routing profiles.
+     */
+    SearchCriteria?: RoutingProfileSearchCriteria;
+  }
+  export interface SearchRoutingProfilesResponse {
+    /**
+     * Information about the routing profiles.
+     */
+    RoutingProfiles?: RoutingProfileList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of routing profiles which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
   }
   export interface SearchSecurityProfilesRequest {
     /**
@@ -5245,6 +5378,7 @@ declare namespace Connect {
      */
     NextToken?: VocabularyNextToken;
   }
+  export type SearchableQueueType = "STANDARD"|string;
   export interface SecurityKey {
     /**
      * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
@@ -5892,7 +6026,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * TThe name of the flow.
+     * The name of the flow.
      */
     Name?: ContactFlowName;
     /**
@@ -6255,7 +6389,7 @@ declare namespace Connect {
      */
     Description?: SecurityProfileDescription;
     /**
-     * The permissions granted to a security profile.
+     * The permissions granted to a security profile. For a list of valid permissions, see List of security profile permissions.
      */
     Permissions?: PermissionsList;
     /**

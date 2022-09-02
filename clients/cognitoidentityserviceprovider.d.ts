@@ -1575,6 +1575,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type AuthEventsType = AuthEventType[];
   export type AuthFlowType = "USER_SRP_AUTH"|"REFRESH_TOKEN_AUTH"|"REFRESH_TOKEN"|"CUSTOM_AUTH"|"ADMIN_NO_SRP_AUTH"|"USER_PASSWORD_AUTH"|"ADMIN_USER_PASSWORD_AUTH"|string;
   export type AuthParametersType = {[key: string]: StringType};
+  export type AuthSessionValidityType = number;
   export interface AuthenticationResultType {
     /**
      * A valid access token that Amazon Cognito issued to the user who you want to authenticate.
@@ -1985,6 +1986,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Activates the propagation of additional user context data. For more information about propagation of user context data, see  Adding advanced security to a user pool. If you don’t include this parameter, you can't send device fingerprint information, including source IP address, to Amazon Cognito advanced security. You can only activate EnablePropagateAdditionalUserContextData in an app client that has a client secret.
      */
     EnablePropagateAdditionalUserContextData?: WrappedBooleanType;
+    /**
+     * Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.
+     */
+    AuthSessionValidity?: AuthSessionValidityType;
   }
   export interface CreateUserPoolClientResponse {
     /**
@@ -2038,15 +2043,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UsernameAttributes?: UsernameAttributesListType;
     /**
-     * A string representing the SMS verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     SmsVerificationMessage?: SmsVerificationMessageType;
     /**
-     * A string representing the email verification message. EmailVerificationMessage is allowed only if EmailSendingAccount is DEVELOPER. 
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     EmailVerificationMessage?: EmailVerificationMessageType;
     /**
-     * A string representing the email verification subject. EmailVerificationSubject is allowed only if EmailSendingAccount is DEVELOPER. 
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
     /**
@@ -2325,11 +2330,11 @@ declare namespace CognitoIdentityServiceProvider {
   export type DescriptionType = string;
   export interface DeviceConfigurationType {
     /**
-     * When true, device authentication can replace SMS and time-based one-time password (TOTP) factors for multi-factor authentication (MFA).  Regardless of the value of this field, users that sign in with new devices that have not been confirmed or remembered must provide a second factor if your user pool requires MFA. 
+     * When true, a remembered device can sign in with device authentication instead of SMS and time-based one-time password (TOTP) factors for multi-factor authentication (MFA).  Whether or not ChallengeRequiredOnNewDevice is true, users who sign in with devices that have not been confirmed or remembered must still provide a second factor in a user pool that requires MFA. 
      */
     ChallengeRequiredOnNewDevice?: BooleanType;
     /**
-     * When true, Amazon Cognito doesn't remember newly-confirmed devices. Users who want to authenticate with their device can instead opt in to remembering their device. To collect a choice from your user, create an input prompt in your app and return the value that the user chooses in an UpdateDeviceStatus API request.
+     * When true, Amazon Cognito doesn't automatically remember a user's device when your app sends a  ConfirmDevice API request. In your app, create a prompt for your user to choose whether they want to remember their device. Return the user's choice in an  UpdateDeviceStatus API request. When DeviceOnlyRememberedOnUserPrompt is false, Amazon Cognito immediately remembers devices that you register in a ConfirmDevice API request.
      */
     DeviceOnlyRememberedOnUserPrompt?: BooleanType;
   }
@@ -4074,6 +4079,10 @@ declare namespace CognitoIdentityServiceProvider {
      * Activates the propagation of additional user context data. For more information about propagation of user context data, see  Adding advanced security to a user pool. If you don’t include this parameter, you can't send device fingerprint information, including source IP address, to Amazon Cognito advanced security. You can only activate EnablePropagateAdditionalUserContextData in an app client that has a client secret.
      */
     EnablePropagateAdditionalUserContextData?: WrappedBooleanType;
+    /**
+     * Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.
+     */
+    AuthSessionValidity?: AuthSessionValidityType;
   }
   export interface UpdateUserPoolClientResponse {
     /**
@@ -4119,15 +4128,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AutoVerifiedAttributes?: VerifiedAttributesListType;
     /**
-     * A container with information about the SMS verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     SmsVerificationMessage?: SmsVerificationMessageType;
     /**
-     * The contents of the email verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     EmailVerificationMessage?: EmailVerificationMessageType;
     /**
-     * The subject of the email verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
     /**
@@ -4371,6 +4380,10 @@ declare namespace CognitoIdentityServiceProvider {
      * When EnablePropagateAdditionalUserContextData is true, Amazon Cognito accepts an IpAddress value that you send in the UserContextData parameter. The UserContextData parameter sends information to Amazon Cognito advanced security for risk analysis. You can send UserContextData when you sign in Amazon Cognito native users with the InitiateAuth and RespondToAuthChallenge API operations. When EnablePropagateAdditionalUserContextData is false, you can't send your user's source IP address to Amazon Cognito advanced security with unauthenticated API operations. EnablePropagateAdditionalUserContextData doesn't affect whether you can send a source IP address in a ContextData parameter with the authenticated API operations AdminInitiateAuth and AdminRespondToAuthChallenge. You can only activate EnablePropagateAdditionalUserContextData in an app client that has a client secret. For more information about propagation of user context data, see Adding user device and session data to API requests.
      */
     EnablePropagateAdditionalUserContextData?: WrappedBooleanType;
+    /**
+     * Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires.
+     */
+    AuthSessionValidity?: AuthSessionValidityType;
   }
   export interface UserPoolDescriptionType {
     /**
@@ -4456,15 +4469,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UsernameAttributes?: UsernameAttributesListType;
     /**
-     * The contents of the SMS verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     SmsVerificationMessage?: SmsVerificationMessageType;
     /**
-     * The contents of the email verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     EmailVerificationMessage?: EmailVerificationMessageType;
     /**
-     * The subject of the email verification message.
+     * This parameter is no longer used. See VerificationMessageTemplateType.
      */
     EmailVerificationSubject?: EmailVerificationSubjectType;
     /**
