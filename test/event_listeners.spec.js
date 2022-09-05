@@ -240,6 +240,18 @@
           return sendRequest(body).httpRequest.headers['Content-Length'];
         };
 
+        describe('when request is GET or other bodyless method', function() {
+          it('should skip adding content-length header', function() {
+            var service = new FooService();
+            var req = service.get({});
+
+            req.runTo('sign', function(err) {
+              expect('Content-Length' in req.httpRequest.headers).to.equal(false);
+              expect(!err).to.equal(true);
+            });
+          });
+        });
+
         describe('when using unsigned authtype', function() {
           it('when payload is a buffer', function() {
             var service = new FooService();

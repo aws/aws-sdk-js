@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Http",
+  "description": "skip addition of content length 0 header for GET etc. bodyless requests"
+}

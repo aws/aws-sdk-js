@@ -15,6 +15,12 @@ var model = {
     'uid': 'foo-2018-06-13'
   },
   'operations': {
+    'Get': {
+      'http': {
+        'method': 'GET',
+        'requestUri': '/'
+      }
+    },
     'PutStream': {
       'http': {
         'method': 'PUT',
