@@ -572,7 +572,7 @@ const exp = require('constants');
             done();
           });
         });
-        it('will pass httpOptions through', function(done) {
+        it('passes httpOptions through', function(done) {
           var httpClient, spy;
           helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
           creds = new AWS.SsoCredentials({
