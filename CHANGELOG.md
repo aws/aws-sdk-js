@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1209.0-->
+<!--LATEST=2.1210.0-->
 <!--ENTRYINSERT-->
+
+## 2.1210.0
+* feature: SageMaker: This release adds HyperParameterTuningJob type in Search API.
 
 ## 2.1209.0
 * feature: CognitoIdentityServiceProvider: This release adds a new "AuthSessionValidity" field to the UserPoolClient in Cognito. Application admins can configure this value for their users' authentication duration, which is currently fixed at 3 minutes, up to 15 minutes. Setting this field will also apply to the SMS MFA authentication flow.

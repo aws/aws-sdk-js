@@ -68,11 +68,11 @@ declare class IdentityStore extends Service {
    */
   describeGroup(callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupResponse) => void): Request<IdentityStore.Types.DescribeGroupResponse, AWSError>;
   /**
-   * Retrieves membership metadata and attributes from MembershipId in a group.
+   * Retrieves membership metadata and attributes from MembershipId in an identity store.
    */
   describeGroupMembership(params: IdentityStore.Types.DescribeGroupMembershipRequest, callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupMembershipResponse) => void): Request<IdentityStore.Types.DescribeGroupMembershipResponse, AWSError>;
   /**
-   * Retrieves membership metadata and attributes from MembershipId in a group.
+   * Retrieves membership metadata and attributes from MembershipId in an identity store.
    */
   describeGroupMembership(callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupMembershipResponse) => void): Request<IdentityStore.Types.DescribeGroupMembershipResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class IdentityStore extends Service {
    */
   getGroupId(callback?: (err: AWSError, data: IdentityStore.Types.GetGroupIdResponse) => void): Request<IdentityStore.Types.GetGroupIdResponse, AWSError>;
   /**
-   * Retrieves the MembershipId in a group.
+   * Retrieves the MembershipId in an identity store.
    */
   getGroupMembershipId(params: IdentityStore.Types.GetGroupMembershipIdRequest, callback?: (err: AWSError, data: IdentityStore.Types.GetGroupMembershipIdResponse) => void): Request<IdentityStore.Types.GetGroupMembershipIdResponse, AWSError>;
   /**
-   * Retrieves the MembershipId in a group.
+   * Retrieves the MembershipId in an identity store.
    */
   getGroupMembershipId(callback?: (err: AWSError, data: IdentityStore.Types.GetGroupMembershipIdResponse) => void): Request<IdentityStore.Types.GetGroupMembershipIdResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class IdentityStore extends Service {
    */
   getUserId(callback?: (err: AWSError, data: IdentityStore.Types.GetUserIdResponse) => void): Request<IdentityStore.Types.GetUserIdResponse, AWSError>;
   /**
-   * Returns if a member exists in specified groups.
+   * Checks the user's membership in all requested groups and returns if the member exists in all queried groups.
    */
   isMemberInGroups(params: IdentityStore.Types.IsMemberInGroupsRequest, callback?: (err: AWSError, data: IdentityStore.Types.IsMemberInGroupsResponse) => void): Request<IdentityStore.Types.IsMemberInGroupsResponse, AWSError>;
   /**
-   * Returns if a member exists in specified groups.
+   * Checks the user's membership in all requested groups and returns if the member exists in all queried groups.
    */
   isMemberInGroups(callback?: (err: AWSError, data: IdentityStore.Types.IsMemberInGroupsResponse) => void): Request<IdentityStore.Types.IsMemberInGroupsResponse, AWSError>;
   /**
@@ -132,19 +132,19 @@ declare class IdentityStore extends Service {
    */
   listGroupMembershipsForMember(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupMembershipsForMemberResponse) => void): Request<IdentityStore.Types.ListGroupMembershipsForMemberResponse, AWSError>;
   /**
-   *  Filtering for a group by the group DisplayName attribute is deprecated. Instead, use the GetGroupId API action.  Lists all groups in the identity store. Returns a paginated list of complete Group objects.
+   * Lists the attribute name and value of the group that you specified in the search. We only support DisplayName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including GroupId and group DisplayName in the response.
    */
   listGroups(params: IdentityStore.Types.ListGroupsRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListGroupsResponse) => void): Request<IdentityStore.Types.ListGroupsResponse, AWSError>;
   /**
-   *  Filtering for a group by the group DisplayName attribute is deprecated. Instead, use the GetGroupId API action.  Lists all groups in the identity store. Returns a paginated list of complete Group objects.
+   * Lists the attribute name and value of the group that you specified in the search. We only support DisplayName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including GroupId and group DisplayName in the response.
    */
   listGroups(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupsResponse) => void): Request<IdentityStore.Types.ListGroupsResponse, AWSError>;
   /**
-   *  Filtering for a user by the UserName attribute is deprecated. Instead, use the GetUserId API action.  Lists all users in the identity store. Returns a paginated list of complete User objects.
+   * Lists the attribute name and value of the user that you specified in the search. We only support UserName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including UserId and UserName in the response.
    */
   listUsers(params: IdentityStore.Types.ListUsersRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListUsersResponse) => void): Request<IdentityStore.Types.ListUsersResponse, AWSError>;
   /**
-   *  Filtering for a user by the UserName attribute is deprecated. Instead, use the GetUserId API action.  Lists all users in the identity store. Returns a paginated list of complete User objects.
+   * Lists the attribute name and value of the user that you specified in the search. We only support UserName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including UserId and UserName in the response.
    */
   listUsers(callback?: (err: AWSError, data: IdentityStore.Types.ListUsersResponse) => void): Request<IdentityStore.Types.ListUsersResponse, AWSError>;
   /**
@@ -195,7 +195,7 @@ declare namespace IdentityStore {
      */
     Type?: SensitiveStringType;
     /**
-     * A boolean representing whether this is the primary address for the associated resource.
+     * A Boolean value representing whether this is the primary address for the associated resource.
      */
     Primary?: SensitiveBooleanType;
   }
@@ -216,7 +216,7 @@ declare namespace IdentityStore {
      */
     AttributePath: AttributePath;
     /**
-     * The value of the attribute.
+     * The value of the attribute. This is a Document type. This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.
      */
     AttributeValue?: AttributeValue;
   }
@@ -240,7 +240,7 @@ declare namespace IdentityStore {
   }
   export interface CreateGroupMembershipResponse {
     /**
-     * The identifier for a GroupMembership in the identity store.
+     * The identifier for a newly created GroupMembership in an identity store.
      */
     MembershipId: ResourceId;
     /**
@@ -278,7 +278,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
      */
     UserName?: UserName;
     /**
@@ -346,7 +346,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * The identifier for a GroupMembership in the identity store.
+     * The identifier for a GroupMembership in an identity store.
      */
     MembershipId: ResourceId;
   }
@@ -382,7 +382,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * The identifier for a GroupMembership in the identity store.
+     * The identifier for a GroupMembership in an identity store.
      */
     MembershipId: ResourceId;
   }
@@ -392,7 +392,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * The identifier for a GroupMembership in the identity store.
+     * The identifier for a GroupMembership in an identity store.
      */
     MembershipId: ResourceId;
     /**
@@ -445,7 +445,7 @@ declare namespace IdentityStore {
   }
   export interface DescribeUserResponse {
     /**
-     * The user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
      */
     UserName?: UserName;
     /**
@@ -519,7 +519,7 @@ declare namespace IdentityStore {
      */
     Type?: SensitiveStringType;
     /**
-     * A boolean representing whether this is the primary email for the associated resource.
+     * A Boolean value representing whether this is the primary email address for the associated resource.
      */
     Primary?: SensitiveBooleanType;
   }
@@ -554,7 +554,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique identifier for the group value that is not the group's primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a unique GroupDisplayName.
+     * A unique identifier for an identity resource that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a unique GroupDisplayName.
      */
     AlternateIdentifier: AlternateIdentifier;
   }
@@ -584,7 +584,7 @@ declare namespace IdentityStore {
   }
   export interface GetGroupMembershipIdResponse {
     /**
-     * The identifier for a GroupMembership in the identity store.
+     * The identifier for a GroupMembership in an identity store.
      */
     MembershipId: ResourceId;
     /**
@@ -598,7 +598,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * Any unique attribute associated with a user that is not the UserId.
+     * A unique identifier for an identity resource that is not the primary identifier.
      */
     AlternateIdentifier: AlternateIdentifier;
   }
@@ -642,7 +642,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * The identifier for a GroupMembership object in the identity store.
+     * The identifier for a GroupMembership object in an identity store.
      */
     MembershipId?: ResourceId;
     /**
@@ -688,7 +688,7 @@ declare namespace IdentityStore {
   }
   export interface IsMemberInGroupsResponse {
     /**
-     * An object containing results of batch IsMemberInGroups call.
+     * A list containing the results of membership existence checks.
      */
     Results: GroupMembershipExistenceResults;
   }
@@ -706,7 +706,7 @@ declare namespace IdentityStore {
      */
     MaxResults?: MaxResults;
     /**
-     * The pagination token used for the ListUsers, ListGroups and ListGroupMemberships API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
+     * The pagination token used for the ListUsers, ListGroups, and ListGroupMemberships API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
      */
     NextToken?: NextToken;
   }
@@ -716,7 +716,7 @@ declare namespace IdentityStore {
      */
     GroupMemberships: GroupMemberships;
     /**
-     * The pagination token used for the ListUsers, ListGroups and ListGroupMemberships API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page. 
+     * The pagination token used for the ListUsers, ListGroups, and ListGroupMemberships API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page. 
      */
     NextToken?: NextToken;
   }
@@ -730,7 +730,7 @@ declare namespace IdentityStore {
      */
     GroupId: ResourceId;
     /**
-     * The maximum number of results to be returned per request. This parameter is used in the ListUsers and ListGroups requests to specify how many results to return in one page. The length limit is 50 characters.
+     * The maximum number of results to be returned per request. This parameter is used in all List requests to specify how many results to return in one page.
      */
     MaxResults?: MaxResults;
     /**
@@ -744,7 +744,7 @@ declare namespace IdentityStore {
      */
     GroupMemberships: GroupMemberships;
     /**
-     * The pagination token used for the ListUsers, ListGroups and ListGroupMemberships API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
+     * The pagination token used for the ListUsers, ListGroups, and ListGroupMemberships API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
      */
     NextToken?: NextToken;
   }
@@ -762,7 +762,7 @@ declare namespace IdentityStore {
      */
     NextToken?: NextToken;
     /**
-     * A list of Filter objects that is used in the ListUsers and ListGroups requests.
+     * A list of Filter objects, which is used in the ListUsers and ListGroups requests.
      */
     Filters?: Filters;
   }
@@ -790,7 +790,7 @@ declare namespace IdentityStore {
      */
     NextToken?: NextToken;
     /**
-     * A list of Filter objects that is used in the ListUsers and ListGroups requests.
+     * A list of Filter objects, which is used in the ListUsers and ListGroups requests. 
      */
     Filters?: Filters;
   }
@@ -848,7 +848,7 @@ declare namespace IdentityStore {
      */
     Type?: SensitiveStringType;
     /**
-     * A boolean representing whether this is the primary phone number for the associated resource.
+     * A Boolean value representing whether this is the primary phone number for the associated resource.
      */
     Primary?: SensitiveBooleanType;
   }
@@ -862,7 +862,7 @@ declare namespace IdentityStore {
      */
     AttributePath: AttributePath;
     /**
-     * The value of the attribute.
+     * The value of the attribute. This is a Document type. This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.
      */
     AttributeValue: AttributeValue;
   }
@@ -900,7 +900,7 @@ declare namespace IdentityStore {
   }
   export interface User {
     /**
-     * The user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
      */
     UserName?: UserName;
     /**
@@ -944,7 +944,7 @@ declare namespace IdentityStore {
      */
     UserType?: SensitiveStringType;
     /**
-     * A string containing the user's title. Possible values depend on each customer's specific needs, so they are left unspecified
+     * A string containing the user's title. Possible values depend on each customer's specific needs, so they are left unspecified.
      */
     Title?: SensitiveStringType;
     /**

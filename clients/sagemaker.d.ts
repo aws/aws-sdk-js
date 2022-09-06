@@ -10228,6 +10228,51 @@ declare namespace SageMaker {
   }
   export type HyperParameterTuningJobObjectiveType = "Maximize"|"Minimize"|string;
   export type HyperParameterTuningJobObjectives = HyperParameterTuningJobObjective[];
+  export interface HyperParameterTuningJobSearchEntity {
+    /**
+     * The name of a hyperparameter tuning job.
+     */
+    HyperParameterTuningJobName?: HyperParameterTuningJobName;
+    /**
+     * The Amazon Resource Name (ARN) of a hyperparameter tuning job.
+     */
+    HyperParameterTuningJobArn?: HyperParameterTuningJobArn;
+    HyperParameterTuningJobConfig?: HyperParameterTuningJobConfig;
+    TrainingJobDefinition?: HyperParameterTrainingJobDefinition;
+    /**
+     * The job definitions included in a hyperparameter tuning job.
+     */
+    TrainingJobDefinitions?: HyperParameterTrainingJobDefinitions;
+    /**
+     * The status of a hyperparameter tuning job.
+     */
+    HyperParameterTuningJobStatus?: HyperParameterTuningJobStatus;
+    /**
+     * The time that a hyperparameter tuning job was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time that a hyperparameter tuning job ended.
+     */
+    HyperParameterTuningEndTime?: Timestamp;
+    /**
+     * The time that a hyperparameter tuning job was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    TrainingJobStatusCounters?: TrainingJobStatusCounters;
+    ObjectiveStatusCounters?: ObjectiveStatusCounters;
+    BestTrainingJob?: HyperParameterTrainingJobSummary;
+    OverallBestTrainingJob?: HyperParameterTrainingJobSummary;
+    WarmStartConfig?: HyperParameterTuningJobWarmStartConfig;
+    /**
+     * The error that was created when a hyperparameter tuning job failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The tags associated with a hyperparameter tuning job. For more information see Tagging Amazon Web Services resources.
+     */
+    Tags?: TagList;
+  }
   export type HyperParameterTuningJobSortByOptions = "Name"|"Status"|"CreationTime"|string;
   export type HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export type HyperParameterTuningJobStrategyType = "Bayesian"|"Random"|string;
@@ -16267,7 +16312,7 @@ declare namespace SageMaker {
      */
     LifecycleConfigArn?: StudioLifecycleConfigArn;
   }
-  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|"FeatureMetadata"|string;
+  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|"FeatureMetadata"|"HyperParameterTuningJob"|string;
   export type ResponseMIMEType = string;
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
@@ -16407,6 +16452,10 @@ declare namespace SageMaker {
      * The feature metadata used to search through the features.
      */
     FeatureMetadata?: FeatureMetadata;
+    /**
+     * The properties of a hyperparameter tuning job.
+     */
+    HyperParameterTuningJob?: HyperParameterTuningJobSearchEntity;
   }
   export interface SearchRequest {
     /**
