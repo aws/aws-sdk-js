@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1210.0-->
+<!--LATEST=2.1211.0-->
 <!--ENTRYINSERT-->
+
+## 2.1211.0
+* bugfix: SSO: sso did not allow httpOptions to be passed through
+* feature: DataExchange: Documentation updates for AWS Data Exchange.
+* feature: EC2: Documentation updates for Amazon EC2.
+* feature: EKS: Adds support for EKS Addons ResolveConflicts "preserve" flag. Also adds new update failed status for EKS Addons.
+* feature: Inspector2: This release adds new fields like fixAvailable, fixedInVersion and remediation to the finding model. The requirement to have vulnerablePackages in the finding model has also been removed. The documentation has been updated to reflect these changes.
+* feature: IoTSiteWise: Allow specifying units in Asset Properties
+* feature: SNS: Amazon SNS introduces the Data Protection Policy APIs, which enable customers to attach a data protection policy to an SNS topic. This allows topic owners to enable the new message data protection feature to audit and block sensitive data that is exchanged through their topics.
+* feature: SageMaker: SageMaker Hosting now allows customization on ML instance storage volume size, model data download timeout and inference container startup ping health check timeout for each ProductionVariant in CreateEndpointConfig API.
 
 ## 2.1210.0
 * feature: SageMaker: This release adds HyperParameterTuningJob type in Search API.

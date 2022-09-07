@@ -101,11 +101,11 @@ declare class IoTSiteWise extends Service {
    */
   createAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAssetModelResponse) => void): Request<IoTSiteWise.Types.CreateAssetModelResponse, AWSError>;
   /**
-   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see Create a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.  You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see PutStorageConfiguration. 
+   * Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see Create a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.  You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see PutStorageConfiguration. 
    */
   createBulkImportJob(params: IoTSiteWise.Types.CreateBulkImportJobRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateBulkImportJobResponse) => void): Request<IoTSiteWise.Types.CreateBulkImportJobResponse, AWSError>;
   /**
-   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see Create a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.  You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see PutStorageConfiguration. 
+   * Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see Create a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.  You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see PutStorageConfiguration. 
    */
   createBulkImportJob(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateBulkImportJobResponse) => void): Request<IoTSiteWise.Types.CreateBulkImportJobResponse, AWSError>;
   /**
@@ -237,11 +237,11 @@ declare class IoTSiteWise extends Service {
    */
   describeAssetProperty(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAssetPropertyResponse) => void): Request<IoTSiteWise.Types.DescribeAssetPropertyResponse, AWSError>;
   /**
-   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves information about a bulk import job request. For more information, see Describe a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.
+   * Retrieves information about a bulk import job request. For more information, see Describe a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.
    */
   describeBulkImportJob(params: IoTSiteWise.Types.DescribeBulkImportJobRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeBulkImportJobResponse) => void): Request<IoTSiteWise.Types.DescribeBulkImportJobResponse, AWSError>;
   /**
-   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves information about a bulk import job request. For more information, see Describe a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.
+   * Retrieves information about a bulk import job request. For more information, see Describe a bulk import job (CLI) in the Amazon Simple Storage Service User Guide.
    */
   describeBulkImportJob(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeBulkImportJobResponse) => void): Request<IoTSiteWise.Types.DescribeBulkImportJobResponse, AWSError>;
   /**
@@ -405,11 +405,11 @@ declare class IoTSiteWise extends Service {
    */
   listAssociatedAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssociatedAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssociatedAssetsResponse, AWSError>;
   /**
-   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves a paginated list of bulk import job requests. For more information, see List bulk import jobs (CLI) in the Amazon Simple Storage Service User Guide.
+   * Retrieves a paginated list of bulk import job requests. For more information, see List bulk import jobs (CLI) in the IoT SiteWise User Guide.
    */
   listBulkImportJobs(params: IoTSiteWise.Types.ListBulkImportJobsRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListBulkImportJobsResponse) => void): Request<IoTSiteWise.Types.ListBulkImportJobsResponse, AWSError>;
   /**
-   *  This API operation is in preview release for IoT SiteWise and is subject to change. We recommend that you use this operation only with test data, and not in production environments.  Retrieves a paginated list of bulk import job requests. For more information, see List bulk import jobs (CLI) in the Amazon Simple Storage Service User Guide.
+   * Retrieves a paginated list of bulk import job requests. For more information, see List bulk import jobs (CLI) in the IoT SiteWise User Guide.
    */
   listBulkImportJobs(callback?: (err: AWSError, data: IoTSiteWise.Types.ListBulkImportJobsResponse) => void): Request<IoTSiteWise.Types.ListBulkImportJobsResponse, AWSError>;
   /**
@@ -1663,7 +1663,7 @@ declare namespace IoTSiteWise {
   }
   export interface CreateAssetRequest {
     /**
-     * A unique, friendly name for the asset.
+     * A friendly name for the asset.
      */
     assetName: Name;
     /**
@@ -3880,6 +3880,10 @@ declare namespace IoTSiteWise {
      * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
      */
     clientToken?: ClientToken;
+    /**
+     * The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.
+     */
+    propertyUnit?: PropertyUnit;
   }
   export interface UpdateAssetRequest {
     /**
@@ -3887,7 +3891,7 @@ declare namespace IoTSiteWise {
      */
     assetId: ID;
     /**
-     * A unique, friendly name for the asset.
+     * A friendly name for the asset.
      */
     assetName: Name;
     /**

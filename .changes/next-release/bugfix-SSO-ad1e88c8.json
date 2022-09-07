@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "SSO",
-  "description": "sso did not allow httpOptions to be passed through"
-}

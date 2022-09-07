@@ -1441,9 +1441,16 @@ declare namespace DataExchange {
     NextToken?: NextToken;
   }
   export type ListOfAssetDestinationEntry = AssetDestinationEntry[];
+  export type ListOfAssetEntry = AssetEntry[];
   export type ListOfAssetSourceEntry = AssetSourceEntry[];
+  export type ListOfDataSetEntry = DataSetEntry[];
+  export type ListOfEventActionEntry = EventActionEntry[];
+  export type ListOfJobEntry = JobEntry[];
+  export type ListOfJobError = JobError[];
   export type ListOfRedshiftDataShareAssetSourceEntry = RedshiftDataShareAssetSourceEntry[];
   export type ListOfRevisionDestinationEntry = RevisionDestinationEntry[];
+  export type ListOfRevisionEntry = RevisionEntry[];
+  export type ListOf__string = __string[];
   export interface ListRevisionAssetsRequest {
     /**
      * The unique identifier for a data set.
@@ -1484,6 +1491,7 @@ declare namespace DataExchange {
      */
     Tags?: MapOf__string;
   }
+  export type MapOf__string = {[key: string]: __string};
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
@@ -1521,11 +1529,11 @@ declare namespace DataExchange {
      */
     ExportRevisionsToS3?: ExportRevisionsToS3RequestDetails;
     /**
-     * Details about the import from signed URL request.
+     * Details about the import from Amazon S3 request.
      */
     ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlRequestDetails;
     /**
-     * Details about the import from Amazon S3 request.
+     * Information about the import asset from API Gateway API request.
      */
     ImportAssetsFromS3?: ImportAssetsFromS3RequestDetails;
     /**
@@ -1533,7 +1541,7 @@ declare namespace DataExchange {
      */
     ImportAssetsFromRedshiftDataShares?: ImportAssetsFromRedshiftDataSharesRequestDetails;
     /**
-     * Information about the import asset from API Gateway API request.
+     * Details about the import from signed URL request.
      */
     ImportAssetFromApiGatewayApi?: ImportAssetFromApiGatewayApiRequestDetails;
   }
@@ -1725,7 +1733,7 @@ declare namespace DataExchange {
      */
     Method?: __string;
     /**
-     * URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}
+     * URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}.
      */
     Path?: __string;
     /**
@@ -1994,18 +2002,10 @@ declare namespace DataExchange {
   export type __boolean = boolean;
   export type __double = number;
   export type __doubleMin0 = number;
-  export type ListOfAssetEntry = AssetEntry[];
-  export type ListOfDataSetEntry = DataSetEntry[];
-  export type ListOfEventActionEntry = EventActionEntry[];
-  export type ListOfJobEntry = JobEntry[];
-  export type ListOfJobError = JobError[];
-  export type ListOfRevisionEntry = RevisionEntry[];
-  export type ListOf__string = __string[];
-  export type MapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMin0Max16384 = string;
-  export type __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = string;
   export type __stringMin10Max512 = string;
+  export type __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

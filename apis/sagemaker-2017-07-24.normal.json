@@ -25613,6 +25613,18 @@
         "ServerlessConfig": {
           "shape": "ProductionVariantServerlessConfig",
           "documentation": "<p>The serverless configuration for an endpoint. Specifies a serverless endpoint configuration instead of an instance-based endpoint configuration.</p>"
+        },
+        "VolumeSizeInGB": {
+          "shape": "ProductionVariantVolumeSizeInGB",
+          "documentation": "<p>The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Currenly only Amazon EBS gp2 storage volumes are supported.</p>"
+        },
+        "ModelDataDownloadTimeoutInSeconds": {
+          "shape": "ProductionVariantModelDataDownloadTimeoutInSeconds",
+          "documentation": "<p>The timeout value, in seconds, to download and extract customer model artifact from Amazon S3 to individual inference instance associated with this production variant.</p>"
+        },
+        "ContainerStartupHealthCheckTimeoutInSeconds": {
+          "shape": "ProductionVariantContainerStartupHealthCheckTimeoutInSeconds",
+          "documentation": "<p>The timeout value, in seconds, for the customer inference container to pass health check by SageMaker Hosting. For more information on health check, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests\">How Your Container Should Respond to Health Check (Ping) Requests</a>.</p>"
         }
       },
       "documentation": "<p>Identifies a model that you want to host and the resources chosen to deploy for hosting it. If you are deploying multiple models, tell SageMaker how to distribute traffic among the models by specifying variant weights. </p>"
@@ -25627,6 +25639,11 @@
         "ml.eia2.large",
         "ml.eia2.xlarge"
       ]
+    },
+    "ProductionVariantContainerStartupHealthCheckTimeoutInSeconds": {
+      "type": "integer",
+      "max": 3600,
+      "min": 60
     },
     "ProductionVariantCoreDumpConfig": {
       "type": "structure",
@@ -25742,6 +25759,11 @@
       "max": 10,
       "min": 1
     },
+    "ProductionVariantModelDataDownloadTimeoutInSeconds": {
+      "type": "integer",
+      "max": 3600,
+      "min": 60
+    },
     "ProductionVariantServerlessConfig": {
       "type": "structure",
       "required": [
@@ -25839,6 +25861,11 @@
       "member": {
         "shape": "ProductionVariantSummary"
       },
+      "min": 1
+    },
+    "ProductionVariantVolumeSizeInGB": {
+      "type": "integer",
+      "max": 512,
       "min": 1
     },
     "ProfilerConfig": {

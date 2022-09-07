@@ -853,7 +853,7 @@ declare namespace FSx {
      */
     JunctionPath: JunctionPath;
     /**
-     * The security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.     NTFS if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.    MIXED if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.  
+     * Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style. The security style determines the type of permissions that FSx for ONTAP uses to control data access. For more information, see Volume security style in the Amazon FSx for NetApp ONTAP User Guide. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.     NTFS if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.    MIXED if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.  
      */
     SecurityStyle?: SecurityStyle;
     /**
@@ -1694,7 +1694,7 @@ declare namespace FSx {
   }
   export interface FileSystemFailureDetails {
     /**
-     * A message describing any failures that occurred during file system creation.
+     * A message describing any failures that occurred.
      */
     Message?: ErrorMessage;
   }

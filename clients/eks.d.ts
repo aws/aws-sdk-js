@@ -429,7 +429,7 @@ declare namespace EKS {
   }
   export type AddonIssueCode = "AccessDenied"|"InternalFailure"|"ClusterUnreachable"|"InsufficientNumberOfReplicas"|"ConfigurationConflict"|"AdmissionRequestDenied"|"UnsupportedAddonModification"|"K8sResourceNotFound"|string;
   export type AddonIssueList = AddonIssue[];
-  export type AddonStatus = "CREATING"|"ACTIVE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETE_FAILED"|"DEGRADED"|string;
+  export type AddonStatus = "CREATING"|"ACTIVE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETE_FAILED"|"DEGRADED"|"UPDATE_FAILED"|string;
   export interface AddonVersionInfo {
     /**
      * The version of the add-on.
@@ -644,7 +644,7 @@ declare namespace EKS {
      */
     serviceAccountRoleArn?: RoleArn;
     /**
-     * How to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on.
+     * How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are handled based on the value you choose:    None – If the self-managed version of the add-on is installed on your cluster, Amazon EKS doesn't change the value. Creation of the add-on might fail.    Overwrite – If the self-managed version of the add-on is installed on your cluster and the Amazon EKS default value is different than the existing value, Amazon EKS changes the value to the Amazon EKS default value.    Preserve – Not supported. You can set this value when updating an add-on though. For more information, see UpdateAddon.   If you don't currently have the self-managed version of the add-on installed on your cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values to default values, regardless of the option that you specify.
      */
     resolveConflicts?: ResolveConflicts;
     /**
@@ -1177,15 +1177,15 @@ declare namespace EKS {
   }
   export interface LaunchTemplateSpecification {
     /**
-     * The name of the launch template.
+     * The name of the launch template. You must specify either the launch template name or the launch template ID in the request, but not both.
      */
     name?: String;
     /**
-     * The version of the launch template to use. If no version is specified, then the template's default version is used.
+     * The launch template version number, $Latest, or $Default. If the value is $Latest, Amazon EKS uses the latest version of the launch template. If the value is $Default, Amazon EKS uses the default version of the launch template. Default: The default version of the launch template.
      */
     version?: String;
     /**
-     * The ID of the launch template.
+     * The ID of the launch template. You must specify either the launch template ID or the launch template name in the request, but not both.
      */
     id?: String;
   }
@@ -1642,7 +1642,7 @@ declare namespace EKS {
      */
     sourceSecurityGroups?: StringList;
   }
-  export type ResolveConflicts = "OVERWRITE"|"NONE"|string;
+  export type ResolveConflicts = "OVERWRITE"|"NONE"|"PRESERVE"|string;
   export type RoleArn = string;
   export type String = string;
   export type StringList = String[];
@@ -1734,7 +1734,7 @@ declare namespace EKS {
      */
     serviceAccountRoleArn?: RoleArn;
     /**
-     * How to resolve parameter value conflicts when applying the new version of the add-on to the cluster.
+     * How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Conflicts are handled based on the option you choose:    None – Amazon EKS doesn't change the value. The update might fail.    Overwrite – Amazon EKS overwrites the changed value back to the Amazon EKS default value.    Preserve – Amazon EKS preserves the value. If you choose this option, we recommend that you test any field and value changes on a non-production cluster before updating the add-on on your production cluster.  
      */
     resolveConflicts?: ResolveConflicts;
     /**

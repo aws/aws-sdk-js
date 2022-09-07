@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['dataexchange'], '2017-07-25', {
   get: function get() {
     var model = require('../apis/dataexchange-2017-07-25.min.json');
     model.paginators = require('../apis/dataexchange-2017-07-25.paginators.json').pagination;
+    model.waiters = require('../apis/dataexchange-2017-07-25.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

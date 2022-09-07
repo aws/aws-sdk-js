@@ -1283,6 +1283,10 @@ declare namespace Inspector2 {
      */
     firstObservedAt?: DateFilterList;
     /**
+     * Details on whether a fix is available through a version update. This value can be YES, NO, or PARTIAL. A PARTIAL fix means that some, but not all, of the packages identified in the finding have fixes available through updated versions.
+     */
+    fixAvailable?: StringFilterList;
+    /**
      * The Amazon Inspector score to filter on.
      */
     inspectorScore?: NumberFilterList;
@@ -1364,6 +1368,10 @@ declare namespace Inspector2 {
      * The date and time that the finding was first observed.
      */
     firstObservedAt: DateTimeTimestamp;
+    /**
+     * Details on whether a fix is available through a version update. This value can be YES, NO, or PARTIAL. A PARTIAL fix means that some, but not all, of the packages identified in the finding have fixes available through updated versions.
+     */
+    fixAvailable?: FixAvailable;
     /**
      * The Amazon Inspector score given to the finding.
      */
@@ -1448,6 +1456,7 @@ declare namespace Inspector2 {
     severityCounts?: SeverityCounts;
   }
   export type FindingTypeSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type FixAvailable = "YES"|"NO"|"PARTIAL"|string;
   export interface FreeTrialAccountInfo {
     /**
      * The account associated with the Amazon Inspector free trial information.
@@ -2050,7 +2059,7 @@ declare namespace Inspector2 {
     /**
      * The packages impacted by this vulnerability.
      */
-    vulnerablePackages: VulnerablePackageList;
+    vulnerablePackages?: VulnerablePackageList;
   }
   export interface Permission {
     /**
@@ -2224,7 +2233,7 @@ declare namespace Inspector2 {
     statusCode: ScanStatusCode;
   }
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
-  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|string;
+  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|string;
   export type ScanType = "NETWORK"|"PACKAGE"|string;
   export type Service = "EC2"|"ECR"|string;
   export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNTRIAGED"|string;
@@ -2488,6 +2497,10 @@ declare namespace Inspector2 {
      */
     release?: PackageRelease;
     /**
+     * The code to run in your environment to update packages with a fix available.
+     */
+    remediation?: VulnerablePackageRemediation;
+    /**
      * The source layer hash of the vulnerable package.
      */
     sourceLayerHash?: SourceLayerHash;
@@ -2497,6 +2510,7 @@ declare namespace Inspector2 {
     version: PackageVersion;
   }
   export type VulnerablePackageList = VulnerablePackage[];
+  export type VulnerablePackageRemediation = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
