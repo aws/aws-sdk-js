@@ -752,6 +752,10 @@ declare namespace LookoutMetrics {
      * A list of tags to apply to the dataset.
      */
     Tags?: TagMap;
+    /**
+     * A list of filters that specify which data is kept for anomaly detection.
+     */
+    DimensionFilterList?: MetricSetDimensionFilterList;
   }
   export interface CreateMetricSetResponse {
     /**
@@ -982,6 +986,10 @@ declare namespace LookoutMetrics {
      * Contains information about the dataset's source data.
      */
     MetricSource?: MetricSource;
+    /**
+     * The dimensions and their values that were used to filter the dataset.
+     */
+    DimensionFilterList?: MetricSetDimensionFilterList;
   }
   export interface DetectMetricSetConfigRequest {
     /**
@@ -1159,6 +1167,18 @@ declare namespace LookoutMetrics {
      */
     JsonFormatDescriptor?: JsonFormatDescriptor;
   }
+  export interface Filter {
+    /**
+     * The value that you want to include in the filter.
+     */
+    DimensionValue?: DimensionValue;
+    /**
+     * The condition to apply.
+     */
+    FilterOperation?: FilterOperation;
+  }
+  export type FilterList = Filter[];
+  export type FilterOperation = "EQUALS"|string;
   export type FlowName = string;
   export type Frequency = "P1D"|"PT1H"|"PT10M"|"PT5M"|string;
   export interface GetAnomalyGroupRequest {
@@ -1530,6 +1550,17 @@ declare namespace LookoutMetrics {
   }
   export type MetricSetDataQualityMetricList = MetricSetDataQualityMetric[];
   export type MetricSetDescription = string;
+  export interface MetricSetDimensionFilter {
+    /**
+     * The dimension that you want to filter on.
+     */
+    Name?: ColumnName;
+    /**
+     * The list of filters that you are applying.
+     */
+    FilterList?: FilterList;
+  }
+  export type MetricSetDimensionFilterList = MetricSetDimensionFilter[];
   export type MetricSetName = string;
   export interface MetricSetSummary {
     /**
@@ -1893,6 +1924,10 @@ declare namespace LookoutMetrics {
      */
     MetricSetFrequency?: Frequency;
     MetricSource?: MetricSource;
+    /**
+     * Describes a list of filters for choosing specific dimensions and specific values. Each filter consists of the dimension and one of its values that you want to include. When multiple dimensions or values are specified, the dimensions are joined with an AND operation and the values are joined with an OR operation.
+     */
+    DimensionFilterList?: MetricSetDimensionFilterList;
   }
   export interface UpdateMetricSetResponse {
     /**

@@ -2589,6 +2589,10 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    /**
+     * Adds or overwrites one or more tags for a State Manager association. Tags are metadata that you can assign to your Amazon Web Services resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. 
+     */
+    Tags?: TagList;
   }
   export interface CreateAssociationResult {
     /**
@@ -2610,7 +2614,7 @@ declare namespace SSM {
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws-     amazon     amzn    
+     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws     amazon     amzn    
      */
     Name: DocumentName;
     /**
@@ -3419,7 +3423,7 @@ declare namespace SSM {
      */
     InstanceInformationFilterList?: InstanceInformationFilterList;
     /**
-     * One or more filters. Use a filter to return a more specific list of managed nodes. You can filter based on tags applied to EC2 instances. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
+     * One or more filters. Use a filter to return a more specific list of managed nodes. You can filter based on tags applied to your managed nodes. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
      */
     Filters?: InstanceInformationStringFilterList;
     /**
@@ -5537,7 +5541,7 @@ declare namespace SSM {
   export type InstanceInformationList = InstanceInformation[];
   export interface InstanceInformationStringFilter {
     /**
-     * The filter key name to describe your managed nodes. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"   Tag key isn't a valid filter. You must specify either tag-key or tag:keyname and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
+     * The filter key name to describe your managed nodes. For example: "InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus" | "tag-key" | "tag:{keyname}    Tag Key isn't a valid filter. You must specify either tag-key or tag:{keyname} and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
      */
     Key: InstanceInformationStringFilterKey;
     /**
@@ -8372,7 +8376,7 @@ declare namespace SSM {
   export type ResourceDataSyncType = string;
   export type ResourceId = string;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
-  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|"OpsMetadata"|"Automation"|string;
+  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|"OpsMetadata"|"Automation"|"Association"|string;
   export type ResponseCode = number;
   export interface ResultAttribute {
     /**
@@ -8571,7 +8575,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * The ARN of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.
+     * The ARN of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands. This role must provide the sns:Publish permission for your notification topic. For information about creating and using this service role, see Monitoring Systems Manager status changes using Amazon SNS notifications in the Amazon Web Services Systems Manager User Guide.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -8876,7 +8880,7 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * An encrypted token value containing session and caller information. Used to authenticate the connection to the managed node.
+     * An encrypted token value containing session and caller information. This token is used to authenticate the connection to the managed node, and is valid only long enough to ensure the connection is successful. Never share your session's token.
      */
     TokenValue?: TokenValue;
     /**

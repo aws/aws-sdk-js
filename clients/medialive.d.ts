@@ -731,6 +731,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   export interface AudioCodecSettings {
     AacSettings?: AacSettings;
     Ac3Settings?: Ac3Settings;
+    Eac3AtmosSettings?: Eac3AtmosSettings;
     Eac3Settings?: Eac3Settings;
     Mp2Settings?: Mp2Settings;
     PassThroughSettings?: PassThroughSettings;
@@ -2447,6 +2448,8 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
   export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
+  export interface DolbyVision81Settings {
+  }
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -2573,6 +2576,40 @@ provide the language to consider when translating the image-based source to text
      * The number of milliseconds between instances of this table in the output transport stream.
      */
     RepInterval?: __integerMin1000Max30000;
+  }
+  export type Eac3AtmosCodingMode = "CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6"|string;
+  export type Eac3AtmosDrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export type Eac3AtmosDrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export interface Eac3AtmosSettings {
+    /**
+     * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+//  * @affectsRightSizing true
+     */
+    Bitrate?: __double;
+    /**
+     * Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
+     */
+    CodingMode?: Eac3AtmosCodingMode;
+    /**
+     * Sets the dialnorm for the output. Default 23.
+     */
+    Dialnorm?: __integerMin1Max31;
+    /**
+     * Sets the Dolby dynamic range compression profile.
+     */
+    DrcLine?: Eac3AtmosDrcLine;
+    /**
+     * Sets the profile for heavy Dolby dynamic range compression, ensures that the instantaneous signal peaks do not exceed specified levels.
+     */
+    DrcRf?: Eac3AtmosDrcRf;
+    /**
+     * Height dimensional trim. Sets the maximum amount to attenuate the height channels when the downstream player isn??t configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+     */
+    HeightTrim?: __double;
+    /**
+     * Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+     */
+    SurroundTrim?: __double;
   }
   export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Eac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
@@ -3145,6 +3182,7 @@ This field is optional; when no value is specified the encoder will choose the n
   export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H265ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
+    DolbyVision81Settings?: DolbyVision81Settings;
     Hdr10Settings?: Hdr10Settings;
     Rec601Settings?: Rec601Settings;
     Rec709Settings?: Rec709Settings;

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1211.0-->
+<!--LATEST=2.1212.0-->
 <!--ENTRYINSERT-->
+
+## 2.1212.0
+* feature: EC2: This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type
+* feature: EMRcontainers: EMR on EKS now allows running Spark SQL using the newly introduced Spark SQL Job Driver in the Start Job Run API
+* feature: LookoutMetrics: Release dimension value filtering feature to allow customers to define dimension filters for including only a subset of their dataset to be used by LookoutMetrics.
+* feature: MediaLive: This change exposes API settings which allow Dolby Atmos and Dolby Vision to be used when running a channel using Elemental Media Live
+* feature: Route53: Amazon Route 53 now supports the Middle East (UAE) Region (me-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* feature: SSM: This release adds support for Systems Manager State Manager Association tagging.
+* feature: SageMaker: This release adds Mode to AutoMLJobConfig.
 
 ## 2.1211.0
 * bugfix: SSO: sso did not allow httpOptions to be passed through
