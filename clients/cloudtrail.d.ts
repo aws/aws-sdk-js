@@ -76,6 +76,14 @@ declare class CloudTrail extends Service {
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
+   *  Returns the specified CloudTrail service-linked channel. Amazon Web Services services create service-linked channels to view CloudTrail events. 
+   */
+  getChannel(params: CloudTrail.Types.GetChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
+  /**
+   *  Returns the specified CloudTrail service-linked channel. Amazon Web Services services create service-linked channels to view CloudTrail events. 
+   */
+  getChannel(callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
+  /**
    * Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
    */
   getEventDataStore(params: CloudTrail.Types.GetEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetEventDataStoreResponse) => void): Request<CloudTrail.Types.GetEventDataStoreResponse, AWSError>;
@@ -123,6 +131,14 @@ declare class CloudTrail extends Service {
    * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.
    */
   getTrailStatus(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
+  /**
+   *  Returns all CloudTrail channels. 
+   */
+  listChannels(params: CloudTrail.Types.ListChannelsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
+  /**
+   *  Returns all CloudTrail channels. 
+   */
+  listChannels(callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
   /**
    * Returns information about all event data stores in the account, in the current region.
    */
@@ -228,11 +244,11 @@ declare class CloudTrail extends Service {
    */
   stopLogging(callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
   /**
-   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2555. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
    */
   updateEventDataStore(params: CloudTrail.Types.UpdateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
-   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2555. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
    */
   updateEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
@@ -270,7 +286,7 @@ declare namespace CloudTrail {
   export type AdvancedEventSelectors = AdvancedEventSelector[];
   export interface AdvancedFieldSelector {
     /**
-     *  A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.      readOnly  - Optional. Can be set to Equals a value of true or false. If you do not add this field, CloudTrail logs both both read and write events. A value of true logs only read events. A value of false logs only write events.     eventSource  - For filtering management events only. This can be set only to NotEquals kms.amazonaws.com.     eventName  - Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld, separated by commas.     eventCategory  - This is required. It must be set to Equals, and the value must be Management or Data.     resources.type  - This ﬁeld is required. resources.type can only use the Equals operator, and the value can be one of the following:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table     AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table     You can have only one resources.type ﬁeld per selector. To log data events on more than one resource type, add another selector.     resources.ARN  - You can use any operator with resources.ARN, but if you use Equals or NotEquals, the value must exactly match the ARN of a valid resource of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals AWS::S3::Object, the ARN must be in one of the following formats. To log all data events for all objects in a specific S3 bucket, use the StartsWith operator, and include only the bucket ARN as the matching value. The trailing slash is intentional; do not exclude it. Replace the text between less than and greater than symbols (&lt;&gt;) with resource-specific information.     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/&lt;object_path&gt;/    When resources.type equals AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in one of the following formats. To log events on all objects in an S3 access point, we recommend that you use only the access point ARN, don’t include the object path, and use the StartsWith or NotStartsWith operators.    arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;     arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;/object/&lt;object_path&gt;    When resources.type equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:lambda:&lt;region&gt;:&lt;account_ID&gt;:function:&lt;function_name&gt;    When resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;    When resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-outposts:&lt;region&gt;:&lt;account_ID&gt;:&lt;object_path&gt;    When resources.type equals AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:managedblockchain:&lt;region&gt;:&lt;account_ID&gt;:nodes/&lt;node_ID&gt;    When resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-object-lambda:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;    When resources.type equals AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:ec2:&lt;region&gt;::snapshot/&lt;snapshot_ID&gt;    When resources.type equals AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;/stream/&lt;date_time&gt;    When resources.type equals AWS::Glue::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:glue:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;database_name&gt;/&lt;table_name&gt;     
+     *  A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.      readOnly  - Optional. Can be set to Equals a value of true or false. If you do not add this field, CloudTrail logs both read and write events. A value of true logs only read events. A value of false logs only write events.     eventSource  - For filtering management events only. This can be set only to NotEquals kms.amazonaws.com.     eventName  - Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld, separated by commas.     eventCategory  - This is required. It must be set to Equals, and the value must be Management or Data.     resources.type  - This ﬁeld is required. resources.type can only use the Equals operator, and the value can be one of the following:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table     AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table     You can have only one resources.type ﬁeld per selector. To log data events on more than one resource type, add another selector.     resources.ARN  - You can use any operator with resources.ARN, but if you use Equals or NotEquals, the value must exactly match the ARN of a valid resource of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals AWS::S3::Object, the ARN must be in one of the following formats. To log all data events for all objects in a specific S3 bucket, use the StartsWith operator, and include only the bucket ARN as the matching value. The trailing slash is intentional; do not exclude it. Replace the text between less than and greater than symbols (&lt;&gt;) with resource-specific information.     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/&lt;object_path&gt;/    When resources.type equals AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in one of the following formats. To log events on all objects in an S3 access point, we recommend that you use only the access point ARN, don’t include the object path, and use the StartsWith or NotStartsWith operators.    arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;     arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;/object/&lt;object_path&gt;    When resources.type equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:lambda:&lt;region&gt;:&lt;account_ID&gt;:function:&lt;function_name&gt;    When resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;    When resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-outposts:&lt;region&gt;:&lt;account_ID&gt;:&lt;object_path&gt;    When resources.type equals AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:managedblockchain:&lt;region&gt;:&lt;account_ID&gt;:nodes/&lt;node_ID&gt;    When resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-object-lambda:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;    When resources.type equals AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:ec2:&lt;region&gt;::snapshot/&lt;snapshot_ID&gt;    When resources.type equals AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;/stream/&lt;date_time&gt;    When resources.type equals AWS::Glue::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:glue:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;database_name&gt;/&lt;table_name&gt;     
      */
     Field: SelectorField;
     /**
@@ -321,6 +337,19 @@ declare namespace CloudTrail {
      */
     QueryStatus: QueryStatus;
   }
+  export interface Channel {
+    /**
+     *  The Amazon Resource Name (ARN) of the channel. 
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     *  The name of the CloudTrail channel. For service-linked channels, the name is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix created by the Amazon Web Services service. 
+     */
+    Name?: ChannelName;
+  }
+  export type ChannelArn = string;
+  export type ChannelName = string;
+  export type Channels = Channel[];
   export interface CreateEventDataStoreRequest {
     /**
      * The name of the event data store.
@@ -339,7 +368,7 @@ declare namespace CloudTrail {
      */
     OrganizationEnabled?: Boolean;
     /**
-     * The retention period of the event data store, in days. You can set a retention period of up to 2555 days, the equivalent of seven years.
+     * The retention period of the event data store, in days. You can set a retention period of up to 2557 days, the equivalent of seven years.
      */
     RetentionPeriod?: RetentionPeriod;
     /**
@@ -569,6 +598,18 @@ declare namespace CloudTrail {
      */
     trailList?: TrailList;
   }
+  export interface Destination {
+    /**
+     *  The type of service. For service-linked channels, the value is AWS_SERVICE. 
+     */
+    Type: DestinationType;
+    /**
+     *  The location of the service. For service-linked channels, this is the name of the Amazon Web Services service. 
+     */
+    Location: Location;
+  }
+  export type DestinationType = "EVENT_DATA_STORE"|"AWS_SERVICE"|string;
+  export type Destinations = Destination[];
   export type ErrorMessage = string;
   export interface Event {
     /**
@@ -676,6 +717,34 @@ declare namespace CloudTrail {
   export type EventSelectors = EventSelector[];
   export type EventsList = Event[];
   export type ExcludeManagementEventSources = String[];
+  export interface GetChannelRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail service-linked channel. 
+     */
+    Channel: ChannelArn;
+  }
+  export interface GetChannelResponse {
+    /**
+     *  The ARN of the CloudTrail service-linked channel. 
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     *  The name of the CloudTrail service-linked channel. For service-linked channels, the value is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix generated by the Amazon Web Services service. 
+     */
+    Name?: ChannelName;
+    /**
+     *  The trail or event data store for the CloudTrail service-linked channel. 
+     */
+    Source?: Source;
+    /**
+     *  Provides information about the advanced event selectors configured for the service-linked channel, and whether the service-linked channel applies to all regions or one region. 
+     */
+    SourceConfig?: SourceConfig;
+    /**
+     *  The Amazon Web Services service that created the CloudTrail service-linked channel. 
+     */
+    Destinations?: Destinations;
+  }
   export interface GetEventDataStoreRequest {
     /**
      * The ARN (or ID suffix of the ARN) of the event data store about which you want information.
@@ -894,6 +963,27 @@ declare namespace CloudTrail {
   export type InsightSelectors = InsightSelector[];
   export type InsightType = "ApiCallRateInsight"|"ApiErrorRateInsight"|string;
   export type Integer = number;
+  export type ListChannelsMaxResultsCount = number;
+  export interface ListChannelsRequest {
+    /**
+     *  The maximum number of CloudTrail channels to display on a single page. 
+     */
+    MaxResults?: ListChannelsMaxResultsCount;
+    /**
+     *  A token you can use to get the next page of results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListChannelsResponse {
+    /**
+     *  The list of CloudTrail channels. 
+     */
+    Channels?: Channels;
+    /**
+     *  A token used to get the next page of results. 
+     */
+    NextToken?: PaginationToken;
+  }
   export type ListEventDataStoresMaxResultsCount = number;
   export interface ListEventDataStoresRequest {
     /**
@@ -998,7 +1088,7 @@ declare namespace CloudTrail {
   }
   export interface ListTrailsRequest {
     /**
-     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
      */
     NextToken?: String;
   }
@@ -1012,6 +1102,7 @@ declare namespace CloudTrail {
      */
     NextToken?: String;
   }
+  export type Location = string;
   export type Long = number;
   export interface LookupAttribute {
     /**
@@ -1047,7 +1138,7 @@ declare namespace CloudTrail {
      */
     MaxResults?: MaxResults;
     /**
-     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
      */
     NextToken?: NextToken;
   }
@@ -1279,6 +1370,17 @@ declare namespace CloudTrail {
   export type RetentionPeriod = number;
   export type SelectorField = string;
   export type SelectorName = string;
+  export type Source = string;
+  export interface SourceConfig {
+    /**
+     *  Specifies whether the service-linked channel applies to one region or all regions. 
+     */
+    ApplyToAllRegions?: Boolean;
+    /**
+     *  The advanced event selectors configured for the service-linked channel. 
+     */
+    AdvancedEventSelectors?: AdvancedEventSelectors;
+  }
   export interface StartLoggingRequest {
     /**
      * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 

@@ -1095,6 +1095,12 @@ declare namespace LexModelsV2 {
   export interface CodeHookSpecification {
     lambdaCodeHook: LambdaCodeHook;
   }
+  export interface CompositeSlotTypeSetting {
+    /**
+     * Subslots in the composite slot.
+     */
+    subSlots?: SubSlotTypeList;
+  }
   export interface Condition {
     /**
      * The expression string that is evaluated. 
@@ -1670,6 +1676,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException.  If the multipleValuesSetting is not set, the default value is false.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface CreateSlotResponse {
     /**
@@ -1720,6 +1730,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot returns multiple values in one response.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface CreateSlotTypeRequest {
     /**
@@ -1758,6 +1772,10 @@ declare namespace LexModelsV2 {
      * Sets the type of external information used to create the slot type.
      */
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export interface CreateSlotTypeResponse {
     /**
@@ -1804,6 +1822,10 @@ declare namespace LexModelsV2 {
      * The type of external information used to create the slot type.
      */
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export interface CreateUploadUrlRequest {
   }
@@ -2782,6 +2804,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot accepts multiple values in a single utterance. If the multipleValuesSetting is not set, the default value is false.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface DescribeSlotTypeRequest {
     /**
@@ -2847,6 +2873,10 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export type Description = string;
   export interface DialogAction {
@@ -4499,7 +4529,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type SlotSummaryList = SlotSummary[];
-  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|string;
+  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|"Composite"|string;
   export interface SlotTypeFilter {
     /**
      * The name of the field to use for filtering.
@@ -4623,7 +4653,7 @@ declare namespace LexModelsV2 {
      */
     pattern: RegexPattern;
   }
-  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|string;
+  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation"|string;
   export interface SlotValueSelectionSetting {
     /**
      * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:   OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.   TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is OriginalValue. 
@@ -4640,6 +4670,16 @@ declare namespace LexModelsV2 {
   }
   export type SlotValues = SlotValueOverride[];
   export type SortOrder = "Ascending"|"Descending"|string;
+  export interface Specifications {
+    /**
+     * The unique identifier assigned to the slot type.
+     */
+    slotTypeId: BuiltInOrCustomSlotTypeId;
+    /**
+     * Specifies the elicitation setting details for constituent sub slots of a composite slot.
+     */
+    valueElicitationSetting: SubSlotValueElicitationSetting;
+  }
   export interface StartBotRecommendationRequest {
     /**
      * The unique identifier of the bot containing the bot recommendation.
@@ -4798,6 +4838,38 @@ declare namespace LexModelsV2 {
   }
   export type String = string;
   export type StringMap = {[key: string]: String};
+  export type SubSlotExpression = string;
+  export interface SubSlotSetting {
+    /**
+     * The expression text for defining the constituent sub slots in the composite slot using logical AND and OR operators.
+     */
+    expression?: SubSlotExpression;
+    /**
+     * Specifications for the constituent sub slots of a composite slot.
+     */
+    slotSpecifications?: SubSlotSpecificationMap;
+  }
+  export type SubSlotSpecificationMap = {[key: string]: Specifications};
+  export interface SubSlotTypeComposition {
+    /**
+     * Name of a constituent sub slot inside a composite slot.
+     */
+    name: Name;
+    /**
+     * The unique identifier assigned to a slot type. This refers to either a built-in slot type or the unique slotTypeId of a custom slot type.
+     */
+    slotTypeId: BuiltInOrCustomSlotTypeId;
+  }
+  export type SubSlotTypeList = SubSlotTypeComposition[];
+  export interface SubSlotValueElicitationSetting {
+    defaultValueSpecification?: SlotDefaultValueSpecification;
+    promptSpecification: PromptSpecification;
+    /**
+     * If you know a specific pattern that users might respond to an Amazon Lex request for a sub slot value, you can provide those utterances to improve accuracy. This is optional. In most cases Amazon Lex is capable of understanding user utterances. This is similar to SampleUtterances for slots.
+     */
+    sampleUtterances?: SampleUtterancesList;
+    waitAndContinueSpecification?: WaitAndContinueSpecification;
+  }
   export type SynonymList = SampleValue[];
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -5385,6 +5457,10 @@ declare namespace LexModelsV2 {
      * Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the multipleValuesSetting is not set, the default value is false.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface UpdateSlotResponse {
     /**
@@ -5439,6 +5515,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot accepts multiple values in one response.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface UpdateSlotTypeRequest {
     /**
@@ -5478,6 +5558,10 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export interface UpdateSlotTypeResponse {
     /**
@@ -5525,6 +5609,10 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export type Utterance = string;
   export interface UtteranceAggregationDuration {

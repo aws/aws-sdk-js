@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1212.0-->
+<!--LATEST=2.1213.0-->
 <!--ENTRYINSERT-->
+
+## 2.1213.0
+* feature: CloudTrail: This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations.
+* feature: LexModelsV2: This release is for supporting Composite Slot Type feature in AWS Lex V2. Composite Slot Type will help developer to logically group coherent slots and maintain their inter-relationships in runtime conversation.
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: PI: Increases the maximum values of two RDS Performance Insights APIs. The maximum value of the Limit parameter of DimensionGroup is 25. The MaxResult maximum is now 25 for the following APIs: DescribeDimensionKeys, GetResourceMetrics, ListAvailableResourceDimensions, and ListAvailableResourceMetrics.
 
 ## 2.1212.0
 * feature: EC2: This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type

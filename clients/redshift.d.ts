@@ -721,11 +721,11 @@ declare class Redshift extends Service {
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
-   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   * This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
    */
   modifyAquaConfiguration(params: Redshift.Types.ModifyAquaInputMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
   /**
-   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   * This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
    */
   modifyAquaConfiguration(callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
   /**
@@ -1040,11 +1040,11 @@ declare namespace Redshift {
   export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
   export interface AquaConfiguration {
     /**
-     * The value indicates the status of AQUA on the cluster. Possible values include the following.   enabled - AQUA is enabled.   disabled - AQUA is not enabled.    applying - AQUA status is being applied.   
+     * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaStatus?: AquaStatus;
     /**
-     * The value represents how the cluster is configured to use AQUA. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
   }
@@ -1416,7 +1416,7 @@ declare namespace Redshift {
      */
     TotalStorageCapacityInMegaBytes?: LongOptional;
     /**
-     * The AQUA (Advanced Query Accelerator) configuration of the cluster.
+     * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfiguration?: AquaConfiguration;
     /**
@@ -1870,7 +1870,7 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier?: String;
     /**
-     * The Elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a publicly accessible cluster with AvailabilityZoneRelocation turned on. Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to Supported Platforms to Launch Your Cluster in the Amazon Redshift Cluster Management Guide.
+     * The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to Supported Platforms to Launch Your Cluster in the Amazon Redshift Cluster Management Guide.
      */
     ElasticIp?: String;
     /**
@@ -1906,7 +1906,7 @@ declare namespace Redshift {
      */
     AvailabilityZoneRelocation?: BooleanOptional;
     /**
-     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
     /**
@@ -3614,11 +3614,11 @@ declare namespace Redshift {
   }
   export interface GetClusterCredentialsMessage {
     /**
-     * The name of a database user. If a user name matching DbUser exists in the database, the temporary user credentials have the same permissions as the existing user. If DbUser doesn't exist in the database and Autocreate is True, a new user is created using the value for DbUser with PUBLIC permissions. If a database user matching the value for DbUser doesn't exist and Autocreate is False, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database. For more information, see CREATE USER in the Amazon Redshift Database Developer Guide.  Constraints:   Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
+     * The name of a database user. If a user name matching DbUser exists in the database, the temporary user credentials have the same permissions as the existing user. If DbUser doesn't exist in the database and Autocreate is True, a new user is created using the value for DbUser with PUBLIC permissions. If a database user matching the value for DbUser doesn't exist and Autocreate is False, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database. For more information, see CREATE USER in the Amazon Redshift Database Developer Guide.  Constraints:   Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbUser: String;
     /**
-     * The name of a database that DbUser is authorized to log on to. If DbName is not specified, DbUser can log on to any existing database. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
+     * The name of a database that DbUser is authorized to log on to. If DbName is not specified, DbUser can log on to any existing database. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens   Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbName?: String;
     /**
@@ -3860,13 +3860,13 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * The new value of AQUA configuration status. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
   }
   export interface ModifyAquaOutputMessage {
     /**
-     * The updated AQUA configuration of the cluster. 
+     * This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
      */
     AquaConfiguration?: AquaConfiguration;
   }
@@ -4820,11 +4820,11 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive. Example: my-snapshot-id 
+     * The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive. You can specify this parameter or snapshotArn, but not both. Example: my-snapshot-id 
      */
     SnapshotIdentifier?: String;
     /**
-     * The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster.
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster. You can specify this parameter or snapshotIdentifier, but not both.
      */
     SnapshotArn?: String;
     /**
@@ -4864,7 +4864,7 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier?: String;
     /**
-     * The elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a publicly accessible cluster with AvailabilityZoneRelocation turned on.
+     * The elastic IP (EIP) address for the cluster.
      */
     ElasticIp?: String;
     /**
@@ -4928,7 +4928,7 @@ declare namespace Redshift {
      */
     AvailabilityZoneRelocation?: BooleanOptional;
     /**
-     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
     /**
