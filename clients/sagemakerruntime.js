@@ -5,6 +5,7 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['sagemakerruntime'] = {};
 AWS.SageMakerRuntime = Service.defineService('sagemakerruntime', ['2017-05-13']);
+require('../lib/services/sagemakerruntime');
 Object.defineProperty(apiLoader.services['sagemakerruntime'], '2017-05-13', {
   get: function get() {
     var model = require('../apis/runtime.sagemaker-2017-05-13.min.json');

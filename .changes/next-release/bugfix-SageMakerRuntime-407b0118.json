@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "SageMakerRuntime",
+  "description": "fixed the issue that invokeEndpointAsync is not callable #4203"
+}
