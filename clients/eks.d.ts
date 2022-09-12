@@ -369,7 +369,7 @@ declare namespace EKS {
      */
     addonVersion?: String;
     /**
-     * An object that represents the health of the add-on.
+     * An object representing the health of the add-on.
      */
     health?: AddonHealth;
     /**
@@ -395,7 +395,7 @@ declare namespace EKS {
   }
   export interface AddonHealth {
     /**
-     * An object that represents the add-on's health issues.
+     * An object representing the health issues for an add-on.
      */
     issues?: AddonIssueList;
   }
@@ -409,7 +409,7 @@ declare namespace EKS {
      */
     type?: String;
     /**
-     * An object that represents information about available add-on versions and compatible Kubernetes versions.
+     * An object representing information about available add-on versions and compatible Kubernetes versions.
      */
     addonVersions?: AddonVersionInfoList;
   }
@@ -440,7 +440,7 @@ declare namespace EKS {
      */
     architecture?: StringList;
     /**
-     * An object that represents the compatibilities of a version.
+     * An object representing the compatibilities of a version.
      */
     compatibilities?: Compatibilities;
   }
@@ -469,7 +469,7 @@ declare namespace EKS {
      */
     clusterName: String;
     /**
-     * An object that represents an OpenID Connect (OIDC) identity provider configuration.
+     * An object representing an OpenID Connect (OIDC) identity provider configuration.
      */
     oidc: OidcIdentityProviderConfigRequest;
     /**
@@ -575,7 +575,41 @@ declare namespace EKS {
      * The configuration used to connect to a cluster for registration.
      */
     connectorConfig?: ConnectorConfigResponse;
+    /**
+     * The ID of your local Amazon EKS cluster on an Amazon Web Services Outpost. This property isn't available for an Amazon EKS cluster on the Amazon Web Services cloud.
+     */
+    id?: String;
+    /**
+     * An object representing the health of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.
+     */
+    health?: ClusterHealth;
+    /**
+     * An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. This object isn't available for clusters on the Amazon Web Services cloud.
+     */
+    outpostConfig?: OutpostConfigResponse;
   }
+  export interface ClusterHealth {
+    /**
+     * An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.
+     */
+    issues?: ClusterIssueList;
+  }
+  export interface ClusterIssue {
+    /**
+     * The error code of the issue.
+     */
+    code?: ClusterIssueCode;
+    /**
+     * A description of the issue.
+     */
+    message?: String;
+    /**
+     * The resource IDs that the issue relates to.
+     */
+    resourceIds?: StringList;
+  }
+  export type ClusterIssueCode = "AccessDenied"|"ClusterUnreachable"|"ConfigurationConflict"|"InternalFailure"|"ResourceLimitExceeded"|"ResourceNotFound"|string;
+  export type ClusterIssueList = ClusterIssue[];
   export type ClusterName = string;
   export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"PENDING"|string;
   export type Compatibilities = Compatibility[];
@@ -665,7 +699,7 @@ declare namespace EKS {
      */
     name: ClusterName;
     /**
-     * The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
+     * The desired Kubernetes version for your cluster. If you don't specify a value here, the default version available in Amazon EKS is used.  The default version might not be the latest version available. 
      */
     version?: String;
     /**
@@ -696,6 +730,10 @@ declare namespace EKS {
      * The encryption configuration for the cluster.
      */
     encryptionConfig?: EncryptionConfigList;
+    /**
+     * An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review Creating an Amazon EKS cluster on an Amazon Web Services Outpost in the Amazon EKS User Guide. This object isn't available for creating Amazon EKS clusters on the Amazon Web Services cloud.
+     */
+    outpostConfig?: OutpostConfigRequest;
   }
   export interface CreateClusterResponse {
     /**
@@ -965,7 +1003,7 @@ declare namespace EKS {
      */
     clusterName: String;
     /**
-     * An object that represents an identity provider configuration.
+     * An object representing an identity provider configuration.
      */
     identityProviderConfig: IdentityProviderConfig;
   }
@@ -1021,7 +1059,7 @@ declare namespace EKS {
      */
     clusterName: String;
     /**
-     * An object that represents an identity provider configuration.
+     * An object representing an identity provider configuration.
      */
     identityProviderConfig: IdentityProviderConfig;
     /**
@@ -1129,7 +1167,7 @@ declare namespace EKS {
   }
   export interface IdentityProviderConfigResponse {
     /**
-     * An object that represents an OpenID Connect (OIDC) identity provider configuration.
+     * An object representing an OpenID Connect (OIDC) identity provider configuration.
      */
     oidc?: OidcIdentityProviderConfig;
   }
@@ -1603,6 +1641,26 @@ declare namespace EKS {
      * The key value pairs that describe required claims in the identity token. If set, each claim is verified to be present in the token with a matching value. For the maximum number of claims that you can require, see Amazon EKS service quotas in the Amazon EKS User Guide.
      */
     requiredClaims?: requiredClaimsMap;
+  }
+  export interface OutpostConfigRequest {
+    /**
+     * The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.
+     */
+    outpostArns: StringList;
+    /**
+     * The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. Choose an instance type based on the number of nodes that your cluster will have. If your cluster will have:   1–20 nodes, then we recommend specifying a large instance type.   21–100 nodes, then we recommend specifying an xlarge instance type.   101–250 nodes, then we recommend specifying a 2xlarge instance type.   For a list of the available Amazon EC2 instance types, see Compute and storage in Outposts rack features. The control plane is not automatically scaled by Amazon EKS.
+     */
+    controlPlaneInstanceType: String;
+  }
+  export interface OutpostConfigResponse {
+    /**
+     * The ARN of the Outpost that you specified for use with your local Amazon EKS cluster on Outposts.
+     */
+    outpostArns: StringList;
+    /**
+     * The Amazon EC2 instance type used for the control plane. The instance type is the same for all control plane instances.
+     */
+    controlPlaneInstanceType: String;
   }
   export type PercentCapacity = number;
   export interface Provider {

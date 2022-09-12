@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1213.0-->
+<!--LATEST=2.1214.0-->
 <!--ENTRYINSERT-->
+
+## 2.1214.0
+* feature: EKS: Adding support for local Amazon EKS clusters on Outposts
 
 ## 2.1213.0
 * feature: CloudTrail: This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations.

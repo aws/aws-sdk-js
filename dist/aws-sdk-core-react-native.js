@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1213.0',
+	  VERSION: '2.1214.0',
 
 	  /**
 	   * @api private
@@ -10094,12 +10094,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	var fnClass = '[object Function]';
 	var genClass = '[object GeneratorFunction]';
 	var hasToStringTag = typeof Symbol === 'function' && !!Symbol.toStringTag; // better: use `has-tostringtag`
-	/* globals document: false */
-	var documentDotAll = typeof document === 'object' && typeof document.all === 'undefined' && document.all !== undefined ? document.all : {};
+	var isDDA = typeof document === 'object' ? function isDocumentDotAll(value) {
+		/* globals document: false */
+		// in IE 8, typeof document.all is "object"
+		if (typeof value === 'undefined' || typeof value === 'object') {
+			try {
+				return value('') === null;
+			} catch (e) { /**/ }
+		}
+		return false;
+	} : function () { return false; };
 
 	module.exports = reflectApply
 		? function isCallable(value) {
-			if (value === documentDotAll) { return true; }
+			if (isDDA(value)) { return true; }
 			if (!value) { return false; }
 			if (typeof value !== 'function' && typeof value !== 'object') { return false; }
 			if (typeof value === 'function' && !value.prototype) { return true; }
@@ -10111,14 +10119,14 @@ return /******/ (function(modules) { // webpackBootstrap
 			return !isES6ClassFn(value);
 		}
 		: function isCallable(value) {
-			if (value === documentDotAll) { return true; }
+			if (isDDA(value)) { return true; }
 			if (!value) { return false; }
 			if (typeof value !== 'function' && typeof value !== 'object') { return false; }
 			if (typeof value === 'function' && !value.prototype) { return true; }
 			if (hasToStringTag) { return tryFunctionObject(value); }
 			if (isES6ClassFn(value)) { return false; }
 			var strClass = toStr.call(value);
-			return strClass === fnClass || strClass === genClass;
+			return strClass === fnClass || strClass === genClass || tryFunctionObject(value);
 		};
 
 
