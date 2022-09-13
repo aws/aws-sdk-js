@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1214.0',
+	  VERSION: '2.1215.0',
 
 	  /**
 	   * @api private
@@ -9640,7 +9640,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			throw new $TypeError('"allowMissing" argument must be a boolean');
 		}
 
-		if ($exec(/^%?[^%]*%?$/g, name) === null) {
+		if ($exec(/^%?[^%]*%?$/, name) === null) {
 			throw new $SyntaxError('`%` may not be present anywhere but at the beginning and end of the intrinsic name');
 		}
 		var parts = stringToPath(name);

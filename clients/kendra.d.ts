@@ -648,31 +648,31 @@ declare namespace Kendra {
      */
     NotFilter?: AttributeFilter;
     /**
-     * Performs an equals operation on two document attributes.
+     * Performs an equals operation on two document attributes or metadata fields.
      */
     EqualsTo?: DocumentAttribute;
     /**
-     * Returns true when a document contains all of the specified document attributes. This filter is only applicable to StringListValue metadata.
+     * Returns true when a document contains all of the specified document attributes or metadata fields. This filter is only applicable to StringListValue metadata.
      */
     ContainsAll?: DocumentAttribute;
     /**
-     * Returns true when a document contains any of the specified document attributes. This filter is only applicable to StringListValue metadata.
+     * Returns true when a document contains any of the specified document attributes or metadata fields. This filter is only applicable to StringListValue metadata.
      */
     ContainsAny?: DocumentAttribute;
     /**
-     * Performs a greater than operation on two document attributes. Use with a document attribute of type Date or Long.
+     * Performs a greater than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
      */
     GreaterThan?: DocumentAttribute;
     /**
-     * Performs a greater or equals than operation on two document attributes. Use with a document attribute of type Date or Long.
+     * Performs a greater or equals than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
      */
     GreaterThanOrEquals?: DocumentAttribute;
     /**
-     * Performs a less than operation on two document attributes. Use with a document attribute of type Date or Long.
+     * Performs a less than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
      */
     LessThan?: DocumentAttribute;
     /**
-     * Performs a less than or equals operation on two document attributes. Use with a document attribute of type Date or Long.
+     * Performs a less than or equals operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
      */
     LessThanOrEquals?: DocumentAttribute;
   }
@@ -4289,7 +4289,7 @@ declare namespace Kendra {
   }
   export type SharePointOnlineAuthenticationType = "HTTP_BASIC"|"OAUTH2"|string;
   export type SharePointUrlList = Url[];
-  export type SharePointVersion = "SHAREPOINT_2013"|"SHAREPOINT_2016"|"SHAREPOINT_ONLINE"|string;
+  export type SharePointVersion = "SHAREPOINT_2013"|"SHAREPOINT_2016"|"SHAREPOINT_ONLINE"|"SHAREPOINT_2019"|string;
   export type SharedDriveId = string;
   export type SinceCrawlDate = string;
   export type SiteId = string;

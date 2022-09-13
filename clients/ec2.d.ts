@@ -581,11 +581,11 @@ declare class EC2 extends Service {
    */
   createLaunchTemplateVersion(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
-   * Creates a static route for the specified local gateway route table.
+   * Creates a static route for the specified local gateway route table. You must specify one of the following targets:     LocalGatewayVirtualInterfaceGroupId     NetworkInterfaceId   
    */
   createLocalGatewayRoute(params: EC2.Types.CreateLocalGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteResult) => void): Request<EC2.Types.CreateLocalGatewayRouteResult, AWSError>;
   /**
-   * Creates a static route for the specified local gateway route table.
+   * Creates a static route for the specified local gateway route table. You must specify one of the following targets:     LocalGatewayVirtualInterfaceGroupId     NetworkInterfaceId   
    */
   createLocalGatewayRoute(callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteResult) => void): Request<EC2.Types.CreateLocalGatewayRouteResult, AWSError>;
   /**
@@ -3525,6 +3525,14 @@ declare class EC2 extends Service {
    */
   modifyLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.ModifyLaunchTemplateResult) => void): Request<EC2.Types.ModifyLaunchTemplateResult, AWSError>;
   /**
+   * Modifies the specified local gateway route.
+   */
+  modifyLocalGatewayRoute(params: EC2.Types.ModifyLocalGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.ModifyLocalGatewayRouteResult) => void): Request<EC2.Types.ModifyLocalGatewayRouteResult, AWSError>;
+  /**
+   * Modifies the specified local gateway route.
+   */
+  modifyLocalGatewayRoute(callback?: (err: AWSError, data: EC2.Types.ModifyLocalGatewayRouteResult) => void): Request<EC2.Types.ModifyLocalGatewayRouteResult, AWSError>;
+  /**
    * Modifies the specified managed prefix list. Adding or removing entries in a prefix list creates a new version of the prefix list. Changing the name of the prefix list does not affect the version. If you specify a current version number that does not match the true current version number, the request fails.
    */
   modifyManagedPrefixList(params: EC2.Types.ModifyManagedPrefixListRequest, callback?: (err: AWSError, data: EC2.Types.ModifyManagedPrefixListResult) => void): Request<EC2.Types.ModifyManagedPrefixListResult, AWSError>;
@@ -4572,7 +4580,7 @@ declare namespace EC2 {
   }
   export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string;
   export type AcceleratorManufacturerSet = AcceleratorManufacturer[];
-  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|string;
+  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|"inferentia"|"k520"|string;
   export type AcceleratorNameSet = AcceleratorName[];
   export interface AcceleratorTotalMemoryMiB {
     /**
@@ -8523,11 +8531,15 @@ declare namespace EC2 {
     /**
      * The ID of the virtual interface group.
      */
-    LocalGatewayVirtualInterfaceGroupId: LocalGatewayVirtualInterfaceGroupId;
+    LocalGatewayVirtualInterfaceGroupId?: LocalGatewayVirtualInterfaceGroupId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: NetworkInterfaceId;
   }
   export interface CreateLocalGatewayRouteResult {
     /**
@@ -23513,6 +23525,18 @@ declare namespace EC2 {
      * The ID of the Amazon Web Services account that owns the local gateway route.
      */
     OwnerId?: String;
+    /**
+     * The ID of the subnet.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * The ID of the customer-owned address pool.
+     */
+    CoipPoolId?: CoipPoolId;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: NetworkInterfaceId;
   }
   export type LocalGatewayRouteList = LocalGatewayRoute[];
   export type LocalGatewayRouteState = "pending"|"active"|"blackhole"|"deleting"|"deleted"|string;
@@ -23545,8 +23569,13 @@ declare namespace EC2 {
      * The tags assigned to the local gateway route table.
      */
     Tags?: TagList;
+    /**
+     * The mode of the local gateway route table.
+     */
+    Mode?: LocalGatewayRouteTableMode;
   }
   export type LocalGatewayRouteTableIdSet = LocalGatewayRoutetableId[];
+  export type LocalGatewayRouteTableMode = "direct-vpc-routing"|"coip"|string;
   export type LocalGatewayRouteTableSet = LocalGatewayRouteTable[];
   export interface LocalGatewayRouteTableVirtualInterfaceGroupAssociation {
     /**
@@ -24610,6 +24639,27 @@ declare namespace EC2 {
      * Information about the launch template.
      */
     LaunchTemplate?: LaunchTemplate;
+  }
+  export interface ModifyLocalGatewayRouteRequest {
+    /**
+     * The CIDR block used for destination matches. The value that you provide must match the CIDR of an existing route in the table.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * The ID of the local gateway route table.
+     */
+    LocalGatewayRouteTableId: LocalGatewayRoutetableId;
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId: NetworkInterfaceId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyLocalGatewayRouteResult {
+    Route?: LocalGatewayRoute;
   }
   export interface ModifyManagedPrefixListRequest {
     /**

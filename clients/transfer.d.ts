@@ -101,6 +101,14 @@ declare class Transfer extends Service {
    */
   deleteConnector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the host key that's specified in the HoskKeyId parameter.
+   */
+  deleteHostKey(params: Transfer.Types.DeleteHostKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the host key that's specified in the HoskKeyId parameter.
+   */
+  deleteHostKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the profile that's specified in the ProfileId parameter.
    */
   deleteProfile(params: Transfer.Types.DeleteProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -181,6 +189,14 @@ declare class Transfer extends Service {
    */
   describeExecution(callback?: (err: AWSError, data: Transfer.Types.DescribeExecutionResponse) => void): Request<Transfer.Types.DescribeExecutionResponse, AWSError>;
   /**
+   * Returns the details of the host key that's specified by the HostKeyId and ServerId.
+   */
+  describeHostKey(params: Transfer.Types.DescribeHostKeyRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeHostKeyResponse) => void): Request<Transfer.Types.DescribeHostKeyResponse, AWSError>;
+  /**
+   * Returns the details of the host key that's specified by the HostKeyId and ServerId.
+   */
+  describeHostKey(callback?: (err: AWSError, data: Transfer.Types.DescribeHostKeyResponse) => void): Request<Transfer.Types.DescribeHostKeyResponse, AWSError>;
+  /**
    * Returns the details of the profile that's specified by the ProfileId.
    */
   describeProfile(params: Transfer.Types.DescribeProfileRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeProfileResponse) => void): Request<Transfer.Types.DescribeProfileResponse, AWSError>;
@@ -229,6 +245,14 @@ declare class Transfer extends Service {
    */
   importCertificate(callback?: (err: AWSError, data: Transfer.Types.ImportCertificateResponse) => void): Request<Transfer.Types.ImportCertificateResponse, AWSError>;
   /**
+   * Adds a host key to the server specified by the ServerId parameter.
+   */
+  importHostKey(params: Transfer.Types.ImportHostKeyRequest, callback?: (err: AWSError, data: Transfer.Types.ImportHostKeyResponse) => void): Request<Transfer.Types.ImportHostKeyResponse, AWSError>;
+  /**
+   * Adds a host key to the server specified by the ServerId parameter.
+   */
+  importHostKey(callback?: (err: AWSError, data: Transfer.Types.ImportHostKeyResponse) => void): Request<Transfer.Types.ImportHostKeyResponse, AWSError>;
+  /**
    * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(params: Transfer.Types.ImportSshPublicKeyRequest, callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
@@ -276,6 +300,14 @@ declare class Transfer extends Service {
    * Lists all executions for the specified workflow.
    */
   listExecutions(callback?: (err: AWSError, data: Transfer.Types.ListExecutionsResponse) => void): Request<Transfer.Types.ListExecutionsResponse, AWSError>;
+  /**
+   * Returns a list of host keys for the server specified by the ServerId paramter.
+   */
+  listHostKeys(params: Transfer.Types.ListHostKeysRequest, callback?: (err: AWSError, data: Transfer.Types.ListHostKeysResponse) => void): Request<Transfer.Types.ListHostKeysResponse, AWSError>;
+  /**
+   * Returns a list of host keys for the server specified by the ServerId paramter.
+   */
+  listHostKeys(callback?: (err: AWSError, data: Transfer.Types.ListHostKeysResponse) => void): Request<Transfer.Types.ListHostKeysResponse, AWSError>;
   /**
    * Returns a list of the profiles for your system. If you want to limit the results to a certain number, supply a value for the MaxResults parameter. If you ran the command previously and received a value for NextToken, you can supply that value to continue listing profiles from where you left off.
    */
@@ -412,6 +444,14 @@ declare class Transfer extends Service {
    * Updates some of the parameters for an existing connector. Provide the ConnectorId for the connector that you want to update, along with the new values for the parameters to update.
    */
   updateConnector(callback?: (err: AWSError, data: Transfer.Types.UpdateConnectorResponse) => void): Request<Transfer.Types.UpdateConnectorResponse, AWSError>;
+  /**
+   * Updates the description for the host key specified by the specified by the ServerId and HostKeyId parameters.
+   */
+  updateHostKey(params: Transfer.Types.UpdateHostKeyRequest, callback?: (err: AWSError, data: Transfer.Types.UpdateHostKeyResponse) => void): Request<Transfer.Types.UpdateHostKeyResponse, AWSError>;
+  /**
+   * Updates the description for the host key specified by the specified by the ServerId and HostKeyId parameters.
+   */
+  updateHostKey(callback?: (err: AWSError, data: Transfer.Types.UpdateHostKeyResponse) => void): Request<Transfer.Types.UpdateHostKeyResponse, AWSError>;
   /**
    * Updates some of the parameters for an existing profile. Provide the ProfileId for the profile that you want to update, along with the new values for the parameters to update.
    */
@@ -858,6 +898,16 @@ declare namespace Transfer {
      */
     ConnectorId: ConnectorId;
   }
+  export interface DeleteHostKeyRequest {
+    /**
+     * Provide the ID of the server that contains the host key that you are deleting.
+     */
+    ServerId: ServerId;
+    /**
+     * The ID of the host key that you are deleting.
+     */
+    HostKeyId: HostKeyId;
+  }
   export interface DeleteProfileRequest {
     /**
      * The ID of the profile that you are deleting.
@@ -989,6 +1039,22 @@ declare namespace Transfer {
      * The structure that contains the details of the workflow' execution.
      */
     Execution: DescribedExecution;
+  }
+  export interface DescribeHostKeyRequest {
+    /**
+     * Provide the ID of the server that contains the host key that you want described.
+     */
+    ServerId: ServerId;
+    /**
+     * Provide the ID of the host key that you want described.
+     */
+    HostKeyId: HostKeyId;
+  }
+  export interface DescribeHostKeyResponse {
+    /**
+     * Returns the details for the specified host key.
+     */
+    HostKey: DescribedHostKey;
   }
   export interface DescribeProfileRequest {
     /**
@@ -1245,6 +1311,36 @@ declare namespace Transfer {
      * A structure that describes the execution results. This includes a list of the steps along with the details of each step, error type and message (if any), and the OnExceptionSteps structure.
      */
     Results?: ExecutionResults;
+  }
+  export interface DescribedHostKey {
+    /**
+     * The unique Amazon Resource Name (ARN) for the host key.
+     */
+    Arn: Arn;
+    /**
+     * A unique identifier for the host key.
+     */
+    HostKeyId?: HostKeyId;
+    /**
+     * The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.
+     */
+    HostKeyFingerprint?: HostKeyFingerprint;
+    /**
+     * The text description for this host key.
+     */
+    Description?: HostKeyDescription;
+    /**
+     * The encryption algorithm used for the host key. The Type is one of the following values:   ssh-rsa   ssh-ed25519   ecdsa-sha2-nistp256    ecdsa-sha2-nistp384   ecdsa-sha2-nistp521  
+     */
+    Type?: HostKeyType;
+    /**
+     * The date on which the host key was added to the server.
+     */
+    DateImported?: DateImported;
+    /**
+     * Key-value pairs that can be used to group and search for host keys.
+     */
+    Tags?: Tags;
   }
   export interface DescribedProfile {
     /**
@@ -1551,7 +1647,10 @@ declare namespace Transfer {
   export type HomeDirectoryMappings = HomeDirectoryMapEntry[];
   export type HomeDirectoryType = "PATH"|"LOGICAL"|string;
   export type HostKey = string;
+  export type HostKeyDescription = string;
   export type HostKeyFingerprint = string;
+  export type HostKeyId = string;
+  export type HostKeyType = string;
   export interface IdentityProviderDetails {
     /**
      * Provides the location of the service endpoint used to authenticate users.
@@ -1610,6 +1709,34 @@ declare namespace Transfer {
      * An array of identifiers for the imported certificates. You use this identifier for working with profiles and partner profiles.
      */
     CertificateId: CertificateId;
+  }
+  export interface ImportHostKeyRequest {
+    /**
+     * Provide the ID of the server that contains the host key that you are importing.
+     */
+    ServerId: ServerId;
+    /**
+     * The public key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+     */
+    HostKeyBody: HostKey;
+    /**
+     * Enter a text description to identify this host key.
+     */
+    Description?: HostKeyDescription;
+    /**
+     * Key-value pairs that can be used to group and search for host keys.
+     */
+    Tags?: Tags;
+  }
+  export interface ImportHostKeyResponse {
+    /**
+     * Returns the server ID that contains the imported key.
+     */
+    ServerId: ServerId;
+    /**
+     * Returns the host key ID for the imported key.
+     */
+    HostKeyId: HostKeyId;
   }
   export interface ImportSshPublicKeyRequest {
     /**
@@ -1768,6 +1895,34 @@ declare namespace Transfer {
      * Returns the details for each execution.    NextToken: returned from a call to several APIs, you can use pass it to a subsequent command to continue listing additional executions.    StartTime: timestamp indicating when the execution began.    Executions: details of the execution, including the execution ID, initial file location, and Service metadata.    Status: one of the following values: IN_PROGRESS, COMPLETED, EXCEPTION, HANDLING_EXEPTION.   
      */
     Executions: ListedExecutions;
+  }
+  export interface ListHostKeysRequest {
+    /**
+     * The maximum number of host keys to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * When there are additional results that were not returned, a NextToken parameter is returned. You can use that value for a subsequent call to ListHostKeys to continue listing results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Provide the ID of the server that contains the host keys that you want to view.
+     */
+    ServerId: ServerId;
+  }
+  export interface ListHostKeysResponse {
+    /**
+     * Returns a token that you can use to call ListHostKeys again and receive additional results, if there are any.
+     */
+    NextToken?: NextToken;
+    /**
+     * Returns the server ID that contains the listed host keys.
+     */
+    ServerId: ServerId;
+    /**
+     * Returns an array, where each item contains the details of a host key.
+     */
+    HostKeys: ListedHostKeys;
   }
   export interface ListProfilesRequest {
     /**
@@ -2028,6 +2183,33 @@ declare namespace Transfer {
     Status?: ExecutionStatus;
   }
   export type ListedExecutions = ListedExecution[];
+  export interface ListedHostKey {
+    /**
+     * Specifies the unique Amazon Resource Name (ARN) of the host key.
+     */
+    Arn: Arn;
+    /**
+     * 
+     */
+    HostKeyId?: HostKeyId;
+    /**
+     * The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.
+     */
+    Fingerprint?: HostKeyFingerprint;
+    /**
+     * The current description for the host key. You can change it by calling the UpdateHostKey operation and providing a new description.
+     */
+    Description?: HostKeyDescription;
+    /**
+     * The encryption algorithm used for the host key. The Type is one of the following values:   ssh-rsa   ssh-ed25519   ecdsa-sha2-nistp256    ecdsa-sha2-nistp384   ecdsa-sha2-nistp521  
+     */
+    Type?: HostKeyType;
+    /**
+     * The date on which the host key was added to the server.
+     */
+    DateImported?: DateImported;
+  }
+  export type ListedHostKeys = ListedHostKey[];
   export interface ListedProfile {
     /**
      * The Amazon Resource Name (ARN) of the specified profile.
@@ -2547,6 +2729,30 @@ declare namespace Transfer {
      * Returns the identifier of the connector object that you are updating.
      */
     ConnectorId: ConnectorId;
+  }
+  export interface UpdateHostKeyRequest {
+    /**
+     * Provide the ID of the server that contains the host key that you are updating.
+     */
+    ServerId: ServerId;
+    /**
+     * Provide the ID of the host key that you are updating.
+     */
+    HostKeyId: HostKeyId;
+    /**
+     * Provide an updated description for the host key.
+     */
+    Description: HostKeyDescription;
+  }
+  export interface UpdateHostKeyResponse {
+    /**
+     * Returns the server ID for the server that contains the updated host key.
+     */
+    ServerId: ServerId;
+    /**
+     * Returns the host key ID for the updated host key.
+     */
+    HostKeyId: HostKeyId;
   }
   export interface UpdateProfileRequest {
     /**

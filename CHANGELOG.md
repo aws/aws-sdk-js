@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1214.0-->
+<!--LATEST=2.1215.0-->
 <!--ENTRYINSERT-->
+
+## 2.1215.0
+* feature: CustomerProfiles: Added isUnstructured in response for Customer Profiles Integration APIs
+* feature: Drs: Fixed the data type of lagDuration that is returned in Describe Source Server API
+* feature: EC2: Two new features for local gateway route tables: support for static routes targeting Elastic Network Interfaces and direct VPC routing.
+* feature: Evidently: This release adds support for the client-side evaluation - powered by AWS AppConfig feature.
+* feature: Kendra: This release enables our customer to choose the option of Sharepoint 2019 for the on-premise Sharepoint connector.
+* feature: Transfer: This release introduces the ability to have multiple server host keys for any of your Transfer Family servers that use the SFTP protocol.
 
 ## 2.1214.0
 * feature: EKS: Adding support for local Amazon EKS clusters on Outposts

@@ -12,11 +12,11 @@ declare class CustomerProfiles extends Service {
   constructor(options?: CustomerProfiles.Types.ClientConfiguration)
   config: Config & CustomerProfiles.Types.ClientConfiguration;
   /**
-   * Associates a new key value with a specific profile, such as a Contact Trace Record (CTR) ContactId. A profile object can have a single unique key and any number of additional keys that can be used to identify the profile that it belongs to.
+   * Associates a new key value with a specific profile, such as a Contact Record ContactId. A profile object can have a single unique key and any number of additional keys that can be used to identify the profile that it belongs to.
    */
   addProfileKey(params: CustomerProfiles.Types.AddProfileKeyRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.AddProfileKeyResponse) => void): Request<CustomerProfiles.Types.AddProfileKeyResponse, AWSError>;
   /**
-   * Associates a new key value with a specific profile, such as a Contact Trace Record (CTR) ContactId. A profile object can have a single unique key and any number of additional keys that can be used to identify the profile that it belongs to.
+   * Associates a new key value with a specific profile, such as a Contact Record ContactId. A profile object can have a single unique key and any number of additional keys that can be used to identify the profile that it belongs to.
    */
   addProfileKey(callback?: (err: AWSError, data: CustomerProfiles.Types.AddProfileKeyResponse) => void): Request<CustomerProfiles.Types.AddProfileKeyResponse, AWSError>;
   /**
@@ -252,27 +252,27 @@ declare class CustomerProfiles extends Service {
    */
   mergeProfiles(callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
   /**
-   * Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect. An integration can belong to only one domain.
+   * Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect. An integration can belong to only one domain. To add or remove tags on an existing Integration, see  TagResource / UntagResource.
    */
   putIntegration(params: CustomerProfiles.Types.PutIntegrationRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.PutIntegrationResponse) => void): Request<CustomerProfiles.Types.PutIntegrationResponse, AWSError>;
   /**
-   * Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect. An integration can belong to only one domain.
+   * Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect. An integration can belong to only one domain. To add or remove tags on an existing Integration, see  TagResource / UntagResource.
    */
   putIntegration(callback?: (err: AWSError, data: CustomerProfiles.Types.PutIntegrationResponse) => void): Request<CustomerProfiles.Types.PutIntegrationResponse, AWSError>;
   /**
-   * Adds additional objects to customer profiles of a given ObjectType. When adding a specific profile object, like a Contact Trace Record (CTR), an inferred profile can get created if it is not mapped to an existing profile. The resulting profile will only have a phone number populated in the standard ProfileObject. Any additional CTRs with the same phone number will be mapped to the same inferred profile. When a ProfileObject is created and if a ProfileObjectType already exists for the ProfileObject, it will provide data to a standard profile depending on the ProfileObjectType definition. PutProfileObject needs an ObjectType, which can be created using PutProfileObjectType.
+   * Adds additional objects to customer profiles of a given ObjectType. When adding a specific profile object, like a Contact Record, an inferred profile can get created if it is not mapped to an existing profile. The resulting profile will only have a phone number populated in the standard ProfileObject. Any additional Contact Records with the same phone number will be mapped to the same inferred profile. When a ProfileObject is created and if a ProfileObjectType already exists for the ProfileObject, it will provide data to a standard profile depending on the ProfileObjectType definition. PutProfileObject needs an ObjectType, which can be created using PutProfileObjectType.
    */
   putProfileObject(params: CustomerProfiles.Types.PutProfileObjectRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.PutProfileObjectResponse) => void): Request<CustomerProfiles.Types.PutProfileObjectResponse, AWSError>;
   /**
-   * Adds additional objects to customer profiles of a given ObjectType. When adding a specific profile object, like a Contact Trace Record (CTR), an inferred profile can get created if it is not mapped to an existing profile. The resulting profile will only have a phone number populated in the standard ProfileObject. Any additional CTRs with the same phone number will be mapped to the same inferred profile. When a ProfileObject is created and if a ProfileObjectType already exists for the ProfileObject, it will provide data to a standard profile depending on the ProfileObjectType definition. PutProfileObject needs an ObjectType, which can be created using PutProfileObjectType.
+   * Adds additional objects to customer profiles of a given ObjectType. When adding a specific profile object, like a Contact Record, an inferred profile can get created if it is not mapped to an existing profile. The resulting profile will only have a phone number populated in the standard ProfileObject. Any additional Contact Records with the same phone number will be mapped to the same inferred profile. When a ProfileObject is created and if a ProfileObjectType already exists for the ProfileObject, it will provide data to a standard profile depending on the ProfileObjectType definition. PutProfileObject needs an ObjectType, which can be created using PutProfileObjectType.
    */
   putProfileObject(callback?: (err: AWSError, data: CustomerProfiles.Types.PutProfileObjectResponse) => void): Request<CustomerProfiles.Types.PutProfileObjectResponse, AWSError>;
   /**
-   * Defines a ProfileObjectType.
+   * Defines a ProfileObjectType. To add or remove tags on an existing ObjectType, see  TagResource/UntagResource.
    */
   putProfileObjectType(params: CustomerProfiles.Types.PutProfileObjectTypeRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.PutProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.PutProfileObjectTypeResponse, AWSError>;
   /**
-   * Defines a ProfileObjectType.
+   * Defines a ProfileObjectType. To add or remove tags on an existing ObjectType, see  TagResource/UntagResource.
    */
   putProfileObjectType(callback?: (err: AWSError, data: CustomerProfiles.Types.PutProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.PutProfileObjectTypeResponse, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class CustomerProfiles extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CustomerProfiles.Types.UntagResourceResponse) => void): Request<CustomerProfiles.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
    */
   updateDomain(params: CustomerProfiles.Types.UpdateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
    */
   updateDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
@@ -1176,6 +1176,10 @@ declare namespace CustomerProfiles {
      * Unique identifier for the workflow.
      */
     WorkflowId?: string1To255;
+    /**
+     * Boolean to indicate if the Flow associated with the Integration is created via Appflow console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition
+     */
+    IsUnstructured?: optionalBoolean;
   }
   export interface GetMatchesRequest {
     /**
@@ -1585,6 +1589,10 @@ declare namespace CustomerProfiles {
      * Unique identifier for the workflow.
      */
     WorkflowId?: string1To255;
+    /**
+     * Boolean to indicate if the Flow associated with the Integration is created via Appflow console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition
+     */
+    IsUnstructured?: optionalBoolean;
   }
   export interface ListIntegrationsRequest {
     /**
@@ -2101,6 +2109,10 @@ declare namespace CustomerProfiles {
      * Unique identifier for the workflow.
      */
     WorkflowId?: string1To255;
+    /**
+     * Boolean to indicate if the Flow associated with the Integration is created via Appflow console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition
+     */
+    IsUnstructured?: optionalBoolean;
   }
   export interface PutProfileObjectRequest {
     /**

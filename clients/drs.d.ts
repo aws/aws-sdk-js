@@ -420,7 +420,7 @@ declare namespace Drs {
     /**
      * Data replication lag duration.
      */
-    lagDuration?: ISO8601DatetimeString;
+    lagDuration?: ISO8601DurationString;
     /**
      * The disks that should be replicated.
      */
@@ -779,6 +779,7 @@ declare namespace Drs {
   }
   export type IPsList = BoundedString[];
   export type ISO8601DatetimeString = string;
+  export type ISO8601DurationString = string;
   export interface IdentificationHints {
     /**
      * AWS Instance ID identification hint.
@@ -935,7 +936,7 @@ declare namespace Drs {
     /**
      * The amount of time that the Source Server has been replicating for.
      */
-    elapsedReplicationDuration?: ISO8601DatetimeString;
+    elapsedReplicationDuration?: ISO8601DurationString;
     /**
      * The date and time of the first byte that was replicated from the Source Server.
      */
