@@ -437,6 +437,22 @@ declare class EC2 extends Service {
    */
   createClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
   /**
+   *  Creates a range of customer-owned IP addresses. 
+   */
+  createCoipCidr(params: EC2.Types.CreateCoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.CreateCoipCidrResult) => void): Request<EC2.Types.CreateCoipCidrResult, AWSError>;
+  /**
+   *  Creates a range of customer-owned IP addresses. 
+   */
+  createCoipCidr(callback?: (err: AWSError, data: EC2.Types.CreateCoipCidrResult) => void): Request<EC2.Types.CreateCoipCidrResult, AWSError>;
+  /**
+   *  Creates a pool of customer-owned IP (CoIP) addresses. 
+   */
+  createCoipPool(params: EC2.Types.CreateCoipPoolRequest, callback?: (err: AWSError, data: EC2.Types.CreateCoipPoolResult) => void): Request<EC2.Types.CreateCoipPoolResult, AWSError>;
+  /**
+   *  Creates a pool of customer-owned IP (CoIP) addresses. 
+   */
+  createCoipPool(callback?: (err: AWSError, data: EC2.Types.CreateCoipPoolResult) => void): Request<EC2.Types.CreateCoipPoolResult, AWSError>;
+  /**
    * Provides information to Amazon Web Services about your customer gateway device. The customer gateway device is the appliance at your end of the VPN connection. You must provide the IP address of the customer gateway device’s external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN. For more information, see Customer gateway options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide. To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. An identical request returns information about the existing customer gateway; it doesn't create a new customer gateway.
    */
   createCustomerGateway(params: EC2.Types.CreateCustomerGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
@@ -588,6 +604,22 @@ declare class EC2 extends Service {
    * Creates a static route for the specified local gateway route table. You must specify one of the following targets:     LocalGatewayVirtualInterfaceGroupId     NetworkInterfaceId   
    */
   createLocalGatewayRoute(callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteResult) => void): Request<EC2.Types.CreateLocalGatewayRouteResult, AWSError>;
+  /**
+   *  Creates a local gateway route table. 
+   */
+  createLocalGatewayRouteTable(params: EC2.Types.CreateLocalGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteTableResult) => void): Request<EC2.Types.CreateLocalGatewayRouteTableResult, AWSError>;
+  /**
+   *  Creates a local gateway route table. 
+   */
+  createLocalGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteTableResult) => void): Request<EC2.Types.CreateLocalGatewayRouteTableResult, AWSError>;
+  /**
+   *  Creates a local gateway route table virtual interface group association. 
+   */
+  createLocalGatewayRouteTableVirtualInterfaceGroupAssociation(params: EC2.Types.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest, callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult) => void): Request<EC2.Types.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult, AWSError>;
+  /**
+   *  Creates a local gateway route table virtual interface group association. 
+   */
+  createLocalGatewayRouteTableVirtualInterfaceGroupAssociation(callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult) => void): Request<EC2.Types.CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult, AWSError>;
   /**
    * Associates the specified VPC with the specified local gateway route table.
    */
@@ -997,6 +1029,22 @@ declare class EC2 extends Service {
    */
   deleteClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.DeleteClientVpnRouteResult) => void): Request<EC2.Types.DeleteClientVpnRouteResult, AWSError>;
   /**
+   *  Deletes a range of customer-owned IP addresses. 
+   */
+  deleteCoipCidr(params: EC2.Types.DeleteCoipCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeleteCoipCidrResult) => void): Request<EC2.Types.DeleteCoipCidrResult, AWSError>;
+  /**
+   *  Deletes a range of customer-owned IP addresses. 
+   */
+  deleteCoipCidr(callback?: (err: AWSError, data: EC2.Types.DeleteCoipCidrResult) => void): Request<EC2.Types.DeleteCoipCidrResult, AWSError>;
+  /**
+   * Deletes a pool of customer-owned IP (CoIP) addresses. 
+   */
+  deleteCoipPool(params: EC2.Types.DeleteCoipPoolRequest, callback?: (err: AWSError, data: EC2.Types.DeleteCoipPoolResult) => void): Request<EC2.Types.DeleteCoipPoolResult, AWSError>;
+  /**
+   * Deletes a pool of customer-owned IP (CoIP) addresses. 
+   */
+  deleteCoipPool(callback?: (err: AWSError, data: EC2.Types.DeleteCoipPoolResult) => void): Request<EC2.Types.DeleteCoipPoolResult, AWSError>;
+  /**
    * Deletes the specified customer gateway. You must delete the VPN connection before you can delete the customer gateway.
    */
   deleteCustomerGateway(params: EC2.Types.DeleteCustomerGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1116,6 +1164,22 @@ declare class EC2 extends Service {
    * Deletes the specified route from the specified local gateway route table.
    */
   deleteLocalGatewayRoute(callback?: (err: AWSError, data: EC2.Types.DeleteLocalGatewayRouteResult) => void): Request<EC2.Types.DeleteLocalGatewayRouteResult, AWSError>;
+  /**
+   *  Deletes a local gateway route table. 
+   */
+  deleteLocalGatewayRouteTable(params: EC2.Types.DeleteLocalGatewayRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.DeleteLocalGatewayRouteTableResult) => void): Request<EC2.Types.DeleteLocalGatewayRouteTableResult, AWSError>;
+  /**
+   *  Deletes a local gateway route table. 
+   */
+  deleteLocalGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DeleteLocalGatewayRouteTableResult) => void): Request<EC2.Types.DeleteLocalGatewayRouteTableResult, AWSError>;
+  /**
+   *  Deletes a local gateway route table virtual interface group association. 
+   */
+  deleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation(params: EC2.Types.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest, callback?: (err: AWSError, data: EC2.Types.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult) => void): Request<EC2.Types.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult, AWSError>;
+  /**
+   *  Deletes a local gateway route table virtual interface group association. 
+   */
+  deleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation(callback?: (err: AWSError, data: EC2.Types.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult) => void): Request<EC2.Types.DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult, AWSError>;
   /**
    * Deletes the specified association between a VPC and local gateway route table.
    */
@@ -7241,6 +7305,20 @@ declare namespace EC2 {
     CoIp?: String;
   }
   export type CoipAddressUsageSet = CoipAddressUsage[];
+  export interface CoipCidr {
+    /**
+     *  An address range in a customer-owned IP address space. 
+     */
+    Cidr?: String;
+    /**
+     *  The ID of the address pool. 
+     */
+    CoipPoolId?: Ipv4PoolCoipId;
+    /**
+     *  The ID of the local gateway route table. 
+     */
+    LocalGatewayRouteTableId?: String;
+  }
   export interface CoipPool {
     /**
      * The ID of the address pool.
@@ -7842,6 +7920,43 @@ declare namespace EC2 {
      * The current state of the route.
      */
     Status?: ClientVpnRouteStatus;
+  }
+  export interface CreateCoipCidrRequest {
+    /**
+     *  A customer-owned IP address range to create. 
+     */
+    Cidr: String;
+    /**
+     *  The ID of the address pool. 
+     */
+    CoipPoolId: Ipv4PoolCoipId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateCoipCidrResult {
+    /**
+     *  Information about a range of customer-owned IP addresses. 
+     */
+    CoipCidr?: CoipCidr;
+  }
+  export interface CreateCoipPoolRequest {
+    /**
+     *  The ID of the local gateway route table. 
+     */
+    LocalGatewayRouteTableId: LocalGatewayRoutetableId;
+    /**
+     *  The tags to assign to the CoIP address pool. 
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateCoipPoolResult {
+    CoipPool?: CoipPool;
   }
   export interface CreateCustomerGatewayRequest {
     /**
@@ -8546,6 +8661,48 @@ declare namespace EC2 {
      * Information about the route.
      */
     Route?: LocalGatewayRoute;
+  }
+  export interface CreateLocalGatewayRouteTableRequest {
+    /**
+     *  The ID of the local gateway. 
+     */
+    LocalGatewayId: LocalGatewayId;
+    /**
+     *  The mode of the local gateway route table. 
+     */
+    Mode?: LocalGatewayRouteTableMode;
+    /**
+     *  The tags assigned to the local gateway route table. 
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateLocalGatewayRouteTableResult {
+    LocalGatewayRouteTable?: LocalGatewayRouteTable;
+  }
+  export interface CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest {
+    /**
+     *  The ID of the local gateway route table. 
+     */
+    LocalGatewayRouteTableId: LocalGatewayRoutetableId;
+    /**
+     *  The ID of the local gateway route table virtual interface group association. 
+     */
+    LocalGatewayVirtualInterfaceGroupId: LocalGatewayVirtualInterfaceGroupId;
+    /**
+     *  The tags assigned to the local gateway route table virtual interface group association. 
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult {
+    LocalGatewayRouteTableVirtualInterfaceGroupAssociation?: LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
   }
   export interface CreateLocalGatewayRouteTableVpcAssociationRequest {
     /**
@@ -10338,6 +10495,39 @@ declare namespace EC2 {
      */
     Status?: ClientVpnRouteStatus;
   }
+  export interface DeleteCoipCidrRequest {
+    /**
+     *  A customer-owned IP address range that you want to delete. 
+     */
+    Cidr: String;
+    /**
+     *  The ID of the customer-owned address pool. 
+     */
+    CoipPoolId: Ipv4PoolCoipId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteCoipCidrResult {
+    /**
+     *  Information about a range of customer-owned IP addresses. 
+     */
+    CoipCidr?: CoipCidr;
+  }
+  export interface DeleteCoipPoolRequest {
+    /**
+     * The ID of the CoIP pool that you want to delete. 
+     */
+    CoipPoolId: Ipv4PoolCoipId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteCoipPoolResult {
+    CoipPool?: CoipPool;
+  }
   export interface DeleteCustomerGatewayRequest {
     /**
      * The ID of the customer gateway.
@@ -10664,6 +10854,32 @@ declare namespace EC2 {
      * Information about the route.
      */
     Route?: LocalGatewayRoute;
+  }
+  export interface DeleteLocalGatewayRouteTableRequest {
+    /**
+     *  The ID of the local gateway route table. 
+     */
+    LocalGatewayRouteTableId: LocalGatewayRoutetableId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteLocalGatewayRouteTableResult {
+    LocalGatewayRouteTable?: LocalGatewayRouteTable;
+  }
+  export interface DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest {
+    /**
+     *  The ID of the local gateway route table virtual interface group association. 
+     */
+    LocalGatewayRouteTableVirtualInterfaceGroupAssociationId: LocalGatewayRouteTableVirtualInterfaceGroupAssociationId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult {
+    LocalGatewayRouteTableVirtualInterfaceGroupAssociation?: LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
   }
   export interface DeleteLocalGatewayRouteTableVpcAssociationRequest {
     /**
@@ -23573,6 +23789,7 @@ declare namespace EC2 {
      * The mode of the local gateway route table.
      */
     Mode?: LocalGatewayRouteTableMode;
+    StateReason?: StateReason;
   }
   export type LocalGatewayRouteTableIdSet = LocalGatewayRoutetableId[];
   export type LocalGatewayRouteTableMode = "direct-vpc-routing"|"coip"|string;
@@ -24650,9 +24867,13 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
+     *  The ID of the virtual interface group. 
+     */
+    LocalGatewayVirtualInterfaceGroupId?: LocalGatewayVirtualInterfaceGroupId;
+    /**
      * The ID of the network interface.
      */
-    NetworkInterfaceId: NetworkInterfaceId;
+    NetworkInterfaceId?: NetworkInterfaceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -28852,7 +29073,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"vpn-connection-device-type"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"vpn-connection-device-type"|string;
   export interface ResponseError {
     /**
      * The error code.

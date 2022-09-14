@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1215.0-->
+<!--LATEST=2.1216.0-->
 <!--ENTRYINSERT-->
+
+## 2.1216.0
+* feature: AmplifyUIBuilder: Amplify Studio UIBuilder is introducing forms functionality. Forms can be configured from Data Store models, JSON, or from scratch. These forms can then be generated in your project and used like any other React components.
+* feature: EC2: This update introduces API operations to manage and create local gateway route tables, CoIP pools, and VIF group associations.
 
 ## 2.1215.0
 * feature: CustomerProfiles: Added isUnstructured in response for Customer Profiles Integration APIs
