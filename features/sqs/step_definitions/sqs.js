@@ -4,4 +4,10 @@ module.exports = function() {
     this.createdQueues = [];
     callback();
   });
+
+  this.After("@sqs", async function () {
+    for (var queueUrl of this.createdQueues) {
+      await this.service.deleteQueue({QueueUrl: queueUrl}).promise();
+    }
+  });
 };
