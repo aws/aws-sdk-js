@@ -7946,6 +7946,39 @@
       },
       "documentation": "<p>An entry for a prefix list.</p>"
     },
+    "AddedPrincipal": {
+      "type": "structure",
+      "members": {
+        "PrincipalType": {
+          "shape": "PrincipalType",
+          "documentation": "<p>The type of principal.</p>",
+          "locationName": "principalType"
+        },
+        "Principal": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the principal.</p>",
+          "locationName": "principal"
+        },
+        "ServicePermissionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service permission.</p>",
+          "locationName": "servicePermissionId"
+        },
+        "ServiceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "locationName": "serviceId"
+        }
+      },
+      "documentation": "<p>Describes a principal.</p>"
+    },
+    "AddedPrincipalSet": {
+      "type": "list",
+      "member": {
+        "shape": "AddedPrincipal",
+        "locationName": "item"
+      }
+    },
     "AdditionalDetail": {
       "type": "structure",
       "members": {
@@ -8379,6 +8412,21 @@
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the principal.</p>",
           "locationName": "principal"
+        },
+        "ServicePermissionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service permission.</p>",
+          "locationName": "servicePermissionId"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags.</p>",
+          "locationName": "tagSet"
+        },
+        "ServiceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "locationName": "serviceId"
         }
       },
       "documentation": "<p>Describes a principal.</p>"
@@ -40625,6 +40673,11 @@
     "ModifyVpcEndpointServicePermissionsResult": {
       "type": "structure",
       "members": {
+        "AddedPrincipals": {
+          "shape": "AddedPrincipalSet",
+          "documentation": "<p>Information about the added principals.</p>",
+          "locationName": "addedPrincipalSet"
+        },
         "ReturnValue": {
           "shape": "Boolean",
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
@@ -46488,7 +46541,9 @@
         "volume",
         "vpc",
         "vpc-endpoint",
+        "vpc-endpoint-connection",
         "vpc-endpoint-service",
+        "vpc-endpoint-service-permission",
         "vpc-peering-connection",
         "vpn-connection",
         "vpn-gateway",
@@ -48730,7 +48785,7 @@
         },
         "PrivateDnsNames": {
           "shape": "PrivateDnsDetailsSet",
-          "documentation": "<p>The private DNS names assigned to the VPC endpoint service. </p>",
+          "documentation": "<p>The private DNS names assigned to the VPC endpoint service.</p>",
           "locationName": "privateDnsNameSet"
         },
         "VpcEndpointPolicySupported": {
@@ -54998,6 +55053,16 @@
           "shape": "IpAddressType",
           "documentation": "<p>The IP address type for the endpoint.</p>",
           "locationName": "ipAddressType"
+        },
+        "VpcEndpointConnectionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the VPC endpoint connection.</p>",
+          "locationName": "vpcEndpointConnectionId"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes a VPC endpoint connection to a service.</p>"

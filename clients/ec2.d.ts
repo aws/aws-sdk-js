@@ -4884,6 +4884,25 @@ declare namespace EC2 {
      */
     Description?: String;
   }
+  export interface AddedPrincipal {
+    /**
+     * The type of principal.
+     */
+    PrincipalType?: PrincipalType;
+    /**
+     * The Amazon Resource Name (ARN) of the principal.
+     */
+    Principal?: String;
+    /**
+     * The ID of the service permission.
+     */
+    ServicePermissionId?: String;
+    /**
+     * The ID of the service.
+     */
+    ServiceId?: String;
+  }
+  export type AddedPrincipalSet = AddedPrincipal[];
   export interface AdditionalDetail {
     /**
      * The information type.
@@ -5155,6 +5174,18 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the principal.
      */
     Principal?: String;
+    /**
+     * The ID of the service permission.
+     */
+    ServicePermissionId?: String;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+    /**
+     * The ID of the service.
+     */
+    ServiceId?: String;
   }
   export type AllowedPrincipalSet = AllowedPrincipal[];
   export type AllowsMultipleInstanceTypes = "on"|"off"|string;
@@ -25641,6 +25672,10 @@ declare namespace EC2 {
   }
   export interface ModifyVpcEndpointServicePermissionsResult {
     /**
+     * Information about the added principals.
+     */
+    AddedPrincipals?: AddedPrincipalSet;
+    /**
      * Returns true if the request succeeds; otherwise, it returns an error.
      */
     ReturnValue?: Boolean;
@@ -29073,7 +29108,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"vpn-connection-device-type"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"vpn-connection-device-type"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -30611,7 +30646,7 @@ declare namespace EC2 {
      */
     PrivateDnsName?: String;
     /**
-     * The private DNS names assigned to the VPC endpoint service. 
+     * The private DNS names assigned to the VPC endpoint service.
      */
     PrivateDnsNames?: PrivateDnsDetailsSet;
     /**
@@ -34289,6 +34324,14 @@ declare namespace EC2 {
      * The IP address type for the endpoint.
      */
     IpAddressType?: IpAddressType;
+    /**
+     * The ID of the VPC endpoint connection.
+     */
+    VpcEndpointConnectionId?: String;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
   }
   export type VpcEndpointConnectionSet = VpcEndpointConnection[];
   export type VpcEndpointId = string;

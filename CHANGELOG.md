@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1216.0-->
+<!--LATEST=2.1217.0-->
 <!--ENTRYINSERT-->
+
+## 2.1217.0
+* feature: DynamoDB: Increased DynamoDB transaction limit from 25 to 100.
+* feature: EC2: This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now supports specifying Hyperband strategy for tuning jobs, which uses a multi-fidelity based tuning strategy to stop underperforming hyperparameter configurations early.
 
 ## 2.1216.0
 * feature: AmplifyUIBuilder: Amplify Studio UIBuilder is introducing forms functionality. Forms can be configured from Data Store models, JSON, or from scratch. These forms can then be generated in your project and used like any other React components.

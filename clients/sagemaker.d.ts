@@ -61,11 +61,11 @@ declare class SageMaker extends Service {
    */
   createAlgorithm(callback?: (err: AWSError, data: SageMaker.Types.CreateAlgorithmOutput) => void): Request<SageMaker.Types.CreateAlgorithmOutput, AWSError>;
   /**
-   * Creates a running app for the specified UserProfile. Supported apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
+   * Creates a running app for the specified UserProfile. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
    */
   createApp(params: SageMaker.Types.CreateAppRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates a running app for the specified UserProfile. Supported apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
+   * Creates a running app for the specified UserProfile. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.
    */
   createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
@@ -3652,7 +3652,7 @@ declare namespace SageMaker {
      */
     UserProfileName: UserProfileName;
     /**
-     * The type of app. Supported apps are JupyterServer and KernelGateway. TensorBoard is not supported.
+     * The type of app.
      */
     AppType: AppType;
     /**
@@ -8855,7 +8855,7 @@ declare namespace SageMaker {
      */
     RStudioServerProDomainSettings?: RStudioServerProDomainSettings;
     /**
-     * The configuration for attaching a SageMaker user profile name to the execution role as a  sts:SourceIdentity key.
+     * The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.
      */
     ExecutionRoleIdentityConfig?: ExecutionRoleIdentityConfig;
   }
@@ -8865,7 +8865,7 @@ declare namespace SageMaker {
      */
     RStudioServerProDomainSettingsForUpdate?: RStudioServerProDomainSettingsForUpdate;
     /**
-     * The configuration for attaching a SageMaker user profile name to the execution role as a  sts:SourceIdentity key. This configuration can only be modified if there are no apps in the InService or Pending state.
+     * The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key. This configuration can only be modified if there are no apps in the InService or Pending state.
      */
     ExecutionRoleIdentityConfig?: ExecutionRoleIdentityConfig;
   }
@@ -9985,7 +9985,7 @@ declare namespace SageMaker {
      */
     TaskAvailabilityLifetimeInSeconds?: TaskAvailabilityLifetimeInSeconds;
     /**
-     * Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time. The default value is 1000 objects.
+     * Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time. The default value is 1000 objects. To increase the maximum value to 5000 objects, contact Amazon Web Services Support.
      */
     MaxConcurrentTaskCount?: MaxConcurrentTaskCount;
     /**
@@ -10196,9 +10196,13 @@ declare namespace SageMaker {
   export type HyperParameterTuningJobArn = string;
   export interface HyperParameterTuningJobConfig {
     /**
-     * Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. To use the Bayesian search strategy, set this to Bayesian. To randomly search, set it to Random. For information about search strategies, see How Hyperparameter Tuning Works.
+     * Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. For information about search strategies, see How Hyperparameter Tuning Works.
      */
     Strategy: HyperParameterTuningJobStrategyType;
+    /**
+     * The configuration for the Hyperband optimization strategy. This parameter should be provided only if Hyperband is selected as the strategy for HyperParameterTuningJobConfig.
+     */
+    StrategyConfig?: HyperParameterTuningJobStrategyConfig;
     /**
      * The HyperParameterTuningJobObjective object that specifies the objective metric for this tuning job.
      */
@@ -10212,7 +10216,7 @@ declare namespace SageMaker {
      */
     ParameterRanges?: ParameterRanges;
     /**
-     * Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. This can be one of the following values (the default value is OFF):  OFF  Training jobs launched by the hyperparameter tuning job do not use early stopping.  AUTO  SageMaker stops training jobs launched by the hyperparameter tuning job when they are unlikely to perform better than previously completed training jobs. For more information, see Stop Training Jobs Early.  
+     * Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. Because the Hyperband strategy has its own advanced internal early stopping mechanism, TrainingJobEarlyStoppingType must be OFF to use Hyperband. This parameter can take on one of the following values (the default value is OFF):  OFF  Training jobs launched by the hyperparameter tuning job do not use early stopping.  AUTO  SageMaker stops training jobs launched by the hyperparameter tuning job when they are unlikely to perform better than previously completed training jobs. For more information, see Stop Training Jobs Early.  
      */
     TrainingJobEarlyStoppingType?: TrainingJobEarlyStoppingType;
     /**
@@ -10280,7 +10284,13 @@ declare namespace SageMaker {
   }
   export type HyperParameterTuningJobSortByOptions = "Name"|"Status"|"CreationTime"|string;
   export type HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
-  export type HyperParameterTuningJobStrategyType = "Bayesian"|"Random"|string;
+  export interface HyperParameterTuningJobStrategyConfig {
+    /**
+     * The configuration for the object that specifies the Hyperband strategy. This parameter is only supported for the Hyperband selection for Strategy within the HyperParameterTuningJobConfig API.
+     */
+    HyperbandStrategyConfig?: HyperbandStrategyConfig;
+  }
+  export type HyperParameterTuningJobStrategyType = "Bayesian"|"Random"|"Hyperband"|string;
   export type HyperParameterTuningJobSummaries = HyperParameterTuningJobSummary[];
   export interface HyperParameterTuningJobSummary {
     /**
@@ -10296,7 +10306,7 @@ declare namespace SageMaker {
      */
     HyperParameterTuningJobStatus: HyperParameterTuningJobStatus;
     /**
-     * Specifies the search strategy hyperparameter tuning uses to choose which hyperparameters to use for each iteration. Currently, the only valid value is Bayesian.
+     * Specifies the search strategy hyperparameter tuning uses to choose which hyperparameters to evaluate at each iteration.
      */
     Strategy: HyperParameterTuningJobStrategyType;
     /**
@@ -10363,6 +10373,18 @@ declare namespace SageMaker {
   }
   export type HyperParameterValue = string;
   export type HyperParameters = {[key: string]: HyperParameterValue};
+  export interface HyperbandStrategyConfig {
+    /**
+     * The minimum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. If the value for MinResource has not been reached, the training job will not be stopped by Hyperband.
+     */
+    MinResource?: HyperbandStrategyMinResource;
+    /**
+     * The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the MaxResource value, it is stopped. If a value for MaxResource is not provided, and Hyperband is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts to infer MaxResource from the following keys (if present) in StaticsHyperParameters:    epochs     numepochs     n-epochs     n_epochs     num_epochs    If HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive early stopping decisions. For distributive training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. 
+     */
+    MaxResource?: HyperbandStrategyMaxResource;
+  }
+  export type HyperbandStrategyMaxResource = number;
+  export type HyperbandStrategyMinResource = number;
   export type IdempotencyToken = string;
   export interface Image {
     /**
