@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1217.0-->
+<!--LATEST=2.1218.0-->
 <!--ENTRYINSERT-->
+
+## 2.1218.0
+* feature: CodeStarNotifications: This release adds tag based access control for the UntagResource API.
 
 ## 2.1217.0
 * feature: DynamoDB: Increased DynamoDB transaction limit from 25 to 100.
