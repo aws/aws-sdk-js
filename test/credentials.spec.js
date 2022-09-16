@@ -703,7 +703,7 @@ const exp = require('constants');
             done();
           });
         });
-        return it('throws error if sso client returns an error', function(done) {
+        it('throws error if sso client returns an error', function(done) {
           var mockErr;
           mockErr = 'foo Error';
           helpers.spyOn(creds.service, 'getRoleCredentials').andCallFake(function(_, cb) {
@@ -711,6 +711,20 @@ const exp = require('constants');
           });
           creds.refresh(function(err) {
             expect(err.message).to.eql(mockErr);
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        return it('rethrows NetworkingErrors with a modified error message', function(done) {
+          const netError = 'unable to verify the first certificate';
+          helpers.spyOn(creds.service, 'getRoleCredentials').andCallFake(function(_, cb) {
+            const e = new Error(netError);
+            e.code = 'NetworkingError';
+            return cb(e, null);
+          });
+          creds.refresh(function(err) {
+            expect(err.message).to.eql('SSO credential retrieval failed with \'' + netError + '\'');
+            expect(err.code).to.eql('NetworkingError');
             expect(creds.accessKeyId).to.be.undefined;
             done();
           });
