@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "sso",
+  "description": "sso TLS errors are now rethrown without going through the load() callabck. This allows a faster failure, and prepends the error message to make it clear which call failed."
+}
