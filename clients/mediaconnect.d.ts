@@ -1236,7 +1236,7 @@ declare namespace MediaConnect {
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type PriceUnits = "HOURLY"|string;
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"fujitsu-qos"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos"|string;
   export interface PurchaseOfferingRequest {
     /**
      * The Amazon Resource Name (ARN) of the offering.
@@ -1480,6 +1480,14 @@ declare namespace MediaConnect {
      */
     SenderIpAddress?: __string;
     /**
+     * Source IP or domain name for SRT-caller protocol.
+     */
+    SourceListenerAddress?: __string;
+    /**
+     * Source port for SRT-caller protocol.
+     */
+    SourceListenerPort?: __integer;
+    /**
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
     StreamId?: __string;
@@ -1643,6 +1651,14 @@ declare namespace MediaConnect {
      * The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
      */
     SmoothingLatency?: __integer;
+    /**
+     * Source IP or domain name for SRT-caller protocol.
+     */
+    SourceListenerAddress?: __string;
+    /**
+     * Source port for SRT-caller protocol.
+     */
+    SourceListenerPort?: __integer;
     /**
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
@@ -1935,6 +1951,14 @@ declare namespace MediaConnect {
      * The ARN of the source that you want to update.
      */
     SourceArn: __string;
+    /**
+     * Source IP or domain name for SRT-caller protocol.
+     */
+    SourceListenerAddress?: __string;
+    /**
+     * Source port for SRT-caller protocol.
+     */
+    SourceListenerPort?: __integer;
     /**
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */

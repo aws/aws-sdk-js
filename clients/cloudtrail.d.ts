@@ -92,13 +92,21 @@ declare class CloudTrail extends Service {
    */
   getEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.GetEventDataStoreResponse) => void): Request<CloudTrail.Types.GetEventDataStoreResponse, AWSError>;
   /**
-   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information, see Logging Data and Management Events for Trails  in the CloudTrail User Guide.
+   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information about logging management and data events, see the following topics in the CloudTrail User Guide:    Logging management events for trails      Logging data events for trails    
    */
   getEventSelectors(params: CloudTrail.Types.GetEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
   /**
-   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information, see Logging Data and Management Events for Trails  in the CloudTrail User Guide.
+   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the resources on which you are logging data events.   For more information about logging management and data events, see the following topics in the CloudTrail User Guide:    Logging management events for trails      Logging data events for trails    
    */
   getEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
+  /**
+   *  Returns information for the specified import. 
+   */
+  getImport(params: CloudTrail.Types.GetImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetImportResponse) => void): Request<CloudTrail.Types.GetImportResponse, AWSError>;
+  /**
+   *  Returns information for the specified import. 
+   */
+  getImport(callback?: (err: AWSError, data: CloudTrail.Types.GetImportResponse) => void): Request<CloudTrail.Types.GetImportResponse, AWSError>;
   /**
    * Describes the settings for the Insights event selectors that you configured for your trail. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. If you run GetInsightSelectors on a trail that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  For more information, see Logging CloudTrail Insights Events for Trails  in the CloudTrail User Guide.
    */
@@ -148,6 +156,22 @@ declare class CloudTrail extends Service {
    */
   listEventDataStores(callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
   /**
+   *  Returns a list of failures for the specified import. 
+   */
+  listImportFailures(params: CloudTrail.Types.ListImportFailuresRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListImportFailuresResponse) => void): Request<CloudTrail.Types.ListImportFailuresResponse, AWSError>;
+  /**
+   *  Returns a list of failures for the specified import. 
+   */
+  listImportFailures(callback?: (err: AWSError, data: CloudTrail.Types.ListImportFailuresResponse) => void): Request<CloudTrail.Types.ListImportFailuresResponse, AWSError>;
+  /**
+   *  Returns information on all imports, or a select set of imports by ImportStatus or Destination. 
+   */
+  listImports(params: CloudTrail.Types.ListImportsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListImportsResponse) => void): Request<CloudTrail.Types.ListImportsResponse, AWSError>;
+  /**
+   *  Returns information on all imports, or a select set of imports by ImportStatus or Destination. 
+   */
+  listImports(callback?: (err: AWSError, data: CloudTrail.Types.ListImportsResponse) => void): Request<CloudTrail.Types.ListImportsResponse, AWSError>;
+  /**
    * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per region. Each digest file is signed with a private key unique to its region. When you validate a digest file from a specific region, you must look in the same region for its corresponding public key. 
    */
   listPublicKeys(params: CloudTrail.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
@@ -188,11 +212,11 @@ declare class CloudTrail extends Service {
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging data and management events for trails  and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events for trails , Logging data events for trails , and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the CloudTrail User Guide.
    */
   putEventSelectors(params: CloudTrail.Types.PutEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging data and management events for trails  and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events for trails , Logging data events for trails , and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events for trails in the CloudTrail User Guide.
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
@@ -220,6 +244,14 @@ declare class CloudTrail extends Service {
    */
   restoreEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
   /**
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
+   */
+  startImport(params: CloudTrail.Types.StartImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
+  /**
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
+   */
+  startImport(callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
+  /**
    * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
    */
   startLogging(params: CloudTrail.Types.StartLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
@@ -235,6 +267,14 @@ declare class CloudTrail extends Service {
    * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks.
    */
   startQuery(callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
+  /**
+   *  Stops a specified import. 
+   */
+  stopImport(params: CloudTrail.Types.StopImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopImportResponse) => void): Request<CloudTrail.Types.StopImportResponse, AWSError>;
+  /**
+   *  Stops a specified import. 
+   */
+  stopImport(callback?: (err: AWSError, data: CloudTrail.Types.StopImportResponse) => void): Request<CloudTrail.Types.StopImportResponse, AWSError>;
   /**
    * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
    */
@@ -527,7 +567,7 @@ declare namespace CloudTrail {
      */
     Type?: String;
     /**
-     * An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.   To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the prefix as arn:aws:s3:::.  This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, even if that activity is performed on a bucket that belongs to another Amazon Web Services account.    To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3 bucket.   To log data events for specific objects, specify the S3 bucket and object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in this S3 bucket that match the prefix.   To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as arn:aws:lambda.  This also enables logging of Invoke activity performed by any user or role in your Amazon Web Services account, even if that activity is performed on a function that belongs to another Amazon Web Services account.     To log data events for a specific Lambda function, specify the function ARN.  Lambda function ARNs are exact. For example, if you specify a function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events will only be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.    To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix as arn:aws:dynamodb.  
+     * An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.   To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the prefix as arn:aws:s3.  This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, even if that activity is performed on a bucket that belongs to another Amazon Web Services account.    To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3 bucket.   To log data events for specific objects, specify the S3 bucket and object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in this S3 bucket that match the prefix.   To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as arn:aws:lambda.  This also enables logging of Invoke activity performed by any user or role in your Amazon Web Services account, even if that activity is performed on a function that belongs to another Amazon Web Services account.     To log data events for a specific Lambda function, specify the function ARN.  Lambda function ARNs are exact. For example, if you specify a function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events will only be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.    To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix as arn:aws:dynamodb.  
      */
     Values?: DataResourceValues;
   }
@@ -813,6 +853,50 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
   }
+  export interface GetImportRequest {
+    /**
+     *  The ID for the import. 
+     */
+    ImportId: UUID;
+  }
+  export interface GetImportResponse {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The source S3 bucket. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  Used with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Used with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The timestamp of the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of when the import was updated. 
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     *  Provides statistics for the import. 
+     */
+    ImportStatistics?: ImportStatistics;
+  }
   export interface GetInsightSelectorsRequest {
     /**
      * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
@@ -954,6 +1038,83 @@ declare namespace CloudTrail {
      */
     TimeLoggingStopped?: String;
   }
+  export type ImportDestinations = EventDataStoreArn[];
+  export type ImportFailureList = ImportFailureListItem[];
+  export interface ImportFailureListItem {
+    /**
+     *  The location of the failure in the S3 bucket. 
+     */
+    Location?: String;
+    /**
+     *  The status of the import. 
+     */
+    Status?: ImportFailureStatus;
+    /**
+     *  The type of import error. 
+     */
+    ErrorType?: String;
+    /**
+     *  Provides the reason the import failed. 
+     */
+    ErrorMessage?: String;
+    /**
+     *  When the import was last updated. 
+     */
+    LastUpdatedTime?: _Date;
+  }
+  export type ImportFailureStatus = "FAILED"|"RETRY"|"SUCCEEDED"|string;
+  export interface ImportSource {
+    /**
+     *  The source S3 bucket. 
+     */
+    S3: S3ImportSource;
+  }
+  export interface ImportStatistics {
+    /**
+     *  The number of S3 prefixes found for the import. 
+     */
+    PrefixesFound?: Long;
+    /**
+     *  The number of S3 prefixes that completed import. 
+     */
+    PrefixesCompleted?: Long;
+    /**
+     * The number of files that completed import.
+     */
+    FilesCompleted?: Long;
+    /**
+     *  The number of trail events imported. 
+     */
+    EventsCompleted?: Long;
+    /**
+     *  The number of failed entries. 
+     */
+    FailedEntries?: Long;
+  }
+  export type ImportStatus = "INITIALIZING"|"IN_PROGRESS"|"FAILED"|"STOPPED"|"COMPLETED"|string;
+  export type ImportsList = ImportsListItem[];
+  export interface ImportsListItem {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The timestamp of the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of the import's last update. 
+     */
+    UpdatedTimestamp?: _Date;
+  }
   export interface InsightSelector {
     /**
      * The type of insights to log on a trail. ApiCallRateInsight and ApiErrorRateInsight are valid insight types.
@@ -1002,6 +1163,60 @@ declare namespace CloudTrail {
     EventDataStores?: EventDataStores;
     /**
      * A token you can use to get the next page of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export type ListImportFailuresMaxResultsCount = number;
+  export interface ListImportFailuresRequest {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId: UUID;
+    /**
+     *  The maximum number of failures to display on a single page. 
+     */
+    MaxResults?: ListImportFailuresMaxResultsCount;
+    /**
+     *  A token you can use to get the next page of import failures. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListImportFailuresResponse {
+    /**
+     *  Contains information about the import failures. 
+     */
+    Failures?: ImportFailureList;
+    /**
+     *  A token you can use to get the next page of results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export type ListImportsMaxResultsCount = number;
+  export interface ListImportsRequest {
+    /**
+     *  The maximum number of imports to display on a single page. 
+     */
+    MaxResults?: ListImportsMaxResultsCount;
+    /**
+     *  The destination event data store. 
+     */
+    Destination?: EventDataStoreArn;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  A token you can use to get the next page of import results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListImportsResponse {
+    /**
+     *  The list of returned imports. 
+     */
+    Imports?: ImportsList;
+    /**
+     *  A token you can use to get the next page of import results. 
      */
     NextToken?: PaginationToken;
   }
@@ -1368,6 +1583,20 @@ declare namespace CloudTrail {
     UpdatedTimestamp?: _Date;
   }
   export type RetentionPeriod = number;
+  export interface S3ImportSource {
+    /**
+     *  The URI for the source S3 bucket. 
+     */
+    S3LocationUri: String;
+    /**
+     *  The region associated with the source S3 bucket. 
+     */
+    S3BucketRegion: String;
+    /**
+     *  The IAM ARN role used to access the source S3 bucket. 
+     */
+    S3BucketAccessRoleArn: String;
+  }
   export type SelectorField = string;
   export type SelectorName = string;
   export type Source = string;
@@ -1380,6 +1609,62 @@ declare namespace CloudTrail {
      *  The advanced event selectors configured for the service-linked channel. 
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
+  }
+  export interface StartImportRequest {
+    /**
+     *  The destination event data store. Use this parameter for a new import. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The source S3 bucket for the import. Use this parameter for a new import. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  Use with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Use with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  The ID of the import. Use this parameter when you are retrying an import. 
+     */
+    ImportId?: UUID;
+  }
+  export interface StartImportResponse {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The source S3 bucket. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  Used with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Used with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  Shows the status of the import after a StartImport request. An import finishes with a status of COMPLETED if there were no failures, or FAILED if there were failures. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The timestamp for the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of the import's last update, if applicable. 
+     */
+    UpdatedTimestamp?: _Date;
   }
   export interface StartLoggingRequest {
     /**
@@ -1400,6 +1685,50 @@ declare namespace CloudTrail {
      * The ID of the started query.
      */
     QueryId?: UUID;
+  }
+  export interface StopImportRequest {
+    /**
+     *  The ID of the import. 
+     */
+    ImportId: UUID;
+  }
+  export interface StopImportResponse {
+    /**
+     *  The ID for the import. 
+     */
+    ImportId?: UUID;
+    /**
+     *  The source S3 bucket. 
+     */
+    ImportSource?: ImportSource;
+    /**
+     *  The destination event data store. 
+     */
+    Destinations?: ImportDestinations;
+    /**
+     *  The status of the import. 
+     */
+    ImportStatus?: ImportStatus;
+    /**
+     *  The timestamp of the import's creation. 
+     */
+    CreatedTimestamp?: _Date;
+    /**
+     *  The timestamp of the import's last update. 
+     */
+    UpdatedTimestamp?: _Date;
+    /**
+     *  Used with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    StartEventTime?: _Date;
+    /**
+     *  Used with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     */
+    EndEventTime?: _Date;
+    /**
+     *  Returns information on the stopped import. 
+     */
+    ImportStatistics?: ImportStatistics;
   }
   export interface StopLoggingRequest {
     /**
@@ -1518,7 +1847,7 @@ declare namespace CloudTrail {
      */
     Name?: EventDataStoreName;
     /**
-     * The advanced event selectors used to select events for the event data store.
+     * The advanced event selectors used to select events for the event data store. You can configure up to five advanced event selectors for each event data store.
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**

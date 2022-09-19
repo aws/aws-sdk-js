@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1218.0-->
+<!--LATEST=2.1219.0-->
 <!--ENTRYINSERT-->
+
+## 2.1219.0
+* feature: CloudTrail: This release includes support for importing existing trails into CloudTrail Lake.
+* feature: EC2: This release adds CapacityAllocations field to DescribeCapacityReservations
+* feature: MediaConnect: This change allows the customer to use the SRT Caller protocol as part of their flows
+* feature: RDS: This release adds support for Amazon RDS Proxy with SQL Server compatibility.
 
 ## 2.1218.0
 * feature: CodeStarNotifications: This release adds tag based access control for the UntagResource API.
