@@ -5,8 +5,13 @@ on:
   schedule:
   - cron: "0 0 * * *"
 
+permissions: {}
 jobs:
   cleanup:
+    permissions:
+      issues: write # to label, comment and close issues (aws-actions/stale-issue-cleanup)
+      pull-requests: write # to label, comment and close pull requests (aws-actions/stale-issue-cleanup)
+
     runs-on: ubuntu-latest
     name: Stale issue job
     steps:
