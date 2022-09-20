@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1219.0-->
+<!--LATEST=2.1220.0-->
 <!--ENTRYINSERT-->
+
+## 2.1220.0
+* feature: EC2: This release adds support for blocked paths to Amazon VPC Reachability Analyzer.
 
 ## 2.1219.0
 * feature: CloudTrail: This release includes support for importing existing trails into CloudTrail Lake.
