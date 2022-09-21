@@ -20,11 +20,11 @@ declare class Comprehend extends Service {
    */
   batchDetectDominantLanguage(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectDominantLanguageResponse) => void): Request<Comprehend.Types.BatchDetectDominantLanguageResponse, AWSError>;
   /**
-   * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see how-entities 
+   * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see Entities in the Comprehend Developer Guide. 
    */
   batchDetectEntities(params: Comprehend.Types.BatchDetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectEntitiesResponse) => void): Request<Comprehend.Types.BatchDetectEntitiesResponse, AWSError>;
   /**
-   * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see how-entities 
+   * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see Entities in the Comprehend Developer Guide. 
    */
   batchDetectEntities(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectEntitiesResponse) => void): Request<Comprehend.Types.BatchDetectEntitiesResponse, AWSError>;
   /**
@@ -44,13 +44,21 @@ declare class Comprehend extends Service {
    */
   batchDetectSentiment(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSentimentResponse) => void): Request<Comprehend.Types.BatchDetectSentimentResponse, AWSError>;
   /**
-   * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see how-syntax.
+   * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see Syntax in the Comprehend Developer Guide. 
    */
   batchDetectSyntax(params: Comprehend.Types.BatchDetectSyntaxRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
   /**
-   * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see how-syntax.
+   * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see Syntax in the Comprehend Developer Guide. 
    */
   batchDetectSyntax(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
+  /**
+   * Inspects a batch of documents and returns a sentiment analysis for each entity identified in the documents. For more information about targeted sentiment, see Targeted sentiment.
+   */
+  batchDetectTargetedSentiment(params: Comprehend.Types.BatchDetectTargetedSentimentRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectTargetedSentimentResponse) => void): Request<Comprehend.Types.BatchDetectTargetedSentimentResponse, AWSError>;
+  /**
+   * Inspects a batch of documents and returns a sentiment analysis for each entity identified in the documents. For more information about targeted sentiment, see Targeted sentiment.
+   */
+  batchDetectTargetedSentiment(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectTargetedSentimentResponse) => void): Request<Comprehend.Types.BatchDetectTargetedSentimentResponse, AWSError>;
   /**
    * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
    */
@@ -68,11 +76,11 @@ declare class Comprehend extends Service {
    */
   containsPiiEntities(callback?: (err: AWSError, data: Comprehend.Types.ContainsPiiEntitiesResponse) => void): Request<Comprehend.Types.ContainsPiiEntitiesResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see Document Classification in the Comprehend Developer Guide. 
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see Document Classification in the Comprehend Developer Guide. 
    */
   createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
@@ -236,11 +244,11 @@ declare class Comprehend extends Service {
    */
   detectDominantLanguage(callback?: (err: AWSError, data: Comprehend.Types.DetectDominantLanguageResponse) => void): Request<Comprehend.Types.DetectDominantLanguageResponse, AWSError>;
   /**
-   * Inspects text for named entities, and returns information about them. For more information, about named entities, see how-entities. 
+   * Inspects text for named entities, and returns information about them. For more information, about named entities, see Entities in the Comprehend Developer Guide.
    */
   detectEntities(params: Comprehend.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
-   * Inspects text for named entities, and returns information about them. For more information, about named entities, see how-entities. 
+   * Inspects text for named entities, and returns information about them. For more information, about named entities, see Entities in the Comprehend Developer Guide.
    */
   detectEntities(callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
@@ -268,13 +276,21 @@ declare class Comprehend extends Service {
    */
   detectSentiment(callback?: (err: AWSError, data: Comprehend.Types.DetectSentimentResponse) => void): Request<Comprehend.Types.DetectSentimentResponse, AWSError>;
   /**
-   * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
+   * Inspects text for syntax and the part of speech of words in the document. For more information, see Syntax in the Comprehend Developer Guide. 
    */
   detectSyntax(params: Comprehend.Types.DetectSyntaxRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
   /**
-   * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
+   * Inspects text for syntax and the part of speech of words in the document. For more information, see Syntax in the Comprehend Developer Guide. 
    */
   detectSyntax(callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
+  /**
+   * Inspects the input text and returns a sentiment analysis for each entity identified in the text. For more information about targeted sentiment, see Targeted sentiment.
+   */
+  detectTargetedSentiment(params: Comprehend.Types.DetectTargetedSentimentRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectTargetedSentimentResponse) => void): Request<Comprehend.Types.DetectTargetedSentimentResponse, AWSError>;
+  /**
+   * Inspects the input text and returns a sentiment analysis for each entity identified in the text. For more information about targeted sentiment, see Targeted sentiment.
+   */
+  detectTargetedSentiment(callback?: (err: AWSError, data: Comprehend.Types.DetectTargetedSentimentResponse) => void): Request<Comprehend.Types.DetectTargetedSentimentResponse, AWSError>;
   /**
    * Creates a new custom model that replicates a source custom model that you import. The source model can be in your AWS account or another one. If the source model is in another AWS account, then it must have a resource-based policy that authorizes you to import it. The source model must be in the same AWS region that you're using when you import. You can't import a model that's in a different region.
    */
@@ -623,7 +639,7 @@ declare namespace Comprehend {
   }
   export interface BatchDetectDominantLanguageRequest {
     /**
-     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document should contain at least 20 characters and must contain fewer than 5,000 bytes of UTF-8 encoded characters.
+     * A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25 documents. Each document should contain at least 20 characters. The maximum size of each document is 5 KB.
      */
     TextList: CustomerInputStringList;
   }
@@ -649,7 +665,7 @@ declare namespace Comprehend {
   }
   export interface BatchDetectEntitiesRequest {
     /**
-     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded characters.
+     * A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25 documents. The maximum size of each document is 5 KB.
      */
     TextList: CustomerInputStringList;
     /**
@@ -679,7 +695,7 @@ declare namespace Comprehend {
   }
   export interface BatchDetectKeyPhrasesRequest {
     /**
-     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded characters.
+     * A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25 documents. The maximum size of each document is 5 KB.
      */
     TextList: CustomerInputStringList;
     /**
@@ -713,7 +729,7 @@ declare namespace Comprehend {
   }
   export interface BatchDetectSentimentRequest {
     /**
-     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25 documents. The maximum size of each document is 5 KB.   Amazon Comprehend performs real-time sentiment analysis on the first 500 characters of the input text and ignores any additional text in the input. 
      */
     TextList: CustomerInputStringList;
     /**
@@ -743,7 +759,7 @@ declare namespace Comprehend {
   }
   export interface BatchDetectSyntaxRequest {
     /**
-     * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25 documents. The maximum size for each document is 5 KB.
      */
     TextList: CustomerInputStringList;
     /**
@@ -758,6 +774,36 @@ declare namespace Comprehend {
     ResultList: ListOfDetectSyntaxResult;
     /**
      * A list containing one object for each document that contained an error. The results are sorted in ascending order by the Index field and match the order of the documents in the input list. If there are no errors in the batch, the ErrorList is empty.
+     */
+    ErrorList: BatchItemErrorList;
+  }
+  export interface BatchDetectTargetedSentimentItemResult {
+    /**
+     * The zero-based index of this result in the input list.
+     */
+    Index?: Integer;
+    /**
+     * An array of targeted sentiment entities.
+     */
+    Entities?: ListOfTargetedSentimentEntities;
+  }
+  export interface BatchDetectTargetedSentimentRequest {
+    /**
+     * A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25 documents. The maximum size of each document is 5 KB.
+     */
+    TextList: CustomerInputStringList;
+    /**
+     * The language of the input documents. Currently, English is the only supported language.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface BatchDetectTargetedSentimentResponse {
+    /**
+     * A list of objects containing the results of the operation. The results are sorted in ascending order by the Index field and match the order of the documents in the input list. If all of the documents contain an error, the ResultList is empty.
+     */
+    ResultList: ListOfDetectTargetedSentimentResult;
+    /**
+     * List of errors that the operation can return.
      */
     ErrorList: BatchItemErrorList;
   }
@@ -856,7 +902,7 @@ declare namespace Comprehend {
   export type ComprehendModelArn = string;
   export interface ContainsPiiEntitiesRequest {
     /**
-     * Creates a new document classification request to analyze a single document in real-time, returning personally identifiable information (PII) entity labels.
+     * A UTF-8 text string. The maximum string size is 100 KB.
      */
     Text: String;
     /**
@@ -1219,7 +1265,7 @@ declare namespace Comprehend {
   }
   export interface DetectDominantLanguageRequest {
     /**
-     * A UTF-8 text string. Each string should contain at least 20 characters and must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A UTF-8 text string. The string must contain at least 20 characters. The maximum string size is 100 KB.
      */
     Text: CustomerInputString;
   }
@@ -1231,7 +1277,7 @@ declare namespace Comprehend {
   }
   export interface DetectEntitiesRequest {
     /**
-     * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A UTF-8 text string. The maximum string size is 100 KB.
      */
     Text: CustomerInputString;
     /**
@@ -1245,13 +1291,13 @@ declare namespace Comprehend {
   }
   export interface DetectEntitiesResponse {
     /**
-     * A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.  If your request uses a custom entity recognition model, Amazon Comprehend detects the entities that the model is trained to recognize. Otherwise, it detects the default entity types. For a list of default entity types, see how-entities.
+     * A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.  If your request uses a custom entity recognition model, Amazon Comprehend detects the entities that the model is trained to recognize. Otherwise, it detects the default entity types. For a list of default entity types, see Entities in the Comprehend Developer Guide. 
      */
     Entities?: ListOfEntities;
   }
   export interface DetectKeyPhrasesRequest {
     /**
-     * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A UTF-8 text string. The string must contain less than 100 KB of UTF-8 encoded characters.
      */
     Text: CustomerInputString;
     /**
@@ -1267,7 +1313,7 @@ declare namespace Comprehend {
   }
   export interface DetectPiiEntitiesRequest {
     /**
-     * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A UTF-8 text string. The maximum string size is 100 KB.
      */
     Text: String;
     /**
@@ -1283,7 +1329,7 @@ declare namespace Comprehend {
   }
   export interface DetectSentimentRequest {
     /**
-     * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     * A UTF-8 text string. The maximum string size is 5 KB.  Amazon Comprehend performs real-time sentiment analysis on the first 500 characters of the input text and ignores any additional text in the input. 
      */
     Text: CustomerInputString;
     /**
@@ -1303,7 +1349,7 @@ declare namespace Comprehend {
   }
   export interface DetectSyntaxRequest {
     /**
-     * A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.
+     * A UTF-8 string. The maximum string size is 5 KB.
      */
     Text: CustomerInputString;
     /**
@@ -1313,9 +1359,25 @@ declare namespace Comprehend {
   }
   export interface DetectSyntaxResponse {
     /**
-     * A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see how-syntax.
+     * A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see Syntax in the Comprehend Developer Guide. 
      */
     SyntaxTokens?: ListOfSyntaxTokens;
+  }
+  export interface DetectTargetedSentimentRequest {
+    /**
+     * A UTF-8 text string. The maximum string length is 5 KB.
+     */
+    Text: CustomerInputString;
+    /**
+     * The language of the input documents. Currently, English is the only supported language.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface DetectTargetedSentimentResponse {
+    /**
+     * Targeted sentiment analysis for each of the entities identified in the input text.
+     */
+    Entities?: ListOfTargetedSentimentEntities;
   }
   export interface DocumentClass {
     /**
@@ -1432,7 +1494,7 @@ declare namespace Comprehend {
      */
     S3Uri?: S3Uri;
     /**
-     * The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same AWS Region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. 
+     * This specifies the Amazon S3 location where the test annotations for an entity recognizer are located. The URI must be in the same AWS Region as the API endpoint that you are calling. 
      */
     TestS3Uri?: S3Uri;
     /**
@@ -1817,11 +1879,11 @@ declare namespace Comprehend {
      */
     Text?: String;
     /**
-     * A character offset in the input text that shows where the entity begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     * The zero-based offset from the beginning of the source text to the first character in the entity.
      */
     BeginOffset?: Integer;
     /**
-     * A character offset in the input text that shows where the entity ends. The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point. 
+     * The zero-based offset from the beginning of the source text to the last character in the entity.
      */
     EndOffset?: Integer;
   }
@@ -1841,7 +1903,7 @@ declare namespace Comprehend {
      */
     S3Uri: S3Uri;
     /**
-     * This specifies the Amazon S3 location where the test annotations for an entity recognizer are located. The URI must be in the same AWS Region as the API endpoint that you are calling.
+     *  Specifies the Amazon S3 location where the test annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
      */
     TestS3Uri?: S3Uri;
   }
@@ -2207,11 +2269,11 @@ declare namespace Comprehend {
      */
     Text?: String;
     /**
-     * A character offset in the input text that shows where the key phrase begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     * The zero-based offset from the beginning of the source text to the first character in the key phrase.
      */
     BeginOffset?: Integer;
     /**
-     * A character offset in the input text where the key phrase ends. The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     * The zero-based offset from the beginning of the source text to the last character in the key phrase.
      */
     EndOffset?: Integer;
   }
@@ -2524,20 +2586,24 @@ declare namespace Comprehend {
     NextToken?: String;
   }
   export type ListOfClasses = DocumentClass[];
+  export type ListOfDescriptiveMentionIndices = Integer[];
   export type ListOfDetectDominantLanguageResult = BatchDetectDominantLanguageItemResult[];
   export type ListOfDetectEntitiesResult = BatchDetectEntitiesItemResult[];
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
   export type ListOfDetectSentimentResult = BatchDetectSentimentItemResult[];
   export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
+  export type ListOfDetectTargetedSentimentResult = BatchDetectTargetedSentimentItemResult[];
   export type ListOfDocumentReadFeatureTypes = DocumentReadFeatureTypes[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfEntityLabels = EntityLabel[];
   export type ListOfKeyPhrases = KeyPhrase[];
   export type ListOfLabels = DocumentLabel[];
+  export type ListOfMentions = TargetedSentimentMention[];
   export type ListOfPiiEntities = PiiEntity[];
   export type ListOfPiiEntityTypes = PiiEntityType[];
   export type ListOfSyntaxTokens = SyntaxToken[];
+  export type ListOfTargetedSentimentEntities = TargetedSentimentEntity[];
   export interface ListPiiEntitiesDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -2652,6 +2718,13 @@ declare namespace Comprehend {
   }
   export type MaskCharacter = string;
   export type MaxResultsInteger = number;
+  export interface MentionSentiment {
+    /**
+     * The sentiment of the mention. 
+     */
+    Sentiment?: SentimentType;
+    SentimentScore?: SentimentScore;
+  }
   export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|string;
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
@@ -2760,11 +2833,11 @@ declare namespace Comprehend {
      */
     Type?: PiiEntityType;
     /**
-     * A character offset in the input text that shows where the PII entity begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     * The zero-based offset from the beginning of the source text to the first character in the entity.
      */
     BeginOffset?: Integer;
     /**
-     * A character offset in the input text that shows where the PII entity ends. The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     * The zero-based offset from the beginning of the source text to the last character in the entity.
      */
     EndOffset?: Integer;
   }
@@ -3286,7 +3359,7 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. Currently, English is the only valid language.
+     * The language of the input documents. Currently, English is the only supported language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -3519,7 +3592,7 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
     /**
-     * Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see how-syntax.
+     * Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see Syntax in the Comprehend Developer Guide. 
      */
     PartOfSpeech?: PartOfSpeechTag;
   }
@@ -3614,6 +3687,47 @@ declare namespace Comprehend {
     VpcConfig?: VpcConfig;
   }
   export type TargetedSentimentDetectionJobPropertiesList = TargetedSentimentDetectionJobProperties[];
+  export interface TargetedSentimentEntity {
+    /**
+     * One or more index into the Mentions array that provides the best name for the entity group.
+     */
+    DescriptiveMentionIndex?: ListOfDescriptiveMentionIndices;
+    /**
+     * An array of mentions of the entity in the document. The array represents a co-reference group. See  Co-reference group for an example. 
+     */
+    Mentions?: ListOfMentions;
+  }
+  export type TargetedSentimentEntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"FACILITY"|"BRAND"|"COMMERCIAL_ITEM"|"MOVIE"|"MUSIC"|"BOOK"|"SOFTWARE"|"GAME"|"PERSONAL_TITLE"|"EVENT"|"DATE"|"QUANTITY"|"ATTRIBUTE"|"OTHER"|string;
+  export interface TargetedSentimentMention {
+    /**
+     * Model confidence that the entity is relevant. Value range is zero to one, where one is highest confidence.
+     */
+    Score?: Float;
+    /**
+     * The confidence that all the entities mentioned in the group relate to the same entity.
+     */
+    GroupScore?: Float;
+    /**
+     * The text in the document that identifies the entity.
+     */
+    Text?: String;
+    /**
+     * The type of the entity. Amazon Comprehend supports a variety of entity types.
+     */
+    Type?: TargetedSentimentEntityType;
+    /**
+     * Contains the sentiment and sentiment score for the mention.
+     */
+    MentionSentiment?: MentionSentiment;
+    /**
+     * The offset into the document text where the mention begins.
+     */
+    BeginOffset?: Integer;
+    /**
+     * The offset into the document text where the mention ends.
+     */
+    EndOffset?: Integer;
+  }
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**

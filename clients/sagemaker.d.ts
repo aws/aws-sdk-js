@@ -405,11 +405,11 @@ declare class SageMaker extends Service {
    */
   createTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
   /**
-   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from Amazon Web Services SSO, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
    */
   createUserProfile(params: SageMaker.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
-   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from Amazon Web Services SSO, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   * Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a "person" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
    */
   createUserProfile(callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
@@ -509,11 +509,11 @@ declare class SageMaker extends Service {
    */
   deleteDeviceFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using Amazon Web Services SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
+   * Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using IAM Identity Center. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
    */
   deleteDomain(params: SageMaker.Types.DeleteDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using Amazon Web Services SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
+   * Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using IAM Identity Center. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
    */
   deleteDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2763,7 +2763,7 @@ declare namespace SageMaker {
   }
   export interface AutoMLCandidateGenerationConfig {
     /**
-     * A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job (optional). This file should be in json format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. The key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] is case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.
+     * A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job. You can input FeatureAttributeNames (optional) in JSON format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. You can also specify the data type of the feature (optional) in the format shown below:  { "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }   These column keys may not include the target column.  In ensembling mode, Autopilot will only support the following data types: numeric, categorical, text and datetime. In HPO mode, Autopilot can support numeric, categorical, text, datetime and sequence. If only FeatureDataTypes is provided, the column keys (col1, col2,..) should be a subset of the column names in the input data.  If both FeatureDataTypes and FeatureAttributeNames are provided, then the column keys should be a subset of the column names provided in FeatureAttributeNames.  The key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] is case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.
      */
     FeatureSpecificationS3Uri?: S3Uri;
   }
@@ -3128,6 +3128,12 @@ declare namespace SageMaker {
   export type CandidateStepName = string;
   export type CandidateStepType = "AWS::SageMaker::TrainingJob"|"AWS::SageMaker::TransformJob"|"AWS::SageMaker::ProcessingJob"|string;
   export type CandidateSteps = AutoMLCandidateStep[];
+  export interface CanvasAppSettings {
+    /**
+     * Time series forecast settings for the Canvas app.
+     */
+    TimeSeriesForecastingSettings?: TimeSeriesForecastingSettings;
+  }
   export interface CapacitySize {
     /**
      * Specifies the endpoint capacity type.    INSTANCE_COUNT: The endpoint activates based on the number of instances.    CAPACITY_PERCENT: The endpoint activates based on the specified percentage of capacity.  
@@ -5147,11 +5153,11 @@ declare namespace SageMaker {
      */
     UserProfileName: UserProfileName;
     /**
-     * A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is "UserName". If the Domain's AuthMode is Amazon Web Services SSO, this field is required. If the Domain's AuthMode is not Amazon Web Services SSO, this field cannot be specified. 
+     * A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is "UserName". If the Domain's AuthMode is IAM Identity Center, this field is required. If the Domain's AuthMode is not IAM Identity Center, this field cannot be specified. 
      */
     SingleSignOnUserIdentifier?: SingleSignOnUserIdentifier;
     /**
-     * The username of the associated Amazon Web Services Single Sign-On User for this UserProfile. If the Domain's AuthMode is Amazon Web Services SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not Amazon Web Services SSO, this field cannot be specified. 
+     * The username of the associated Amazon Web Services Single Sign-On User for this UserProfile. If the Domain's AuthMode is IAM Identity Center, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not IAM Identity Center, this field cannot be specified. 
      */
     SingleSignOnUserValue?: String256;
     /**
@@ -6540,7 +6546,7 @@ declare namespace SageMaker {
      */
     HomeEfsFileSystemId?: ResourceId;
     /**
-     * The Amazon Web Services SSO managed application instance ID.
+     * The IAM Identity Center managed application instance ID.
      */
     SingleSignOnManagedApplicationInstanceId?: String256;
     /**
@@ -8566,11 +8572,11 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Web Services SSO user identifier.
+     * The IAM Identity Center user identifier.
      */
     SingleSignOnUserIdentifier?: SingleSignOnUserIdentifier;
     /**
-     * The Amazon Web Services SSO user value.
+     * The IAM Identity Center user value.
      */
     SingleSignOnUserValue?: String256;
     /**
@@ -9635,6 +9641,7 @@ declare namespace SageMaker {
   export type FeatureParameterRemovals = FeatureParameterKey[];
   export type FeatureParameterValue = string;
   export type FeatureParameters = FeatureParameter[];
+  export type FeatureStatus = "ENABLED"|"DISABLED"|string;
   export type FeatureType = "Integral"|"Fractional"|"String"|string;
   export interface FileSource {
     /**
@@ -17003,6 +17010,16 @@ declare namespace SageMaker {
   export type TenthFractionsOfACent = number;
   export type TerminationWaitInSeconds = number;
   export type ThingName = string;
+  export interface TimeSeriesForecastingSettings {
+    /**
+     * Describes whether time series forecasting is enabled or disabled in the Canvas app.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the  AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
+     */
+    AmazonForecastRoleArn?: RoleArn;
+  }
   export type Timestamp = Date;
   export type TrafficDurationInSeconds = number;
   export interface TrafficPattern {
@@ -18611,6 +18628,10 @@ declare namespace SageMaker {
      * A collection of settings that configure the RSessionGateway app.
      */
     RSessionAppSettings?: RSessionAppSettings;
+    /**
+     * The Canvas app settings.
+     */
+    CanvasAppSettings?: CanvasAppSettings;
   }
   export type ValidationFraction = number;
   export type VariantName = string;
