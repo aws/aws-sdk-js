@@ -2311,6 +2311,14 @@ declare namespace Glue {
      * The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a Catalog connection type paired with a NETWORK Connection type.
      */
     ConnectionName?: ConnectionName;
+    /**
+     * A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.
+     */
+    EventQueueArn?: EventQueueArn;
+    /**
+     * A valid Amazon dead-letter SQS ARN. For example, arn:aws:sqs:region:account:deadLetterQueue.
+     */
+    DlqEventQueueArn?: EventQueueArn;
   }
   export type CatalogTargetList = CatalogTarget[];
   export interface CheckSchemaVersionValidityInput {

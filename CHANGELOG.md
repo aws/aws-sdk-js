@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1221.0-->
+<!--LATEST=2.1222.0-->
 <!--ENTRYINSERT-->
+
+## 2.1222.0
+* feature: BackupGateway: Changes include: new GetVirtualMachineApi to fetch a single user's VM, improving ListVirtualMachines to fetch filtered VMs as well as all VMs, and improving GetGatewayApi to now also return the gateway's MaintenanceStartTime.
+* feature: DeviceFarm: This release adds the support for VPC-ENI based connectivity for private devices on AWS Device Farm.
+* feature: EC2: Documentation updates for Amazon EC2.
+* feature: Glue: Added support for S3 Event Notifications for Catalog Target Crawlers.
 
 ## 2.1221.0
 * feature: Comprehend: Amazon Comprehend now supports synchronous mode for targeted sentiment API operations.

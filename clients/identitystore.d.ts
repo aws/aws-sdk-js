@@ -132,19 +132,19 @@ declare class IdentityStore extends Service {
    */
   listGroupMembershipsForMember(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupMembershipsForMemberResponse) => void): Request<IdentityStore.Types.ListGroupMembershipsForMemberResponse, AWSError>;
   /**
-   * Lists the attribute name and value of the group that you specified in the search. We only support DisplayName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including GroupId and group DisplayName in the response.
+   * Lists all groups in the identity store. Returns a paginated list of complete Group objects. Filtering for a Group by the DisplayName attribute is deprecated. Instead, use the GetGroupId API action.
    */
   listGroups(params: IdentityStore.Types.ListGroupsRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListGroupsResponse) => void): Request<IdentityStore.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists the attribute name and value of the group that you specified in the search. We only support DisplayName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including GroupId and group DisplayName in the response.
+   * Lists all groups in the identity store. Returns a paginated list of complete Group objects. Filtering for a Group by the DisplayName attribute is deprecated. Instead, use the GetGroupId API action.
    */
   listGroups(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupsResponse) => void): Request<IdentityStore.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists the attribute name and value of the user that you specified in the search. We only support UserName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including UserId and UserName in the response.
+   * Lists all users in the identity store. Returns a paginated list of complete User objects. Filtering for a User by the UserName attribute is deprecated. Instead, use the GetUserId API action.
    */
   listUsers(params: IdentityStore.Types.ListUsersRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListUsersResponse) => void): Request<IdentityStore.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists the attribute name and value of the user that you specified in the search. We only support UserName as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including UserId and UserName in the response.
+   * Lists all users in the identity store. Returns a paginated list of complete User objects. Filtering for a User by the UserName attribute is deprecated. Instead, use the GetUserId API action.
    */
   listUsers(callback?: (err: AWSError, data: IdentityStore.Types.ListUsersResponse) => void): Request<IdentityStore.Types.ListUsersResponse, AWSError>;
   /**
@@ -417,7 +417,7 @@ declare namespace IdentityStore {
      */
     GroupId: ResourceId;
     /**
-     * The group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters &lt;&gt;;:% are excluded. This value is specified at the time that the group is created and stored as an attribute of the group object in the identity store.
+     * The group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. This value is specified at the time that the group is created and stored as an attribute of the group object in the identity store.
      */
     DisplayName?: GroupDisplayName;
     /**
@@ -554,7 +554,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique identifier for an identity resource that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a unique GroupDisplayName.
+     * A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique GroupDisplayName.
      */
     AlternateIdentifier: AlternateIdentifier;
   }
@@ -598,7 +598,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique identifier for an identity resource that is not the primary identifier.
+     * A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique UserDisplayName.
      */
     AlternateIdentifier: AlternateIdentifier;
   }
@@ -618,7 +618,7 @@ declare namespace IdentityStore {
      */
     GroupId: ResourceId;
     /**
-     * The group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters &lt;&gt;;:% are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
+     * The group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
      */
     DisplayName?: GroupDisplayName;
     /**

@@ -60,6 +60,14 @@ declare class BackupGateway extends Service {
    */
   getGateway(callback?: (err: AWSError, data: BackupGateway.Types.GetGatewayOutput) => void): Request<BackupGateway.Types.GetGatewayOutput, AWSError>;
   /**
+   * By providing the ARN (Amazon Resource Name), this API returns the virtual machine.
+   */
+  getVirtualMachine(params: BackupGateway.Types.GetVirtualMachineInput, callback?: (err: AWSError, data: BackupGateway.Types.GetVirtualMachineOutput) => void): Request<BackupGateway.Types.GetVirtualMachineOutput, AWSError>;
+  /**
+   * By providing the ARN (Amazon Resource Name), this API returns the virtual machine.
+   */
+  getVirtualMachine(callback?: (err: AWSError, data: BackupGateway.Types.GetVirtualMachineOutput) => void): Request<BackupGateway.Types.GetVirtualMachineOutput, AWSError>;
+  /**
    * Connect to a hypervisor by importing its configuration.
    */
   importHypervisorConfiguration(params: BackupGateway.Types.ImportHypervisorConfigurationInput, callback?: (err: AWSError, data: BackupGateway.Types.ImportHypervisorConfigurationOutput) => void): Request<BackupGateway.Types.ImportHypervisorConfigurationOutput, AWSError>;
@@ -281,6 +289,10 @@ declare namespace BackupGateway {
      */
     LastSeenTime?: Time;
     /**
+     * Returns your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.
+     */
+    MaintenanceStartTime?: MaintenanceStartTime;
+    /**
      * Details showing the next update availability time of the gateway.
      */
     NextUpdateAvailabilityTime?: Time;
@@ -302,6 +314,18 @@ declare namespace BackupGateway {
      * By providing the ARN (Amazon Resource Name), this API returns the gateway.
      */
     Gateway?: GatewayDetails;
+  }
+  export interface GetVirtualMachineInput {
+    /**
+     * The Amazon Resource Name (ARN) of the virtual machine.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetVirtualMachineOutput {
+    /**
+     * This object contains the basic attributes of VirtualMachine contained by the output of GetVirtualMachine 
+     */
+    VirtualMachine?: VirtualMachineDetails;
   }
   export type Host = string;
   export type HourOfDay = number;
@@ -421,6 +445,10 @@ declare namespace BackupGateway {
   }
   export interface ListVirtualMachinesInput {
     /**
+     * The Amazon Resource Name (ARN) of the hypervisor connected to your virtual machine.
+     */
+    HypervisorArn?: ServerArn;
+    /**
      * The maximum number of virtual machines to list.
      */
     MaxResults?: MaxResults;
@@ -438,6 +466,24 @@ declare namespace BackupGateway {
      * A list of your VirtualMachine objects, ordered by their Amazon Resource Names (ARNs).
      */
     VirtualMachines?: VirtualMachines;
+  }
+  export interface MaintenanceStartTime {
+    /**
+     * The day of the month component of the maintenance start time represented as an ordinal number from 1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.
+     */
+    DayOfMonth?: DayOfMonth;
+    /**
+     * An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.
+     */
+    DayOfWeek?: DayOfWeek;
+    /**
+     * The hour component of the maintenance start time represented as hh, where hh is the hour (0 to 23). The hour of the day is in the time zone of the gateway.
+     */
+    HourOfDay: HourOfDay;
+    /**
+     * The minute component of the maintenance start time represented as mm, where mm is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.
+     */
+    MinuteOfHour: MinuteOfHour;
   }
   export type MaxResults = number;
   export type MinuteOfHour = number;
@@ -600,6 +646,32 @@ declare namespace BackupGateway {
   }
   export type Username = string;
   export interface VirtualMachine {
+    /**
+     * The host name of the virtual machine.
+     */
+    HostName?: Name;
+    /**
+     * The ID of the virtual machine's hypervisor.
+     */
+    HypervisorId?: string;
+    /**
+     * The most recent date a virtual machine was backed up, in Unix format and UTC time.
+     */
+    LastBackupDate?: Time;
+    /**
+     * The name of the virtual machine.
+     */
+    Name?: Name;
+    /**
+     * The path of the virtual machine.
+     */
+    Path?: Path;
+    /**
+     * The Amazon Resource Name (ARN) of the virtual machine. For example, arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
+     */
+    ResourceArn?: ResourceArn;
+  }
+  export interface VirtualMachineDetails {
     /**
      * The host name of the virtual machine.
      */
