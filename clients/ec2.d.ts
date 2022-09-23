@@ -18187,6 +18187,10 @@ declare namespace EC2 {
      * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceType. 
      */
     InstanceRequirements?: InstanceRequirements;
+    /**
+     * The ID of the AMI. An AMI is required to launch an instance. The AMI ID must be specified here or in the launch template.
+     */
+    ImageId?: ImageId;
   }
   export type FleetLaunchTemplateOverridesList = FleetLaunchTemplateOverrides[];
   export type FleetLaunchTemplateOverridesListRequest = FleetLaunchTemplateOverridesRequest[];
@@ -18223,6 +18227,10 @@ declare namespace EC2 {
      * The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with those attributes.  If you specify InstanceRequirements, you can't specify InstanceType. 
      */
     InstanceRequirements?: InstanceRequirementsRequest;
+    /**
+     * The ID of the AMI. An AMI is required to launch an instance. The AMI ID must be specified here or in the launch template.
+     */
+    ImageId?: ImageId;
   }
   export interface FleetLaunchTemplateSpecification {
     /**

@@ -610,6 +610,16 @@ declare namespace LexModelsV2 {
     containsDataFromDeletedResources?: BoxedBoolean;
   }
   export type AggregatedUtterancesSummaryList = AggregatedUtterancesSummary[];
+  export interface AllowedInputTypes {
+    /**
+     * Indicates whether audio input is allowed.
+     */
+    allowAudioInput: BoxedBoolean;
+    /**
+     * Indicates whether DTMF input is allowed.
+     */
+    allowDTMFInput: BoxedBoolean;
+  }
   export type AmazonResourceName = string;
   export interface AssociatedTranscript {
     /**
@@ -632,6 +642,20 @@ declare namespace LexModelsV2 {
   export type AssociatedTranscriptList = AssociatedTranscript[];
   export type AttachmentTitle = string;
   export type AttachmentUrl = string;
+  export interface AudioAndDTMFInputSpecification {
+    /**
+     * Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
+     */
+    startTimeoutMs: TimeInMilliSeconds;
+    /**
+     * Specifies the settings on audio input.
+     */
+    audioSpecification?: AudioSpecification;
+    /**
+     * Specifies the settings on DTMF input.
+     */
+    dtmfSpecification?: DTMFSpecification;
+  }
   export interface AudioLogDestination {
     /**
      * The Amazon S3 bucket where the audio log files are stored. The IAM role specified in the roleArn parameter of the CreateBot operation must have permission to write to this bucket.
@@ -647,6 +671,16 @@ declare namespace LexModelsV2 {
   }
   export type AudioLogSettingsList = AudioLogSetting[];
   export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string;
+  export interface AudioSpecification {
+    /**
+     * Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
+     */
+    maxLengthMs: TimeInMilliSeconds;
+    /**
+     * Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
+     */
+    endTimeoutMs: TimeInMilliSeconds;
+  }
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
     /**
@@ -1875,6 +1909,25 @@ declare namespace LexModelsV2 {
     localeId: LocaleId;
   }
   export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string;
+  export type DTMFCharacter = string;
+  export interface DTMFSpecification {
+    /**
+     * The maximum number of DTMF digits allowed in an utterance.
+     */
+    maxLength: MaxUtteranceDigits;
+    /**
+     * How long the bot should wait after the last DTMF character input before assuming that the input has concluded.
+     */
+    endTimeoutMs: TimeInMilliSeconds;
+    /**
+     * The DTMF character that clears the accumulated DTMF digits and immediately ends the input.
+     */
+    deletionCharacter: DTMFCharacter;
+    /**
+     * The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.
+     */
+    endCharacter: DTMFCharacter;
+  }
   export interface DataPrivacy {
     /**
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ.
@@ -4063,6 +4116,7 @@ declare namespace LexModelsV2 {
   export type LocaleName = string;
   export type LogPrefix = string;
   export type MaxResults = number;
+  export type MaxUtteranceDigits = number;
   export type MergeStrategy = "Overwrite"|"FailOnConflict"|"Append"|string;
   export interface Message {
     /**
@@ -4219,6 +4273,26 @@ declare namespace LexModelsV2 {
   export type PrincipalArn = string;
   export type PrincipalList = Principal[];
   export type PriorityValue = number;
+  export type PromptAttempt = "Initial"|"Retry1"|"Retry2"|"Retry3"|"Retry4"|"Retry5"|string;
+  export interface PromptAttemptSpecification {
+    /**
+     * Indicates whether the user can interrupt a speech prompt attempt from the bot.
+     */
+    allowInterrupt?: BoxedBoolean;
+    /**
+     * Indicates the allowed input types of the prompt attempt.
+     */
+    allowedInputTypes: AllowedInputTypes;
+    /**
+     * Specifies the settings on audio and DTMF input.
+     */
+    audioAndDTMFInputSpecification?: AudioAndDTMFInputSpecification;
+    /**
+     * Specifies the settings on text input.
+     */
+    textInputSpecification?: TextInputSpecification;
+  }
+  export type PromptAttemptsSpecificationMap = {[key: string]: PromptAttemptSpecification};
   export type PromptMaxRetries = number;
   export interface PromptSpecification {
     /**
@@ -4237,6 +4311,10 @@ declare namespace LexModelsV2 {
      * Indicates how a message is selected from a message group among retries.
      */
     messageSelectionStrategy?: MessageSelectionStrategy;
+    /**
+     * Specifies the advanced settings on each attempt of the prompt.
+     */
+    promptAttemptsSpecification?: PromptAttemptsSpecificationMap;
   }
   export type QueryFilterString = string;
   export type RecommendedAction = string;
@@ -4887,6 +4965,12 @@ declare namespace LexModelsV2 {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TextInputSpecification {
+    /**
+     * Time for which a bot waits before re-prompting a customer for text input.
+     */
+    startTimeoutMs: TimeInMilliSeconds;
+  }
   export interface TextLogDestination {
     /**
      * Defines the Amazon CloudWatch Logs log group where text and metadata logs are delivered.
@@ -4902,6 +4986,7 @@ declare namespace LexModelsV2 {
   }
   export type TextLogSettingsList = TextLogSetting[];
   export type TimeDimension = "Hours"|"Days"|"Weeks"|string;
+  export type TimeInMilliSeconds = number;
   export type TimeValue = number;
   export type Timestamp = Date;
   export type Transcript = string;

@@ -317,11 +317,11 @@ declare class Nimble extends Service {
    */
   startStreamingSession(callback?: (err: AWSError, data: Nimble.Types.StartStreamingSessionResponse) => void): Request<Nimble.Types.StartStreamingSessionResponse, AWSError>;
   /**
-   * Repairs the Amazon Web Services SSO configuration for a given studio. If the studio has a valid Amazon Web Services SSO configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid Amazon Web Services SSO configuration currently associated with it, then a new Amazon Web Services SSO application is created for the studio and the studio is changed to the READY state. After the Amazon Web Services SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
+   * Repairs the IAM Identity Center configuration for a given studio. If the studio has a valid IAM Identity Center configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid IAM Identity Center configuration currently associated with it, then a new IAM Identity Center application is created for the studio and the studio is changed to the READY state. After the IAM Identity Center application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
    */
   startStudioSSOConfigurationRepair(params: Nimble.Types.StartStudioSSOConfigurationRepairRequest, callback?: (err: AWSError, data: Nimble.Types.StartStudioSSOConfigurationRepairResponse) => void): Request<Nimble.Types.StartStudioSSOConfigurationRepairResponse, AWSError>;
   /**
-   * Repairs the Amazon Web Services SSO configuration for a given studio. If the studio has a valid Amazon Web Services SSO configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid Amazon Web Services SSO configuration currently associated with it, then a new Amazon Web Services SSO application is created for the studio and the studio is changed to the READY state. After the Amazon Web Services SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
+   * Repairs the IAM Identity Center configuration for a given studio. If the studio has a valid IAM Identity Center configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid IAM Identity Center configuration currently associated with it, then a new IAM Identity Center application is created for the studio and the studio is changed to the READY state. After the IAM Identity Center application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
    */
   startStudioSSOConfigurationRepair(callback?: (err: AWSError, data: Nimble.Types.StartStudioSSOConfigurationRepairResponse) => void): Request<Nimble.Types.StartStudioSSOConfigurationRepairResponse, AWSError>;
   /**
@@ -421,11 +421,11 @@ declare class Nimble extends Service {
    */
   waitFor(state: "streamingImageReady", callback?: (err: AWSError, data: Nimble.Types.GetStreamingImageResponse) => void): Request<Nimble.Types.GetStreamingImageResponse, AWSError>;
   /**
-   * Waits for the streamingSessionDeleted state by periodically calling the underlying Nimble.getStreamingSessionoperation every 5 seconds (at most 180 times). Wait until a StreamingSessionDeleted. Use this after invoking Deletesession
+   * Waits for the streamingSessionDeleted state by periodically calling the underlying Nimble.getStreamingSessionoperation every 5 seconds (at most 180 times). Wait until a StreamingSessionDeleted. Use this after invoking DeleteStreamingSession
    */
   waitFor(state: "streamingSessionDeleted", params: Nimble.Types.GetStreamingSessionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionResponse) => void): Request<Nimble.Types.GetStreamingSessionResponse, AWSError>;
   /**
-   * Waits for the streamingSessionDeleted state by periodically calling the underlying Nimble.getStreamingSessionoperation every 5 seconds (at most 180 times). Wait until a StreamingSessionDeleted. Use this after invoking Deletesession
+   * Waits for the streamingSessionDeleted state by periodically calling the underlying Nimble.getStreamingSessionoperation every 5 seconds (at most 180 times). Wait until a StreamingSessionDeleted. Use this after invoking DeleteStreamingSession
    */
   waitFor(state: "streamingSessionDeleted", callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionResponse) => void): Request<Nimble.Types.GetStreamingSessionResponse, AWSError>;
   /**
@@ -496,7 +496,7 @@ declare namespace Nimble {
      */
     eulaIds?: EulaIdList;
     /**
-     * A collection of EULA IDs.
+     * The studio ID.
      */
     studioId: String;
   }
@@ -789,7 +789,7 @@ declare namespace Nimble {
      */
     launchProfileId: String;
     /**
-     * The principal ID. This currently supports a Amazon Web Services SSO UserId. 
+     * The principal ID. This currently supports a IAM Identity Center UserId. 
      */
     principalId: String;
     /**
@@ -885,7 +885,7 @@ declare namespace Nimble {
      */
     clientToken?: ClientToken;
     /**
-     * The principal ID. This currently supports a Amazon Web Services SSO UserId. 
+     * The principal ID. This currently supports a IAM Identity Center UserId. 
      */
     principalId: String;
     /**
@@ -1035,7 +1035,7 @@ declare namespace Nimble {
      */
     launchProfileId: String;
     /**
-     * The principal ID. This currently supports a Amazon Web Services SSO UserId. 
+     * The principal ID. This currently supports a IAM Identity Center UserId. 
      */
     principalId: String;
     /**
@@ -1135,7 +1135,7 @@ declare namespace Nimble {
   }
   export interface GetStudioMemberRequest {
     /**
-     * The principal ID. This currently supports a Amazon Web Services SSO UserId. 
+     * The principal ID. This currently supports a IAM Identity Center UserId. 
      */
     principalId: String;
     /**
@@ -1352,7 +1352,7 @@ declare namespace Nimble {
   export type LaunchProfileSecurityGroupIdList = SecurityGroupId[];
   export type LaunchProfileState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
   export type LaunchProfileStateList = LaunchProfileState[];
-  export type LaunchProfileStatusCode = "LAUNCH_PROFILE_CREATED"|"LAUNCH_PROFILE_UPDATED"|"LAUNCH_PROFILE_DELETED"|"LAUNCH_PROFILE_CREATE_IN_PROGRESS"|"LAUNCH_PROFILE_UPDATE_IN_PROGRESS"|"LAUNCH_PROFILE_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"STREAMING_IMAGE_NOT_FOUND"|"STREAMING_IMAGE_NOT_READY"|"LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"INVALID_SUBNETS_PROVIDED"|string;
+  export type LaunchProfileStatusCode = "LAUNCH_PROFILE_CREATED"|"LAUNCH_PROFILE_UPDATED"|"LAUNCH_PROFILE_DELETED"|"LAUNCH_PROFILE_CREATE_IN_PROGRESS"|"LAUNCH_PROFILE_UPDATE_IN_PROGRESS"|"LAUNCH_PROFILE_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"STREAMING_IMAGE_NOT_FOUND"|"STREAMING_IMAGE_NOT_READY"|"LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"INVALID_SUBNETS_PROVIDED"|"INVALID_INSTANCE_TYPES_PROVIDED"|"INVALID_SUBNETS_COMBINATION"|string;
   export type LaunchProfileStudioComponentIdList = String[];
   export type LaunchProfileValidationState = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR"|string;
   export type LaunchProfileValidationStatusCode = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION"|"VALIDATION_FAILED_SUBNET_NOT_FOUND"|"VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION"|"VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY"|"VALIDATION_FAILED_UNAUTHORIZED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR"|string;
@@ -1448,7 +1448,7 @@ declare namespace Nimble {
      */
     nextToken?: String;
     /**
-     * The principal ID. This currently supports a Amazon Web Services SSO UserId. 
+     * The principal ID. This currently supports a IAM Identity Center UserId. 
      */
     principalId?: String;
     /**
@@ -1905,7 +1905,7 @@ declare namespace Nimble {
   export type StreamingImagePlatform = string;
   export type StreamingImageState = "CREATE_IN_PROGRESS"|"READY"|"DELETE_IN_PROGRESS"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
   export type StreamingImageStatusCode = "STREAMING_IMAGE_CREATE_IN_PROGRESS"|"STREAMING_IMAGE_READY"|"STREAMING_IMAGE_DELETE_IN_PROGRESS"|"STREAMING_IMAGE_DELETED"|"STREAMING_IMAGE_UPDATE_IN_PROGRESS"|"INTERNAL_ERROR"|"ACCESS_DENIED"|string;
-  export type StreamingInstanceType = "g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|string;
+  export type StreamingInstanceType = "g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g3.4xlarge"|"g3s.xlarge"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.16xlarge"|string;
   export type StreamingInstanceTypeList = StreamingInstanceType[];
   export interface StreamingSession {
     /**
@@ -2068,7 +2068,7 @@ declare namespace Nimble {
      */
     homeRegion?: Region;
     /**
-     * The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.
+     * The IAM Identity Center application client ID used to integrate with IAM Identity Center to enable IAM Identity Center users to log in to Nimble Studio portal.
      */
     ssoClientId?: String;
     /**
@@ -2361,7 +2361,7 @@ declare namespace Nimble {
      */
     persona: LaunchProfilePersona;
     /**
-     * The principal ID. This currently supports a Amazon Web Services SSO UserId. 
+     * The principal ID. This currently supports a IAM Identity Center UserId. 
      */
     principalId: String;
     /**

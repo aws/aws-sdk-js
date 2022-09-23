@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1222.0-->
+<!--LATEST=2.1223.0-->
 <!--ENTRYINSERT-->
+
+## 2.1223.0
+* feature: AppRunner: AWS App Runner adds a Node.js 16 runtime.
+* feature: EC2: Letting external AWS customers provide ImageId as a Launch Template override in FleetLaunchTemplateOverridesRequest
+* feature: LexModelsV2: This release introduces additional optional parameters promptAttemptsSpecification to PromptSpecification, which enables the users to configure interrupt setting and Audio, DTMF and Text input configuration for the initial and retry prompt played by the Bot
+* feature: Lightsail: This release adds Instance Metadata Service (IMDS) support for Lightsail instances.
+* feature: Nimble: Amazon Nimble Studio adds support for on-demand Amazon Elastic Compute Cloud (EC2) G3 and G5 instances, allowing customers to utilize additional GPU instance types for their creative projects.
+* feature: SSM: This release adds new SSM document types ConformancePackTemplate and CloudFormation
 
 ## 2.1222.0
 * feature: BackupGateway: Changes include: new GetVirtualMachineApi to fetch a single user's VM, improving ListVirtualMachines to fetch filtered VMs as well as all VMs, and improving GetGatewayApi to now also return the gateway's MaintenanceStartTime.
