@@ -34,6 +34,7 @@
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "^1.1.0",
     "mocha": "^3.0.0",
+    "patch-package": "6.2.0",
     "repl.history": "*",
     "semver": "*",
     "typescript": "2.0.8",
