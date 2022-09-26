@@ -1181,6 +1181,35 @@ declare namespace SSM {
   }
   export type AgentErrorCode = string;
   export type AggregatorSchemaOnly = boolean;
+  export interface Alarm {
+    /**
+     * The name of your CloudWatch alarm.
+     */
+    Name: AlarmName;
+  }
+  export interface AlarmConfiguration {
+    /**
+     * If you specify true for this value, your automation or command continue to run even if we can't gather information about the state of your CloudWatch alarm. The default value is false.
+     */
+    IgnorePollAlarmFailure?: Boolean;
+    /**
+     * The name of the CloudWatch alarm specified in the configuration.
+     */
+    Alarms: AlarmList;
+  }
+  export type AlarmList = Alarm[];
+  export type AlarmName = string;
+  export interface AlarmStateInformation {
+    /**
+     * The name of your CloudWatch alarm.
+     */
+    Name: AlarmName;
+    /**
+     * The state of your CloudWatch alarm.
+     */
+    State: ExternalAlarmState;
+  }
+  export type AlarmStateInformationList = AlarmStateInformation[];
   export type AllowedPattern = string;
   export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
@@ -1364,6 +1393,11 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked during the association.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1399,6 +1433,11 @@ declare namespace SSM {
      * An aggregate status of the resources in the execution based on the status type.
      */
     ResourceCountByStatus?: ResourceCountByStatus;
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarms that were invoked by the association.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface AssociationExecutionFilter {
     /**
@@ -1764,6 +1803,14 @@ declare namespace SSM {
      */
     ProgressCounters?: ProgressCounters;
     /**
+     * The details for the CloudWatch alarm applied to your automation.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the automation.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
+    /**
      * The subtype of the Automation operation. Currently, the only supported value is ChangeRequest.
      */
     AutomationSubtype?: AutomationSubtype;
@@ -1892,6 +1939,14 @@ declare namespace SSM {
      * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and Amazon Web Services accounts. For more information, see Running Automation workflows in multiple Amazon Web Services Regions and accounts in the Amazon Web Services Systems Manager User Guide. 
      */
     AutomationType?: AutomationType;
+    /**
+     * The details for the CloudWatch alarm applied to your automation.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the automation.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
     /**
      * The subtype of the Automation operation. Currently, the only supported value is ChangeRequest.
      */
@@ -2105,6 +2160,14 @@ declare namespace SSM {
      * The TimeoutSeconds value specified for a command.
      */
     TimeoutSeconds?: TimeoutSeconds;
+    /**
+     * The details for the CloudWatch alarm applied to your command.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the command.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface CommandFilter {
     /**
@@ -2505,6 +2568,7 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2590,9 +2654,10 @@ declare namespace SSM {
      */
     TargetMaps?: TargetMaps;
     /**
-     * Adds or overwrites one or more tags for a State Manager association. Tags are metadata that you can assign to your Amazon Web Services resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. 
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an association to identify the type of resource to which it applies, the environment, or the purpose of the association.
      */
     Tags?: TagList;
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface CreateAssociationResult {
     /**
@@ -4403,6 +4468,7 @@ declare namespace SSM {
   export type ExecutionMode = "Auto"|"Interactive"|string;
   export type ExecutionRoleName = string;
   export type ExpirationDate = Date;
+  export type ExternalAlarmState = "UNKNOWN"|"ALARM"|string;
   export interface FailedCreateAssociation {
     /**
      * The association.
@@ -4913,6 +4979,14 @@ declare namespace SSM {
      * The time the task execution completed.
      */
     EndTime?: DateTime;
+    /**
+     * The details for the CloudWatch alarm you applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarms that were invoked by the maintenance window task.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface GetMaintenanceWindowRequest {
     /**
@@ -5053,6 +5127,10 @@ declare namespace SSM {
      * The action to take on tasks when the maintenance window cutoff time is reached. CONTINUE_TASK means that tasks continue to run. For Automation, Lambda, Step Functions tasks, CANCEL_TASK means that currently running task invocations continue, but no new task invocations are started. For Run Command tasks, CANCEL_TASK means the system attempts to stop the task by sending a CancelCommand operation.
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The details for the CloudWatch alarm you applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface GetOpsItemRequest {
     /**
@@ -6465,6 +6543,14 @@ declare namespace SSM {
      * The type of task that ran.
      */
     TaskType?: MaintenanceWindowTaskType;
+    /**
+     * The details for the CloudWatch alarm applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the maintenance window task.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export type MaintenanceWindowExecutionTaskIdentityList = MaintenanceWindowExecutionTaskIdentity[];
   export type MaintenanceWindowExecutionTaskInvocationId = string;
@@ -6764,6 +6850,10 @@ declare namespace SSM {
      * The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. 
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The details for the CloudWatch alarm applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export type MaintenanceWindowTaskArn = string;
   export type MaintenanceWindowTaskCutoffBehavior = "CONTINUE_TASK"|"CANCEL_TASK"|string;
@@ -8111,6 +8201,10 @@ declare namespace SSM {
      * Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.     CONTINUE_TASK: When the cutoff time is reached, any tasks that are running continue. The default value.    CANCEL_TASK:   For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.   For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.   The status for tasks that are not completed is TIMED_OUT.  
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The CloudWatch alarm you want to apply to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface RegisterTaskWithMaintenanceWindowResult {
     /**
@@ -8586,6 +8680,10 @@ declare namespace SSM {
      * Enables Amazon Web Services Systems Manager to send Run Command output to Amazon CloudWatch Logs. Run Command is a capability of Amazon Web Services Systems Manager.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
+    /**
+     * The CloudWatch alarm you want to apply to your command.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface SendCommandResult {
     /**
@@ -8797,6 +8895,10 @@ declare namespace SSM {
      * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an automation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an automation to identify an environment or operating system. In this case, you could specify the following key-value pairs:    Key=environment,Value=test     Key=OS,Value=Windows     To add tags to an existing automation, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
+    /**
+     * The CloudWatch alarm you want to apply to your automation.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface StartAutomationExecutionResult {
     /**
@@ -9189,6 +9291,7 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface UpdateAssociationResult {
     /**
@@ -9509,6 +9612,10 @@ declare namespace SSM {
      * Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.     CONTINUE_TASK: When the cutoff time is reached, any tasks that are running continue. The default value.    CANCEL_TASK:   For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.   For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.   The status for tasks that are not completed is TIMED_OUT.  
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The CloudWatch alarm you want to apply to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface UpdateMaintenanceWindowTaskResult {
     /**
@@ -9567,6 +9674,10 @@ declare namespace SSM {
      * The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. 
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The details for the CloudWatch alarm you applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface UpdateManagedInstanceRoleRequest {
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1223.0-->
+<!--LATEST=2.1224.0-->
 <!--ENTRYINSERT-->
+
+## 2.1224.0
+* feature: CUR: This release adds two new support regions(me-central-1/eu-south-2) for OSG.
+* feature: IoTFleetWise: General availability (GA) for AWS IoT Fleetwise. It adds AWS IoT Fleetwise to AWS SDK. For more information, see https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/Welcome.html.
+* feature: SSM: This release includes support for applying a CloudWatch alarm to Systems Manager capabilities like Automation, Run Command, State Manager, and Maintenance Windows.
 
 ## 2.1223.0
 * feature: AppRunner: AWS App Runner adds a Node.js 16 runtime.

@@ -1193,5 +1193,8 @@
   },
   "controltower": {
     "name": "ControlTower"
+  },
+  "iotfleetwise": {
+    "name": "IoTFleetWise"
   }
 }

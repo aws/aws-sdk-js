@@ -316,6 +316,7 @@ export abstract class ConfigurationServicePlaceholders {
   privatenetworks?: AWS.PrivateNetworks.Types.ClientConfiguration;
   supportapp?: AWS.SupportApp.Types.ClientConfiguration;
   controltower?: AWS.ControlTower.Types.ClientConfiguration;
+  iotfleetwise?: AWS.IoTFleetWise.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -634,4 +635,5 @@ export interface ConfigurationServiceApiVersions {
   privatenetworks?: AWS.PrivateNetworks.Types.apiVersion;
   supportapp?: AWS.SupportApp.Types.apiVersion;
   controltower?: AWS.ControlTower.Types.apiVersion;
+  iotfleetwise?: AWS.IoTFleetWise.Types.apiVersion;
 }

@@ -315,5 +315,6 @@ module.exports = {
   BackupStorage: require('./backupstorage'),
   PrivateNetworks: require('./privatenetworks'),
   SupportApp: require('./supportapp'),
-  ControlTower: require('./controltower')
+  ControlTower: require('./controltower'),
+  IoTFleetWise: require('./iotfleetwise')
 };
