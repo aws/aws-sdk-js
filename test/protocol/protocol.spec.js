@@ -101,6 +101,12 @@
           expect(req.httpRequest.headers[key]).to.equal(data.headers[key]);
         });
       }
+      if (data.forbidHeaders) {
+        for (k in data.forbidHeaders) {
+          v = data.forbidHeaders[k];
+          expect(req.httpRequest.headers[v]).to.be.undefined;
+        }
+      }
     } else if (svc.api.protocol.match(/(json|xml)/)) {
       if (req.httpRequest.body === '{}') {
         req.httpRequest.body = '';
