@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "rest-json",
+  "description": "unset content length in rest-json when payload is undefined"
+}
