@@ -268,6 +268,14 @@ declare class Location extends Service {
    */
   getMapTile(callback?: (err: AWSError, data: Location.Types.GetMapTileResponse) => void): Request<Location.Types.GetMapTileResponse, AWSError>;
   /**
+   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer AWS account   AWS Region   Data provider specified in the place index resource   
+   */
+  getPlace(params: Location.Types.GetPlaceRequest, callback?: (err: AWSError, data: Location.Types.GetPlaceResponse) => void): Request<Location.Types.GetPlaceResponse, AWSError>;
+  /**
+   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer AWS account   AWS Region   Data provider specified in the place index resource   
+   */
+  getPlace(callback?: (err: AWSError, data: Location.Types.GetPlaceResponse) => void): Request<Location.Types.GetPlaceResponse, AWSError>;
+  /**
    * A batch request to retrieve all device positions.
    */
   listDevicePositions(params: Location.Types.ListDevicePositionsRequest, callback?: (err: AWSError, data: Location.Types.ListDevicePositionsResponse) => void): Request<Location.Types.ListDevicePositionsResponse, AWSError>;
@@ -935,7 +943,7 @@ declare namespace Location {
     /**
      * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
-    MapArn: Arn;
+    MapArn: GeoArn;
     /**
      * The name of the map resource.
      */
@@ -1177,7 +1185,7 @@ declare namespace Location {
     /**
      * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
-    MapArn: Arn;
+    MapArn: GeoArn;
     /**
      * The map style selected from an available provider.
      */
@@ -1391,6 +1399,7 @@ declare namespace Location {
   }
   export type DistanceUnit = "Kilometers"|"Miles"|string;
   export type Double = number;
+  export type GeoArn = string;
   export interface GeofenceGeometry {
     /**
      * A circle on the earth, as defined by a center point and a radius.
@@ -1533,7 +1542,7 @@ declare namespace Location {
   }
   export interface GetMapSpritesRequest {
     /**
-     * The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:    sprites.png     sprites@2x.png for high pixel density displays   For the JSON document contain image offsets. Use the following ﬁle names:    sprites.json     sprites@2x.json for high pixel density displays  
+     * The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:    sprites.png     sprites@2x.png for high pixel density displays   For the JSON document containing image offsets. Use the following ﬁle names:    sprites.json     sprites@2x.json for high pixel density displays  
      */
     FileName: GetMapSpritesRequestFileNameString;
     /**
@@ -1598,6 +1607,26 @@ declare namespace Location {
      * The map tile's content type. For example, application/vnd.mapbox-vector-tile.
      */
     ContentType?: String;
+  }
+  export interface GetPlaceRequest {
+    /**
+     * The name of the place index resource that you want to use for the search.
+     */
+    IndexName: ResourceName;
+    /**
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the language parameter set to en. The city in the results will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the city in the results will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+     */
+    Language?: LanguageTag;
+    /**
+     * The identifier of the place to find.
+     */
+    PlaceId: PlaceId;
+  }
+  export interface GetPlaceResponse {
+    /**
+     * Details about the result, such as its address and position.
+     */
+    Place: Place;
   }
   export type Id = string;
   export type Integer = number;
@@ -2068,6 +2097,14 @@ declare namespace Location {
      * The time zone in which the Place is located. Returned only when using Here as the selected partner.
      */
     TimeZone?: TimeZone;
+    /**
+     * For addresses with multiple units, the unit identifier. Can include numbers and letters, for example 3B or Unit 123.  Returned only for a place index that uses Esri as a data provider. Is not returned for SearchPlaceIndexForPosition. 
+     */
+    UnitNumber?: String;
+    /**
+     * For addresses with a UnitNumber, the type of unit. For example, Apartment.
+     */
+    UnitType?: String;
   }
   export interface PlaceGeometry {
     /**
@@ -2075,6 +2112,7 @@ declare namespace Location {
      */
     Point?: Position;
   }
+  export type PlaceId = string;
   export type PlaceIndexSearchResultLimit = number;
   export type Position = Double[];
   export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
@@ -2157,10 +2195,18 @@ declare namespace Location {
      * Details about the search result, such as its address and position.
      */
     Place: Place;
+    /**
+     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForPosition operations, the PlaceId is returned only by place indexes that use HERE as a data provider. 
+     */
+    PlaceId?: PlaceId;
   }
   export type SearchForPositionResultDistanceDouble = number;
   export type SearchForPositionResultList = SearchForPositionResult[];
   export interface SearchForSuggestionsResult {
+    /**
+     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place indexes that use HERE or Esri as data providers. 
+     */
+    PlaceId?: PlaceId;
     /**
      * The text of the place suggestion, typically formatted as an address string.
      */
@@ -2176,6 +2222,10 @@ declare namespace Location {
      * Details about the search result, such as its address and position.
      */
     Place: Place;
+    /**
+     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForText operations, the PlaceId is returned only by place indexes that use HERE as a data provider. 
+     */
+    PlaceId?: PlaceId;
     /**
      * The relative confidence in the match for a result among the results returned. For example, if more fields for an address match (including house number, street, city, country/region, and postal code), the relevance score is closer to 1. Returned only when the partner selected is Esri.
      */
@@ -2528,7 +2578,7 @@ declare namespace Location {
     /**
      * The Amazon Resource Name (ARN) of the updated map resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
-    MapArn: Arn;
+    MapArn: GeoArn;
     /**
      * The name of the updated map resource.
      */

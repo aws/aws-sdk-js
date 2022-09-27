@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1224.0',
+	  VERSION: '2.1225.0',
 
 	  /**
 	   * @api private
@@ -3546,6 +3546,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	var JsonBuilder = __webpack_require__(19);
 	var JsonParser = __webpack_require__(20);
 
+	var METHODS_WITHOUT_BODY = ['GET', 'HEAD', 'DELETE'];
+
+	function unsetContentLength(req) {
+	  var payloadMember = util.getRequestPayloadShape(req);
+	  if (
+	    payloadMember === undefined &&
+	    METHODS_WITHOUT_BODY.indexOf(req.httpRequest.method) >= 0
+	  ) {
+	    delete req.httpRequest.headers['Content-Length'];
+	  }
+	}
+
 	function populateBody(req) {
 	  var builder = new JsonBuilder();
 	  var input = req.service.api.operations[req.operation].input;
@@ -3582,7 +3594,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Rest.buildRequest(req);
 
 	  // never send body payload on GET/HEAD/DELETE
-	  if (['GET', 'HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
+	  if (METHODS_WITHOUT_BODY.indexOf(req.httpRequest.method) < 0) {
 	    populateBody(req);
 	  }
 	}
@@ -3631,7 +3643,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = {
 	  buildRequest: buildRequest,
 	  extractError: extractError,
-	  extractData: extractData
+	  extractData: extractData,
+	  unsetContentLength: unsetContentLength
 	};
 
 
@@ -7790,6 +7803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+	    add('UNSET_CONTENT_LENGTH', 'afterBuild', svc.unsetContentLength);
 	  }),
 
 	  RestXml: new SequentialExecutor().addNamedListeners(function(add) {

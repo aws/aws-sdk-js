@@ -12,19 +12,19 @@ declare class Kendra extends Service {
   constructor(options?: Kendra.Types.ClientConfiguration)
   config: Config & Kendra.Types.ClientConfiguration;
   /**
-   * Grants users or groups in your Amazon Web Services SSO identity source access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Grants users or groups in your IAM Identity Center identity source access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   associateEntitiesToExperience(params: Kendra.Types.AssociateEntitiesToExperienceRequest, callback?: (err: AWSError, data: Kendra.Types.AssociateEntitiesToExperienceResponse) => void): Request<Kendra.Types.AssociateEntitiesToExperienceResponse, AWSError>;
   /**
-   * Grants users or groups in your Amazon Web Services SSO identity source access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Grants users or groups in your IAM Identity Center identity source access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   associateEntitiesToExperience(callback?: (err: AWSError, data: Kendra.Types.AssociateEntitiesToExperienceResponse) => void): Request<Kendra.Types.AssociateEntitiesToExperienceResponse, AWSError>;
   /**
-   * Defines the specific permissions of users or groups in your Amazon Web Services SSO identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Defines the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   associatePersonasToEntities(params: Kendra.Types.AssociatePersonasToEntitiesRequest, callback?: (err: AWSError, data: Kendra.Types.AssociatePersonasToEntitiesResponse) => void): Request<Kendra.Types.AssociatePersonasToEntitiesResponse, AWSError>;
   /**
-   * Defines the specific permissions of users or groups in your Amazon Web Services SSO identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Defines the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   associatePersonasToEntities(callback?: (err: AWSError, data: Kendra.Types.AssociatePersonasToEntitiesResponse) => void): Request<Kendra.Types.AssociatePersonasToEntitiesResponse, AWSError>;
   /**
@@ -252,19 +252,19 @@ declare class Kendra extends Service {
    */
   describeThesaurus(callback?: (err: AWSError, data: Kendra.Types.DescribeThesaurusResponse) => void): Request<Kendra.Types.DescribeThesaurusResponse, AWSError>;
   /**
-   * Prevents users or groups in your Amazon Web Services SSO identity source from accessing your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Prevents users or groups in your IAM Identity Center identity source from accessing your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   disassociateEntitiesFromExperience(params: Kendra.Types.DisassociateEntitiesFromExperienceRequest, callback?: (err: AWSError, data: Kendra.Types.DisassociateEntitiesFromExperienceResponse) => void): Request<Kendra.Types.DisassociateEntitiesFromExperienceResponse, AWSError>;
   /**
-   * Prevents users or groups in your Amazon Web Services SSO identity source from accessing your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Prevents users or groups in your IAM Identity Center identity source from accessing your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   disassociateEntitiesFromExperience(callback?: (err: AWSError, data: Kendra.Types.DisassociateEntitiesFromExperienceResponse) => void): Request<Kendra.Types.DisassociateEntitiesFromExperienceResponse, AWSError>;
   /**
-   * Removes the specific permissions of users or groups in your Amazon Web Services SSO identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Removes the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   disassociatePersonasFromEntities(params: Kendra.Types.DisassociatePersonasFromEntitiesRequest, callback?: (err: AWSError, data: Kendra.Types.DisassociatePersonasFromEntitiesResponse) => void): Request<Kendra.Types.DisassociatePersonasFromEntitiesResponse, AWSError>;
   /**
-   * Removes the specific permissions of users or groups in your Amazon Web Services SSO identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Removes the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   disassociatePersonasFromEntities(callback?: (err: AWSError, data: Kendra.Types.DisassociatePersonasFromEntitiesResponse) => void): Request<Kendra.Types.DisassociatePersonasFromEntitiesResponse, AWSError>;
   /**
@@ -316,11 +316,11 @@ declare class Kendra extends Service {
    */
   listEntityPersonas(callback?: (err: AWSError, data: Kendra.Types.ListEntityPersonasResponse) => void): Request<Kendra.Types.ListEntityPersonasResponse, AWSError>;
   /**
-   * Lists users or groups in your Amazon Web Services SSO identity source that are granted access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Lists users or groups in your IAM Identity Center identity source that are granted access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   listExperienceEntities(params: Kendra.Types.ListExperienceEntitiesRequest, callback?: (err: AWSError, data: Kendra.Types.ListExperienceEntitiesResponse) => void): Request<Kendra.Types.ListExperienceEntitiesResponse, AWSError>;
   /**
-   * Lists users or groups in your Amazon Web Services SSO identity source that are granted access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
+   * Lists users or groups in your IAM Identity Center identity source that are granted access to your Amazon Kendra experience. You can create an Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   listExperienceEntities(callback?: (err: AWSError, data: Kendra.Types.ListExperienceEntitiesResponse) => void): Request<Kendra.Types.ListExperienceEntitiesResponse, AWSError>;
   /**
@@ -603,13 +603,13 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * Lists users or groups in your Amazon Web Services SSO identity source.
+     * Lists users or groups in your IAM Identity Center identity source.
      */
     EntityList: AssociateEntityList;
   }
   export interface AssociateEntitiesToExperienceResponse {
     /**
-     * Lists the users or groups in your Amazon Web Services SSO identity source that failed to properly configure with your Amazon Kendra experience.
+     * Lists the users or groups in your IAM Identity Center identity source that failed to properly configure with your Amazon Kendra experience.
      */
     FailedEntityList?: AssociateEntitiesToExperienceFailedEntityList;
   }
@@ -624,13 +624,13 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The personas that define the specific permissions of users or groups in your Amazon Web Services SSO identity source. The available personas or access roles are Owner and Viewer. For more information on these personas, see Providing access to your search page.
+     * The personas that define the specific permissions of users or groups in your IAM Identity Center identity source. The available personas or access roles are Owner and Viewer. For more information on these personas, see Providing access to your search page.
      */
     Personas: EntityPersonaConfigurationList;
   }
   export interface AssociatePersonasToEntitiesResponse {
     /**
-     * Lists the users or groups in your Amazon Web Services SSO identity source that failed to properly configure with your Amazon Kendra experience.
+     * Lists the users or groups in your IAM Identity Center identity source that failed to properly configure with your Amazon Kendra experience.
      */
     FailedEntityList?: FailedEntityList;
   }
@@ -1231,7 +1231,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
@@ -1335,7 +1335,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Enables fetching access levels of groups and users from an Amazon Web Services Single Sign On identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -1918,7 +1918,7 @@ declare namespace Kendra {
      */
     Status?: ExperienceStatus;
     /**
-     * Shows the Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that stores your user and group information.
+     * Shows the Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that stores your user and group information.
      */
     RoleArn?: RoleArn;
     /**
@@ -2051,7 +2051,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Whether you have enabled the configuration for fetching access levels of groups and users from an Amazon Web Services Single Sign On identity source.
+     * Whether you have enabled the configuration for fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -2263,13 +2263,13 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * Lists users or groups in your Amazon Web Services SSO identity source.
+     * Lists users or groups in your IAM Identity Center identity source.
      */
     EntityList: DisassociateEntityList;
   }
   export interface DisassociateEntitiesFromExperienceResponse {
     /**
-     * Lists the users or groups in your Amazon Web Services SSO identity source that failed to properly remove access to your Amazon Kendra experience.
+     * Lists the users or groups in your IAM Identity Center identity source that failed to properly remove access to your Amazon Kendra experience.
      */
     FailedEntityList?: FailedEntityList;
   }
@@ -2284,13 +2284,13 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The identifiers of users or groups in your Amazon Web Services SSO identity source. For example, user IDs could be user emails.
+     * The identifiers of users or groups in your IAM Identity Center identity source. For example, user IDs could be user emails.
      */
     EntityIds: EntityIdsList;
   }
   export interface DisassociatePersonasFromEntitiesResponse {
     /**
-     * Lists the users or groups in your Amazon Web Services SSO identity source that failed to properly remove access to your Amazon Kendra experience.
+     * Lists the users or groups in your IAM Identity Center identity source that failed to properly remove access to your Amazon Kendra experience.
      */
     FailedEntityList?: FailedEntityList;
   }
@@ -2467,7 +2467,7 @@ declare namespace Kendra {
   export type EnterpriseId = string;
   export interface EntityConfiguration {
     /**
-     * The identifier of a user or group in your Amazon Web Services SSO identity source. For example, a user ID could be an email.
+     * The identifier of a user or group in your IAM Identity Center identity source. For example, a user ID could be an email.
      */
     EntityId: EntityId;
     /**
@@ -2502,11 +2502,11 @@ declare namespace Kendra {
   export type EntityIdsList = EntityId[];
   export interface EntityPersonaConfiguration {
     /**
-     * The identifier of a user or group in your Amazon Web Services SSO identity source. For example, a user ID could be an email.
+     * The identifier of a user or group in your IAM Identity Center identity source. For example, a user ID could be an email.
      */
     EntityId: EntityId;
     /**
-     * The persona that defines the specific permissions of the user or group in your Amazon Web Services SSO identity source. The available personas or access roles are Owner and Viewer. For more information on these personas, see Providing access to your search page.
+     * The persona that defines the specific permissions of the user or group in your IAM Identity Center identity source. The available personas or access roles are Owner and Viewer. For more information on these personas, see Providing access to your search page.
      */
     Persona: Persona;
   }
@@ -2523,7 +2523,7 @@ declare namespace Kendra {
      */
     ContentSourceConfiguration?: ContentSourceConfiguration;
     /**
-     * The Amazon Web Services SSO field name that contains the identifiers of your users, such as their emails.
+     * The IAM Identity Center field name that contains the identifiers of your users, such as their emails.
      */
     UserIdentityConfiguration?: UserIdentityConfiguration;
   }
@@ -2540,7 +2540,7 @@ declare namespace Kendra {
   export type ExperienceEndpoints = ExperienceEndpoint[];
   export interface ExperienceEntitiesSummary {
     /**
-     * The identifier of a user or group in your Amazon Web Services SSO identity source. For example, a user ID could be an email.
+     * The identifier of a user or group in your IAM Identity Center identity source. For example, a user ID could be an email.
      */
     EntityId?: EntityId;
     /**
@@ -2611,11 +2611,11 @@ declare namespace Kendra {
   export type FacetResultList = FacetResult[];
   export interface FailedEntity {
     /**
-     * The identifier of the user or group in your Amazon Web Services SSO identity source. For example, a user ID could be an email.
+     * The identifier of the user or group in your IAM Identity Center identity source. For example, a user ID could be an email.
      */
     EntityId?: EntityId;
     /**
-     * The reason the user or group in your Amazon Web Services SSO identity source failed to properly configure with your Amazon Kendra experience.
+     * The reason the user or group in your IAM Identity Center identity source failed to properly configure with your Amazon Kendra experience.
      */
     ErrorMessage?: ErrorMessage;
   }
@@ -3581,11 +3581,11 @@ declare namespace Kendra {
   export type Persona = "OWNER"|"VIEWER"|string;
   export interface PersonasSummary {
     /**
-     * The identifier of a user or group in your Amazon Web Services SSO identity source. For example, a user ID could be an email.
+     * The identifier of a user or group in your IAM Identity Center identity source. For example, a user ID could be an email.
      */
     EntityId?: EntityId;
     /**
-     * The persona that defines the specific permissions of the user or group in your Amazon Web Services SSO identity source. The available personas or access roles are Owner and Viewer. For more information on these personas, see Providing access to your search page.
+     * The persona that defines the specific permissions of the user or group in your IAM Identity Center identity source. The available personas or access roles are Owner and Viewer. For more information on these personas, see Providing access to your search page.
      */
     Persona?: Persona;
     /**
@@ -4538,7 +4538,7 @@ declare namespace Kendra {
   }
   export interface TemplateConfiguration {
     /**
-     * The template schema used for the data source. The following links to the template schema for data sources where templates are supported:    Zendesk template schema   
+     * The template schema used for the data source, where templates schemas are supported. See Data source template schemas.
      */
     Template?: Template;
   }
@@ -4700,7 +4700,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
@@ -4746,7 +4746,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Enables fetching access levels of groups and users from an Amazon Web Services Single Sign On identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -4858,7 +4858,7 @@ declare namespace Kendra {
   export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
   export interface UserGroupResolutionConfiguration {
     /**
-     * The identity store provider (mode) you want to use to fetch access levels of groups and users. Amazon Web Services Single Sign On is currently the only available mode. Your users and groups must exist in an Amazon Web Services SSO identity source in order to use this mode.
+     * The identity store provider (mode) you want to use to fetch access levels of groups and users. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
      */
     UserGroupResolutionMode: UserGroupResolutionMode;
   }
@@ -4866,7 +4866,7 @@ declare namespace Kendra {
   export type UserId = string;
   export interface UserIdentityConfiguration {
     /**
-     * The Amazon Web Services SSO field name that contains the identifiers of your users, such as their emails. This is used for user context filtering and for granting access to your Amazon Kendra experience. You must set up Amazon Web Services SSO with Amazon Kendra. You must include your users and groups in your Access Control List when you ingest documents into your index. For more information, see Getting started with an Amazon Web Services SSO identity source.
+     * The IAM Identity Center field name that contains the identifiers of your users, such as their emails. This is used for user context filtering and for granting access to your Amazon Kendra experience. You must set up IAM Identity Center with Amazon Kendra. You must include your users and groups in your Access Control List when you ingest documents into your index. For more information, see Getting started with an IAM Identity Center identity source.
      */
     IdentityAttributeName?: IdentityAttributeName;
   }

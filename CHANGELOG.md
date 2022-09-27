@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1224.0-->
+<!--LATEST=2.1225.0-->
 <!--ENTRYINSERT-->
+
+## 2.1225.0
+* bugfix: rest-json: unset content length in rest-json when payload is undefined
+* feature: CostExplorer: This release is to support retroactive Cost Categories. The new field will enable you to retroactively apply new and existing cost category rules to previous months.
+* feature: Kendra: My AWS Service (placeholder) - Amazon Kendra now provides a data source connector for DropBox. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-dropbox.html
+* feature: Location: This release adds place IDs, which are unique identifiers of places, along with a new GetPlace operation, which can be used with place IDs to find a place again later. UnitNumber and UnitType are also added as new properties of places.
 
 ## 2.1224.0
 * feature: CUR: This release adds two new support regions(me-central-1/eu-south-2) for OSG.
