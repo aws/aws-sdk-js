@@ -20,6 +20,14 @@ declare class IoTEventsData extends Service {
    */
   batchAcknowledgeAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchAcknowledgeAlarmResponse) => void): Request<IoTEventsData.Types.BatchAcknowledgeAlarmResponse, AWSError>;
   /**
+   * Deletes one or more detectors that were created. When a detector is deleted, its state will be cleared and the detector will be removed from the list of detectors. The deleted detector will no longer appear if referenced in the ListDetectors API call.
+   */
+  batchDeleteDetector(params: IoTEventsData.Types.BatchDeleteDetectorRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchDeleteDetectorResponse) => void): Request<IoTEventsData.Types.BatchDeleteDetectorResponse, AWSError>;
+  /**
+   * Deletes one or more detectors that were created. When a detector is deleted, its state will be cleared and the detector will be removed from the list of detectors. The deleted detector will no longer appear if referenced in the ListDetectors API call.
+   */
+  batchDeleteDetector(callback?: (err: AWSError, data: IoTEventsData.Types.BatchDeleteDetectorResponse) => void): Request<IoTEventsData.Types.BatchDeleteDetectorResponse, AWSError>;
+  /**
    * Disables one or more alarms. The alarms change to the DISABLED state after you disable them.
    */
   batchDisableAlarm(params: IoTEventsData.Types.BatchDisableAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchDisableAlarmResponse) => void): Request<IoTEventsData.Types.BatchDisableAlarmResponse, AWSError>;
@@ -231,6 +239,33 @@ declare namespace IoTEventsData {
      */
     errorMessage?: ErrorMessage;
   }
+  export type BatchDeleteDetectorErrorEntries = BatchDeleteDetectorErrorEntry[];
+  export interface BatchDeleteDetectorErrorEntry {
+    /**
+     * The ID of the message that caused the error. (See the value of the "messageId" in the detectors object of the DeleteDetectorRequest.)
+     */
+    messageId?: MessageId;
+    /**
+     * The error code.
+     */
+    errorCode?: ErrorCode;
+    /**
+     * A message that describes the error.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export interface BatchDeleteDetectorRequest {
+    /**
+     * The list of one or more detectors to be deleted.
+     */
+    detectors: DeleteDetectorRequests;
+  }
+  export interface BatchDeleteDetectorResponse {
+    /**
+     * A list of errors associated with the request, or an empty array ([]) if there are no errors. Each error entry contains a messageId that helps you identify the entry that failed.
+     */
+    batchDeleteDetectorErrorEntries?: BatchDeleteDetectorErrorEntries;
+  }
   export interface BatchDisableAlarmRequest {
     /**
      * The list of disable action requests. You can specify up to 10 requests per operation.
@@ -361,6 +396,21 @@ declare namespace IoTEventsData {
     resetActionConfiguration?: ResetActionConfiguration;
   }
   export type CustomerActionName = "SNOOZE"|"ENABLE"|"DISABLE"|"ACKNOWLEDGE"|"RESET"|string;
+  export interface DeleteDetectorRequest {
+    /**
+     * The ID to assign to the DeleteDetectorRequest. Each "messageId" must be unique within each batch sent.
+     */
+    messageId: MessageId;
+    /**
+     * The name of the detector model that was used to create the detector instance.
+     */
+    detectorModelName: DetectorModelName;
+    /**
+     * The value of the key used to identify the detector. 
+     */
+    keyValue?: KeyValue;
+  }
+  export type DeleteDetectorRequests = DeleteDetectorRequest[];
   export interface DescribeAlarmRequest {
     /**
      * The name of the alarm model.

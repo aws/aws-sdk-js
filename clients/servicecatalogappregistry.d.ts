@@ -132,6 +132,14 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   listAttributeGroups(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAttributeGroupsResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAttributeGroupsResponse, AWSError>;
   /**
+   * Lists the details of all attribute groups associated with a specific application. The results display in pages.
+   */
+  listAttributeGroupsForApplication(params: ServiceCatalogAppRegistry.Types.ListAttributeGroupsForApplicationRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAttributeGroupsForApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAttributeGroupsForApplicationResponse, AWSError>;
+  /**
+   * Lists the details of all attribute groups associated with a specific application. The results display in pages.
+   */
+  listAttributeGroupsForApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAttributeGroupsForApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAttributeGroupsForApplicationResponse, AWSError>;
+  /**
    * Lists all of the tags on the resource.
    */
   listTagsForResource(params: ServiceCatalogAppRegistry.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse, AWSError>;
@@ -318,6 +326,21 @@ declare namespace ServiceCatalogAppRegistry {
     tags?: Tags;
   }
   export type AttributeGroupArn = string;
+  export interface AttributeGroupDetails {
+    /**
+     * The unique identifier of the attribute group.
+     */
+    id?: AttributeGroupId;
+    /**
+     * The Amazon resource name (ARN) that specifies the attribute group.
+     */
+    arn?: AttributeGroupArn;
+    /**
+     * The name of the attribute group. 
+     */
+    name?: Name;
+  }
+  export type AttributeGroupDetailsList = AttributeGroupDetails[];
   export type AttributeGroupId = string;
   export type AttributeGroupIds = AttributeGroupId[];
   export type AttributeGroupSpecifier = string;
@@ -649,6 +672,30 @@ declare namespace ServiceCatalogAppRegistry {
      */
     nextToken?: NextToken;
   }
+  export interface ListAttributeGroupsForApplicationRequest {
+    /**
+     * The name or ID of the application.
+     */
+    application: ApplicationSpecifier;
+    /**
+     * This token retrieves the next page of results after a previous API call.
+     */
+    nextToken?: NextToken;
+    /**
+     * The upper bound of the number of results to return. The value cannot exceed 25. If you omit this parameter, it defaults to 25. This value is optional.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAttributeGroupsForApplicationResponse {
+    /**
+     *  The details related to a specific AttributeGroup. 
+     */
+    attributeGroupsDetails?: AttributeGroupDetailsList;
+    /**
+     * The token to use to get the next page of results after a previous API call.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListAttributeGroupsRequest {
     /**
      * The token to use to get the next page of results after a previous API call. 
@@ -798,7 +845,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     application: ApplicationSpecifier;
     /**
-     * The new name of the application. The name must be unique in the region in which you are updating the application.
+     * Deprecated: The new name of the application. The name must be unique in the region in which you are updating the application. Please do not use this field as we have stopped supporting name updates.
      */
     name?: Name;
     /**
@@ -818,7 +865,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     attributeGroup: AttributeGroupSpecifier;
     /**
-     * The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group.
+     * Deprecated: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group. Please do not use this field as we have stopped supporting name updates.
      */
     name?: Name;
     /**

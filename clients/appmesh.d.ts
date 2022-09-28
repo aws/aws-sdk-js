@@ -44,11 +44,11 @@ declare class AppMesh extends Service {
    */
   createVirtualGateway(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualGatewayOutput) => void): Request<AppMesh.Types.CreateVirtualGatewayOutput, AWSError>;
   /**
-   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see Envoy image in the AWS App Mesh User Guide.
+   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see Envoy image in the App Mesh User Guide.
    */
   createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
-   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see Envoy image in the AWS App Mesh User Guide.
+   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see Envoy image in the App Mesh User Guide.
    */
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
@@ -345,6 +345,10 @@ declare namespace AppMesh {
      */
     attributes?: AwsCloudMapInstanceAttributes;
     /**
+     * The preferred IP version that this virtual node uses. Setting the IP preference on the virtual node only overrides the IP preference set for the mesh on this specific node.
+     */
+    ipPreference?: IpPreference;
+    /**
      * The name of the Cloud Map namespace to use.
      */
     namespaceName: AwsCloudMapName;
@@ -416,7 +420,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -472,7 +476,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -508,7 +512,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -540,7 +544,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -572,7 +576,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -604,7 +608,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -637,7 +641,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -669,7 +673,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -693,7 +697,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -713,7 +717,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -733,7 +737,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -753,7 +757,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -777,7 +781,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -797,7 +801,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
   }
@@ -813,7 +817,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -837,7 +841,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -857,7 +861,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -877,7 +881,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -897,7 +901,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -917,6 +921,10 @@ declare namespace AppMesh {
      * Specifies the DNS service discovery hostname for the virtual node. 
      */
     hostname: Hostname;
+    /**
+     * The preferred IP version that this virtual node uses. Setting the IP preference on the virtual node only overrides the IP preference set for the mesh on this specific node.
+     */
+    ipPreference?: IpPreference;
     /**
      * Specifies the DNS response type for the virtual node.
      */
@@ -944,7 +952,11 @@ declare namespace AppMesh {
   export type ExactHostName = string;
   export interface FileAccessLog {
     /**
-     * The file path to write access logs to. You can use /dev/stdout to send access logs to standard out and configure your Envoy container to use a log driver, such as awslogs, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.  The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly. 
+     * The specified format for the logs. The format is either json_format or text_format.
+     */
+    format?: LoggingFormat;
+    /**
+     * The file path to write access logs to. You can use /dev/stdout to send access logs to standard out and configure your Envoy container to use a log driver, such as awslogs, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.  &lt;note&gt; &lt;p&gt;The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.&lt;/p&gt; &lt;/note&gt; 
      */
     path: FilePath;
   }
@@ -1012,11 +1024,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -1054,6 +1066,10 @@ declare namespace AppMesh {
   }
   export type GatewayRouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
   export interface GatewayRouteTarget {
+    /**
+     * The port number of the gateway route target.
+     */
+    port?: ListenerPort;
     /**
      * An object that represents a virtual service gateway route target.
      */
@@ -1094,6 +1110,10 @@ declare namespace AppMesh {
      * The gateway route metadata to be matched on.
      */
     metadata?: GrpcGatewayRouteMetadataList;
+    /**
+     * The port number to match from the request.
+     */
+    port?: ListenerPort;
     /**
      * The fully qualified domain name for the service to match from the request.
      */
@@ -1196,6 +1216,10 @@ declare namespace AppMesh {
      * The method name to match from the request. If you specify a name, you must also specify a serviceName.
      */
     methodName?: MethodName;
+    /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
     /**
      * The fully qualified domain name for the service to match from the request.
      */
@@ -1331,6 +1355,9 @@ declare namespace AppMesh {
      * Specify True to match anything except the match criteria. The default value is False.
      */
     invert?: Boolean;
+    /**
+     * An object that represents the method and value to match with the header value sent in a request. Specify one match method.
+     */
     match?: HeaderMatchMethod;
     /**
      * A name for the HTTP header in the gateway route that will be matched on.
@@ -1355,6 +1382,10 @@ declare namespace AppMesh {
      * The path to match on.
      */
     path?: HttpPathMatch;
+    /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
     /**
      * Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is my-service.local and you want the route to match requests to my-service.local/metrics, your prefix should be /metrics.
      */
@@ -1492,6 +1523,10 @@ declare namespace AppMesh {
      */
     path?: HttpPathMatch;
     /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
+    /**
      * Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is my-service.local and you want the route to match requests to my-service.local/metrics, your prefix should be /metrics.
      */
     prefix?: String;
@@ -1515,6 +1550,20 @@ declare namespace AppMesh {
      */
     perRequest?: Duration;
   }
+  export type IpPreference = "IPv6_PREFERRED"|"IPv4_PREFERRED"|"IPv4_ONLY"|"IPv6_ONLY"|string;
+  export type JsonFormat = JsonFormatRef[];
+  export interface JsonFormatRef {
+    /**
+     * The specified key for the JSON.
+     */
+    key: JsonKey;
+    /**
+     * The specified value for the JSON.
+     */
+    value: JsonValue;
+  }
+  export type JsonKey = string;
+  export type JsonValue = string;
   export interface ListGatewayRoutesInput {
     /**
      * The maximum number of results returned by ListGatewayRoutes in paginated output. When you use this parameter, ListGatewayRoutes returns only limit results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListGatewayRoutes request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListGatewayRoutes returns up to 100 results and a nextToken value if applicable.
@@ -1525,7 +1574,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1579,7 +1628,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1636,7 +1685,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1665,7 +1714,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1694,7 +1743,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1723,7 +1772,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1768,6 +1817,7 @@ declare namespace AppMesh {
      */
     tls?: ListenerTls;
   }
+  export type ListenerPort = number;
   export interface ListenerTimeout {
     /**
      * An object that represents types of timeouts. 
@@ -1808,7 +1858,7 @@ declare namespace AppMesh {
   }
   export interface ListenerTlsCertificate {
     /**
-     * A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents an Certificate Manager certificate.
      */
     acm?: ListenerTlsAcmCertificate;
     /**
@@ -1864,6 +1914,16 @@ declare namespace AppMesh {
      */
     accessLog?: AccessLog;
   }
+  export interface LoggingFormat {
+    /**
+     * 
+     */
+    json?: JsonFormat;
+    /**
+     * 
+     */
+    text?: TextFormat;
+  }
   export type Long = number;
   export interface MatchRange {
     /**
@@ -1916,11 +1976,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -1928,11 +1988,18 @@ declare namespace AppMesh {
      */
     version: Long;
   }
+  export interface MeshServiceDiscovery {
+    /**
+     * The IP version to use to control traffic within the mesh.
+     */
+    ipPreference?: IpPreference;
+  }
   export interface MeshSpec {
     /**
      * The egress filter rules for the service mesh.
      */
     egressFilter?: EgressFilter;
+    serviceDiscovery?: MeshServiceDiscovery;
   }
   export interface MeshStatus {
     /**
@@ -1997,11 +2064,11 @@ declare namespace AppMesh {
      */
     lastUpdatedAt: Timestamp;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -2060,11 +2127,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -2172,6 +2239,10 @@ declare namespace AppMesh {
      */
     action: TcpRouteAction;
     /**
+     * An object that represents the criteria for determining a request match.
+     */
+    match?: TcpRouteMatch;
+    /**
      * An object that represents types of timeouts. 
      */
     timeout?: TcpTimeout;
@@ -2182,16 +2253,23 @@ declare namespace AppMesh {
      */
     weightedTargets: WeightedTargets;
   }
+  export interface TcpRouteMatch {
+    /**
+     * The port number to match on.
+     */
+    port?: ListenerPort;
+  }
   export interface TcpTimeout {
     /**
      * An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.
      */
     idle?: Duration;
   }
+  export type TextFormat = string;
   export type Timestamp = Date;
   export interface TlsValidationContext {
     /**
-     * A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.
+     * A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context. If you don't specify SANs on the terminating mesh endpoint, the Envoy proxy for that node doesn't verify the SAN on a peer client certificate. If you don't specify SANs on the originating mesh endpoint, the SAN on the certificate provided by the terminating endpoint must match the mesh endpoint service discovery configuration. Since SPIRE vended certificates have a SPIFFE ID as a name, you must set the SAN since the name doesn't match the service discovery name.
      */
     subjectAlternativeNames?: SubjectAlternativeNames;
     /**
@@ -2257,7 +2335,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2302,7 +2380,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2334,7 +2412,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2362,7 +2440,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2390,7 +2468,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2418,7 +2496,7 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2517,6 +2595,10 @@ declare namespace AppMesh {
     virtualGatewayName: ResourceName;
   }
   export interface VirtualGatewayFileAccessLog {
+    /**
+     * The specified format for the virtual gateway access logs. It can be either json_format or text_format.
+     */
+    format?: LoggingFormat;
     /**
      * The file path to write access logs to. You can use /dev/stdout to send access logs to standard out and configure your Envoy container to use a log driver, such as awslogs, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.
      */
@@ -2703,11 +2785,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -2861,11 +2943,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -2963,11 +3045,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -3056,11 +3138,11 @@ declare namespace AppMesh {
      */
     meshName: ResourceName;
     /**
-     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
-     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     * The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -3086,6 +3168,10 @@ declare namespace AppMesh {
   }
   export type VirtualServiceStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
   export interface WeightedTarget {
+    /**
+     * The targeted port of the weighted object.
+     */
+    port?: ListenerPort;
     /**
      * The virtual node to associate with the weighted target.
      */

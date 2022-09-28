@@ -198,7 +198,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This action is deprecated. Please use <a>AttachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
+      "documentation": "<p>Attaches the specified policy to the specified principal (certificate or other credential).</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>AttachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
       "deprecated": true
     },
     "AttachSecurityProfile": {
@@ -1142,7 +1142,7 @@
           "shape": "ResourceAlreadyExistsException"
         }
       ],
-      "documentation": "<p>Creates a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplate</a> action.</p>"
+      "documentation": "<p>Creates a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplate</a> action.</p>"
     },
     "CreateProvisioningTemplateVersion": {
       "name": "CreateProvisioningTemplateVersion",
@@ -1179,7 +1179,7 @@
           "shape": "ConflictingResourceUpdateException"
         }
       ],
-      "documentation": "<p>Creates a new version of a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplateVersion</a> action.</p>"
+      "documentation": "<p>Creates a new version of a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplateVersion</a> action.</p>"
     },
     "CreateRoleAlias": {
       "name": "CreateRoleAlias",
@@ -2062,7 +2062,7 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>Deletes a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplate</a> action.</p>"
+      "documentation": "<p>Deletes a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplate</a> action.</p>"
     },
     "DeleteProvisioningTemplateVersion": {
       "name": "DeleteProvisioningTemplateVersion",
@@ -2099,7 +2099,7 @@
           "shape": "DeleteConflictException"
         }
       ],
-      "documentation": "<p>Deletes a fleet provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplateVersion</a> action.</p>"
+      "documentation": "<p>Deletes a provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplateVersion</a> action.</p>"
     },
     "DeleteRegistrationCode": {
       "name": "DeleteRegistrationCode",
@@ -3179,7 +3179,7 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>Returns information about a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplate</a> action.</p>"
+      "documentation": "<p>Returns information about a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplate</a> action.</p>"
     },
     "DescribeProvisioningTemplateVersion": {
       "name": "DescribeProvisioningTemplateVersion",
@@ -3210,7 +3210,7 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>Returns information about a fleet provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplateVersion</a> action.</p>"
+      "documentation": "<p>Returns information about a provisioning template version.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplateVersion</a> action.</p>"
     },
     "DescribeRoleAlias": {
       "name": "DescribeRoleAlias",
@@ -3523,7 +3523,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Removes the specified policy from the specified certificate.</p> <note> <p>This action is deprecated. Please use <a>DetachPolicy</a> instead.</p> </note> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPrincipalPolicy</a> action.</p>",
+      "documentation": "<p>Removes the specified policy from the specified certificate.</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>DetachPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPrincipalPolicy</a> action.</p>",
       "deprecated": true
     },
     "DetachSecurityProfile": {
@@ -5029,7 +5029,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists the principals associated with the specified policy.</p> <p> <b>Note:</b> This action is deprecated. Please use <a>ListTargetsForPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyPrincipals</a> action.</p>",
+      "documentation": "<p>Lists the principals associated with the specified policy.</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>ListTargetsForPolicy</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyPrincipals</a> action.</p>",
       "deprecated": true
     },
     "ListPolicyVersions": {
@@ -5098,7 +5098,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This action is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalPolicies</a> action.</p>",
+      "documentation": "<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This action is deprecated and works as expected for backward compatibility, but we won't add enhancements. Use <a>ListAttachedPolicies</a> instead.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalPolicies</a> action.</p>",
       "deprecated": true
     },
     "ListPrincipalThings": {
@@ -5164,7 +5164,7 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>A list of fleet provisioning template versions.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplateVersions</a> action.</p>"
+      "documentation": "<p>A list of provisioning template versions.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplateVersions</a> action.</p>"
     },
     "ListProvisioningTemplates": {
       "name": "ListProvisioningTemplates",
@@ -5192,7 +5192,7 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>Lists the fleet provisioning templates in your Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplates</a> action.</p>"
+      "documentation": "<p>Lists the provisioning templates in your Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplates</a> action.</p>"
     },
     "ListRoleAliases": {
       "name": "ListRoleAliases",
@@ -5839,6 +5839,9 @@
       },
       "errors": [
         {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "ResourceAlreadyExistsException"
         },
         {
@@ -5866,7 +5869,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Registers a CA certificate with IoT. This CA certificate can then be used to sign device certificates, which can be then registered with IoT. You can register up to 10 CA certificates per Amazon Web Services account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the <a>RegisterCertificate</a> action.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCACertificate</a> action.</p>"
+      "documentation": "<p>Registers a CA certificate with Amazon Web Services IoT Core. There is no limit to the number of CA certificates you can register in your Amazon Web Services account. You can register up to 10 CA certificates with the same <code>CA subject field</code> per Amazon Web Services account.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCACertificate</a> action.</p>"
     },
     "RegisterCertificate": {
       "name": "RegisterCertificate",
@@ -5909,7 +5912,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Registers a device certificate with IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCertificate</a> action.</p>"
+      "documentation": "<p>Registers a device certificate with IoT in the same <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\">certificate mode</a> as the signing CA. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RegisterCertificate</a> action.</p>"
     },
     "RegisterCertificateWithoutCA": {
       "name": "RegisterCertificateWithoutCA",
@@ -7105,7 +7108,7 @@
           "shape": "ConflictingResourceUpdateException"
         }
       ],
-      "documentation": "<p>Updates a fleet provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateProvisioningTemplate</a> action.</p>"
+      "documentation": "<p>Updates a provisioning template.</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateProvisioningTemplate</a> action.</p>"
     },
     "UpdateRoleAlias": {
       "name": "UpdateRoleAlias",
@@ -9163,6 +9166,10 @@
         "validity": {
           "shape": "CertificateValidity",
           "documentation": "<p>When the CA certificate is valid.</p>"
+        },
+        "certificateMode": {
+          "shape": "CertificateMode",
+          "documentation": "<p>The mode of the CA. </p> <p>All the device certificates that are registered using this CA will be registered in the same mode as the CA. For more information about certificate mode for device certificates, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\">certificate mode</a>.</p>"
         }
       },
       "documentation": "<p>Describes a CA certificate.</p>"
@@ -9374,7 +9381,7 @@
         },
         "certificateMode": {
           "shape": "CertificateMode",
-          "documentation": "<p>The mode of the certificate.</p>"
+          "documentation": "<p>The mode of the certificate.</p> <p> <code>DEFAULT</code>: A certificate in <code>DEFAULT</code> mode is either generated by Amazon Web Services IoT Core or registered with an issuer certificate authority (CA) in <code>DEFAULT</code> mode. Devices with certificates in <code>DEFAULT</code> mode aren't required to send the Server Name Indication (SNI) extension when connecting to Amazon Web Services IoT Core. However, to use features such as custom domains and VPC endpoints, we recommend that you use the SNI extension when connecting to Amazon Web Services IoT Core.</p> <p> <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p>"
         },
         "creationDate": {
           "shape": "DateType",
@@ -9443,7 +9450,7 @@
         },
         "certificateMode": {
           "shape": "CertificateMode",
-          "documentation": "<p>The mode of the certificate.</p>"
+          "documentation": "<p>The mode of the certificate.</p> <p> <code>DEFAULT</code>: A certificate in <code>DEFAULT</code> mode is either generated by Amazon Web Services IoT Core or registered with an issuer certificate authority (CA) in <code>DEFAULT</code> mode. Devices with certificates in <code>DEFAULT</code> mode aren't required to send the Server Name Indication (SNI) extension when connecting to Amazon Web Services IoT Core. However, to use features such as custom domains and VPC endpoints, we recommend that you use the SNI extension when connecting to Amazon Web Services IoT Core.</p> <p> <code>SNI_ONLY</code>: A certificate in <code>SNI_ONLY</code> mode is registered without an issuer CA. Devices with certificates in <code>SNI_ONLY</code> mode must send the SNI extension when connecting to Amazon Web Services IoT Core. </p> <p>For more information about the value for SNI extension, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html\">Transport security in IoT</a>.</p>"
         }
       },
       "documentation": "<p>Describes a certificate.</p>"
@@ -10666,23 +10673,23 @@
       "members": {
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>"
+          "documentation": "<p>The name of the provisioning template.</p>"
         },
         "description": {
           "shape": "TemplateDescription",
-          "documentation": "<p>The description of the fleet provisioning template.</p>"
+          "documentation": "<p>The description of the provisioning template.</p>"
         },
         "templateBody": {
           "shape": "TemplateBody",
-          "documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+          "documentation": "<p>The JSON formatted contents of the provisioning template.</p>"
         },
         "enabled": {
           "shape": "Enabled",
-          "documentation": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+          "documentation": "<p>True to enable the provisioning template, otherwise false.</p>"
         },
         "provisioningRoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.</p>"
+          "documentation": "<p>The role ARN for the role associated with the provisioning template. This IoT role grants permission to provision a device.</p>"
         },
         "preProvisioningHook": {
           "shape": "ProvisioningHook",
@@ -10690,7 +10697,11 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
+          "documentation": "<p>Metadata which can be used to manage the provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
+        },
+        "type": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type you define in a provisioning template. You can create a template with only one type. You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>. For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>. </p>"
         }
       }
     },
@@ -10703,11 +10714,11 @@
         },
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>"
+          "documentation": "<p>The name of the provisioning template.</p>"
         },
         "defaultVersionId": {
           "shape": "TemplateVersionId",
-          "documentation": "<p>The default version of the fleet provisioning template.</p>"
+          "documentation": "<p>The default version of the provisioning template.</p>"
         }
       }
     },
@@ -10720,13 +10731,13 @@
       "members": {
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "documentation": "<p>The name of the provisioning template.</p>",
           "location": "uri",
           "locationName": "templateName"
         },
         "templateBody": {
           "shape": "TemplateBody",
-          "documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+          "documentation": "<p>The JSON formatted contents of the provisioning template.</p>"
         },
         "setAsDefault": {
           "shape": "SetAsDefault",
@@ -10745,15 +10756,15 @@
         },
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>"
+          "documentation": "<p>The name of the provisioning template.</p>"
         },
         "versionId": {
           "shape": "TemplateVersionId",
-          "documentation": "<p>The version of the fleet provisioning template.</p>"
+          "documentation": "<p>The version of the provisioning template.</p>"
         },
         "isDefaultVersion": {
           "shape": "IsDefaultVersion",
-          "documentation": "<p>True if the fleet provisioning template version is the default version, otherwise false.</p>"
+          "documentation": "<p>True if the provisioning template version is the default version, otherwise false.</p>"
         }
       }
     },
@@ -11619,13 +11630,13 @@
       "members": {
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template version to delete.</p>",
+          "documentation": "<p>The name of the provisioning template version to delete.</p>",
           "location": "uri",
           "locationName": "templateName"
         },
         "versionId": {
           "shape": "TemplateVersionId",
-          "documentation": "<p>The fleet provisioning template version ID to delete.</p>",
+          "documentation": "<p>The provisioning template version ID to delete.</p>",
           "location": "uri",
           "locationName": "versionId"
         }
@@ -12744,7 +12755,7 @@
       "members": {
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "documentation": "<p>The name of the provisioning template.</p>",
           "location": "uri",
           "locationName": "templateName"
         }
@@ -12755,23 +12766,23 @@
       "members": {
         "templateArn": {
           "shape": "TemplateArn",
-          "documentation": "<p>The ARN of the fleet provisioning template.</p>"
+          "documentation": "<p>The ARN of the provisioning template.</p>"
         },
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>"
+          "documentation": "<p>The name of the provisioning template.</p>"
         },
         "description": {
           "shape": "TemplateDescription",
-          "documentation": "<p>The description of the fleet provisioning template.</p>"
+          "documentation": "<p>The description of the provisioning template.</p>"
         },
         "creationDate": {
           "shape": "DateType",
-          "documentation": "<p>The date when the fleet provisioning template was created.</p>"
+          "documentation": "<p>The date when the provisioning template was created.</p>"
         },
         "lastModifiedDate": {
           "shape": "DateType",
-          "documentation": "<p>The date when the fleet provisioning template was last modified.</p>"
+          "documentation": "<p>The date when the provisioning template was last modified.</p>"
         },
         "defaultVersionId": {
           "shape": "TemplateVersionId",
@@ -12779,11 +12790,11 @@
         },
         "templateBody": {
           "shape": "TemplateBody",
-          "documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+          "documentation": "<p>The JSON formatted contents of the provisioning template.</p>"
         },
         "enabled": {
           "shape": "Enabled",
-          "documentation": "<p>True if the fleet provisioning template is enabled, otherwise false.</p>"
+          "documentation": "<p>True if the provisioning template is enabled, otherwise false.</p>"
         },
         "provisioningRoleArn": {
           "shape": "RoleArn",
@@ -12792,6 +12803,10 @@
         "preProvisioningHook": {
           "shape": "ProvisioningHook",
           "documentation": "<p>Gets information about a pre-provisioned hook.</p>"
+        },
+        "type": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type you define in a provisioning template. You can create a template with only one type. You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>. For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>. </p>"
         }
       }
     },
@@ -12810,7 +12825,7 @@
         },
         "versionId": {
           "shape": "TemplateVersionId",
-          "documentation": "<p>The fleet provisioning template version ID.</p>",
+          "documentation": "<p>The provisioning template version ID.</p>",
           "location": "uri",
           "locationName": "versionId"
         }
@@ -12821,19 +12836,19 @@
       "members": {
         "versionId": {
           "shape": "TemplateVersionId",
-          "documentation": "<p>The fleet provisioning template version ID.</p>"
+          "documentation": "<p>The provisioning template version ID.</p>"
         },
         "creationDate": {
           "shape": "DateType",
-          "documentation": "<p>The date when the fleet provisioning template version was created.</p>"
+          "documentation": "<p>The date when the provisioning template version was created.</p>"
         },
         "templateBody": {
           "shape": "TemplateBody",
-          "documentation": "<p>The JSON formatted contents of the fleet provisioning template version.</p>"
+          "documentation": "<p>The JSON formatted contents of the provisioning template version.</p>"
         },
         "isDefaultVersion": {
           "shape": "IsDefaultVersion",
-          "documentation": "<p>True if the fleet provisioning template version is the default version.</p>"
+          "documentation": "<p>True if the provisioning template version is the default version.</p>"
         }
       }
     },
@@ -14894,6 +14909,16 @@
         "REBUILDING"
       ]
     },
+    "IndexingFilter": {
+      "type": "structure",
+      "members": {
+        "namedShadowNames": {
+          "shape": "NamedShadowNamesFilter",
+          "documentation": "<p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device Management Quotas</a> in the <i>Amazon Web Services General Reference</i>. </p>"
+        }
+      },
+      "documentation": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and specify your shadow names in <code>filter</code>.</p>"
+    },
     "InlineDocument": {
       "type": "string"
     },
@@ -15068,7 +15093,8 @@
           "documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p> <note> <p> <code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p> </note>"
         },
         "isConcurrent": {
-          "shape": "BooleanWrapperObject"
+          "shape": "BooleanWrapperObject",
+          "documentation": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.</p>"
         }
       },
       "documentation": "<p>The <code>Job</code> object contains details about a job.</p>"
@@ -15362,7 +15388,8 @@
           "documentation": "<p>The time, in seconds since the epoch, when the job completed.</p>"
         },
         "isConcurrent": {
-          "shape": "BooleanWrapperObject"
+          "shape": "BooleanWrapperObject",
+          "documentation": "<p>Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.</p>"
         }
       },
       "documentation": "<p>The job summary.</p>"
@@ -15991,6 +16018,12 @@
           "documentation": "<p>Determines the order of the results.</p>",
           "location": "querystring",
           "locationName": "isAscendingOrder"
+        },
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the provisioning template.</p>",
+          "location": "querystring",
+          "locationName": "templateName"
         }
       },
       "documentation": "<p>Input for the ListCACertificates operation.</p>"
@@ -16972,7 +17005,7 @@
       "members": {
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "documentation": "<p>The name of the provisioning template.</p>",
           "location": "uri",
           "locationName": "templateName"
         },
@@ -16995,7 +17028,7 @@
       "members": {
         "versions": {
           "shape": "ProvisioningTemplateVersionListing",
-          "documentation": "<p>The list of fleet provisioning template versions.</p>"
+          "documentation": "<p>The list of provisioning template versions.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -17025,7 +17058,7 @@
       "members": {
         "templates": {
           "shape": "ProvisioningTemplateListing",
-          "documentation": "<p>A list of fleet provisioning templates</p>"
+          "documentation": "<p>A list of provisioning templates</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -18374,6 +18407,12 @@
         "ON"
       ]
     },
+    "NamedShadowNamesFilter": {
+      "type": "list",
+      "member": {
+        "shape": "ShadowName"
+      }
+    },
     "NamespaceId": {
       "type": "string",
       "max": 64,
@@ -18885,7 +18924,7 @@
       "members": {
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p>"
+          "documentation": "<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html\">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>"
         },
         "expiresInSec": {
           "shape": "ExpiresInSec",
@@ -18972,30 +19011,34 @@
       "members": {
         "templateArn": {
           "shape": "TemplateArn",
-          "documentation": "<p>The ARN of the fleet provisioning template.</p>"
+          "documentation": "<p>The ARN of the provisioning template.</p>"
         },
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>"
+          "documentation": "<p>The name of the provisioning template.</p>"
         },
         "description": {
           "shape": "TemplateDescription",
-          "documentation": "<p>The description of the fleet provisioning template.</p>"
+          "documentation": "<p>The description of the provisioning template.</p>"
         },
         "creationDate": {
           "shape": "DateType",
-          "documentation": "<p>The date when the fleet provisioning template summary was created.</p>"
+          "documentation": "<p>The date when the provisioning template summary was created.</p>"
         },
         "lastModifiedDate": {
           "shape": "DateType",
-          "documentation": "<p>The date when the fleet provisioning template summary was last modified.</p>"
+          "documentation": "<p>The date when the provisioning template summary was last modified.</p>"
         },
         "enabled": {
           "shape": "Enabled",
           "documentation": "<p>True if the fleet provision template is enabled, otherwise false.</p>"
+        },
+        "type": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type you define in a provisioning template. You can create a template with only one type. You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>. For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>. </p>"
         }
       },
-      "documentation": "<p>A summary of information about a fleet provisioning template.</p>"
+      "documentation": "<p>A summary of information about a provisioning template.</p>"
     },
     "ProvisioningTemplateVersionListing": {
       "type": "list",
@@ -19012,11 +19055,11 @@
         },
         "creationDate": {
           "shape": "DateType",
-          "documentation": "<p>The date when the fleet provisioning template version was created</p>"
+          "documentation": "<p>The date when the provisioning template version was created</p>"
         },
         "isDefaultVersion": {
           "shape": "IsDefaultVersion",
-          "documentation": "<p>True if the fleet provisioning template version is the default version, otherwise false.</p>"
+          "documentation": "<p>True if the provisioning template version is the default version, otherwise false.</p>"
         }
       },
       "documentation": "<p>A summary of information about a fleet provision template version.</p>"
@@ -19197,8 +19240,7 @@
     "RegisterCACertificateRequest": {
       "type": "structure",
       "required": [
-        "caCertificate",
-        "verificationCertificate"
+        "caCertificate"
       ],
       "members": {
         "caCertificate": {
@@ -19207,7 +19249,7 @@
         },
         "verificationCertificate": {
           "shape": "CertificatePem",
-          "documentation": "<p>The private key verification certificate.</p>"
+          "documentation": "<p>The private key verification certificate. If <code>certificateMode</code> is <code>SNI_ONLY</code>, the <code>verificationCertificate</code> field must be empty. If <code>certificateMode</code> is <code>DEFAULT</code> or not provided, the <code>verificationCertificate</code> field must not be empty. </p>"
         },
         "setAsActive": {
           "shape": "SetAsActive",
@@ -19228,6 +19270,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Metadata which can be used to manage the CA certificate.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
+        },
+        "certificateMode": {
+          "shape": "CertificateMode",
+          "documentation": "<p>Describes the certificate mode in which the Certificate Authority (CA) will be registered. If the <code>verificationCertificate</code> field is not provided, set <code>certificateMode</code> to be <code>SNI_ONLY</code>. If the <code>verificationCertificate</code> field is provided, set <code>certificateMode</code> to be <code>DEFAULT</code>. When <code>certificateMode</code> is not provided, it defaults to <code>DEFAULT</code>. All the device certificates that are registered using this CA will be registered in the same certificate mode as the CA. For more information about certificate mode for device certificates, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode\"> certificate mode</a>. </p>"
         }
       },
       "documentation": "<p>The input to the RegisterCACertificate operation.</p>"
@@ -19362,6 +19408,10 @@
         "roleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The ARN of the role.</p>"
+        },
+        "templateName": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the provisioning template.</p>"
         }
       },
       "documentation": "<p>The registration configuration.</p>"
@@ -19910,7 +19960,7 @@
         },
         "queryString": {
           "shape": "QueryString",
-          "documentation": "<p>The search query string.</p>"
+          "documentation": "<p>The search query string. For more information about the search query syntax, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query syntax</a>.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -20203,6 +20253,12 @@
           "documentation": "<p>If true all logs are disabled. The default is false.</p>"
         }
       }
+    },
+    "ShadowName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9:_-]+"
     },
     "SigV4Authorization": {
       "type": "structure",
@@ -20832,7 +20888,7 @@
     "TagValue": {
       "type": "string",
       "max": 256,
-      "min": 1
+      "min": 0
     },
     "Target": {
       "type": "string"
@@ -20959,6 +21015,13 @@
       "max": 36,
       "min": 1,
       "pattern": "^[0-9A-Za-z_-]+$"
+    },
+    "TemplateType": {
+      "type": "string",
+      "enum": [
+        "FLEET_PROVISIONING",
+        "JITP"
+      ]
     },
     "TemplateVersionId": {
       "type": "integer"
@@ -21349,6 +21412,10 @@
         "customFields": {
           "shape": "Fields",
           "documentation": "<p>Contains custom field names and their data type.</p>"
+        },
+        "filter": {
+          "shape": "IndexingFilter",
+          "documentation": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and specify your shadow names in <code>filter</code>.</p>"
         }
       },
       "documentation": "<p>The thing indexing configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html\">Managing Thing Indexing</a>.</p>"
@@ -22471,17 +22538,17 @@
       "members": {
         "templateName": {
           "shape": "TemplateName",
-          "documentation": "<p>The name of the fleet provisioning template.</p>",
+          "documentation": "<p>The name of the provisioning template.</p>",
           "location": "uri",
           "locationName": "templateName"
         },
         "description": {
           "shape": "TemplateDescription",
-          "documentation": "<p>The description of the fleet provisioning template.</p>"
+          "documentation": "<p>The description of the provisioning template.</p>"
         },
         "enabled": {
           "shape": "Enabled",
-          "documentation": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+          "documentation": "<p>True to enable the provisioning template, otherwise false.</p>"
         },
         "defaultVersionId": {
           "shape": "TemplateVersionId",

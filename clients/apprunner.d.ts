@@ -418,7 +418,7 @@ declare namespace AppRunner {
      */
     SourceCodeVersion: SourceCodeVersion;
     /**
-     * Configuration for building and running the service from a source code repository.
+     * Configuration for building and running the service from a source code repository.   CodeConfiguration is required only for CreateService request. 
      */
     CodeConfiguration?: CodeConfiguration;
   }
@@ -593,7 +593,7 @@ declare namespace AppRunner {
      */
     VpcConnectorName: VpcConnectorName;
     /**
-     * A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.
+     * A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.   App Runner currently only provides support for IPv4.  
      */
     Subnets: StringList;
     /**
@@ -1181,7 +1181,7 @@ declare namespace AppRunner {
     OperationId?: UUID;
   }
   export type RoleArn = string;
-  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|string;
+  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|string;
   export type RuntimeEnvironmentVariables = {[key: string]: RuntimeEnvironmentVariablesValue};
   export type RuntimeEnvironmentVariablesKey = string;
   export type RuntimeEnvironmentVariablesValue = string;

@@ -4997,6 +4997,18 @@ declare namespace Pinpoint {
      * The channel-specific configurations for the journey.
      */
     JourneyChannelSettings?: JourneyChannelSettings;
+    /**
+     * Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+     */
+    SendingSchedule?: __boolean;
+    /**
+     * The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    OpenHours?: OpenHours;
+    /**
+     * The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    ClosedDays?: ClosedDays;
   }
   export interface JourneySMSMessage {
     /**
@@ -7268,6 +7280,18 @@ declare namespace Pinpoint {
      * The channel-specific configurations for the journey.
      */
     JourneyChannelSettings?: JourneyChannelSettings;
+    /**
+     * Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+     */
+    SendingSchedule?: __boolean;
+    /**
+     * The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    OpenHours?: OpenHours;
+    /**
+     * The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     */
+    ClosedDays?: ClosedDays;
   }
   export interface WriteSegmentRequest {
     /**
@@ -7366,6 +7390,78 @@ declare namespace Pinpoint {
   export type MapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __timestampIso8601 = Date;
+  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export interface OpenHoursRule {
+    /**
+     * Local start time in ISO 8601 format.
+     */
+    StartTime?: __string;
+    /**
+     * Local start time in ISO 8601 format.
+     */
+    EndTime?: __string;
+  }
+  export type ListOfOpenHoursRules = OpenHoursRule[];
+  export type MapOfListOfOpenHoursRules = {[key: string]: ListOfOpenHoursRules};
+  export interface OpenHours {
+    /**
+     * Rules for Email Channel.
+     */
+    EMAIL?: MapOfListOfOpenHoursRules;
+    /**
+     * Rules for SMS Channel.
+     */
+    SMS?: MapOfListOfOpenHoursRules;
+    /**
+     * Rules for Push Channel.
+     */
+    PUSH?: MapOfListOfOpenHoursRules;
+    /**
+     * Rules for Voice Channel.
+     */
+    VOICE?: MapOfListOfOpenHoursRules;
+    /**
+     * Rules for Custom Channel.
+     */
+    CUSTOM?: MapOfListOfOpenHoursRules;
+  }
+  export interface ClosedDaysRule {
+    /**
+     * Name of the rule.
+     */
+    Name?: __string;
+    /**
+     * Start Datetime in ISO 8601 format.
+     */
+    StartDateTime?: __string;
+    /**
+     * End Datetime in ISO 8601 format.
+     */
+    EndDateTime?: __string;
+  }
+  export type ListOfClosedDaysRules = ClosedDaysRule[];
+  export interface ClosedDays {
+    /**
+     * Rules for Email Channel.
+     */
+    EMAIL?: ListOfClosedDaysRules;
+    /**
+     * Rules for SMS Channel.
+     */
+    SMS?: ListOfClosedDaysRules;
+    /**
+     * Rules for Push Channel.
+     */
+    PUSH?: ListOfClosedDaysRules;
+    /**
+     * Rules for Voice Channel.
+     */
+    VOICE?: ListOfClosedDaysRules;
+    /**
+     * Rules for Custom Channel.
+     */
+    CUSTOM?: ListOfClosedDaysRules;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

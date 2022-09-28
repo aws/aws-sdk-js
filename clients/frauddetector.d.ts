@@ -100,11 +100,11 @@ declare class FraudDetector extends Service {
    */
   createVariable(callback?: (err: AWSError, data: FraudDetector.Types.CreateVariableResult) => void): Request<FraudDetector.Types.CreateVariableResult, AWSError>;
   /**
-   * Deletes data that was batch imported to Amazon Fraud Detector. 
+   * Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. 
    */
   deleteBatchImportJob(params: FraudDetector.Types.DeleteBatchImportJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchImportJobResult) => void): Request<FraudDetector.Types.DeleteBatchImportJobResult, AWSError>;
   /**
-   * Deletes data that was batch imported to Amazon Fraud Detector. 
+   * Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. 
    */
   deleteBatchImportJob(callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchImportJobResult) => void): Request<FraudDetector.Types.DeleteBatchImportJobResult, AWSError>;
   /**
@@ -520,11 +520,11 @@ declare class FraudDetector extends Service {
    */
   updateModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionResult) => void): Request<FraudDetector.Types.UpdateModelVersionResult, AWSError>;
   /**
-   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
+   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED.   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
    */
   updateModelVersionStatus(params: FraudDetector.Types.UpdateModelVersionStatusRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionStatusResult) => void): Request<FraudDetector.Types.UpdateModelVersionStatusResult, AWSError>;
   /**
-   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
+   * Updates the status of a model version. You can perform the following status updates:   Change the TRAINING_IN_PROGRESS status to TRAINING_CANCELLED.   Change the TRAINING_COMPLETE status to ACTIVE.   Change ACTIVE to INACTIVE.  
    */
   updateModelVersionStatus(callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelVersionStatusResult) => void): Request<FraudDetector.Types.UpdateModelVersionStatusResult, AWSError>;
   /**
@@ -553,6 +553,71 @@ declare class FraudDetector extends Service {
   updateVariable(callback?: (err: AWSError, data: FraudDetector.Types.UpdateVariableResult) => void): Request<FraudDetector.Types.UpdateVariableResult, AWSError>;
 }
 declare namespace FraudDetector {
+  export interface ATIMetricDataPoint {
+    /**
+     *  The challenge rate. This indicates the percentage of login events that the model recommends to challenge such as one-time password, multi-factor authentication, and investigations. 
+     */
+    cr?: float;
+    /**
+     *  The anomaly discovery rate. This metric quantifies the percentage of anomalies that can be detected by the model at the selected score threshold. A lower score threshold increases the percentage of anomalies captured by the model, but would also require challenging a larger percentage of login events, leading to a higher customer friction. 
+     */
+    adr?: float;
+    /**
+     *  The model's threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. 
+     */
+    threshold?: float;
+    /**
+     *  The account takeover discovery rate. This metric quantifies the percentage of account compromise events that can be detected by the model at the selected score threshold. This metric is only available if 50 or more entities with at-least one labeled account takeover event is present in the ingested dataset. 
+     */
+    atodr?: float;
+  }
+  export type ATIMetricDataPointsList = ATIMetricDataPoint[];
+  export interface ATIModelPerformance {
+    /**
+     *  The anomaly separation index (ASI) score. This metric summarizes the overall ability of the model to separate anomalous activities from the normal behavior. Depending on the business, a large fraction of these anomalous activities can be malicious and correspond to the account takeover attacks. A model with no separability power will have the lowest possible ASI score of 0.5, whereas the a model with a high separability power will have the highest possible ASI score of 1.0 
+     */
+    asi?: float;
+  }
+  export interface ATITrainingMetricsValue {
+    /**
+     *  The model's performance metrics data points. 
+     */
+    metricDataPoints?: ATIMetricDataPointsList;
+    /**
+     *  The model's overall performance scores. 
+     */
+    modelPerformance?: ATIModelPerformance;
+  }
+  export interface AggregatedLogOddsMetric {
+    /**
+     *  The names of all the variables. 
+     */
+    variableNames: ListOfStrings;
+    /**
+     *  The relative importance of the variables in the list to the other event variable. 
+     */
+    aggregatedVariablesImportance: float;
+  }
+  export interface AggregatedVariablesImpactExplanation {
+    /**
+     *  The names of all the event variables that were used to derive the aggregated variables. 
+     */
+    eventVariableNames?: ListOfStrings;
+    /**
+     *  The relative impact of the aggregated variables in terms of magnitude on the prediction scores. 
+     */
+    relativeImpact?: string;
+    /**
+     *  The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from -infinity to +infinity.   A positive value indicates that the variables drove the risk score up.   A negative value indicates that the variables drove the risk score down.  
+     */
+    logOddsImpact?: float;
+  }
+  export interface AggregatedVariablesImportanceMetrics {
+    /**
+     *  List of variables' metrics. 
+     */
+    logOddsMetrics?: ListOfAggregatedLogOddsMetrics;
+  }
   export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED"|string;
   export interface BatchCreateVariableError {
     /**
@@ -1004,7 +1069,7 @@ declare namespace FraudDetector {
   export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|string;
   export interface DataValidationMetrics {
     /**
-     * The file-specific model training validation messages.
+     * The file-specific model training data validation messages.
      */
     fileLevelMessages?: fileValidationMessageList;
     /**
@@ -1790,7 +1855,7 @@ declare namespace FraudDetector {
      */
     detectorVersionId: wholeNumberVersionString;
     /**
-     *  The timestamp that defines when the prediction was generated. 
+     *  The timestamp that defines when the prediction was generated. The timestamp must be specified using ISO 8601 standard in UTC. We recommend calling ListEventPredictions first, and using the predictionTimestamp value in the response to provide an accurate prediction timestamp value.
      */
     predictionTimestamp: time;
   }
@@ -2231,7 +2296,7 @@ declare namespace FraudDetector {
     /**
      * The label mapper maps the Amazon Fraud Detector supported model classification labels (FRAUD, LEGIT) to the appropriate event type labels. For example, if "FRAUD" and "LEGIT" are Amazon Fraud Detector supported labels, this mapper could be: {"FRAUD" =&gt; ["0"], "LEGIT" =&gt; ["1"]} or {"FRAUD" =&gt; ["false"], "LEGIT" =&gt; ["true"]} or {"FRAUD" =&gt; ["fraud", "abuse"], "LEGIT" =&gt; ["legit", "safe"]}. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. 
      */
-    labelMapper: labelMapper;
+    labelMapper?: labelMapper;
     /**
      * The action to take for unlabeled events.
      */
@@ -2278,6 +2343,8 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export type ListOfAggregatedLogOddsMetrics = AggregatedLogOddsMetric[];
+  export type ListOfAggregatedVariablesImpactExplanations = AggregatedVariablesImpactExplanation[];
   export type ListOfEvaluatedExternalModels = EvaluatedExternalModel[];
   export type ListOfEvaluatedModelVersions = EvaluatedModelVersion[];
   export type ListOfEventPredictionSummaries = EventPredictionSummary[];
@@ -2438,7 +2505,7 @@ declare namespace FraudDetector {
     scores?: ModelPredictionMap;
   }
   export type ModelSource = "SAGEMAKER"|string;
-  export type ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"|"TRANSACTION_FRAUD_INSIGHTS"|string;
+  export type ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"|"TRANSACTION_FRAUD_INSIGHTS"|"ACCOUNT_TAKEOVER_INSIGHTS"|string;
   export interface ModelVersion {
     /**
      * The model ID.
@@ -2506,6 +2573,10 @@ declare namespace FraudDetector {
      * The model version ARN.
      */
     arn?: fraudDetectorArn;
+    /**
+     *  The training result details. The details include the relative importance of the variables. 
+     */
+    trainingResultV2?: TrainingResultV2;
   }
   export interface ModelVersionEvaluation {
     /**
@@ -2524,6 +2595,41 @@ declare namespace FraudDetector {
   export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|"TRAINING_CANCELLED"|string;
   export type NameList = string[];
   export type NonEmptyListOfStrings = string[];
+  export interface OFIMetricDataPoint {
+    /**
+     *  The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud. 
+     */
+    fpr?: float;
+    /**
+     *  The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent. 
+     */
+    precision?: float;
+    /**
+     *  The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate. 
+     */
+    tpr?: float;
+    /**
+     *  The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. 
+     */
+    threshold?: float;
+  }
+  export type OFIMetricDataPointsList = OFIMetricDataPoint[];
+  export interface OFIModelPerformance {
+    /**
+     *  The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. 
+     */
+    auc?: float;
+  }
+  export interface OFITrainingMetricsValue {
+    /**
+     *  The model's performance metrics data points. 
+     */
+    metricDataPoints?: OFIMetricDataPointsList;
+    /**
+     *  The model's overall performance score. 
+     */
+    modelPerformance?: OFIModelPerformance;
+  }
   export interface Outcome {
     /**
      * The outcome name.
@@ -2553,6 +2659,10 @@ declare namespace FraudDetector {
      *  The details of the event variable's impact on the prediction score. 
      */
     variableImpactExplanations?: listOfVariableImpactExplanations;
+    /**
+     *  The details of the aggregated variables impact on the prediction score.  Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are IP address and user.
+     */
+    aggregatedVariablesImpactExplanations?: ListOfAggregatedVariablesImpactExplanations;
   }
   export interface PredictionTimeRange {
     /**
@@ -2806,6 +2916,41 @@ declare namespace FraudDetector {
   }
   export interface SendEventResult {
   }
+  export interface TFIMetricDataPoint {
+    /**
+     *  The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud. 
+     */
+    fpr?: float;
+    /**
+     *  The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent. 
+     */
+    precision?: float;
+    /**
+     *  The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate. 
+     */
+    tpr?: float;
+    /**
+     *  The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. 
+     */
+    threshold?: float;
+  }
+  export type TFIMetricDataPointsList = TFIMetricDataPoint[];
+  export interface TFIModelPerformance {
+    /**
+     *  The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. 
+     */
+    auc?: float;
+  }
+  export interface TFITrainingMetricsValue {
+    /**
+     *  The model's performance metrics data points. 
+     */
+    metricDataPoints?: TFIMetricDataPointsList;
+    /**
+     *  The model performance score. 
+     */
+    modelPerformance?: TFIModelPerformance;
+  }
   export interface Tag {
     /**
      * A tag key.
@@ -2834,7 +2979,7 @@ declare namespace FraudDetector {
      * The training data schema variables.
      */
     modelVariables: ListOfStrings;
-    labelSchema: LabelSchema;
+    labelSchema?: LabelSchema;
   }
   export type TrainingDataSourceEnum = "EXTERNAL_EVENTS"|"INGESTED_EVENTS"|string;
   export interface TrainingMetrics {
@@ -2846,6 +2991,20 @@ declare namespace FraudDetector {
      * The data points details.
      */
     metricDataPoints?: metricDataPointsList;
+  }
+  export interface TrainingMetricsV2 {
+    /**
+     *  The Online Fraud Insights (OFI) model training metric details. 
+     */
+    ofi?: OFITrainingMetricsValue;
+    /**
+     *  The Transaction Fraud Insights (TFI) model training metric details. 
+     */
+    tfi?: TFITrainingMetricsValue;
+    /**
+     *  The Account Takeover Insights (ATI) model training metric details. 
+     */
+    ati?: ATITrainingMetricsValue;
   }
   export interface TrainingResult {
     /**
@@ -2860,6 +3019,18 @@ declare namespace FraudDetector {
      * The variable importance metrics.
      */
     variableImportanceMetrics?: VariableImportanceMetrics;
+  }
+  export interface TrainingResultV2 {
+    dataValidationMetrics?: DataValidationMetrics;
+    /**
+     *  The training metric details. 
+     */
+    trainingMetricsV2?: TrainingMetricsV2;
+    variableImportanceMetrics?: VariableImportanceMetrics;
+    /**
+     *  The variable importance metrics of the aggregated variables.  Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are IP address and user.
+     */
+    aggregatedVariablesImportanceMetrics?: AggregatedVariablesImportanceMetrics;
   }
   export type UnlabeledEventsTreatment = "IGNORE"|"FRAUD"|"LEGIT"|string;
   export interface UntagResourceRequest {
@@ -3212,7 +3383,7 @@ declare namespace FraudDetector {
   export type identifier = string;
   export type integer = number;
   export type labelList = Label[];
-  export type labelMapper = {[key: string]: NonEmptyListOfStrings};
+  export type labelMapper = {[key: string]: ListOfStrings};
   export type labelsMaxResults = number;
   export type listOfEntities = Entity[];
   export type listOfVariableImpactExplanations = VariableImpactExplanation[];

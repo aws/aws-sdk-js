@@ -90,6 +90,44 @@
       ],
       "documentation": "<p>Associates an Amazon VPC with a private hosted zone. </p> <important> <p>To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public hosted zone into a private hosted zone.</p> </important> <note> <p>If you want to associate a VPC that was created by using one Amazon Web Services account with a private hosted zone that was created by using a different account, the Amazon Web Services account that created the private hosted zone must first submit a <code>CreateVPCAssociationAuthorization</code> request. Then the account that created the VPC must submit an <code>AssociateVPCWithHostedZone</code> request.</p> </note> <note> <p>When granting access, the hosted zone and the Amazon VPC must belong to the same partition. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition.</p> <p>The following are the supported partitions:</p> <ul> <li> <p> <code>aws</code> - Amazon Web Services Regions</p> </li> <li> <p> <code>aws-cn</code> - China Regions</p> </li> <li> <p> <code>aws-us-gov</code> - Amazon Web Services GovCloud (US) Region</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Access Management</a> in the <i>Amazon Web Services General Reference</i>.</p> </note>"
     },
+    "ChangeCidrCollection": {
+      "name": "ChangeCidrCollection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/cidrcollection/{CidrCollectionId}"
+      },
+      "input": {
+        "shape": "ChangeCidrCollectionRequest",
+        "locationName": "ChangeCidrCollectionRequest",
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        }
+      },
+      "output": {
+        "shape": "ChangeCidrCollectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchCidrCollectionException"
+        },
+        {
+          "shape": "CidrCollectionVersionMismatchException"
+        },
+        {
+          "shape": "InvalidInput"
+        },
+        {
+          "shape": "CidrBlockInUseException"
+        },
+        {
+          "shape": "LimitsExceeded"
+        },
+        {
+          "shape": "ConcurrentModification"
+        }
+      ],
+      "documentation": "<p>Creates, changes, or deletes CIDR blocks within a collection. Contains authoritative IP information mapping blocks to one or multiple locations.</p> <p>A change request can update multiple locations in a collection at a time, which is helpful if you want to move one or more CIDR blocks from one location to another in one transaction, without downtime. </p> <p> <b>Limits</b> </p> <p>The max number of CIDR blocks included in the request is 1000. As a result, big updates require multiple API calls.</p> <p> <b> PUT and DELETE_IF_EXISTS</b> </p> <p>Use <code>ChangeCidrCollection</code> to perform the following actions:</p> <ul> <li> <p> <code>PUT</code>: Create a CIDR block within the specified collection.</p> </li> <li> <p> <code> DELETE_IF_EXISTS</code>: Delete an existing CIDR block from the collection.</p> </li> </ul>"
+    },
     "ChangeResourceRecordSets": {
       "name": "ChangeResourceRecordSets",
       "http": {
@@ -159,6 +197,39 @@
         }
       ],
       "documentation": "<p>Adds, edits, or deletes tags for a health check or a hosted zone.</p> <p>For information about using tags for cost allocation, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>Billing and Cost Management User Guide</i>.</p>"
+    },
+    "CreateCidrCollection": {
+      "name": "CreateCidrCollection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2013-04-01/cidrcollection",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateCidrCollectionRequest",
+        "locationName": "CreateCidrCollectionRequest",
+        "xmlNamespace": {
+          "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
+        }
+      },
+      "output": {
+        "shape": "CreateCidrCollectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitsExceeded"
+        },
+        {
+          "shape": "InvalidInput"
+        },
+        {
+          "shape": "CidrCollectionAlreadyExistsException"
+        },
+        {
+          "shape": "ConcurrentModification"
+        }
+      ],
+      "documentation": "<p>Creates a CIDR collection in the current Amazon Web Services account.</p>"
     },
     "CreateHealthCheck": {
       "name": "CreateHealthCheck",
@@ -236,7 +307,7 @@
           "shape": "DelegationSetNotReusable"
         }
       ],
-      "documentation": "<p>Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs). </p> <important> <p>You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.</p> </important> <p>For more information about charges for hosted zones, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p> <p>Note the following:</p> <ul> <li> <p>You can't create a hosted zone for a top-level domain (TLD) such as .com.</p> </li> <li> <p>For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html\">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the <code>DelegationSetId</code> element.</p> </li> <li> <p>If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html\">Migrating DNS Service for an Existing Domain to Amazon Route 53</a> in the <i>Amazon Route 53 Developer Guide</i>. </p> </li> </ul> <p>When you submit a <code>CreateHostedZone</code> request, the initial status of the hosted zone is <code>PENDING</code>. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to <code>INSYNC</code>.</p> <p>The <code>CreateHostedZone</code> request requires the caller to have an <code>ec2:DescribeVpcs</code> permission.</p> <note> <p>When creating private hosted zones, the Amazon VPC must belong to the same partition where the hosted zone is created. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition.</p> <p>The following are the supported partitions:</p> <ul> <li> <p> <code>aws</code> - Amazon Web Services Regions</p> </li> <li> <p> <code>aws-cn</code> - China Regions</p> </li> <li> <p> <code>aws-us-gov</code> - Amazon Web Services GovCloud (US) Region</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Access Management</a> in the <i>Amazon Web Services General Reference</i>.</p> </note>"
+      "documentation": "<p>Creates a new public or private hosted zone. You create records in a public hosted zone to define how you want to route traffic on the internet for a domain, such as example.com, and its subdomains (apex.example.com, acme.example.com). You create records in a private hosted zone to define how you want to route traffic for a domain and its subdomains within one or more Amazon Virtual Private Clouds (Amazon VPCs). </p> <important> <p>You can't convert a public hosted zone to a private hosted zone or vice versa. Instead, you must create a new hosted zone with the same name and create new resource record sets.</p> </important> <p>For more information about charges for hosted zones, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p> <p>Note the following:</p> <ul> <li> <p>You can't create a hosted zone for a top-level domain (TLD) such as .com.</p> </li> <li> <p>For public hosted zones, Route 53 automatically creates a default SOA record and four NS records for the zone. For more information about SOA and NS records, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html\">NS and SOA Records that Route 53 Creates for a Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If you want to use the same name servers for multiple public hosted zones, you can optionally associate a reusable delegation set with the hosted zone. See the <code>DelegationSetId</code> element.</p> </li> <li> <p>If your domain is registered with a registrar other than Route 53, you must update the name servers with your registrar to make Route 53 the DNS service for the domain. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html\">Migrating DNS Service for an Existing Domain to Amazon Route 53</a> in the <i>Amazon Route 53 Developer Guide</i>. </p> </li> </ul> <p>When you submit a <code>CreateHostedZone</code> request, the initial status of the hosted zone is <code>PENDING</code>. For public hosted zones, this means that the NS and SOA records are not yet available on all Route 53 DNS servers. When the NS and SOA records are available, the status of the zone changes to <code>INSYNC</code>.</p> <p>The <code>CreateHostedZone</code> request requires the caller to have an <code>ec2:DescribeVpcs</code> permission.</p> <note> <p>When creating private hosted zones, the Amazon VPC must belong to the same partition where the hosted zone is created. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition.</p> <p>The following are the supported partitions:</p> <ul> <li> <p> <code>aws</code> - Amazon Web Services Regions</p> </li> <li> <p> <code>aws-cn</code> - China Regions</p> </li> <li> <p> <code>aws-us-gov</code> - Amazon Web Services GovCloud (US) Region</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Access Management</a> in the <i>Amazon Web Services General Reference</i>.</p> </note>"
     },
     "CreateKeySigningKey": {
       "name": "CreateKeySigningKey",
@@ -547,6 +618,34 @@
       ],
       "documentation": "<p>Deactivates a key-signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to <code>INACTIVE</code>.</p>"
     },
+    "DeleteCidrCollection": {
+      "name": "DeleteCidrCollection",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2013-04-01/cidrcollection/{CidrCollectionId}"
+      },
+      "input": {
+        "shape": "DeleteCidrCollectionRequest"
+      },
+      "output": {
+        "shape": "DeleteCidrCollectionResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchCidrCollectionException"
+        },
+        {
+          "shape": "CidrCollectionInUseException"
+        },
+        {
+          "shape": "InvalidInput"
+        },
+        {
+          "shape": "ConcurrentModification"
+        }
+      ],
+      "documentation": "<p>Deletes a CIDR collection in the current Amazon Web Services account. The collection must be empty before it can be deleted.</p>"
+    },
     "DeleteHealthCheck": {
       "name": "DeleteHealthCheck",
       "http": {
@@ -601,7 +700,7 @@
           "shape": "InvalidDomainName"
         }
       ],
-      "documentation": "<p>Deletes a hosted zone.</p> <p>If the hosted zone was created by another service, such as Cloud Map, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html#delete-public-hosted-zone-created-by-another-service\">Deleting Public Hosted Zones That Were Created by Another Service</a> in the <i>Amazon Route 53 Developer Guide</i> for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.)</p> <p>If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.</p> <important> <p>If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.</p> </important> <p>If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainNameservers.html\">UpdateDomainNameservers</a> for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on \"free DNS service.\"</p> <p>You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a <code>HostedZoneNotEmpty</code> error. For information about deleting records from your hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html\">ChangeResourceRecordSets</a>.</p> <p>To verify that the hosted zone has been deleted, do one of the following:</p> <ul> <li> <p>Use the <code>GetHostedZone</code> action to request information about the hosted zone.</p> </li> <li> <p>Use the <code>ListHostedZones</code> action to get a list of the hosted zones associated with the current Amazon Web Services account.</p> </li> </ul>"
+      "documentation": "<p>Deletes a hosted zone.</p> <p>If the hosted zone was created by another service, such as Cloud Map, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html#delete-public-hosted-zone-created-by-another-service\">Deleting Public Hosted Zones That Were Created by Another Service</a> in the <i>Amazon Route 53 Developer Guide</i> for information about how to delete it. (The process is the same for public and private hosted zones that were created by another service.)</p> <p>If you want to keep your domain registration but you want to stop routing internet traffic to your website or web application, we recommend that you delete resource record sets in the hosted zone instead of deleting the hosted zone.</p> <important> <p>If you delete a hosted zone, you can't undelete it. You must create a new hosted zone and update the name servers for your domain registration, which can require up to 48 hours to take effect. (If you delegated responsibility for a subdomain to a hosted zone and you delete the child hosted zone, you must update the name servers in the parent hosted zone.) In addition, if you delete a hosted zone, someone could hijack the domain and route traffic to their own resources using your domain name.</p> </important> <p>If you want to avoid the monthly charge for the hosted zone, you can transfer DNS service for the domain to a free DNS service. When you transfer DNS service, you have to update the name servers for the domain registration. If the domain is registered with Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainNameservers.html\">UpdateDomainNameservers</a> for information about how to replace Route 53 name servers with name servers for the new DNS service. If the domain is registered with another registrar, use the method provided by the registrar to update name servers for the domain registration. For more information, perform an internet search on \"free DNS service.\"</p> <p>You can delete a hosted zone only if it contains only the default SOA record and NS resource record sets. If the hosted zone contains other resource record sets, you must delete them before you can delete the hosted zone. If you try to delete a hosted zone that contains other resource record sets, the request fails, and Route 53 returns a <code>HostedZoneNotEmpty</code> error. For information about deleting records from your hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html\">ChangeResourceRecordSets</a>.</p> <p>To verify that the hosted zone has been deleted, do one of the following:</p> <ul> <li> <p>Use the <code>GetHostedZone</code> action to request information about the hosted zone.</p> </li> <li> <p>Use the <code>ListHostedZones</code> action to get a list of the hosted zones associated with the current Amazon Web Services account.</p> </li> </ul>"
     },
     "DeleteKeySigningKey": {
       "name": "DeleteKeySigningKey",
@@ -1274,6 +1373,72 @@
       },
       "documentation": "<p>Gets the number of traffic policy instances that are associated with the current Amazon Web Services account.</p>"
     },
+    "ListCidrBlocks": {
+      "name": "ListCidrBlocks",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/cidrcollection/{CidrCollectionId}/cidrblocks"
+      },
+      "input": {
+        "shape": "ListCidrBlocksRequest"
+      },
+      "output": {
+        "shape": "ListCidrBlocksResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchCidrCollectionException"
+        },
+        {
+          "shape": "NoSuchCidrLocationException"
+        },
+        {
+          "shape": "InvalidInput"
+        }
+      ],
+      "documentation": "<p>Returns a paginated list of location objects and their CIDR blocks.</p>"
+    },
+    "ListCidrCollections": {
+      "name": "ListCidrCollections",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/cidrcollection"
+      },
+      "input": {
+        "shape": "ListCidrCollectionsRequest"
+      },
+      "output": {
+        "shape": "ListCidrCollectionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInput"
+        }
+      ],
+      "documentation": "<p>Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only).</p>"
+    },
+    "ListCidrLocations": {
+      "name": "ListCidrLocations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/cidrcollection/{CidrCollectionId}"
+      },
+      "input": {
+        "shape": "ListCidrLocationsRequest"
+      },
+      "output": {
+        "shape": "ListCidrLocationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchCidrCollectionException"
+        },
+        {
+          "shape": "InvalidInput"
+        }
+      ],
+      "documentation": "<p>Returns a paginated list of CIDR locations for the given collection (metadata only, does not include CIDR blocks).</p>"
+    },
     "ListGeoLocations": {
       "name": "ListGeoLocations",
       "http": {
@@ -1800,6 +1965,12 @@
     }
   },
   "shapes": {
+    "ARN": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": ".*\\S.*"
+    },
     "AWSAccountID": {
       "type": "string"
     },
@@ -1910,7 +2081,7 @@
           "documentation": "<p> <i>Applies only to alias, failover alias, geolocation alias, latency alias, and weighted alias resource record sets:</i> When <code>EvaluateTargetHealth</code> is <code>true</code>, an alias resource record set inherits the health of the referenced Amazon Web Services resource, such as an ELB load balancer or another resource record set in the hosted zone.</p> <p>Note the following:</p> <dl> <dt>CloudFront distributions</dt> <dd> <p>You can't set <code>EvaluateTargetHealth</code> to <code>true</code> when the alias target is a CloudFront distribution.</p> </dd> <dt>Elastic Beanstalk environments that have regionalized subdomains</dt> <dd> <p>If you specify an Elastic Beanstalk environment in <code>DNSName</code> and the environment contains an ELB load balancer, Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances that are registered with the load balancer. (An environment automatically contains an ELB load balancer if it includes more than one Amazon EC2 instance.) If you set <code>EvaluateTargetHealth</code> to <code>true</code> and either no Amazon EC2 instances are healthy or the load balancer itself is unhealthy, Route 53 routes queries to other available resources that are healthy, if any. </p> <p>If the environment contains a single Amazon EC2 instance, there are no special requirements.</p> </dd> <dt>ELB load balancers</dt> <dd> <p>Health checking behavior depends on the type of load balancer:</p> <ul> <li> <p> <b>Classic Load Balancers</b>: If you specify an ELB Classic Load Balancer in <code>DNSName</code>, Elastic Load Balancing routes queries only to the healthy Amazon EC2 instances that are registered with the load balancer. If you set <code>EvaluateTargetHealth</code> to <code>true</code> and either no EC2 instances are healthy or the load balancer itself is unhealthy, Route 53 routes queries to other resources.</p> </li> <li> <p> <b>Application and Network Load Balancers</b>: If you specify an ELB Application or Network Load Balancer and you set <code>EvaluateTargetHealth</code> to <code>true</code>, Route 53 routes queries to the load balancer based on the health of the target groups that are associated with the load balancer:</p> <ul> <li> <p>For an Application or Network Load Balancer to be considered healthy, every target group that contains targets must contain at least one healthy target. If any target group contains only unhealthy targets, the load balancer is considered unhealthy, and Route 53 routes queries to other resources.</p> </li> <li> <p>A target group that has no registered targets is considered unhealthy.</p> </li> </ul> </li> </ul> <note> <p>When you create a load balancer, you configure settings for Elastic Load Balancing health checks; they're not Route 53 health checks, but they perform a similar function. Do not create Route 53 health checks for the EC2 instances that you register with an ELB load balancer. </p> </note> </dd> <dt>S3 buckets</dt> <dd> <p>There are no special requirements for setting <code>EvaluateTargetHealth</code> to <code>true</code> when the alias target is an S3 bucket.</p> </dd> <dt>Other records in the same hosted zone</dt> <dd> <p>If the Amazon Web Services resource that you specify in <code>DNSName</code> is a record or a group of records (for example, a group of weighted records) but is not another alias record, we recommend that you associate a health check with all of the records in the alias target. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting\">What Happens When You Omit Health Checks?</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> </dd> </dl> <p>For more information and examples, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html\">Amazon Route 53 Health Checks and DNS Failover</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>"
         }
       },
-      "documentation": "<p> <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to.</p> <p>When creating resource record sets for a private hosted zone, note the following:</p> <ul> <li> <p>Creating geolocation alias resource record sets or latency alias resource record sets in a private hosted zone is unsupported.</p> </li> <li> <p>For information about creating failover resource record sets in a private hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a>.</p> </li> </ul>"
+      "documentation": "<p> <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to.</p> <p>When creating resource record sets for a private hosted zone, note the following:</p> <ul> <li> <p>For information about creating failover resource record sets in a private hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a>.</p> </li> </ul>"
     },
     "AssociateVPCComment": {
       "type": "string"
@@ -1994,6 +2165,46 @@
         }
       },
       "documentation": "<p>The information for a change request.</p>"
+    },
+    "ChangeCidrCollectionRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "Changes"
+      ],
+      "members": {
+        "Id": {
+          "shape": "UUID",
+          "documentation": "<p>The UUID of the CIDR collection to update.</p>",
+          "location": "uri",
+          "locationName": "CidrCollectionId"
+        },
+        "CollectionVersion": {
+          "shape": "CollectionVersion",
+          "documentation": "<p>A sequential counter that Amazon Route 53 sets to 1 when you create a collection and increments it by 1 each time you update the collection.</p> <p>We recommend that you use <code>ListCidrCollection</code> to get the current value of <code>CollectionVersion</code> for the collection that you want to update, and then include that value with the change request. This prevents Route 53 from overwriting an intervening update: </p> <ul> <li> <p>If the value in the request matches the value of <code>CollectionVersion</code> in the collection, Route 53 updates the collection.</p> </li> <li> <p>If the value of <code>CollectionVersion</code> in the collection is greater than the value in the request, the collection was changed after you got the version number. Route 53 does not update the collection, and it returns a <code>CidrCollectionVersionMismatch</code> error. </p> </li> </ul>"
+        },
+        "Changes": {
+          "shape": "CidrCollectionChanges",
+          "documentation": "<p> Information about changes to a CIDR collection.</p>"
+        }
+      }
+    },
+    "ChangeCidrCollectionResponse": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "ChangeId",
+          "documentation": "<p>The ID that is returned by <code>ChangeCidrCollection</code>. You can use it as input to <code>GetChange</code> to see if a CIDR collection change has propagated or not.</p>"
+        }
+      }
+    },
+    "ChangeId": {
+      "type": "string",
+      "max": 6500,
+      "min": 1
     },
     "ChangeInfo": {
       "type": "structure",
@@ -2119,6 +2330,137 @@
       },
       "max": 256
     },
+    "Cidr": {
+      "type": "string",
+      "max": 50,
+      "min": 1,
+      "pattern": ".*\\S.*"
+    },
+    "CidrBlockSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "CidrBlockSummary"
+      }
+    },
+    "CidrBlockSummary": {
+      "type": "structure",
+      "members": {
+        "CidrBlock": {
+          "shape": "Cidr",
+          "documentation": "<p>Value for the CIDR block.</p>"
+        },
+        "LocationName": {
+          "shape": "CidrLocationNameDefaultNotAllowed",
+          "documentation": "<p>The location name of the CIDR block.</p>"
+        }
+      },
+      "documentation": "<p>A complex type that lists the CIDR blocks.</p>"
+    },
+    "CidrCollection": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the collection. Can be used to reference the collection in IAM policy or in another Amazon Web Services account.</p>"
+        },
+        "Id": {
+          "shape": "UUID",
+          "documentation": "<p>The unique ID of the CIDR collection.</p>"
+        },
+        "Name": {
+          "shape": "CollectionName",
+          "documentation": "<p>The name of a CIDR collection.</p>"
+        },
+        "Version": {
+          "shape": "CollectionVersion",
+          "documentation": "<p>A sequential counter that Route 53 sets to 1 when you create a CIDR collection and increments by 1 each time you update settings for the CIDR collection.</p>"
+        }
+      },
+      "documentation": "<p>A complex type that identifies a CIDR collection.</p>"
+    },
+    "CidrCollectionChange": {
+      "type": "structure",
+      "required": [
+        "LocationName",
+        "Action",
+        "CidrList"
+      ],
+      "members": {
+        "LocationName": {
+          "shape": "CidrLocationNameDefaultNotAllowed",
+          "documentation": "<p>Name of the location that is associated with the CIDR collection.</p>"
+        },
+        "Action": {
+          "shape": "CidrCollectionChangeAction",
+          "documentation": "<p>CIDR collection change action. </p>"
+        },
+        "CidrList": {
+          "shape": "CidrList",
+          "documentation": "<p>List of CIDR blocks.</p>"
+        }
+      },
+      "documentation": "<p>A complex type that contains information about the CIDR collection change.</p>"
+    },
+    "CidrCollectionChangeAction": {
+      "type": "string",
+      "enum": [
+        "PUT",
+        "DELETE_IF_EXISTS"
+      ]
+    },
+    "CidrCollectionChanges": {
+      "type": "list",
+      "member": {
+        "shape": "CidrCollectionChange"
+      },
+      "max": 1000,
+      "min": 1
+    },
+    "CidrList": {
+      "type": "list",
+      "member": {
+        "shape": "Cidr",
+        "locationName": "Cidr"
+      },
+      "max": 1000,
+      "min": 1
+    },
+    "CidrLocationNameDefaultAllowed": {
+      "type": "string",
+      "max": 16,
+      "min": 1,
+      "pattern": "[0-9A-Za-z_\\-\\*]+"
+    },
+    "CidrLocationNameDefaultNotAllowed": {
+      "type": "string",
+      "max": 16,
+      "min": 1,
+      "pattern": "[0-9A-Za-z_\\-]+"
+    },
+    "CidrNonce": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "\\p{ASCII}+"
+    },
+    "CidrRoutingConfig": {
+      "type": "structure",
+      "required": [
+        "CollectionId",
+        "LocationName"
+      ],
+      "members": {
+        "CollectionId": {
+          "shape": "UUID",
+          "documentation": "<p>The CIDR collection ID.</p>"
+        },
+        "LocationName": {
+          "shape": "CidrLocationNameDefaultAllowed",
+          "documentation": "<p>The CIDR collection location name.</p>"
+        }
+      },
+      "documentation": "<p>The object that is specified in resource record set object when you are linking a resource record set to a CIDR location.</p> <p>A <code>LocationName</code> with an asterisk “*” can be used to create a default CIDR record. <code>CollectionId</code> is still required for default record.</p>"
+    },
     "CloudWatchAlarmConfiguration": {
       "type": "structure",
       "required": [
@@ -2183,6 +2525,7 @@
         "eu-west-3",
         "ap-east-1",
         "me-south-1",
+        "me-central-1",
         "ap-south-1",
         "ap-southeast-1",
         "ap-southeast-2",
@@ -2205,6 +2548,44 @@
       "max": 64,
       "min": 1
     },
+    "CollectionName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[0-9A-Za-z_\\-]+"
+    },
+    "CollectionSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "CollectionSummary"
+      }
+    },
+    "CollectionSummary": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the collection summary. Can be used to reference the collection in IAM policy or cross-account.</p>"
+        },
+        "Id": {
+          "shape": "UUID",
+          "documentation": "<p>Unique ID for the CIDR collection.</p>"
+        },
+        "Name": {
+          "shape": "CollectionName",
+          "documentation": "<p>The name of a CIDR collection.</p>"
+        },
+        "Version": {
+          "shape": "CollectionVersion",
+          "documentation": "<p>A sequential counter that Route 53 sets to 1 when you create a CIDR collection and increments by 1 each time you update settings for the CIDR collection.</p>"
+        }
+      },
+      "documentation": "<p>A complex type that is an entry in an <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CidrCollection.html\">CidrCollection</a> array.</p>"
+    },
+    "CollectionVersion": {
+      "type": "long",
+      "min": 1
+    },
     "ComparisonOperator": {
       "type": "string",
       "enum": [
@@ -2213,6 +2594,38 @@
         "LessThanThreshold",
         "LessThanOrEqualToThreshold"
       ]
+    },
+    "CreateCidrCollectionRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "CallerReference"
+      ],
+      "members": {
+        "Name": {
+          "shape": "CollectionName",
+          "documentation": "<p>A unique identifier for the account that can be used to reference the collection from other API calls.</p>"
+        },
+        "CallerReference": {
+          "shape": "CidrNonce",
+          "documentation": "<p>A client-specific token that allows requests to be securely retried so that the intended outcome will only occur once, retries receive a similar response, and there are no additional edge cases to handle.</p>"
+        }
+      }
+    },
+    "CreateCidrCollectionResponse": {
+      "type": "structure",
+      "members": {
+        "Collection": {
+          "shape": "CidrCollection",
+          "documentation": "<p>A complex type that contains information about the CIDR collection.</p>"
+        },
+        "Location": {
+          "shape": "ResourceURI",
+          "documentation": "<p>A unique URL that represents the location for the CIDR collection.</p>",
+          "location": "header",
+          "locationName": "Location"
+        }
+      }
     },
     "CreateHealthCheckRequest": {
       "type": "structure",
@@ -2261,7 +2674,7 @@
       "members": {
         "Name": {
           "shape": "DNSName",
-          "documentation": "<p>The name of the domain. Specify a fully qualified domain name, for example, <i>www.example.com</i>. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats <i>www.example.com</i> (without a trailing dot) and <i>www.example.com.</i> (with a trailing dot) as identical.</p> <p>If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of <code>NameServers</code> that <code>CreateHostedZone</code> returns in <code>DelegationSet</code>.</p>"
+          "documentation": "<p>The name of the domain. Specify a fully qualified domain name, for example, <i>www.example.com</i>. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats <i>www.example.com</i> (without a trailing dot) and <i>www.example.com.</i> (with a trailing dot) as identical.</p> <p>If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of <code>NameServers</code> that <code>CreateHostedZone</code> returns in <code>DelegationSet</code>.</p>"
         },
         "VPC": {
           "shape": "VPC",
@@ -2277,7 +2690,7 @@
         },
         "DelegationSetId": {
           "shape": "ResourceId",
-          "documentation": "<p>If you want to associate a reusable delegation set with this hosted zone, the ID that Amazon Route 53 assigned to the reusable delegation set when you created it. For more information about reusable delegation sets, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html\">CreateReusableDelegationSet</a>.</p>"
+          "documentation": "<p>If you want to associate a reusable delegation set with this hosted zone, the ID that Amazon Route 53 assigned to the reusable delegation set when you created it. For more information about reusable delegation sets, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html\">CreateReusableDelegationSet</a>.</p>"
         }
       },
       "documentation": "<p>A complex type that contains information about the request to create a public or private hosted zone.</p>"
@@ -2707,6 +3120,24 @@
         "shape": "DelegationSet",
         "locationName": "DelegationSet"
       }
+    },
+    "DeleteCidrCollectionRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "UUID",
+          "documentation": "<p>The UUID of the collection to delete.</p>",
+          "location": "uri",
+          "locationName": "CidrCollectionId"
+        }
+      }
+    },
+    "DeleteCidrCollectionResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteHealthCheckRequest": {
       "type": "structure",
@@ -3163,7 +3594,7 @@
       ],
       "members": {
         "Id": {
-          "shape": "ResourceId",
+          "shape": "ChangeId",
           "documentation": "<p>The ID of the change batch request. The value that you specify here is the value that <code>ChangeResourceRecordSets</code> returned in the <code>Id</code> element when you submitted the request.</p>",
           "location": "uri",
           "locationName": "Id"
@@ -4099,6 +4530,120 @@
       },
       "documentation": "<p>If a health check or hosted zone was created by another service, <code>LinkedService</code> is a complex type that describes the service that created the resource. When a resource is created by another service, you can't edit or delete it using Amazon Route 53. </p>"
     },
+    "ListCidrBlocksRequest": {
+      "type": "structure",
+      "required": [
+        "CollectionId"
+      ],
+      "members": {
+        "CollectionId": {
+          "shape": "UUID",
+          "documentation": "<p>The UUID of the CIDR collection.</p>",
+          "location": "uri",
+          "locationName": "CidrCollectionId"
+        },
+        "LocationName": {
+          "shape": "CidrLocationNameDefaultNotAllowed",
+          "documentation": "<p>The name of the CIDR collection location.</p>",
+          "location": "querystring",
+          "locationName": "location"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating results.</p>",
+          "location": "querystring",
+          "locationName": "nexttoken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Maximum number of results you want returned.</p>",
+          "location": "querystring",
+          "locationName": "maxresults"
+        }
+      }
+    },
+    "ListCidrBlocksResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating results. </p> <p>If no value is provided, the listing of results starts from the beginning.</p>"
+        },
+        "CidrBlocks": {
+          "shape": "CidrBlockSummaries",
+          "documentation": "<p>A complex type that contains information about the CIDR blocks.</p>"
+        }
+      }
+    },
+    "ListCidrCollectionsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating results.</p> <p>If no value is provided, the listing of results starts from the beginning.</p>",
+          "location": "querystring",
+          "locationName": "nexttoken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of CIDR collections to return in the response.</p>",
+          "location": "querystring",
+          "locationName": "maxresults"
+        }
+      }
+    },
+    "ListCidrCollectionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating results.</p> <p>If no value is provided, the listing of results starts from the beginning.</p>"
+        },
+        "CidrCollections": {
+          "shape": "CollectionSummaries",
+          "documentation": "<p>A complex type with information about the CIDR collection.</p>"
+        }
+      }
+    },
+    "ListCidrLocationsRequest": {
+      "type": "structure",
+      "required": [
+        "CollectionId"
+      ],
+      "members": {
+        "CollectionId": {
+          "shape": "UUID",
+          "documentation": "<p>The CIDR collection ID.</p>",
+          "location": "uri",
+          "locationName": "CidrCollectionId"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating results.</p> <p>If no value is provided, the listing of results starts from the beginning.</p>",
+          "location": "querystring",
+          "locationName": "nexttoken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of CIDR collection locations to return in the response.</p>",
+          "location": "querystring",
+          "locationName": "maxresults"
+        }
+      }
+    },
+    "ListCidrLocationsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating results.</p> <p>If no value is provided, the listing of results starts from the beginning.</p>"
+        },
+        "CidrLocations": {
+          "shape": "LocationSummaries",
+          "documentation": "<p>A complex type that contains information about the list of CIDR locations.</p>"
+        }
+      }
+    },
     "ListGeoLocationsRequest": {
       "type": "structure",
       "members": {
@@ -4978,6 +5523,22 @@
       },
       "documentation": "<p>A complex type that contains the response information for the request.</p>"
     },
+    "LocationSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "LocationSummary"
+      }
+    },
+    "LocationSummary": {
+      "type": "structure",
+      "members": {
+        "LocationName": {
+          "shape": "CidrLocationNameDefaultAllowed",
+          "documentation": "<p>A string that specifies a location name.</p>"
+        }
+      },
+      "documentation": "<p>A complex type that contains information about the CIDR location.</p>"
+    },
     "MaxResults": {
       "type": "string"
     },
@@ -5199,7 +5760,7 @@
         },
         "AliasTarget": {
           "shape": "AliasTarget",
-          "documentation": "<p> <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to. </p> <p>If you're creating resource records sets for a private hosted zone, note the following:</p> <ul> <li> <p>You can't create an alias resource record set in a private hosted zone to route traffic to a CloudFront distribution.</p> </li> <li> <p>Creating geolocation alias resource record sets or latency alias resource record sets in a private hosted zone is unsupported.</p> </li> <li> <p>For information about creating failover resource record sets in a private hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> </li> </ul>"
+          "documentation": "<p> <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that you want to route traffic to. </p> <p>If you're creating resource records sets for a private hosted zone, note the following:</p> <ul> <li> <p>You can't create an alias resource record set in a private hosted zone to route traffic to a CloudFront distribution.</p> </li> <li> <p>For information about creating failover resource record sets in a private hosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> </li> </ul>"
         },
         "HealthCheckId": {
           "shape": "HealthCheckId",
@@ -5208,6 +5769,9 @@
         "TrafficPolicyInstanceId": {
           "shape": "TrafficPolicyInstanceId",
           "documentation": "<p>When you create a traffic policy instance, Amazon Route 53 automatically creates a resource record set. <code>TrafficPolicyInstanceId</code> is the ID of the traffic policy instance that Route 53 created this resource record set for.</p> <important> <p>To delete the resource record set that is associated with a traffic policy instance, use <code>DeleteTrafficPolicyInstance</code>. Route 53 will delete the resource record set automatically. If you delete the resource record set by using <code>ChangeResourceRecordSets</code>, Route 53 doesn't automatically delete the traffic policy instance, and you'll continue to be charged for it even though it's no longer in use. </p> </important>"
+        },
+        "CidrRoutingConfig": {
+          "shape": "CidrRoutingConfig"
         }
       },
       "documentation": "<p>Information about the resource record set to create or delete.</p>"
@@ -5747,6 +6311,10 @@
     "TransportProtocol": {
       "type": "string"
     },
+    "UUID": {
+      "type": "string",
+      "pattern": "[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}"
+    },
     "UpdateHealthCheckRequest": {
       "type": "structure",
       "required": [
@@ -5994,6 +6562,7 @@
         "us-iso-east-1",
         "us-iso-west-1",
         "us-isob-east-1",
+        "me-central-1",
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-southeast-3",

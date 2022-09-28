@@ -59,7 +59,7 @@ declare namespace SSOOIDC {
     /**
      * Used only when calling this API for the device code grant type. This short-term code is used to identify this authentication attempt. This should come from an in-memory reference to the result of the StartDeviceAuthorization API.
      */
-    deviceCode: DeviceCode;
+    deviceCode?: DeviceCode;
     /**
      * The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.
      */

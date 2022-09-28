@@ -203,12 +203,14 @@ declare namespace MediaPackage {
      * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
      */
     ConstantInitializationVector?: __string;
+    EncryptionMethod?: CmafEncryptionMethod;
     /**
      * Time (in seconds) between each encryption key rotation.
      */
     KeyRotationIntervalSeconds?: __integer;
     SpekeKeyProvider: SpekeKeyProvider;
   }
+  export type CmafEncryptionMethod = "SAMPLE_AES"|"AES_CTR"|string;
   export interface CmafPackage {
     Encryption?: CmafEncryption;
     /**
@@ -491,6 +493,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     AdTriggers?: AdTriggers;
     AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: DashEncryption;
+    /**
+     * When enabled, an I-Frame only stream will be included in the output.
+     */
+    IncludeIframeOnlyStream?: __boolean;
     /**
      * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
      */
@@ -842,6 +848,8 @@ it will be passed through to HLS output.
      * The URL of the packaged OriginEndpoint for consumption.
      */
     Url?: __string;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
   }
   export interface HlsManifestCreateOrUpdateParameters {
     /**
@@ -1133,8 +1141,8 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export type Origination = "ALLOW"|"DENY"|string;
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
-  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|string;
-  export type PresetSpeke20Video = "PRESET-VIDEO-1"|string;
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED"|string;
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|"DVB_DASH_2014"|string;
   export interface RotateChannelCredentialsRequest {
     /**

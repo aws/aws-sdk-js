@@ -139,7 +139,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a running app for the specified UserProfile. Supported apps are <code>JupyterServer</code> and <code>KernelGateway</code>. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.</p>"
+      "documentation": "<p>Creates a running app for the specified UserProfile. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously.</p>"
     },
     "CreateAppImageConfig": {
       "name": "CreateAppImageConfig",
@@ -318,6 +318,41 @@
         }
       ],
       "documentation": "<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An Amazon Web Services account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.</p> <p> <b>EFS storage</b> </p> <p>When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.</p> <p>SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, you can specify a customer managed key. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html\">Protect Data at Rest Using Encryption</a>.</p> <p> <b>VPC configuration</b> </p> <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code> parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you choose when you onboard to Studio. The following options are available:</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway.</p> <p>When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.</p> </li> </ul> <important> <p>NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully.</p> </important> <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html\">Connect SageMaker Studio Notebooks to Resources in a VPC</a>.</p>"
+    },
+    "CreateEdgeDeploymentPlan": {
+      "name": "CreateEdgeDeploymentPlan",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateEdgeDeploymentPlanRequest"
+      },
+      "output": {
+        "shape": "CreateEdgeDeploymentPlanResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
+      "documentation": "<p>Creates an edge deployment plan, consisting of multiple stages. Each stage may have a different deployment configuration and devices.</p>"
+    },
+    "CreateEdgeDeploymentStage": {
+      "name": "CreateEdgeDeploymentStage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateEdgeDeploymentStageRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceLimitExceeded"
+        }
+      ],
+      "documentation": "<p>Creates a new stage in an existing edge deployment plan.</p>"
     },
     "CreateEdgePackagingJob": {
       "name": "CreateEdgePackagingJob",
@@ -588,7 +623,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions.</p> <p>Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job.</p> <p>To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>For an example that calls this method when deploying a model to SageMaker hosting services, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).</a> </p> <p>To run a batch transform using your model, you start a job with the <code>CreateTransformJob</code> API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location.</p> <p>In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.</p>"
+      "documentation": "<p>Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions.</p> <p>Use this API to create a model if you want to use SageMaker hosting services or run a batch transform job.</p> <p>To host your model, you create an endpoint configuration with the <code>CreateEndpointConfig</code> API, and then create an endpoint with the <code>CreateEndpoint</code> API. SageMaker then deploys all of the containers that you defined for the model in the hosting environment. </p> <p>For an example that calls this method when deploying a model to SageMaker hosting services, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model\">Create a Model (Amazon Web Services SDK for Python (Boto 3)).</a> </p> <p>To run a batch transform using your model, you start a job with the <code>CreateTransformJob</code> API. SageMaker uses your model and your dataset to get inferences which are then saved to a specified S3 location.</p> <p>In the request, you also provide an IAM role that SageMaker can assume to access model artifacts and docker image for deployment on ML compute hosting instances or for batch transform jobs. In addition, you also use the IAM role to manage permissions the inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.</p>"
     },
     "CreateModelBiasJobDefinition": {
       "name": "CreateModelBiasJobDefinition",
@@ -796,7 +831,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM. </p> <p>The IAM role or user used to call this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app.</p> <p>You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html\">Connect to SageMaker Studio Through an Interface VPC Endpoint</a> .</p> <note> <p>The URL that you get from a call to <code>CreatePresignedDomainUrl</code> has a default timeout of 5 minutes. You can configure this value using <code>ExpiresInSeconds</code>. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page.</p> </note>"
+      "documentation": "<p>Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM. </p> <p>The IAM role or user passed to this API defines the permissions to access the app. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request and WebSocket frame that attempts to connect to the app.</p> <p>You can restrict access to this API and to the URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html\">Connect to SageMaker Studio Through an Interface VPC Endpoint</a> .</p> <note> <p>The URL that you get from a call to <code>CreatePresignedDomainUrl</code> has a default timeout of 5 minutes. You can configure this value using <code>ExpiresInSeconds</code>. If you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page.</p> </note>"
     },
     "CreatePresignedNotebookInstanceUrl": {
       "name": "CreatePresignedNotebookInstanceUrl",
@@ -898,7 +933,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Starts a model training job. After training completes, SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify. </p> <p>If you choose to host your model using SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than SageMaker, provided that you know how to use them for inference. </p> <p>In the request body, you provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> - Identifies the training algorithm to use. </p> </li> <li> <p> <code>HyperParameters</code> - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p> </li> <li> <p> <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.</p> </li> <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want SageMaker to save the results of model training. </p> </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance. </p> </li> <li> <p> <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot Training</a>. </p> </li> <li> <p> <code>RoleArn</code> - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that SageMaker can successfully complete model training. </p> </li> <li> <p> <code>StoppingCondition</code> - To help cap training costs, use <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot training job has to complete. </p> </li> <li> <p> <code>Environment</code> - The environment variables to set in the Docker container.</p> </li> <li> <p> <code>RetryStrategy</code> - The number of times to retry the job when the job fails due to an <code>InternalServerError</code>.</p> </li> </ul> <p> For more information about SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+      "documentation": "<p>Starts a model training job. After training completes, SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify. </p> <p>If you choose to host your model using SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than SageMaker, provided that you know how to use them for inference. </p> <p>In the request body, you provide the following: </p> <ul> <li> <p> <code>AlgorithmSpecification</code> - Identifies the training algorithm to use. </p> </li> <li> <p> <code>HyperParameters</code> - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p> <important> <p>You must not include any security-sensitive information, such as account access IDs, secrets, and tokens, in the dictionary for configuring hyperparameters. SageMaker rejects the training job request and returns an exception error for detected credentials, if such user input is found.</p> </important> </li> <li> <p> <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.</p> </li> <li> <p> <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want SageMaker to save the results of model training. </p> </li> <li> <p> <code>ResourceConfig</code> - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance. </p> </li> <li> <p> <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot Training</a>. </p> </li> <li> <p> <code>RoleArn</code> - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that SageMaker can successfully complete model training. </p> </li> <li> <p> <code>StoppingCondition</code> - To help cap training costs, use <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot training job has to complete. </p> </li> <li> <p> <code>Environment</code> - The environment variables to set in the Docker container.</p> </li> <li> <p> <code>RetryStrategy</code> - The number of times to retry the job when the job fails due to an <code>InternalServerError</code>.</p> </li> </ul> <p> For more information about SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
     },
     "CreateTransformJob": {
       "name": "CreateTransformJob",
@@ -923,7 +958,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify.</p> <p>To perform batch transformations, you create a transform job and use the data that you have readily available.</p> <p>In the request body, you provide the following:</p> <ul> <li> <p> <code>TransformJobName</code> - Identifies the transform job. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account.</p> </li> <li> <p> <code>ModelName</code> - Identifies the model to use. <code>ModelName</code> must be the name of an existing Amazon SageMaker model in the same Amazon Web Services Region and Amazon Web Services account. For information on creating a model, see <a>CreateModel</a>.</p> </li> <li> <p> <code>TransformInput</code> - Describes the dataset to be transformed and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>TransformOutput</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.</p> </li> <li> <p> <code>TransformResources</code> - Identifies the ML compute instances for the transform job.</p> </li> </ul> <p>For more information about how batch transformation works, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html\">Batch Transform</a>.</p>"
+      "documentation": "<p>Starts a transform job. A transform job uses a trained model to get inferences on a dataset and saves these results to an Amazon S3 location that you specify.</p> <p>To perform batch transformations, you create a transform job and use the data that you have readily available.</p> <p>In the request body, you provide the following:</p> <ul> <li> <p> <code>TransformJobName</code> - Identifies the transform job. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account.</p> </li> <li> <p> <code>ModelName</code> - Identifies the model to use. <code>ModelName</code> must be the name of an existing Amazon SageMaker model in the same Amazon Web Services Region and Amazon Web Services account. For information on creating a model, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html\">CreateModel</a>.</p> </li> <li> <p> <code>TransformInput</code> - Describes the dataset to be transformed and the Amazon S3 location where it is stored.</p> </li> <li> <p> <code>TransformOutput</code> - Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.</p> </li> <li> <p> <code>TransformResources</code> - Identifies the ML compute instances for the transform job.</p> </li> </ul> <p>For more information about how batch transformation works, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html\">Batch Transform</a>.</p>"
     },
     "CreateTrial": {
       "name": "CreateTrial",
@@ -986,7 +1021,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a \"person\" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from SSO, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. </p>"
+      "documentation": "<p>Creates a user profile. A user profile represents a single user within a domain, and is the main way to reference a \"person\" for the purposes of sharing, reporting, and other user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from IAM Identity Center, a user profile is automatically created. A user profile is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. </p>"
     },
     "CreateWorkforce": {
       "name": "CreateWorkforce",
@@ -1206,7 +1241,39 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. </p>"
+      "documentation": "<p>Used to delete a domain. If you onboarded with IAM mode, you will need to delete your domain to onboard again using IAM Identity Center. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. </p>"
+    },
+    "DeleteEdgeDeploymentPlan": {
+      "name": "DeleteEdgeDeploymentPlan",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteEdgeDeploymentPlanRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Deletes an edge deployment plan if (and only if) all the stages in the plan are inactive or there are no stages in the plan.</p>"
+    },
+    "DeleteEdgeDeploymentStage": {
+      "name": "DeleteEdgeDeploymentStage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteEdgeDeploymentStageRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Delete a stage in an edge deployment plan if (and only if) the stage is inactive.</p>"
     },
     "DeleteEndpoint": {
       "name": "DeleteEndpoint",
@@ -1896,6 +1963,25 @@
       ],
       "documentation": "<p>The description of the domain.</p>"
     },
+    "DescribeEdgeDeploymentPlan": {
+      "name": "DescribeEdgeDeploymentPlan",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeEdgeDeploymentPlanRequest"
+      },
+      "output": {
+        "shape": "DescribeEdgeDeploymentPlanResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Describes an edge deployment plan with deployment status per stage.</p>"
+    },
     "DescribeEdgePackagingJob": {
       "name": "DescribeEdgePackagingJob",
       "http": {
@@ -1980,6 +2066,25 @@
         }
       ],
       "documentation": "<p>Use this operation to describe a <code>FeatureGroup</code>. The response includes information on the creation time, <code>FeatureGroup</code> name, the unique identifier for each <code>FeatureGroup</code>, and more.</p>"
+    },
+    "DescribeFeatureMetadata": {
+      "name": "DescribeFeatureMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFeatureMetadataRequest"
+      },
+      "output": {
+        "shape": "DescribeFeatureMetadataResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Shows the metadata for a feature within a feature group.</p>"
     },
     "DescribeFlowDefinition": {
       "name": "DescribeFlowDefinition",
@@ -2882,6 +2987,20 @@
       },
       "documentation": "<p>Lists the domains.</p>"
     },
+    "ListEdgeDeploymentPlans": {
+      "name": "ListEdgeDeploymentPlans",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListEdgeDeploymentPlansRequest"
+      },
+      "output": {
+        "shape": "ListEdgeDeploymentPlansResponse"
+      },
+      "documentation": "<p>Lists all edge deployment plans.</p>"
+    },
     "ListEdgePackagingJobs": {
       "name": "ListEdgePackagingJobs",
       "http": {
@@ -3341,6 +3460,20 @@
       },
       "documentation": "<p>Gets a list of the projects in an Amazon Web Services account.</p>"
     },
+    "ListStageDevices": {
+      "name": "ListStageDevices",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListStageDevicesRequest"
+      },
+      "output": {
+        "shape": "ListStageDevicesResponse"
+      },
+      "documentation": "<p>Lists devices allocated to the stage, containing detailed device information and deployment status.</p>"
+    },
     "ListStudioLifecycleConfigs": {
       "name": "ListStudioLifecycleConfigs",
       "http": {
@@ -3666,6 +3799,17 @@
       ],
       "documentation": "<p>Notifies the pipeline that the execution of a callback step succeeded and provides a list of the step's output parameters. When a callback step is run, the pipeline generates a callback token and includes the token in a message sent to Amazon Simple Queue Service (Amazon SQS).</p>"
     },
+    "StartEdgeDeploymentStage": {
+      "name": "StartEdgeDeploymentStage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartEdgeDeploymentStageRequest"
+      },
+      "documentation": "<p>Starts a stage in an edge deployment plan.</p>"
+    },
     "StartMonitoringSchedule": {
       "name": "StartMonitoringSchedule",
       "http": {
@@ -3751,6 +3895,17 @@
         }
       ],
       "documentation": "<p>Stops a model compilation job.</p> <p> To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal. This gracefully shuts the job down. If the job hasn't stopped, it sends the SIGKILL signal.</p> <p>When it receives a <code>StopCompilationJob</code> request, Amazon SageMaker changes the <a>CompilationJobSummary$CompilationJobStatus</a> of the job to <code>Stopping</code>. After Amazon SageMaker stops the job, it sets the <a>CompilationJobSummary$CompilationJobStatus</a> to <code>Stopped</code>. </p>"
+    },
+    "StopEdgeDeploymentStage": {
+      "name": "StopEdgeDeploymentStage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopEdgeDeploymentStageRequest"
+      },
+      "documentation": "<p>Stops a stage in an edge deployment plan.</p>"
     },
     "StopEdgePackagingJob": {
       "name": "StopEdgePackagingJob",
@@ -4116,6 +4271,41 @@
       ],
       "documentation": "<p>Adds, updates, or removes the description of an experiment. Updates the display name of an experiment.</p>"
     },
+    "UpdateFeatureGroup": {
+      "name": "UpdateFeatureGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFeatureGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateFeatureGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Updates the feature group.</p>"
+    },
+    "UpdateFeatureMetadata": {
+      "name": "UpdateFeatureMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFeatureMetadataRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Updates the description and parameters of the feature group.</p>"
+    },
     "UpdateImage": {
       "name": "UpdateImage",
       "http": {
@@ -4364,7 +4554,12 @@
       "output": {
         "shape": "UpdateWorkforceResponse"
       },
-      "documentation": "<p>Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.</p> <p> Use <code>SourceIpConfig</code> to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a <code>Not Found</code> error message on the worker portal.</p> <p>Use <code>OidcConfig</code> to update the configuration of a workforce created using your own OIDC IdP. </p> <important> <p>You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.</p> </important> <p>After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.</p> <important> <p>This operation only applies to private workforces.</p> </important>"
+      "errors": [
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.</p> <p>The worker portal is now supported in VPC and public internet.</p> <p> Use <code>SourceIpConfig</code> to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a <code>Not Found</code> error message on the worker portal.</p> <p>To restrict access to all the workers in public internet, add the <code>SourceIpConfig</code> CIDR value as \"0.0.0.0/0\".</p> <important> <p>Amazon SageMaker does not support Source Ip restriction for worker portals in VPC.</p> </important> <p>Use <code>OidcConfig</code> to update the configuration of a workforce created using your own OIDC IdP. </p> <important> <p>You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.</p> </important> <p>After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.</p> <important> <p>This operation only applies to private workforces.</p> </important>"
     },
     "UpdateWorkteam": {
       "name": "UpdateWorkteam",
@@ -4660,11 +4855,11 @@
       "members": {
         "TrainingImage": {
           "shape": "AlgorithmImage",
-          "documentation": "<p>The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Algorithms Provided by Amazon SageMaker: Common Parameters</a>. SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>.</p>"
+          "documentation": "<p>The registry path of the Docker image that contains the training algorithm. For information about docker registry paths for SageMaker built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Docker Registry Paths and Example Code</a> in the <i>Amazon SageMaker developer guide</i>. SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information about using your custom training container, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>.</p> <note> <p>You must specify either the algorithm name to the <code>AlgorithmName</code> parameter or the image URI of the algorithm container to the <code>TrainingImage</code> parameter.</p> <p>For more information, see the note in the <code>AlgorithmName</code> parameter description.</p> </note>"
         },
         "AlgorithmName": {
           "shape": "ArnOrName",
-          "documentation": "<p>The name of the algorithm resource to use for the training job. This must be an algorithm resource that you created or subscribe to on Amazon Web Services Marketplace. If you specify a value for this parameter, you can't specify a value for <code>TrainingImage</code>.</p>"
+          "documentation": "<p>The name of the algorithm resource to use for the training job. This must be an algorithm resource that you created or subscribe to on Amazon Web Services Marketplace.</p> <note> <p>You must specify either the algorithm name to the <code>AlgorithmName</code> parameter or the image URI of the algorithm container to the <code>TrainingImage</code> parameter.</p> <p>Note that the <code>AlgorithmName</code> parameter is mutually exclusive with the <code>TrainingImage</code> parameter. If you specify a value for the <code>AlgorithmName</code> parameter, you can't specify a value for <code>TrainingImage</code>, and vice versa.</p> <p>If you specify values for both parameters, the training job might break; if you don't specify any value for both parameters, the training job might raise a <code>null</code> error.</p> </note>"
         },
         "TrainingInputMode": {
           "shape": "TrainingInputMode"
@@ -4967,7 +5162,15 @@
         "ml.r5.8xlarge",
         "ml.r5.12xlarge",
         "ml.r5.16xlarge",
-        "ml.r5.24xlarge"
+        "ml.r5.24xlarge",
+        "ml.g5.xlarge",
+        "ml.g5.2xlarge",
+        "ml.g5.4xlarge",
+        "ml.g5.8xlarge",
+        "ml.g5.16xlarge",
+        "ml.g5.12xlarge",
+        "ml.g5.24xlarge",
+        "ml.g5.48xlarge"
       ]
     },
     "AppList": {
@@ -5478,6 +5681,16 @@
       },
       "documentation": "<p>Information about a candidate produced by an AutoML training job, including its status, steps, and other properties.</p>"
     },
+    "AutoMLCandidateGenerationConfig": {
+      "type": "structure",
+      "members": {
+        "FeatureSpecificationS3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job. You can input <code>FeatureAttributeNames</code> (optional) in JSON format as shown below: </p> <p> <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p> <p>You can also specify the data type of the feature (optional) in the format shown below:</p> <p> <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code> </p> <note> <p>These column keys may not include the target column.</p> </note> <p>In ensembling mode, Autopilot will only support the following data types: <code>numeric</code>, <code>categorical</code>, <code>text</code> and <code>datetime</code>. In HPO mode, Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>, <code>datetime</code> and <code>sequence</code>.</p> <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>, <code>col2</code>,..) should be a subset of the column names in the input data. </p> <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are provided, then the column keys should be a subset of the column names provided in <code>FeatureAttributeNames</code>. </p> <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in <code>[\"col1\", \"col2\", ...]</code> is case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.</p>"
+        }
+      },
+      "documentation": "<p>Stores the config information for how a candidate is generated (optional).</p>"
+    },
     "AutoMLCandidateStep": {
       "type": "structure",
       "required": [
@@ -5532,7 +5745,7 @@
         },
         "ChannelType": {
           "shape": "AutoMLChannelType",
-          "documentation": "<p>The channel type (optional) is an enum string. The default value is <code>training</code>. Channels for training and validation must share the same <code>ContentType</code> and <code>TargetAttributeName</code>.</p>"
+          "documentation": "<p>The channel type (optional) is an <code>enum</code> string. The default value is <code>training</code>. Channels for training and validation must share the same <code>ContentType</code> and <code>TargetAttributeName</code>. For information on specifying training and validation channel types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation\"> <code>How to specify training and validation datasets</code> </a>.</p>"
         }
       },
       "documentation": "<p>A channel is a named input source that training algorithms can consume. The validation dataset size is limited to less than 2 GB. The training dataset size must be less than 100 GB. For more information, see .</p> <note> <p>A validation dataset must contain the same headers as the training dataset.</p> </note> <p/>"
@@ -5581,7 +5794,7 @@
       "members": {
         "S3DataSource": {
           "shape": "AutoMLS3DataSource",
-          "documentation": "<p>The Amazon S3 location of the input data.</p> <note> <p>The input data must be in CSV format and contain at least 500 rows.</p> </note>"
+          "documentation": "<p>The Amazon S3 location of the input data.</p>"
         }
       },
       "documentation": "<p>The data source for the Autopilot job.</p>"
@@ -5591,10 +5804,10 @@
       "members": {
         "ValidationFraction": {
           "shape": "ValidationFraction",
-          "documentation": "<p>The validation fraction (optional) is a float that specifies the portion of the training dataset to be used for validation. The default value is 0.2, and values can range from 0 to 1. We recommend setting this value to be less than 0.5.</p>"
+          "documentation": "<p>The validation fraction (optional) is a float that specifies the portion of the training dataset to be used for validation. The default value is 0.2, and values must be greater than 0 and less than 1. We recommend setting this value to be less than 0.5.</p>"
         }
       },
-      "documentation": "<p>This structure specifies how to split the data into train and test datasets. The validation and training datasets must contain the same headers. The validation dataset must be less than 2 GB in size.</p>"
+      "documentation": "<p>This structure specifies how to split the data into train and validation datasets. The validation and training datasets must contain the same headers. The validation dataset must be less than 2 GB in size.</p>"
     },
     "AutoMLFailureReason": {
       "type": "string",
@@ -5605,7 +5818,7 @@
       "member": {
         "shape": "AutoMLChannel"
       },
-      "max": 20,
+      "max": 2,
       "min": 1
     },
     "AutoMLJobArn": {
@@ -5637,7 +5850,7 @@
         },
         "MaxRuntimePerTrainingJobInSeconds": {
           "shape": "MaxRuntimePerTrainingJobInSeconds",
-          "documentation": "<p>The maximum time, in seconds, that each training job is allowed to run as part of a hyperparameter tuning job. For more information, see the used by the action.</p>"
+          "documentation": "<p>The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the used by the action.</p>"
         },
         "MaxAutoMLJobRuntimeInSeconds": {
           "shape": "MaxAutoMLJobRuntimeInSeconds",
@@ -5660,6 +5873,14 @@
         "DataSplitConfig": {
           "shape": "AutoMLDataSplitConfig",
           "documentation": "<p>The configuration for splitting the input training dataset.</p> <p>Type: AutoMLDataSplitConfig</p>"
+        },
+        "CandidateGenerationConfig": {
+          "shape": "AutoMLCandidateGenerationConfig",
+          "documentation": "<p>The configuration for generating a candidate for an AutoML job (optional). </p>"
+        },
+        "Mode": {
+          "shape": "AutoMLMode",
+          "documentation": "<p>The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than 100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p> <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by <code>ENSEMBLING</code> mode.</p> <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train the best version of a model. HPO will automatically select an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by <code>HYPERPARAMETER_TUNING</code> mode.</p>"
         }
       },
       "documentation": "<p>A collection of settings used for an AutoML job.</p>"
@@ -5812,6 +6033,14 @@
         "LogLoss"
       ]
     },
+    "AutoMLMode": {
+      "type": "string",
+      "enum": [
+        "AUTO",
+        "ENSEMBLING",
+        "HYPERPARAMETER_TUNING"
+      ]
+    },
     "AutoMLNameContains": {
       "type": "string",
       "max": 63,
@@ -5861,7 +6090,7 @@
       "members": {
         "S3DataType": {
           "shape": "AutoMLS3DataType",
-          "documentation": "<p>The data type.</p>"
+          "documentation": "<p>The data type.</p> <p>A ManifestFile should have the format shown below:</p> <p> <code>[ {\"prefix\": \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/\"}, </code> </p> <p> <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1\",</code> </p> <p> <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2\",</code> </p> <p> <code>... \"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N\" ]</code> </p> <p>An S3Prefix should have the following format: </p> <p> <code>s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE</code> </p>"
         },
         "S3Uri": {
           "shape": "S3Uri",
@@ -6038,10 +6267,12 @@
           "documentation": "<p>The bias report for a model</p>"
         },
         "PreTrainingReport": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The pre-training bias report for a model.</p>"
         },
         "PostTrainingReport": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The post-training bias report for a model.</p>"
         }
       },
       "documentation": "<p>Contains bias metrics for a model.</p>"
@@ -6214,6 +6445,16 @@
         "shape": "AutoMLCandidateStep"
       }
     },
+    "CanvasAppSettings": {
+      "type": "structure",
+      "members": {
+        "TimeSeriesForecastingSettings": {
+          "shape": "TimeSeriesForecastingSettings",
+          "documentation": "<p>Time series forecast settings for the Canvas app.</p>"
+        }
+      },
+      "documentation": "<p>The SageMaker Canvas app settings.</p>"
+    },
     "CapacitySize": {
       "type": "structure",
       "required": [
@@ -6248,14 +6489,14 @@
       "members": {
         "CsvContentTypes": {
           "shape": "CsvContentTypes",
-          "documentation": "<p/>"
+          "documentation": "<p>The list of all content type headers that SageMaker will treat as CSV and capture accordingly.</p>"
         },
         "JsonContentTypes": {
           "shape": "JsonContentTypes",
-          "documentation": "<p/>"
+          "documentation": "<p>The list of all content type headers that SageMaker will treat as JSON and capture accordingly.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.</p>"
     },
     "CaptureMode": {
       "type": "string",
@@ -6272,10 +6513,10 @@
       "members": {
         "CaptureMode": {
           "shape": "CaptureMode",
-          "documentation": "<p/>"
+          "documentation": "<p>Specify the boundary of data to capture.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Specifies data Model Monitor will capture.</p>"
     },
     "CaptureOptionList": {
       "type": "list",
@@ -6360,7 +6601,7 @@
       "member": {
         "shape": "CategoricalParameterRange"
       },
-      "max": 20,
+      "max": 30,
       "min": 0
     },
     "CategoricalParameters": {
@@ -7078,7 +7319,7 @@
       "member": {
         "shape": "ContinuousParameterRange"
       },
-      "max": 20,
+      "max": 30,
       "min": 0
     },
     "CreateActionRequest": {
@@ -7196,7 +7437,7 @@
         },
         "KernelGatewayImageConfig": {
           "shape": "KernelGatewayImageConfig",
-          "documentation": "<p>The KernelGatewayImageConfig.</p>"
+          "documentation": "<p>The KernelGatewayImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel will be shown to users before the image starts. Once the image runs, all kernels are visible in JupyterLab.</p>"
         }
       }
     },
@@ -7228,7 +7469,7 @@
         },
         "AppType": {
           "shape": "AppType",
-          "documentation": "<p>The type of app. Supported apps are <code>JupyterServer</code> and <code>KernelGateway</code>. <code>TensorBoard</code> is not supported.</p>"
+          "documentation": "<p>The type of app.</p>"
         },
         "AppName": {
           "shape": "AppName",
@@ -7240,7 +7481,7 @@
         },
         "ResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
+          "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p> <note> <p>The value of <code>InstanceType</code> passed as part of the <code>ResourceSpec</code> in the <code>CreateApp</code> call overrides the value passed as part of the <code>ResourceSpec</code> configured for the user profile or the domain. If <code>InstanceType</code> is not specified in any of those three <code>ResourceSpec</code> values for a <code>KernelGateway</code> app, the <code>CreateApp</code> call fails with a request validation error.</p> </note>"
         }
       }
     },
@@ -7309,7 +7550,7 @@
         },
         "InputDataConfig": {
           "shape": "AutoMLInputDataConfig",
-          "documentation": "<p>An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to <code>InputDataConfig</code> supported by . Format(s) supported: CSV. Minimum of 500 rows.</p>"
+          "documentation": "<p>An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to <code>InputDataConfig</code> supported by . Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the training dataset. There is not a minimum number of rows required for the validation dataset.</p>"
         },
         "OutputDataConfig": {
           "shape": "AutoMLOutputDataConfig",
@@ -7317,7 +7558,7 @@
         },
         "ProblemType": {
           "shape": "ProblemType",
-          "documentation": "<p>Defines the type of supervised learning available for the candidates. Options include: <code>BinaryClassification</code>, <code>MulticlassClassification</code>, and <code>Regression</code>. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\"> Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
+          "documentation": "<p>Defines the type of supervised learning available for the candidates. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\"> Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
         },
         "AutoMLJobObjective": {
           "shape": "AutoMLJobObjective",
@@ -7325,7 +7566,7 @@
         },
         "AutoMLJobConfig": {
           "shape": "AutoMLJobConfig",
-          "documentation": "<p>Contains <code>CompletionCriteria</code> and <code>SecurityConfig</code> settings for the AutoML job.</p>"
+          "documentation": "<p>A collection of settings used to configure an AutoML job.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
@@ -7651,6 +7892,65 @@
         "Url": {
           "shape": "String1024",
           "documentation": "<p>The URL to the created domain.</p>"
+        }
+      }
+    },
+    "CreateEdgeDeploymentPlanRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName",
+        "ModelConfigs",
+        "DeviceFleetName"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan.</p>"
+        },
+        "ModelConfigs": {
+          "shape": "EdgeDeploymentModelConfigs",
+          "documentation": "<p>List of models associated with the edge deployment plan.</p>"
+        },
+        "DeviceFleetName": {
+          "shape": "EntityName",
+          "documentation": "<p>The device fleet used for this edge deployment plan.</p>"
+        },
+        "Stages": {
+          "shape": "DeploymentStages",
+          "documentation": "<p>List of stages of the edge deployment plan. The number of stages is limited to 10 per deployment.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>List of tags with which to tag the edge deployment plan.</p>"
+        }
+      }
+    },
+    "CreateEdgeDeploymentPlanResponse": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanArn"
+      ],
+      "members": {
+        "EdgeDeploymentPlanArn": {
+          "shape": "EdgeDeploymentPlanArn",
+          "documentation": "<p>The ARN of the edge deployment plan.</p>"
+        }
+      }
+    },
+    "CreateEdgeDeploymentStageRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName",
+        "Stages"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan.</p>"
+        },
+        "Stages": {
+          "shape": "DeploymentStages",
+          "documentation": "<p>List of stages to be added to the edge deployment plan.</p>"
         }
       }
     },
@@ -8463,7 +8763,7 @@
         },
         "Task": {
           "shape": "String",
-          "documentation": "<p>The machine learning task your model package accomplishes. Common machine learning tasks include object detection and image classification.</p>"
+          "documentation": "<p>The machine learning task your model package accomplishes. Common machine learning tasks include object detection and image classification. The following tasks are supported by Inference Recommender: <code>\"IMAGE_CLASSIFICATION\"</code> | <code>\"OBJECT_DETECTION\"</code> | <code>\"TEXT_GENERATION\"</code> |<code>\"IMAGE_SEGMENTATION\"</code> | <code>\"FILL_MASK\"</code> | <code>\"CLASSIFICATION\"</code> | <code>\"REGRESSION\"</code> | <code>\"OTHER\"</code>.</p> <p>Specify \"OTHER\" if none of the tasks listed fit your use case.</p>"
         },
         "SamplePayloadUrl": {
           "shape": "S3Uri",
@@ -8649,6 +8949,10 @@
         "PlatformIdentifier": {
           "shape": "PlatformIdentifier",
           "documentation": "<p>The platform identifier of the notebook instance runtime environment.</p>"
+        },
+        "InstanceMetadataServiceConfiguration": {
+          "shape": "InstanceMetadataServiceConfiguration",
+          "documentation": "<p>Information on the IMDS configuration of the notebook instance</p>"
         }
       }
     },
@@ -8965,7 +9269,7 @@
         },
         "HyperParameters": {
           "shape": "HyperParameters",
-          "documentation": "<p>Algorithm-specific parameters that influence the quality of the model. You set hyperparameters before you start the learning process. For a list of hyperparameters for each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p>"
+          "documentation": "<p>Algorithm-specific parameters that influence the quality of the model. You set hyperparameters before you start the learning process. For a list of hyperparameters for each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p> <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value pair. Each key and value is limited to 256 characters, as specified by the <code>Length Constraint</code>. </p> <important> <p>You must not include any security-sensitive information, such as account access IDs, secrets, and tokens, in the dictionary for configuring hyperparameters. SageMaker rejects the training job request and returns an exception error for detected credentials, if such user input is found.</p> </important>"
         },
         "AlgorithmSpecification": {
           "shape": "AlgorithmSpecification",
@@ -9242,11 +9546,11 @@
         },
         "SingleSignOnUserIdentifier": {
           "shape": "SingleSignOnUserIdentifier",
-          "documentation": "<p>A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified. </p>"
+          "documentation": "<p>A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is IAM Identity Center, this field is required. If the Domain's AuthMode is not IAM Identity Center, this field cannot be specified. </p>"
         },
         "SingleSignOnUserValue": {
           "shape": "String256",
-          "documentation": "<p>The username of the associated Amazon Web Services Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified. </p>"
+          "documentation": "<p>The username of the associated Amazon Web Services Single Sign-On User for this UserProfile. If the Domain's AuthMode is IAM Identity Center, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not IAM Identity Center, this field cannot be specified. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -9291,6 +9595,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>An array of key-value pairs that contain metadata to help you categorize and organize our workforce. Each tag consists of a key and a value, both of which you define.</p>"
+        },
+        "WorkforceVpcConfig": {
+          "shape": "WorkforceVpcConfigRequest",
+          "documentation": "<p>Use this parameter to configure a workforce using VPC.</p>"
         }
       }
     },
@@ -9435,30 +9743,30 @@
       "members": {
         "EnableCapture": {
           "shape": "EnableCapture",
-          "documentation": "<p/>"
+          "documentation": "<p>Whether data capture should be enabled or disabled (defaults to enabled).</p>"
         },
         "InitialSamplingPercentage": {
           "shape": "SamplingPercentage",
-          "documentation": "<p/>"
+          "documentation": "<p>The percentage of requests SageMaker will capture. A lower value is recommended for Endpoints with high traffic.</p>"
         },
         "DestinationS3Uri": {
           "shape": "DestinationS3Uri",
-          "documentation": "<p/>"
+          "documentation": "<p>The Amazon S3 location used to capture the data.</p>"
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p/>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul>"
         },
         "CaptureOptions": {
           "shape": "CaptureOptionList",
-          "documentation": "<p/>"
+          "documentation": "<p>Specifies data Model Monitor will capture. You can configure whether to collect only input, only output, or both</p>"
         },
         "CaptureContentTypeHeader": {
           "shape": "CaptureContentTypeHeader",
-          "documentation": "<p/>"
+          "documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Configuration to control how SageMaker captures inference data.</p>"
     },
     "DataCaptureConfigSummary": {
       "type": "structure",
@@ -9472,26 +9780,26 @@
       "members": {
         "EnableCapture": {
           "shape": "EnableCapture",
-          "documentation": "<p/>"
+          "documentation": "<p>Whether data capture is enabled or disabled.</p>"
         },
         "CaptureStatus": {
           "shape": "CaptureStatus",
-          "documentation": "<p/>"
+          "documentation": "<p>Whether data capture is currently functional.</p>"
         },
         "CurrentSamplingPercentage": {
           "shape": "SamplingPercentage",
-          "documentation": "<p/>"
+          "documentation": "<p>The percentage of requests being captured by your Endpoint.</p>"
         },
         "DestinationS3Uri": {
           "shape": "DestinationS3Uri",
-          "documentation": "<p/>"
+          "documentation": "<p>The Amazon S3 location being used to capture the data.</p>"
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p/>"
+          "documentation": "<p>The KMS key being used to encrypt the data in Amazon S3.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>The currently active data capture configuration used by your Endpoint.</p>"
     },
     "DataCatalogConfig": {
       "type": "structure",
@@ -9968,6 +10276,35 @@
         }
       }
     },
+    "DeleteEdgeDeploymentPlanRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan to delete.</p>"
+        }
+      }
+    },
+    "DeleteEdgeDeploymentStageRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName",
+        "StageName"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan from which the stage will be deleted.</p>"
+        },
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage.</p>"
+        }
+      }
+    },
     "DeleteEndpointConfigInput": {
       "type": "structure",
       "required": [
@@ -10425,6 +10762,72 @@
         }
       },
       "documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>"
+    },
+    "DeploymentStage": {
+      "type": "structure",
+      "required": [
+        "StageName",
+        "DeviceSelectionConfig"
+      ],
+      "members": {
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage.</p>"
+        },
+        "DeviceSelectionConfig": {
+          "shape": "DeviceSelectionConfig",
+          "documentation": "<p>Configuration of the devices in the stage.</p>"
+        },
+        "DeploymentConfig": {
+          "shape": "EdgeDeploymentConfig",
+          "documentation": "<p>Configuration of the deployment details.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a stage in an edge deployment plan.</p>"
+    },
+    "DeploymentStageMaxResults": {
+      "type": "integer",
+      "max": 10
+    },
+    "DeploymentStageStatusSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "DeploymentStageStatusSummary"
+      }
+    },
+    "DeploymentStageStatusSummary": {
+      "type": "structure",
+      "required": [
+        "StageName",
+        "DeviceSelectionConfig",
+        "DeploymentConfig",
+        "DeploymentStatus"
+      ],
+      "members": {
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage.</p>"
+        },
+        "DeviceSelectionConfig": {
+          "shape": "DeviceSelectionConfig",
+          "documentation": "<p>Configuration of the devices in the stage.</p>"
+        },
+        "DeploymentConfig": {
+          "shape": "EdgeDeploymentConfig",
+          "documentation": "<p>Configuration of the deployment details.</p>"
+        },
+        "DeploymentStatus": {
+          "shape": "EdgeDeploymentStatus",
+          "documentation": "<p>General status of the current state.</p>"
+        }
+      },
+      "documentation": "<p>Contains information summarizing the deployment stage results.</p>"
+    },
+    "DeploymentStages": {
+      "type": "list",
+      "member": {
+        "shape": "DeploymentStage"
+      }
     },
     "DeregisterDevicesRequest": {
       "type": "structure",
@@ -11293,7 +11696,7 @@
         },
         "SingleSignOnManagedApplicationInstanceId": {
           "shape": "String256",
-          "documentation": "<p>The SSO managed application instance ID.</p>"
+          "documentation": "<p>The IAM Identity Center managed application instance ID.</p>"
         },
         "Status": {
           "shape": "DomainStatus",
@@ -11356,6 +11759,82 @@
         "SecurityGroupIdForDomainBoundary": {
           "shape": "SecurityGroupId",
           "documentation": "<p>The ID of the security group that authorizes traffic between the <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
+        }
+      }
+    },
+    "DescribeEdgeDeploymentPlanRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the deployment plan to describe.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the edge deployment plan has enough stages to require tokening, then this is the response from the last list of stages returned.</p>"
+        },
+        "MaxResults": {
+          "shape": "DeploymentStageMaxResults",
+          "documentation": "<p>The maximum number of results to select (50 by default).</p>"
+        }
+      }
+    },
+    "DescribeEdgeDeploymentPlanResponse": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanArn",
+        "EdgeDeploymentPlanName",
+        "ModelConfigs",
+        "DeviceFleetName",
+        "Stages"
+      ],
+      "members": {
+        "EdgeDeploymentPlanArn": {
+          "shape": "EdgeDeploymentPlanArn",
+          "documentation": "<p>The ARN of edge deployment plan.</p>"
+        },
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan.</p>"
+        },
+        "ModelConfigs": {
+          "shape": "EdgeDeploymentModelConfigs",
+          "documentation": "<p>List of models associated with the edge deployment plan.</p>"
+        },
+        "DeviceFleetName": {
+          "shape": "EntityName",
+          "documentation": "<p>The device fleet used for this edge deployment plan.</p>"
+        },
+        "EdgeDeploymentSuccess": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices with the successful deployment.</p>"
+        },
+        "EdgeDeploymentPending": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices yet to pick up deployment, or in progress.</p>"
+        },
+        "EdgeDeploymentFailed": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices that failed the deployment.</p>"
+        },
+        "Stages": {
+          "shape": "DeploymentStageStatusSummaries",
+          "documentation": "<p>List of stages in the edge deployment plan.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Token to use when calling the next set of stages in the edge deployment plan.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the edge deployment plan was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the edge deployment plan was last updated.</p>"
         }
       }
     },
@@ -11668,6 +12147,10 @@
           "shape": "CreationTime",
           "documentation": "<p>A timestamp indicating when SageMaker created the <code>FeatureGroup</code>.</p>"
         },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating when the feature group was last updated.</p>"
+        },
         "OnlineStoreConfig": {
           "shape": "OnlineStoreConfig",
           "documentation": "<p>The configuration for the <code>OnlineStore</code>.</p>"
@@ -11688,6 +12171,10 @@
           "shape": "OfflineStoreStatus",
           "documentation": "<p>The status of the <code>OfflineStore</code>. Notifies you if replicating data into the <code>OfflineStore</code> has failed. Returns either: <code>Active</code> or <code>Blocked</code> </p>"
         },
+        "LastUpdateStatus": {
+          "shape": "LastUpdateStatus",
+          "documentation": "<p>A value indicating whether the update made to the feature group was successful.</p>"
+        },
         "FailureReason": {
           "shape": "FailureReason",
           "documentation": "<p>The reason that the <code>FeatureGroup</code> failed to be replicated in the <code>OfflineStore</code>. This is failure can occur because:</p> <ul> <li> <p>The <code>FeatureGroup</code> could not be created in the <code>OfflineStore</code>.</p> </li> <li> <p>The <code>FeatureGroup</code> could not be deleted from the <code>OfflineStore</code>.</p> </li> </ul>"
@@ -11699,6 +12186,72 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>A token to resume pagination of the list of <code>Features</code> (<code>FeatureDefinitions</code>).</p>"
+        },
+        "OnlineStoreTotalSizeBytes": {
+          "shape": "OnlineStoreTotalSizeBytes",
+          "documentation": "<p>The size of the <code>OnlineStore</code> in bytes.</p>"
+        }
+      }
+    },
+    "DescribeFeatureMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "FeatureName"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group containing the feature.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of the feature.</p>"
+        }
+      }
+    },
+    "DescribeFeatureMetadataResponse": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupArn",
+        "FeatureGroupName",
+        "FeatureName",
+        "FeatureType",
+        "CreationTime",
+        "LastModifiedTime"
+      ],
+      "members": {
+        "FeatureGroupArn": {
+          "shape": "FeatureGroupArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the feature group that contains the feature.</p>"
+        },
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group that you've specified.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of the feature that you've specified.</p>"
+        },
+        "FeatureType": {
+          "shape": "FeatureType",
+          "documentation": "<p>The data type of the feature.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime",
+          "documentation": "<p>A timestamp indicating when the feature was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating when the metadata for the feature group was modified. For example, if you add a parameter describing the feature, the timestamp changes to reflect the last time you </p>"
+        },
+        "Description": {
+          "shape": "FeatureDescription",
+          "documentation": "<p>The description you added to describe the feature.</p>"
+        },
+        "Parameters": {
+          "shape": "FeatureParameters",
+          "documentation": "<p>The key-value pairs that you added to describe the feature.</p>"
         }
       }
     },
@@ -12869,6 +13422,10 @@
         "PlatformIdentifier": {
           "shape": "PlatformIdentifier",
           "documentation": "<p>The platform identifier of the notebook instance runtime environment.</p>"
+        },
+        "InstanceMetadataServiceConfiguration": {
+          "shape": "InstanceMetadataServiceConfiguration",
+          "documentation": "<p>Information on the IMDS configuration of the notebook instance</p>"
         }
       }
     },
@@ -13748,11 +14305,11 @@
         },
         "SingleSignOnUserIdentifier": {
           "shape": "SingleSignOnUserIdentifier",
-          "documentation": "<p>The SSO user identifier.</p>"
+          "documentation": "<p>The IAM Identity Center user identifier.</p>"
         },
         "SingleSignOnUserValue": {
           "shape": "String256",
-          "documentation": "<p>The SSO user value.</p>"
+          "documentation": "<p>The IAM Identity Center user value.</p>"
         },
         "UserSettings": {
           "shape": "UserSettings",
@@ -13890,6 +14447,80 @@
       "min": 20,
       "pattern": "^arn:aws[a-z\\-]*:[a-z\\-]*:[a-z\\-]*:\\d{12}:[a-z\\-]*/?[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
+    "DeviceDeploymentStatus": {
+      "type": "string",
+      "enum": [
+        "READYTODEPLOY",
+        "INPROGRESS",
+        "DEPLOYED",
+        "FAILED",
+        "STOPPING",
+        "STOPPED"
+      ]
+    },
+    "DeviceDeploymentSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceDeploymentSummary"
+      }
+    },
+    "DeviceDeploymentSummary": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanArn",
+        "EdgeDeploymentPlanName",
+        "StageName",
+        "DeviceName",
+        "DeviceArn"
+      ],
+      "members": {
+        "EdgeDeploymentPlanArn": {
+          "shape": "EdgeDeploymentPlanArn",
+          "documentation": "<p>The ARN of the edge deployment plan.</p>"
+        },
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan.</p>"
+        },
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage in the edge deployment plan.</p>"
+        },
+        "DeployedStageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the deployed stage.</p>"
+        },
+        "DeviceFleetName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the fleet to which the device belongs to.</p>"
+        },
+        "DeviceName": {
+          "shape": "DeviceName",
+          "documentation": "<p>The name of the device.</p>"
+        },
+        "DeviceArn": {
+          "shape": "DeviceArn",
+          "documentation": "<p>The ARN of the device.</p>"
+        },
+        "DeviceDeploymentStatus": {
+          "shape": "DeviceDeploymentStatus",
+          "documentation": "<p>The deployment status of the device.</p>"
+        },
+        "DeviceDeploymentStatusMessage": {
+          "shape": "String",
+          "documentation": "<p>The detailed error message for the deployoment status result.</p>"
+        },
+        "Description": {
+          "shape": "DeviceDescription",
+          "documentation": "<p>The description of the device.</p>"
+        },
+        "DeploymentStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the deployment on the device started.</p>"
+        }
+      },
+      "documentation": "<p>Contains information summarizing device details and deployment status.</p>"
+    },
     "DeviceDescription": {
       "type": "string",
       "max": 40,
@@ -13950,6 +14581,31 @@
         "shape": "DeviceName"
       }
     },
+    "DeviceSelectionConfig": {
+      "type": "structure",
+      "required": [
+        "DeviceSubsetType"
+      ],
+      "members": {
+        "DeviceSubsetType": {
+          "shape": "DeviceSubsetType",
+          "documentation": "<p>Type of device subsets to deploy to the current stage.</p>"
+        },
+        "Percentage": {
+          "shape": "Percentage",
+          "documentation": "<p>Percentage of devices in the fleet to deploy to the current stage.</p>"
+        },
+        "DeviceNames": {
+          "shape": "DeviceNames",
+          "documentation": "<p>List of devices chosen to deploy.</p>"
+        },
+        "DeviceNameContains": {
+          "shape": "DeviceName",
+          "documentation": "<p>A filter to select devices with names containing this name.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the configurations of selected devices.</p>"
+    },
     "DeviceStats": {
       "type": "structure",
       "required": [
@@ -13967,6 +14623,14 @@
         }
       },
       "documentation": "<p>Status of devices.</p>"
+    },
+    "DeviceSubsetType": {
+      "type": "string",
+      "enum": [
+        "PERCENTAGE",
+        "SELECTION",
+        "NAMECONTAINS"
+      ]
     },
     "DeviceSummaries": {
       "type": "list",
@@ -14175,6 +14839,10 @@
         "RStudioServerProDomainSettings": {
           "shape": "RStudioServerProDomainSettings",
           "documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+        },
+        "ExecutionRoleIdentityConfig": {
+          "shape": "ExecutionRoleIdentityConfig",
+          "documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>.</p>"
         }
       },
       "documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings are specified through the <code>CreateDomain</code> API call.</p>"
@@ -14185,6 +14853,10 @@
         "RStudioServerProDomainSettingsForUpdate": {
           "shape": "RStudioServerProDomainSettingsForUpdate",
           "documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update.</p>"
+        },
+        "ExecutionRoleIdentityConfig": {
+          "shape": "ExecutionRoleIdentityConfig",
+          "documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>. This configuration can only be modified if there are no apps in the <code>InService</code> or <code>Pending</code> state.</p>"
         }
       },
       "documentation": "<p>A collection of <code>Domain</code> configuration settings to update.</p>"
@@ -14234,10 +14906,12 @@
           "documentation": "<p>The bias config file for a model.</p>"
         },
         "PreTrainingConstraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The pre-training constraints.</p>"
         },
         "PostTrainingConstraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The post-training constraints.</p>"
         }
       },
       "documentation": "<p>Represents the drift check bias baselines that can be used when the model monitor is set using the model package.</p>"
@@ -14246,7 +14920,8 @@
       "type": "structure",
       "members": {
         "Constraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check explainability constraints.</p>"
         },
         "ConfigFile": {
           "shape": "FileSource",
@@ -14259,10 +14934,12 @@
       "type": "structure",
       "members": {
         "Statistics": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model data quality statistics.</p>"
         },
         "Constraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model data quality constraints.</p>"
         }
       },
       "documentation": "<p>Represents the drift check data quality baselines that can be used when the model monitor is set using the model package. </p>"
@@ -14271,10 +14948,12 @@
       "type": "structure",
       "members": {
         "Statistics": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model quality statistics.</p>"
         },
         "Constraints": {
-          "shape": "MetricsSource"
+          "shape": "MetricsSource",
+          "documentation": "<p>The drift check model quality constraints.</p>"
         }
       },
       "documentation": "<p>Represents the drift check model quality baselines that can be used when the model monitor is set using the model package. </p>"
@@ -14318,6 +14997,137 @@
         }
       },
       "documentation": "<p>A directed edge connecting two lineage entities.</p>"
+    },
+    "EdgeDeploymentConfig": {
+      "type": "structure",
+      "required": [
+        "FailureHandlingPolicy"
+      ],
+      "members": {
+        "FailureHandlingPolicy": {
+          "shape": "FailureHandlingPolicy",
+          "documentation": "<p>Toggle that determines whether to rollback to previous configuration if the current deployment fails. By default this is turned on. You may turn this off if you want to investigate the errors yourself.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the configuration of a deployment.</p>"
+    },
+    "EdgeDeploymentModelConfig": {
+      "type": "structure",
+      "required": [
+        "ModelHandle",
+        "EdgePackagingJobName"
+      ],
+      "members": {
+        "ModelHandle": {
+          "shape": "EntityName",
+          "documentation": "<p>The name the device application uses to reference this model.</p>"
+        },
+        "EdgePackagingJobName": {
+          "shape": "EntityName",
+          "documentation": "<p>The edge packaging job associated with this deployment.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the configuration of a model in a deployment.</p>"
+    },
+    "EdgeDeploymentModelConfigs": {
+      "type": "list",
+      "member": {
+        "shape": "EdgeDeploymentModelConfig"
+      }
+    },
+    "EdgeDeploymentPlanArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z\\-]*:\\d{12}:edge-deployment/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+    },
+    "EdgeDeploymentPlanSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "EdgeDeploymentPlanSummary"
+      }
+    },
+    "EdgeDeploymentPlanSummary": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanArn",
+        "EdgeDeploymentPlanName",
+        "DeviceFleetName",
+        "EdgeDeploymentSuccess",
+        "EdgeDeploymentPending",
+        "EdgeDeploymentFailed"
+      ],
+      "members": {
+        "EdgeDeploymentPlanArn": {
+          "shape": "EdgeDeploymentPlanArn",
+          "documentation": "<p>The ARN of the edge deployment plan.</p>"
+        },
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan.</p>"
+        },
+        "DeviceFleetName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the device fleet used for the deployment. </p>"
+        },
+        "EdgeDeploymentSuccess": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices with the successful deployment.</p>"
+        },
+        "EdgeDeploymentPending": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices yet to pick up the deployment, or in progress.</p>"
+        },
+        "EdgeDeploymentFailed": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices that failed the deployment.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the edge deployment plan was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the edge deployment plan was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Contains information summarizing an edge deployment plan.</p>"
+    },
+    "EdgeDeploymentStatus": {
+      "type": "structure",
+      "required": [
+        "StageStatus",
+        "EdgeDeploymentSuccessInStage",
+        "EdgeDeploymentPendingInStage",
+        "EdgeDeploymentFailedInStage"
+      ],
+      "members": {
+        "StageStatus": {
+          "shape": "StageStatus",
+          "documentation": "<p>The general status of the current stage.</p>"
+        },
+        "EdgeDeploymentSuccessInStage": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices with the successful deployment in the current stage.</p>"
+        },
+        "EdgeDeploymentPendingInStage": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices yet to pick up the deployment in current stage, or in progress.</p>"
+        },
+        "EdgeDeploymentFailedInStage": {
+          "shape": "Integer",
+          "documentation": "<p>The number of edge devices that failed the deployment in current stage.</p>"
+        },
+        "EdgeDeploymentStatusMessage": {
+          "shape": "String",
+          "documentation": "<p>A detailed message about deployment status in current stage.</p>"
+        },
+        "EdgeDeploymentStageStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the deployment API started.</p>"
+        }
+      },
+      "documentation": "<p>Contains information summarizing the deployment stage results.</p>"
     },
     "EdgeModel": {
       "type": "structure",
@@ -14948,6 +15758,13 @@
       "max": 1024,
       "pattern": "[\\S\\s]*"
     },
+    "ExecutionRoleIdentityConfig": {
+      "type": "string",
+      "enum": [
+        "USER_PROFILE_NAME",
+        "DISABLED"
+      ]
+    },
     "ExecutionStatus": {
       "type": "string",
       "enum": [
@@ -15135,9 +15952,24 @@
       },
       "documentation": "<p>The container for the metadata for Fail step.</p>"
     },
+    "FailureHandlingPolicy": {
+      "type": "string",
+      "enum": [
+        "ROLLBACK_ON_FAILURE",
+        "DO_NOTHING"
+      ]
+    },
     "FailureReason": {
       "type": "string",
       "max": 1024
+    },
+    "FeatureAdditions": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureDefinition"
+      },
+      "max": 100,
+      "min": 1
     },
     "FeatureDefinition": {
       "type": "structure",
@@ -15160,6 +15992,12 @@
       },
       "max": 2500,
       "min": 1
+    },
+    "FeatureDescription": {
+      "type": "string",
+      "max": 255,
+      "min": 0,
+      "pattern": ".*"
     },
     "FeatureGroup": {
       "type": "structure",
@@ -15188,6 +16026,10 @@
           "shape": "CreationTime",
           "documentation": "<p>The time a <code>FeatureGroup</code> was created.</p>"
         },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating the last time you updated the feature group.</p>"
+        },
         "OnlineStoreConfig": {
           "shape": "OnlineStoreConfig"
         },
@@ -15204,6 +16046,10 @@
         },
         "OfflineStoreStatus": {
           "shape": "OfflineStoreStatus"
+        },
+        "LastUpdateStatus": {
+          "shape": "LastUpdateStatus",
+          "documentation": "<p>A value that indicates whether the feature group was updated successfully.</p>"
         },
         "FailureReason": {
           "shape": "FailureReason",
@@ -15304,11 +16150,104 @@
       },
       "documentation": "<p>The name, Arn, <code>CreationTime</code>, <code>FeatureGroup</code> values, <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a <code>FeatureGroup</code>.</p>"
     },
+    "FeatureMetadata": {
+      "type": "structure",
+      "members": {
+        "FeatureGroupArn": {
+          "shape": "FeatureGroupArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the feature group.</p>"
+        },
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group containing the feature.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of feature.</p>"
+        },
+        "FeatureType": {
+          "shape": "FeatureType",
+          "documentation": "<p>The data type of the feature.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime",
+          "documentation": "<p>A timestamp indicating when the feature was created.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "LastModifiedTime",
+          "documentation": "<p>A timestamp indicating when the feature was last modified.</p>"
+        },
+        "Description": {
+          "shape": "FeatureDescription",
+          "documentation": "<p>An optional description that you specify to better describe the feature.</p>"
+        },
+        "Parameters": {
+          "shape": "FeatureParameters",
+          "documentation": "<p>Optional key-value pairs that you specify to better describe the feature.</p>"
+        }
+      },
+      "documentation": "<p>The metadata for a feature. It can either be metadata that you specify, or metadata that is updated automatically.</p>"
+    },
     "FeatureName": {
       "type": "string",
       "max": 64,
       "min": 1,
       "pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}"
+    },
+    "FeatureParameter": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "FeatureParameterKey",
+          "documentation": "<p>A key that must contain a value to describe the feature.</p>"
+        },
+        "Value": {
+          "shape": "FeatureParameterValue",
+          "documentation": "<p>The value that belongs to a key.</p>"
+        }
+      },
+      "documentation": "<p>A key-value pair that you specify to describe the feature.</p>"
+    },
+    "FeatureParameterAdditions": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureParameter"
+      },
+      "max": 25
+    },
+    "FeatureParameterKey": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$"
+    },
+    "FeatureParameterRemovals": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureParameterKey"
+      },
+      "max": 25
+    },
+    "FeatureParameterValue": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$"
+    },
+    "FeatureParameters": {
+      "type": "list",
+      "member": {
+        "shape": "FeatureParameter"
+      },
+      "max": 25,
+      "min": 0
+    },
+    "FeatureStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "FeatureType": {
       "type": "string",
@@ -15978,7 +16917,7 @@
         },
         "MaxConcurrentTaskCount": {
           "shape": "MaxConcurrentTaskCount",
-          "documentation": "<p>Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time. The default value is 1000 objects.</p>"
+          "documentation": "<p>Defines the maximum number of data objects that can be labeled by human workers at the same time. Also referred to as batch size. Each object may have more than one worker at one time. The default value is 1000 objects. To increase the maximum value to 5000 objects, contact Amazon Web Services Support.</p>"
         },
         "AnnotationConsolidationConfig": {
           "shape": "AnnotationConsolidationConfig",
@@ -16128,7 +17067,6 @@
         "AlgorithmSpecification",
         "RoleArn",
         "OutputDataConfig",
-        "ResourceConfig",
         "StoppingCondition"
       ],
       "members": {
@@ -16168,7 +17106,7 @@
         },
         "ResourceConfig": {
           "shape": "ResourceConfig",
-          "documentation": "<p>The resources, including the compute instances and storage volumes, to use for the training jobs that the tuning job launches.</p> <p>Storage volumes store model artifacts and incremental states. Training algorithms might also use storage volumes for scratch space. If you want SageMaker to use the storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p>"
+          "documentation": "<p>The resources, including the compute instances and storage volumes, to use for the training jobs that the tuning job launches.</p> <p>Storage volumes store model artifacts and incremental states. Training algorithms might also use storage volumes for scratch space. If you want SageMaker to use the storage volume to store the training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. For distributed training algorithms, specify an instance count greater than 1.</p> <note> <p>If you want to use hyperparameter optimization with instance type flexibility, use <code>HyperParameterTuningResourceConfig</code> instead.</p> </note>"
         },
         "StoppingCondition": {
           "shape": "StoppingCondition",
@@ -16192,6 +17130,10 @@
         "RetryStrategy": {
           "shape": "RetryStrategy",
           "documentation": "<p>The number of times to retry the job when the job fails due to an <code>InternalServerError</code>.</p>"
+        },
+        "HyperParameterTuningResourceConfig": {
+          "shape": "HyperParameterTuningResourceConfig",
+          "documentation": "<p>The configuration for the hyperparameter tuning resources, including the compute instances and storage volumes, used for training jobs launched by the tuning job. By default, storage volumes hold model artifacts and incremental states. Choose <code>File</code> for <code>TrainingInputMode</code> in the <code>AlgorithmSpecification</code> parameter to additionally store training data in the storage volume (optional).</p>"
         }
       },
       "documentation": "<p>Defines the training jobs launched by a hyperparameter tuning job.</p>"
@@ -16277,6 +17219,43 @@
       },
       "documentation": "<p>The container for the summary information about a training job.</p>"
     },
+    "HyperParameterTuningAllocationStrategy": {
+      "type": "string",
+      "enum": [
+        "Prioritized"
+      ]
+    },
+    "HyperParameterTuningInstanceConfig": {
+      "type": "structure",
+      "required": [
+        "InstanceType",
+        "InstanceCount",
+        "VolumeSizeInGB"
+      ],
+      "members": {
+        "InstanceType": {
+          "shape": "TrainingInstanceType",
+          "documentation": "<p>The instance type used for processing of hyperparameter optimization jobs. Choose from general purpose (no GPUs) instance types: ml.m5.xlarge, ml.m5.2xlarge, and ml.m5.4xlarge or compute optimized (no GPUs) instance types: ml.c5.xlarge and ml.c5.2xlarge. For more information about instance types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html\">instance type descriptions</a>.</p>"
+        },
+        "InstanceCount": {
+          "shape": "TrainingInstanceCount",
+          "documentation": "<p>The number of instances of the type specified by <code>InstanceType</code>. Choose an instance count larger than 1 for distributed training algorithms. See <a href=\"https://docs.aws.amazon.com/data-parallel-use-api.html\">SageMaker distributed training jobs</a> for more information.</p>"
+        },
+        "VolumeSizeInGB": {
+          "shape": "VolumeSizeInGB",
+          "documentation": "<p>The volume size in GB of the data to be processed for hyperparameter optimization (optional).</p>"
+        }
+      },
+      "documentation": "<p>The configuration for hyperparameter tuning resources for use in training jobs launched by the tuning job. These resources include compute instances and storage volumes. Specify one or more compute instance configurations and allocation strategies to select resources (optional).</p>"
+    },
+    "HyperParameterTuningInstanceConfigs": {
+      "type": "list",
+      "member": {
+        "shape": "HyperParameterTuningInstanceConfig"
+      },
+      "max": 6,
+      "min": 1
+    },
     "HyperParameterTuningJobArn": {
       "type": "string",
       "max": 256,
@@ -16291,7 +17270,11 @@
       "members": {
         "Strategy": {
           "shape": "HyperParameterTuningJobStrategyType",
-          "documentation": "<p>Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. To use the Bayesian search strategy, set this to <code>Bayesian</code>. To randomly search, set it to <code>Random</code>. For information about search strategies, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html\">How Hyperparameter Tuning Works</a>.</p>"
+          "documentation": "<p>Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. For information about search strategies, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html\">How Hyperparameter Tuning Works</a>.</p>"
+        },
+        "StrategyConfig": {
+          "shape": "HyperParameterTuningJobStrategyConfig",
+          "documentation": "<p>The configuration for the <code>Hyperband</code> optimization strategy. This parameter should be provided only if <code>Hyperband</code> is selected as the strategy for <code>HyperParameterTuningJobConfig</code>.</p>"
         },
         "HyperParameterTuningJobObjective": {
           "shape": "HyperParameterTuningJobObjective",
@@ -16307,7 +17290,7 @@
         },
         "TrainingJobEarlyStoppingType": {
           "shape": "TrainingJobEarlyStoppingType",
-          "documentation": "<p>Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. This can be one of the following values (the default value is <code>OFF</code>):</p> <dl> <dt>OFF</dt> <dd> <p>Training jobs launched by the hyperparameter tuning job do not use early stopping.</p> </dd> <dt>AUTO</dt> <dd> <p>SageMaker stops training jobs launched by the hyperparameter tuning job when they are unlikely to perform better than previously completed training jobs. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">Stop Training Jobs Early</a>.</p> </dd> </dl>"
+          "documentation": "<p>Specifies whether to use early stopping for training jobs launched by the hyperparameter tuning job. Because the <code>Hyperband</code> strategy has its own advanced internal early stopping mechanism, <code>TrainingJobEarlyStoppingType</code> must be <code>OFF</code> to use <code>Hyperband</code>. This parameter can take on one of the following values (the default value is <code>OFF</code>):</p> <dl> <dt>OFF</dt> <dd> <p>Training jobs launched by the hyperparameter tuning job do not use early stopping.</p> </dd> <dt>AUTO</dt> <dd> <p>SageMaker stops training jobs launched by the hyperparameter tuning job when they are unlikely to perform better than previously completed training jobs. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">Stop Training Jobs Early</a>.</p> </dd> </dl>"
         },
         "TuningJobCompletionCriteria": {
           "shape": "TuningJobCompletionCriteria",
@@ -16353,6 +17336,69 @@
         "shape": "HyperParameterTuningJobObjective"
       }
     },
+    "HyperParameterTuningJobSearchEntity": {
+      "type": "structure",
+      "members": {
+        "HyperParameterTuningJobName": {
+          "shape": "HyperParameterTuningJobName",
+          "documentation": "<p>The name of a hyperparameter tuning job.</p>"
+        },
+        "HyperParameterTuningJobArn": {
+          "shape": "HyperParameterTuningJobArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a hyperparameter tuning job.</p>"
+        },
+        "HyperParameterTuningJobConfig": {
+          "shape": "HyperParameterTuningJobConfig"
+        },
+        "TrainingJobDefinition": {
+          "shape": "HyperParameterTrainingJobDefinition"
+        },
+        "TrainingJobDefinitions": {
+          "shape": "HyperParameterTrainingJobDefinitions",
+          "documentation": "<p>The job definitions included in a hyperparameter tuning job.</p>"
+        },
+        "HyperParameterTuningJobStatus": {
+          "shape": "HyperParameterTuningJobStatus",
+          "documentation": "<p>The status of a hyperparameter tuning job.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that a hyperparameter tuning job was created.</p>"
+        },
+        "HyperParameterTuningEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that a hyperparameter tuning job ended.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that a hyperparameter tuning job was last modified.</p>"
+        },
+        "TrainingJobStatusCounters": {
+          "shape": "TrainingJobStatusCounters"
+        },
+        "ObjectiveStatusCounters": {
+          "shape": "ObjectiveStatusCounters"
+        },
+        "BestTrainingJob": {
+          "shape": "HyperParameterTrainingJobSummary"
+        },
+        "OverallBestTrainingJob": {
+          "shape": "HyperParameterTrainingJobSummary"
+        },
+        "WarmStartConfig": {
+          "shape": "HyperParameterTuningJobWarmStartConfig"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>The error that was created when a hyperparameter tuning job failed.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags associated with a hyperparameter tuning job. For more information see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+        }
+      },
+      "documentation": "<p>An entity returned by the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html\">SearchRecord</a> API containing the properties of a hyperparameter tuning job.</p>"
+    },
     "HyperParameterTuningJobSortByOptions": {
       "type": "string",
       "enum": [
@@ -16371,12 +17417,23 @@
         "Stopping"
       ]
     },
+    "HyperParameterTuningJobStrategyConfig": {
+      "type": "structure",
+      "members": {
+        "HyperbandStrategyConfig": {
+          "shape": "HyperbandStrategyConfig",
+          "documentation": "<p>The configuration for the object that specifies the <code>Hyperband</code> strategy. This parameter is only supported for the <code>Hyperband</code> selection for <code>Strategy</code> within the <code>HyperParameterTuningJobConfig</code> API.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for a training job launched by a hyperparameter tuning job. Choose <code>Bayesian</code> for Bayesian optimization, and <code>Random</code> for random search optimization. For more advanced use cases, use <code>Hyperband</code>, which evaluates objective metrics for training jobs after every epoch. For more information about strategies, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html\">How Hyperparameter Tuning Works</a>.</p>"
+    },
     "HyperParameterTuningJobStrategyType": {
       "type": "string",
       "documentation": "<p>The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. Currently, the only supported value is <code>Bayesian</code>.</p>",
       "enum": [
         "Bayesian",
-        "Random"
+        "Random",
+        "Hyperband"
       ]
     },
     "HyperParameterTuningJobSummaries": {
@@ -16411,7 +17468,7 @@
         },
         "Strategy": {
           "shape": "HyperParameterTuningJobStrategyType",
-          "documentation": "<p>Specifies the search strategy hyperparameter tuning uses to choose which hyperparameters to use for each iteration. Currently, the only valid value is Bayesian.</p>"
+          "documentation": "<p>Specifies the search strategy hyperparameter tuning uses to choose which hyperparameters to evaluate at each iteration.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -16465,6 +17522,36 @@
         "TransferLearning"
       ]
     },
+    "HyperParameterTuningResourceConfig": {
+      "type": "structure",
+      "members": {
+        "InstanceType": {
+          "shape": "TrainingInstanceType",
+          "documentation": "<p>The instance type used to run hyperparameter optimization tuning jobs. See <a href=\"https://docs.aws.amazon.com/notebooks-available-instance-types.html\"> descriptions of instance types</a> for more information.</p>"
+        },
+        "InstanceCount": {
+          "shape": "TrainingInstanceCount",
+          "documentation": "<p>The number of compute instances of type <code>InstanceType</code> to use. For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html\">distributed training</a>, select a value greater than 1.</p>"
+        },
+        "VolumeSizeInGB": {
+          "shape": "OptionalVolumeSizeInGB",
+          "documentation": "<p>The volume size in GB for the storage volume to be used in processing hyperparameter optimization jobs (optional). These volumes store model artifacts, incremental states and optionally, scratch space for training algorithms. Do not provide a value for this parameter if a value for <code>InstanceConfigs</code> is also specified.</p> <p>Some instance types have a fixed total local storage size. If you select one of these instances for training, <code>VolumeSizeInGB</code> cannot be greater than this total size. For a list of instance types with local instance storage and their sizes, see <a href=\"http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>.</p> <note> <p>SageMaker supports only the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html\">General Purpose SSD (gp2)</a> storage volume type.</p> </note>"
+        },
+        "VolumeKmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>A key used by Amazon Web Services Key Management Service to encrypt data on the storage volume attached to the compute instances used to run the training job. You can use either of the following formats to specify a key.</p> <p>KMS Key ID:</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> <p>Amazon Resource Name (ARN) of a KMS key:</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> <p>Some instances use local storage, which use a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">hardware module to encrypt</a> storage volumes. If you choose one of these instance types, you cannot request a <code>VolumeKmsKeyId</code>. For a list of instance types that use local storage, see <a href=\"http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>. For more information about Amazon Web Services Key Management Service, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html\">KMS encryption</a> for more information.</p>"
+        },
+        "AllocationStrategy": {
+          "shape": "HyperParameterTuningAllocationStrategy",
+          "documentation": "<p>The strategy that determines the order of preference for resources specified in <code>InstanceConfigs</code> used in hyperparameter optimization.</p>"
+        },
+        "InstanceConfigs": {
+          "shape": "HyperParameterTuningInstanceConfigs",
+          "documentation": "<p>A list containing the configuration(s) for one or more resources for processing hyperparameter jobs. These resources include compute instances and storage volumes to use in model training jobs launched by hyperparameter tuning jobs. The <code>AllocationStrategy</code> controls the order in which multiple configurations provided in <code>InstanceConfigs</code> are used.</p> <note> <p>If you only want to use a single instance configuration inside the <code>HyperParameterTuningResourceConfig</code> API, do not provide a value for <code>InstanceConfigs</code>. Instead, use <code>InstanceType</code>, <code>VolumeSizeInGB</code> and <code>InstanceCount</code>. If you use <code>InstanceConfigs</code>, do not provide values for <code>InstanceType</code>, <code>VolumeSizeInGB</code> or <code>InstanceCount</code>.</p> </note>"
+        }
+      },
+      "documentation": "<p>The configuration of resources, including compute instances and storage volumes for use in training jobs launched by hyperparameter tuning jobs. Specify one or more instance type and count and the allocation strategy for instance selection.</p> <note> <p> <code>HyperParameterTuningResourceConfig</code> supports all of the capabilities of ResourceConfig with added functionality for flexible instance management.</p> </note>"
+    },
     "HyperParameterValue": {
       "type": "string",
       "max": 2500,
@@ -16480,6 +17567,28 @@
       },
       "max": 100,
       "min": 0
+    },
+    "HyperbandStrategyConfig": {
+      "type": "structure",
+      "members": {
+        "MinResource": {
+          "shape": "HyperbandStrategyMinResource",
+          "documentation": "<p>The minimum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. If the value for <code>MinResource</code> has not been reached, the training job will not be stopped by <code>Hyperband</code>.</p>"
+        },
+        "MaxResource": {
+          "shape": "HyperbandStrategyMaxResource",
+          "documentation": "<p>The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the <code>MaxResource</code> value, it is stopped. If a value for <code>MaxResource</code> is not provided, and <code>Hyperband</code> is selected as the hyperparameter tuning strategy, <code>HyperbandTrainingJ</code> attempts to infer <code>MaxResource</code> from the following keys (if present) in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters\">StaticsHyperParameters</a>:</p> <ul> <li> <p> <code>epochs</code> </p> </li> <li> <p> <code>numepochs</code> </p> </li> <li> <p> <code>n-epochs</code> </p> </li> <li> <p> <code>n_epochs</code> </p> </li> <li> <p> <code>num_epochs</code> </p> </li> </ul> <p>If <code>HyperbandStrategyConfig</code> is unable to infer a value for <code>MaxResource</code>, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">early stopping decisions</a>. For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html\">distributive</a> training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. </p>"
+        }
+      },
+      "documentation": "<p>The configuration for <code>Hyperband</code>, a multi-fidelity based hyperparameter tuning strategy. <code>Hyperband</code> uses the final and intermediate results of a training job to dynamically allocate resources to utilized hyperparameter configurations while automatically stopping under-performing configurations. This parameter should be provided only if <code>Hyperband</code> is selected as the <code>StrategyConfig</code> under the <code>HyperParameterTuningJobConfig</code> API.</p>"
+    },
+    "HyperbandStrategyMaxResource": {
+      "type": "integer",
+      "min": 1
+    },
+    "HyperbandStrategyMinResource": {
+      "type": "integer",
+      "min": 1
     },
     "IdempotencyToken": {
       "type": "string",
@@ -16936,6 +18045,62 @@
       },
       "min": 1
     },
+    "InstanceGroup": {
+      "type": "structure",
+      "required": [
+        "InstanceType",
+        "InstanceCount",
+        "InstanceGroupName"
+      ],
+      "members": {
+        "InstanceType": {
+          "shape": "TrainingInstanceType",
+          "documentation": "<p>Specifies the instance type of the instance group.</p>"
+        },
+        "InstanceCount": {
+          "shape": "TrainingInstanceCount",
+          "documentation": "<p>Specifies the number of instances of the instance group.</p>"
+        },
+        "InstanceGroupName": {
+          "shape": "InstanceGroupName",
+          "documentation": "<p>Specifies the name of the instance group.</p>"
+        }
+      },
+      "documentation": "<p>Defines an instance group for heterogeneous cluster training. When requesting a training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, you can configure multiple instance groups .</p>"
+    },
+    "InstanceGroupName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": ".+"
+    },
+    "InstanceGroupNames": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceGroupName"
+      },
+      "max": 5
+    },
+    "InstanceGroups": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceGroup"
+      },
+      "max": 5
+    },
+    "InstanceMetadataServiceConfiguration": {
+      "type": "structure",
+      "required": [
+        "MinimumInstanceMetadataServiceVersion"
+      ],
+      "members": {
+        "MinimumInstanceMetadataServiceVersion": {
+          "shape": "MinimumInstanceMetadataServiceVersion",
+          "documentation": "<p>Indicates the minimum IMDS version that the notebook instance supports. When passed as part of <code>CreateNotebookInstance</code>, if no value is selected, then it defaults to IMDSv1. This means that both IMDSv1 and IMDSv2 are supported. If passed as part of <code>UpdateNotebookInstance</code>, there is no default.</p>"
+        }
+      },
+      "documentation": "<p>Information on the IMDS configuration of the notebook instance</p>"
+    },
     "InstanceType": {
       "type": "string",
       "enum": [
@@ -17063,7 +18228,7 @@
       "member": {
         "shape": "IntegerParameterRange"
       },
-      "max": 20,
+      "max": 30,
       "min": 0
     },
     "IntegerValue": {
@@ -17434,6 +18599,9 @@
         "VolumeKmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training and inference jobs used for automated data labeling. </p> <p>You can only specify a <code>VolumeKmsKeyId</code> when you create a labeling job with automated data labeling enabled using the API operation <code>CreateLabelingJob</code>. You cannot specify an Amazon Web Services KMS key to encrypt the storage volume used for automated data labeling model training and inference when you create a labeling job using the console. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html\">Output Data and Storage Volume Encryption</a>.</p> <p>The <code>VolumeKmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> </ul>"
+        },
+        "VpcConfig": {
+          "shape": "VpcConfig"
         }
       },
       "documentation": "<p>Configure encryption on the storage volume attached to the ML compute instance used to run automated data labeling model training and inference. </p>"
@@ -17580,6 +18748,31 @@
     },
     "LastModifiedTime": {
       "type": "timestamp"
+    },
+    "LastUpdateStatus": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "LastUpdateStatusValue",
+          "documentation": "<p>A value that indicates whether the update was made successful.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If the update wasn't successful, indicates the reason why it failed.</p>"
+        }
+      },
+      "documentation": "<p>A value that indicates whether the update was successful.</p>"
+    },
+    "LastUpdateStatusValue": {
+      "type": "string",
+      "enum": [
+        "Successful",
+        "Failed",
+        "InProgress"
+      ]
     },
     "LifecycleConfigArns": {
       "type": "list",
@@ -18434,6 +19627,77 @@
           "documentation": "<p>If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.</p>"
         }
       }
+    },
+    "ListEdgeDeploymentPlansRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The response from the last list when returning a list large enough to need tokening.</p>"
+        },
+        "MaxResults": {
+          "shape": "ListMaxResults",
+          "documentation": "<p>The maximum number of results to select (50 by default).</p>",
+          "box": true
+        },
+        "CreationTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>Selects edge deployment plans created after this time.</p>"
+        },
+        "CreationTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>Selects edge deployment plans created before this time.</p>"
+        },
+        "LastModifiedTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>Selects edge deployment plans that were last updated after this time.</p>"
+        },
+        "LastModifiedTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>Selects edge deployment plans that were last updated before this time.</p>"
+        },
+        "NameContains": {
+          "shape": "NameContains",
+          "documentation": "<p>Selects edge deployment plans with names containing this name.</p>"
+        },
+        "DeviceFleetNameContains": {
+          "shape": "NameContains",
+          "documentation": "<p>Selects edge deployment plans with a device fleet name containing this name.</p>"
+        },
+        "SortBy": {
+          "shape": "ListEdgeDeploymentPlansSortBy",
+          "documentation": "<p>The column by which to sort the edge deployment plans. Can be one of <code>NAME</code>, <code>DEVICEFLEETNAME</code>, <code>CREATIONTIME</code>, <code>LASTMODIFIEDTIME</code>.</p>"
+        },
+        "SortOrder": {
+          "shape": "SortOrder",
+          "documentation": "<p>The direction of the sorting (ascending or descending).</p>"
+        }
+      }
+    },
+    "ListEdgeDeploymentPlansResponse": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanSummaries"
+      ],
+      "members": {
+        "EdgeDeploymentPlanSummaries": {
+          "shape": "EdgeDeploymentPlanSummaries",
+          "documentation": "<p>List of summaries of edge deployment plans.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use when calling the next page of results.</p>"
+        }
+      }
+    },
+    "ListEdgeDeploymentPlansSortBy": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "DEVICE_FLEET_NAME",
+        "CREATION_TIME",
+        "LAST_MODIFIED_TIME"
+      ]
     },
     "ListEdgePackagingJobsRequest": {
       "type": "structure",
@@ -20121,6 +21385,52 @@
         }
       }
     },
+    "ListStageDevicesRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName",
+        "StageName"
+      ],
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The response from the last list when returning a list large enough to neeed tokening.</p>"
+        },
+        "MaxResults": {
+          "shape": "ListMaxResults",
+          "documentation": "<p>The maximum number of requests to select.</p>",
+          "box": true
+        },
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan.</p>"
+        },
+        "ExcludeDevicesDeployedInOtherStage": {
+          "shape": "Boolean",
+          "documentation": "<p>Toggle for excluding devices deployed in other stages.</p>"
+        },
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage in the deployment.</p>"
+        }
+      }
+    },
+    "ListStageDevicesResponse": {
+      "type": "structure",
+      "required": [
+        "DeviceDeploymentSummaries"
+      ],
+      "members": {
+        "DeviceDeploymentSummaries": {
+          "shape": "DeviceDeploymentSummaries",
+          "documentation": "<p>List of summaries of devices allocated to the stage.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use when calling the next page of results.</p>"
+        }
+      }
+    },
     "ListStudioLifecycleConfigsRequest": {
       "type": "structure",
       "members": {
@@ -20690,7 +22000,7 @@
     },
     "MaxConcurrentTaskCount": {
       "type": "integer",
-      "max": 1000,
+      "max": 5000,
       "min": 1
     },
     "MaxConcurrentTransforms": {
@@ -20854,7 +22164,7 @@
         },
         "StandardMetricName": {
           "shape": "AutoMLMetricExtendedEnum",
-          "documentation": "<p>The name of the standard metric.</p>"
+          "documentation": "<p>The name of the standard metric. </p> <note> <p>For definitions of the standard metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics\"> <code>Autopilot candidate metrics</code> </a>.</p> </note>"
         }
       },
       "documentation": "<p>Information about the metric for a candidate produced by an AutoML job.</p>"
@@ -20917,18 +22227,23 @@
       "members": {
         "ContentType": {
           "shape": "ContentType",
-          "documentation": "<p/>"
+          "documentation": "<p>The metric source content type.</p>"
         },
         "ContentDigest": {
           "shape": "ContentDigest",
-          "documentation": "<p/>"
+          "documentation": "<p>The hash key used for the metrics source.</p>"
         },
         "S3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p/>"
+          "documentation": "<p>The S3 URI for the metrics source.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Details about the metrics source.</p>"
+    },
+    "MinimumInstanceMetadataServiceVersion": {
+      "type": "string",
+      "max": 1,
+      "pattern": "1|2"
     },
     "ModelApprovalStatus": {
       "type": "string",
@@ -20970,7 +22285,7 @@
         },
         "ConfigUri": {
           "shape": "S3Uri",
-          "documentation": "<p>JSON formatted S3 file that defines bias parameters. For more information on this JSON configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/json-bias-parameter-config.html\">Configure bias parameters</a>.</p>"
+          "documentation": "<p>JSON formatted S3 file that defines bias parameters. For more information on this JSON configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html\">Configure bias parameters</a>.</p>"
         },
         "Environment": {
           "shape": "MonitoringEnvironmentMap",
@@ -21105,7 +22420,7 @@
         },
         "ConfigUri": {
           "shape": "S3Uri",
-          "documentation": "<p>JSON formatted S3 file that defines explainability parameters. For more information on this JSON configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/json-model-explainability-parameter-config.html\">Configure model explainability parameters</a>.</p>"
+          "documentation": "<p>JSON formatted S3 file that defines explainability parameters. For more information on this JSON configuration file, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html\">Configure model explainability parameters</a>.</p>"
         },
         "Environment": {
           "shape": "MonitoringEnvironmentMap",
@@ -21322,20 +22637,24 @@
           "documentation": "<p>The time that the model package was created.</p>"
         },
         "InferenceSpecification": {
-          "shape": "InferenceSpecification"
+          "shape": "InferenceSpecification",
+          "documentation": "<p>Defines how to perform inference generation after a training job is run.</p>"
         },
         "SourceAlgorithmSpecification": {
-          "shape": "SourceAlgorithmSpecification"
+          "shape": "SourceAlgorithmSpecification",
+          "documentation": "<p>A list of algorithms that were used to create a model package.</p>"
         },
         "ValidationSpecification": {
-          "shape": "ModelPackageValidationSpecification"
+          "shape": "ModelPackageValidationSpecification",
+          "documentation": "<p>Specifies batch transform jobs that SageMaker runs to validate your model package.</p>"
         },
         "ModelPackageStatus": {
           "shape": "ModelPackageStatus",
           "documentation": "<p>The status of the model package. This can be one of the following values.</p> <ul> <li> <p> <code>PENDING</code> - The model package is pending being created.</p> </li> <li> <p> <code>IN_PROGRESS</code> - The model package is in the process of being created.</p> </li> <li> <p> <code>COMPLETED</code> - The model package was successfully created.</p> </li> <li> <p> <code>FAILED</code> - The model package failed.</p> </li> <li> <p> <code>DELETING</code> - The model package is in the process of being deleted.</p> </li> </ul>"
         },
         "ModelPackageStatusDetails": {
-          "shape": "ModelPackageStatusDetails"
+          "shape": "ModelPackageStatusDetails",
+          "documentation": "<p>Specifies the validation and image scan statuses of the model package.</p>"
         },
         "CertifyForMarketplace": {
           "shape": "CertifyForMarketplace",
@@ -21346,10 +22665,12 @@
           "documentation": "<p>The approval status of the model. This can be one of the following values.</p> <ul> <li> <p> <code>APPROVED</code> - The model is approved</p> </li> <li> <p> <code>REJECTED</code> - The model is rejected.</p> </li> <li> <p> <code>PENDING_MANUAL_APPROVAL</code> - The model is waiting for manual approval.</p> </li> </ul>"
         },
         "CreatedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
         },
         "MetadataProperties": {
-          "shape": "MetadataProperties"
+          "shape": "MetadataProperties",
+          "documentation": "<p>Metadata properties of the tracking entity, trial, or trial component.</p>"
         },
         "ModelMetrics": {
           "shape": "ModelMetrics",
@@ -21360,7 +22681,8 @@
           "documentation": "<p>The last time the model package was modified.</p>"
         },
         "LastModifiedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
         },
         "ApprovalDescription": {
           "shape": "ApprovalDescription",
@@ -23007,6 +24329,9 @@
       },
       "documentation": "<p>The security configuration for <code>OnlineStore</code>.</p>"
     },
+    "OnlineStoreTotalSizeBytes": {
+      "type": "long"
+    },
     "Operator": {
       "type": "string",
       "enum": [
@@ -23199,7 +24524,7 @@
           "documentation": "<p>The array of <a>CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.</p>"
         }
       },
-      "documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs with hyperparameter values within these ranges to find the combination of values that result in the training job with the best performance as measured by the objective metric of the hyperparameter tuning job.</p> <note> <p>You can specify a maximum of 20 hyperparameters that a hyperparameter tuning job can search over. Every possible value of a categorical parameter range counts against this limit.</p> </note>"
+      "documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs with hyperparameter values within these ranges to find the combination of values that result in the training job with the best performance as measured by the objective metric of the hyperparameter tuning job.</p> <note> <p>The maximum number of items specified for <code>Array Members</code> refers to the maximum number of hyperparameters for each range and also the maximum for the hyperparameter tuning job itself. That is, the sum of the number of hyperparameters for all the ranges can't exceed the maximum number specified.</p> </note>"
     },
     "ParameterType": {
       "type": "string",
@@ -23220,7 +24545,7 @@
       "member": {
         "shape": "ParameterValue"
       },
-      "max": 20,
+      "max": 30,
       "min": 1
     },
     "Parent": {
@@ -23341,6 +24666,10 @@
         "shape": "PendingProductionVariantSummary"
       },
       "min": 1
+    },
+    "Percentage": {
+      "type": "integer",
+      "max": 100
     },
     "Phase": {
       "type": "structure",
@@ -23780,7 +25109,7 @@
     "PlatformIdentifier": {
       "type": "string",
       "max": 15,
-      "pattern": "^(notebook-al1-v1|notebook-al2-v1)$"
+      "pattern": "^(notebook-al1-v1|notebook-al2-v1|notebook-al2-v2)$"
     },
     "PolicyString": {
       "type": "string",
@@ -24350,6 +25679,18 @@
         "ServerlessConfig": {
           "shape": "ProductionVariantServerlessConfig",
           "documentation": "<p>The serverless configuration for an endpoint. Specifies a serverless endpoint configuration instead of an instance-based endpoint configuration.</p>"
+        },
+        "VolumeSizeInGB": {
+          "shape": "ProductionVariantVolumeSizeInGB",
+          "documentation": "<p>The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Currenly only Amazon EBS gp2 storage volumes are supported.</p>"
+        },
+        "ModelDataDownloadTimeoutInSeconds": {
+          "shape": "ProductionVariantModelDataDownloadTimeoutInSeconds",
+          "documentation": "<p>The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant.</p>"
+        },
+        "ContainerStartupHealthCheckTimeoutInSeconds": {
+          "shape": "ProductionVariantContainerStartupHealthCheckTimeoutInSeconds",
+          "documentation": "<p>The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests\">How Your Container Should Respond to Health Check (Ping) Requests</a>.</p>"
         }
       },
       "documentation": "<p>Identifies a model that you want to host and the resources chosen to deploy for hosting it. If you are deploying multiple models, tell SageMaker how to distribute traffic among the models by specifying variant weights. </p>"
@@ -24364,6 +25705,11 @@
         "ml.eia2.large",
         "ml.eia2.xlarge"
       ]
+    },
+    "ProductionVariantContainerStartupHealthCheckTimeoutInSeconds": {
+      "type": "integer",
+      "max": 3600,
+      "min": 60
     },
     "ProductionVariantCoreDumpConfig": {
       "type": "structure",
@@ -24450,7 +25796,25 @@
         "ml.inf1.xlarge",
         "ml.inf1.2xlarge",
         "ml.inf1.6xlarge",
-        "ml.inf1.24xlarge"
+        "ml.inf1.24xlarge",
+        "ml.c6i.large",
+        "ml.c6i.xlarge",
+        "ml.c6i.2xlarge",
+        "ml.c6i.4xlarge",
+        "ml.c6i.8xlarge",
+        "ml.c6i.12xlarge",
+        "ml.c6i.16xlarge",
+        "ml.c6i.24xlarge",
+        "ml.c6i.32xlarge",
+        "ml.g5.xlarge",
+        "ml.g5.2xlarge",
+        "ml.g5.4xlarge",
+        "ml.g5.8xlarge",
+        "ml.g5.12xlarge",
+        "ml.g5.16xlarge",
+        "ml.g5.24xlarge",
+        "ml.g5.48xlarge",
+        "ml.p4d.24xlarge"
       ]
     },
     "ProductionVariantList": {
@@ -24460,6 +25824,11 @@
       },
       "max": 10,
       "min": 1
+    },
+    "ProductionVariantModelDataDownloadTimeoutInSeconds": {
+      "type": "integer",
+      "max": 3600,
+      "min": 60
     },
     "ProductionVariantServerlessConfig": {
       "type": "structure",
@@ -24558,6 +25927,11 @@
       "member": {
         "shape": "ProductionVariantSummary"
       },
+      "min": 1
+    },
+    "ProductionVariantVolumeSizeInGB": {
+      "type": "integer",
+      "max": 512,
       "min": 1
     },
     "ProfilerConfig": {
@@ -25044,9 +26418,6 @@
     },
     "QueryLineageRequest": {
       "type": "structure",
-      "required": [
-        "StartArns"
-      ],
       "members": {
         "StartArns": {
           "shape": "QueryLineageStartArns",
@@ -25101,7 +26472,7 @@
         "shape": "AssociationEntityArn"
       },
       "max": 1,
-      "min": 1
+      "min": 0
     },
     "QueryLineageTypes": {
       "type": "list",
@@ -25229,6 +26600,40 @@
       },
       "documentation": "<p>Provides information about the output configuration for the compiled model.</p>"
     },
+    "RecommendationJobContainerConfig": {
+      "type": "structure",
+      "members": {
+        "Domain": {
+          "shape": "String",
+          "documentation": "<p>The machine learning domain of the model and its components.</p> <p>Valid Values: <code>COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING | MACHINE_LEARNING</code> </p>"
+        },
+        "Task": {
+          "shape": "String",
+          "documentation": "<p>The machine learning task that the model accomplishes.</p> <p>Valid Values: <code>IMAGE_CLASSIFICATION | OBJECT_DETECTION | TEXT_GENERATION | IMAGE_SEGMENTATION | FILL_MASK | CLASSIFICATION | REGRESSION | OTHER</code> </p>"
+        },
+        "Framework": {
+          "shape": "String",
+          "documentation": "<p>The machine learning framework of the container image.</p> <p>Valid Values: <code>TENSORFLOW | PYTORCH | XGBOOST | SAGEMAKER-SCIKIT-LEARN</code> </p>"
+        },
+        "FrameworkVersion": {
+          "shape": "String",
+          "documentation": "<p>The framework version of the container image.</p>"
+        },
+        "PayloadConfig": {
+          "shape": "RecommendationJobPayloadConfig",
+          "documentation": "<p>Specifies the <code>SamplePayloadUrl</code> and all other sample payload-related fields.</p>"
+        },
+        "NearestModelName": {
+          "shape": "String",
+          "documentation": "<p>The name of a pre-trained machine learning model benchmarked by Amazon SageMaker Inference Recommender that matches your model.</p> <p>Valid Values: <code>efficientnetb7 | unet | xgboost | faster-rcnn-resnet101 | nasnetlarge | vgg16 | inception-v3 | mask-rcnn | sagemaker-scikit-learn | densenet201-gluon | resnet18v2-gluon | xception | densenet201 | yolov4 | resnet152 | bert-base-cased | xceptionV1-keras | resnet50 | retinanet</code> </p>"
+        },
+        "SupportedInstanceTypes": {
+          "shape": "RecommendationJobSupportedInstanceTypes",
+          "documentation": "<p>A list of the instance types that are used to generate inferences in real-time.</p>"
+        }
+      },
+      "documentation": "<p>Specifies mandatory fields for running an Inference Recommender job directly in the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJob</a> API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use <code>ContainerConfig</code> if you want to specify these fields for the recommendation job but don't want to edit them in your model package.</p>"
+    },
     "RecommendationJobDescription": {
       "type": "string",
       "max": 128
@@ -25262,6 +26667,10 @@
         "VolumeKmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. This key will be passed to SageMaker Hosting for endpoint creation. </p> <p>The SageMaker execution role must have <code>kms:CreateGrant</code> permission in order to encrypt data on the storage volume of the endpoints created for inference recommendation. The inference recommendation job will fail asynchronously during endpoint configuration creation if the role passed does not have <code>kms:CreateGrant</code> permission.</p> <p>The <code>KmsKeyId</code> can be any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:&lt;region&gt;:&lt;account&gt;:key/&lt;key-id-12ab-34cd-56ef-1234567890ab&gt;\"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>\"alias/ExampleAlias\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>\"arn:aws:kms:&lt;region&gt;:&lt;account&gt;:alias/&lt;ExampleAlias&gt;\"</code> </p> </li> </ul> <p>For more information about key identifiers, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">Key identifiers (KeyID)</a> in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.</p>"
+        },
+        "ContainerConfig": {
+          "shape": "RecommendationJobContainerConfig",
+          "documentation": "<p>Specifies mandatory fields for running an Inference Recommender job. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package.</p>"
         }
       },
       "documentation": "<p>The input configuration of the recommendation job.</p>"
@@ -25285,6 +26694,20 @@
         }
       },
       "documentation": "<p>Provides information about the output configuration for the compiled model.</p>"
+    },
+    "RecommendationJobPayloadConfig": {
+      "type": "structure",
+      "members": {
+        "SamplePayloadUrl": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).</p>"
+        },
+        "SupportedContentTypes": {
+          "shape": "RecommendationJobSupportedContentTypes",
+          "documentation": "<p>The supported MIME types for the input data.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the payload for a recommendation job.</p>"
     },
     "RecommendationJobResourceLimit": {
       "type": "structure",
@@ -25324,6 +26747,18 @@
         }
       },
       "documentation": "<p>Specifies conditions for stopping a job. When a job reaches a stopping condition limit, SageMaker ends the job.</p>"
+    },
+    "RecommendationJobSupportedContentTypes": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "RecommendationJobSupportedInstanceTypes": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
     },
     "RecommendationJobType": {
       "type": "string",
@@ -25619,8 +27054,6 @@
     "ResourceConfig": {
       "type": "structure",
       "required": [
-        "InstanceType",
-        "InstanceCount",
         "VolumeSizeInGB"
       ],
       "members": {
@@ -25634,11 +27067,15 @@
         },
         "VolumeSizeInGB": {
           "shape": "VolumeSizeInGB",
-          "documentation": "<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>You must specify sufficient ML storage for your scenario. </p> <note> <p> SageMaker supports only the General Purpose SSD (gp2) ML storage volume type. </p> </note> <note> <p>Certain Nitro-based instances include local storage with a fixed total size, dependent on the instance type. When using these instances for training, SageMaker mounts the local instance storage instead of Amazon EBS gp2 storage. You can't request a <code>VolumeSizeInGB</code> greater than the total size of the local instance storage.</p> <p>For a list of instance types that support local instance storage, including the total size per instance type, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p> </note>"
+          "documentation": "<p>The size of the ML storage volume that you want to provision. </p> <p>ML storage volumes store model artifacts and incremental states. Training algorithms might also use the ML storage volume for scratch space. If you want to store the training data in the ML storage volume, choose <code>File</code> as the <code>TrainingInputMode</code> in the algorithm specification. </p> <p>When using an ML instance with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes\">NVMe SSD volumes</a>, SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage. Available storage is fixed to the NVMe-type instance's storage capacity. SageMaker configures storage paths for training datasets, checkpoints, model artifacts, and outputs to use the entire capacity of the instance storage. For example, ML instance families with the NVMe-type instance storage include <code>ml.p4d</code>, <code>ml.g4dn</code>, and <code>ml.g5</code>. </p> <p>When using an ML instance with the EBS-only storage option and without instance storage, you must define the size of EBS volume through <code>VolumeSizeInGB</code> in the <code>ResourceConfig</code> API. For example, ML instance families that use EBS volumes include <code>ml.c5</code> and <code>ml.p2</code>. </p> <p>To look up instance types and their instance storage types and volumes, see <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a>.</p> <p>To find the default local paths defined by the SageMaker training platform, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html\">Amazon SageMaker Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs</a>.</p>"
         },
         "VolumeKmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The Amazon Web Services KMS key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the training job.</p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>VolumeKmsKeyId</code> when using an instance type with local storage.</p> <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD Instance Store Volumes</a>.</p> </note> <p>The <code>VolumeKmsKeyId</code> can be in any of the following formats:</p> <ul> <li> <p>// KMS Key ID</p> <p> <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code> </p> </li> </ul>"
+        },
+        "InstanceGroups": {
+          "shape": "InstanceGroups",
+          "documentation": "<p>The configuration of a heterogeneous cluster in JSON format.</p>"
         }
       },
       "documentation": "<p>Describes the resources, including ML compute instances and ML storage volumes, to use for model training. </p>"
@@ -25689,7 +27126,7 @@
         },
         "InstanceType": {
           "shape": "AppInstanceType",
-          "documentation": "<p>The instance type that the image version runs on.</p> <note> <p>JupyterServer Apps only support the <code>system</code> value. KernelGateway Apps do not support the <code>system</code> value, but support all other values for available instance types.</p> </note>"
+          "documentation": "<p>The instance type that the image version runs on.</p> <note> <p> <b>JupyterServer apps</b> only support the <code>system</code> value.</p> <p>For <b>KernelGateway apps</b>, the <code>system</code> value is translated to <code>ml.t3.medium</code>. KernelGateway apps also support all other values for available instance types.</p> </note>"
         },
         "LifecycleConfigArn": {
           "shape": "StudioLifecycleConfigArn",
@@ -25711,7 +27148,9 @@
         "Pipeline",
         "PipelineExecution",
         "FeatureGroup",
-        "Project"
+        "Project",
+        "FeatureMetadata",
+        "HyperParameterTuningJob"
       ]
     },
     "ResponseMIMEType": {
@@ -25856,6 +27295,10 @@
         "AttributeNames": {
           "shape": "AttributeNames",
           "documentation": "<p>A list of one or more attribute names to use that are found in a specified augmented manifest file.</p>"
+        },
+        "InstanceGroupNames": {
+          "shape": "InstanceGroupNames",
+          "documentation": "<p>A list of names of instance groups that get data from the S3 data source.</p>"
         }
       },
       "documentation": "<p>Describes the S3 data source.</p>"
@@ -26003,6 +27446,14 @@
         "Project": {
           "shape": "Project",
           "documentation": "<p>The properties of a project.</p>"
+        },
+        "FeatureMetadata": {
+          "shape": "FeatureMetadata",
+          "documentation": "<p>The feature metadata used to search through the features.</p>"
+        },
+        "HyperParameterTuningJob": {
+          "shape": "HyperParameterTuningJobSearchEntity",
+          "documentation": "<p>The properties of a hyperparameter tuning job.</p>"
         }
       },
       "documentation": "<p>A single resource returned as part of the <a>Search</a> API response.</p>"
@@ -26474,6 +27925,36 @@
         "TFRecord"
       ]
     },
+    "StageStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "READYTODEPLOY",
+        "STARTING",
+        "INPROGRESS",
+        "DEPLOYED",
+        "FAILED",
+        "STOPPING",
+        "STOPPED"
+      ]
+    },
+    "StartEdgeDeploymentStageRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName",
+        "StageName"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan to start.</p>"
+        },
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage to start.</p>"
+        }
+      }
+    },
     "StartMonitoringScheduleRequest": {
       "type": "structure",
       "required": [
@@ -26598,6 +28079,23 @@
         "CompilationJobName": {
           "shape": "EntityName",
           "documentation": "<p>The name of the model compilation job to stop.</p>"
+        }
+      }
+    },
+    "StopEdgeDeploymentStageRequest": {
+      "type": "structure",
+      "required": [
+        "EdgeDeploymentPlanName",
+        "StageName"
+      ],
+      "members": {
+        "EdgeDeploymentPlanName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the edge deployment plan to stop.</p>"
+        },
+        "StageName": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the stage to stop.</p>"
         }
       }
     },
@@ -26741,7 +28239,7 @@
       "members": {
         "MaxRuntimeInSeconds": {
           "shape": "MaxRuntimeInSeconds",
-          "documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run.</p> <p>For compilation jobs, if the job does not complete during this time, a <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and increasing as necessary based on your model.</p> <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job. When <code>RetryStrategy</code> is specified in the job request, <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts in total, not each individual attempt. The default value is 1 day. The maximum value is 28 days.</p>"
+          "documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run before it is stopped.</p> <p>For compilation jobs, if the job does not complete during this time, a <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and increasing as necessary based on your model.</p> <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job. When <code>RetryStrategy</code> is specified in the job request, <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts in total, not each individual attempt. The default value is 1 day. The maximum value is 28 days.</p> <p>The maximum time that a <code>TrainingJob</code> can run in total, including any time spent publishing metrics or archiving and uploading models after it has been stopped, is 30 days.</p>"
         },
         "MaxWaitTimeInSeconds": {
           "shape": "MaxWaitTimeInSeconds",
@@ -27166,6 +28664,20 @@
       "max": 128,
       "pattern": "[a-zA-Z0-9:_-]+"
     },
+    "TimeSeriesForecastingSettings": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "FeatureStatus",
+          "documentation": "<p>Describes whether time series forecasting is enabled or disabled in the Canvas app.</p>"
+        },
+        "AmazonForecastRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the <code>UserProfile</code> that launches the Canvas app. If an execution role is not specified in the <code>UserProfile</code>, Canvas uses the execution role specified in the Domain that owns the <code>UserProfile</code>. To allow time series forecasting, this IAM role should have the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess\"> AmazonSageMakerCanvasForecastAccess</a> policy attached and <code>forecast.amazonaws.com</code> added in the trust relationship as a service principal.</p>"
+        }
+      },
+      "documentation": "<p>Time series forecast settings for the SageMaker Canvas app.</p>"
+    },
     "Timestamp": {
       "type": "timestamp"
     },
@@ -27258,7 +28770,7 @@
     },
     "TrainingInstanceCount": {
       "type": "integer",
-      "min": 1
+      "min": 0
     },
     "TrainingInstanceType": {
       "type": "string",
@@ -27996,7 +29508,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
+          "documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html\">CreateModel</a> request. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>Describes the results of a transform job.</p>"
@@ -28930,6 +30442,63 @@
         }
       }
     },
+    "UpdateFeatureGroupRequest": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group that you're updating.</p>"
+        },
+        "FeatureAdditions": {
+          "shape": "FeatureAdditions",
+          "documentation": "<p>Updates the feature group. Updating a feature group is an asynchronous operation. When you get an HTTP 200 response, you've made a valid request. It takes some time after you've made a valid request for Feature Store to update the feature group.</p>"
+        }
+      }
+    },
+    "UpdateFeatureGroupResponse": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupArn"
+      ],
+      "members": {
+        "FeatureGroupArn": {
+          "shape": "FeatureGroupArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the feature group that you're updating.</p>"
+        }
+      }
+    },
+    "UpdateFeatureMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "FeatureName"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>The name of the feature group containing the feature that you're updating.</p>"
+        },
+        "FeatureName": {
+          "shape": "FeatureName",
+          "documentation": "<p>The name of the feature that you're updating.</p>"
+        },
+        "Description": {
+          "shape": "FeatureDescription",
+          "documentation": "<p>A description that you can write to better describe the feature.</p>"
+        },
+        "ParameterAdditions": {
+          "shape": "FeatureParameterAdditions",
+          "documentation": "<p>A list of key-value pairs that you can add to better describe the feature.</p>"
+        },
+        "ParameterRemovals": {
+          "shape": "FeatureParameterRemovals",
+          "documentation": "<p>A list of parameter keys that you can specify to remove parameters that describe your feature.</p>"
+        }
+      }
+    },
     "UpdateImageRequest": {
       "type": "structure",
       "required": [
@@ -29097,6 +30666,10 @@
         "RootAccess": {
           "shape": "RootAccess",
           "documentation": "<p>Whether root access is enabled or disabled for users of the notebook instance. The default value is <code>Enabled</code>.</p> <note> <p>If you set this to <code>Disabled</code>, users don't have root access on the notebook instance, but lifecycle configuration scripts still run with root permissions.</p> </note>"
+        },
+        "InstanceMetadataServiceConfiguration": {
+          "shape": "InstanceMetadataServiceConfiguration",
+          "documentation": "<p>Information on the IMDS configuration of the notebook instance</p>"
         }
       }
     },
@@ -29226,7 +30799,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
+          "documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>. In addition, the project must have tag update constraints set in order to include this parameter in the request. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html\">Amazon Web Services Service Catalog Tag Update Constraints</a>.</p>"
         }
       }
     },
@@ -29407,6 +30980,10 @@
         "OidcConfig": {
           "shape": "OidcConfig",
           "documentation": "<p>Use this parameter to update your OIDC Identity Provider (IdP) configuration for a workforce made using your own IdP.</p>"
+        },
+        "WorkforceVpcConfig": {
+          "shape": "WorkforceVpcConfigRequest",
+          "documentation": "<p>Use this parameter to update your VPC configuration for a workforce.</p>"
         }
       }
     },
@@ -29576,6 +31153,10 @@
         "RSessionAppSettings": {
           "shape": "RSessionAppSettings",
           "documentation": "<p>A collection of settings that configure the <code>RSessionGateway</code> app.</p>"
+        },
+        "CanvasAppSettings": {
+          "shape": "CanvasAppSettings",
+          "documentation": "<p>The Canvas app settings.</p>"
         }
       },
       "documentation": "<p>A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the <code>CreateUserProfile</code> API is called, and as <code>DefaultUserSettings</code> when the <code>CreateDomain</code> API is called.</p> <p> <code>SecurityGroups</code> is aggregated when specified in both calls. For all other settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code> take precedence over those specified in <code>CreateDomain</code>.</p>"
@@ -29751,6 +31332,18 @@
         "CreateDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date that the workforce is created.</p>"
+        },
+        "WorkforceVpcConfig": {
+          "shape": "WorkforceVpcConfigResponse",
+          "documentation": "<p>The configuration of a VPC workforce.</p>"
+        },
+        "Status": {
+          "shape": "WorkforceStatus",
+          "documentation": "<p>The status of your workforce.</p>"
+        },
+        "FailureReason": {
+          "shape": "WorkforceFailureReason",
+          "documentation": "<p>The reason your workforce failed.</p>"
         }
       },
       "documentation": "<p>A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each Amazon Web Services Region. By default, any workforce-related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>"
@@ -29760,11 +31353,109 @@
       "max": 256,
       "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:workforce/.*"
     },
+    "WorkforceFailureReason": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": ".+"
+    },
     "WorkforceName": {
       "type": "string",
       "max": 63,
       "min": 1,
       "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]){0,62}$"
+    },
+    "WorkforceSecurityGroupId": {
+      "type": "string",
+      "max": 32,
+      "pattern": "^sg-[0-9a-z]*$"
+    },
+    "WorkforceSecurityGroupIds": {
+      "type": "list",
+      "member": {
+        "shape": "WorkforceSecurityGroupId"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "WorkforceStatus": {
+      "type": "string",
+      "enum": [
+        "Initializing",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Active"
+      ]
+    },
+    "WorkforceSubnetId": {
+      "type": "string",
+      "max": 32,
+      "pattern": "^subnet-[0-9a-z]*$"
+    },
+    "WorkforceSubnets": {
+      "type": "list",
+      "member": {
+        "shape": "WorkforceSubnetId"
+      },
+      "max": 16,
+      "min": 1
+    },
+    "WorkforceVpcConfigRequest": {
+      "type": "structure",
+      "members": {
+        "VpcId": {
+          "shape": "WorkforceVpcId",
+          "documentation": "<p>The ID of the VPC that the workforce uses for communication.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "WorkforceSecurityGroupIds",
+          "documentation": "<p>The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.</p>"
+        },
+        "Subnets": {
+          "shape": "WorkforceSubnets",
+          "documentation": "<p>The ID of the subnets in the VPC that you want to connect.</p>"
+        }
+      },
+      "documentation": "<p>The VPC object you use to create or update a workforce.</p>"
+    },
+    "WorkforceVpcConfigResponse": {
+      "type": "structure",
+      "required": [
+        "VpcId",
+        "SecurityGroupIds",
+        "Subnets"
+      ],
+      "members": {
+        "VpcId": {
+          "shape": "WorkforceVpcId",
+          "documentation": "<p>The ID of the VPC that the workforce uses for communication.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "WorkforceSecurityGroupIds",
+          "documentation": "<p>The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.</p>"
+        },
+        "Subnets": {
+          "shape": "WorkforceSubnets",
+          "documentation": "<p>The ID of the subnets in the VPC that you want to connect.</p>"
+        },
+        "VpcEndpointId": {
+          "shape": "WorkforceVpcEndpointId",
+          "documentation": "<p>The IDs for the VPC service endpoints of your VPC workforce when it is created and updated.</p>"
+        }
+      },
+      "documentation": "<p>A VpcConfig object that specifies the VPC that you want your workforce to connect to.</p>"
+    },
+    "WorkforceVpcEndpointId": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^vpce-[0-9a-z]*$"
+    },
+    "WorkforceVpcId": {
+      "type": "string",
+      "max": 32,
+      "pattern": "^vpc-[0-9a-z]*$"
     },
     "Workforces": {
       "type": "list",

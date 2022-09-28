@@ -245,7 +245,7 @@ declare namespace EMRcontainers {
      */
     executionRoleArn: IAMRoleArn;
     /**
-     * The certificate ARN provided by users for the managed endpoint. This fiedd is under deprecation and will be removed in future releases.
+     * The certificate ARN provided by users for the managed endpoint. This field is under deprecation and will be removed in future releases.
      */
     certificateArn?: ACMCertArn;
     /**
@@ -486,6 +486,10 @@ declare namespace EMRcontainers {
      * The job driver parameters specified for spark submit.
      */
     sparkSubmitJobDriver?: SparkSubmitJobDriver;
+    /**
+     * The job driver for job type.
+     */
+    sparkSqlJobDriver?: SparkSqlJobDriver;
   }
   export interface JobRun {
     /**
@@ -718,6 +722,17 @@ declare namespace EMRcontainers {
     logUri: UriString;
   }
   export type SensitivePropertiesMap = {[key: string]: String1024};
+  export interface SparkSqlJobDriver {
+    /**
+     * The SQL file to be executed.
+     */
+    entryPoint?: EntryPointPath;
+    /**
+     * The Spark parameters to be included in the Spark SQL command.
+     */
+    sparkSqlParameters?: SparkSqlParameters;
+  }
+  export type SparkSqlParameters = string;
   export interface SparkSubmitJobDriver {
     /**
      * The entry point of job application.

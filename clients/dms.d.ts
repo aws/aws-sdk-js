@@ -53,6 +53,14 @@ declare class DMS extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
   /**
+   * Creates a Fleet Advisor collector using the specified parameters.
+   */
+  createFleetAdvisorCollector(params: DMS.Types.CreateFleetAdvisorCollectorRequest, callback?: (err: AWSError, data: DMS.Types.CreateFleetAdvisorCollectorResponse) => void): Request<DMS.Types.CreateFleetAdvisorCollectorResponse, AWSError>;
+  /**
+   * Creates a Fleet Advisor collector using the specified parameters.
+   */
+  createFleetAdvisorCollector(callback?: (err: AWSError, data: DMS.Types.CreateFleetAdvisorCollectorResponse) => void): Request<DMS.Types.CreateFleetAdvisorCollectorResponse, AWSError>;
+  /**
    * Creates the replication instance using the specified parameters. DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see Creating the IAM Roles to Use With the CLI and DMS API. For information on the required permissions, see IAM Permissions Needed to Use DMS.
    */
   createReplicationInstance(params: DMS.Types.CreateReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
@@ -108,6 +116,22 @@ declare class DMS extends Service {
    *  Deletes an DMS event subscription. 
    */
   deleteEventSubscription(callback?: (err: AWSError, data: DMS.Types.DeleteEventSubscriptionResponse) => void): Request<DMS.Types.DeleteEventSubscriptionResponse, AWSError>;
+  /**
+   * Deletes the specified Fleet Advisor collector.
+   */
+  deleteFleetAdvisorCollector(params: DMS.Types.DeleteCollectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Fleet Advisor collector.
+   */
+  deleteFleetAdvisorCollector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Fleet Advisor collector databases.
+   */
+  deleteFleetAdvisorDatabases(params: DMS.Types.DeleteFleetAdvisorDatabasesRequest, callback?: (err: AWSError, data: DMS.Types.DeleteFleetAdvisorDatabasesResponse) => void): Request<DMS.Types.DeleteFleetAdvisorDatabasesResponse, AWSError>;
+  /**
+   * Deletes the specified Fleet Advisor collector databases.
+   */
+  deleteFleetAdvisorDatabases(callback?: (err: AWSError, data: DMS.Types.DeleteFleetAdvisorDatabasesResponse) => void): Request<DMS.Types.DeleteFleetAdvisorDatabasesResponse, AWSError>;
   /**
    * Deletes the specified replication instance.  You must delete any migration tasks that are associated with the replication instance before you can delete it.  
    */
@@ -220,6 +244,46 @@ declare class DMS extends Service {
    *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on DMS events, see Working with Events and Notifications in the Database Migration Service User Guide. 
    */
   describeEvents(callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
+  /**
+   * Returns a list of the Fleet Advisor collectors in your account.
+   */
+  describeFleetAdvisorCollectors(params: DMS.Types.DescribeFleetAdvisorCollectorsRequest, callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorCollectorsResponse) => void): Request<DMS.Types.DescribeFleetAdvisorCollectorsResponse, AWSError>;
+  /**
+   * Returns a list of the Fleet Advisor collectors in your account.
+   */
+  describeFleetAdvisorCollectors(callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorCollectorsResponse) => void): Request<DMS.Types.DescribeFleetAdvisorCollectorsResponse, AWSError>;
+  /**
+   * Returns a list of Fleet Advisor databases in your account.
+   */
+  describeFleetAdvisorDatabases(params: DMS.Types.DescribeFleetAdvisorDatabasesRequest, callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorDatabasesResponse) => void): Request<DMS.Types.DescribeFleetAdvisorDatabasesResponse, AWSError>;
+  /**
+   * Returns a list of Fleet Advisor databases in your account.
+   */
+  describeFleetAdvisorDatabases(callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorDatabasesResponse) => void): Request<DMS.Types.DescribeFleetAdvisorDatabasesResponse, AWSError>;
+  /**
+   * Provides descriptions of large-scale assessment (LSA) analyses produced by your Fleet Advisor collectors. 
+   */
+  describeFleetAdvisorLsaAnalysis(params: DMS.Types.DescribeFleetAdvisorLsaAnalysisRequest, callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorLsaAnalysisResponse) => void): Request<DMS.Types.DescribeFleetAdvisorLsaAnalysisResponse, AWSError>;
+  /**
+   * Provides descriptions of large-scale assessment (LSA) analyses produced by your Fleet Advisor collectors. 
+   */
+  describeFleetAdvisorLsaAnalysis(callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorLsaAnalysisResponse) => void): Request<DMS.Types.DescribeFleetAdvisorLsaAnalysisResponse, AWSError>;
+  /**
+   * Provides descriptions of the schemas discovered by your Fleet Advisor collectors.
+   */
+  describeFleetAdvisorSchemaObjectSummary(params: DMS.Types.DescribeFleetAdvisorSchemaObjectSummaryRequest, callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorSchemaObjectSummaryResponse) => void): Request<DMS.Types.DescribeFleetAdvisorSchemaObjectSummaryResponse, AWSError>;
+  /**
+   * Provides descriptions of the schemas discovered by your Fleet Advisor collectors.
+   */
+  describeFleetAdvisorSchemaObjectSummary(callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorSchemaObjectSummaryResponse) => void): Request<DMS.Types.DescribeFleetAdvisorSchemaObjectSummaryResponse, AWSError>;
+  /**
+   * Returns a list of schemas detected by Fleet Advisor Collectors in your account.
+   */
+  describeFleetAdvisorSchemas(params: DMS.Types.DescribeFleetAdvisorSchemasRequest, callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorSchemasResponse) => void): Request<DMS.Types.DescribeFleetAdvisorSchemasResponse, AWSError>;
+  /**
+   * Returns a list of schemas detected by Fleet Advisor Collectors in your account.
+   */
+  describeFleetAdvisorSchemas(callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorSchemasResponse) => void): Request<DMS.Types.DescribeFleetAdvisorSchemasResponse, AWSError>;
   /**
    * Returns information about the replication instance types that can be created in the specified region.
    */
@@ -413,6 +477,10 @@ declare class DMS extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
+   * Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.
+   */
+  runFleetAdvisorLsaAnalysis(callback?: (err: AWSError, data: DMS.Types.RunFleetAdvisorLsaAnalysisResponse) => void): Request<DMS.Types.RunFleetAdvisorLsaAnalysisResponse, AWSError>;
+  /**
    * Starts the replication task. For more information about DMS tasks, see Working with Migration Tasks  in the Database Migration Service User Guide. 
    */
   startReplicationTask(params: DMS.Types.StartReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
@@ -452,6 +520,14 @@ declare class DMS extends Service {
    * Tests the connection between the replication instance and the endpoint.
    */
   testConnection(callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
+  /**
+   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
+   */
+  updateSubscriptionsToEventBridge(params: DMS.Types.UpdateSubscriptionsToEventBridgeMessage, callback?: (err: AWSError, data: DMS.Types.UpdateSubscriptionsToEventBridgeResponse) => void): Request<DMS.Types.UpdateSubscriptionsToEventBridgeResponse, AWSError>;
+  /**
+   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
+   */
+  updateSubscriptionsToEventBridge(callback?: (err: AWSError, data: DMS.Types.UpdateSubscriptionsToEventBridgeResponse) => void): Request<DMS.Types.UpdateSubscriptionsToEventBridgeResponse, AWSError>;
   /**
    * Waits for the testConnectionSucceeds state by periodically calling the underlying DMS.describeConnectionsoperation every 5 seconds (at most 60 times). Wait until testing connection succeeds.
    */
@@ -635,6 +711,85 @@ declare namespace DMS {
   export type CertificateList = Certificate[];
   export type CertificateWallet = Buffer|Uint8Array|Blob|string;
   export type CharLengthSemantics = "default"|"char"|"byte"|string;
+  export interface CollectorHealthCheck {
+    /**
+     * The status of the Fleet Advisor collector.
+     */
+    CollectorStatus?: CollectorStatus;
+    /**
+     * Whether the local collector can access its Amazon S3 bucket.
+     */
+    LocalCollectorS3Access?: BooleanOptional;
+    /**
+     * Whether the web collector can access its Amazon S3 bucket.
+     */
+    WebCollectorS3Access?: BooleanOptional;
+    /**
+     * Whether the role that you provided when creating the Fleet Advisor collector has sufficient permissions to access the Fleet Advisor web collector.
+     */
+    WebCollectorGrantedRoleBasedAccess?: BooleanOptional;
+  }
+  export interface CollectorResponse {
+    /**
+     * The reference ID of the Fleet Advisor collector.
+     */
+    CollectorReferencedId?: String;
+    /**
+     * The name of the Fleet Advisor collector .
+     */
+    CollectorName?: String;
+    /**
+     * The version of your Fleet Advisor collector, in semantic versioning format, for example 1.0.2 
+     */
+    CollectorVersion?: String;
+    /**
+     * Whether the collector version is up to date.
+     */
+    VersionStatus?: VersionStatus;
+    /**
+     * A summary description of the Fleet Advisor collector.
+     */
+    Description?: String;
+    /**
+     * The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.
+     */
+    S3BucketName?: String;
+    /**
+     * The IAM role that grants permissions to access the specified Amazon S3 bucket.
+     */
+    ServiceAccessRoleArn?: String;
+    CollectorHealthCheck?: CollectorHealthCheck;
+    /**
+     * The timestamp of the last time the collector received data, in the following format: 2022-01-24T19:04:02.596113Z 
+     */
+    LastDataReceived?: String;
+    /**
+     * The timestamp when DMS registered the collector, in the following format: 2022-01-24T19:04:02.596113Z 
+     */
+    RegisteredDate?: String;
+    /**
+     * The timestamp when you created the collector, in the following format: 2022-01-24T19:04:02.596113Z 
+     */
+    CreatedDate?: String;
+    /**
+     * The timestamp when DMS last modified the collector, in the following format: 2022-01-24T19:04:02.596113Z 
+     */
+    ModifiedDate?: String;
+    InventoryData?: InventoryData;
+  }
+  export type CollectorResponses = CollectorResponse[];
+  export interface CollectorShortInfoResponse {
+    /**
+     * The reference ID of the Fleet Advisor collector.
+     */
+    CollectorReferencedId?: String;
+    /**
+     * The name of the Fleet Advisor collector.
+     */
+    CollectorName?: String;
+  }
+  export type CollectorStatus = "UNREGISTERED"|"ACTIVE"|string;
+  export type CollectorsList = CollectorShortInfoResponse[];
   export type CompressionTypeValue = "none"|"gzip"|string;
   export interface Connection {
     /**
@@ -693,7 +848,7 @@ declare namespace DMS {
      */
     Port?: IntegerOptional;
     /**
-     * The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName.
+     * The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName. To migrate to a specific database, use this setting and targetDbType.
      */
     DatabaseName?: String;
     /**
@@ -836,6 +991,46 @@ declare namespace DMS {
      * The event subscription that was created.
      */
     EventSubscription?: EventSubscription;
+  }
+  export interface CreateFleetAdvisorCollectorRequest {
+    /**
+     * The name of your Fleet Advisor collector (for example, sample-collector).
+     */
+    CollectorName: String;
+    /**
+     * A summary description of your Fleet Advisor collector.
+     */
+    Description?: String;
+    /**
+     * The IAM role that grants permissions to access the specified Amazon S3 bucket.
+     */
+    ServiceAccessRoleArn: String;
+    /**
+     * The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.
+     */
+    S3BucketName: String;
+  }
+  export interface CreateFleetAdvisorCollectorResponse {
+    /**
+     * The unique ID of the new Fleet Advisor collector, for example: 22fda70c-40d5-4acf-b233-a495bd8eb7f5 
+     */
+    CollectorReferencedId?: String;
+    /**
+     * The name of the new Fleet Advisor collector.
+     */
+    CollectorName?: String;
+    /**
+     * A summary description of the Fleet Advisor collector.
+     */
+    Description?: String;
+    /**
+     * The IAM role that grants permissions to access the specified Amazon S3 bucket.
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * The Amazon S3 bucket that the collector uses to store inventory metadata.
+     */
+    S3BucketName?: String;
   }
   export interface CreateReplicationInstanceMessage {
     /**
@@ -990,6 +1185,85 @@ declare namespace DMS {
     ReplicationTask?: ReplicationTask;
   }
   export type DataFormatValue = "csv"|"parquet"|string;
+  export interface DatabaseInstanceSoftwareDetailsResponse {
+    /**
+     * The database engine of a database in a Fleet Advisor collector inventory, for example Microsoft SQL Server.
+     */
+    Engine?: String;
+    /**
+     * The database engine version of a database in a Fleet Advisor collector inventory, for example 2019.
+     */
+    EngineVersion?: String;
+    /**
+     * The database engine edition of a database in a Fleet Advisor collector inventory, for example Express.
+     */
+    EngineEdition?: String;
+    /**
+     * The service pack level of the database.
+     */
+    ServicePack?: String;
+    /**
+     * The support level of the database, for example Mainstream support.
+     */
+    SupportLevel?: String;
+    /**
+     * The operating system architecture of the database.
+     */
+    OsArchitecture?: IntegerOptional;
+    /**
+     * Information about the database engine software, for example Mainstream support ends on November 14th, 2024.
+     */
+    Tooltip?: String;
+  }
+  export type DatabaseList = DatabaseResponse[];
+  export interface DatabaseResponse {
+    /**
+     * The ID of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseId?: String;
+    /**
+     * The name of a database in a Fleet Advisor collector inventory. 
+     */
+    DatabaseName?: String;
+    /**
+     * The IP address of a database in a Fleet Advisor collector inventory. 
+     */
+    IpAddress?: String;
+    /**
+     * The number of schemas in a Fleet Advisor collector inventory database. 
+     */
+    NumberOfSchemas?: LongOptional;
+    /**
+     * The server name of a database in a Fleet Advisor collector inventory. 
+     */
+    Server?: ServerShortInfoResponse;
+    /**
+     * The software details of a database in a Fleet Advisor collector inventory, such as database engine and version.
+     */
+    SoftwareDetails?: DatabaseInstanceSoftwareDetailsResponse;
+    /**
+     * A list of collectors associated with the database.
+     */
+    Collectors?: CollectorsList;
+  }
+  export interface DatabaseShortInfoResponse {
+    /**
+     * The ID of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseId?: String;
+    /**
+     * The name of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseName?: String;
+    /**
+     * The IP address of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseIpAddress?: String;
+    /**
+     * The database engine of a database in a Fleet Advisor collector inventory, for example PostgreSQL.
+     */
+    DatabaseEngine?: String;
+  }
   export type DatePartitionDelimiterValue = "SLASH"|"UNDERSCORE"|"DASH"|"NONE"|string;
   export type DatePartitionSequenceValue = "YYYYMMDD"|"YYYYMMDDHH"|"YYYYMM"|"MMYYYYDD"|"DDMMYYYY"|string;
   export interface DeleteCertificateMessage {
@@ -1003,6 +1277,12 @@ declare namespace DMS {
      * The Secure Sockets Layer (SSL) certificate.
      */
     Certificate?: Certificate;
+  }
+  export interface DeleteCollectorRequest {
+    /**
+     * The reference ID of the Fleet Advisor collector to delete.
+     */
+    CollectorReferencedId: String;
   }
   export interface DeleteConnectionMessage {
     /**
@@ -1043,6 +1323,18 @@ declare namespace DMS {
      * The event subscription that was deleted.
      */
     EventSubscription?: EventSubscription;
+  }
+  export interface DeleteFleetAdvisorDatabasesRequest {
+    /**
+     * The IDs of the Fleet Advisor collector databases to delete.
+     */
+    DatabaseIds: StringList;
+  }
+  export interface DeleteFleetAdvisorDatabasesResponse {
+    /**
+     * The IDs of the databases that the operation deleted.
+     */
+    DatabaseIds?: StringList;
   }
   export interface DeleteReplicationInstanceMessage {
     /**
@@ -1351,6 +1643,122 @@ declare namespace DMS {
      * The events described.
      */
     Events?: EventList;
+  }
+  export interface DescribeFleetAdvisorCollectorsRequest {
+    /**
+     *  If you specify any of the following filters, the output includes information for only those collectors that meet the filter criteria:    collector-referenced-id – The ID of the collector agent, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.    collector-name – The name of the collector agent.   An example is: describe-fleet-advisor-collectors --filter Name="collector-referenced-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d" 
+     */
+    Filters?: FilterList;
+    /**
+     * Sets the maximum number of records returned in the response.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorCollectorsResponse {
+    /**
+     * Provides descriptions of the Fleet Advisor collectors, including the collectors' name and ID, and the latest inventory data. 
+     */
+    Collectors?: CollectorResponses;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorDatabasesRequest {
+    /**
+     *  If you specify any of the following filters, the output includes information for only those databases that meet the filter criteria:     database-id – The ID of the database.    database-name – The name of the database.    database-engine – The name of the database engine.    server-ip-address – The IP address of the database server.    database-ip-address – The IP address of the database.    collector-name – The name of the associated Fleet Advisor collector.   An example is: describe-fleet-advisor-databases --filter Name="database-id",Values="45" 
+     */
+    Filters?: FilterList;
+    /**
+     * Sets the maximum number of records returned in the response.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorDatabasesResponse {
+    /**
+     * Provides descriptions of the Fleet Advisor collector databases, including the database's collector, ID, and name.
+     */
+    Databases?: DatabaseList;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorLsaAnalysisRequest {
+    /**
+     * Sets the maximum number of records returned in the response.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorLsaAnalysisResponse {
+    /**
+     * A list of FleetAdvisorLsaAnalysisResponse objects.
+     */
+    Analysis?: FleetAdvisorLsaAnalysisResponseList;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorSchemaObjectSummaryRequest {
+    /**
+     *  If you specify any of the following filters, the output includes information for only those schema objects that meet the filter criteria:    schema-id – The ID of the schema, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.   Example: describe-fleet-advisor-schema-object-summary --filter Name="schema-id",Values="50" 
+     */
+    Filters?: FilterList;
+    /**
+     * Sets the maximum number of records returned in the response.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorSchemaObjectSummaryResponse {
+    /**
+     * A collection of FleetAdvisorSchemaObjectResponse objects.
+     */
+    FleetAdvisorSchemaObjects?: FleetAdvisorSchemaObjectList;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorSchemasRequest {
+    /**
+     *  If you specify any of the following filters, the output includes information for only those schemas that meet the filter criteria:    complexity – The schema's complexity, for example Simple.    database-id – The ID of the schema's database.    database-ip-address – The IP address of the schema's database.    database-name – The name of the schema's database.    database-engine – The name of the schema database's engine.    original-schema-name – The name of the schema's database's main schema.    schema-id – The ID of the schema, for example 15.    schema-name – The name of the schema.    server-ip-address – The IP address of the schema database's server.   An example is: describe-fleet-advisor-schemas --filter Name="schema-id",Values="50" 
+     */
+    Filters?: FilterList;
+    /**
+     * Sets the maximum number of records returned in the response.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
+  }
+  export interface DescribeFleetAdvisorSchemasResponse {
+    /**
+     * A collection of SchemaResponse objects.
+     */
+    FleetAdvisorSchemas?: FleetAdvisorSchemaList;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
+     */
+    NextToken?: String;
   }
   export interface DescribeOrderableReplicationInstancesMessage {
     /**
@@ -1705,6 +2113,7 @@ declare namespace DMS {
      */
     SecretsManagerSecretId?: String;
   }
+  export type DoubleOptional = number;
   export interface DynamoDbSettings {
     /**
      *  The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action.
@@ -1728,6 +2137,10 @@ declare namespace DMS {
      * The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.
      */
     ErrorRetryDuration?: IntegerOptional;
+    /**
+     * Set this option to true for DMS to migrate documentation using the documentation type _doc. OpenSearch and an Elasticsearch cluster only support the _doc documentation type in versions 7. x and later. The default value is false.
+     */
+    UseNewMappingType?: BooleanOptional;
   }
   export type EncodingTypeValue = "plain"|"plain-dictionary"|"rle-dictionary"|string;
   export type EncryptionModeValue = "sse-s3"|"sse-kms"|string;
@@ -1999,6 +2412,41 @@ declare namespace DMS {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface FleetAdvisorLsaAnalysisResponse {
+    /**
+     * The ID of an LSA analysis run by a Fleet Advisor collector.
+     */
+    LsaAnalysisId?: String;
+    /**
+     * The status of an LSA analysis run by a Fleet Advisor collector.
+     */
+    Status?: String;
+  }
+  export type FleetAdvisorLsaAnalysisResponseList = FleetAdvisorLsaAnalysisResponse[];
+  export type FleetAdvisorSchemaList = SchemaResponse[];
+  export type FleetAdvisorSchemaObjectList = FleetAdvisorSchemaObjectResponse[];
+  export interface FleetAdvisorSchemaObjectResponse {
+    /**
+     * The ID of a schema object in a Fleet Advisor collector inventory.
+     */
+    SchemaId?: String;
+    /**
+     * The type of the schema object, as reported by the database engine. Examples include the following:    function     trigger     SYSTEM_TABLE     QUEUE   
+     */
+    ObjectType?: String;
+    /**
+     * The number of objects in a schema object in a Fleet Advisor collector inventory.
+     */
+    NumberOfObjects?: LongOptional;
+    /**
+     * The number of lines of code in a schema object in a Fleet Advisor collector inventory.
+     */
+    CodeLineCount?: LongOptional;
+    /**
+     * The size level of the code in a schema object in a Fleet Advisor collector inventory.
+     */
+    CodeSize?: LongOptional;
+  }
   export interface GcpMySQLSettings {
     /**
      * Specifies a script to run immediately after DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails. For this parameter, provide the code of the script itself, not the name of a file containing the script. 
@@ -2128,6 +2576,16 @@ declare namespace DMS {
   export type Integer = number;
   export type IntegerList = Integer[];
   export type IntegerOptional = number;
+  export interface InventoryData {
+    /**
+     * The number of databases in the Fleet Advisor collector inventory.
+     */
+    NumberOfDatabases?: IntegerOptional;
+    /**
+     * The number of schemas in the Fleet Advisor collector inventory.
+     */
+    NumberOfSchemas?: IntegerOptional;
+  }
   export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string;
   export interface KafkaSettings {
     /**
@@ -2263,6 +2721,7 @@ declare namespace DMS {
     TagList?: TagList;
   }
   export type Long = number;
+  export type LongOptional = number;
   export type MessageFormatValue = "json"|"json-unformatted"|string;
   export interface MicrosoftSQLServerSettings {
     /**
@@ -2321,6 +2780,10 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the SQL Server endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     */
+    TrimSpaceInChar?: BooleanOptional;
   }
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
   export interface ModifyEndpointMessage {
@@ -2696,7 +3159,7 @@ declare namespace DMS {
      */
     EventsPollInterval?: IntegerOptional;
     /**
-     * Specifies where to migrate source tables on the target, either to a single database or multiple databases. Example: targetDbType=MULTIPLE_DATABASES 
+     * Specifies where to migrate source tables on the target, either to a single database or multiple databases. If you specify SPECIFIC_DATABASE, specify the database name using the DatabaseName parameter of the Endpoint object. Example: targetDbType=MULTIPLE_DATABASES 
      */
     TargetDbType?: TargetDbType;
     /**
@@ -2928,6 +3391,10 @@ declare namespace DMS {
      * Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret that contains the Oracle ASM connection details for the Oracle endpoint.
      */
     SecretsManagerOracleAsmSecretId?: String;
+    /**
+     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     */
+    TrimSpaceInChar?: BooleanOptional;
   }
   export interface OrderableReplicationInstance {
     /**
@@ -3071,6 +3538,10 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the PostgreSQL endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     */
+    TrimSpaceInChar?: BooleanOptional;
   }
   export interface RebootReplicationInstanceMessage {
     /**
@@ -3510,7 +3981,7 @@ declare namespace DMS {
      */
     LastFailureMessage?: String;
     /**
-     * The reason the replication task was stopped. This response parameter can return one of the following values:    "STOP_REASON_FULL_LOAD_COMPLETED" – Full-load migration completed.    "STOP_REASON_CACHED_CHANGES_APPLIED" – Change data capture (CDC) load completed.    "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a full-load and CDC migration, the full load stopped as specified before starting the CDC migration.    "STOP_REASON_SERVER_TIME" – The migration stopped at the specified server time.  
+     * The reason the replication task was stopped. This response parameter can return one of the following values:    "Stop Reason NORMAL"     "Stop Reason RECOVERABLE_ERROR"     "Stop Reason FATAL_ERROR"     "Stop Reason FULL_LOAD_ONLY_FINISHED"     "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load completed, with cached changes not applied    "Stop Reason STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes applied    "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"     "Stop Reason STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied    "Stop Reason STOPPED_DUE_TO_LOW_MEMORY"     "Stop Reason STOPPED_DUE_TO_LOW_DISK"     "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping task    "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for stopping task    "Stop Reason RECONFIGURATION_RESTART"     "Stop Reason RECYCLE_TASK"   
      */
     StopReason?: String;
     /**
@@ -3722,6 +4193,16 @@ declare namespace DMS {
      */
     PendingMaintenanceActionDetails?: PendingMaintenanceActionDetails;
   }
+  export interface RunFleetAdvisorLsaAnalysisResponse {
+    /**
+     * The ID of the LSA analysis run.
+     */
+    LsaAnalysisId?: String;
+    /**
+     * The status of the LSA analysis, for example COMPLETED.
+     */
+    Status?: String;
+  }
   export interface S3Settings {
     /**
      *  The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action. It is a required parameter that enables DMS to write and read objects from an S3 bucket.
@@ -3875,10 +4356,89 @@ declare namespace DMS {
      * When creating an S3 target endpoint, set DatePartitionTimezone to convert the current UTC time into a specified time zone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The time zone format is Area/Location. Use this parameter when DatePartitionedEnabled is set to true, as shown in the following example.  s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence": "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH", "DatePartitionTimezone":"Asia/Seoul", "BucketName": "dms-nattarat-test"}' 
      */
     DatePartitionTimezone?: String;
+    /**
+     * Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on string data. The default value is false.
+     */
+    AddTrailingPaddingCharacter?: BooleanOptional;
+    /**
+     * To specify a bucket owner and prevent sniping, you can use the ExpectedBucketOwner endpoint setting.  Example: --s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}'  When you make a request to test a connection or perform a migration, S3 checks the account ID of the bucket owner against the specified parameter.
+     */
+    ExpectedBucketOwner?: String;
   }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
   export type SchemaList = String[];
+  export interface SchemaResponse {
+    /**
+     * The number of lines of code in a schema in a Fleet Advisor collector inventory.
+     */
+    CodeLineCount?: LongOptional;
+    /**
+     * The size level of the code in a schema in a Fleet Advisor collector inventory.
+     */
+    CodeSize?: LongOptional;
+    /**
+     * The complexity level of the code in a schema in a Fleet Advisor collector inventory.
+     */
+    Complexity?: String;
+    /**
+     * The database server for a schema in a Fleet Advisor collector inventory.
+     */
+    Server?: ServerShortInfoResponse;
+    /**
+     * The database for a schema in a Fleet Advisor collector inventory.
+     */
+    DatabaseInstance?: DatabaseShortInfoResponse;
+    /**
+     * The ID of a schema in a Fleet Advisor collector inventory.
+     */
+    SchemaId?: String;
+    /**
+     * The name of a schema in a Fleet Advisor collector inventory.
+     */
+    SchemaName?: String;
+    OriginalSchema?: SchemaShortInfoResponse;
+    /**
+     * The similarity value for a schema in a Fleet Advisor collector inventory. A higher similarity value indicates that a schema is likely to be a duplicate.
+     */
+    Similarity?: DoubleOptional;
+  }
+  export interface SchemaShortInfoResponse {
+    /**
+     * The ID of a schema in a Fleet Advisor collector inventory.
+     */
+    SchemaId?: String;
+    /**
+     * The name of a schema in a Fleet Advisor collector inventory.
+     */
+    SchemaName?: String;
+    /**
+     * The ID of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseId?: String;
+    /**
+     * The name of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseName?: String;
+    /**
+     * The IP address of a database in a Fleet Advisor collector inventory.
+     */
+    DatabaseIpAddress?: String;
+  }
   export type SecretString = string;
+  export interface ServerShortInfoResponse {
+    /**
+     * The ID of a server in a Fleet Advisor collector inventory.
+     */
+    ServerId?: String;
+    /**
+     * The IP address of a server in a Fleet Advisor collector inventory.
+     */
+    IpAddress?: String;
+    /**
+     * The name address of a server in a Fleet Advisor collector inventory.
+     */
+    ServerName?: String;
+  }
   export type SourceIdsList = String[];
   export type SourceType = "replication-instance"|string;
   export type SslSecurityProtocolValue = "plaintext"|"ssl-encryption"|string;
@@ -3980,6 +4540,7 @@ declare namespace DMS {
     ReplicationTask?: ReplicationTask;
   }
   export type String = string;
+  export type StringList = String[];
   export interface Subnet {
     /**
      * The subnet identifier.
@@ -4105,7 +4666,7 @@ declare namespace DMS {
      */
     LastUpdateTime?: TStamp;
     /**
-     * The state of the tables described. Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded
+     * The state of the tables described. Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table is being reloaded
      */
     TableState?: String;
     /**
@@ -4172,6 +4733,19 @@ declare namespace DMS {
      */
     Connection?: Connection;
   }
+  export interface UpdateSubscriptionsToEventBridgeMessage {
+    /**
+     * When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.6 or higher. 
+     */
+    ForceMove?: BooleanOptional;
+  }
+  export interface UpdateSubscriptionsToEventBridgeResponse {
+    /**
+     * A string that indicates how many event subscriptions were migrated and how many remain to be migrated.
+     */
+    Result?: String;
+  }
+  export type VersionStatus = "UP_TO_DATE"|"OUTDATED"|"UNSUPPORTED"|string;
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

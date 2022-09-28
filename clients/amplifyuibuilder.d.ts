@@ -20,6 +20,14 @@ declare class AmplifyUIBuilder extends Service {
    */
   createComponent(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateComponentResponse) => void): Request<AmplifyUIBuilder.Types.CreateComponentResponse, AWSError>;
   /**
+   * Creates a new form for an Amplify app.
+   */
+  createForm(params: AmplifyUIBuilder.Types.CreateFormRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateFormResponse) => void): Request<AmplifyUIBuilder.Types.CreateFormResponse, AWSError>;
+  /**
+   * Creates a new form for an Amplify app.
+   */
+  createForm(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateFormResponse) => void): Request<AmplifyUIBuilder.Types.CreateFormResponse, AWSError>;
+  /**
    * Creates a theme to apply to the components in an Amplify app.
    */
   createTheme(params: AmplifyUIBuilder.Types.CreateThemeRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateThemeResponse) => void): Request<AmplifyUIBuilder.Types.CreateThemeResponse, AWSError>;
@@ -35,6 +43,14 @@ declare class AmplifyUIBuilder extends Service {
    * Deletes a component from an Amplify app.
    */
   deleteComponent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a form from an Amplify app.
+   */
+  deleteForm(params: AmplifyUIBuilder.Types.DeleteFormRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a form from an Amplify app.
+   */
+  deleteForm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a theme from an Amplify app.
    */
@@ -60,6 +76,14 @@ declare class AmplifyUIBuilder extends Service {
    */
   exportComponents(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExportComponentsResponse) => void): Request<AmplifyUIBuilder.Types.ExportComponentsResponse, AWSError>;
   /**
+   * Exports form configurations to code that is ready to integrate into an Amplify app.
+   */
+  exportForms(params: AmplifyUIBuilder.Types.ExportFormsRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExportFormsResponse) => void): Request<AmplifyUIBuilder.Types.ExportFormsResponse, AWSError>;
+  /**
+   * Exports form configurations to code that is ready to integrate into an Amplify app.
+   */
+  exportForms(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExportFormsResponse) => void): Request<AmplifyUIBuilder.Types.ExportFormsResponse, AWSError>;
+  /**
    * Exports theme configurations to code that is ready to integrate into an Amplify app.
    */
   exportThemes(params: AmplifyUIBuilder.Types.ExportThemesRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExportThemesResponse) => void): Request<AmplifyUIBuilder.Types.ExportThemesResponse, AWSError>;
@@ -75,6 +99,22 @@ declare class AmplifyUIBuilder extends Service {
    * Returns an existing component for an Amplify app.
    */
   getComponent(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetComponentResponse) => void): Request<AmplifyUIBuilder.Types.GetComponentResponse, AWSError>;
+  /**
+   * Returns an existing form for an Amplify app.
+   */
+  getForm(params: AmplifyUIBuilder.Types.GetFormRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetFormResponse) => void): Request<AmplifyUIBuilder.Types.GetFormResponse, AWSError>;
+  /**
+   * Returns an existing form for an Amplify app.
+   */
+  getForm(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetFormResponse) => void): Request<AmplifyUIBuilder.Types.GetFormResponse, AWSError>;
+  /**
+   * Returns existing metadata for an Amplify app.
+   */
+  getMetadata(params: AmplifyUIBuilder.Types.GetMetadataRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetMetadataResponse) => void): Request<AmplifyUIBuilder.Types.GetMetadataResponse, AWSError>;
+  /**
+   * Returns existing metadata for an Amplify app.
+   */
+  getMetadata(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetMetadataResponse) => void): Request<AmplifyUIBuilder.Types.GetMetadataResponse, AWSError>;
   /**
    * Returns an existing theme for an Amplify app.
    */
@@ -92,6 +132,14 @@ declare class AmplifyUIBuilder extends Service {
    */
   listComponents(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListComponentsResponse) => void): Request<AmplifyUIBuilder.Types.ListComponentsResponse, AWSError>;
   /**
+   * Retrieves a list of forms for a specified Amplify app and backend environment.
+   */
+  listForms(params: AmplifyUIBuilder.Types.ListFormsRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListFormsResponse) => void): Request<AmplifyUIBuilder.Types.ListFormsResponse, AWSError>;
+  /**
+   * Retrieves a list of forms for a specified Amplify app and backend environment.
+   */
+  listForms(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListFormsResponse) => void): Request<AmplifyUIBuilder.Types.ListFormsResponse, AWSError>;
+  /**
    * Retrieves a list of themes for a specified Amplify app and backend environment.
    */
   listThemes(params: AmplifyUIBuilder.Types.ListThemesRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListThemesResponse) => void): Request<AmplifyUIBuilder.Types.ListThemesResponse, AWSError>;
@@ -99,6 +147,14 @@ declare class AmplifyUIBuilder extends Service {
    * Retrieves a list of themes for a specified Amplify app and backend environment.
    */
   listThemes(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListThemesResponse) => void): Request<AmplifyUIBuilder.Types.ListThemesResponse, AWSError>;
+  /**
+   * Stores the metadata information about a feature on a form or view.
+   */
+  putMetadataFlag(params: AmplifyUIBuilder.Types.PutMetadataFlagRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stores the metadata information about a feature on a form or view.
+   */
+  putMetadataFlag(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Refreshes a previously issued access token that might have expired.
    */
@@ -115,6 +171,14 @@ declare class AmplifyUIBuilder extends Service {
    * Updates an existing component.
    */
   updateComponent(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.UpdateComponentResponse) => void): Request<AmplifyUIBuilder.Types.UpdateComponentResponse, AWSError>;
+  /**
+   * Updates an existing form.
+   */
+  updateForm(params: AmplifyUIBuilder.Types.UpdateFormRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.UpdateFormResponse) => void): Request<AmplifyUIBuilder.Types.UpdateFormResponse, AWSError>;
+  /**
+   * Updates an existing form.
+   */
+  updateForm(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.UpdateFormResponse) => void): Request<AmplifyUIBuilder.Types.UpdateFormResponse, AWSError>;
   /**
    * Updates an existing theme.
    */
@@ -274,6 +338,10 @@ declare namespace AmplifyUIBuilder {
      * A list of predicates for binding a component's properties to data.
      */
     predicates?: PredicateList;
+    /**
+     * The name of a component slot.
+     */
+    slotName?: String;
     /**
      * An authenticated user attribute.
      */
@@ -558,6 +626,68 @@ declare namespace AmplifyUIBuilder {
      */
     entity?: Component;
   }
+  export interface CreateFormData {
+    /**
+     * The FormCTA object that stores the call to action configuration for the form.
+     */
+    cta?: FormCTA;
+    /**
+     * The type of data source to use to create the form.
+     */
+    dataType: FormDataTypeConfig;
+    /**
+     * The configuration information for the form's fields.
+     */
+    fields: FieldsMap;
+    /**
+     * Specifies whether to perform a create or update action on the form.
+     */
+    formActionType: FormActionType;
+    /**
+     * The name of the form.
+     */
+    name: FormName;
+    /**
+     * The schema version of the form.
+     */
+    schemaVersion: String;
+    /**
+     * The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+     */
+    sectionalElements: SectionalElementMap;
+    /**
+     * The configuration for the form's style.
+     */
+    style: FormStyle;
+    /**
+     * One or more key-value pairs to use when tagging the form data.
+     */
+    tags?: Tags;
+  }
+  export interface CreateFormRequest {
+    /**
+     * The unique ID of the Amplify app to associate with the form.
+     */
+    appId: String;
+    /**
+     * The unique client token.
+     */
+    clientToken?: String;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * Represents the configuration of the form to create.
+     */
+    formToCreate: CreateFormData;
+  }
+  export interface CreateFormResponse {
+    /**
+     * Describes the configuration of the new form.
+     */
+    entity?: Form;
+  }
   export interface CreateThemeData {
     /**
      * The name of the theme.
@@ -611,6 +741,20 @@ declare namespace AmplifyUIBuilder {
     environmentName: String;
     /**
      * The unique ID of the component to delete.
+     */
+    id: Uuid;
+  }
+  export interface DeleteFormRequest {
+    /**
+     * The unique ID of the Amplify app associated with the form to delete.
+     */
+    appId: String;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The unique ID of the form to delete.
      */
     id: Uuid;
   }
@@ -686,6 +830,30 @@ declare namespace AmplifyUIBuilder {
      */
     nextToken?: String;
   }
+  export interface ExportFormsRequest {
+    /**
+     * The unique ID of the Amplify app to export forms to.
+     */
+    appId: String;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ExportFormsResponse {
+    /**
+     * Represents the configuration of the exported forms.
+     */
+    entities: FormList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    nextToken?: String;
+  }
   export interface ExportThemesRequest {
     /**
      * The unique ID of the Amplify app to export the themes to.
@@ -710,6 +878,173 @@ declare namespace AmplifyUIBuilder {
      */
     nextToken?: String;
   }
+  export type FeaturesMap = {[key: string]: String};
+  export interface FieldConfig {
+    /**
+     * Specifies whether to hide a field.
+     */
+    excluded?: Boolean;
+    /**
+     * Describes the configuration for the default input value to display for a field.
+     */
+    inputType?: FieldInputConfig;
+    /**
+     * The label for the field.
+     */
+    label?: String;
+    /**
+     * Specifies the field position.
+     */
+    position?: FieldPosition;
+    /**
+     * The validations to perform on the value in the field.
+     */
+    validations?: ValidationsList;
+  }
+  export interface FieldInputConfig {
+    /**
+     * Specifies whether a field has a default value.
+     */
+    defaultChecked?: Boolean;
+    /**
+     * The default country code for a phone number.
+     */
+    defaultCountryCode?: String;
+    /**
+     * The default value for the field.
+     */
+    defaultValue?: String;
+    /**
+     * The text to display to describe the field.
+     */
+    descriptiveText?: String;
+    /**
+     * The maximum value to display for the field.
+     */
+    maxValue?: Float;
+    /**
+     * The minimum value to display for the field.
+     */
+    minValue?: Float;
+    /**
+     * The name of the field.
+     */
+    name?: String;
+    /**
+     * The text to display as a placeholder for the field.
+     */
+    placeholder?: String;
+    /**
+     * Specifies a read only field.
+     */
+    readOnly?: Boolean;
+    /**
+     * Specifies a field that requires input.
+     */
+    required?: Boolean;
+    /**
+     * The stepping increment for a numeric value in a field.
+     */
+    step?: Float;
+    /**
+     * The input type for the field. 
+     */
+    type: String;
+    /**
+     * The value for the field.
+     */
+    value?: String;
+    /**
+     * The information to use to customize the input fields with data at runtime.
+     */
+    valueMappings?: ValueMappings;
+  }
+  export interface FieldPosition {
+    /**
+     * The field position is below the field specified by the string.
+     */
+    below?: String;
+    /**
+     * The field position is fixed and doesn't change in relation to other fields.
+     */
+    fixed?: FixedPosition;
+    /**
+     * The field position is to the right of the field specified by the string.
+     */
+    rightOf?: String;
+  }
+  export interface FieldValidationConfiguration {
+    /**
+     * The validation to perform on a number value.
+     */
+    numValues?: NumValues;
+    /**
+     * The validation to perform on a string value.
+     */
+    strValues?: StrValues;
+    /**
+     * The validation to perform on an object type. 
+     */
+    type: String;
+    /**
+     * The validation message to display.
+     */
+    validationMessage?: String;
+  }
+  export type FieldsMap = {[key: string]: FieldConfig};
+  export type FixedPosition = "first"|string;
+  export type Float = number;
+  export interface Form {
+    /**
+     * The unique ID of the Amplify app associated with the form.
+     */
+    appId: String;
+    /**
+     * Stores the call to action configuration for the form.
+     */
+    cta?: FormCTA;
+    /**
+     * The type of data source to use to create the form.
+     */
+    dataType: FormDataTypeConfig;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * Stores the information about the form's fields.
+     */
+    fields: FieldsMap;
+    /**
+     * The operation to perform on the specified form.
+     */
+    formActionType: FormActionType;
+    /**
+     * The unique ID of the form.
+     */
+    id: Uuid;
+    /**
+     * The name of the form.
+     */
+    name: FormName;
+    /**
+     * The schema version of the form when it was imported.
+     */
+    schemaVersion: String;
+    /**
+     * Stores the visual helper elements for the form that are not associated with any data.
+     */
+    sectionalElements: SectionalElementMap;
+    /**
+     * Stores the configuration for the form's style.
+     */
+    style: FormStyle;
+    /**
+     * One or more key-value pairs to use when tagging the form.
+     */
+    tags?: Tags;
+  }
+  export type FormActionType = "create"|"update"|string;
   export interface FormBindingElement {
     /**
      * The name of the component to retrieve a value from.
@@ -721,6 +1056,109 @@ declare namespace AmplifyUIBuilder {
     property: String;
   }
   export type FormBindings = {[key: string]: FormBindingElement};
+  export interface FormButton {
+    /**
+     * Describes the button's properties.
+     */
+    children?: String;
+    /**
+     * Specifies whether the button is visible on the form.
+     */
+    excluded?: Boolean;
+    /**
+     * The position of the button.
+     */
+    position?: FieldPosition;
+  }
+  export type FormButtonsPosition = "top"|"bottom"|"top_and_bottom"|string;
+  export interface FormCTA {
+    /**
+     * Displays a cancel button.
+     */
+    cancel?: FormButton;
+    /**
+     * Displays a clear button.
+     */
+    clear?: FormButton;
+    /**
+     * The position of the button.
+     */
+    position?: FormButtonsPosition;
+    /**
+     * Displays a submit button.
+     */
+    submit?: FormButton;
+  }
+  export type FormDataSourceType = "DataStore"|"Custom"|string;
+  export interface FormDataTypeConfig {
+    /**
+     * The data source type, either an Amplify DataStore model or a custom data type.
+     */
+    dataSourceType: FormDataSourceType;
+    /**
+     * The unique name of the data type you are using as the data source for the form.
+     */
+    dataTypeName: String;
+  }
+  export interface FormInputValueProperty {
+    /**
+     * The value to assign to the input field.
+     */
+    value?: String;
+  }
+  export type FormList = Form[];
+  export type FormName = string;
+  export interface FormStyle {
+    /**
+     * The spacing for the horizontal gap.
+     */
+    horizontalGap?: FormStyleConfig;
+    /**
+     * The size of the outer padding for the form.
+     */
+    outerPadding?: FormStyleConfig;
+    /**
+     * The spacing for the vertical gap.
+     */
+    verticalGap?: FormStyleConfig;
+  }
+  export interface FormStyleConfig {
+    /**
+     * A reference to a design token to use to bind the form's style properties to an existing theme.
+     */
+    tokenReference?: String;
+    /**
+     * The value of the style setting.
+     */
+    value?: String;
+  }
+  export interface FormSummary {
+    /**
+     * The unique ID for the app associated with the form summary.
+     */
+    appId: String;
+    /**
+     * The form's data source type.
+     */
+    dataType: FormDataTypeConfig;
+    /**
+     * The name of the backend environment that is part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The type of operation to perform on the form.
+     */
+    formActionType: FormActionType;
+    /**
+     * The ID of the form.
+     */
+    id: Uuid;
+    /**
+     * The name of the form.
+     */
+    name: FormName;
+  }
+  export type FormSummaryList = FormSummary[];
   export interface GetComponentRequest {
     /**
      * The unique ID of the Amplify app.
@@ -740,6 +1178,42 @@ declare namespace AmplifyUIBuilder {
      * Represents the configuration settings for the component.
      */
     component?: Component;
+  }
+  export interface GetFormRequest {
+    /**
+     * The unique ID of the Amplify app.
+     */
+    appId: String;
+    /**
+     * The name of the backend environment that is part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The unique ID of the form.
+     */
+    id: Uuid;
+  }
+  export interface GetFormResponse {
+    /**
+     * Represents the configuration settings for the form.
+     */
+    form?: Form;
+  }
+  export interface GetMetadataRequest {
+    /**
+     * The unique ID of the Amplify app.
+     */
+    appId: String;
+    /**
+     * The name of the backend environment that is part of the Amplify app.
+     */
+    environmentName: String;
+  }
+  export interface GetMetadataResponse {
+    /**
+     * Represents the configuration settings for the features metadata.
+     */
+    features: FeaturesMap;
   }
   export interface GetThemeRequest {
     /**
@@ -792,6 +1266,35 @@ declare namespace AmplifyUIBuilder {
      */
     nextToken?: String;
   }
+  export type ListFormsLimit = number;
+  export interface ListFormsRequest {
+    /**
+     * The unique ID for the Amplify app.
+     */
+    appId: String;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The maximum number of forms to retrieve.
+     */
+    maxResults?: ListFormsLimit;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListFormsResponse {
+    /**
+     * The list of forms for the Amplify app.
+     */
+    entities: FormSummaryList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    nextToken?: String;
+  }
   export type ListThemesLimit = number;
   export interface ListThemesRequest {
     /**
@@ -835,6 +1338,7 @@ declare namespace AmplifyUIBuilder {
      */
     set: ComponentProperty;
   }
+  export type NumValues = Integer[];
   export interface Predicate {
     /**
      * A list of predicates to combine logically.
@@ -858,6 +1362,30 @@ declare namespace AmplifyUIBuilder {
     or?: PredicateList;
   }
   export type PredicateList = Predicate[];
+  export interface PutMetadataFlagBody {
+    /**
+     * The new information to store.
+     */
+    newValue: String;
+  }
+  export interface PutMetadataFlagRequest {
+    /**
+     * The unique ID for the Amplify app.
+     */
+    appId: String;
+    /**
+     * The metadata information to store.
+     */
+    body: PutMetadataFlagBody;
+    /**
+     * The name of the backend environment that is part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The name of the feature associated with the metadata.
+     */
+    featureName: String;
+  }
   export interface RefreshTokenRequest {
     /**
      * The third-party provider for the token. The only valid value is figma.
@@ -884,6 +1412,29 @@ declare namespace AmplifyUIBuilder {
      */
     expiresIn: Integer;
   }
+  export interface SectionalElement {
+    /**
+     * Specifies the size of the font for a Heading sectional element. Valid values are 1 | 2 | 3 | 4 | 5 | 6.
+     */
+    level?: Integer;
+    /**
+     * Specifies the orientation for a Divider sectional element. Valid values are horizontal or vertical.
+     */
+    orientation?: String;
+    /**
+     * Specifies the position of the text in a field for a Text sectional element.
+     */
+    position?: FieldPosition;
+    /**
+     * The text for a Text sectional element.
+     */
+    text?: String;
+    /**
+     * The type of sectional element. Valid values are Heading, Text, and Divider.
+     */
+    type: String;
+  }
+  export type SectionalElementMap = {[key: string]: SectionalElement};
   export type SensitiveString = string;
   export type SortDirection = "ASC"|"DESC"|string;
   export interface SortProperty {
@@ -897,6 +1448,7 @@ declare namespace AmplifyUIBuilder {
     field: String;
   }
   export type SortPropertyList = SortProperty[];
+  export type StrValues = String[];
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
   export type TagKey = string;
@@ -1061,6 +1613,68 @@ declare namespace AmplifyUIBuilder {
      */
     entity?: Component;
   }
+  export interface UpdateFormData {
+    /**
+     * The FormCTA object that stores the call to action configuration for the form.
+     */
+    cta?: FormCTA;
+    /**
+     * The type of data source to use to create the form.
+     */
+    dataType?: FormDataTypeConfig;
+    /**
+     * The configuration information for the form's fields.
+     */
+    fields?: FieldsMap;
+    /**
+     * Specifies whether to perform a create or update action on the form.
+     */
+    formActionType?: FormActionType;
+    /**
+     * The name of the form.
+     */
+    name?: FormName;
+    /**
+     * The schema version of the form.
+     */
+    schemaVersion?: String;
+    /**
+     * The configuration information for the visual helper elements for the form. These elements are not associated with any data.
+     */
+    sectionalElements?: SectionalElementMap;
+    /**
+     * The configuration for the form's style.
+     */
+    style?: FormStyle;
+  }
+  export interface UpdateFormRequest {
+    /**
+     * The unique ID for the Amplify app.
+     */
+    appId: String;
+    /**
+     * The unique client token.
+     */
+    clientToken?: String;
+    /**
+     * The name of the backend environment that is part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The unique ID for the form.
+     */
+    id: Uuid;
+    /**
+     * The request accepts the following data in JSON format.
+     */
+    updatedForm: UpdateFormData;
+  }
+  export interface UpdateFormResponse {
+    /**
+     * Describes the configuration of the updated form.
+     */
+    entity?: Form;
+  }
   export interface UpdateThemeData {
     /**
      * The unique ID of the theme to update.
@@ -1108,6 +1722,24 @@ declare namespace AmplifyUIBuilder {
     entity?: Theme;
   }
   export type Uuid = string;
+  export type ValidationsList = FieldValidationConfiguration[];
+  export interface ValueMapping {
+    /**
+     * The value to display for the complex object.
+     */
+    displayValue?: FormInputValueProperty;
+    /**
+     * The complex object.
+     */
+    value: FormInputValueProperty;
+  }
+  export type ValueMappingList = ValueMapping[];
+  export interface ValueMappings {
+    /**
+     * The value and display value pairs.
+     */
+    values: ValueMappingList;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -100,6 +100,14 @@ declare class SNS extends Service {
    */
   deleteTopic(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Retrieves the specified inline DataProtectionPolicy document that is stored in the specified Amazon SNS topic. 
+   */
+  getDataProtectionPolicy(params: SNS.Types.GetDataProtectionPolicyInput, callback?: (err: AWSError, data: SNS.Types.GetDataProtectionPolicyResponse) => void): Request<SNS.Types.GetDataProtectionPolicyResponse, AWSError>;
+  /**
+   * Retrieves the specified inline DataProtectionPolicy document that is stored in the specified Amazon SNS topic. 
+   */
+  getDataProtectionPolicy(callback?: (err: AWSError, data: SNS.Types.GetDataProtectionPolicyResponse) => void): Request<SNS.Types.GetDataProtectionPolicyResponse, AWSError>;
+  /**
    * Retrieves the endpoint attributes for a device on one of the supported push notification services, such as GCM (Firebase Cloud Messaging) and APNS. For more information, see Using Amazon SNS Mobile Push Notifications. 
    */
   getEndpointAttributes(params: SNS.Types.GetEndpointAttributesInput, callback?: (err: AWSError, data: SNS.Types.GetEndpointAttributesResponse) => void): Request<SNS.Types.GetEndpointAttributesResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class SNS extends Service {
    * Publishes up to ten messages to the specified topic. This is a batch version of Publish. For FIFO topics, multiple messages within a single batch are published in the order they are sent, and messages are deduplicated within the batch and across batches for 5 minutes. The result of publishing each message is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200. The maximum allowed individual message size and the maximum total payload size (the sum of the individual lengths of all of the batched messages) are both 256 KB (262,144 bytes).  Some actions take lists of parameters. These lists are specified using the param.n notation. Values of n are integers starting from 1. For example, a parameter list with two elements looks like this:  &amp;AttributeName.1=first &amp;AttributeName.2=second If you send a batch message to a topic, Amazon SNS publishes the batch message to each endpoint that is subscribed to the topic. The format of the batch message depends on the notification protocol for each subscribed endpoint. When a messageId is returned, the batch message is saved and Amazon SNS immediately delivers the message to subscribers.
    */
   publishBatch(callback?: (err: AWSError, data: SNS.Types.PublishBatchResponse) => void): Request<SNS.Types.PublishBatchResponse, AWSError>;
+  /**
+   * Adds or updates an inline policy document that is stored in the specified Amazon SNS topic.
+   */
+  putDataProtectionPolicy(params: SNS.Types.PutDataProtectionPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates an inline policy document that is stored in the specified Amazon SNS topic.
+   */
+  putDataProtectionPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a statement from a topic's access control policy.
    */
@@ -474,6 +490,10 @@ declare namespace SNS {
      * The list of tags to add to a new topic.  To be able to tag a topic on creation, you must have the sns:CreateTopic and sns:TagResource permissions. 
      */
     Tags?: TagList;
+    /**
+     * The body of the policy document you want to use for this topic. You can only add one policy per topic. The policy must be in JSON string format. Length Constraints: Maximum length of 30,720.
+     */
+    DataProtectionPolicy?: attributeValue;
   }
   export interface CreateTopicResponse {
     /**
@@ -517,6 +537,18 @@ declare namespace SNS {
      * Attributes for endpoint.
      */
     Attributes?: MapStringToString;
+  }
+  export interface GetDataProtectionPolicyInput {
+    /**
+     * The ARN of the topic whose DataProtectionPolicy you want to get. For more information about ARNs, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.
+     */
+    ResourceArn: topicARN;
+  }
+  export interface GetDataProtectionPolicyResponse {
+    /**
+     * Retrieves the DataProtectionPolicy in JSON string format.
+     */
+    DataProtectionPolicy?: attributeValue;
   }
   export interface GetEndpointAttributesInput {
     /**
@@ -929,6 +961,16 @@ declare namespace SNS {
      * This response element applies only to FIFO (first-in-first-out) topics.  The sequence number is a large, non-consecutive number that Amazon SNS assigns to each message. The length of SequenceNumber is 128 bits. SequenceNumber continues to increase for each MessageGroupId.
      */
     SequenceNumber?: String;
+  }
+  export interface PutDataProtectionPolicyInput {
+    /**
+     * The ARN of the topic whose DataProtectionPolicy you want to add or update. For more information about ARNs, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.
+     */
+    ResourceArn: topicARN;
+    /**
+     * The JSON serialization of the topic's DataProtectionPolicy. The DataProtectionPolicy must be in JSON string format. Length Constraints: Maximum length of 30,720.
+     */
+    DataProtectionPolicy: attributeValue;
   }
   export interface RemovePermissionInput {
     /**

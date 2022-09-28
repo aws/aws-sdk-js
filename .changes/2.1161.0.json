@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "LookoutEquipment",
+        "description": "This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers."
+    },
+    {
+        "type": "feature",
+        "category": "Mgn",
+        "description": "New and modified APIs for the Post-Migration Framework"
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHubRefactorSpaces",
+        "description": "This release adds the new API UpdateRoute that allows route to be updated to ACTIVE/INACTIVE state. In addition, CreateRoute API will now allow users to create route in ACTIVE/INACTIVE state."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "SageMaker Ground Truth now supports Virtual Private Cloud. Customers can launch labeling jobs and access to their private workforce in VPC mode."
+    }
+]

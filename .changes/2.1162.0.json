@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "redshiftserverless",
+        "description": "remove redshiftserverless client"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history."
+    }
+]

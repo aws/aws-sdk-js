@@ -20,11 +20,11 @@ declare class Pricing extends Service {
    */
   describeServices(callback?: (err: AWSError, data: Pricing.Types.DescribeServicesResponse) => void): Request<Pricing.Types.DescribeServicesResponse, AWSError>;
   /**
-   * Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Amazon Web Services Billing and Cost Management User Guide.
+   * Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Billing and Cost Management User Guide.
    */
   getAttributeValues(params: Pricing.Types.GetAttributeValuesRequest, callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
-   * Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Amazon Web Services Billing and Cost Management User Guide.
+   * Returns a list of attribute values. Attributes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Billing and Cost Management User Guide.
    */
   getAttributeValues(callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
@@ -126,7 +126,7 @@ declare namespace Pricing {
     /**
      * The code for the service whose products you want to retrieve. 
      */
-    ServiceCode?: String;
+    ServiceCode: String;
     /**
      * The list of filters that limit the returned products. only products that match all filters are returned.
      */
@@ -152,19 +152,19 @@ declare namespace Pricing {
     /**
      * The list of products that match your filters. The list contains both the product metadata and the price information.
      */
-    PriceList?: PriceList;
+    PriceList?: PriceListJsonItems;
     /**
      * The pagination token that indicates the next set of results to retrieve.
      */
     NextToken?: String;
   }
-  export type PriceList = PriceListItemJSON[];
-  export type PriceListItemJSON = string;
+  export type PriceListJsonItem = string;
+  export type PriceListJsonItems = PriceListJsonItem[];
   export interface Service {
     /**
      * The code for the Amazon Web Services service.
      */
-    ServiceCode?: String;
+    ServiceCode: String;
     /**
      * The attributes that are available for this service.
      */

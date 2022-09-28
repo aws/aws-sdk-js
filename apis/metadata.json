@@ -1159,5 +1159,42 @@
   "chimesdkmediapipelines": {
     "prefix": "chime-sdk-media-pipelines",
     "name": "ChimeSDKMediaPipelines"
+  },
+  "emrserverless": {
+    "prefix": "emr-serverless",
+    "name": "EMRServerless"
+  },
+  "m2": {
+    "name": "M2"
+  },
+  "connectcampaigns": {
+    "name": "ConnectCampaigns"
+  },
+  "redshiftserverless": {
+    "prefix": "redshift-serverless",
+    "name": "RedshiftServerless"
+  },
+  "rolesanywhere": {
+    "name": "RolesAnywhere"
+  },
+  "licensemanagerusersubscriptions": {
+    "prefix": "license-manager-user-subscriptions",
+    "name": "LicenseManagerUserSubscriptions"
+  },
+  "backupstorage": {
+    "name": "BackupStorage"
+  },
+  "privatenetworks": {
+    "name": "PrivateNetworks"
+  },
+  "supportapp": {
+    "prefix": "support-app",
+    "name": "SupportApp"
+  },
+  "controltower": {
+    "name": "ControlTower"
+  },
+  "iotfleetwise": {
+    "name": "IoTFleetWise"
   }
 }

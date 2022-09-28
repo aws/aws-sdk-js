@@ -12,43 +12,51 @@ declare class SSOAdmin extends Service {
   constructor(options?: SSOAdmin.Types.ClientConfiguration)
   config: Config & SSOAdmin.Types.ClientConfiguration;
   /**
-   * Attaches an IAM managed policy ARN to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this operation. Calling ProvisionPermissionSet applies the corresponding IAM policy updates to all assigned accounts. 
+   * Attaches the specified customer managed policy to the specified PermissionSet.
+   */
+  attachCustomerManagedPolicyReferenceToPermissionSet(params: SSOAdmin.Types.AttachCustomerManagedPolicyReferenceToPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.AttachCustomerManagedPolicyReferenceToPermissionSetResponse) => void): Request<SSOAdmin.Types.AttachCustomerManagedPolicyReferenceToPermissionSetResponse, AWSError>;
+  /**
+   * Attaches the specified customer managed policy to the specified PermissionSet.
+   */
+  attachCustomerManagedPolicyReferenceToPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.AttachCustomerManagedPolicyReferenceToPermissionSetResponse) => void): Request<SSOAdmin.Types.AttachCustomerManagedPolicyReferenceToPermissionSetResponse, AWSError>;
+  /**
+   * Attaches an AWS managed policy ARN to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this operation. Calling ProvisionPermissionSet applies the corresponding IAM policy updates to all assigned accounts. 
    */
   attachManagedPolicyToPermissionSet(params: SSOAdmin.Types.AttachManagedPolicyToPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse, AWSError>;
   /**
-   * Attaches an IAM managed policy ARN to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this operation. Calling ProvisionPermissionSet applies the corresponding IAM policy updates to all assigned accounts. 
+   * Attaches an AWS managed policy ARN to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this operation. Calling ProvisionPermissionSet applies the corresponding IAM policy updates to all assigned accounts. 
    */
   attachManagedPolicyToPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse, AWSError>;
   /**
-   * Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.  The term principal here refers to a user or group that is defined in Amazon Web Services SSO.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call  ProvisionPermissionSet  to make these updates. 
+   * Assigns access to a principal for a specified AWS account using a specified permission set.  The term principal here refers to a user or group that is defined in IAM Identity Center.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call  ProvisionPermissionSet  to make these updates.    After a successful response, call DescribeAccountAssignmentCreationStatus to describe the status of an assignment creation request.  
    */
   createAccountAssignment(params: SSOAdmin.Types.CreateAccountAssignmentRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreateAccountAssignmentResponse) => void): Request<SSOAdmin.Types.CreateAccountAssignmentResponse, AWSError>;
   /**
-   * Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.  The term principal here refers to a user or group that is defined in Amazon Web Services SSO.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call  ProvisionPermissionSet  to make these updates. 
+   * Assigns access to a principal for a specified AWS account using a specified permission set.  The term principal here refers to a user or group that is defined in IAM Identity Center.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call  ProvisionPermissionSet  to make these updates.    After a successful response, call DescribeAccountAssignmentCreationStatus to describe the status of an assignment creation request.  
    */
   createAccountAssignment(callback?: (err: AWSError, data: SSOAdmin.Types.CreateAccountAssignmentResponse) => void): Request<SSOAdmin.Types.CreateAccountAssignmentResponse, AWSError>;
   /**
-   * Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.  After a successful response, call DescribeInstanceAccessControlAttributeConfiguration to validate that InstanceAccessControlAttributeConfiguration was created. 
    */
   createInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
-   * Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.  After a successful response, call DescribeInstanceAccessControlAttributeConfiguration to validate that InstanceAccessControlAttributeConfiguration was created. 
    */
   createInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.CreateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
-   * Creates a permission set within a specified SSO instance.  To grant users and groups access to Amazon Web Services account resources, use  CreateAccountAssignment . 
+   * Creates a permission set within a specified IAM Identity Center instance.  To grant users and groups access to AWS account resources, use  CreateAccountAssignment . 
    */
   createPermissionSet(params: SSOAdmin.Types.CreatePermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreatePermissionSetResponse) => void): Request<SSOAdmin.Types.CreatePermissionSetResponse, AWSError>;
   /**
-   * Creates a permission set within a specified SSO instance.  To grant users and groups access to Amazon Web Services account resources, use  CreateAccountAssignment . 
+   * Creates a permission set within a specified IAM Identity Center instance.  To grant users and groups access to AWS account resources, use  CreateAccountAssignment . 
    */
   createPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.CreatePermissionSetResponse) => void): Request<SSOAdmin.Types.CreatePermissionSetResponse, AWSError>;
   /**
-   * Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.
+   * Deletes a principal's access from a specified AWS account using a specified permission set.  After a successful response, call DescribeAccountAssignmentCreationStatus to describe the status of an assignment deletion request. 
    */
   deleteAccountAssignment(params: SSOAdmin.Types.DeleteAccountAssignmentRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DeleteAccountAssignmentResponse) => void): Request<SSOAdmin.Types.DeleteAccountAssignmentResponse, AWSError>;
   /**
-   * Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.
+   * Deletes a principal's access from a specified AWS account using a specified permission set.  After a successful response, call DescribeAccountAssignmentCreationStatus to describe the status of an assignment deletion request. 
    */
   deleteAccountAssignment(callback?: (err: AWSError, data: SSOAdmin.Types.DeleteAccountAssignmentResponse) => void): Request<SSOAdmin.Types.DeleteAccountAssignmentResponse, AWSError>;
   /**
@@ -60,11 +68,11 @@ declare class SSOAdmin extends Service {
    */
   deleteInlinePolicyFromPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.DeleteInlinePolicyFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DeleteInlinePolicyFromPermissionSetResponse, AWSError>;
   /**
-   * Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
    */
   deleteInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
-   * Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
    */
   deleteInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DeleteInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
@@ -75,6 +83,14 @@ declare class SSOAdmin extends Service {
    * Deletes the specified permission set.
    */
   deletePermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.DeletePermissionSetResponse) => void): Request<SSOAdmin.Types.DeletePermissionSetResponse, AWSError>;
+  /**
+   * Deletes the permissions boundary from a specified PermissionSet.
+   */
+  deletePermissionsBoundaryFromPermissionSet(params: SSOAdmin.Types.DeletePermissionsBoundaryFromPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DeletePermissionsBoundaryFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DeletePermissionsBoundaryFromPermissionSetResponse, AWSError>;
+  /**
+   * Deletes the permissions boundary from a specified PermissionSet.
+   */
+  deletePermissionsBoundaryFromPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.DeletePermissionsBoundaryFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DeletePermissionsBoundaryFromPermissionSetResponse, AWSError>;
   /**
    * Describes the status of the assignment creation request.
    */
@@ -92,11 +108,11 @@ declare class SSOAdmin extends Service {
    */
   describeAccountAssignmentDeletionStatus(callback?: (err: AWSError, data: SSOAdmin.Types.DescribeAccountAssignmentDeletionStatusResponse) => void): Request<SSOAdmin.Types.DescribeAccountAssignmentDeletionStatusResponse, AWSError>;
   /**
-   * Returns the list of Amazon Web Services SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
    */
   describeInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
-   * Returns the list of Amazon Web Services SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
    */
   describeInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.DescribeInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
@@ -116,11 +132,19 @@ declare class SSOAdmin extends Service {
    */
   describePermissionSetProvisioningStatus(callback?: (err: AWSError, data: SSOAdmin.Types.DescribePermissionSetProvisioningStatusResponse) => void): Request<SSOAdmin.Types.DescribePermissionSetProvisioningStatusResponse, AWSError>;
   /**
-   * Detaches the attached IAM managed policy ARN from the specified permission set.
+   * Detaches the specified customer managed policy from the specified PermissionSet.
+   */
+  detachCustomerManagedPolicyReferenceFromPermissionSet(params: SSOAdmin.Types.DetachCustomerManagedPolicyReferenceFromPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DetachCustomerManagedPolicyReferenceFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DetachCustomerManagedPolicyReferenceFromPermissionSetResponse, AWSError>;
+  /**
+   * Detaches the specified customer managed policy from the specified PermissionSet.
+   */
+  detachCustomerManagedPolicyReferenceFromPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.DetachCustomerManagedPolicyReferenceFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DetachCustomerManagedPolicyReferenceFromPermissionSetResponse, AWSError>;
+  /**
+   * Detaches the attached AWS managed policy ARN from the specified permission set.
    */
   detachManagedPolicyFromPermissionSet(params: SSOAdmin.Types.DetachManagedPolicyFromPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.DetachManagedPolicyFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DetachManagedPolicyFromPermissionSetResponse, AWSError>;
   /**
-   * Detaches the attached IAM managed policy ARN from the specified permission set.
+   * Detaches the attached AWS managed policy ARN from the specified permission set.
    */
   detachManagedPolicyFromPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.DetachManagedPolicyFromPermissionSetResponse) => void): Request<SSOAdmin.Types.DetachManagedPolicyFromPermissionSetResponse, AWSError>;
   /**
@@ -132,75 +156,91 @@ declare class SSOAdmin extends Service {
    */
   getInlinePolicyForPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.GetInlinePolicyForPermissionSetResponse) => void): Request<SSOAdmin.Types.GetInlinePolicyForPermissionSetResponse, AWSError>;
   /**
-   * Lists the status of the Amazon Web Services account assignment creation requests for a specified SSO instance.
+   * Obtains the permissions boundary for a specified PermissionSet.
+   */
+  getPermissionsBoundaryForPermissionSet(params: SSOAdmin.Types.GetPermissionsBoundaryForPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.GetPermissionsBoundaryForPermissionSetResponse) => void): Request<SSOAdmin.Types.GetPermissionsBoundaryForPermissionSetResponse, AWSError>;
+  /**
+   * Obtains the permissions boundary for a specified PermissionSet.
+   */
+  getPermissionsBoundaryForPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.GetPermissionsBoundaryForPermissionSetResponse) => void): Request<SSOAdmin.Types.GetPermissionsBoundaryForPermissionSetResponse, AWSError>;
+  /**
+   * Lists the status of the AWS account assignment creation requests for a specified IAM Identity Center instance.
    */
   listAccountAssignmentCreationStatus(params: SSOAdmin.Types.ListAccountAssignmentCreationStatusRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountAssignmentCreationStatusResponse) => void): Request<SSOAdmin.Types.ListAccountAssignmentCreationStatusResponse, AWSError>;
   /**
-   * Lists the status of the Amazon Web Services account assignment creation requests for a specified SSO instance.
+   * Lists the status of the AWS account assignment creation requests for a specified IAM Identity Center instance.
    */
   listAccountAssignmentCreationStatus(callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountAssignmentCreationStatusResponse) => void): Request<SSOAdmin.Types.ListAccountAssignmentCreationStatusResponse, AWSError>;
   /**
-   * Lists the status of the Amazon Web Services account assignment deletion requests for a specified SSO instance.
+   * Lists the status of the AWS account assignment deletion requests for a specified IAM Identity Center instance.
    */
   listAccountAssignmentDeletionStatus(params: SSOAdmin.Types.ListAccountAssignmentDeletionStatusRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountAssignmentDeletionStatusResponse) => void): Request<SSOAdmin.Types.ListAccountAssignmentDeletionStatusResponse, AWSError>;
   /**
-   * Lists the status of the Amazon Web Services account assignment deletion requests for a specified SSO instance.
+   * Lists the status of the AWS account assignment deletion requests for a specified IAM Identity Center instance.
    */
   listAccountAssignmentDeletionStatus(callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountAssignmentDeletionStatusResponse) => void): Request<SSOAdmin.Types.ListAccountAssignmentDeletionStatusResponse, AWSError>;
   /**
-   * Lists the assignee of the specified Amazon Web Services account with the specified permission set.
+   * Lists the assignee of the specified AWS account with the specified permission set.
    */
   listAccountAssignments(params: SSOAdmin.Types.ListAccountAssignmentsRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountAssignmentsResponse) => void): Request<SSOAdmin.Types.ListAccountAssignmentsResponse, AWSError>;
   /**
-   * Lists the assignee of the specified Amazon Web Services account with the specified permission set.
+   * Lists the assignee of the specified AWS account with the specified permission set.
    */
   listAccountAssignments(callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountAssignmentsResponse) => void): Request<SSOAdmin.Types.ListAccountAssignmentsResponse, AWSError>;
   /**
-   * Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
+   * Lists all the AWS accounts where the specified permission set is provisioned.
    */
   listAccountsForProvisionedPermissionSet(params: SSOAdmin.Types.ListAccountsForProvisionedPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountsForProvisionedPermissionSetResponse) => void): Request<SSOAdmin.Types.ListAccountsForProvisionedPermissionSetResponse, AWSError>;
   /**
-   * Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
+   * Lists all the AWS accounts where the specified permission set is provisioned.
    */
   listAccountsForProvisionedPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.ListAccountsForProvisionedPermissionSetResponse) => void): Request<SSOAdmin.Types.ListAccountsForProvisionedPermissionSetResponse, AWSError>;
   /**
-   * Lists the SSO instances that the caller has access to.
+   * Lists all customer managed policies attached to a specified PermissionSet.
+   */
+  listCustomerManagedPolicyReferencesInPermissionSet(params: SSOAdmin.Types.ListCustomerManagedPolicyReferencesInPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListCustomerManagedPolicyReferencesInPermissionSetResponse) => void): Request<SSOAdmin.Types.ListCustomerManagedPolicyReferencesInPermissionSetResponse, AWSError>;
+  /**
+   * Lists all customer managed policies attached to a specified PermissionSet.
+   */
+  listCustomerManagedPolicyReferencesInPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.ListCustomerManagedPolicyReferencesInPermissionSetResponse) => void): Request<SSOAdmin.Types.ListCustomerManagedPolicyReferencesInPermissionSetResponse, AWSError>;
+  /**
+   * Lists the IAM Identity Center instances that the caller has access to.
    */
   listInstances(params: SSOAdmin.Types.ListInstancesRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListInstancesResponse) => void): Request<SSOAdmin.Types.ListInstancesResponse, AWSError>;
   /**
-   * Lists the SSO instances that the caller has access to.
+   * Lists the IAM Identity Center instances that the caller has access to.
    */
   listInstances(callback?: (err: AWSError, data: SSOAdmin.Types.ListInstancesResponse) => void): Request<SSOAdmin.Types.ListInstancesResponse, AWSError>;
   /**
-   * Lists the IAM managed policy that is attached to a specified permission set.
+   * Lists the AWS managed policy that is attached to a specified permission set.
    */
   listManagedPoliciesInPermissionSet(params: SSOAdmin.Types.ListManagedPoliciesInPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListManagedPoliciesInPermissionSetResponse) => void): Request<SSOAdmin.Types.ListManagedPoliciesInPermissionSetResponse, AWSError>;
   /**
-   * Lists the IAM managed policy that is attached to a specified permission set.
+   * Lists the AWS managed policy that is attached to a specified permission set.
    */
   listManagedPoliciesInPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.ListManagedPoliciesInPermissionSetResponse) => void): Request<SSOAdmin.Types.ListManagedPoliciesInPermissionSetResponse, AWSError>;
   /**
-   * Lists the status of the permission set provisioning requests for a specified SSO instance.
+   * Lists the status of the permission set provisioning requests for a specified IAM Identity Center instance.
    */
   listPermissionSetProvisioningStatus(params: SSOAdmin.Types.ListPermissionSetProvisioningStatusRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListPermissionSetProvisioningStatusResponse) => void): Request<SSOAdmin.Types.ListPermissionSetProvisioningStatusResponse, AWSError>;
   /**
-   * Lists the status of the permission set provisioning requests for a specified SSO instance.
+   * Lists the status of the permission set provisioning requests for a specified IAM Identity Center instance.
    */
   listPermissionSetProvisioningStatus(callback?: (err: AWSError, data: SSOAdmin.Types.ListPermissionSetProvisioningStatusResponse) => void): Request<SSOAdmin.Types.ListPermissionSetProvisioningStatusResponse, AWSError>;
   /**
-   * Lists the PermissionSets in an SSO instance.
+   * Lists the PermissionSets in an IAM Identity Center instance.
    */
   listPermissionSets(params: SSOAdmin.Types.ListPermissionSetsRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListPermissionSetsResponse) => void): Request<SSOAdmin.Types.ListPermissionSetsResponse, AWSError>;
   /**
-   * Lists the PermissionSets in an SSO instance.
+   * Lists the PermissionSets in an IAM Identity Center instance.
    */
   listPermissionSets(callback?: (err: AWSError, data: SSOAdmin.Types.ListPermissionSetsResponse) => void): Request<SSOAdmin.Types.ListPermissionSetsResponse, AWSError>;
   /**
-   * Lists all the permission sets that are provisioned to a specified Amazon Web Services account.
+   * Lists all the permission sets that are provisioned to a specified AWS account.
    */
   listPermissionSetsProvisionedToAccount(params: SSOAdmin.Types.ListPermissionSetsProvisionedToAccountRequest, callback?: (err: AWSError, data: SSOAdmin.Types.ListPermissionSetsProvisionedToAccountResponse) => void): Request<SSOAdmin.Types.ListPermissionSetsProvisionedToAccountResponse, AWSError>;
   /**
-   * Lists all the permission sets that are provisioned to a specified Amazon Web Services account.
+   * Lists all the permission sets that are provisioned to a specified AWS account.
    */
   listPermissionSetsProvisionedToAccount(callback?: (err: AWSError, data: SSOAdmin.Types.ListPermissionSetsProvisionedToAccountResponse) => void): Request<SSOAdmin.Types.ListPermissionSetsProvisionedToAccountResponse, AWSError>;
   /**
@@ -220,13 +260,21 @@ declare class SSOAdmin extends Service {
    */
   provisionPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.ProvisionPermissionSetResponse) => void): Request<SSOAdmin.Types.ProvisionPermissionSetResponse, AWSError>;
   /**
-   * Attaches an IAM inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
+   * Attaches an inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
    */
   putInlinePolicyToPermissionSet(params: SSOAdmin.Types.PutInlinePolicyToPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse, AWSError>;
   /**
-   * Attaches an IAM inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
+   * Attaches an inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
    */
   putInlinePolicyToPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse, AWSError>;
+  /**
+   * Attaches an AWS managed or customer managed policy to the specified PermissionSet as a permissions boundary.
+   */
+  putPermissionsBoundaryToPermissionSet(params: SSOAdmin.Types.PutPermissionsBoundaryToPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.PutPermissionsBoundaryToPermissionSetResponse) => void): Request<SSOAdmin.Types.PutPermissionsBoundaryToPermissionSetResponse, AWSError>;
+  /**
+   * Attaches an AWS managed or customer managed policy to the specified PermissionSet as a permissions boundary.
+   */
+  putPermissionsBoundaryToPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.PutPermissionsBoundaryToPermissionSetResponse) => void): Request<SSOAdmin.Types.PutPermissionsBoundaryToPermissionSetResponse, AWSError>;
   /**
    * Associates a set of tags with a specified resource.
    */
@@ -244,11 +292,11 @@ declare class SSOAdmin extends Service {
    */
   untagResource(callback?: (err: AWSError, data: SSOAdmin.Types.UntagResourceResponse) => void): Request<SSOAdmin.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO identity store. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center identity store. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
    */
   updateInstanceAccessControlAttributeConfiguration(params: SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationRequest, callback?: (err: AWSError, data: SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
-   * Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO identity store. For more information about ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User Guide.
+   * Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center identity store. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
    */
   updateInstanceAccessControlAttributeConfiguration(callback?: (err: AWSError, data: SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse) => void): Request<SSOAdmin.Types.UpdateInstanceAccessControlAttributeConfigurationResponse, AWSError>;
   /**
@@ -263,7 +311,7 @@ declare class SSOAdmin extends Service {
 declare namespace SSOAdmin {
   export interface AccessControlAttribute {
     /**
-     * The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in Amazon Web Services SSO.
+     * The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in IAM Identity Center.
      */
     Key: AccessControlAttributeKey;
     /**
@@ -275,7 +323,7 @@ declare namespace SSOAdmin {
   export type AccessControlAttributeList = AccessControlAttribute[];
   export interface AccessControlAttributeValue {
     /**
-     * The identity source to use when mapping a specified attribute to Amazon Web Services SSO.
+     * The identity source to use when mapping a specified attribute to IAM Identity Center.
      */
     Source: AccessControlAttributeValueSourceList;
   }
@@ -283,11 +331,11 @@ declare namespace SSOAdmin {
   export type AccessControlAttributeValueSourceList = AccessControlAttributeValueSource[];
   export interface AccountAssignment {
     /**
-     * The identifier of the Amazon Web Services account.
+     * The identifier of the AWS account.
      */
     AccountId?: AccountId;
     /**
-     * The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     PermissionSetArn?: PermissionSetArn;
     /**
@@ -295,7 +343,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType?: PrincipalType;
     /**
-     * An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the Amazon Web Services SSO Identity Store API Reference.
+     * An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
      */
     PrincipalId?: PrincipalId;
   }
@@ -314,7 +362,7 @@ declare namespace SSOAdmin {
      */
     FailureReason?: Reason;
     /**
-     * TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId?: TargetId;
     /**
@@ -322,7 +370,7 @@ declare namespace SSOAdmin {
      */
     TargetType?: TargetType;
     /**
-     * The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     PermissionSetArn?: PermissionSetArn;
     /**
@@ -330,7 +378,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType?: PrincipalType;
     /**
-     * An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the Amazon Web Services SSO Identity Store API Reference.
+     * An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
      */
     PrincipalId?: PrincipalId;
     /**
@@ -355,9 +403,25 @@ declare namespace SSOAdmin {
   }
   export type AccountId = string;
   export type AccountList = AccountId[];
+  export interface AttachCustomerManagedPolicyReferenceToPermissionSetRequest {
+    /**
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. 
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * The ARN of the PermissionSet.
+     */
+    PermissionSetArn: PermissionSetArn;
+    /**
+     * Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
+     */
+    CustomerManagedPolicyReference: CustomerManagedPolicyReference;
+  }
+  export interface AttachCustomerManagedPolicyReferenceToPermissionSetResponse {
+  }
   export interface AttachManagedPolicyToPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -365,7 +429,7 @@ declare namespace SSOAdmin {
      */
     PermissionSetArn: PermissionSetArn;
     /**
-     * The IAM managed policy ARN to be attached to a permission set.
+     * The AWS managed policy ARN to be attached to a permission set.
      */
     ManagedPolicyArn: ManagedPolicyArn;
   }
@@ -373,22 +437,22 @@ declare namespace SSOAdmin {
   }
   export interface AttachedManagedPolicy {
     /**
-     * The name of the IAM managed policy.
+     * The name of the AWS managed policy.
      */
     Name?: Name;
     /**
-     * The ARN of the IAM managed policy. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the AWS managed policy. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     Arn?: ManagedPolicyArn;
   }
   export type AttachedManagedPolicyList = AttachedManagedPolicy[];
   export interface CreateAccountAssignmentRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
-     * TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId: TargetId;
     /**
@@ -404,7 +468,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType: PrincipalType;
     /**
-     * An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the Amazon Web Services SSO Identity Store API Reference.
+     * An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
      */
     PrincipalId: PrincipalId;
   }
@@ -416,11 +480,11 @@ declare namespace SSOAdmin {
   }
   export interface CreateInstanceAccessControlAttributeConfigurationRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed.
      */
     InstanceArn: InstanceArn;
     /**
-     * Specifies the Amazon Web Services SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO will replace the attribute value with the value from the Amazon Web Services SSO identity store.
+     * Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center will replace the attribute value with the value from the IAM Identity Center identity store.
      */
     InstanceAccessControlAttributeConfiguration: InstanceAccessControlAttributeConfiguration;
   }
@@ -436,7 +500,7 @@ declare namespace SSOAdmin {
      */
     Description?: PermissionSetDescription;
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -454,18 +518,29 @@ declare namespace SSOAdmin {
   }
   export interface CreatePermissionSetResponse {
     /**
-     * Defines the level of access on an Amazon Web Services account.
+     * Defines the level of access on an AWS account.
      */
     PermissionSet?: PermissionSet;
   }
+  export interface CustomerManagedPolicyReference {
+    /**
+     * The name of the IAM policy that you have configured in each account where you want to deploy your permission set.
+     */
+    Name: ManagedPolicyName;
+    /**
+     * The path to the IAM policy that you have configured in each account where you want to deploy your permission set. The default is /. For more information, see Friendly names and paths in the IAM User Guide.
+     */
+    Path?: ManagedPolicyPath;
+  }
+  export type CustomerManagedPolicyReferenceList = CustomerManagedPolicyReference[];
   export type _Date = Date;
   export interface DeleteAccountAssignmentRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
-     * TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId: TargetId;
     /**
@@ -481,7 +556,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType: PrincipalType;
     /**
-     * An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the Amazon Web Services SSO Identity Store API Reference.
+     * An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
      */
     PrincipalId: PrincipalId;
   }
@@ -493,7 +568,7 @@ declare namespace SSOAdmin {
   }
   export interface DeleteInlinePolicyFromPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -505,7 +580,7 @@ declare namespace SSOAdmin {
   }
   export interface DeleteInstanceAccessControlAttributeConfigurationRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed.
      */
     InstanceArn: InstanceArn;
   }
@@ -513,7 +588,7 @@ declare namespace SSOAdmin {
   }
   export interface DeletePermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -523,9 +598,21 @@ declare namespace SSOAdmin {
   }
   export interface DeletePermissionSetResponse {
   }
+  export interface DeletePermissionsBoundaryFromPermissionSetRequest {
+    /**
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. 
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * The ARN of the PermissionSet.
+     */
+    PermissionSetArn: PermissionSetArn;
+  }
+  export interface DeletePermissionsBoundaryFromPermissionSetResponse {
+  }
   export interface DescribeAccountAssignmentCreationStatusRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -541,7 +628,7 @@ declare namespace SSOAdmin {
   }
   export interface DescribeAccountAssignmentDeletionStatusRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -557,7 +644,7 @@ declare namespace SSOAdmin {
   }
   export interface DescribeInstanceAccessControlAttributeConfigurationRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed.
      */
     InstanceArn: InstanceArn;
   }
@@ -571,13 +658,13 @@ declare namespace SSOAdmin {
      */
     StatusReason?: InstanceAccessControlAttributeConfigurationStatusReason;
     /**
-     * Gets the list of Amazon Web Services SSO identity store attributes that have been added to your ABAC configuration.
+     * Gets the list of IAM Identity Center identity store attributes that have been added to your ABAC configuration.
      */
     InstanceAccessControlAttributeConfiguration?: InstanceAccessControlAttributeConfiguration;
   }
   export interface DescribePermissionSetProvisioningStatusRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -593,23 +680,39 @@ declare namespace SSOAdmin {
   }
   export interface DescribePermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
-     * The ARN of the permission set.
+     * The ARN of the permission set. 
      */
     PermissionSetArn: PermissionSetArn;
   }
   export interface DescribePermissionSetResponse {
     /**
-     * Describes the level of access on an Amazon Web Services account.
+     * Describes the level of access on an AWS account.
      */
     PermissionSet?: PermissionSet;
   }
+  export interface DetachCustomerManagedPolicyReferenceFromPermissionSetRequest {
+    /**
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. 
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * The ARN of the PermissionSet.
+     */
+    PermissionSetArn: PermissionSetArn;
+    /**
+     * Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
+     */
+    CustomerManagedPolicyReference: CustomerManagedPolicyReference;
+  }
+  export interface DetachCustomerManagedPolicyReferenceFromPermissionSetResponse {
+  }
   export interface DetachManagedPolicyFromPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -617,17 +720,16 @@ declare namespace SSOAdmin {
      */
     PermissionSetArn: PermissionSetArn;
     /**
-     * The IAM managed policy ARN to be attached to a permission set.
+     * The AWS managed policy ARN to be detached from a permission set.
      */
     ManagedPolicyArn: ManagedPolicyArn;
   }
   export interface DetachManagedPolicyFromPermissionSetResponse {
   }
   export type Duration = string;
-  export type GeneralArn = string;
   export interface GetInlinePolicyForPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -637,14 +739,30 @@ declare namespace SSOAdmin {
   }
   export interface GetInlinePolicyForPermissionSetResponse {
     /**
-     * The IAM inline policy that is attached to the permission set.
+     * The inline policy that is attached to the permission set.
      */
     InlinePolicy?: PermissionSetPolicyDocument;
+  }
+  export interface GetPermissionsBoundaryForPermissionSetRequest {
+    /**
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. 
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * The ARN of the PermissionSet.
+     */
+    PermissionSetArn: PermissionSetArn;
+  }
+  export interface GetPermissionsBoundaryForPermissionSetResponse {
+    /**
+     * The permissions boundary attached to the specified permission set.
+     */
+    PermissionsBoundary?: PermissionsBoundary;
   }
   export type Id = string;
   export interface InstanceAccessControlAttributeConfiguration {
     /**
-     * Lists the attributes that are configured for ABAC in the specified Amazon Web Services SSO instance.
+     * Lists the attributes that are configured for ABAC in the specified IAM Identity Center instance.
      */
     AccessControlAttributes: AccessControlAttributeList;
   }
@@ -654,17 +772,17 @@ declare namespace SSOAdmin {
   export type InstanceList = InstanceMetadata[];
   export interface InstanceMetadata {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn?: InstanceArn;
     /**
-     * The identifier of the identity store that is connected to the SSO instance.
+     * The identifier of the identity store that is connected to the IAM Identity Center instance.
      */
     IdentityStoreId?: Id;
   }
   export interface ListAccountAssignmentCreationStatusRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -692,7 +810,7 @@ declare namespace SSOAdmin {
   }
   export interface ListAccountAssignmentDeletionStatusRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -720,11 +838,11 @@ declare namespace SSOAdmin {
   }
   export interface ListAccountAssignmentsRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
-     * The identifier of the Amazon Web Services account from which to list the assignments.
+     * The identifier of the AWS account from which to list the assignments.
      */
     AccountId: TargetId;
     /**
@@ -742,7 +860,7 @@ declare namespace SSOAdmin {
   }
   export interface ListAccountAssignmentsResponse {
     /**
-     * The list of assignments that match the input Amazon Web Services account and permission set.
+     * The list of assignments that match the input AWS account and permission set.
      */
     AccountAssignments?: AccountAssignmentList;
     /**
@@ -752,15 +870,15 @@ declare namespace SSOAdmin {
   }
   export interface ListAccountsForProvisionedPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
-     * The ARN of the PermissionSet from which the associated Amazon Web Services accounts will be listed.
+     * The ARN of the PermissionSet from which the associated AWS accounts will be listed.
      */
     PermissionSetArn: PermissionSetArn;
     /**
-     * The permission set provisioning status for an Amazon Web Services account.
+     * The permission set provisioning status for an AWS account.
      */
     ProvisioningStatus?: ProvisioningStatus;
     /**
@@ -774,9 +892,37 @@ declare namespace SSOAdmin {
   }
   export interface ListAccountsForProvisionedPermissionSetResponse {
     /**
-     * The list of Amazon Web Services AccountIds.
+     * The list of AWS AccountIds.
      */
     AccountIds?: AccountList;
+    /**
+     * The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+     */
+    NextToken?: Token;
+  }
+  export interface ListCustomerManagedPolicyReferencesInPermissionSetRequest {
+    /**
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. 
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * The ARN of the PermissionSet. 
+     */
+    PermissionSetArn: PermissionSetArn;
+    /**
+     * The maximum number of results to display for the list call.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+     */
+    NextToken?: Token;
+  }
+  export interface ListCustomerManagedPolicyReferencesInPermissionSetResponse {
+    /**
+     * Specifies the names and paths of the customer managed policies that you have attached to your permission set.
+     */
+    CustomerManagedPolicyReferences?: CustomerManagedPolicyReferenceList;
     /**
      * The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
      */
@@ -794,7 +940,7 @@ declare namespace SSOAdmin {
   }
   export interface ListInstancesResponse {
     /**
-     * Lists the SSO instances that the caller has access to.
+     * Lists the IAM Identity Center instances that the caller has access to.
      */
     Instances?: InstanceList;
     /**
@@ -804,7 +950,7 @@ declare namespace SSOAdmin {
   }
   export interface ListManagedPoliciesInPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -822,7 +968,7 @@ declare namespace SSOAdmin {
   }
   export interface ListManagedPoliciesInPermissionSetResponse {
     /**
-     * The array of the AttachedManagedPolicy data type object.
+     * An array of the AttachedManagedPolicy data type object.
      */
     AttachedManagedPolicies?: AttachedManagedPolicyList;
     /**
@@ -832,7 +978,7 @@ declare namespace SSOAdmin {
   }
   export interface ListPermissionSetProvisioningStatusRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -860,11 +1006,11 @@ declare namespace SSOAdmin {
   }
   export interface ListPermissionSetsProvisionedToAccountRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
-     * The identifier of the Amazon Web Services account from which to list the assignments.
+     * The identifier of the AWS account from which to list the assignments.
      */
     AccountId: AccountId;
     /**
@@ -886,13 +1032,13 @@ declare namespace SSOAdmin {
      */
     NextToken?: Token;
     /**
-     * Defines the level of access that an Amazon Web Services account has.
+     * Defines the level of access that an AWS account has.
      */
     PermissionSets?: PermissionSetList;
   }
   export interface ListPermissionSetsRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -906,7 +1052,7 @@ declare namespace SSOAdmin {
   }
   export interface ListPermissionSetsResponse {
     /**
-     * Defines the level of access on an Amazon Web Services account.
+     * Defines the level of access on an AWS account.
      */
     PermissionSets?: PermissionSetList;
     /**
@@ -916,13 +1062,13 @@ declare namespace SSOAdmin {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
      * The ARN of the resource with the tags to be listed.
      */
-    ResourceArn: GeneralArn;
+    ResourceArn: TaggableResourceArn;
     /**
      * The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
      */
@@ -939,6 +1085,8 @@ declare namespace SSOAdmin {
     NextToken?: Token;
   }
   export type ManagedPolicyArn = string;
+  export type ManagedPolicyName = string;
+  export type ManagedPolicyPath = string;
   export type MaxResults = number;
   export type Name = string;
   export interface OperationStatusFilter {
@@ -953,7 +1101,7 @@ declare namespace SSOAdmin {
      */
     Name?: PermissionSetName;
     /**
-     * The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the permission set. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     PermissionSetArn?: PermissionSetArn;
     /**
@@ -988,11 +1136,11 @@ declare namespace SSOAdmin {
      */
     RequestId?: UUId;
     /**
-     * The identifier of the Amazon Web Services account from which to list the assignments.
+     * The identifier of the AWS account from which to list the assignments.
      */
     AccountId?: AccountId;
     /**
-     * The ARN of the permission set that is being provisioned. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the permission set that is being provisioned. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     PermissionSetArn?: PermissionSetArn;
     /**
@@ -1019,11 +1167,21 @@ declare namespace SSOAdmin {
      */
     CreatedDate?: _Date;
   }
+  export interface PermissionsBoundary {
+    /**
+     * Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
+     */
+    CustomerManagedPolicyReference?: CustomerManagedPolicyReference;
+    /**
+     * The AWS managed policy ARN that you want to attach to a permission set as a permissions boundary.
+     */
+    ManagedPolicyArn?: ManagedPolicyArn;
+  }
   export type PrincipalId = string;
   export type PrincipalType = "USER"|"GROUP"|string;
   export interface ProvisionPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -1031,7 +1189,7 @@ declare namespace SSOAdmin {
      */
     PermissionSetArn: PermissionSetArn;
     /**
-     * TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId?: TargetId;
     /**
@@ -1049,7 +1207,7 @@ declare namespace SSOAdmin {
   export type ProvisioningStatus = "LATEST_PERMISSION_SET_PROVISIONED"|"LATEST_PERMISSION_SET_NOT_PROVISIONED"|string;
   export interface PutInlinePolicyToPermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
@@ -1057,11 +1215,27 @@ declare namespace SSOAdmin {
      */
     PermissionSetArn: PermissionSetArn;
     /**
-     * The IAM inline policy to attach to a PermissionSet.
+     * The inline policy to attach to a PermissionSet.
      */
     InlinePolicy: PermissionSetPolicyDocument;
   }
   export interface PutInlinePolicyToPermissionSetResponse {
+  }
+  export interface PutPermissionsBoundaryToPermissionSetRequest {
+    /**
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. 
+     */
+    InstanceArn: InstanceArn;
+    /**
+     * The ARN of the PermissionSet.
+     */
+    PermissionSetArn: PermissionSetArn;
+    /**
+     * The permissions boundary that you want to attach to a PermissionSet.
+     */
+    PermissionsBoundary: PermissionsBoundary;
+  }
+  export interface PutPermissionsBoundaryToPermissionSetResponse {
   }
   export type Reason = string;
   export type RelayState = string;
@@ -1070,24 +1244,24 @@ declare namespace SSOAdmin {
     /**
      * The key for the tag.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * The value of the tag.
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
      * The ARN of the resource with the tags to be listed.
      */
-    ResourceArn: GeneralArn;
+    ResourceArn: TaggableResourceArn;
     /**
      * A set of key-value pairs that are used to manage the resource.
      */
@@ -1096,19 +1270,20 @@ declare namespace SSOAdmin {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TaggableResourceArn = string;
   export type TargetId = string;
   export type TargetType = "AWS_ACCOUNT"|string;
   export type Token = string;
   export type UUId = string;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**
      * The ARN of the resource with the tags to be listed.
      */
-    ResourceArn: GeneralArn;
+    ResourceArn: TaggableResourceArn;
     /**
      * The keys of tags that are attached to the resource.
      */
@@ -1118,7 +1293,7 @@ declare namespace SSOAdmin {
   }
   export interface UpdateInstanceAccessControlAttributeConfigurationRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed.
      */
     InstanceArn: InstanceArn;
     /**
@@ -1130,7 +1305,7 @@ declare namespace SSOAdmin {
   }
   export interface UpdatePermissionSetRequest {
     /**
-     * The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+     * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     InstanceArn: InstanceArn;
     /**

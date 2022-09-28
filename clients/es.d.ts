@@ -1239,9 +1239,13 @@ declare namespace ES {
      */
     VolumeSize?: IntegerClass;
     /**
-     * Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
+     * Specifies the IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
      */
     Iops?: IntegerClass;
+    /**
+     * Specifies the Throughput for GP3 EBS volume (SSD).
+     */
+    Throughput?: IntegerClass;
   }
   export interface EBSOptionsStatus {
     /**
@@ -2254,7 +2258,7 @@ declare namespace ES {
   }
   export interface StorageTypeLimit {
     /**
-     *  Name of storage limits that are applicable for given storage type. If  StorageType  is ebs, following storage options are applicable  MinimumVolumeSize Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. MaximumVolumeSize Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. MaximumIops Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. MinimumIops Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable.  
+     *  Name of storage limits that are applicable for given storage type. If  StorageType  is ebs, following storage options are applicable  MinimumVolumeSize Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. MaximumVolumeSize Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. MaximumIops Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. MinimumIops Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. MaximumThroughput Maximum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable. MinimumThroughput Minimum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable.  
      */
     LimitName?: LimitName;
     /**
@@ -2483,7 +2487,7 @@ declare namespace ES {
     SecurityGroupIds?: StringList;
   }
   export type ValueStringList = NonEmptyString[];
-  export type VolumeType = "standard"|"gp2"|"io1"|string;
+  export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string;
   export interface ZoneAwarenessConfig {
     /**
      * An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled

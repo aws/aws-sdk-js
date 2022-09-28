@@ -133,6 +133,14 @@ declare class Neptune extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
   /**
+   * Creates a Neptune global database spread across multiple Amazon Regions. The global database contains a single primary cluster with read-write capability, and read-only secondary clusters that receive data from the primary cluster through high-speed replication performed by the Neptune storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and secondary clusters to it, or you can specify an existing Neptune cluster during the create operation to become the primary cluster of the global database.
+   */
+  createGlobalCluster(params: Neptune.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.CreateGlobalClusterResult) => void): Request<Neptune.Types.CreateGlobalClusterResult, AWSError>;
+  /**
+   * Creates a Neptune global database spread across multiple Amazon Regions. The global database contains a single primary cluster with read-write capability, and read-only secondary clusters that receive data from the primary cluster through high-speed replication performed by the Neptune storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and secondary clusters to it, or you can specify an existing Neptune cluster during the create operation to become the primary cluster of the global database.
+   */
+  createGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.CreateGlobalClusterResult) => void): Request<Neptune.Types.CreateGlobalClusterResult, AWSError>;
+  /**
    * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its DeletionProtection field to False.
    */
   deleteDBCluster(params: Neptune.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
@@ -196,6 +204,14 @@ declare class Neptune extends Service {
    * Deletes an event notification subscription.
    */
   deleteEventSubscription(callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   * Deletes a global database. The primary and all secondary clusters must already be detached or deleted first.
+   */
+  deleteGlobalCluster(params: Neptune.Types.DeleteGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteGlobalClusterResult) => void): Request<Neptune.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Deletes a global database. The primary and all secondary clusters must already be detached or deleted first.
+   */
+  deleteGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.DeleteGlobalClusterResult) => void): Request<Neptune.Types.DeleteGlobalClusterResult, AWSError>;
   /**
    * Returns information about endpoints for an Amazon Neptune DB cluster.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
    */
@@ -325,6 +341,14 @@ declare class Neptune extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: Neptune.Types.EventsMessage) => void): Request<Neptune.Types.EventsMessage, AWSError>;
   /**
+   * Returns information about Neptune global database clusters. This API supports pagination.
+   */
+  describeGlobalClusters(params: Neptune.Types.DescribeGlobalClustersMessage, callback?: (err: AWSError, data: Neptune.Types.GlobalClustersMessage) => void): Request<Neptune.Types.GlobalClustersMessage, AWSError>;
+  /**
+   * Returns information about Neptune global database clusters. This API supports pagination.
+   */
+  describeGlobalClusters(callback?: (err: AWSError, data: Neptune.Types.GlobalClustersMessage) => void): Request<Neptune.Types.GlobalClustersMessage, AWSError>;
+  /**
    * Returns a list of orderable DB instance options for the specified engine.
    */
   describeOrderableDBInstanceOptions(params: Neptune.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: Neptune.Types.OrderableDBInstanceOptionsMessage) => void): Request<Neptune.Types.OrderableDBInstanceOptionsMessage, AWSError>;
@@ -356,6 +380,14 @@ declare class Neptune extends Service {
    * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Read Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). Amazon Neptune will automatically fail over to a Read Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.
    */
   failoverDBCluster(callback?: (err: AWSError, data: Neptune.Types.FailoverDBClusterResult) => void): Request<Neptune.Types.FailoverDBClusterResult, AWSError>;
+  /**
+   * Initiates the failover process for a Neptune global database. A failover for a Neptune global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected target secondary DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Neptune global database.  This action applies only to Neptune global databases. This action is only intended for use on healthy Neptune global databases with healthy Neptune DB clusters and no region-wide outages, to test disaster recovery scenarios or to reconfigure the global database topology. 
+   */
+  failoverGlobalCluster(params: Neptune.Types.FailoverGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.FailoverGlobalClusterResult) => void): Request<Neptune.Types.FailoverGlobalClusterResult, AWSError>;
+  /**
+   * Initiates the failover process for a Neptune global database. A failover for a Neptune global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected target secondary DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Neptune global database.  This action applies only to Neptune global databases. This action is only intended for use on healthy Neptune global databases with healthy Neptune DB clusters and no region-wide outages, to test disaster recovery scenarios or to reconfigure the global database topology. 
+   */
+  failoverGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.FailoverGlobalClusterResult) => void): Request<Neptune.Types.FailoverGlobalClusterResult, AWSError>;
   /**
    * Lists all tags on an Amazon Neptune resource.
    */
@@ -429,6 +461,14 @@ declare class Neptune extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Neptune.Types.ModifyEventSubscriptionResult) => void): Request<Neptune.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
+   * Modify a setting for an Amazon Neptune global cluster. You can change one or more database configuration parameters by specifying these parameters and their new values in the request.
+   */
+  modifyGlobalCluster(params: Neptune.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyGlobalClusterResult) => void): Request<Neptune.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon Neptune global cluster. You can change one or more database configuration parameters by specifying these parameters and their new values in the request.
+   */
+  modifyGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.ModifyGlobalClusterResult) => void): Request<Neptune.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
    * Not supported.
    */
   promoteReadReplicaDBCluster(params: Neptune.Types.PromoteReadReplicaDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.PromoteReadReplicaDBClusterResult) => void): Request<Neptune.Types.PromoteReadReplicaDBClusterResult, AWSError>;
@@ -444,6 +484,14 @@ declare class Neptune extends Service {
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting.
    */
   rebootDBInstance(callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * Detaches a Neptune DB cluster from a Neptune global database. A secondary cluster becomes a normal standalone cluster with read-write capability instead of being read-only, and no longer receives data from a the primary cluster.
+   */
+  removeFromGlobalCluster(params: Neptune.Types.RemoveFromGlobalClusterMessage, callback?: (err: AWSError, data: Neptune.Types.RemoveFromGlobalClusterResult) => void): Request<Neptune.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   * Detaches a Neptune DB cluster from a Neptune global database. A secondary cluster becomes a normal standalone cluster with read-write capability instead of being read-only, and no longer receives data from a the primary cluster.
+   */
+  removeFromGlobalCluster(callback?: (err: AWSError, data: Neptune.Types.RemoveFromGlobalClusterResult) => void): Request<Neptune.Types.RemoveFromGlobalClusterResult, AWSError>;
   /**
    * Disassociates an Identity and Access Management (IAM) role from a DB cluster.
    */
@@ -860,6 +908,10 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The ID of the Neptune global database to which this new DB cluster should be added.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -1153,6 +1205,35 @@ declare namespace Neptune {
   }
   export interface CreateEventSubscriptionResult {
     EventSubscription?: EventSubscription;
+  }
+  export interface CreateGlobalClusterMessage {
+    /**
+     * The cluster identifier of the new global database cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * (Optional) The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.
+     */
+    SourceDBClusterIdentifier?: String;
+    /**
+     * The name of the database engine to be used in the global database. Valid values: neptune 
+     */
+    Engine?: String;
+    /**
+     * The Neptune engine version to be used by the global database. Valid values: 1.2.0.0 or above.
+     */
+    EngineVersion?: String;
+    /**
+     * The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The storage encryption setting for the new global database cluster.
+     */
+    StorageEncrypted?: BooleanOptional;
+  }
+  export interface CreateGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface DBCluster {
     /**
@@ -1633,6 +1714,10 @@ declare namespace Neptune {
      * Indicates whether the database engine version supports read replicas.
      */
     SupportsReadReplica?: Boolean;
+    /**
+     * A value that indicates whether you can use Aurora global databases with a specific DB engine version.
+     */
+    SupportsGlobalDatabases?: Boolean;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -2112,6 +2197,15 @@ declare namespace Neptune {
   export interface DeleteEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface DeleteGlobalClusterMessage {
+    /**
+     * The cluster identifier of the global database cluster being deleted.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+  }
+  export interface DeleteGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DescribeDBClusterEndpointsMessage {
     /**
      * The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
@@ -2457,6 +2551,20 @@ declare namespace Neptune {
      */
     Marker?: String;
   }
+  export interface DescribeGlobalClustersMessage {
+    /**
+     * The user-supplied DB cluster identifier. If this parameter is specified, only information about the specified DB cluster is returned. This parameter is not case-sensitive. Constraints: If supplied, must match an existing DB cluster identifier.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination marker token is included in the response that you can use to retrieve the remaining results. Default: 100  Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * (Optional) A pagination token returned by a previous call to DescribeGlobalClusters. If this parameter is specified, the response will only include records beyond the marker, up to the number specified by MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeOrderableDBInstanceOptionsMessage {
     /**
      * The name of the engine to retrieve DB instance options for.
@@ -2699,6 +2807,19 @@ declare namespace Neptune {
   export interface FailoverDBClusterResult {
     DBCluster?: DBCluster;
   }
+  export interface FailoverGlobalClusterMessage {
+    /**
+     * Identifier of the Neptune global database that should be failed over. The identifier is the unique key assigned by the user when the Neptune global database was created. In other words, it's the name of the global database that you want to fail over. Constraints: Must match the identifier of an existing Neptune global database.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want to promote to primary for the global database.
+     */
+    TargetDbClusterIdentifier: String;
+  }
+  export interface FailoverGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface Filter {
     /**
      * This parameter is not currently supported.
@@ -2711,6 +2832,71 @@ declare namespace Neptune {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GlobalCluster {
+    /**
+     * Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * An immutable identifier for the global database that is unique within in all regions. This identifier is found in CloudTrail log entries whenever the KMS key for the DB cluster is accessed.
+     */
+    GlobalClusterResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the global database.
+     */
+    GlobalClusterArn?: String;
+    /**
+     * Specifies the current state of this global database.
+     */
+    Status?: String;
+    /**
+     * The Neptune database engine used by the global database ("neptune").
+     */
+    Engine?: String;
+    /**
+     * The Neptune engine version used by the global database.
+     */
+    EngineVersion?: String;
+    /**
+     * The storage encryption setting for the global database.
+     */
+    StorageEncrypted?: BooleanOptional;
+    /**
+     * The deletion protection setting for the global database.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * A list of cluster ARNs and instance ARNs for all the DB clusters that are part of the global database.
+     */
+    GlobalClusterMembers?: GlobalClusterMemberList;
+  }
+  export type GlobalClusterIdentifier = string;
+  export type GlobalClusterList = GlobalCluster[];
+  export interface GlobalClusterMember {
+    /**
+     *  The Amazon Resource Name (ARN) for each Neptune cluster. 
+     */
+    DBClusterArn?: String;
+    /**
+     *  The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Neptune global database. 
+     */
+    Readers?: ReadersArnList;
+    /**
+     *  Specifies whether the Neptune cluster is the primary cluster (that is, has read-write capability) for the Neptune global database with which it is associated. 
+     */
+    IsWriter?: Boolean;
+  }
+  export type GlobalClusterMemberList = GlobalClusterMember[];
+  export interface GlobalClustersMessage {
+    /**
+     * A pagination token. If this parameter is returned in the response, more records are available, which can be retrieved by one or more additional calls to DescribeGlobalClusters.
+     */
+    Marker?: String;
+    /**
+     * The list of global clusters and instances returned by this request.
+     */
+    GlobalClusters?: GlobalClusterList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -3098,6 +3284,31 @@ declare namespace Neptune {
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface ModifyGlobalClusterMessage {
+    /**
+     * The DB cluster identifier for the global cluster being modified. This parameter is not case-sensitive. Constraints: Must match the identifier of an existing global database cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * A new cluster identifier to assign to the global database. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   The first character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     */
+    NewGlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * Indicates whether the global database has deletion protection enabled. The global database cannot be deleted when deletion protection is enabled.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The version number of the database engine to which you want to upgrade. Changing this parameter will result in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. To list all of the available Neptune engine versions, use the following command:
+     */
+    EngineVersion?: String;
+    /**
+     * A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades if you specify a value for the EngineVersion parameter that is a different major version than the DB cluster's current version. If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version, so you will need to apply any custom parameter groups after completing the upgrade.
+     */
+    AllowMajorVersionUpgrade?: BooleanOptional;
+  }
+  export interface ModifyGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface OptionGroupMembership {
     /**
      * Not supported by Neptune.
@@ -3190,6 +3401,10 @@ declare namespace Neptune {
      * Maximum provisioned IOPS per GiB for a DB instance.
      */
     MaxIopsPerGib?: DoubleOptional;
+    /**
+     * A value that indicates whether you can use Neptune global databases with a specific combination of other DB engine attributes.
+     */
+    SupportsGlobalDatabases?: Boolean;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -3378,6 +3593,7 @@ declare namespace Neptune {
   export type ReadReplicaDBClusterIdentifierList = String[];
   export type ReadReplicaDBInstanceIdentifierList = String[];
   export type ReadReplicaIdentifierList = String[];
+  export type ReadersArnList = String[];
   export interface RebootDBInstanceMessage {
     /**
      * The DB instance identifier. This parameter is stored as a lowercase string. Constraints:   Must match the identifier of an existing DBInstance.  
@@ -3390,6 +3606,19 @@ declare namespace Neptune {
   }
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
+  }
+  export interface RemoveFromGlobalClusterMessage {
+    /**
+     * The identifier of the Neptune global database from which to detach the specified Neptune DB cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) identifying the cluster to be detached from the Neptune global database cluster.
+     */
+    DbClusterIdentifier: String;
+  }
+  export interface RemoveFromGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface RemoveRoleFromDBClusterMessage {
     /**
@@ -3689,6 +3918,10 @@ declare namespace Neptune {
      * A value that indicates whether a database engine is upgraded to a major version.
      */
     IsMajorVersionUpgrade?: Boolean;
+    /**
+     * A value that indicates whether you can use Neptune global databases with the target engine version.
+     */
+    SupportsGlobalDatabases?: BooleanOptional;
   }
   export interface ValidDBInstanceModificationsMessage {
     /**

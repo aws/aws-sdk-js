@@ -52,11 +52,11 @@ declare class IoTThingsGraph extends Service {
    */
   deleteFlowTemplate(callback?: (err: AWSError, data: IoTThingsGraph.Types.DeleteFlowTemplateResponse) => void): Request<IoTThingsGraph.Types.DeleteFlowTemplateResponse, AWSError>;
   /**
-   * Deletes the specified namespace. This action deletes all of the entities in the namespace. Delete the systems and flows that use entities in the namespace before performing this action.
+   * Deletes the specified namespace. This action deletes all of the entities in the namespace. Delete the systems and flows that use entities in the namespace before performing this action. This action takes no request parameters.
    */
   deleteNamespace(params: IoTThingsGraph.Types.DeleteNamespaceRequest, callback?: (err: AWSError, data: IoTThingsGraph.Types.DeleteNamespaceResponse) => void): Request<IoTThingsGraph.Types.DeleteNamespaceResponse, AWSError>;
   /**
-   * Deletes the specified namespace. This action deletes all of the entities in the namespace. Delete the systems and flows that use entities in the namespace before performing this action.
+   * Deletes the specified namespace. This action deletes all of the entities in the namespace. Delete the systems and flows that use entities in the namespace before performing this action. This action takes no request parameters.
    */
   deleteNamespace(callback?: (err: AWSError, data: IoTThingsGraph.Types.DeleteNamespaceResponse) => void): Request<IoTThingsGraph.Types.DeleteNamespaceResponse, AWSError>;
   /**

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "This release adds support for excluding specific data (non-boot) volumes from multi-volume snapshot sets created by snapshot lifecycle policies"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances."
+    }
+]

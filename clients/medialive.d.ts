@@ -358,6 +358,14 @@ declare class MediaLive extends Service {
    */
   purchaseOffering(callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
   /**
+   * Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.
+   */
+  rebootInputDevice(params: MediaLive.Types.RebootInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.RebootInputDeviceResponse) => void): Request<MediaLive.Types.RebootInputDeviceResponse, AWSError>;
+  /**
+   * Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.
+   */
+  rebootInputDevice(callback?: (err: AWSError, data: MediaLive.Types.RebootInputDeviceResponse) => void): Request<MediaLive.Types.RebootInputDeviceResponse, AWSError>;
+  /**
    * Reject the transfer of the specified input device to your AWS account.
    */
   rejectInputDeviceTransfer(params: MediaLive.Types.RejectInputDeviceTransferRequest, callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
@@ -373,6 +381,14 @@ declare class MediaLive extends Service {
    * Starts an existing channel
    */
   startChannel(callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
+  /**
+   * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
+   */
+  startInputDeviceMaintenanceWindow(params: MediaLive.Types.StartInputDeviceMaintenanceWindowRequest, callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
+  /**
+   * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
+   */
+  startInputDeviceMaintenanceWindow(callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
   /**
    * Start (run) the multiplex. Starting the multiplex does not start the channels. You must explicitly start each channel.
    */
@@ -649,6 +665,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export interface AcceptInputDeviceTransferResponse {
   }
+  export type AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"|"IMPLEMENTS_ACCESSIBILITY_FEATURES"|string;
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
   export interface AncillarySourceSettings {
     /**
@@ -714,6 +731,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   export interface AudioCodecSettings {
     AacSettings?: AacSettings;
     Ac3Settings?: Ac3Settings;
+    Eac3AtmosSettings?: Eac3AtmosSettings;
     Eac3Settings?: Eac3Settings;
     Mp2Settings?: Mp2Settings;
     PassThroughSettings?: PassThroughSettings;
@@ -758,7 +776,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
     /**
      * The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
      */
-    Name: __string;
+    Name: __stringMax255;
     /**
      * Settings that control how input audio channels are remixed into the output audio channels.
      */
@@ -1189,6 +1207,10 @@ Alternate rendition that the client will not try to play back by default. Repres
   export interface CancelInputDeviceTransferResponse {
   }
   export interface CaptionDescription {
+    /**
+     * Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
+     */
+    Accessibility?: AccessibilityType;
     /**
      * Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
      */
@@ -1880,6 +1902,10 @@ one destination per packager.
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -2374,6 +2400,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -2417,7 +2447,9 @@ during input switch actions. Presently, this functionality only works with MP4_F
     ScheduleActions?: __listOfScheduleAction;
   }
   export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
-  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|string;
+  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
+  export interface DolbyVision81Settings {
+  }
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -2544,6 +2576,40 @@ provide the language to consider when translating the image-based source to text
      * The number of milliseconds between instances of this table in the output transport stream.
      */
     RepInterval?: __integerMin1000Max30000;
+  }
+  export type Eac3AtmosCodingMode = "CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6"|string;
+  export type Eac3AtmosDrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export type Eac3AtmosDrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export interface Eac3AtmosSettings {
+    /**
+     * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+//  * @affectsRightSizing true
+     */
+    Bitrate?: __double;
+    /**
+     * Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
+     */
+    CodingMode?: Eac3AtmosCodingMode;
+    /**
+     * Sets the dialnorm for the output. Default 23.
+     */
+    Dialnorm?: __integerMin1Max31;
+    /**
+     * Sets the Dolby dynamic range compression profile.
+     */
+    DrcLine?: Eac3AtmosDrcLine;
+    /**
+     * Sets the profile for heavy Dolby dynamic range compression, ensures that the instantaneous signal peaks do not exceed specified levels.
+     */
+    DrcRf?: Eac3AtmosDrcRf;
+    /**
+     * Height dimensional trim. Sets the maximum amount to attenuate the height channels when the downstream player isn??t configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+     */
+    HeightTrim?: __double;
+    /**
+     * Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+     */
+    SurroundTrim?: __double;
   }
   export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Eac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
@@ -3116,6 +3182,7 @@ This field is optional; when no value is specified the encoder will choose the n
   export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H265ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
+    DolbyVision81Settings?: DolbyVision81Settings;
     Hdr10Settings?: Hdr10Settings;
     Rec601Settings?: Rec601Settings;
     Rec709Settings?: Rec709Settings;
@@ -4016,7 +4083,7 @@ to.
     /**
      * Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".
      */
-    Uri: __string;
+    Uri: __stringMax2048;
     /**
      * Documentation update needed
      */
@@ -5556,6 +5623,10 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     OfferingId: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
      */
     RequestId?: __string;
@@ -5572,6 +5643,19 @@ When this field is defined, ConstantBitrate must be undefined.
     Reservation?: Reservation;
   }
   export interface RawSettings {
+  }
+  export type RebootInputDeviceForce = "NO"|"YES"|string;
+  export interface RebootInputDeviceRequest {
+    /**
+     * Force a reboot of an input device. If the device is streaming, it will stop streaming and begin rebooting within a few seconds of sending the command. If the device was streaming prior to the reboot, the device will resume streaming when the reboot completes.
+     */
+    Force?: RebootInputDeviceForce;
+    /**
+     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface RebootInputDeviceResponse {
   }
   export interface Rec601Settings {
   }
@@ -5599,6 +5683,16 @@ When this field is defined, ConstantBitrate must be undefined.
 Valid values: 1, 2, 4, 6, 8
      */
     ChannelsOut?: __integerMin1Max8;
+  }
+  export interface RenewalSettings {
+    /**
+     * Automatic renewal status for the reservation
+     */
+    AutomaticRenewal?: ReservationAutomaticRenewal;
+    /**
+     * Count for the reservation renewal
+     */
+    RenewalCount?: __integerMin1;
   }
   export interface Reservation {
     /**
@@ -5650,6 +5744,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     Region?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId?: __string;
@@ -5674,6 +5772,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     UsagePrice?: __double;
   }
+  export type ReservationAutomaticRenewal = "DISABLED"|"ENABLED"|"UNAVAILABLE"|string;
   export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|"LINK"|string;
   export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
   export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
@@ -6112,6 +6211,14 @@ one destination per packager.
      * Settings for VPC output
      */
     Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface StartInputDeviceMaintenanceWindowRequest {
+    /**
+     * The unique ID of the input device to start a maintenance window for. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StartInputDeviceMaintenanceWindowResponse {
   }
   export interface StartMultiplexRequest {
     /**
@@ -6716,6 +6823,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     Name?: __string;
     /**
+     * Renewal settings for the reservation
+     */
+    RenewalSettings?: RenewalSettings;
+    /**
      * Unique reservation ID, e.g. '1234567'
      */
     ReservationId: __string;
@@ -6994,6 +7105,8 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __longMin0Max86400000 = number;
   export type __string = string;
   export type __stringMax1000 = string;
+  export type __stringMax2048 = string;
+  export type __stringMax255 = string;
   export type __stringMax256 = string;
   export type __stringMax32 = string;
   export type __stringMin1 = string;

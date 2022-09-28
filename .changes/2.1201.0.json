@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "RDS for Oracle supports Oracle Data Guard switchover and read replica backups."
+    }
+]

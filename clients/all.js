@@ -305,5 +305,16 @@ module.exports = {
   GameSparks: require('./gamesparks'),
   PinpointSMSVoiceV2: require('./pinpointsmsvoicev2'),
   Ivschat: require('./ivschat'),
-  ChimeSDKMediaPipelines: require('./chimesdkmediapipelines')
+  ChimeSDKMediaPipelines: require('./chimesdkmediapipelines'),
+  EMRServerless: require('./emrserverless'),
+  M2: require('./m2'),
+  ConnectCampaigns: require('./connectcampaigns'),
+  RedshiftServerless: require('./redshiftserverless'),
+  RolesAnywhere: require('./rolesanywhere'),
+  LicenseManagerUserSubscriptions: require('./licensemanagerusersubscriptions'),
+  BackupStorage: require('./backupstorage'),
+  PrivateNetworks: require('./privatenetworks'),
+  SupportApp: require('./supportapp'),
+  ControlTower: require('./controltower'),
+  IoTFleetWise: require('./iotfleetwise')
 };

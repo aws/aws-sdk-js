@@ -829,11 +829,11 @@ declare class SSM extends Service {
    */
   modifyDocumentPermission(callback?: (err: AWSError, data: SSM.Types.ModifyDocumentPermissionResponse) => void): Request<SSM.Types.ModifyDocumentPermissionResponse, AWSError>;
   /**
-   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
+   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, Critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
    */
   putComplianceItems(params: SSM.Types.PutComplianceItemsRequest, callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
-   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
+   * Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request. ComplianceType can be one of the following:   ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.   ExecutionType: Specify patch, association, or Custom:string.   ExecutionTime. The time the patch, association, or custom compliance item was applied to the managed node.   Id: The patch, association, or custom compliance ID.   Title: A title.   Status: The status of the compliance item. For example, approved for patches, or Failed for associations.   Severity: A patch severity. For example, Critical.   DocumentName: An SSM document name. For example, AWS-RunPatchBaseline.   DocumentVersion: An SSM document version number. For example, 4.   Classification: A patch classification. For example, security updates.   PatchBaselineId: A patch baseline ID.   PatchSeverity: A patch severity. For example, Critical.   PatchState: A patch state. For example, InstancesWithFailedPatches.   PatchGroup: The name of a patch group.   InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'  
    */
   putComplianceItems(callback?: (err: AWSError, data: SSM.Types.PutComplianceItemsResult) => void): Request<SSM.Types.PutComplianceItemsResult, AWSError>;
   /**
@@ -1181,6 +1181,35 @@ declare namespace SSM {
   }
   export type AgentErrorCode = string;
   export type AggregatorSchemaOnly = boolean;
+  export interface Alarm {
+    /**
+     * The name of your CloudWatch alarm.
+     */
+    Name: AlarmName;
+  }
+  export interface AlarmConfiguration {
+    /**
+     * If you specify true for this value, your automation or command continue to run even if we can't gather information about the state of your CloudWatch alarm. The default value is false.
+     */
+    IgnorePollAlarmFailure?: Boolean;
+    /**
+     * The name of the CloudWatch alarm specified in the configuration.
+     */
+    Alarms: AlarmList;
+  }
+  export type AlarmList = Alarm[];
+  export type AlarmName = string;
+  export interface AlarmStateInformation {
+    /**
+     * The name of your CloudWatch alarm.
+     */
+    Name: AlarmName;
+    /**
+     * The state of your CloudWatch alarm.
+     */
+    State: ExternalAlarmState;
+  }
+  export type AlarmStateInformationList = AlarmStateInformation[];
   export type AllowedPattern = string;
   export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
@@ -1364,6 +1393,11 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked during the association.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1399,6 +1433,11 @@ declare namespace SSM {
      * An aggregate status of the resources in the execution based on the status type.
      */
     ResourceCountByStatus?: ResourceCountByStatus;
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarms that were invoked by the association.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface AssociationExecutionFilter {
     /**
@@ -1764,6 +1803,14 @@ declare namespace SSM {
      */
     ProgressCounters?: ProgressCounters;
     /**
+     * The details for the CloudWatch alarm applied to your automation.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the automation.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
+    /**
      * The subtype of the Automation operation. Currently, the only supported value is ChangeRequest.
      */
     AutomationSubtype?: AutomationSubtype;
@@ -1892,6 +1939,14 @@ declare namespace SSM {
      * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and Amazon Web Services accounts. For more information, see Running Automation workflows in multiple Amazon Web Services Regions and accounts in the Amazon Web Services Systems Manager User Guide. 
      */
     AutomationType?: AutomationType;
+    /**
+     * The details for the CloudWatch alarm applied to your automation.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the automation.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
     /**
      * The subtype of the Automation operation. Currently, the only supported value is ChangeRequest.
      */
@@ -2026,7 +2081,7 @@ declare namespace SSM {
      */
     Comment?: Comment;
     /**
-     * If this time is reached and the command hasn't already started running, it won't run. Calculated based on the ExpiresAfter user input provided as part of the SendCommand API operation.
+     * If a command expires, it changes status to DeliveryTimedOut for all invocations that have the status InProgress, Pending, or Delayed. ExpiresAfter is calculated based on the total timeout for the overall command. For more information, see Understanding command timeout values in the Amazon Web Services Systems Manager User Guide.
      */
     ExpiresAfter?: DateTime;
     /**
@@ -2050,7 +2105,7 @@ declare namespace SSM {
      */
     Status?: CommandStatus;
     /**
-     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to any managed nodes.   In Progress: The command has been sent to at least one managed node but hasn't reached a final state on all managed nodes.   Success: The command successfully ran on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all managed nodes and one or more invocations doesn't have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of managed nodes targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before running it on any managed node. This is a terminal state.  
+     * A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to any managed nodes.   In Progress: The command has been sent to at least one managed node but hasn't reached a final state on all managed nodes.   Success: The command successfully ran on all invocations. This is a terminal state.   Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.   Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.   Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.   Incomplete: The command was attempted on all managed nodes and one or more invocations doesn't have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Rate Exceeded: The number of managed nodes targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before running it on any managed node. This is a terminal state.   Delayed: The system attempted to send the command to the managed node but wasn't successful. The system retries again.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2105,6 +2160,14 @@ declare namespace SSM {
      * The TimeoutSeconds value specified for a command.
      */
     TimeoutSeconds?: TimeoutSeconds;
+    /**
+     * The details for the CloudWatch alarm applied to your command.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the command.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface CommandFilter {
     /**
@@ -2154,7 +2217,7 @@ declare namespace SSM {
      */
     Status?: CommandInvocationStatus;
     /**
-     * A detailed status of the command execution for each invocation (each managed node targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the managed node, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The managed node might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.  
+     * A detailed status of the command execution for each invocation (each managed node targeted by the command). StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see Understanding command statuses in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one of the following values:   Pending: The command hasn't been sent to the managed node.   In Progress: The command has been sent to the managed node but hasn't reached a terminal state.   Success: The execution of the command or plugin was successfully completed. This is a terminal state.   Delivery Timed Out: The command wasn't delivered to the managed node before the delivery timeout expired. Delivery timeouts don't count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Execution Timed Out: Command execution started on the managed node, but the execution wasn't complete before the execution timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.   Failed: The command wasn't successful on the managed node. For a plugin, this indicates that the result code wasn't zero. For a command invocation, this indicates that the result code for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.   Cancelled: The command was terminated before it was completed. This is a terminal state.   Undeliverable: The command can't be delivered to the managed node. The managed node might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.   Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.   Delayed: The system attempted to send the command to the managed node but wasn't successful. The system retries again.  
      */
     StatusDetails?: StatusDetails;
     /**
@@ -2505,6 +2568,7 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2589,6 +2653,11 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an association to identify the type of resource to which it applies, the environment, or the purpose of the association.
+     */
+    Tags?: TagList;
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface CreateAssociationResult {
     /**
@@ -2610,7 +2679,7 @@ declare namespace SSM {
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws-     amazon     amzn    
+     * A name for the SSM document.  You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services for use as document name prefixes:    aws     amazon     amzn    
      */
     Name: DocumentName;
     /**
@@ -2618,7 +2687,7 @@ declare namespace SSM {
      */
     DisplayName?: DocumentDisplayName;
     /**
-     * An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     * An optional field specifying the version of the artifact you are creating with the document. For example, Release12.1. This value is unique across all versions of a document, and can't be changed.
      */
     VersionName?: DocumentVersionName;
     /**
@@ -3419,7 +3488,7 @@ declare namespace SSM {
      */
     InstanceInformationFilterList?: InstanceInformationFilterList;
     /**
-     * One or more filters. Use a filter to return a more specific list of managed nodes. You can filter based on tags applied to EC2 instances. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
+     * One or more filters. Use a filter to return a more specific list of managed nodes. You can filter based on tags applied to your managed nodes. Use this Filters data type instead of InstanceInformationFilterList, which is deprecated.
      */
     Filters?: InstanceInformationStringFilterList;
     /**
@@ -4335,7 +4404,7 @@ declare namespace SSM {
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|"CloudFormation"|"ConformancePackTemplate"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -4399,6 +4468,7 @@ declare namespace SSM {
   export type ExecutionMode = "Auto"|"Interactive"|string;
   export type ExecutionRoleName = string;
   export type ExpirationDate = Date;
+  export type ExternalAlarmState = "UNKNOWN"|"ALARM"|string;
   export interface FailedCreateAssociation {
     /**
      * The association.
@@ -4909,6 +4979,14 @@ declare namespace SSM {
      * The time the task execution completed.
      */
     EndTime?: DateTime;
+    /**
+     * The details for the CloudWatch alarm you applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarms that were invoked by the maintenance window task.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface GetMaintenanceWindowRequest {
     /**
@@ -5049,6 +5127,10 @@ declare namespace SSM {
      * The action to take on tasks when the maintenance window cutoff time is reached. CONTINUE_TASK means that tasks continue to run. For Automation, Lambda, Step Functions tasks, CANCEL_TASK means that currently running task invocations continue, but no new task invocations are started. For Run Command tasks, CANCEL_TASK means the system attempts to stop the task by sending a CancelCommand operation.
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The details for the CloudWatch alarm you applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface GetOpsItemRequest {
     /**
@@ -5322,7 +5404,7 @@ declare namespace SSM {
   }
   export interface GetServiceSettingRequest {
     /**
-     * The ID of the service setting to get. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
+     * The ID of the service setting to get. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/managed-instance/activation-tier     /ssm/opsinsights/opscenter     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled   
      */
     SettingId: ServiceSettingId;
   }
@@ -5537,7 +5619,7 @@ declare namespace SSM {
   export type InstanceInformationList = InstanceInformation[];
   export interface InstanceInformationStringFilter {
     /**
-     * The filter key name to describe your managed nodes. For example: "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"   Tag key isn't a valid filter. You must specify either tag-key or tag:keyname and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
+     * The filter key name to describe your managed nodes. For example: "InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus" | "tag-key" | "tag:{keyname}    Tag Key isn't a valid filter. You must specify either tag-key or tag:{keyname} and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname. 
      */
     Key: InstanceInformationStringFilterKey;
     /**
@@ -6461,6 +6543,14 @@ declare namespace SSM {
      * The type of task that ran.
      */
     TaskType?: MaintenanceWindowTaskType;
+    /**
+     * The details for the CloudWatch alarm applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
+    /**
+     * The CloudWatch alarm that was invoked by the maintenance window task.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export type MaintenanceWindowExecutionTaskIdentityList = MaintenanceWindowExecutionTaskIdentity[];
   export type MaintenanceWindowExecutionTaskInvocationId = string;
@@ -6760,6 +6850,10 @@ declare namespace SSM {
      * The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. 
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The details for the CloudWatch alarm applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export type MaintenanceWindowTaskArn = string;
   export type MaintenanceWindowTaskCutoffBehavior = "CONTINUE_TASK"|"CANCEL_TASK"|string;
@@ -8107,6 +8201,10 @@ declare namespace SSM {
      * Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.     CONTINUE_TASK: When the cutoff time is reached, any tasks that are running continue. The default value.    CANCEL_TASK:   For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.   For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.   The status for tasks that are not completed is TIMED_OUT.  
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The CloudWatch alarm you want to apply to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface RegisterTaskWithMaintenanceWindowResult {
     /**
@@ -8155,7 +8253,7 @@ declare namespace SSM {
   }
   export interface ResetServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
+     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/managed-instance/activation-tier     /ssm/opsinsights/opscenter     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled   
      */
     SettingId: ServiceSettingId;
   }
@@ -8372,7 +8470,7 @@ declare namespace SSM {
   export type ResourceDataSyncType = string;
   export type ResourceId = string;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
-  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|"OpsMetadata"|"Automation"|string;
+  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|"OpsMetadata"|"Automation"|"Association"|string;
   export type ResponseCode = number;
   export interface ResultAttribute {
     /**
@@ -8571,7 +8669,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * The ARN of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.
+     * The ARN of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands. This role must provide the sns:Publish permission for your notification topic. For information about creating and using this service role, see Monitoring Systems Manager status changes using Amazon SNS notifications in the Amazon Web Services Systems Manager User Guide.
      */
     ServiceRoleArn?: ServiceRole;
     /**
@@ -8582,6 +8680,10 @@ declare namespace SSM {
      * Enables Amazon Web Services Systems Manager to send Run Command output to Amazon CloudWatch Logs. Run Command is a capability of Amazon Web Services Systems Manager.
      */
     CloudWatchOutputConfig?: CloudWatchOutputConfig;
+    /**
+     * The CloudWatch alarm you want to apply to your command.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface SendCommandResult {
     /**
@@ -8704,7 +8806,7 @@ declare namespace SSM {
   export type SessionTarget = string;
   export interface SeveritySummary {
     /**
-     * The total number of resources or compliance items that have a severity level of critical. Critical severity is determined by the organization that published the compliance items.
+     * The total number of resources or compliance items that have a severity level of Critical. Critical severity is determined by the organization that published the compliance items.
      */
     CriticalCount?: ComplianceSummaryCount;
     /**
@@ -8793,6 +8895,10 @@ declare namespace SSM {
      * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an automation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an automation to identify an environment or operating system. In this case, you could specify the following key-value pairs:    Key=environment,Value=test     Key=OS,Value=Windows     To add tags to an existing automation, use the AddTagsToResource operation. 
      */
     Tags?: TagList;
+    /**
+     * The CloudWatch alarm you want to apply to your automation.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface StartAutomationExecutionResult {
     /**
@@ -8858,7 +8964,7 @@ declare namespace SSM {
      */
     Target: SessionTarget;
     /**
-     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the managed node is launched by default.
+     * The name of the SSM document you want to use to define the type of session, input parameters, or preferences for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the managed node is launched by default. For more information, see Start a session in the Amazon Web Services Systems Manager User Guide.
      */
     DocumentName?: DocumentARN;
     /**
@@ -8876,7 +8982,7 @@ declare namespace SSM {
      */
     SessionId?: SessionId;
     /**
-     * An encrypted token value containing session and caller information. Used to authenticate the connection to the managed node.
+     * An encrypted token value containing session and caller information. This token is used to authenticate the connection to the managed node, and is valid only long enough to ensure the connection is successful. Never share your session's token.
      */
     TokenValue?: TokenValue;
     /**
@@ -9185,6 +9291,7 @@ declare namespace SSM {
      * A key-value mapping of document parameters to target resources. Both Targets and TargetMaps can't be specified together.
      */
     TargetMaps?: TargetMaps;
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface UpdateAssociationResult {
     /**
@@ -9505,6 +9612,10 @@ declare namespace SSM {
      * Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.     CONTINUE_TASK: When the cutoff time is reached, any tasks that are running continue. The default value.    CANCEL_TASK:   For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.   For Run Command tasks: When the cutoff time is reached, the system sends a CancelCommand operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.   The status for tasks that are not completed is TIMED_OUT.  
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The CloudWatch alarm you want to apply to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface UpdateMaintenanceWindowTaskResult {
     /**
@@ -9563,6 +9674,10 @@ declare namespace SSM {
      * The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. 
      */
     CutoffBehavior?: MaintenanceWindowTaskCutoffBehavior;
+    /**
+     * The details for the CloudWatch alarm you applied to your maintenance window task.
+     */
+    AlarmConfiguration?: AlarmConfiguration;
   }
   export interface UpdateManagedInstanceRoleRequest {
     /**
@@ -9786,11 +9901,11 @@ declare namespace SSM {
   }
   export interface UpdateServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
+     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/managed-instance/activation-tier     /ssm/opsinsights/opscenter     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled   
      */
     SettingId: ServiceSettingId;
     /**
-     * The new value to specify for the service setting. The following list specifies the available values for each setting.    /ssm/parameter-store/default-parameter-tier: Standard, Advanced, Intelligent-Tiering     /ssm/parameter-store/high-throughput-enabled: true or false     /ssm/managed-instance/activation-tier: true or false     /ssm/automation/customer-script-log-destination: CloudWatch     /ssm/automation/customer-script-log-group-name: the name of an Amazon CloudWatch Logs log group    /ssm/documents/console/public-sharing-permission: Enable or Disable     /ssm/managed-instance/activation-tier: standard or advanced   
+     * The new value to specify for the service setting. The following list specifies the available values for each setting.    /ssm/automation/customer-script-log-destination: CloudWatch     /ssm/automation/customer-script-log-group-name: the name of an Amazon CloudWatch Logs log group    /ssm/documents/console/public-sharing-permission: Enable or Disable     /ssm/managed-instance/activation-tier: standard or advanced     /ssm/opsinsights/opscenter: Enabled or Disabled     /ssm/parameter-store/default-parameter-tier: Standard, Advanced, Intelligent-Tiering     /ssm/parameter-store/high-throughput-enabled: true or false   
      */
     SettingValue: ServiceSettingValue;
   }

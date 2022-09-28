@@ -26,7 +26,6 @@ describe 'ServiceCollector', ->
     add 's3,cloudwatch'
     assertServiceAdded 'S3'
     assertServiceAdded 'CloudWatch'
-    assertServiceAdded 'STS' # STS always added
 
   it 'uses latest service version if version suffix is not supplied', ->
     add 'rds'
@@ -88,6 +87,11 @@ describe 'build', ->
       if !err && code
         result = helpers.evalCode(code, data)
       cb(err, result)
+
+  it 'always bundles sts and cognitoidentity clients', -> 
+    buildBundle 's3', null, 'window.AWS', (err, AWS) ->
+      expect(new AWS.STS().api.apiVersion).to.equal(new helpers.AWS.STS().api.apiVersion)
+      expect(new AWS.CognitoIdentity().api.apiVersion).to.equal(new helpers.AWS.CognitoIdentity().api.apiVersion)
 
   it 'defaults to no minification', ->
     buildBundle null, null, 'window.AWS', (err, AWS) ->

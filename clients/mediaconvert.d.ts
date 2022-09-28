@@ -354,6 +354,20 @@ declare namespace MediaConvert {
      */
     SampleRate?: __integerMin8000Max192000;
   }
+  export interface AllowedRenditionSize {
+    /**
+     * Use Height to define the video resolution height, in pixels, for this rule.
+     */
+    Height?: __integerMin32Max8192;
+    /**
+     * Set to ENABLED to force a rendition to be included.
+     */
+    Required?: RequiredFlag;
+    /**
+     * Use Width to define the video resolution width, in pixels, for this rule.
+     */
+    Width?: __integerMin32Max8192;
+  }
   export type AlphaBehavior = "DISCARD"|"REMAP_TO_LUMA"|string;
   export type AncillaryConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface AncillarySourceSettings {
@@ -481,6 +495,7 @@ declare namespace MediaConvert {
      */
     StreamName?: __stringPatternWS;
   }
+  export type AudioDurationCorrection = "DISABLED"|"AUTO"|"TRACK"|"FRAME"|string;
   export type AudioLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export type AudioNormalizationAlgorithm = "ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4"|string;
   export type AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"|"MEASURE_ONLY"|string;
@@ -513,6 +528,10 @@ declare namespace MediaConvert {
     TargetLkfs?: __doubleMinNegative59Max0;
   }
   export interface AudioSelector {
+    /**
+     * Apply audio timing corrections to help synchronize audio and video in your output. To apply timing corrections, your input must meet the following requirements: * Container: MP4, or MOV, with an accurate time-to-sample (STTS) table. * Audio track: AAC. Choose from the following audio timing correction settings: * Disabled (Default): Apply no correction. * Auto: Recommended for most inputs. MediaConvert analyzes the audio timing in your input and determines which correction setting to use, if needed. * Track: Adjust the duration of each audio frame by a constant amount to align the audio track length with STTS duration. Track-level correction does not affect pitch, and is recommended for tonal audio content such as music. * Frame: Adjust the duration of each audio frame by a variable amount to align audio frames with STTS timestamps. No corrections are made to already-aligned frames. Frame-level correction may affect the pitch of corrected frames, and is recommended for atonal audio content such as speech or percussion.
+     */
+    AudioDurationCorrection?: AudioDurationCorrection;
     /**
      * Selects a specific language code from within an audio source, using the ISO 639-2 or ISO 639-3 three-letter language code
      */
@@ -566,6 +585,28 @@ declare namespace MediaConvert {
   }
   export type AudioSelectorType = "PID"|"TRACK"|"LANGUAGE_CODE"|"HLS_RENDITION_GROUP"|string;
   export type AudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export interface AutomatedAbrRule {
+    /**
+     * When customer adds the allowed renditions rule for auto ABR ladder, they are required to add at leat one rendition to allowedRenditions list
+     */
+    AllowedRenditions?: __listOfAllowedRenditionSize;
+    /**
+     * When customer adds the force include renditions rule for auto ABR ladder, they are required to add at leat one rendition to forceIncludeRenditions list
+     */
+    ForceIncludeRenditions?: __listOfForceIncludeRenditionSize;
+    /**
+     * Use Min bottom rendition size to specify a minimum size for the lowest resolution in your ABR stack. * The lowest resolution in your ABR stack will be equal to or greater than the value that you enter. For example: If you specify 640x360 the lowest resolution in your ABR stack will be equal to or greater than to 640x360. * If you specify a Min top rendition size rule, the value that you specify for Min bottom rendition size must be less than, or equal to, Min top rendition size.
+     */
+    MinBottomRenditionSize?: MinBottomRenditionSize;
+    /**
+     * Use Min top rendition size to specify a minimum size for the highest resolution in your ABR stack. * The highest resolution in your ABR stack will be equal to or greater than the value that you enter. For example: If you specify 1280x720 the highest resolution in your ABR stack will be equal to or greater than 1280x720. * If you specify a value for Max resolution, the value that you specify for Min top rendition size must be less than, or equal to, Max resolution.
+     */
+    MinTopRenditionSize?: MinTopRenditionSize;
+    /**
+     * Use Min top rendition size to specify a minimum size for the highest resolution in your ABR stack. * The highest resolution in your ABR stack will be equal to or greater than the value that you enter. For example: If you specify 1280x720 the highest resolution in your ABR stack will be equal to or greater than 1280x720. * If you specify a value for Max resolution, the value that you specify for Min top rendition size must be less than, or equal to, Max resolution. Use Min bottom rendition size to specify a minimum size for the lowest resolution in your ABR stack. * The lowest resolution in your ABR stack will be equal to or greater than the value that you enter. For example: If you specify 640x360 the lowest resolution in your ABR stack will be equal to or greater than to 640x360. * If you specify a Min top rendition size rule, the value that you specify for Min bottom rendition size must be less than, or equal to, Min top rendition size. Use Force include renditions to specify one or more resolutions to include your ABR stack. * (Recommended) To optimize automated ABR, specify as few resolutions as possible. * (Required) The number of resolutions that you specify must be equal to, or less than, the Max renditions setting. * If you specify a Min top rendition size rule, specify at least one resolution that is equal to, or greater than, Min top rendition size. * If you specify a Min bottom rendition size rule, only specify resolutions that are equal to, or greater than, Min bottom rendition size. * If you specify a Force include renditions rule, do not specify a separate rule for Allowed renditions. * Note: The ABR stack may include other resolutions that you do not specify here, depending on the Max renditions setting. Use Allowed renditions to specify a list of possible resolutions in your ABR stack. * (Required) The number of resolutions that you specify must be equal to, or greater than, the Max renditions setting. * MediaConvert will create an ABR stack exclusively from the list of resolutions that you specify. * Some resolutions in the Allowed renditions list may not be included, however you can force a resolution to be included by setting Required to ENABLED. * You must specify at least one resolution that is greater than or equal to any resolutions that you specify in Min top rendition size or Min bottom rendition size. * If you specify Allowed renditions, you must not specify a separate rule for Force include renditions.
+     */
+    Type?: RuleType;
+  }
   export interface AutomatedAbrSettings {
     /**
      * Optional. The maximum target bit rate used in your automated ABR stack. Use this value to set an upper limit on the bandwidth consumed by the highest-quality rendition. This is the rendition that is delivered to viewers with the fastest internet connections. If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s) by default.
@@ -579,6 +620,10 @@ declare namespace MediaConvert {
      * Optional. The minimum target bitrate used in your automated ABR stack. Use this value to set a lower limit on the bitrate of video delivered to viewers with slow internet connections. If you don't specify a value, MediaConvert uses 600,000 (600 kb/s) by default.
      */
     MinAbrBitrate?: __integerMin100000Max100000000;
+    /**
+     * Optional. Use Automated ABR rules to specify restrictions for the rendition sizes MediaConvert will create in your ABR stack. You can use these rules if your ABR workflow has specific rendition size requirements, but you still want MediaConvert to optimize for video quality and overall file size.
+     */
+    Rules?: __listOfAutomatedAbrRule;
   }
   export interface AutomatedEncodingSettings {
     /**
@@ -1181,7 +1226,7 @@ declare namespace MediaConvert {
      */
     IFrameOnlyManifest?: CmfcIFrameOnlyManifest;
     /**
-     * Applies to CMAF outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.
+     * To include key-length-value metadata in this output: Set KLV metadata insertion to Passthrough. MediaConvert reads KLV metadata present in your input and writes each instance to a separate event message box in the output, according to MISB ST1910.1. To exclude this KLV metadata: Set KLV metadata insertion to None or leave blank.
      */
     KlvMetadata?: CmfcKlvMetadata;
     /**
@@ -1666,11 +1711,11 @@ declare namespace MediaConvert {
      */
     L6Mode?: DolbyVisionLevel6Mode;
     /**
-     * Required when you set Dolby Vision Profile (Profile) to Profile 8.1 (PROFILE_8_1). When you set Content mapping (Mapping) to None (HDR10_NOMAP), content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to Static (HDR10_1000), the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims.
+     * Required when you set Dolby Vision Profile to Profile 8.1. When you set Content mapping to None, content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to HDR10 1000, the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims.
      */
     Mapping?: DolbyVisionMapping;
     /**
-     * Required when you use Dolby Vision (DolbyVision) processing. Set Profile (DolbyVisionProfile) to Profile 5 (Profile_5) to only include frame-interleaved Dolby Vision metadata in your output. Set Profile to Profile 8.1 (Profile_8_1) to include both frame-interleaved Dolby Vision metadata and HDR10 metadata in your output.
+     * Required when you enable Dolby Vision. Use Profile 5 to include frame-interleaved Dolby Vision metadata in your output. Your input must include Dolby Vision metadata or an HDR10 YUV color space. Use Profile 8.1 to include frame-interleaved Dolby Vision metadata and HDR10 metadata in your output. Your input must include Dolby Vision metadata.
      */
     Profile?: DolbyVisionProfile;
   }
@@ -2150,6 +2195,16 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   }
   export type FileSourceTimeDeltaUnits = "SECONDS"|"MILLISECONDS"|string;
   export type FontScript = "AUTOMATIC"|"HANS"|"HANT"|string;
+  export interface ForceIncludeRenditionSize {
+    /**
+     * Use Height to define the video resolution height, in pixels, for this rule.
+     */
+    Height?: __integerMin32Max8192;
+    /**
+     * Use Width to define the video resolution width, in pixels, for this rule.
+     */
+    Width?: __integerMin32Max8192;
+  }
   export interface FrameCaptureSettings {
     /**
      * Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds. For example, settings of framerateNumerator = 1 and framerateDenominator = 3 (a rate of 1/3 frame per second) will capture the first frame, then 1 frame every 3s. Files will be named as filename.n.jpg where n is the 0-based sequence number of each Capture.
@@ -2998,7 +3053,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type ImscAccessibilitySubs = "DISABLED"|"ENABLED"|string;
   export interface ImscDestinationSettings {
     /**
-     * Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
+     * Set Accessibility subtitles to Enabled if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled, if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
      */
     Accessibility?: ImscAccessibilitySubs;
     /**
@@ -3089,7 +3144,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
     /**
-     * Use this setting if you do not have a video input or if you want to add black video frames before, or after, other inputs. When you include Video generator, MediaConvert creates a video input with black frames and without an audio track. You can specify a value for Video generator, or you can specify an Input file, but you cannot specify both.
+     * When you include Video generator, MediaConvert creates a video input with black frames. Use this setting if you do not have a video input or if you want to add black video frames before, or after, other inputs. You can specify Video generator, or you can specify an Input file, but you cannot specify both. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
      */
     VideoGenerator?: InputVideoGenerator;
     /**
@@ -3811,7 +3866,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     FragmentTime?: __doubleMin0;
     /**
-     * Applies to MPEG-TS outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.
+     * To include key-length-value metadata in this output: Set KLV metadata insertion to Passthrough. MediaConvert reads KLV metadata present in your input and passes it through to the output transport stream. To exclude this KLV metadata: Set KLV metadata insertion to None or leave blank.
      */
     KlvMetadata?: M2tsKlvMetadata;
     /**
@@ -3887,7 +3942,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SegmentationTime?: __doubleMin0;
     /**
-     * Specify the packet identifier (PID) for timed metadata in this output. Default is 502.
+     * Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
      */
     TimedMetadataPid?: __integerMin32Max8182;
     /**
@@ -3981,6 +4036,26 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Packet Identifier (PID) of the elementary video stream in the transport stream.
      */
     VideoPid?: __integerMin32Max8182;
+  }
+  export interface MinBottomRenditionSize {
+    /**
+     * Use Height to define the video resolution height, in pixels, for this rule.
+     */
+    Height?: __integerMin32Max8192;
+    /**
+     * Use Width to define the video resolution width, in pixels, for this rule.
+     */
+    Width?: __integerMin32Max8192;
+  }
+  export interface MinTopRenditionSize {
+    /**
+     * Use Height to define the video resolution height, in pixels, for this rule.
+     */
+    Height?: __integerMin32Max8192;
+    /**
+     * Use Width to define the video resolution width, in pixels, for this rule.
+     */
+    Width?: __integerMin32Max8192;
   }
   export interface MotionImageInserter {
     /**
@@ -4143,7 +4218,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     CaptionContainerType?: MpdCaptionContainerType;
     /**
-     * Applies to DASH ISO outputs. Use this setting to specify whether the service inserts the KLV metadata from the input in this output.
+     * To include key-length-value metadata in this output: Set KLV metadata insertion to Passthrough. MediaConvert reads KLV metadata present in your input and writes each instance to a separate event message box in the output, according to MISB ST1910.1. To exclude this KLV metadata: Set KLV metadata insertion to None or leave blank.
      */
     KlvMetadata?: MpdKlvMetadata;
     /**
@@ -4905,6 +4980,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     ChannelsOut?: __integerMin1Max64;
   }
   export type RenewalType = "AUTO_RENEW"|"EXPIRE"|string;
+  export type RequiredFlag = "ENABLED"|"DISABLED"|string;
   export interface ReservationPlan {
     /**
      * The length of the term of your reserved queue pricing plan commitment.
@@ -4957,6 +5033,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     Tags?: __mapOf__string;
   }
   export type RespondToAfd = "NONE"|"RESPOND"|"PASSTHROUGH"|string;
+  export type RuleType = "MIN_TOP_RENDITION_SIZE"|"MIN_BOTTOM_RENDITION_SIZE"|"FORCE_INCLUDE_RENDITIONS"|"ALLOWED_RENDITIONS"|string;
   export interface S3DestinationAccessControl {
     /**
      * Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
@@ -5669,7 +5746,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type WebvttAccessibilitySubs = "DISABLED"|"ENABLED"|string;
   export interface WebvttDestinationSettings {
     /**
-     * Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
+     * Set Accessibility subtitles to Enabled if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled, if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
      */
     Accessibility?: WebvttAccessibilitySubs;
     /**
@@ -5970,12 +6047,15 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type __integerMinNegative5Max5 = number;
   export type __integerMinNegative60Max6 = number;
   export type __integerMinNegative70Max0 = number;
+  export type __listOfAllowedRenditionSize = AllowedRenditionSize[];
   export type __listOfAudioDescription = AudioDescription[];
+  export type __listOfAutomatedAbrRule = AutomatedAbrRule[];
   export type __listOfCaptionDescription = CaptionDescription[];
   export type __listOfCaptionDescriptionPreset = CaptionDescriptionPreset[];
   export type __listOfCmafAdditionalManifest = CmafAdditionalManifest[];
   export type __listOfDashAdditionalManifest = DashAdditionalManifest[];
   export type __listOfEndpoint = Endpoint[];
+  export type __listOfForceIncludeRenditionSize = ForceIncludeRenditionSize[];
   export type __listOfHlsAdMarkers = HlsAdMarkers[];
   export type __listOfHlsAdditionalManifest = HlsAdditionalManifest[];
   export type __listOfHlsCaptionLanguageMapping = HlsCaptionLanguageMapping[];

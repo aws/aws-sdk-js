@@ -21,6 +21,14 @@ declare class Amp extends Service {
    */
   createAlertManagerDefinition(callback?: (err: AWSError, data: Amp.Types.CreateAlertManagerDefinitionResponse) => void): Request<Amp.Types.CreateAlertManagerDefinitionResponse, AWSError>;
   /**
+   * Create logging configuration.
+   */
+  createLoggingConfiguration(params: Amp.Types.CreateLoggingConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.CreateLoggingConfigurationResponse) => void): Request<Amp.Types.CreateLoggingConfigurationResponse, AWSError>;
+  /**
+   * Create logging configuration.
+   */
+  createLoggingConfiguration(callback?: (err: AWSError, data: Amp.Types.CreateLoggingConfigurationResponse) => void): Request<Amp.Types.CreateLoggingConfigurationResponse, AWSError>;
+  /**
    * Create a rule group namespace.
    */
   createRuleGroupsNamespace(params: Amp.Types.CreateRuleGroupsNamespaceRequest, callback?: (err: AWSError, data: Amp.Types.CreateRuleGroupsNamespaceResponse) => void): Request<Amp.Types.CreateRuleGroupsNamespaceResponse, AWSError>;
@@ -45,6 +53,14 @@ declare class Amp extends Service {
    */
   deleteAlertManagerDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Delete logging configuration.
+   */
+  deleteLoggingConfiguration(params: Amp.Types.DeleteLoggingConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete logging configuration.
+   */
+  deleteLoggingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Delete a rule groups namespace.
    */
   deleteRuleGroupsNamespace(params: Amp.Types.DeleteRuleGroupsNamespaceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -68,6 +84,14 @@ declare class Amp extends Service {
    * Describes an alert manager definition.
    */
   describeAlertManagerDefinition(callback?: (err: AWSError, data: Amp.Types.DescribeAlertManagerDefinitionResponse) => void): Request<Amp.Types.DescribeAlertManagerDefinitionResponse, AWSError>;
+  /**
+   * Describes logging configuration.
+   */
+  describeLoggingConfiguration(params: Amp.Types.DescribeLoggingConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.DescribeLoggingConfigurationResponse) => void): Request<Amp.Types.DescribeLoggingConfigurationResponse, AWSError>;
+  /**
+   * Describes logging configuration.
+   */
+  describeLoggingConfiguration(callback?: (err: AWSError, data: Amp.Types.DescribeLoggingConfigurationResponse) => void): Request<Amp.Types.DescribeLoggingConfigurationResponse, AWSError>;
   /**
    * Describe a rule groups namespace.
    */
@@ -140,6 +164,14 @@ declare class Amp extends Service {
    * Deletes tags from the specified resource.
    */
   untagResource(callback?: (err: AWSError, data: Amp.Types.UntagResourceResponse) => void): Request<Amp.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Update logging configuration.
+   */
+  updateLoggingConfiguration(params: Amp.Types.UpdateLoggingConfigurationRequest, callback?: (err: AWSError, data: Amp.Types.UpdateLoggingConfigurationResponse) => void): Request<Amp.Types.UpdateLoggingConfigurationResponse, AWSError>;
+  /**
+   * Update logging configuration.
+   */
+  updateLoggingConfiguration(callback?: (err: AWSError, data: Amp.Types.UpdateLoggingConfigurationResponse) => void): Request<Amp.Types.UpdateLoggingConfigurationResponse, AWSError>;
   /**
    * Updates an AMP workspace alias.
    */
@@ -215,6 +247,26 @@ declare namespace Amp {
      * The status of alert manager definition.
      */
     status: AlertManagerDefinitionStatus;
+  }
+  export interface CreateLoggingConfigurationRequest {
+    /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+    /**
+     * The ARN of the CW log group to which the vended log data will be published.
+     */
+    logGroupArn: LogGroupArn;
+    /**
+     * The ID of the workspace to vend logs to.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface CreateLoggingConfigurationResponse {
+    /**
+     * The status of the logging configuration.
+     */
+    status: LoggingConfigurationStatus;
   }
   export interface CreateRuleGroupsNamespaceRequest {
     /**
@@ -298,6 +350,16 @@ declare namespace Amp {
      */
     workspaceId: WorkspaceId;
   }
+  export interface DeleteLoggingConfigurationRequest {
+    /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+    /**
+     * The ID of the workspace to vend logs to.
+     */
+    workspaceId: WorkspaceId;
+  }
   export interface DeleteRuleGroupsNamespaceRequest {
     /**
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
@@ -333,6 +395,18 @@ declare namespace Amp {
      * The properties of the selected workspace's alert manager definition.
      */
     alertManagerDefinition: AlertManagerDefinitionDescription;
+  }
+  export interface DescribeLoggingConfigurationRequest {
+    /**
+     * The ID of the workspace to vend logs to.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface DescribeLoggingConfigurationResponse {
+    /**
+     * Metadata object containing information about the logging configuration of a workspace.
+     */
+    loggingConfiguration: LoggingConfigurationMetadata;
   }
   export interface DescribeRuleGroupsNamespaceRequest {
     /**
@@ -426,6 +500,40 @@ declare namespace Amp {
      */
     workspaces: WorkspaceSummaryList;
   }
+  export type LogGroupArn = string;
+  export interface LoggingConfigurationMetadata {
+    /**
+     * The time when the logging configuration was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The ARN of the CW log group to which the vended log data will be published.
+     */
+    logGroupArn: LogGroupArn;
+    /**
+     * The time when the logging configuration was modified.
+     */
+    modifiedAt: Timestamp;
+    /**
+     * The status of the logging configuration.
+     */
+    status: LoggingConfigurationStatus;
+    /**
+     * The workspace where the logging configuration exists.
+     */
+    workspace: WorkspaceId;
+  }
+  export interface LoggingConfigurationStatus {
+    /**
+     * Status code of the logging configuration.
+     */
+    statusCode: LoggingConfigurationStatusCode;
+    /**
+     * The reason for failure if any.
+     */
+    statusReason?: String;
+  }
+  export type LoggingConfigurationStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
   export type PaginationToken = string;
   export interface PutAlertManagerDefinitionRequest {
     /**
@@ -580,6 +688,26 @@ declare namespace Amp {
     tagKeys: TagKeys;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateLoggingConfigurationRequest {
+    /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+    /**
+     * The ARN of the CW log group to which the vended log data will be published.
+     */
+    logGroupArn: LogGroupArn;
+    /**
+     * The ID of the workspace to vend logs to.
+     */
+    workspaceId: WorkspaceId;
+  }
+  export interface UpdateLoggingConfigurationResponse {
+    /**
+     * The status of the logging configuration.
+     */
+    status: LoggingConfigurationStatus;
   }
   export interface UpdateWorkspaceAliasRequest {
     /**

@@ -562,6 +562,31 @@
       ],
       "documentation": "<p>Removes an <code>ApiAssociation</code> object from a custom domain.</p>"
     },
+    "EvaluateMappingTemplate": {
+      "name": "EvaluateMappingTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/dataplane-evaluatetemplate"
+      },
+      "input": {
+        "shape": "EvaluateMappingTemplateRequest"
+      },
+      "output": {
+        "shape": "EvaluateMappingTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Evaluates a given template and returns the response. The mapping template can be a request or response template.</p> <p>Request templates take the incoming request after a GraphQL operation is parsed and convert it into a request configuration for the selected data source operation. Response templates interpret responses from the data source and map it to the shape of the GraphQL field output type.</p> <p>Mapping templates are written in the Apache Velocity Template Language (VTL).</p>"
+    },
     "FlushApiCache": {
       "name": "FlushApiCache",
       "http": {
@@ -1722,6 +1747,9 @@
     },
     "CachingConfig": {
       "type": "structure",
+      "required": [
+        "ttl"
+      ],
       "members": {
         "ttl": {
           "shape": "Long",
@@ -1763,7 +1791,7 @@
         },
         "appIdClientRegex": {
           "shape": "String",
-          "documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID.</p>"
+          "documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn't set, no filtering is applied.</p>"
         }
       },
       "documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"
@@ -1783,6 +1811,12 @@
         "AUTOMERGE",
         "NONE"
       ]
+    },
+    "Context": {
+      "type": "string",
+      "max": 28000,
+      "min": 2,
+      "pattern": "^[\\s\\S]*$"
     },
     "CreateApiCacheRequest": {
       "type": "structure",
@@ -2559,6 +2593,55 @@
         }
       },
       "documentation": "<p>Describes an OpenSearch data source configuration.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. For new data sources, use <a>OpenSearchServiceDataSourceConfig</a> to specify an OpenSearch data source.</p>"
+    },
+    "ErrorDetail": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>The error payload.</p>"
+        }
+      },
+      "documentation": "<p>Contains the list of errors generated when attempting to evaluate a mapping template.</p>"
+    },
+    "ErrorMessage": {
+      "type": "string"
+    },
+    "EvaluateMappingTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "template",
+        "context"
+      ],
+      "members": {
+        "template": {
+          "shape": "Template",
+          "documentation": "<p>The mapping template; this can be a request or response template. A <code>template</code> is required for this action.</p>"
+        },
+        "context": {
+          "shape": "Context",
+          "documentation": "<p>The map that holds all of the contextual information for your resolver invocation. A <code>context</code> is required for this action.</p>"
+        }
+      }
+    },
+    "EvaluateMappingTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "evaluationResult": {
+          "shape": "EvaluationResult",
+          "documentation": "<p>The mapping template; this can be a request or response template.</p>"
+        },
+        "error": {
+          "shape": "ErrorDetail",
+          "documentation": "<p>The <code>ErrorDetail</code> object.</p>"
+        }
+      }
+    },
+    "EvaluationResult": {
+      "type": "string",
+      "max": 65536,
+      "min": 0,
+      "pattern": "^[\\s\\S]*$"
     },
     "FieldLogLevel": {
       "type": "string",
@@ -3755,6 +3838,12 @@
       "max": 256,
       "pattern": "^[\\s\\w+-=\\.:/@]*$"
     },
+    "Template": {
+      "type": "string",
+      "max": 65536,
+      "min": 2,
+      "pattern": "^[\\s\\S]*$"
+    },
     "Type": {
       "type": "structure",
       "members": {
@@ -4241,7 +4330,7 @@
         },
         "appIdClientRegex": {
           "shape": "String",
-          "documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID.</p>"
+          "documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn't set, no filtering is applied.</p>"
         }
       },
       "documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"

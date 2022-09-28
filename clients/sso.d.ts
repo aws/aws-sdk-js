@@ -28,19 +28,19 @@ declare class SSO extends Service {
    */
   listAccountRoles(callback?: (err: AWSError, data: SSO.Types.ListAccountRolesResponse) => void): Request<SSO.Types.ListAccountRolesResponse, AWSError>;
   /**
-   * Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see Assign User Access in the AWS SSO User Guide. This operation returns a paginated response.
+   * Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see Assign User Access in the IAM Identity Center User Guide. This operation returns a paginated response.
    */
   listAccounts(params: SSO.Types.ListAccountsRequest, callback?: (err: AWSError, data: SSO.Types.ListAccountsResponse) => void): Request<SSO.Types.ListAccountsResponse, AWSError>;
   /**
-   * Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see Assign User Access in the AWS SSO User Guide. This operation returns a paginated response.
+   * Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see Assign User Access in the IAM Identity Center User Guide. This operation returns a paginated response.
    */
   listAccounts(callback?: (err: AWSError, data: SSO.Types.ListAccountsResponse) => void): Request<SSO.Types.ListAccountsResponse, AWSError>;
   /**
-   * Removes the client- and server-side session that is associated with the user.
+   * Removes the locally stored SSO tokens from the client-side cache and sends an API call to the IAM Identity Center service to invalidate the corresponding server-side IAM Identity Center sign in session.  If a user uses IAM Identity Center to access the AWS CLI, the user’s IAM Identity Center sign in session is used to obtain an IAM session, as specified in the corresponding IAM Identity Center permission set. More specifically, IAM Identity Center assumes an IAM role in the target account on behalf of the user, and the corresponding temporary AWS credentials are returned to the client. After user logout, any existing IAM role sessions that were created by using IAM Identity Center permission sets continue based on the duration configured in the permission set. For more information, see User authentications in the IAM Identity Center User Guide. 
    */
   logout(params: SSO.Types.LogoutRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the client- and server-side session that is associated with the user.
+   * Removes the locally stored SSO tokens from the client-side cache and sends an API call to the IAM Identity Center service to invalidate the corresponding server-side IAM Identity Center sign in session.  If a user uses IAM Identity Center to access the AWS CLI, the user’s IAM Identity Center sign in session is used to obtain an IAM session, as specified in the corresponding IAM Identity Center permission set. More specifically, IAM Identity Center assumes an IAM role in the target account on behalf of the user, and the corresponding temporary AWS credentials are returned to the client. After user logout, any existing IAM role sessions that were created by using IAM Identity Center permission sets continue based on the duration configured in the permission set. For more information, see User authentications in the IAM Identity Center User Guide. 
    */
   logout(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -76,7 +76,7 @@ declare namespace SSO {
      */
     accountId: AccountIdType;
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the AWS SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
   }
@@ -96,7 +96,7 @@ declare namespace SSO {
      */
     maxResults?: MaxResultType;
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the AWS SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
     /**
@@ -124,7 +124,7 @@ declare namespace SSO {
      */
     maxResults?: MaxResultType;
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the AWS SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
   }
@@ -140,7 +140,7 @@ declare namespace SSO {
   }
   export interface LogoutRequest {
     /**
-     * The token issued by the CreateToken API call. For more information, see CreateToken in the AWS SSO OIDC API Reference Guide.
+     * The token issued by the CreateToken API call. For more information, see CreateToken in the IAM Identity Center OIDC API Reference Guide.
      */
     accessToken: AccessTokenType;
   }

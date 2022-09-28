@@ -92,6 +92,14 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
   /**
+   * Creates a new WorkSpace image from an existing WorkSpace.
+   */
+  createWorkspaceImage(params: WorkSpaces.Types.CreateWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
+  /**
+   * Creates a new WorkSpace image from an existing WorkSpace.
+   */
+  createWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
+  /**
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
@@ -355,6 +363,14 @@ declare class WorkSpaces extends Service {
    * Modifies the properties of the specified Amazon WorkSpaces clients.
    */
   modifyClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
+  /**
+   * Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+   */
+  modifySamlProperties(params: WorkSpaces.Types.ModifySamlPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifySamlPropertiesResult) => void): Request<WorkSpaces.Types.ModifySamlPropertiesResult, AWSError>;
+  /**
+   * Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+   */
+  modifySamlProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifySamlPropertiesResult) => void): Request<WorkSpaces.Types.ModifySamlPropertiesResult, AWSError>;
   /**
    * Modifies the self-service WorkSpace management capabilities for your users. For more information, see Enable Self-Service WorkSpace Management Capabilities for Your Users.
    */
@@ -840,6 +856,58 @@ declare namespace WorkSpaces {
   export interface CreateWorkspaceBundleResult {
     WorkspaceBundle?: WorkspaceBundle;
   }
+  export interface CreateWorkspaceImageRequest {
+    /**
+     * The name of the new WorkSpace image.
+     */
+    Name: WorkspaceImageName;
+    /**
+     * The description of the new WorkSpace image.
+     */
+    Description: WorkspaceImageDescription;
+    /**
+     * The identifier of the source WorkSpace
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The tags that you want to add to the new WorkSpace image. To add tags when you're creating the image, you must create an IAM policy that grants your IAM user permission to use workspaces:CreateTags.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateWorkspaceImageResult {
+    /**
+     * The identifier of the new WorkSpace image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The name of the image.
+     */
+    Name?: WorkspaceImageName;
+    /**
+     * The description of the image.
+     */
+    Description?: WorkspaceImageDescription;
+    /**
+     * The operating system that the image is running.
+     */
+    OperatingSystem?: OperatingSystem;
+    /**
+     * The availability status of the image.
+     */
+    State?: WorkspaceImageState;
+    /**
+     * Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more information, see  Bring Your Own Windows Desktop Images. 
+     */
+    RequiredTenancy?: WorkspaceImageRequiredTenancy;
+    /**
+     * The date when the image was created.
+     */
+    Created?: Timestamp;
+    /**
+     * The identifier of the AWS account that owns the image.
+     */
+    OwnerAccountId?: AwsAccount;
+  }
   export interface CreateWorkspacesRequest {
     /**
      * The WorkSpaces to create. You can specify up to 25 WorkSpaces.
@@ -863,7 +931,7 @@ declare namespace WorkSpaces {
   export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
   export interface DefaultClientBrandingAttributes {
     /**
-     * The logo URL. This is the link where users can download the logo image. The only supported image format is .png.
+     * The logo. The only image format accepted is a binary data object that is converted from a .png file.
      */
     LogoUrl?: ClientUrl;
     /**
@@ -879,13 +947,13 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
   export interface DefaultImportClientBrandingAttributes {
     /**
-     * The logo. This is the link where users can download the logo image. The only image format accepted is .png.
+     * The logo. The only image format accepted is a binary data object that is converted from a .png file.
      */
     Logo?: DefaultLogo;
     /**
@@ -901,7 +969,7 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
@@ -933,6 +1001,8 @@ declare namespace WorkSpaces {
      */
     EnableMaintenanceMode?: BooleanObject;
   }
+  export type DeletableSamlPropertiesList = DeletableSamlProperty[];
+  export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string;
   export interface DeleteClientBrandingRequest {
     /**
      * The directory identifier of the WorkSpace for which you want to delete client branding.
@@ -1505,7 +1575,7 @@ declare namespace WorkSpaces {
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled images (bundles other than Graphics.g4dn, GraphicsPro.g4dn, Graphics, or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.  Use BYOL_GRAPHICS_G4DN ingestion for both Graphics.g4dn and GraphicsPro.g4dn. 
+     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -1521,7 +1591,7 @@ declare namespace WorkSpaces {
      */
     Tags?: TagList;
     /**
-     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.    Although this parameter is an array, only one item is allowed at this time   Microsoft Office 2016 application subscription through AWS is currently not supported for Graphics.g4dn Bring Your Own License (BYOL) images   
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
      */
     Applications?: ApplicationList;
   }
@@ -1535,15 +1605,15 @@ declare namespace WorkSpaces {
   export type Ios3XLogo = Buffer|Uint8Array|Blob|string;
   export interface IosClientBrandingAttributes {
     /**
-     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     * The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a .png file.
      */
     LogoUrl?: ClientUrl;
     /**
-     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo2xUrl?: ClientUrl;
     /**
-     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo3xUrl?: ClientUrl;
     /**
@@ -1559,21 +1629,21 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
   export interface IosImportClientBrandingAttributes {
     /**
-     * The logo. This is the link where users can download the logo image. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point.
+     * The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a .png file.
      */
     Logo?: IosLogo;
     /**
-     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo2x?: Ios2XLogo;
     /**
-     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
+     * The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x). The only image format accepted is a binary data object that is converted from a .png file.   For more information about iOS image size and resolution, see Image Size and Resolution  in the Apple Human Interface Guidelines. 
      */
     Logo3x?: Ios3XLogo;
     /**
@@ -1589,7 +1659,7 @@ declare namespace WorkSpaces {
      */
     ForgotPasswordLink?: ClientUrl;
     /**
-     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. 
+     * The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is en_US. The HTML tags supported include the following: a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul.
      */
     LoginMessage?: LoginMessage;
   }
@@ -1697,6 +1767,22 @@ declare namespace WorkSpaces {
     ClientProperties: ClientProperties;
   }
   export interface ModifyClientPropertiesResult {
+  }
+  export interface ModifySamlPropertiesRequest {
+    /**
+     * The directory identifier for which you want to configure SAML properties.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The properties for configuring SAML 2.0 authentication.
+     */
+    SamlProperties?: SamlProperties;
+    /**
+     * The SAML properties to delete as part of your request. Specify one of the following options:    SAML_PROPERTIES_USER_ACCESS_URL to delete the user access URL.    SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME to delete the relay state parameter name.  
+     */
+    PropertiesToDelete?: DeletableSamlPropertiesList;
+  }
+  export interface ModifySamlPropertiesResult {
   }
   export interface ModifySelfservicePermissionsRequest {
     /**
@@ -1866,6 +1952,22 @@ declare namespace WorkSpaces {
   export type RootVolumeSizeGib = number;
   export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|string;
   export type RunningModeAutoStopTimeoutInMinutes = number;
+  export interface SamlProperties {
+    /**
+     * Indicates the status of SAML 2.0 authentication. These statuses include the following.   If the setting is DISABLED, end users will be directed to login with their directory credentials.   If the setting is ENABLED, end users will be directed to login via the user access URL. Users attempting to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to connect.   If the setting is ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will be directed to login via the user access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication from connecting as if SAML 2.0 authentication was disabled.  
+     */
+    Status?: SamlStatusEnum;
+    /**
+     * The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP) bindings.
+     */
+    UserAccessUrl?: SamlUserAccessUrl;
+    /**
+     * The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query parameter to the URL along with the relay state endpoint to return the user to the client application session. To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state URL. Consult your IdP documentation for more information.
+     */
+    RelayStateParameterName?: NonEmptyString;
+  }
+  export type SamlStatusEnum = "DISABLED"|"ENABLED"|"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"|string;
+  export type SamlUserAccessUrl = string;
   export type SecurityGroupId = string;
   export interface SelfservicePermissions {
     /**
@@ -2314,6 +2416,10 @@ declare namespace WorkSpaces {
      * The default self-service permissions for WorkSpaces in the directory.
      */
     SelfservicePermissions?: SelfservicePermissions;
+    /**
+     * Describes the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
+     */
+    SamlProperties?: SamlProperties;
   }
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
   export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;

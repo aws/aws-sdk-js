@@ -1290,6 +1290,20 @@
       "min": 1,
       "pattern": "^\\S(.*\\S)?$"
     },
+    "DeploymentResult": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "Message",
+          "documentation": "<p>Details about the deployment result.</p>"
+        },
+        "ResultCode": {
+          "shape": "ResultCode",
+          "documentation": "<p>The type of deployment result.</p>"
+        }
+      },
+      "documentation": "<p>The result of the deployment.</p>"
+    },
     "DeploymentState": {
       "type": "string",
       "enum": [
@@ -2294,6 +2308,9 @@
       "max": 100,
       "min": 1
     },
+    "Message": {
+      "type": "string"
+    },
     "NextToken": {
       "type": "string",
       "max": 1024,
@@ -2330,6 +2347,14 @@
       "max": 2048,
       "min": 20,
       "pattern": "^arn:aws:gamesparks:"
+    },
+    "ResultCode": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "INVALID_ROLE_FAILURE",
+        "UNSPECIFIED_FAILURE"
+      ]
     },
     "RoleARN": {
       "type": "string",
@@ -2500,6 +2525,10 @@
           "shape": "DeploymentId",
           "documentation": "<p>The identifier of the deployment.</p>"
         },
+        "DeploymentResult": {
+          "shape": "DeploymentResult",
+          "documentation": "<p>The result of the deployment.</p>"
+        },
         "DeploymentState": {
           "shape": "DeploymentState",
           "documentation": "<p>The state of the deployment.</p>"
@@ -2531,6 +2560,10 @@
         "DeploymentId": {
           "shape": "DeploymentId",
           "documentation": "<p>The identifier of the deployment.</p>"
+        },
+        "DeploymentResult": {
+          "shape": "DeploymentResult",
+          "documentation": "<p>The result of the deployment.</p>"
         },
         "DeploymentState": {
           "shape": "DeploymentState",

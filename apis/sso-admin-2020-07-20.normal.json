@@ -14,6 +14,43 @@
     "uid": "sso-admin-2020-07-20"
   },
   "operations": {
+    "AttachCustomerManagedPolicyReferenceToPermissionSet": {
+      "name": "AttachCustomerManagedPolicyReferenceToPermissionSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AttachCustomerManagedPolicyReferenceToPermissionSetRequest"
+      },
+      "output": {
+        "shape": "AttachCustomerManagedPolicyReferenceToPermissionSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Attaches the specified customer managed policy to the specified <a>PermissionSet</a>.</p>"
+    },
     "AttachManagedPolicyToPermissionSet": {
       "name": "AttachManagedPolicyToPermissionSet",
       "http": {
@@ -49,7 +86,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Attaches an IAM managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this operation. Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates to all assigned accounts.</p> </note>"
+      "documentation": "<p>Attaches an AWS managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this operation. Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates to all assigned accounts.</p> </note>"
     },
     "CreateAccountAssignment": {
       "name": "CreateAccountAssignment",
@@ -86,7 +123,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in Amazon Web Services SSO.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note>"
+      "documentation": "<p>Assigns access to a principal for a specified AWS account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in IAM Identity Center.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note> <note> <p> After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request. </p> </note>"
     },
     "CreateInstanceAccessControlAttributeConfiguration": {
       "name": "CreateInstanceAccessControlAttributeConfiguration",
@@ -120,7 +157,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+      "documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p> <note> <p>After a successful response, call <code>DescribeInstanceAccessControlAttributeConfiguration</code> to validate that <code>InstanceAccessControlAttributeConfiguration</code> was created.</p> </note>"
     },
     "CreatePermissionSet": {
       "name": "CreatePermissionSet",
@@ -157,7 +194,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Creates a permission set within a specified SSO instance.</p> <note> <p>To grant users and groups access to Amazon Web Services account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>"
+      "documentation": "<p>Creates a permission set within a specified IAM Identity Center instance.</p> <note> <p>To grant users and groups access to AWS account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>"
     },
     "DeleteAccountAssignment": {
       "name": "DeleteAccountAssignment",
@@ -191,7 +228,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.</p>"
+      "documentation": "<p>Deletes a principal's access from a specified AWS account using a specified permission set.</p> <note> <p>After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment deletion request.</p> </note>"
     },
     "DeleteInlinePolicyFromPermissionSet": {
       "name": "DeleteInlinePolicyFromPermissionSet",
@@ -259,7 +296,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+      "documentation": "<p>Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
     },
     "DeletePermissionSet": {
       "name": "DeletePermissionSet",
@@ -294,6 +331,37 @@
         }
       ],
       "documentation": "<p>Deletes the specified permission set.</p>"
+    },
+    "DeletePermissionsBoundaryFromPermissionSet": {
+      "name": "DeletePermissionsBoundaryFromPermissionSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeletePermissionsBoundaryFromPermissionSetRequest"
+      },
+      "output": {
+        "shape": "DeletePermissionsBoundaryFromPermissionSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Deletes the permissions boundary from a specified <a>PermissionSet</a>.</p>"
     },
     "DescribeAccountAssignmentCreationStatus": {
       "name": "DescribeAccountAssignmentCreationStatus",
@@ -386,7 +454,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Returns the list of Amazon Web Services SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+      "documentation": "<p>Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
     },
     "DescribePermissionSet": {
       "name": "DescribePermissionSet",
@@ -450,6 +518,40 @@
       ],
       "documentation": "<p>Describes the status for the given permission set provisioning request.</p>"
     },
+    "DetachCustomerManagedPolicyReferenceFromPermissionSet": {
+      "name": "DetachCustomerManagedPolicyReferenceFromPermissionSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DetachCustomerManagedPolicyReferenceFromPermissionSetRequest"
+      },
+      "output": {
+        "shape": "DetachCustomerManagedPolicyReferenceFromPermissionSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Detaches the specified customer managed policy from the specified <a>PermissionSet</a>.</p>"
+    },
     "DetachManagedPolicyFromPermissionSet": {
       "name": "DetachManagedPolicyFromPermissionSet",
       "http": {
@@ -482,7 +584,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Detaches the attached IAM managed policy ARN from the specified permission set.</p>"
+      "documentation": "<p>Detaches the attached AWS managed policy ARN from the specified permission set.</p>"
     },
     "GetInlinePolicyForPermissionSet": {
       "name": "GetInlinePolicyForPermissionSet",
@@ -515,6 +617,37 @@
       ],
       "documentation": "<p>Obtains the inline policy assigned to the permission set.</p>"
     },
+    "GetPermissionsBoundaryForPermissionSet": {
+      "name": "GetPermissionsBoundaryForPermissionSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetPermissionsBoundaryForPermissionSetRequest"
+      },
+      "output": {
+        "shape": "GetPermissionsBoundaryForPermissionSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Obtains the permissions boundary for a specified <a>PermissionSet</a>.</p>"
+    },
     "ListAccountAssignmentCreationStatus": {
       "name": "ListAccountAssignmentCreationStatus",
       "http": {
@@ -544,7 +677,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists the status of the Amazon Web Services account assignment creation requests for a specified SSO instance.</p>"
+      "documentation": "<p>Lists the status of the AWS account assignment creation requests for a specified IAM Identity Center instance.</p>"
     },
     "ListAccountAssignmentDeletionStatus": {
       "name": "ListAccountAssignmentDeletionStatus",
@@ -575,7 +708,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists the status of the Amazon Web Services account assignment deletion requests for a specified SSO instance.</p>"
+      "documentation": "<p>Lists the status of the AWS account assignment deletion requests for a specified IAM Identity Center instance.</p>"
     },
     "ListAccountAssignments": {
       "name": "ListAccountAssignments",
@@ -606,7 +739,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists the assignee of the specified Amazon Web Services account with the specified permission set.</p>"
+      "documentation": "<p>Lists the assignee of the specified AWS account with the specified permission set.</p>"
     },
     "ListAccountsForProvisionedPermissionSet": {
       "name": "ListAccountsForProvisionedPermissionSet",
@@ -637,7 +770,38 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists all the Amazon Web Services accounts where the specified permission set is provisioned.</p>"
+      "documentation": "<p>Lists all the AWS accounts where the specified permission set is provisioned.</p>"
+    },
+    "ListCustomerManagedPolicyReferencesInPermissionSet": {
+      "name": "ListCustomerManagedPolicyReferencesInPermissionSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListCustomerManagedPolicyReferencesInPermissionSetRequest"
+      },
+      "output": {
+        "shape": "ListCustomerManagedPolicyReferencesInPermissionSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Lists all customer managed policies attached to a specified <a>PermissionSet</a>.</p>"
     },
     "ListInstances": {
       "name": "ListInstances",
@@ -665,7 +829,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Lists the SSO instances that the caller has access to.</p>"
+      "documentation": "<p>Lists the IAM Identity Center instances that the caller has access to.</p>"
     },
     "ListManagedPoliciesInPermissionSet": {
       "name": "ListManagedPoliciesInPermissionSet",
@@ -696,7 +860,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists the IAM managed policy that is attached to a specified permission set.</p>"
+      "documentation": "<p>Lists the AWS managed policy that is attached to a specified permission set.</p>"
     },
     "ListPermissionSetProvisioningStatus": {
       "name": "ListPermissionSetProvisioningStatus",
@@ -727,7 +891,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists the status of the permission set provisioning requests for a specified SSO instance.</p>"
+      "documentation": "<p>Lists the status of the permission set provisioning requests for a specified IAM Identity Center instance.</p>"
     },
     "ListPermissionSets": {
       "name": "ListPermissionSets",
@@ -758,7 +922,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists the <a>PermissionSet</a>s in an SSO instance.</p>"
+      "documentation": "<p>Lists the <a>PermissionSet</a>s in an IAM Identity Center instance.</p>"
     },
     "ListPermissionSetsProvisionedToAccount": {
       "name": "ListPermissionSetsProvisionedToAccount",
@@ -789,7 +953,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists all the permission sets that are provisioned to a specified Amazon Web Services account.</p>"
+      "documentation": "<p>Lists all the permission sets that are provisioned to a specified AWS account.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -891,7 +1055,41 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Attaches an IAM inline policy to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>"
+      "documentation": "<p>Attaches an inline policy to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>"
+    },
+    "PutPermissionsBoundaryToPermissionSet": {
+      "name": "PutPermissionsBoundaryToPermissionSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutPermissionsBoundaryToPermissionSetRequest"
+      },
+      "output": {
+        "shape": "PutPermissionsBoundaryToPermissionSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Attaches an AWS managed or customer managed policy to the specified <a>PermissionSet</a> as a permissions boundary.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -996,7 +1194,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+      "documentation": "<p>Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
     },
     "UpdatePermissionSet": {
       "name": "UpdatePermissionSet",
@@ -1043,14 +1241,14 @@
       "members": {
         "Key": {
           "shape": "AccessControlAttributeKey",
-          "documentation": "<p>The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in Amazon Web Services SSO.</p>"
+          "documentation": "<p>The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in IAM Identity Center.</p>"
         },
         "Value": {
           "shape": "AccessControlAttributeValue",
           "documentation": "<p>The value used for mapping a specified attribute to an identity source.</p>"
         }
       },
-      "documentation": "<p>These are Amazon Web Services SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permissions policies that determine who can access your Amazon Web Services resources based upon the configured attribute values. When you enable ABAC and specify <code>AccessControlAttributes</code>, Amazon Web Services SSO passes the attribute values of the authenticated user into IAM for use in policy evaluation.</p>"
+      "documentation": "<p>These are IAM Identity Center identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permissions policies that determine who can access your AWS resources based upon the configured attribute values. When you enable ABAC and specify <code>AccessControlAttributes</code>, IAM Identity Center passes the attribute values of the authenticated user into IAM for use in policy evaluation.</p>"
     },
     "AccessControlAttributeKey": {
       "type": "string",
@@ -1074,10 +1272,10 @@
       "members": {
         "Source": {
           "shape": "AccessControlAttributeValueSourceList",
-          "documentation": "<p>The identity source to use when mapping a specified attribute to Amazon Web Services SSO.</p>"
+          "documentation": "<p>The identity source to use when mapping a specified attribute to IAM Identity Center.</p>"
         }
       },
-      "documentation": "<p>The value used for mapping a specified attribute to an identity source.</p>"
+      "documentation": "<p>The value used for mapping a specified attribute to an identity source. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html\">Attribute mappings</a> in the <i>IAM Identity Center User Guide</i>.</p>"
     },
     "AccessControlAttributeValueSource": {
       "type": "string",
@@ -1098,11 +1296,11 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The identifier of the Amazon Web Services account.</p>"
+          "documentation": "<p>The identifier of the AWS account.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
-          "documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PrincipalType": {
           "shape": "PrincipalType",
@@ -1110,10 +1308,10 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+          "documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
         }
       },
-      "documentation": "<p>The assignment that indicates a principal's limited access to a specified Amazon Web Services account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in Amazon Web Services SSO.</p> </note>"
+      "documentation": "<p>The assignment that indicates a principal's limited access to a specified AWS account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in IAM Identity Center.</p> </note>"
     },
     "AccountAssignmentList": {
       "type": "list",
@@ -1138,7 +1336,7 @@
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "TargetType",
@@ -1146,7 +1344,7 @@
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
-          "documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PrincipalType": {
           "shape": "PrincipalType",
@@ -1154,7 +1352,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+          "documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
         },
         "CreatedDate": {
           "shape": "Date",
@@ -1189,6 +1387,8 @@
     },
     "AccountId": {
       "type": "string",
+      "max": 12,
+      "min": 12,
       "pattern": "\\d{12}"
     },
     "AccountList": {
@@ -1196,6 +1396,32 @@
       "member": {
         "shape": "AccountId"
       }
+    },
+    "AttachCustomerManagedPolicyReferenceToPermissionSetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "PermissionSetArn",
+        "CustomerManagedPolicyReference"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>"
+        },
+        "PermissionSetArn": {
+          "shape": "PermissionSetArn",
+          "documentation": "<p>The ARN of the <code>PermissionSet</code>.</p>"
+        },
+        "CustomerManagedPolicyReference": {
+          "shape": "CustomerManagedPolicyReference",
+          "documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
+        }
+      }
+    },
+    "AttachCustomerManagedPolicyReferenceToPermissionSetResponse": {
+      "type": "structure",
+      "members": {}
     },
     "AttachManagedPolicyToPermissionSetRequest": {
       "type": "structure",
@@ -1207,7 +1433,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1215,7 +1441,7 @@
         },
         "ManagedPolicyArn": {
           "shape": "ManagedPolicyArn",
-          "documentation": "<p>The IAM managed policy ARN to be attached to a permission set.</p>"
+          "documentation": "<p>The AWS managed policy ARN to be attached to a permission set.</p>"
         }
       }
     },
@@ -1228,14 +1454,14 @@
       "members": {
         "Name": {
           "shape": "Name",
-          "documentation": "<p>The name of the IAM managed policy.</p>"
+          "documentation": "<p>The name of the AWS managed policy.</p>"
         },
         "Arn": {
           "shape": "ManagedPolicyArn",
-          "documentation": "<p>The ARN of the IAM managed policy. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the AWS managed policy. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         }
       },
-      "documentation": "<p>A structure that stores the details of the IAM managed policy.</p>"
+      "documentation": "<p>A structure that stores the details of the AWS managed policy.</p>"
     },
     "AttachedManagedPolicyList": {
       "type": "list",
@@ -1256,11 +1482,11 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "TargetType",
@@ -1276,7 +1502,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+          "documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
         }
       }
     },
@@ -1298,11 +1524,11 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>"
         },
         "InstanceAccessControlAttributeConfiguration": {
           "shape": "InstanceAccessControlAttributeConfiguration",
-          "documentation": "<p>Specifies the Amazon Web Services SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO will replace the attribute value with the value from the Amazon Web Services SSO identity store.</p>"
+          "documentation": "<p>Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center will replace the attribute value with the value from the IAM Identity Center identity store.</p>"
         }
       }
     },
@@ -1327,7 +1553,7 @@
         },
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "SessionDuration": {
           "shape": "Duration",
@@ -1348,8 +1574,31 @@
       "members": {
         "PermissionSet": {
           "shape": "PermissionSet",
-          "documentation": "<p>Defines the level of access on an Amazon Web Services account.</p>"
+          "documentation": "<p>Defines the level of access on an AWS account.</p>"
         }
+      }
+    },
+    "CustomerManagedPolicyReference": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ManagedPolicyName",
+          "documentation": "<p>The name of the IAM policy that you have configured in each account where you want to deploy your permission set.</p>"
+        },
+        "Path": {
+          "shape": "ManagedPolicyPath",
+          "documentation": "<p>The path to the IAM policy that you have configured in each account where you want to deploy your permission set. The default is <code>/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly names and paths</a> in the <i>IAM User Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
+    },
+    "CustomerManagedPolicyReferenceList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomerManagedPolicyReference"
       }
     },
     "Date": {
@@ -1368,11 +1617,11 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "TargetType",
@@ -1388,7 +1637,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+          "documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
         }
       }
     },
@@ -1410,7 +1659,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1430,7 +1679,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>"
         }
       }
     },
@@ -1447,7 +1696,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1456,6 +1705,27 @@
       }
     },
     "DeletePermissionSetResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeletePermissionsBoundaryFromPermissionSetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "PermissionSetArn"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>"
+        },
+        "PermissionSetArn": {
+          "shape": "PermissionSetArn",
+          "documentation": "<p>The ARN of the <code>PermissionSet</code>.</p>"
+        }
+      }
+    },
+    "DeletePermissionsBoundaryFromPermissionSetResponse": {
       "type": "structure",
       "members": {}
     },
@@ -1468,7 +1738,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "AccountAssignmentCreationRequestId": {
           "shape": "UUId",
@@ -1494,7 +1764,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "AccountAssignmentDeletionRequestId": {
           "shape": "UUId",
@@ -1519,7 +1789,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>"
         }
       }
     },
@@ -1536,7 +1806,7 @@
         },
         "InstanceAccessControlAttributeConfiguration": {
           "shape": "InstanceAccessControlAttributeConfiguration",
-          "documentation": "<p>Gets the list of Amazon Web Services SSO identity store attributes that have been added to your ABAC configuration.</p>"
+          "documentation": "<p>Gets the list of IAM Identity Center identity store attributes that have been added to your ABAC configuration.</p>"
         }
       }
     },
@@ -1549,7 +1819,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "ProvisionPermissionSetRequestId": {
           "shape": "UUId",
@@ -1575,11 +1845,11 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
-          "documentation": "<p>The ARN of the permission set.</p>"
+          "documentation": "<p>The ARN of the permission set. </p>"
         }
       }
     },
@@ -1588,9 +1858,35 @@
       "members": {
         "PermissionSet": {
           "shape": "PermissionSet",
-          "documentation": "<p>Describes the level of access on an Amazon Web Services account.</p>"
+          "documentation": "<p>Describes the level of access on an AWS account.</p>"
         }
       }
+    },
+    "DetachCustomerManagedPolicyReferenceFromPermissionSetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "PermissionSetArn",
+        "CustomerManagedPolicyReference"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>"
+        },
+        "PermissionSetArn": {
+          "shape": "PermissionSetArn",
+          "documentation": "<p>The ARN of the <code>PermissionSet</code>.</p>"
+        },
+        "CustomerManagedPolicyReference": {
+          "shape": "CustomerManagedPolicyReference",
+          "documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
+        }
+      }
+    },
+    "DetachCustomerManagedPolicyReferenceFromPermissionSetResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DetachManagedPolicyFromPermissionSetRequest": {
       "type": "structure",
@@ -1602,7 +1898,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1610,7 +1906,7 @@
         },
         "ManagedPolicyArn": {
           "shape": "ManagedPolicyArn",
-          "documentation": "<p>The IAM managed policy ARN to be attached to a permission set.</p>"
+          "documentation": "<p>The AWS managed policy ARN to be detached from a permission set.</p>"
         }
       }
     },
@@ -1624,12 +1920,6 @@
       "min": 1,
       "pattern": "^(-?)P(?=\\d|T\\d)(?:(\\d+)Y)?(?:(\\d+)M)?(?:(\\d+)([DW]))?(?:T(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+(?:\\.\\d+)?)S)?)?$"
     },
-    "GeneralArn": {
-      "type": "string",
-      "max": 2048,
-      "min": 10,
-      "pattern": "arn:aws:sso:([a-zA-Z0-9-]+)?:(\\d{12})?:[a-zA-Z0-9-]+/[a-zA-Z0-9-/.]+"
-    },
     "GetInlinePolicyForPermissionSetRequest": {
       "type": "structure",
       "required": [
@@ -1639,7 +1929,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1652,7 +1942,33 @@
       "members": {
         "InlinePolicy": {
           "shape": "PermissionSetPolicyDocument",
-          "documentation": "<p>The IAM inline policy that is attached to the permission set.</p>"
+          "documentation": "<p>The inline policy that is attached to the permission set.</p>"
+        }
+      }
+    },
+    "GetPermissionsBoundaryForPermissionSetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "PermissionSetArn"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>"
+        },
+        "PermissionSetArn": {
+          "shape": "PermissionSetArn",
+          "documentation": "<p>The ARN of the <code>PermissionSet</code>.</p>"
+        }
+      }
+    },
+    "GetPermissionsBoundaryForPermissionSetResponse": {
+      "type": "structure",
+      "members": {
+        "PermissionsBoundary": {
+          "shape": "PermissionsBoundary",
+          "documentation": "<p>The permissions boundary attached to the specified permission set.</p>"
         }
       }
     },
@@ -1670,7 +1986,7 @@
       "members": {
         "AccessControlAttributes": {
           "shape": "AccessControlAttributeList",
-          "documentation": "<p>Lists the attributes that are configured for ABAC in the specified Amazon Web Services SSO instance.</p>"
+          "documentation": "<p>Lists the attributes that are configured for ABAC in the specified IAM Identity Center instance.</p>"
         }
       },
       "documentation": "<p>Specifies the attributes to add to your attribute-based access control (ABAC) configuration.</p>"
@@ -1690,7 +2006,7 @@
       "type": "string",
       "max": 1224,
       "min": 10,
-      "pattern": "arn:aws:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"
     },
     "InstanceList": {
       "type": "list",
@@ -1703,14 +2019,14 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "IdentityStoreId": {
           "shape": "Id",
-          "documentation": "<p>The identifier of the identity store that is connected to the SSO instance.</p>"
+          "documentation": "<p>The identifier of the identity store that is connected to the IAM Identity Center instance.</p>"
         }
       },
-      "documentation": "<p>Provides information about the SSO instance.</p>"
+      "documentation": "<p>Provides information about the IAM Identity Center instance.</p>"
     },
     "ListAccountAssignmentCreationStatusRequest": {
       "type": "structure",
@@ -1720,7 +2036,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1757,7 +2073,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1796,11 +2112,11 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "AccountId": {
           "shape": "TargetId",
-          "documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>"
+          "documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1821,7 +2137,7 @@
       "members": {
         "AccountAssignments": {
           "shape": "AccountAssignmentList",
-          "documentation": "<p>The list of assignments that match the input Amazon Web Services account and permission set.</p>"
+          "documentation": "<p>The list of assignments that match the input AWS account and permission set.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -1838,15 +2154,15 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
-          "documentation": "<p>The ARN of the <a>PermissionSet</a> from which the associated Amazon Web Services accounts will be listed.</p>"
+          "documentation": "<p>The ARN of the <a>PermissionSet</a> from which the associated AWS accounts will be listed.</p>"
         },
         "ProvisioningStatus": {
           "shape": "ProvisioningStatus",
-          "documentation": "<p>The permission set provisioning status for an Amazon Web Services account.</p>"
+          "documentation": "<p>The permission set provisioning status for an AWS account.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1863,7 +2179,45 @@
       "members": {
         "AccountIds": {
           "shape": "AccountList",
-          "documentation": "<p>The list of Amazon Web Services <code>AccountIds</code>.</p>"
+          "documentation": "<p>The list of AWS <code>AccountIds</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>"
+        }
+      }
+    },
+    "ListCustomerManagedPolicyReferencesInPermissionSetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "PermissionSetArn"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>"
+        },
+        "PermissionSetArn": {
+          "shape": "PermissionSetArn",
+          "documentation": "<p>The ARN of the <code>PermissionSet</code>. </p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to display for the list call.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>"
+        }
+      }
+    },
+    "ListCustomerManagedPolicyReferencesInPermissionSetResponse": {
+      "type": "structure",
+      "members": {
+        "CustomerManagedPolicyReferences": {
+          "shape": "CustomerManagedPolicyReferenceList",
+          "documentation": "<p>Specifies the names and paths of the customer managed policies that you have attached to your permission set.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -1889,7 +2243,7 @@
       "members": {
         "Instances": {
           "shape": "InstanceList",
-          "documentation": "<p>Lists the SSO instances that the caller has access to.</p>"
+          "documentation": "<p>Lists the IAM Identity Center instances that the caller has access to.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -1906,7 +2260,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -1927,7 +2281,7 @@
       "members": {
         "AttachedManagedPolicies": {
           "shape": "AttachedManagedPolicyList",
-          "documentation": "<p>The array of the <a>AttachedManagedPolicy</a> data type object.</p>"
+          "documentation": "<p>An array of the <a>AttachedManagedPolicy</a> data type object.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -1943,7 +2297,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1981,11 +2335,11 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>"
+          "documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>"
         },
         "ProvisioningStatus": {
           "shape": "ProvisioningStatus",
@@ -2010,7 +2364,7 @@
         },
         "PermissionSets": {
           "shape": "PermissionSetList",
-          "documentation": "<p>Defines the level of access that an Amazon Web Services account has.</p>"
+          "documentation": "<p>Defines the level of access that an AWS account has.</p>"
         }
       }
     },
@@ -2022,7 +2376,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -2039,7 +2393,7 @@
       "members": {
         "PermissionSets": {
           "shape": "PermissionSetList",
-          "documentation": "<p>Defines the level of access on an Amazon Web Services account.</p>"
+          "documentation": "<p>Defines the level of access on an AWS account.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -2056,10 +2410,10 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "ResourceArn": {
-          "shape": "GeneralArn",
+          "shape": "TaggableResourceArn",
           "documentation": "<p>The ARN of the resource with the tags to be listed.</p>"
         },
         "NextToken": {
@@ -2084,7 +2438,20 @@
     "ManagedPolicyArn": {
       "type": "string",
       "max": 2048,
-      "min": 20
+      "min": 20,
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::aws:policy/[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]+"
+    },
+    "ManagedPolicyName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\w+=,.@-]+"
+    },
+    "ManagedPolicyPath": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"
     },
     "MaxResults": {
       "type": "integer",
@@ -2115,7 +2482,7 @@
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
-          "documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "Description": {
           "shape": "PermissionSetDescription",
@@ -2140,13 +2507,13 @@
       "type": "string",
       "max": 1224,
       "min": 10,
-      "pattern": "arn:aws:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}"
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}"
     },
     "PermissionSetDescription": {
       "type": "string",
       "max": 700,
       "min": 1,
-      "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A0-\\u00FF]*"
     },
     "PermissionSetList": {
       "type": "list",
@@ -2164,8 +2531,7 @@
       "type": "string",
       "max": 10240,
       "min": 1,
-      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
-      "sensitive": true
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
     "PermissionSetProvisioningStatus": {
       "type": "structure",
@@ -2180,11 +2546,11 @@
         },
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>"
+          "documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
-          "documentation": "<p>The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "FailureReason": {
           "shape": "Reason",
@@ -2221,6 +2587,20 @@
       },
       "documentation": "<p>Provides information about the permission set provisioning status.</p>"
     },
+    "PermissionsBoundary": {
+      "type": "structure",
+      "members": {
+        "CustomerManagedPolicyReference": {
+          "shape": "CustomerManagedPolicyReference",
+          "documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
+        },
+        "ManagedPolicyArn": {
+          "shape": "ManagedPolicyArn",
+          "documentation": "<p>The AWS managed policy ARN that you want to attach to a permission set as a permissions boundary.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration of the AWS managed or customer managed policy that you want to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code> to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use the ARN of an AWS managed policy. A permissions boundary represents the maximum permissions that any policy can grant your role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM entities</a> in the <i>IAM User Guide</i>.</p> <important> <p>Policies used as permissions boundaries don't provide permissions. You must also attach an IAM policy to the role. To learn how the effective permissions for a role are evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy evaluation logic</a> in the <i>IAM User Guide</i>.</p> </important>"
+    },
     "PrincipalId": {
       "type": "string",
       "max": 47,
@@ -2244,7 +2624,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -2252,7 +2632,7 @@
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "ProvisionTargetType",
@@ -2293,7 +2673,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -2301,11 +2681,37 @@
         },
         "InlinePolicy": {
           "shape": "PermissionSetPolicyDocument",
-          "documentation": "<p>The IAM inline policy to attach to a <a>PermissionSet</a>.</p>"
+          "documentation": "<p>The inline policy to attach to a <a>PermissionSet</a>.</p>"
         }
       }
     },
     "PutInlinePolicyToPermissionSetResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutPermissionsBoundaryToPermissionSetRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceArn",
+        "PermissionSetArn",
+        "PermissionsBoundary"
+      ],
+      "members": {
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>"
+        },
+        "PermissionSetArn": {
+          "shape": "PermissionSetArn",
+          "documentation": "<p>The ARN of the <code>PermissionSet</code>.</p>"
+        },
+        "PermissionsBoundary": {
+          "shape": "PermissionsBoundary",
+          "documentation": "<p>The permissions boundary that you want to attach to a <code>PermissionSet</code>.</p>"
+        }
+      }
+    },
+    "PutPermissionsBoundaryToPermissionSetResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2329,6 +2735,10 @@
     },
     "Tag": {
       "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
       "members": {
         "Key": {
           "shape": "TagKey",
@@ -2339,7 +2749,7 @@
           "documentation": "<p>The value of the tag.</p>"
         }
       },
-      "documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that Amazon Web Services SSO creates in Amazon Web Services accounts.</p>"
+      "documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that IAM Identity Center creates in AWS accounts.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -2373,10 +2783,10 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "ResourceArn": {
-          "shape": "GeneralArn",
+          "shape": "TaggableResourceArn",
           "documentation": "<p>The ARN of the resource with the tags to be listed.</p>"
         },
         "Tags": {
@@ -2395,8 +2805,16 @@
       "min": 0,
       "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
+    "TaggableResourceArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 10,
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}"
+    },
     "TargetId": {
       "type": "string",
+      "max": 12,
+      "min": 12,
       "pattern": "\\d{12}"
     },
     "TargetType": {
@@ -2412,6 +2830,8 @@
     },
     "UUId": {
       "type": "string",
+      "max": 36,
+      "min": 36,
       "pattern": "\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b"
     },
     "UntagResourceRequest": {
@@ -2424,10 +2844,10 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "ResourceArn": {
-          "shape": "GeneralArn",
+          "shape": "TaggableResourceArn",
           "documentation": "<p>The ARN of the resource with the tags to be listed.</p>"
         },
         "TagKeys": {
@@ -2449,7 +2869,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>"
         },
         "InstanceAccessControlAttributeConfiguration": {
           "shape": "InstanceAccessControlAttributeConfiguration",
@@ -2470,7 +2890,7 @@
       "members": {
         "InstanceArn": {
           "shape": "InstanceArn",
-          "documentation": "<p>The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          "documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
         },
         "PermissionSetArn": {
           "shape": "PermissionSetArn",
@@ -2495,5 +2915,5 @@
       "members": {}
     }
   },
-  "documentation": "<p>Amazon Web Services Single Sign On (SSO) is a cloud SSO service that makes it easy to centrally manage SSO access to multiple Amazon Web Services accounts and business applications. This guide provides information on SSO operations which could be used for access management of Amazon Web Services accounts. For information about Amazon Web Services SSO features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">Amazon Web Services Single Sign-On User Guide</a>.</p> <p>Many operations in the SSO APIs rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in Amazon Web Services SSO, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+  "documentation": "<p>AWS IAM Identity Center (successor to AWS Single Sign-On) helps you securely create, or connect, your workforce identities and manage their access centrally across AWS accounts and applications. IAM Identity Center is the recommended approach for workforce authentication and authorization in AWS, for organizations of any size and type.</p> <note> <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and <code>identitystore</code> API namespaces will continue to retain their original name for backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">IAM Identity Center rename</a>.</p> </note> <p>This reference guide provides information on single sign-on operations which could be used for access management of AWS accounts. For information about IAM Identity Center features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User Guide</a>.</p> <p>Many operations in the IAM Identity Center APIs rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API Reference</a>.</p> <note> <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a convenient way to create programmatic access to IAM Identity Center and other AWS services. For more information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> </note>"
 }

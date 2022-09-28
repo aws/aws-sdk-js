@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['macie2'], '2020-01-01', {
   get: function get() {
     var model = require('../apis/macie2-2020-01-01.min.json');
     model.paginators = require('../apis/macie2-2020-01-01.paginators.json').pagination;
+    model.waiters = require('../apis/macie2-2020-01-01.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

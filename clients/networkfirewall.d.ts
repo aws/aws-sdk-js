@@ -367,8 +367,29 @@ declare namespace NetworkFirewall {
   export type AzSubnet = string;
   export type AzSubnets = AzSubnet[];
   export type Boolean = boolean;
+  export type CIDRCount = number;
+  export interface CIDRSummary {
+    /**
+     * The number of CIDR blocks available for use by the IP set references in a firewall.
+     */
+    AvailableCIDRCount?: CIDRCount;
+    /**
+     * The number of CIDR blocks used by the IP set references in a firewall.
+     */
+    UtilizedCIDRCount?: CIDRCount;
+    /**
+     * The list of the IP set references used by a firewall.
+     */
+    IPSetReferences?: IPSetMetadataMap;
+  }
+  export interface CapacityUsageSummary {
+    /**
+     * Describes the capacity usage of the CIDR blocks used by the IP set references in a firewall.
+     */
+    CIDRs?: CIDRSummary;
+  }
   export type CollectionMember_String = string;
-  export type ConfigurationSyncState = "PENDING"|"IN_SYNC"|string;
+  export type ConfigurationSyncState = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED"|string;
   export interface CreateFirewallPolicyRequest {
     /**
      * The descriptive name of the firewall policy. You can't change the name of a firewall policy after you create it.
@@ -942,6 +963,10 @@ declare namespace NetworkFirewall {
      * The subnets that you've configured for use by the Network Firewall firewall. This contains one array element per Availability Zone where you've configured a subnet. These objects provide details of the information that is summarized in the ConfigurationSyncStateSummary and Status, broken down by zone and configuration object. 
      */
     SyncStates?: SyncStates;
+    /**
+     * Describes the capacity usage of the resources contained in a firewall's reference sets. Network Firewall calclulates the capacity usage by taking an aggregated count of all of the resources used by all of the reference sets in a firewall.
+     */
+    CapacityUsageSummary?: CapacityUsageSummary;
   }
   export type FirewallStatusValue = "PROVISIONING"|"DELETING"|"READY"|string;
   export type Firewalls = FirewallMetadata[];
@@ -981,6 +1006,22 @@ declare namespace NetworkFirewall {
      */
     Definition: VariableDefinitionList;
   }
+  export type IPSetArn = string;
+  export interface IPSetMetadata {
+    /**
+     * Describes the total number of CIDR blocks currently in use by the IP set references in a firewall. To determine how many CIDR blocks are available for you to use in a firewall, you can call AvailableCIDRCount.
+     */
+    ResolvedCIDRCount?: CIDRCount;
+  }
+  export type IPSetMetadataMap = {[key: string]: IPSetMetadata};
+  export interface IPSetReference {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you are referencing in your rule group.
+     */
+    ReferenceArn?: ResourceArn;
+  }
+  export type IPSetReferenceMap = {[key: string]: IPSetReference};
+  export type IPSetReferenceName = string;
   export type IPSets = {[key: string]: IPSet};
   export type KeyId = string;
   export type Keyword = string;
@@ -1149,7 +1190,7 @@ declare namespace NetworkFirewall {
      */
     UpdateToken?: UpdateToken;
   }
-  export type PerObjectSyncStatus = "PENDING"|"IN_SYNC"|string;
+  export type PerObjectSyncStatus = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED"|string;
   export type PolicyString = string;
   export type Port = string;
   export interface PortRange {
@@ -1192,6 +1233,12 @@ declare namespace NetworkFirewall {
   }
   export interface PutResourcePolicyResponse {
   }
+  export interface ReferenceSets {
+    /**
+     * The list of IP set references.
+     */
+    IPSetReferences?: IPSetReferenceMap;
+  }
   export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
@@ -1214,6 +1261,10 @@ declare namespace NetworkFirewall {
      * Settings that are available for use in the rules in the rule group. You can only use these for stateful rule groups. 
      */
     RuleVariables?: RuleVariables;
+    /**
+     * The list of a rule group's reference sets.
+     */
+    ReferenceSets?: ReferenceSets;
     /**
      * The stateful rules or stateless rules for the rule group. 
      */

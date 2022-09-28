@@ -1,7 +1,7 @@
 {
   "name": "aws-sdk",
   "description": "AWS SDK for JavaScript",
-  "version": "2.1136.0",
+  "version": "2.1225.0",
   "author": {
     "name": "Amazon Web Services",
     "email": "",
@@ -48,7 +48,8 @@
     "querystring": "0.2.0",
     "sax": "1.2.1",
     "url": "0.10.3",
-    "uuid": "3.3.2",
+    "util": "^0.12.4",
+    "uuid": "8.0.0",
     "xml2js": "0.4.19"
   },
   "main": "lib/aws.js",

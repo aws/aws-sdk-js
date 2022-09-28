@@ -325,6 +325,7 @@ declare namespace IotDeviceAdvisor {
   }
   export type GroupResultList = GroupResult[];
   export type IntendedForQualificationBoolean = boolean;
+  export type IsLongDurationTestBoolean = boolean;
   export interface ListSuiteDefinitionsRequest {
     /**
      * The maximum number of results to return at once.
@@ -388,6 +389,7 @@ declare namespace IotDeviceAdvisor {
   export type LogUrl = string;
   export type MaxResults = number;
   export type ParallelRun = boolean;
+  export type Protocol = "MqttV3_1_1"|"MqttV5"|string;
   export type QualificationReportDownloadUrl = string;
   export type RootGroup = string;
   export type SelectedTestList = UUID[];
@@ -452,6 +454,10 @@ declare namespace IotDeviceAdvisor {
      */
     intendedForQualification?: IntendedForQualificationBoolean;
     /**
+     *  Verifies if the test suite is a long duration test. 
+     */
+    isLongDurationTest?: IsLongDurationTestBoolean;
+    /**
      * Gets test suite root group.
      */
     rootGroup?: RootGroup;
@@ -459,6 +465,10 @@ declare namespace IotDeviceAdvisor {
      * Gets the device permission ARN.
      */
     devicePermissionRoleArn?: AmazonResourceName;
+    /**
+     *  Gets the MQTT protocol that is configured in the suite definition.
+     */
+    protocol?: Protocol;
   }
   export interface SuiteDefinitionInformation {
     /**
@@ -477,6 +487,14 @@ declare namespace IotDeviceAdvisor {
      * Specifies if the test suite is intended for qualification.
      */
     intendedForQualification?: IntendedForQualificationBoolean;
+    /**
+     *  Verifies if the test suite is a long duration test. 
+     */
+    isLongDurationTest?: IsLongDurationTestBoolean;
+    /**
+     *  Gets the MQTT protocol that is configured in the suite definition.
+     */
+    protocol?: Protocol;
     /**
      * Date (in Unix epoch time) when the test suite was created.
      */
@@ -544,6 +562,7 @@ declare namespace IotDeviceAdvisor {
   export type SuiteRunResultCount = number;
   export type SuiteRunStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
   export type SuiteRunsList = SuiteRunInformation[];
+  export type SystemMessage = string;
   export type TagKeyList = String128[];
   export type TagMap = {[key: string]: String256};
   export interface TagResourceRequest {
@@ -596,8 +615,38 @@ declare namespace IotDeviceAdvisor {
      * Provides test case run failure result.
      */
     failure?: Failure;
+    /**
+     *  Provides the test scenarios for the test case run. 
+     */
+    testScenarios?: TestCaseScenariosList;
   }
   export type TestCaseRuns = TestCaseRun[];
+  export interface TestCaseScenario {
+    /**
+     * Provides test case scenario ID.
+     */
+    testCaseScenarioId?: TestCaseScenarioId;
+    /**
+     * Provides test case scenario type. Type is one of the following:   Advanced   Basic  
+     */
+    testCaseScenarioType?: TestCaseScenarioType;
+    /**
+     * Provides the test case scenario status. Status is one of the following:    PASS: Test passed.    FAIL: Test failed.    PENDING: Test has not started running but is scheduled.    RUNNING: Test is running.    STOPPING: Test is performing cleanup steps. You will see this status only if you stop a suite run.    STOPPED Test is stopped. You will see this status only if you stop a suite run.    PASS_WITH_WARNINGS: Test passed with warnings.    ERORR: Test faced an error when running due to an internal issue.  
+     */
+    status?: TestCaseScenarioStatus;
+    /**
+     * Provides test case scenario failure result.
+     */
+    failure?: Failure;
+    /**
+     *  
+     */
+    systemMessage?: SystemMessage;
+  }
+  export type TestCaseScenarioId = string;
+  export type TestCaseScenarioStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
+  export type TestCaseScenarioType = "Advanced"|"Basic"|string;
+  export type TestCaseScenariosList = TestCaseScenario[];
   export interface TestResult {
     /**
      * Show each group of test results.

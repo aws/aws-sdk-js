@@ -12,11 +12,11 @@ declare class Appflow extends Service {
   constructor(options?: Appflow.Types.ClientConfiguration)
   config: Config & Appflow.Types.ClientConfiguration;
   /**
-   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
+   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you create, you can provide the credentials and properties for only one connector.
    */
   createConnectorProfile(params: Appflow.Types.CreateConnectorProfileRequest, callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
   /**
-   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
+   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you create, you can provide the credentials and properties for only one connector.
    */
   createConnectorProfile(callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class Appflow extends Service {
    */
   describeConnector(callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorResponse) => void): Request<Appflow.Types.DescribeConnectorResponse, AWSError>;
   /**
-   *  Provides details regarding the entity used with the connector, with a description of the data model for each entity. 
+   *  Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity. 
    */
   describeConnectorEntity(params: Appflow.Types.DescribeConnectorEntityRequest, callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorEntityResponse) => void): Request<Appflow.Types.DescribeConnectorEntityResponse, AWSError>;
   /**
-   *  Provides details regarding the entity used with the connector, with a description of the data model for each entity. 
+   *  Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity. 
    */
   describeConnectorEntity(callback?: (err: AWSError, data: Appflow.Types.DescribeConnectorEntityResponse) => void): Request<Appflow.Types.DescribeConnectorEntityResponse, AWSError>;
   /**
@@ -1686,6 +1686,7 @@ declare namespace Appflow {
     lastRunExecutionDetails?: ExecutionDetails;
   }
   export type FlowDescription = string;
+  export type FlowErrorDeactivationThreshold = number;
   export type FlowExecutionList = ExecutionRecord[];
   export type FlowList = FlowDefinition[];
   export type FlowName = string;
@@ -1797,6 +1798,7 @@ declare namespace Appflow {
     object: Object;
   }
   export type InstanceUrl = string;
+  export type JavaBoolean = boolean;
   export type KMSArn = string;
   export type Key = string;
   export type Label = string;
@@ -2218,6 +2220,10 @@ declare namespace Appflow {
      */
     prefixConfig?: PrefixConfig;
     aggregationConfig?: AggregationConfig;
+    /**
+     * If your file output format is Parquet, use this parameter to set whether Amazon AppFlow preserves the data types in your source data when it writes the output to Amazon S3.     true: Amazon AppFlow preserves the data types when it writes to Amazon S3. For example, an integer or 1 in your source data is still an integer in your output.    false: Amazon AppFlow converts all of the source data into strings when it writes to Amazon S3. For example, an integer of 1 in your source data becomes the string "1" in the output.  
+     */
+    preserveSourceDataTyping?: JavaBoolean;
   }
   export interface S3SourceProperties {
     /**
@@ -2372,15 +2378,15 @@ declare namespace Appflow {
      */
     dataPullMode?: DataPullMode;
     /**
-     *  Specifies the scheduled start time for a schedule-triggered flow. 
+     * The time at which the scheduled flow starts. The time is formatted as a timestamp that follows the ISO 8601 standard, such as 2022-04-26T13:00:00-07:00.
      */
     scheduleStartTime?: _Date;
     /**
-     *  Specifies the scheduled end time for a schedule-triggered flow. 
+     * The time at which the scheduled flow ends. The time is formatted as a timestamp that follows the ISO 8601 standard, such as 2022-04-27T13:00:00-07:00.
      */
     scheduleEndTime?: _Date;
     /**
-     *  Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York. 
+     * Specifies the time zone used when referring to the dates and times of a scheduled flow, such as America/New_York. This time zone is only a descriptive label. It doesn't affect how Amazon AppFlow interprets the timestamps that you specify to schedule the flow. If you want to schedule a flow by using times in a particular time zone, indicate the time zone as a UTC offset in your timestamps. For example, the UTC offsets for the America/New_York timezone are -04:00 EDT and -05:00 EST.
      */
     timezone?: Timezone;
     /**
@@ -2391,6 +2397,10 @@ declare namespace Appflow {
      *  Specifies the date range for the records to import from the connector in the first flow run. 
      */
     firstExecutionFrom?: _Date;
+    /**
+     * Defines how many times a scheduled flow fails consecutively before Amazon AppFlow deactivates it.
+     */
+    flowErrorDeactivationThreshold?: FlowErrorDeactivationThreshold;
   }
   export type SchedulingFrequencyTypeList = ScheduleFrequencyType[];
   export type SecretKey = string;

@@ -12,6 +12,14 @@ declare class SagemakerEdge extends Service {
   constructor(options?: SagemakerEdge.Types.ClientConfiguration)
   config: Config & SagemakerEdge.Types.ClientConfiguration;
   /**
+   * Use to get the active deployments from a device.
+   */
+  getDeployments(params: SagemakerEdge.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: SagemakerEdge.Types.GetDeploymentsResult) => void): Request<SagemakerEdge.Types.GetDeploymentsResult, AWSError>;
+  /**
+   * Use to get the active deployments from a device.
+   */
+  getDeployments(callback?: (err: AWSError, data: SagemakerEdge.Types.GetDeploymentsResult) => void): Request<SagemakerEdge.Types.GetDeploymentsResult, AWSError>;
+  /**
    * Use to check if a device is registered with SageMaker Edge Manager.
    */
   getDeviceRegistration(params: SagemakerEdge.Types.GetDeviceRegistrationRequest, callback?: (err: AWSError, data: SagemakerEdge.Types.GetDeviceRegistrationResult) => void): Request<SagemakerEdge.Types.GetDeviceRegistrationResult, AWSError>;
@@ -30,10 +38,123 @@ declare class SagemakerEdge extends Service {
 }
 declare namespace SagemakerEdge {
   export type CacheTTLSeconds = string;
+  export interface Checksum {
+    /**
+     * The type of the checksum.
+     */
+    Type?: ChecksumType;
+    /**
+     * The checksum of the model.
+     */
+    Sum?: ChecksumString;
+  }
+  export type ChecksumString = string;
+  export type ChecksumType = "SHA1"|string;
+  export interface Definition {
+    /**
+     * The unique model handle.
+     */
+    ModelHandle?: EntityName;
+    /**
+     * The absolute S3 location of the model.
+     */
+    S3Url?: S3Uri;
+    /**
+     * The checksum information of the model.
+     */
+    Checksum?: Checksum;
+    /**
+     * The desired state of the model.
+     */
+    State?: ModelState;
+  }
+  export type Definitions = Definition[];
+  export interface DeploymentModel {
+    /**
+     * The unique handle of the model.
+     */
+    ModelHandle?: EntityName;
+    /**
+     * The name of the model.
+     */
+    ModelName?: ModelName;
+    /**
+     * The version of the model.
+     */
+    ModelVersion?: Version;
+    /**
+     * The desired state of the model.
+     */
+    DesiredState?: ModelState;
+    /**
+     * Returns the current state of the model.
+     */
+    State?: ModelState;
+    /**
+     * Returns the deployment status of the model.
+     */
+    Status?: DeploymentStatus;
+    /**
+     * Returns the error message for the deployment status result.
+     */
+    StatusReason?: String;
+    /**
+     * Returns the error message if there is a rollback.
+     */
+    RollbackFailureReason?: String;
+  }
+  export type DeploymentModels = DeploymentModel[];
+  export interface DeploymentResult {
+    /**
+     * The name and unique ID of the deployment.
+     */
+    DeploymentName?: EntityName;
+    /**
+     * Returns the bucket error code.
+     */
+    DeploymentStatus?: EntityName;
+    /**
+     * Returns the detailed error message.
+     */
+    DeploymentStatusMessage?: String;
+    /**
+     * The timestamp of when the deployment was started on the agent.
+     */
+    DeploymentStartTime?: Timestamp;
+    /**
+     * The timestamp of when the deployment was ended, and the agent got the deployment results.
+     */
+    DeploymentEndTime?: Timestamp;
+    /**
+     * Returns a list of models deployed on the agent.
+     */
+    DeploymentModels?: DeploymentModels;
+  }
+  export type DeploymentStatus = "SUCCESS"|"FAIL"|string;
+  export type DeploymentType = "Model"|string;
   export type DeviceFleetName = string;
   export type DeviceName = string;
   export type DeviceRegistration = string;
   export type Dimension = string;
+  export interface EdgeDeployment {
+    /**
+     * The name and unique ID of the deployment.
+     */
+    DeploymentName?: EntityName;
+    /**
+     * The type of the deployment.
+     */
+    Type?: DeploymentType;
+    /**
+     * Determines whether to rollback to previous configuration if deployment fails.
+     */
+    FailureHandlingPolicy?: FailureHandlingPolicy;
+    /**
+     * Returns a list of Definition objects.
+     */
+    Definitions?: Definitions;
+  }
+  export type EdgeDeployments = EdgeDeployment[];
   export interface EdgeMetric {
     /**
      * The dimension of metrics published.
@@ -53,6 +174,24 @@ declare namespace SagemakerEdge {
     Timestamp?: Timestamp;
   }
   export type EdgeMetrics = EdgeMetric[];
+  export type EntityName = string;
+  export type FailureHandlingPolicy = "ROLLBACK_ON_FAILURE"|"DO_NOTHING"|string;
+  export interface GetDeploymentsRequest {
+    /**
+     * The unique name of the device you want to get the configuration of active deployments from.
+     */
+    DeviceName: DeviceName;
+    /**
+     * The name of the fleet that the device belongs to.
+     */
+    DeviceFleetName: DeviceFleetName;
+  }
+  export interface GetDeploymentsResult {
+    /**
+     * Returns a list of the configurations of the active deployments on the device.
+     */
+    Deployments?: EdgeDeployments;
+  }
   export interface GetDeviceRegistrationRequest {
     /**
      * The unique name of the device you want to get the registration status from.
@@ -97,7 +236,9 @@ declare namespace SagemakerEdge {
     ModelMetrics?: EdgeMetrics;
   }
   export type ModelName = string;
+  export type ModelState = "DEPLOY"|"UNDEPLOY"|string;
   export type Models = Model[];
+  export type S3Uri = string;
   export interface SendHeartbeatRequest {
     /**
      * For internal use. Returns a list of SageMaker Edge Manager agent operating metrics.
@@ -119,7 +260,12 @@ declare namespace SagemakerEdge {
      * The name of the fleet that the device belongs to.
      */
     DeviceFleetName: DeviceFleetName;
+    /**
+     * Returns the result of a deployment on the device.
+     */
+    DeploymentResult?: DeploymentResult;
   }
+  export type String = string;
   export type Timestamp = Date;
   export type Value = number;
   export type Version = string;

@@ -244,6 +244,14 @@ declare class DirectoryService extends Service {
    */
   describeRegions(callback?: (err: AWSError, data: DirectoryService.Types.DescribeRegionsResult) => void): Request<DirectoryService.Types.DescribeRegionsResult, AWSError>;
   /**
+   * Retrieves information about the configurable settings for the specified directory.
+   */
+  describeSettings(params: DirectoryService.Types.DescribeSettingsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSettingsResult) => void): Request<DirectoryService.Types.DescribeSettingsResult, AWSError>;
+  /**
+   * Retrieves information about the configurable settings for the specified directory.
+   */
+  describeSettings(callback?: (err: AWSError, data: DirectoryService.Types.DescribeSettingsResult) => void): Request<DirectoryService.Types.DescribeSettingsResult, AWSError>;
+  /**
    * Returns the shared directories in your account. 
    */
   describeSharedDirectories(params: DirectoryService.Types.DescribeSharedDirectoriesRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSharedDirectoriesResult) => void): Request<DirectoryService.Types.DescribeSharedDirectoriesResult, AWSError>;
@@ -500,6 +508,14 @@ declare class DirectoryService extends Service {
    */
   updateRadius(callback?: (err: AWSError, data: DirectoryService.Types.UpdateRadiusResult) => void): Request<DirectoryService.Types.UpdateRadiusResult, AWSError>;
   /**
+   * Updates the configurable settings for the specified directory.
+   */
+  updateSettings(params: DirectoryService.Types.UpdateSettingsRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateSettingsResult) => void): Request<DirectoryService.Types.UpdateSettingsResult, AWSError>;
+  /**
+   * Updates the configurable settings for the specified directory.
+   */
+  updateSettings(callback?: (err: AWSError, data: DirectoryService.Types.UpdateSettingsResult) => void): Request<DirectoryService.Types.UpdateSettingsResult, AWSError>;
+  /**
    * Updates the trust that has been set up between your Managed Microsoft AD directory and an self-managed Active Directory.
    */
   updateTrust(params: DirectoryService.Types.UpdateTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateTrustResult) => void): Request<DirectoryService.Types.UpdateTrustResult, AWSError>;
@@ -684,7 +700,7 @@ declare namespace DirectoryService {
   }
   export type ClientAuthenticationSettingsInfo = ClientAuthenticationSettingInfo[];
   export type ClientAuthenticationStatus = "Enabled"|"Disabled"|string;
-  export type ClientAuthenticationType = "SmartCard"|string;
+  export type ClientAuthenticationType = "SmartCard"|"SmartCardOrPassword"|string;
   export interface ClientCertAuthSettings {
     /**
      * Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.
@@ -1230,6 +1246,34 @@ declare namespace DirectoryService {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeSettingsRequest {
+    /**
+     * The identifier of the directory for which to retrieve information.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The status of the directory settings for which to retrieve information.
+     */
+    Status?: DirectoryConfigurationStatus;
+    /**
+     * The DescribeSettingsResult.NextToken value from a previous call to DescribeSettings. Pass null if this is the first call.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeSettingsResult {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The list of SettingEntry objects that were retrieved. It is possible that this list contains less than the number of items specified in the Limit member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.
+     */
+    SettingEntries?: SettingEntries;
+    /**
+     * If not null, token that indicates that more results are available. Pass this value for the NextToken parameter in a subsequent call to DescribeSettings to retrieve the next set of items. 
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeSharedDirectoriesRequest {
     /**
      * Returns the identifier of the directory in the directory owner account. 
@@ -1316,6 +1360,15 @@ declare namespace DirectoryService {
   }
   export type Description = string;
   export type DesiredNumberOfDomainControllers = number;
+  export type DirectoryConfigurationSettingAllowedValues = string;
+  export type DirectoryConfigurationSettingLastRequestedDateTime = Date;
+  export type DirectoryConfigurationSettingLastUpdatedDateTime = Date;
+  export type DirectoryConfigurationSettingName = string;
+  export type DirectoryConfigurationSettingRequestDetailedStatus = {[key: string]: DirectoryConfigurationStatus};
+  export type DirectoryConfigurationSettingRequestStatusMessage = string;
+  export type DirectoryConfigurationSettingType = string;
+  export type DirectoryConfigurationSettingValue = string;
+  export type DirectoryConfigurationStatus = "Requested"|"Updating"|"Updated"|"Failed"|"Default"|string;
   export interface DirectoryConnectSettings {
     /**
      * The identifier of the VPC in which the AD Connector is created.
@@ -2199,6 +2252,60 @@ declare namespace DirectoryService {
   export type SelectiveAuth = "Enabled"|"Disabled"|string;
   export type Server = string;
   export type Servers = Server[];
+  export interface Setting {
+    /**
+     * The name of the directory setting. For example:  TLS_1_0 
+     */
+    Name: DirectoryConfigurationSettingName;
+    /**
+     * The value of the directory setting for which to retrieve information. For example, for TLS_1_0, the valid values are: Enable and Disable.
+     */
+    Value: DirectoryConfigurationSettingValue;
+  }
+  export type SettingEntries = SettingEntry[];
+  export interface SettingEntry {
+    /**
+     * The type of directory setting. For example, Protocol or Cipher.
+     */
+    Type?: DirectoryConfigurationSettingType;
+    /**
+     * The name of the directory setting. For example:  TLS_1_0 
+     */
+    Name?: DirectoryConfigurationSettingName;
+    /**
+     * The valid range of values for the directory setting.
+     */
+    AllowedValues?: DirectoryConfigurationSettingAllowedValues;
+    /**
+     * The value of the directory setting that is applied to the directory.
+     */
+    AppliedValue?: DirectoryConfigurationSettingValue;
+    /**
+     * The value that was last requested for the directory setting.
+     */
+    RequestedValue?: DirectoryConfigurationSettingValue;
+    /**
+     * The overall status of the request to update the directory setting request. If the directory setting is deployed in more than one region, and the request fails in any region, the overall status is Failed.
+     */
+    RequestStatus?: DirectoryConfigurationStatus;
+    /**
+     * Details about the status of the request to update the directory setting. If the directory setting is deployed in more than one region, status is returned for the request in each region where the setting is deployed.
+     */
+    RequestDetailedStatus?: DirectoryConfigurationSettingRequestDetailedStatus;
+    /**
+     * The last status message for the directory status request.
+     */
+    RequestStatusMessage?: DirectoryConfigurationSettingRequestStatusMessage;
+    /**
+     * The date and time when the directory setting was last updated.
+     */
+    LastUpdatedDateTime?: DirectoryConfigurationSettingLastUpdatedDateTime;
+    /**
+     * The date and time when the request to update a directory setting was last submitted.
+     */
+    LastRequestedDateTime?: DirectoryConfigurationSettingLastRequestedDateTime;
+  }
+  export type Settings = Setting[];
   export interface ShareDirectoryRequest {
     /**
      * Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.
@@ -2493,6 +2600,22 @@ declare namespace DirectoryService {
   export interface UpdateRadiusResult {
   }
   export type UpdateSecurityGroupForDirectoryControllers = boolean;
+  export interface UpdateSettingsRequest {
+    /**
+     * The identifier of the directory for which to update settings.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The list of Setting objects.
+     */
+    Settings: Settings;
+  }
+  export interface UpdateSettingsResult {
+    /**
+     * The identifier of the directory.
+     */
+    DirectoryId?: DirectoryId;
+  }
   export interface UpdateTrustRequest {
     /**
      * Identifier of the trust relationship.

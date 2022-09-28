@@ -1959,6 +1959,10 @@
           "shape": "String",
           "documentation": "<p>The identifier of the cluster that the instance will belong to.</p>"
         },
+        "CopyTagsToSnapshot": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
+        },
         "PromotionTier": {
           "shape": "IntegerOptional",
           "documentation": "<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p> <p>Default: 1</p> <p>Valid values: 0-15</p>"
@@ -2222,6 +2226,10 @@
         "AssociatedRoles": {
           "shape": "DBClusterRoles",
           "documentation": "<p>Provides a list of the Identity and Access Management (IAM) roles that are associated with the cluster. (IAM) roles that are associated with a cluster grant permission for the cluster to access other Amazon Web Services services on your behalf.</p>"
+        },
+        "CloneGroupId": {
+          "shape": "String",
+          "documentation": "<p>Identifies the clone group to which the DB cluster is associated.</p>"
         },
         "ClusterCreateTime": {
           "shape": "TStamp",
@@ -2664,6 +2672,10 @@
         "CACertificateIdentifier": {
           "shape": "String",
           "documentation": "<p>The identifier of the CA certificate for this DB instance.</p>"
+        },
+        "CopyTagsToSnapshot": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
         },
         "PromotionTier": {
           "shape": "IntegerOptional",
@@ -3894,6 +3906,10 @@
           "shape": "String",
           "documentation": "<p>Indicates the certificate that needs to be associated with the instance.</p>"
         },
+        "CopyTagsToSnapshot": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether to copy all tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
+        },
         "PromotionTier": {
           "shape": "IntegerOptional",
           "documentation": "<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p> <p>Default: 1</p> <p>Valid values: 0-15</p>"
@@ -4473,6 +4489,10 @@
         "DBClusterIdentifier": {
           "shape": "String",
           "documentation": "<p>The name of the new cluster to be created.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>"
+        },
+        "RestoreType": {
+          "shape": "String",
+          "documentation": "<p>The type of restore to be performed. You can specify one of the following values:</p> <ul> <li> <p> <code>full-copy</code> - The new DB cluster is restored as a full copy of the source DB cluster.</p> </li> <li> <p> <code>copy-on-write</code> - The new DB cluster is restored as a clone of the source DB cluster.</p> </li> </ul> <p>If you don't specify a <code>RestoreType</code> value, then the new DB cluster is restored as a full copy of the source DB cluster.</p>"
         },
         "SourceDBClusterIdentifier": {
           "shape": "String",

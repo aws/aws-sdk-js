@@ -1204,11 +1204,11 @@ declare class Chime extends Service {
    */
   putVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Indonesians. It also sets the retention period, in hours, for the Amazon Kinesis data.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
   putVoiceConnectorStreamingConfiguration(params: Chime.Types.PutVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Indonesians. It also sets the retention period, in hours, for the Amazon Kinesis data.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
   putVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
@@ -1523,6 +1523,14 @@ declare class Chime extends Service {
    * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
    */
   updateVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorGroupResponse) => void): Request<Chime.Types.UpdateVoiceConnectorGroupResponse, AWSError>;
+  /**
+   * Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.
+   */
+  validateE911Address(params: Chime.Types.ValidateE911AddressRequest, callback?: (err: AWSError, data: Chime.Types.ValidateE911AddressResponse) => void): Request<Chime.Types.ValidateE911AddressResponse, AWSError>;
+  /**
+   * Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.
+   */
+  validateE911Address(callback?: (err: AWSError, data: Chime.Types.ValidateE911AddressResponse) => void): Request<Chime.Types.ValidateE911AddressResponse, AWSError>;
 }
 declare namespace Chime {
   export interface Account {
@@ -1577,6 +1585,48 @@ declare namespace Chime {
   }
   export type AccountStatus = "Suspended"|"Active"|string;
   export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC"|string;
+  export interface Address {
+    /**
+     * The address street, such as 8th Avenue.
+     */
+    streetName?: SensitiveNonEmptyString;
+    /**
+     * The address suffix, such as the N in 8th Avenue N.
+     */
+    streetSuffix?: SensitiveNonEmptyString;
+    /**
+     * An address suffix location, such as the S. Unit A in Central Park S. Unit A.
+     */
+    postDirectional?: SensitiveNonEmptyString;
+    /**
+     * An address prefix location, such as the N in N. Third St..
+     */
+    preDirectional?: SensitiveNonEmptyString;
+    /**
+     * The numeric portion of an address.
+     */
+    streetNumber?: SensitiveNonEmptyString;
+    /**
+     * The city of an address.
+     */
+    city?: SensitiveNonEmptyString;
+    /**
+     * The state of an address.
+     */
+    state?: SensitiveNonEmptyString;
+    /**
+     * The postal code of an address.
+     */
+    postalCode?: SensitiveNonEmptyString;
+    /**
+     * The Zip + 4 or postal code + 4 of an address.
+     */
+    postalCodePlus4?: SensitiveNonEmptyString;
+    /**
+     * The country of an address. 
+     */
+    country?: SensitiveNonEmptyString;
+  }
   export interface AlexaForBusinessMetadata {
     /**
      * Starts or stops Alexa for Business.
@@ -2046,6 +2096,37 @@ declare namespace Chime {
   export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
   export type CallingRegion = string;
   export type CallingRegionList = CallingRegion[];
+  export interface CandidateAddress {
+    /**
+     * The street information of a candidate address
+     */
+    streetInfo?: SensitiveNonEmptyString;
+    /**
+     * The numeric portion of a candidate address.
+     */
+    streetNumber?: SensitiveNonEmptyString;
+    /**
+     * The city of a candidate address.
+     */
+    city?: SensitiveNonEmptyString;
+    /**
+     * The state of a candidate address.
+     */
+    state?: SensitiveNonEmptyString;
+    /**
+     * The postal code of a candidate address.
+     */
+    postalCode?: SensitiveNonEmptyString;
+    /**
+     * The Zip + 4 or postal code + 4 of a candidate address.
+     */
+    postalCodePlus4?: SensitiveNonEmptyString;
+    /**
+     * The country of a candidate address.
+     */
+    country?: SensitiveNonEmptyString;
+  }
+  export type CandidateAddressList = CandidateAddress[];
   export type Capability = "Voice"|"SMS"|string;
   export type CapabilityList = Capability[];
   export interface Channel {
@@ -4773,11 +4854,11 @@ declare namespace Chime {
   }
   export interface LoggingConfiguration {
     /**
-     * Boolean that enables SIP message logs to CloudWatch logs.
+     * When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
      */
     EnableSIPLogs?: Boolean;
     /**
-     * Boolean that enables logging of detailed media metrics for Voice Connectors to CloudWatch logs.
+     * Boolean that enables the logging of Voice Connector metrics to Cloudwatch.
      */
     EnableMediaMetricLogs?: Boolean;
   }
@@ -5733,6 +5814,7 @@ declare namespace Chime {
      */
     MessageId?: MessageId;
   }
+  export type SensitiveNonEmptyString = string;
   export type SensitiveString = string;
   export type SensitiveStringList = SensitiveString[];
   export interface SigninDelegateGroup {
@@ -6579,6 +6661,55 @@ declare namespace Chime {
     Telephony: TelephonySettings;
   }
   export type UserType = "PrivateUser"|"SharedDevice"|string;
+  export interface ValidateE911AddressRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: NonEmptyString;
+    /**
+     * The address street number, such as 200 or 2121.
+     */
+    StreetNumber: SensitiveNonEmptyString;
+    /**
+     * The address street information, such as 8th Avenue.
+     */
+    StreetInfo: SensitiveNonEmptyString;
+    /**
+     * The address city, such as Portland.
+     */
+    City: SensitiveNonEmptyString;
+    /**
+     * The address state, such as ME.
+     */
+    State: SensitiveNonEmptyString;
+    /**
+     * The address country, such as US. 
+     */
+    Country: SensitiveNonEmptyString;
+    /**
+     * The address postal code, such as 04352.
+     */
+    PostalCode: SensitiveNonEmptyString;
+  }
+  export interface ValidateE911AddressResponse {
+    /**
+     * Number indicating the result of address validation. 0 means the address was perfect as is and successfully validated. 1 means the address was corrected. 2 means the address sent was not close enough and was not validated.
+     */
+    ValidationResult?: ValidationResult;
+    /**
+     * The ID that represents the address.
+     */
+    AddressExternalId?: String;
+    /**
+     * The validated address.
+     */
+    Address?: Address;
+    /**
+     * The list of address suggestions.
+     */
+    CandidateAddressList?: CandidateAddressList;
+  }
+  export type ValidationResult = number;
   export interface VideoArtifactsConfiguration {
     /**
      * Indicates whether the video artifact is enabled or disabled.

@@ -3178,6 +3178,10 @@
         "LogDeliveryConfigurations": {
           "shape": "LogDeliveryConfigurationRequestList",
           "documentation": "<p>Specifies the destination, format and type of the logs. </p>"
+        },
+        "TransitEncryptionEnabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A flag that enables in-transit encryption when set to true. You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to true when you create a cluster. </p> <p> <b>Required:</b> Only available when creating a cache cluster in an Amazon VPC using Memcached version <code>1.6.12</code> or later.</p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateCacheCluster operation.</p>"
@@ -6084,6 +6088,10 @@
         "DataTiering": {
           "shape": "DataTieringStatus",
           "documentation": "<p>Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html\">Data tiering</a>.</p>"
+        },
+        "AutoMinorVersionUpgrade": {
+          "shape": "Boolean",
+          "documentation": "<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions.  </p>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific Redis replication group.</p>",

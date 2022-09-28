@@ -3,6 +3,8 @@ import {Agent as httpsAgent} from 'https';
 import {AWSError} from './error';
 import {Credentials, CredentialsOptions} from './credentials';
 import {CredentialProviderChain} from './credentials/credential_provider_chain';
+import {Token} from './token';
+import {TokenProviderChain} from './token/token_provider_chain';
 
 export class ConfigBase extends ConfigurationOptions{
     constructor(options?: ConfigurationOptions);
@@ -10,6 +12,10 @@ export class ConfigBase extends ConfigurationOptions{
      * Loads credentials from the configuration object.
      */
     getCredentials(callback: (err: AWSError|null, credentials: Credentials|CredentialsOptions|null) => void): void;
+    /**
+     * Loads token from the token object.
+     */
+    getToken(callback: (err: AWSError|null, token: Token|null) => void): void;
     /**
      * Loads configuration data from a JSON file into this config object.
      * Loading configuration will reset all existing configuration on the object.
@@ -149,6 +155,14 @@ export abstract class ConfigurationOptions {
      * The provider chain used to resolve credentials if no static credentials property is set.
      */
     credentialProvider?: CredentialProviderChain
+    /**
+     * The Token to authenticate requests with.
+     */
+    token?: Token|null
+    /**
+     * The provider chain used to resolve token if no static token property is set.
+     */
+    tokenProvider?: TokenProviderChain
     /**
      * AWS access key ID.
      *

@@ -20,6 +20,14 @@ declare class ChimeSDKMeetings extends Service {
    */
   batchCreateAttendee(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.BatchCreateAttendeeResponse) => void): Request<ChimeSDKMeetings.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
+   * Updates AttendeeCapabilities except the capabilities listed in an ExcludedAttendeeIds table.  You use the capabilities with a set of values that control what the capabilities can do, such as SendReceive data. For more information about those values, see .  When using capabilities, be aware of these corner cases:   You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive. If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.   When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.   When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.  
+   */
+  batchUpdateAttendeeCapabilitiesExcept(params: ChimeSDKMeetings.Types.BatchUpdateAttendeeCapabilitiesExceptRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates AttendeeCapabilities except the capabilities listed in an ExcludedAttendeeIds table.  You use the capabilities with a set of values that control what the capabilities can do, such as SendReceive data. For more information about those values, see .  When using capabilities, be aware of these corner cases:   You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive. If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.   When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.   When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.  
+   */
+  batchUpdateAttendeeCapabilitiesExcept(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   createAttendee(params: ChimeSDKMeetings.Types.CreateAttendeeRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.CreateAttendeeResponse) => void): Request<ChimeSDKMeetings.Types.CreateAttendeeResponse, AWSError>;
@@ -84,6 +92,14 @@ declare class ChimeSDKMeetings extends Service {
    */
   listAttendees(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.ListAttendeesResponse) => void): Request<ChimeSDKMeetings.Types.ListAttendeesResponse, AWSError>;
   /**
+   * Returns a list of the tags available for the specified resource.
+   */
+  listTagsForResource(params: ChimeSDKMeetings.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMeetings.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of the tags available for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMeetings.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Starts transcription for the specified meetingId.
    */
   startMeetingTranscription(params: ChimeSDKMeetings.Types.StartMeetingTranscriptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -99,8 +115,33 @@ declare class ChimeSDKMeetings extends Service {
    * Stops transcription for the specified meetingId.
    */
   stopMeetingTranscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * The resource that supports tags.
+   */
+  tagResource(params: ChimeSDKMeetings.Types.TagResourceRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.TagResourceResponse) => void): Request<ChimeSDKMeetings.Types.TagResourceResponse, AWSError>;
+  /**
+   * The resource that supports tags.
+   */
+  tagResource(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.TagResourceResponse) => void): Request<ChimeSDKMeetings.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:   To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see the documentation for the service whose resource you want to untag.   You can only tag resources that are located in the specified AWS Region for the calling AWS account.    Minimum permissions  In addition to the tag:UntagResources permission required by this operation, you must also have the remove tags permission defined by the service that created the resource. For example, to remove the tags from an Amazon EC2 instance using the UntagResources operation, you must have both of the following permissions:  tag:UntagResource   ChimeSDKMeetings:DeleteTags 
+   */
+  untagResource(params: ChimeSDKMeetings.Types.UntagResourceRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.UntagResourceResponse) => void): Request<ChimeSDKMeetings.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:   To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see the documentation for the service whose resource you want to untag.   You can only tag resources that are located in the specified AWS Region for the calling AWS account.    Minimum permissions  In addition to the tag:UntagResources permission required by this operation, you must also have the remove tags permission defined by the service that created the resource. For example, to remove the tags from an Amazon EC2 instance using the UntagResources operation, you must have both of the following permissions:  tag:UntagResource   ChimeSDKMeetings:DeleteTags 
+   */
+  untagResource(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.UntagResourceResponse) => void): Request<ChimeSDKMeetings.Types.UntagResourceResponse, AWSError>;
+  /**
+   * The capabilties that you want to update.  You use the capabilities with a set of values that control what the capabilities can do, such as SendReceive data. For more information about those values, see .  When using capabilities, be aware of these corner cases:   You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive. If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.   When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.   When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.  
+   */
+  updateAttendeeCapabilities(params: ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesRequest, callback?: (err: AWSError, data: ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse) => void): Request<ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse, AWSError>;
+  /**
+   * The capabilties that you want to update.  You use the capabilities with a set of values that control what the capabilities can do, such as SendReceive data. For more information about those values, see .  When using capabilities, be aware of these corner cases:   You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive. If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.   When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.   When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.  
+   */
+  updateAttendeeCapabilities(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse) => void): Request<ChimeSDKMeetings.Types.UpdateAttendeeCapabilitiesResponse, AWSError>;
 }
 declare namespace ChimeSDKMeetings {
+  export type AmazonResourceName = string;
   export type Arn = string;
   export interface Attendee {
     /**
@@ -115,7 +156,32 @@ declare namespace ChimeSDKMeetings {
      * The join token used by the Amazon Chime SDK attendee.
      */
     JoinToken?: JoinTokenString;
+    /**
+     * The capabilities assigned to an attendee: audio, video, or content.  You use the capabilities with a set of values that control what the capabilities can do, such as SendReceive data. For more information about those values, see .  When using capabilities, be aware of these corner cases:   You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive. If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.   When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.   When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.  
+     */
+    Capabilities?: AttendeeCapabilities;
   }
+  export interface AttendeeCapabilities {
+    /**
+     * The audio capability assigned to an attendee.
+     */
+    Audio: MediaCapabilities;
+    /**
+     * The video capability assigned to an attendee.
+     */
+    Video: MediaCapabilities;
+    /**
+     * The content capability assigned to an attendee.
+     */
+    Content: MediaCapabilities;
+  }
+  export interface AttendeeIdItem {
+    /**
+     * A list of one or more attendee IDs.
+     */
+    AttendeeId: GuidString;
+  }
+  export type AttendeeIdsList = AttendeeIdItem[];
   export type AttendeeList = Attendee[];
   export interface AudioFeatures {
     /**
@@ -144,6 +210,20 @@ declare namespace ChimeSDKMeetings {
      */
     Errors?: BatchCreateAttendeeErrorList;
   }
+  export interface BatchUpdateAttendeeCapabilitiesExceptRequest {
+    /**
+     * The ID of the meeting associated with the update request.
+     */
+    MeetingId: GuidString;
+    /**
+     * The AttendeeIDs that you want to exclude from one or more capabilities.
+     */
+    ExcludedAttendeeIds: AttendeeIdsList;
+    /**
+     * The capabilities (audio, video, or content) that you want to update.
+     */
+    Capabilities: AttendeeCapabilities;
+  }
   export type Boolean = boolean;
   export type ClientRequestToken = string;
   export interface CreateAttendeeError {
@@ -169,12 +249,20 @@ declare namespace ChimeSDKMeetings {
      * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserId;
+    /**
+     * The capabilities (audio, video, or content) that you want to grant an attendee. If you don't specify capabilities, all users have send and receive capabilities on all media channels by default.  You use the capabilities with a set of values that control what the capabilities can do, such as SendReceive data. For more information about those values, see .  When using capabilities, be aware of these corner cases:   You can't set content capabilities to SendReceive or Receive unless you also set video capabilities to SendReceive or Receive. If you don't set the video capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your video capability to receive and you set your content capability to not receive.   When you change an audio capability from None or Receive to Send or SendReceive , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.   When you change a video or content capability from None or Receive to Send or SendReceive , and if the attendee turned on their video or content streams, remote attendess can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.  
+     */
+    Capabilities?: AttendeeCapabilities;
   }
   export interface CreateAttendeeRequestItem {
     /**
      * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserId;
+    /**
+     * A list of one or more capabilities.
+     */
+    Capabilities?: AttendeeCapabilities;
   }
   export type CreateAttendeeRequestItemList = CreateAttendeeRequestItem[];
   export interface CreateAttendeeResponse {
@@ -212,6 +300,14 @@ declare namespace ChimeSDKMeetings {
      * When specified, replicates the media from the primary meeting to the new meeting.
      */
     PrimaryMeetingId?: PrimaryMeetingId;
+    /**
+     * A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.
+     */
+    TenantIds?: TenantIdList;
+    /**
+     * Applies one or more tags to an Amazon Chime SDK meeting. Note the following:   Not all resources have tags. For a list of services with resources that support tagging using this operation, see Services that support the Resource Groups Tagging API. If the resource doesn't yet support this operation, the resource's service might support tagging using its own API operations. For more information, refer to the documentation for that service.   Each resource can have up to 50 tags. For other limits, see Tag Naming and Usage Conventions in the AWS General Reference.   You can only tag resources that are located in the specified AWS Region for the AWS account.   To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see the documentation for each service.    Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.   Minimum permissions   In addition to the tag:TagResources permission required by this operation, you must also have the tagging permission defined by the service that created the resource. For example, to tag a ChimeSDKMeetings instance using the TagResources operation, you must have both of the following permissions:  tag:TagResources   ChimeSDKMeetings:CreateTags   Some services might have specific requirements for tagging some resources. For example, to tag an Amazon S3 bucket, you must also have the s3:GetBucketTagging permission. If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information. 
+     */
+    Tags?: TagList;
   }
   export interface CreateMeetingResponse {
     /**
@@ -252,6 +348,14 @@ declare namespace ChimeSDKMeetings {
      * When specified, replicates the media from the primary meeting to the new meeting.
      */
     PrimaryMeetingId?: PrimaryMeetingId;
+    /**
+     * A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.
+     */
+    TenantIds?: TenantIdList;
+    /**
+     * The tags in the request.
+     */
+    Tags?: TagList;
   }
   export type CreateMeetingWithAttendeesRequestItemList = CreateAttendeeRequestItem[];
   export interface CreateMeetingWithAttendeesResponse {
@@ -302,7 +406,7 @@ declare namespace ChimeSDKMeetings {
      */
     VocabularyName?: String;
     /**
-     * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.
+     * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region. 
      */
     Region?: TranscribeMedicalRegion;
     /**
@@ -424,6 +528,19 @@ declare namespace ChimeSDKMeetings {
      */
     NextToken?: String;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags requested for the specified resource.
+     */
+    Tags?: TagList;
+  }
+  export type MediaCapabilities = "SendReceive"|"Send"|"Receive"|"None"|string;
   export interface MediaPlacement {
     /**
      * The audio host URL.
@@ -488,6 +605,14 @@ declare namespace ChimeSDKMeetings {
      * When specified, replicates the media from the primary meeting to this meeting.
      */
     PrimaryMeetingId?: PrimaryMeetingId;
+    /**
+     * Array of strings.
+     */
+    TenantIds?: TenantIdList;
+    /**
+     * The ARN of the meeting.
+     */
+    MeetingArn?: AmazonResourceName;
   }
   export type MeetingFeatureStatus = "AVAILABLE"|"UNAVAILABLE"|string;
   export interface MeetingFeaturesConfiguration {
@@ -529,6 +654,34 @@ declare namespace ChimeSDKMeetings {
     MeetingId: GuidString;
   }
   export type String = string;
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    Key: TagKey;
+    /**
+     * The tag's value.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * Lists the requested tags.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TenantId = string;
+  export type TenantIdList = TenantId[];
   export type TranscribeContentIdentificationType = "PII"|string;
   export type TranscribeContentRedactionType = "PII"|string;
   export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
@@ -541,7 +694,7 @@ declare namespace ChimeSDKMeetings {
   export type TranscribeMedicalType = "CONVERSATION"|"DICTATION"|string;
   export type TranscribePartialResultsStability = "low"|"medium"|"high"|string;
   export type TranscribePiiEntityTypes = string;
-  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto"|string;
+  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto"|"us-gov-west-1"|string;
   export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag"|string;
   export interface TranscriptionConfiguration {
     /**
@@ -552,6 +705,38 @@ declare namespace ChimeSDKMeetings {
      * The transcription configuration settings passed to Amazon Transcribe Medical.
      */
     EngineTranscribeMedicalSettings?: EngineTranscribeMedicalSettings;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource that you're removing tags from.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tag keys being removed from the resources.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
+  export interface UpdateAttendeeCapabilitiesRequest {
+    /**
+     * The ID of the meeting associated with the update request.
+     */
+    MeetingId: GuidString;
+    /**
+     * The ID of the attendee associated with the update request.
+     */
+    AttendeeId: GuidString;
+    /**
+     * The capabilties that you want to update.
+     */
+    Capabilities: AttendeeCapabilities;
+  }
+  export interface UpdateAttendeeCapabilitiesResponse {
+    /**
+     * The updated attendee data.
+     */
+    Attendee?: Attendee;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

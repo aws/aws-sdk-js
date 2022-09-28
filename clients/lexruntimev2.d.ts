@@ -146,7 +146,7 @@ declare namespace LexRuntimeV2 {
   }
   export interface DialogAction {
     /**
-     * The next action that the bot should take in its interaction with the user. The possible values are:    Close - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.    ConfirmIntent - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"    Delegate - The next action is determined by Amazon Lex V2.    ElicitSlot - The next action is to elicit a slot value from the user.  
+     * The next action that the bot should take in its interaction with the user. The possible values are:    Close - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.    ConfirmIntent - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"    Delegate - The next action is determined by Amazon Lex V2.    ElicitIntent - The next action is to elicit an intent from the user.    ElicitSlot - The next action is to elicit a slot value from the user.  
      */
     type: DialogActionType;
     /**
@@ -157,9 +157,23 @@ declare namespace LexRuntimeV2 {
      * Configures the slot to use spell-by-letter or spell-by-word style. When you use a style on a slot, users can spell out their input to make it clear to your bot.   Spell by letter - "b" "o" "b"   Spell by word - "b as in boy" "o as in oscar" "b as in boy"   For more information, see  Using spelling to enter slot values .
      */
     slotElicitationStyle?: StyleType;
+    /**
+     * The name of the constituent sub slot of the composite slot specified in slotToElicit that should be elicited from the user.
+     */
+    subSlotToElicit?: ElicitSubSlot;
   }
   export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|"None"|string;
   export type Double = number;
+  export interface ElicitSubSlot {
+    /**
+     * The name of the slot that should be elicited from the user.
+     */
+    name: NonEmptyString;
+    /**
+     * The field is not supported.
+     */
+    subSlotToElicit?: ElicitSubSlot;
+  }
   export interface GetSessionRequest {
     /**
      * The identifier of the bot that contains the session data.
@@ -457,7 +471,11 @@ declare namespace LexRuntimeV2 {
     /**
      * One or more strings that Amazon Lex V2 should look for in the input to the bot. Each phrase is given preference when deciding on slot values.
      */
-    runtimeHintValues: RuntimeHintValuesList;
+    runtimeHintValues?: RuntimeHintValuesList;
+    /**
+     * A map of constituent sub slot names inside a composite slot in the intent and the phrases that should be added for each sub slot. Inside each composite slot hints, this structure provides a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots. The intent name, composite slot name and the constituent sub slot names must exist.
+     */
+    subSlotHints?: SlotHintsSlotMap;
   }
   export type RuntimeHintPhrase = string;
   export interface RuntimeHintValue {
@@ -527,7 +545,7 @@ declare namespace LexRuntimeV2 {
      */
     runtimeHints?: RuntimeHints;
   }
-  export type Shape = "Scalar"|"List"|string;
+  export type Shape = "Scalar"|"List"|"Composite"|string;
   export interface Slot {
     /**
      * The current value of the slot.
@@ -541,6 +559,10 @@ declare namespace LexRuntimeV2 {
      * A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
      */
     values?: Values;
+    /**
+     * The constituent sub slots of a composite slot.
+     */
+    subSlots?: Slots;
   }
   export type SlotHintsIntentMap = {[key: string]: SlotHintsSlotMap};
   export type SlotHintsSlotMap = {[key: string]: RuntimeHintDetails};

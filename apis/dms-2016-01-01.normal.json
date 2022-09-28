@@ -158,6 +158,37 @@
       ],
       "documentation": "<p> Creates an DMS event notification subscription. </p> <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of, provide a list of DMS source IDs (<code>SourceIds</code>) that triggers the events, and provide a list of event categories (<code>EventCategories</code>) for events you want to be notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier = my-replinstance</code>, you will be notified of all the replication instance events for the specified source. If you specify a <code>SourceType</code> but don't specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your DMS sources. If you don't specify either <code>SourceType</code> nor <code>SourceIdentifier</code>, you will be notified of events generated from all DMS sources belonging to your customer account.</p> <p>For more information about DMS events, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html\">Working with Events and Notifications</a> in the <i>Database Migration Service User Guide.</i> </p>"
     },
+    "CreateFleetAdvisorCollector": {
+      "name": "CreateFleetAdvisorCollector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateFleetAdvisorCollectorRequest"
+      },
+      "output": {
+        "shape": "CreateFleetAdvisorCollectorResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        },
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "S3AccessDeniedFault"
+        },
+        {
+          "shape": "S3ResourceNotFoundFault"
+        },
+        {
+          "shape": "ResourceQuotaExceededFault"
+        }
+      ],
+      "documentation": "<p>Creates a Fleet Advisor collector using the specified parameters.</p>"
+    },
     "CreateReplicationInstance": {
       "name": "CreateReplicationInstance",
       "http": {
@@ -362,6 +393,47 @@
         }
       ],
       "documentation": "<p> Deletes an DMS event subscription. </p>"
+    },
+    "DeleteFleetAdvisorCollector": {
+      "name": "DeleteFleetAdvisorCollector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteCollectorRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        },
+        {
+          "shape": "CollectorNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Deletes the specified Fleet Advisor collector.</p>"
+    },
+    "DeleteFleetAdvisorDatabases": {
+      "name": "DeleteFleetAdvisorDatabases",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteFleetAdvisorDatabasesRequest"
+      },
+      "output": {
+        "shape": "DeleteFleetAdvisorDatabasesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "InvalidOperationFault"
+        }
+      ],
+      "documentation": "<p>Deletes the specified Fleet Advisor collector databases.</p>"
     },
     "DeleteReplicationInstance": {
       "name": "DeleteReplicationInstance",
@@ -624,6 +696,101 @@
         "shape": "DescribeEventsResponse"
       },
       "documentation": "<p> Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on DMS events, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html\">Working with Events and Notifications</a> in the <i>Database Migration Service User Guide.</i> </p>"
+    },
+    "DescribeFleetAdvisorCollectors": {
+      "name": "DescribeFleetAdvisorCollectors",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFleetAdvisorCollectorsRequest"
+      },
+      "output": {
+        "shape": "DescribeFleetAdvisorCollectorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Returns a list of the Fleet Advisor collectors in your account.</p>"
+    },
+    "DescribeFleetAdvisorDatabases": {
+      "name": "DescribeFleetAdvisorDatabases",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFleetAdvisorDatabasesRequest"
+      },
+      "output": {
+        "shape": "DescribeFleetAdvisorDatabasesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Returns a list of Fleet Advisor databases in your account.</p>"
+    },
+    "DescribeFleetAdvisorLsaAnalysis": {
+      "name": "DescribeFleetAdvisorLsaAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFleetAdvisorLsaAnalysisRequest"
+      },
+      "output": {
+        "shape": "DescribeFleetAdvisorLsaAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Provides descriptions of large-scale assessment (LSA) analyses produced by your Fleet Advisor collectors. </p>"
+    },
+    "DescribeFleetAdvisorSchemaObjectSummary": {
+      "name": "DescribeFleetAdvisorSchemaObjectSummary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFleetAdvisorSchemaObjectSummaryRequest"
+      },
+      "output": {
+        "shape": "DescribeFleetAdvisorSchemaObjectSummaryResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Provides descriptions of the schemas discovered by your Fleet Advisor collectors.</p>"
+    },
+    "DescribeFleetAdvisorSchemas": {
+      "name": "DescribeFleetAdvisorSchemas",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFleetAdvisorSchemasRequest"
+      },
+      "output": {
+        "shape": "DescribeFleetAdvisorSchemasResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Returns a list of schemas detected by Fleet Advisor Collectors in your account.</p>"
     },
     "DescribeOrderableReplicationInstances": {
       "name": "DescribeOrderableReplicationInstances",
@@ -1199,6 +1366,25 @@
       ],
       "documentation": "<p>Removes metadata tags from an DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html\"> <code>Tag</code> </a> data type description.</p>"
     },
+    "RunFleetAdvisorLsaAnalysis": {
+      "name": "RunFleetAdvisorLsaAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "output": {
+        "shape": "RunFleetAdvisorLsaAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceStateFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.</p>"
+    },
     "StartReplicationTask": {
       "name": "StartReplicationTask",
       "http": {
@@ -1350,6 +1536,28 @@
         }
       ],
       "documentation": "<p>Tests the connection between the replication instance and the endpoint.</p>"
+    },
+    "UpdateSubscriptionsToEventBridge": {
+      "name": "UpdateSubscriptionsToEventBridge",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateSubscriptionsToEventBridgeMessage"
+      },
+      "output": {
+        "shape": "UpdateSubscriptionsToEventBridgeResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the <code>Force</code> option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge.</p> <p>To call this operation, make sure that you have certain permissions added to your user account. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge\">Migrating event subscriptions to Amazon EventBridge</a> in the <i>Amazon Web Services Database Migration Service User Guide</i>.</p>"
     }
   },
   "shapes": {
@@ -1575,6 +1783,117 @@
         "byte"
       ]
     },
+    "CollectorHealthCheck": {
+      "type": "structure",
+      "members": {
+        "CollectorStatus": {
+          "shape": "CollectorStatus",
+          "documentation": "<p>The status of the Fleet Advisor collector.</p>"
+        },
+        "LocalCollectorS3Access": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether the local collector can access its Amazon S3 bucket.</p>"
+        },
+        "WebCollectorS3Access": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether the web collector can access its Amazon S3 bucket.</p>"
+        },
+        "WebCollectorGrantedRoleBasedAccess": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether the role that you provided when creating the Fleet Advisor collector has sufficient permissions to access the Fleet Advisor web collector.</p>"
+        }
+      },
+      "documentation": "<p>Describes the last Fleet Advisor collector health check.</p>"
+    },
+    "CollectorResponse": {
+      "type": "structure",
+      "members": {
+        "CollectorReferencedId": {
+          "shape": "String",
+          "documentation": "<p>The reference ID of the Fleet Advisor collector.</p>"
+        },
+        "CollectorName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Fleet Advisor collector .</p>"
+        },
+        "CollectorVersion": {
+          "shape": "String",
+          "documentation": "<p>The version of your Fleet Advisor collector, in semantic versioning format, for example <code>1.0.2</code> </p>"
+        },
+        "VersionStatus": {
+          "shape": "VersionStatus",
+          "documentation": "<p>Whether the collector version is up to date.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A summary description of the Fleet Advisor collector.</p>"
+        },
+        "S3BucketName": {
+          "shape": "String",
+          "documentation": "<p>The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.</p>"
+        },
+        "ServiceAccessRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The IAM role that grants permissions to access the specified Amazon S3 bucket.</p>"
+        },
+        "CollectorHealthCheck": {
+          "shape": "CollectorHealthCheck"
+        },
+        "LastDataReceived": {
+          "shape": "String",
+          "documentation": "<p>The timestamp of the last time the collector received data, in the following format: <code>2022-01-24T19:04:02.596113Z</code> </p>"
+        },
+        "RegisteredDate": {
+          "shape": "String",
+          "documentation": "<p>The timestamp when DMS registered the collector, in the following format: <code>2022-01-24T19:04:02.596113Z</code> </p>"
+        },
+        "CreatedDate": {
+          "shape": "String",
+          "documentation": "<p>The timestamp when you created the collector, in the following format: <code>2022-01-24T19:04:02.596113Z</code> </p>"
+        },
+        "ModifiedDate": {
+          "shape": "String",
+          "documentation": "<p>The timestamp when DMS last modified the collector, in the following format: <code>2022-01-24T19:04:02.596113Z</code> </p>"
+        },
+        "InventoryData": {
+          "shape": "InventoryData"
+        }
+      },
+      "documentation": "<p>Describes a Fleet Advisor collector.</p>"
+    },
+    "CollectorResponses": {
+      "type": "list",
+      "member": {
+        "shape": "CollectorResponse"
+      }
+    },
+    "CollectorShortInfoResponse": {
+      "type": "structure",
+      "members": {
+        "CollectorReferencedId": {
+          "shape": "String",
+          "documentation": "<p>The reference ID of the Fleet Advisor collector.</p>"
+        },
+        "CollectorName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Fleet Advisor collector.</p>"
+        }
+      },
+      "documentation": "<p>Briefly describes a Fleet Advisor collector.</p>"
+    },
+    "CollectorStatus": {
+      "type": "string",
+      "enum": [
+        "UNREGISTERED",
+        "ACTIVE"
+      ]
+    },
+    "CollectorsList": {
+      "type": "list",
+      "member": {
+        "shape": "CollectorShortInfoResponse"
+      }
+    },
     "CompressionTypeValue": {
       "type": "string",
       "enum": [
@@ -1656,7 +1975,7 @@
         },
         "DatabaseName": {
           "shape": "String",
-          "documentation": "<p>The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName.</p>"
+          "documentation": "<p>The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName. To migrate to a specific database, use this setting and <code>targetDbType</code>.</p>"
         },
         "ExtraConnectionAttributes": {
           "shape": "String",
@@ -1820,6 +2139,57 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "CreateFleetAdvisorCollectorRequest": {
+      "type": "structure",
+      "required": [
+        "CollectorName",
+        "ServiceAccessRoleArn",
+        "S3BucketName"
+      ],
+      "members": {
+        "CollectorName": {
+          "shape": "String",
+          "documentation": "<p>The name of your Fleet Advisor collector (for example, <code>sample-collector</code>).</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A summary description of your Fleet Advisor collector.</p>"
+        },
+        "ServiceAccessRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The IAM role that grants permissions to access the specified Amazon S3 bucket.</p>"
+        },
+        "S3BucketName": {
+          "shape": "String",
+          "documentation": "<p>The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.</p>"
+        }
+      }
+    },
+    "CreateFleetAdvisorCollectorResponse": {
+      "type": "structure",
+      "members": {
+        "CollectorReferencedId": {
+          "shape": "String",
+          "documentation": "<p>The unique ID of the new Fleet Advisor collector, for example: <code>22fda70c-40d5-4acf-b233-a495bd8eb7f5</code> </p>"
+        },
+        "CollectorName": {
+          "shape": "String",
+          "documentation": "<p>The name of the new Fleet Advisor collector.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A summary description of the Fleet Advisor collector.</p>"
+        },
+        "ServiceAccessRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The IAM role that grants permissions to access the specified Amazon S3 bucket.</p>"
+        },
+        "S3BucketName": {
+          "shape": "String",
+          "documentation": "<p>The Amazon S3 bucket that the collector uses to store inventory metadata.</p>"
+        }
+      }
     },
     "CreateReplicationInstanceMessage": {
       "type": "structure",
@@ -2021,6 +2391,102 @@
         "parquet"
       ]
     },
+    "DatabaseInstanceSoftwareDetailsResponse": {
+      "type": "structure",
+      "members": {
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The database engine of a database in a Fleet Advisor collector inventory, for example <code>Microsoft SQL Server</code>.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The database engine version of a database in a Fleet Advisor collector inventory, for example <code>2019</code>.</p>"
+        },
+        "EngineEdition": {
+          "shape": "String",
+          "documentation": "<p>The database engine edition of a database in a Fleet Advisor collector inventory, for example <code>Express</code>.</p>"
+        },
+        "ServicePack": {
+          "shape": "String",
+          "documentation": "<p>The service pack level of the database.</p>"
+        },
+        "SupportLevel": {
+          "shape": "String",
+          "documentation": "<p>The support level of the database, for example <code>Mainstream support</code>.</p>"
+        },
+        "OsArchitecture": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The operating system architecture of the database.</p>"
+        },
+        "Tooltip": {
+          "shape": "String",
+          "documentation": "<p>Information about the database engine software, for example <code>Mainstream support ends on November 14th, 2024</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes an inventory database instance for a Fleet Advisor collector.</p>"
+    },
+    "DatabaseList": {
+      "type": "list",
+      "member": {
+        "shape": "DatabaseResponse"
+      }
+    },
+    "DatabaseResponse": {
+      "type": "structure",
+      "members": {
+        "DatabaseId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a database in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>The name of a database in a Fleet Advisor collector inventory. </p>"
+        },
+        "IpAddress": {
+          "shape": "String",
+          "documentation": "<p>The IP address of a database in a Fleet Advisor collector inventory. </p>"
+        },
+        "NumberOfSchemas": {
+          "shape": "LongOptional",
+          "documentation": "<p>The number of schemas in a Fleet Advisor collector inventory database. </p>"
+        },
+        "Server": {
+          "shape": "ServerShortInfoResponse",
+          "documentation": "<p>The server name of a database in a Fleet Advisor collector inventory. </p>"
+        },
+        "SoftwareDetails": {
+          "shape": "DatabaseInstanceSoftwareDetailsResponse",
+          "documentation": "<p>The software details of a database in a Fleet Advisor collector inventory, such as database engine and version.</p>"
+        },
+        "Collectors": {
+          "shape": "CollectorsList",
+          "documentation": "<p>A list of collectors associated with the database.</p>"
+        }
+      },
+      "documentation": "<p>Describes a database in a Fleet Advisor collector inventory.</p>"
+    },
+    "DatabaseShortInfoResponse": {
+      "type": "structure",
+      "members": {
+        "DatabaseId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a database in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>The name of a database in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseIpAddress": {
+          "shape": "String",
+          "documentation": "<p>The IP address of a database in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseEngine": {
+          "shape": "String",
+          "documentation": "<p>The database engine of a database in a Fleet Advisor collector inventory, for example <code>PostgreSQL</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes a database in a Fleet Advisor collector inventory.</p>"
+    },
     "DatePartitionDelimiterValue": {
       "type": "string",
       "enum": [
@@ -2058,6 +2524,18 @@
         "Certificate": {
           "shape": "Certificate",
           "documentation": "<p>The Secure Sockets Layer (SSL) certificate.</p>"
+        }
+      }
+    },
+    "DeleteCollectorRequest": {
+      "type": "structure",
+      "required": [
+        "CollectorReferencedId"
+      ],
+      "members": {
+        "CollectorReferencedId": {
+          "shape": "String",
+          "documentation": "<p>The reference ID of the Fleet Advisor collector to delete.</p>"
         }
       }
     },
@@ -2134,6 +2612,27 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DeleteFleetAdvisorDatabasesRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseIds"
+      ],
+      "members": {
+        "DatabaseIds": {
+          "shape": "StringList",
+          "documentation": "<p>The IDs of the Fleet Advisor collector databases to delete.</p>"
+        }
+      }
+    },
+    "DeleteFleetAdvisorDatabasesResponse": {
+      "type": "structure",
+      "members": {
+        "DatabaseIds": {
+          "shape": "StringList",
+          "documentation": "<p>The IDs of the databases that the operation deleted.</p>"
+        }
+      }
     },
     "DeleteReplicationInstanceMessage": {
       "type": "structure",
@@ -2563,6 +3062,152 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DescribeFleetAdvisorCollectorsRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p> If you specify any of the following filters, the output includes information for only those collectors that meet the filter criteria:</p> <ul> <li> <p> <code>collector-referenced-id</code> – The ID of the collector agent, for example <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p> </li> <li> <p> <code>collector-name</code> – The name of the collector agent.</p> </li> </ul> <p>An example is: <code>describe-fleet-advisor-collectors --filter Name=\"collector-referenced-id\",Values=\"d4610ac5-e323-4ad9-bc50-eaf7249dfe9d\"</code> </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorCollectorsResponse": {
+      "type": "structure",
+      "members": {
+        "Collectors": {
+          "shape": "CollectorResponses",
+          "documentation": "<p>Provides descriptions of the Fleet Advisor collectors, including the collectors' name and ID, and the latest inventory data. </p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorDatabasesRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p> If you specify any of the following filters, the output includes information for only those databases that meet the filter criteria: </p> <ul> <li> <p> <code>database-id</code> – The ID of the database.</p> </li> <li> <p> <code>database-name</code> – The name of the database.</p> </li> <li> <p> <code>database-engine</code> – The name of the database engine.</p> </li> <li> <p> <code>server-ip-address</code> – The IP address of the database server.</p> </li> <li> <p> <code>database-ip-address</code> – The IP address of the database.</p> </li> <li> <p> <code>collector-name</code> – The name of the associated Fleet Advisor collector.</p> </li> </ul> <p>An example is: <code>describe-fleet-advisor-databases --filter Name=\"database-id\",Values=\"45\"</code> </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorDatabasesResponse": {
+      "type": "structure",
+      "members": {
+        "Databases": {
+          "shape": "DatabaseList",
+          "documentation": "<p>Provides descriptions of the Fleet Advisor collector databases, including the database's collector, ID, and name.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorLsaAnalysisRequest": {
+      "type": "structure",
+      "members": {
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorLsaAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "Analysis": {
+          "shape": "FleetAdvisorLsaAnalysisResponseList",
+          "documentation": "<p>A list of <code>FleetAdvisorLsaAnalysisResponse</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorSchemaObjectSummaryRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p> If you specify any of the following filters, the output includes information for only those schema objects that meet the filter criteria:</p> <ul> <li> <p> <code>schema-id</code> – The ID of the schema, for example <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p> </li> </ul> <p>Example: <code>describe-fleet-advisor-schema-object-summary --filter Name=\"schema-id\",Values=\"50\"</code> </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorSchemaObjectSummaryResponse": {
+      "type": "structure",
+      "members": {
+        "FleetAdvisorSchemaObjects": {
+          "shape": "FleetAdvisorSchemaObjectList",
+          "documentation": "<p>A collection of <code>FleetAdvisorSchemaObjectResponse</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorSchemasRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p> If you specify any of the following filters, the output includes information for only those schemas that meet the filter criteria:</p> <ul> <li> <p> <code>complexity</code> – The schema's complexity, for example <code>Simple</code>.</p> </li> <li> <p> <code>database-id</code> – The ID of the schema's database.</p> </li> <li> <p> <code>database-ip-address</code> – The IP address of the schema's database.</p> </li> <li> <p> <code>database-name</code> – The name of the schema's database.</p> </li> <li> <p> <code>database-engine</code> – The name of the schema database's engine.</p> </li> <li> <p> <code>original-schema-name</code> – The name of the schema's database's main schema.</p> </li> <li> <p> <code>schema-id</code> – The ID of the schema, for example <code>15</code>.</p> </li> <li> <p> <code>schema-name</code> – The name of the schema.</p> </li> <li> <p> <code>server-ip-address</code> – The IP address of the schema database's server.</p> </li> </ul> <p>An example is: <code>describe-fleet-advisor-schemas --filter Name=\"schema-id\",Values=\"50\"</code> </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
+    },
+    "DescribeFleetAdvisorSchemasResponse": {
+      "type": "structure",
+      "members": {
+        "FleetAdvisorSchemas": {
+          "shape": "FleetAdvisorSchemaList",
+          "documentation": "<p>A collection of <code>SchemaResponse</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. </p>"
+        }
+      }
     },
     "DescribeOrderableReplicationInstancesMessage": {
       "type": "structure",
@@ -3039,6 +3684,9 @@
       },
       "documentation": "<p>Provides information that defines a DocumentDB endpoint.</p>"
     },
+    "DoubleOptional": {
+      "type": "double"
+    },
     "DynamoDbSettings": {
       "type": "structure",
       "required": [
@@ -3074,6 +3722,10 @@
         "ErrorRetryDuration": {
           "shape": "IntegerOptional",
           "documentation": "<p>The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.</p>"
+        },
+        "UseNewMappingType": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this option to <code>true</code> for DMS to migrate documentation using the documentation type <code>_doc</code>. OpenSearch and an Elasticsearch cluster only support the _doc documentation type in versions 7. x and later. The default value is <code>false</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that defines an OpenSearch endpoint.</p>"
@@ -3449,6 +4101,64 @@
         "shape": "String"
       }
     },
+    "FleetAdvisorLsaAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "LsaAnalysisId": {
+          "shape": "String",
+          "documentation": "<p>The ID of an LSA analysis run by a Fleet Advisor collector.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of an LSA analysis run by a Fleet Advisor collector.</p>"
+        }
+      },
+      "documentation": "<p>Describes a large-scale assessment (LSA) analysis run by a Fleet Advisor collector.</p>"
+    },
+    "FleetAdvisorLsaAnalysisResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "FleetAdvisorLsaAnalysisResponse"
+      }
+    },
+    "FleetAdvisorSchemaList": {
+      "type": "list",
+      "member": {
+        "shape": "SchemaResponse"
+      }
+    },
+    "FleetAdvisorSchemaObjectList": {
+      "type": "list",
+      "member": {
+        "shape": "FleetAdvisorSchemaObjectResponse"
+      }
+    },
+    "FleetAdvisorSchemaObjectResponse": {
+      "type": "structure",
+      "members": {
+        "SchemaId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a schema object in a Fleet Advisor collector inventory.</p>"
+        },
+        "ObjectType": {
+          "shape": "String",
+          "documentation": "<p>The type of the schema object, as reported by the database engine. Examples include the following:</p> <ul> <li> <p> <code>function</code> </p> </li> <li> <p> <code>trigger</code> </p> </li> <li> <p> <code>SYSTEM_TABLE</code> </p> </li> <li> <p> <code>QUEUE</code> </p> </li> </ul>"
+        },
+        "NumberOfObjects": {
+          "shape": "LongOptional",
+          "documentation": "<p>The number of objects in a schema object in a Fleet Advisor collector inventory.</p>"
+        },
+        "CodeLineCount": {
+          "shape": "LongOptional",
+          "documentation": "<p>The number of lines of code in a schema object in a Fleet Advisor collector inventory.</p>"
+        },
+        "CodeSize": {
+          "shape": "LongOptional",
+          "documentation": "<p>The size level of the code in a schema object in a Fleet Advisor collector inventory.</p>"
+        }
+      },
+      "documentation": "<p>Describes a schema object in a Fleet Advisor collector inventory.</p>"
+    },
     "GcpMySQLSettings": {
       "type": "structure",
       "members": {
@@ -3613,6 +4323,20 @@
     },
     "IntegerOptional": {
       "type": "integer"
+    },
+    "InventoryData": {
+      "type": "structure",
+      "members": {
+        "NumberOfDatabases": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of databases in the Fleet Advisor collector inventory.</p>"
+        },
+        "NumberOfSchemas": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of schemas in the Fleet Advisor collector inventory.</p>"
+        }
+      },
+      "documentation": "<p>Describes a Fleet Advisor collector inventory.</p>"
     },
     "KafkaSecurityProtocol": {
       "type": "string",
@@ -3780,6 +4504,9 @@
     "Long": {
       "type": "long"
     },
+    "LongOptional": {
+      "type": "long"
+    },
     "MessageFormatValue": {
       "type": "string",
       "enum": [
@@ -3845,6 +4572,10 @@
         "SecretsManagerSecretId": {
           "shape": "String",
           "documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the SQL Server endpoint connection details.</p>"
+        },
+        "TrimSpaceInChar": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that defines a Microsoft SQL Server endpoint.</p>"
@@ -4307,7 +5038,7 @@
         },
         "TargetDbType": {
           "shape": "TargetDbType",
-          "documentation": "<p>Specifies where to migrate source tables on the target, either to a single database or multiple databases.</p> <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code> </p>"
+          "documentation": "<p>Specifies where to migrate source tables on the target, either to a single database or multiple databases. If you specify <code>SPECIFIC_DATABASE</code>, specify the database name using the <code>DatabaseName</code> parameter of the <code>Endpoint</code> object.</p> <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code> </p>"
         },
         "MaxFileSize": {
           "shape": "IntegerOptional",
@@ -4555,6 +5286,10 @@
         "SecretsManagerOracleAsmSecretId": {
           "shape": "String",
           "documentation": "<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> that contains the Oracle ASM connection details for the Oracle endpoint.</p>"
+        },
+        "TrimSpaceInChar": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that defines an Oracle endpoint.</p>"
@@ -4738,6 +5473,10 @@
         "SecretsManagerSecretId": {
           "shape": "String",
           "documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the PostgreSQL endpoint connection details.</p>"
+        },
+        "TrimSpaceInChar": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that defines a PostgreSQL endpoint.</p>"
@@ -5315,7 +6054,7 @@
         },
         "StopReason": {
           "shape": "String",
-          "documentation": "<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>\"STOP_REASON_FULL_LOAD_COMPLETED\"</code> – Full-load migration completed.</p> </li> <li> <p> <code>\"STOP_REASON_CACHED_CHANGES_APPLIED\"</code> – Change data capture (CDC) load completed.</p> </li> <li> <p> <code>\"STOP_REASON_CACHED_CHANGES_NOT_APPLIED\"</code> – In a full-load and CDC migration, the full load stopped as specified before starting the CDC migration.</p> </li> <li> <p> <code>\"STOP_REASON_SERVER_TIME\"</code> – The migration stopped at the specified server time.</p> </li> </ul>"
+          "documentation": "<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>\"Stop Reason NORMAL\"</code> </p> </li> <li> <p> <code>\"Stop Reason RECOVERABLE_ERROR\"</code> </p> </li> <li> <p> <code>\"Stop Reason FATAL_ERROR\"</code> </p> </li> <li> <p> <code>\"Stop Reason FULL_LOAD_ONLY_FINISHED\"</code> </p> </li> <li> <p> <code>\"Stop Reason STOPPED_AFTER_FULL_LOAD\"</code> – Full load completed, with cached changes not applied</p> </li> <li> <p> <code>\"Stop Reason STOPPED_AFTER_CACHED_EVENTS\"</code> – Full load completed, with cached changes applied</p> </li> <li> <p> <code>\"Stop Reason EXPRESS_LICENSE_LIMITS_REACHED\"</code> </p> </li> <li> <p> <code>\"Stop Reason STOPPED_AFTER_DDL_APPLY\"</code> – User-defined stop task after DDL applied</p> </li> <li> <p> <code>\"Stop Reason STOPPED_DUE_TO_LOW_MEMORY\"</code> </p> </li> <li> <p> <code>\"Stop Reason STOPPED_DUE_TO_LOW_DISK\"</code> </p> </li> <li> <p> <code>\"Stop Reason STOPPED_AT_SERVER_TIME\"</code> – User-defined server time for stopping task</p> </li> <li> <p> <code>\"Stop Reason STOPPED_AT_COMMIT_TIME\"</code> – User-defined commit time for stopping task</p> </li> <li> <p> <code>\"Stop Reason RECONFIGURATION_RESTART\"</code> </p> </li> <li> <p> <code>\"Stop Reason RECYCLE_TASK\"</code> </p> </li> </ul>"
         },
         "ReplicationTaskCreationDate": {
           "shape": "TStamp",
@@ -5572,6 +6311,19 @@
       },
       "documentation": "<p>Identifies an DMS resource and any pending actions for it.</p>"
     },
+    "RunFleetAdvisorLsaAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "LsaAnalysisId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the LSA analysis run.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the LSA analysis, for example <code>COMPLETED</code>.</p>"
+        }
+      }
+    },
     "S3Settings": {
       "type": "structure",
       "members": {
@@ -5726,6 +6478,14 @@
         "DatePartitionTimezone": {
           "shape": "String",
           "documentation": "<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert the current UTC time into a specified time zone. The conversion occurs when a date partition folder is created and a CDC filename is generated. The time zone format is Area/Location. Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>, as shown in the following example.</p> <p> <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\", \"DatePartitionDelimiter\": \"SLASH\", \"DatePartitionTimezone\":\"<i>Asia/Seoul</i>\", \"BucketName\": \"dms-nattarat-test\"}'</code> </p>"
+        },
+        "AddTrailingPaddingCharacter": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Use the S3 target endpoint setting <code>AddTrailingPaddingCharacter</code> to add padding on string data. The default value is <code>false</code>.</p>"
+        },
+        "ExpectedBucketOwner": {
+          "shape": "String",
+          "documentation": "<p>To specify a bucket owner and prevent sniping, you can use the <code>ExpectedBucketOwner</code> endpoint setting. </p> <p>Example: <code>--s3-settings='{\"ExpectedBucketOwner\": \"<i>AWS_Account_ID</i>\"}'</code> </p> <p>When you make a request to test a connection or perform a migration, S3 checks the account ID of the bucket owner against the specified parameter.</p>"
         }
       },
       "documentation": "<p>Settings for exporting data to Amazon S3. </p>"
@@ -5744,9 +6504,94 @@
         "shape": "String"
       }
     },
+    "SchemaResponse": {
+      "type": "structure",
+      "members": {
+        "CodeLineCount": {
+          "shape": "LongOptional",
+          "documentation": "<p>The number of lines of code in a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "CodeSize": {
+          "shape": "LongOptional",
+          "documentation": "<p>The size level of the code in a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "Complexity": {
+          "shape": "String",
+          "documentation": "<p>The complexity level of the code in a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "Server": {
+          "shape": "ServerShortInfoResponse",
+          "documentation": "<p>The database server for a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseInstance": {
+          "shape": "DatabaseShortInfoResponse",
+          "documentation": "<p>The database for a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "SchemaId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "SchemaName": {
+          "shape": "String",
+          "documentation": "<p>The name of a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "OriginalSchema": {
+          "shape": "SchemaShortInfoResponse"
+        },
+        "Similarity": {
+          "shape": "DoubleOptional",
+          "documentation": "<p>The similarity value for a schema in a Fleet Advisor collector inventory. A higher similarity value indicates that a schema is likely to be a duplicate.</p>"
+        }
+      },
+      "documentation": "<p>Describes a schema in a Fleet Advisor collector inventory.</p>"
+    },
+    "SchemaShortInfoResponse": {
+      "type": "structure",
+      "members": {
+        "SchemaId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "SchemaName": {
+          "shape": "String",
+          "documentation": "<p>The name of a schema in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a database in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>The name of a database in a Fleet Advisor collector inventory.</p>"
+        },
+        "DatabaseIpAddress": {
+          "shape": "String",
+          "documentation": "<p>The IP address of a database in a Fleet Advisor collector inventory.</p>"
+        }
+      },
+      "documentation": "<p>Describes a schema in a Fleet Advisor collector inventory.</p>"
+    },
     "SecretString": {
       "type": "string",
       "sensitive": true
+    },
+    "ServerShortInfoResponse": {
+      "type": "structure",
+      "members": {
+        "ServerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of a server in a Fleet Advisor collector inventory.</p>"
+        },
+        "IpAddress": {
+          "shape": "String",
+          "documentation": "<p>The IP address of a server in a Fleet Advisor collector inventory.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>The name address of a server in a Fleet Advisor collector inventory.</p>"
+        }
+      },
+      "documentation": "<p>Describes a server in a Fleet Advisor collector inventory.</p>"
     },
     "SourceIdsList": {
       "type": "list",
@@ -5922,6 +6767,12 @@
     "String": {
       "type": "string"
     },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "Subnet": {
       "type": "structure",
       "members": {
@@ -6084,7 +6935,7 @@
         },
         "TableState": {
           "shape": "String",
-          "documentation": "<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded</p>"
+          "documentation": "<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table is being reloaded</p>"
         },
         "ValidationPendingRecords": {
           "shape": "Long",
@@ -6191,6 +7042,34 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "UpdateSubscriptionsToEventBridgeMessage": {
+      "type": "structure",
+      "members": {
+        "ForceMove": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.6 or higher. </p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "UpdateSubscriptionsToEventBridgeResponse": {
+      "type": "structure",
+      "members": {
+        "Result": {
+          "shape": "String",
+          "documentation": "<p>A string that indicates how many event subscriptions were migrated and how many remain to be migrated.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "VersionStatus": {
+      "type": "string",
+      "enum": [
+        "UP_TO_DATE",
+        "OUTDATED",
+        "UNSUPPORTED"
+      ]
     },
     "VpcSecurityGroupIdList": {
       "type": "list",

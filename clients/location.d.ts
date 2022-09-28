@@ -68,11 +68,11 @@ declare class Location extends Service {
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
+   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  If you specify walking for the travel mode and your data provider is Esri, the start and destination must be within 40km.   
    */
   calculateRoute(params: Location.Types.CalculateRouteRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  
+   *  Calculates a route given the following required parameters: DeparturePosition and DestinationPosition. Requires that you first create a route calculator resource. By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartNow in a single request. Specifying both parameters returns a validation error.     Specifying a travel mode using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.  If you specify walking for the travel mode and your data provider is Esri, the start and destination must be within 40km.   
    */
   calculateRoute(callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
@@ -267,6 +267,14 @@ declare class Location extends Service {
    * Retrieves a vector data tile from the map resource. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.  The origin (0, 0) is the top left of the map. Increasing the zoom level by 1 doubles both the X and Y dimensions, so a tile containing data for the entire world at (0/0/0) will be split into 4 tiles at zoom 1 (1/0/0, 1/0/1, 1/1/0, 1/1/1).
    */
   getMapTile(callback?: (err: AWSError, data: Location.Types.GetMapTileResponse) => void): Request<Location.Types.GetMapTileResponse, AWSError>;
+  /**
+   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer AWS account   AWS Region   Data provider specified in the place index resource   
+   */
+  getPlace(params: Location.Types.GetPlaceRequest, callback?: (err: AWSError, data: Location.Types.GetPlaceResponse) => void): Request<Location.Types.GetPlaceResponse, AWSError>;
+  /**
+   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer AWS account   AWS Region   Data provider specified in the place index resource   
+   */
+  getPlace(callback?: (err: AWSError, data: Location.Types.GetPlaceResponse) => void): Request<Location.Types.GetPlaceResponse, AWSError>;
   /**
    * A batch request to retrieve all device positions.
    */
@@ -600,7 +608,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains the polygon details to specify the position of the geofence.  Each geofence polygon can have a maximum of 1,000 vertices. 
+     * Contains the details of the position of the geofence. Can be either a polygon or a circle. Including both will return a validation error.  Each  geofence polygon can have a maximum of 1,000 vertices. 
      */
     Geometry: GeofenceGeometry;
   }
@@ -788,7 +796,7 @@ declare namespace Location {
      */
     IncludeLegGeometry?: Boolean;
     /**
-     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
+     * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. You can choose Car, Truck, or Walking as options for the TravelMode. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
      */
     TravelMode?: TravelMode;
     /**
@@ -852,6 +860,16 @@ declare namespace Location {
      * Specifies the truck's weight specifications including total weight and unit of measurement. Used to avoid roads that can't support the truck's weight.
      */
     Weight?: TruckWeight;
+  }
+  export interface Circle {
+    /**
+     * A single point geometry, specifying the center of the circle, using WGS 84 coordinates, in the form [longitude, latitude].
+     */
+    Center: Position;
+    /**
+     * The radius of the circle in meters. Must be greater than zero and no larger than 100,000 (100 kilometers).
+     */
+    Radius: Double;
   }
   export type CountryCode = string;
   export type CountryCodeList = CountryCode[];
@@ -925,7 +943,7 @@ declare namespace Location {
     /**
      * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
-    MapArn: Arn;
+    MapArn: GeoArn;
     /**
      * The name of the map resource.
      */
@@ -1167,7 +1185,7 @@ declare namespace Location {
     /**
      * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
-    MapArn: Arn;
+    MapArn: GeoArn;
     /**
      * The map style selected from an available provider.
      */
@@ -1381,9 +1399,14 @@ declare namespace Location {
   }
   export type DistanceUnit = "Kilometers"|"Miles"|string;
   export type Double = number;
+  export type GeoArn = string;
   export interface GeofenceGeometry {
     /**
-     * An array of 1 or more linear rings. A linear ring is an array of 4 or more vertices, where the first and last vertex are the same to form a closed boundary. Each vertex is a 2-dimensional point of the form: [longitude, latitude].  The first linear ring is an outer ring, describing the polygon's boundary. Subsequent linear rings may be inner or outer rings to describe holes and islands. Outer rings must list their vertices in counter-clockwise order around the ring's center, where the left side is the polygon's exterior. Inner rings must list their vertices in clockwise order, where the left side is the polygon's interior.
+     * A circle on the earth, as defined by a center point and a radius.
+     */
+    Circle?: Circle;
+    /**
+     * An array of 1 or more linear rings. A linear ring is an array of 4 or more vertices, where the first and last vertex are the same to form a closed boundary. Each vertex is a 2-dimensional point of the form: [longitude, latitude].  The first linear ring is an outer ring, describing the polygon's boundary. Subsequent linear rings may be inner or outer rings to describe holes and islands. Outer rings must list their vertices in counter-clockwise order around the ring's center, where the left side is the polygon's exterior. Inner rings must list their vertices in clockwise order, where the left side is the polygon's interior. A geofence polygon can consist of between 4 and 1,000 vertices.
      */
     Polygon?: LinearRings;
   }
@@ -1480,7 +1503,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains the geofence geometry details describing a polygon.
+     * Contains the geofence geometry details describing a polygon or a circle.
      */
     Geometry: GeofenceGeometry;
     /**
@@ -1494,7 +1517,7 @@ declare namespace Location {
   }
   export interface GetMapGlyphsRequest {
     /**
-     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts stacks for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid font stacks for HERE Technologies styles:    VectorHereBerlin – Fira GO Regular | Fira GO Bold    VectorHereExplore, VectorHereExploreTruck – Firo GO Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK JP Light | Noto Sans CJK JP Regular   
+     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts stacks for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid font stacks for HERE Technologies styles:    VectorHereContrast – Fira GO Regular | Fira GO Bold    VectorHereExplore, VectorHereExploreTruck – Firo GO Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK JP Light | Noto Sans CJK JP Regular   
      */
     FontStack: String;
     /**
@@ -1519,7 +1542,7 @@ declare namespace Location {
   }
   export interface GetMapSpritesRequest {
     /**
-     * The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:    sprites.png     sprites@2x.png for high pixel density displays   For the JSON document contain image offsets. Use the following ﬁle names:    sprites.json     sprites@2x.json for high pixel density displays  
+     * The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:    sprites.png     sprites@2x.png for high pixel density displays   For the JSON document containing image offsets. Use the following ﬁle names:    sprites.json     sprites@2x.json for high pixel density displays  
      */
     FileName: GetMapSpritesRequestFileNameString;
     /**
@@ -1584,6 +1607,26 @@ declare namespace Location {
      * The map tile's content type. For example, application/vnd.mapbox-vector-tile.
      */
     ContentType?: String;
+  }
+  export interface GetPlaceRequest {
+    /**
+     * The name of the place index resource that you want to use for the search.
+     */
+    IndexName: ResourceName;
+    /**
+     * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the language parameter set to en. The city in the results will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the city in the results will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+     */
+    Language?: LanguageTag;
+    /**
+     * The identifier of the place to find.
+     */
+    PlaceId: PlaceId;
+  }
+  export interface GetPlaceResponse {
+    /**
+     * Details about the result, such as its address and position.
+     */
+    Place: Place;
   }
   export type Id = string;
   export type Integer = number;
@@ -1734,7 +1777,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains the geofence geometry details describing a polygon.
+     * Contains the geofence geometry details describing a polygon or a circle.
      */
     Geometry: GeofenceGeometry;
     /**
@@ -2003,7 +2046,7 @@ declare namespace Location {
   export type ListTrackersResponseEntryList = ListTrackersResponseEntry[];
   export interface MapConfiguration {
     /**
-     * Specifies the map style selected from an available data provider. Valid Esri map styles:    VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies map styles:    VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.    VectorHereExplore – A default HERE map style containing a neutral, global map and its features including roads, buildings, landmarks, and water features. It also now includes a fully designed map of Japan.    VectorHereExploreTruck – A global map containing truck restrictions and attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments and icons on top of HERE Explore to support use cases within transport and logistics.  
+     * Specifies the map style selected from an available data provider. Valid Esri map styles:    VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies map styles:    VectorHereContrast – The HERE Contrast (Berlin) map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.    VectorHereExplore – A default HERE map style containing a neutral, global map and its features including roads, buildings, landmarks, and water features. It also now includes a fully designed map of Japan.    VectorHereExploreTruck – A global map containing truck restrictions and attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments and icons on top of HERE Explore to support use cases within transport and logistics.    The VectorHereContrast style has been renamed from VectorHereBerlin. VectorHereBerlin has been deprecated, but will continue to work in applications that use it. 
      */
     Style: MapStyle;
   }
@@ -2054,6 +2097,14 @@ declare namespace Location {
      * The time zone in which the Place is located. Returned only when using Here as the selected partner.
      */
     TimeZone?: TimeZone;
+    /**
+     * For addresses with multiple units, the unit identifier. Can include numbers and letters, for example 3B or Unit 123.  Returned only for a place index that uses Esri as a data provider. Is not returned for SearchPlaceIndexForPosition. 
+     */
+    UnitNumber?: String;
+    /**
+     * For addresses with a UnitNumber, the type of unit. For example, Apartment.
+     */
+    UnitType?: String;
   }
   export interface PlaceGeometry {
     /**
@@ -2061,6 +2112,7 @@ declare namespace Location {
      */
     Point?: Position;
   }
+  export type PlaceId = string;
   export type PlaceIndexSearchResultLimit = number;
   export type Position = Double[];
   export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
@@ -2085,7 +2137,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains the polygon details to specify the position of the geofence.  Each geofence polygon can have a maximum of 1,000 vertices. 
+     * Contains the details to specify the position of the geofence. Can be either a polygon or a circle. Including both will return a validation error.  Each  geofence polygon can have a maximum of 1,000 vertices. 
      */
     Geometry: GeofenceGeometry;
   }
@@ -2143,10 +2195,18 @@ declare namespace Location {
      * Details about the search result, such as its address and position.
      */
     Place: Place;
+    /**
+     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForPosition operations, the PlaceId is returned only by place indexes that use HERE as a data provider. 
+     */
+    PlaceId?: PlaceId;
   }
   export type SearchForPositionResultDistanceDouble = number;
   export type SearchForPositionResultList = SearchForPositionResult[];
   export interface SearchForSuggestionsResult {
+    /**
+     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place indexes that use HERE or Esri as data providers. 
+     */
+    PlaceId?: PlaceId;
     /**
      * The text of the place suggestion, typically formatted as an address string.
      */
@@ -2162,6 +2222,10 @@ declare namespace Location {
      * Details about the search result, such as its address and position.
      */
     Place: Place;
+    /**
+     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForText operations, the PlaceId is returned only by place indexes that use HERE as a data provider. 
+     */
+    PlaceId?: PlaceId;
     /**
      * The relative confidence in the match for a result among the results returned. For example, if more fields for an address match (including house number, street, city, country/region, and postal code), the relevance score is closer to 1. Returned only when the partner selected is Esri.
      */
@@ -2422,11 +2486,11 @@ declare namespace Location {
   export type TravelMode = "Car"|"Truck"|"Walking"|string;
   export interface TruckDimensions {
     /**
-     * The height of the truck.   For example, 4.5.  
+     * The height of the truck.   For example, 4.5.     For routes calculated with a HERE resource, this value must be between 0 and 50 meters.  
      */
     Height?: TruckDimensionsHeightDouble;
     /**
-     * The length of the truck.   For example, 15.5.  
+     * The length of the truck.   For example, 15.5.     For routes calculated with a HERE resource, this value must be between 0 and 300 meters.  
      */
     Length?: TruckDimensionsLengthDouble;
     /**
@@ -2434,7 +2498,7 @@ declare namespace Location {
      */
     Unit?: DimensionUnit;
     /**
-     * The width of the truck.   For example, 4.5.  
+     * The width of the truck.   For example, 4.5.     For routes calculated with a HERE resource, this value must be between 0 and 50 meters.  
      */
     Width?: TruckDimensionsWidthDouble;
   }
@@ -2514,7 +2578,7 @@ declare namespace Location {
     /**
      * The Amazon Resource Name (ARN) of the updated map resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
-    MapArn: Arn;
+    MapArn: GeoArn;
     /**
      * The name of the updated map resource.
      */

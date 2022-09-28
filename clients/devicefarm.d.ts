@@ -863,6 +863,10 @@ declare namespace DeviceFarm {
      * Sets the execution timeout value (in minutes) for a project. All test runs in this project use the specified execution timeout value unless overridden when scheduling a run.
      */
     defaultJobTimeoutMinutes?: JobTimeoutMinutes;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: VpcConfig;
   }
   export interface CreateProjectResult {
     /**
@@ -2465,6 +2469,10 @@ declare namespace DeviceFarm {
      * When the project was created.
      */
     created?: DateTime;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: VpcConfig;
   }
   export type Projects = Project[];
   export interface PurchaseOfferingRequest {
@@ -2603,6 +2611,10 @@ declare namespace DeviceFarm {
      * When set to true, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again. For more information about how Device Farm re-signs your apps, see Do you modify my app? in the AWS Device Farm FAQs.
      */
     skipAppResign?: SkipAppResign;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: VpcConfig;
   }
   export type RemoteAccessSessions = RemoteAccessSession[];
   export interface RenewOfferingRequest {
@@ -2775,6 +2787,10 @@ declare namespace DeviceFarm {
      * The results of a device filter used to select the devices for a test run.
      */
     deviceSelectionResult?: DeviceSelectionResult;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: VpcConfig;
   }
   export type Runs = Run[];
   export interface Sample {
@@ -2893,6 +2909,7 @@ declare namespace DeviceFarm {
      */
     parameters?: TestParameters;
   }
+  export type SecurityGroupId = string;
   export type SecurityGroupIds = NonEmptyString[];
   export type SensitiveString = string;
   export type SensitiveURL = string;
@@ -2936,6 +2953,7 @@ declare namespace DeviceFarm {
     run?: Run;
   }
   export type String = string;
+  export type SubnetId = string;
   export type SubnetIds = NonEmptyString[];
   export interface Suite {
     /**
@@ -3354,6 +3372,10 @@ declare namespace DeviceFarm {
      * The number of minutes a test run in the project executes before it times out.
      */
     defaultJobTimeoutMinutes?: JobTimeoutMinutes;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: VpcConfig;
   }
   export interface UpdateProjectResult {
     /**
@@ -3510,6 +3532,22 @@ declare namespace DeviceFarm {
   export type VPCEConfigurations = VPCEConfiguration[];
   export type VPCEServiceName = string;
   export type VideoCapture = boolean;
+  export interface VpcConfig {
+    /**
+     * An array of one or more security groups IDs in your Amazon VPC.
+     */
+    securityGroupIds: VpcSecurityGroupIds;
+    /**
+     * An array of one or more subnet IDs in your Amazon VPC.
+     */
+    subnetIds: VpcSubnetIds;
+    /**
+     * The ID of the Amazon VPC.
+     */
+    vpcId: NonEmptyString;
+  }
+  export type VpcSecurityGroupIds = SecurityGroupId[];
+  export type VpcSubnetIds = SubnetId[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

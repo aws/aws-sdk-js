@@ -28,14 +28,3 @@ export class IniLoader{
  */
   loadFrom(options: LoadFileOptions): IniFileContent;
 }
-
-/**
- * Read specified file and return parsed config object. This method will always
- * read from disk and won't update cache. This is a lower level function of 
- * loadFrom().
- * @param filename [string] valid readable file path containing aws credentials
- * or aws configs
- * @param isConfig [boolean] true if specified file is an aws config file; false
- * if the file is an aws credentials file
- */
-export function parseFile(filename: string, isConfig: boolean): IniFileContent;

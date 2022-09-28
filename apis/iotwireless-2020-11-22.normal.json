@@ -1312,7 +1312,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Get the event configuration by resource types.</p>"
+      "documentation": "<p>Get the event configuration based on resource types.</p>"
     },
     "GetFuotaTask": {
       "name": "GetFuotaTask",
@@ -1498,6 +1498,69 @@
         }
       ],
       "documentation": "<p>Gets information about a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, returns all partner accounts.</p>"
+    },
+    "GetPosition": {
+      "name": "GetPosition",
+      "http": {
+        "method": "GET",
+        "requestUri": "/positions/{ResourceIdentifier}"
+      },
+      "input": {
+        "shape": "GetPositionRequest"
+      },
+      "output": {
+        "shape": "GetPositionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Get the position information for a given resource.</p>"
+    },
+    "GetPositionConfiguration": {
+      "name": "GetPositionConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/position-configurations/{ResourceIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetPositionConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetPositionConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Get position configuration for a given resource.</p>"
     },
     "GetResourceEventConfiguration": {
       "name": "GetResourceEventConfiguration",
@@ -2098,6 +2161,35 @@
       ],
       "documentation": "<p>Lists the partner accounts associated with your AWS account.</p>"
     },
+    "ListPositionConfigurations": {
+      "name": "ListPositionConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/position-configurations",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListPositionConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListPositionConfigurationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>List position configurations for a given resource, such as positioning solvers.</p>"
+    },
     "ListQueuedMessages": {
       "name": "ListQueuedMessages",
       "http": {
@@ -2271,6 +2363,38 @@
         }
       ],
       "documentation": "<p>Lists the wireless gateways registered to your AWS account.</p>"
+    },
+    "PutPositionConfiguration": {
+      "name": "PutPositionConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/position-configurations/{ResourceIdentifier}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutPositionConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutPositionConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Put position configuration for a given resource.</p>"
     },
     "PutResourceLogLevel": {
       "name": "PutResourceLogLevel",
@@ -2721,7 +2845,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Update the event configuration by resource types.</p>"
+      "documentation": "<p>Update the event configuration based on resource types.</p>"
     },
     "UpdateFuotaTask": {
       "name": "UpdateFuotaTask",
@@ -2889,6 +3013,38 @@
       ],
       "documentation": "<p>Updates properties of a partner account.</p>"
     },
+    "UpdatePosition": {
+      "name": "UpdatePosition",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/positions/{ResourceIdentifier}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UpdatePositionRequest"
+      },
+      "output": {
+        "shape": "UpdatePositionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Update the position information of a resource.</p>"
+    },
     "UpdateResourceEventConfiguration": {
       "name": "UpdateResourceEventConfiguration",
       "http": {
@@ -3028,6 +3184,25 @@
     },
     "AccountLinked": {
       "type": "boolean"
+    },
+    "Accuracy": {
+      "type": "structure",
+      "members": {
+        "HorizontalAccuracy": {
+          "shape": "HorizontalAccuracy",
+          "documentation": "<p>The horizontal accuracy of the estimated position in meters.</p>"
+        },
+        "VerticalAccuracy": {
+          "shape": "VerticalAccuracy",
+          "documentation": "<p>The vertical accuracy of the estimated position in meters.</p>"
+        }
+      },
+      "documentation": "<p>The accuracy of the estimated position in meters. An empty value indicates that no position data is available. A value of ‘0.0’ value indicates that position data is available. This data corresponds to the position information that you specified instead of the position computed by solver.</p>"
+    },
+    "AckModeRetryDurationSecs": {
+      "type": "integer",
+      "max": 604800,
+      "min": 0
     },
     "AddGwMetadata": {
       "type": "boolean"
@@ -3244,6 +3419,38 @@
         "critical"
       ]
     },
+    "Beaconing": {
+      "type": "structure",
+      "members": {
+        "DataRate": {
+          "shape": "BeaconingDataRate",
+          "documentation": "<p>The data rate for gateways that are sending the beacons.</p>"
+        },
+        "Frequencies": {
+          "shape": "BeaconingFrequencies",
+          "documentation": "<p>The frequency list for the gateways to send the beacons.</p>"
+        }
+      },
+      "documentation": "<p>Beaconing parameters for configuring the wireless gateways.</p>"
+    },
+    "BeaconingDataRate": {
+      "type": "integer",
+      "max": 15,
+      "min": 0
+    },
+    "BeaconingFrequencies": {
+      "type": "list",
+      "member": {
+        "shape": "BeaconingFrequency"
+      },
+      "max": 10,
+      "min": 0
+    },
+    "BeaconingFrequency": {
+      "type": "integer",
+      "max": 1000000000,
+      "min": 100000000
+    },
     "CancelMulticastGroupSessionRequest": {
       "type": "structure",
       "required": [
@@ -3328,7 +3535,7 @@
         },
         "WirelessGatewayIdEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless gateway id connection status event topic is enabled or disabled .</p>"
+          "documentation": "<p>Denotes whether the wireless gateway ID connection status event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Connection status event configuration object for enabling or disabling topic.</p>"
@@ -4086,7 +4293,7 @@
         },
         "WirelessDeviceIdEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless device id device registration state event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the wireless device ID device registration state event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Device registration state event configuration object for enabling and disabling relevant topics.</p>"
@@ -4297,6 +4504,19 @@
     "Double": {
       "type": "double"
     },
+    "DownlinkFrequency": {
+      "type": "integer",
+      "max": 1000000000,
+      "min": 100000000
+    },
+    "DownlinkMode": {
+      "type": "string",
+      "enum": [
+        "SEQUENTIAL",
+        "CONCURRENT",
+        "USING_UPLINK_GATEWAY"
+      ]
+    },
     "DownlinkQueueMessage": {
       "type": "structure",
       "members": {
@@ -4329,7 +4549,17 @@
       "max": 15,
       "min": 0
     },
+    "DrMaxBox": {
+      "type": "integer",
+      "max": 15,
+      "min": 0
+    },
     "DrMin": {
+      "type": "integer",
+      "max": 15,
+      "min": 0
+    },
+    "DrMinBox": {
       "type": "integer",
       "max": 15,
       "min": 0
@@ -4395,6 +4625,10 @@
         "ConnectionStatus": {
           "shape": "ConnectionStatusEventConfiguration",
           "documentation": "<p>Connection status event configuration for an event configuration item.</p>"
+        },
+        "MessageDeliveryStatus": {
+          "shape": "MessageDeliveryStatusEventConfiguration",
+          "documentation": "<p>Message delivery status event configuration for an event configuration item.</p>"
         }
       },
       "documentation": "<p>Object of all event configurations and the status of the event topics.</p>"
@@ -4458,6 +4692,10 @@
         },
         "ClockSync": {
           "shape": "FPort"
+        },
+        "Positioning": {
+          "shape": "Positioning",
+          "documentation": "<p>FPort values for the GNSS, stream, and ClockSync functions of the positioning information.</p>"
         }
       },
       "documentation": "<p>List of FPort assigned for different LoRaWAN application packages to use</p>"
@@ -4558,6 +4796,30 @@
       "type": "string",
       "pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"
     },
+    "GatewayList": {
+      "type": "list",
+      "member": {
+        "shape": "GatewayListItem"
+      }
+    },
+    "GatewayListItem": {
+      "type": "structure",
+      "required": [
+        "GatewayId",
+        "DownlinkFrequency"
+      ],
+      "members": {
+        "GatewayId": {
+          "shape": "WirelessGatewayId",
+          "documentation": "<p>The ID of the wireless gateways that you want to add to the list of gateways when sending downlink messages.</p>"
+        },
+        "DownlinkFrequency": {
+          "shape": "DownlinkFrequency",
+          "documentation": "<p>The frequency to use for the gateways when sending a downlink message to the wireless device.</p>"
+        }
+      },
+      "documentation": "<p>Gateway list item object that specifies the frequency and list of gateways for which the downlink message should be sent.</p>"
+    },
     "GenAppKey": {
       "type": "string",
       "pattern": "[a-fA-F0-9]{32}"
@@ -4649,19 +4911,23 @@
       "members": {
         "DeviceRegistrationState": {
           "shape": "DeviceRegistrationStateResourceTypeEventConfiguration",
-          "documentation": "<p>Resource type event configuration for the device registration state event</p>"
+          "documentation": "<p>Resource type event configuration for the device registration state event.</p>"
         },
         "Proximity": {
           "shape": "ProximityResourceTypeEventConfiguration",
-          "documentation": "<p>Resource type event configuration for the proximity event</p>"
+          "documentation": "<p>Resource type event configuration for the proximity event.</p>"
         },
         "Join": {
           "shape": "JoinResourceTypeEventConfiguration",
-          "documentation": "<p>Resource type event configuration for the join event</p>"
+          "documentation": "<p>Resource type event configuration for the join event.</p>"
         },
         "ConnectionStatus": {
           "shape": "ConnectionStatusResourceTypeEventConfiguration",
-          "documentation": "<p>Resource type event configuration for the connection status event</p>"
+          "documentation": "<p>Resource type event configuration for the connection status event.</p>"
+        },
+        "MessageDeliveryStatus": {
+          "shape": "MessageDeliveryStatusResourceTypeEventConfiguration",
+          "documentation": "<p>Resource type event configuration object for the message delivery status event.</p>"
         }
       }
     },
@@ -4861,6 +5127,90 @@
         }
       }
     },
+    "GetPositionConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "PositionResourceIdentifier",
+          "documentation": "<p>Resource identifier used in a position configuration.</p>",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "PositionResourceType",
+          "documentation": "<p>Resource type of the resource for which position configuration is retrieved.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "GetPositionConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "Solvers": {
+          "shape": "PositionSolverDetails",
+          "documentation": "<p>The wrapper for the solver configuration details object.</p>"
+        },
+        "Destination": {
+          "shape": "DestinationName",
+          "documentation": "<p>The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.</p>"
+        }
+      }
+    },
+    "GetPositionRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "PositionResourceIdentifier",
+          "documentation": "<p>Resource identifier used to retrieve the position information.</p>",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "PositionResourceType",
+          "documentation": "<p>Resource type of the resource for which position information is retrieved.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        }
+      }
+    },
+    "GetPositionResponse": {
+      "type": "structure",
+      "members": {
+        "Position": {
+          "shape": "PositionCoordinate",
+          "documentation": "<p>The position information of the resource.</p>"
+        },
+        "Accuracy": {
+          "shape": "Accuracy",
+          "documentation": "<p>The accuracy of the estimated position in meters. An empty value indicates that no position data is available. A value of ‘0.0’ value indicates that position data is available. This data corresponds to the position information that you specified instead of the position computed by solver.</p>"
+        },
+        "SolverType": {
+          "shape": "PositionSolverType",
+          "documentation": "<p>The type of solver used to identify the position of the resource.</p>"
+        },
+        "SolverProvider": {
+          "shape": "PositionSolverProvider",
+          "documentation": "<p>The vendor of the positioning solver.</p>"
+        },
+        "SolverVersion": {
+          "shape": "PositionSolverVersion",
+          "documentation": "<p>The version of the positioning solver.</p>"
+        },
+        "Timestamp": {
+          "shape": "ISODateTimeString",
+          "documentation": "<p>The timestamp at which the device's position was determined.</p>"
+        }
+      }
+    },
     "GetResourceEventConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -4882,7 +5232,7 @@
         },
         "PartnerType": {
           "shape": "EventNotificationPartnerType",
-          "documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId.</p>",
+          "documentation": "<p>Partner type of the resource if the identifier type is <code>PartnerAccountId</code>.</p>",
           "location": "querystring",
           "locationName": "partnerType"
         }
@@ -4893,11 +5243,11 @@
       "members": {
         "DeviceRegistrationState": {
           "shape": "DeviceRegistrationStateEventConfiguration",
-          "documentation": "<p>Event configuration for the device registration state event</p>"
+          "documentation": "<p>Event configuration for the device registration state event.</p>"
         },
         "Proximity": {
           "shape": "ProximityEventConfiguration",
-          "documentation": "<p>Event configuration for the Proximity event</p>"
+          "documentation": "<p>Event configuration for the proximity event.</p>"
         },
         "Join": {
           "shape": "JoinEventConfiguration",
@@ -4906,6 +5256,10 @@
         "ConnectionStatus": {
           "shape": "ConnectionStatusEventConfiguration",
           "documentation": "<p>Event configuration for the connection status event.</p>"
+        },
+        "MessageDeliveryStatus": {
+          "shape": "MessageDeliveryStatusEventConfiguration",
+          "documentation": "<p>Event configuration for the message delivery status event.</p>"
         }
       }
     },
@@ -5310,6 +5664,10 @@
         }
       }
     },
+    "HorizontalAccuracy": {
+      "type": "float",
+      "min": 0
+    },
     "HrAllowed": {
       "type": "boolean"
     },
@@ -5370,7 +5728,7 @@
         },
         "WirelessDeviceIdEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless device id join event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the wireless device ID join event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Join event configuration object for enabling or disabling topic.</p>"
@@ -5634,6 +5992,41 @@
         }
       }
     },
+    "ListPositionConfigurationsRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceType": {
+          "shape": "PositionResourceType",
+          "documentation": "<p>Resource type for which position configurations are listed.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListPositionConfigurationsResponse": {
+      "type": "structure",
+      "members": {
+        "PositionConfigurationList": {
+          "shape": "PositionConfigurationList",
+          "documentation": "<p>A list of position configurations.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+        }
+      }
+    },
     "ListQueuedMessagesRequest": {
       "type": "structure",
       "required": [
@@ -5867,7 +6260,7 @@
       "members": {
         "GatewayEuiEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the gateway eui connection status event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the gateway EUI connection status event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Object for LoRaWAN connection status resource type event configuration.</p>"
@@ -5877,7 +6270,7 @@
       "members": {
         "WirelessGatewayEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless gateway connection status event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the wireless gateway connection status event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Object for LoRaWAN connection status resource type event configuration.</p>"
@@ -6071,6 +6464,10 @@
         },
         "SubBands": {
           "shape": "SubBands"
+        },
+        "Beaconing": {
+          "shape": "Beaconing",
+          "documentation": "<p>Beaconing object information, which consists of the data rate and frequency parameters.</p>"
         }
       },
       "documentation": "<p>LoRaWANGateway object.</p>"
@@ -6214,7 +6611,7 @@
       "members": {
         "DevEuiEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the dev eui join event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the Dev EUI join event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Object for LoRaWAN join resource type event configuration.</p>"
@@ -6224,7 +6621,7 @@
       "members": {
         "WirelessDeviceEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless device join event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the wireless device join event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Object for LoRaWAN join resource type event configuration.</p>"
@@ -6301,6 +6698,10 @@
       "members": {
         "FPort": {
           "shape": "FPort"
+        },
+        "ParticipatingGateways": {
+          "shape": "ParticipatingGateways",
+          "documentation": "<p>Choose the gateways that you want to use for the downlink data traffic when the wireless device is running in class B or class C mode.</p>"
         }
       },
       "documentation": "<p>LoRaWAN router info.</p>"
@@ -6311,6 +6712,14 @@
         "AddGwMetadata": {
           "shape": "AddGwMetadata",
           "documentation": "<p>The AddGWMetaData value.</p>"
+        },
+        "DrMin": {
+          "shape": "DrMinBox",
+          "documentation": "<p>The DrMin value.</p>"
+        },
+        "DrMax": {
+          "shape": "DrMaxBox",
+          "documentation": "<p>The DrMax value.</p>"
         }
       },
       "documentation": "<p>LoRaWANServiceProfile object.</p>"
@@ -6342,6 +6751,10 @@
         "AbpV1_0_x": {
           "shape": "UpdateAbpV1_0_x",
           "documentation": "<p>ABP device object for update APIs for v1.0.x</p>"
+        },
+        "FPorts": {
+          "shape": "UpdateFPorts",
+          "documentation": "<p>FPorts object for the positioning information of the device.</p>"
         }
       },
       "documentation": "<p>LoRaWAN object for update functions.</p>"
@@ -6416,6 +6829,28 @@
       "documentation": "<p>Id of the multicast group.</p>",
       "max": 256,
       "min": 1
+    },
+    "MessageDeliveryStatusEventConfiguration": {
+      "type": "structure",
+      "members": {
+        "Sidewalk": {
+          "shape": "SidewalkEventNotificationConfigurations"
+        },
+        "WirelessDeviceIdEventTopic": {
+          "shape": "EventNotificationTopicStatus",
+          "documentation": "<p>Denotes whether the wireless device ID device registration state event topic is enabled or disabled.</p>"
+        }
+      },
+      "documentation": "<p>Message delivery status event configuration object for enabling and disabling relevant topics.</p>"
+    },
+    "MessageDeliveryStatusResourceTypeEventConfiguration": {
+      "type": "structure",
+      "members": {
+        "Sidewalk": {
+          "shape": "SidewalkResourceTypeEventConfiguration"
+        }
+      },
+      "documentation": "<p>Message delivery status resource type event configuration object for enabling or disabling relevant topic.</p>"
     },
     "MessageId": {
       "type": "string"
@@ -6628,6 +7063,29 @@
       "max": 32,
       "min": 1
     },
+    "ParticipatingGateways": {
+      "type": "structure",
+      "required": [
+        "DownlinkMode",
+        "GatewayList",
+        "TransmissionInterval"
+      ],
+      "members": {
+        "DownlinkMode": {
+          "shape": "DownlinkMode",
+          "documentation": "<p>Indicates whether to send the downlink message in sequential mode or concurrent mode, or to use only the chosen gateways from the previous uplink message transmission.</p>"
+        },
+        "GatewayList": {
+          "shape": "GatewayList",
+          "documentation": "<p>The list of gateways that you want to use for sending the downlink data traffic.</p>"
+        },
+        "TransmissionInterval": {
+          "shape": "TransmissionInterval",
+          "documentation": "<p>The duration of time for which AWS IoT Core for LoRaWAN will wait before transmitting the payload to the next gateway.</p>"
+        }
+      },
+      "documentation": "<p>Specify the list of gateways to which you want to send downlink data traffic when the wireless device is running in class B or class C mode.</p>"
+    },
     "PartnerAccountArn": {
       "type": "string"
     },
@@ -6662,6 +7120,120 @@
       "max": 4096,
       "min": 128
     },
+    "PositionConfigurationFec": {
+      "type": "string",
+      "enum": [
+        "ROSE",
+        "NONE"
+      ]
+    },
+    "PositionConfigurationItem": {
+      "type": "structure",
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "PositionResourceIdentifier",
+          "documentation": "<p>Resource identifier for the position configuration.</p>"
+        },
+        "ResourceType": {
+          "shape": "PositionResourceType",
+          "documentation": "<p>Resource type of the resource for the position configuration.</p>"
+        },
+        "Solvers": {
+          "shape": "PositionSolverDetails",
+          "documentation": "<p>The details of the positioning solver object used to compute the location.</p>"
+        },
+        "Destination": {
+          "shape": "DestinationName",
+          "documentation": "<p>The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.</p>"
+        }
+      },
+      "documentation": "<p>The wrapper for a position configuration.</p>"
+    },
+    "PositionConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "PositionConfigurationItem"
+      }
+    },
+    "PositionConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "PositionCoordinate": {
+      "type": "list",
+      "member": {
+        "shape": "PositionCoordinateValue"
+      }
+    },
+    "PositionCoordinateValue": {
+      "type": "float"
+    },
+    "PositionResourceIdentifier": {
+      "type": "string",
+      "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+    },
+    "PositionResourceType": {
+      "type": "string",
+      "enum": [
+        "WirelessDevice",
+        "WirelessGateway"
+      ]
+    },
+    "PositionSolverConfigurations": {
+      "type": "structure",
+      "members": {
+        "SemtechGnss": {
+          "shape": "SemtechGnssConfiguration",
+          "documentation": "<p>The Semtech GNSS solver configuration object.</p>"
+        }
+      },
+      "documentation": "<p>The wrapper for position solver configurations.</p>"
+    },
+    "PositionSolverDetails": {
+      "type": "structure",
+      "members": {
+        "SemtechGnss": {
+          "shape": "SemtechGnssDetail",
+          "documentation": "<p>The Semtech GNSS solver object details.</p>"
+        }
+      },
+      "documentation": "<p>The wrapper for position solver details.</p>"
+    },
+    "PositionSolverProvider": {
+      "type": "string",
+      "enum": [
+        "Semtech"
+      ]
+    },
+    "PositionSolverType": {
+      "type": "string",
+      "enum": [
+        "GNSS"
+      ]
+    },
+    "PositionSolverVersion": {
+      "type": "string",
+      "max": 50,
+      "min": 0
+    },
+    "Positioning": {
+      "type": "structure",
+      "members": {
+        "ClockSync": {
+          "shape": "FPort"
+        },
+        "Stream": {
+          "shape": "FPort"
+        },
+        "Gnss": {
+          "shape": "FPort"
+        }
+      },
+      "documentation": "<p>The FPorts for the position information.</p>"
+    },
     "PrAllowed": {
       "type": "boolean"
     },
@@ -6679,7 +7251,7 @@
         },
         "WirelessDeviceIdEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless device id proximity event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the wireless device ID proximity event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Proximity event configuration object for enabling and disabling relevant topics.</p>"
@@ -6693,6 +7265,39 @@
         }
       },
       "documentation": "<p>Proximity resource type event configuration object for enabling or disabling topic.</p>"
+    },
+    "PutPositionConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "PositionResourceIdentifier",
+          "documentation": "<p>Resource identifier used to update the position configuration.</p>",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "PositionResourceType",
+          "documentation": "<p>Resource type of the resource for which you want to update the position configuration.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        },
+        "Solvers": {
+          "shape": "PositionSolverConfigurations",
+          "documentation": "<p>The positioning solvers used to update the position configuration of the resource.</p>"
+        },
+        "Destination": {
+          "shape": "DestinationName",
+          "documentation": "<p>The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.</p>"
+        }
+      }
+    },
+    "PutPositionConfigurationResponse": {
+      "type": "structure",
+      "members": {}
     },
     "PutResourceLogLevelRequest": {
       "type": "structure",
@@ -6817,6 +7422,46 @@
     "SNwkSIntKey": {
       "type": "string",
       "pattern": "[a-fA-F0-9]{32}"
+    },
+    "SemtechGnssConfiguration": {
+      "type": "structure",
+      "required": [
+        "Status",
+        "Fec"
+      ],
+      "members": {
+        "Status": {
+          "shape": "PositionConfigurationStatus",
+          "documentation": "<p>The status indicating whether the solver is enabled.</p>"
+        },
+        "Fec": {
+          "shape": "PositionConfigurationFec",
+          "documentation": "<p>Whether forward error correction is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Information about the Semtech GNSS solver configuration.</p>"
+    },
+    "SemtechGnssDetail": {
+      "type": "structure",
+      "members": {
+        "Provider": {
+          "shape": "PositionSolverProvider",
+          "documentation": "<p>The vendor of the solver object.</p>"
+        },
+        "Type": {
+          "shape": "PositionSolverType",
+          "documentation": "<p>The type of positioning solver used.</p>"
+        },
+        "Status": {
+          "shape": "PositionConfigurationStatus",
+          "documentation": "<p>The status indicating whether the solver is enabled.</p>"
+        },
+        "Fec": {
+          "shape": "PositionConfigurationFec",
+          "documentation": "<p>Whether forward error correction is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Details of the Semtech GNSS solver object.</p>"
     },
     "SendDataToMulticastGroupRequest": {
       "type": "structure",
@@ -7056,10 +7701,10 @@
       "members": {
         "AmazonIdEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether amazon id event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the Amazon ID event topic is enabled or disabled.</p>"
         }
       },
-      "documentation": "<p> SidewalkEventNotificationConfigurations object Event configuration object for Sidewalk related event topics.</p>"
+      "documentation": "<p> <code>SidewalkEventNotificationConfigurations</code> object, which is the event configuration object for Sidewalk-related event topics.</p>"
     },
     "SidewalkId": {
       "type": "string",
@@ -7097,7 +7742,7 @@
       "members": {
         "WirelessDeviceEventTopic": {
           "shape": "EventNotificationTopicStatus",
-          "documentation": "<p>Enum to denote whether the wireless device join event topic is enabled or disabled.</p>"
+          "documentation": "<p>Denotes whether the wireless device join event topic is enabled or disabled.</p>"
         }
       },
       "documentation": "<p>Sidewalk resource type event configuration object for enabling or disabling topic.</p>"
@@ -7111,6 +7756,10 @@
         },
         "MessageType": {
           "shape": "MessageType"
+        },
+        "AckModeRetryDurationSecs": {
+          "shape": "AckModeRetryDurationSecs",
+          "documentation": "<p>The duration of time in seconds for which you want to retry sending the ACK.</p>"
         }
       },
       "documentation": "<p>Information about a Sidewalk router.</p>"
@@ -7381,6 +8030,11 @@
       },
       "documentation": "<p>Trace content for your wireless gateway and wireless device resources.</p>"
     },
+    "TransmissionInterval": {
+      "type": "integer",
+      "max": 604800,
+      "min": 1
+    },
     "TransmitMode": {
       "type": "integer",
       "max": 1,
@@ -7502,12 +8156,26 @@
         "ConnectionStatus": {
           "shape": "ConnectionStatusResourceTypeEventConfiguration",
           "documentation": "<p>Connection status resource type event configuration object for enabling and disabling wireless gateway topic.</p>"
+        },
+        "MessageDeliveryStatus": {
+          "shape": "MessageDeliveryStatusResourceTypeEventConfiguration",
+          "documentation": "<p>Message delivery status resource type event configuration object for enabling and disabling wireless device topic.</p>"
         }
       }
     },
     "UpdateEventConfigurationByResourceTypesResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateFPorts": {
+      "type": "structure",
+      "members": {
+        "Positioning": {
+          "shape": "Positioning",
+          "documentation": "<p>Positioning FPorts for the ClockSync, Stream, and GNSS functions.</p>"
+        }
+      },
+      "documentation": "<p>Object for updating the FPorts information.</p>"
     },
     "UpdateFuotaTaskRequest": {
       "type": "structure",
@@ -7654,6 +8322,36 @@
       "type": "structure",
       "members": {}
     },
+    "UpdatePositionRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceIdentifier",
+        "ResourceType",
+        "Position"
+      ],
+      "members": {
+        "ResourceIdentifier": {
+          "shape": "PositionResourceIdentifier",
+          "documentation": "<p>Resource identifier of the resource for which position is updated.</p>",
+          "location": "uri",
+          "locationName": "ResourceIdentifier"
+        },
+        "ResourceType": {
+          "shape": "PositionResourceType",
+          "documentation": "<p>Resource type of the resource for which position is updated.</p>",
+          "location": "querystring",
+          "locationName": "resourceType"
+        },
+        "Position": {
+          "shape": "PositionCoordinate",
+          "documentation": "<p>The position information of the resource.</p>"
+        }
+      }
+    },
+    "UpdatePositionResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateResourceEventConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -7675,25 +8373,29 @@
         },
         "PartnerType": {
           "shape": "EventNotificationPartnerType",
-          "documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId</p>",
+          "documentation": "<p>Partner type of the resource if the identifier type is <code>PartnerAccountId</code> </p>",
           "location": "querystring",
           "locationName": "partnerType"
         },
         "DeviceRegistrationState": {
           "shape": "DeviceRegistrationStateEventConfiguration",
-          "documentation": "<p>Event configuration for the device registration state event</p>"
+          "documentation": "<p>Event configuration for the device registration state event.</p>"
         },
         "Proximity": {
           "shape": "ProximityEventConfiguration",
-          "documentation": "<p>Event configuration for the Proximity event</p>"
+          "documentation": "<p>Event configuration for the proximity event.</p>"
         },
         "Join": {
           "shape": "JoinEventConfiguration",
-          "documentation": "<p>Event configuration for the join event</p>"
+          "documentation": "<p>Event configuration for the join event.</p>"
         },
         "ConnectionStatus": {
           "shape": "ConnectionStatusEventConfiguration",
-          "documentation": "<p>Event configuration for the connection status event</p>"
+          "documentation": "<p>Event configuration for the connection status event.</p>"
+        },
+        "MessageDeliveryStatus": {
+          "shape": "MessageDeliveryStatusEventConfiguration",
+          "documentation": "<p>Event configuration for the message delivery status event.</p>"
         }
       }
     },
@@ -7808,6 +8510,10 @@
       },
       "documentation": "<p>UpdateWirelessGatewayTaskEntry object.</p>"
     },
+    "VerticalAccuracy": {
+      "type": "float",
+      "min": 0
+    },
     "WirelessDeviceArn": {
       "type": "string"
     },
@@ -7847,7 +8553,7 @@
     },
     "WirelessDeviceFrameInfo": {
       "type": "string",
-      "documentation": "<p>FrameInfo of your wireless device resources for the trace content. Use FrameInfo to debug the communication between your LoRaWAN end devices and the network server.</p>",
+      "documentation": "<p> <code>FrameInfo</code> of your wireless device resources for the trace content. Use FrameInfo to debug the communication between your LoRaWAN end devices and the network server.</p>",
       "enum": [
         "ENABLED",
         "DISABLED"

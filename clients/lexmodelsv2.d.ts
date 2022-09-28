@@ -452,6 +452,14 @@ declare class LexModelsV2 extends Service {
    */
   startImport(callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
   /**
+   * Stop an already running Bot Recommendation request.
+   */
+  stopBotRecommendation(params: LexModelsV2.Types.StopBotRecommendationRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StopBotRecommendationResponse) => void): Request<LexModelsV2.Types.StopBotRecommendationResponse, AWSError>;
+  /**
+   * Stop an already running Bot Recommendation request.
+   */
+  stopBotRecommendation(callback?: (err: AWSError, data: LexModelsV2.Types.StopBotRecommendationResponse) => void): Request<LexModelsV2.Types.StopBotRecommendationResponse, AWSError>;
+  /**
    * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
    */
   tagResource(params: LexModelsV2.Types.TagResourceRequest, callback?: (err: AWSError, data: LexModelsV2.Types.TagResourceResponse) => void): Request<LexModelsV2.Types.TagResourceResponse, AWSError>;
@@ -602,6 +610,16 @@ declare namespace LexModelsV2 {
     containsDataFromDeletedResources?: BoxedBoolean;
   }
   export type AggregatedUtterancesSummaryList = AggregatedUtterancesSummary[];
+  export interface AllowedInputTypes {
+    /**
+     * Indicates whether audio input is allowed.
+     */
+    allowAudioInput: BoxedBoolean;
+    /**
+     * Indicates whether DTMF input is allowed.
+     */
+    allowDTMFInput: BoxedBoolean;
+  }
   export type AmazonResourceName = string;
   export interface AssociatedTranscript {
     /**
@@ -624,6 +642,20 @@ declare namespace LexModelsV2 {
   export type AssociatedTranscriptList = AssociatedTranscript[];
   export type AttachmentTitle = string;
   export type AttachmentUrl = string;
+  export interface AudioAndDTMFInputSpecification {
+    /**
+     * Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
+     */
+    startTimeoutMs: TimeInMilliSeconds;
+    /**
+     * Specifies the settings on audio input.
+     */
+    audioSpecification?: AudioSpecification;
+    /**
+     * Specifies the settings on DTMF input.
+     */
+    dtmfSpecification?: DTMFSpecification;
+  }
   export interface AudioLogDestination {
     /**
      * The Amazon S3 bucket where the audio log files are stored. The IAM role specified in the roleArn parameter of the CreateBot operation must have permission to write to this bucket.
@@ -639,6 +671,16 @@ declare namespace LexModelsV2 {
   }
   export type AudioLogSettingsList = AudioLogSetting[];
   export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string;
+  export interface AudioSpecification {
+    /**
+     * Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
+     */
+    maxLengthMs: TimeInMilliSeconds;
+    /**
+     * Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
+     */
+    endTimeoutMs: TimeInMilliSeconds;
+  }
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
     /**
@@ -874,7 +916,7 @@ declare namespace LexModelsV2 {
      */
     statistics?: BotRecommendationResultStatistics;
   }
-  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|string;
+  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|"Stopping"|"Stopped"|string;
   export interface BotRecommendationSummary {
     /**
      * The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field. 
@@ -1087,11 +1129,54 @@ declare namespace LexModelsV2 {
   export interface CodeHookSpecification {
     lambdaCodeHook: LambdaCodeHook;
   }
+  export interface CompositeSlotTypeSetting {
+    /**
+     * Subslots in the composite slot.
+     */
+    subSlots?: SubSlotTypeList;
+  }
+  export interface Condition {
+    /**
+     * The expression string that is evaluated. 
+     */
+    expressionString: ConditionExpression;
+  }
+  export type ConditionExpression = string;
   export type ConditionKey = string;
   export type ConditionKeyValueMap = {[key: string]: ConditionValue};
   export type ConditionMap = {[key: string]: ConditionKeyValueMap};
   export type ConditionOperator = string;
   export type ConditionValue = string;
+  export interface ConditionalBranch {
+    /**
+     * The name of the branch. 
+     */
+    name: Name;
+    /**
+     * Contains the expression to evaluate. If the condition is true, the branch's actions are taken.
+     */
+    condition: Condition;
+    /**
+     * The next step in the conversation.
+     */
+    nextStep: DialogState;
+    response?: ResponseSpecification;
+  }
+  export type ConditionalBranches = ConditionalBranch[];
+  export interface ConditionalSpecification {
+    /**
+     * Determines whether a conditional branch is active. When active is false, the conditions are not evaluated.
+     */
+    active: BoxedBoolean;
+    /**
+     * A list of conditional branches. A conditional branch is made up of a condition, a response and a next step. The response and next step are executed when the condition is true.
+     */
+    conditionalBranches: ConditionalBranches;
+    /**
+     * The conditional branch that should be followed when the conditions for other branches are not satisfied. A conditional branch is made up of a condition, a response and a next step.
+     */
+    defaultBranch: DefaultConditionalBranch;
+  }
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
@@ -1449,6 +1534,10 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
+    /**
+     * Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface CreateIntentResponse {
     /**
@@ -1515,6 +1604,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the intent was created.
      */
     creationDateTime?: Timestamp;
+    /**
+     * Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface CreateResourcePolicyRequest {
     /**
@@ -1617,6 +1710,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException.  If the multipleValuesSetting is not set, the default value is false.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface CreateSlotResponse {
     /**
@@ -1667,6 +1764,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot returns multiple values in one response.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface CreateSlotTypeRequest {
     /**
@@ -1705,6 +1806,10 @@ declare namespace LexModelsV2 {
      * Sets the type of external information used to create the slot type.
      */
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export interface CreateSlotTypeResponse {
     /**
@@ -1751,6 +1856,10 @@ declare namespace LexModelsV2 {
      * The type of external information used to create the slot type.
      */
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export interface CreateUploadUrlRequest {
   }
@@ -1800,6 +1909,25 @@ declare namespace LexModelsV2 {
     localeId: LocaleId;
   }
   export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string;
+  export type DTMFCharacter = string;
+  export interface DTMFSpecification {
+    /**
+     * The maximum number of DTMF digits allowed in an utterance.
+     */
+    maxLength: MaxUtteranceDigits;
+    /**
+     * How long the bot should wait after the last DTMF character input before assuming that the input has concluded.
+     */
+    endTimeoutMs: TimeInMilliSeconds;
+    /**
+     * The DTMF character that clears the accumulated DTMF digits and immediately ends the input.
+     */
+    deletionCharacter: DTMFCharacter;
+    /**
+     * The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.
+     */
+    endCharacter: DTMFCharacter;
+  }
   export interface DataPrivacy {
     /**
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ.
@@ -1815,6 +1943,13 @@ declare namespace LexModelsV2 {
      * A timestamp indicating the end date for the date range filter.
      */
     endDateTime: Timestamp;
+  }
+  export interface DefaultConditionalBranch {
+    /**
+     * The next step in the conversation.
+     */
+    nextStep?: DialogState;
+    response?: ResponseSpecification;
   }
   export interface DeleteBotAliasRequest {
     /**
@@ -2622,6 +2757,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the intent was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * 
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface DescribeResourcePolicyRequest {
     /**
@@ -2718,6 +2857,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot accepts multiple values in a single utterance. If the multipleValuesSetting is not set, the default value is false.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface DescribeSlotTypeRequest {
     /**
@@ -2783,16 +2926,71 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export type Description = string;
+  export interface DialogAction {
+    /**
+     * The action that the bot should execute. 
+     */
+    type: DialogActionType;
+    /**
+     * If the dialog action is ElicitSlot, defines the slot to elicit from the user.
+     */
+    slotToElicit?: Name;
+    /**
+     * When true the next message for the intent is not used.
+     */
+    suppressNextMessage?: BoxedBoolean;
+  }
+  export type DialogActionType = "ElicitIntent"|"StartIntent"|"ElicitSlot"|"EvaluateConditional"|"InvokeDialogCodeHook"|"ConfirmIntent"|"FulfillIntent"|"CloseIntent"|"EndConversation"|string;
+  export interface DialogCodeHookInvocationSetting {
+    /**
+     * Indicates whether a Lambda function should be invoked for the dialog.
+     */
+    enableCodeHookInvocation: BoxedBoolean;
+    /**
+     * Determines whether a dialog code hook is used when the intent is activated.
+     */
+    active: BoxedBoolean;
+    /**
+     * A label that indicates the dialog step from which the dialog code hook is happening.
+     */
+    invocationLabel?: Name;
+    /**
+     * Contains the responses and actions that Amazon Lex takes after the Lambda function is complete.
+     */
+    postCodeHookSpecification: PostDialogCodeHookInvocationSpecification;
+  }
   export interface DialogCodeHookSettings {
     /**
      * Enables the dialog code hook so that it processes user requests.
      */
     enabled: Boolean;
   }
+  export interface DialogState {
+    dialogAction?: DialogAction;
+    intent?: IntentOverride;
+    /**
+     * Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex and a client application.
+     */
+    sessionAttributes?: StringMap;
+  }
   export type DraftBotVersion = string;
   export type Effect = "Allow"|"Deny"|string;
+  export interface ElicitationCodeHookInvocationSetting {
+    /**
+     * Indicates whether a Lambda function should be invoked for the dialog.
+     */
+    enableCodeHookInvocation: BoxedBoolean;
+    /**
+     * A label that indicates the dialog step from which the dialog code hook is happening.
+     */
+    invocationLabel?: Name;
+  }
   export interface EncryptionSetting {
     /**
      * The KMS key ARN used to encrypt the metadata associated with the bot recommendation.
@@ -2901,6 +3099,10 @@ declare namespace LexModelsV2 {
      * Provides settings for update messages sent to the user for long-running Lambda fulfillment functions. Fulfillment updates can be used only with streaming conversations.
      */
     fulfillmentUpdatesSpecification?: FulfillmentUpdatesSpecification;
+    /**
+     * Determines whether the fulfillment code hook is used. When active is false, the code hook doesn't run.
+     */
+    active?: BoxedBoolean;
   }
   export type FulfillmentStartResponseDelay = number;
   export interface FulfillmentStartResponseSpecification {
@@ -3070,6 +3272,15 @@ declare namespace LexModelsV2 {
   }
   export type ImportSummaryList = ImportSummary[];
   export type ImportedResourceId = string;
+  export interface InitialResponseSetting {
+    initialResponse?: ResponseSpecification;
+    /**
+     * The next step in the conversation.
+     */
+    nextStep?: DialogState;
+    conditional?: ConditionalSpecification;
+    codeHook?: DialogCodeHookInvocationSetting;
+  }
   export interface InputContext {
     /**
      * The name of the context.
@@ -3081,11 +3292,19 @@ declare namespace LexModelsV2 {
     /**
      * The response that Amazon Lex sends to the user when the intent is complete.
      */
-    closingResponse: ResponseSpecification;
+    closingResponse?: ResponseSpecification;
     /**
      * Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
+    /**
+     * Specifies the next step that the bot executes after playing the intent's closing response.
+     */
+    nextStep?: DialogState;
+    /**
+     * A list of conditional branches associated with the intent's closing response. These branches are executed when the nextStep attribute is set to EvalutateConditional.
+     */
+    conditional?: ConditionalSpecification;
   }
   export interface IntentConfirmationSetting {
     /**
@@ -3095,11 +3314,42 @@ declare namespace LexModelsV2 {
     /**
      * When the user answers "no" to the question defined in promptSpecification, Amazon Lex responds with this response to acknowledge that the intent was canceled. 
      */
-    declinationResponse: ResponseSpecification;
+    declinationResponse?: ResponseSpecification;
     /**
      * Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent. If the active field isn't specified, the default is true.
      */
     active?: BoxedBoolean;
+    confirmationResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot executes when the customer confirms the intent.
+     */
+    confirmationNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the intent is closed.
+     */
+    confirmationConditional?: ConditionalSpecification;
+    /**
+     * Specifies the next step that the bot executes when the customer declines the intent.
+     */
+    declinationNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the intent is declined.
+     */
+    declinationConditional?: ConditionalSpecification;
+    failureResponse?: ResponseSpecification;
+    /**
+     * The next step to take in the conversation if the confirmation step fails.
+     */
+    failureNextStep?: DialogState;
+    failureConditional?: ConditionalSpecification;
+    /**
+     * The DialogCodeHookInvocationSetting object associated with intent's confirmation step. The dialog code hook is triggered based on these invocation settings when the confirmation next step or declination next step or failure next step is InvokeDialogCodeHook. 
+     */
+    codeHook?: DialogCodeHookInvocationSetting;
+    /**
+     * The DialogCodeHookInvocationSetting used when the code hook is invoked during confirmation prompt retries.
+     */
+    elicitationCodeHook?: ElicitationCodeHookInvocationSetting;
   }
   export interface IntentFilter {
     /**
@@ -3118,6 +3368,16 @@ declare namespace LexModelsV2 {
   export type IntentFilterName = "IntentName"|string;
   export type IntentFilterOperator = "CO"|"EQ"|string;
   export type IntentFilters = IntentFilter[];
+  export interface IntentOverride {
+    /**
+     * The name of the intent. Only required when you're switching intents.
+     */
+    name?: Name;
+    /**
+     * A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren't overridden.,
+     */
+    slots?: SlotValueOverrideMap;
+  }
   export type IntentSignature = string;
   export type IntentSortAttribute = "IntentName"|"LastUpdatedDateTime"|string;
   export interface IntentSortBy {
@@ -3856,6 +4116,7 @@ declare namespace LexModelsV2 {
   export type LocaleName = string;
   export type LogPrefix = string;
   export type MaxResults = number;
+  export type MaxUtteranceDigits = number;
   export type MergeStrategy = "Overwrite"|"FailOnConflict"|"Append"|string;
   export interface Message {
     /**
@@ -3886,6 +4147,7 @@ declare namespace LexModelsV2 {
     variations?: MessageVariationsList;
   }
   export type MessageGroupsList = MessageGroup[];
+  export type MessageSelectionStrategy = "Random"|"Ordered"|string;
   export type MessageVariationsList = Message[];
   export type MissedCount = number;
   export interface MultipleValuesSetting {
@@ -3897,6 +4159,7 @@ declare namespace LexModelsV2 {
   export type Name = string;
   export type NextIndex = number;
   export type NextToken = string;
+  export type NonEmptyString = string;
   export type NumericalBotVersion = string;
   export interface ObfuscationSetting {
     /**
@@ -3938,10 +4201,63 @@ declare namespace LexModelsV2 {
   }
   export type PlainTextMessageValue = string;
   export type Policy = string;
+  export interface PostDialogCodeHookInvocationSpecification {
+    successResponse?: ResponseSpecification;
+    /**
+     * Specifics the next step the bot runs after the dialog code hook finishes successfully. 
+     */
+    successNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the dialog code hook finishes successfully.
+     */
+    successConditional?: ConditionalSpecification;
+    failureResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step the bot runs after the dialog code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the dialog code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureConditional?: ConditionalSpecification;
+    timeoutResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot runs when the code hook times out.
+     */
+    timeoutNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate if the code hook times out.
+     */
+    timeoutConditional?: ConditionalSpecification;
+  }
   export interface PostFulfillmentStatusSpecification {
     successResponse?: ResponseSpecification;
     failureResponse?: ResponseSpecification;
     timeoutResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step in the conversation that Amazon Lex invokes when the fulfillment code hook completes successfully.
+     */
+    successNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the fulfillment code hook finishes successfully.
+     */
+    successConditional?: ConditionalSpecification;
+    /**
+     * Specifies the next step the bot runs after the fulfillment code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the fulfillment code hook throws an exception or returns with the State field of the Intent object set to Failed.
+     */
+    failureConditional?: ConditionalSpecification;
+    /**
+     * Specifies the next step that the bot runs when the fulfillment code hook times out.
+     */
+    timeoutNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate if the fulfillment code hook times out.
+     */
+    timeoutConditional?: ConditionalSpecification;
   }
   export type PresignedS3Url = string;
   export interface Principal {
@@ -3957,6 +4273,26 @@ declare namespace LexModelsV2 {
   export type PrincipalArn = string;
   export type PrincipalList = Principal[];
   export type PriorityValue = number;
+  export type PromptAttempt = "Initial"|"Retry1"|"Retry2"|"Retry3"|"Retry4"|"Retry5"|string;
+  export interface PromptAttemptSpecification {
+    /**
+     * Indicates whether the user can interrupt a speech prompt attempt from the bot.
+     */
+    allowInterrupt?: BoxedBoolean;
+    /**
+     * Indicates the allowed input types of the prompt attempt.
+     */
+    allowedInputTypes: AllowedInputTypes;
+    /**
+     * Specifies the settings on audio and DTMF input.
+     */
+    audioAndDTMFInputSpecification?: AudioAndDTMFInputSpecification;
+    /**
+     * Specifies the settings on text input.
+     */
+    textInputSpecification?: TextInputSpecification;
+  }
+  export type PromptAttemptsSpecificationMap = {[key: string]: PromptAttemptSpecification};
   export type PromptMaxRetries = number;
   export interface PromptSpecification {
     /**
@@ -3971,6 +4307,14 @@ declare namespace LexModelsV2 {
      * Indicates whether the user can interrupt a speech prompt from the bot.
      */
     allowInterrupt?: BoxedBoolean;
+    /**
+     * Indicates how a message is selected from a message group among retries.
+     */
+    messageSelectionStrategy?: MessageSelectionStrategy;
+    /**
+     * Specifies the advanced settings on each attempt of the prompt.
+     */
+    promptAttemptsSpecification?: PromptAttemptsSpecificationMap;
   }
   export type QueryFilterString = string;
   export type RecommendedAction = string;
@@ -4149,6 +4493,34 @@ declare namespace LexModelsV2 {
   export type SessionId = string;
   export type SessionTTL = number;
   export type SkipResourceInUseCheck = boolean;
+  export interface SlotCaptureSetting {
+    captureResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot runs when the slot value is captured before the code hook times out.
+     */
+    captureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate after the slot value is captured.
+     */
+    captureConditional?: ConditionalSpecification;
+    failureResponse?: ResponseSpecification;
+    /**
+     * Specifies the next step that the bot runs when the slot value code is not recognized.
+     */
+    failureNextStep?: DialogState;
+    /**
+     * A list of conditional branches to evaluate when the slot value isn't captured.
+     */
+    failureConditional?: ConditionalSpecification;
+    /**
+     * Code hook called after Amazon Lex successfully captures a slot value.
+     */
+    codeHook?: DialogCodeHookInvocationSetting;
+    /**
+     * Code hook called when Amazon Lex doesn't capture a slot value.
+     */
+    elicitationCodeHook?: ElicitationCodeHookInvocationSetting;
+  }
   export type SlotConstraint = "Required"|"Optional"|string;
   export interface SlotDefaultValue {
     /**
@@ -4192,6 +4564,7 @@ declare namespace LexModelsV2 {
      */
     slotId: Id;
   }
+  export type SlotShape = "Scalar"|"List"|string;
   export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime"|string;
   export interface SlotSortBy {
     /**
@@ -4234,7 +4607,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type SlotSummaryList = SlotSummary[];
-  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|string;
+  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|"Composite"|string;
   export interface SlotTypeFilter {
     /**
      * The name of the field to use for filtering.
@@ -4308,6 +4681,12 @@ declare namespace LexModelsV2 {
     synonyms?: SynonymList;
   }
   export type SlotTypeValues = SlotTypeValue[];
+  export interface SlotValue {
+    /**
+     * The value that Amazon Lex determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex choose the first value in the resolvedValues list.
+     */
+    interpretedValue?: NonEmptyString;
+  }
   export interface SlotValueElicitationSetting {
     /**
      * A list of default values for a slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, session attributes, and defined values.
@@ -4326,14 +4705,33 @@ declare namespace LexModelsV2 {
      */
     sampleUtterances?: SampleUtterancesList;
     waitAndContinueSpecification?: WaitAndContinueSpecification;
+    /**
+     * Specifies the settings that Amazon Lex uses when a slot value is successfully entered by a user.
+     */
+    slotCaptureSetting?: SlotCaptureSetting;
   }
+  export interface SlotValueOverride {
+    /**
+     * When the shape value is List, it indicates that the values field contains a list of slot values. When the value is Scalar, it indicates that the value field contains a single value.
+     */
+    shape?: SlotShape;
+    /**
+     * The current value of the slot.
+     */
+    value?: SlotValue;
+    /**
+     * A list of one or more values that the user provided for the slot. For example, for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple."
+     */
+    values?: SlotValues;
+  }
+  export type SlotValueOverrideMap = {[key: string]: SlotValueOverride};
   export interface SlotValueRegexFilter {
     /**
      * A regular expression used to validate the value of a slot.  Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:    A-Z, a-z   0-9   Unicode characters ("\ u&lt;Unicode&gt;")    Represent Unicode characters with four digits, for example "\u0041" or "\u005A".   The following regular expression operators are not supported:    Infinite repeaters: *, +, or {x,} with no upper bound.   Wild card (.)  
      */
     pattern: RegexPattern;
   }
-  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|string;
+  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation"|string;
   export interface SlotValueSelectionSetting {
     /**
      * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:   OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.   TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is OriginalValue. 
@@ -4348,7 +4746,18 @@ declare namespace LexModelsV2 {
      */
     advancedRecognitionSetting?: AdvancedRecognitionSetting;
   }
+  export type SlotValues = SlotValueOverride[];
   export type SortOrder = "Ascending"|"Descending"|string;
+  export interface Specifications {
+    /**
+     * The unique identifier assigned to the slot type.
+     */
+    slotTypeId: BuiltInOrCustomSlotTypeId;
+    /**
+     * Specifies the elicitation setting details for constituent sub slots of a composite slot.
+     */
+    valueElicitationSetting: SubSlotValueElicitationSetting;
+  }
   export interface StartBotRecommendationRequest {
     /**
      * The unique identifier of the bot containing the bot recommendation.
@@ -4465,6 +4874,80 @@ declare namespace LexModelsV2 {
     allowInterrupt?: BoxedBoolean;
   }
   export type StillWaitingResponseTimeout = number;
+  export interface StopBotRecommendationRequest {
+    /**
+     * The unique identifier of the bot containing the bot recommendation to be stopped.
+     */
+    botId: Id;
+    /**
+     * The version of the bot containing the bot recommendation.
+     */
+    botVersion: DraftBotVersion;
+    /**
+     * The identifier of the language and locale of the bot recommendation to stop. The string must match one of the supported locales. For more information, see Supported languages 
+     */
+    localeId: LocaleId;
+    /**
+     * The unique identifier of the bot recommendation to be stopped.
+     */
+    botRecommendationId: Id;
+  }
+  export interface StopBotRecommendationResponse {
+    /**
+     * The unique identifier of the bot containing the bot recommendation that is being stopped.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot containing the recommendation that is being stopped.
+     */
+    botVersion?: DraftBotVersion;
+    /**
+     * The identifier of the language and locale of the bot response to stop. The string must match one of the supported locales. For more information, see Supported languages 
+     */
+    localeId?: LocaleId;
+    /**
+     * The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field.
+     */
+    botRecommendationStatus?: BotRecommendationStatus;
+    /**
+     * The unique identifier of the bot recommendation that is being stopped.
+     */
+    botRecommendationId?: Id;
+  }
+  export type String = string;
+  export type StringMap = {[key: string]: String};
+  export type SubSlotExpression = string;
+  export interface SubSlotSetting {
+    /**
+     * The expression text for defining the constituent sub slots in the composite slot using logical AND and OR operators.
+     */
+    expression?: SubSlotExpression;
+    /**
+     * Specifications for the constituent sub slots of a composite slot.
+     */
+    slotSpecifications?: SubSlotSpecificationMap;
+  }
+  export type SubSlotSpecificationMap = {[key: string]: Specifications};
+  export interface SubSlotTypeComposition {
+    /**
+     * Name of a constituent sub slot inside a composite slot.
+     */
+    name: Name;
+    /**
+     * The unique identifier assigned to a slot type. This refers to either a built-in slot type or the unique slotTypeId of a custom slot type.
+     */
+    slotTypeId: BuiltInOrCustomSlotTypeId;
+  }
+  export type SubSlotTypeList = SubSlotTypeComposition[];
+  export interface SubSlotValueElicitationSetting {
+    defaultValueSpecification?: SlotDefaultValueSpecification;
+    promptSpecification: PromptSpecification;
+    /**
+     * If you know a specific pattern that users might respond to an Amazon Lex request for a sub slot value, you can provide those utterances to improve accuracy. This is optional. In most cases Amazon Lex is capable of understanding user utterances. This is similar to SampleUtterances for slots.
+     */
+    sampleUtterances?: SampleUtterancesList;
+    waitAndContinueSpecification?: WaitAndContinueSpecification;
+  }
   export type SynonymList = SampleValue[];
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -4482,6 +4965,12 @@ declare namespace LexModelsV2 {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TextInputSpecification {
+    /**
+     * Time for which a bot waits before re-prompting a customer for text input.
+     */
+    startTimeoutMs: TimeInMilliSeconds;
+  }
   export interface TextLogDestination {
     /**
      * Defines the Amazon CloudWatch Logs log group where text and metadata logs are delivered.
@@ -4497,6 +4986,7 @@ declare namespace LexModelsV2 {
   }
   export type TextLogSettingsList = TextLogSetting[];
   export type TimeDimension = "Hours"|"Days"|"Weeks"|string;
+  export type TimeInMilliSeconds = number;
   export type TimeValue = number;
   export type Timestamp = Date;
   export type Transcript = string;
@@ -4900,6 +5390,10 @@ declare namespace LexModelsV2 {
      * The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
+    /**
+     * 
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface UpdateIntentResponse {
     /**
@@ -4974,6 +5468,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the last time that the intent was modified.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * 
+     */
+    initialResponseSetting?: InitialResponseSetting;
   }
   export interface UpdateResourcePolicyRequest {
     /**
@@ -5044,6 +5542,10 @@ declare namespace LexModelsV2 {
      * Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the multipleValuesSetting is not set, the default value is false.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface UpdateSlotResponse {
     /**
@@ -5098,6 +5600,10 @@ declare namespace LexModelsV2 {
      * Indicates whether the slot accepts multiple values in one response.
      */
     multipleValuesSetting?: MultipleValuesSetting;
+    /**
+     * Specifications for the constituent sub slots and the expression for the composite slot.
+     */
+    subSlotSetting?: SubSlotSetting;
   }
   export interface UpdateSlotTypeRequest {
     /**
@@ -5137,6 +5643,10 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export interface UpdateSlotTypeResponse {
     /**
@@ -5184,6 +5694,10 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     externalSourceSetting?: ExternalSourceSetting;
+    /**
+     * Specifications for a composite slot type.
+     */
+    compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
   export type Utterance = string;
   export interface UtteranceAggregationDuration {

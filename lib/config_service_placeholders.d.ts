@@ -306,6 +306,17 @@ export abstract class ConfigurationServicePlaceholders {
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
   ivschat?: AWS.Ivschat.Types.ClientConfiguration;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
+  emrserverless?: AWS.EMRServerless.Types.ClientConfiguration;
+  m2?: AWS.M2.Types.ClientConfiguration;
+  connectcampaigns?: AWS.ConnectCampaigns.Types.ClientConfiguration;
+  redshiftserverless?: AWS.RedshiftServerless.Types.ClientConfiguration;
+  rolesanywhere?: AWS.RolesAnywhere.Types.ClientConfiguration;
+  licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.ClientConfiguration;
+  backupstorage?: AWS.BackupStorage.Types.ClientConfiguration;
+  privatenetworks?: AWS.PrivateNetworks.Types.ClientConfiguration;
+  supportapp?: AWS.SupportApp.Types.ClientConfiguration;
+  controltower?: AWS.ControlTower.Types.ClientConfiguration;
+  iotfleetwise?: AWS.IoTFleetWise.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -614,4 +625,15 @@ export interface ConfigurationServiceApiVersions {
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
   ivschat?: AWS.Ivschat.Types.apiVersion;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;
+  emrserverless?: AWS.EMRServerless.Types.apiVersion;
+  m2?: AWS.M2.Types.apiVersion;
+  connectcampaigns?: AWS.ConnectCampaigns.Types.apiVersion;
+  redshiftserverless?: AWS.RedshiftServerless.Types.apiVersion;
+  rolesanywhere?: AWS.RolesAnywhere.Types.apiVersion;
+  licensemanagerusersubscriptions?: AWS.LicenseManagerUserSubscriptions.Types.apiVersion;
+  backupstorage?: AWS.BackupStorage.Types.apiVersion;
+  privatenetworks?: AWS.PrivateNetworks.Types.apiVersion;
+  supportapp?: AWS.SupportApp.Types.apiVersion;
+  controltower?: AWS.ControlTower.Types.apiVersion;
+  iotfleetwise?: AWS.IoTFleetWise.Types.apiVersion;
 }

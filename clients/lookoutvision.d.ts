@@ -93,11 +93,11 @@ declare class LookoutVision extends Service {
    */
   describeProject(callback?: (err: AWSError, data: LookoutVision.Types.DescribeProjectResponse) => void): Request<LookoutVision.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.   This operation requires permissions to perform the lookoutvision:DetectAnomalies operation.
+   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction. If the model is an image segmentation model, the response also includes segmentation information for each type of anomaly found in the image.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.   For more information, see Detecting anomalies in an image in the Amazon Lookout for Vision developer guide. This operation requires permissions to perform the lookoutvision:DetectAnomalies operation.
    */
   detectAnomalies(params: LookoutVision.Types.DetectAnomaliesRequest, callback?: (err: AWSError, data: LookoutVision.Types.DetectAnomaliesResponse) => void): Request<LookoutVision.Types.DetectAnomaliesResponse, AWSError>;
   /**
-   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.   This operation requires permissions to perform the lookoutvision:DetectAnomalies operation.
+   * Detects anomalies in an image that you supply.  The response from DetectAnomalies includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction. If the model is an image segmentation model, the response also includes segmentation information for each type of anomaly found in the image.  Before calling DetectAnomalies, you must first start your model with the StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the StopModel operation to stop your model.   For more information, see Detecting anomalies in an image in the Amazon Lookout for Vision developer guide. This operation requires permissions to perform the lookoutvision:DetectAnomalies operation.
    */
   detectAnomalies(callback?: (err: AWSError, data: LookoutVision.Types.DetectAnomaliesResponse) => void): Request<LookoutVision.Types.DetectAnomaliesResponse, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class LookoutVision extends Service {
    */
   listModels(callback?: (err: AWSError, data: LookoutVision.Types.ListModelsResponse) => void): Request<LookoutVision.Types.ListModelsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
+   * Lists the Amazon Lookout for Vision projects in your AWS account that are in the AWS Region in which you call ListProjects. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(params: LookoutVision.Types.ListProjectsRequest, callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
-   * Lists the Amazon Lookout for Vision projects in your AWS account. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
+   * Lists the Amazon Lookout for Vision projects in your AWS account that are in the AWS Region in which you call ListProjects. The ListProjects operation is eventually consistent. Recent calls to CreateProject and DeleteProject might take a while to appear in the response from ListProjects. This operation requires permissions to perform the lookoutvision:ListProjects operation.
    */
   listProjects(callback?: (err: AWSError, data: LookoutVision.Types.ListProjectsResponse) => void): Request<LookoutVision.Types.ListProjectsResponse, AWSError>;
   /**
@@ -190,9 +190,23 @@ declare class LookoutVision extends Service {
   updateDatasetEntries(callback?: (err: AWSError, data: LookoutVision.Types.UpdateDatasetEntriesResponse) => void): Request<LookoutVision.Types.UpdateDatasetEntriesResponse, AWSError>;
 }
 declare namespace LookoutVision {
+  export interface Anomaly {
+    /**
+     * The name of an anomaly type found in an image. Name maps to an anomaly type in the training dataset, apart from the anomaly type background. The service automatically inserts the background anomaly type into the response from DetectAnomalies. 
+     */
+    Name?: AnomalyName;
+    /**
+     * Information about the pixel mask that covers an anomaly type.
+     */
+    PixelAnomaly?: PixelAnomaly;
+  }
   export type AnomalyClassFilter = string;
+  export type AnomalyList = Anomaly[];
+  export type AnomalyMask = Buffer|Uint8Array|Blob|string;
+  export type AnomalyName = string;
   export type Boolean = boolean;
   export type ClientToken = string;
+  export type Color = string;
   export type CompilerOptions = string;
   export type ComponentDescription = string;
   export type ComponentName = string;
@@ -499,18 +513,26 @@ declare namespace LookoutVision {
      */
     Source?: ImageSource;
     /**
-     * True if the image contains an anomaly, otherwise false.
+     * True if Amazon Lookout for Vision classifies the image as containing an anomaly, otherwise false.
      */
     IsAnomalous?: Boolean;
     /**
-     * The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.
+     * The confidence that Lookout for Vision has in the accuracy of the classification in IsAnomalous.
      */
     Confidence?: Float;
+    /**
+     * If the model is an image segmentation model, Anomalies contains a list of anomaly types found in the image. There is one entry for each type of anomaly found (even if multiple instances of an anomaly type exist on the image). The first element in the list is always an anomaly type representing the image background ('background') and shouldn't be considered an anomaly. Amazon Lookout for Vision automatically add the background anomaly type to the response, and you don't need to declare a background anomaly type in your dataset. If the list has one entry ('background'), no anomalies were found on the image.  An image classification model doesn't return an Anomalies list. 
+     */
+    Anomalies?: AnomalyList;
+    /**
+     * If the model is an image segmentation model, AnomalyMask contains pixel masks that covers all anomaly types found on the image. Each anomaly type has a different mask color. To map a color to an anomaly type, see the color field of the PixelAnomaly object. An image classification model doesn't return an Anomalies list. 
+     */
+    AnomalyMask?: AnomalyMask;
   }
   export type Float = number;
   export interface GreengrassConfiguration {
     /**
-     * Additional compiler options for the Greengrass component. Currently, only NVIDIA Graphics Processing Units (GPU) are supported. If you specify TargetPlatform, you must specify CompilerOptions. If you specify TargetDevice, don't specify CompilerOptions. For more information, see Compiler options in the Amazon Lookout for Vision Developer Guide. 
+     * Additional compiler options for the Greengrass component. Currently, only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are supported. If you specify TargetDevice, don't specify CompilerOptions. For more information, see Compiler options in the Amazon Lookout for Vision Developer Guide. 
      */
     CompilerOptions?: CompilerOptions;
     /**
@@ -759,6 +781,14 @@ declare namespace LookoutVision {
      * The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model during training.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The minimum number of inference units used by the model. For more information, see StartModel 
+     */
+    MinInferenceUnits?: InferenceUnits;
+    /**
+     * The maximum number of inference units Amazon Lookout for Vision uses to auto-scale the model. For more information, see StartModel.
+     */
+    MaxInferenceUnits?: InferenceUnits;
   }
   export type ModelDescriptionMessage = string;
   export type ModelHostingStatus = "STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|string;
@@ -931,6 +961,16 @@ declare namespace LookoutVision {
   }
   export type PageSize = number;
   export type PaginationToken = string;
+  export interface PixelAnomaly {
+    /**
+     * The percentage area of the image that the anomaly type covers.
+     */
+    TotalPercentageArea?: Float;
+    /**
+     * A hex color value for the mask that covers an anomaly type. Each anomaly type has a different mask color. The color maps to the color of the anomaly type used in the training dataset. 
+     */
+    Color?: Color;
+  }
   export type ProjectArn = string;
   export interface ProjectDescription {
     /**
@@ -1030,6 +1070,10 @@ declare namespace LookoutVision {
      * ClientToken is an idempotency token that ensures a call to StartModel completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from StartModel. In this case, safely retry your call to StartModel by using the same ClientToken parameter value.  If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple start requests. You'll need to provide your own value for other use cases.  An error occurs if the other input parameters are not the same as in the first request. Using a different value for ClientToken is considered a new call to StartModel. An idempotency token is active for 8 hours. 
      */
     ClientToken?: ClientToken;
+    /**
+     * The maximum number of inference units to use for auto-scaling the model. If you don't specify a value, Amazon Lookout for Vision doesn't auto-scale the model.
+     */
+    MaxInferenceUnits?: InferenceUnits;
   }
   export interface StartModelResponse {
     /**
@@ -1096,9 +1140,9 @@ declare namespace LookoutVision {
      */
     Arch: TargetPlatformArch;
     /**
-     * The target accelerator for the model. NVIDIA (Nvidia graphics processing unit) is the only accelerator that is currently supported. You must also specify the gpu-code, trt-ver, and cuda-ver compiler options. 
+     * The target accelerator for the model. Currently, Amazon Lookout for Vision only supports NVIDIA (Nvidia graphics processing unit) and CPU accelerators. If you specify NVIDIA as an accelerator, you must also specify the gpu-code, trt-ver, and cuda-ver compiler options. If you don't specify an accelerator, Lookout for Vision uses the CPU for compilation and we highly recommend that you use the GreengrassConfiguration$CompilerOptions field. For example, you can use the following compiler options for CPU:     mcpu: CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}     mattr: CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}   
      */
-    Accelerator: TargetPlatformAccelerator;
+    Accelerator?: TargetPlatformAccelerator;
   }
   export type TargetPlatformAccelerator = "NVIDIA"|string;
   export type TargetPlatformArch = "ARM64"|"X86_64"|string;

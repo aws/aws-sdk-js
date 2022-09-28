@@ -116,7 +116,7 @@ declare namespace MWAA {
     /**
      * An Airflow CLI login token.
      */
-    CliToken?: SyntheticCreateCliTokenResponseToken;
+    CliToken?: Token;
     /**
      * The Airflow web server hostname for the environment.
      */
@@ -126,9 +126,9 @@ declare namespace MWAA {
     /**
      * A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see Apache Airflow configuration options.
      */
-    AirflowConfigurationOptions?: SyntheticCreateEnvironmentInputAirflowConfigurationOptions;
+    AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: 1.10.12, 2.0.2. To learn more, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA).
+     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2. To learn more, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA).
      */
     AirflowVersion?: AirflowVersion;
     /**
@@ -184,7 +184,7 @@ declare namespace MWAA {
      */
     RequirementsS3Path?: RelativePath;
     /**
-     * The number of Apache Airflow schedulers to run in your environment. Valid values:   v2.0.2 - Accepts between 2 to 5. Defaults to 2.   v1.10.12 - Accepts 1.  
+     * The number of Apache Airflow schedulers to run in your environment. Valid values:   v2 - Accepts between 2 to 5. Defaults to 2.   v1 - Accepts 1.  
      */
     Schedulers?: Schedulers;
     /**
@@ -224,7 +224,7 @@ declare namespace MWAA {
     /**
      * An Airflow web server login token.
      */
-    WebToken?: SyntheticCreateWebLoginTokenResponseToken;
+    WebToken?: Token;
   }
   export type CreatedAt = Date;
   export interface DeleteEnvironmentInput {
@@ -253,7 +253,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2.
+     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, and 2.2.2.
      */
     AirflowVersion?: AirflowVersion;
     /**
@@ -576,10 +576,6 @@ declare namespace MWAA {
   export type String = string;
   export type SubnetId = string;
   export type SubnetList = SubnetId[];
-  export type SyntheticCreateCliTokenResponseToken = string;
-  export type SyntheticCreateEnvironmentInputAirflowConfigurationOptions = {[key: string]: ConfigValue};
-  export type SyntheticCreateWebLoginTokenResponseToken = string;
-  export type SyntheticUpdateEnvironmentInputAirflowConfigurationOptions = {[key: string]: ConfigValue};
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -597,6 +593,7 @@ declare namespace MWAA {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export type Token = string;
   export type Unit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
   export interface UntagResourceInput {
     /**
@@ -615,9 +612,9 @@ declare namespace MWAA {
     /**
      * A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see Apache Airflow configuration options.
      */
-    AirflowConfigurationOptions?: SyntheticUpdateEnvironmentInputAirflowConfigurationOptions;
+    AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: 1.10.12, 2.0.2.
+     * The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2.
      */
     AirflowVersion?: AirflowVersion;
     /**

@@ -1260,6 +1260,10 @@ declare namespace ElastiCache {
      * Specifies the destination, format and type of the logs. 
      */
     LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
+    /**
+     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.   Required: Only available when creating a cache cluster in an Amazon VPC using Memcached version 1.6.12 or later.
+     */
+    TransitEncryptionEnabled?: BooleanOptional;
   }
   export interface CreateCacheClusterResult {
     CacheCluster?: CacheCluster;
@@ -3275,6 +3279,10 @@ declare namespace ElastiCache {
      * Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes. For more information, see Data tiering.
      */
     DataTiering?: DataTieringStatus;
+    /**
+     *  If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions.  
+     */
+    AutoMinorVersionUpgrade?: Boolean;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];

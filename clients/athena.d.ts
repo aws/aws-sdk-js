@@ -20,6 +20,14 @@ declare class Athena extends Service {
    */
   batchGetNamedQuery(callback?: (err: AWSError, data: Athena.Types.BatchGetNamedQueryOutput) => void): Request<Athena.Types.BatchGetNamedQueryOutput, AWSError>;
   /**
+   * Returns the details of a single prepared statement or a list of up to 256 prepared statements for the array of prepared statement names that you provide. Requires you to have access to the workgroup to which the prepared statements belong. If a prepared statement cannot be retrieved for the name specified, the statement is listed in UnprocessedPreparedStatementNames.
+   */
+  batchGetPreparedStatement(params: Athena.Types.BatchGetPreparedStatementInput, callback?: (err: AWSError, data: Athena.Types.BatchGetPreparedStatementOutput) => void): Request<Athena.Types.BatchGetPreparedStatementOutput, AWSError>;
+  /**
+   * Returns the details of a single prepared statement or a list of up to 256 prepared statements for the array of prepared statement names that you provide. Requires you to have access to the workgroup to which the prepared statements belong. If a prepared statement cannot be retrieved for the name specified, the statement is listed in UnprocessedPreparedStatementNames.
+   */
+  batchGetPreparedStatement(callback?: (err: AWSError, data: Athena.Types.BatchGetPreparedStatementOutput) => void): Request<Athena.Types.BatchGetPreparedStatementOutput, AWSError>;
+  /**
    * Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use ListQueryExecutionsInput$WorkGroup. Query executions differ from named (saved) queries. Use BatchGetNamedQueryInput to get details about named queries.
    */
   batchGetQueryExecution(params: Athena.Types.BatchGetQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
@@ -140,6 +148,14 @@ declare class Athena extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+   */
+  getQueryRuntimeStatistics(params: Athena.Types.GetQueryRuntimeStatisticsInput, callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
+  /**
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+   */
+  getQueryRuntimeStatistics(callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
+  /**
    * Returns table metadata for the specified catalog, database, and table.
    */
   getTableMetadata(params: Athena.Types.GetTableMetadataInput, callback?: (err: AWSError, data: Athena.Types.GetTableMetadataOutput) => void): Request<Athena.Types.GetTableMetadataOutput, AWSError>;
@@ -188,11 +204,11 @@ declare class Athena extends Service {
    */
   listNamedQueries(callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
-   * Lists the prepared statements in the specfied workgroup.
+   * Lists the prepared statements in the specified workgroup.
    */
   listPreparedStatements(params: Athena.Types.ListPreparedStatementsInput, callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
   /**
-   * Lists the prepared statements in the specfied workgroup.
+   * Lists the prepared statements in the specified workgroup.
    */
   listPreparedStatements(callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
   /**
@@ -318,6 +334,7 @@ declare namespace Athena {
      */
     ErrorMessage?: String;
   }
+  export type AwsAccountId = string;
   export interface BatchGetNamedQueryInput {
     /**
      * An array of query IDs.
@@ -333,6 +350,26 @@ declare namespace Athena {
      * Information about provided query IDs.
      */
     UnprocessedNamedQueryIds?: UnprocessedNamedQueryIdList;
+  }
+  export interface BatchGetPreparedStatementInput {
+    /**
+     * A list of prepared statement names to return.
+     */
+    PreparedStatementNames: PreparedStatementNameList;
+    /**
+     * The name of the workgroup to which the prepared statements belong.
+     */
+    WorkGroup: WorkGroupName;
+  }
+  export interface BatchGetPreparedStatementOutput {
+    /**
+     * The list of prepared statements returned.
+     */
+    PreparedStatements?: PreparedStatementDetailsList;
+    /**
+     * A list of one or more prepared statements that were requested but could not be returned.
+     */
+    UnprocessedPreparedStatementNames?: UnprocessedPreparedStatementNameList;
   }
   export interface BatchGetQueryExecutionInput {
     /**
@@ -630,6 +667,8 @@ declare namespace Athena {
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export type ErrorType = number;
+  export type ExecutionParameter = string;
+  export type ExecutionParameters = ExecutionParameter[];
   export type ExpressionString = string;
   export interface GetDataCatalogInput {
     /**
@@ -726,6 +765,18 @@ declare namespace Athena {
      * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
+  }
+  export interface GetQueryRuntimeStatisticsInput {
+    /**
+     * The unique ID of the query execution.
+     */
+    QueryExecutionId: QueryExecutionId;
+  }
+  export interface GetQueryRuntimeStatisticsOutput {
+    /**
+     * Runtime statistics about the query execution.
+     */
+    QueryRuntimeStatistics?: QueryRuntimeStatistics;
   }
   export interface GetTableMetadataInput {
     /**
@@ -1040,6 +1091,8 @@ declare namespace Athena {
      */
     LastModifiedTime?: _Date;
   }
+  export type PreparedStatementDetailsList = PreparedStatement[];
+  export type PreparedStatementNameList = StatementName[];
   export interface PreparedStatementSummary {
     /**
      * The name of the prepared statement.
@@ -1088,6 +1141,10 @@ declare namespace Athena {
      * The engine version that executed the query.
      */
     EngineVersion?: EngineVersion;
+    /**
+     * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
+     */
+    ExecutionParameters?: ExecutionParameters;
   }
   export interface QueryExecutionContext {
     /**
@@ -1155,12 +1212,118 @@ declare namespace Athena {
      */
     AthenaError?: AthenaError;
   }
+  export interface QueryRuntimeStatistics {
+    Timeline?: QueryRuntimeStatisticsTimeline;
+    Rows?: QueryRuntimeStatisticsRows;
+    /**
+     * Stage statistics such as input and output rows and bytes, execution time, and stage state. This information also includes substages and the query stage plan.
+     */
+    OutputStage?: QueryStage;
+  }
+  export interface QueryRuntimeStatisticsRows {
+    /**
+     * The number of rows read to execute the query.
+     */
+    InputRows?: Long;
+    /**
+     * The number of bytes read to execute the query.
+     */
+    InputBytes?: Long;
+    /**
+     * The number of bytes returned by the query.
+     */
+    OutputBytes?: Long;
+    /**
+     * The number of rows returned by the query.
+     */
+    OutputRows?: Long;
+  }
+  export interface QueryRuntimeStatisticsTimeline {
+    /**
+     * The number of milliseconds that the query was in your query queue waiting for resources. Note that if transient errors occur, Athena might automatically add the query back to the queue.
+     */
+    QueryQueueTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that Athena took to plan the query processing flow. This includes the time spent retrieving table partitions from the data source. Note that because the query engine performs the query planning, query planning time is a subset of engine processing time.
+     */
+    QueryPlanningTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that the query took to execute.
+     */
+    EngineExecutionTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that Athena took to finalize and publish the query results after the query engine finished running the query.
+     */
+    ServiceProcessingTimeInMillis?: Long;
+    /**
+     * The number of milliseconds that Athena took to run the query.
+     */
+    TotalExecutionTimeInMillis?: Long;
+  }
+  export interface QueryStage {
+    /**
+     * The identifier for a stage.
+     */
+    StageId?: Long;
+    /**
+     * State of the stage after query execution.
+     */
+    State?: String;
+    /**
+     * The number of bytes output from the stage after execution.
+     */
+    OutputBytes?: Long;
+    /**
+     * The number of rows output from the stage after execution.
+     */
+    OutputRows?: Long;
+    /**
+     * The number of bytes input into the stage for execution.
+     */
+    InputBytes?: Long;
+    /**
+     * The number of rows input into the stage for execution.
+     */
+    InputRows?: Long;
+    /**
+     * Time taken to execute this stage.
+     */
+    ExecutionTime?: Long;
+    /**
+     * Stage plan information such as name, identifier, sub plans, and source stages.
+     */
+    QueryStagePlan?: QueryStagePlanNode;
+    /**
+     * List of sub query stages that form this stage execution plan.
+     */
+    SubStages?: QueryStages;
+  }
+  export interface QueryStagePlanNode {
+    /**
+     * Name of the query stage plan that describes the operation this stage is performing as part of query execution.
+     */
+    Name?: String;
+    /**
+     * Information about the operation this query stage plan node is performing.
+     */
+    Identifier?: String;
+    /**
+     * Stage plan information such as name, identifier, sub plans, and remote sources of child plan nodes/
+     */
+    Children?: QueryStagePlanNodes;
+    /**
+     * Source plan node IDs.
+     */
+    RemoteSources?: StringList;
+  }
+  export type QueryStagePlanNodes = QueryStagePlanNode[];
+  export type QueryStages = QueryStage[];
   export type QueryString = string;
   export interface ResultConfiguration {
     /**
      * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none of them is set, Athena issues an error that no output location is provided. For more information, see Query Results. If workgroup settings override client-side settings, then the query uses the settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
-    OutputLocation?: String;
+    OutputLocation?: ResultOutputLocation;
     /**
      * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE_KMS or CSE_KMS) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
@@ -1168,7 +1331,7 @@ declare namespace Athena {
     /**
      * The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to your specified output location. If the ExpectedBucketOwner Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ExpectedBucketOwner setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
-    ExpectedBucketOwner?: String;
+    ExpectedBucketOwner?: AwsAccountId;
     /**
      * Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the ACL configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. For more information, see WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
@@ -1178,7 +1341,7 @@ declare namespace Athena {
     /**
      * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Query Results If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
-    OutputLocation?: String;
+    OutputLocation?: ResultOutputLocation;
     /**
      * If set to "true", indicates that the previously-specified query results location (also known as a client-side setting) for queries in this workgroup should be ignored and set to null. If set to "false" or not set, and a value is present in the OutputLocation in ResultConfigurationUpdates (the client-side setting), the OutputLocation in the workgroup's ResultConfiguration will be updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
      */
@@ -1194,7 +1357,7 @@ declare namespace Athena {
     /**
      * The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to your specified output location. If the ExpectedBucketOwner Amazon Web Services account ID does not match the actual owner of the Amazon S3 bucket, the call fails with a permissions error. If workgroup settings override client-side settings, then the query uses the ExpectedBucketOwner setting that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
-    ExpectedBucketOwner?: String;
+    ExpectedBucketOwner?: AwsAccountId;
     /**
      * If set to "true", removes the Amazon Web Services account ID previously specified for ResultConfiguration$ExpectedBucketOwner. If set to "false" or not set, and a value is present in the ExpectedBucketOwner in ResultConfigurationUpdates (the client-side setting), the ExpectedBucketOwner in the workgroup's ResultConfiguration is updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
      */
@@ -1208,6 +1371,7 @@ declare namespace Athena {
      */
     RemoveAclConfiguration?: BoxedBoolean;
   }
+  export type ResultOutputLocation = string;
   export interface ResultSet {
     /**
      * The rows in the table.
@@ -1253,6 +1417,10 @@ declare namespace Athena {
      * The name of the workgroup in which the query is being started.
      */
     WorkGroup?: WorkGroupName;
+    /**
+     * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
+     */
+    ExecutionParameters?: ExecutionParameters;
   }
   export interface StartQueryExecutionOutput {
     /**
@@ -1271,6 +1439,7 @@ declare namespace Athena {
   export interface StopQueryExecutionOutput {
   }
   export type String = string;
+  export type StringList = String[];
   export interface TableMetadata {
     /**
      * The name of the table.
@@ -1347,6 +1516,21 @@ declare namespace Athena {
     ErrorMessage?: ErrorMessage;
   }
   export type UnprocessedNamedQueryIdList = UnprocessedNamedQueryId[];
+  export interface UnprocessedPreparedStatementName {
+    /**
+     * The name of a prepared statement that could not be returned due to an error.
+     */
+    StatementName?: StatementName;
+    /**
+     * The error code returned when the request for the prepared statement failed.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * The error message containing the reason why the prepared statement could not be returned. The following error messages are possible:    INVALID_INPUT - The name of the prepared statement that was provided is not valid (for example, the name is too long).    STATEMENT_NOT_FOUND - A prepared statement with the name provided could not be found.    UNAUTHORIZED - The requester does not have permission to access the workgroup that contains the prepared statement.  
+     */
+    ErrorMessage?: ErrorMessage;
+  }
+  export type UnprocessedPreparedStatementNameList = UnprocessedPreparedStatementName[];
   export interface UnprocessedQueryExecutionId {
     /**
      * The unique identifier of the query execution.

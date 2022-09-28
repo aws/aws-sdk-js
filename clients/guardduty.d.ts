@@ -12,6 +12,14 @@ declare class GuardDuty extends Service {
   constructor(options?: GuardDuty.Types.ClientConfiguration)
   config: Config & GuardDuty.Types.ClientConfiguration;
   /**
+   * Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.
+   */
+  acceptAdministratorInvitation(params: GuardDuty.Types.AcceptAdministratorInvitationRequest, callback?: (err: AWSError, data: GuardDuty.Types.AcceptAdministratorInvitationResponse) => void): Request<GuardDuty.Types.AcceptAdministratorInvitationResponse, AWSError>;
+  /**
+   * Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.
+   */
+  acceptAdministratorInvitation(callback?: (err: AWSError, data: GuardDuty.Types.AcceptAdministratorInvitationResponse) => void): Request<GuardDuty.Types.AcceptAdministratorInvitationResponse, AWSError>;
+  /**
    * Accepts the invitation to be monitored by a GuardDuty administrator account.
    */
   acceptInvitation(params: GuardDuty.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
@@ -148,6 +156,14 @@ declare class GuardDuty extends Service {
    */
   deleteThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.DeleteThreatIntelSetResponse) => void): Request<GuardDuty.Types.DeleteThreatIntelSetResponse, AWSError>;
   /**
+   * Returns a list of malware scans.
+   */
+  describeMalwareScans(params: GuardDuty.Types.DescribeMalwareScansRequest, callback?: (err: AWSError, data: GuardDuty.Types.DescribeMalwareScansResponse) => void): Request<GuardDuty.Types.DescribeMalwareScansResponse, AWSError>;
+  /**
+   * Returns a list of malware scans.
+   */
+  describeMalwareScans(callback?: (err: AWSError, data: GuardDuty.Types.DescribeMalwareScansResponse) => void): Request<GuardDuty.Types.DescribeMalwareScansResponse, AWSError>;
+  /**
    * Returns information about the account selected as the delegated administrator for GuardDuty.
    */
   describeOrganizationConfiguration(params: GuardDuty.Types.DescribeOrganizationConfigurationRequest, callback?: (err: AWSError, data: GuardDuty.Types.DescribeOrganizationConfigurationResponse) => void): Request<GuardDuty.Types.DescribeOrganizationConfigurationResponse, AWSError>;
@@ -174,17 +190,25 @@ declare class GuardDuty extends Service {
   /**
    * Disassociates the current GuardDuty member account from its administrator account.
    */
+  disassociateFromAdministratorAccount(params: GuardDuty.Types.DisassociateFromAdministratorAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromAdministratorAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * Disassociates the current GuardDuty member account from its administrator account.
+   */
+  disassociateFromAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromAdministratorAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
+  /**
+   * Disassociates the current GuardDuty member account from its administrator account.
+   */
   disassociateFromMasterAccount(params: GuardDuty.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
    * Disassociates the current GuardDuty member account from its administrator account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. Member accounts added through Invitation get deleted from the current GuardDuty administrator account after 30 days of disassociation.
+   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   disassociateMembers(params: GuardDuty.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. Member accounts added through Invitation get deleted from the current GuardDuty administrator account after 30 days of disassociation.
+   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
    */
   disassociateMembers(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
@@ -195,6 +219,14 @@ declare class GuardDuty extends Service {
    * Enables an Amazon Web Services account within the organization as the GuardDuty delegated administrator.
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: GuardDuty.Types.EnableOrganizationAdminAccountResponse) => void): Request<GuardDuty.Types.EnableOrganizationAdminAccountResponse, AWSError>;
+  /**
+   * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
+   */
+  getAdministratorAccount(params: GuardDuty.Types.GetAdministratorAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetAdministratorAccountResponse) => void): Request<GuardDuty.Types.GetAdministratorAccountResponse, AWSError>;
+  /**
+   * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
+   */
+  getAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetAdministratorAccountResponse) => void): Request<GuardDuty.Types.GetAdministratorAccountResponse, AWSError>;
   /**
    * Retrieves an Amazon GuardDuty detector specified by the detectorId.
    */
@@ -244,6 +276,14 @@ declare class GuardDuty extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: GuardDuty.Types.GetInvitationsCountResponse) => void): Request<GuardDuty.Types.GetInvitationsCountResponse, AWSError>;
   /**
+   * Returns the details of the malware scan settings.
+   */
+  getMalwareScanSettings(params: GuardDuty.Types.GetMalwareScanSettingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMalwareScanSettingsResponse) => void): Request<GuardDuty.Types.GetMalwareScanSettingsResponse, AWSError>;
+  /**
+   * Returns the details of the malware scan settings.
+   */
+  getMalwareScanSettings(callback?: (err: AWSError, data: GuardDuty.Types.GetMalwareScanSettingsResponse) => void): Request<GuardDuty.Types.GetMalwareScanSettingsResponse, AWSError>;
+  /**
    * Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
    */
   getMasterAccount(params: GuardDuty.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
@@ -268,6 +308,14 @@ declare class GuardDuty extends Service {
    */
   getMembers(callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
+   * Provides the number of days left for each data source used in the free trial period.
+   */
+  getRemainingFreeTrialDays(params: GuardDuty.Types.GetRemainingFreeTrialDaysRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetRemainingFreeTrialDaysResponse) => void): Request<GuardDuty.Types.GetRemainingFreeTrialDaysResponse, AWSError>;
+  /**
+   * Provides the number of days left for each data source used in the free trial period.
+   */
+  getRemainingFreeTrialDays(callback?: (err: AWSError, data: GuardDuty.Types.GetRemainingFreeTrialDaysResponse) => void): Request<GuardDuty.Types.GetRemainingFreeTrialDaysResponse, AWSError>;
+  /**
    * Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
    */
   getThreatIntelSet(params: GuardDuty.Types.GetThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
@@ -276,11 +324,11 @@ declare class GuardDuty extends Service {
    */
   getThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see Understanding How Usage Costs are Calculated.
+   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources, the cost returned will include only the usage so far under 30 days. This may differ from the cost metrics in the console, which project usage over 30 days to provide a monthly cost estimate. For more information, see Understanding How Usage Costs are Calculated.
    */
   getUsageStatistics(params: GuardDuty.Types.GetUsageStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
   /**
-   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see Understanding How Usage Costs are Calculated.
+   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources, the cost returned will include only the usage so far under 30 days. This may differ from the cost metrics in the console, which project usage over 30 days to provide a monthly cost estimate. For more information, see Understanding How Usage Costs are Calculated.
    */
   getUsageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
   /**
@@ -444,6 +492,14 @@ declare class GuardDuty extends Service {
    */
   updateIPSet(callback?: (err: AWSError, data: GuardDuty.Types.UpdateIPSetResponse) => void): Request<GuardDuty.Types.UpdateIPSetResponse, AWSError>;
   /**
+   * Updates the malware scan settings.
+   */
+  updateMalwareScanSettings(params: GuardDuty.Types.UpdateMalwareScanSettingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateMalwareScanSettingsResponse) => void): Request<GuardDuty.Types.UpdateMalwareScanSettingsResponse, AWSError>;
+  /**
+   * Updates the malware scan settings.
+   */
+  updateMalwareScanSettings(callback?: (err: AWSError, data: GuardDuty.Types.UpdateMalwareScanSettingsResponse) => void): Request<GuardDuty.Types.UpdateMalwareScanSettingsResponse, AWSError>;
+  /**
    * Contains information on member accounts to be updated.
    */
   updateMemberDetectors(params: GuardDuty.Types.UpdateMemberDetectorsRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateMemberDetectorsResponse) => void): Request<GuardDuty.Types.UpdateMemberDetectorsResponse, AWSError>;
@@ -477,6 +533,22 @@ declare class GuardDuty extends Service {
   updateThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.UpdateThreatIntelSetResponse) => void): Request<GuardDuty.Types.UpdateThreatIntelSetResponse, AWSError>;
 }
 declare namespace GuardDuty {
+  export interface AcceptAdministratorInvitationRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+    /**
+     * The account ID of the GuardDuty administrator account whose invitation you're accepting.
+     */
+    AdministratorId: String;
+    /**
+     * The value that is used to validate the administrator account to the member account.
+     */
+    InvitationId: String;
+  }
+  export interface AcceptAdministratorInvitationResponse {
+  }
   export interface AcceptInvitationRequest {
     /**
      * The unique ID of the detector of the GuardDuty member account.
@@ -532,6 +604,17 @@ declare namespace GuardDuty {
     Email: Email;
   }
   export type AccountDetails = AccountDetail[];
+  export interface AccountFreeTrialInfo {
+    /**
+     * The account identifier of the GuardDuty member account.
+     */
+    AccountId?: String;
+    /**
+     * Describes the data source enabled for the GuardDuty member account.
+     */
+    DataSources?: DataSourcesFreeTrial;
+  }
+  export type AccountFreeTrialInfos = AccountFreeTrialInfo[];
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export interface AccountLevelPermissions {
@@ -578,6 +661,25 @@ declare namespace GuardDuty {
   }
   export type AdminAccounts = AdminAccount[];
   export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
+  export interface Administrator {
+    /**
+     * The ID of the account used as the administrator account.
+     */
+    AccountId?: AccountId;
+    /**
+     * The value that is used to validate the administrator account to the member account.
+     */
+    InvitationId?: String;
+    /**
+     * The status of the relationship between the administrator and member accounts.
+     */
+    RelationshipStatus?: String;
+    /**
+     * The timestamp when the invitation was sent.
+     */
+    InvitedAt?: String;
+  }
+  export type AffectedResources = {[key: string]: String};
   export interface ArchiveFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
@@ -623,6 +725,10 @@ declare namespace GuardDuty {
      * The details of the Amazon Web Services account that made the API call. This field appears if the call was made from outside your account.
      */
     RemoteAccountDetails?: RemoteAccountDetails;
+    /**
+     * The details of the Amazon Web Services account that made the API call. This field identifies the resources that were affected by this API call.
+     */
+    AffectedResources?: AffectedResources;
   }
   export interface BlockPublicAccess {
     /**
@@ -965,13 +1071,14 @@ declare namespace GuardDuty {
     ThreatIntelSetId: String;
   }
   export type Criterion = {[key: string]: Condition};
+  export type CriterionKey = "EC2_INSTANCE_ARN"|"SCAN_ID"|"ACCOUNT_ID"|"GUARDDUTY_FINDING_ID"|"SCAN_START_TIME"|"SCAN_STATUS"|string;
   export interface DNSLogsConfigurationResult {
     /**
      * Denotes whether DNS logs is enabled as a data source.
      */
     Status: DataSourceStatus;
   }
-  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|"KUBERNETES_AUDIT_LOGS"|string;
+  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|"KUBERNETES_AUDIT_LOGS"|"EC2_MALWARE_SCAN"|string;
   export interface DataSourceConfigurations {
     /**
      * Describes whether S3 data event logs are enabled as a data source.
@@ -981,6 +1088,10 @@ declare namespace GuardDuty {
      * Describes whether any Kubernetes logs are enabled as data sources.
      */
     Kubernetes?: KubernetesConfiguration;
+    /**
+     * Describes whether Malware Protection is enabled as a data source.
+     */
+    MalwareProtection?: MalwareProtectionConfiguration;
   }
   export interface DataSourceConfigurationsResult {
     /**
@@ -1003,9 +1114,45 @@ declare namespace GuardDuty {
      * An object that contains information on the status of all Kubernetes data sources.
      */
     Kubernetes?: KubernetesConfigurationResult;
+    /**
+     * Describes the configuration of Malware Protection data sources.
+     */
+    MalwareProtection?: MalwareProtectionConfigurationResult;
+  }
+  export interface DataSourceFreeTrial {
+    /**
+     * A value that specifies the number of days left to use each enabled data source.
+     */
+    FreeTrialDaysRemaining?: Integer;
   }
   export type DataSourceList = DataSource[];
   export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
+  export interface DataSourcesFreeTrial {
+    /**
+     * Describes whether any AWS CloudTrail management event logs are enabled as data sources.
+     */
+    CloudTrail?: DataSourceFreeTrial;
+    /**
+     * Describes whether any DNS logs are enabled as data sources.
+     */
+    DnsLogs?: DataSourceFreeTrial;
+    /**
+     * Describes whether any VPC Flow logs are enabled as data sources.
+     */
+    FlowLogs?: DataSourceFreeTrial;
+    /**
+     * Describes whether any S3 data event logs are enabled as data sources.
+     */
+    S3Logs?: DataSourceFreeTrial;
+    /**
+     * Describes whether any Kubernetes logs are enabled as data sources.
+     */
+    Kubernetes?: KubernetesDataSourceFreeTrial;
+    /**
+     * Describes whether Malware Protection is enabled as a data source.
+     */
+    MalwareProtection?: MalwareProtectionDataSourceFreeTrial;
+  }
   export interface DeclineInvitationsRequest {
     /**
      * A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.
@@ -1112,6 +1259,38 @@ declare namespace GuardDuty {
   }
   export interface DeleteThreatIntelSetResponse {
   }
+  export interface DescribeMalwareScansRequest {
+    /**
+     * The unique ID of the detector that the request is associated with.
+     */
+    DetectorId: DetectorId;
+    /**
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     */
+    NextToken?: String;
+    /**
+     * You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
+     */
+    MaxResults?: IntegerValueWithMax;
+    /**
+     * Represents the criteria to be used in the filter for describing scan entries.
+     */
+    FilterCriteria?: FilterCriteria;
+    /**
+     * Represents the criteria used for sorting scan entries.
+     */
+    SortCriteria?: SortCriteria;
+  }
+  export interface DescribeMalwareScansResponse {
+    /**
+     * Contains information about malware scans.
+     */
+    Scans: Scans;
+    /**
+     * The pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
+  }
   export interface DescribeOrganizationConfigurationRequest {
     /**
      * The ID of the detector to retrieve information about the delegated administrator from.
@@ -1201,6 +1380,14 @@ declare namespace GuardDuty {
   }
   export interface DisableOrganizationAdminAccountResponse {
   }
+  export interface DisassociateFromAdministratorAccountRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+  }
+  export interface DisassociateFromAdministratorAccountResponse {
+  }
   export interface DisassociateFromMasterAccountRequest {
     /**
      * The unique ID of the detector of the GuardDuty member account.
@@ -1230,6 +1417,14 @@ declare namespace GuardDuty {
      * The domain information for the API request.
      */
     Domain?: String;
+    /**
+     * The network connection protocol observed in the activity that prompted GuardDuty to generate the finding.
+     */
+    Protocol?: String;
+    /**
+     * Indicates whether the targeted port is blocked.
+     */
+    Blocked?: Boolean;
   }
   export interface DomainDetails {
     /**
@@ -1238,6 +1433,125 @@ declare namespace GuardDuty {
     Domain?: String;
   }
   export type Double = number;
+  export type EbsSnapshotPreservation = "NO_RETENTION"|"RETENTION_WITH_FINDING"|string;
+  export interface EbsVolumeDetails {
+    /**
+     * List of EBS volumes that were scanned.
+     */
+    ScannedVolumeDetails?: VolumeDetails;
+    /**
+     * List of EBS volumes that were skipped from the malware scan.
+     */
+    SkippedVolumeDetails?: VolumeDetails;
+  }
+  export interface EbsVolumeScanDetails {
+    /**
+     * Unique Id of the malware scan that generated the finding.
+     */
+    ScanId?: String;
+    /**
+     * Returns the start date and time of the malware scan.
+     */
+    ScanStartedAt?: Timestamp;
+    /**
+     * Returns the completion date and time of the malware scan.
+     */
+    ScanCompletedAt?: Timestamp;
+    /**
+     * GuardDuty finding ID that triggered a malware scan.
+     */
+    TriggerFindingId?: String;
+    /**
+     * Contains list of threat intelligence sources used to detect threats.
+     */
+    Sources?: Sources;
+    /**
+     * Contains a complete view providing malware scan result details.
+     */
+    ScanDetections?: ScanDetections;
+  }
+  export interface EbsVolumesResult {
+    /**
+     * Describes whether scanning EBS volumes is enabled as a data source.
+     */
+    Status?: DataSourceStatus;
+  }
+  export interface EcsClusterDetails {
+    /**
+     * The name of the ECS Cluster.
+     */
+    Name?: String;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the cluster.
+     */
+    Arn?: String;
+    /**
+     * The status of the ECS cluster.
+     */
+    Status?: String;
+    /**
+     * The number of services that are running on the cluster in an ACTIVE state.
+     */
+    ActiveServicesCount?: Integer;
+    /**
+     * The number of container instances registered into the cluster.
+     */
+    RegisteredContainerInstancesCount?: Integer;
+    /**
+     * The number of tasks in the cluster that are in the RUNNING state.
+     */
+    RunningTasksCount?: Integer;
+    /**
+     * The tags of the ECS Cluster.
+     */
+    Tags?: Tags;
+    /**
+     * Contains information about the details of the ECS Task.
+     */
+    TaskDetails?: EcsTaskDetails;
+  }
+  export interface EcsTaskDetails {
+    /**
+     * The Amazon Resource Name (ARN) of the task.
+     */
+    Arn?: String;
+    /**
+     * The ARN of the task definition that creates the task.
+     */
+    DefinitionArn?: String;
+    /**
+     * The version counter for the task.
+     */
+    Version?: String;
+    /**
+     * The Unix timestamp for the time when the task was created.
+     */
+    TaskCreatedAt?: Timestamp;
+    /**
+     * The Unix timestamp for the time when the task started.
+     */
+    StartedAt?: Timestamp;
+    /**
+     * Contains the tag specified when a task is started.
+     */
+    StartedBy?: String;
+    /**
+     * The tags of the ECS Task.
+     */
+    Tags?: Tags;
+    /**
+     * The list of data volume definitions for the task.
+     */
+    Volumes?: Volumes;
+    /**
+     * The containers that's associated with the task.
+     */
+    Containers?: Containers;
+    /**
+     * The name of the task group that's associated with the task.
+     */
+    Group?: String;
+  }
   export interface EksClusterDetails {
     /**
      * EKS cluster name.
@@ -1282,7 +1596,39 @@ declare namespace GuardDuty {
     ThreatIntelligenceDetails?: ThreatIntelligenceDetails;
   }
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
+  export type FilePaths = ScanFilePath[];
   export type FilterAction = "NOOP"|"ARCHIVE"|string;
+  export interface FilterCondition {
+    /**
+     * Represents an equal  condition to be applied to a single field when querying for scan entries.
+     */
+    EqualsValue?: NonEmptyString;
+    /**
+     * Represents a greater than condition to be applied to a single field when querying for scan entries.
+     */
+    GreaterThan?: LongValue;
+    /**
+     * Represents a less than condition to be applied to a single field when querying for scan entries.
+     */
+    LessThan?: LongValue;
+  }
+  export interface FilterCriteria {
+    /**
+     * Represents a condition that when matched will be added to the response of the operation.
+     */
+    FilterCriterion?: FilterCriterionList;
+  }
+  export interface FilterCriterion {
+    /**
+     * An enum value representing possible scan properties to match with given scan entries.
+     */
+    CriterionKey?: CriterionKey;
+    /**
+     * Contains information about the condition.
+     */
+    FilterCondition?: FilterCondition;
+  }
+  export type FilterCriterionList = FilterCriterion[];
   export type FilterDescription = string;
   export type FilterName = string;
   export type FilterNames = FilterName[];
@@ -1378,6 +1724,18 @@ declare namespace GuardDuty {
      * The longitude information of the remote IP address.
      */
     Lon?: Double;
+  }
+  export interface GetAdministratorAccountRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+  }
+  export interface GetAdministratorAccountResponse {
+    /**
+     * The administrator account details.
+     */
+    Administrator: Administrator;
   }
   export interface GetDetectorRequest {
     /**
@@ -1531,6 +1889,22 @@ declare namespace GuardDuty {
      */
     InvitationsCount?: Integer;
   }
+  export interface GetMalwareScanSettingsRequest {
+    /**
+     * The unique ID of the detector that the scan setting is associated with.
+     */
+    DetectorId: DetectorId;
+  }
+  export interface GetMalwareScanSettingsResponse {
+    /**
+     * Represents the criteria to be used in the filter for scanning resources.
+     */
+    ScanResourceCriteria?: ScanResourceCriteria;
+    /**
+     * An enum value representing possible snapshot preservations.
+     */
+    EbsSnapshotPreservation?: EbsSnapshotPreservation;
+  }
   export interface GetMasterAccountRequest {
     /**
      * The unique ID of the detector of the GuardDuty member account.
@@ -1582,6 +1956,26 @@ declare namespace GuardDuty {
      * A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
+  }
+  export interface GetRemainingFreeTrialDaysRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty member account.
+     */
+    DetectorId: DetectorId;
+    /**
+     * A list of account identifiers of the GuardDuty member account.
+     */
+    AccountIds?: AccountIds;
+  }
+  export interface GetRemainingFreeTrialDaysResponse {
+    /**
+     * The member accounts which were included in a request and were processed successfully.
+     */
+    Accounts?: AccountFreeTrialInfos;
+    /**
+     * The member account that was included in a request but for which the request could not be processed.
+     */
+    UnprocessedAccounts?: UnprocessedAccounts;
   }
   export interface GetThreatIntelSetRequest {
     /**
@@ -1653,6 +2047,20 @@ declare namespace GuardDuty {
   }
   export type Groups = String[];
   export type GuardDutyArn = string;
+  export interface HighestSeverityThreatDetails {
+    /**
+     * Severity level of the highest severity threat detected.
+     */
+    Severity?: String;
+    /**
+     * Threat name of the highest severity threat detected as part of the malware scan.
+     */
+    ThreatName?: String;
+    /**
+     * Total number of infected files with the highest severity threat detected.
+     */
+    Count?: Integer;
+  }
   export interface HostPath {
     /**
      * Path of the file or directory on the host that the volume maps to.
@@ -1669,6 +2077,7 @@ declare namespace GuardDuty {
      */
     Id?: String;
   }
+  export type InstanceArn = string;
   export interface InstanceDetails {
     /**
      * The Availability Zone of the EC2 instance.
@@ -1724,6 +2133,7 @@ declare namespace GuardDuty {
     Tags?: Tags;
   }
   export type Integer = number;
+  export type IntegerValueWithMax = number;
   export interface Invitation {
     /**
      * The ID of the account that the invitation was sent from.
@@ -1821,6 +2231,12 @@ declare namespace GuardDuty {
      * Describes whether Kubernetes audit logs are enabled as a data source.
      */
     AuditLogs: KubernetesAuditLogsConfigurationResult;
+  }
+  export interface KubernetesDataSourceFreeTrial {
+    /**
+     * Describes whether Kubernetes audit logs are enabled as a data source.
+     */
+    AuditLogs?: DataSourceFreeTrial;
   }
   export interface KubernetesDetails {
     /**
@@ -2122,6 +2538,30 @@ declare namespace GuardDuty {
   }
   export type Location = string;
   export type Long = number;
+  export type LongValue = number;
+  export interface MalwareProtectionConfiguration {
+    /**
+     * Describes the configuration of Malware Protection for EC2 instances with findings.
+     */
+    ScanEc2InstanceWithFindings?: ScanEc2InstanceWithFindings;
+  }
+  export interface MalwareProtectionConfigurationResult {
+    /**
+     * Describes the configuration of Malware Protection for EC2 instances with findings.
+     */
+    ScanEc2InstanceWithFindings?: ScanEc2InstanceWithFindingsResult;
+    /**
+     * The GuardDuty Malware Protection service role.
+     */
+    ServiceRole?: String;
+  }
+  export interface MalwareProtectionDataSourceFreeTrial {
+    /**
+     * Describes whether Malware Protection for EC2 instances with findings is enabled as a data source.
+     */
+    ScanEc2InstanceWithFindings?: DataSourceFreeTrial;
+  }
+  export type MapEquals = ScanConditionPair[];
   export interface Master {
     /**
      * The ID of the account used as the administrator account.
@@ -2170,6 +2610,10 @@ declare namespace GuardDuty {
      * The last-updated timestamp of the member.
      */
     UpdatedAt: String;
+    /**
+     * The administrator account ID.
+     */
+    AdministratorId?: String;
   }
   export interface MemberDataSourceConfiguration {
     /**
@@ -2258,6 +2702,7 @@ declare namespace GuardDuty {
     VpcId?: String;
   }
   export type NetworkInterfaces = NetworkInterface[];
+  export type NonEmptyString = string;
   export type NotEquals = String[];
   export type OrderBy = "ASC"|"DESC"|string;
   export interface Organization {
@@ -2287,6 +2732,10 @@ declare namespace GuardDuty {
      * Describes the configuration of Kubernetes data sources for new members of the organization.
      */
     Kubernetes?: OrganizationKubernetesConfiguration;
+    /**
+     * Describes the configuration of Malware Protection for new members of the organization.
+     */
+    MalwareProtection?: OrganizationMalwareProtectionConfiguration;
   }
   export interface OrganizationDataSourceConfigurationsResult {
     /**
@@ -2297,6 +2746,22 @@ declare namespace GuardDuty {
      * Describes the configuration of Kubernetes data sources.
      */
     Kubernetes?: OrganizationKubernetesConfigurationResult;
+    /**
+     * Describes the configuration of Malware Protection data source for an organization.
+     */
+    MalwareProtection?: OrganizationMalwareProtectionConfigurationResult;
+  }
+  export interface OrganizationEbsVolumes {
+    /**
+     * Whether scanning EBS volumes should be auto-enabled for new members joining the organization.
+     */
+    AutoEnable?: Boolean;
+  }
+  export interface OrganizationEbsVolumesResult {
+    /**
+     * An object that contains the status of whether scanning EBS volumes should be auto-enabled for new members joining the organization.
+     */
+    AutoEnable?: Boolean;
   }
   export interface OrganizationKubernetesAuditLogsConfiguration {
     /**
@@ -2322,6 +2787,18 @@ declare namespace GuardDuty {
      */
     AuditLogs: OrganizationKubernetesAuditLogsConfigurationResult;
   }
+  export interface OrganizationMalwareProtectionConfiguration {
+    /**
+     * Whether Malware Protection for EC2 instances with findings should be auto-enabled for new members joining the organization.
+     */
+    ScanEc2InstanceWithFindings?: OrganizationScanEc2InstanceWithFindings;
+  }
+  export interface OrganizationMalwareProtectionConfigurationResult {
+    /**
+     * Describes the configuration for scanning EC2 instances with findings for an organization.
+     */
+    ScanEc2InstanceWithFindings?: OrganizationScanEc2InstanceWithFindingsResult;
+  }
   export interface OrganizationS3LogsConfiguration {
     /**
      * A value that contains information on whether S3 data event logs will be enabled automatically as a data source for the organization.
@@ -2333,6 +2810,18 @@ declare namespace GuardDuty {
      * A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
      */
     AutoEnable: Boolean;
+  }
+  export interface OrganizationScanEc2InstanceWithFindings {
+    /**
+     * Whether scanning EBS volumes should be auto-enabled for new members joining the organization.
+     */
+    EbsVolumes?: OrganizationEbsVolumes;
+  }
+  export interface OrganizationScanEc2InstanceWithFindingsResult {
+    /**
+     * Describes the configuration for scanning EBS volumes for an organization.
+     */
+    EbsVolumes?: OrganizationEbsVolumesResult;
   }
   export interface Owner {
     /**
@@ -2375,6 +2864,7 @@ declare namespace GuardDuty {
     RemoteIpDetails?: RemoteIpDetails;
   }
   export type PortProbeDetails = PortProbeDetail[];
+  export type PositiveLong = number;
   export interface PrivateIpAddressDetails {
     /**
      * The private DNS name of the EC2 instance.
@@ -2475,6 +2965,21 @@ declare namespace GuardDuty {
      * The type of Amazon Web Services resource.
      */
     ResourceType?: String;
+    /**
+     * Contains list of scanned and skipped EBS volumes with details.
+     */
+    EbsVolumeDetails?: EbsVolumeDetails;
+    /**
+     * Contains information about the details of the ECS Cluster.
+     */
+    EcsClusterDetails?: EcsClusterDetails;
+    ContainerDetails?: Container;
+  }
+  export interface ResourceDetails {
+    /**
+     * InstanceArn that was scanned in the scan entry.
+     */
+    InstanceArn?: InstanceArn;
   }
   export type ResourceList = String[];
   export interface S3BucketDetail {
@@ -2524,6 +3029,182 @@ declare namespace GuardDuty {
      */
     Status: DataSourceStatus;
   }
+  export interface Scan {
+    /**
+     * The unique ID of the detector that the request is associated with.
+     */
+    DetectorId?: DetectorId;
+    /**
+     * The unique detector ID of the administrator account that the request is associated with. Note that this value will be the same as the one used for DetectorId if the account is an administrator.
+     */
+    AdminDetectorId?: DetectorId;
+    /**
+     * The unique scan ID associated with a scan entry.
+     */
+    ScanId?: NonEmptyString;
+    /**
+     * An enum value representing possible scan statuses.
+     */
+    ScanStatus?: ScanStatus;
+    /**
+     * Represents the reason for FAILED scan status.
+     */
+    FailureReason?: NonEmptyString;
+    /**
+     * The timestamp of when the scan was triggered.
+     */
+    ScanStartTime?: Timestamp;
+    /**
+     * The timestamp of when the scan was finished.
+     */
+    ScanEndTime?: Timestamp;
+    /**
+     * Represents the reason the scan was triggered.
+     */
+    TriggerDetails?: TriggerDetails;
+    /**
+     * Represents the resources that were scanned in the scan entry.
+     */
+    ResourceDetails?: ResourceDetails;
+    /**
+     * Represents the result of the scan.
+     */
+    ScanResultDetails?: ScanResultDetails;
+    /**
+     * The ID for the account that belongs to the scan.
+     */
+    AccountId?: AccountId;
+    /**
+     * Represents total bytes that were scanned.
+     */
+    TotalBytes?: PositiveLong;
+    /**
+     * Represents the number of files that were scanned.
+     */
+    FileCount?: PositiveLong;
+    /**
+     * List of volumes that were attached to the original instance to be scanned.
+     */
+    AttachedVolumes?: VolumeDetails;
+  }
+  export interface ScanCondition {
+    /**
+     * Represents an mapEqual  condition to be applied to a single field when triggering for malware scan.
+     */
+    MapEquals: MapEquals;
+  }
+  export interface ScanConditionPair {
+    /**
+     * Represents key  in the map condition.
+     */
+    Key: TagKey;
+    /**
+     * Represents optional value  in the map condition. If not specified, only key  will be matched.
+     */
+    Value?: TagValue;
+  }
+  export type ScanCriterion = {[key: string]: ScanCondition};
+  export type ScanCriterionKey = "EC2_INSTANCE_TAG"|string;
+  export interface ScanDetections {
+    /**
+     * Total number of scanned files.
+     */
+    ScannedItemCount?: ScannedItemCount;
+    /**
+     * Total number of infected files.
+     */
+    ThreatsDetectedItemCount?: ThreatsDetectedItemCount;
+    /**
+     * Details of the highest severity threat detected during malware scan and number of infected files.
+     */
+    HighestSeverityThreatDetails?: HighestSeverityThreatDetails;
+    /**
+     * Contains details about identified threats organized by threat name.
+     */
+    ThreatDetectedByName?: ThreatDetectedByName;
+  }
+  export interface ScanEc2InstanceWithFindings {
+    /**
+     * Describes the configuration for scanning EBS volumes as data source.
+     */
+    EbsVolumes?: Boolean;
+  }
+  export interface ScanEc2InstanceWithFindingsResult {
+    /**
+     * Describes the configuration of scanning EBS volumes as a data source.
+     */
+    EbsVolumes?: EbsVolumesResult;
+  }
+  export interface ScanFilePath {
+    /**
+     * The file path of the infected file.
+     */
+    FilePath?: String;
+    /**
+     * EBS volume Arn details of the infected file.
+     */
+    VolumeArn?: String;
+    /**
+     * The hash value of the infected file.
+     */
+    Hash?: String;
+    /**
+     * File name of the infected file.
+     */
+    FileName?: String;
+  }
+  export interface ScanResourceCriteria {
+    /**
+     * Represents condition that when matched will allow a malware scan for a certain resource.
+     */
+    Include?: ScanCriterion;
+    /**
+     * Represents condition that when matched will prevent a malware scan for a certain resource.
+     */
+    Exclude?: ScanCriterion;
+  }
+  export type ScanResult = "CLEAN"|"INFECTED"|string;
+  export interface ScanResultDetails {
+    /**
+     * An enum value representing possible scan results.
+     */
+    ScanResult?: ScanResult;
+  }
+  export type ScanStatus = "RUNNING"|"COMPLETED"|"FAILED"|string;
+  export interface ScanThreatName {
+    /**
+     * The name of the identified threat.
+     */
+    Name?: String;
+    /**
+     * Severity of threat identified as part of the malware scan.
+     */
+    Severity?: String;
+    /**
+     * Total number of files infected with given threat.
+     */
+    ItemCount?: Integer;
+    /**
+     * List of infected files in EBS volume with details.
+     */
+    FilePaths?: FilePaths;
+  }
+  export type ScanThreatNames = ScanThreatName[];
+  export interface ScannedItemCount {
+    /**
+     * Total GB of files scanned for malware.
+     */
+    TotalGb?: Integer;
+    /**
+     * Number of files scanned.
+     */
+    Files?: Integer;
+    /**
+     * Total number of scanned volumes.
+     */
+    Volumes?: Integer;
+  }
+  export type Scans = Scan[];
   export interface SecurityContext {
     /**
      * Whether the container is privileged.
@@ -2582,6 +3263,28 @@ declare namespace GuardDuty {
      * Feedback that was submitted about the finding.
      */
     UserFeedback?: String;
+    /**
+     * Contains additional information about the generated finding.
+     */
+    AdditionalInfo?: ServiceAdditionalInfo;
+    /**
+     * The name of the feature that generated a finding.
+     */
+    FeatureName?: String;
+    /**
+     * Returns details from the malware scan that created a finding.
+     */
+    EbsVolumeScanDetails?: EbsVolumeScanDetails;
+  }
+  export interface ServiceAdditionalInfo {
+    /**
+     * This field specifies the value of the additional information.
+     */
+    Value?: String;
+    /**
+     * Describes the type of the additional information.
+     */
+    Type?: String;
   }
   export interface SortCriteria {
     /**
@@ -2594,6 +3297,7 @@ declare namespace GuardDuty {
     OrderBy?: OrderBy;
   }
   export type SourceIps = String[];
+  export type Sources = String[];
   export interface StartMonitoringMembersRequest {
     /**
      * The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.
@@ -2654,6 +3358,24 @@ declare namespace GuardDuty {
   }
   export type TagValue = string;
   export type Tags = Tag[];
+  export interface ThreatDetectedByName {
+    /**
+     * Total number of infected files identified.
+     */
+    ItemCount?: Integer;
+    /**
+     * Total number of unique threats by name identified, as part of the malware scan.
+     */
+    UniqueThreatNameCount?: Integer;
+    /**
+     * Flag to determine if the finding contains every single infected file-path and/or every threat.
+     */
+    Shortened?: Boolean;
+    /**
+     * List of identified threats with details, organized by threat name.
+     */
+    ThreatNames?: ScanThreatNames;
+  }
   export type ThreatIntelSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
   export type ThreatIntelSetIds = String[];
   export type ThreatIntelSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
@@ -2669,6 +3391,12 @@ declare namespace GuardDuty {
   }
   export type ThreatIntelligenceDetails = ThreatIntelligenceDetail[];
   export type ThreatNames = String[];
+  export interface ThreatsDetectedItemCount {
+    /**
+     * Total number of infected files.
+     */
+    Files?: Integer;
+  }
   export type Timestamp = Date;
   export interface Total {
     /**
@@ -2679,6 +3407,16 @@ declare namespace GuardDuty {
      * The currency unit that the amount is given in.
      */
     Unit?: String;
+  }
+  export interface TriggerDetails {
+    /**
+     * The ID of the GuardDuty finding that triggered the BirdDog scan.
+     */
+    GuardDutyFindingId?: NonEmptyString;
+    /**
+     * The description of the scan trigger.
+     */
+    Description?: NonEmptyString;
   }
   export interface UnarchiveFindingsRequest {
     /**
@@ -2810,6 +3548,22 @@ declare namespace GuardDuty {
     Activate?: Boolean;
   }
   export interface UpdateIPSetResponse {
+  }
+  export interface UpdateMalwareScanSettingsRequest {
+    /**
+     * The unique ID of the detector that specifies the GuardDuty service where you want to update scan settings.
+     */
+    DetectorId: DetectorId;
+    /**
+     * Represents the criteria to be used in the filter for selecting resources to scan.
+     */
+    ScanResourceCriteria?: ScanResourceCriteria;
+    /**
+     * An enum value representing possible snapshot preservations.
+     */
+    EbsSnapshotPreservation?: EbsSnapshotPreservation;
+  }
+  export interface UpdateMalwareScanSettingsResponse {
   }
   export interface UpdateMemberDetectorsRequest {
     /**
@@ -2963,6 +3717,37 @@ declare namespace GuardDuty {
      */
     HostPath?: HostPath;
   }
+  export interface VolumeDetail {
+    /**
+     * EBS volume Arn information.
+     */
+    VolumeArn?: String;
+    /**
+     * The EBS volume type.
+     */
+    VolumeType?: String;
+    /**
+     * The device name for the EBS volume.
+     */
+    DeviceName?: String;
+    /**
+     * EBS volume size in GB.
+     */
+    VolumeSizeInGB?: Integer;
+    /**
+     * EBS volume encryption type.
+     */
+    EncryptionType?: String;
+    /**
+     * Snapshot Arn of the EBS volume.
+     */
+    SnapshotArn?: String;
+    /**
+     * KMS key Arn used to encrypt the EBS volume.
+     */
+    KmsKeyArn?: String;
+  }
+  export type VolumeDetails = VolumeDetail[];
   export interface VolumeMount {
     /**
      * Volume mount name.

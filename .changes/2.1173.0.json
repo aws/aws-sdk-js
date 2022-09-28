@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "NetworkManager",
+        "description": "This release adds general availability API support for AWS Cloud WAN."
+    }
+]

@@ -77,7 +77,7 @@ declare namespace DynamoDBStreams {
      */
     M?: MapAttributeValue;
     /**
-     * An attribute of type List. For example:  "L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N", "3.14159"}] 
+     * An attribute of type List. For example:  "L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}] 
      */
     L?: ListAttributeValue;
     /**

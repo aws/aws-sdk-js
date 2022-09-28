@@ -1761,6 +1761,47 @@
       ],
       "documentation": "<p>Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.</p>"
     },
+    "StopBotRecommendation": {
+      "name": "StopBotRecommendation",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/stopbotrecommendation",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "StopBotRecommendationRequest"
+      },
+      "output": {
+        "shape": "StopBotRecommendationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Stop an already running Bot Recommendation request.</p>"
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -2257,6 +2298,24 @@
         "shape": "AggregatedUtterancesSummary"
       }
     },
+    "AllowedInputTypes": {
+      "type": "structure",
+      "required": [
+        "allowAudioInput",
+        "allowDTMFInput"
+      ],
+      "members": {
+        "allowAudioInput": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates whether audio input is allowed.</p>"
+        },
+        "allowDTMFInput": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates whether DTMF input is allowed.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the allowed input types.</p>"
+    },
     "AmazonResourceName": {
       "type": "string",
       "max": 1011,
@@ -2267,7 +2326,7 @@
       "members": {
         "transcript": {
           "shape": "Transcript",
-          "documentation": "<p>The content of the transcript that meets the search filter criteria. For the JSON format of the transcript, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html\">Output transcript format</a>.</p>"
+          "documentation": "<p>The content of the transcript that meets the search filter criteria. For the JSON format of the transcript, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/designing-output-format.html\">Output transcript format</a>.</p>"
         }
       },
       "documentation": "<p>The object containing information that associates the recommended intent/slot type with a conversation.</p>"
@@ -2321,6 +2380,27 @@
       "max": 250,
       "min": 1
     },
+    "AudioAndDTMFInputSpecification": {
+      "type": "structure",
+      "required": [
+        "startTimeoutMs"
+      ],
+      "members": {
+        "startTimeoutMs": {
+          "shape": "TimeInMilliSeconds",
+          "documentation": "<p>Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.</p>"
+        },
+        "audioSpecification": {
+          "shape": "AudioSpecification",
+          "documentation": "<p>Specifies the settings on audio input.</p>"
+        },
+        "dtmfSpecification": {
+          "shape": "DTMFSpecification",
+          "documentation": "<p>Specifies the settings on DTMF input.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the audio and DTMF input specification.</p>"
+    },
     "AudioLogDestination": {
       "type": "structure",
       "required": [
@@ -2364,6 +2444,24 @@
       "enum": [
         "UseSlotValuesAsCustomVocabulary"
       ]
+    },
+    "AudioSpecification": {
+      "type": "structure",
+      "required": [
+        "maxLengthMs",
+        "endTimeoutMs"
+      ],
+      "members": {
+        "maxLengthMs": {
+          "shape": "TimeInMilliSeconds",
+          "documentation": "<p>Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.</p>"
+        },
+        "endTimeoutMs": {
+          "shape": "TimeInMilliSeconds",
+          "documentation": "<p>Time for which a bot waits after the customer stops speaking to assume the utterance is finished.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the audio input specifications.</p>"
     },
     "Boolean": {
       "type": "boolean"
@@ -2798,7 +2896,7 @@
           "documentation": "<p>The statistical summary of the bot recommendation results.</p>"
         }
       },
-      "documentation": "<p>The object representing the URL of the bot definition, the URL of the associated transcript and a statistical summary of the bot recommendation results.</p>"
+      "documentation": "<p>The object representing the URL of the bot definition, the URL of the associated transcript, and a statistical summary of the bot recommendation results.</p>"
     },
     "BotRecommendationStatus": {
       "type": "string",
@@ -2809,7 +2907,9 @@
         "Downloading",
         "Updating",
         "Available",
-        "Failed"
+        "Failed",
+        "Stopping",
+        "Stopped"
       ]
     },
     "BotRecommendationSummary": {
@@ -3238,6 +3338,34 @@
       },
       "documentation": "<p>Contains information about code hooks that Amazon Lex calls during a conversation.</p>"
     },
+    "CompositeSlotTypeSetting": {
+      "type": "structure",
+      "members": {
+        "subSlots": {
+          "shape": "SubSlotTypeList",
+          "documentation": "<p>Subslots in the composite slot.</p>"
+        }
+      },
+      "documentation": "<p>A composite slot is a combination of two or more slots that capture multiple pieces of information in a single user input.</p>"
+    },
+    "Condition": {
+      "type": "structure",
+      "required": [
+        "expressionString"
+      ],
+      "members": {
+        "expressionString": {
+          "shape": "ConditionExpression",
+          "documentation": "<p>The expression string that is evaluated. </p>"
+        }
+      },
+      "documentation": "<p>Provides an expression that evaluates to true or false. </p>"
+    },
+    "ConditionExpression": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "ConditionKey": {
       "type": "string",
       "max": 1024,
@@ -3273,6 +3401,63 @@
       "type": "string",
       "max": 1024,
       "min": 1
+    },
+    "ConditionalBranch": {
+      "type": "structure",
+      "required": [
+        "name",
+        "condition",
+        "nextStep"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the branch. </p>"
+        },
+        "condition": {
+          "shape": "Condition",
+          "documentation": "<p>Contains the expression to evaluate. If the condition is true, the branch's actions are taken.</p>"
+        },
+        "nextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>The next step in the conversation.</p>"
+        },
+        "response": {
+          "shape": "ResponseSpecification"
+        }
+      },
+      "documentation": "<p>A set of actions that Amazon Lex should run if the condition is matched.</p>"
+    },
+    "ConditionalBranches": {
+      "type": "list",
+      "member": {
+        "shape": "ConditionalBranch"
+      },
+      "max": 4,
+      "min": 1
+    },
+    "ConditionalSpecification": {
+      "type": "structure",
+      "required": [
+        "active",
+        "conditionalBranches",
+        "defaultBranch"
+      ],
+      "members": {
+        "active": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Determines whether a conditional branch is active. When <code>active</code> is false, the conditions are not evaluated.</p>"
+        },
+        "conditionalBranches": {
+          "shape": "ConditionalBranches",
+          "documentation": "<p>A list of conditional branches. A conditional branch is made up of a condition, a response and a next step. The response and next step are executed when the condition is true.</p>"
+        },
+        "defaultBranch": {
+          "shape": "DefaultConditionalBranch",
+          "documentation": "<p>The conditional branch that should be followed when the conditions for other branches are not satisfied. A conditional branch is made up of a condition, a response and a next step.</p>"
+        }
+      },
+      "documentation": "<p>Provides a list of conditional branches. Branches are evaluated in the order that they are entered in the list. The first branch with a condition that evaluates to true is executed. The last branch in the list is the default branch. The default branch should not have any condition expression. The default branch is executed if no other branch has a matching condition.</p>"
     },
     "ConfidenceThreshold": {
       "type": "double",
@@ -3650,7 +3835,7 @@
         },
         "exportStatus": {
           "shape": "ExportStatus",
-          "documentation": "<p>The status of the export. When the status is <code>Completed</code>, you can use the <a href=\"https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the pre-signed S3 URL link to your exported bot or bot locale.</p>"
+          "documentation": "<p>The status of the export. When the status is <code>Completed</code>, you can use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the pre-signed S3 URL link to your exported bot or bot locale.</p>"
         },
         "creationDateTime": {
           "shape": "Timestamp",
@@ -3728,6 +3913,10 @@
           "documentation": "<p>The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
+        },
+        "initialResponseSetting": {
+          "shape": "InitialResponseSetting",
+          "documentation": "<p>Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.</p>"
         }
       }
     },
@@ -3797,6 +3986,10 @@
         "creationDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>A timestamp of the date and time that the intent was created.</p>"
+        },
+        "initialResponseSetting": {
+          "shape": "InitialResponseSetting",
+          "documentation": "<p>Configuration settings for the response that is sent to the user at the beginning of a conversation, before eliciting slot values.</p>"
         }
       }
     },
@@ -3947,6 +4140,10 @@
         "multipleValuesSetting": {
           "shape": "MultipleValuesSetting",
           "documentation": "<p>Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>. </p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>"
+        },
+        "subSlotSetting": {
+          "shape": "SubSlotSetting",
+          "documentation": "<p>Specifications for the constituent sub slots and the expression for the composite slot.</p>"
         }
       }
     },
@@ -4000,6 +4197,10 @@
         "multipleValuesSetting": {
           "shape": "MultipleValuesSetting",
           "documentation": "<p>Indicates whether the slot returns multiple values in one response.</p>"
+        },
+        "subSlotSetting": {
+          "shape": "SubSlotSetting",
+          "documentation": "<p>Specifications for the constituent sub slots and the expression for the composite slot.</p>"
         }
       }
     },
@@ -4053,6 +4254,10 @@
         "externalSourceSetting": {
           "shape": "ExternalSourceSetting",
           "documentation": "<p>Sets the type of external information used to create the slot type.</p>"
+        },
+        "compositeSlotTypeSetting": {
+          "shape": "CompositeSlotTypeSetting",
+          "documentation": "<p>Specifications for a composite slot type.</p>"
         }
       }
     },
@@ -4102,6 +4307,10 @@
         "externalSourceSetting": {
           "shape": "ExternalSourceSetting",
           "documentation": "<p>The type of external information used to create the slot type.</p>"
+        },
+        "compositeSlotTypeSetting": {
+          "shape": "CompositeSlotTypeSetting",
+          "documentation": "<p>Specifications for a composite slot type.</p>"
         }
       }
     },
@@ -4196,6 +4405,38 @@
         "Creating"
       ]
     },
+    "DTMFCharacter": {
+      "type": "string",
+      "pattern": "^[A-D0-9#*]{1}$"
+    },
+    "DTMFSpecification": {
+      "type": "structure",
+      "required": [
+        "maxLength",
+        "endTimeoutMs",
+        "deletionCharacter",
+        "endCharacter"
+      ],
+      "members": {
+        "maxLength": {
+          "shape": "MaxUtteranceDigits",
+          "documentation": "<p>The maximum number of DTMF digits allowed in an utterance.</p>"
+        },
+        "endTimeoutMs": {
+          "shape": "TimeInMilliSeconds",
+          "documentation": "<p>How long the bot should wait after the last DTMF character input before assuming that the input has concluded.</p>"
+        },
+        "deletionCharacter": {
+          "shape": "DTMFCharacter",
+          "documentation": "<p>The DTMF character that clears the accumulated DTMF digits and immediately ends the input.</p>"
+        },
+        "endCharacter": {
+          "shape": "DTMFCharacter",
+          "documentation": "<p>The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the DTMF input specifications.</p>"
+    },
     "DataPrivacy": {
       "type": "structure",
       "required": [
@@ -4226,6 +4467,19 @@
         }
       },
       "documentation": "<p>The object used for specifying the data range that the customer wants Amazon Lex to read through in the input transcripts.</p>"
+    },
+    "DefaultConditionalBranch": {
+      "type": "structure",
+      "members": {
+        "nextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>The next step in the conversation.</p>"
+        },
+        "response": {
+          "shape": "ResponseSpecification"
+        }
+      },
+      "documentation": "<p>A set of actions that Amazon Lex should run if none of the other conditions are met.</p>"
     },
     "DeleteBotAliasRequest": {
       "type": "structure",
@@ -5368,6 +5622,10 @@
         "lastUpdatedDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>A timestamp of the date and time that the intent was last updated.</p>"
+        },
+        "initialResponseSetting": {
+          "shape": "InitialResponseSetting",
+          "documentation": "<p/>"
         }
       }
     },
@@ -5498,6 +5756,10 @@
         "multipleValuesSetting": {
           "shape": "MultipleValuesSetting",
           "documentation": "<p>Indicates whether the slot accepts multiple values in a single utterance.</p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>"
+        },
+        "subSlotSetting": {
+          "shape": "SubSlotSetting",
+          "documentation": "<p>Specifications for the constituent sub slots and the expression for the composite slot.</p>"
         }
       }
     },
@@ -5585,6 +5847,10 @@
         },
         "externalSourceSetting": {
           "shape": "ExternalSourceSetting"
+        },
+        "compositeSlotTypeSetting": {
+          "shape": "CompositeSlotTypeSetting",
+          "documentation": "<p>Specifications for a composite slot type.</p>"
         }
       }
     },
@@ -5592,6 +5858,68 @@
       "type": "string",
       "max": 200,
       "min": 0
+    },
+    "DialogAction": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {
+          "shape": "DialogActionType",
+          "documentation": "<p>The action that the bot should execute. </p>"
+        },
+        "slotToElicit": {
+          "shape": "Name",
+          "documentation": "<p>If the dialog action is <code>ElicitSlot</code>, defines the slot to elicit from the user.</p>"
+        },
+        "suppressNextMessage": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>When true the next message for the intent is not used.</p>"
+        }
+      },
+      "documentation": "<p> Defines the action that the bot executes at runtime when the conversation reaches this step.</p>"
+    },
+    "DialogActionType": {
+      "type": "string",
+      "enum": [
+        "ElicitIntent",
+        "StartIntent",
+        "ElicitSlot",
+        "EvaluateConditional",
+        "InvokeDialogCodeHook",
+        "ConfirmIntent",
+        "FulfillIntent",
+        "CloseIntent",
+        "EndConversation"
+      ]
+    },
+    "DialogCodeHookInvocationSetting": {
+      "type": "structure",
+      "required": [
+        "enableCodeHookInvocation",
+        "active",
+        "postCodeHookSpecification"
+      ],
+      "members": {
+        "enableCodeHookInvocation": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates whether a Lambda function should be invoked for the dialog.</p>"
+        },
+        "active": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Determines whether a dialog code hook is used when the intent is activated.</p>"
+        },
+        "invocationLabel": {
+          "shape": "Name",
+          "documentation": "<p>A label that indicates the dialog step from which the dialog code hook is happening.</p>"
+        },
+        "postCodeHookSpecification": {
+          "shape": "PostDialogCodeHookInvocationSpecification",
+          "documentation": "<p>Contains the responses and actions that Amazon Lex takes after the Lambda function is complete.</p>"
+        }
+      },
+      "documentation": "<p> Settings that specify the dialog code hook that is called by Amazon Lex at a step of the conversation. </p>"
     },
     "DialogCodeHookSettings": {
       "type": "structure",
@@ -5606,6 +5934,22 @@
       },
       "documentation": "<p>Settings that determine the Lambda function that Amazon Lex uses for processing user responses.</p>"
     },
+    "DialogState": {
+      "type": "structure",
+      "members": {
+        "dialogAction": {
+          "shape": "DialogAction"
+        },
+        "intent": {
+          "shape": "IntentOverride"
+        },
+        "sessionAttributes": {
+          "shape": "StringMap",
+          "documentation": "<p>Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex and a client application.</p>"
+        }
+      },
+      "documentation": "<p>The current state of the conversation with the user.</p>"
+    },
     "DraftBotVersion": {
       "type": "string",
       "max": 5,
@@ -5618,6 +5962,23 @@
         "Allow",
         "Deny"
       ]
+    },
+    "ElicitationCodeHookInvocationSetting": {
+      "type": "structure",
+      "required": [
+        "enableCodeHookInvocation"
+      ],
+      "members": {
+        "enableCodeHookInvocation": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates whether a Lambda function should be invoked for the dialog.</p>"
+        },
+        "invocationLabel": {
+          "shape": "Name",
+          "documentation": "<p>A label that indicates the dialog step from which the dialog code hook is happening.</p>"
+        }
+      },
+      "documentation": "<p>Settings that specify the dialog code hook that is called by Amazon Lex between eliciting slot values.</p>"
     },
     "EncryptionSetting": {
       "type": "structure",
@@ -5824,6 +6185,10 @@
         "fulfillmentUpdatesSpecification": {
           "shape": "FulfillmentUpdatesSpecification",
           "documentation": "<p>Provides settings for update messages sent to the user for long-running Lambda fulfillment functions. Fulfillment updates can be used only with streaming conversations.</p>"
+        },
+        "active": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Determines whether the fulfillment code hook is used. When <code>active</code> is false, the code hook doesn't run.</p>"
         }
       },
       "documentation": "<p>Determines if a Lambda function should be invoked for a specific intent.</p>"
@@ -6143,6 +6508,25 @@
       "min": 5,
       "pattern": "^([0-9a-zA-Z_])+$"
     },
+    "InitialResponseSetting": {
+      "type": "structure",
+      "members": {
+        "initialResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "nextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>The next step in the conversation.</p>"
+        },
+        "conditional": {
+          "shape": "ConditionalSpecification"
+        },
+        "codeHook": {
+          "shape": "DialogCodeHookInvocationSetting"
+        }
+      },
+      "documentation": "<p>Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.</p>"
+    },
     "InputContext": {
       "type": "structure",
       "required": [
@@ -6166,9 +6550,6 @@
     },
     "IntentClosingSetting": {
       "type": "structure",
-      "required": [
-        "closingResponse"
-      ],
       "members": {
         "closingResponse": {
           "shape": "ResponseSpecification",
@@ -6177,6 +6558,14 @@
         "active": {
           "shape": "BoxedBoolean",
           "documentation": "<p>Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user. If the <code>active</code> field isn't specified, the default is true.</p>"
+        },
+        "nextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot executes after playing the intent's closing response.</p>"
+        },
+        "conditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches associated with the intent's closing response. These branches are executed when the <code>nextStep</code> attribute is set to <code>EvalutateConditional</code>.</p>"
         }
       },
       "documentation": "<p>Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.</p>"
@@ -6184,8 +6573,7 @@
     "IntentConfirmationSetting": {
       "type": "structure",
       "required": [
-        "promptSpecification",
-        "declinationResponse"
+        "promptSpecification"
       ],
       "members": {
         "promptSpecification": {
@@ -6199,6 +6587,43 @@
         "active": {
           "shape": "BoxedBoolean",
           "documentation": "<p>Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent. If the <code>active</code> field isn't specified, the default is true.</p>"
+        },
+        "confirmationResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "confirmationNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot executes when the customer confirms the intent.</p>"
+        },
+        "confirmationConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the intent is closed.</p>"
+        },
+        "declinationNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot executes when the customer declines the intent.</p>"
+        },
+        "declinationConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the intent is declined.</p>"
+        },
+        "failureResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "failureNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>The next step to take in the conversation if the confirmation step fails.</p>"
+        },
+        "failureConditional": {
+          "shape": "ConditionalSpecification"
+        },
+        "codeHook": {
+          "shape": "DialogCodeHookInvocationSetting",
+          "documentation": "<p>The <code>DialogCodeHookInvocationSetting</code> object associated with intent's confirmation step. The dialog code hook is triggered based on these invocation settings when the confirmation next step or declination next step or failure next step is <code>InvokeDialogCodeHook</code>. </p>"
+        },
+        "elicitationCodeHook": {
+          "shape": "ElicitationCodeHookInvocationSetting",
+          "documentation": "<p>The <code>DialogCodeHookInvocationSetting</code> used when the code hook is invoked during confirmation prompt retries.</p>"
         }
       },
       "documentation": "<p>Provides a prompt for making sure that the user is ready for the intent to be fulfilled.</p>"
@@ -6246,6 +6671,20 @@
       },
       "max": 1,
       "min": 1
+    },
+    "IntentOverride": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the intent. Only required when you're switching intents.</p>"
+        },
+        "slots": {
+          "shape": "SlotValueOverrideMap",
+          "documentation": "<p>A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren't overridden.,</p>"
+        }
+      },
+      "documentation": "<p>Override settings to configure the intent state.</p>"
     },
     "IntentSignature": {
       "type": "string"
@@ -7251,6 +7690,11 @@
       "max": 1000,
       "min": 1
     },
+    "MaxUtteranceDigits": {
+      "type": "integer",
+      "max": 1024,
+      "min": 1
+    },
     "MergeStrategy": {
       "type": "string",
       "enum": [
@@ -7306,6 +7750,13 @@
       "max": 5,
       "min": 1
     },
+    "MessageSelectionStrategy": {
+      "type": "string",
+      "enum": [
+        "Random",
+        "Ordered"
+      ]
+    },
     "MessageVariationsList": {
       "type": "list",
       "member": {
@@ -7341,6 +7792,10 @@
     },
     "NextToken": {
       "type": "string"
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "min": 1
     },
     "NumericalBotVersion": {
       "type": "string",
@@ -7456,6 +7911,45 @@
       "type": "string",
       "min": 2
     },
+    "PostDialogCodeHookInvocationSpecification": {
+      "type": "structure",
+      "members": {
+        "successResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "successNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifics the next step the bot runs after the dialog code hook finishes successfully. </p>"
+        },
+        "successConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the dialog code hook finishes successfully.</p>"
+        },
+        "failureResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "failureNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step the bot runs after the dialog code hook throws an exception or returns with the <code>State</code> field of the <code>Intent</code> object set to <code>Failed</code>.</p>"
+        },
+        "failureConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the dialog code hook throws an exception or returns with the <code>State</code> field of the <code>Intent</code> object set to <code>Failed</code>.</p>"
+        },
+        "timeoutResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "timeoutNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot runs when the code hook times out.</p>"
+        },
+        "timeoutConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate if the code hook times out.</p>"
+        }
+      },
+      "documentation": "<p>Specifies next steps to run after the dialog code hook finishes.</p>"
+    },
     "PostFulfillmentStatusSpecification": {
       "type": "structure",
       "members": {
@@ -7467,6 +7961,30 @@
         },
         "timeoutResponse": {
           "shape": "ResponseSpecification"
+        },
+        "successNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step in the conversation that Amazon Lex invokes when the fulfillment code hook completes successfully.</p>"
+        },
+        "successConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the fulfillment code hook finishes successfully.</p>"
+        },
+        "failureNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step the bot runs after the fulfillment code hook throws an exception or returns with the <code>State</code> field of the <code>Intent</code> object set to <code>Failed</code>.</p>"
+        },
+        "failureConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the fulfillment code hook throws an exception or returns with the <code>State</code> field of the <code>Intent</code> object set to <code>Failed</code>.</p>"
+        },
+        "timeoutNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot runs when the fulfillment code hook times out.</p>"
+        },
+        "timeoutConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate if the fulfillment code hook times out.</p>"
         }
       },
       "documentation": "<p>Provides a setting that determines whether the post-fulfillment response is sent to the user. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete\">https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete</a> </p>"
@@ -7507,6 +8025,52 @@
       "max": 100,
       "min": 0
     },
+    "PromptAttempt": {
+      "type": "string",
+      "documentation": "<p>The attempt name of attempts of a prompt.</p>",
+      "enum": [
+        "Initial",
+        "Retry1",
+        "Retry2",
+        "Retry3",
+        "Retry4",
+        "Retry5"
+      ]
+    },
+    "PromptAttemptSpecification": {
+      "type": "structure",
+      "required": [
+        "allowedInputTypes"
+      ],
+      "members": {
+        "allowInterrupt": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates whether the user can interrupt a speech prompt attempt from the bot.</p>"
+        },
+        "allowedInputTypes": {
+          "shape": "AllowedInputTypes",
+          "documentation": "<p>Indicates the allowed input types of the prompt attempt.</p>"
+        },
+        "audioAndDTMFInputSpecification": {
+          "shape": "AudioAndDTMFInputSpecification",
+          "documentation": "<p>Specifies the settings on audio and DTMF input.</p>"
+        },
+        "textInputSpecification": {
+          "shape": "TextInputSpecification",
+          "documentation": "<p>Specifies the settings on text input.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the settings on a prompt attempt.</p>"
+    },
+    "PromptAttemptsSpecificationMap": {
+      "type": "map",
+      "key": {
+        "shape": "PromptAttempt"
+      },
+      "value": {
+        "shape": "PromptAttemptSpecification"
+      }
+    },
     "PromptMaxRetries": {
       "type": "integer",
       "max": 5,
@@ -7530,6 +8094,14 @@
         "allowInterrupt": {
           "shape": "BoxedBoolean",
           "documentation": "<p>Indicates whether the user can interrupt a speech prompt from the bot.</p>"
+        },
+        "messageSelectionStrategy": {
+          "shape": "MessageSelectionStrategy",
+          "documentation": "<p>Indicates how a message is selected from a message group among retries.</p>"
+        },
+        "promptAttemptsSpecification": {
+          "shape": "PromptAttemptsSpecificationMap",
+          "documentation": "<p>Specifies the advanced settings on each attempt of the prompt.</p>"
         }
       },
       "documentation": "<p>Specifies a list of message groups that Amazon Lex sends to a user to elicit a response.</p>"
@@ -7875,6 +8447,42 @@
     "SkipResourceInUseCheck": {
       "type": "boolean"
     },
+    "SlotCaptureSetting": {
+      "type": "structure",
+      "members": {
+        "captureResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "captureNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot runs when the slot value is captured before the code hook times out.</p>"
+        },
+        "captureConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate after the slot value is captured.</p>"
+        },
+        "failureResponse": {
+          "shape": "ResponseSpecification"
+        },
+        "failureNextStep": {
+          "shape": "DialogState",
+          "documentation": "<p>Specifies the next step that the bot runs when the slot value code is not recognized.</p>"
+        },
+        "failureConditional": {
+          "shape": "ConditionalSpecification",
+          "documentation": "<p>A list of conditional branches to evaluate when the slot value isn't captured.</p>"
+        },
+        "codeHook": {
+          "shape": "DialogCodeHookInvocationSetting",
+          "documentation": "<p>Code hook called after Amazon Lex successfully captures a slot value.</p>"
+        },
+        "elicitationCodeHook": {
+          "shape": "ElicitationCodeHookInvocationSetting",
+          "documentation": "<p>Code hook called when Amazon Lex doesn't capture a slot value.</p>"
+        }
+      },
+      "documentation": "<p>Settings used when Amazon Lex successfully captures a slot value from a user.</p>"
+    },
     "SlotConstraint": {
       "type": "string",
       "enum": [
@@ -7989,6 +8597,13 @@
       },
       "documentation": "<p>Sets the priority that Amazon Lex should use when eliciting slot values from a user.</p>"
     },
+    "SlotShape": {
+      "type": "string",
+      "enum": [
+        "Scalar",
+        "List"
+      ]
+    },
     "SlotSortAttribute": {
       "type": "string",
       "enum": [
@@ -8059,7 +8674,8 @@
       "enum": [
         "Custom",
         "Extended",
-        "ExternalGrammar"
+        "ExternalGrammar",
+        "Composite"
       ]
     },
     "SlotTypeFilter": {
@@ -8203,6 +8819,16 @@
       "max": 10000,
       "min": 1
     },
+    "SlotValue": {
+      "type": "structure",
+      "members": {
+        "interpretedValue": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value that Amazon Lex determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex choose the first value in the <code>resolvedValues</code> list.</p>"
+        }
+      },
+      "documentation": "<p>The value to set in a slot.</p>"
+    },
     "SlotValueElicitationSetting": {
       "type": "structure",
       "required": [
@@ -8227,9 +8853,40 @@
         },
         "waitAndContinueSpecification": {
           "shape": "WaitAndContinueSpecification"
+        },
+        "slotCaptureSetting": {
+          "shape": "SlotCaptureSetting",
+          "documentation": "<p>Specifies the settings that Amazon Lex uses when a slot value is successfully entered by a user.</p>"
         }
       },
-      "documentation": "<p>Settings that you can use for eliciting a slot value.</p>"
+      "documentation": "<p>Specifies the elicitation setting details for constituent sub slots of a composite slot.</p>"
+    },
+    "SlotValueOverride": {
+      "type": "structure",
+      "members": {
+        "shape": {
+          "shape": "SlotShape",
+          "documentation": "<p>When the shape value is <code>List</code>, it indicates that the <code>values</code> field contains a list of slot values. When the value is <code>Scalar</code>, it indicates that the <code>value</code> field contains a single value.</p>"
+        },
+        "value": {
+          "shape": "SlotValue",
+          "documentation": "<p>The current value of the slot.</p>"
+        },
+        "values": {
+          "shape": "SlotValues",
+          "documentation": "<p>A list of one or more values that the user provided for the slot. For example, for a slot that elicits pizza toppings, the values might be \"pepperoni\" and \"pineapple.\"</p>"
+        }
+      },
+      "documentation": "<p>The slot values that Amazon Lex uses when it sets slot values in a dialog step.</p>"
+    },
+    "SlotValueOverrideMap": {
+      "type": "map",
+      "key": {
+        "shape": "Name"
+      },
+      "value": {
+        "shape": "SlotValueOverride"
+      }
     },
     "SlotValueRegexFilter": {
       "type": "structure",
@@ -8248,7 +8905,8 @@
       "type": "string",
       "enum": [
         "OriginalValue",
-        "TopResolution"
+        "TopResolution",
+        "Concatenation"
       ]
     },
     "SlotValueSelectionSetting": {
@@ -8272,12 +8930,36 @@
       },
       "documentation": "<p>Contains settings used by Amazon Lex to select a slot value.</p>"
     },
+    "SlotValues": {
+      "type": "list",
+      "member": {
+        "shape": "SlotValueOverride"
+      }
+    },
     "SortOrder": {
       "type": "string",
       "enum": [
         "Ascending",
         "Descending"
       ]
+    },
+    "Specifications": {
+      "type": "structure",
+      "required": [
+        "slotTypeId",
+        "valueElicitationSetting"
+      ],
+      "members": {
+        "slotTypeId": {
+          "shape": "BuiltInOrCustomSlotTypeId",
+          "documentation": "<p>The unique identifier assigned to the slot type.</p>"
+        },
+        "valueElicitationSetting": {
+          "shape": "SubSlotValueElicitationSetting",
+          "documentation": "<p>Specifies the elicitation setting details for constituent sub slots of a composite slot.</p>"
+        }
+      },
+      "documentation": "<p>Subslot specifications.</p>"
     },
     "StartBotRecommendationRequest": {
       "type": "structure",
@@ -8441,6 +9123,157 @@
       "max": 900,
       "min": 1
     },
+    "StopBotRecommendationRequest": {
+      "type": "structure",
+      "required": [
+        "botId",
+        "botVersion",
+        "localeId",
+        "botRecommendationId"
+      ],
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the bot containing the bot recommendation to be stopped.</p>",
+          "location": "uri",
+          "locationName": "botId"
+        },
+        "botVersion": {
+          "shape": "DraftBotVersion",
+          "documentation": "<p>The version of the bot containing the bot recommendation.</p>",
+          "location": "uri",
+          "locationName": "botVersion"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale of the bot recommendation to stop. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a> </p>",
+          "location": "uri",
+          "locationName": "localeId"
+        },
+        "botRecommendationId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the bot recommendation to be stopped.</p>",
+          "location": "uri",
+          "locationName": "botRecommendationId"
+        }
+      }
+    },
+    "StopBotRecommendationResponse": {
+      "type": "structure",
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the bot containing the bot recommendation that is being stopped.</p>"
+        },
+        "botVersion": {
+          "shape": "DraftBotVersion",
+          "documentation": "<p>The version of the bot containing the recommendation that is being stopped.</p>"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale of the bot response to stop. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a> </p>"
+        },
+        "botRecommendationStatus": {
+          "shape": "BotRecommendationStatus",
+          "documentation": "<p>The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field.</p>"
+        },
+        "botRecommendationId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the bot recommendation that is being stopped.</p>"
+        }
+      }
+    },
+    "String": {
+      "type": "string"
+    },
+    "StringMap": {
+      "type": "map",
+      "key": {
+        "shape": "NonEmptyString"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "SubSlotExpression": {
+      "type": "string",
+      "max": 640,
+      "min": 0,
+      "pattern": "[0-9A-Za-z_\\-\\s\\(\\)]+"
+    },
+    "SubSlotSetting": {
+      "type": "structure",
+      "members": {
+        "expression": {
+          "shape": "SubSlotExpression",
+          "documentation": "<p>The expression text for defining the constituent sub slots in the composite slot using logical AND and OR operators.</p>"
+        },
+        "slotSpecifications": {
+          "shape": "SubSlotSpecificationMap",
+          "documentation": "<p>Specifications for the constituent sub slots of a composite slot.</p>"
+        }
+      },
+      "documentation": "<p>Specifications for the constituent sub slots and the expression for the composite slot.</p>"
+    },
+    "SubSlotSpecificationMap": {
+      "type": "map",
+      "key": {
+        "shape": "Name"
+      },
+      "value": {
+        "shape": "Specifications"
+      },
+      "max": 6,
+      "min": 0
+    },
+    "SubSlotTypeComposition": {
+      "type": "structure",
+      "required": [
+        "name",
+        "slotTypeId"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of a constituent sub slot inside a composite slot.</p>"
+        },
+        "slotTypeId": {
+          "shape": "BuiltInOrCustomSlotTypeId",
+          "documentation": "<p>The unique identifier assigned to a slot type. This refers to either a built-in slot type or the unique slotTypeId of a custom slot type.</p>"
+        }
+      },
+      "documentation": "<p>Subslot type composition.</p>"
+    },
+    "SubSlotTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "SubSlotTypeComposition"
+      },
+      "max": 6,
+      "min": 0
+    },
+    "SubSlotValueElicitationSetting": {
+      "type": "structure",
+      "required": [
+        "promptSpecification"
+      ],
+      "members": {
+        "defaultValueSpecification": {
+          "shape": "SlotDefaultValueSpecification"
+        },
+        "promptSpecification": {
+          "shape": "PromptSpecification"
+        },
+        "sampleUtterances": {
+          "shape": "SampleUtterancesList",
+          "documentation": "<p>If you know a specific pattern that users might respond to an Amazon Lex request for a sub slot value, you can provide those utterances to improve accuracy. This is optional. In most cases Amazon Lex is capable of understanding user utterances. This is similar to <code>SampleUtterances</code> for slots.</p>"
+        },
+        "waitAndContinueSpecification": {
+          "shape": "WaitAndContinueSpecification"
+        }
+      },
+      "documentation": "<p>Subslot elicitation settings.</p> <p> <code>DefaultValueSpecification</code> is a list of default values for a constituent sub slot in a composite slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, session attributes, and defined values. This is similar to <code>DefaultValueSpecification</code> for slots.</p> <p> <code>PromptSpecification</code> is the prompt that Amazon Lex uses to elicit the sub slot value from the user. This is similar to <code>PromptSpecification</code> for slots.</p>"
+    },
     "SynonymList": {
       "type": "list",
       "member": {
@@ -8501,6 +9334,19 @@
       "max": 256,
       "min": 0
     },
+    "TextInputSpecification": {
+      "type": "structure",
+      "required": [
+        "startTimeoutMs"
+      ],
+      "members": {
+        "startTimeoutMs": {
+          "shape": "TimeInMilliSeconds",
+          "documentation": "<p>Time for which a bot waits before re-prompting a customer for text input.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the text input specifications.</p>"
+    },
     "TextLogDestination": {
       "type": "structure",
       "required": [
@@ -8546,6 +9392,10 @@
         "Days",
         "Weeks"
       ]
+    },
+    "TimeInMilliSeconds": {
+      "type": "integer",
+      "min": 1
     },
     "TimeValue": {
       "type": "integer",
@@ -9087,6 +9937,10 @@
           "documentation": "<p>The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
           "location": "uri",
           "locationName": "localeId"
+        },
+        "initialResponseSetting": {
+          "shape": "InitialResponseSetting",
+          "documentation": "<p/>"
         }
       }
     },
@@ -9164,6 +10018,10 @@
         "lastUpdatedDateTime": {
           "shape": "Timestamp",
           "documentation": "<p>A timestamp of the last time that the intent was modified.</p>"
+        },
+        "initialResponseSetting": {
+          "shape": "InitialResponseSetting",
+          "documentation": "<p/>"
         }
       }
     },
@@ -9270,6 +10128,10 @@
         "multipleValuesSetting": {
           "shape": "MultipleValuesSetting",
           "documentation": "<p>Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>.</p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>"
+        },
+        "subSlotSetting": {
+          "shape": "SubSlotSetting",
+          "documentation": "<p>Specifications for the constituent sub slots and the expression for the composite slot.</p>"
         }
       }
     },
@@ -9327,6 +10189,10 @@
         "multipleValuesSetting": {
           "shape": "MultipleValuesSetting",
           "documentation": "<p>Indicates whether the slot accepts multiple values in one response.</p>"
+        },
+        "subSlotSetting": {
+          "shape": "SubSlotSetting",
+          "documentation": "<p>Specifications for the constituent sub slots and the expression for the composite slot.</p>"
         }
       }
     },
@@ -9386,6 +10252,10 @@
         },
         "externalSourceSetting": {
           "shape": "ExternalSourceSetting"
+        },
+        "compositeSlotTypeSetting": {
+          "shape": "CompositeSlotTypeSetting",
+          "documentation": "<p>Specifications for a composite slot type.</p>"
         }
       }
     },
@@ -9438,6 +10308,10 @@
         },
         "externalSourceSetting": {
           "shape": "ExternalSourceSetting"
+        },
+        "compositeSlotTypeSetting": {
+          "shape": "CompositeSlotTypeSetting",
+          "documentation": "<p>Specifications for a composite slot type.</p>"
         }
       }
     },

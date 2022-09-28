@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "New APIs for Monitor that help you understand how your predictors perform over time."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "Adding modelMetrics as part of DescribeRecommender API response for Personalize."
+    }
+]

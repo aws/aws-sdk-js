@@ -12,21 +12,45 @@ declare class Synthetics extends Service {
   constructor(options?: Synthetics.Types.ClientConfiguration)
   config: Config & Synthetics.Types.ClientConfiguration;
   /**
-   * Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once.  Do not use CreateCanary to modify an existing canary. Use UpdateCanary instead. To create canaries, you must have the CloudWatchSyntheticsFullAccess policy. If you are creating a new IAM role for the canary, you also need the the iam:CreateRole, iam:CreatePolicy and iam:AttachRolePolicy permissions. For more information, see Necessary Roles and Permissions. Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see Security Considerations for Synthetics Canaries.
+   * Associates a canary with a group. Using groups can help you with managing and automating your canaries, and you can also view aggregated run results and statistics for all canaries in a group.  You must run this operation in the Region where the canary exists.
+   */
+  associateResource(params: Synthetics.Types.AssociateResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.AssociateResourceResponse) => void): Request<Synthetics.Types.AssociateResourceResponse, AWSError>;
+  /**
+   * Associates a canary with a group. Using groups can help you with managing and automating your canaries, and you can also view aggregated run results and statistics for all canaries in a group.  You must run this operation in the Region where the canary exists.
+   */
+  associateResource(callback?: (err: AWSError, data: Synthetics.Types.AssociateResourceResponse) => void): Request<Synthetics.Types.AssociateResourceResponse, AWSError>;
+  /**
+   * Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once.  Do not use CreateCanary to modify an existing canary. Use UpdateCanary instead. To create canaries, you must have the CloudWatchSyntheticsFullAccess policy. If you are creating a new IAM role for the canary, you also need the iam:CreateRole, iam:CreatePolicy and iam:AttachRolePolicy permissions. For more information, see Necessary Roles and Permissions. Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see Security Considerations for Synthetics Canaries.
    */
   createCanary(params: Synthetics.Types.CreateCanaryRequest, callback?: (err: AWSError, data: Synthetics.Types.CreateCanaryResponse) => void): Request<Synthetics.Types.CreateCanaryResponse, AWSError>;
   /**
-   * Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once.  Do not use CreateCanary to modify an existing canary. Use UpdateCanary instead. To create canaries, you must have the CloudWatchSyntheticsFullAccess policy. If you are creating a new IAM role for the canary, you also need the the iam:CreateRole, iam:CreatePolicy and iam:AttachRolePolicy permissions. For more information, see Necessary Roles and Permissions. Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see Security Considerations for Synthetics Canaries.
+   * Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once.  Do not use CreateCanary to modify an existing canary. Use UpdateCanary instead. To create canaries, you must have the CloudWatchSyntheticsFullAccess policy. If you are creating a new IAM role for the canary, you also need the iam:CreateRole, iam:CreatePolicy and iam:AttachRolePolicy permissions. For more information, see Necessary Roles and Permissions. Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see Security Considerations for Synthetics Canaries.
    */
   createCanary(callback?: (err: AWSError, data: Synthetics.Types.CreateCanaryResponse) => void): Request<Synthetics.Types.CreateCanaryResponse, AWSError>;
   /**
-   * Permanently deletes the specified canary. If you specify DeleteLambda to true, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary. Other esources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
+   * Creates a group which you can use to associate canaries with each other, including cross-Region canaries. Using groups can help you with managing and automating your canaries, and you can also view aggregated run results and statistics for all canaries in a group.  Groups are global resources. When you create a group, it is replicated across Amazon Web Services Regions, and you can view it and add canaries to it from any Region. Although the group ARN format reflects the Region name where it was created, a group is not constrained to any Region. This means that you can put canaries from multiple Regions into the same group, and then use that group to view and manage all of those canaries in a single view. Groups are supported in all Regions except the Regions that are disabled by default. For more information about these Regions, see Enabling a Region. Each group can contain as many as 10 canaries. You can have as many as 20 groups in your account. Any single canary can be a member of up to 10 groups.
+   */
+  createGroup(params: Synthetics.Types.CreateGroupRequest, callback?: (err: AWSError, data: Synthetics.Types.CreateGroupResponse) => void): Request<Synthetics.Types.CreateGroupResponse, AWSError>;
+  /**
+   * Creates a group which you can use to associate canaries with each other, including cross-Region canaries. Using groups can help you with managing and automating your canaries, and you can also view aggregated run results and statistics for all canaries in a group.  Groups are global resources. When you create a group, it is replicated across Amazon Web Services Regions, and you can view it and add canaries to it from any Region. Although the group ARN format reflects the Region name where it was created, a group is not constrained to any Region. This means that you can put canaries from multiple Regions into the same group, and then use that group to view and manage all of those canaries in a single view. Groups are supported in all Regions except the Regions that are disabled by default. For more information about these Regions, see Enabling a Region. Each group can contain as many as 10 canaries. You can have as many as 20 groups in your account. Any single canary can be a member of up to 10 groups.
+   */
+  createGroup(callback?: (err: AWSError, data: Synthetics.Types.CreateGroupResponse) => void): Request<Synthetics.Types.CreateGroupResponse, AWSError>;
+  /**
+   * Permanently deletes the specified canary. If you specify DeleteLambda to true, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary. Other resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
    */
   deleteCanary(params: Synthetics.Types.DeleteCanaryRequest, callback?: (err: AWSError, data: Synthetics.Types.DeleteCanaryResponse) => void): Request<Synthetics.Types.DeleteCanaryResponse, AWSError>;
   /**
-   * Permanently deletes the specified canary. If you specify DeleteLambda to true, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary. Other esources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
+   * Permanently deletes the specified canary. If you specify DeleteLambda to true, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary. Other resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:   The CloudWatch alarms created for this canary. These alarms have a name of Synthetics-SharpDrop-Alarm-MyCanaryName .   Amazon S3 objects and buckets, such as the canary's artifact location.   IAM roles created for the canary. If they were created in the console, these roles have the name  role/service-role/CloudWatchSyntheticsRole-MyCanaryName .   CloudWatch Logs log groups created for the canary. These logs groups have the name /aws/lambda/cwsyn-MyCanaryName .    Before you delete a canary, you might want to use GetCanary to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.
    */
   deleteCanary(callback?: (err: AWSError, data: Synthetics.Types.DeleteCanaryResponse) => void): Request<Synthetics.Types.DeleteCanaryResponse, AWSError>;
+  /**
+   * Deletes a group. The group doesn't need to be empty to be deleted. If there are canaries in the group, they are not deleted when you delete the group.  Groups are a global resource that appear in all Regions, but the request to delete a group must be made from its home Region. You can find the home Region of a group within its ARN.
+   */
+  deleteGroup(params: Synthetics.Types.DeleteGroupRequest, callback?: (err: AWSError, data: Synthetics.Types.DeleteGroupResponse) => void): Request<Synthetics.Types.DeleteGroupResponse, AWSError>;
+  /**
+   * Deletes a group. The group doesn't need to be empty to be deleted. If there are canaries in the group, they are not deleted when you delete the group.  Groups are a global resource that appear in all Regions, but the request to delete a group must be made from its home Region. You can find the home Region of a group within its ARN.
+   */
+  deleteGroup(callback?: (err: AWSError, data: Synthetics.Types.DeleteGroupResponse) => void): Request<Synthetics.Types.DeleteGroupResponse, AWSError>;
   /**
    * This operation returns a list of the canaries in your account, along with full details about each canary. This operation supports resource-level authorization using an IAM policy and the Names parameter. If you specify the Names parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response. You are required to use the Names parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see  Limiting a user to viewing specific canaries.
    */
@@ -52,6 +76,14 @@ declare class Synthetics extends Service {
    */
   describeRuntimeVersions(callback?: (err: AWSError, data: Synthetics.Types.DescribeRuntimeVersionsResponse) => void): Request<Synthetics.Types.DescribeRuntimeVersionsResponse, AWSError>;
   /**
+   * Removes a canary from a group. You must run this operation in the Region where the canary exists.
+   */
+  disassociateResource(params: Synthetics.Types.DisassociateResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.DisassociateResourceResponse) => void): Request<Synthetics.Types.DisassociateResourceResponse, AWSError>;
+  /**
+   * Removes a canary from a group. You must run this operation in the Region where the canary exists.
+   */
+  disassociateResource(callback?: (err: AWSError, data: Synthetics.Types.DisassociateResourceResponse) => void): Request<Synthetics.Types.DisassociateResourceResponse, AWSError>;
+  /**
    * Retrieves complete information about one canary. You must specify the name of the canary that you want. To get a list of canaries and their names, use DescribeCanaries.
    */
   getCanary(params: Synthetics.Types.GetCanaryRequest, callback?: (err: AWSError, data: Synthetics.Types.GetCanaryResponse) => void): Request<Synthetics.Types.GetCanaryResponse, AWSError>;
@@ -68,11 +100,43 @@ declare class Synthetics extends Service {
    */
   getCanaryRuns(callback?: (err: AWSError, data: Synthetics.Types.GetCanaryRunsResponse) => void): Request<Synthetics.Types.GetCanaryRunsResponse, AWSError>;
   /**
-   * Displays the tags associated with a canary.
+   * Returns information about one group. Groups are a global resource, so you can use this operation from any Region.
+   */
+  getGroup(params: Synthetics.Types.GetGroupRequest, callback?: (err: AWSError, data: Synthetics.Types.GetGroupResponse) => void): Request<Synthetics.Types.GetGroupResponse, AWSError>;
+  /**
+   * Returns information about one group. Groups are a global resource, so you can use this operation from any Region.
+   */
+  getGroup(callback?: (err: AWSError, data: Synthetics.Types.GetGroupResponse) => void): Request<Synthetics.Types.GetGroupResponse, AWSError>;
+  /**
+   * Returns a list of the groups that the specified canary is associated with. The canary that you specify must be in the current Region.
+   */
+  listAssociatedGroups(params: Synthetics.Types.ListAssociatedGroupsRequest, callback?: (err: AWSError, data: Synthetics.Types.ListAssociatedGroupsResponse) => void): Request<Synthetics.Types.ListAssociatedGroupsResponse, AWSError>;
+  /**
+   * Returns a list of the groups that the specified canary is associated with. The canary that you specify must be in the current Region.
+   */
+  listAssociatedGroups(callback?: (err: AWSError, data: Synthetics.Types.ListAssociatedGroupsResponse) => void): Request<Synthetics.Types.ListAssociatedGroupsResponse, AWSError>;
+  /**
+   * This operation returns a list of the ARNs of the canaries that are associated with the specified group.
+   */
+  listGroupResources(params: Synthetics.Types.ListGroupResourcesRequest, callback?: (err: AWSError, data: Synthetics.Types.ListGroupResourcesResponse) => void): Request<Synthetics.Types.ListGroupResourcesResponse, AWSError>;
+  /**
+   * This operation returns a list of the ARNs of the canaries that are associated with the specified group.
+   */
+  listGroupResources(callback?: (err: AWSError, data: Synthetics.Types.ListGroupResourcesResponse) => void): Request<Synthetics.Types.ListGroupResourcesResponse, AWSError>;
+  /**
+   * Returns a list of all groups in the account, displaying their names, unique IDs, and ARNs. The groups from all Regions are returned.
+   */
+  listGroups(params: Synthetics.Types.ListGroupsRequest, callback?: (err: AWSError, data: Synthetics.Types.ListGroupsResponse) => void): Request<Synthetics.Types.ListGroupsResponse, AWSError>;
+  /**
+   * Returns a list of all groups in the account, displaying their names, unique IDs, and ARNs. The groups from all Regions are returned.
+   */
+  listGroups(callback?: (err: AWSError, data: Synthetics.Types.ListGroupsResponse) => void): Request<Synthetics.Types.ListGroupsResponse, AWSError>;
+  /**
+   * Displays the tags associated with a canary or group.
    */
   listTagsForResource(params: Synthetics.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.ListTagsForResourceResponse) => void): Request<Synthetics.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Displays the tags associated with a canary.
+   * Displays the tags associated with a canary or group.
    */
   listTagsForResource(callback?: (err: AWSError, data: Synthetics.Types.ListTagsForResourceResponse) => void): Request<Synthetics.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -84,35 +148,35 @@ declare class Synthetics extends Service {
    */
   startCanary(callback?: (err: AWSError, data: Synthetics.Types.StartCanaryResponse) => void): Request<Synthetics.Types.StartCanaryResponse, AWSError>;
   /**
-   * Stops the canary to prevent all future runs. If the canary is currently running, Synthetics stops waiting for the current run of the specified canary to complete. The run that is in progress completes on its own, publishes metrics, and uploads artifacts, but it is not recorded in Synthetics as a completed run. You can use StartCanary to start it running again with the canary’s current schedule at any point in the future. 
+   * Stops the canary to prevent all future runs. If the canary is currently running,the run that is in progress completes on its own, publishes metrics, and uploads artifacts, but it is not recorded in Synthetics as a completed run. You can use StartCanary to start it running again with the canary’s current schedule at any point in the future. 
    */
   stopCanary(params: Synthetics.Types.StopCanaryRequest, callback?: (err: AWSError, data: Synthetics.Types.StopCanaryResponse) => void): Request<Synthetics.Types.StopCanaryResponse, AWSError>;
   /**
-   * Stops the canary to prevent all future runs. If the canary is currently running, Synthetics stops waiting for the current run of the specified canary to complete. The run that is in progress completes on its own, publishes metrics, and uploads artifacts, but it is not recorded in Synthetics as a completed run. You can use StartCanary to start it running again with the canary’s current schedule at any point in the future. 
+   * Stops the canary to prevent all future runs. If the canary is currently running,the run that is in progress completes on its own, publishes metrics, and uploads artifacts, but it is not recorded in Synthetics as a completed run. You can use StartCanary to start it running again with the canary’s current schedule at any point in the future. 
    */
   stopCanary(callback?: (err: AWSError, data: Synthetics.Types.StopCanaryResponse) => void): Request<Synthetics.Types.StopCanaryResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary or group.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary or group.
    */
   tagResource(params: Synthetics.Types.TagResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary or group.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary or group.
    */
   tagResource(callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from the specified canary.
+   * Removes one or more tags from the specified resource.
    */
   untagResource(params: Synthetics.Types.UntagResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.UntagResourceResponse) => void): Request<Synthetics.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from the specified canary.
+   * Removes one or more tags from the specified resource.
    */
   untagResource(callback?: (err: AWSError, data: Synthetics.Types.UntagResourceResponse) => void): Request<Synthetics.Types.UntagResourceResponse, AWSError>;
   /**
-   * Use this operation to change the settings of a canary that has already been created. You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use TagResource.
+   * Updates the configuration of a canary that has already been created. You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use TagResource.
    */
   updateCanary(params: Synthetics.Types.UpdateCanaryRequest, callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
   /**
-   * Use this operation to change the settings of a canary that has already been created. You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use TagResource.
+   * Updates the configuration of a canary that has already been created. You can't use this operation to update the tags of an existing canary. To change the tags of an existing canary, use TagResource.
    */
   updateCanary(callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
 }
@@ -129,13 +193,25 @@ declare namespace Synthetics {
      */
     S3Encryption?: S3EncryptionConfig;
   }
+  export interface AssociateResourceRequest {
+    /**
+     * Specifies the group. You can specify the group name, the ARN, or the group ID as the GroupIdentifier.
+     */
+    GroupIdentifier: GroupIdentifier;
+    /**
+     * The ARN of the canary that you want to associate with the specified group.
+     */
+    ResourceArn: CanaryArn;
+  }
+  export interface AssociateResourceResponse {
+  }
   export interface BaseScreenshot {
     /**
      * The name of the screenshot. This is generated the first time the canary is run after the UpdateCanary operation that specified for this canary to perform visual monitoring.
      */
     ScreenshotName: String;
     /**
-     * Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}
+     * Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch console to draw the boundaries on the screen. For more information, see  Editing or deleting a canary 
      */
     IgnoreCoordinates?: BaseScreenshotIgnoreCoordinates;
   }
@@ -286,7 +362,7 @@ declare namespace Synthetics {
      */
     ActiveTracing?: NullableBoolean;
     /**
-     * Specifies the keys and values to use for any environment variables used in the canary script. Use the following format: { "key1" : "value1", "key2" : "value2", ...} Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can't specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see  Runtime environment variables.
+     * Specifies the keys and values to use for any environment variables used in the canary script. Use the following format: { "key1" : "value1", "key2" : "value2", ...} Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can't specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see  Runtime environment variables.  The environment variables keys and values are not encrypted. Do not store sensitive information in this field. 
      */
     EnvironmentVariables?: EnvironmentVariablesMap;
   }
@@ -408,7 +484,7 @@ declare namespace Synthetics {
      */
     Schedule: CanaryScheduleInput;
     /**
-     * A structure that contains the configuration for individual canary runs, such as timeout value.
+     * A structure that contains the configuration for individual canary runs, such as timeout value and environment variables.  The environment variables keys and values are not encrypted. Do not store sensitive information in this field. 
      */
     RunConfig?: CanaryRunConfigInput;
     /**
@@ -442,6 +518,22 @@ declare namespace Synthetics {
      */
     Canary?: Canary;
   }
+  export interface CreateGroupRequest {
+    /**
+     * The name for the group. It can include any Unicode characters. The names for all groups in your account, across all Regions, must be unique.
+     */
+    Name: GroupName;
+    /**
+     * A list of key-value pairs to associate with the group. You can associate as many as 50 tags with a group. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateGroupResponse {
+    /**
+     * A structure that contains information about the group that was just created.
+     */
+    Group?: Group;
+  }
   export interface DeleteCanaryRequest {
     /**
      * The name of the canary that you want to delete. To find the names of your canaries, use DescribeCanaries.
@@ -454,10 +546,18 @@ declare namespace Synthetics {
   }
   export interface DeleteCanaryResponse {
   }
+  export interface DeleteGroupRequest {
+    /**
+     * Specifies which group to delete. You can specify the group name, the ARN, or the group ID as the GroupIdentifier.
+     */
+    GroupIdentifier: GroupIdentifier;
+  }
+  export interface DeleteGroupResponse {
+  }
   export type DescribeCanariesLastRunNameFilter = CanaryName[];
   export interface DescribeCanariesLastRunRequest {
     /**
-     * A token that indicates that there is more data available. You can use this token in a subsequent DescribeCanaries operation to retrieve the next set of results.
+     * A token that indicates that there is more data available. You can use this token in a subsequent DescribeCanariesLastRun operation to retrieve the next set of results.
      */
     NextToken?: Token;
     /**
@@ -524,6 +624,18 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export interface DisassociateResourceRequest {
+    /**
+     * Specifies the group. You can specify the group name, the ARN, or the group ID as the GroupIdentifier.
+     */
+    GroupIdentifier: GroupIdentifier;
+    /**
+     * The ARN of the canary that you want to remove from the specified group.
+     */
+    ResourceArn: CanaryArn;
+  }
+  export interface DisassociateResourceResponse {
+  }
   export type EncryptionMode = "SSE_S3"|"SSE_KMS"|string;
   export type EnvironmentVariableName = string;
   export type EnvironmentVariableValue = string;
@@ -537,7 +649,7 @@ declare namespace Synthetics {
   }
   export interface GetCanaryResponse {
     /**
-     * A strucure that contains the full information about the canary.
+     * A structure that contains the full information about the canary.
      */
     Canary?: Canary;
   }
@@ -565,26 +677,153 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
-  export type KmsKeyArn = string;
-  export interface ListTagsForResourceRequest {
+  export interface GetGroupRequest {
     /**
-     * The ARN of the canary that you want to view tags for. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
+     * Specifies the group to return information for. You can specify the group name, the ARN, or the group ID as the GroupIdentifier.
+     */
+    GroupIdentifier: GroupIdentifier;
+  }
+  export interface GetGroupResponse {
+    /**
+     * A structure that contains information about the group.
+     */
+    Group?: Group;
+  }
+  export interface Group {
+    /**
+     * The unique ID of the group.
+     */
+    Id?: String;
+    /**
+     * The name of the group.
+     */
+    Name?: GroupName;
+    /**
+     * The ARN of the group.
+     */
+    Arn?: GroupArn;
+    /**
+     * The list of key-value pairs that are associated with the canary.
+     */
+    Tags?: TagMap;
+    /**
+     * The date and time that the group was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The date and time that the group was most recently updated.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type GroupArn = string;
+  export type GroupIdentifier = string;
+  export type GroupName = string;
+  export interface GroupSummary {
+    /**
+     * The unique ID of the group.
+     */
+    Id?: String;
+    /**
+     * The name of the group.
+     */
+    Name?: GroupName;
+    /**
+     * The ARN of the group.
+     */
+    Arn?: GroupArn;
+  }
+  export type GroupSummaryList = GroupSummary[];
+  export type KmsKeyArn = string;
+  export interface ListAssociatedGroupsRequest {
+    /**
+     * A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Specify this parameter to limit how many groups are returned each time you use the ListAssociatedGroups operation. If you omit this parameter, the default of 20 is used.
+     */
+    MaxResults?: MaxGroupResults;
+    /**
+     * The ARN of the canary that you want to view groups for.
      */
     ResourceArn: CanaryArn;
   }
+  export interface ListAssociatedGroupsResponse {
+    /**
+     * An array of structures that contain information about the groups that this canary is associated with.
+     */
+    Groups?: GroupSummaryList;
+    /**
+     * A token that indicates that there is more data available. You can use this token in a subsequent ListAssociatedGroups operation to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListGroupResourcesRequest {
+    /**
+     * A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Specify this parameter to limit how many canary ARNs are returned each time you use the ListGroupResources operation. If you omit this parameter, the default of 20 is used.
+     */
+    MaxResults?: MaxGroupResults;
+    /**
+     * Specifies the group to return information for. You can specify the group name, the ARN, or the group ID as the GroupIdentifier.
+     */
+    GroupIdentifier: GroupIdentifier;
+  }
+  export interface ListGroupResourcesResponse {
+    /**
+     * An array of ARNs. These ARNs are for the canaries that are associated with the group.
+     */
+    Resources?: StringList;
+    /**
+     * A token that indicates that there is more data available. You can use this token in a subsequent ListGroupResources operation to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListGroupsRequest {
+    /**
+     * A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Specify this parameter to limit how many groups are returned each time you use the ListGroups operation. If you omit this parameter, the default of 20 is used.
+     */
+    MaxResults?: MaxGroupResults;
+  }
+  export interface ListGroupsResponse {
+    /**
+     * An array of structures that each contain information about one group.
+     */
+    Groups?: GroupSummaryList;
+    /**
+     * A token that indicates that there is more data available. You can use this token in a subsequent ListGroups operation to retrieve the next set of results.
+     */
+    NextToken?: Token;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the canary or group that you want to view tags for. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The ARN format of a group is arn:aws:synthetics:Region:account-id:group:group-name  
+     */
+    ResourceArn: ResourceArn;
+  }
   export interface ListTagsForResourceResponse {
     /**
-     * The list of tag keys and values associated with the canary that you specified.
+     * The list of tag keys and values associated with the resource that you specified.
      */
     Tags?: TagMap;
   }
   export type MaxCanaryResults = number;
   export type MaxFifteenMinutesInSeconds = number;
+  export type MaxGroupResults = number;
   export type MaxOneYearInSeconds = number;
   export type MaxSize100 = number;
   export type MaxSize1024 = number;
   export type MaxSize3008 = number;
   export type NullableBoolean = boolean;
+  export type PaginationToken = string;
+  export type ResourceArn = string;
   export type RoleArn = string;
   export interface RuntimeVersion {
     /**
@@ -627,13 +866,14 @@ declare namespace Synthetics {
   }
   export interface StopCanaryRequest {
     /**
-     * The name of the canary that you want to stop. To find the names of your canaries, use DescribeCanaries.
+     * The name of the canary that you want to stop. To find the names of your canaries, use ListCanaries.
      */
     Name: CanaryName;
   }
   export interface StopCanaryResponse {
   }
   export type String = string;
+  export type StringList = String[];
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
   export type TagKey = string;
@@ -641,11 +881,11 @@ declare namespace Synthetics {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * The ARN of the canary that you're adding tags to. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
+     * The ARN of the canary or group that you're adding tags to. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The ARN format of a group is arn:aws:synthetics:Region:account-id:group:group-name  
      */
-    ResourceArn: CanaryArn;
+    ResourceArn: ResourceArn;
     /**
-     * The list of key-value pairs to associate with the canary.
+     * The list of key-value pairs to associate with the resource.
      */
     Tags: TagMap;
   }
@@ -657,9 +897,9 @@ declare namespace Synthetics {
   export type UUID = string;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the canary that you're removing tags from. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
+     * The ARN of the canary or group that you're removing tags from. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The ARN format of a group is arn:aws:synthetics:Region:account-id:group:group-name  
      */
-    ResourceArn: CanaryArn;
+    ResourceArn: ResourceArn;
     /**
      * The list of tag keys to remove from the resource.
      */
@@ -689,7 +929,7 @@ declare namespace Synthetics {
      */
     Schedule?: CanaryScheduleInput;
     /**
-     * A structure that contains the timeout value that is used for each individual run of the canary.
+     * A structure that contains the timeout value that is used for each individual run of the canary.  The environment variables keys and values are not encrypted. Do not store sensitive information in this field. 
      */
     RunConfig?: CanaryRunConfigInput;
     /**
@@ -735,7 +975,7 @@ declare namespace Synthetics {
      */
     BaseScreenshots?: BaseScreenshots;
     /**
-     * The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.
+     * The ID of the canary run that produced the baseline screenshots that are used for visual monitoring comparisons by this canary.
      */
     BaseCanaryRunId?: String;
   }

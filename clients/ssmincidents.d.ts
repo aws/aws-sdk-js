@@ -735,6 +735,10 @@ declare namespace SSMIncidents {
      */
     impact: Impact;
     /**
+     * Tags to apply to an incident when calling the StartIncident API action.
+     */
+    incidentTags?: TagMap;
+    /**
      * The Amazon SNS targets that are notified when updates are made to an incident.
      */
     notificationTargets?: NotificationTargetSet;
@@ -1135,6 +1139,7 @@ declare namespace SSMIncidents {
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
+  export type TagMapUpdate = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the response plan you're adding the tags to.
@@ -1344,6 +1349,10 @@ declare namespace SSMIncidents {
      * A brief summary of the incident. This typically contains what has happened, what's currently happening, and next steps.
      */
     incidentTemplateSummary?: IncidentSummary;
+    /**
+     * Tags to apply to an incident when calling the StartIncident API action. To call this action, you must also have permission to call the TagResource API action for the incident record resource.
+     */
+    incidentTemplateTags?: TagMapUpdate;
     /**
      * The short format name of the incident. The title can't contain spaces.
      */

@@ -697,6 +697,14 @@ declare class Redshift extends Service {
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
+   * Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity. For more information about IAM identities, see IAM Identities (users, user groups, and roles) in the Amazon Web Services Identity and Access Management User Guide. The Identity and Access Management (IAM) identity that runs this operation must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Using identity-based policies (IAM policies) in the Amazon Redshift Cluster Management Guide. 
+   */
+  getClusterCredentialsWithIAM(params: Redshift.Types.GetClusterCredentialsWithIAMMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterExtendedCredentials) => void): Request<Redshift.Types.ClusterExtendedCredentials, AWSError>;
+  /**
+   * Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity. For more information about IAM identities, see IAM Identities (users, user groups, and roles) in the Amazon Web Services Identity and Access Management User Guide. The Identity and Access Management (IAM) identity that runs this operation must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Using identity-based policies (IAM policies) in the Amazon Redshift Cluster Management Guide. 
+   */
+  getClusterCredentialsWithIAM(callback?: (err: AWSError, data: Redshift.Types.ClusterExtendedCredentials) => void): Request<Redshift.Types.ClusterExtendedCredentials, AWSError>;
+  /**
    * Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.
    */
   getReservedNodeExchangeConfigurationOptions(params: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeConfigurationOptionsOutputMessage, AWSError>;
@@ -713,11 +721,11 @@ declare class Redshift extends Service {
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
-   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   * This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
    */
   modifyAquaConfiguration(params: Redshift.Types.ModifyAquaInputMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
   /**
-   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   * This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
    */
   modifyAquaConfiguration(callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
   /**
@@ -1032,11 +1040,11 @@ declare namespace Redshift {
   export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
   export interface AquaConfiguration {
     /**
-     * The value indicates the status of AQUA on the cluster. Possible values include the following.   enabled - AQUA is enabled.   disabled - AQUA is not enabled.    applying - AQUA status is being applied.   
+     * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaStatus?: AquaStatus;
     /**
-     * The value represents how the cluster is configured to use AQUA. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
   }
@@ -1132,7 +1140,11 @@ declare namespace Redshift {
     /**
      * The identifier of the snapshot the account is authorized to restore.
      */
-    SnapshotIdentifier: String;
+    SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot to authorize access to.
+     */
+    SnapshotArn?: String;
     /**
      * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
@@ -1404,7 +1416,7 @@ declare namespace Redshift {
      */
     TotalStorageCapacityInMegaBytes?: LongOptional;
     /**
-     * The AQUA (Advanced Query Accelerator) configuration of the cluster.
+     * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfiguration?: AquaConfiguration;
     /**
@@ -1468,6 +1480,24 @@ declare namespace Redshift {
      * A list of revisions.
      */
     ClusterDbRevisions?: ClusterDbRevisionsList;
+  }
+  export interface ClusterExtendedCredentials {
+    /**
+     * A database user name that you provide when you connect to a database. The database user is mapped 1:1 to the source IAM identity. 
+     */
+    DbUser?: String;
+    /**
+     * A temporary password that you provide when you connect to a database.
+     */
+    DbPassword?: SensitiveString;
+    /**
+     * The time (UTC) when the temporary password expires. After this timestamp, a log in with the temporary password fails.
+     */
+    Expiration?: TStamp;
+    /**
+     * Reserved for future use.
+     */
+    NextRefreshTime?: TStamp;
   }
   export interface ClusterIamRole {
     /**
@@ -1876,7 +1906,7 @@ declare namespace Redshift {
      */
     AvailabilityZoneRelocation?: BooleanOptional;
     /**
-     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
     /**
@@ -2545,6 +2575,10 @@ declare namespace Redshift {
      */
     SnapshotIdentifier?: String;
     /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to describe cluster snapshots.
+     */
+    SnapshotArn?: String;
+    /**
      * The type of snapshots for which you are requesting information. By default, snapshots of all types are returned. Valid Values: automated | manual 
      */
     SnapshotType?: String;
@@ -2927,6 +2961,10 @@ declare namespace Redshift {
      * The identifier of the snapshot to evaluate for possible node configurations.
      */
     SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.
+     */
+    SnapshotArn?: String;
     /**
      * The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
      */
@@ -3576,15 +3614,15 @@ declare namespace Redshift {
   }
   export interface GetClusterCredentialsMessage {
     /**
-     * The name of a database user. If a user name matching DbUser exists in the database, the temporary user credentials have the same permissions as the existing user. If DbUser doesn't exist in the database and Autocreate is True, a new user is created using the value for DbUser with PUBLIC permissions. If a database user matching the value for DbUser doesn't exist and Autocreate is False, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database. For more information, see CREATE USER in the Amazon Redshift Database Developer Guide.  Constraints:   Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
+     * The name of a database user. If a user name matching DbUser exists in the database, the temporary user credentials have the same permissions as the existing user. If DbUser doesn't exist in the database and Autocreate is True, a new user is created using the value for DbUser with PUBLIC permissions. If a database user matching the value for DbUser doesn't exist and Autocreate is False, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database. For more information, see CREATE USER in the Amazon Redshift Database Developer Guide.  Constraints:   Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbUser: String;
     /**
-     * The name of a database that DbUser is authorized to log on to. If DbName is not specified, DbUser can log on to any existing database. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
+     * The name of a database that DbUser is authorized to log on to. If DbName is not specified, DbUser can log on to any existing database. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens   Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbName?: String;
     /**
-     * The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.
+     * The unique identifier of the cluster that contains the database for which you are requesting credentials. This parameter is case sensitive.
      */
     ClusterIdentifier: String;
     /**
@@ -3599,6 +3637,20 @@ declare namespace Redshift {
      * A list of the names of existing database groups that the user named in DbUser will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC. Database group name constraints   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbGroups?: DbGroupList;
+  }
+  export interface GetClusterCredentialsWithIAMMessage {
+    /**
+     * The name of the database for which you are requesting credentials. If the database name is specified, the IAM policy must allow access to the resource dbname for the specified database name. If the database name is not specified, access to all databases is allowed.
+     */
+    DbName?: String;
+    /**
+     * The unique identifier of the cluster that contains the database for which you are requesting credentials. 
+     */
+    ClusterIdentifier: String;
+    /**
+     * The number of seconds until the returned temporary password expires. Range: 900-3600. Default: 900.
+     */
+    DurationSeconds?: IntegerOptional;
   }
   export interface GetReservedNodeExchangeConfigurationOptionsInputMessage {
     /**
@@ -3808,13 +3860,13 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * The new value of AQUA configuration status. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
   }
   export interface ModifyAquaOutputMessage {
     /**
-     * The updated AQUA configuration of the cluster. 
+     * This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
      */
     AquaConfiguration?: AquaConfiguration;
   }
@@ -4768,9 +4820,13 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive. Example: my-snapshot-id 
+     * The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive. You can specify this parameter or snapshotArn, but not both. Example: my-snapshot-id 
      */
-    SnapshotIdentifier: String;
+    SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster. You can specify this parameter or snapshotIdentifier, but not both.
+     */
+    SnapshotArn?: String;
     /**
      * The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
@@ -4872,7 +4928,7 @@ declare namespace Redshift {
      */
     AvailabilityZoneRelocation?: BooleanOptional;
     /**
-     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     * This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
     /**
@@ -5029,7 +5085,11 @@ declare namespace Redshift {
     /**
      * The identifier of the snapshot that the account can no longer access.
      */
-    SnapshotIdentifier: String;
+    SnapshotIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the snapshot associated with the message to revoke access.
+     */
+    SnapshotArn?: String;
     /**
      * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
