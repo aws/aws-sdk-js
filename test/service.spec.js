@@ -11,6 +11,46 @@
 
   metadata = require('../apis/metadata.json');
 
+  describe('AWSQuery compatible error codes', function () {
+    let service;
+
+    beforeEach(function(done) {
+      service = new MockService({maxRetries: 0});
+      return done();
+    });
+
+    it('can receive awsquery compatible error code when header present', function () {
+      helpers.mockHttpResponse(500, {
+        'x-amzn-query-error': 'AwsQueryError;Sender'
+      }, ['ServiceError']);
+      return (service.makeRequest('operation', {}, function (err, data) {
+        expect(err.code).to.equal('AwsQueryError');
+        expect(err.statusCode).to.equal(500);
+        return expect(data).to.equal(null);
+      }));
+    });
+
+    it('can receive error code when header not present', function () {
+      helpers.mockHttpResponse(500, {}, ['ServiceUnavailableException']);
+      return (service.makeRequest('operation', {}, function (err, data) {
+        expect(err.code).to.equal('ServiceUnavailableException');
+        expect(err.statusCode).to.equal(500);
+        return expect(data).to.equal(null);
+      }));
+    });
+
+    it('can receive awsquery compatible error code when header empty', function () {
+      helpers.mockHttpResponse(500, {
+        'x-amzn-query-error': ''
+      }, ['ServiceError']);
+      return (service.makeRequest('operation', {}, function (err, data) {
+        expect(err.code).to.equal('ServiceError');
+        expect(err.statusCode).to.equal(500);
+        return expect(data).to.equal(null);
+      }));
+    });
+  });
+
   describe('AWS.Service', function() {
     var config, retryableError, service;
     config = null;

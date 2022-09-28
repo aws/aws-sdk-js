@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "AwsQueryCompatible",
+  "description": "Return  AWSQuery compatible error code from HTTP header if found"
+}
