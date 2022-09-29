@@ -84,6 +84,14 @@ declare class Translate extends Service {
    */
   listParallelData(callback?: (err: AWSError, data: Translate.Types.ListParallelDataResponse) => void): Request<Translate.Types.ListParallelDataResponse, AWSError>;
   /**
+   * 
+   */
+  listTagsForResource(params: Translate.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Translate.Types.ListTagsForResourceResponse) => void): Request<Translate.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Translate.Types.ListTagsForResourceResponse) => void): Request<Translate.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Provides a list of custom terminologies associated with your account.
    */
   listTerminologies(params: Translate.Types.ListTerminologiesRequest, callback?: (err: AWSError, data: Translate.Types.ListTerminologiesResponse) => void): Request<Translate.Types.ListTerminologiesResponse, AWSError>;
@@ -116,6 +124,14 @@ declare class Translate extends Service {
    */
   stopTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.StopTextTranslationJobResponse) => void): Request<Translate.Types.StopTextTranslationJobResponse, AWSError>;
   /**
+   * 
+   */
+  tagResource(params: Translate.Types.TagResourceRequest, callback?: (err: AWSError, data: Translate.Types.TagResourceResponse) => void): Request<Translate.Types.TagResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  tagResource(callback?: (err: AWSError, data: Translate.Types.TagResourceResponse) => void): Request<Translate.Types.TagResourceResponse, AWSError>;
+  /**
    * Translates input text from the source language to the target language. For a list of available languages and language codes, see what-is-languages.
    */
   translateText(params: Translate.Types.TranslateTextRequest, callback?: (err: AWSError, data: Translate.Types.TranslateTextResponse) => void): Request<Translate.Types.TranslateTextResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class Translate extends Service {
    * Translates input text from the source language to the target language. For a list of available languages and language codes, see what-is-languages.
    */
   translateText(callback?: (err: AWSError, data: Translate.Types.TranslateTextResponse) => void): Request<Translate.Types.TranslateTextResponse, AWSError>;
+  /**
+   * 
+   */
+  untagResource(params: Translate.Types.UntagResourceRequest, callback?: (err: AWSError, data: Translate.Types.UntagResourceResponse) => void): Request<Translate.Types.UntagResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  untagResource(callback?: (err: AWSError, data: Translate.Types.UntagResourceResponse) => void): Request<Translate.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates a previously created parallel data resource by importing a new input file from Amazon S3.
    */
@@ -165,6 +189,7 @@ declare namespace Translate {
      * A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
      */
     ClientToken: ClientTokenString;
+    Tags?: TagList;
   }
   export interface CreateParallelDataResponse {
     /**
@@ -296,6 +321,7 @@ declare namespace Translate {
      * The encryption key for the custom terminology being imported.
      */
     EncryptionKey?: EncryptionKey;
+    Tags?: TagList;
   }
   export interface ImportTerminologyResponse {
     /**
@@ -395,6 +421,12 @@ declare namespace Translate {
      * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    ResourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: TagList;
   }
   export interface ListTerminologiesRequest {
     /**
@@ -544,6 +576,7 @@ declare namespace Translate {
   export type ParallelDataPropertiesList = ParallelDataProperties[];
   export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
   export type Profanity = "MASK"|string;
+  export type ResourceArn = string;
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
   export type S3Uri = string;
@@ -616,6 +649,20 @@ declare namespace Translate {
     JobStatus?: JobStatus;
   }
   export type String = string;
+  export interface Tag {
+    Key: TagKey;
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    ResourceArn: ResourceArn;
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type TargetLanguageCodeStringList = LanguageCodeString[];
   export interface Term {
     /**
@@ -851,6 +898,12 @@ declare namespace Translate {
     Profanity?: Profanity;
   }
   export type UnboundedLengthString = string;
+  export interface UntagResourceRequest {
+    ResourceArn: ResourceArn;
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateParallelDataRequest {
     /**
      * The name of the parallel data resource being updated.

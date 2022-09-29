@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1225.0-->
+<!--LATEST=2.1226.0-->
 <!--ENTRYINSERT-->
+
+## 2.1226.0
+* feature: ACM: This update returns additional certificate details such as certificate SANs and allows sorting in the ListCertificates API.
+* feature: AwsQueryCompatible: Return  AWSQuery compatible error code from HTTP header if found
+* feature: EC2: u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases.
+* feature: EMRServerless: This release adds API support to debug Amazon EMR Serverless jobs in real-time with live application UIs
+* feature: FSx: This release adds support for Amazon File Cache.
+* feature: MigrationHubOrchestrator: Introducing AWS MigrationHubOrchestrator. This is the first public release of AWS MigrationHubOrchestrator.
+* feature: Polly: Added support for the new Cantonese voice - Hiujin. Hiujin is available as a Neural voice only.
+* feature: Proton: This release adds an option to delete pipeline provisioning repositories using the UpdateAccountSettings API
+* feature: SageMaker: SageMaker Training Managed Warm Pools let you retain provisioned infrastructure to reduce latency for repetitive training workloads.
+* feature: Translate: This release enables customers to access control rights on Translate resources like Parallel Data and Custom Terminology using Tag Based Authorization.
+* feature: WorkSpaces: This release includes diagnostic log uploading feature. If it is enabled, the log files of WorkSpaces Windows client will be sent to Amazon WorkSpaces automatically for troubleshooting. You can use modifyClientProperty api to enable/disable this feature.
 
 ## 2.1225.0
 * bugfix: rest-json: unset content length in rest-json when payload is undefined

@@ -316,5 +316,6 @@ module.exports = {
   PrivateNetworks: require('./privatenetworks'),
   SupportApp: require('./supportapp'),
   ControlTower: require('./controltower'),
-  IoTFleetWise: require('./iotfleetwise')
+  IoTFleetWise: require('./iotfleetwise'),
+  MigrationHubOrchestrator: require('./migrationhuborchestrator')
 };

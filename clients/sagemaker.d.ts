@@ -2069,11 +2069,11 @@ declare class SageMaker extends Service {
    */
   updateProject(callback?: (err: AWSError, data: SageMaker.Types.UpdateProjectOutput) => void): Request<SageMaker.Types.UpdateProjectOutput, AWSError>;
   /**
-   * Update a model training job to request a new Debugger profiling configuration.
+   * Update a model training job to request a new Debugger profiling configuration or to change warm pool retention length.
    */
   updateTrainingJob(params: SageMaker.Types.UpdateTrainingJobRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateTrainingJobResponse) => void): Request<SageMaker.Types.UpdateTrainingJobResponse, AWSError>;
   /**
-   * Update a model training job to request a new Debugger profiling configuration.
+   * Update a model training job to request a new Debugger profiling configuration or to change warm pool retention length.
    */
   updateTrainingJob(callback?: (err: AWSError, data: SageMaker.Types.UpdateTrainingJobResponse) => void): Request<SageMaker.Types.UpdateTrainingJobResponse, AWSError>;
   /**
@@ -8327,6 +8327,10 @@ declare namespace SageMaker {
      * The environment variables to set in the Docker container.
      */
     Environment?: TrainingEnvironmentMap;
+    /**
+     * The status of the warm pool associated with the training job.
+     */
+    WarmPoolStatus?: WarmPoolStatus;
   }
   export interface DescribeTransformJobRequest {
     /**
@@ -10675,6 +10679,7 @@ declare namespace SageMaker {
      */
     LifecycleConfigArns?: LifecycleConfigArns;
   }
+  export type KeepAlivePeriodInSeconds = number;
   export type KernelDisplayName = string;
   export interface KernelGatewayAppSettings {
     /**
@@ -13284,6 +13289,10 @@ declare namespace SageMaker {
      * The sort order for results. The default is Ascending.
      */
     SortOrder?: SortOrder;
+    /**
+     * A filter that retrieves only training jobs with a specific warm pool status.
+     */
+    WarmPoolStatusEquals?: WarmPoolResourceStatus;
   }
   export interface ListTrainingJobsResponse {
     /**
@@ -16329,6 +16338,16 @@ declare namespace SageMaker {
      * The configuration of a heterogeneous cluster in JSON format.
      */
     InstanceGroups?: InstanceGroups;
+    /**
+     * The duration of time in seconds to retain configured resources in a warm pool for subsequent training jobs.
+     */
+    KeepAlivePeriodInSeconds?: KeepAlivePeriodInSeconds;
+  }
+  export interface ResourceConfigForUpdate {
+    /**
+     * The KeepAlivePeriodInSeconds value specified in the ResourceConfig to update.
+     */
+    KeepAlivePeriodInSeconds: KeepAlivePeriodInSeconds;
   }
   export type ResourceId = string;
   export interface ResourceLimits {
@@ -16343,6 +16362,7 @@ declare namespace SageMaker {
   }
   export type ResourcePolicyString = string;
   export type ResourcePropertyName = string;
+  export type ResourceRetainedBillableTimeInSeconds = number;
   export interface ResourceSpec {
     /**
      * The ARN of the SageMaker image that the image version belongs to.
@@ -17280,6 +17300,10 @@ declare namespace SageMaker {
      * The status of the training job.
      */
     TrainingJobStatus: TrainingJobStatus;
+    /**
+     * The status of the warm pool associated with the training job.
+     */
+    WarmPoolStatus?: WarmPoolStatus;
   }
   export interface TrainingSpecification {
     /**
@@ -18410,6 +18434,10 @@ declare namespace SageMaker {
      * Configuration information for Debugger rules for profiling system and framework metrics.
      */
     ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
+    /**
+     * The training job ResourceConfig to update warm pool retention length.
+     */
+    ResourceConfig?: ResourceConfigForUpdate;
   }
   export interface UpdateTrainingJobResponse {
     /**
@@ -18677,6 +18705,21 @@ declare namespace SageMaker {
   export type VpcId = string;
   export type VpcSecurityGroupIds = SecurityGroupId[];
   export type WaitIntervalInSeconds = number;
+  export type WarmPoolResourceStatus = "Available"|"Terminated"|"Reused"|"InUse"|string;
+  export interface WarmPoolStatus {
+    /**
+     * The status of the warm pool.    InUse: The warm pool is in use for the training job.    Available: The warm pool is available to reuse for a matching training job.    Reused: The warm pool moved to a matching training job for reuse.    Terminated: The warm pool is no longer available. Warm pools are unavailable if they are terminated by a user, terminated for a patch update, or terminated for exceeding the specified KeepAlivePeriodInSeconds.  
+     */
+    Status: WarmPoolResourceStatus;
+    /**
+     * The billable time in seconds used by the warm pool. Billable time refers to the absolute wall-clock time. Multiply ResourceRetainedBillableTimeInSeconds by the number of instances (InstanceCount) in your training cluster to get the total compute time SageMaker bills you if you run warm pool training. The formula is as follows: ResourceRetainedBillableTimeInSeconds * InstanceCount.
+     */
+    ResourceRetainedBillableTimeInSeconds?: ResourceRetainedBillableTimeInSeconds;
+    /**
+     * The name of the matching training job that reused the warm pool.
+     */
+    ReusedByJob?: TrainingJobName;
+  }
   export interface Workforce {
     /**
      * The name of the private workforce.

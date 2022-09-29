@@ -609,6 +609,10 @@ declare namespace WorkSpaces {
      * Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. 
      */
     ReconnectEnabled?: ReconnectEnum;
+    /**
+     * Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to WorkSpaces to troubleshoot issues when using the WorkSpaces client. When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all users in the specified directory.
+     */
+    LogUploadEnabled?: LogUploadEnum;
   }
   export type ClientPropertiesList = ClientPropertiesResult[];
   export interface ClientPropertiesResult {
@@ -904,7 +908,7 @@ declare namespace WorkSpaces {
      */
     Created?: Timestamp;
     /**
-     * The identifier of the AWS account that owns the image.
+     * The identifier of the Amazon Web Services account that owns the image.
      */
     OwnerAccountId?: AwsAccount;
   }
@@ -1708,6 +1712,7 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export type LogUploadEnum = "ENABLED"|"DISABLED"|string;
   export type LoginMessage = {[key: string]: ClientLoginMessage};
   export type ManagementCidrRangeConstraint = string;
   export type ManagementCidrRangeMaxResults = number;

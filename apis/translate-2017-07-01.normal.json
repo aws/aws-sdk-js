@@ -39,7 +39,13 @@
           "shape": "TooManyRequestsException"
         },
         {
+          "shape": "TooManyTagsException"
+        },
+        {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         },
         {
           "shape": "InternalServerException"
@@ -204,6 +210,12 @@
           "shape": "TooManyRequestsException"
         },
         {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
           "shape": "InternalServerException"
         }
       ],
@@ -261,6 +273,30 @@
         }
       ],
       "documentation": "<p>Provides a list of your parallel data resources in Amazon Translate.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ]
     },
     "ListTerminologies": {
       "name": "ListTerminologies",
@@ -374,6 +410,36 @@
       ],
       "documentation": "<p>Stops an asynchronous batch translation job that is in progress.</p> <p>If the job's state is <code>IN_PROGRESS</code>, the job will be marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state. Otherwise, the job is put into the <code>STOPPED</code> state.</p> <p>Asynchronous batch translation jobs are started with the <a>StartTextTranslationJob</a> operation. You can use the <a>DescribeTextTranslationJob</a> or <a>ListTextTranslationJobs</a> operations to get a batch translation job's <code>JobId</code>.</p>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ]
+    },
     "TranslateText": {
       "name": "TranslateText",
       "http": {
@@ -413,6 +479,33 @@
         }
       ],
       "documentation": "<p>Translates input text from the source language to the target language. For a list of available languages and language codes, see <a>what-is-languages</a>.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ]
     },
     "UpdateParallelData": {
       "name": "UpdateParallelData",
@@ -520,6 +613,9 @@
           "shape": "ClientTokenString",
           "documentation": "<p>A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.</p>",
           "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "TagList"
         }
       }
     },
@@ -757,6 +853,9 @@
         "EncryptionKey": {
           "shape": "EncryptionKey",
           "documentation": "<p>The encryption key for the custom terminology being imported.</p>"
+        },
+        "Tags": {
+          "shape": "TagList"
         }
       }
     },
@@ -928,6 +1027,25 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList"
         }
       }
     },
@@ -1171,6 +1289,11 @@
         "MASK"
       ]
     },
+    "ResourceArn": {
+      "type": "string",
+      "max": 512,
+      "min": 1
+    },
     "ResourceName": {
       "type": "string",
       "max": 256,
@@ -1285,12 +1408,71 @@
       "max": 10000,
       "pattern": "[\\P{M}\\p{M}]{0,10000}"
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey"
+        },
+        "Value": {
+          "shape": "TagValue"
+        }
+      }
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "TargetLanguageCodeStringList": {
       "type": "list",
       "member": {
         "shape": "LanguageCodeString"
       },
-      "max": 1,
       "min": 1
     },
     "Term": {
@@ -1612,6 +1794,25 @@
     },
     "UnboundedLengthString": {
       "type": "string"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateParallelDataRequest": {
       "type": "structure",

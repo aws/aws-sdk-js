@@ -317,6 +317,7 @@ export abstract class ConfigurationServicePlaceholders {
   supportapp?: AWS.SupportApp.Types.ClientConfiguration;
   controltower?: AWS.ControlTower.Types.ClientConfiguration;
   iotfleetwise?: AWS.IoTFleetWise.Types.ClientConfiguration;
+  migrationhuborchestrator?: AWS.MigrationHubOrchestrator.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -636,4 +637,5 @@ export interface ConfigurationServiceApiVersions {
   supportapp?: AWS.SupportApp.Types.apiVersion;
   controltower?: AWS.ControlTower.Types.apiVersion;
   iotfleetwise?: AWS.IoTFleetWise.Types.apiVersion;
+  migrationhuborchestrator?: AWS.MigrationHubOrchestrator.Types.apiVersion;
 }

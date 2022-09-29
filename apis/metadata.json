@@ -1196,5 +1196,8 @@
   },
   "iotfleetwise": {
     "name": "IoTFleetWise"
+  },
+  "migrationhuborchestrator": {
+    "name": "MigrationHubOrchestrator"
   }
 }

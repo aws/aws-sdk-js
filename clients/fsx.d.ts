@@ -44,11 +44,11 @@ declare class FSx extends Service {
    */
   createBackup(callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
   /**
-   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported only for file systems with the Persistent_2 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.
+   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported only for file systems with the Persistent_2 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.   CreateDataRepositoryAssociation isn't supported on Amazon File Cache resources. To create a DRA on Amazon File Cache, use the CreateFileCache operation. 
    */
   createDataRepositoryAssociation(params: FSx.Types.CreateDataRepositoryAssociationRequest, callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryAssociationResponse) => void): Request<FSx.Types.CreateDataRepositoryAssociationResponse, AWSError>;
   /**
-   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported only for file systems with the Persistent_2 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.
+   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported only for file systems with the Persistent_2 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.   CreateDataRepositoryAssociation isn't supported on Amazon File Cache resources. To create a DRA on Amazon File Cache, use the CreateFileCache operation. 
    */
   createDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryAssociationResponse) => void): Request<FSx.Types.CreateDataRepositoryAssociationResponse, AWSError>;
   /**
@@ -60,11 +60,19 @@ declare class FSx extends Service {
    */
   createDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryTaskResponse) => void): Request<FSx.Types.CreateDataRepositoryTaskResponse, AWSError>;
   /**
-   * Creates a new, empty Amazon FSx file system. You can create the following supported Amazon FSx file systems using the CreateFileSystem API operation:   Amazon FSx for Lustre   Amazon FSx for NetApp ONTAP   Amazon FSx for OpenZFS   Amazon FSx for Windows File Server   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same. If a file system with the specified client request token exists and the parameters match, CreateFileSystem returns the description of the existing file system. If a file system with the specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, CreateFileSystem does the following:    Creates a new, empty Amazon FSx file system with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system in JSON format.   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport-level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives a success message as long as the parameters are the same.  The CreateFileSystem call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
+   * Creates a new Amazon File Cache resource. You can use this operation with a client request token in the request that Amazon File Cache uses to ensure idempotent creation. If a cache with the specified client request token exists and the parameters match, CreateFileCache returns the description of the existing cache. If a cache with the specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file cache with the specified client request token doesn't exist, CreateFileCache does the following:    Creates a new, empty Amazon File Cache resourcewith an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the cache in JSON format.    The CreateFileCache call returns while the cache's lifecycle state is still CREATING. You can check the cache creation status by calling the DescribeFileCaches operation, which returns the cache state along with other information. 
+   */
+  createFileCache(params: FSx.Types.CreateFileCacheRequest, callback?: (err: AWSError, data: FSx.Types.CreateFileCacheResponse) => void): Request<FSx.Types.CreateFileCacheResponse, AWSError>;
+  /**
+   * Creates a new Amazon File Cache resource. You can use this operation with a client request token in the request that Amazon File Cache uses to ensure idempotent creation. If a cache with the specified client request token exists and the parameters match, CreateFileCache returns the description of the existing cache. If a cache with the specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file cache with the specified client request token doesn't exist, CreateFileCache does the following:    Creates a new, empty Amazon File Cache resourcewith an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the cache in JSON format.    The CreateFileCache call returns while the cache's lifecycle state is still CREATING. You can check the cache creation status by calling the DescribeFileCaches operation, which returns the cache state along with other information. 
+   */
+  createFileCache(callback?: (err: AWSError, data: FSx.Types.CreateFileCacheResponse) => void): Request<FSx.Types.CreateFileCacheResponse, AWSError>;
+  /**
+   * Creates a new, empty Amazon FSx file system. You can create the following supported Amazon FSx file systems using the CreateFileSystem API operation:   Amazon FSx for Lustre   Amazon FSx for NetApp ONTAP   Amazon FSx for OpenZFS   Amazon FSx for Windows File Server   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same. If a file system with the specified client request token exists and the parameters match, CreateFileSystem returns the description of the existing file system. If a file system with the specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, CreateFileSystem does the following:    Creates a new, empty Amazon FSx file system with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system in JSON format.    The CreateFileSystem call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
    */
   createFileSystem(params: FSx.Types.CreateFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.CreateFileSystemResponse) => void): Request<FSx.Types.CreateFileSystemResponse, AWSError>;
   /**
-   * Creates a new, empty Amazon FSx file system. You can create the following supported Amazon FSx file systems using the CreateFileSystem API operation:   Amazon FSx for Lustre   Amazon FSx for NetApp ONTAP   Amazon FSx for OpenZFS   Amazon FSx for Windows File Server   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same. If a file system with the specified client request token exists and the parameters match, CreateFileSystem returns the description of the existing file system. If a file system with the specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, CreateFileSystem does the following:    Creates a new, empty Amazon FSx file system with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system in JSON format.   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport-level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives a success message as long as the parameters are the same.  The CreateFileSystem call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
+   * Creates a new, empty Amazon FSx file system. You can create the following supported Amazon FSx file systems using the CreateFileSystem API operation:   Amazon FSx for Lustre   Amazon FSx for NetApp ONTAP   Amazon FSx for OpenZFS   Amazon FSx for Windows File Server   This operation requires a client request token in the request that Amazon FSx uses to ensure idempotent creation. This means that calling the operation multiple times with the same client request token has no effect. By using the idempotent operation, you can retry a CreateFileSystem operation without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same. If a file system with the specified client request token exists and the parameters match, CreateFileSystem returns the description of the existing file system. If a file system with the specified client request token exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, CreateFileSystem does the following:    Creates a new, empty Amazon FSx file system with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system in JSON format.    The CreateFileSystem call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
    */
   createFileSystem(callback?: (err: AWSError, data: FSx.Types.CreateFileSystemResponse) => void): Request<FSx.Types.CreateFileSystemResponse, AWSError>;
   /**
@@ -124,6 +132,14 @@ declare class FSx extends Service {
    */
   deleteDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.DeleteDataRepositoryAssociationResponse) => void): Request<FSx.Types.DeleteDataRepositoryAssociationResponse, AWSError>;
   /**
+   * Deletes an Amazon File Cache resource. After deletion, the cache no longer exists, and its data is gone. The DeleteFileCache operation returns while the cache has the DELETING status. You can check the cache deletion status by calling the DescribeFileCaches operation, which returns a list of caches in your account. If you pass the cache ID for a deleted cache, the DescribeFileCaches operation returns a FileCacheNotFound error.  The data in a deleted cache is also deleted and can't be recovered by any means. 
+   */
+  deleteFileCache(params: FSx.Types.DeleteFileCacheRequest, callback?: (err: AWSError, data: FSx.Types.DeleteFileCacheResponse) => void): Request<FSx.Types.DeleteFileCacheResponse, AWSError>;
+  /**
+   * Deletes an Amazon File Cache resource. After deletion, the cache no longer exists, and its data is gone. The DeleteFileCache operation returns while the cache has the DELETING status. You can check the cache deletion status by calling the DescribeFileCaches operation, which returns a list of caches in your account. If you pass the cache ID for a deleted cache, the DescribeFileCaches operation returns a FileCacheNotFound error.  The data in a deleted cache is also deleted and can't be recovered by any means. 
+   */
+  deleteFileCache(callback?: (err: AWSError, data: FSx.Types.DeleteFileCacheResponse) => void): Request<FSx.Types.DeleteFileCacheResponse, AWSError>;
+  /**
    * Deletes a file system. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups and snapshots are also deleted. To delete an Amazon FSx for NetApp ONTAP file system, first delete all the volumes and storage virtual machines (SVMs) on the file system. Then provide a FileSystemId value to the DeleFileSystem operation. By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup isn't subject to the file system's retention policy, and must be manually deleted. The DeleteFileSystem operation returns while the file system has the DELETING status. You can check the file system deletion status by calling the DescribeFileSystems operation, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the DescribeFileSystems operation returns a FileSystemNotFound error.  If a data repository task is in a PENDING or EXECUTING state, deleting an Amazon FSx for Lustre file system will fail with an HTTP status code 400 (Bad Request).   The data in a deleted file system is also deleted and can't be recovered by any means. 
    */
   deleteFileSystem(params: FSx.Types.DeleteFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.DeleteFileSystemResponse) => void): Request<FSx.Types.DeleteFileSystemResponse, AWSError>;
@@ -164,21 +180,29 @@ declare class FSx extends Service {
    */
   describeBackups(callback?: (err: AWSError, data: FSx.Types.DescribeBackupsResponse) => void): Request<FSx.Types.DescribeBackupsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx for Lustre data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported only for file systems with the Persistent_2 deployment type. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported only for Amazon FSx for Lustre file systems with the Persistent_2 deployment type and for Amazon File Cache resources. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or caches (use the file-cache-id filter with the ID of the cache), or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3 or NFS). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
    */
   describeDataRepositoryAssociations(params: FSx.Types.DescribeDataRepositoryAssociationsRequest, callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryAssociationsResponse) => void): Request<FSx.Types.DescribeDataRepositoryAssociationsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx for Lustre data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported only for file systems with the Persistent_2 deployment type. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported only for Amazon FSx for Lustre file systems with the Persistent_2 deployment type and for Amazon File Cache resources. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or caches (use the file-cache-id filter with the ID of the cache), or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3 or NFS). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
    */
   describeDataRepositoryAssociations(callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryAssociationsResponse) => void): Request<FSx.Types.DescribeDataRepositoryAssociationsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more TaskIds values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all tasks, you can paginate the response by using the optional MaxResults parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository tasks, if one or more TaskIds values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems or caches, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all tasks, you can paginate the response by using the optional MaxResults parameter to limit the number of tasks returned in a response. If more tasks remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
    */
   describeDataRepositoryTasks(params: FSx.Types.DescribeDataRepositoryTasksRequest, callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryTasksResponse) => void): Request<FSx.Types.DescribeDataRepositoryTasksResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more TaskIds values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all tasks, you can paginate the response by using the optional MaxResults parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository tasks, if one or more TaskIds values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems or caches, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all tasks, you can paginate the response by using the optional MaxResults parameter to limit the number of tasks returned in a response. If more tasks remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
    */
   describeDataRepositoryTasks(callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryTasksResponse) => void): Request<FSx.Types.DescribeDataRepositoryTasksResponse, AWSError>;
+  /**
+   * Returns the description of a specific Amazon File Cache resource, if a FileCacheIds value is provided for that cache. Otherwise, it returns descriptions of all caches owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all cache descriptions, you can optionally specify the MaxResults parameter to limit the number of descriptions in a response. If more cache descriptions remain, the operation returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This operation is used in an iterative process to retrieve a list of your cache descriptions. DescribeFileCaches is called first without a NextTokenvalue. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this operation, keep the following in mind:   The implementation might return fewer than MaxResults cache descriptions while still including a NextToken value.   The order of caches returned in the response of one DescribeFileCaches call and the order of caches returned across the responses of a multicall iteration is unspecified.  
+   */
+  describeFileCaches(params: FSx.Types.DescribeFileCachesRequest, callback?: (err: AWSError, data: FSx.Types.DescribeFileCachesResponse) => void): Request<FSx.Types.DescribeFileCachesResponse, AWSError>;
+  /**
+   * Returns the description of a specific Amazon File Cache resource, if a FileCacheIds value is provided for that cache. Otherwise, it returns descriptions of all caches owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all cache descriptions, you can optionally specify the MaxResults parameter to limit the number of descriptions in a response. If more cache descriptions remain, the operation returns a NextToken value in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response. This operation is used in an iterative process to retrieve a list of your cache descriptions. DescribeFileCaches is called first without a NextTokenvalue. Then the operation continues to be called with the NextToken parameter set to the value of the last NextToken value until a response has no NextToken. When using this operation, keep the following in mind:   The implementation might return fewer than MaxResults cache descriptions while still including a NextToken value.   The order of caches returned in the response of one DescribeFileCaches call and the order of caches returned across the responses of a multicall iteration is unspecified.  
+   */
+  describeFileCaches(callback?: (err: AWSError, data: FSx.Types.DescribeFileCachesResponse) => void): Request<FSx.Types.DescribeFileCachesResponse, AWSError>;
   /**
    * Returns the DNS aliases that are associated with the specified Amazon FSx for Windows File Server file system. A history of all DNS aliases that have been associated with and disassociated from the file system is available in the list of AdministrativeAction provided in the DescribeFileSystems operation response.
    */
@@ -275,6 +299,14 @@ declare class FSx extends Service {
    * Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system. Data repository associations are supported only for file systems with the Persistent_2 deployment type.
    */
   updateDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.UpdateDataRepositoryAssociationResponse) => void): Request<FSx.Types.UpdateDataRepositoryAssociationResponse, AWSError>;
+  /**
+   * Updates the configuration of an existing Amazon File Cache resource. You can update multiple properties in a single request.
+   */
+  updateFileCache(params: FSx.Types.UpdateFileCacheRequest, callback?: (err: AWSError, data: FSx.Types.UpdateFileCacheResponse) => void): Request<FSx.Types.UpdateFileCacheResponse, AWSError>;
+  /**
+   * Updates the configuration of an existing Amazon File Cache resource. You can update multiple properties in a single request.
+   */
+  updateFileCache(callback?: (err: AWSError, data: FSx.Types.UpdateFileCacheResponse) => void): Request<FSx.Types.UpdateFileCacheResponse, AWSError>;
   /**
    * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For Amazon FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For Amazon FSx for NetApp ONTAP file systems, you can update the following properties:    AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For the Amazon FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
@@ -387,7 +419,7 @@ declare namespace FSx {
   }
   export interface AutoExportPolicy {
     /**
-     * The AutoExportPolicy can have the following event values:    NEW - Amazon FSx automatically exports new files and directories to the data repository as they are added to the file system.    CHANGED - Amazon FSx automatically exports changes to files and directories on the file system to the data repository.    DELETED - Files and directories are automatically deleted on the data repository when they are deleted on the file system.   You can define any combination of event types for your AutoExportPolicy.
+     * The AutoExportPolicy can have the following event values:    NEW - New files and directories are automatically exported to the data repository as they are added to the file system.    CHANGED - Changes to files and directories on the file system are automatically exported to the data repository.    DELETED - Files and directories are automatically deleted on the data repository when they are deleted on the file system.   You can define any combination of event types for your AutoExportPolicy.
      */
     Events?: EventTypes;
   }
@@ -481,6 +513,7 @@ declare namespace FSx {
      */
     TaskId?: TaskId;
   }
+  export type CapacityToRelease = number;
   export type ClientRequestToken = string;
   export interface CompletionReport {
     /**
@@ -521,6 +554,7 @@ declare namespace FSx {
   export interface CopyBackupResponse {
     Backup?: Backup;
   }
+  export type CopyTagsToDataRepositoryAssociations = boolean;
   export interface CreateBackupRequest {
     /**
      * The ID of the file system to back up.
@@ -548,9 +582,9 @@ declare namespace FSx {
   export interface CreateDataRepositoryAssociationRequest {
     FileSystemId: FileSystemId;
     /**
-     * A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with DataRepositoryPath. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.  If you specify only a forward slash (/) as the file system path, you can link only 1 data repository to the file system. You can only specify "/" as the file system path for the first data repository associated with a file system. 
+     * A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with DataRepositoryPath. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.  If you specify only a forward slash (/) as the file system path, you can link only one data repository to the file system. You can only specify "/" as the file system path for the first data repository associated with a file system. 
      */
-    FileSystemPath: Namespace;
+    FileSystemPath?: Namespace;
     /**
      * The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/. This path specifies where in the S3 data repository files will be imported from or exported to.
      */
@@ -592,12 +626,78 @@ declare namespace FSx {
     Report: CompletionReport;
     ClientRequestToken?: ClientRequestToken;
     Tags?: Tags;
+    /**
+     * Specifies the amount of data to release, in GiB, by an Amazon File Cache AUTO_RELEASE_DATA task that automatically releases files from the cache.
+     */
+    CapacityToRelease?: CapacityToRelease;
   }
   export interface CreateDataRepositoryTaskResponse {
     /**
      * The description of the data repository task that you just created.
      */
     DataRepositoryTask?: DataRepositoryTask;
+  }
+  export type CreateFileCacheDataRepositoryAssociations = FileCacheDataRepositoryAssociation[];
+  export interface CreateFileCacheLustreConfiguration {
+    /**
+     * Provisions the amount of read and write throughput for each 1 tebibyte (TiB) of cache storage capacity, in MB/s/TiB. The only supported value is 1000.
+     */
+    PerUnitStorageThroughput: PerUnitStorageThroughput;
+    /**
+     * Specifies the cache deployment type, which must be CACHE_1.
+     */
+    DeploymentType: FileCacheLustreDeploymentType;
+    WeeklyMaintenanceStartTime?: WeeklyTime;
+    /**
+     * The configuration for a Lustre MDT (Metadata Target) storage volume.
+     */
+    MetadataConfiguration: FileCacheLustreMetadataConfiguration;
+  }
+  export interface CreateFileCacheRequest {
+    /**
+     * An idempotency token for resource creation, in a string of up to 64 ASCII characters. This token is automatically filled on your behalf when you use the Command Line Interface (CLI) or an Amazon Web Services SDK. By using the idempotent operation, you can retry a CreateFileCache operation without the risk of creating an extra cache. This approach can be useful when an initial call fails in a way that makes it unclear whether a cache was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a cache, the client receives success as long as the parameters are the same.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The type of cache that you're creating, which must be LUSTRE.
+     */
+    FileCacheType: FileCacheType;
+    /**
+     * Sets the Lustre version for the cache that you're creating, which must be 2.12.
+     */
+    FileCacheTypeVersion: FileSystemTypeVersion;
+    /**
+     * The storage capacity of the cache in gibibytes (GiB). Valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
+     */
+    StorageCapacity: StorageCapacity;
+    SubnetIds: SubnetIds;
+    /**
+     * A list of IDs specifying the security groups to apply to all network interfaces created for Amazon File Cache access. This list isn't returned in later requests to describe the cache.
+     */
+    SecurityGroupIds?: SecurityGroupIds;
+    Tags?: Tags;
+    /**
+     * A boolean flag indicating whether tags for the cache should be copied to data repository associations. This value defaults to false.
+     */
+    CopyTagsToDataRepositoryAssociations?: CopyTagsToDataRepositoryAssociations;
+    /**
+     * Specifies the ID of the Key Management Service (KMS) key to use for encrypting data on an Amazon File Cache. If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for your account is used. For more information, see Encrypt in the Key Management Service API Reference.
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * The configuration for the Amazon File Cache resource being created.
+     */
+    LustreConfiguration?: CreateFileCacheLustreConfiguration;
+    /**
+     * A list of up to 8 configurations for data repository associations (DRAs) to be created during the cache creation. The DRAs link the cache to either an Amazon S3 data repository or a Network File System (NFS) data repository that supports the NFSv3 protocol. The DRA configurations must meet the following requirements:   All configurations on the list must be of the same data repository type, either all S3 or all NFS. A cache can't link to different data repository types at the same time.   An NFS DRA must link to an NFS file system that supports the NFSv3 protocol.   DRA automatic import and automatic export is not supported.
+     */
+    DataRepositoryAssociations?: CreateFileCacheDataRepositoryAssociations;
+  }
+  export interface CreateFileCacheResponse {
+    /**
+     * A description of the cache that was created.
+     */
+    FileCache?: FileCacheCreating;
   }
   export interface CreateFileSystemFromBackupRequest {
     BackupId: BackupId;
@@ -635,6 +735,10 @@ declare namespace FSx {
      * The OpenZFS configuration for the file system that's being created. 
      */
     OpenZFSConfiguration?: CreateFileSystemOpenZFSConfiguration;
+    /**
+     * Sets the storage capacity of the OpenZFS file system that you're creating from a backup, in gibibytes (GiB). Valid values are from 64 GiB up to 524,288 GiB (512 TiB). However, the value that you specify must be equal to or greater than the backup's storage capacity value. If you don't use the StorageCapacity parameter, the default is the backup's StorageCapacity value. If used to create a file system other than OpenZFS, you must provide a value that matches the backup's StorageCapacity value. If you provide any other value, Amazon FSx responds with a 400 Bad Request. 
+     */
+    StorageCapacity?: StorageCapacity;
   }
   export interface CreateFileSystemFromBackupResponse {
     /**
@@ -1028,32 +1132,48 @@ declare namespace FSx {
     ResourceARN?: ResourceARN;
     FileSystemId?: FileSystemId;
     /**
-     * Describes the state of a data repository association. The lifecycle can have the following values:    CREATING - The data repository association between the FSx file system and the S3 data repository is being created. The data repository is unavailable.    AVAILABLE - The data repository association is available for use.    MISCONFIGURED - Amazon FSx cannot automatically import updates from the S3 bucket or automatically export updates to the S3 bucket until the data repository association configuration is corrected.    UPDATING - The data repository association is undergoing a customer initiated update that might affect its availability.    DELETING - The data repository association is undergoing a customer initiated deletion.    FAILED - The data repository association is in a terminal state that cannot be recovered.  
+     * Describes the state of a data repository association. The lifecycle can have the following values:    CREATING - The data repository association between the file system or cache and the data repository is being created. The data repository is unavailable.    AVAILABLE - The data repository association is available for use.    MISCONFIGURED - The data repository association is misconfigured. Until the configuration is corrected, automatic import and automatic export will not work (only for Amazon FSx for Lustre).    UPDATING - The data repository association is undergoing a customer initiated update that might affect its availability.    DELETING - The data repository association is undergoing a customer initiated deletion.    FAILED - The data repository association is in a terminal state that cannot be recovered.  
      */
     Lifecycle?: DataRepositoryLifecycle;
     FailureDetails?: DataRepositoryFailureDetails;
     /**
-     * A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with DataRepositoryPath. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.  If you specify only a forward slash (/) as the file system path, you can link only 1 data repository to the file system. You can only specify "/" as the file system path for the first data repository associated with a file system. 
+     * A path on the Amazon FSx for Lustre file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with DataRepositoryPath. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.  If you specify only a forward slash (/) as the file system path, you can link only one data repository to the file system. You can only specify "/" as the file system path for the first data repository associated with a file system. 
      */
     FileSystemPath?: Namespace;
     /**
-     * The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/. This path specifies where in the S3 data repository files will be imported from or exported to.
+     * The path to the data repository that will be linked to the cache or file system.   For Amazon File Cache, the path can be an NFS data repository that will be linked to the cache. The path can be in one of two formats:   If you are not using the DataRepositorySubdirectories parameter, the path is to an NFS Export directory (or one of its subdirectories) in the format nsf://nfs-domain-name/exportpath. You can therefore link a single NFS Export to a single data repository association.   If you are using the DataRepositorySubdirectories parameter, the path is the domain name of the NFS file system in the format nfs://filer-domain-name, which indicates the root of the subdirectories specified with the DataRepositorySubdirectories parameter.     For Amazon File Cache, the path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/.   For Amazon FSx for Lustre, the path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/.  
      */
     DataRepositoryPath?: ArchivePath;
     /**
-     * A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.
+     * A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.   BatchImportMetaDataOnCreate is not supported for data repositories linked to an Amazon File Cache resource. 
      */
     BatchImportMetaDataOnCreate?: BatchImportMetaDataOnCreate;
     /**
-     * For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system. The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
+     * For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system or cache. The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
      */
     ImportedFileChunkSize?: Megabytes;
     /**
-     * The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.
+     * The configuration for an Amazon S3 data repository linked to an Amazon FSx for Lustre file system with a data repository association.
      */
     S3?: S3DataRepositoryConfiguration;
     Tags?: Tags;
     CreationTime?: CreationTime;
+    /**
+     * The globally unique ID of the Amazon File Cache resource.
+     */
+    FileCacheId?: FileCacheId;
+    /**
+     * A path on the Amazon File Cache that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with DataRepositoryPath. The leading forward slash in the path is required. Two data repository associations cannot have overlapping cache paths. For example, if a data repository is associated with cache path /ns1/, then you cannot link another data repository with cache path /ns1/ns2. This path specifies the directory in your cache where files will be exported from. This cache directory can be linked to only one data repository (S3 or NFS) and no other data repository can be linked to the directory.  The cache path can only be set to root (/) on an NFS DRA when DataRepositorySubdirectories is specified. If you specify root (/) as the cache path, you can create only one DRA on the cache. The cache path cannot be set to root (/) for an S3 DRA. 
+     */
+    FileCachePath?: Namespace;
+    /**
+     * For Amazon File Cache, a list of NFS Exports that will be linked with an NFS data repository association. All the subdirectories must be on a single NFS file system. The Export paths are in the format /exportpath1. To use this parameter, you must configure DataRepositoryPath as the domain name of the NFS file system. The NFS file system domain name in effect is the root of the subdirectories. Note that DataRepositorySubdirectories is not supported for S3 data repositories.
+     */
+    DataRepositorySubdirectories?: SubDirectoriesPaths;
+    /**
+     * The configuration for an NFS data repository linked to an Amazon File Cache resource with a data repository association.
+     */
+    NFS?: NFSDataRepositoryConfiguration;
   }
   export type DataRepositoryAssociationId = string;
   export type DataRepositoryAssociationIds = DataRepositoryAssociationId[];
@@ -1091,27 +1211,30 @@ declare namespace FSx {
      */
     TaskId: TaskId;
     /**
-     * The lifecycle status of the data repository task, as follows:    PENDING - Amazon FSx has not started the task.    EXECUTING - Amazon FSx is processing the task.    FAILED - Amazon FSx was not able to complete the task. For example, there may be files the task failed to process. The DataRepositoryTaskFailureDetails property provides more information about task failures.    SUCCEEDED - FSx completed the task successfully.    CANCELED - Amazon FSx canceled the task and it did not complete.    CANCELING - FSx is in process of canceling the task.    You cannot delete an FSx for Lustre file system if there are data repository tasks for the file system in the PENDING or EXECUTING states. Please retry when the data repository task is finished (with a status of CANCELED, SUCCEEDED, or FAILED). You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately. 
+     * The lifecycle status of the data repository task, as follows:    PENDING - The task has not started.    EXECUTING - The task is in process.    FAILED - The task was not able to be completed. For example, there may be files the task failed to process. The DataRepositoryTaskFailureDetails property provides more information about task failures.    SUCCEEDED - The task has completed successfully.    CANCELED - The task was canceled and it did not complete.    CANCELING - The task is in process of being canceled.    You cannot delete an FSx for Lustre file system if there are data repository tasks for the file system in the PENDING or EXECUTING states. Please retry when the data repository task is finished (with a status of CANCELED, SUCCEEDED, or FAILED). You can use the DescribeDataRepositoryTask action to monitor the task status. Contact the FSx team if you need to delete your file system immediately. 
      */
     Lifecycle: DataRepositoryTaskLifecycle;
     /**
-     * The type of data repository task.   The EXPORT_TO_REPOSITORY data repository task exports from your Lustre file system from to a linked S3 bucket.   The IMPORT_METADATA_FROM_REPOSITORY data repository task imports metadata changes from a linked S3 bucket to your Lustre file system.  
+     * The type of data repository task.    EXPORT_TO_REPOSITORY tasks export from your Amazon FSx for Lustre file system to a linked data repository.    IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked S3 bucket to your Amazon FSx for Lustre file system.    AUTO_RELEASE_DATA tasks automatically release files from an Amazon File Cache resource.  
      */
     Type: DataRepositoryTaskType;
     CreationTime: CreationTime;
     /**
-     * The time that Amazon FSx began processing the task.
+     * The time the system began processing the task.
      */
     StartTime?: StartTime;
     /**
-     * The time that Amazon FSx completed processing the task, populated after the task is complete.
+     * The time the system completed processing the task, populated after the task is complete.
      */
     EndTime?: EndTime;
     ResourceARN?: ResourceARN;
     Tags?: Tags;
-    FileSystemId: FileSystemId;
     /**
-     * An array of paths on the Amazon FSx for Lustre file system that specify the data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository. (Default) If Paths is not specified, Amazon FSx uses the file system root directory.
+     * The globally unique ID of the file system.
+     */
+    FileSystemId?: FileSystemId;
+    /**
+     * An array of paths that specify the data for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which data to export to the linked data repository. (Default) If Paths is not specified, Amazon FSx uses the file system root directory.
      */
     Paths?: DataRepositoryTaskPaths;
     /**
@@ -1123,6 +1246,14 @@ declare namespace FSx {
      */
     Status?: DataRepositoryTaskStatus;
     Report?: CompletionReport;
+    /**
+     * Specifies the amount of data to release, in GiB, by an Amazon File Cache AUTO_RELEASE_DATA task that automatically releases files from the cache.
+     */
+    CapacityToRelease?: CapacityToRelease;
+    /**
+     * The system-generated, unique ID of the cache.
+     */
+    FileCacheId?: FileCacheId;
   }
   export interface DataRepositoryTaskFailureDetails {
     Message?: ErrorMessage;
@@ -1137,7 +1268,7 @@ declare namespace FSx {
      */
     Values?: DataRepositoryTaskFilterValues;
   }
-  export type DataRepositoryTaskFilterName = "file-system-id"|"task-lifecycle"|"data-repository-association-id"|string;
+  export type DataRepositoryTaskFilterName = "file-system-id"|"task-lifecycle"|"data-repository-association-id"|"file-cache-id"|string;
   export type DataRepositoryTaskFilterValue = string;
   export type DataRepositoryTaskFilterValues = DataRepositoryTaskFilterValue[];
   export type DataRepositoryTaskFilters = DataRepositoryTaskFilter[];
@@ -1161,8 +1292,12 @@ declare namespace FSx {
      * The time at which the task status was last updated.
      */
     LastUpdatedTime?: LastUpdatedTime;
+    /**
+     * The total amount of data, in GiB, released by an Amazon File Cache AUTO_RELEASE_DATA task that automatically releases files from the cache.
+     */
+    ReleasedCapacity?: ReleasedCapacity;
   }
-  export type DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"|"IMPORT_METADATA_FROM_REPOSITORY"|string;
+  export type DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"|"IMPORT_METADATA_FROM_REPOSITORY"|"RELEASE_DATA_FROM_FILESYSTEM"|"AUTO_RELEASE_DATA"|string;
   export type DataRepositoryTasks = DataRepositoryTask[];
   export interface DeleteBackupRequest {
     /**
@@ -1194,7 +1329,7 @@ declare namespace FSx {
     /**
      * Set to true to delete the data in the file system that corresponds to the data repository association.
      */
-    DeleteDataInFileSystem: DeleteDataInFileSystem;
+    DeleteDataInFileSystem?: DeleteDataInFileSystem;
   }
   export interface DeleteDataRepositoryAssociationResponse {
     /**
@@ -1209,6 +1344,23 @@ declare namespace FSx {
      * Indicates whether data in the file system that corresponds to the data repository association is being deleted. Default is false.
      */
     DeleteDataInFileSystem?: DeleteDataInFileSystem;
+  }
+  export interface DeleteFileCacheRequest {
+    /**
+     * The ID of the cache that's being deleted.
+     */
+    FileCacheId: FileCacheId;
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface DeleteFileCacheResponse {
+    /**
+     * The ID of the cache that's being deleted.
+     */
+    FileCacheId?: FileCacheId;
+    /**
+     * The cache lifecycle for the deletion request. If the DeleteFileCache operation is successful, this status is DELETING.
+     */
+    Lifecycle?: FileCacheLifecycle;
   }
   export interface DeleteFileSystemLustreConfiguration {
     /**
@@ -1426,7 +1578,7 @@ declare namespace FSx {
   }
   export interface DescribeDataRepositoryAssociationsResponse {
     /**
-     * An array of one ore more data repository association descriptions.
+     * An array of one or more data repository association descriptions.
      */
     Associations?: DataRepositoryAssociations;
     NextToken?: NextToken;
@@ -1448,6 +1600,21 @@ declare namespace FSx {
      * The collection of data repository task descriptions returned.
      */
     DataRepositoryTasks?: DataRepositoryTasks;
+    NextToken?: NextToken;
+  }
+  export interface DescribeFileCachesRequest {
+    /**
+     * IDs of the caches whose descriptions you want to retrieve (String).
+     */
+    FileCacheIds?: FileCacheIds;
+    MaxResults?: MaxResults;
+    NextToken?: NextToken;
+  }
+  export interface DescribeFileCachesResponse {
+    /**
+     * The response object for the DescribeFileCaches operation.
+     */
+    FileCaches?: FileCaches;
     NextToken?: NextToken;
   }
   export interface DescribeFileSystemAliasesRequest {
@@ -1594,6 +1761,176 @@ declare namespace FSx {
   export type EventType = "NEW"|"CHANGED"|"DELETED"|string;
   export type EventTypes = EventType[];
   export type FailedCount = number;
+  export interface FileCache {
+    OwnerId?: AWSAccountId;
+    CreationTime?: CreationTime;
+    /**
+     * The system-generated, unique ID of the cache.
+     */
+    FileCacheId?: FileCacheId;
+    /**
+     * The type of cache, which must be LUSTRE.
+     */
+    FileCacheType?: FileCacheType;
+    /**
+     * The Lustre version of the cache, which must be 2.12.
+     */
+    FileCacheTypeVersion?: FileSystemTypeVersion;
+    /**
+     * The lifecycle status of the cache. The following are the possible values and what they mean:    AVAILABLE - The cache is in a healthy state, and is reachable and available for use.    CREATING - The new cache is being created.    DELETING - An existing cache is being deleted.    UPDATING - The cache is undergoing a customer-initiated update.    FAILED - An existing cache has experienced an unrecoverable failure. When creating a new cache, the cache was unable to be created.  
+     */
+    Lifecycle?: FileCacheLifecycle;
+    /**
+     * A structure providing details of any failures that occurred.
+     */
+    FailureDetails?: FileCacheFailureDetails;
+    /**
+     * The storage capacity of the cache in gibibytes (GiB).
+     */
+    StorageCapacity?: StorageCapacity;
+    VpcId?: VpcId;
+    SubnetIds?: SubnetIds;
+    NetworkInterfaceIds?: NetworkInterfaceIds;
+    /**
+     * The Domain Name System (DNS) name for the cache.
+     */
+    DNSName?: DNSName;
+    /**
+     * Specifies the ID of the Key Management Service (KMS) key to use for encrypting data on an Amazon File Cache. If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for your account is used. For more information, see Encrypt in the Key Management Service API Reference.
+     */
+    KmsKeyId?: KmsKeyId;
+    ResourceARN?: ResourceARN;
+    /**
+     * The configuration for the Amazon File Cache resource.
+     */
+    LustreConfiguration?: FileCacheLustreConfiguration;
+    /**
+     * A list of IDs of data repository associations that are associated with this cache.
+     */
+    DataRepositoryAssociationIds?: DataRepositoryAssociationIds;
+  }
+  export interface FileCacheCreating {
+    OwnerId?: AWSAccountId;
+    CreationTime?: CreationTime;
+    /**
+     * The system-generated, unique ID of the cache.
+     */
+    FileCacheId?: FileCacheId;
+    /**
+     * The type of cache, which must be LUSTRE.
+     */
+    FileCacheType?: FileCacheType;
+    /**
+     * The Lustre version of the cache, which must be 2.12.
+     */
+    FileCacheTypeVersion?: FileSystemTypeVersion;
+    /**
+     * The lifecycle status of the cache. The following are the possible values and what they mean:    AVAILABLE - The cache is in a healthy state, and is reachable and available for use.    CREATING - The new cache is being created.    DELETING - An existing cache is being deleted.    UPDATING - The cache is undergoing a customer-initiated update.    FAILED - An existing cache has experienced an unrecoverable failure. When creating a new cache, the cache was unable to be created.  
+     */
+    Lifecycle?: FileCacheLifecycle;
+    /**
+     * A structure providing details of any failures that occurred.
+     */
+    FailureDetails?: FileCacheFailureDetails;
+    /**
+     * The storage capacity of the cache in gibibytes (GiB).
+     */
+    StorageCapacity?: StorageCapacity;
+    VpcId?: VpcId;
+    SubnetIds?: SubnetIds;
+    NetworkInterfaceIds?: NetworkInterfaceIds;
+    /**
+     * The Domain Name System (DNS) name for the cache.
+     */
+    DNSName?: DNSName;
+    /**
+     * Specifies the ID of the Key Management Service (KMS) key to use for encrypting data on an Amazon File Cache. If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for your account is used. For more information, see Encrypt in the Key Management Service API Reference.
+     */
+    KmsKeyId?: KmsKeyId;
+    ResourceARN?: ResourceARN;
+    Tags?: Tags;
+    /**
+     * A boolean flag indicating whether tags for the cache should be copied to data repository associations.
+     */
+    CopyTagsToDataRepositoryAssociations?: CopyTagsToDataRepositoryAssociations;
+    /**
+     * The configuration for the Amazon File Cache resource.
+     */
+    LustreConfiguration?: FileCacheLustreConfiguration;
+    /**
+     * A list of IDs of data repository associations that are associated with this cache.
+     */
+    DataRepositoryAssociationIds?: DataRepositoryAssociationIds;
+  }
+  export interface FileCacheDataRepositoryAssociation {
+    /**
+     * A path on the cache that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with DataRepositoryPath. The leading forward slash in the name is required. Two data repository associations cannot have overlapping cache paths. For example, if a data repository is associated with cache path /ns1/, then you cannot link another data repository with cache path /ns1/ns2. This path specifies where in your cache files will be exported from. This cache directory can be linked to only one data repository, and no data repository other can be linked to the directory.  The cache path can only be set to root (/) on an NFS DRA when DataRepositorySubdirectories is specified. If you specify root (/) as the cache path, you can create only one DRA on the cache. The cache path cannot be set to root (/) for an S3 DRA. 
+     */
+    FileCachePath: Namespace;
+    /**
+     * The path to the S3 or NFS data repository that links to the cache. You must provide one of the following paths:   The path can be an NFS data repository that links to the cache. The path can be in one of two formats:   If you are not using the DataRepositorySubdirectories parameter, the path is to an NFS Export directory (or one of its subdirectories) in the format nsf://nfs-domain-name/exportpath. You can therefore link a single NFS Export to a single data repository association.   If you are using the DataRepositorySubdirectories parameter, the path is the domain name of the NFS file system in the format nfs://filer-domain-name, which indicates the root of the subdirectories specified with the DataRepositorySubdirectories parameter.     The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/.  
+     */
+    DataRepositoryPath: ArchivePath;
+    /**
+     * A list of NFS Exports that will be linked with this data repository association. The Export paths are in the format /exportpath1. To use this parameter, you must configure DataRepositoryPath as the domain name of the NFS file system. The NFS file system domain name in effect is the root of the subdirectories. Note that DataRepositorySubdirectories is not supported for S3 data repositories.
+     */
+    DataRepositorySubdirectories?: SubDirectoriesPaths;
+    /**
+     * The configuration for a data repository association that links an Amazon File Cache resource to an NFS data repository.
+     */
+    NFS?: FileCacheNFSConfiguration;
+  }
+  export interface FileCacheFailureDetails {
+    /**
+     * A message describing any failures that occurred.
+     */
+    Message?: ErrorMessage;
+  }
+  export type FileCacheId = string;
+  export type FileCacheIds = FileCacheId[];
+  export type FileCacheLifecycle = "AVAILABLE"|"CREATING"|"DELETING"|"UPDATING"|"FAILED"|string;
+  export interface FileCacheLustreConfiguration {
+    /**
+     * Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. Cache throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). The only supported value is 1000.
+     */
+    PerUnitStorageThroughput?: PerUnitStorageThroughput;
+    /**
+     * The deployment type of the Amazon File Cache resource, which must be CACHE_1.
+     */
+    DeploymentType?: FileCacheLustreDeploymentType;
+    /**
+     * You use the MountName value when mounting the cache. If you pass a cache ID to the DescribeFileCaches operation, it returns the the MountName value as part of the cache's description.
+     */
+    MountName?: LustreFileSystemMountName;
+    WeeklyMaintenanceStartTime?: WeeklyTime;
+    /**
+     * The configuration for a Lustre MDT (Metadata Target) storage volume.
+     */
+    MetadataConfiguration?: FileCacheLustreMetadataConfiguration;
+    /**
+     * The configuration for Lustre logging used to write the enabled logging events for your Amazon File Cache resource to Amazon CloudWatch Logs.
+     */
+    LogConfiguration?: LustreLogConfiguration;
+  }
+  export type FileCacheLustreDeploymentType = "CACHE_1"|string;
+  export interface FileCacheLustreMetadataConfiguration {
+    /**
+     * The storage capacity of the Lustre MDT (Metadata Target) storage volume in gibibytes (GiB). The only supported value is 2400 GiB.
+     */
+    StorageCapacity: MetadataStorageCapacity;
+  }
+  export interface FileCacheNFSConfiguration {
+    /**
+     * The version of the NFS (Network File System) protocol of the NFS data repository. The only supported value is NFS3, which indicates that the data repository must support the NFSv3 protocol.
+     */
+    Version: NfsVersion;
+    /**
+     * A list of up to 2 IP addresses of DNS servers used to resolve the NFS file system domain name. The provided IP addresses can either be the IP addresses of a DNS forwarder or resolver that the customer manages and runs inside the customer VPC, or the IP addresses of the on-premises DNS servers.
+     */
+    DnsIps?: RepositoryDnsIps;
+  }
+  export type FileCacheType = "LUSTRE"|string;
+  export type FileCaches = FileCache[];
   export interface FileSystem {
     /**
      * The Amazon Web Services account that created the file system. If the file system was created by an Identity and Access Management (IAM) user, the Amazon Web Services account to which the IAM user belongs is the owner.
@@ -1716,7 +2053,7 @@ declare namespace FSx {
      */
     Values?: FilterValues;
   }
-  export type FilterName = "file-system-id"|"backup-type"|"file-system-type"|"volume-id"|"data-repository-type"|string;
+  export type FilterName = "file-system-id"|"backup-type"|"file-system-type"|"volume-id"|"data-repository-type"|"file-cache-id"|"file-cache-type"|string;
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
@@ -1806,7 +2143,7 @@ declare namespace FSx {
   export type LustreFileSystemMountName = string;
   export interface LustreLogConfiguration {
     /**
-     * The data repository events that are logged by Amazon FSx.    WARN_ONLY - only warning events are logged.    ERROR_ONLY - only error events are logged.    WARN_ERROR - both warning events and error events are logged.    DISABLED - logging of data repository events is turned off.  
+     * The data repository events that are logged by Amazon FSx.    WARN_ONLY - only warning events are logged.    ERROR_ONLY - only error events are logged.    WARN_ERROR - both warning events and error events are logged.    DISABLED - logging of data repository events is turned off.   Note that Amazon File Cache uses a default setting of WARN_ERROR, which can't be changed.
      */
     Level: LustreAccessAuditLogLevel;
     /**
@@ -1820,7 +2157,7 @@ declare namespace FSx {
      */
     Level: LustreAccessAuditLogLevel;
     /**
-     * The Amazon Resource Name (ARN) that specifies the destination of the logs. The destination can be any Amazon CloudWatch Logs log group ARN, with the following requirements:   The destination ARN that you provide must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.   The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix.   If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group.   If Destination is provided and the resource does not exist, the request will fail with a BadRequest error.   If Level is set to DISABLED, you cannot specify a destination in Destination.  
+     * The Amazon Resource Name (ARN) that specifies the destination of the logs. The destination can be any Amazon CloudWatch Logs log group ARN, with the following requirements:   The destination ARN that you provide must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.   The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix.   If you do not provide a destination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/lustre log group (for Amazon FSx for Lustre) or /aws/fsx/filecache (for Amazon File Cache).   If Destination is provided and the resource does not exist, the request will fail with a BadRequest error.   If Level is set to DISABLED, you cannot specify a destination in Destination.  
      */
     Destination?: GeneralARN;
   }
@@ -1840,11 +2177,27 @@ declare namespace FSx {
   export type MaxResults = number;
   export type Megabytes = number;
   export type MegabytesPerSecond = number;
+  export type MetadataStorageCapacity = number;
+  export interface NFSDataRepositoryConfiguration {
+    /**
+     * The version of the NFS (Network File System) protocol of the NFS data repository. Currently, the only supported value is NFS3, which indicates that the data repository must support the NFSv3 protocol.
+     */
+    Version: NfsVersion;
+    /**
+     * A list of up to 2 IP addresses of DNS servers used to resolve the NFS file system domain name. The provided IP addresses can either be the IP addresses of a DNS forwarder or resolver that the customer manages and runs inside the customer VPC, or the IP addresses of the on-premises DNS servers.
+     */
+    DnsIps?: RepositoryDnsIps;
+    /**
+     * This parameter is not supported for Amazon File Cache.
+     */
+    AutoExportPolicy?: AutoExportPolicy;
+  }
   export type Namespace = string;
   export type NetBiosAlias = string;
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
+  export type NfsVersion = "NFS3"|string;
   export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|string;
   export type OntapEndpointIpAddresses = IpAddress[];
   export interface OntapFileSystemConfiguration {
@@ -2074,8 +2427,10 @@ declare namespace FSx {
   export interface ReleaseFileSystemNfsV3LocksResponse {
     FileSystem?: FileSystem;
   }
+  export type ReleasedCapacity = number;
   export type ReportFormat = "REPORT_CSV_20191124"|string;
   export type ReportScope = "FAILED_FILES_ONLY"|string;
+  export type RepositoryDnsIps = IpAddress[];
   export type RequestTime = Date;
   export type ResourceARN = string;
   export type ResourceType = "FILE_SYSTEM"|"VOLUME"|string;
@@ -2296,6 +2651,7 @@ declare namespace FSx {
   export type StorageVirtualMachineRootVolumeSecurityStyle = "UNIX"|"NTFS"|"MIXED"|string;
   export type StorageVirtualMachineSubtype = "DEFAULT"|"DP_DESTINATION"|"SYNC_DESTINATION"|"SYNC_SOURCE"|string;
   export type StorageVirtualMachines = StorageVirtualMachine[];
+  export type SubDirectoriesPaths = Namespace[];
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
   export type SucceededCount = number;
@@ -2404,6 +2760,26 @@ declare namespace FSx {
      * The response object returned after the data repository association is updated.
      */
     Association?: DataRepositoryAssociation;
+  }
+  export interface UpdateFileCacheLustreConfiguration {
+    WeeklyMaintenanceStartTime?: WeeklyTime;
+  }
+  export interface UpdateFileCacheRequest {
+    /**
+     * The ID of the cache that you are updating.
+     */
+    FileCacheId: FileCacheId;
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The configuration updates for an Amazon File Cache resource.
+     */
+    LustreConfiguration?: UpdateFileCacheLustreConfiguration;
+  }
+  export interface UpdateFileCacheResponse {
+    /**
+     * A description of the cache that was updated.
+     */
+    FileCache?: FileCache;
   }
   export interface UpdateFileSystemLustreConfiguration {
     /**

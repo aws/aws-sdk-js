@@ -44,6 +44,14 @@ declare class EMRServerless extends Service {
    */
   getApplication(callback?: (err: AWSError, data: EMRServerless.Types.GetApplicationResponse) => void): Request<EMRServerless.Types.GetApplicationResponse, AWSError>;
   /**
+   * Returns a URL to access the job run dashboard.
+   */
+  getDashboardForJobRun(params: EMRServerless.Types.GetDashboardForJobRunRequest, callback?: (err: AWSError, data: EMRServerless.Types.GetDashboardForJobRunResponse) => void): Request<EMRServerless.Types.GetDashboardForJobRunResponse, AWSError>;
+  /**
+   * Returns a URL to access the job run dashboard.
+   */
+  getDashboardForJobRun(callback?: (err: AWSError, data: EMRServerless.Types.GetDashboardForJobRunResponse) => void): Request<EMRServerless.Types.GetDashboardForJobRunResponse, AWSError>;
+  /**
    * Displays detailed information about a job run.
    */
   getJobRun(params: EMRServerless.Types.GetJobRunRequest, callback?: (err: AWSError, data: EMRServerless.Types.GetJobRunResponse) => void): Request<EMRServerless.Types.GetJobRunResponse, AWSError>;
@@ -380,6 +388,22 @@ declare namespace EMRServerless {
      * The output displays information about the specified application.
      */
     application: Application;
+  }
+  export interface GetDashboardForJobRunRequest {
+    /**
+     * The ID of the application.
+     */
+    applicationId: ApplicationId;
+    /**
+     * The ID of the job run.
+     */
+    jobRunId: JobRunId;
+  }
+  export interface GetDashboardForJobRunResponse {
+    /**
+     * The URL to view job run's dashboard.
+     */
+    url?: Url;
   }
   export interface GetJobRunRequest {
     /**
@@ -855,6 +879,7 @@ declare namespace EMRServerless {
     application: Application;
   }
   export type UriString = string;
+  export type Url = string;
   export type WorkerCounts = number;
   export interface WorkerResourceConfig {
     /**
