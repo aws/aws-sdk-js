@@ -20,11 +20,11 @@ declare class DLM extends Service {
    */
   createLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
-   * Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
+   * Deletes the specified lifecycle policy and halts the automated operations that the policy specified. For more information about deleting a policy, see Delete lifecycle policies.
    */
   deleteLifecyclePolicy(params: DLM.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.DeleteLifecyclePolicyResponse) => void): Request<DLM.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
-   * Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
+   * Deletes the specified lifecycle policy and halts the automated operations that the policy specified. For more information about deleting a policy, see Delete lifecycle policies.
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.DeleteLifecyclePolicyResponse) => void): Request<DLM.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class DLM extends Service {
    */
   untagResource(callback?: (err: AWSError, data: DLM.Types.UntagResourceResponse) => void): Request<DLM.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified lifecycle policy.
+   * Updates the specified lifecycle policy. For more information about updating a policy, see Modify lifecycle policies.
    */
   updateLifecyclePolicy(params: DLM.Types.UpdateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
   /**
-   * Updates the specified lifecycle policy.
+   * Updates the specified lifecycle policy. For more information about updating a policy, see Modify lifecycle policies.
    */
   updateLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
 }
@@ -89,6 +89,18 @@ declare namespace DLM {
   }
   export type ActionList = Action[];
   export type ActionName = string;
+  export interface ArchiveRetainRule {
+    /**
+     * Information about retention period in the Amazon EBS Snapshots Archive. For more information, see Archive Amazon EBS snapshots.
+     */
+    RetentionArchiveTier: RetentionArchiveTier;
+  }
+  export interface ArchiveRule {
+    /**
+     * Information about the retention period for the snapshot archiving rule.
+     */
+    RetainRule: ArchiveRetainRule;
+  }
   export type AvailabilityZone = string;
   export type AvailabilityZoneList = AvailabilityZone[];
   export type AwsAccountId = string;
@@ -138,7 +150,7 @@ declare namespace DLM {
      */
     IntervalUnit?: IntervalUnitValues;
     /**
-     * The time, in UTC, to start the operation. The supported format is hh:mm. The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.
+     * The time, in UTC, to start the operation. The supported format is hh:mm. The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon Data Lifecycle Manager selects a time within the next 24 hours.
      */
     Times?: TimesList;
     /**
@@ -472,15 +484,29 @@ declare namespace DLM {
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {
     /**
-     * The number of snapshots to retain for each volume, up to a maximum of 1000.
+     * The number of snapshots to retain for each volume, up to a maximum of 1000. For example if you want to retain a maximum of three snapshots, specify 3. When the fourth snapshot is created, the oldest retained snapshot is deleted, or it is moved to the archive tier if you have specified an ArchiveRule.
      */
-    Count?: Count;
+    Count?: StandardTierRetainRuleCount;
     /**
      * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
      */
+    Interval?: StandardTierRetainRuleInterval;
+    /**
+     * The unit of time for time-based retention. For example, to retain snapshots for 3 months, specify Interval=3 and IntervalUnit=MONTHS. Once the snapshot has been retained for 3 months, it is deleted, or it is moved to the archive tier if you have specified an ArchiveRule.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
+  }
+  export interface RetentionArchiveTier {
+    /**
+     * The maximum number of snapshots to retain in the archive storage tier for each volume. The count must ensure that each snapshot remains in the archive tier for at least 90 days. For example, if the schedule creates snapshots every 30 days, you must specify a count of 3 or more to ensure that each snapshot is archived for at least 90 days.
+     */
+    Count?: Count;
+    /**
+     * Specifies the period of time to retain snapshots in the archive tier. After this period expires, the snapshot is permanently deleted.
+     */
     Interval?: Interval;
     /**
-     * The unit of time for time-based retention.
+     * The unit of time in which to measure the Interval. For example, to retain a snapshots in the archive tier for 6 months, specify Interval=6 and IntervalUnit=MONTHS.
      */
     IntervalUnit?: RetentionIntervalUnitValues;
   }
@@ -526,6 +552,10 @@ declare namespace DLM {
      *  [AMI policies only] The AMI deprecation rule for the schedule.
      */
     DeprecateRule?: DeprecateRule;
+    /**
+     *  [Snapshot policies that target volumes only] The snapshot archiving rule for the schedule. When you specify an archiving rule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's retention threshold is met. Snapshots are then retained in the archive tier for the archive retention period that you specify.  For more information about using snapshot archiving, see Considerations for snapshot lifecycle policies.
+     */
+    ArchiveRule?: ArchiveRule;
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
@@ -547,6 +577,8 @@ declare namespace DLM {
   export type ShareRules = ShareRule[];
   export type ShareTargetAccountList = AwsAccountId[];
   export type SnapshotOwnerList = AwsAccountId[];
+  export type StandardTierRetainRuleCount = number;
+  export type StandardTierRetainRuleInterval = number;
   export type StatusMessage = string;
   export type String = string;
   export interface Tag {

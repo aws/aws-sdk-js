@@ -3301,6 +3301,133 @@ declare namespace SageMaker {
      */
     RegisterNewBaseline?: Boolean;
   }
+  export type ClarifyContentTemplate = string;
+  export type ClarifyEnableExplanations = string;
+  export interface ClarifyExplainerConfig {
+    /**
+     * A JMESPath boolean expression used to filter which records to explain. Explanations are activated by default. See  EnableExplanations for additional information.
+     */
+    EnableExplanations?: ClarifyEnableExplanations;
+    /**
+     * The inference configuration parameter for the model container.
+     */
+    InferenceConfig?: ClarifyInferenceConfig;
+    /**
+     * The configuration for SHAP analysis.
+     */
+    ShapConfig: ClarifyShapConfig;
+  }
+  export type ClarifyFeatureHeaders = ClarifyHeader[];
+  export type ClarifyFeatureType = "numerical"|"categorical"|"text"|string;
+  export type ClarifyFeatureTypes = ClarifyFeatureType[];
+  export type ClarifyFeaturesAttribute = string;
+  export type ClarifyHeader = string;
+  export interface ClarifyInferenceConfig {
+    /**
+     * Provides the JMESPath expression to extract the features from a model container input in JSON Lines format. For example, if FeaturesAttribute is the JMESPath expression 'myfeatures', it extracts a list of features [1,2,3] from request data '{"myfeatures":[1,2,3}'.
+     */
+    FeaturesAttribute?: ClarifyFeaturesAttribute;
+    /**
+     * A template string used to format a JSON record into an acceptable model container input. For example, a ContentTemplate string '{"myfeatures":$features}' will format a list of features [1,2,3] into the record string '{"myfeatures":[1,2,3]}'. Required only when the model container input is in JSON Lines format.
+     */
+    ContentTemplate?: ClarifyContentTemplate;
+    /**
+     * The maximum number of records in a request that the model container can process when querying the model container for the predictions of a synthetic dataset. A record is a unit of input data that inference can be made on, for example, a single line in CSV data. If MaxRecordCount is 1, the model container expects one record per request. A value of 2 or greater means that the model expects batch requests, which can reduce overhead and speed up the inferencing process. If this parameter is not provided, the explainer will tune the record count per request according to the model container's capacity at runtime.
+     */
+    MaxRecordCount?: ClarifyMaxRecordCount;
+    /**
+     * The maximum payload size (MB) allowed of a request from the explainer to the model container. Defaults to 6 MB.
+     */
+    MaxPayloadInMB?: ClarifyMaxPayloadInMB;
+    /**
+     * A zero-based index used to extract a probability value (score) or list from model container output in CSV format. If this value is not provided, the entire model container output will be treated as a probability value (score) or list.  Example for a single class model: If the model container output consists of a string-formatted prediction label followed by its probability: '1,0.6', set ProbabilityIndex to 1 to select the probability value 0.6.  Example for a multiclass model: If the model container output consists of a string-formatted prediction label followed by its probability: '"[\'cat\',\'dog\',\'fish\']","[0.1,0.6,0.3]"', set ProbabilityIndex to 1 to select the probability values [0.1,0.6,0.3].
+     */
+    ProbabilityIndex?: ClarifyProbabilityIndex;
+    /**
+     * A zero-based index used to extract a label header or list of label headers from model container output in CSV format.  Example for a multiclass model: If the model container output consists of label headers followed by probabilities: '"[\'cat\',\'dog\',\'fish\']","[0.1,0.6,0.3]"', set LabelIndex to 0 to select the label headers ['cat','dog','fish'].
+     */
+    LabelIndex?: ClarifyLabelIndex;
+    /**
+     * A JMESPath expression used to extract the probability (or score) from the model container output if the model container is in JSON Lines format.  Example: If the model container output of a single request is '{"predicted_label":1,"probability":0.6}', then set ProbabilityAttribute to 'probability'.
+     */
+    ProbabilityAttribute?: ClarifyProbabilityAttribute;
+    /**
+     * A JMESPath expression used to locate the list of label headers in the model container output.  Example: If the model container output of a batch request is '{"labels":["cat","dog","fish"],"probability":[0.6,0.3,0.1]}', then set LabelAttribute to 'labels' to extract the list of label headers ["cat","dog","fish"] 
+     */
+    LabelAttribute?: ClarifyLabelAttribute;
+    /**
+     * For multiclass classification problems, the label headers are the names of the classes. Otherwise, the label header is the name of the predicted label. These are used to help readability for the output of the InvokeEndpoint API. See the response section under Invoke the endpoint in the Developer Guide for more information. If there are no label headers in the model container output, provide them manually using this parameter.
+     */
+    LabelHeaders?: ClarifyLabelHeaders;
+    /**
+     * The names of the features. If provided, these are included in the endpoint response payload to help readability of the InvokeEndpoint output. See the Response section under Invoke the endpoint in the Developer Guide for more information.
+     */
+    FeatureHeaders?: ClarifyFeatureHeaders;
+    /**
+     * A list of data types of the features (optional). Applicable only to NLP explainability. If provided, FeatureTypes must have at least one 'text' string (for example, ['text']). If FeatureTypes is not provided, the explainer infers the feature types based on the baseline data. The feature types are included in the endpoint response payload. For additional information see the response section under Invoke the endpoint in the Developer Guide for more information.
+     */
+    FeatureTypes?: ClarifyFeatureTypes;
+  }
+  export type ClarifyLabelAttribute = string;
+  export type ClarifyLabelHeaders = ClarifyHeader[];
+  export type ClarifyLabelIndex = number;
+  export type ClarifyMaxPayloadInMB = number;
+  export type ClarifyMaxRecordCount = number;
+  export type ClarifyMimeType = string;
+  export type ClarifyProbabilityAttribute = string;
+  export type ClarifyProbabilityIndex = number;
+  export type ClarifyShapBaseline = string;
+  export interface ClarifyShapBaselineConfig {
+    /**
+     * The MIME type of the baseline data. Choose from 'text/csv' or 'application/jsonlines'. Defaults to 'text/csv'.
+     */
+    MimeType?: ClarifyMimeType;
+    /**
+     * The inline SHAP baseline data in string format. ShapBaseline can have one or multiple records to be used as the baseline dataset. The format of the SHAP baseline file should be the same format as the training dataset. For example, if the training dataset is in CSV format and each record contains four features, and all features are numerical, then the format of the baseline data should also share these characteristics. For natural language processing (NLP) of text columns, the baseline value should be the value used to replace the unit of text specified by the Granularity of the TextConfig parameter. The size limit for ShapBasline is 4 KB. Use the ShapBaselineUri parameter if you want to provide more than 4 KB of baseline data.
+     */
+    ShapBaseline?: ClarifyShapBaseline;
+    /**
+     * The uniform resource identifier (URI) of the S3 bucket where the SHAP baseline file is stored. The format of the SHAP baseline file should be the same format as the format of the training dataset. For example, if the training dataset is in CSV format, and each record in the training dataset has four features, and all features are numerical, then the baseline file should also have this same format. Each record should contain only the features. If you are using a virtual private cloud (VPC), the ShapBaselineUri should be accessible to the VPC. For more information about setting up endpoints with Amazon Virtual Private Cloud, see Give SageMaker access to Resources in your Amazon Virtual Private Cloud.
+     */
+    ShapBaselineUri?: Url;
+  }
+  export interface ClarifyShapConfig {
+    /**
+     * The configuration for the SHAP baseline of the Kernal SHAP algorithm.
+     */
+    ShapBaselineConfig: ClarifyShapBaselineConfig;
+    /**
+     * The number of samples to be used for analysis by the Kernal SHAP algorithm.   The number of samples determines the size of the synthetic dataset, which has an impact on latency of explainability requests. For more information, see the Synthetic data of Configure and create an endpoint. 
+     */
+    NumberOfSamples?: ClarifyShapNumberOfSamples;
+    /**
+     * A Boolean toggle to indicate if you want to use the logit function (true) or log-odds units (false) for model predictions. Defaults to false.
+     */
+    UseLogit?: ClarifyShapUseLogit;
+    /**
+     * The starting value used to initialize the random number generator in the explainer. Provide a value for this parameter to obtain a deterministic SHAP result.
+     */
+    Seed?: ClarifyShapSeed;
+    /**
+     * A parameter that indicates if text features are treated as text and explanations are provided for individual units of text. Required for natural language processing (NLP) explainability only.
+     */
+    TextConfig?: ClarifyTextConfig;
+  }
+  export type ClarifyShapNumberOfSamples = number;
+  export type ClarifyShapSeed = number;
+  export type ClarifyShapUseLogit = boolean;
+  export interface ClarifyTextConfig {
+    /**
+     * Specifies the language of the text features in ISO 639-1 or ISO 639-3 code of a supported language.   For a mix of multiple languages, use code 'xx'. 
+     */
+    Language: ClarifyTextLanguage;
+    /**
+     * The unit of granularity for the analysis of text features. For example, if the unit is 'token', then each token (like a word in English) of the text is treated as a feature. SHAP values are computed for each unit/feature.
+     */
+    Granularity: ClarifyTextGranularity;
+  }
+  export type ClarifyTextGranularity = "token"|"sentence"|"paragraph"|string;
+  export type ClarifyTextLanguage = "af"|"sq"|"ar"|"hy"|"eu"|"bn"|"bg"|"ca"|"zh"|"hr"|"cs"|"da"|"nl"|"en"|"et"|"fi"|"fr"|"de"|"el"|"gu"|"he"|"hi"|"hu"|"is"|"id"|"ga"|"it"|"kn"|"ky"|"lv"|"lt"|"lb"|"mk"|"ml"|"mr"|"ne"|"nb"|"fa"|"pl"|"pt"|"ro"|"ru"|"sa"|"sr"|"tn"|"si"|"sk"|"sl"|"es"|"sv"|"tl"|"ta"|"tt"|"te"|"tr"|"uk"|"ur"|"yo"|"lij"|"xx"|string;
   export type ClientId = string;
   export type ClientSecret = string;
   export type ClientToken = string;
@@ -4064,6 +4191,10 @@ declare namespace SageMaker {
      * Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using InvokeEndpointAsync.
      */
     AsyncInferenceConfig?: AsyncInferenceConfig;
+    /**
+     * A member of CreateEndpointConfig that enables explainers.
+     */
+    ExplainerConfig?: ExplainerConfig;
   }
   export interface CreateEndpointConfigOutput {
     /**
@@ -6770,6 +6901,10 @@ declare namespace SageMaker {
      * Returns the description of an endpoint configuration created using the  CreateEndpointConfig  API.
      */
     AsyncInferenceConfig?: AsyncInferenceConfig;
+    /**
+     * The configuration parameters for an explainer.
+     */
+    ExplainerConfig?: ExplainerConfig;
   }
   export interface DescribeEndpointInput {
     /**
@@ -6823,6 +6958,10 @@ declare namespace SageMaker {
      * Returns the summary of an in-progress deployment. This field is only returned when the endpoint is creating or updating with a new endpoint configuration.
      */
     PendingDeploymentSummary?: PendingDeploymentSummary;
+    /**
+     * The configuration parameters for an explainer.
+     */
+    ExplainerConfig?: ExplainerConfig;
   }
   export interface DescribeExperimentRequest {
     /**
@@ -9487,6 +9626,12 @@ declare namespace SageMaker {
     Report?: MetricsSource;
   }
   export type ExplainabilityLocation = string;
+  export interface ExplainerConfig {
+    /**
+     * A member of ExplainerConfig that contains configuration parameters for the SageMaker Clarify explainer.
+     */
+    ClarifyExplainerConfig?: ClarifyExplainerConfig;
+  }
   export interface FailStepMetadata {
     /**
      * A message that you define and then is processed and rendered by the Fail step when the error occurs.

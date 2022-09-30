@@ -31,6 +31,7 @@ declare class SageMakerRuntime extends Service {
 declare namespace SageMakerRuntime {
   export type BodyBlob = Buffer|Uint8Array|Blob|string;
   export type CustomAttributesHeader = string;
+  export type EnableExplanationsHeader = string;
   export type EndpointName = string;
   export type Header = string;
   export type InferenceId = string;
@@ -112,10 +113,14 @@ declare namespace SageMakerRuntime {
      * If you provide a value, it is added to the captured data when you enable data capture on the endpoint. For information about data capture, see Capture Data.
      */
     InferenceId?: InferenceId;
+    /**
+     * An optional JMESPath expression used to override the EnableExplanations parameter of the ClarifyExplainerConfig API. See the EnableExplanations section in the developer guide for more information. 
+     */
+    EnableExplanations?: EnableExplanationsHeader;
   }
   export interface InvokeEndpointOutput {
     /**
-     * Includes the inference provided by the model. For information about the format of the response body, see Common Data Formats-Inference.
+     * Includes the inference provided by the model.  For information about the format of the response body, see Common Data Formats-Inference. If the explainer is activated, the body includes the explanations provided by the model. For more information, see the Response section under Invoke the Endpoint in the Developer Guide.
      */
     Body: BodyBlob;
     /**

@@ -20,11 +20,11 @@ declare class SSOOIDC extends Service {
    */
   createToken(callback?: (err: AWSError, data: SSOOIDC.Types.CreateTokenResponse) => void): Request<SSOOIDC.Types.CreateTokenResponse, AWSError>;
   /**
-   * Registers a client with AWS SSO. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.
+   * Registers a client with IAM Identity Center. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.
    */
   registerClient(params: SSOOIDC.Types.RegisterClientRequest, callback?: (err: AWSError, data: SSOOIDC.Types.RegisterClientResponse) => void): Request<SSOOIDC.Types.RegisterClientResponse, AWSError>;
   /**
-   * Registers a client with AWS SSO. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.
+   * Registers a client with IAM Identity Center. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.
    */
   registerClient(callback?: (err: AWSError, data: SSOOIDC.Types.RegisterClientResponse) => void): Request<SSOOIDC.Types.RegisterClientResponse, AWSError>;
   /**
@@ -53,7 +53,7 @@ declare namespace SSOOIDC {
      */
     clientSecret: ClientSecret;
     /**
-     * Supports grant types for authorization code, refresh token, and device code request.
+     * Supports grant types for the authorization code, refresh token, and device code request. For device code requests, specify the following value:  urn:ietf:params:oauth:grant-type:device_code   For information about how to obtain the device code, see the StartDeviceAuthorization topic.
      */
     grantType: GrantType;
     /**
@@ -65,7 +65,7 @@ declare namespace SSOOIDC {
      */
     code?: AuthCode;
     /**
-     * The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.
+     * Currently, refreshToken is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see Considerations for Using this Guide in the IAM Identity Center OIDC API Reference. The token used to obtain an access token in the event that the access token is invalid or expired.
      */
     refreshToken?: RefreshToken;
     /**
@@ -79,7 +79,7 @@ declare namespace SSOOIDC {
   }
   export interface CreateTokenResponse {
     /**
-     * An opaque token to access AWS SSO resources assigned to a user.
+     * An opaque token to access IAM Identity Center resources assigned to a user.
      */
     accessToken?: AccessToken;
     /**
@@ -91,11 +91,11 @@ declare namespace SSOOIDC {
      */
     expiresIn?: ExpirationInSeconds;
     /**
-     * A token that, if present, can be used to refresh a previously issued access token that might have expired.
+     * Currently, refreshToken is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see Considerations for Using this Guide in the IAM Identity Center OIDC API Reference. A token that, if present, can be used to refresh a previously issued access token that might have expired.
      */
     refreshToken?: RefreshToken;
     /**
-     * The identifier of the user that associated with the access token, if present.
+     * Currently, idToken is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see Considerations for Using this Guide in the IAM Identity Center OIDC API Reference. The identifier of the user that associated with the access token, if present.
      */
     idToken?: IdToken;
   }
@@ -150,7 +150,7 @@ declare namespace SSOOIDC {
   export type Scopes = Scope[];
   export interface StartDeviceAuthorizationRequest {
     /**
-     * The unique identifier string for the client that is registered with AWS SSO. This value should come from the persisted result of the RegisterClient API operation.
+     * The unique identifier string for the client that is registered with IAM Identity Center. This value should come from the persisted result of the RegisterClient API operation.
      */
     clientId: ClientId;
     /**
@@ -158,7 +158,7 @@ declare namespace SSOOIDC {
      */
     clientSecret: ClientSecret;
     /**
-     * The URL for the AWS SSO user portal. For more information, see Using the User Portal in the AWS Single Sign-On User Guide.
+     * The URL for the AWS access portal. For more information, see Using the AWS access portal in the IAM Identity Center User Guide.
      */
     startUrl: URI;
   }

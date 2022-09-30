@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1226.0-->
+<!--LATEST=2.1227.0-->
 <!--ENTRYINSERT-->
+
+## 2.1227.0
+* feature: CodeDeploy: This release allows you to override the alarm configurations when creating a deployment.
+* feature: DLM: This release adds support for archival of single-volume snapshots created by Amazon Data Lifecycle Manager policies
+* feature: DevOpsGuru: This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes
+* feature: SageMaker: A new parameter called ExplainerConfig is added to CreateEndpointConfig API to enable SageMaker Clarify online explainability feature.
+* feature: SageMakerRuntime: A new parameter called EnableExplanations is added to InvokeEndpoint API to enable on-demand SageMaker Clarify online explainability requests.
 
 ## 2.1226.0
 * feature: ACM: This update returns additional certificate details such as certificate SANs and allows sorting in the ListCertificates API.
