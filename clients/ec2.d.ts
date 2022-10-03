@@ -20110,6 +20110,10 @@ declare namespace EC2 {
      * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specified a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.
      */
     DeprecationTime?: String;
+    /**
+     * If v2.0, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ImdsSupport?: ImdsSupportValues;
   }
   export interface ImageAttribute {
     /**
@@ -20160,8 +20164,12 @@ declare namespace EC2 {
      * The date and time, in ISO 8601 date-time format, when the AMI was last used to launch an EC2 instance. When the AMI is used to launch an instance, there is a 24-hour delay before that usage is reported.   lastLaunchedTime data is available starting April 2017. 
      */
     LastLaunchedTime?: AttributeValue;
+    /**
+     * If v2.0, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ImdsSupport?: AttributeValue;
   }
-  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"tpmSupport"|"uefiData"|"lastLaunchedTime"|string;
+  export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"tpmSupport"|"uefiData"|"lastLaunchedTime"|"imdsSupport"|string;
   export interface ImageDiskContainer {
     /**
      * The description of the disk image.
@@ -20218,6 +20226,7 @@ declare namespace EC2 {
   export type ImageRecycleBinInfoList = ImageRecycleBinInfo[];
   export type ImageState = "pending"|"available"|"invalid"|"deregistered"|"transient"|"failed"|"error"|string;
   export type ImageTypeValues = "machine"|"kernel"|"ramdisk"|string;
+  export type ImdsSupportValues = "v2.0"|string;
   export interface ImportClientVpnClientCertificateRevocationListRequest {
     /**
      * The ID of the Client VPN endpoint to which the client certificate revocation list applies.
@@ -27875,6 +27884,10 @@ declare namespace EC2 {
      * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
      */
     UefiData?: StringType;
+    /**
+     * Set to v2.0 to indicate that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon Elastic Compute Cloud User Guide.  If you set the value to v2.0, make sure that your AMI software can support IMDSv2. 
+     */
+    ImdsSupport?: ImdsSupportValues;
   }
   export interface RegisterImageResult {
     /**
