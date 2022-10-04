@@ -3722,7 +3722,7 @@ declare namespace Connect {
     SourceType?: SourceType;
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
-  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|string;
+  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|string;
   export interface InvisibleFieldInfo {
     /**
      * Identifier of the invisible field.

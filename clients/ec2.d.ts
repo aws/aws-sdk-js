@@ -15715,6 +15715,10 @@ declare namespace EC2 {
      * Indicates whether DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.
      */
     EnableDnsSupport?: AttributeBooleanValue;
+    /**
+     * Indicates whether Network Address Usage metrics are enabled for your VPC.
+     */
+    EnableNetworkAddressUsageMetrics?: AttributeBooleanValue;
   }
   export type DescribeVpcClassicLinkDnsSupportMaxResults = number;
   export type DescribeVpcClassicLinkDnsSupportNextToken = string;
@@ -25545,6 +25549,10 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId: VpcId;
+    /**
+     * Indicates whether Network Address Usage metrics are enabled for your VPC.
+     */
+    EnableNetworkAddressUsageMetrics?: AttributeBooleanValue;
   }
   export interface ModifyVpcEndpointConnectionNotificationRequest {
     /**
@@ -34227,7 +34235,7 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type VpcAttachmentList = VpcAttachment[];
-  export type VpcAttributeName = "enableDnsSupport"|"enableDnsHostnames"|string;
+  export type VpcAttributeName = "enableDnsSupport"|"enableDnsHostnames"|"enableNetworkAddressUsageMetrics"|string;
   export type VpcCidrAssociationId = string;
   export interface VpcCidrBlockAssociation {
     /**

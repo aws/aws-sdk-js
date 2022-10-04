@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1228.0-->
+<!--LATEST=2.1229.0-->
 <!--ENTRYINSERT-->
+
+## 2.1229.0
+* feature: Connect: Updated the CreateIntegrationAssociation API to support the CASES_DOMAIN IntegrationType.
+* feature: ConnectCases: This release adds APIs for Amazon Connect Cases. Cases allows your agents to quickly track and manage customer issues that require multiple interactions, follow-up tasks, and teams in your contact center.  For more information, see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* feature: EC2: Added EnableNetworkAddressUsageMetrics flag for ModifyVpcAttribute, DescribeVpcAttribute APIs.
+* feature: S3Control: S3 Object Lambda adds support to allow customers to intercept HeadObject and ListObjects requests and introduce their own compute. These requests were previously proxied to S3.
+* feature: WorkMail: This release adds support for impersonation roles in Amazon WorkMail.
 
 ## 2.1228.0
 * feature: AccessAnalyzer: AWS IAM Access Analyzer policy validation introduces new checks for role trust policies. As customers author a policy, IAM Access Analyzer policy validation evaluates the policy for any issues to make it easier for customers to author secure policies.

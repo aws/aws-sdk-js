@@ -1199,5 +1199,8 @@
   },
   "migrationhuborchestrator": {
     "name": "MigrationHubOrchestrator"
+  },
+  "connectcases": {
+    "name": "ConnectCases"
   }
 }

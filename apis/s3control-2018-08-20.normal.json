@@ -4043,7 +4043,9 @@
       "type": "string",
       "enum": [
         "GetObject-Range",
-        "GetObject-PartNumber"
+        "GetObject-PartNumber",
+        "HeadObject-Range",
+        "HeadObject-PartNumber"
       ]
     },
     "ObjectLambdaAllowedFeaturesList": {
@@ -4120,7 +4122,10 @@
     "ObjectLambdaTransformationConfigurationAction": {
       "type": "string",
       "enum": [
-        "GetObject"
+        "GetObject",
+        "HeadObject",
+        "ListObjects",
+        "ListObjectsV2"
       ]
     },
     "ObjectLambdaTransformationConfigurationActionsList": {

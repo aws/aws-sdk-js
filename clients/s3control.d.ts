@@ -2049,7 +2049,7 @@ declare namespace S3Control {
   export type ObjectLambdaAccessPointArn = string;
   export type ObjectLambdaAccessPointList = ObjectLambdaAccessPoint[];
   export type ObjectLambdaAccessPointName = string;
-  export type ObjectLambdaAllowedFeature = "GetObject-Range"|"GetObject-PartNumber"|string;
+  export type ObjectLambdaAllowedFeature = "GetObject-Range"|"GetObject-PartNumber"|"HeadObject-Range"|"HeadObject-PartNumber"|string;
   export type ObjectLambdaAllowedFeaturesList = ObjectLambdaAllowedFeature[];
   export interface ObjectLambdaConfiguration {
     /**
@@ -2087,7 +2087,7 @@ declare namespace S3Control {
      */
     ContentTransformation: ObjectLambdaContentTransformation;
   }
-  export type ObjectLambdaTransformationConfigurationAction = "GetObject"|string;
+  export type ObjectLambdaTransformationConfigurationAction = "GetObject"|"HeadObject"|"ListObjects"|"ListObjectsV2"|string;
   export type ObjectLambdaTransformationConfigurationActionsList = ObjectLambdaTransformationConfigurationAction[];
   export type ObjectLambdaTransformationConfigurationsList = ObjectLambdaTransformationConfiguration[];
   export type ObjectLockEnabledForBucket = boolean;

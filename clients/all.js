@@ -317,5 +317,6 @@ module.exports = {
   SupportApp: require('./supportapp'),
   ControlTower: require('./controltower'),
   IoTFleetWise: require('./iotfleetwise'),
-  MigrationHubOrchestrator: require('./migrationhuborchestrator')
+  MigrationHubOrchestrator: require('./migrationhuborchestrator'),
+  ConnectCases: require('./connectcases')
 };

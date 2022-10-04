@@ -24271,6 +24271,11 @@
           "shape": "AttributeBooleanValue",
           "documentation": "<p>Indicates whether DNS resolution is enabled for the VPC. If this attribute is <code>true</code>, the Amazon DNS server resolves DNS hostnames for your instances to their corresponding IP addresses; otherwise, it does not.</p>",
           "locationName": "enableDnsSupport"
+        },
+        "EnableNetworkAddressUsageMetrics": {
+          "shape": "AttributeBooleanValue",
+          "documentation": "<p>Indicates whether Network Address Usage metrics are enabled for your VPC.</p>",
+          "locationName": "enableNetworkAddressUsageMetrics"
         }
       }
     },
@@ -40517,6 +40522,10 @@
           "shape": "VpcId",
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
+        },
+        "EnableNetworkAddressUsageMetrics": {
+          "shape": "AttributeBooleanValue",
+          "documentation": "<p>Indicates whether Network Address Usage metrics are enabled for your VPC.</p>"
         }
       }
     },
@@ -54907,7 +54916,8 @@
       "type": "string",
       "enum": [
         "enableDnsSupport",
-        "enableDnsHostnames"
+        "enableDnsHostnames",
+        "enableNetworkAddressUsageMetrics"
       ]
     },
     "VpcCidrAssociationId": {
