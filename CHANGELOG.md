@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1229.0-->
+<!--LATEST=2.1230.0-->
 <!--ENTRYINSERT-->
+
+## 2.1230.0
+* feature: Glue: This SDK release adds support to sync glue jobs with source control provider. Additionally, a new parameter called SourceControlDetails will be added to Job model.
+* feature: NetworkFirewall: StreamExceptionPolicy configures how AWS Network Firewall processes traffic when a network connection breaks midstream
+* feature: Outposts: This release adds the Asset state information to the ListAssets response. The ListAssets request supports filtering on Asset state.
 
 ## 2.1229.0
 * feature: Connect: Updated the CreateIntegrationAssociation API to support the CASES_DOMAIN IntegrationType.

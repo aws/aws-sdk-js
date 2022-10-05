@@ -12,11 +12,11 @@ declare class Outposts extends Service {
   constructor(options?: Outposts.Types.ClientConfiguration)
   config: Config & Outposts.Types.ClientConfiguration;
   /**
-   *  Cancels an order for an Outpost. 
+   * Cancels the specified order for an Outpost.
    */
   cancelOrder(params: Outposts.Types.CancelOrderInput, callback?: (err: AWSError, data: Outposts.Types.CancelOrderOutput) => void): Request<Outposts.Types.CancelOrderOutput, AWSError>;
   /**
-   *  Cancels an order for an Outpost. 
+   * Cancels the specified order for an Outpost.
    */
   cancelOrder(callback?: (err: AWSError, data: Outposts.Types.CancelOrderOutput) => void): Request<Outposts.Types.CancelOrderOutput, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class Outposts extends Service {
    */
   createOrder(callback?: (err: AWSError, data: Outposts.Types.CreateOrderOutput) => void): Request<Outposts.Types.CreateOrderOutput, AWSError>;
   /**
-   * Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
+   * Creates an Outpost. You can specify either an Availability one or an AZ ID.
    */
   createOutpost(params: Outposts.Types.CreateOutpostInput, callback?: (err: AWSError, data: Outposts.Types.CreateOutpostOutput) => void): Request<Outposts.Types.CreateOutpostOutput, AWSError>;
   /**
-   * Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
+   * Creates an Outpost. You can specify either an Availability one or an AZ ID.
    */
   createOutpost(callback?: (err: AWSError, data: Outposts.Types.CreateOutpostOutput) => void): Request<Outposts.Types.CreateOutpostOutput, AWSError>;
   /**
@@ -44,43 +44,43 @@ declare class Outposts extends Service {
    */
   createSite(callback?: (err: AWSError, data: Outposts.Types.CreateSiteOutput) => void): Request<Outposts.Types.CreateSiteOutput, AWSError>;
   /**
-   * Deletes the Outpost.
+   * Deletes the specified Outpost.
    */
   deleteOutpost(params: Outposts.Types.DeleteOutpostInput, callback?: (err: AWSError, data: Outposts.Types.DeleteOutpostOutput) => void): Request<Outposts.Types.DeleteOutpostOutput, AWSError>;
   /**
-   * Deletes the Outpost.
+   * Deletes the specified Outpost.
    */
   deleteOutpost(callback?: (err: AWSError, data: Outposts.Types.DeleteOutpostOutput) => void): Request<Outposts.Types.DeleteOutpostOutput, AWSError>;
   /**
-   * Deletes the site.
+   * Deletes the specified site.
    */
   deleteSite(params: Outposts.Types.DeleteSiteInput, callback?: (err: AWSError, data: Outposts.Types.DeleteSiteOutput) => void): Request<Outposts.Types.DeleteSiteOutput, AWSError>;
   /**
-   * Deletes the site.
+   * Deletes the specified site.
    */
   deleteSite(callback?: (err: AWSError, data: Outposts.Types.DeleteSiteOutput) => void): Request<Outposts.Types.DeleteSiteOutput, AWSError>;
   /**
-   * Gets information about a catalog item.
+   * Gets information about the specified catalog item.
    */
   getCatalogItem(params: Outposts.Types.GetCatalogItemInput, callback?: (err: AWSError, data: Outposts.Types.GetCatalogItemOutput) => void): Request<Outposts.Types.GetCatalogItemOutput, AWSError>;
   /**
-   * Gets information about a catalog item.
+   * Gets information about the specified catalog item.
    */
   getCatalogItem(callback?: (err: AWSError, data: Outposts.Types.GetCatalogItemOutput) => void): Request<Outposts.Types.GetCatalogItemOutput, AWSError>;
   /**
-   *   Amazon Web Services uses this action to install Outpost servers.   Gets information about a specified connection.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
+   *   Amazon Web Services uses this action to install Outpost servers.   Gets information about the specified connection.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
    */
   getConnection(params: Outposts.Types.GetConnectionRequest, callback?: (err: AWSError, data: Outposts.Types.GetConnectionResponse) => void): Request<Outposts.Types.GetConnectionResponse, AWSError>;
   /**
-   *   Amazon Web Services uses this action to install Outpost servers.   Gets information about a specified connection.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
+   *   Amazon Web Services uses this action to install Outpost servers.   Gets information about the specified connection.   Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For more information, see  Amazon Web Services managed policies for Amazon Web Services Outposts and  Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail in the Amazon Web Services Outposts User Guide. 
    */
   getConnection(callback?: (err: AWSError, data: Outposts.Types.GetConnectionResponse) => void): Request<Outposts.Types.GetConnectionResponse, AWSError>;
   /**
-   * Gets an order.
+   * Gets information about the specified order.
    */
   getOrder(params: Outposts.Types.GetOrderInput, callback?: (err: AWSError, data: Outposts.Types.GetOrderOutput) => void): Request<Outposts.Types.GetOrderOutput, AWSError>;
   /**
-   * Gets an order.
+   * Gets information about the specified order.
    */
   getOrder(callback?: (err: AWSError, data: Outposts.Types.GetOrderOutput) => void): Request<Outposts.Types.GetOrderOutput, AWSError>;
   /**
@@ -100,59 +100,59 @@ declare class Outposts extends Service {
    */
   getOutpostInstanceTypes(callback?: (err: AWSError, data: Outposts.Types.GetOutpostInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostInstanceTypesOutput, AWSError>;
   /**
-   *  Gets information about the specified Outpost site. 
+   * Gets information about the specified Outpost site.
    */
   getSite(params: Outposts.Types.GetSiteInput, callback?: (err: AWSError, data: Outposts.Types.GetSiteOutput) => void): Request<Outposts.Types.GetSiteOutput, AWSError>;
   /**
-   *  Gets information about the specified Outpost site. 
+   * Gets information about the specified Outpost site.
    */
   getSite(callback?: (err: AWSError, data: Outposts.Types.GetSiteOutput) => void): Request<Outposts.Types.GetSiteOutput, AWSError>;
   /**
-   *  Gets the site address. 
+   *  Gets the site address of the specified site. 
    */
   getSiteAddress(params: Outposts.Types.GetSiteAddressInput, callback?: (err: AWSError, data: Outposts.Types.GetSiteAddressOutput) => void): Request<Outposts.Types.GetSiteAddressOutput, AWSError>;
   /**
-   *  Gets the site address. 
+   *  Gets the site address of the specified site. 
    */
   getSiteAddress(callback?: (err: AWSError, data: Outposts.Types.GetSiteAddressOutput) => void): Request<Outposts.Types.GetSiteAddressOutput, AWSError>;
   /**
-   *  Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware assets that allocate resources for Dedicated Hosts. 
+   * Lists the hardware assets for the specified Outpost. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listAssets(params: Outposts.Types.ListAssetsInput, callback?: (err: AWSError, data: Outposts.Types.ListAssetsOutput) => void): Request<Outposts.Types.ListAssetsOutput, AWSError>;
   /**
-   *  Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware assets that allocate resources for Dedicated Hosts. 
+   * Lists the hardware assets for the specified Outpost. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listAssets(callback?: (err: AWSError, data: Outposts.Types.ListAssetsOutput) => void): Request<Outposts.Types.ListAssetsOutput, AWSError>;
   /**
-   * Lists the items in the catalog. Add filters to your request to return a more specific list of results. Use filters to match an item class, storage option, or EC2 family.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the items in the catalog. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listCatalogItems(params: Outposts.Types.ListCatalogItemsInput, callback?: (err: AWSError, data: Outposts.Types.ListCatalogItemsOutput) => void): Request<Outposts.Types.ListCatalogItemsOutput, AWSError>;
   /**
-   * Lists the items in the catalog. Add filters to your request to return a more specific list of results. Use filters to match an item class, storage option, or EC2 family.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the items in the catalog. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listCatalogItems(callback?: (err: AWSError, data: Outposts.Types.ListCatalogItemsOutput) => void): Request<Outposts.Types.ListCatalogItemsOutput, AWSError>;
   /**
-   * Lists the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to return a more specific list of results. 
+   * Lists the Outpost orders for your Amazon Web Services account.
    */
   listOrders(params: Outposts.Types.ListOrdersInput, callback?: (err: AWSError, data: Outposts.Types.ListOrdersOutput) => void): Request<Outposts.Types.ListOrdersOutput, AWSError>;
   /**
-   * Lists the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to return a more specific list of results. 
+   * Lists the Outpost orders for your Amazon Web Services account.
    */
   listOrders(callback?: (err: AWSError, data: Outposts.Types.ListOrdersOutput) => void): Request<Outposts.Types.ListOrdersOutput, AWSError>;
   /**
-   * Lists the Outposts for your Amazon Web Services account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outposts for your Amazon Web Services account. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listOutposts(params: Outposts.Types.ListOutpostsInput, callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
-   * Lists the Outposts for your Amazon Web Services account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outposts for your Amazon Web Services account. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listOutposts(callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
-   * Lists the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outpost sites for your Amazon Web Services account. Use filters to return specific results. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listSites(params: Outposts.Types.ListSitesInput, callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
   /**
-   * Lists the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to return a more specific list of results. Use filters to match site city, country code, or state/region of the operating address.  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
+   * Lists the Outpost sites for your Amazon Web Services account. Use filters to return specific results. Use filters to return specific results. If you specify multiple filters, the results include only the resources that match all of the specified filters. For a filter where you can specify multiple values, the results include items that match any of the values that you specify for the filter.
    */
   listSites(callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
   /**
@@ -196,19 +196,19 @@ declare class Outposts extends Service {
    */
   updateOutpost(callback?: (err: AWSError, data: Outposts.Types.UpdateOutpostOutput) => void): Request<Outposts.Types.UpdateOutpostOutput, AWSError>;
   /**
-   *  Updates the site. 
+   * Updates the specified site.
    */
   updateSite(params: Outposts.Types.UpdateSiteInput, callback?: (err: AWSError, data: Outposts.Types.UpdateSiteOutput) => void): Request<Outposts.Types.UpdateSiteOutput, AWSError>;
   /**
-   *  Updates the site. 
+   * Updates the specified site.
    */
   updateSite(callback?: (err: AWSError, data: Outposts.Types.UpdateSiteOutput) => void): Request<Outposts.Types.UpdateSiteOutput, AWSError>;
   /**
-   *  Updates the site address.   To update a site address with an order IN_PROGRESS, you must wait for the order to complete or cancel the order.  You can update the operating address before you place an order at the site, or after all Outposts that belong to the site have been deactivated. 
+   * Updates the address of the specified site. You can't update a site address if there is an order in progress. You must wait for the order to complete or cancel the order. You can update the operating address before you place an order at the site, or after all Outposts that belong to the site have been deactivated.
    */
   updateSiteAddress(params: Outposts.Types.UpdateSiteAddressInput, callback?: (err: AWSError, data: Outposts.Types.UpdateSiteAddressOutput) => void): Request<Outposts.Types.UpdateSiteAddressOutput, AWSError>;
   /**
-   *  Updates the site address.   To update a site address with an order IN_PROGRESS, you must wait for the order to complete or cancel the order.  You can update the operating address before you place an order at the site, or after all Outposts that belong to the site have been deactivated. 
+   * Updates the address of the specified site. You can't update a site address if there is an order in progress. You must wait for the order to complete or cancel the order. You can update the operating address before you place an order at the site, or after all Outposts that belong to the site have been deactivated.
    */
   updateSiteAddress(callback?: (err: AWSError, data: Outposts.Types.UpdateSiteAddressOutput) => void): Request<Outposts.Types.UpdateSiteAddressOutput, AWSError>;
   /**
@@ -303,6 +303,7 @@ declare namespace Outposts {
      */
     RackElevation?: RackElevation;
   }
+  export type AssetState = "ACTIVE"|"RETIRING"|string;
   export type AssetType = "COMPUTE"|string;
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
@@ -312,7 +313,7 @@ declare namespace Outposts {
   export type CIDRList = CIDR[];
   export interface CancelOrderInput {
     /**
-     *  The ID of the order to cancel. 
+     *  The ID of the order. 
      */
     OrderId: OrderId;
   }
@@ -356,11 +357,16 @@ declare namespace Outposts {
   export type CatalogItemWeightLbs = number;
   export type City = string;
   export type CityList = City[];
+  export type ComputeAssetState = "ACTIVE"|"ISOLATED"|"RETIRING"|string;
   export interface ComputeAttributes {
     /**
-     *  The host ID of any Dedicated Hosts on the asset. 
+     *  The host ID of the Dedicated Host on the asset. 
      */
     HostId?: HostId;
+    /**
+     * The state.   ACTIVE - The asset is available and can provide capacity for new compute resources.   ISOLATED - The asset is undergoing maintenance and can't provide capacity for new compute resources. Existing compute resources on the asset are not affected.   RETIRING - The underlying hardware for the asset is degraded. Capacity for new compute resources is reduced. Amazon Web Services sends notifications for resources that must be stopped before the asset can be replaced.  
+     */
+    State?: ComputeAssetState;
   }
   export interface ConnectionDetails {
     /**
@@ -403,11 +409,11 @@ declare namespace Outposts {
      */
     LineItems: LineItemRequestListDefinition;
     /**
-     * The payment option for the order.
+     * The payment option.
      */
     PaymentOption: PaymentOption;
     /**
-     * The payment terms for the order.
+     * The payment terms.
      */
     PaymentTerm?: PaymentTerm;
   }
@@ -421,7 +427,7 @@ declare namespace Outposts {
     Name: OutpostName;
     Description?: OutpostDescription;
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
     AvailabilityZone?: AvailabilityZone;
@@ -467,7 +473,7 @@ declare namespace Outposts {
   }
   export interface DeleteOutpostInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
   }
@@ -475,7 +481,7 @@ declare namespace Outposts {
   }
   export interface DeleteSiteInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
   }
@@ -515,17 +521,17 @@ declare namespace Outposts {
   }
   export interface GetConnectionRequest {
     /**
-     *  The ID of the connection you request. 
+     *  The ID of the connection. 
      */
     ConnectionId: ConnectionId;
   }
   export interface GetConnectionResponse {
     /**
-     *  The ID of the connection you receive. 
+     *  The ID of the connection. 
      */
     ConnectionId?: ConnectionId;
     /**
-     *  Information about a connection. 
+     *  Information about the connection. 
      */
     ConnectionDetails?: ConnectionDetails;
   }
@@ -540,13 +546,13 @@ declare namespace Outposts {
   }
   export interface GetOutpostInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
   }
   export interface GetOutpostInstanceTypesInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
     NextToken?: Token;
@@ -556,7 +562,7 @@ declare namespace Outposts {
     InstanceTypes?: InstanceTypeListDefinition;
     NextToken?: Token;
     /**
-     *  The ID of the Outpost.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID of the Outpost. 
      */
     OutpostId?: OutpostId;
     OutpostArn?: OutpostArn;
@@ -566,18 +572,18 @@ declare namespace Outposts {
   }
   export interface GetSiteAddressInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
     /**
-     *  The type of the address you request. 
+     * The type of the address you request. 
      */
     AddressType: AddressType;
   }
   export interface GetSiteAddressOutput {
     SiteId?: SiteId;
     /**
-     *  The type of the address you receive. 
+     * The type of the address you receive. 
      */
     AddressType?: AddressType;
     /**
@@ -587,7 +593,7 @@ declare namespace Outposts {
   }
   export interface GetSiteInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
   }
@@ -636,7 +642,7 @@ declare namespace Outposts {
      */
     AssetId?: AssetId;
     /**
-     *  MAC addresses of the asset. 
+     *  The MAC addresses of the asset. 
      */
     MacAddressList?: MacAddressList;
   }
@@ -663,15 +669,19 @@ declare namespace Outposts {
      */
     OutpostIdentifier: OutpostIdentifier;
     /**
-     *  A filter for the host ID of Dedicated Hosts on the Outpost.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by the host ID of a Dedicated Host.
      */
     HostIdFilter?: HostIdList;
     MaxResults?: MaxResults1000;
     NextToken?: Token;
+    /**
+     * Filters the results by state.
+     */
+    StatusFilter?: StatusList;
   }
   export interface ListAssetsOutput {
     /**
-     *  Information about hardware assets. 
+     * Information about the hardware assets.
      */
     Assets?: AssetListDefinition;
     NextToken?: Token;
@@ -680,15 +690,15 @@ declare namespace Outposts {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
     /**
-     *  A filter for the class of items in the catalog.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by item class.
      */
     ItemClassFilter?: CatalogItemClassList;
     /**
-     *  A filter for the storage options of items in the catalog.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by storage option.
      */
     SupportedStorageFilter?: SupportedStorageList;
     /**
-     *  A filter for EC2 family options for items in the catalog.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by EC2 family (for example, M5).
      */
     EC2FamilyFilter?: EC2FamilyList;
   }
@@ -718,15 +728,15 @@ declare namespace Outposts {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
     /**
-     *  A filter for the lifecycle status of the Outpost.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by the lifecycle status.
      */
     LifeCycleStatusFilter?: LifeCycleStatusList;
     /**
-     *  A filter for the Availability Zone (us-east-1a) of the Outpost.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by Availability Zone (for example, us-east-1a).
      */
     AvailabilityZoneFilter?: AvailabilityZoneList;
     /**
-     *  A filter for the AZ IDs (use1-az1) of the Outpost.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by AZ ID (for example, use1-az1).
      */
     AvailabilityZoneIdFilter?: AvailabilityZoneIdList;
   }
@@ -738,15 +748,15 @@ declare namespace Outposts {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
     /**
-     *  A filter for the country code of the Outpost site.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by country code.
      */
     OperatingAddressCountryCodeFilter?: CountryCodeList;
     /**
-     *  A filter for the state/region of the Outpost site.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by state or region.
      */
     OperatingAddressStateOrRegionFilter?: StateOrRegionList;
     /**
-     *  A filter for the city of the Outpost site.  Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
+     * Filters the results by city.
      */
     OperatingAddressCityFilter?: CityList;
   }
@@ -784,7 +794,7 @@ declare namespace Outposts {
      */
     OrderId?: OrderId;
     /**
-     * The status of the order.    PREPARING - Order is received and being prepared.    IN_PROGRESS - Order is either being built, shipped, or installed. To get more details, see the LineItem status.    COMPLETED - Order is complete.    CANCELLED - Order is cancelled.    ERROR - Customer should contact support.    The following status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and FULFILLED.  
+     * The status of the order.    PREPARING - Order is received and being prepared.    IN_PROGRESS - Order is either being built, shipped, or installed. To get more details, see the line item status.    COMPLETED - Order is complete.    CANCELLED - Order is cancelled.    ERROR - Customer should contact support.    The following status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and FULFILLED.  
      */
     Status?: OrderStatus;
     /**
@@ -828,11 +838,11 @@ declare namespace Outposts {
      */
     LineItemCountsByStatus?: LineItemStatusCounts;
     /**
-     *  Submission date for the order. 
+     *  The submission date for the order. 
      */
     OrderSubmissionDate?: ISO8601Timestamp;
     /**
-     *  Fulfilment date for the order. 
+     *  The fulfilment date for the order. 
      */
     OrderFulfilledDate?: ISO8601Timestamp;
   }
@@ -869,7 +879,7 @@ declare namespace Outposts {
   export type OutpostName = string;
   export type OwnerId = string;
   export type PaymentOption = "ALL_UPFRONT"|"NO_UPFRONT"|"PARTIAL_UPFRONT"|string;
-  export type PaymentTerm = "THREE_YEARS"|string;
+  export type PaymentTerm = "THREE_YEARS"|"ONE_YEAR"|string;
   export type PostalCode = string;
   export type PowerConnector = "L6_30P"|"IEC309"|"AH530P7W"|"AH532P6W"|string;
   export type PowerDrawKva = "POWER_5_KVA"|"POWER_10_KVA"|"POWER_15_KVA"|string;
@@ -995,6 +1005,7 @@ declare namespace Outposts {
   }
   export type StateOrRegion = string;
   export type StateOrRegionList = StateOrRegion[];
+  export type StatusList = AssetState[];
   export type SupportedHardwareType = "RACK"|"SERVER"|string;
   export type SupportedStorageEnum = "EBS"|"S3"|string;
   export type SupportedStorageList = SupportedStorageEnum[];
@@ -1033,7 +1044,7 @@ declare namespace Outposts {
   }
   export interface UpdateOutpostInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the Outpost.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
      */
     OutpostId: OutpostId;
     Name?: OutpostName;
@@ -1048,7 +1059,7 @@ declare namespace Outposts {
   }
   export interface UpdateSiteAddressInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
     /**
@@ -1072,13 +1083,13 @@ declare namespace Outposts {
   }
   export interface UpdateSiteInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
     Name?: SiteName;
     Description?: SiteDescription;
     /**
-     *  Notes about a site. 
+     * Notes about a site.
      */
     Notes?: SiteNotes;
   }
@@ -1087,27 +1098,27 @@ declare namespace Outposts {
   }
   export interface UpdateSiteRackPhysicalPropertiesInput {
     /**
-     *  The ID or the Amazon Resource Name (ARN) of the site.   In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the Outposts Query API. To address backwards compatibility, the parameter names OutpostID or SiteID remain in use. Despite the parameter name, you can make the request with an ARN. 
+     *  The ID or the Amazon Resource Name (ARN) of the site. 
      */
     SiteId: SiteId;
     /**
-     * Specify in kVA the power draw available at the hardware placement position for the rack.
+     * The power draw, in kVA, available at the hardware placement position for the rack.
      */
     PowerDrawKva?: PowerDrawKva;
     /**
-     *  Specify the power option that you can provide for hardware.    Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz   Three-phase AC feed: 346 V to 480 V, 50 Hz or 60 Hz  
+     * The power option that you can provide for hardware.    Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz   Three-phase AC feed: 346 V to 480 V, 50 Hz or 60 Hz  
      */
     PowerPhase?: PowerPhase;
     /**
-     *  Specify the power connector that Amazon Web Services should plan to provide for connections to the hardware. Note the correlation between PowerPhase and PowerConnector.    Single-phase AC feed    L6-30P – (common in US); 30A; single phase    IEC309 (blue) – P+N+E, 6hr; 32 A; single phase     Three-phase AC feed    AH530P7W (red) – 3P+N+E, 7hr; 30A; three phase    AH532P6W (red) – 3P+N+E, 6hr; 32A; three phase    
+     * The power connector that Amazon Web Services should plan to provide for connections to the hardware. Note the correlation between PowerPhase and PowerConnector.    Single-phase AC feed    L6-30P – (common in US); 30A; single phase    IEC309 (blue) – P+N+E, 6hr; 32 A; single phase     Three-phase AC feed    AH530P7W (red) – 3P+N+E, 7hr; 30A; three phase    AH532P6W (red) – 3P+N+E, 6hr; 32A; three phase    
      */
     PowerConnector?: PowerConnector;
     /**
-     *  Specify whether the power feed comes above or below the rack. 
+     * Indicates whether the power feed comes above or below the rack. 
      */
     PowerFeedDrop?: PowerFeedDrop;
     /**
-     *  Specify the uplink speed the rack should support for the connection to the Region. 
+     * The uplink speed the rack should support for the connection to the Region. 
      */
     UplinkGbps?: UplinkGbps;
     /**
@@ -1115,15 +1126,15 @@ declare namespace Outposts {
      */
     UplinkCount?: UplinkCount;
     /**
-     *  Specify the type of fiber that you will use to attach the Outpost to your network. 
+     * The type of fiber that you will use to attach the Outpost to your network. 
      */
     FiberOpticCableType?: FiberOpticCableType;
     /**
-     * Specify the type of optical standard that you will use to attach the Outpost to your network. This field is dependent on uplink speed, fiber type, and distance to the upstream device. For more information about networking requirements for racks, see Network in the Amazon Web Services Outposts User Guide.     OPTIC_10GBASE_SR: 10GBASE-SR    OPTIC_10GBASE_IR: 10GBASE-IR    OPTIC_10GBASE_LR: 10GBASE-LR    OPTIC_40GBASE_SR: 40GBASE-SR    OPTIC_40GBASE_ESR: 40GBASE-ESR    OPTIC_40GBASE_IR4_LR4L: 40GBASE-IR (LR4L)    OPTIC_40GBASE_LR4: 40GBASE-LR4    OPTIC_100GBASE_SR4: 100GBASE-SR4    OPTIC_100GBASE_CWDM4: 100GBASE-CWDM4    OPTIC_100GBASE_LR4: 100GBASE-LR4    OPTIC_100G_PSM4_MSA: 100G PSM4 MSA    OPTIC_1000BASE_LX: 1000Base-LX    OPTIC_1000BASE_SX : 1000Base-SX  
+     * The type of optical standard that you will use to attach the Outpost to your network. This field is dependent on uplink speed, fiber type, and distance to the upstream device. For more information about networking requirements for racks, see Network in the Amazon Web Services Outposts User Guide.     OPTIC_10GBASE_SR: 10GBASE-SR    OPTIC_10GBASE_IR: 10GBASE-IR    OPTIC_10GBASE_LR: 10GBASE-LR    OPTIC_40GBASE_SR: 40GBASE-SR    OPTIC_40GBASE_ESR: 40GBASE-ESR    OPTIC_40GBASE_IR4_LR4L: 40GBASE-IR (LR4L)    OPTIC_40GBASE_LR4: 40GBASE-LR4    OPTIC_100GBASE_SR4: 100GBASE-SR4    OPTIC_100GBASE_CWDM4: 100GBASE-CWDM4    OPTIC_100GBASE_LR4: 100GBASE-LR4    OPTIC_100G_PSM4_MSA: 100G PSM4 MSA    OPTIC_1000BASE_LX: 1000Base-LX    OPTIC_1000BASE_SX : 1000Base-SX  
      */
     OpticalStandard?: OpticalStandard;
     /**
-     *  Specify the maximum rack weight that this site can support. NO_LIMIT is over 2000lbs. 
+     * The maximum rack weight that this site can support. NO_LIMIT is over 2000lbs. 
      */
     MaximumSupportedWeightLbs?: MaximumSupportedWeightLbs;
   }

@@ -1420,6 +1420,14 @@ declare class Glue extends Service {
    */
   updateJob(callback?: (err: AWSError, data: Glue.Types.UpdateJobResponse) => void): Request<Glue.Types.UpdateJobResponse, AWSError>;
   /**
+   * Synchronizes a job from the source control repository. This operation takes the job artifacts that are located in the remote repository and updates the Glue internal stores with these artifacts. This API supports optional parameters which take in the repository information.
+   */
+  updateJobFromSourceControl(params: Glue.Types.UpdateJobFromSourceControlRequest, callback?: (err: AWSError, data: Glue.Types.UpdateJobFromSourceControlResponse) => void): Request<Glue.Types.UpdateJobFromSourceControlResponse, AWSError>;
+  /**
+   * Synchronizes a job from the source control repository. This operation takes the job artifacts that are located in the remote repository and updates the Glue internal stores with these artifacts. This API supports optional parameters which take in the repository information.
+   */
+  updateJobFromSourceControl(callback?: (err: AWSError, data: Glue.Types.UpdateJobFromSourceControlResponse) => void): Request<Glue.Types.UpdateJobFromSourceControlResponse, AWSError>;
+  /**
    * Updates an existing machine learning transform. Call this operation to tune the algorithm parameters to achieve better results. After calling this operation, you can call the StartMLEvaluationTaskRun operation to assess how well your new parameters achieved your goals (such as improving the quality of your machine learning transform, or making it more cost-effective).
    */
   updateMLTransform(params: Glue.Types.UpdateMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.UpdateMLTransformResponse) => void): Request<Glue.Types.UpdateMLTransformResponse, AWSError>;
@@ -1451,6 +1459,14 @@ declare class Glue extends Service {
    * Updates the description, compatibility setting, or version checkpoint for a schema set. For updating the compatibility setting, the call will not validate compatibility for the entire set of schema versions with the new compatibility setting. If the value for Compatibility is provided, the VersionNumber (a checkpoint) is also required. The API will validate the checkpoint version number for consistency. If the value for the VersionNumber (checkpoint) is provided, Compatibility is optional and this can be used to set/reset a checkpoint for the schema. This update will happen only if the schema is in the AVAILABLE state.
    */
   updateSchema(callback?: (err: AWSError, data: Glue.Types.UpdateSchemaResponse) => void): Request<Glue.Types.UpdateSchemaResponse, AWSError>;
+  /**
+   * Synchronizes a job to the source control repository. This operation takes the job artifacts from the Glue internal stores and makes a commit to the remote repository that is configured on the job. This API supports optional parameters which take in the repository information.
+   */
+  updateSourceControlFromJob(params: Glue.Types.UpdateSourceControlFromJobRequest, callback?: (err: AWSError, data: Glue.Types.UpdateSourceControlFromJobResponse) => void): Request<Glue.Types.UpdateSourceControlFromJobResponse, AWSError>;
+  /**
+   * Synchronizes a job to the source control repository. This operation takes the job artifacts from the Glue internal stores and makes a commit to the remote repository that is configured on the job. This API supports optional parameters which take in the repository information.
+   */
+  updateSourceControlFromJob(callback?: (err: AWSError, data: Glue.Types.UpdateSourceControlFromJobResponse) => void): Request<Glue.Types.UpdateSourceControlFromJobResponse, AWSError>;
   /**
    * Updates a metadata table in the Data Catalog.
    */
@@ -1606,6 +1622,7 @@ declare namespace Glue {
     AllColumnsRequested?: NullableBoolean;
   }
   export type AuditContextString = string;
+  export type AuthTokenString = string;
   export interface BackfillError {
     /**
      * The error code for an error that occurred when registering partition indexes for an existing table.
@@ -2737,6 +2754,7 @@ declare namespace Glue {
   export type ColumnValueStringList = ColumnValuesString[];
   export type ColumnValuesString = string;
   export type CommentString = string;
+  export type CommitIdString = string;
   export type Comparator = "EQUALS"|"GREATER_THAN"|"LESS_THAN"|"GREATER_THAN_EQUALS"|"LESS_THAN_EQUALS"|string;
   export type Compatibility = "NONE"|"DISABLED"|"BACKWARD"|"BACKWARD_ALL"|"FORWARD"|"FORWARD_ALL"|"FULL"|"FULL_ALL"|string;
   export type CompressionType = "gzip"|"bzip2"|string;
@@ -3543,6 +3561,10 @@ declare namespace Glue {
      * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
      */
     ExecutionClass?: ExecutionClass;
+    /**
+     * The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.
+     */
+    SourceControlDetails?: SourceControlDetails;
   }
   export interface CreateJobResponse {
     /**
@@ -7011,6 +7033,10 @@ declare namespace Glue {
      * Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
      */
     ExecutionClass?: ExecutionClass;
+    /**
+     * The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.
+     */
+    SourceControlDetails?: SourceControlDetails;
   }
   export interface JobBookmarkEntry {
     /**
@@ -7253,6 +7279,10 @@ declare namespace Glue {
      * Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources. The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary.  Only jobs with Glue version 3.0 and above and command type glueetl will be allowed to set ExecutionClass to FLEX. The flexible execution class is available for Spark jobs.
      */
     ExecutionClass?: ExecutionClass;
+    /**
+     * The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.
+     */
+    SourceControlDetails?: SourceControlDetails;
   }
   export interface Join {
     /**
@@ -9729,6 +9759,42 @@ declare namespace Glue {
     Sort?: Sort;
   }
   export type SortDirectionType = "DESCENDING"|"ASCENDING"|string;
+  export type SourceControlAuthStrategy = "PERSONAL_ACCESS_TOKEN"|"AWS_SECRETS_MANAGER"|string;
+  export interface SourceControlDetails {
+    /**
+     * The provider for the remote repository.
+     */
+    Provider?: SourceControlProvider;
+    /**
+     * The name of the remote repository that contains the job artifacts.
+     */
+    Repository?: Generic512CharString;
+    /**
+     * The owner of the remote repository that contains the job artifacts.
+     */
+    Owner?: Generic512CharString;
+    /**
+     * An optional branch in the remote repository.
+     */
+    Branch?: Generic512CharString;
+    /**
+     * An optional folder in the remote repository.
+     */
+    Folder?: Generic512CharString;
+    /**
+     * The last commit ID for a commit in the remote repository.
+     */
+    LastCommitId?: Generic512CharString;
+    /**
+     * The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token.
+     */
+    AuthStrategy?: SourceControlAuthStrategy;
+    /**
+     * The value of an authorization token.
+     */
+    AuthToken?: Generic512CharString;
+  }
+  export type SourceControlProvider = "GITHUB"|"AWS_CODE_COMMIT"|string;
   export interface SparkConnectorSource {
     /**
      * The name of the data source.
@@ -11034,6 +11100,50 @@ declare namespace Glue {
      */
     CustomPatterns?: CustomPatterns;
   }
+  export interface UpdateJobFromSourceControlRequest {
+    /**
+     * The name of the Glue job to be synchronized to or from the remote repository.
+     */
+    JobName?: NameString;
+    /**
+     * The provider for the remote repository.
+     */
+    Provider?: SourceControlProvider;
+    /**
+     * The name of the remote repository that contains the job artifacts.
+     */
+    RepositoryName?: NameString;
+    /**
+     * The owner of the remote repository that contains the job artifacts.
+     */
+    RepositoryOwner?: NameString;
+    /**
+     * An optional branch in the remote repository.
+     */
+    BranchName?: NameString;
+    /**
+     * An optional folder in the remote repository.
+     */
+    Folder?: NameString;
+    /**
+     * A commit ID for a commit in the remote repository.
+     */
+    CommitId?: CommitIdString;
+    /**
+     * The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token.
+     */
+    AuthStrategy?: SourceControlAuthStrategy;
+    /**
+     * The value of the authorization token.
+     */
+    AuthToken?: AuthTokenString;
+  }
+  export interface UpdateJobFromSourceControlResponse {
+    /**
+     * The name of the Glue job.
+     */
+    JobName?: NameString;
+  }
   export interface UpdateJobRequest {
     /**
      * The name of the job definition to update.
@@ -11187,6 +11297,50 @@ declare namespace Glue {
      * The name of the registry that contains the schema.
      */
     RegistryName?: SchemaRegistryNameString;
+  }
+  export interface UpdateSourceControlFromJobRequest {
+    /**
+     * The name of the Glue job to be synchronized to or from the remote repository.
+     */
+    JobName?: NameString;
+    /**
+     * The provider for the remote repository.
+     */
+    Provider?: SourceControlProvider;
+    /**
+     * The name of the remote repository that contains the job artifacts.
+     */
+    RepositoryName?: NameString;
+    /**
+     * The owner of the remote repository that contains the job artifacts.
+     */
+    RepositoryOwner?: NameString;
+    /**
+     * An optional branch in the remote repository.
+     */
+    BranchName?: NameString;
+    /**
+     * An optional folder in the remote repository.
+     */
+    Folder?: NameString;
+    /**
+     * A commit ID for a commit in the remote repository.
+     */
+    CommitId?: CommitIdString;
+    /**
+     * The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token.
+     */
+    AuthStrategy?: SourceControlAuthStrategy;
+    /**
+     * The value of the authorization token.
+     */
+    AuthToken?: AuthTokenString;
+  }
+  export interface UpdateSourceControlFromJobResponse {
+    /**
+     * The name of the Glue job.
+     */
+    JobName?: NameString;
   }
   export interface UpdateTableRequest {
     /**
