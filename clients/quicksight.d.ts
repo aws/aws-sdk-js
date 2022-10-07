@@ -836,11 +836,11 @@ declare class QuickSight extends Service {
    */
   updateDashboardPublishedVersion(callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardPublishedVersionResponse) => void): Request<QuickSight.Types.UpdateDashboardPublishedVersionResponse, AWSError>;
   /**
-   * Updates a dataset. This operation doesn't support datasets that include uploaded files as a source.
+   * Updates a dataset. This operation doesn't support datasets that include uploaded files as a source. Partial updates are not supported by this operation.
    */
   updateDataSet(params: QuickSight.Types.UpdateDataSetRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateDataSetResponse) => void): Request<QuickSight.Types.UpdateDataSetResponse, AWSError>;
   /**
-   * Updates a dataset. This operation doesn't support datasets that include uploaded files as a source.
+   * Updates a dataset. This operation doesn't support datasets that include uploaded files as a source. Partial updates are not supported by this operation.
    */
   updateDataSet(callback?: (err: AWSError, data: QuickSight.Types.UpdateDataSetResponse) => void): Request<QuickSight.Types.UpdateDataSetResponse, AWSError>;
   /**
@@ -2705,6 +2705,10 @@ declare namespace QuickSight {
      * Error information from the last update or the creation of the data source.
      */
     ErrorInfo?: DataSourceErrorInfo;
+    /**
+     * The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.
+     */
+    SecretArn?: SecretArn;
   }
   export interface DataSourceCredentials {
     /**
@@ -2715,6 +2719,10 @@ declare namespace QuickSight {
      * The Amazon Resource Name (ARN) of a data source that has the credential pair that you want to use. When CopySourceArn is not null, the credential pair from the data source in the ARN is used as the credentials for the DataSourceCredentials structure.
      */
     CopySourceArn?: CopySourceArn;
+    /**
+     * The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.
+     */
+    SecretArn?: SecretArn;
   }
   export interface DataSourceErrorInfo {
     /**
@@ -4344,7 +4352,7 @@ declare namespace QuickSight {
     /**
      * Country code.
      */
-    CountryCode: GeoSpatialCountryCode;
+    CountryCode?: GeoSpatialCountryCode;
     /**
      * Columns in this hierarchy.
      */
@@ -6130,6 +6138,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export type SecretArn = string;
   export interface ServiceNowParameters {
     /**
      * URL of the base site.
@@ -7821,7 +7830,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The user's user name. In the output, the value for UserName is N/A when the value for IdentityType is IAM and the corresponding IAM user is deleted.
+     * The user's user name. This value is required if you are registering a user that will be managed in Amazon QuickSight. In the output, the value for UserName is N/A when the value for IdentityType is IAM and the corresponding IAM user is deleted.
      */
     UserName?: UserName;
     /**

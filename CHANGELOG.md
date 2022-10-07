@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1230.0-->
+<!--LATEST=2.1231.0-->
 <!--ENTRYINSERT-->
+
+## 2.1231.0
+* feature: GreengrassV2: This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation.
+* feature: QuickSight: Amazon QuickSight now supports SecretsManager Secret ARN in place of CredentialPair for DataSource creation and update. This release also has some minor documentation updates and removes CountryCode as a required parameter in GeoSpatialColumnGroup
 
 ## 2.1230.0
 * feature: Glue: This SDK release adds support to sync glue jobs with source control provider. Additionally, a new parameter called SourceControlDetails will be added to Job model.

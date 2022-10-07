@@ -840,8 +840,26 @@ declare namespace GreengrassV2 {
      * The time at which the deployment job was last modified, expressed in ISO 8601 format.
      */
     modifiedTimestamp: Timestamp;
+    /**
+     * The status details that explain why a deployment has an error. This response will be null if the deployment is in a success state.
+     */
+    statusDetails?: EffectiveDeploymentStatusDetails;
   }
+  export type EffectiveDeploymentErrorCode = string;
+  export type EffectiveDeploymentErrorStack = EffectiveDeploymentErrorCode[];
+  export type EffectiveDeploymentErrorType = string;
+  export type EffectiveDeploymentErrorTypeList = EffectiveDeploymentErrorType[];
   export type EffectiveDeploymentExecutionStatus = "IN_PROGRESS"|"QUEUED"|"FAILED"|"COMPLETED"|"TIMED_OUT"|"CANCELED"|"REJECTED"|string;
+  export interface EffectiveDeploymentStatusDetails {
+    /**
+     * Contains an ordered list of short error codes that range from the most generic error to the most specific one. The error codes describe the reason for failure whenever the coreDeviceExecutionStatus is in a failed state. The response will be an empty list if there is no error.
+     */
+    errorStack?: EffectiveDeploymentErrorStack;
+    /**
+     * Contains tags which describe the error. You can use the error types to classify errors to assist with remediating the failure. The response will be an empty list if there is no error.
+     */
+    errorTypes?: EffectiveDeploymentErrorTypeList;
+  }
   export type EffectiveDeploymentsList = EffectiveDeployment[];
   export type FileSystemPath = string;
   export type GGCVersion = string;
@@ -1024,7 +1042,7 @@ declare namespace GreengrassV2 {
      */
     lifecycleState?: InstalledComponentLifecycleState;
     /**
-     * The details about the lifecycle state of the component.
+     * A detailed response about the lifecycle state of the component that explains the reason why a component has an error or is broken.
      */
     lifecycleStateDetails?: LifecycleStateDetails;
     /**
@@ -1035,8 +1053,22 @@ declare namespace GreengrassV2 {
      * The status of how current the data is. This response is based off of component state changes. The status reflects component disruptions and deployments. If a component only sees a configuration update during a deployment, it might not undergo a state change and this status would not be updated.
      */
     lastStatusChangeTimestamp?: Timestamp;
+    /**
+     * The last time the Greengrass core device sent a message containing a certain component to the Amazon Web Services Cloud. A component does not need to see a state change for this field to update.
+     */
+    lastReportedTimestamp?: Timestamp;
+    /**
+     * The most recent deployment source that brought the component to the Greengrass core device. For a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for local deployments it will be LOCAL.
+     */
+    lastInstallationSource?: NonEmptyString;
+    /**
+     * The status codes that indicate the reason for failure whenever the lifecycleState has an error or is in a broken state.  Greengrass nucleus v2.8.0 or later is required to get an accurate lifecycleStatusCodes response. This response can be inaccurate in earlier Greengrass nucleus versions. 
+     */
+    lifecycleStatusCodes?: InstalledComponentLifecycleStatusCodeList;
   }
   export type InstalledComponentLifecycleState = "NEW"|"INSTALLED"|"STARTING"|"RUNNING"|"STOPPING"|"ERRORED"|"BROKEN"|"FINISHED"|string;
+  export type InstalledComponentLifecycleStatusCode = string;
+  export type InstalledComponentLifecycleStatusCodeList = InstalledComponentLifecycleStatusCode[];
   export type InstalledComponentList = InstalledComponent[];
   export type InstalledComponentTopologyFilter = "ALL"|"ROOT"|string;
   export type IoTJobARN = string;
@@ -1443,7 +1475,7 @@ declare namespace GreengrassV2 {
   }
   export interface ListInstalledComponentsResponse {
     /**
-     * A list that summarizes each component on the core device.  Accuracy of the lastStatusChangeTimestamp response depends on Greengrass nucleus v2.7.0. It performs best on Greengrass nucleus v2.7.0 and can be inaccurate on earlier versions. 
+     * A list that summarizes each component on the core device.  Greengrass nucleus v2.7.0 or later is required to get an accurate lastStatusChangeTimestamp response. This response can be inaccurate in earlier Greengrass nucleus versions.   Greengrass nucleus v2.8.0 or later is required to get an accurate lastInstallationSource and lastReportedTimestamp response. This response can be inaccurate or null in earlier Greengrass nucleus versions. 
      */
     installedComponents?: InstalledComponentList;
     /**

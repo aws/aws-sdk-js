@@ -194,7 +194,7 @@ declare namespace CodeGuruReviewer {
      */
     SourceCodeArtifactsObjectKey: SourceCodeArtifactsObjectKey;
     /**
-     * The S3 object key for a build artifacts .zip file that contains .jar or .class files. This is required for a code review with security analysis. For more information, see Create code reviews with security analysis in the Amazon CodeGuru Reviewer User Guide.
+     * The S3 object key for a build artifacts .zip file that contains .jar or .class files. This is required for a code review with security analysis. For more information, see Create code reviews with GitHub Actions in the Amazon CodeGuru Reviewer User Guide.
      */
     BuildArtifactsObjectKey?: BuildArtifactsObjectKey;
   }
