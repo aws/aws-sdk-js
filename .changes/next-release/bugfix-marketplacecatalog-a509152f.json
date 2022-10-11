@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "marketplacecatalog",
+  "description": "Enable CORS for marketplacecatalog API"
+}
