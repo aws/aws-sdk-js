@@ -82,6 +82,7 @@ Amazon Lightsail | AWS.Lightsail | 2016-11-28 |  |
 Amazon Machine Learning | AWS.MachineLearning | 2014-12-12 | :tada: |
 AWS Marketplace Commerce Analytics | AWS.MarketplaceCommerceAnalytics | 2015-07-01 | :tada: |
 AWSMarketplace Metering | AWS.MarketplaceMetering | 2016-01-14 |  |
+AWSMarketplace Catalog API | AWS.MarketplaceCatalogAPI | 2020-09-15 | :tada: |
 Amazon Mechanical Turk | AWS.MTurk | 2017-01-17 | :tada: |
 Amazon Mobile Analytics | AWS.MobileAnalytics | 2014-06-05 | :tada: |
 AWS OpsWorks | AWS.OpsWorks | 2013-02-18 | :tada: |
