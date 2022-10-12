@@ -790,7 +790,8 @@
   },
   "marketplacecatalog": {
     "prefix": "marketplace-catalog",
-    "name": "MarketplaceCatalog"
+    "name": "MarketplaceCatalog",
+    "cors": true
   },
   "dataexchange": {
     "name": "DataExchange"
