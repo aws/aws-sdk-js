@@ -1,4 +1,0 @@
---reporter dot
---ui bdd
---timeout 4000
---no-exit

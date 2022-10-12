@@ -1,7 +1,0 @@
-<h2>Waiter Resource States</h2>
-<p>This service supports a list of resource states that can be polled using
-  the <%= resolve_links "{waitFor}" %> method. The resource states are:</p>
-
-<p class="children">
-  <%= @waiters.map {|waiter| linkify waiter }.join(", ") %>
-</p>

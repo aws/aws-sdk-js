@@ -1,9 +1,0 @@
-{
-  "region": "us-east-1",
-  "s3": {
-    "params": { "Bucket": "test-s3-bucket" }
-  },
-  "devicefarm": {
-    "region": "us-west-2"
-  }
-}
