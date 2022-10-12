@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeStarNotifications",
+        "description": "This release adds a notification manager for events in repositories, build projects, deployments, and pipelines. You can now configure rules and receive notifications about events that occur for resources. Each notification includes a status message as well as a link to the resource (repository, build project, deployment application, or pipeline) whose event generated the notification."
+    },
+    {
+        "type": "feature",
+        "category": "Config",
+        "description": "Allow shortcutting in customBackoff based on error"
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "Bug fix (Add tags field to Update Stage , Api and DomainName Responses )"
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Amazon Elasticsearch Service now supports M5, C5, and R5 instance types."
+    },
+    {
+        "type": "feature",
+        "category": "IAM",
+        "description": "Removed exception that was indicated but never thrown for IAM GetAccessKeyLastUsed API"
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Added Melodic as a supported Robot Software Suite Version"
+    }
+]

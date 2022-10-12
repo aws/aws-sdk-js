@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeStarconnections",
+        "description": "New integration with the GitHub provider type."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive now supports batch operations, which allow users to start, stop, and delete multiple MediaLive resources with a single request."
+    }
+]

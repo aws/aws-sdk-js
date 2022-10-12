@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "Adding support for optional tags in CreateBusinessReportSchedule, CreateProfile and CreateSkillGroup APIs"
+    },
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "This release adds a hosted configuration source provider. Customers can now store their application configurations directly in AppConfig, without the need for an external configuration source."
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "feature: Chime: This release introduces the ability to create an AWS Chime SDK meeting with attendees."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Updated all AuthParameters to be sensitive."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Added support for job executions rollout configuration, job abort configuration, and job executions timeout configuration for AWS IoT Over-the-Air (OTA) Update Feature."
+    }
+]

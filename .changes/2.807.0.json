@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for G4ad instances powered by AMD Radeon Pro V520 GPUs and AMD 2nd Generation EPYC processors"
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "This release adds support for custom routing accelerators"
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Add support for availability zone relocation feature."
+    }
+]

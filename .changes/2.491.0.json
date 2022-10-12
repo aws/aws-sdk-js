@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Amazon QuickSight now supports embedding dashboards for all non-federated QuickSight users. This includes IAM users, AD users and users from the QuickSight user pool. The get-dashboard-embed-url API accepts QUICKSIGHT as identity type with a user ARN to authenticate the embeddable dashboard viewer as a non-federated user."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "This release adds support for Parameters in ExecuteProvisionedProductServiceAction and adds functionality to get the default parameter values for a Self-Service Action execution against a Provisioned Product via DescribeServiceActionExecutionParameters"
+    }
+]

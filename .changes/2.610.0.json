@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "BigInt Support for DynamoDB Convert",
+        "description": "Adding support for BigInt data type for DocumentDB Dynamo Client converter."
+    },
+    {
+        "type": "bugfix",
+        "category": "endpoint",
+        "description": "add endpoint for us-iso-*"
+    },
+    {
+        "type": "bugfix",
+        "category": "endpoint",
+        "description": "add endpoint for us-isob-*"
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "AWS DataSync now supports FSx for Windows File Server Locations"
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release provides support for tagging Amazon ECS task sets for services using external deployment controllers."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding new error codes for Nodegroups in EKS"
+    },
+    {
+        "type": "feature",
+        "category": "OpsWorksCM",
+        "description": "AWS OpsWorks for Chef Automate now supports in-place upgrade to Chef Automate 2. Eligible servers can be updated through the management console, CLI and APIs."
+    }
+]

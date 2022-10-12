@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "This release adds the ability to search and order toll free phone numbers for Voice Connectors."
+    },
+    {
+        "type": "feature",
+        "category": "GroundStation",
+        "description": "AWS Ground Station is a fully managed service that enables you to control satellite communications, downlink and process satellite data, and scale your satellite operations efficiently and cost-effectively without having to build or manage your own ground station infrastructure."
+    },
+    {
+        "type": "feature",
+        "category": "PinpointEmail",
+        "description": "This release adds support for programmatic access to Deliverability dashboard subscriptions and the deliverability data provided by the Deliverability dashboard for domains and IP addresses. The data includes placement metrics for campaigns that use subscribed domains to send email."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Add a new output field Status to DBEngineVersion which shows the status of the engine version (either available or deprecated). Add a new parameter IncludeAll to DescribeDBEngineVersions to make it possible to return both available and deprecated engine versions. These changes enable a user to create a Read Replica of an DB instance on a deprecated engine version."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Added support for an additional robot software suite (Gazebo 9) and for cancelling deployment jobs."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Introduce AssignTapePool operation to allow customers to migrate tapes between pools."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe - support transcriptions from audio sources in Modern Standard Arabic (ar-SA)."
+    }
+]

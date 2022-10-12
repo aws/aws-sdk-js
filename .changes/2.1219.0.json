@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudTrail",
+        "description": "This release includes support for importing existing trails into CloudTrail Lake."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds CapacityAllocations field to DescribeCapacityReservations"
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "This change allows the customer to use the SRT Caller protocol as part of their flows"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for Amazon RDS Proxy with SQL Server compatibility."
+    }
+]

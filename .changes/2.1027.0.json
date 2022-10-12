@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release provides an additional route target for the VPC route table."
+    },
+    {
+        "type": "feature",
+        "category": "Translate",
+        "description": "This release enables customers to import Multi-Directional Custom Terminology and use Multi-Directional Custom Terminology in both real-time translation and asynchronous batch translation."
+    },
+    {
+        "type": "feature",
+        "category": "endpoint",
+        "description": "Add useFipsEndpoint configuration"
+    }
+]

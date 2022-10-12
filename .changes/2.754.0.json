@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds support for contact flows and routing profiles. For details, see the Release Notes in the Amazon Connect Administrator Guide."
+    },
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "Customers can now provide multiple schedules within a single Data Lifecycle Manager (DLM) policy. Each schedule supports tagging, Fast Snapshot Restore (FSR) and cross region copy individually."
+    },
+    {
+        "type": "feature",
+        "category": "Greengrass",
+        "description": "This release includes the ability to set run-time configuration for a Greengrass core. The Telemetry feature, also included in this release, can be configured via run-time configuration per core."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Enhance DescribeProvisionedProduct API to allow useProvisionedProduct Name as Input, so customer can provide ProvisionedProduct Name instead of ProvisionedProduct Id to describe a ProvisionedProduct."
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "This release adds Ads AdTriggers and AdsOnDeliveryRestrictions to describe calls for CMAF endpoints on MediaPackage."
+    },
+    {
+        "type": "feature",
+        "category": "Token",
+        "description": "Read sso data from sso-session section in SSOTokenProvider"
+    },
+    {
+        "type": "feature",
+        "category": "Token",
+        "description": "Set token from AWS.Signers.Bearer when specified by authtype/signatureVersion"
+    },
+    {
+        "type": "feature",
+        "category": "token",
+        "description": "Add TokenProviderChain with Token/Static/SSO"
+    }
+]

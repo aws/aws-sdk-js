@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release introduces the ability to tag Elastic Graphics accelerators. You can use tags to organize and identify your accelerators for cost allocation."
+    },
+    {
+        "type": "feature",
+        "category": "OpsWorksCM",
+        "description": "AWS OpsWorks CM now supports tagging, and tag-based access control, of servers and backups."
+    }
+]

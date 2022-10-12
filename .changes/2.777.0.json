@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Salesforce connector creation with customer provided client id and client secret, incremental pull configuration, salesforce upsert write operations and execution ID when on-demand flows are executed."
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "SNS now supports a new class of topics: FIFO (First-In-First-Out). FIFO topics provide strictly-ordered, deduplicated, filterable, encryptable, many-to-many messaging at scale."
+    }
+]

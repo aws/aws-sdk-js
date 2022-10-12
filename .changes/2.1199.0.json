@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds SearchSecurityProfiles API which can be used to search for Security Profile resources within a Connect Instance."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server."
+    },
+    {
+        "type": "feature",
+        "category": "LookoutMetrics",
+        "description": "This release is to make GetDataQualityMetrics API publicly available."
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for deleting capacity providers."
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "EC2 Image Builder now supports specifying a custom working directory for your build and test workflows. In addition, Image Builder now supports defining tags that are applied to ephemeral resources created by EC2 Image Builder as part of the image creation workflow. "
+    },
+    {
+        "type": "feature",
+        "category": "IotData",
+        "description": "As part of this release, we are introducing a new feature called named shadow, which extends the capability of AWS IoT Device Shadow to support multiple shadows for a single IoT device. With this release, customers can store different device state data into different shadows, and as a result access only the required state data when needed and reduce individual shadow size."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "This change adds the built-in AMAZON.KendraSearchIntent that enables integration with Amazon Kendra."
+    }
+]

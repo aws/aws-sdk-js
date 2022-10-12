@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Parser",
+        "description": "Alloc new buffers from 0 offset when parsing the sensitive blob data and zero out the node shared buffer pool."
+    },
+    {
+        "type": "bugfix",
+        "category": "computeSha256",
+        "description": "Before running instanceof, verify that the operand is a function"
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "This release adds support for the new email configuration in Amazon Cognito User Pools. You can now specify whether Amazon Cognito emails your users by using its built-in email functionality or your Amazon SES email configuration."
+    },
+    {
+        "type": "feature",
+        "category": "MQ",
+        "description": "This release adds the ability to retrieve information about broker engines and broker instance options. See Broker Engine Types and Broker Instance Options in the Amazon MQ REST API Reference."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "DescribeResize can now return percent of data transferred from source cluster to target cluster for a classic resize."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "This change allows you to select either a weekly or monthly maintenance window for your volume or tape gateway. It also allows you to tag your tape and volume resources on creation by adding a Tag value on calls to the respective api endpoints."
+    }
+]

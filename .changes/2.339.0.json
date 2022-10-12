@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Configuration",
+        "description": "cache shared ini files for later use"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Rate Control feature release for State Manager. Users now have the ability to apply rate control parameters similar to run command to their association in state manager console or CLI."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Added support for PowerPro and GraphicsPro WorkSpaces bundles."
+    }
+]

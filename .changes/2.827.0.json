@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "FraudDetector",
+        "description": "Added support for cancelling a model version that is TRAINING_IN_PROGRESS."
+    }
+]

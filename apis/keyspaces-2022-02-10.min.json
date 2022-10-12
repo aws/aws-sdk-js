@@ -1,0 +1,562 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-02-10",
+    "endpointPrefix": "cassandra",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "serviceFullName": "Amazon Keyspaces",
+    "serviceId": "Keyspaces",
+    "signatureVersion": "v4",
+    "signingName": "cassandra",
+    "targetPrefix": "KeyspacesService",
+    "uid": "keyspaces-2022-02-10"
+  },
+  "operations": {
+    "CreateKeyspace": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "tags": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {}
+        }
+      }
+    },
+    "CreateTable": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName",
+          "tableName",
+          "schemaDefinition"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "tableName": {},
+          "schemaDefinition": {
+            "shape": "Sb"
+          },
+          "comment": {
+            "shape": "Sm"
+          },
+          "capacitySpecification": {
+            "shape": "So"
+          },
+          "encryptionSpecification": {
+            "shape": "Sr"
+          },
+          "pointInTimeRecovery": {
+            "shape": "Su"
+          },
+          "ttl": {
+            "shape": "Sw"
+          },
+          "defaultTimeToLive": {
+            "type": "integer"
+          },
+          "tags": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {}
+        }
+      }
+    },
+    "DeleteKeyspace": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName"
+        ],
+        "members": {
+          "keyspaceName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeleteTable": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName",
+          "tableName"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "tableName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "GetKeyspace": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName"
+        ],
+        "members": {
+          "keyspaceName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "keyspaceName",
+          "resourceArn"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "resourceArn": {}
+        }
+      }
+    },
+    "GetTable": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName",
+          "tableName"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "tableName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "keyspaceName",
+          "tableName",
+          "resourceArn"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "tableName": {},
+          "resourceArn": {},
+          "creationTimestamp": {
+            "type": "timestamp"
+          },
+          "status": {},
+          "schemaDefinition": {
+            "shape": "Sb"
+          },
+          "capacitySpecification": {
+            "type": "structure",
+            "required": [
+              "throughputMode"
+            ],
+            "members": {
+              "throughputMode": {},
+              "readCapacityUnits": {
+                "type": "long"
+              },
+              "writeCapacityUnits": {
+                "type": "long"
+              },
+              "lastUpdateToPayPerRequestTimestamp": {
+                "type": "timestamp"
+              }
+            }
+          },
+          "encryptionSpecification": {
+            "shape": "Sr"
+          },
+          "pointInTimeRecovery": {
+            "type": "structure",
+            "required": [
+              "status"
+            ],
+            "members": {
+              "status": {},
+              "earliestRestorableTimestamp": {
+                "type": "timestamp"
+              }
+            }
+          },
+          "ttl": {
+            "shape": "Sw"
+          },
+          "defaultTimeToLive": {
+            "type": "integer"
+          },
+          "comment": {
+            "shape": "Sm"
+          }
+        }
+      }
+    },
+    "ListKeyspaces": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "keyspaces"
+        ],
+        "members": {
+          "nextToken": {},
+          "keyspaces": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "keyspaceName",
+                "resourceArn"
+              ],
+              "members": {
+                "keyspaceName": {},
+                "resourceArn": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListTables": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName"
+        ],
+        "members": {
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          },
+          "keyspaceName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "tables": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "keyspaceName",
+                "tableName",
+                "resourceArn"
+              ],
+              "members": {
+                "keyspaceName": {},
+                "tableName": {},
+                "resourceArn": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {},
+          "nextToken": {},
+          "maxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "nextToken": {},
+          "tags": {
+            "shape": "S3"
+          }
+        }
+      }
+    },
+    "RestoreTable": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "sourceKeyspaceName",
+          "sourceTableName",
+          "targetKeyspaceName",
+          "targetTableName"
+        ],
+        "members": {
+          "sourceKeyspaceName": {},
+          "sourceTableName": {},
+          "targetKeyspaceName": {},
+          "targetTableName": {},
+          "restoreTimestamp": {
+            "type": "timestamp"
+          },
+          "capacitySpecificationOverride": {
+            "shape": "So"
+          },
+          "encryptionSpecificationOverride": {
+            "shape": "Sr"
+          },
+          "pointInTimeRecoveryOverride": {
+            "shape": "Su"
+          },
+          "tagsOverride": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "restoredTableARN"
+        ],
+        "members": {
+          "restoredTableARN": {}
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {},
+          "tags": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "resourceArn",
+          "tags"
+        ],
+        "members": {
+          "resourceArn": {},
+          "tags": {
+            "shape": "S3"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateTable": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "keyspaceName",
+          "tableName"
+        ],
+        "members": {
+          "keyspaceName": {},
+          "tableName": {},
+          "addColumns": {
+            "shape": "Sc"
+          },
+          "capacitySpecification": {
+            "shape": "So"
+          },
+          "encryptionSpecification": {
+            "shape": "Sr"
+          },
+          "pointInTimeRecovery": {
+            "shape": "Su"
+          },
+          "ttl": {
+            "shape": "Sw"
+          },
+          "defaultTimeToLive": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "resourceArn"
+        ],
+        "members": {
+          "resourceArn": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S3": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "key",
+          "value"
+        ],
+        "members": {
+          "key": {},
+          "value": {}
+        }
+      }
+    },
+    "Sb": {
+      "type": "structure",
+      "required": [
+        "allColumns",
+        "partitionKeys"
+      ],
+      "members": {
+        "allColumns": {
+          "shape": "Sc"
+        },
+        "partitionKeys": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name"
+            ],
+            "members": {
+              "name": {}
+            }
+          }
+        },
+        "clusteringKeys": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name",
+              "orderBy"
+            ],
+            "members": {
+              "name": {},
+              "orderBy": {}
+            }
+          }
+        },
+        "staticColumns": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "name"
+            ],
+            "members": {
+              "name": {}
+            }
+          }
+        }
+      }
+    },
+    "Sc": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "name",
+          "type"
+        ],
+        "members": {
+          "name": {},
+          "type": {}
+        }
+      }
+    },
+    "Sm": {
+      "type": "structure",
+      "required": [
+        "message"
+      ],
+      "members": {
+        "message": {}
+      }
+    },
+    "So": {
+      "type": "structure",
+      "required": [
+        "throughputMode"
+      ],
+      "members": {
+        "throughputMode": {},
+        "readCapacityUnits": {
+          "type": "long"
+        },
+        "writeCapacityUnits": {
+          "type": "long"
+        }
+      }
+    },
+    "Sr": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {},
+        "kmsKeyIdentifier": {}
+      }
+    },
+    "Su": {
+      "type": "structure",
+      "required": [
+        "status"
+      ],
+      "members": {
+        "status": {}
+      }
+    },
+    "Sw": {
+      "type": "structure",
+      "required": [
+        "status"
+      ],
+      "members": {
+        "status": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "AWS Kendra now supports checking document status."
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeEvents",
+        "description": "Support for unstructured text inputs in the items dataset to to automatically extract key information from product/content description as an input when creating solution versions."
+    },
+    {
+        "type": "feature",
+        "category": "Proton",
+        "description": "This is the initial SDK release for AWS Proton"
+    }
+]

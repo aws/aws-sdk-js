@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Adding input validation for the OrganizationConfigRuleName string."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for new data fields and log format in VPC flow logs."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "This release adds support for the RIST protocol on sources and outputs."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release allows customers to specify a custom parameter group when creating a Read Replica, for DB engines which support this feature."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "Fixing letter case in Map history event details to be small case"
+    }
+]

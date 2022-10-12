@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AuditManager",
+        "description": "This release adds AccessDeniedException to GetServicesInScope API."
+    },
+    {
+        "type": "feature",
+        "category": "DataBrew",
+        "description": "This release adds the DescribeJobRun API to allow customers retrieve details of a given job run"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "EC2 Public IP now supports API for setting PTR records on Elastic IP address."
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "Update AccessPolicy API input to support IAM role for IAM mode. Iam role is added as part of accessPolicyIdentity."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Support for creating Lambda Functions using 'nodejs14.x'"
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added a ProductArn parameter to DescribeProducts. ProductArn is used to identify the integration to return details for."
+    },
+    {
+        "type": "feature",
+        "category": "WorkMail",
+        "description": "Increased maximum length of ipRanges values for Access Control Rules from 10 to 1024."
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "This release adds support for SMB location type."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release allows users to enable RDS Data API while creating Aurora Serverless databases. "
+    }
+]

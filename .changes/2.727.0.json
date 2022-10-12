@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AWS AppSync releases support for Direct Lambda Resolvers."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe now supports custom language models, which can improve transcription accuracy for your specific use case."
+    }
+]

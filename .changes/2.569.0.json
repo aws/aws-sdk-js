@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "The Resource Import feature enables customers to import existing AWS resources into new or existing CloudFormation Stacks."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This launch provides customers with access to GetCostAndUsageWithResources API."
+    }
+]

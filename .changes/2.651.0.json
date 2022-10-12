@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release introduces Dimensions for AWS IoT Device Defender. Dimensions can be used in Security Profiles to collect and monitor fine-grained metrics."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "You can now send content from your virtual private cloud (VPC) to your MediaConnect flow without going over the public internet."
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "AWS Config now supports tagging on PutConfigRule, PutConfigurationAggregator and PutAggregationAuthorization APIs."
+    }
+]

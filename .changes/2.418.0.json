@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "cloudfront",
+        "description": "Fix whitespace removal on custom policy"
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild also now supports Git Submodules.  CodeBuild now supports opting out of Encryption for S3 Build Logs.  By default these logs are encrypted."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "SageMaker notebook instances now support enabling or disabling root access for notebook users. SageMaker Neo now supports rk3399 and rk3288 as compilation target devices."
+    }
+]

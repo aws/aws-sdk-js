@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Adding support for partitionIndexes to improve GetPartitions performance."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalyticsV2",
+        "description": "Kinesis Data Analytics is adding new AUTOSCALING application status for applications during auto scaling and also adding FlinkRunConfigurationDescription in the ApplicationDetails."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftData",
+        "description": "The Amazon Redshift Data API is generally available. This release enables querying Amazon Redshift data and listing various database objects."
+    }
+]

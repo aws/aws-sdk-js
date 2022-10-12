@@ -1,0 +1,1214 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2020-05-15",
+    "endpointPrefix": "apprunner",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "serviceFullName": "AWS App Runner",
+    "serviceId": "AppRunner",
+    "signatureVersion": "v4",
+    "signingName": "apprunner",
+    "targetPrefix": "AppRunner",
+    "uid": "apprunner-2020-05-15"
+  },
+  "operations": {
+    "AssociateCustomDomain": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn",
+          "DomainName"
+        ],
+        "members": {
+          "ServiceArn": {},
+          "DomainName": {},
+          "EnableWWWSubdomain": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "DNSTarget",
+          "ServiceArn",
+          "CustomDomain"
+        ],
+        "members": {
+          "DNSTarget": {},
+          "ServiceArn": {},
+          "CustomDomain": {
+            "shape": "S7"
+          }
+        }
+      }
+    },
+    "CreateAutoScalingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfigurationName"
+        ],
+        "members": {
+          "AutoScalingConfigurationName": {},
+          "MaxConcurrency": {
+            "type": "integer"
+          },
+          "MinSize": {
+            "type": "integer"
+          },
+          "MaxSize": {
+            "type": "integer"
+          },
+          "Tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfiguration"
+        ],
+        "members": {
+          "AutoScalingConfiguration": {
+            "shape": "Sm"
+          }
+        }
+      }
+    },
+    "CreateConnection": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectionName",
+          "ProviderType"
+        ],
+        "members": {
+          "ConnectionName": {},
+          "ProviderType": {},
+          "Tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Connection"
+        ],
+        "members": {
+          "Connection": {
+            "shape": "Sv"
+          }
+        }
+      }
+    },
+    "CreateObservabilityConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfigurationName"
+        ],
+        "members": {
+          "ObservabilityConfigurationName": {},
+          "TraceConfiguration": {
+            "shape": "Sz"
+          },
+          "Tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfiguration"
+        ],
+        "members": {
+          "ObservabilityConfiguration": {
+            "shape": "S12"
+          }
+        }
+      }
+    },
+    "CreateService": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceName",
+          "SourceConfiguration"
+        ],
+        "members": {
+          "ServiceName": {},
+          "SourceConfiguration": {
+            "shape": "S16"
+          },
+          "InstanceConfiguration": {
+            "shape": "S1p"
+          },
+          "Tags": {
+            "shape": "Sh"
+          },
+          "EncryptionConfiguration": {
+            "shape": "S1s"
+          },
+          "HealthCheckConfiguration": {
+            "shape": "S1u"
+          },
+          "AutoScalingConfigurationArn": {},
+          "NetworkConfiguration": {
+            "shape": "S21"
+          },
+          "ObservabilityConfiguration": {
+            "shape": "S24"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service",
+          "OperationId"
+        ],
+        "members": {
+          "Service": {
+            "shape": "S26"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "CreateVpcConnector": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VpcConnectorName",
+          "Subnets"
+        ],
+        "members": {
+          "VpcConnectorName": {},
+          "Subnets": {
+            "shape": "S2d"
+          },
+          "SecurityGroups": {
+            "shape": "S2d"
+          },
+          "Tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "VpcConnector"
+        ],
+        "members": {
+          "VpcConnector": {
+            "shape": "S2f"
+          }
+        }
+      }
+    },
+    "DeleteAutoScalingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfigurationArn"
+        ],
+        "members": {
+          "AutoScalingConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfiguration"
+        ],
+        "members": {
+          "AutoScalingConfiguration": {
+            "shape": "Sm"
+          }
+        }
+      }
+    },
+    "DeleteConnection": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ConnectionArn"
+        ],
+        "members": {
+          "ConnectionArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Connection": {
+            "shape": "Sv"
+          }
+        }
+      }
+    },
+    "DeleteObservabilityConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfigurationArn"
+        ],
+        "members": {
+          "ObservabilityConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfiguration"
+        ],
+        "members": {
+          "ObservabilityConfiguration": {
+            "shape": "S12"
+          }
+        }
+      }
+    },
+    "DeleteService": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service",
+          "OperationId"
+        ],
+        "members": {
+          "Service": {
+            "shape": "S26"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "DeleteVpcConnector": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VpcConnectorArn"
+        ],
+        "members": {
+          "VpcConnectorArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "VpcConnector"
+        ],
+        "members": {
+          "VpcConnector": {
+            "shape": "S2f"
+          }
+        }
+      }
+    },
+    "DescribeAutoScalingConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfigurationArn"
+        ],
+        "members": {
+          "AutoScalingConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfiguration"
+        ],
+        "members": {
+          "AutoScalingConfiguration": {
+            "shape": "Sm"
+          }
+        }
+      }
+    },
+    "DescribeCustomDomains": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "DNSTarget",
+          "ServiceArn",
+          "CustomDomains"
+        ],
+        "members": {
+          "DNSTarget": {},
+          "ServiceArn": {},
+          "CustomDomains": {
+            "type": "list",
+            "member": {
+              "shape": "S7"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "DescribeObservabilityConfiguration": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfigurationArn"
+        ],
+        "members": {
+          "ObservabilityConfigurationArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfiguration"
+        ],
+        "members": {
+          "ObservabilityConfiguration": {
+            "shape": "S12"
+          }
+        }
+      }
+    },
+    "DescribeService": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service"
+        ],
+        "members": {
+          "Service": {
+            "shape": "S26"
+          }
+        }
+      }
+    },
+    "DescribeVpcConnector": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "VpcConnectorArn"
+        ],
+        "members": {
+          "VpcConnectorArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "VpcConnector"
+        ],
+        "members": {
+          "VpcConnector": {
+            "shape": "S2f"
+          }
+        }
+      }
+    },
+    "DisassociateCustomDomain": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn",
+          "DomainName"
+        ],
+        "members": {
+          "ServiceArn": {},
+          "DomainName": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "DNSTarget",
+          "ServiceArn",
+          "CustomDomain"
+        ],
+        "members": {
+          "DNSTarget": {},
+          "ServiceArn": {},
+          "CustomDomain": {
+            "shape": "S7"
+          }
+        }
+      }
+    },
+    "ListAutoScalingConfigurations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "AutoScalingConfigurationName": {},
+          "LatestOnly": {
+            "type": "boolean"
+          },
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "AutoScalingConfigurationSummaryList"
+        ],
+        "members": {
+          "AutoScalingConfigurationSummaryList": {
+            "type": "list",
+            "member": {
+              "shape": "S29"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListConnections": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "ConnectionName": {},
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ConnectionSummaryList"
+        ],
+        "members": {
+          "ConnectionSummaryList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ConnectionName": {},
+                "ConnectionArn": {},
+                "ProviderType": {},
+                "Status": {},
+                "CreatedAt": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListObservabilityConfigurations": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "ObservabilityConfigurationName": {},
+          "LatestOnly": {
+            "type": "boolean"
+          },
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ObservabilityConfigurationSummaryList"
+        ],
+        "members": {
+          "ObservabilityConfigurationSummaryList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ObservabilityConfigurationArn": {},
+                "ObservabilityConfigurationName": {},
+                "ObservabilityConfigurationRevision": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListOperations": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "OperationSummaryList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Id": {},
+                "Type": {},
+                "Status": {},
+                "TargetArn": {},
+                "StartedAt": {
+                  "type": "timestamp"
+                },
+                "EndedAt": {
+                  "type": "timestamp"
+                },
+                "UpdatedAt": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListServices": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "ServiceSummaryList"
+        ],
+        "members": {
+          "ServiceSummaryList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ServiceName": {},
+                "ServiceId": {},
+                "ServiceArn": {},
+                "ServiceUrl": {},
+                "CreatedAt": {
+                  "type": "timestamp"
+                },
+                "UpdatedAt": {
+                  "type": "timestamp"
+                },
+                "Status": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Tags": {
+            "shape": "Sh"
+          }
+        }
+      }
+    },
+    "ListVpcConnectors": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "MaxResults": {
+            "type": "integer"
+          },
+          "NextToken": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "VpcConnectors"
+        ],
+        "members": {
+          "VpcConnectors": {
+            "type": "list",
+            "member": {
+              "shape": "S2f"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "PauseService": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service"
+        ],
+        "members": {
+          "Service": {
+            "shape": "S26"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "ResumeService": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service"
+        ],
+        "members": {
+          "Service": {
+            "shape": "S26"
+          },
+          "OperationId": {}
+        }
+      }
+    },
+    "StartDeployment": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "OperationId"
+        ],
+        "members": {
+          "OperationId": {}
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "Tags": {
+            "shape": "Sh"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UpdateService": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ServiceArn"
+        ],
+        "members": {
+          "ServiceArn": {},
+          "SourceConfiguration": {
+            "shape": "S16"
+          },
+          "InstanceConfiguration": {
+            "shape": "S1p"
+          },
+          "AutoScalingConfigurationArn": {},
+          "HealthCheckConfiguration": {
+            "shape": "S1u"
+          },
+          "NetworkConfiguration": {
+            "shape": "S21"
+          },
+          "ObservabilityConfiguration": {
+            "shape": "S24"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Service",
+          "OperationId"
+        ],
+        "members": {
+          "Service": {
+            "shape": "S26"
+          },
+          "OperationId": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S7": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "EnableWWWSubdomain",
+        "Status"
+      ],
+      "members": {
+        "DomainName": {},
+        "EnableWWWSubdomain": {
+          "type": "boolean"
+        },
+        "CertificateValidationRecords": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "Name": {},
+              "Type": {},
+              "Value": {},
+              "Status": {}
+            }
+          }
+        },
+        "Status": {}
+      }
+    },
+    "Sh": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    },
+    "Sm": {
+      "type": "structure",
+      "members": {
+        "AutoScalingConfigurationArn": {},
+        "AutoScalingConfigurationName": {},
+        "AutoScalingConfigurationRevision": {
+          "type": "integer"
+        },
+        "Latest": {
+          "type": "boolean"
+        },
+        "Status": {},
+        "MaxConcurrency": {
+          "type": "integer"
+        },
+        "MinSize": {
+          "type": "integer"
+        },
+        "MaxSize": {
+          "type": "integer"
+        },
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "DeletedAt": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "Sv": {
+      "type": "structure",
+      "members": {
+        "ConnectionName": {},
+        "ConnectionArn": {},
+        "ProviderType": {},
+        "Status": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "Sz": {
+      "type": "structure",
+      "required": [
+        "Vendor"
+      ],
+      "members": {
+        "Vendor": {}
+      }
+    },
+    "S12": {
+      "type": "structure",
+      "members": {
+        "ObservabilityConfigurationArn": {},
+        "ObservabilityConfigurationName": {},
+        "TraceConfiguration": {
+          "shape": "Sz"
+        },
+        "ObservabilityConfigurationRevision": {
+          "type": "integer"
+        },
+        "Latest": {
+          "type": "boolean"
+        },
+        "Status": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "DeletedAt": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "S16": {
+      "type": "structure",
+      "members": {
+        "CodeRepository": {
+          "type": "structure",
+          "required": [
+            "RepositoryUrl",
+            "SourceCodeVersion"
+          ],
+          "members": {
+            "RepositoryUrl": {},
+            "SourceCodeVersion": {
+              "type": "structure",
+              "required": [
+                "Type",
+                "Value"
+              ],
+              "members": {
+                "Type": {},
+                "Value": {}
+              }
+            },
+            "CodeConfiguration": {
+              "type": "structure",
+              "required": [
+                "ConfigurationSource"
+              ],
+              "members": {
+                "ConfigurationSource": {},
+                "CodeConfigurationValues": {
+                  "type": "structure",
+                  "required": [
+                    "Runtime"
+                  ],
+                  "members": {
+                    "Runtime": {},
+                    "BuildCommand": {
+                      "type": "string",
+                      "sensitive": true
+                    },
+                    "StartCommand": {
+                      "shape": "S1f"
+                    },
+                    "Port": {},
+                    "RuntimeEnvironmentVariables": {
+                      "shape": "S1g"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ImageRepository": {
+          "type": "structure",
+          "required": [
+            "ImageIdentifier",
+            "ImageRepositoryType"
+          ],
+          "members": {
+            "ImageIdentifier": {},
+            "ImageConfiguration": {
+              "type": "structure",
+              "members": {
+                "RuntimeEnvironmentVariables": {
+                  "shape": "S1g"
+                },
+                "StartCommand": {
+                  "shape": "S1f"
+                },
+                "Port": {}
+              }
+            },
+            "ImageRepositoryType": {}
+          }
+        },
+        "AutoDeploymentsEnabled": {
+          "type": "boolean"
+        },
+        "AuthenticationConfiguration": {
+          "type": "structure",
+          "members": {
+            "ConnectionArn": {},
+            "AccessRoleArn": {}
+          }
+        }
+      }
+    },
+    "S1f": {
+      "type": "string",
+      "sensitive": true
+    },
+    "S1g": {
+      "type": "map",
+      "key": {
+        "type": "string",
+        "sensitive": true
+      },
+      "value": {
+        "type": "string",
+        "sensitive": true
+      }
+    },
+    "S1p": {
+      "type": "structure",
+      "members": {
+        "Cpu": {},
+        "Memory": {},
+        "InstanceRoleArn": {}
+      }
+    },
+    "S1s": {
+      "type": "structure",
+      "required": [
+        "KmsKey"
+      ],
+      "members": {
+        "KmsKey": {}
+      }
+    },
+    "S1u": {
+      "type": "structure",
+      "members": {
+        "Protocol": {},
+        "Path": {},
+        "Interval": {
+          "type": "integer"
+        },
+        "Timeout": {
+          "type": "integer"
+        },
+        "HealthyThreshold": {
+          "type": "integer"
+        },
+        "UnhealthyThreshold": {
+          "type": "integer"
+        }
+      }
+    },
+    "S21": {
+      "type": "structure",
+      "members": {
+        "EgressConfiguration": {
+          "type": "structure",
+          "members": {
+            "EgressType": {},
+            "VpcConnectorArn": {}
+          }
+        }
+      }
+    },
+    "S24": {
+      "type": "structure",
+      "required": [
+        "ObservabilityEnabled"
+      ],
+      "members": {
+        "ObservabilityEnabled": {
+          "type": "boolean"
+        },
+        "ObservabilityConfigurationArn": {}
+      }
+    },
+    "S26": {
+      "type": "structure",
+      "required": [
+        "ServiceName",
+        "ServiceId",
+        "ServiceArn",
+        "ServiceUrl",
+        "CreatedAt",
+        "UpdatedAt",
+        "Status",
+        "SourceConfiguration",
+        "InstanceConfiguration",
+        "AutoScalingConfigurationSummary",
+        "NetworkConfiguration"
+      ],
+      "members": {
+        "ServiceName": {},
+        "ServiceId": {},
+        "ServiceArn": {},
+        "ServiceUrl": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "UpdatedAt": {
+          "type": "timestamp"
+        },
+        "DeletedAt": {
+          "type": "timestamp"
+        },
+        "Status": {},
+        "SourceConfiguration": {
+          "shape": "S16"
+        },
+        "InstanceConfiguration": {
+          "shape": "S1p"
+        },
+        "EncryptionConfiguration": {
+          "shape": "S1s"
+        },
+        "HealthCheckConfiguration": {
+          "shape": "S1u"
+        },
+        "AutoScalingConfigurationSummary": {
+          "shape": "S29"
+        },
+        "NetworkConfiguration": {
+          "shape": "S21"
+        },
+        "ObservabilityConfiguration": {
+          "shape": "S24"
+        }
+      }
+    },
+    "S29": {
+      "type": "structure",
+      "members": {
+        "AutoScalingConfigurationArn": {},
+        "AutoScalingConfigurationName": {},
+        "AutoScalingConfigurationRevision": {
+          "type": "integer"
+        }
+      }
+    },
+    "S2d": {
+      "type": "list",
+      "member": {}
+    },
+    "S2f": {
+      "type": "structure",
+      "members": {
+        "VpcConnectorName": {},
+        "VpcConnectorArn": {},
+        "VpcConnectorRevision": {
+          "type": "integer"
+        },
+        "Subnets": {
+          "shape": "S2d"
+        },
+        "SecurityGroups": {
+          "shape": "S2d"
+        },
+        "Status": {},
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "DeletedAt": {
+          "type": "timestamp"
+        }
+      }
+    }
+  }
+}

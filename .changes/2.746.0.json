@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Types",
+        "description": "Re-export ConfigBase on previous config typings"
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "GuardDuty findings triggered by failed events now include the error code name within the AwsApiCallAction section."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now returns confidence scores for both 'answer' and 'question and answer' query responses."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "Enables inserting a UTCTiming XML tag in the output manifest of a DASH endpoint which a media player will use to help with time synchronization."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "This release of the AWS Step Functions SDK introduces support for payloads up to 256KB for Standard and Express workflows"
+    }
+]

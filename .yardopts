@@ -1,0 +1,26 @@
+-m markdown
+--markup-provider rdiscount
+--exclude lib/aws.js
+--exclude lib/browser.js
+--exclude lib/browser_loader.js
+--exclude lib/node_loader.js
+--exclude lib/react-native-loader.js
+--no-api private
+--api experimental
+--no-highlight
+--title "AWS SDK for JavaScript"
+--template-path doc-src/templates
+--plugin sitemap
+-o doc/latest
+-e doc-src/templates/api-versions/plugin.rb
+--plugin js
+--define-class-expr (AWS\.util\.)?inherit
+--update-class-expr (AWS\.util\.)?update
+--mixin-module-expr (AWS\.util\.)?mixin
+--tag class_abstract:"Abstract Class"
+--tag method_abstract:"Abstract Method"
+lib/core.js
+lib/**/*.js
+-
+README.md
+UPGRADING.md

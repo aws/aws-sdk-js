@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "- ### Features    - Add new GetCostcategories API - Support filter for GetDimensions, GetTags and GetCostcategories api - Support sortBy metrics for GetDimensions, GetTags and GetCostcategories api"
+    },
+    {
+        "type": "feature",
+        "category": "ParamValidator",
+        "description": "Updated validateStructure to accept null and undefined values for params not described in the input shape"
+    }
+]

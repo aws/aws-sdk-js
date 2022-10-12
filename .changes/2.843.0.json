@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "Approve release for appsync local on pipeline resolver"
+    },
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "The release provides new GetActionType and UpdateActionType APIs for viewing and editing action types in CodePipeline."
+    },
+    {
+        "type": "feature",
+        "category": "Detective",
+        "description": "The API definition now indicates that the format for timestamps is an ISO 8601 date-time string"
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Amazon EKS now supports OpenId Connect (OIDC) compatible identity providers as a user authentication option"
+    },
+    {
+        "type": "feature",
+        "category": "IAM",
+        "description": "AWS Identity and Access Management now supports tagging for the following resources: customer managed policies, identity providers, instance profiles, server certificates, and virtual MFA devices."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API replaces the term master account with the term administrator account, including deprecating APIs that use the previous term and adding APIs that use the new term."
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeEvents",
+        "description": "Increased maximum char size of PutUsers and PutItems properties."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "EngineMode in the response of DescribeDBClusterSnapshots. SupportedEngineModes, SupportsParallelQuery and SupportsGlobalDatabases in ValidUpgradeTarget of DBEngineVersions in DescribeDBEngineVersions."
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "Added the option to inspect the web request body as parsed and filtered JSON (new FieldToMatch type JsonBody), in addition to the existing option to inspect the web request body as plain text."
+    }
+]

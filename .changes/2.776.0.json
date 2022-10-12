@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "CloudFront adds support for managing the public keys for signed URLs and signed cookies directly in CloudFront (it no longer requires the AWS root account)."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "instance-storage-info nvmeSupport added to DescribeInstanceTypes API"
+    },
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "This release adds support for specifying port overrides on AWS Global Accelerator endpoint groups."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "AWS Glue crawlers now support incremental crawls for the Amazon Simple Storage Service (Amazon S3) data source."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "This release adds custom data sources: a new data source type that gives you full control of the documents added, modified or deleted during a data source sync while providing run history metrics."
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Access Point",
+        "description": "Avoid mixing up S3 client config set by ManagedUpload with user-set client config"
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "This release allows you to create and manage tags for event buses."
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "This release allows you to create and manage tags for event buses."
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "Announcing persistent file systems for Amazon FSx for Lustre that are ideal for longer-term storage and workloads, and a new generation of scratch file systems that offer higher burst throughput for spiky workloads."
+    },
+    {
+        "type": "feature",
+        "category": "Snowball",
+        "description": "AWS Snowball adds a field for entering your GSTIN when creating AWS Snowball jobs in the Asia Pacific (Mumbai) region. "
+    }
+]

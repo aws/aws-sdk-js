@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "This release supports optional start date and end date parameters for the GetAssetPropertyValueHistory API."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Add Theme APIs and update Dashboard APIs to support theme overrides."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds support for Amazon RDS on AWS Outposts."
+    }
+]

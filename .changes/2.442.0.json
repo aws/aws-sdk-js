@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "This release adds support for the Alexa for Business gateway and gateway group APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "You can now launch the new Amazon EC2 general purpose burstable instance types T3a that feature AMD EPYC processors."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "Adds support for ListEntitlements pagination."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "AWS Elemental MediaTailor SDK now includes a new parameter to support origin servers that produce single-period DASH manifests."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "A new parameter \"feature-name\" is added to the add-role and remove-role db cluster APIs. The value for the parameter is optional for Aurora MySQL compatible database clusters, but mandatory for Aurora PostgresQL. You can find the valid list of values using describe db engine versions API."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Amazon Route 53 now supports the Asia Pacific (Hong Kong) Region (ap-east-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This release updates AWS Systems Manager APIs to allow customers to configure parameters to use either the standard-parameter tier (the default tier) or the advanced-parameter tier. It allows customers to create parameters with larger values and attach parameter policies to an Advanced Parameter. "
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "AWS Storage Gateway now supports Access Control Lists (ACLs) on File Gateway SMB shares, enabling you to apply fine grained access controls for Active Directory users and groups."
+    },
+    {
+        "type": "feature",
+        "category": "Textract",
+        "description": "This release adds support for checkbox also known as SELECTION_ELEMENT in Amazon Textract."
+    }
+]

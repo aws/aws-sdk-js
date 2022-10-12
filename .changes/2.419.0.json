@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "The only change in this release is to make TimePeriod a required parameter in GetCostAndUsageRequest."
+    },
+    {
+        "type": "feature",
+        "category": "ElasticBeanstalk",
+        "description": "Elastic Beanstalk added support for tagging, and tag-based access control, of all Elastic Beanstalk resources."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "CreateDevEndpoint and UpdateDevEndpoint now support Arguments to configure the DevEndpoint. "
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Amazon QuickSight user and group operation results now include group principal IDs and user principal IDs. This release also adds \"DeleteUserByPrincipalId\", which deletes users given their principal ID. The update also improves role session name validation."
+    }
+]

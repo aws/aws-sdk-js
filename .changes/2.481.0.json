@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Customers can pick different security policies (TLS version + cipher suite) for custom domains in API Gateway"
+    },
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "Customers can get information about security policies set on custom domain resources in API Gateway"
+    },
+    {
+        "type": "feature",
+        "category": "ApplicationInsights",
+        "description": "CloudWatch Application Insights detects errors and exceptions from logs, including .NET custom application logs, SQL Server logs, IIS logs, and more, and uses a combination of built-in rules and machine learning, such as dynamic baselining, to identify common problems. You can then easily drill into specific issues with CloudWatch Automatic Dashboards that are dynamically generated. These dashboards contain the most recent alarms, a summary of relevant metrics, and log snippets to help you identify root cause."
+    },
+    {
+        "type": "feature",
+        "category": "ClientSideMonitoring",
+        "description": "add a host config to client-side monitoring configuration, defaults to be '127.0.0.1'"
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release adds support for UDP on Network Load Balancers"
+    },
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "Starting today, you can join your Amazon FSx for Windows File Server file systems to your organization's self-managed Microsoft Active Directory while creating the file system. You can also perform in-place updates of file systems to keep your Active Directory configuration up to date."
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroupsTaggingAPI",
+        "description": "Updated service APIs and documentation."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "AWS Systems Manager now supports deleting a specific version of a SSM Document."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "This release includes a new Tags parameter for the EnableSecurityHub operation, and the following new operations: DescribeHub, CreateActionTarget, DeleteActionTarget, DescribeActionTargets, UpdateActionTarget, TagResource, UntagResource, and ListTagsforResource. It removes the operation ListProductSubscribers, and makes Title and Description required attributes of AwsSecurityFinding."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceQuotas",
+        "description": "Service Quotas enables you to view and manage your quotas for AWS services from a central location."
+    }
+]

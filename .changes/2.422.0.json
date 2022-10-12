@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "ACM",
+        "description": "AWS Certificate Manager has added a new API action, RenewCertificate. RenewCertificate causes ACM to force the renewal of any private certificate which has been exported."
+    },
+    {
+        "type": "feature",
+        "category": "ACMPCA",
+        "description": "AWS Certificate Manager (ACM) Private CA allows customers to manage permissions on their CAs. Customers can grant or deny AWS Certificate Manager permission to renew exported private certificates."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "New Messages parameter for the output of GetMetricData, to support new metric search functionality."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "AWS Config - add ability to tag, untag and list tags for ConfigRule, ConfigurationAggregator and AggregationAuthorization resource types. Tags can be used for various scenarios including tag based authorization."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds tagging support for Dedicated Host Reservations."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "In this release, AWS IoT introduces support for tagging OTA Update and Stream resources. For more information about tagging, see the AWS IoT Developer Guide."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Automatic Model Tuning now supports random search and hyperparameter scaling."
+    }
+]

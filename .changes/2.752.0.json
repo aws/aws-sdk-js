@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DocDB",
+        "description": "Updated API documentation and added paginators for DescribeCertificates, DescribeDBClusterParameterGroups, DescribeDBClusterParameters, DescribeDBClusterSnapshots and DescribePendingMaintenanceActions"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for the T4G instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs."
+    },
+    {
+        "type": "feature",
+        "category": "ManagedBlockchain",
+        "description": "Introducing support for Hyperledger Fabric 1.4. When using framework version 1.4, the state database may optionally be specified when creating peer nodes (defaults to CouchDB)."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "This release of the AWS Step Functions SDK introduces support for AWS X-Ray."
+    }
+]

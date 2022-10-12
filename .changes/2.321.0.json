@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This update adds the Amazon Connect Metrics API, which lets you get current metric data and historical metric data within 24 hours for the queues in your Amazon Connect instance."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": " Adds DB engine version requirements for option group option settings, and specifies if an option setting requires a value."
+    }
+]

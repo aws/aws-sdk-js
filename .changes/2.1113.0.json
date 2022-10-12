@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DevOpsGuru",
+        "description": "This release adds new APIs DeleteInsight to deletes the insight along with the associated anomalies, events and recommendations."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "X2idn and X2iedn instances are powered by 3rd generation Intel Xeon Scalable processors with an all-core turbo frequency up to 3.5 GHzAmazon EC2. C6a instances are powered by 3rd generation AMD EPYC processors."
+    },
+    {
+        "type": "feature",
+        "category": "EFS",
+        "description": "Amazon EFS adds support for a ThrottlingException when using the CreateAccessPoint API if the account is nearing the AccessPoint limit(120)."
+    },
+    {
+        "type": "feature",
+        "category": "IoTTwinMaker",
+        "description": "This release adds the following new features: 1) ListEntities API now supports search using ExternalId. 2) BatchPutPropertyValue and GetPropertyValueHistory API now allows users to represent time in sub-second level precisions."
+    }
+]

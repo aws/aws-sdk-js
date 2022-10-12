@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Add support for CodeBuild local caching feature"
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideoArchivedMedia",
+        "description": "In this release, HLS playback of KVS streams can be configured to output MPEG TS fragments using the ContainerFormat parameter. HLS playback of KVS streams can also be configured to include the EXT-X-PROGRAM-DATE-TIME field using the DisplayFragmentTimestamp parameter."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Bug fix: increased the max length allowed for request parameter NextToken when paginating List operations"
+    }
+]

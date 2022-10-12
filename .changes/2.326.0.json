@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Support optional FindingPublishingFrequency parameter in CreateDetector and UpdateDetector operations, and ClientToken on Create* operations"
+    }
+]

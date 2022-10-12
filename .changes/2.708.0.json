@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeGuruReviewer",
+        "description": "Release GitHub Enterprise Server source provider integration"
+    },
+    {
+        "type": "feature",
+        "category": "ComprehendMedical",
+        "description": "This release adds the relationships between MedicalCondition and Anatomy in DetectEntitiesV2 API."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added support for tag-on-create for CreateVpc, CreateEgressOnlyInternetGateway, CreateSecurityGroup, CreateSubnet, CreateNetworkInterface, CreateNetworkAcl, CreateDhcpOptions and CreateInternetGateway. You can now specify tags when creating any of these resources. For more information about tagging, see AWS Tagging Strategies."
+    },
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "Add a new parameter (ImageDigest) and a new exception (ImageDigestDoesNotMatchException) to PutImage API to support pushing image by digest."
+    }
+]

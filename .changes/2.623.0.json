@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "EndpointDiscovery",
+        "description": "Update host header in requests when new endpoint is found; Throw error when endpoint discovery is required but not enabled"
+    },
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "This release adds exponential growth type support for deployment strategies."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "As of this release of the Amazon Pinpoint API, the Title property is optional for the CampaignEmailMessage object. "
+    },
+    {
+        "type": "feature",
+        "category": "SavingsPlans",
+        "description": "Added support for AWS Lambda in Compute Savings Plans"
+    }
+]

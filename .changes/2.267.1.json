@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Execution History and StartAssociationOnce release for State Manager. Users now have the ability to view association execution history with DescribeAssociationExecutions and DescribeAssociationExecutionTargets. Users can also execute an association by calling StartAssociationOnce."
+    }
+]

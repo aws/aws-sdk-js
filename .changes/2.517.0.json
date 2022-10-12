@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Credentials",
+        "description": "Added TokenFileWebIdentityCredentials"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release of EC2 VM Import Export adds support for exporting Amazon Machine Image(AMI)s to a VM file"
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageVod",
+        "description": "Adds optional Constant Initialization Vector (IV) to HLS Encryption for MediaPackage VOD."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe - support transcriptions from audio sources in Russian (ru-RU) and Chinese (zh-CN)."
+    }
+]

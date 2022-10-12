@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Amazon MSK has added support for Broker Log delivery to CloudWatch, S3, and Firehose."
+    },
+    {
+        "type": "feature",
+        "category": "Outposts",
+        "description": "This release adds DeleteSite and DeleteOutpost. "
+    },
+    {
+        "type": "feature",
+        "category": "SecretsManager",
+        "description": "This release increases the maximum allowed size of SecretString or SecretBinary from 10KB to 64KB in the CreateSecret, UpdateSecret, PutSecretValue and GetSecretValue APIs."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "This release adds support for CloudWatch Logs for Standard Workflows."
+    }
+]

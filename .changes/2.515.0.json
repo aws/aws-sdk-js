@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "ElastiCache extends support for Scale down for Redis Cluster-mode enabled and disabled replication groups "
+    },
+    {
+        "type": "feature",
+        "category": "ForecastQueryService",
+        "description": "Amazon Forecast is a fully managed machine learning service that makes it easy for customers to generate accurate forecasts using their historical time-series data"
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "Amazon Forecast is a fully managed machine learning service that makes it easy for customers to generate accurate forecasts using their historical time-series data"
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeRuntime",
+        "description": "Increased limits on number of items recommended and reranked: The maximum number of results returned from getRecommendations API has been increased to 200. The maximum number of items which can be reranked via getPersonalizedRanking API has been increased to 200."
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "This release provides a way to add metadata tags to a queue when it is created. You can use tags to organize and identify your Amazon SQS queues for cost allocation."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker now supports Amazon EFS and Amazon FSx for Lustre file systems as data sources for training machine learning models. Amazon SageMaker now supports running training jobs on ml.p3dn.24xlarge instance type. This instance type is offered as a limited private preview for certain SageMaker customers. If you are interested in joining the private preview, please reach out to the SageMaker Product Management team via AWS Support.\""
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "util",
+        "description": "Fix `name.endsWith is not a function` exception when inspecting some generated errors with some versions of nodejs"
+    },
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "Cross-region backup is a new AWS Backup feature that allows enterprises to copy backups across multiple AWS services to different regions. "
+    },
+    {
+        "type": "feature",
+        "category": "EFS",
+        "description": "This release adds support for managing EFS file system policies and EFS Access Points."
+    }
+]

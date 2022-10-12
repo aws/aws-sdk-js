@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Buffer",
+        "description": "remove deprecated new Buffer() constructor in Node.js"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 I3en instances are the new storage-optimized instances offering up to 60 TB NVMe SSD instance storage and up to 100 Gbps of network bandwidth."
+    }
+]

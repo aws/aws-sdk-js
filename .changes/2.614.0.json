@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "This version of the SDK includes bug fixes and documentation updates."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "This release adds support for simulation job batches"
+    }
+]

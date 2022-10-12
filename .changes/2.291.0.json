@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "This release adds support for a new rate control mode, Quality-Defined Variable Bitrate (QVBR) encoding, includes updates to optimize transcoding performance, and resolves previously reported bugs."
+    }
+]

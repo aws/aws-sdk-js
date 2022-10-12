@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "We show details about inbound executions and id of action executions in GetPipelineState API. We also add ConflictException to StartPipelineExecution, RetryStageExecution, StopPipelineExecution APIs."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Adding MoveReplicationTask feature to move replication tasks between instances"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSecureTunneling",
+        "description": "Support using multiple data streams per tunnel using the Secure Tunneling multiplexing feature."
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "This release supports Unicode characters for string operations in formulae computes in SiteWise. For more information, search for SiteWise in Amazon What's new or refer the SiteWise documentation."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Adding new parameters for dashboard persistence"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This feature enables customers to encrypt their Amazon SageMaker Studio storage volumes with customer master keys (CMKs) managed by them in AWS Key Management Service (KMS)."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Support import of CloudFormation stacks into Service Catalog provisioned products."
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "AWS Synthetics now supports Environment Variables  to assign runtime parameters in the canary scripts."
+    }
+]

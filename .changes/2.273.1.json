@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Support for fine grain throttling for API gateway. "
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Starting today, you can access custom Reserved Instance (RI) purchase recommendations for your Amazon Redshift, Amazon ElastiCache, and Amazon Elasticsearch reservations via AWS Cost Explorer API, in addition to accessing RI purchase recommendations for your Amazon EC2 and Amazon RDS reservations."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "S3 Select support for BZIP2 compressed input files"
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Support Conditional Branching OnFailure for SSM Automation"
+    }
+]

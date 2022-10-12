@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "CredentailProviderChain",
+        "description": "CredentialProviderChain.resolve now coalesces calls, so that concurrent requests for a service instance which has yet to resolve credentials will not result in a stampede to assign config.credentials"
+    },
+    {
+        "type": "bugfix",
+        "category": "documentation",
+        "description": "swap abstract Yard tag for custom tags to support compatibility with google-closure-compiler"
+    },
+    {
+        "type": "feature",
+        "category": "ACMPCA",
+        "description": "This release marks the introduction of waiters in ACM PCA, which allow you to control the progression of your code based on the presence or state of certain resources. Waiters can be implemented in the DescribeCertificateAuthorityAuditReport, GetCertificate, and GetCertificateAuthorityCsr API operations."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "Added provisionedThroughPut exception on the request level for transaction APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EC2MetadataCredentials",
+        "description": "refresh now passes an error to callback if metadata service responds with expired credentials"
+    },
+    {
+        "type": "feature",
+        "category": "PinpointSMSVoice",
+        "description": "Configuration sets can now use Amazon SNS as an event destination."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "This release adds support for cost allocation tagging. You can now create, delete, and list tags for AWS Step Functions activity and state machine resources. For more information about tagging, see AWS Tagging Strategies."
+    }
+]

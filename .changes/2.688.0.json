@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Amazon GuardDuty findings now include S3 bucket details under the resource section if an S3 Bucket was one of the affected resources"
+    }
+]

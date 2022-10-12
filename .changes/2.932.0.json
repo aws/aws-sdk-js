@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ApiGateway",
+        "description": "adds mention of default value for \"enabled\" field of CreateApiKeyRequest for better documentation"
+    },
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "CloudFormation registry service now supports 3rd party public type sharing"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "ACM",
+        "description": "ACM provides support for the new Private CA feature Cross-account CA sharing. ACM users can issue certificates signed by a private CA belonging to another account where the CA was shared with them."
+    },
+    {
+        "type": "feature",
+        "category": "ACMPCA",
+        "description": "ACM Private CA is launching cross-account support. This allows customers to share their private CAs with other accounts, AWS Organizations, and organizational units to issue end-entity certificates."
+    },
+    {
+        "type": "feature",
+        "category": "ECR",
+        "description": "This feature adds support for pushing and pulling Open Container Initiative (OCI) artifacts."
+    },
+    {
+        "type": "feature",
+        "category": "Kinesis",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Amazon QuickSight now supports programmatic creation and management of analyses with new APIs."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "This release introduces RoboMaker Simulation WorldForge, a capability that automatically generates one or more simulation worlds."
+    }
+]

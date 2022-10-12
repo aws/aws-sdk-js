@@ -1,0 +1,57 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "AWS Config adds support to save advanced queries. New API operations - GetStoredQuery, PutStoredQuery, ListStoredQueries, DeleteStoredQuery"
+    },
+    {
+        "type": "feature",
+        "category": "ConnectParticipant",
+        "description": "This release adds three new APIs: StartAttachmentUpload, CompleteAttachmentUpload, and GetAttachment. For Amazon Connect Chat, you can use these APIs to share files in chat conversations."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "AWS DMS launches support for AWS Secrets Manager to manage source and target database credentials."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds Tag On Create feature support for the AllocateAddress API."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add 4 connection properties: SECRET_ID, CONNECTOR_URL, CONNECTOR_TYPE, CONNECTOR_CLASS_NAME. Add two connection types: MARKETPLACE, CUSTOM"
+    },
+    {
+        "type": "feature",
+        "category": "ManagedBlockchain",
+        "description": "Added support for provisioning and managing public Ethereum nodes on main and test networks supporting secure access using Sigv4 and standard open-source Ethereum APIs."
+    },
+    {
+        "type": "feature",
+        "category": "Outposts",
+        "description": "In this release, AWS Outposts adds support for three new APIs: TagResource, UntagResource, and ListTagsForResource. Customers can now manage tags for their resources through the SDK."
+    },
+    {
+        "type": "feature",
+        "category": "QLDBSession",
+        "description": "Adds \"TimingInformation\" to all SendCommand API results and \"IOUsage\" to ExecuteStatementResult, FetchPageResult and CommitTransactionResult."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Format GetObject's Expires header to be an http-date instead of iso8601"
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalogAppRegistry",
+        "description": "New API `SyncResouce` to update AppRegistry system tags."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceQuotas",
+        "description": "Added the ability to tag applied quotas."
+    }
+]

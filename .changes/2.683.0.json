@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "DualStack",
+        "description": "Add dualstack by modifying existing endpoint in config"
+    },
+    {
+        "type": "bugfix",
+        "category": "EndpointDiscovery",
+        "description": "* If at least one operation requires endpoint discovery then the SDK enables endpoint discovery by default including operational endpoint discovery operations; * Users can set config `endpointDiscoveryEnabled`, env `AWS_ENDPOINT_DISCOVERY_ENABLED`, config file entry `endpoint_discovery_enabled` to `false` to explictly disable endpoint discovery, even operations the require endpoint discovery will fail; * SDK throws if endpoint discovery is explicitly disabled but operation requires endpoint discovery; * Now SDK throws more clear error message when required endpoint operation fails"
+    },
+    {
+        "type": "bugfix",
+        "category": "S3",
+        "description": "throw exception when incomplete body is returned from CopyObject, UploadPartCopy, and CompleteMultipartUpload"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "This release adds support for the standard deviation auto-computed aggregate and improved support for portal logo images in SiteWise."
+    }
+]

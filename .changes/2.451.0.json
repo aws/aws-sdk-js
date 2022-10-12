@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "This release adds an API allowing authorized users to delete a shared device's history of voice recordings and associated response data."
+    },
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AWS AppSync now supports the ability to add additional authentication providers to your AWS AppSync GraphQL API as well as the ability to retrieve directives configured against fields or object type definitions during schema introspection."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Patch Manager adds support for Microsoft Application Patching."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Add optional field AdminUserList to CreateSMBFileShare and UpdateSMBFileShare APIs."
+    }
+]

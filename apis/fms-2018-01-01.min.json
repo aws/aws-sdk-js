@@ -1,0 +1,1483 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-01-01",
+    "endpointPrefix": "fms",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "serviceAbbreviation": "FMS",
+    "serviceFullName": "Firewall Management Service",
+    "serviceId": "FMS",
+    "signatureVersion": "v4",
+    "targetPrefix": "AWSFMS_20180101",
+    "uid": "fms-2018-01-01"
+  },
+  "operations": {
+    "AssociateAdminAccount": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AdminAccount"
+        ],
+        "members": {
+          "AdminAccount": {}
+        }
+      }
+    },
+    "AssociateThirdPartyFirewall": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ThirdPartyFirewall"
+        ],
+        "members": {
+          "ThirdPartyFirewall": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ThirdPartyFirewallStatus": {}
+        }
+      }
+    },
+    "DeleteAppsList": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ListId"
+        ],
+        "members": {
+          "ListId": {}
+        }
+      }
+    },
+    "DeleteNotificationChannel": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DeletePolicy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyId"
+        ],
+        "members": {
+          "PolicyId": {},
+          "DeleteAllPolicyResources": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "DeleteProtocolsList": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ListId"
+        ],
+        "members": {
+          "ListId": {}
+        }
+      }
+    },
+    "DisassociateAdminAccount": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "DisassociateThirdPartyFirewall": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ThirdPartyFirewall"
+        ],
+        "members": {
+          "ThirdPartyFirewall": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ThirdPartyFirewallStatus": {}
+        }
+      }
+    },
+    "GetAdminAccount": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AdminAccount": {},
+          "RoleStatus": {}
+        }
+      }
+    },
+    "GetAppsList": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ListId"
+        ],
+        "members": {
+          "ListId": {},
+          "DefaultList": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AppsList": {
+            "shape": "Sm"
+          },
+          "AppsListArn": {}
+        }
+      }
+    },
+    "GetComplianceDetail": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyId",
+          "MemberAccount"
+        ],
+        "members": {
+          "PolicyId": {},
+          "MemberAccount": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PolicyComplianceDetail": {
+            "type": "structure",
+            "members": {
+              "PolicyOwner": {},
+              "PolicyId": {},
+              "MemberAccount": {},
+              "Violators": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "ResourceId": {},
+                    "ViolationReason": {},
+                    "ResourceType": {},
+                    "Metadata": {
+                      "type": "map",
+                      "key": {},
+                      "value": {}
+                    }
+                  }
+                }
+              },
+              "EvaluationLimitExceeded": {
+                "type": "boolean"
+              },
+              "ExpiredAt": {
+                "type": "timestamp"
+              },
+              "IssueInfoMap": {
+                "shape": "S17"
+              }
+            }
+          }
+        }
+      }
+    },
+    "GetNotificationChannel": {
+      "input": {
+        "type": "structure",
+        "members": {}
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "SnsTopicArn": {},
+          "SnsRoleName": {}
+        }
+      }
+    },
+    "GetPolicy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyId"
+        ],
+        "members": {
+          "PolicyId": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Policy": {
+            "shape": "S1e"
+          },
+          "PolicyArn": {}
+        }
+      }
+    },
+    "GetProtectionStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyId"
+        ],
+        "members": {
+          "PolicyId": {},
+          "MemberAccountId": {},
+          "StartTime": {
+            "type": "timestamp"
+          },
+          "EndTime": {
+            "type": "timestamp"
+          },
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AdminAccountId": {},
+          "ServiceType": {},
+          "Data": {},
+          "NextToken": {}
+        }
+      }
+    },
+    "GetProtocolsList": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ListId"
+        ],
+        "members": {
+          "ListId": {},
+          "DefaultList": {
+            "type": "boolean"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProtocolsList": {
+            "shape": "S23"
+          },
+          "ProtocolsListArn": {}
+        }
+      }
+    },
+    "GetThirdPartyFirewallAssociationStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ThirdPartyFirewall"
+        ],
+        "members": {
+          "ThirdPartyFirewall": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ThirdPartyFirewallStatus": {},
+          "MarketplaceOnboardingStatus": {}
+        }
+      }
+    },
+    "GetViolationDetails": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyId",
+          "MemberAccount",
+          "ResourceId",
+          "ResourceType"
+        ],
+        "members": {
+          "PolicyId": {},
+          "MemberAccount": {},
+          "ResourceId": {},
+          "ResourceType": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ViolationDetail": {
+            "type": "structure",
+            "required": [
+              "PolicyId",
+              "MemberAccount",
+              "ResourceId",
+              "ResourceType",
+              "ResourceViolations"
+            ],
+            "members": {
+              "PolicyId": {},
+              "MemberAccount": {},
+              "ResourceId": {},
+              "ResourceType": {},
+              "ResourceViolations": {
+                "type": "list",
+                "member": {
+                  "type": "structure",
+                  "members": {
+                    "AwsVPCSecurityGroupViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "ViolationTargetDescription": {},
+                        "PartialMatches": {
+                          "type": "list",
+                          "member": {
+                            "type": "structure",
+                            "members": {
+                              "Reference": {},
+                              "TargetViolationReasons": {
+                                "type": "list",
+                                "member": {}
+                              }
+                            }
+                          }
+                        },
+                        "PossibleSecurityGroupRemediationActions": {
+                          "type": "list",
+                          "member": {
+                            "type": "structure",
+                            "members": {
+                              "RemediationActionType": {},
+                              "Description": {},
+                              "RemediationResult": {
+                                "type": "structure",
+                                "members": {
+                                  "IPV4Range": {},
+                                  "IPV6Range": {},
+                                  "PrefixListId": {},
+                                  "Protocol": {},
+                                  "FromPort": {
+                                    "type": "long"
+                                  },
+                                  "ToPort": {
+                                    "type": "long"
+                                  }
+                                }
+                              },
+                              "IsDefaultAction": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AwsEc2NetworkInterfaceViolation": {
+                      "shape": "S2r"
+                    },
+                    "AwsEc2InstanceViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "AwsEc2NetworkInterfaceViolations": {
+                          "type": "list",
+                          "member": {
+                            "shape": "S2r"
+                          }
+                        }
+                      }
+                    },
+                    "NetworkFirewallMissingFirewallViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "VPC": {},
+                        "AvailabilityZone": {},
+                        "TargetViolationReason": {}
+                      }
+                    },
+                    "NetworkFirewallMissingSubnetViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "VPC": {},
+                        "AvailabilityZone": {},
+                        "TargetViolationReason": {}
+                      }
+                    },
+                    "NetworkFirewallMissingExpectedRTViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "VPC": {},
+                        "AvailabilityZone": {},
+                        "CurrentRouteTable": {},
+                        "ExpectedRouteTable": {}
+                      }
+                    },
+                    "NetworkFirewallPolicyModifiedViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "CurrentPolicyDescription": {
+                          "shape": "S2z"
+                        },
+                        "ExpectedPolicyDescription": {
+                          "shape": "S2z"
+                        }
+                      }
+                    },
+                    "NetworkFirewallInternetTrafficNotInspectedViolation": {
+                      "type": "structure",
+                      "members": {
+                        "SubnetId": {},
+                        "SubnetAvailabilityZone": {},
+                        "RouteTableId": {},
+                        "ViolatingRoutes": {
+                          "shape": "S3c"
+                        },
+                        "IsRouteTableUsedInDifferentAZ": {
+                          "type": "boolean"
+                        },
+                        "CurrentFirewallSubnetRouteTable": {},
+                        "ExpectedFirewallEndpoint": {},
+                        "FirewallSubnetId": {},
+                        "ExpectedFirewallSubnetRoutes": {
+                          "shape": "S3g"
+                        },
+                        "ActualFirewallSubnetRoutes": {
+                          "shape": "S3c"
+                        },
+                        "InternetGatewayId": {},
+                        "CurrentInternetGatewayRouteTable": {},
+                        "ExpectedInternetGatewayRoutes": {
+                          "shape": "S3g"
+                        },
+                        "ActualInternetGatewayRoutes": {
+                          "shape": "S3c"
+                        },
+                        "VpcId": {}
+                      }
+                    },
+                    "NetworkFirewallInvalidRouteConfigurationViolation": {
+                      "type": "structure",
+                      "members": {
+                        "AffectedSubnets": {
+                          "shape": "S2s"
+                        },
+                        "RouteTableId": {},
+                        "IsRouteTableUsedInDifferentAZ": {
+                          "type": "boolean"
+                        },
+                        "ViolatingRoute": {
+                          "shape": "S3d"
+                        },
+                        "CurrentFirewallSubnetRouteTable": {},
+                        "ExpectedFirewallEndpoint": {},
+                        "ActualFirewallEndpoint": {},
+                        "ExpectedFirewallSubnetId": {},
+                        "ActualFirewallSubnetId": {},
+                        "ExpectedFirewallSubnetRoutes": {
+                          "shape": "S3g"
+                        },
+                        "ActualFirewallSubnetRoutes": {
+                          "shape": "S3c"
+                        },
+                        "InternetGatewayId": {},
+                        "CurrentInternetGatewayRouteTable": {},
+                        "ExpectedInternetGatewayRoutes": {
+                          "shape": "S3g"
+                        },
+                        "ActualInternetGatewayRoutes": {
+                          "shape": "S3c"
+                        },
+                        "VpcId": {}
+                      }
+                    },
+                    "NetworkFirewallBlackHoleRouteDetectedViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "RouteTableId": {},
+                        "VpcId": {},
+                        "ViolatingRoutes": {
+                          "shape": "S3c"
+                        }
+                      }
+                    },
+                    "NetworkFirewallUnexpectedFirewallRoutesViolation": {
+                      "type": "structure",
+                      "members": {
+                        "FirewallSubnetId": {},
+                        "ViolatingRoutes": {
+                          "shape": "S3c"
+                        },
+                        "RouteTableId": {},
+                        "FirewallEndpoint": {},
+                        "VpcId": {}
+                      }
+                    },
+                    "NetworkFirewallUnexpectedGatewayRoutesViolation": {
+                      "type": "structure",
+                      "members": {
+                        "GatewayId": {},
+                        "ViolatingRoutes": {
+                          "shape": "S3c"
+                        },
+                        "RouteTableId": {},
+                        "VpcId": {}
+                      }
+                    },
+                    "NetworkFirewallMissingExpectedRoutesViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "ExpectedRoutes": {
+                          "shape": "S3g"
+                        },
+                        "VpcId": {}
+                      }
+                    },
+                    "DnsRuleGroupPriorityConflictViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "ViolationTargetDescription": {},
+                        "ConflictingPriority": {
+                          "type": "integer"
+                        },
+                        "ConflictingPolicyId": {},
+                        "UnavailablePriorities": {
+                          "type": "list",
+                          "member": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "DnsDuplicateRuleGroupViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "ViolationTargetDescription": {}
+                      }
+                    },
+                    "DnsRuleGroupLimitExceededViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "ViolationTargetDescription": {},
+                        "NumberOfRuleGroupsAlreadyAssociated": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "PossibleRemediationActions": {
+                      "type": "structure",
+                      "members": {
+                        "Description": {},
+                        "Actions": {
+                          "type": "list",
+                          "member": {
+                            "type": "structure",
+                            "required": [
+                              "OrderedRemediationActions"
+                            ],
+                            "members": {
+                              "Description": {},
+                              "OrderedRemediationActions": {
+                                "type": "list",
+                                "member": {
+                                  "type": "structure",
+                                  "members": {
+                                    "RemediationAction": {
+                                      "type": "structure",
+                                      "members": {
+                                        "Description": {},
+                                        "EC2CreateRouteAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "RouteTableId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "DestinationCidrBlock": {},
+                                            "DestinationPrefixListId": {},
+                                            "DestinationIpv6CidrBlock": {},
+                                            "VpcEndpointId": {
+                                              "shape": "S41"
+                                            },
+                                            "GatewayId": {
+                                              "shape": "S41"
+                                            },
+                                            "RouteTableId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "EC2ReplaceRouteAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "RouteTableId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "DestinationCidrBlock": {},
+                                            "DestinationPrefixListId": {},
+                                            "DestinationIpv6CidrBlock": {},
+                                            "GatewayId": {
+                                              "shape": "S41"
+                                            },
+                                            "RouteTableId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "EC2DeleteRouteAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "RouteTableId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "DestinationCidrBlock": {},
+                                            "DestinationPrefixListId": {},
+                                            "DestinationIpv6CidrBlock": {},
+                                            "RouteTableId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "EC2CopyRouteTableAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "VpcId",
+                                            "RouteTableId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "VpcId": {
+                                              "shape": "S41"
+                                            },
+                                            "RouteTableId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "EC2ReplaceRouteTableAssociationAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "AssociationId",
+                                            "RouteTableId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "AssociationId": {
+                                              "shape": "S41"
+                                            },
+                                            "RouteTableId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "EC2AssociateRouteTableAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "RouteTableId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "RouteTableId": {
+                                              "shape": "S41"
+                                            },
+                                            "SubnetId": {
+                                              "shape": "S41"
+                                            },
+                                            "GatewayId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "EC2CreateRouteTableAction": {
+                                          "type": "structure",
+                                          "required": [
+                                            "VpcId"
+                                          ],
+                                          "members": {
+                                            "Description": {},
+                                            "VpcId": {
+                                              "shape": "S41"
+                                            }
+                                          }
+                                        },
+                                        "FMSPolicyUpdateFirewallCreationConfigAction": {
+                                          "type": "structure",
+                                          "members": {
+                                            "Description": {},
+                                            "FirewallCreationConfig": {}
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "Order": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              },
+                              "IsDefaultAction": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FirewallSubnetIsOutOfScopeViolation": {
+                      "type": "structure",
+                      "members": {
+                        "FirewallSubnetId": {},
+                        "VpcId": {},
+                        "SubnetAvailabilityZone": {},
+                        "SubnetAvailabilityZoneId": {},
+                        "VpcEndpointId": {}
+                      }
+                    },
+                    "RouteHasOutOfScopeEndpointViolation": {
+                      "type": "structure",
+                      "members": {
+                        "SubnetId": {},
+                        "VpcId": {},
+                        "RouteTableId": {},
+                        "ViolatingRoutes": {
+                          "shape": "S3c"
+                        },
+                        "SubnetAvailabilityZone": {},
+                        "SubnetAvailabilityZoneId": {},
+                        "CurrentFirewallSubnetRouteTable": {},
+                        "FirewallSubnetId": {},
+                        "FirewallSubnetRoutes": {
+                          "shape": "S3c"
+                        },
+                        "InternetGatewayId": {},
+                        "CurrentInternetGatewayRouteTable": {},
+                        "InternetGatewayRoutes": {
+                          "shape": "S3c"
+                        }
+                      }
+                    },
+                    "ThirdPartyFirewallMissingFirewallViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "VPC": {},
+                        "AvailabilityZone": {},
+                        "TargetViolationReason": {}
+                      }
+                    },
+                    "ThirdPartyFirewallMissingSubnetViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "VPC": {},
+                        "AvailabilityZone": {},
+                        "TargetViolationReason": {}
+                      }
+                    },
+                    "ThirdPartyFirewallMissingExpectedRouteTableViolation": {
+                      "type": "structure",
+                      "members": {
+                        "ViolationTarget": {},
+                        "VPC": {},
+                        "AvailabilityZone": {},
+                        "CurrentRouteTable": {},
+                        "ExpectedRouteTable": {}
+                      }
+                    },
+                    "FirewallSubnetMissingVPCEndpointViolation": {
+                      "type": "structure",
+                      "members": {
+                        "FirewallSubnetId": {},
+                        "VpcId": {},
+                        "SubnetAvailabilityZone": {},
+                        "SubnetAvailabilityZoneId": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "ResourceTags": {
+                "shape": "S4f"
+              },
+              "ResourceDescription": {}
+            }
+          }
+        }
+      }
+    },
+    "ListAppsLists": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "MaxResults"
+        ],
+        "members": {
+          "DefaultLists": {
+            "type": "boolean"
+          },
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AppsLists": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ListArn": {},
+                "ListId": {},
+                "ListName": {},
+                "AppsList": {
+                  "shape": "Sq"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListComplianceStatus": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "PolicyId"
+        ],
+        "members": {
+          "PolicyId": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PolicyComplianceStatusList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "PolicyOwner": {},
+                "PolicyId": {},
+                "PolicyName": {},
+                "MemberAccount": {},
+                "EvaluationResults": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "ComplianceStatus": {},
+                      "ViolatorCount": {
+                        "type": "long"
+                      },
+                      "EvaluationLimitExceeded": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "LastUpdated": {
+                  "type": "timestamp"
+                },
+                "IssueInfoMap": {
+                  "shape": "S17"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListMemberAccounts": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "MemberAccounts": {
+            "type": "list",
+            "member": {}
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListPolicies": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "PolicyList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "PolicyArn": {},
+                "PolicyId": {},
+                "PolicyName": {},
+                "ResourceType": {},
+                "SecurityServiceType": {},
+                "RemediationEnabled": {
+                  "type": "boolean"
+                },
+                "DeleteUnusedFMManagedResources": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListProtocolsLists": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "MaxResults"
+        ],
+        "members": {
+          "DefaultLists": {
+            "type": "boolean"
+          },
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProtocolsLists": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "ListArn": {},
+                "ListId": {},
+                "ListName": {},
+                "ProtocolsList": {
+                  "shape": "S24"
+                }
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn"
+        ],
+        "members": {
+          "ResourceArn": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TagList": {
+            "shape": "S4f"
+          }
+        }
+      }
+    },
+    "ListThirdPartyFirewallFirewallPolicies": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ThirdPartyFirewall",
+          "MaxResults"
+        ],
+        "members": {
+          "ThirdPartyFirewall": {},
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ThirdPartyFirewallFirewallPolicies": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "FirewallPolicyId": {},
+                "FirewallPolicyName": {}
+              }
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "PutAppsList": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "AppsList"
+        ],
+        "members": {
+          "AppsList": {
+            "shape": "Sm"
+          },
+          "TagList": {
+            "shape": "S4f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "AppsList": {
+            "shape": "Sm"
+          },
+          "AppsListArn": {}
+        }
+      }
+    },
+    "PutNotificationChannel": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "SnsTopicArn",
+          "SnsRoleName"
+        ],
+        "members": {
+          "SnsTopicArn": {},
+          "SnsRoleName": {}
+        }
+      }
+    },
+    "PutPolicy": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Policy"
+        ],
+        "members": {
+          "Policy": {
+            "shape": "S1e"
+          },
+          "TagList": {
+            "shape": "S4f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "Policy": {
+            "shape": "S1e"
+          },
+          "PolicyArn": {}
+        }
+      }
+    },
+    "PutProtocolsList": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ProtocolsList"
+        ],
+        "members": {
+          "ProtocolsList": {
+            "shape": "S23"
+          },
+          "TagList": {
+            "shape": "S4f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "ProtocolsList": {
+            "shape": "S23"
+          },
+          "ProtocolsListArn": {}
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagList"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "TagList": {
+            "shape": "S4f"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ],
+        "members": {
+          "ResourceArn": {},
+          "TagKeys": {
+            "type": "list",
+            "member": {}
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {}
+      }
+    }
+  },
+  "shapes": {
+    "Sm": {
+      "type": "structure",
+      "required": [
+        "ListName",
+        "AppsList"
+      ],
+      "members": {
+        "ListId": {},
+        "ListName": {},
+        "ListUpdateToken": {},
+        "CreateTime": {
+          "type": "timestamp"
+        },
+        "LastUpdateTime": {
+          "type": "timestamp"
+        },
+        "AppsList": {
+          "shape": "Sq"
+        },
+        "PreviousAppsList": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "shape": "Sq"
+          }
+        }
+      }
+    },
+    "Sq": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "AppName",
+          "Protocol",
+          "Port"
+        ],
+        "members": {
+          "AppName": {},
+          "Protocol": {},
+          "Port": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "S17": {
+      "type": "map",
+      "key": {},
+      "value": {}
+    },
+    "S1e": {
+      "type": "structure",
+      "required": [
+        "PolicyName",
+        "SecurityServicePolicyData",
+        "ResourceType",
+        "ExcludeResourceTags",
+        "RemediationEnabled"
+      ],
+      "members": {
+        "PolicyId": {},
+        "PolicyName": {},
+        "PolicyUpdateToken": {},
+        "SecurityServicePolicyData": {
+          "type": "structure",
+          "required": [
+            "Type"
+          ],
+          "members": {
+            "Type": {},
+            "ManagedServiceData": {},
+            "PolicyOption": {
+              "type": "structure",
+              "members": {
+                "NetworkFirewallPolicy": {
+                  "type": "structure",
+                  "members": {
+                    "FirewallDeploymentModel": {}
+                  }
+                },
+                "ThirdPartyFirewallPolicy": {
+                  "type": "structure",
+                  "members": {
+                    "FirewallDeploymentModel": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ResourceType": {},
+        "ResourceTypeList": {
+          "type": "list",
+          "member": {}
+        },
+        "ResourceTags": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "required": [
+              "Key"
+            ],
+            "members": {
+              "Key": {},
+              "Value": {}
+            }
+          }
+        },
+        "ExcludeResourceTags": {
+          "type": "boolean"
+        },
+        "RemediationEnabled": {
+          "type": "boolean"
+        },
+        "DeleteUnusedFMManagedResources": {
+          "type": "boolean"
+        },
+        "IncludeMap": {
+          "shape": "S1s"
+        },
+        "ExcludeMap": {
+          "shape": "S1s"
+        }
+      }
+    },
+    "S1s": {
+      "type": "map",
+      "key": {},
+      "value": {
+        "type": "list",
+        "member": {}
+      }
+    },
+    "S23": {
+      "type": "structure",
+      "required": [
+        "ListName",
+        "ProtocolsList"
+      ],
+      "members": {
+        "ListId": {},
+        "ListName": {},
+        "ListUpdateToken": {},
+        "CreateTime": {
+          "type": "timestamp"
+        },
+        "LastUpdateTime": {
+          "type": "timestamp"
+        },
+        "ProtocolsList": {
+          "shape": "S24"
+        },
+        "PreviousProtocolsList": {
+          "type": "map",
+          "key": {},
+          "value": {
+            "shape": "S24"
+          }
+        }
+      }
+    },
+    "S24": {
+      "type": "list",
+      "member": {}
+    },
+    "S2r": {
+      "type": "structure",
+      "members": {
+        "ViolationTarget": {},
+        "ViolatingSecurityGroups": {
+          "shape": "S2s"
+        }
+      }
+    },
+    "S2s": {
+      "type": "list",
+      "member": {}
+    },
+    "S2z": {
+      "type": "structure",
+      "members": {
+        "StatelessRuleGroups": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "RuleGroupName": {},
+              "ResourceId": {},
+              "Priority": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "StatelessDefaultActions": {
+          "shape": "S34"
+        },
+        "StatelessFragmentDefaultActions": {
+          "shape": "S34"
+        },
+        "StatelessCustomActions": {
+          "shape": "S34"
+        },
+        "StatefulRuleGroups": {
+          "type": "list",
+          "member": {
+            "type": "structure",
+            "members": {
+              "RuleGroupName": {},
+              "ResourceId": {},
+              "Priority": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "StatefulDefaultActions": {
+          "shape": "S34"
+        },
+        "StatefulEngineOptions": {
+          "type": "structure",
+          "members": {
+            "RuleOrder": {}
+          }
+        }
+      }
+    },
+    "S34": {
+      "type": "list",
+      "member": {}
+    },
+    "S3c": {
+      "type": "list",
+      "member": {
+        "shape": "S3d"
+      }
+    },
+    "S3d": {
+      "type": "structure",
+      "members": {
+        "DestinationType": {},
+        "TargetType": {},
+        "Destination": {},
+        "Target": {}
+      }
+    },
+    "S3g": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "IpV4Cidr": {},
+          "PrefixListId": {},
+          "IpV6Cidr": {},
+          "ContributingSubnets": {
+            "shape": "S2s"
+          },
+          "AllowedTargets": {
+            "type": "list",
+            "member": {}
+          },
+          "RouteTableId": {}
+        }
+      }
+    },
+    "S41": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {},
+        "Description": {}
+      }
+    },
+    "S4f": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "members": {
+          "Key": {},
+          "Value": {}
+        }
+      }
+    }
+  }
+}

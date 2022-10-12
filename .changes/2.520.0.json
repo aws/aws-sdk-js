@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "With the current release, you can suspend and later resume any of the following scaling actions in Application Auto Scaling: scheduled scaling actions, dynamic scaling in actions, dynamic scaling out actions."
+    },
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Introducing pipeline execution trigger details in ListPipelineExecutions API."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release of Amazon Elastic Container Service (Amazon ECS) introduces support for including Docker container IDs in the API response when describing and stopping tasks. This enables customers to easily map containers to the tasks they are associated with."
+    },
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "Amazon ElastiCache for Redis now supports encryption at rest using customer managed customer master keys (CMKs) in AWS Key Management Service (KMS). Amazon ElastiCache now supports cluster names upto 40 characters for replicationGoups and upto 50 characters for cacheClusters."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Adds a \"MaximumBatchingWindowInSeconds\" parameter to event source mapping api's. Usable by Dynamodb and Kinesis event sources."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "add support for AWS.S3.getSignedUrlPromise which returns a promise for S3 presigned url"
+    }
+]

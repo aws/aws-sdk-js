@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Finspacedata",
+        "description": "This release adds a new set of APIs, GetPermissionGroup, DisassociateUserFromPermissionGroup, AssociateUserToPermissionGroup, ListPermissionGroupsByUser, ListUsersByPermissionGroup."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Adds finding fields available from GuardDuty Console. Adds FreeTrial related operations. Deprecates the use of various APIs related to Master Accounts and Replace them with Administrator Accounts."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalogAppRegistry",
+        "description": "This release adds a new API ListAttributeGroupsForApplication that returns associated attribute groups of an application. In addition, the UpdateApplication and UpdateAttributeGroup APIs will not allow users to update the 'Name' attribute."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Added new field \"reason\" to OperationNotSupportedException. Receiving this exception in the DeregisterWorkspaceDirectory API will now return a reason giving more context on the failure."
+    }
+]

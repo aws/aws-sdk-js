@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaStore",
+        "description": "This release adds support for tagging, untagging, and listing tags for AWS Elemental MediaStore containers."
+    }
+]

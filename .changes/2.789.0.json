@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for Gateway Load Balancer VPC endpoints and VPC endpoint services"
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "Added support for Gateway Load Balancers, which make it easy to deploy, scale, and run third-party virtual networking appliances."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Add SessionId as a filter for DescribeSessions API"
+    }
+]

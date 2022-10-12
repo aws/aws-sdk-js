@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release supports Wavelength resources, including carrier gateways, and carrier IP addresses."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Amazon Lex supports the option to enable accuracy improvements and specify an intent classification confidence score threshold."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntime",
+        "description": "Amazon Lex supports intent classification confidence scores along with a list of the top five intents."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "Add 'exploration' functionality"
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeEvents",
+        "description": "Adds support implicit and explicit impression input"
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeRuntime",
+        "description": "Adds support for implicit impressions"
+    }
+]

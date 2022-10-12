@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "This release allows customers to choose from a list of predefined deployment strategies while starting deployments."
+    },
+    {
+        "type": "feature",
+        "category": "CodeArtifact",
+        "description": "Added support for AWS CodeArtifact."
+    },
+    {
+        "type": "feature",
+        "category": "ComputeOptimizer",
+        "description": "Compute Optimizer supports exporting recommendations to Amazon S3."
+    },
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "Reducing the schedule name of DLM Lifecycle policy from 500 to 120 characters. "
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "New C6g instances powered by AWS Graviton2 processors and ideal for running advanced, compute-intensive workloads; New R6g instances powered by AWS Graviton2 processors and ideal for running memory-intensive workloads."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API removes support for the ArchiveFindings and UnarchiveFindings operations. This release also adds UNKNOWN as an encryption type for S3 bucket metadata."
+    },
+    {
+        "type": "feature",
+        "category": "Shield",
+        "description": "Corrections to the supported format for contact phone numbers and to the description for the create subscription action."
+    }
+]

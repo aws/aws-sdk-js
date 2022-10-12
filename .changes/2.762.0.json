@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "This release extends Application Auto Scaling support to AWS Comprehend Entity Recognizer endpoint, allowing automatic updates to provisioned Inference Units to maintain targeted utilization level."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds the InsufficientAvailableIPsInSubnetFault error for RDS Proxy."
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adding support for global write forwarding on secondary clusters in an Aurora global database."
+    },
+    {
+        "type": "feature",
+        "category": "Route53",
+        "description": "Added a new ListHostedZonesByVPC API for customers to list all the private hosted zones that a specified VPC is associated with."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "You can now configure Amazon SES to send event notifications when the delivery of an email is delayed because of a temporary issue. For example, you can receive a notification if the recipient's inbox is full, or if there's a temporary problem with the receiving email server."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression before running the maintenance window."
+    }
+]

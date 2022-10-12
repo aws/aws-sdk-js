@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds functionality to the CreateDiskSnapshot API that allows users to snapshot instance root volumes. It also adds various documentation updates."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "This release updates the PutEvents operation. AppPackageName, AppTitle, AppVersionCode, SdkName fields will now be accepted as a part of the event when submitting events."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "GetLabelDetection now returns bounding box information for common objects and a hierarchical taxonomy of detected labels. The version of the model used for video label detection is also returned. DetectModerationLabels now returns the version of the model used for detecting unsafe content."
+    },
+    {
+        "type": "feature",
+        "category": "credentials",
+        "description": "make resolvedProfile cached inenumerable"
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DocDB",
+        "description": "Amazon DocumentDB (with MongoDB compatibility) is a fast, reliable, and fully-managed database service. Amazon DocumentDB makes it easy for developers to set up, run, and scale MongoDB-compatible databases in the cloud."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "DescribeSnapshotSchedules returns a list of snapshot schedules. With this release, this API will have a list of clusters and number of clusters associated with the schedule."
+    },
+    {
+        "type": "feature",
+        "category": "s3",
+        "description": "Improved sigv4 documentation on getSignedUrl operation"
+    }
+]

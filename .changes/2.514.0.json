@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "Adding support for optional locale input in CreateProfile and UpdateProfile APIs"
+    },
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Includes API updates to support streaming through VPC endpoints for image builders and stacks."
+    },
+    {
+        "type": "feature",
+        "category": "ChainableTemporaryCredentials",
+        "description": "Support for specifying STS client config when creating ChainableTemporaryCredentials to override endpoint or region."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker introduces Managed Spot Training. Increases the maximum number of metric definitions to 40 for SageMaker Training and Hyperparameter Tuning Jobs. SageMaker Neo adds support for Acer aiSage and Qualcomm QCS605 and QCS603. "
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "New field in response of TestIdentityProvider"
+    }
+]

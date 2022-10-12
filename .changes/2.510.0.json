@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds a new API called SendDiagnosticInterrupt, which allows you to send diagnostic interrupts to your EC2 instance."
+    }
+]

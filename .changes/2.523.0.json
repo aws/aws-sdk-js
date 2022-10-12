@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Amazon EKS DescribeCluster API returns a new OIDC issuer field that can be used to create OIDC identity provider for IAM for Service Accounts feature."
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "Added support for new history events"
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "MediaFormat is now optional for StartTranscriptionJob API."
+    }
+]

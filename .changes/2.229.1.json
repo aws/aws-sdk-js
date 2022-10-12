@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeDeploy",
+        "description": "AWS CodeDeploy has a new exception that indicates when a GitHub token is not valid."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Added PutEncryptionConfig and GetEncryptionConfig APIs for managing data encryption settings. Use PutEncryptionConfig to configure X-Ray to use an AWS Key Management Service customer master key to encrypt trace data at rest."
+    }
+]

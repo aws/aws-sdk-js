@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "Add support for Redshift Data API Targets"
+    },
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Add support for Redshift Data API Targets"
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Adding support to update multiple partitions of a table in a single request"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "This release supports IAM mode for SiteWise Monitor portals"
+    }
+]

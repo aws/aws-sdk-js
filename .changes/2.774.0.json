@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Amazon CloudFront adds support for Origin Shield."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This Patch Manager release now supports Common Vulnerabilities and Exposure (CVE) Ids for missing packages via the DescribeInstancePatches API."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "An Admin can now update the launch role associated with a Provisioned Product. Admins and End Users can now view the launch role associated with a Provisioned Product."
+    }
+]

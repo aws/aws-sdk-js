@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Introducing startDate field for CapacityReservation object for the date and time which the reservation started and adding reserved parameter for ModifyCapacityReservation."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "This release adds support for Amazon Lex V2 APIs for model building."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntimeV2",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Update VPC endpoint field names."
+    }
+]

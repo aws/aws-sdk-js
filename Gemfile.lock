@@ -1,0 +1,38 @@
+PATH
+  remote: doc-src/parsejs
+  specs:
+    parsejs (0.0.1)
+      kpeg
+      yard
+
+PATH
+  remote: doc-src/yard-js
+  specs:
+    yard-js (0.1.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    kpeg (1.1.0)
+    rake (13.0.6)
+    rdiscount (2.2.0.2)
+    redcarpet (3.5.1)
+    samus (3.0.9)
+    yard (0.9.26)
+    yard-sitemap (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  parsejs!
+  rake
+  rdiscount
+  redcarpet (~> 3.0)
+  samus
+  yard (~> 0.9.26)
+  yard-js!
+  yard-sitemap (~> 1.0)
+
+BUNDLED WITH
+   1.17.3
