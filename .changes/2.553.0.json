@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "CloudWatch",
-        "description": "New Period parameter added to MetricDataQuery structure."
-    }
-]

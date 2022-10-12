@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "AppSync",
-        "description": "Adds a configuration option for AppSync GraphQL APIs"
-    }
-]

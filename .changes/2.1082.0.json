@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Panorama",
-        "description": "Added NTP server configuration parameter to ProvisionDevice operation. Added alternate software fields to DescribeDevice response"
-    }
-]

@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Greengrass",
-        "description": "Greengrass OTA service supports Raspbian/Armv6l platforms."
-    }
-]

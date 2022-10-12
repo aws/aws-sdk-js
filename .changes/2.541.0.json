@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Lightsail",
-        "description": "This release adds support for the automatic snapshots add-on for instances and block storage disks."
-    }
-]

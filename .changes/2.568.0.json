@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "CognitoIdentity",
-        "description": "This release adds support for disabling classic flow."
-    }
-]

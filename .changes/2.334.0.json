@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "CloudTrail",
-        "description": "The LookupEvents API now supports two new attribute keys: ReadOnly and AccessKeyId"
-    }
-]

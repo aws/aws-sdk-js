@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Batch",
-        "description": "Support for Timeout in SubmitJob and RegisterJobDefinition"
-    }
-]

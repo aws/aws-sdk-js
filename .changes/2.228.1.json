@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ElasticBeanstalk",
-        "description": "Support tracking Elastic Beanstalk resources in AWS Config."
-    }
-]

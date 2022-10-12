@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "GameLift",
-        "description": "AutoScaling Target Tracking scaling simplification along with StartFleetActions and StopFleetActions APIs to suspend and resume automatic scaling at will."
-    }
-]

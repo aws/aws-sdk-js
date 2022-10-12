@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "EC2",
-        "description": "Added idempotency to the CreateVolume API using the ClientToken request parameter"
-    }
-]

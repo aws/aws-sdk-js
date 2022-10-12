@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ControlTower",
-        "description": "This release contains the first SDK for AWS Control Tower. It introduces  a new set of APIs: EnableControl, DisableControl, GetControlOperation, and ListEnabledControls."
-    }
-]

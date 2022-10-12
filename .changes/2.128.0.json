@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Redshift",
-        "description": "DescribeEventSubscriptions API supports tag keys and tag values as request parameters. "
-    }
-]

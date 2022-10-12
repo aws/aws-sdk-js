@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "MediaPackage",
-        "description": "Adds support for DASH OriginEnpoints with multiple media presentation description periods triggered by presence of SCTE-35 ad markers in Channel input streams."
-    }
-]

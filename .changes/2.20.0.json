@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ES",
-        "description": "Added three new API calls to expose Amazon Elasticsearch imposed limits."
-    }
-]

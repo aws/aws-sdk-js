@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "KinesisVideoArchivedMedia",
-        "description": "Add ON_DISCONTINUITY mode to the GetHLSStreamingSessionURL API"
-    }
-]

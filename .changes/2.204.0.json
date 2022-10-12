@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ApplicationAutoScaling",
-        "description": "Application Auto Scaling now supports automatic scaling of SageMaker Production Variants on an Endpoint."
-    }
-]

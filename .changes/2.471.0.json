@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "EC2",
-        "description": "Adds DNS entries and NLB ARNs to describe-vpc-endpoint-connections API response. Adds owner ID to describe-vpc-endpoints and create-vpc-endpoint API responses."
-    }
-]

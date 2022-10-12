@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "CloudDirectory",
-        "description": "Cloud Directory customers can fetch attributes within a facet on an object with the new GetObjectAttributes API and can fetch attributes from multiple facets or objects with the BatchGetObjectAttributes operation."
-    }
-]

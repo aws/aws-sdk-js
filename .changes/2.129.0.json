@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ConfigService",
-        "description": "Added missing enumeration values for ConfigurationItemStatus"
-    }
-]

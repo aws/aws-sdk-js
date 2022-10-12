@@ -1,6 +1,0 @@
-#full_list li.expander { color: #038; }
-.service_list { list-style: none; padding: 0; margin: 0; font-size: 1.1em; clear: both; }
-.service_list li { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 7px; width: 40%; float: left; margin-right: 7px; }
-#listing .service_list li small { font-size: 0.9em; }
-.clear { clear: both; }
-#capabilities-banner { margin-bottom: 12px; font-weight: bold; padding: 12px; }

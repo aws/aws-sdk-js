@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Redshift",
-        "description": "Amazon Redshift now supports operations to pause and resume a cluster on demand or on a schedule."
-    }
-]

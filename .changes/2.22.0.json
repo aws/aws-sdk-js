@@ -1,7 +1,0 @@
-[
-    {
-        "type": "bugfix",
-        "category": "MechanicalTurkRequester",
-        "description": "Rename MechanicalTurkRequester to MTurk"
-    }
-]

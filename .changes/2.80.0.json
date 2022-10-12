@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "S3",
-        "description": "API Update for S3: Adding Object Tagging Header to MultipartUpload Initialization"
-    }
-]

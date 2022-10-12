@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "DocDB",
-        "description": "This release provides support for describe and modify CA certificates."
-    }
-]

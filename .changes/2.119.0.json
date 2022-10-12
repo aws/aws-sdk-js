@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "EC2",
-        "description": "Fixed bug in EC2 clients preventing ElasticGpuSet from being set."
-    }
-]

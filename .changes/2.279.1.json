@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ConfigService",
-        "description": "Setting internal length limits on resourceId for APIs.  "
-    }
-]

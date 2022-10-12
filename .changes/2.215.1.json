@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "ACM",
-        "description": "AWS Certificate Manager has added support for customers to disable Certificate Transparency logging on a per-certificate basis."
-    }
-]

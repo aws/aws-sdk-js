@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Budgets",
-        "description": "Add additional costTypes: IncludeDiscount, UseAmortized,  to support finer control for different charges included in a cost budget."
-    }
-]

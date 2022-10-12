@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "Ec2",
-        "description": "Adds support for the new Modify Volumes apis."
-    }
-]

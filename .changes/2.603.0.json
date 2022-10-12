@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "EC2",
-        "description": "This release adds support for partition placement groups and instance metadata option in Launch Templates"
-    }
-]

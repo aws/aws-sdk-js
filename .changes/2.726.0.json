@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "SSM",
-        "description": "Adds a waiter for CommandExecuted and paginators for various other APIs."
-    }
-]

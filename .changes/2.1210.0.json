@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "SageMaker",
-        "description": "This release adds HyperParameterTuningJob type in Search API."
-    }
-]

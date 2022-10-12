@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "RDS",
-        "description": "Updates RDS API to indicate whether a DBEngine supports read replicas."
-    }
-]

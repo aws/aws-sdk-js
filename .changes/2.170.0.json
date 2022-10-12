@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "APIGateway",
-        "description": "Adds support for Cognito Authorizer scopes at the API method level."
-    }
-]

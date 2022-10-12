@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "CloudFormation",
-        "description": "Adding ResourcesToSkip parameter to ContinueUpdateRollback API, adding support for ListExports, new ChangeSet types and Transforms."
-    }
-]

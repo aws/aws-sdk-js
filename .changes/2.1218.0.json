@@ -1,7 +1,0 @@
-[
-    {
-        "type": "feature",
-        "category": "CodeStarNotifications",
-        "description": "This release adds tag based access control for the UntagResource API."
-    }
-]
