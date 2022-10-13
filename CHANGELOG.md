@@ -1,6 +1,21 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1231.0-->
+<!--LATEST=2.1232.0-->
 <!--ENTRYINSERT-->
+
+## 2.1232.0
+* bugfix: marketplacecatalog: Enable CORS for marketplacecatalog API
+* feature: AmplifyUIBuilder: We are releasing the ability for fields to be configured as arrays.
+* feature: Appflow: With this update, you can choose which Salesforce API is used by Amazon AppFlow to transfer data to or from your Salesforce account. You can choose the Salesforce REST API or Bulk API 2.0. You can also choose for Amazon AppFlow to pick the API automatically.
+* feature: Connect: This release adds support for a secondary email and a mobile number for Amazon Connect instance users.
+* feature: DirectoryService: This release adds support for describing and updating AWS Managed Microsoft AD set up.
+* feature: GuardDuty: Add UnprocessedDataSources to CreateDetectorResponse which specifies the data sources that couldn't be enabled during the CreateDetector request. In addition, update documentations.
+* feature: MediaLive: AWS Elemental MediaLive now supports forwarding SCTE-35 messages through the Event Signaling and Management (ESAM) API, and can read those SCTE-35 messages from an inactive source.
+* feature: MediaPackageVod: This release adds SPEKE v2 support for MediaPackage VOD. Speke v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, based on an encryption contract selected by the customer.
+* feature: Panorama: Pause and resume camera stream processing with SignalApplicationInstanceNodeInstances. Reboot an appliance with CreateJobForDevices. More application state information in DescribeApplicationInstance response.
+* feature: SSM: Support of AmazonLinux2022 by Patch Manager
+* feature: SSMIncidents: Update RelatedItem enum to support Tasks
+* feature: Transfer: This release adds an option for customers to configure workflows that are triggered when files are only partially received from a client due to premature session disconnect.
+* feature: Wisdom: This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.
 
 ## 2.1231.0
 * feature: GreengrassV2: This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation.

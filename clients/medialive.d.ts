@@ -947,6 +947,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     AvailSettings?: AvailSettings;
   }
   export interface AvailSettings {
+    Esam?: Esam;
     Scte35SpliceInsert?: Scte35SpliceInsert;
     Scte35TimeSignalApos?: Scte35TimeSignalApos;
   }
@@ -2802,6 +2803,32 @@ You specify only the font family. All other style information (color, bold, posi
      */
     TimecodeConfig: TimecodeConfig;
     VideoDescriptions: __listOfVideoDescription;
+  }
+  export interface Esam {
+    /**
+     * Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
+     */
+    AcquisitionPointId: __stringMax256;
+    /**
+     * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
+     */
+    AdAvailOffset?: __integerMinNegative1000Max1000;
+    /**
+     * Password if credentials are required to access the POIS endpoint.  This is a reference to an AWS parameter store name from which the password can be retrieved.  AWS Parameter store format: "ssm://"
+     */
+    PasswordParam?: __string;
+    /**
+     * The URL of the signal conditioner endpoint on the Placement Opportunity Information System (POIS). MediaLive sends SignalProcessingEvents here when SCTE-35 messages are read.
+     */
+    PoisEndpoint: __string;
+    /**
+     * Username if credentials are required to access the POIS endpoint.  This can be either a plaintext username, or a reference to an AWS parameter store name from which the username can be retrieved.  AWS Parameter store format: "ssm://"
+     */
+    Username?: __string;
+    /**
+     * Optional data sent as zoneIdentity to identify the MediaLive channel to the POIS.
+     */
+    ZoneIdentity?: __stringMax256;
   }
   export interface FailoverCondition {
     /**
@@ -5917,6 +5944,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     PauseStateSettings?: PauseStateScheduleActionSettings;
     /**
+     * Action to specify scte35 input
+     */
+    Scte35InputSettings?: Scte35InputScheduleActionSettings;
+    /**
      * Action to insert SCTE-35 return_to_network message
      */
     Scte35ReturnToNetworkSettings?: Scte35ReturnToNetworkScheduleActionSettings;
@@ -6016,6 +6047,17 @@ provide the language to consider when translating the image-based source to text
     SegmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor;
   }
   export type Scte35DeviceRestrictions = "NONE"|"RESTRICT_GROUP0"|"RESTRICT_GROUP1"|"RESTRICT_GROUP2"|string;
+  export type Scte35InputMode = "FIXED"|"FOLLOW_ACTIVE"|string;
+  export interface Scte35InputScheduleActionSettings {
+    /**
+     * In fixed mode, enter the name of the input attachment that you want to use as a SCTE-35 input. (Don't enter the ID of the input.)"
+     */
+    InputAttachmentNameReference?: __string;
+    /**
+     * Whether the SCTE-35 input should be the active input or a fixed input.
+     */
+    Mode: Scte35InputMode;
+  }
   export type Scte35NoRegionalBlackoutFlag = "REGIONAL_BLACKOUT"|"NO_REGIONAL_BLACKOUT"|string;
   export interface Scte35ReturnToNetworkScheduleActionSettings {
     /**

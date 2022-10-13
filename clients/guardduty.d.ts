@@ -156,11 +156,11 @@ declare class GuardDuty extends Service {
    */
   deleteThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.DeleteThreatIntelSetResponse) => void): Request<GuardDuty.Types.DeleteThreatIntelSetResponse, AWSError>;
   /**
-   * Returns a list of malware scans.
+   * Returns a list of malware scans. Each member account can view the malware scans for their own accounts. An administrator can view the malware scans for all the member accounts.
    */
   describeMalwareScans(params: GuardDuty.Types.DescribeMalwareScansRequest, callback?: (err: AWSError, data: GuardDuty.Types.DescribeMalwareScansResponse) => void): Request<GuardDuty.Types.DescribeMalwareScansResponse, AWSError>;
   /**
-   * Returns a list of malware scans.
+   * Returns a list of malware scans. Each member account can view the malware scans for their own accounts. An administrator can view the malware scans for all the member accounts.
    */
   describeMalwareScans(callback?: (err: AWSError, data: GuardDuty.Types.DescribeMalwareScansResponse) => void): Request<GuardDuty.Types.DescribeMalwareScansResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class GuardDuty extends Service {
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
+   * Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs.
    */
   disassociateMembers(params: GuardDuty.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
+   * Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs.
    */
   disassociateMembers(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
@@ -905,6 +905,10 @@ declare namespace GuardDuty {
      * The unique ID of the created detector.
      */
     DetectorId?: DetectorId;
+    /**
+     * Specifies the data sources that couldn't be enabled when GuardDuty was enabled for the first time.
+     */
+    UnprocessedDataSources?: UnprocessedDataSourcesResult;
   }
   export interface CreateFilterRequest {
     /**
@@ -1129,7 +1133,7 @@ declare namespace GuardDuty {
   export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
   export interface DataSourcesFreeTrial {
     /**
-     * Describes whether any AWS CloudTrail management event logs are enabled as data sources.
+     * Describes whether any Amazon Web Services CloudTrail management event logs are enabled as data sources.
      */
     CloudTrail?: DataSourceFreeTrial;
     /**
@@ -1475,6 +1479,10 @@ declare namespace GuardDuty {
      * Describes whether scanning EBS volumes is enabled as a data source.
      */
     Status?: DataSourceStatus;
+    /**
+     * Specifies the reason why scanning EBS volumes (Malware Protection) was not enabled as a data source.
+     */
+    Reason?: String;
   }
   export interface EcsClusterDetails {
     /**
@@ -1901,7 +1909,7 @@ declare namespace GuardDuty {
      */
     ScanResourceCriteria?: ScanResourceCriteria;
     /**
-     * An enum value representing possible snapshot preservations.
+     * An enum value representing possible snapshot preservation settings.
      */
     EbsSnapshotPreservation?: EbsSnapshotPreservation;
   }
@@ -2426,7 +2434,7 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
     /**
-     * Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
+     * Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated). Member accounts must have been previously associated with the GuardDuty administrator account using  Create Members . 
      */
     OnlyAssociated?: String;
   }
@@ -3441,6 +3449,9 @@ declare namespace GuardDuty {
     Result: String;
   }
   export type UnprocessedAccounts = UnprocessedAccount[];
+  export interface UnprocessedDataSourcesResult {
+    MalwareProtection?: MalwareProtectionConfigurationResult;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the resource to remove tags from.
@@ -3559,7 +3570,7 @@ declare namespace GuardDuty {
      */
     ScanResourceCriteria?: ScanResourceCriteria;
     /**
-     * An enum value representing possible snapshot preservations.
+     * An enum value representing possible snapshot preservation settings.
      */
     EbsSnapshotPreservation?: EbsSnapshotPreservation;
   }

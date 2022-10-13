@@ -84,11 +84,11 @@ declare class Translate extends Service {
    */
   listParallelData(callback?: (err: AWSError, data: Translate.Types.ListParallelDataResponse) => void): Request<Translate.Types.ListParallelDataResponse, AWSError>;
   /**
-   * 
+   * Lists all tags associated with a given Amazon Translate resource. For more information, see  Tagging your resources.
    */
   listTagsForResource(params: Translate.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Translate.Types.ListTagsForResourceResponse) => void): Request<Translate.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * 
+   * Lists all tags associated with a given Amazon Translate resource. For more information, see  Tagging your resources.
    */
   listTagsForResource(callback?: (err: AWSError, data: Translate.Types.ListTagsForResourceResponse) => void): Request<Translate.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Translate extends Service {
    */
   listTextTranslationJobs(callback?: (err: AWSError, data: Translate.Types.ListTextTranslationJobsResponse) => void): Request<Translate.Types.ListTextTranslationJobsResponse, AWSError>;
   /**
-   * Starts an asynchronous batch translation job. Batch translation jobs can be used to translate large volumes of text across multiple documents at once. For more information, see async. Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.  Amazon Translate does not support batch translation of multiple source languages at once. 
+   * Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, the input documents must share the same source language. You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see Asynchronous batch processing  Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.  Amazon Translate does not support batch translation of multiple source languages at once. 
    */
   startTextTranslationJob(params: Translate.Types.StartTextTranslationJobRequest, callback?: (err: AWSError, data: Translate.Types.StartTextTranslationJobResponse) => void): Request<Translate.Types.StartTextTranslationJobResponse, AWSError>;
   /**
-   * Starts an asynchronous batch translation job. Batch translation jobs can be used to translate large volumes of text across multiple documents at once. For more information, see async. Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.  Amazon Translate does not support batch translation of multiple source languages at once. 
+   * Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, the input documents must share the same source language. You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see Asynchronous batch processing  Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.  Amazon Translate does not support batch translation of multiple source languages at once. 
    */
   startTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.StartTextTranslationJobResponse) => void): Request<Translate.Types.StartTextTranslationJobResponse, AWSError>;
   /**
@@ -124,27 +124,27 @@ declare class Translate extends Service {
    */
   stopTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.StopTextTranslationJobResponse) => void): Request<Translate.Types.StopTextTranslationJobResponse, AWSError>;
   /**
-   * 
+   * Associates a specific tag with a resource. A tag is a key-value pair that adds as a metadata to a resource. For more information, see  Tagging your resources.
    */
   tagResource(params: Translate.Types.TagResourceRequest, callback?: (err: AWSError, data: Translate.Types.TagResourceResponse) => void): Request<Translate.Types.TagResourceResponse, AWSError>;
   /**
-   * 
+   * Associates a specific tag with a resource. A tag is a key-value pair that adds as a metadata to a resource. For more information, see  Tagging your resources.
    */
   tagResource(callback?: (err: AWSError, data: Translate.Types.TagResourceResponse) => void): Request<Translate.Types.TagResourceResponse, AWSError>;
   /**
-   * Translates input text from the source language to the target language. For a list of available languages and language codes, see what-is-languages.
+   * Translates input text from the source language to the target language. For a list of available languages and language codes, see Supported languages.
    */
   translateText(params: Translate.Types.TranslateTextRequest, callback?: (err: AWSError, data: Translate.Types.TranslateTextResponse) => void): Request<Translate.Types.TranslateTextResponse, AWSError>;
   /**
-   * Translates input text from the source language to the target language. For a list of available languages and language codes, see what-is-languages.
+   * Translates input text from the source language to the target language. For a list of available languages and language codes, see Supported languages.
    */
   translateText(callback?: (err: AWSError, data: Translate.Types.TranslateTextResponse) => void): Request<Translate.Types.TranslateTextResponse, AWSError>;
   /**
-   * 
+   * Removes a specific tag associated with an Amazon Translate resource. For more information, see  Tagging your resources.
    */
   untagResource(params: Translate.Types.UntagResourceRequest, callback?: (err: AWSError, data: Translate.Types.UntagResourceResponse) => void): Request<Translate.Types.UntagResourceResponse, AWSError>;
   /**
-   * 
+   * Removes a specific tag associated with an Amazon Translate resource. For more information, see  Tagging your resources.
    */
   untagResource(callback?: (err: AWSError, data: Translate.Types.UntagResourceResponse) => void): Request<Translate.Types.UntagResourceResponse, AWSError>;
   /**
@@ -189,6 +189,9 @@ declare namespace Translate {
      * A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
      */
     ClientToken: ClientTokenString;
+    /**
+     * Tags to be associated with this resource. A tag is a key-value pair that adds metadata to a resource. Each tag key for the resource must be unique. For more information, see  Tagging your resources.
+     */
     Tags?: TagList;
   }
   export interface CreateParallelDataResponse {
@@ -321,6 +324,9 @@ declare namespace Translate {
      * The encryption key for the custom terminology being imported.
      */
     EncryptionKey?: EncryptionKey;
+    /**
+     * Tags to be associated with this resource. A tag is a key-value pair that adds metadata to a resource. Each tag key for the resource must be unique. For more information, see  Tagging your resources.
+     */
     Tags?: TagList;
   }
   export interface ImportTerminologyResponse {
@@ -423,9 +429,15 @@ declare namespace Translate {
     NextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Translate resource you are querying. 
+     */
     ResourceArn: ResourceArn;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * Tags associated with the Amazon Translate resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Translate. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+     */
     Tags?: TagList;
   }
   export interface ListTerminologiesRequest {
@@ -594,23 +606,23 @@ declare namespace Translate {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more information, see identity-and-access-management.
+     * The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more information, see Identity and access management .
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * The language code of the input language. For a list of language codes, see what-is-languages. Amazon Translate does not automatically detect a source language during batch translation jobs.
+     * The language code of the input language. For a list of language codes, see Supported languages. Amazon Translate does not automatically detect a source language during batch translation jobs.
      */
     SourceLanguageCode: LanguageCodeString;
     /**
-     * The language code of the output language.
+     * The target languages of the translation job. Enter up to 10 language codes. Each input file is translated into each target language. Each language code is two or five characters long. For a list of language codes, see Supported languages.
      */
     TargetLanguageCodes: TargetLanguageCodeStringList;
     /**
-     * The name of a custom terminology resource to add to the translation job. This resource lists examples source terms and the desired translation for each term. This parameter accepts only one custom terminology resource. For a list of available custom terminology resources, use the ListTerminologies operation. For more information, see how-custom-terminology.
+     * The name of a custom terminology resource to add to the translation job. This resource lists examples source terms and the desired translation for each term. This parameter accepts only one custom terminology resource. If you specify multiple target languages for the job, translate uses the designated terminology for each requested target language that has an entry for the source term in the terminology file. For a list of available custom terminology resources, use the ListTerminologies operation. For more information, see Custom terminology.
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The name of a parallel data resource to add to the translation job. This resource consists of examples that show how you want segments of text to be translated. When you add parallel data to a translation job, you create an Active Custom Translation job.  This parameter accepts only one parallel data resource.  Active Custom Translation jobs are priced at a higher rate than other jobs that don't use parallel data. For more information, see Amazon Translate pricing.  For a list of available parallel data resources, use the ListParallelData operation. For more information, see customizing-translations-parallel-data.
+     * The name of a parallel data resource to add to the translation job. This resource consists of examples that show how you want segments of text to be translated. If you specify multiple target languages for the job, the parallel data file must include translations for all the target languages. When you add parallel data to a translation job, you create an Active Custom Translation job.  This parameter accepts only one parallel data resource.  Active Custom Translation jobs are priced at a higher rate than other jobs that don't use parallel data. For more information, see Amazon Translate pricing.  For a list of available parallel data resources, use the ListParallelData operation. For more information, see  Customizing your translations with parallel data.
      */
     ParallelDataNames?: ResourceNameList;
     /**
@@ -618,7 +630,7 @@ declare namespace Translate {
      */
     ClientToken: ClientTokenString;
     /**
-     * Settings to configure your translation output, including the option to mask profane words and phrases. StartTextTranslationJob does not support the formality setting.
+     * Settings to configure your translation output, including the option to set the formality level of the output text and the option to mask profane words and phrases.
      */
     Settings?: TranslationSettings;
   }
@@ -650,14 +662,26 @@ declare namespace Translate {
   }
   export type String = string;
   export interface Tag {
+    /**
+     * The initial part of a key-value pair that forms a tag associated with a given resource. 
+     */
     Key: TagKey;
+    /**
+     *  The second part of a key-value pair that forms a tag associated with a given resource.
+     */
     Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
   export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Translate resource to which you want to associate the tags. 
+     */
     ResourceArn: ResourceArn;
+    /**
+     * Tags being associated with a specific Amazon Translate resource. There can be a maximum of 50 tags (both existing and pending) associated with a specific resource.
+     */
     Tags: TagList;
   }
   export interface TagResourceResponse {
@@ -853,7 +877,7 @@ declare namespace Translate {
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see what-is-languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.  If you specify auto, you must send the TranslateText request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported.  
+     * The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see Supported languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.  If you specify auto, you must send the TranslateText request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported.  
      */
     SourceLanguageCode: LanguageCodeString;
     /**
@@ -889,17 +913,23 @@ declare namespace Translate {
   }
   export interface TranslationSettings {
     /**
-     * You can optionally specify the desired level of formality for real-time translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting. Note that asynchronous translation jobs don't support formality. If you provide a value for formality, the StartTextTranslationJob API throws an exception (InvalidRequestException). For target languages that support formality, see Supported Languages and Language Codes in the Amazon Translate Developer Guide.
+     * You can optionally specify the desired level of formality for translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting.  If you specify multiple target languages for the job, translate ignores the formality setting for any unsupported target language. For a list of target languages that support formality, see Setting Formality in the Amazon Translate Developer Guide.
      */
     Formality?: Formality;
     /**
-     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that support profanity detection, see Supported Languages and Language Codes in the Amazon Translate Developer Guide.
+     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that support profanity detection, see Masking profanity in the Amazon Translate Developer Guide. If you specify multiple target languages for the job, all the target languages must support profanity masking. If any of the target languages don't support profanity masking, the translation job won't mask profanity for any target language.
      */
     Profanity?: Profanity;
   }
   export type UnboundedLengthString = string;
   export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the given Amazon Translate resource from which you want to remove the tags. 
+     */
     ResourceArn: ResourceArn;
+    /**
+     * The initial part of a key-value pair that forms a tag being removed from a given resource. Keys must be unique and cannot be duplicated for a particular resource. 
+     */
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {

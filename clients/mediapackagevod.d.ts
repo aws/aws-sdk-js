@@ -547,6 +547,16 @@ rounded to the nearest multiple of the source segment duration.
      */
     Url?: __string;
   }
+  export interface EncryptionContractConfiguration {
+    /**
+     * A collection of audio encryption presets.
+     */
+    PresetSpeke20Audio: PresetSpeke20Audio;
+    /**
+     * A collection of video encryption presets.
+     */
+    PresetSpeke20Video: PresetSpeke20Video;
+  }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
   export interface HlsEncryption {
     /**
@@ -759,10 +769,13 @@ rounded to the nearest multiple of the source fragment duration.
     Id?: __string;
     Tags?: Tags;
   }
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED"|string;
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export type ScteMarkersSource = "SEGMENTS"|"MANIFEST"|string;
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
   export interface SpekeKeyProvider {
+    EncryptionContractConfiguration?: EncryptionContractConfiguration;
     /**
      * An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
 MediaPackage will assume when accessing the key provider service.

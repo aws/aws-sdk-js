@@ -276,6 +276,14 @@ declare class DirectoryService extends Service {
    */
   describeTrusts(callback?: (err: AWSError, data: DirectoryService.Types.DescribeTrustsResult) => void): Request<DirectoryService.Types.DescribeTrustsResult, AWSError>;
   /**
+   *  Describes the updates of a directory for a particular update type. 
+   */
+  describeUpdateDirectory(params: DirectoryService.Types.DescribeUpdateDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeUpdateDirectoryResult) => void): Request<DirectoryService.Types.DescribeUpdateDirectoryResult, AWSError>;
+  /**
+   *  Describes the updates of a directory for a particular update type. 
+   */
+  describeUpdateDirectory(callback?: (err: AWSError, data: DirectoryService.Types.DescribeUpdateDirectoryResult) => void): Request<DirectoryService.Types.DescribeUpdateDirectoryResult, AWSError>;
+  /**
    * Disables alternative client authentication methods for the specified directory. 
    */
   disableClientAuthentication(params: DirectoryService.Types.DisableClientAuthenticationRequest, callback?: (err: AWSError, data: DirectoryService.Types.DisableClientAuthenticationResult) => void): Request<DirectoryService.Types.DisableClientAuthenticationResult, AWSError>;
@@ -491,6 +499,14 @@ declare class DirectoryService extends Service {
    * Updates a conditional forwarder that has been set up for your Amazon Web Services directory.
    */
   updateConditionalForwarder(callback?: (err: AWSError, data: DirectoryService.Types.UpdateConditionalForwarderResult) => void): Request<DirectoryService.Types.UpdateConditionalForwarderResult, AWSError>;
+  /**
+   *  Updates the directory for a particular update type. 
+   */
+  updateDirectorySetup(params: DirectoryService.Types.UpdateDirectorySetupRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateDirectorySetupResult) => void): Request<DirectoryService.Types.UpdateDirectorySetupResult, AWSError>;
+  /**
+   *  Updates the directory for a particular update type. 
+   */
+  updateDirectorySetup(callback?: (err: AWSError, data: DirectoryService.Types.UpdateDirectorySetupResult) => void): Request<DirectoryService.Types.UpdateDirectorySetupResult, AWSError>;
   /**
    * Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.
    */
@@ -926,6 +942,7 @@ declare namespace DirectoryService {
     DirectoryId?: DirectoryId;
   }
   export type CreateSnapshotBeforeSchemaExtension = boolean;
+  export type CreateSnapshotBeforeUpdate = boolean;
   export interface CreateSnapshotRequest {
     /**
      * The identifier of the directory of which to take a snapshot.
@@ -1358,6 +1375,34 @@ declare namespace DirectoryService {
      */
     NextToken?: NextToken;
   }
+  export interface DescribeUpdateDirectoryRequest {
+    /**
+     *  The unique identifier of the directory. 
+     */
+    DirectoryId: DirectoryId;
+    /**
+     *  The type of updates you want to describe for the directory. 
+     */
+    UpdateType: UpdateType;
+    /**
+     *  The name of the Region. 
+     */
+    RegionName?: RegionName;
+    /**
+     *  The DescribeUpdateDirectoryResult. NextToken value from a previous call to DescribeUpdateDirectory. Pass null if this is the first call. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeUpdateDirectoryResult {
+    /**
+     *  The list of update activities on a directory for the requested update type. 
+     */
+    UpdateActivities?: UpdateActivities;
+    /**
+     *  If not null, more results are available. Pass this value for the NextToken parameter. 
+     */
+    NextToken?: NextToken;
+  }
   export type Description = string;
   export type DesiredNumberOfDomainControllers = number;
   export type DirectoryConfigurationSettingAllowedValues = string;
@@ -1514,6 +1559,10 @@ declare namespace DirectoryService {
      * Lists the Regions where the directory has replicated.
      */
     RegionsInfo?: RegionsInfo;
+    /**
+     * The operating system (OS) version of the directory.
+     */
+    OsVersion?: OSVersion;
   }
   export type DirectoryDescriptions = DirectoryDescription[];
   export type DirectoryEdition = "Enterprise"|"Standard"|string;
@@ -1782,6 +1831,7 @@ declare namespace DirectoryService {
      */
     SnapshotLimits?: SnapshotLimits;
   }
+  export type InitiatedBy = string;
   export type IpAddr = string;
   export type IpAddrs = IpAddr[];
   export interface IpRoute {
@@ -1986,6 +2036,13 @@ declare namespace DirectoryService {
   export type NextToken = string;
   export type Notes = string;
   export type OCSPUrl = string;
+  export interface OSUpdateSettings {
+    /**
+     *  OS version that the directory needs to be updated to. 
+     */
+    OSVersion?: OSVersion;
+  }
+  export type OSVersion = "SERVER_2012"|"SERVER_2019"|string;
   export type OrganizationalUnitDN = string;
   export interface OwnerDirectoryDescription {
     /**
@@ -2559,6 +2616,7 @@ declare namespace DirectoryService {
      */
     Type: TargetType;
   }
+  export type UpdateActivities = UpdateInfoEntry[];
   export interface UpdateConditionalForwarderRequest {
     /**
      * The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.
@@ -2574,6 +2632,60 @@ declare namespace DirectoryService {
     DnsIpAddrs: DnsIpAddrs;
   }
   export interface UpdateConditionalForwarderResult {
+  }
+  export interface UpdateDirectorySetupRequest {
+    /**
+     *  The identifier of the directory on which you want to perform the update. 
+     */
+    DirectoryId: DirectoryId;
+    /**
+     *  The type of update that needs to be performed on the directory. For example, OS. 
+     */
+    UpdateType: UpdateType;
+    /**
+     *  The settings for the OS update that needs to be performed on the directory. 
+     */
+    OSUpdateSettings?: OSUpdateSettings;
+    /**
+     *  The boolean that specifies if a snapshot for the directory needs to be taken before updating the directory. 
+     */
+    CreateSnapshotBeforeUpdate?: CreateSnapshotBeforeUpdate;
+  }
+  export interface UpdateDirectorySetupResult {
+  }
+  export interface UpdateInfoEntry {
+    /**
+     *  The name of the Region. 
+     */
+    Region?: RegionName;
+    /**
+     *  The status of the update performed on the directory. 
+     */
+    Status?: UpdateStatus;
+    /**
+     *  The reason for the current status of the update type activity. 
+     */
+    StatusReason?: UpdateStatusReason;
+    /**
+     *  This specifies if the update was initiated by the customer or by the service team. 
+     */
+    InitiatedBy?: InitiatedBy;
+    /**
+     *  The new value of the target setting. 
+     */
+    NewValue?: UpdateValue;
+    /**
+     *  The old value of the target setting. 
+     */
+    PreviousValue?: UpdateValue;
+    /**
+     *  The start time of the UpdateDirectorySetup for the particular type. 
+     */
+    StartTime?: StartDateTime;
+    /**
+     *  The last updated date and time of a particular directory setting. 
+     */
+    LastUpdatedDateTime?: LastUpdatedDateTime;
   }
   export interface UpdateNumberOfDomainControllersRequest {
     /**
@@ -2616,6 +2728,8 @@ declare namespace DirectoryService {
      */
     DirectoryId?: DirectoryId;
   }
+  export type UpdateStatus = "Updated"|"Updating"|"UpdateFailed"|string;
+  export type UpdateStatusReason = string;
   export interface UpdateTrustRequest {
     /**
      * Identifier of the trust relationship.
@@ -2632,6 +2746,13 @@ declare namespace DirectoryService {
      * Identifier of the trust relationship.
      */
     TrustId?: TrustId;
+  }
+  export type UpdateType = "OS"|string;
+  export interface UpdateValue {
+    /**
+     *  The OS update related settings. 
+     */
+    OSUpdateSettings?: OSUpdateSettings;
   }
   export type UseSameUsername = boolean;
   export type UserName = string;

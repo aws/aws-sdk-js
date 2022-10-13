@@ -104,7 +104,7 @@ declare namespace RDSDataService {
      */
     database?: DbName;
     /**
-     * The name of the database schema.
+     * The name of the database schema.  Currently, the schema parameter isn't supported. 
      */
     schema?: DbName;
     /**

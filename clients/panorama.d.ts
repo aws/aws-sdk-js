@@ -20,11 +20,11 @@ declare class Panorama extends Service {
    */
   createApplicationInstance(callback?: (err: AWSError, data: Panorama.Types.CreateApplicationInstanceResponse) => void): Request<Panorama.Types.CreateApplicationInstanceResponse, AWSError>;
   /**
-   * Creates a job to run on one or more devices.
+   * Creates a job to run on one or more devices. A job can update a device's software or reboot it.
    */
   createJobForDevices(params: Panorama.Types.CreateJobForDevicesRequest, callback?: (err: AWSError, data: Panorama.Types.CreateJobForDevicesResponse) => void): Request<Panorama.Types.CreateJobForDevicesResponse, AWSError>;
   /**
-   * Creates a job to run on one or more devices.
+   * Creates a job to run on one or more devices. A job can update a device's software or reboot it.
    */
   createJobForDevices(callback?: (err: AWSError, data: Panorama.Types.CreateJobForDevicesResponse) => void): Request<Panorama.Types.CreateJobForDevicesResponse, AWSError>;
   /**
@@ -252,6 +252,14 @@ declare class Panorama extends Service {
    */
   removeApplicationInstance(callback?: (err: AWSError, data: Panorama.Types.RemoveApplicationInstanceResponse) => void): Request<Panorama.Types.RemoveApplicationInstanceResponse, AWSError>;
   /**
+   * Signal camera nodes to stop or resume.
+   */
+  signalApplicationInstanceNodeInstances(params: Panorama.Types.SignalApplicationInstanceNodeInstancesRequest, callback?: (err: AWSError, data: Panorama.Types.SignalApplicationInstanceNodeInstancesResponse) => void): Request<Panorama.Types.SignalApplicationInstanceNodeInstancesResponse, AWSError>;
+  /**
+   * Signal camera nodes to stop or resume.
+   */
+  signalApplicationInstanceNodeInstances(callback?: (err: AWSError, data: Panorama.Types.SignalApplicationInstanceNodeInstancesResponse) => void): Request<Panorama.Types.SignalApplicationInstanceNodeInstancesResponse, AWSError>;
+  /**
    * Tags a resource.
    */
   tagResource(params: Panorama.Types.TagResourceRequest, callback?: (err: AWSError, data: Panorama.Types.TagResourceResponse) => void): Request<Panorama.Types.TagResourceResponse, AWSError>;
@@ -317,6 +325,10 @@ declare namespace Panorama {
      * The application instance's name.
      */
     Name?: ApplicationInstanceName;
+    /**
+     * The application's state.
+     */
+    RuntimeContextStates?: ReportedRuntimeContextStates;
     /**
      * The application instance's status.
      */
@@ -389,9 +401,9 @@ declare namespace Panorama {
      */
     DeviceIds: DeviceIdList;
     /**
-     * Configuration settings for the job.
+     * Configuration settings for a software update job.
      */
-    DeviceJobConfig: DeviceJobConfig;
+    DeviceJobConfig?: DeviceJobConfig;
     /**
      * The type of job to run.
      */
@@ -631,6 +643,10 @@ declare namespace Panorama {
      */
     Name?: ApplicationInstanceName;
     /**
+     * The application instance's state.
+     */
+    RuntimeContextStates?: ReportedRuntimeContextStates;
+    /**
      * The application instance's runtime role ARN.
      */
     RuntimeRoleArn?: RuntimeRoleArn;
@@ -682,6 +698,10 @@ declare namespace Panorama {
      * The job's ID.
      */
     JobId?: JobId;
+    /**
+     * The job's type.
+     */
+    JobType?: JobType;
     /**
      * The job's status.
      */
@@ -1052,6 +1072,7 @@ declare namespace Panorama {
     StatusDescription?: PackageVersionStatusDescription;
   }
   export type Description = string;
+  export type DesiredState = "RUNNING"|"STOPPED"|"REMOVED"|string;
   export interface Device {
     /**
      * The device's maker.
@@ -1106,7 +1127,7 @@ declare namespace Panorama {
      */
     Type?: DeviceType;
   }
-  export type DeviceAggregatedStatus = "ERROR"|"AWAITING_PROVISIONING"|"PENDING"|"FAILED"|"DELETING"|"ONLINE"|"OFFLINE"|"LEASE_EXPIRED"|"UPDATE_NEEDED"|string;
+  export type DeviceAggregatedStatus = "ERROR"|"AWAITING_PROVISIONING"|"PENDING"|"FAILED"|"DELETING"|"ONLINE"|"OFFLINE"|"LEASE_EXPIRED"|"UPDATE_NEEDED"|"REBOOTING"|string;
   export type DeviceArn = string;
   export type DeviceBrand = "AWS_PANORAMA"|"LENOVO"|string;
   export type DeviceConnectionStatus = "ONLINE"|"OFFLINE"|"AWAITING_CREDENTIALS"|"NOT_AVAILABLE"|"ERROR"|string;
@@ -1129,6 +1150,10 @@ declare namespace Panorama {
      * The job's ID.
      */
     JobId?: JobId;
+    /**
+     * The job's type.
+     */
+    JobType?: JobType;
   }
   export interface DeviceJobConfig {
     /**
@@ -1139,6 +1164,7 @@ declare namespace Panorama {
   export type DeviceJobList = DeviceJob[];
   export type DeviceList = Device[];
   export type DeviceName = string;
+  export type DeviceReportedStatus = "STOPPING"|"STOPPED"|"STOP_ERROR"|"REMOVAL_FAILED"|"REMOVAL_IN_PROGRESS"|"STARTING"|"RUNNING"|"INSTALL_ERROR"|"LAUNCHED"|"LAUNCH_ERROR"|"INSTALL_IN_PROGRESS"|string;
   export type DeviceSerialNumber = string;
   export type DeviceStatus = "AWAITING_PROVISIONING"|"PENDING"|"SUCCEEDED"|"FAILED"|"ERROR"|"DELETING"|string;
   export type DeviceType = "PANORAMA_APPLIANCE_DEVELOPER_KIT"|"PANORAMA_APPLIANCE"|string;
@@ -1198,7 +1224,7 @@ declare namespace Panorama {
   }
   export type JobResourceType = "PACKAGE"|string;
   export type JobTagsList = JobResourceTags[];
-  export type JobType = "OTA"|string;
+  export type JobType = "OTA"|"REBOOT"|string;
   export type LastUpdatedTime = Date;
   export type LatestAlternateSoftware = string;
   export interface LatestDeviceJob {
@@ -1206,6 +1232,10 @@ declare namespace Panorama {
      * The target version of the device software.
      */
     ImageVersion?: ImageVersion;
+    /**
+     * The job's type.
+     */
+    JobType?: JobType;
     /**
      * Status of the latest device job.
      */
@@ -1646,7 +1676,7 @@ declare namespace Panorama {
     PackageVersion?: NodePackageVersion;
   }
   export type NodeInstanceId = string;
-  export type NodeInstanceStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|string;
+  export type NodeInstanceStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|"PAUSED"|string;
   export type NodeInstances = NodeInstance[];
   export interface NodeInterface {
     /**
@@ -1678,6 +1708,18 @@ declare namespace Panorama {
   export type NodePackageName = string;
   export type NodePackagePatchVersion = string;
   export type NodePackageVersion = string;
+  export interface NodeSignal {
+    /**
+     * The camera node's name, from the application manifest.
+     */
+    NodeInstanceId: NodeInstanceId;
+    /**
+     * The signal value.
+     */
+    Signal: NodeSignalValue;
+  }
+  export type NodeSignalList = NodeSignal[];
+  export type NodeSignalValue = "PAUSE"|"RESUME"|string;
   export type NodesList = Node[];
   export interface NtpPayload {
     /**
@@ -1919,7 +1961,27 @@ declare namespace Panorama {
   }
   export interface RemoveApplicationInstanceResponse {
   }
+  export interface ReportedRuntimeContextState {
+    /**
+     * The application's desired state.
+     */
+    DesiredState: DesiredState;
+    /**
+     * The application's reported status.
+     */
+    DeviceReportedStatus: DeviceReportedStatus;
+    /**
+     * When the device reported the application's state.
+     */
+    DeviceReportedTime: TimeStamp;
+    /**
+     * The device's name.
+     */
+    RuntimeContextName: RuntimeContextName;
+  }
+  export type ReportedRuntimeContextStates = ReportedRuntimeContextState[];
   export type ResourceArn = string;
+  export type RuntimeContextName = string;
   export type RuntimeRoleArn = string;
   export interface S3Location {
     /**
@@ -1934,6 +1996,22 @@ declare namespace Panorama {
      * The bucket's Region.
      */
     Region?: Region;
+  }
+  export interface SignalApplicationInstanceNodeInstancesRequest {
+    /**
+     * An application instance ID.
+     */
+    ApplicationInstanceId: ApplicationInstanceId;
+    /**
+     * A list of signals.
+     */
+    NodeSignals: NodeSignalList;
+  }
+  export interface SignalApplicationInstanceNodeInstancesResponse {
+    /**
+     * An application instance ID.
+     */
+    ApplicationInstanceId: ApplicationInstanceId;
   }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StaticIpConnectionInfo {

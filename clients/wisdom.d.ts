@@ -188,14 +188,6 @@ declare class Wisdom extends Service {
    */
   notifyRecommendationsReceived(callback?: (err: AWSError, data: Wisdom.Types.NotifyRecommendationsReceivedResponse) => void): Request<Wisdom.Types.NotifyRecommendationsReceivedResponse, AWSError>;
   /**
-   * Submits feedback to Wisdom. The feedback is used to improve future recommendations from GetRecommendations or results from QueryAssistant. Feedback can be resubmitted up to 6 hours after submission. 
-   */
-  putFeedback(params: Wisdom.Types.PutFeedbackRequest, callback?: (err: AWSError, data: Wisdom.Types.PutFeedbackResponse) => void): Request<Wisdom.Types.PutFeedbackResponse, AWSError>;
-  /**
-   * Submits feedback to Wisdom. The feedback is used to improve future recommendations from GetRecommendations or results from QueryAssistant. Feedback can be resubmitted up to 6 hours after submission. 
-   */
-  putFeedback(callback?: (err: AWSError, data: Wisdom.Types.PutFeedbackResponse) => void): Request<Wisdom.Types.PutFeedbackResponse, AWSError>;
-  /**
    * Performs a manual search against the specified assistant. To retrieve recommendations for an assistant, use GetRecommendations. 
    */
   queryAssistant(params: Wisdom.Types.QueryAssistantRequest, callback?: (err: AWSError, data: Wisdom.Types.QueryAssistantResponse) => void): Request<Wisdom.Types.QueryAssistantResponse, AWSError>;
@@ -787,12 +779,6 @@ declare namespace Wisdom {
      */
     text?: SensitiveString;
   }
-  export interface FeedbackData {
-    /**
-     * The relevance of the target this feedback is for.
-     */
-    relevance: Relevance;
-  }
   export interface Filter {
     /**
      * The field on which to filter.
@@ -1182,46 +1168,6 @@ declare namespace Wisdom {
     recommendationIds?: RecommendationIdList;
   }
   export type ObjectFieldsList = NonEmptyString[];
-  export interface PutFeedbackRequest {
-    /**
-     * The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
-     */
-    assistantId: UuidOrArn;
-    /**
-     * The feedback.
-     */
-    feedback: FeedbackData;
-    /**
-     * The identifier of a recommendation. or The identifier of the result data.
-     */
-    targetId: String;
-    /**
-     * The type of the targetId for which The feedback. is targeted.
-     */
-    targetType: TargetType;
-  }
-  export interface PutFeedbackResponse {
-    /**
-     * The Amazon Resource Name (ARN) of the Wisdom assistant.
-     */
-    assistantArn: UuidOrArn;
-    /**
-     * The identifier of the Wisdom assistant.
-     */
-    assistantId: Uuid;
-    /**
-     * The feedback.
-     */
-    feedback: FeedbackData;
-    /**
-     * The identifier of a recommendation. or The identifier of the result data.
-     */
-    targetId: Uuid;
-    /**
-     * The type of the targetId for which The feedback. is targeted.
-     */
-    targetType: TargetType;
-  }
   export interface QueryAssistantRequest {
     /**
      * The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -1314,7 +1260,6 @@ declare namespace Wisdom {
   export type RecommendationTriggerList = RecommendationTrigger[];
   export type RecommendationTriggerType = "QUERY"|string;
   export type RecommendationType = "KNOWLEDGE_CONTENT"|string;
-  export type Relevance = "HELPFUL"|"NOT_HELPFUL"|string;
   export type RelevanceLevel = "HIGH"|"MEDIUM"|"LOW"|string;
   export type RelevanceScore = number;
   export interface RemoveKnowledgeBaseTemplateUriRequest {
@@ -1507,7 +1452,6 @@ declare namespace Wisdom {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
-  export type TargetType = "RECOMMENDATION"|"RESULT"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.

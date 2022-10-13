@@ -919,6 +919,10 @@ declare namespace AmplifyUIBuilder {
      */
     descriptiveText?: String;
     /**
+     * Specifies whether to render the field as an array. This property is ignored if the dataSourceType for the form is a Data Store.
+     */
+    isArray?: Boolean;
+    /**
      * The maximum value to display for the field.
      */
     maxValue?: Float;

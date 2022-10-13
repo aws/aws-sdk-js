@@ -6711,6 +6711,14 @@ declare namespace Connect {
      * The email address. If you are using SAML for identity management and include this parameter, an error is returned.
      */
     Email?: Email;
+    /**
+     * The user's secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.
+     */
+    SecondaryEmail?: Email;
+    /**
+     * The user's mobile number.
+     */
+    Mobile?: PhoneNumber;
   }
   export interface UserIdentityInfoLite {
     /**
