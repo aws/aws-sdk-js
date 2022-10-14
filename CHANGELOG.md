@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1232.0-->
+<!--LATEST=2.1233.0-->
 <!--ENTRYINSERT-->
+
+## 2.1233.0
+* feature: MediaConvert: MediaConvert now supports specifying the minimum percentage of the HRD buffer available at the end of each encoded video segment.
 
 ## 2.1232.0
 * bugfix: marketplacecatalog: Enable CORS for marketplacecatalog API
