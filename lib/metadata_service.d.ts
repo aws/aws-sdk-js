@@ -18,6 +18,10 @@ export class MetadataService {
         callback: (err: AWSError, data: string) => void
     ): void;
     /**
+     * Fetches metadata token used for authenticating against the instance metadata service.
+     */
+    fetchMetadataToken(callback: (err: AWSError, token: string) => void): void;
+    /**
      * 169.254.169.254
      */
     static host: string
