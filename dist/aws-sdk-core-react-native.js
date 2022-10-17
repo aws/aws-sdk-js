@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1233.0',
+	  VERSION: '2.1234.0',
 
 	  /**
 	   * @api private
@@ -8620,7 +8620,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (array) {
 	          str = str.split('\n').map(function(line) {
 	            return '  ' + line;
-	          }).join('\n').substr(2);
+	          }).join('\n').slice(2);
 	        } else {
 	          str = '\n' + str.split('\n').map(function(line) {
 	            return '   ' + line;
@@ -8637,7 +8637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    name = JSON.stringify('' + key);
 	    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-	      name = name.substr(1, name.length - 2);
+	      name = name.slice(1, -1);
 	      name = ctx.stylize(name, 'name');
 	    } else {
 	      name = name.replace(/'/g, "\\'")

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1233.0-->
+<!--LATEST=2.1234.0-->
 <!--ENTRYINSERT-->
+
+## 2.1234.0
+* feature: Greengrass: This change allows customers to specify FunctionRuntimeOverride in FunctionDefinitionVersion. This configuration can be used if the runtime on the device is different from the AWS Lambda runtime specified for that function.
+* feature: SageMaker: This release adds support for C7g, C6g, C6gd, C6gn, M6g, M6gd, R6g, and R6gn Graviton instance types in Amazon SageMaker Inference.
 
 ## 2.1233.0
 * feature: MediaConvert: MediaConvert now supports specifying the minimum percentage of the HRD buffer available at the end of each encoded video segment.
