@@ -834,7 +834,7 @@ declare namespace FraudDetector {
      */
     eventTypeName: identifier;
     /**
-     * The ARN of the IAM role created for Amazon S3 bucket that holds your data file. The IAM role must have read and write permissions to both input and output S3 buckets.
+     * The ARN of the IAM role created for Amazon S3 bucket that holds your data file. The IAM role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket. For more information about bucket permissions, see User policy examples in the Amazon S3 User Guide.
      */
     iamRoleArn: iamRoleArn;
     /**
@@ -870,7 +870,7 @@ declare namespace FraudDetector {
      */
     detectorVersion?: wholeNumberVersionString;
     /**
-     * The ARN of the IAM role to use for this job request.
+     * The ARN of the IAM role to use for this job request. The IAM Role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket. For more information about bucket permissions, see User policy examples in the Amazon S3 User Guide.
      */
     iamRoleArn: iamRoleArn;
     /**
@@ -2776,7 +2776,7 @@ declare namespace FraudDetector {
   }
   export interface PutKMSEncryptionKeyRequest {
     /**
-     * The KMS encryption key ARN.
+     * The KMS encryption key ARN. The KMS key must be single-Region key. Amazon Fraud Detector does not support multi-Region KMS key.
      */
     kmsEncryptionKeyArn: KmsEncryptionKeyArn;
   }
@@ -3103,7 +3103,7 @@ declare namespace FraudDetector {
      */
     detectorVersionId: wholeNumberVersionString;
     /**
-     * The new status.
+     * The new status. The only supported values are ACTIVE and INACTIVE 
      */
     status: DetectorVersionStatus;
   }

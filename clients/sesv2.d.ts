@@ -44,11 +44,11 @@ declare class SESV2 extends Service {
    */
   createContactList(callback?: (err: AWSError, data: SESV2.Types.CreateContactListResponse) => void): Request<SESV2.Types.CreateContactListResponse, AWSError>;
   /**
-   * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Creates a new custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createCustomVerificationEmailTemplate(params: SESV2.Types.CreateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.CreateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.CreateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Creates a new custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.CreateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.CreateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class SESV2 extends Service {
    */
   deleteContactList(callback?: (err: AWSError, data: SESV2.Types.DeleteContactListResponse) => void): Request<SESV2.Types.DeleteContactListResponse, AWSError>;
   /**
-   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteCustomVerificationEmailTemplate(params: SESV2.Types.DeleteCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.DeleteCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   deleteCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.DeleteCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.DeleteCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class SESV2 extends Service {
    */
   getContactList(callback?: (err: AWSError, data: SESV2.Types.GetContactListResponse) => void): Request<SESV2.Types.GetContactListResponse, AWSError>;
   /**
-   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   getCustomVerificationEmailTemplate(params: SESV2.Types.GetCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.GetCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.GetCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   getCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.GetCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.GetCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -243,6 +243,14 @@ declare class SESV2 extends Service {
    * Get information about a dedicated IP address, including the name of the dedicated IP pool that it's associated with, as well information about the automatic warm-up process for the address.
    */
   getDedicatedIp(callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpResponse) => void): Request<SESV2.Types.GetDedicatedIpResponse, AWSError>;
+  /**
+   * Retrieve information about the dedicated pool.
+   */
+  getDedicatedIpPool(params: SESV2.Types.GetDedicatedIpPoolRequest, callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpPoolResponse) => void): Request<SESV2.Types.GetDedicatedIpPoolResponse, AWSError>;
+  /**
+   * Retrieve information about the dedicated pool.
+   */
+  getDedicatedIpPool(callback?: (err: AWSError, data: SESV2.Types.GetDedicatedIpPoolResponse) => void): Request<SESV2.Types.GetDedicatedIpPoolResponse, AWSError>;
   /**
    * List the dedicated IP addresses that are associated with your Amazon Web Services account.
    */
@@ -348,11 +356,11 @@ declare class SESV2 extends Service {
    */
   listContacts(callback?: (err: AWSError, data: SESV2.Types.ListContactsResponse) => void): Request<SESV2.Types.ListContactsResponse, AWSError>;
   /**
-   * Lists the existing custom verification email templates for your account in the current Amazon Web Services Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the existing custom verification email templates for your account in the current Amazon Web Services Region. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listCustomVerificationEmailTemplates(params: SESV2.Types.ListCustomVerificationEmailTemplatesRequest, callback?: (err: AWSError, data: SESV2.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SESV2.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
-   * Lists the existing custom verification email templates for your account in the current Amazon Web Services Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Lists the existing custom verification email templates for your account in the current Amazon Web Services Region. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   listCustomVerificationEmailTemplates(callback?: (err: AWSError, data: SESV2.Types.ListCustomVerificationEmailTemplatesResponse) => void): Request<SESV2.Types.ListCustomVerificationEmailTemplatesResponse, AWSError>;
   /**
@@ -572,11 +580,11 @@ declare class SESV2 extends Service {
    */
   sendBulkEmail(callback?: (err: AWSError, data: SESV2.Types.SendBulkEmailResponse) => void): Request<SESV2.Types.SendBulkEmailResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account in the current Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(params: SESV2.Types.SendCustomVerificationEmailRequest, callback?: (err: AWSError, data: SESV2.Types.SendCustomVerificationEmailResponse) => void): Request<SESV2.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
-   * Adds an email address to the list of identities for your Amazon SES account in the current Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Adds an email address to the list of identities for your Amazon SES account in the current Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address. To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   sendCustomVerificationEmail(callback?: (err: AWSError, data: SESV2.Types.SendCustomVerificationEmailResponse) => void): Request<SESV2.Types.SendCustomVerificationEmailResponse, AWSError>;
   /**
@@ -636,11 +644,11 @@ declare class SESV2 extends Service {
    */
   updateContactList(callback?: (err: AWSError, data: SESV2.Types.UpdateContactListResponse) => void): Request<SESV2.Types.UpdateContactListResponse, AWSError>;
   /**
-   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateCustomVerificationEmailTemplate(params: SESV2.Types.UpdateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.UpdateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
-   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
+   * Updates an existing custom verification email template. For more information about custom verification email templates, see Using custom verification email templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateCustomVerificationEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.UpdateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.UpdateCustomVerificationEmailTemplateResponse, AWSError>;
   /**
@@ -699,7 +707,7 @@ declare namespace SESV2 {
      */
     RblName?: RblName;
     /**
-     * The time when the blacklisting event occurred, shown in Unix time format.
+     * The time when the blacklisting event occurred.
      */
     ListingTime?: Timestamp;
     /**
@@ -777,7 +785,7 @@ declare namespace SESV2 {
      */
     DimensionValueSource: DimensionValueSource;
     /**
-     * The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email. This value has to meet the following criteria:   It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).   It can contain no more than 256 characters.  
+     * The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email. This value has to meet the following criteria:   Can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-), at signs (@), and periods (.).   It can contain no more than 256 characters.  
      */
     DefaultDimensionValue: DefaultDimensionValue;
   }
@@ -942,7 +950,7 @@ declare namespace SESV2 {
      */
     TemplateSubject: EmailTemplateSubject;
     /**
-     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom Verification Email Frequently Asked Questions in the Amazon SES Developer Guide.
+     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom verification email frequently asked questions in the Amazon SES Developer Guide.
      */
     TemplateContent: TemplateContent;
     /**
@@ -965,6 +973,10 @@ declare namespace SESV2 {
      * An object that defines the tags (keys and values) that you want to associate with the pool.
      */
     Tags?: TagList;
+    /**
+     * The type of scaling mode.
+     */
+    ScalingMode?: ScalingMode;
   }
   export interface CreateDedicatedIpPoolResponse {
   }
@@ -1131,6 +1143,16 @@ declare namespace SESV2 {
     PoolName?: PoolName;
   }
   export type DedicatedIpList = DedicatedIp[];
+  export interface DedicatedIpPool {
+    /**
+     * The name of the dedicated IP pool.
+     */
+    PoolName: PoolName;
+    /**
+     * The type of the dedicated IP pool.    STANDARD – A dedicated IP pool where the customer can control which IPs are part of the pool.    MANAGED – A dedicated IP pool where the reputation and number of IPs is automatically managed by Amazon SES.  
+     */
+    ScalingMode: ScalingMode;
+  }
   export type DefaultDimensionValue = string;
   export interface DeleteConfigurationSetEventDestinationRequest {
     /**
@@ -1243,7 +1265,7 @@ declare namespace SESV2 {
      */
     FromEmailAddress?: EmailAddress;
     /**
-     * The date and time when the predictive inbox placement test was created, in Unix time format.
+     * The date and time when the predictive inbox placement test was created.
      */
     CreateDate?: Timestamp;
     /**
@@ -1354,11 +1376,11 @@ declare namespace SESV2 {
      */
     SendingIps?: IpList;
     /**
-     * The first time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
+     * The first time when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
      */
     FirstSeenDateTime?: Timestamp;
     /**
-     * The last time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
+     * The last time when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
      */
     LastSeenDateTime?: Timestamp;
     /**
@@ -1397,7 +1419,7 @@ declare namespace SESV2 {
      */
     Domain?: Domain;
     /**
-     * The date, in Unix time format, when you enabled the Deliverability dashboard for the domain.
+     * The date when you enabled the Deliverability dashboard for the domain.
      */
     SubscriptionStartDate?: Timestamp;
     /**
@@ -1755,6 +1777,18 @@ declare namespace SESV2 {
      */
     FailureRedirectionURL?: FailureRedirectionURL;
   }
+  export interface GetDedicatedIpPoolRequest {
+    /**
+     * The name of the dedicated IP pool to retrieve.
+     */
+    PoolName: PoolName;
+  }
+  export interface GetDedicatedIpPoolResponse {
+    /**
+     * An object that contains information about a dedicated IP pool.
+     */
+    DedicatedIpPool?: DedicatedIpPool;
+  }
   export interface GetDedicatedIpRequest {
     /**
      * The IP address that you want to obtain more information about. The value you specify has to be a dedicated IP address that's assocaited with your Amazon Web Services account.
@@ -1799,7 +1833,7 @@ declare namespace SESV2 {
      */
     DashboardEnabled: Enabled;
     /**
-     * The date, in Unix time format, when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.
+     * The date when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.
      */
     SubscriptionExpiryDate?: Timestamp;
     /**
@@ -1930,6 +1964,10 @@ declare namespace SESV2 {
      * The configuration set used by default when sending from this identity.
      */
     ConfigurationSetName?: ConfigurationSetName;
+    /**
+     * The verification status of the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.    NOT_STARTED – The verification process hasn't been initiated for the identity.  
+     */
+    VerificationStatus?: VerificationStatus;
   }
   export interface GetEmailTemplateRequest {
     /**
@@ -2017,6 +2055,10 @@ declare namespace SESV2 {
      * Indicates whether or not you can send email from the identity. An identity is an email address or domain that you send email from. Before you can send email from an identity, you have to demostrate that you own the identity, and that you authorize Amazon SES to send email from that identity.
      */
     SendingEnabled?: Enabled;
+    /**
+     * The verification status of the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.    NOT_STARTED – The verification process hasn't been initiated for the identity.  
+     */
+    VerificationStatus?: VerificationStatus;
   }
   export type IdentityInfoList = IdentityInfo[];
   export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
@@ -2050,6 +2092,14 @@ declare namespace SESV2 {
      * The date and time when the import job was created.
      */
     CreatedTimestamp?: Timestamp;
+    /**
+     * The current number of records processed.
+     */
+    ProcessedRecordsCount?: ProcessedRecordsCount;
+    /**
+     * The number of records that failed processing because of invalid input or other reasons.
+     */
+    FailedRecordsCount?: FailedRecordsCount;
   }
   export type ImportJobSummaryList = ImportJobSummary[];
   export interface InboxPlacementTrackingOption {
@@ -2230,11 +2280,11 @@ declare namespace SESV2 {
   }
   export interface ListDomainDeliverabilityCampaignsRequest {
     /**
-     * The first day, in Unix time format, that you want to obtain deliverability data for.
+     * The first day that you want to obtain deliverability data for.
      */
     StartDate: Timestamp;
     /**
-     * The last day, in Unix time format, that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the StartDate parameter.
+     * The last day that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the StartDate parameter.
      */
     EndDate: Timestamp;
     /**
@@ -2343,11 +2393,11 @@ declare namespace SESV2 {
      */
     Reasons?: SuppressionListReasons;
     /**
-     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list after a specific date. The date that you specify should be in Unix time format.
+     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list after a specific date.
      */
     StartDate?: Timestamp;
     /**
-     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list before a specific date. The date that you specify should be in Unix time format.
+     * Used to filter the list of suppressed email destinations so that it only includes addresses that were added to the list before a specific date.
      */
     EndDate?: Timestamp;
     /**
@@ -2391,7 +2441,7 @@ declare namespace SESV2 {
      */
     MailFromDomainStatus: MailFromDomainStatus;
     /**
-     * The action to take if the required MX record can't be found when you send an email. When you set this value to UseDefaultValue, the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email. These behaviors are taken when the custom MAIL FROM domain configuration is in the Pending, Failed, and TemporaryFailure states.
+     * The action to take if the required MX record can't be found when you send an email. When you set this value to USE_DEFAULT_VALUE, the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to REJECT_MESSAGE, the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email. These behaviors are taken when the custom MAIL FROM domain configuration is in the Pending, Failed, and TemporaryFailure states.
      */
     BehaviorOnMxFailure: BehaviorOnMxFailure;
   }
@@ -2763,6 +2813,7 @@ declare namespace SESV2 {
   }
   export type ReviewStatus = "PENDING"|"FAILED"|"GRANTED"|"DENIED"|string;
   export type S3Url = string;
+  export type ScalingMode = "STANDARD"|"MANAGED"|string;
   export type Selector = string;
   export interface SendBulkEmailRequest {
     /**
@@ -2878,7 +2929,7 @@ declare namespace SESV2 {
   }
   export interface SendQuota {
     /**
-     * The maximum number of emails that you can send in the current Amazon Web Services Region over a 24-hour period. This value is also called your sending quota.
+     * The maximum number of emails that you can send in the current Amazon Web Services Region over a 24-hour period. A value of -1 signifies an unlimited quota. (This value is also referred to as your sending quota.)
      */
     Max24HourSend?: Max24HourSend;
     /**
@@ -3160,7 +3211,7 @@ declare namespace SESV2 {
      */
     TemplateSubject: EmailTemplateSubject;
     /**
-     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom Verification Email Frequently Asked Questions in the Amazon SES Developer Guide.
+     * The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see Custom verification email frequently asked questions in the Amazon SES Developer Guide.
      */
     TemplateContent: TemplateContent;
     /**
@@ -3204,6 +3255,7 @@ declare namespace SESV2 {
   }
   export type UseCaseDescription = string;
   export type UseDefaultIfPreferenceUnavailable = boolean;
+  export type VerificationStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type Volume = number;
   export interface VolumeStatistics {
     /**

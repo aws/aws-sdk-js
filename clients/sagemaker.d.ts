@@ -2986,6 +2986,20 @@ declare namespace SageMaker {
     Alarms?: AlarmList;
   }
   export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
+  export interface BatchDataCaptureConfig {
+    /**
+     * The Amazon S3 location being used to capture the data.
+     */
+    DestinationS3Uri: S3Uri;
+    /**
+     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the batch transform job. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * Flag that indicates whether to append inference id to the output.
+     */
+    GenerateInferenceId?: Boolean;
+  }
   export interface BatchDescribeModelPackageError {
     /**
      * 
@@ -3045,6 +3059,52 @@ declare namespace SageMaker {
     ModelApprovalStatus?: ModelApprovalStatus;
   }
   export type BatchStrategy = "MultiRecord"|"SingleRecord"|string;
+  export interface BatchTransformInput {
+    /**
+     * The Amazon S3 location being used to capture the data.
+     */
+    DataCapturedDestinationS3Uri: DestinationS3Uri;
+    /**
+     * The dataset format for your batch transform job.
+     */
+    DatasetFormat: MonitoringDatasetFormat;
+    /**
+     * Path to the filesystem where the batch transform data is available to the container.
+     */
+    LocalPath: ProcessingLocalPath;
+    /**
+     * Whether the Pipe or File is used as the input mode for transferring data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
+     */
+    S3InputMode?: ProcessingS3InputMode;
+    /**
+     * Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defaults to FullyReplicated 
+     */
+    S3DataDistributionType?: ProcessingS3DataDistributionType;
+    /**
+     * The attributes of the input data that are the input features.
+     */
+    FeaturesAttribute?: String;
+    /**
+     * The attribute of the input data that represents the ground truth label.
+     */
+    InferenceAttribute?: String;
+    /**
+     * In a classification problem, the attribute that represents the class probability.
+     */
+    ProbabilityAttribute?: String;
+    /**
+     * The threshold for the class probability to be evaluated as a positive result.
+     */
+    ProbabilityThresholdAttribute?: ProbabilityThresholdAttribute;
+    /**
+     * If specified, monitoring jobs substract this time from the start time. For information about using offsets for scheduling monitoring jobs, see Schedule Model Quality Monitoring Jobs.
+     */
+    StartTimeOffset?: MonitoringTimeOffsetString;
+    /**
+     * If specified, monitoring jobs substract this time from the end time. For information about using offsets for scheduling monitoring jobs, see Schedule Model Quality Monitoring Jobs.
+     */
+    EndTimeOffset?: MonitoringTimeOffsetString;
+  }
   export interface Bias {
     /**
      * The bias report for a model
@@ -5185,6 +5245,10 @@ declare namespace SageMaker {
      */
     TransformOutput: TransformOutput;
     /**
+     * Configuration to control how SageMaker captures inference data.
+     */
+    DataCaptureConfig?: BatchDataCaptureConfig;
+    /**
      * Describes the resources, including ML instance types and ML instance count, to use for the transform job.
      */
     TransformResources: TransformResources;
@@ -5503,7 +5567,11 @@ declare namespace SageMaker {
     StatisticsResource?: MonitoringStatisticsResource;
   }
   export interface DataQualityJobInput {
-    EndpointInput: EndpointInput;
+    EndpointInput?: EndpointInput;
+    /**
+     * Input object for the batch transform job.
+     */
+    BatchTransformInput?: BatchTransformInput;
   }
   export interface DataSource {
     /**
@@ -8526,6 +8594,10 @@ declare namespace SageMaker {
      * Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.
      */
     TransformOutput?: TransformOutput;
+    /**
+     * Configuration to control how SageMaker captures inference data.
+     */
+    DataCaptureConfig?: BatchDataCaptureConfig;
     /**
      * Describes the resources, including ML instance types and ML instance count, to use for the transform job.
      */
@@ -13840,7 +13912,11 @@ declare namespace SageMaker {
     ConstraintsResource?: MonitoringConstraintsResource;
   }
   export interface ModelBiasJobInput {
-    EndpointInput: EndpointInput;
+    EndpointInput?: EndpointInput;
+    /**
+     * Input object for the batch transform job.
+     */
+    BatchTransformInput?: BatchTransformInput;
     /**
      * Location of ground truth labels to use in model bias job.
      */
@@ -13921,7 +13997,11 @@ declare namespace SageMaker {
     ConstraintsResource?: MonitoringConstraintsResource;
   }
   export interface ModelExplainabilityJobInput {
-    EndpointInput: EndpointInput;
+    EndpointInput?: EndpointInput;
+    /**
+     * Input object for the batch transform job.
+     */
+    BatchTransformInput?: BatchTransformInput;
   }
   export interface ModelInput {
     /**
@@ -14340,7 +14420,11 @@ declare namespace SageMaker {
     ConstraintsResource?: MonitoringConstraintsResource;
   }
   export interface ModelQualityJobInput {
-    EndpointInput: EndpointInput;
+    EndpointInput?: EndpointInput;
+    /**
+     * Input object for the batch transform job.
+     */
+    BatchTransformInput?: BatchTransformInput;
     /**
      * The ground truth label provided for the model.
      */
@@ -14429,6 +14513,26 @@ declare namespace SageMaker {
     S3Uri?: S3Uri;
   }
   export type MonitoringContainerArguments = ContainerArgument[];
+  export interface MonitoringCsvDatasetFormat {
+    /**
+     * Indicates if the CSV data has a header.
+     */
+    Header?: Boolean;
+  }
+  export interface MonitoringDatasetFormat {
+    /**
+     * The CSV dataset used in the monitoring job.
+     */
+    Csv?: MonitoringCsvDatasetFormat;
+    /**
+     * The JSON dataset used in the monitoring job
+     */
+    Json?: MonitoringJsonDatasetFormat;
+    /**
+     * The Parquet dataset used in the monitoring job
+     */
+    Parquet?: MonitoringParquetDatasetFormat;
+  }
   export type MonitoringEnvironmentMap = {[key: string]: ProcessingEnvironmentValue};
   export type MonitoringExecutionSortKey = "CreationTime"|"ScheduledTime"|"Status"|string;
   export interface MonitoringExecutionSummary {
@@ -14484,7 +14588,11 @@ declare namespace SageMaker {
     /**
      * The endpoint for a monitoring job.
      */
-    EndpointInput: EndpointInput;
+    EndpointInput?: EndpointInput;
+    /**
+     * Input object for the batch transform job.
+     */
+    BatchTransformInput?: BatchTransformInput;
   }
   export type MonitoringInputs = MonitoringInput[];
   export interface MonitoringJobDefinition {
@@ -14547,6 +14655,12 @@ declare namespace SageMaker {
     EndpointName: EndpointName;
   }
   export type MonitoringJobDefinitionSummaryList = MonitoringJobDefinitionSummary[];
+  export interface MonitoringJsonDatasetFormat {
+    /**
+     * Indicates if the file should be read as a json object per line. 
+     */
+    Line?: Boolean;
+  }
   export type MonitoringMaxRuntimeInSeconds = number;
   export interface MonitoringNetworkConfig {
     /**
@@ -14576,6 +14690,8 @@ declare namespace SageMaker {
     KmsKeyId?: KmsKeyId;
   }
   export type MonitoringOutputs = MonitoringOutput[];
+  export interface MonitoringParquetDatasetFormat {
+  }
   export type MonitoringProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression"|string;
   export interface MonitoringResources {
     /**

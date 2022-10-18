@@ -6156,6 +6156,27 @@
         "AWS/Textract/AnalyzeDocument/Forms/V1"
       ]
     },
+    "BatchDataCaptureConfig": {
+      "type": "structure",
+      "required": [
+        "DestinationS3Uri"
+      ],
+      "members": {
+        "DestinationS3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>The Amazon S3 location being used to capture the data.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the batch transform job.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul>"
+        },
+        "GenerateInferenceId": {
+          "shape": "Boolean",
+          "documentation": "<p>Flag that indicates whether to append inference id to the output.</p>"
+        }
+      },
+      "documentation": "<p>Configuration to control how SageMaker captures inference data for batch transform jobs.</p>"
+    },
     "BatchDescribeModelPackageError": {
       "type": "structure",
       "required": [
@@ -6258,6 +6279,61 @@
         "MultiRecord",
         "SingleRecord"
       ]
+    },
+    "BatchTransformInput": {
+      "type": "structure",
+      "required": [
+        "DataCapturedDestinationS3Uri",
+        "DatasetFormat",
+        "LocalPath"
+      ],
+      "members": {
+        "DataCapturedDestinationS3Uri": {
+          "shape": "DestinationS3Uri",
+          "documentation": "<p>The Amazon S3 location being used to capture the data.</p>"
+        },
+        "DatasetFormat": {
+          "shape": "MonitoringDatasetFormat",
+          "documentation": "<p>The dataset format for your batch transform job.</p>"
+        },
+        "LocalPath": {
+          "shape": "ProcessingLocalPath",
+          "documentation": "<p>Path to the filesystem where the batch transform data is available to the container.</p>"
+        },
+        "S3InputMode": {
+          "shape": "ProcessingS3InputMode",
+          "documentation": "<p>Whether the <code>Pipe</code> or <code>File</code> is used as the input mode for transferring data for the monitoring job. <code>Pipe</code> mode is recommended for large datasets. <code>File</code> mode is useful for small files that fit in memory. Defaults to <code>File</code>.</p>"
+        },
+        "S3DataDistributionType": {
+          "shape": "ProcessingS3DataDistributionType",
+          "documentation": "<p>Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defaults to <code>FullyReplicated</code> </p>"
+        },
+        "FeaturesAttribute": {
+          "shape": "String",
+          "documentation": "<p>The attributes of the input data that are the input features.</p>"
+        },
+        "InferenceAttribute": {
+          "shape": "String",
+          "documentation": "<p>The attribute of the input data that represents the ground truth label.</p>"
+        },
+        "ProbabilityAttribute": {
+          "shape": "String",
+          "documentation": "<p>In a classification problem, the attribute that represents the class probability.</p>"
+        },
+        "ProbabilityThresholdAttribute": {
+          "shape": "ProbabilityThresholdAttribute",
+          "documentation": "<p>The threshold for the class probability to be evaluated as a positive result.</p>"
+        },
+        "StartTimeOffset": {
+          "shape": "MonitoringTimeOffsetString",
+          "documentation": "<p>If specified, monitoring jobs substract this time from the start time. For information about using offsets for scheduling monitoring jobs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html\">Schedule Model Quality Monitoring Jobs</a>.</p>"
+        },
+        "EndTimeOffset": {
+          "shape": "MonitoringTimeOffsetString",
+          "documentation": "<p>If specified, monitoring jobs substract this time from the end time. For information about using offsets for scheduling monitoring jobs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html\">Schedule Model Quality Monitoring Jobs</a>.</p>"
+        }
+      },
+      "documentation": "<p>Input object for the batch transform job.</p>"
     },
     "Bias": {
       "type": "structure",
@@ -9726,6 +9802,10 @@
           "shape": "TransformOutput",
           "documentation": "<p>Describes the results of the transform job.</p>"
         },
+        "DataCaptureConfig": {
+          "shape": "BatchDataCaptureConfig",
+          "documentation": "<p>Configuration to control how SageMaker captures inference data.</p>"
+        },
         "TransformResources": {
           "shape": "TransformResources",
           "documentation": "<p>Describes the resources, including ML instance types and ML instance count, to use for the transform job.</p>"
@@ -10229,12 +10309,13 @@
     },
     "DataQualityJobInput": {
       "type": "structure",
-      "required": [
-        "EndpointInput"
-      ],
       "members": {
         "EndpointInput": {
           "shape": "EndpointInput"
+        },
+        "BatchTransformInput": {
+          "shape": "BatchTransformInput",
+          "documentation": "<p>Input object for the batch transform job.</p>"
         }
       },
       "documentation": "<p>The input for the data quality monitoring job. Currently endpoints are supported for input.</p>"
@@ -14409,6 +14490,10 @@
         "TransformOutput": {
           "shape": "TransformOutput",
           "documentation": "<p>Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the transform job.</p>"
+        },
+        "DataCaptureConfig": {
+          "shape": "BatchDataCaptureConfig",
+          "documentation": "<p>Configuration to control how SageMaker captures inference data.</p>"
         },
         "TransformResources": {
           "shape": "TransformResources",
@@ -22660,12 +22745,15 @@
     "ModelBiasJobInput": {
       "type": "structure",
       "required": [
-        "EndpointInput",
         "GroundTruthS3Input"
       ],
       "members": {
         "EndpointInput": {
           "shape": "EndpointInput"
+        },
+        "BatchTransformInput": {
+          "shape": "BatchTransformInput",
+          "documentation": "<p>Input object for the batch transform job.</p>"
         },
         "GroundTruthS3Input": {
           "shape": "MonitoringGroundTruthS3Input",
@@ -22794,12 +22882,13 @@
     },
     "ModelExplainabilityJobInput": {
       "type": "structure",
-      "required": [
-        "EndpointInput"
-      ],
       "members": {
         "EndpointInput": {
           "shape": "EndpointInput"
+        },
+        "BatchTransformInput": {
+          "shape": "BatchTransformInput",
+          "documentation": "<p>Input object for the batch transform job.</p>"
         }
       },
       "documentation": "<p>Inputs for the model explainability job.</p>"
@@ -23479,12 +23568,15 @@
     "ModelQualityJobInput": {
       "type": "structure",
       "required": [
-        "EndpointInput",
         "GroundTruthS3Input"
       ],
       "members": {
         "EndpointInput": {
           "shape": "EndpointInput"
+        },
+        "BatchTransformInput": {
+          "shape": "BatchTransformInput",
+          "documentation": "<p>Input object for the batch transform job.</p>"
         },
         "GroundTruthS3Input": {
           "shape": "MonitoringGroundTruthS3Input",
@@ -23631,6 +23723,34 @@
       "max": 50,
       "min": 1
     },
+    "MonitoringCsvDatasetFormat": {
+      "type": "structure",
+      "members": {
+        "Header": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if the CSV data has a header.</p>"
+        }
+      },
+      "documentation": "<p>Represents the CSV dataset format used when running a monitoring job.</p>"
+    },
+    "MonitoringDatasetFormat": {
+      "type": "structure",
+      "members": {
+        "Csv": {
+          "shape": "MonitoringCsvDatasetFormat",
+          "documentation": "<p>The CSV dataset used in the monitoring job.</p>"
+        },
+        "Json": {
+          "shape": "MonitoringJsonDatasetFormat",
+          "documentation": "<p>The JSON dataset used in the monitoring job</p>"
+        },
+        "Parquet": {
+          "shape": "MonitoringParquetDatasetFormat",
+          "documentation": "<p>The Parquet dataset used in the monitoring job</p>"
+        }
+      },
+      "documentation": "<p>Represents the dataset format used when running a monitoring job.</p>"
+    },
     "MonitoringEnvironmentMap": {
       "type": "map",
       "key": {
@@ -23720,13 +23840,14 @@
     },
     "MonitoringInput": {
       "type": "structure",
-      "required": [
-        "EndpointInput"
-      ],
       "members": {
         "EndpointInput": {
           "shape": "EndpointInput",
           "documentation": "<p>The endpoint for a monitoring job.</p>"
+        },
+        "BatchTransformInput": {
+          "shape": "BatchTransformInput",
+          "documentation": "<p>Input object for the batch transform job.</p>"
         }
       },
       "documentation": "<p>The inputs for a monitoring job.</p>"
@@ -23840,6 +23961,16 @@
         "shape": "MonitoringJobDefinitionSummary"
       }
     },
+    "MonitoringJsonDatasetFormat": {
+      "type": "structure",
+      "members": {
+        "Line": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if the file should be read as a json object per line. </p>"
+        }
+      },
+      "documentation": "<p>Represents the JSON dataset format used when running a monitoring job.</p>"
+    },
     "MonitoringMaxRuntimeInSeconds": {
       "type": "integer",
       "max": 86400,
@@ -23899,6 +24030,11 @@
       },
       "max": 1,
       "min": 1
+    },
+    "MonitoringParquetDatasetFormat": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>Represents the Parquet dataset format used when running a monitoring job.</p>"
     },
     "MonitoringProblemType": {
       "type": "string",
