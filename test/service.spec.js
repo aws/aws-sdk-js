@@ -18,7 +18,7 @@
 
     beforeEach(function(done) {
       AwsQueryService = MockServiceFromApi({awsQueryCompatible: {}});
-      service = new AwsQueryService({maxRetries: 0})
+      service = new AwsQueryService({maxRetries: 0});
       return done();
     });
 
