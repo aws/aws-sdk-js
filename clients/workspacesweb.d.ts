@@ -36,6 +36,14 @@ declare class WorkSpacesWeb extends Service {
    */
   associateTrustStore(callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateTrustStoreResponse) => void): Request<WorkSpacesWeb.Types.AssociateTrustStoreResponse, AWSError>;
   /**
+   * Associates a user access logging settings resource with a web portal.
+   */
+  associateUserAccessLoggingSettings(params: WorkSpacesWeb.Types.AssociateUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Associates a user access logging settings resource with a web portal.
+   */
+  associateUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateUserAccessLoggingSettingsResponse, AWSError>;
+  /**
    * Associates a user settings resource with a web portal.
    */
   associateUserSettings(params: WorkSpacesWeb.Types.AssociateUserSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateUserSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateUserSettingsResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class WorkSpacesWeb extends Service {
    * Creates a trust store that can be associated with a web portal. A trust store contains certificate authority (CA) certificates. Once associated with a web portal, the browser in a streaming session will recognize certificates that have been issued using any of the CAs in the trust store. If your organization has internal websites that use certificates issued by private CAs, you should add the private CA certificate to the trust store. 
    */
   createTrustStore(callback?: (err: AWSError, data: WorkSpacesWeb.Types.CreateTrustStoreResponse) => void): Request<WorkSpacesWeb.Types.CreateTrustStoreResponse, AWSError>;
+  /**
+   * Creates a user access logging settings resource that can be associated with a web portal.
+   */
+  createUserAccessLoggingSettings(params: WorkSpacesWeb.Types.CreateUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.CreateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.CreateUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Creates a user access logging settings resource that can be associated with a web portal.
+   */
+  createUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.CreateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.CreateUserAccessLoggingSettingsResponse, AWSError>;
   /**
    * Creates a user settings resource that can be associated with a web portal. Once associated with a web portal, user settings control how users can transfer data between a streaming session and the their local devices. 
    */
@@ -132,6 +148,14 @@ declare class WorkSpacesWeb extends Service {
    */
   deleteTrustStore(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteTrustStoreResponse) => void): Request<WorkSpacesWeb.Types.DeleteTrustStoreResponse, AWSError>;
   /**
+   * Deletes user access logging settings.
+   */
+  deleteUserAccessLoggingSettings(params: WorkSpacesWeb.Types.DeleteUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.DeleteUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Deletes user access logging settings.
+   */
+  deleteUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.DeleteUserAccessLoggingSettingsResponse, AWSError>;
+  /**
    * Deletes user settings.
    */
   deleteUserSettings(params: WorkSpacesWeb.Types.DeleteUserSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteUserSettingsResponse) => void): Request<WorkSpacesWeb.Types.DeleteUserSettingsResponse, AWSError>;
@@ -163,6 +187,14 @@ declare class WorkSpacesWeb extends Service {
    * Disassociates a trust store from a web portal.
    */
   disassociateTrustStore(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateTrustStoreResponse) => void): Request<WorkSpacesWeb.Types.DisassociateTrustStoreResponse, AWSError>;
+  /**
+   * Disassociates user access logging settings from a web portal.
+   */
+  disassociateUserAccessLoggingSettings(params: WorkSpacesWeb.Types.DisassociateUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.DisassociateUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Disassociates user access logging settings from a web portal.
+   */
+  disassociateUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.DisassociateUserAccessLoggingSettingsResponse, AWSError>;
   /**
    * Disassociates user settings from a web portal.
    */
@@ -228,6 +260,14 @@ declare class WorkSpacesWeb extends Service {
    */
   getTrustStoreCertificate(callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetTrustStoreCertificateResponse) => void): Request<WorkSpacesWeb.Types.GetTrustStoreCertificateResponse, AWSError>;
   /**
+   * Gets user access logging settings.
+   */
+  getUserAccessLoggingSettings(params: WorkSpacesWeb.Types.GetUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.GetUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Gets user access logging settings.
+   */
+  getUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.GetUserAccessLoggingSettingsResponse, AWSError>;
+  /**
    * Gets user settings.
    */
   getUserSettings(params: WorkSpacesWeb.Types.GetUserSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetUserSettingsResponse) => void): Request<WorkSpacesWeb.Types.GetUserSettingsResponse, AWSError>;
@@ -292,6 +332,14 @@ declare class WorkSpacesWeb extends Service {
    */
   listTrustStores(callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListTrustStoresResponse) => void): Request<WorkSpacesWeb.Types.ListTrustStoresResponse, AWSError>;
   /**
+   * Retrieves a list of user access logging settings.
+   */
+  listUserAccessLoggingSettings(params: WorkSpacesWeb.Types.ListUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.ListUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Retrieves a list of user access logging settings.
+   */
+  listUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.ListUserAccessLoggingSettingsResponse, AWSError>;
+  /**
    * Retrieves a list of user settings.
    */
   listUserSettings(params: WorkSpacesWeb.Types.ListUserSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListUserSettingsResponse) => void): Request<WorkSpacesWeb.Types.ListUserSettingsResponse, AWSError>;
@@ -355,6 +403,14 @@ declare class WorkSpacesWeb extends Service {
    * Updates the trust store.
    */
   updateTrustStore(callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateTrustStoreResponse) => void): Request<WorkSpacesWeb.Types.UpdateTrustStoreResponse, AWSError>;
+  /**
+   * Updates the user access logging settings.
+   */
+  updateUserAccessLoggingSettings(params: WorkSpacesWeb.Types.UpdateUserAccessLoggingSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.UpdateUserAccessLoggingSettingsResponse, AWSError>;
+  /**
+   * Updates the user access logging settings.
+   */
+  updateUserAccessLoggingSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateUserAccessLoggingSettingsResponse) => void): Request<WorkSpacesWeb.Types.UpdateUserAccessLoggingSettingsResponse, AWSError>;
   /**
    * Updates the user settings.
    */
@@ -426,6 +482,26 @@ declare namespace WorkSpacesWeb {
      * The ARN of the trust store.
      */
     trustStoreArn: ARN;
+  }
+  export interface AssociateUserAccessLoggingSettingsRequest {
+    /**
+     * The ARN of the web portal.
+     */
+    portalArn: ARN;
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
+  }
+  export interface AssociateUserAccessLoggingSettingsResponse {
+    /**
+     * The ARN of the web portal.
+     */
+    portalArn: ARN;
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
   }
   export interface AssociateUserSettingsRequest {
     /**
@@ -661,6 +737,26 @@ declare namespace WorkSpacesWeb {
      */
     trustStoreArn: ARN;
   }
+  export interface CreateUserAccessLoggingSettingsRequest {
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ARN of the Kinesis stream.
+     */
+    kinesisStreamArn: KinesisStreamArn;
+    /**
+     * The tags to add to the user settings resource. A tag is a key-value pair.
+     */
+    tags?: TagList;
+  }
+  export interface CreateUserAccessLoggingSettingsResponse {
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
+  }
   export interface CreateUserSettingsRequest {
     /**
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
@@ -745,6 +841,14 @@ declare namespace WorkSpacesWeb {
   }
   export interface DeleteTrustStoreResponse {
   }
+  export interface DeleteUserAccessLoggingSettingsRequest {
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
+  }
+  export interface DeleteUserAccessLoggingSettingsResponse {
+  }
   export interface DeleteUserSettingsRequest {
     /**
      * The ARN of the user settings.
@@ -776,6 +880,14 @@ declare namespace WorkSpacesWeb {
     portalArn: ARN;
   }
   export interface DisassociateTrustStoreResponse {
+  }
+  export interface DisassociateUserAccessLoggingSettingsRequest {
+    /**
+     * The ARN of the web portal.
+     */
+    portalArn: ARN;
+  }
+  export interface DisassociateUserAccessLoggingSettingsResponse {
   }
   export interface DisassociateUserSettingsRequest {
     /**
@@ -885,6 +997,18 @@ declare namespace WorkSpacesWeb {
      */
     trustStore?: TrustStore;
   }
+  export interface GetUserAccessLoggingSettingsRequest {
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
+  }
+  export interface GetUserAccessLoggingSettingsResponse {
+    /**
+     * The user access logging settings.
+     */
+    userAccessLoggingSettings?: UserAccessLoggingSettings;
+  }
   export interface GetUserSettingsRequest {
     /**
      * The ARN of the user settings.
@@ -934,6 +1058,7 @@ declare namespace WorkSpacesWeb {
   }
   export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
   export type IdleDisconnectTimeoutInMinutes = number;
+  export type KinesisStreamArn = string;
   export interface ListBrowserSettingsRequest {
     /**
      * The maximum number of results to be included in the next page.
@@ -1078,6 +1203,26 @@ declare namespace WorkSpacesWeb {
      */
     trustStores?: TrustStoreSummaryList;
   }
+  export interface ListUserAccessLoggingSettingsRequest {
+    /**
+     * The maximum number of results to be included in the next page.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListUserAccessLoggingSettingsResponse {
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The user access logging settings.
+     */
+    userAccessLoggingSettings?: UserAccessLoggingSettingsList;
+  }
   export interface ListUserSettingsRequest {
     /**
      * The maximum number of results to be included in the next page.
@@ -1179,7 +1324,11 @@ declare namespace WorkSpacesWeb {
      */
     trustStoreArn?: ARN;
     /**
-     * The ARN of the trust store that is associated with the web portal.
+     * The ARN of the user access logging settings that is associated with the web portal.
+     */
+    userAccessLoggingSettingsArn?: ARN;
+    /**
+     * The ARN of the user settings that is associated with the web portal.
      */
     userSettingsArn?: ARN;
   }
@@ -1227,6 +1376,10 @@ declare namespace WorkSpacesWeb {
      * The ARN of the trust that is associated with this web portal.
      */
     trustStoreArn?: ARN;
+    /**
+     * The ARN of the user access logging settings that is associated with the web portal.
+     */
+    userAccessLoggingSettingsArn?: ARN;
     /**
      * The ARN of the user settings that is associated with the web portal.
      */
@@ -1416,6 +1569,26 @@ declare namespace WorkSpacesWeb {
      */
     trustStoreArn: ARN;
   }
+  export interface UpdateUserAccessLoggingSettingsRequest {
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The ARN of the Kinesis stream.
+     */
+    kinesisStreamArn?: KinesisStreamArn;
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
+  }
+  export interface UpdateUserAccessLoggingSettingsResponse {
+    /**
+     * The user access logging settings.
+     */
+    userAccessLoggingSettings: UserAccessLoggingSettings;
+  }
   export interface UpdateUserSettingsRequest {
     /**
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
@@ -1459,6 +1632,31 @@ declare namespace WorkSpacesWeb {
      * The user settings.
      */
     userSettings: UserSettings;
+  }
+  export interface UserAccessLoggingSettings {
+    /**
+     * A list of web portal ARNs that this user access logging settings is associated with.
+     */
+    associatedPortalArns?: ArnList;
+    /**
+     * The ARN of the Kinesis stream.
+     */
+    kinesisStreamArn?: KinesisStreamArn;
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn: ARN;
+  }
+  export type UserAccessLoggingSettingsList = UserAccessLoggingSettingsSummary[];
+  export interface UserAccessLoggingSettingsSummary {
+    /**
+     * The ARN of the Kinesis stream.
+     */
+    kinesisStreamArn?: KinesisStreamArn;
+    /**
+     * The ARN of the user access logging settings.
+     */
+    userAccessLoggingSettingsArn?: ARN;
   }
   export interface UserSettings {
     /**

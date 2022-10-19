@@ -76,11 +76,11 @@ declare class CloudTrail extends Service {
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   *  Returns the specified CloudTrail service-linked channel. Amazon Web Services services create service-linked channels to view CloudTrail events. 
+   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI.. 
    */
   getChannel(params: CloudTrail.Types.GetChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
   /**
-   *  Returns the specified CloudTrail service-linked channel. Amazon Web Services services create service-linked channels to view CloudTrail events. 
+   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI.. 
    */
   getChannel(callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class CloudTrail extends Service {
    */
   getEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
   /**
-   *  Returns information for the specified import. 
+   *  Returns information about a specific import. 
    */
   getImport(params: CloudTrail.Types.GetImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetImportResponse) => void): Request<CloudTrail.Types.GetImportResponse, AWSError>;
   /**
-   *  Returns information for the specified import. 
+   *  Returns information about a specific import. 
    */
   getImport(callback?: (err: AWSError, data: CloudTrail.Types.GetImportResponse) => void): Request<CloudTrail.Types.GetImportResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class CloudTrail extends Service {
    */
   getTrailStatus(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
-   *  Returns all CloudTrail channels. 
+   *  Lists the channels in the current account, and their source names. Amazon Web Services services create service-linked channels get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
    */
   listChannels(params: CloudTrail.Types.ListChannelsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
   /**
-   *  Returns all CloudTrail channels. 
+   *  Lists the channels in the current account, and their source names. Amazon Web Services services create service-linked channels get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
    */
   listChannels(callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class CloudTrail extends Service {
    */
   restoreEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
   /**
-   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
    */
   startImport(params: CloudTrail.Types.StartImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
   /**
-   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
    */
   startImport(callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class CloudTrail extends Service {
    */
   startLogging(callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
   /**
-   * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks.
+   * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks. Use the optional DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
    */
   startQuery(params: CloudTrail.Types.StartQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
   /**
-   * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks.
+   * Starts a CloudTrail Lake query. The required QueryStatement parameter provides your SQL query, enclosed in single quotation marks. Use the optional DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
    */
   startQuery(callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
   /**
@@ -379,7 +379,7 @@ declare namespace CloudTrail {
   }
   export interface Channel {
     /**
-     *  The Amazon Resource Name (ARN) of the channel. 
+     * The Amazon Resource Name (ARN) of a channel.
      */
     ChannelArn?: ChannelArn;
     /**
@@ -498,7 +498,7 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:   alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
+     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
      */
     KmsKeyId?: String;
     /**
@@ -553,7 +553,7 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
     /**
@@ -563,7 +563,7 @@ declare namespace CloudTrail {
   }
   export interface DataResource {
     /**
-     * The resource type in which you want to log data events. You can specify the following basic event selector resource types:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table    The following resource types are also availble through advanced event selectors. Basic event selector resource types are valid in advanced event selectors, but advanced event selector resource types are not valid in basic event selectors. For more information, see AdvancedFieldSelector$Field.    AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table   
+     * The resource type in which you want to log data events. You can specify the following basic event selector resource types:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table    The following resource types are also available through advanced event selectors. Basic event selector resource types are valid in advanced event selectors, but advanced event selector resource types are not valid in basic event selectors. For more information, see AdvancedFieldSelector$Field.    AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table   
      */
     Type?: String;
     /**
@@ -590,6 +590,8 @@ declare namespace CloudTrail {
   }
   export interface DeleteTrailResponse {
   }
+  export type DeliveryS3Uri = string;
+  export type DeliveryStatus = "SUCCESS"|"FAILED"|"FAILED_SIGNING_FILE"|"PENDING"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"ACCESS_DENIED_SIGNING_FILE"|"CANCELLED"|"UNKNOWN"|string;
   export interface DescribeQueryRequest {
     /**
      * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query was run.
@@ -621,6 +623,14 @@ declare namespace CloudTrail {
      * The error message returned if a query failed.
      */
     ErrorMessage?: ErrorMessage;
+    /**
+     * The URI for the S3 bucket where CloudTrail delivered query results, if applicable.
+     */
+    DeliveryS3Uri?: DeliveryS3Uri;
+    /**
+     * The delivery status.
+     */
+    DeliveryStatus?: DeliveryStatus;
   }
   export interface DescribeTrailsRequest {
     /**
@@ -640,11 +650,11 @@ declare namespace CloudTrail {
   }
   export interface Destination {
     /**
-     *  The type of service. For service-linked channels, the value is AWS_SERVICE. 
+     * The type of destination for events arriving from a channel. For service-linked channels, the value is AWS_SERVICE.
      */
     Type: DestinationType;
     /**
-     *  The location of the service. For service-linked channels, this is the name of the Amazon Web Services service. 
+     * For service-linked channels, the value is the name of the Amazon Web Services service.
      */
     Location: Location;
   }
@@ -759,29 +769,29 @@ declare namespace CloudTrail {
   export type ExcludeManagementEventSources = String[];
   export interface GetChannelRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the CloudTrail service-linked channel. 
+     * The ARN or UUID of a channel.
      */
     Channel: ChannelArn;
   }
   export interface GetChannelResponse {
     /**
-     *  The ARN of the CloudTrail service-linked channel. 
+     * The ARN of an channel returned by a GetChannel request.
      */
     ChannelArn?: ChannelArn;
     /**
-     *  The name of the CloudTrail service-linked channel. For service-linked channels, the value is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix generated by the Amazon Web Services service. 
+     *  The name of the CloudTrail channel. For service-linked channels, the value is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix generated by the Amazon Web Services service. 
      */
     Name?: ChannelName;
     /**
-     *  The trail or event data store for the CloudTrail service-linked channel. 
+     * The event source for the CloudTrail channel.
      */
     Source?: Source;
     /**
-     *  Provides information about the advanced event selectors configured for the service-linked channel, and whether the service-linked channel applies to all regions or one region. 
+     *  Provides information about the advanced event selectors configured for the channel, and whether the channel applies to all regions or a single region. 
      */
     SourceConfig?: SourceConfig;
     /**
-     *  The Amazon Web Services service that created the CloudTrail service-linked channel. 
+     * The Amazon Web Services service that created the service-linked channel.
      */
     Destinations?: Destinations;
   }
@@ -865,7 +875,7 @@ declare namespace CloudTrail {
      */
     ImportId?: UUID;
     /**
-     *  The destination event data store. 
+     *  The ARN of the destination event data store. 
      */
     Destinations?: ImportDestinations;
     /**
@@ -893,7 +903,7 @@ declare namespace CloudTrail {
      */
     UpdatedTimestamp?: _Date;
     /**
-     *  Provides statistics for the import. 
+     *  Provides statistics for the import. CloudTrail does not update import statistics in real-time. Returned values for parameters such as EventsCompleted may be lower than the actual value, because CloudTrail updates statistics incrementally over the course of the import. 
      */
     ImportStatistics?: ImportStatistics;
   }
@@ -1079,11 +1089,11 @@ declare namespace CloudTrail {
      */
     PrefixesCompleted?: Long;
     /**
-     * The number of files that completed import.
+     * The number of log files that completed import.
      */
     FilesCompleted?: Long;
     /**
-     *  The number of trail events imported. 
+     *  The number of trail events imported into the event data store. 
      */
     EventsCompleted?: Long;
     /**
@@ -1103,7 +1113,7 @@ declare namespace CloudTrail {
      */
     ImportStatus?: ImportStatus;
     /**
-     *  The destination event data store. 
+     *  The ARN of the destination event data store. 
      */
     Destinations?: ImportDestinations;
     /**
@@ -1131,17 +1141,17 @@ declare namespace CloudTrail {
      */
     MaxResults?: ListChannelsMaxResultsCount;
     /**
-     *  A token you can use to get the next page of results. 
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
      */
     NextToken?: PaginationToken;
   }
   export interface ListChannelsResponse {
     /**
-     *  The list of CloudTrail channels. 
+     *  The list of channels in the account. 
      */
     Channels?: Channels;
     /**
-     *  A token used to get the next page of results. 
+     * The token to use to get the next page of results after a previous API call.
      */
     NextToken?: PaginationToken;
   }
@@ -1198,7 +1208,7 @@ declare namespace CloudTrail {
      */
     MaxResults?: ListImportsMaxResultsCount;
     /**
-     *  The destination event data store. 
+     *  The ARN of the destination event data store. 
      */
     Destination?: EventDataStoreArn;
     /**
@@ -1602,17 +1612,17 @@ declare namespace CloudTrail {
   export type Source = string;
   export interface SourceConfig {
     /**
-     *  Specifies whether the service-linked channel applies to one region or all regions. 
+     *  Specifies whether the channel applies to a single region or to all regions.
      */
     ApplyToAllRegions?: Boolean;
     /**
-     *  The advanced event selectors configured for the service-linked channel. 
+     *  The advanced event selectors that are configured for the channel.
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
   }
   export interface StartImportRequest {
     /**
-     *  The destination event data store. Use this parameter for a new import. 
+     *  The ARN of the destination event data store. Use this parameter for a new import. 
      */
     Destinations?: ImportDestinations;
     /**
@@ -1620,11 +1630,11 @@ declare namespace CloudTrail {
      */
     ImportSource?: ImportSource;
     /**
-     *  Use with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     *  Use with EndEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. When you specify a time range, CloudTrail checks the prefix and log file names to verify the names contain a date between the specified StartEventTime and EndEventTime before attempting to import events. 
      */
     StartEventTime?: _Date;
     /**
-     *  Use with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. 
+     *  Use with StartEventTime to bound a StartImport request, and limit imported trail events to only those events logged within a specified time period. When you specify a time range, CloudTrail checks the prefix and log file names to verify the names contain a date between the specified StartEventTime and EndEventTime before attempting to import events. 
      */
     EndEventTime?: _Date;
     /**
@@ -1638,11 +1648,11 @@ declare namespace CloudTrail {
      */
     ImportId?: UUID;
     /**
-     *  The destination event data store. 
+     *  The ARN of the destination event data store. 
      */
     Destinations?: ImportDestinations;
     /**
-     *  The source S3 bucket. 
+     *  The source S3 bucket for the import. 
      */
     ImportSource?: ImportSource;
     /**
@@ -1679,6 +1689,10 @@ declare namespace CloudTrail {
      * The SQL code of your query.
      */
     QueryStatement: QueryStatement;
+    /**
+     *  The URI for the S3 bucket where CloudTrail delivers the query results. 
+     */
+    DeliveryS3Uri?: DeliveryS3Uri;
   }
   export interface StartQueryResponse {
     /**
@@ -1698,11 +1712,11 @@ declare namespace CloudTrail {
      */
     ImportId?: UUID;
     /**
-     *  The source S3 bucket. 
+     *  The source S3 bucket for the import. 
      */
     ImportSource?: ImportSource;
     /**
-     *  The destination event data store. 
+     *  The ARN of the destination event data store. 
      */
     Destinations?: ImportDestinations;
     /**

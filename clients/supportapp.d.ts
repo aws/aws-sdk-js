@@ -76,6 +76,14 @@ declare class SupportApp extends Service {
    */
   putAccountAlias(callback?: (err: AWSError, data: SupportApp.Types.PutAccountAliasResult) => void): Request<SupportApp.Types.PutAccountAliasResult, AWSError>;
   /**
+   * Registers a Slack workspace for your Amazon Web Services account. To call this API, your account must be part of an organization in Organizations. If you're the management account and you want to register Slack workspaces for your organization, you must complete the following tasks:   Sign in to the Amazon Web Services Support Center and authorize the Slack workspaces where you want your organization to have access to. See Authorize a Slack workspace in the Amazon Web Services Support User Guide.   Call the RegisterSlackWorkspaceForOrganization API to authorize each Slack workspace for the organization.   After the management account authorizes the Slack workspace, member accounts can call this API to authorize the same Slack workspace for their individual accounts. Member accounts don't need to authorize the Slack workspace manually through the Amazon Web Services Support Center. To use the Amazon Web Services Support App, each account must then complete the following tasks:   Create an Identity and Access Management (IAM) role with the required permission. For more information, see Managing access to the Amazon Web Services Support App.   Configure a Slack channel to use the Amazon Web Services Support App for support cases for that account. For more information, see Configuring a Slack channel.  
+   */
+  registerSlackWorkspaceForOrganization(params: SupportApp.Types.RegisterSlackWorkspaceForOrganizationRequest, callback?: (err: AWSError, data: SupportApp.Types.RegisterSlackWorkspaceForOrganizationResult) => void): Request<SupportApp.Types.RegisterSlackWorkspaceForOrganizationResult, AWSError>;
+  /**
+   * Registers a Slack workspace for your Amazon Web Services account. To call this API, your account must be part of an organization in Organizations. If you're the management account and you want to register Slack workspaces for your organization, you must complete the following tasks:   Sign in to the Amazon Web Services Support Center and authorize the Slack workspaces where you want your organization to have access to. See Authorize a Slack workspace in the Amazon Web Services Support User Guide.   Call the RegisterSlackWorkspaceForOrganization API to authorize each Slack workspace for the organization.   After the management account authorizes the Slack workspace, member accounts can call this API to authorize the same Slack workspace for their individual accounts. Member accounts don't need to authorize the Slack workspace manually through the Amazon Web Services Support Center. To use the Amazon Web Services Support App, each account must then complete the following tasks:   Create an Identity and Access Management (IAM) role with the required permission. For more information, see Managing access to the Amazon Web Services Support App.   Configure a Slack channel to use the Amazon Web Services Support App for support cases for that account. For more information, see Configuring a Slack channel.  
+   */
+  registerSlackWorkspaceForOrganization(callback?: (err: AWSError, data: SupportApp.Types.RegisterSlackWorkspaceForOrganizationResult) => void): Request<SupportApp.Types.RegisterSlackWorkspaceForOrganizationResult, AWSError>;
+  /**
    * Updates the configuration for a Slack channel, such as case update notifications.
    */
   updateSlackChannelConfiguration(params: SupportApp.Types.UpdateSlackChannelConfigurationRequest, callback?: (err: AWSError, data: SupportApp.Types.UpdateSlackChannelConfigurationResult) => void): Request<SupportApp.Types.UpdateSlackChannelConfigurationResult, AWSError>;
@@ -85,6 +93,7 @@ declare class SupportApp extends Service {
   updateSlackChannelConfiguration(callback?: (err: AWSError, data: SupportApp.Types.UpdateSlackChannelConfigurationResult) => void): Request<SupportApp.Types.UpdateSlackChannelConfigurationResult, AWSError>;
 }
 declare namespace SupportApp {
+  export type AccountType = "management"|"member"|string;
   export interface CreateSlackChannelConfigurationRequest {
     /**
      * The channel ID in Slack. This ID identifies a channel within a Slack workspace.
@@ -103,7 +112,7 @@ declare namespace SupportApp {
      */
     notifyOnAddCorrespondenceToCase?: booleanValue;
     /**
-     * The case severity for a support case that you want to receive notifications.  &lt;p&gt;If you specify &lt;code&gt;high&lt;/code&gt; or &lt;code&gt;all&lt;/code&gt;, you must specify &lt;code&gt;true&lt;/code&gt; for at least one of the following parameters:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnAddCorrespondenceToCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnCreateOrReopenCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnResolveCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;If you specify &lt;code&gt;none&lt;/code&gt;, the following parameters must be null or &lt;code&gt;false&lt;/code&gt;:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnAddCorrespondenceToCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnCreateOrReopenCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnResolveCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;note&gt; &lt;p&gt;If you don't specify these parameters in your request, they default to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt; &lt;/note&gt; 
+     * The case severity for a support case that you want to receive notifications. If you specify high or all, you must specify true for at least one of the following parameters:    notifyOnAddCorrespondenceToCase     notifyOnCreateOrReopenCase     notifyOnResolveCase    If you specify none, the following parameters must be null or false:    notifyOnAddCorrespondenceToCase     notifyOnCreateOrReopenCase     notifyOnResolveCase     If you don't specify these parameters in your request, they default to false. 
      */
     notifyOnCaseSeverity: NotificationSeverityLevel;
     /**
@@ -115,7 +124,7 @@ declare namespace SupportApp {
      */
     notifyOnResolveCase?: booleanValue;
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId: teamId;
   }
@@ -131,7 +140,7 @@ declare namespace SupportApp {
      */
     channelId: channelId;
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId: teamId;
   }
@@ -139,7 +148,7 @@ declare namespace SupportApp {
   }
   export interface DeleteSlackWorkspaceConfigurationRequest {
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId: teamId;
   }
@@ -194,13 +203,33 @@ declare namespace SupportApp {
   }
   export interface PutAccountAliasResult {
   }
+  export interface RegisterSlackWorkspaceForOrganizationRequest {
+    /**
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG. Specify the Slack workspace that you want to use for your organization.
+     */
+    teamId: teamId;
+  }
+  export interface RegisterSlackWorkspaceForOrganizationResult {
+    /**
+     * Whether the Amazon Web Services account is a management or member account that's part of an organization in Organizations.
+     */
+    accountType?: AccountType;
+    /**
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
+     */
+    teamId?: teamId;
+    /**
+     * The name of the Slack workspace.
+     */
+    teamName?: teamName;
+  }
   export interface SlackChannelConfiguration {
     /**
      * The channel ID in Slack. This ID identifies a channel within a Slack workspace.
      */
     channelId: channelId;
     /**
-     * The name of the Slack channel that you configured with the Amazon Web Services Support App.
+     * The name of the Slack channel that you configured with the Amazon Web Services Support App for your Amazon Web Services account.
      */
     channelName?: channelName;
     /**
@@ -224,15 +253,23 @@ declare namespace SupportApp {
      */
     notifyOnResolveCase?: booleanValue;
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId: teamId;
   }
   export interface SlackWorkspaceConfiguration {
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * Whether to allow member accounts to authorize Slack workspaces. Member accounts must be part of an organization in Organizations.
+     */
+    allowOrganizationMemberAccount?: booleanValue;
+    /**
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId: teamId;
+    /**
+     * The name of the Slack workspace.
+     */
+    teamName?: teamName;
   }
   export type SlackWorkspaceConfigurationList = SlackWorkspaceConfiguration[];
   export interface UpdateSlackChannelConfigurationRequest {
@@ -253,7 +290,7 @@ declare namespace SupportApp {
      */
     notifyOnAddCorrespondenceToCase?: booleanValue;
     /**
-     * The case severity for a support case that you want to receive notifications.  &lt;p&gt;If you specify &lt;code&gt;high&lt;/code&gt; or &lt;code&gt;all&lt;/code&gt;, at least one of the following parameters must be &lt;code&gt;true&lt;/code&gt;:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnAddCorrespondenceToCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnCreateOrReopenCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnResolveCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;If you specify &lt;code&gt;none&lt;/code&gt;, any of the following parameters that you specify in your request must be &lt;code&gt;false&lt;/code&gt;:&lt;/p&gt; &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnAddCorrespondenceToCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnCreateOrReopenCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;notifyOnResolveCase&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;note&gt; &lt;p&gt;If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current values by default.&lt;/p&gt; &lt;/note&gt; 
+     * The case severity for a support case that you want to receive notifications. If you specify high or all, at least one of the following parameters must be true:    notifyOnAddCorrespondenceToCase     notifyOnCreateOrReopenCase     notifyOnResolveCase    If you specify none, any of the following parameters that you specify in your request must be false:    notifyOnAddCorrespondenceToCase     notifyOnCreateOrReopenCase     notifyOnResolveCase     If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current values by default. 
      */
     notifyOnCaseSeverity?: NotificationSeverityLevel;
     /**
@@ -265,7 +302,7 @@ declare namespace SupportApp {
      */
     notifyOnResolveCase?: booleanValue;
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId: teamId;
   }
@@ -299,7 +336,7 @@ declare namespace SupportApp {
      */
     notifyOnResolveCase?: booleanValue;
     /**
-     * The team ID in Slack. This ID uniquely identifies a Slack workspace.
+     * The team ID in Slack. This ID uniquely identifies a Slack workspace, such as T012ABCDEFG.
      */
     teamId?: teamId;
   }
@@ -311,6 +348,7 @@ declare namespace SupportApp {
   export type roleArn = string;
   export type slackChannelConfigurationList = SlackChannelConfiguration[];
   export type teamId = string;
+  export type teamName = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

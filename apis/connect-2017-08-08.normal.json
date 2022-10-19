@@ -240,7 +240,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Associates a flow with a phone number claimed to your Amazon Connect instance.</p>"
+      "documentation": "<p>Associates a flow with a phone number claimed to your Amazon Connect instance.</p> <important> <p>If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the <code>PhoneNumberId</code> URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a <code>ResourceNotFoundException</code>.</p> </important>"
     },
     "AssociateQueueQuickConnects": {
       "name": "AssociateQueueQuickConnects",
@@ -370,7 +370,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Claims an available phone number to your Amazon Connect instance.</p>"
+      "documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p> <important> <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a> operation.</p> </important>"
     },
     "CreateAgentStatus": {
       "name": "CreateAgentStatus",
@@ -629,7 +629,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a new queue for the specified Amazon Connect instance.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a new queue for the specified Amazon Connect instance.</p> <important> <p>If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the <code>OutboundCallerIdNumberId</code> value of the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig\">OutboundCallerConfig</a> request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a <code>ResourceNotFoundException</code>.</p> </important>"
     },
     "CreateQuickConnect": {
       "name": "CreateQuickConnect",
@@ -775,6 +775,46 @@
         }
       ],
       "documentation": "<p>Creates a new task template in the specified Amazon Connect instance.</p>"
+    },
+    "CreateTrafficDistributionGroup": {
+      "name": "CreateTrafficDistributionGroup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/traffic-distribution-group"
+      },
+      "input": {
+        "shape": "CreateTrafficDistributionGroupRequest"
+      },
+      "output": {
+        "shape": "CreateTrafficDistributionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "ResourceNotReadyException"
+        }
+      ],
+      "documentation": "<p>Creates a traffic distribution group given an Amazon Connect instance that has been replicated. </p> <p>For more information about creating traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html\">Set up traffic distribution groups</a> in the <i>Amazon Connect Administrator Guide</i>. </p>"
     },
     "CreateUseCase": {
       "name": "CreateUseCase",
@@ -1150,6 +1190,37 @@
         }
       ],
       "documentation": "<p>Deletes the task template.</p>"
+    },
+    "DeleteTrafficDistributionGroup": {
+      "name": "DeleteTrafficDistributionGroup",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/traffic-distribution-group/{TrafficDistributionGroupId}"
+      },
+      "input": {
+        "shape": "DeleteTrafficDistributionGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteTrafficDistributionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is created.</p> <p>For more information about deleting traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html\">Delete traffic distribution groups</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "DeleteUseCase": {
       "name": "DeleteUseCase",
@@ -1546,7 +1617,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets details and status of a phone number that’s claimed to your Amazon Connect instance</p>"
+      "documentation": "<p>Gets details and status of a phone number that’s claimed to your Amazon Connect instance or traffic distribution group.</p> <important> <p>If the number is claimed to a traffic distribution group, and you are calling in the Amazon Web Services Region where the traffic distribution group was created, you can use either a phone number ARN or UUID value for the <code>PhoneNumberId</code> URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a <code>ResourceNotFoundException</code>.</p> </important>"
     },
     "DescribeQueue": {
       "name": "DescribeQueue",
@@ -1671,6 +1742,37 @@
         }
       ],
       "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Gets basic information about the security profle.</p>"
+    },
+    "DescribeTrafficDistributionGroup": {
+      "name": "DescribeTrafficDistributionGroup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/traffic-distribution-group/{TrafficDistributionGroupId}"
+      },
+      "input": {
+        "shape": "DescribeTrafficDistributionGroupRequest"
+      },
+      "output": {
+        "shape": "DescribeTrafficDistributionGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Gets details and status of a traffic distribution group.</p>"
     },
     "DescribeUser": {
       "name": "DescribeUser",
@@ -1959,7 +2061,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Removes the flow association from a phone number claimed to your Amazon Connect instance, if a flow association exists.</p>"
+      "documentation": "<p>Removes the flow association from a phone number claimed to your Amazon Connect instance.</p> <important> <p>If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the <code>PhoneNumberId</code> URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a <code>ResourceNotFoundException</code>.</p> </important>"
     },
     "DisassociateQueueQuickConnects": {
       "name": "DisassociateQueueQuickConnects",
@@ -2227,6 +2329,37 @@
         }
       ],
       "documentation": "<p>Gets details about a specific task template in the specified Amazon Connect instance.</p>"
+    },
+    "GetTrafficDistribution": {
+      "name": "GetTrafficDistribution",
+      "http": {
+        "method": "GET",
+        "requestUri": "/traffic-distribution/{Id}"
+      },
+      "input": {
+        "shape": "GetTrafficDistributionRequest"
+      },
+      "output": {
+        "shape": "GetTrafficDistributionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the current traffic distribution for a given traffic distribution group.</p>"
     },
     "ListAgentStatuses": {
       "name": "ListAgentStatuses",
@@ -2676,7 +2809,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p> <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p> <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <important> <p>The phone number <code>Arn</code> value that is returned from each of the items in the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail with a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API. It returns the new phone number ARN that can be used to tag phone number resources.</p> </important>"
     },
     "ListPhoneNumbersV2": {
       "name": "ListPhoneNumbersV2",
@@ -2707,7 +2840,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists phone numbers claimed to your Amazon Connect instance. </p> <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided <code>TargetArn</code> is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group.</p> <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "ListPrompts": {
       "name": "ListPrompts",
@@ -3050,6 +3183,34 @@
       ],
       "documentation": "<p>Lists task templates for the specified Amazon Connect instance.</p>"
     },
+    "ListTrafficDistributionGroups": {
+      "name": "ListTrafficDistributionGroups",
+      "http": {
+        "method": "GET",
+        "requestUri": "/traffic-distribution-groups"
+      },
+      "input": {
+        "shape": "ListTrafficDistributionGroupsRequest"
+      },
+      "output": {
+        "shape": "ListTrafficDistributionGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Lists traffic distribution groups.</p>"
+    },
     "ListUseCases": {
       "name": "ListUseCases",
       "http": {
@@ -3206,7 +3367,47 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance.</p>"
+      "documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.</p> <important> <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the Amazon Connect console.</p> <p>After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.</p> </important>"
+    },
+    "ReplicateInstance": {
+      "name": "ReplicateInstance",
+      "http": {
+        "method": "POST",
+        "requestUri": "/instance/{InstanceId}/replicate"
+      },
+      "input": {
+        "shape": "ReplicateInstanceRequest"
+      },
+      "output": {
+        "shape": "ReplicateInstanceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceNotReadyException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        }
+      ],
+      "documentation": "<p>Replicates an Amazon Connect instance in the specified Amazon Web Services Region.</p> <p>For more information about replicating an Amazon Connect instance, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html\">Create a replica of your existing Amazon Connect instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "ResumeContactRecording": {
       "name": "ResumeContactRecording",
@@ -3259,7 +3460,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Searches for available phone numbers that you can claim to your Amazon Connect instance.</p>"
+      "documentation": "<p>Searches for available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group. If the provided <code>TargetArn</code> is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with the traffic distribution group.</p>"
     },
     "SearchQueues": {
       "name": "SearchQueues",
@@ -3383,7 +3584,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p>"
+      "documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p> <note> <p> <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p> </note>"
     },
     "SearchVocabularies": {
       "name": "SearchVocabularies",
@@ -4189,7 +4390,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.</p>"
+      "documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.</p> <important> <p>You can call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation.</p> </important>"
     },
     "UpdateQueueHoursOfOperation": {
       "name": "UpdateQueueHoursOfOperation",
@@ -4304,7 +4505,7 @@
           "shape": "InternalServiceException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.</p>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.</p> <important> <p>If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the <code>OutboundCallerIdNumberId</code> value of the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_OutboundCallerConfig\">OutboundCallerConfig</a> request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a <code>ResourceNotFoundException</code>.</p> </important>"
     },
     "UpdateQueueStatus": {
       "name": "UpdateQueueStatus",
@@ -4566,6 +4767,40 @@
         }
       ],
       "documentation": "<p>Updates details about a specific task template in the specified Amazon Connect instance. This operation does not support partial updates. Instead it does a full update of template content.</p>"
+    },
+    "UpdateTrafficDistribution": {
+      "name": "UpdateTrafficDistribution",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/traffic-distribution/{Id}"
+      },
+      "input": {
+        "shape": "UpdateTrafficDistributionRequest"
+      },
+      "output": {
+        "shape": "UpdateTrafficDistributionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Updates the traffic distribution for a given traffic distribution group. For more information about updating a traffic distribution group see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony traffic distribution across Amazon Web Services Regions </a> in the <i>Amazon Connect Administrator Guide</i>. </p>"
     },
     "UpdateUserHierarchy": {
       "name": "UpdateUserHierarchy",
@@ -5326,6 +5561,12 @@
         "shape": "AvailableNumberSummary"
       }
     },
+    "AwsRegion": {
+      "type": "string",
+      "max": 31,
+      "min": 8,
+      "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -5427,7 +5668,7 @@
       "members": {
         "TargetArn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
         },
         "PhoneNumber": {
           "shape": "PhoneNumber",
@@ -5443,7 +5684,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -5490,7 +5731,7 @@
         },
         "TargetArn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -5498,10 +5739,10 @@
         },
         "PhoneNumberStatus": {
           "shape": "PhoneNumberStatus",
-          "documentation": "<p>The status of the phone number.</p>"
+          "documentation": "<p>The status of the phone number.</p> <ul> <li> <p> <code>CLAIMED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation succeeded.</p> </li> <li> <p> <code>IN_PROGRESS</code> means a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation is still in progress and has not yet completed. You can call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> at a later time to verify if the previous operation has completed.</p> </li> <li> <p> <code>FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation has failed. It will include a message indicating the failure reason. A common reason for a failure may be that the <code>TargetArn</code> value you are claiming or updating a phone number to has reached its limit of total claimed numbers. If you received a <code>FAILED</code> status from a <code>ClaimPhoneNumber</code> API call, you have one day to retry claiming the phone number before the number is released back to the inventory for other customers to claim.</p> </li> </ul> <note> <p>You will not be billed for the phone number during the 1-day period if number claiming fails. </p> </note>"
         }
       },
-      "documentation": "<p>Information about a phone number that has been claimed to your Amazon Connect instance.</p>"
+      "documentation": "<p>Information about a phone number that has been claimed to your Amazon Connect instance or traffic distribution group.</p>"
     },
     "ClientToken": {
       "type": "string",
@@ -5955,7 +6196,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -6419,7 +6660,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -6438,6 +6679,49 @@
         "Arn": {
           "shape": "TaskTemplateArn",
           "documentation": "<p>The Amazon Resource Name (ARN) for the task template resource.</p>"
+        }
+      }
+    },
+    "CreateTrafficDistributionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "InstanceId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "Name128",
+          "documentation": "<p>The name for the traffic distribution group. </p>"
+        },
+        "Description": {
+          "shape": "Description250",
+          "documentation": "<p>A description for the traffic distribution group.</p>"
+        },
+        "InstanceId": {
+          "shape": "InstanceIdOrArn",
+          "documentation": "<p>The identifier of the Amazon Connect instance that has been replicated. You can find the <code>instanceId</code> in the ARN of the instance.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+          "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        }
+      }
+    },
+    "CreateTrafficDistributionGroupResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "TrafficDistributionGroupId",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
+        },
+        "Arn": {
+          "shape": "TrafficDistributionGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
         }
       }
     },
@@ -6602,7 +6886,7 @@
       "members": {
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If a create request is received more than once with same client token, subsequent requests return the previous response without creating a vocabulary again.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>. If a create request is received more than once with same client token, subsequent requests return the previous response without creating a vocabulary again.</p>",
           "idempotencyToken": true
         },
         "InstanceId": {
@@ -6972,6 +7256,24 @@
       }
     },
     "DeleteTaskTemplateResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteTrafficDistributionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficDistributionGroupId"
+      ],
+      "members": {
+        "TrafficDistributionGroupId": {
+          "shape": "TrafficDistributionGroupIdOrArn",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
+          "location": "uri",
+          "locationName": "TrafficDistributionGroupId"
+        }
+      }
+    },
+    "DeleteTrafficDistributionGroupResponse": {
       "type": "structure",
       "members": {}
     },
@@ -7347,7 +7649,7 @@
       "members": {
         "ClaimedPhoneNumberSummary": {
           "shape": "ClaimedPhoneNumberSummary",
-          "documentation": "<p>Information about a phone number that's been claimed to your Amazon Connect instance.</p>"
+          "documentation": "<p>Information about a phone number that's been claimed to your Amazon Connect instance or traffic distribution group.</p>"
         }
       }
     },
@@ -7471,6 +7773,29 @@
         }
       }
     },
+    "DescribeTrafficDistributionGroupRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficDistributionGroupId"
+      ],
+      "members": {
+        "TrafficDistributionGroupId": {
+          "shape": "TrafficDistributionGroupIdOrArn",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
+          "location": "uri",
+          "locationName": "TrafficDistributionGroupId"
+        }
+      }
+    },
+    "DescribeTrafficDistributionGroupResponse": {
+      "type": "structure",
+      "members": {
+        "TrafficDistributionGroup": {
+          "shape": "TrafficDistributionGroup",
+          "documentation": "<p>Information about the traffic distribution group.</p>"
+        }
+      }
+    },
     "DescribeUserHierarchyGroupRequest": {
       "type": "structure",
       "required": [
@@ -7591,6 +7916,12 @@
       "type": "string",
       "max": 4096,
       "min": 0
+    },
+    "Description250": {
+      "type": "string",
+      "max": 250,
+      "min": 1,
+      "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)"
     },
     "Dimensions": {
       "type": "structure",
@@ -7743,7 +8074,7 @@
         },
         "LexRegion": {
           "shape": "LexRegion",
-          "documentation": "<p>The Region in which the Amazon Lex bot has been created.</p>",
+          "documentation": "<p>The Amazon Web Services Region in which the Amazon Lex bot has been created.</p>",
           "location": "querystring",
           "locationName": "lexRegion"
         }
@@ -7847,6 +8178,30 @@
       "type": "string",
       "max": 256,
       "min": 1
+    },
+    "Distribution": {
+      "type": "structure",
+      "required": [
+        "Region",
+        "Percentage"
+      ],
+      "members": {
+        "Region": {
+          "shape": "AwsRegion",
+          "documentation": "<p>The Amazon Web Services Region where the traffic is distributed.</p>"
+        },
+        "Percentage": {
+          "shape": "Percentage",
+          "documentation": "<p>The percentage of the traffic that is distributed, in increments of 10.</p>"
+        }
+      },
+      "documentation": "<p>Information about a traffic distribution.</p>"
+    },
+    "DistributionList": {
+      "type": "list",
+      "member": {
+        "shape": "Distribution"
+      }
     },
     "Email": {
       "type": "string"
@@ -8208,6 +8563,37 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        }
+      }
+    },
+    "GetTrafficDistributionRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "TrafficDistributionGroupIdOrArn",
+          "documentation": "<p>The identifier of the traffic distribution group.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetTrafficDistributionResponse": {
+      "type": "structure",
+      "members": {
+        "TelephonyConfig": {
+          "shape": "TelephonyConfig",
+          "documentation": "<p>The distribution of traffic between the instance and its replicas.</p>"
+        },
+        "Id": {
+          "shape": "TrafficDistributionGroupId",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
+        },
+        "Arn": {
+          "shape": "TrafficDistributionGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
         }
       }
     },
@@ -8753,6 +9139,10 @@
       },
       "documentation": "<p>The Amazon Connect instance.</p>"
     },
+    "InstanceArn": {
+      "type": "string",
+      "pattern": "arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9-]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+    },
     "InstanceAttributeType": {
       "type": "string",
       "enum": [
@@ -8776,6 +9166,12 @@
       "type": "string",
       "max": 100,
       "min": 1
+    },
+    "InstanceIdOrArn": {
+      "type": "string",
+      "max": 250,
+      "min": 1,
+      "pattern": "^(arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
     },
     "InstanceStatus": {
       "type": "string",
@@ -9042,7 +9438,7 @@
         },
         "LexRegion": {
           "shape": "LexRegion",
-          "documentation": "<p>The Region that the Amazon Lex bot was created in.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the Amazon Lex bot was created.</p>"
         }
       },
       "documentation": "<p>Configuration information of an Amazon Lex bot.</p>"
@@ -9218,7 +9614,7 @@
       "members": {
         "LexBots": {
           "shape": "LexBotConfigList",
-          "documentation": "<p>The names and Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified instance.</p>"
+          "documentation": "<p>The names and Amazon Web Services Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified instance.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -9681,7 +10077,7 @@
       "members": {
         "LexBots": {
           "shape": "LexBotsList",
-          "documentation": "<p>The names and Regions of the Amazon Lex bots associated with the specified instance.</p>"
+          "documentation": "<p>The names and Amazon Web Services Regions of the Amazon Lex bots associated with the specified instance.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -9765,10 +10161,10 @@
         },
         "TargetArn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
         }
       },
-      "documentation": "<p>Information about phone numbers that have been claimed to your Amazon Connect instance.</p>"
+      "documentation": "<p>Information about phone numbers that have been claimed to your Amazon Connect instance or traffic distribution group.</p>"
     },
     "ListPhoneNumbersSummaryList": {
       "type": "list",
@@ -9781,7 +10177,7 @@
       "members": {
         "TargetArn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account in the same Amazon Web Services Region as the request.</p>"
         },
         "MaxResults": {
           "shape": "MaxResult1000",
@@ -9815,7 +10211,7 @@
         },
         "ListPhoneNumbersSummaryList": {
           "shape": "ListPhoneNumbersSummaryList",
-          "documentation": "<p>Information about phone numbers that have been claimed to your Amazon Connect instances.</p>"
+          "documentation": "<p>Information about phone numbers that have been claimed to your Amazon Connect instances or traffic distribution groups.</p>"
         }
       }
     },
@@ -10286,6 +10682,42 @@
         }
       }
     },
+    "ListTrafficDistributionGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResult10",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "InstanceId": {
+          "shape": "InstanceIdOrArn",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "querystring",
+          "locationName": "instanceId"
+        }
+      }
+    },
+    "ListTrafficDistributionGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "TrafficDistributionGroupSummaryList": {
+          "shape": "TrafficDistributionGroupSummaryList",
+          "documentation": "<p>A list of traffic distribution groups.</p>"
+        }
+      }
+    },
     "ListUseCasesRequest": {
       "type": "structure",
       "required": [
@@ -10481,6 +10913,12 @@
       "max": 512,
       "min": 0
     },
+    "Name128": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)"
+    },
     "NextToken": {
       "type": "string"
     },
@@ -10570,6 +11008,11 @@
     "Password": {
       "type": "string",
       "pattern": "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d\\S]{8,64}$/"
+    },
+    "Percentage": {
+      "type": "integer",
+      "max": 100,
+      "min": 0
     },
     "PermissionsList": {
       "type": "list",
@@ -10869,7 +11312,7 @@
           "documentation": "<p>The status message.</p>"
         }
       },
-      "documentation": "<p>The status of the phone number.</p>"
+      "documentation": "<p>The status of the phone number.</p> <ul> <li> <p> <code>CLAIMED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation succeeded.</p> </li> <li> <p> <code>IN_PROGRESS</code> means a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation is still in progress and has not yet completed. You can call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> at a later time to verify if the previous operation has completed.</p> </li> <li> <p> <code>FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation has failed. It will include a message indicating the failure reason. A common reason for a failure may be that the <code>TargetArn</code> value you are claiming or updating a phone number to has reached its limit of total claimed numbers. If you received a <code>FAILED</code> status from a <code>ClaimPhoneNumber</code> API call, you have one day to retry claiming the phone number before the number is released back to the inventory for other customers to claim.</p> </li> </ul>"
     },
     "PhoneNumberSummary": {
       "type": "structure",
@@ -11068,7 +11511,7 @@
       "members": {
         "Id": {
           "shape": "QueueId",
-          "documentation": "<p>The identifier of the agent who accepted the contact.</p>"
+          "documentation": "<p>The unique identifier for the queue.</p>"
         },
         "EnqueueTimestamp": {
           "shape": "timestamp",
@@ -11365,7 +11808,7 @@
         },
         "Type": {
           "shape": "ReferenceType",
-          "documentation": "<p>The type of the reference.</p>"
+          "documentation": "<p>The type of the reference. <code>DATE</code> must be of type Epoch timestamp. </p>"
         }
       },
       "documentation": "<p>Well-formed data on a contact, used by agents to complete a contact request. You can have up to 4,096 UTF-8 bytes across all references for a contact.</p>"
@@ -11456,10 +11899,52 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true,
           "location": "querystring",
           "locationName": "clientToken"
+        }
+      }
+    },
+    "ReplicateInstanceRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "ReplicaRegion",
+        "ReplicaAlias"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceIdOrArn",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "ReplicaRegion": {
+          "shape": "AwsRegion",
+          "documentation": "<p>The Amazon Web Services Region where to replicate the Amazon Connect instance.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+          "idempotencyToken": true
+        },
+        "ReplicaAlias": {
+          "shape": "DirectoryAlias",
+          "documentation": "<p>The alias for the replicated instance. The <code>ReplicaAlias</code> must be unique.</p>"
+        }
+      }
+    },
+    "ReplicateInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the replicated instance. You can find the <code>instanceId</code> in the ARN of the instance. The replicated instance has the same identifier as the instance it was replicated from.</p>"
+        },
+        "Arn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the replicated instance.</p>"
         }
       }
     },
@@ -11773,7 +12258,7 @@
       "members": {
         "TargetArn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
         },
         "PhoneNumberCountryCode": {
           "shape": "PhoneNumberCountryCode",
@@ -11807,7 +12292,7 @@
         },
         "AvailableNumbersList": {
           "shape": "AvailableNumbersList",
-          "documentation": "<p>A list of available phone numbers that you can claim for your Amazon Connect instance.</p>"
+          "documentation": "<p>A list of available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group.</p>"
         }
       }
     },
@@ -11924,7 +12409,7 @@
         },
         "SearchCriteria": {
           "shape": "SecurityProfileSearchCriteria",
-          "documentation": "<p>The search criteria to be used to return security profiles.</p>"
+          "documentation": "<p>The search criteria to be used to return security profiles. </p> <note> <p>The currently supported value for <code>FieldName</code>: <code>name</code> </p> </note>"
         },
         "SearchFilter": {
           "shape": "SecurityProfilesSearchFilter",
@@ -12269,7 +12754,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         },
         "ChatDurationInMinutes": {
@@ -12353,7 +12838,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -12392,7 +12877,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. </p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. </p>",
           "idempotencyToken": true
         },
         "SourcePhoneNumber": {
@@ -12467,7 +12952,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         },
         "ScheduledTime": {
@@ -12615,7 +13100,7 @@
           "documentation": "<p>The type of comparison to be made when evaluating the string condition.</p>"
         }
       },
-      "documentation": "<p>A leaf node condition which can be used to specify a string condition, for example, <code>username = 'abc'</code>. </p>"
+      "documentation": "<p>A leaf node condition which can be used to specify a string condition. </p> <note> <p>The currently supported value for <code>FieldName</code>: <code>name</code> </p> </note>"
     },
     "StringReference": {
       "type": "structure",
@@ -12935,6 +13420,19 @@
         "INACTIVE"
       ]
     },
+    "TelephonyConfig": {
+      "type": "structure",
+      "required": [
+        "Distributions"
+      ],
+      "members": {
+        "Distributions": {
+          "shape": "DistributionList",
+          "documentation": "<p>Information about traffic distributions.</p>"
+        }
+      },
+      "documentation": "<p>The distribution of traffic between the instance and its replicas.</p>"
+    },
     "Threshold": {
       "type": "structure",
       "members": {
@@ -12958,6 +13456,97 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TrafficDistributionGroup": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "TrafficDistributionGroupId",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
+        },
+        "Arn": {
+          "shape": "TrafficDistributionGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
+        },
+        "Name": {
+          "shape": "Name128",
+          "documentation": "<p>The name of the traffic distribution group.</p>"
+        },
+        "Description": {
+          "shape": "Description250",
+          "documentation": "<p>The description of the traffic distribution group.</p>"
+        },
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "Status": {
+          "shape": "TrafficDistributionGroupStatus",
+          "documentation": "<p>The status of the traffic distribution group.</p> <ul> <li> <p> <code>CREATION_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation is still in progress and has not yet completed.</p> </li> <li> <p> <code>ACTIVE</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has succeeded.</p> </li> <li> <p> <code>CREATION_FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has failed.</p> </li> <li> <p> <code>PENDING_DELETION</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation is still in progress and has not yet completed.</p> </li> <li> <p> <code>DELETION_FAILED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation has failed.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html\">UpdateTrafficDistributionGroup</a> operation is still in progress and has not yet completed.</p> </li> </ul>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        }
+      },
+      "documentation": "<p>Information about a traffic distribution group.</p>"
+    },
+    "TrafficDistributionGroupArn": {
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:traffic-distribution-group/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "TrafficDistributionGroupId": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "TrafficDistributionGroupIdOrArn": {
+      "type": "string",
+      "pattern": "^(arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z-]+-[0-9]{1}:[0-9]{1,20}:traffic-distribution-group/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "TrafficDistributionGroupStatus": {
+      "type": "string",
+      "enum": [
+        "CREATION_IN_PROGRESS",
+        "ACTIVE",
+        "CREATION_FAILED",
+        "PENDING_DELETION",
+        "DELETION_FAILED",
+        "UPDATE_IN_PROGRESS"
+      ]
+    },
+    "TrafficDistributionGroupSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "TrafficDistributionGroupId",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>"
+        },
+        "Arn": {
+          "shape": "TrafficDistributionGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
+        },
+        "Name": {
+          "shape": "Name128",
+          "documentation": "<p>The name of the traffic distribution group.</p>"
+        },
+        "InstanceArn": {
+          "shape": "InstanceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the traffic distribution group.</p>"
+        },
+        "Status": {
+          "shape": "TrafficDistributionGroupStatus",
+          "documentation": "<p>The status of the traffic distribution group. </p> <ul> <li> <p> <code>CREATION_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation is still in progress and has not yet completed.</p> </li> <li> <p> <code>ACTIVE</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has succeeded.</p> </li> <li> <p> <code>CREATION_FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has failed.</p> </li> <li> <p> <code>PENDING_DELETION</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation is still in progress and has not yet completed.</p> </li> <li> <p> <code>DELETION_FAILED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation has failed.</p> </li> <li> <p> <code>UPDATE_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html\">UpdateTrafficDistributionGroup</a> operation is still in progress and has not yet completed.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Information about traffic distribution groups.</p>"
+    },
+    "TrafficDistributionGroupSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficDistributionGroupSummary"
+      },
+      "max": 10,
+      "min": 0
     },
     "TrafficType": {
       "type": "string",
@@ -12996,7 +13585,7 @@
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -13454,11 +14043,11 @@
         },
         "TargetArn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.</p>"
         },
         "ClientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
           "idempotencyToken": true
         }
       }
@@ -13907,6 +14496,28 @@
         }
       }
     },
+    "UpdateTrafficDistributionRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "TrafficDistributionGroupIdOrArn",
+          "documentation": "<p>The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "TelephonyConfig": {
+          "shape": "TelephonyConfig",
+          "documentation": "<p>The distribution of traffic between the instance and its replica(s).</p>"
+        }
+      }
+    },
+    "UpdateTrafficDistributionResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateUserHierarchyGroupNameRequest": {
       "type": "structure",
       "required": [
@@ -14175,14 +14786,14 @@
           "documentation": "<p>The tags.</p>"
         }
       },
-      "documentation": "<p>Contains information about a user account for a Amazon Connect instance.</p>"
+      "documentation": "<p>Contains information about a user account for an Amazon Connect instance.</p>"
     },
     "UserData": {
       "type": "structure",
       "members": {
         "User": {
           "shape": "UserReference",
-          "documentation": "<p>Information about the user for the data that is returned. It contains resourceId and ARN of the user. </p>"
+          "documentation": "<p>Information about the user for the data that is returned. It contains the <code>resourceId</code> and ARN of the user. </p>"
         },
         "RoutingProfile": {
           "shape": "RoutingProfileReference",
@@ -14202,7 +14813,7 @@
         },
         "MaxSlotsByChannel": {
           "shape": "ChannelToCountMap",
-          "documentation": "<p>A map of maximum slots by channel. The key is a channel name. The value is an integer: the maximum number of slots. This is calculated from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html\">MediaConcurrency</a> of the RoutingProfile assigned to the agent. </p>"
+          "documentation": "<p>A map of maximum slots by channel. The key is a channel name. The value is an integer: the maximum number of slots. This is calculated from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html\">MediaConcurrency</a> of the <code>RoutingProfile</code> assigned to the agent. </p>"
         },
         "ActiveSlotsByChannel": {
           "shape": "ChannelToCountMap",
@@ -14255,7 +14866,7 @@
         },
         "SecondaryEmail": {
           "shape": "Email",
-          "documentation": "<p>The user's secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.</p>"
+          "documentation": "<p>The user's secondary email address. If you provide a secondary email, the user receives email notifications - other than password reset notifications - to this email address instead of to their primary email address.</p> <p>Pattern: <code>(?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,63}</code> </p>"
         },
         "Mobile": {
           "shape": "PhoneNumber",
@@ -14294,7 +14905,7 @@
         },
         "AfterContactWorkTimeLimit": {
           "shape": "AfterContactWorkTimeLimit",
-          "documentation": "<p>The After Call Work (ACW) timeout setting, in seconds.</p>"
+          "documentation": "<p>The After Call Work (ACW) timeout setting, in seconds.</p> <note> <p>When returned by a <code>SearchUsers</code> call, <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p> </note>"
         },
         "DeskPhoneNumber": {
           "shape": "PhoneNumber",

@@ -324,11 +324,11 @@ declare class ChimeSDKMessaging extends Service {
    */
   redactChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.RedactChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.RedactChannelMessageResponse, AWSError>;
   /**
-   * Allows an AppInstanceUser to search the channels that they belong to. The AppInstanceUser can search by membership or external ID. An AppInstanceAdmin can search across all channels within the AppInstance.
+   * Allows ChimeBearer to search channels by channel members. AppInstanceUsers can search across the channels that they belong to. AppInstanceAdmins can search across all channels.
    */
   searchChannels(params: ChimeSDKMessaging.Types.SearchChannelsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SearchChannelsResponse) => void): Request<ChimeSDKMessaging.Types.SearchChannelsResponse, AWSError>;
   /**
-   * Allows an AppInstanceUser to search the channels that they belong to. The AppInstanceUser can search by membership or external ID. An AppInstanceAdmin can search across all channels within the AppInstance.
+   * Allows ChimeBearer to search channels by channel members. AppInstanceUsers can search across the channels that they belong to. AppInstanceAdmins can search across all channels.
    */
   searchChannels(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SearchChannelsResponse) => void): Request<ChimeSDKMessaging.Types.SearchChannelsResponse, AWSError>;
   /**
@@ -906,7 +906,7 @@ declare namespace ChimeSDKMessaging {
      */
     Metadata?: Metadata;
     /**
-     * The time at which the last message in a channel was sent.
+     * The time at which the last persistent message in a channel was sent.
      */
     LastMessageTimestamp?: Timestamp;
   }

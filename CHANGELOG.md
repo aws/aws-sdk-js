@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1235.0-->
+<!--LATEST=2.1236.0-->
 <!--ENTRYINSERT-->
+
+## 2.1236.0
+* feature: CloudTrail: This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket.
+* feature: ConfigService: This release adds resourceType enums for AppConfig, AppSync, DataSync, EC2, EKS, Glue, GuardDuty, SageMaker, ServiceDiscovery, SES, Route53 types.
+* feature: Connect: This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution.
+* feature: EventBridge: Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.
+* feature: ManagedBlockchain: Adding new Accessor APIs for Amazon Managed Blockchain
+* feature: S3: Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.
+* feature: S3Control: Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.
+* feature: SupportApp: This release adds the RegisterSlackWorkspaceForOrganization API. You can use the API to register a Slack workspace for an AWS account that is part of an organization.
+* feature: WorkSpacesWeb: WorkSpaces Web now supports user access logging for recording session start, stop, and URL navigation.
 
 ## 2.1235.0
 * feature: SESV2: This release allows subscribers to enable Dedicated IPs (managed) to send email via a fully managed dedicated IP experience. It also adds identities' VerificationStatus in the response of GetEmailIdentity and ListEmailIdentities APIs, and ImportJobs counts in the response of ListImportJobs API.

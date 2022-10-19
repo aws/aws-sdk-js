@@ -60,11 +60,11 @@ declare class Connect extends Service {
    */
   associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a flow with a phone number claimed to your Amazon Connect instance.
+   * Associates a flow with a phone number claimed to your Amazon Connect instance.  If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   associatePhoneNumberContactFlow(params: Connect.Types.AssociatePhoneNumberContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a flow with a phone number claimed to your Amazon Connect instance.
+   * Associates a flow with a phone number claimed to your Amazon Connect instance.  If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   associatePhoneNumberContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class Connect extends Service {
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance.
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.  You can call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance.
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.  You can call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
    */
   claimPhoneNumber(callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Connect extends Service {
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   createQueue(params: Connect.Types.CreateQueueRequest, callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   createQueue(callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
   /**
@@ -187,6 +187,14 @@ declare class Connect extends Service {
    * Creates a new task template in the specified Amazon Connect instance.
    */
   createTaskTemplate(callback?: (err: AWSError, data: Connect.Types.CreateTaskTemplateResponse) => void): Request<Connect.Types.CreateTaskTemplateResponse, AWSError>;
+  /**
+   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
+   */
+  createTrafficDistributionGroup(params: Connect.Types.CreateTrafficDistributionGroupRequest, callback?: (err: AWSError, data: Connect.Types.CreateTrafficDistributionGroupResponse) => void): Request<Connect.Types.CreateTrafficDistributionGroupResponse, AWSError>;
+  /**
+   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
+   */
+  createTrafficDistributionGroup(callback?: (err: AWSError, data: Connect.Types.CreateTrafficDistributionGroupResponse) => void): Request<Connect.Types.CreateTrafficDistributionGroupResponse, AWSError>;
   /**
    * Creates a use case for an integration association.
    */
@@ -284,6 +292,14 @@ declare class Connect extends Service {
    */
   deleteTaskTemplate(callback?: (err: AWSError, data: Connect.Types.DeleteTaskTemplateResponse) => void): Request<Connect.Types.DeleteTaskTemplateResponse, AWSError>;
   /**
+   * Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is created. For more information about deleting traffic distribution groups, see Delete traffic distribution groups in the Amazon Connect Administrator Guide.
+   */
+  deleteTrafficDistributionGroup(params: Connect.Types.DeleteTrafficDistributionGroupRequest, callback?: (err: AWSError, data: Connect.Types.DeleteTrafficDistributionGroupResponse) => void): Request<Connect.Types.DeleteTrafficDistributionGroupResponse, AWSError>;
+  /**
+   * Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is created. For more information about deleting traffic distribution groups, see Delete traffic distribution groups in the Amazon Connect Administrator Guide.
+   */
+  deleteTrafficDistributionGroup(callback?: (err: AWSError, data: Connect.Types.DeleteTrafficDistributionGroupResponse) => void): Request<Connect.Types.DeleteTrafficDistributionGroupResponse, AWSError>;
+  /**
    * Deletes a use case from an integration association.
    */
   deleteUseCase(params: Connect.Types.DeleteUseCaseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -380,11 +396,11 @@ declare class Connect extends Service {
    */
   describeInstanceStorageConfig(callback?: (err: AWSError, data: Connect.Types.DescribeInstanceStorageConfigResponse) => void): Request<Connect.Types.DescribeInstanceStorageConfigResponse, AWSError>;
   /**
-   * Gets details and status of a phone number that’s claimed to your Amazon Connect instance
+   * Gets details and status of a phone number that’s claimed to your Amazon Connect instance or traffic distribution group.  If the number is claimed to a traffic distribution group, and you are calling in the Amazon Web Services Region where the traffic distribution group was created, you can use either a phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   describePhoneNumber(params: Connect.Types.DescribePhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.DescribePhoneNumberResponse) => void): Request<Connect.Types.DescribePhoneNumberResponse, AWSError>;
   /**
-   * Gets details and status of a phone number that’s claimed to your Amazon Connect instance
+   * Gets details and status of a phone number that’s claimed to your Amazon Connect instance or traffic distribution group.  If the number is claimed to a traffic distribution group, and you are calling in the Amazon Web Services Region where the traffic distribution group was created, you can use either a phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   describePhoneNumber(callback?: (err: AWSError, data: Connect.Types.DescribePhoneNumberResponse) => void): Request<Connect.Types.DescribePhoneNumberResponse, AWSError>;
   /**
@@ -419,6 +435,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Gets basic information about the security profle.
    */
   describeSecurityProfile(callback?: (err: AWSError, data: Connect.Types.DescribeSecurityProfileResponse) => void): Request<Connect.Types.DescribeSecurityProfileResponse, AWSError>;
+  /**
+   * Gets details and status of a traffic distribution group.
+   */
+  describeTrafficDistributionGroup(params: Connect.Types.DescribeTrafficDistributionGroupRequest, callback?: (err: AWSError, data: Connect.Types.DescribeTrafficDistributionGroupResponse) => void): Request<Connect.Types.DescribeTrafficDistributionGroupResponse, AWSError>;
+  /**
+   * Gets details and status of a traffic distribution group.
+   */
+  describeTrafficDistributionGroup(callback?: (err: AWSError, data: Connect.Types.DescribeTrafficDistributionGroupResponse) => void): Request<Connect.Types.DescribeTrafficDistributionGroupResponse, AWSError>;
   /**
    * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
@@ -492,11 +516,11 @@ declare class Connect extends Service {
    */
   disassociateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the flow association from a phone number claimed to your Amazon Connect instance, if a flow association exists.
+   * Removes the flow association from a phone number claimed to your Amazon Connect instance.  If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   disassociatePhoneNumberContactFlow(params: Connect.Types.DisassociatePhoneNumberContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the flow association from a phone number claimed to your Amazon Connect instance, if a flow association exists.
+   * Removes the flow association from a phone number claimed to your Amazon Connect instance.  If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   disassociatePhoneNumberContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -571,6 +595,14 @@ declare class Connect extends Service {
    * Gets details about a specific task template in the specified Amazon Connect instance.
    */
   getTaskTemplate(callback?: (err: AWSError, data: Connect.Types.GetTaskTemplateResponse) => void): Request<Connect.Types.GetTaskTemplateResponse, AWSError>;
+  /**
+   * Retrieves the current traffic distribution for a given traffic distribution group.
+   */
+  getTrafficDistribution(params: Connect.Types.GetTrafficDistributionRequest, callback?: (err: AWSError, data: Connect.Types.GetTrafficDistributionResponse) => void): Request<Connect.Types.GetTrafficDistributionResponse, AWSError>;
+  /**
+   * Retrieves the current traffic distribution for a given traffic distribution group.
+   */
+  getTrafficDistribution(callback?: (err: AWSError, data: Connect.Types.GetTrafficDistributionResponse) => void): Request<Connect.Types.GetTrafficDistributionResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Lists agent statuses.
    */
@@ -684,19 +716,19 @@ declare class Connect extends Service {
    */
   listLexBots(callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
-   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.  The phone number Arn value that is returned from each of the items in the PhoneNumberSummaryList cannot be used to tag phone number resources. It will fail with a ResourceNotFoundException. Instead, use the ListPhoneNumbersV2 API. It returns the new phone number ARN that can be used to tag phone number resources. 
    */
   listPhoneNumbers(params: Connect.Types.ListPhoneNumbersRequest, callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.  The phone number Arn value that is returned from each of the items in the PhoneNumberSummaryList cannot be used to tag phone number resources. It will fail with a ResourceNotFoundException. Instead, use the ListPhoneNumbersV2 API. It returns the new phone number ARN that can be used to tag phone number resources. 
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Lists phone numbers claimed to your Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   * Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group. For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
    */
   listPhoneNumbersV2(params: Connect.Types.ListPhoneNumbersV2Request, callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
   /**
-   * Lists phone numbers claimed to your Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   * Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group. For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
    */
   listPhoneNumbersV2(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
   /**
@@ -788,6 +820,14 @@ declare class Connect extends Service {
    */
   listTaskTemplates(callback?: (err: AWSError, data: Connect.Types.ListTaskTemplatesResponse) => void): Request<Connect.Types.ListTaskTemplatesResponse, AWSError>;
   /**
+   * Lists traffic distribution groups.
+   */
+  listTrafficDistributionGroups(params: Connect.Types.ListTrafficDistributionGroupsRequest, callback?: (err: AWSError, data: Connect.Types.ListTrafficDistributionGroupsResponse) => void): Request<Connect.Types.ListTrafficDistributionGroupsResponse, AWSError>;
+  /**
+   * Lists traffic distribution groups.
+   */
+  listTrafficDistributionGroups(callback?: (err: AWSError, data: Connect.Types.ListTrafficDistributionGroupsResponse) => void): Request<Connect.Types.ListTrafficDistributionGroupsResponse, AWSError>;
+  /**
    * Lists the use cases for the integration association. 
    */
   listUseCases(params: Connect.Types.ListUseCasesRequest, callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
@@ -820,13 +860,21 @@ declare class Connect extends Service {
    */
   putUserStatus(callback?: (err: AWSError, data: Connect.Types.PutUserStatusResponse) => void): Request<Connect.Types.PutUserStatusResponse, AWSError>;
   /**
-   * Releases a phone number previously claimed to an Amazon Connect instance.
+   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect console. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support. 
    */
   releasePhoneNumber(params: Connect.Types.ReleasePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases a phone number previously claimed to an Amazon Connect instance.
+   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect console. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support. 
    */
   releasePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Replicates an Amazon Connect instance in the specified Amazon Web Services Region. For more information about replicating an Amazon Connect instance, see Create a replica of your existing Amazon Connect instance in the Amazon Connect Administrator Guide.
+   */
+  replicateInstance(params: Connect.Types.ReplicateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.ReplicateInstanceResponse) => void): Request<Connect.Types.ReplicateInstanceResponse, AWSError>;
+  /**
+   * Replicates an Amazon Connect instance in the specified Amazon Web Services Region. For more information about replicating an Amazon Connect instance, see Create a replica of your existing Amazon Connect instance in the Amazon Connect Administrator Guide.
+   */
+  replicateInstance(callback?: (err: AWSError, data: Connect.Types.ReplicateInstanceResponse) => void): Request<Connect.Types.ReplicateInstanceResponse, AWSError>;
   /**
    * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call. Only voice recordings are supported at this time.
    */
@@ -836,11 +884,11 @@ declare class Connect extends Service {
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
-   * Searches for available phone numbers that you can claim to your Amazon Connect instance.
+   * Searches for available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with the traffic distribution group.
    */
   searchAvailablePhoneNumbers(params: Connect.Types.SearchAvailablePhoneNumbersRequest, callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
-   * Searches for available phone numbers that you can claim to your Amazon Connect instance.
+   * Searches for available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with the traffic distribution group.
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
@@ -868,11 +916,11 @@ declare class Connect extends Service {
    */
   searchSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
   /**
-   * Searches users in an Amazon Connect instance, with optional filtering.
+   * Searches users in an Amazon Connect instance, with optional filtering.   AfterContactWorkTimeLimit is returned in milliseconds.  
    */
   searchUsers(params: Connect.Types.SearchUsersRequest, callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
   /**
-   * Searches users in an Amazon Connect instance, with optional filtering.
+   * Searches users in an Amazon Connect instance, with optional filtering.   AfterContactWorkTimeLimit is returned in milliseconds.  
    */
   searchUsers(callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
   /**
@@ -1076,11 +1124,11 @@ declare class Connect extends Service {
    */
   updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.
+   * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
    */
   updatePhoneNumber(params: Connect.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.
+   * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
@@ -1108,11 +1156,11 @@ declare class Connect extends Service {
    */
   updateQueueName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   updateQueueOutboundCallerConfig(params: Connect.Types.UpdateQueueOutboundCallerConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   updateQueueOutboundCallerConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1187,6 +1235,14 @@ declare class Connect extends Service {
    * Updates details about a specific task template in the specified Amazon Connect instance. This operation does not support partial updates. Instead it does a full update of template content.
    */
   updateTaskTemplate(callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
+  /**
+   * Updates the traffic distribution for a given traffic distribution group. For more information about updating a traffic distribution group see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   */
+  updateTrafficDistribution(params: Connect.Types.UpdateTrafficDistributionRequest, callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
+  /**
+   * Updates the traffic distribution for a given traffic distribution group. For more information about updating a traffic distribution group see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   */
+  updateTrafficDistribution(callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
    * Assigns the specified hierarchy group to the specified user.
    */
@@ -1551,6 +1607,7 @@ declare namespace Connect {
     PhoneNumberType?: PhoneNumberType;
   }
   export type AvailableNumbersList = AvailableNumberSummary[];
+  export type AwsRegion = string;
   export type Boolean = boolean;
   export type BotName = string;
   export type BucketName = string;
@@ -1580,7 +1637,7 @@ declare namespace Connect {
   export type ChatStreamingEndpointARN = string;
   export interface ClaimPhoneNumberRequest {
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
      */
     TargetArn: ARN;
     /**
@@ -1596,7 +1653,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
   }
@@ -1636,7 +1693,7 @@ declare namespace Connect {
      */
     PhoneNumberDescription?: PhoneNumberDescription;
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
      */
     TargetArn?: ARN;
     /**
@@ -1644,7 +1701,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * The status of the phone number.
+     * The status of the phone number.    CLAIMED means the previous ClaimedPhoneNumber or UpdatePhoneNumber operation succeeded.    IN_PROGRESS means a ClaimedPhoneNumber or UpdatePhoneNumber operation is still in progress and has not yet completed. You can call DescribePhoneNumber at a later time to verify if the previous operation has completed.    FAILED indicates that the previous ClaimedPhoneNumber or UpdatePhoneNumber operation has failed. It will include a message indicating the failure reason. A common reason for a failure may be that the TargetArn value you are claiming or updating a phone number to has reached its limit of total claimed numbers. If you received a FAILED status from a ClaimPhoneNumber API call, you have one day to retry claiming the phone number before the number is released back to the inventory for other customers to claim.    You will not be billed for the phone number during the 1-day period if number claiming fails.  
      */
     PhoneNumberStatus?: PhoneNumberStatus;
   }
@@ -1916,7 +1973,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
   }
@@ -2260,7 +2317,7 @@ declare namespace Connect {
      */
     Fields: TaskTemplateFields;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
   }
@@ -2273,6 +2330,38 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) for the task template resource.
      */
     Arn: TaskTemplateArn;
+  }
+  export interface CreateTrafficDistributionGroupRequest {
+    /**
+     * The name for the traffic distribution group. 
+     */
+    Name: Name128;
+    /**
+     * A description for the traffic distribution group.
+     */
+    Description?: Description250;
+    /**
+     * The identifier of the Amazon Connect instance that has been replicated. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceIdOrArn;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateTrafficDistributionGroupResponse {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    Id?: TrafficDistributionGroupId;
+    /**
+     * The Amazon Resource Name (ARN) of the traffic distribution group.
+     */
+    Arn?: TrafficDistributionGroupArn;
   }
   export interface CreateUseCaseRequest {
     /**
@@ -2384,7 +2473,7 @@ declare namespace Connect {
   }
   export interface CreateVocabularyRequest {
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If a create request is received more than once with same client token, subsequent requests return the previous response without creating a vocabulary again.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs. If a create request is received more than once with same client token, subsequent requests return the previous response without creating a vocabulary again.
      */
     ClientToken?: ClientToken;
     /**
@@ -2584,6 +2673,14 @@ declare namespace Connect {
   }
   export interface DeleteTaskTemplateResponse {
   }
+  export interface DeleteTrafficDistributionGroupRequest {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    TrafficDistributionGroupId: TrafficDistributionGroupIdOrArn;
+  }
+  export interface DeleteTrafficDistributionGroupResponse {
+  }
   export interface DeleteUseCaseRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2778,7 +2875,7 @@ declare namespace Connect {
   }
   export interface DescribePhoneNumberResponse {
     /**
-     * Information about a phone number that's been claimed to your Amazon Connect instance.
+     * Information about a phone number that's been claimed to your Amazon Connect instance or traffic distribution group.
      */
     ClaimedPhoneNumberSummary?: ClaimedPhoneNumberSummary;
   }
@@ -2846,6 +2943,18 @@ declare namespace Connect {
      */
     SecurityProfile?: SecurityProfile;
   }
+  export interface DescribeTrafficDistributionGroupRequest {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    TrafficDistributionGroupId: TrafficDistributionGroupIdOrArn;
+  }
+  export interface DescribeTrafficDistributionGroupResponse {
+    /**
+     * Information about the traffic distribution group.
+     */
+    TrafficDistributionGroup?: TrafficDistributionGroup;
+  }
   export interface DescribeUserHierarchyGroupRequest {
     /**
      * The identifier of the hierarchy group.
@@ -2907,6 +3016,7 @@ declare namespace Connect {
     Vocabulary: Vocabulary;
   }
   export type Description = string;
+  export type Description250 = string;
   export interface Dimensions {
     /**
      * Information about the queue for which metrics are returned.
@@ -2976,7 +3086,7 @@ declare namespace Connect {
      */
     BotName: BotName;
     /**
-     * The Region in which the Amazon Lex bot has been created.
+     * The Amazon Web Services Region in which the Amazon Lex bot has been created.
      */
     LexRegion: LexRegion;
   }
@@ -3029,6 +3139,17 @@ declare namespace Connect {
     AssociationId: AssociationId;
   }
   export type DisplayName = string;
+  export interface Distribution {
+    /**
+     * The Amazon Web Services Region where the traffic is distributed.
+     */
+    Region: AwsRegion;
+    /**
+     * The percentage of the traffic that is distributed, in increments of 10.
+     */
+    Percentage: Percentage;
+  }
+  export type DistributionList = Distribution[];
   export type Email = string;
   export interface EmailReference {
     /**
@@ -3270,6 +3391,26 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+  }
+  export interface GetTrafficDistributionRequest {
+    /**
+     * The identifier of the traffic distribution group.
+     */
+    Id: TrafficDistributionGroupIdOrArn;
+  }
+  export interface GetTrafficDistributionResponse {
+    /**
+     * The distribution of traffic between the instance and its replicas.
+     */
+    TelephonyConfig?: TelephonyConfig;
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    Id?: TrafficDistributionGroupId;
+    /**
+     * The Amazon Resource Name (ARN) of the traffic distribution group.
+     */
+    Arn?: TrafficDistributionGroupArn;
   }
   export type Grouping = "QUEUE"|"CHANNEL"|string;
   export type Groupings = Grouping[];
@@ -3608,9 +3749,11 @@ declare namespace Connect {
      */
     OutboundCallsEnabled?: OutboundCallsEnabled;
   }
+  export type InstanceArn = string;
   export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|"MULTI_PARTY_CONFERENCE"|"HIGH_VOLUME_OUTBOUND"|string;
   export type InstanceAttributeValue = string;
   export type InstanceId = string;
+  export type InstanceIdOrArn = string;
   export type InstanceStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|string;
   export interface InstanceStatusReason {
     /**
@@ -3764,7 +3907,7 @@ declare namespace Connect {
      */
     Name?: BotName;
     /**
-     * The Region that the Amazon Lex bot was created in.
+     * The Amazon Web Services Region where the Amazon Lex bot was created.
      */
     LexRegion?: LexRegion;
   }
@@ -3857,7 +4000,7 @@ declare namespace Connect {
   }
   export interface ListBotsResponse {
     /**
-     * The names and Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified instance.
+     * The names and Amazon Web Services Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified instance.
      */
     LexBots?: LexBotConfigList;
     /**
@@ -4141,7 +4284,7 @@ declare namespace Connect {
   }
   export interface ListLexBotsResponse {
     /**
-     * The names and Regions of the Amazon Lex bots associated with the specified instance.
+     * The names and Amazon Web Services Regions of the Amazon Lex bots associated with the specified instance.
      */
     LexBots?: LexBotsList;
     /**
@@ -4203,14 +4346,14 @@ declare namespace Connect {
      */
     PhoneNumberType?: PhoneNumberType;
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
      */
     TargetArn?: ARN;
   }
   export type ListPhoneNumbersSummaryList = ListPhoneNumbersSummary[];
   export interface ListPhoneNumbersV2Request {
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If TargetArn input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to. If TargetArn input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account in the same Amazon Web Services Region as the request.
      */
     TargetArn?: ARN;
     /**
@@ -4240,7 +4383,7 @@ declare namespace Connect {
      */
     NextToken?: LargeNextToken;
     /**
-     * Information about phone numbers that have been claimed to your Amazon Connect instances.
+     * Information about phone numbers that have been claimed to your Amazon Connect instances or traffic distribution groups.
      */
     ListPhoneNumbersSummaryList?: ListPhoneNumbersSummaryList;
   }
@@ -4524,6 +4667,30 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListTrafficDistributionGroupsRequest {
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult10;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId?: InstanceIdOrArn;
+  }
+  export interface ListTrafficDistributionGroupsResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of traffic distribution groups.
+     */
+    TrafficDistributionGroupSummaryList?: TrafficDistributionGroupSummaryList;
+  }
   export interface ListUseCasesRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -4620,6 +4787,7 @@ declare namespace Connect {
   }
   export type MinutesLimit60 = number;
   export type Name = string;
+  export type Name128 = string;
   export type NextToken = string;
   export type NextToken2500 = string;
   export interface NumberReference {
@@ -4660,6 +4828,7 @@ declare namespace Connect {
   export type ParticipantId = string;
   export type ParticipantToken = string;
   export type Password = string;
+  export type Percentage = number;
   export type PermissionsList = SecurityProfilePermission[];
   export type PhoneNumber = string;
   export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
@@ -4788,7 +4957,7 @@ declare namespace Connect {
   export type QueueId = string;
   export interface QueueInfo {
     /**
-     * The identifier of the agent who accepted the contact.
+     * The unique identifier for the queue.
      */
     Id?: QueueId;
     /**
@@ -4943,7 +5112,7 @@ declare namespace Connect {
      */
     Value: ReferenceValue;
     /**
-     * The type of the reference.
+     * The type of the reference. DATE must be of type Epoch timestamp. 
      */
     Type: ReferenceType;
   }
@@ -4985,9 +5154,37 @@ declare namespace Connect {
      */
     PhoneNumberId: PhoneNumberId;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
+  }
+  export interface ReplicateInstanceRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceIdOrArn;
+    /**
+     * The Amazon Web Services Region where to replicate the Amazon Connect instance.
+     */
+    ReplicaRegion: AwsRegion;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The alias for the replicated instance. The ReplicaAlias must be unique.
+     */
+    ReplicaAlias: DirectoryAlias;
+  }
+  export interface ReplicateInstanceResponse {
+    /**
+     * The identifier of the replicated instance. You can find the instanceId in the ARN of the instance. The replicated instance has the same identifier as the instance it was replicated from.
+     */
+    Id?: InstanceId;
+    /**
+     * The Amazon Resource Name (ARN) of the replicated instance.
+     */
+    Arn?: ARN;
   }
   export interface RequiredFieldInfo {
     /**
@@ -5167,7 +5364,7 @@ declare namespace Connect {
   }
   export interface SearchAvailablePhoneNumbersRequest {
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
      */
     TargetArn: ARN;
     /**
@@ -5197,7 +5394,7 @@ declare namespace Connect {
      */
     NextToken?: LargeNextToken;
     /**
-     * A list of available phone numbers that you can claim for your Amazon Connect instance.
+     * A list of available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group.
      */
     AvailableNumbersList?: AvailableNumbersList;
   }
@@ -5287,7 +5484,7 @@ declare namespace Connect {
      */
     MaxResults?: MaxResult100;
     /**
-     * The search criteria to be used to return security profiles.
+     * The search criteria to be used to return security profiles.   The currently supported value for FieldName: name  
      */
     SearchCriteria?: SecurityProfileSearchCriteria;
     /**
@@ -5509,7 +5706,7 @@ declare namespace Connect {
      */
     InitialMessage?: ChatMessage;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
     /**
@@ -5569,7 +5766,7 @@ declare namespace Connect {
      */
     ChatStreamingConfiguration: ChatStreamingConfiguration;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken: ClientToken;
   }
@@ -5593,7 +5790,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. 
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. 
      */
     ClientToken?: ClientToken;
     /**
@@ -5657,7 +5854,7 @@ declare namespace Connect {
      */
     Description?: Description;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
     /**
@@ -5893,6 +6090,12 @@ declare namespace Connect {
   export type TaskTemplateName = string;
   export type TaskTemplateSingleSelectOption = string;
   export type TaskTemplateStatus = "ACTIVE"|"INACTIVE"|string;
+  export interface TelephonyConfig {
+    /**
+     * Information about traffic distributions.
+     */
+    Distributions: DistributionList;
+  }
   export interface Threshold {
     /**
      * The type of comparison. Only "less than" (LT) comparisons are supported.
@@ -5906,6 +6109,63 @@ declare namespace Connect {
   export type ThresholdValue = number;
   export type TimeZone = string;
   export type Timestamp = Date;
+  export interface TrafficDistributionGroup {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    Id?: TrafficDistributionGroupId;
+    /**
+     * The Amazon Resource Name (ARN) of the traffic distribution group.
+     */
+    Arn?: TrafficDistributionGroupArn;
+    /**
+     * The name of the traffic distribution group.
+     */
+    Name?: Name128;
+    /**
+     * The description of the traffic distribution group.
+     */
+    Description?: Description250;
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    InstanceArn?: InstanceArn;
+    /**
+     * The status of the traffic distribution group.    CREATION_IN_PROGRESS means the previous CreateTrafficDistributionGroup operation is still in progress and has not yet completed.    ACTIVE means the previous CreateTrafficDistributionGroup operation has succeeded.    CREATION_FAILED indicates that the previous CreateTrafficDistributionGroup operation has failed.    PENDING_DELETION means the previous DeleteTrafficDistributionGroup operation is still in progress and has not yet completed.    DELETION_FAILED means the previous DeleteTrafficDistributionGroup operation has failed.    UPDATE_IN_PROGRESS means the previous UpdateTrafficDistributionGroup operation is still in progress and has not yet completed.  
+     */
+    Status?: TrafficDistributionGroupStatus;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export type TrafficDistributionGroupArn = string;
+  export type TrafficDistributionGroupId = string;
+  export type TrafficDistributionGroupIdOrArn = string;
+  export type TrafficDistributionGroupStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|"PENDING_DELETION"|"DELETION_FAILED"|"UPDATE_IN_PROGRESS"|string;
+  export interface TrafficDistributionGroupSummary {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    Id?: TrafficDistributionGroupId;
+    /**
+     * The Amazon Resource Name (ARN) of the traffic distribution group.
+     */
+    Arn?: TrafficDistributionGroupArn;
+    /**
+     * The name of the traffic distribution group.
+     */
+    Name?: Name128;
+    /**
+     * The Amazon Resource Name (ARN) of the traffic distribution group.
+     */
+    InstanceArn?: InstanceArn;
+    /**
+     * The status of the traffic distribution group.     CREATION_IN_PROGRESS means the previous CreateTrafficDistributionGroup operation is still in progress and has not yet completed.    ACTIVE means the previous CreateTrafficDistributionGroup operation has succeeded.    CREATION_FAILED indicates that the previous CreateTrafficDistributionGroup operation has failed.    PENDING_DELETION means the previous DeleteTrafficDistributionGroup operation is still in progress and has not yet completed.    DELETION_FAILED means the previous DeleteTrafficDistributionGroup operation has failed.    UPDATE_IN_PROGRESS means the previous UpdateTrafficDistributionGroup operation is still in progress and has not yet completed.  
+     */
+    Status?: TrafficDistributionGroupStatus;
+  }
+  export type TrafficDistributionGroupSummaryList = TrafficDistributionGroupSummary[];
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export interface TransferContactRequest {
     /**
@@ -5929,7 +6189,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
   }
@@ -6198,11 +6458,11 @@ declare namespace Connect {
      */
     PhoneNumberId: PhoneNumberId;
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
      */
     TargetArn: ARN;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
   }
@@ -6489,6 +6749,18 @@ declare namespace Connect {
      */
     CreatedTime?: timestamp;
   }
+  export interface UpdateTrafficDistributionRequest {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    Id: TrafficDistributionGroupIdOrArn;
+    /**
+     * The distribution of traffic between the instance and its replica(s).
+     */
+    TelephonyConfig?: TelephonyConfig;
+  }
+  export interface UpdateTrafficDistributionResponse {
+  }
   export interface UpdateUserHierarchyGroupNameRequest {
     /**
      * The name of the hierarchy group. Must not be more than 100 characters.
@@ -6654,7 +6926,7 @@ declare namespace Connect {
   }
   export interface UserData {
     /**
-     * Information about the user for the data that is returned. It contains resourceId and ARN of the user. 
+     * Information about the user for the data that is returned. It contains the resourceId and ARN of the user. 
      */
     User?: UserReference;
     /**
@@ -6712,7 +6984,7 @@ declare namespace Connect {
      */
     Email?: Email;
     /**
-     * The user's secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.
+     * The user's secondary email address. If you provide a secondary email, the user receives email notifications - other than password reset notifications - to this email address instead of to their primary email address. Pattern: (?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63} 
      */
     SecondaryEmail?: Email;
     /**
@@ -6740,7 +7012,7 @@ declare namespace Connect {
      */
     AutoAccept?: AutoAccept;
     /**
-     * The After Call Work (ACW) timeout setting, in seconds.
+     * The After Call Work (ACW) timeout setting, in seconds.  When returned by a SearchUsers call, AfterContactWorkTimeLimit is returned in milliseconds.  
      */
     AfterContactWorkTimeLimit?: AfterContactWorkTimeLimit;
     /**
