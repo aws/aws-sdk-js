@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "AwsQueryCompatible",
-  "description": "Make AwsQueryCompatible translation only if trait is found"
-}

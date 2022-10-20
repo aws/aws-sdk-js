@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1236.0-->
+<!--LATEST=2.1237.0-->
 <!--ENTRYINSERT-->
+
+## 2.1237.0
+* feature: AwsQueryCompatible: Make AwsQueryCompatible translation only if trait is found
+* feature: DevOpsGuru: This release adds information about the resources DevOps Guru is analyzing.
+* feature: GlobalAccelerator: Global Accelerator now supports AddEndpoints and RemoveEndpoints operations for standard endpoint groups.
+* feature: RUM: CloudWatch RUM now supports Extended CloudWatch Metrics with Additional Dimensions
+* feature: Resiliencehub: In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity.
 
 ## 2.1236.0
 * feature: CloudTrail: This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket.

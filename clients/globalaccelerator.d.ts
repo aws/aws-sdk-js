@@ -20,6 +20,14 @@ declare class GlobalAccelerator extends Service {
    */
   addCustomRoutingEndpoints(callback?: (err: AWSError, data: GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddCustomRoutingEndpointsResponse, AWSError>;
   /**
+   * Add endpoints to an endpoint group. The AddEndpoints API operation is the recommended option for adding endpoints. The alternative options are to add endpoints when you create an endpoint group (with the CreateEndpointGroup API) or when you update an endpoint group (with the UpdateEndpointGroup API).  There are two advantages to using AddEndpoints to add endpoints:   It's faster, because Global Accelerator only has to resolve the new endpoints that you're adding.   It's more convenient, because you don't need to specify all of the current endpoints that are already in the endpoint group in addition to the new endpoints that you want to add.  
+   */
+  addEndpoints(params: GlobalAccelerator.Types.AddEndpointsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AddEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddEndpointsResponse, AWSError>;
+  /**
+   * Add endpoints to an endpoint group. The AddEndpoints API operation is the recommended option for adding endpoints. The alternative options are to add endpoints when you create an endpoint group (with the CreateEndpointGroup API) or when you update an endpoint group (with the UpdateEndpointGroup API).  There are two advantages to using AddEndpoints to add endpoints:   It's faster, because Global Accelerator only has to resolve the new endpoints that you're adding.   It's more convenient, because you don't need to specify all of the current endpoints that are already in the endpoint group in addition to the new endpoints that you want to add.  
+   */
+  addEndpoints(callback?: (err: AWSError, data: GlobalAccelerator.Types.AddEndpointsResponse) => void): Request<GlobalAccelerator.Types.AddEndpointsResponse, AWSError>;
+  /**
    * Advertises an IPv4 address range that is provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP). It can take a few minutes before traffic to the specified addresses starts routing to Amazon Web Services because of propagation delays.  To stop advertising the BYOIP address range, use  WithdrawByoipCidr. For more information, see Bring your own IP addresses (BYOIP) in the Global Accelerator Developer Guide.
    */
   advertiseByoipCidr(params: GlobalAccelerator.Types.AdvertiseByoipCidrRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.AdvertiseByoipCidrResponse) => void): Request<GlobalAccelerator.Types.AdvertiseByoipCidrResponse, AWSError>;
@@ -308,6 +316,14 @@ declare class GlobalAccelerator extends Service {
    */
   removeCustomRoutingEndpoints(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Remove endpoints from an endpoint group.  The RemoveEndpoints API operation is the recommended option for removing endpoints. The alternative is to remove endpoints by updating an endpoint group by using the UpdateEndpointGroup API operation. There are two advantages to using AddEndpoints to remove endpoints instead:   It's more convenient, because you only need to specify the endpoints that you want to remove. With the UpdateEndpointGroup API operation, you must specify all of the endpoints in the endpoint group except the ones that you want to remove from the group.   It's faster, because Global Accelerator doesn't need to resolve any endpoints. With the UpdateEndpointGroup API operation, Global Accelerator must resolve all of the endpoints that remain in the group.  
+   */
+  removeEndpoints(params: GlobalAccelerator.Types.RemoveEndpointsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove endpoints from an endpoint group.  The RemoveEndpoints API operation is the recommended option for removing endpoints. The alternative is to remove endpoints by updating an endpoint group by using the UpdateEndpointGroup API operation. There are two advantages to using AddEndpoints to remove endpoints instead:   It's more convenient, because you only need to specify the endpoints that you want to remove. With the UpdateEndpointGroup API operation, you must specify all of the endpoints in the endpoint group except the ones that you want to remove from the group.   It's faster, because Global Accelerator doesn't need to resolve any endpoints. With the UpdateEndpointGroup API operation, Global Accelerator must resolve all of the endpoints that remain in the group.  
+   */
+  removeEndpoints(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Add tags to an accelerator resource.  For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide. 
    */
   tagResource(params: GlobalAccelerator.Types.TagResourceRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.TagResourceResponse) => void): Request<GlobalAccelerator.Types.TagResourceResponse, AWSError>;
@@ -411,7 +427,7 @@ declare namespace GlobalAccelerator {
      */
     IpSets?: IpSets;
     /**
-     * The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses. The naming convention for the DNS name for an accelerator is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four static addresses for the accelerator (two IPv4 addresses and two IPv6 addresses). For more information about the default DNS name, see  Support for DNS Addressing in Global Accelerator in the Global Accelerator Developer Guide.
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses. The naming convention for the DNS name for an accelerator is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four static addresses for the accelerator: two IPv4 addresses and two IPv6 addresses. For more information about the default DNS name, see  Support for DNS addressing in Global Accelerator in the Global Accelerator Developer Guide.
      */
     DnsName?: GenericString;
     /**
@@ -427,7 +443,7 @@ declare namespace GlobalAccelerator {
      */
     LastModifiedTime?: Timestamp;
     /**
-     * The Domain Name System (DNS) name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. The naming convention for the dual-stack DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .dualstack.awsglobalaccelerator.com. For example: a1234567890abcdef.dualstack.awsglobalaccelerator.com. Note: Global Accelerator also assigns a default DNS name, DnsName, to your accelerator that points just to the static IPv4 addresses.  For more information, see  Support for DNS Addressing in Global Accelerator in the Global Accelerator Developer Guide.
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses: two IPv4 addresses and two IPv6 addresses. The naming convention for the dual-stack DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .dualstack.awsglobalaccelerator.com. For example: a1234567890abcdef.dualstack.awsglobalaccelerator.com. Note: Global Accelerator also assigns a default DNS name, DnsName, to your accelerator that points just to the static IPv4 addresses.  For more information, see  Support for DNS addressing in Global Accelerator in the Global Accelerator Developer Guide.
      */
     DualStackDnsName?: GenericString;
     /**
@@ -479,6 +495,26 @@ declare namespace GlobalAccelerator {
     EndpointDescriptions?: CustomRoutingEndpointDescriptions;
     /**
      * The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.
+     */
+    EndpointGroupArn?: GenericString;
+  }
+  export interface AddEndpointsRequest {
+    /**
+     * The list of endpoint objects.
+     */
+    EndpointConfigurations: EndpointConfigurations;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface AddEndpointsResponse {
+    /**
+     * The list of endpoint objects.
+     */
+    EndpointDescriptions?: EndpointDescriptions;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
      */
     EndpointGroupArn?: GenericString;
   }
@@ -764,7 +800,7 @@ declare namespace GlobalAccelerator {
      */
     IpSets?: IpSets;
     /**
-     * The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four static addresses for the accelerator (two IPv4 addresses and two IPv6 addresses). For more information about the default DNS name, see  Support for DNS Addressing in Global Accelerator in the Global Accelerator Developer Guide.
+     * The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses.  The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four static addresses for the accelerator: two IPv4 addresses and two IPv6 addresses. For more information about the default DNS name, see  Support for DNS addressing in Global Accelerator in the Global Accelerator Developer Guide.
      */
     DnsName?: GenericString;
     /**
@@ -1157,6 +1193,17 @@ declare namespace GlobalAccelerator {
     PortOverrides?: PortOverrides;
   }
   export type EndpointGroups = EndpointGroup[];
+  export interface EndpointIdentifier {
+    /**
+     * An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID.  An Application Load Balancer can be either internal or internet-facing.
+     */
+    EndpointId: GenericString;
+    /**
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator.
+     */
+    ClientIPPreservationEnabled?: GenericBoolean;
+  }
+  export type EndpointIdentifiers = EndpointIdentifier[];
   export type EndpointIds = GenericString[];
   export type EndpointWeight = number;
   export type GenericBoolean = boolean;
@@ -1506,6 +1553,16 @@ declare namespace GlobalAccelerator {
     EndpointIds: EndpointIds;
     /**
      * The Amazon Resource Name (ARN) of the endpoint group to remove endpoints from.
+     */
+    EndpointGroupArn: GenericString;
+  }
+  export interface RemoveEndpointsRequest {
+    /**
+     * The identifiers of the endpoints that you want to remove.
+     */
+    EndpointIdentifiers: EndpointIdentifiers;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint group.
      */
     EndpointGroupArn: GenericString;
   }

@@ -212,11 +212,11 @@ declare class DevOpsGuru extends Service {
    */
   removeNotificationChannel(callback?: (err: AWSError, data: DevOpsGuru.Types.RemoveNotificationChannelResponse) => void): Request<DevOpsGuru.Types.RemoveNotificationChannelResponse, AWSError>;
   /**
-   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
+   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time, one or more statuses (ONGOING or CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
    */
   searchInsights(params: DevOpsGuru.Types.SearchInsightsRequest, callback?: (err: AWSError, data: DevOpsGuru.Types.SearchInsightsResponse) => void): Request<DevOpsGuru.Types.SearchInsightsResponse, AWSError>;
   /**
-   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time, one or more statuses (ONGOING, CLOSED, and CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
+   *  Returns a list of insights in your Amazon Web Services account. You can specify which insights are returned by their start time, one or more statuses (ONGOING or CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or PROACTIVE).   Use the Filters parameter to specify status and severity search parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your search. 
    */
   searchInsights(callback?: (err: AWSError, data: DevOpsGuru.Types.SearchInsightsResponse) => void): Request<DevOpsGuru.Types.SearchInsightsResponse, AWSError>;
   /**
@@ -301,6 +301,7 @@ declare namespace DevOpsGuru {
      */
     Status?: EventSourceOptInStatus;
   }
+  export type AnalyzedResourceCount = number;
   export interface AnomalousLogGroup {
     /**
      *  The name of the CloudWatch log group. 
@@ -419,6 +420,10 @@ declare namespace DevOpsGuru {
      *  Information about the health of the Amazon Web Services resources in your account that are specified by an Amazon Web Services CloudFormation stack, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. 
      */
     Insight?: InsightHealth;
+    /**
+     *  Number of resources that DevOps Guru is monitoring in your account that are specified by an Amazon Web Services CloudFormation stack. 
+     */
+    AnalyzedResourceCount?: AnalyzedResourceCount;
   }
   export type CloudFormationHealths = CloudFormationHealth[];
   export type CloudWatchMetricDataStatusCode = "Complete"|"InternalError"|"PartialData"|string;
@@ -534,6 +539,10 @@ declare namespace DevOpsGuru {
      * The number of Amazon DevOps Guru resource analysis hours billed to the current Amazon Web Services account in the last hour. 
      */
     ResourceHours: ResourceHours;
+    /**
+     *  Number of resources that DevOps Guru is monitoring in your Amazon Web Services account. 
+     */
+    AnalyzedResourceCount?: AnalyzedResourceCount;
   }
   export interface DescribeAccountOverviewRequest {
     /**
@@ -1131,7 +1140,7 @@ declare namespace DevOpsGuru {
     /**
      *  Filters to determine which monitored resources you want to retrieve. You can filter by resource type or resource permission status. 
      */
-    Filters: ListMonitoredResourcesFilters;
+    Filters?: ListMonitoredResourcesFilters;
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
@@ -1299,6 +1308,11 @@ declare namespace DevOpsGuru {
      *  The permission status of a resource. 
      */
     ResourcePermission?: ResourcePermission;
+    /**
+     *  The time at which DevOps Guru last updated this resource. 
+     */
+    LastUpdated?: Timestamp;
+    ResourceCollection?: ResourceCollection;
   }
   export type MonitoredResourceIdentifiers = MonitoredResourceIdentifier[];
   export type MonitoredResourceName = string;
@@ -1997,7 +2011,7 @@ declare namespace DevOpsGuru {
   export type ResourceName = string;
   export type ResourcePermission = "FULL_PERMISSION"|"MISSING_PERMISSION"|string;
   export type ResourceType = string;
-  export type ResourceTypeFilter = "LOG_GROUPS"|string;
+  export type ResourceTypeFilter = "LOG_GROUPS"|"CLOUDFRONT_DISTRIBUTION"|"DYNAMODB_TABLE"|"EC2_NAT_GATEWAY"|"ECS_CLUSTER"|"ECS_SERVICE"|"EKS_CLUSTER"|"ELASTIC_BEANSTALK_ENVIRONMENT"|"ELASTIC_LOAD_BALANCER_LOAD_BALANCER"|"ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER"|"ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP"|"ELASTICACHE_CACHE_CLUSTER"|"ELASTICSEARCH_DOMAIN"|"KINESIS_STREAM"|"LAMBDA_FUNCTION"|"OPEN_SEARCH_SERVICE_DOMAIN"|"RDS_DB_INSTANCE"|"RDS_DB_CLUSTER"|"REDSHIFT_CLUSTER"|"ROUTE53_HOSTED_ZONE"|"ROUTE53_HEALTH_CHECK"|"S3_BUCKET"|"SAGEMAKER_ENDPOINT"|"SNS_TOPIC"|"SQS_QUEUE"|"STEP_FUNCTIONS_ACTIVITY"|"STEP_FUNCTIONS_STATE_MACHINE"|string;
   export type ResourceTypeFilters = ResourceTypeFilter[];
   export type SearchInsightsAccountIdList = AwsAccountId[];
   export interface SearchInsightsFilters {
@@ -2117,6 +2131,10 @@ declare namespace DevOpsGuru {
      * Represents the health of an Amazon Web Services service. This is a ServiceInsightHealth that contains the number of open proactive and reactive insights for this service.
      */
     Insight?: ServiceInsightHealth;
+    /**
+     *  Number of resources that DevOps Guru is monitoring in an analyzed Amazon Web Services service. 
+     */
+    AnalyzedResourceCount?: AnalyzedResourceCount;
   }
   export type ServiceHealths = ServiceHealth[];
   export interface ServiceInsightHealth {
@@ -2241,6 +2259,10 @@ declare namespace DevOpsGuru {
      * Information about the health of the Amazon Web Services resources in your account that are specified by an Amazon Web Services tag, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. 
      */
     Insight?: InsightHealth;
+    /**
+     *  Number of resources that DevOps Guru is monitoring in your account that are specified by an Amazon Web Services tag. 
+     */
+    AnalyzedResourceCount?: AnalyzedResourceCount;
   }
   export type TagHealths = TagHealth[];
   export type TagValue = string;

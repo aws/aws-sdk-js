@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1236.0',
+	  VERSION: '2.1237.0',
 
 	  /**
 	   * @api private
@@ -4077,6 +4077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    property(this, 'documentation', api.documentation);
 	    property(this, 'documentationUrl', api.documentationUrl);
 	  }
+	  property(this, 'awsQueryCompatible', api.awsQueryCompatible);
 	}
 
 	/**
@@ -7443,10 +7444,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 
 	    add('ERROR', 'error', function ERROR(err, resp) {
-	      var headers = resp.httpResponse.headers;
-	      var queryErrorCode = headers ? headers['x-amzn-query-error'] : undefined;
-	      if (queryErrorCode) {
-	        resp.error.code = queryErrorCode.split(';')[0];
+	      var awsQueryCompatible = resp.request.service.api.awsQueryCompatible;
+	      if (awsQueryCompatible) {
+	        var headers = resp.httpResponse.headers;
+	        var queryErrorCode = headers ? headers['x-amzn-query-error'] : undefined;
+	        if (queryErrorCode && queryErrorCode.includes(';')) {
+	          resp.error.code = queryErrorCode.split(';')[0];
+	        }
 	      }
 	    }, true);
 

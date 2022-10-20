@@ -428,7 +428,7 @@ declare namespace Resiliencehub {
      */
     resiliencyScore?: Double;
     /**
-     * The status of the action.
+     * The status of the application.
      */
     status?: AppStatusType;
     /**
@@ -622,6 +622,10 @@ declare namespace Resiliencehub {
      * The current resiliency score for the application.
      */
     resiliencyScore?: Double;
+    /**
+     * The status of the application.
+     */
+    status?: AppStatusType;
   }
   export type AppSummaryList = AppSummary[];
   export type AppTemplateBody = string;
@@ -701,7 +705,7 @@ declare namespace Resiliencehub {
     suggestedChanges?: SuggestedChangesList;
   }
   export type ConfigRecommendationList = ConfigRecommendation[];
-  export type ConfigRecommendationOptimizationType = "LeastCost"|"LeastChange"|"BestAZRecovery"|"LeastErrors"|"BestAttainable"|string;
+  export type ConfigRecommendationOptimizationType = "LeastCost"|"LeastChange"|"BestAZRecovery"|"LeastErrors"|"BestAttainable"|"BestRegionRecovery"|string;
   export interface Cost {
     /**
      * The cost amount.
@@ -2135,7 +2139,7 @@ declare namespace Resiliencehub {
      */
     dataLocationConstraint?: DataLocationConstraint;
     /**
-     * The type of resiliency policy to be created, including the recovery time objective (RTO) and recovery point objective (RPO) in seconds.  If you do not want to specify regional targets for a regional policy, you must set the values of rpoInSecs and rtoInSecs to -1. 
+     * The type of resiliency policy to be created, including the recovery time objective (RTO) and recovery point objective (RPO) in seconds.
      */
     policy?: DisruptionPolicy;
     /**

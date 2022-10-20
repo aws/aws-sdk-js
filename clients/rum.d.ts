@@ -12,6 +12,30 @@ declare class RUM extends Service {
   constructor(options?: RUM.Types.ClientConfiguration)
   config: Config & RUM.Types.ClientConfiguration;
   /**
+   * Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently. By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in CloudWatch metrics that you can collect with CloudWatch RUM. If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also optionally send the metrics with additional dimensions. The valid dimension names for the additional dimensions are BrowserName, CountryCode, DeviceType, FileType, OSName, and PageId. For more information, see  Extended metrics that you can send to CloudWatch and CloudWatch Evidently. The maximum number of metric definitions that you can specify in one BatchCreateRumMetricDefinitions operation is 200.  &lt;p&gt;The maximum number of metric definitions that one destination can contain is 2000.&lt;/p&gt; &lt;p&gt;Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see &lt;a href=&quot;https://aws.amazon.com/cloudwatch/pricing/&quot;&gt;Amazon CloudWatch Pricing&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;You must have already created a destination for the metrics before you send them. For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html&quot;&gt;PutRumMetricsDestination&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;If some metric definitions specified in a &lt;code&gt;BatchCreateRumMetricDefinitions&lt;/code&gt; operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.&lt;/p&gt; 
+   */
+  batchCreateRumMetricDefinitions(params: RUM.Types.BatchCreateRumMetricDefinitionsRequest, callback?: (err: AWSError, data: RUM.Types.BatchCreateRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchCreateRumMetricDefinitionsResponse, AWSError>;
+  /**
+   * Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently. By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in CloudWatch metrics that you can collect with CloudWatch RUM. If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also optionally send the metrics with additional dimensions. The valid dimension names for the additional dimensions are BrowserName, CountryCode, DeviceType, FileType, OSName, and PageId. For more information, see  Extended metrics that you can send to CloudWatch and CloudWatch Evidently. The maximum number of metric definitions that you can specify in one BatchCreateRumMetricDefinitions operation is 200.  &lt;p&gt;The maximum number of metric definitions that one destination can contain is 2000.&lt;/p&gt; &lt;p&gt;Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see &lt;a href=&quot;https://aws.amazon.com/cloudwatch/pricing/&quot;&gt;Amazon CloudWatch Pricing&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;You must have already created a destination for the metrics before you send them. For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html&quot;&gt;PutRumMetricsDestination&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;If some metric definitions specified in a &lt;code&gt;BatchCreateRumMetricDefinitions&lt;/code&gt; operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.&lt;/p&gt; 
+   */
+  batchCreateRumMetricDefinitions(callback?: (err: AWSError, data: RUM.Types.BatchCreateRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchCreateRumMetricDefinitionsResponse, AWSError>;
+  /**
+   * Removes the specified metrics from being sent to an extended metrics destination. If some metric definition IDs specified in a BatchDeleteRumMetricDefinitions operations are not valid, those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still deleted. The maximum number of metric definitions that you can specify in one BatchDeleteRumMetricDefinitions operation is 200.
+   */
+  batchDeleteRumMetricDefinitions(params: RUM.Types.BatchDeleteRumMetricDefinitionsRequest, callback?: (err: AWSError, data: RUM.Types.BatchDeleteRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchDeleteRumMetricDefinitionsResponse, AWSError>;
+  /**
+   * Removes the specified metrics from being sent to an extended metrics destination. If some metric definition IDs specified in a BatchDeleteRumMetricDefinitions operations are not valid, those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still deleted. The maximum number of metric definitions that you can specify in one BatchDeleteRumMetricDefinitions operation is 200.
+   */
+  batchDeleteRumMetricDefinitions(callback?: (err: AWSError, data: RUM.Types.BatchDeleteRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchDeleteRumMetricDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves the list of metrics and dimensions that a RUM app monitor is sending to a single destination.
+   */
+  batchGetRumMetricDefinitions(params: RUM.Types.BatchGetRumMetricDefinitionsRequest, callback?: (err: AWSError, data: RUM.Types.BatchGetRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchGetRumMetricDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves the list of metrics and dimensions that a RUM app monitor is sending to a single destination.
+   */
+  batchGetRumMetricDefinitions(callback?: (err: AWSError, data: RUM.Types.BatchGetRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchGetRumMetricDefinitionsResponse, AWSError>;
+  /**
    * Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from your application and sends that data to RUM. The data includes performance and reliability information such as page load time, client-side errors, and user behavior. You use this operation only to create a new app monitor. To update an existing app monitor, use UpdateAppMonitor instead. After you create an app monitor, sign in to the CloudWatch RUM console to get the JavaScript code snippet to add to your web application. For more information, see How do I find a code snippet that I've already generated? 
    */
   createAppMonitor(params: RUM.Types.CreateAppMonitorRequest, callback?: (err: AWSError, data: RUM.Types.CreateAppMonitorResponse) => void): Request<RUM.Types.CreateAppMonitorResponse, AWSError>;
@@ -27,6 +51,14 @@ declare class RUM extends Service {
    * Deletes an existing app monitor. This immediately stops the collection of data.
    */
   deleteAppMonitor(callback?: (err: AWSError, data: RUM.Types.DeleteAppMonitorResponse) => void): Request<RUM.Types.DeleteAppMonitorResponse, AWSError>;
+  /**
+   * Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops sending extended metrics to that destination.
+   */
+  deleteRumMetricsDestination(params: RUM.Types.DeleteRumMetricsDestinationRequest, callback?: (err: AWSError, data: RUM.Types.DeleteRumMetricsDestinationResponse) => void): Request<RUM.Types.DeleteRumMetricsDestinationResponse, AWSError>;
+  /**
+   * Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops sending extended metrics to that destination.
+   */
+  deleteRumMetricsDestination(callback?: (err: AWSError, data: RUM.Types.DeleteRumMetricsDestinationResponse) => void): Request<RUM.Types.DeleteRumMetricsDestinationResponse, AWSError>;
   /**
    * Retrieves the complete configuration information for one app monitor.
    */
@@ -52,6 +84,14 @@ declare class RUM extends Service {
    */
   listAppMonitors(callback?: (err: AWSError, data: RUM.Types.ListAppMonitorsResponse) => void): Request<RUM.Types.ListAppMonitorsResponse, AWSError>;
   /**
+   * Returns a list of destinations that you have created to receive RUM extended metrics, for the specified app monitor. For more information about extended metrics, see AddRumMetrics.
+   */
+  listRumMetricsDestinations(params: RUM.Types.ListRumMetricsDestinationsRequest, callback?: (err: AWSError, data: RUM.Types.ListRumMetricsDestinationsResponse) => void): Request<RUM.Types.ListRumMetricsDestinationsResponse, AWSError>;
+  /**
+   * Returns a list of destinations that you have created to receive RUM extended metrics, for the specified app monitor. For more information about extended metrics, see AddRumMetrics.
+   */
+  listRumMetricsDestinations(callback?: (err: AWSError, data: RUM.Types.ListRumMetricsDestinationsResponse) => void): Request<RUM.Types.ListRumMetricsDestinationsResponse, AWSError>;
+  /**
    * Displays the tags associated with a CloudWatch RUM resource.
    */
   listTagsForResource(params: RUM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: RUM.Types.ListTagsForResourceResponse) => void): Request<RUM.Types.ListTagsForResourceResponse, AWSError>;
@@ -67,6 +107,14 @@ declare class RUM extends Service {
    * Sends telemetry events about your application performance and user behavior to CloudWatch RUM. The code snippet that RUM generates for you to add to your application includes PutRumEvents operations to send this data to RUM. Each PutRumEvents operation can send a batch of events from one user session.
    */
   putRumEvents(callback?: (err: AWSError, data: RUM.Types.PutRumEventsResponse) => void): Request<RUM.Types.PutRumEventsResponse, AWSError>;
+  /**
+   * Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment. For more information about extended metrics, see AddRumMetrics.
+   */
+  putRumMetricsDestination(params: RUM.Types.PutRumMetricsDestinationRequest, callback?: (err: AWSError, data: RUM.Types.PutRumMetricsDestinationResponse) => void): Request<RUM.Types.PutRumMetricsDestinationResponse, AWSError>;
+  /**
+   * Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment. For more information about extended metrics, see AddRumMetrics.
+   */
+  putRumMetricsDestination(callback?: (err: AWSError, data: RUM.Types.PutRumMetricsDestinationResponse) => void): Request<RUM.Types.PutRumMetricsDestinationResponse, AWSError>;
   /**
    * Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, the only resources that can be tagged app monitors. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. For more information, see Tagging Amazon Web Services resources.
    */
@@ -91,6 +139,14 @@ declare class RUM extends Service {
    * Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor configuration that you specify in this operation are changed. For any parameters that you omit, the existing values are kept. You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use TagResource. To create a new app monitor, use CreateAppMonitor. After you update an app monitor, sign in to the CloudWatch RUM console to get the updated JavaScript code snippet to add to your web application. For more information, see How do I find a code snippet that I've already generated? 
    */
   updateAppMonitor(callback?: (err: AWSError, data: RUM.Types.UpdateAppMonitorResponse) => void): Request<RUM.Types.UpdateAppMonitorResponse, AWSError>;
+  /**
+   * Modifies one existing metric definition for CloudWatch RUM extended metrics. For more information about extended metrics, see BatchCreateRumMetricsDefinitions.
+   */
+  updateRumMetricDefinition(params: RUM.Types.UpdateRumMetricDefinitionRequest, callback?: (err: AWSError, data: RUM.Types.UpdateRumMetricDefinitionResponse) => void): Request<RUM.Types.UpdateRumMetricDefinitionResponse, AWSError>;
+  /**
+   * Modifies one existing metric definition for CloudWatch RUM extended metrics. For more information about extended metrics, see BatchCreateRumMetricsDefinitions.
+   */
+  updateRumMetricDefinition(callback?: (err: AWSError, data: RUM.Types.UpdateRumMetricDefinitionResponse) => void): Request<RUM.Types.UpdateRumMetricDefinitionResponse, AWSError>;
 }
 declare namespace RUM {
   export interface AppMonitor {
@@ -145,7 +201,7 @@ declare namespace RUM {
      */
     ExcludedPages?: Pages;
     /**
-     * A list of pages in the CloudWatch RUM console that are to be displayed with a "favorite" icon.
+     * A list of pages in your application that are to be displayed with a "favorite" icon in the CloudWatch RUM console.
      */
     FavoritePages?: FavoritePages;
     /**
@@ -161,7 +217,7 @@ declare namespace RUM {
      */
     IncludedPages?: Pages;
     /**
-     * Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.
+     * Specifies the portion of user sessions to use for RUM data collection. Choosing a higher portion gives you more data but also incurs more costs. The range for this value is 0 to 1 inclusive. Setting this to 1 means that 100% of user sessions are sampled, and setting it to 0.1 means that 10% of user sessions are sampled. If you omit this parameter, the default of 0.1 is used, and 10% of sessions will be sampled.
      */
     SessionSampleRate?: SessionSampleRate;
     /**
@@ -210,6 +266,124 @@ declare namespace RUM {
   }
   export type AppMonitorSummaryList = AppMonitorSummary[];
   export type Arn = string;
+  export interface BatchCreateRumMetricDefinitionsError {
+    /**
+     * The error code.
+     */
+    ErrorCode: String;
+    /**
+     * The error message for this metric definition.
+     */
+    ErrorMessage: String;
+    /**
+     * The metric definition that caused this error.
+     */
+    MetricDefinition: MetricDefinitionRequest;
+  }
+  export type BatchCreateRumMetricDefinitionsErrors = BatchCreateRumMetricDefinitionsError[];
+  export interface BatchCreateRumMetricDefinitionsRequest {
+    /**
+     * The name of the CloudWatch RUM app monitor that is to send the metrics.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * The destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that will receive the metrics and an IAM role that has permission to write to the experiment.
+     */
+    Destination: MetricDestination;
+    /**
+     * This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter. This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this experiment as a valid destination. For more information, see PutRumMetricsDestination.
+     */
+    DestinationArn?: DestinationArn;
+    /**
+     * An array of structures which define the metrics that you want to send.
+     */
+    MetricDefinitions: MetricDefinitionsRequest;
+  }
+  export interface BatchCreateRumMetricDefinitionsResponse {
+    /**
+     * An array of error objects, if the operation caused any errors.
+     */
+    Errors: BatchCreateRumMetricDefinitionsErrors;
+    /**
+     * An array of structures that define the extended metrics.
+     */
+    MetricDefinitions?: MetricDefinitions;
+  }
+  export interface BatchDeleteRumMetricDefinitionsError {
+    /**
+     * The error code.
+     */
+    ErrorCode: String;
+    /**
+     * The error message for this metric definition.
+     */
+    ErrorMessage: String;
+    /**
+     * The ID of the metric definition that caused this error.
+     */
+    MetricDefinitionId: MetricDefinitionId;
+  }
+  export type BatchDeleteRumMetricDefinitionsErrors = BatchDeleteRumMetricDefinitionsError[];
+  export interface BatchDeleteRumMetricDefinitionsRequest {
+    /**
+     * The name of the CloudWatch RUM app monitor that is sending these metrics.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * Defines the destination where you want to stop sending the specified metrics. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
+     */
+    Destination: MetricDestination;
+    /**
+     * This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.  This parameter specifies the ARN of the Evidently experiment that was receiving the metrics that are being deleted.
+     */
+    DestinationArn?: DestinationArn;
+    /**
+     * An array of structures which define the metrics that you want to stop sending.
+     */
+    MetricDefinitionIds: MetricDefinitionIds;
+  }
+  export interface BatchDeleteRumMetricDefinitionsResponse {
+    /**
+     * An array of error objects, if the operation caused any errors.
+     */
+    Errors: BatchDeleteRumMetricDefinitionsErrors;
+    /**
+     * The IDs of the metric definitions that were deleted.
+     */
+    MetricDefinitionIds?: MetricDefinitionIds;
+  }
+  export interface BatchGetRumMetricDefinitionsRequest {
+    /**
+     * The name of the CloudWatch RUM app monitor that is sending the metrics.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * The type of destination that you want to view metrics for. Valid values are CloudWatch and Evidently.
+     */
+    Destination: MetricDestination;
+    /**
+     * This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter. This parameter specifies the ARN of the Evidently experiment that corresponds to the destination.
+     */
+    DestinationArn?: DestinationArn;
+    /**
+     * The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100. To retrieve the remaining results, make another call with the returned NextToken value. 
+     */
+    MaxResults?: MaxResultsInteger;
+    /**
+     * Use the token returned by the previous operation to request the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface BatchGetRumMetricDefinitionsResponse {
+    /**
+     * An array of structures that display information about the metrics that are sent by the specified app monitor to the specified destination.
+     */
+    MetricDefinitions?: MetricDefinitions;
+    /**
+     * A token that you can use in a subsequent operation to retrieve the next set of results.
+     */
+    NextToken?: String;
+  }
   export type Boolean = boolean;
   export interface CreateAppMonitorRequest {
     /**
@@ -263,8 +437,29 @@ declare namespace RUM {
   }
   export interface DeleteAppMonitorResponse {
   }
+  export interface DeleteRumMetricsDestinationRequest {
+    /**
+     * The name of the app monitor that is sending metrics to the destination that you want to delete.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * The type of destination to delete. Valid values are CloudWatch and Evidently.
+     */
+    Destination: MetricDestination;
+    /**
+     * This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter. This parameter specifies the ARN of the Evidently experiment that corresponds to the destination to delete.
+     */
+    DestinationArn?: DestinationArn;
+  }
+  export interface DeleteRumMetricsDestinationResponse {
+  }
+  export type DestinationArn = string;
+  export type DimensionKey = string;
+  export type DimensionKeysMap = {[key: string]: DimensionName};
+  export type DimensionName = string;
   export type EventData = string;
   export type EventDataList = EventData[];
+  export type EventPattern = string;
   export type FavoritePages = String[];
   export interface GetAppMonitorDataRequest {
     /**
@@ -311,14 +506,14 @@ declare namespace RUM {
     AppMonitor?: AppMonitor;
   }
   export type ISOTimestampString = string;
+  export type IamRoleArn = string;
   export type IdentityPoolId = string;
-  export type Integer = number;
   export type JsonValue = string;
   export interface ListAppMonitorsRequest {
     /**
-     * The maximum number of results to return in one operation. 
+     * The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100.
      */
-    MaxResults?: Integer;
+    MaxResults?: MaxResultsInteger;
     /**
      * Use the token returned by the previous operation to request the next page of results.
      */
@@ -329,6 +524,30 @@ declare namespace RUM {
      * An array of structures that contain information about the returned app monitors.
      */
     AppMonitorSummaries?: AppMonitorSummaryList;
+    /**
+     * A token that you can use in a subsequent operation to retrieve the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListRumMetricsDestinationsRequest {
+    /**
+     * The name of the app monitor associated with the destinations that you want to retrieve.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * The maximum number of results to return in one operation. The default is 50. The maximum that you can specify is 100. To retrieve the remaining results, make another call with the returned NextToken value. 
+     */
+    MaxResults?: MaxResultsInteger;
+    /**
+     * Use the token returned by the previous operation to request the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListRumMetricsDestinationsResponse {
+    /**
+     * The list of CloudWatch RUM extended metrics destinations associated with the app monitor that you specified.
+     */
+    Destinations?: MetricDestinationSummaryList;
     /**
      * A token that you can use in a subsequent operation to retrieve the next set of results.
      */
@@ -351,6 +570,76 @@ declare namespace RUM {
     Tags: TagMap;
   }
   export type MaxQueryResults = number;
+  export type MaxResultsInteger = number;
+  export interface MetricDefinition {
+    /**
+     * This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch The value of this field is used only if the metric destination is CloudWatch. If the metric destination is Evidently, the value of DimensionKeys is ignored.
+     */
+    DimensionKeys?: DimensionKeysMap;
+    /**
+     * The pattern that defines the metric. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination. If the metrics destination is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions. 
+     */
+    EventPattern?: EventPattern;
+    /**
+     * The ID of this metric definition.
+     */
+    MetricDefinitionId: MetricDefinitionId;
+    /**
+     * The name of the metric that is defined in this structure.
+     */
+    Name: MetricName;
+    /**
+     * Use this field only if you are sending this metric to CloudWatch. It defines the CloudWatch metric unit that this metric is measured in. 
+     */
+    UnitLabel?: UnitLabel;
+    /**
+     * The field within the event object that the metric value is sourced from.
+     */
+    ValueKey?: ValueKey;
+  }
+  export type MetricDefinitionId = string;
+  export type MetricDefinitionIds = MetricDefinitionId[];
+  export interface MetricDefinitionRequest {
+    /**
+     * Use this field only if you are sending the metric to CloudWatch. This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:    "metadata.pageId": "PageId"     "metadata.browserName": "BrowserName"     "metadata.deviceType": "DeviceType"     "metadata.osName": "OSName"     "metadata.countryCode": "CountryCode"     "event_details.fileType": "FileType"     &lt;p&gt; All dimensions listed in this field must also be included in &lt;code&gt;EventPattern&lt;/code&gt;.&lt;/p&gt; 
+     */
+    DimensionKeys?: DimensionKeysMap;
+    /**
+     * The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination. When you define extended metrics, the metric definition is not valid if EventPattern is omitted. Example event patterns:    '{ "event_type": ["com.amazon.rum.js_error_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], } }'     '{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Firefox" ] }, "event_details": { "duration": [{ "numeric": [ "&lt;", 2000 ] }] } }'     '{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] }, "event_details": { "duration": [{ "numeric": [ "&gt;=", 2000, "&lt;", 8000 ] }] } }'    If the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions. 
+     */
+    EventPattern?: EventPattern;
+    /**
+     * The name for the metric that is defined in this structure. Valid values are the following:    PerformanceNavigationDuration     PerformanceResourceDuration      NavigationSatisfiedTransaction     NavigationToleratedTransaction     NavigationFrustratedTransaction     WebVitalsCumulativeLayoutShift     WebVitalsFirstInputDelay     WebVitalsLargestContentfulPaint     JsErrorCount     HttpErrorCount     SessionCount   
+     */
+    Name: MetricName;
+    /**
+     * The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.
+     */
+    UnitLabel?: UnitLabel;
+    /**
+     * The field within the event object that the metric value is sourced from. If you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.  If this metric is sent to CloudWatch Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.
+     */
+    ValueKey?: ValueKey;
+  }
+  export type MetricDefinitions = MetricDefinition[];
+  export type MetricDefinitionsRequest = MetricDefinitionRequest[];
+  export type MetricDestination = "CloudWatch"|"Evidently"|string;
+  export interface MetricDestinationSummary {
+    /**
+     * Specifies whether the destination is CloudWatch or Evidently.
+     */
+    Destination?: MetricDestination;
+    /**
+     * If the destination is Evidently, this specifies the ARN of the Evidently experiment that receives the metrics.
+     */
+    DestinationArn?: DestinationArn;
+    /**
+     * This field appears only when the destination is Evidently. It specifies the ARN of the IAM role that is used to write to the Evidently experiment that receives the metrics.
+     */
+    IamRoleArn?: IamRoleArn;
+  }
+  export type MetricDestinationSummaryList = MetricDestinationSummary[];
+  export type MetricName = string;
   export type Pages = Url[];
   export interface PutRumEventsRequest {
     /**
@@ -375,6 +664,26 @@ declare namespace RUM {
     UserDetails: UserDetails;
   }
   export interface PutRumEventsResponse {
+  }
+  export interface PutRumMetricsDestinationRequest {
+    /**
+     * The name of the CloudWatch RUM app monitor that will send the metrics.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
+     */
+    Destination: MetricDestination;
+    /**
+     * Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
+     */
+    DestinationArn?: DestinationArn;
+    /**
+     * This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter. This parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.
+     */
+    IamRoleArn?: IamRoleArn;
+  }
+  export interface PutRumMetricsDestinationResponse {
   }
   export interface QueryFilter {
     /**
@@ -447,6 +756,7 @@ declare namespace RUM {
   }
   export type Timestamp = Date;
   export type Token = string;
+  export type UnitLabel = string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the CloudWatch RUM resource that you're removing tags from.
@@ -479,6 +789,30 @@ declare namespace RUM {
   }
   export interface UpdateAppMonitorResponse {
   }
+  export interface UpdateRumMetricDefinitionRequest {
+    /**
+     * The name of the CloudWatch RUM app monitor that sends these metrics.
+     */
+    AppMonitorName: AppMonitorName;
+    /**
+     * The destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that will receive the metrics and an IAM role that has permission to write to the experiment.
+     */
+    Destination: MetricDestination;
+    /**
+     * This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter. This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this experiment as a valid destination. For more information, see PutRumMetricsDestination.
+     */
+    DestinationArn?: DestinationArn;
+    /**
+     * A structure that contains the new definition that you want to use for this metric.
+     */
+    MetricDefinition: MetricDefinitionRequest;
+    /**
+     * The ID of the metric definition to update.
+     */
+    MetricDefinitionId: MetricDefinitionId;
+  }
+  export interface UpdateRumMetricDefinitionResponse {
+  }
   export type Url = string;
   export interface UserDetails {
     /**
@@ -490,6 +824,7 @@ declare namespace RUM {
      */
     userId?: String;
   }
+  export type ValueKey = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
