@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1237.0-->
+<!--LATEST=2.1238.0-->
 <!--ENTRYINSERT-->
+
+## 2.1238.0
+* feature: CognitoIdentityServiceProvider: This release adds a new "DeletionProtection" field to the UserPool in Cognito. Application admins can configure this value with either ACTIVE or INACTIVE value. Setting this field to ACTIVE will prevent a user pool from accidental deletion.
+* feature: S3: S3 on Outposts launches support for automatic bucket-style alias. You can use the automatic access point alias instead of an access point ARN for any object-level operation in an Outposts bucket.
+* feature: SageMaker: CreateInferenceRecommenderjob API now supports passing endpoint details directly, that will help customers to identify the max invocation and max latency they can achieve for their model and the associated endpoint along with getting recommendations on other instances.
 
 ## 2.1237.0
 * feature: AwsQueryCompatible: Make AwsQueryCompatible translation only if trait is found

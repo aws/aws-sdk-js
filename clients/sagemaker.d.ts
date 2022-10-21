@@ -7491,6 +7491,10 @@ declare namespace SageMaker {
      * The recommendations made by Inference Recommender.
      */
     InferenceRecommendations?: InferenceRecommendations;
+    /**
+     * The performance results from running an Inference Recommender job on an existing endpoint.
+     */
+    EndpointPerformances?: EndpointPerformances;
   }
   export interface DescribeLabelingJobRequest {
     /**
@@ -9470,6 +9474,12 @@ declare namespace SageMaker {
     CreationTime: Timestamp;
   }
   export type EndpointConfigSummaryList = EndpointConfigSummary[];
+  export interface EndpointInfo {
+    /**
+     * The name of a customer's endpoint.
+     */
+    EndpointName: EndpointName;
+  }
   export interface EndpointInput {
     /**
      * An endpoint in customer's account which has enabled DataCaptureConfig enabled.
@@ -9547,6 +9557,14 @@ declare namespace SageMaker {
      */
     InitialInstanceCount: Integer;
   }
+  export interface EndpointPerformance {
+    /**
+     * The metrics for an existing endpoint.
+     */
+    Metrics: InferenceMetrics;
+    EndpointInfo: EndpointInfo;
+  }
+  export type EndpointPerformances = EndpointPerformance[];
   export type EndpointSortKey = "Name"|"CreationTime"|"Status"|string;
   export type EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"|string;
   export interface EndpointSummary {
@@ -9572,6 +9590,7 @@ declare namespace SageMaker {
     EndpointStatus: EndpointStatus;
   }
   export type EndpointSummaryList = EndpointSummary[];
+  export type Endpoints = EndpointInfo[];
   export type EntityDescription = string;
   export type EntityName = string;
   export type EnvironmentKey = string;
@@ -10717,6 +10736,16 @@ declare namespace SageMaker {
   }
   export type InferenceExecutionMode = "Serial"|"Direct"|string;
   export type InferenceImage = string;
+  export interface InferenceMetrics {
+    /**
+     * The expected maximum number of requests per minute for the instance.
+     */
+    MaxInvocations: Integer;
+    /**
+     * The expected model latency at maximum invocations per minute for the instance.
+     */
+    ModelLatency: Integer;
+  }
   export interface InferenceRecommendation {
     /**
      * The metrics used to decide what recommendation to make.
@@ -16405,6 +16434,10 @@ declare namespace SageMaker {
      * Specifies mandatory fields for running an Inference Recommender job. The fields specified in ContainerConfig override the corresponding fields in the model package.
      */
     ContainerConfig?: RecommendationJobContainerConfig;
+    /**
+     * Existing customer endpoints on which to run an Inference Recommender job.
+     */
+    Endpoints?: Endpoints;
   }
   export type RecommendationJobName = string;
   export interface RecommendationJobOutputConfig {
@@ -17793,7 +17826,7 @@ declare namespace SageMaker {
      */
     InstanceType: TransformInstanceType;
     /**
-     * The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.
+     * The number of ML compute instances to use in the transform job. The default value is 1, and the maximum is 100. For distributed transform jobs, specify a value greater than 1.
      */
     InstanceCount: TransformInstanceCount;
     /**

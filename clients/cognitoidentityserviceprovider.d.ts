@@ -68,11 +68,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminDisableProviderForUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
   /**
-   * Disables the specified user. Calling this action requires developer credentials.
+   * Deactivates a user and revokes all access tokens for the user. A deactivated user can't sign in, but still appears in the responses to GetUser and ListUsers API requests. You must make this API request with Amazon Web Services credentials that have cognito-idp:AdminDisableUser permissions.
    */
   adminDisableUser(params: CognitoIdentityServiceProvider.Types.AdminDisableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
-   * Disables the specified user. Calling this action requires developer credentials.
+   * Deactivates a user and revokes all access tokens for the user. A deactivated user can't sign in, but still appears in the responses to GetUser and ListUsers API requests. You must make this API request with Amazon Web Services credentials that have cognito-idp:AdminDisableUser permissions.
    */
   adminDisableUser(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getIdentityProviderByIdentifier(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse, AWSError>;
   /**
-   * This method takes a user pool ID, and returns the signing certificate.
+   * This method takes a user pool ID, and returns the signing certificate. The issued certificate is valid for 10 years from the date of issue. Amazon Cognito issues and assigns a new signing certificate annually. This process returns a new value in the response to GetSigningCertificate, but doesn't invalidate the original certificate.
    */
   getSigningCertificate(params: CognitoIdentityServiceProvider.Types.GetSigningCertificateRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse, AWSError>;
   /**
-   * This method takes a user pool ID, and returns the signing certificate.
+   * This method takes a user pool ID, and returns the signing certificate. The issued certificate is valid for 10 years from the date of issue. Amazon Cognito issues and assigns a new signing certificate annually. This process returns a new value in the response to GetSigningCertificate, but doesn't invalidate the original certificate.
    */
   getSigningCertificate(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse, AWSError>;
   /**
@@ -532,11 +532,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   getUserPoolMfaConfig(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
   /**
-   * Signs out users from all devices. It also invalidates all refresh tokens that Amazon Cognito has issued to a user. The user's current access and ID tokens remain valid until their expiry. By default, access and ID tokens expire one hour after Amazon Cognito issues them. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the cookie validity period of 1 hour.
+   * Signs out users from all devices. It also invalidates all refresh tokens that Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the 1-hour cookie validity period.
    */
   globalSignOut(params: CognitoIdentityServiceProvider.Types.GlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
-   * Signs out users from all devices. It also invalidates all refresh tokens that Amazon Cognito has issued to a user. The user's current access and ID tokens remain valid until their expiry. By default, access and ID tokens expire one hour after Amazon Cognito issues them. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the cookie validity period of 1 hour.
+   * Signs out users from all devices. It also invalidates all refresh tokens that Amazon Cognito has issued to a user. A user can still use a hosted UI cookie to retrieve new tokens for the duration of the 1-hour cookie validity period.
    */
   globalSignOut(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
@@ -644,11 +644,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   respondToAuthChallenge(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
   /**
-   * Revokes all of the access tokens generated by the specified refresh token. After the token is revoked, you can't use the revoked token to access Amazon Cognito authenticated APIs.
+   * Revokes all of the access tokens generated by, and at the same time as, the specified refresh token. After a token is revoked, you can't use the revoked token to access Amazon Cognito user APIs, or to authorize access to your resource server.
    */
   revokeToken(params: CognitoIdentityServiceProvider.Types.RevokeTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RevokeTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.RevokeTokenResponse, AWSError>;
   /**
-   * Revokes all of the access tokens generated by the specified refresh token. After the token is revoked, you can't use the revoked token to access Amazon Cognito authenticated APIs.
+   * Revokes all of the access tokens generated by, and at the same time as, the specified refresh token. After a token is revoked, you can't use the revoked token to access Amazon Cognito user APIs, or to authorize access to your resource server.
    */
   revokeToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RevokeTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.RevokeTokenResponse, AWSError>;
   /**
@@ -1240,7 +1240,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Username: UsernameType;
     /**
-     * The maximum number of authentication events to return.
+     * The maximum number of authentication events to return. Returns 60 events if you set MaxResults to 0, or if you don't include a MaxResults parameter.
      */
     MaxResults?: QueryLimitType;
     /**
@@ -1915,15 +1915,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     GenerateSecret?: GenerateSecret;
     /**
-     * The refresh token time limit. After this limit expires, your user can't use their refresh token. To specify the time unit for RefreshTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set RefreshTokenValidity as 10 and TokenValidityUnits as days, your user can refresh their session and retrieve new access and ID tokens for 10 days. The default time unit for RefreshTokenValidity in an API request is days. You can't set RefreshTokenValidity to 0. If you do, Amazon Cognito overrides the value with the default value of 30 days. Valid range is displayed below in seconds.
+     * The refresh token time limit. After this limit expires, your user can't use their refresh token. To specify the time unit for RefreshTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set RefreshTokenValidity as 10 and TokenValidityUnits as days, your user can refresh their session and retrieve new access and ID tokens for 10 days. The default time unit for RefreshTokenValidity in an API request is days. You can't set RefreshTokenValidity to 0. If you do, Amazon Cognito overrides the value with the default value of 30 days. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your refresh tokens are valid for 30 days.
      */
     RefreshTokenValidity?: RefreshTokenValidityType;
     /**
-     * The access token time limit. After this limit expires, your user can't use their access token. To specify the time unit for AccessTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours, your user can authorize access with their access token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds.
+     * The access token time limit. After this limit expires, your user can't use their access token. To specify the time unit for AccessTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours, your user can authorize access with their access token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your access tokens are valid for one hour.
      */
     AccessTokenValidity?: AccessTokenValidityType;
     /**
-     * The ID token time limit. After this limit expires, your user can't use their ID token. To specify the time unit for IdTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can authenticate their session with their ID token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds.
+     * The ID token time limit. After this limit expires, your user can't use their ID token. To specify the time unit for IdTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can authenticate their session with their ID token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your ID tokens are valid for one hour.
      */
     IdTokenValidity?: IdTokenValidityType;
     /**
@@ -1939,7 +1939,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     WriteAttributes?: ClientPermissionListType;
     /**
-     * The authentication flows that are supported by the user pool clients. Flow names without the ALLOW_ prefix are no longer supported, in favor of new names with the ALLOW_ prefix.  Values with ALLOW_ prefix must be used only along with the ALLOW_ prefix.  Valid values include:  ALLOW_ADMIN_USER_PASSWORD_AUTH  Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, Amazon Cognito receives the password in the request instead of using the Secure Remote Password (SRP) protocol to verify passwords.  ALLOW_CUSTOM_AUTH  Enable Lambda trigger based authentication.  ALLOW_USER_PASSWORD_AUTH  Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.  ALLOW_USER_SRP_AUTH  Enable SRP-based authentication.  ALLOW_REFRESH_TOKEN_AUTH  Enable the authflow that refreshes tokens.   If you don't specify a value for ExplicitAuthFlows, your user client supports ALLOW_USER_SRP_AUTH and ALLOW_CUSTOM_AUTH.
+     * The authentication flows that you want your user pool client to support. For each app client in your user pool, you can sign in your users with any combination of one or more flows, including with a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that you define with Lambda functions.  If you don't specify a value for ExplicitAuthFlows, your user client supports ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_CUSTOM_AUTH.  Valid values include:    ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, your app passes a user name and password to Amazon Cognito in the request, instead of using the Secure Remote Password (SRP) protocol to securely transmit the password.    ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.    ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.    ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.    ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.   In some environments, you will see the values ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, or USER_PASSWORD_AUTH. You can't assign these legacy ExplicitAuthFlows values to user pool clients at the same time as values that begin with ALLOW_, like ALLOW_USER_SRP_AUTH.
      */
     ExplicitAuthFlows?: ExplicitAuthFlowsListType;
     /**
@@ -2026,6 +2026,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The policies associated with the new user pool.
      */
     Policies?: UserPoolPolicyType;
+    /**
+     * When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. When you try to delete a protected user pool in a DeleteUserPool API request, Amazon Cognito returns an InvalidParameterException error. To delete a protected user pool, send a new DeleteUserPool request after you deactivate deletion protection in an UpdateUserPool API request.
+     */
+    DeletionProtection?: DeletionProtectionType;
     /**
      * The Lambda trigger configuration information for the new user pool.  In a push model, event sources (such as Amazon S3 and custom applications) need permission to invoke a function. So you must make an extra call to add permission for these event sources to invoke your Lambda function.  For more information on using the Lambda API to add permission, see AddPermission .  For adding permission using the CLI, see add-permission . 
      */
@@ -2221,6 +2225,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AccessToken: TokenModelType;
   }
+  export type DeletionProtectionType = "ACTIVE"|"INACTIVE"|string;
   export type DeliveryMediumListType = DeliveryMediumType[];
   export type DeliveryMediumType = "SMS"|"EMAIL"|string;
   export interface DescribeIdentityProviderRequest {
@@ -2235,7 +2240,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface DescribeIdentityProviderResponse {
     /**
-     * The IdP that was deleted.
+     * The identity provider details.
      */
     IdentityProvider: IdentityProviderType;
   }
@@ -2422,7 +2427,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ReplyToEmailAddress?: EmailAddressType;
     /**
-     * Specifies whether Amazon Cognito uses its built-in functionality to send your users email messages, or uses your Amazon Simple Email Service email configuration. Specify one of the following values:  COGNITO_DEFAULT  When Amazon Cognito emails your users, it uses its built-in email functionality. When you use the default option, Amazon Cognito allows only a limited number of emails each day for your user pool. For typical production environments, the default email limit is less than the required delivery volume. To achieve a higher delivery volume, specify DEVELOPER to use your Amazon SES email configuration. To look up the email delivery limit for the default option, see Limits in  in the  Developer Guide. The default FROM address is no-reply@verificationemail.com. To customize the FROM address, provide the Amazon Resource Name (ARN) of an Amazon SES verified email address for the SourceArn parameter.  DEVELOPER  When Amazon Cognito emails your users, it uses your Amazon SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email from your verified email address. When you use this option, the email delivery limits are the same limits that apply to your Amazon SES verified email address in your Amazon Web Services account. If you use this option, provide the ARN of an Amazon SES verified email address for the SourceArn parameter. Before Amazon Cognito can email your users, it requires additional permissions to call Amazon SES on your behalf. When you update your user pool with this option, Amazon Cognito creates a service-linked role, which is a type of role, in your Amazon Web Services account. This role contains the permissions that allow to access Amazon SES and send email messages with your address. For more information about the service-linked role that Amazon Cognito creates, see Using Service-Linked Roles for Amazon Cognito in the Amazon Cognito Developer Guide.  
+     * Specifies whether Amazon Cognito uses its built-in functionality to send your users email messages, or uses your Amazon Simple Email Service email configuration. Specify one of the following values:  COGNITO_DEFAULT  When Amazon Cognito emails your users, it uses its built-in email functionality. When you use the default option, Amazon Cognito allows only a limited number of emails each day for your user pool. For typical production environments, the default email limit is less than the required delivery volume. To achieve a higher delivery volume, specify DEVELOPER to use your Amazon SES email configuration. To look up the email delivery limit for the default option, see Limits in the Amazon Cognito Developer Guide. The default FROM address is no-reply@verificationemail.com. To customize the FROM address, provide the Amazon Resource Name (ARN) of an Amazon SES verified email address for the SourceArn parameter.  DEVELOPER  When Amazon Cognito emails your users, it uses your Amazon SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email from your verified email address. When you use this option, the email delivery limits are the same limits that apply to your Amazon SES verified email address in your Amazon Web Services account. If you use this option, provide the ARN of an Amazon SES verified email address for the SourceArn parameter. Before Amazon Cognito can email your users, it requires additional permissions to call Amazon SES on your behalf. When you update your user pool with this option, Amazon Cognito creates a service-linked role, which is a type of role in your Amazon Web Services account. This role contains the permissions that allow you to access Amazon SES and send email messages from your email address. For more information about the service-linked role that Amazon Cognito creates, see Using Service-Linked Roles for Amazon Cognito in the Amazon Cognito Developer Guide.  
      */
     EmailSendingAccount?: EmailSendingAccountType;
     /**
@@ -2603,7 +2608,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface GetIdentityProviderByIdentifierResponse {
     /**
-     * The IdP object.
+     * The identity provider details.
      */
     IdentityProvider: IdentityProviderType;
   }
@@ -3946,7 +3951,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface UpdateIdentityProviderResponse {
     /**
-     * The IdP object.
+     * The identity provider details.
      */
     IdentityProvider: IdentityProviderType;
   }
@@ -4008,15 +4013,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ClientName?: ClientNameType;
     /**
-     * The refresh token time limit. After this limit expires, your user can't use their refresh token. To specify the time unit for RefreshTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set RefreshTokenValidity as 10 and TokenValidityUnits as days, your user can refresh their session and retrieve new access and ID tokens for 10 days. The default time unit for RefreshTokenValidity in an API request is days. You can't set RefreshTokenValidity to 0. If you do, Amazon Cognito overrides the value with the default value of 30 days. Valid range is displayed below in seconds.
+     * The refresh token time limit. After this limit expires, your user can't use their refresh token. To specify the time unit for RefreshTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set RefreshTokenValidity as 10 and TokenValidityUnits as days, your user can refresh their session and retrieve new access and ID tokens for 10 days. The default time unit for RefreshTokenValidity in an API request is days. You can't set RefreshTokenValidity to 0. If you do, Amazon Cognito overrides the value with the default value of 30 days. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your refresh tokens are valid for 30 days.
      */
     RefreshTokenValidity?: RefreshTokenValidityType;
     /**
-     * The access token time limit. After this limit expires, your user can't use their access token. To specify the time unit for AccessTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours, your user can authorize access with their access token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds.
+     * The access token time limit. After this limit expires, your user can't use their access token. To specify the time unit for AccessTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours, your user can authorize access with their access token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your access tokens are valid for one hour.
      */
     AccessTokenValidity?: AccessTokenValidityType;
     /**
-     * The ID token time limit. After this limit expires, your user can't use their ID token. To specify the time unit for IdTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can authenticate their session with their ID token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds.
+     * The ID token time limit. After this limit expires, your user can't use their ID token. To specify the time unit for IdTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can authenticate their session with their ID token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your ID tokens are valid for one hour.
      */
     IdTokenValidity?: IdTokenValidityType;
     /**
@@ -4032,7 +4037,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     WriteAttributes?: ClientPermissionListType;
     /**
-     * The authentication flows that are supported by the user pool clients. Flow names without the ALLOW_ prefix are no longer supported in favor of new names with the ALLOW_ prefix. Note that values with ALLOW_ prefix must be used only along with values with the ALLOW_ prefix. Valid values include:    ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, Amazon Cognito receives the password in the request instead of using the Secure Remote Password (SRP) protocol to verify passwords.    ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.    ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.    ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.    ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.  
+     * The authentication flows that you want your user pool client to support. For each app client in your user pool, you can sign in your users with any combination of one or more flows, including with a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that you define with Lambda functions.  If you don't specify a value for ExplicitAuthFlows, your user client supports ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_CUSTOM_AUTH.  Valid values include:    ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, your app passes a user name and password to Amazon Cognito in the request, instead of using the Secure Remote Password (SRP) protocol to securely transmit the password.    ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.    ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.    ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.    ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.   In some environments, you will see the values ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, or USER_PASSWORD_AUTH. You can't assign these legacy ExplicitAuthFlows values to user pool clients at the same time as values that begin with ALLOW_, like ALLOW_USER_SRP_AUTH.
      */
     ExplicitAuthFlows?: ExplicitAuthFlowsListType;
     /**
@@ -4119,6 +4124,10 @@ declare namespace CognitoIdentityServiceProvider {
      * A container with the policies you want to update in a user pool.
      */
     Policies?: UserPoolPolicyType;
+    /**
+     * When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. When you try to delete a protected user pool in a DeleteUserPool API request, Amazon Cognito returns an InvalidParameterException error. To delete a protected user pool, send a new DeleteUserPool request after you deactivate deletion protection in an UpdateUserPool API request.
+     */
+    DeletionProtection?: DeletionProtectionType;
     /**
      * The Lambda configuration information from the request to update the user pool.
      */
@@ -4309,15 +4318,15 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
     /**
-     * The refresh token time limit. After this limit expires, your user can't use their refresh token. To specify the time unit for RefreshTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set RefreshTokenValidity as 10 and TokenValidityUnits as days, your user can refresh their session and retrieve new access and ID tokens for 10 days. The default time unit for RefreshTokenValidity in an API request is days. You can't set RefreshTokenValidity to 0. If you do, Amazon Cognito overrides the value with the default value of 30 days. Valid range is displayed below in seconds.
+     * The refresh token time limit. After this limit expires, your user can't use their refresh token. To specify the time unit for RefreshTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set RefreshTokenValidity as 10 and TokenValidityUnits as days, your user can refresh their session and retrieve new access and ID tokens for 10 days. The default time unit for RefreshTokenValidity in an API request is days. You can't set RefreshTokenValidity to 0. If you do, Amazon Cognito overrides the value with the default value of 30 days. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your refresh tokens are valid for 30 days.
      */
     RefreshTokenValidity?: RefreshTokenValidityType;
     /**
-     * The access token time limit. After this limit expires, your user can't use their access token. To specify the time unit for AccessTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours, your user can authorize access with their access token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds.
+     * The access token time limit. After this limit expires, your user can't use their access token. To specify the time unit for AccessTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours, your user can authorize access with their access token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your access tokens are valid for one hour.
      */
     AccessTokenValidity?: AccessTokenValidityType;
     /**
-     * The ID token time limit. After this limit expires, your user can't use their ID token. To specify the time unit for IdTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can authenticate their session with their ID token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds.
+     * The ID token time limit. After this limit expires, your user can't use their ID token. To specify the time unit for IdTokenValidity as seconds, minutes, hours, or days, set a TokenValidityUnits value in your API request. For example, when you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can authenticate their session with their ID token for 10 hours. The default time unit for AccessTokenValidity in an API request is hours. Valid range is displayed below in seconds. If you don't specify otherwise in the configuration of your app client, your ID tokens are valid for one hour.
      */
     IdTokenValidity?: IdTokenValidityType;
     /**
@@ -4333,7 +4342,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     WriteAttributes?: ClientPermissionListType;
     /**
-     * The authentication flows that are supported by the user pool clients. Flow names without the ALLOW_ prefix are no longer supported in favor of new names with the ALLOW_ prefix. Note that values with ALLOW_ prefix must be used only along with values including the ALLOW_ prefix. Valid values include:    ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, Amazon Cognito receives the password in the request instead of using the Secure Remote Password (SRP) protocol to verify passwords.    ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.    ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.    ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.    ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.  
+     * The authentication flows that you want your user pool client to support. For each app client in your user pool, you can sign in your users with any combination of one or more flows, including with a user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that you define with Lambda functions.  If you don't specify a value for ExplicitAuthFlows, your user client supports ALLOW_REFRESH_TOKEN_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_CUSTOM_AUTH.  Valid values include:    ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, your app passes a user name and password to Amazon Cognito in the request, instead of using the Secure Remote Password (SRP) protocol to securely transmit the password.    ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.    ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this flow, Amazon Cognito receives the password in the request instead of using the SRP protocol to verify passwords.    ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.    ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.   In some environments, you will see the values ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, or USER_PASSWORD_AUTH. You can't assign these legacy ExplicitAuthFlows values to user pool clients at the same time as values that begin with ALLOW_, like ALLOW_USER_SRP_AUTH.
      */
     ExplicitAuthFlows?: ExplicitAuthFlowsListType;
     /**
@@ -4436,6 +4445,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The policies associated with the user pool.
      */
     Policies?: UserPoolPolicyType;
+    /**
+     * When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. When you try to delete a protected user pool in a DeleteUserPool API request, Amazon Cognito returns an InvalidParameterException error. To delete a protected user pool, send a new DeleteUserPool request after you deactivate deletion protection in an UpdateUserPool API request.
+     */
+    DeletionProtection?: DeletionProtectionType;
     /**
      * The Lambda triggers associated with the user pool.
      */
