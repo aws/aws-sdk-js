@@ -382,6 +382,10 @@ declare namespace ACMPCA {
      * Defines a cryptographic key management compliance standard used for handling CA keys.  Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: Amazon Web Services Region ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this parameter and value when creating a CA in that Region. Specifying a different value (or no value) results in an InvalidArgsException with the message "A certificate authority cannot be created in this region with the specified security standard."
      */
     KeyStorageSecurityStandard?: KeyStorageSecurityStandard;
+    /**
+     * Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly. Short-lived certificate validity is limited to seven days. The default value is GENERAL_PURPOSE.
+     */
+    UsageMode?: CertificateAuthorityUsageMode;
   }
   export interface CertificateAuthorityConfiguration {
     /**
@@ -403,6 +407,7 @@ declare namespace ACMPCA {
   }
   export type CertificateAuthorityStatus = "CREATING"|"PENDING_CERTIFICATE"|"ACTIVE"|"DELETED"|"DISABLED"|"EXPIRED"|"FAILED"|string;
   export type CertificateAuthorityType = "ROOT"|"SUBORDINATE"|string;
+  export type CertificateAuthorityUsageMode = "GENERAL_PURPOSE"|"SHORT_LIVED_CERTIFICATE"|string;
   export type CertificateBody = string;
   export type CertificateBodyBlob = Buffer|Uint8Array|Blob|string;
   export type CertificateChain = string;
@@ -458,6 +463,10 @@ declare namespace ACMPCA {
      * Key-value pairs that will be attached to the new private CA. You can associate up to 50 tags with a private CA. For information using tags with IAM to manage permissions, see Controlling Access Using IAM Tags.
      */
     Tags?: TagList;
+    /**
+     * Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly. Short-lived certificate validity is limited to seven days. The default value is GENERAL_PURPOSE.
+     */
+    UsageMode?: CertificateAuthorityUsageMode;
   }
   export interface CreateCertificateAuthorityResponse {
     /**
@@ -924,7 +933,7 @@ declare namespace ACMPCA {
      */
     Enabled: Boolean;
     /**
-     * By default, ACM Private CA injects an Amazon Web Services domain into certificates being validated by the Online Certificate Status Protocol (OCSP). A customer can alternatively use this object to define a CNAME specifying a customized OCSP domain. Note: The value of the CNAME must not include a protocol prefix such as "http://" or "https://". For more information, see Customizing Online Certificate Status Protocol (OCSP)  in the Certificate Manager Private Certificate Authority (PCA) User Guide.
+     * By default, ACM Private CA injects an Amazon Web Services domain into certificates being validated by the Online Certificate Status Protocol (OCSP). A customer can alternatively use this object to define a CNAME specifying a customized OCSP domain. Note: The value of the CNAME must not include a protocol prefix such as "http://" or "https://". For more information, see Customizing Online Certificate Status Protocol (OCSP)  in the Private Certificate Authority (PCA) User Guide.
      */
     OcspCustomCname?: String253;
   }

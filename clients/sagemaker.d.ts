@@ -1437,6 +1437,14 @@ declare class SageMaker extends Service {
    */
   listImages(callback?: (err: AWSError, data: SageMaker.Types.ListImagesResponse) => void): Request<SageMaker.Types.ListImagesResponse, AWSError>;
   /**
+   * Returns a list of the subtasks for an Inference Recommender job. The supported subtasks are benchmarks, which evaluate the performance of your model on different instance types.
+   */
+  listInferenceRecommendationsJobSteps(params: SageMaker.Types.ListInferenceRecommendationsJobStepsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListInferenceRecommendationsJobStepsResponse) => void): Request<SageMaker.Types.ListInferenceRecommendationsJobStepsResponse, AWSError>;
+  /**
+   * Returns a list of the subtasks for an Inference Recommender job. The supported subtasks are benchmarks, which evaluate the performance of your model on different instance types.
+   */
+  listInferenceRecommendationsJobSteps(callback?: (err: AWSError, data: SageMaker.Types.ListInferenceRecommendationsJobStepsResponse) => void): Request<SageMaker.Types.ListInferenceRecommendationsJobStepsResponse, AWSError>;
+  /**
    * Lists recommendation jobs that satisfy various filters.
    */
   listInferenceRecommendationsJobs(params: SageMaker.Types.ListInferenceRecommendationsJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListInferenceRecommendationsJobsResponse) => void): Request<SageMaker.Types.ListInferenceRecommendationsJobsResponse, AWSError>;
@@ -2932,7 +2940,7 @@ declare namespace SageMaker {
   }
   export type AutoMLMaxResults = number;
   export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|string;
-  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|string;
+  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|"InferenceLatency"|string;
   export type AutoMLMode = "AUTO"|"ENSEMBLING"|"HYPERPARAMETER_TUNING"|string;
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
@@ -10803,6 +10811,25 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
   }
+  export interface InferenceRecommendationsJobStep {
+    /**
+     * The type of the subtask.  BENCHMARK: Evaluate the performance of your model on different instance types.
+     */
+    StepType: RecommendationStepType;
+    /**
+     * The name of the Inference Recommender job.
+     */
+    JobName: RecommendationJobName;
+    /**
+     * The current status of the benchmark.
+     */
+    Status: RecommendationJobStatus;
+    /**
+     * The details for a specific benchmark.
+     */
+    InferenceBenchmark?: RecommendationJobInferenceBenchmark;
+  }
+  export type InferenceRecommendationsJobSteps = InferenceRecommendationsJobStep[];
   export type InferenceRecommendationsJobs = InferenceRecommendationsJob[];
   export interface InferenceSpecification {
     /**
@@ -12374,6 +12401,38 @@ declare namespace SageMaker {
     Images?: Images;
     /**
      * A token for getting the next set of images, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListInferenceRecommendationsJobStepsRequest {
+    /**
+     * The name for the Inference Recommender job.
+     */
+    JobName: RecommendationJobName;
+    /**
+     * A filter to return benchmarks of a specified status. If this field is left empty, then all benchmarks are returned.
+     */
+    Status?: RecommendationJobStatus;
+    /**
+     * A filter to return details about the specified type of subtask.  BENCHMARK: Evaluate the performance of your model on different instance types.
+     */
+    StepType?: RecommendationStepType;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token that you can specify to return more results from the list. Specify this field if you have a token that was returned from a previous request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListInferenceRecommendationsJobStepsResponse {
+    /**
+     * A list of all subtask details in Inference Recommender.
+     */
+    Steps?: InferenceRecommendationsJobSteps;
+    /**
+     * A token that you can specify in your next request to return more results from the list.
      */
     NextToken?: NextToken;
   }
@@ -16367,6 +16426,7 @@ declare namespace SageMaker {
   }
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
+  export type RecommendationFailureReason = string;
   export type RecommendationJobArn = string;
   export interface RecommendationJobCompiledOutputConfig {
     /**
@@ -16405,6 +16465,15 @@ declare namespace SageMaker {
     SupportedInstanceTypes?: RecommendationJobSupportedInstanceTypes;
   }
   export type RecommendationJobDescription = string;
+  export interface RecommendationJobInferenceBenchmark {
+    Metrics?: RecommendationMetrics;
+    EndpointConfiguration?: EndpointOutputConfiguration;
+    ModelConfiguration: ModelConfiguration;
+    /**
+     * The reason why a benchmark failed.
+     */
+    FailureReason?: RecommendationFailureReason;
+  }
   export interface RecommendationJobInputConfig {
     /**
      * The Amazon Resource Name (ARN) of a versioned model package.
@@ -16502,6 +16571,7 @@ declare namespace SageMaker {
      */
     ModelLatency: Integer;
   }
+  export type RecommendationStepType = "BENCHMARK"|string;
   export type RecordWrapper = "None"|"RecordIO"|string;
   export type RedshiftClusterId = string;
   export type RedshiftDatabase = string;

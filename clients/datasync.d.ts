@@ -12,19 +12,19 @@ declare class DataSync extends Service {
   constructor(options?: DataSync.Types.ClientConfiguration)
   config: Config & DataSync.Types.ClientConfiguration;
   /**
-   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully complete the transfer when you start the next task execution.
+   * Stops an DataSync task execution that's in progress. The transfer of some files are abruptly interrupted. File contents that're transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution using the same task and allow it to finish, file content on the destination will be complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully completes the transfer when you start the next task execution.
    */
   cancelTaskExecution(params: DataSync.Types.CancelTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully complete the transfer when you start the next task execution.
+   * Stops an DataSync task execution that's in progress. The transfer of some files are abruptly interrupted. File contents that're transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution using the same task and allow it to finish, file content on the destination will be complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully completes the transfer when you start the next task execution.
    */
   cancelTaskExecution(callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Activates an DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an DataSync agent that you have deployed in your storage environment. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks.
    */
   createAgent(params: DataSync.Types.CreateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Activates an DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an DataSync agent that you have deployed in your storage environment. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks.
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class DataSync extends Service {
    */
   createLocationFsxOntap(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOntapResponse) => void): Request<DataSync.Types.CreateLocationFsxOntapResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for OpenZFS file system.
+   * Creates an endpoint for an Amazon FSx for OpenZFS file system that DataSync can access for a transfer. For more information, see Creating a location for FSx for OpenZFS.  Request parameters related to SMB aren't supported with the CreateLocationFsxOpenZfs operation. 
    */
   createLocationFsxOpenZfs(params: DataSync.Types.CreateLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for OpenZFS file system.
+   * Creates an endpoint for an Amazon FSx for OpenZFS file system that DataSync can access for a transfer. For more information, see Creating a location for FSx for OpenZFS.  Request parameters related to SMB aren't supported with the CreateLocationFsxOpenZfs operation. 
    */
   createLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class DataSync extends Service {
    */
   createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For more information, see Create an Amazon S3 location in the DataSync User Guide.
+   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location in the DataSync User Guide.
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For more information, see Create an Amazon S3 location in the DataSync User Guide.
+   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location in the DataSync User Guide.
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
@@ -156,27 +156,27 @@ declare class DataSync extends Service {
    */
   describeLocationEfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationEfsResponse) => void): Request<DataSync.Types.DescribeLocationEfsResponse, AWSError>;
   /**
-   * Returns metadata about an Amazon FSx for Lustre location, such as information about its path.
+   * Provides details about how an DataSync location for an Amazon FSx for Lustre file system is configured.
    */
   describeLocationFsxLustre(params: DataSync.Types.DescribeLocationFsxLustreRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
   /**
-   * Returns metadata about an Amazon FSx for Lustre location, such as information about its path.
+   * Provides details about how an DataSync location for an Amazon FSx for Lustre file system is configured.
    */
   describeLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxLustreResponse) => void): Request<DataSync.Types.DescribeLocationFsxLustreResponse, AWSError>;
   /**
-   * Provides details about how an DataSync location for an Amazon FSx for NetApp ONTAP file system is configured.
+   * Provides details about how an DataSync location for an Amazon FSx for NetApp ONTAP file system is configured.  If your location uses SMB, the DescribeLocationFsxOntap operation doesn't actually return a Password. 
    */
   describeLocationFsxOntap(params: DataSync.Types.DescribeLocationFsxOntapRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOntapResponse) => void): Request<DataSync.Types.DescribeLocationFsxOntapResponse, AWSError>;
   /**
-   * Provides details about how an DataSync location for an Amazon FSx for NetApp ONTAP file system is configured.
+   * Provides details about how an DataSync location for an Amazon FSx for NetApp ONTAP file system is configured.  If your location uses SMB, the DescribeLocationFsxOntap operation doesn't actually return a Password. 
    */
   describeLocationFsxOntap(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOntapResponse) => void): Request<DataSync.Types.DescribeLocationFsxOntapResponse, AWSError>;
   /**
-   * Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.
+   * Provides details about how an DataSync location for an Amazon FSx for OpenZFS file system is configured.  Response elements related to SMB aren't supported with the DescribeLocationFsxOpenZfs operation. 
    */
   describeLocationFsxOpenZfs(params: DataSync.Types.DescribeLocationFsxOpenZfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
   /**
-   * Returns metadata about an Amazon FSx for OpenZFS location, such as information about its path.
+   * Provides details about how an DataSync location for an Amazon FSx for OpenZFS file system is configured.  Response elements related to SMB aren't supported with the DescribeLocationFsxOpenZfs operation. 
    */
   describeLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.DescribeLocationFsxOpenZfsResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class DataSync extends Service {
    */
   updateLocationNfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see Creating a location for object storage.
+   * Updates some parameters of an existing object storage location that DataSync accesses for a transfer. For information about creating a self-managed object storage location, see Creating a location for object storage.
    */
   updateLocationObjectStorage(params: DataSync.Types.UpdateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see Creating a location for object storage.
+   * Updates some parameters of an existing object storage location that DataSync accesses for a transfer. For information about creating a self-managed object storage location, see Creating a location for object storage.
    */
   updateLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
   /**
@@ -388,7 +388,7 @@ declare namespace DataSync {
   export type BytesPerSecond = number;
   export interface CancelTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task execution to cancel.
+     * The Amazon Resource Name (ARN) of the task execution to stop.
      */
     TaskExecutionArn: TaskExecutionArn;
   }
@@ -700,6 +700,10 @@ declare namespace DataSync {
      * Specifies the key-value pair that represents a tag that you want to add to the resource. Tags can help you manage, filter, and search for your resources. We recommend creating a name tag for your location.
      */
     Tags?: InputTagList;
+    /**
+     * Specifies a certificate to authenticate with an object storage system that uses a private or self-signed certificate authority (CA). You must specify a Base64-encoded .pem file (for example, file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up to 32768 bytes (before Base64 encoding). To use this parameter, configure ServerProtocol to HTTPS.
+     */
+    ServerCertificate?: ObjectStorageCertificate;
   }
   export interface CreateLocationObjectStorageResponse {
     /**
@@ -1127,7 +1131,7 @@ declare namespace DataSync {
      */
     LocationUri?: LocationUri;
     /**
-     * The access key (for example, a user name) required to authenticate with the object storage server.
+     * The access key (for example, a user name) required to authenticate with the object storage system.
      */
     AccessKey?: ObjectStorageAccessKey;
     /**
@@ -1135,7 +1139,7 @@ declare namespace DataSync {
      */
     ServerPort?: ObjectStorageServerPort;
     /**
-     * The protocol that your object storage server uses to communicate.
+     * The protocol that your object storage system uses to communicate.
      */
     ServerProtocol?: ObjectStorageServerProtocol;
     /**
@@ -1146,6 +1150,10 @@ declare namespace DataSync {
      * The time that the location was created.
      */
     CreationTime?: Time;
+    /**
+     * The self-signed certificate that DataSync uses to securely authenticate with your object storage system.
+     */
+    ServerCertificate?: ObjectStorageCertificate;
   }
   export interface DescribeLocationS3Request {
     /**
@@ -1229,11 +1237,11 @@ declare namespace DataSync {
     Status?: TaskExecutionStatus;
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2" 
      */
     Excludes?: FilterList;
     /**
-     * A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2"   
+     * A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2" 
      */
     Includes?: FilterList;
     /**
@@ -1264,6 +1272,10 @@ declare namespace DataSync {
      * The result of the task execution.
      */
     Result?: TaskExecutionResultDetail;
+    /**
+     * The physical number of bytes transferred over the network after compression was applied. In most cases, this number is less than BytesTransferred.
+     */
+    BytesCompressed?: long;
   }
   export interface DescribeTaskRequest {
     /**
@@ -1594,6 +1606,7 @@ declare namespace DataSync {
   export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string;
   export type ObjectStorageAccessKey = string;
   export type ObjectStorageBucketName = string;
+  export type ObjectStorageCertificate = Buffer|Uint8Array|Blob|string;
   export type ObjectStorageSecretKey = string;
   export type ObjectStorageServerPort = number;
   export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
@@ -1965,33 +1978,37 @@ declare namespace DataSync {
   }
   export interface UpdateLocationObjectStorageRequest {
     /**
-     * The Amazon Resource Name (ARN) of the self-managed object storage server location to be updated.
+     * Specifies the ARN of the object storage system location that you're updating.
      */
     LocationArn: LocationArn;
     /**
-     * The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your self-managed object storage server requires one.
+     * Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
      */
     ServerPort?: ObjectStorageServerPort;
     /**
-     * The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+     * Specifies the protocol that your object storage server uses to communicate.
      */
     ServerProtocol?: ObjectStorageServerProtocol;
     /**
-     * The subdirectory in the self-managed object storage server that is used to read data from.
+     * Specifies the object prefix for your object storage server. If this is a source location, DataSync only copies objects with this prefix. If this is a destination location, DataSync writes all objects with this prefix.
      */
     Subdirectory?: S3Subdirectory;
     /**
-     * Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     * Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
      */
     AccessKey?: ObjectStorageAccessKey;
     /**
-     * Optional. The secret key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
+     * Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
      */
     SecretKey?: ObjectStorageSecretKey;
     /**
-     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     * Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can securely connect with your location.
      */
     AgentArns?: AgentArnList;
+    /**
+     * Specifies a certificate to authenticate with an object storage system that uses a private or self-signed certificate authority (CA). You must specify a Base64-encoded .pem file (for example, file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up to 32768 bytes (before Base64 encoding). To use this parameter, configure ServerProtocol to HTTPS. Updating the certificate doesn't interfere with tasks that you have in progress.
+     */
+    ServerCertificate?: ObjectStorageCertificate;
   }
   export interface UpdateLocationObjectStorageResponse {
   }
