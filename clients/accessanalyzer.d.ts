@@ -552,13 +552,33 @@ declare namespace AccessAnalyzer {
   export type ConditionKeyMap = {[key: string]: String};
   export interface Configuration {
     /**
+     * The access control configuration is for an Amazon EBS volume snapshot.
+     */
+    ebsSnapshot?: EbsSnapshotConfiguration;
+    /**
+     * The access control configuration is for an Amazon ECR repository.
+     */
+    ecrRepository?: EcrRepositoryConfiguration;
+    /**
      * The access control configuration is for an IAM role. 
      */
     iamRole?: IamRoleConfiguration;
     /**
+     * The access control configuration is for an Amazon EFS file system.
+     */
+    efsFileSystem?: EfsFileSystemConfiguration;
+    /**
      * The access control configuration is for a KMS key. 
      */
     kmsKey?: KmsKeyConfiguration;
+    /**
+     * The access control configuration is for an Amazon RDS DB cluster snapshot.
+     */
+    rdsDbClusterSnapshot?: RdsDbClusterSnapshotConfiguration;
+    /**
+     * The access control configuration is for an Amazon RDS DB snapshot.
+     */
+    rdsDbSnapshot?: RdsDbSnapshotConfiguration;
     /**
      * The access control configuration is for a Secrets Manager secret.
      */
@@ -567,6 +587,10 @@ declare namespace AccessAnalyzer {
      * The access control configuration is for an Amazon S3 Bucket. 
      */
     s3Bucket?: S3BucketConfiguration;
+    /**
+     * The access control configuration is for an Amazon SNS topic
+     */
+    snsTopic?: SnsTopicConfiguration;
     /**
      * The access control configuration is for an Amazon SQS queue. 
      */
@@ -682,6 +706,39 @@ declare namespace AccessAnalyzer {
      */
     clientToken?: String;
   }
+  export type EbsGroup = string;
+  export type EbsGroupList = EbsGroup[];
+  export interface EbsSnapshotConfiguration {
+    /**
+     * The IDs of the Amazon Web Services accounts that have access to the Amazon EBS volume snapshot.   If the configuration is for an existing Amazon EBS volume snapshot and you do not specify the userIds, then the access preview uses the existing shared userIds for the snapshot.   If the access preview is for a new resource and you do not specify the userIds, then the access preview considers the snapshot without any userIds.   To propose deletion of existing shared accountIds, you can specify an empty list for userIds.  
+     */
+    userIds?: EbsUserIdList;
+    /**
+     * The groups that have access to the Amazon EBS volume snapshot. If the value all is specified, then the Amazon EBS volume snapshot is public.   If the configuration is for an existing Amazon EBS volume snapshot and you do not specify the groups, then the access preview uses the existing shared groups for the snapshot.   If the access preview is for a new resource and you do not specify the groups, then the access preview considers the snapshot without any groups.   To propose deletion of existing shared groups, you can specify an empty list for groups.  
+     */
+    groups?: EbsGroupList;
+    /**
+     * The KMS key identifier for an encrypted Amazon EBS volume snapshot. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.   If the configuration is for an existing Amazon EBS volume snapshot and you do not specify the kmsKeyId, or you specify an empty string, then the access preview uses the existing kmsKeyId of the snapshot.   If the access preview is for a new resource and you do not specify the kmsKeyId, the access preview considers the snapshot as unencrypted.  
+     */
+    kmsKeyId?: EbsSnapshotDataEncryptionKeyId;
+  }
+  export type EbsSnapshotDataEncryptionKeyId = string;
+  export type EbsUserId = string;
+  export type EbsUserIdList = EbsUserId[];
+  export interface EcrRepositoryConfiguration {
+    /**
+     * The JSON repository policy text to apply to the Amazon ECR repository. For more information, see Private repository policy examples in the Amazon ECR User Guide.
+     */
+    repositoryPolicy?: EcrRepositoryPolicy;
+  }
+  export type EcrRepositoryPolicy = string;
+  export interface EfsFileSystemConfiguration {
+    /**
+     * The JSON policy definition to apply to the Amazon EFS file system. For more information on the elements that make up a file system policy, see Amazon EFS Resource-based policies.
+     */
+    fileSystemPolicy?: EfsFileSystemPolicy;
+  }
+  export type EfsFileSystemPolicy = string;
   export type FilterCriteriaMap = {[key: string]: Criterion};
   export interface Finding {
     /**
@@ -1350,10 +1407,52 @@ declare namespace AccessAnalyzer {
   }
   export type PrincipalArn = string;
   export type PrincipalMap = {[key: string]: String};
+  export type RdsDbClusterSnapshotAccountId = string;
+  export type RdsDbClusterSnapshotAccountIdsList = RdsDbClusterSnapshotAccountId[];
+  export type RdsDbClusterSnapshotAttributeName = string;
+  export interface RdsDbClusterSnapshotAttributeValue {
+    /**
+     * The Amazon Web Services account IDs that have access to the manual Amazon RDS DB cluster snapshot. If the value all is specified, then the Amazon RDS DB cluster snapshot is public and can be copied or restored by all Amazon Web Services accounts.   If the configuration is for an existing Amazon RDS DB cluster snapshot and you do not specify the accountIds in RdsDbClusterSnapshotAttributeValue, then the access preview uses the existing shared accountIds for the snapshot.   If the access preview is for a new resource and you do not specify the specify the accountIds in RdsDbClusterSnapshotAttributeValue, then the access preview considers the snapshot without any attributes.   To propose deletion of existing shared accountIds, you can specify an empty list for accountIds in the RdsDbClusterSnapshotAttributeValue.  
+     */
+    accountIds?: RdsDbClusterSnapshotAccountIdsList;
+  }
+  export type RdsDbClusterSnapshotAttributesMap = {[key: string]: RdsDbClusterSnapshotAttributeValue};
+  export interface RdsDbClusterSnapshotConfiguration {
+    /**
+     * The names and values of manual DB cluster snapshot attributes. Manual DB cluster snapshot attributes are used to authorize other Amazon Web Services accounts to restore a manual DB cluster snapshot. The only valid value for AttributeName for the attribute map is restore 
+     */
+    attributes?: RdsDbClusterSnapshotAttributesMap;
+    /**
+     * The KMS key identifier for an encrypted Amazon RDS DB cluster snapshot. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.   If the configuration is for an existing Amazon RDS DB cluster snapshot and you do not specify the kmsKeyId, or you specify an empty string, then the access preview uses the existing kmsKeyId of the snapshot.   If the access preview is for a new resource and you do not specify the specify the kmsKeyId, then the access preview considers the snapshot as unencrypted.  
+     */
+    kmsKeyId?: RdsDbClusterSnapshotKmsKeyId;
+  }
+  export type RdsDbClusterSnapshotKmsKeyId = string;
+  export type RdsDbSnapshotAccountId = string;
+  export type RdsDbSnapshotAccountIdsList = RdsDbSnapshotAccountId[];
+  export type RdsDbSnapshotAttributeName = string;
+  export interface RdsDbSnapshotAttributeValue {
+    /**
+     * The Amazon Web Services account IDs that have access to the manual Amazon RDS DB snapshot. If the value all is specified, then the Amazon RDS DB snapshot is public and can be copied or restored by all Amazon Web Services accounts.   If the configuration is for an existing Amazon RDS DB snapshot and you do not specify the accountIds in RdsDbSnapshotAttributeValue, then the access preview uses the existing shared accountIds for the snapshot.   If the access preview is for a new resource and you do not specify the specify the accountIds in RdsDbSnapshotAttributeValue, then the access preview considers the snapshot without any attributes.   To propose deletion of an existing shared accountIds, you can specify an empty list for accountIds in the RdsDbSnapshotAttributeValue.  
+     */
+    accountIds?: RdsDbSnapshotAccountIdsList;
+  }
+  export type RdsDbSnapshotAttributesMap = {[key: string]: RdsDbSnapshotAttributeValue};
+  export interface RdsDbSnapshotConfiguration {
+    /**
+     * The names and values of manual DB snapshot attributes. Manual DB snapshot attributes are used to authorize other Amazon Web Services accounts to restore a manual DB snapshot. The only valid value for attributeName for the attribute map is restore.
+     */
+    attributes?: RdsDbSnapshotAttributesMap;
+    /**
+     * The KMS key identifier for an encrypted Amazon RDS DB snapshot. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.   If the configuration is for an existing Amazon RDS DB snapshot and you do not specify the kmsKeyId, or you specify an empty string, then the access preview uses the existing kmsKeyId of the snapshot.   If the access preview is for a new resource and you do not specify the specify the kmsKeyId, then the access preview considers the snapshot as unencrypted.  
+     */
+    kmsKeyId?: RdsDbSnapshotKmsKeyId;
+  }
+  export type RdsDbSnapshotKmsKeyId = string;
   export type ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"|"DELEGATED_ADMINISTRATOR_DEREGISTERED"|"ORGANIZATION_DELETED"|"SERVICE_LINKED_ROLE_CREATION_FAILED"|string;
   export type RegionList = String[];
   export type ResourceArn = string;
-  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|string;
+  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|string;
   export type RetiringPrincipal = string;
   export type RoleArn = string;
   export interface S3AccessPointConfiguration {
@@ -1424,6 +1523,13 @@ declare namespace AccessAnalyzer {
   export type SecretsManagerSecretKmsId = string;
   export type SecretsManagerSecretPolicy = string;
   export type SharedViaList = String[];
+  export interface SnsTopicConfiguration {
+    /**
+     * The JSON policy text that defines who can access an Amazon SNS topic. For more information, see Example cases for Amazon SNS access control in the Amazon SNS Developer Guide.
+     */
+    topicPolicy?: SnsTopicPolicy;
+  }
+  export type SnsTopicPolicy = string;
   export interface SortCriteria {
     /**
      * The name of the attribute to sort on.
@@ -1480,6 +1586,10 @@ declare namespace AccessAnalyzer {
      * The ARN of the resource to scan.
      */
     resourceArn: ResourceArn;
+    /**
+     * The Amazon Web Services account ID that owns the resource. For most Amazon Web Services resources, the owning account is the account in which the resource was created.
+     */
+    resourceOwnerAccount?: String;
   }
   export interface StatusReason {
     /**

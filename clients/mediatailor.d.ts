@@ -12,171 +12,171 @@ declare class MediaTailor extends Service {
   constructor(options?: MediaTailor.Types.ClientConfiguration)
   config: Config & MediaTailor.Types.ClientConfiguration;
   /**
-   * Configures Amazon CloudWatch log settings for a playback configuration.
+   * Amazon CloudWatch log settings for a playback configuration.
    */
   configureLogsForPlaybackConfiguration(params: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
   /**
-   * Configures Amazon CloudWatch log settings for a playback configuration.
+   * Amazon CloudWatch log settings for a playback configuration.
    */
   configureLogsForPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
   /**
-   * Creates a channel.
+   * Creates a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   createChannel(params: MediaTailor.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a channel.
+   * Creates a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   createChannel(callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates name for a specific live source in a source location.
+   * The live source configuration.
    */
   createLiveSource(params: MediaTailor.Types.CreateLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateLiveSourceResponse) => void): Request<MediaTailor.Types.CreateLiveSourceResponse, AWSError>;
   /**
-   * Creates name for a specific live source in a source location.
+   * The live source configuration.
    */
   createLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.CreateLiveSourceResponse) => void): Request<MediaTailor.Types.CreateLiveSourceResponse, AWSError>;
   /**
-   * Creates a new prefetch schedule for the specified playback configuration.
+   * Creates a prefetch schedule for a playback configuration. A prefetch schedule allows you to tell MediaTailor to fetch and prepare certain ads before an ad break happens. For more information about ad prefetching, see Using ad prefetching in the MediaTailor User Guide.
    */
   createPrefetchSchedule(params: MediaTailor.Types.CreatePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
   /**
-   * Creates a new prefetch schedule for the specified playback configuration.
+   * Creates a prefetch schedule for a playback configuration. A prefetch schedule allows you to tell MediaTailor to fetch and prepare certain ads before an ad break happens. For more information about ad prefetching, see Using ad prefetching in the MediaTailor User Guide.
    */
   createPrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.CreatePrefetchScheduleResponse) => void): Request<MediaTailor.Types.CreatePrefetchScheduleResponse, AWSError>;
   /**
-   * Creates a program.
+   * Creates a program within a channel. For information about programs, see Working with programs in the MediaTailor User Guide.
    */
   createProgram(params: MediaTailor.Types.CreateProgramRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateProgramResponse) => void): Request<MediaTailor.Types.CreateProgramResponse, AWSError>;
   /**
-   * Creates a program.
+   * Creates a program within a channel. For information about programs, see Working with programs in the MediaTailor User Guide.
    */
   createProgram(callback?: (err: AWSError, data: MediaTailor.Types.CreateProgramResponse) => void): Request<MediaTailor.Types.CreateProgramResponse, AWSError>;
   /**
-   * Creates a source location on a specific channel.
+   * Creates a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   createSourceLocation(params: MediaTailor.Types.CreateSourceLocationRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateSourceLocationResponse) => void): Request<MediaTailor.Types.CreateSourceLocationResponse, AWSError>;
   /**
-   * Creates a source location on a specific channel.
+   * Creates a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   createSourceLocation(callback?: (err: AWSError, data: MediaTailor.Types.CreateSourceLocationResponse) => void): Request<MediaTailor.Types.CreateSourceLocationResponse, AWSError>;
   /**
-   * Creates name for a specific VOD source in a source location.
+   * The VOD source configuration parameters.
    */
   createVodSource(params: MediaTailor.Types.CreateVodSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateVodSourceResponse) => void): Request<MediaTailor.Types.CreateVodSourceResponse, AWSError>;
   /**
-   * Creates name for a specific VOD source in a source location.
+   * The VOD source configuration parameters.
    */
   createVodSource(callback?: (err: AWSError, data: MediaTailor.Types.CreateVodSourceResponse) => void): Request<MediaTailor.Types.CreateVodSourceResponse, AWSError>;
   /**
-   * Deletes a channel. You must stop the channel before it can be deleted.
+   * Deletes a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   deleteChannel(params: MediaTailor.Types.DeleteChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteChannelResponse) => void): Request<MediaTailor.Types.DeleteChannelResponse, AWSError>;
   /**
-   * Deletes a channel. You must stop the channel before it can be deleted.
+   * Deletes a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   deleteChannel(callback?: (err: AWSError, data: MediaTailor.Types.DeleteChannelResponse) => void): Request<MediaTailor.Types.DeleteChannelResponse, AWSError>;
   /**
-   * Deletes a channel's IAM policy.
+   * The channel policy to delete.
    */
   deleteChannelPolicy(params: MediaTailor.Types.DeleteChannelPolicyRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteChannelPolicyResponse) => void): Request<MediaTailor.Types.DeleteChannelPolicyResponse, AWSError>;
   /**
-   * Deletes a channel's IAM policy.
+   * The channel policy to delete.
    */
   deleteChannelPolicy(callback?: (err: AWSError, data: MediaTailor.Types.DeleteChannelPolicyResponse) => void): Request<MediaTailor.Types.DeleteChannelPolicyResponse, AWSError>;
   /**
-   * Deletes a specific live source in a specific source location.
+   * The live source to delete.
    */
   deleteLiveSource(params: MediaTailor.Types.DeleteLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteLiveSourceResponse) => void): Request<MediaTailor.Types.DeleteLiveSourceResponse, AWSError>;
   /**
-   * Deletes a specific live source in a specific source location.
+   * The live source to delete.
    */
   deleteLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.DeleteLiveSourceResponse) => void): Request<MediaTailor.Types.DeleteLiveSourceResponse, AWSError>;
   /**
-   * Deletes the playback configuration for the specified name.  
+   * Deletes a playback configuration. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
    */
   deletePlaybackConfiguration(params: MediaTailor.Types.DeletePlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
   /**
-   * Deletes the playback configuration for the specified name.  
+   * Deletes a playback configuration. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
    */
   deletePlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
   /**
-   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code. For more information about ad prefetching, see Using ad prefetching in the MediaTailor User Guide.
    */
   deletePrefetchSchedule(params: MediaTailor.Types.DeletePrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePrefetchScheduleResponse) => void): Request<MediaTailor.Types.DeletePrefetchScheduleResponse, AWSError>;
   /**
-   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   * Deletes a prefetch schedule for a specific playback configuration. If you call DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code. For more information about ad prefetching, see Using ad prefetching in the MediaTailor User Guide.
    */
   deletePrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.DeletePrefetchScheduleResponse) => void): Request<MediaTailor.Types.DeletePrefetchScheduleResponse, AWSError>;
   /**
-   * Deletes a specific program on a specific channel.
+   * Deletes a program within a channel. For information about programs, see Working with programs in the MediaTailor User Guide.
    */
   deleteProgram(params: MediaTailor.Types.DeleteProgramRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteProgramResponse) => void): Request<MediaTailor.Types.DeleteProgramResponse, AWSError>;
   /**
-   * Deletes a specific program on a specific channel.
+   * Deletes a program within a channel. For information about programs, see Working with programs in the MediaTailor User Guide.
    */
   deleteProgram(callback?: (err: AWSError, data: MediaTailor.Types.DeleteProgramResponse) => void): Request<MediaTailor.Types.DeleteProgramResponse, AWSError>;
   /**
-   * Deletes a source location on a specific channel.
+   * Deletes a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   deleteSourceLocation(params: MediaTailor.Types.DeleteSourceLocationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteSourceLocationResponse) => void): Request<MediaTailor.Types.DeleteSourceLocationResponse, AWSError>;
   /**
-   * Deletes a source location on a specific channel.
+   * Deletes a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   deleteSourceLocation(callback?: (err: AWSError, data: MediaTailor.Types.DeleteSourceLocationResponse) => void): Request<MediaTailor.Types.DeleteSourceLocationResponse, AWSError>;
   /**
-   * Deletes a specific VOD source in a specific source location.
+   * The video on demand (VOD) source to delete.
    */
   deleteVodSource(params: MediaTailor.Types.DeleteVodSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeleteVodSourceResponse) => void): Request<MediaTailor.Types.DeleteVodSourceResponse, AWSError>;
   /**
-   * Deletes a specific VOD source in a specific source location.
+   * The video on demand (VOD) source to delete.
    */
   deleteVodSource(callback?: (err: AWSError, data: MediaTailor.Types.DeleteVodSourceResponse) => void): Request<MediaTailor.Types.DeleteVodSourceResponse, AWSError>;
   /**
-   * Describes the properties of a specific channel.
+   * Describes a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   describeChannel(params: MediaTailor.Types.DescribeChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.DescribeChannelResponse) => void): Request<MediaTailor.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Describes the properties of a specific channel.
+   * Describes a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   describeChannel(callback?: (err: AWSError, data: MediaTailor.Types.DescribeChannelResponse) => void): Request<MediaTailor.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Provides details about a specific live source in a specific source location.
+   * The live source to describe.
    */
   describeLiveSource(params: MediaTailor.Types.DescribeLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.DescribeLiveSourceResponse) => void): Request<MediaTailor.Types.DescribeLiveSourceResponse, AWSError>;
   /**
-   * Provides details about a specific live source in a specific source location.
+   * The live source to describe.
    */
   describeLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.DescribeLiveSourceResponse) => void): Request<MediaTailor.Types.DescribeLiveSourceResponse, AWSError>;
   /**
-   * Retrieves the properties of the requested program.
+   * Describes a program within a channel. For information about programs, see Working with programs in the MediaTailor User Guide.
    */
   describeProgram(params: MediaTailor.Types.DescribeProgramRequest, callback?: (err: AWSError, data: MediaTailor.Types.DescribeProgramResponse) => void): Request<MediaTailor.Types.DescribeProgramResponse, AWSError>;
   /**
-   * Retrieves the properties of the requested program.
+   * Describes a program within a channel. For information about programs, see Working with programs in the MediaTailor User Guide.
    */
   describeProgram(callback?: (err: AWSError, data: MediaTailor.Types.DescribeProgramResponse) => void): Request<MediaTailor.Types.DescribeProgramResponse, AWSError>;
   /**
-   * Retrieves the properties of the requested source location.
+   * Describes a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   describeSourceLocation(params: MediaTailor.Types.DescribeSourceLocationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DescribeSourceLocationResponse) => void): Request<MediaTailor.Types.DescribeSourceLocationResponse, AWSError>;
   /**
-   * Retrieves the properties of the requested source location.
+   * Describes a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   describeSourceLocation(callback?: (err: AWSError, data: MediaTailor.Types.DescribeSourceLocationResponse) => void): Request<MediaTailor.Types.DescribeSourceLocationResponse, AWSError>;
   /**
-   * Provides details about a specific VOD source in a specific source location.
+   * Provides details about a specific video on demand (VOD) source in a specific source location.
    */
   describeVodSource(params: MediaTailor.Types.DescribeVodSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.DescribeVodSourceResponse) => void): Request<MediaTailor.Types.DescribeVodSourceResponse, AWSError>;
   /**
-   * Provides details about a specific VOD source in a specific source location.
+   * Provides details about a specific video on demand (VOD) source in a specific source location.
    */
   describeVodSource(callback?: (err: AWSError, data: MediaTailor.Types.DescribeVodSourceResponse) => void): Request<MediaTailor.Types.DescribeVodSourceResponse, AWSError>;
   /**
-   * Retrieves information about a channel's IAM policy.
+   * Returns the channel's IAM policy. IAM policies are used to control access to your channel.
    */
   getChannelPolicy(params: MediaTailor.Types.GetChannelPolicyRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetChannelPolicyResponse) => void): Request<MediaTailor.Types.GetChannelPolicyResponse, AWSError>;
   /**
-   * Retrieves information about a channel's IAM policy.
+   * Returns the channel's IAM policy. IAM policies are used to control access to your channel.
    */
   getChannelPolicy(callback?: (err: AWSError, data: MediaTailor.Types.GetChannelPolicyResponse) => void): Request<MediaTailor.Types.GetChannelPolicyResponse, AWSError>;
   /**
@@ -188,170 +188,170 @@ declare class MediaTailor extends Service {
    */
   getChannelSchedule(callback?: (err: AWSError, data: MediaTailor.Types.GetChannelScheduleResponse) => void): Request<MediaTailor.Types.GetChannelScheduleResponse, AWSError>;
   /**
-   * Returns the playback configuration for the specified name.  
+   * Retrieves a playback configuration. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
    */
   getPlaybackConfiguration(params: MediaTailor.Types.GetPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
-   * Returns the playback configuration for the specified name.  
+   * Retrieves a playback configuration. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
    */
   getPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
-   * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   * Retrieves a prefetch schedule for a playback configuration. A prefetch schedule allows you to tell MediaTailor to fetch and prepare certain ads before an ad break happens. For more information about ad prefetching, see Using ad prefetching in the MediaTailor User Guide.
    */
   getPrefetchSchedule(params: MediaTailor.Types.GetPrefetchScheduleRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPrefetchScheduleResponse) => void): Request<MediaTailor.Types.GetPrefetchScheduleResponse, AWSError>;
   /**
-   * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
+   * Retrieves a prefetch schedule for a playback configuration. A prefetch schedule allows you to tell MediaTailor to fetch and prepare certain ads before an ad break happens. For more information about ad prefetching, see Using ad prefetching in the MediaTailor User Guide.
    */
   getPrefetchSchedule(callback?: (err: AWSError, data: MediaTailor.Types.GetPrefetchScheduleResponse) => void): Request<MediaTailor.Types.GetPrefetchScheduleResponse, AWSError>;
   /**
-   * Returns a list of alerts for the given resource.
+   * Lists the alerts that are associated with a MediaTailor channel assembly resource.
    */
   listAlerts(params: MediaTailor.Types.ListAlertsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
   /**
-   * Returns a list of alerts for the given resource.
+   * Lists the alerts that are associated with a MediaTailor channel assembly resource.
    */
   listAlerts(callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
   /**
-   * Retrieves a list of channels that are associated with this account.
+   * Retrieves information about the channels that are associated with the current AWS account.
    */
   listChannels(params: MediaTailor.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListChannelsResponse) => void): Request<MediaTailor.Types.ListChannelsResponse, AWSError>;
   /**
-   * Retrieves a list of channels that are associated with this account.
+   * Retrieves information about the channels that are associated with the current AWS account.
    */
   listChannels(callback?: (err: AWSError, data: MediaTailor.Types.ListChannelsResponse) => void): Request<MediaTailor.Types.ListChannelsResponse, AWSError>;
   /**
-   * lists all the live sources in a source location.
+   * Lists the live sources contained in a source location. A source represents a piece of content.
    */
   listLiveSources(params: MediaTailor.Types.ListLiveSourcesRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListLiveSourcesResponse) => void): Request<MediaTailor.Types.ListLiveSourcesResponse, AWSError>;
   /**
-   * lists all the live sources in a source location.
+   * Lists the live sources contained in a source location. A source represents a piece of content.
    */
   listLiveSources(callback?: (err: AWSError, data: MediaTailor.Types.ListLiveSourcesResponse) => void): Request<MediaTailor.Types.ListLiveSourcesResponse, AWSError>;
   /**
-   * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful.  
+   * Retrieves existing playback configurations. For information about MediaTailor configurations, see Working with Configurations in AWS Elemental MediaTailor.
    */
   listPlaybackConfigurations(params: MediaTailor.Types.ListPlaybackConfigurationsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
   /**
-   * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful.  
+   * Retrieves existing playback configurations. For information about MediaTailor configurations, see Working with Configurations in AWS Elemental MediaTailor.
    */
   listPlaybackConfigurations(callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
   /**
-   * Creates a new prefetch schedule.
+   * Lists the prefetch schedules for a playback configuration.
    */
   listPrefetchSchedules(params: MediaTailor.Types.ListPrefetchSchedulesRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPrefetchSchedulesResponse) => void): Request<MediaTailor.Types.ListPrefetchSchedulesResponse, AWSError>;
   /**
-   * Creates a new prefetch schedule.
+   * Lists the prefetch schedules for a playback configuration.
    */
   listPrefetchSchedules(callback?: (err: AWSError, data: MediaTailor.Types.ListPrefetchSchedulesResponse) => void): Request<MediaTailor.Types.ListPrefetchSchedulesResponse, AWSError>;
   /**
-   * Retrieves a list of source locations.
+   * Lists the source locations for a channel. A source location defines the host server URL, and contains a list of sources.
    */
   listSourceLocations(params: MediaTailor.Types.ListSourceLocationsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListSourceLocationsResponse) => void): Request<MediaTailor.Types.ListSourceLocationsResponse, AWSError>;
   /**
-   * Retrieves a list of source locations.
+   * Lists the source locations for a channel. A source location defines the host server URL, and contains a list of sources.
    */
   listSourceLocations(callback?: (err: AWSError, data: MediaTailor.Types.ListSourceLocationsResponse) => void): Request<MediaTailor.Types.ListSourceLocationsResponse, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified playback configuration resource.  
+   * A list of tags that are associated with this resource. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
    */
   listTagsForResource(params: MediaTailor.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified playback configuration resource.  
+   * A list of tags that are associated with this resource. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all the VOD sources in a source location.
+   * Lists the VOD sources contained in a source location. A source represents a piece of content.
    */
   listVodSources(params: MediaTailor.Types.ListVodSourcesRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListVodSourcesResponse) => void): Request<MediaTailor.Types.ListVodSourcesResponse, AWSError>;
   /**
-   * Lists all the VOD sources in a source location.
+   * Lists the VOD sources contained in a source location. A source represents a piece of content.
    */
   listVodSources(callback?: (err: AWSError, data: MediaTailor.Types.ListVodSourcesResponse) => void): Request<MediaTailor.Types.ListVodSourcesResponse, AWSError>;
   /**
-   * Creates an IAM policy for the channel.
+   * Creates an IAM policy for the channel. IAM policies are used to control access to your channel.
    */
   putChannelPolicy(params: MediaTailor.Types.PutChannelPolicyRequest, callback?: (err: AWSError, data: MediaTailor.Types.PutChannelPolicyResponse) => void): Request<MediaTailor.Types.PutChannelPolicyResponse, AWSError>;
   /**
-   * Creates an IAM policy for the channel.
+   * Creates an IAM policy for the channel. IAM policies are used to control access to your channel.
    */
   putChannelPolicy(callback?: (err: AWSError, data: MediaTailor.Types.PutChannelPolicyResponse) => void): Request<MediaTailor.Types.PutChannelPolicyResponse, AWSError>;
   /**
-   * Adds a new playback configuration to AWS Elemental MediaTailor.  
+   * Creates a playback configuration. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
    */
   putPlaybackConfiguration(params: MediaTailor.Types.PutPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
   /**
-   * Adds a new playback configuration to AWS Elemental MediaTailor.  
+   * Creates a playback configuration. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
    */
   putPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
   /**
-   * Starts a specific channel.
+   * Starts a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   startChannel(params: MediaTailor.Types.StartChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.StartChannelResponse) => void): Request<MediaTailor.Types.StartChannelResponse, AWSError>;
   /**
-   * Starts a specific channel.
+   * Starts a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   startChannel(callback?: (err: AWSError, data: MediaTailor.Types.StartChannelResponse) => void): Request<MediaTailor.Types.StartChannelResponse, AWSError>;
   /**
-   * Stops a specific channel.
+   * Stops a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   stopChannel(params: MediaTailor.Types.StopChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.StopChannelResponse) => void): Request<MediaTailor.Types.StopChannelResponse, AWSError>;
   /**
-   * Stops a specific channel.
+   * Stops a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   stopChannel(callback?: (err: AWSError, data: MediaTailor.Types.StopChannelResponse) => void): Request<MediaTailor.Types.StopChannelResponse, AWSError>;
   /**
-   * Adds tags to the specified playback configuration resource. You can specify one or more tags to add.  
+   * The resource to tag. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
    */
   tagResource(params: MediaTailor.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds tags to the specified playback configuration resource. You can specify one or more tags to add.  
+   * The resource to tag. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove.  
+   * The resource to untag.
    */
   untagResource(params: MediaTailor.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove.  
+   * The resource to untag.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing channel.
+   * Updates a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   updateChannel(params: MediaTailor.Types.UpdateChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateChannelResponse) => void): Request<MediaTailor.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Updates an existing channel.
+   * Updates a channel. For information about MediaTailor channels, see Working with channels in the MediaTailor User Guide.
    */
   updateChannel(callback?: (err: AWSError, data: MediaTailor.Types.UpdateChannelResponse) => void): Request<MediaTailor.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Updates a specific live source in a specific source location.
+   * Updates a live source's configuration.
    */
   updateLiveSource(params: MediaTailor.Types.UpdateLiveSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateLiveSourceResponse) => void): Request<MediaTailor.Types.UpdateLiveSourceResponse, AWSError>;
   /**
-   * Updates a specific live source in a specific source location.
+   * Updates a live source's configuration.
    */
   updateLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.UpdateLiveSourceResponse) => void): Request<MediaTailor.Types.UpdateLiveSourceResponse, AWSError>;
   /**
-   * Updates a source location on a specific channel.
+   * Updates a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   updateSourceLocation(params: MediaTailor.Types.UpdateSourceLocationRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateSourceLocationResponse) => void): Request<MediaTailor.Types.UpdateSourceLocationResponse, AWSError>;
   /**
-   * Updates a source location on a specific channel.
+   * Updates a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   updateSourceLocation(callback?: (err: AWSError, data: MediaTailor.Types.UpdateSourceLocationResponse) => void): Request<MediaTailor.Types.UpdateSourceLocationResponse, AWSError>;
   /**
-   * Updates a specific VOD source in a specific source location.
+   * Updates a VOD source's configuration.
    */
   updateVodSource(params: MediaTailor.Types.UpdateVodSourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateVodSourceResponse) => void): Request<MediaTailor.Types.UpdateVodSourceResponse, AWSError>;
   /**
-   * Updates a specific VOD source in a specific source location.
+   * Updates a VOD source's configuration.
    */
   updateVodSource(callback?: (err: AWSError, data: MediaTailor.Types.UpdateVodSourceResponse) => void): Request<MediaTailor.Types.UpdateVodSourceResponse, AWSError>;
 }
 declare namespace MediaTailor {
   export interface AccessConfiguration {
     /**
-     * The type of authentication used to access content from HttpConfiguration::BaseUrl on your source location. Accepted value: S3_SIGV4. S3_SIGV4 - AWS Signature Version 4 authentication for Amazon S3 hosted virtual-style access. If your source location base URL is an Amazon S3 bucket, MediaTailor can use AWS Signature Version 4 (SigV4) authentication to access the bucket where your source content is stored. Your MediaTailor source location baseURL must follow the S3 virtual hosted-style request URL format. For example, https://bucket-name.s3.Region.amazonaws.com/key-name. Before you can use S3_SIGV4, you must meet these requirements: • You must allow MediaTailor to access your S3 bucket by granting mediatailor.amazonaws.com principal access in IAM. For information about configuring access in IAM, see Access management in the IAM User Guide. • The mediatailor.amazonaws.com service principal must have permissions to read all top level manifests referenced by the VodSource packaging configurations. • The caller of the API must have s3:GetObject IAM permissions to read all top level manifests referenced by your MediaTailor VodSource packaging configurations.
+     * The type of authentication used to access content from HttpConfiguration::BaseUrl on your source location. Accepted value: S3_SIGV4.  S3_SIGV4 - AWS Signature Version 4 authentication for Amazon S3 hosted virtual-style access. If your source location base URL is an Amazon S3 bucket, MediaTailor can use AWS Signature Version 4 (SigV4) authentication to access the bucket where your source content is stored. Your MediaTailor source location baseURL must follow the S3 virtual hosted-style request URL format. For example, https://bucket-name.s3.Region.amazonaws.com/key-name. Before you can use S3_SIGV4, you must meet these requirements: • You must allow MediaTailor to access your S3 bucket by granting mediatailor.amazonaws.com principal access in IAM. For information about configuring access in IAM, see Access management in the IAM User Guide. • The mediatailor.amazonaws.com service principal must have permissions to read all top level manifests referenced by the VodSource packaging configurations. • The caller of the API must have s3:GetObject IAM permissions to read all top level manifests referenced by your MediaTailor VodSource packaging configurations.
      */
     AccessType?: AccessType;
     /**
@@ -362,7 +362,7 @@ declare namespace MediaTailor {
   export type AccessType = "S3_SIGV4"|"SECRETS_MANAGER_ACCESS_TOKEN"|string;
   export interface AdBreak {
     /**
-     * The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT.
+     * The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT, TIME_SIGNAL.
      */
     MessageType?: MessageType;
     /**
@@ -438,7 +438,7 @@ declare namespace MediaTailor {
   }
   export interface CdnConfiguration {
     /**
-     * A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the origin ads.mediatailor.&amp;lt;region>.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.
+     * A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the origin ads.mediatailor.&lt;region&gt;.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.
      */
     AdSegmentUrlPrefix?: __string;
     /**
@@ -476,11 +476,11 @@ declare namespace MediaTailor {
      */
     Outputs: ResponseOutputs;
     /**
-     * The type of playback mode for this channel. LINEAR - Programs play back-to-back only once. LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.
+     * The type of playback mode for this channel.  LINEAR - Programs play back-to-back only once.  LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.
      */
     PlaybackMode: __string;
     /**
-     * The tags to assign to the channel.
+     * The tags to assign to the channel. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -493,7 +493,7 @@ declare namespace MediaTailor {
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
   export interface ConfigureLogsForPlaybackConfigurationRequest {
     /**
-     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100 
      */
     PercentEnabled: __integer;
     /**
@@ -505,7 +505,7 @@ declare namespace MediaTailor {
     /**
      * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account.
      */
-    PercentEnabled?: __integer;
+    PercentEnabled: __integer;
     /**
      * The name of the playback configuration.
      */
@@ -513,7 +513,7 @@ declare namespace MediaTailor {
   }
   export interface CreateChannelRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
     /**
@@ -525,11 +525,11 @@ declare namespace MediaTailor {
      */
     Outputs: RequestOutputs;
     /**
-     * The type of playback mode to use for this channel. LINEAR - The programs in the schedule play once back-to-back in the schedule. LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.
+     * The type of playback mode to use for this channel.  LINEAR - The programs in the schedule play once back-to-back in the schedule.  LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.
      */
     PlaybackMode: PlaybackMode;
     /**
-     * The tags to assign to the channel.
+     * The tags to assign to the channel. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -539,11 +539,11 @@ declare namespace MediaTailor {
   }
   export interface CreateChannelResponse {
     /**
-     * The ARN of the channel.
+     * The Amazon Resource Name (ARN) to assign to the channel.
      */
     Arn?: __string;
     /**
-     * The name of the channel.
+     * The name to assign to the channel.
      */
     ChannelName?: __string;
     /**
@@ -563,19 +563,19 @@ declare namespace MediaTailor {
      */
     LastModifiedTime?: __timestampUnix;
     /**
-     * The channel's output properties.
+     * The output properties to assign to the channel.
      */
     Outputs?: ResponseOutputs;
     /**
-     * The channel's playback mode.
+     * The playback mode to assign to the channel.
      */
     PlaybackMode?: __string;
     /**
-     * The tags assigned to the channel.
+     * The tags to assign to the channel. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
-     * The channel's tier.
+     * The tier of the channel.
      */
     Tier?: __string;
   }
@@ -585,45 +585,45 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations: HttpPackageConfigurations;
     /**
-     * The identifier for the live source you are working on.
+     * The name of the live source.
      */
     LiveSourceName: __string;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location.
      */
     SourceLocationName: __string;
     /**
-     * The tags to assign to the live source.
+     * The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
   export interface CreateLiveSourceResponse {
     /**
-     * The ARN of the live source.
+     * The ARN to assign to the live source.
      */
     Arn?: __string;
     /**
-     * The timestamp that indicates when the live source was created.
+     * The time the live source was created.
      */
     CreationTime?: __timestampUnix;
     /**
-     * The HTTP package configurations.
+     * A list of HTTP package configuration parameters for this live source.
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The timestamp that indicates when the live source was modified.
+     * The time the live source was last modified.
      */
     LastModifiedTime?: __timestampUnix;
     /**
-     * The name of the live source.
+     * The name to assign to the live source.
      */
     LiveSourceName?: __string;
     /**
-     * The name of the source location associated with the VOD source.
+     * The name to assign to the source location of the live source.
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the live source.
+     * The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
@@ -633,11 +633,11 @@ declare namespace MediaTailor {
      */
     Consumption: PrefetchConsumption;
     /**
-     * The identifier for the playback configuration.
+     * The name to assign to the schedule request.
      */
     Name: __string;
     /**
-     * The name of the playback configuration.
+     * The name to assign to the playback configuration.
      */
     PlaybackConfigurationName: __string;
     /**
@@ -651,27 +651,27 @@ declare namespace MediaTailor {
   }
   export interface CreatePrefetchScheduleResponse {
     /**
-     * The Amazon Resource Name (ARN) of the prefetch schedule.
+     * The ARN to assign to the prefetch schedule.
      */
     Arn?: __string;
     /**
-     * Consumption settings determine how, and when, MediaTailor places the prefetched ads into ad breaks. Ad consumption occurs within a span of time that you define, called a consumption window. You can designate which ad breaks that MediaTailor fills with prefetch ads by setting avail matching criteria.
+     * The configuration settings for MediaTailor's consumption of the prefetched ads from the ad decision server. Each consumption configuration contains an end time and an optional start time that define the consumption window. Prefetch schedules automatically expire no earlier than seven days after the end time.
      */
     Consumption?: PrefetchConsumption;
     /**
-     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
+     * The name to assign to the prefetch schedule.
      */
     Name?: __string;
     /**
-     * The name of the playback configuration to create the prefetch schedule for.
+     * The name to assign to the playback configuration.
      */
     PlaybackConfigurationName?: __string;
     /**
-     * A complex type that contains settings for prefetch retrieval from the ad decision server (ADS).
+     * The configuration settings for retrieval of prefetched ads from the ad decision server. Only one set of prefetched ads will be retrieved and subsequently consumed for each ad break.
      */
     Retrieval?: PrefetchRetrieval;
     /**
-     * An optional stream identifier that you can specify in order to prefetch for multiple streams that use the same playback configuration.
+     * An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration. If StreamId is specified, MediaTailor returns all of the prefetch schedules with an exact match on StreamId. If not specified, MediaTailor returns all of the prefetch schedules for the playback configuration, regardless of StreamId.
      */
     StreamId?: __string;
   }
@@ -681,7 +681,7 @@ declare namespace MediaTailor {
      */
     AdBreaks?: __listOfAdBreak;
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel for this Program.
      */
     ChannelName: __string;
     /**
@@ -689,7 +689,7 @@ declare namespace MediaTailor {
      */
     LiveSourceName?: __string;
     /**
-     * The identifier for the program you are working on.
+     * The name of the Program.
      */
     ProgramName: __string;
     /**
@@ -711,15 +711,15 @@ declare namespace MediaTailor {
      */
     AdBreaks?: __listOfAdBreak;
     /**
-     * The ARN of the program.
+     * The ARN to assign to the program.
      */
     Arn?: __string;
     /**
-     * The name of the channel that the program belongs to.
+     * The name to assign to the channel for this program.
      */
     ChannelName?: __string;
     /**
-     * The timestamp of when the program was created.
+     * The time the program was created.
      */
     CreationTime?: __timestampUnix;
     /**
@@ -727,15 +727,15 @@ declare namespace MediaTailor {
      */
     LiveSourceName?: __string;
     /**
-     * The name of the program.
+     * The name to assign to this program.
      */
     ProgramName?: __string;
     /**
-     * The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
+     * The scheduled start time for this Program.
      */
     ScheduledStartTime?: __timestampUnix;
     /**
-     * The source location name.
+     * The name to assign to the source location for this program.
      */
     SourceLocationName?: __string;
     /**
@@ -761,49 +761,49 @@ declare namespace MediaTailor {
      */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
-     * The identifier for the source location you are working on.
+     * The name associated with the source location.
      */
     SourceLocationName: __string;
     /**
-     * The tags to assign to the source location.
+     * The tags to assign to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
   export interface CreateSourceLocationResponse {
     /**
-     * The access configuration for the source location.
+     * Access configuration parameters. Configures the type of authentication used to access content from your source location.
      */
     AccessConfiguration?: AccessConfiguration;
     /**
-     * The ARN of the source location.
+     * The ARN to assign to the source location.
      */
     Arn?: __string;
     /**
-     * The timestamp that indicates when the source location was created.
+     * The time the source location was created.
      */
     CreationTime?: __timestampUnix;
     /**
-     * The default segment delivery configuration settings.
+     * The optional configuration for the server that serves segments.
      */
     DefaultSegmentDeliveryConfiguration?: DefaultSegmentDeliveryConfiguration;
     /**
-     * The HTTP package configuration settings for the source location.
+     * The source's HTTP package configurations.
      */
     HttpConfiguration?: HttpConfiguration;
     /**
-     * The timestamp that indicates when the source location was last modified.
+     * The time the source location was last modified.
      */
     LastModifiedTime?: __timestampUnix;
     /**
-     * A list of the segment delivery configurations associated with this resource.
+     * The segment delivery configurations for the source location. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
      */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
-     * The name of the source location.
+     * The name to assign to the source location.
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the source location.
+     * The tags to assign to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
@@ -813,45 +813,45 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations: HttpPackageConfigurations;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location for this VOD source.
      */
     SourceLocationName: __string;
     /**
-     * The tags to assign to the VOD source.
+     * The tags to assign to the VOD source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
-     * The identifier for the VOD source you are working on.
+     * The name associated with the VOD source.&gt;
      */
     VodSourceName: __string;
   }
   export interface CreateVodSourceResponse {
     /**
-     * The ARN of the VOD source.
+     * The ARN to assign to this VOD source.
      */
     Arn?: __string;
     /**
-     * The timestamp that indicates when the VOD source was created.
+     * The time the VOD source was created.
      */
     CreationTime?: __timestampUnix;
     /**
-     * The HTTP package configurations.
+     * A list of HTTP package configuration parameters for this VOD source.
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The last modified time of the VOD source.
+     * The time the VOD source was last modified.
      */
     LastModifiedTime?: __timestampUnix;
     /**
-     * The name of the source location associated with the VOD source.
+     * The name to assign to the source location for this VOD source.
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the VOD source.
+     * The tags to assign to the VOD source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
-     * The name of the VOD source.
+     * The name to assign to the VOD source.
      */
     VodSourceName?: __string;
   }
@@ -905,7 +905,7 @@ declare namespace MediaTailor {
   }
   export interface DeleteChannelPolicyRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel associated with this channel policy.
      */
     ChannelName: __string;
   }
@@ -913,7 +913,7 @@ declare namespace MediaTailor {
   }
   export interface DeleteChannelRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
   }
@@ -921,11 +921,11 @@ declare namespace MediaTailor {
   }
   export interface DeleteLiveSourceRequest {
     /**
-     * The identifier for the live source you are working on.
+     * The name of the live source.
      */
     LiveSourceName: __string;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this Live Source.
      */
     SourceLocationName: __string;
   }
@@ -933,7 +933,7 @@ declare namespace MediaTailor {
   }
   export interface DeletePlaybackConfigurationRequest {
     /**
-     * The identifier for the playback configuration.
+     * The name of the playback configuration.
      */
     Name: __string;
   }
@@ -941,11 +941,11 @@ declare namespace MediaTailor {
   }
   export interface DeletePrefetchScheduleRequest {
     /**
-     * The identifier for the playback configuration.
+     * The name of the prefetch schedule. If the action is successful, the service sends back an HTTP 204 response with an empty HTTP body.
      */
     Name: __string;
     /**
-     * The name of the playback configuration.
+     * The name of the playback configuration for this prefetch schedule.
      */
     PlaybackConfigurationName: __string;
   }
@@ -953,11 +953,11 @@ declare namespace MediaTailor {
   }
   export interface DeleteProgramRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
     /**
-     * The identifier for the program you are working on.
+     * The name of the program.
      */
     ProgramName: __string;
   }
@@ -965,7 +965,7 @@ declare namespace MediaTailor {
   }
   export interface DeleteSourceLocationRequest {
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location.
      */
     SourceLocationName: __string;
   }
@@ -973,11 +973,11 @@ declare namespace MediaTailor {
   }
   export interface DeleteVodSourceRequest {
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this VOD Source.
      */
     SourceLocationName: __string;
     /**
-     * The identifier for the VOD source you are working on.
+     * The name of the VOD source.
      */
     VodSourceName: __string;
   }
@@ -985,7 +985,7 @@ declare namespace MediaTailor {
   }
   export interface DescribeChannelRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
   }
@@ -1023,7 +1023,7 @@ declare namespace MediaTailor {
      */
     PlaybackMode?: __string;
     /**
-     * The tags assigned to the channel.
+     * The tags assigned to the channel. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -1033,11 +1033,11 @@ declare namespace MediaTailor {
   }
   export interface DescribeLiveSourceRequest {
     /**
-     * The identifier for the live source you are working on.
+     * The name of the live source.
      */
     LiveSourceName: __string;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this Live Source.
      */
     SourceLocationName: __string;
   }
@@ -1063,21 +1063,21 @@ declare namespace MediaTailor {
      */
     LiveSourceName?: __string;
     /**
-     * The name of the source location associated with the VOD source.
+     * The name of the source location associated with the live source.
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the live source.
+     * The tags assigned to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
   export interface DescribeProgramRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel associated with this Program.
      */
     ChannelName: __string;
     /**
-     * The identifier for the program you are working on.
+     * The name of the program.
      */
     ProgramName: __string;
   }
@@ -1121,7 +1121,7 @@ declare namespace MediaTailor {
   }
   export interface DescribeSourceLocationRequest {
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location.
      */
     SourceLocationName: __string;
   }
@@ -1159,17 +1159,17 @@ declare namespace MediaTailor {
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the source location.
+     * The tags assigned to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
   export interface DescribeVodSourceRequest {
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this VOD Source.
      */
     SourceLocationName: __string;
     /**
-     * The identifier for the VOD source you are working on.
+     * The name of the VOD Source.
      */
     VodSourceName: __string;
   }
@@ -1195,7 +1195,7 @@ declare namespace MediaTailor {
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the VOD source.
+     * The tags assigned to the VOD source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -1205,31 +1205,31 @@ declare namespace MediaTailor {
   }
   export interface GetChannelPolicyRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel associated with this Channel Policy.
      */
     ChannelName: __string;
   }
   export interface GetChannelPolicyResponse {
     /**
-     * The IAM policy for the channel.
+     * The IAM policy for the channel. IAM policies are used to control access to your channel.
      */
     Policy?: __string;
   }
   export interface GetChannelScheduleRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel associated with this Channel Schedule.
      */
     ChannelName: __string;
     /**
-     * The schedule duration in minutes. The maximum duration is 4320 minutes (three days).
+     * The duration in minutes of the channel schedule.
      */
     DurationMinutes?: __string;
     /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
+     * The maximum number of channel schedules that you want MediaTailor to return in response to the current request. If there are more than MaxResults channel schedules, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * (Optional) If the playback configuration has more than MaxResults channel schedules, use NextToken to get the second and subsequent pages of results. For the first GetChannelScheduleRequest request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request. If the previous response didn't include a NextToken element, there are no more channel schedules to get.
      */
     NextToken?: __string;
   }
@@ -1239,7 +1239,7 @@ declare namespace MediaTailor {
      */
     Items?: __listOfScheduleEntry;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
@@ -1315,7 +1315,7 @@ declare namespace MediaTailor {
      */
     SlateAdUrl?: __string;
     /**
-     * The tags assigned to the playback configuration.
+     * The tags assigned to the playback configuration. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -1329,11 +1329,11 @@ declare namespace MediaTailor {
   }
   export interface GetPrefetchScheduleRequest {
     /**
-     * The identifier for the playback configuration.
+     * The name of the prefetch schedule. The name must be unique among all prefetch schedules that are associated with the specified playback configuration.
      */
     Name: __string;
     /**
-     * The name of the playback configuration.
+     * Returns information about the prefetch schedule for a specific playback configuration. If you call GetPrefetchSchedule on an expired prefetch schedule, MediaTailor returns an HTTP 404 status code.
      */
     PlaybackConfigurationName: __string;
   }
@@ -1398,11 +1398,11 @@ declare namespace MediaTailor {
   export type HttpPackageConfigurations = HttpPackageConfiguration[];
   export interface ListAlertsRequest {
     /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
+     * The maximum number of alerts that you want MediaTailor to return in response to the current request. If there are more than MaxResults alerts, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
     /**
@@ -1416,17 +1416,17 @@ declare namespace MediaTailor {
      */
     Items?: __listOfAlert;
     /**
-     * Pagination token from the list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
   export interface ListChannelsRequest {
     /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
+     * The maximum number of channels that you want MediaTailor to return in response to the current request. If there are more than MaxResults channels, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
@@ -1442,15 +1442,15 @@ declare namespace MediaTailor {
   }
   export interface ListLiveSourcesRequest {
     /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
+     * The maximum number of live sources that you want MediaTailor to return in response to the current request. If there are more than MaxResults live sources, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this Live Sources list.
      */
     SourceLocationName: __string;
   }
@@ -1460,17 +1460,17 @@ declare namespace MediaTailor {
      */
     Items?: __listOfLiveSource;
     /**
-     * Pagination token from the list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
   export interface ListPlaybackConfigurationsRequest {
     /**
-     * Maximum number of records to return.
+     * The maximum number of playback configurations that you want MediaTailor to return in response to the current request. If there are more than MaxResults playback configurations, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
@@ -1486,15 +1486,15 @@ declare namespace MediaTailor {
   }
   export interface ListPrefetchSchedulesRequest {
     /**
-     * The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If the playback configuration has more than MaxResults prefetch schedules, use the value of NextToken in the response to get the next page of results.
+     * The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If there are more than MaxResults prefetch schedules, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: __integerMin1Max100;
     /**
-     * (Optional) If the playback configuration has more than MaxResults prefetch schedules, use NextToken to get the second and subsequent pages of results. For the first ListPrefetchSchedulesRequest request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request. If the previous response didn't include a NextToken element, there are no more prefetch schedules to get.
+     * (Optional) If the playback configuration has more than MaxResults prefetch schedules, use NextToken to get the second and subsequent pages of results.  For the first ListPrefetchSchedulesRequest request, omit this value.  For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request.  If the previous response didn't include a NextToken element, there are no more prefetch schedules to get.
      */
     NextToken?: __string;
     /**
-     * The name of the playback configuration.
+     * Retrieves the prefetch schedule(s) for a specific playback configuration.
      */
     PlaybackConfigurationName: __string;
     /**
@@ -1508,17 +1508,17 @@ declare namespace MediaTailor {
      */
     Items?: __listOfPrefetchSchedule;
     /**
-     * The value that you will use forNextToken in the next ListPrefetchSchedulesRequest request.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
   export interface ListSourceLocationsRequest {
     /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
+     *  The maximum number of source locations that you want MediaTailor to return in response to the current request. If there are more than MaxResults source locations, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
@@ -1528,33 +1528,33 @@ declare namespace MediaTailor {
      */
     Items?: __listOfSourceLocation;
     /**
-     * Pagination token from the list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request.
+     * The Amazon Resource Name (ARN) associated with this resource.
      */
     ResourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * A comma-separated list of tag key:value pairs.
+     * The tags associated with this resource. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
   export interface ListVodSourcesRequest {
     /**
-     * Upper bound on number of records to return. The maximum number of results is 100.
+     *  The maximum number of VOD sources that you want MediaTailor to return in response to the current request. If there are more than MaxResults VOD sources, use the value of NextToken in the response to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this VOD Source list.
      */
     SourceLocationName: __string;
   }
@@ -1564,7 +1564,7 @@ declare namespace MediaTailor {
      */
     Items?: __listOfVodSource;
     /**
-     * Pagination token from the list request. Use the token to fetch the next page of results.
+     * Pagination token returned by the list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
      */
     NextToken?: __string;
   }
@@ -1604,13 +1604,13 @@ declare namespace MediaTailor {
      */
     SourceLocationName: __string;
     /**
-     * The tags assigned to the live source.
+     * The tags assigned to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
   export interface LogConfiguration {
     /**
-     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100 
      */
     PercentEnabled: __integer;
   }
@@ -1691,7 +1691,7 @@ declare namespace MediaTailor {
      */
     SlateAdUrl?: __string;
     /**
-     * The tags to assign to the playback configuration.
+     * The tags to assign to the playback configuration. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -1720,7 +1720,7 @@ declare namespace MediaTailor {
   }
   export interface PrefetchRetrieval {
     /**
-     * The dynamic variables to use for substitution during prefetch requests to the ad decision server (ADS). You intially configure dynamic variables for the ADS URL when you set up your playback configuration. When you specify DynamicVariables for prefetch retrieval, MediaTailor includes the dynamic variables in the request to the ADS.
+     * The dynamic variables to use for substitution during prefetch requests to the ad decision server (ADS). You initially configure dynamic variables for the ADS URL when you set up your playback configuration. When you specify DynamicVariables for prefetch retrieval, MediaTailor includes the dynamic variables in the request to the ADS.
      */
     DynamicVariables?: __mapOf__string;
     /**
@@ -1760,7 +1760,7 @@ declare namespace MediaTailor {
   }
   export interface PutChannelPolicyRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The channel name associated with this Channel Policy.
      */
     ChannelName: __string;
     /**
@@ -1788,7 +1788,7 @@ declare namespace MediaTailor {
      */
     CdnConfiguration?: CdnConfiguration;
     /**
-     * The player parameters and aliases used as dynamic variables during session initialization. For more information, see Domain Variables. 
+     * The player parameters and aliases used as dynamic variables during session initialization. For more information, see Domain Variables.
      */
     ConfigurationAliases?: ConfigurationAliasesRequest;
     /**
@@ -1806,7 +1806,7 @@ declare namespace MediaTailor {
     /**
      * The identifier for the playback configuration.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Defines the maximum duration of underfilled ad time (in seconds) allowed in an ad break. If the duration of underfilled ad time exceeds the personalization threshold, then the personalization of the ad break is abandoned and the underlying content is shown. This feature applies to ad replacement in live and VOD streams, rather than ad insertion, because it relies on an underlying content stream. For more information about ad break behavior, including ad replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor.
      */
@@ -1816,7 +1816,7 @@ declare namespace MediaTailor {
      */
     SlateAdUrl?: __string;
     /**
-     * The tags to assign to the playback configuration.
+     * The tags to assign to the playback configuration. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -1830,7 +1830,7 @@ declare namespace MediaTailor {
   }
   export interface PutPlaybackConfigurationResponse {
     /**
-     * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.
+     * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.
      */
     AdDecisionServerUrl?: __string;
     /**
@@ -1878,23 +1878,23 @@ declare namespace MediaTailor {
      */
     PersonalizationThresholdSeconds?: __integerMin1;
     /**
-     * The Amazon Resource Name (ARN) for the playback configuration.
+     * The Amazon Resource Name (ARN) associated with the playback configuration.
      */
     PlaybackConfigurationArn?: __string;
     /**
-     * The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting.
+     * The playback endpoint prefix associated with the playback configuration.
      */
     PlaybackEndpointPrefix?: __string;
     /**
-     * The URL that the player uses to initialize a session that uses client-side reporting.
+     * The session initialization endpoint prefix associated with the playback configuration.
      */
     SessionInitializationEndpointPrefix?: __string;
     /**
-     * The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video.
+     * The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video.
      */
     SlateAdUrl?: __string;
     /**
-     * The tags assigned to the playback configuration.
+     * The tags to assign to the playback configuration. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -2003,7 +2003,7 @@ declare namespace MediaTailor {
      */
     ScheduleAdBreaks?: __listOfScheduleAdBreak;
     /**
-     * The type of schedule entry. Valid values: PROGRAM or FILLER_SLATE.
+     * The type of schedule entry.
      */
     ScheduleEntryType?: ScheduleEntryType;
     /**
@@ -2084,7 +2084,7 @@ declare namespace MediaTailor {
      */
     SourceLocationName: __string;
     /**
-     * The tags assigned to the source location.
+     * The tags assigned to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
@@ -2108,7 +2108,7 @@ declare namespace MediaTailor {
   }
   export interface StartChannelRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
   }
@@ -2116,7 +2116,7 @@ declare namespace MediaTailor {
   }
   export interface StopChannelRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
   }
@@ -2124,11 +2124,11 @@ declare namespace MediaTailor {
   }
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request.
+     * The Amazon Resource Name (ARN) associated with the resource.
      */
     ResourceArn: __string;
     /**
-     * A comma-separated list of tag key:value pairs.
+     * The tags to assign to the resource. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags: __mapOf__string;
   }
@@ -2151,24 +2151,24 @@ declare namespace MediaTailor {
      */
     ScheduledStartTimeMillis?: __long;
     /**
-     * Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE. ABSOLUTE - The program plays at a specific wall clock time. This setting can only be used for channels using the LINEAR PlaybackMode. Note the following considerations when using ABSOLUTE transitions: If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary. If there are gaps in playback, MediaTailor plays the FillerSlate you configured for your linear channel. RELATIVE - The program is inserted into the schedule either before or after a program that you specify via RelativePosition.
+     * Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE.  ABSOLUTE - The program plays at a specific wall clock time. This setting can only be used for channels using the LINEAR PlaybackMode. Note the following considerations when using ABSOLUTE transitions: If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary. If there are gaps in playback, MediaTailor plays the FillerSlate you configured for your linear channel.  RELATIVE - The program is inserted into the schedule either before or after a program that you specify via RelativePosition.
      */
     Type: __string;
   }
   export type Type = "DASH"|"HLS"|string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request.
+     * The Amazon Resource Name (ARN) of the resource to untag.
      */
     ResourceArn: __string;
     /**
-     * A comma-separated list of the tag keys to remove from the playback configuration.
+     * The tag keys associated with the resource.
      */
     TagKeys: __listOf__string;
   }
   export interface UpdateChannelRequest {
     /**
-     * The identifier for the channel you are working on.
+     * The name of the channel.
      */
     ChannelName: __string;
     /**
@@ -2182,7 +2182,7 @@ declare namespace MediaTailor {
   }
   export interface UpdateChannelResponse {
     /**
-     * The ARN of the channel.
+     * The Amazon Resource Name (ARN) associated with the channel.
      */
     Arn?: __string;
     /**
@@ -2190,7 +2190,7 @@ declare namespace MediaTailor {
      */
     ChannelName?: __string;
     /**
-     * Indicates whether the channel is in a running state or not.
+     * Returns the state whether the channel is running or not.
      */
     ChannelState?: ChannelState;
     /**
@@ -2198,11 +2198,11 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
-     * Contains information about the slate used to fill gaps between programs in the schedule.
+     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode.
      */
     FillerSlate?: SlateSource;
     /**
-     * The timestamp of when the channel was last modified.
+     * The timestamp that indicates when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
     /**
@@ -2210,15 +2210,15 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The channel's playback mode.
+     * The type of playback mode for this channel.  LINEAR - Programs play back-to-back only once.  LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.
      */
     PlaybackMode?: __string;
     /**
-     * The tags assigned to the channel.
+     * The tags to assign to the channel. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
-     * The channel's tier.
+     * The tier associated with this Channel.
      */
     Tier?: __string;
   }
@@ -2228,17 +2228,17 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations: HttpPackageConfigurations;
     /**
-     * The identifier for the live source you are working on.
+     * The name of the live source.
      */
     LiveSourceName: __string;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this Live Source.
      */
     SourceLocationName: __string;
   }
   export interface UpdateLiveSourceResponse {
     /**
-     * The ARN of the live source.
+     * The Amazon Resource Name (ARN) associated with this live source.
      */
     Arn?: __string;
     /**
@@ -2246,11 +2246,11 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
-     * The HTTP package configurations.
+     * A list of HTTP package configurations for the live source on this account.
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The timestamp that indicates when the live source was modified.
+     * The timestamp that indicates when the live source was last modified.
      */
     LastModifiedTime?: __timestampUnix;
     /**
@@ -2258,11 +2258,11 @@ declare namespace MediaTailor {
      */
     LiveSourceName?: __string;
     /**
-     * The name of the source location associated with the VOD source.
+     * The name of the source location associated with the live source.
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the live source.
+     * The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
@@ -2284,17 +2284,17 @@ declare namespace MediaTailor {
      */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location.
      */
     SourceLocationName: __string;
   }
   export interface UpdateSourceLocationResponse {
     /**
-     * The access configuration for the source location.
+     * Access configuration parameters. Configures the type of authentication used to access content from your source location.
      */
     AccessConfiguration?: AccessConfiguration;
     /**
-     * The ARN of the source location.
+     * The Amazon Resource Name (ARN) associated with the source location.
      */
     Arn?: __string;
     /**
@@ -2302,11 +2302,11 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
-     * The default segment delivery configuration settings.
+     * The optional configuration for the host server that serves segments.
      */
     DefaultSegmentDeliveryConfiguration?: DefaultSegmentDeliveryConfiguration;
     /**
-     * The HTTP package configuration settings for the source location.
+     * The HTTP configuration for the source location.
      */
     HttpConfiguration?: HttpConfiguration;
     /**
@@ -2314,7 +2314,7 @@ declare namespace MediaTailor {
      */
     LastModifiedTime?: __timestampUnix;
     /**
-     * A list of the segment delivery configurations associated with this resource.
+     * The segment delivery configurations for the source location. For information about MediaTailor configurations, see Working with configurations in AWS Elemental MediaTailor.
      */
     SegmentDeliveryConfigurations?: __listOfSegmentDeliveryConfiguration;
     /**
@@ -2322,7 +2322,7 @@ declare namespace MediaTailor {
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the source location.
+     * The tags to assign to the source location. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
   }
@@ -2332,17 +2332,17 @@ declare namespace MediaTailor {
      */
     HttpPackageConfigurations: HttpPackageConfigurations;
     /**
-     * The identifier for the source location you are working on.
+     * The name of the source location associated with this VOD Source.
      */
     SourceLocationName: __string;
     /**
-     * The identifier for the VOD source you are working on.
+     * The name of the VOD source.
      */
     VodSourceName: __string;
   }
   export interface UpdateVodSourceResponse {
     /**
-     * The ARN of the VOD source.
+     * The Amazon Resource Name (ARN) associated with the VOD source.
      */
     Arn?: __string;
     /**
@@ -2350,11 +2350,11 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
-     * The HTTP package configurations.
+     * A list of HTTP package configurations for the VOD source on this account.
      */
     HttpPackageConfigurations?: HttpPackageConfigurations;
     /**
-     * The last modified time of the VOD source.
+     * The timestamp that indicates when the VOD source was last modified.
      */
     LastModifiedTime?: __timestampUnix;
     /**
@@ -2362,7 +2362,7 @@ declare namespace MediaTailor {
      */
     SourceLocationName?: __string;
     /**
-     * The tags assigned to the VOD source.
+     * The tags to assign to the VOD source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**
@@ -2392,7 +2392,7 @@ declare namespace MediaTailor {
      */
     SourceLocationName: __string;
     /**
-     * The tags assigned to the VOD source.
+     * The tags assigned to the VOD source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
     /**

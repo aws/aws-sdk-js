@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1239.0',
+	  VERSION: '2.1240.0',
 
 	  /**
 	   * @api private
@@ -4077,7 +4077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    property(this, 'documentation', api.documentation);
 	    property(this, 'documentationUrl', api.documentationUrl);
 	  }
-	  property(this, 'awsQueryCompatible', api.awsQueryCompatible);
+	  property(this, 'awsQueryCompatible', api.metadata.awsQueryCompatible);
 	}
 
 	/**

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1239.0-->
+<!--LATEST=2.1240.0-->
 <!--ENTRYINSERT-->
+
+## 2.1240.0
+* bugfix: AWSQueryCompatible: Read trait from metadata
+* feature: AccessAnalyzer: This release adds support for six new resource types in IAM Access Analyzer to help you easily identify public and cross-account access to your AWS resources. Updated service API, documentation, and paginators.
+* feature: MediaTailor: This release is a documentation update
+* feature: RDS: Relational Database Service - This release adds support for exporting DB cluster data to Amazon S3.
+* feature: WorkSpaces: This release adds new enums for supporting Workspaces Core features, including creating Manual running mode workspaces, importing regular Workspaces Core images and importing g4dn Workspaces Core images.
 
 ## 2.1239.0
 * feature: ACMPCA: AWS Private Certificate Authority (AWS Private CA) now offers usage modes which are combination of features to address specific use cases.

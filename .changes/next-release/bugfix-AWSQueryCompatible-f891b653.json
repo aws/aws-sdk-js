@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "AWSQueryCompatible",
-  "description": "Read trait from metadata"
-}
