@@ -15,15 +15,34 @@
   describe('AWSQuery compatible error codes', function () {
     let service;
     let AwsQueryService;
+    let metadata = {
+      endpointPrefix : 'mockservice',
+      signatureVersion : 'v4'
+    };
 
     beforeEach(function(done) {
-      AwsQueryService = MockServiceFromApi({awsQueryCompatible: {}});
+      AwsQueryService = MockServiceFromApi({
+        metadata: {...metadata, awsQueryCompatible: {}}
+      });
       service = new AwsQueryService({maxRetries: 0});
       return done();
     });
 
     it('awsQueryCompatible trait is translated to correct property', function() {
       return expect(service.api.awsQueryCompatible).to.eql({});
+    });
+
+    it('can receive default error code when trait is not present', function() {
+      AwsQueryService = MockServiceFromApi({ metadata: metadata });
+      service = new AwsQueryService({maxRetries: 0});
+      helpers.mockHttpResponse(500, {
+        'x-amzn-query-error': 'AwsQueryError;Sender'
+      }, ['ServiceError']);
+      return (service.makeRequest('operation', {}, function (err, data) {
+        expect(err.code).to.equal('ServiceError');
+        expect(err.statusCode).to.equal(500);
+        return expect(data).to.equal(null);
+      }));
     });
 
     it('can receive awsquery compatible error code when header present', function () {
