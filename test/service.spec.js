@@ -18,7 +18,7 @@
     let metadata = {
       endpointPrefix : 'mockservice',
       signatureVersion : 'v4'
-    }
+    };
 
     beforeEach(function(done) {
       AwsQueryService = MockServiceFromApi({
@@ -43,7 +43,7 @@
         expect(err.statusCode).to.equal(500);
         return expect(data).to.equal(null);
       }));
-    })
+    });
 
     it('can receive awsquery compatible error code when header present', function () {
       helpers.mockHttpResponse(500, {
