@@ -10545,7 +10545,7 @@ declare namespace SageMaker {
      */
     HyperbandStrategyConfig?: HyperbandStrategyConfig;
   }
-  export type HyperParameterTuningJobStrategyType = "Bayesian"|"Random"|"Hyperband"|string;
+  export type HyperParameterTuningJobStrategyType = "Bayesian"|"Random"|"Hyperband"|"Grid"|string;
   export type HyperParameterTuningJobSummaries = HyperParameterTuningJobSummary[];
   export interface HyperParameterTuningJobSummary {
     /**
@@ -16718,7 +16718,7 @@ declare namespace SageMaker {
     /**
      * The maximum number of training jobs that a hyperparameter tuning job can launch.
      */
-    MaxNumberOfTrainingJobs: MaxNumberOfTrainingJobs;
+    MaxNumberOfTrainingJobs?: MaxNumberOfTrainingJobs;
     /**
      * The maximum number of concurrent training jobs that a hyperparameter tuning job can launch.
      */

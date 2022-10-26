@@ -908,6 +908,7 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
     /**
      * The ID of the Neptune global database to which this new DB cluster should be added.
      */
@@ -1396,6 +1397,7 @@ declare namespace Neptune {
      * Time at which the DB cluster will be automatically restarted.
      */
     AutomaticRestartTime?: TStamp;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfigurationInfo;
   }
   export interface DBClusterEndpoint {
     /**
@@ -3044,6 +3046,7 @@ declare namespace Neptune {
      *  If set to true, tags are copied to any snapshot of the DB cluster that is created. 
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -3764,6 +3767,7 @@ declare namespace Neptune {
      *  If set to true, tags are copied to any snapshot of the restored DB cluster that is created. 
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -3829,9 +3833,30 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
      */
     DeletionProtection?: BooleanOptional;
+    ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
+  }
+  export interface ServerlessV2ScalingConfiguration {
+    /**
+     * The minimum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on.
+     */
+    MinCapacity?: DoubleOptional;
+    /**
+     * The maximum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on.
+     */
+    MaxCapacity?: DoubleOptional;
+  }
+  export interface ServerlessV2ScalingConfigurationInfo {
+    /**
+     * The minimum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on.
+     */
+    MinCapacity?: DoubleOptional;
+    /**
+     * The maximum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on.
+     */
+    MaxCapacity?: DoubleOptional;
   }
   export type SourceIdsList = String[];
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;

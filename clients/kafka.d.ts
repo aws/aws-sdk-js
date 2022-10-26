@@ -427,6 +427,14 @@ declare class Kafka extends Service {
          
    */
   updateSecurity(callback?: (err: AWSError, data: Kafka.Types.UpdateSecurityResponse) => void): Request<Kafka.Types.UpdateSecurityResponse, AWSError>;
+  /**
+   * Updates cluster broker volume size (or) sets cluster storage mode to TIERED.
+   */
+  updateStorage(params: Kafka.Types.UpdateStorageRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateStorageResponse) => void): Request<Kafka.Types.UpdateStorageResponse, AWSError>;
+  /**
+   * Updates cluster broker volume size (or) sets cluster storage mode to TIERED.
+   */
+  updateStorage(callback?: (err: AWSError, data: Kafka.Types.UpdateStorageResponse) => void): Request<Kafka.Types.UpdateStorageResponse, AWSError>;
 }
 declare namespace Kafka {
   export interface BatchAssociateScramSecretRequest {
@@ -466,7 +474,9 @@ declare namespace Kafka {
      */
     KafkaBrokerNodeId: __string;
     /**
-     * EBS volume provisioned throughput information.
+     * 
+            EBS volume provisioned throughput information.
+         
      */
     ProvisionedThroughput?: ProvisionedThroughput;
     /**
@@ -711,6 +721,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ZookeeperConnectStringTls?: __string;
+    /**
+     * 
+            This controls storage mode for supported storage tiers.
+         
+     */
+    StorageMode?: StorageMode;
   }
   export interface Cluster {
     /**
@@ -927,6 +943,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     NumberOfBrokerNodes: __integerMin1Max15;
+    /**
+     * 
+            This controls storage mode for supported storage tiers.
+         
+     */
+    StorageMode?: StorageMode;
   }
   export interface Provisioned {
     /**
@@ -989,6 +1011,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ZookeeperConnectStringTls?: __string;
+    /**
+     * 
+            This controls storage mode for supported storage tiers.
+         
+     */
+    StorageMode?: StorageMode;
   }
   export interface VpcConfig {
     /**
@@ -1221,6 +1249,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Tags?: __mapOf__string;
+    /**
+     * 
+            This controls storage mode for supported storage tiers.
+         
+     */
+    StorageMode?: StorageMode;
   }
   export interface CreateClusterResponse {
     /**
@@ -1554,7 +1588,9 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   }
   export interface EBSStorageInfo {
     /**
-     * EBS volume provisioned throughput information.
+     * 
+            EBS volume provisioned throughput information.
+         
      */
     ProvisionedThroughput?: ProvisionedThroughput;
     /**
@@ -2051,6 +2087,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ConnectivityInfo?: ConnectivityInfo;
+    /**
+     * 
+            This controls storage mode for supported storage tiers.
+         
+     */
+    StorageMode?: StorageMode;
   }
   export interface NodeExporter {
     /**
@@ -2130,11 +2172,15 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   }
   export interface ProvisionedThroughput {
     /**
-     * Provisioned throughput is enabled or not.
+     * 
+            Provisioned throughput is enabled or not.
+         
      */
     Enabled?: __boolean;
     /**
-     * Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second.
+     * 
+            Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second.
+         
      */
     VolumeThroughput?: __integer;
   }
@@ -2268,6 +2314,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     EbsStorageInfo?: EBSStorageInfo;
   }
+  export type StorageMode = "LOCAL"|"TIERED"|string;
   export interface TagResourceRequest {
     /**
      * 
@@ -2601,6 +2648,52 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     EncryptionInfo?: EncryptionInfo;
   }
   export interface UpdateSecurityResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
+  }
+  export interface UpdateStorageRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The version of cluster to update from. A successful operation will then generate a new version.
+         
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            EBS volume provisioned throughput information.
+         
+     */
+    ProvisionedThroughput?: ProvisionedThroughput;
+    /**
+     * 
+            Controls storage mode for supported storage tiers.
+         
+     */
+    StorageMode?: StorageMode;
+    /**
+     * 
+            size of the EBS volume to update.
+         
+     */
+    VolumeSizeGB?: __integer;
+  }
+  export interface UpdateStorageResponse {
     /**
      * 
             The Amazon Resource Name (ARN) of the cluster.

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1240.0-->
+<!--LATEST=2.1241.0-->
 <!--ENTRYINSERT-->
+
+## 2.1241.0
+* feature: Kafka: This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.
+* feature: Neptune: Added a new cluster-level attribute to set the capacity range for Neptune Serverless instances.
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now supports specifying Grid Search strategy for tuning jobs, which evaluates all hyperparameter combinations exhaustively based on the categorical hyperparameters provided.
 
 ## 2.1240.0
 * bugfix: AWSQueryCompatible: Read trait from metadata
