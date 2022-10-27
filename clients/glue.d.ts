@@ -3281,6 +3281,14 @@ declare namespace Glue {
      * Enables the processing of files that contain only one column.
      */
     AllowSingleColumn?: NullableBoolean;
+    /**
+     * Enables the configuration of custom datatypes.
+     */
+    CustomDatatypeConfigured?: NullableBoolean;
+    /**
+     * Creates a list of supported custom datatypes.
+     */
+    CustomDatatypes?: CustomDatatypes;
   }
   export interface CreateCustomEntityTypeRequest {
     /**
@@ -4087,6 +4095,14 @@ declare namespace Glue {
      * Enables the processing of files that contain only one column.
      */
     AllowSingleColumn?: NullableBoolean;
+    /**
+     * Enables the custom datatype to be configured.
+     */
+    CustomDatatypeConfigured?: NullableBoolean;
+    /**
+     * A list of custom datatypes including "BINARY", "BOOLEAN", "DATE", "DECIMAL", "DOUBLE", "FLOAT", "INT", "LONG", "SHORT", "STRING", "TIMESTAMP".
+     */
+    CustomDatatypes?: CustomDatatypes;
   }
   export type CsvColumnDelimiter = string;
   export type CsvHeader = NameString[];
@@ -4114,6 +4130,7 @@ declare namespace Glue {
      */
     OutputSchemas?: GlueSchemas;
   }
+  export type CustomDatatypes = NameString[];
   export interface CustomEntityType {
     /**
      * A name for the custom pattern that allows it to be retrieved or deleted later. This name must be unique per Amazon Web Services account.
@@ -11029,6 +11046,14 @@ declare namespace Glue {
      * Enables the processing of files that contain only one column.
      */
     AllowSingleColumn?: NullableBoolean;
+    /**
+     * Specifies the configuration of custom datatypes.
+     */
+    CustomDatatypeConfigured?: NullableBoolean;
+    /**
+     * Specifies a list of supported custom datatypes.
+     */
+    CustomDatatypes?: CustomDatatypes;
   }
   export interface UpdateDatabaseRequest {
     /**

@@ -709,11 +709,11 @@ declare class EC2 extends Service {
    */
   createPublicIpv4Pool(callback?: (err: AWSError, data: EC2.Types.CreatePublicIpv4PoolResult) => void): Request<EC2.Types.CreatePublicIpv4PoolResult, AWSError>;
   /**
-   * Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
+   * Replaces the EBS-backed root volume for a running instance with a new volume that is restored to the original root volume's launch state, that is restored to a specific snapshot taken from the original root volume, or that is restored from an AMI that has the same key characteristics as that of the instance. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
    */
   createReplaceRootVolumeTask(params: EC2.Types.CreateReplaceRootVolumeTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateReplaceRootVolumeTaskResult) => void): Request<EC2.Types.CreateReplaceRootVolumeTaskResult, AWSError>;
   /**
-   * Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
+   * Replaces the EBS-backed root volume for a running instance with a new volume that is restored to the original root volume's launch state, that is restored to a specific snapshot taken from the original root volume, or that is restored from an AMI that has the same key characteristics as that of the instance. For more information, see Replace a root volume in the Amazon Elastic Compute Cloud User Guide.
    */
   createReplaceRootVolumeTask(callback?: (err: AWSError, data: EC2.Types.CreateReplaceRootVolumeTaskResult) => void): Request<EC2.Types.CreateReplaceRootVolumeTaskResult, AWSError>;
   /**
@@ -9146,7 +9146,7 @@ declare namespace EC2 {
      */
     InstanceId: InstanceId;
     /**
-     * The ID of the snapshot from which to restore the replacement root volume. If you want to restore the volume to the initial launch state, omit this parameter.
+     * The ID of the snapshot from which to restore the replacement root volume. The specified snapshot must be a snapshot that you previously created from the original root volume. If you want to restore the replacement root volume to the initial launch state, or if you want to restore the replacement root volume from an AMI, omit this parameter.
      */
     SnapshotId?: SnapshotId;
     /**
@@ -9161,6 +9161,14 @@ declare namespace EC2 {
      * The tags to apply to the root volume replacement task.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The ID of the AMI to use to restore the root volume. The specified AMI must have the same product code, billing information, architecture type, and virtualization type as that of the instance. If you want to restore the replacement volume from a specific snapshot, or if you want to restore it to its launch state, omit this parameter.
+     */
+    ImageId?: ImageId;
+    /**
+     * Indicates whether to automatically delete the original root volume after the root volume replacement task completes. To delete the original root volume, specify true. If you choose to keep the original root volume after the replacement task completes, you must manually delete it when you no longer need it.
+     */
+    DeleteReplacedRootVolume?: Boolean;
   }
   export interface CreateReplaceRootVolumeTaskResult {
     /**
@@ -28241,6 +28249,18 @@ declare namespace EC2 {
      * The tags assigned to the task.
      */
     Tags?: TagList;
+    /**
+     * The ID of the AMI used to create the replacement root volume.
+     */
+    ImageId?: ImageId;
+    /**
+     * The ID of the snapshot used to create the replacement root volume.
+     */
+    SnapshotId?: SnapshotId;
+    /**
+     * Indicates whether the original root volume is to be deleted after the root volume replacement task completes.
+     */
+    DeleteReplacedRootVolume?: Boolean;
   }
   export type ReplaceRootVolumeTaskId = string;
   export type ReplaceRootVolumeTaskIds = ReplaceRootVolumeTaskId[];

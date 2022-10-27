@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1241.0-->
+<!--LATEST=2.1242.0-->
 <!--ENTRYINSERT-->
+
+## 2.1242.0
+* feature: EC2: Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.
+* feature: FMS: Add support NetworkFirewall Managed Rule Group Override flag in GetViolationDetails API
+* feature: Glue: Added support for custom datatypes when using custom csv classifier.
+* feature: SageMaker: This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.
+* feature: WAFV2: This release adds the following: Challenge rule action, to silently verify client browsers; rule group rule action override to any valid rule action, not just Count; token sharing between protected applications for challenge/CAPTCHA token; targeted rules option for Bot Control managed rule group.
 
 ## 2.1241.0
 * feature: Kafka: This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.

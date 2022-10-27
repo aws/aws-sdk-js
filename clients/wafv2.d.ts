@@ -132,11 +132,11 @@ declare class WAFV2 extends Service {
    */
   disassociateWebACL(callback?: (err: AWSError, data: WAFV2.Types.DisassociateWebACLResponse) => void): Request<WAFV2.Types.DisassociateWebACLResponse, AWSError>;
   /**
-   * Generates a presigned download URL for the specified release of the mobile SDK. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
+   * Generates a presigned download URL for the specified release of the mobile SDK. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
    */
   generateMobileSdkReleaseUrl(params: WAFV2.Types.GenerateMobileSdkReleaseUrlRequest, callback?: (err: AWSError, data: WAFV2.Types.GenerateMobileSdkReleaseUrlResponse) => void): Request<WAFV2.Types.GenerateMobileSdkReleaseUrlResponse, AWSError>;
   /**
-   * Generates a presigned download URL for the specified release of the mobile SDK. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
+   * Generates a presigned download URL for the specified release of the mobile SDK. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
    */
   generateMobileSdkReleaseUrl(callback?: (err: AWSError, data: WAFV2.Types.GenerateMobileSdkReleaseUrlResponse) => void): Request<WAFV2.Types.GenerateMobileSdkReleaseUrlResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class WAFV2 extends Service {
    */
   getManagedRuleSet(callback?: (err: AWSError, data: WAFV2.Types.GetManagedRuleSetResponse) => void): Request<WAFV2.Types.GetManagedRuleSetResponse, AWSError>;
   /**
-   * Retrieves information for the specified mobile SDK release, including release notes and tags. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
+   * Retrieves information for the specified mobile SDK release, including release notes and tags. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
    */
   getMobileSdkRelease(params: WAFV2.Types.GetMobileSdkReleaseRequest, callback?: (err: AWSError, data: WAFV2.Types.GetMobileSdkReleaseResponse) => void): Request<WAFV2.Types.GetMobileSdkReleaseResponse, AWSError>;
   /**
-   * Retrieves information for the specified mobile SDK release, including release notes and tags. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
+   * Retrieves information for the specified mobile SDK release, including release notes and tags. The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
    */
   getMobileSdkRelease(callback?: (err: AWSError, data: WAFV2.Types.GetMobileSdkReleaseResponse) => void): Request<WAFV2.Types.GetMobileSdkReleaseResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class WAFV2 extends Service {
    */
   listManagedRuleSets(callback?: (err: AWSError, data: WAFV2.Types.ListManagedRuleSetsResponse) => void): Request<WAFV2.Types.ListManagedRuleSetsResponse, AWSError>;
   /**
-   * Retrieves a list of the available releases for the mobile SDK and the specified device platform.  The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
+   * Retrieves a list of the available releases for the mobile SDK and the specified device platform.  The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
    */
   listMobileSdkReleases(params: WAFV2.Types.ListMobileSdkReleasesRequest, callback?: (err: AWSError, data: WAFV2.Types.ListMobileSdkReleasesResponse) => void): Request<WAFV2.Types.ListMobileSdkReleasesResponse, AWSError>;
   /**
-   * Retrieves a list of the available releases for the mobile SDK and the specified device platform.  The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
+   * Retrieves a list of the available releases for the mobile SDK and the specified device platform.  The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see WAF client application integration in the WAF Developer Guide.
    */
   listMobileSdkReleases(callback?: (err: AWSError, data: WAFV2.Types.ListMobileSdkReleasesResponse) => void): Request<WAFV2.Types.ListMobileSdkReleasesResponse, AWSError>;
   /**
@@ -397,14 +397,20 @@ declare class WAFV2 extends Service {
   updateWebACL(callback?: (err: AWSError, data: WAFV2.Types.UpdateWebACLResponse) => void): Request<WAFV2.Types.UpdateWebACLResponse, AWSError>;
 }
 declare namespace WAFV2 {
+  export interface AWSManagedRulesBotControlRuleSet {
+    /**
+     * The inspection level to use for the Bot Control rule group. The common level is the least expensive. The targeted level includes all common level rules and adds rules with more advanced inspection criteria. For details, see WAF Bot Control rule group.
+     */
+    InspectionLevel: InspectionLevel;
+  }
   export type Action = string;
   export interface ActionCondition {
     /**
-     * The action setting that a log record must contain in order to meet the condition. 
+     * The action setting that a log record must contain in order to meet the condition. This is the action that WAF applied to the web request.  For rule groups, this is either the configured rule action setting, or if you've applied a rule action override to the rule, it's the override action. The value EXCLUDED_AS_COUNT matches on excluded rules and also on rules that have a rule action override of Count. 
      */
     Action: ActionValue;
   }
-  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|"CAPTCHA"|"EXCLUDED_AS_COUNT"|string;
+  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|"CAPTCHA"|"CHALLENGE"|"EXCLUDED_AS_COUNT"|string;
   export interface All {
   }
   export interface AllQueryArguments {
@@ -468,13 +474,13 @@ declare namespace WAFV2 {
   export type CapacityUnit = number;
   export interface CaptchaAction {
     /**
-     * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide. 
+     * Defines custom handling for the web request, used when the CAPTCHA inspection determines that the request's token is valid and unexpired. For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide. 
      */
     CustomRequestHandling?: CustomRequestHandling;
   }
   export interface CaptchaConfig {
     /**
-     * Determines how long a CAPTCHA token remains valid after the client successfully solves a CAPTCHA puzzle. 
+     * Determines how long a CAPTCHA timestamp in the token remains valid after the client successfully solves a CAPTCHA puzzle. 
      */
     ImmunityTimeProperty?: ImmunityTimeProperty;
   }
@@ -484,7 +490,33 @@ declare namespace WAFV2 {
      */
     ResponseCode?: ResponseCode;
     /**
-     * The time that the CAPTCHA puzzle was solved for the supplied token. 
+     * The time that the CAPTCHA was last solved for the supplied token. 
+     */
+    SolveTimestamp?: SolveTimestamp;
+    /**
+     * The reason for failure, populated when the evaluation of the token fails.
+     */
+    FailureReason?: FailureReason;
+  }
+  export interface ChallengeAction {
+    /**
+     * Defines custom handling for the web request, used when the challenge inspection determines that the request's token is valid and unexpired. For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide. 
+     */
+    CustomRequestHandling?: CustomRequestHandling;
+  }
+  export interface ChallengeConfig {
+    /**
+     * Determines how long a challenge timestamp in the token remains valid after the client successfully responds to a challenge. 
+     */
+    ImmunityTimeProperty?: ImmunityTimeProperty;
+  }
+  export interface ChallengeResponse {
+    /**
+     * The HTTP response code indicating the status of the challenge token in the web request. If the token is missing, invalid, or expired, this code is 202 Request Accepted.
+     */
+    ResponseCode?: ResponseCode;
+    /**
+     * The time that the challenge was last solved for the supplied token. 
      */
     SolveTimestamp?: SolveTimestamp;
     /**
@@ -696,6 +728,14 @@ declare namespace WAFV2 {
      * Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. If you don't specify this, WAF uses its default settings for CaptchaConfig. 
      */
     CaptchaConfig?: CaptchaConfig;
+    /**
+     * Specifies how WAF should handle challenge evaluations for rules that don't have their own ChallengeConfig settings. If you don't specify this, WAF uses its default settings for ChallengeConfig. 
+     */
+    ChallengeConfig?: ChallengeConfig;
+    /**
+     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains. Example JSON: "TokenDomains": { "mywebsite.com", "myotherwebsite.com" } 
+     */
+    TokenDomains?: TokenDomains;
   }
   export interface CreateWebACLResponse {
     /**
@@ -936,7 +976,7 @@ declare namespace WAFV2 {
     Name: EntityName;
   }
   export type ExcludedRules = ExcludedRule[];
-  export type FailureReason = "TOKEN_MISSING"|"TOKEN_EXPIRED"|string;
+  export type FailureReason = "TOKEN_MISSING"|"TOKEN_EXPIRED"|"TOKEN_INVALID"|"TOKEN_DOMAIN_MISMATCH"|string;
   export type FallbackBehavior = "MATCH"|"NO_MATCH"|string;
   export type FieldIdentifier = string;
   export interface FieldToMatch {
@@ -1013,7 +1053,7 @@ declare namespace WAFV2 {
      */
     FirewallManagerStatement: FirewallManagerStatement;
     /**
-     * The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only.  You can only use this for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead exclude those rules in your rule group reference statement settings.  
+     * The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only.  You can only use this for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead use the rule action override option, with Count action, in your rule group reference statement settings.  
      */
     OverrideAction: OverrideAction;
     /**
@@ -1467,10 +1507,11 @@ declare namespace WAFV2 {
   export type IPString = string;
   export interface ImmunityTimeProperty {
     /**
-     * The amount of time, in seconds, that a CAPTCHA token is valid. The default setting is 300.
+     * The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by WAF. The default setting is 300.  For the Challenge action, the minimum setting is 300. 
      */
     ImmunityTime: TimeWindowSecond;
   }
+  export type InspectionLevel = "COMMON"|"TARGETED"|string;
   export interface JsonBody {
     /**
      * The patterns to look for in the JSON body. WAF inspects the results of these pattern matches against the rule inspection criteria. 
@@ -1857,6 +1898,10 @@ declare namespace WAFV2 {
      * Details about your login page password field. 
      */
     PasswordField?: PasswordField;
+    /**
+     * Additional configuration for using the Bot Control managed rule group. Use this to specify the inspection level that you want to use. For information about using the Bot Control managed rule group, see WAF Bot Control rule group and WAF Bot Control in the WAF Developer Guide.
+     */
+    AWSManagedRulesBotControlRuleSet?: AWSManagedRulesBotControlRuleSet;
   }
   export type ManagedRuleGroupConfigs = ManagedRuleGroupConfig[];
   export interface ManagedRuleGroupStatement {
@@ -1873,7 +1918,7 @@ declare namespace WAFV2 {
      */
     Version?: VersionKeyString;
     /**
-     * The rules in the referenced rule group whose actions are set to Count. When you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were Count. This is a useful option for testing the rules in a rule group without modifying how they handle your web traffic.
+     * Rules in the referenced rule group whose actions are set to Count.   Instead of this option, use RuleActionOverrides. It accepts any valid action setting, including Count. 
      */
     ExcludedRules?: ExcludedRules;
     /**
@@ -1881,9 +1926,13 @@ declare namespace WAFV2 {
      */
     ScopeDownStatement?: Statement;
     /**
-     * Additional information that's used by a managed rule group. Most managed rule groups don't require this. Use this for the account takeover prevention managed rule group AWSManagedRulesATPRuleSet, to provide information about the sign-in page of your application.  You can provide multiple individual ManagedRuleGroupConfig objects for any rule group configuration, for example UsernameField and PasswordField. The configuration that you provide depends on the needs of the managed rule group. For the ATP managed rule group, you provide the following individual configuration objects: LoginPath, PasswordField, PayloadType and UsernameField.
+     * Additional information that's used by a managed rule group. Many managed rule groups don't require this. Use the AWSManagedRulesBotControlRuleSet configuration object to configure the protection level that you want the Bot Control rule group to use. 
      */
     ManagedRuleGroupConfigs?: ManagedRuleGroupConfigs;
+    /**
+     * Action settings to use in the place of the rule actions that are configured inside the rule group. You specify one override for each rule whose action you want to change.  You can use overrides for testing, for example you can override all of rule actions to Count and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.
+     */
+    RuleActionOverrides?: RuleActionOverrides;
   }
   export type ManagedRuleGroupSummaries = ManagedRuleGroupSummary[];
   export interface ManagedRuleGroupSummary {
@@ -2038,7 +2087,7 @@ declare namespace WAFV2 {
   export type OutputUrl = string;
   export interface OverrideAction {
     /**
-     * Override the rule group evaluation result to count only.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead exclude those rules in your rule group reference statement settings.  
+     * Override the rule group evaluation result to count only.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead use the rule action override option, with Count action, in your rule group reference statement settings.  
      */
     Count?: CountAction;
     /**
@@ -2267,7 +2316,7 @@ declare namespace WAFV2 {
      */
     Action?: RuleAction;
     /**
-     * The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only.  You can only use this for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead exclude those rules in your rule group reference statement settings.  
+     * The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only.  You can only use this for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.   This option is usually set to none. It does not affect how the rules in the rule group are evaluated. If you want the rules in the rule group to only count matches, do not use this and instead use the rule action override option, with Count action, in your rule group reference statement settings.  
      */
     OverrideAction?: OverrideAction;
     /**
@@ -2282,6 +2331,10 @@ declare namespace WAFV2 {
      * Specifies how WAF should handle CAPTCHA evaluations. If you don't specify this, WAF uses the CAPTCHA configuration that's defined for the web ACL. 
      */
     CaptchaConfig?: CaptchaConfig;
+    /**
+     * Specifies how WAF should handle Challenge evaluations. If you don't specify this, WAF uses the challenge configuration that's defined for the web ACL. 
+     */
+    ChallengeConfig?: ChallengeConfig;
   }
   export interface RuleAction {
     /**
@@ -2300,7 +2353,22 @@ declare namespace WAFV2 {
      * Instructs WAF to run a CAPTCHA check against the web request.
      */
     Captcha?: CaptchaAction;
+    /**
+     * Instructs WAF to run a Challenge check against the web request.
+     */
+    Challenge?: ChallengeAction;
   }
+  export interface RuleActionOverride {
+    /**
+     * The name of the rule to override.
+     */
+    Name: EntityName;
+    /**
+     * The override action to use, in place of the configured action of the rule in the rule group. 
+     */
+    ActionToUse: RuleAction;
+  }
+  export type RuleActionOverrides = RuleActionOverride[];
   export interface RuleGroup {
     /**
      * The name of the rule group. You cannot change the name of a rule group after you create it.
@@ -2353,9 +2421,13 @@ declare namespace WAFV2 {
      */
     ARN: ResourceArn;
     /**
-     * The rules in the referenced rule group whose actions are set to Count. When you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were Count. This is a useful option for testing the rules in a rule group without modifying how they handle your web traffic.
+     * Rules in the referenced rule group whose actions are set to Count.   Instead of this option, use RuleActionOverrides. It accepts any valid action setting, including Count. 
      */
     ExcludedRules?: ExcludedRules;
+    /**
+     * Action settings to use in the place of the rule actions that are configured inside the rule group. You specify one override for each rule whose action you want to change.  You can use overrides for testing, for example you can override all of rule actions to Count and then monitor the resulting count metrics to understand how the rule group would handle your web traffic. You can also permanently override some or all actions, to modify how the rule group manages your web traffic.
+     */
+    RuleActionOverrides?: RuleActionOverrides;
   }
   export type RuleGroupSummaries = RuleGroupSummary[];
   export interface RuleGroupSummary {
@@ -2408,7 +2480,7 @@ declare namespace WAFV2 {
      */
     Timestamp?: Timestamp;
     /**
-     * The action for the Rule that the request matched: Allow, Block, or Count.
+     * The action that WAF applied to the request.
      */
     Action?: Action;
     /**
@@ -2431,6 +2503,14 @@ declare namespace WAFV2 {
      * The CAPTCHA response for the request.
      */
     CaptchaResponse?: CaptchaResponse;
+    /**
+     * The Challenge response for the request.
+     */
+    ChallengeResponse?: ChallengeResponse;
+    /**
+     * Used only for rule group rules that have a rule action override in place in the web ACL. This is the action that the rule group rule is configured for, and not the action that was applied to the request. The action that WAF applied is the Action value. 
+     */
+    OverriddenAction?: Action;
   }
   export type SampledHTTPRequests = SampledHTTPRequest[];
   export type Scope = "CLOUDFRONT"|"REGIONAL"|string;
@@ -2608,6 +2688,8 @@ declare namespace WAFV2 {
   export type TimeWindowDay = number;
   export type TimeWindowSecond = number;
   export type Timestamp = Date;
+  export type TokenDomain = string;
+  export type TokenDomains = TokenDomain[];
   export type URIString = string;
   export interface UntagResourceRequest {
     /**
@@ -2806,6 +2888,14 @@ declare namespace WAFV2 {
      * Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. If you don't specify this, WAF uses its default settings for CaptchaConfig. 
      */
     CaptchaConfig?: CaptchaConfig;
+    /**
+     * Specifies how WAF should handle challenge evaluations for rules that don't have their own ChallengeConfig settings. If you don't specify this, WAF uses its default settings for ChallengeConfig. 
+     */
+    ChallengeConfig?: ChallengeConfig;
+    /**
+     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains. Example JSON: "TokenDomains": { "mywebsite.com", "myotherwebsite.com" } 
+     */
+    TokenDomains?: TokenDomains;
   }
   export interface UpdateWebACLResponse {
     /**
@@ -2905,6 +2995,14 @@ declare namespace WAFV2 {
      * Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. If you don't specify this, WAF uses its default settings for CaptchaConfig. 
      */
     CaptchaConfig?: CaptchaConfig;
+    /**
+     * Specifies how WAF should handle challenge evaluations for rules that don't have their own ChallengeConfig settings. If you don't specify this, WAF uses its default settings for ChallengeConfig. 
+     */
+    ChallengeConfig?: ChallengeConfig;
+    /**
+     * Specifies the domains that WAF should accept in a web request token. This enables the use of tokens across multiple protected websites. When WAF provides a token, it uses the domain of the Amazon Web Services resource that the web ACL is protecting. If you don't specify a list of token domains, WAF accepts tokens only for the domain of the protected resource. With a token domain list, WAF accepts the resource's host domain plus all domains in the token domain list, including their prefixed subdomains.
+     */
+    TokenDomains?: TokenDomains;
   }
   export type WebACLSummaries = WebACLSummary[];
   export interface WebACLSummary {
