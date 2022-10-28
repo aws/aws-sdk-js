@@ -493,11 +493,11 @@ declare class CloudFormation extends Service {
    */
   stopStackSetOperation(callback?: (err: AWSError, data: CloudFormation.Types.StopStackSetOperationOutput) => void): Request<CloudFormation.Types.StopStackSetOperationOutput, AWSError>;
   /**
-   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can use DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
+   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
    */
   testType(params: CloudFormation.Types.TestTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
   /**
-   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can use DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
+   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you don't specify a version, CloudFormation uses the default version of the extension in your account and region for testing. To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can pass the returned TypeVersionArn into DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
    */
   testType(callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
   /**
@@ -1273,7 +1273,7 @@ declare namespace CloudFormation {
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
     /**
-     * Limit deployment targets to individual accounts or include additional accounts with provided OUs. The following is a list of possible values for the AccountFilterType operation.    INTERSECTION: StackSets deploys to the accounts specified in Accounts parameter.     DIFFERENCE: StackSets excludes the accounts specified in Accounts parameter. This enables user to avoid certain accounts within an OU such as suspended accounts.    UNION: (default value) StackSets includes additional accounts deployment targets.  This is the default value if AccountFilterType is not provided. This enables user to update an entire OU and individual accounts from a different OU in one request, which used to be two separate requests.    NONE: Deploys to all the accounts in specified organizational units (OU).  
+     * Limit deployment targets to individual accounts or include additional accounts with provided OUs. The following is a list of possible values for the AccountFilterType operation.    INTERSECTION: StackSets deploys to the accounts specified in Accounts parameter.     DIFFERENCE: StackSets excludes the accounts specified in Accounts parameter. This enables user to avoid certain accounts within an OU such as suspended accounts.    UNION: StackSets includes additional accounts deployment targets.  This is the default value if AccountFilterType is not provided. This enables user to update an entire OU and individual accounts from a different OU in one request, which used to be two separate requests.    NONE: Deploys to all the accounts in specified organizational units (OU).  
      */
     AccountFilterType?: AccountFilterType;
   }
@@ -2185,7 +2185,7 @@ declare namespace CloudFormation {
      */
     MaxResults?: MaxResults;
     /**
-     * The status that stack instances are filtered by.
+     * The filter to apply to stack instances
      */
     Filters?: StackInstanceFilters;
     /**
@@ -2252,6 +2252,10 @@ declare namespace CloudFormation {
      * [Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified. Use SELF for stack sets with self-managed permissions.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the CloudFormation User Guide.  
      */
     CallAs?: CallAs;
+    /**
+     * The filter to apply to operation results.
+     */
+    Filters?: OperationResultFilters;
   }
   export interface ListStackSetOperationResultsOutput {
     /**
@@ -2497,6 +2501,19 @@ declare namespace CloudFormation {
   export type NotificationARN = string;
   export type NotificationARNs = NotificationARN[];
   export type OnFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
+  export interface OperationResultFilter {
+    /**
+     * The type of filter to apply.
+     */
+    Name?: OperationResultFilterName;
+    /**
+     * The value to filter by.
+     */
+    Values?: OperationResultFilterValues;
+  }
+  export type OperationResultFilterName = "OPERATION_RESULT_STATUS"|string;
+  export type OperationResultFilterValues = string;
+  export type OperationResultFilters = OperationResultFilter[];
   export type OperationStatus = "PENDING"|"IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
   export type OptionalSecureUrl = string;
   export type OrganizationalUnitId = string;
@@ -3229,6 +3246,10 @@ declare namespace CloudFormation {
      * Most recent time when CloudFormation performed a drift detection operation on the stack instance. This value will be NULL for any stack instance on which drift detection hasn't yet been performed.
      */
     LastDriftCheckTimestamp?: Timestamp;
+    /**
+     * The last unique ID of a StackSet operation performed on a stack instance.
+     */
+    LastOperationId?: ClientRequestToken;
   }
   export interface StackInstanceComprehensiveStatus {
     /**
@@ -3247,7 +3268,7 @@ declare namespace CloudFormation {
      */
     Values?: StackInstanceFilterValues;
   }
-  export type StackInstanceFilterName = "DETAILED_STATUS"|string;
+  export type StackInstanceFilterName = "DETAILED_STATUS"|"LAST_OPERATION_ID"|string;
   export type StackInstanceFilterValues = string;
   export type StackInstanceFilters = StackInstanceFilter[];
   export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
@@ -3293,6 +3314,10 @@ declare namespace CloudFormation {
      * Most recent time when CloudFormation performed a drift detection operation on the stack instance. This value will be NULL for any stack instance on which drift detection hasn't yet been performed.
      */
     LastDriftCheckTimestamp?: Timestamp;
+    /**
+     * The last unique ID of a StackSet operation performed on a stack instance.
+     */
+    LastOperationId?: ClientRequestToken;
   }
   export type StackName = string;
   export type StackNameOrId = string;
@@ -3660,6 +3685,10 @@ declare namespace CloudFormation {
      * The status of the operation in details.
      */
     StatusReason?: StackSetOperationStatusReason;
+    /**
+     * Detailed information about the StackSet operation.
+     */
+    StatusDetails?: StackSetOperationStatusDetails;
   }
   export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|"DETECT_DRIFT"|string;
   export interface StackSetOperationPreferences {
@@ -3717,6 +3746,12 @@ declare namespace CloudFormation {
     OrganizationalUnitId?: OrganizationalUnitId;
   }
   export type StackSetOperationStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"STOPPING"|"STOPPED"|"QUEUED"|string;
+  export interface StackSetOperationStatusDetails {
+    /**
+     * The number of stack instances for which the StackSet operation failed.
+     */
+    FailedStackInstancesCount?: FailedStackInstancesCount;
+  }
   export type StackSetOperationStatusReason = string;
   export type StackSetOperationSummaries = StackSetOperationSummary[];
   export interface StackSetOperationSummary {
@@ -3744,6 +3779,11 @@ declare namespace CloudFormation {
      * The status of the operation in details.
      */
     StatusReason?: StackSetOperationStatusReason;
+    /**
+     * Detailed information about the stack set operation.
+     */
+    StatusDetails?: StackSetOperationStatusDetails;
+    OperationPreferences?: StackSetOperationPreferences;
   }
   export type StackSetStatus = "ACTIVE"|"DELETED"|string;
   export type StackSetSummaries = StackSetSummary[];

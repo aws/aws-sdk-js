@@ -1181,7 +1181,7 @@ declare namespace AppRunner {
     OperationId?: UUID;
   }
   export type RoleArn = string;
-  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|string;
+  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|"GO_1"|"DOTNET_6"|"PHP_81"|"RUBY_31"|string;
   export type RuntimeEnvironmentVariables = {[key: string]: RuntimeEnvironmentVariablesValue};
   export type RuntimeEnvironmentVariablesKey = string;
   export type RuntimeEnvironmentVariablesValue = string;

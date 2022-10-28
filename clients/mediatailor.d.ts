@@ -377,6 +377,10 @@ declare namespace MediaTailor {
      * This defines the SCTE-35 splice_insert() message inserted around the ad. For information about using splice_insert(), see the SCTE-35 specficiaiton, section 9.7.3.1.
      */
     SpliceInsertMessage?: SpliceInsertMessage;
+    /**
+     * Defines the SCTE-35 time_signal message inserted around the ad. Programs on a channel's schedule can be configured with one or more ad breaks. You can attach a splice_insert SCTE-35 message to the ad break. This message provides basic metadata about the ad break. See section 9.7.4 of the 2022 SCTE-35 specification for more information.
+     */
+    TimeSignalMessage?: TimeSignalMessage;
   }
   export interface AdMarkerPassthrough {
     /**
@@ -1396,6 +1400,7 @@ declare namespace MediaTailor {
     Type: Type;
   }
   export type HttpPackageConfigurations = HttpPackageConfiguration[];
+  export type Integer = number;
   export interface ListAlertsRequest {
     /**
      * The maximum number of alerts that you want MediaTailor to return in response to the current request. If there are more than MaxResults alerts, use the value of NextToken in the response to get the next page of results.
@@ -1621,7 +1626,7 @@ declare namespace MediaTailor {
     AdMarkerPassthrough?: AdMarkerPassthrough;
   }
   export type MaxResults = number;
-  export type MessageType = "SPLICE_INSERT"|string;
+  export type MessageType = "SPLICE_INSERT"|"TIME_SIGNAL"|string;
   export type Mode = "OFF"|"BEHIND_LIVE_EDGE"|string;
   export type Operator = "EQUALS"|string;
   export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD"|string;
@@ -2040,6 +2045,41 @@ declare namespace MediaTailor {
      */
     Name?: __string;
   }
+  export interface SegmentationDescriptor {
+    /**
+     * The segment number to assign to the segmentation_descriptor.segment_num message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification Values must be between 0 and 256, inclusive. The default value is 0.
+     */
+    SegmentNum?: Integer;
+    /**
+     * The Event Identifier to assign to the segmentation_descriptor.segmentation_event_id message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. The default value is 1.
+     */
+    SegmentationEventId?: Integer;
+    /**
+     * The Type Identifier to assign to the segmentation_descriptor.segmentation_type_id message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must be between 0 and 256, inclusive. The default value is 48.
+     */
+    SegmentationTypeId?: Integer;
+    /**
+     * The Upid to assign to the segmentation_descriptor.segmentation_upid message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. The value must be a hexadecimal string containing only the characters 0 though 9 and A through F. The default value is "" (an empty string).
+     */
+    SegmentationUpid?: String;
+    /**
+     * The Upid Type to assign to the segmentation_descriptor.segmentation_upid_type message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must be between 0 and 256, inclusive. The default value is 14.
+     */
+    SegmentationUpidType?: Integer;
+    /**
+     * The number of segments expected, which is assigned to the segmentation_descriptor.segments_expectedS message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification Values must be between 0 and 256, inclusive. The default value is 0.
+     */
+    SegmentsExpected?: Integer;
+    /**
+     * The sub-segment number to assign to the segmentation_descriptor.sub_segment_num message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must be between 0 and 256, inclusive. The defualt value is null.
+     */
+    SubSegmentNum?: Integer;
+    /**
+     * The number of sub-segments expected, which is assigned to the segmentation_descriptor.sub_segments_expected message, as defined in section 10.3.3.1 of the 2022 SCTE-35 specification. Values must be between 0 and 256, inclusive. The default value is null.
+     */
+    SubSegmentsExpected?: Integer;
+  }
+  export type SegmentationDescriptorList = SegmentationDescriptor[];
   export interface SlateSource {
     /**
      * The name of the source location where the slate VOD source is stored.
@@ -2122,6 +2162,7 @@ declare namespace MediaTailor {
   }
   export interface StopChannelResponse {
   }
+  export type String = string;
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) associated with the resource.
@@ -2133,6 +2174,12 @@ declare namespace MediaTailor {
     Tags: __mapOf__string;
   }
   export type Tier = "BASIC"|"STANDARD"|string;
+  export interface TimeSignalMessage {
+    /**
+     * The configurations for the SCTE-35 segmentation_descriptor message(s) sent with the time_signal message.
+     */
+    SegmentationDescriptors?: SegmentationDescriptorList;
+  }
   export interface Transition {
     /**
      * The duration of the live program in seconds.

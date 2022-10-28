@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1242.0-->
+<!--LATEST=2.1243.0-->
 <!--ENTRYINSERT-->
+
+## 2.1243.0
+* feature: AppRunner: AWS App Runner adds .NET 6, Go 1, PHP 8.1 and Ruby 3.1 runtimes.
+* feature: AppStream: This release includes CertificateBasedAuthProperties in CreateDirectoryConfig and UpdateDirectoryConfig.
+* feature: CloudFormation: This release adds more fields to improves visibility of AWS CloudFormation StackSets information in following APIs: ListStackInstances, DescribeStackInstance, ListStackSetOperationResults, ListStackSetOperations, DescribeStackSetOperation.
+* feature: GameSparks: Add LATEST as a possible GameSDK Version on snapshot
+* feature: MediaTailor: This release introduces support for SCTE-35 segmentation descriptor messages which can be sent within time signal messages.
+* feature: PrivateNetworks: Fix incorrect endpoint-prefix in endpoint ruleset.
+* feature: SupportApp: Fix incorrect endpoint-prefix in endpoint ruleset.
 
 ## 2.1242.0
 * feature: EC2: Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.
