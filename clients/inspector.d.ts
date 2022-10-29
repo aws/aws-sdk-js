@@ -332,8 +332,8 @@ declare namespace Inspector {
      */
     agentHealthCodes: AgentHealthCodeList;
   }
-  export type AgentHealth = "HEALTHY"|"UNHEALTHY"|"UNKNOWN"|string;
-  export type AgentHealthCode = "IDLE"|"RUNNING"|"SHUTDOWN"|"UNHEALTHY"|"THROTTLED"|"UNKNOWN"|string;
+  export type AgentHealth = "HEALTHY"|"UNHEALTHY"|"UNKNOWN";
+  export type AgentHealthCode = "IDLE"|"RUNNING"|"SHUTDOWN"|"UNHEALTHY"|"THROTTLED"|"UNKNOWN";
   export type AgentHealthCodeList = AgentHealthCode[];
   export type AgentHealthList = AgentHealth[];
   export type AgentId = string;
@@ -532,8 +532,8 @@ declare namespace Inspector {
     snsPublishStatusCode?: AssessmentRunNotificationSnsStatusCode;
   }
   export type AssessmentRunNotificationList = AssessmentRunNotification[];
-  export type AssessmentRunNotificationSnsStatusCode = "SUCCESS"|"TOPIC_DOES_NOT_EXIST"|"ACCESS_DENIED"|"INTERNAL_ERROR"|string;
-  export type AssessmentRunState = "CREATED"|"START_DATA_COLLECTION_PENDING"|"START_DATA_COLLECTION_IN_PROGRESS"|"COLLECTING_DATA"|"STOP_DATA_COLLECTION_PENDING"|"DATA_COLLECTED"|"START_EVALUATING_RULES_PENDING"|"EVALUATING_RULES"|"FAILED"|"ERROR"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"CANCELED"|string;
+  export type AssessmentRunNotificationSnsStatusCode = "SUCCESS"|"TOPIC_DOES_NOT_EXIST"|"ACCESS_DENIED"|"INTERNAL_ERROR";
+  export type AssessmentRunState = "CREATED"|"START_DATA_COLLECTION_PENDING"|"START_DATA_COLLECTION_IN_PROGRESS"|"COLLECTING_DATA"|"STOP_DATA_COLLECTION_PENDING"|"DATA_COLLECTED"|"START_EVALUATING_RULES_PENDING"|"EVALUATING_RULES"|"FAILED"|"ERROR"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"CANCELED";
   export interface AssessmentRunStateChange {
     /**
      * The last time the assessment run state changed.
@@ -665,7 +665,7 @@ declare namespace Inspector {
      */
     networkInterfaces?: NetworkInterfaces;
   }
-  export type AssetType = "ec2-instance"|string;
+  export type AssetType = "ec2-instance";
   export interface Attribute {
     /**
      * The attribute key.
@@ -986,7 +986,7 @@ declare namespace Inspector {
      */
     retryable: Bool;
   }
-  export type FailedItemErrorCode = "INVALID_ARN"|"DUPLICATE_ARN"|"ITEM_DOES_NOT_EXIST"|"ACCESS_DENIED"|"LIMIT_EXCEEDED"|"INTERNAL_ERROR"|string;
+  export type FailedItemErrorCode = "INVALID_ARN"|"DUPLICATE_ARN"|"ITEM_DOES_NOT_EXIST"|"ACCESS_DENIED"|"LIMIT_EXCEEDED"|"INTERNAL_ERROR";
   export type FailedItems = {[key: string]: FailedItemDetails};
   export type FilterRulesPackageArnList = Arn[];
   export interface Finding {
@@ -1173,7 +1173,7 @@ declare namespace Inspector {
     telemetryMetadata: TelemetryMetadataList;
   }
   export type Hostname = string;
-  export type InspectorEvent = "ASSESSMENT_RUN_STARTED"|"ASSESSMENT_RUN_COMPLETED"|"ASSESSMENT_RUN_STATE_CHANGED"|"FINDING_REPORTED"|"OTHER"|string;
+  export type InspectorEvent = "ASSESSMENT_RUN_STARTED"|"ASSESSMENT_RUN_COMPLETED"|"ASSESSMENT_RUN_STATE_CHANGED"|"FINDING_REPORTED"|"OTHER";
   export interface InspectorServiceAttributes {
     /**
      * The schema version of this data type.
@@ -1413,7 +1413,7 @@ declare namespace Inspector {
      */
     tags: TagList;
   }
-  export type Locale = "EN_US"|string;
+  export type Locale = "EN_US";
   export type Long = number;
   export type Message = string;
   export type MessageType = string;
@@ -1490,7 +1490,7 @@ declare namespace Inspector {
      */
     nextToken?: PaginationToken;
   }
-  export type PreviewStatus = "WORK_IN_PROGRESS"|"COMPLETED"|string;
+  export type PreviewStatus = "WORK_IN_PROGRESS"|"COMPLETED";
   export interface PrivateIp {
     /**
      * The DNS name of the private IP address.
@@ -1525,9 +1525,9 @@ declare namespace Inspector {
      */
     failedItems: FailedItems;
   }
-  export type ReportFileFormat = "HTML"|"PDF"|string;
-  export type ReportStatus = "WORK_IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
-  export type ReportType = "FINDING"|"FULL"|string;
+  export type ReportFileFormat = "HTML"|"PDF";
+  export type ReportStatus = "WORK_IN_PROGRESS"|"FAILED"|"COMPLETED";
+  export type ReportType = "FINDING"|"FULL";
   export interface ResourceGroup {
     /**
      * The ARN of the resource group.
@@ -1591,7 +1591,7 @@ declare namespace Inspector {
     value?: ScopeValue;
   }
   export type ScopeList = Scope[];
-  export type ScopeType = "INSTANCE_ID"|"RULES_PACKAGE_ARN"|string;
+  export type ScopeType = "INSTANCE_ID"|"RULES_PACKAGE_ARN";
   export type ScopeValue = string;
   export interface SecurityGroup {
     /**
@@ -1615,7 +1615,7 @@ declare namespace Inspector {
      */
     tags?: TagList;
   }
-  export type Severity = "Low"|"Medium"|"High"|"Informational"|"Undefined"|string;
+  export type Severity = "Low"|"Medium"|"High"|"Informational"|"Undefined";
   export type SeverityList = Severity[];
   export interface StartAssessmentRunRequest {
     /**
@@ -1633,7 +1633,7 @@ declare namespace Inspector {
      */
     assessmentRunArn: Arn;
   }
-  export type StopAction = "START_EVALUATION"|"SKIP_EVALUATION"|string;
+  export type StopAction = "START_EVALUATION"|"SKIP_EVALUATION";
   export interface StopAssessmentRunRequest {
     /**
      * The ARN of the assessment run that you want to stop.

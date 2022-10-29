@@ -377,7 +377,7 @@ declare namespace DataPipeline {
      */
     values?: stringList;
   }
-  export type OperatorType = "EQ"|"REF_EQ"|"LE"|"GE"|"BETWEEN"|string;
+  export type OperatorType = "EQ"|"REF_EQ"|"LE"|"GE"|"BETWEEN";
   export interface ParameterAttribute {
     /**
      * The field identifier.
@@ -676,7 +676,7 @@ declare namespace DataPipeline {
      */
     objects?: PipelineObjectMap;
   }
-  export type TaskStatus = "FINISHED"|"FAILED"|"FALSE"|string;
+  export type TaskStatus = "FINISHED"|"FAILED"|"FALSE";
   export interface ValidatePipelineDefinitionInput {
     /**
      * The ID of the pipeline.

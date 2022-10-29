@@ -359,7 +359,7 @@ declare namespace MediaTailor {
      */
     SecretsManagerAccessTokenConfiguration?: SecretsManagerAccessTokenConfiguration;
   }
-  export type AccessType = "S3_SIGV4"|"SECRETS_MANAGER_ACCESS_TOKEN"|string;
+  export type AccessType = "S3_SIGV4"|"SECRETS_MANAGER_ACCESS_TOKEN";
   export interface AdBreak {
     /**
      * The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT, TIME_SIGNAL.
@@ -492,7 +492,7 @@ declare namespace MediaTailor {
      */
     Tier: __string;
   }
-  export type ChannelState = "RUNNING"|"STOPPED"|string;
+  export type ChannelState = "RUNNING"|"STOPPED";
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
   export interface ConfigureLogsForPlaybackConfigurationRequest {
@@ -1626,10 +1626,10 @@ declare namespace MediaTailor {
     AdMarkerPassthrough?: AdMarkerPassthrough;
   }
   export type MaxResults = number;
-  export type MessageType = "SPLICE_INSERT"|"TIME_SIGNAL"|string;
-  export type Mode = "OFF"|"BEHIND_LIVE_EDGE"|string;
-  export type Operator = "EQUALS"|string;
-  export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD"|string;
+  export type MessageType = "SPLICE_INSERT"|"TIME_SIGNAL";
+  export type Mode = "OFF"|"BEHIND_LIVE_EDGE";
+  export type Operator = "EQUALS";
+  export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD";
   export interface PlaybackConfiguration {
     /**
      * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.
@@ -1708,7 +1708,7 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
-  export type PlaybackMode = "LOOP"|"LINEAR"|string;
+  export type PlaybackMode = "LOOP"|"LINEAR";
   export interface PrefetchConsumption {
     /**
      * If you only want MediaTailor to insert prefetched ads into avails (ad breaks) that match specific dynamic variables, such as scte.event_id, set the avail matching criteria.
@@ -1911,7 +1911,7 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
-  export type RelativePosition = "BEFORE_PROGRAM"|"AFTER_PROGRAM"|string;
+  export type RelativePosition = "BEFORE_PROGRAM"|"AFTER_PROGRAM";
   export interface RequestOutputItem {
     /**
      * DASH manifest configuration parameters.
@@ -2020,7 +2020,7 @@ declare namespace MediaTailor {
      */
     VodSourceName?: __string;
   }
-  export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE"|string;
+  export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE";
   export interface SecretsManagerAccessTokenConfiguration {
     /**
      * The name of the HTTP header used to supply the access token in requests to the source location.
@@ -2173,7 +2173,7 @@ declare namespace MediaTailor {
      */
     Tags: __mapOf__string;
   }
-  export type Tier = "BASIC"|"STANDARD"|string;
+  export type Tier = "BASIC"|"STANDARD";
   export interface TimeSignalMessage {
     /**
      * The configurations for the SCTE-35 segmentation_descriptor message(s) sent with the time_signal message.
@@ -2202,7 +2202,7 @@ declare namespace MediaTailor {
      */
     Type: __string;
   }
-  export type Type = "DASH"|"HLS"|string;
+  export type Type = "DASH"|"HLS";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource to untag.

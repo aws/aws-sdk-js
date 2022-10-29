@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ts-generator",
+  "description": "Fix generation of string literals from enum shapes"
+}

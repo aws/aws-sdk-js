@@ -476,9 +476,9 @@ declare namespace AppSync {
      */
     status?: ApiCacheStatus;
   }
-  export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|string;
-  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|"SMALL"|"MEDIUM"|"LARGE"|"XLARGE"|"LARGE_2X"|"LARGE_4X"|"LARGE_8X"|"LARGE_12X"|string;
-  export type ApiCachingBehavior = "FULL_REQUEST_CACHING"|"PER_RESOLVER_CACHING"|string;
+  export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED";
+  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|"SMALL"|"MEDIUM"|"LARGE"|"XLARGE"|"LARGE_2X"|"LARGE_4X"|"LARGE_8X"|"LARGE_12X";
+  export type ApiCachingBehavior = "FULL_REQUEST_CACHING"|"PER_RESOLVER_CACHING";
   export interface ApiKey {
     /**
      * The API key ID.
@@ -514,8 +514,8 @@ declare namespace AppSync {
      */
     apiAssociation?: ApiAssociation;
   }
-  export type AssociationStatus = "PROCESSING"|"FAILED"|"SUCCESS"|string;
-  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA"|string;
+  export type AssociationStatus = "PROCESSING"|"FAILED"|"SUCCESS";
+  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA";
   export interface AuthorizationConfig {
     /**
      * The authorization type that the HTTP endpoint requires.    AWS_IAM: The authorization type is Signature Version 4 (SigV4).  
@@ -526,7 +526,7 @@ declare namespace AppSync {
      */
     awsIamConfig?: AwsIamConfig;
   }
-  export type AuthorizationType = "AWS_IAM"|string;
+  export type AuthorizationType = "AWS_IAM";
   export interface AwsIamConfig {
     /**
      * The signing Amazon Web Services Region for IAM authorization.
@@ -566,8 +566,8 @@ declare namespace AppSync {
      */
     appIdClientRegex?: String;
   }
-  export type ConflictDetectionType = "VERSION"|"NONE"|string;
-  export type ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
+  export type ConflictDetectionType = "VERSION"|"NONE";
+  export type ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE";
   export type Context = string;
   export interface CreateApiCacheRequest {
     /**
@@ -896,9 +896,9 @@ declare namespace AppSync {
      */
     relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE";
   export type DataSources = DataSource[];
-  export type DefaultAction = "ALLOW"|"DENY"|string;
+  export type DefaultAction = "ALLOW"|"DENY";
   export interface DeleteApiCacheRequest {
     /**
      * The API ID.
@@ -1094,7 +1094,7 @@ declare namespace AppSync {
     error?: ErrorDetail;
   }
   export type EvaluationResult = string;
-  export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
+  export type FieldLogLevel = "NONE"|"ERROR"|"ALL";
   export interface FlushApiCacheRequest {
     /**
      * The API ID.
@@ -1646,7 +1646,7 @@ declare namespace AppSync {
      */
     awsRegion: String;
   }
-  export type OutputType = "SDL"|"JSON"|string;
+  export type OutputType = "SDL"|"JSON";
   export type PaginationToken = string;
   export interface PipelineConfig {
     /**
@@ -1686,7 +1686,7 @@ declare namespace AppSync {
      */
     rdsHttpEndpointConfig?: RdsHttpEndpointConfig;
   }
-  export type RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"|string;
+  export type RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT";
   export interface Resolver {
     /**
      * The resolver type name.
@@ -1733,11 +1733,11 @@ declare namespace AppSync {
      */
     maxBatchSize?: MaxBatchSize;
   }
-  export type ResolverKind = "UNIT"|"PIPELINE"|string;
+  export type ResolverKind = "UNIT"|"PIPELINE";
   export type Resolvers = Resolver[];
   export type ResourceArn = string;
   export type ResourceName = string;
-  export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE"|string;
+  export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE";
   export interface StartSchemaCreationRequest {
     /**
      * The API ID.
@@ -1809,7 +1809,7 @@ declare namespace AppSync {
      */
     format?: TypeDefinitionFormat;
   }
-  export type TypeDefinitionFormat = "SDL"|"JSON"|string;
+  export type TypeDefinitionFormat = "SDL"|"JSON";
   export type TypeList = Type[];
   export interface UntagResourceRequest {
     /**

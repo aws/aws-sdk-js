@@ -77,11 +77,11 @@ declare class IoTSiteWise extends Service {
    */
   batchPutAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
-   * Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
+   * Creates an access policy that grants the specified identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
    */
   createAccessPolicy(params: IoTSiteWise.Types.CreateAccessPolicyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.CreateAccessPolicyResponse, AWSError>;
   /**
-   * Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
+   * Creates an access policy that grants the specified identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
    */
   createAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.CreateAccessPolicyResponse, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class IoTSiteWise extends Service {
    */
   createGateway(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateGatewayResponse) => void): Request<IoTSiteWise.Types.CreateGatewayResponse, AWSError>;
   /**
-   * Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses IAM Identity Center or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the IoT SiteWise User Guide. 
+   * Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses Amazon Web Services SSO or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the IoT SiteWise User Guide. 
    */
   createPortal(params: IoTSiteWise.Types.CreatePortalRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
-   * Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses IAM Identity Center or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the IoT SiteWise User Guide. 
+   * Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses Amazon Web Services SSO or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the IoT SiteWise User Guide. 
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
@@ -365,21 +365,13 @@ declare class IoTSiteWise extends Service {
    */
   getInterpolatedAssetPropertyValues(callback?: (err: AWSError, data: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse) => void): Request<IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse, AWSError>;
   /**
-   * Retrieves a paginated list of access policies for an identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).
+   * Retrieves a paginated list of access policies for an identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).
    */
   listAccessPolicies(params: IoTSiteWise.Types.ListAccessPoliciesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAccessPoliciesResponse) => void): Request<IoTSiteWise.Types.ListAccessPoliciesResponse, AWSError>;
   /**
-   * Retrieves a paginated list of access policies for an identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).
+   * Retrieves a paginated list of access policies for an identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).
    */
   listAccessPolicies(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAccessPoliciesResponse) => void): Request<IoTSiteWise.Types.ListAccessPoliciesResponse, AWSError>;
-  /**
-   * Retrieves a paginated list of properties associated with an asset model. If you update properties associated with the model before you finish listing all the properties, you need to start all over again.
-   */
-  listAssetModelProperties(params: IoTSiteWise.Types.ListAssetModelPropertiesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetModelPropertiesResponse) => void): Request<IoTSiteWise.Types.ListAssetModelPropertiesResponse, AWSError>;
-  /**
-   * Retrieves a paginated list of properties associated with an asset model. If you update properties associated with the model before you finish listing all the properties, you need to start all over again.
-   */
-  listAssetModelProperties(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetModelPropertiesResponse) => void): Request<IoTSiteWise.Types.ListAssetModelPropertiesResponse, AWSError>;
   /**
    * Retrieves a paginated list of summaries of all asset models.
    */
@@ -388,14 +380,6 @@ declare class IoTSiteWise extends Service {
    * Retrieves a paginated list of summaries of all asset models.
    */
   listAssetModels(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetModelsResponse) => void): Request<IoTSiteWise.Types.ListAssetModelsResponse, AWSError>;
-  /**
-   * Retrieves a paginated list of properties associated with an asset. If you update properties associated with the model before you finish listing all the properties, you need to start all over again.
-   */
-  listAssetProperties(params: IoTSiteWise.Types.ListAssetPropertiesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetPropertiesResponse) => void): Request<IoTSiteWise.Types.ListAssetPropertiesResponse, AWSError>;
-  /**
-   * Retrieves a paginated list of properties associated with an asset. If you update properties associated with the model before you finish listing all the properties, you need to start all over again.
-   */
-  listAssetProperties(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetPropertiesResponse) => void): Request<IoTSiteWise.Types.ListAssetPropertiesResponse, AWSError>;
   /**
    * Retrieves a paginated list of asset relationships for an asset. You can use this operation to identify an asset's root asset and all associated assets between that asset and its root.
    */
@@ -654,7 +638,7 @@ declare namespace IoTSiteWise {
      */
     id: ID;
     /**
-     * The identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user).
+     * The identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user).
      */
     identity: Identity;
     /**
@@ -674,7 +658,7 @@ declare namespace IoTSiteWise {
      */
     lastUpdateDate?: Timestamp;
   }
-  export type AggregateType = "AVERAGE"|"COUNT"|"MAXIMUM"|"MINIMUM"|"SUM"|"STANDARD_DEVIATION"|string;
+  export type AggregateType = "AVERAGE"|"COUNT"|"MAXIMUM"|"MINIMUM"|"SUM"|"STANDARD_DEVIATION";
   export type AggregateTypes = AggregateType[];
   export type AggregatedDoubleValue = number;
   export interface AggregatedValue {
@@ -746,13 +730,9 @@ declare namespace IoTSiteWise {
      * The asset properties that this composite model defines.
      */
     properties: AssetProperties;
-    /**
-     *  The ID of the asset composite model. 
-     */
-    id?: ID;
   }
   export type AssetCompositeModels = AssetCompositeModel[];
-  export type AssetErrorCode = "INTERNAL_FAILURE"|string;
+  export type AssetErrorCode = "INTERNAL_FAILURE";
   export interface AssetErrorDetails {
     /**
      * The ID of the asset.
@@ -807,10 +787,6 @@ declare namespace IoTSiteWise {
      * The asset property definitions for this composite model.
      */
     properties?: AssetModelProperties;
-    /**
-     *  The ID of the asset model composite model. 
-     */
-    id?: ID;
   }
   export interface AssetModelCompositeModelDefinition {
     /**
@@ -908,35 +884,7 @@ declare namespace IoTSiteWise {
     type: PropertyType;
   }
   export type AssetModelPropertyDefinitions = AssetModelPropertyDefinition[];
-  export type AssetModelPropertySummaries = AssetModelPropertySummary[];
-  export interface AssetModelPropertySummary {
-    /**
-     * The ID of the property.
-     */
-    id?: ID;
-    /**
-     * The name of the property.
-     */
-    name: Name;
-    /**
-     * The data type of the property.
-     */
-    dataType: PropertyDataType;
-    /**
-     * The data type of the structure for this property. This parameter exists on properties that have the STRUCT data type.
-     */
-    dataTypeSpec?: Name;
-    /**
-     * The unit (such as Newtons or RPM) of the property.
-     */
-    unit?: PropertyUnit;
-    type: PropertyType;
-    /**
-     *  The ID of the composite model that contains the asset model property. 
-     */
-    assetModelCompositeModelId?: ID;
-  }
-  export type AssetModelState = "CREATING"|"ACTIVE"|"UPDATING"|"PROPAGATING"|"DELETING"|"FAILED"|string;
+  export type AssetModelState = "CREATING"|"ACTIVE"|"UPDATING"|"PROPAGATING"|"DELETING"|"FAILED";
   export interface AssetModelStatus {
     /**
      * The current state of the asset model.
@@ -1010,26 +958,6 @@ declare namespace IoTSiteWise {
     unit?: PropertyUnit;
   }
   export type AssetPropertyAlias = string;
-  export type AssetPropertySummaries = AssetPropertySummary[];
-  export interface AssetPropertySummary {
-    /**
-     * The ID of the property.
-     */
-    id?: ID;
-    /**
-     * The alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the IoT SiteWise User Guide.
-     */
-    alias?: PropertyAlias;
-    /**
-     *  The unit of measure (such as Newtons or RPM) of the asset property. 
-     */
-    unit?: PropertyUnit;
-    notification?: PropertyNotification;
-    /**
-     *  The ID of the composite model that contains the asset property. 
-     */
-    assetCompositeModelId?: ID;
-  }
   export interface AssetPropertyValue {
     /**
      * The value of the asset property (see Variant).
@@ -1057,8 +985,8 @@ declare namespace IoTSiteWise {
      */
     relationshipType: AssetRelationshipType;
   }
-  export type AssetRelationshipType = "HIERARCHY"|string;
-  export type AssetState = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type AssetRelationshipType = "HIERARCHY";
+  export type AssetState = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED";
   export interface AssetStatus {
     /**
      * The current status of the asset.
@@ -1189,7 +1117,7 @@ declare namespace IoTSiteWise {
      */
     defaultValue?: DefaultValue;
   }
-  export type AuthMode = "IAM"|"SSO"|string;
+  export type AuthMode = "IAM"|"SSO";
   export type BatchAssociateProjectAssetsErrors = AssetErrorDetails[];
   export interface BatchAssociateProjectAssetsRequest {
     /**
@@ -1232,7 +1160,7 @@ declare namespace IoTSiteWise {
      */
     errors?: BatchDisassociateProjectAssetsErrors;
   }
-  export type BatchEntryCompletionStatus = "SUCCESS"|"ERROR"|string;
+  export type BatchEntryCompletionStatus = "SUCCESS"|"ERROR";
   export type BatchGetAssetPropertyAggregatesEntries = BatchGetAssetPropertyAggregatesEntry[];
   export interface BatchGetAssetPropertyAggregatesEntry {
     /**
@@ -1276,7 +1204,7 @@ declare namespace IoTSiteWise {
      */
     timeOrdering?: TimeOrdering;
   }
-  export type BatchGetAssetPropertyAggregatesErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyAggregatesErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException";
   export type BatchGetAssetPropertyAggregatesErrorEntries = BatchGetAssetPropertyAggregatesErrorEntry[];
   export interface BatchGetAssetPropertyAggregatesErrorEntry {
     /**
@@ -1380,7 +1308,7 @@ declare namespace IoTSiteWise {
      */
     propertyAlias?: AssetPropertyAlias;
   }
-  export type BatchGetAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException";
   export type BatchGetAssetPropertyValueErrorEntries = BatchGetAssetPropertyValueErrorEntry[];
   export interface BatchGetAssetPropertyValueErrorEntry {
     /**
@@ -1441,7 +1369,7 @@ declare namespace IoTSiteWise {
      */
     timeOrdering?: TimeOrdering;
   }
-  export type BatchGetAssetPropertyValueHistoryErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyValueHistoryErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException";
   export type BatchGetAssetPropertyValueHistoryErrorEntries = BatchGetAssetPropertyValueHistoryErrorEntry[];
   export interface BatchGetAssetPropertyValueHistoryErrorEntry {
     /**
@@ -1603,7 +1531,7 @@ declare namespace IoTSiteWise {
     errors: BatchPutAssetPropertyErrors;
   }
   export type BatchPutAssetPropertyErrors = BatchPutAssetPropertyError[];
-  export type BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|"LimitExceededException"|"ConflictingOperationException"|"TimestampOutOfRangeException"|"AccessDeniedException"|string;
+  export type BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|"LimitExceededException"|"ConflictingOperationException"|"TimestampOutOfRangeException"|"AccessDeniedException";
   export interface BatchPutAssetPropertyValueRequest {
     /**
      * The list of asset property value entries for the batch put request. You can specify up to 10 entries per request.
@@ -1619,9 +1547,9 @@ declare namespace IoTSiteWise {
   export type Bucket = string;
   export type CapabilityConfiguration = string;
   export type CapabilityNamespace = string;
-  export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|"UNKNOWN"|string;
+  export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|"UNKNOWN";
   export type ClientToken = string;
-  export type ColumnName = "ALIAS"|"ASSET_ID"|"PROPERTY_ID"|"DATA_TYPE"|"TIMESTAMP_SECONDS"|"TIMESTAMP_NANO_OFFSET"|"QUALITY"|"VALUE"|string;
+  export type ColumnName = "ALIAS"|"ASSET_ID"|"PROPERTY_ID"|"DATA_TYPE"|"TIMESTAMP_SECONDS"|"TIMESTAMP_NANO_OFFSET"|"QUALITY"|"VALUE";
   export type ColumnNames = ColumnName[];
   export interface CompositeModelProperty {
     /**
@@ -1633,12 +1561,8 @@ declare namespace IoTSiteWise {
      */
     type: Name;
     assetProperty: Property;
-    /**
-     *  The ID of the composite model that contains the property. 
-     */
-    id?: ID;
   }
-  export type ComputeLocation = "EDGE"|"CLOUD"|string;
+  export type ComputeLocation = "EDGE"|"CLOUD";
   export interface ConfigurationErrorDetails {
     /**
      * The error code.
@@ -1649,7 +1573,7 @@ declare namespace IoTSiteWise {
      */
     message: ErrorMessage;
   }
-  export type ConfigurationState = "ACTIVE"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export type ConfigurationState = "ACTIVE"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED";
   export interface ConfigurationStatus {
     /**
      * The current state of the configuration.
@@ -1663,7 +1587,7 @@ declare namespace IoTSiteWise {
   export type CoreDeviceThingName = string;
   export interface CreateAccessPolicyRequest {
     /**
-     * The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.
+     * The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.
      */
     accessPolicyIdentity: Identity;
     /**
@@ -1899,7 +1823,7 @@ declare namespace IoTSiteWise {
      */
     tags?: TagMap;
     /**
-     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses IAM Identity Center (successor to Single Sign-On) to authenticate users and manage user permissions. Before you can create a portal that uses IAM Identity Center, you must enable IAM Identity Center. For more information, see Enabling IAM Identity Center in the IoT SiteWise User Guide. This option is only available in Amazon Web Services Regions other than the China Regions.    IAM – The portal uses Identity and Access Management to authenticate users and manage user permissions.   You can't change this value after you create a portal. Default: SSO 
+     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses Amazon Web Services Single Sign On to authenticate users and manage user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO. For more information, see Enabling Amazon Web Services SSO in the IoT SiteWise User Guide. This option is only available in Amazon Web Services Regions other than the China Regions.    IAM – The portal uses Identity and Access Management to authenticate users and manage user permissions.   You can't change this value after you create a portal. Default: SSO 
      */
     portalAuthMode?: AuthMode;
     /**
@@ -1921,7 +1845,7 @@ declare namespace IoTSiteWise {
      */
     portalArn: ARN;
     /**
-     * The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.
+     * The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.
      */
     portalStartUrl: Url;
     /**
@@ -1929,7 +1853,7 @@ declare namespace IoTSiteWise {
      */
     portalStatus: PortalStatus;
     /**
-     * The associated IAM Identity Center application ID, if the portal uses IAM Identity Center.
+     * The associated Amazon Web Services SSO application ID, if the portal uses Amazon Web Services SSO.
      */
     ssoApplicationId: SSOApplicationId;
   }
@@ -2130,7 +2054,7 @@ declare namespace IoTSiteWise {
      */
     accessPolicyArn: ARN;
     /**
-     * The identity (IAM Identity Center user, IAM Identity Center group, or IAM user) to which this access policy applies.
+     * The identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) to which this access policy applies.
      */
     accessPolicyIdentity: Identity;
     /**
@@ -2155,10 +2079,6 @@ declare namespace IoTSiteWise {
      * The ID of the asset model.
      */
     assetModelId: ID;
-    /**
-     *  Whether or not to exclude asset model properties from the response. 
-     */
-    excludeProperties?: ExcludeProperties;
   }
   export interface DescribeAssetModelResponse {
     /**
@@ -2239,10 +2159,6 @@ declare namespace IoTSiteWise {
      * The ID of the asset.
      */
     assetId: ID;
-    /**
-     *  Whether or not to exclude asset properties from the response. 
-     */
-    excludeProperties?: ExcludeProperties;
   }
   export interface DescribeAssetResponse {
     /**
@@ -2486,11 +2402,11 @@ declare namespace IoTSiteWise {
      */
     portalDescription?: Description;
     /**
-     * The IAM Identity Center application generated client ID (used with IAM Identity Center APIs). IoT SiteWise includes portalClientId for only portals that use IAM Identity Center to authenticate users.
+     * The Amazon Web Services SSO application generated client ID (used with Amazon Web Services SSO APIs). IoT SiteWise includes portalClientId for only portals that use Amazon Web Services SSO to authenticate users.
      */
     portalClientId: PortalClientId;
     /**
-     * The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.
+     * The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.
      */
     portalStartUrl: Url;
     /**
@@ -2650,7 +2566,7 @@ declare namespace IoTSiteWise {
      */
     message: DetailedErrorMessage;
   }
-  export type DetailedErrorCode = "INCOMPATIBLE_COMPUTE_LOCATION"|"INCOMPATIBLE_FORWARDING_CONFIGURATION"|string;
+  export type DetailedErrorCode = "INCOMPATIBLE_COMPUTE_LOCATION"|"INCOMPATIBLE_FORWARDING_CONFIGURATION";
   export type DetailedErrorMessage = string;
   export type DetailedErrors = DetailedError[];
   export interface DisassociateAssetsRequest {
@@ -2689,11 +2605,11 @@ declare namespace IoTSiteWise {
      */
     clientToken?: ClientToken;
   }
-  export type DisassociatedDataStorageState = "ENABLED"|"DISABLED"|string;
+  export type DisassociatedDataStorageState = "ENABLED"|"DISABLED";
   export type Email = string;
-  export type EncryptionType = "SITEWISE_DEFAULT_ENCRYPTION"|"KMS_BASED_ENCRYPTION"|string;
+  export type EncryptionType = "SITEWISE_DEFAULT_ENCRYPTION"|"KMS_BASED_ENCRYPTION";
   export type EntryId = string;
-  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|string;
+  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE";
   export interface ErrorDetails {
     /**
      * The error code.
@@ -2719,7 +2635,6 @@ declare namespace IoTSiteWise {
      */
     prefix: String;
   }
-  export type ExcludeProperties = boolean;
   export type Expression = string;
   export interface ExpressionVariable {
     /**
@@ -2759,7 +2674,7 @@ declare namespace IoTSiteWise {
      */
     state: ForwardingConfigState;
   }
-  export type ForwardingConfigState = "DISABLED"|"ENABLED"|string;
+  export type ForwardingConfigState = "DISABLED"|"ENABLED";
   export type GatewayCapabilitySummaries = GatewayCapabilitySummary[];
   export interface GatewayCapabilitySummary {
     /**
@@ -3007,7 +2922,7 @@ declare namespace IoTSiteWise {
   }
   export interface GroupIdentity {
     /**
-     * The IAM Identity Center ID of the group.
+     * The Amazon Web Services SSO ID of the group.
      */
     id: IdentityId;
   }
@@ -3027,11 +2942,11 @@ declare namespace IoTSiteWise {
   export type IDs = ID[];
   export interface Identity {
     /**
-     * An IAM Identity Center user identity.
+     * An Amazon Web Services SSO user identity.
      */
     user?: UserIdentity;
     /**
-     * An IAM Identity Center group identity.
+     * An Amazon Web Services SSO group identity.
      */
     group?: GroupIdentity;
     /**
@@ -3044,7 +2959,7 @@ declare namespace IoTSiteWise {
     iamRole?: IAMRoleIdentity;
   }
   export type IdentityId = string;
-  export type IdentityType = "USER"|"GROUP"|"IAM"|string;
+  export type IdentityType = "USER"|"GROUP"|"IAM";
   export interface Image {
     /**
      * The ID of an existing image. Specify this parameter to keep an existing image.
@@ -3063,7 +2978,7 @@ declare namespace IoTSiteWise {
     type: ImageFileType;
   }
   export type ImageFileData = Buffer|Uint8Array|Blob|string;
-  export type ImageFileType = "PNG"|string;
+  export type ImageFileType = "PNG";
   export interface ImageLocation {
     /**
      * The ID of the image.
@@ -3089,7 +3004,7 @@ declare namespace IoTSiteWise {
      */
     fileFormat: FileFormat;
   }
-  export type JobStatus = "PENDING"|"CANCELLED"|"RUNNING"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string;
+  export type JobStatus = "PENDING"|"CANCELLED"|"RUNNING"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES";
   export type JobSummaries = JobSummary[];
   export interface JobSummary {
     /**
@@ -3108,7 +3023,7 @@ declare namespace IoTSiteWise {
   export type KmsKeyId = string;
   export interface ListAccessPoliciesRequest {
     /**
-     * The type of identity (IAM Identity Center user, IAM Identity Center group, or IAM user). This parameter is required if you specify identityId.
+     * The type of identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user). This parameter is required if you specify identityId.
      */
     identityType?: IdentityType;
     /**
@@ -3146,35 +3061,6 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListAssetModelPropertiesFilter = "ALL"|"BASE"|string;
-  export interface ListAssetModelPropertiesRequest {
-    /**
-     * The ID of the asset model.
-     */
-    assetModelId: ID;
-    /**
-     * The token to be used for the next set of paginated results.
-     */
-    nextToken?: NextToken;
-    /**
-     * The maximum number of results to return for each paginated request. If not specified, the default value is 50.
-     */
-    maxResults?: MaxResults;
-    /**
-     *  Filters the requested list of asset model properties. You can choose one of the following options:    ALL – The list includes all asset model properties for a given asset model ID.     BASE – The list includes only base asset model properties for a given asset model ID.    Default: BASE 
-     */
-    filter?: ListAssetModelPropertiesFilter;
-  }
-  export interface ListAssetModelPropertiesResponse {
-    /**
-     * A list that summarizes the properties associated with the specified asset model.
-     */
-    assetModelPropertySummaries: AssetModelPropertySummaries;
-    /**
-     * The token for the next set of results, or null if there are no additional results.
-     */
-    nextToken?: NextToken;
-  }
   export interface ListAssetModelsRequest {
     /**
      * The token to be used for the next set of paginated results.
@@ -3190,35 +3076,6 @@ declare namespace IoTSiteWise {
      * A list that summarizes each asset model.
      */
     assetModelSummaries: AssetModelSummaries;
-    /**
-     * The token for the next set of results, or null if there are no additional results.
-     */
-    nextToken?: NextToken;
-  }
-  export type ListAssetPropertiesFilter = "ALL"|"BASE"|string;
-  export interface ListAssetPropertiesRequest {
-    /**
-     * The ID of the asset.
-     */
-    assetId: ID;
-    /**
-     * The token to be used for the next set of paginated results.
-     */
-    nextToken?: NextToken;
-    /**
-     * The maximum number of results to return for each paginated request. If not specified, the default value is 50.
-     */
-    maxResults?: MaxResults;
-    /**
-     *  Filters the requested list of asset properties. You can choose one of the following options:    ALL – The list includes all asset properties for a given asset model ID.     BASE – The list includes only base asset properties for a given asset model ID.    Default: BASE 
-     */
-    filter?: ListAssetPropertiesFilter;
-  }
-  export interface ListAssetPropertiesResponse {
-    /**
-     * A list that summarizes the properties associated with the specified asset.
-     */
-    assetPropertySummaries: AssetPropertySummaries;
     /**
      * The token for the next set of results, or null if there are no additional results.
      */
@@ -3252,7 +3109,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListAssetsFilter = "ALL"|"TOP_LEVEL"|string;
+  export type ListAssetsFilter = "ALL"|"TOP_LEVEL";
   export interface ListAssetsRequest {
     /**
      * The token to be used for the next set of paginated results.
@@ -3313,7 +3170,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListBulkImportJobsFilter = "ALL"|"PENDING"|"RUNNING"|"CANCELLED"|"FAILED"|"COMPLETED_WITH_FAILURES"|"COMPLETED"|string;
+  export type ListBulkImportJobsFilter = "ALL"|"PENDING"|"RUNNING"|"CANCELLED"|"FAILED"|"COMPLETED_WITH_FAILURES"|"COMPLETED";
   export interface ListBulkImportJobsRequest {
     /**
      * The token to be used for the next set of paginated results.
@@ -3494,8 +3351,8 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListTimeSeriesType = "ASSOCIATED"|"DISASSOCIATED"|string;
-  export type LoggingLevel = "ERROR"|"INFO"|"OFF"|string;
+  export type ListTimeSeriesType = "ASSOCIATED"|"DISASSOCIATED";
+  export type LoggingLevel = "ERROR"|"INFO"|"OFF";
   export interface LoggingOptions {
     /**
      * The IoT SiteWise logging verbosity level.
@@ -3547,7 +3404,7 @@ declare namespace IoTSiteWise {
      */
     tumbling?: TumblingWindow;
   }
-  export type MonitorErrorCode = "INTERNAL_FAILURE"|"VALIDATION_ERROR"|"LIMIT_EXCEEDED"|string;
+  export type MonitorErrorCode = "INTERNAL_FAILURE"|"VALIDATION_ERROR"|"LIMIT_EXCEEDED";
   export interface MonitorErrorDetails {
     /**
      * The error code.
@@ -3570,7 +3427,7 @@ declare namespace IoTSiteWise {
   export type NumberOfDays = number;
   export type Offset = string;
   export type OffsetInNanos = number;
-  export type Permission = "ADMINISTRATOR"|"VIEWER"|string;
+  export type Permission = "ADMINISTRATOR"|"VIEWER";
   export type PortalClientId = string;
   export interface PortalResource {
     /**
@@ -3578,7 +3435,7 @@ declare namespace IoTSiteWise {
      */
     id: ID;
   }
-  export type PortalState = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string;
+  export type PortalState = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED";
   export interface PortalStatus {
     /**
      * The current state of the portal.
@@ -3604,7 +3461,7 @@ declare namespace IoTSiteWise {
      */
     description?: Description;
     /**
-     * The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.
+     * The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.
      */
     startUrl: Url;
     /**
@@ -3681,7 +3538,7 @@ declare namespace IoTSiteWise {
     type?: PropertyType;
   }
   export type PropertyAlias = string;
-  export type PropertyDataType = "STRING"|"INTEGER"|"DOUBLE"|"BOOLEAN"|"STRUCT"|string;
+  export type PropertyDataType = "STRING"|"INTEGER"|"DOUBLE"|"BOOLEAN"|"STRUCT";
   export interface PropertyNotification {
     /**
      * The MQTT topic to which IoT SiteWise publishes property value update notifications.
@@ -3692,7 +3549,7 @@ declare namespace IoTSiteWise {
      */
     state: PropertyNotificationState;
   }
-  export type PropertyNotificationState = "ENABLED"|"DISABLED"|string;
+  export type PropertyNotificationState = "ENABLED"|"DISABLED";
   export type PropertyNotificationTopic = string;
   export interface PropertyType {
     /**
@@ -3804,7 +3661,7 @@ declare namespace IoTSiteWise {
     configurationStatus: ConfigurationStatus;
   }
   export type Qualities = Quality[];
-  export type Quality = "GOOD"|"BAD"|"UNCERTAIN"|string;
+  export type Quality = "GOOD"|"BAD"|"UNCERTAIN";
   export type Resolution = string;
   export interface Resource {
     /**
@@ -3816,7 +3673,7 @@ declare namespace IoTSiteWise {
      */
     project?: ProjectResource;
   }
-  export type ResourceType = "PORTAL"|"PROJECT"|string;
+  export type ResourceType = "PORTAL"|"PROJECT";
   export interface RetentionPeriod {
     /**
      * The number of days that your data is kept.  If you specified a value for this parameter, the unlimited parameter must be false. 
@@ -3828,7 +3685,7 @@ declare namespace IoTSiteWise {
     unlimited?: Unlimited;
   }
   export type SSOApplicationId = string;
-  export type StorageType = "SITEWISE_DEFAULT_STORAGE"|"MULTI_LAYER_STORAGE"|string;
+  export type StorageType = "SITEWISE_DEFAULT_STORAGE"|"MULTI_LAYER_STORAGE";
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -3857,7 +3714,7 @@ declare namespace IoTSiteWise {
     offsetInNanos?: OffsetInNanos;
   }
   export type TimeInSeconds = number;
-  export type TimeOrdering = "ASCENDING"|"DESCENDING"|string;
+  export type TimeOrdering = "ASCENDING"|"DESCENDING";
   export type TimeSeriesId = string;
   export type TimeSeriesSummaries = TimeSeriesSummary[];
   export interface TimeSeriesSummary {
@@ -3917,8 +3774,8 @@ declare namespace IoTSiteWise {
     computeLocation: ComputeLocation;
     forwardingConfig?: ForwardingConfig;
   }
-  export type TraversalDirection = "PARENT"|"CHILD"|string;
-  export type TraversalType = "PATH_TO_ROOT"|string;
+  export type TraversalDirection = "PARENT"|"CHILD";
+  export type TraversalType = "PATH_TO_ROOT";
   export interface TumblingWindow {
     /**
      * The time interval for the tumbling window. The interval time must be between 1 minute and 1 week. IoT SiteWise computes the 1w interval the end of Sunday at midnight each week (UTC), the 1d interval at the end of each day at midnight (UTC), the 1h interval at the end of each hour, and so on.  When IoT SiteWise aggregates data points for metric computations, the start of each interval is exclusive and the end of each interval is inclusive. IoT SiteWise places the computed data point at the end of the interval.
@@ -3948,7 +3805,7 @@ declare namespace IoTSiteWise {
      */
     accessPolicyId: ID;
     /**
-     * The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.
+     * The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.
      */
     accessPolicyIdentity: Identity;
     /**
@@ -4174,7 +4031,7 @@ declare namespace IoTSiteWise {
   export type Url = string;
   export interface UserIdentity {
     /**
-     * The IAM Identity Center ID of the user.
+     * The Amazon Web Services SSO ID of the user.
      */
     id: IdentityId;
   }

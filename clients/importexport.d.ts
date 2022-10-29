@@ -145,7 +145,7 @@ declare namespace ImportExport {
   }
   export type JobId = string;
   export type JobIdList = GenericString[];
-  export type JobType = "Import"|"Export"|string;
+  export type JobType = "Import"|"Export";
   export type JobsList = Job[];
   export interface ListJobsInput {
     MaxJobs?: MaxJobs;

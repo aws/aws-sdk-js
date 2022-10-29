@@ -120,7 +120,7 @@ declare namespace HealthLake {
   export type AmazonResourceName = string;
   export type BoundedLengthString = string;
   export type ClientTokenString = string;
-  export type CmkType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string;
+  export type CmkType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY";
   export interface CreateFHIRDatastoreRequest {
     /**
      * The user generated name for the Data Store.
@@ -225,7 +225,7 @@ declare namespace HealthLake {
     PreloadDataConfig?: PreloadDataConfig;
   }
   export type DatastorePropertiesList = DatastoreProperties[];
-  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
+  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED";
   export interface DeleteFHIRDatastoreRequest {
     /**
      *  The AWS-generated ID for the Data Store to be deleted.
@@ -334,7 +334,7 @@ declare namespace HealthLake {
     Message?: Message;
   }
   export type ExportJobPropertiesList = ExportJobProperties[];
-  export type FHIRVersion = "R4"|string;
+  export type FHIRVersion = "R4";
   export type IamRoleArn = string;
   export interface ImportJobProperties {
     /**
@@ -384,7 +384,7 @@ declare namespace HealthLake {
   }
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED";
   export interface KmsEncryptionConfig {
     /**
      *  The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
@@ -526,7 +526,7 @@ declare namespace HealthLake {
      */
     PreloadDataType: PreloadDataType;
   }
-  export type PreloadDataType = "SYNTHEA"|string;
+  export type PreloadDataType = "SYNTHEA";
   export interface S3Configuration {
     /**
      *  The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 

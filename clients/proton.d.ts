@@ -849,7 +849,7 @@ declare namespace Proton {
     serviceSpec?: SpecContents;
   }
   export type ComponentArn = string;
-  export type ComponentDeploymentUpdateType = "NONE"|"CURRENT_VERSION"|string;
+  export type ComponentDeploymentUpdateType = "NONE"|"CURRENT_VERSION";
   export interface ComponentSummary {
     /**
      * The Amazon Resource Name (ARN) of the component.
@@ -1414,8 +1414,8 @@ declare namespace Proton {
     templateSyncConfig?: TemplateSyncConfig;
   }
   export type DeploymentId = string;
-  export type DeploymentStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"CANCELLING"|"CANCELLED"|string;
-  export type DeploymentUpdateType = "NONE"|"CURRENT_VERSION"|"MINOR_VERSION"|"MAJOR_VERSION"|string;
+  export type DeploymentStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"CANCELLING"|"CANCELLED";
+  export type DeploymentUpdateType = "NONE"|"CURRENT_VERSION"|"MINOR_VERSION"|"MAJOR_VERSION";
   export type Description = string;
   export type DisplayName = string;
   export type EmptyNextToken = string;
@@ -1537,8 +1537,8 @@ declare namespace Proton {
   }
   export type EnvironmentAccountConnectionArn = string;
   export type EnvironmentAccountConnectionId = string;
-  export type EnvironmentAccountConnectionRequesterAccountType = "MANAGEMENT_ACCOUNT"|"ENVIRONMENT_ACCOUNT"|string;
-  export type EnvironmentAccountConnectionStatus = "PENDING"|"CONNECTED"|"REJECTED"|string;
+  export type EnvironmentAccountConnectionRequesterAccountType = "MANAGEMENT_ACCOUNT"|"ENVIRONMENT_ACCOUNT";
+  export type EnvironmentAccountConnectionStatus = "PENDING"|"CONNECTED"|"REJECTED";
   export type EnvironmentAccountConnectionStatusList = EnvironmentAccountConnectionStatus[];
   export interface EnvironmentAccountConnectionSummary {
     /**
@@ -2572,11 +2572,11 @@ declare namespace Proton {
      */
     provisioningEngine?: ProvisionedResourceEngine;
   }
-  export type ProvisionedResourceEngine = "CLOUDFORMATION"|"TERRAFORM"|string;
+  export type ProvisionedResourceEngine = "CLOUDFORMATION"|"TERRAFORM";
   export type ProvisionedResourceIdentifier = string;
   export type ProvisionedResourceList = ProvisionedResource[];
   export type ProvisionedResourceName = string;
-  export type Provisioning = "CUSTOMER_MANAGED"|string;
+  export type Provisioning = "CUSTOMER_MANAGED";
   export interface RejectEnvironmentAccountConnectionInput {
     /**
      * The ID of the environment account connection to reject.
@@ -2646,7 +2646,7 @@ declare namespace Proton {
   }
   export type RepositoryId = string;
   export type RepositoryName = string;
-  export type RepositoryProvider = "GITHUB"|"GITHUB_ENTERPRISE"|"BITBUCKET"|string;
+  export type RepositoryProvider = "GITHUB"|"GITHUB_ENTERPRISE"|"BITBUCKET";
   export interface RepositorySummary {
     /**
      * The Amazon Resource Name (ARN) of the linked repository.
@@ -2714,8 +2714,8 @@ declare namespace Proton {
     type: String;
   }
   export type RepositorySyncEvents = RepositorySyncEvent[];
-  export type RepositorySyncStatus = "INITIATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"QUEUED"|string;
-  export type ResourceDeploymentStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string;
+  export type RepositorySyncStatus = "INITIATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"QUEUED";
+  export type ResourceDeploymentStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED";
   export type ResourceName = string;
   export type ResourceNameOrEmpty = string;
   export interface ResourceSyncAttempt {
@@ -2763,7 +2763,7 @@ declare namespace Proton {
     type: String;
   }
   export type ResourceSyncEvents = ResourceSyncEvent[];
-  export type ResourceSyncStatus = "INITIATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type ResourceSyncStatus = "INITIATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED";
   export interface Revision {
     /**
      * The repository branch.
@@ -3002,7 +3002,7 @@ declare namespace Proton {
      */
     templateName: ResourceName;
   }
-  export type ServiceStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED_CLEANUP_IN_PROGRESS"|"CREATE_FAILED_CLEANUP_COMPLETE"|"CREATE_FAILED_CLEANUP_FAILED"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED_CLEANUP_IN_PROGRESS"|"UPDATE_FAILED_CLEANUP_COMPLETE"|"UPDATE_FAILED_CLEANUP_FAILED"|"UPDATE_FAILED"|"UPDATE_COMPLETE_CLEANUP_FAILED"|string;
+  export type ServiceStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED_CLEANUP_IN_PROGRESS"|"CREATE_FAILED_CLEANUP_COMPLETE"|"CREATE_FAILED_CLEANUP_FAILED"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED_CLEANUP_IN_PROGRESS"|"UPDATE_FAILED_CLEANUP_COMPLETE"|"UPDATE_FAILED_CLEANUP_FAILED"|"UPDATE_FAILED"|"UPDATE_COMPLETE_CLEANUP_FAILED";
   export interface ServiceSummary {
     /**
      * The Amazon Resource Name (ARN) of the service.
@@ -3113,7 +3113,7 @@ declare namespace Proton {
   }
   export type ServiceTemplateSummaryList = ServiceTemplateSummary[];
   export type ServiceTemplateSupportedComponentSourceInputList = ServiceTemplateSupportedComponentSourceType[];
-  export type ServiceTemplateSupportedComponentSourceType = "DIRECTLY_DEFINED"|string;
+  export type ServiceTemplateSupportedComponentSourceType = "DIRECTLY_DEFINED";
   export interface ServiceTemplateVersion {
     /**
      * The Amazon Resource Name (ARN) of the version of a service template.
@@ -3216,7 +3216,7 @@ declare namespace Proton {
   export type StatusMessage = string;
   export type String = string;
   export type Subdirectory = string;
-  export type SyncType = "TEMPLATE_SYNC"|string;
+  export type SyncType = "TEMPLATE_SYNC";
   export interface Tag {
     /**
      * The key of the resource tag.
@@ -3272,7 +3272,7 @@ declare namespace Proton {
      */
     templateType: TemplateType;
   }
-  export type TemplateType = "ENVIRONMENT"|"SERVICE"|string;
+  export type TemplateType = "ENVIRONMENT"|"SERVICE";
   export type TemplateVersionPart = string;
   export interface TemplateVersionSourceInput {
     /**
@@ -3280,7 +3280,7 @@ declare namespace Proton {
      */
     s3?: S3ObjectSource;
   }
-  export type TemplateVersionStatus = "REGISTRATION_IN_PROGRESS"|"REGISTRATION_FAILED"|"DRAFT"|"PUBLISHED"|string;
+  export type TemplateVersionStatus = "REGISTRATION_IN_PROGRESS"|"REGISTRATION_FAILED"|"DRAFT"|"PUBLISHED";
   export type Timestamp = Date;
   export interface UntagResourceInput {
     /**

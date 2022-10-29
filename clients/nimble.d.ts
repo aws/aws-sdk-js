@@ -1345,19 +1345,19 @@ declare namespace Nimble {
   }
   export type LaunchProfileMembershipList = LaunchProfileMembership[];
   export type LaunchProfileName = string;
-  export type LaunchProfilePersona = "USER"|string;
-  export type LaunchProfilePlatform = "LINUX"|"WINDOWS"|string;
+  export type LaunchProfilePersona = "USER";
+  export type LaunchProfilePlatform = "LINUX"|"WINDOWS";
   export type LaunchProfileProtocolVersion = string;
   export type LaunchProfileProtocolVersionList = LaunchProfileProtocolVersion[];
   export type LaunchProfileSecurityGroupIdList = SecurityGroupId[];
-  export type LaunchProfileState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type LaunchProfileState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED";
   export type LaunchProfileStateList = LaunchProfileState[];
-  export type LaunchProfileStatusCode = "LAUNCH_PROFILE_CREATED"|"LAUNCH_PROFILE_UPDATED"|"LAUNCH_PROFILE_DELETED"|"LAUNCH_PROFILE_CREATE_IN_PROGRESS"|"LAUNCH_PROFILE_UPDATE_IN_PROGRESS"|"LAUNCH_PROFILE_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"STREAMING_IMAGE_NOT_FOUND"|"STREAMING_IMAGE_NOT_READY"|"LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"INVALID_SUBNETS_PROVIDED"|"INVALID_INSTANCE_TYPES_PROVIDED"|"INVALID_SUBNETS_COMBINATION"|string;
+  export type LaunchProfileStatusCode = "LAUNCH_PROFILE_CREATED"|"LAUNCH_PROFILE_UPDATED"|"LAUNCH_PROFILE_DELETED"|"LAUNCH_PROFILE_CREATE_IN_PROGRESS"|"LAUNCH_PROFILE_UPDATE_IN_PROGRESS"|"LAUNCH_PROFILE_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"STREAMING_IMAGE_NOT_FOUND"|"STREAMING_IMAGE_NOT_READY"|"LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"INVALID_SUBNETS_PROVIDED"|"INVALID_INSTANCE_TYPES_PROVIDED"|"INVALID_SUBNETS_COMBINATION";
   export type LaunchProfileStudioComponentIdList = String[];
-  export type LaunchProfileValidationState = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR"|string;
-  export type LaunchProfileValidationStatusCode = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION"|"VALIDATION_FAILED_SUBNET_NOT_FOUND"|"VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION"|"VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY"|"VALIDATION_FAILED_UNAUTHORIZED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR"|string;
+  export type LaunchProfileValidationState = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR";
+  export type LaunchProfileValidationStatusCode = "VALIDATION_NOT_STARTED"|"VALIDATION_IN_PROGRESS"|"VALIDATION_SUCCESS"|"VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION"|"VALIDATION_FAILED_SUBNET_NOT_FOUND"|"VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION"|"VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY"|"VALIDATION_FAILED_UNAUTHORIZED"|"VALIDATION_FAILED_INTERNAL_SERVER_ERROR";
   export type LaunchProfileValidationStatusMessage = string;
-  export type LaunchProfileValidationType = "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT"|"VALIDATE_SUBNET_ASSOCIATION"|"VALIDATE_NETWORK_ACL_ASSOCIATION"|"VALIDATE_SECURITY_GROUP_ASSOCIATION"|string;
+  export type LaunchProfileValidationType = "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT"|"VALIDATE_SUBNET_ASSOCIATION"|"VALIDATE_NETWORK_ACL_ASSOCIATION"|"VALIDATE_SECURITY_GROUP_ASSOCIATION";
   export type LaunchPurpose = string;
   export interface LicenseServiceConfiguration {
     /**
@@ -1829,7 +1829,7 @@ declare namespace Nimble {
      */
     root?: StreamingSessionStorageRoot;
   }
-  export type StreamingClipboardMode = "ENABLED"|"DISABLED"|string;
+  export type StreamingClipboardMode = "ENABLED"|"DISABLED";
   export interface StreamingImage {
     /**
      * The ARN of the resource.
@@ -1896,16 +1896,16 @@ declare namespace Nimble {
     keyType: StreamingImageEncryptionConfigurationKeyType;
   }
   export type StreamingImageEncryptionConfigurationKeyArn = string;
-  export type StreamingImageEncryptionConfigurationKeyType = "CUSTOMER_MANAGED_KEY"|string;
+  export type StreamingImageEncryptionConfigurationKeyType = "CUSTOMER_MANAGED_KEY";
   export type StreamingImageId = string;
   export type StreamingImageIdList = StreamingImageId[];
   export type StreamingImageList = StreamingImage[];
   export type StreamingImageName = string;
   export type StreamingImageOwner = string;
   export type StreamingImagePlatform = string;
-  export type StreamingImageState = "CREATE_IN_PROGRESS"|"READY"|"DELETE_IN_PROGRESS"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
-  export type StreamingImageStatusCode = "STREAMING_IMAGE_CREATE_IN_PROGRESS"|"STREAMING_IMAGE_READY"|"STREAMING_IMAGE_DELETE_IN_PROGRESS"|"STREAMING_IMAGE_DELETED"|"STREAMING_IMAGE_UPDATE_IN_PROGRESS"|"INTERNAL_ERROR"|"ACCESS_DENIED"|string;
-  export type StreamingInstanceType = "g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g3.4xlarge"|"g3s.xlarge"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.16xlarge"|string;
+  export type StreamingImageState = "CREATE_IN_PROGRESS"|"READY"|"DELETE_IN_PROGRESS"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"CREATE_FAILED"|"DELETE_FAILED";
+  export type StreamingImageStatusCode = "STREAMING_IMAGE_CREATE_IN_PROGRESS"|"STREAMING_IMAGE_READY"|"STREAMING_IMAGE_DELETE_IN_PROGRESS"|"STREAMING_IMAGE_DELETED"|"STREAMING_IMAGE_UPDATE_IN_PROGRESS"|"INTERNAL_ERROR"|"ACCESS_DENIED";
+  export type StreamingInstanceType = "g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g3.4xlarge"|"g3s.xlarge"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.16xlarge";
   export type StreamingInstanceTypeList = StreamingInstanceType[];
   export interface StreamingSession {
     /**
@@ -1991,9 +1991,9 @@ declare namespace Nimble {
   }
   export type StreamingSessionId = string;
   export type StreamingSessionList = StreamingSession[];
-  export type StreamingSessionState = "CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"READY"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|"STOP_IN_PROGRESS"|"START_IN_PROGRESS"|"STOPPED"|"STOP_FAILED"|"START_FAILED"|string;
-  export type StreamingSessionStatusCode = "STREAMING_SESSION_READY"|"STREAMING_SESSION_DELETED"|"STREAMING_SESSION_CREATE_IN_PROGRESS"|"STREAMING_SESSION_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"INSUFFICIENT_CAPACITY"|"ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"|"NETWORK_CONNECTION_ERROR"|"INITIALIZATION_SCRIPT_ERROR"|"DECRYPT_STREAMING_IMAGE_ERROR"|"NETWORK_INTERFACE_ERROR"|"STREAMING_SESSION_STOPPED"|"STREAMING_SESSION_STARTED"|"STREAMING_SESSION_STOP_IN_PROGRESS"|"STREAMING_SESSION_START_IN_PROGRESS"|"AMI_VALIDATION_ERROR"|string;
-  export type StreamingSessionStorageMode = "UPLOAD"|string;
+  export type StreamingSessionState = "CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"READY"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|"STOP_IN_PROGRESS"|"START_IN_PROGRESS"|"STOPPED"|"STOP_FAILED"|"START_FAILED";
+  export type StreamingSessionStatusCode = "STREAMING_SESSION_READY"|"STREAMING_SESSION_DELETED"|"STREAMING_SESSION_CREATE_IN_PROGRESS"|"STREAMING_SESSION_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"INSUFFICIENT_CAPACITY"|"ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"|"NETWORK_CONNECTION_ERROR"|"INITIALIZATION_SCRIPT_ERROR"|"DECRYPT_STREAMING_IMAGE_ERROR"|"NETWORK_INTERFACE_ERROR"|"STREAMING_SESSION_STOPPED"|"STREAMING_SESSION_STARTED"|"STREAMING_SESSION_STOP_IN_PROGRESS"|"STREAMING_SESSION_START_IN_PROGRESS"|"AMI_VALIDATION_ERROR";
+  export type StreamingSessionStorageMode = "UPLOAD";
   export type StreamingSessionStorageModeList = StreamingSessionStorageMode[];
   export interface StreamingSessionStorageRoot {
     /**
@@ -2042,8 +2042,8 @@ declare namespace Nimble {
     url?: SensitiveString;
   }
   export type StreamingSessionStreamExpirationInSeconds = number;
-  export type StreamingSessionStreamState = "READY"|"CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
-  export type StreamingSessionStreamStatusCode = "STREAM_CREATE_IN_PROGRESS"|"STREAM_READY"|"STREAM_DELETE_IN_PROGRESS"|"STREAM_DELETED"|"INTERNAL_ERROR"|"NETWORK_CONNECTION_ERROR"|string;
+  export type StreamingSessionStreamState = "READY"|"CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED";
+  export type StreamingSessionStreamStatusCode = "STREAM_CREATE_IN_PROGRESS"|"STREAM_READY"|"STREAM_DELETE_IN_PROGRESS"|"STREAM_DELETED"|"INTERNAL_ERROR"|"NETWORK_CONNECTION_ERROR";
   export type String = string;
   export type StringList = String[];
   export interface Studio {
@@ -2234,15 +2234,15 @@ declare namespace Nimble {
   }
   export type StudioComponentInitializationScriptContent = string;
   export type StudioComponentInitializationScriptList = StudioComponentInitializationScript[];
-  export type StudioComponentInitializationScriptRunContext = "SYSTEM_INITIALIZATION"|"USER_INITIALIZATION"|string;
+  export type StudioComponentInitializationScriptRunContext = "SYSTEM_INITIALIZATION"|"USER_INITIALIZATION";
   export type StudioComponentList = StudioComponent[];
   export type StudioComponentName = string;
   export type StudioComponentScriptParameterKeyValueList = ScriptParameterKeyValue[];
   export type StudioComponentSecurityGroupIdList = SecurityGroupId[];
-  export type StudioComponentState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type StudioComponentState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED";
   export type StudioComponentStateList = StudioComponentState[];
-  export type StudioComponentStatusCode = "ACTIVE_DIRECTORY_ALREADY_EXISTS"|"STUDIO_COMPONENT_CREATED"|"STUDIO_COMPONENT_UPDATED"|"STUDIO_COMPONENT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"STUDIO_COMPONENT_CREATE_IN_PROGRESS"|"STUDIO_COMPONENT_UPDATE_IN_PROGRESS"|"STUDIO_COMPONENT_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|string;
-  export type StudioComponentSubtype = "AWS_MANAGED_MICROSOFT_AD"|"AMAZON_FSX_FOR_WINDOWS"|"AMAZON_FSX_FOR_LUSTRE"|"CUSTOM"|string;
+  export type StudioComponentStatusCode = "ACTIVE_DIRECTORY_ALREADY_EXISTS"|"STUDIO_COMPONENT_CREATED"|"STUDIO_COMPONENT_UPDATED"|"STUDIO_COMPONENT_DELETED"|"ENCRYPTION_KEY_ACCESS_DENIED"|"ENCRYPTION_KEY_NOT_FOUND"|"STUDIO_COMPONENT_CREATE_IN_PROGRESS"|"STUDIO_COMPONENT_UPDATE_IN_PROGRESS"|"STUDIO_COMPONENT_DELETE_IN_PROGRESS"|"INTERNAL_ERROR";
+  export type StudioComponentSubtype = "AWS_MANAGED_MICROSOFT_AD"|"AMAZON_FSX_FOR_WINDOWS"|"AMAZON_FSX_FOR_LUSTRE"|"CUSTOM";
   export interface StudioComponentSummary {
     /**
      * The Unix epoch timestamp in seconds for when the resource was created.
@@ -2282,7 +2282,7 @@ declare namespace Nimble {
     updatedBy?: String;
   }
   export type StudioComponentSummaryList = StudioComponentSummary[];
-  export type StudioComponentType = "ACTIVE_DIRECTORY"|"SHARED_FILE_SYSTEM"|"COMPUTE_FARM"|"LICENSE_SERVICE"|"CUSTOM"|string;
+  export type StudioComponentType = "ACTIVE_DIRECTORY"|"SHARED_FILE_SYSTEM"|"COMPUTE_FARM"|"LICENSE_SERVICE"|"CUSTOM";
   export type StudioComponentTypeList = StudioComponentType[];
   export type StudioDisplayName = string;
   export interface StudioEncryptionConfiguration {
@@ -2296,7 +2296,7 @@ declare namespace Nimble {
     keyType: StudioEncryptionConfigurationKeyType;
   }
   export type StudioEncryptionConfigurationKeyArn = string;
-  export type StudioEncryptionConfigurationKeyType = "AWS_OWNED_KEY"|"CUSTOMER_MANAGED_KEY"|string;
+  export type StudioEncryptionConfigurationKeyType = "AWS_OWNED_KEY"|"CUSTOMER_MANAGED_KEY";
   export type StudioList = Studio[];
   export interface StudioMembership {
     /**
@@ -2318,9 +2318,9 @@ declare namespace Nimble {
   }
   export type StudioMembershipList = StudioMembership[];
   export type StudioName = string;
-  export type StudioPersona = "ADMINISTRATOR"|string;
-  export type StudioState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
-  export type StudioStatusCode = "STUDIO_CREATED"|"STUDIO_DELETED"|"STUDIO_UPDATED"|"STUDIO_CREATE_IN_PROGRESS"|"STUDIO_UPDATE_IN_PROGRESS"|"STUDIO_DELETE_IN_PROGRESS"|"STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED"|"STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED"|"STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED"|"AWS_SSO_NOT_ENABLED"|"AWS_SSO_ACCESS_DENIED"|"ROLE_NOT_OWNED_BY_STUDIO_OWNER"|"ROLE_COULD_NOT_BE_ASSUMED"|"INTERNAL_ERROR"|"ENCRYPTION_KEY_NOT_FOUND"|"ENCRYPTION_KEY_ACCESS_DENIED"|"AWS_SSO_CONFIGURATION_REPAIRED"|"AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"|string;
+  export type StudioPersona = "ADMINISTRATOR";
+  export type StudioState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED";
+  export type StudioStatusCode = "STUDIO_CREATED"|"STUDIO_DELETED"|"STUDIO_UPDATED"|"STUDIO_CREATE_IN_PROGRESS"|"STUDIO_UPDATE_IN_PROGRESS"|"STUDIO_DELETE_IN_PROGRESS"|"STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED"|"STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED"|"STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED"|"AWS_SSO_NOT_ENABLED"|"AWS_SSO_ACCESS_DENIED"|"ROLE_NOT_OWNED_BY_STUDIO_OWNER"|"ROLE_COULD_NOT_BE_ASSUMED"|"INTERNAL_ERROR"|"ENCRYPTION_KEY_NOT_FOUND"|"ENCRYPTION_KEY_ACCESS_DENIED"|"AWS_SSO_CONFIGURATION_REPAIRED"|"AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS";
   export interface TagResourceRequest {
     /**
      *  The Amazon Resource Name (ARN) of the resource you want to add tags to. 

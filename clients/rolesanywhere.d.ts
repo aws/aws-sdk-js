@@ -698,7 +698,7 @@ declare namespace RolesAnywhere {
     trustAnchor: TrustAnchorDetail;
   }
   export type TrustAnchorDetails = TrustAnchorDetail[];
-  export type TrustAnchorType = "AWS_ACM_PCA"|"CERTIFICATE_BUNDLE"|"SELF_SIGNED_REPOSITORY"|string;
+  export type TrustAnchorType = "AWS_ACM_PCA"|"CERTIFICATE_BUNDLE"|"SELF_SIGNED_REPOSITORY";
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.

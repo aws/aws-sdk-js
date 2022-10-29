@@ -320,7 +320,7 @@ declare namespace Glacier {
     vaultName: string;
   }
   export type AccessControlPolicyList = Grant[];
-  export type ActionCode = "ArchiveRetrieval"|"InventoryRetrieval"|"Select"|string;
+  export type ActionCode = "ArchiveRetrieval"|"InventoryRetrieval"|"Select";
   export interface AddTagsToVaultInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -397,7 +397,7 @@ declare namespace Glacier {
      */
     QuoteCharacter?: string;
   }
-  export type CannedACL = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
+  export type CannedACL = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control";
   export interface CompleteMultipartUploadInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -576,9 +576,9 @@ declare namespace Glacier {
      */
     KMSContext?: string;
   }
-  export type EncryptionType = "aws:kms"|"AES256"|string;
-  export type ExpressionType = "SQL"|string;
-  export type FileHeaderInfo = "USE"|"IGNORE"|"NONE"|string;
+  export type EncryptionType = "aws:kms"|"AES256";
+  export type ExpressionType = "SQL";
+  export type FileHeaderInfo = "USE"|"IGNORE"|"NONE";
   export interface GetDataRetrievalPolicyInput {
     /**
      * The AccountId value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID. 
@@ -1175,7 +1175,7 @@ declare namespace Glacier {
      */
     SHA256TreeHash?: string;
   }
-  export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
+  export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP";
   export interface ProvisionedCapacityDescription {
     /**
      * The ID that identifies the provisioned capacity unit.
@@ -1203,7 +1203,7 @@ declare namespace Glacier {
      */
     capacityId?: string;
   }
-  export type QuoteFields = "ALWAYS"|"ASNEEDED"|string;
+  export type QuoteFields = "ALWAYS"|"ASNEEDED";
   export interface RemoveTagsFromVaultInput {
     /**
      * The AccountId value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
@@ -1309,14 +1309,14 @@ declare namespace Glacier {
     vaultNotificationConfig?: VaultNotificationConfig;
   }
   export type Size = number;
-  export type StatusCode = "InProgress"|"Succeeded"|"Failed"|string;
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|string;
+  export type StatusCode = "InProgress"|"Succeeded"|"Failed";
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA";
   export type Stream = Buffer|Uint8Array|Blob|string|Readable;
   export type TagKey = string;
   export type TagKeyList = string[];
   export type TagMap = {[key: string]: TagValue};
   export type TagValue = string;
-  export type Type = "AmazonCustomerByEmail"|"CanonicalUser"|"Group"|string;
+  export type Type = "AmazonCustomerByEmail"|"CanonicalUser"|"Group";
   export interface UploadArchiveInput {
     /**
      * The name of the vault.

@@ -120,7 +120,7 @@ declare namespace Cloud9 {
   export type AutomaticStopTimeMinutes = number;
   export type BoundedEnvironmentIdList = EnvironmentId[];
   export type ClientRequestToken = string;
-  export type ConnectionType = "CONNECT_SSH"|"CONNECT_SSM"|string;
+  export type ConnectionType = "CONNECT_SSH"|"CONNECT_SSM";
   export interface CreateEnvironmentEC2Request {
     /**
      * The name of the environment to create. This name is visible to other IAM users in the same Amazon Web Services account.
@@ -329,7 +329,7 @@ declare namespace Cloud9 {
      */
     failureResource?: String;
   }
-  export type EnvironmentLifecycleStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
+  export type EnvironmentLifecycleStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED";
   export type EnvironmentList = Environment[];
   export interface EnvironmentMember {
     /**
@@ -355,8 +355,8 @@ declare namespace Cloud9 {
   }
   export type EnvironmentMembersList = EnvironmentMember[];
   export type EnvironmentName = string;
-  export type EnvironmentStatus = "error"|"creating"|"connecting"|"ready"|"stopping"|"stopped"|"deleting"|string;
-  export type EnvironmentType = "ssh"|"ec2"|string;
+  export type EnvironmentStatus = "error"|"creating"|"connecting"|"ready"|"stopping"|"stopped"|"deleting";
+  export type EnvironmentType = "ssh"|"ec2";
   export type ImageId = string;
   export type InstanceType = string;
   export interface ListEnvironmentsRequest {
@@ -391,12 +391,12 @@ declare namespace Cloud9 {
      */
     Tags?: TagList;
   }
-  export type ManagedCredentialsAction = "ENABLE"|"DISABLE"|string;
-  export type ManagedCredentialsStatus = "ENABLED_ON_CREATE"|"ENABLED_BY_OWNER"|"DISABLED_BY_DEFAULT"|"DISABLED_BY_OWNER"|"DISABLED_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_COLLABORATOR"|"PENDING_START_REMOVAL_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_OWNER"|"PENDING_START_REMOVAL_BY_OWNER"|"FAILED_REMOVAL_BY_COLLABORATOR"|"FAILED_REMOVAL_BY_OWNER"|string;
+  export type ManagedCredentialsAction = "ENABLE"|"DISABLE";
+  export type ManagedCredentialsStatus = "ENABLED_ON_CREATE"|"ENABLED_BY_OWNER"|"DISABLED_BY_DEFAULT"|"DISABLED_BY_OWNER"|"DISABLED_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_COLLABORATOR"|"PENDING_START_REMOVAL_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_OWNER"|"PENDING_START_REMOVAL_BY_OWNER"|"FAILED_REMOVAL_BY_COLLABORATOR"|"FAILED_REMOVAL_BY_OWNER";
   export type MaxResults = number;
-  export type MemberPermissions = "read-write"|"read-only"|string;
+  export type MemberPermissions = "read-write"|"read-only";
   export type NullableBoolean = boolean;
-  export type Permissions = "owner"|"read-write"|"read-only"|string;
+  export type Permissions = "owner"|"read-write"|"read-only";
   export type PermissionsList = Permissions[];
   export type String = string;
   export type SubnetId = string;

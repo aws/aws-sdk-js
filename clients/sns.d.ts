@@ -619,7 +619,7 @@ declare namespace SNS {
     Attributes?: TopicAttributesMap;
   }
   export type Iso2CountryCode = string;
-  export type LanguageCodeString = "en-US"|"en-GB"|"es-419"|"es-ES"|"de-DE"|"fr-CA"|"fr-FR"|"it-IT"|"ja-JP"|"pt-BR"|"kr-KR"|"zh-CN"|"zh-TW"|string;
+  export type LanguageCodeString = "en-US"|"en-GB"|"es-419"|"es-ES"|"de-DE"|"fr-CA"|"fr-FR"|"it-IT"|"ja-JP"|"pt-BR"|"kr-KR"|"zh-CN"|"zh-TW";
   export interface ListEndpointsByPlatformApplicationInput {
     /**
      * PlatformApplicationArn for ListEndpointsByPlatformApplicationInput action.
@@ -797,7 +797,7 @@ declare namespace SNS {
      */
     BinaryValue?: Binary;
   }
-  export type NumberCapability = "SMS"|"MMS"|"VOICE"|string;
+  export type NumberCapability = "SMS"|"MMS"|"VOICE";
   export type NumberCapabilityList = NumberCapability[];
   export type OTPCode = string;
   export interface OptInPhoneNumberInput {
@@ -982,7 +982,7 @@ declare namespace SNS {
      */
     Label: label;
   }
-  export type RouteType = "Transactional"|"Promotional"|"Premium"|string;
+  export type RouteType = "Transactional"|"Promotional"|"Premium";
   export interface SMSSandboxPhoneNumber {
     /**
      * The destination phone number.
@@ -994,7 +994,7 @@ declare namespace SNS {
     Status?: SMSSandboxPhoneNumberVerificationStatus;
   }
   export type SMSSandboxPhoneNumberList = SMSSandboxPhoneNumber[];
-  export type SMSSandboxPhoneNumberVerificationStatus = "Pending"|"Verified"|string;
+  export type SMSSandboxPhoneNumberVerificationStatus = "Pending"|"Verified";
   export interface SetEndpointAttributesInput {
     /**
      * EndpointArn used for SetEndpointAttributes action.

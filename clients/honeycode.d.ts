@@ -385,7 +385,7 @@ declare namespace Honeycode {
     columnMap?: ImportColumnMap;
   }
   export type Email = string;
-  export type ErrorCode = "ACCESS_DENIED"|"INVALID_URL_ERROR"|"INVALID_IMPORT_OPTIONS_ERROR"|"INVALID_TABLE_ID_ERROR"|"INVALID_TABLE_COLUMN_ID_ERROR"|"TABLE_NOT_FOUND_ERROR"|"FILE_EMPTY_ERROR"|"INVALID_FILE_TYPE_ERROR"|"FILE_PARSING_ERROR"|"FILE_SIZE_LIMIT_ERROR"|"FILE_NOT_FOUND_ERROR"|"UNKNOWN_ERROR"|"RESOURCE_NOT_FOUND_ERROR"|"SYSTEM_LIMIT_ERROR"|string;
+  export type ErrorCode = "ACCESS_DENIED"|"INVALID_URL_ERROR"|"INVALID_IMPORT_OPTIONS_ERROR"|"INVALID_TABLE_ID_ERROR"|"INVALID_TABLE_COLUMN_ID_ERROR"|"TABLE_NOT_FOUND_ERROR"|"FILE_EMPTY_ERROR"|"INVALID_FILE_TYPE_ERROR"|"FILE_PARSING_ERROR"|"FILE_SIZE_LIMIT_ERROR"|"FILE_NOT_FOUND_ERROR"|"UNKNOWN_ERROR"|"RESOURCE_NOT_FOUND_ERROR"|"SYSTEM_LIMIT_ERROR";
   export type Fact = string;
   export type FactList = Fact[];
   export interface FailedBatchItem {
@@ -409,7 +409,7 @@ declare namespace Honeycode {
      */
     contextRowId?: RowId;
   }
-  export type Format = "AUTO"|"NUMBER"|"CURRENCY"|"DATE"|"TIME"|"DATE_TIME"|"PERCENTAGE"|"TEXT"|"ACCOUNTING"|"CONTACT"|"ROWLINK"|"ROWSET"|string;
+  export type Format = "AUTO"|"NUMBER"|"CURRENCY"|"DATE"|"TIME"|"DATE_TIME"|"PERCENTAGE"|"TEXT"|"ACCOUNTING"|"CONTACT"|"ROWLINK"|"ROWSET";
   export type FormattedValue = string;
   export type FormattedValuesList = FormattedValue[];
   export type Formula = string;
@@ -456,7 +456,7 @@ declare namespace Honeycode {
   export type HasHeaderRow = boolean;
   export type IgnoreEmptyRows = boolean;
   export type ImportColumnMap = {[key: string]: SourceDataColumnProperties};
-  export type ImportDataCharacterEncoding = "UTF-8"|"US-ASCII"|"ISO-8859-1"|"UTF-16BE"|"UTF-16LE"|"UTF-16"|string;
+  export type ImportDataCharacterEncoding = "UTF-8"|"US-ASCII"|"ISO-8859-1"|"UTF-16BE"|"UTF-16LE"|"UTF-16";
   export interface ImportDataSource {
     /**
      * The configuration parameters for the data source of the import
@@ -489,7 +489,7 @@ declare namespace Honeycode {
      */
     delimitedTextOptions?: DelimitedTextImportOptions;
   }
-  export type ImportSourceDataFormat = "DELIMITED_TEXT"|string;
+  export type ImportSourceDataFormat = "DELIMITED_TEXT";
   export interface InvokeScreenAutomationRequest {
     /**
      * The ID of the workbook that contains the screen automation.
@@ -801,7 +801,7 @@ declare namespace Honeycode {
      */
     dataSource: ImportDataSource;
   }
-  export type TableDataImportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type TableDataImportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED";
   export type TableName = string;
   export interface TableRow {
     /**
@@ -855,7 +855,7 @@ declare namespace Honeycode {
     cellsToUpdate: RowDataInput;
   }
   export type UpdateRowDataList = UpdateRowData[];
-  export type UpsertAction = "UPDATED"|"APPENDED"|string;
+  export type UpsertAction = "UPDATED"|"APPENDED";
   export interface UpsertRowData {
     /**
      *  An external identifier that represents a single item in the request that is being upserted as part of the BatchUpsertTableRows request. This can be any string that you can use to identify the item in the request. The BatchUpsertTableRows API puts the batch item id in the results to allow you to link data in the request to data in the results. 

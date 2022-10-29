@@ -333,7 +333,7 @@ declare namespace ResourceGroups {
   export type GroupConfigurationParameterName = string;
   export type GroupConfigurationParameterValue = string;
   export type GroupConfigurationParameterValueList = GroupConfigurationParameterValue[];
-  export type GroupConfigurationStatus = "UPDATING"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string;
+  export type GroupConfigurationStatus = "UPDATING"|"UPDATE_COMPLETE"|"UPDATE_FAILED";
   export type GroupConfigurationType = string;
   export interface GroupFilter {
     /**
@@ -346,7 +346,7 @@ declare namespace ResourceGroups {
     Values: GroupFilterValues;
   }
   export type GroupFilterList = GroupFilter[];
-  export type GroupFilterName = "resource-type"|"configuration-type"|string;
+  export type GroupFilterName = "resource-type"|"configuration-type";
   export type GroupFilterValue = string;
   export type GroupFilterValues = GroupFilterValue[];
   export interface GroupIdentifier {
@@ -506,10 +506,10 @@ declare namespace ResourceGroups {
      */
     Message?: QueryErrorMessage;
   }
-  export type QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"|"CLOUDFORMATION_STACK_NOT_EXISTING"|string;
+  export type QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"|"CLOUDFORMATION_STACK_NOT_EXISTING";
   export type QueryErrorList = QueryError[];
   export type QueryErrorMessage = string;
-  export type QueryType = "TAG_FILTERS_1_0"|"CLOUDFORMATION_STACK_1_0"|string;
+  export type QueryType = "TAG_FILTERS_1_0"|"CLOUDFORMATION_STACK_1_0";
   export type ResourceArn = string;
   export type ResourceArnList = ResourceArn[];
   export interface ResourceFilter {
@@ -523,7 +523,7 @@ declare namespace ResourceGroups {
     Values: ResourceFilterValues;
   }
   export type ResourceFilterList = ResourceFilter[];
-  export type ResourceFilterName = "resource-type"|string;
+  export type ResourceFilterName = "resource-type";
   export type ResourceFilterValue = string;
   export type ResourceFilterValues = ResourceFilterValue[];
   export interface ResourceIdentifier {
@@ -553,7 +553,7 @@ declare namespace ResourceGroups {
      */
     Name?: ResourceStatusValue;
   }
-  export type ResourceStatusValue = "PENDING"|string;
+  export type ResourceStatusValue = "PENDING";
   export type ResourceType = string;
   export interface SearchResourcesInput {
     /**

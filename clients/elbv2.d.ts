@@ -361,7 +361,7 @@ declare namespace ELBv2 {
     ForwardConfig?: ForwardActionConfig;
   }
   export type ActionOrder = number;
-  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"authenticate-cognito"|"redirect"|"fixed-response"|string;
+  export type ActionTypeEnum = "forward"|"authenticate-oidc"|"authenticate-cognito"|"redirect"|"fixed-response";
   export type Actions = Action[];
   export interface AddListenerCertificatesInput {
     /**
@@ -397,7 +397,7 @@ declare namespace ELBv2 {
   export type AuthenticateCognitoActionAuthenticationRequestExtraParams = {[key: string]: AuthenticateCognitoActionAuthenticationRequestParamValue};
   export type AuthenticateCognitoActionAuthenticationRequestParamName = string;
   export type AuthenticateCognitoActionAuthenticationRequestParamValue = string;
-  export type AuthenticateCognitoActionConditionalBehaviorEnum = "deny"|"allow"|"authenticate"|string;
+  export type AuthenticateCognitoActionConditionalBehaviorEnum = "deny"|"allow"|"authenticate";
   export interface AuthenticateCognitoActionConfig {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
@@ -444,7 +444,7 @@ declare namespace ELBv2 {
   export type AuthenticateOidcActionAuthorizationEndpoint = string;
   export type AuthenticateOidcActionClientId = string;
   export type AuthenticateOidcActionClientSecret = string;
-  export type AuthenticateOidcActionConditionalBehaviorEnum = "deny"|"allow"|"authenticate"|string;
+  export type AuthenticateOidcActionConditionalBehaviorEnum = "deny"|"allow"|"authenticate";
   export interface AuthenticateOidcActionConfig {
     /**
      * The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path.
@@ -1084,7 +1084,7 @@ declare namespace ELBv2 {
   }
   export type IPv6Address = string;
   export type IpAddress = string;
-  export type IpAddressType = "ipv4"|"dualstack"|string;
+  export type IpAddressType = "ipv4"|"dualstack";
   export type IsDefault = boolean;
   export interface Limit {
     /**
@@ -1225,7 +1225,7 @@ declare namespace ELBv2 {
   export type LoadBalancerAttributes = LoadBalancerAttribute[];
   export type LoadBalancerName = string;
   export type LoadBalancerNames = LoadBalancerName[];
-  export type LoadBalancerSchemeEnum = "internet-facing"|"internal"|string;
+  export type LoadBalancerSchemeEnum = "internet-facing"|"internal";
   export interface LoadBalancerState {
     /**
      * The state code. The initial state of the load balancer is provisioning. After the load balancer is fully set up and ready to route traffic, its state is active. If load balancer is routing traffic but does not have the resources it needs to scale, its state isactive_impaired. If the load balancer could not be set up, its state is failed.
@@ -1236,8 +1236,8 @@ declare namespace ELBv2 {
      */
     Reason?: StateReason;
   }
-  export type LoadBalancerStateEnum = "active"|"provisioning"|"active_impaired"|"failed"|string;
-  export type LoadBalancerTypeEnum = "application"|"network"|"gateway"|string;
+  export type LoadBalancerStateEnum = "active"|"provisioning"|"active_impaired"|"failed";
+  export type LoadBalancerTypeEnum = "application"|"network"|"gateway";
   export type LoadBalancers = LoadBalancer[];
   export type Marker = string;
   export interface Matcher {
@@ -1399,7 +1399,7 @@ declare namespace ELBv2 {
   }
   export type Port = number;
   export type PrivateIPv4Address = string;
-  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|"TCP_UDP"|"GENEVE"|string;
+  export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|"UDP"|"TCP_UDP"|"GENEVE";
   export type ProtocolVersion = string;
   export interface QueryStringConditionConfig {
     /**
@@ -1449,7 +1449,7 @@ declare namespace ELBv2 {
   export type RedirectActionPort = string;
   export type RedirectActionProtocol = string;
   export type RedirectActionQuery = string;
-  export type RedirectActionStatusCodeEnum = "HTTP_301"|"HTTP_302"|string;
+  export type RedirectActionStatusCodeEnum = "HTTP_301"|"HTTP_302";
   export interface RegisterTargetsInput {
     /**
      * The Amazon Resource Name (ARN) of the target group.
@@ -1816,7 +1816,7 @@ declare namespace ELBv2 {
   export type TargetGroupAttributeKey = string;
   export type TargetGroupAttributeValue = string;
   export type TargetGroupAttributes = TargetGroupAttribute[];
-  export type TargetGroupIpAddressTypeEnum = "ipv4"|"ipv6"|string;
+  export type TargetGroupIpAddressTypeEnum = "ipv4"|"ipv6";
   export type TargetGroupList = TargetGroupTuple[];
   export type TargetGroupName = string;
   export type TargetGroupNames = TargetGroupName[];
@@ -1873,10 +1873,10 @@ declare namespace ELBv2 {
     TargetHealth?: TargetHealth;
   }
   export type TargetHealthDescriptions = TargetHealthDescription[];
-  export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Target.HealthCheckDisabled"|"Elb.InternalError"|string;
-  export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable"|string;
+  export type TargetHealthReasonEnum = "Elb.RegistrationInProgress"|"Elb.InitialHealthChecking"|"Target.ResponseCodeMismatch"|"Target.Timeout"|"Target.FailedHealthChecks"|"Target.NotRegistered"|"Target.NotInUse"|"Target.DeregistrationInProgress"|"Target.InvalidState"|"Target.IpUnusable"|"Target.HealthCheckDisabled"|"Elb.InternalError";
+  export type TargetHealthStateEnum = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable";
   export type TargetId = string;
-  export type TargetTypeEnum = "instance"|"ip"|"lambda"|"alb"|string;
+  export type TargetTypeEnum = "instance"|"ip"|"lambda"|"alb";
   export type VpcId = string;
   export type ZoneName = string;
   /**

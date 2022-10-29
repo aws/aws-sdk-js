@@ -141,7 +141,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     CompositedVideo: CompositedVideoConcatenationConfiguration;
   }
-  export type ArtifactsConcatenationState = "Enabled"|"Disabled"|string;
+  export type ArtifactsConcatenationState = "Enabled"|"Disabled";
   export interface ArtifactsConfiguration {
     /**
      * The configuration for the audio artifacts.
@@ -160,23 +160,23 @@ declare namespace ChimeSDKMediaPipelines {
      */
     CompositedVideo?: CompositedVideoArtifactsConfiguration;
   }
-  export type ArtifactsState = "Enabled"|"Disabled"|string;
+  export type ArtifactsState = "Enabled"|"Disabled";
   export type AttendeeIdList = GuidString[];
-  export type AudioArtifactsConcatenationState = "Enabled"|string;
+  export type AudioArtifactsConcatenationState = "Enabled";
   export interface AudioArtifactsConfiguration {
     /**
      * The MUX type of the audio artifact configuration object.
      */
     MuxType: AudioMuxType;
   }
-  export type AudioChannelsOption = "Stereo"|"Mono"|string;
+  export type AudioChannelsOption = "Stereo"|"Mono";
   export interface AudioConcatenationConfiguration {
     /**
      * Enables the name object, where name is the name of the configuration object, such as AudioConcatenation.
      */
     State: AudioArtifactsConcatenationState;
   }
-  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo"|string;
+  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo";
   export type AudioSampleRateOption = string;
   export interface ChimeSdkMeetingConcatenationConfiguration {
     /**
@@ -244,7 +244,7 @@ declare namespace ChimeSDKMediaPipelines {
     S3BucketSinkConfiguration: S3BucketSinkConfiguration;
   }
   export type ConcatenationSinkList = ConcatenationSink[];
-  export type ConcatenationSinkType = "S3Bucket"|string;
+  export type ConcatenationSinkType = "S3Bucket";
   export interface ConcatenationSource {
     /**
      * The type of concatenation source in a configuration object.
@@ -256,7 +256,7 @@ declare namespace ChimeSDKMediaPipelines {
     MediaCapturePipelineSourceConfiguration: MediaCapturePipelineSourceConfiguration;
   }
   export type ConcatenationSourceList = ConcatenationSource[];
-  export type ConcatenationSourceType = "MediaCapturePipeline"|string;
+  export type ConcatenationSourceType = "MediaCapturePipeline";
   export interface ContentArtifactsConfiguration {
     /**
      * Indicates whether the content artifact is enabled or disabled.
@@ -273,8 +273,8 @@ declare namespace ChimeSDKMediaPipelines {
      */
     State: ArtifactsConcatenationState;
   }
-  export type ContentMuxType = "ContentOnly"|string;
-  export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical"|string;
+  export type ContentMuxType = "ContentOnly";
+  export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical";
   export interface CreateMediaCapturePipelineRequest {
     /**
      * Source type from which the media artifacts are captured. A Chime SDK Meeting is the only supported source.
@@ -415,7 +415,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export type GuidString = string;
   export type Iso8601Timestamp = Date;
-  export type LayoutOption = "GridView"|string;
+  export type LayoutOption = "GridView";
   export interface ListMediaCapturePipelinesRequest {
     /**
      * The token used to retrieve the next page of results.
@@ -468,7 +468,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     Tags?: TagList;
   }
-  export type LiveConnectorMuxType = "AudioWithCompositedVideo"|"AudioWithActiveSpeakerVideo"|string;
+  export type LiveConnectorMuxType = "AudioWithCompositedVideo"|"AudioWithActiveSpeakerVideo";
   export interface LiveConnectorRTMPConfiguration {
     /**
      * The URL of the RTMP configuration.
@@ -494,7 +494,7 @@ declare namespace ChimeSDKMediaPipelines {
     RTMPConfiguration: LiveConnectorRTMPConfiguration;
   }
   export type LiveConnectorSinkList = LiveConnectorSinkConfiguration[];
-  export type LiveConnectorSinkType = "RTMP"|string;
+  export type LiveConnectorSinkType = "RTMP";
   export interface LiveConnectorSourceConfiguration {
     /**
      * The source configuration's media source type.
@@ -506,7 +506,7 @@ declare namespace ChimeSDKMediaPipelines {
     ChimeSdkMeetingLiveConnectorConfiguration: ChimeSdkMeetingLiveConnectorConfiguration;
   }
   export type LiveConnectorSourceList = LiveConnectorSourceConfiguration[];
-  export type LiveConnectorSourceType = "ChimeSdkMeeting"|string;
+  export type LiveConnectorSourceType = "ChimeSdkMeeting";
   export interface MediaCapturePipeline {
     /**
      * The ID of a media pipeline.
@@ -645,9 +645,9 @@ declare namespace ChimeSDKMediaPipelines {
     MediaConcatenationPipeline?: MediaConcatenationPipeline;
   }
   export type MediaPipelineList = MediaPipelineSummary[];
-  export type MediaPipelineSinkType = "S3Bucket"|string;
-  export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
-  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
+  export type MediaPipelineSinkType = "S3Bucket";
+  export type MediaPipelineSourceType = "ChimeSdkMeeting";
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped";
   export interface MediaPipelineSummary {
     /**
      * The ID of the media pipeline in the summary.
@@ -670,8 +670,8 @@ declare namespace ChimeSDKMediaPipelines {
      */
     PresenterPosition?: PresenterPosition;
   }
-  export type PresenterPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string;
-  export type ResolutionOption = "HD"|"FHD"|string;
+  export type PresenterPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight";
+  export type ResolutionOption = "HD"|"FHD";
   export type ResultMax = number;
   export interface S3BucketSinkConfiguration {
     /**
@@ -757,7 +757,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     State: ArtifactsConcatenationState;
   }
-  export type VideoMuxType = "VideoOnly"|string;
+  export type VideoMuxType = "VideoOnly";
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

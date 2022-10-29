@@ -109,7 +109,7 @@ declare namespace ResourceGroupsTaggingAPI {
      */
     ErrorMessage?: ErrorMessage;
   }
-  export type ErrorCode = "InternalServiceException"|"InvalidParameterException"|string;
+  export type ErrorCode = "InternalServiceException"|"InvalidParameterException";
   export type ErrorMessage = string;
   export type ExcludeCompliantResources = boolean;
   export type FailedResourcesMap = {[key: string]: FailureInfo};
@@ -248,7 +248,7 @@ declare namespace ResourceGroupsTaggingAPI {
     TagValues?: TagValuesOutputList;
   }
   export type GroupBy = GroupByAttribute[];
-  export type GroupByAttribute = "TARGET_ID"|"REGION"|"RESOURCE_TYPE"|string;
+  export type GroupByAttribute = "TARGET_ID"|"REGION"|"RESOURCE_TYPE";
   export type IncludeComplianceDetails = boolean;
   export type LastUpdated = string;
   export type MaxResultsGetComplianceSummary = number;
@@ -364,7 +364,7 @@ declare namespace ResourceGroupsTaggingAPI {
   export type TagsPerPage = number;
   export type TargetId = string;
   export type TargetIdFilterList = TargetId[];
-  export type TargetIdType = "ACCOUNT"|"OU"|"ROOT"|string;
+  export type TargetIdType = "ACCOUNT"|"OU"|"ROOT";
   export interface UntagResourcesInput {
     /**
      * Specifies a list of ARNs of the resources that you want to remove tags from. An ARN (Amazon Resource Name) uniquely identifies a resource. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.

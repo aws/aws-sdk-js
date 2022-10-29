@@ -294,7 +294,7 @@ declare namespace MachineLearning {
      */
     ResourceType?: TaggableResourceType;
   }
-  export type Algorithm = "sgd"|string;
+  export type Algorithm = "sgd";
   export type AwsUserArn = string;
   export interface BatchPrediction {
     /**
@@ -347,7 +347,7 @@ declare namespace MachineLearning {
     TotalRecordCount?: LongType;
     InvalidRecordCount?: LongType;
   }
-  export type BatchPredictionFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"IAMUser"|"MLModelId"|"DataSourceId"|"DataURI"|string;
+  export type BatchPredictionFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"IAMUser"|"MLModelId"|"DataSourceId"|"DataURI";
   export type BatchPredictions = BatchPrediction[];
   export type ComparatorValue = string;
   export type ComputeStatistics = boolean;
@@ -593,7 +593,7 @@ declare namespace MachineLearning {
     FinishedAt?: EpochTime;
     StartedAt?: EpochTime;
   }
-  export type DataSourceFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"DataLocationS3"|"IAMUser"|string;
+  export type DataSourceFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"DataLocationS3"|"IAMUser";
   export type DataSources = DataSource[];
   export interface DeleteBatchPredictionInput {
     /**
@@ -931,7 +931,7 @@ declare namespace MachineLearning {
      */
     Tags?: TagList;
   }
-  export type DetailsAttributes = "PredictiveModelType"|"Algorithm"|string;
+  export type DetailsAttributes = "PredictiveModelType"|"Algorithm";
   export type DetailsMap = {[key: string]: DetailsValue};
   export type DetailsValue = string;
   export type EDPPipelineId = string;
@@ -942,7 +942,7 @@ declare namespace MachineLearning {
   export type EDPSubnetId = string;
   export type EntityId = string;
   export type EntityName = string;
-  export type EntityStatus = "PENDING"|"INPROGRESS"|"FAILED"|"COMPLETED"|"DELETED"|string;
+  export type EntityStatus = "PENDING"|"INPROGRESS"|"FAILED"|"COMPLETED"|"DELETED";
   export type EpochTime = Date;
   export interface Evaluation {
     /**
@@ -993,7 +993,7 @@ declare namespace MachineLearning {
     FinishedAt?: EpochTime;
     StartedAt?: EpochTime;
   }
-  export type EvaluationFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"IAMUser"|"MLModelId"|"DataSourceId"|"DataURI"|string;
+  export type EvaluationFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"IAMUser"|"MLModelId"|"DataSourceId"|"DataURI";
   export type Evaluations = Evaluation[];
   export interface GetBatchPredictionInput {
     /**
@@ -1381,9 +1381,9 @@ declare namespace MachineLearning {
     FinishedAt?: EpochTime;
     StartedAt?: EpochTime;
   }
-  export type MLModelFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"IAMUser"|"TrainingDataSourceId"|"RealtimeEndpointStatus"|"MLModelType"|"Algorithm"|"TrainingDataURI"|string;
+  export type MLModelFilterVariable = "CreatedAt"|"LastUpdatedAt"|"Status"|"Name"|"IAMUser"|"TrainingDataSourceId"|"RealtimeEndpointStatus"|"MLModelType"|"Algorithm"|"TrainingDataURI";
   export type MLModelName = string;
-  export type MLModelType = "REGRESSION"|"BINARY"|"MULTICLASS"|string;
+  export type MLModelType = "REGRESSION"|"BINARY"|"MULTICLASS";
   export type MLModels = MLModel[];
   export type Message = string;
   export type PageLimit = number;
@@ -1520,7 +1520,7 @@ declare namespace MachineLearning {
      */
     EndpointStatus?: RealtimeEndpointStatus;
   }
-  export type RealtimeEndpointStatus = "NONE"|"READY"|"UPDATING"|"FAILED"|string;
+  export type RealtimeEndpointStatus = "NONE"|"READY"|"UPDATING"|"FAILED";
   export type Recipe = string;
   export type Record = {[key: string]: VariableValue};
   export type RedshiftClusterIdentifier = string;
@@ -1597,7 +1597,7 @@ declare namespace MachineLearning {
   export type ScoreThreshold = number;
   export type ScoreValue = number;
   export type ScoreValuePerLabelMap = {[key: string]: ScoreValue};
-  export type SortOrder = "asc"|"dsc"|string;
+  export type SortOrder = "asc"|"dsc";
   export type StringType = string;
   export interface Tag {
     /**
@@ -1613,7 +1613,7 @@ declare namespace MachineLearning {
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
   export type TagValue = string;
-  export type TaggableResourceType = "BatchPrediction"|"DataSource"|"Evaluation"|"MLModel"|string;
+  export type TaggableResourceType = "BatchPrediction"|"DataSource"|"Evaluation"|"MLModel";
   export type TrainingParameters = {[key: string]: StringType};
   export interface UpdateBatchPredictionInput {
     /**

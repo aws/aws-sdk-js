@@ -996,7 +996,7 @@ declare namespace AmplifyUIBuilder {
     validationMessage?: String;
   }
   export type FieldsMap = {[key: string]: FieldConfig};
-  export type FixedPosition = "first"|string;
+  export type FixedPosition = "first";
   export type Float = number;
   export interface Form {
     /**
@@ -1048,7 +1048,7 @@ declare namespace AmplifyUIBuilder {
      */
     tags?: Tags;
   }
-  export type FormActionType = "create"|"update"|string;
+  export type FormActionType = "create"|"update";
   export interface FormBindingElement {
     /**
      * The name of the component to retrieve a value from.
@@ -1074,7 +1074,7 @@ declare namespace AmplifyUIBuilder {
      */
     position?: FieldPosition;
   }
-  export type FormButtonsPosition = "top"|"bottom"|"top_and_bottom"|string;
+  export type FormButtonsPosition = "top"|"bottom"|"top_and_bottom";
   export interface FormCTA {
     /**
      * Displays a cancel button.
@@ -1093,7 +1093,7 @@ declare namespace AmplifyUIBuilder {
      */
     submit?: FormButton;
   }
-  export type FormDataSourceType = "DataStore"|"Custom"|string;
+  export type FormDataSourceType = "DataStore"|"Custom";
   export interface FormDataTypeConfig {
     /**
      * The data source type, either an Amplify DataStore model or a custom data type.
@@ -1440,7 +1440,7 @@ declare namespace AmplifyUIBuilder {
   }
   export type SectionalElementMap = {[key: string]: SectionalElement};
   export type SensitiveString = string;
-  export type SortDirection = "ASC"|"DESC"|string;
+  export type SortDirection = "ASC"|"DESC";
   export interface SortProperty {
     /**
      * The direction of the sort, either ascending or descending.
@@ -1538,7 +1538,7 @@ declare namespace AmplifyUIBuilder {
     value?: ThemeValue;
   }
   export type ThemeValuesList = ThemeValues[];
-  export type TokenProviders = "figma"|string;
+  export type TokenProviders = "figma";
   export interface UpdateComponentData {
     /**
      * The data binding information for the component's properties.

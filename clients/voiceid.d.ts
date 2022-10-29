@@ -189,7 +189,7 @@ declare namespace VoiceID {
      */
     AcceptanceThreshold: Score;
   }
-  export type AuthenticationDecision = "ACCEPT"|"REJECT"|"NOT_ENOUGH_SPEECH"|"SPEAKER_NOT_ENROLLED"|"SPEAKER_OPTED_OUT"|"SPEAKER_ID_NOT_PROVIDED"|"SPEAKER_EXPIRED"|string;
+  export type AuthenticationDecision = "ACCEPT"|"REJECT"|"NOT_ENOUGH_SPEECH"|"SPEAKER_NOT_ENROLLED"|"SPEAKER_OPTED_OUT"|"SPEAKER_ID_NOT_PROVIDED"|"SPEAKER_EXPIRED";
   export interface AuthenticationResult {
     /**
      * A timestamp indicating when audio aggregation ended for this authentication result.
@@ -397,7 +397,7 @@ declare namespace VoiceID {
   }
   export type DomainId = string;
   export type DomainName = string;
-  export type DomainStatus = "ACTIVE"|"PENDING"|"SUSPENDED"|string;
+  export type DomainStatus = "ACTIVE"|"PENDING"|"SUSPENDED";
   export type DomainSummaries = DomainSummary[];
   export interface DomainSummary {
     /**
@@ -437,7 +437,7 @@ declare namespace VoiceID {
      */
     UpdatedAt?: Timestamp;
   }
-  export type DuplicateRegistrationAction = "SKIP"|"REGISTER_AS_NEW"|string;
+  export type DuplicateRegistrationAction = "SKIP"|"REGISTER_AS_NEW";
   export interface EnrollmentConfig {
     /**
      *  The action to take when the specified speaker is already enrolled in the specified domain. The default value is SKIP, which skips the enrollment for the existing speaker. Setting the value to OVERWRITE replaces the existing voice prints and enrollment audio stored for that speaker with new data generated from the latest audio.
@@ -494,7 +494,7 @@ declare namespace VoiceID {
      */
     StreamingStatus?: StreamingStatus;
   }
-  export type ExistingEnrollmentAction = "SKIP"|"OVERWRITE"|string;
+  export type ExistingEnrollmentAction = "SKIP"|"OVERWRITE";
   export interface FailureDetails {
     /**
      * A description of the error that caused the batch job failure.
@@ -505,15 +505,15 @@ declare namespace VoiceID {
      */
     StatusCode?: Integer;
   }
-  export type FraudDetectionAction = "IGNORE"|"FAIL"|string;
+  export type FraudDetectionAction = "IGNORE"|"FAIL";
   export interface FraudDetectionConfiguration {
     /**
      * Threshold value for determining whether the speaker is a fraudster. If the detected risk score calculated by Voice ID is higher than the threshold, the speaker is considered a fraudster.
      */
     RiskThreshold: Score;
   }
-  export type FraudDetectionDecision = "HIGH_RISK"|"LOW_RISK"|"NOT_ENOUGH_SPEECH"|string;
-  export type FraudDetectionReason = "KNOWN_FRAUDSTER"|"VOICE_SPOOFING"|string;
+  export type FraudDetectionDecision = "HIGH_RISK"|"LOW_RISK"|"NOT_ENOUGH_SPEECH";
+  export type FraudDetectionReason = "KNOWN_FRAUDSTER"|"VOICE_SPOOFING";
   export type FraudDetectionReasons = FraudDetectionReason[];
   export interface FraudDetectionResult {
     /**
@@ -620,7 +620,7 @@ declare namespace VoiceID {
      */
     RegistrationConfig?: RegistrationConfig;
   }
-  export type FraudsterRegistrationJobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"FAILED"|string;
+  export type FraudsterRegistrationJobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"FAILED";
   export type FraudsterRegistrationJobSummaries = FraudsterRegistrationJobSummary[];
   export interface FraudsterRegistrationJobSummary {
     /**
@@ -858,7 +858,7 @@ declare namespace VoiceID {
      */
     UpdateStatus?: ServerSideEncryptionUpdateStatus;
   }
-  export type ServerSideEncryptionUpdateStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ServerSideEncryptionUpdateStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED";
   export type SessionId = string;
   export type SessionName = string;
   export type SessionNameOrId = string;
@@ -942,7 +942,7 @@ declare namespace VoiceID {
      */
     OutputDataConfig?: OutputDataConfig;
   }
-  export type SpeakerEnrollmentJobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"FAILED"|string;
+  export type SpeakerEnrollmentJobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"FAILED";
   export type SpeakerEnrollmentJobSummaries = SpeakerEnrollmentJobSummary[];
   export interface SpeakerEnrollmentJobSummary {
     /**
@@ -979,7 +979,7 @@ declare namespace VoiceID {
     JobStatus?: SpeakerEnrollmentJobStatus;
   }
   export type SpeakerId = string;
-  export type SpeakerStatus = "ENROLLED"|"EXPIRED"|"OPTED_OUT"|"PENDING"|string;
+  export type SpeakerStatus = "ENROLLED"|"EXPIRED"|"OPTED_OUT"|"PENDING";
   export type SpeakerSummaries = SpeakerSummary[];
   export interface SpeakerSummary {
     /**
@@ -1083,7 +1083,7 @@ declare namespace VoiceID {
      */
     Job?: SpeakerEnrollmentJob;
   }
-  export type StreamingStatus = "PENDING_CONFIGURATION"|"ONGOING"|"ENDED"|string;
+  export type StreamingStatus = "PENDING_CONFIGURATION"|"ONGOING"|"ENDED";
   export type String = string;
   export interface Tag {
     /**

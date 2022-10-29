@@ -1037,7 +1037,7 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
-  export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
+  export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster";
   export interface AquaConfiguration {
     /**
      * This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
@@ -1048,8 +1048,8 @@ declare namespace Redshift {
      */
     AquaConfigurationStatus?: AquaConfigurationStatus;
   }
-  export type AquaConfigurationStatus = "enabled"|"disabled"|"auto"|string;
-  export type AquaStatus = "enabled"|"disabled"|"applying"|string;
+  export type AquaConfigurationStatus = "enabled"|"disabled"|"auto";
+  export type AquaStatus = "enabled"|"disabled"|"applying";
   export interface AssociateDataShareConsumerMessage {
     /**
      * The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.
@@ -1090,7 +1090,7 @@ declare namespace Redshift {
   }
   export type AuthenticationProfileList = AuthenticationProfile[];
   export type AuthenticationProfileNameString = string;
-  export type AuthorizationStatus = "Authorized"|"Revoking"|string;
+  export type AuthorizationStatus = "Authorized"|"Revoking";
   export interface AuthorizeClusterSecurityGroupIngressMessage {
     /**
      * The name of the security group to which the ingress rule is added.
@@ -2279,9 +2279,9 @@ declare namespace Redshift {
   }
   export type DataShareAssociationList = DataShareAssociation[];
   export type DataShareList = DataShare[];
-  export type DataShareStatus = "ACTIVE"|"PENDING_AUTHORIZATION"|"AUTHORIZED"|"DEAUTHORIZED"|"REJECTED"|"AVAILABLE"|string;
-  export type DataShareStatusForConsumer = "ACTIVE"|"AVAILABLE"|string;
-  export type DataShareStatusForProducer = "ACTIVE"|"AUTHORIZED"|"PENDING_AUTHORIZATION"|"DEAUTHORIZED"|"REJECTED"|string;
+  export type DataShareStatus = "ACTIVE"|"PENDING_AUTHORIZATION"|"AUTHORIZED"|"DEAUTHORIZED"|"REJECTED"|"AVAILABLE";
+  export type DataShareStatusForConsumer = "ACTIVE"|"AVAILABLE";
+  export type DataShareStatusForProducer = "ACTIVE"|"AUTHORIZED"|"PENDING_AUTHORIZATION"|"DEAUTHORIZED"|"REJECTED";
   export interface DataTransferProgress {
     /**
      * Describes the status of the cluster. While the transfer is in progress the status is transferringdata.
@@ -3801,7 +3801,7 @@ declare namespace Redshift {
   export type ImportTablesNotStarted = String[];
   export type Integer = number;
   export type IntegerOptional = number;
-  export type LogDestinationType = "s3"|"cloudwatch"|string;
+  export type LogDestinationType = "s3"|"cloudwatch";
   export type LogTypeList = String[];
   export interface LoggingStatus {
     /**
@@ -3853,7 +3853,7 @@ declare namespace Redshift {
      */
     UpdateTargets?: EligibleTracksToUpdateList;
   }
-  export type Mode = "standard"|"high-performance"|string;
+  export type Mode = "standard"|"high-performance";
   export interface ModifyAquaInputMessage {
     /**
      * The identifier of the cluster to be modified.
@@ -4287,7 +4287,7 @@ declare namespace Redshift {
     Values?: ValueStringList;
   }
   export type NodeConfigurationOptionsFilterList = NodeConfigurationOptionsFilter[];
-  export type NodeConfigurationOptionsFilterName = "NodeType"|"NumberOfNodes"|"EstimatedDiskUtilizationPercent"|"Mode"|string;
+  export type NodeConfigurationOptionsFilterName = "NodeType"|"NumberOfNodes"|"EstimatedDiskUtilizationPercent"|"Mode";
   export interface NodeConfigurationOptionsMessage {
     /**
      * A list of valid node configurations.
@@ -4298,7 +4298,7 @@ declare namespace Redshift {
      */
     Marker?: String;
   }
-  export type OperatorType = "eq"|"lt"|"gt"|"le"|"ge"|"in"|"between"|string;
+  export type OperatorType = "eq"|"lt"|"gt"|"le"|"ge"|"in"|"between";
   export interface OrderableClusterOption {
     /**
      * The version of the orderable cluster.
@@ -4366,7 +4366,7 @@ declare namespace Redshift {
      */
     MinimumEngineVersion?: String;
   }
-  export type ParameterApplyType = "static"|"dynamic"|string;
+  export type ParameterApplyType = "static"|"dynamic";
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
   export type PartnerIntegrationAccountId = string;
@@ -4428,7 +4428,7 @@ declare namespace Redshift {
     PartnerName?: PartnerIntegrationPartnerName;
   }
   export type PartnerIntegrationPartnerName = string;
-  export type PartnerIntegrationStatus = "Active"|"Inactive"|"RuntimeFailure"|"ConnectionFailure"|string;
+  export type PartnerIntegrationStatus = "Active"|"Inactive"|"RuntimeFailure"|"ConnectionFailure";
   export type PartnerIntegrationStatusMessage = string;
   export interface PauseClusterMessage {
     /**
@@ -4588,7 +4588,7 @@ declare namespace Redshift {
     TargetReservedNodeOffering?: ReservedNodeOffering;
   }
   export type ReservedNodeConfigurationOptionList = ReservedNodeConfigurationOption[];
-  export type ReservedNodeExchangeActionType = "restore-cluster"|"resize-cluster"|string;
+  export type ReservedNodeExchangeActionType = "restore-cluster"|"resize-cluster";
   export interface ReservedNodeExchangeStatus {
     /**
      * The identifier of the reserved-node exchange request.
@@ -4628,7 +4628,7 @@ declare namespace Redshift {
     TargetReservedNodeCount?: Integer;
   }
   export type ReservedNodeExchangeStatusList = ReservedNodeExchangeStatus[];
-  export type ReservedNodeExchangeStatusType = "REQUESTED"|"PENDING"|"IN_PROGRESS"|"RETRYING"|"SUCCEEDED"|"FAILED"|string;
+  export type ReservedNodeExchangeStatusType = "REQUESTED"|"PENDING"|"IN_PROGRESS"|"RETRYING"|"SUCCEEDED"|"FAILED";
   export type ReservedNodeList = ReservedNode[];
   export interface ReservedNodeOffering {
     /**
@@ -4669,7 +4669,7 @@ declare namespace Redshift {
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
   export type ReservedNodeOfferingList = ReservedNodeOffering[];
-  export type ReservedNodeOfferingType = "Regular"|"Upgradable"|string;
+  export type ReservedNodeOfferingType = "Regular"|"Upgradable";
   export interface ReservedNodeOfferingsMessage {
     /**
      * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
@@ -5112,7 +5112,7 @@ declare namespace Redshift {
     Cluster?: Cluster;
   }
   export type ScheduleDefinitionList = String[];
-  export type ScheduleState = "MODIFYING"|"ACTIVE"|"FAILED"|string;
+  export type ScheduleState = "MODIFYING"|"ACTIVE"|"FAILED";
   export interface ScheduledAction {
     /**
      * The name of the scheduled action. 
@@ -5162,9 +5162,9 @@ declare namespace Redshift {
     Values: ValueStringList;
   }
   export type ScheduledActionFilterList = ScheduledActionFilter[];
-  export type ScheduledActionFilterName = "cluster-identifier"|"iam-role"|string;
+  export type ScheduledActionFilterName = "cluster-identifier"|"iam-role";
   export type ScheduledActionList = ScheduledAction[];
-  export type ScheduledActionState = "ACTIVE"|"DISABLED"|string;
+  export type ScheduledActionState = "ACTIVE"|"DISABLED";
   export type ScheduledActionTimeList = TStamp[];
   export interface ScheduledActionType {
     /**
@@ -5180,7 +5180,7 @@ declare namespace Redshift {
      */
     ResumeCluster?: ResumeClusterMessage;
   }
-  export type ScheduledActionTypeValues = "ResizeCluster"|"PauseCluster"|"ResumeCluster"|string;
+  export type ScheduledActionTypeValues = "ResizeCluster"|"PauseCluster"|"ResumeCluster";
   export interface ScheduledActionsMessage {
     /**
      * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
@@ -5331,7 +5331,7 @@ declare namespace Redshift {
      */
     SnapshotRetentionStartTime?: TStamp;
   }
-  export type SnapshotAttributeToSortBy = "SOURCE_TYPE"|"TOTAL_SIZE"|"CREATE_TIME"|string;
+  export type SnapshotAttributeToSortBy = "SOURCE_TYPE"|"TOTAL_SIZE"|"CREATE_TIME";
   export interface SnapshotCopyGrant {
     /**
      * The name of the snapshot copy grant.
@@ -5429,9 +5429,9 @@ declare namespace Redshift {
     SortOrder?: SortByOrder;
   }
   export type SnapshotSortingEntityList = SnapshotSortingEntity[];
-  export type SortByOrder = "ASC"|"DESC"|string;
+  export type SortByOrder = "ASC"|"DESC";
   export type SourceIdsList = String[];
-  export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action"|string;
+  export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action";
   export type String = string;
   export interface Subnet {
     /**
@@ -5533,7 +5533,7 @@ declare namespace Redshift {
      */
     Marker?: String;
   }
-  export type TableRestoreStatusType = "PENDING"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"CANCELED"|string;
+  export type TableRestoreStatusType = "PENDING"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"CANCELED";
   export interface Tag {
     /**
      * The key, or name, for the resource tag.
@@ -5657,9 +5657,9 @@ declare namespace Redshift {
      */
     Tags?: TagList;
   }
-  export type UsageLimitBreachAction = "log"|"emit-metric"|"disable"|string;
-  export type UsageLimitFeatureType = "spectrum"|"concurrency-scaling"|"cross-region-datasharing"|string;
-  export type UsageLimitLimitType = "time"|"data-scanned"|string;
+  export type UsageLimitBreachAction = "log"|"emit-metric"|"disable";
+  export type UsageLimitFeatureType = "spectrum"|"concurrency-scaling"|"cross-region-datasharing";
+  export type UsageLimitLimitType = "time"|"data-scanned";
   export interface UsageLimitList {
     /**
      * Contains the output from the DescribeUsageLimits action. 
@@ -5670,7 +5670,7 @@ declare namespace Redshift {
      */
     Marker?: String;
   }
-  export type UsageLimitPeriod = "daily"|"weekly"|"monthly"|string;
+  export type UsageLimitPeriod = "daily"|"weekly"|"monthly";
   export type UsageLimits = UsageLimit[];
   export type ValueStringList = String[];
   export interface VpcEndpoint {

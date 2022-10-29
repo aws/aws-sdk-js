@@ -385,7 +385,7 @@ declare namespace Resiliencehub {
   }
   export type AlarmRecommendationList = AlarmRecommendation[];
   export type AlarmReferenceIdList = String500[];
-  export type AlarmType = "Metric"|"Composite"|"Canary"|"Logs"|"Event"|string;
+  export type AlarmType = "Metric"|"Composite"|"Canary"|"Logs"|"Event";
   export interface App {
     /**
      * The Amazon Resource Name (ARN) of the application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference.
@@ -502,7 +502,7 @@ declare namespace Resiliencehub {
      */
     tags?: TagMap;
   }
-  export type AppAssessmentScheduleType = "Disabled"|"Daily"|string;
+  export type AppAssessmentScheduleType = "Disabled"|"Daily";
   export interface AppAssessmentSummary {
     /**
      * The Amazon Resource Name (ARN) of the application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference.
@@ -554,7 +554,7 @@ declare namespace Resiliencehub {
     startTime?: TimeStamp;
   }
   export type AppAssessmentSummaryList = AppAssessmentSummary[];
-  export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected"|string;
+  export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected";
   export interface AppComponent {
     /**
      * The name of the application component.
@@ -592,7 +592,7 @@ declare namespace Resiliencehub {
     status?: ComplianceStatus;
   }
   export type AppComponentList = AppComponent[];
-  export type AppStatusType = "Active"|"Deleting"|string;
+  export type AppStatusType = "Active"|"Deleting";
   export interface AppSummary {
     /**
      * The Amazon Resource Name (ARN) of the application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference.
@@ -639,13 +639,13 @@ declare namespace Resiliencehub {
   export type Arn = string;
   export type ArnList = Arn[];
   export type AssessmentCompliance = {[key: string]: DisruptionCompliance};
-  export type AssessmentInvoker = "User"|"System"|string;
-  export type AssessmentStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
+  export type AssessmentInvoker = "User"|"System";
+  export type AssessmentStatus = "Pending"|"InProgress"|"Failed"|"Success";
   export type AssessmentStatusList = AssessmentStatus[];
   export type AwsRegion = string;
   export type BooleanOptional = boolean;
   export type ClientToken = string;
-  export type ComplianceStatus = "PolicyBreached"|"PolicyMet"|string;
+  export type ComplianceStatus = "PolicyBreached"|"PolicyMet";
   export type ComponentCompliancesList = AppComponentCompliance[];
   export interface ComponentRecommendation {
     /**
@@ -705,7 +705,7 @@ declare namespace Resiliencehub {
     suggestedChanges?: SuggestedChangesList;
   }
   export type ConfigRecommendationList = ConfigRecommendation[];
-  export type ConfigRecommendationOptimizationType = "LeastCost"|"LeastChange"|"BestAZRecovery"|"LeastErrors"|"BestAttainable"|"BestRegionRecovery"|string;
+  export type ConfigRecommendationOptimizationType = "LeastCost"|"LeastChange"|"BestAZRecovery"|"LeastErrors"|"BestAttainable"|"BestRegionRecovery";
   export interface Cost {
     /**
      * The cost amount.
@@ -720,7 +720,7 @@ declare namespace Resiliencehub {
      */
     frequency: CostFrequency;
   }
-  export type CostFrequency = "Hourly"|"Daily"|"Monthly"|"Yearly"|string;
+  export type CostFrequency = "Hourly"|"Daily"|"Monthly"|"Yearly";
   export interface CreateAppRequest {
     /**
      *  Assessment execution schedule with 'Daily' or 'Disabled' values. 
@@ -831,7 +831,7 @@ declare namespace Resiliencehub {
   }
   export type CurrencyCode = string;
   export type CustomerId = string;
-  export type DataLocationConstraint = "AnyLocation"|"SameContinent"|"SameCountry"|string;
+  export type DataLocationConstraint = "AnyLocation"|"SameContinent"|"SameCountry";
   export interface DeleteAppAssessmentRequest {
     /**
      * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference.
@@ -1076,7 +1076,7 @@ declare namespace Resiliencehub {
   }
   export type DisruptionPolicy = {[key: string]: FailurePolicy};
   export type DisruptionResiliencyScore = {[key: string]: Double};
-  export type DisruptionType = "Software"|"Hardware"|"AZ"|"Region"|string;
+  export type DisruptionType = "Software"|"Hardware"|"AZ"|"Region";
   export type DocumentName = string;
   export type Double = number;
   export type EntityDescription = string;
@@ -1085,7 +1085,7 @@ declare namespace Resiliencehub {
   export type EntityNameList = EntityName[];
   export type EntityVersion = string;
   export type ErrorMessage = string;
-  export type EstimatedCostTier = "L1"|"L2"|"L3"|"L4"|string;
+  export type EstimatedCostTier = "L1"|"L2"|"L3"|"L4";
   export interface FailurePolicy {
     /**
      * The Recovery Point Objective (RPO), in seconds.
@@ -1096,7 +1096,7 @@ declare namespace Resiliencehub {
      */
     rtoInSecs: Seconds;
   }
-  export type HaArchitecture = "MultiSite"|"WarmStandby"|"PilotLight"|"BackupAndRestore"|"NoRecoveryPlan"|string;
+  export type HaArchitecture = "MultiSite"|"WarmStandby"|"PilotLight"|"BackupAndRestore"|"NoRecoveryPlan";
   export interface ImportResourcesToDraftAppVersionRequest {
     /**
      * The Amazon Resource Name (ARN) of the application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference.
@@ -1565,7 +1565,7 @@ declare namespace Resiliencehub {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type PhysicalIdentifierType = "Arn"|"Native"|string;
+  export type PhysicalIdentifierType = "Arn"|"Native";
   export interface PhysicalResource {
     /**
      * The application components that belong to this resource.
@@ -1644,7 +1644,7 @@ declare namespace Resiliencehub {
     appVersion?: EntityVersion;
   }
   export type RecommendationCompliance = {[key: string]: RecommendationDisruptionCompliance};
-  export type RecommendationComplianceStatus = "BreachedUnattainable"|"BreachedCanMeet"|"MetCanImprove"|string;
+  export type RecommendationComplianceStatus = "BreachedUnattainable"|"BreachedCanMeet"|"MetCanImprove";
   export interface RecommendationDisruptionCompliance {
     /**
      * The expected compliance status after applying the recommended configuration change.
@@ -1746,7 +1746,7 @@ declare namespace Resiliencehub {
     templatesLocation?: S3Location;
   }
   export type RecommendationTemplateList = RecommendationTemplate[];
-  export type RecommendationTemplateStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
+  export type RecommendationTemplateStatus = "Pending"|"InProgress"|"Failed"|"Success";
   export type RecommendationTemplateStatusList = RecommendationTemplateStatus[];
   export interface RemoveDraftAppVersionResourceMappingsRequest {
     /**
@@ -1784,7 +1784,7 @@ declare namespace Resiliencehub {
      */
     appVersion?: EntityVersion;
   }
-  export type RenderRecommendationType = "Alarm"|"Sop"|"Test"|string;
+  export type RenderRecommendationType = "Alarm"|"Sop"|"Test";
   export type RenderRecommendationTypeList = RenderRecommendationType[];
   export type ResiliencyPolicies = ResiliencyPolicy[];
   export interface ResiliencyPolicy {
@@ -1825,7 +1825,7 @@ declare namespace Resiliencehub {
      */
     tier?: ResiliencyPolicyTier;
   }
-  export type ResiliencyPolicyTier = "MissionCritical"|"Critical"|"Important"|"CoreServices"|"NonCritical"|string;
+  export type ResiliencyPolicyTier = "MissionCritical"|"Critical"|"Important"|"CoreServices"|"NonCritical";
   export interface ResiliencyScore {
     /**
      * The disruption score for a valid key.
@@ -1889,7 +1889,7 @@ declare namespace Resiliencehub {
      */
     resourceErrors?: ResourceErrorList;
   }
-  export type ResourceImportStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
+  export type ResourceImportStatusType = "Pending"|"InProgress"|"Failed"|"Success";
   export interface ResourceMapping {
     /**
      * The name of the application this resource is mapped to.
@@ -1921,8 +1921,8 @@ declare namespace Resiliencehub {
     terraformSourceName?: String255;
   }
   export type ResourceMappingList = ResourceMapping[];
-  export type ResourceMappingType = "CfnStack"|"Resource"|"AppRegistryApp"|"ResourceGroup"|"Terraform"|string;
-  export type ResourceResolutionStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
+  export type ResourceMappingType = "CfnStack"|"Resource"|"AppRegistryApp"|"ResourceGroup"|"Terraform";
+  export type ResourceResolutionStatusType = "Pending"|"InProgress"|"Failed"|"Success";
   export interface S3Location {
     /**
      * The name of the Amazon S3 bucket.
@@ -1970,7 +1970,7 @@ declare namespace Resiliencehub {
     serviceType: SopServiceType;
   }
   export type SopRecommendationList = SopRecommendation[];
-  export type SopServiceType = "SSM"|string;
+  export type SopServiceType = "SSM";
   export type SpecReferenceId = string;
   export interface StartAppAssessmentRequest {
     /**
@@ -2020,7 +2020,7 @@ declare namespace Resiliencehub {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TemplateFormat = "CfnYaml"|"CfnJson"|string;
+  export type TemplateFormat = "CfnYaml"|"CfnJson";
   export interface TerraformSource {
     /**
      *  The Terraform s3 state file you need to import. 
@@ -2075,8 +2075,8 @@ declare namespace Resiliencehub {
     type?: TestType;
   }
   export type TestRecommendationList = TestRecommendation[];
-  export type TestRisk = "Small"|"Medium"|"High"|string;
-  export type TestType = "Software"|"Hardware"|"AZ"|"Region"|string;
+  export type TestRisk = "Small"|"Medium"|"High";
+  export type TestType = "Software"|"Hardware"|"AZ"|"Region";
   export type TimeStamp = Date;
   export interface UnsupportedResource {
     /**

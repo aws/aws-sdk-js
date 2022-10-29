@@ -92,7 +92,7 @@ declare namespace Pricing {
      */
     Value: String;
   }
-  export type FilterType = "TERM_MATCH"|string;
+  export type FilterType = "TERM_MATCH";
   export type Filters = Filter[];
   export interface GetAttributeValuesRequest {
     /**

@@ -336,7 +336,7 @@ declare namespace GreengrassV2 {
     message?: NonEmptyString;
   }
   export type ClientTokenString = string;
-  export type CloudComponentState = "REQUESTED"|"INITIATED"|"DEPLOYABLE"|"FAILED"|"DEPRECATED"|string;
+  export type CloudComponentState = "REQUESTED"|"INITIATED"|"DEPLOYABLE"|"FAILED"|"DEPRECATED";
   export interface CloudComponentStatus {
     /**
      * The state of the component version.
@@ -413,7 +413,7 @@ declare namespace GreengrassV2 {
      */
     dependencyType?: ComponentDependencyType;
   }
-  export type ComponentDependencyType = "HARD"|"SOFT"|string;
+  export type ComponentDependencyType = "HARD"|"SOFT";
   export interface ComponentDeploymentSpecification {
     /**
      * The version of the component.
@@ -500,7 +500,7 @@ declare namespace GreengrassV2 {
   }
   export type ComponentVersionRequirementMap = {[key: string]: NonEmptyString};
   export type ComponentVersionString = string;
-  export type ComponentVisibilityScope = "PRIVATE"|"PUBLIC"|string;
+  export type ComponentVisibilityScope = "PRIVATE"|"PUBLIC";
   export interface ConnectivityInfo {
     /**
      * An ID for the connectivity information.
@@ -535,7 +535,7 @@ declare namespace GreengrassV2 {
   }
   export type CoreDeviceArchitectureString = string;
   export type CoreDevicePlatformString = string;
-  export type CoreDeviceStatus = "HEALTHY"|"UNHEALTHY"|string;
+  export type CoreDeviceStatus = "HEALTHY"|"UNHEALTHY";
   export type CoreDeviceThingName = string;
   export type CoreDevicesList = CoreDevice[];
   export interface CreateComponentVersionRequest {
@@ -681,15 +681,15 @@ declare namespace GreengrassV2 {
      */
     action?: DeploymentComponentUpdatePolicyAction;
   }
-  export type DeploymentComponentUpdatePolicyAction = "NOTIFY_COMPONENTS"|"SKIP_NOTIFY_COMPONENTS"|string;
+  export type DeploymentComponentUpdatePolicyAction = "NOTIFY_COMPONENTS"|"SKIP_NOTIFY_COMPONENTS";
   export interface DeploymentConfigurationValidationPolicy {
     /**
      * The amount of time in seconds that a component can validate its configuration updates. If the validation time exceeds this timeout, then the deployment proceeds for the device. Default: 30 
      */
     timeoutInSeconds?: OptionalInteger;
   }
-  export type DeploymentFailureHandlingPolicy = "ROLLBACK"|"DO_NOTHING"|string;
-  export type DeploymentHistoryFilter = "ALL"|"LATEST_ONLY"|string;
+  export type DeploymentFailureHandlingPolicy = "ROLLBACK"|"DO_NOTHING";
+  export type DeploymentHistoryFilter = "ALL"|"LATEST_ONLY";
   export type DeploymentID = string;
   export interface DeploymentIoTJobConfiguration {
     /**
@@ -722,7 +722,7 @@ declare namespace GreengrassV2 {
      */
     configurationValidationPolicy?: DeploymentConfigurationValidationPolicy;
   }
-  export type DeploymentStatus = "ACTIVE"|"COMPLETED"|"CANCELED"|"FAILED"|"INACTIVE"|string;
+  export type DeploymentStatus = "ACTIVE"|"COMPLETED"|"CANCELED"|"FAILED"|"INACTIVE";
   export interface DescribeComponentRequest {
     /**
      * The ARN of the component version.
@@ -849,7 +849,7 @@ declare namespace GreengrassV2 {
   export type EffectiveDeploymentErrorStack = EffectiveDeploymentErrorCode[];
   export type EffectiveDeploymentErrorType = string;
   export type EffectiveDeploymentErrorTypeList = EffectiveDeploymentErrorType[];
-  export type EffectiveDeploymentExecutionStatus = "IN_PROGRESS"|"QUEUED"|"FAILED"|"COMPLETED"|"TIMED_OUT"|"CANCELED"|"REJECTED"|string;
+  export type EffectiveDeploymentExecutionStatus = "IN_PROGRESS"|"QUEUED"|"FAILED"|"COMPLETED"|"TIMED_OUT"|"CANCELED"|"REJECTED";
   export interface EffectiveDeploymentStatusDetails {
     /**
      * Contains an ordered list of short error codes that range from the most generic error to the most specific one. The error codes describe the reason for failure whenever the coreDeviceExecutionStatus is in a failed state. The response will be an empty list if there is no error.
@@ -1066,13 +1066,13 @@ declare namespace GreengrassV2 {
      */
     lifecycleStatusCodes?: InstalledComponentLifecycleStatusCodeList;
   }
-  export type InstalledComponentLifecycleState = "NEW"|"INSTALLED"|"STARTING"|"RUNNING"|"STOPPING"|"ERRORED"|"BROKEN"|"FINISHED"|string;
+  export type InstalledComponentLifecycleState = "NEW"|"INSTALLED"|"STARTING"|"RUNNING"|"STOPPING"|"ERRORED"|"BROKEN"|"FINISHED";
   export type InstalledComponentLifecycleStatusCode = string;
   export type InstalledComponentLifecycleStatusCodeList = InstalledComponentLifecycleStatusCode[];
   export type InstalledComponentList = InstalledComponent[];
-  export type InstalledComponentTopologyFilter = "ALL"|"ROOT"|string;
+  export type InstalledComponentTopologyFilter = "ALL"|"ROOT";
   export type IoTJobARN = string;
-  export type IoTJobAbortAction = "CANCEL"|string;
+  export type IoTJobAbortAction = "CANCEL";
   export interface IoTJobAbortConfig {
     /**
      * The list of criteria that define when and how to cancel the configuration deployment.
@@ -1099,7 +1099,7 @@ declare namespace GreengrassV2 {
   }
   export type IoTJobAbortCriteriaList = IoTJobAbortCriteria[];
   export type IoTJobAbortThresholdPercentage = number;
-  export type IoTJobExecutionFailureType = "FAILED"|"REJECTED"|"TIMED_OUT"|"ALL"|string;
+  export type IoTJobExecutionFailureType = "FAILED"|"REJECTED"|"TIMED_OUT"|"ALL";
   export interface IoTJobExecutionsRolloutConfig {
     /**
      * The exponential rate to increase the job rollout rate.
@@ -1195,7 +1195,7 @@ declare namespace GreengrassV2 {
     type: LambdaEventSourceType;
   }
   export type LambdaEventSourceList = LambdaEventSource[];
-  export type LambdaEventSourceType = "PUB_SUB"|"IOT_CORE"|string;
+  export type LambdaEventSourceType = "PUB_SUB"|"IOT_CORE";
   export type LambdaExecArg = string;
   export type LambdaExecArgsList = LambdaExecArg[];
   export interface LambdaExecutionParameters {
@@ -1244,7 +1244,7 @@ declare namespace GreengrassV2 {
      */
     linuxProcessParams?: LambdaLinuxProcessParams;
   }
-  export type LambdaFilesystemPermission = "ro"|"rw"|string;
+  export type LambdaFilesystemPermission = "ro"|"rw";
   export interface LambdaFunctionRecipeSource {
     /**
      * The ARN of the Lambda function. The ARN must include the version of the function to import. You can't use version aliases like $LATEST.
@@ -1271,8 +1271,8 @@ declare namespace GreengrassV2 {
      */
     componentLambdaParameters?: LambdaExecutionParameters;
   }
-  export type LambdaInputPayloadEncodingType = "json"|"binary"|string;
-  export type LambdaIsolationMode = "GreengrassContainer"|"NoContainer"|string;
+  export type LambdaInputPayloadEncodingType = "json"|"binary";
+  export type LambdaIsolationMode = "GreengrassContainer"|"NoContainer";
   export interface LambdaLinuxProcessParams {
     /**
      * The isolation mode for the process that contains the Lambda function. The process can run in an isolated runtime environment inside the IoT Greengrass container, or as a regular process outside any container. Default: GreengrassContainer 
@@ -1506,7 +1506,7 @@ declare namespace GreengrassV2 {
   export type PublisherString = string;
   export type Reason = string;
   export type RecipeBlob = Buffer|Uint8Array|Blob|string;
-  export type RecipeOutputFormat = "JSON"|"YAML"|string;
+  export type RecipeOutputFormat = "JSON"|"YAML";
   export interface ResolveComponentCandidatesRequest {
     /**
      * The platform to use to resolve compatible components.
@@ -1614,7 +1614,7 @@ declare namespace GreengrassV2 {
      */
     message?: String;
   }
-  export type VendorGuidance = "ACTIVE"|"DISCONTINUED"|"DELETED"|string;
+  export type VendorGuidance = "ACTIVE"|"DISCONTINUED"|"DELETED";
   export type connectivityInfoList = ConnectivityInfo[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

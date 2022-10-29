@@ -336,7 +336,7 @@ declare namespace ConnectCases {
   }
   export type Channel = string;
   export type CommentBody = string;
-  export type CommentBodyTextType = "Text/Plain"|string;
+  export type CommentBodyTextType = "Text/Plain";
   export interface CommentContent {
     /**
      * Text in the body of a Comment on a case.
@@ -552,7 +552,7 @@ declare namespace ConnectCases {
   export type DomainArn = string;
   export type DomainId = string;
   export type DomainName = string;
-  export type DomainStatus = "Active"|"CreationInProgress"|"CreationFailed"|string;
+  export type DomainStatus = "Active"|"CreationInProgress"|"CreationFailed";
   export interface DomainSummary {
     /**
      * The Amazon Resource Name (ARN) of the domain.
@@ -657,7 +657,7 @@ declare namespace ConnectCases {
     id: FieldId;
   }
   export type FieldName = string;
-  export type FieldNamespace = "System"|"Custom"|string;
+  export type FieldNamespace = "System"|"Custom";
   export interface FieldOption {
     /**
      * Describes whether the FieldOption is active (displayed) or inactive.
@@ -711,7 +711,7 @@ declare namespace ConnectCases {
      */
     type: FieldType;
   }
-  export type FieldType = "Text"|"Number"|"Boolean"|"DateTime"|"SingleSelect"|string;
+  export type FieldType = "Text"|"Number"|"Boolean"|"DateTime"|"SingleSelect";
   export interface FieldValue {
     /**
      * Unique identifier of a field.
@@ -1133,7 +1133,7 @@ declare namespace ConnectCases {
   export type ListTemplatesResponseTemplatesList = TemplateSummary[];
   export type MaxResults = number;
   export type NextToken = string;
-  export type Order = "Asc"|"Desc"|string;
+  export type Order = "Asc"|"Desc";
   export interface PutCaseEventConfigurationRequest {
     /**
      * The unique identifier of the Cases domain. 
@@ -1174,7 +1174,7 @@ declare namespace ConnectCases {
      */
     contact?: Contact;
   }
-  export type RelatedItemType = "Contact"|"Comment"|string;
+  export type RelatedItemType = "Contact"|"Comment";
   export interface RelatedItemTypeFilter {
     /**
      * A filter for related items of type Comment.

@@ -130,9 +130,9 @@ declare namespace Polly {
      */
     NextToken?: NextToken;
   }
-  export type Engine = "standard"|"neural"|string;
+  export type Engine = "standard"|"neural";
   export type EngineList = Engine[];
-  export type Gender = "Female"|"Male"|string;
+  export type Gender = "Female"|"Male";
   export interface GetLexiconInput {
     /**
      * Name of the lexicon.
@@ -162,7 +162,7 @@ declare namespace Polly {
     SynthesisTask?: SynthesisTask;
   }
   export type IncludeAdditionalLanguageCodes = boolean;
-  export type LanguageCode = "arb"|"cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-MX"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|"en-NZ"|"en-ZA"|"ca-ES"|"de-AT"|"yue-CN"|string;
+  export type LanguageCode = "arb"|"cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-MX"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"|"en-NZ"|"en-ZA"|"ca-ES"|"de-AT"|"yue-CN";
   export type LanguageCodeList = LanguageCode[];
   export type LanguageName = string;
   export type LastModified = Date;
@@ -260,7 +260,7 @@ declare namespace Polly {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type OutputFormat = "json"|"mp3"|"ogg_vorbis"|"pcm"|string;
+  export type OutputFormat = "json"|"mp3"|"ogg_vorbis"|"pcm";
   export type OutputS3BucketName = string;
   export type OutputS3KeyPrefix = string;
   export type OutputUri = string;
@@ -280,7 +280,7 @@ declare namespace Polly {
   export type SampleRate = string;
   export type Size = number;
   export type SnsTopicArn = string;
-  export type SpeechMarkType = "sentence"|"ssml"|"viseme"|"word"|string;
+  export type SpeechMarkType = "sentence"|"ssml"|"viseme"|"word";
   export type SpeechMarkTypeList = SpeechMarkType[];
   export interface StartSpeechSynthesisTaskInput {
     /**
@@ -454,10 +454,10 @@ declare namespace Polly {
     RequestCharacters?: RequestCharacters;
   }
   export type TaskId = string;
-  export type TaskStatus = "scheduled"|"inProgress"|"completed"|"failed"|string;
+  export type TaskStatus = "scheduled"|"inProgress"|"completed"|"failed";
   export type TaskStatusReason = string;
   export type Text = string;
-  export type TextType = "ssml"|"text"|string;
+  export type TextType = "ssml"|"text";
   export interface Voice {
     /**
      * Gender of the voice.
@@ -488,7 +488,7 @@ declare namespace Polly {
      */
     SupportedEngines?: EngineList;
   }
-  export type VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Gabrielle"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"|"Aria"|"Ayanda"|"Arlet"|"Hannah"|"Arthur"|"Daniel"|"Liam"|"Pedro"|"Kajal"|"Hiujin"|"Laura"|"Elin"|"Ida"|"Suvi"|string;
+  export type VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Gabrielle"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"|"Aria"|"Ayanda"|"Arlet"|"Hannah"|"Arthur"|"Daniel"|"Liam"|"Pedro"|"Kajal"|"Hiujin";
   export type VoiceList = Voice[];
   export type VoiceName = string;
   /**

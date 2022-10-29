@@ -95,8 +95,8 @@ declare namespace EBS {
   export type ChangedBlocks = ChangedBlock[];
   export type ChangedBlocksCount = number;
   export type Checksum = string;
-  export type ChecksumAggregationMethod = "LINEAR"|string;
-  export type ChecksumAlgorithm = "SHA256"|string;
+  export type ChecksumAggregationMethod = "LINEAR";
+  export type ChecksumAlgorithm = "SHA256";
   export interface CompleteSnapshotRequest {
     /**
      * The ID of the snapshot.
@@ -366,7 +366,7 @@ declare namespace EBS {
      */
     KmsKeyArn?: KmsKeyArn;
   }
-  export type Status = "completed"|"pending"|"error"|string;
+  export type Status = "completed"|"pending"|"error";
   export interface Tag {
     /**
      * The key of the tag.

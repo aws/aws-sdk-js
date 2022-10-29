@@ -155,7 +155,7 @@ declare namespace IoTJobsDataPlane {
      */
     versionNumber?: VersionNumber;
   }
-  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"REJECTED"|"REMOVED"|"CANCELED"|string;
+  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"REJECTED"|"REMOVED"|"CANCELED";
   export interface JobExecutionSummary {
     /**
      * The unique identifier you assigned to this job when it was created.

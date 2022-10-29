@@ -57,7 +57,7 @@ declare namespace CloudSearchDomain {
     buckets?: BucketList;
   }
   export type BucketList = Bucket[];
-  export type ContentType = "application/json"|"application/xml"|string;
+  export type ContentType = "application/json"|"application/xml";
   export type Cursor = string;
   export type Deletes = number;
   export interface DocumentServiceWarning {
@@ -152,7 +152,7 @@ declare namespace CloudSearchDomain {
   export type Partial = boolean;
   export type Query = string;
   export type QueryOptions = string;
-  export type QueryParser = "simple"|"structured"|"lucene"|"dismax"|string;
+  export type QueryParser = "simple"|"structured"|"lucene"|"dismax";
   export type Return = string;
   export interface SearchRequest {
     /**

@@ -771,7 +771,7 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type ActivationKey = string;
-  export type ActiveDirectoryStatus = "ACCESS_DENIED"|"DETACHED"|"JOINED"|"JOINING"|"NETWORK_ERROR"|"TIMEOUT"|"UNKNOWN_ERROR"|string;
+  export type ActiveDirectoryStatus = "ACCESS_DENIED"|"DETACHED"|"JOINED"|"JOINING"|"NETWORK_ERROR"|"TIMEOUT"|"UNKNOWN_ERROR";
   export interface AddCacheInput {
     GatewayARN: GatewayARN;
     /**
@@ -941,7 +941,7 @@ declare namespace StorageGateway {
     Worm?: boolean;
   }
   export type AutomaticTapeCreationRules = AutomaticTapeCreationRule[];
-  export type AvailabilityMonitorTestStatus = "COMPLETE"|"FAILED"|"PENDING"|string;
+  export type AvailabilityMonitorTestStatus = "COMPLETE"|"FAILED"|"PENDING";
   export type BandwidthDownloadRateLimit = number;
   export interface BandwidthRateLimitInterval {
     /**
@@ -1062,7 +1062,7 @@ declare namespace StorageGateway {
      */
     TapeARN?: TapeARN;
   }
-  export type CaseSensitivity = "ClientSpecified"|"CaseSensitive"|string;
+  export type CaseSensitivity = "ClientSpecified"|"CaseSensitive";
   export type ChapCredentials = ChapInfo[];
   export interface ChapInfo {
     /**
@@ -2260,7 +2260,7 @@ declare namespace StorageGateway {
   export type FileShareInfoList = FileShareInfo[];
   export type FileShareName = string;
   export type FileShareStatus = string;
-  export type FileShareType = "NFS"|"SMB"|string;
+  export type FileShareType = "NFS"|"SMB";
   export type FileSystemAssociationARN = string;
   export type FileSystemAssociationARNList = FileSystemAssociationARN[];
   export type FileSystemAssociationId = string;
@@ -2326,7 +2326,7 @@ declare namespace StorageGateway {
   export type Folder = string;
   export type FolderList = Folder[];
   export type GatewayARN = string;
-  export type GatewayCapacity = "Small"|"Medium"|"Large"|string;
+  export type GatewayCapacity = "Small"|"Medium"|"Large";
   export type GatewayId = string;
   export interface GatewayInfo {
     /**
@@ -2374,7 +2374,7 @@ declare namespace StorageGateway {
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
   export type Host = string;
-  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|"SNOWBALL"|string;
+  export type HostEnvironment = "VMWARE"|"HYPER-V"|"EC2"|"KVM"|"OTHER"|"SNOWBALL";
   export type HostEnvironmentId = string;
   export type Hosts = Host[];
   export type HourOfDay = number;
@@ -2745,7 +2745,7 @@ declare namespace StorageGateway {
     NotificationId?: NotificationId;
   }
   export type NumTapesToCreate = number;
-  export type ObjectACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"aws-exec-read"|string;
+  export type ObjectACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"aws-exec-read";
   export type OrganizationalUnit = string;
   export type Path = string;
   export type PermissionId = number;
@@ -2781,7 +2781,7 @@ declare namespace StorageGateway {
   }
   export type PoolInfos = PoolInfo[];
   export type PoolName = string;
-  export type PoolStatus = "ACTIVE"|"DELETED"|string;
+  export type PoolStatus = "ACTIVE"|"DELETED";
   export type PositiveIntObject = number;
   export type RecurrenceInHours = number;
   export interface RefreshCacheInput {
@@ -2827,7 +2827,7 @@ declare namespace StorageGateway {
   }
   export type ResourceARN = string;
   export type RetentionLockTimeInDays = number;
-  export type RetentionLockType = "COMPLIANCE"|"GOVERNANCE"|"NONE"|string;
+  export type RetentionLockType = "COMPLIANCE"|"GOVERNANCE"|"NONE";
   export interface RetrieveTapeArchiveInput {
     /**
      * The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from the virtual tape shelf (VTS).
@@ -2957,7 +2957,7 @@ declare namespace StorageGateway {
      */
     GatewayAdmins?: UserList;
   }
-  export type SMBSecurityStrategy = "ClientSpecified"|"MandatorySigning"|"MandatoryEncryption"|string;
+  export type SMBSecurityStrategy = "ClientSpecified"|"MandatorySigning"|"MandatoryEncryption";
   export interface SetLocalConsolePasswordInput {
     GatewayARN: GatewayARN;
     /**
@@ -3245,7 +3245,7 @@ declare namespace StorageGateway {
   export type TapeRecoveryPointStatus = string;
   export type TapeSize = number;
   export type TapeStatus = string;
-  export type TapeStorageClass = "DEEP_ARCHIVE"|"GLACIER"|string;
+  export type TapeStorageClass = "DEEP_ARCHIVE"|"GLACIER";
   export type TapeUsage = number;
   export type Tapes = Tape[];
   export type TargetARN = string;

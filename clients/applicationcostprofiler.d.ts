@@ -73,7 +73,7 @@ declare namespace ApplicationCostProfiler {
      */
     reportId?: ReportId;
   }
-  export type Format = "CSV"|"PARQUET"|string;
+  export type Format = "CSV"|"PARQUET";
   export interface GetReportDefinitionRequest {
     /**
      * ID of the report to retrieve.
@@ -204,10 +204,10 @@ declare namespace ApplicationCostProfiler {
   }
   export type ReportDefinitionList = ReportDefinition[];
   export type ReportDescription = string;
-  export type ReportFrequency = "MONTHLY"|"DAILY"|"ALL"|string;
+  export type ReportFrequency = "MONTHLY"|"DAILY"|"ALL";
   export type ReportId = string;
   export type S3Bucket = string;
-  export type S3BucketRegion = "ap-east-1"|"me-south-1"|"eu-south-1"|"af-south-1"|string;
+  export type S3BucketRegion = "ap-east-1"|"me-south-1"|"eu-south-1"|"af-south-1";
   export type S3Key = string;
   export interface S3Location {
     /**

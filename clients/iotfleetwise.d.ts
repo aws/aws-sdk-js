@@ -540,7 +540,7 @@ declare namespace IoTFleetWise {
      */
     description?: description;
   }
-  export type CampaignStatus = "CREATING"|"WAITING_FOR_APPROVAL"|"RUNNING"|"SUSPENDED"|string;
+  export type CampaignStatus = "CREATING"|"WAITING_FOR_APPROVAL"|"RUNNING"|"SUSPENDED";
   export interface CampaignSummary {
     /**
      * The Amazon Resource Name (ARN) of a campaign.
@@ -660,7 +660,7 @@ declare namespace IoTFleetWise {
      */
     conditionBasedCollectionScheme?: ConditionBasedCollectionScheme;
   }
-  export type Compression = "OFF"|"SNAPPY"|string;
+  export type Compression = "OFF"|"SNAPPY";
   export interface ConditionBasedCollectionScheme {
     /**
      * The logical expression used to recognize what data to collect. For example, $variable.Vehicle.OutsideAirTemperature &gt;= 105.0.
@@ -1096,7 +1096,7 @@ declare namespace IoTFleetWise {
      */
     arn: arn;
   }
-  export type DiagnosticsMode = "OFF"|"SEND_ACTIVE_DTCS"|string;
+  export type DiagnosticsMode = "OFF"|"SEND_ACTIVE_DTCS";
   export interface DisassociateVehicleFleetRequest {
     /**
      *  The unique ID of the vehicle to disassociate from the fleet.
@@ -1818,8 +1818,8 @@ declare namespace IoTFleetWise {
      */
     nextToken?: nextToken;
   }
-  export type LogType = "OFF"|"ERROR"|string;
-  export type ManifestStatus = "ACTIVE"|"DRAFT"|string;
+  export type LogType = "OFF"|"ERROR";
+  export type ManifestStatus = "ACTIVE"|"DRAFT";
   export interface ModelManifestSummary {
     /**
      * The name of the vehicle model.
@@ -1878,7 +1878,7 @@ declare namespace IoTFleetWise {
      */
     obdInterface?: ObdInterface;
   }
-  export type NetworkInterfaceType = "CAN_INTERFACE"|"OBD_INTERFACE"|string;
+  export type NetworkInterfaceType = "CAN_INTERFACE"|"OBD_INTERFACE";
   export type NetworkInterfaces = NetworkInterface[];
   export interface Node {
     /**
@@ -1917,7 +1917,7 @@ declare namespace IoTFleetWise {
      */
     totalActuators?: number;
   }
-  export type NodeDataType = "INT8"|"UINT8"|"INT16"|"UINT16"|"INT32"|"UINT32"|"INT64"|"UINT64"|"BOOLEAN"|"FLOAT"|"DOUBLE"|"STRING"|"UNIX_TIMESTAMP"|"INT8_ARRAY"|"UINT8_ARRAY"|"INT16_ARRAY"|"UINT16_ARRAY"|"INT32_ARRAY"|"UINT32_ARRAY"|"INT64_ARRAY"|"UINT64_ARRAY"|"BOOLEAN_ARRAY"|"FLOAT_ARRAY"|"DOUBLE_ARRAY"|"STRING_ARRAY"|"UNIX_TIMESTAMP_ARRAY"|"UNKNOWN"|string;
+  export type NodeDataType = "INT8"|"UINT8"|"INT16"|"UINT16"|"INT32"|"UINT32"|"INT64"|"UINT64"|"BOOLEAN"|"FLOAT"|"DOUBLE"|"STRING"|"UNIX_TIMESTAMP"|"INT8_ARRAY"|"UINT8_ARRAY"|"INT16_ARRAY"|"UINT16_ARRAY"|"INT32_ARRAY"|"UINT32_ARRAY"|"INT64_ARRAY"|"UINT64_ARRAY"|"BOOLEAN_ARRAY"|"FLOAT_ARRAY"|"DOUBLE_ARRAY"|"STRING_ARRAY"|"UNIX_TIMESTAMP_ARRAY"|"UNKNOWN";
   export type NodePath = string;
   export type NodePaths = NodePath[];
   export type Nodes = Node[];
@@ -2029,7 +2029,7 @@ declare namespace IoTFleetWise {
      */
     lastModificationTime: timestamp;
   }
-  export type RegistrationStatus = "REGISTRATION_PENDING"|"REGISTRATION_SUCCESS"|"REGISTRATION_FAILURE"|string;
+  export type RegistrationStatus = "REGISTRATION_PENDING"|"REGISTRATION_SUCCESS"|"REGISTRATION_FAILURE";
   export interface Sensor {
     /**
      * The fully qualified name of the sensor. For example, the fully qualified name of a sensor might be Vehicle.Body.Engine.Battery.
@@ -2100,7 +2100,7 @@ declare namespace IoTFleetWise {
      */
     obdSignal?: ObdSignal;
   }
-  export type SignalDecoderType = "CAN_SIGNAL"|"OBD_SIGNAL"|string;
+  export type SignalDecoderType = "CAN_SIGNAL"|"OBD_SIGNAL";
   export type SignalDecoders = SignalDecoder[];
   export interface SignalInformation {
     /**
@@ -2117,7 +2117,7 @@ declare namespace IoTFleetWise {
     minimumSamplingIntervalMs?: uint32;
   }
   export type SignalInformationList = SignalInformation[];
-  export type SpoolingMode = "OFF"|"TO_DISK"|string;
+  export type SpoolingMode = "OFF"|"TO_DISK";
   export type String = string;
   export interface Tag {
     /**
@@ -2189,7 +2189,7 @@ declare namespace IoTFleetWise {
     timestreamTableName: TimestreamTableName;
   }
   export type TimestreamTableName = string;
-  export type TriggerMode = "ALWAYS"|"RISING_EDGE"|string;
+  export type TriggerMode = "ALWAYS"|"RISING_EDGE";
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.
@@ -2202,7 +2202,7 @@ declare namespace IoTFleetWise {
   }
   export interface UntagResourceResponse {
   }
-  export type UpdateCampaignAction = "APPROVE"|"SUSPEND"|"RESUME"|"UPDATE"|string;
+  export type UpdateCampaignAction = "APPROVE"|"SUSPEND"|"RESUME"|"UPDATE";
   export interface UpdateCampaignRequest {
     /**
      *  The name of the campaign to update. 
@@ -2303,7 +2303,7 @@ declare namespace IoTFleetWise {
      */
     arn?: arn;
   }
-  export type UpdateMode = "Overwrite"|"Merge"|string;
+  export type UpdateMode = "Overwrite"|"Merge";
   export interface UpdateModelManifestRequest {
     /**
      *  The name of the vehicle model to update. 
@@ -2446,8 +2446,8 @@ declare namespace IoTFleetWise {
      */
     arn?: arn;
   }
-  export type VehicleAssociationBehavior = "CreateIotThing"|"ValidateIotThingExists"|string;
-  export type VehicleState = "CREATED"|"READY"|"HEALTHY"|"SUSPENDED"|"DELETING"|string;
+  export type VehicleAssociationBehavior = "CreateIotThing"|"ValidateIotThingExists";
+  export type VehicleState = "CREATED"|"READY"|"HEALTHY"|"SUSPENDED"|"DELETING";
   export interface VehicleStatus {
     /**
      * The name of a campaign.

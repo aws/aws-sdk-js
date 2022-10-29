@@ -93,7 +93,7 @@ declare class SupportApp extends Service {
   updateSlackChannelConfiguration(callback?: (err: AWSError, data: SupportApp.Types.UpdateSlackChannelConfigurationResult) => void): Request<SupportApp.Types.UpdateSlackChannelConfigurationResult, AWSError>;
 }
 declare namespace SupportApp {
-  export type AccountType = "management"|"member"|string;
+  export type AccountType = "management"|"member";
   export interface CreateSlackChannelConfigurationRequest {
     /**
      * The channel ID in Slack. This ID identifies a channel within a Slack workspace.
@@ -194,7 +194,7 @@ declare namespace SupportApp {
      */
     slackWorkspaceConfigurations?: SlackWorkspaceConfigurationList;
   }
-  export type NotificationSeverityLevel = "none"|"all"|"high"|string;
+  export type NotificationSeverityLevel = "none"|"all"|"high";
   export interface PutAccountAliasRequest {
     /**
      * An alias or short name for an Amazon Web Services account.

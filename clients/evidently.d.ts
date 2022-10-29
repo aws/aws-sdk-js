@@ -336,7 +336,7 @@ declare namespace Evidently {
     results?: EvaluationResultsList;
   }
   export type Boolean = boolean;
-  export type ChangeDirectionEnum = "INCREASE"|"DECREASE"|string;
+  export type ChangeDirectionEnum = "INCREASE"|"DECREASE";
   export interface CloudWatchLogsDestination {
     /**
      * The name of the log group where the project stores evaluation events.
@@ -698,7 +698,7 @@ declare namespace Evidently {
     type: EventType;
   }
   export type EventList = Event[];
-  export type EventType = "aws.evidently.evaluation"|"aws.evidently.custom"|string;
+  export type EventType = "aws.evidently.evaluation"|"aws.evidently.custom";
   export interface Experiment {
     /**
      * The ARN of the experiment.
@@ -774,7 +774,7 @@ declare namespace Evidently {
     type: ExperimentType;
   }
   export type ExperimentArn = string;
-  export type ExperimentBaseStat = "Mean"|string;
+  export type ExperimentBaseStat = "Mean";
   export interface ExperimentExecution {
     /**
      * The date and time that the experiment ended.
@@ -806,11 +806,11 @@ declare namespace Evidently {
     treatmentName?: TreatmentName;
   }
   export type ExperimentReportList = ExperimentReport[];
-  export type ExperimentReportName = "BayesianInference"|string;
+  export type ExperimentReportName = "BayesianInference";
   export type ExperimentReportNameList = ExperimentReportName[];
-  export type ExperimentResultRequestType = "BaseStat"|"TreatmentEffect"|"ConfidenceInterval"|"PValue"|string;
+  export type ExperimentResultRequestType = "BaseStat"|"TreatmentEffect"|"ConfidenceInterval"|"PValue";
   export type ExperimentResultRequestTypeList = ExperimentResultRequestType[];
-  export type ExperimentResultResponseType = "Mean"|"TreatmentEffect"|"ConfidenceIntervalUpperBound"|"ConfidenceIntervalLowerBound"|"PValue"|string;
+  export type ExperimentResultResponseType = "Mean"|"TreatmentEffect"|"ConfidenceIntervalUpperBound"|"ConfidenceIntervalLowerBound"|"PValue";
   export interface ExperimentResultsData {
     /**
      * The name of the metric.
@@ -836,9 +836,9 @@ declare namespace Evidently {
      */
     analysisCompleteTime?: Timestamp;
   }
-  export type ExperimentStatus = "CREATED"|"UPDATING"|"RUNNING"|"COMPLETED"|"CANCELLED"|string;
-  export type ExperimentStopDesiredState = "COMPLETED"|"CANCELLED"|string;
-  export type ExperimentType = "aws.evidently.onlineab"|string;
+  export type ExperimentStatus = "CREATED"|"UPDATING"|"RUNNING"|"COMPLETED"|"CANCELLED";
+  export type ExperimentStopDesiredState = "COMPLETED"|"CANCELLED";
+  export type ExperimentType = "aws.evidently.onlineab";
   export interface Feature {
     /**
      * The ARN of the feature.
@@ -898,9 +898,9 @@ declare namespace Evidently {
     variations: VariationsList;
   }
   export type FeatureArn = string;
-  export type FeatureEvaluationStrategy = "ALL_RULES"|"DEFAULT_VARIATION"|string;
+  export type FeatureEvaluationStrategy = "ALL_RULES"|"DEFAULT_VARIATION";
   export type FeatureName = string;
-  export type FeatureStatus = "AVAILABLE"|"UPDATING"|string;
+  export type FeatureStatus = "AVAILABLE"|"UPDATING";
   export type FeatureSummariesList = FeatureSummary[];
   export interface FeatureSummary {
     /**
@@ -1190,9 +1190,9 @@ declare namespace Evidently {
   export type LaunchGroupConfigList = LaunchGroupConfig[];
   export type LaunchGroupList = LaunchGroup[];
   export type LaunchName = string;
-  export type LaunchStatus = "CREATED"|"UPDATING"|"RUNNING"|"COMPLETED"|"CANCELLED"|string;
-  export type LaunchStopDesiredState = "COMPLETED"|"CANCELLED"|string;
-  export type LaunchType = "aws.evidently.splits"|string;
+  export type LaunchStatus = "CREATED"|"UPDATING"|"RUNNING"|"COMPLETED"|"CANCELLED";
+  export type LaunchStopDesiredState = "COMPLETED"|"CANCELLED";
+  export type LaunchType = "aws.evidently.splits";
   export type LaunchesList = Launch[];
   export interface ListExperimentsRequest {
     /**
@@ -1571,7 +1571,7 @@ declare namespace Evidently {
   }
   export type ProjectName = string;
   export type ProjectRef = string;
-  export type ProjectStatus = "AVAILABLE"|"UPDATING"|string;
+  export type ProjectStatus = "AVAILABLE"|"UPDATING";
   export type ProjectSummariesList = ProjectSummary[];
   export interface ProjectSummary {
     /**
@@ -1815,7 +1815,7 @@ declare namespace Evidently {
   export type SegmentOverridesList = SegmentOverride[];
   export type SegmentPattern = string;
   export type SegmentRef = string;
-  export type SegmentReferenceResourceType = "EXPERIMENT"|"LAUNCH"|string;
+  export type SegmentReferenceResourceType = "EXPERIMENT"|"LAUNCH";
   export type SplitWeight = number;
   export interface StartExperimentRequest {
     /**
@@ -2193,7 +2193,7 @@ declare namespace Evidently {
   export type VariationConfigsList = VariationConfig[];
   export type VariationName = string;
   export type VariationNameList = VariationName[];
-  export type VariationValueType = "STRING"|"LONG"|"DOUBLE"|"BOOLEAN"|string;
+  export type VariationValueType = "STRING"|"LONG"|"DOUBLE"|"BOOLEAN";
   export type VariationsList = Variation[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

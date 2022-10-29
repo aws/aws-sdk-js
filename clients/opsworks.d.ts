@@ -716,10 +716,10 @@ declare namespace OpsWorks {
     Environment?: EnvironmentVariables;
   }
   export type AppAttributes = {[key: string]: String};
-  export type AppAttributesKeys = "DocumentRoot"|"RailsEnv"|"AutoBundleOnDeploy"|"AwsFlowRubySettings"|string;
-  export type AppType = "aws-flow-ruby"|"java"|"rails"|"php"|"nodejs"|"static"|"other"|string;
+  export type AppAttributesKeys = "DocumentRoot"|"RailsEnv"|"AutoBundleOnDeploy"|"AwsFlowRubySettings";
+  export type AppType = "aws-flow-ruby"|"java"|"rails"|"php"|"nodejs"|"static"|"other";
   export type Apps = App[];
-  export type Architecture = "x86_64"|"i386"|string;
+  export type Architecture = "x86_64"|"i386";
   export interface AssignInstanceRequest {
     /**
      * The instance ID.
@@ -790,7 +790,7 @@ declare namespace OpsWorks {
      */
     Alarms?: Strings;
   }
-  export type AutoScalingType = "load"|"timer"|string;
+  export type AutoScalingType = "load"|"timer";
   export interface BlockDeviceMapping {
     /**
      * The device name that is exposed to the instance, such as /dev/sdh. For the root device, you can use the explicit device name or you can set this parameter to ROOT_DEVICE and AWS OpsWorks Stacks will provide the correct device name.
@@ -927,8 +927,8 @@ declare namespace OpsWorks {
      */
     LogStreams?: CloudWatchLogsLogStreams;
   }
-  export type CloudWatchLogsEncoding = "ascii"|"big5"|"big5hkscs"|"cp037"|"cp424"|"cp437"|"cp500"|"cp720"|"cp737"|"cp775"|"cp850"|"cp852"|"cp855"|"cp856"|"cp857"|"cp858"|"cp860"|"cp861"|"cp862"|"cp863"|"cp864"|"cp865"|"cp866"|"cp869"|"cp874"|"cp875"|"cp932"|"cp949"|"cp950"|"cp1006"|"cp1026"|"cp1140"|"cp1250"|"cp1251"|"cp1252"|"cp1253"|"cp1254"|"cp1255"|"cp1256"|"cp1257"|"cp1258"|"euc_jp"|"euc_jis_2004"|"euc_jisx0213"|"euc_kr"|"gb2312"|"gbk"|"gb18030"|"hz"|"iso2022_jp"|"iso2022_jp_1"|"iso2022_jp_2"|"iso2022_jp_2004"|"iso2022_jp_3"|"iso2022_jp_ext"|"iso2022_kr"|"latin_1"|"iso8859_2"|"iso8859_3"|"iso8859_4"|"iso8859_5"|"iso8859_6"|"iso8859_7"|"iso8859_8"|"iso8859_9"|"iso8859_10"|"iso8859_13"|"iso8859_14"|"iso8859_15"|"iso8859_16"|"johab"|"koi8_r"|"koi8_u"|"mac_cyrillic"|"mac_greek"|"mac_iceland"|"mac_latin2"|"mac_roman"|"mac_turkish"|"ptcp154"|"shift_jis"|"shift_jis_2004"|"shift_jisx0213"|"utf_32"|"utf_32_be"|"utf_32_le"|"utf_16"|"utf_16_be"|"utf_16_le"|"utf_7"|"utf_8"|"utf_8_sig"|string;
-  export type CloudWatchLogsInitialPosition = "start_of_file"|"end_of_file"|string;
+  export type CloudWatchLogsEncoding = "ascii"|"big5"|"big5hkscs"|"cp037"|"cp424"|"cp437"|"cp500"|"cp720"|"cp737"|"cp775"|"cp850"|"cp852"|"cp855"|"cp856"|"cp857"|"cp858"|"cp860"|"cp861"|"cp862"|"cp863"|"cp864"|"cp865"|"cp866"|"cp869"|"cp874"|"cp875"|"cp932"|"cp949"|"cp950"|"cp1006"|"cp1026"|"cp1140"|"cp1250"|"cp1251"|"cp1252"|"cp1253"|"cp1254"|"cp1255"|"cp1256"|"cp1257"|"cp1258"|"euc_jp"|"euc_jis_2004"|"euc_jisx0213"|"euc_kr"|"gb2312"|"gbk"|"gb18030"|"hz"|"iso2022_jp"|"iso2022_jp_1"|"iso2022_jp_2"|"iso2022_jp_2004"|"iso2022_jp_3"|"iso2022_jp_ext"|"iso2022_kr"|"latin_1"|"iso8859_2"|"iso8859_3"|"iso8859_4"|"iso8859_5"|"iso8859_6"|"iso8859_7"|"iso8859_8"|"iso8859_9"|"iso8859_10"|"iso8859_13"|"iso8859_14"|"iso8859_15"|"iso8859_16"|"johab"|"koi8_r"|"koi8_u"|"mac_cyrillic"|"mac_greek"|"mac_iceland"|"mac_latin2"|"mac_roman"|"mac_turkish"|"ptcp154"|"shift_jis"|"shift_jis_2004"|"shift_jisx0213"|"utf_32"|"utf_32_be"|"utf_32_le"|"utf_16"|"utf_16_be"|"utf_16_le"|"utf_7"|"utf_8"|"utf_8_sig";
+  export type CloudWatchLogsInitialPosition = "start_of_file"|"end_of_file";
   export interface CloudWatchLogsLogStream {
     /**
      * Specifies the destination log group. A log group is created automatically if it doesn't already exist. Log group names can be between 1 and 512 characters long. Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).
@@ -976,7 +976,7 @@ declare namespace OpsWorks {
     BatchSize?: Integer;
   }
   export type CloudWatchLogsLogStreams = CloudWatchLogsLogStream[];
-  export type CloudWatchLogsTimeZone = "LOCAL"|"UTC"|string;
+  export type CloudWatchLogsTimeZone = "LOCAL"|"UTC";
   export interface Command {
     /**
      * The command ID.
@@ -1496,7 +1496,7 @@ declare namespace OpsWorks {
     Args?: DeploymentCommandArgs;
   }
   export type DeploymentCommandArgs = {[key: string]: Strings};
-  export type DeploymentCommandName = "install_dependencies"|"update_dependencies"|"update_custom_cookbooks"|"execute_recipes"|"configure"|"setup"|"deploy"|"rollback"|"start"|"stop"|"restart"|"undeploy"|string;
+  export type DeploymentCommandName = "install_dependencies"|"update_dependencies"|"update_custom_cookbooks"|"execute_recipes"|"configure"|"setup"|"deploy"|"rollback"|"start"|"stop"|"restart"|"undeploy";
   export type Deployments = Deployment[];
   export interface DeregisterEcsClusterRequest {
     /**
@@ -2407,8 +2407,8 @@ declare namespace OpsWorks {
     LifecycleEventConfiguration?: LifecycleEventConfiguration;
   }
   export type LayerAttributes = {[key: string]: String};
-  export type LayerAttributesKeys = "EcsClusterArn"|"EnableHaproxyStats"|"HaproxyStatsUrl"|"HaproxyStatsUser"|"HaproxyStatsPassword"|"HaproxyHealthCheckUrl"|"HaproxyHealthCheckMethod"|"MysqlRootPassword"|"MysqlRootPasswordUbiquitous"|"GangliaUrl"|"GangliaUser"|"GangliaPassword"|"MemcachedMemory"|"NodejsVersion"|"RubyVersion"|"RubygemsVersion"|"ManageBundler"|"BundlerVersion"|"RailsStack"|"PassengerVersion"|"Jvm"|"JvmVersion"|"JvmOptions"|"JavaAppServer"|"JavaAppServerVersion"|string;
-  export type LayerType = "aws-flow-ruby"|"ecs-cluster"|"java-app"|"lb"|"web"|"php-app"|"rails-app"|"nodejs-app"|"memcached"|"db-master"|"monitoring-master"|"custom"|string;
+  export type LayerAttributesKeys = "EcsClusterArn"|"EnableHaproxyStats"|"HaproxyStatsUrl"|"HaproxyStatsUser"|"HaproxyStatsPassword"|"HaproxyHealthCheckUrl"|"HaproxyHealthCheckMethod"|"MysqlRootPassword"|"MysqlRootPasswordUbiquitous"|"GangliaUrl"|"GangliaUser"|"GangliaPassword"|"MemcachedMemory"|"NodejsVersion"|"RubyVersion"|"RubygemsVersion"|"ManageBundler"|"BundlerVersion"|"RailsStack"|"PassengerVersion"|"Jvm"|"JvmVersion"|"JvmOptions"|"JavaAppServer"|"JavaAppServerVersion";
+  export type LayerType = "aws-flow-ruby"|"ecs-cluster"|"java-app"|"lb"|"web"|"php-app"|"rails-app"|"nodejs-app"|"memcached"|"db-master"|"monitoring-master"|"custom";
   export type Layers = Layer[];
   export interface LifecycleEventConfiguration {
     /**
@@ -2767,7 +2767,7 @@ declare namespace OpsWorks {
     Version?: String;
   }
   export type ResourceArn = string;
-  export type RootDeviceType = "ebs"|"instance-store"|string;
+  export type RootDeviceType = "ebs"|"instance-store";
   export interface SelfUserProfile {
     /**
      * The user's IAM ARN.
@@ -2899,7 +2899,7 @@ declare namespace OpsWorks {
      */
     Revision?: String;
   }
-  export type SourceType = "git"|"svn"|"archive"|"s3"|string;
+  export type SourceType = "git"|"svn"|"archive"|"s3";
   export interface SslConfiguration {
     /**
      * The contents of the certificate's domain.crt file.
@@ -3005,7 +3005,7 @@ declare namespace OpsWorks {
     AgentVersion?: String;
   }
   export type StackAttributes = {[key: string]: String};
-  export type StackAttributesKeys = "Color"|string;
+  export type StackAttributesKeys = "Color";
   export interface StackConfigurationManager {
     /**
      * The name. This parameter must be set to "Chef".
@@ -3465,7 +3465,7 @@ declare namespace OpsWorks {
   }
   export type UserProfiles = UserProfile[];
   export type ValidForInMinutes = number;
-  export type VirtualizationType = "paravirtual"|"hvm"|string;
+  export type VirtualizationType = "paravirtual"|"hvm";
   export interface Volume {
     /**
      * The volume ID.
@@ -3555,7 +3555,7 @@ declare namespace OpsWorks {
     Encrypted?: Boolean;
   }
   export type VolumeConfigurations = VolumeConfiguration[];
-  export type VolumeType = "gp2"|"io1"|"standard"|string;
+  export type VolumeType = "gp2"|"io1"|"standard";
   export type Volumes = Volume[];
   export interface WeeklyAutoScalingSchedule {
     /**

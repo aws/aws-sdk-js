@@ -460,8 +460,8 @@ declare namespace MediaConnect {
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
-  export type Algorithm = "aes128"|"aes192"|"aes256"|string;
-  export type Colorimetry = "BT601"|"BT709"|"BT2020"|"BT2100"|"ST2065-1"|"ST2065-3"|"XYZ"|string;
+  export type Algorithm = "aes128"|"aes192"|"aes256";
+  export type Colorimetry = "BT601"|"BT709"|"BT2020"|"BT2100"|"ST2065-1"|"ST2065-3"|"XYZ";
   export interface CreateFlowRequest {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
@@ -571,9 +571,9 @@ declare namespace MediaConnect {
      */
     Interface: InterfaceRequest;
   }
-  export type DurationUnits = "MONTHS"|string;
-  export type EncoderProfile = "main"|"high"|string;
-  export type EncodingName = "jxsv"|"raw"|"smpte291"|"pcm"|string;
+  export type DurationUnits = "MONTHS";
+  export type EncoderProfile = "main"|"high";
+  export type EncodingName = "jxsv"|"raw"|"smpte291"|"pcm";
   export interface EncodingParameters {
     /**
      * A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.
@@ -662,7 +662,7 @@ declare namespace MediaConnect {
      */
     Subscribers: __listOf__string;
   }
-  export type EntitlementStatus = "ENABLED"|"DISABLED"|string;
+  export type EntitlementStatus = "ENABLED"|"DISABLED";
   export interface FailoverConfig {
     /**
      * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
@@ -678,7 +678,7 @@ declare namespace MediaConnect {
     SourcePriority?: SourcePriority;
     State?: State;
   }
-  export type FailoverMode = "MERGE"|"FAILOVER"|string;
+  export type FailoverMode = "MERGE"|"FAILOVER";
   export interface Flow {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
@@ -867,7 +867,7 @@ declare namespace MediaConnect {
      */
     Name: __string;
   }
-  export type KeyType = "speke"|"static-key"|"srt-password"|string;
+  export type KeyType = "speke"|"static-key"|"srt-password";
   export interface ListEntitlementsRequest {
     /**
      * The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.
@@ -1019,7 +1019,7 @@ declare namespace MediaConnect {
      */
     MaintenanceStartHour?: __string;
   }
-  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday"|string;
+  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday";
   export type MaxResults = number;
   export interface MediaStream {
     /**
@@ -1139,14 +1139,14 @@ declare namespace MediaConnect {
      */
     MediaStreamName: __string;
   }
-  export type MediaStreamType = "video"|"audio"|"ancillary-data"|string;
+  export type MediaStreamType = "video"|"audio"|"ancillary-data";
   export interface Messages {
     /**
      * A list of errors that might have been generated from processes on this flow.
      */
     Errors: __listOf__string;
   }
-  export type NetworkInterfaceType = "ena"|"efa"|string;
+  export type NetworkInterfaceType = "ena"|"efa";
   export interface Offering {
     /**
      * The type of currency that is used for billing. The currencyCode used for all reservations is US dollars.
@@ -1235,8 +1235,8 @@ declare namespace MediaConnect {
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
-  export type PriceUnits = "HOURLY"|string;
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos"|string;
+  export type PriceUnits = "HOURLY";
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos";
   export interface PurchaseOfferingRequest {
     /**
      * The Amazon Resource Name (ARN) of the offering.
@@ -1254,7 +1254,7 @@ declare namespace MediaConnect {
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
   }
-  export type Range = "NARROW"|"FULL"|"FULLPROTECT"|string;
+  export type Range = "NARROW"|"FULL"|"FULLPROTECT";
   export interface RemoveFlowMediaStreamRequest {
     /**
      * The Amazon Resource Name (ARN) of the flow.
@@ -1393,7 +1393,7 @@ declare namespace MediaConnect {
      */
     Start: __string;
   }
-  export type ReservationState = "ACTIVE"|"EXPIRED"|"PROCESSING"|"CANCELED"|string;
+  export type ReservationState = "ACTIVE"|"EXPIRED"|"PROCESSING"|"CANCELED";
   export interface ResourceSpecification {
     /**
      * The amount of outbound bandwidth that is discounted in the offering.
@@ -1404,7 +1404,7 @@ declare namespace MediaConnect {
      */
     ResourceType: ResourceType;
   }
-  export type ResourceType = "Mbps_Outbound_Bandwidth"|string;
+  export type ResourceType = "Mbps_Outbound_Bandwidth";
   export interface RevokeFlowEntitlementRequest {
     /**
      * The ARN of the entitlement that you want to revoke.
@@ -1425,7 +1425,7 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
-  export type ScanMode = "progressive"|"interlace"|"progressive-segmented-frame"|string;
+  export type ScanMode = "progressive"|"interlace"|"progressive-segmented-frame";
   export interface SetSourceRequest {
     /**
      * The type of encryption that is used on the content ingested from this source.
@@ -1564,7 +1564,7 @@ declare namespace MediaConnect {
      */
     PrimarySource?: __string;
   }
-  export type SourceType = "OWNED"|"ENTITLED"|string;
+  export type SourceType = "OWNED"|"ENTITLED";
   export interface StartFlowRequest {
     /**
      * The ARN of the flow that you want to start.
@@ -1581,8 +1581,8 @@ declare namespace MediaConnect {
      */
     Status?: Status;
   }
-  export type State = "ENABLED"|"DISABLED"|string;
-  export type Status = "STANDBY"|"ACTIVE"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"ERROR"|string;
+  export type State = "ENABLED"|"DISABLED";
+  export type Status = "STANDBY"|"ACTIVE"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"ERROR";
   export interface StopFlowRequest {
     /**
      * The ARN of the flow that you want to stop.
@@ -1609,7 +1609,7 @@ declare namespace MediaConnect {
      */
     Tags: __mapOf__string;
   }
-  export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY"|string;
+  export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY";
   export interface Transport {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.

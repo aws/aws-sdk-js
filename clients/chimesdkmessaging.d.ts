@@ -389,7 +389,7 @@ declare class ChimeSDKMessaging extends Service {
   updateChannelReadMarker(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse, AWSError>;
 }
 declare namespace ChimeSDKMessaging {
-  export type AllowNotifications = "ALL"|"NONE"|"FILTERED"|string;
+  export type AllowNotifications = "ALL"|"NONE"|"FILTERED";
   export interface AppInstanceUserMembershipSummary {
     /**
      * The type of ChannelMembership.
@@ -704,7 +704,7 @@ declare namespace ChimeSDKMessaging {
     Member?: Identity;
   }
   export type ChannelMembershipSummaryList = ChannelMembershipSummary[];
-  export type ChannelMembershipType = "DEFAULT"|"HIDDEN"|string;
+  export type ChannelMembershipType = "DEFAULT"|"HIDDEN";
   export interface ChannelMessage {
     /**
      * The ARN of the channel.
@@ -789,8 +789,8 @@ declare namespace ChimeSDKMessaging {
      */
     SubChannelId?: SubChannelId;
   }
-  export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
-  export type ChannelMessageStatus = "SENT"|"PENDING"|"FAILED"|"DENIED"|string;
+  export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT";
+  export type ChannelMessageStatus = "SENT"|"PENDING"|"FAILED"|"DENIED";
   export interface ChannelMessageStatusStructure {
     /**
      * The message status value.
@@ -848,8 +848,8 @@ declare namespace ChimeSDKMessaging {
     MessageAttributes?: MessageAttributeMap;
   }
   export type ChannelMessageSummaryList = ChannelMessageSummary[];
-  export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
-  export type ChannelMode = "UNRESTRICTED"|"RESTRICTED"|string;
+  export type ChannelMessageType = "STANDARD"|"CONTROL";
+  export type ChannelMode = "UNRESTRICTED"|"RESTRICTED";
   export interface ChannelModeratedByAppInstanceUserSummary {
     /**
      * Summary of the details of a Channel.
@@ -883,7 +883,7 @@ declare namespace ChimeSDKMessaging {
     Moderator?: Identity;
   }
   export type ChannelModeratorSummaryList = ChannelModeratorSummary[];
-  export type ChannelPrivacy = "PUBLIC"|"PRIVATE"|string;
+  export type ChannelPrivacy = "PUBLIC"|"PRIVATE";
   export interface ChannelSummary {
     /**
      * The name of the channel.
@@ -1326,8 +1326,8 @@ declare namespace ChimeSDKMessaging {
      */
     MinimumMembershipPercentage: MinimumMembershipPercentage;
   }
-  export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
-  export type FallbackAction = "CONTINUE"|"ABORT"|string;
+  export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist";
+  export type FallbackAction = "CONTINUE"|"ABORT";
   export type FilterRule = string;
   export interface GetChannelMembershipPreferencesRequest {
     /**
@@ -1423,7 +1423,7 @@ declare namespace ChimeSDKMessaging {
      */
     Name?: ResourceName;
   }
-  export type InvocationType = "ASYNC"|string;
+  export type InvocationType = "ASYNC";
   export interface LambdaConfiguration {
     /**
      * The ARN of the Lambda message processing function.
@@ -1850,7 +1850,7 @@ declare namespace ChimeSDKMessaging {
     FilterRule?: FilterRule;
   }
   export type PushNotificationTitle = string;
-  export type PushNotificationType = "DEFAULT"|"VOIP"|string;
+  export type PushNotificationType = "DEFAULT"|"VOIP";
   export interface PutChannelMembershipPreferencesRequest {
     /**
      * The ARN of the channel.
@@ -1958,8 +1958,8 @@ declare namespace ChimeSDKMessaging {
      */
     Operator: SearchFieldOperator;
   }
-  export type SearchFieldKey = "MEMBERS"|string;
-  export type SearchFieldOperator = "EQUALS"|"INCLUDES"|string;
+  export type SearchFieldKey = "MEMBERS";
+  export type SearchFieldOperator = "EQUALS"|"INCLUDES";
   export type SearchFieldValue = string;
   export type SearchFieldValues = SearchFieldValue[];
   export type SearchFields = SearchField[];
@@ -2023,7 +2023,7 @@ declare namespace ChimeSDKMessaging {
      */
     SubChannelId?: SubChannelId;
   }
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING";
   export type StatusDetail = string;
   export type String = string;
   export type SubChannelId = string;

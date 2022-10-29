@@ -135,7 +135,7 @@ declare namespace BackupStorage {
     ChunkToken: string;
   }
   export type ChunkList = Chunk[];
-  export type DataChecksumAlgorithm = "SHA256"|string;
+  export type DataChecksumAlgorithm = "SHA256";
   export interface DeleteObjectInput {
     /**
      * Backup job Id for the in-progress backup.
@@ -447,7 +447,7 @@ declare namespace BackupStorage {
      */
     UploadId: string;
   }
-  export type SummaryChecksumAlgorithm = "SUMMARY"|string;
+  export type SummaryChecksumAlgorithm = "SUMMARY";
   export type long = number;
   export type timestamp = Date;
   /**

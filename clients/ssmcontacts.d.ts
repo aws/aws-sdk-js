@@ -230,7 +230,7 @@ declare class SSMContacts extends Service {
 }
 declare namespace SSMContacts {
   export type AcceptCode = string;
-  export type AcceptCodeValidation = "IGNORE"|"ENFORCE"|string;
+  export type AcceptCodeValidation = "IGNORE"|"ENFORCE";
   export interface AcceptPageRequest {
     /**
      * The Amazon Resource Name (ARN) of the engagement to a contact channel.
@@ -259,7 +259,7 @@ declare namespace SSMContacts {
   }
   export interface AcceptPageResult {
   }
-  export type AcceptType = "DELIVERED"|"READ"|string;
+  export type AcceptType = "DELIVERED"|"READ";
   export interface ActivateContactChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact channel.
@@ -273,7 +273,7 @@ declare namespace SSMContacts {
   export interface ActivateContactChannelResult {
   }
   export type ActivationCode = string;
-  export type ActivationStatus = "ACTIVATED"|"NOT_ACTIVATED"|string;
+  export type ActivationStatus = "ACTIVATED"|"NOT_ACTIVATED";
   export type AmazonResourceName = string;
   export type ChannelName = string;
   export interface ChannelTargetInfo {
@@ -286,7 +286,7 @@ declare namespace SSMContacts {
      */
     RetryIntervalInMinutes?: RetryIntervalInMinutes;
   }
-  export type ChannelType = "SMS"|"VOICE"|"EMAIL"|string;
+  export type ChannelType = "SMS"|"VOICE"|"EMAIL";
   export interface Contact {
     /**
      * The Amazon Resource Name (ARN) of the contact or escalation plan.
@@ -350,7 +350,7 @@ declare namespace SSMContacts {
      */
     IsEssential: IsEssential;
   }
-  export type ContactType = "PERSONAL"|"ESCALATION"|string;
+  export type ContactType = "PERSONAL"|"ESCALATION";
   export type ContactsList = Contact[];
   export type Content = string;
   export interface CreateContactChannelRequest {
@@ -894,7 +894,7 @@ declare namespace SSMContacts {
     ReceiptTime: DateTime;
   }
   export type ReceiptInfo = string;
-  export type ReceiptType = "DELIVERED"|"ERROR"|"READ"|"SENT"|"STOP"|string;
+  export type ReceiptType = "DELIVERED"|"ERROR"|"READ"|"SENT"|"STOP";
   export type ReceiptsList = Receipt[];
   export type RetryIntervalInMinutes = number;
   export interface SendActivationCodeRequest {

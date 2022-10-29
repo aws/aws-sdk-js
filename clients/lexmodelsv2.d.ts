@@ -12,30 +12,6 @@ declare class LexModelsV2 extends Service {
   constructor(options?: LexModelsV2.Types.ClientConfiguration)
   config: Config & LexModelsV2.Types.ClientConfiguration;
   /**
-   * Batch create custom vocabulary item for the specified locale in the specified bot.
-   */
-  batchCreateCustomVocabularyItem(params: LexModelsV2.Types.BatchCreateCustomVocabularyItemRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse, AWSError>;
-  /**
-   * Batch create custom vocabulary item for the specified locale in the specified bot.
-   */
-  batchCreateCustomVocabularyItem(callback?: (err: AWSError, data: LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse, AWSError>;
-  /**
-   * Batch delete custom vocabulary item for the specified locale in the specified bot.
-   */
-  batchDeleteCustomVocabularyItem(params: LexModelsV2.Types.BatchDeleteCustomVocabularyItemRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse, AWSError>;
-  /**
-   * Batch delete custom vocabulary item for the specified locale in the specified bot.
-   */
-  batchDeleteCustomVocabularyItem(callback?: (err: AWSError, data: LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse, AWSError>;
-  /**
-   * Batch update custom vocabulary item for the specified locale in the specified bot.
-   */
-  batchUpdateCustomVocabularyItem(params: LexModelsV2.Types.BatchUpdateCustomVocabularyItemRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse, AWSError>;
-  /**
-   * Batch update custom vocabulary item for the specified locale in the specified bot.
-   */
-  batchUpdateCustomVocabularyItem(callback?: (err: AWSError, data: LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse, AWSError>;
-  /**
    * Builds a bot, its intents, and its slot types into a specific locale. A bot can be built into multiple locales. At runtime the locale is used to choose a specific build of the bot.
    */
   buildBotLocale(params: LexModelsV2.Types.BuildBotLocaleRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BuildBotLocaleResponse) => void): Request<LexModelsV2.Types.BuildBotLocaleResponse, AWSError>;
@@ -396,14 +372,6 @@ declare class LexModelsV2 extends Service {
    */
   listBuiltInSlotTypes(callback?: (err: AWSError, data: LexModelsV2.Types.ListBuiltInSlotTypesResponse) => void): Request<LexModelsV2.Types.ListBuiltInSlotTypesResponse, AWSError>;
   /**
-   * List custom vocabulary items for the specified locale in the specified bot.
-   */
-  listCustomVocabularyItems(params: LexModelsV2.Types.ListCustomVocabularyItemsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListCustomVocabularyItemsResponse) => void): Request<LexModelsV2.Types.ListCustomVocabularyItemsResponse, AWSError>;
-  /**
-   * List custom vocabulary items for the specified locale in the specified bot.
-   */
-  listCustomVocabularyItems(callback?: (err: AWSError, data: LexModelsV2.Types.ListCustomVocabularyItemsResponse) => void): Request<LexModelsV2.Types.ListCustomVocabularyItemsResponse, AWSError>;
-  /**
    * Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept in the list for 7 days.
    */
   listExports(params: LexModelsV2.Types.ListExportsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListExportsResponse) => void): Request<LexModelsV2.Types.ListExportsResponse, AWSError>;
@@ -428,11 +396,11 @@ declare class LexModelsV2 extends Service {
    */
   listIntents(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentsResponse) => void): Request<LexModelsV2.Types.ListIntentsResponse, AWSError>;
   /**
-   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
+   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot.
    */
   listRecommendedIntents(params: LexModelsV2.Types.ListRecommendedIntentsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListRecommendedIntentsResponse) => void): Request<LexModelsV2.Types.ListRecommendedIntentsResponse, AWSError>;
   /**
-   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
+   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot.
    */
   listRecommendedIntents(callback?: (err: AWSError, data: LexModelsV2.Types.ListRecommendedIntentsResponse) => void): Request<LexModelsV2.Types.ListRecommendedIntentsResponse, AWSError>;
   /**
@@ -601,10 +569,10 @@ declare namespace LexModelsV2 {
      */
     operator: AggregatedUtterancesFilterOperator;
   }
-  export type AggregatedUtterancesFilterName = "Utterance"|string;
-  export type AggregatedUtterancesFilterOperator = "CO"|"EQ"|string;
+  export type AggregatedUtterancesFilterName = "Utterance";
+  export type AggregatedUtterancesFilterOperator = "CO"|"EQ";
   export type AggregatedUtterancesFilters = AggregatedUtterancesFilter[];
-  export type AggregatedUtterancesSortAttribute = "HitCount"|"MissedCount"|string;
+  export type AggregatedUtterancesSortAttribute = "HitCount"|"MissedCount";
   export interface AggregatedUtterancesSortBy {
     /**
      * The utterance attribute to sort by.
@@ -669,7 +637,7 @@ declare namespace LexModelsV2 {
      */
     values: FilterValues;
   }
-  export type AssociatedTranscriptFilterName = "IntentId"|"SlotTypeId"|string;
+  export type AssociatedTranscriptFilterName = "IntentId"|"SlotTypeId";
   export type AssociatedTranscriptFilters = AssociatedTranscriptFilter[];
   export type AssociatedTranscriptList = AssociatedTranscript[];
   export type AttachmentTitle = string;
@@ -702,7 +670,7 @@ declare namespace LexModelsV2 {
     destination: AudioLogDestination;
   }
   export type AudioLogSettingsList = AudioLogSetting[];
-  export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string;
+  export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary";
   export interface AudioSpecification {
     /**
      * Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
@@ -712,126 +680,6 @@ declare namespace LexModelsV2 {
      * Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
      */
     endTimeoutMs: TimeInMilliSeconds;
-  }
-  export interface BatchCreateCustomVocabularyItemRequest {
-    /**
-     * The unique identifier of the bot to batch create the custom vocabulary item for.
-     */
-    botId: Id;
-    /**
-     * The bot version of the bot to batch create the custom vocabulary item for.
-     */
-    botVersion: BotVersion;
-    /**
-     * The unique locale identifier of the bot to batch create the custom vocabulary item for.
-     */
-    localeId: LocaleId;
-    /**
-     * The custom vocabulary item list of the bot to batch create the custom vocabulary item for.
-     */
-    customVocabularyItemList: CreateCustomVocabularyItemsList;
-  }
-  export interface BatchCreateCustomVocabularyItemResponse {
-    /**
-     * The unique identifier of the bot to batch create response for the custom vocabulary item.
-     */
-    botId?: Id;
-    /**
-     * The bot version of the bot to batch create the custom vocabulary item response for.
-     */
-    botVersion?: BotVersion;
-    /**
-     * The unique locale identifier of the bot to batch create the custom vocabulary item response for.
-     */
-    localeId?: LocaleId;
-    /**
-     * The errors of the action to batch create the custom vocabulary item response for a bot.
-     */
-    errors?: FailedCustomVocabularyItems;
-    /**
-     * The resources of the action to batch create the custom vocabulary item response for a bot.
-     */
-    resources?: CustomVocabularyItems;
-  }
-  export interface BatchDeleteCustomVocabularyItemRequest {
-    /**
-     * The unique identifier of the bot to batch delete request for the custom vocabulary item.
-     */
-    botId: Id;
-    /**
-     * The version of the bot to batch delete request for the custom vocabulary item.
-     */
-    botVersion: BotVersion;
-    /**
-     * The locale identifier of the bot to batch delete request for the custom vocabulary item.
-     */
-    localeId: LocaleId;
-    /**
-     * The custom vocabulary list to batch delete request for the custom vocabulary item.
-     */
-    customVocabularyItemList: DeleteCustomVocabularyItemsList;
-  }
-  export interface BatchDeleteCustomVocabularyItemResponse {
-    /**
-     * The unique identifier of the bot to batch delete response for the custom vocabulary item.
-     */
-    botId?: Id;
-    /**
-     * The version of the bot to batch delete response for the custom vocabulary item.
-     */
-    botVersion?: BotVersion;
-    /**
-     * The locale identifier of the bot to batch delete response for the custom vocabulary item.
-     */
-    localeId?: LocaleId;
-    /**
-     * The errors of the action to batch delete response for the custom vocabulary item.
-     */
-    errors?: FailedCustomVocabularyItems;
-    /**
-     * The resources of the action to batch delete response for the custom vocabulary item.
-     */
-    resources?: CustomVocabularyItems;
-  }
-  export interface BatchUpdateCustomVocabularyItemRequest {
-    /**
-     * The unique identifier of the bot to the batch update request for the custom vocabulary item.
-     */
-    botId: Id;
-    /**
-     * The bot version of the bot to the batch update request for the custom vocabulary item.
-     */
-    botVersion: BotVersion;
-    /**
-     * The locale identifier of the bot to the batch update request for the custom vocabulary item.
-     */
-    localeId: LocaleId;
-    /**
-     * The custom vocabulary item list of the bot to the batch update request for the custom vocabulary item.
-     */
-    customVocabularyItemList: UpdateCustomVocabularyItemsList;
-  }
-  export interface BatchUpdateCustomVocabularyItemResponse {
-    /**
-     * The unique identifier of the bot to the batch update response for the custom vocabulary item.
-     */
-    botId?: Id;
-    /**
-     * The bot version of the bot to the batch update response for the custom vocabulary item.
-     */
-    botVersion?: BotVersion;
-    /**
-     * The locale identifier of the bot to the batch update response for the custom vocabulary item.
-     */
-    localeId?: LocaleId;
-    /**
-     * The errors of the action to batch update response for the custom vocabulary item.
-     */
-    errors?: FailedCustomVocabularyItems;
-    /**
-     * The resources of the action to batch update response for the custom vocabulary item.
-     */
-    resources?: CustomVocabularyItems;
   }
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
@@ -861,7 +709,7 @@ declare namespace LexModelsV2 {
     codeHookSpecification?: CodeHookSpecification;
   }
   export type BotAliasLocaleSettingsMap = {[key: string]: BotAliasLocaleSettings};
-  export type BotAliasStatus = "Creating"|"Available"|"Deleting"|"Failed"|string;
+  export type BotAliasStatus = "Creating"|"Available"|"Deleting"|"Failed";
   export interface BotAliasSummary {
     /**
      * The unique identifier assigned to the bot alias. You can use this ID to get detailed information about the alias using the DescribeBotAlias operation.
@@ -917,8 +765,8 @@ declare namespace LexModelsV2 {
      */
     operator: BotFilterOperator;
   }
-  export type BotFilterName = "BotName"|string;
-  export type BotFilterOperator = "CO"|"EQ"|string;
+  export type BotFilterName = "BotName";
+  export type BotFilterOperator = "CO"|"EQ";
   export type BotFilters = BotFilter[];
   export interface BotImportSpecification {
     /**
@@ -971,8 +819,8 @@ declare namespace LexModelsV2 {
      */
     operator: BotLocaleFilterOperator;
   }
-  export type BotLocaleFilterName = "BotLocaleName"|string;
-  export type BotLocaleFilterOperator = "CO"|"EQ"|string;
+  export type BotLocaleFilterName = "BotLocaleName";
+  export type BotLocaleFilterOperator = "CO"|"EQ";
   export type BotLocaleFilters = BotLocaleFilter[];
   export interface BotLocaleHistoryEvent {
     /**
@@ -1005,7 +853,7 @@ declare namespace LexModelsV2 {
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     voiceSettings?: VoiceSettings;
   }
-  export type BotLocaleSortAttribute = "BotLocaleName"|string;
+  export type BotLocaleSortAttribute = "BotLocaleName";
   export interface BotLocaleSortBy {
     /**
      * The bot locale attribute to sort by.
@@ -1016,7 +864,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type BotLocaleStatus = "Creating"|"Building"|"Built"|"ReadyExpressTesting"|"Failed"|"Deleting"|"NotBuilt"|"Importing"|"Processing"|string;
+  export type BotLocaleStatus = "Creating"|"Building"|"Built"|"ReadyExpressTesting"|"Failed"|"Deleting"|"NotBuilt"|"Importing"|"Processing";
   export interface BotLocaleSummary {
     /**
      * The language and locale of the bot locale.
@@ -1068,7 +916,7 @@ declare namespace LexModelsV2 {
      */
     statistics?: BotRecommendationResultStatistics;
   }
-  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|"Stopping"|"Stopped"|string;
+  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|"Stopping"|"Stopped";
   export interface BotRecommendationSummary {
     /**
      * The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field. 
@@ -1088,7 +936,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type BotRecommendationSummaryList = BotRecommendationSummary[];
-  export type BotSortAttribute = "BotName"|string;
+  export type BotSortAttribute = "BotName";
   export interface BotSortBy {
     /**
      * The attribute to use to sort the list of bots.
@@ -1099,7 +947,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type BotStatus = "Creating"|"Available"|"Inactive"|"Deleting"|"Failed"|"Versioning"|"Importing"|string;
+  export type BotStatus = "Creating"|"Available"|"Inactive"|"Deleting"|"Failed"|"Versioning"|"Importing";
   export interface BotSummary {
     /**
      * The unique identifier assigned to the bot. Use this ID to get detailed information about the bot with the DescribeBot operation.
@@ -1135,7 +983,7 @@ declare namespace LexModelsV2 {
     sourceBotVersion: BotVersion;
   }
   export type BotVersionLocaleSpecification = {[key: string]: BotVersionLocaleDetails};
-  export type BotVersionSortAttribute = "BotVersion"|string;
+  export type BotVersionSortAttribute = "BotVersion";
   export interface BotVersionSortBy {
     /**
      * The attribute to use to sort the list of versions.
@@ -1206,7 +1054,7 @@ declare namespace LexModelsV2 {
      */
     lastBuildSubmittedDateTime?: Timestamp;
   }
-  export type BuiltInIntentSortAttribute = "IntentSignature"|string;
+  export type BuiltInIntentSortAttribute = "IntentSignature";
   export interface BuiltInIntentSortBy {
     /**
      * The attribute to use to sort the list of built-in intents.
@@ -1229,7 +1077,7 @@ declare namespace LexModelsV2 {
   }
   export type BuiltInIntentSummaryList = BuiltInIntentSummary[];
   export type BuiltInOrCustomSlotTypeId = string;
-  export type BuiltInSlotTypeSortAttribute = "SlotTypeSignature"|string;
+  export type BuiltInSlotTypeSortAttribute = "SlotTypeSignature";
   export interface BuiltInSlotTypeSortBy {
     /**
      * The attribute to use to sort the list of built-in intents.
@@ -1593,7 +1441,6 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
-  export type CreateCustomVocabularyItemsList = NewCustomVocabularyItem[];
   export interface CreateExportRequest {
     /**
      * Specifies the type of resource to export, either a bot or a bot locale. You can only specify one type of resource to export.
@@ -2033,12 +1880,6 @@ declare namespace LexModelsV2 {
     value: CustomPayloadValue;
   }
   export type CustomPayloadValue = string;
-  export interface CustomVocabularyEntryId {
-    /**
-     * The unique item identifier for the custom vocabulary items.
-     */
-    itemId: ItemId;
-  }
   export interface CustomVocabularyExportSpecification {
     /**
      * The identifier of the bot that contains the custom vocabulary to export.
@@ -2067,26 +1908,7 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
   }
-  export interface CustomVocabularyItem {
-    /**
-     * The unique item identifer for the custom vocabulary item from the custom vocabulary list.
-     */
-    itemId: ItemId;
-    /**
-     * The unique phrase for the custom vocabulary item from the custom vocabulary list.
-     */
-    phrase: Phrase;
-    /**
-     * The weight assigned for the custom vocabulary item from the custom vocabulary list.
-     */
-    weight?: Weight;
-    /**
-     * The display as value for the custom vocabulary item from the custom vocabulary list.
-     */
-    displayAs?: Phrase;
-  }
-  export type CustomVocabularyItems = CustomVocabularyItem[];
-  export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string;
+  export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating";
   export type DTMFCharacter = string;
   export interface DTMFSpecification {
     /**
@@ -2237,7 +2059,6 @@ declare namespace LexModelsV2 {
      */
     botStatus?: BotStatus;
   }
-  export type DeleteCustomVocabularyItemsList = CustomVocabularyEntryId[];
   export interface DeleteCustomVocabularyRequest {
     /**
      * The unique identifier of the bot to remove the custom vocabulary from.
@@ -3125,7 +2946,7 @@ declare namespace LexModelsV2 {
      */
     suppressNextMessage?: BoxedBoolean;
   }
-  export type DialogActionType = "ElicitIntent"|"StartIntent"|"ElicitSlot"|"EvaluateConditional"|"InvokeDialogCodeHook"|"ConfirmIntent"|"FulfillIntent"|"CloseIntent"|"EndConversation"|string;
+  export type DialogActionType = "ElicitIntent"|"StartIntent"|"ElicitSlot"|"EvaluateConditional"|"InvokeDialogCodeHook"|"ConfirmIntent"|"FulfillIntent"|"CloseIntent"|"EndConversation";
   export interface DialogCodeHookInvocationSetting {
     /**
      * Indicates whether a Lambda function should be invoked for the dialog.
@@ -3159,7 +2980,7 @@ declare namespace LexModelsV2 {
     sessionAttributes?: StringMap;
   }
   export type DraftBotVersion = string;
-  export type Effect = "Allow"|"Deny"|string;
+  export type Effect = "Allow"|"Deny";
   export interface ElicitationCodeHookInvocationSetting {
     /**
      * Indicates whether a Lambda function should be invoked for the dialog.
@@ -3184,8 +3005,6 @@ declare namespace LexModelsV2 {
      */
     associatedTranscriptsPassword?: FilePassword;
   }
-  export type ErrorCode = "DUPLICATE_INPUT"|"RESOURCE_DOES_NOT_EXIST"|"RESOURCE_ALREADY_EXISTS"|"INTERNAL_SERVER_FAILURE"|string;
-  export type ErrorMessage = string;
   export interface ExportFilter {
     /**
      * The name of the field to use for filtering.
@@ -3200,8 +3019,8 @@ declare namespace LexModelsV2 {
      */
     operator: ExportFilterOperator;
   }
-  export type ExportFilterName = "ExportResourceType"|string;
-  export type ExportFilterOperator = "CO"|"EQ"|string;
+  export type ExportFilterName = "ExportResourceType";
+  export type ExportFilterOperator = "CO"|"EQ";
   export type ExportFilters = ExportFilter[];
   export interface ExportResourceSpecification {
     /**
@@ -3217,7 +3036,7 @@ declare namespace LexModelsV2 {
      */
     customVocabularyExportSpecification?: CustomVocabularyExportSpecification;
   }
-  export type ExportSortAttribute = "LastUpdatedDateTime"|string;
+  export type ExportSortAttribute = "LastUpdatedDateTime";
   export interface ExportSortBy {
     /**
      * The export field to use for sorting.
@@ -3228,7 +3047,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type ExportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string;
+  export type ExportStatus = "InProgress"|"Completed"|"Failed"|"Deleting";
   export interface ExportSummary {
     /**
      * The unique identifier that Amazon Lex assigned to the export.
@@ -3262,21 +3081,6 @@ declare namespace LexModelsV2 {
      */
     grammarSlotTypeSetting?: GrammarSlotTypeSetting;
   }
-  export interface FailedCustomVocabularyItem {
-    /**
-     * The unique item identifer for the failed custom vocabulary item from the custom vocabulary list.
-     */
-    itemId?: ItemId;
-    /**
-     * The error message for the failed custom vocabulary item from the custom vocabulary list.
-     */
-    errorMessage?: ErrorMessage;
-    /**
-     * The unique error code for the failed custom vocabulary item from the custom vocabulary list.
-     */
-    errorCode?: ErrorCode;
-  }
-  export type FailedCustomVocabularyItems = FailedCustomVocabularyItem[];
   export type FailureReason = string;
   export type FailureReasons = FailureReason[];
   export type FilePassword = string;
@@ -3389,7 +3193,7 @@ declare namespace LexModelsV2 {
      */
     buttons?: ButtonsList;
   }
-  export type ImportExportFileFormat = "LexJson"|"TSV"|string;
+  export type ImportExportFileFormat = "LexJson"|"TSV";
   export type ImportExportFilePassword = string;
   export interface ImportFilter {
     /**
@@ -3405,8 +3209,8 @@ declare namespace LexModelsV2 {
      */
     operator: ImportFilterOperator;
   }
-  export type ImportFilterName = "ImportResourceType"|string;
-  export type ImportFilterOperator = "CO"|"EQ"|string;
+  export type ImportFilterName = "ImportResourceType";
+  export type ImportFilterOperator = "CO"|"EQ";
   export type ImportFilters = ImportFilter[];
   export interface ImportResourceSpecification {
     /**
@@ -3419,8 +3223,8 @@ declare namespace LexModelsV2 {
     botLocaleImportSpecification?: BotLocaleImportSpecification;
     customVocabularyImportSpecification?: CustomVocabularyImportSpecification;
   }
-  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary"|string;
-  export type ImportSortAttribute = "LastUpdatedDateTime"|string;
+  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary";
+  export type ImportSortAttribute = "LastUpdatedDateTime";
   export interface ImportSortBy {
     /**
      * The export field to use for sorting.
@@ -3431,7 +3235,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type ImportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string;
+  export type ImportStatus = "InProgress"|"Completed"|"Failed"|"Deleting";
   export interface ImportSummary {
     /**
      * The unique identifier that Amazon Lex assigned to the import.
@@ -3561,8 +3365,8 @@ declare namespace LexModelsV2 {
      */
     operator: IntentFilterOperator;
   }
-  export type IntentFilterName = "IntentName"|string;
-  export type IntentFilterOperator = "CO"|"EQ"|string;
+  export type IntentFilterName = "IntentName";
+  export type IntentFilterOperator = "CO"|"EQ";
   export type IntentFilters = IntentFilter[];
   export interface IntentOverride {
     /**
@@ -3575,7 +3379,7 @@ declare namespace LexModelsV2 {
     slots?: SlotValueOverrideMap;
   }
   export type IntentSignature = string;
-  export type IntentSortAttribute = "IntentName"|"LastUpdatedDateTime"|string;
+  export type IntentSortAttribute = "IntentName"|"LastUpdatedDateTime";
   export interface IntentSortBy {
     /**
      * The attribute to use to sort the list of intents.
@@ -3623,7 +3427,6 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type IntentSummaryList = IntentSummary[];
-  export type ItemId = string;
   export interface KendraConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot.
@@ -3977,50 +3780,6 @@ declare namespace LexModelsV2 {
      */
     localeId?: LocaleId;
   }
-  export interface ListCustomVocabularyItemsRequest {
-    /**
-     * The unique identifier of the bot to the list custom vocabulary request.
-     */
-    botId: Id;
-    /**
-     * The bot version of the bot to the list custom vocabulary request.
-     */
-    botVersion: BotVersion;
-    /**
-     * The locale identifier of the bot to the list custom vocabulary request.
-     */
-    localeId: LocaleId;
-    /**
-     * The maximum results to the list custom vocabulary request.
-     */
-    maxResults?: MaxResults;
-    /**
-     * The nextToken identifier to the list custom vocabulary request.
-     */
-    nextToken?: NextToken;
-  }
-  export interface ListCustomVocabularyItemsResponse {
-    /**
-     * The unique identifier of the bot to the list custom vocabulary response.
-     */
-    botId?: Id;
-    /**
-     * The bot version of the bot to the list custom vocabulary response.
-     */
-    botVersion?: BotVersion;
-    /**
-     * The locale identifier of the bot to the list custom vocabulary response.
-     */
-    localeId?: LocaleId;
-    /**
-     * The custom vocabulary items from the list custom vocabulary response.
-     */
-    customVocabularyItems?: CustomVocabularyItems;
-    /**
-     * The nextToken identifier to the list custom vocabulary response.
-     */
-    nextToken?: NextToken;
-  }
   export interface ListExportsRequest {
     /**
      * The unique identifier that Amazon Lex assigned to the bot.
@@ -4358,7 +4117,7 @@ declare namespace LexModelsV2 {
   export type LogPrefix = string;
   export type MaxResults = number;
   export type MaxUtteranceDigits = number;
-  export type MergeStrategy = "Overwrite"|"FailOnConflict"|"Append"|string;
+  export type MergeStrategy = "Overwrite"|"FailOnConflict"|"Append";
   export interface Message {
     /**
      * A message in plain text format.
@@ -4388,7 +4147,7 @@ declare namespace LexModelsV2 {
     variations?: MessageVariationsList;
   }
   export type MessageGroupsList = MessageGroup[];
-  export type MessageSelectionStrategy = "Random"|"Ordered"|string;
+  export type MessageSelectionStrategy = "Random"|"Ordered";
   export type MessageVariationsList = Message[];
   export type MissedCount = number;
   export interface MultipleValuesSetting {
@@ -4398,20 +4157,6 @@ declare namespace LexModelsV2 {
     allowMultipleValues?: Boolean;
   }
   export type Name = string;
-  export interface NewCustomVocabularyItem {
-    /**
-     * The unique phrase for the new custom vocabulary item from the custom vocabulary list.
-     */
-    phrase: Phrase;
-    /**
-     * The weight assigned to the new custom vocabulary item from the custom vocabulary list.
-     */
-    weight?: Weight;
-    /**
-     * The display as value assigned to the new custom vocabulary item from the custom vocabulary list.
-     */
-    displayAs?: Phrase;
-  }
   export type NextIndex = number;
   export type NextToken = string;
   export type NonEmptyString = string;
@@ -4422,7 +4167,7 @@ declare namespace LexModelsV2 {
      */
     obfuscationSettingType: ObfuscationSettingType;
   }
-  export type ObfuscationSettingType = "None"|"DefaultObfuscation"|string;
+  export type ObfuscationSettingType = "None"|"DefaultObfuscation";
   export type ObjectPrefix = string;
   export type ObjectPrefixes = ObjectPrefix[];
   export type Operation = string;
@@ -4448,7 +4193,6 @@ declare namespace LexModelsV2 {
      */
     objectPrefixes?: ObjectPrefixes;
   }
-  export type Phrase = string;
   export interface PlainTextMessage {
     /**
      * The message to send to the user.
@@ -4529,7 +4273,7 @@ declare namespace LexModelsV2 {
   export type PrincipalArn = string;
   export type PrincipalList = Principal[];
   export type PriorityValue = number;
-  export type PromptAttempt = "Initial"|"Retry1"|"Retry2"|"Retry3"|"Retry4"|"Retry5"|string;
+  export type PromptAttempt = "Initial"|"Retry1"|"Retry2"|"Retry3"|"Retry4"|"Retry5";
   export interface PromptAttemptSpecification {
     /**
      * Indicates whether the user can interrupt a speech prompt attempt from the bot.
@@ -4738,7 +4482,7 @@ declare namespace LexModelsV2 {
      */
     totalResults?: MaxResults;
   }
-  export type SearchOrder = "Ascending"|"Descending"|string;
+  export type SearchOrder = "Ascending"|"Descending";
   export interface SentimentAnalysisSettings {
     /**
      * Sets whether Amazon Lex uses Amazon Comprehend to detect the sentiment of user utterances.
@@ -4777,7 +4521,7 @@ declare namespace LexModelsV2 {
      */
     elicitationCodeHook?: ElicitationCodeHookInvocationSetting;
   }
-  export type SlotConstraint = "Required"|"Optional"|string;
+  export type SlotConstraint = "Required"|"Optional";
   export interface SlotDefaultValue {
     /**
      * The default value to use when a user doesn't provide a value for a slot.
@@ -4806,8 +4550,8 @@ declare namespace LexModelsV2 {
      */
     operator: SlotFilterOperator;
   }
-  export type SlotFilterName = "SlotName"|string;
-  export type SlotFilterOperator = "CO"|"EQ"|string;
+  export type SlotFilterName = "SlotName";
+  export type SlotFilterOperator = "CO"|"EQ";
   export type SlotFilters = SlotFilter[];
   export type SlotPrioritiesList = SlotPriority[];
   export interface SlotPriority {
@@ -4820,8 +4564,8 @@ declare namespace LexModelsV2 {
      */
     slotId: Id;
   }
-  export type SlotShape = "Scalar"|"List"|string;
-  export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime"|string;
+  export type SlotShape = "Scalar"|"List";
+  export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime";
   export interface SlotSortBy {
     /**
      * The attribute to use to sort the list.
@@ -4863,7 +4607,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type SlotSummaryList = SlotSummary[];
-  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|"Composite"|string;
+  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|"Composite";
   export interface SlotTypeFilter {
     /**
      * The name of the field to use for filtering.
@@ -4878,11 +4622,11 @@ declare namespace LexModelsV2 {
      */
     operator: SlotTypeFilterOperator;
   }
-  export type SlotTypeFilterName = "SlotTypeName"|"ExternalSourceType"|string;
-  export type SlotTypeFilterOperator = "CO"|"EQ"|string;
+  export type SlotTypeFilterName = "SlotTypeName"|"ExternalSourceType";
+  export type SlotTypeFilterOperator = "CO"|"EQ";
   export type SlotTypeFilters = SlotTypeFilter[];
   export type SlotTypeSignature = string;
-  export type SlotTypeSortAttribute = "SlotTypeName"|"LastUpdatedDateTime"|string;
+  export type SlotTypeSortAttribute = "SlotTypeName"|"LastUpdatedDateTime";
   export interface SlotTypeSortBy {
     /**
      * The attribute to use to sort the list of slot types.
@@ -4987,7 +4731,7 @@ declare namespace LexModelsV2 {
      */
     pattern: RegexPattern;
   }
-  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation"|string;
+  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation";
   export interface SlotValueSelectionSetting {
     /**
      * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:   OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.   TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is OriginalValue. 
@@ -5003,7 +4747,7 @@ declare namespace LexModelsV2 {
     advancedRecognitionSetting?: AdvancedRecognitionSetting;
   }
   export type SlotValues = SlotValueOverride[];
-  export type SortOrder = "Ascending"|"Descending"|string;
+  export type SortOrder = "Ascending"|"Descending";
   export interface Specifications {
     /**
      * The unique identifier assigned to the slot type.
@@ -5241,7 +4985,7 @@ declare namespace LexModelsV2 {
     destination: TextLogDestination;
   }
   export type TextLogSettingsList = TextLogSetting[];
-  export type TimeDimension = "Hours"|"Days"|"Weeks"|string;
+  export type TimeDimension = "Hours"|"Days"|"Weeks";
   export type TimeInMilliSeconds = number;
   export type TimeValue = number;
   export type Timestamp = Date;
@@ -5252,7 +4996,7 @@ declare namespace LexModelsV2 {
      */
     lexTranscriptFilter?: LexTranscriptFilter;
   }
-  export type TranscriptFormat = "Lex"|string;
+  export type TranscriptFormat = "Lex";
   export interface TranscriptSourceSetting {
     /**
      * Indicates the setting of the Amazon S3 bucket where the transcript is stored.
@@ -5545,7 +5289,6 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
   }
-  export type UpdateCustomVocabularyItemsList = CustomVocabularyItem[];
   export interface UpdateExportRequest {
     /**
      * The unique identifier Amazon Lex assigned to the export.
@@ -5964,7 +5707,7 @@ declare namespace LexModelsV2 {
     relativeAggregationDuration: RelativeAggregationDuration;
   }
   export type Value = string;
-  export type VoiceEngine = "standard"|"neural"|string;
+  export type VoiceEngine = "standard"|"neural";
   export type VoiceId = string;
   export interface VoiceSettings {
     /**
@@ -5994,7 +5737,6 @@ declare namespace LexModelsV2 {
      */
     active?: BoxedBoolean;
   }
-  export type Weight = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

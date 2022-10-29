@@ -93,7 +93,7 @@ declare class ApplicationAutoScaling extends Service {
   registerScalableTarget(callback?: (err: AWSError, data: ApplicationAutoScaling.Types.RegisterScalableTargetResponse) => void): Request<ApplicationAutoScaling.Types.RegisterScalableTargetResponse, AWSError>;
 }
 declare namespace ApplicationAutoScaling {
-  export type AdjustmentType = "ChangeInCapacity"|"PercentChangeInCapacity"|"ExactCapacity"|string;
+  export type AdjustmentType = "ChangeInCapacity"|"PercentChangeInCapacity"|"ExactCapacity";
   export interface Alarm {
     /**
      * The name of the alarm.
@@ -322,7 +322,7 @@ declare namespace ApplicationAutoScaling {
   }
   export type DisableScaleIn = boolean;
   export type MaxResults = number;
-  export type MetricAggregationType = "Average"|"Minimum"|"Maximum"|string;
+  export type MetricAggregationType = "Average"|"Minimum"|"Maximum";
   export interface MetricDimension {
     /**
      * The name of the dimension.
@@ -339,12 +339,12 @@ declare namespace ApplicationAutoScaling {
   export type MetricName = string;
   export type MetricNamespace = string;
   export type MetricScale = number;
-  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
-  export type MetricType = "DynamoDBReadCapacityUtilization"|"DynamoDBWriteCapacityUtilization"|"ALBRequestCountPerTarget"|"RDSReaderAverageCPUUtilization"|"RDSReaderAverageDatabaseConnections"|"EC2SpotFleetRequestAverageCPUUtilization"|"EC2SpotFleetRequestAverageNetworkIn"|"EC2SpotFleetRequestAverageNetworkOut"|"SageMakerVariantInvocationsPerInstance"|"ECSServiceAverageCPUUtilization"|"ECSServiceAverageMemoryUtilization"|"AppStreamAverageCapacityUtilization"|"ComprehendInferenceUtilization"|"LambdaProvisionedConcurrencyUtilization"|"CassandraReadCapacityUtilization"|"CassandraWriteCapacityUtilization"|"KafkaBrokerStorageUtilization"|"ElastiCachePrimaryEngineCPUUtilization"|"ElastiCacheReplicaEngineCPUUtilization"|"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"|"NeptuneReaderAverageCPUUtilization"|string;
+  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum";
+  export type MetricType = "DynamoDBReadCapacityUtilization"|"DynamoDBWriteCapacityUtilization"|"ALBRequestCountPerTarget"|"RDSReaderAverageCPUUtilization"|"RDSReaderAverageDatabaseConnections"|"EC2SpotFleetRequestAverageCPUUtilization"|"EC2SpotFleetRequestAverageNetworkIn"|"EC2SpotFleetRequestAverageNetworkOut"|"SageMakerVariantInvocationsPerInstance"|"ECSServiceAverageCPUUtilization"|"ECSServiceAverageMemoryUtilization"|"AppStreamAverageCapacityUtilization"|"ComprehendInferenceUtilization"|"LambdaProvisionedConcurrencyUtilization"|"CassandraReadCapacityUtilization"|"CassandraWriteCapacityUtilization"|"KafkaBrokerStorageUtilization"|"ElastiCachePrimaryEngineCPUUtilization"|"ElastiCacheReplicaEngineCPUUtilization"|"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"|"NeptuneReaderAverageCPUUtilization";
   export type MetricUnit = string;
   export type MinAdjustmentMagnitude = number;
   export type PolicyName = string;
-  export type PolicyType = "StepScaling"|"TargetTrackingScaling"|string;
+  export type PolicyType = "StepScaling"|"TargetTrackingScaling";
   export interface PredefinedMetricSpecification {
     /**
      * The metric type. The ALBRequestCountPerTarget metric type applies only to Spot Fleet requests and ECS services.
@@ -472,7 +472,7 @@ declare namespace ApplicationAutoScaling {
   export type ResourceIdMaxLen1600 = string;
   export type ResourceIdsMaxLen1600 = ResourceIdMaxLen1600[];
   export type ResourceLabel = string;
-  export type ScalableDimension = "ecs:service:DesiredCount"|"ec2:spot-fleet-request:TargetCapacity"|"elasticmapreduce:instancegroup:InstanceCount"|"appstream:fleet:DesiredCapacity"|"dynamodb:table:ReadCapacityUnits"|"dynamodb:table:WriteCapacityUnits"|"dynamodb:index:ReadCapacityUnits"|"dynamodb:index:WriteCapacityUnits"|"rds:cluster:ReadReplicaCount"|"sagemaker:variant:DesiredInstanceCount"|"custom-resource:ResourceType:Property"|"comprehend:document-classifier-endpoint:DesiredInferenceUnits"|"comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"|"lambda:function:ProvisionedConcurrency"|"cassandra:table:ReadCapacityUnits"|"cassandra:table:WriteCapacityUnits"|"kafka:broker-storage:VolumeSize"|"elasticache:replication-group:NodeGroups"|"elasticache:replication-group:Replicas"|"neptune:cluster:ReadReplicaCount"|string;
+  export type ScalableDimension = "ecs:service:DesiredCount"|"ec2:spot-fleet-request:TargetCapacity"|"elasticmapreduce:instancegroup:InstanceCount"|"appstream:fleet:DesiredCapacity"|"dynamodb:table:ReadCapacityUnits"|"dynamodb:table:WriteCapacityUnits"|"dynamodb:index:ReadCapacityUnits"|"dynamodb:index:WriteCapacityUnits"|"rds:cluster:ReadReplicaCount"|"sagemaker:variant:DesiredInstanceCount"|"custom-resource:ResourceType:Property"|"comprehend:document-classifier-endpoint:DesiredInferenceUnits"|"comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"|"lambda:function:ProvisionedConcurrency"|"cassandra:table:ReadCapacityUnits"|"cassandra:table:WriteCapacityUnits"|"kafka:broker-storage:VolumeSize"|"elasticache:replication-group:NodeGroups"|"elasticache:replication-group:Replicas"|"neptune:cluster:ReadReplicaCount";
   export interface ScalableTarget {
     /**
      * The namespace of the Amazon Web Services service that provides the resource, or a custom-resource.
@@ -562,7 +562,7 @@ declare namespace ApplicationAutoScaling {
      */
     Details?: XmlString;
   }
-  export type ScalingActivityStatusCode = "Pending"|"InProgress"|"Successful"|"Overridden"|"Unfulfilled"|"Failed"|string;
+  export type ScalingActivityStatusCode = "Pending"|"InProgress"|"Successful"|"Overridden"|"Unfulfilled"|"Failed";
   export type ScalingAdjustment = number;
   export type ScalingPolicies = ScalingPolicy[];
   export interface ScalingPolicy {
@@ -656,7 +656,7 @@ declare namespace ApplicationAutoScaling {
   }
   export type ScheduledActionName = string;
   export type ScheduledActions = ScheduledAction[];
-  export type ServiceNamespace = "ecs"|"elasticmapreduce"|"ec2"|"appstream"|"dynamodb"|"rds"|"sagemaker"|"custom-resource"|"comprehend"|"lambda"|"cassandra"|"kafka"|"elasticache"|"neptune"|string;
+  export type ServiceNamespace = "ecs"|"elasticmapreduce"|"ec2"|"appstream"|"dynamodb"|"rds"|"sagemaker"|"custom-resource"|"comprehend"|"lambda"|"cassandra"|"kafka"|"elasticache"|"neptune";
   export interface StepAdjustment {
     /**
      * The lower bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the lower bound is inclusive (the metric must be greater than or equal to the threshold plus the lower bound). Otherwise, it is exclusive (the metric must be greater than the threshold plus the lower bound). A null value indicates negative infinity.

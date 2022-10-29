@@ -310,7 +310,7 @@ declare namespace KinesisAnalytics {
     ApplicationVersionId: ApplicationVersionId;
   }
   export type ApplicationName = string;
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING";
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -728,7 +728,7 @@ declare namespace KinesisAnalytics {
      */
     RecordColumnUpdates?: RecordColumns;
   }
-  export type InputStartingPosition = "NOW"|"TRIM_HORIZON"|"LAST_STOPPED_POINT"|string;
+  export type InputStartingPosition = "NOW"|"TRIM_HORIZON"|"LAST_STOPPED_POINT";
   export interface InputStartingPositionConfiguration {
     /**
      * The starting position on the stream.    NOW - Start reading just after the most recent record in the stream, start at the request time stamp that the customer issued.    TRIM_HORIZON - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Firehose delivery stream.    LAST_STOPPED_POINT - Resume reading from where the application last stopped reading.  
@@ -1082,7 +1082,7 @@ declare namespace KinesisAnalytics {
      */
     MappingParameters?: MappingParameters;
   }
-  export type RecordFormatType = "JSON"|"CSV"|string;
+  export type RecordFormatType = "JSON"|"CSV";
   export type RecordRowDelimiter = string;
   export type RecordRowPath = string;
   export interface ReferenceDataSource {

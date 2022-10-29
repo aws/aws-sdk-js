@@ -199,7 +199,7 @@ declare namespace EMRServerless {
   export type ApplicationId = string;
   export type ApplicationList = ApplicationSummary[];
   export type ApplicationName = string;
-  export type ApplicationState = "CREATING"|"CREATED"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"TERMINATED"|string;
+  export type ApplicationState = "CREATING"|"CREATED"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"TERMINATED";
   export type ApplicationStateSet = ApplicationState[];
   export interface ApplicationSummary {
     /**
@@ -529,7 +529,7 @@ declare namespace EMRServerless {
     totalExecutionDurationSeconds?: Integer;
   }
   export type JobRunId = string;
-  export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
+  export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED";
   export type JobRunStateSet = JobRunState[];
   export interface JobRunSummary {
     /**

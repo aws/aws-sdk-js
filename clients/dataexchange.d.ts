@@ -372,7 +372,7 @@ declare namespace DataExchange {
      */
     Key: __string;
   }
-  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|"API_GATEWAY_API"|string;
+  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|"API_GATEWAY_API";
   export interface AutoExportRevisionDestinationEntry {
     /**
      * The S3 bucket that is the destination for the event action.
@@ -399,7 +399,7 @@ declare namespace DataExchange {
      */
     JobId: __string;
   }
-  export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE"|string;
+  export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE";
   export interface CreateDataSetRequest {
     /**
      * The type of asset that is added to a data set.
@@ -1338,8 +1338,8 @@ declare namespace DataExchange {
      */
     ResourceType?: JobErrorResourceTypes;
   }
-  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision"|string;
-  export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string;
+  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision";
+  export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET";
   export interface ListDataSetRevisionsRequest {
     /**
      * The unique identifier for a data set.
@@ -1495,14 +1495,14 @@ declare namespace DataExchange {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
-  export type Origin = "OWNED"|"ENTITLED"|string;
+  export type Origin = "OWNED"|"ENTITLED";
   export interface OriginDetails {
     /**
      * The product ID of the origin of the data set.
      */
     ProductId: __string;
   }
-  export type ProtocolType = "REST"|string;
+  export type ProtocolType = "REST";
   export interface RedshiftDataShareAsset {
     /**
      * The Amazon Resource Name (ARN) of the datashare asset.
@@ -1751,7 +1751,7 @@ declare namespace DataExchange {
      */
     ResponseHeaders?: MapOf__string;
   }
-  export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string;
+  export type ServerSideEncryptionTypes = "aws:kms"|"AES256";
   export interface StartJobRequest {
     /**
      * The unique identifier for a job.
@@ -1760,7 +1760,7 @@ declare namespace DataExchange {
   }
   export interface StartJobResponse {
   }
-  export type State = "WAITING"|"IN_PROGRESS"|"ERROR"|"COMPLETED"|"CANCELLED"|"TIMED_OUT"|string;
+  export type State = "WAITING"|"IN_PROGRESS"|"ERROR"|"COMPLETED"|"CANCELLED"|"TIMED_OUT";
   export interface TagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.
@@ -1772,7 +1772,7 @@ declare namespace DataExchange {
     Tags: MapOf__string;
   }
   export type Timestamp = Date;
-  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|"IMPORT_ASSET_FROM_API_GATEWAY_API"|string;
+  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|"IMPORT_ASSET_FROM_API_GATEWAY_API";
   export interface UntagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.

@@ -380,8 +380,8 @@ declare namespace Synthetics {
      */
     ActiveTracing?: NullableBoolean;
   }
-  export type CanaryRunState = "RUNNING"|"PASSED"|"FAILED"|string;
-  export type CanaryRunStateReasonCode = "CANARY_FAILURE"|"EXECUTION_FAILURE"|string;
+  export type CanaryRunState = "RUNNING"|"PASSED"|"FAILED";
+  export type CanaryRunStateReasonCode = "CANARY_FAILURE"|"EXECUTION_FAILURE";
   export interface CanaryRunStatus {
     /**
      * The current state of the run.
@@ -427,8 +427,8 @@ declare namespace Synthetics {
      */
     DurationInSeconds?: MaxOneYearInSeconds;
   }
-  export type CanaryState = "CREATING"|"READY"|"STARTING"|"RUNNING"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|"DELETING"|string;
-  export type CanaryStateReasonCode = "INVALID_PERMISSIONS"|"CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_PENDING"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"ROLLBACK_COMPLETE"|"ROLLBACK_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"SYNC_DELETE_IN_PROGRESS"|string;
+  export type CanaryState = "CREATING"|"READY"|"STARTING"|"RUNNING"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|"DELETING";
+  export type CanaryStateReasonCode = "INVALID_PERMISSIONS"|"CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"UPDATE_PENDING"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"ROLLBACK_COMPLETE"|"ROLLBACK_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"SYNC_DELETE_IN_PROGRESS";
   export interface CanaryStatus {
     /**
      * The current state of the canary.
@@ -636,7 +636,7 @@ declare namespace Synthetics {
   }
   export interface DisassociateResourceResponse {
   }
-  export type EncryptionMode = "SSE_S3"|"SSE_KMS"|string;
+  export type EncryptionMode = "SSE_S3"|"SSE_KMS";
   export type EnvironmentVariableName = string;
   export type EnvironmentVariableValue = string;
   export type EnvironmentVariablesMap = {[key: string]: EnvironmentVariableValue};

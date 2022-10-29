@@ -411,7 +411,7 @@ declare namespace IoTAnalytics {
      */
     size?: EstimatedResourceSize;
   }
-  export type ChannelStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
+  export type ChannelStatus = "CREATING"|"ACTIVE"|"DELETING";
   export interface ChannelStorage {
     /**
      * Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice of S3 storage after the data store is created.
@@ -472,7 +472,7 @@ declare namespace IoTAnalytics {
   export type ColumnDataType = string;
   export type ColumnName = string;
   export type Columns = Column[];
-  export type ComputeType = "ACU_1"|"ACU_2"|string;
+  export type ComputeType = "ACU_1"|"ACU_2";
   export interface ContainerDatasetAction {
     /**
      * The ARN of the Docker container stored in your account. The Docker container contains an application and required support libraries and is used to generate dataset contents.
@@ -779,7 +779,7 @@ declare namespace IoTAnalytics {
      */
     actionType?: DatasetActionType;
   }
-  export type DatasetActionType = "QUERY"|"CONTAINER"|string;
+  export type DatasetActionType = "QUERY"|"CONTAINER";
   export type DatasetActions = DatasetAction[];
   export type DatasetArn = string;
   export interface DatasetContentDeliveryDestination {
@@ -803,7 +803,7 @@ declare namespace IoTAnalytics {
     destination: DatasetContentDeliveryDestination;
   }
   export type DatasetContentDeliveryRules = DatasetContentDeliveryRule[];
-  export type DatasetContentState = "CREATING"|"SUCCEEDED"|"FAILED"|string;
+  export type DatasetContentState = "CREATING"|"SUCCEEDED"|"FAILED";
   export interface DatasetContentStatus {
     /**
      * The state of the dataset contents. Can be one of READY, CREATING, SUCCEEDED, or FAILED.
@@ -856,7 +856,7 @@ declare namespace IoTAnalytics {
     dataURI?: PresignedURI;
   }
   export type DatasetName = string;
-  export type DatasetStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
+  export type DatasetStatus = "CREATING"|"ACTIVE"|"DELETING";
   export type DatasetSummaries = DatasetSummary[];
   export interface DatasetSummary {
     /**
@@ -983,7 +983,7 @@ declare namespace IoTAnalytics {
      */
     size?: EstimatedResourceSize;
   }
-  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
+  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING";
   export interface DatastoreStorage {
     /**
      * Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created. 
@@ -1238,7 +1238,7 @@ declare namespace IoTAnalytics {
      */
     parquetConfiguration?: ParquetConfiguration;
   }
-  export type FileFormatType = "JSON"|"PARQUET"|string;
+  export type FileFormatType = "JSON"|"PARQUET";
   export interface FilterActivity {
     /**
      * The name of the filter activity.
@@ -1488,7 +1488,7 @@ declare namespace IoTAnalytics {
   }
   export type LogResult = string;
   export type LoggingEnabled = boolean;
-  export type LoggingLevel = "ERROR"|string;
+  export type LoggingLevel = "ERROR";
   export interface LoggingOptions {
     /**
      * The ARN of the role that grants permission to IoT Analytics to perform logging.
@@ -1682,7 +1682,7 @@ declare namespace IoTAnalytics {
     next?: ActivityName;
   }
   export type ReprocessingId = string;
-  export type ReprocessingStatus = "RUNNING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export type ReprocessingStatus = "RUNNING"|"SUCCEEDED"|"CANCELLED"|"FAILED";
   export type ReprocessingSummaries = ReprocessingSummary[];
   export interface ReprocessingSummary {
     /**

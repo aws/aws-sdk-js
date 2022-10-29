@@ -49,7 +49,7 @@ declare namespace SagemakerEdge {
     Sum?: ChecksumString;
   }
   export type ChecksumString = string;
-  export type ChecksumType = "SHA1"|string;
+  export type ChecksumType = "SHA1";
   export interface Definition {
     /**
      * The unique model handle.
@@ -130,8 +130,8 @@ declare namespace SagemakerEdge {
      */
     DeploymentModels?: DeploymentModels;
   }
-  export type DeploymentStatus = "SUCCESS"|"FAIL"|string;
-  export type DeploymentType = "Model"|string;
+  export type DeploymentStatus = "SUCCESS"|"FAIL";
+  export type DeploymentType = "Model";
   export type DeviceFleetName = string;
   export type DeviceName = string;
   export type DeviceRegistration = string;
@@ -175,7 +175,7 @@ declare namespace SagemakerEdge {
   }
   export type EdgeMetrics = EdgeMetric[];
   export type EntityName = string;
-  export type FailureHandlingPolicy = "ROLLBACK_ON_FAILURE"|"DO_NOTHING"|string;
+  export type FailureHandlingPolicy = "ROLLBACK_ON_FAILURE"|"DO_NOTHING";
   export interface GetDeploymentsRequest {
     /**
      * The unique name of the device you want to get the configuration of active deployments from.
@@ -236,7 +236,7 @@ declare namespace SagemakerEdge {
     ModelMetrics?: EdgeMetrics;
   }
   export type ModelName = string;
-  export type ModelState = "DEPLOY"|"UNDEPLOY"|string;
+  export type ModelState = "DEPLOY"|"UNDEPLOY";
   export type Models = Model[];
   export type S3Uri = string;
   export interface SendHeartbeatRequest {

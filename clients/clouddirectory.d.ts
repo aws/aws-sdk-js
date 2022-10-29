@@ -1265,7 +1265,7 @@ declare namespace CloudDirectory {
      */
     Message?: ExceptionMessage;
   }
-  export type BatchReadExceptionType = "ValidationException"|"InvalidArnException"|"ResourceNotFoundException"|"InvalidNextTokenException"|"AccessDeniedException"|"NotNodeException"|"FacetValidationException"|"CannotListParentOfRootException"|"NotIndexException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"InternalServiceException"|string;
+  export type BatchReadExceptionType = "ValidationException"|"InvalidArnException"|"ResourceNotFoundException"|"InvalidNextTokenException"|"AccessDeniedException"|"NotNodeException"|"FacetValidationException"|"CannotListParentOfRootException"|"NotIndexException"|"NotPolicyException"|"DirectoryNotEnabledException"|"LimitExceededException"|"InternalServiceException";
   export interface BatchReadOperation {
     /**
      * Lists all attributes that are associated with an object.
@@ -1600,7 +1600,7 @@ declare namespace CloudDirectory {
   export type BinaryAttributeValue = Buffer|Uint8Array|Blob|string;
   export type Bool = boolean;
   export type BooleanAttributeValue = boolean;
-  export type ConsistencyLevel = "SERIALIZABLE"|"EVENTUAL"|string;
+  export type ConsistencyLevel = "SERIALIZABLE"|"EVENTUAL";
   export interface CreateDirectoryRequest {
     /**
      * The name of the Directory. Should be unique per account, per region.
@@ -1882,7 +1882,7 @@ declare namespace CloudDirectory {
   export type DirectoryArn = string;
   export type DirectoryList = Directory[];
   export type DirectoryName = string;
-  export type DirectoryState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export type DirectoryState = "ENABLED"|"DISABLED"|"DELETED";
   export interface DisableDirectoryRequest {
     /**
      * The ARN of the directory to disable.
@@ -1969,7 +1969,7 @@ declare namespace CloudDirectory {
      */
     TargetAttributeName: AttributeName;
   }
-  export type FacetAttributeType = "STRING"|"BINARY"|"BOOLEAN"|"NUMBER"|"DATETIME"|"VARIANT"|string;
+  export type FacetAttributeType = "STRING"|"BINARY"|"BOOLEAN"|"NUMBER"|"DATETIME"|"VARIANT";
   export interface FacetAttributeUpdate {
     /**
      * The attribute to update.
@@ -1983,7 +1983,7 @@ declare namespace CloudDirectory {
   export type FacetAttributeUpdateList = FacetAttributeUpdate[];
   export type FacetName = string;
   export type FacetNameList = FacetName[];
-  export type FacetStyle = "STATIC"|"DYNAMIC"|string;
+  export type FacetStyle = "STATIC"|"DYNAMIC";
   export interface GetAppliedSchemaVersionRequest {
     /**
      * The ARN of the applied schema.
@@ -2845,7 +2845,7 @@ declare namespace CloudDirectory {
      */
     Selector?: SelectorObjectReference;
   }
-  export type ObjectType = "NODE"|"LEAF_NODE"|"POLICY"|"INDEX"|string;
+  export type ObjectType = "NODE"|"LEAF_NODE"|"POLICY"|"INDEX";
   export type PathString = string;
   export interface PathToObjectIdentifiers {
     /**
@@ -2925,7 +2925,7 @@ declare namespace CloudDirectory {
      */
     Arn?: Arn;
   }
-  export type RangeMode = "FIRST"|"LAST"|"LAST_BEFORE_MISSING_VALUES"|"INCLUSIVE"|"EXCLUSIVE"|string;
+  export type RangeMode = "FIRST"|"LAST"|"LAST_BEFORE_MISSING_VALUES"|"INCLUSIVE"|"EXCLUSIVE";
   export interface RemoveFacetFromObjectRequest {
     /**
      * The ARN of the directory in which the object resides.
@@ -2942,7 +2942,7 @@ declare namespace CloudDirectory {
   }
   export interface RemoveFacetFromObjectResponse {
   }
-  export type RequiredAttributeBehavior = "REQUIRED_ALWAYS"|"NOT_REQUIRED"|string;
+  export type RequiredAttributeBehavior = "REQUIRED_ALWAYS"|"NOT_REQUIRED";
   export interface Rule {
     /**
      * The type of attribute validation rule.
@@ -2958,7 +2958,7 @@ declare namespace CloudDirectory {
   export type RuleParameterKey = string;
   export type RuleParameterMap = {[key: string]: RuleParameterValue};
   export type RuleParameterValue = string;
-  export type RuleType = "BINARY_LENGTH"|"NUMBER_COMPARISON"|"STRING_FROM_SET"|"STRING_LENGTH"|string;
+  export type RuleType = "BINARY_LENGTH"|"NUMBER_COMPARISON"|"STRING_FROM_SET"|"STRING_LENGTH";
   export interface SchemaFacet {
     /**
      * The ARN of the schema that contains the facet with no minor component. See arns and In-Place Schema Upgrade for a description of when to provide minor versions. If this value is set, FacetName must also be set.
@@ -3147,7 +3147,7 @@ declare namespace CloudDirectory {
   }
   export interface UntagResourceResponse {
   }
-  export type UpdateActionType = "CREATE_OR_UPDATE"|"DELETE"|string;
+  export type UpdateActionType = "CREATE_OR_UPDATE"|"DELETE";
   export interface UpdateFacetRequest {
     /**
      * The Amazon Resource Name (ARN) that is associated with the Facet. For more information, see arns.

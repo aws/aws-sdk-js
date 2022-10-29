@@ -1583,8 +1583,8 @@ declare namespace Chime {
      */
     EnableDialOut?: Boolean;
   }
-  export type AccountStatus = "Suspended"|"Active"|string;
-  export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC"|string;
+  export type AccountStatus = "Suspended"|"Active";
+  export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC";
   export interface Address {
     /**
      * The address street, such as 8th Avenue.
@@ -1681,7 +1681,7 @@ declare namespace Chime {
      */
     Admin?: Identity;
   }
-  export type AppInstanceDataType = "Channel"|"ChannelMessage"|string;
+  export type AppInstanceDataType = "Channel"|"ChannelMessage";
   export type AppInstanceList = AppInstanceSummary[];
   export interface AppInstanceRetentionSettings {
     /**
@@ -1777,7 +1777,7 @@ declare namespace Chime {
      */
     Content: ContentArtifactsConfiguration;
   }
-  export type ArtifactsState = "Enabled"|"Disabled"|string;
+  export type ArtifactsState = "Enabled"|"Disabled";
   export interface AssociatePhoneNumberWithUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -1870,7 +1870,7 @@ declare namespace Chime {
      */
     MuxType: AudioMuxType;
   }
-  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|string;
+  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo";
   export interface BatchChannelMemberships {
     /**
      * The identifier of the member who invited another member.
@@ -2085,7 +2085,7 @@ declare namespace Chime {
     SecurityToken?: SensitiveString;
   }
   export type BotList = Bot[];
-  export type BotType = "ChatBot"|string;
+  export type BotType = "ChatBot";
   export interface BusinessCallingSettings {
     /**
      * The Amazon S3 bucket designated for call detail record storage.
@@ -2093,7 +2093,7 @@ declare namespace Chime {
     CdrBucket?: String;
   }
   export type CallingName = string;
-  export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
+  export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed";
   export type CallingRegion = string;
   export type CallingRegionList = CallingRegion[];
   export interface CandidateAddress {
@@ -2127,7 +2127,7 @@ declare namespace Chime {
     country?: SensitiveNonEmptyString;
   }
   export type CandidateAddressList = CandidateAddress[];
-  export type Capability = "Voice"|"SMS"|string;
+  export type Capability = "Voice"|"SMS";
   export type CapabilityList = Capability[];
   export interface Channel {
     /**
@@ -2230,7 +2230,7 @@ declare namespace Chime {
     Member?: Identity;
   }
   export type ChannelMembershipSummaryList = ChannelMembershipSummary[];
-  export type ChannelMembershipType = "DEFAULT"|"HIDDEN"|string;
+  export type ChannelMembershipType = "DEFAULT"|"HIDDEN";
   export interface ChannelMessage {
     /**
      * The ARN of the channel.
@@ -2277,7 +2277,7 @@ declare namespace Chime {
      */
     Persistence?: ChannelMessagePersistenceType;
   }
-  export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
+  export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT";
   export interface ChannelMessageSummary {
     /**
      * The ID of the message.
@@ -2317,8 +2317,8 @@ declare namespace Chime {
     Redacted?: NonNullableBoolean;
   }
   export type ChannelMessageSummaryList = ChannelMessageSummary[];
-  export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
-  export type ChannelMode = "UNRESTRICTED"|"RESTRICTED"|string;
+  export type ChannelMessageType = "STANDARD"|"CONTROL";
+  export type ChannelMode = "UNRESTRICTED"|"RESTRICTED";
   export interface ChannelModeratedByAppInstanceUserSummary {
     /**
      * Summary of the details of a Channel.
@@ -2351,7 +2351,7 @@ declare namespace Chime {
     Moderator?: Identity;
   }
   export type ChannelModeratorSummaryList = ChannelModeratorSummary[];
-  export type ChannelPrivacy = "PUBLIC"|"PRIVATE"|string;
+  export type ChannelPrivacy = "PUBLIC"|"PRIVATE";
   export interface ChannelRetentionSettings {
     /**
      * The time in days to retain the messages in a channel.
@@ -2408,7 +2408,7 @@ declare namespace Chime {
      */
     MuxType?: ContentMuxType;
   }
-  export type ContentMuxType = "ContentOnly"|string;
+  export type ContentMuxType = "ContentOnly";
   export interface ConversationRetentionSettings {
     /**
      * The number of days for which to retain conversation messages.
@@ -3523,7 +3523,7 @@ declare namespace Chime {
   export type E164PhoneNumber = string;
   export type E164PhoneNumberList = E164PhoneNumber[];
   export type EmailAddress = string;
-  export type EmailStatus = "NotSent"|"Sent"|"Failed"|string;
+  export type EmailStatus = "NotSent"|"Sent"|"Failed";
   export interface EmergencyCallingConfiguration {
     /**
      * The Dialed Number Identification Service (DNIS) emergency calling configuration details.
@@ -3602,7 +3602,7 @@ declare namespace Chime {
      */
     LanguageModelName?: TranscribeLanguageModelName;
   }
-  export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
+  export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist";
   export interface EventsConfiguration {
     /**
      * The bot ID.
@@ -3621,7 +3621,7 @@ declare namespace Chime {
   export type ExternalUserIdList = ExternalUserIdType[];
   export type ExternalUserIdType = string;
   export type FunctionArn = string;
-  export type GeoMatchLevel = "Country"|"AreaCode"|string;
+  export type GeoMatchLevel = "Country"|"AreaCode";
   export interface GeoMatchParams {
     /**
      * The country.
@@ -4083,7 +4083,7 @@ declare namespace Chime {
     EmailStatus?: EmailStatus;
   }
   export type InviteList = Invite[];
-  export type InviteStatus = "Pending"|"Accepted"|"Failed"|string;
+  export type InviteStatus = "Pending"|"Accepted"|"Failed";
   export interface InviteUsersRequest {
     /**
      * The Amazon Chime account ID.
@@ -4106,7 +4106,7 @@ declare namespace Chime {
   }
   export type Iso8601Timestamp = Date;
   export type JoinTokenString = string;
-  export type License = "Basic"|"Plus"|"Pro"|"ProTrial"|string;
+  export type License = "Basic"|"Plus"|"Pro"|"ProTrial";
   export type LicenseList = License[];
   export interface ListAccountsRequest {
     /**
@@ -4914,9 +4914,9 @@ declare namespace Chime {
     ChimeSdkMeetingConfiguration?: ChimeSdkMeetingConfiguration;
   }
   export type MediaCapturePipelineList = MediaCapturePipeline[];
-  export type MediaPipelineSinkType = "S3Bucket"|string;
-  export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
-  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
+  export type MediaPipelineSinkType = "S3Bucket";
+  export type MediaPipelineSourceType = "ChimeSdkMeeting";
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped";
   export interface MediaPlacement {
     /**
      * The audio host URL.
@@ -5020,7 +5020,7 @@ declare namespace Chime {
     ErrorMessage?: String;
   }
   export type MemberErrorList = MemberError[];
-  export type MemberType = "User"|"Bot"|"Webhook"|string;
+  export type MemberType = "User"|"Bot"|"Webhook";
   export type Members = Identity[];
   export interface MembershipItem {
     /**
@@ -5049,9 +5049,9 @@ declare namespace Chime {
   export type NonEmptyString128 = string;
   export type NonEmptyStringList = String[];
   export type NonNullableBoolean = boolean;
-  export type NotificationTarget = "EventBridge"|"SNS"|"SQS"|string;
+  export type NotificationTarget = "EventBridge"|"SNS"|"SQS";
   export type NullableBoolean = boolean;
-  export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky"|string;
+  export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky";
   export interface OrderedPhoneNumber {
     /**
      * The phone number, in E.164 format.
@@ -5063,7 +5063,7 @@ declare namespace Chime {
     Status?: OrderedPhoneNumberStatus;
   }
   export type OrderedPhoneNumberList = OrderedPhoneNumber[];
-  export type OrderedPhoneNumberStatus = "Processing"|"Acquired"|"Failed"|string;
+  export type OrderedPhoneNumberStatus = "Processing"|"Acquired"|"Failed";
   export interface Origination {
     /**
      * The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or Disabled.
@@ -5098,7 +5098,7 @@ declare namespace Chime {
   }
   export type OriginationRouteList = OriginationRoute[];
   export type OriginationRoutePriority = number;
-  export type OriginationRouteProtocol = "TCP"|"UDP"|string;
+  export type OriginationRouteProtocol = "TCP"|"UDP";
   export type OriginationRouteWeight = number;
   export interface Participant {
     /**
@@ -5181,7 +5181,7 @@ declare namespace Chime {
     AssociatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberAssociationList = PhoneNumberAssociation[];
-  export type PhoneNumberAssociationName = "AccountId"|"UserId"|"VoiceConnectorId"|"VoiceConnectorGroupId"|"SipRuleId"|string;
+  export type PhoneNumberAssociationName = "AccountId"|"UserId"|"VoiceConnectorId"|"VoiceConnectorGroupId"|"SipRuleId";
   export interface PhoneNumberCapabilities {
     /**
      * Allows or denies inbound calling for the specified phone number.
@@ -5263,10 +5263,10 @@ declare namespace Chime {
     UpdatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberOrderList = PhoneNumberOrder[];
-  export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial"|string;
-  export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|"SipMediaApplicationDialIn"|string;
-  export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
-  export type PhoneNumberType = "Local"|"TollFree"|string;
+  export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial";
+  export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|"SipMediaApplicationDialIn";
+  export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed";
+  export type PhoneNumberType = "Local"|"TollFree";
   export type PhoneNumberTypeList = PhoneNumberType[];
   export type Port = number;
   export type PositiveInteger = number;
@@ -5344,7 +5344,7 @@ declare namespace Chime {
     GeoMatchParams?: GeoMatchParams;
   }
   export type ProxySessionNameString = string;
-  export type ProxySessionStatus = "Open"|"InProgress"|"Closed"|string;
+  export type ProxySessionStatus = "Open"|"InProgress"|"Closed";
   export type ProxySessions = ProxySession[];
   export interface PutAppInstanceRetentionSettingsRequest {
     /**
@@ -5623,7 +5623,7 @@ declare namespace Chime {
   export interface RegenerateSecurityTokenResponse {
     Bot?: Bot;
   }
-  export type RegistrationStatus = "Unregistered"|"Registered"|"Suspended"|string;
+  export type RegistrationStatus = "Unregistered"|"Registered"|"Suspended";
   export interface ResetPersonalPINRequest {
     /**
      * The Amazon Chime account ID.
@@ -5712,7 +5712,7 @@ declare namespace Chime {
     UpdatedTimestamp?: Iso8601Timestamp;
   }
   export type RoomMembershipList = RoomMembership[];
-  export type RoomMembershipRole = "Administrator"|"Member"|string;
+  export type RoomMembershipRole = "Administrator"|"Member";
   export interface RoomRetentionSettings {
     /**
      * The number of days for which to retain chat-room messages.
@@ -5924,8 +5924,8 @@ declare namespace Chime {
     AwsRegion?: String;
   }
   export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
-  export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname";
+  export type SortOrder = "ASCENDING"|"DESCENDING";
   export interface SourceConfiguration {
     /**
      * The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.
@@ -6072,19 +6072,19 @@ declare namespace Chime {
   }
   export type Timestamp = Date;
   export type TollFreePrefix = string;
-  export type TranscribeContentIdentificationType = "PII"|string;
-  export type TranscribeContentRedactionType = "PII"|string;
-  export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
+  export type TranscribeContentIdentificationType = "PII";
+  export type TranscribeContentRedactionType = "PII";
+  export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN";
   export type TranscribeLanguageModelName = string;
-  export type TranscribeMedicalContentIdentificationType = "PHI"|string;
-  export type TranscribeMedicalLanguageCode = "en-US"|string;
-  export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|"auto"|string;
-  export type TranscribeMedicalSpecialty = "PRIMARYCARE"|"CARDIOLOGY"|"NEUROLOGY"|"ONCOLOGY"|"RADIOLOGY"|"UROLOGY"|string;
-  export type TranscribeMedicalType = "CONVERSATION"|"DICTATION"|string;
-  export type TranscribePartialResultsStability = "low"|"medium"|"high"|string;
+  export type TranscribeMedicalContentIdentificationType = "PHI";
+  export type TranscribeMedicalLanguageCode = "en-US";
+  export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|"auto";
+  export type TranscribeMedicalSpecialty = "PRIMARYCARE"|"CARDIOLOGY"|"NEUROLOGY"|"ONCOLOGY"|"RADIOLOGY"|"UROLOGY";
+  export type TranscribeMedicalType = "CONVERSATION"|"DICTATION";
+  export type TranscribePartialResultsStability = "low"|"medium"|"high";
   export type TranscribePiiEntityTypes = string;
-  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto"|string;
-  export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag"|string;
+  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto";
+  export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag";
   export interface TranscriptionConfiguration {
     /**
      * The transcription configuration settings passed to Amazon Transcribe.
@@ -6660,7 +6660,7 @@ declare namespace Chime {
      */
     Telephony: TelephonySettings;
   }
-  export type UserType = "PrivateUser"|"SharedDevice"|string;
+  export type UserType = "PrivateUser"|"SharedDevice";
   export interface ValidateE911AddressRequest {
     /**
      * The AWS account ID.
@@ -6720,7 +6720,7 @@ declare namespace Chime {
      */
     MuxType?: VideoMuxType;
   }
-  export type VideoMuxType = "VideoOnly"|string;
+  export type VideoMuxType = "VideoOnly";
   export interface VoiceConnector {
     /**
      * The Amazon Chime Voice Connector ID.
@@ -6755,7 +6755,7 @@ declare namespace Chime {
      */
     VoiceConnectorArn?: NonEmptyString;
   }
-  export type VoiceConnectorAwsRegion = "us-east-1"|"us-west-2"|string;
+  export type VoiceConnectorAwsRegion = "us-east-1"|"us-west-2";
   export interface VoiceConnectorGroup {
     /**
      * The Amazon Chime Voice Connector group ID.

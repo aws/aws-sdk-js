@@ -235,7 +235,7 @@ declare namespace CodeStarNotifications {
      */
     Tags?: Tags;
   }
-  export type DetailType = "BASIC"|"FULL"|string;
+  export type DetailType = "BASIC"|"FULL";
   export type EventTypeBatch = EventTypeSummary[];
   export type EventTypeId = string;
   export type EventTypeIds = EventTypeId[];
@@ -270,7 +270,7 @@ declare namespace CodeStarNotifications {
      */
     Value: ListEventTypesFilterValue;
   }
-  export type ListEventTypesFilterName = "RESOURCE_TYPE"|"SERVICE_NAME"|string;
+  export type ListEventTypesFilterName = "RESOURCE_TYPE"|"SERVICE_NAME";
   export type ListEventTypesFilterValue = string;
   export type ListEventTypesFilters = ListEventTypesFilter[];
   export interface ListEventTypesRequest {
@@ -307,7 +307,7 @@ declare namespace CodeStarNotifications {
      */
     Value: ListNotificationRulesFilterValue;
   }
-  export type ListNotificationRulesFilterName = "EVENT_TYPE_ID"|"CREATED_BY"|"RESOURCE"|"TARGET_ADDRESS"|string;
+  export type ListNotificationRulesFilterName = "EVENT_TYPE_ID"|"CREATED_BY"|"RESOURCE"|"TARGET_ADDRESS";
   export type ListNotificationRulesFilterValue = string;
   export type ListNotificationRulesFilters = ListNotificationRulesFilter[];
   export interface ListNotificationRulesRequest {
@@ -356,7 +356,7 @@ declare namespace CodeStarNotifications {
      */
     Value: ListTargetsFilterValue;
   }
-  export type ListTargetsFilterName = "TARGET_TYPE"|"TARGET_ADDRESS"|"TARGET_STATUS"|string;
+  export type ListTargetsFilterName = "TARGET_TYPE"|"TARGET_ADDRESS"|"TARGET_STATUS";
   export type ListTargetsFilterValue = string;
   export type ListTargetsFilters = ListTargetsFilter[];
   export interface ListTargetsRequest {
@@ -391,7 +391,7 @@ declare namespace CodeStarNotifications {
   export type NotificationRuleId = string;
   export type NotificationRuleName = string;
   export type NotificationRuleResource = string;
-  export type NotificationRuleStatus = "ENABLED"|"DISABLED"|string;
+  export type NotificationRuleStatus = "ENABLED"|"DISABLED";
   export interface NotificationRuleSummary {
     /**
      * The unique ID of the notification rule.
@@ -452,7 +452,7 @@ declare namespace CodeStarNotifications {
     TargetAddress?: TargetAddress;
   }
   export type TargetAddress = string;
-  export type TargetStatus = "PENDING"|"ACTIVE"|"UNREACHABLE"|"INACTIVE"|"DEACTIVATED"|string;
+  export type TargetStatus = "PENDING"|"ACTIVE"|"UNREACHABLE"|"INACTIVE"|"DEACTIVATED";
   export interface TargetSummary {
     /**
      * The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.

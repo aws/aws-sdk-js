@@ -97,7 +97,7 @@ declare namespace KinesisVideoSignalingChannels {
      */
     Answer?: Answer;
   }
-  export type Service = "TURN"|string;
+  export type Service = "TURN";
   export type Ttl = number;
   export type Uri = string;
   export type Uris = Uri[];

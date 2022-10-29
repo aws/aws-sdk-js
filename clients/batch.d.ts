@@ -205,7 +205,7 @@ declare class Batch extends Service {
   updateSchedulingPolicy(callback?: (err: AWSError, data: Batch.Types.UpdateSchedulingPolicyResponse) => void): Request<Batch.Types.UpdateSchedulingPolicyResponse, AWSError>;
 }
 declare namespace Batch {
-  export type ArrayJobDependency = "N_TO_N"|"SEQUENTIAL"|string;
+  export type ArrayJobDependency = "N_TO_N"|"SEQUENTIAL";
   export type ArrayJobStatusSummary = {[key: string]: Integer};
   export interface ArrayProperties {
     /**
@@ -237,7 +237,7 @@ declare namespace Batch {
      */
     index?: Integer;
   }
-  export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
+  export type AssignPublicIp = "ENABLED"|"DISABLED";
   export interface AttemptContainerDetail {
     /**
      * The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts the job attempt.
@@ -284,12 +284,12 @@ declare namespace Batch {
   }
   export type AttemptDetails = AttemptDetail[];
   export type Boolean = boolean;
-  export type CEState = "ENABLED"|"DISABLED"|string;
-  export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
-  export type CEType = "MANAGED"|"UNMANAGED"|string;
-  export type CRAllocationStrategy = "BEST_FIT"|"BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED"|string;
-  export type CRType = "EC2"|"SPOT"|"FARGATE"|"FARGATE_SPOT"|string;
-  export type CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED"|string;
+  export type CEState = "ENABLED"|"DISABLED";
+  export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID";
+  export type CEType = "MANAGED"|"UNMANAGED";
+  export type CRAllocationStrategy = "BEST_FIT"|"BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED";
+  export type CRType = "EC2"|"SPOT"|"FARGATE"|"FARGATE_SPOT";
+  export type CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED";
   export interface CancelJobRequest {
     /**
      * The Batch job ID of the job to cancel.
@@ -994,7 +994,7 @@ declare namespace Batch {
      */
     permissions?: DeviceCgroupPermissions;
   }
-  export type DeviceCgroupPermission = "READ"|"WRITE"|"MKNOD"|string;
+  export type DeviceCgroupPermission = "READ"|"WRITE"|"MKNOD";
   export type DeviceCgroupPermissions = DeviceCgroupPermission[];
   export type DevicesList = Device[];
   export interface EFSAuthorizationConfig {
@@ -1007,8 +1007,8 @@ declare namespace Batch {
      */
     iam?: EFSAuthorizationConfigIAM;
   }
-  export type EFSAuthorizationConfigIAM = "ENABLED"|"DISABLED"|string;
-  export type EFSTransitEncryption = "ENABLED"|"DISABLED"|string;
+  export type EFSAuthorizationConfigIAM = "ENABLED"|"DISABLED";
+  export type EFSTransitEncryption = "ENABLED"|"DISABLED";
   export interface EFSVolumeConfiguration {
     /**
      * The Amazon EFS file system ID to use.
@@ -1434,8 +1434,8 @@ declare namespace Batch {
   export type ImageIdOverride = string;
   export type ImageType = string;
   export type Integer = number;
-  export type JQState = "ENABLED"|"DISABLED"|string;
-  export type JQStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
+  export type JQState = "ENABLED"|"DISABLED";
+  export type JQStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID";
   export interface JobDefinition {
     /**
      * The name of the job definition.
@@ -1503,7 +1503,7 @@ declare namespace Batch {
     containerOrchestrationType?: OrchestrationType;
   }
   export type JobDefinitionList = JobDefinition[];
-  export type JobDefinitionType = "container"|"multinode"|string;
+  export type JobDefinitionType = "container"|"multinode";
   export interface JobDependency {
     /**
      * The job ID of the Batch job that's associated with this dependency.
@@ -1662,7 +1662,7 @@ declare namespace Batch {
     tags?: TagrisTagsMap;
   }
   export type JobQueueDetailList = JobQueueDetail[];
-  export type JobStatus = "SUBMITTED"|"PENDING"|"RUNNABLE"|"STARTING"|"RUNNING"|"SUCCEEDED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"PENDING"|"RUNNABLE"|"STARTING"|"RUNNING"|"SUCCEEDED"|"FAILED";
   export interface JobSummary {
     /**
      * The Amazon Resource Name (ARN) of the job.
@@ -1869,7 +1869,7 @@ declare namespace Batch {
     secretOptions?: SecretList;
   }
   export type LogConfigurationOptionsMap = {[key: string]: String};
-  export type LogDriver = "json-file"|"syslog"|"journald"|"gelf"|"fluentd"|"awslogs"|"splunk"|string;
+  export type LogDriver = "json-file"|"syslog"|"journald"|"gelf"|"fluentd"|"awslogs"|"splunk";
   export type Long = number;
   export interface MountPoint {
     /**
@@ -1977,9 +1977,9 @@ declare namespace Batch {
      */
     container?: ContainerProperties;
   }
-  export type OrchestrationType = "ECS"|"EKS"|string;
+  export type OrchestrationType = "ECS"|"EKS";
   export type ParametersMap = {[key: string]: String};
-  export type PlatformCapability = "EC2"|"FARGATE"|string;
+  export type PlatformCapability = "EC2"|"FARGATE";
   export type PlatformCapabilityList = PlatformCapability[];
   export type Quantity = string;
   export interface RegisterJobDefinitionRequest {
@@ -2057,8 +2057,8 @@ declare namespace Batch {
     type: ResourceType;
   }
   export type ResourceRequirements = ResourceRequirement[];
-  export type ResourceType = "GPU"|"VCPU"|"MEMORY"|string;
-  export type RetryAction = "RETRY"|"EXIT"|string;
+  export type ResourceType = "GPU"|"VCPU"|"MEMORY";
+  export type RetryAction = "RETRY"|"EXIT";
   export interface RetryStrategy {
     /**
      * The number of times to move a job to the RUNNABLE status. You can specify between 1 and 10 attempts. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value.

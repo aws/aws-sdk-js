@@ -344,7 +344,7 @@ declare namespace IoTTwinMaker {
      */
     updateType?: ComponentUpdateType;
   }
-  export type ComponentUpdateType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type ComponentUpdateType = "CREATE"|"UPDATE"|"DELETE";
   export type ComponentUpdatesMapRequest = {[key: string]: ComponentUpdateRequest};
   export type ComponentsMap = {[key: string]: ComponentResponse};
   export type ComponentsMapRequest = {[key: string]: ComponentRequest};
@@ -703,7 +703,7 @@ declare namespace IoTTwinMaker {
     updateDateTime: Timestamp;
   }
   export type Entries = PropertyValueEntry[];
-  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|string;
+  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE";
   export interface ErrorDetails {
     /**
      * The error code.
@@ -1063,7 +1063,7 @@ declare namespace IoTTwinMaker {
      */
     intervalInSeconds?: IntervalInSeconds;
   }
-  export type InterpolationType = "LINEAR"|string;
+  export type InterpolationType = "LINEAR";
   export type IntervalInSeconds = number;
   export type LambdaArn = string;
   export interface LambdaFunction {
@@ -1238,7 +1238,7 @@ declare namespace IoTTwinMaker {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
-  export type OrderByTime = "ASCENDING"|"DESCENDING"|string;
+  export type OrderByTime = "ASCENDING"|"DESCENDING";
   export type ParentEntityId = string;
   export interface ParentEntityUpdateRequest {
     /**
@@ -1250,7 +1250,7 @@ declare namespace IoTTwinMaker {
      */
     updateType: ParentEntityUpdateType;
   }
-  export type ParentEntityUpdateType = "UPDATE"|"DELETE"|string;
+  export type ParentEntityUpdateType = "UPDATE"|"DELETE";
   export interface PropertyDefinitionRequest {
     /**
      * A mapping that specifies configuration information about the property. Use this field to specify information that you read from and write to an external source.
@@ -1377,7 +1377,7 @@ declare namespace IoTTwinMaker {
     value?: DataValue;
   }
   export type PropertyResponses = {[key: string]: PropertyResponse};
-  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|string;
+  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE";
   export interface PropertyValue {
     /**
      * ISO8601 DateTime of a value for a time series property. The time for when the property value was recorded in ISO 8601 format: YYYY-MM-DDThh:mm:ss[.SSSSSSSSS][Z/±HH:mm].    [YYYY]: year    [MM]: month    [DD]: day    [hh]: hour    [mm]: minute    [ss]: seconds    [.SSSSSSSSS]: additional precision, where precedence is maintained. For example: [.573123] is equal to 573123000 nanoseconds.    Z: default timezone UTC    ± HH:mm: time zone offset in Hours and Minutes.    Required sub-fields: YYYY-MM-DDThh:mm:ss and [Z/±HH:mm]
@@ -1467,9 +1467,9 @@ declare namespace IoTTwinMaker {
      */
     updateDateTime: Timestamp;
   }
-  export type Scope = "ENTITY"|"WORKSPACE"|string;
+  export type Scope = "ENTITY"|"WORKSPACE";
   export type SelectedPropertyList = String[];
-  export type State = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"ERROR"|string;
+  export type State = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"ERROR";
   export interface Status {
     /**
      * The error message.
@@ -1500,7 +1500,7 @@ declare namespace IoTTwinMaker {
   export type Time = string;
   export type Timestamp = Date;
   export type TwinMakerArn = string;
-  export type Type = "RELATIONSHIP"|"STRING"|"LONG"|"BOOLEAN"|"INTEGER"|"DOUBLE"|"LIST"|"MAP"|string;
+  export type Type = "RELATIONSHIP"|"STRING"|"LONG"|"BOOLEAN"|"INTEGER"|"DOUBLE"|"LIST"|"MAP";
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.

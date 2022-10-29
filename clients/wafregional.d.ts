@@ -757,10 +757,10 @@ declare namespace WAFRegional {
     PositionalConstraint: PositionalConstraint;
   }
   export type ByteMatchTuples = ByteMatchTuple[];
-  export type ChangeAction = "INSERT"|"DELETE"|string;
+  export type ChangeAction = "INSERT"|"DELETE";
   export type ChangeToken = string;
-  export type ChangeTokenStatus = "PROVISIONED"|"PENDING"|"INSYNC"|string;
-  export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|string;
+  export type ChangeTokenStatus = "PROVISIONED"|"PENDING"|"INSYNC";
+  export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT";
   export type Country = string;
   export interface CreateByteMatchSetRequest {
     /**
@@ -1309,8 +1309,8 @@ declare namespace WAFRegional {
      */
     Value: GeoMatchConstraintValue;
   }
-  export type GeoMatchConstraintType = "Country"|string;
-  export type GeoMatchConstraintValue = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
+  export type GeoMatchConstraintType = "Country";
+  export type GeoMatchConstraintValue = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW";
   export type GeoMatchConstraints = GeoMatchConstraint[];
   export interface GeoMatchSet {
     /**
@@ -1666,7 +1666,7 @@ declare namespace WAFRegional {
      */
     Value: IPSetDescriptorValue;
   }
-  export type IPSetDescriptorType = "IPV4"|"IPV6"|string;
+  export type IPSetDescriptorType = "IPV4"|"IPV6";
   export type IPSetDescriptorValue = string;
   export type IPSetDescriptors = IPSetDescriptor[];
   export type IPSetSummaries = IPSetSummary[];
@@ -2056,14 +2056,14 @@ declare namespace WAFRegional {
   export type ManagedKey = string;
   export type ManagedKeys = ManagedKey[];
   export type MatchFieldData = string;
-  export type MatchFieldType = "URI"|"QUERY_STRING"|"HEADER"|"METHOD"|"BODY"|"SINGLE_QUERY_ARG"|"ALL_QUERY_ARGS"|string;
+  export type MatchFieldType = "URI"|"QUERY_STRING"|"HEADER"|"METHOD"|"BODY"|"SINGLE_QUERY_ARG"|"ALL_QUERY_ARGS";
   export type MetricName = string;
   export type Negated = boolean;
   export type NextMarker = string;
   export type PaginationLimit = number;
   export type PolicyString = string;
   export type PopulationSize = number;
-  export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
+  export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD";
   export interface Predicate {
     /**
      * Set Negated to False if you want AWS WAF to allow, block, or count requests based on the settings in the specified ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address. Set Negated to True if you want AWS WAF to allow or block a request based on the negation of the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
@@ -2078,7 +2078,7 @@ declare namespace WAFRegional {
      */
     DataId: ResourceId;
   }
-  export type PredicateType = "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"GeoMatch"|"SizeConstraint"|"XssMatch"|"RegexMatch"|string;
+  export type PredicateType = "IPMatch"|"ByteMatch"|"SqlInjectionMatch"|"GeoMatch"|"SizeConstraint"|"XssMatch"|"RegexMatch";
   export type Predicates = Predicate[];
   export interface PutLoggingConfigurationRequest {
     /**
@@ -2130,7 +2130,7 @@ declare namespace WAFRegional {
      */
     RateLimit: RateLimit;
   }
-  export type RateKey = "IP"|string;
+  export type RateKey = "IP";
   export type RateLimit = number;
   export type RedactedFields = FieldToMatch[];
   export interface RegexMatchSet {
@@ -2226,7 +2226,7 @@ declare namespace WAFRegional {
   export type ResourceArns = ResourceArn[];
   export type ResourceId = string;
   export type ResourceName = string;
-  export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|string;
+  export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY";
   export interface Rule {
     /**
      * A unique identifier for a Rule. You use RuleId to get more information about a Rule (see GetRule), update a Rule (see UpdateRule), insert a Rule into a WebACL or delete a one from a WebACL (see UpdateWebACL), or delete a Rule from AWS WAF (see DeleteRule).  RuleId is returned by CreateRule and by ListRules.
@@ -2484,7 +2484,7 @@ declare namespace WAFRegional {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TextTransformation = "NONE"|"COMPRESS_WHITE_SPACE"|"HTML_ENTITY_DECODE"|"LOWERCASE"|"CMD_LINE"|"URL_DECODE"|string;
+  export type TextTransformation = "NONE"|"COMPRESS_WHITE_SPACE"|"HTML_ENTITY_DECODE"|"LOWERCASE"|"CMD_LINE"|"URL_DECODE";
   export interface TimeWindow {
     /**
      * The beginning of the time range from which you want GetSampledRequests to return a sample of the requests that your AWS resource received. You must specify the date and time in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". You can specify any time range in the previous three hours.
@@ -2763,15 +2763,15 @@ declare namespace WAFRegional {
      */
     Type: WafActionType;
   }
-  export type WafActionType = "BLOCK"|"ALLOW"|"COUNT"|string;
+  export type WafActionType = "BLOCK"|"ALLOW"|"COUNT";
   export interface WafOverrideAction {
     /**
      *  COUNT overrides the action specified by the individual rule within a RuleGroup . If set to NONE, the rule's action will take place.
      */
     Type: WafOverrideActionType;
   }
-  export type WafOverrideActionType = "NONE"|"COUNT"|string;
-  export type WafRuleType = "REGULAR"|"RATE_BASED"|"GROUP"|string;
+  export type WafOverrideActionType = "NONE"|"COUNT";
+  export type WafRuleType = "REGULAR"|"RATE_BASED"|"GROUP";
   export interface WebACL {
     /**
      * A unique identifier for a WebACL. You use WebACLId to get information about a WebACL (see GetWebACL), update a WebACL (see UpdateWebACL), and delete a WebACL from AWS WAF (see DeleteWebACL).  WebACLId is returned by CreateWebACL and by ListWebACLs.

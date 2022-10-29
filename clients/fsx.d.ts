@@ -383,7 +383,7 @@ declare namespace FSx {
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS";
   export type AdministrativeActions = AdministrativeAction[];
   export interface Alias {
     /**
@@ -395,7 +395,7 @@ declare namespace FSx {
      */
     Lifecycle?: AliasLifecycle;
   }
-  export type AliasLifecycle = "AVAILABLE"|"CREATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type AliasLifecycle = "AVAILABLE"|"CREATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED";
   export type Aliases = Alias[];
   export type AlternateDNSName = string;
   export type AlternateDNSNames = AlternateDNSName[];
@@ -429,7 +429,7 @@ declare namespace FSx {
      */
     Events?: EventTypes;
   }
-  export type AutoImportPolicyType = "NONE"|"NEW"|"NEW_CHANGED"|"NEW_CHANGED_DELETED"|string;
+  export type AutoImportPolicyType = "NONE"|"NEW"|"NEW_CHANGED"|"NEW_CHANGED_DELETED";
   export type AutomaticBackupRetentionDays = number;
   export interface Backup {
     /**
@@ -493,8 +493,8 @@ declare namespace FSx {
   }
   export type BackupId = string;
   export type BackupIds = BackupId[];
-  export type BackupLifecycle = "AVAILABLE"|"CREATING"|"TRANSFERRING"|"DELETED"|"FAILED"|"PENDING"|"COPYING"|string;
-  export type BackupType = "AUTOMATIC"|"USER_INITIATED"|"AWS_BACKUP"|string;
+  export type BackupLifecycle = "AVAILABLE"|"CREATING"|"TRANSFERRING"|"DELETED"|"FAILED"|"PENDING"|"COPYING";
+  export type BackupType = "AUTOMATIC"|"USER_INITIATED"|"AWS_BACKUP";
   export type Backups = Backup[];
   export type BatchImportMetaDataOnCreate = boolean;
   export interface CancelDataRepositoryTaskRequest {
@@ -1123,7 +1123,7 @@ declare namespace FSx {
   export type CreationTime = Date;
   export type DNSName = string;
   export type DailyTime = string;
-  export type DataCompressionType = "NONE"|"LZ4"|string;
+  export type DataCompressionType = "NONE"|"LZ4";
   export interface DataRepositoryAssociation {
     /**
      * The system-generated, unique ID of the data repository association.
@@ -1204,7 +1204,7 @@ declare namespace FSx {
   export interface DataRepositoryFailureDetails {
     Message?: ErrorMessage;
   }
-  export type DataRepositoryLifecycle = "CREATING"|"AVAILABLE"|"MISCONFIGURED"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type DataRepositoryLifecycle = "CREATING"|"AVAILABLE"|"MISCONFIGURED"|"UPDATING"|"DELETING"|"FAILED";
   export interface DataRepositoryTask {
     /**
      * The system-generated, unique 17-digit ID of the data repository task.
@@ -1268,11 +1268,11 @@ declare namespace FSx {
      */
     Values?: DataRepositoryTaskFilterValues;
   }
-  export type DataRepositoryTaskFilterName = "file-system-id"|"task-lifecycle"|"data-repository-association-id"|"file-cache-id"|string;
+  export type DataRepositoryTaskFilterName = "file-system-id"|"task-lifecycle"|"data-repository-association-id"|"file-cache-id";
   export type DataRepositoryTaskFilterValue = string;
   export type DataRepositoryTaskFilterValues = DataRepositoryTaskFilterValue[];
   export type DataRepositoryTaskFilters = DataRepositoryTaskFilter[];
-  export type DataRepositoryTaskLifecycle = "PENDING"|"EXECUTING"|"FAILED"|"SUCCEEDED"|"CANCELED"|"CANCELING"|string;
+  export type DataRepositoryTaskLifecycle = "PENDING"|"EXECUTING"|"FAILED"|"SUCCEEDED"|"CANCELED"|"CANCELING";
   export type DataRepositoryTaskPath = string;
   export type DataRepositoryTaskPaths = DataRepositoryTaskPath[];
   export interface DataRepositoryTaskStatus {
@@ -1297,7 +1297,7 @@ declare namespace FSx {
      */
     ReleasedCapacity?: ReleasedCapacity;
   }
-  export type DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"|"IMPORT_METADATA_FROM_REPOSITORY"|"RELEASE_DATA_FROM_FILESYSTEM"|"AUTO_RELEASE_DATA"|string;
+  export type DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"|"IMPORT_METADATA_FROM_REPOSITORY"|"RELEASE_DATA_FROM_FILESYSTEM"|"AUTO_RELEASE_DATA";
   export type DataRepositoryTasks = DataRepositoryTask[];
   export interface DeleteBackupRequest {
     /**
@@ -1396,7 +1396,7 @@ declare namespace FSx {
      */
     Options?: DeleteFileSystemOpenZFSOptions;
   }
-  export type DeleteFileSystemOpenZFSOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"|string;
+  export type DeleteFileSystemOpenZFSOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS";
   export type DeleteFileSystemOpenZFSOptions = DeleteFileSystemOpenZFSOption[];
   export interface DeleteFileSystemOpenZFSResponse {
     FinalBackupId?: BackupId;
@@ -1454,7 +1454,7 @@ declare namespace FSx {
      */
     FinalBackupTags?: Tags;
   }
-  export type DeleteOpenZFSVolumeOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"|string;
+  export type DeleteOpenZFSVolumeOption = "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS";
   export type DeleteOpenZFSVolumeOptions = DeleteOpenZFSVolumeOption[];
   export interface DeleteSnapshotRequest {
     ClientRequestToken?: ClientRequestToken;
@@ -1753,12 +1753,12 @@ declare namespace FSx {
      */
     Iops?: Iops;
   }
-  export type DiskIopsConfigurationMode = "AUTOMATIC"|"USER_PROVISIONED"|string;
+  export type DiskIopsConfigurationMode = "AUTOMATIC"|"USER_PROVISIONED";
   export type DnsIps = IpAddress[];
-  export type DriveCacheType = "NONE"|"READ"|string;
+  export type DriveCacheType = "NONE"|"READ";
   export type EndTime = Date;
   export type ErrorMessage = string;
-  export type EventType = "NEW"|"CHANGED"|"DELETED"|string;
+  export type EventType = "NEW"|"CHANGED"|"DELETED";
   export type EventTypes = EventType[];
   export type FailedCount = number;
   export interface FileCache {
@@ -1888,7 +1888,7 @@ declare namespace FSx {
   }
   export type FileCacheId = string;
   export type FileCacheIds = FileCacheId[];
-  export type FileCacheLifecycle = "AVAILABLE"|"CREATING"|"DELETING"|"UPDATING"|"FAILED"|string;
+  export type FileCacheLifecycle = "AVAILABLE"|"CREATING"|"DELETING"|"UPDATING"|"FAILED";
   export interface FileCacheLustreConfiguration {
     /**
      * Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. Cache throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). The only supported value is 1000.
@@ -1912,7 +1912,7 @@ declare namespace FSx {
      */
     LogConfiguration?: LustreLogConfiguration;
   }
-  export type FileCacheLustreDeploymentType = "CACHE_1"|string;
+  export type FileCacheLustreDeploymentType = "CACHE_1";
   export interface FileCacheLustreMetadataConfiguration {
     /**
      * The storage capacity of the Lustre MDT (Metadata Target) storage volume in gibibytes (GiB). The only supported value is 2400 GiB.
@@ -1929,7 +1929,7 @@ declare namespace FSx {
      */
     DnsIps?: RepositoryDnsIps;
   }
-  export type FileCacheType = "LUSTRE"|string;
+  export type FileCacheType = "LUSTRE";
   export type FileCaches = FileCache[];
   export interface FileSystem {
     /**
@@ -2037,10 +2037,10 @@ declare namespace FSx {
   }
   export type FileSystemId = string;
   export type FileSystemIds = FileSystemId[];
-  export type FileSystemLifecycle = "AVAILABLE"|"CREATING"|"FAILED"|"DELETING"|"MISCONFIGURED"|"UPDATING"|"MISCONFIGURED_UNAVAILABLE"|string;
-  export type FileSystemMaintenanceOperation = "PATCHING"|"BACKING_UP"|string;
+  export type FileSystemLifecycle = "AVAILABLE"|"CREATING"|"FAILED"|"DELETING"|"MISCONFIGURED"|"UPDATING"|"MISCONFIGURED_UNAVAILABLE";
+  export type FileSystemMaintenanceOperation = "PATCHING"|"BACKING_UP";
   export type FileSystemMaintenanceOperations = FileSystemMaintenanceOperation[];
-  export type FileSystemType = "WINDOWS"|"LUSTRE"|"ONTAP"|"OPENZFS"|string;
+  export type FileSystemType = "WINDOWS"|"LUSTRE"|"ONTAP"|"OPENZFS";
   export type FileSystemTypeVersion = string;
   export type FileSystems = FileSystem[];
   export interface Filter {
@@ -2053,12 +2053,12 @@ declare namespace FSx {
      */
     Values?: FilterValues;
   }
-  export type FilterName = "file-system-id"|"backup-type"|"file-system-type"|"volume-id"|"data-repository-type"|"file-cache-id"|"file-cache-type"|string;
+  export type FilterName = "file-system-id"|"backup-type"|"file-system-type"|"volume-id"|"data-repository-type"|"file-cache-id"|"file-cache-type";
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
   export type Flag = boolean;
-  export type FlexCacheEndpointType = "NONE"|"ORIGIN"|"CACHE"|string;
+  export type FlexCacheEndpointType = "NONE"|"ORIGIN"|"CACHE";
   export type GeneralARN = string;
   export type IntegerNoMax = number;
   export type IntegerNoMaxFromNegativeOne = number;
@@ -2097,8 +2097,8 @@ declare namespace FSx {
      */
     NextToken?: NextToken;
   }
-  export type LustreAccessAuditLogLevel = "DISABLED"|"WARN_ONLY"|"ERROR_ONLY"|"WARN_ERROR"|string;
-  export type LustreDeploymentType = "SCRATCH_1"|"SCRATCH_2"|"PERSISTENT_1"|"PERSISTENT_2"|string;
+  export type LustreAccessAuditLogLevel = "DISABLED"|"WARN_ONLY"|"ERROR_ONLY"|"WARN_ERROR";
+  export type LustreDeploymentType = "SCRATCH_1"|"SCRATCH_2"|"PERSISTENT_1"|"PERSISTENT_2";
   export interface LustreFileSystemConfiguration {
     /**
      * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. Here, d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
@@ -2197,8 +2197,8 @@ declare namespace FSx {
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
-  export type NfsVersion = "NFS3"|string;
-  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|string;
+  export type NfsVersion = "NFS3";
+  export type OntapDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1";
   export type OntapEndpointIpAddresses = IpAddress[];
   export interface OntapFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
@@ -2269,7 +2269,7 @@ declare namespace FSx {
      */
     OntapVolumeType?: OntapVolumeType;
   }
-  export type OntapVolumeType = "RW"|"DP"|"LS"|string;
+  export type OntapVolumeType = "RW"|"DP"|"LS";
   export interface OpenZFSClientConfiguration {
     /**
      * A value that specifies who can mount the file system. You can provide a wildcard character (*), an IP address (0.0.0.0), or a CIDR address (192.0.2.0/24). By default, Amazon FSx uses the wildcard character when specifying the client. 
@@ -2282,7 +2282,7 @@ declare namespace FSx {
   }
   export type OpenZFSClientConfigurations = OpenZFSClientConfiguration[];
   export type OpenZFSClients = string;
-  export type OpenZFSCopyStrategy = "CLONE"|"FULL_COPY"|string;
+  export type OpenZFSCopyStrategy = "CLONE"|"FULL_COPY";
   export interface OpenZFSCreateRootVolumeConfiguration {
     /**
      * Specifies the record size of an OpenZFS root volume, in kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default is 128 KiB. Most workloads should use the default record size. Database workflows can benefit from a smaller record size, while streaming workflows can benefit from a larger record size. For additional guidance on setting a custom record size, see  Tips for maximizing performance in the Amazon FSx for OpenZFS User Guide.
@@ -2309,8 +2309,8 @@ declare namespace FSx {
      */
     ReadOnly?: ReadOnly;
   }
-  export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|"LZ4"|string;
-  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|string;
+  export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|"LZ4";
+  export type OpenZFSDeploymentType = "SINGLE_AZ_1";
   export interface OpenZFSFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
@@ -2353,7 +2353,7 @@ declare namespace FSx {
      */
     CopyStrategy?: OpenZFSCopyStrategy;
   }
-  export type OpenZFSQuotaType = "USER"|"GROUP"|string;
+  export type OpenZFSQuotaType = "USER"|"GROUP";
   export type OpenZFSUserAndGroupQuotas = OpenZFSUserOrGroupQuota[];
   export interface OpenZFSUserOrGroupQuota {
     /**
@@ -2428,13 +2428,13 @@ declare namespace FSx {
     FileSystem?: FileSystem;
   }
   export type ReleasedCapacity = number;
-  export type ReportFormat = "REPORT_CSV_20191124"|string;
-  export type ReportScope = "FAILED_FILES_ONLY"|string;
+  export type ReportFormat = "REPORT_CSV_20191124";
+  export type ReportScope = "FAILED_FILES_ONLY";
   export type RepositoryDnsIps = IpAddress[];
   export type RequestTime = Date;
   export type ResourceARN = string;
-  export type ResourceType = "FILE_SYSTEM"|"VOLUME"|string;
-  export type RestoreOpenZFSVolumeOption = "DELETE_INTERMEDIATE_SNAPSHOTS"|"DELETE_CLONED_VOLUMES"|string;
+  export type ResourceType = "FILE_SYSTEM"|"VOLUME";
+  export type RestoreOpenZFSVolumeOption = "DELETE_INTERMEDIATE_SNAPSHOTS"|"DELETE_CLONED_VOLUMES";
   export type RestoreOpenZFSVolumeOptions = RestoreOpenZFSVolumeOption[];
   export interface RestoreVolumeFromSnapshotRequest {
     ClientRequestToken?: ClientRequestToken;
@@ -2475,7 +2475,7 @@ declare namespace FSx {
   }
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
-  export type SecurityStyle = "UNIX"|"NTFS"|"MIXED"|string;
+  export type SecurityStyle = "UNIX"|"NTFS"|"MIXED";
   export interface SelfManagedActiveDirectoryAttributes {
     /**
      * The fully qualified domain name of the self-managed AD directory.
@@ -2574,20 +2574,20 @@ declare namespace FSx {
      */
     Values?: SnapshotFilterValues;
   }
-  export type SnapshotFilterName = "file-system-id"|"volume-id"|string;
+  export type SnapshotFilterName = "file-system-id"|"volume-id";
   export type SnapshotFilterValue = string;
   export type SnapshotFilterValues = SnapshotFilterValue[];
   export type SnapshotFilters = SnapshotFilter[];
   export type SnapshotId = string;
   export type SnapshotIds = SnapshotId[];
-  export type SnapshotLifecycle = "PENDING"|"CREATING"|"DELETING"|"AVAILABLE"|string;
+  export type SnapshotLifecycle = "PENDING"|"CREATING"|"DELETING"|"AVAILABLE";
   export type SnapshotName = string;
   export type Snapshots = Snapshot[];
   export type SourceBackupId = string;
   export type StartTime = Date;
-  export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING"|string;
+  export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING";
   export type StorageCapacity = number;
-  export type StorageType = "SSD"|"HDD"|string;
+  export type StorageType = "SSD"|"HDD";
   export interface StorageVirtualMachine {
     /**
      * Describes the Microsoft Active Directory configuration to which the SVM is joined, if applicable.
@@ -2640,16 +2640,16 @@ declare namespace FSx {
      */
     Values?: StorageVirtualMachineFilterValues;
   }
-  export type StorageVirtualMachineFilterName = "file-system-id"|string;
+  export type StorageVirtualMachineFilterName = "file-system-id";
   export type StorageVirtualMachineFilterValue = string;
   export type StorageVirtualMachineFilterValues = StorageVirtualMachineFilterValue[];
   export type StorageVirtualMachineFilters = StorageVirtualMachineFilter[];
   export type StorageVirtualMachineId = string;
   export type StorageVirtualMachineIds = StorageVirtualMachineId[];
-  export type StorageVirtualMachineLifecycle = "CREATED"|"CREATING"|"DELETING"|"FAILED"|"MISCONFIGURED"|"PENDING"|string;
+  export type StorageVirtualMachineLifecycle = "CREATED"|"CREATING"|"DELETING"|"FAILED"|"MISCONFIGURED"|"PENDING";
   export type StorageVirtualMachineName = string;
-  export type StorageVirtualMachineRootVolumeSecurityStyle = "UNIX"|"NTFS"|"MIXED"|string;
-  export type StorageVirtualMachineSubtype = "DEFAULT"|"DP_DESTINATION"|"SYNC_DESTINATION"|"SYNC_SOURCE"|string;
+  export type StorageVirtualMachineRootVolumeSecurityStyle = "UNIX"|"NTFS"|"MIXED";
+  export type StorageVirtualMachineSubtype = "DEFAULT"|"DP_DESTINATION"|"SYNC_DESTINATION"|"SYNC_SOURCE";
   export type StorageVirtualMachines = StorageVirtualMachine[];
   export type SubDirectoriesPaths = Namespace[];
   export type SubnetId = string;
@@ -2725,7 +2725,7 @@ declare namespace FSx {
      */
     Name?: TieringPolicyName;
   }
-  export type TieringPolicyName = "SNAPSHOT_ONLY"|"AUTO"|"ALL"|"NONE"|string;
+  export type TieringPolicyName = "SNAPSHOT_ONLY"|"AUTO"|"ALL"|"NONE";
   export type TotalCount = number;
   export type UUID = string;
   export interface UntagResourceRequest {
@@ -3057,20 +3057,20 @@ declare namespace FSx {
      */
     Values?: VolumeFilterValues;
   }
-  export type VolumeFilterName = "file-system-id"|"storage-virtual-machine-id"|string;
+  export type VolumeFilterName = "file-system-id"|"storage-virtual-machine-id";
   export type VolumeFilterValue = string;
   export type VolumeFilterValues = VolumeFilterValue[];
   export type VolumeFilters = VolumeFilter[];
   export type VolumeId = string;
   export type VolumeIds = VolumeId[];
-  export type VolumeLifecycle = "CREATING"|"CREATED"|"DELETING"|"FAILED"|"MISCONFIGURED"|"PENDING"|"AVAILABLE"|string;
+  export type VolumeLifecycle = "CREATING"|"CREATED"|"DELETING"|"FAILED"|"MISCONFIGURED"|"PENDING"|"AVAILABLE";
   export type VolumeName = string;
   export type VolumePath = string;
-  export type VolumeType = "ONTAP"|"OPENZFS"|string;
+  export type VolumeType = "ONTAP"|"OPENZFS";
   export type Volumes = Volume[];
   export type VpcId = string;
   export type WeeklyTime = string;
-  export type WindowsAccessAuditLogLevel = "DISABLED"|"SUCCESS_ONLY"|"FAILURE_ONLY"|"SUCCESS_AND_FAILURE"|string;
+  export type WindowsAccessAuditLogLevel = "DISABLED"|"SUCCESS_ONLY"|"FAILURE_ONLY"|"SUCCESS_AND_FAILURE";
   export interface WindowsAuditLogConfiguration {
     /**
      * Sets which attempt type is logged by Amazon FSx for file and folder accesses.    SUCCESS_ONLY - only successful attempts to access files or folders are logged.    FAILURE_ONLY - only failed attempts to access files or folders are logged.    SUCCESS_AND_FAILURE - both successful attempts and failed attempts to access files or folders are logged.    DISABLED - access auditing of files and folders is turned off.  
@@ -3099,7 +3099,7 @@ declare namespace FSx {
      */
     AuditLogDestination?: GeneralARN;
   }
-  export type WindowsDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|"SINGLE_AZ_2"|string;
+  export type WindowsDeploymentType = "MULTI_AZ_1"|"SINGLE_AZ_1"|"SINGLE_AZ_2";
   export interface WindowsFileSystemConfiguration {
     /**
      * The ID for an existing Amazon Web Services Managed Microsoft Active Directory instance that the file system is joined to.

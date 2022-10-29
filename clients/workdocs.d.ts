@@ -410,7 +410,7 @@ declare namespace WorkDocs {
     CommentMetadata?: CommentMetadata;
   }
   export type ActivityNamesFilterType = string;
-  export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_VERSION_VIEWED"|"DOCUMENT_VERSION_DOWNLOADED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED"|string;
+  export type ActivityType = "DOCUMENT_CHECKED_IN"|"DOCUMENT_CHECKED_OUT"|"DOCUMENT_RENAMED"|"DOCUMENT_VERSION_UPLOADED"|"DOCUMENT_VERSION_DELETED"|"DOCUMENT_VERSION_VIEWED"|"DOCUMENT_VERSION_DOWNLOADED"|"DOCUMENT_RECYCLED"|"DOCUMENT_RESTORED"|"DOCUMENT_REVERTED"|"DOCUMENT_SHARED"|"DOCUMENT_UNSHARED"|"DOCUMENT_SHARE_PERMISSION_CHANGED"|"DOCUMENT_SHAREABLE_LINK_CREATED"|"DOCUMENT_SHAREABLE_LINK_REMOVED"|"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"|"DOCUMENT_MOVED"|"DOCUMENT_COMMENT_ADDED"|"DOCUMENT_COMMENT_DELETED"|"DOCUMENT_ANNOTATION_ADDED"|"DOCUMENT_ANNOTATION_DELETED"|"FOLDER_CREATED"|"FOLDER_DELETED"|"FOLDER_RENAMED"|"FOLDER_RECYCLED"|"FOLDER_RESTORED"|"FOLDER_SHARED"|"FOLDER_UNSHARED"|"FOLDER_SHARE_PERMISSION_CHANGED"|"FOLDER_SHAREABLE_LINK_CREATED"|"FOLDER_SHAREABLE_LINK_REMOVED"|"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"|"FOLDER_MOVED";
   export interface AddResourcePermissionsRequest {
     /**
      * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
@@ -436,7 +436,7 @@ declare namespace WorkDocs {
     ShareResults?: ShareResultsList;
   }
   export type AuthenticationHeaderType = string;
-  export type BooleanEnumType = "TRUE"|"FALSE"|string;
+  export type BooleanEnumType = "TRUE"|"FALSE";
   export type BooleanType = boolean;
   export interface Comment {
     /**
@@ -500,9 +500,9 @@ declare namespace WorkDocs {
      */
     RecipientId?: IdType;
   }
-  export type CommentStatusType = "DRAFT"|"PUBLISHED"|"DELETED"|string;
+  export type CommentStatusType = "DRAFT"|"PUBLISHED"|"DELETED";
   export type CommentTextType = string;
-  export type CommentVisibilityType = "PUBLIC"|"PRIVATE"|string;
+  export type CommentVisibilityType = "PUBLIC"|"PRIVATE";
   export interface CreateCommentRequest {
     /**
      * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
@@ -1165,10 +1165,10 @@ declare namespace WorkDocs {
     Labels?: SharedLabels;
   }
   export type DocumentMetadataList = DocumentMetadata[];
-  export type DocumentSourceType = "ORIGINAL"|"WITH_COMMENTS"|string;
+  export type DocumentSourceType = "ORIGINAL"|"WITH_COMMENTS";
   export type DocumentSourceUrlMap = {[key: string]: UrlType};
-  export type DocumentStatusType = "INITIALIZED"|"ACTIVE"|string;
-  export type DocumentThumbnailType = "SMALL"|"SMALL_HQ"|"LARGE"|string;
+  export type DocumentStatusType = "INITIALIZED"|"ACTIVE";
+  export type DocumentThumbnailType = "SMALL"|"SMALL_HQ"|"LARGE";
   export type DocumentThumbnailUrlMap = {[key: string]: UrlType};
   export type DocumentVersionIdType = string;
   export interface DocumentVersionMetadata {
@@ -1226,10 +1226,10 @@ declare namespace WorkDocs {
     Source?: DocumentSourceUrlMap;
   }
   export type DocumentVersionMetadataList = DocumentVersionMetadata[];
-  export type DocumentVersionStatus = "ACTIVE"|string;
+  export type DocumentVersionStatus = "ACTIVE";
   export type EmailAddressType = string;
   export type FieldNamesType = string;
-  export type FolderContentType = "ALL"|"DOCUMENT"|"FOLDER"|string;
+  export type FolderContentType = "ALL"|"DOCUMENT"|"FOLDER";
   export interface FolderMetadata {
     /**
      * The ID of the folder.
@@ -1522,7 +1522,7 @@ declare namespace WorkDocs {
     UploadMetadata?: UploadMetadata;
   }
   export type LimitType = number;
-  export type LocaleType = "en"|"fr"|"ko"|"de"|"es"|"ja"|"ru"|"zh_CN"|"zh_TW"|"pt_BR"|"default"|string;
+  export type LocaleType = "en"|"fr"|"ko"|"de"|"es"|"ja"|"ru"|"zh_CN"|"zh_TW"|"pt_BR"|"default";
   export type MarkerType = string;
   export type MessageType = string;
   export interface NotificationOptions {
@@ -1535,7 +1535,7 @@ declare namespace WorkDocs {
      */
     EmailMessage?: MessageType;
   }
-  export type OrderType = "ASCENDING"|"DESCENDING"|string;
+  export type OrderType = "ASCENDING"|"DESCENDING";
   export type OrganizationUserList = User[];
   export type PageMarkerType = string;
   export interface Participants {
@@ -1577,7 +1577,7 @@ declare namespace WorkDocs {
     Roles?: PermissionInfoList;
   }
   export type PrincipalList = Principal[];
-  export type PrincipalType = "USER"|"GROUP"|"INVITE"|"ANONYMOUS"|"ORGANIZATION"|string;
+  export type PrincipalType = "USER"|"GROUP"|"INVITE"|"ANONYMOUS"|"ORGANIZATION";
   export interface RemoveAllResourcePermissionsRequest {
     /**
      * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
@@ -1606,7 +1606,7 @@ declare namespace WorkDocs {
      */
     PrincipalType?: PrincipalType;
   }
-  export type ResourceCollectionType = "SHARED_WITH_ME"|string;
+  export type ResourceCollectionType = "SHARED_WITH_ME";
   export type ResourceIdType = string;
   export interface ResourceMetadata {
     /**
@@ -1656,11 +1656,11 @@ declare namespace WorkDocs {
     Name?: ResourceNameType;
   }
   export type ResourcePathComponentList = ResourcePathComponent[];
-  export type ResourceSortType = "DATE"|"NAME"|string;
-  export type ResourceStateType = "ACTIVE"|"RESTORING"|"RECYCLING"|"RECYCLED"|string;
-  export type ResourceType = "FOLDER"|"DOCUMENT"|string;
-  export type RolePermissionType = "DIRECT"|"INHERITED"|string;
-  export type RoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
+  export type ResourceSortType = "DATE"|"NAME";
+  export type ResourceStateType = "ACTIVE"|"RESTORING"|"RECYCLING"|"RECYCLED";
+  export type ResourceType = "FOLDER"|"DOCUMENT";
+  export type RolePermissionType = "DIRECT"|"INHERITED";
+  export type RoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER";
   export type SearchQueryType = string;
   export interface SharePrincipal {
     /**
@@ -1704,7 +1704,7 @@ declare namespace WorkDocs {
     StatusMessage?: MessageType;
   }
   export type ShareResultsList = ShareResult[];
-  export type ShareStatusType = "SUCCESS"|"FAILURE"|string;
+  export type ShareStatusType = "SUCCESS"|"FAILURE";
   export type SharedLabel = string;
   export type SharedLabels = SharedLabel[];
   export type SignedHeaderMap = {[key: string]: HeaderValueType};
@@ -1719,7 +1719,7 @@ declare namespace WorkDocs {
      */
     StorageType?: StorageType;
   }
-  export type StorageType = "UNLIMITED"|"QUOTA"|string;
+  export type StorageType = "UNLIMITED"|"QUOTA";
   export interface Subscription {
     /**
      * The ID of the subscription.
@@ -1736,8 +1736,8 @@ declare namespace WorkDocs {
   }
   export type SubscriptionEndPointType = string;
   export type SubscriptionList = Subscription[];
-  export type SubscriptionProtocolType = "HTTPS"|string;
-  export type SubscriptionType = "ALL"|string;
+  export type SubscriptionProtocolType = "HTTPS";
+  export type SubscriptionType = "ALL";
   export type TimeZoneIdType = string;
   export type TimestampType = Date;
   export interface UpdateDocumentRequest {
@@ -1921,7 +1921,7 @@ declare namespace WorkDocs {
   }
   export type UserActivities = Activity[];
   export type UserAttributeValueType = string;
-  export type UserFilterType = "ALL"|"ACTIVE_PENDING"|string;
+  export type UserFilterType = "ALL"|"ACTIVE_PENDING";
   export type UserIdsType = string;
   export interface UserMetadata {
     /**
@@ -1946,8 +1946,8 @@ declare namespace WorkDocs {
     EmailAddress?: EmailAddressType;
   }
   export type UserMetadataList = UserMetadata[];
-  export type UserSortType = "USER_NAME"|"FULL_NAME"|"STORAGE_LIMIT"|"USER_STATUS"|"STORAGE_USED"|string;
-  export type UserStatusType = "ACTIVE"|"INACTIVE"|"PENDING"|string;
+  export type UserSortType = "USER_NAME"|"FULL_NAME"|"STORAGE_LIMIT"|"USER_STATUS"|"STORAGE_USED";
+  export type UserStatusType = "ACTIVE"|"INACTIVE"|"PENDING";
   export interface UserStorageMetadata {
     /**
      * The amount of storage used, in bytes.
@@ -1958,7 +1958,7 @@ declare namespace WorkDocs {
      */
     StorageRule?: StorageRuleType;
   }
-  export type UserType = "USER"|"ADMIN"|"POWERUSER"|"MINIMALUSER"|"WORKSPACESUSER"|string;
+  export type UserType = "USER"|"ADMIN"|"POWERUSER"|"MINIMALUSER"|"WORKSPACESUSER";
   export type UsernameType = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

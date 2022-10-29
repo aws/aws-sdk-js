@@ -227,7 +227,7 @@ declare namespace Amp {
      */
     statusReason?: String;
   }
-  export type AlertManagerDefinitionStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
+  export type AlertManagerDefinitionStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED";
   export interface CreateAlertManagerDefinitionRequest {
     /**
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
@@ -533,7 +533,7 @@ declare namespace Amp {
      */
     statusReason?: String;
   }
-  export type LoggingConfigurationStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
+  export type LoggingConfigurationStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED";
   export type PaginationToken = string;
   export interface PutAlertManagerDefinitionRequest {
     /**
@@ -634,7 +634,7 @@ declare namespace Amp {
      */
     statusReason?: String;
   }
-  export type RuleGroupsNamespaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
+  export type RuleGroupsNamespaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED";
   export interface RuleGroupsNamespaceSummary {
     /**
      * The Amazon Resource Name (ARN) of this rule groups namespace.
@@ -763,7 +763,7 @@ declare namespace Amp {
      */
     statusCode: WorkspaceStatusCode;
   }
-  export type WorkspaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|string;
+  export type WorkspaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED";
   export interface WorkspaceSummary {
     /**
      * Alias of this workspace.

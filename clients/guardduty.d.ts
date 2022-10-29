@@ -660,7 +660,7 @@ declare namespace GuardDuty {
     AdminStatus?: AdminStatus;
   }
   export type AdminAccounts = AdminAccount[];
-  export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
+  export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS";
   export interface Administrator {
     /**
      * The ID of the account used as the administrator account.
@@ -1075,14 +1075,14 @@ declare namespace GuardDuty {
     ThreatIntelSetId: String;
   }
   export type Criterion = {[key: string]: Condition};
-  export type CriterionKey = "EC2_INSTANCE_ARN"|"SCAN_ID"|"ACCOUNT_ID"|"GUARDDUTY_FINDING_ID"|"SCAN_START_TIME"|"SCAN_STATUS"|string;
+  export type CriterionKey = "EC2_INSTANCE_ARN"|"SCAN_ID"|"ACCOUNT_ID"|"GUARDDUTY_FINDING_ID"|"SCAN_START_TIME"|"SCAN_STATUS";
   export interface DNSLogsConfigurationResult {
     /**
      * Denotes whether DNS logs is enabled as a data source.
      */
     Status: DataSourceStatus;
   }
-  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|"KUBERNETES_AUDIT_LOGS"|"EC2_MALWARE_SCAN"|string;
+  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|"KUBERNETES_AUDIT_LOGS"|"EC2_MALWARE_SCAN";
   export interface DataSourceConfigurations {
     /**
      * Describes whether S3 data event logs are enabled as a data source.
@@ -1130,7 +1130,7 @@ declare namespace GuardDuty {
     FreeTrialDaysRemaining?: Integer;
   }
   export type DataSourceList = DataSource[];
-  export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
+  export type DataSourceStatus = "ENABLED"|"DISABLED";
   export interface DataSourcesFreeTrial {
     /**
      * Describes whether any Amazon Web Services CloudTrail management event logs are enabled as data sources.
@@ -1371,11 +1371,11 @@ declare namespace GuardDuty {
      */
     KmsKeyArn?: String;
   }
-  export type DestinationType = "S3"|string;
+  export type DestinationType = "S3";
   export type Destinations = Destination[];
   export type DetectorId = string;
   export type DetectorIds = DetectorId[];
-  export type DetectorStatus = "ENABLED"|"DISABLED"|string;
+  export type DetectorStatus = "ENABLED"|"DISABLED";
   export interface DisableOrganizationAdminAccountRequest {
     /**
      * The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated administrator.
@@ -1437,7 +1437,7 @@ declare namespace GuardDuty {
     Domain?: String;
   }
   export type Double = number;
-  export type EbsSnapshotPreservation = "NO_RETENTION"|"RETENTION_WITH_FINDING"|string;
+  export type EbsSnapshotPreservation = "NO_RETENTION"|"RETENTION_WITH_FINDING";
   export interface EbsVolumeDetails {
     /**
      * List of EBS volumes that were scanned.
@@ -1603,9 +1603,9 @@ declare namespace GuardDuty {
      */
     ThreatIntelligenceDetails?: ThreatIntelligenceDetails;
   }
-  export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
+  export type Feedback = "USEFUL"|"NOT_USEFUL";
   export type FilePaths = ScanFilePath[];
-  export type FilterAction = "NOOP"|"ARCHIVE"|string;
+  export type FilterAction = "NOOP"|"ARCHIVE";
   export interface FilterCondition {
     /**
      * Represents an equal  condition to be applied to a single field when querying for scan entries.
@@ -1705,8 +1705,8 @@ declare namespace GuardDuty {
   }
   export type FindingId = string;
   export type FindingIds = FindingId[];
-  export type FindingPublishingFrequency = "FIFTEEN_MINUTES"|"ONE_HOUR"|"SIX_HOURS"|string;
-  export type FindingStatisticType = "COUNT_BY_SEVERITY"|string;
+  export type FindingPublishingFrequency = "FIFTEEN_MINUTES"|"ONE_HOUR"|"SIX_HOURS";
+  export type FindingStatisticType = "COUNT_BY_SEVERITY";
   export type FindingStatisticTypes = FindingStatisticType[];
   export interface FindingStatistics {
     /**
@@ -2185,9 +2185,9 @@ declare namespace GuardDuty {
      */
     UnprocessedAccounts: UnprocessedAccounts;
   }
-  export type IpSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
+  export type IpSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE";
   export type IpSetIds = String[];
-  export type IpSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
+  export type IpSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED";
   export type Ipv6Addresses = String[];
   export interface KubernetesApiCallAction {
     /**
@@ -2712,7 +2712,7 @@ declare namespace GuardDuty {
   export type NetworkInterfaces = NetworkInterface[];
   export type NonEmptyString = string;
   export type NotEquals = String[];
-  export type OrderBy = "ASC"|"DESC"|string;
+  export type OrderBy = "ASC"|"DESC";
   export interface Organization {
     /**
      * The Autonomous System Number (ASN) of the internet provider of the remote IP address.
@@ -2905,7 +2905,7 @@ declare namespace GuardDuty {
      */
     EffectivePermission?: String;
   }
-  export type PublishingStatus = "PENDING_VERIFICATION"|"PUBLISHING"|"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"|"STOPPED"|string;
+  export type PublishingStatus = "PENDING_VERIFICATION"|"PUBLISHING"|"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"|"STOPPED";
   export interface RemoteAccountDetails {
     /**
      * The Amazon Web Services account ID of the remote API caller.
@@ -3112,7 +3112,7 @@ declare namespace GuardDuty {
     Value?: TagValue;
   }
   export type ScanCriterion = {[key: string]: ScanCondition};
-  export type ScanCriterionKey = "EC2_INSTANCE_TAG"|string;
+  export type ScanCriterionKey = "EC2_INSTANCE_TAG";
   export interface ScanDetections {
     /**
      * Total number of scanned files.
@@ -3171,14 +3171,14 @@ declare namespace GuardDuty {
      */
     Exclude?: ScanCriterion;
   }
-  export type ScanResult = "CLEAN"|"INFECTED"|string;
+  export type ScanResult = "CLEAN"|"INFECTED";
   export interface ScanResultDetails {
     /**
      * An enum value representing possible scan results.
      */
     ScanResult?: ScanResult;
   }
-  export type ScanStatus = "RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type ScanStatus = "RUNNING"|"COMPLETED"|"FAILED";
   export interface ScanThreatName {
     /**
      * The name of the identified threat.
@@ -3384,9 +3384,9 @@ declare namespace GuardDuty {
      */
     ThreatNames?: ScanThreatNames;
   }
-  export type ThreatIntelSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
+  export type ThreatIntelSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE";
   export type ThreatIntelSetIds = String[];
-  export type ThreatIntelSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
+  export type ThreatIntelSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED";
   export interface ThreatIntelligenceDetail {
     /**
      * The name of the threat intelligence list that triggered the finding.
@@ -3699,7 +3699,7 @@ declare namespace GuardDuty {
     Total?: Total;
   }
   export type UsageResourceResultList = UsageResourceResult[];
-  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES"|string;
+  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES";
   export interface UsageStatistics {
     /**
      * The usage statistic sum organized by account ID.

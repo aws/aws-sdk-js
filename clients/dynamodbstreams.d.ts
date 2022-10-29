@@ -179,7 +179,7 @@ declare namespace DynamoDBStreams {
      */
     KeyType: KeyType;
   }
-  export type KeyType = "HASH"|"RANGE"|string;
+  export type KeyType = "HASH"|"RANGE";
   export type ListAttributeValue = AttributeValue[];
   export interface ListStreamsInput {
     /**
@@ -209,7 +209,7 @@ declare namespace DynamoDBStreams {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
-  export type OperationType = "INSERT"|"MODIFY"|"REMOVE"|string;
+  export type OperationType = "INSERT"|"MODIFY"|"REMOVE";
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
   export interface Record {
@@ -271,7 +271,7 @@ declare namespace DynamoDBStreams {
   export type ShardDescriptionList = Shard[];
   export type ShardId = string;
   export type ShardIterator = string;
-  export type ShardIteratorType = "TRIM_HORIZON"|"LATEST"|"AT_SEQUENCE_NUMBER"|"AFTER_SEQUENCE_NUMBER"|string;
+  export type ShardIteratorType = "TRIM_HORIZON"|"LATEST"|"AT_SEQUENCE_NUMBER"|"AFTER_SEQUENCE_NUMBER";
   export interface Stream {
     /**
      * The Amazon Resource Name (ARN) for the stream.
@@ -356,8 +356,8 @@ declare namespace DynamoDBStreams {
      */
     StreamViewType?: StreamViewType;
   }
-  export type StreamStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
-  export type StreamViewType = "NEW_IMAGE"|"OLD_IMAGE"|"NEW_AND_OLD_IMAGES"|"KEYS_ONLY"|string;
+  export type StreamStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED";
+  export type StreamViewType = "NEW_IMAGE"|"OLD_IMAGE"|"NEW_AND_OLD_IMAGES"|"KEYS_ONLY";
   export type String = string;
   export type StringAttributeValue = string;
   export type StringSetAttributeValue = StringAttributeValue[];

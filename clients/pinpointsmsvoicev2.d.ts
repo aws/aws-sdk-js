@@ -368,7 +368,7 @@ declare namespace PinpointSMSVoiceV2 {
     Value: String;
   }
   export type AccountAttributeList = AccountAttribute[];
-  export type AccountAttributeName = "ACCOUNT_TIER"|string;
+  export type AccountAttributeName = "ACCOUNT_TIER";
   export interface AccountLimit {
     /**
      * The name of the attribute to apply the account limit to.
@@ -384,7 +384,7 @@ declare namespace PinpointSMSVoiceV2 {
     Max: PrimitiveLong;
   }
   export type AccountLimitList = AccountLimit[];
-  export type AccountLimitName = "PHONE_NUMBERS"|"POOLS"|"CONFIGURATION_SETS"|"OPT_OUT_LISTS"|string;
+  export type AccountLimitName = "PHONE_NUMBERS"|"POOLS"|"CONFIGURATION_SETS"|"OPT_OUT_LISTS";
   export type AmazonResourceName = string;
   export interface AssociateOriginationIdentityRequest {
     /**
@@ -449,7 +449,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type ConfigurationSetFilterList = ConfigurationSetFilter[];
-  export type ConfigurationSetFilterName = "event-destination-name"|"matching-event-types"|"default-message-type"|"default-sender-id"|string;
+  export type ConfigurationSetFilterName = "event-destination-name"|"matching-event-types"|"default-message-type"|"default-sender-id";
   export interface ConfigurationSetInformation {
     /**
      * The Resource Name (ARN) of the ConfigurationSet.
@@ -1188,7 +1188,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     NextToken?: NextToken;
   }
-  export type DestinationCountryParameterKey = "IN_TEMPLATE_ID"|"IN_ENTITY_ID"|string;
+  export type DestinationCountryParameterKey = "IN_TEMPLATE_ID"|"IN_ENTITY_ID";
   export type DestinationCountryParameterValue = string;
   export type DestinationCountryParameters = {[key: string]: DestinationCountryParameterValue};
   export interface DisassociateOriginationIdentityRequest {
@@ -1259,14 +1259,14 @@ declare namespace PinpointSMSVoiceV2 {
   }
   export type EventDestinationList = EventDestination[];
   export type EventDestinationName = string;
-  export type EventType = "ALL"|"TEXT_ALL"|"TEXT_SENT"|"TEXT_PENDING"|"TEXT_QUEUED"|"TEXT_SUCCESSFUL"|"TEXT_DELIVERED"|"TEXT_INVALID"|"TEXT_INVALID_MESSAGE"|"TEXT_UNREACHABLE"|"TEXT_CARRIER_UNREACHABLE"|"TEXT_BLOCKED"|"TEXT_CARRIER_BLOCKED"|"TEXT_SPAM"|"TEXT_UNKNOWN"|"TEXT_TTL_EXPIRED"|"VOICE_ALL"|"VOICE_INITIATED"|"VOICE_RINGING"|"VOICE_ANSWERED"|"VOICE_COMPLETED"|"VOICE_BUSY"|"VOICE_NO_ANSWER"|"VOICE_FAILED"|"VOICE_TTL_EXPIRED"|string;
+  export type EventType = "ALL"|"TEXT_ALL"|"TEXT_SENT"|"TEXT_PENDING"|"TEXT_QUEUED"|"TEXT_SUCCESSFUL"|"TEXT_DELIVERED"|"TEXT_INVALID"|"TEXT_INVALID_MESSAGE"|"TEXT_UNREACHABLE"|"TEXT_CARRIER_UNREACHABLE"|"TEXT_BLOCKED"|"TEXT_CARRIER_BLOCKED"|"TEXT_SPAM"|"TEXT_UNKNOWN"|"TEXT_TTL_EXPIRED"|"VOICE_ALL"|"VOICE_INITIATED"|"VOICE_RINGING"|"VOICE_ANSWERED"|"VOICE_COMPLETED"|"VOICE_BUSY"|"VOICE_NO_ANSWER"|"VOICE_FAILED"|"VOICE_TTL_EXPIRED";
   export type EventTypeList = EventType[];
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
   export type IamRoleArn = string;
   export type IsoCountryCode = string;
   export type Keyword = string;
-  export type KeywordAction = "AUTOMATIC_RESPONSE"|"OPT_OUT"|"OPT_IN"|string;
+  export type KeywordAction = "AUTOMATIC_RESPONSE"|"OPT_OUT"|"OPT_IN";
   export interface KeywordFilter {
     /**
      * The name of the attribute to filter on.
@@ -1278,7 +1278,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type KeywordFilterList = KeywordFilter[];
-  export type KeywordFilterName = "keyword-action"|string;
+  export type KeywordFilterName = "keyword-action";
   export interface KeywordInformation {
     /**
      * The keyword as a string.
@@ -1361,15 +1361,15 @@ declare namespace PinpointSMSVoiceV2 {
   export type LogGroupArn = string;
   export type MaxPrice = string;
   export type MaxResults = number;
-  export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
+  export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL";
   export type MessageTypeList = MessageType[];
   export type MonthlyLimit = number;
   export type NextToken = string;
   export type NonEmptyTagList = Tag[];
-  export type NumberCapability = "SMS"|"VOICE"|string;
+  export type NumberCapability = "SMS"|"VOICE";
   export type NumberCapabilityList = NumberCapability[];
-  export type NumberStatus = "PENDING"|"ACTIVE"|"ASSOCIATING"|"DISASSOCIATING"|"DELETED"|string;
-  export type NumberType = "SHORT_CODE"|"LONG_CODE"|"TOLL_FREE"|"TEN_DLC"|string;
+  export type NumberStatus = "PENDING"|"ACTIVE"|"ASSOCIATING"|"DISASSOCIATING"|"DELETED";
+  export type NumberType = "SHORT_CODE"|"LONG_CODE"|"TOLL_FREE"|"TEN_DLC";
   export interface OptOutListInformation {
     /**
      * The Amazon Resource Name (ARN) of the OptOutList.
@@ -1399,7 +1399,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type OptedOutFilterList = OptedOutFilter[];
-  export type OptedOutFilterName = "end-user-opted-out"|string;
+  export type OptedOutFilterName = "end-user-opted-out";
   export interface OptedOutNumberInformation {
     /**
      * The phone number that is opted out.
@@ -1447,7 +1447,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type PhoneNumberFilterList = PhoneNumberFilter[];
-  export type PhoneNumberFilterName = "status"|"iso-country-code"|"message-type"|"number-capability"|"number-type"|"two-way-enabled"|"self-managed-opt-outs-enabled"|"opt-out-list-name"|"deletion-protection-enabled"|string;
+  export type PhoneNumberFilterName = "status"|"iso-country-code"|"message-type"|"number-capability"|"number-type"|"two-way-enabled"|"self-managed-opt-outs-enabled"|"opt-out-list-name"|"deletion-protection-enabled";
   export type PhoneNumberIdList = PhoneNumberIdOrArn[];
   export type PhoneNumberIdOrArn = string;
   export interface PhoneNumberInformation {
@@ -1530,7 +1530,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type PoolFilterList = PoolFilter[];
-  export type PoolFilterName = "status"|"message-type"|"two-way-enabled"|"self-managed-opt-outs-enabled"|"opt-out-list-name"|"shared-routes-enabled"|"deletion-protection-enabled"|string;
+  export type PoolFilterName = "status"|"message-type"|"two-way-enabled"|"self-managed-opt-outs-enabled"|"opt-out-list-name"|"shared-routes-enabled"|"deletion-protection-enabled";
   export type PoolIdList = PoolIdOrArn[];
   export type PoolIdOrArn = string;
   export interface PoolInformation {
@@ -1591,8 +1591,8 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type PoolOriginationIdentitiesFilterList = PoolOriginationIdentitiesFilter[];
-  export type PoolOriginationIdentitiesFilterName = "iso-country-code"|"number-capability"|string;
-  export type PoolStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
+  export type PoolOriginationIdentitiesFilterName = "iso-country-code"|"number-capability";
+  export type PoolStatus = "CREATING"|"ACTIVE"|"DELETING";
   export type PrimitiveBoolean = boolean;
   export type PrimitiveLong = number;
   export interface PutKeywordRequest {
@@ -1844,7 +1844,7 @@ declare namespace PinpointSMSVoiceV2 {
      */
     CreatedTimestamp?: Timestamp;
   }
-  export type RequestableNumberType = "LONG_CODE"|"TOLL_FREE"|"TEN_DLC"|string;
+  export type RequestableNumberType = "LONG_CODE"|"TOLL_FREE"|"TEN_DLC";
   export interface SendTextMessageRequest {
     /**
      * The destination phone number in E.164 format.
@@ -1967,7 +1967,7 @@ declare namespace PinpointSMSVoiceV2 {
     Values: FilterValueList;
   }
   export type SenderIdFilterList = SenderIdFilter[];
-  export type SenderIdFilterName = "sender-id"|"iso-country-code"|"message-type"|string;
+  export type SenderIdFilterName = "sender-id"|"iso-country-code"|"message-type";
   export interface SenderIdInformation {
     /**
      * The Amazon Resource Name (ARN) associated with the SenderId.
@@ -2091,7 +2091,7 @@ declare namespace PinpointSMSVoiceV2 {
     Overridden: PrimitiveBoolean;
   }
   export type SpendLimitList = SpendLimit[];
-  export type SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"|"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"|string;
+  export type SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"|"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT";
   export type String = string;
   export interface Tag {
     /**
@@ -2344,9 +2344,9 @@ declare namespace PinpointSMSVoiceV2 {
      */
     CreatedTimestamp?: Timestamp;
   }
-  export type VoiceId = "AMY"|"ASTRID"|"BIANCA"|"BRIAN"|"CAMILA"|"CARLA"|"CARMEN"|"CELINE"|"CHANTAL"|"CONCHITA"|"CRISTIANO"|"DORA"|"EMMA"|"ENRIQUE"|"EWA"|"FILIZ"|"GERAINT"|"GIORGIO"|"GWYNETH"|"HANS"|"INES"|"IVY"|"JACEK"|"JAN"|"JOANNA"|"JOEY"|"JUSTIN"|"KARL"|"KENDRA"|"KIMBERLY"|"LEA"|"LIV"|"LOTTE"|"LUCIA"|"LUPE"|"MADS"|"MAJA"|"MARLENE"|"MATHIEU"|"MATTHEW"|"MAXIM"|"MIA"|"MIGUEL"|"MIZUKI"|"NAJA"|"NICOLE"|"PENELOPE"|"RAVEENA"|"RICARDO"|"RUBEN"|"RUSSELL"|"SALLI"|"SEOYEON"|"TAKUMI"|"TATYANA"|"VICKI"|"VITORIA"|"ZEINA"|"ZHIYU"|string;
+  export type VoiceId = "AMY"|"ASTRID"|"BIANCA"|"BRIAN"|"CAMILA"|"CARLA"|"CARMEN"|"CELINE"|"CHANTAL"|"CONCHITA"|"CRISTIANO"|"DORA"|"EMMA"|"ENRIQUE"|"EWA"|"FILIZ"|"GERAINT"|"GIORGIO"|"GWYNETH"|"HANS"|"INES"|"IVY"|"JACEK"|"JAN"|"JOANNA"|"JOEY"|"JUSTIN"|"KARL"|"KENDRA"|"KIMBERLY"|"LEA"|"LIV"|"LOTTE"|"LUCIA"|"LUPE"|"MADS"|"MAJA"|"MARLENE"|"MATHIEU"|"MATTHEW"|"MAXIM"|"MIA"|"MIGUEL"|"MIZUKI"|"NAJA"|"NICOLE"|"PENELOPE"|"RAVEENA"|"RICARDO"|"RUBEN"|"RUSSELL"|"SALLI"|"SEOYEON"|"TAKUMI"|"TATYANA"|"VICKI"|"VITORIA"|"ZEINA"|"ZHIYU";
   export type VoiceMessageBody = string;
-  export type VoiceMessageBodyTextType = "TEXT"|"SSML"|string;
+  export type VoiceMessageBodyTextType = "TEXT"|"SSML";
   export type VoiceMessageOriginationIdentity = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

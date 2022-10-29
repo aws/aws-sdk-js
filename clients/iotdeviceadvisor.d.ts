@@ -389,7 +389,7 @@ declare namespace IotDeviceAdvisor {
   export type LogUrl = string;
   export type MaxResults = number;
   export type ParallelRun = boolean;
-  export type Protocol = "MqttV3_1_1"|"MqttV5"|string;
+  export type Protocol = "MqttV3_1_1"|"MqttV5";
   export type QualificationReportDownloadUrl = string;
   export type RootGroup = string;
   export type SelectedTestList = UUID[];
@@ -425,7 +425,7 @@ declare namespace IotDeviceAdvisor {
      */
     createdAt?: Timestamp;
   }
-  export type Status = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
+  export type Status = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR";
   export interface StopSuiteRunRequest {
     /**
      * Suite definition ID of the test suite run to be stopped.
@@ -560,7 +560,7 @@ declare namespace IotDeviceAdvisor {
     failed?: SuiteRunResultCount;
   }
   export type SuiteRunResultCount = number;
-  export type SuiteRunStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
+  export type SuiteRunStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR";
   export type SuiteRunsList = SuiteRunInformation[];
   export type SystemMessage = string;
   export type TagKeyList = String128[];
@@ -644,8 +644,8 @@ declare namespace IotDeviceAdvisor {
     systemMessage?: SystemMessage;
   }
   export type TestCaseScenarioId = string;
-  export type TestCaseScenarioStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
-  export type TestCaseScenarioType = "Advanced"|"Basic"|string;
+  export type TestCaseScenarioStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR";
+  export type TestCaseScenarioType = "Advanced"|"Basic";
   export type TestCaseScenariosList = TestCaseScenario[];
   export interface TestResult {
     /**

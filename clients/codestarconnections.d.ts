@@ -140,7 +140,7 @@ declare namespace CodeStarconnections {
   export type ConnectionArn = string;
   export type ConnectionList = Connection[];
   export type ConnectionName = string;
-  export type ConnectionStatus = "PENDING"|"AVAILABLE"|"ERROR"|string;
+  export type ConnectionStatus = "PENDING"|"AVAILABLE"|"ERROR";
   export interface CreateConnectionInput {
     /**
      * The name of the external provider where your third-party code repository is configured.
@@ -348,7 +348,7 @@ declare namespace CodeStarconnections {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|string;
+  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer";
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SubnetId = string;

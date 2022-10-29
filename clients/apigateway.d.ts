@@ -1053,7 +1053,7 @@ declare namespace APIGateway {
      */
     warnings?: ListOfString;
   }
-  export type ApiKeySourceType = "HEADER"|"AUTHORIZER"|string;
+  export type ApiKeySourceType = "HEADER"|"AUTHORIZER";
   export interface ApiKeys {
     /**
      * A list of warning messages logged during the import of API keys when the failOnWarnings option is set to true.
@@ -1065,7 +1065,7 @@ declare namespace APIGateway {
      */
     items?: ListOfApiKey;
   }
-  export type ApiKeysFormat = "csv"|string;
+  export type ApiKeysFormat = "csv";
   export interface ApiStage {
     /**
      * API Id of the associated API stage in a usage plan.
@@ -1122,7 +1122,7 @@ declare namespace APIGateway {
      */
     authorizerResultTtlInSeconds?: NullableInteger;
   }
-  export type AuthorizerType = "TOKEN"|"REQUEST"|"COGNITO_USER_POOLS"|string;
+  export type AuthorizerType = "TOKEN"|"REQUEST"|"COGNITO_USER_POOLS";
   export interface Authorizers {
     position?: String;
     /**
@@ -1153,8 +1153,8 @@ declare namespace APIGateway {
   }
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
-  export type CacheClusterSize = "0.5"|"1.6"|"6.1"|"13.5"|"28.4"|"58.2"|"118"|"237"|string;
-  export type CacheClusterStatus = "CREATE_IN_PROGRESS"|"AVAILABLE"|"DELETE_IN_PROGRESS"|"NOT_AVAILABLE"|"FLUSH_IN_PROGRESS"|string;
+  export type CacheClusterSize = "0.5"|"1.6"|"6.1"|"13.5"|"28.4"|"58.2"|"118"|"237";
+  export type CacheClusterStatus = "CREATE_IN_PROGRESS"|"AVAILABLE"|"DELETE_IN_PROGRESS"|"NOT_AVAILABLE"|"FLUSH_IN_PROGRESS";
   export interface CanarySettings {
     /**
      * The percent (0-100) of traffic diverted to a canary deployment.
@@ -1206,8 +1206,8 @@ declare namespace APIGateway {
      */
     items?: ListOfClientCertificate;
   }
-  export type ConnectionType = "INTERNET"|"VPC_LINK"|string;
-  export type ContentHandlingStrategy = "CONVERT_TO_BINARY"|"CONVERT_TO_TEXT"|string;
+  export type ConnectionType = "INTERNET"|"VPC_LINK";
+  export type ContentHandlingStrategy = "CONVERT_TO_BINARY"|"CONVERT_TO_TEXT";
   export interface CreateApiKeyRequest {
     /**
      * The name of the ApiKey.
@@ -1923,7 +1923,7 @@ declare namespace APIGateway {
     name?: String;
   }
   export type DocumentationPartLocationStatusCode = string;
-  export type DocumentationPartType = "API"|"AUTHORIZER"|"MODEL"|"RESOURCE"|"METHOD"|"PATH_PARAMETER"|"QUERY_PARAMETER"|"REQUEST_HEADER"|"REQUEST_BODY"|"RESPONSE"|"RESPONSE_HEADER"|"RESPONSE_BODY"|string;
+  export type DocumentationPartType = "API"|"AUTHORIZER"|"MODEL"|"RESOURCE"|"METHOD"|"PATH_PARAMETER"|"QUERY_PARAMETER"|"REQUEST_HEADER"|"REQUEST_BODY"|"RESPONSE"|"RESPONSE_HEADER"|"RESPONSE_BODY";
   export interface DocumentationParts {
     position?: String;
     /**
@@ -2022,7 +2022,7 @@ declare namespace APIGateway {
      */
     ownershipVerificationCertificateArn?: String;
   }
-  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION";
   export interface DomainNames {
     position?: String;
     /**
@@ -2041,7 +2041,7 @@ declare namespace APIGateway {
      */
     vpcEndpointIds?: ListOfString;
   }
-  export type EndpointType = "REGIONAL"|"EDGE"|"PRIVATE"|string;
+  export type EndpointType = "REGIONAL"|"EDGE"|"PRIVATE";
   export interface ExportResponse {
     /**
      * The content-type header value in the HTTP response. This will correspond to a valid 'accept' type in the request.
@@ -2098,7 +2098,7 @@ declare namespace APIGateway {
      */
     defaultResponse?: Boolean;
   }
-  export type GatewayResponseType = "DEFAULT_4XX"|"DEFAULT_5XX"|"RESOURCE_NOT_FOUND"|"UNAUTHORIZED"|"INVALID_API_KEY"|"ACCESS_DENIED"|"AUTHORIZER_FAILURE"|"AUTHORIZER_CONFIGURATION_ERROR"|"INVALID_SIGNATURE"|"EXPIRED_TOKEN"|"MISSING_AUTHENTICATION_TOKEN"|"INTEGRATION_FAILURE"|"INTEGRATION_TIMEOUT"|"API_CONFIGURATION_ERROR"|"UNSUPPORTED_MEDIA_TYPE"|"BAD_REQUEST_PARAMETERS"|"BAD_REQUEST_BODY"|"REQUEST_TOO_LARGE"|"THROTTLED"|"QUOTA_EXCEEDED"|"WAF_FILTERED"|string;
+  export type GatewayResponseType = "DEFAULT_4XX"|"DEFAULT_5XX"|"RESOURCE_NOT_FOUND"|"UNAUTHORIZED"|"INVALID_API_KEY"|"ACCESS_DENIED"|"AUTHORIZER_FAILURE"|"AUTHORIZER_CONFIGURATION_ERROR"|"INVALID_SIGNATURE"|"EXPIRED_TOKEN"|"MISSING_AUTHENTICATION_TOKEN"|"INTEGRATION_FAILURE"|"INTEGRATION_TIMEOUT"|"API_CONFIGURATION_ERROR"|"UNSUPPORTED_MEDIA_TYPE"|"BAD_REQUEST_PARAMETERS"|"BAD_REQUEST_BODY"|"REQUEST_TOO_LARGE"|"THROTTLED"|"QUOTA_EXCEEDED"|"WAF_FILTERED";
   export interface GatewayResponses {
     position?: String;
     /**
@@ -2831,7 +2831,7 @@ declare namespace APIGateway {
      */
     contentHandling?: ContentHandlingStrategy;
   }
-  export type IntegrationType = "HTTP"|"AWS"|"MOCK"|"HTTP_PROXY"|"AWS_PROXY"|string;
+  export type IntegrationType = "HTTP"|"AWS"|"MOCK"|"HTTP_PROXY"|"AWS_PROXY";
   export type ListOfARNs = ProviderARN[];
   export type ListOfApiKey = ApiKey[];
   export type ListOfApiStage = ApiStage[];
@@ -2859,7 +2859,7 @@ declare namespace APIGateway {
   export type ListOfUsagePlan = UsagePlan[];
   export type ListOfUsagePlanKey = UsagePlanKey[];
   export type ListOfVpcLink = VpcLink[];
-  export type LocationStatusType = "DOCUMENTED"|"UNDOCUMENTED"|string;
+  export type LocationStatusType = "DOCUMENTED"|"UNDOCUMENTED";
   export type Long = number;
   export type MapOfApiStageThrottleSettings = {[key: string]: ThrottleSettings};
   export type MapOfIntegrationResponse = {[key: string]: IntegrationResponse};
@@ -3038,7 +3038,7 @@ declare namespace APIGateway {
   }
   export type NullableBoolean = boolean;
   export type NullableInteger = number;
-  export type Op = "add"|"remove"|"replace"|"move"|"copy"|"test"|string;
+  export type Op = "add"|"remove"|"replace"|"move"|"copy"|"test";
   export interface PatchOperation {
     /**
      * An update operation to be performed with this PATCH request. The valid value can be add, remove, replace or copy. Not all valid operations are supported for a given resource. Support of the operations depends on specific operational contexts. Attempts to apply an unsupported operation on a resource will return an error message..
@@ -3254,7 +3254,7 @@ declare namespace APIGateway {
      */
     responseModels?: MapOfStringToString;
   }
-  export type PutMode = "merge"|"overwrite"|string;
+  export type PutMode = "merge"|"overwrite";
   export interface PutRestApiRequest {
     /**
      * The string identifier of the associated RestApi.
@@ -3277,7 +3277,7 @@ declare namespace APIGateway {
      */
     body: _Blob;
   }
-  export type QuotaPeriodType = "DAY"|"WEEK"|"MONTH"|string;
+  export type QuotaPeriodType = "DAY"|"WEEK"|"MONTH";
   export interface QuotaSettings {
     /**
      * The target maximum number of requests that can be made in a given time period.
@@ -3468,7 +3468,7 @@ declare namespace APIGateway {
      */
     items?: ListOfSdkType;
   }
-  export type SecurityPolicy = "TLS_1_0"|"TLS_1_2"|string;
+  export type SecurityPolicy = "TLS_1_0"|"TLS_1_2";
   export interface Stage {
     /**
      * The identifier of the Deployment that the stage points to.
@@ -3724,7 +3724,7 @@ declare namespace APIGateway {
      */
     insecureSkipVerification?: Boolean;
   }
-  export type UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"|"SUCCEED_WITH_RESPONSE_HEADER"|"SUCCEED_WITHOUT_RESPONSE_HEADER"|string;
+  export type UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"|"SUCCEED_WITH_RESPONSE_HEADER"|"SUCCEED_WITHOUT_RESPONSE_HEADER";
   export interface UntagResourceRequest {
     /**
      * The ARN of a resource that can be tagged.
@@ -4150,7 +4150,7 @@ declare namespace APIGateway {
      */
     tags?: MapOfStringToString;
   }
-  export type VpcLinkStatus = "AVAILABLE"|"PENDING"|"DELETING"|"FAILED"|string;
+  export type VpcLinkStatus = "AVAILABLE"|"PENDING"|"DELETING"|"FAILED";
   export interface VpcLinks {
     position?: String;
     /**

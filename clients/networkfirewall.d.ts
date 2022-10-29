@@ -362,7 +362,7 @@ declare namespace NetworkFirewall {
      */
     Status?: AttachmentStatus;
   }
-  export type AttachmentStatus = "CREATING"|"DELETING"|"SCALING"|"READY"|string;
+  export type AttachmentStatus = "CREATING"|"DELETING"|"SCALING"|"READY";
   export type AvailabilityZone = string;
   export type AzSubnet = string;
   export type AzSubnets = AzSubnet[];
@@ -389,7 +389,7 @@ declare namespace NetworkFirewall {
     CIDRs?: CIDRSummary;
   }
   export type CollectionMember_String = string;
-  export type ConfigurationSyncState = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED"|string;
+  export type ConfigurationSyncState = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED";
   export interface CreateFirewallPolicyRequest {
     /**
      * The descriptive name of the firewall policy. You can't change the name of a firewall policy after you create it.
@@ -801,7 +801,7 @@ declare namespace NetworkFirewall {
      */
     Type: EncryptionType;
   }
-  export type EncryptionType = "CUSTOMER_KMS"|"AWS_OWNED_KMS_KEY"|string;
+  export type EncryptionType = "CUSTOMER_KMS"|"AWS_OWNED_KMS_KEY";
   export type EndpointId = string;
   export interface Firewall {
     /**
@@ -968,10 +968,10 @@ declare namespace NetworkFirewall {
      */
     CapacityUsageSummary?: CapacityUsageSummary;
   }
-  export type FirewallStatusValue = "PROVISIONING"|"DELETING"|"READY"|string;
+  export type FirewallStatusValue = "PROVISIONING"|"DELETING"|"READY";
   export type Firewalls = FirewallMetadata[];
   export type Flags = TCPFlag[];
-  export type GeneratedRulesType = "ALLOWLIST"|"DENYLIST"|string;
+  export type GeneratedRulesType = "ALLOWLIST"|"DENYLIST";
   export type HashMapKey = string;
   export type HashMapValue = string;
   export interface Header {
@@ -1142,8 +1142,8 @@ declare namespace NetworkFirewall {
   }
   export type LogDestinationConfigs = LogDestinationConfig[];
   export type LogDestinationMap = {[key: string]: HashMapValue};
-  export type LogDestinationType = "S3"|"CloudWatchLogs"|"KinesisDataFirehose"|string;
-  export type LogType = "ALERT"|"FLOW"|string;
+  export type LogDestinationType = "S3"|"CloudWatchLogs"|"KinesisDataFirehose";
+  export type LogType = "ALERT"|"FLOW";
   export interface LoggingConfiguration {
     /**
      * Defines the logging destinations for the logs for a firewall. Network Firewall generates logs for stateful rule groups. 
@@ -1177,7 +1177,7 @@ declare namespace NetworkFirewall {
     TCPFlags?: TCPFlags;
   }
   export type NumberOfAssociations = number;
-  export type OverrideAction = "DROP_TO_ALERT"|string;
+  export type OverrideAction = "DROP_TO_ALERT";
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface PerObjectStatus {
@@ -1190,7 +1190,7 @@ declare namespace NetworkFirewall {
      */
     UpdateToken?: UpdateToken;
   }
-  export type PerObjectSyncStatus = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED"|string;
+  export type PerObjectSyncStatus = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED";
   export type PolicyString = string;
   export type Port = string;
   export interface PortRange {
@@ -1241,10 +1241,10 @@ declare namespace NetworkFirewall {
   }
   export type ResourceArn = string;
   export type ResourceId = string;
-  export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
-  export type ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"|"AWS_MANAGED_DOMAIN_LISTS"|string;
+  export type ResourceManagedStatus = "MANAGED"|"ACCOUNT";
+  export type ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"|"AWS_MANAGED_DOMAIN_LISTS";
   export type ResourceName = string;
-  export type ResourceStatus = "ACTIVE"|"DELETING"|string;
+  export type ResourceStatus = "ACTIVE"|"DELETING";
   export type RuleCapacity = number;
   export interface RuleDefinition {
     /**
@@ -1342,7 +1342,7 @@ declare namespace NetworkFirewall {
      */
     LastModifiedTime?: LastUpdateTime;
   }
-  export type RuleGroupType = "STATELESS"|"STATEFUL"|string;
+  export type RuleGroupType = "STATELESS"|"STATEFUL";
   export type RuleGroups = RuleGroupMetadata[];
   export interface RuleOption {
     /**
@@ -1355,7 +1355,7 @@ declare namespace NetworkFirewall {
     Settings?: Settings;
   }
   export type RuleOptions = RuleOption[];
-  export type RuleOrder = "DEFAULT_ACTION_ORDER"|"STRICT_ORDER"|string;
+  export type RuleOrder = "DEFAULT_ACTION_ORDER"|"STRICT_ORDER";
   export type RuleTargets = CollectionMember_String[];
   export type RuleVariableName = string;
   export interface RuleVariables {
@@ -1414,7 +1414,7 @@ declare namespace NetworkFirewall {
      */
     SourceUpdateToken?: UpdateToken;
   }
-  export type StatefulAction = "PASS"|"DROP"|"ALERT"|string;
+  export type StatefulAction = "PASS"|"DROP"|"ALERT";
   export type StatefulActions = CollectionMember_String[];
   export interface StatefulEngineOptions {
     /**
@@ -1440,7 +1440,7 @@ declare namespace NetworkFirewall {
      */
     RuleOptions: RuleOptions;
   }
-  export type StatefulRuleDirection = "FORWARD"|"ANY"|string;
+  export type StatefulRuleDirection = "FORWARD"|"ANY";
   export interface StatefulRuleGroupOverride {
     /**
      * The action that changes the rule group from DROP to ALERT. This only applies to managed rule groups.
@@ -1468,7 +1468,7 @@ declare namespace NetworkFirewall {
      */
     RuleOrder?: RuleOrder;
   }
-  export type StatefulRuleProtocol = "IP"|"TCP"|"UDP"|"ICMP"|"HTTP"|"FTP"|"TLS"|"SMB"|"DNS"|"DCERPC"|"SSH"|"SMTP"|"IMAP"|"MSN"|"KRB5"|"IKEV2"|"TFTP"|"NTP"|"DHCP"|string;
+  export type StatefulRuleProtocol = "IP"|"TCP"|"UDP"|"ICMP"|"HTTP"|"FTP"|"TLS"|"SMB"|"DNS"|"DCERPC"|"SSH"|"SMTP"|"IMAP"|"MSN"|"KRB5"|"IKEV2"|"TFTP"|"NTP"|"DHCP";
   export type StatefulRules = StatefulRule[];
   export type StatelessActions = CollectionMember_String[];
   export interface StatelessRule {
@@ -1503,7 +1503,7 @@ declare namespace NetworkFirewall {
      */
     CustomActions?: CustomActions;
   }
-  export type StreamExceptionPolicy = "DROP"|"CONTINUE"|string;
+  export type StreamExceptionPolicy = "DROP"|"CONTINUE";
   export interface SubnetMapping {
     /**
      * The unique identifier for the subnet. 
@@ -1523,7 +1523,7 @@ declare namespace NetworkFirewall {
   }
   export type SyncStateConfig = {[key: string]: PerObjectStatus};
   export type SyncStates = {[key: string]: SyncState};
-  export type TCPFlag = "FIN"|"SYN"|"RST"|"PSH"|"ACK"|"URG"|"ECE"|"CWR"|string;
+  export type TCPFlag = "FIN"|"SYN"|"RST"|"PSH"|"ACK"|"URG"|"ECE"|"CWR";
   export interface TCPFlagField {
     /**
      * Used in conjunction with the Masks setting to define the flags that must be set and flags that must not be set in order for the packet to match. This setting can only specify values that are also specified in the Masks setting. For the flags that are specified in the masks setting, the following must be true for the packet to match:    The ones that are set in this flags setting must be set in the packet.    The ones that are not set in this flags setting must also not be set in the packet.   
@@ -1562,7 +1562,7 @@ declare namespace NetworkFirewall {
   }
   export type TagValue = string;
   export type TagsPaginationMaxResults = number;
-  export type TargetType = "TLS_SNI"|"HTTP_HOST"|string;
+  export type TargetType = "TLS_SNI"|"HTTP_HOST";
   export type TargetTypes = TargetType[];
   export interface UntagResourceRequest {
     /**

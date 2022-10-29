@@ -319,8 +319,8 @@ declare namespace QLDB {
     EncryptionDescription?: LedgerEncryptionDescription;
   }
   export type Digest = Buffer|Uint8Array|Blob|string;
-  export type EncryptionStatus = "ENABLED"|"UPDATING"|"KMS_KEY_INACCESSIBLE"|string;
-  export type ErrorCause = "KINESIS_STREAM_NOT_FOUND"|"IAM_PERMISSION_REVOKED"|string;
+  export type EncryptionStatus = "ENABLED"|"UPDATING"|"KMS_KEY_INACCESSIBLE";
+  export type ErrorCause = "KINESIS_STREAM_NOT_FOUND"|"IAM_PERMISSION_REVOKED";
   export interface ExportJournalToS3Request {
     /**
      * The name of the ledger.
@@ -353,7 +353,7 @@ declare namespace QLDB {
      */
     ExportId: UniqueId;
   }
-  export type ExportStatus = "IN_PROGRESS"|"COMPLETED"|"CANCELLED"|string;
+  export type ExportStatus = "IN_PROGRESS"|"COMPLETED"|"CANCELLED";
   export interface GetBlockRequest {
     /**
      * The name of the ledger.
@@ -533,7 +533,7 @@ declare namespace QLDB {
   }
   export type LedgerList = LedgerSummary[];
   export type LedgerName = string;
-  export type LedgerState = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
+  export type LedgerState = "CREATING"|"ACTIVE"|"DELETING"|"DELETED";
   export interface LedgerSummary {
     /**
      * The name of the ledger.
@@ -650,8 +650,8 @@ declare namespace QLDB {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type OutputFormat = "ION_BINARY"|"ION_TEXT"|"JSON"|string;
-  export type PermissionsMode = "ALLOW_ALL"|"STANDARD"|string;
+  export type OutputFormat = "ION_BINARY"|"ION_TEXT"|"JSON";
+  export type PermissionsMode = "ALLOW_ALL"|"STANDARD";
   export type S3Bucket = string;
   export interface S3EncryptionConfiguration {
     /**
@@ -677,7 +677,7 @@ declare namespace QLDB {
      */
     EncryptionConfiguration: S3EncryptionConfiguration;
   }
-  export type S3ObjectEncryptionType = "SSE_KMS"|"SSE_S3"|"NO_ENCRYPTION"|string;
+  export type S3ObjectEncryptionType = "SSE_KMS"|"SSE_S3"|"NO_ENCRYPTION";
   export type S3Prefix = string;
   export interface StreamJournalToKinesisRequest {
     /**
@@ -716,7 +716,7 @@ declare namespace QLDB {
     StreamId?: UniqueId;
   }
   export type StreamName = string;
-  export type StreamStatus = "ACTIVE"|"COMPLETED"|"CANCELED"|"FAILED"|"IMPAIRED"|string;
+  export type StreamStatus = "ACTIVE"|"COMPLETED"|"CANCELED"|"FAILED"|"IMPAIRED";
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {

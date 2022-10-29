@@ -216,7 +216,7 @@ declare namespace ConnectCampaigns {
   }
   export type CampaignId = string;
   export type CampaignName = string;
-  export type CampaignState = "Initialized"|"Running"|"Paused"|"Stopped"|"Failed"|string;
+  export type CampaignState = "Initialized"|"Running"|"Paused"|"Stopped"|"Failed";
   export interface CampaignSummary {
     arn: CampaignArn;
     connectInstanceId: InstanceId;
@@ -273,7 +273,7 @@ declare namespace ConnectCampaigns {
     keyArn?: EncryptionKey;
   }
   export type EncryptionKey = string;
-  export type EncryptionType = "KMS"|string;
+  export type EncryptionType = "KMS";
   export interface FailedCampaignStateResponse {
     campaignId?: CampaignId;
     failureCode?: GetCampaignStateBatchFailureCode;
@@ -285,8 +285,8 @@ declare namespace ConnectCampaigns {
     id?: DialRequestId;
   }
   export type FailedRequestList = FailedRequest[];
-  export type FailureCode = "InvalidInput"|"RequestThrottled"|"UnknownError"|string;
-  export type GetCampaignStateBatchFailureCode = "ResourceNotFound"|"UnknownError"|string;
+  export type FailureCode = "InvalidInput"|"RequestThrottled"|"UnknownError";
+  export type GetCampaignStateBatchFailureCode = "ResourceNotFound"|"UnknownError";
   export interface GetCampaignStateBatchRequest {
     campaignIds: GetCampaignStateBatchRequestCampaignIdsList;
   }
@@ -323,14 +323,14 @@ declare namespace ConnectCampaigns {
     operator: InstanceIdFilterOperator;
     value: InstanceId;
   }
-  export type InstanceIdFilterOperator = "Eq"|string;
-  export type InstanceOnboardingJobFailureCode = "EVENT_BRIDGE_ACCESS_DENIED"|"EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED"|"IAM_ACCESS_DENIED"|"KMS_ACCESS_DENIED"|"KMS_KEY_NOT_FOUND"|"INTERNAL_FAILURE"|string;
+  export type InstanceIdFilterOperator = "Eq";
+  export type InstanceOnboardingJobFailureCode = "EVENT_BRIDGE_ACCESS_DENIED"|"EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED"|"IAM_ACCESS_DENIED"|"KMS_ACCESS_DENIED"|"KMS_KEY_NOT_FOUND"|"INTERNAL_FAILURE";
   export interface InstanceOnboardingJobStatus {
     connectInstanceId: InstanceId;
     failureCode?: InstanceOnboardingJobFailureCode;
     status: InstanceOnboardingJobStatusCode;
   }
-  export type InstanceOnboardingJobStatusCode = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type InstanceOnboardingJobStatusCode = "IN_PROGRESS"|"SUCCEEDED"|"FAILED";
   export interface ListCampaignsRequest {
     filters?: CampaignFilters;
     maxResults?: MaxResults;

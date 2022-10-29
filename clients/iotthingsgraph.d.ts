@@ -382,7 +382,7 @@ declare namespace IoTThingsGraph {
      */
     text: DefinitionText;
   }
-  export type DefinitionLanguage = "GRAPHQL"|string;
+  export type DefinitionLanguage = "GRAPHQL";
   export type DefinitionText = string;
   export interface DeleteFlowTemplateRequest {
     /**
@@ -447,7 +447,7 @@ declare namespace IoTThingsGraph {
      */
     greengrassDeploymentId?: GreengrassDeploymentId;
   }
-  export type DeploymentTarget = "GREENGRASS"|"CLOUD"|string;
+  export type DeploymentTarget = "GREENGRASS"|"CLOUD";
   export type DeprecateExistingEntities = boolean;
   export interface DeprecateFlowTemplateRequest {
     /**
@@ -539,13 +539,13 @@ declare namespace IoTThingsGraph {
      */
     value?: EntityFilterValues;
   }
-  export type EntityFilterName = "NAME"|"NAMESPACE"|"SEMANTIC_TYPE_PATH"|"REFERENCED_ENTITY_ID"|string;
+  export type EntityFilterName = "NAME"|"NAMESPACE"|"SEMANTIC_TYPE_PATH"|"REFERENCED_ENTITY_ID";
   export type EntityFilterValue = string;
   export type EntityFilterValues = EntityFilterValue[];
   export type EntityFilters = EntityFilter[];
-  export type EntityType = "DEVICE"|"SERVICE"|"DEVICE_MODEL"|"CAPABILITY"|"STATE"|"ACTION"|"EVENT"|"PROPERTY"|"MAPPING"|"ENUM"|string;
+  export type EntityType = "DEVICE"|"SERVICE"|"DEVICE_MODEL"|"CAPABILITY"|"STATE"|"ACTION"|"EVENT"|"PROPERTY"|"MAPPING"|"ENUM";
   export type EntityTypes = EntityType[];
-  export type FlowExecutionEventType = "EXECUTION_STARTED"|"EXECUTION_FAILED"|"EXECUTION_ABORTED"|"EXECUTION_SUCCEEDED"|"STEP_STARTED"|"STEP_FAILED"|"STEP_SUCCEEDED"|"ACTIVITY_SCHEDULED"|"ACTIVITY_STARTED"|"ACTIVITY_FAILED"|"ACTIVITY_SUCCEEDED"|"START_FLOW_EXECUTION_TASK"|"SCHEDULE_NEXT_READY_STEPS_TASK"|"THING_ACTION_TASK"|"THING_ACTION_TASK_FAILED"|"THING_ACTION_TASK_SUCCEEDED"|"ACKNOWLEDGE_TASK_MESSAGE"|string;
+  export type FlowExecutionEventType = "EXECUTION_STARTED"|"EXECUTION_FAILED"|"EXECUTION_ABORTED"|"EXECUTION_SUCCEEDED"|"STEP_STARTED"|"STEP_FAILED"|"STEP_SUCCEEDED"|"ACTIVITY_SCHEDULED"|"ACTIVITY_STARTED"|"ACTIVITY_FAILED"|"ACTIVITY_SUCCEEDED"|"START_FLOW_EXECUTION_TASK"|"SCHEDULE_NEXT_READY_STEPS_TASK"|"THING_ACTION_TASK"|"THING_ACTION_TASK_FAILED"|"THING_ACTION_TASK_SUCCEEDED"|"ACKNOWLEDGE_TASK_MESSAGE";
   export type FlowExecutionId = string;
   export interface FlowExecutionMessage {
     /**
@@ -568,7 +568,7 @@ declare namespace IoTThingsGraph {
   export type FlowExecutionMessageId = string;
   export type FlowExecutionMessagePayload = string;
   export type FlowExecutionMessages = FlowExecutionMessage[];
-  export type FlowExecutionStatus = "RUNNING"|"ABORTED"|"SUCCEEDED"|"FAILED"|string;
+  export type FlowExecutionStatus = "RUNNING"|"ABORTED"|"SUCCEEDED"|"FAILED";
   export type FlowExecutionSummaries = FlowExecutionSummary[];
   export interface FlowExecutionSummary {
     /**
@@ -620,7 +620,7 @@ declare namespace IoTThingsGraph {
      */
     value: FlowTemplateFilterValues;
   }
-  export type FlowTemplateFilterName = "DEVICE_MODEL_ID"|string;
+  export type FlowTemplateFilterName = "DEVICE_MODEL_ID";
   export type FlowTemplateFilterValue = string;
   export type FlowTemplateFilterValues = FlowTemplateFilterValue[];
   export type FlowTemplateFilters = FlowTemplateFilter[];
@@ -874,8 +874,8 @@ declare namespace IoTThingsGraph {
      */
     metricRuleRoleArn?: RoleArn;
   }
-  export type NamespaceDeletionStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
-  export type NamespaceDeletionStatusErrorCodes = "VALIDATION_FAILED"|string;
+  export type NamespaceDeletionStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED";
+  export type NamespaceDeletionStatusErrorCodes = "VALIDATION_FAILED";
   export type NamespaceName = string;
   export type NextToken = string;
   export type ResourceArn = string;
@@ -1052,7 +1052,7 @@ declare namespace IoTThingsGraph {
   export type String = string;
   export type StringList = String[];
   export type SyncWithPublicNamespace = boolean;
-  export type SystemInstanceDeploymentStatus = "NOT_DEPLOYED"|"BOOTSTRAP"|"DEPLOY_IN_PROGRESS"|"DEPLOYED_IN_TARGET"|"UNDEPLOY_IN_PROGRESS"|"FAILED"|"PENDING_DELETE"|"DELETED_IN_TARGET"|string;
+  export type SystemInstanceDeploymentStatus = "NOT_DEPLOYED"|"BOOTSTRAP"|"DEPLOY_IN_PROGRESS"|"DEPLOYED_IN_TARGET"|"UNDEPLOY_IN_PROGRESS"|"FAILED"|"PENDING_DELETE"|"DELETED_IN_TARGET";
   export interface SystemInstanceDescription {
     /**
      * An object that contains summary information about a system instance.
@@ -1087,7 +1087,7 @@ declare namespace IoTThingsGraph {
      */
     value?: SystemInstanceFilterValues;
   }
-  export type SystemInstanceFilterName = "SYSTEM_TEMPLATE_ID"|"STATUS"|"GREENGRASS_GROUP_NAME"|string;
+  export type SystemInstanceFilterName = "SYSTEM_TEMPLATE_ID"|"STATUS"|"GREENGRASS_GROUP_NAME";
   export type SystemInstanceFilterValue = string;
   export type SystemInstanceFilterValues = SystemInstanceFilterValue[];
   export type SystemInstanceFilters = SystemInstanceFilter[];
@@ -1154,7 +1154,7 @@ declare namespace IoTThingsGraph {
      */
     value: SystemTemplateFilterValues;
   }
-  export type SystemTemplateFilterName = "FLOW_TEMPLATE_ID"|string;
+  export type SystemTemplateFilterName = "FLOW_TEMPLATE_ID";
   export type SystemTemplateFilterValue = string;
   export type SystemTemplateFilterValues = SystemTemplateFilterValue[];
   export type SystemTemplateFilters = SystemTemplateFilter[];
@@ -1302,7 +1302,7 @@ declare namespace IoTThingsGraph {
     uploadId: UploadId;
   }
   export type UploadId = string;
-  export type UploadStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type UploadStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED";
   export type Urn = string;
   export type Urns = Urn[];
   export type Version = number;

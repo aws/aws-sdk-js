@@ -410,7 +410,7 @@ declare namespace SecretsManager {
      */
     Values?: FilterValuesStringList;
   }
-  export type FilterNameStringType = "description"|"name"|"tag-key"|"tag-value"|"primary-region"|"all"|string;
+  export type FilterNameStringType = "description"|"name"|"tag-key"|"tag-value"|"primary-region"|"all";
   export type FilterValueStringType = string;
   export type FilterValuesStringList = FilterValueStringType[];
   export type FiltersListType = Filter[];
@@ -908,9 +908,9 @@ declare namespace SecretsManager {
   }
   export type SecretVersionsListType = SecretVersionsListEntry[];
   export type SecretVersionsToStagesMapType = {[key: string]: SecretVersionStagesType};
-  export type SortOrderType = "asc"|"desc"|string;
+  export type SortOrderType = "asc"|"desc";
   export type StatusMessageType = string;
-  export type StatusType = "InSync"|"Failed"|"InProgress"|string;
+  export type StatusType = "InSync"|"Failed"|"InProgress";
   export interface StopReplicationToReplicaRequest {
     /**
      * The ARN of the primary secret. 

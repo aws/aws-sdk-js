@@ -1199,10 +1199,10 @@ declare namespace RDS {
     Max?: Long;
   }
   export type AccountQuotaList = AccountQuota[];
-  export type ActivityStreamMode = "sync"|"async"|string;
+  export type ActivityStreamMode = "sync"|"async";
   export type ActivityStreamModeList = String[];
-  export type ActivityStreamPolicyStatus = "locked"|"unlocked"|"locking-policy"|"unlocking-policy"|string;
-  export type ActivityStreamStatus = "stopped"|"starting"|"started"|"stopping"|string;
+  export type ActivityStreamPolicyStatus = "locked"|"unlocked"|"locking-policy"|"unlocking-policy";
+  export type ActivityStreamStatus = "stopped"|"starting"|"started"|"stopping";
   export interface AddRoleToDBClusterMessage {
     /**
      * The name of the DB cluster to associate the IAM role with.
@@ -1254,7 +1254,7 @@ declare namespace RDS {
      */
     Tags: TagList;
   }
-  export type ApplyMethod = "immediate"|"pending-reboot"|string;
+  export type ApplyMethod = "immediate"|"pending-reboot";
   export interface ApplyPendingMaintenanceActionMessage {
     /**
      * The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see  Constructing an RDS Amazon Resource Name (ARN).
@@ -1273,8 +1273,8 @@ declare namespace RDS {
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
   export type AttributeValueList = String[];
-  export type AuditPolicyState = "locked"|"unlocked"|string;
-  export type AuthScheme = "SECRETS"|string;
+  export type AuditPolicyState = "locked"|"unlocked";
+  export type AuthScheme = "SECRETS";
   export interface AuthorizeDBSecurityGroupIngressMessage {
     /**
      * The name of the DB security group to add authorization to.
@@ -1300,7 +1300,7 @@ declare namespace RDS {
   export interface AuthorizeDBSecurityGroupIngressResult {
     DBSecurityGroup?: DBSecurityGroup;
   }
-  export type AutomationMode = "full"|"all-paused"|string;
+  export type AutomationMode = "full"|"all-paused";
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -2487,7 +2487,7 @@ declare namespace RDS {
   export type CustomDBEngineVersionManifest = string;
   export type CustomEngineName = string;
   export type CustomEngineVersion = string;
-  export type CustomEngineVersionStatus = "available"|"inactive"|"inactive-except-restore"|string;
+  export type CustomEngineVersionStatus = "available"|"inactive"|"inactive-except-restore";
   export interface DBCluster {
     /**
      * For all database engines except Amazon Aurora, AllocatedStorage specifies the allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage always returns 1, because Aurora DB cluster storage size isn't fixed, but instead automatically adjusts as needed.
@@ -3854,11 +3854,11 @@ declare namespace RDS {
   }
   export type DBProxyEndpointList = DBProxyEndpoint[];
   export type DBProxyEndpointName = string;
-  export type DBProxyEndpointStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|string;
-  export type DBProxyEndpointTargetRole = "READ_WRITE"|"READ_ONLY"|string;
+  export type DBProxyEndpointStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting";
+  export type DBProxyEndpointTargetRole = "READ_WRITE"|"READ_ONLY";
   export type DBProxyList = DBProxy[];
   export type DBProxyName = string;
-  export type DBProxyStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|"suspended"|"suspending"|"reactivating"|string;
+  export type DBProxyStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|"suspended"|"suspending"|"reactivating";
   export interface DBProxyTarget {
     /**
      * The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB cluster.
@@ -5397,7 +5397,7 @@ declare namespace RDS {
      */
     Parameters?: ParametersList;
   }
-  export type EngineFamily = "MYSQL"|"POSTGRESQL"|"SQLSERVER"|string;
+  export type EngineFamily = "MYSQL"|"POSTGRESQL"|"SQLSERVER";
   export type EngineModeList = String[];
   export interface Event {
     /**
@@ -5507,7 +5507,7 @@ declare namespace RDS {
      */
     Events?: EventList;
   }
-  export type ExportSourceType = "SNAPSHOT"|"CLUSTER"|string;
+  export type ExportSourceType = "SNAPSHOT"|"CLUSTER";
   export interface ExportTask {
     /**
      * A unique identifier for the snapshot export task. This ID isn't an identifier for the Amazon S3 bucket where the snapshot is exported to.
@@ -5625,7 +5625,7 @@ declare namespace RDS {
      */
     ToDbClusterArn?: String;
   }
-  export type FailoverStatus = "pending"|"failing-over"|"cancelling"|string;
+  export type FailoverStatus = "pending"|"failing-over"|"cancelling";
   export type FeatureNameList = String[];
   export interface Filter {
     /**
@@ -5716,7 +5716,7 @@ declare namespace RDS {
      */
     GlobalClusters?: GlobalClusterList;
   }
-  export type IAMAuthMode = "DISABLED"|"REQUIRED"|"ENABLED"|string;
+  export type IAMAuthMode = "DISABLED"|"REQUIRED"|"ENABLED";
   export interface IPRange {
     /**
      * Specifies the status of the IP range. Status can be "authorizing", "authorized", "revoking", and "revoked".
@@ -7267,7 +7267,7 @@ declare namespace RDS {
      */
     TagKeys: KeyList;
   }
-  export type ReplicaMode = "open-read-only"|"mounted"|string;
+  export type ReplicaMode = "open-read-only"|"mounted";
   export interface ReservedDBInstance {
     /**
      * The unique identifier for the reservation.
@@ -8402,7 +8402,7 @@ declare namespace RDS {
      */
     SourceRegions?: SourceRegionList;
   }
-  export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|"custom-engine-version"|"db-proxy"|string;
+  export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|"custom-engine-version"|"db-proxy";
   export interface StartActivityStreamRequest {
     /**
      * The Amazon Resource Name (ARN) of the DB cluster, for example, arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
@@ -8639,11 +8639,11 @@ declare namespace RDS {
      */
     Description?: String;
   }
-  export type TargetHealthReason = "UNREACHABLE"|"CONNECTION_FAILED"|"AUTH_FAILURE"|"PENDING_PROXY_CAPACITY"|"INVALID_REPLICATION_STATE"|string;
+  export type TargetHealthReason = "UNREACHABLE"|"CONNECTION_FAILED"|"AUTH_FAILURE"|"PENDING_PROXY_CAPACITY"|"INVALID_REPLICATION_STATE";
   export type TargetList = DBProxyTarget[];
-  export type TargetRole = "READ_WRITE"|"READ_ONLY"|"UNKNOWN"|string;
-  export type TargetState = "REGISTERING"|"AVAILABLE"|"UNAVAILABLE"|string;
-  export type TargetType = "RDS_INSTANCE"|"RDS_SERVERLESS_ENDPOINT"|"TRACKED_CLUSTER"|string;
+  export type TargetRole = "READ_WRITE"|"READ_ONLY"|"UNKNOWN";
+  export type TargetState = "REGISTERING"|"AVAILABLE"|"UNAVAILABLE";
+  export type TargetType = "RDS_INSTANCE"|"RDS_SERVERLESS_ENDPOINT"|"TRACKED_CLUSTER";
   export interface Timezone {
     /**
      * The name of the time zone.
@@ -8788,7 +8788,7 @@ declare namespace RDS {
     Status?: String;
   }
   export type VpcSecurityGroupMembershipList = VpcSecurityGroupMembership[];
-  export type WriteForwardingStatus = "enabled"|"disabled"|"enabling"|"disabling"|"unknown"|string;
+  export type WriteForwardingStatus = "enabled"|"disabled"|"enabling"|"disabling"|"unknown";
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

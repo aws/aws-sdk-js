@@ -162,12 +162,12 @@ declare namespace Firehose {
   }
   export type AmazonopensearchserviceDomainARN = string;
   export type AmazonopensearchserviceIndexName = string;
-  export type AmazonopensearchserviceIndexRotationPeriod = "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth"|string;
+  export type AmazonopensearchserviceIndexRotationPeriod = "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth";
   export type AmazonopensearchserviceRetryDurationInSeconds = number;
   export interface AmazonopensearchserviceRetryOptions {
     DurationInSeconds?: AmazonopensearchserviceRetryDurationInSeconds;
   }
-  export type AmazonopensearchserviceS3BackupMode = "FailedDocumentsOnly"|"AllDocuments"|string;
+  export type AmazonopensearchserviceS3BackupMode = "FailedDocumentsOnly"|"AllDocuments";
   export type AmazonopensearchserviceTypeName = string;
   export type BlockSizeBytes = number;
   export type BooleanObject = boolean;
@@ -198,8 +198,8 @@ declare namespace Firehose {
   }
   export type ClusterJDBCURL = string;
   export type ColumnToJsonKeyMappings = {[key: string]: NonEmptyString};
-  export type CompressionFormat = "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy"|"HADOOP_SNAPPY"|string;
-  export type ContentEncoding = "NONE"|"GZIP"|string;
+  export type CompressionFormat = "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy"|"HADOOP_SNAPPY";
+  export type ContentEncoding = "NONE"|"GZIP";
   export interface CopyCommand {
     /**
      * The name of the target table. The table must already exist in the database.
@@ -381,12 +381,12 @@ declare namespace Firehose {
      */
     KeyType: KeyType;
   }
-  export type DeliveryStreamEncryptionStatus = "ENABLED"|"ENABLING"|"ENABLING_FAILED"|"DISABLED"|"DISABLING"|"DISABLING_FAILED"|string;
-  export type DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"|"CREATE_KMS_GRANT_FAILED"|"KMS_ACCESS_DENIED"|"DISABLED_KMS_KEY"|"INVALID_KMS_KEY"|"KMS_KEY_NOT_FOUND"|"KMS_OPT_IN_REQUIRED"|"CREATE_ENI_FAILED"|"DELETE_ENI_FAILED"|"SUBNET_NOT_FOUND"|"SECURITY_GROUP_NOT_FOUND"|"ENI_ACCESS_DENIED"|"SUBNET_ACCESS_DENIED"|"SECURITY_GROUP_ACCESS_DENIED"|"UNKNOWN_ERROR"|string;
+  export type DeliveryStreamEncryptionStatus = "ENABLED"|"ENABLING"|"ENABLING_FAILED"|"DISABLED"|"DISABLING"|"DISABLING_FAILED";
+  export type DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"|"CREATE_KMS_GRANT_FAILED"|"KMS_ACCESS_DENIED"|"DISABLED_KMS_KEY"|"INVALID_KMS_KEY"|"KMS_KEY_NOT_FOUND"|"KMS_OPT_IN_REQUIRED"|"CREATE_ENI_FAILED"|"DELETE_ENI_FAILED"|"SUBNET_NOT_FOUND"|"SECURITY_GROUP_NOT_FOUND"|"ENI_ACCESS_DENIED"|"SUBNET_ACCESS_DENIED"|"SECURITY_GROUP_ACCESS_DENIED"|"UNKNOWN_ERROR";
   export type DeliveryStreamName = string;
   export type DeliveryStreamNameList = DeliveryStreamName[];
-  export type DeliveryStreamStatus = "CREATING"|"CREATING_FAILED"|"DELETING"|"DELETING_FAILED"|"ACTIVE"|string;
-  export type DeliveryStreamType = "DirectPut"|"KinesisStreamAsSource"|string;
+  export type DeliveryStreamStatus = "CREATING"|"CREATING_FAILED"|"DELETING"|"DELETING_FAILED"|"ACTIVE";
+  export type DeliveryStreamType = "DirectPut"|"KinesisStreamAsSource";
   export type DeliveryStreamVersionId = string;
   export interface DescribeDeliveryStreamInput {
     /**
@@ -631,7 +631,7 @@ declare namespace Firehose {
   }
   export type ElasticsearchDomainARN = string;
   export type ElasticsearchIndexName = string;
-  export type ElasticsearchIndexRotationPeriod = "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth"|string;
+  export type ElasticsearchIndexRotationPeriod = "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth";
   export type ElasticsearchRetryDurationInSeconds = number;
   export interface ElasticsearchRetryOptions {
     /**
@@ -639,7 +639,7 @@ declare namespace Firehose {
      */
     DurationInSeconds?: ElasticsearchRetryDurationInSeconds;
   }
-  export type ElasticsearchS3BackupMode = "FailedDocumentsOnly"|"AllDocuments"|string;
+  export type ElasticsearchS3BackupMode = "FailedDocumentsOnly"|"AllDocuments";
   export type ElasticsearchTypeName = string;
   export interface EncryptionConfiguration {
     /**
@@ -828,7 +828,7 @@ declare namespace Firehose {
   }
   export type HECAcknowledgmentTimeoutInSeconds = number;
   export type HECEndpoint = string;
-  export type HECEndpointType = "Raw"|"Event"|string;
+  export type HECEndpointType = "Raw"|"Event";
   export type HECToken = string;
   export interface HiveJsonSerDe {
     /**
@@ -991,7 +991,7 @@ declare namespace Firehose {
      */
     DurationInSeconds?: HttpEndpointRetryDurationInSeconds;
   }
-  export type HttpEndpointS3BackupMode = "FailedDataOnly"|"AllData"|string;
+  export type HttpEndpointS3BackupMode = "FailedDataOnly"|"AllData";
   export type HttpEndpointUrl = string;
   export interface InputFormatConfiguration {
     /**
@@ -1006,7 +1006,7 @@ declare namespace Firehose {
      */
     AWSKMSKeyARN: AWSKMSKeyARN;
   }
-  export type KeyType = "AWS_OWNED_CMK"|"CUSTOMER_MANAGED_CMK"|string;
+  export type KeyType = "AWS_OWNED_CMK"|"CUSTOMER_MANAGED_CMK";
   export type KinesisStreamARN = string;
   export interface KinesisStreamSourceConfiguration {
     /**
@@ -1087,7 +1087,7 @@ declare namespace Firehose {
   export type ListTagsForDeliveryStreamOutputTagList = Tag[];
   export type LogGroupName = string;
   export type LogStreamName = string;
-  export type NoEncryptionConfig = "NoEncryption"|string;
+  export type NoEncryptionConfig = "NoEncryption";
   export type NonEmptyString = string;
   export type NonEmptyStringWithoutWhitespace = string;
   export type NonNegativeIntegerObject = number;
@@ -1105,8 +1105,8 @@ declare namespace Firehose {
      */
     ColumnToJsonKeyMappings?: ColumnToJsonKeyMappings;
   }
-  export type OrcCompression = "NONE"|"ZLIB"|"SNAPPY"|string;
-  export type OrcFormatVersion = "V0_11"|"V0_12"|string;
+  export type OrcCompression = "NONE"|"ZLIB"|"SNAPPY";
+  export type OrcFormatVersion = "V0_11"|"V0_12";
   export type OrcRowIndexStride = number;
   export interface OrcSerDe {
     /**
@@ -1157,7 +1157,7 @@ declare namespace Firehose {
      */
     Serializer?: Serializer;
   }
-  export type ParquetCompression = "UNCOMPRESSED"|"GZIP"|"SNAPPY"|string;
+  export type ParquetCompression = "UNCOMPRESSED"|"GZIP"|"SNAPPY";
   export type ParquetPageSizeBytes = number;
   export interface ParquetSerDe {
     /**
@@ -1185,7 +1185,7 @@ declare namespace Firehose {
      */
     WriterVersion?: ParquetWriterVersion;
   }
-  export type ParquetWriterVersion = "V1"|"V2"|string;
+  export type ParquetWriterVersion = "V1"|"V2";
   export type Password = string;
   export type Prefix = string;
   export interface ProcessingConfiguration {
@@ -1220,9 +1220,9 @@ declare namespace Firehose {
     ParameterValue: ProcessorParameterValue;
   }
   export type ProcessorParameterList = ProcessorParameter[];
-  export type ProcessorParameterName = "LambdaArn"|"NumberOfRetries"|"MetadataExtractionQuery"|"JsonParsingEngine"|"RoleArn"|"BufferSizeInMBs"|"BufferIntervalInSeconds"|"SubRecordType"|"Delimiter"|string;
+  export type ProcessorParameterName = "LambdaArn"|"NumberOfRetries"|"MetadataExtractionQuery"|"JsonParsingEngine"|"RoleArn"|"BufferSizeInMBs"|"BufferIntervalInSeconds"|"SubRecordType"|"Delimiter";
   export type ProcessorParameterValue = string;
-  export type ProcessorType = "RecordDeAggregation"|"Lambda"|"MetadataExtraction"|"AppendDelimiterToRecord"|string;
+  export type ProcessorType = "RecordDeAggregation"|"Lambda"|"MetadataExtraction"|"AppendDelimiterToRecord";
   export type Proportion = number;
   export interface PutRecordBatchInput {
     /**
@@ -1432,7 +1432,7 @@ declare namespace Firehose {
      */
     DurationInSeconds?: RedshiftRetryDurationInSeconds;
   }
-  export type RedshiftS3BackupMode = "Disabled"|"Enabled"|string;
+  export type RedshiftS3BackupMode = "Disabled"|"Enabled";
   export type RetryDurationInSeconds = number;
   export interface RetryOptions {
     /**
@@ -1441,7 +1441,7 @@ declare namespace Firehose {
     DurationInSeconds?: RetryDurationInSeconds;
   }
   export type RoleARN = string;
-  export type S3BackupMode = "Disabled"|"Enabled"|string;
+  export type S3BackupMode = "Disabled"|"Enabled";
   export interface S3DestinationConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
@@ -1709,7 +1709,7 @@ declare namespace Firehose {
      */
     DurationInSeconds?: SplunkRetryDurationInSeconds;
   }
-  export type SplunkS3BackupMode = "FailedEventsOnly"|"AllEvents"|string;
+  export type SplunkS3BackupMode = "FailedEventsOnly"|"AllEvents";
   export interface StartDeliveryStreamEncryptionInput {
     /**
      * The name of the delivery stream for which you want to enable server-side encryption (SSE).

@@ -165,7 +165,7 @@ declare namespace CognitoSync {
      */
     IdentityPoolId?: IdentityPoolId;
   }
-  export type BulkPublishStatus = "NOT_STARTED"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string;
+  export type BulkPublishStatus = "NOT_STARTED"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED";
   export type ClientContext = string;
   export type CognitoEventType = string;
   export interface CognitoStreams {
@@ -521,8 +521,8 @@ declare namespace CognitoSync {
   }
   export type Long = number;
   export type MergedDatasetNameList = String[];
-  export type Operation = "replace"|"remove"|string;
-  export type Platform = "APNS"|"APNS_SANDBOX"|"GCM"|"ADM"|string;
+  export type Operation = "replace"|"remove";
+  export type Platform = "APNS"|"APNS_SANDBOX"|"GCM"|"ADM";
   export interface PushSync {
     /**
      * List of SNS platform application ARNs that could be used by clients.
@@ -649,7 +649,7 @@ declare namespace CognitoSync {
     CognitoStreams?: CognitoStreams;
   }
   export type StreamName = string;
-  export type StreamingStatus = "ENABLED"|"DISABLED"|string;
+  export type StreamingStatus = "ENABLED"|"DISABLED";
   export type String = string;
   export interface SubscribeToDatasetRequest {
     /**

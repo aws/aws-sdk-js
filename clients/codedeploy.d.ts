@@ -469,7 +469,7 @@ declare namespace CodeDeploy {
     computePlatform?: ComputePlatform;
   }
   export type ApplicationName = string;
-  export type ApplicationRevisionSortBy = "registerTime"|"firstUsedTime"|"lastUsedTime"|string;
+  export type ApplicationRevisionSortBy = "registerTime"|"firstUsedTime"|"lastUsedTime";
   export type ApplicationsInfoList = ApplicationInfo[];
   export type ApplicationsList = ApplicationName[];
   export type Arn = string;
@@ -483,7 +483,7 @@ declare namespace CodeDeploy {
      */
     events?: AutoRollbackEventsList;
   }
-  export type AutoRollbackEvent = "DEPLOYMENT_FAILURE"|"DEPLOYMENT_STOP_ON_ALARM"|"DEPLOYMENT_STOP_ON_REQUEST"|string;
+  export type AutoRollbackEvent = "DEPLOYMENT_FAILURE"|"DEPLOYMENT_STOP_ON_ALARM"|"DEPLOYMENT_STOP_ON_REQUEST";
   export type AutoRollbackEventsList = AutoRollbackEvent[];
   export interface AutoScalingGroup {
     /**
@@ -640,7 +640,7 @@ declare namespace CodeDeploy {
     terminationWaitTimeInMinutes?: Duration;
   }
   export type Boolean = boolean;
-  export type BundleType = "tar"|"tgz"|"zip"|"YAML"|"JSON"|string;
+  export type BundleType = "tar"|"tgz"|"zip"|"YAML"|"JSON";
   export type CloudFormationResourceType = string;
   export interface CloudFormationTarget {
     /**
@@ -673,7 +673,7 @@ declare namespace CodeDeploy {
     targetVersionWeight?: TrafficWeight;
   }
   export type CommitId = string;
-  export type ComputePlatform = "Server"|"Lambda"|"ECS"|string;
+  export type ComputePlatform = "Server"|"Lambda"|"ECS";
   export interface ContinueDeploymentInput {
     /**
      *  The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment. 
@@ -937,7 +937,7 @@ declare namespace CodeDeploy {
   }
   export type DeploymentConfigName = string;
   export type DeploymentConfigsList = DeploymentConfigName[];
-  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CodeDeployAutoUpdate"|"CloudFormation"|"CloudFormationRollback"|string;
+  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CodeDeployAutoUpdate"|"CloudFormation"|"CloudFormationRollback";
   export type DeploymentGroupId = string;
   export interface DeploymentGroupInfo {
     /**
@@ -1149,7 +1149,7 @@ declare namespace CodeDeploy {
     relatedDeployments?: RelatedDeployments;
     overrideAlarmConfiguration?: AlarmConfiguration;
   }
-  export type DeploymentOption = "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL"|string;
+  export type DeploymentOption = "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL";
   export interface DeploymentOverview {
     /**
      * The number of instances in the deployment in a pending state.
@@ -1176,7 +1176,7 @@ declare namespace CodeDeploy {
      */
     Ready?: InstanceCount;
   }
-  export type DeploymentReadyAction = "CONTINUE_DEPLOYMENT"|"STOP_DEPLOYMENT"|string;
+  export type DeploymentReadyAction = "CONTINUE_DEPLOYMENT"|"STOP_DEPLOYMENT";
   export interface DeploymentReadyOption {
     /**
      * Information about when to reroute traffic from an original environment to a replacement environment in a blue/green deployment.   CONTINUE_DEPLOYMENT: Register new instances with the load balancer immediately after the new application revision is installed on the instances in the replacement environment.   STOP_DEPLOYMENT: Do not register new instances with a load balancer unless traffic rerouting is started using ContinueDeployment. If traffic rerouting is not started before the end of the specified wait period, the deployment status is changed to Stopped.  
@@ -1187,7 +1187,7 @@ declare namespace CodeDeploy {
      */
     waitTimeInMinutes?: Duration;
   }
-  export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Baking"|"Succeeded"|"Failed"|"Stopped"|"Ready"|string;
+  export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Baking"|"Succeeded"|"Failed"|"Stopped"|"Ready";
   export type DeploymentStatusList = DeploymentStatus[];
   export type DeploymentStatusMessageList = ErrorMessage[];
   export interface DeploymentStyle {
@@ -1220,9 +1220,9 @@ declare namespace CodeDeploy {
     cloudFormationTarget?: CloudFormationTarget;
   }
   export type DeploymentTargetList = DeploymentTarget[];
-  export type DeploymentTargetType = "InstanceTarget"|"LambdaTarget"|"ECSTarget"|"CloudFormationTarget"|string;
-  export type DeploymentType = "IN_PLACE"|"BLUE_GREEN"|string;
-  export type DeploymentWaitType = "READY_WAIT"|"TERMINATION_WAIT"|string;
+  export type DeploymentTargetType = "InstanceTarget"|"LambdaTarget"|"ECSTarget"|"CloudFormationTarget";
+  export type DeploymentType = "IN_PLACE"|"BLUE_GREEN";
+  export type DeploymentWaitType = "READY_WAIT"|"TERMINATION_WAIT";
   export type DeploymentsInfoList = DeploymentInfo[];
   export type DeploymentsList = DeploymentId[];
   export interface DeregisterOnPremisesInstanceInput {
@@ -1266,7 +1266,7 @@ declare namespace CodeDeploy {
     Type?: EC2TagFilterType;
   }
   export type EC2TagFilterList = EC2TagFilter[];
-  export type EC2TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
+  export type EC2TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE";
   export interface EC2TagSet {
     /**
      * A list that contains other lists of Amazon EC2 instance tag groups. For an instance to be included in the deployment group, it must be identified by all of the tag groups in the list.
@@ -1364,7 +1364,7 @@ declare namespace CodeDeploy {
   export type ELBInfoList = ELBInfo[];
   export type ELBName = string;
   export type ETag = string;
-  export type ErrorCode = "AGENT_ISSUE"|"ALARM_ACTIVE"|"APPLICATION_MISSING"|"AUTOSCALING_VALIDATION_ERROR"|"AUTO_SCALING_CONFIGURATION"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"|"CUSTOMER_APPLICATION_UNHEALTHY"|"DEPLOYMENT_GROUP_MISSING"|"ECS_UPDATE_ERROR"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"HEALTH_CONSTRAINTS"|"HEALTH_CONSTRAINTS_INVALID"|"HOOK_EXECUTION_FAILURE"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"INTERNAL_ERROR"|"INVALID_ECS_SERVICE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"INVALID_REVISION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"NO_EC2_SUBSCRIPTION"|"NO_INSTANCES"|"OVER_MAX_INSTANCES"|"RESOURCE_LIMIT_EXCEEDED"|"REVISION_MISSING"|"THROTTLED"|"TIMEOUT"|"CLOUDFORMATION_STACK_FAILURE"|string;
+  export type ErrorCode = "AGENT_ISSUE"|"ALARM_ACTIVE"|"APPLICATION_MISSING"|"AUTOSCALING_VALIDATION_ERROR"|"AUTO_SCALING_CONFIGURATION"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"|"CUSTOMER_APPLICATION_UNHEALTHY"|"DEPLOYMENT_GROUP_MISSING"|"ECS_UPDATE_ERROR"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"HEALTH_CONSTRAINTS"|"HEALTH_CONSTRAINTS_INVALID"|"HOOK_EXECUTION_FAILURE"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"INTERNAL_ERROR"|"INVALID_ECS_SERVICE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"INVALID_REVISION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"NO_EC2_SUBSCRIPTION"|"NO_INSTANCES"|"OVER_MAX_INSTANCES"|"RESOURCE_LIMIT_EXCEEDED"|"REVISION_MISSING"|"THROTTLED"|"TIMEOUT"|"CLOUDFORMATION_STACK_FAILURE";
   export interface ErrorInformation {
     /**
      * For more information, see Error Codes for CodeDeploy in the CodeDeploy User Guide. The error code:   APPLICATION_MISSING: The application was missing. This error code is most likely raised if the application is deleted after the deployment is created, but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code is most likely raised if the deployment group is deleted after the deployment is created, but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to Amazon EC2.   NO_INSTANCES: No instances were specified, or no instances can be found.   OVER_MAX_INSTANCES: The maximum number of instances was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more Amazon Web Services services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code is most likely raised if the revision is deleted after the deployment is created, but before it is started.  
@@ -1377,7 +1377,7 @@ declare namespace CodeDeploy {
   }
   export type ErrorMessage = string;
   export type ExternalId = string;
-  export type FileExistsBehavior = "DISALLOW"|"OVERWRITE"|"RETAIN"|string;
+  export type FileExistsBehavior = "DISALLOW"|"OVERWRITE"|"RETAIN";
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
   export interface GenericRevisionInfo {
@@ -1534,7 +1534,7 @@ declare namespace CodeDeploy {
      */
     commitId?: CommitId;
   }
-  export type GreenFleetProvisioningAction = "DISCOVER_EXISTING"|"COPY_AUTO_SCALING_GROUP"|string;
+  export type GreenFleetProvisioningAction = "DISCOVER_EXISTING"|"COPY_AUTO_SCALING_GROUP";
   export interface GreenFleetProvisioningOption {
     /**
      * The method used to add instances to a replacement environment.    DISCOVER_EXISTING: Use instances that already exist or will be created manually.    COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.  
@@ -1543,7 +1543,7 @@ declare namespace CodeDeploy {
   }
   export type IamSessionArn = string;
   export type IamUserArn = string;
-  export type InstanceAction = "TERMINATE"|"KEEP_ALIVE"|string;
+  export type InstanceAction = "TERMINATE"|"KEEP_ALIVE";
   export type InstanceArn = string;
   export type InstanceCount = number;
   export type InstanceId = string;
@@ -1580,7 +1580,7 @@ declare namespace CodeDeploy {
   export type InstanceInfoList = InstanceInfo[];
   export type InstanceName = string;
   export type InstanceNameList = InstanceName[];
-  export type InstanceStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|"Ready"|string;
+  export type InstanceStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|"Ready";
   export type InstanceStatusList = InstanceStatus[];
   export interface InstanceSummary {
     /**
@@ -1639,7 +1639,7 @@ declare namespace CodeDeploy {
      */
     instanceLabel?: TargetLabel;
   }
-  export type InstanceType = "Blue"|"Green"|string;
+  export type InstanceType = "Blue"|"Green";
   export type InstanceTypeList = InstanceType[];
   export type InstancesList = InstanceId[];
   export type Key = string;
@@ -1715,7 +1715,7 @@ declare namespace CodeDeploy {
      */
     createTime?: Timestamp;
   }
-  export type LifecycleErrorCode = "Success"|"ScriptMissing"|"ScriptNotExecutable"|"ScriptTimedOut"|"ScriptFailed"|"UnknownError"|string;
+  export type LifecycleErrorCode = "Success"|"ScriptMissing"|"ScriptNotExecutable"|"ScriptTimedOut"|"ScriptFailed"|"UnknownError";
   export interface LifecycleEvent {
     /**
      * The deployment lifecycle event name, such as ApplicationStop, BeforeInstall, AfterInstall, ApplicationStart, or ValidateService.
@@ -1741,7 +1741,7 @@ declare namespace CodeDeploy {
   export type LifecycleEventHookExecutionId = string;
   export type LifecycleEventList = LifecycleEvent[];
   export type LifecycleEventName = string;
-  export type LifecycleEventStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|string;
+  export type LifecycleEventStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown";
   export type LifecycleMessage = string;
   export interface ListApplicationRevisionsInput {
     /**
@@ -1967,7 +1967,7 @@ declare namespace CodeDeploy {
      */
     nextToken?: NextToken;
   }
-  export type ListStateFilterAction = "include"|"exclude"|"ignore"|string;
+  export type ListStateFilterAction = "include"|"exclude"|"ignore";
   export interface ListTagsForResourceInput {
     /**
      *  The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags associated with the resource that is identified by the ResourceArn. 
@@ -2016,7 +2016,7 @@ declare namespace CodeDeploy {
      */
     value?: MinimumHealthyHostsValue;
   }
-  export type MinimumHealthyHostsType = "HOST_COUNT"|"FLEET_PERCENT"|string;
+  export type MinimumHealthyHostsType = "HOST_COUNT"|"FLEET_PERCENT";
   export type MinimumHealthyHostsValue = number;
   export type NextToken = string;
   export type NullableBoolean = boolean;
@@ -2027,7 +2027,7 @@ declare namespace CodeDeploy {
     onPremisesTagSetList?: OnPremisesTagSetList;
   }
   export type OnPremisesTagSetList = TagFilterList[];
-  export type OutdatedInstancesStrategy = "UPDATE"|"IGNORE"|string;
+  export type OutdatedInstancesStrategy = "UPDATE"|"IGNORE";
   export type Percentage = number;
   export interface PutLifecycleEventHookExecutionStatusInput {
     /**
@@ -2089,7 +2089,7 @@ declare namespace CodeDeploy {
      */
     iamUserArn?: IamUserArn;
   }
-  export type RegistrationStatus = "Registered"|"Deregistered"|string;
+  export type RegistrationStatus = "Registered"|"Deregistered";
   export interface RelatedDeployments {
     /**
      * The deployment ID of the root deployment that triggered this deployment.
@@ -2145,7 +2145,7 @@ declare namespace CodeDeploy {
     appSpecContent?: AppSpecContent;
   }
   export type RevisionLocationList = RevisionLocation[];
-  export type RevisionLocationType = "S3"|"GitHub"|"String"|"AppSpecContent"|string;
+  export type RevisionLocationType = "S3"|"GitHub"|"String"|"AppSpecContent";
   export type Role = string;
   export interface RollbackInfo {
     /**
@@ -2192,7 +2192,7 @@ declare namespace CodeDeploy {
      */
     deploymentId?: DeploymentId;
   }
-  export type SortOrder = "ascending"|"descending"|string;
+  export type SortOrder = "ascending"|"descending";
   export interface StopDeploymentInput {
     /**
      *  The unique ID of a deployment. 
@@ -2213,7 +2213,7 @@ declare namespace CodeDeploy {
      */
     statusMessage?: Message;
   }
-  export type StopStatus = "Pending"|"Succeeded"|string;
+  export type StopStatus = "Pending"|"Succeeded";
   export interface Tag {
     /**
      * The tag's key.
@@ -2239,7 +2239,7 @@ declare namespace CodeDeploy {
     Type?: TagFilterType;
   }
   export type TagFilterList = TagFilter[];
-  export type TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
+  export type TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE";
   export type TagKeyList = Key[];
   export type TagList = Tag[];
   export interface TagResourceInput {
@@ -2255,7 +2255,7 @@ declare namespace CodeDeploy {
   export interface TagResourceOutput {
   }
   export type TargetArn = string;
-  export type TargetFilterName = "TargetStatus"|"ServerInstanceLabel"|string;
+  export type TargetFilterName = "TargetStatus"|"ServerInstanceLabel";
   export type TargetFilters = {[key: string]: FilterValueList};
   export interface TargetGroupInfo {
     /**
@@ -2296,8 +2296,8 @@ declare namespace CodeDeploy {
      */
     ec2TagSet?: EC2TagSet;
   }
-  export type TargetLabel = "Blue"|"Green"|string;
-  export type TargetStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|"Ready"|string;
+  export type TargetLabel = "Blue"|"Green";
+  export type TargetStatus = "Pending"|"InProgress"|"Succeeded"|"Failed"|"Skipped"|"Unknown"|"Ready";
   export type Time = Date;
   export interface TimeBasedCanary {
     /**
@@ -2350,7 +2350,7 @@ declare namespace CodeDeploy {
      */
     timeBasedLinear?: TimeBasedLinear;
   }
-  export type TrafficRoutingType = "TimeBasedCanary"|"TimeBasedLinear"|"AllAtOnce"|string;
+  export type TrafficRoutingType = "TimeBasedCanary"|"TimeBasedLinear"|"AllAtOnce";
   export type TrafficWeight = number;
   export interface TriggerConfig {
     /**
@@ -2367,7 +2367,7 @@ declare namespace CodeDeploy {
     triggerEvents?: TriggerEventTypeList;
   }
   export type TriggerConfigList = TriggerConfig[];
-  export type TriggerEventType = "DeploymentStart"|"DeploymentSuccess"|"DeploymentFailure"|"DeploymentStop"|"DeploymentRollback"|"DeploymentReady"|"InstanceStart"|"InstanceSuccess"|"InstanceFailure"|"InstanceReady"|string;
+  export type TriggerEventType = "DeploymentStart"|"DeploymentSuccess"|"DeploymentFailure"|"DeploymentStop"|"DeploymentRollback"|"DeploymentReady"|"InstanceStart"|"InstanceSuccess"|"InstanceFailure"|"InstanceReady";
   export type TriggerEventTypeList = TriggerEventType[];
   export type TriggerName = string;
   export type TriggerTargetArn = string;

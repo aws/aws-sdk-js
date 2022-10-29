@@ -953,8 +953,8 @@ declare namespace S3 {
      */
     Prefix?: Prefix;
   }
-  export type AnalyticsS3ExportFileFormat = "CSV"|string;
-  export type ArchiveStatus = "ARCHIVE_ACCESS"|"DEEP_ARCHIVE_ACCESS"|string;
+  export type AnalyticsS3ExportFileFormat = "CSV";
+  export type ArchiveStatus = "ARCHIVE_ACCESS"|"DEEP_ARCHIVE_ACCESS";
   export type Body = Buffer|Uint8Array|Blob|string|Readable;
   export interface Bucket {
     /**
@@ -966,8 +966,8 @@ declare namespace S3 {
      */
     CreationDate?: CreationDate;
   }
-  export type BucketAccelerateStatus = "Enabled"|"Suspended"|string;
-  export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
+  export type BucketAccelerateStatus = "Enabled"|"Suspended";
+  export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read";
   export type BucketKeyEnabled = boolean;
   export interface BucketLifecycleConfiguration {
     /**
@@ -975,13 +975,13 @@ declare namespace S3 {
      */
     Rules: LifecycleRules;
   }
-  export type BucketLocationConstraint = "af-south-1"|"ap-east-1"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ca-central-1"|"cn-north-1"|"cn-northwest-1"|"EU"|"eu-central-1"|"eu-north-1"|"eu-south-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"me-south-1"|"sa-east-1"|"us-east-2"|"us-gov-east-1"|"us-gov-west-1"|"us-west-1"|"us-west-2"|string;
+  export type BucketLocationConstraint = "af-south-1"|"ap-east-1"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ca-central-1"|"cn-north-1"|"cn-northwest-1"|"EU"|"eu-central-1"|"eu-north-1"|"eu-south-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"me-south-1"|"sa-east-1"|"us-east-2"|"us-gov-east-1"|"us-gov-west-1"|"us-west-1"|"us-west-2";
   export interface BucketLoggingStatus {
     LoggingEnabled?: LoggingEnabled;
   }
-  export type BucketLogsPermission = "FULL_CONTROL"|"READ"|"WRITE"|string;
+  export type BucketLogsPermission = "FULL_CONTROL"|"READ"|"WRITE";
   export type BucketName = string;
-  export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
+  export type BucketVersioningStatus = "Enabled"|"Suspended";
   export type Buckets = Bucket[];
   export type BypassGovernanceRetention = boolean;
   export type BytesProcessed = number;
@@ -1091,11 +1091,11 @@ declare namespace S3 {
      */
     ChecksumSHA256?: ChecksumSHA256;
   }
-  export type ChecksumAlgorithm = "CRC32"|"CRC32C"|"SHA1"|"SHA256"|string;
+  export type ChecksumAlgorithm = "CRC32"|"CRC32C"|"SHA1"|"SHA256";
   export type ChecksumAlgorithmList = ChecksumAlgorithm[];
   export type ChecksumCRC32 = string;
   export type ChecksumCRC32C = string;
-  export type ChecksumMode = "ENABLED"|string;
+  export type ChecksumMode = "ENABLED";
   export type ChecksumSHA1 = string;
   export type ChecksumSHA256 = string;
   export type CloudFunction = string;
@@ -1264,7 +1264,7 @@ declare namespace S3 {
     PartNumber?: PartNumber;
   }
   export type CompletedPartList = CompletedPart[];
-  export type CompressionType = "NONE"|"GZIP"|"BZIP2"|string;
+  export type CompressionType = "NONE"|"GZIP"|"BZIP2";
   export interface Condition {
     /**
      * The HTTP error code when the redirect is applied. In the event of an error, if the error code equals this value, then the specified redirect is applied. Required when parent element Condition is specified and sibling KeyPrefixEquals is not specified. If both are specified, then both must be true for the redirect to be applied.
@@ -1973,7 +1973,7 @@ declare namespace S3 {
      */
     Status?: DeleteMarkerReplicationStatus;
   }
-  export type DeleteMarkerReplicationStatus = "Enabled"|"Disabled"|string;
+  export type DeleteMarkerReplicationStatus = "Enabled"|"Disabled";
   export type DeleteMarkerVersionId = string;
   export type DeleteMarkers = DeleteMarkerEntry[];
   export interface DeleteObjectOutput {
@@ -2141,7 +2141,7 @@ declare namespace S3 {
   export type ETag = string;
   export type EmailAddress = string;
   export type EnableRequestProgress = boolean;
-  export type EncodingType = "url"|string;
+  export type EncodingType = "url";
   export interface Encryption {
     /**
      * The server-side encryption algorithm used when storing job results in Amazon S3 (for example, AES256, aws:kms).
@@ -2192,7 +2192,7 @@ declare namespace S3 {
   }
   export type ErrorMessage = string;
   export type Errors = Error[];
-  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:*"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|"s3:Replication:*"|"s3:Replication:OperationFailedReplication"|"s3:Replication:OperationNotTracked"|"s3:Replication:OperationMissedThreshold"|"s3:Replication:OperationReplicatedAfterThreshold"|"s3:ObjectRestore:Delete"|"s3:LifecycleTransition"|"s3:IntelligentTiering"|"s3:ObjectAcl:Put"|"s3:LifecycleExpiration:*"|"s3:LifecycleExpiration:Delete"|"s3:LifecycleExpiration:DeleteMarkerCreated"|"s3:ObjectTagging:*"|"s3:ObjectTagging:Put"|"s3:ObjectTagging:Delete"|string;
+  export type Event = "s3:ReducedRedundancyLostObject"|"s3:ObjectCreated:*"|"s3:ObjectCreated:Put"|"s3:ObjectCreated:Post"|"s3:ObjectCreated:Copy"|"s3:ObjectCreated:CompleteMultipartUpload"|"s3:ObjectRemoved:*"|"s3:ObjectRemoved:Delete"|"s3:ObjectRemoved:DeleteMarkerCreated"|"s3:ObjectRestore:*"|"s3:ObjectRestore:Post"|"s3:ObjectRestore:Completed"|"s3:Replication:*"|"s3:Replication:OperationFailedReplication"|"s3:Replication:OperationNotTracked"|"s3:Replication:OperationMissedThreshold"|"s3:Replication:OperationReplicatedAfterThreshold"|"s3:ObjectRestore:Delete"|"s3:LifecycleTransition"|"s3:IntelligentTiering"|"s3:ObjectAcl:Put"|"s3:LifecycleExpiration:*"|"s3:LifecycleExpiration:Delete"|"s3:LifecycleExpiration:DeleteMarkerCreated"|"s3:ObjectTagging:*"|"s3:ObjectTagging:Put"|"s3:ObjectTagging:Delete";
   export interface EventBridgeConfiguration {
   }
   export type EventList = Event[];
@@ -2202,18 +2202,18 @@ declare namespace S3 {
      */
     Status: ExistingObjectReplicationStatus;
   }
-  export type ExistingObjectReplicationStatus = "Enabled"|"Disabled"|string;
+  export type ExistingObjectReplicationStatus = "Enabled"|"Disabled";
   export type Expiration = string;
-  export type ExpirationStatus = "Enabled"|"Disabled"|string;
+  export type ExpirationStatus = "Enabled"|"Disabled";
   export type ExpiredObjectDeleteMarker = boolean;
   export type Expires = Date;
   export type ExposeHeader = string;
   export type ExposeHeaders = ExposeHeader[];
   export type Expression = string;
-  export type ExpressionType = "SQL"|string;
+  export type ExpressionType = "SQL";
   export type FetchOwner = boolean;
   export type FieldDelimiter = string;
-  export type FileHeaderInfo = "USE"|"IGNORE"|"NONE"|string;
+  export type FileHeaderInfo = "USE"|"IGNORE"|"NONE";
   export interface FilterRule {
     /**
      * The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications in the Amazon S3 User Guide.
@@ -2225,7 +2225,7 @@ declare namespace S3 {
     Value?: FilterRuleValue;
   }
   export type FilterRuleList = FilterRule[];
-  export type FilterRuleName = "prefix"|"suffix"|string;
+  export type FilterRuleName = "prefix"|"suffix";
   export type FilterRuleValue = string;
   export interface GetBucketAccelerateConfigurationOutput {
     /**
@@ -3365,7 +3365,7 @@ declare namespace S3 {
      */
     Parquet?: ParquetInput;
   }
-  export type IntelligentTieringAccessTier = "ARCHIVE_ACCESS"|"DEEP_ARCHIVE_ACCESS"|string;
+  export type IntelligentTieringAccessTier = "ARCHIVE_ACCESS"|"DEEP_ARCHIVE_ACCESS";
   export interface IntelligentTieringAndOperator {
     /**
      * An object key name prefix that identifies the subset of objects to which the configuration applies.
@@ -3408,7 +3408,7 @@ declare namespace S3 {
     And?: IntelligentTieringAndOperator;
   }
   export type IntelligentTieringId = string;
-  export type IntelligentTieringStatus = "Enabled"|"Disabled"|string;
+  export type IntelligentTieringStatus = "Enabled"|"Disabled";
   export interface InventoryConfiguration {
     /**
      * Contains information about where to publish the inventory results.
@@ -3462,11 +3462,11 @@ declare namespace S3 {
      */
     Prefix: Prefix;
   }
-  export type InventoryFormat = "CSV"|"ORC"|"Parquet"|string;
-  export type InventoryFrequency = "Daily"|"Weekly"|string;
+  export type InventoryFormat = "CSV"|"ORC"|"Parquet";
+  export type InventoryFrequency = "Daily"|"Weekly";
   export type InventoryId = string;
-  export type InventoryIncludedObjectVersions = "All"|"Current"|string;
-  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|"ObjectLockRetainUntilDate"|"ObjectLockMode"|"ObjectLockLegalHoldStatus"|"IntelligentTieringAccessTier"|"BucketKeyStatus"|"ChecksumAlgorithm"|string;
+  export type InventoryIncludedObjectVersions = "All"|"Current";
+  export type InventoryOptionalField = "Size"|"LastModifiedDate"|"StorageClass"|"ETag"|"IsMultipartUploaded"|"ReplicationStatus"|"EncryptionStatus"|"ObjectLockRetainUntilDate"|"ObjectLockMode"|"ObjectLockLegalHoldStatus"|"IntelligentTieringAccessTier"|"BucketKeyStatus"|"ChecksumAlgorithm";
   export type InventoryOptionalFields = InventoryOptionalField[];
   export interface InventoryS3BucketDestination {
     /**
@@ -3512,7 +3512,7 @@ declare namespace S3 {
      */
     RecordDelimiter?: RecordDelimiter;
   }
-  export type JSONType = "DOCUMENT"|"LINES"|string;
+  export type JSONType = "DOCUMENT"|"LINES";
   export type KMSContext = string;
   export type KeyCount = number;
   export type KeyMarker = string;
@@ -4202,8 +4202,8 @@ declare namespace S3 {
     TargetPrefix: TargetPrefix;
   }
   export type MFA = string;
-  export type MFADelete = "Enabled"|"Disabled"|string;
-  export type MFADeleteStatus = "Enabled"|"Disabled"|string;
+  export type MFADelete = "Enabled"|"Disabled";
+  export type MFADeleteStatus = "Enabled"|"Disabled";
   export type Marker = string;
   export type MaxAgeSeconds = number;
   export type MaxKeys = number;
@@ -4211,7 +4211,7 @@ declare namespace S3 {
   export type MaxUploads = number;
   export type Message = string;
   export type Metadata = {[key: string]: MetadataValue};
-  export type MetadataDirective = "COPY"|"REPLACE"|string;
+  export type MetadataDirective = "COPY"|"REPLACE";
   export interface MetadataEntry {
     /**
      * Name of the Object.
@@ -4278,7 +4278,7 @@ declare namespace S3 {
     And?: MetricsAndOperator;
   }
   export type MetricsId = string;
-  export type MetricsStatus = "Enabled"|"Disabled"|string;
+  export type MetricsStatus = "Enabled"|"Disabled";
   export type Minutes = number;
   export type MissingMeta = number;
   export interface MultipartUpload {
@@ -4410,9 +4410,9 @@ declare namespace S3 {
      */
     Owner?: Owner;
   }
-  export type ObjectAttributes = "ETag"|"Checksum"|"ObjectParts"|"StorageClass"|"ObjectSize"|string;
+  export type ObjectAttributes = "ETag"|"Checksum"|"ObjectParts"|"StorageClass"|"ObjectSize";
   export type ObjectAttributesList = ObjectAttributes[];
-  export type ObjectCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"aws-exec-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
+  export type ObjectCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"aws-exec-read"|"bucket-owner-read"|"bucket-owner-full-control";
   export interface ObjectIdentifier {
     /**
      * Key name of the object.  Replacement must be made for object keys containing special characters (such as carriage returns) when using XML requests. For more information, see  XML related object key constraints. 
@@ -4436,7 +4436,7 @@ declare namespace S3 {
      */
     Rule?: ObjectLockRule;
   }
-  export type ObjectLockEnabled = "Enabled"|string;
+  export type ObjectLockEnabled = "Enabled";
   export type ObjectLockEnabledForBucket = boolean;
   export interface ObjectLockLegalHold {
     /**
@@ -4444,8 +4444,8 @@ declare namespace S3 {
      */
     Status?: ObjectLockLegalHoldStatus;
   }
-  export type ObjectLockLegalHoldStatus = "ON"|"OFF"|string;
-  export type ObjectLockMode = "GOVERNANCE"|"COMPLIANCE"|string;
+  export type ObjectLockLegalHoldStatus = "ON"|"OFF";
+  export type ObjectLockMode = "GOVERNANCE"|"COMPLIANCE";
   export type ObjectLockRetainUntilDate = Date;
   export interface ObjectLockRetention {
     /**
@@ -4457,7 +4457,7 @@ declare namespace S3 {
      */
     RetainUntilDate?: _Date;
   }
-  export type ObjectLockRetentionMode = "GOVERNANCE"|"COMPLIANCE"|string;
+  export type ObjectLockRetentionMode = "GOVERNANCE"|"COMPLIANCE";
   export interface ObjectLockRule {
     /**
      * The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. Bucket settings require both a mode and a period. The period can be either Days or Years but you must select one. You cannot specify Days and Years at the same time.
@@ -4465,7 +4465,7 @@ declare namespace S3 {
     DefaultRetention?: DefaultRetention;
   }
   export type ObjectLockToken = string;
-  export type ObjectOwnership = "BucketOwnerPreferred"|"ObjectWriter"|"BucketOwnerEnforced"|string;
+  export type ObjectOwnership = "BucketOwnerPreferred"|"ObjectWriter"|"BucketOwnerEnforced";
   export interface ObjectPart {
     /**
      * The part number identifying the part. This value is a positive integer between 1 and 10,000.
@@ -4495,7 +4495,7 @@ declare namespace S3 {
   export type ObjectSize = number;
   export type ObjectSizeGreaterThanBytes = number;
   export type ObjectSizeLessThanBytes = number;
-  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_IR"|string;
+  export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_IR";
   export interface ObjectVersion {
     /**
      * The entity tag is an MD5 hash of that version of the object.
@@ -4536,7 +4536,7 @@ declare namespace S3 {
   }
   export type ObjectVersionId = string;
   export type ObjectVersionList = ObjectVersion[];
-  export type ObjectVersionStorageClass = "STANDARD"|string;
+  export type ObjectVersionStorageClass = "STANDARD";
   export interface OutputLocation {
     /**
      * Describes an S3 location that will receive the results of the restore request.
@@ -4563,7 +4563,7 @@ declare namespace S3 {
      */
     ID?: ID;
   }
-  export type OwnerOverride = "Destination"|string;
+  export type OwnerOverride = "Destination";
   export interface OwnershipControls {
     /**
      * The container element for an ownership control rule.
@@ -4615,8 +4615,8 @@ declare namespace S3 {
   export type Parts = Part[];
   export type PartsCount = number;
   export type PartsList = ObjectPart[];
-  export type Payer = "Requester"|"BucketOwner"|string;
-  export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"|string;
+  export type Payer = "Requester"|"BucketOwner";
+  export type Permission = "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP";
   export type Policy = string;
   export interface PolicyStatus {
     /**
@@ -4646,7 +4646,7 @@ declare namespace S3 {
      */
     Details?: Progress;
   }
-  export type Protocol = "http"|"https"|string;
+  export type Protocol = "http"|"https";
   export interface PublicAccessBlockConfiguration {
     /**
      * Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:   PUT Bucket ACL and PUT Object ACL calls fail if the specified ACL is public.   PUT Object calls fail if the request includes a public ACL.   PUT Bucket calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs.
@@ -5546,7 +5546,7 @@ declare namespace S3 {
   export type Quiet = boolean;
   export type QuoteCharacter = string;
   export type QuoteEscapeCharacter = string;
-  export type QuoteFields = "ALWAYS"|"ASNEEDED"|string;
+  export type QuoteFields = "ALWAYS"|"ASNEEDED";
   export type Range = string;
   export type RecordDelimiter = string;
   export interface RecordsEvent {
@@ -5596,7 +5596,7 @@ declare namespace S3 {
      */
     Status: ReplicaModificationsStatus;
   }
-  export type ReplicaModificationsStatus = "Enabled"|"Disabled"|string;
+  export type ReplicaModificationsStatus = "Enabled"|"Disabled";
   export interface ReplicationConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects. For more information, see How to Set Up Replication in the Amazon S3 User Guide.
@@ -5663,9 +5663,9 @@ declare namespace S3 {
      */
     And?: ReplicationRuleAndOperator;
   }
-  export type ReplicationRuleStatus = "Enabled"|"Disabled"|string;
+  export type ReplicationRuleStatus = "Enabled"|"Disabled";
   export type ReplicationRules = ReplicationRule[];
-  export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA"|string;
+  export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA";
   export interface ReplicationTime {
     /**
      *  Specifies whether the replication time is enabled. 
@@ -5676,15 +5676,15 @@ declare namespace S3 {
      */
     Time: ReplicationTimeValue;
   }
-  export type ReplicationTimeStatus = "Enabled"|"Disabled"|string;
+  export type ReplicationTimeStatus = "Enabled"|"Disabled";
   export interface ReplicationTimeValue {
     /**
      *  Contains an integer specifying time in minutes.   Valid value: 15
      */
     Minutes?: Minutes;
   }
-  export type RequestCharged = "requester"|string;
-  export type RequestPayer = "requester"|string;
+  export type RequestCharged = "requester";
+  export type RequestPayer = "requester";
   export interface RequestPaymentConfiguration {
     /**
      * Specifies who pays for the download and request fees.
@@ -5768,7 +5768,7 @@ declare namespace S3 {
      */
     OutputLocation?: OutputLocation;
   }
-  export type RestoreRequestType = "SELECT"|string;
+  export type RestoreRequestType = "SELECT";
   export type Role = string;
   export interface RoutingRule {
     /**
@@ -5939,7 +5939,7 @@ declare namespace S3 {
      */
     OutputSerialization: OutputSerialization;
   }
-  export type ServerSideEncryption = "AES256"|"aws:kms"|string;
+  export type ServerSideEncryption = "AES256"|"aws:kms";
   export interface ServerSideEncryptionByDefault {
     /**
      * Server-side encryption algorithm to use for the default encryption.
@@ -5986,7 +5986,7 @@ declare namespace S3 {
      */
     Status: SseKmsEncryptedObjectsStatus;
   }
-  export type SseKmsEncryptedObjectsStatus = "Enabled"|"Disabled"|string;
+  export type SseKmsEncryptedObjectsStatus = "Enabled"|"Disabled";
   export type Start = number;
   export type StartAfter = string;
   export interface Stats {
@@ -6009,7 +6009,7 @@ declare namespace S3 {
      */
     Details?: Stats;
   }
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_IR"|string;
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_IR";
   export interface StorageClassAnalysis {
     /**
      * Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.
@@ -6026,7 +6026,7 @@ declare namespace S3 {
      */
     Destination: AnalyticsExportDestination;
   }
-  export type StorageClassAnalysisSchemaVersion = "V_1"|string;
+  export type StorageClassAnalysisSchemaVersion = "V_1";
   export type Suffix = string;
   export interface Tag {
     /**
@@ -6046,7 +6046,7 @@ declare namespace S3 {
      */
     TagSet: TagSet;
   }
-  export type TaggingDirective = "COPY"|"REPLACE"|string;
+  export type TaggingDirective = "COPY"|"REPLACE";
   export type TaggingHeader = string;
   export type TargetBucket = string;
   export interface TargetGrant {
@@ -6061,7 +6061,7 @@ declare namespace S3 {
   }
   export type TargetGrants = TargetGrant[];
   export type TargetPrefix = string;
-  export type Tier = "Standard"|"Bulk"|"Expedited"|string;
+  export type Tier = "Standard"|"Bulk"|"Expedited";
   export interface Tiering {
     /**
      * The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).
@@ -6118,8 +6118,8 @@ declare namespace S3 {
     StorageClass?: TransitionStorageClass;
   }
   export type TransitionList = Transition[];
-  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR"|string;
-  export type Type = "CanonicalUser"|"AmazonCustomerByEmail"|"Group"|string;
+  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR";
+  export type Type = "CanonicalUser"|"AmazonCustomerByEmail"|"Group";
   export type URI = string;
   export type UploadIdMarker = string;
   export interface UploadPartCopyOutput {

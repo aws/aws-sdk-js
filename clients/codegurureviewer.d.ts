@@ -142,7 +142,7 @@ declare class CodeGuruReviewer extends Service {
   waitFor(state: "codeReviewCompleted", callback?: (err: AWSError, data: CodeGuruReviewer.Types.DescribeCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.DescribeCodeReviewResponse, AWSError>;
 }
 declare namespace CodeGuruReviewer {
-  export type AnalysisType = "Security"|"CodeQuality"|string;
+  export type AnalysisType = "Security"|"CodeQuality";
   export type AnalysisTypes = AnalysisType[];
   export type Arn = string;
   export interface AssociateRepositoryRequest {
@@ -344,7 +344,7 @@ declare namespace CodeGuruReviewer {
     MergeBaseCommit?: CommitId;
   }
   export type CommitId = string;
-  export type ConfigFileState = "Present"|"Absent"|"PresentWithErrors"|string;
+  export type ConfigFileState = "Present"|"Absent"|"PresentWithErrors";
   export type ConnectionArn = string;
   export interface CreateCodeReviewRequest {
     /**
@@ -431,7 +431,7 @@ declare namespace CodeGuruReviewer {
      */
     Tags?: TagMap;
   }
-  export type EncryptionOption = "AWS_OWNED_CMK"|"CUSTOMER_MANAGED_CMK"|string;
+  export type EncryptionOption = "AWS_OWNED_CMK"|"CUSTOMER_MANAGED_CMK";
   export interface EventInfo {
     /**
      * The name of the event. The possible names are pull_request, workflow_dispatch, schedule, and push 
@@ -446,7 +446,7 @@ declare namespace CodeGuruReviewer {
   export type EventState = string;
   export type FilePath = string;
   export type FindingsCount = number;
-  export type JobState = "Completed"|"Pending"|"Failed"|"Deleting"|string;
+  export type JobState = "Completed"|"Pending"|"Failed"|"Deleting";
   export type JobStates = JobState[];
   export interface KMSKeyDetails {
     /**
@@ -638,7 +638,7 @@ declare namespace CodeGuruReviewer {
   export type NextToken = string;
   export type Owner = string;
   export type Owners = Owner[];
-  export type ProviderType = "CodeCommit"|"GitHub"|"Bitbucket"|"GitHubEnterpriseServer"|"S3Bucket"|string;
+  export type ProviderType = "CodeCommit"|"GitHub"|"Bitbucket"|"GitHubEnterpriseServer"|"S3Bucket";
   export type ProviderTypes = ProviderType[];
   export type PullRequestId = string;
   export interface PutRecommendationFeedbackRequest {
@@ -657,9 +657,9 @@ declare namespace CodeGuruReviewer {
   }
   export interface PutRecommendationFeedbackResponse {
   }
-  export type Reaction = "ThumbsUp"|"ThumbsDown"|string;
+  export type Reaction = "ThumbsUp"|"ThumbsDown";
   export type Reactions = Reaction[];
-  export type RecommendationCategory = "AWSBestPractices"|"AWSCloudFormationIssues"|"DuplicateCode"|"CodeMaintenanceIssues"|"ConcurrencyIssues"|"InputValidations"|"PythonBestPractices"|"JavaBestPractices"|"ResourceLeaks"|"SecurityIssues"|"CodeInconsistencies"|string;
+  export type RecommendationCategory = "AWSBestPractices"|"AWSCloudFormationIssues"|"DuplicateCode"|"CodeMaintenanceIssues"|"ConcurrencyIssues"|"InputValidations"|"PythonBestPractices"|"JavaBestPractices"|"ResourceLeaks"|"SecurityIssues"|"CodeInconsistencies";
   export interface RecommendationFeedback {
     /**
      * The Amazon Resource Name (ARN) of the CodeReview object. 
@@ -807,7 +807,7 @@ declare namespace CodeGuruReviewer {
     KMSKeyDetails?: KMSKeyDetails;
     S3RepositoryDetails?: S3RepositoryDetails;
   }
-  export type RepositoryAssociationState = "Associated"|"Associating"|"Failed"|"Disassociating"|"Disassociated"|string;
+  export type RepositoryAssociationState = "Associated"|"Associating"|"Failed"|"Disassociating"|"Disassociated";
   export type RepositoryAssociationStates = RepositoryAssociationState[];
   export type RepositoryAssociationSummaries = RepositoryAssociationSummary[];
   export interface RepositoryAssociationSummary {
@@ -928,7 +928,7 @@ declare namespace CodeGuruReviewer {
      */
     CodeArtifacts?: CodeArtifacts;
   }
-  export type Severity = "Info"|"Low"|"Medium"|"High"|"Critical"|string;
+  export type Severity = "Info"|"Low"|"Medium"|"High"|"Critical";
   export type ShortDescription = string;
   export type SourceCodeArtifactsObjectKey = string;
   export interface SourceCodeType {
@@ -983,7 +983,7 @@ declare namespace CodeGuruReviewer {
     Owner: Owner;
   }
   export type TimeStamp = Date;
-  export type Type = "PullRequest"|"RepositoryAnalysis"|string;
+  export type Type = "PullRequest"|"RepositoryAnalysis";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the RepositoryAssociation object. You can retrieve this ARN by calling ListRepositoryAssociations.
@@ -998,7 +998,7 @@ declare namespace CodeGuruReviewer {
   }
   export type UserId = string;
   export type UserIds = UserId[];
-  export type VendorName = "GitHub"|"GitLab"|"NativeS3"|string;
+  export type VendorName = "GitHub"|"GitLab"|"NativeS3";
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

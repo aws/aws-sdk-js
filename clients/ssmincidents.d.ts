@@ -715,7 +715,7 @@ declare namespace SSMIncidents {
      */
     source: IncidentSource;
   }
-  export type IncidentRecordStatus = "OPEN"|"RESOLVED"|string;
+  export type IncidentRecordStatus = "OPEN"|"RESOLVED";
   export interface IncidentRecordSummary {
     /**
      * The Amazon Resource Name (ARN) of the incident.
@@ -788,7 +788,7 @@ declare namespace SSMIncidents {
      */
     value: ItemValue;
   }
-  export type ItemType = "ANALYSIS"|"INCIDENT"|"METRIC"|"PARENT"|"ATTACHMENT"|"OTHER"|"AUTOMATION"|"INVOLVED_RESOURCE"|"TASK"|string;
+  export type ItemType = "ANALYSIS"|"INCIDENT"|"METRIC"|"PARENT"|"ATTACHMENT"|"OTHER"|"AUTOMATION"|"INVOLVED_RESOURCE"|"TASK";
   export interface ItemValue {
     /**
      * The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
@@ -995,7 +995,7 @@ declare namespace SSMIncidents {
     sseKmsKeyId?: SseKmsKey;
   }
   export type RegionName = string;
-  export type RegionStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|string;
+  export type RegionStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED";
   export interface RelatedItem {
     /**
      * A unique ID for a RelatedItem.  Don't specify this parameter when you add a RelatedItem by using the UpdateRelatedItems API action. 
@@ -1057,7 +1057,7 @@ declare namespace SSMIncidents {
     status: ReplicationSetStatus;
   }
   export type ReplicationSetArnList = Arn[];
-  export type ReplicationSetStatus = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type ReplicationSetStatus = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"FAILED";
   export interface ResourcePolicy {
     /**
      * The JSON blob that describes the policy.
@@ -1093,7 +1093,7 @@ declare namespace SSMIncidents {
   export type RoleArn = string;
   export type ServicePrincipal = string;
   export type SnsArn = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING";
   export type SseKmsKey = string;
   export interface SsmAutomation {
     /**
@@ -1128,7 +1128,7 @@ declare namespace SSMIncidents {
   export type SsmParameterValuesMemberString = string;
   export type SsmParameters = {[key: string]: SsmParameterValues};
   export type SsmParametersKeyString = string;
-  export type SsmTargetAccount = "RESPONSE_PLAN_OWNER_ACCOUNT"|"IMPACTED_ACCOUNT"|string;
+  export type SsmTargetAccount = "RESPONSE_PLAN_OWNER_ACCOUNT"|"IMPACTED_ACCOUNT";
   export interface StartIncidentInput {
     /**
      * A token ensuring that the operation is called only once with the specified details.
@@ -1211,7 +1211,7 @@ declare namespace SSMIncidents {
      */
     incidentRecordArn: Arn;
   }
-  export type TimelineEventSort = "EVENT_TIME"|string;
+  export type TimelineEventSort = "EVENT_TIME";
   export type TimelineEventType = string;
   export type Timestamp = Date;
   export interface TriggerDetails {
@@ -1425,7 +1425,7 @@ declare namespace SSMIncidents {
   export interface UpdateTimelineEventOutput {
   }
   export type Url = string;
-  export type VariableType = "INCIDENT_RECORD_ARN"|"INVOLVED_RESOURCES"|string;
+  export type VariableType = "INCIDENT_RECORD_ARN"|"INVOLVED_RESOURCES";
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

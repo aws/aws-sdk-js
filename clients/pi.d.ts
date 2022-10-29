@@ -147,7 +147,7 @@ declare namespace PI {
     NextToken?: NextToken;
   }
   export type Description = string;
-  export type DetailStatus = "AVAILABLE"|"PROCESSING"|"UNAVAILABLE"|string;
+  export type DetailStatus = "AVAILABLE"|"PROCESSING"|"UNAVAILABLE";
   export interface DimensionDetail {
     /**
      * The identifier of a dimension.
@@ -224,7 +224,7 @@ declare namespace PI {
     Status?: FeatureStatus;
   }
   export type FeatureMetadataMap = {[key: string]: FeatureMetadata};
-  export type FeatureStatus = "ENABLED"|"DISABLED"|"UNSUPPORTED"|"ENABLED_PENDING_REBOOT"|"DISABLED_PENDING_REBOOT"|"UNKNOWN"|string;
+  export type FeatureStatus = "ENABLED"|"DISABLED"|"UNSUPPORTED"|"ENABLED_PENDING_REBOOT"|"DISABLED_PENDING_REBOOT"|"UNKNOWN";
   export interface GetDimensionKeyDetailsRequest {
     /**
      * The Amazon Web Services service for which Performance Insights returns data. The only valid value is RDS.
@@ -474,7 +474,7 @@ declare namespace PI {
     Dimensions?: DimensionMap;
   }
   export type ResponseResourceMetricList = ResponseResourceMetric[];
-  export type ServiceType = "RDS"|"DOCDB"|string;
+  export type ServiceType = "RDS"|"DOCDB";
   export type String = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

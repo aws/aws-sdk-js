@@ -214,7 +214,7 @@ declare namespace MarketplaceMetering {
     Status?: UsageRecordResultStatus;
   }
   export type UsageRecordResultList = UsageRecordResult[];
-  export type UsageRecordResultStatus = "Success"|"CustomerNotSubscribed"|"DuplicateRecord"|string;
+  export type UsageRecordResultStatus = "Success"|"CustomerNotSubscribed"|"DuplicateRecord";
   export type VersionInteger = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -163,8 +163,8 @@ declare namespace Braket {
      */
     quantumTaskArn: QuantumTaskArn;
   }
-  export type CancellationStatus = "CANCELLING"|"CANCELLED"|string;
-  export type CompressionType = "NONE"|"GZIP"|string;
+  export type CancellationStatus = "CANCELLING"|"CANCELLED";
+  export type CompressionType = "NONE"|"GZIP";
   export interface ContainerImage {
     /**
      * The URI locating the container image.
@@ -290,7 +290,7 @@ declare namespace Braket {
      */
     device: String256;
   }
-  export type DeviceStatus = "ONLINE"|"OFFLINE"|"RETIRED"|string;
+  export type DeviceStatus = "ONLINE"|"OFFLINE"|"RETIRED";
   export interface DeviceSummary {
     /**
      * The ARN of the device.
@@ -314,7 +314,7 @@ declare namespace Braket {
     providerName: String;
   }
   export type DeviceSummaryList = DeviceSummary[];
-  export type DeviceType = "QPU"|"SIMULATOR"|string;
+  export type DeviceType = "QPU"|"SIMULATOR";
   export interface GetDeviceRequest {
     /**
      * The ARN of the device to retrieve.
@@ -522,7 +522,7 @@ declare namespace Braket {
   }
   export type InstanceConfigInstanceCountInteger = number;
   export type InstanceConfigVolumeSizeInGbInteger = number;
-  export type InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|string;
+  export type InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge";
   export type Integer = number;
   export type JobArn = string;
   export interface JobCheckpointConfig {
@@ -550,7 +550,7 @@ declare namespace Braket {
     timeOfEvent?: SyntheticTimestamp_date_time;
   }
   export type JobEventDetailsMessageString = string;
-  export type JobEventType = "WAITING_FOR_PRIORITY"|"QUEUED_FOR_EXECUTION"|"STARTING_INSTANCE"|"DOWNLOADING_DATA"|"RUNNING"|"DEPRIORITIZED_DUE_TO_INACTIVITY"|"UPLOADING_RESULTS"|"COMPLETED"|"FAILED"|"MAX_RUNTIME_EXCEEDED"|"CANCELLED"|string;
+  export type JobEventType = "WAITING_FOR_PRIORITY"|"QUEUED_FOR_EXECUTION"|"STARTING_INSTANCE"|"DOWNLOADING_DATA"|"RUNNING"|"DEPRIORITIZED_DUE_TO_INACTIVITY"|"UPLOADING_RESULTS"|"COMPLETED"|"FAILED"|"MAX_RUNTIME_EXCEEDED"|"CANCELLED";
   export type JobEvents = JobEventDetails[];
   export interface JobOutputDataConfig {
     /**
@@ -562,7 +562,7 @@ declare namespace Braket {
      */
     s3Path: S3Path;
   }
-  export type JobPrimaryStatus = "QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
+  export type JobPrimaryStatus = "QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED";
   export interface JobStoppingCondition {
     /**
      * The maximum length of time, in seconds, that an Amazon Braket job can run.
@@ -621,7 +621,7 @@ declare namespace Braket {
   }
   export type Long = number;
   export type QuantumTaskArn = string;
-  export type QuantumTaskStatus = "CREATED"|"QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
+  export type QuantumTaskStatus = "CREATED"|"QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED";
   export interface QuantumTaskSummary {
     /**
      * The time at which the task was created.
@@ -735,7 +735,7 @@ declare namespace Braket {
      */
     values: SearchJobsFilterValuesList;
   }
-  export type SearchJobsFilterOperator = "LT"|"LTE"|"EQUAL"|"GT"|"GTE"|"BETWEEN"|"CONTAINS"|string;
+  export type SearchJobsFilterOperator = "LT"|"LTE"|"EQUAL"|"GT"|"GTE"|"BETWEEN"|"CONTAINS";
   export type SearchJobsFilterValuesList = String256[];
   export interface SearchJobsRequest {
     /**
@@ -777,7 +777,7 @@ declare namespace Braket {
      */
     values: SearchQuantumTasksFilterValuesList;
   }
-  export type SearchQuantumTasksFilterOperator = "LT"|"LTE"|"EQUAL"|"GT"|"GTE"|"BETWEEN"|string;
+  export type SearchQuantumTasksFilterOperator = "LT"|"LTE"|"EQUAL"|"GT"|"GTE"|"BETWEEN";
   export type SearchQuantumTasksFilterValuesList = String256[];
   export interface SearchQuantumTasksRequest {
     /**

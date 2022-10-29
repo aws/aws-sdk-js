@@ -1917,7 +1917,7 @@ declare namespace Personalize {
   }
   export type Description = string;
   export type DockerURI = string;
-  export type Domain = "ECOMMERCE"|"VIDEO_ON_DEMAND"|string;
+  export type Domain = "ECOMMERCE"|"VIDEO_ON_DEMAND";
   export interface EventTracker {
     /**
      * The name of the event tracker.
@@ -2143,8 +2143,8 @@ declare namespace Personalize {
     categoricalHyperParameterRanges?: CategoricalHyperParameterRanges;
   }
   export type HyperParameters = {[key: string]: ParameterValue};
-  export type ImportMode = "FULL"|"INCREMENTAL"|string;
-  export type IngestionMode = "BULK"|"PUT"|"ALL"|string;
+  export type ImportMode = "FULL"|"INCREMENTAL";
+  export type IngestionMode = "BULK"|"PUT"|"ALL";
   export interface IntegerHyperParameterRange {
     /**
      * The name of the hyperparameter.
@@ -2516,7 +2516,7 @@ declare namespace Personalize {
   export type Name = string;
   export type NextToken = string;
   export type NumBatchResults = number;
-  export type ObjectiveSensitivity = "LOW"|"MEDIUM"|"HIGH"|"OFF"|string;
+  export type ObjectiveSensitivity = "LOW"|"MEDIUM"|"HIGH"|"OFF";
   export interface OptimizationObjective {
     /**
      * The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).
@@ -2569,7 +2569,7 @@ declare namespace Personalize {
      */
     lastUpdatedDateTime?: _Date;
   }
-  export type RecipeProvider = "SERVICE"|string;
+  export type RecipeProvider = "SERVICE";
   export interface RecipeSummary {
     /**
      * The name of the recipe.
@@ -2973,7 +2973,7 @@ declare namespace Personalize {
   export type TrackingId = string;
   export type TrainingHours = number;
   export type TrainingInputMode = string;
-  export type TrainingMode = "FULL"|"UPDATE"|string;
+  export type TrainingMode = "FULL"|"UPDATE";
   export type TransactionsPerSecond = number;
   export type Tunable = boolean;
   export interface TunedHPOParams {

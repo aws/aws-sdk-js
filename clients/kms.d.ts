@@ -414,7 +414,7 @@ declare class KMS extends Service {
 }
 declare namespace KMS {
   export type AWSAccountIdType = string;
-  export type AlgorithmSpec = "RSAES_PKCS1_V1_5"|"RSAES_OAEP_SHA_1"|"RSAES_OAEP_SHA_256"|string;
+  export type AlgorithmSpec = "RSAES_PKCS1_V1_5"|"RSAES_OAEP_SHA_1"|"RSAES_OAEP_SHA_256";
   export type AliasList = AliasListEntry[];
   export interface AliasListEntry {
     /**
@@ -463,8 +463,8 @@ declare namespace KMS {
   }
   export interface ConnectCustomKeyStoreResponse {
   }
-  export type ConnectionErrorCodeType = "INVALID_CREDENTIALS"|"CLUSTER_NOT_FOUND"|"NETWORK_ERRORS"|"INTERNAL_ERROR"|"INSUFFICIENT_CLOUDHSM_HSMS"|"USER_LOCKED_OUT"|"USER_NOT_FOUND"|"USER_LOGGED_IN"|"SUBNET_NOT_FOUND"|"INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET"|string;
-  export type ConnectionStateType = "CONNECTED"|"CONNECTING"|"FAILED"|"DISCONNECTED"|"DISCONNECTING"|string;
+  export type ConnectionErrorCodeType = "INVALID_CREDENTIALS"|"CLUSTER_NOT_FOUND"|"NETWORK_ERRORS"|"INTERNAL_ERROR"|"INSUFFICIENT_CLOUDHSM_HSMS"|"USER_LOCKED_OUT"|"USER_NOT_FOUND"|"USER_LOGGED_IN"|"SUBNET_NOT_FOUND"|"INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET";
+  export type ConnectionStateType = "CONNECTED"|"CONNECTING"|"FAILED"|"DISCONNECTED"|"DISCONNECTING";
   export interface CreateAliasRequest {
     /**
      * Specifies the alias name. This value must begin with alias/ followed by a name, such as alias/ExampleAlias.  The AliasName value must be string of 1-256 characters. It can contain only alphanumeric characters, forward slashes (/), underscores (_), and dashes (-). The alias name cannot begin with alias/aws/. The alias/aws/ prefix is reserved for Amazon Web Services managed keys.
@@ -620,9 +620,9 @@ declare namespace KMS {
      */
     CreationDate?: DateType;
   }
-  export type CustomerMasterKeySpec = "RSA_2048"|"RSA_3072"|"RSA_4096"|"ECC_NIST_P256"|"ECC_NIST_P384"|"ECC_NIST_P521"|"ECC_SECG_P256K1"|"SYMMETRIC_DEFAULT"|"HMAC_224"|"HMAC_256"|"HMAC_384"|"HMAC_512"|"SM2"|string;
-  export type DataKeyPairSpec = "RSA_2048"|"RSA_3072"|"RSA_4096"|"ECC_NIST_P256"|"ECC_NIST_P384"|"ECC_NIST_P521"|"ECC_SECG_P256K1"|"SM2"|string;
-  export type DataKeySpec = "AES_256"|"AES_128"|string;
+  export type CustomerMasterKeySpec = "RSA_2048"|"RSA_3072"|"RSA_4096"|"ECC_NIST_P256"|"ECC_NIST_P384"|"ECC_NIST_P521"|"ECC_SECG_P256K1"|"SYMMETRIC_DEFAULT"|"HMAC_224"|"HMAC_256"|"HMAC_384"|"HMAC_512"|"SM2";
+  export type DataKeyPairSpec = "RSA_2048"|"RSA_3072"|"RSA_4096"|"ECC_NIST_P256"|"ECC_NIST_P384"|"ECC_NIST_P521"|"ECC_SECG_P256K1"|"SM2";
+  export type DataKeySpec = "AES_256"|"AES_128";
   export type DateType = Date;
   export interface DecryptRequest {
     /**
@@ -797,12 +797,12 @@ declare namespace KMS {
      */
     EncryptionAlgorithm?: EncryptionAlgorithmSpec;
   }
-  export type EncryptionAlgorithmSpec = "SYMMETRIC_DEFAULT"|"RSAES_OAEP_SHA_1"|"RSAES_OAEP_SHA_256"|"SM2PKE"|string;
+  export type EncryptionAlgorithmSpec = "SYMMETRIC_DEFAULT"|"RSAES_OAEP_SHA_1"|"RSAES_OAEP_SHA_256"|"SM2PKE";
   export type EncryptionAlgorithmSpecList = EncryptionAlgorithmSpec[];
   export type EncryptionContextKey = string;
   export type EncryptionContextType = {[key: string]: EncryptionContextValue};
   export type EncryptionContextValue = string;
-  export type ExpirationModelType = "KEY_MATERIAL_EXPIRES"|"KEY_MATERIAL_DOES_NOT_EXPIRE"|string;
+  export type ExpirationModelType = "KEY_MATERIAL_EXPIRES"|"KEY_MATERIAL_DOES_NOT_EXPIRE";
   export interface GenerateDataKeyPairRequest {
     /**
      * Specifies the encryption context that will be used when encrypting the private key in the data key pair. An encryption context is a collection of non-secret key-value pairs that represent additional authenticated data. When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended. For more information, see Encryption context in the Key Management Service Developer Guide.
@@ -1146,7 +1146,7 @@ declare namespace KMS {
     Constraints?: GrantConstraints;
   }
   export type GrantNameType = string;
-  export type GrantOperation = "Decrypt"|"Encrypt"|"GenerateDataKey"|"GenerateDataKeyWithoutPlaintext"|"ReEncryptFrom"|"ReEncryptTo"|"Sign"|"Verify"|"GetPublicKey"|"CreateGrant"|"RetireGrant"|"DescribeKey"|"GenerateDataKeyPair"|"GenerateDataKeyPairWithoutPlaintext"|"GenerateMac"|"VerifyMac"|string;
+  export type GrantOperation = "Decrypt"|"Encrypt"|"GenerateDataKey"|"GenerateDataKeyWithoutPlaintext"|"ReEncryptFrom"|"ReEncryptTo"|"Sign"|"Verify"|"GetPublicKey"|"CreateGrant"|"RetireGrant"|"DescribeKey"|"GenerateDataKeyPair"|"GenerateDataKeyPairWithoutPlaintext"|"GenerateMac"|"VerifyMac";
   export type GrantOperationList = GrantOperation[];
   export type GrantTokenList = GrantTokenType[];
   export type GrantTokenType = string;
@@ -1186,7 +1186,7 @@ declare namespace KMS {
      */
     KeyArn?: ArnType;
   }
-  export type KeyManagerType = "AWS"|"CUSTOMER"|string;
+  export type KeyManagerType = "AWS"|"CUSTOMER";
   export interface KeyMetadata {
     /**
      * The twelve-digit account ID of the Amazon Web Services account that owns the KMS key.
@@ -1281,10 +1281,10 @@ declare namespace KMS {
      */
     MacAlgorithms?: MacAlgorithmSpecList;
   }
-  export type KeySpec = "RSA_2048"|"RSA_3072"|"RSA_4096"|"ECC_NIST_P256"|"ECC_NIST_P384"|"ECC_NIST_P521"|"ECC_SECG_P256K1"|"SYMMETRIC_DEFAULT"|"HMAC_224"|"HMAC_256"|"HMAC_384"|"HMAC_512"|"SM2"|string;
-  export type KeyState = "Creating"|"Enabled"|"Disabled"|"PendingDeletion"|"PendingImport"|"PendingReplicaDeletion"|"Unavailable"|"Updating"|string;
+  export type KeySpec = "RSA_2048"|"RSA_3072"|"RSA_4096"|"ECC_NIST_P256"|"ECC_NIST_P384"|"ECC_NIST_P521"|"ECC_SECG_P256K1"|"SYMMETRIC_DEFAULT"|"HMAC_224"|"HMAC_256"|"HMAC_384"|"HMAC_512"|"SM2";
+  export type KeyState = "Creating"|"Enabled"|"Disabled"|"PendingDeletion"|"PendingImport"|"PendingReplicaDeletion"|"Unavailable"|"Updating";
   export type KeyStorePasswordType = string;
-  export type KeyUsageType = "SIGN_VERIFY"|"ENCRYPT_DECRYPT"|"GENERATE_VERIFY_MAC"|string;
+  export type KeyUsageType = "SIGN_VERIFY"|"ENCRYPT_DECRYPT"|"GENERATE_VERIFY_MAC";
   export type LimitType = number;
   export interface ListAliasesRequest {
     /**
@@ -1444,10 +1444,10 @@ declare namespace KMS {
      */
     RetiringPrincipal: PrincipalIdType;
   }
-  export type MacAlgorithmSpec = "HMAC_SHA_224"|"HMAC_SHA_256"|"HMAC_SHA_384"|"HMAC_SHA_512"|string;
+  export type MacAlgorithmSpec = "HMAC_SHA_224"|"HMAC_SHA_256"|"HMAC_SHA_384"|"HMAC_SHA_512";
   export type MacAlgorithmSpecList = MacAlgorithmSpec[];
   export type MarkerType = string;
-  export type MessageType = "RAW"|"DIGEST"|string;
+  export type MessageType = "RAW"|"DIGEST";
   export interface MultiRegionConfiguration {
     /**
      * Indicates whether the KMS key is a PRIMARY or REPLICA key.
@@ -1473,10 +1473,10 @@ declare namespace KMS {
     Region?: RegionType;
   }
   export type MultiRegionKeyList = MultiRegionKey[];
-  export type MultiRegionKeyType = "PRIMARY"|"REPLICA"|string;
+  export type MultiRegionKeyType = "PRIMARY"|"REPLICA";
   export type NullableBooleanType = boolean;
   export type NumberOfBytesType = number;
-  export type OriginType = "AWS_KMS"|"EXTERNAL"|"AWS_CLOUDHSM"|string;
+  export type OriginType = "AWS_KMS"|"EXTERNAL"|"AWS_CLOUDHSM";
   export type PendingWindowInDaysType = number;
   export type PlaintextType = Buffer|Uint8Array|Blob|string;
   export type PolicyNameList = PolicyNameType[];
@@ -1687,7 +1687,7 @@ declare namespace KMS {
      */
     SigningAlgorithm?: SigningAlgorithmSpec;
   }
-  export type SigningAlgorithmSpec = "RSASSA_PSS_SHA_256"|"RSASSA_PSS_SHA_384"|"RSASSA_PSS_SHA_512"|"RSASSA_PKCS1_V1_5_SHA_256"|"RSASSA_PKCS1_V1_5_SHA_384"|"RSASSA_PKCS1_V1_5_SHA_512"|"ECDSA_SHA_256"|"ECDSA_SHA_384"|"ECDSA_SHA_512"|"SM2DSA"|string;
+  export type SigningAlgorithmSpec = "RSASSA_PSS_SHA_256"|"RSASSA_PSS_SHA_384"|"RSASSA_PSS_SHA_512"|"RSASSA_PKCS1_V1_5_SHA_256"|"RSASSA_PKCS1_V1_5_SHA_384"|"RSASSA_PKCS1_V1_5_SHA_512"|"ECDSA_SHA_256"|"ECDSA_SHA_384"|"ECDSA_SHA_512"|"SM2DSA";
   export type SigningAlgorithmSpecList = SigningAlgorithmSpec[];
   export interface Tag {
     /**
@@ -1850,7 +1850,7 @@ declare namespace KMS {
      */
     SigningAlgorithm?: SigningAlgorithmSpec;
   }
-  export type WrappingKeySpec = "RSA_2048"|string;
+  export type WrappingKeySpec = "RSA_2048";
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -583,7 +583,7 @@ declare namespace S3Control {
      */
     ResponseDetails?: AsyncResponseDetails;
   }
-  export type AsyncOperationName = "CreateMultiRegionAccessPoint"|"DeleteMultiRegionAccessPoint"|"PutMultiRegionAccessPointPolicy"|string;
+  export type AsyncOperationName = "CreateMultiRegionAccessPoint"|"DeleteMultiRegionAccessPoint"|"PutMultiRegionAccessPointPolicy";
   export interface AsyncRequestParameters {
     /**
      * A container of the parameters for a CreateMultiRegionAccessPoint request.
@@ -623,7 +623,7 @@ declare namespace S3Control {
   export type AwsLambdaTransformationPayload = string;
   export type AwsOrgArn = string;
   export type Boolean = boolean;
-  export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
+  export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read";
   export interface BucketLevel {
     /**
      * A container for the bucket-level activity metrics for Amazon S3 Storage Lens
@@ -634,9 +634,9 @@ declare namespace S3Control {
      */
     PrefixLevel?: PrefixLevel;
   }
-  export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
+  export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1";
   export type BucketName = string;
-  export type BucketVersioningStatus = "Enabled"|"Suspended"|string;
+  export type BucketVersioningStatus = "Enabled"|"Suspended";
   export type Buckets = S3BucketArnString[];
   export interface CloudWatchMetrics {
     /**
@@ -1041,9 +1041,9 @@ declare namespace S3Control {
      */
     Regions?: Regions;
   }
-  export type ExpirationStatus = "Enabled"|"Disabled"|string;
+  export type ExpirationStatus = "Enabled"|"Disabled";
   export type ExpiredObjectDeleteMarker = boolean;
-  export type Format = "CSV"|"Parquet"|string;
+  export type Format = "CSV"|"Parquet";
   export type FunctionArnString = string;
   export interface GeneratedManifestEncryption {
     /**
@@ -1055,7 +1055,7 @@ declare namespace S3Control {
      */
     SSEKMS?: SSEKMSEncryption;
   }
-  export type GeneratedManifestFormat = "S3InventoryReport_CSV_20211130"|string;
+  export type GeneratedManifestFormat = "S3InventoryReport_CSV_20211130";
   export interface GetAccessPointConfigurationForObjectLambdaRequest {
     /**
      * The account ID for the account that owns the specified Object Lambda Access Point.
@@ -1558,8 +1558,8 @@ declare namespace S3Control {
     Location: JobManifestLocation;
   }
   export type JobManifestFieldList = JobManifestFieldName[];
-  export type JobManifestFieldName = "Ignore"|"Bucket"|"Key"|"VersionId"|string;
-  export type JobManifestFormat = "S3BatchOperations_CSV_20180820"|"S3InventoryReport_CSV_20161130"|string;
+  export type JobManifestFieldName = "Ignore"|"Bucket"|"Key"|"VersionId";
+  export type JobManifestFormat = "S3BatchOperations_CSV_20180820"|"S3InventoryReport_CSV_20161130";
   export interface JobManifestGenerator {
     /**
      * The S3 job ManifestGenerator's configuration details.
@@ -1683,9 +1683,9 @@ declare namespace S3Control {
      */
     ReportScope?: JobReportScope;
   }
-  export type JobReportFormat = "Report_CSV_20180820"|string;
-  export type JobReportScope = "AllTasks"|"FailedTasksOnly"|string;
-  export type JobStatus = "Active"|"Cancelled"|"Cancelling"|"Complete"|"Completing"|"Failed"|"Failing"|"New"|"Paused"|"Pausing"|"Preparing"|"Ready"|"Suspended"|string;
+  export type JobReportFormat = "Report_CSV_20180820";
+  export type JobReportScope = "AllTasks"|"FailedTasksOnly";
+  export type JobStatus = "Active"|"Cancelled"|"Cancelling"|"Complete"|"Completing"|"Failed"|"Failing"|"New"|"Paused"|"Pausing"|"Preparing"|"Ready"|"Suspended";
   export type JobStatusList = JobStatus[];
   export type JobStatusUpdateReason = string;
   export type JobTerminationDate = Date;
@@ -1750,7 +1750,7 @@ declare namespace S3Control {
      */
     NoncurrentVersionTransitions?: NoncurrentVersionTransitionList;
     /**
-     * The noncurrent version expiration of the lifecycle rule.
+     * The noncurrent version expiration of the lifecycle rule.  This is not supported by Amazon S3 on Outposts buckets. 
      */
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
     /**
@@ -1767,14 +1767,6 @@ declare namespace S3Control {
      * All of these tags must exist in the object's tag set in order for the rule to apply.
      */
     Tags?: S3TagSet;
-    /**
-     * Minimum object size to which the rule applies.
-     */
-    ObjectSizeGreaterThan?: ObjectSizeGreaterThanBytes;
-    /**
-     * Maximum object size to which the rule applies.
-     */
-    ObjectSizeLessThan?: ObjectSizeLessThanBytes;
   }
   export interface LifecycleRuleFilter {
     /**
@@ -1786,14 +1778,6 @@ declare namespace S3Control {
      * The container for the AND condition for the lifecycle rule.
      */
     And?: LifecycleRuleAndOperator;
-    /**
-     * Minimum object size to which the rule applies.
-     */
-    ObjectSizeGreaterThan?: ObjectSizeGreaterThanBytes;
-    /**
-     * Maximum object size to which the rule applies.
-     */
-    ObjectSizeLessThan?: ObjectSizeLessThanBytes;
   }
   export type LifecycleRules = LifecycleRule[];
   export interface ListAccessPointsForObjectLambdaRequest {
@@ -1968,8 +1952,8 @@ declare namespace S3Control {
   }
   export type Location = string;
   export type MFA = string;
-  export type MFADelete = "Enabled"|"Disabled"|string;
-  export type MFADeleteStatus = "Enabled"|"Disabled"|string;
+  export type MFADelete = "Enabled"|"Disabled";
+  export type MFADeleteStatus = "Enabled"|"Disabled";
   export type ManifestPrefixString = string;
   export type MaxLength1024String = string;
   export type MaxResults = number;
@@ -2022,28 +2006,23 @@ declare namespace S3Control {
     Regions?: RegionReportList;
   }
   export type MultiRegionAccessPointReportList = MultiRegionAccessPointReport[];
-  export type MultiRegionAccessPointStatus = "READY"|"INCONSISTENT_ACROSS_REGIONS"|"CREATING"|"PARTIALLY_CREATED"|"PARTIALLY_DELETED"|"DELETING"|string;
+  export type MultiRegionAccessPointStatus = "READY"|"INCONSISTENT_ACROSS_REGIONS"|"CREATING"|"PARTIALLY_CREATED"|"PARTIALLY_DELETED"|"DELETING";
   export interface MultiRegionAccessPointsAsyncResponse {
     /**
      * A collection of status information for the different Regions that a Multi-Region Access Point supports.
      */
     Regions?: MultiRegionAccessPointRegionalResponseList;
   }
-  export type NetworkOrigin = "Internet"|"VPC"|string;
+  export type NetworkOrigin = "Internet"|"VPC";
   export type NonEmptyMaxLength1024String = string;
   export type NonEmptyMaxLength2048String = string;
   export type NonEmptyMaxLength256String = string;
   export type NonEmptyMaxLength64String = string;
-  export type NoncurrentVersionCount = number;
   export interface NoncurrentVersionExpiration {
     /**
      * Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see How Amazon S3 Calculates When an Object Became Noncurrent in the Amazon S3 User Guide.
      */
     NoncurrentDays?: Days;
-    /**
-     * Specifies how many noncurrent versions S3 on Outposts will retain. If there are this many more recent noncurrent versions, S3 on Outposts will take the associated action. For more information about noncurrent versions, see Lifecycle configuration elements in the Amazon S3 User Guide.
-     */
-    NewerNoncurrentVersions?: NoncurrentVersionCount;
   }
   export interface NoncurrentVersionTransition {
     /**
@@ -2070,7 +2049,7 @@ declare namespace S3Control {
   export type ObjectLambdaAccessPointArn = string;
   export type ObjectLambdaAccessPointList = ObjectLambdaAccessPoint[];
   export type ObjectLambdaAccessPointName = string;
-  export type ObjectLambdaAllowedFeature = "GetObject-Range"|"GetObject-PartNumber"|"HeadObject-Range"|"HeadObject-PartNumber"|string;
+  export type ObjectLambdaAllowedFeature = "GetObject-Range"|"GetObject-PartNumber"|"HeadObject-Range"|"HeadObject-PartNumber";
   export type ObjectLambdaAllowedFeaturesList = ObjectLambdaAllowedFeature[];
   export interface ObjectLambdaConfiguration {
     /**
@@ -2082,7 +2061,7 @@ declare namespace S3Control {
      */
     CloudWatchMetricsEnabled?: Boolean;
     /**
-     * A container for allowed features. Valid inputs are GetObject-Range, GetObject-PartNumber, HeadObject-Range, and HeadObject-PartNumber.
+     * A container for allowed features. Valid inputs are GetObject-Range and GetObject-PartNumber.
      */
     AllowedFeatures?: ObjectLambdaAllowedFeaturesList;
     /**
@@ -2100,7 +2079,7 @@ declare namespace S3Control {
   export type ObjectLambdaSupportingAccessPointArn = string;
   export interface ObjectLambdaTransformationConfiguration {
     /**
-     * A container for the action of an Object Lambda Access Point configuration. Valid inputs are GetObject, ListObjects, HeadObject, and ListObjectsV2.
+     * A container for the action of an Object Lambda Access Point configuration. Valid input is GetObject.
      */
     Actions: ObjectLambdaTransformationConfigurationActionsList;
     /**
@@ -2108,14 +2087,12 @@ declare namespace S3Control {
      */
     ContentTransformation: ObjectLambdaContentTransformation;
   }
-  export type ObjectLambdaTransformationConfigurationAction = "GetObject"|"HeadObject"|"ListObjects"|"ListObjectsV2"|string;
+  export type ObjectLambdaTransformationConfigurationAction = "GetObject"|"HeadObject"|"ListObjects"|"ListObjectsV2";
   export type ObjectLambdaTransformationConfigurationActionsList = ObjectLambdaTransformationConfigurationAction[];
   export type ObjectLambdaTransformationConfigurationsList = ObjectLambdaTransformationConfiguration[];
   export type ObjectLockEnabledForBucket = boolean;
-  export type ObjectSizeGreaterThanBytes = number;
-  export type ObjectSizeLessThanBytes = number;
-  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject"|string;
-  export type OutputSchemaVersion = "V_1"|string;
+  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject";
+  export type OutputSchemaVersion = "V_1";
   export type Policy = string;
   export interface PolicyStatus {
     /**
@@ -2401,10 +2378,10 @@ declare namespace S3Control {
   }
   export type RegionalBucketList = RegionalBucket[];
   export type Regions = S3AWSRegion[];
-  export type ReplicationStatus = "COMPLETED"|"FAILED"|"REPLICA"|"NONE"|string;
+  export type ReplicationStatus = "COMPLETED"|"FAILED"|"REPLICA"|"NONE";
   export type ReplicationStatusFilterList = ReplicationStatus[];
   export type ReportPrefixString = string;
-  export type RequestedJobStatus = "Cancelled"|"Ready"|string;
+  export type RequestedJobStatus = "Cancelled"|"Ready";
   export type S3AWSRegion = string;
   export interface S3AccessControlList {
     /**
@@ -2454,8 +2431,8 @@ declare namespace S3Control {
      */
     Encryption?: StorageLensDataExportEncryption;
   }
-  export type S3CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
-  export type S3ChecksumAlgorithm = "CRC32"|"CRC32C"|"SHA1"|"SHA256"|string;
+  export type S3CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control";
+  export type S3ChecksumAlgorithm = "CRC32"|"CRC32C"|"SHA1"|"SHA256";
   export type S3ContentLength = number;
   export interface S3CopyObjectOperation {
     /**
@@ -2541,7 +2518,7 @@ declare namespace S3Control {
     Format?: GeneratedManifestFormat;
     Location?: JobManifestLocation;
   }
-  export type S3GlacierJobTier = "BULK"|"STANDARD"|string;
+  export type S3GlacierJobTier = "BULK"|"STANDARD";
   export interface S3Grant {
     /**
      * 
@@ -2567,7 +2544,7 @@ declare namespace S3Control {
      */
     DisplayName?: NonEmptyMaxLength1024String;
   }
-  export type S3GranteeTypeIdentifier = "id"|"emailAddress"|"uri"|string;
+  export type S3GranteeTypeIdentifier = "id"|"emailAddress"|"uri";
   export interface S3InitiateRestoreObjectOperation {
     /**
      * This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive object remains available in Amazon S3. S3 Initiate Restore Object jobs that target S3 Glacier and S3 Glacier Deep Archive objects require ExpirationInDays set to 1 or greater. Conversely, do not set ExpirationInDays when creating S3 Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so specifying ExpirationInDays results in restore request failure. S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects, but not both types in the same job. If you need to restore objects of both types you must create separate Batch Operations jobs. 
@@ -2623,16 +2600,16 @@ declare namespace S3Control {
      */
     ManifestFormat: GeneratedManifestFormat;
   }
-  export type S3MetadataDirective = "COPY"|"REPLACE"|string;
+  export type S3MetadataDirective = "COPY"|"REPLACE";
   export interface S3ObjectLockLegalHold {
     /**
      * The Object Lock legal hold status to be applied to all objects in the Batch Operations job.
      */
     Status: S3ObjectLockLegalHoldStatus;
   }
-  export type S3ObjectLockLegalHoldStatus = "OFF"|"ON"|string;
-  export type S3ObjectLockMode = "COMPLIANCE"|"GOVERNANCE"|string;
-  export type S3ObjectLockRetentionMode = "COMPLIANCE"|"GOVERNANCE"|string;
+  export type S3ObjectLockLegalHoldStatus = "OFF"|"ON";
+  export type S3ObjectLockMode = "COMPLIANCE"|"GOVERNANCE";
+  export type S3ObjectLockRetentionMode = "COMPLIANCE"|"GOVERNANCE";
   export interface S3ObjectMetadata {
     /**
      * 
@@ -2690,7 +2667,7 @@ declare namespace S3Control {
     DisplayName?: NonEmptyMaxLength1024String;
   }
   export type S3ObjectVersionId = string;
-  export type S3Permission = "FULL_CONTROL"|"READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|string;
+  export type S3Permission = "FULL_CONTROL"|"READ"|"WRITE"|"READ_ACP"|"WRITE_ACP";
   export type S3RegionalBucketArn = string;
   export interface S3ReplicateObjectOperation {
   }
@@ -2704,7 +2681,7 @@ declare namespace S3Control {
      */
     Mode?: S3ObjectLockRetentionMode;
   }
-  export type S3SSEAlgorithm = "AES256"|"KMS"|string;
+  export type S3SSEAlgorithm = "AES256"|"KMS";
   export interface S3SetObjectAclOperation {
     /**
      * 
@@ -2733,7 +2710,7 @@ declare namespace S3Control {
      */
     TagSet?: S3TagSet;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR"|string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR";
   export interface S3Tag {
     /**
      * 
@@ -2880,7 +2857,7 @@ declare namespace S3Control {
     StorageClass?: TransitionStorageClass;
   }
   export type TransitionList = Transition[];
-  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
+  export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE";
   export interface UpdateJobPriorityRequest {
     /**
      * The Amazon Web Services account ID associated with the S3 Batch Operations job.

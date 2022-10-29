@@ -658,7 +658,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export type ApplicationMaintenanceWindowEndTime = string;
   export type ApplicationMaintenanceWindowStartTime = string;
-  export type ApplicationMode = "STREAMING"|"INTERACTIVE"|string;
+  export type ApplicationMode = "STREAMING"|"INTERACTIVE";
   export type ApplicationName = string;
   export interface ApplicationRestoreConfiguration {
     /**
@@ -670,7 +670,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotName?: SnapshotName;
   }
-  export type ApplicationRestoreType = "SKIP_RESTORE_FROM_SNAPSHOT"|"RESTORE_FROM_LATEST_SNAPSHOT"|"RESTORE_FROM_CUSTOM_SNAPSHOT"|string;
+  export type ApplicationRestoreType = "SKIP_RESTORE_FROM_SNAPSHOT"|"RESTORE_FROM_LATEST_SNAPSHOT"|"RESTORE_FROM_CUSTOM_SNAPSHOT";
   export interface ApplicationSnapshotConfiguration {
     /**
      * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
@@ -689,7 +689,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"ROLLING_BACK"|"MAINTENANCE"|"ROLLED_BACK"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"ROLLING_BACK"|"MAINTENANCE"|"ROLLED_BACK";
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -729,7 +729,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationStatus: ApplicationStatus;
   }
-  export type ArtifactType = "UDF"|"DEPENDENCY_JAR"|string;
+  export type ArtifactType = "UDF"|"DEPENDENCY_JAR";
   export type AuthorizedUrl = string;
   export type BasePath = string;
   export type BooleanObject = boolean;
@@ -882,7 +882,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     S3ApplicationCodeLocationDescription?: S3ApplicationCodeLocationDescription;
   }
-  export type CodeContentType = "PLAINTEXT"|"ZIPFILE"|string;
+  export type CodeContentType = "PLAINTEXT"|"ZIPFILE";
   export interface CodeContentUpdate {
     /**
      * Describes an update to the text code for an application.
@@ -900,7 +900,7 @@ declare namespace KinesisAnalyticsV2 {
   export type CodeMD5 = string;
   export type CodeSize = number;
   export type ConditionalToken = string;
-  export type ConfigurationType = "DEFAULT"|"CUSTOM"|string;
+  export type ConfigurationType = "DEFAULT"|"CUSTOM";
   export interface CreateApplicationPresignedUrlRequest {
     /**
      * The name of the application.
@@ -1492,7 +1492,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     RecordColumnUpdates?: RecordColumns;
   }
-  export type InputStartingPosition = "NOW"|"TRIM_HORIZON"|"LAST_STOPPED_POINT"|string;
+  export type InputStartingPosition = "NOW"|"TRIM_HORIZON"|"LAST_STOPPED_POINT";
   export interface InputStartingPositionConfiguration {
     /**
      * The starting position on the stream.    NOW - Start reading just after the most recent record in the stream, and start at the request timestamp that the customer issued.    TRIM_HORIZON - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Data Firehose delivery stream.    LAST_STOPPED_POINT - Resume reading from where the application last stopped reading.  
@@ -1732,7 +1732,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     Tags?: Tags;
   }
-  export type LogLevel = "INFO"|"WARN"|"ERROR"|"DEBUG"|string;
+  export type LogLevel = "INFO"|"WARN"|"ERROR"|"DEBUG";
   export type LogStreamARN = string;
   export interface MappingParameters {
     /**
@@ -1761,7 +1761,7 @@ declare namespace KinesisAnalyticsV2 {
     Version: MavenVersion;
   }
   export type MavenVersion = string;
-  export type MetricsLevel = "APPLICATION"|"TASK"|"OPERATOR"|"PARALLELISM"|string;
+  export type MetricsLevel = "APPLICATION"|"TASK"|"OPERATOR"|"PARALLELISM";
   export type MinPauseBetweenCheckpoints = number;
   export interface MonitoringConfiguration {
     /**
@@ -1995,7 +1995,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     MappingParameters?: MappingParameters;
   }
-  export type RecordFormatType = "JSON"|"CSV"|string;
+  export type RecordFormatType = "JSON"|"CSV";
   export type RecordRowDelimiter = string;
   export type RecordRowPath = string;
   export interface ReferenceDataSource {
@@ -2097,7 +2097,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationRestoreConfiguration?: ApplicationRestoreConfiguration;
   }
-  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"ZEPPELIN-FLINK-1_0"|"FLINK-1_11"|"FLINK-1_13"|"ZEPPELIN-FLINK-2_0"|string;
+  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"ZEPPELIN-FLINK-1_0"|"FLINK-1_11"|"FLINK-1_13"|"ZEPPELIN-FLINK-2_0";
   export interface S3ApplicationCodeLocationDescription {
     /**
      * The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
@@ -2236,7 +2236,7 @@ declare namespace KinesisAnalyticsV2 {
     SnapshotCreationTimestamp?: Timestamp;
   }
   export type SnapshotName = string;
-  export type SnapshotStatus = "CREATING"|"READY"|"DELETING"|"FAILED"|string;
+  export type SnapshotStatus = "CREATING"|"READY"|"DELETING"|"FAILED";
   export type SnapshotSummaries = SnapshotDetails[];
   export interface SourceSchema {
     /**
@@ -2427,7 +2427,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDetail: ApplicationDetail;
   }
-  export type UrlType = "FLINK_DASHBOARD_URL"|"ZEPPELIN_UI_URL"|string;
+  export type UrlType = "FLINK_DASHBOARD_URL"|"ZEPPELIN_UI_URL";
   export interface VpcConfiguration {
     /**
      * The array of Subnet IDs used by the VPC configuration.

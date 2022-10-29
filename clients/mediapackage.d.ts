@@ -165,9 +165,9 @@ declare class MediaPackage extends Service {
   updateOriginEndpoint(callback?: (err: AWSError, data: MediaPackage.Types.UpdateOriginEndpointResponse) => void): Request<MediaPackage.Types.UpdateOriginEndpointResponse, AWSError>;
 }
 declare namespace MediaPackage {
-  export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|"DATERANGE"|string;
+  export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|"DATERANGE";
   export type AdTriggers = __AdTriggersElement[];
-  export type AdsOnDeliveryRestrictions = "NONE"|"RESTRICTED"|"UNRESTRICTED"|"BOTH"|string;
+  export type AdsOnDeliveryRestrictions = "NONE"|"RESTRICTED"|"UNRESTRICTED"|"BOTH";
   export interface Authorization {
     /**
      * The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
@@ -210,7 +210,7 @@ declare namespace MediaPackage {
     KeyRotationIntervalSeconds?: __integer;
     SpekeKeyProvider: SpekeKeyProvider;
   }
-  export type CmafEncryptionMethod = "SAMPLE_AES"|"AES_CTR"|string;
+  export type CmafEncryptionMethod = "SAMPLE_AES"|"AES_CTR";
   export interface CmafPackage {
     Encryption?: CmafEncryption;
     /**
@@ -719,7 +719,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     PresetSpeke20Video: PresetSpeke20Video;
   }
-  export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
+  export type EncryptionMethod = "AES_128"|"SAMPLE_AES";
   export interface HarvestJob {
     /**
      * The Amazon Resource Name (ARN) assigned to the HarvestJob.
@@ -1067,7 +1067,7 @@ rounded to the nearest multiple of the source fragment duration.
   export interface ListTagsForResourceResponse {
     Tags?: __mapOf__string;
   }
-  export type ManifestLayout = "FULL"|"COMPACT"|string;
+  export type ManifestLayout = "FULL"|"COMPACT";
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -1139,11 +1139,11 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
-  export type Origination = "ALLOW"|"DENY"|string;
-  export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
-  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED"|string;
-  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED"|string;
-  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|"DVB_DASH_2014"|string;
+  export type Origination = "ALLOW"|"DENY";
+  export type PlaylistType = "NONE"|"EVENT"|"VOD";
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED";
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED";
+  export type Profile = "NONE"|"HBBTV_1_5"|"HYBRIDCAST"|"DVB_DASH_2014";
   export interface RotateChannelCredentialsRequest {
     /**
      * The ID of the channel to update.
@@ -1213,7 +1213,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     RoleArn: __string;
   }
-  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION";
   export interface SpekeKeyProvider {
     /**
      * An Amazon Resource Name (ARN) of a Certificate Manager certificate
@@ -1242,8 +1242,8 @@ MediaPackage will assume when accessing the key provider service.
      */
     Url: __string;
   }
-  export type Status = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
-  export type StreamOrder = "ORIGINAL"|"VIDEO_BITRATE_ASCENDING"|"VIDEO_BITRATE_DESCENDING"|string;
+  export type Status = "IN_PROGRESS"|"SUCCEEDED"|"FAILED";
+  export type StreamOrder = "ORIGINAL"|"VIDEO_BITRATE_ASCENDING"|"VIDEO_BITRATE_DESCENDING";
   export interface StreamSelection {
     /**
      * The maximum video bitrate (bps) to include in output.
@@ -1395,9 +1395,9 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
-  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|"HTTP-XSDATE"|string;
-  export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
-  export type __PeriodTriggersElement = "ADS"|string;
+  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|"HTTP-XSDATE";
+  export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY";
+  export type __PeriodTriggersElement = "ADS";
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfChannel = Channel[];

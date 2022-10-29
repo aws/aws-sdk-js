@@ -603,7 +603,7 @@ declare namespace ECRPUBLIC {
      */
     failureReason?: ImageFailureReason;
   }
-  export type ImageFailureCode = "InvalidImageDigest"|"InvalidImageTag"|"ImageTagDoesNotMatchDigest"|"ImageNotFound"|"MissingDigestAndTag"|"ImageReferencedByManifestList"|"KmsError"|string;
+  export type ImageFailureCode = "InvalidImageDigest"|"InvalidImageTag"|"ImageTagDoesNotMatchDigest"|"ImageNotFound"|"MissingDigestAndTag"|"ImageReferencedByManifestList"|"KmsError";
   export type ImageFailureList = ImageFailure[];
   export type ImageFailureReason = string;
   export interface ImageIdentifier {
@@ -674,7 +674,7 @@ declare namespace ECRPUBLIC {
      */
     mediaType?: MediaType;
   }
-  export type LayerAvailability = "AVAILABLE"|"UNAVAILABLE"|string;
+  export type LayerAvailability = "AVAILABLE"|"UNAVAILABLE";
   export type LayerDigest = string;
   export type LayerDigestList = LayerDigest[];
   export interface LayerFailure {
@@ -691,7 +691,7 @@ declare namespace ECRPUBLIC {
      */
     failureReason?: LayerFailureReason;
   }
-  export type LayerFailureCode = "InvalidLayerDigest"|"MissingLayerDigest"|string;
+  export type LayerFailureCode = "InvalidLayerDigest"|"MissingLayerDigest";
   export type LayerFailureList = LayerFailure[];
   export type LayerFailureReason = string;
   export type LayerList = Layer[];
@@ -847,7 +847,7 @@ declare namespace ECRPUBLIC {
   }
   export type RegistryAliasList = RegistryAlias[];
   export type RegistryAliasName = string;
-  export type RegistryAliasStatus = "ACTIVE"|"PENDING"|"REJECTED"|string;
+  export type RegistryAliasStatus = "ACTIVE"|"PENDING"|"REJECTED";
   export interface RegistryCatalogData {
     /**
      * The display name for a public registry. This appears on the Amazon ECR Public Gallery.  Only accounts that have the verified account badge can have a registry display name. 

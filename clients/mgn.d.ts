@@ -279,7 +279,7 @@ declare class Mgn extends Service {
 declare namespace Mgn {
   export type ARN = string;
   export type Boolean = boolean;
-  export type BootMode = "LEGACY_BIOS"|"UEFI"|string;
+  export type BootMode = "LEGACY_BIOS"|"UEFI";
   export type BoundedString = string;
   export interface CPU {
     /**
@@ -307,7 +307,7 @@ declare namespace Mgn {
      */
     state: ChangeServerLifeCycleStateSourceServerLifecycleState;
   }
-  export type ChangeServerLifeCycleStateSourceServerLifecycleState = "READY_FOR_TEST"|"READY_FOR_CUTOVER"|"CUTOVER"|string;
+  export type ChangeServerLifeCycleStateSourceServerLifecycleState = "READY_FOR_TEST"|"READY_FOR_CUTOVER"|"CUTOVER";
   export type CloudWatchLogGroupName = string;
   export type Cpus = CPU[];
   export interface CreateLaunchConfigurationTemplateRequest {
@@ -384,7 +384,7 @@ declare namespace Mgn {
      */
     rawError?: LargeBoundedString;
   }
-  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|"UNSUPPORTED_VM_CONFIGURATION"|"LAST_SNAPSHOT_JOB_FAILED"|string;
+  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|"UNSUPPORTED_VM_CONFIGURATION"|"LAST_SNAPSHOT_JOB_FAILED";
   export interface DataReplicationInfo {
     /**
      * Error in obtaining data replication info.
@@ -462,10 +462,10 @@ declare namespace Mgn {
      */
     status?: DataReplicationInitiationStepStatus;
   }
-  export type DataReplicationInitiationStepName = "WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string;
-  export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
+  export type DataReplicationInitiationStepName = "WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER";
+  export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED";
   export type DataReplicationInitiationSteps = DataReplicationInitiationStep[];
-  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"PENDING_SNAPSHOT_SHIPPING"|"SHIPPING_SNAPSHOT"|string;
+  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"PENDING_SNAPSHOT_SHIPPING"|"SHIPPING_SNAPSHOT";
   export interface DeleteJobRequest {
     /**
      * Request to delete Job from service by Job ID.
@@ -703,7 +703,7 @@ declare namespace Mgn {
      */
     sourceServerID: SourceServerID;
   }
-  export type FirstBoot = "WAITING"|"SUCCEEDED"|"UNKNOWN"|"STOPPED"|string;
+  export type FirstBoot = "WAITING"|"SUCCEEDED"|"UNKNOWN"|"STOPPED";
   export interface GetLaunchConfigurationRequest {
     /**
      * Request to get Launch Configuration information by Source Server ID.
@@ -745,7 +745,7 @@ declare namespace Mgn {
   }
   export interface InitializeServiceResponse {
   }
-  export type InitiatedBy = "START_TEST"|"START_CUTOVER"|"DIAGNOSTIC"|"TERMINATE"|string;
+  export type InitiatedBy = "START_TEST"|"START_CUTOVER"|"DIAGNOSTIC"|"TERMINATE";
   export interface Job {
     /**
      * the ARN of the specific Job.
@@ -799,7 +799,7 @@ declare namespace Mgn {
      */
     logDateTime?: ISO8601DatetimeString;
   }
-  export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END"|string;
+  export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END";
   export interface JobLogEventData {
     /**
      * Job Event conversion Server ID.
@@ -841,8 +841,8 @@ declare namespace Mgn {
      */
     ssmDocumentType?: SsmDocumentType;
   }
-  export type JobStatus = "PENDING"|"STARTED"|"COMPLETED"|string;
-  export type JobType = "LAUNCH"|"TERMINATE"|string;
+  export type JobStatus = "PENDING"|"STARTED"|"COMPLETED";
+  export type JobType = "LAUNCH"|"TERMINATE";
   export type JobsList = Job[];
   export type LargeBoundedString = string;
   export interface LaunchConfiguration {
@@ -905,8 +905,8 @@ declare namespace Mgn {
   export type LaunchConfigurationTemplateID = string;
   export type LaunchConfigurationTemplateIDs = LaunchConfigurationTemplateID[];
   export type LaunchConfigurationTemplates = LaunchConfigurationTemplate[];
-  export type LaunchDisposition = "STOPPED"|"STARTED"|string;
-  export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
+  export type LaunchDisposition = "STOPPED"|"STARTED";
+  export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED";
   export interface LaunchedInstance {
     /**
      * Launched instance EC2 ID.
@@ -1029,7 +1029,7 @@ declare namespace Mgn {
      */
     apiCallDateTime?: ISO8601DatetimeString;
   }
-  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|string;
+  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED";
   export type LifeCycleStates = LifeCycleState[];
   export interface ListTagsForResourceRequest {
     /**
@@ -1091,7 +1091,7 @@ declare namespace Mgn {
   }
   export type ParticipatingServers = ParticipatingServer[];
   export type PositiveInteger = number;
-  export type PostLaunchActionExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
+  export type PostLaunchActionExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED";
   export interface PostLaunchActions {
     /**
      * Server participating in Job.
@@ -1114,7 +1114,7 @@ declare namespace Mgn {
      */
     ssmDocuments?: SsmDocuments;
   }
-  export type PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"|"CUTOVER_ONLY"|string;
+  export type PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"|"CUTOVER_ONLY";
   export type PostLaunchActionsLaunchStatusList = JobPostLaunchActionsLaunchStatus[];
   export interface PostLaunchActionsStatus {
     /**
@@ -1188,9 +1188,9 @@ declare namespace Mgn {
      */
     useDedicatedReplicationServer?: Boolean;
   }
-  export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
-  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"ST1"|"GP3"|string;
-  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|string;
+  export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP";
+  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"ST1"|"GP3";
+  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM";
   export interface ReplicationConfigurationReplicatedDisk {
     /**
      * Replication Configuration replicated disk device name.
@@ -1213,7 +1213,7 @@ declare namespace Mgn {
      */
     throughput?: PositiveInteger;
   }
-  export type ReplicationConfigurationReplicatedDiskStagingDiskType = "AUTO"|"GP2"|"IO1"|"SC1"|"ST1"|"STANDARD"|"GP3"|"IO2"|string;
+  export type ReplicationConfigurationReplicatedDiskStagingDiskType = "AUTO"|"GP2"|"IO1"|"SC1"|"ST1"|"STANDARD"|"GP3"|"IO2";
   export type ReplicationConfigurationReplicatedDisks = ReplicationConfigurationReplicatedDisk[];
   export interface ReplicationConfigurationTemplate {
     /**
@@ -1281,7 +1281,7 @@ declare namespace Mgn {
   export type ReplicationConfigurationTemplateIDs = ReplicationConfigurationTemplateID[];
   export type ReplicationConfigurationTemplates = ReplicationConfigurationTemplate[];
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
-  export type ReplicationType = "AGENT_BASED"|"SNAPSHOT_SHIPPING"|string;
+  export type ReplicationType = "AGENT_BASED"|"SNAPSHOT_SHIPPING";
   export type ReplicationTypes = ReplicationType[];
   export interface RetryDataReplicationRequest {
     /**
@@ -1395,7 +1395,7 @@ declare namespace Mgn {
   export type SsmDocumentName = string;
   export type SsmDocumentParameterName = string;
   export type SsmDocumentParameters = {[key: string]: SsmParameterStoreParameters};
-  export type SsmDocumentType = "AUTOMATION"|"COMMAND"|string;
+  export type SsmDocumentType = "AUTOMATION"|"COMMAND";
   export type SsmDocuments = SsmDocument[];
   export interface SsmParameterStoreParameter {
     /**
@@ -1408,7 +1408,7 @@ declare namespace Mgn {
     parameterType: SsmParameterStoreParameterType;
   }
   export type SsmParameterStoreParameterName = string;
-  export type SsmParameterStoreParameterType = "STRING"|string;
+  export type SsmParameterStoreParameterType = "STRING";
   export type SsmParameterStoreParameters = SsmParameterStoreParameter[];
   export interface StartCutoverRequest {
     /**
@@ -1466,7 +1466,7 @@ declare namespace Mgn {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
-  export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC"|string;
+  export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC";
   export interface TerminateTargetInstancesRequest {
     /**
      * Terminate Target instance by Source Server IDs.

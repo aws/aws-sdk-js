@@ -880,9 +880,9 @@ declare namespace RAM {
   }
   export type ResourceArnList = String[];
   export type ResourceList = Resource[];
-  export type ResourceOwner = "SELF"|"OTHER-ACCOUNTS"|string;
-  export type ResourceRegionScope = "REGIONAL"|"GLOBAL"|string;
-  export type ResourceRegionScopeFilter = "ALL"|"REGIONAL"|"GLOBAL"|string;
+  export type ResourceOwner = "SELF"|"OTHER-ACCOUNTS";
+  export type ResourceRegionScope = "REGIONAL"|"GLOBAL";
+  export type ResourceRegionScopeFilter = "ALL"|"REGIONAL"|"GLOBAL";
   export interface ResourceShare {
     /**
      * The Amazon Resoure Name (ARN) of the resource share
@@ -965,9 +965,9 @@ declare namespace RAM {
     external?: Boolean;
   }
   export type ResourceShareAssociationList = ResourceShareAssociation[];
-  export type ResourceShareAssociationStatus = "ASSOCIATING"|"ASSOCIATED"|"FAILED"|"DISASSOCIATING"|"DISASSOCIATED"|string;
-  export type ResourceShareAssociationType = "PRINCIPAL"|"RESOURCE"|string;
-  export type ResourceShareFeatureSet = "CREATED_FROM_POLICY"|"PROMOTING_TO_STANDARD"|"STANDARD"|string;
+  export type ResourceShareAssociationStatus = "ASSOCIATING"|"ASSOCIATED"|"FAILED"|"DISASSOCIATING"|"DISASSOCIATED";
+  export type ResourceShareAssociationType = "PRINCIPAL"|"RESOURCE";
+  export type ResourceShareFeatureSet = "CREATED_FROM_POLICY"|"PROMOTING_TO_STANDARD"|"STANDARD";
   export interface ResourceShareInvitation {
     /**
      * The Amazon Resoure Name (ARN) of the invitation.
@@ -1008,7 +1008,7 @@ declare namespace RAM {
   }
   export type ResourceShareInvitationArnList = String[];
   export type ResourceShareInvitationList = ResourceShareInvitation[];
-  export type ResourceShareInvitationStatus = "PENDING"|"ACCEPTED"|"REJECTED"|"EXPIRED"|string;
+  export type ResourceShareInvitationStatus = "PENDING"|"ACCEPTED"|"REJECTED"|"EXPIRED";
   export type ResourceShareList = ResourceShare[];
   export interface ResourceSharePermissionDetail {
     /**
@@ -1087,8 +1087,8 @@ declare namespace RAM {
      */
     isResourceTypeDefault?: Boolean;
   }
-  export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED"|string;
-  export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING"|string;
+  export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED";
+  export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING";
   export interface ServiceNameAndResourceType {
     /**
      * The type of the resource.

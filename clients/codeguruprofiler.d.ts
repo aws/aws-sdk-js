@@ -197,7 +197,7 @@ declare class CodeGuruProfiler extends Service {
   updateProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.UpdateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.UpdateProfilingGroupResponse, AWSError>;
 }
 declare namespace CodeGuruProfiler {
-  export type ActionGroup = "agentPermissions"|string;
+  export type ActionGroup = "agentPermissions";
   export interface AddNotificationChannelsRequest {
     /**
      * One or 2 channels to report to when anomalies are detected.
@@ -234,7 +234,7 @@ declare namespace CodeGuruProfiler {
      */
     profilingEnabled: Boolean;
   }
-  export type AgentParameterField = "SamplingIntervalInMilliseconds"|"ReportingIntervalInMilliseconds"|"MinimumTimeForReportingInMilliseconds"|"MemoryUsageLimitPercent"|"MaxStackDepth"|string;
+  export type AgentParameterField = "SamplingIntervalInMilliseconds"|"ReportingIntervalInMilliseconds"|"MinimumTimeForReportingInMilliseconds"|"MemoryUsageLimitPercent"|"MaxStackDepth";
   export type AgentParameters = {[key: string]: String};
   export type AgentProfile = Buffer|Uint8Array|Blob|string;
   export type AggregatedProfile = Buffer|Uint8Array|Blob|string;
@@ -248,7 +248,7 @@ declare namespace CodeGuruProfiler {
      */
     start?: Timestamp;
   }
-  export type AggregationPeriod = "PT5M"|"PT1H"|"P1D"|string;
+  export type AggregationPeriod = "PT5M"|"PT1H"|"P1D";
   export type Anomalies = Anomaly[];
   export interface Anomaly {
     /**
@@ -355,7 +355,7 @@ declare namespace CodeGuruProfiler {
   export type ChannelUri = string;
   export type Channels = Channel[];
   export type ClientToken = string;
-  export type ComputePlatform = "Default"|"AWSLambda"|string;
+  export type ComputePlatform = "Default"|"AWSLambda";
   export interface ConfigureAgentRequest {
     /**
      *  A universally unique identifier (UUID) for a profiling instance. For example, if the profiling instance is an Amazon EC2 instance, it is the instance ID. If it is an AWS Fargate container, it is the container's task ID. 
@@ -425,9 +425,9 @@ declare namespace CodeGuruProfiler {
     profilingGroup: ProfilingGroupDescription;
   }
   export type Double = number;
-  export type EventPublisher = "AnomalyDetection"|string;
+  export type EventPublisher = "AnomalyDetection";
   export type EventPublishers = EventPublisher[];
-  export type FeedbackType = "Positive"|"Negative"|string;
+  export type FeedbackType = "Positive"|"Negative";
   export type FindingsReportId = string;
   export type FindingsReportSummaries = FindingsReportSummary[];
   export interface FindingsReportSummary {
@@ -747,7 +747,7 @@ declare namespace CodeGuruProfiler {
   export type MaxDepth = number;
   export type MaxResults = number;
   export type Metadata = {[key: string]: String};
-  export type MetadataField = "ComputePlatform"|"AgentId"|"AwsRequestId"|"ExecutionEnvironment"|"LambdaFunctionArn"|"LambdaMemoryLimitInMB"|"LambdaRemainingTimeInMilliseconds"|"LambdaTimeGapBetweenInvokesInMilliseconds"|"LambdaPreviousExecutionTimeInMilliseconds"|string;
+  export type MetadataField = "ComputePlatform"|"AgentId"|"AwsRequestId"|"ExecutionEnvironment"|"LambdaFunctionArn"|"LambdaMemoryLimitInMB"|"LambdaRemainingTimeInMilliseconds"|"LambdaTimeGapBetweenInvokesInMilliseconds"|"LambdaPreviousExecutionTimeInMilliseconds";
   export interface Metric {
     /**
      *  The name of the method that appears as a frame in any stack in a profile. 
@@ -762,14 +762,14 @@ declare namespace CodeGuruProfiler {
      */
     type: MetricType;
   }
-  export type MetricType = "AggregatedRelativeTotalTime"|string;
+  export type MetricType = "AggregatedRelativeTotalTime";
   export interface NotificationConfiguration {
     /**
      * List of up to two channels to be used for sending notifications for events detected from the application profile.
      */
     channels?: Channels;
   }
-  export type OrderBy = "TimestampDescending"|"TimestampAscending"|string;
+  export type OrderBy = "TimestampDescending"|"TimestampAscending";
   export type PaginationToken = string;
   export interface Pattern {
     /**

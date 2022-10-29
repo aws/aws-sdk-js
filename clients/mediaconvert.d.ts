@@ -237,11 +237,11 @@ declare class MediaConvert extends Service {
   updateQueue(callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
 }
 declare namespace MediaConvert {
-  export type AacAudioDescriptionBroadcasterMix = "BROADCASTER_MIXED_AD"|"NORMAL"|string;
-  export type AacCodecProfile = "LC"|"HEV1"|"HEV2"|string;
-  export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
-  export type AacRateControlMode = "CBR"|"VBR"|string;
-  export type AacRawFormat = "LATM_LOAS"|"NONE"|string;
+  export type AacAudioDescriptionBroadcasterMix = "BROADCASTER_MIXED_AD"|"NORMAL";
+  export type AacCodecProfile = "LC"|"HEV1"|"HEV2";
+  export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1";
+  export type AacRateControlMode = "CBR"|"VBR";
+  export type AacRawFormat = "LATM_LOAS"|"NONE";
   export interface AacSettings {
     /**
      * Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio description (AD) as a stereo pair. The value for AudioType will be set to 3, which signals to downstream systems that this stream contains "broadcaster mixed AD". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType and  FollowInputAudioType. Choose NORMAL when the input does not contain pre-mixed audio + audio description (AD). In this case, the encoder will use any values you provide for AudioType and FollowInputAudioType.
@@ -280,18 +280,18 @@ declare namespace MediaConvert {
      */
     VbrQuality?: AacVbrQuality;
   }
-  export type AacSpecification = "MPEG2"|"MPEG4"|string;
-  export type AacVbrQuality = "LOW"|"MEDIUM_LOW"|"MEDIUM_HIGH"|"HIGH"|string;
-  export type Ac3BitstreamMode = "COMPLETE_MAIN"|"COMMENTARY"|"DIALOGUE"|"EMERGENCY"|"HEARING_IMPAIRED"|"MUSIC_AND_EFFECTS"|"VISUALLY_IMPAIRED"|"VOICE_OVER"|string;
-  export type Ac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_3_2_LFE"|string;
-  export type Ac3DynamicRangeCompressionLine = "FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|"NONE"|string;
-  export type Ac3DynamicRangeCompressionProfile = "FILM_STANDARD"|"NONE"|string;
-  export type Ac3DynamicRangeCompressionRf = "FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|"NONE"|string;
-  export type Ac3LfeFilter = "ENABLED"|"DISABLED"|string;
-  export type Ac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export type AacSpecification = "MPEG2"|"MPEG4";
+  export type AacVbrQuality = "LOW"|"MEDIUM_LOW"|"MEDIUM_HIGH"|"HIGH";
+  export type Ac3BitstreamMode = "COMPLETE_MAIN"|"COMMENTARY"|"DIALOGUE"|"EMERGENCY"|"HEARING_IMPAIRED"|"MUSIC_AND_EFFECTS"|"VISUALLY_IMPAIRED"|"VOICE_OVER";
+  export type Ac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_3_2_LFE";
+  export type Ac3DynamicRangeCompressionLine = "FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|"NONE";
+  export type Ac3DynamicRangeCompressionProfile = "FILM_STANDARD"|"NONE";
+  export type Ac3DynamicRangeCompressionRf = "FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|"NONE";
+  export type Ac3LfeFilter = "ENABLED"|"DISABLED";
+  export type Ac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED";
   export interface Ac3Settings {
     /**
-     * Specify the average bitrate in bits per second. The bitrate that you specify must be a multiple of 8000 within the allowed minimum and maximum values.  Leave blank to use the default bitrate for the coding mode you select according ETSI TS 102 366. Valid bitrates for coding mode 1/0: Default: 96000. Minimum: 64000. Maximum: 128000. Valid bitrates for coding mode 1/1: Default: 192000. Minimum: 128000. Maximum: 384000. Valid bitrates for coding mode 2/0: Default: 192000. Minimum: 128000. Maximum: 384000. Valid bitrates for coding mode 3/2 with FLE: Default: 384000. Minimum: 384000. Maximum: 640000.
+     * Specify the average bitrate in bits per second. Valid bitrates depend on the coding mode.
      */
     Bitrate?: __integerMin64000Max640000;
     /**
@@ -331,15 +331,15 @@ declare namespace MediaConvert {
      */
     SampleRate?: __integerMin48000Max48000;
   }
-  export type AccelerationMode = "DISABLED"|"ENABLED"|"PREFERRED"|string;
+  export type AccelerationMode = "DISABLED"|"ENABLED"|"PREFERRED";
   export interface AccelerationSettings {
     /**
      * Specify the conditions when the service will run your job with accelerated transcoding.
      */
     Mode: AccelerationMode;
   }
-  export type AccelerationStatus = "NOT_APPLICABLE"|"IN_PROGRESS"|"ACCELERATED"|"NOT_ACCELERATED"|string;
-  export type AfdSignaling = "NONE"|"AUTO"|"FIXED"|string;
+  export type AccelerationStatus = "NOT_APPLICABLE"|"IN_PROGRESS"|"ACCELERATED"|"NOT_ACCELERATED";
+  export type AfdSignaling = "NONE"|"AUTO"|"FIXED";
   export interface AiffSettings {
     /**
      * Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.
@@ -368,8 +368,8 @@ declare namespace MediaConvert {
      */
     Width?: __integerMin32Max8192;
   }
-  export type AlphaBehavior = "DISCARD"|"REMAP_TO_LUMA"|string;
-  export type AncillaryConvert608To708 = "UPCONVERT"|"DISABLED"|string;
+  export type AlphaBehavior = "DISCARD"|"REMAP_TO_LUMA";
+  export type AncillaryConvert608To708 = "UPCONVERT"|"DISABLED";
   export interface AncillarySourceSettings {
     /**
      * Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.
@@ -384,8 +384,8 @@ declare namespace MediaConvert {
      */
     TerminateCaptions?: AncillaryTerminateCaptions;
   }
-  export type AncillaryTerminateCaptions = "END_OF_INPUT"|"DISABLED"|string;
-  export type AntiAlias = "DISABLED"|"ENABLED"|string;
+  export type AncillaryTerminateCaptions = "END_OF_INPUT"|"DISABLED";
+  export type AntiAlias = "DISABLED"|"ENABLED";
   export interface AssociateCertificateRequest {
     /**
      * The ARN of the ACM certificate that you want to associate with your MediaConvert resource.
@@ -394,14 +394,14 @@ declare namespace MediaConvert {
   }
   export interface AssociateCertificateResponse {
   }
-  export type AudioChannelTag = "L"|"R"|"C"|"LFE"|"LS"|"RS"|"LC"|"RC"|"CS"|"LSD"|"RSD"|"TCS"|"VHL"|"VHC"|"VHR"|string;
+  export type AudioChannelTag = "L"|"R"|"C"|"LFE"|"LS"|"RS"|"LC"|"RC"|"CS"|"LSD"|"RSD"|"TCS"|"VHL"|"VHC"|"VHR";
   export interface AudioChannelTaggingSettings {
     /**
      * You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout.  For example, if this track is the left surround channel, choose Left surround (LS).
      */
     ChannelTag?: AudioChannelTag;
   }
-  export type AudioCodec = "AAC"|"MP2"|"MP3"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"VORBIS"|"OPUS"|"PASSTHROUGH"|string;
+  export type AudioCodec = "AAC"|"MP2"|"MP3"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"VORBIS"|"OPUS"|"PASSTHROUGH";
   export interface AudioCodecSettings {
     /**
      * Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode (rateControlMode) to "VBR" or "CBR".  In VBR mode, you control the audio quality with the setting VBR quality (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate). Defaults and valid values depend on the rate control mode.
@@ -448,7 +448,7 @@ declare namespace MediaConvert {
      */
     WavSettings?: WavSettings;
   }
-  export type AudioDefaultSelection = "DEFAULT"|"NOT_DEFAULT"|string;
+  export type AudioDefaultSelection = "DEFAULT"|"NOT_DEFAULT";
   export interface AudioDescription {
     /**
      * When you mimic a multi-channel audio layout with multiple mono-channel tracks, you can tag each channel layout manually. For example, you would tag the tracks that contain your left, right, and center audio with Left (L), Right (R), and Center (C), respectively. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use audio layout tagging, your output must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or AIFF; and you must set up your audio track to have only one channel.
@@ -495,12 +495,12 @@ declare namespace MediaConvert {
      */
     StreamName?: __stringPatternWS;
   }
-  export type AudioDurationCorrection = "DISABLED"|"AUTO"|"TRACK"|"FRAME"|string;
-  export type AudioLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
-  export type AudioNormalizationAlgorithm = "ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4"|string;
-  export type AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"|"MEASURE_ONLY"|string;
-  export type AudioNormalizationLoudnessLogging = "LOG"|"DONT_LOG"|string;
-  export type AudioNormalizationPeakCalculation = "TRUE_PEAK"|"NONE"|string;
+  export type AudioDurationCorrection = "DISABLED"|"AUTO"|"TRACK"|"FRAME";
+  export type AudioLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED";
+  export type AudioNormalizationAlgorithm = "ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4";
+  export type AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"|"MEASURE_ONLY";
+  export type AudioNormalizationLoudnessLogging = "LOG"|"DONT_LOG";
+  export type AudioNormalizationPeakCalculation = "TRUE_PEAK"|"NONE";
   export interface AudioNormalizationSettings {
     /**
      * Choose one of the following audio normalization algorithms: ITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content, suitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels. ITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of EBU-R128. Supports up to 5.1 audio channels. ITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak measurement. ITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including configurations such as 7.1.
@@ -583,8 +583,8 @@ declare namespace MediaConvert {
      */
     AudioSelectorNames?: __listOf__stringMin1;
   }
-  export type AudioSelectorType = "PID"|"TRACK"|"LANGUAGE_CODE"|"HLS_RENDITION_GROUP"|string;
-  export type AudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export type AudioSelectorType = "PID"|"TRACK"|"LANGUAGE_CODE"|"HLS_RENDITION_GROUP";
+  export type AudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED";
   export interface AutomatedAbrRule {
     /**
      * When customer adds the allowed renditions rule for auto ABR ladder, they are required to add at leat one rendition to allowedRenditions list
@@ -631,10 +631,10 @@ declare namespace MediaConvert {
      */
     AbrSettings?: AutomatedAbrSettings;
   }
-  export type Av1AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
-  export type Av1BitDepth = "BIT_8"|"BIT_10"|string;
-  export type Av1FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
+  export type Av1AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX";
+  export type Av1BitDepth = "BIT_8"|"BIT_10";
+  export type Av1FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
   export interface Av1QvbrSettings {
     /**
      * Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
@@ -645,7 +645,7 @@ declare namespace MediaConvert {
      */
     QvbrQualityLevelFineTune?: __doubleMin0Max1;
   }
-  export type Av1RateControlMode = "QVBR"|string;
+  export type Av1RateControlMode = "QVBR";
   export interface Av1Settings {
     /**
      * Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to Spatial adaptive quantization (spatialAdaptiveQuantization).
@@ -700,18 +700,18 @@ declare namespace MediaConvert {
      */
     SpatialAdaptiveQuantization?: Av1SpatialAdaptiveQuantization;
   }
-  export type Av1SpatialAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
+  export type Av1SpatialAdaptiveQuantization = "DISABLED"|"ENABLED";
   export interface AvailBlanking {
     /**
      * Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported.
      */
     AvailBlankingImage?: __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG;
   }
-  export type AvcIntraClass = "CLASS_50"|"CLASS_100"|"CLASS_200"|"CLASS_4K_2K"|string;
-  export type AvcIntraFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type AvcIntraFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type AvcIntraInterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
-  export type AvcIntraScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
+  export type AvcIntraClass = "CLASS_50"|"CLASS_100"|"CLASS_200"|"CLASS_4K_2K";
+  export type AvcIntraFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type AvcIntraFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type AvcIntraInterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD";
+  export type AvcIntraScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE";
   export interface AvcIntraSettings {
     /**
      * Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.
@@ -754,17 +754,17 @@ declare namespace MediaConvert {
      */
     Telecine?: AvcIntraTelecine;
   }
-  export type AvcIntraSlowPal = "DISABLED"|"ENABLED"|string;
-  export type AvcIntraTelecine = "NONE"|"HARD"|string;
-  export type AvcIntraUhdQualityTuningLevel = "SINGLE_PASS"|"MULTI_PASS"|string;
+  export type AvcIntraSlowPal = "DISABLED"|"ENABLED";
+  export type AvcIntraTelecine = "NONE"|"HARD";
+  export type AvcIntraUhdQualityTuningLevel = "SINGLE_PASS"|"MULTI_PASS";
   export interface AvcIntraUhdSettings {
     /**
      * Optional. Use Quality tuning level (qualityTuningLevel) to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass (MULTI_PASS), your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS), your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).
      */
     QualityTuningLevel?: AvcIntraUhdQualityTuningLevel;
   }
-  export type BillingTagsSource = "QUEUE"|"PRESET"|"JOB_TEMPLATE"|"JOB"|string;
-  export type BurnInSubtitleStylePassthrough = "ENABLED"|"DISABLED"|string;
+  export type BillingTagsSource = "QUEUE"|"PRESET"|"JOB_TEMPLATE"|"JOB";
+  export type BurnInSubtitleStylePassthrough = "ENABLED"|"DISABLED";
   export interface BurninDestinationSettings {
     /**
      * Specify the alignment of your captions. If no explicit x_position is provided, setting alignment to centered will placethe captions at the bottom center of the output. Similarly, setting a left alignment willalign captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates.
@@ -851,14 +851,14 @@ declare namespace MediaConvert {
      */
     YPosition?: __integerMin0Max2147483647;
   }
-  export type BurninSubtitleAlignment = "CENTERED"|"LEFT"|"AUTO"|string;
-  export type BurninSubtitleApplyFontColor = "WHITE_TEXT_ONLY"|"ALL_TEXT"|string;
-  export type BurninSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
-  export type BurninSubtitleFallbackFont = "BEST_MATCH"|"MONOSPACED_SANSSERIF"|"MONOSPACED_SERIF"|"PROPORTIONAL_SANSSERIF"|"PROPORTIONAL_SERIF"|string;
-  export type BurninSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"HEX"|"AUTO"|string;
-  export type BurninSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"AUTO"|string;
-  export type BurninSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
-  export type BurninSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|"AUTO"|string;
+  export type BurninSubtitleAlignment = "CENTERED"|"LEFT"|"AUTO";
+  export type BurninSubtitleApplyFontColor = "WHITE_TEXT_ONLY"|"ALL_TEXT";
+  export type BurninSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|"AUTO";
+  export type BurninSubtitleFallbackFont = "BEST_MATCH"|"MONOSPACED_SANSSERIF"|"MONOSPACED_SERIF"|"PROPORTIONAL_SANSSERIF"|"PROPORTIONAL_SERIF";
+  export type BurninSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"HEX"|"AUTO";
+  export type BurninSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"AUTO";
+  export type BurninSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|"AUTO";
+  export type BurninSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|"AUTO";
   export interface CancelJobRequest {
     /**
      * The Job ID of the job to be cancelled.
@@ -949,7 +949,7 @@ declare namespace MediaConvert {
      */
     WebvttDestinationSettings?: WebvttDestinationSettings;
   }
-  export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"EMBEDDED_PLUS_SCTE20"|"IMSC"|"SCTE20_PLUS_EMBEDDED"|"SCC"|"SRT"|"SMI"|"TELETEXT"|"TTML"|"WEBVTT"|string;
+  export type CaptionDestinationType = "BURN_IN"|"DVB_SUB"|"EMBEDDED"|"EMBEDDED_PLUS_SCTE20"|"IMSC"|"SCTE20_PLUS_EMBEDDED"|"SCC"|"SRT"|"SMI"|"TELETEXT"|"TTML"|"WEBVTT";
   export interface CaptionSelector {
     /**
      * The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.
@@ -1008,7 +1008,7 @@ declare namespace MediaConvert {
      */
     WebvttHlsSourceSettings?: WebvttHlsSourceSettings;
   }
-  export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCTE20"|"SCC"|"TTML"|"STL"|"SRT"|"SMI"|"SMPTE_TT"|"TELETEXT"|"NULL_SOURCE"|"IMSC"|"WEBVTT"|string;
+  export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCTE20"|"SCC"|"TTML"|"STL"|"SRT"|"SMI"|"SMPTE_TT"|"TELETEXT"|"NULL_SOURCE"|"IMSC"|"WEBVTT";
   export interface ChannelMapping {
     /**
      * In your JSON job specification, include one child of OutputChannels for each audio channel that you want in your output. Each child should contain one instance of InputChannels or InputChannelsFineTune.
@@ -1025,8 +1025,8 @@ declare namespace MediaConvert {
      */
     SelectedOutputs?: __listOf__stringMin1;
   }
-  export type CmafClientCache = "DISABLED"|"ENABLED"|string;
-  export type CmafCodecSpecification = "RFC_6381"|"RFC_4281"|string;
+  export type CmafClientCache = "DISABLED"|"ENABLED";
+  export type CmafCodecSpecification = "RFC_6381"|"RFC_4281";
   export interface CmafEncryptionSettings {
     /**
      * This is a 128-bit, 16-byte hex value represented by a 32-character text string. If this parameter is not set then the Initialization Vector will follow the segment number by default.
@@ -1053,7 +1053,7 @@ declare namespace MediaConvert {
      */
     Type?: CmafKeyProviderType;
   }
-  export type CmafEncryptionType = "SAMPLE_AES"|"AES_CTR"|string;
+  export type CmafEncryptionType = "SAMPLE_AES"|"AES_CTR";
   export interface CmafGroupSettings {
     /**
      * By default, the service creates one top-level .m3u8 HLS manifest and one top -level .mpd DASH manifest for each CMAF output group in your job. These default manifests reference every output in the output group. To create additional top-level manifests that reference a subset of the outputs in the output group, specify a list of them here. For each additional manifest that you specify, the service creates one HLS manifest and one DASH manifest.
@@ -1152,7 +1152,7 @@ declare namespace MediaConvert {
      */
     WriteSegmentTimelineInRepresentation?: CmafWriteSegmentTimelineInRepresentation;
   }
-  export type CmafImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED"|string;
+  export type CmafImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED";
   export interface CmafImageBasedTrickPlaySettings {
     /**
      * The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.
@@ -1179,27 +1179,27 @@ declare namespace MediaConvert {
      */
     TileWidth?: __integerMin1Max512;
   }
-  export type CmafInitializationVectorInManifest = "INCLUDE"|"EXCLUDE"|string;
-  export type CmafIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM"|string;
-  export type CmafKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
-  export type CmafManifestCompression = "GZIP"|"NONE"|string;
-  export type CmafManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
-  export type CmafMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE"|string;
-  export type CmafPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS"|string;
-  export type CmafSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
-  export type CmafSegmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
-  export type CmafStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
-  export type CmafTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT"|string;
-  export type CmafWriteDASHManifest = "DISABLED"|"ENABLED"|string;
-  export type CmafWriteHLSManifest = "DISABLED"|"ENABLED"|string;
-  export type CmafWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
-  export type CmfcAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
-  export type CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|string;
-  export type CmfcDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG"|string;
-  export type CmfcIFrameOnlyManifest = "INCLUDE"|"EXCLUDE"|string;
-  export type CmfcKlvMetadata = "PASSTHROUGH"|"NONE"|string;
-  export type CmfcScte35Esam = "INSERT"|"NONE"|string;
-  export type CmfcScte35Source = "PASSTHROUGH"|"NONE"|string;
+  export type CmafInitializationVectorInManifest = "INCLUDE"|"EXCLUDE";
+  export type CmafIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM";
+  export type CmafKeyProviderType = "SPEKE"|"STATIC_KEY";
+  export type CmafManifestCompression = "GZIP"|"NONE";
+  export type CmafManifestDurationFormat = "FLOATING_POINT"|"INTEGER";
+  export type CmafMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE";
+  export type CmafPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS";
+  export type CmafSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES";
+  export type CmafSegmentLengthControl = "EXACT"|"GOP_MULTIPLE";
+  export type CmafStreamInfResolution = "INCLUDE"|"EXCLUDE";
+  export type CmafTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT";
+  export type CmafWriteDASHManifest = "DISABLED"|"ENABLED";
+  export type CmafWriteHLSManifest = "DISABLED"|"ENABLED";
+  export type CmafWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED";
+  export type CmfcAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION";
+  export type CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT";
+  export type CmfcDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG";
+  export type CmfcIFrameOnlyManifest = "INCLUDE"|"EXCLUDE";
+  export type CmfcKlvMetadata = "PASSTHROUGH"|"NONE";
+  export type CmfcScte35Esam = "INSERT"|"NONE";
+  export type CmfcScte35Source = "PASSTHROUGH"|"NONE";
   export interface CmfcSettings {
     /**
      * Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.
@@ -1242,14 +1242,14 @@ declare namespace MediaConvert {
      */
     TimedMetadata?: CmfcTimedMetadata;
   }
-  export type CmfcTimedMetadata = "PASSTHROUGH"|"NONE"|string;
+  export type CmfcTimedMetadata = "PASSTHROUGH"|"NONE";
   export interface ColorCorrector {
     /**
      * Brightness level.
      */
     Brightness?: __integerMin1Max100;
     /**
-     * Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses Elemental tone mapping technology to approximate the outcome of manually regrading from HDR to SDR. Select Force P3D65 (SDR) to set the output color space metadata to the following: * Color primaries: Display P3 * Transfer characteristics: SMPTE 428M * Matrix coefficients: BT.709
+     * Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses Elemental tone mapping technology to approximate the outcome of manually regrading from HDR to SDR.
      */
     ColorSpaceConversion?: ColorSpaceConversion;
     /**
@@ -1272,16 +1272,12 @@ declare namespace MediaConvert {
      * Saturation level.
      */
     Saturation?: __integerMin1Max100;
-    /**
-     * Specify the reference white level, in nits, for all of your SDR inputs. Use to correct brightness levels within HDR10 outputs. The following color metadata must be present in your SDR input: color primaries, transfer characteristics, and matrix coefficients. If your SDR input has missing color metadata, or if you want to correct input color metadata, manually specify a color space in the input video selector. For 1,000 nit peak brightness displays, we recommend that you set SDR reference white level to 203 (according to ITU-R BT.2408). Leave blank to use the default value of 100, or specify an integer from 100 to 1000.
-     */
-    SdrReferenceWhiteLevel?: __integerMin100Max1000;
   }
-  export type ColorMetadata = "IGNORE"|"INSERT"|string;
-  export type ColorSpace = "FOLLOW"|"REC_601"|"REC_709"|"HDR10"|"HLG_2020"|"P3DCI"|"P3D65_SDR"|string;
-  export type ColorSpaceConversion = "NONE"|"FORCE_601"|"FORCE_709"|"FORCE_HDR10"|"FORCE_HLG_2020"|"FORCE_P3DCI"|"FORCE_P3D65_SDR"|string;
-  export type ColorSpaceUsage = "FORCE"|"FALLBACK"|string;
-  export type Commitment = "ONE_YEAR"|string;
+  export type ColorMetadata = "IGNORE"|"INSERT";
+  export type ColorSpace = "FOLLOW"|"REC_601"|"REC_709"|"HDR10"|"HLG_2020";
+  export type ColorSpaceConversion = "NONE"|"FORCE_601"|"FORCE_709"|"FORCE_HDR10"|"FORCE_HLG_2020";
+  export type ColorSpaceUsage = "FORCE"|"FALLBACK";
+  export type Commitment = "ONE_YEAR";
   export interface ContainerSettings {
     /**
      * These settings relate to the fragmented MP4 container for the segments in your CMAF outputs.
@@ -1320,8 +1316,8 @@ declare namespace MediaConvert {
      */
     MxfSettings?: MxfSettings;
   }
-  export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"WEBM"|"RAW"|string;
-  export type CopyProtectionAction = "PASSTHROUGH"|"STRIP"|string;
+  export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"WEBM"|"RAW";
+  export type CopyProtectionAction = "PASSTHROUGH"|"STRIP";
   export interface CreateJobRequest {
     /**
      * Optional. Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
@@ -1510,7 +1506,7 @@ declare namespace MediaConvert {
      */
     SpekeKeyProvider?: SpekeKeyProvider;
   }
-  export type DashIsoGroupAudioChannelConfigSchemeIdUri = "MPEG_CHANNEL_CONFIGURATION"|"DOLBY_CHANNEL_CONFIGURATION"|string;
+  export type DashIsoGroupAudioChannelConfigSchemeIdUri = "MPEG_CHANNEL_CONFIGURATION"|"DOLBY_CHANNEL_CONFIGURATION";
   export interface DashIsoGroupSettings {
     /**
      * By default, the service creates one .mpd DASH manifest for each DASH ISO output group in your job. This default manifest references every output in the output group. To create additional DASH manifests that reference a subset of the outputs in the output group, specify a list of them here.
@@ -1585,8 +1581,8 @@ declare namespace MediaConvert {
      */
     WriteSegmentTimelineInRepresentation?: DashIsoWriteSegmentTimelineInRepresentation;
   }
-  export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE"|string;
-  export type DashIsoImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED"|string;
+  export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE";
+  export type DashIsoImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED";
   export interface DashIsoImageBasedTrickPlaySettings {
     /**
      * The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.
@@ -1613,15 +1609,15 @@ declare namespace MediaConvert {
      */
     TileWidth?: __integerMin1Max512;
   }
-  export type DashIsoIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM"|string;
-  export type DashIsoMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE"|string;
-  export type DashIsoPlaybackDeviceCompatibility = "CENC_V1"|"UNENCRYPTED_SEI"|string;
-  export type DashIsoPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS"|string;
-  export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
-  export type DashIsoSegmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
-  export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
-  export type DecryptionMode = "AES_CTR"|"AES_CBC"|"AES_GCM"|string;
-  export type DeinterlaceAlgorithm = "INTERPOLATE"|"INTERPOLATE_TICKER"|"BLEND"|"BLEND_TICKER"|string;
+  export type DashIsoIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM";
+  export type DashIsoMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE";
+  export type DashIsoPlaybackDeviceCompatibility = "CENC_V1"|"UNENCRYPTED_SEI";
+  export type DashIsoPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS";
+  export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES";
+  export type DashIsoSegmentLengthControl = "EXACT"|"GOP_MULTIPLE";
+  export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED";
+  export type DecryptionMode = "AES_CTR"|"AES_CBC"|"AES_GCM";
+  export type DeinterlaceAlgorithm = "INTERPOLATE"|"INTERPOLATE_TICKER"|"BLEND"|"BLEND_TICKER";
   export interface Deinterlacer {
     /**
      * Only applies when you set Deinterlacer (DeinterlaceMode) to Deinterlace (DEINTERLACE) or Adaptive (ADAPTIVE). Motion adaptive interpolate (INTERPOLATE) produces sharper pictures, while blend (BLEND) produces smoother motion. Use (INTERPOLATE_TICKER) OR (BLEND_TICKER) if your source file includes a ticker, such as a scrolling headline at the bottom of the frame.
@@ -1636,8 +1632,8 @@ declare namespace MediaConvert {
      */
     Mode?: DeinterlacerMode;
   }
-  export type DeinterlacerControl = "FORCE_ALL_FRAMES"|"NORMAL"|string;
-  export type DeinterlacerMode = "DEINTERLACE"|"INVERSE_TELECINE"|"ADAPTIVE"|string;
+  export type DeinterlacerControl = "FORCE_ALL_FRAMES"|"NORMAL";
+  export type DeinterlacerMode = "DEINTERLACE"|"INVERSE_TELECINE"|"ADAPTIVE";
   export interface DeleteJobTemplateRequest {
     /**
      * The name of the job template to be deleted.
@@ -1666,7 +1662,7 @@ declare namespace MediaConvert {
   }
   export interface DeleteQueueResponse {
   }
-  export type DescribeEndpointsMode = "DEFAULT"|"GET_ONLY"|string;
+  export type DescribeEndpointsMode = "DEFAULT"|"GET_ONLY";
   export interface DescribeEndpointsRequest {
     /**
      * Optional. Max number of endpoints, up to twenty, that will be returned at one time.
@@ -1733,10 +1729,10 @@ declare namespace MediaConvert {
      */
     MaxFall?: __integerMin0Max65535;
   }
-  export type DolbyVisionLevel6Mode = "PASSTHROUGH"|"RECALCULATE"|"SPECIFY"|string;
-  export type DolbyVisionMapping = "HDR10_NOMAP"|"HDR10_1000"|string;
-  export type DolbyVisionProfile = "PROFILE_5"|"PROFILE_8_1"|string;
-  export type DropFrameTimecode = "DISABLED"|"ENABLED"|string;
+  export type DolbyVisionLevel6Mode = "PASSTHROUGH"|"RECALCULATE"|"SPECIFY";
+  export type DolbyVisionMapping = "HDR10_NOMAP"|"HDR10_1000";
+  export type DolbyVisionProfile = "PROFILE_5"|"PROFILE_8_1";
+  export type DropFrameTimecode = "DISABLED"|"ENABLED";
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -1887,31 +1883,31 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Pid?: __integerMin1Max2147483647;
   }
-  export type DvbSubSubtitleFallbackFont = "BEST_MATCH"|"MONOSPACED_SANSSERIF"|"MONOSPACED_SERIF"|"PROPORTIONAL_SANSSERIF"|"PROPORTIONAL_SERIF"|string;
-  export type DvbSubtitleAlignment = "CENTERED"|"LEFT"|"AUTO"|string;
-  export type DvbSubtitleApplyFontColor = "WHITE_TEXT_ONLY"|"ALL_TEXT"|string;
-  export type DvbSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
-  export type DvbSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"HEX"|"AUTO"|string;
-  export type DvbSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"AUTO"|string;
-  export type DvbSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
-  export type DvbSubtitleStylePassthrough = "ENABLED"|"DISABLED"|string;
-  export type DvbSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|"AUTO"|string;
-  export type DvbSubtitlingType = "HEARING_IMPAIRED"|"STANDARD"|string;
+  export type DvbSubSubtitleFallbackFont = "BEST_MATCH"|"MONOSPACED_SANSSERIF"|"MONOSPACED_SERIF"|"PROPORTIONAL_SANSSERIF"|"PROPORTIONAL_SERIF";
+  export type DvbSubtitleAlignment = "CENTERED"|"LEFT"|"AUTO";
+  export type DvbSubtitleApplyFontColor = "WHITE_TEXT_ONLY"|"ALL_TEXT";
+  export type DvbSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|"AUTO";
+  export type DvbSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"HEX"|"AUTO";
+  export type DvbSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"AUTO";
+  export type DvbSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|"AUTO";
+  export type DvbSubtitleStylePassthrough = "ENABLED"|"DISABLED";
+  export type DvbSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|"AUTO";
+  export type DvbSubtitlingType = "HEARING_IMPAIRED"|"STANDARD";
   export interface DvbTdtSettings {
     /**
      * The number of milliseconds between instances of this table in the output transport stream.
      */
     TdtInterval?: __integerMin1000Max30000;
   }
-  export type DvbddsHandling = "NONE"|"SPECIFIED"|"NO_DISPLAY_WINDOW"|string;
-  export type Eac3AtmosBitstreamMode = "COMPLETE_MAIN"|string;
-  export type Eac3AtmosCodingMode = "CODING_MODE_AUTO"|"CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6"|string;
-  export type Eac3AtmosDialogueIntelligence = "ENABLED"|"DISABLED"|string;
-  export type Eac3AtmosDownmixControl = "SPECIFIED"|"INITIALIZE_FROM_SOURCE"|string;
-  export type Eac3AtmosDynamicRangeCompressionLine = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|string;
-  export type Eac3AtmosDynamicRangeCompressionRf = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|string;
-  export type Eac3AtmosDynamicRangeControl = "SPECIFIED"|"INITIALIZE_FROM_SOURCE"|string;
-  export type Eac3AtmosMeteringMode = "LEQ_A"|"ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4"|string;
+  export type DvbddsHandling = "NONE"|"SPECIFIED"|"NO_DISPLAY_WINDOW";
+  export type Eac3AtmosBitstreamMode = "COMPLETE_MAIN";
+  export type Eac3AtmosCodingMode = "CODING_MODE_AUTO"|"CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6";
+  export type Eac3AtmosDialogueIntelligence = "ENABLED"|"DISABLED";
+  export type Eac3AtmosDownmixControl = "SPECIFIED"|"INITIALIZE_FROM_SOURCE";
+  export type Eac3AtmosDynamicRangeCompressionLine = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH";
+  export type Eac3AtmosDynamicRangeCompressionRf = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH";
+  export type Eac3AtmosDynamicRangeControl = "SPECIFIED"|"INITIALIZE_FROM_SOURCE";
+  export type Eac3AtmosMeteringMode = "LEQ_A"|"ITU_BS_1770_1"|"ITU_BS_1770_2"|"ITU_BS_1770_3"|"ITU_BS_1770_4";
   export interface Eac3AtmosSettings {
     /**
      * Specify the average bitrate for this output in bits per second. Valid values: 384k, 448k, 576k, 640k, 768k, 1024k Default value: 448k Note that MediaConvert supports 384k only with channel-based immersive (CBI) 7.1.4 and 5.1.4 inputs. For CBI 9.1.6 and other input types, MediaConvert automatically increases your output bitrate to 448k.
@@ -1982,28 +1978,28 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SurroundExMode?: Eac3AtmosSurroundExMode;
   }
-  export type Eac3AtmosStereoDownmix = "NOT_INDICATED"|"STEREO"|"SURROUND"|"DPL2"|string;
-  export type Eac3AtmosSurroundExMode = "NOT_INDICATED"|"ENABLED"|"DISABLED"|string;
-  export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
-  export type Eac3BitstreamMode = "COMPLETE_MAIN"|"COMMENTARY"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
-  export type Eac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_3_2"|string;
-  export type Eac3DcFilter = "ENABLED"|"DISABLED"|string;
-  export type Eac3DynamicRangeCompressionLine = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|string;
-  export type Eac3DynamicRangeCompressionRf = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH"|string;
-  export type Eac3LfeControl = "LFE"|"NO_LFE"|string;
-  export type Eac3LfeFilter = "ENABLED"|"DISABLED"|string;
-  export type Eac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
-  export type Eac3PassthroughControl = "WHEN_POSSIBLE"|"NO_PASSTHROUGH"|string;
-  export type Eac3PhaseControl = "SHIFT_90_DEGREES"|"NO_SHIFT"|string;
+  export type Eac3AtmosStereoDownmix = "NOT_INDICATED"|"STEREO"|"SURROUND"|"DPL2";
+  export type Eac3AtmosSurroundExMode = "NOT_INDICATED"|"ENABLED"|"DISABLED";
+  export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE";
+  export type Eac3BitstreamMode = "COMPLETE_MAIN"|"COMMENTARY"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED";
+  export type Eac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_3_2";
+  export type Eac3DcFilter = "ENABLED"|"DISABLED";
+  export type Eac3DynamicRangeCompressionLine = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH";
+  export type Eac3DynamicRangeCompressionRf = "NONE"|"FILM_STANDARD"|"FILM_LIGHT"|"MUSIC_STANDARD"|"MUSIC_LIGHT"|"SPEECH";
+  export type Eac3LfeControl = "LFE"|"NO_LFE";
+  export type Eac3LfeFilter = "ENABLED"|"DISABLED";
+  export type Eac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED";
+  export type Eac3PassthroughControl = "WHEN_POSSIBLE"|"NO_PASSTHROUGH";
+  export type Eac3PhaseControl = "SHIFT_90_DEGREES"|"NO_SHIFT";
   export interface Eac3Settings {
     /**
      * If set to ATTENUATE_3_DB, applies a 3 dB attenuation to the surround channels. Only used for 3/2 coding mode.
      */
     AttenuationControl?: Eac3AttenuationControl;
     /**
-     * Specify the average bitrate in bits per second. The bitrate that you specify must be a multiple of 8000 within the allowed minimum and maximum values.  Leave blank to use the default bitrate for the coding mode you select according ETSI TS 102 366. Valid bitrates for coding mode 1/0: Default: 96000. Minimum: 32000. Maximum: 3024000. Valid bitrates for coding mode 2/0: Default: 192000. Minimum: 96000. Maximum: 3024000. Valid bitrates for coding mode 3/2: Default: 384000. Minimum: 192000. Maximum: 3024000.
+     * Specify the average bitrate in bits per second. Valid bitrates depend on the coding mode.
      */
-    Bitrate?: __integerMin32000Max3024000;
+    Bitrate?: __integerMin64000Max640000;
     /**
      * Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E).
      */
@@ -2081,10 +2077,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SurroundMode?: Eac3SurroundMode;
   }
-  export type Eac3StereoDownmix = "NOT_INDICATED"|"LO_RO"|"LT_RT"|"DPL2"|string;
-  export type Eac3SurroundExMode = "NOT_INDICATED"|"ENABLED"|"DISABLED"|string;
-  export type Eac3SurroundMode = "NOT_INDICATED"|"ENABLED"|"DISABLED"|string;
-  export type EmbeddedConvert608To708 = "UPCONVERT"|"DISABLED"|string;
+  export type Eac3StereoDownmix = "NOT_INDICATED"|"LO_RO"|"LT_RT"|"DPL2";
+  export type Eac3SurroundExMode = "NOT_INDICATED"|"ENABLED"|"DISABLED";
+  export type Eac3SurroundMode = "NOT_INDICATED"|"ENABLED"|"DISABLED";
+  export type EmbeddedConvert608To708 = "UPCONVERT"|"DISABLED";
   export interface EmbeddedDestinationSettings {
     /**
      * Ignore this setting unless your input captions are SCC format and your output captions are embedded in the video stream. Specify a CC number for each captions channel in this output. If you have two channels, choose CC numbers that aren't in the same field. For example, choose 1 and 3. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
@@ -2113,8 +2109,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TerminateCaptions?: EmbeddedTerminateCaptions;
   }
-  export type EmbeddedTerminateCaptions = "END_OF_INPUT"|"DISABLED"|string;
-  export type EmbeddedTimecodeOverride = "NONE"|"USE_MDPM"|string;
+  export type EmbeddedTerminateCaptions = "END_OF_INPUT"|"DISABLED";
+  export type EmbeddedTimecodeOverride = "NONE"|"USE_MDPM";
   export interface Endpoint {
     /**
      * URL of endpoint
@@ -2157,7 +2153,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VchipAction?: VchipAction;
   }
-  export type F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
+  export type F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL";
   export interface F4vSettings {
     /**
      * If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.
@@ -2174,7 +2170,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     DestinationSettings?: DestinationSettings;
   }
-  export type FileSourceConvert608To708 = "UPCONVERT"|"DISABLED"|string;
+  export type FileSourceConvert608To708 = "UPCONVERT"|"DISABLED";
   export interface FileSourceSettings {
     /**
      * Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.
@@ -2197,8 +2193,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimeDeltaUnits?: FileSourceTimeDeltaUnits;
   }
-  export type FileSourceTimeDeltaUnits = "SECONDS"|"MILLISECONDS"|string;
-  export type FontScript = "AUTOMATIC"|"HANS"|"HANT"|string;
+  export type FileSourceTimeDeltaUnits = "SECONDS"|"MILLISECONDS";
+  export type FontScript = "AUTOMATIC"|"HANS"|"HANT";
   export interface ForceIncludeRenditionSize {
     /**
      * Use Height to define the video resolution height, in pixels, for this rule.
@@ -2283,20 +2279,20 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Queue?: Queue;
   }
-  export type H264AdaptiveQuantization = "OFF"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
-  export type H264CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_1_1"|"LEVEL_1_2"|"LEVEL_1_3"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_2_2"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_3_2"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_4_2"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|string;
-  export type H264CodecProfile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
-  export type H264DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
-  export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
-  export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|"MBAFF"|string;
-  export type H264FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type H264FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type H264GopBReference = "DISABLED"|"ENABLED"|string;
-  export type H264GopSizeUnits = "FRAMES"|"SECONDS"|"AUTO"|string;
-  export type H264InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
-  export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type H264QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
+  export type H264AdaptiveQuantization = "OFF"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX";
+  export type H264CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_1_1"|"LEVEL_1_2"|"LEVEL_1_3"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_2_2"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_3_2"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_4_2"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2";
+  export type H264CodecProfile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN";
+  export type H264DynamicSubGop = "ADAPTIVE"|"STATIC";
+  export type H264EntropyEncoding = "CABAC"|"CAVLC";
+  export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|"MBAFF";
+  export type H264FlickerAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type H264FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type H264GopBReference = "DISABLED"|"ENABLED";
+  export type H264GopSizeUnits = "FRAMES"|"SECONDS"|"AUTO";
+  export type H264InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD";
+  export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type H264QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ";
   export interface H264QvbrSettings {
     /**
      * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value that you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
@@ -2311,10 +2307,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     QvbrQualityLevelFineTune?: __doubleMin0Max1;
   }
-  export type H264RateControlMode = "VBR"|"CBR"|"QVBR"|string;
-  export type H264RepeatPps = "DISABLED"|"ENABLED"|string;
-  export type H264ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
-  export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|"TRANSITION_DETECTION"|string;
+  export type H264RateControlMode = "VBR"|"CBR"|"QVBR";
+  export type H264RepeatPps = "DISABLED"|"ENABLED";
+  export type H264ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE";
+  export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|"TRANSITION_DETECTION";
   export interface H264Settings {
     /**
      * Keep the default value, Auto (AUTO), for this setting to have MediaConvert automatically apply the best types of quantization for your video content. When you want to apply your quantization settings manually, you must set H264AdaptiveQuantization to a value other than Auto (AUTO). Use this setting to specify the strength of any adaptive quantization filters that you enable. If you don't want MediaConvert to do any adaptive quantization in this transcode, set Adaptive quantization (H264AdaptiveQuantization) to Off (OFF). Related settings: The value that you choose here applies to the following settings: H264FlickerAdaptiveQuantization, H264SpatialAdaptiveQuantization, and H264TemporalAdaptiveQuantization.
@@ -2481,25 +2477,25 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     UnregisteredSeiTimecode?: H264UnregisteredSeiTimecode;
   }
-  export type H264SlowPal = "DISABLED"|"ENABLED"|string;
-  export type H264SpatialAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type H264Syntax = "DEFAULT"|"RP2027"|string;
-  export type H264Telecine = "NONE"|"SOFT"|"HARD"|string;
-  export type H264TemporalAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type H264UnregisteredSeiTimecode = "DISABLED"|"ENABLED"|string;
-  export type H265AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|"AUTO"|string;
-  export type H265AlternateTransferFunctionSei = "DISABLED"|"ENABLED"|string;
-  export type H265CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|"LEVEL_6"|"LEVEL_6_1"|"LEVEL_6_2"|string;
-  export type H265CodecProfile = "MAIN_MAIN"|"MAIN_HIGH"|"MAIN10_MAIN"|"MAIN10_HIGH"|"MAIN_422_8BIT_MAIN"|"MAIN_422_8BIT_HIGH"|"MAIN_422_10BIT_MAIN"|"MAIN_422_10BIT_HIGH"|string;
-  export type H265DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
-  export type H265FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type H265FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type H265FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type H265GopBReference = "DISABLED"|"ENABLED"|string;
-  export type H265GopSizeUnits = "FRAMES"|"SECONDS"|"AUTO"|string;
-  export type H265InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
-  export type H265ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type H265QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
+  export type H264SlowPal = "DISABLED"|"ENABLED";
+  export type H264SpatialAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type H264Syntax = "DEFAULT"|"RP2027";
+  export type H264Telecine = "NONE"|"SOFT"|"HARD";
+  export type H264TemporalAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type H264UnregisteredSeiTimecode = "DISABLED"|"ENABLED";
+  export type H265AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|"AUTO";
+  export type H265AlternateTransferFunctionSei = "DISABLED"|"ENABLED";
+  export type H265CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|"LEVEL_6"|"LEVEL_6_1"|"LEVEL_6_2";
+  export type H265CodecProfile = "MAIN_MAIN"|"MAIN_HIGH"|"MAIN10_MAIN"|"MAIN10_HIGH"|"MAIN_422_8BIT_MAIN"|"MAIN_422_8BIT_HIGH"|"MAIN_422_10BIT_MAIN"|"MAIN_422_10BIT_HIGH";
+  export type H265DynamicSubGop = "ADAPTIVE"|"STATIC";
+  export type H265FlickerAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type H265FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type H265FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type H265GopBReference = "DISABLED"|"ENABLED";
+  export type H265GopSizeUnits = "FRAMES"|"SECONDS"|"AUTO";
+  export type H265InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD";
+  export type H265ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type H265QualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ";
   export interface H265QvbrSettings {
     /**
      * Use this setting only when Rate control mode is QVBR and Quality tuning level is Multi-pass HQ. For Max average bitrate values suited to the complexity of your input video, the service limits the average bitrate of the video part of this output to the value that you choose. That is, the total size of the video element is less than or equal to the value you set multiplied by the number of seconds of encoded output.
@@ -2514,10 +2510,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     QvbrQualityLevelFineTune?: __doubleMin0Max1;
   }
-  export type H265RateControlMode = "VBR"|"CBR"|"QVBR"|string;
-  export type H265SampleAdaptiveOffsetFilterMode = "DEFAULT"|"ADAPTIVE"|"OFF"|string;
-  export type H265ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
-  export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|"TRANSITION_DETECTION"|string;
+  export type H265RateControlMode = "VBR"|"CBR"|"QVBR";
+  export type H265SampleAdaptiveOffsetFilterMode = "DEFAULT"|"ADAPTIVE"|"OFF";
+  export type H265ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE";
+  export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|"TRANSITION_DETECTION";
   export interface H265Settings {
     /**
      * When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or leave blank, MediaConvert automatically applies quantization to improve the video quality of your output. Set Adaptive Quantization to Low (LOW), Medium (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the strength of the quantization filter. When you do, you can specify a value for Spatial Adaptive Quantization (H265SpatialAdaptiveQuantization), Temporal Adaptive Quantization (H265TemporalAdaptiveQuantization), and Flicker Adaptive Quantization (H265FlickerAdaptiveQuantization), to further control the quantization filter. Set Adaptive Quantization to Off (OFF) to apply no quantization to your output.
@@ -2684,14 +2680,14 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     WriteMp4PackagingType?: H265WriteMp4PackagingType;
   }
-  export type H265SlowPal = "DISABLED"|"ENABLED"|string;
-  export type H265SpatialAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type H265Telecine = "NONE"|"SOFT"|"HARD"|string;
-  export type H265TemporalAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type H265TemporalIds = "DISABLED"|"ENABLED"|string;
-  export type H265Tiles = "DISABLED"|"ENABLED"|string;
-  export type H265UnregisteredSeiTimecode = "DISABLED"|"ENABLED"|string;
-  export type H265WriteMp4PackagingType = "HVC1"|"HEV1"|string;
+  export type H265SlowPal = "DISABLED"|"ENABLED";
+  export type H265SpatialAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type H265Telecine = "NONE"|"SOFT"|"HARD";
+  export type H265TemporalAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type H265TemporalIds = "DISABLED"|"ENABLED";
+  export type H265Tiles = "DISABLED"|"ENABLED";
+  export type H265UnregisteredSeiTimecode = "DISABLED"|"ENABLED";
+  export type H265WriteMp4PackagingType = "HVC1"|"HEV1";
   export interface Hdr10Metadata {
     /**
      * HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.
@@ -2752,7 +2748,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TargetMonitorNits?: __integerMin0Max4000;
   }
-  export type HlsAdMarkers = "ELEMENTAL"|"ELEMENTAL_SCTE35"|string;
+  export type HlsAdMarkers = "ELEMENTAL"|"ELEMENTAL_SCTE35";
   export interface HlsAdditionalManifest {
     /**
      * Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your HLS group is film-name.m3u8. If you enter "-no-premium" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.m3u8. For HLS output groups, specify a manifestNameModifier that is different from the nameModifier of the output. The service uses the output name modifier to create unique names for the individual variant manifests.
@@ -2763,9 +2759,9 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SelectedOutputs?: __listOf__stringMin1;
   }
-  export type HlsAudioOnlyContainer = "AUTOMATIC"|"M2TS"|string;
-  export type HlsAudioOnlyHeader = "INCLUDE"|"EXCLUDE"|string;
-  export type HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string;
+  export type HlsAudioOnlyContainer = "AUTOMATIC"|"M2TS";
+  export type HlsAudioOnlyHeader = "INCLUDE"|"EXCLUDE";
+  export type HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM";
   export interface HlsCaptionLanguageMapping {
     /**
      * Caption channel.
@@ -2784,12 +2780,12 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     LanguageDescription?: __string;
   }
-  export type HlsCaptionLanguageSetting = "INSERT"|"OMIT"|"NONE"|string;
-  export type HlsCaptionSegmentLengthControl = "LARGE_SEGMENTS"|"MATCH_VIDEO"|string;
-  export type HlsClientCache = "DISABLED"|"ENABLED"|string;
-  export type HlsCodecSpecification = "RFC_6381"|"RFC_4281"|string;
-  export type HlsDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG"|string;
-  export type HlsDirectoryStructure = "SINGLE_DIRECTORY"|"SUBDIRECTORY_PER_STREAM"|string;
+  export type HlsCaptionLanguageSetting = "INSERT"|"OMIT"|"NONE";
+  export type HlsCaptionSegmentLengthControl = "LARGE_SEGMENTS"|"MATCH_VIDEO";
+  export type HlsClientCache = "DISABLED"|"ENABLED";
+  export type HlsCodecSpecification = "RFC_6381"|"RFC_4281";
+  export type HlsDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG";
+  export type HlsDirectoryStructure = "SINGLE_DIRECTORY"|"SUBDIRECTORY_PER_STREAM";
   export interface HlsEncryptionSettings {
     /**
      * This is a 128-bit, 16-byte hex value represented by a 32-character text string. If this parameter is not set then the Initialization Vector will follow the segment number by default.
@@ -2820,7 +2816,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Type?: HlsKeyProviderType;
   }
-  export type HlsEncryptionType = "AES128"|"SAMPLE_AES"|string;
+  export type HlsEncryptionType = "AES128"|"SAMPLE_AES";
   export interface HlsGroupSettings {
     /**
      * Choose one or more ad marker types to decorate your Apple HLS manifest. This setting does not determine whether SCTE-35 markers appear in the outputs themselves.
@@ -2947,8 +2943,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimestampDeltaMilliseconds?: __integerMinNegative2147483648Max2147483647;
   }
-  export type HlsIFrameOnlyManifest = "INCLUDE"|"EXCLUDE"|string;
-  export type HlsImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED"|string;
+  export type HlsIFrameOnlyManifest = "INCLUDE"|"EXCLUDE";
+  export type HlsImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED";
   export interface HlsImageBasedTrickPlaySettings {
     /**
      * The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.
@@ -2975,14 +2971,14 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TileWidth?: __integerMin1Max512;
   }
-  export type HlsInitializationVectorInManifest = "INCLUDE"|"EXCLUDE"|string;
-  export type HlsIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM"|string;
-  export type HlsKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
-  export type HlsManifestCompression = "GZIP"|"NONE"|string;
-  export type HlsManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
-  export type HlsOfflineEncrypted = "ENABLED"|"DISABLED"|string;
-  export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|string;
-  export type HlsProgramDateTime = "INCLUDE"|"EXCLUDE"|string;
+  export type HlsInitializationVectorInManifest = "INCLUDE"|"EXCLUDE";
+  export type HlsIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM";
+  export type HlsKeyProviderType = "SPEKE"|"STATIC_KEY";
+  export type HlsManifestCompression = "GZIP"|"NONE";
+  export type HlsManifestDurationFormat = "FLOATING_POINT"|"INTEGER";
+  export type HlsOfflineEncrypted = "ENABLED"|"DISABLED";
+  export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY";
+  export type HlsProgramDateTime = "INCLUDE"|"EXCLUDE";
   export interface HlsRenditionGroupSettings {
     /**
      * Optional. Specify alternative group ID
@@ -2997,8 +2993,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     RenditionName?: __string;
   }
-  export type HlsSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
-  export type HlsSegmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
+  export type HlsSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES";
+  export type HlsSegmentLengthControl = "EXACT"|"GOP_MULTIPLE";
   export interface HlsSettings {
     /**
      * Specifies the group to which the audio rendition belongs.
@@ -3029,9 +3025,9 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SegmentModifier?: __string;
   }
-  export type HlsStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
-  export type HlsTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT"|string;
-  export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export type HlsStreamInfResolution = "INCLUDE"|"EXCLUDE";
+  export type HlsTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT";
+  export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL";
   export interface HopDestination {
     /**
      * Optional. When you set up a job to use queue hopping, you can specify a different relative priority for the job in the destination queue. If you don't specify, the relative priority will remain the same as in the previous queue.
@@ -3061,12 +3057,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Specify the images that you want to overlay on your video. The images must be PNG or TGA files.
      */
     InsertableImages?: __listOfInsertableImage;
-    /**
-     * Specify the reference white level, in nits, for all of your image inserter images. Use to correct brightness levels within HDR10 outputs. For 1,000 nit peak brightness displays, we recommend that you set SDR reference white level to 203 (according to ITU-R BT.2408). Leave blank to use the default value of 100, or specify an integer from 100 to 1000.
-     */
-    SdrReferenceWhiteLevel?: __integerMin100Max1000;
   }
-  export type ImscAccessibilitySubs = "DISABLED"|"ENABLED"|string;
+  export type ImscAccessibilitySubs = "DISABLED"|"ENABLED";
   export interface ImscDestinationSettings {
     /**
      * Set Accessibility subtitles to Enabled if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled, if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
@@ -3077,7 +3069,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     StylePassthrough?: ImscStylePassthrough;
   }
-  export type ImscStylePassthrough = "ENABLED"|"DISABLED"|string;
+  export type ImscStylePassthrough = "ENABLED"|"DISABLED";
   export interface Input {
     /**
      * Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group.
@@ -3178,7 +3170,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     StartTimecode?: __stringPattern010920405090509092;
   }
-  export type InputDeblockFilter = "ENABLED"|"DISABLED"|string;
+  export type InputDeblockFilter = "ENABLED"|"DISABLED";
   export interface InputDecryptionSettings {
     /**
      * Specify the encryption mode that you used to encrypt your input files.
@@ -3197,13 +3189,13 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     KmsKeyRegion?: __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912;
   }
-  export type InputDenoiseFilter = "ENABLED"|"DISABLED"|string;
-  export type InputFilterEnable = "AUTO"|"DISABLE"|"FORCE"|string;
-  export type InputPolicy = "ALLOWED"|"DISALLOWED"|string;
-  export type InputPsiControl = "IGNORE_PSI"|"USE_PSI"|string;
-  export type InputRotate = "DEGREE_0"|"DEGREES_90"|"DEGREES_180"|"DEGREES_270"|"AUTO"|string;
-  export type InputSampleRange = "FOLLOW"|"FULL_RANGE"|"LIMITED_RANGE"|string;
-  export type InputScanType = "AUTO"|"PSF"|string;
+  export type InputDenoiseFilter = "ENABLED"|"DISABLED";
+  export type InputFilterEnable = "AUTO"|"DISABLE"|"FORCE";
+  export type InputPolicy = "ALLOWED"|"DISALLOWED";
+  export type InputPsiControl = "IGNORE_PSI"|"USE_PSI";
+  export type InputRotate = "DEGREE_0"|"DEGREES_90"|"DEGREES_180"|"DEGREES_270"|"AUTO";
+  export type InputSampleRange = "FOLLOW"|"FULL_RANGE"|"LIMITED_RANGE";
+  export type InputScanType = "AUTO"|"PSF";
   export interface InputTemplate {
     /**
      * Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group.
@@ -3278,7 +3270,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VideoSelector?: VideoSelector;
   }
-  export type InputTimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART"|string;
+  export type InputTimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART";
   export interface InputVideoGenerator {
     /**
      * Specify an integer value for Black video duration from 50 to 86400000 to generate a black video input for that many milliseconds. Required when you include Video generator.
@@ -3443,7 +3435,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Warning?: __listOf__string;
   }
-  export type JobPhase = "PROBING"|"TRANSCODING"|"UPLOADING"|string;
+  export type JobPhase = "PROBING"|"TRANSCODING"|"UPLOADING";
   export interface JobSettings {
     /**
      * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.
@@ -3494,7 +3486,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimedMetadataInsertion?: TimedMetadataInsertion;
   }
-  export type JobStatus = "SUBMITTED"|"PROGRESSING"|"COMPLETE"|"CANCELED"|"ERROR"|string;
+  export type JobStatus = "SUBMITTED"|"PROGRESSING"|"COMPLETE"|"CANCELED"|"ERROR";
   export interface JobTemplate {
     /**
      * Accelerated transcoding can significantly speed up jobs with long, visually complex content.
@@ -3549,7 +3541,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Type?: Type;
   }
-  export type JobTemplateListBy = "NAME"|"CREATION_DATE"|"SYSTEM"|string;
+  export type JobTemplateListBy = "NAME"|"CREATION_DATE"|"SYSTEM";
   export interface JobTemplateSettings {
     /**
      * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time.
@@ -3654,7 +3646,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Metadata8?: __stringMin1Max50;
   }
-  export type LanguageCode = "ENG"|"SPA"|"FRA"|"DEU"|"GER"|"ZHO"|"ARA"|"HIN"|"JPN"|"RUS"|"POR"|"ITA"|"URD"|"VIE"|"KOR"|"PAN"|"ABK"|"AAR"|"AFR"|"AKA"|"SQI"|"AMH"|"ARG"|"HYE"|"ASM"|"AVA"|"AVE"|"AYM"|"AZE"|"BAM"|"BAK"|"EUS"|"BEL"|"BEN"|"BIH"|"BIS"|"BOS"|"BRE"|"BUL"|"MYA"|"CAT"|"KHM"|"CHA"|"CHE"|"NYA"|"CHU"|"CHV"|"COR"|"COS"|"CRE"|"HRV"|"CES"|"DAN"|"DIV"|"NLD"|"DZO"|"ENM"|"EPO"|"EST"|"EWE"|"FAO"|"FIJ"|"FIN"|"FRM"|"FUL"|"GLA"|"GLG"|"LUG"|"KAT"|"ELL"|"GRN"|"GUJ"|"HAT"|"HAU"|"HEB"|"HER"|"HMO"|"HUN"|"ISL"|"IDO"|"IBO"|"IND"|"INA"|"ILE"|"IKU"|"IPK"|"GLE"|"JAV"|"KAL"|"KAN"|"KAU"|"KAS"|"KAZ"|"KIK"|"KIN"|"KIR"|"KOM"|"KON"|"KUA"|"KUR"|"LAO"|"LAT"|"LAV"|"LIM"|"LIN"|"LIT"|"LUB"|"LTZ"|"MKD"|"MLG"|"MSA"|"MAL"|"MLT"|"GLV"|"MRI"|"MAR"|"MAH"|"MON"|"NAU"|"NAV"|"NDE"|"NBL"|"NDO"|"NEP"|"SME"|"NOR"|"NOB"|"NNO"|"OCI"|"OJI"|"ORI"|"ORM"|"OSS"|"PLI"|"FAS"|"POL"|"PUS"|"QUE"|"QAA"|"RON"|"ROH"|"RUN"|"SMO"|"SAG"|"SAN"|"SRD"|"SRB"|"SNA"|"III"|"SND"|"SIN"|"SLK"|"SLV"|"SOM"|"SOT"|"SUN"|"SWA"|"SSW"|"SWE"|"TGL"|"TAH"|"TGK"|"TAM"|"TAT"|"TEL"|"THA"|"BOD"|"TIR"|"TON"|"TSO"|"TSN"|"TUR"|"TUK"|"TWI"|"UIG"|"UKR"|"UZB"|"VEN"|"VOL"|"WLN"|"CYM"|"FRY"|"WOL"|"XHO"|"YID"|"YOR"|"ZHA"|"ZUL"|"ORJ"|"QPC"|"TNG"|"SRP"|string;
+  export type LanguageCode = "ENG"|"SPA"|"FRA"|"DEU"|"GER"|"ZHO"|"ARA"|"HIN"|"JPN"|"RUS"|"POR"|"ITA"|"URD"|"VIE"|"KOR"|"PAN"|"ABK"|"AAR"|"AFR"|"AKA"|"SQI"|"AMH"|"ARG"|"HYE"|"ASM"|"AVA"|"AVE"|"AYM"|"AZE"|"BAM"|"BAK"|"EUS"|"BEL"|"BEN"|"BIH"|"BIS"|"BOS"|"BRE"|"BUL"|"MYA"|"CAT"|"KHM"|"CHA"|"CHE"|"NYA"|"CHU"|"CHV"|"COR"|"COS"|"CRE"|"HRV"|"CES"|"DAN"|"DIV"|"NLD"|"DZO"|"ENM"|"EPO"|"EST"|"EWE"|"FAO"|"FIJ"|"FIN"|"FRM"|"FUL"|"GLA"|"GLG"|"LUG"|"KAT"|"ELL"|"GRN"|"GUJ"|"HAT"|"HAU"|"HEB"|"HER"|"HMO"|"HUN"|"ISL"|"IDO"|"IBO"|"IND"|"INA"|"ILE"|"IKU"|"IPK"|"GLE"|"JAV"|"KAL"|"KAN"|"KAU"|"KAS"|"KAZ"|"KIK"|"KIN"|"KIR"|"KOM"|"KON"|"KUA"|"KUR"|"LAO"|"LAT"|"LAV"|"LIM"|"LIN"|"LIT"|"LUB"|"LTZ"|"MKD"|"MLG"|"MSA"|"MAL"|"MLT"|"GLV"|"MRI"|"MAR"|"MAH"|"MON"|"NAU"|"NAV"|"NDE"|"NBL"|"NDO"|"NEP"|"SME"|"NOR"|"NOB"|"NNO"|"OCI"|"OJI"|"ORI"|"ORM"|"OSS"|"PLI"|"FAS"|"POL"|"PUS"|"QUE"|"QAA"|"RON"|"ROH"|"RUN"|"SMO"|"SAG"|"SAN"|"SRD"|"SRB"|"SNA"|"III"|"SND"|"SIN"|"SLK"|"SLV"|"SOM"|"SOT"|"SUN"|"SWA"|"SSW"|"SWE"|"TGL"|"TAH"|"TGK"|"TAM"|"TAT"|"TEL"|"THA"|"BOD"|"TIR"|"TON"|"TSO"|"TSN"|"TUR"|"TUK"|"TWI"|"UIG"|"UKR"|"UZB"|"VEN"|"VOL"|"WLN"|"CYM"|"FRY"|"WOL"|"XHO"|"YID"|"YOR"|"ZHA"|"ZUL"|"ORJ"|"QPC"|"TNG"|"SRP";
   export interface ListJobTemplatesRequest {
     /**
      * Optionally, specify a job template category to limit responses to only job templates from that category.
@@ -3791,27 +3783,27 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ResourceTags?: ResourceTags;
   }
-  export type M2tsAudioBufferModel = "DVB"|"ATSC"|string;
-  export type M2tsAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
-  export type M2tsBufferModel = "MULTIPLEX"|"NONE"|string;
-  export type M2tsDataPtsControl = "AUTO"|"ALIGN_TO_VIDEO"|string;
-  export type M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL"|string;
-  export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
-  export type M2tsEsRateInPes = "INCLUDE"|"EXCLUDE"|string;
-  export type M2tsForceTsVideoEbpOrder = "FORCE"|"DEFAULT"|string;
-  export type M2tsKlvMetadata = "PASSTHROUGH"|"NONE"|string;
-  export type M2tsNielsenId3 = "INSERT"|"NONE"|string;
-  export type M2tsPcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
-  export type M2tsRateMode = "VBR"|"CBR"|string;
+  export type M2tsAudioBufferModel = "DVB"|"ATSC";
+  export type M2tsAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION";
+  export type M2tsBufferModel = "MULTIPLEX"|"NONE";
+  export type M2tsDataPtsControl = "AUTO"|"ALIGN_TO_VIDEO";
+  export type M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL";
+  export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID";
+  export type M2tsEsRateInPes = "INCLUDE"|"EXCLUDE";
+  export type M2tsForceTsVideoEbpOrder = "FORCE"|"DEFAULT";
+  export type M2tsKlvMetadata = "PASSTHROUGH"|"NONE";
+  export type M2tsNielsenId3 = "INSERT"|"NONE";
+  export type M2tsPcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD";
+  export type M2tsRateMode = "VBR"|"CBR";
   export interface M2tsScte35Esam {
     /**
      * Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated by ESAM.
      */
     Scte35EsamPid?: __integerMin32Max8182;
   }
-  export type M2tsScte35Source = "PASSTHROUGH"|"NONE"|string;
-  export type M2tsSegmentationMarkers = "NONE"|"RAI_SEGSTART"|"RAI_ADAPT"|"PSI_SEGSTART"|"EBP"|"EBP_LEGACY"|string;
-  export type M2tsSegmentationStyle = "MAINTAIN_CADENCE"|"RESET_CADENCE"|string;
+  export type M2tsScte35Source = "PASSTHROUGH"|"NONE";
+  export type M2tsSegmentationMarkers = "NONE"|"RAI_SEGSTART"|"RAI_ADAPT"|"PSI_SEGSTART"|"EBP"|"EBP_LEGACY";
+  export type M2tsSegmentationStyle = "MAINTAIN_CADENCE"|"RESET_CADENCE";
   export interface M2tsSettings {
     /**
      * Selects between the DVB and ATSC buffer models for Dolby Digital audio.
@@ -3970,11 +3962,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VideoPid?: __integerMin32Max8182;
   }
-  export type M3u8AudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
-  export type M3u8DataPtsControl = "AUTO"|"ALIGN_TO_VIDEO"|string;
-  export type M3u8NielsenId3 = "INSERT"|"NONE"|string;
-  export type M3u8PcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
-  export type M3u8Scte35Source = "PASSTHROUGH"|"NONE"|string;
+  export type M3u8AudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION";
+  export type M3u8DataPtsControl = "AUTO"|"ALIGN_TO_VIDEO";
+  export type M3u8NielsenId3 = "INSERT"|"NONE";
+  export type M3u8PcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD";
+  export type M3u8Scte35Source = "PASSTHROUGH"|"NONE";
   export interface M3u8Settings {
     /**
      * Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.
@@ -4109,7 +4101,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     FramerateNumerator?: __integerMin1Max2147483640;
   }
-  export type MotionImageInsertionMode = "MOV"|"PNG"|string;
+  export type MotionImageInsertionMode = "MOV"|"PNG";
   export interface MotionImageInsertionOffset {
     /**
      * Set the distance, in pixels, between the overlay and the left edge of the video frame.
@@ -4120,12 +4112,12 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ImageY?: __integerMin0Max2147483647;
   }
-  export type MotionImagePlayback = "ONCE"|"REPEAT"|string;
-  export type MovClapAtom = "INCLUDE"|"EXCLUDE"|string;
-  export type MovCslgAtom = "INCLUDE"|"EXCLUDE"|string;
-  export type MovMpeg2FourCCControl = "XDCAM"|"MPEG"|string;
-  export type MovPaddingControl = "OMNEON"|"NONE"|string;
-  export type MovReference = "SELF_CONTAINED"|"EXTERNAL"|string;
+  export type MotionImagePlayback = "ONCE"|"REPEAT";
+  export type MovClapAtom = "INCLUDE"|"EXCLUDE";
+  export type MovCslgAtom = "INCLUDE"|"EXCLUDE";
+  export type MovMpeg2FourCCControl = "XDCAM"|"MPEG";
+  export type MovPaddingControl = "OMNEON"|"NONE";
+  export type MovReference = "SELF_CONTAINED"|"EXTERNAL";
   export interface MovSettings {
     /**
      * When enabled, include 'clap' atom if appropriate for the video output settings.
@@ -4162,7 +4154,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SampleRate?: __integerMin32000Max48000;
   }
-  export type Mp3RateControlMode = "CBR"|"VBR"|string;
+  export type Mp3RateControlMode = "CBR"|"VBR";
   export interface Mp3Settings {
     /**
      * Specify the average bitrate in bits per second.
@@ -4185,9 +4177,9 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VbrQuality?: __integerMin0Max9;
   }
-  export type Mp4CslgAtom = "INCLUDE"|"EXCLUDE"|string;
-  export type Mp4FreeSpaceBox = "INCLUDE"|"EXCLUDE"|string;
-  export type Mp4MoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
+  export type Mp4CslgAtom = "INCLUDE"|"EXCLUDE";
+  export type Mp4FreeSpaceBox = "INCLUDE"|"EXCLUDE";
+  export type Mp4MoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL";
   export interface Mp4Settings {
     /**
      * Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.
@@ -4214,12 +4206,12 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Mp4MajorBrand?: __string;
   }
-  export type MpdAccessibilityCaptionHints = "INCLUDE"|"EXCLUDE"|string;
-  export type MpdAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
-  export type MpdCaptionContainerType = "RAW"|"FRAGMENTED_MP4"|string;
-  export type MpdKlvMetadata = "NONE"|"PASSTHROUGH"|string;
-  export type MpdScte35Esam = "INSERT"|"NONE"|string;
-  export type MpdScte35Source = "PASSTHROUGH"|"NONE"|string;
+  export type MpdAccessibilityCaptionHints = "INCLUDE"|"EXCLUDE";
+  export type MpdAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION";
+  export type MpdCaptionContainerType = "RAW"|"FRAGMENTED_MP4";
+  export type MpdKlvMetadata = "NONE"|"PASSTHROUGH";
+  export type MpdScte35Esam = "INSERT"|"NONE";
+  export type MpdScte35Source = "PASSTHROUGH"|"NONE";
   export interface MpdSettings {
     /**
      * Optional. Choose Include (INCLUDE) to have MediaConvert mark up your DASH manifest with  elements for embedded 608 captions. This markup isn't generally required, but some video players require it to discover and play embedded 608 captions. Keep the default value, Exclude (EXCLUDE), to leave these elements out. When you enable this setting, this is the markup that MediaConvert includes in your manifest: 
@@ -4250,21 +4242,21 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimedMetadata?: MpdTimedMetadata;
   }
-  export type MpdTimedMetadata = "PASSTHROUGH"|"NONE"|string;
-  export type Mpeg2AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|string;
-  export type Mpeg2CodecLevel = "AUTO"|"LOW"|"MAIN"|"HIGH1440"|"HIGH"|string;
-  export type Mpeg2CodecProfile = "MAIN"|"PROFILE_422"|string;
-  export type Mpeg2DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
-  export type Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS"|string;
-  export type Mpeg2InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
-  export type Mpeg2IntraDcPrecision = "AUTO"|"INTRA_DC_PRECISION_8"|"INTRA_DC_PRECISION_9"|"INTRA_DC_PRECISION_10"|"INTRA_DC_PRECISION_11"|string;
-  export type Mpeg2ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Mpeg2QualityTuningLevel = "SINGLE_PASS"|"MULTI_PASS"|string;
-  export type Mpeg2RateControlMode = "VBR"|"CBR"|string;
-  export type Mpeg2ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
-  export type Mpeg2SceneChangeDetect = "DISABLED"|"ENABLED"|string;
+  export type MpdTimedMetadata = "PASSTHROUGH"|"NONE";
+  export type Mpeg2AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH";
+  export type Mpeg2CodecLevel = "AUTO"|"LOW"|"MAIN"|"HIGH1440"|"HIGH";
+  export type Mpeg2CodecProfile = "MAIN"|"PROFILE_422";
+  export type Mpeg2DynamicSubGop = "ADAPTIVE"|"STATIC";
+  export type Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS";
+  export type Mpeg2InterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD";
+  export type Mpeg2IntraDcPrecision = "AUTO"|"INTRA_DC_PRECISION_8"|"INTRA_DC_PRECISION_9"|"INTRA_DC_PRECISION_10"|"INTRA_DC_PRECISION_11";
+  export type Mpeg2ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Mpeg2QualityTuningLevel = "SINGLE_PASS"|"MULTI_PASS";
+  export type Mpeg2RateControlMode = "VBR"|"CBR";
+  export type Mpeg2ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE";
+  export type Mpeg2SceneChangeDetect = "DISABLED"|"ENABLED";
   export interface Mpeg2Settings {
     /**
      * Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).
@@ -4399,11 +4391,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TemporalAdaptiveQuantization?: Mpeg2TemporalAdaptiveQuantization;
   }
-  export type Mpeg2SlowPal = "DISABLED"|"ENABLED"|string;
-  export type Mpeg2SpatialAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type Mpeg2Syntax = "DEFAULT"|"D_10"|string;
-  export type Mpeg2Telecine = "NONE"|"SOFT"|"HARD"|string;
-  export type Mpeg2TemporalAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
+  export type Mpeg2SlowPal = "DISABLED"|"ENABLED";
+  export type Mpeg2SpatialAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type Mpeg2Syntax = "DEFAULT"|"D_10";
+  export type Mpeg2Telecine = "NONE"|"SOFT"|"HARD";
+  export type Mpeg2TemporalAdaptiveQuantization = "DISABLED"|"ENABLED";
   export interface MsSmoothAdditionalManifest {
     /**
      * Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your Microsoft Smooth group is film-name.ismv. If you enter "-no-premium" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.ismv.
@@ -4414,14 +4406,14 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SelectedOutputs?: __listOf__stringMin1;
   }
-  export type MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"|"NONE"|string;
+  export type MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"|"NONE";
   export interface MsSmoothEncryptionSettings {
     /**
      * If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
      */
     SpekeKeyProvider?: SpekeKeyProvider;
   }
-  export type MsSmoothFragmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
+  export type MsSmoothFragmentLengthControl = "EXACT"|"GOP_MULTIPLE";
   export interface MsSmoothGroupSettings {
     /**
      * By default, the service creates one .ism Microsoft Smooth Streaming manifest for each Microsoft Smooth Streaming output group in your job. This default manifest references every output in the output group. To create additional manifests that reference a subset of the outputs in the output group, specify a list of them here.
@@ -4456,9 +4448,9 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ManifestEncoding?: MsSmoothManifestEncoding;
   }
-  export type MsSmoothManifestEncoding = "UTF8"|"UTF16"|string;
-  export type MxfAfdSignaling = "NO_COPY"|"COPY_FROM_VIDEO"|string;
-  export type MxfProfile = "D_10"|"XDCAM"|"OP1A"|"XAVC"|string;
+  export type MsSmoothManifestEncoding = "UTF8"|"UTF16";
+  export type MxfAfdSignaling = "NO_COPY"|"COPY_FROM_VIDEO";
+  export type MxfProfile = "D_10"|"XDCAM"|"OP1A"|"XAVC";
   export interface MxfSettings {
     /**
      * Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings.
@@ -4473,7 +4465,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     XavcProfileSettings?: MxfXavcProfileSettings;
   }
-  export type MxfXavcDurationMode = "ALLOW_ANY_DURATION"|"DROP_FRAMES_FOR_COMPLIANCE"|string;
+  export type MxfXavcDurationMode = "ALLOW_ANY_DURATION"|"DROP_FRAMES_FOR_COMPLIANCE";
   export interface MxfXavcProfileSettings {
     /**
      * To create an output that complies with the XAVC file format guidelines for interoperability, keep the default value, Drop frames for compliance (DROP_FRAMES_FOR_COMPLIANCE). To include all frames from your input in this output, keep the default setting, Allow any duration (ALLOW_ANY_DURATION). The number of frames that MediaConvert excludes when you set this to Drop frames for compliance depends on the output frame rate and duration.
@@ -4502,7 +4494,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Strength?: WatermarkingStrength;
   }
-  export type NielsenActiveWatermarkProcessType = "NAES2_AND_NW"|"CBET"|"NAES2_AND_NW_AND_CBET"|string;
+  export type NielsenActiveWatermarkProcessType = "NAES2_AND_NW"|"CBET"|"NAES2_AND_NW_AND_CBET";
   export interface NielsenConfiguration {
     /**
      * Nielsen has discontinued the use of breakout code functionality. If you must include this property, set the value to zero.
@@ -4559,10 +4551,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     UniqueTicPerAudioTrack?: NielsenUniqueTicPerAudioTrackType;
   }
-  export type NielsenSourceWatermarkStatusType = "CLEAN"|"WATERMARKED"|string;
-  export type NielsenUniqueTicPerAudioTrackType = "RESERVE_UNIQUE_TICS_PER_TRACK"|"SAME_TICS_PER_TRACK"|string;
-  export type NoiseFilterPostTemporalSharpening = "DISABLED"|"ENABLED"|"AUTO"|string;
-  export type NoiseFilterPostTemporalSharpeningStrength = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type NielsenSourceWatermarkStatusType = "CLEAN"|"WATERMARKED";
+  export type NielsenUniqueTicPerAudioTrackType = "RESERVE_UNIQUE_TICS_PER_TRACK"|"SAME_TICS_PER_TRACK";
+  export type NoiseFilterPostTemporalSharpening = "DISABLED"|"ENABLED"|"AUTO";
+  export type NoiseFilterPostTemporalSharpeningStrength = "LOW"|"MEDIUM"|"HIGH";
   export interface NoiseReducer {
     /**
      * Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain filtering based on JND principles. * Temporal optimizes video quality for complex motion.
@@ -4581,7 +4573,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TemporalFilterSettings?: NoiseReducerTemporalFilterSettings;
   }
-  export type NoiseReducerFilter = "BILATERAL"|"MEAN"|"GAUSSIAN"|"LANCZOS"|"SHARPEN"|"CONSERVE"|"SPATIAL"|"TEMPORAL"|string;
+  export type NoiseReducerFilter = "BILATERAL"|"MEAN"|"GAUSSIAN"|"LANCZOS"|"SHARPEN"|"CONSERVE"|"SPATIAL"|"TEMPORAL";
   export interface NoiseReducerFilterSettings {
     /**
      * Relative strength of noise reducing filter. Higher values produce stronger filtering.
@@ -4638,7 +4630,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SampleRate?: __integerMin16000Max48000;
   }
-  export type Order = "ASCENDING"|"DESCENDING"|string;
+  export type Order = "ASCENDING"|"DESCENDING";
   export interface Output {
     /**
      * (AudioDescriptions) contains groups of audio encoding settings organized by audio codec. Include one instance of (AudioDescriptions) per output. (AudioDescriptions) can contain multiple groups of encoding settings.
@@ -4747,15 +4739,15 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Type?: OutputGroupType;
   }
-  export type OutputGroupType = "HLS_GROUP_SETTINGS"|"DASH_ISO_GROUP_SETTINGS"|"FILE_GROUP_SETTINGS"|"MS_SMOOTH_GROUP_SETTINGS"|"CMAF_GROUP_SETTINGS"|string;
-  export type OutputSdt = "SDT_FOLLOW"|"SDT_FOLLOW_IF_PRESENT"|"SDT_MANUAL"|"SDT_NONE"|string;
+  export type OutputGroupType = "HLS_GROUP_SETTINGS"|"DASH_ISO_GROUP_SETTINGS"|"FILE_GROUP_SETTINGS"|"MS_SMOOTH_GROUP_SETTINGS"|"CMAF_GROUP_SETTINGS";
+  export type OutputSdt = "SDT_FOLLOW"|"SDT_FOLLOW_IF_PRESENT"|"SDT_MANUAL"|"SDT_NONE";
   export interface OutputSettings {
     /**
      * Settings for HLS output groups
      */
     HlsSettings?: HlsSettings;
   }
-  export type PadVideo = "DISABLED"|"BLACK"|string;
+  export type PadVideo = "DISABLED"|"BLACK";
   export interface PartnerWatermarking {
     /**
      * For forensic video watermarking, MediaConvert supports Nagra NexGuard File Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2) and OTT Streaming workflows.
@@ -4810,7 +4802,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Type?: Type;
   }
-  export type PresetListBy = "NAME"|"CREATION_DATE"|"SYSTEM"|string;
+  export type PresetListBy = "NAME"|"CREATION_DATE"|"SYSTEM";
   export interface PresetSettings {
     /**
      * (AudioDescriptions) contains groups of audio encoding settings organized by audio codec. Include one instance of (AudioDescriptions) per output. (AudioDescriptions) can contain multiple groups of encoding settings.
@@ -4829,14 +4821,14 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VideoDescription?: VideoDescription;
   }
-  export type PricingPlan = "ON_DEMAND"|"RESERVED"|string;
-  export type ProresChromaSampling = "PRESERVE_444_SAMPLING"|"SUBSAMPLE_TO_422"|string;
-  export type ProresCodecProfile = "APPLE_PRORES_422"|"APPLE_PRORES_422_HQ"|"APPLE_PRORES_422_LT"|"APPLE_PRORES_422_PROXY"|"APPLE_PRORES_4444"|"APPLE_PRORES_4444_XQ"|string;
-  export type ProresFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type ProresInterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
-  export type ProresParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type ProresScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
+  export type PricingPlan = "ON_DEMAND"|"RESERVED";
+  export type ProresChromaSampling = "PRESERVE_444_SAMPLING"|"SUBSAMPLE_TO_422";
+  export type ProresCodecProfile = "APPLE_PRORES_422"|"APPLE_PRORES_422_HQ"|"APPLE_PRORES_422_LT"|"APPLE_PRORES_422_PROXY"|"APPLE_PRORES_4444"|"APPLE_PRORES_4444_XQ";
+  export type ProresFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type ProresInterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD";
+  export type ProresParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type ProresScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE";
   export interface ProresSettings {
     /**
      * This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs that you create from inputs that use 4:4:4 chroma sampling. Set Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING) to allow outputs to also use 4:4:4 chroma sampling. You must specify a value for this setting when your output codec profile supports 4:4:4 chroma sampling. Related Settings: When you set Chroma sampling to Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING), you must choose an output codec profile that supports 4:4:4 chroma sampling. These values for Profile (CodecProfile) support 4:4:4 chroma sampling: Apple ProRes 4444 (APPLE_PRORES_4444) or Apple ProRes 4444 XQ (APPLE_PRORES_4444_XQ). When you set Chroma sampling to Preserve 4:4:4 sampling, you must disable all video preprocessors except for Nexguard file marker (PartnerWatermarking). When you set Chroma sampling to Preserve 4:4:4 sampling and use framerate conversion, you must set Frame rate conversion algorithm (FramerateConversionAlgorithm) to Drop duplicate (DUPLICATE_DROP).
@@ -4891,8 +4883,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Telecine?: ProresTelecine;
   }
-  export type ProresSlowPal = "DISABLED"|"ENABLED"|string;
-  export type ProresTelecine = "NONE"|"HARD"|string;
+  export type ProresSlowPal = "DISABLED"|"ENABLED";
+  export type ProresTelecine = "NONE"|"HARD";
   export interface PutPolicyRequest {
     /**
      * A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
@@ -4951,8 +4943,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Type?: Type;
   }
-  export type QueueListBy = "NAME"|"CREATION_DATE"|string;
-  export type QueueStatus = "ACTIVE"|"PAUSED"|string;
+  export type QueueListBy = "NAME"|"CREATION_DATE";
+  export type QueueStatus = "ACTIVE"|"PAUSED";
   export interface QueueTransition {
     /**
      * The queue that the job was on after the transition.
@@ -4999,8 +4991,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ChannelsOut?: __integerMin1Max64;
   }
-  export type RenewalType = "AUTO_RENEW"|"EXPIRE"|string;
-  export type RequiredFlag = "ENABLED"|"DISABLED"|string;
+  export type RenewalType = "AUTO_RENEW"|"EXPIRE";
+  export type RequiredFlag = "ENABLED"|"DISABLED";
   export interface ReservationPlan {
     /**
      * The length of the term of your reserved queue pricing plan commitment.
@@ -5041,7 +5033,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ReservedSlots: __integer;
   }
-  export type ReservationPlanStatus = "ACTIVE"|"EXPIRED"|string;
+  export type ReservationPlanStatus = "ACTIVE"|"EXPIRED";
   export interface ResourceTags {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -5052,8 +5044,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Tags?: __mapOf__string;
   }
-  export type RespondToAfd = "NONE"|"RESPOND"|"PASSTHROUGH"|string;
-  export type RuleType = "MIN_TOP_RENDITION_SIZE"|"MIN_BOTTOM_RENDITION_SIZE"|"FORCE_INCLUDE_RENDITIONS"|"ALLOWED_RENDITIONS"|string;
+  export type RespondToAfd = "NONE"|"RESPOND"|"PASSTHROUGH";
+  export type RuleType = "MIN_TOP_RENDITION_SIZE"|"MIN_BOTTOM_RENDITION_SIZE"|"FORCE_INCLUDE_RENDITIONS"|"ALLOWED_RENDITIONS";
   export interface S3DestinationAccessControl {
     /**
      * Choose an Amazon S3 canned ACL for MediaConvert to apply to this output.
@@ -5084,18 +5076,18 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     KmsKeyArn?: __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932;
   }
-  export type S3ObjectCannedAcl = "PUBLIC_READ"|"AUTHENTICATED_READ"|"BUCKET_OWNER_READ"|"BUCKET_OWNER_FULL_CONTROL"|string;
-  export type S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"|"SERVER_SIDE_ENCRYPTION_KMS"|string;
-  export type SampleRangeConversion = "LIMITED_RANGE_SQUEEZE"|"NONE"|string;
-  export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
-  export type SccDestinationFramerate = "FRAMERATE_23_97"|"FRAMERATE_24"|"FRAMERATE_25"|"FRAMERATE_29_97_DROPFRAME"|"FRAMERATE_29_97_NON_DROPFRAME"|string;
+  export type S3ObjectCannedAcl = "PUBLIC_READ"|"AUTHENTICATED_READ"|"BUCKET_OWNER_READ"|"BUCKET_OWNER_FULL_CONTROL";
+  export type S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"|"SERVER_SIDE_ENCRYPTION_KMS";
+  export type SampleRangeConversion = "LIMITED_RANGE_SQUEEZE"|"NONE";
+  export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT";
+  export type SccDestinationFramerate = "FRAMERATE_23_97"|"FRAMERATE_24"|"FRAMERATE_25"|"FRAMERATE_29_97_DROPFRAME"|"FRAMERATE_29_97_NON_DROPFRAME";
   export interface SccDestinationSettings {
     /**
      * Set Framerate (SccDestinationFramerate) to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe (FRAMERATE_29_97_DROPFRAME) only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe (FRAMERATE_29_97_NON_DROPFRAME).
      */
     Framerate?: SccDestinationFramerate;
   }
-  export type SimulateReservedQueue = "DISABLED"|"ENABLED"|string;
+  export type SimulateReservedQueue = "DISABLED"|"ENABLED";
   export interface SpekeKeyProvider {
     /**
      * If you want your key provider to encrypt the content keys that it provides to MediaConvert, set up a certificate with a master key using AWS Certificate Manager. Specify the certificate's Amazon Resource Name (ARN) here.
@@ -5143,7 +5135,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     StylePassthrough?: SrtStylePassthrough;
   }
-  export type SrtStylePassthrough = "ENABLED"|"DISABLED"|string;
+  export type SrtStylePassthrough = "ENABLED"|"DISABLED";
   export interface StaticKeyProvider {
     /**
      * Relates to DRM implementation. Sets the value of the KEYFORMAT attribute. Must be 'identity' or a reverse DNS string. May be omitted to indicate an implicit value of 'identity'.
@@ -5162,7 +5154,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Url?: __string;
   }
-  export type StatusUpdateInterval = "SECONDS_10"|"SECONDS_12"|"SECONDS_15"|"SECONDS_20"|"SECONDS_30"|"SECONDS_60"|"SECONDS_120"|"SECONDS_180"|"SECONDS_240"|"SECONDS_300"|"SECONDS_360"|"SECONDS_420"|"SECONDS_480"|"SECONDS_540"|"SECONDS_600"|string;
+  export type StatusUpdateInterval = "SECONDS_10"|"SECONDS_12"|"SECONDS_15"|"SECONDS_20"|"SECONDS_30"|"SECONDS_60"|"SECONDS_120"|"SECONDS_180"|"SECONDS_240"|"SECONDS_300"|"SECONDS_360"|"SECONDS_420"|"SECONDS_480"|"SECONDS_540"|"SECONDS_600";
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.
@@ -5185,7 +5177,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     PageTypes?: __listOfTeletextPageType;
   }
-  export type TeletextPageType = "PAGE_TYPE_INITIAL"|"PAGE_TYPE_SUBTITLE"|"PAGE_TYPE_ADDL_INFO"|"PAGE_TYPE_PROGRAM_SCHEDULE"|"PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"|string;
+  export type TeletextPageType = "PAGE_TYPE_INITIAL"|"PAGE_TYPE_SUBTITLE"|"PAGE_TYPE_ADDL_INFO"|"PAGE_TYPE_PROGRAM_SCHEDULE"|"PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE";
   export interface TeletextSourceSettings {
     /**
      * Use Page Number (PageNumber) to specify the three-digit hexadecimal page number that will be used for Teletext captions. Do not use this setting if you are passing through teletext from the input source to output.
@@ -5206,7 +5198,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Prefix?: __stringPattern;
   }
-  export type TimecodeBurninPosition = "TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|"MIDDLE_LEFT"|"MIDDLE_CENTER"|"MIDDLE_RIGHT"|"BOTTOM_LEFT"|"BOTTOM_CENTER"|"BOTTOM_RIGHT"|string;
+  export type TimecodeBurninPosition = "TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|"MIDDLE_LEFT"|"MIDDLE_CENTER"|"MIDDLE_RIGHT"|"BOTTOM_LEFT"|"BOTTOM_CENTER"|"BOTTOM_RIGHT";
   export interface TimecodeConfig {
     /**
      * If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores frame rate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.
@@ -5225,8 +5217,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     TimestampOffset?: __stringPattern0940191020191209301;
   }
-  export type TimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART"|string;
-  export type TimedMetadata = "PASSTHROUGH"|"NONE"|string;
+  export type TimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART";
+  export type TimedMetadata = "PASSTHROUGH"|"NONE";
   export interface TimedMetadataInsertion {
     /**
      * Id3Insertions contains the array of Id3Insertion instances.
@@ -5259,8 +5251,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     StylePassthrough?: TtmlStylePassthrough;
   }
-  export type TtmlStylePassthrough = "ENABLED"|"DISABLED"|string;
-  export type Type = "SYSTEM"|"CUSTOM"|string;
+  export type TtmlStylePassthrough = "ENABLED"|"DISABLED";
+  export type Type = "SYSTEM"|"CUSTOM";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to remove tags from. To get the ARN, send a GET request with the resource name.
@@ -5365,11 +5357,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Queue?: Queue;
   }
-  export type Vc3Class = "CLASS_145_8BIT"|"CLASS_220_8BIT"|"CLASS_220_10BIT"|string;
-  export type Vc3FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Vc3FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type Vc3InterlaceMode = "INTERLACED"|"PROGRESSIVE"|string;
-  export type Vc3ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE"|string;
+  export type Vc3Class = "CLASS_145_8BIT"|"CLASS_220_8BIT"|"CLASS_220_10BIT";
+  export type Vc3FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Vc3FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type Vc3InterlaceMode = "INTERLACED"|"PROGRESSIVE";
+  export type Vc3ScanTypeConversionMode = "INTERLACED"|"INTERLACED_OPTIMIZE";
   export interface Vc3Settings {
     /**
      * If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.
@@ -5408,10 +5400,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Vc3Class?: Vc3Class;
   }
-  export type Vc3SlowPal = "DISABLED"|"ENABLED"|string;
-  export type Vc3Telecine = "NONE"|"HARD"|string;
-  export type VchipAction = "PASSTHROUGH"|"STRIP"|string;
-  export type VideoCodec = "AV1"|"AVC_INTRA"|"FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PRORES"|"VC3"|"VP8"|"VP9"|"XAVC"|string;
+  export type Vc3SlowPal = "DISABLED"|"ENABLED";
+  export type Vc3Telecine = "NONE"|"HARD";
+  export type VchipAction = "PASSTHROUGH"|"STRIP";
+  export type VideoCodec = "AV1"|"AVC_INTRA"|"FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PRORES"|"VC3"|"VP8"|"VP9"|"XAVC";
   export interface VideoCodecSettings {
     /**
      * Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.
@@ -5574,10 +5566,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     AlphaBehavior?: AlphaBehavior;
     /**
-     * If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value Follow. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 here and specify correct values in the input HDR 10 metadata settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr. Select P3D65 (SDR) to set the input color space metadata to the following:
- * Color primaries: Display P3
- * Transfer characteristics: SMPTE 428M
- * Matrix coefficients: BT.709
+     * If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value Follow (FOLLOW). The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10) here and specify correct values in the input HDR 10 metadata (Hdr10Metadata) settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
      */
     ColorSpace?: ColorSpace;
     /**
@@ -5613,7 +5602,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SampleRange?: InputSampleRange;
   }
-  export type VideoTimecodeInsertion = "DISABLED"|"PIC_TIMING_SEI"|string;
+  export type VideoTimecodeInsertion = "DISABLED"|"PIC_TIMING_SEI";
   export interface VorbisSettings {
     /**
      * Optional. Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are 1 and 2. The default value is 2.
@@ -5628,11 +5617,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VbrQuality?: __integerMinNegative1Max10;
   }
-  export type Vp8FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type Vp8ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Vp8QualityTuningLevel = "MULTI_PASS"|"MULTI_PASS_HQ"|string;
-  export type Vp8RateControlMode = "VBR"|string;
+  export type Vp8FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type Vp8ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Vp8QualityTuningLevel = "MULTI_PASS"|"MULTI_PASS_HQ";
+  export type Vp8RateControlMode = "VBR";
   export interface Vp8Settings {
     /**
      * Target bitrate in bits/second. For example, enter five megabits per second as 5000000.
@@ -5687,11 +5676,11 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     RateControlMode?: Vp8RateControlMode;
   }
-  export type Vp9FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type Vp9ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type Vp9QualityTuningLevel = "MULTI_PASS"|"MULTI_PASS_HQ"|string;
-  export type Vp9RateControlMode = "VBR"|string;
+  export type Vp9FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type Vp9ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type Vp9QualityTuningLevel = "MULTI_PASS"|"MULTI_PASS_HQ";
+  export type Vp9RateControlMode = "VBR";
   export interface Vp9Settings {
     /**
      * Target bitrate in bits/second. For example, enter five megabits per second as 5000000.
@@ -5746,8 +5735,8 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     RateControlMode?: Vp9RateControlMode;
   }
-  export type WatermarkingStrength = "LIGHTEST"|"LIGHTER"|"DEFAULT"|"STRONGER"|"STRONGEST"|string;
-  export type WavFormat = "RIFF"|"RF64"|string;
+  export type WatermarkingStrength = "LIGHTEST"|"LIGHTER"|"DEFAULT"|"STRONGER"|"STRONGEST";
+  export type WavFormat = "RIFF"|"RF64";
   export interface WavSettings {
     /**
      * Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.
@@ -5766,7 +5755,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SampleRate?: __integerMin8000Max192000;
   }
-  export type WebvttAccessibilitySubs = "DISABLED"|"ENABLED"|string;
+  export type WebvttAccessibilitySubs = "DISABLED"|"ENABLED";
   export interface WebvttDestinationSettings {
     /**
      * Set Accessibility subtitles to Enabled if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound" and AUTOSELECT="YES". Keep the default value, Disabled, if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes.
@@ -5791,24 +5780,24 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     RenditionName?: __string;
   }
-  export type WebvttStylePassthrough = "ENABLED"|"DISABLED"|"STRICT"|string;
-  export type Xavc4kIntraCbgProfileClass = "CLASS_100"|"CLASS_300"|"CLASS_480"|string;
+  export type WebvttStylePassthrough = "ENABLED"|"DISABLED"|"STRICT";
+  export type Xavc4kIntraCbgProfileClass = "CLASS_100"|"CLASS_300"|"CLASS_480";
   export interface Xavc4kIntraCbgProfileSettings {
     /**
      * Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
      */
     XavcClass?: Xavc4kIntraCbgProfileClass;
   }
-  export type Xavc4kIntraVbrProfileClass = "CLASS_100"|"CLASS_300"|"CLASS_480"|string;
+  export type Xavc4kIntraVbrProfileClass = "CLASS_100"|"CLASS_300"|"CLASS_480";
   export interface Xavc4kIntraVbrProfileSettings {
     /**
      * Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
      */
     XavcClass?: Xavc4kIntraVbrProfileClass;
   }
-  export type Xavc4kProfileBitrateClass = "BITRATE_CLASS_100"|"BITRATE_CLASS_140"|"BITRATE_CLASS_200"|string;
-  export type Xavc4kProfileCodecProfile = "HIGH"|"HIGH_422"|string;
-  export type Xavc4kProfileQualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
+  export type Xavc4kProfileBitrateClass = "BITRATE_CLASS_100"|"BITRATE_CLASS_140"|"BITRATE_CLASS_200";
+  export type Xavc4kProfileCodecProfile = "HIGH"|"HIGH_422";
+  export type Xavc4kProfileQualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ";
   export interface Xavc4kProfileSettings {
     /**
      * Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
@@ -5843,21 +5832,21 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Slices?: __integerMin8Max12;
   }
-  export type XavcAdaptiveQuantization = "OFF"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
-  export type XavcEntropyEncoding = "AUTO"|"CABAC"|"CAVLC"|string;
-  export type XavcFlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type XavcFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type XavcFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
-  export type XavcGopBReference = "DISABLED"|"ENABLED"|string;
-  export type XavcHdIntraCbgProfileClass = "CLASS_50"|"CLASS_100"|"CLASS_200"|string;
+  export type XavcAdaptiveQuantization = "OFF"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX";
+  export type XavcEntropyEncoding = "AUTO"|"CABAC"|"CAVLC";
+  export type XavcFlickerAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type XavcFramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED";
+  export type XavcFramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER";
+  export type XavcGopBReference = "DISABLED"|"ENABLED";
+  export type XavcHdIntraCbgProfileClass = "CLASS_50"|"CLASS_100"|"CLASS_200";
   export interface XavcHdIntraCbgProfileSettings {
     /**
      * Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
      */
     XavcClass?: XavcHdIntraCbgProfileClass;
   }
-  export type XavcHdProfileBitrateClass = "BITRATE_CLASS_25"|"BITRATE_CLASS_35"|"BITRATE_CLASS_50"|string;
-  export type XavcHdProfileQualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ"|string;
+  export type XavcHdProfileBitrateClass = "BITRATE_CLASS_25"|"BITRATE_CLASS_35"|"BITRATE_CLASS_50";
+  export type XavcHdProfileQualityTuningLevel = "SINGLE_PASS"|"SINGLE_PASS_HQ"|"MULTI_PASS_HQ";
   export interface XavcHdProfileSettings {
     /**
      * Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class.
@@ -5896,9 +5885,9 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Telecine?: XavcHdProfileTelecine;
   }
-  export type XavcHdProfileTelecine = "NONE"|"HARD"|string;
-  export type XavcInterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD"|string;
-  export type XavcProfile = "XAVC_HD_INTRA_CBG"|"XAVC_4K_INTRA_CBG"|"XAVC_4K_INTRA_VBR"|"XAVC_HD"|"XAVC_4K"|string;
+  export type XavcHdProfileTelecine = "NONE"|"HARD";
+  export type XavcInterlaceMode = "PROGRESSIVE"|"TOP_FIELD"|"BOTTOM_FIELD"|"FOLLOW_TOP_FIELD"|"FOLLOW_BOTTOM_FIELD";
+  export type XavcProfile = "XAVC_HD_INTRA_CBG"|"XAVC_4K_INTRA_CBG"|"XAVC_4K_INTRA_VBR"|"XAVC_HD"|"XAVC_4K";
   export interface XavcSettings {
     /**
      * Keep the default value, Auto (AUTO), for this setting to have MediaConvert automatically apply the best types of quantization for your video content. When you want to apply your quantization settings manually, you must set Adaptive quantization (adaptiveQuantization) to a value other than Auto (AUTO). Use this setting to specify the strength of any adaptive quantization filters that you enable. If you don't want MediaConvert to do any adaptive quantization in this transcode, set Adaptive quantization to Off (OFF). Related settings: The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).
@@ -5965,9 +5954,9 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     XavcHdProfileSettings?: XavcHdProfileSettings;
   }
-  export type XavcSlowPal = "DISABLED"|"ENABLED"|string;
-  export type XavcSpatialAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
-  export type XavcTemporalAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
+  export type XavcSlowPal = "DISABLED"|"ENABLED";
+  export type XavcSpatialAdaptiveQuantization = "DISABLED"|"ENABLED";
+  export type XavcTemporalAdaptiveQuantization = "DISABLED"|"ENABLED";
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
   export type __doubleMin0Max2147483647 = number;
@@ -6014,7 +6003,6 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type __integerMin1000Max30000 = number;
   export type __integerMin1000Max300000000 = number;
   export type __integerMin1000Max480000000 = number;
-  export type __integerMin100Max1000 = number;
   export type __integerMin10Max48 = number;
   export type __integerMin16000Max320000 = number;
   export type __integerMin16000Max48000 = number;
@@ -6045,7 +6033,6 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type __integerMin2Max2147483647 = number;
   export type __integerMin2Max4096 = number;
   export type __integerMin32000Max192000 = number;
-  export type __integerMin32000Max3024000 = number;
   export type __integerMin32000Max384000 = number;
   export type __integerMin32000Max48000 = number;
   export type __integerMin32Max8182 = number;

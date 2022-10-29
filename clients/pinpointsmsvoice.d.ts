@@ -161,7 +161,7 @@ declare namespace PinpointSMSVoice {
     SnsDestination?: SnsDestination;
   }
   export type EventDestinations = EventDestination[];
-  export type EventType = "INITIATED_CALL"|"RINGING"|"ANSWERED"|"COMPLETED_CALL"|"BUSY"|"FAILED"|"NO_ANSWER"|string;
+  export type EventType = "INITIATED_CALL"|"RINGING"|"ANSWERED"|"COMPLETED_CALL"|"BUSY"|"FAILED"|"NO_ANSWER";
   export type EventTypes = EventType[];
   export interface GetConfigurationSetEventDestinationsRequest {
     /**

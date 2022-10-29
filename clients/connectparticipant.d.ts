@@ -78,7 +78,7 @@ declare class ConnectParticipant extends Service {
 }
 declare namespace ConnectParticipant {
   export type ArtifactId = string;
-  export type ArtifactStatus = "APPROVED"|"REJECTED"|"IN_PROGRESS"|string;
+  export type ArtifactStatus = "APPROVED"|"REJECTED"|"IN_PROGRESS";
   export type AttachmentIdList = ArtifactId[];
   export interface AttachmentItem {
     /**
@@ -105,7 +105,7 @@ declare namespace ConnectParticipant {
   export type ChatContent = string;
   export type ChatContentType = string;
   export type ChatItemId = string;
-  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK"|string;
+  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK";
   export type ClientToken = string;
   export interface CompleteAttachmentUploadRequest {
     /**
@@ -133,7 +133,7 @@ declare namespace ConnectParticipant {
      */
     Expiry?: ISO8601Datetime;
   }
-  export type ConnectionType = "WEBSOCKET"|"CONNECTION_CREDENTIALS"|string;
+  export type ConnectionType = "WEBSOCKET"|"CONNECTION_CREDENTIALS";
   export type ConnectionTypeList = ConnectionType[];
   export type ContactId = string;
   export type ContentType = string;
@@ -283,11 +283,11 @@ declare namespace ConnectParticipant {
   export type NextToken = string;
   export type NonEmptyClientToken = string;
   export type ParticipantId = string;
-  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|string;
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM";
   export type ParticipantToken = string;
   export type PreSignedAttachmentUrl = string;
   export type PreSignedConnectionUrl = string;
-  export type ScanDirection = "FORWARD"|"BACKWARD"|string;
+  export type ScanDirection = "FORWARD"|"BACKWARD";
   export interface SendEventRequest {
     /**
      * The content type of the request. Supported types are:   application/vnd.amazonaws.connect.event.typing   application/vnd.amazonaws.connect.event.connection.acknowledged  
@@ -344,7 +344,7 @@ declare namespace ConnectParticipant {
      */
     AbsoluteTime?: Instant;
   }
-  export type SortKey = "DESCENDING"|"ASCENDING"|string;
+  export type SortKey = "DESCENDING"|"ASCENDING";
   export interface StartAttachmentUploadRequest {
     /**
      * Describes the MIME file type of the attachment. For a list of supported file types, see Feature specifications in the Amazon Connect Administrator Guide.
