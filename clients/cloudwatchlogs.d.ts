@@ -28,11 +28,11 @@ declare class CloudWatchLogs extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. When you perform a CreateExportTask operation, you must use credentials that have permission to write to the S3 bucket that you specify as the destination.  Exporting log data to Amazon S3 buckets that are encrypted by KMS is not supported. Exporting log data to Amazon S3 buckets that have S3 Object Lock enabled with a retention period is not supported. Exporting to S3 buckets that are encrypted with AES-256 is supported.   This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.  Time-based sorting on chunks of log data inside an exported file is not guaranteed. You can sort the exported log fild data by using Linux utilities. 
+   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. When you perform a CreateExportTask operation, you must use credentials that have permission to write to the S3 bucket that you specify as the destination. This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects. Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets encrypted with SSE-KMS is not supported. 
    */
   createExportTask(params: CloudWatchLogs.Types.CreateExportTaskRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
   /**
-   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. When you perform a CreateExportTask operation, you must use credentials that have permission to write to the S3 bucket that you specify as the destination.  Exporting log data to Amazon S3 buckets that are encrypted by KMS is not supported. Exporting log data to Amazon S3 buckets that have S3 Object Lock enabled with a retention period is not supported. Exporting to S3 buckets that are encrypted with AES-256 is supported.   This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.  Time-based sorting on chunks of log data inside an exported file is not guaranteed. You can sort the exported log fild data by using Linux utilities. 
+   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. When you perform a CreateExportTask operation, you must use credentials that have permission to write to the S3 bucket that you specify as the destination. This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects. Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets encrypted with SSE-KMS is not supported. 
    */
   createExportTask(callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
   /**
@@ -236,11 +236,19 @@ declare class CloudWatchLogs extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetQueryResultsResponse) => void): Request<CloudWatchLogs.Types.GetQueryResultsResponse, AWSError>;
   /**
-   * Lists the tags for the specified log group.
+   * Displays the tags associated with a CloudWatch Logs resource. Currently, log groups and destinations support tagging.
+   */
+  listTagsForResource(params: CloudWatchLogs.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsForResourceResponse) => void): Request<CloudWatchLogs.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Displays the tags associated with a CloudWatch Logs resource. Currently, log groups and destinations support tagging.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsForResourceResponse) => void): Request<CloudWatchLogs.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  The ListTagsLogGroup operation is on the path to deprecation. We recommend that you use ListTagsForResource instead.  Lists the tags for the specified log group.
    */
   listTagsLogGroup(params: CloudWatchLogs.Types.ListTagsLogGroupRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
   /**
-   * Lists the tags for the specified log group.
+   *  The ListTagsLogGroup operation is on the path to deprecation. We recommend that you use ListTagsForResource instead.  Lists the tags for the specified log group.
    */
   listTagsLogGroup(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
   /**
@@ -324,13 +332,21 @@ declare class CloudWatchLogs extends Service {
    */
   stopQuery(callback?: (err: AWSError, data: CloudWatchLogs.Types.StopQueryResponse) => void): Request<CloudWatchLogs.Types.StopQueryResponse, AWSError>;
   /**
-   * Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsLogGroup. To remove tags, use UntagLogGroup. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. For more information about using tags to control access, see Controlling access to Amazon Web Services resources using tags.
+   *  The TagLogGroup operation is on the path to deprecation. We recommend that you use TagResource instead.  Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsForResource. To remove tags, use UntagResource. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. For more information about using tags to control access, see Controlling access to Amazon Web Services resources using tags.
    */
   tagLogGroup(params: CloudWatchLogs.Types.TagLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsLogGroup. To remove tags, use UntagLogGroup. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. For more information about using tags to control access, see Controlling access to Amazon Web Services resources using tags.
+   *  The TagLogGroup operation is on the path to deprecation. We recommend that you use TagResource instead.  Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsForResource. To remove tags, use UntagResource. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. For more information about using tags to control access, see Controlling access to Amazon Web Services resources using tags.
    */
   tagLogGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Assigns one or more tags (key-value pairs) to the specified CloudWatch Logs resource. Currently, the only CloudWatch Logs resources that can be tagged are log groups and destinations.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a CloudWatch Logs resource.
+   */
+  tagResource(params: CloudWatchLogs.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Assigns one or more tags (key-value pairs) to the specified CloudWatch Logs resource. Currently, the only CloudWatch Logs resources that can be tagged are log groups and destinations.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a CloudWatch Logs resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Tests the filter pattern of a metric filter against a sample of log event messages. You can use this operation to validate the correctness of a metric filter pattern.
    */
@@ -340,16 +356,25 @@ declare class CloudWatchLogs extends Service {
    */
   testMetricFilter(callback?: (err: AWSError, data: CloudWatchLogs.Types.TestMetricFilterResponse) => void): Request<CloudWatchLogs.Types.TestMetricFilterResponse, AWSError>;
   /**
-   * Removes the specified tags from the specified log group. To list the tags for a log group, use ListTagsLogGroup. To add tags, use TagLogGroup. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. 
+   *  The UntagLogGroup operation is on the path to deprecation. We recommend that you use UntagResource instead.  Removes the specified tags from the specified log group. To list the tags for a log group, use ListTagsForResource. To add tags, use TagResource. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. 
    */
   untagLogGroup(params: CloudWatchLogs.Types.UntagLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified tags from the specified log group. To list the tags for a log group, use ListTagsLogGroup. To add tags, use TagLogGroup. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. 
+   *  The UntagLogGroup operation is on the path to deprecation. We recommend that you use UntagResource instead.  Removes the specified tags from the specified log group. To list the tags for a log group, use ListTagsForResource. To add tags, use TagResource. CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys condition keys. 
    */
   untagLogGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes one or more tags from the specified resource.
+   */
+  untagResource(params: CloudWatchLogs.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes one or more tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace CloudWatchLogs {
   export type AccessPolicy = string;
+  export type AmazonResourceName = string;
   export type Arn = string;
   export interface AssociateKmsKeyRequest {
     /**
@@ -1005,6 +1030,18 @@ declare namespace CloudWatchLogs {
   export type InputLogStreamNames = LogStreamName[];
   export type Interleaved = boolean;
   export type KmsKeyId = string;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource that you want to view tags for. The ARN format of a log group is arn:aws:logs:Region:account-id:log-group:log-group-name   The ARN format of a destination is arn:aws:logs:Region:account-id:destination:destination-name   For more information about ARN format, see CloudWatch Logs resources and operations.
+     */
+    resourceArn: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of tags associated with the requested resource.&gt;
+     */
+    tags?: Tags;
+  }
   export interface ListTagsLogGroupRequest {
     /**
      * The name of the log group.
@@ -1210,6 +1247,10 @@ declare namespace CloudWatchLogs {
      * The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis PutRecord operation on the destination stream.
      */
     roleArn: RoleArn;
+    /**
+     * An optional list of key-value pairs to associate with the resource. For more information about tagging, see Tagging Amazon Web Services resources 
+     */
+    tags?: Tags;
   }
   export interface PutDestinationResponse {
     /**
@@ -1531,6 +1572,7 @@ declare namespace CloudWatchLogs {
   export type SubscriptionFilters = SubscriptionFilter[];
   export type Success = boolean;
   export type TagKey = string;
+  export type TagKeyList = TagKey[];
   export type TagList = TagKey[];
   export interface TagLogGroupRequest {
     /**
@@ -1539,6 +1581,16 @@ declare namespace CloudWatchLogs {
     logGroupName: LogGroupName;
     /**
      * The key-value pairs to use for the tags.
+     */
+    tags: Tags;
+  }
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource that you're adding tags to. The ARN format of a log group is arn:aws:logs:Region:account-id:log-group:log-group-name   The ARN format of a destination is arn:aws:logs:Region:account-id:destination:destination-name   For more information about ARN format, see CloudWatch Logs resources and operations.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The list of key-value pairs to associate with the resource.
      */
     tags: Tags;
   }
@@ -1570,6 +1622,16 @@ declare namespace CloudWatchLogs {
      * The tag keys. The corresponding tags are removed from the log group.
      */
     tags: TagList;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the CloudWatch Logs resource that you're removing tags from. The ARN format of a log group is arn:aws:logs:Region:account-id:log-group:log-group-name   The ARN format of a destination is arn:aws:logs:Region:account-id:destination:destination-name   For more information about ARN format, see CloudWatch Logs resources and operations.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The list of tag keys to remove from the resource.
+     */
+    tagKeys: TagKeyList;
   }
   export type Value = string;
   /**

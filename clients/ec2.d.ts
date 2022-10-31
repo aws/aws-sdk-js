@@ -13,6 +13,14 @@ declare class EC2 extends Service {
   constructor(options?: EC2.Types.ClientConfiguration)
   config: Config & EC2.Types.ClientConfiguration;
   /**
+   * Accepts an Elastic IP address transfer. For more information, see Accept a transferred Elastic IP address in the Amazon Virtual Private Cloud User Guide.
+   */
+  acceptAddressTransfer(params: EC2.Types.AcceptAddressTransferRequest, callback?: (err: AWSError, data: EC2.Types.AcceptAddressTransferResult) => void): Request<EC2.Types.AcceptAddressTransferResult, AWSError>;
+  /**
+   * Accepts an Elastic IP address transfer. For more information, see Accept a transferred Elastic IP address in the Amazon Virtual Private Cloud User Guide.
+   */
+  acceptAddressTransfer(callback?: (err: AWSError, data: EC2.Types.AcceptAddressTransferResult) => void): Request<EC2.Types.AcceptAddressTransferResult, AWSError>;
+  /**
    * Accepts the Convertible Reserved Instance exchange quote described in the GetReservedInstancesExchangeQuote call.
    */
   acceptReservedInstancesExchangeQuote(params: EC2.Types.AcceptReservedInstancesExchangeQuoteRequest, callback?: (err: AWSError, data: EC2.Types.AcceptReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.AcceptReservedInstancesExchangeQuoteResult, AWSError>;
@@ -1613,6 +1621,14 @@ declare class EC2 extends Service {
    */
   describeAccountAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
+   * Describes an Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   */
+  describeAddressTransfers(params: EC2.Types.DescribeAddressTransfersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAddressTransfersResult) => void): Request<EC2.Types.DescribeAddressTransfersResult, AWSError>;
+  /**
+   * Describes an Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   */
+  describeAddressTransfers(callback?: (err: AWSError, data: EC2.Types.DescribeAddressTransfersResult) => void): Request<EC2.Types.DescribeAddressTransfersResult, AWSError>;
+  /**
    * Describes the specified Elastic IP addresses or all of your Elastic IP addresses. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   describeAddresses(params: EC2.Types.DescribeAddressesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAddressesResult) => void): Request<EC2.Types.DescribeAddressesResult, AWSError>;
@@ -2725,6 +2741,14 @@ declare class EC2 extends Service {
    */
   detachVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disables Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   */
+  disableAddressTransfer(params: EC2.Types.DisableAddressTransferRequest, callback?: (err: AWSError, data: EC2.Types.DisableAddressTransferResult) => void): Request<EC2.Types.DisableAddressTransferResult, AWSError>;
+  /**
+   * Disables Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   */
+  disableAddressTransfer(callback?: (err: AWSError, data: EC2.Types.DisableAddressTransferResult) => void): Request<EC2.Types.DisableAddressTransferResult, AWSError>;
+  /**
    * Disables EBS encryption by default for your account in the current Region. After you disable encryption by default, you can still create encrypted volumes by enabling encryption when you create each volume. Disabling encryption by default does not change the encryption status of your existing volumes. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   disableEbsEncryptionByDefault(params: EC2.Types.DisableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
@@ -2900,6 +2924,14 @@ declare class EC2 extends Service {
    * Disassociates a CIDR block from a VPC. To disassociate the CIDR block, you must specify its association ID. You can get the association ID by using DescribeVpcs. You must detach or delete all gateways and resources that are associated with the CIDR block before you can disassociate it.  You cannot disassociate the CIDR block with which you originally created the VPC (the primary CIDR block).
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
+  /**
+   * Enables Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   */
+  enableAddressTransfer(params: EC2.Types.EnableAddressTransferRequest, callback?: (err: AWSError, data: EC2.Types.EnableAddressTransferResult) => void): Request<EC2.Types.EnableAddressTransferResult, AWSError>;
+  /**
+   * Enables Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   */
+  enableAddressTransfer(callback?: (err: AWSError, data: EC2.Types.EnableAddressTransferResult) => void): Request<EC2.Types.EnableAddressTransferResult, AWSError>;
   /**
    * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default KMS key or the KMS key that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default KMS key for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
@@ -4668,6 +4700,26 @@ declare namespace EC2 {
   }
   export type AcceleratorType = "gpu"|"fpga"|"inference"|string;
   export type AcceleratorTypeSet = AcceleratorType[];
+  export interface AcceptAddressTransferRequest {
+    /**
+     * The Elastic IP address you are accepting for transfer.
+     */
+    Address: String;
+    /**
+     *  tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AcceptAddressTransferResult {
+    /**
+     * An Elastic IP address transfer.
+     */
+    AddressTransfer?: AddressTransfer;
+  }
   export interface AcceptReservedInstancesExchangeQuoteRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -4995,6 +5047,34 @@ declare namespace EC2 {
   export type AddressList = Address[];
   export type AddressMaxResults = number;
   export type AddressSet = AddressAttribute[];
+  export interface AddressTransfer {
+    /**
+     * The Elastic IP address being transferred.
+     */
+    PublicIp?: String;
+    /**
+     * The allocation ID of an Elastic IP address.
+     */
+    AllocationId?: String;
+    /**
+     * The ID of the account that you want to transfer the Elastic IP address to.
+     */
+    TransferAccountId?: String;
+    /**
+     * The timestamp when the Elastic IP address transfer expired. When the source account starts the transfer, the transfer account has seven hours to allocate the Elastic IP address to complete the transfer, or the Elastic IP address will return to its original owner.
+     */
+    TransferOfferExpirationTimestamp?: MillisecondDateTime;
+    /**
+     * The timestamp when the Elastic IP address transfer was accepted.
+     */
+    TransferOfferAcceptedTimestamp?: MillisecondDateTime;
+    /**
+     * The Elastic IP address transfer status.
+     */
+    AddressTransferStatus?: AddressTransferStatus;
+  }
+  export type AddressTransferList = AddressTransfer[];
+  export type AddressTransferStatus = "pending"|"disabled"|"accepted"|string;
   export interface AdvertiseByoipCidrRequest {
     /**
      * The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.
@@ -11795,6 +11875,35 @@ declare namespace EC2 {
      */
     AccountAttributes?: AccountAttributeList;
   }
+  export type DescribeAddressTransfersMaxResults = number;
+  export interface DescribeAddressTransfersRequest {
+    /**
+     * The allocation IDs of Elastic IP addresses.
+     */
+    AllocationIds?: AllocationIdList;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of address transfers to return in one page of results.
+     */
+    MaxResults?: DescribeAddressTransfersMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeAddressTransfersResult {
+    /**
+     * The Elastic IP address transfer.
+     */
+    AddressTransfers?: AddressTransferList;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface DescribeAddressesAttributeRequest {
     /**
      * [EC2-VPC] The allocation IDs.
@@ -16231,6 +16340,22 @@ declare namespace EC2 {
      */
     DirectoryId?: String;
   }
+  export interface DisableAddressTransferRequest {
+    /**
+     * The allocation ID of an Elastic IP address.
+     */
+    AllocationId: AllocationId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableAddressTransferResult {
+    /**
+     * An Elastic IP address transfer.
+     */
+    AddressTransfer?: AddressTransfer;
+  }
   export interface DisableEbsEncryptionByDefaultRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -17093,6 +17218,26 @@ declare namespace EC2 {
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
   export type ElasticIpAssociationId = string;
   export type EnaSupport = "unsupported"|"supported"|"required"|string;
+  export interface EnableAddressTransferRequest {
+    /**
+     * The allocation ID of an Elastic IP address.
+     */
+    AllocationId: AllocationId;
+    /**
+     * The ID of the account that you want to transfer the Elastic IP address to.
+     */
+    TransferAccountId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableAddressTransferResult {
+    /**
+     * An Elastic IP address transfer.
+     */
+    AddressTransfer?: AddressTransfer;
+  }
   export interface EnableEbsEncryptionByDefaultRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -19027,6 +19172,9 @@ declare namespace EC2 {
      * The resource type.
      */
     ResourceType?: IpamResourceType;
+    /**
+     * The resource tag.
+     */
     ResourceTag?: RequestIpamResourceTag;
     /**
      * The ID of the Amazon Web Services account that owns the resource.
@@ -24894,6 +25042,9 @@ declare namespace EC2 {
     Monitored: Boolean;
   }
   export interface ModifyIpamResourceCidrResult {
+    /**
+     * The CIDR of the resource.
+     */
     IpamResourceCidr?: IpamResourceCidr;
   }
   export interface ModifyIpamResult {
@@ -26026,6 +26177,9 @@ declare namespace EC2 {
     IpamPoolOwner: String;
   }
   export interface MoveByoipCidrToIpamResult {
+    /**
+     * The BYOIP CIDR.
+     */
     ByoipCidr?: ByoipCidr;
   }
   export type MoveStatus = "movingToVpc"|"restoringToClassic"|string;
@@ -27537,6 +27691,9 @@ declare namespace EC2 {
      * The ID of the pool that you want to provision the CIDR to.
      */
     PoolId?: Ipv4PoolEc2Id;
+    /**
+     * Information about the address range of the public IPv4 pool.
+     */
     PoolAddressRange?: PublicIpv4PoolRange;
   }
   export interface ProvisionedBandwidth {

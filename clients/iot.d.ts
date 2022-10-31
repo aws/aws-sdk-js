@@ -2036,6 +2036,10 @@ declare namespace Iot {
      * Write data to an Amazon OpenSearch Service domain.
      */
     openSearch?: OpenSearchAction;
+    /**
+     * The Amazon Location Service rule action sends device location updates from an MQTT message to an Amazon Location tracker resource.
+     */
+    location?: LocationAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
@@ -3909,7 +3913,7 @@ declare namespace Iot {
      */
     provisioningRoleArn: RoleArn;
     /**
-     * Creates a pre-provisioning hook template.
+     * Creates a pre-provisioning hook template. Only supports template of type FLEET_PROVISIONING. For more information about provisioning template types, see type.
      */
     preProvisioningHook?: ProvisioningHook;
     /**
@@ -5981,7 +5985,7 @@ declare namespace Iot {
      */
     securityProfileName?: SecurityProfileName;
     /**
-     *  The maximum number of results to return at one time. The default is 25. 
+     *  The maximum number of results to return at one time. The default is 10. 
      */
     maxResults?: TinyMaxResults;
     /**
@@ -8369,6 +8373,42 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface LocationAction {
+    /**
+     * The IAM role that grants permission to write to the Amazon Location resource.
+     */
+    roleArn: AwsArn;
+    /**
+     * The name of the tracker resource in Amazon Location in which the location is updated.
+     */
+    trackerName: String;
+    /**
+     * The unique ID of the device providing the location data.
+     */
+    deviceId: String;
+    /**
+     * The time that the location data was sampled. The default value is the time the MQTT message was processed.
+     */
+    timestamp?: LocationTimestamp;
+    /**
+     * A string that evaluates to a double value that represents the latitude of the device's location.
+     */
+    latitude: String;
+    /**
+     * A string that evaluates to a double value that represents the longitude of the device's location.
+     */
+    longitude: String;
+  }
+  export interface LocationTimestamp {
+    /**
+     * An expression that returns a long epoch time value.
+     */
+    value: String;
+    /**
+     * The precision of the timestamp value that results from the expression described in value. Valid values: SECONDS | MILLISECONDS | MICROSECONDS | NANOSECONDS. The default is MILLISECONDS.
+     */
+    unit?: String;
+  }
   export type LogGroupName = string;
   export type LogLevel = "DEBUG"|"INFO"|"ERROR"|"WARN"|"DISABLED"|string;
   export interface LogTarget {
@@ -8919,7 +8959,7 @@ declare namespace Iot {
   export type ProvisioningTemplateVersionListing = ProvisioningTemplateVersionSummary[];
   export interface ProvisioningTemplateVersionSummary {
     /**
-     * The ID of the fleet privisioning template version.
+     * The ID of the fleet provisioning template version.
      */
     versionId?: TemplateVersionId;
     /**
@@ -10996,7 +11036,7 @@ declare namespace Iot {
      */
     provisioningRoleArn?: RoleArn;
     /**
-     * Updates the pre-provisioning hook template.
+     * Updates the pre-provisioning hook template. Only supports template of type FLEET_PROVISIONING. For more information about provisioning template types, see type.
      */
     preProvisioningHook?: ProvisioningHook;
     /**

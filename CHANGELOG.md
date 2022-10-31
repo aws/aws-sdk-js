@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1243.0-->
+<!--LATEST=2.1244.0-->
 <!--ENTRYINSERT-->
+
+## 2.1244.0
+* feature: AppRunner: This release adds support for private App Runner services. Services may now be configured to be made private and only accessible from a VPC. The changes include a new VpcIngressConnection resource and several new and modified APIs.
+* feature: CloudWatchLogs: SDK release to support tagging for destinations and log groups with TagResource. Also supports tag on create with PutDestination.
+* feature: Connect: Amazon connect now support a new API DismissUserContact to dismiss or remove terminated contacts in Agent CCP
+* feature: EC2: Elastic IP transfer is a new Amazon VPC feature that allows you to transfer your Elastic IP addresses from one AWS Account to another.
+* feature: Iot: This release adds the Amazon Location action to IoT Rules Engine.
+* feature: SESV2: This release includes support for interacting with the Virtual Deliverability Manager, allowing you to opt in/out of the feature and to retrieve recommendations and metric data.
+* feature: Textract: This release introduces additional support for 30+ normalized fields such as vendor address and currency. It also includes OCR output in the response and accuracy improvements for the already supported fields in previous version
 
 ## 2.1243.0
 * feature: AppRunner: AWS App Runner adds .NET 6, Go 1, PHP 8.1 and Ruby 3.1 runtimes.

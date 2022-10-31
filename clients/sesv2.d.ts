@@ -12,6 +12,14 @@ declare class SESV2 extends Service {
   constructor(options?: SESV2.Types.ClientConfiguration)
   config: Config & SESV2.Types.ClientConfiguration;
   /**
+   * Retrieves batches of metric data collected based on your sending activity. You can execute this operation no more than 16 times per second, and with at most 160 queries from the batches per second (cumulative).
+   */
+  batchGetMetricData(params: SESV2.Types.BatchGetMetricDataRequest, callback?: (err: AWSError, data: SESV2.Types.BatchGetMetricDataResponse) => void): Request<SESV2.Types.BatchGetMetricDataResponse, AWSError>;
+  /**
+   * Retrieves batches of metric data collected based on your sending activity. You can execute this operation no more than 16 times per second, and with at most 160 queries from the batches per second (cumulative).
+   */
+  batchGetMetricData(callback?: (err: AWSError, data: SESV2.Types.BatchGetMetricDataResponse) => void): Request<SESV2.Types.BatchGetMetricDataResponse, AWSError>;
+  /**
    * Create a configuration set. Configuration sets are groups of rules that you can apply to the emails that you send. You apply a configuration set to an email by specifying the name of the configuration set when you call the Amazon SES API v2. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email. 
    */
   createConfigurationSet(params: SESV2.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetResponse) => void): Request<SESV2.Types.CreateConfigurationSetResponse, AWSError>;
@@ -412,6 +420,14 @@ declare class SESV2 extends Service {
    */
   listImportJobs(callback?: (err: AWSError, data: SESV2.Types.ListImportJobsResponse) => void): Request<SESV2.Types.ListImportJobsResponse, AWSError>;
   /**
+   * Lists the recommendations present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
+   */
+  listRecommendations(params: SESV2.Types.ListRecommendationsRequest, callback?: (err: AWSError, data: SESV2.Types.ListRecommendationsResponse) => void): Request<SESV2.Types.ListRecommendationsResponse, AWSError>;
+  /**
+   * Lists the recommendations present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
+   */
+  listRecommendations(callback?: (err: AWSError, data: SESV2.Types.ListRecommendationsResponse) => void): Request<SESV2.Types.ListRecommendationsResponse, AWSError>;
+  /**
    * Retrieves a list of email addresses that are on the suppression list for your account.
    */
   listSuppressedDestinations(params: SESV2.Types.ListSuppressedDestinationsRequest, callback?: (err: AWSError, data: SESV2.Types.ListSuppressedDestinationsResponse) => void): Request<SESV2.Types.ListSuppressedDestinationsResponse, AWSError>;
@@ -460,6 +476,14 @@ declare class SESV2 extends Service {
    */
   putAccountSuppressionAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountSuppressionAttributesResponse) => void): Request<SESV2.Types.PutAccountSuppressionAttributesResponse, AWSError>;
   /**
+   * Update your Amazon SES account VDM attributes. You can execute this operation no more than once per second.
+   */
+  putAccountVdmAttributes(params: SESV2.Types.PutAccountVdmAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutAccountVdmAttributesResponse) => void): Request<SESV2.Types.PutAccountVdmAttributesResponse, AWSError>;
+  /**
+   * Update your Amazon SES account VDM attributes. You can execute this operation no more than once per second.
+   */
+  putAccountVdmAttributes(callback?: (err: AWSError, data: SESV2.Types.PutAccountVdmAttributesResponse) => void): Request<SESV2.Types.PutAccountVdmAttributesResponse, AWSError>;
+  /**
    * Associate a configuration set with a dedicated IP pool. You can use dedicated IP pools to create groups of dedicated IP addresses for sending specific types of email.
    */
   putConfigurationSetDeliveryOptions(params: SESV2.Types.PutConfigurationSetDeliveryOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetDeliveryOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetDeliveryOptionsResponse, AWSError>;
@@ -499,6 +523,14 @@ declare class SESV2 extends Service {
    * Specify a custom domain to use for open and click tracking elements in email that you send.
    */
   putConfigurationSetTrackingOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetTrackingOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetTrackingOptionsResponse, AWSError>;
+  /**
+   * Specify VDM preferences for email that you send using the configuration set. You can execute this operation no more than once per second.
+   */
+  putConfigurationSetVdmOptions(params: SESV2.Types.PutConfigurationSetVdmOptionsRequest, callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetVdmOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetVdmOptionsResponse, AWSError>;
+  /**
+   * Specify VDM preferences for email that you send using the configuration set. You can execute this operation no more than once per second.
+   */
+  putConfigurationSetVdmOptions(callback?: (err: AWSError, data: SESV2.Types.PutConfigurationSetVdmOptionsResponse) => void): Request<SESV2.Types.PutConfigurationSetVdmOptionsResponse, AWSError>;
   /**
    * Move a dedicated IP address to an existing dedicated IP pool.  The dedicated IP address that you specify must already exist, and must be associated with your Amazon Web Services account.  The dedicated IP pool you specify must already exist. You can create a new pool by using the CreateDedicatedIpPool operation. 
    */
@@ -699,6 +731,49 @@ declare namespace SESV2 {
   export type AdditionalContactEmailAddresses = AdditionalContactEmailAddress[];
   export type AmazonResourceName = string;
   export type AttributesData = string;
+  export type BatchGetMetricDataQueries = BatchGetMetricDataQuery[];
+  export interface BatchGetMetricDataQuery {
+    /**
+     * The query identifier.
+     */
+    Id: QueryIdentifier;
+    /**
+     * The query namespace - e.g. VDM 
+     */
+    Namespace: MetricNamespace;
+    /**
+     * The queried metric. This can be one of the following:    SEND – Emails sent eligible for tracking in the VDM dashboard. This excludes emails sent to the mailbox simulator and emails addressed to more than one recipient.    COMPLAINT – Complaints received for your account. This excludes complaints from the mailbox simulator, those originating from your account-level suppression list (if enabled), and those for emails addressed to more than one recipient    PERMANENT_BOUNCE – Permanent bounces - i.e. feedback received for emails sent to non-existent mailboxes. Excludes bounces from the mailbox simulator, those originating from your account-level suppression list (if enabled), and those for emails addressed to more than one recipient.    TRANSIENT_BOUNCE – Transient bounces - i.e. feedback received for delivery failures excluding issues with non-existent mailboxes. Excludes bounces from the mailbox simulator, and those for emails addressed to more than one recipient.    OPEN – Unique open events for emails including open trackers. Excludes opens for emails addressed to more than one recipient.    CLICK – Unique click events for emails including wrapped links. Excludes clicks for emails addressed to more than one recipient.    DELIVERY – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator and for emails addressed to more than one recipient.    DELIVERY_OPEN – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient, and emails without open trackers.    DELIVERY_CLICK – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient, and emails without click trackers.    DELIVERY_COMPLAINT – Successful deliveries for email sending attempts. Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient, and emails addressed to recipients hosted by ISPs with which Amazon SES does not have a feedback loop agreement.  
+     */
+    Metric: Metric;
+    /**
+     * An object that contains mapping between MetricDimensionName and MetricDimensionValue to filter metrics by.
+     */
+    Dimensions?: Dimensions;
+    /**
+     * Represents the start date for the query interval.
+     */
+    StartDate: Timestamp;
+    /**
+     * Represents the end date for the query interval.
+     */
+    EndDate: Timestamp;
+  }
+  export interface BatchGetMetricDataRequest {
+    /**
+     * A list of queries for metrics to be retrieved.
+     */
+    Queries: BatchGetMetricDataQueries;
+  }
+  export interface BatchGetMetricDataResponse {
+    /**
+     * A list of successfully retrieved MetricDataResult.
+     */
+    Results?: MetricDataResultList;
+    /**
+     * A list of MetricDataError encountered while processing your metric data batch request.
+     */
+    Errors?: MetricDataErrorList;
+  }
   export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string;
   export type BlacklistEntries = BlacklistEntry[];
   export interface BlacklistEntry {
@@ -847,6 +922,7 @@ declare namespace SESV2 {
      */
     Charset?: Charset;
   }
+  export type Counter = number;
   export interface CreateConfigurationSetEventDestinationRequest {
     /**
      * The name of the configuration set .
@@ -889,6 +965,10 @@ declare namespace SESV2 {
      */
     Tags?: TagList;
     SuppressionOptions?: SuppressionOptions;
+    /**
+     * An object that defines the VDM options for emails that you send using the configuration set.
+     */
+    VdmOptions?: VdmOptions;
   }
   export interface CreateConfigurationSetResponse {
   }
@@ -1123,6 +1203,18 @@ declare namespace SESV2 {
     DomainIspPlacements?: DomainIspPlacements;
   }
   export type DailyVolumes = DailyVolume[];
+  export interface DashboardAttributes {
+    /**
+     * Specifies the status of your VDM engagement metrics collection. Can be one of the following:    ENABLED – Amazon SES enables engagement metrics for your account.    DISABLED – Amazon SES disables engagement metrics for your account.  
+     */
+    EngagementMetrics?: FeatureStatus;
+  }
+  export interface DashboardOptions {
+    /**
+     * Specifies the status of your VDM engagement metrics collection. Can be one of the following:    ENABLED – Amazon SES enables engagement metrics for the configuration set.    DISABLED – Amazon SES disables engagement metrics for the configuration set.  
+     */
+    EngagementMetrics?: FeatureStatus;
+  }
   export type DataFormat = "CSV"|"JSON"|string;
   export interface DedicatedIp {
     /**
@@ -1303,6 +1395,7 @@ declare namespace SESV2 {
   }
   export type DimensionName = string;
   export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string;
+  export type Dimensions = {[key: string]: MetricDimensionValue};
   export type DisplayName = string;
   export interface DkimAttributes {
     /**
@@ -1575,6 +1668,7 @@ declare namespace SESV2 {
     ErrorMessage?: ErrorMessage;
   }
   export type FailureRedirectionURL = string;
+  export type FeatureStatus = "ENABLED"|"DISABLED"|string;
   export type FeedbackId = string;
   export type GeneralEnforcementStatus = string;
   export interface GetAccountRequest {
@@ -1608,6 +1702,10 @@ declare namespace SESV2 {
      * An object that defines your account details.
      */
     Details?: AccountDetails;
+    /**
+     * The VDM attributes that apply to your Amazon SES account.
+     */
+    VdmAttributes?: VdmAttributes;
   }
   export interface GetBlacklistReportsRequest {
     /**
@@ -1668,6 +1766,10 @@ declare namespace SESV2 {
      * An object that contains information about the suppression list preferences for your account.
      */
     SuppressionOptions?: SuppressionOptions;
+    /**
+     * An object that contains information about the VDM preferences for your configuration set.
+     */
+    VdmOptions?: VdmOptions;
   }
   export interface GetContactListRequest {
     /**
@@ -2041,6 +2143,18 @@ declare namespace SESV2 {
      */
     SuppressedDestination: SuppressedDestination;
   }
+  export interface GuardianAttributes {
+    /**
+     * Specifies the status of your VDM optimized shared delivery. Can be one of the following:    ENABLED – Amazon SES enables optimized shared delivery for your account.    DISABLED – Amazon SES disables optimized shared delivery for your account.  
+     */
+    OptimizedSharedDelivery?: FeatureStatus;
+  }
+  export interface GuardianOptions {
+    /**
+     * Specifies the status of your VDM optimized shared delivery. Can be one of the following:    ENABLED – Amazon SES enables optimized shared delivery for the configuration set.    DISABLED – Amazon SES disables optimized shared delivery for the configuration set.  
+     */
+    OptimizedSharedDelivery?: FeatureStatus;
+  }
   export type Identity = string;
   export interface IdentityInfo {
     /**
@@ -2387,6 +2501,33 @@ declare namespace SESV2 {
   export type ListOfContactLists = ContactList[];
   export type ListOfContacts = Contact[];
   export type ListOfDedicatedIpPools = PoolName[];
+  export type ListRecommendationFilterValue = string;
+  export type ListRecommendationsFilter = {[key: string]: ListRecommendationFilterValue};
+  export type ListRecommendationsFilterKey = "TYPE"|"IMPACT"|"STATUS"|"RESOURCE_ARN"|string;
+  export interface ListRecommendationsRequest {
+    /**
+     * Filters applied when retrieving recommendations. Can eiter be an individual filter, or combinations of STATUS and IMPACT or STATUS and TYPE 
+     */
+    Filter?: ListRecommendationsFilter;
+    /**
+     * A token returned from a previous call to ListRecommendations to indicate the position in the list of recommendations.
+     */
+    NextToken?: NextToken;
+    /**
+     * The number of results to show in a single call to ListRecommendations. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 100.
+     */
+    PageSize?: MaxItems;
+  }
+  export interface ListRecommendationsResponse {
+    /**
+     * The recommendations applicable to your account.
+     */
+    Recommendations?: RecommendationsList;
+    /**
+     * A string token indicating that there might be additional recommendations available to be listed. Use the token provided in the ListRecommendationsResponse to use in the subsequent call to ListRecommendations with the same parameters to retrieve the next page of recommendations.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSuppressedDestinationsRequest {
     /**
      * The factors that caused the email address to be added to .
@@ -2476,6 +2617,41 @@ declare namespace SESV2 {
   export type MessageTagList = MessageTag[];
   export type MessageTagName = string;
   export type MessageTagValue = string;
+  export type Metric = "SEND"|"COMPLAINT"|"PERMANENT_BOUNCE"|"TRANSIENT_BOUNCE"|"OPEN"|"CLICK"|"DELIVERY"|"DELIVERY_OPEN"|"DELIVERY_CLICK"|"DELIVERY_COMPLAINT"|string;
+  export interface MetricDataError {
+    /**
+     * The query identifier.
+     */
+    Id?: QueryIdentifier;
+    /**
+     * The query error code. Can be one of:    INTERNAL_FAILURE – Amazon SES has failed to process one of the queries.    ACCESS_DENIED – You have insufficient access to retrieve metrics based on the given query.  
+     */
+    Code?: QueryErrorCode;
+    /**
+     * The error message associated with the current query error.
+     */
+    Message?: QueryErrorMessage;
+  }
+  export type MetricDataErrorList = MetricDataError[];
+  export interface MetricDataResult {
+    /**
+     * The query identifier.
+     */
+    Id?: QueryIdentifier;
+    /**
+     * A list of timestamps for the metric data results.
+     */
+    Timestamps?: TimestampList;
+    /**
+     * A list of values (cumulative / sum) for the metric data results.
+     */
+    Values?: MetricValueList;
+  }
+  export type MetricDataResultList = MetricDataResult[];
+  export type MetricDimensionName = "EMAIL_IDENTITY"|"CONFIGURATION_SET"|"ISP"|string;
+  export type MetricDimensionValue = string;
+  export type MetricNamespace = "VDM"|string;
+  export type MetricValueList = Counter[];
   export type NextToken = string;
   export type OutboundMessageId = string;
   export interface OverallVolume {
@@ -2580,6 +2756,14 @@ declare namespace SESV2 {
   }
   export interface PutAccountSuppressionAttributesResponse {
   }
+  export interface PutAccountVdmAttributesRequest {
+    /**
+     * The VDM attributes that you wish to apply to your Amazon SES account.
+     */
+    VdmAttributes: VdmAttributes;
+  }
+  export interface PutAccountVdmAttributesResponse {
+  }
   export interface PutConfigurationSetDeliveryOptionsRequest {
     /**
      * The name of the configuration set to associate with a dedicated IP pool.
@@ -2643,6 +2827,18 @@ declare namespace SESV2 {
     CustomRedirectDomain?: CustomRedirectDomain;
   }
   export interface PutConfigurationSetTrackingOptionsResponse {
+  }
+  export interface PutConfigurationSetVdmOptionsRequest {
+    /**
+     * The name of the configuration set.
+     */
+    ConfigurationSetName: ConfigurationSetName;
+    /**
+     * The VDM options to apply to the configuration set.
+     */
+    VdmOptions?: VdmOptions;
+  }
+  export interface PutConfigurationSetVdmOptionsResponse {
   }
   export interface PutDedicatedIpInPoolRequest {
     /**
@@ -2768,6 +2964,9 @@ declare namespace SESV2 {
   }
   export interface PutSuppressedDestinationResponse {
   }
+  export type QueryErrorCode = "INTERNAL_FAILURE"|"ACCESS_DENIED"|string;
+  export type QueryErrorMessage = string;
+  export type QueryIdentifier = string;
   export interface RawMessage {
     /**
      * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
@@ -2776,6 +2975,41 @@ declare namespace SESV2 {
   }
   export type RawMessageData = Buffer|Uint8Array|Blob|string;
   export type RblName = string;
+  export interface Recommendation {
+    /**
+     * The resource affected by the recommendation, with values like arn:aws:ses:us-east-1:123456789012:identity/example.com.
+     */
+    ResourceArn?: AmazonResourceName;
+    /**
+     * The recommendation type, with values like DKIM, SPF or DMARC.
+     */
+    Type?: RecommendationType;
+    /**
+     * The recommendation description / disambiguator - e.g. DKIM1 and DKIM2 are different recommendations about your DKIM setup.
+     */
+    Description?: RecommendationDescription;
+    /**
+     * The recommendation status, with values like OPEN or FIXED.
+     */
+    Status?: RecommendationStatus;
+    /**
+     * The first time this issue was encountered and the recommendation was generated.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The last time the recommendation was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The recommendation impact, with values like HIGH or LOW.
+     */
+    Impact?: RecommendationImpact;
+  }
+  export type RecommendationDescription = string;
+  export type RecommendationImpact = "LOW"|"HIGH"|string;
+  export type RecommendationStatus = "OPEN"|"FIXED"|string;
+  export type RecommendationType = "DKIM"|"DMARC"|"SPF"|string;
+  export type RecommendationsList = Recommendation[];
   export type RenderedEmailTemplate = string;
   export interface ReplacementEmailContent {
     /**
@@ -3080,6 +3314,7 @@ declare namespace SESV2 {
     RenderedTemplate: RenderedEmailTemplate;
   }
   export type Timestamp = Date;
+  export type TimestampList = Timestamp[];
   export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
   export interface Topic {
     /**
@@ -3255,6 +3490,30 @@ declare namespace SESV2 {
   }
   export type UseCaseDescription = string;
   export type UseDefaultIfPreferenceUnavailable = boolean;
+  export interface VdmAttributes {
+    /**
+     * Specifies the status of your VDM configuration. Can be one of the following:    ENABLED – Amazon SES enables VDM for your account.    DISABLED – Amazon SES disables VDM for your account.  
+     */
+    VdmEnabled: FeatureStatus;
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+     */
+    DashboardAttributes?: DashboardAttributes;
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Guardian.
+     */
+    GuardianAttributes?: GuardianAttributes;
+  }
+  export interface VdmOptions {
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+     */
+    DashboardOptions?: DashboardOptions;
+    /**
+     * Specifies additional settings for your VDM configuration as applicable to the Guardian.
+     */
+    GuardianOptions?: GuardianOptions;
+  }
   export type VerificationStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type Volume = number;
   export interface VolumeStatistics {

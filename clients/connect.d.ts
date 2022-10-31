@@ -548,6 +548,14 @@ declare class Connect extends Service {
    */
   disassociateSecurityKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Dismisses contacts from an agent’s CCP and returns the agent to an available state, which allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a MISSED, ERROR, ENDED, or REJECTED state in the Agent Event Stream.
+   */
+  dismissUserContact(params: Connect.Types.DismissUserContactRequest, callback?: (err: AWSError, data: Connect.Types.DismissUserContactResponse) => void): Request<Connect.Types.DismissUserContactResponse, AWSError>;
+  /**
+   * Dismisses contacts from an agent’s CCP and returns the agent to an available state, which allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a MISSED, ERROR, ENDED, or REJECTED state in the Agent Event Stream.
+   */
+  dismissUserContact(callback?: (err: AWSError, data: Connect.Types.DismissUserContactResponse) => void): Request<Connect.Types.DismissUserContactResponse, AWSError>;
+  /**
    * Retrieves the contact attributes for the specified contact.
    */
   getContactAttributes(params: Connect.Types.GetContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.GetContactAttributesResponse) => void): Request<Connect.Types.GetContactAttributesResponse, AWSError>;
@@ -1236,11 +1244,11 @@ declare class Connect extends Service {
    */
   updateTaskTemplate(callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group. For more information about updating a traffic distribution group see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(params: Connect.Types.UpdateTrafficDistributionRequest, callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group. For more information about updating a traffic distribution group see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
@@ -3137,6 +3145,22 @@ declare namespace Connect {
      * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
      */
     AssociationId: AssociationId;
+  }
+  export interface DismissUserContactRequest {
+    /**
+     * The identifier of the user account.
+     */
+    UserId: UserId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact.
+     */
+    ContactId: ContactId;
+  }
+  export interface DismissUserContactResponse {
   }
   export type DisplayName = string;
   export interface Distribution {

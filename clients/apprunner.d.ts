@@ -60,6 +60,14 @@ declare class AppRunner extends Service {
    */
   createVpcConnector(callback?: (err: AWSError, data: AppRunner.Types.CreateVpcConnectorResponse) => void): Request<AppRunner.Types.CreateVpcConnectorResponse, AWSError>;
   /**
+   * Create an App Runner VPC Ingress Connection resource. App Runner requires this resource when you want to associate your App Runner service with an Amazon VPC endpoint.
+   */
+  createVpcIngressConnection(params: AppRunner.Types.CreateVpcIngressConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateVpcIngressConnectionResponse) => void): Request<AppRunner.Types.CreateVpcIngressConnectionResponse, AWSError>;
+  /**
+   * Create an App Runner VPC Ingress Connection resource. App Runner requires this resource when you want to associate your App Runner service with an Amazon VPC endpoint.
+   */
+  createVpcIngressConnection(callback?: (err: AWSError, data: AppRunner.Types.CreateVpcIngressConnectionResponse) => void): Request<AppRunner.Types.CreateVpcIngressConnectionResponse, AWSError>;
+  /**
    * Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
    */
   deleteAutoScalingConfiguration(params: AppRunner.Types.DeleteAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DeleteAutoScalingConfigurationResponse, AWSError>;
@@ -84,11 +92,11 @@ declare class AppRunner extends Service {
    */
   deleteObservabilityConfiguration(callback?: (err: AWSError, data: AppRunner.Types.DeleteObservabilityConfigurationResponse) => void): Request<AppRunner.Types.DeleteObservabilityConfigurationResponse, AWSError>;
   /**
-   * Delete an App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Delete an App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.  Make sure that you don't have any active VPCIngressConnections associated with the service you want to delete.  
    */
   deleteService(params: AppRunner.Types.DeleteServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteServiceResponse) => void): Request<AppRunner.Types.DeleteServiceResponse, AWSError>;
   /**
-   * Delete an App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Delete an App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.  Make sure that you don't have any active VPCIngressConnections associated with the service you want to delete.  
    */
   deleteService(callback?: (err: AWSError, data: AppRunner.Types.DeleteServiceResponse) => void): Request<AppRunner.Types.DeleteServiceResponse, AWSError>;
   /**
@@ -99,6 +107,14 @@ declare class AppRunner extends Service {
    * Delete an App Runner VPC connector resource. You can't delete a connector that's used by one or more App Runner services.
    */
   deleteVpcConnector(callback?: (err: AWSError, data: AppRunner.Types.DeleteVpcConnectorResponse) => void): Request<AppRunner.Types.DeleteVpcConnectorResponse, AWSError>;
+  /**
+   * Delete an App Runner VPC Ingress Connection resource that's associated with an App Runner service. The VPC Ingress Connection must be in one of the following states to be deleted:     AVAILABLE     FAILED_CREATION     FAILED_UPDATE     FAILED_DELETION   
+   */
+  deleteVpcIngressConnection(params: AppRunner.Types.DeleteVpcIngressConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteVpcIngressConnectionResponse) => void): Request<AppRunner.Types.DeleteVpcIngressConnectionResponse, AWSError>;
+  /**
+   * Delete an App Runner VPC Ingress Connection resource that's associated with an App Runner service. The VPC Ingress Connection must be in one of the following states to be deleted:     AVAILABLE     FAILED_CREATION     FAILED_UPDATE     FAILED_DELETION   
+   */
+  deleteVpcIngressConnection(callback?: (err: AWSError, data: AppRunner.Types.DeleteVpcIngressConnectionResponse) => void): Request<AppRunner.Types.DeleteVpcIngressConnectionResponse, AWSError>;
   /**
    * Return a full description of an App Runner automatic scaling configuration resource.
    */
@@ -139,6 +155,14 @@ declare class AppRunner extends Service {
    * Return a description of an App Runner VPC connector resource.
    */
   describeVpcConnector(callback?: (err: AWSError, data: AppRunner.Types.DescribeVpcConnectorResponse) => void): Request<AppRunner.Types.DescribeVpcConnectorResponse, AWSError>;
+  /**
+   * Return a full description of an App Runner VPC Ingress Connection resource.
+   */
+  describeVpcIngressConnection(params: AppRunner.Types.DescribeVpcIngressConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.DescribeVpcIngressConnectionResponse) => void): Request<AppRunner.Types.DescribeVpcIngressConnectionResponse, AWSError>;
+  /**
+   * Return a full description of an App Runner VPC Ingress Connection resource.
+   */
+  describeVpcIngressConnection(callback?: (err: AWSError, data: AppRunner.Types.DescribeVpcIngressConnectionResponse) => void): Request<AppRunner.Types.DescribeVpcIngressConnectionResponse, AWSError>;
   /**
    * Disassociate a custom domain name from an App Runner service. Certificates tracking domain validity are associated with a custom domain and are stored in AWS Certificate Manager (ACM). These certificates aren't deleted as part of this action. App Runner delays certificate deletion for 30 days after a domain is disassociated from your service.
    */
@@ -204,6 +228,14 @@ declare class AppRunner extends Service {
    */
   listVpcConnectors(callback?: (err: AWSError, data: AppRunner.Types.ListVpcConnectorsResponse) => void): Request<AppRunner.Types.ListVpcConnectorsResponse, AWSError>;
   /**
+   * Return a list of App Runner VPC Ingress Connections in your Amazon Web Services account.
+   */
+  listVpcIngressConnections(params: AppRunner.Types.ListVpcIngressConnectionsRequest, callback?: (err: AWSError, data: AppRunner.Types.ListVpcIngressConnectionsResponse) => void): Request<AppRunner.Types.ListVpcIngressConnectionsResponse, AWSError>;
+  /**
+   * Return a list of App Runner VPC Ingress Connections in your Amazon Web Services account.
+   */
+  listVpcIngressConnections(callback?: (err: AWSError, data: AppRunner.Types.ListVpcIngressConnectionsResponse) => void): Request<AppRunner.Types.ListVpcIngressConnectionsResponse, AWSError>;
+  /**
    * Pause an active App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is removed). This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   pauseService(params: AppRunner.Types.PauseServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.PauseServiceResponse) => void): Request<AppRunner.Types.PauseServiceResponse, AWSError>;
@@ -251,6 +283,14 @@ declare class AppRunner extends Service {
    * Update an App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service. These can be set only when you create the service. To update the tags applied to your service, use the separate actions TagResource and UntagResource. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   updateService(callback?: (err: AWSError, data: AppRunner.Types.UpdateServiceResponse) => void): Request<AppRunner.Types.UpdateServiceResponse, AWSError>;
+  /**
+   * Update an existing App Runner VPC Ingress Connection resource. The VPC Ingress Connection must be in one of the following states to be updated:    AVAILABLE     FAILED_CREATION     FAILED_UPDATE   
+   */
+  updateVpcIngressConnection(params: AppRunner.Types.UpdateVpcIngressConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.UpdateVpcIngressConnectionResponse) => void): Request<AppRunner.Types.UpdateVpcIngressConnectionResponse, AWSError>;
+  /**
+   * Update an existing App Runner VPC Ingress Connection resource. The VPC Ingress Connection must be in one of the following states to be updated:    AVAILABLE     FAILED_CREATION     FAILED_UPDATE   
+   */
+  updateVpcIngressConnection(callback?: (err: AWSError, data: AppRunner.Types.UpdateVpcIngressConnectionResponse) => void): Request<AppRunner.Types.UpdateVpcIngressConnectionResponse, AWSError>;
 }
 declare namespace AppRunner {
   export type ASConfigMaxConcurrency = number;
@@ -284,6 +324,10 @@ declare namespace AppRunner {
      * A description of the domain name that's being associated.
      */
     CustomDomain: CustomDomain;
+    /**
+     * DNS Target records for the custom domains of this Amazon VPC. 
+     */
+    VpcDNSTargets: VpcDNSTargetList;
   }
   export interface AuthenticationConfiguration {
     /**
@@ -611,6 +655,30 @@ declare namespace AppRunner {
      */
     VpcConnector: VpcConnector;
   }
+  export interface CreateVpcIngressConnectionRequest {
+    /**
+     * The Amazon Resource Name (ARN) for this App Runner service that is used to create the VPC Ingress Connection resource.
+     */
+    ServiceArn: AppRunnerResourceArn;
+    /**
+     * A name for the VPC Ingress Connection resource. It must be unique across all the active VPC Ingress Connections in your Amazon Web Services account in the Amazon Web Services Region. 
+     */
+    VpcIngressConnectionName: VpcIngressConnectionName;
+    /**
+     * Specifications for the customer’s Amazon VPC and the related Amazon Web Services PrivateLink VPC endpoint that are used to create the VPC Ingress Connection resource.
+     */
+    IngressVpcConfiguration: IngressVpcConfiguration;
+    /**
+     * An optional list of metadata items that you can associate with the VPC Ingress Connection resource. A tag is a key-value pair.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateVpcIngressConnectionResponse {
+    /**
+     * A description of the App Runner VPC Ingress Connection resource that's created by this request. 
+     */
+    VpcIngressConnection: VpcIngressConnection;
+  }
   export interface CustomDomain {
     /**
      * An associated custom domain endpoint. It can be a root domain (for example, example.com), a subdomain (for example, login.example.com or admin.login.example.com), or a wildcard (for example, *.example.com).
@@ -631,6 +699,7 @@ declare namespace AppRunner {
   }
   export type CustomDomainAssociationStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"DELETING"|"DELETE_FAILED"|"PENDING_CERTIFICATE_DNS_VALIDATION"|"BINDING_CERTIFICATE"|string;
   export type CustomDomainList = CustomDomain[];
+  export type CustomerAccountId = string;
   export interface DeleteAutoScalingConfigurationRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to delete. The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either .../name  or .../name/revision . If a revision isn't specified, the latest active revision is deleted.
@@ -695,6 +764,18 @@ declare namespace AppRunner {
      */
     VpcConnector: VpcConnector;
   }
+  export interface DeleteVpcIngressConnectionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want to delete.
+     */
+    VpcIngressConnectionArn: AppRunnerResourceArn;
+  }
+  export interface DeleteVpcIngressConnectionResponse {
+    /**
+     * A description of the App Runner VPC Ingress Connection that this request just deleted.
+     */
+    VpcIngressConnection: VpcIngressConnection;
+  }
   export interface DescribeAutoScalingConfigurationRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for. The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either .../name  or .../name/revision . If a revision isn't specified, the latest active revision is described.
@@ -736,6 +817,10 @@ declare namespace AppRunner {
      */
     CustomDomains: CustomDomainList;
     /**
+     * DNS Target records for the custom domains of this Amazon VPC. 
+     */
+    VpcDNSTargets: VpcDNSTargetList;
+    /**
      * The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
      */
     NextToken?: String;
@@ -776,6 +861,18 @@ declare namespace AppRunner {
      */
     VpcConnector: VpcConnector;
   }
+  export interface DescribeVpcIngressConnectionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want a description for.
+     */
+    VpcIngressConnectionArn: AppRunnerResourceArn;
+  }
+  export interface DescribeVpcIngressConnectionResponse {
+    /**
+     * A description of the App Runner VPC Ingress Connection that you specified in this request.
+     */
+    VpcIngressConnection: VpcIngressConnection;
+  }
   export interface DisassociateCustomDomainRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.
@@ -799,6 +896,10 @@ declare namespace AppRunner {
      * A description of the domain name that's being disassociated.
      */
     CustomDomain: CustomDomain;
+    /**
+     * DNS Target records for the custom domains of this Amazon VPC. 
+     */
+    VpcDNSTargets: VpcDNSTargetList;
   }
   export type DomainName = string;
   export interface EgressConfiguration {
@@ -880,6 +981,22 @@ declare namespace AppRunner {
     ImageRepositoryType: ImageRepositoryType;
   }
   export type ImageRepositoryType = "ECR"|"ECR_PUBLIC"|string;
+  export interface IngressConfiguration {
+    /**
+     * Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False. 
+     */
+    IsPubliclyAccessible?: Boolean;
+  }
+  export interface IngressVpcConfiguration {
+    /**
+     * The ID of the VPC that is used for the VPC endpoint.
+     */
+    VpcId?: String;
+    /**
+     * The ID of the VPC endpoint that your App Runner service connects to. 
+     */
+    VpcEndpointId?: String;
+  }
   export interface InstanceConfiguration {
     /**
      * The number of CPU units reserved for each instance of your App Runner service. Default: 1 vCPU 
@@ -1053,6 +1170,40 @@ declare namespace AppRunner {
      */
     NextToken?: NextToken;
   }
+  export interface ListVpcIngressConnectionsFilter {
+    /**
+     * The Amazon Resource Name (ARN) of a service to filter by. 
+     */
+    ServiceArn?: AppRunnerResourceArn;
+    /**
+     * The ID of a VPC Endpoint to filter by. 
+     */
+    VpcEndpointId?: String;
+  }
+  export interface ListVpcIngressConnectionsRequest {
+    /**
+     * The VPC Ingress Connections to be listed based on either the Service Arn or Vpc Endpoint Id, or both.
+     */
+    Filter?: ListVpcIngressConnectionsFilter;
+    /**
+     * The maximum number of results to include in each response (result page). It's used for a paginated request. If you don't specify MaxResults, the request retrieves all available results in a single response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones that are specified in the initial request. If you don't specify NextToken, the request retrieves the first result page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListVpcIngressConnectionsResponse {
+    /**
+     * A list of summary information records for VPC Ingress Connections. In a paginated request, the request returns up to MaxResults records for each call.
+     */
+    VpcIngressConnectionSummaryList: VpcIngressConnectionSummaryList;
+    /**
+     * The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+     */
+    NextToken?: NextToken;
+  }
   export type MaxResults = number;
   export type Memory = string;
   export interface NetworkConfiguration {
@@ -1060,6 +1211,10 @@ declare namespace AppRunner {
      * Network configuration settings for outbound message traffic.
      */
     EgressConfiguration?: EgressConfiguration;
+    /**
+     * Network configuration settings for inbound message traffic.
+     */
+    IngressConfiguration?: IngressConfiguration;
   }
   export type NextToken = string;
   export type NullableBoolean = boolean;
@@ -1201,7 +1356,7 @@ declare namespace AppRunner {
     /**
      * A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.
      */
-    ServiceUrl: String;
+    ServiceUrl?: String;
     /**
      * The time when the App Runner service was created. It's in the Unix time stamp format.
      */
@@ -1423,6 +1578,22 @@ declare namespace AppRunner {
      */
     OperationId: UUID;
   }
+  export interface UpdateVpcIngressConnectionRequest {
+    /**
+     * The Amazon Resource Name (Arn) for the App Runner VPC Ingress Connection resource that you want to update.
+     */
+    VpcIngressConnectionArn: AppRunnerResourceArn;
+    /**
+     * Specifications for the customer’s Amazon VPC and the related Amazon Web Services PrivateLink VPC endpoint that are used to update the VPC Ingress Connection resource.
+     */
+    IngressVpcConfiguration: IngressVpcConfiguration;
+  }
+  export interface UpdateVpcIngressConnectionResponse {
+    /**
+     * A description of the App Runner VPC Ingress Connection resource that's updated by this request.
+     */
+    VpcIngressConnection: VpcIngressConnection;
+  }
   export interface VpcConnector {
     /**
      * The customer-provided VPC connector name.
@@ -1460,6 +1631,72 @@ declare namespace AppRunner {
   export type VpcConnectorName = string;
   export type VpcConnectorStatus = "ACTIVE"|"INACTIVE"|string;
   export type VpcConnectors = VpcConnector[];
+  export interface VpcDNSTarget {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC Ingress Connection that is associated with your service.
+     */
+    VpcIngressConnectionArn?: AppRunnerResourceArn;
+    /**
+     * The ID of the Amazon VPC that is associated with the custom domain name of the target DNS.
+     */
+    VpcId?: String;
+    /**
+     * The domain name of your target DNS that is associated with the Amazon VPC.
+     */
+    DomainName?: DomainName;
+  }
+  export type VpcDNSTargetList = VpcDNSTarget[];
+  export interface VpcIngressConnection {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC Ingress Connection. 
+     */
+    VpcIngressConnectionArn?: AppRunnerResourceArn;
+    /**
+     * The customer-provided VPC Ingress Connection name.
+     */
+    VpcIngressConnectionName?: VpcIngressConnectionName;
+    /**
+     * The Amazon Resource Name (ARN) of the service associated with the VPC Ingress Connection. 
+     */
+    ServiceArn?: AppRunnerResourceArn;
+    /**
+     * The current status of the VPC Ingress Connection. The VPC Ingress Connection displays one of the following statuses: AVAILABLE, PENDING_CREATION, PENDING_UPDATE, PENDING_DELETION,FAILED_CREATION, FAILED_UPDATE, FAILED_DELETION, and DELETED.. 
+     */
+    Status?: VpcIngressConnectionStatus;
+    /**
+     * The Account Id you use to create the VPC Ingress Connection resource.
+     */
+    AccountId?: CustomerAccountId;
+    /**
+     * The domain name associated with the VPC Ingress Connection resource.
+     */
+    DomainName?: DomainName;
+    /**
+     * Specifications for the customer’s VPC and related PrivateLink VPC endpoint that are used to associate with the VPC Ingress Connection resource.
+     */
+    IngressVpcConfiguration?: IngressVpcConfiguration;
+    /**
+     * The time when the VPC Ingress Connection was created. It's in the Unix time stamp format.    Type: Timestamp     Required: Yes   
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The time when the App Runner service was deleted. It's in the Unix time stamp format.    Type: Timestamp     Required: No   
+     */
+    DeletedAt?: Timestamp;
+  }
+  export type VpcIngressConnectionName = string;
+  export type VpcIngressConnectionStatus = "AVAILABLE"|"PENDING_CREATION"|"PENDING_UPDATE"|"PENDING_DELETION"|"FAILED_CREATION"|"FAILED_UPDATE"|"FAILED_DELETION"|"DELETED"|string;
+  export interface VpcIngressConnectionSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC Ingress Connection. 
+     */
+    VpcIngressConnectionArn?: AppRunnerResourceArn;
+    /**
+     * The Amazon Resource Name (ARN) of the service associated with the VPC Ingress Connection. 
+     */
+    ServiceArn?: AppRunnerResourceArn;
+  }
+  export type VpcIngressConnectionSummaryList = VpcIngressConnectionSummary[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
