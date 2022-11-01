@@ -1805,7 +1805,7 @@ declare namespace RDS {
      */
     StorageType?: String;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. This setting is required to create a Multi-AZ DB cluster. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB cluster. Valid for: Multi-AZ DB clusters only
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid IOPS values, see Amazon RDS Provisioned IOPS storage in the Amazon RDS User Guide. This setting is required to create a Multi-AZ DB cluster. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB cluster. Valid for: Multi-AZ DB clusters only
      */
     Iops?: IntegerOptional;
     /**
@@ -1897,7 +1897,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The amount of storage in gibibytes (GiB) to allocate for the DB instance. Type: Integer  Amazon Aurora  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  Amazon RDS Custom  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.   Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.    MySQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    MariaDB  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    PostgreSQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    Oracle  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 10 to 3072.    SQL Server  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2):   Enterprise and Standard editions: Must be an integer from 20 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 100 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 20 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.    
+     * The amount of storage in gibibytes (GiB) to allocate for the DB instance. Type: Integer  Amazon Aurora  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  Amazon RDS Custom  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.   Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.    MySQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    MariaDB  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    PostgreSQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    Oracle  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 10 to 3072.    SQL Server  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3):   Enterprise and Standard editions: Must be an integer from 20 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 100 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 20 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.    
      */
     AllocatedStorage?: IntegerOptional;
     /**
@@ -1969,7 +1969,7 @@ declare namespace RDS {
      */
     LicenseModel?: String;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances, must be a multiple between .5 and 50 of the storage amount for the DB instance. For SQL Server DB instances, must be a multiple between 1 and 50 of the storage amount for the DB instance.  Amazon Aurora  Not applicable. Storage is managed by the DB cluster.
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. For information about valid IOPS values, see Amazon RDS DB instance storage in the Amazon RDS User Guide. Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances, must be a multiple between .5 and 50 of the storage amount for the DB instance. For SQL Server DB instances, must be a multiple between 1 and 50 of the storage amount for the DB instance.  Amazon Aurora  Not applicable. Storage is managed by the DB cluster.
      */
     Iops?: IntegerOptional;
     /**
@@ -1997,7 +1997,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier?: String;
     /**
-     * Specifies the storage type to be associated with the DB instance. Valid values: standard | gp2 | io1  If you specify io1, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2   Amazon Aurora  Not applicable. Storage is managed by the DB cluster.
+     * Specifies the storage type to be associated with the DB instance. Valid values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2   Amazon Aurora  Not applicable. Storage is managed by the DB cluster.
      */
     StorageType?: String;
     /**
@@ -2092,6 +2092,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     NetworkType?: String;
+    /**
+     * Specifies the storage throughput value for the DB instance. This setting doesn't apply to RDS Custom or Amazon Aurora.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -2148,7 +2152,7 @@ declare namespace RDS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * Specifies the storage type to be associated with the read replica. Valid values: standard | gp2 | io1  If you specify io1, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
+     * Specifies the storage type to be associated with the read replica. Valid values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -2227,6 +2231,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for read replica. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     NetworkType?: String;
+    /**
+     * Specifies the storage throughput value for the read replica. This setting doesn't apply to RDS Custom or Amazon Aurora.
+     */
+    StorageThroughput?: IntegerOptional;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -3338,7 +3346,7 @@ declare namespace RDS {
      */
     StatusInfos?: DBInstanceStatusInfoList;
     /**
-     * Specifies the storage type associated with DB instance.
+     * Specifies the storage type associated with the DB instance.
      */
     StorageType?: String;
     /**
@@ -3498,6 +3506,10 @@ declare namespace RDS {
      * The status of the policy state of the activity stream.
      */
     ActivityStreamPolicyStatus?: ActivityStreamPolicyStatus;
+    /**
+     * Specifies the storage throughput for the DB instance.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -3537,7 +3549,7 @@ declare namespace RDS {
      */
     AvailabilityZone?: String;
     /**
-     * Provides the VPC ID associated with the DB instance
+     * Provides the VPC ID associated with the DB instance.
      */
     VpcId?: String;
     /**
@@ -3608,6 +3620,10 @@ declare namespace RDS {
      * Specifies where automated backups are stored: Amazon Web Services Outposts or the Amazon Web Services Region.
      */
     BackupTarget?: String;
+    /**
+     * Specifies the storage throughput for the automated backup.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export type DBInstanceAutomatedBackupList = DBInstanceAutomatedBackup[];
   export interface DBInstanceAutomatedBackupMessage {
@@ -4090,6 +4106,10 @@ declare namespace RDS {
      * Specifies where manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.
      */
     SnapshotTarget?: String;
+    /**
+     * Specifies the storage throughput for the DB snapshot.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface DBSnapshotAttribute {
     /**
@@ -4490,7 +4510,7 @@ declare namespace RDS {
   }
   export interface DescribeDBClustersMessage {
     /**
-     * The user-supplied DB cluster identifier. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match an existing DBClusterIdentifier.  
+     * The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the DB cluster. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match an existing DBClusterIdentifier.  
      */
     DBClusterIdentifier?: String;
     /**
@@ -4580,7 +4600,7 @@ declare namespace RDS {
   }
   export interface DescribeDBInstancesMessage {
     /**
-     * The user-supplied instance identifier. If this parameter is specified, information from only the specific DB instance is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match the identifier of an existing DBInstance.  
+     * The user-supplied instance identifier or the Amazon Resource Name (ARN) of the DB instance. If this parameter is specified, information from only the specific DB instance is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match the identifier of an existing DBInstance.  
      */
     DBInstanceIdentifier?: String;
     /**
@@ -5950,7 +5970,7 @@ declare namespace RDS {
      */
     StorageType?: String;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS Storage to Improve Performance in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB cluster. Valid for: Multi-AZ DB clusters only
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid IOPS values, see Amazon RDS Provisioned IOPS storage in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB cluster. Valid for: Multi-AZ DB clusters only
      */
     Iops?: IntegerOptional;
     /**
@@ -6099,7 +6119,7 @@ declare namespace RDS {
      */
     NewDBInstanceIdentifier?: String;
     /**
-     * Specifies the storage type to be associated with the DB instance. If you specify Provisioned IOPS (io1), you must also include a value for the Iops parameter. If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. Valid values: standard | gp2 | io1  Default: io1 if the Iops parameter is specified, otherwise gp2 
+     * Specifies the storage type to be associated with the DB instance. If you specify Provisioned IOPS (io1), you must also include a value for the Iops parameter. If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon RDS operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a read replica for the instance, and creating a DB snapshot of the instance. Valid values: gp2 | gp3 | io1 | standard  Default: io1 if the Iops parameter is specified, otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -6210,6 +6230,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     NetworkType?: String;
+    /**
+     * Specifies the storage throughput value for the DB instance. This setting doesn't apply to RDS Custom or Amazon Aurora.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -6840,6 +6864,26 @@ declare namespace RDS {
      * The network types supported by the DB instance (IPV4 or DUAL). A DB instance can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     SupportedNetworkTypes?: StringList;
+    /**
+     * Indicates whether a DB instance supports storage throughput.
+     */
+    SupportsStorageThroughput?: Boolean;
+    /**
+     * Minimum storage throughput for a DB instance.
+     */
+    MinStorageThroughputPerDbInstance?: IntegerOptional;
+    /**
+     * Maximum storage throughput for a DB instance.
+     */
+    MaxStorageThroughputPerDbInstance?: IntegerOptional;
+    /**
+     * Minimum storage throughput to provisioned IOPS ratio for a DB instance.
+     */
+    MinStorageThroughputPerIops?: DoubleOptional;
+    /**
+     * Maximum storage throughput to provisioned IOPS ratio for a DB instance.
+     */
+    MaxStorageThroughputPerIops?: DoubleOptional;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -7023,6 +7067,10 @@ declare namespace RDS {
      * The number of minutes to pause the automation. When the time period ends, RDS Custom resumes full automation. The minimum value is 60 (default). The maximum value is 1,440.
      */
     ResumeFullAutomationModeTime?: TStamp;
+    /**
+     * The storage throughput of the DB instance.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface ProcessorFeature {
     /**
@@ -7617,7 +7665,7 @@ declare namespace RDS {
      */
     StorageType?: String;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS Storage to Improve Performance in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB instance. Valid for: Aurora DB clusters and Multi-AZ DB clusters
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid IOPS values, see Amazon RDS Provisioned IOPS storage in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB instance. Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
     Iops?: IntegerOptional;
     /**
@@ -7728,7 +7776,7 @@ declare namespace RDS {
      */
     PubliclyAccessible?: BooleanOptional;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB instance. Valid for: Multi-AZ DB clusters only
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid IOPS values, see Amazon RDS Provisioned IOPS storage in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB instance. Valid for: Multi-AZ DB clusters only
      */
     Iops?: IntegerOptional;
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
@@ -7790,7 +7838,7 @@ declare namespace RDS {
      */
     Engine?: String;
     /**
-     * Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O operations per second. If this parameter isn't specified, the IOPS value is taken from the backup. If this parameter is set to 0, the new instance is converted to a non-PIOPS instance. The conversion takes additional time, though your DB instance is available for connections before the conversion starts. The provisioned IOPS value must follow the requirements for your database engine. For more information, see Amazon RDS Provisioned IOPS Storage to Improve Performance in the Amazon RDS User Guide.  Constraints: Must be an integer greater than 1000.
+     * Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O operations per second. If this parameter isn't specified, the IOPS value is taken from the backup. If this parameter is set to 0, the new instance is converted to a non-PIOPS instance. The conversion takes additional time, though your DB instance is available for connections before the conversion starts. The provisioned IOPS value must follow the requirements for your database engine. For more information, see Amazon RDS Provisioned IOPS storage in the Amazon RDS User Guide.  Constraints: Must be an integer greater than 1000.
      */
     Iops?: IntegerOptional;
     /**
@@ -7799,7 +7847,7 @@ declare namespace RDS {
     OptionGroupName?: String;
     Tags?: TagList;
     /**
-     * Specifies the storage type to be associated with the DB instance. Valid values: standard | gp2 | io1  If you specify io1, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
+     * Specifies the storage type to be associated with the DB instance. Valid values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -7866,6 +7914,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     NetworkType?: String;
+    /**
+     * Specifies the storage throughput value for the DB instance. This setting doesn't apply to RDS Custom or Amazon Aurora.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -7952,7 +8004,7 @@ declare namespace RDS {
      */
     LicenseModel?: String;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB instance. For information about valid Iops values, see Amazon RDS Provisioned IOPS Storage to Improve Performance in the Amazon RDS User Guide. 
+     * The amount of Provisioned IOPS (input/output operations per second) to allocate initially for the DB instance. For information about valid IOPS values, see Amazon RDS Provisioned IOPS storage in the Amazon RDS User Guide. 
      */
     Iops?: IntegerOptional;
     /**
@@ -7968,7 +8020,7 @@ declare namespace RDS {
      */
     Tags?: TagList;
     /**
-     * Specifies the storage type to be associated with the DB instance. Valid values: standard | gp2 | io1  If you specify io1, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified; otherwise gp2 
+     * Specifies the storage type to be associated with the DB instance. Valid values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified; otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -8051,6 +8103,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     NetworkType?: String;
+    /**
+     * Specifies the storage throughput value for the DB instance. This setting doesn't apply to RDS Custom or Amazon Aurora.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -8126,7 +8182,7 @@ declare namespace RDS {
     CopyTagsToSnapshot?: BooleanOptional;
     Tags?: TagList;
     /**
-     * Specifies the storage type to be associated with the DB instance. Valid values: standard | gp2 | io1  If you specify io1, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
+     * Specifies the storage type to be associated with the DB instance. Valid values: gp2 | gp3 | io1 | standard  If you specify io1 or gp3, you must also include a value for the Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2 
      */
     StorageType?: String;
     /**
@@ -8201,6 +8257,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon RDS User Guide. 
      */
     NetworkType?: String;
+    /**
+     * Specifies the storage throughput value for the DB instance. This setting doesn't apply to RDS Custom or Amazon Aurora.
+     */
+    StorageThroughput?: IntegerOptional;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;
@@ -8686,15 +8746,15 @@ declare namespace RDS {
   }
   export interface ValidStorageOptions {
     /**
-     * The valid storage types for your DB instance. For example, gp2, io1.
+     * The valid storage types for your DB instance. For example: gp2, gp3, io1.
      */
     StorageType?: String;
     /**
-     * The valid range of storage in gibibytes (GiB). For example, 100 to 16384.
+     * The valid range of storage in gibibytes (GiB). For example, 100 to 16,384.
      */
     StorageSize?: RangeList;
     /**
-     * The valid range of provisioned IOPS. For example, 1000-20000.
+     * The valid range of provisioned IOPS. For example, 1000-256,000.
      */
     ProvisionedIops?: RangeList;
     /**
@@ -8705,6 +8765,14 @@ declare namespace RDS {
      * Whether or not Amazon RDS can automatically scale storage for DB instances that use the new instance class.
      */
     SupportsStorageAutoscaling?: Boolean;
+    /**
+     * The valid range of provisioned storage throughput. For example, 500-4,000 mebibytes per second (MiBps).
+     */
+    ProvisionedStorageThroughput?: RangeList;
+    /**
+     * The valid range of storage throughput to provisioned IOPS ratios. For example, 0-0.25.
+     */
+    StorageThroughputToIopsRatio?: DoubleRangeList;
   }
   export type ValidStorageOptionsList = ValidStorageOptions[];
   export type ValidUpgradeTargetList = UpgradeTarget[];

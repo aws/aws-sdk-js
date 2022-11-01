@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1244.0-->
+<!--LATEST=2.1245.0-->
 <!--ENTRYINSERT-->
+
+## 2.1245.0
+* feature: RDS: Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.
+* feature: Textract: Add ocr results in AnalyzeIDResponse as blocks
 
 ## 2.1244.0
 * feature: AppRunner: This release adds support for private App Runner services. Services may now be configured to be made private and only accessible from a VPC. The changes include a new VpcIngressConnection resource and several new and modified APIs.

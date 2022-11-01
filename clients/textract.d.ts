@@ -303,7 +303,7 @@ declare namespace Textract {
   export type ErrorCode = string;
   export interface ExpenseCurrency {
     /**
-     * Currency code for detected currency.
+     * Currency code for detected currency. the current supported codes are:   USD   EUR   GBP   CAD   INR   JPY   CHF   AUD   CNY   BZR   SEK   HKD  
      */
     Code?: String;
     /**
@@ -370,7 +370,7 @@ declare namespace Textract {
   export type ExpenseFieldList = ExpenseField[];
   export interface ExpenseGroupProperty {
     /**
-     * Informs you on the kind of label associated with the group
+     * Informs you on whether the expense group is a name or an address.
      */
     Types?: StringList;
     /**
@@ -584,6 +584,10 @@ declare namespace Textract {
      * The structure used to record information extracted from identity documents. Contains both normalized field and value of the extracted text.
      */
     IdentityDocumentFields?: IdentityDocumentFieldList;
+    /**
+     * Individual word recognition, as returned by document detection.
+     */
+    Blocks?: BlockList;
   }
   export interface IdentityDocumentField {
     Type?: AnalyzeIDDetections;
