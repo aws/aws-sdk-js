@@ -23375,7 +23375,7 @@
           "documentation": "<p>The machine learning framework of the model package container image.</p>"
         },
         "FrameworkVersion": {
-          "shape": "FrameworkVersion",
+          "shape": "ModelPackageFrameworkVersion",
           "documentation": "<p>The framework version of the Model Package Container Image.</p>"
         },
         "NearestModelName": {
@@ -23392,6 +23392,12 @@
       },
       "max": 15,
       "min": 1
+    },
+    "ModelPackageFrameworkVersion": {
+      "type": "string",
+      "max": 10,
+      "min": 3,
+      "pattern": "[0-9]\\.[A-Za-z0-9.-]+"
     },
     "ModelPackageGroup": {
       "type": "structure",

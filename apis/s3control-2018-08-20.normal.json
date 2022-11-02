@@ -3908,7 +3908,7 @@
         },
         "NoncurrentVersionExpiration": {
           "shape": "NoncurrentVersionExpiration",
-          "documentation": "<p>The noncurrent version expiration of the lifecycle rule.</p> <note> <p>This is not supported by Amazon S3 on Outposts buckets.</p> </note>"
+          "documentation": "<p>The noncurrent version expiration of the lifecycle rule.</p>"
         },
         "AbortIncompleteMultipartUpload": {
           "shape": "AbortIncompleteMultipartUpload",
@@ -3927,6 +3927,16 @@
         "Tags": {
           "shape": "S3TagSet",
           "documentation": "<p>All of these tags must exist in the object's tag set in order for the rule to apply.</p>"
+        },
+        "ObjectSizeGreaterThan": {
+          "shape": "ObjectSizeGreaterThanBytes",
+          "documentation": "<p>Minimum object size to which the rule applies.</p>",
+          "box": true
+        },
+        "ObjectSizeLessThan": {
+          "shape": "ObjectSizeLessThanBytes",
+          "documentation": "<p>Maximum object size to which the rule applies.</p>",
+          "box": true
         }
       },
       "documentation": "<p>The container for the Outposts bucket lifecycle rule and operator.</p>"
@@ -3944,6 +3954,16 @@
         "And": {
           "shape": "LifecycleRuleAndOperator",
           "documentation": "<p>The container for the <code>AND</code> condition for the lifecycle rule.</p>"
+        },
+        "ObjectSizeGreaterThan": {
+          "shape": "ObjectSizeGreaterThanBytes",
+          "documentation": "<p>Minimum object size to which the rule applies.</p>",
+          "box": true
+        },
+        "ObjectSizeLessThan": {
+          "shape": "ObjectSizeLessThanBytes",
+          "documentation": "<p>Maximum object size to which the rule applies.</p>",
+          "box": true
         }
       },
       "documentation": "<p>The container for the filter of the lifecycle rule.</p>"
@@ -4432,12 +4452,20 @@
       "max": 64,
       "min": 1
     },
+    "NoncurrentVersionCount": {
+      "type": "integer"
+    },
     "NoncurrentVersionExpiration": {
       "type": "structure",
       "members": {
         "NoncurrentDays": {
           "shape": "Days",
           "documentation": "<p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        },
+        "NewerNoncurrentVersions": {
+          "shape": "NoncurrentVersionCount",
+          "documentation": "<p>Specifies how many noncurrent versions S3 on Outposts will retain. If there are this many more recent noncurrent versions, S3 on Outposts will take the associated action. For more information about noncurrent versions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html\">Lifecycle configuration elements</a> in the <i>Amazon S3 User Guide</i>.</p>",
+          "box": true
         }
       },
       "documentation": "<p>The container of the noncurrent version expiration.</p>"
@@ -4535,7 +4563,7 @@
         },
         "AllowedFeatures": {
           "shape": "ObjectLambdaAllowedFeaturesList",
-          "documentation": "<p>A container for allowed features. Valid inputs are <code>GetObject-Range</code> and <code>GetObject-PartNumber</code>.</p>"
+          "documentation": "<p>A container for allowed features. Valid inputs are <code>GetObject-Range</code>, <code>GetObject-PartNumber</code>, <code>HeadObject-Range</code>, and <code>HeadObject-PartNumber</code>.</p>"
         },
         "TransformationConfigurations": {
           "shape": "ObjectLambdaTransformationConfigurationsList",
@@ -4573,7 +4601,7 @@
       "members": {
         "Actions": {
           "shape": "ObjectLambdaTransformationConfigurationActionsList",
-          "documentation": "<p>A container for the action of an Object Lambda Access Point configuration. Valid input is <code>GetObject</code>.</p>"
+          "documentation": "<p>A container for the action of an Object Lambda Access Point configuration. Valid inputs are <code>GetObject</code>, <code>ListObjects</code>, <code>HeadObject</code>, and <code>ListObjectsV2</code>.</p>"
         },
         "ContentTransformation": {
           "shape": "ObjectLambdaContentTransformation",
@@ -4607,6 +4635,12 @@
     },
     "ObjectLockEnabledForBucket": {
       "type": "boolean"
+    },
+    "ObjectSizeGreaterThanBytes": {
+      "type": "long"
+    },
+    "ObjectSizeLessThanBytes": {
+      "type": "long"
     },
     "OperationName": {
       "type": "string",

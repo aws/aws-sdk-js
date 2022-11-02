@@ -165,11 +165,11 @@ declare class SSMIncidents extends Service {
    */
   listTimelineEvents(callback?: (err: AWSError, data: SSMIncidents.Types.ListTimelineEventsOutput) => void): Request<SSMIncidents.Types.ListTimelineEventsOutput, AWSError>;
   /**
-   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
+   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Cross-Region and cross-account incident management.
    */
   putResourcePolicy(params: SSMIncidents.Types.PutResourcePolicyInput, callback?: (err: AWSError, data: SSMIncidents.Types.PutResourcePolicyOutput) => void): Request<SSMIncidents.Types.PutResourcePolicyOutput, AWSError>;
   /**
-   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Setting up cross-account functionality.
+   * Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see Cross-Region and cross-account incident management.
    */
   putResourcePolicy(callback?: (err: AWSError, data: SSMIncidents.Types.PutResourcePolicyOutput) => void): Request<SSMIncidents.Types.PutResourcePolicyOutput, AWSError>;
   /**
@@ -326,13 +326,17 @@ declare namespace SSMIncidents {
   }
   export interface CreateReplicationSetInput {
     /**
-     * A token ensuring that the operation is called only once with the specified details.
+     * A token that ensures that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
      * The Regions that Incident Manager replicates your data to. You can have up to three Regions in your replication set.
      */
     regions: RegionMapInput;
+    /**
+     * A list of tags to add to the replication set.
+     */
+    tags?: TagMap;
   }
   export interface CreateReplicationSetOutput {
     /**
@@ -358,7 +362,7 @@ declare namespace SSMIncidents {
      */
     displayName?: ResponsePlanDisplayName;
     /**
-     * The contacts and escalation plans that the response plan engages during an incident.
+     * The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
      */
     engagements?: EngagementSet;
     /**
@@ -540,7 +544,7 @@ declare namespace SSMIncidents {
   }
   export interface GetResourcePoliciesInput {
     /**
-     * The maximum number of resource policies to display per page of results.
+     * The maximum number of resource policies to display for each page of results.
      */
     maxResults?: MaxResults;
     /**
@@ -586,7 +590,7 @@ declare namespace SSMIncidents {
      */
     displayName?: ResponsePlanDisplayName;
     /**
-     * The contacts and escalation plans that the response plan engages during an incident.
+     * The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
      */
     engagements?: EngagementSet;
     /**
@@ -735,7 +739,7 @@ declare namespace SSMIncidents {
      */
     impact: Impact;
     /**
-     * Tags to apply to an incident when calling the StartIncident API action.
+     * Tags to assign to the template. When the StartIncident API action is called, Incident Manager assigns the tags specified in the template to the incident.
      */
     incidentTags?: TagMap;
     /**
@@ -933,7 +937,7 @@ declare namespace SSMIncidents {
      */
     policy: Policy;
     /**
-     * The Amazon Resource Name (ARN) of the response plan you're adding the resource policy to.
+     * The Amazon Resource Name (ARN) of the response plan to add the resource policy to.
      */
     resourceArn: Arn;
   }
@@ -1146,7 +1150,7 @@ declare namespace SSMIncidents {
      */
     resourceArn: String;
     /**
-     * A list of tags that you are adding to the response plan.
+     * A list of tags to add to the response plan.
      */
     tags: TagMap;
   }
@@ -1207,7 +1211,7 @@ declare namespace SSMIncidents {
      */
     resourceArn: String;
     /**
-     * The name of the tag you're removing from the response plan.
+     * The name of the tag to remove from the response plan.
      */
     tagKeys: TagKeyList;
   }
@@ -1215,15 +1219,15 @@ declare namespace SSMIncidents {
   }
   export interface UpdateDeletionProtectionInput {
     /**
-     * The Amazon Resource Name (ARN) of the replication set you're updating.
+     * The Amazon Resource Name (ARN) of the replication set to update.
      */
     arn: Arn;
     /**
-     * A token ensuring that the operation is called only once with the specified details.
+     * A token that ensures that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
-     * Details if deletion protection is enabled or disabled in your account.
+     * Specifies if deletion protection is turned on or off in your account. 
      */
     deletionProtected: Boolean;
   }
@@ -1301,7 +1305,7 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * A token ensuring that the operation is called only once with the specified details.
+     * A token that ensures that the operation is called only once with the specified details.
      */
     clientToken?: ClientToken;
   }
@@ -1330,7 +1334,7 @@ declare namespace SSMIncidents {
      */
     displayName?: ResponsePlanDisplayName;
     /**
-     * The contacts and escalation plans that Incident Manager engages at the start of the incident.
+     * The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
      */
     engagements?: EngagementSet;
     /**
@@ -1350,7 +1354,7 @@ declare namespace SSMIncidents {
      */
     incidentTemplateSummary?: IncidentSummary;
     /**
-     * Tags to apply to an incident when calling the StartIncident API action. To call this action, you must also have permission to call the TagResource API action for the incident record resource.
+     * Tags to assign to the template. When the StartIncident API action is called, Incident Manager assigns the tags specified in the template to the incident. To call this action, you must also have permission to call the TagResource API action for the incident record resource.
      */
     incidentTemplateTags?: TagMapUpdate;
     /**

@@ -14322,13 +14322,14 @@ declare namespace SageMaker {
     /**
      * The framework version of the Model Package Container Image.
      */
-    FrameworkVersion?: FrameworkVersion;
+    FrameworkVersion?: ModelPackageFrameworkVersion;
     /**
      * The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model. You can find a list of benchmarked models by calling ListModelMetadata.
      */
     NearestModelName?: String;
   }
   export type ModelPackageContainerDefinitionList = ModelPackageContainerDefinition[];
+  export type ModelPackageFrameworkVersion = string;
   export interface ModelPackageGroup {
     /**
      * The name of the model group.

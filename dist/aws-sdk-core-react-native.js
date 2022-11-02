@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1245.0',
+	  VERSION: '2.1246.0',
 
 	  /**
 	   * @api private
@@ -9936,6 +9936,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var forEach = __webpack_require__(66);
 	var availableTypedArrays = __webpack_require__(68);
 	var callBound = __webpack_require__(57);
+	var gOPD = __webpack_require__(69);
 
 	var $toString = callBound('Object.prototype.toString');
 	var hasToStringTag = __webpack_require__(55)();
@@ -9945,7 +9946,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var $slice = callBound('String.prototype.slice');
 	var toStrTags = {};
-	var gOPD = __webpack_require__(69);
 	var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
 	if (hasToStringTag && gOPD && getPrototypeOf) {
 		forEach(typedArrays, function (typedArray) {
@@ -10207,6 +10207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var GetIntrinsic = __webpack_require__(58);
 
 	var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%', true);
+
 	if ($gOPD) {
 		try {
 			$gOPD([], 'length');
@@ -10231,6 +10232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var $toString = callBound('Object.prototype.toString');
 	var hasToStringTag = __webpack_require__(55)();
+	var gOPD = __webpack_require__(69);
 
 	var g = typeof globalThis === 'undefined' ? global : globalThis;
 	var typedArrays = availableTypedArrays();
@@ -10245,7 +10247,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	var $slice = callBound('String.prototype.slice');
 	var toStrTags = {};
-	var gOPD = __webpack_require__(69);
 	var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
 	if (hasToStringTag && gOPD && getPrototypeOf) {
 		forEach(typedArrays, function (typedArray) {

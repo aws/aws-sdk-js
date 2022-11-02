@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1245.0-->
+<!--LATEST=2.1246.0-->
 <!--ENTRYINSERT-->
+
+## 2.1246.0
+* feature: IoTSiteWise: This release adds the ListAssetModelProperties and ListAssetProperties APIs. You can list all properties that belong to a single asset model or asset using these two new APIs.
+* feature: S3Control: S3 on Outposts launches support for Lifecycle configuration for Outposts buckets. With S3 Lifecycle configuration, you can mange objects so they are stored cost effectively. You can manage objects using size-based rules and specify how many noncurrent versions bucket will retain.
+* feature: SSMIncidents: Adds support for tagging replication-set on creation.
+* feature: SageMaker: This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.
 
 ## 2.1245.0
 * feature: RDS: Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.

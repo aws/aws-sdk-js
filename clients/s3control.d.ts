@@ -1750,7 +1750,7 @@ declare namespace S3Control {
      */
     NoncurrentVersionTransitions?: NoncurrentVersionTransitionList;
     /**
-     * The noncurrent version expiration of the lifecycle rule.  This is not supported by Amazon S3 on Outposts buckets. 
+     * The noncurrent version expiration of the lifecycle rule.
      */
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
     /**
@@ -1767,6 +1767,14 @@ declare namespace S3Control {
      * All of these tags must exist in the object's tag set in order for the rule to apply.
      */
     Tags?: S3TagSet;
+    /**
+     * Minimum object size to which the rule applies.
+     */
+    ObjectSizeGreaterThan?: ObjectSizeGreaterThanBytes;
+    /**
+     * Maximum object size to which the rule applies.
+     */
+    ObjectSizeLessThan?: ObjectSizeLessThanBytes;
   }
   export interface LifecycleRuleFilter {
     /**
@@ -1778,6 +1786,14 @@ declare namespace S3Control {
      * The container for the AND condition for the lifecycle rule.
      */
     And?: LifecycleRuleAndOperator;
+    /**
+     * Minimum object size to which the rule applies.
+     */
+    ObjectSizeGreaterThan?: ObjectSizeGreaterThanBytes;
+    /**
+     * Maximum object size to which the rule applies.
+     */
+    ObjectSizeLessThan?: ObjectSizeLessThanBytes;
   }
   export type LifecycleRules = LifecycleRule[];
   export interface ListAccessPointsForObjectLambdaRequest {
@@ -2018,11 +2034,16 @@ declare namespace S3Control {
   export type NonEmptyMaxLength2048String = string;
   export type NonEmptyMaxLength256String = string;
   export type NonEmptyMaxLength64String = string;
+  export type NoncurrentVersionCount = number;
   export interface NoncurrentVersionExpiration {
     /**
      * Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see How Amazon S3 Calculates When an Object Became Noncurrent in the Amazon S3 User Guide.
      */
     NoncurrentDays?: Days;
+    /**
+     * Specifies how many noncurrent versions S3 on Outposts will retain. If there are this many more recent noncurrent versions, S3 on Outposts will take the associated action. For more information about noncurrent versions, see Lifecycle configuration elements in the Amazon S3 User Guide.
+     */
+    NewerNoncurrentVersions?: NoncurrentVersionCount;
   }
   export interface NoncurrentVersionTransition {
     /**
@@ -2061,7 +2082,7 @@ declare namespace S3Control {
      */
     CloudWatchMetricsEnabled?: Boolean;
     /**
-     * A container for allowed features. Valid inputs are GetObject-Range and GetObject-PartNumber.
+     * A container for allowed features. Valid inputs are GetObject-Range, GetObject-PartNumber, HeadObject-Range, and HeadObject-PartNumber.
      */
     AllowedFeatures?: ObjectLambdaAllowedFeaturesList;
     /**
@@ -2079,7 +2100,7 @@ declare namespace S3Control {
   export type ObjectLambdaSupportingAccessPointArn = string;
   export interface ObjectLambdaTransformationConfiguration {
     /**
-     * A container for the action of an Object Lambda Access Point configuration. Valid input is GetObject.
+     * A container for the action of an Object Lambda Access Point configuration. Valid inputs are GetObject, ListObjects, HeadObject, and ListObjectsV2.
      */
     Actions: ObjectLambdaTransformationConfigurationActionsList;
     /**
@@ -2091,6 +2112,8 @@ declare namespace S3Control {
   export type ObjectLambdaTransformationConfigurationActionsList = ObjectLambdaTransformationConfigurationAction[];
   export type ObjectLambdaTransformationConfigurationsList = ObjectLambdaTransformationConfiguration[];
   export type ObjectLockEnabledForBucket = boolean;
+  export type ObjectSizeGreaterThanBytes = number;
+  export type ObjectSizeLessThanBytes = number;
   export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject"|string;
   export type OutputSchemaVersion = "V_1"|string;
   export type Policy = string;
