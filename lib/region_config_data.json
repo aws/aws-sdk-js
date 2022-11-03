@@ -67,7 +67,8 @@
     "*/sdb": {
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "v2"
-    }
+    },
+    "*/resource-explorer-2": "dualstackByDefault"
   },
 
   "fipsRules": {
@@ -223,6 +224,9 @@
     },
     "dualstackLegacyEc2": {
       "endpoint": "api.ec2.{region}.aws"
+    },
+    "dualstackByDefault": {
+      "endpoint": "{service}.{region}.api.aws"
     }
   }
 }
