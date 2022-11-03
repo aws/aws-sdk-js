@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "New Service",
+  "description": "Dualstack support customization for a new service."
+}
