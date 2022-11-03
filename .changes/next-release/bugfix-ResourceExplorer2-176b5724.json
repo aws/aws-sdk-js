@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ResourceExplorer2",
+  "description": "Set endpoint to dualstack by default"
+}
