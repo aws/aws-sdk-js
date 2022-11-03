@@ -204,11 +204,11 @@ declare class MemoryDB extends Service {
    */
   describeUsers(callback?: (err: AWSError, data: MemoryDB.Types.DescribeUsersResponse) => void): Request<MemoryDB.Types.DescribeUsersResponse, AWSError>;
   /**
-   * Used to failover a shard
+   * Used to failover a shard. This API is designed for testing the behavior of your application in case of MemoryDB failover. It is not designed to be used as a production-level tool for initiating a failover to overcome a problem you may have with the cluster. Moreover, in certain conditions such as large scale operational events, Amazon may block this API. 
    */
   failoverShard(params: MemoryDB.Types.FailoverShardRequest, callback?: (err: AWSError, data: MemoryDB.Types.FailoverShardResponse) => void): Request<MemoryDB.Types.FailoverShardResponse, AWSError>;
   /**
-   * Used to failover a shard
+   * Used to failover a shard. This API is designed for testing the behavior of your application in case of MemoryDB failover. It is not designed to be used as a production-level tool for initiating a failover to overcome a problem you may have with the cluster. Moreover, in certain conditions such as large scale operational events, Amazon may block this API. 
    */
   failoverShard(callback?: (err: AWSError, data: MemoryDB.Types.FailoverShardResponse) => void): Request<MemoryDB.Types.FailoverShardResponse, AWSError>;
   /**
@@ -495,6 +495,10 @@ declare namespace MemoryDB {
      * When set to true, the cluster will automatically receive minor engine version upgrades after launch.
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
+    /**
+     * Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes. For more information, see Data tiering.
+     */
+    DataTiering?: DataTieringStatus;
   }
   export interface ClusterConfiguration {
     /**
@@ -652,7 +656,7 @@ declare namespace MemoryDB {
      */
     SecurityGroupIds?: SecurityGroupIdsList;
     /**
-     * Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
+     * Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for ddd are:    sun     mon     tue     wed     thu     fri     sat    Example: sun:23:00-mon:01:30 
      */
     MaintenanceWindow?: String;
     /**
@@ -703,6 +707,10 @@ declare namespace MemoryDB {
      * When set to true, the cluster will automatically receive minor engine version upgrades after launch.
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
+    /**
+     * Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes. For more information, see Data tiering.
+     */
+    DataTiering?: BooleanOptional;
   }
   export interface CreateClusterResponse {
     /**
@@ -806,6 +814,7 @@ declare namespace MemoryDB {
      */
     User?: User;
   }
+  export type DataTieringStatus = "true"|"false"|string;
   export interface DeleteACLRequest {
     /**
      * The name of the Access Control List to delete
@@ -1553,6 +1562,10 @@ declare namespace MemoryDB {
      * The configuration of the cluster from which the snapshot was taken
      */
     ClusterConfiguration?: ClusterConfiguration;
+    /**
+     * Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes. For more information, see Data tiering.
+     */
+    DataTiering?: DataTieringStatus;
   }
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];
@@ -1687,7 +1700,7 @@ declare namespace MemoryDB {
      */
     SecurityGroupIds?: SecurityGroupIdsList;
     /**
-     * The maintenance window to update
+     * Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for ddd are:    sun     mon     tue     wed     thu     fri     sat    Example: sun:23:00-mon:01:30 
      */
     MaintenanceWindow?: String;
     /**

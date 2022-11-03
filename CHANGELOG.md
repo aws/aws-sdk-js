@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1246.0-->
+<!--LATEST=2.1247.0-->
 <!--ENTRYINSERT-->
+
+## 2.1247.0
+* feature: MemoryDB: Adding support for r6gd instances for MemoryDB Redis with data tiering. In a cluster with data tiering enabled, when available memory capacity is exhausted, the least recently used data is automatically tiered to solid state drives for cost-effective capacity scaling with minimal performance impact.
+* feature: SageMaker: Amazon SageMaker now supports running training jobs on ml.trn1 instance types.
 
 ## 2.1246.0
 * feature: IoTSiteWise: This release adds the ListAssetModelProperties and ListAssetProperties APIs. You can list all properties that belong to a single asset model or asset using these two new APIs.
