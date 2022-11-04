@@ -574,6 +574,20 @@
       },
       "documentation": "<p>Cancels an active export task. The request removes all artifacts of the export, including any partially-created Amazon S3 objects. If the export task is complete or is in the process of transferring the final disk image, the command fails and returns an error.</p>"
     },
+    "CancelImageLaunchPermission": {
+      "name": "CancelImageLaunchPermission",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelImageLaunchPermissionRequest"
+      },
+      "output": {
+        "shape": "CancelImageLaunchPermissionResult"
+      },
+      "documentation": "<p>Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see <a href=\"https://docs.aws.amazon.com/\">Cancel sharing an AMI with your Amazon Web Services account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "CancelImportTask": {
       "name": "CancelImportTask",
       "http": {
@@ -10772,6 +10786,32 @@
           "shape": "ExportVmTaskId",
           "documentation": "<p>The ID of the export task. This is the ID returned by <code>CreateInstanceExportTask</code>.</p>",
           "locationName": "exportTaskId"
+        }
+      }
+    },
+    "CancelImageLaunchPermissionRequest": {
+      "type": "structure",
+      "required": [
+        "ImageId"
+      ],
+      "members": {
+        "ImageId": {
+          "shape": "ImageId",
+          "documentation": "<p>The ID of the AMI that was shared with your Amazon Web Services account.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "CancelImageLaunchPermissionResult": {
+      "type": "structure",
+      "members": {
+        "Return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+          "locationName": "return"
         }
       }
     },
@@ -27058,7 +27098,7 @@
         },
         "DeprecateAt": {
           "shape": "MillisecondDateTime",
-          "documentation": "<p>The date and time to deprecate the AMI, in UTC, in the following format: <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z. If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.</p> <p>You can’t specify a date in the past. The upper limit for <code>DeprecateAt</code> is 10 years from now.</p>"
+          "documentation": "<p>The date and time to deprecate the AMI, in UTC, in the following format: <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z. If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute.</p> <p>You can’t specify a date in the past. The upper limit for <code>DeprecateAt</code> is 10 years from now, except for public AMIs, where the upper limit is 2 years from the creation date.</p>"
         },
         "DryRun": {
           "shape": "Boolean",

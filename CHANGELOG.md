@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1247.0-->
+<!--LATEST=2.1248.0-->
 <!--ENTRYINSERT-->
+
+## 2.1248.0
+* bugfix: ResourceExplorer2: Set endpoint to dualstack by default
+* feature: EC2: This release adds API support for the recipient of an AMI account share to remove shared AMI launch permissions.
+* feature: EMRcontainers: Adding support for Job templates. Job templates allow you to create and store templates to configure Spark applications parameters. This helps you ensure consistent settings across applications by reusing and enforcing configuration overrides in data pipelines.
 
 ## 2.1247.0
 * feature: MemoryDB: Adding support for r6gd instances for MemoryDB Redis with data tiering. In a cluster with data tiering enabled, when available memory capacity is exhausted, the least recently used data is automatically tiered to solid state drives for cost-effective capacity scaling with minimal performance impact.

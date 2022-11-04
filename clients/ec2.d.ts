@@ -341,6 +341,14 @@ declare class EC2 extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel sharing an AMI with your Amazon Web Services account in the Amazon Elastic Compute Cloud User Guide.
+   */
+  cancelImageLaunchPermission(params: EC2.Types.CancelImageLaunchPermissionRequest, callback?: (err: AWSError, data: EC2.Types.CancelImageLaunchPermissionResult) => void): Request<EC2.Types.CancelImageLaunchPermissionResult, AWSError>;
+  /**
+   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel sharing an AMI with your Amazon Web Services account in the Amazon Elastic Compute Cloud User Guide.
+   */
+  cancelImageLaunchPermission(callback?: (err: AWSError, data: EC2.Types.CancelImageLaunchPermissionResult) => void): Request<EC2.Types.CancelImageLaunchPermissionResult, AWSError>;
+  /**
    * Cancels an in-process import virtual machine or import snapshot task.
    */
   cancelImportTask(params: EC2.Types.CancelImportTaskRequest, callback?: (err: AWSError, data: EC2.Types.CancelImportTaskResult) => void): Request<EC2.Types.CancelImportTaskResult, AWSError>;
@@ -6561,6 +6569,22 @@ declare namespace EC2 {
      * The ID of the export task. This is the ID returned by CreateInstanceExportTask.
      */
     ExportTaskId: ExportVmTaskId;
+  }
+  export interface CancelImageLaunchPermissionRequest {
+    /**
+     * The ID of the AMI that was shared with your Amazon Web Services account.
+     */
+    ImageId: ImageId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CancelImageLaunchPermissionResult {
+    /**
+     * Returns true if the request succeeds; otherwise, it returns an error.
+     */
+    Return?: Boolean;
   }
   export interface CancelImportTaskRequest {
     /**
@@ -17423,7 +17447,7 @@ declare namespace EC2 {
      */
     ImageId: ImageId;
     /**
-     * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. You can’t specify a date in the past. The upper limit for DeprecateAt is 10 years from now.
+     * The date and time to deprecate the AMI, in UTC, in the following format: YYYY-MM-DDTHH:MM:SSZ. If you specify a value for seconds, Amazon EC2 rounds the seconds to the nearest minute. You can’t specify a date in the past. The upper limit for DeprecateAt is 10 years from now, except for public AMIs, where the upper limit is 2 years from the creation date.
      */
     DeprecateAt: MillisecondDateTime;
     /**
