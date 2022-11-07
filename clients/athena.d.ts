@@ -315,6 +315,7 @@ declare namespace Athena {
      */
     S3AclOption: S3AclOption;
   }
+  export type Age = number;
   export type AmazonResourceName = string;
   export interface AthenaError {
     /**
@@ -1122,6 +1123,10 @@ declare namespace Athena {
      */
     ResultConfiguration?: ResultConfiguration;
     /**
+     * Specifies the query result reuse behavior that was used for the query.
+     */
+    ResultReuseConfiguration?: ResultReuseConfiguration;
+    /**
      * The database in which the query execution occurred.
      */
     QueryExecutionContext?: QueryExecutionContext;
@@ -1189,6 +1194,10 @@ declare namespace Athena {
      * The number of milliseconds that Athena took to finalize and publish the query results after the query engine finished running the query.
      */
     ServiceProcessingTimeInMillis?: Long;
+    /**
+     * Contains information about whether previous query results were reused for the query.
+     */
+    ResultReuseInformation?: ResultReuseInformation;
   }
   export interface QueryExecutionStatus {
     /**
@@ -1372,6 +1381,28 @@ declare namespace Athena {
     RemoveAclConfiguration?: BoxedBoolean;
   }
   export type ResultOutputLocation = string;
+  export interface ResultReuseByAgeConfiguration {
+    /**
+     * True if previous query results can be reused when the query is run; otherwise, false. The default is false.
+     */
+    Enabled: Boolean;
+    /**
+     * Specifies, in minutes, the maximum age of a previous query result that Athena should consider for reuse. The default is 60.
+     */
+    MaxAgeInMinutes?: Age;
+  }
+  export interface ResultReuseConfiguration {
+    /**
+     * Specifies whether previous query results are reused, and if so, their maximum age.
+     */
+    ResultReuseByAgeConfiguration?: ResultReuseByAgeConfiguration;
+  }
+  export interface ResultReuseInformation {
+    /**
+     * True if a previous query result was reused; false if the result was generated from a new run of the query.
+     */
+    ReusedPreviousResult: Boolean;
+  }
   export interface ResultSet {
     /**
      * The rows in the table.
@@ -1421,6 +1452,10 @@ declare namespace Athena {
      * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
      */
     ExecutionParameters?: ExecutionParameters;
+    /**
+     * Specifies the query result reuse behavior for the query.
+     */
+    ResultReuseConfiguration?: ResultReuseConfiguration;
   }
   export interface StartQueryExecutionOutput {
     /**

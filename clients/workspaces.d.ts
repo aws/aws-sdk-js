@@ -1858,6 +1858,8 @@ declare namespace WorkSpaces {
   }
   export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
+  export type Protocol = "PCOIP"|"WSP"|string;
+  export type ProtocolList = Protocol[];
   export interface RebootRequest {
     /**
      * The identifier of the WorkSpace.
@@ -2508,6 +2510,10 @@ declare namespace WorkSpaces {
      * The compute type. For more information, see Amazon WorkSpaces Bundles.
      */
     ComputeTypeName?: Compute;
+    /**
+     * The protocol. For more information, see  Protocols for Amazon WorkSpaces.    Only available for WorkSpaces created with PCoIP bundles.   The Protocols property is case sensitive. Ensure you use PCOIP or WSP.   Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).   
+     */
+    Protocols?: ProtocolList;
   }
   export interface WorkspaceRequest {
     /**

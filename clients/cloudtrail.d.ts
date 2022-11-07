@@ -60,6 +60,14 @@ declare class CloudTrail extends Service {
    */
   deleteTrail(callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
+   * Removes CloudTrail delegated administrator permissions from a member account in an organization.
+   */
+  deregisterOrganizationDelegatedAdmin(params: CloudTrail.Types.DeregisterOrganizationDelegatedAdminRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
+   * Removes CloudTrail delegated administrator permissions from a member account in an organization.
+   */
+  deregisterOrganizationDelegatedAdmin(callback?: (err: AWSError, data: CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.DeregisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
    * Returns metadata about a query, including query run time in milliseconds, number of events scanned and matched, and query status. You must specify an ARN for EventDataStore, and a value for QueryID.
    */
   describeQuery(params: CloudTrail.Types.DescribeQueryRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeQueryResponse) => void): Request<CloudTrail.Types.DescribeQueryResponse, AWSError>;
@@ -76,11 +84,11 @@ declare class CloudTrail extends Service {
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI.. 
+   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
    */
   getChannel(params: CloudTrail.Types.GetChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
   /**
-   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI.. 
+   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
    */
   getChannel(callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
   /**
@@ -228,6 +236,14 @@ declare class CloudTrail extends Service {
    */
   putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
+   * Registers an organization’s member account as the CloudTrail delegated administrator.
+   */
+  registerOrganizationDelegatedAdmin(params: CloudTrail.Types.RegisterOrganizationDelegatedAdminRequest, callback?: (err: AWSError, data: CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
+   * Registers an organization’s member account as the CloudTrail delegated administrator.
+   */
+  registerOrganizationDelegatedAdmin(callback?: (err: AWSError, data: CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse, AWSError>;
+  /**
    * Removes the specified tags from a trail or event data store.
    */
   removeTags(params: CloudTrail.Types.RemoveTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
@@ -301,6 +317,7 @@ declare class CloudTrail extends Service {
   updateTrail(callback?: (err: AWSError, data: CloudTrail.Types.UpdateTrailResponse) => void): Request<CloudTrail.Types.UpdateTrailResponse, AWSError>;
 }
 declare namespace CloudTrail {
+  export type AccountId = string;
   export interface AddTagsRequest {
     /**
      * Specifies the ARN of the trail or event data store to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
@@ -361,7 +378,7 @@ declare namespace CloudTrail {
     /**
      * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.
      */
-    EventDataStore: EventDataStoreArn;
+    EventDataStore?: EventDataStoreArn;
     /**
      * The ID of the query that you want to cancel. The QueryId comes from the response of a StartQuery operation.
      */
@@ -416,6 +433,10 @@ declare namespace CloudTrail {
      */
     TerminationProtectionEnabled?: TerminationProtectionEnabled;
     TagsList?: TagsList;
+    /**
+     * Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.  Disabling or deleting the KMS key, or removing CloudTrail permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users from querying the data in the event data store that was encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or delete a KMS key that you are using with an event data store, delete or back up your event data store.  CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
   }
   export interface CreateEventDataStoreResponse {
     /**
@@ -459,6 +480,10 @@ declare namespace CloudTrail {
      * The timestamp that shows when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
      */
     UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
   }
   export interface CreateTrailRequest {
     /**
@@ -592,11 +617,19 @@ declare namespace CloudTrail {
   }
   export type DeliveryS3Uri = string;
   export type DeliveryStatus = "SUCCESS"|"FAILED"|"FAILED_SIGNING_FILE"|"PENDING"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"ACCESS_DENIED_SIGNING_FILE"|"CANCELLED"|"UNKNOWN"|string;
+  export interface DeregisterOrganizationDelegatedAdminRequest {
+    /**
+     * A delegated administrator account ID. This is a member account in an organization that is currently designated as a delegated administrator.
+     */
+    DelegatedAdminAccountId: AccountId;
+  }
+  export interface DeregisterOrganizationDelegatedAdminResponse {
+  }
   export interface DescribeQueryRequest {
     /**
      * The ARN (or the ID suffix of the ARN) of an event data store on which the specified query was run.
      */
-    EventDataStore: EventDataStoreArn;
+    EventDataStore?: EventDataStoreArn;
     /**
      * The query ID.
      */
@@ -743,6 +776,7 @@ declare namespace CloudTrail {
     UpdatedTimestamp?: _Date;
   }
   export type EventDataStoreArn = string;
+  export type EventDataStoreKmsKeyId = string;
   export type EventDataStoreName = string;
   export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|string;
   export type EventDataStores = EventDataStore[];
@@ -842,6 +876,10 @@ declare namespace CloudTrail {
      * Shows the time that an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
      */
     UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
   }
   export interface GetEventSelectorsRequest {
     /**
@@ -927,7 +965,7 @@ declare namespace CloudTrail {
     /**
      * The ARN (or ID suffix of the ARN) of the event data store against which the query was run.
      */
-    EventDataStore: EventDataStoreArn;
+    EventDataStore?: EventDataStoreArn;
     /**
      * The ID of the query for which you want to get results.
      */
@@ -1509,6 +1547,14 @@ declare namespace CloudTrail {
   }
   export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|"TIMED_OUT"|string;
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
+  export interface RegisterOrganizationDelegatedAdminRequest {
+    /**
+     * An organization member account ID that you want to designate as a delegated administrator.
+     */
+    MemberAccountId: AccountId;
+  }
+  export interface RegisterOrganizationDelegatedAdminResponse {
+  }
   export interface RemoveTagsRequest {
     /**
      * Specifies the ARN of the trail or event data store from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE 
@@ -1591,6 +1637,10 @@ declare namespace CloudTrail {
      * The timestamp that shows when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
      */
     UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
   }
   export type RetentionPeriod = number;
   export interface S3ImportSource {
@@ -1880,6 +1930,10 @@ declare namespace CloudTrail {
      * Indicates that termination protection is enabled and the event data store cannot be automatically deleted.
      */
     TerminationProtectionEnabled?: TerminationProtectionEnabled;
+    /**
+     * Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.  Disabling or deleting the KMS key, or removing CloudTrail permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users from querying the data in the event data store that was encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or delete a KMS key that you are using with an event data store, delete or back up your event data store.  CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
   }
   export interface UpdateEventDataStoreResponse {
     /**
@@ -1922,6 +1976,10 @@ declare namespace CloudTrail {
      * The timestamp that shows when the event data store was last updated. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
      */
     UpdatedTimestamp?: _Date;
+    /**
+     * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
+     */
+    KmsKeyId?: EventDataStoreKmsKeyId;
   }
   export interface UpdateTrailRequest {
     /**

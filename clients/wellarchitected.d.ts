@@ -20,11 +20,11 @@ declare class WellArchitected extends Service {
    */
   associateLenses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Create a lens share. The owner of a lens can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
+   * Create a lens share. The owner of a lens can share it with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
    */
   createLensShare(params: WellArchitected.Types.CreateLensShareInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateLensShareOutput) => void): Request<WellArchitected.Types.CreateLensShareOutput, AWSError>;
   /**
-   * Create a lens share. The owner of a lens can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
+   * Create a lens share. The owner of a lens can share it with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
    */
   createLensShare(callback?: (err: AWSError, data: WellArchitected.Types.CreateLensShareOutput) => void): Request<WellArchitected.Types.CreateLensShareOutput, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class WellArchitected extends Service {
    */
   createMilestone(callback?: (err: AWSError, data: WellArchitected.Types.CreateMilestoneOutput) => void): Request<WellArchitected.Types.CreateMilestoneOutput, AWSError>;
   /**
-   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.
+   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.
    */
   createWorkload(params: WellArchitected.Types.CreateWorkloadInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateWorkloadOutput) => void): Request<WellArchitected.Types.CreateWorkloadOutput, AWSError>;
   /**
-   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.
+   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.
    */
   createWorkload(callback?: (err: AWSError, data: WellArchitected.Types.CreateWorkloadOutput) => void): Request<WellArchitected.Types.CreateWorkloadOutput, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class WellArchitected extends Service {
    */
   deleteLens(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a lens share. After the lens share is deleted, Amazon Web Services accounts and IAM users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
+   * Delete a lens share. After the lens share is deleted, Amazon Web Services accounts, IAM users, organizations, and organizational units (OUs) that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
    */
   deleteLensShare(params: WellArchitected.Types.DeleteLensShareInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a lens share. After the lens share is deleted, Amazon Web Services accounts and IAM users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
+   * Delete a lens share. After the lens share is deleted, Amazon Web Services accounts, IAM users, organizations, and organizational units (OUs) that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
    */
   deleteLensShare(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -179,6 +179,22 @@ declare class WellArchitected extends Service {
    * List of answers.
    */
   listAnswers(callback?: (err: AWSError, data: WellArchitected.Types.ListAnswersOutput) => void): Request<WellArchitected.Types.ListAnswersOutput, AWSError>;
+  /**
+   * List of Trusted Advisor check details by account related to the workload.
+   */
+  listCheckDetails(params: WellArchitected.Types.ListCheckDetailsInput, callback?: (err: AWSError, data: WellArchitected.Types.ListCheckDetailsOutput) => void): Request<WellArchitected.Types.ListCheckDetailsOutput, AWSError>;
+  /**
+   * List of Trusted Advisor check details by account related to the workload.
+   */
+  listCheckDetails(callback?: (err: AWSError, data: WellArchitected.Types.ListCheckDetailsOutput) => void): Request<WellArchitected.Types.ListCheckDetailsOutput, AWSError>;
+  /**
+   * List of Trusted Advisor checks summarized for all accounts related to the workload.
+   */
+  listCheckSummaries(params: WellArchitected.Types.ListCheckSummariesInput, callback?: (err: AWSError, data: WellArchitected.Types.ListCheckSummariesOutput) => void): Request<WellArchitected.Types.ListCheckSummariesOutput, AWSError>;
+  /**
+   * List of Trusted Advisor checks summarized for all accounts related to the workload.
+   */
+  listCheckSummaries(callback?: (err: AWSError, data: WellArchitected.Types.ListCheckSummariesOutput) => void): Request<WellArchitected.Types.ListCheckSummariesOutput, AWSError>;
   /**
    * List lens review improvements.
    */
@@ -300,11 +316,11 @@ declare class WellArchitected extends Service {
    */
   updateLensReview(callback?: (err: AWSError, data: WellArchitected.Types.UpdateLensReviewOutput) => void): Request<WellArchitected.Types.UpdateLensReviewOutput, AWSError>;
   /**
-   * Update a workload invitation.
+   * Update a workload or custom lens share invitation.  This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified. 
    */
   updateShareInvitation(params: WellArchitected.Types.UpdateShareInvitationInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateShareInvitationOutput) => void): Request<WellArchitected.Types.UpdateShareInvitationOutput, AWSError>;
   /**
-   * Update a workload invitation.
+   * Update a workload or custom lens share invitation.  This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified. 
    */
   updateShareInvitation(callback?: (err: AWSError, data: WellArchitected.Types.UpdateShareInvitationOutput) => void): Request<WellArchitected.Types.UpdateShareInvitationOutput, AWSError>;
   /**
@@ -333,6 +349,7 @@ declare class WellArchitected extends Service {
   upgradeLensReview(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace WellArchitected {
+  export type AccountSummary = {[key: string]: CheckStatusCount};
   export type AdditionalResourceType = "HELPFUL_RESOURCE"|"IMPROVEMENT_PLAN"|string;
   export interface AdditionalResources {
     /**
@@ -389,6 +406,7 @@ declare namespace WellArchitected {
      */
     Reason?: AnswerReason;
   }
+  export type ApplicationArn = string;
   export interface AssociateLensesInput {
     WorkloadId: WorkloadId;
     LensAliases: LensAliases;
@@ -396,6 +414,88 @@ declare namespace WellArchitected {
   export type AwsAccountId = string;
   export type AwsRegion = string;
   export type Base64String = string;
+  export type CheckDescription = string;
+  export interface CheckDetail {
+    /**
+     * Trusted Advisor check ID.
+     */
+    Id?: CheckId;
+    /**
+     * Trusted Advisor check name.
+     */
+    Name?: CheckName;
+    /**
+     * Trusted Advisor check description.
+     */
+    Description?: CheckDescription;
+    /**
+     * Provider of the check related to the best practice.
+     */
+    Provider?: CheckProvider;
+    /**
+     * Well-Architected Lens ARN associated to the check.
+     */
+    LensArn?: LensArn;
+    PillarId?: PillarId;
+    QuestionId?: QuestionId;
+    ChoiceId?: ChoiceId;
+    /**
+     * Status associated to the check.
+     */
+    Status?: CheckStatus;
+    AccountId?: AwsAccountId;
+    /**
+     * Count of flagged resources associated to the check.
+     */
+    FlaggedResources?: FlaggedResources;
+    /**
+     * Reason associated to the check.
+     */
+    Reason?: CheckFailureReason;
+    UpdatedAt?: Timestamp;
+  }
+  export type CheckDetails = CheckDetail[];
+  export type CheckFailureReason = "ASSUME_ROLE_ERROR"|"ACCESS_DENIED"|"UNKNOWN_ERROR"|"PREMIUM_SUPPORT_REQUIRED"|string;
+  export type CheckId = string;
+  export type CheckName = string;
+  export type CheckProvider = "TRUSTED_ADVISOR"|string;
+  export type CheckStatus = "OKAY"|"WARNING"|"ERROR"|"NOT_AVAILABLE"|"FETCH_FAILED"|string;
+  export type CheckStatusCount = number;
+  export type CheckSummaries = CheckSummary[];
+  export interface CheckSummary {
+    /**
+     * Trusted Advisor check ID.
+     */
+    Id?: CheckId;
+    /**
+     * Trusted Advisor check name.
+     */
+    Name?: CheckName;
+    /**
+     * Provider of the check related to the best practice.
+     */
+    Provider?: CheckProvider;
+    /**
+     * Trusted Advisor check description.
+     */
+    Description?: CheckDescription;
+    UpdatedAt?: Timestamp;
+    /**
+     * Well-Architected Lens ARN associated to the check.
+     */
+    LensArn?: LensArn;
+    PillarId?: PillarId;
+    QuestionId?: QuestionId;
+    ChoiceId?: ChoiceId;
+    /**
+     * Status associated to the check.
+     */
+    Status?: CheckStatus;
+    /**
+     * Account summary associated to the check.
+     */
+    AccountSummary?: AccountSummary;
+  }
   export interface Choice {
     ChoiceId?: ChoiceId;
     Title?: ChoiceTitle;
@@ -544,6 +644,14 @@ declare namespace WellArchitected {
      * The tags to be associated with the workload.
      */
     Tags?: TagMap;
+    /**
+     * Well-Architected discovery configuration settings associated to the workload.
+     */
+    DiscoveryConfig?: WorkloadDiscoveryConfig;
+    /**
+     * List of AppRegistry application ARNs associated to the workload.
+     */
+    Applications?: WorkloadApplications;
   }
   export interface CreateWorkloadOutput {
     WorkloadId?: WorkloadId;
@@ -600,6 +708,7 @@ declare namespace WellArchitected {
      */
     LensJSON?: LensJSON;
   }
+  export type FlaggedResources = number;
   export interface GetAnswerInput {
     WorkloadId: WorkloadId;
     LensAlias: LensAlias;
@@ -893,6 +1002,44 @@ declare namespace WellArchitected {
     AnswerSummaries?: AnswerSummaries;
     NextToken?: NextToken;
   }
+  export interface ListCheckDetailsInput {
+    WorkloadId: WorkloadId;
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+    /**
+     * Well-Architected Lens ARN.
+     */
+    LensArn: LensArn;
+    PillarId: PillarId;
+    QuestionId: QuestionId;
+    ChoiceId: ChoiceId;
+  }
+  export interface ListCheckDetailsOutput {
+    /**
+     * The details about the Trusted Advisor checks related to the Well-Architected best practice.
+     */
+    CheckDetails?: CheckDetails;
+    NextToken?: NextToken;
+  }
+  export interface ListCheckSummariesInput {
+    WorkloadId: WorkloadId;
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+    /**
+     * Well-Architected Lens ARN.
+     */
+    LensArn: LensArn;
+    PillarId: PillarId;
+    QuestionId: QuestionId;
+    ChoiceId: ChoiceId;
+  }
+  export interface ListCheckSummariesOutput {
+    /**
+     * List of Trusted Advisor summaries related to the Well-Architected best practice.
+     */
+    CheckSummaries?: CheckSummaries;
+    NextToken?: NextToken;
+  }
   export interface ListLensReviewImprovementsInput {
     WorkloadId: WorkloadId;
     LensAlias: LensAlias;
@@ -931,7 +1078,7 @@ declare namespace WellArchitected {
   export interface ListLensSharesInput {
     LensAlias: LensAlias;
     /**
-     * The Amazon Web Services account ID or IAM role with which the lens is shared.
+     * The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the lens is shared.
      */
     SharedWithPrefix?: SharedWithPrefix;
     NextToken?: NextToken;
@@ -1027,7 +1174,7 @@ declare namespace WellArchitected {
   export interface ListWorkloadSharesInput {
     WorkloadId: WorkloadId;
     /**
-     * The Amazon Web Services account ID or IAM role with which the workload is shared.
+     * The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.
      */
     SharedWithPrefix?: SharedWithPrefix;
     NextToken?: NextToken;
@@ -1185,6 +1332,7 @@ declare namespace WellArchitected {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export type TrustedAdvisorIntegrationStatus = "ENABLED"|"DISABLED"|string;
   export interface UntagResourceInput {
     WorkloadArn: WorkloadArn;
     /**
@@ -1244,7 +1392,7 @@ declare namespace WellArchitected {
   }
   export interface UpdateShareInvitationOutput {
     /**
-     * The updated workload share invitation.
+     * The updated workload or custom lens share invitation.
      */
     ShareInvitation?: ShareInvitation;
   }
@@ -1267,6 +1415,14 @@ declare namespace WellArchitected {
     Industry?: WorkloadIndustry;
     Notes?: Notes;
     ImprovementStatus?: WorkloadImprovementStatus;
+    /**
+     * Well-Architected discovery configuration settings to associate to the workload.
+     */
+    DiscoveryConfig?: WorkloadDiscoveryConfig;
+    /**
+     * List of AppRegistry application ARNs to associate to the workload.
+     */
+    Applications?: WorkloadApplications;
   }
   export interface UpdateWorkloadOutput {
     Workload?: Workload;
@@ -1326,12 +1482,27 @@ declare namespace WellArchitected {
      * The tags associated with the workload.
      */
     Tags?: TagMap;
+    /**
+     * Discovery configuration associated to the workload.
+     */
+    DiscoveryConfig?: WorkloadDiscoveryConfig;
+    /**
+     * List of AppRegistry application ARNs associated to the workload.
+     */
+    Applications?: WorkloadApplications;
   }
   export type WorkloadAccountIds = AwsAccountId[];
+  export type WorkloadApplications = ApplicationArn[];
   export type WorkloadArchitecturalDesign = string;
   export type WorkloadArn = string;
   export type WorkloadAwsRegions = AwsRegion[];
   export type WorkloadDescription = string;
+  export interface WorkloadDiscoveryConfig {
+    /**
+     * Discovery integration status in respect to Trusted Advisor for the workload.
+     */
+    TrustedAdvisorIntegrationStatus?: TrustedAdvisorIntegrationStatus;
+  }
   export type WorkloadEnvironment = "PRODUCTION"|"PREPRODUCTION"|string;
   export type WorkloadId = string;
   export type WorkloadImprovementStatus = "NOT_APPLICABLE"|"NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"RISK_ACKNOWLEDGED"|string;

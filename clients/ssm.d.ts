@@ -9083,6 +9083,10 @@ declare namespace SSM {
      * The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation execution.
      */
     TargetLocation?: TargetLocation;
+    /**
+     * The CloudWatch alarms that were invoked by the automation.
+     */
+    TriggeredAlarms?: AlarmStateInformationList;
   }
   export interface StepExecutionFilter {
     /**
@@ -9162,6 +9166,7 @@ declare namespace SSM {
      * The Automation execution role used by the currently running Automation. If not specified, the default value is AWS-SystemsManager-AutomationExecutionRole.
      */
     ExecutionRoleName?: ExecutionRoleName;
+    TargetLocationAlarmConfiguration?: AlarmConfiguration;
   }
   export type TargetLocations = TargetLocation[];
   export type TargetMap = {[key: string]: TargetMapValueList};

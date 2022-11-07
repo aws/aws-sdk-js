@@ -12,6 +12,30 @@ declare class LexModelsV2 extends Service {
   constructor(options?: LexModelsV2.Types.ClientConfiguration)
   config: Config & LexModelsV2.Types.ClientConfiguration;
   /**
+   * Batch create custom vocabulary item for the specified locale in the specified bot.
+   */
+  batchCreateCustomVocabularyItem(params: LexModelsV2.Types.BatchCreateCustomVocabularyItemRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse, AWSError>;
+  /**
+   * Batch create custom vocabulary item for the specified locale in the specified bot.
+   */
+  batchCreateCustomVocabularyItem(callback?: (err: AWSError, data: LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchCreateCustomVocabularyItemResponse, AWSError>;
+  /**
+   * Batch delete custom vocabulary item for the specified locale in the specified bot.
+   */
+  batchDeleteCustomVocabularyItem(params: LexModelsV2.Types.BatchDeleteCustomVocabularyItemRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse, AWSError>;
+  /**
+   * Batch delete custom vocabulary item for the specified locale in the specified bot.
+   */
+  batchDeleteCustomVocabularyItem(callback?: (err: AWSError, data: LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchDeleteCustomVocabularyItemResponse, AWSError>;
+  /**
+   * Batch update custom vocabulary item for the specified locale in the specified bot.
+   */
+  batchUpdateCustomVocabularyItem(params: LexModelsV2.Types.BatchUpdateCustomVocabularyItemRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse, AWSError>;
+  /**
+   * Batch update custom vocabulary item for the specified locale in the specified bot.
+   */
+  batchUpdateCustomVocabularyItem(callback?: (err: AWSError, data: LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse) => void): Request<LexModelsV2.Types.BatchUpdateCustomVocabularyItemResponse, AWSError>;
+  /**
    * Builds a bot, its intents, and its slot types into a specific locale. A bot can be built into multiple locales. At runtime the locale is used to choose a specific build of the bot.
    */
   buildBotLocale(params: LexModelsV2.Types.BuildBotLocaleRequest, callback?: (err: AWSError, data: LexModelsV2.Types.BuildBotLocaleResponse) => void): Request<LexModelsV2.Types.BuildBotLocaleResponse, AWSError>;
@@ -372,6 +396,14 @@ declare class LexModelsV2 extends Service {
    */
   listBuiltInSlotTypes(callback?: (err: AWSError, data: LexModelsV2.Types.ListBuiltInSlotTypesResponse) => void): Request<LexModelsV2.Types.ListBuiltInSlotTypesResponse, AWSError>;
   /**
+   * List custom vocabulary items for the specified locale in the specified bot.
+   */
+  listCustomVocabularyItems(params: LexModelsV2.Types.ListCustomVocabularyItemsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListCustomVocabularyItemsResponse) => void): Request<LexModelsV2.Types.ListCustomVocabularyItemsResponse, AWSError>;
+  /**
+   * List custom vocabulary items for the specified locale in the specified bot.
+   */
+  listCustomVocabularyItems(callback?: (err: AWSError, data: LexModelsV2.Types.ListCustomVocabularyItemsResponse) => void): Request<LexModelsV2.Types.ListCustomVocabularyItemsResponse, AWSError>;
+  /**
    * Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept in the list for 7 days.
    */
   listExports(params: LexModelsV2.Types.ListExportsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListExportsResponse) => void): Request<LexModelsV2.Types.ListExportsResponse, AWSError>;
@@ -396,11 +428,11 @@ declare class LexModelsV2 extends Service {
    */
   listIntents(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentsResponse) => void): Request<LexModelsV2.Types.ListIntentsResponse, AWSError>;
   /**
-   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot.
+   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
    */
   listRecommendedIntents(params: LexModelsV2.Types.ListRecommendedIntentsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListRecommendedIntentsResponse) => void): Request<LexModelsV2.Types.ListRecommendedIntentsResponse, AWSError>;
   /**
-   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot.
+   * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
    */
   listRecommendedIntents(callback?: (err: AWSError, data: LexModelsV2.Types.ListRecommendedIntentsResponse) => void): Request<LexModelsV2.Types.ListRecommendedIntentsResponse, AWSError>;
   /**
@@ -680,6 +712,126 @@ declare namespace LexModelsV2 {
      * Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
      */
     endTimeoutMs: TimeInMilliSeconds;
+  }
+  export interface BatchCreateCustomVocabularyItemRequest {
+    /**
+     * The unique identifier of the bot to batch create the custom vocabulary item for.
+     */
+    botId: Id;
+    /**
+     * The bot version of the bot to batch create the custom vocabulary item for.
+     */
+    botVersion: BotVersion;
+    /**
+     * The unique locale identifier of the bot to batch create the custom vocabulary item for.
+     */
+    localeId: LocaleId;
+    /**
+     * The custom vocabulary item list of the bot to batch create the custom vocabulary item for.
+     */
+    customVocabularyItemList: CreateCustomVocabularyItemsList;
+  }
+  export interface BatchCreateCustomVocabularyItemResponse {
+    /**
+     * The unique identifier of the bot to batch create response for the custom vocabulary item.
+     */
+    botId?: Id;
+    /**
+     * The bot version of the bot to batch create the custom vocabulary item response for.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The unique locale identifier of the bot to batch create the custom vocabulary item response for.
+     */
+    localeId?: LocaleId;
+    /**
+     * The errors of the action to batch create the custom vocabulary item response for a bot.
+     */
+    errors?: FailedCustomVocabularyItems;
+    /**
+     * The resources of the action to batch create the custom vocabulary item response for a bot.
+     */
+    resources?: CustomVocabularyItems;
+  }
+  export interface BatchDeleteCustomVocabularyItemRequest {
+    /**
+     * The unique identifier of the bot to batch delete request for the custom vocabulary item.
+     */
+    botId: Id;
+    /**
+     * The version of the bot to batch delete request for the custom vocabulary item.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale identifier of the bot to batch delete request for the custom vocabulary item.
+     */
+    localeId: LocaleId;
+    /**
+     * The custom vocabulary list to batch delete request for the custom vocabulary item.
+     */
+    customVocabularyItemList: DeleteCustomVocabularyItemsList;
+  }
+  export interface BatchDeleteCustomVocabularyItemResponse {
+    /**
+     * The unique identifier of the bot to batch delete response for the custom vocabulary item.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot to batch delete response for the custom vocabulary item.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale identifier of the bot to batch delete response for the custom vocabulary item.
+     */
+    localeId?: LocaleId;
+    /**
+     * The errors of the action to batch delete response for the custom vocabulary item.
+     */
+    errors?: FailedCustomVocabularyItems;
+    /**
+     * The resources of the action to batch delete response for the custom vocabulary item.
+     */
+    resources?: CustomVocabularyItems;
+  }
+  export interface BatchUpdateCustomVocabularyItemRequest {
+    /**
+     * The unique identifier of the bot to the batch update request for the custom vocabulary item.
+     */
+    botId: Id;
+    /**
+     * The bot version of the bot to the batch update request for the custom vocabulary item.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale identifier of the bot to the batch update request for the custom vocabulary item.
+     */
+    localeId: LocaleId;
+    /**
+     * The custom vocabulary item list of the bot to the batch update request for the custom vocabulary item.
+     */
+    customVocabularyItemList: UpdateCustomVocabularyItemsList;
+  }
+  export interface BatchUpdateCustomVocabularyItemResponse {
+    /**
+     * The unique identifier of the bot to the batch update response for the custom vocabulary item.
+     */
+    botId?: Id;
+    /**
+     * The bot version of the bot to the batch update response for the custom vocabulary item.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale identifier of the bot to the batch update response for the custom vocabulary item.
+     */
+    localeId?: LocaleId;
+    /**
+     * The errors of the action to batch update response for the custom vocabulary item.
+     */
+    errors?: FailedCustomVocabularyItems;
+    /**
+     * The resources of the action to batch update response for the custom vocabulary item.
+     */
+    resources?: CustomVocabularyItems;
   }
   export type Boolean = boolean;
   export interface BotAliasHistoryEvent {
@@ -1441,6 +1593,7 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
+  export type CreateCustomVocabularyItemsList = NewCustomVocabularyItem[];
   export interface CreateExportRequest {
     /**
      * Specifies the type of resource to export, either a bot or a bot locale. You can only specify one type of resource to export.
@@ -1880,6 +2033,12 @@ declare namespace LexModelsV2 {
     value: CustomPayloadValue;
   }
   export type CustomPayloadValue = string;
+  export interface CustomVocabularyEntryId {
+    /**
+     * The unique item identifier for the custom vocabulary items.
+     */
+    itemId: ItemId;
+  }
   export interface CustomVocabularyExportSpecification {
     /**
      * The identifier of the bot that contains the custom vocabulary to export.
@@ -1908,6 +2067,25 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
   }
+  export interface CustomVocabularyItem {
+    /**
+     * The unique item identifer for the custom vocabulary item from the custom vocabulary list.
+     */
+    itemId: ItemId;
+    /**
+     * The unique phrase for the custom vocabulary item from the custom vocabulary list.
+     */
+    phrase: Phrase;
+    /**
+     * The weight assigned for the custom vocabulary item from the custom vocabulary list.
+     */
+    weight?: Weight;
+    /**
+     * The display as value for the custom vocabulary item from the custom vocabulary list.
+     */
+    displayAs?: Phrase;
+  }
+  export type CustomVocabularyItems = CustomVocabularyItem[];
   export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string;
   export type DTMFCharacter = string;
   export interface DTMFSpecification {
@@ -2059,6 +2237,7 @@ declare namespace LexModelsV2 {
      */
     botStatus?: BotStatus;
   }
+  export type DeleteCustomVocabularyItemsList = CustomVocabularyEntryId[];
   export interface DeleteCustomVocabularyRequest {
     /**
      * The unique identifier of the bot to remove the custom vocabulary from.
@@ -3005,6 +3184,8 @@ declare namespace LexModelsV2 {
      */
     associatedTranscriptsPassword?: FilePassword;
   }
+  export type ErrorCode = "DUPLICATE_INPUT"|"RESOURCE_DOES_NOT_EXIST"|"RESOURCE_ALREADY_EXISTS"|"INTERNAL_SERVER_FAILURE"|string;
+  export type ErrorMessage = string;
   export interface ExportFilter {
     /**
      * The name of the field to use for filtering.
@@ -3081,6 +3262,21 @@ declare namespace LexModelsV2 {
      */
     grammarSlotTypeSetting?: GrammarSlotTypeSetting;
   }
+  export interface FailedCustomVocabularyItem {
+    /**
+     * The unique item identifer for the failed custom vocabulary item from the custom vocabulary list.
+     */
+    itemId?: ItemId;
+    /**
+     * The error message for the failed custom vocabulary item from the custom vocabulary list.
+     */
+    errorMessage?: ErrorMessage;
+    /**
+     * The unique error code for the failed custom vocabulary item from the custom vocabulary list.
+     */
+    errorCode?: ErrorCode;
+  }
+  export type FailedCustomVocabularyItems = FailedCustomVocabularyItem[];
   export type FailureReason = string;
   export type FailureReasons = FailureReason[];
   export type FilePassword = string;
@@ -3427,6 +3623,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type IntentSummaryList = IntentSummary[];
+  export type ItemId = string;
   export interface KendraConfiguration {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot.
@@ -3779,6 +3976,50 @@ declare namespace LexModelsV2 {
      * The language and locale of the slot types in the list.
      */
     localeId?: LocaleId;
+  }
+  export interface ListCustomVocabularyItemsRequest {
+    /**
+     * The unique identifier of the bot to the list custom vocabulary request.
+     */
+    botId: Id;
+    /**
+     * The bot version of the bot to the list custom vocabulary request.
+     */
+    botVersion: BotVersion;
+    /**
+     * The locale identifier of the bot to the list custom vocabulary request.
+     */
+    localeId: LocaleId;
+    /**
+     * The maximum results to the list custom vocabulary request.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The nextToken identifier to the list custom vocabulary request.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListCustomVocabularyItemsResponse {
+    /**
+     * The unique identifier of the bot to the list custom vocabulary response.
+     */
+    botId?: Id;
+    /**
+     * The bot version of the bot to the list custom vocabulary response.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The locale identifier of the bot to the list custom vocabulary response.
+     */
+    localeId?: LocaleId;
+    /**
+     * The custom vocabulary items from the list custom vocabulary response.
+     */
+    customVocabularyItems?: CustomVocabularyItems;
+    /**
+     * The nextToken identifier to the list custom vocabulary response.
+     */
+    nextToken?: NextToken;
   }
   export interface ListExportsRequest {
     /**
@@ -4157,6 +4398,20 @@ declare namespace LexModelsV2 {
     allowMultipleValues?: Boolean;
   }
   export type Name = string;
+  export interface NewCustomVocabularyItem {
+    /**
+     * The unique phrase for the new custom vocabulary item from the custom vocabulary list.
+     */
+    phrase: Phrase;
+    /**
+     * The weight assigned to the new custom vocabulary item from the custom vocabulary list.
+     */
+    weight?: Weight;
+    /**
+     * The display as value assigned to the new custom vocabulary item from the custom vocabulary list.
+     */
+    displayAs?: Phrase;
+  }
   export type NextIndex = number;
   export type NextToken = string;
   export type NonEmptyString = string;
@@ -4193,6 +4448,7 @@ declare namespace LexModelsV2 {
      */
     objectPrefixes?: ObjectPrefixes;
   }
+  export type Phrase = string;
   export interface PlainTextMessage {
     /**
      * The message to send to the user.
@@ -5289,6 +5545,7 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
   }
+  export type UpdateCustomVocabularyItemsList = CustomVocabularyItem[];
   export interface UpdateExportRequest {
     /**
      * The unique identifier Amazon Lex assigned to the export.
@@ -5737,6 +5994,7 @@ declare namespace LexModelsV2 {
      */
     active?: BoxedBoolean;
   }
+  export type Weight = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
