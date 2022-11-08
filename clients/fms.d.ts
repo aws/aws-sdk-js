@@ -28,6 +28,22 @@ declare class FMS extends Service {
    */
   associateThirdPartyFirewall(callback?: (err: AWSError, data: FMS.Types.AssociateThirdPartyFirewallResponse) => void): Request<FMS.Types.AssociateThirdPartyFirewallResponse, AWSError>;
   /**
+   * Associate resources to a Firewall Manager resource set.
+   */
+  batchAssociateResource(params: FMS.Types.BatchAssociateResourceRequest, callback?: (err: AWSError, data: FMS.Types.BatchAssociateResourceResponse) => void): Request<FMS.Types.BatchAssociateResourceResponse, AWSError>;
+  /**
+   * Associate resources to a Firewall Manager resource set.
+   */
+  batchAssociateResource(callback?: (err: AWSError, data: FMS.Types.BatchAssociateResourceResponse) => void): Request<FMS.Types.BatchAssociateResourceResponse, AWSError>;
+  /**
+   * Disassociates resources from a Firewall Manager resource set.
+   */
+  batchDisassociateResource(params: FMS.Types.BatchDisassociateResourceRequest, callback?: (err: AWSError, data: FMS.Types.BatchDisassociateResourceResponse) => void): Request<FMS.Types.BatchDisassociateResourceResponse, AWSError>;
+  /**
+   * Disassociates resources from a Firewall Manager resource set.
+   */
+  batchDisassociateResource(callback?: (err: AWSError, data: FMS.Types.BatchDisassociateResourceResponse) => void): Request<FMS.Types.BatchDisassociateResourceResponse, AWSError>;
+  /**
    * Permanently deletes an Firewall Manager applications list.
    */
   deleteAppsList(params: FMS.Types.DeleteAppsListRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -59,6 +75,14 @@ declare class FMS extends Service {
    * Permanently deletes an Firewall Manager protocols list.
    */
   deleteProtocolsList(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified ResourceSet.
+   */
+  deleteResourceSet(params: FMS.Types.DeleteResourceSetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified ResourceSet.
+   */
+  deleteResourceSet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disassociates the account that has been set as the Firewall Manager administrator account. To set a different account as the administrator account, you must submit an AssociateAdminAccount request.
    */
@@ -132,6 +156,14 @@ declare class FMS extends Service {
    */
   getProtocolsList(callback?: (err: AWSError, data: FMS.Types.GetProtocolsListResponse) => void): Request<FMS.Types.GetProtocolsListResponse, AWSError>;
   /**
+   * Gets information about a specific resource set.
+   */
+  getResourceSet(params: FMS.Types.GetResourceSetRequest, callback?: (err: AWSError, data: FMS.Types.GetResourceSetResponse) => void): Request<FMS.Types.GetResourceSetResponse, AWSError>;
+  /**
+   * Gets information about a specific resource set.
+   */
+  getResourceSet(callback?: (err: AWSError, data: FMS.Types.GetResourceSetResponse) => void): Request<FMS.Types.GetResourceSetResponse, AWSError>;
+  /**
    * The onboarding status of a Firewall Manager admin account to third-party firewall vendor tenant.
    */
   getThirdPartyFirewallAssociationStatus(params: FMS.Types.GetThirdPartyFirewallAssociationStatusRequest, callback?: (err: AWSError, data: FMS.Types.GetThirdPartyFirewallAssociationStatusResponse) => void): Request<FMS.Types.GetThirdPartyFirewallAssociationStatusResponse, AWSError>;
@@ -164,6 +196,14 @@ declare class FMS extends Service {
    */
   listComplianceStatus(callback?: (err: AWSError, data: FMS.Types.ListComplianceStatusResponse) => void): Request<FMS.Types.ListComplianceStatusResponse, AWSError>;
   /**
+   * Returns an array of resources in the organization's accounts that are available to be associated with a resource set.
+   */
+  listDiscoveredResources(params: FMS.Types.ListDiscoveredResourcesRequest, callback?: (err: AWSError, data: FMS.Types.ListDiscoveredResourcesResponse) => void): Request<FMS.Types.ListDiscoveredResourcesResponse, AWSError>;
+  /**
+   * Returns an array of resources in the organization's accounts that are available to be associated with a resource set.
+   */
+  listDiscoveredResources(callback?: (err: AWSError, data: FMS.Types.ListDiscoveredResourcesResponse) => void): Request<FMS.Types.ListDiscoveredResourcesResponse, AWSError>;
+  /**
    * Returns a MemberAccounts object that lists the member accounts in the administrator's Amazon Web Services organization. The ListMemberAccounts must be submitted by the account that is set as the Firewall Manager administrator.
    */
   listMemberAccounts(params: FMS.Types.ListMemberAccountsRequest, callback?: (err: AWSError, data: FMS.Types.ListMemberAccountsResponse) => void): Request<FMS.Types.ListMemberAccountsResponse, AWSError>;
@@ -187,6 +227,22 @@ declare class FMS extends Service {
    * Returns an array of ProtocolsListDataSummary objects.
    */
   listProtocolsLists(callback?: (err: AWSError, data: FMS.Types.ListProtocolsListsResponse) => void): Request<FMS.Types.ListProtocolsListsResponse, AWSError>;
+  /**
+   * Returns an array of resources that are currently associated to a resource set.
+   */
+  listResourceSetResources(params: FMS.Types.ListResourceSetResourcesRequest, callback?: (err: AWSError, data: FMS.Types.ListResourceSetResourcesResponse) => void): Request<FMS.Types.ListResourceSetResourcesResponse, AWSError>;
+  /**
+   * Returns an array of resources that are currently associated to a resource set.
+   */
+  listResourceSetResources(callback?: (err: AWSError, data: FMS.Types.ListResourceSetResourcesResponse) => void): Request<FMS.Types.ListResourceSetResourcesResponse, AWSError>;
+  /**
+   * Returns an array of ResourceSetSummary objects.
+   */
+  listResourceSets(params: FMS.Types.ListResourceSetsRequest, callback?: (err: AWSError, data: FMS.Types.ListResourceSetsResponse) => void): Request<FMS.Types.ListResourceSetsResponse, AWSError>;
+  /**
+   * Returns an array of ResourceSetSummary objects.
+   */
+  listResourceSets(callback?: (err: AWSError, data: FMS.Types.ListResourceSetsResponse) => void): Request<FMS.Types.ListResourceSetsResponse, AWSError>;
   /**
    * Retrieves the list of tags for the specified Amazon Web Services resource. 
    */
@@ -236,6 +292,14 @@ declare class FMS extends Service {
    */
   putProtocolsList(callback?: (err: AWSError, data: FMS.Types.PutProtocolsListResponse) => void): Request<FMS.Types.PutProtocolsListResponse, AWSError>;
   /**
+   * Creates the resource set. An Firewall Manager resource set defines the resources to import into an Firewall Manager policy from another Amazon Web Services service.
+   */
+  putResourceSet(params: FMS.Types.PutResourceSetRequest, callback?: (err: AWSError, data: FMS.Types.PutResourceSetResponse) => void): Request<FMS.Types.PutResourceSetResponse, AWSError>;
+  /**
+   * Creates the resource set. An Firewall Manager resource set defines the resources to import into an Firewall Manager policy from another Amazon Web Services service.
+   */
+  putResourceSet(callback?: (err: AWSError, data: FMS.Types.PutResourceSetResponse) => void): Request<FMS.Types.PutResourceSetResponse, AWSError>;
+  /**
    * Adds one or more tags to an Amazon Web Services resource.
    */
   tagResource(params: FMS.Types.TagResourceRequest, callback?: (err: AWSError, data: FMS.Types.TagResourceResponse) => void): Request<FMS.Types.TagResourceResponse, AWSError>;
@@ -254,6 +318,7 @@ declare class FMS extends Service {
 }
 declare namespace FMS {
   export type AWSAccountId = string;
+  export type AWSAccountIdList = AWSAccountId[];
   export type AccountRoleStatus = "READY"|"CREATING"|"PENDING_DELETION"|"DELETING"|"DELETED"|string;
   export interface ActionTarget {
     /**
@@ -386,7 +451,48 @@ declare namespace FMS {
      */
     PossibleSecurityGroupRemediationActions?: SecurityGroupRemediationActions;
   }
+  export type Base62Id = string;
   export type BasicInteger = number;
+  export interface BatchAssociateResourceRequest {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    ResourceSetIdentifier: Identifier;
+    /**
+     * The uniform resource identifiers (URIs) of resources that should be associated to the resource set. The URIs must be Amazon Resource Names (ARNs).
+     */
+    Items: IdentifierList;
+  }
+  export interface BatchAssociateResourceResponse {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    ResourceSetIdentifier: Identifier;
+    /**
+     * The resources that failed to associate to the resource set.
+     */
+    FailedItems: FailedItemList;
+  }
+  export interface BatchDisassociateResourceRequest {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    ResourceSetIdentifier: Identifier;
+    /**
+     * The uniform resource identifiers (URI) of resources that should be disassociated from the resource set. The URIs must be Amazon Resource Names (ARNs).
+     */
+    Items: IdentifierList;
+  }
+  export interface BatchDisassociateResourceResponse {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    ResourceSetIdentifier: Identifier;
+    /**
+     * The resources that failed to disassociate from the resource set.
+     */
+    FailedItems: FailedItemList;
+  }
   export type Boolean = boolean;
   export type CIDR = string;
   export interface ComplianceViolator {
@@ -437,7 +543,14 @@ declare namespace FMS {
      */
     ListId: ListId;
   }
+  export interface DeleteResourceSetRequest {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    Identifier: Base62Id;
+  }
   export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|"AWSSHIELD_ADVANCED"|"AWSVPC"|string;
+  export type Description = string;
   export type DestinationType = "IPV4"|"IPV6"|"PREFIX_LIST"|string;
   export type DetailedInfo = string;
   export interface DisassociateAdminAccountRequest {
@@ -454,6 +567,25 @@ declare namespace FMS {
      */
     ThirdPartyFirewallStatus?: ThirdPartyFirewallAssociationStatus;
   }
+  export interface DiscoveredResource {
+    /**
+     * The universal resource identifier (URI) of the discovered resource.
+     */
+    URI?: Identifier;
+    /**
+     * The Amazon Web Services account ID associated with the discovered resource.
+     */
+    AccountId?: AWSAccountId;
+    /**
+     * The type of the discovered resource.
+     */
+    Type?: ResourceType;
+    /**
+     * The name of the discovered resource.
+     */
+    Name?: ResourceName;
+  }
+  export type DiscoveredResourceList = DiscoveredResource[];
   export interface DnsDuplicateRuleGroupViolation {
     /**
      * Information about the VPC ID. 
@@ -688,6 +820,18 @@ declare namespace FMS {
      */
     FirewallCreationConfig?: ManagedServiceData;
   }
+  export interface FailedItem {
+    /**
+     * The univeral resource indicator (URI) of the resource that failed.
+     */
+    URI?: Identifier;
+    /**
+     * The reason the resource's association could not be updated.
+     */
+    Reason?: FailedItemReason;
+  }
+  export type FailedItemList = FailedItem[];
+  export type FailedItemReason = "NOT_VALID_ARN"|"NOT_VALID_PARTITION"|"NOT_VALID_REGION"|"NOT_VALID_SERVICE"|"NOT_VALID_RESOURCE_TYPE"|"NOT_VALID_ACCOUNT_ID"|string;
   export type FirewallDeploymentModel = "CENTRALIZED"|"DISTRIBUTED"|string;
   export type FirewallPolicyId = string;
   export type FirewallPolicyName = string;
@@ -871,6 +1015,22 @@ declare namespace FMS {
      */
     ProtocolsListArn?: ResourceArn;
   }
+  export interface GetResourceSetRequest {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    Identifier: Base62Id;
+  }
+  export interface GetResourceSetResponse {
+    /**
+     * Information about the specified resource set.
+     */
+    ResourceSet: ResourceSet;
+    /**
+     * The Amazon Resource Name (ARN) of the resource set.
+     */
+    ResourceSetArn: ResourceArn;
+  }
   export interface GetThirdPartyFirewallAssociationStatusRequest {
     /**
      * The name of the third-party firewall vendor.
@@ -912,6 +1072,8 @@ declare namespace FMS {
     ViolationDetail?: ViolationDetail;
   }
   export type IPPortNumber = number;
+  export type Identifier = string;
+  export type IdentifierList = Identifier[];
   export type IssueInfoMap = {[key: string]: DetailedInfo};
   export type LengthBoundedString = string;
   export type LengthBoundedStringList = LengthBoundedString[];
@@ -960,6 +1122,34 @@ declare namespace FMS {
     PolicyComplianceStatusList?: PolicyComplianceStatusList;
     /**
      * If you have more PolicyComplianceStatus objects than the number that you specified for MaxResults in the request, the response includes a NextToken value. To list more PolicyComplianceStatus objects, submit another ListComplianceStatus request, and specify the NextToken value from the response in the NextToken value in the next request.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDiscoveredResourcesRequest {
+    /**
+     * The Amazon Web Services account IDs to discover resources in. Only one account is supported per request. The account must be a member of your organization.
+     */
+    MemberAccountIds: AWSAccountIdList;
+    /**
+     * The type of resources to discover.
+     */
+    ResourceType: ResourceType;
+    /**
+     * The maximum number of objects that you want Firewall Manager to return for this request. If more objects are available, in the response, Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: PaginationMaxResults;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDiscoveredResourcesResponse {
+    /**
+     * Details of the resources that were discovered.
+     */
+    Items?: DiscoveredResourceList;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
      */
     NextToken?: PaginationToken;
   }
@@ -1028,6 +1218,50 @@ declare namespace FMS {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListResourceSetResourcesRequest {
+    /**
+     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     */
+    Identifier: ResourceId;
+    /**
+     * The maximum number of objects that you want Firewall Manager to return for this request. If more objects are available, in the response, Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: PaginationMaxResults;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListResourceSetResourcesResponse {
+    /**
+     * An array of the associated resources' uniform resource identifiers (URI).
+     */
+    Items: ResourceList;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListResourceSetsRequest {
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of objects that you want Firewall Manager to return for this request. If more objects are available, in the response, Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: PaginationMaxResults;
+  }
+  export interface ListResourceSetsResponse {
+    /**
+     * An array of ResourceSetSummary objects.
+     */
+    ResourceSets?: ResourceSetSummaryList;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. 
@@ -1067,6 +1301,7 @@ declare namespace FMS {
   export type ManagedServiceData = string;
   export type MarketplaceSubscriptionOnboardingStatus = "NO_SUBSCRIPTION"|"NOT_COMPLETE"|"COMPLETE"|string;
   export type MemberAccounts = AWSAccountId[];
+  export type Name = string;
   export type NetworkFirewallAction = string;
   export type NetworkFirewallActionList = NetworkFirewallAction[];
   export interface NetworkFirewallBlackHoleRouteDetectedViolation {
@@ -1448,6 +1683,14 @@ declare namespace FMS {
      * Specifies the Amazon Web Services account IDs and Organizations organizational units (OUs) to exclude from the policy. Specifying an OU is the equivalent of specifying all accounts in the OU and in any of its child OUs, including any child OUs and accounts that are added at a later time. You can specify inclusions or exclusions, but not both. If you specify an IncludeMap, Firewall Manager applies the policy to all accounts specified by the IncludeMap, and does not evaluate any ExcludeMap specifications. If you do not specify an IncludeMap, then Firewall Manager applies the policy to all accounts except for those specified by the ExcludeMap. You can specify account IDs, OUs, or a combination:    Specify account IDs by setting the key to ACCOUNT. For example, the following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]}.   Specify OUs by setting the key to ORG_UNIT. For example, the following is a valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.   Specify accounts and OUs together in a single map, separated with a comma. For example, the following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}.  
      */
     ExcludeMap?: CustomerPolicyScopeMap;
+    /**
+     * The unique identifiers of the resource sets used by the policy.
+     */
+    ResourceSetIds?: ResourceSetIds;
+    /**
+     * The definition of the Network Firewall firewall policy.
+     */
+    PolicyDescription?: ResourceDescription;
   }
   export interface PolicyComplianceDetail {
     /**
@@ -1705,6 +1948,26 @@ declare namespace FMS {
      */
     ProtocolsListArn?: ResourceArn;
   }
+  export interface PutResourceSetRequest {
+    /**
+     * Details about the resource set to be created or updated.&gt;
+     */
+    ResourceSet: ResourceSet;
+    /**
+     * Retrieves the tags associated with the specified resource set. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing. For example, you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a resource.
+     */
+    TagList?: TagList;
+  }
+  export interface PutResourceSetResponse {
+    /**
+     * Details about the resource set.
+     */
+    ResourceSet: ResourceSet;
+    /**
+     * The Amazon Resource Name (ARN) of the resource set.
+     */
+    ResourceSetArn: ResourceArn;
+  }
   export type ReferenceRule = string;
   export interface RemediationAction {
     /**
@@ -1756,11 +2019,69 @@ declare namespace FMS {
      */
     Order?: BasicInteger;
   }
+  export interface Resource {
+    /**
+     * The resource's universal resource indicator (URI).
+     */
+    URI: Identifier;
+    /**
+     * The Amazon Web Services account ID that the associated resource belongs to.
+     */
+    AccountId?: AWSAccountId;
+  }
   export type ResourceArn = string;
   export type ResourceCount = number;
+  export type ResourceDescription = string;
   export type ResourceId = string;
   export type ResourceIdList = ResourceId[];
+  export type ResourceList = Resource[];
   export type ResourceName = string;
+  export interface ResourceSet {
+    /**
+     * A unique identifier for the resource set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
+     */
+    Id?: Base62Id;
+    /**
+     * The descriptive name of the resource set. You can't change the name of a resource set after you create it.
+     */
+    Name: Name;
+    /**
+     * A description of the resource set.
+     */
+    Description?: Description;
+    /**
+     * An optional token that you can use for optimistic locking. Firewall Manager returns a token to your requests that access the resource set. The token marks the state of the resource set resource at the time of the request. Update tokens are not allowed when creating a resource set. After creation, each subsequent update call to the resource set requires the update token.  To make an unconditional change to the resource set, omit the token in your update request. Without the token, Firewall Manager performs your updates regardless of whether the resource set has changed since you last retrieved it. To make a conditional change to the resource set, provide the token in your update request. Firewall Manager uses the token to ensure that the resource set hasn't changed since you last retrieved it. If it has changed, the operation fails with an InvalidTokenException. If this happens, retrieve the resource set again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. 
+     */
+    UpdateToken?: UpdateToken;
+    /**
+     * Determines the resources that can be associated to the resource set. Depending on your setting for max results and the number of resource sets, a single call might not return the full list.
+     */
+    ResourceTypeList: ResourceTypeList;
+    /**
+     * The last time that the resource set was changed.
+     */
+    LastUpdateTime?: TimeStamp;
+  }
+  export type ResourceSetIds = Base62Id[];
+  export interface ResourceSetSummary {
+    /**
+     * A unique identifier for the resource set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
+     */
+    Id?: Base62Id;
+    /**
+     * The descriptive name of the resource set. You can't change the name of a resource set after you create it.
+     */
+    Name?: Name;
+    /**
+     * A description of the resource set.
+     */
+    Description?: Description;
+    /**
+     * The last time that the resource set was changed.
+     */
+    LastUpdateTime?: TimeStamp;
+  }
+  export type ResourceSetSummaryList = ResourceSetSummary[];
   export interface ResourceTag {
     /**
      * The resource tag key.
@@ -1997,7 +2318,7 @@ declare namespace FMS {
      */
     PolicyOption?: PolicyOption;
   }
-  export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|"DNS_FIREWALL"|"THIRD_PARTY_FIREWALL"|string;
+  export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|"DNS_FIREWALL"|"THIRD_PARTY_FIREWALL"|"IMPORT_NETWORK_FIREWALL"|string;
   export interface StatefulEngineOptions {
     /**
      * Indicates how to manage the order of stateful rule evaluation for the policy. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the Network Firewall Developer Guide.

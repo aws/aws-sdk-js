@@ -318,5 +318,6 @@ module.exports = {
   ControlTower: require('./controltower'),
   IoTFleetWise: require('./iotfleetwise'),
   MigrationHubOrchestrator: require('./migrationhuborchestrator'),
-  ConnectCases: require('./connectcases')
+  ConnectCases: require('./connectcases'),
+  ResourceExplorer2: require('./resourceexplorer2')
 };

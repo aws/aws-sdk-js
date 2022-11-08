@@ -23666,6 +23666,10 @@ declare namespace EC2 {
      * The number of the partition the instance should launch in. Valid only if the placement group strategy is set to partition.
      */
     PartitionNumber?: Integer;
+    /**
+     * The Group ID of the placement group. You must specify the Placement Group Group ID to launch an instance in a shared placement group.
+     */
+    GroupId?: PlacementGroupId;
   }
   export interface LaunchTemplatePlacementRequest {
     /**
@@ -23700,6 +23704,10 @@ declare namespace EC2 {
      * The number of the partition the instance should launch in. Valid only if the placement group strategy is set to partition.
      */
     PartitionNumber?: Integer;
+    /**
+     * The Group Id of a placement group. You must specify the Placement Group Group Id to launch an instance in a shared placement group.
+     */
+    GroupId?: PlacementGroupId;
   }
   export interface LaunchTemplatePrivateDnsNameOptions {
     /**
@@ -24982,6 +24990,10 @@ declare namespace EC2 {
      * The ARN of the host resource group in which to place the instance.
      */
     HostResourceGroupArn?: String;
+    /**
+     * The Group Id of a placement group. You must specify the Placement Group Group Id to launch an instance in a shared placement group.
+     */
+    GroupId?: PlacementGroupId;
   }
   export interface ModifyInstancePlacementResult {
     /**
@@ -27373,6 +27385,10 @@ declare namespace EC2 {
      * The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host. This parameter is not supported by CreateFleet.
      */
     HostResourceGroupArn?: String;
+    /**
+     * The Group Id of the placement group.
+     */
+    GroupId?: PlacementGroupId;
   }
   export interface PlacementGroup {
     /**

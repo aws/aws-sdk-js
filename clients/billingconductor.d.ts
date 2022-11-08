@@ -100,11 +100,11 @@ declare class Billingconductor extends Service {
    */
   deletePricingPlan(callback?: (err: AWSError, data: Billingconductor.Types.DeletePricingPlanOutput) => void): Request<Billingconductor.Types.DeletePricingPlanOutput, AWSError>;
   /**
-   *  Deletes the pricing rule identified by the input Amazon Resource Name (ARN). 
+   *  Deletes the pricing rule that's identified by the input Amazon Resource Name (ARN). 
    */
   deletePricingRule(params: Billingconductor.Types.DeletePricingRuleInput, callback?: (err: AWSError, data: Billingconductor.Types.DeletePricingRuleOutput) => void): Request<Billingconductor.Types.DeletePricingRuleOutput, AWSError>;
   /**
-   *  Deletes the pricing rule identified by the input Amazon Resource Name (ARN). 
+   *  Deletes the pricing rule that's identified by the input Amazon Resource Name (ARN). 
    */
   deletePricingRule(callback?: (err: AWSError, data: Billingconductor.Types.DeletePricingRuleOutput) => void): Request<Billingconductor.Types.DeletePricingRuleOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Billingconductor extends Service {
    */
   disassociatePricingRules(callback?: (err: AWSError, data: Billingconductor.Types.DisassociatePricingRulesOutput) => void): Request<Billingconductor.Types.DisassociatePricingRulesOutput, AWSError>;
   /**
-   *   Amazon Web Services Billing Conductor is in beta release and is subject to change. Your use of Amazon Web Services Billing Conductor is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).    This is a paginated call to list linked accounts that are linked to the payer account for the specified time period. If no information is provided, the current billing period is used. The response will optionally include the billing group associated with the linked account.
+   *  This is a paginated call to list linked accounts that are linked to the payer account for the specified time period. If no information is provided, the current billing period is used. The response will optionally include the billing group that's associated with the linked account.
    */
   listAccountAssociations(params: Billingconductor.Types.ListAccountAssociationsInput, callback?: (err: AWSError, data: Billingconductor.Types.ListAccountAssociationsOutput) => void): Request<Billingconductor.Types.ListAccountAssociationsOutput, AWSError>;
   /**
-   *   Amazon Web Services Billing Conductor is in beta release and is subject to change. Your use of Amazon Web Services Billing Conductor is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).    This is a paginated call to list linked accounts that are linked to the payer account for the specified time period. If no information is provided, the current billing period is used. The response will optionally include the billing group associated with the linked account.
+   *  This is a paginated call to list linked accounts that are linked to the payer account for the specified time period. If no information is provided, the current billing period is used. The response will optionally include the billing group that's associated with the linked account.
    */
   listAccountAssociations(callback?: (err: AWSError, data: Billingconductor.Types.ListAccountAssociationsOutput) => void): Request<Billingconductor.Types.ListAccountAssociationsOutput, AWSError>;
   /**
@@ -148,6 +148,14 @@ declare class Billingconductor extends Service {
    */
   listBillingGroups(callback?: (err: AWSError, data: Billingconductor.Types.ListBillingGroupsOutput) => void): Request<Billingconductor.Types.ListBillingGroupsOutput, AWSError>;
   /**
+   * A paginated call to get a list of all custom line item versions.
+   */
+  listCustomLineItemVersions(params: Billingconductor.Types.ListCustomLineItemVersionsInput, callback?: (err: AWSError, data: Billingconductor.Types.ListCustomLineItemVersionsOutput) => void): Request<Billingconductor.Types.ListCustomLineItemVersionsOutput, AWSError>;
+  /**
+   * A paginated call to get a list of all custom line item versions.
+   */
+  listCustomLineItemVersions(callback?: (err: AWSError, data: Billingconductor.Types.ListCustomLineItemVersionsOutput) => void): Request<Billingconductor.Types.ListCustomLineItemVersionsOutput, AWSError>;
+  /**
    *  A paginated call to get a list of all custom line items (FFLIs) for the given billing period. If you don't provide a billing period, the current billing period is used. 
    */
   listCustomLineItems(params: Billingconductor.Types.ListCustomLineItemsInput, callback?: (err: AWSError, data: Billingconductor.Types.ListCustomLineItemsOutput) => void): Request<Billingconductor.Types.ListCustomLineItemsOutput, AWSError>;
@@ -164,11 +172,11 @@ declare class Billingconductor extends Service {
    */
   listPricingPlans(callback?: (err: AWSError, data: Billingconductor.Types.ListPricingPlansOutput) => void): Request<Billingconductor.Types.ListPricingPlansOutput, AWSError>;
   /**
-   *  A list of the pricing plans associated with a pricing rule. 
+   *  A list of the pricing plans that are associated with a pricing rule. 
    */
   listPricingPlansAssociatedWithPricingRule(params: Billingconductor.Types.ListPricingPlansAssociatedWithPricingRuleInput, callback?: (err: AWSError, data: Billingconductor.Types.ListPricingPlansAssociatedWithPricingRuleOutput) => void): Request<Billingconductor.Types.ListPricingPlansAssociatedWithPricingRuleOutput, AWSError>;
   /**
-   *  A list of the pricing plans associated with a pricing rule. 
+   *  A list of the pricing plans that are associated with a pricing rule. 
    */
   listPricingPlansAssociatedWithPricingRule(callback?: (err: AWSError, data: Billingconductor.Types.ListPricingPlansAssociatedWithPricingRuleOutput) => void): Request<Billingconductor.Types.ListPricingPlansAssociatedWithPricingRuleOutput, AWSError>;
   /**
@@ -180,19 +188,19 @@ declare class Billingconductor extends Service {
    */
   listPricingRules(callback?: (err: AWSError, data: Billingconductor.Types.ListPricingRulesOutput) => void): Request<Billingconductor.Types.ListPricingRulesOutput, AWSError>;
   /**
-   *  Lists the pricing rules associated with a pricing plan. 
+   *  Lists the pricing rules that are associated with a pricing plan. 
    */
   listPricingRulesAssociatedToPricingPlan(params: Billingconductor.Types.ListPricingRulesAssociatedToPricingPlanInput, callback?: (err: AWSError, data: Billingconductor.Types.ListPricingRulesAssociatedToPricingPlanOutput) => void): Request<Billingconductor.Types.ListPricingRulesAssociatedToPricingPlanOutput, AWSError>;
   /**
-   *  Lists the pricing rules associated with a pricing plan. 
+   *  Lists the pricing rules that are associated with a pricing plan. 
    */
   listPricingRulesAssociatedToPricingPlan(callback?: (err: AWSError, data: Billingconductor.Types.ListPricingRulesAssociatedToPricingPlanOutput) => void): Request<Billingconductor.Types.ListPricingRulesAssociatedToPricingPlanOutput, AWSError>;
   /**
-   *  List the resources associated to a custom line item. 
+   *  List the resources that are associated to a custom line item. 
    */
   listResourcesAssociatedToCustomLineItem(params: Billingconductor.Types.ListResourcesAssociatedToCustomLineItemInput, callback?: (err: AWSError, data: Billingconductor.Types.ListResourcesAssociatedToCustomLineItemOutput) => void): Request<Billingconductor.Types.ListResourcesAssociatedToCustomLineItemOutput, AWSError>;
   /**
-   *  List the resources associated to a custom line item. 
+   *  List the resources that are associated to a custom line item. 
    */
   listResourcesAssociatedToCustomLineItem(callback?: (err: AWSError, data: Billingconductor.Types.ListResourcesAssociatedToCustomLineItemOutput) => void): Request<Billingconductor.Types.ListResourcesAssociatedToCustomLineItemOutput, AWSError>;
   /**
@@ -318,20 +326,20 @@ declare namespace Billingconductor {
   }
   export interface AssociateResourceError {
     /**
-     *  The reason the resource association failed. 
+     *  The reason why the resource association failed. 
      */
     Message?: String;
     /**
-     *  A static error code that used to classify the type of failure. 
+     *  A static error code that's used to classify the type of failure. 
      */
     Reason?: AssociateResourceErrorReason;
   }
-  export type AssociateResourceErrorReason = "INVALID_ARN"|"SERVICE_LIMIT_EXCEEDED"|"ILLEGAL_CUSTOMLINEITEM"|"INTERNAL_SERVER_EXCEPTION"|string;
+  export type AssociateResourceErrorReason = "INVALID_ARN"|"SERVICE_LIMIT_EXCEEDED"|"ILLEGAL_CUSTOMLINEITEM"|"INTERNAL_SERVER_EXCEPTION"|"INVALID_BILLING_PERIOD_RANGE"|string;
   export interface AssociateResourceResponseElement {
     /**
      *  The resource ARN that was associated to the custom line item. 
      */
-    Arn?: CustomLineItemArn;
+    Arn?: CustomLineItemAssociationElement;
     /**
      *  An AssociateResourceError that will populate if the resource association fails. 
      */
@@ -415,7 +423,7 @@ declare namespace Billingconductor {
   export type BillingGroupList = BillingGroupListElement[];
   export interface BillingGroupListElement {
     /**
-     * The billing group's name. 
+     * The name of the billing group. 
      */
     Name?: BillingGroupName;
     /**
@@ -423,7 +431,7 @@ declare namespace Billingconductor {
      */
     Arn?: BillingGroupArn;
     /**
-     * The billing group description. 
+     * The description of the billing group. 
      */
     Description?: BillingGroupDescription;
     /**
@@ -436,11 +444,11 @@ declare namespace Billingconductor {
      */
     Size?: NumberOfAccounts;
     /**
-     *  The time the billing group was created. 
+     *  The time when the billing group was created. 
      */
     CreationTime?: Instant;
     /**
-     *  The most recent time the billing group was modified. 
+     *  The most recent time when the billing group was modified. 
      */
     LastModifiedTime?: Instant;
     /**
@@ -459,7 +467,7 @@ declare namespace Billingconductor {
   export type ClientToken = string;
   export interface ComputationPreference {
     /**
-     *  The Amazon Resource Name (ARN) of the pricing plan used to compute the Amazon Web Services charges for a billing group. 
+     *  The Amazon Resource Name (ARN) of the pricing plan that's used to compute the Amazon Web Services charges for a billing group. 
      */
     PricingPlanArn: PricingPlanFullArn;
   }
@@ -485,7 +493,7 @@ declare namespace Billingconductor {
      */
     PrimaryAccountId?: AccountId;
     /**
-     * The billing group description. 
+     * The description of the billing group. 
      */
     Description?: BillingGroupDescription;
     /**
@@ -541,11 +549,11 @@ declare namespace Billingconductor {
      */
     ClientToken?: ClientToken;
     /**
-     * The pricing plan name. The names must be unique to each pricing plan. 
+     * The name of the pricing plan. The names must be unique to each pricing plan. 
      */
     Name: PricingPlanName;
     /**
-     * The pricing plan description. 
+     * The description of the pricing plan. 
      */
     Description?: PricingPlanDescription;
     /**
@@ -565,7 +573,7 @@ declare namespace Billingconductor {
   }
   export interface CreatePricingRuleInput {
     /**
-     *  The token that is needed to support idempotency. Idempotency isn't currently supported, but will be implemented in a future update. 
+     *  The token that's needed to support idempotency. Idempotency isn't currently supported, but will be implemented in a future update. 
      */
     ClientToken?: ClientToken;
     /**
@@ -577,7 +585,7 @@ declare namespace Billingconductor {
      */
     Description?: PricingRuleDescription;
     /**
-     *  The scope of pricing rule that indicates if it is globally applicable, or is service-specific. 
+     *  The scope of pricing rule that indicates if it's globally applicable, or it's service-specific. 
      */
     Scope: PricingRuleScope;
     /**
@@ -585,7 +593,7 @@ declare namespace Billingconductor {
      */
     Type: PricingRuleType;
     /**
-     *  A percentage modifier applied on the public pricing rates. 
+     *  A percentage modifier that's applied on the public pricing rates. 
      */
     ModifierPercentage: ModifierPercentage;
     /**
@@ -619,7 +627,7 @@ declare namespace Billingconductor {
     /**
      *  The inclusive end billing period that defines a billing period range where a custom line is applied. 
      */
-    ExclusiveEndBillingPeriod: BillingPeriod;
+    ExclusiveEndBillingPeriod?: BillingPeriod;
   }
   export interface CustomLineItemChargeDetails {
     /**
@@ -666,7 +674,7 @@ declare namespace Billingconductor {
      */
     Description?: CustomLineItemDescription;
     /**
-     *  The product code associated with the custom line item. 
+     *  The product code that's associated with the custom line item. 
      */
     ProductCode?: CustomLineItemProductCode;
     /**
@@ -678,7 +686,7 @@ declare namespace Billingconductor {
      */
     CreationTime?: Instant;
     /**
-     *  The most recent time the custom line item was modified. 
+     *  The most recent time when the custom line item was modified. 
      */
     LastModifiedTime?: Instant;
     /**
@@ -702,9 +710,53 @@ declare namespace Billingconductor {
   export type CustomLineItemProductCode = string;
   export type CustomLineItemRelationship = "PARENT"|"CHILD"|string;
   export type CustomLineItemType = "CREDIT"|"FEE"|string;
+  export type CustomLineItemVersionList = CustomLineItemVersionListElement[];
+  export interface CustomLineItemVersionListElement {
+    /**
+     * The name of the custom line item.
+     */
+    Name?: CustomLineItemName;
+    ChargeDetails?: ListCustomLineItemChargeDetails;
+    /**
+     * The charge value currency of the custom line item.
+     */
+    CurrencyCode?: CurrencyCode;
+    /**
+     * The description of the custom line item.
+     */
+    Description?: CustomLineItemDescription;
+    /**
+     * The product code that’s associated with the custom line item.
+     */
+    ProductCode?: CustomLineItemProductCode;
+    /**
+     * The Amazon Resource Name (ARN) of the billing group that the custom line item applies to.
+     */
+    BillingGroupArn?: BillingGroupArn;
+    /**
+     * The time when the custom line item version was created.
+     */
+    CreationTime?: Instant;
+    /**
+     * The most recent time that the custom line item version was modified.
+     */
+    LastModifiedTime?: Instant;
+    /**
+     * The number of resources that are associated with the custom line item.
+     */
+    AssociationSize?: NumberOfAssociations;
+    /**
+     * The start billing period of the custom line item version.
+     */
+    StartBillingPeriod?: BillingPeriod;
+    /**
+     * The end billing period of the custom line item version.
+     */
+    EndBillingPeriod?: BillingPeriod;
+  }
   export interface DeleteBillingGroupInput {
     /**
-     * The Amazon Resource Name (ARN) of the billing group you're deleting.
+     * The Amazon Resource Name (ARN) of the billing group that you're deleting.
      */
     Arn: BillingGroupArn;
   }
@@ -729,7 +781,7 @@ declare namespace Billingconductor {
   }
   export interface DeletePricingPlanInput {
     /**
-     * The Amazon Resource Name (ARN) of the pricing plan you're deleting. 
+     * The Amazon Resource Name (ARN) of the pricing plan that you're deleting. 
      */
     Arn: PricingPlanArn;
   }
@@ -741,7 +793,7 @@ declare namespace Billingconductor {
   }
   export interface DeletePricingRuleInput {
     /**
-     *  The Amazon Resource Name (ARN) of the pricing rule you are deleting. 
+     *  The Amazon Resource Name (ARN) of the pricing rule that you are deleting. 
      */
     Arn: PricingRuleArn;
   }
@@ -787,9 +839,9 @@ declare namespace Billingconductor {
     /**
      *  The resource ARN that was disassociated from the custom line item. 
      */
-    Arn?: CustomLineItemArn;
+    Arn?: CustomLineItemAssociationElement;
     /**
-     *  An AssociateResourceError shown if the resource disassociation fails. 
+     *  An AssociateResourceError that's shown if the resource disassociation fails. 
      */
     Error?: AssociateResourceError;
   }
@@ -811,11 +863,11 @@ declare namespace Billingconductor {
      */
     BillingPeriod?: BillingPeriod;
     /**
-     * The filter on the account ID of the linked account, or any of the following:  MONITORED: linked accounts that are associated to billing groups.  UNMONITORED: linked accounts that are not associated to billing groups.  Billing Group Arn: linked accounts that are associated to the provided billing group Arn. 
+     * The filter on the account ID of the linked account, or any of the following:  MONITORED: linked accounts that are associated to billing groups.  UNMONITORED: linked accounts that aren't associated to billing groups.  Billing Group Arn: linked accounts that are associated to the provided billing group Arn. 
      */
     Filters?: ListAccountAssociationsFilter;
     /**
-     *  The pagination token used on subsequent calls to retrieve accounts. 
+     *  The pagination token that's used on subsequent calls to retrieve accounts. 
      */
     NextToken?: Token;
   }
@@ -825,7 +877,7 @@ declare namespace Billingconductor {
      */
     LinkedAccounts?: AccountAssociationsList;
     /**
-     *  The pagination token used on subsequent calls to get accounts. 
+     *  The pagination token that's used on subsequent calls to get accounts. 
      */
     NextToken?: Token;
   }
@@ -845,7 +897,7 @@ declare namespace Billingconductor {
      */
     MaxResults?: MaxBillingGroupResults;
     /**
-     * The pagination token used on subsequent calls to get reports. 
+     * The pagination token that's used on subsequent calls to get reports. 
      */
     NextToken?: Token;
     /**
@@ -859,7 +911,7 @@ declare namespace Billingconductor {
      */
     BillingGroupCostReports?: BillingGroupCostReportList;
     /**
-     * The pagination token used on subsequent calls to get reports. 
+     * The pagination token that's used on subsequent calls to get reports. 
      */
     NextToken?: Token;
   }
@@ -883,7 +935,7 @@ declare namespace Billingconductor {
      */
     MaxResults?: MaxBillingGroupResults;
     /**
-     * The pagination token used on subsequent calls to get billing groups. 
+     * The pagination token that's used on subsequent calls to get billing groups. 
      */
     NextToken?: Token;
     /**
@@ -897,7 +949,7 @@ declare namespace Billingconductor {
      */
     BillingGroups?: BillingGroupList;
     /**
-     * The pagination token used on subsequent calls to get billing groups. 
+     * The pagination token that's used on subsequent calls to get billing groups. 
      */
     NextToken?: Token;
   }
@@ -927,6 +979,50 @@ declare namespace Billingconductor {
      */
     PercentageValue: CustomLineItemPercentageChargeValue;
   }
+  export interface ListCustomLineItemVersionsBillingPeriodRangeFilter {
+    /**
+     * The inclusive start billing period that defines a billing period range where a custom line item version is applied.
+     */
+    StartBillingPeriod?: BillingPeriod;
+    /**
+     * The exclusive end billing period that defines a billing period range where a custom line item version is applied.
+     */
+    EndBillingPeriod?: BillingPeriod;
+  }
+  export interface ListCustomLineItemVersionsFilter {
+    /**
+     * The billing period range in which the custom line item version is applied.
+     */
+    BillingPeriodRange?: ListCustomLineItemVersionsBillingPeriodRangeFilter;
+  }
+  export interface ListCustomLineItemVersionsInput {
+    /**
+     * The Amazon Resource Name (ARN) for the custom line item.
+     */
+    Arn: CustomLineItemArn;
+    /**
+     * The maximum number of custom line item versions to retrieve.
+     */
+    MaxResults?: MaxCustomLineItemResults;
+    /**
+     * The pagination token that's used on subsequent calls to retrieve custom line item versions.
+     */
+    NextToken?: Token;
+    /**
+     * A ListCustomLineItemVersionsFilter that specifies the billing period range in which the custom line item versions are applied.
+     */
+    Filters?: ListCustomLineItemVersionsFilter;
+  }
+  export interface ListCustomLineItemVersionsOutput {
+    /**
+     * A list of CustomLineItemVersionListElements that are received.
+     */
+    CustomLineItemVersions?: CustomLineItemVersionList;
+    /**
+     * The pagination token that's used on subsequent calls to retrieve custom line item versions.
+     */
+    NextToken?: Token;
+  }
   export interface ListCustomLineItemsFilter {
     /**
      *  A list of custom line items to retrieve information. 
@@ -949,9 +1045,9 @@ declare namespace Billingconductor {
     /**
      *  The maximum number of billing groups to retrieve. 
      */
-    MaxResults?: MaxBillingGroupResults;
+    MaxResults?: MaxCustomLineItemResults;
     /**
-     *  The pagination token used on subsequent calls to get custom line items (FFLIs). 
+     *  The pagination token that's used on subsequent calls to get custom line items (FFLIs). 
      */
     NextToken?: Token;
     /**
@@ -965,7 +1061,7 @@ declare namespace Billingconductor {
      */
     CustomLineItems?: CustomLineItemList;
     /**
-     *  The pagination token used on subsequent calls to get custom line items (FFLIs). 
+     *  The pagination token that's used on subsequent calls to get custom line items (FFLIs). 
      */
     NextToken?: Token;
   }
@@ -997,7 +1093,7 @@ declare namespace Billingconductor {
      */
     PricingRuleArn?: PricingRuleArn;
     /**
-     *  The list containing pricing plans associated with the requested pricing rule. 
+     *  The list containing pricing plans that are associated with the requested pricing rule. 
      */
     PricingPlanArns?: PricingPlanArns;
     /**
@@ -1025,7 +1121,7 @@ declare namespace Billingconductor {
      */
     MaxResults?: MaxPricingPlanResults;
     /**
-     * The pagination token used on subsequent call to get pricing plans. 
+     * The pagination token that's used on subsequent call to get pricing plans. 
      */
     NextToken?: Token;
   }
@@ -1039,7 +1135,7 @@ declare namespace Billingconductor {
      */
     PricingPlans?: PricingPlanList;
     /**
-     * The pagination token used on subsequent calls to get pricing plans. 
+     * The pagination token that's used on subsequent calls to get pricing plans. 
      */
     NextToken?: Token;
   }
@@ -1071,7 +1167,7 @@ declare namespace Billingconductor {
      */
     PricingPlanArn?: PricingPlanArn;
     /**
-     *  A list containing pricing rules associated with the requested pricing plan. 
+     *  A list containing pricing rules that are associated with the requested pricing plan. 
      */
     PricingRuleArns?: PricingRuleArns;
     /**
@@ -1099,7 +1195,7 @@ declare namespace Billingconductor {
      */
     MaxResults?: MaxPricingRuleResults;
     /**
-     *  The pagination token used on subsequent call to get pricing rules. 
+     *  The pagination token that's used on subsequent call to get pricing rules. 
      */
     NextToken?: Token;
   }
@@ -1113,7 +1209,7 @@ declare namespace Billingconductor {
      */
     PricingRules?: PricingRuleList;
     /**
-     *  The pagination token used on subsequent calls to get pricing rules. 
+     *  The pagination token that's used on subsequent calls to get pricing rules. 
      */
     NextToken?: Token;
   }
@@ -1137,7 +1233,7 @@ declare namespace Billingconductor {
      */
     MaxResults?: MaxCustomLineItemResults;
     /**
-     *  (Optional) The pagination token returned by a previous request. 
+     *  (Optional) The pagination token that's returned by a previous request. 
      */
     NextToken?: Token;
     /**
@@ -1168,6 +1264,10 @@ declare namespace Billingconductor {
      *  The type of relationship between the custom line item and the associated resource. 
      */
     Relationship?: CustomLineItemRelationship;
+    /**
+     * The end billing period of the associated resource.
+     */
+    EndBillingPeriod?: BillingPeriod;
   }
   export type ListResourcesAssociatedToCustomLineItemResponseList = ListResourcesAssociatedToCustomLineItemResponseElement[];
   export interface ListTagsForResourceRequest {
@@ -1212,15 +1312,15 @@ declare namespace Billingconductor {
      */
     Description?: PricingPlanDescription;
     /**
-     *  The pricing rules count currently associated with this pricing plan list element. 
+     *  The pricing rules count that's currently associated with this pricing plan list element. 
      */
     Size?: NumberOfAssociatedPricingRules;
     /**
-     *  The time the pricing plan was created. 
+     *  The time when the pricing plan was created. 
      */
     CreationTime?: Instant;
     /**
-     *  The most recent time the pricing plan was modified. 
+     *  The most recent time when the pricing plan was modified. 
      */
     LastModifiedTime?: Instant;
   }
@@ -1265,11 +1365,11 @@ declare namespace Billingconductor {
      */
     AssociatedPricingPlanCount?: NumberOfPricingPlansAssociatedWith;
     /**
-     *  The time the pricing rule was created. 
+     *  The time when the pricing rule was created. 
      */
     CreationTime?: Instant;
     /**
-     *  The most recent time the pricing rule was modified. 
+     *  The most recent time when the pricing rule was modified. 
      */
     LastModifiedTime?: Instant;
   }
@@ -1356,7 +1456,7 @@ declare namespace Billingconductor {
      */
     Size?: NumberOfAccounts;
     /**
-     *  The most recent time the billing group was modified. 
+     *  The most recent time when the billing group was modified. 
      */
     LastModifiedTime?: Instant;
     /**
@@ -1392,7 +1492,7 @@ declare namespace Billingconductor {
     /**
      *  The new name for the custom line item. 
      */
-    Name?: BillingGroupName;
+    Name?: CustomLineItemName;
     /**
      *  The new line item description of the custom line item. 
      */
@@ -1425,7 +1525,7 @@ declare namespace Billingconductor {
      */
     ChargeDetails?: ListCustomLineItemChargeDetails;
     /**
-     *  The most recent time the custom line item was modified. 
+     *  The most recent time when the custom line item was modified. 
      */
     LastModifiedTime?: Instant;
     /**
@@ -1441,7 +1541,7 @@ declare namespace Billingconductor {
   }
   export interface UpdatePricingPlanInput {
     /**
-     * The Amazon Resource Name (ARN) of the pricing plan you're updating. 
+     * The Amazon Resource Name (ARN) of the pricing plan that you're updating. 
      */
     Arn: PricingPlanArn;
     /**
@@ -1449,7 +1549,7 @@ declare namespace Billingconductor {
      */
     Name?: PricingPlanName;
     /**
-     * The pricing plan description. 
+     * The description of the pricing plan. 
      */
     Description?: PricingPlanDescription;
   }
@@ -1467,11 +1567,11 @@ declare namespace Billingconductor {
      */
     Description?: PricingPlanDescription;
     /**
-     *  The pricing rules count currently associated with this pricing plan list. 
+     *  The pricing rules count that's currently associated with this pricing plan list. 
      */
     Size?: NumberOfAssociatedPricingRules;
     /**
-     *  The most recent time the pricing plan was modified. 
+     *  The most recent time when the pricing plan was modified. 
      */
     LastModifiedTime?: Instant;
   }
@@ -1511,7 +1611,7 @@ declare namespace Billingconductor {
      */
     Description?: PricingRuleDescription;
     /**
-     *  The scope of pricing rule that indicates if it is globally applicable, or is service-specific. 
+     *  The scope of pricing rule that indicates if it's globally applicable, or it's service-specific. 
      */
     Scope?: PricingRuleScope;
     /**

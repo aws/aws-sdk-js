@@ -12,372 +12,454 @@ declare class OpenSearch extends Service {
   constructor(options?: OpenSearch.Types.ClientConfiguration)
   config: Config & OpenSearch.Types.ClientConfiguration;
   /**
-   * Allows the remote domain owner to accept an inbound cross-cluster connection request.
+   * Allows the destination Amazon OpenSearch Service domain owner to accept an inbound cross-cluster search connection request. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   acceptInboundConnection(params: OpenSearch.Types.AcceptInboundConnectionRequest, callback?: (err: AWSError, data: OpenSearch.Types.AcceptInboundConnectionResponse) => void): Request<OpenSearch.Types.AcceptInboundConnectionResponse, AWSError>;
   /**
-   * Allows the remote domain owner to accept an inbound cross-cluster connection request.
+   * Allows the destination Amazon OpenSearch Service domain owner to accept an inbound cross-cluster search connection request. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   acceptInboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.AcceptInboundConnectionResponse) => void): Request<OpenSearch.Types.AcceptInboundConnectionResponse, AWSError>;
   /**
-   * Attaches tags to an existing domain. Tags are a set of case-sensitive key value pairs. An domain can have up to 10 tags. See  Tagging Amazon OpenSearch Service domains for more information. 
+   * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. An domain can have up to 10 tags. For more information, see  Tagging Amazon OpenSearch Service domains.
    */
   addTags(params: OpenSearch.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches tags to an existing domain. Tags are a set of case-sensitive key value pairs. An domain can have up to 10 tags. See  Tagging Amazon OpenSearch Service domains for more information. 
+   * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. An domain can have up to 10 tags. For more information, see  Tagging Amazon OpenSearch Service domains.
    */
   addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a package with an Amazon OpenSearch Service domain.
+   * Associates a package with an Amazon OpenSearch Service domain. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   associatePackage(params: OpenSearch.Types.AssociatePackageRequest, callback?: (err: AWSError, data: OpenSearch.Types.AssociatePackageResponse) => void): Request<OpenSearch.Types.AssociatePackageResponse, AWSError>;
   /**
-   * Associates a package with an Amazon OpenSearch Service domain.
+   * Associates a package with an Amazon OpenSearch Service domain. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   associatePackage(callback?: (err: AWSError, data: OpenSearch.Types.AssociatePackageResponse) => void): Request<OpenSearch.Types.AssociatePackageResponse, AWSError>;
   /**
-   * Cancels a scheduled service software update for an Amazon OpenSearch Service domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state. 
+   * Provides access to an Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
+   */
+  authorizeVpcEndpointAccess(params: OpenSearch.Types.AuthorizeVpcEndpointAccessRequest, callback?: (err: AWSError, data: OpenSearch.Types.AuthorizeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.AuthorizeVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Provides access to an Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
+   */
+  authorizeVpcEndpointAccess(callback?: (err: AWSError, data: OpenSearch.Types.AuthorizeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.AuthorizeVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Cancels a scheduled service software update for an Amazon OpenSearch Service domain. You can only perform this operation before the AutomatedUpdateDate and when the domain's UpdateStatus is PENDING_UPDATE. For more information, see Service software updates in Amazon OpenSearch Service.
    */
   cancelServiceSoftwareUpdate(params: OpenSearch.Types.CancelServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: OpenSearch.Types.CancelServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.CancelServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Cancels a scheduled service software update for an Amazon OpenSearch Service domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state. 
+   * Cancels a scheduled service software update for an Amazon OpenSearch Service domain. You can only perform this operation before the AutomatedUpdateDate and when the domain's UpdateStatus is PENDING_UPDATE. For more information, see Service software updates in Amazon OpenSearch Service.
    */
   cancelServiceSoftwareUpdate(callback?: (err: AWSError, data: OpenSearch.Types.CancelServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.CancelServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Creates a new Amazon OpenSearch Service domain. For more information, see Creating and managing Amazon OpenSearch Service domains  in the Amazon OpenSearch Service Developer Guide. 
+   * Creates an Amazon OpenSearch Service domain. For more information, see Creating and managing Amazon OpenSearch Service domains.
    */
   createDomain(params: OpenSearch.Types.CreateDomainRequest, callback?: (err: AWSError, data: OpenSearch.Types.CreateDomainResponse) => void): Request<OpenSearch.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a new Amazon OpenSearch Service domain. For more information, see Creating and managing Amazon OpenSearch Service domains  in the Amazon OpenSearch Service Developer Guide. 
+   * Creates an Amazon OpenSearch Service domain. For more information, see Creating and managing Amazon OpenSearch Service domains.
    */
   createDomain(callback?: (err: AWSError, data: OpenSearch.Types.CreateDomainResponse) => void): Request<OpenSearch.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a new cross-cluster connection from a local OpenSearch domain to a remote OpenSearch domain.
+   * Creates a new cross-cluster search connection from a source Amazon OpenSearch Service domain to a destination domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   createOutboundConnection(params: OpenSearch.Types.CreateOutboundConnectionRequest, callback?: (err: AWSError, data: OpenSearch.Types.CreateOutboundConnectionResponse) => void): Request<OpenSearch.Types.CreateOutboundConnectionResponse, AWSError>;
   /**
-   * Creates a new cross-cluster connection from a local OpenSearch domain to a remote OpenSearch domain.
+   * Creates a new cross-cluster search connection from a source Amazon OpenSearch Service domain to a destination domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   createOutboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.CreateOutboundConnectionResponse) => void): Request<OpenSearch.Types.CreateOutboundConnectionResponse, AWSError>;
   /**
-   * Create a package for use with Amazon OpenSearch Service domains.
+   * Creates a package for use with Amazon OpenSearch Service domains. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   createPackage(params: OpenSearch.Types.CreatePackageRequest, callback?: (err: AWSError, data: OpenSearch.Types.CreatePackageResponse) => void): Request<OpenSearch.Types.CreatePackageResponse, AWSError>;
   /**
-   * Create a package for use with Amazon OpenSearch Service domains.
+   * Creates a package for use with Amazon OpenSearch Service domains. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   createPackage(callback?: (err: AWSError, data: OpenSearch.Types.CreatePackageResponse) => void): Request<OpenSearch.Types.CreatePackageResponse, AWSError>;
   /**
-   * Permanently deletes the specified domain and all of its data. Once a domain is deleted, it cannot be recovered. 
+   * Creates an Amazon OpenSearch Service-managed VPC endpoint.
+   */
+  createVpcEndpoint(params: OpenSearch.Types.CreateVpcEndpointRequest, callback?: (err: AWSError, data: OpenSearch.Types.CreateVpcEndpointResponse) => void): Request<OpenSearch.Types.CreateVpcEndpointResponse, AWSError>;
+  /**
+   * Creates an Amazon OpenSearch Service-managed VPC endpoint.
+   */
+  createVpcEndpoint(callback?: (err: AWSError, data: OpenSearch.Types.CreateVpcEndpointResponse) => void): Request<OpenSearch.Types.CreateVpcEndpointResponse, AWSError>;
+  /**
+   * Deletes an Amazon OpenSearch Service domain and all of its data. You can't recover a domain after you delete it.
    */
   deleteDomain(params: OpenSearch.Types.DeleteDomainRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeleteDomainResponse) => void): Request<OpenSearch.Types.DeleteDomainResponse, AWSError>;
   /**
-   * Permanently deletes the specified domain and all of its data. Once a domain is deleted, it cannot be recovered. 
+   * Deletes an Amazon OpenSearch Service domain and all of its data. You can't recover a domain after you delete it.
    */
   deleteDomain(callback?: (err: AWSError, data: OpenSearch.Types.DeleteDomainResponse) => void): Request<OpenSearch.Types.DeleteDomainResponse, AWSError>;
   /**
-   * Allows the remote domain owner to delete an existing inbound cross-cluster connection.
+   * Allows the destination Amazon OpenSearch Service domain owner to delete an existing inbound cross-cluster search connection. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   deleteInboundConnection(params: OpenSearch.Types.DeleteInboundConnectionRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeleteInboundConnectionResponse) => void): Request<OpenSearch.Types.DeleteInboundConnectionResponse, AWSError>;
   /**
-   * Allows the remote domain owner to delete an existing inbound cross-cluster connection.
+   * Allows the destination Amazon OpenSearch Service domain owner to delete an existing inbound cross-cluster search connection. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   deleteInboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.DeleteInboundConnectionResponse) => void): Request<OpenSearch.Types.DeleteInboundConnectionResponse, AWSError>;
   /**
-   * Allows the local domain owner to delete an existing outbound cross-cluster connection.
+   * Allows the source Amazon OpenSearch Service domain owner to delete an existing outbound cross-cluster search connection. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   deleteOutboundConnection(params: OpenSearch.Types.DeleteOutboundConnectionRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeleteOutboundConnectionResponse) => void): Request<OpenSearch.Types.DeleteOutboundConnectionResponse, AWSError>;
   /**
-   * Allows the local domain owner to delete an existing outbound cross-cluster connection.
+   * Allows the source Amazon OpenSearch Service domain owner to delete an existing outbound cross-cluster search connection. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   deleteOutboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.DeleteOutboundConnectionResponse) => void): Request<OpenSearch.Types.DeleteOutboundConnectionResponse, AWSError>;
   /**
-   * Deletes the package.
+   * Deletes an Amazon OpenSearch Service package. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   deletePackage(params: OpenSearch.Types.DeletePackageRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeletePackageResponse) => void): Request<OpenSearch.Types.DeletePackageResponse, AWSError>;
   /**
-   * Deletes the package.
+   * Deletes an Amazon OpenSearch Service package. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   deletePackage(callback?: (err: AWSError, data: OpenSearch.Types.DeletePackageResponse) => void): Request<OpenSearch.Types.DeletePackageResponse, AWSError>;
   /**
-   * Returns domain configuration information about the specified domain, including the domain ID, domain endpoint, and domain ARN. 
+   * Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
+   */
+  deleteVpcEndpoint(params: OpenSearch.Types.DeleteVpcEndpointRequest, callback?: (err: AWSError, data: OpenSearch.Types.DeleteVpcEndpointResponse) => void): Request<OpenSearch.Types.DeleteVpcEndpointResponse, AWSError>;
+  /**
+   * Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
+   */
+  deleteVpcEndpoint(callback?: (err: AWSError, data: OpenSearch.Types.DeleteVpcEndpointResponse) => void): Request<OpenSearch.Types.DeleteVpcEndpointResponse, AWSError>;
+  /**
+   * Describes the domain configuration for the specified Amazon OpenSearch Service domain, including the domain ID, domain service endpoint, and domain ARN.
    */
   describeDomain(params: OpenSearch.Types.DescribeDomainRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainResponse) => void): Request<OpenSearch.Types.DescribeDomainResponse, AWSError>;
   /**
-   * Returns domain configuration information about the specified domain, including the domain ID, domain endpoint, and domain ARN. 
+   * Describes the domain configuration for the specified Amazon OpenSearch Service domain, including the domain ID, domain service endpoint, and domain ARN.
    */
   describeDomain(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainResponse) => void): Request<OpenSearch.Types.DescribeDomainResponse, AWSError>;
   /**
-   * Provides scheduled Auto-Tune action details for the domain, such as Auto-Tune action type, description, severity, and scheduled date. 
+   * Returns the list of optimizations that Auto-Tune has made to an Amazon OpenSearch Service domain. For more information, see Auto-Tune for Amazon OpenSearch Service.
    */
   describeDomainAutoTunes(params: OpenSearch.Types.DescribeDomainAutoTunesRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainAutoTunesResponse) => void): Request<OpenSearch.Types.DescribeDomainAutoTunesResponse, AWSError>;
   /**
-   * Provides scheduled Auto-Tune action details for the domain, such as Auto-Tune action type, description, severity, and scheduled date. 
+   * Returns the list of optimizations that Auto-Tune has made to an Amazon OpenSearch Service domain. For more information, see Auto-Tune for Amazon OpenSearch Service.
    */
   describeDomainAutoTunes(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainAutoTunesResponse) => void): Request<OpenSearch.Types.DescribeDomainAutoTunesResponse, AWSError>;
   /**
-   * Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.
+   * Returns information about the current blue/green deployment happening on an Amazon OpenSearch Service domain. For more information, see Making configuration changes in Amazon OpenSearch Service.
    */
   describeDomainChangeProgress(params: OpenSearch.Types.DescribeDomainChangeProgressRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainChangeProgressResponse) => void): Request<OpenSearch.Types.DescribeDomainChangeProgressResponse, AWSError>;
   /**
-   * Returns information about the current blue/green deployment happening on a domain, including a change ID, status, and progress stages.
+   * Returns information about the current blue/green deployment happening on an Amazon OpenSearch Service domain. For more information, see Making configuration changes in Amazon OpenSearch Service.
    */
   describeDomainChangeProgress(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainChangeProgressResponse) => void): Request<OpenSearch.Types.DescribeDomainChangeProgressResponse, AWSError>;
   /**
-   * Provides cluster configuration information about the specified domain, such as the state, creation date, update version, and update date for cluster options. 
+   * Returns the configuration of an Amazon OpenSearch Service domain.
    */
   describeDomainConfig(params: OpenSearch.Types.DescribeDomainConfigRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainConfigResponse) => void): Request<OpenSearch.Types.DescribeDomainConfigResponse, AWSError>;
   /**
-   * Provides cluster configuration information about the specified domain, such as the state, creation date, update version, and update date for cluster options. 
+   * Returns the configuration of an Amazon OpenSearch Service domain.
    */
   describeDomainConfig(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainConfigResponse) => void): Request<OpenSearch.Types.DescribeDomainConfigResponse, AWSError>;
   /**
-   * Returns domain configuration information about the specified domains, including the domain ID, domain endpoint, and domain ARN. 
+   * Returns domain configuration information about the specified Amazon OpenSearch Service domains.
    */
   describeDomains(params: OpenSearch.Types.DescribeDomainsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainsResponse) => void): Request<OpenSearch.Types.DescribeDomainsResponse, AWSError>;
   /**
-   * Returns domain configuration information about the specified domains, including the domain ID, domain endpoint, and domain ARN. 
+   * Returns domain configuration information about the specified Amazon OpenSearch Service domains.
    */
   describeDomains(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainsResponse) => void): Request<OpenSearch.Types.DescribeDomainsResponse, AWSError>;
   /**
-   * Lists all the inbound cross-cluster connections for a remote domain.
+   * Lists all the inbound cross-cluster search connections for a destination (remote) Amazon OpenSearch Service domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   describeInboundConnections(params: OpenSearch.Types.DescribeInboundConnectionsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeInboundConnectionsResponse) => void): Request<OpenSearch.Types.DescribeInboundConnectionsResponse, AWSError>;
   /**
-   * Lists all the inbound cross-cluster connections for a remote domain.
+   * Lists all the inbound cross-cluster search connections for a destination (remote) Amazon OpenSearch Service domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   describeInboundConnections(callback?: (err: AWSError, data: OpenSearch.Types.DescribeInboundConnectionsResponse) => void): Request<OpenSearch.Types.DescribeInboundConnectionsResponse, AWSError>;
   /**
-   *  Describe the limits for a given instance type and OpenSearch or Elasticsearch version. When modifying an existing domain, specify the  DomainName  to see which limits you can modify. 
+   * Describes the instance count, storage, and master node limits for a given OpenSearch or Elasticsearch version and instance type.
    */
   describeInstanceTypeLimits(params: OpenSearch.Types.DescribeInstanceTypeLimitsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeInstanceTypeLimitsResponse) => void): Request<OpenSearch.Types.DescribeInstanceTypeLimitsResponse, AWSError>;
   /**
-   *  Describe the limits for a given instance type and OpenSearch or Elasticsearch version. When modifying an existing domain, specify the  DomainName  to see which limits you can modify. 
+   * Describes the instance count, storage, and master node limits for a given OpenSearch or Elasticsearch version and instance type.
    */
   describeInstanceTypeLimits(callback?: (err: AWSError, data: OpenSearch.Types.DescribeInstanceTypeLimitsResponse) => void): Request<OpenSearch.Types.DescribeInstanceTypeLimitsResponse, AWSError>;
   /**
-   * Lists all the outbound cross-cluster connections for a local domain.
+   * Lists all the outbound cross-cluster connections for a local (source) Amazon OpenSearch Service domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   describeOutboundConnections(params: OpenSearch.Types.DescribeOutboundConnectionsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeOutboundConnectionsResponse) => void): Request<OpenSearch.Types.DescribeOutboundConnectionsResponse, AWSError>;
   /**
-   * Lists all the outbound cross-cluster connections for a local domain.
+   * Lists all the outbound cross-cluster connections for a local (source) Amazon OpenSearch Service domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
   describeOutboundConnections(callback?: (err: AWSError, data: OpenSearch.Types.DescribeOutboundConnectionsResponse) => void): Request<OpenSearch.Types.DescribeOutboundConnectionsResponse, AWSError>;
   /**
-   * Describes all packages available to Amazon OpenSearch Service domains. Includes options for filtering, limiting the number of results, and pagination. 
+   * Describes all packages available to OpenSearch Service. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   describePackages(params: OpenSearch.Types.DescribePackagesRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribePackagesResponse) => void): Request<OpenSearch.Types.DescribePackagesResponse, AWSError>;
   /**
-   * Describes all packages available to Amazon OpenSearch Service domains. Includes options for filtering, limiting the number of results, and pagination. 
+   * Describes all packages available to OpenSearch Service. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   describePackages(callback?: (err: AWSError, data: OpenSearch.Types.DescribePackagesResponse) => void): Request<OpenSearch.Types.DescribePackagesResponse, AWSError>;
   /**
-   * Lists available reserved OpenSearch instance offerings.
+   * Describes the available Amazon OpenSearch Service Reserved Instance offerings for a given Region. For more information, see Reserved Instances in Amazon OpenSearch Service.
    */
   describeReservedInstanceOfferings(params: OpenSearch.Types.DescribeReservedInstanceOfferingsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeReservedInstanceOfferingsResponse) => void): Request<OpenSearch.Types.DescribeReservedInstanceOfferingsResponse, AWSError>;
   /**
-   * Lists available reserved OpenSearch instance offerings.
+   * Describes the available Amazon OpenSearch Service Reserved Instance offerings for a given Region. For more information, see Reserved Instances in Amazon OpenSearch Service.
    */
   describeReservedInstanceOfferings(callback?: (err: AWSError, data: OpenSearch.Types.DescribeReservedInstanceOfferingsResponse) => void): Request<OpenSearch.Types.DescribeReservedInstanceOfferingsResponse, AWSError>;
   /**
-   * Returns information about reserved OpenSearch instances for this account.
+   * Describes the Amazon OpenSearch Service instances that you have reserved in a given Region. For more information, see Reserved Instances in Amazon OpenSearch Service.
    */
   describeReservedInstances(params: OpenSearch.Types.DescribeReservedInstancesRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeReservedInstancesResponse) => void): Request<OpenSearch.Types.DescribeReservedInstancesResponse, AWSError>;
   /**
-   * Returns information about reserved OpenSearch instances for this account.
+   * Describes the Amazon OpenSearch Service instances that you have reserved in a given Region. For more information, see Reserved Instances in Amazon OpenSearch Service.
    */
   describeReservedInstances(callback?: (err: AWSError, data: OpenSearch.Types.DescribeReservedInstancesResponse) => void): Request<OpenSearch.Types.DescribeReservedInstancesResponse, AWSError>;
   /**
-   * Dissociates a package from the Amazon OpenSearch Service domain.
+   * Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
+   */
+  describeVpcEndpoints(params: OpenSearch.Types.DescribeVpcEndpointsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeVpcEndpointsResponse) => void): Request<OpenSearch.Types.DescribeVpcEndpointsResponse, AWSError>;
+  /**
+   * Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
+   */
+  describeVpcEndpoints(callback?: (err: AWSError, data: OpenSearch.Types.DescribeVpcEndpointsResponse) => void): Request<OpenSearch.Types.DescribeVpcEndpointsResponse, AWSError>;
+  /**
+   * Removes a package from the specified Amazon OpenSearch Service domain. The package can't be in use with any OpenSearch index for the dissociation to succeed. The package is still available in OpenSearch Service for association later. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   dissociatePackage(params: OpenSearch.Types.DissociatePackageRequest, callback?: (err: AWSError, data: OpenSearch.Types.DissociatePackageResponse) => void): Request<OpenSearch.Types.DissociatePackageResponse, AWSError>;
   /**
-   * Dissociates a package from the Amazon OpenSearch Service domain.
+   * Removes a package from the specified Amazon OpenSearch Service domain. The package can't be in use with any OpenSearch index for the dissociation to succeed. The package is still available in OpenSearch Service for association later. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   dissociatePackage(callback?: (err: AWSError, data: OpenSearch.Types.DissociatePackageResponse) => void): Request<OpenSearch.Types.DissociatePackageResponse, AWSError>;
   /**
-   *  Returns a list of upgrade-compatible versions of OpenSearch/Elasticsearch. You can optionally pass a  DomainName  to get all upgrade-compatible versions of OpenSearch/Elasticsearch for that specific domain. 
+   * Returns a map of OpenSearch or Elasticsearch versions and the versions you can upgrade them to.
    */
   getCompatibleVersions(params: OpenSearch.Types.GetCompatibleVersionsRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
-   *  Returns a list of upgrade-compatible versions of OpenSearch/Elasticsearch. You can optionally pass a  DomainName  to get all upgrade-compatible versions of OpenSearch/Elasticsearch for that specific domain. 
+   * Returns a map of OpenSearch or Elasticsearch versions and the versions you can upgrade them to.
    */
   getCompatibleVersions(callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
-   * Returns a list of package versions, along with their creation time and commit message.
+   * Returns a list of Amazon OpenSearch Service package versions, along with their creation time and commit message. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   getPackageVersionHistory(params: OpenSearch.Types.GetPackageVersionHistoryRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetPackageVersionHistoryResponse) => void): Request<OpenSearch.Types.GetPackageVersionHistoryResponse, AWSError>;
   /**
-   * Returns a list of package versions, along with their creation time and commit message.
+   * Returns a list of Amazon OpenSearch Service package versions, along with their creation time and commit message. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   getPackageVersionHistory(callback?: (err: AWSError, data: OpenSearch.Types.GetPackageVersionHistoryResponse) => void): Request<OpenSearch.Types.GetPackageVersionHistoryResponse, AWSError>;
   /**
-   * Retrieves the complete history of the last 10 upgrades performed on the domain.
+   * Retrieves the complete history of the last 10 upgrades performed on an Amazon OpenSearch Service domain.
    */
   getUpgradeHistory(params: OpenSearch.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeHistoryResponse) => void): Request<OpenSearch.Types.GetUpgradeHistoryResponse, AWSError>;
   /**
-   * Retrieves the complete history of the last 10 upgrades performed on the domain.
+   * Retrieves the complete history of the last 10 upgrades performed on an Amazon OpenSearch Service domain.
    */
   getUpgradeHistory(callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeHistoryResponse) => void): Request<OpenSearch.Types.GetUpgradeHistoryResponse, AWSError>;
   /**
-   * Retrieves the latest status of the last upgrade or upgrade eligibility check performed on the domain. 
+   * Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
    */
   getUpgradeStatus(params: OpenSearch.Types.GetUpgradeStatusRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeStatusResponse) => void): Request<OpenSearch.Types.GetUpgradeStatusResponse, AWSError>;
   /**
-   * Retrieves the latest status of the last upgrade or upgrade eligibility check performed on the domain. 
+   * Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
    */
   getUpgradeStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeStatusResponse) => void): Request<OpenSearch.Types.GetUpgradeStatusResponse, AWSError>;
   /**
-   * Returns the names of all domains owned by the current user's account.
+   * Returns the names of all Amazon OpenSearch Service domains owned by the current user in the active Region.
    */
   listDomainNames(params: OpenSearch.Types.ListDomainNamesRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDomainNamesResponse) => void): Request<OpenSearch.Types.ListDomainNamesResponse, AWSError>;
   /**
-   * Returns the names of all domains owned by the current user's account.
+   * Returns the names of all Amazon OpenSearch Service domains owned by the current user in the active Region.
    */
   listDomainNames(callback?: (err: AWSError, data: OpenSearch.Types.ListDomainNamesResponse) => void): Request<OpenSearch.Types.ListDomainNamesResponse, AWSError>;
   /**
-   * Lists all Amazon OpenSearch Service domains associated with the package.
+   * Lists all Amazon OpenSearch Service domains associated with a given package. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   listDomainsForPackage(params: OpenSearch.Types.ListDomainsForPackageRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDomainsForPackageResponse) => void): Request<OpenSearch.Types.ListDomainsForPackageResponse, AWSError>;
   /**
-   * Lists all Amazon OpenSearch Service domains associated with the package.
+   * Lists all Amazon OpenSearch Service domains associated with a given package. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   listDomainsForPackage(callback?: (err: AWSError, data: OpenSearch.Types.ListDomainsForPackageResponse) => void): Request<OpenSearch.Types.ListDomainsForPackageResponse, AWSError>;
   /**
-   * 
+   * Lists all instance types and available features for a given OpenSearch or Elasticsearch version.
    */
   listInstanceTypeDetails(params: OpenSearch.Types.ListInstanceTypeDetailsRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListInstanceTypeDetailsResponse) => void): Request<OpenSearch.Types.ListInstanceTypeDetailsResponse, AWSError>;
   /**
-   * 
+   * Lists all instance types and available features for a given OpenSearch or Elasticsearch version.
    */
   listInstanceTypeDetails(callback?: (err: AWSError, data: OpenSearch.Types.ListInstanceTypeDetailsResponse) => void): Request<OpenSearch.Types.ListInstanceTypeDetailsResponse, AWSError>;
   /**
-   * Lists all packages associated with the Amazon OpenSearch Service domain.
+   * Lists all packages associated with an Amazon OpenSearch Service domain. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   listPackagesForDomain(params: OpenSearch.Types.ListPackagesForDomainRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListPackagesForDomainResponse) => void): Request<OpenSearch.Types.ListPackagesForDomainResponse, AWSError>;
   /**
-   * Lists all packages associated with the Amazon OpenSearch Service domain.
+   * Lists all packages associated with an Amazon OpenSearch Service domain. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   listPackagesForDomain(callback?: (err: AWSError, data: OpenSearch.Types.ListPackagesForDomainResponse) => void): Request<OpenSearch.Types.ListPackagesForDomainResponse, AWSError>;
   /**
-   * Returns all tags for the given domain.
+   * Returns all resource tags for an Amazon OpenSearch Service domain. For more information, see Tagging Amazon OpenSearch Service domains.
    */
   listTags(params: OpenSearch.Types.ListTagsRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListTagsResponse) => void): Request<OpenSearch.Types.ListTagsResponse, AWSError>;
   /**
-   * Returns all tags for the given domain.
+   * Returns all resource tags for an Amazon OpenSearch Service domain. For more information, see Tagging Amazon OpenSearch Service domains.
    */
   listTags(callback?: (err: AWSError, data: OpenSearch.Types.ListTagsResponse) => void): Request<OpenSearch.Types.ListTagsResponse, AWSError>;
   /**
-   * List all supported versions of OpenSearch and Elasticsearch.
+   * Lists all versions of OpenSearch and Elasticsearch that Amazon OpenSearch Service supports.
    */
   listVersions(params: OpenSearch.Types.ListVersionsRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListVersionsResponse) => void): Request<OpenSearch.Types.ListVersionsResponse, AWSError>;
   /**
-   * List all supported versions of OpenSearch and Elasticsearch.
+   * Lists all versions of OpenSearch and Elasticsearch that Amazon OpenSearch Service supports.
    */
   listVersions(callback?: (err: AWSError, data: OpenSearch.Types.ListVersionsResponse) => void): Request<OpenSearch.Types.ListVersionsResponse, AWSError>;
   /**
-   * Allows you to purchase reserved OpenSearch instances.
+   * Retrieves information about each Amazon Web Services principal that is allowed to access a given Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
+   */
+  listVpcEndpointAccess(params: OpenSearch.Types.ListVpcEndpointAccessRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.ListVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Retrieves information about each Amazon Web Services principal that is allowed to access a given Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
+   */
+  listVpcEndpointAccess(callback?: (err: AWSError, data: OpenSearch.Types.ListVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.ListVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the current Amazon Web Services account and Region.
+   */
+  listVpcEndpoints(params: OpenSearch.Types.ListVpcEndpointsRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListVpcEndpointsResponse) => void): Request<OpenSearch.Types.ListVpcEndpointsResponse, AWSError>;
+  /**
+   * Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the current Amazon Web Services account and Region.
+   */
+  listVpcEndpoints(callback?: (err: AWSError, data: OpenSearch.Types.ListVpcEndpointsResponse) => void): Request<OpenSearch.Types.ListVpcEndpointsResponse, AWSError>;
+  /**
+   * Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a particular domain.
+   */
+  listVpcEndpointsForDomain(params: OpenSearch.Types.ListVpcEndpointsForDomainRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListVpcEndpointsForDomainResponse) => void): Request<OpenSearch.Types.ListVpcEndpointsForDomainResponse, AWSError>;
+  /**
+   * Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a particular domain.
+   */
+  listVpcEndpointsForDomain(callback?: (err: AWSError, data: OpenSearch.Types.ListVpcEndpointsForDomainResponse) => void): Request<OpenSearch.Types.ListVpcEndpointsForDomainResponse, AWSError>;
+  /**
+   * Allows you to purchase Amazon OpenSearch Service Reserved Instances.
    */
   purchaseReservedInstanceOffering(params: OpenSearch.Types.PurchaseReservedInstanceOfferingRequest, callback?: (err: AWSError, data: OpenSearch.Types.PurchaseReservedInstanceOfferingResponse) => void): Request<OpenSearch.Types.PurchaseReservedInstanceOfferingResponse, AWSError>;
   /**
-   * Allows you to purchase reserved OpenSearch instances.
+   * Allows you to purchase Amazon OpenSearch Service Reserved Instances.
    */
   purchaseReservedInstanceOffering(callback?: (err: AWSError, data: OpenSearch.Types.PurchaseReservedInstanceOfferingResponse) => void): Request<OpenSearch.Types.PurchaseReservedInstanceOfferingResponse, AWSError>;
   /**
-   * Allows the remote domain owner to reject an inbound cross-cluster connection request.
+   * Allows the remote Amazon OpenSearch Service domain owner to reject an inbound cross-cluster connection request.
    */
   rejectInboundConnection(params: OpenSearch.Types.RejectInboundConnectionRequest, callback?: (err: AWSError, data: OpenSearch.Types.RejectInboundConnectionResponse) => void): Request<OpenSearch.Types.RejectInboundConnectionResponse, AWSError>;
   /**
-   * Allows the remote domain owner to reject an inbound cross-cluster connection request.
+   * Allows the remote Amazon OpenSearch Service domain owner to reject an inbound cross-cluster connection request.
    */
   rejectInboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.RejectInboundConnectionResponse) => void): Request<OpenSearch.Types.RejectInboundConnectionResponse, AWSError>;
   /**
-   * Removes the specified set of tags from the given domain.
+   * Removes the specified set of tags from an Amazon OpenSearch Service domain. For more information, see  Tagging Amazon OpenSearch Service domains.
    */
   removeTags(params: OpenSearch.Types.RemoveTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified set of tags from the given domain.
+   * Removes the specified set of tags from an Amazon OpenSearch Service domain. For more information, see  Tagging Amazon OpenSearch Service domains.
    */
   removeTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Schedules a service software update for an Amazon OpenSearch Service domain.
+   * Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.
+   */
+  revokeVpcEndpointAccess(params: OpenSearch.Types.RevokeVpcEndpointAccessRequest, callback?: (err: AWSError, data: OpenSearch.Types.RevokeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.RevokeVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.
+   */
+  revokeVpcEndpointAccess(callback?: (err: AWSError, data: OpenSearch.Types.RevokeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.RevokeVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Schedules a service software update for an Amazon OpenSearch Service domain. For more information, see Service software updates in Amazon OpenSearch Service.
    */
   startServiceSoftwareUpdate(params: OpenSearch.Types.StartServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: OpenSearch.Types.StartServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.StartServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Schedules a service software update for an Amazon OpenSearch Service domain.
+   * Schedules a service software update for an Amazon OpenSearch Service domain. For more information, see Service software updates in Amazon OpenSearch Service.
    */
   startServiceSoftwareUpdate(callback?: (err: AWSError, data: OpenSearch.Types.StartServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.StartServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified domain, such as setting the instance type and the number of instances. 
+   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
    */
   updateDomainConfig(params: OpenSearch.Types.UpdateDomainConfigRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified domain, such as setting the instance type and the number of instances. 
+   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
    */
   updateDomainConfig(callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
   /**
-   * Updates a package for use with Amazon OpenSearch Service domains.
+   * Updates a package for use with Amazon OpenSearch Service domains. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   updatePackage(params: OpenSearch.Types.UpdatePackageRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdatePackageResponse) => void): Request<OpenSearch.Types.UpdatePackageResponse, AWSError>;
   /**
-   * Updates a package for use with Amazon OpenSearch Service domains.
+   * Updates a package for use with Amazon OpenSearch Service domains. For more information, see Custom packages for Amazon OpenSearch Service.
    */
   updatePackage(callback?: (err: AWSError, data: OpenSearch.Types.UpdatePackageResponse) => void): Request<OpenSearch.Types.UpdatePackageResponse, AWSError>;
   /**
-   * Allows you to either upgrade your domain or perform an upgrade eligibility check to a compatible version of OpenSearch or Elasticsearch. 
+   * Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
+   */
+  updateVpcEndpoint(params: OpenSearch.Types.UpdateVpcEndpointRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateVpcEndpointResponse) => void): Request<OpenSearch.Types.UpdateVpcEndpointResponse, AWSError>;
+  /**
+   * Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
+   */
+  updateVpcEndpoint(callback?: (err: AWSError, data: OpenSearch.Types.UpdateVpcEndpointResponse) => void): Request<OpenSearch.Types.UpdateVpcEndpointResponse, AWSError>;
+  /**
+   * Allows you to either upgrade your Amazon OpenSearch Service domain or perform an upgrade eligibility check to a compatible version of OpenSearch or Elasticsearch.
    */
   upgradeDomain(params: OpenSearch.Types.UpgradeDomainRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpgradeDomainResponse) => void): Request<OpenSearch.Types.UpgradeDomainResponse, AWSError>;
   /**
-   * Allows you to either upgrade your domain or perform an upgrade eligibility check to a compatible version of OpenSearch or Elasticsearch. 
+   * Allows you to either upgrade your Amazon OpenSearch Service domain or perform an upgrade eligibility check to a compatible version of OpenSearch or Elasticsearch.
    */
   upgradeDomain(callback?: (err: AWSError, data: OpenSearch.Types.UpgradeDomainResponse) => void): Request<OpenSearch.Types.UpgradeDomainResponse, AWSError>;
 }
 declare namespace OpenSearch {
   export type ARN = string;
+  export type AWSAccount = string;
   export interface AWSDomainInformation {
+    /**
+     * The Amazon Web Services account ID of the domain owner.
+     */
     OwnerId?: OwnerId;
+    /**
+     * Name of the domain.
+     */
     DomainName: DomainName;
+    /**
+     * The Amazon Web Services Region in which the domain is located.
+     */
     Region?: Region;
   }
   export interface AcceptInboundConnectionRequest {
     /**
-     * The ID of the inbound connection you want to accept.
+     * The ID of the inbound connection to accept.
      */
     ConnectionId: ConnectionId;
   }
   export interface AcceptInboundConnectionResponse {
     /**
-     * The  InboundConnection  of the accepted inbound connection. 
+     * Information about the accepted inbound connection.
      */
     Connection?: InboundConnection;
   }
   export interface AccessPoliciesStatus {
     /**
-     * The access policy configured for the domain. Access policies can be resource-based, IP-based, or IAM-based. See  Configuring access policiesfor more information. 
+     * The access policy configured for the domain. Access policies can be resource-based, IP-based, or IAM-based. For more information, see Configuring access policies.
      */
     Options: PolicyDocument;
     /**
-     * The status of the access policy for the domain. See OptionStatus for the status information that's included. 
+     * The status of the access policy for the domain.
      */
     Status: OptionStatus;
   }
   export interface AddTagsRequest {
     /**
-     * Specify the ARN of the domain you want to add tags to. 
+     * Amazon Resource Name (ARN) for the OpenSearch Service domain to which you want to attach resource tags.
      */
     ARN: ARN;
     /**
-     * List of Tag to add to the domain. 
+     * List of resource tags.
      */
     TagList: TagList;
   }
   export interface AdditionalLimit {
     /**
-     *  Additional limit is specific to a given InstanceType and for each of its  InstanceRole  etc.  Attributes and their details:   MaximumNumberOfDataNodesSupported This attribute is present on the master node only to specify how much data nodes up to which given  ESPartitionInstanceType  can support as master node. MaximumNumberOfDataNodesWithoutMasterNode This attribute is present on data node only to specify how much data nodes of given  ESPartitionInstanceType  up to which you don't need any master nodes to govern them.  
+     *    MaximumNumberOfDataNodesSupported - This attribute only applies to master nodes and specifies the maximum number of data nodes of a given instance type a master node can support.    MaximumNumberOfDataNodesWithoutMasterNode - This attribute only applies to data nodes and specifies the maximum number of data nodes of a given instance type can exist without a master node governing them.  
      */
     LimitName?: LimitName;
     /**
-     *  Value for a given  AdditionalLimit$LimitName  . 
+     *  The values of the additional instance type limits.
      */
     LimitValues?: LimitValueList;
   }
@@ -389,13 +471,13 @@ declare namespace OpenSearch {
      */
     Options: AdvancedOptions;
     /**
-     * The OptionStatus for advanced options for the specified domain. 
+     * The status of advanced options for the specified domain.
      */
     Status: OptionStatus;
   }
   export interface AdvancedSecurityOptions {
     /**
-     * True if advanced security is enabled.
+     * True if fine-grained access control is enabled.
      */
     Enabled?: Boolean;
     /**
@@ -403,47 +485,47 @@ declare namespace OpenSearch {
      */
     InternalUserDatabaseEnabled?: Boolean;
     /**
-     * Describes the SAML application configured for a domain.
+     * Container for information about the SAML configuration for OpenSearch Dashboards.
      */
     SAMLOptions?: SAMLOptionsOutput;
     /**
-     * Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+     * Date and time when the migration period will be disabled. Only necessary when enabling fine-grained access control on an existing domain.
      */
     AnonymousAuthDisableDate?: DisableTimestamp;
     /**
-     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     * True if a 30-day migration period is enabled, during which administrators can create role mappings. Only necessary when enabling fine-grained access control on an existing domain.
      */
     AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsInput {
     /**
-     * True if advanced security is enabled.
+     * True to enable fine-grained access control.
      */
     Enabled?: Boolean;
     /**
-     * True if the internal user database is enabled.
+     * True to enable the internal user database.
      */
     InternalUserDatabaseEnabled?: Boolean;
     /**
-     * Credentials for the master user: username and password, ARN, or both.
+     * Container for information about the master user.
      */
     MasterUserOptions?: MasterUserOptions;
     /**
-     * The SAML application configuration for the domain.
+     * Container for information about the SAML configuration for OpenSearch Dashboards.
      */
     SAMLOptions?: SAMLOptionsInput;
     /**
-     * True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.
+     * True to enable a 30-day migration period during which administrators can create role mappings. Only necessary when enabling fine-grained access control on an existing domain.
      */
     AnonymousAuthEnabled?: Boolean;
   }
   export interface AdvancedSecurityOptionsStatus {
     /**
-     * Advanced security options for the specified domain.
+     * Container for fine-grained access control settings.
      */
     Options: AdvancedSecurityOptions;
     /**
-     * Status of the advanced security options for the specified domain.
+     * Status of the fine-grained access control settings for a domain.
      */
     Status: OptionStatus;
   }
@@ -453,99 +535,129 @@ declare namespace OpenSearch {
      */
     PackageID: PackageID;
     /**
-     * The name of the domain to associate the package with.
+     * Name of the domain to associate the package with.
      */
     DomainName: DomainName;
   }
   export interface AssociatePackageResponse {
     /**
-     *  DomainPackageDetails 
+     * Information about a package that is associated with a domain.
      */
     DomainPackageDetails?: DomainPackageDetails;
   }
+  export interface AuthorizeVpcEndpointAccessRequest {
+    /**
+     * The name of the OpenSearch Service domain to provide access to.
+     */
+    DomainName: DomainName;
+    /**
+     * The Amazon Web Services account ID to grant access to.
+     */
+    Account: AWSAccount;
+  }
+  export interface AuthorizeVpcEndpointAccessResponse {
+    /**
+     * Information about the Amazon Web Services account or service that was provided access to the domain.
+     */
+    AuthorizedPrincipal: AuthorizedPrincipal;
+  }
+  export interface AuthorizedPrincipal {
+    /**
+     * The type of principal.
+     */
+    PrincipalType?: PrincipalType;
+    /**
+     * The IAM principal that is allowed access to the domain.
+     */
+    Principal?: String;
+  }
+  export type AuthorizedPrincipalList = AuthorizedPrincipal[];
   export interface AutoTune {
     /**
-     * Specifies the Auto-Tune type. Valid value is SCHEDULED_ACTION.
+     * The type of Auto-Tune action.
      */
     AutoTuneType?: AutoTuneType;
     /**
-     * Specifies details about the Auto-Tune action. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * Details about an Auto-Tune action.
      */
     AutoTuneDetails?: AutoTuneDetails;
   }
   export type AutoTuneDate = Date;
   export type AutoTuneDesiredState = "ENABLED"|"DISABLED"|string;
   export interface AutoTuneDetails {
+    /**
+     * Container for details about a scheduled Auto-Tune action.
+     */
     ScheduledAutoTuneDetails?: ScheduledAutoTuneDetails;
   }
   export type AutoTuneList = AutoTune[];
   export interface AutoTuneMaintenanceSchedule {
     /**
-     * The timestamp at which the Auto-Tune maintenance schedule starts.
+     * The Epoch timestamp at which the Auto-Tune maintenance schedule starts.
      */
     StartAt?: StartAt;
     /**
-     * Specifies maintenance schedule duration: duration value and duration unit. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * The duration of the maintenance schedule. For example, "Duration": {"Value": 2, "Unit": "HOURS"}.
      */
     Duration?: Duration;
     /**
-     * A cron expression for a recurring maintenance schedule. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * A cron expression for a recurring maintenance schedule during which Auto-Tune can deploy changes.
      */
     CronExpressionForRecurrence?: String;
   }
   export type AutoTuneMaintenanceScheduleList = AutoTuneMaintenanceSchedule[];
   export interface AutoTuneOptions {
     /**
-     * The Auto-Tune desired state. Valid values are ENABLED and DISABLED.
+     * Whether Auto-Tune is enabled or disabled.
      */
     DesiredState?: AutoTuneDesiredState;
     /**
-     * The rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK and DEFAULT_ROLLBACK. 
+     * When disabling Auto-Tune, specify NO_ROLLBACK to retain all prior Auto-Tune settings or DEFAULT_ROLLBACK to revert to the OpenSearch Service defaults. If you specify DEFAULT_ROLLBACK, you must include a MaintenanceSchedule in the request. Otherwise, OpenSearch Service is unable to perform the rollback.
      */
     RollbackOnDisable?: RollbackOnDisable;
     /**
-     * A list of maintenance schedules. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * A list of maintenance schedules during which Auto-Tune can deploy changes.
      */
     MaintenanceSchedules?: AutoTuneMaintenanceScheduleList;
   }
   export interface AutoTuneOptionsInput {
     /**
-     * The Auto-Tune desired state. Valid values are ENABLED and DISABLED.
+     * Whether Auto-Tune is enabled or disabled.
      */
     DesiredState?: AutoTuneDesiredState;
     /**
-     * A list of maintenance schedules. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance schedules are overwrite, not append. If your request includes no schedules, the request deletes all existing schedules. To preserve existing schedules, make a call to DescribeDomainConfig first and use the MaintenanceSchedules portion of the response as the basis for this section.
      */
     MaintenanceSchedules?: AutoTuneMaintenanceScheduleList;
   }
   export interface AutoTuneOptionsOutput {
     /**
-     * The AutoTuneState for the domain. 
+     * The current state of Auto-Tune on the domain.
      */
     State?: AutoTuneState;
     /**
-     * The error message while enabling or disabling Auto-Tune.
+     * Any errors that occurred while enabling or disabling Auto-Tune.
      */
     ErrorMessage?: String;
   }
   export interface AutoTuneOptionsStatus {
     /**
-     * Specifies Auto-Tune options for the domain.
+     * Auto-Tune settings for updating a domain.
      */
     Options?: AutoTuneOptions;
     /**
-     * The status of the Auto-Tune options for the domain.
+     * The current status of Auto-Tune for a domain.
      */
     Status?: AutoTuneStatus;
   }
   export type AutoTuneState = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_SCHEDULED"|"DISABLED_AND_ROLLBACK_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_COMPLETE"|"DISABLED_AND_ROLLBACK_ERROR"|"ERROR"|string;
   export interface AutoTuneStatus {
     /**
-     * The timestamp of the Auto-Tune options creation date.
+     * Date and time when Auto-Tune was enabled for the domain.
      */
     CreationDate: UpdateTimestamp;
     /**
-     * The timestamp of when the Auto-Tune options were last updated.
+     * Date and time when the Auto-Tune options were last updated for the domain.
      */
     UpdateDate: UpdateTimestamp;
     /**
@@ -553,11 +665,11 @@ declare namespace OpenSearch {
      */
     UpdateVersion?: UIntValue;
     /**
-     * The AutoTuneState for the domain. 
+     * The current state of Auto-Tune on the domain.
      */
     State: AutoTuneState;
     /**
-     * The error message while enabling or disabling Auto-Tune.
+     * Any errors that occurred while enabling or disabling Auto-Tune.
      */
     ErrorMessage?: String;
     /**
@@ -570,41 +682,41 @@ declare namespace OpenSearch {
   export type Boolean = boolean;
   export interface CancelServiceSoftwareUpdateRequest {
     /**
-     * The name of the domain that you want to stop the latest service software update on.
+     * Name of the OpenSearch Service domain that you want to cancel the service software update on.
      */
     DomainName: DomainName;
   }
   export interface CancelServiceSoftwareUpdateResponse {
     /**
-     * The current status of the OpenSearch service software update.
+     * Container for the state of your domain relative to the latest service software.
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
   export interface ChangeProgressDetails {
     /**
-     * The unique change identifier associated with a specific domain configuration change.
+     * The ID of the configuration change.
      */
     ChangeId?: GUID;
     /**
-     * Contains an optional message associated with the domain configuration change.
+     * A message corresponding to the status of the configuration change.
      */
     Message?: Message;
   }
   export interface ChangeProgressStage {
     /**
-     * The name of the specific progress stage.
+     * The name of the stage.
      */
     Name?: ChangeProgressStageName;
     /**
-     * The overall status of a specific progress stage.
+     * The status of the stage.
      */
     Status?: ChangeProgressStageStatus;
     /**
-     * The description of the progress stage.
+     * The description of the stage.
      */
     Description?: Description;
     /**
-     * The last updated timestamp of the progress stage.
+     * The most recent updated timestamp of the stage.
      */
     LastUpdated?: LastUpdated;
   }
@@ -621,15 +733,15 @@ declare namespace OpenSearch {
      */
     StartTime?: UpdateTimestamp;
     /**
-     * The overall status of the domain configuration change. This field can take the following values: PENDING, PROCESSING, COMPLETED and FAILED
+     * The overall status of the domain configuration change.
      */
     Status?: OverallChangeStatus;
     /**
-     * The list of properties involved in the domain configuration change that are still in pending.
+     * The list of properties in the domain configuration change that are still pending.
      */
     PendingProperties?: StringList;
     /**
-     * The list of properties involved in the domain configuration change that are completed.
+     * The list of properties in the domain configuration change that have completed.
      */
     CompletedProperties?: StringList;
     /**
@@ -641,78 +753,79 @@ declare namespace OpenSearch {
      */
     ChangeProgressStages?: ChangeProgressStageList;
   }
+  export type ClientToken = string;
   export type CloudWatchLogsLogGroupArn = string;
   export interface ClusterConfig {
     /**
-     * The instance type for an OpenSearch cluster. UltraWarm instance types are not supported for data instances. 
+     * Instance type of data nodes in the cluster.
      */
     InstanceType?: OpenSearchPartitionInstanceType;
     /**
-     * The number of instances in the specified domain cluster.
+     * Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
      */
     InstanceCount?: IntegerClass;
     /**
-     * A boolean value to indicate whether a dedicated master node is enabled. See Dedicated master nodes in Amazon OpenSearch Service  for more information. 
+     * Indicates whether dedicated master nodes are enabled for the cluster.True if the cluster will use a dedicated master node.False if the cluster will not.
      */
     DedicatedMasterEnabled?: Boolean;
     /**
-     * A boolean value to indicate whether zone awareness is enabled. See Configuring a multi-AZ domain in Amazon OpenSearch Service  for more information. 
+     * Indicates whether multiple Availability Zones are enabled. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
      */
     ZoneAwarenessEnabled?: Boolean;
     /**
-     * The zone awareness configuration for a domain when zone awareness is enabled.
+     * Container for zone awareness configuration options. Only required if ZoneAwarenessEnabled is true.
      */
     ZoneAwarenessConfig?: ZoneAwarenessConfig;
     /**
-     * The instance type for a dedicated master node.
+     * OpenSearch Service instance type of the dedicated master nodes in the cluster.
      */
     DedicatedMasterType?: OpenSearchPartitionInstanceType;
     /**
-     * Total number of dedicated master nodes, active and on standby, for the cluster.
+     * Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
      */
     DedicatedMasterCount?: IntegerClass;
     /**
-     * True to enable UltraWarm storage.
+     * Whether to enable warm storage for the cluster.
      */
     WarmEnabled?: Boolean;
     /**
-     * The instance type for the OpenSearch cluster's warm nodes.
+     * The instance type for the cluster's warm nodes.
      */
     WarmType?: OpenSearchWarmPartitionInstanceType;
     /**
-     * The number of UltraWarm nodes in the cluster.
+     * The number of warm nodes in the cluster.
      */
     WarmCount?: IntegerClass;
     /**
-     * Specifies the ColdStorageOptions config for a Domain
+     * Container for cold storage configuration options.
      */
     ColdStorageOptions?: ColdStorageOptions;
   }
   export interface ClusterConfigStatus {
     /**
-     * The cluster configuration for the specified domain.
+     * Cluster configuration options for the specified domain.
      */
     Options: ClusterConfig;
     /**
-     * The cluster configuration status for the specified domain.
+     * The status of cluster configuration options for the specified domain.
      */
     Status: OptionStatus;
   }
   export interface CognitoOptions {
     /**
-     * The option to enable Cognito for OpenSearch Dashboards authentication.
+     * Whether to enable or disable Amazon Cognito authentication for OpenSearch Dashboards.
      */
     Enabled?: Boolean;
     /**
-     * The Cognito user pool ID for OpenSearch Dashboards authentication.
+     * The Amazon Cognito user pool ID that you want OpenSearch Service to use for OpenSearch Dashboards authentication.
      */
     UserPoolId?: UserPoolId;
     /**
-     * The Cognito identity pool ID for OpenSearch Dashboards authentication.
+     * The Amazon Cognito identity pool ID that you want OpenSearch Service to use for OpenSearch Dashboards authentication.
      */
     IdentityPoolId?: IdentityPoolId;
     /**
-     * The role ARN that provides OpenSearch permissions for accessing Cognito resources.
+     * The AmazonOpenSearchServiceCognitoAccess role that allows OpenSearch Service to configure your user pool and identity pool.
      */
     RoleArn?: RoleArn;
   }
@@ -728,7 +841,7 @@ declare namespace OpenSearch {
   }
   export interface ColdStorageOptions {
     /**
-     * Enable cold storage option. Accepted values true or false
+     * Whether to enable or disable cold storage on the domain.
      */
     Enabled: Boolean;
   }
@@ -736,9 +849,12 @@ declare namespace OpenSearch {
   export type CompatibleVersionsList = CompatibleVersionsMap[];
   export interface CompatibleVersionsMap {
     /**
-     * The current version of OpenSearch a domain is on.
+     * The current version that the OpenSearch Service domain is running.
      */
     SourceVersion?: VersionString;
+    /**
+     * The possible versions that you can upgrade the domain to.
+     */
     TargetVersions?: VersionList;
   }
   export type ConnectionAlias = string;
@@ -746,67 +862,67 @@ declare namespace OpenSearch {
   export type ConnectionStatusMessage = string;
   export interface CreateDomainRequest {
     /**
-     * The name of the Amazon OpenSearch Service domain you're creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). 
+     * Name of the OpenSearch Service domain to create. Domain names are unique across the domains owned by an account within an Amazon Web Services Region.
      */
     DomainName: DomainName;
     /**
-     * String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the Amazon OpenSearch Service domain. For example, "OpenSearch_1.0" or "Elasticsearch_7.9". For more information, see Creating and managing Amazon OpenSearch Service domains . 
+     * String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9. For more information, see Creating and managing Amazon OpenSearch Service domains.
      */
     EngineVersion?: VersionString;
     /**
-     * Configuration options for a domain. Specifies the instance type and number of instances in the domain. 
+     * Container for the cluster configuration of a domain.
      */
     ClusterConfig?: ClusterConfig;
     /**
-     * Options to enable, disable, and specify the type and size of EBS storage volumes.
+     * Container for the parameters required to enable EBS-based storage for an OpenSearch Service domain.
      */
     EBSOptions?: EBSOptions;
     /**
-     * IAM access policy as a JSON-formatted string.
+     * Identity and Access Management (IAM) policy document specifying the access policies for the new domain.
      */
     AccessPolicies?: PolicyDocument;
     /**
-     * Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours.
+     * DEPRECATED. Container for the parameters required to configure automated snapshots of domain indexes.
      */
     SnapshotOptions?: SnapshotOptions;
     /**
-     * Options to specify the subnets and security groups for a VPC endpoint. For more information, see Launching your Amazon OpenSearch Service domains using a VPC . 
+     * Container for the values required to configure VPC access domains. If you don't specify these values, OpenSearch Service creates the domain with a public endpoint. For more information, see Launching your Amazon OpenSearch Service domains using a VPC.
      */
     VPCOptions?: VPCOptions;
     /**
-     * Options to specify the Cognito user and identity pools for OpenSearch Dashboards authentication. For more information, see Configuring Amazon Cognito authentication for OpenSearch Dashboards. 
+     * Key-value pairs to configure Amazon Cognito authentication. For more information, see Configuring Amazon Cognito authentication for OpenSearch Dashboards.
      */
     CognitoOptions?: CognitoOptions;
     /**
-     * Options for encryption of data at rest.
+     * Key-value pairs to enable encryption at rest.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
-     * Node-to-node encryption options.
+     * Enables node-to-node encryption.
      */
     NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
     /**
-     * Option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Advanced cluster parameters  for more information. 
+     * Key-value pairs to specify advanced configuration options. The following key-value pairs are supported:    "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.    "indices.fielddata.cache.size": "80"  - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.    "indices.query.bool.max_clause_count": "1024" - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a TooManyClauses error.    "override_main_response_version": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with it. Default is false when creating a domain and true when upgrading a domain.   For more information, see Advanced cluster parameters.
      */
     AdvancedOptions?: AdvancedOptions;
     /**
-     * Map of LogType and LogPublishingOption, each containing options to publish a given type of OpenSearch log. 
+     * Key-value pairs to configure slow log publishing.
      */
     LogPublishingOptions?: LogPublishingOptions;
     /**
-     * Options to specify configurations that will be applied to the domain endpoint.
+     * Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
      */
     DomainEndpointOptions?: DomainEndpointOptions;
     /**
-     * Specifies advanced security options.
+     * Options for fine-grained access control.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
     /**
-     * A list of Tag added during domain creation. 
+     * List of tags to add to the domain upon creation.
      */
     TagList?: TagList;
     /**
-     * Specifies Auto-Tune options.
+     * Options for Auto-Tune.
      */
     AutoTuneOptions?: AutoTuneOptionsInput;
   }
@@ -818,47 +934,47 @@ declare namespace OpenSearch {
   }
   export interface CreateOutboundConnectionRequest {
     /**
-     * The  AWSDomainInformation  for the local OpenSearch domain. 
+     * Name and Region of the source (local) domain.
      */
     LocalDomainInfo: DomainInformationContainer;
     /**
-     * The  AWSDomainInformation  for the remote OpenSearch domain. 
+     * Name and Region of the destination (remote) domain.
      */
     RemoteDomainInfo: DomainInformationContainer;
     /**
-     * The connection alias used used by the customer for this cross-cluster connection.
+     * Name of the connection.
      */
     ConnectionAlias: ConnectionAlias;
   }
   export interface CreateOutboundConnectionResponse {
     /**
-     * The  AWSDomainInformation  for the local OpenSearch domain. 
+     * Information about the source (local) domain.
      */
     LocalDomainInfo?: DomainInformationContainer;
     /**
-     * The  AWSDomainInformation  for the remote OpenSearch domain. 
+     * Information about the destination (remote) domain.
      */
     RemoteDomainInfo?: DomainInformationContainer;
     /**
-     * The connection alias provided during the create connection request.
+     * Name of the connection.
      */
     ConnectionAlias?: ConnectionAlias;
     /**
-     * The  OutboundConnectionStatus  for the newly created connection. 
+     * The status of the connection.
      */
     ConnectionStatus?: OutboundConnectionStatus;
     /**
-     * The unique ID for the created outbound connection, which is used for subsequent operations on the connection.
+     * The unique identifier for the created outbound connection, which is used for subsequent operations on the connection.
      */
     ConnectionId?: ConnectionId;
   }
   export interface CreatePackageRequest {
     /**
-     * Unique identifier for the package.
+     * Unique name for the package.
      */
     PackageName: PackageName;
     /**
-     * Type of package. Currently supports only TXT-DICTIONARY.
+     * Type of package.
      */
     PackageType: PackageType;
     /**
@@ -866,15 +982,35 @@ declare namespace OpenSearch {
      */
     PackageDescription?: PackageDescription;
     /**
-     * The Amazon S3 location from which to import the package. 
+     * The Amazon S3 location from which to import the package.
      */
     PackageSource: PackageSource;
   }
   export interface CreatePackageResponse {
     /**
-     * Information about the package. 
+     * Basic information about an OpenSearch Service package.
      */
     PackageDetails?: PackageDetails;
+  }
+  export interface CreateVpcEndpointRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the domain to grant access to.
+     */
+    DomainArn: DomainArn;
+    /**
+     * Options to specify the subnets and security groups for the endpoint.
+     */
+    VpcOptions: VPCOptions;
+    /**
+     * Unique, case-sensitive identifier to ensure idempotency of the request.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateVpcEndpointResponse {
+    /**
+     * Information about the newly created VPC endpoint.
+     */
+    VpcEndpoint: VpcEndpoint;
   }
   export type CreatedAt = Date;
   export interface DeleteDomainRequest {
@@ -897,7 +1033,7 @@ declare namespace OpenSearch {
   }
   export interface DeleteInboundConnectionResponse {
     /**
-     * The  InboundConnection  of the deleted inbound connection. 
+     * The deleted inbound connection.
      */
     Connection?: InboundConnection;
   }
@@ -909,173 +1045,188 @@ declare namespace OpenSearch {
   }
   export interface DeleteOutboundConnectionResponse {
     /**
-     * The  OutboundConnection  of the deleted outbound connection. 
+     * The deleted inbound connection.
      */
     Connection?: OutboundConnection;
   }
   export interface DeletePackageRequest {
     /**
-     * The internal ID of the package you want to delete. Use DescribePackages to find this value. 
+     * The internal ID of the package you want to delete. Use DescribePackages to find this value.
      */
     PackageID: PackageID;
   }
   export interface DeletePackageResponse {
     /**
-     *  PackageDetails 
+     *  Information about the deleted package.
      */
     PackageDetails?: PackageDetails;
+  }
+  export interface DeleteVpcEndpointRequest {
+    /**
+     * The unique identifier of the endpoint.
+     */
+    VpcEndpointId: VpcEndpointId;
+  }
+  export interface DeleteVpcEndpointResponse {
+    /**
+     * Information about the deleted endpoint, including its current status (DELETING or DELETE_FAILED).
+     */
+    VpcEndpointSummary: VpcEndpointSummary;
   }
   export type DeploymentCloseDateTimeStamp = Date;
   export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
   export type DeploymentType = string;
   export interface DescribeDomainAutoTunesRequest {
     /**
-     * The domain name for which you want Auto-Tune action details.
+     * Name of the domain that you want Auto-Tune details about.
      */
     DomainName: DomainName;
     /**
-     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * NextToken is sent in case the earlier API call results contain the NextToken. Used for pagination.
+     * If your initial DescribeDomainAutoTunes operation returns a nextToken, you can include the returned nextToken in subsequent DescribeDomainAutoTunes operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeDomainAutoTunesResponse {
     /**
-     * The list of setting adjustments that Auto-Tune has made to the domain. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * The list of setting adjustments that Auto-Tune has made to the domain.
      */
     AutoTunes?: AutoTuneList;
     /**
-     * An identifier to allow retrieval of paginated results.
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeDomainChangeProgressRequest {
     /**
-     * The domain you want to get the progress information about.
+     * The name of the domain to get progress information for.
      */
     DomainName: DomainName;
     /**
-     * The specific change ID for which you want to get progress information. This is an optional parameter. If omitted, the service returns information about the most recent configuration change. 
+     * The specific change ID for which you want to get progress information. If omitted, the request returns information about the most recent configuration change.
      */
     ChangeId?: GUID;
   }
   export interface DescribeDomainChangeProgressResponse {
     /**
-     * Progress information for the configuration change that is requested in the DescribeDomainChangeProgress request. 
+     * Container for information about the stages of a configuration change happening on a domain.
      */
     ChangeProgressStatus?: ChangeProgressStatusDetails;
   }
   export interface DescribeDomainConfigRequest {
     /**
-     * The domain you want to get information about.
+     * Name of the OpenSearch Service domain configuration that you want to describe.
      */
     DomainName: DomainName;
   }
   export interface DescribeDomainConfigResponse {
     /**
-     * The configuration information of the domain requested in the DescribeDomainConfig request. 
+     * Container for the configuration of the OpenSearch Service domain.
      */
     DomainConfig: DomainConfig;
   }
   export interface DescribeDomainRequest {
     /**
-     * The name of the domain for which you want information.
+     * The name of the domain that you want information about.
      */
     DomainName: DomainName;
   }
   export interface DescribeDomainResponse {
     /**
-     * The current status of the domain.
+     * List that contains the status of each specified OpenSearch Service domain.
      */
     DomainStatus: DomainStatus;
   }
   export interface DescribeDomainsRequest {
     /**
-     * The domains for which you want information.
+     * Array of OpenSearch Service domain names that you want information about. If you don't specify any domains, OpenSearch Service returns information about all domains owned by the account.
      */
     DomainNames: DomainNameList;
   }
   export interface DescribeDomainsResponse {
     /**
-     * The status of the domains requested in the DescribeDomains request. 
+     * The status of the requested domains.
      */
     DomainStatusList: DomainStatusList;
   }
   export interface DescribeInboundConnectionsRequest {
     /**
-     *  A list of filters used to match properties for inbound cross-cluster connections. Available  Filter  values are:  connection-id local-domain-info.domain-name local-domain-info.owner-id local-domain-info.region remote-domain-info.domain-name  
+     *  A list of filters used to match properties for inbound cross-cluster connections.
      */
     Filters?: FilterList;
     /**
-     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results.
+     * If your initial DescribeInboundConnections operation returns a nextToken, you can include the returned nextToken in subsequent DescribeInboundConnections operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeInboundConnectionsResponse {
     /**
-     * A list of  InboundConnection  matching the specified filter criteria. 
+     * List of inbound connections.
      */
     Connections?: InboundConnections;
     /**
-     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. 
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeInstanceTypeLimitsRequest {
     /**
-     *  The name of the domain you want to modify. Only include this value if you're querying OpenSearch  Limits  for an existing domain. 
+     * The name of the domain. Only specify if you need the limits for an existing domain.
      */
     DomainName?: DomainName;
     /**
-     *  The instance type for an OpenSearch cluster for which OpenSearch  Limits  are needed. 
+     * The OpenSearch Service instance type for which you need limit information.
      */
     InstanceType: OpenSearchPartitionInstanceType;
     /**
-     *  Version of OpenSearch for which  Limits  are needed. 
+     * Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
      */
     EngineVersion: VersionString;
   }
   export interface DescribeInstanceTypeLimitsResponse {
+    /**
+     * Map that contains all applicable instance type limits.data refers to data nodes.master refers to dedicated master nodes.
+     */
     LimitsByRole?: LimitsByRole;
   }
   export interface DescribeOutboundConnectionsRequest {
     /**
-     *  A list of filters used to match properties for outbound cross-cluster connections. Available  Filter  names for this operation are:  connection-id remote-domain-info.domain-name remote-domain-info.owner-id remote-domain-info.region local-domain-info.domain-name  
+     * List of filter names and values that you can use for requests.
      */
     Filters?: FilterList;
     /**
-     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * NextToken is sent in case the earlier API call results contain the NextToken parameter. Used for pagination.
+     * If your initial DescribeOutboundConnections operation returns a nextToken, you can include the returned nextToken in subsequent DescribeOutboundConnections operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeOutboundConnectionsResponse {
     /**
-     * A list of  OutboundConnection  matching the specified filter criteria. 
+     * List of outbound connections that match the filter criteria.
      */
     Connections?: OutboundConnections;
     /**
-     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. 
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribePackagesFilter {
     /**
-     * Any field from PackageDetails. 
+     * Any field from PackageDetails.
      */
     Name?: DescribePackagesFilterName;
     /**
-     * A list of values for the specified field.
+     * A list of values for the specified filter field.
      */
     Value?: DescribePackagesFilterValues;
   }
@@ -1085,160 +1236,180 @@ declare namespace OpenSearch {
   export type DescribePackagesFilterValues = DescribePackagesFilterValue[];
   export interface DescribePackagesRequest {
     /**
-     * Only returns packages that match the DescribePackagesFilterList values. 
+     * Only returns packages that match the DescribePackagesFilterList values.
      */
     Filters?: DescribePackagesFilterList;
     /**
-     * Limits results to a maximum number of packages.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page. 
+     * If your initial DescribePackageFilters operation returns a nextToken, you can include the returned nextToken in subsequent DescribePackageFilters operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribePackagesResponse {
     /**
-     * List of PackageDetails objects. 
+     * Basic information about a package.
      */
     PackageDetailsList?: PackageDetailsList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
     NextToken?: String;
   }
   export interface DescribeReservedInstanceOfferingsRequest {
     /**
-     * The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier. 
+     * The Reserved Instance identifier filter value. Use this parameter to show only the available instance types that match the specified reservation identifier.
      */
     ReservedInstanceOfferingId?: GUID;
     /**
-     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Provides an identifier to allow retrieval of paginated results. 
+     * If your initial DescribeReservedInstanceOfferings operation returns a nextToken, you can include the returned nextToken in subsequent DescribeReservedInstanceOfferings operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeReservedInstanceOfferingsResponse {
     /**
-     * Provides an identifier to allow retrieval of paginated results.
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: NextToken;
     /**
-     * List of reserved OpenSearch instance offerings
+     * List of Reserved Instance offerings.
      */
     ReservedInstanceOfferings?: ReservedInstanceOfferingList;
   }
   export interface DescribeReservedInstancesRequest {
     /**
-     * The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the specified reserved OpenSearch instance ID. 
+     * The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the specified reserved OpenSearch instance ID.
      */
     ReservedInstanceId?: GUID;
     /**
-     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Provides an identifier to allow retrieval of paginated results. 
+     * If your initial DescribeReservedInstances operation returns a nextToken, you can include the returned nextToken in subsequent DescribeReservedInstances operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface DescribeReservedInstancesResponse {
     /**
-     * Provides an identifier to allow retrieval of paginated results.
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: String;
     /**
-     * List of reserved OpenSearch instances.
+     * List of Reserved Instances in the current Region.
      */
     ReservedInstances?: ReservedInstanceList;
+  }
+  export interface DescribeVpcEndpointsRequest {
+    /**
+     * The unique identifiers of the endpoints to get information about.
+     */
+    VpcEndpointIds: VpcEndpointIdList;
+  }
+  export interface DescribeVpcEndpointsResponse {
+    /**
+     * Information about each requested VPC endpoint.
+     */
+    VpcEndpoints: VpcEndpoints;
+    /**
+     * Any errors associated with the request.
+     */
+    VpcEndpointErrors: VpcEndpointErrorList;
   }
   export type Description = string;
   export type DisableTimestamp = Date;
   export interface DissociatePackageRequest {
     /**
-     * The internal ID of the package to associate with a domain. Use DescribePackages to find this value. 
+     * Internal ID of the package to dissociate from the domain. Use ListPackagesForDomain to find this value.
      */
     PackageID: PackageID;
     /**
-     * The name of the domain to associate the package with.
+     * Name of the domain to dissociate the package from.
      */
     DomainName: DomainName;
   }
   export interface DissociatePackageResponse {
     /**
-     *  DomainPackageDetails 
+     *  Information about a package that has been dissociated from the domain.
      */
     DomainPackageDetails?: DomainPackageDetails;
   }
+  export type DomainArn = string;
   export interface DomainConfig {
     /**
-     * String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the OpenSearch or Elasticsearch domain.
+     * The OpenSearch or Elasticsearch version that the domain is running.
      */
     EngineVersion?: VersionStatus;
     /**
-     * The ClusterConfig for the domain. 
+     * Container for the cluster configuration of a the domain.
      */
     ClusterConfig?: ClusterConfigStatus;
     /**
-     * The EBSOptions for the domain. 
+     * Container for EBS options configured for an OpenSearch Service domain.
      */
     EBSOptions?: EBSOptionsStatus;
     /**
-     * IAM access policy as a JSON-formatted string.
+     * Specifies the access policies for the domain.
      */
     AccessPolicies?: AccessPoliciesStatus;
     /**
-     * The SnapshotOptions for the domain. 
+     * DEPRECATED. Container for parameters required to configure automated snapshots of domain indexes.
      */
     SnapshotOptions?: SnapshotOptionsStatus;
     /**
-     * The VPCOptions for the specified domain. For more information, see  Launching your Amazon OpenSearch Service domains using a VPC. 
+     * The current VPC options for the domain and the status of any updates to their configuration.
      */
     VPCOptions?: VPCDerivedInfoStatus;
     /**
-     * The CognitoOptions for the specified domain. For more information, see Configuring Amazon Cognito authentication for OpenSearch Dashboards. 
+     * Container for Amazon Cognito options for the domain.
      */
     CognitoOptions?: CognitoOptionsStatus;
     /**
-     * The EncryptionAtRestOptions for the domain. 
+     * Key-value pairs to enable encryption at rest.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus;
     /**
-     * The NodeToNodeEncryptionOptions for the domain. 
+     * Whether node-to-node encryption is enabled or disabled.
      */
     NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptionsStatus;
     /**
-     * The AdvancedOptions for the domain. See Advanced options  for more information. 
+     * Key-value pairs to specify advanced configuration options. For more information, see Advanced options.
      */
     AdvancedOptions?: AdvancedOptionsStatus;
     /**
-     * Log publishing options for the given domain.
+     * Key-value pairs to configure slow log publishing.
      */
     LogPublishingOptions?: LogPublishingOptionsStatus;
     /**
-     * The DomainEndpointOptions for the domain. 
+     * Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
      */
     DomainEndpointOptions?: DomainEndpointOptionsStatus;
     /**
-     * Specifies AdvancedSecurityOptions for the domain. 
+     * Container for fine-grained access control settings for the domain.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsStatus;
     /**
-     * Specifies AutoTuneOptions for the domain. 
+     * Container for Auto-Tune settings for the domain.
      */
     AutoTuneOptions?: AutoTuneOptionsStatus;
     /**
-     * Specifies change details of the domain configuration change.
+     * Container for information about the progress of an existing configuration change.
      */
     ChangeProgressDetails?: ChangeProgressDetails;
   }
   export interface DomainEndpointOptions {
     /**
-     * Whether only HTTPS endpoint should be enabled for the domain.
+     * True to require that all traffic to the domain arrive over HTTPS.
      */
     EnforceHTTPS?: Boolean;
     /**
-     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain.  Can be one of the following values:   Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLSv1.0 and higher.   Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLSv1.2   
+     * Specify the TLS security policy to apply to the HTTPS endpoint of the domain.  Can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 and higher.    Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2   
      */
     TLSSecurityPolicy?: TLSSecurityPolicy;
     /**
@@ -1246,37 +1417,40 @@ declare namespace OpenSearch {
      */
     CustomEndpointEnabled?: Boolean;
     /**
-     * The fully qualified domain for your custom endpoint.
+     * The fully qualified URL for the custom endpoint.
      */
     CustomEndpoint?: DomainNameFqdn;
     /**
-     * The ACM certificate ARN for your custom endpoint.
+     * The ARN for your security certificate, managed in Amazon Web Services Certificate Manager (ACM).
      */
     CustomEndpointCertificateArn?: ARN;
   }
   export interface DomainEndpointOptionsStatus {
     /**
-     * Options to configure the endpoint for the domain.
+     * Options to configure the endpoint for a domain.
      */
     Options: DomainEndpointOptions;
     /**
-     * The status of the endpoint options for the domain. See OptionStatus for the status information that's included. 
+     * The status of the endpoint options for a domain.
      */
     Status: OptionStatus;
   }
   export type DomainId = string;
   export interface DomainInfo {
     /**
-     * The DomainName. 
+     * Name of the domain.
      */
     DomainName?: DomainName;
     /**
-     *  Specifies the EngineType of the domain.
+     * The type of search engine that the domain is running.OpenSearch for an OpenSearch engine, or Elasticsearch for a legacy Elasticsearch OSS engine.
      */
     EngineType?: EngineType;
   }
   export type DomainInfoList = DomainInfo[];
   export interface DomainInformationContainer {
+    /**
+     * Information about an Amazon OpenSearch Service domain.
+     */
     AWSDomainInformation?: AWSDomainInformation;
   }
   export type DomainName = string;
@@ -1284,7 +1458,7 @@ declare namespace OpenSearch {
   export type DomainNameList = DomainName[];
   export interface DomainPackageDetails {
     /**
-     * The internal ID of the package.
+     * Internal ID of the package.
      */
     PackageID?: PackageID;
     /**
@@ -1292,24 +1466,27 @@ declare namespace OpenSearch {
      */
     PackageName?: PackageName;
     /**
-     * Currently supports only TXT-DICTIONARY.
+     * The type of package.
      */
     PackageType?: PackageType;
     /**
-     * The timestamp of the most recent update to the package association status.
+     * Timestamp of the most recent update to the package association status.
      */
     LastUpdated?: LastUpdated;
     /**
-     * The name of the domain you've associated a package with.
+     * Name of the domain that the package is associated with.
      */
     DomainName?: DomainName;
     /**
-     * State of the association. Values are ASSOCIATING, ASSOCIATION_FAILED, ACTIVE, DISSOCIATING, and DISSOCIATION_FAILED.
+     * State of the association.
      */
     DomainPackageStatus?: DomainPackageStatus;
+    /**
+     * The current version of the package.
+     */
     PackageVersion?: PackageVersion;
     /**
-     * The relative path on Amazon OpenSearch Service nodes, which can be used as synonym_path when the package is a synonym file.
+     * Denotes the location of the package on the OpenSearch Service cluster nodes. It's the same as synonym_path for dictionary files.
      */
     ReferencePath?: ReferencePath;
     /**
@@ -1321,80 +1498,83 @@ declare namespace OpenSearch {
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
   export interface DomainStatus {
     /**
-     * The unique identifier for the specified domain.
+     * Unique identifier for the domain.
      */
     DomainId: DomainId;
     /**
-     * The name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen). 
+     * Name of the domain. Domain names are unique across all domains owned by the same account within an Amazon Web Services Region.
      */
     DomainName: DomainName;
     /**
-     * The Amazon Resource Name (ARN) of a domain. See IAM identifiers  in the AWS Identity and Access Management User Guide for more information. 
+     * The Amazon Resource Name (ARN) of the domain. For more information, see IAM identifiers  in the AWS Identity and Access Management User Guide.
      */
     ARN: ARN;
     /**
-     * The domain creation status. True if the creation of a domain is complete.  False  if domain creation is still in progress. 
+     * Creation status of an OpenSearch Service domain. True if domain creation is complete. False if domain creation is still in progress.
      */
     Created?: Boolean;
     /**
-     * The domain deletion status. True if a delete request has been received for the domain but resource cleanup is still in progress. False if the domain has not been deleted. Once domain deletion is complete, the status of the domain is no longer returned. 
+     * Deletion status of an OpenSearch Service domain. True if domain deletion is complete. False if domain deletion is still in progress. Once deletion is complete, the status of the domain is no longer returned.
      */
     Deleted?: Boolean;
     /**
-     * The domain endpoint that you use to submit index and search requests.
+     * Domain-specific endpoint used to submit index, search, and data upload requests to the domain.
      */
     Endpoint?: ServiceUrl;
     /**
-     * Map containing the domain endpoints used to submit index and search requests. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'. 
+     * The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints.. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
      */
     Endpoints?: EndpointsMap;
     /**
-     * The status of the domain configuration. True if Amazon OpenSearch Service is processing configuration changes. False if the configuration is active. 
+     * The status of the domain configuration. True if OpenSearch Service is processing configuration changes. False if the configuration is active.
      */
     Processing?: Boolean;
     /**
-     * The status of a domain version upgrade. True if Amazon OpenSearch Service is undergoing a version upgrade. False if the configuration is active. 
+     * The status of a domain version upgrade to a new version of OpenSearch or Elasticsearch. True if OpenSearch Service is in the process of a version upgrade. False if the configuration is active.
      */
     UpgradeProcessing?: Boolean;
+    /**
+     * Version of OpenSearch or Elasticsearch that the domain is running, in the format Elasticsearch_X.Y or OpenSearch_X.Y.
+     */
     EngineVersion?: VersionString;
     /**
-     * The type and number of instances in the domain.
+     * Container for the cluster configuration of the domain.
      */
     ClusterConfig: ClusterConfig;
     /**
-     * The EBSOptions for the specified domain. 
+     * Container for EBS-based storage settings for the domain.
      */
     EBSOptions?: EBSOptions;
     /**
-     * IAM access policy as a JSON-formatted string.
+     * Identity and Access Management (IAM) policy document specifying the access policies for the domain.
      */
     AccessPolicies?: PolicyDocument;
     /**
-     * The status of the SnapshotOptions. 
+     * DEPRECATED. Container for parameters required to configure automated snapshots of domain indexes.
      */
     SnapshotOptions?: SnapshotOptions;
     /**
-     * The VPCOptions for the specified domain. For more information, see  Launching your Amazon OpenSearch Service domains using a VPC. 
+     * The VPC configuration for the domain.
      */
     VPCOptions?: VPCDerivedInfo;
     /**
-     * The CognitoOptions for the specified domain. For more information, see Configuring Amazon Cognito authentication for OpenSearch Dashboards. 
+     * Key-value pairs to configure Amazon Cognito authentication for OpenSearch Dashboards.
      */
     CognitoOptions?: CognitoOptions;
     /**
-     * The status of the EncryptionAtRestOptions. 
+     * Encryption at rest settings for the domain.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
-     * The status of the NodeToNodeEncryptionOptions. 
+     * Whether node-to-node encryption is enabled or disabled.
      */
     NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
     /**
-     * The status of the AdvancedOptions. 
+     * Key-value pairs that specify advanced configuration options.
      */
     AdvancedOptions?: AdvancedOptions;
     /**
-     * Log publishing options for the given domain.
+     * Log publishing options for the domain.
      */
     LogPublishingOptions?: LogPublishingOptions;
     /**
@@ -1402,19 +1582,19 @@ declare namespace OpenSearch {
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
     /**
-     * The current status of the domain's endpoint options.
+     * Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
      */
     DomainEndpointOptions?: DomainEndpointOptions;
     /**
-     * The current status of the domain's advanced security options.
+     * Settings for fine-grained access control.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptions;
     /**
-     * The current status of the domain's Auto-Tune options.
+     * Auto-Tune settings for the domain.
      */
     AutoTuneOptions?: AutoTuneOptionsOutput;
     /**
-     * Specifies change details of the domain configuration change.
+     * Information about a configuration change happening on the domain.
      */
     ChangeProgressDetails?: ChangeProgressDetails;
   }
@@ -1423,50 +1603,50 @@ declare namespace OpenSearch {
   export type DryRun = boolean;
   export interface DryRunResults {
     /**
-     *  Specifies the way in which Amazon OpenSearch Service applies the update. Possible responses are Blue/Green (the update requires a blue/green deployment), DynamicUpdate (no blue/green required), Undetermined (the domain is undergoing an update and can't predict the deployment type; try again after the update is complete), and None (the request doesn't include any configuration changes). 
+     *  Specifies the way in which OpenSearch Service will apply an update. Possible values are:    Blue/Green - The update requires a blue/green deployment.    DynamicUpdate - No blue/green deployment required    Undetermined - The domain is in the middle of an update and can't predict the deployment type. Try again after the update is complete.    None - The request doesn't include any configuration changes.  
      */
     DeploymentType?: DeploymentType;
     /**
-     * Contains an optional message associated with the DryRunResults.
+     * A message corresponding to the deployment type.
      */
     Message?: Message;
   }
   export interface Duration {
     /**
-     * Integer to specify the value of a maintenance schedule duration. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * Integer to specify the value of a maintenance schedule duration.
      */
     Value?: DurationValue;
     /**
-     * The unit of a maintenance schedule duration. Valid value is HOURS. See  Auto-Tune for Amazon OpenSearch Service  for more information. 
+     * The unit of measurement for the duration of a maintenance schedule.
      */
     Unit?: TimeUnit;
   }
   export type DurationValue = number;
   export interface EBSOptions {
     /**
-     * Whether EBS-based storage is enabled.
+     * Indicates whether EBS volumes are attached to data nodes in an OpenSearch Service domain.
      */
     EBSEnabled?: Boolean;
     /**
-     * The volume type for EBS-based storage.
+     * Specifies the type of EBS volumes attached to data nodes.
      */
     VolumeType?: VolumeType;
     /**
-     * Integer to specify the size of an EBS volume.
+     * Specifies the size (in GiB) of EBS volumes attached to data nodes.
      */
     VolumeSize?: IntegerClass;
     /**
-     * The IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
+     * Specifies the baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the gp3 and provisioned IOPS EBS volume types.
      */
     Iops?: IntegerClass;
     /**
-     * The Throughput for GP3 EBS volume (SSD).
+     * Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
      */
     Throughput?: IntegerClass;
   }
   export interface EBSOptionsStatus {
     /**
-     * The EBS options for the specified domain.
+     * The configured EBS options for the specified domain.
      */
     Options: EBSOptions;
     /**
@@ -1476,133 +1656,161 @@ declare namespace OpenSearch {
   }
   export interface EncryptionAtRestOptions {
     /**
-     * The option to enable encryption at rest.
+     * True to enable encryption at rest.
      */
     Enabled?: Boolean;
     /**
-     * The KMS key ID for encryption at rest options.
+     * The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
      */
     KmsKeyId?: KmsKeyId;
   }
   export interface EncryptionAtRestOptionsStatus {
     /**
-     * The Encryption At Rest options for the specified domain.
+     * Encryption at rest options for the specified domain.
      */
     Options: EncryptionAtRestOptions;
     /**
-     * The status of the Encryption At Rest options for the specified domain.
+     * The status of the encryption at rest options for the specified domain.
      */
     Status: OptionStatus;
   }
+  export type Endpoint = string;
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type EngineType = "OpenSearch"|"Elasticsearch"|string;
   export interface ErrorDetails {
+    /**
+     * The type of error that occurred.
+     */
     ErrorType?: ErrorType;
+    /**
+     * A message describing the error.
+     */
     ErrorMessage?: ErrorMessage;
   }
   export type ErrorMessage = string;
   export type ErrorType = string;
   export interface Filter {
     /**
-     *  The name of the filter. 
+     * The name of the filter.
      */
     Name?: NonEmptyString;
     /**
-     *  Contains one or more values for the filter. 
+     * One or more values for the filter.
      */
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
   export type GUID = string;
   export interface GetCompatibleVersionsRequest {
+    /**
+     * The name of an existing domain. Provide this parameter to limit the results to a single domain.
+     */
     DomainName?: DomainName;
   }
   export interface GetCompatibleVersionsResponse {
     /**
-     *  A map of compatible OpenSearch versions returned as part of the  GetCompatibleVersions  operation. 
+     * A map of OpenSearch or Elasticsearch versions and the versions you can upgrade them to.
      */
     CompatibleVersions?: CompatibleVersionsList;
   }
   export interface GetPackageVersionHistoryRequest {
     /**
-     * Returns an audit history of package versions.
+     * The unique identifier of the package.
      */
     PackageID: PackageID;
     /**
-     * Limits results to a maximum number of package versions.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page. 
+     * If your initial GetPackageVersionHistory operation returns a nextToken, you can include the returned nextToken in subsequent GetPackageVersionHistory operations, which returns results in the next page. 
      */
     NextToken?: NextToken;
   }
   export interface GetPackageVersionHistoryResponse {
+    /**
+     * The unique identifier of the package.
+     */
     PackageID?: PackageID;
     /**
-     * List of PackageVersionHistory objects. 
+     * A list of package versions, along with their creation time and commit message.
      */
     PackageVersionHistoryList?: PackageVersionHistoryList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
     NextToken?: String;
   }
   export interface GetUpgradeHistoryRequest {
+    /**
+     * The name of an existing domain.
+     */
     DomainName: DomainName;
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     */
     MaxResults?: MaxResults;
+    /**
+     * If your initial GetUpgradeHistory operation returns a nextToken, you can include the returned nextToken in subsequent GetUpgradeHistory operations, which returns results in the next page.
+     */
     NextToken?: NextToken;
   }
   export interface GetUpgradeHistoryResponse {
     /**
-     *  A list of  UpgradeHistory  objects corresponding to each upgrade or upgrade eligibility check performed on a domain returned as part of the  GetUpgradeHistoryResponse  object. 
+     * A list of objects corresponding to each upgrade or upgrade eligibility check performed on a domain.
      */
     UpgradeHistories?: UpgradeHistoryList;
     /**
-     * Pagination token that needs to be supplied to the next call to get the next page of results.
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: String;
   }
   export interface GetUpgradeStatusRequest {
+    /**
+     * The domain of the domain to get upgrade status information for.
+     */
     DomainName: DomainName;
   }
   export interface GetUpgradeStatusResponse {
     /**
-     *  One of three steps an upgrade or upgrade eligibility check goes through:  PreUpgradeCheck Snapshot Upgrade  
+     * One of three steps that an upgrade or upgrade eligibility check goes through.
      */
     UpgradeStep?: UpgradeStep;
     /**
-     *  One of four statuses an upgrade have, returned as part of the  GetUpgradeStatusResponse  object. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     * The status of the current step that an upgrade is on.
      */
     StepStatus?: UpgradeStatus;
     /**
-     * A string that briefly describes the update.
+     * A string that describes the update.
      */
     UpgradeName?: UpgradeName;
   }
   export type IdentityPoolId = string;
   export interface InboundConnection {
     /**
-     * The  AWSDomainInformation  for the local OpenSearch domain. 
+     * Information about the source (local) domain.
      */
     LocalDomainInfo?: DomainInformationContainer;
     /**
-     * The  AWSDomainInformation  for the remote OpenSearch domain. 
+     * Information about the destination (remote) domain.
      */
     RemoteDomainInfo?: DomainInformationContainer;
     /**
-     * The connection ID for the inbound cross-cluster connection.
+     * The unique identifier of the connection.
      */
     ConnectionId?: ConnectionId;
     /**
-     * The  InboundConnectionStatus  for the outbound connection. 
+     * The current status of the connection.
      */
     ConnectionStatus?: InboundConnectionStatus;
   }
   export interface InboundConnectionStatus {
     /**
-     * The state code for the inbound connection. Can be one of the following:  PENDING_ACCEPTANCE: Inbound connection is not yet accepted by the remote domain owner. APPROVED: Inbound connection is pending acceptance by the remote domain owner. PROVISIONING: Inbound connection provisioning is in progress. ACTIVE: Inbound connection is active and ready to use. REJECTING: Inbound connection rejection is in process. REJECTED: Inbound connection is rejected. DELETING: Inbound connection deletion is in progress. DELETED: Inbound connection is deleted and can no longer be used. 
+     * The status code for the connection. Can be one of the following:    PENDING_ACCEPTANCE - Inbound connection is not yet accepted by the remote domain owner.    APPROVED: Inbound connection is pending acceptance by the remote domain owner.    PROVISIONING: Inbound connection is being provisioned.    ACTIVE: Inbound connection is active and ready to use.    REJECTING: Inbound connection rejection is in process.    REJECTED: Inbound connection is rejected.    DELETING: Inbound connection deletion is in progress.    DELETED: Inbound connection is deleted and can no longer be used.  
      */
     StatusCode?: InboundConnectionStatusCode;
     /**
-     * Verbose information for the inbound connection status.
+     * Information about the connection.
      */
     Message?: ConnectionStatusMessage;
   }
@@ -1610,21 +1818,51 @@ declare namespace OpenSearch {
   export type InboundConnections = InboundConnection[];
   export type InstanceCount = number;
   export interface InstanceCountLimits {
+    /**
+     * The maximum allowed number of instances.
+     */
     MinimumInstanceCount?: MinimumInstanceCount;
+    /**
+     * The minimum allowed number of instances.
+     */
     MaximumInstanceCount?: MaximumInstanceCount;
   }
   export interface InstanceLimits {
+    /**
+     * Limits on the number of instances that can be created for a given instance type.
+     */
     InstanceCountLimits?: InstanceCountLimits;
   }
   export type InstanceRole = string;
   export type InstanceRoleList = InstanceRole[];
   export interface InstanceTypeDetails {
+    /**
+     * The instance type.
+     */
     InstanceType?: OpenSearchPartitionInstanceType;
+    /**
+     * Whether encryption at rest and node-to-node encryption are supported for the instance type.
+     */
     EncryptionEnabled?: Boolean;
+    /**
+     * Whether Amazon Cognito access is supported for the instance type.
+     */
     CognitoEnabled?: Boolean;
+    /**
+     * Whether logging is supported for the instance type.
+     */
     AppLogsEnabled?: Boolean;
+    /**
+     * Whether fine-grained access control is supported for the instance type.
+     */
     AdvancedSecurityEnabled?: Boolean;
+    /**
+     * Whether UltraWarm is supported for the instance type.
+     */
     WarmEnabled?: Boolean;
+    /**
+     * Whether the instance acts as a data node, a dedicated master node, or an UltraWarm node.
+     */
     InstanceRole?: InstanceRoleList;
   }
   export type InstanceTypeDetailsList = InstanceTypeDetails[];
@@ -1639,57 +1877,81 @@ declare namespace OpenSearch {
   export type LimitValueList = LimitValue[];
   export interface Limits {
     /**
-     * Storage-related types and attributes that are available for a given InstanceType. 
+     * Storage-related attributes that are available for a given instance type.
      */
     StorageTypes?: StorageTypeList;
+    /**
+     * The limits for a given instance type.
+     */
     InstanceLimits?: InstanceLimits;
     /**
-     *  List of additional limits that are specific to a given InstanceType and for each of its  InstanceRole  . 
+     * List of additional limits that are specific to a given instance type for each of its instance roles.
      */
     AdditionalLimits?: AdditionalLimitList;
   }
   export type LimitsByRole = {[key: string]: Limits};
   export interface ListDomainNamesRequest {
     /**
-     *  Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. 
+     * Filters the output by domain engine type.
      */
     EngineType?: EngineType;
   }
   export interface ListDomainNamesResponse {
     /**
-     * List of domain names and respective engine types.
+     * The names of all OpenSearch Service domains owned by the current user and their respective engine types.
      */
     DomainNames?: DomainInfoList;
   }
   export interface ListDomainsForPackageRequest {
     /**
-     * The package for which to list associated domains.
+     * The unique identifier of the package for which to list associated domains.
      */
     PackageID: PackageID;
     /**
-     * Limits the results to a maximum number of domains.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page. 
+     * If your initial ListDomainsForPackage operation returns a nextToken, you can include the returned nextToken in subsequent ListDomainsForPackage operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface ListDomainsForPackageResponse {
     /**
-     * List of DomainPackageDetails objects. 
+     * Information about all domains associated with a package.
      */
     DomainPackageDetailsList?: DomainPackageDetailsList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
     NextToken?: String;
   }
   export interface ListInstanceTypeDetailsRequest {
+    /**
+     * Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
+     */
     EngineVersion: VersionString;
+    /**
+     * Name of the domain to list instance type details for.
+     */
     DomainName?: DomainName;
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     */
     MaxResults?: MaxResults;
+    /**
+     * If your initial ListInstanceTypeDetails operation returns a nextToken, you can include the returned nextToken in subsequent ListInstanceTypeDetails operations, which returns results in the next page.
+     */
     NextToken?: NextToken;
   }
   export interface ListInstanceTypeDetailsResponse {
+    /**
+     * Lists all supported instance types and features for the given OpenSearch or Elasticsearch version.
+     */
     InstanceTypeDetails?: InstanceTypeDetailsList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
     NextToken?: NextToken;
   }
   export interface ListPackagesForDomainRequest {
@@ -1698,51 +1960,119 @@ declare namespace OpenSearch {
      */
     DomainName: DomainName;
     /**
-     * Limits results to a maximum number of packages.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page. 
+     * If your initial ListPackagesForDomain operation returns a nextToken, you can include the returned nextToken in subsequent ListPackagesForDomain operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface ListPackagesForDomainResponse {
     /**
-     * List of DomainPackageDetails objects. 
+     * List of all packages associated with a domain.
      */
     DomainPackageDetailsList?: DomainPackageDetailsList;
     /**
-     * Pagination token to supply to the next call to get the next page of results.
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
     NextToken?: String;
   }
   export interface ListTagsRequest {
     /**
-     * Specify the ARN of the domain that the tags you want to view are attached to. 
+     * Amazon Resource Name (ARN) for the domain to view tags for.
      */
     ARN: ARN;
   }
   export interface ListTagsResponse {
     /**
-     * List of Tag for the requested domain. 
+     * List of resource tags associated with the specified domain.
      */
     TagList?: TagList;
   }
   export interface ListVersionsRequest {
     /**
-     *  Set this value to limit the number of results returned. Value must be greater than 10 or it won't be honored. 
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
      */
     MaxResults?: MaxResults;
+    /**
+     * If your initial ListVersions operation returns a nextToken, you can include the returned nextToken in subsequent ListVersions operations, which returns results in the next page.
+     */
     NextToken?: NextToken;
   }
   export interface ListVersionsResponse {
+    /**
+     * A list of all versions of OpenSearch and Elasticsearch that Amazon OpenSearch Service supports.
+     */
     Versions?: VersionList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
     NextToken?: NextToken;
   }
+  export interface ListVpcEndpointAccessRequest {
+    /**
+     * The name of the OpenSearch Service domain to retrieve access information for.
+     */
+    DomainName: DomainName;
+    /**
+     * If your initial ListVpcEndpointAccess operation returns a nextToken, you can include the returned nextToken in subsequent ListVpcEndpointAccess operations, which returns results in the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListVpcEndpointAccessResponse {
+    /**
+     * A list of IAM principals that can currently access the domain.
+     */
+    AuthorizedPrincipalList: AuthorizedPrincipalList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    NextToken: NextToken;
+  }
+  export interface ListVpcEndpointsForDomainRequest {
+    /**
+     * The name of the domain to list associated VPC endpoints for.
+     */
+    DomainName: DomainName;
+    /**
+     * If your initial ListEndpointsForDomain operation returns a nextToken, you can include the returned nextToken in subsequent ListEndpointsForDomain operations, which returns results in the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListVpcEndpointsForDomainResponse {
+    /**
+     * Information about each endpoint associated with the domain.
+     */
+    VpcEndpointSummaryList: VpcEndpointSummaryList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    NextToken: NextToken;
+  }
+  export interface ListVpcEndpointsRequest {
+    /**
+     * If your initial ListVpcEndpoints operation returns a nextToken, you can include the returned nextToken in subsequent ListVpcEndpoints operations, which returns results in the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListVpcEndpointsResponse {
+    /**
+     * Information about each endpoint.
+     */
+    VpcEndpointSummaryList: VpcEndpointSummaryList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    NextToken: NextToken;
+  }
   export interface LogPublishingOption {
+    /**
+     * The Amazon Resource Name (ARN) of the CloudWatch Logs group to publish logs to.
+     */
     CloudWatchLogsLogGroupArn?: CloudWatchLogsLogGroupArn;
     /**
-     * Whether the given log publishing option is enabled or not.
+     * Whether the log should be published.
      */
     Enabled?: Boolean;
   }
@@ -1753,7 +2083,7 @@ declare namespace OpenSearch {
      */
     Options?: LogPublishingOptions;
     /**
-     * The status of the log publishing options for the domain. See OptionStatus for the status information that's included. 
+     * The status of the log publishing options for the domain.
      */
     Status?: OptionStatus;
   }
@@ -1761,15 +2091,15 @@ declare namespace OpenSearch {
   export type Long = number;
   export interface MasterUserOptions {
     /**
-     * ARN for the master user (if IAM is enabled).
+     * Amazon Resource Name (ARN) for the master user. Only specify if InternalUserDatabaseEnabled is false.
      */
     MasterUserARN?: ARN;
     /**
-     * The master user's username, which is stored in the Amazon OpenSearch Service domain's internal database.
+     * User name for the master user. Only specify if InternalUserDatabaseEnabled is true.
      */
     MasterUserName?: Username;
     /**
-     * The master user's password, which is stored in the Amazon OpenSearch Service domain's internal database.
+     * Password for the master user. Only specify if InternalUserDatabaseEnabled is true.
      */
     MasterUserPassword?: Password;
   }
@@ -1800,7 +2130,7 @@ declare namespace OpenSearch {
   export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
   export interface OptionStatus {
     /**
-     * The timestamp of when the entity was created.
+     * The timestamp when the entity was created.
      */
     CreationDate: UpdateTimestamp;
     /**
@@ -1812,43 +2142,43 @@ declare namespace OpenSearch {
      */
     UpdateVersion?: UIntValue;
     /**
-     * Provides the OptionState for the domain. 
+     * The state of the entity.
      */
     State: OptionState;
     /**
-     * Indicates whether the domain is being deleted.
+     * Indicates whether the entity is being deleted.
      */
     PendingDeletion?: Boolean;
   }
   export interface OutboundConnection {
     /**
-     * The  DomainInformation  for the local OpenSearch domain. 
+     * Information about the source (local) domain.
      */
     LocalDomainInfo?: DomainInformationContainer;
     /**
-     * The  DomainInformation  for the remote OpenSearch domain. 
+     * Information about the destination (remote) domain.
      */
     RemoteDomainInfo?: DomainInformationContainer;
     /**
-     * The connection ID for the outbound cross-cluster connection.
+     * Unique identifier of the connection.
      */
     ConnectionId?: ConnectionId;
     /**
-     * The connection alias for the outbound cross-cluster connection.
+     * Name of the connection.
      */
     ConnectionAlias?: ConnectionAlias;
     /**
-     * The  OutboundConnectionStatus  for the outbound connection. 
+     * Status of the connection.
      */
     ConnectionStatus?: OutboundConnectionStatus;
   }
   export interface OutboundConnectionStatus {
     /**
-     * The state code for the outbound connection. Can be one of the following:  VALIDATING: The outbound connection request is being validated. VALIDATION_FAILED: Validation failed for the connection request. PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by the remote domain owner.  APPROVED: Outbound connection has been approved by the remote domain owner for getting provisioned. PROVISIONING: Outbound connection request is in process. ACTIVE: Outbound connection is active and ready to use. REJECTING: Outbound connection rejection by remote domain owner is in progress. REJECTED: Outbound connection request is rejected by remote domain owner. DELETING: Outbound connection deletion is in progress. DELETED: Outbound connection is deleted and can no longer be used. 
+     * The status code for the outbound connection. Can be one of the following:    VALIDATING - The outbound connection request is being validated.    VALIDATION_FAILED - Validation failed for the connection request.    PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by the remote domain owner.    APPROVED - Outbound connection has been approved by the remote domain owner for getting provisioned.    PROVISIONING - Outbound connection request is in process.    ACTIVE - Outbound connection is active and ready to use.    REJECTING - Outbound connection rejection by remote domain owner is in progress.    REJECTED - Outbound connection request is rejected by remote domain owner.    DELETING - Outbound connection deletion is in progress.    DELETED - Outbound connection is deleted and can no longer be used.  
      */
     StatusCode?: OutboundConnectionStatusCode;
     /**
-     * Verbose information for the outbound connection status.
+     * Verbose information for the outbound connection.
      */
     Message?: ConnectionStatusMessage;
   }
@@ -1859,7 +2189,7 @@ declare namespace OpenSearch {
   export type PackageDescription = string;
   export interface PackageDetails {
     /**
-     * Internal ID of the package.
+     * The unique identifier of the package.
      */
     PackageID?: PackageID;
     /**
@@ -1867,7 +2197,7 @@ declare namespace OpenSearch {
      */
     PackageName?: PackageName;
     /**
-     * Currently supports only TXT-DICTIONARY.
+     * The type of package.
      */
     PackageType?: PackageType;
     /**
@@ -1875,14 +2205,20 @@ declare namespace OpenSearch {
      */
     PackageDescription?: PackageDescription;
     /**
-     * Current state of the package. Values are COPYING, COPY_FAILED, AVAILABLE, DELETING, and DELETE_FAILED.
+     * Current status of the package.
      */
     PackageStatus?: PackageStatus;
     /**
-     * The timestamp of when the package was created.
+     * The timestamp when the package was created.
      */
     CreatedAt?: CreatedAt;
+    /**
+     * Date and time when the package was last updated.
+     */
     LastUpdatedAt?: LastUpdated;
+    /**
+     * The package version.
+     */
     AvailablePackageVersion?: PackageVersion;
     /**
      * Additional information if the package is in an error state. Null otherwise.
@@ -1911,20 +2247,21 @@ declare namespace OpenSearch {
      */
     PackageVersion?: PackageVersion;
     /**
-     * A message associated with the package version.
+     * A message associated with the package version when it was uploaded.
      */
     CommitMessage?: CommitMessage;
     /**
-     * The timestamp of when the package was created.
+     * The date and time when the package was created.
      */
     CreatedAt?: CreatedAt;
   }
   export type PackageVersionHistoryList = PackageVersionHistory[];
   export type Password = string;
   export type PolicyDocument = string;
+  export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string;
   export interface PurchaseReservedInstanceOfferingRequest {
     /**
-     * The ID of the reserved OpenSearch instance offering to purchase.
+     * The ID of the Reserved Instance offering to purchase.
      */
     ReservedInstanceOfferingId: GUID;
     /**
@@ -1938,7 +2275,7 @@ declare namespace OpenSearch {
   }
   export interface PurchaseReservedInstanceOfferingResponse {
     /**
-     * Details of the reserved OpenSearch instance which was purchased.
+     * The ID of the Reserved Instance offering that was purchased.
      */
     ReservedInstanceId?: GUID;
     /**
@@ -1961,23 +2298,23 @@ declare namespace OpenSearch {
   export type Region = string;
   export interface RejectInboundConnectionRequest {
     /**
-     * The ID of the inbound connection to reject.
+     * The unique identifier of the inbound connection to reject.
      */
     ConnectionId: ConnectionId;
   }
   export interface RejectInboundConnectionResponse {
     /**
-     * The  InboundConnection  of the rejected inbound connection. 
+     * Contains details about the rejected inbound connection.
      */
     Connection?: InboundConnection;
   }
   export interface RemoveTagsRequest {
     /**
-     * The ARN of the domain from which you want to delete the specified tags. 
+     * The Amazon Resource Name (ARN) of the domain from which you want to delete the specified tags.
      */
     ARN: ARN;
     /**
-     * The TagKey list you want to remove from the domain. 
+     * The list of tag keys to remove from the domain.
      */
     TagKeys: StringList;
   }
@@ -1991,17 +2328,20 @@ declare namespace OpenSearch {
      * The unique identifier for the reservation.
      */
     ReservedInstanceId?: GUID;
+    /**
+     * The unique identifier of the billing subscription.
+     */
     BillingSubscriptionId?: Long;
     /**
-     * The offering identifier.
+     * The unique identifier of the Reserved Instance offering.
      */
     ReservedInstanceOfferingId?: String;
     /**
-     * The OpenSearch instance type offered by the reserved instance offering.
+     * The OpenSearch instance type offered by theReserved Instance offering.
      */
     InstanceType?: OpenSearchPartitionInstanceType;
     /**
-     * The time the reservation started.
+     * The date and time when the reservation was purchased.
      */
     StartTime?: UpdateTimestamp;
     /**
@@ -2009,15 +2349,15 @@ declare namespace OpenSearch {
      */
     Duration?: Integer;
     /**
-     * The upfront fixed charge you will paid to purchase the specific reserved OpenSearch instance offering.
+     * The upfront fixed charge you will paid to purchase the specific Reserved Instance offering.
      */
     FixedPrice?: Double;
     /**
-     * The rate you are charged for each hour for the domain that is using this reserved instance.
+     * The hourly rate at which you're charged for the domain using this Reserved Instance.
      */
     UsagePrice?: Double;
     /**
-     * The currency code for the reserved OpenSearch instance offering.
+     * The currency code for the offering.
      */
     CurrencyCode?: String;
     /**
@@ -2025,26 +2365,26 @@ declare namespace OpenSearch {
      */
     InstanceCount?: Integer;
     /**
-     * The state of the reserved OpenSearch instance.
+     * The state of the Reserved Instance.
      */
     State?: String;
     /**
-     * The payment option as defined in the reserved OpenSearch instance offering.
+     * The payment option as defined in the Reserved Instance offering.
      */
     PaymentOption?: ReservedInstancePaymentOption;
     /**
-     * The charge to your account regardless of whether you are creating any domains using the instance offering.
+     * The recurring charge to your account, regardless of whether you create any domains using the Reserved Instance offering.
      */
     RecurringCharges?: RecurringChargeList;
   }
   export type ReservedInstanceList = ReservedInstance[];
   export interface ReservedInstanceOffering {
     /**
-     * The OpenSearch reserved instance offering identifier.
+     * The unique identifier of the Reserved Instance offering.
      */
     ReservedInstanceOfferingId?: GUID;
     /**
-     * The OpenSearch instance type offered by the reserved instance offering.
+     * The OpenSearch instance type offered by the Reserved Instance offering.
      */
     InstanceType?: OpenSearchPartitionInstanceType;
     /**
@@ -2052,28 +2392,40 @@ declare namespace OpenSearch {
      */
     Duration?: Integer;
     /**
-     * The upfront fixed charge you will pay to purchase the specific reserved OpenSearch instance offering.
+     * The upfront fixed charge you will pay to purchase the specific Reserved Instance offering.
      */
     FixedPrice?: Double;
     /**
-     * The rate you are charged for each hour the domain that is using the offering is running.
+     * The hourly rate at which you're charged for the domain using this Reserved Instance.
      */
     UsagePrice?: Double;
     /**
-     * The currency code for the reserved OpenSearch instance offering.
+     * The currency code for the Reserved Instance offering.
      */
     CurrencyCode?: String;
     /**
-     * Payment option for the reserved OpenSearch instance offering
+     * Payment option for the Reserved Instance offering
      */
     PaymentOption?: ReservedInstancePaymentOption;
     /**
-     * The charge to your account regardless of whether you are creating any domains using the instance offering.
+     * The recurring charge to your account, regardless of whether you creates any domains using the offering.
      */
     RecurringCharges?: RecurringChargeList;
   }
   export type ReservedInstanceOfferingList = ReservedInstanceOffering[];
   export type ReservedInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
+  export interface RevokeVpcEndpointAccessRequest {
+    /**
+     * The name of the OpenSearch Service domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The account ID to revoke access from.
+     */
+    Account: AWSAccount;
+  }
+  export interface RevokeVpcEndpointAccessResponse {
+  }
   export type RoleArn = string;
   export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string;
   export type S3BucketName = string;
@@ -2081,18 +2433,18 @@ declare namespace OpenSearch {
   export type SAMLEntityId = string;
   export interface SAMLIdp {
     /**
-     * The metadata of the SAML application in XML format.
+     * The metadata of the SAML application, in XML format.
      */
     MetadataContent: SAMLMetadata;
     /**
-     * The unique entity ID of the application in SAML identity provider.
+     * The unique entity ID of the application in the SAML identity provider.
      */
     EntityId: SAMLEntityId;
   }
   export type SAMLMetadata = string;
   export interface SAMLOptionsInput {
     /**
-     * True if SAML is enabled.
+     * True to enable SAML authentication for a domain.
      */
     Enabled?: Boolean;
     /**
@@ -2100,7 +2452,7 @@ declare namespace OpenSearch {
      */
     Idp?: SAMLIdp;
     /**
-     * The SAML master username, which is stored in the Amazon OpenSearch Service domain's internal database.
+     * The SAML master user name, which is stored in the domain's internal user database.
      */
     MasterUserName?: Username;
     /**
@@ -2108,7 +2460,7 @@ declare namespace OpenSearch {
      */
     MasterBackendRole?: BackendRole;
     /**
-     * Element of the SAML assertion to use for username. Default is NameID.
+     * Element of the SAML assertion to use for the user name. Default is NameID.
      */
     SubjectKey?: String;
     /**
@@ -2116,7 +2468,7 @@ declare namespace OpenSearch {
      */
     RolesKey?: String;
     /**
-     * The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60. 
+     * The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.
      */
     SessionTimeoutMinutes?: IntegerClass;
   }
@@ -2146,19 +2498,19 @@ declare namespace OpenSearch {
   export type ScheduledAutoTuneDescription = string;
   export interface ScheduledAutoTuneDetails {
     /**
-     * The timestamp of the Auto-Tune action scheduled for the domain.
+     * The date and time when the Auto-Tune action is scheduled for the domain.
      */
     Date?: AutoTuneDate;
     /**
-     * The Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING.
+     * The type of Auto-Tune action.
      */
     ActionType?: ScheduledAutoTuneActionType;
     /**
-     * The Auto-Tune action description.
+     * A description of the Auto-Tune action.
      */
     Action?: ScheduledAutoTuneDescription;
     /**
-     * The Auto-Tune action severity. Valid values are LOW, MEDIUM, and HIGH.
+     * The severity of the Auto-Tune action. Valid values are LOW, MEDIUM, and HIGH.
      */
     Severity?: ScheduledAutoTuneSeverityType;
   }
@@ -2169,38 +2521,38 @@ declare namespace OpenSearch {
      */
     CurrentVersion?: String;
     /**
-     * The new service software version if one is available.
+     * The new service software version, if one is available.
      */
     NewVersion?: String;
     /**
-     *  True if you're able to update your service software version. False if you can't update your service software version. 
+     * True if you're able to update your service software version. False if you can't update your service software version.
      */
     UpdateAvailable?: Boolean;
     /**
-     *  True if you're able to cancel your service software version update. False if you can't cancel your service software update. 
+     *  True if you're able to cancel your service software version update. False if you can't cancel your service software update.
      */
     Cancellable?: Boolean;
     /**
-     * The status of your service software update. This field can take the following values:  ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and  NOT_ELIGIBLE. 
+     * The status of your service software update.
      */
     UpdateStatus?: DeploymentStatus;
     /**
-     * The description of the UpdateStatus. 
+     * A description of the service software update status.
      */
     Description?: String;
     /**
-     * The timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software. 
+     * The timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.
      */
     AutomatedUpdateDate?: DeploymentCloseDateTimeStamp;
     /**
-     *  True if a service software is never automatically updated. False if a service software is automatically updated after AutomatedUpdateDate. 
+     * True if a service software is never automatically updated. False if a service software is automatically updated after the automated update date.
      */
     OptionalDeployment?: Boolean;
   }
   export type ServiceUrl = string;
   export interface SnapshotOptions {
     /**
-     * The time, in UTC format, when the service takes a daily automated snapshot of the specified domain. Default is 0 hours. 
+     * The time, in UTC format, when OpenSearch Service takes a daily automated snapshot of the specified domain. Default is 0 hours.
      */
     AutomatedSnapshotStartHour?: IntegerClass;
   }
@@ -2223,27 +2575,33 @@ declare namespace OpenSearch {
   }
   export interface StartServiceSoftwareUpdateResponse {
     /**
-     * The current status of the OpenSearch service software update.
+     * The current status of the OpenSearch Service software update.
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
   export type StartTimestamp = Date;
   export type StorageSubTypeName = string;
   export interface StorageType {
+    /**
+     * The name of the storage type.
+     */
     StorageTypeName?: StorageTypeName;
+    /**
+     * The storage sub-type, such as gp3 or io1.
+     */
     StorageSubTypeName?: StorageSubTypeName;
     /**
-     * Limits that are applicable for the given storage type. 
+     * Limits that are applicable for the given storage type.
      */
     StorageTypeLimits?: StorageTypeLimitList;
   }
   export interface StorageTypeLimit {
     /**
-     *  Name of storage limits that are applicable for the given storage type. If  StorageType  is "ebs", the following storage options are applicable:  MinimumVolumeSize Minimum amount of volume size that is applicable for the given storage type. Can be empty if not applicable. MaximumVolumeSize Maximum amount of volume size that is applicable for the given storage type. Can be empty if not applicable. MaximumIops Maximum amount of Iops that is applicable for given the storage type. Can be empty if not applicable. MinimumIops Minimum amount of Iops that is applicable for given the storage type. Can be empty if not applicable. MaximumThroughput Maximum amount of Throughput that is applicable for given the storage type. Can be empty if not applicable. MinimumThroughput Minimum amount of Throughput that is applicable for given the storage type. Can be empty if not applicable.  
+     *  Name of storage limits that are applicable for the given storage type. If StorageType is ebs, the following options are available:    MinimumVolumeSize - Minimum volume size that is available for the given storage type. Can be empty if not applicable.    MaximumVolumeSize - Maximum volume size that is available for the given storage type. Can be empty if not applicable.    MaximumIops - Maximum amount of IOPS that is available for the given the storage type. Can be empty if not applicable.    MinimumIops - Minimum amount of IOPS that is available for the given the storage type. Can be empty if not applicable.    MaximumThroughput - Maximum amount of throughput that is available for the given the storage type. Can be empty if not applicable.    MinimumThroughput - Minimum amount of throughput that is available for the given the storage type. Can be empty if not applicable.  
      */
     LimitName?: LimitName;
     /**
-     *  Values for the  StorageTypeLimit$LimitName  . 
+     * The limit values.
      */
     LimitValues?: LimitValueList;
   }
@@ -2255,11 +2613,11 @@ declare namespace OpenSearch {
   export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
   export interface Tag {
     /**
-     * The TagKey, the name of the tag. Tag keys must be unique for the domain to which they are attached. 
+     * The tag key. Tag keys must be unique for the domain to which they are attached.
      */
     Key: TagKey;
     /**
-     * The TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key value pair in a tag set of project : Trinity and cost-center : Trinity 
+     * The value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key value pair in a tag set of project : Trinity and cost-center : Trinity 
      */
     Value: TagValue;
   }
@@ -2271,15 +2629,15 @@ declare namespace OpenSearch {
   export type UIntValue = number;
   export interface UpdateDomainConfigRequest {
     /**
-     * The name of the domain you're updating.
+     * The name of the domain that you're updating.
      */
     DomainName: DomainName;
     /**
-     * The type and number of instances to instantiate for the domain cluster.
+     * Changes that you want to make to the cluster configuration, such as the instance type and number of EC2 instances.
      */
     ClusterConfig?: ClusterConfig;
     /**
-     * Specify the type and size of the EBS volume to use.
+     * The type and size of the EBS volume to attach to instances in the domain.
      */
     EBSOptions?: EBSOptions;
     /**
@@ -2287,47 +2645,47 @@ declare namespace OpenSearch {
      */
     SnapshotOptions?: SnapshotOptions;
     /**
-     * Options to specify the subnets and security groups for the VPC endpoint. For more information, see Launching your Amazon OpenSearch Service domains using a VPC . 
+     * Options to specify the subnets and security groups for a VPC endpoint. For more information, see Launching your Amazon OpenSearch Service domains using a VPC.
      */
     VPCOptions?: VPCOptions;
     /**
-     * Options to specify the Cognito user and identity pools for OpenSearch Dashboards authentication. For more information, see Configuring Amazon Cognito authentication for OpenSearch Dashboards. 
+     * Key-value pairs to configure Amazon Cognito authentication for OpenSearch Dashboards.
      */
     CognitoOptions?: CognitoOptions;
     /**
-     * Modifies the advanced option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Advanced options  for more information. 
+     * Key-value pairs to specify advanced configuration options. The following key-value pairs are supported:    "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.    "indices.fielddata.cache.size": "80"  - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.    "indices.query.bool.max_clause_count": "1024" - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a TooManyClauses error.    "override_main_response_version": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with it. Default is false when creating a domain and true when upgrading a domain.   For more information, see Advanced cluster parameters.
      */
     AdvancedOptions?: AdvancedOptions;
     /**
-     * IAM access policy as a JSON-formatted string.
+     * Identity and Access Management (IAM) access policy as a JSON-formatted string.
      */
     AccessPolicies?: PolicyDocument;
     /**
-     * Map of LogType and LogPublishingOption, each containing options to publish a given type of OpenSearch log. 
+     * Options to publish OpenSearch lots to Amazon CloudWatch Logs.
      */
     LogPublishingOptions?: LogPublishingOptions;
     /**
-     * Specifies encryption of data at rest options.
+     * Encryption at rest options for the domain.
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
-     * Options to specify configuration that will be applied to the domain endpoint.
+     * Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
      */
     DomainEndpointOptions?: DomainEndpointOptions;
     /**
-     * Specifies node-to-node encryption options.
+     * Node-To-Node Encryption options for the domain.
      */
     NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
     /**
-     * Specifies advanced security options.
+     * Options for fine-grained access control.
      */
     AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
     /**
-     * Specifies Auto-Tune options.
+     * Options for Auto-Tune.
      */
     AutoTuneOptions?: AutoTuneOptions;
     /**
-     * This flag, when set to True, specifies whether the UpdateDomain request should return the results of validation checks (DryRunResults) without actually applying the change.
+     * This flag, when set to True, specifies whether the UpdateDomain request should return the results of validation check without actually applying the change.
      */
     DryRun?: DryRun;
   }
@@ -2337,7 +2695,7 @@ declare namespace OpenSearch {
      */
     DomainConfig: DomainConfig;
     /**
-     * Contains result of DryRun. 
+     * Results of a dry run performed in an update domain request.
      */
     DryRunResults?: DryRunResults;
   }
@@ -2346,64 +2704,101 @@ declare namespace OpenSearch {
      * The unique identifier for the package.
      */
     PackageID: PackageID;
+    /**
+     * Amazon S3 bucket and key for the package.
+     */
     PackageSource: PackageSource;
     /**
      * A new description of the package.
      */
     PackageDescription?: PackageDescription;
     /**
-     * A commit message for the new version which is shown as part of GetPackageVersionHistoryResponse. 
+     * Commit message for the updated file, which is shown as part of GetPackageVersionHistoryResponse.
      */
     CommitMessage?: CommitMessage;
   }
   export interface UpdatePackageResponse {
     /**
-     * Information about the package. 
+     * Information about a package.
      */
     PackageDetails?: PackageDetails;
   }
   export type UpdateTimestamp = Date;
+  export interface UpdateVpcEndpointRequest {
+    /**
+     * The unique identifier of the endpoint.
+     */
+    VpcEndpointId: VpcEndpointId;
+    /**
+     * The security groups and/or subnets to add, remove, or modify.
+     */
+    VpcOptions: VPCOptions;
+  }
+  export interface UpdateVpcEndpointResponse {
+    /**
+     * The endpoint to be updated.
+     */
+    VpcEndpoint: VpcEndpoint;
+  }
   export interface UpgradeDomainRequest {
+    /**
+     * Name of the OpenSearch Service domain that you want to upgrade.
+     */
     DomainName: DomainName;
     /**
-     * The version of OpenSearch you intend to upgrade the domain to.
+     * OpenSearch or Elasticsearch version to which you want to upgrade, in the format Opensearch_X.Y or Elasticsearch_X.Y.
      */
     TargetVersion: VersionString;
     /**
-     *  When true, indicates that an upgrade eligibility check needs to be performed. Does not actually perform the upgrade. 
+     * When true, indicates that an upgrade eligibility check needs to be performed. Does not actually perform the upgrade.
      */
     PerformCheckOnly?: Boolean;
+    /**
+     * Only supports the override_main_response_version parameter and not other advanced options. You can only include this option when upgrading to an OpenSearch version. Specifies whether the domain reports its version as 7.10 so that it continues to work with Elasticsearch OSS clients and plugins.
+     */
     AdvancedOptions?: AdvancedOptions;
   }
   export interface UpgradeDomainResponse {
+    /**
+     * The unique identifier of the domain upgrade.
+     */
     UpgradeId?: String;
+    /**
+     * The name of the domain that was upgraded.
+     */
     DomainName?: DomainName;
     /**
-     * The version of OpenSearch that you intend to upgrade the domain to.
+     * OpenSearch or Elasticsearch version that the domain was upgraded to.
      */
     TargetVersion?: VersionString;
     /**
-     *  When true, indicates that an upgrade eligibility check needs to be performed. Does not actually perform the upgrade. 
+     * When true, indicates that an upgrade eligibility check was performed.
      */
     PerformCheckOnly?: Boolean;
+    /**
+     * The advanced options configuration for the domain.
+     */
     AdvancedOptions?: AdvancedOptions;
+    /**
+     * Container for information about a configuration change happening on a domain.
+     */
     ChangeProgressDetails?: ChangeProgressDetails;
   }
   export interface UpgradeHistory {
     /**
-     * A string that briefly describes the upgrade.
+     * A string that describes the upgrade.
      */
     UpgradeName?: UpgradeName;
     /**
-     * UTC timestamp at which the upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.
+     * UTC timestamp at which the upgrade API call was made, in the format yyyy-MM-ddTHH:mm:ssZ.
      */
     StartTimestamp?: StartTimestamp;
     /**
-     *  The current status of the upgrade. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     *  The current status of the upgrade. The status can take one of the following values:    In Progress   Succeeded   Succeeded with Issues   Failed  
      */
     UpgradeStatus?: UpgradeStatus;
     /**
-     *  A list of  UpgradeStepItem  s representing information about each step performed as part of a specific upgrade or upgrade eligibility check. 
+     * A list of each step performed as part of a specific upgrade or upgrade eligibility check.
      */
     StepsList?: UpgradeStepsList;
   }
@@ -2413,11 +2808,11 @@ declare namespace OpenSearch {
   export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string;
   export interface UpgradeStepItem {
     /**
-     *  One of three steps an upgrade or upgrade eligibility check goes through:  PreUpgradeCheck Snapshot Upgrade  
+     *  One of three steps that an upgrade or upgrade eligibility check goes through:    PreUpgradeCheck   Snapshot   Upgrade  
      */
     UpgradeStep?: UpgradeStep;
     /**
-     *  The current status of the upgrade. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     *  The current status of the upgrade. The status can take one of the following values:    In Progress   Succeeded   Succeeded with Issues   Failed  
      */
     UpgradeStepStatus?: UpgradeStatus;
     /**
@@ -2434,19 +2829,19 @@ declare namespace OpenSearch {
   export type Username = string;
   export interface VPCDerivedInfo {
     /**
-     * The VPC ID for the domain. Exists only if the domain was created with VPCOptions.
+     * The ID for your VPC. Amazon VPC generates this value when you create a VPC.
      */
     VPCId?: String;
     /**
-     * The subnets for the VPC endpoint.
+     * A list of subnet IDs associated with the VPC endpoints for the domain.
      */
     SubnetIds?: StringList;
     /**
-     * The Availability Zones for the domain. Exists only if the domain was created with VPCOptions.
+     * The list of Availability Zones associated with the VPC subnets.
      */
     AvailabilityZones?: StringList;
     /**
-     * The security groups for the VPC endpoint.
+     * The list of security group IDs associated with the VPC endpoints for the domain.
      */
     SecurityGroupIds?: StringList;
   }
@@ -2462,11 +2857,11 @@ declare namespace OpenSearch {
   }
   export interface VPCOptions {
     /**
-     * The subnets for the VPC endpoint.
+     * A list of subnet IDs associated with the VPC endpoints for the domain. If your domain uses multiple Availability Zones, you need to provide two subnet IDs, one per zone. Otherwise, provide only one.
      */
     SubnetIds?: StringList;
     /**
-     * The security groups for the VPC endpoint.
+     * The list of security group IDs associated with the VPC endpoints for the domain. If you do not provide a security group ID, OpenSearch Service uses the default security group for the VPC.
      */
     SecurityGroupIds?: StringList;
   }
@@ -2474,19 +2869,84 @@ declare namespace OpenSearch {
   export type VersionList = VersionString[];
   export interface VersionStatus {
     /**
-     * The OpenSearch version for the specified OpenSearch domain.
+     * The OpenSearch or Elasticsearch version for the specified domain.
      */
     Options: VersionString;
     /**
-     * The status of the OpenSearch version options for the specified OpenSearch domain.
+     * The status of the version options for the specified domain.
      */
     Status: OptionStatus;
   }
   export type VersionString = string;
   export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string;
+  export interface VpcEndpoint {
+    /**
+     * The unique identifier of the endpoint.
+     */
+    VpcEndpointId?: VpcEndpointId;
+    /**
+     * The creator of the endpoint.
+     */
+    VpcEndpointOwner?: AWSAccount;
+    /**
+     * The Amazon Resource Name (ARN) of the domain associated with the endpoint.
+     */
+    DomainArn?: DomainArn;
+    /**
+     * Options to specify the subnets and security groups for an Amazon OpenSearch Service VPC endpoint.
+     */
+    VpcOptions?: VPCDerivedInfo;
+    /**
+     * The current status of the endpoint.
+     */
+    Status?: VpcEndpointStatus;
+    /**
+     * The connection endpoint ID for connecting to the domain.
+     */
+    Endpoint?: Endpoint;
+  }
+  export interface VpcEndpointError {
+    /**
+     * The unique identifier of the endpoint.
+     */
+    VpcEndpointId?: VpcEndpointId;
+    /**
+     * The code associated with the error.
+     */
+    ErrorCode?: VpcEndpointErrorCode;
+    /**
+     * A message describing the error.
+     */
+    ErrorMessage?: String;
+  }
+  export type VpcEndpointErrorCode = "ENDPOINT_NOT_FOUND"|"SERVER_ERROR"|string;
+  export type VpcEndpointErrorList = VpcEndpointError[];
+  export type VpcEndpointId = string;
+  export type VpcEndpointIdList = VpcEndpointId[];
+  export type VpcEndpointStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
+  export interface VpcEndpointSummary {
+    /**
+     * The unique identifier of the endpoint.
+     */
+    VpcEndpointId?: VpcEndpointId;
+    /**
+     * The creator of the endpoint.
+     */
+    VpcEndpointOwner?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the domain associated with the endpoint.
+     */
+    DomainArn?: DomainArn;
+    /**
+     * The current status of the endpoint.
+     */
+    Status?: VpcEndpointStatus;
+  }
+  export type VpcEndpointSummaryList = VpcEndpointSummary[];
+  export type VpcEndpoints = VpcEndpoint[];
   export interface ZoneAwarenessConfig {
     /**
-     * An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled. 
+     * If you enabled multiple Availability Zones, this value is the number of zones that you want the domain to use. Valid values are 2 and 3. If your domain is provisioned within a VPC, this value be equal to number of subnets.
      */
     AvailabilityZoneCount?: IntegerClass;
   }

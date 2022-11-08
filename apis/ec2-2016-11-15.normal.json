@@ -37733,6 +37733,11 @@
           "shape": "Integer",
           "documentation": "<p>The number of the partition the instance should launch in. Valid only if the placement group strategy is set to <code>partition</code>.</p>",
           "locationName": "partitionNumber"
+        },
+        "GroupId": {
+          "shape": "PlacementGroupId",
+          "documentation": "<p>The Group ID of the placement group. You must specify the Placement Group <b>Group ID</b> to launch an instance in a shared placement group.</p>",
+          "locationName": "groupId"
         }
       },
       "documentation": "<p>Describes the placement of an instance.</p>"
@@ -37771,6 +37776,10 @@
         "PartitionNumber": {
           "shape": "Integer",
           "documentation": "<p>The number of the partition the instance should launch in. Valid only if the placement group strategy is set to <code>partition</code>.</p>"
+        },
+        "GroupId": {
+          "shape": "PlacementGroupId",
+          "documentation": "<p>The Group Id of a placement group. You must specify the Placement Group <b>Group Id</b> to launch an instance in a shared placement group.</p>"
         }
       },
       "documentation": "<p>Describes the placement of an instance.</p>"
@@ -39796,6 +39805,10 @@
         "HostResourceGroupArn": {
           "shape": "String",
           "documentation": "<p>The ARN of the host resource group in which to place the instance.</p>"
+        },
+        "GroupId": {
+          "shape": "PlacementGroupId",
+          "documentation": "<p>The Group Id of a placement group. You must specify the Placement Group <b>Group Id</b> to launch an instance in a shared placement group.</p>"
         }
       }
     },
@@ -43502,6 +43515,11 @@
           "shape": "String",
           "documentation": "<p>The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
           "locationName": "hostResourceGroupArn"
+        },
+        "GroupId": {
+          "shape": "PlacementGroupId",
+          "documentation": "<p>The Group Id of the placement group.</p>",
+          "locationName": "groupId"
         }
       },
       "documentation": "<p>Describes the placement of an instance.</p>"

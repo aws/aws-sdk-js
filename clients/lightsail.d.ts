@@ -604,19 +604,19 @@ declare class Lightsail extends Service {
    */
   getContainerImages(callback?: (err: AWSError, data: Lightsail.Types.GetContainerImagesResult) => void): Request<Lightsail.Types.GetContainerImagesResult, AWSError>;
   /**
-   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerLog(params: Lightsail.Types.GetContainerLogRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerLogResult) => void): Request<Lightsail.Types.GetContainerLogResult, AWSError>;
   /**
-   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the log events of a container of your Amazon Lightsail container service. If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.  Container logs are retained for a certain amount of time. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerLog(callback?: (err: AWSError, data: Lightsail.Types.GetContainerLogResult) => void): Request<Lightsail.Types.GetContainerLogResult, AWSError>;
   /**
-   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerServiceDeployments(params: Lightsail.Types.GetContainerServiceDeploymentsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceDeploymentsResult) => void): Request<Lightsail.Types.GetContainerServiceDeploymentsResult, AWSError>;
   /**
-   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the AWS General Reference. 
+   * Returns the deployments for your Amazon Lightsail container service A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service. The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.  A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see Amazon Lightsail endpoints and quotas in the Amazon Web Services General Reference. 
    */
   getContainerServiceDeployments(callback?: (err: AWSError, data: Lightsail.Types.GetContainerServiceDeploymentsResult) => void): Request<Lightsail.Types.GetContainerServiceDeploymentsResult, AWSError>;
   /**
@@ -1180,11 +1180,11 @@ declare class Lightsail extends Service {
    */
   updateBucket(callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketResult) => void): Request<Lightsail.Types.UpdateBucketResult, AWSError>;
   /**
-   * Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly AWS billing cycle. To determine if you can update a bucket's bundle, use the GetBuckets action. The ableToUpdateBundle parameter in the response will indicate whether you can currently update a bucket's bundle. Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.
+   * Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly Amazon Web Services billing cycle. To determine if you can update a bucket's bundle, use the GetBuckets action. The ableToUpdateBundle parameter in the response will indicate whether you can currently update a bucket's bundle. Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.
    */
   updateBucketBundle(params: Lightsail.Types.UpdateBucketBundleRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketBundleResult) => void): Request<Lightsail.Types.UpdateBucketBundleResult, AWSError>;
   /**
-   * Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly AWS billing cycle. To determine if you can update a bucket's bundle, use the GetBuckets action. The ableToUpdateBundle parameter in the response will indicate whether you can currently update a bucket's bundle. Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.
+   * Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly Amazon Web Services billing cycle. To determine if you can update a bucket's bundle, use the GetBuckets action. The ableToUpdateBundle parameter in the response will indicate whether you can currently update a bucket's bundle. Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.
    */
   updateBucketBundle(callback?: (err: AWSError, data: Lightsail.Types.UpdateBucketBundleResult) => void): Request<Lightsail.Types.UpdateBucketBundleResult, AWSError>;
   /**
@@ -1204,11 +1204,11 @@ declare class Lightsail extends Service {
    */
   updateDistribution(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionResult) => void): Request<Lightsail.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly Amazon Web Services billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
    */
   updateDistributionBundle(params: Lightsail.Types.UpdateDistributionBundleRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
-   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your distribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly Amazon Web Services billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
    */
   updateDistributionBundle(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
@@ -1282,11 +1282,11 @@ declare namespace Lightsail {
      */
     lastUsedDate?: IsoDate;
     /**
-     * The AWS Region where this access key was most recently used. This value is N/A if the access key has not been used.
+     * The Amazon Web Services Region where this access key was most recently used. This value is N/A if the access key has not been used.
      */
     region?: string;
     /**
-     * The name of the AWS service with which this access key was most recently used. This value is N/A if the access key has not been used.
+     * The name of the Amazon Web Services service with which this access key was most recently used. This value is N/A if the access key has not been used.
      */
     serviceName?: string;
   }
@@ -1887,7 +1887,7 @@ declare namespace Lightsail {
      */
     domainValidationRecords?: DomainValidationRecordList;
     /**
-     * The validation failure reason, if any, of the certificate. The following failure reasons are possible:     NO_AVAILABLE_CONTACTS  - This failure applies to email validation, which is not available for Lightsail certificates.     ADDITIONAL_VERIFICATION_REQUIRED  - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the AWS Support Center to contact AWS Support.  You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.      DOMAIN_NOT_ALLOWED  - One or more of the domain names in the certificate request was reported as an unsafe domain by VirusTotal. To correct the problem, search for your domain name on the VirusTotal website. If your domain is reported as suspicious, see Google Help for Hacked Websites to learn what you can do. If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate. If you see this error and your domain is not included in the VirusTotal list, visit the AWS Support Center and create a case.     INVALID_PUBLIC_DOMAIN  - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for example.invalidpublicdomain because invalidpublicdomain is not a valid top-level domain.     OTHER  - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request.   
+     * The validation failure reason, if any, of the certificate. The following failure reasons are possible:     NO_AVAILABLE_CONTACTS  - This failure applies to email validation, which is not available for Lightsail certificates.     ADDITIONAL_VERIFICATION_REQUIRED  - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the Amazon Web Services Support Center to contact Amazon Web Services Support.  You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.      DOMAIN_NOT_ALLOWED  - One or more of the domain names in the certificate request was reported as an unsafe domain by VirusTotal. To correct the problem, search for your domain name on the VirusTotal website. If your domain is reported as suspicious, see Google Help for Hacked Websites to learn what you can do. If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate. If you see this error and your domain is not included in the VirusTotal list, visit the Amazon Web Services Support Center and create a case.     INVALID_PUBLIC_DOMAIN  - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for example.invalidpublicdomain because invalidpublicdomain is not a valid top-level domain.     OTHER  - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request.   
      */
     requestFailureReason?: RequestFailureReason;
     /**
@@ -1943,6 +1943,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
   }
+  export type CertificateDomainValidationStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
   export type CertificateName = string;
   export type CertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|string;
   export type CertificateStatusList = CertificateStatus[];
@@ -2540,7 +2541,7 @@ declare namespace Lightsail {
   }
   export interface CreateContainerServiceRequest {
     /**
-     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) AWS region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each Amazon Web Services Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
+     * The name for the container service. The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com. If the name of your container service is container-service-1, and it's located in the US East (Ohio) Amazon Web Services Region (us-east-2), then the domain for your container service will be like the following example: https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com  The following are the requirements for container service names:   Must be unique within each Amazon Web Services Region in your Lightsail account.   Must contain 1 to 63 characters.   Must contain only alphanumeric characters and hyphens.   A hyphen (-) can separate words but cannot be at the start or end of the name.  
      */
     serviceName: ContainerServiceName;
     /**
@@ -3048,7 +3049,7 @@ declare namespace Lightsail {
      */
     masterUserPassword?: SensitiveString;
     /**
-     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service (Amazon RDS) documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Coordinated Universal Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created for your new database if automated backups are enabled. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. For more information about the preferred backup window time blocks for each region, see the Working With Backups guide in the Amazon Relational Database Service documentation. Constraints:   Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30    Specified in Coordinated Universal Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     preferredBackupWindow?: string;
     /**
@@ -3657,6 +3658,17 @@ declare namespace Lightsail {
   export type DistributionBundleList = DistributionBundle[];
   export type DistributionList = LightsailDistribution[];
   export type DistributionMetricName = "Requests"|"BytesDownloaded"|"BytesUploaded"|"TotalErrorRate"|"Http4xxErrorRate"|"Http5xxErrorRate"|string;
+  export interface DnsRecordCreationState {
+    /**
+     * The status code for the automated DNS record creation. Following are the possible values:    SUCCEEDED - The validation records were successfully added to the domain.    STARTED - The automatic DNS record creation has started.    FAILED - The validation records failed to be added to the domain.  
+     */
+    code?: DnsRecordCreationStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type DnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED"|string;
   export interface Domain {
     /**
      * The name of the domain.
@@ -3690,6 +3702,10 @@ declare namespace Lightsail {
      * An array of key-value pairs containing information about the domain entries.
      */
     domainEntries?: DomainEntryList;
+    /**
+     * An object that describes the state of the Route 53 domain delegation to a Lightsail DNS zone.
+     */
+    registeredDomainDelegationInfo?: RegisteredDomainDelegationInfo;
   }
   export interface DomainEntry {
     /**
@@ -3733,6 +3749,14 @@ declare namespace Lightsail {
      * An object that describes the DNS records to add to your domain's DNS to validate it for the certificate.
      */
     resourceRecord?: ResourceRecord;
+    /**
+     * An object that describes the state of the canonical name (CNAME) records that are automatically added by Lightsail to the DNS of the domain to validate domain ownership.
+     */
+    dnsRecordCreationState?: DnsRecordCreationState;
+    /**
+     * The validation status of the record.
+     */
+    validationStatus?: CertificateDomainValidationStatus;
   }
   export type DomainValidationRecordList = DomainValidationRecord[];
   export interface DownloadDefaultKeyPairRequest {
@@ -5719,7 +5743,7 @@ declare namespace Lightsail {
      */
     createdAt?: IsoDate;
     /**
-     * The AWS Region and Availability Zone where you created your certificate.
+     * The Amazon Web Services Region and Availability Zone where you created your certificate.
      */
     location?: ResourceLocation;
     /**
@@ -5803,6 +5827,17 @@ declare namespace Lightsail {
      */
     subjectAlternativeNames?: StringList;
   }
+  export interface LoadBalancerTlsCertificateDnsRecordCreationState {
+    /**
+     * The status code for the automated DNS record creation. Following are the possible values:    SUCCEEDED - The validation records were successfully added.    STARTED - The automatic DNS record creation has started.    FAILED - The validation record addition failed.  
+     */
+    code?: LoadBalancerTlsCertificateDnsRecordCreationStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type LoadBalancerTlsCertificateDnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED"|string;
   export type LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
   export interface LoadBalancerTlsCertificateDomainValidationOption {
     /**
@@ -5836,6 +5871,10 @@ declare namespace Lightsail {
      * The domain name against which your SSL/TLS certificate was validated.
      */
     domainName?: DomainName;
+    /**
+     * An object that describes the state of the canonical name (CNAME) records that are automatically added by Lightsail to the DNS of a domain to validate domain ownership.
+     */
+    dnsRecordCreationState?: LoadBalancerTlsCertificateDnsRecordCreationState;
   }
   export type LoadBalancerTlsCertificateDomainValidationRecordList = LoadBalancerTlsCertificateDomainValidationRecord[];
   export type LoadBalancerTlsCertificateFailureReason = "NO_AVAILABLE_CONTACTS"|"ADDITIONAL_VERIFICATION_REQUIRED"|"DOMAIN_NOT_ALLOWED"|"INVALID_PUBLIC_DOMAIN"|"OTHER"|string;
@@ -5954,6 +5993,17 @@ declare namespace Lightsail {
      */
     gbPerMonthAllocated?: integer;
   }
+  export interface NameServersUpdateState {
+    /**
+     * The status code for the name servers update. Following are the possible values:    SUCCEEDED - The name server records were successfully updated.    PENDING - The name server record update is in progress.    FAILED - The name server record update failed.    STARTED - The automatic name server record update started.  
+     */
+    code?: NameServersUpdateStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type NameServersUpdateStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
   export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|string;
   export type NonEmptyString = string;
   export type NotificationTriggerList = AlarmState[];
@@ -6216,6 +6266,17 @@ declare namespace Lightsail {
      */
     queryStringsAllowList?: StringList;
   }
+  export interface R53HostedZoneDeletionState {
+    /**
+     * The status code for the deletion state. Following are the possible values:    SUCCEEDED - The hosted zone was successfully deleted.    PENDING - The hosted zone deletion is in progress.    FAILED - The hosted zone deletion failed.    STARTED - The hosted zone deletion started.  
+     */
+    code?: R53HostedZoneDeletionStateCode;
+    /**
+     * The message that describes the reason for the status code.
+     */
+    message?: string;
+  }
+  export type R53HostedZoneDeletionStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
   export interface RebootInstanceRequest {
     /**
      * The name of the instance to reboot.
@@ -6247,7 +6308,7 @@ declare namespace Lightsail {
      */
     continentCode?: string;
     /**
-     * The description of the AWS Region (e.g., This region is recommended to serve users in the eastern United States and eastern Canada).
+     * The description of the Amazon Web Services Region (e.g., This region is recommended to serve users in the eastern United States and eastern Canada).
      */
     description?: string;
     /**
@@ -6288,6 +6349,13 @@ declare namespace Lightsail {
      * An object that describes a container image that is registered to a Lightsail container service
      */
     containerImage?: ContainerImage;
+  }
+  export interface RegisteredDomainDelegationInfo {
+    /**
+     * An object that describes the state of the name server records that are automatically added to the Route 53 domain by Lightsail.
+     */
+    nameServersUpdateState?: NameServersUpdateState;
+    r53HostedZoneDeletionState?: R53HostedZoneDeletionState;
   }
   export interface RelationalDatabase {
     /**
@@ -6667,7 +6735,7 @@ declare namespace Lightsail {
      */
     availabilityZone?: string;
     /**
-     * The AWS Region name.
+     * The Amazon Web Services Region name.
      */
     regionName?: RegionName;
   }
@@ -7155,7 +7223,7 @@ declare namespace Lightsail {
      */
     preferredBackupWindow?: string;
     /**
-     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Coordinated Universal Time (UTC).   Example: Tue:17:00-Tue:17:30   
+     * The weekly time range during which system maintenance can occur on your database. The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week. Constraints:   Must be in the ddd:hh24:mi-ddd:hh24:mi format.   Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.   Must be at least 30 minutes.   Specified in Coordinated Universal Time (UTC).   Example: Tue:17:00-Tue:17:30   
      */
     preferredMaintenanceWindow?: string;
     /**

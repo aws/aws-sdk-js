@@ -97,11 +97,11 @@ declare class ACM extends Service {
    */
   removeTagsFromCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your ACM Private CA certificates with ACM, you must first grant the ACM service principal permission to do so. For more information, see Testing Managed Renewal in the ACM User Guide.
+   * Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your Amazon Web Services Private CA certificates with ACM, you must first grant the ACM service principal permission to do so. For more information, see Testing Managed Renewal in the ACM User Guide.
    */
   renewCertificate(params: ACM.Types.RenewCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your ACM Private CA certificates with ACM, you must first grant the ACM service principal permission to do so. For more information, see Testing Managed Renewal in the ACM User Guide.
+   * Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your Amazon Web Services Private CA certificates with ACM, you must first grant the ACM service principal permission to do so. For more information, see Testing Managed Renewal in the ACM User Guide.
    */
   renewCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -578,6 +578,7 @@ declare namespace ACM {
   export type NextToken = string;
   export type NullableBoolean = boolean;
   export type PassphraseBlob = Buffer|Uint8Array|Blob|string;
+  export type PcaArn = string;
   export type PositiveInteger = number;
   export type PrivateKey = string;
   export type PrivateKeyBlob = Buffer|Uint8Array|Blob|string;
@@ -654,13 +655,17 @@ declare namespace ACM {
      */
     Options?: CertificateOptions;
     /**
-     * The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the Certificate Manager Private Certificate Authority user guide. The ARN must have the following form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 
+     * The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the Amazon Web Services Private Certificate Authority user guide. The ARN must have the following form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 
      */
-    CertificateAuthorityArn?: Arn;
+    CertificateAuthorityArn?: PcaArn;
     /**
      * One or more resource tags to associate with the certificate.
      */
     Tags?: TagList;
+    /**
+     * Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data. RSA is the default key algorithm for ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA) keys are smaller, offering security comparable to RSA keys but with greater computing efficiency. However, ECDSA is not supported by all network clients. Some AWS services may require RSA keys, or only support ECDSA keys of a particular size, while others allow the use of either RSA and ECDSA keys to ensure that compatibility is not broken. Check the requirements for the AWS service where you plan to deploy your certificate. Default: RSA_2048
+     */
+    KeyAlgorithm?: KeyAlgorithm;
   }
   export interface RequestCertificateResponse {
     /**

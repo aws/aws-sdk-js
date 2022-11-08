@@ -64,6 +64,15 @@
           "shape": "ResourceInUseException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "InvalidArnException"
         }
       ],
@@ -212,6 +221,9 @@
       "errors": [
         {
           "shape": "InvalidArgsException"
+        },
+        {
+          "shape": "ValidationException"
         }
       ],
       "documentation": "<p>Retrieves a list of certificate ARNs and domain names. You can request that only certificates that match a specific status be listed. You can also filter by specific attributes of the certificate. Default filtering returns only <code>RSA_2048</code> certificates. For more information, see <a>Filters</a>.</p>"
@@ -311,7 +323,7 @@
           "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your ACM Private CA certificates with ACM, you must first <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html\">grant the ACM service principal permission to do so</a>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html\">Testing Managed Renewal</a> in the ACM User Guide.</p>"
+      "documentation": "<p>Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your Amazon Web Services Private CA certificates with ACM, you must first <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html\">grant the ACM service principal permission to do so</a>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html\">Testing Managed Renewal</a> in the ACM User Guide.</p>"
     },
     "RequestCertificate": {
       "name": "RequestCertificate",
@@ -423,7 +435,7 @@
       "type": "string",
       "max": 2048,
       "min": 20,
-      "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+      "pattern": "arn:[\\w+=/,.@-]+:acm:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
     },
     "CertificateBody": {
       "type": "string",
@@ -1171,6 +1183,12 @@
       "min": 4,
       "sensitive": true
     },
+    "PcaArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:[\\w+=/,.@-]+:acm-pca:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
+    },
     "PositiveInteger": {
       "type": "integer",
       "min": 1
@@ -1313,12 +1331,16 @@
           "documentation": "<p>Currently, you can use this parameter to specify whether to add the certificate to a certificate transparency log. Certificate transparency makes it possible to detect SSL/TLS certificates that have been mistakenly or maliciously issued. Certificates that have not been logged typically produce an error message in a browser. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency\">Opting Out of Certificate Transparency Logging</a>.</p>"
         },
         "CertificateAuthorityArn": {
-          "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">Certificate Manager Private Certificate Authority</a> user guide. The ARN must have the following form: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>"
+          "shape": "PcaArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate. If you do not provide an ARN and you are trying to request a private certificate, ACM will attempt to issue a public certificate. For more information about private CAs, see the <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html\">Amazon Web Services Private Certificate Authority</a> user guide. The ARN must have the following form: </p> <p> <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> </p>"
         },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>One or more resource tags to associate with the certificate.</p>"
+        },
+        "KeyAlgorithm": {
+          "shape": "KeyAlgorithm",
+          "documentation": "<p>Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data. RSA is the default key algorithm for ACM certificates. Elliptic Curve Digital Signature Algorithm (ECDSA) keys are smaller, offering security comparable to RSA keys but with greater computing efficiency. However, ECDSA is not supported by all network clients. Some AWS services may require RSA keys, or only support ECDSA keys of a particular size, while others allow the use of either RSA and ECDSA keys to ensure that compatibility is not broken. Check the requirements for the AWS service where you plan to deploy your certificate.</p> <p>Default: RSA_2048</p>"
         }
       }
     },

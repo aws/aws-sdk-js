@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1249.0-->
+<!--LATEST=2.1250.0-->
 <!--ENTRYINSERT-->
+
+## 2.1250.0
+* feature: ACM: Support added for requesting elliptic curve certificate key algorithm types P-256 (EC_prime256v1) and P-384 (EC_secp384r1).
+* feature: Billingconductor: This release adds the Recurring Custom Line Item feature along with a new API ListCustomLineItemVersions.
+* feature: EC2: This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager
+* feature: FMS: AWS Firewall Manager now supports importing existing AWS Network Firewall firewalls into Firewall Manager policies.
+* feature: Lightsail: This release adds support for Amazon Lightsail to automate the delegation of domains registered through Amazon Route 53 to Lightsail DNS management and to automate record creation for DNS validation of Lightsail SSL/TLS certificates.
+* feature: OpenSearch: Amazon OpenSearch Service now offers managed VPC endpoints to connect to your Amazon OpenSearch Service VPC-enabled domain in a Virtual Private Cloud (VPC). This feature allows you to privately access OpenSearch Service domain without using public IPs or requiring traffic to traverse the Internet.
+* feature: Polly: Amazon Polly adds new voices: Elin (sv-SE), Ida (nb-NO), Laura (nl-NL) and Suvi (fi-FI). They are available as neural voices only.
+* feature: ResourceExplorer2: This is the initial SDK release for AWS Resource Explorer. AWS Resource Explorer lets your users search for and discover your AWS resources across the AWS Regions in your account.
+* feature: Route53: Amazon Route 53 now supports the Europe (Zurich) Region (eu-central-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
 
 ## 2.1249.0
 * feature: Athena: Adds support for using Query Result Reuse

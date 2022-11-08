@@ -317,3 +317,4 @@ export import ControlTower = require('./controltower');
 export import IoTFleetWise = require('./iotfleetwise');
 export import MigrationHubOrchestrator = require('./migrationhuborchestrator');
 export import ConnectCases = require('./connectcases');
+export import ResourceExplorer2 = require('./resourceexplorer2');
