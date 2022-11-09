@@ -1661,7 +1661,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs. Pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$ 
      */
     ClientToken?: ClientToken;
   }
@@ -3303,6 +3303,18 @@ declare namespace Connect {
      * The credentials to use for federation.
      */
     Credentials?: Credentials;
+    /**
+     * The URL to sign into the user's instance. 
+     */
+    SignInUrl?: Url;
+    /**
+     * The Amazon Resource Name (ARN) of the user.
+     */
+    UserArn?: ARN;
+    /**
+     * The identifier for the user.
+     */
+    UserId?: AgentResourceId;
   }
   export interface GetMetricDataRequest {
     /**
@@ -5184,7 +5196,7 @@ declare namespace Connect {
   }
   export interface ReplicateInstanceRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance. You can provide the InstanceId, or the entire ARN.
      */
     InstanceId: InstanceIdOrArn;
     /**
@@ -6879,6 +6891,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
   }
+  export type Url = string;
   export interface UrlReference {
     /**
      * Identifier of the URL reference.

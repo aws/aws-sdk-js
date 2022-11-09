@@ -68,11 +68,11 @@ declare class ConnectCases extends Service {
    */
   createRelatedItem(callback?: (err: AWSError, data: ConnectCases.Types.CreateRelatedItemResponse) => void): Request<ConnectCases.Types.CreateRelatedItemResponse, AWSError>;
   /**
-   * Creates a template in the Cases domain. This template is used to define the case object model (that is, define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs. Additionally, multiple fields with same IDs are not allowed within the same Template.
+   * Creates a template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs. Additionally, multiple fields with same IDs are not allowed within the same Template. A template can be either Active or Inactive, as indicated by its status. Inactive templates cannot be used to create cases.
    */
   createTemplate(params: ConnectCases.Types.CreateTemplateRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateTemplateResponse) => void): Request<ConnectCases.Types.CreateTemplateResponse, AWSError>;
   /**
-   * Creates a template in the Cases domain. This template is used to define the case object model (that is, define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs. Additionally, multiple fields with same IDs are not allowed within the same Template.
+   * Creates a template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs. Additionally, multiple fields with same IDs are not allowed within the same Template. A template can be either Active or Inactive, as indicated by its status. Inactive templates cannot be used to create cases.
    */
   createTemplate(callback?: (err: AWSError, data: ConnectCases.Types.CreateTemplateResponse) => void): Request<ConnectCases.Types.CreateTemplateResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class ConnectCases extends Service {
    */
   updateLayout(callback?: (err: AWSError, data: ConnectCases.Types.UpdateLayoutResponse) => void): Request<ConnectCases.Types.UpdateLayoutResponse, AWSError>;
   /**
-   * Updates the attributes of an existing template. The template attributes that can be modified include name, description, layouts, and requiredFields. At least one of these attributes must not be null. If a null value is provided for a given attribute, that attribute is ignored and its current value is preserved.
+   * Updates the attributes of an existing template. The template attributes that can be modified include name, description, layoutConfiguration, requiredFields, and status. At least one of these attributes must not be null. If a null value is provided for a given attribute, that attribute is ignored and its current value is preserved.
    */
   updateTemplate(params: ConnectCases.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: ConnectCases.Types.UpdateTemplateResponse) => void): Request<ConnectCases.Types.UpdateTemplateResponse, AWSError>;
   /**
-   * Updates the attributes of an existing template. The template attributes that can be modified include name, description, layouts, and requiredFields. At least one of these attributes must not be null. If a null value is provided for a given attribute, that attribute is ignored and its current value is preserved.
+   * Updates the attributes of an existing template. The template attributes that can be modified include name, description, layoutConfiguration, requiredFields, and status. At least one of these attributes must not be null. If a null value is provided for a given attribute, that attribute is ignored and its current value is preserved.
    */
   updateTemplate(callback?: (err: AWSError, data: ConnectCases.Types.UpdateTemplateResponse) => void): Request<ConnectCases.Types.UpdateTemplateResponse, AWSError>;
 }
@@ -384,7 +384,7 @@ declare namespace ConnectCases {
   export type ContactFilterChannelList = Channel[];
   export interface CreateCaseRequest {
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     clientToken?: CreateCaseRequestClientTokenString;
     /**
@@ -533,6 +533,10 @@ declare namespace ConnectCases {
      * A list of fields that must contain a value for a case to be successfully created with this template.
      */
     requiredFields?: RequiredFieldList;
+    /**
+     * The status of the template.
+     */
+    status?: TemplateStatus;
   }
   export interface CreateTemplateResponse {
     /**
@@ -905,6 +909,10 @@ declare namespace ConnectCases {
      */
     requiredFields?: RequiredFieldList;
     /**
+     * The status of the template.
+     */
+    status: TemplateStatus;
+    /**
      * A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.
      */
     tags?: Tags;
@@ -1107,6 +1115,10 @@ declare namespace ConnectCases {
      * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
      */
     nextToken?: NextToken;
+    /**
+     * A list of status values to filter on.
+     */
+    status?: TemplateStatusFilters;
   }
   export interface ListTemplatesResponse {
     /**
@@ -1336,11 +1348,17 @@ declare namespace ConnectCases {
   export type TemplateDescription = string;
   export type TemplateId = string;
   export type TemplateName = string;
+  export type TemplateStatus = "Active"|"Inactive"|string;
+  export type TemplateStatusFilters = TemplateStatus[];
   export interface TemplateSummary {
     /**
      * The template name.
      */
     name: TemplateName;
+    /**
+     * The status of the template.
+     */
+    status: TemplateStatus;
     /**
      * The Amazon Resource Name (ARN) of the template.
      */
@@ -1438,6 +1456,10 @@ declare namespace ConnectCases {
      * A list of fields that must contain a value for a case to be successfully created with this template.
      */
     requiredFields?: RequiredFieldList;
+    /**
+     * The status of the template.
+     */
+    status?: TemplateStatus;
     /**
      * A unique identifier for the template.
      */

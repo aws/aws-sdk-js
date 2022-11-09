@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1250.0-->
+<!--LATEST=2.1251.0-->
 <!--ENTRYINSERT-->
+
+## 2.1251.0
+* feature: Connect: This release adds new fields SignInUrl, UserArn, and UserId to GetFederationToken response payload.
+* feature: ConnectCases: This release adds the ability to disable templates through the UpdateTemplate API. Disabling templates prevents customers from creating cases using the template. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* feature: EC2: Amazon EC2 Trn1 instances, powered by AWS Trainium chips, are purpose built for high-performance deep learning training. u-24tb1.112xlarge and u-18tb1.112xlarge High Memory instances are purpose-built to run large in-memory databases.
+* feature: GroundStation: This release adds the preview of customer-provided ephemeris support for AWS Ground Station, allowing space vehicle owners to provide their own position and trajectory information for a satellite.
+* feature: MediaPackageVod: This release adds "IncludeIframeOnlyStream" for Dash endpoints.
 
 ## 2.1250.0
 * feature: ACM: Support added for requesting elliptic curve certificate key algorithm types P-256 (EC_prime256v1) and P-384 (EC_secp384r1).
