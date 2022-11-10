@@ -320,6 +320,7 @@ export abstract class ConfigurationServicePlaceholders {
   migrationhuborchestrator?: AWS.MigrationHubOrchestrator.Types.ClientConfiguration;
   connectcases?: AWS.ConnectCases.Types.ClientConfiguration;
   resourceexplorer2?: AWS.ResourceExplorer2.Types.ClientConfiguration;
+  scheduler?: AWS.Scheduler.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -642,4 +643,5 @@ export interface ConfigurationServiceApiVersions {
   migrationhuborchestrator?: AWS.MigrationHubOrchestrator.Types.apiVersion;
   connectcases?: AWS.ConnectCases.Types.apiVersion;
   resourceexplorer2?: AWS.ResourceExplorer2.Types.apiVersion;
+  scheduler?: AWS.Scheduler.Types.apiVersion;
 }

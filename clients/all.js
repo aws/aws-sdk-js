@@ -319,5 +319,6 @@ module.exports = {
   IoTFleetWise: require('./iotfleetwise'),
   MigrationHubOrchestrator: require('./migrationhuborchestrator'),
   ConnectCases: require('./connectcases'),
-  ResourceExplorer2: require('./resourceexplorer2')
+  ResourceExplorer2: require('./resourceexplorer2'),
+  Scheduler: require('./scheduler')
 };

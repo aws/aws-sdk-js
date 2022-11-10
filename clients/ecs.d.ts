@@ -181,6 +181,14 @@ declare class ECS extends Service {
    */
   executeCommand(callback?: (err: AWSError, data: ECS.Types.ExecuteCommandResponse) => void): Request<ECS.Types.ExecuteCommandResponse, AWSError>;
   /**
+   * Retrieves the protection status of tasks in an Amazon ECS service.
+   */
+  getTaskProtection(params: ECS.Types.GetTaskProtectionRequest, callback?: (err: AWSError, data: ECS.Types.GetTaskProtectionResponse) => void): Request<ECS.Types.GetTaskProtectionResponse, AWSError>;
+  /**
+   * Retrieves the protection status of tasks in an Amazon ECS service.
+   */
+  getTaskProtection(callback?: (err: AWSError, data: ECS.Types.GetTaskProtectionResponse) => void): Request<ECS.Types.GetTaskProtectionResponse, AWSError>;
+  /**
    * Lists the account settings for a specified principal.
    */
   listAccountSettings(params: ECS.Types.ListAccountSettingsRequest, callback?: (err: AWSError, data: ECS.Types.ListAccountSettingsResponse) => void): Request<ECS.Types.ListAccountSettingsResponse, AWSError>;
@@ -420,6 +428,14 @@ declare class ECS extends Service {
    * Modifies which task set in a service is the primary task set. Any parameters that are updated on the primary task set in a service will transition to the service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
    */
   updateServicePrimaryTaskSet(callback?: (err: AWSError, data: ECS.Types.UpdateServicePrimaryTaskSetResponse) => void): Request<ECS.Types.UpdateServicePrimaryTaskSetResponse, AWSError>;
+  /**
+   * Updates the protection status of a task. You can set protectionEnabled to true to protect your task from termination during scale-in events from Service Autoscaling or deployments. Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the protectionEnabled property making the task eligible for termination by a subsequent scale-in event. You can specify a custom expiration period for task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the custom expiration period, set the expiresInMinutes property. The expiresInMinutes property is always reset when you invoke this operation for a task that already has protectionEnabled set to true. You can keep extending the protection expiration period of a task by invoking this operation repeatedly. To learn more about Amazon ECS task protection, see Task scale-in protection in the Amazon Elastic Container Service Developer Guide.  This operation is only supported for tasks belonging to an Amazon ECS service. Invoking this operation for a standalone task will result in an TASK_NOT_VALID failure. For more information, see API failure reasons.   If you prefer to set task protection from within the container, we recommend using the Amazon ECS container agent endpoint. 
+   */
+  updateTaskProtection(params: ECS.Types.UpdateTaskProtectionRequest, callback?: (err: AWSError, data: ECS.Types.UpdateTaskProtectionResponse) => void): Request<ECS.Types.UpdateTaskProtectionResponse, AWSError>;
+  /**
+   * Updates the protection status of a task. You can set protectionEnabled to true to protect your task from termination during scale-in events from Service Autoscaling or deployments. Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the protectionEnabled property making the task eligible for termination by a subsequent scale-in event. You can specify a custom expiration period for task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the custom expiration period, set the expiresInMinutes property. The expiresInMinutes property is always reset when you invoke this operation for a task that already has protectionEnabled set to true. You can keep extending the protection expiration period of a task by invoking this operation repeatedly. To learn more about Amazon ECS task protection, see Task scale-in protection in the Amazon Elastic Container Service Developer Guide.  This operation is only supported for tasks belonging to an Amazon ECS service. Invoking this operation for a standalone task will result in an TASK_NOT_VALID failure. For more information, see API failure reasons.   If you prefer to set task protection from within the container, we recommend using the Amazon ECS container agent endpoint. 
+   */
+  updateTaskProtection(callback?: (err: AWSError, data: ECS.Types.UpdateTaskProtectionResponse) => void): Request<ECS.Types.UpdateTaskProtectionResponse, AWSError>;
   /**
    * Modifies a task set. This is used when a service uses the EXTERNAL deployment controller type. For more information, see Amazon ECS Deployment Types in the Amazon Elastic Container Service Developer Guide.
    */
@@ -1952,6 +1968,26 @@ declare namespace ECS {
   }
   export type FirelensConfigurationOptionsMap = {[key: string]: String};
   export type FirelensConfigurationType = "fluentd"|"fluentbit"|string;
+  export interface GetTaskProtectionRequest {
+    /**
+     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task sets exist in.
+     */
+    cluster: String;
+    /**
+     * A list of up to 100 task IDs or full ARN entries.
+     */
+    tasks?: StringList;
+  }
+  export interface GetTaskProtectionResponse {
+    /**
+     * A list of tasks with the following information.    taskArn: The task ARN.    protectionEnabled: The protection status of the task. If scale-in protection is enabled for a task, the value is true. Otherwise, it is false.    expirationDate: The epoch time when protection for the task will expire.  
+     */
+    protectedTasks?: ProtectedTasks;
+    /**
+     * Any failures associated with the call.
+     */
+    failures?: Failures;
+  }
   export type GpuIds = String[];
   export interface HealthCheck {
     /**
@@ -2577,6 +2613,21 @@ declare namespace ECS {
   }
   export type PortMappingList = PortMapping[];
   export type PropagateTags = "TASK_DEFINITION"|"SERVICE"|"NONE"|string;
+  export interface ProtectedTask {
+    /**
+     * The task ARN.
+     */
+    taskArn?: String;
+    /**
+     * The protection status of the task. If scale-in protection is enabled for a task, the value is true. Otherwise, it is false.
+     */
+    protectionEnabled?: Boolean;
+    /**
+     * The epoch time when protection for the task will expire.
+     */
+    expirationDate?: Timestamp;
+  }
+  export type ProtectedTasks = ProtectedTask[];
   export interface ProxyConfiguration {
     /**
      * The proxy type. The only supported value is APPMESH.
@@ -3998,6 +4049,34 @@ declare namespace ECS {
      * The full description of your service following the update call.
      */
     service?: Service;
+  }
+  export interface UpdateTaskProtectionRequest {
+    /**
+     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service that the task sets exist in.
+     */
+    cluster: String;
+    /**
+     * A list of up to 10 task IDs or full ARN entries.
+     */
+    tasks: StringList;
+    /**
+     * Specify true to mark a task for protection and false to unset protection, making it eligible for termination.
+     */
+    protectionEnabled: Boolean;
+    /**
+     * If you set protectionEnabled to true, you can specify the duration for task protection in minutes. You can specify a value from 1 minute to up to 2,880 minutes (48 hours). During this time, your task will not be terminated by scale-in events from Service Auto Scaling or deployments. After this time period lapses, protectionEnabled will be reset to false. If you don’t specify the time, then the task is automatically protected for 120 minutes (2 hours).
+     */
+    expiresInMinutes?: BoxedInteger;
+  }
+  export interface UpdateTaskProtectionResponse {
+    /**
+     * A list of tasks with the following information.    taskArn: The task ARN.    protectionEnabled: The protection status of the task. If scale-in protection is enabled for a task, the value is true. Otherwise, it is false.    expirationDate: The epoch time when protection for the task will expire.  
+     */
+    protectedTasks?: ProtectedTasks;
+    /**
+     * Any failures associated with the call.
+     */
+    failures?: Failures;
   }
   export interface UpdateTaskSetRequest {
     /**

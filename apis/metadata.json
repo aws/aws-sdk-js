@@ -1207,5 +1207,8 @@
   "resourceexplorer2": {
     "prefix": "resource-explorer-2",
     "name": "ResourceExplorer2"
+  },
+  "scheduler": {
+    "name": "Scheduler"
   }
 }
