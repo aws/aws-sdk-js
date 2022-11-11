@@ -254,7 +254,7 @@ declare class GroundStation extends Service {
 }
 declare namespace GroundStation {
   export type AWSRegion = string;
-  export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string;
+  export type AngleUnits = "DEGREE_ANGLE"|"RADIAN";
   export interface AntennaDemodDecodeDetails {
     /**
      * Name of an antenna demod decode output node used in a contact.
@@ -296,7 +296,7 @@ declare namespace GroundStation {
     transmitDisabled?: Boolean;
   }
   export type AnyArn = string;
-  export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
+  export type BandwidthUnits = "GHz"|"MHz"|"kHz";
   export type Boolean = boolean;
   export type BucketArn = string;
   export interface CancelContactRequest {
@@ -306,7 +306,7 @@ declare namespace GroundStation {
     contactId: Uuid;
   }
   export type ConfigArn = string;
-  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|"s3-recording"|string;
+  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|"s3-recording";
   export interface ConfigDetails {
     /**
      * Details for antenna demod decode Config in a contact.
@@ -442,7 +442,7 @@ declare namespace GroundStation {
     contactId?: Uuid;
   }
   export type ContactList = ContactData[];
-  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"AWS_FAILED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string;
+  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"AWS_FAILED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING";
   export interface CreateConfigRequest {
     /**
      * Parameters of a Config.
@@ -531,7 +531,7 @@ declare namespace GroundStation {
      */
     trackingConfigArn: ConfigArn;
   }
-  export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string;
+  export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED";
   export type CustomerEphemerisPriority = number;
   export interface DataflowDetail {
     destination?: Destination;
@@ -773,7 +773,7 @@ declare namespace GroundStation {
      */
     value: Double;
   }
-  export type EirpUnits = "dBW"|string;
+  export type EirpUnits = "dBW";
   export interface Elevation {
     /**
      * Elevation angle units.
@@ -795,7 +795,7 @@ declare namespace GroundStation {
     securityDetails?: SecurityDetails;
   }
   export type EndpointDetailsList = EndpointDetails[];
-  export type EndpointStatus = "created"|"creating"|"deleted"|"deleting"|"failed"|string;
+  export type EndpointStatus = "created"|"creating"|"deleted"|"deleting"|"failed";
   export type EphemeridesList = EphemerisItem[];
   export interface EphemerisData {
     oem?: OEMEphemeris;
@@ -817,7 +817,7 @@ declare namespace GroundStation {
      */
     ephemerisId?: Uuid;
   }
-  export type EphemerisInvalidReason = "METADATA_INVALID"|"TIME_RANGE_INVALID"|"TRAJECTORY_INVALID"|"KMS_KEY_INVALID"|"VALIDATION_ERROR"|string;
+  export type EphemerisInvalidReason = "METADATA_INVALID"|"TIME_RANGE_INVALID"|"TRAJECTORY_INVALID"|"KMS_KEY_INVALID"|"VALIDATION_ERROR";
   export interface EphemerisItem {
     /**
      * The time the ephemeris was uploaded in UTC.
@@ -867,8 +867,8 @@ declare namespace GroundStation {
     source: EphemerisSource;
   }
   export type EphemerisPriority = number;
-  export type EphemerisSource = "CUSTOMER_PROVIDED"|"SPACE_TRACK"|string;
-  export type EphemerisStatus = "VALIDATING"|"INVALID"|"ERROR"|"ENABLED"|"DISABLED"|"EXPIRED"|string;
+  export type EphemerisSource = "CUSTOMER_PROVIDED"|"SPACE_TRACK";
+  export type EphemerisStatus = "VALIDATING"|"INVALID"|"ERROR"|"ENABLED"|"DISABLED"|"EXPIRED";
   export type EphemerisStatusList = EphemerisStatus[];
   export interface EphemerisTypeDescription {
     oem?: EphemerisDescription;
@@ -894,7 +894,7 @@ declare namespace GroundStation {
      */
     value: Double;
   }
-  export type FrequencyUnits = "GHz"|"MHz"|"kHz"|string;
+  export type FrequencyUnits = "GHz"|"MHz"|"kHz";
   export interface GetConfigRequest {
     /**
      * UUID of a Config.
@@ -1318,7 +1318,7 @@ declare namespace GroundStation {
   }
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
-  export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND"|string;
+  export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND";
   export type PositiveDurationInSeconds = number;
   export interface ReserveContactRequest {
     /**

@@ -166,7 +166,7 @@ declare namespace MigrationHub {
     LastUpdatedTime?: UpdateDateTime;
   }
   export type ApplicationStateList = ApplicationState[];
-  export type ApplicationStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string;
+  export type ApplicationStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED";
   export interface AssociateCreatedArtifactRequest {
     /**
      * The name of the ProgressUpdateStream. 
@@ -613,10 +613,10 @@ declare namespace MigrationHub {
     Value: ResourceAttributeValue;
   }
   export type ResourceAttributeList = ResourceAttribute[];
-  export type ResourceAttributeType = "IPV4_ADDRESS"|"IPV6_ADDRESS"|"MAC_ADDRESS"|"FQDN"|"VM_MANAGER_ID"|"VM_MANAGED_OBJECT_REFERENCE"|"VM_NAME"|"VM_PATH"|"BIOS_ID"|"MOTHERBOARD_SERIAL_NUMBER"|string;
+  export type ResourceAttributeType = "IPV4_ADDRESS"|"IPV6_ADDRESS"|"MAC_ADDRESS"|"FQDN"|"VM_MANAGER_ID"|"VM_MANAGED_OBJECT_REFERENCE"|"VM_NAME"|"VM_PATH"|"BIOS_ID"|"MOTHERBOARD_SERIAL_NUMBER";
   export type ResourceAttributeValue = string;
   export type ResourceName = string;
-  export type Status = "NOT_STARTED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
+  export type Status = "NOT_STARTED"|"IN_PROGRESS"|"FAILED"|"COMPLETED";
   export type StatusDetail = string;
   export interface Task {
     /**

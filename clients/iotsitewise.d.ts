@@ -674,7 +674,7 @@ declare namespace IoTSiteWise {
      */
     lastUpdateDate?: Timestamp;
   }
-  export type AggregateType = "AVERAGE"|"COUNT"|"MAXIMUM"|"MINIMUM"|"SUM"|"STANDARD_DEVIATION"|string;
+  export type AggregateType = "AVERAGE"|"COUNT"|"MAXIMUM"|"MINIMUM"|"SUM"|"STANDARD_DEVIATION";
   export type AggregateTypes = AggregateType[];
   export type AggregatedDoubleValue = number;
   export interface AggregatedValue {
@@ -752,7 +752,7 @@ declare namespace IoTSiteWise {
     id?: ID;
   }
   export type AssetCompositeModels = AssetCompositeModel[];
-  export type AssetErrorCode = "INTERNAL_FAILURE"|string;
+  export type AssetErrorCode = "INTERNAL_FAILURE";
   export interface AssetErrorDetails {
     /**
      * The ID of the asset.
@@ -936,7 +936,7 @@ declare namespace IoTSiteWise {
      */
     assetModelCompositeModelId?: ID;
   }
-  export type AssetModelState = "CREATING"|"ACTIVE"|"UPDATING"|"PROPAGATING"|"DELETING"|"FAILED"|string;
+  export type AssetModelState = "CREATING"|"ACTIVE"|"UPDATING"|"PROPAGATING"|"DELETING"|"FAILED";
   export interface AssetModelStatus {
     /**
      * The current state of the asset model.
@@ -1057,8 +1057,8 @@ declare namespace IoTSiteWise {
      */
     relationshipType: AssetRelationshipType;
   }
-  export type AssetRelationshipType = "HIERARCHY"|string;
-  export type AssetState = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type AssetRelationshipType = "HIERARCHY";
+  export type AssetState = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED";
   export interface AssetStatus {
     /**
      * The current status of the asset.
@@ -1189,7 +1189,7 @@ declare namespace IoTSiteWise {
      */
     defaultValue?: DefaultValue;
   }
-  export type AuthMode = "IAM"|"SSO"|string;
+  export type AuthMode = "IAM"|"SSO";
   export type BatchAssociateProjectAssetsErrors = AssetErrorDetails[];
   export interface BatchAssociateProjectAssetsRequest {
     /**
@@ -1232,7 +1232,7 @@ declare namespace IoTSiteWise {
      */
     errors?: BatchDisassociateProjectAssetsErrors;
   }
-  export type BatchEntryCompletionStatus = "SUCCESS"|"ERROR"|string;
+  export type BatchEntryCompletionStatus = "SUCCESS"|"ERROR";
   export type BatchGetAssetPropertyAggregatesEntries = BatchGetAssetPropertyAggregatesEntry[];
   export interface BatchGetAssetPropertyAggregatesEntry {
     /**
@@ -1276,7 +1276,7 @@ declare namespace IoTSiteWise {
      */
     timeOrdering?: TimeOrdering;
   }
-  export type BatchGetAssetPropertyAggregatesErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyAggregatesErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException";
   export type BatchGetAssetPropertyAggregatesErrorEntries = BatchGetAssetPropertyAggregatesErrorEntry[];
   export interface BatchGetAssetPropertyAggregatesErrorEntry {
     /**
@@ -1380,7 +1380,7 @@ declare namespace IoTSiteWise {
      */
     propertyAlias?: AssetPropertyAlias;
   }
-  export type BatchGetAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException";
   export type BatchGetAssetPropertyValueErrorEntries = BatchGetAssetPropertyValueErrorEntry[];
   export interface BatchGetAssetPropertyValueErrorEntry {
     /**
@@ -1441,7 +1441,7 @@ declare namespace IoTSiteWise {
      */
     timeOrdering?: TimeOrdering;
   }
-  export type BatchGetAssetPropertyValueHistoryErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException"|string;
+  export type BatchGetAssetPropertyValueHistoryErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"AccessDeniedException";
   export type BatchGetAssetPropertyValueHistoryErrorEntries = BatchGetAssetPropertyValueHistoryErrorEntry[];
   export interface BatchGetAssetPropertyValueHistoryErrorEntry {
     /**
@@ -1603,7 +1603,7 @@ declare namespace IoTSiteWise {
     errors: BatchPutAssetPropertyErrors;
   }
   export type BatchPutAssetPropertyErrors = BatchPutAssetPropertyError[];
-  export type BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|"LimitExceededException"|"ConflictingOperationException"|"TimestampOutOfRangeException"|"AccessDeniedException"|string;
+  export type BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|"LimitExceededException"|"ConflictingOperationException"|"TimestampOutOfRangeException"|"AccessDeniedException";
   export interface BatchPutAssetPropertyValueRequest {
     /**
      * The list of asset property value entries for the batch put request. You can specify up to 10 entries per request.
@@ -1619,9 +1619,9 @@ declare namespace IoTSiteWise {
   export type Bucket = string;
   export type CapabilityConfiguration = string;
   export type CapabilityNamespace = string;
-  export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|"UNKNOWN"|string;
+  export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|"UNKNOWN";
   export type ClientToken = string;
-  export type ColumnName = "ALIAS"|"ASSET_ID"|"PROPERTY_ID"|"DATA_TYPE"|"TIMESTAMP_SECONDS"|"TIMESTAMP_NANO_OFFSET"|"QUALITY"|"VALUE"|string;
+  export type ColumnName = "ALIAS"|"ASSET_ID"|"PROPERTY_ID"|"DATA_TYPE"|"TIMESTAMP_SECONDS"|"TIMESTAMP_NANO_OFFSET"|"QUALITY"|"VALUE";
   export type ColumnNames = ColumnName[];
   export interface CompositeModelProperty {
     /**
@@ -1638,7 +1638,7 @@ declare namespace IoTSiteWise {
      */
     id?: ID;
   }
-  export type ComputeLocation = "EDGE"|"CLOUD"|string;
+  export type ComputeLocation = "EDGE"|"CLOUD";
   export interface ConfigurationErrorDetails {
     /**
      * The error code.
@@ -1649,7 +1649,7 @@ declare namespace IoTSiteWise {
      */
     message: ErrorMessage;
   }
-  export type ConfigurationState = "ACTIVE"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export type ConfigurationState = "ACTIVE"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED";
   export interface ConfigurationStatus {
     /**
      * The current state of the configuration.
@@ -2650,7 +2650,7 @@ declare namespace IoTSiteWise {
      */
     message: DetailedErrorMessage;
   }
-  export type DetailedErrorCode = "INCOMPATIBLE_COMPUTE_LOCATION"|"INCOMPATIBLE_FORWARDING_CONFIGURATION"|string;
+  export type DetailedErrorCode = "INCOMPATIBLE_COMPUTE_LOCATION"|"INCOMPATIBLE_FORWARDING_CONFIGURATION";
   export type DetailedErrorMessage = string;
   export type DetailedErrors = DetailedError[];
   export interface DisassociateAssetsRequest {
@@ -2689,11 +2689,11 @@ declare namespace IoTSiteWise {
      */
     clientToken?: ClientToken;
   }
-  export type DisassociatedDataStorageState = "ENABLED"|"DISABLED"|string;
+  export type DisassociatedDataStorageState = "ENABLED"|"DISABLED";
   export type Email = string;
-  export type EncryptionType = "SITEWISE_DEFAULT_ENCRYPTION"|"KMS_BASED_ENCRYPTION"|string;
+  export type EncryptionType = "SITEWISE_DEFAULT_ENCRYPTION"|"KMS_BASED_ENCRYPTION";
   export type EntryId = string;
-  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|string;
+  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE";
   export interface ErrorDetails {
     /**
      * The error code.
@@ -2759,7 +2759,7 @@ declare namespace IoTSiteWise {
      */
     state: ForwardingConfigState;
   }
-  export type ForwardingConfigState = "DISABLED"|"ENABLED"|string;
+  export type ForwardingConfigState = "DISABLED"|"ENABLED";
   export type GatewayCapabilitySummaries = GatewayCapabilitySummary[];
   export interface GatewayCapabilitySummary {
     /**
@@ -3044,7 +3044,7 @@ declare namespace IoTSiteWise {
     iamRole?: IAMRoleIdentity;
   }
   export type IdentityId = string;
-  export type IdentityType = "USER"|"GROUP"|"IAM"|string;
+  export type IdentityType = "USER"|"GROUP"|"IAM";
   export interface Image {
     /**
      * The ID of an existing image. Specify this parameter to keep an existing image.
@@ -3063,7 +3063,7 @@ declare namespace IoTSiteWise {
     type: ImageFileType;
   }
   export type ImageFileData = Buffer|Uint8Array|Blob|string;
-  export type ImageFileType = "PNG"|string;
+  export type ImageFileType = "PNG";
   export interface ImageLocation {
     /**
      * The ID of the image.
@@ -3089,7 +3089,7 @@ declare namespace IoTSiteWise {
      */
     fileFormat: FileFormat;
   }
-  export type JobStatus = "PENDING"|"CANCELLED"|"RUNNING"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string;
+  export type JobStatus = "PENDING"|"CANCELLED"|"RUNNING"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES";
   export type JobSummaries = JobSummary[];
   export interface JobSummary {
     /**
@@ -3146,7 +3146,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListAssetModelPropertiesFilter = "ALL"|"BASE"|string;
+  export type ListAssetModelPropertiesFilter = "ALL"|"BASE";
   export interface ListAssetModelPropertiesRequest {
     /**
      * The ID of the asset model.
@@ -3195,7 +3195,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListAssetPropertiesFilter = "ALL"|"BASE"|string;
+  export type ListAssetPropertiesFilter = "ALL"|"BASE";
   export interface ListAssetPropertiesRequest {
     /**
      * The ID of the asset.
@@ -3252,7 +3252,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListAssetsFilter = "ALL"|"TOP_LEVEL"|string;
+  export type ListAssetsFilter = "ALL"|"TOP_LEVEL";
   export interface ListAssetsRequest {
     /**
      * The token to be used for the next set of paginated results.
@@ -3313,7 +3313,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListBulkImportJobsFilter = "ALL"|"PENDING"|"RUNNING"|"CANCELLED"|"FAILED"|"COMPLETED_WITH_FAILURES"|"COMPLETED"|string;
+  export type ListBulkImportJobsFilter = "ALL"|"PENDING"|"RUNNING"|"CANCELLED"|"FAILED"|"COMPLETED_WITH_FAILURES"|"COMPLETED";
   export interface ListBulkImportJobsRequest {
     /**
      * The token to be used for the next set of paginated results.
@@ -3494,8 +3494,8 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
-  export type ListTimeSeriesType = "ASSOCIATED"|"DISASSOCIATED"|string;
-  export type LoggingLevel = "ERROR"|"INFO"|"OFF"|string;
+  export type ListTimeSeriesType = "ASSOCIATED"|"DISASSOCIATED";
+  export type LoggingLevel = "ERROR"|"INFO"|"OFF";
   export interface LoggingOptions {
     /**
      * The IoT SiteWise logging verbosity level.
@@ -3547,7 +3547,7 @@ declare namespace IoTSiteWise {
      */
     tumbling?: TumblingWindow;
   }
-  export type MonitorErrorCode = "INTERNAL_FAILURE"|"VALIDATION_ERROR"|"LIMIT_EXCEEDED"|string;
+  export type MonitorErrorCode = "INTERNAL_FAILURE"|"VALIDATION_ERROR"|"LIMIT_EXCEEDED";
   export interface MonitorErrorDetails {
     /**
      * The error code.
@@ -3570,7 +3570,7 @@ declare namespace IoTSiteWise {
   export type NumberOfDays = number;
   export type Offset = string;
   export type OffsetInNanos = number;
-  export type Permission = "ADMINISTRATOR"|"VIEWER"|string;
+  export type Permission = "ADMINISTRATOR"|"VIEWER";
   export type PortalClientId = string;
   export interface PortalResource {
     /**
@@ -3578,7 +3578,7 @@ declare namespace IoTSiteWise {
      */
     id: ID;
   }
-  export type PortalState = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string;
+  export type PortalState = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED";
   export interface PortalStatus {
     /**
      * The current state of the portal.
@@ -3681,7 +3681,7 @@ declare namespace IoTSiteWise {
     type?: PropertyType;
   }
   export type PropertyAlias = string;
-  export type PropertyDataType = "STRING"|"INTEGER"|"DOUBLE"|"BOOLEAN"|"STRUCT"|string;
+  export type PropertyDataType = "STRING"|"INTEGER"|"DOUBLE"|"BOOLEAN"|"STRUCT";
   export interface PropertyNotification {
     /**
      * The MQTT topic to which IoT SiteWise publishes property value update notifications.
@@ -3692,7 +3692,7 @@ declare namespace IoTSiteWise {
      */
     state: PropertyNotificationState;
   }
-  export type PropertyNotificationState = "ENABLED"|"DISABLED"|string;
+  export type PropertyNotificationState = "ENABLED"|"DISABLED";
   export type PropertyNotificationTopic = string;
   export interface PropertyType {
     /**
@@ -3804,7 +3804,7 @@ declare namespace IoTSiteWise {
     configurationStatus: ConfigurationStatus;
   }
   export type Qualities = Quality[];
-  export type Quality = "GOOD"|"BAD"|"UNCERTAIN"|string;
+  export type Quality = "GOOD"|"BAD"|"UNCERTAIN";
   export type Resolution = string;
   export interface Resource {
     /**
@@ -3816,7 +3816,7 @@ declare namespace IoTSiteWise {
      */
     project?: ProjectResource;
   }
-  export type ResourceType = "PORTAL"|"PROJECT"|string;
+  export type ResourceType = "PORTAL"|"PROJECT";
   export interface RetentionPeriod {
     /**
      * The number of days that your data is kept.  If you specified a value for this parameter, the unlimited parameter must be false. 
@@ -3828,7 +3828,7 @@ declare namespace IoTSiteWise {
     unlimited?: Unlimited;
   }
   export type SSOApplicationId = string;
-  export type StorageType = "SITEWISE_DEFAULT_STORAGE"|"MULTI_LAYER_STORAGE"|string;
+  export type StorageType = "SITEWISE_DEFAULT_STORAGE"|"MULTI_LAYER_STORAGE";
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -3857,7 +3857,7 @@ declare namespace IoTSiteWise {
     offsetInNanos?: OffsetInNanos;
   }
   export type TimeInSeconds = number;
-  export type TimeOrdering = "ASCENDING"|"DESCENDING"|string;
+  export type TimeOrdering = "ASCENDING"|"DESCENDING";
   export type TimeSeriesId = string;
   export type TimeSeriesSummaries = TimeSeriesSummary[];
   export interface TimeSeriesSummary {
@@ -3917,8 +3917,8 @@ declare namespace IoTSiteWise {
     computeLocation: ComputeLocation;
     forwardingConfig?: ForwardingConfig;
   }
-  export type TraversalDirection = "PARENT"|"CHILD"|string;
-  export type TraversalType = "PATH_TO_ROOT"|string;
+  export type TraversalDirection = "PARENT"|"CHILD";
+  export type TraversalType = "PATH_TO_ROOT";
   export interface TumblingWindow {
     /**
      * The time interval for the tumbling window. The interval time must be between 1 minute and 1 week. IoT SiteWise computes the 1w interval the end of Sunday at midnight each week (UTC), the 1d interval at the end of each day at midnight (UTC), the 1h interval at the end of each hour, and so on.  When IoT SiteWise aggregates data points for metric computations, the start of each interval is exclusive and the end of each interval is inclusive. IoT SiteWise places the computed data point at the end of the interval.

@@ -476,7 +476,7 @@ declare namespace GlobalAccelerator {
     Timestamp?: Timestamp;
   }
   export type AcceleratorEvents = AcceleratorEvent[];
-  export type AcceleratorStatus = "DEPLOYED"|"IN_PROGRESS"|string;
+  export type AcceleratorStatus = "DEPLOYED"|"IN_PROGRESS";
   export type Accelerators = Accelerator[];
   export interface AddCustomRoutingEndpointsRequest {
     /**
@@ -577,7 +577,7 @@ declare namespace GlobalAccelerator {
     Timestamp?: Timestamp;
   }
   export type ByoipCidrEvents = ByoipCidrEvent[];
-  export type ByoipCidrState = "PENDING_PROVISIONING"|"READY"|"PENDING_ADVERTISING"|"ADVERTISING"|"PENDING_WITHDRAWING"|"PENDING_DEPROVISIONING"|"DEPROVISIONED"|"FAILED_PROVISION"|"FAILED_ADVERTISING"|"FAILED_WITHDRAW"|"FAILED_DEPROVISION"|string;
+  export type ByoipCidrState = "PENDING_PROVISIONING"|"READY"|"PENDING_ADVERTISING"|"ADVERTISING"|"PENDING_WITHDRAWING"|"PENDING_DEPROVISIONING"|"DEPROVISIONED"|"FAILED_PROVISION"|"FAILED_ADVERTISING"|"FAILED_WITHDRAW"|"FAILED_DEPROVISION";
   export type ByoipCidrs = ByoipCidr[];
   export interface CidrAuthorizationContext {
     /**
@@ -589,7 +589,7 @@ declare namespace GlobalAccelerator {
      */
     Signature: GenericString;
   }
-  export type ClientAffinity = "NONE"|"SOURCE_IP"|string;
+  export type ClientAffinity = "NONE"|"SOURCE_IP";
   export interface CreateAcceleratorRequest {
     /**
      * The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, periods (.), or hyphens (-), and must not begin or end with a hyphen or period.
@@ -830,7 +830,7 @@ declare namespace GlobalAccelerator {
      */
     FlowLogsS3Prefix?: GenericString;
   }
-  export type CustomRoutingAcceleratorStatus = "DEPLOYED"|"IN_PROGRESS"|string;
+  export type CustomRoutingAcceleratorStatus = "DEPLOYED"|"IN_PROGRESS";
   export type CustomRoutingAccelerators = CustomRoutingAccelerator[];
   export interface CustomRoutingDestinationConfiguration {
     /**
@@ -862,7 +862,7 @@ declare namespace GlobalAccelerator {
     Protocols?: Protocols;
   }
   export type CustomRoutingDestinationDescriptions = CustomRoutingDestinationDescription[];
-  export type CustomRoutingDestinationTrafficState = "ALLOW"|"DENY"|string;
+  export type CustomRoutingDestinationTrafficState = "ALLOW"|"DENY";
   export interface CustomRoutingEndpointConfiguration {
     /**
      * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID. 
@@ -907,7 +907,7 @@ declare namespace GlobalAccelerator {
     PortRanges?: PortRanges;
   }
   export type CustomRoutingListeners = CustomRoutingListener[];
-  export type CustomRoutingProtocol = "TCP"|"UDP"|string;
+  export type CustomRoutingProtocol = "TCP"|"UDP";
   export type CustomRoutingProtocols = CustomRoutingProtocol[];
   export interface DeleteAcceleratorRequest {
     /**
@@ -1211,12 +1211,12 @@ declare namespace GlobalAccelerator {
   export type HealthCheckIntervalSeconds = number;
   export type HealthCheckPath = string;
   export type HealthCheckPort = number;
-  export type HealthCheckProtocol = "TCP"|"HTTP"|"HTTPS"|string;
-  export type HealthState = "INITIAL"|"HEALTHY"|"UNHEALTHY"|string;
+  export type HealthCheckProtocol = "TCP"|"HTTP"|"HTTPS";
+  export type HealthState = "INITIAL"|"HEALTHY"|"UNHEALTHY";
   export type IdempotencyToken = string;
   export type IpAddress = string;
-  export type IpAddressFamily = "IPv4"|"IPv6"|string;
-  export type IpAddressType = "IPV4"|"DUAL_STACK"|string;
+  export type IpAddressFamily = "IPv4"|"IPv6";
+  export type IpAddressType = "IPV4"|"DUAL_STACK";
   export type IpAddresses = IpAddress[];
   export interface IpSet {
     /**
@@ -1528,7 +1528,7 @@ declare namespace GlobalAccelerator {
     ToPort?: PortNumber;
   }
   export type PortRanges = PortRange[];
-  export type Protocol = "TCP"|"UDP"|string;
+  export type Protocol = "TCP"|"UDP";
   export type Protocols = Protocol[];
   export interface ProvisionByoipCidrRequest {
     /**

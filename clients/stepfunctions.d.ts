@@ -586,7 +586,7 @@ declare namespace StepFunctions {
      */
     roleArn?: Arn;
   }
-  export type ExecutionStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"ABORTED"|string;
+  export type ExecutionStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"ABORTED";
   export interface ExecutionSucceededEventDetails {
     /**
      * The JSON data output by the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
@@ -764,7 +764,7 @@ declare namespace StepFunctions {
     truncated?: truncated;
   }
   export type HistoryEventList = HistoryEvent[];
-  export type HistoryEventType = "ActivityFailed"|"ActivityScheduled"|"ActivityScheduleFailed"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionAborted"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduled"|"LambdaFunctionScheduleFailed"|"LambdaFunctionStarted"|"LambdaFunctionStartFailed"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"MapIterationAborted"|"MapIterationFailed"|"MapIterationStarted"|"MapIterationSucceeded"|"MapStateAborted"|"MapStateEntered"|"MapStateExited"|"MapStateFailed"|"MapStateStarted"|"MapStateSucceeded"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"PassStateEntered"|"PassStateExited"|"SucceedStateEntered"|"SucceedStateExited"|"TaskFailed"|"TaskScheduled"|"TaskStarted"|"TaskStartFailed"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"TaskSubmitFailed"|"TaskSubmitted"|"TaskSucceeded"|"TaskTimedOut"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited"|string;
+  export type HistoryEventType = "ActivityFailed"|"ActivityScheduled"|"ActivityScheduleFailed"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionAborted"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduled"|"LambdaFunctionScheduleFailed"|"LambdaFunctionStarted"|"LambdaFunctionStartFailed"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"MapIterationAborted"|"MapIterationFailed"|"MapIterationStarted"|"MapIterationSucceeded"|"MapStateAborted"|"MapStateEntered"|"MapStateExited"|"MapStateFailed"|"MapStateStarted"|"MapStateSucceeded"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"PassStateEntered"|"PassStateExited"|"SucceedStateEntered"|"SucceedStateExited"|"TaskFailed"|"TaskScheduled"|"TaskStarted"|"TaskStartFailed"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"TaskSubmitFailed"|"TaskSubmitted"|"TaskSucceeded"|"TaskTimedOut"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited";
   export type Identity = string;
   export type IncludeExecutionData = boolean;
   export type IncludeExecutionDataGetExecutionHistory = boolean;
@@ -921,7 +921,7 @@ declare namespace StepFunctions {
     cloudWatchLogsLogGroup?: CloudWatchLogsLogGroup;
   }
   export type LogDestinationList = LogDestination[];
-  export type LogLevel = "ALL"|"ERROR"|"FATAL"|"OFF"|string;
+  export type LogLevel = "ALL"|"ERROR"|"FATAL"|"OFF";
   export interface LoggingConfiguration {
     /**
      * Defines which category of execution history events are logged.
@@ -1141,8 +1141,8 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
   }
-  export type StateMachineStatus = "ACTIVE"|"DELETING"|string;
-  export type StateMachineType = "STANDARD"|"EXPRESS"|string;
+  export type StateMachineStatus = "ACTIVE"|"DELETING";
+  export type StateMachineType = "STANDARD"|"EXPRESS";
   export interface StopExecutionInput {
     /**
      * The Amazon Resource Name (ARN) of the execution to stop.
@@ -1163,7 +1163,7 @@ declare namespace StepFunctions {
      */
     stopDate: Timestamp;
   }
-  export type SyncExecutionStatus = "SUCCEEDED"|"FAILED"|"TIMED_OUT"|string;
+  export type SyncExecutionStatus = "SUCCEEDED"|"FAILED"|"TIMED_OUT";
   export interface Tag {
     /**
      * The key of a tag.

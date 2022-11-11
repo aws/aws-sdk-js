@@ -435,7 +435,7 @@ declare namespace MigrationHubOrchestrator {
      */
     name?: String;
   }
-  export type DataType = "STRING"|"INTEGER"|"STRINGLIST"|"STRINGMAP"|string;
+  export type DataType = "STRING"|"INTEGER"|"STRINGLIST"|"STRINGMAP";
   export interface DeleteMigrationWorkflowRequest {
     /**
      * The ID of the migration workflow you want to delete.
@@ -1083,7 +1083,7 @@ declare namespace MigrationHubOrchestrator {
   export type MigrationWorkflowDescription = string;
   export type MigrationWorkflowId = string;
   export type MigrationWorkflowName = string;
-  export type MigrationWorkflowStatusEnum = "CREATING"|"NOT_STARTED"|"CREATION_FAILED"|"STARTING"|"IN_PROGRESS"|"WORKFLOW_FAILED"|"PAUSED"|"PAUSING"|"PAUSING_FAILED"|"USER_ATTENTION_REQUIRED"|"DELETING"|"DELETION_FAILED"|"DELETED"|"COMPLETED"|string;
+  export type MigrationWorkflowStatusEnum = "CREATING"|"NOT_STARTED"|"CREATION_FAILED"|"STARTING"|"IN_PROGRESS"|"WORKFLOW_FAILED"|"PAUSED"|"PAUSING"|"PAUSING_FAILED"|"USER_ATTENTION_REQUIRED"|"DELETING"|"DELETION_FAILED"|"DELETED"|"COMPLETED";
   export interface MigrationWorkflowSummary {
     /**
      * The ID of the migration workflow.
@@ -1128,7 +1128,7 @@ declare namespace MigrationHubOrchestrator {
   }
   export type MigrationWorkflowSummaryList = MigrationWorkflowSummary[];
   export type NextToken = string;
-  export type Owner = "AWS_MANAGED"|"CUSTOM"|string;
+  export type Owner = "AWS_MANAGED"|"CUSTOM";
   export interface PlatformCommand {
     /**
      * Command for Linux.
@@ -1149,7 +1149,7 @@ declare namespace MigrationHubOrchestrator {
      */
     windows?: S3Key;
   }
-  export type PluginHealth = "HEALTHY"|"UNHEALTHY"|string;
+  export type PluginHealth = "HEALTHY"|"UNHEALTHY";
   export type PluginId = string;
   export type PluginSummaries = PluginSummary[];
   export interface PluginSummary {
@@ -1212,7 +1212,7 @@ declare namespace MigrationHubOrchestrator {
      */
     status?: StepStatus;
   }
-  export type RunEnvironment = "AWS"|"ONPREMISE"|string;
+  export type RunEnvironment = "AWS"|"ONPREMISE";
   export type S3Bucket = string;
   export type S3Key = string;
   export interface StartMigrationWorkflowRequest {
@@ -1243,7 +1243,7 @@ declare namespace MigrationHubOrchestrator {
      */
     lastStartTime?: Timestamp;
   }
-  export type StepActionType = "MANUAL"|"AUTOMATED"|string;
+  export type StepActionType = "MANUAL"|"AUTOMATED";
   export interface StepAutomationConfiguration {
     /**
      * The Amazon S3 bucket where the script is located.
@@ -1270,7 +1270,7 @@ declare namespace MigrationHubOrchestrator {
   export type StepGroupDescription = string;
   export type StepGroupId = string;
   export type StepGroupName = string;
-  export type StepGroupStatus = "AWAITING_DEPENDENCIES"|"READY"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"PAUSED"|"PAUSING"|"USER_ATTENTION_REQUIRED"|string;
+  export type StepGroupStatus = "AWAITING_DEPENDENCIES"|"READY"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"PAUSED"|"PAUSING"|"USER_ATTENTION_REQUIRED";
   export type StepId = string;
   export interface StepInput {
     /**
@@ -1308,7 +1308,7 @@ declare namespace MigrationHubOrchestrator {
     required?: Boolean;
   }
   export type StepOutputList = StepOutput[];
-  export type StepStatus = "AWAITING_DEPENDENCIES"|"READY"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"PAUSED"|"USER_ATTENTION_REQUIRED"|string;
+  export type StepStatus = "AWAITING_DEPENDENCIES"|"READY"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"PAUSED"|"USER_ATTENTION_REQUIRED";
   export interface StopMigrationWorkflowRequest {
     /**
      * The ID of the migration workflow.
@@ -1360,7 +1360,7 @@ declare namespace MigrationHubOrchestrator {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TargetType = "SINGLE"|"ALL"|"NONE"|string;
+  export type TargetType = "SINGLE"|"ALL"|"NONE";
   export type TemplateId = string;
   export interface TemplateInput {
     /**
@@ -1379,7 +1379,7 @@ declare namespace MigrationHubOrchestrator {
   export type TemplateInputList = TemplateInput[];
   export type TemplateInputName = string;
   export type TemplateName = string;
-  export type TemplateStatus = "CREATED"|string;
+  export type TemplateStatus = "CREATED";
   export interface TemplateStepGroupSummary {
     /**
      * The ID of the step group.

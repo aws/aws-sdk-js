@@ -605,10 +605,10 @@ declare namespace SecurityHub {
     Status?: AdminStatus;
   }
   export type AdminAccounts = AdminAccount[];
-  export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
+  export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS";
   export type AdminsMaxResults = number;
   export type ArnList = NonEmptyString[];
-  export type AutoEnableStandards = "NONE"|"DEFAULT"|string;
+  export type AutoEnableStandards = "NONE"|"DEFAULT";
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -5403,7 +5403,7 @@ declare namespace SecurityHub {
      */
     UserName?: NonEmptyString;
   }
-  export type AwsIamAccessKeyStatus = "Active"|"Inactive"|string;
+  export type AwsIamAccessKeyStatus = "Active"|"Inactive";
   export interface AwsIamAttachedManagedPolicy {
     /**
      * The name of the policy.
@@ -7892,7 +7892,7 @@ declare namespace SecurityHub {
      */
     Value?: NonEmptyString;
   }
-  export type AwsS3BucketNotificationConfigurationS3KeyFilterRuleName = "Prefix"|"Suffix"|string;
+  export type AwsS3BucketNotificationConfigurationS3KeyFilterRuleName = "Prefix"|"Suffix";
   export type AwsS3BucketNotificationConfigurationS3KeyFilterRules = AwsS3BucketNotificationConfigurationS3KeyFilterRule[];
   export interface AwsS3BucketServerSideEncryptionByDefault {
     /**
@@ -9333,7 +9333,7 @@ declare namespace SecurityHub {
      */
     StatusReasons?: StatusReasonsList;
   }
-  export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE"|string;
+  export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE";
   export interface ContainerDetails {
     /**
      * The runtime of the container. 
@@ -9364,7 +9364,7 @@ declare namespace SecurityHub {
      */
     Privileged?: Boolean;
   }
-  export type ControlStatus = "ENABLED"|"DISABLED"|string;
+  export type ControlStatus = "ENABLED"|"DISABLED";
   export interface Country {
     /**
      * The 2-letter ISO 3166 country code for the country.
@@ -9543,7 +9543,7 @@ declare namespace SecurityHub {
      */
     Unit?: DateRangeUnit;
   }
-  export type DateRangeUnit = "DAYS"|string;
+  export type DateRangeUnit = "DAYS";
   export interface DeclineInvitationsRequest {
     /**
      * The list of account IDs for the accounts from which to decline the invitations to Security Hub.
@@ -10163,7 +10163,7 @@ declare namespace SecurityHub {
   }
   export type Integer = number;
   export type IntegerList = Integer[];
-  export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|"UPDATE_FINDINGS_IN_SECURITY_HUB"|string;
+  export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|"UPDATE_FINDINGS_IN_SECURITY_HUB";
   export type IntegrationTypeList = IntegrationType[];
   export interface Invitation {
     /**
@@ -10389,8 +10389,8 @@ declare namespace SecurityHub {
     State?: MalwareState;
   }
   export type MalwareList = Malware[];
-  export type MalwareState = "OBSERVED"|"REMOVAL_FAILED"|"REMOVED"|string;
-  export type MalwareType = "ADWARE"|"BLENDED_THREAT"|"BOTNET_AGENT"|"COIN_MINER"|"EXPLOIT_KIT"|"KEYLOGGER"|"MACRO"|"POTENTIALLY_UNWANTED"|"SPYWARE"|"RANSOMWARE"|"REMOTE_ACCESS"|"ROOTKIT"|"TROJAN"|"VIRUS"|"WORM"|string;
+  export type MalwareState = "OBSERVED"|"REMOVAL_FAILED"|"REMOVED";
+  export type MalwareType = "ADWARE"|"BLENDED_THREAT"|"BOTNET_AGENT"|"COIN_MINER"|"EXPLOIT_KIT"|"KEYLOGGER"|"MACRO"|"POTENTIALLY_UNWANTED"|"SPYWARE"|"RANSOMWARE"|"REMOTE_ACCESS"|"ROOTKIT"|"TROJAN"|"VIRUS"|"WORM";
   export interface MapFilter {
     /**
      * The key of the map filter. For example, for ResourceTags, Key identifies the name of the tag. For UserDefinedFields, Key is the name of the field.
@@ -10405,7 +10405,7 @@ declare namespace SecurityHub {
      */
     Comparison?: MapFilterComparison;
   }
-  export type MapFilterComparison = "EQUALS"|"NOT_EQUALS"|string;
+  export type MapFilterComparison = "EQUALS"|"NOT_EQUALS";
   export type MapFilterList = MapFilter[];
   export type MaxResults = number;
   export interface Member {
@@ -10515,7 +10515,7 @@ declare namespace SecurityHub {
      */
     Blocked?: Boolean;
   }
-  export type NetworkDirection = "IN"|"OUT"|string;
+  export type NetworkDirection = "IN"|"OUT";
   export interface NetworkHeader {
     /**
      * The protocol used for the component.
@@ -10638,7 +10638,7 @@ declare namespace SecurityHub {
     OffsetRange?: Range;
   }
   export type Pages = Page[];
-  export type Partition = "aws"|"aws-cn"|"aws-us-gov"|string;
+  export type Partition = "aws"|"aws-cn"|"aws-us-gov";
   export interface PatchSummary {
     /**
      * The identifier of the compliance standard that was used to determine the patch compliance status.
@@ -10833,7 +10833,7 @@ declare namespace SecurityHub {
      */
     RecordIndex?: Long;
   }
-  export type RecordState = "ACTIVE"|"ARCHIVED"|string;
+  export type RecordState = "ACTIVE"|"ARCHIVED";
   export type Records = Record[];
   export interface RelatedFinding {
     /**
@@ -11500,8 +11500,8 @@ declare namespace SecurityHub {
      */
     Original?: NonEmptyString;
   }
-  export type SeverityLabel = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
-  export type SeverityRating = "LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
+  export type SeverityLabel = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL";
+  export type SeverityRating = "LOW"|"MEDIUM"|"HIGH"|"CRITICAL";
   export interface SeverityUpdate {
     /**
      * The normalized severity for the finding. This attribute is to be deprecated in favor of Label. If you provide Normalized and do not provide Label, Label is set automatically as follows.   0 - INFORMATIONAL    1–39 - LOW    40–69 - MEDIUM    70–89 - HIGH    90–100 - CRITICAL   
@@ -11567,7 +11567,7 @@ declare namespace SecurityHub {
      */
     SortOrder?: SortOrder;
   }
-  export type SortOrder = "asc"|"desc"|string;
+  export type SortOrder = "asc"|"desc";
   export interface Standard {
     /**
      * The ARN of a standard.
@@ -11631,7 +11631,7 @@ declare namespace SecurityHub {
   }
   export type StandardsControls = StandardsControl[];
   export type StandardsInputParameterMap = {[key: string]: NonEmptyString};
-  export type StandardsStatus = "PENDING"|"READY"|"FAILED"|"DELETING"|"INCOMPLETE"|string;
+  export type StandardsStatus = "PENDING"|"READY"|"FAILED"|"DELETING"|"INCOMPLETE";
   export interface StandardsStatusReason {
     /**
      * The reason code that represents the reason for the current status of a standard subscription.
@@ -11702,7 +11702,7 @@ declare namespace SecurityHub {
      */
     Description?: NonEmptyString;
   }
-  export type StatusReasonCode = "NO_AVAILABLE_CONFIGURATION_RECORDER"|"INTERNAL_ERROR"|string;
+  export type StatusReasonCode = "NO_AVAILABLE_CONFIGURATION_RECORDER"|"INTERNAL_ERROR";
   export type StatusReasonsList = StatusReason[];
   export interface StringFilter {
     /**
@@ -11714,7 +11714,7 @@ declare namespace SecurityHub {
      */
     Comparison?: StringFilterComparison;
   }
-  export type StringFilterComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|"PREFIX_NOT_EQUALS"|string;
+  export type StringFilterComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|"PREFIX_NOT_EQUALS";
   export type StringFilterList = StringFilter[];
   export type StringList = NonEmptyString[];
   export type TagKey = string;
@@ -11777,9 +11777,9 @@ declare namespace SecurityHub {
      */
     SourceUrl?: NonEmptyString;
   }
-  export type ThreatIntelIndicatorCategory = "BACKDOOR"|"CARD_STEALER"|"COMMAND_AND_CONTROL"|"DROP_SITE"|"EXPLOIT_SITE"|"KEYLOGGER"|string;
+  export type ThreatIntelIndicatorCategory = "BACKDOOR"|"CARD_STEALER"|"COMMAND_AND_CONTROL"|"DROP_SITE"|"EXPLOIT_SITE"|"KEYLOGGER";
   export type ThreatIntelIndicatorList = ThreatIntelIndicator[];
-  export type ThreatIntelIndicatorType = "DOMAIN"|"EMAIL_ADDRESS"|"HASH_MD5"|"HASH_SHA1"|"HASH_SHA256"|"HASH_SHA512"|"IPV4_ADDRESS"|"IPV6_ADDRESS"|"MUTEX"|"PROCESS"|"URL"|string;
+  export type ThreatIntelIndicatorType = "DOMAIN"|"EMAIL_ADDRESS"|"HASH_MD5"|"HASH_SHA1"|"HASH_SHA256"|"HASH_SHA512"|"IPV4_ADDRESS"|"IPV6_ADDRESS"|"MUTEX"|"PROCESS"|"URL";
   export type ThreatList = Threat[];
   export type Timestamp = Date;
   export type TypeList = NonEmptyString[];
@@ -11915,7 +11915,7 @@ declare namespace SecurityHub {
   }
   export interface UpdateStandardsControlResponse {
   }
-  export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
+  export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE";
   export interface VolumeMount {
     /**
      * The name of the volume. 
@@ -11985,7 +11985,7 @@ declare namespace SecurityHub {
      */
     FixAvailable?: VulnerabilityFixAvailable;
   }
-  export type VulnerabilityFixAvailable = "YES"|"NO"|"PARTIAL"|string;
+  export type VulnerabilityFixAvailable = "YES"|"NO"|"PARTIAL";
   export type VulnerabilityList = Vulnerability[];
   export interface VulnerabilityVendor {
     /**
@@ -12034,8 +12034,8 @@ declare namespace SecurityHub {
      */
     Status?: WorkflowStatus;
   }
-  export type WorkflowState = "NEW"|"ASSIGNED"|"IN_PROGRESS"|"DEFERRED"|"RESOLVED"|string;
-  export type WorkflowStatus = "NEW"|"NOTIFIED"|"RESOLVED"|"SUPPRESSED"|string;
+  export type WorkflowState = "NEW"|"ASSIGNED"|"IN_PROGRESS"|"DEFERRED"|"RESOLVED";
+  export type WorkflowStatus = "NEW"|"NOTIFIED"|"RESOLVED"|"SUPPRESSED";
   export interface WorkflowUpdate {
     /**
      * The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to SUPPRESSED or RESOLVED does not prevent a new finding for the same issue. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the following cases:   The record state changes from ARCHIVED to ACTIVE.   The compliance status changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.    SUPPRESSED - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.  

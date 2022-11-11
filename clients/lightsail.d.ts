@@ -1253,7 +1253,7 @@ declare class Lightsail extends Service {
   updateRelationalDatabaseParameters(callback?: (err: AWSError, data: Lightsail.Types.UpdateRelationalDatabaseParametersResult) => void): Request<Lightsail.Types.UpdateRelationalDatabaseParametersResult, AWSError>;
 }
 declare namespace Lightsail {
-  export type AccessDirection = "inbound"|"outbound"|string;
+  export type AccessDirection = "inbound"|"outbound";
   export interface AccessKey {
     /**
      * The ID of the access key.
@@ -1302,7 +1302,7 @@ declare namespace Lightsail {
      */
     allowPublicOverrides?: boolean;
   }
-  export type AccessType = "public"|"private"|string;
+  export type AccessType = "public"|"private";
   export interface AccountLevelBpaSync {
     /**
      * The status of the account-level BPA synchronization. The following statuses are possible:    InSync - Account-level BPA is synchronized. The Amazon S3 account-level BPA configuration applies to your Lightsail buckets.    NeverSynced - Synchronization has not yet happened. The Amazon S3 account-level BPA configuration does not apply to your Lightsail buckets.    Failed - Synchronization failed. The Amazon S3 account-level BPA configuration does not apply to your Lightsail buckets.    Defaulted - Synchronization failed and account-level BPA for your Lightsail buckets is defaulted to active.    You might need to complete further actions if the status is Failed or Defaulted. The message parameter provides more information for those statuses. 
@@ -1321,7 +1321,7 @@ declare namespace Lightsail {
      */
     bpaImpactsLightsail?: boolean;
   }
-  export type AccountLevelBpaSyncStatus = "InSync"|"Failed"|"NeverSynced"|"Defaulted"|string;
+  export type AccountLevelBpaSyncStatus = "InSync"|"Failed"|"NeverSynced"|"Defaulted";
   export interface AddOn {
     /**
      * The name of the add-on.
@@ -1352,7 +1352,7 @@ declare namespace Lightsail {
     autoSnapshotAddOnRequest?: AutoSnapshotAddOnRequest;
   }
   export type AddOnRequestList = AddOnRequest[];
-  export type AddOnType = "AutoSnapshot"|string;
+  export type AddOnType = "AutoSnapshot";
   export interface Alarm {
     /**
      * The name of the alarm.
@@ -1435,7 +1435,7 @@ declare namespace Lightsail {
      */
     notificationEnabled?: boolean;
   }
-  export type AlarmState = "OK"|"ALARM"|"INSUFFICIENT_DATA"|string;
+  export type AlarmState = "OK"|"ALARM"|"INSUFFICIENT_DATA";
   export type AlarmsList = Alarm[];
   export interface AllocateStaticIpRequest {
     /**
@@ -1571,7 +1571,7 @@ declare namespace Lightsail {
     fromAttachedDisks?: AttachedDiskList;
   }
   export type AutoSnapshotDetailsList = AutoSnapshotDetails[];
-  export type AutoSnapshotStatus = "Success"|"Failed"|"InProgress"|"NotFound"|string;
+  export type AutoSnapshotStatus = "Success"|"Failed"|"InProgress"|"NotFound";
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone. The format is us-east-2a (case-sensitive).
@@ -1583,9 +1583,9 @@ declare namespace Lightsail {
     state?: NonEmptyString;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
-  export type BPAStatusMessage = "DEFAULTED_FOR_SLR_MISSING"|"SYNC_ON_HOLD"|"DEFAULTED_FOR_SLR_MISSING_ON_HOLD"|"Unknown"|string;
+  export type BPAStatusMessage = "DEFAULTED_FOR_SLR_MISSING"|"SYNC_ON_HOLD"|"DEFAULTED_FOR_SLR_MISSING_ON_HOLD"|"Unknown";
   export type Base64 = string;
-  export type BehaviorEnum = "dont-cache"|"cache"|string;
+  export type BehaviorEnum = "dont-cache"|"cache";
   export interface Blueprint {
     /**
      * The ID for the virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0).
@@ -1637,7 +1637,7 @@ declare namespace Lightsail {
     platform?: InstancePlatform;
   }
   export type BlueprintList = Blueprint[];
-  export type BlueprintType = "os"|"app"|string;
+  export type BlueprintType = "os"|"app";
   export interface Bucket {
     /**
      * The Lightsail resource type of the bucket (for example, Bucket).
@@ -1747,7 +1747,7 @@ declare namespace Lightsail {
   }
   export type BucketBundleList = BucketBundle[];
   export type BucketList = Bucket[];
-  export type BucketMetricName = "BucketSizeBytes"|"NumberOfObjects"|string;
+  export type BucketMetricName = "BucketSizeBytes"|"NumberOfObjects";
   export type BucketName = string;
   export interface BucketState {
     /**
@@ -1943,9 +1943,9 @@ declare namespace Lightsail {
      */
     supportCode?: string;
   }
-  export type CertificateDomainValidationStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
+  export type CertificateDomainValidationStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS";
   export type CertificateName = string;
-  export type CertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|string;
+  export type CertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED";
   export type CertificateStatusList = CertificateStatus[];
   export interface CertificateSummary {
     /**
@@ -2036,8 +2036,8 @@ declare namespace Lightsail {
     arn?: NonEmptyString;
   }
   export type CloudFormationStackRecordSourceInfoList = CloudFormationStackRecordSourceInfo[];
-  export type CloudFormationStackRecordSourceType = "ExportSnapshotRecord"|string;
-  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export type CloudFormationStackRecordSourceType = "ExportSnapshotRecord";
+  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold";
   export interface ContactMethod {
     /**
      * The destination of the contact method, such as an email address or a mobile phone number.
@@ -2076,10 +2076,10 @@ declare namespace Lightsail {
      */
     supportCode?: string;
   }
-  export type ContactMethodStatus = "PendingVerification"|"Valid"|"Invalid"|string;
-  export type ContactMethodVerificationProtocol = "Email"|string;
+  export type ContactMethodStatus = "PendingVerification"|"Valid"|"Invalid";
+  export type ContactMethodVerificationProtocol = "Email";
   export type ContactMethodsList = ContactMethod[];
-  export type ContactProtocol = "Email"|"SMS"|string;
+  export type ContactProtocol = "Email"|"SMS";
   export type ContactProtocolsList = ContactProtocol[];
   export interface Container {
     /**
@@ -2228,7 +2228,7 @@ declare namespace Lightsail {
      */
     publicEndpoint?: EndpointRequest;
   }
-  export type ContainerServiceDeploymentState = "ACTIVATING"|"ACTIVE"|"INACTIVE"|"FAILED"|string;
+  export type ContainerServiceDeploymentState = "ACTIVATING"|"ACTIVE"|"INACTIVE"|"FAILED";
   export interface ContainerServiceECRImagePullerRole {
     /**
      * A Boolean value that indicates whether the role is activated.
@@ -2299,7 +2299,7 @@ declare namespace Lightsail {
   export type ContainerServiceLogEventList = ContainerServiceLogEvent[];
   export type ContainerServiceMetadataEntry = {[key: string]: string};
   export type ContainerServiceMetadataEntryList = ContainerServiceMetadataEntry[];
-  export type ContainerServiceMetricName = "CPUUtilization"|"MemoryUtilization"|string;
+  export type ContainerServiceMetricName = "CPUUtilization"|"MemoryUtilization";
   export type ContainerServiceName = string;
   export interface ContainerServicePower {
     /**
@@ -2328,8 +2328,8 @@ declare namespace Lightsail {
     isActive?: boolean;
   }
   export type ContainerServicePowerList = ContainerServicePower[];
-  export type ContainerServicePowerName = "nano"|"micro"|"small"|"medium"|"large"|"xlarge"|string;
-  export type ContainerServiceProtocol = "HTTP"|"HTTPS"|"TCP"|"UDP"|string;
+  export type ContainerServicePowerName = "nano"|"micro"|"small"|"medium"|"large"|"xlarge";
+  export type ContainerServiceProtocol = "HTTP"|"HTTPS"|"TCP"|"UDP";
   export type ContainerServicePublicDomains = {[key: string]: ContainerServicePublicDomainsList};
   export type ContainerServicePublicDomainsList = string[];
   export interface ContainerServiceRegistryLogin {
@@ -2351,7 +2351,7 @@ declare namespace Lightsail {
     registry?: string;
   }
   export type ContainerServiceScale = number;
-  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|"DEPLOYING"|string;
+  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|"DEPLOYING";
   export interface ContainerServiceStateDetail {
     /**
      * The state code of the container service. The following state codes are possible:   The following state codes are possible if your container service is in a DEPLOYING or UPDATING state:    CREATING_SYSTEM_RESOURCES - The system resources for your container service are being created.    CREATING_NETWORK_INFRASTRUCTURE - The network infrastructure for your container service are being created.    PROVISIONING_CERTIFICATE - The SSL/TLS certificate for your container service is being created.    PROVISIONING_SERVICE - Your container service is being provisioned.    CREATING_DEPLOYMENT - Your deployment is being created on your container service.    EVALUATING_HEALTH_CHECK - The health of your deployment is being evaluated.    ACTIVATING_DEPLOYMENT - Your deployment is being activated.     The following state codes are possible if your container service is in a PENDING state:    CERTIFICATE_LIMIT_EXCEEDED - The SSL/TLS certificate required for your container service exceeds the maximum number of certificates allowed for your account.    UNKNOWN_ERROR - An error was experienced when your container service was being created.    
@@ -2362,7 +2362,7 @@ declare namespace Lightsail {
      */
     message?: string;
   }
-  export type ContainerServiceStateDetailCode = "CREATING_SYSTEM_RESOURCES"|"CREATING_NETWORK_INFRASTRUCTURE"|"PROVISIONING_CERTIFICATE"|"PROVISIONING_SERVICE"|"CREATING_DEPLOYMENT"|"EVALUATING_HEALTH_CHECK"|"ACTIVATING_DEPLOYMENT"|"CERTIFICATE_LIMIT_EXCEEDED"|"UNKNOWN_ERROR"|string;
+  export type ContainerServiceStateDetailCode = "CREATING_SYSTEM_RESOURCES"|"CREATING_NETWORK_INFRASTRUCTURE"|"PROVISIONING_CERTIFICATE"|"PROVISIONING_SERVICE"|"CREATING_DEPLOYMENT"|"EVALUATING_HEALTH_CHECK"|"ACTIVATING_DEPLOYMENT"|"CERTIFICATE_LIMIT_EXCEEDED"|"UNKNOWN_ERROR";
   export interface ContainerServicesListResult {
     /**
      * An array of objects that describe one or more container services.
@@ -3631,8 +3631,8 @@ declare namespace Lightsail {
     sizeInGb?: integer;
   }
   export type DiskSnapshotList = DiskSnapshot[];
-  export type DiskSnapshotState = "pending"|"completed"|"error"|"unknown"|string;
-  export type DiskState = "pending"|"error"|"available"|"in-use"|"unknown"|string;
+  export type DiskSnapshotState = "pending"|"completed"|"error"|"unknown";
+  export type DiskState = "pending"|"error"|"available"|"in-use"|"unknown";
   export interface DistributionBundle {
     /**
      * The ID of the bundle.
@@ -3657,7 +3657,7 @@ declare namespace Lightsail {
   }
   export type DistributionBundleList = DistributionBundle[];
   export type DistributionList = LightsailDistribution[];
-  export type DistributionMetricName = "Requests"|"BytesDownloaded"|"BytesUploaded"|"TotalErrorRate"|"Http4xxErrorRate"|"Http5xxErrorRate"|string;
+  export type DistributionMetricName = "Requests"|"BytesDownloaded"|"BytesUploaded"|"TotalErrorRate"|"Http4xxErrorRate"|"Http5xxErrorRate";
   export interface DnsRecordCreationState {
     /**
      * The status code for the automated DNS record creation. Following are the possible values:    SUCCEEDED - The validation records were successfully added to the domain.    STARTED - The automatic DNS record creation has started.    FAILED - The validation records failed to be added to the domain.  
@@ -3668,7 +3668,7 @@ declare namespace Lightsail {
      */
     message?: string;
   }
-  export type DnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED"|string;
+  export type DnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED";
   export interface Domain {
     /**
      * The name of the domain.
@@ -3876,7 +3876,7 @@ declare namespace Lightsail {
      */
     diskSnapshotInfo?: DiskSnapshotInfo;
   }
-  export type ExportSnapshotRecordSourceType = "InstanceSnapshot"|"DiskSnapshot"|string;
+  export type ExportSnapshotRecordSourceType = "InstanceSnapshot"|"DiskSnapshot";
   export interface ExportSnapshotRequest {
     /**
      * The name of the instance or disk snapshot to be exported to Amazon EC2.
@@ -3889,7 +3889,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
-  export type ForwardValues = "none"|"allow-list"|"all"|string;
+  export type ForwardValues = "none"|"allow-list"|"all";
   export interface GetActiveNamesRequest {
     /**
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetActiveNames request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
@@ -5040,7 +5040,7 @@ declare namespace Lightsail {
      */
     nextPageToken?: string;
   }
-  export type HeaderEnum = "Accept"|"Accept-Charset"|"Accept-Datetime"|"Accept-Encoding"|"Accept-Language"|"Authorization"|"CloudFront-Forwarded-Proto"|"CloudFront-Is-Desktop-Viewer"|"CloudFront-Is-Mobile-Viewer"|"CloudFront-Is-SmartTV-Viewer"|"CloudFront-Is-Tablet-Viewer"|"CloudFront-Viewer-Country"|"Host"|"Origin"|"Referer"|string;
+  export type HeaderEnum = "Accept"|"Accept-Charset"|"Accept-Datetime"|"Accept-Encoding"|"Accept-Language"|"Authorization"|"CloudFront-Forwarded-Proto"|"CloudFront-Is-Desktop-Viewer"|"CloudFront-Is-Mobile-Viewer"|"CloudFront-Is-SmartTV-Viewer"|"CloudFront-Is-Tablet-Viewer"|"CloudFront-Viewer-Country"|"Host"|"Origin"|"Referer";
   export type HeaderForwardList = HeaderEnum[];
   export interface HeaderObject {
     /**
@@ -5083,9 +5083,9 @@ declare namespace Lightsail {
     notValidAfter?: IsoDate;
   }
   export type HostKeysList = HostKeyAttributes[];
-  export type HttpEndpoint = "disabled"|"enabled"|string;
-  export type HttpProtocolIpv6 = "disabled"|"enabled"|string;
-  export type HttpTokens = "optional"|"required"|string;
+  export type HttpEndpoint = "disabled"|"enabled";
+  export type HttpProtocolIpv6 = "disabled"|"enabled";
+  export type HttpTokens = "optional"|"required";
   export type IAMAccessKeyId = string;
   export interface ImportKeyPairRequest {
     /**
@@ -5251,7 +5251,7 @@ declare namespace Lightsail {
      */
     hostKeys?: HostKeysList;
   }
-  export type InstanceAccessProtocol = "ssh"|"rdp"|string;
+  export type InstanceAccessProtocol = "ssh"|"rdp";
   export interface InstanceEntry {
     /**
      * The name of the export snapshot record, which contains the exported Lightsail instance snapshot that will be used as the source of the new Amazon EC2 instance. Use the get export snapshot records operation to get a list of export snapshot records that you can use to create a CloudFormation stack.
@@ -5289,8 +5289,8 @@ declare namespace Lightsail {
      */
     ramSizeInGb?: float;
   }
-  export type InstanceHealthReason = "Lb.RegistrationInProgress"|"Lb.InitialHealthChecking"|"Lb.InternalError"|"Instance.ResponseCodeMismatch"|"Instance.Timeout"|"Instance.FailedHealthChecks"|"Instance.NotRegistered"|"Instance.NotInUse"|"Instance.DeregistrationInProgress"|"Instance.InvalidState"|"Instance.IpUnusable"|string;
-  export type InstanceHealthState = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable"|string;
+  export type InstanceHealthReason = "Lb.RegistrationInProgress"|"Lb.InitialHealthChecking"|"Lb.InternalError"|"Instance.ResponseCodeMismatch"|"Instance.Timeout"|"Instance.FailedHealthChecks"|"Instance.NotRegistered"|"Instance.NotInUse"|"Instance.DeregistrationInProgress"|"Instance.InvalidState"|"Instance.IpUnusable";
+  export type InstanceHealthState = "initial"|"healthy"|"unhealthy"|"unused"|"draining"|"unavailable";
   export interface InstanceHealthSummary {
     /**
      * The name of the Lightsail instance for which you are requesting health check data.
@@ -5329,8 +5329,8 @@ declare namespace Lightsail {
      */
     httpProtocolIpv6?: HttpProtocolIpv6;
   }
-  export type InstanceMetadataState = "pending"|"applied"|string;
-  export type InstanceMetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"BurstCapacityTime"|"BurstCapacityPercentage"|"MetadataNoToken"|string;
+  export type InstanceMetadataState = "pending"|"applied";
+  export type InstanceMetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"BurstCapacityTime"|"BurstCapacityPercentage"|"MetadataNoToken";
   export interface InstanceNetworking {
     /**
      * The amount of data in GB allocated for monthly data transfers.
@@ -5341,7 +5341,7 @@ declare namespace Lightsail {
      */
     ports?: InstancePortInfoList;
   }
-  export type InstancePlatform = "LINUX_UNIX"|"WINDOWS"|string;
+  export type InstancePlatform = "LINUX_UNIX"|"WINDOWS";
   export type InstancePlatformList = InstancePlatform[];
   export interface InstancePortInfo {
     /**
@@ -5498,7 +5498,7 @@ declare namespace Lightsail {
     fromDiskInfo?: DiskInfoList;
   }
   export type InstanceSnapshotList = InstanceSnapshot[];
-  export type InstanceSnapshotState = "pending"|"error"|"available"|string;
+  export type InstanceSnapshotState = "pending"|"error"|"available";
   export interface InstanceState {
     /**
      * The status code for the instance.
@@ -5510,7 +5510,7 @@ declare namespace Lightsail {
     name?: string;
   }
   export type IpAddress = string;
-  export type IpAddressType = "dualstack"|"ipv4"|string;
+  export type IpAddressType = "dualstack"|"ipv4";
   export type Ipv6Address = string;
   export type Ipv6AddressList = Ipv6Address[];
   export interface IsVpcPeeredRequest {
@@ -5719,12 +5719,12 @@ declare namespace Lightsail {
      */
     tlsPolicyName?: ResourceName;
   }
-  export type LoadBalancerAttributeName = "HealthCheckPath"|"SessionStickinessEnabled"|"SessionStickiness_LB_CookieDurationSeconds"|"HttpsRedirectionEnabled"|"TlsPolicyName"|string;
+  export type LoadBalancerAttributeName = "HealthCheckPath"|"SessionStickinessEnabled"|"SessionStickiness_LB_CookieDurationSeconds"|"HttpsRedirectionEnabled"|"TlsPolicyName";
   export type LoadBalancerConfigurationOptions = {[key: string]: string};
   export type LoadBalancerList = LoadBalancer[];
-  export type LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount"|string;
-  export type LoadBalancerProtocol = "HTTP_HTTPS"|"HTTP"|string;
-  export type LoadBalancerState = "active"|"provisioning"|"active_impaired"|"failed"|"unknown"|string;
+  export type LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount";
+  export type LoadBalancerProtocol = "HTTP_HTTPS"|"HTTP";
+  export type LoadBalancerState = "active"|"provisioning"|"active_impaired"|"failed"|"unknown";
   export interface LoadBalancerTlsCertificate {
     /**
      * The name of the SSL/TLS certificate (e.g., my-certificate).
@@ -5837,8 +5837,8 @@ declare namespace Lightsail {
      */
     message?: string;
   }
-  export type LoadBalancerTlsCertificateDnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED"|string;
-  export type LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS"|string;
+  export type LoadBalancerTlsCertificateDnsRecordCreationStateCode = "SUCCEEDED"|"STARTED"|"FAILED";
+  export type LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"|"FAILED"|"SUCCESS";
   export interface LoadBalancerTlsCertificateDomainValidationOption {
     /**
      * The fully qualified domain name in the certificate request.
@@ -5877,9 +5877,9 @@ declare namespace Lightsail {
     dnsRecordCreationState?: LoadBalancerTlsCertificateDnsRecordCreationState;
   }
   export type LoadBalancerTlsCertificateDomainValidationRecordList = LoadBalancerTlsCertificateDomainValidationRecord[];
-  export type LoadBalancerTlsCertificateFailureReason = "NO_AVAILABLE_CONTACTS"|"ADDITIONAL_VERIFICATION_REQUIRED"|"DOMAIN_NOT_ALLOWED"|"INVALID_PUBLIC_DOMAIN"|"OTHER"|string;
+  export type LoadBalancerTlsCertificateFailureReason = "NO_AVAILABLE_CONTACTS"|"ADDITIONAL_VERIFICATION_REQUIRED"|"DOMAIN_NOT_ALLOWED"|"INVALID_PUBLIC_DOMAIN"|"OTHER";
   export type LoadBalancerTlsCertificateList = LoadBalancerTlsCertificate[];
-  export type LoadBalancerTlsCertificateRenewalStatus = "PENDING_AUTO_RENEWAL"|"PENDING_VALIDATION"|"SUCCESS"|"FAILED"|string;
+  export type LoadBalancerTlsCertificateRenewalStatus = "PENDING_AUTO_RENEWAL"|"PENDING_VALIDATION"|"SUCCESS"|"FAILED";
   export interface LoadBalancerTlsCertificateRenewalSummary {
     /**
      * The renewal status of the certificate. The following renewal status are possible:     PendingAutoRenewal  - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required.      PendingValidation  - Lightsail couldn't automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won't be renewed. Check to make sure your certificate's domain validation records exist in your domain's DNS, and that your certificate remains in use.     Success  - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required.      Failed  - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the CreateCertificate action.  
@@ -5890,8 +5890,8 @@ declare namespace Lightsail {
      */
     domainValidationOptions?: LoadBalancerTlsCertificateDomainValidationOptionList;
   }
-  export type LoadBalancerTlsCertificateRevocationReason = "UNSPECIFIED"|"KEY_COMPROMISE"|"CA_COMPROMISE"|"AFFILIATION_CHANGED"|"SUPERCEDED"|"CESSATION_OF_OPERATION"|"CERTIFICATE_HOLD"|"REMOVE_FROM_CRL"|"PRIVILEGE_WITHDRAWN"|"A_A_COMPROMISE"|string;
-  export type LoadBalancerTlsCertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|"UNKNOWN"|string;
+  export type LoadBalancerTlsCertificateRevocationReason = "UNSPECIFIED"|"KEY_COMPROMISE"|"CA_COMPROMISE"|"AFFILIATION_CHANGED"|"SUPERCEDED"|"CESSATION_OF_OPERATION"|"CERTIFICATE_HOLD"|"REMOVE_FROM_CRL"|"PRIVILEGE_WITHDRAWN"|"A_A_COMPROMISE";
+  export type LoadBalancerTlsCertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|"UNKNOWN";
   export interface LoadBalancerTlsCertificateSummary {
     /**
      * The name of the SSL/TLS certificate.
@@ -5968,11 +5968,11 @@ declare namespace Lightsail {
     unit?: MetricUnit;
   }
   export type MetricDatapointList = MetricDatapoint[];
-  export type MetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount"|"DatabaseConnections"|"DiskQueueDepth"|"FreeStorageSpace"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput"|"BurstCapacityTime"|"BurstCapacityPercentage"|string;
+  export type MetricName = "CPUUtilization"|"NetworkIn"|"NetworkOut"|"StatusCheckFailed"|"StatusCheckFailed_Instance"|"StatusCheckFailed_System"|"ClientTLSNegotiationErrorCount"|"HealthyHostCount"|"UnhealthyHostCount"|"HTTPCode_LB_4XX_Count"|"HTTPCode_LB_5XX_Count"|"HTTPCode_Instance_2XX_Count"|"HTTPCode_Instance_3XX_Count"|"HTTPCode_Instance_4XX_Count"|"HTTPCode_Instance_5XX_Count"|"InstanceResponseTime"|"RejectedConnectionCount"|"RequestCount"|"DatabaseConnections"|"DiskQueueDepth"|"FreeStorageSpace"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput"|"BurstCapacityTime"|"BurstCapacityPercentage";
   export type MetricPeriod = number;
-  export type MetricStatistic = "Minimum"|"Maximum"|"Sum"|"Average"|"SampleCount"|string;
+  export type MetricStatistic = "Minimum"|"Maximum"|"Sum"|"Average"|"SampleCount";
   export type MetricStatisticList = MetricStatistic[];
-  export type MetricUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export type MetricUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None";
   export interface MonitoredResourceInfo {
     /**
      * The Amazon Resource Name (ARN) of the resource being monitored.
@@ -6003,8 +6003,8 @@ declare namespace Lightsail {
      */
     message?: string;
   }
-  export type NameServersUpdateStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
-  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|string;
+  export type NameServersUpdateStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED";
+  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp";
   export type NonEmptyString = string;
   export type NotificationTriggerList = AlarmState[];
   export interface OpenInstancePublicPortsRequest {
@@ -6074,8 +6074,8 @@ declare namespace Lightsail {
     errorDetails?: string;
   }
   export type OperationList = Operation[];
-  export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions"|string;
+  export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded";
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions";
   export interface Origin {
     /**
      * The name of the origin resource.
@@ -6094,7 +6094,7 @@ declare namespace Lightsail {
      */
     protocolPolicy?: OriginProtocolPolicyEnum;
   }
-  export type OriginProtocolPolicyEnum = "http-only"|"https-only"|string;
+  export type OriginProtocolPolicyEnum = "http-only"|"https-only";
   export type PartnerIdList = NonEmptyString[];
   export interface PasswordData {
     /**
@@ -6144,7 +6144,7 @@ declare namespace Lightsail {
     backupRetentionEnabled?: boolean;
   }
   export type Port = number;
-  export type PortAccessType = "Public"|"Private"|string;
+  export type PortAccessType = "Public"|"Private";
   export interface PortInfo {
     /**
      * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - The ICMP type for IPv4 addresses. For example, specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more information, see Control Messages on Wikipedia.   ICMPv6 - The ICMP type for IPv6 addresses. For example, specify 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more information, see Internet Control Message Protocol for IPv6.  
@@ -6172,10 +6172,10 @@ declare namespace Lightsail {
     cidrListAliases?: StringList;
   }
   export type PortInfoList = PortInfo[];
-  export type PortInfoSourceType = "DEFAULT"|"INSTANCE"|"NONE"|"CLOSED"|string;
+  export type PortInfoSourceType = "DEFAULT"|"INSTANCE"|"NONE"|"CLOSED";
   export type PortList = Port[];
   export type PortMap = {[key: string]: ContainerServiceProtocol};
-  export type PortState = "open"|"closed"|string;
+  export type PortState = "open"|"closed";
   export interface PrivateRegistryAccess {
     /**
      * An object that describes the activation status of the role that you can use to grant a Lightsail container service access to Amazon ECR private repositories. If the role is activated, the Amazon Resource Name (ARN) of the role is also listed.
@@ -6276,7 +6276,7 @@ declare namespace Lightsail {
      */
     message?: string;
   }
-  export type R53HostedZoneDeletionStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED"|string;
+  export type R53HostedZoneDeletionStateCode = "SUCCEEDED"|"PENDING"|"FAILED"|"STARTED";
   export interface RebootInstanceRequest {
     /**
      * The name of the instance to reboot.
@@ -6301,7 +6301,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
-  export type RecordState = "Started"|"Succeeded"|"Failed"|string;
+  export type RecordState = "Started"|"Succeeded"|"Failed";
   export interface Region {
     /**
      * The continent code (e.g., NA, meaning North America).
@@ -6329,7 +6329,7 @@ declare namespace Lightsail {
     relationalDatabaseAvailabilityZones?: AvailabilityZoneList;
   }
   export type RegionList = Region[];
-  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ca-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"eu-north-1"|string;
+  export type RegionName = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"ca-central-1"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"ap-northeast-2"|"eu-north-1";
   export interface RegisterContainerImageRequest {
     /**
      * The name of the container service for which to register a container image.
@@ -6539,7 +6539,7 @@ declare namespace Lightsail {
      */
     address?: NonEmptyString;
   }
-  export type RelationalDatabaseEngine = "mysql"|string;
+  export type RelationalDatabaseEngine = "mysql";
   export interface RelationalDatabaseEvent {
     /**
      * The database that the database event relates to.
@@ -6574,7 +6574,7 @@ declare namespace Lightsail {
     ramSizeInGb?: float;
   }
   export type RelationalDatabaseList = RelationalDatabase[];
-  export type RelationalDatabaseMetricName = "CPUUtilization"|"DatabaseConnections"|"DiskQueueDepth"|"FreeStorageSpace"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput"|string;
+  export type RelationalDatabaseMetricName = "CPUUtilization"|"DatabaseConnections"|"DiskQueueDepth"|"FreeStorageSpace"|"NetworkReceiveThroughput"|"NetworkTransmitThroughput";
   export interface RelationalDatabaseParameter {
     /**
      * Specifies the valid range of values for the parameter.
@@ -6610,7 +6610,7 @@ declare namespace Lightsail {
     parameterValue?: string;
   }
   export type RelationalDatabaseParameterList = RelationalDatabaseParameter[];
-  export type RelationalDatabasePasswordVersion = "CURRENT"|"PREVIOUS"|"PENDING"|string;
+  export type RelationalDatabasePasswordVersion = "CURRENT"|"PREVIOUS"|"PENDING";
   export interface RelationalDatabaseSnapshot {
     /**
      * The name of the database snapshot.
@@ -6686,7 +6686,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
-  export type RenewalStatus = "PendingAutoRenewal"|"PendingValidation"|"Success"|"Failed"|string;
+  export type RenewalStatus = "PendingAutoRenewal"|"PendingValidation"|"Success"|"Failed";
   export type RenewalStatusReason = string;
   export interface RenewalSummary {
     /**
@@ -6728,7 +6728,7 @@ declare namespace Lightsail {
     operation?: Operation;
   }
   export type ResourceArn = string;
-  export type ResourceBucketAccess = "allow"|"deny"|string;
+  export type ResourceBucketAccess = "allow"|"deny";
   export interface ResourceLocation {
     /**
      * The Availability Zone. Follows the format us-east-2a (case-sensitive).
@@ -6765,7 +6765,7 @@ declare namespace Lightsail {
      */
     value?: string;
   }
-  export type ResourceType = "ContainerService"|"Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|"Bucket"|string;
+  export type ResourceType = "ContainerService"|"Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|"Bucket";
   export type RevocationReason = string;
   export interface SendContactMethodVerificationRequest {
     /**
@@ -6884,7 +6884,7 @@ declare namespace Lightsail {
     isAttached?: boolean;
   }
   export type StaticIpList = StaticIp[];
-  export type StatusType = "Active"|"Inactive"|string;
+  export type StatusType = "Active"|"Inactive";
   export interface StopInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to stop.
@@ -6971,7 +6971,7 @@ declare namespace Lightsail {
     operations?: OperationList;
   }
   export type TimeOfDay = string;
-  export type TreatMissingData = "breaching"|"notBreaching"|"ignore"|"missing"|string;
+  export type TreatMissingData = "breaching"|"notBreaching"|"ignore"|"missing";
   export interface UnpeerVpcRequest {
   }
   export interface UnpeerVpcResult {

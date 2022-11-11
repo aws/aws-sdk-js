@@ -209,7 +209,7 @@ declare namespace MigrationHubRefactorSpaces {
   export type AdditionalDetails = {[key: string]: AdditionalDetailsValue};
   export type AdditionalDetailsKey = string;
   export type AdditionalDetailsValue = string;
-  export type ApiGatewayEndpointType = "REGIONAL"|"PRIVATE"|string;
+  export type ApiGatewayEndpointType = "REGIONAL"|"PRIVATE";
   export type ApiGatewayId = string;
   export interface ApiGatewayProxyConfig {
     /**
@@ -283,7 +283,7 @@ declare namespace MigrationHubRefactorSpaces {
   }
   export type ApplicationId = string;
   export type ApplicationName = string;
-  export type ApplicationState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|string;
+  export type ApplicationState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING";
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -853,7 +853,7 @@ declare namespace MigrationHubRefactorSpaces {
   export type Ec2TagValue = string;
   export type EnvironmentId = string;
   export type EnvironmentName = string;
-  export type EnvironmentState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
+  export type EnvironmentState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED";
   export type EnvironmentSummaries = EnvironmentSummary[];
   export interface EnvironmentSummary {
     /**
@@ -936,9 +936,9 @@ declare namespace MigrationHubRefactorSpaces {
     VpcName?: Ec2TagValue;
   }
   export type EnvironmentVpcs = EnvironmentVpc[];
-  export type ErrorCode = "INVALID_RESOURCE_STATE"|"RESOURCE_LIMIT_EXCEEDED"|"RESOURCE_CREATION_FAILURE"|"RESOURCE_UPDATE_FAILURE"|"SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE"|"RESOURCE_DELETION_FAILURE"|"RESOURCE_RETRIEVAL_FAILURE"|"RESOURCE_IN_USE"|"RESOURCE_NOT_FOUND"|"STATE_TRANSITION_FAILURE"|"REQUEST_LIMIT_EXCEEDED"|"NOT_AUTHORIZED"|string;
+  export type ErrorCode = "INVALID_RESOURCE_STATE"|"RESOURCE_LIMIT_EXCEEDED"|"RESOURCE_CREATION_FAILURE"|"RESOURCE_UPDATE_FAILURE"|"SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE"|"RESOURCE_DELETION_FAILURE"|"RESOURCE_RETRIEVAL_FAILURE"|"RESOURCE_IN_USE"|"RESOURCE_NOT_FOUND"|"STATE_TRANSITION_FAILURE"|"REQUEST_LIMIT_EXCEEDED"|"NOT_AUTHORIZED";
   export type ErrorMessage = string;
-  export type ErrorResourceType = "ENVIRONMENT"|"APPLICATION"|"ROUTE"|"SERVICE"|"TRANSIT_GATEWAY"|"TRANSIT_GATEWAY_ATTACHMENT"|"API_GATEWAY"|"NLB"|"TARGET_GROUP"|"LOAD_BALANCER_LISTENER"|"VPC_LINK"|"LAMBDA"|"VPC"|"SUBNET"|"ROUTE_TABLE"|"SECURITY_GROUP"|"VPC_ENDPOINT_SERVICE_CONFIGURATION"|"RESOURCE_SHARE"|"IAM_ROLE"|string;
+  export type ErrorResourceType = "ENVIRONMENT"|"APPLICATION"|"ROUTE"|"SERVICE"|"TRANSIT_GATEWAY"|"TRANSIT_GATEWAY_ATTACHMENT"|"API_GATEWAY"|"NLB"|"TARGET_GROUP"|"LOAD_BALANCER_LISTENER"|"VPC_LINK"|"LAMBDA"|"VPC"|"SUBNET"|"ROUTE_TABLE"|"SECURITY_GROUP"|"VPC_ENDPOINT_SERVICE_CONFIGURATION"|"RESOURCE_SHARE"|"IAM_ROLE";
   export interface ErrorResponse {
     /**
      * The Amazon Web Services account ID of the resource owner. 
@@ -1269,7 +1269,7 @@ declare namespace MigrationHubRefactorSpaces {
      */
     VpcId?: VpcId;
   }
-  export type HttpMethod = "DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|string;
+  export type HttpMethod = "DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT";
   export type HttpMethods = HttpMethod[];
   export type LambdaArn = string;
   export interface LambdaEndpointConfig {
@@ -1427,7 +1427,7 @@ declare namespace MigrationHubRefactorSpaces {
     Tags?: TagMap;
   }
   export type MaxResults = number;
-  export type NetworkFabricType = "TRANSIT_GATEWAY"|string;
+  export type NetworkFabricType = "TRANSIT_GATEWAY";
   export type NextToken = string;
   export type NlbArn = string;
   export type NlbName = string;
@@ -1435,7 +1435,7 @@ declare namespace MigrationHubRefactorSpaces {
   export type PathResourceToIdKey = string;
   export type PathResourceToIdValue = string;
   export type PolicyString = string;
-  export type ProxyType = "API_GATEWAY"|string;
+  export type ProxyType = "API_GATEWAY";
   export interface PutResourcePolicyRequest {
     /**
      * A JSON-formatted string for an Amazon Web Services resource-based policy. 
@@ -1451,9 +1451,9 @@ declare namespace MigrationHubRefactorSpaces {
   export type ResourceArn = string;
   export type ResourceIdentifier = string;
   export type ResourcePolicyIdentifier = string;
-  export type RouteActivationState = "ACTIVE"|"INACTIVE"|string;
+  export type RouteActivationState = "ACTIVE"|"INACTIVE";
   export type RouteId = string;
-  export type RouteState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"INACTIVE"|string;
+  export type RouteState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"INACTIVE";
   export type RouteSummaries = RouteSummary[];
   export interface RouteSummary {
     /**
@@ -1525,11 +1525,11 @@ declare namespace MigrationHubRefactorSpaces {
      */
     Tags?: TagMap;
   }
-  export type RouteType = "DEFAULT"|"URI_PATH"|string;
-  export type ServiceEndpointType = "LAMBDA"|"URL"|string;
+  export type RouteType = "DEFAULT"|"URI_PATH";
+  export type ServiceEndpointType = "LAMBDA"|"URL";
   export type ServiceId = string;
   export type ServiceName = string;
-  export type ServiceState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
+  export type ServiceState = "CREATING"|"ACTIVE"|"DELETING"|"FAILED";
   export type ServiceSummaries = ServiceSummary[];
   export interface ServiceSummary {
     /**

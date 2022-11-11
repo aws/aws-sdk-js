@@ -255,16 +255,16 @@ declare namespace Budgets {
     Action: Action;
   }
   export type ActionId = string;
-  export type ActionStatus = "STANDBY"|"PENDING"|"EXECUTION_IN_PROGRESS"|"EXECUTION_SUCCESS"|"EXECUTION_FAILURE"|"REVERSE_IN_PROGRESS"|"REVERSE_SUCCESS"|"REVERSE_FAILURE"|"RESET_IN_PROGRESS"|"RESET_FAILURE"|string;
-  export type ActionSubType = "STOP_EC2_INSTANCES"|"STOP_RDS_INSTANCES"|string;
+  export type ActionStatus = "STANDBY"|"PENDING"|"EXECUTION_IN_PROGRESS"|"EXECUTION_SUCCESS"|"EXECUTION_FAILURE"|"REVERSE_IN_PROGRESS"|"REVERSE_SUCCESS"|"REVERSE_FAILURE"|"RESET_IN_PROGRESS"|"RESET_FAILURE";
+  export type ActionSubType = "STOP_EC2_INSTANCES"|"STOP_RDS_INSTANCES";
   export interface ActionThreshold {
     ActionThresholdValue: NotificationThreshold;
     ActionThresholdType: ThresholdType;
   }
-  export type ActionType = "APPLY_IAM_POLICY"|"APPLY_SCP_POLICY"|"RUN_SSM_DOCUMENTS"|string;
+  export type ActionType = "APPLY_IAM_POLICY"|"APPLY_SCP_POLICY"|"RUN_SSM_DOCUMENTS";
   export type Actions = Action[];
   export type AdjustmentPeriod = number;
-  export type ApprovalModel = "AUTOMATIC"|"MANUAL"|string;
+  export type ApprovalModel = "AUTOMATIC"|"MANUAL";
   export interface AutoAdjustData {
     /**
      * The string that defines whether your budget auto-adjusts based on historical or forecasted data.
@@ -279,7 +279,7 @@ declare namespace Budgets {
      */
     LastAutoAdjustTime?: GenericTimestamp;
   }
-  export type AutoAdjustType = "HISTORICAL"|"FORECAST"|string;
+  export type AutoAdjustType = "HISTORICAL"|"FORECAST";
   export interface Budget {
     /**
      * The name of a budget. The name must be unique within an account. The : and \ characters aren't allowed in BudgetName.
@@ -349,7 +349,7 @@ declare namespace Budgets {
      */
     BudgetedAndActualAmountsList?: BudgetedAndActualAmountsList;
   }
-  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|"RI_COVERAGE"|"SAVINGS_PLANS_UTILIZATION"|"SAVINGS_PLANS_COVERAGE"|string;
+  export type BudgetType = "USAGE"|"COST"|"RI_UTILIZATION"|"RI_COVERAGE"|"SAVINGS_PLANS_UTILIZATION"|"SAVINGS_PLANS_COVERAGE";
   export interface BudgetedAndActualAmounts {
     /**
      * The amount of cost or usage that you created the budget for.
@@ -376,7 +376,7 @@ declare namespace Budgets {
      */
     ForecastedSpend?: Spend;
   }
-  export type ComparisonOperator = "GREATER_THAN"|"LESS_THAN"|"EQUAL_TO"|string;
+  export type ComparisonOperator = "GREATER_THAN"|"LESS_THAN"|"EQUAL_TO";
   export type CostFilters = {[key: string]: DimensionValues};
   export interface CostTypes {
     /**
@@ -776,7 +776,7 @@ declare namespace Budgets {
   }
   export type DimensionValue = string;
   export type DimensionValues = DimensionValue[];
-  export type EventType = "SYSTEM"|"CREATE_ACTION"|"DELETE_ACTION"|"UPDATE_ACTION"|"EXECUTE_ACTION"|string;
+  export type EventType = "SYSTEM"|"CREATE_ACTION"|"DELETE_ACTION"|"UPDATE_ACTION"|"EXECUTE_ACTION";
   export interface ExecuteBudgetActionRequest {
     AccountId: AccountId;
     BudgetName: BudgetName;
@@ -801,7 +801,7 @@ declare namespace Budgets {
      */
     ExecutionType: ExecutionType;
   }
-  export type ExecutionType = "APPROVE_BUDGET_ACTION"|"RETRY_BUDGET_ACTION"|"REVERSE_BUDGET_ACTION"|"RESET_BUDGET_ACTION"|string;
+  export type ExecutionType = "APPROVE_BUDGET_ACTION"|"RETRY_BUDGET_ACTION"|"REVERSE_BUDGET_ACTION"|"RESET_BUDGET_ACTION";
   export type GenericString = string;
   export type GenericTimestamp = Date;
   export type Group = string;
@@ -860,9 +860,9 @@ declare namespace Budgets {
      */
     NotificationState?: NotificationState;
   }
-  export type NotificationState = "OK"|"ALARM"|string;
+  export type NotificationState = "OK"|"ALARM";
   export type NotificationThreshold = number;
-  export type NotificationType = "ACTUAL"|"FORECASTED"|string;
+  export type NotificationType = "ACTUAL"|"FORECASTED";
   export interface NotificationWithSubscribers {
     /**
      * The notification that's associated with a budget.
@@ -930,10 +930,10 @@ declare namespace Budgets {
   }
   export type SubscriberAddress = string;
   export type Subscribers = Subscriber[];
-  export type SubscriptionType = "SNS"|"EMAIL"|string;
+  export type SubscriptionType = "SNS"|"EMAIL";
   export type TargetId = string;
   export type TargetIds = TargetId[];
-  export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;
+  export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE";
   export interface TimePeriod {
     /**
      * The start date for a budget. If you created your budget and didn't specify a start date, Amazon Web Services defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose DAILY, and didn't set a start date, Amazon Web Services set your start date to 01/24/18 00:00 UTC. If you chose MONTHLY, Amazon Web Services set your start date to 01/01/18 00:00 UTC. The defaults are the same for the Billing and Cost Management console and the API. You can change your start date with the UpdateBudget operation.
@@ -944,7 +944,7 @@ declare namespace Budgets {
      */
     End?: GenericTimestamp;
   }
-  export type TimeUnit = "DAILY"|"MONTHLY"|"QUARTERLY"|"ANNUALLY"|string;
+  export type TimeUnit = "DAILY"|"MONTHLY"|"QUARTERLY"|"ANNUALLY";
   export type UnitValue = string;
   export interface UpdateBudgetActionRequest {
     AccountId: AccountId;

@@ -68,8 +68,8 @@ declare namespace ControlTower {
      */
     statusMessage?: String;
   }
-  export type ControlOperationStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS"|string;
-  export type ControlOperationType = "ENABLE_CONTROL"|"DISABLE_CONTROL"|string;
+  export type ControlOperationStatus = "SUCCEEDED"|"FAILED"|"IN_PROGRESS";
+  export type ControlOperationType = "ENABLE_CONTROL"|"DISABLE_CONTROL";
   export interface DisableControlInput {
     /**
      * The ARN of the control. Only Strongly recommended and Elective controls are permitted, with the exception of the Region deny guardrail.

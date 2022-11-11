@@ -314,7 +314,7 @@ declare namespace Inspector2 {
   export type AccountId = string;
   export type AccountIdSet = AccountId[];
   export type AccountList = Account[];
-  export type AccountSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type AccountSortBy = "CRITICAL"|"HIGH"|"ALL";
   export interface AccountState {
     /**
      * The Amazon Web Services account ID.
@@ -331,7 +331,7 @@ declare namespace Inspector2 {
   }
   export type AccountStateList = AccountState[];
   export type AggCounts = number;
-  export type AggregationFindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY"|string;
+  export type AggregationFindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY";
   export interface AggregationRequest {
     /**
      * An object that contains details about an aggregation request based on Amazon Web Services account IDs.
@@ -370,7 +370,7 @@ declare namespace Inspector2 {
      */
     titleAggregation?: TitleAggregation;
   }
-  export type AggregationResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|string;
+  export type AggregationResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE";
   export interface AggregationResponse {
     /**
      * An object that contains details about an aggregation response based on Amazon Web Services account IDs.
@@ -410,7 +410,7 @@ declare namespace Inspector2 {
     titleAggregation?: TitleAggregationResponse;
   }
   export type AggregationResponseList = AggregationResponse[];
-  export type AggregationType = "FINDING_TYPE"|"PACKAGE"|"TITLE"|"REPOSITORY"|"AMI"|"AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER"|"IMAGE_LAYER"|"ACCOUNT"|string;
+  export type AggregationType = "FINDING_TYPE"|"PACKAGE"|"TITLE"|"REPOSITORY"|"AMI"|"AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER"|"IMAGE_LAYER"|"ACCOUNT";
   export interface AmiAggregation {
     /**
      * The IDs of AMIs to aggregate findings for.
@@ -444,7 +444,7 @@ declare namespace Inspector2 {
     severityCounts?: SeverityCounts;
   }
   export type AmiId = string;
-  export type AmiSortBy = "CRITICAL"|"HIGH"|"ALL"|"AFFECTED_INSTANCES"|string;
+  export type AmiSortBy = "CRITICAL"|"HIGH"|"ALL"|"AFFECTED_INSTANCES";
   export type Arn = string;
   export interface AssociateMemberRequest {
     /**
@@ -604,7 +604,7 @@ declare namespace Inspector2 {
      */
     repositoryName: NonEmptyString;
   }
-  export type AwsEcrContainerSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type AwsEcrContainerSortBy = "CRITICAL"|"HIGH"|"ALL";
   export interface BatchGetAccountStatusRequest {
     /**
      * The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.
@@ -703,7 +703,7 @@ declare namespace Inspector2 {
      */
     scanType?: CoverageStringFilterList;
   }
-  export type CoverageMapComparison = "EQUALS"|string;
+  export type CoverageMapComparison = "EQUALS";
   export interface CoverageMapFilter {
     /**
      * The operator to compare coverage on.
@@ -719,8 +719,8 @@ declare namespace Inspector2 {
     value?: NonEmptyString;
   }
   export type CoverageMapFilterList = CoverageMapFilter[];
-  export type CoverageResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|string;
-  export type CoverageStringComparison = "EQUALS"|"NOT_EQUALS"|string;
+  export type CoverageResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY";
+  export type CoverageStringComparison = "EQUALS"|"NOT_EQUALS";
   export interface CoverageStringFilter {
     /**
      * The operator to compare strings on.
@@ -812,7 +812,7 @@ declare namespace Inspector2 {
      */
     reportId?: ReportId;
   }
-  export type Currency = "USD"|string;
+  export type Currency = "USD";
   export interface CvssScore {
     /**
      * The base CVSS score used for the finding.
@@ -902,7 +902,7 @@ declare namespace Inspector2 {
     status?: DelegatedAdminStatus;
   }
   export type DelegatedAdminAccountList = DelegatedAdminAccount[];
-  export type DelegatedAdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
+  export type DelegatedAdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS";
   export interface DeleteFilterRequest {
     /**
      * The Amazon Resource Number (ARN) of the filter to be deleted.
@@ -1043,7 +1043,7 @@ declare namespace Inspector2 {
      */
     severityCounts?: SeverityCounts;
   }
-  export type Ec2InstanceSortBy = "NETWORK_FINDINGS"|"CRITICAL"|"HIGH"|"ALL"|string;
+  export type Ec2InstanceSortBy = "NETWORK_FINDINGS"|"CRITICAL"|"HIGH"|"ALL";
   export interface Ec2Metadata {
     /**
      * The ID of the Amazon Machine Image (AMI) used to launch the instance.
@@ -1058,7 +1058,7 @@ declare namespace Inspector2 {
      */
     tags?: TagMap;
   }
-  export type Ec2Platform = "WINDOWS"|"LINUX"|"UNKNOWN"|string;
+  export type Ec2Platform = "WINDOWS"|"LINUX"|"UNKNOWN";
   export interface EcrConfiguration {
     /**
      * The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes inactive and all associated findings are scheduled for closure.
@@ -1087,7 +1087,7 @@ declare namespace Inspector2 {
      */
     scanFrequency?: EcrScanFrequency;
   }
-  export type EcrRescanDuration = "LIFETIME"|"DAYS_30"|"DAYS_180"|string;
+  export type EcrRescanDuration = "LIFETIME"|"DAYS_30"|"DAYS_180";
   export interface EcrRescanDurationState {
     /**
      * The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes inactive and all associated findings are scheduled for closure.
@@ -1102,8 +1102,8 @@ declare namespace Inspector2 {
      */
     updatedAt?: DateTimeTimestamp;
   }
-  export type EcrRescanDurationStatus = "SUCCESS"|"PENDING"|"FAILED"|string;
-  export type EcrScanFrequency = "MANUAL"|"SCAN_ON_PUSH"|"CONTINUOUS_SCAN"|string;
+  export type EcrRescanDurationStatus = "SUCCESS"|"PENDING"|"FAILED";
+  export type EcrScanFrequency = "MANUAL"|"SCAN_ON_PUSH"|"CONTINUOUS_SCAN";
   export interface EnableDelegatedAdminAccountRequest {
     /**
      * The idempotency token for the request.
@@ -1145,9 +1145,9 @@ declare namespace Inspector2 {
      */
     failedAccounts?: FailedAccountList;
   }
-  export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED"|string;
+  export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED";
   export type ErrorMessage = string;
-  export type ExternalReportStatus = "SUCCEEDED"|"IN_PROGRESS"|"CANCELLED"|"FAILED"|string;
+  export type ExternalReportStatus = "SUCCEEDED"|"IN_PROGRESS"|"CANCELLED"|"FAILED";
   export interface FailedAccount {
     /**
      * The Amazon Web Services account ID.
@@ -1214,7 +1214,7 @@ declare namespace Inspector2 {
      */
     updatedAt: DateTimeTimestamp;
   }
-  export type FilterAction = "NONE"|"SUPPRESS"|string;
+  export type FilterAction = "NONE"|"SUPPRESS";
   export type FilterArn = string;
   export type FilterArnList = FilterArn[];
   export interface FilterCriteria {
@@ -1424,9 +1424,9 @@ declare namespace Inspector2 {
   export type FindingArn = string;
   export type FindingDescription = string;
   export type FindingList = Finding[];
-  export type FindingStatus = "ACTIVE"|"SUPPRESSED"|"CLOSED"|string;
+  export type FindingStatus = "ACTIVE"|"SUPPRESSED"|"CLOSED";
   export type FindingTitle = string;
-  export type FindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY"|string;
+  export type FindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY";
   export interface FindingTypeAggregation {
     /**
      * The finding type to aggregate.
@@ -1455,8 +1455,8 @@ declare namespace Inspector2 {
      */
     severityCounts?: SeverityCounts;
   }
-  export type FindingTypeSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
-  export type FixAvailable = "YES"|"NO"|"PARTIAL"|string;
+  export type FindingTypeSortBy = "CRITICAL"|"HIGH"|"ALL";
+  export type FixAvailable = "YES"|"NO"|"PARTIAL";
   export interface FreeTrialAccountInfo {
     /**
      * The account associated with the Amazon Inspector free trial information.
@@ -1500,11 +1500,11 @@ declare namespace Inspector2 {
      */
     message: String;
   }
-  export type FreeTrialInfoErrorCode = "ACCESS_DENIED"|"INTERNAL_ERROR"|string;
+  export type FreeTrialInfoErrorCode = "ACCESS_DENIED"|"INTERNAL_ERROR";
   export type FreeTrialInfoErrorList = FreeTrialInfoError[];
   export type FreeTrialInfoList = FreeTrialInfo[];
-  export type FreeTrialStatus = "ACTIVE"|"INACTIVE"|string;
-  export type FreeTrialType = "EC2"|"ECR"|string;
+  export type FreeTrialStatus = "ACTIVE"|"INACTIVE";
+  export type FreeTrialType = "EC2"|"ECR";
   export interface GetConfigurationRequest {
   }
   export interface GetConfigurationResponse {
@@ -1565,7 +1565,7 @@ declare namespace Inspector2 {
      */
     member?: Member;
   }
-  export type GroupKey = "SCAN_STATUS_CODE"|"SCAN_STATUS_REASON"|"ACCOUNT_ID"|"RESOURCE_TYPE"|"ECR_REPOSITORY_NAME"|string;
+  export type GroupKey = "SCAN_STATUS_CODE"|"SCAN_STATUS_REASON"|"ACCOUNT_ID"|"RESOURCE_TYPE"|"ECR_REPOSITORY_NAME";
   export type ImageHash = string;
   export interface ImageLayerAggregation {
     /**
@@ -1611,7 +1611,7 @@ declare namespace Inspector2 {
      */
     severityCounts?: SeverityCounts;
   }
-  export type ImageLayerSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type ImageLayerSortBy = "CRITICAL"|"HIGH"|"ALL";
   export type ImageTagList = NonEmptyString[];
   export interface InspectorScoreDetails {
     /**
@@ -1881,7 +1881,7 @@ declare namespace Inspector2 {
     totals?: UsageTotalList;
   }
   export type Long = number;
-  export type MapComparison = "EQUALS"|string;
+  export type MapComparison = "EQUALS";
   export interface MapFilter {
     /**
      * The operator to use when comparing values in the filter.
@@ -1926,7 +1926,7 @@ declare namespace Inspector2 {
      */
     steps?: StepList;
   }
-  export type NetworkProtocol = "TCP"|"UDP"|string;
+  export type NetworkProtocol = "TCP"|"UDP";
   export interface NetworkReachabilityDetails {
     /**
      * An object that contains details about a network path associated with a finding.
@@ -1955,7 +1955,7 @@ declare namespace Inspector2 {
     upperInclusive?: Double;
   }
   export type NumberFilterList = NumberFilter[];
-  export type Operation = "ENABLE_SCANNING"|"DISABLE_SCANNING"|"ENABLE_REPOSITORY"|"DISABLE_REPOSITORY"|string;
+  export type Operation = "ENABLE_SCANNING"|"DISABLE_SCANNING"|"ENABLE_REPOSITORY"|"DISABLE_REPOSITORY";
   export type OwnerId = string;
   export interface PackageAggregation {
     /**
@@ -2014,10 +2014,10 @@ declare namespace Inspector2 {
     version?: StringFilter;
   }
   export type PackageFilterList = PackageFilter[];
-  export type PackageManager = "BUNDLER"|"CARGO"|"COMPOSER"|"NPM"|"NUGET"|"PIPENV"|"POETRY"|"YARN"|"GOBINARY"|"GOMOD"|"JAR"|"OS"|"PIP"|"PYTHONPKG"|"NODEPKG"|"POM"|string;
+  export type PackageManager = "BUNDLER"|"CARGO"|"COMPOSER"|"NPM"|"NUGET"|"PIPENV"|"POETRY"|"YARN"|"GOBINARY"|"GOMOD"|"JAR"|"OS"|"PIP"|"PYTHONPKG"|"NODEPKG"|"POM";
   export type PackageName = string;
   export type PackageRelease = string;
-  export type PackageSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type PackageSortBy = "CRITICAL"|"HIGH"|"ALL";
   export type PackageVersion = string;
   export interface PackageVulnerabilityDetails {
     /**
@@ -2105,16 +2105,16 @@ declare namespace Inspector2 {
      */
     text?: NonEmptyString;
   }
-  export type RelationshipStatus = "CREATED"|"INVITED"|"DISABLED"|"ENABLED"|"REMOVED"|"RESIGNED"|"DELETED"|"EMAIL_VERIFICATION_IN_PROGRESS"|"EMAIL_VERIFICATION_FAILED"|"REGION_DISABLED"|"ACCOUNT_SUSPENDED"|"CANNOT_CREATE_DETECTOR_IN_ORG_MASTER"|string;
+  export type RelationshipStatus = "CREATED"|"INVITED"|"DISABLED"|"ENABLED"|"REMOVED"|"RESIGNED"|"DELETED"|"EMAIL_VERIFICATION_IN_PROGRESS"|"EMAIL_VERIFICATION_FAILED"|"REGION_DISABLED"|"ACCOUNT_SUSPENDED"|"CANNOT_CREATE_DETECTOR_IN_ORG_MASTER";
   export interface Remediation {
     /**
      * An object that contains information about the recommended course of action to remediate the finding.
      */
     recommendation?: Recommendation;
   }
-  export type ReportFormat = "CSV"|"JSON"|string;
+  export type ReportFormat = "CSV"|"JSON";
   export type ReportId = string;
-  export type ReportingErrorCode = "INTERNAL_ERROR"|"INVALID_PERMISSIONS"|"NO_FINDINGS_FOUND"|"BUCKET_NOT_FOUND"|"INCOMPATIBLE_BUCKET_REGION"|"MALFORMED_KMS_KEY"|string;
+  export type ReportingErrorCode = "INTERNAL_ERROR"|"INVALID_PERMISSIONS"|"NO_FINDINGS_FOUND"|"BUCKET_NOT_FOUND"|"INCOMPATIBLE_BUCKET_REGION"|"MALFORMED_KMS_KEY";
   export interface RepositoryAggregation {
     /**
      * The names of repositories to aggregate findings on.
@@ -2147,7 +2147,7 @@ declare namespace Inspector2 {
      */
     severityCounts?: SeverityCounts;
   }
-  export type RepositorySortBy = "CRITICAL"|"HIGH"|"ALL"|"AFFECTED_IMAGES"|string;
+  export type RepositorySortBy = "CRITICAL"|"HIGH"|"ALL"|"AFFECTED_IMAGES";
   export interface Resource {
     /**
      * An object that contains details about the resource involved in a finding.
@@ -2200,7 +2200,7 @@ declare namespace Inspector2 {
      */
     ecrRepository?: EcrRepositoryMetadata;
   }
-  export type ResourceScanType = "EC2"|"ECR"|string;
+  export type ResourceScanType = "EC2"|"ECR";
   export interface ResourceState {
     /**
      * An object detailing the state of Amazon Inspector scanning for Amazon EC2 resources.
@@ -2221,7 +2221,7 @@ declare namespace Inspector2 {
      */
     ecr: Status;
   }
-  export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|string;
+  export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY";
   export interface ScanStatus {
     /**
      * The reason for the scan.
@@ -2232,11 +2232,11 @@ declare namespace Inspector2 {
      */
     statusCode: ScanStatusCode;
   }
-  export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
-  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|string;
-  export type ScanType = "NETWORK"|"PACKAGE"|string;
-  export type Service = "EC2"|"ECR"|string;
-  export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNTRIAGED"|string;
+  export type ScanStatusCode = "ACTIVE"|"INACTIVE";
+  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY";
+  export type ScanType = "NETWORK"|"PACKAGE";
+  export type Service = "EC2"|"ECR";
+  export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNTRIAGED";
   export interface SeverityCounts {
     /**
      * The total count of findings from all severities.
@@ -2265,8 +2265,8 @@ declare namespace Inspector2 {
      */
     sortOrder: SortOrder;
   }
-  export type SortField = "AWS_ACCOUNT_ID"|"FINDING_TYPE"|"SEVERITY"|"FIRST_OBSERVED_AT"|"LAST_OBSERVED_AT"|"FINDING_STATUS"|"RESOURCE_TYPE"|"ECR_IMAGE_PUSHED_AT"|"ECR_IMAGE_REPOSITORY_NAME"|"ECR_IMAGE_REGISTRY"|"NETWORK_PROTOCOL"|"COMPONENT_TYPE"|"VULNERABILITY_ID"|"VULNERABILITY_SOURCE"|"INSPECTOR_SCORE"|"VENDOR_SEVERITY"|string;
-  export type SortOrder = "ASC"|"DESC"|string;
+  export type SortField = "AWS_ACCOUNT_ID"|"FINDING_TYPE"|"SEVERITY"|"FIRST_OBSERVED_AT"|"LAST_OBSERVED_AT"|"FINDING_STATUS"|"RESOURCE_TYPE"|"ECR_IMAGE_PUSHED_AT"|"ECR_IMAGE_REPOSITORY_NAME"|"ECR_IMAGE_REGISTRY"|"NETWORK_PROTOCOL"|"COMPONENT_TYPE"|"VULNERABILITY_ID"|"VULNERABILITY_SOURCE"|"INSPECTOR_SCORE"|"VENDOR_SEVERITY";
+  export type SortOrder = "ASC"|"DESC";
   export type SourceLayerHash = string;
   export interface State {
     /**
@@ -2282,7 +2282,7 @@ declare namespace Inspector2 {
      */
     status: Status;
   }
-  export type Status = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"SUSPENDING"|"SUSPENDED"|string;
+  export type Status = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"SUSPENDING"|"SUSPENDED";
   export interface Step {
     /**
      * The component ID.
@@ -2295,7 +2295,7 @@ declare namespace Inspector2 {
   }
   export type StepList = Step[];
   export type String = string;
-  export type StringComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|string;
+  export type StringComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS";
   export interface StringFilter {
     /**
      * The operator to use when comparing values in the filter
@@ -2366,7 +2366,7 @@ declare namespace Inspector2 {
      */
     vulnerabilityId?: String;
   }
-  export type TitleSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type TitleSortBy = "CRITICAL"|"HIGH"|"ALL";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the resource to remove tags from.
@@ -2463,7 +2463,7 @@ declare namespace Inspector2 {
     usage?: UsageList;
   }
   export type UsageTotalList = UsageTotal[];
-  export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|string;
+  export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN";
   export type UsageValue = number;
   export type VulnerabilityId = string;
   export type VulnerabilityIdList = VulnerabilityId[];

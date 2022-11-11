@@ -334,7 +334,7 @@ declare namespace Billingconductor {
      */
     Reason?: AssociateResourceErrorReason;
   }
-  export type AssociateResourceErrorReason = "INVALID_ARN"|"SERVICE_LIMIT_EXCEEDED"|"ILLEGAL_CUSTOMLINEITEM"|"INTERNAL_SERVER_EXCEPTION"|"INVALID_BILLING_PERIOD_RANGE"|string;
+  export type AssociateResourceErrorReason = "INVALID_ARN"|"SERVICE_LIMIT_EXCEEDED"|"ILLEGAL_CUSTOMLINEITEM"|"INTERNAL_SERVER_EXCEPTION"|"INVALID_BILLING_PERIOD_RANGE";
   export interface AssociateResourceResponseElement {
     /**
      *  The resource ARN that was associated to the custom line item. 
@@ -461,7 +461,7 @@ declare namespace Billingconductor {
     StatusReason?: BillingGroupStatusReason;
   }
   export type BillingGroupName = string;
-  export type BillingGroupStatus = "ACTIVE"|"PRIMARY_ACCOUNT_MISSING"|string;
+  export type BillingGroupStatus = "ACTIVE"|"PRIMARY_ACCOUNT_MISSING";
   export type BillingGroupStatusReason = string;
   export type BillingPeriod = string;
   export type ClientToken = string;
@@ -612,7 +612,7 @@ declare namespace Billingconductor {
     Arn?: PricingRuleArn;
   }
   export type Currency = string;
-  export type CurrencyCode = "USD"|"CNY"|string;
+  export type CurrencyCode = "USD"|"CNY";
   export type CustomLineItemArn = string;
   export type CustomLineItemArns = CustomLineItemArn[];
   export type CustomLineItemAssociationElement = string;
@@ -708,8 +708,8 @@ declare namespace Billingconductor {
   }
   export type CustomLineItemPercentageChargeValue = number;
   export type CustomLineItemProductCode = string;
-  export type CustomLineItemRelationship = "PARENT"|"CHILD"|string;
-  export type CustomLineItemType = "CREDIT"|"FEE"|string;
+  export type CustomLineItemRelationship = "PARENT"|"CHILD";
+  export type CustomLineItemType = "CREDIT"|"FEE";
   export type CustomLineItemVersionList = CustomLineItemVersionListElement[];
   export interface CustomLineItemVersionListElement {
     /**
@@ -1374,8 +1374,8 @@ declare namespace Billingconductor {
     LastModifiedTime?: Instant;
   }
   export type PricingRuleName = string;
-  export type PricingRuleScope = "GLOBAL"|"SERVICE"|string;
-  export type PricingRuleType = "MARKUP"|"DISCOUNT"|string;
+  export type PricingRuleScope = "GLOBAL"|"SERVICE";
+  export type PricingRuleType = "MARKUP"|"DISCOUNT";
   export type ProformaCost = string;
   export type Service = string;
   export type String = string;

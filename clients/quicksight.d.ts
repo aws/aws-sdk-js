@@ -1112,8 +1112,8 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type AnalysisErrorList = AnalysisError[];
-  export type AnalysisErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
-  export type AnalysisFilterAttribute = "QUICKSIGHT_USER"|string;
+  export type AnalysisErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING";
+  export type AnalysisFilterAttribute = "QUICKSIGHT_USER";
   export type AnalysisName = string;
   export interface AnalysisSearchFilter {
     /**
@@ -1197,7 +1197,7 @@ declare namespace QuickSight {
   }
   export type Arn = string;
   export type ArnList = Arn[];
-  export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED"|string;
+  export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED";
   export interface AthenaParameters {
     /**
      * The workgroup that Amazon Athena uses.
@@ -1232,7 +1232,7 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
-  export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|string;
+  export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY";
   export type AwsAccountId = string;
   export type AwsAndAccountId = string;
   export interface AwsIotAnalyticsParameters {
@@ -1313,7 +1313,7 @@ declare namespace QuickSight {
   export type Catalog = string;
   export type ClusterId = string;
   export type ColorList = HexColor[];
-  export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string;
+  export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME";
   export interface ColumnDescription {
     /**
      * The text of a description for a column.
@@ -1388,7 +1388,7 @@ declare namespace QuickSight {
     ColumnDescription?: ColumnDescription;
   }
   export type ColumnTagList = ColumnTag[];
-  export type ColumnTagName = "COLUMN_GEOGRAPHIC_ROLE"|"COLUMN_DESCRIPTION"|string;
+  export type ColumnTagName = "COLUMN_GEOGRAPHIC_ROLE"|"COLUMN_DESCRIPTION";
   export type ColumnTagNames = ColumnTagName[];
   export type CopySourceArn = string;
   export interface CreateAccountCustomizationRequest {
@@ -2317,7 +2317,7 @@ declare namespace QuickSight {
      */
     LastUpdatedTime?: Timestamp;
   }
-  export type DashboardBehavior = "ENABLED"|"DISABLED"|string;
+  export type DashboardBehavior = "ENABLED"|"DISABLED";
   export interface DashboardError {
     /**
      * Type.
@@ -2329,8 +2329,8 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type DashboardErrorList = DashboardError[];
-  export type DashboardErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
-  export type DashboardFilterAttribute = "QUICKSIGHT_USER"|string;
+  export type DashboardErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING";
+  export type DashboardFilterAttribute = "QUICKSIGHT_USER";
   export type DashboardName = string;
   export interface DashboardPublishOptions {
     /**
@@ -2408,7 +2408,7 @@ declare namespace QuickSight {
     LastPublishedTime?: Timestamp;
   }
   export type DashboardSummaryList = DashboardSummary[];
-  export type DashboardUIState = "EXPANDED"|"COLLAPSED"|string;
+  export type DashboardUIState = "EXPANDED"|"COLLAPSED";
   export interface DashboardVersion {
     /**
      * The time that this dashboard version was created.
@@ -2588,7 +2588,7 @@ declare namespace QuickSight {
     ColumnGroupSchemaList?: ColumnGroupSchemaList;
   }
   export type DataSetConfigurationList = DataSetConfiguration[];
-  export type DataSetImportMode = "SPICE"|"DIRECT_QUERY"|string;
+  export type DataSetImportMode = "SPICE"|"DIRECT_QUERY";
   export type DataSetName = string;
   export interface DataSetReference {
     /**
@@ -2734,7 +2734,7 @@ declare namespace QuickSight {
      */
     Message?: String;
   }
-  export type DataSourceErrorInfoType = "ACCESS_DENIED"|"COPY_SOURCE_NOT_FOUND"|"TIMEOUT"|"ENGINE_VERSION_NOT_SUPPORTED"|"UNKNOWN_HOST"|"GENERIC_SQL_FAILURE"|"CONFLICT"|"UNKNOWN"|string;
+  export type DataSourceErrorInfoType = "ACCESS_DENIED"|"COPY_SOURCE_NOT_FOUND"|"TIMEOUT"|"ENGINE_VERSION_NOT_SUPPORTED"|"UNKNOWN_HOST"|"GENERIC_SQL_FAILURE"|"CONFLICT"|"UNKNOWN";
   export type DataSourceList = DataSource[];
   export interface DataSourceParameters {
     /**
@@ -2827,7 +2827,7 @@ declare namespace QuickSight {
     ExasolParameters?: ExasolParameters;
   }
   export type DataSourceParametersList = DataSourceParameters[];
-  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL"|string;
+  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL";
   export type Database = string;
   export interface DateTimeParameter {
     /**
@@ -4124,8 +4124,8 @@ declare namespace QuickSight {
   export type Domain = string;
   export type Double = number;
   export type DoubleList = Double[];
-  export type Edition = "STANDARD"|"ENTERPRISE"|"ENTERPRISE_AND_Q"|string;
-  export type EmbeddingIdentityType = "IAM"|"QUICKSIGHT"|"ANONYMOUS"|string;
+  export type Edition = "STANDARD"|"ENTERPRISE"|"ENTERPRISE_AND_Q";
+  export type EmbeddingIdentityType = "IAM"|"QUICKSIGHT"|"ANONYMOUS";
   export type EmbeddingUrl = string;
   export type EntryPath = string;
   export type EntryPoint = string;
@@ -4169,14 +4169,14 @@ declare namespace QuickSight {
   export type FieldFolderDescription = string;
   export type FieldFolderMap = {[key: string]: FieldFolder};
   export type FieldFolderPath = string;
-  export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string;
+  export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON";
   export interface FilterOperation {
     /**
      * An expression that must evaluate to a Boolean value. Rows for which the expression evaluates to true are kept in the dataset.
      */
     ConditionExpression: Expression;
   }
-  export type FilterOperator = "StringEquals"|string;
+  export type FilterOperator = "StringEquals";
   export interface Folder {
     /**
      * The ID of the folder.
@@ -4208,7 +4208,7 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type FolderColumnList = String[];
-  export type FolderFilterAttribute = "PARENT_FOLDER_ARN"|string;
+  export type FolderFilterAttribute = "PARENT_FOLDER_ARN";
   export interface FolderMember {
     /**
      * The ID of an asset in the folder.
@@ -4263,7 +4263,7 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type FolderSummaryList = FolderSummary[];
-  export type FolderType = "SHARED"|string;
+  export type FolderType = "SHARED";
   export interface GenerateEmbedUrlForAnonymousUserRequest {
     /**
      * The ID for the Amazon Web Services account that contains the dashboard that you're embedding.
@@ -4358,8 +4358,8 @@ declare namespace QuickSight {
      */
     Columns: ColumnList;
   }
-  export type GeoSpatialCountryCode = "US"|string;
-  export type GeoSpatialDataRole = "COUNTRY"|"STATE"|"COUNTY"|"CITY"|"POSTCODE"|"LONGITUDE"|"LATITUDE"|string;
+  export type GeoSpatialCountryCode = "US";
+  export type GeoSpatialDataRole = "COUNTRY"|"STATE"|"COUNTY"|"CITY"|"POSTCODE"|"LONGITUDE"|"LATITUDE";
   export interface GetDashboardEmbedUrlRequest {
     /**
      * The ID for the Amazon Web Services account that contains the dashboard that you're embedding.
@@ -4467,8 +4467,8 @@ declare namespace QuickSight {
     PrincipalId?: String;
   }
   export type GroupDescription = string;
-  export type GroupFilterAttribute = "GROUP_NAME"|string;
-  export type GroupFilterOperator = "StartsWith"|string;
+  export type GroupFilterAttribute = "GROUP_NAME";
+  export type GroupFilterOperator = "StartsWith";
   export type GroupList = Group[];
   export interface GroupMember {
     /**
@@ -4548,8 +4548,8 @@ declare namespace QuickSight {
   export type IdentityMap = {[key: string]: IdentityNameList};
   export type IdentityName = string;
   export type IdentityNameList = IdentityName[];
-  export type IdentityStore = "QUICKSIGHT"|string;
-  export type IdentityType = "IAM"|"QUICKSIGHT"|string;
+  export type IdentityStore = "QUICKSIGHT";
+  export type IdentityType = "IAM"|"QUICKSIGHT";
   export interface Ingestion {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -4590,13 +4590,13 @@ declare namespace QuickSight {
      */
     RequestType?: IngestionRequestType;
   }
-  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED"|string;
+  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED";
   export type IngestionId = string;
   export type IngestionMaxResults = number;
-  export type IngestionRequestSource = "MANUAL"|"SCHEDULED"|string;
-  export type IngestionRequestType = "INITIAL_INGESTION"|"EDIT"|"INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
-  export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
-  export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
+  export type IngestionRequestSource = "MANUAL"|"SCHEDULED";
+  export type IngestionRequestType = "INITIAL_INGESTION"|"EDIT"|"INCREMENTAL_REFRESH"|"FULL_REFRESH";
+  export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED";
+  export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH";
   export type Ingestions = Ingestion[];
   export interface InputColumn {
     /**
@@ -4608,7 +4608,7 @@ declare namespace QuickSight {
      */
     Type: InputColumnDataType;
   }
-  export type InputColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|"BIT"|"BOOLEAN"|"JSON"|string;
+  export type InputColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|"BIT"|"BOOLEAN"|"JSON";
   export type InputColumnList = InputColumn[];
   export type InstanceId = string;
   export interface IntegerParameter {
@@ -4662,7 +4662,7 @@ declare namespace QuickSight {
      */
     UniqueKey?: Boolean;
   }
-  export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
+  export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT";
   export interface LinkSharingConfiguration {
     /**
      * A structure that contains the permissions of a shareable link.
@@ -5507,7 +5507,7 @@ declare namespace QuickSight {
      */
     MemberArn?: Arn;
   }
-  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET"|string;
+  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET";
   export interface MySqlParameters {
     /**
      * Host.
@@ -5533,7 +5533,7 @@ declare namespace QuickSight {
      */
     Message?: String;
   }
-  export type NamespaceErrorType = "PERMISSION_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
+  export type NamespaceErrorType = "PERMISSION_DENIED"|"INTERNAL_SERVICE_ERROR";
   export interface NamespaceInfoV2 {
     /**
      * The name of the error.
@@ -5560,7 +5560,7 @@ declare namespace QuickSight {
      */
     NamespaceError?: NamespaceError;
   }
-  export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE"|string;
+  export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE";
   export type Namespaces = NamespaceInfoV2[];
   export type NonEmptyString = string;
   export type NullableBoolean = boolean;
@@ -5868,7 +5868,7 @@ declare namespace QuickSight {
     Actions: ActionList;
   }
   export type ResourcePermissionList = ResourcePermission[];
-  export type ResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETED"|string;
+  export type ResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETED";
   export interface RestoreAnalysisRequest {
     /**
      * The ID of the Amazon Web Services account that contains the analysis.
@@ -5936,8 +5936,8 @@ declare namespace QuickSight {
      */
     Status?: Status;
   }
-  export type RowLevelPermissionFormatVersion = "VERSION_1"|"VERSION_2"|string;
-  export type RowLevelPermissionPolicy = "GRANT_ACCESS"|"DENY_ACCESS"|string;
+  export type RowLevelPermissionFormatVersion = "VERSION_1"|"VERSION_2";
+  export type RowLevelPermissionPolicy = "GRANT_ACCESS"|"DENY_ACCESS";
   export interface RowLevelPermissionTagConfiguration {
     /**
      * The status of row-level security tags. If enabled, the status is ENABLED. If disabled, the status is DISABLED.
@@ -6250,7 +6250,7 @@ declare namespace QuickSight {
      */
     DisableSsl?: Boolean;
   }
-  export type Status = "ENABLED"|"DISABLED"|string;
+  export type Status = "ENABLED"|"DISABLED";
   export type StatusCode = number;
   export type String = string;
   export type StringList = String[];
@@ -6361,7 +6361,7 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type TemplateErrorList = TemplateError[];
-  export type TemplateErrorType = "SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"ACCESS_DENIED"|string;
+  export type TemplateErrorType = "SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"ACCESS_DENIED";
   export type TemplateName = string;
   export interface TemplateSourceAnalysis {
     /**
@@ -6491,7 +6491,7 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
-  export type TextQualifier = "DOUBLE_QUOTE"|"SINGLE_QUOTE"|string;
+  export type TextQualifier = "DOUBLE_QUOTE"|"SINGLE_QUOTE";
   export interface Theme {
     /**
      * The Amazon Resource Name (ARN) of the theme.
@@ -6559,7 +6559,7 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type ThemeErrorList = ThemeError[];
-  export type ThemeErrorType = "INTERNAL_FAILURE"|string;
+  export type ThemeErrorType = "INTERNAL_FAILURE";
   export type ThemeName = string;
   export interface ThemeSummary {
     /**
@@ -6588,7 +6588,7 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type ThemeSummaryList = ThemeSummary[];
-  export type ThemeType = "QUICKSIGHT"|"CUSTOM"|"ALL"|string;
+  export type ThemeType = "QUICKSIGHT"|"CUSTOM"|"ALL";
   export interface ThemeVersion {
     /**
      * The version number of the theme.
@@ -7872,7 +7872,7 @@ declare namespace QuickSight {
   }
   export type UserList = User[];
   export type UserName = string;
-  export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|string;
+  export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER";
   export type Username = string;
   export type VersionDescription = string;
   export type VersionNumber = number;

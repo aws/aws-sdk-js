@@ -469,7 +469,7 @@ declare class RoboMaker extends Service {
   updateWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.UpdateWorldTemplateResponse) => void): Request<RoboMaker.Types.UpdateWorldTemplateResponse, AWSError>;
 }
 declare namespace RoboMaker {
-  export type Architecture = "X86_64"|"ARM64"|"ARMHF"|string;
+  export type Architecture = "X86_64"|"ARM64"|"ARMHF";
   export type Arn = string;
   export type Arns = Arn[];
   export interface BatchDeleteWorldsRequest {
@@ -584,7 +584,7 @@ declare namespace RoboMaker {
      */
     gpuUnitLimit?: GPUUnit;
   }
-  export type ComputeType = "CPU"|"GPU_AND_CPU"|string;
+  export type ComputeType = "CPU"|"GPU_AND_CPU";
   export interface CreateDeploymentJobRequest {
     /**
      * The requested deployment configuration.
@@ -1291,7 +1291,7 @@ declare namespace RoboMaker {
   }
   export type DataSourceConfigs = DataSourceConfig[];
   export type DataSourceNames = Name[];
-  export type DataSourceType = "Prefix"|"Archive"|"File"|string;
+  export type DataSourceType = "Prefix"|"Archive"|"File";
   export type DataSources = DataSource[];
   export interface DeleteFleetRequest {
     /**
@@ -1408,7 +1408,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
   }
-  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"InvalidGreengrassGroup"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"LambdaDeleted"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"BadLambdaAssociated"|"InternalServerError"|"RobotApplicationDoesNotExist"|"DeploymentFleetDoesNotExist"|"FleetDeploymentTimeout"|string;
+  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"InvalidGreengrassGroup"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"LambdaDeleted"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"BadLambdaAssociated"|"InternalServerError"|"RobotApplicationDoesNotExist"|"DeploymentFleetDoesNotExist"|"FleetDeploymentTimeout";
   export type DeploymentJobs = DeploymentJob[];
   export interface DeploymentLaunchConfig {
     /**
@@ -1432,7 +1432,7 @@ declare namespace RoboMaker {
      */
     environmentVariables?: EnvironmentVariableMap;
   }
-  export type DeploymentStatus = "Pending"|"Preparing"|"InProgress"|"Failed"|"Succeeded"|"Canceled"|string;
+  export type DeploymentStatus = "Pending"|"Preparing"|"InProgress"|"Failed"|"Succeeded"|"Canceled";
   export type DeploymentTimeout = number;
   export type DeploymentVersion = string;
   export interface DeregisterRobotRequest {
@@ -2025,7 +2025,7 @@ declare namespace RoboMaker {
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
   export type EnvironmentVariableValue = string;
-  export type ExitBehavior = "FAIL"|"RESTART"|string;
+  export type ExitBehavior = "FAIL"|"RESTART";
   export type FailedAt = Date;
   export interface FailedCreateSimulationJobRequest {
     /**
@@ -2046,7 +2046,7 @@ declare namespace RoboMaker {
     failedAt?: FailedAt;
   }
   export type FailedCreateSimulationJobRequests = FailedCreateSimulationJobRequest[];
-  export type FailureBehavior = "Fail"|"Continue"|string;
+  export type FailureBehavior = "Fail"|"Continue";
   export interface FailureSummary {
     /**
      * The total number of failures.
@@ -2554,7 +2554,7 @@ declare namespace RoboMaker {
      */
     version?: RenderingEngineVersionType;
   }
-  export type RenderingEngineType = "OGRE"|string;
+  export type RenderingEngineType = "OGRE";
   export type RenderingEngineVersionType = string;
   export type RepositoryUrl = string;
   export interface RestartSimulationJobRequest {
@@ -2689,7 +2689,7 @@ declare namespace RoboMaker {
      */
     failureCode?: DeploymentJobErrorCode;
   }
-  export type RobotDeploymentStep = "Validating"|"DownloadingExtracting"|"ExecutingDownloadCondition"|"ExecutingPreLaunch"|"Launching"|"ExecutingPostLaunch"|"Finished"|string;
+  export type RobotDeploymentStep = "Validating"|"DownloadingExtracting"|"ExecutingDownloadCondition"|"ExecutingPreLaunch"|"Launching"|"ExecutingPostLaunch"|"Finished";
   export type RobotDeploymentSummary = RobotDeployment[];
   export interface RobotSoftwareSuite {
     /**
@@ -2701,9 +2701,9 @@ declare namespace RoboMaker {
      */
     version?: RobotSoftwareSuiteVersionType;
   }
-  export type RobotSoftwareSuiteType = "ROS"|"ROS2"|"General"|string;
-  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy"|string;
-  export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
+  export type RobotSoftwareSuiteType = "ROS"|"ROS2"|"General";
+  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy";
+  export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse";
   export type Robots = Robot[];
   export type S3Bucket = string;
   export type S3Etag = string;
@@ -2886,8 +2886,8 @@ declare namespace RoboMaker {
      */
     compute?: ComputeResponse;
   }
-  export type SimulationJobBatchErrorCode = "InternalServiceError"|string;
-  export type SimulationJobBatchStatus = "Pending"|"InProgress"|"Failed"|"Completed"|"Canceled"|"Canceling"|"Completing"|"TimingOut"|"TimedOut"|string;
+  export type SimulationJobBatchErrorCode = "InternalServiceError";
+  export type SimulationJobBatchStatus = "Pending"|"InProgress"|"Failed"|"Completed"|"Canceled"|"Canceling"|"Completing"|"TimingOut"|"TimedOut";
   export type SimulationJobBatchSummaries = SimulationJobBatchSummary[];
   export interface SimulationJobBatchSummary {
     /**
@@ -2919,7 +2919,7 @@ declare namespace RoboMaker {
      */
     createdRequestCount?: Integer;
   }
-  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"RobotApplicationHealthCheckFailure"|"SimulationApplicationHealthCheckFailure"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"ThrottlingError"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|"UploadContentMismatchError"|string;
+  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"RobotApplicationHealthCheckFailure"|"SimulationApplicationHealthCheckFailure"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"ThrottlingError"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|"UploadContentMismatchError";
   export interface SimulationJobRequest {
     outputLocation?: OutputLocation;
     loggingConfig?: LoggingConfig;
@@ -2961,7 +2961,7 @@ declare namespace RoboMaker {
      */
     tags?: TagMap;
   }
-  export type SimulationJobStatus = "Pending"|"Preparing"|"Running"|"Restarting"|"Completed"|"Failed"|"RunningFailed"|"Terminating"|"Terminated"|"Canceled"|string;
+  export type SimulationJobStatus = "Pending"|"Preparing"|"Running"|"Restarting"|"Completed"|"Failed"|"RunningFailed"|"Terminating"|"Terminated"|"Canceled";
   export type SimulationJobSummaries = SimulationJobSummary[];
   export interface SimulationJobSummary {
     /**
@@ -3008,7 +3008,7 @@ declare namespace RoboMaker {
      */
     version?: SimulationSoftwareSuiteVersionType;
   }
-  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|"SimulationRuntime"|string;
+  export type SimulationSoftwareSuiteType = "Gazebo"|"RosbagPlay"|"SimulationRuntime";
   export type SimulationSoftwareSuiteVersionType = string;
   export type SimulationTimeMillis = number;
   export type SimulationUnit = number;
@@ -3405,7 +3405,7 @@ declare namespace RoboMaker {
      */
     lastUpdatedAt?: LastUpdatedAt;
   }
-  export type UploadBehavior = "UPLOAD_ON_TERMINATE"|"UPLOAD_ROLLING_AUTO_REMOVE"|string;
+  export type UploadBehavior = "UPLOAD_ON_TERMINATE"|"UPLOAD_ROLLING_AUTO_REMOVE";
   export interface UploadConfiguration {
     /**
      * A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the simulation output location to determine the final path.   For example, if your simulation output location is s3://my-bucket and your upload configuration name is robot-test, your files will be uploaded to s3://my-bucket/&lt;simid&gt;/&lt;runid&gt;/robot-test. 
@@ -3472,8 +3472,8 @@ declare namespace RoboMaker {
      */
     interiorCountPerFloorplan?: InteriorCountPerFloorplan;
   }
-  export type WorldExportJobErrorCode = "InternalServiceError"|"LimitExceeded"|"ResourceNotFound"|"RequestThrottled"|"InvalidInput"|"AccessDenied"|string;
-  export type WorldExportJobStatus = "Pending"|"Running"|"Completed"|"Failed"|"Canceling"|"Canceled"|string;
+  export type WorldExportJobErrorCode = "InternalServiceError"|"LimitExceeded"|"ResourceNotFound"|"RequestThrottled"|"InvalidInput"|"AccessDenied";
+  export type WorldExportJobStatus = "Pending"|"Running"|"Completed"|"Failed"|"Canceling"|"Canceled";
   export type WorldExportJobSummaries = WorldExportJobSummary[];
   export interface WorldExportJobSummary {
     /**
@@ -3509,8 +3509,8 @@ declare namespace RoboMaker {
     failureCount?: Integer;
   }
   export type WorldFailures = WorldFailure[];
-  export type WorldGenerationJobErrorCode = "InternalServiceError"|"LimitExceeded"|"ResourceNotFound"|"RequestThrottled"|"InvalidInput"|"AllWorldGenerationFailed"|string;
-  export type WorldGenerationJobStatus = "Pending"|"Running"|"Completed"|"Failed"|"PartialFailed"|"Canceling"|"Canceled"|string;
+  export type WorldGenerationJobErrorCode = "InternalServiceError"|"LimitExceeded"|"ResourceNotFound"|"RequestThrottled"|"InvalidInput"|"AllWorldGenerationFailed";
+  export type WorldGenerationJobStatus = "Pending"|"Running"|"Completed"|"Failed"|"PartialFailed"|"Canceling"|"Canceled";
   export type WorldGenerationJobSummaries = WorldGenerationJobSummary[];
   export interface WorldGenerationJobSummary {
     /**

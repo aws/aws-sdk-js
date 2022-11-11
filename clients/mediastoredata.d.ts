@@ -165,7 +165,7 @@ declare namespace MediaStoreData {
   }
   export type ItemList = Item[];
   export type ItemName = string;
-  export type ItemType = "OBJECT"|"FOLDER"|string;
+  export type ItemType = "OBJECT"|"FOLDER";
   export interface ListItemsRequest {
     /**
      * The path in the container from which to retrieve items. Format: &lt;folder name&gt;/&lt;folder name&gt;/&lt;file name&gt;
@@ -238,10 +238,10 @@ declare namespace MediaStoreData {
   }
   export type RangePattern = string;
   export type SHA256Hash = string;
-  export type StorageClass = "TEMPORAL"|string;
+  export type StorageClass = "TEMPORAL";
   export type StringPrimitive = string;
   export type TimeStamp = Date;
-  export type UploadAvailability = "STANDARD"|"STREAMING"|string;
+  export type UploadAvailability = "STANDARD"|"STREAMING";
   export type statusCode = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

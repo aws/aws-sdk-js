@@ -618,7 +618,7 @@ declare namespace FraudDetector {
      */
     logOddsMetrics?: ListOfAggregatedLogOddsMetrics;
   }
-  export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED"|string;
+  export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED";
   export interface BatchCreateVariableError {
     /**
      * The name.
@@ -1065,8 +1065,8 @@ declare namespace FraudDetector {
   export interface CreateVariableResult {
   }
   export type CsvIndexToVariableMap = {[key: string]: string};
-  export type DataSource = "EVENT"|"MODEL_SCORE"|"EXTERNAL_MODEL_SCORE"|string;
-  export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|string;
+  export type DataSource = "EVENT"|"MODEL_SCORE"|"EXTERNAL_MODEL_SCORE";
+  export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN";
   export interface DataValidationMetrics {
     /**
      * The file-specific model training data validation messages.
@@ -1319,7 +1319,7 @@ declare namespace FraudDetector {
   }
   export type DetectorList = Detector[];
   export type DetectorVersionMaxResults = number;
-  export type DetectorVersionStatus = "DRAFT"|"ACTIVE"|"INACTIVE"|string;
+  export type DetectorVersionStatus = "DRAFT"|"ACTIVE"|"INACTIVE";
   export interface DetectorVersionSummary {
     /**
      * The detector version ID. 
@@ -1470,7 +1470,7 @@ declare namespace FraudDetector {
     entities?: listOfEntities;
   }
   export type EventAttributeMap = {[key: string]: attributeValue};
-  export type EventIngestion = "ENABLED"|"DISABLED"|string;
+  export type EventIngestion = "ENABLED"|"DISABLED";
   export interface EventPredictionSummary {
     /**
      *  The event ID. 
@@ -2302,7 +2302,7 @@ declare namespace FraudDetector {
      */
     unlabeledEventsTreatment?: UnlabeledEventsTreatment;
   }
-  export type Language = "DETECTORPL"|string;
+  export type Language = "DETECTORPL";
   export interface ListEventPredictionsRequest {
     /**
      *  The event ID. 
@@ -2454,7 +2454,7 @@ declare namespace FraudDetector {
      */
     contentType?: contentType;
   }
-  export type ModelEndpointStatus = "ASSOCIATED"|"DISSOCIATED"|string;
+  export type ModelEndpointStatus = "ASSOCIATED"|"DISSOCIATED";
   export interface ModelInputConfiguration {
     /**
      * The event type name.
@@ -2477,7 +2477,7 @@ declare namespace FraudDetector {
      */
     csvInputTemplate?: modelInputTemplate;
   }
-  export type ModelInputDataFormat = "TEXT_CSV"|"APPLICATION_JSON"|string;
+  export type ModelInputDataFormat = "TEXT_CSV"|"APPLICATION_JSON";
   export interface ModelOutputConfiguration {
     /**
      * The format of the model output configuration.
@@ -2492,7 +2492,7 @@ declare namespace FraudDetector {
      */
     csvIndexToVariableMap?: CsvIndexToVariableMap;
   }
-  export type ModelOutputDataFormat = "TEXT_CSV"|"APPLICATION_JSONLINES"|string;
+  export type ModelOutputDataFormat = "TEXT_CSV"|"APPLICATION_JSONLINES";
   export type ModelPredictionMap = {[key: string]: float};
   export interface ModelScores {
     /**
@@ -2504,8 +2504,8 @@ declare namespace FraudDetector {
      */
     scores?: ModelPredictionMap;
   }
-  export type ModelSource = "SAGEMAKER"|string;
-  export type ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"|"TRANSACTION_FRAUD_INSIGHTS"|"ACCOUNT_TAKEOVER_INSIGHTS"|string;
+  export type ModelSource = "SAGEMAKER";
+  export type ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"|"TRANSACTION_FRAUD_INSIGHTS"|"ACCOUNT_TAKEOVER_INSIGHTS";
   export interface ModelVersion {
     /**
      * The model ID.
@@ -2592,7 +2592,7 @@ declare namespace FraudDetector {
      */
     predictionExplanations?: PredictionExplanations;
   }
-  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|"TRAINING_CANCELLED"|string;
+  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|"TRAINING_CANCELLED";
   export type NameList = string[];
   export type NonEmptyListOfStrings = string[];
   export interface OFIMetricDataPoint {
@@ -2871,7 +2871,7 @@ declare namespace FraudDetector {
     arn?: fraudDetectorArn;
   }
   export type RuleDetailList = RuleDetail[];
-  export type RuleExecutionMode = "ALL_MATCHED"|"FIRST_MATCHED"|string;
+  export type RuleExecutionMode = "ALL_MATCHED"|"FIRST_MATCHED";
   export type RuleList = Rule[];
   export interface RuleResult {
     /**
@@ -2981,7 +2981,7 @@ declare namespace FraudDetector {
     modelVariables: ListOfStrings;
     labelSchema?: LabelSchema;
   }
-  export type TrainingDataSourceEnum = "EXTERNAL_EVENTS"|"INGESTED_EVENTS"|string;
+  export type TrainingDataSourceEnum = "EXTERNAL_EVENTS"|"INGESTED_EVENTS";
   export interface TrainingMetrics {
     /**
      * The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.
@@ -3032,7 +3032,7 @@ declare namespace FraudDetector {
      */
     aggregatedVariablesImportanceMetrics?: AggregatedVariablesImportanceMetrics;
   }
-  export type UnlabeledEventsTreatment = "IGNORE"|"FRAUD"|"LEGIT"|string;
+  export type UnlabeledEventsTreatment = "IGNORE"|"FRAUD"|"LEGIT";
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which to remove the tag.

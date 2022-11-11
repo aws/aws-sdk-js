@@ -623,7 +623,7 @@ declare namespace RUM {
   }
   export type MetricDefinitions = MetricDefinition[];
   export type MetricDefinitionsRequest = MetricDefinitionRequest[];
-  export type MetricDestination = "CloudWatch"|"Evidently"|string;
+  export type MetricDestination = "CloudWatch"|"Evidently";
   export interface MetricDestinationSummary {
     /**
      * Specifies whether the destination is CloudWatch or Evidently.
@@ -724,7 +724,7 @@ declare namespace RUM {
   }
   export type RumEventList = RumEvent[];
   export type SessionSampleRate = number;
-  export type StateEnum = "CREATED"|"DELETING"|"ACTIVE"|string;
+  export type StateEnum = "CREATED"|"DELETING"|"ACTIVE";
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -743,7 +743,7 @@ declare namespace RUM {
   }
   export type TagValue = string;
   export type Telemetries = Telemetry[];
-  export type Telemetry = "errors"|"performance"|"http"|string;
+  export type Telemetry = "errors"|"performance"|"http";
   export interface TimeRange {
     /**
      * The beginning of the time range to retrieve performance events from.

@@ -77,7 +77,7 @@ declare class IoTFleetHub extends Service {
   updateApplication(callback?: (err: AWSError, data: IoTFleetHub.Types.UpdateApplicationResponse) => void): Request<IoTFleetHub.Types.UpdateApplicationResponse, AWSError>;
 }
 declare namespace IoTFleetHub {
-  export type ApplicationState = "CREATING"|"DELETING"|"ACTIVE"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type ApplicationState = "CREATING"|"DELETING"|"ACTIVE"|"CREATE_FAILED"|"DELETE_FAILED";
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**

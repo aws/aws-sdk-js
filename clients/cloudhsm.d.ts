@@ -197,8 +197,8 @@ declare namespace CloudHSM {
   export type ClientLabel = string;
   export type ClientList = ClientArn[];
   export type ClientToken = string;
-  export type ClientVersion = "5.1"|"5.3"|string;
-  export type CloudHsmObjectState = "READY"|"UPDATING"|"DEGRADED"|string;
+  export type ClientVersion = "5.1"|"5.3";
+  export type CloudHsmObjectState = "READY"|"UPDATING"|"DEGRADED";
   export interface CreateHapgRequest {
     /**
      * The label of the new high-availability partition group.
@@ -504,7 +504,7 @@ declare namespace CloudHSM {
   export type HsmArn = string;
   export type HsmList = HsmArn[];
   export type HsmSerialNumber = string;
-  export type HsmStatus = "PENDING"|"RUNNING"|"UPDATING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|"DEGRADED"|string;
+  export type HsmStatus = "PENDING"|"RUNNING"|"UPDATING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|"DEGRADED";
   export type IamRoleArn = string;
   export type IpAddress = string;
   export type Label = string;
@@ -668,7 +668,7 @@ declare namespace CloudHSM {
   export type SshKey = string;
   export type String = string;
   export type SubnetId = string;
-  export type SubscriptionType = "PRODUCTION"|string;
+  export type SubscriptionType = "PRODUCTION";
   export interface Tag {
     /**
      * The key of the tag.

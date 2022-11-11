@@ -450,7 +450,7 @@ declare namespace Athena {
   }
   export type ColumnInfoList = ColumnInfo[];
   export type ColumnList = Column[];
-  export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN"|string;
+  export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN";
   export type CommentString = string;
   export interface CreateDataCatalogInput {
     /**
@@ -577,7 +577,7 @@ declare namespace Athena {
     Type?: DataCatalogType;
   }
   export type DataCatalogSummaryList = DataCatalogSummary[];
-  export type DataCatalogType = "LAMBDA"|"GLUE"|"HIVE"|string;
+  export type DataCatalogType = "LAMBDA"|"GLUE"|"HIVE";
   export interface Database {
     /**
      * The name of the database.
@@ -652,7 +652,7 @@ declare namespace Athena {
      */
     KmsKey?: String;
   }
-  export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS"|string;
+  export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS";
   export interface EngineVersion {
     /**
      * The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
@@ -1164,7 +1164,7 @@ declare namespace Athena {
   export type QueryExecutionId = string;
   export type QueryExecutionIdList = QueryExecutionId[];
   export type QueryExecutionList = QueryExecution[];
-  export type QueryExecutionState = "QUEUED"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|string;
+  export type QueryExecutionState = "QUEUED"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED";
   export interface QueryExecutionStatistics {
     /**
      * The number of milliseconds that the query took to execute.
@@ -1426,7 +1426,7 @@ declare namespace Athena {
     Data?: datumList;
   }
   export type RowList = Row[];
-  export type S3AclOption = "BUCKET_OWNER_FULL_CONTROL"|string;
+  export type S3AclOption = "BUCKET_OWNER_FULL_CONTROL";
   export interface StartQueryExecutionInput {
     /**
      * The SQL query statements to be executed.
@@ -1464,7 +1464,7 @@ declare namespace Athena {
     QueryExecutionId?: QueryExecutionId;
   }
   export type StatementName = string;
-  export type StatementType = "DDL"|"DML"|"UTILITY"|string;
+  export type StatementType = "DDL"|"DML"|"UTILITY";
   export interface StopQueryExecutionInput {
     /**
      * The unique ID of the query execution to stop.
@@ -1753,7 +1753,7 @@ declare namespace Athena {
   }
   export type WorkGroupDescriptionString = string;
   export type WorkGroupName = string;
-  export type WorkGroupState = "ENABLED"|"DISABLED"|string;
+  export type WorkGroupState = "ENABLED"|"DISABLED";
   export interface WorkGroupSummary {
     /**
      * The name of the workgroup.

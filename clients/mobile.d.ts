@@ -249,7 +249,7 @@ declare namespace Mobile {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type Platform = "OSX"|"WINDOWS"|"LINUX"|"OBJC"|"SWIFT"|"ANDROID"|"JAVASCRIPT"|string;
+  export type Platform = "OSX"|"WINDOWS"|"LINUX"|"OBJC"|"SWIFT"|"ANDROID"|"JAVASCRIPT";
   export type Platforms = Platform[];
   export interface ProjectDetails {
     name?: ProjectName;
@@ -273,7 +273,7 @@ declare namespace Mobile {
   export type ProjectId = string;
   export type ProjectName = string;
   export type ProjectRegion = string;
-  export type ProjectState = "NORMAL"|"SYNCING"|"IMPORTING"|string;
+  export type ProjectState = "NORMAL"|"SYNCING"|"IMPORTING";
   export type ProjectSummaries = ProjectSummary[];
   export interface ProjectSummary {
     /**

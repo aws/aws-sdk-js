@@ -373,10 +373,10 @@ declare class CodeBuild extends Service {
   updateWebhook(callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
 }
 declare namespace CodeBuild {
-  export type ArtifactNamespace = "NONE"|"BUILD_ID"|string;
-  export type ArtifactPackaging = "NONE"|"ZIP"|string;
-  export type ArtifactsType = "CODEPIPELINE"|"S3"|"NO_ARTIFACTS"|string;
-  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN"|string;
+  export type ArtifactNamespace = "NONE"|"BUILD_ID";
+  export type ArtifactPackaging = "NONE"|"ZIP";
+  export type ArtifactsType = "CODEPIPELINE"|"S3"|"NO_ARTIFACTS";
+  export type AuthType = "OAUTH"|"BASIC_AUTH"|"PERSONAL_ACCESS_TOKEN";
   export interface BatchDeleteBuildsInput {
     /**
      * The IDs of the builds to delete.
@@ -473,7 +473,7 @@ declare namespace CodeBuild {
      */
     reportsNotFound?: ReportArns;
   }
-  export type BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"|"REPORT_AGGREGATED_BATCH"|string;
+  export type BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"|"REPORT_AGGREGATED_BATCH";
   export interface BatchRestrictions {
     /**
      * Specifies the maximum number of builds allowed.
@@ -485,7 +485,7 @@ declare namespace CodeBuild {
     computeTypesAllowed?: ComputeTypesAllowed;
   }
   export type Boolean = boolean;
-  export type BucketOwnerAccess = "NONE"|"READ_ONLY"|"FULL"|string;
+  export type BucketOwnerAccess = "NONE"|"READ_ONLY"|"FULL";
   export interface Build {
     /**
      * The unique ID for the build.
@@ -781,7 +781,7 @@ declare namespace CodeBuild {
      */
     contexts?: PhaseContexts;
   }
-  export type BuildBatchPhaseType = "SUBMITTED"|"DOWNLOAD_BATCHSPEC"|"IN_PROGRESS"|"COMBINE_ARTIFACTS"|"SUCCEEDED"|"FAILED"|"STOPPED"|string;
+  export type BuildBatchPhaseType = "SUBMITTED"|"DOWNLOAD_BATCHSPEC"|"IN_PROGRESS"|"COMBINE_ARTIFACTS"|"SUCCEEDED"|"FAILED"|"STOPPED";
   export type BuildBatchPhases = BuildBatchPhase[];
   export type BuildBatches = BuildBatch[];
   export interface BuildGroup {
@@ -844,7 +844,7 @@ declare namespace CodeBuild {
      */
     contexts?: PhaseContexts;
   }
-  export type BuildPhaseType = "SUBMITTED"|"QUEUED"|"PROVISIONING"|"DOWNLOAD_SOURCE"|"INSTALL"|"PRE_BUILD"|"BUILD"|"POST_BUILD"|"UPLOAD_ARTIFACTS"|"FINALIZING"|"COMPLETED"|string;
+  export type BuildPhaseType = "SUBMITTED"|"QUEUED"|"PROVISIONING"|"DOWNLOAD_SOURCE"|"INSTALL"|"PRE_BUILD"|"BUILD"|"POST_BUILD"|"UPLOAD_ARTIFACTS"|"FINALIZING"|"COMPLETED";
   export type BuildPhases = BuildPhase[];
   export type BuildReportArns = String[];
   export interface BuildStatusConfig {
@@ -882,8 +882,8 @@ declare namespace CodeBuild {
   }
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
-  export type CacheMode = "LOCAL_DOCKER_LAYER_CACHE"|"LOCAL_SOURCE_CACHE"|"LOCAL_CUSTOM_CACHE"|string;
-  export type CacheType = "NO_CACHE"|"S3"|"LOCAL"|string;
+  export type CacheMode = "LOCAL_DOCKER_LAYER_CACHE"|"LOCAL_SOURCE_CACHE"|"LOCAL_CUSTOM_CACHE";
+  export type CacheType = "NO_CACHE"|"S3"|"LOCAL";
   export interface CloudWatchLogsConfig {
     /**
      * The current status of the logs in CloudWatch Logs for a build project. Valid values are:    ENABLED: CloudWatch Logs are enabled for this build project.    DISABLED: CloudWatch Logs are not enabled for this build project.  
@@ -967,7 +967,7 @@ declare namespace CodeBuild {
     branchesMissed?: NonNegativeInt;
   }
   export type CodeCoverages = CodeCoverage[];
-  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|"BUILD_GENERAL1_2XLARGE"|string;
+  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|"BUILD_GENERAL1_2XLARGE";
   export type ComputeTypesAllowed = NonEmptyString[];
   export interface CreateProjectInput {
     /**
@@ -1109,7 +1109,7 @@ declare namespace CodeBuild {
      */
     webhook?: Webhook;
   }
-  export type CredentialProviderType = "SECRETS_MANAGER"|string;
+  export type CredentialProviderType = "SECRETS_MANAGER";
   export interface DebugSession {
     /**
      * Specifies if session debugging is enabled for this build.
@@ -1301,7 +1301,7 @@ declare namespace CodeBuild {
     languages?: EnvironmentLanguages;
   }
   export type EnvironmentPlatforms = EnvironmentPlatform[];
-  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER"|string;
+  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER";
   export interface EnvironmentVariable {
     /**
      * The name or key of the environment variable.
@@ -1316,7 +1316,7 @@ declare namespace CodeBuild {
      */
     type?: EnvironmentVariableType;
   }
-  export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|"SECRETS_MANAGER"|string;
+  export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|"SECRETS_MANAGER";
   export type EnvironmentVariables = EnvironmentVariable[];
   export interface ExportedEnvironmentVariable {
     /**
@@ -1329,7 +1329,7 @@ declare namespace CodeBuild {
     value?: String;
   }
   export type ExportedEnvironmentVariables = ExportedEnvironmentVariable[];
-  export type FileSystemType = "EFS"|string;
+  export type FileSystemType = "EFS";
   export type FilterGroup = WebhookFilter[];
   export type FilterGroups = FilterGroup[];
   export interface GetReportGroupTrendInput {
@@ -1376,7 +1376,7 @@ declare namespace CodeBuild {
     fetchSubmodules: WrapperBoolean;
   }
   export type Identifiers = NonEmptyString[];
-  export type ImagePullCredentialsType = "CODEBUILD"|"SERVICE_ROLE"|string;
+  export type ImagePullCredentialsType = "CODEBUILD"|"SERVICE_ROLE";
   export type ImageVersions = String[];
   export interface ImportSourceCredentialsInput {
     /**
@@ -1415,7 +1415,7 @@ declare namespace CodeBuild {
   export interface InvalidateProjectCacheOutput {
   }
   export type KeyInput = string;
-  export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"DOTNET"|"BASE"|"PHP"|string;
+  export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"DOTNET"|"BASE"|"PHP";
   export interface ListBuildBatchesForProjectInput {
     /**
      * The name of the project.
@@ -1714,7 +1714,7 @@ declare namespace CodeBuild {
      */
     s3Logs?: S3LogsConfig;
   }
-  export type LogsConfigStatusType = "ENABLED"|"DISABLED"|string;
+  export type LogsConfigStatusType = "ENABLED"|"DISABLED";
   export interface LogsLocation {
     /**
      * The name of the CloudWatch Logs group for the build logs.
@@ -1774,7 +1774,7 @@ declare namespace CodeBuild {
     message?: String;
   }
   export type PhaseContexts = PhaseContext[];
-  export type PlatformType = "DEBIAN"|"AMAZON_LINUX"|"UBUNTU"|"WINDOWS_SERVER"|string;
+  export type PlatformType = "DEBIAN"|"AMAZON_LINUX"|"UBUNTU"|"WINDOWS_SERVER";
   export interface Project {
     /**
      * The name of the build project.
@@ -2035,7 +2035,7 @@ declare namespace CodeBuild {
   export type ProjectName = string;
   export type ProjectNames = NonEmptyString[];
   export type ProjectSecondarySourceVersions = ProjectSourceVersion[];
-  export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
+  export type ProjectSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME";
   export interface ProjectSource {
     /**
      * The type of repository that contains the source code to be built. Valid values include:    BITBUCKET: The source code is in a Bitbucket repository.    CODECOMMIT: The source code is in an CodeCommit repository.    CODEPIPELINE: The source code settings are specified in the source action of a pipeline in CodePipeline.    GITHUB: The source code is in a GitHub or GitHub Enterprise Cloud repository.    GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise Server repository.    NO_SOURCE: The project does not have input source code.    S3: The source code is in an Amazon S3 bucket.  
@@ -2089,7 +2089,7 @@ declare namespace CodeBuild {
     sourceVersion: String;
   }
   export type ProjectSources = ProjectSource[];
-  export type ProjectVisibilityType = "PUBLIC_READ"|"PRIVATE"|string;
+  export type ProjectVisibilityType = "PUBLIC_READ"|"PRIVATE";
   export type Projects = Project[];
   export interface PutResourcePolicyInput {
     /**
@@ -2168,7 +2168,7 @@ declare namespace CodeBuild {
     codeCoverageSummary?: CodeCoverageReportSummary;
   }
   export type ReportArns = NonEmptyString[];
-  export type ReportCodeCoverageSortByType = "LINE_COVERAGE_PERCENTAGE"|"FILE_PATH"|string;
+  export type ReportCodeCoverageSortByType = "LINE_COVERAGE_PERCENTAGE"|"FILE_PATH";
   export interface ReportExportConfig {
     /**
      *  The export configuration type. Valid values are:     S3: The report results are exported to an S3 bucket.     NO_EXPORT: The report results are not exported.   
@@ -2179,7 +2179,7 @@ declare namespace CodeBuild {
      */
     s3Destination?: S3ReportExportConfig;
   }
-  export type ReportExportConfigType = "S3"|"NO_EXPORT"|string;
+  export type ReportExportConfigType = "S3"|"NO_EXPORT";
   export interface ReportFilter {
     /**
      *  The status used to filter reports. You can filter using one status only. 
@@ -2222,9 +2222,9 @@ declare namespace CodeBuild {
   }
   export type ReportGroupArns = NonEmptyString[];
   export type ReportGroupName = string;
-  export type ReportGroupSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME"|string;
-  export type ReportGroupStatusType = "ACTIVE"|"DELETING"|string;
-  export type ReportGroupTrendFieldType = "PASS_RATE"|"DURATION"|"TOTAL"|"LINE_COVERAGE"|"LINES_COVERED"|"LINES_MISSED"|"BRANCH_COVERAGE"|"BRANCHES_COVERED"|"BRANCHES_MISSED"|string;
+  export type ReportGroupSortByType = "NAME"|"CREATED_TIME"|"LAST_MODIFIED_TIME";
+  export type ReportGroupStatusType = "ACTIVE"|"DELETING";
+  export type ReportGroupTrendFieldType = "PASS_RATE"|"DURATION"|"TOTAL"|"LINE_COVERAGE"|"LINES_COVERED"|"LINES_MISSED"|"BRANCH_COVERAGE"|"BRANCHES_COVERED"|"BRANCHES_MISSED";
   export type ReportGroupTrendRawDataList = ReportWithRawData[];
   export interface ReportGroupTrendStats {
     /**
@@ -2241,10 +2241,10 @@ declare namespace CodeBuild {
     min?: String;
   }
   export type ReportGroups = ReportGroup[];
-  export type ReportPackagingType = "ZIP"|"NONE"|string;
+  export type ReportPackagingType = "ZIP"|"NONE";
   export type ReportStatusCounts = {[key: string]: WrapperInt};
-  export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING"|string;
-  export type ReportType = "TEST"|"CODE_COVERAGE"|string;
+  export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING";
+  export type ReportType = "TEST"|"CODE_COVERAGE";
   export interface ReportWithRawData {
     /**
      * The ARN of the report.
@@ -2288,7 +2288,7 @@ declare namespace CodeBuild {
   export interface RetryBuildBatchOutput {
     buildBatch?: BuildBatch;
   }
-  export type RetryBuildBatchType = "RETRY_ALL_BUILDS"|"RETRY_FAILED_BUILDS"|string;
+  export type RetryBuildBatchType = "RETRY_ALL_BUILDS"|"RETRY_FAILED_BUILDS";
   export interface RetryBuildInput {
     /**
      * Specifies the identifier of the build to restart.
@@ -2345,9 +2345,9 @@ declare namespace CodeBuild {
   }
   export type SecurityGroupIds = NonEmptyString[];
   export type SensitiveNonEmptyString = string;
-  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE"|string;
-  export type SharedResourceSortByType = "ARN"|"MODIFIED_TIME"|string;
-  export type SortOrderType = "ASCENDING"|"DESCENDING"|string;
+  export type ServerType = "GITHUB"|"BITBUCKET"|"GITHUB_ENTERPRISE";
+  export type SharedResourceSortByType = "ARN"|"MODIFIED_TIME";
+  export type SortOrderType = "ASCENDING"|"DESCENDING";
   export interface SourceAuth {
     /**
      *   This data type is deprecated and is no longer accurate or used.   The authorization type to use. The only valid value is OAUTH, which represents the OAuth authorization type.
@@ -2358,7 +2358,7 @@ declare namespace CodeBuild {
      */
     resource?: String;
   }
-  export type SourceAuthType = "OAUTH"|string;
+  export type SourceAuthType = "OAUTH";
   export interface SourceCredentialsInfo {
     /**
      *  The Amazon Resource Name (ARN) of the token. 
@@ -2374,7 +2374,7 @@ declare namespace CodeBuild {
     authType?: AuthType;
   }
   export type SourceCredentialsInfos = SourceCredentialsInfo[];
-  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
+  export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE";
   export interface StartBuildBatchInput {
     /**
      * The name of the project.
@@ -2639,7 +2639,7 @@ declare namespace CodeBuild {
      */
     build?: Build;
   }
-  export type StatusType = "SUCCEEDED"|"FAILED"|"FAULT"|"TIMED_OUT"|"IN_PROGRESS"|"STOPPED"|string;
+  export type StatusType = "SUCCEEDED"|"FAILED"|"FAULT"|"TIMED_OUT"|"IN_PROGRESS"|"STOPPED";
   export interface StopBuildBatchInput {
     /**
      * The identifier of the batch build to stop.
@@ -2939,7 +2939,7 @@ declare namespace CodeBuild {
      */
     lastModifiedSecret?: Timestamp;
   }
-  export type WebhookBuildType = "BUILD"|"BUILD_BATCH"|string;
+  export type WebhookBuildType = "BUILD"|"BUILD_BATCH";
   export interface WebhookFilter {
     /**
      *  The type of webhook filter. There are six webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, FILE_PATH, and COMMIT_MESSAGE.    EVENT    A webhook event triggers a build when the provided pattern matches one of five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED, and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.     ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.    HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.   Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.    BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.     FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    COMMIT_MESSAGE  A webhook triggers a build when the head commit message matches the regular expression pattern.   Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    
@@ -2954,7 +2954,7 @@ declare namespace CodeBuild {
      */
     excludeMatchedPattern?: WrapperBoolean;
   }
-  export type WebhookFilterType = "EVENT"|"BASE_REF"|"HEAD_REF"|"ACTOR_ACCOUNT_ID"|"FILE_PATH"|"COMMIT_MESSAGE"|string;
+  export type WebhookFilterType = "EVENT"|"BASE_REF"|"HEAD_REF"|"ACTOR_ACCOUNT_ID"|"FILE_PATH"|"COMMIT_MESSAGE";
   export type WrapperBoolean = boolean;
   export type WrapperInt = number;
   export type WrapperLong = number;

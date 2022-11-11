@@ -102,8 +102,8 @@ declare namespace LexRuntime {
   }
   export type ButtonTextStringWithLength = string;
   export type ButtonValueStringWithLength = string;
-  export type ConfirmationStatus = "None"|"Confirmed"|"Denied"|string;
-  export type ContentType = "application/vnd.amazonaws.card.generic"|string;
+  export type ConfirmationStatus = "None"|"Confirmed"|"Denied";
+  export type ContentType = "application/vnd.amazonaws.card.generic";
   export interface DeleteSessionRequest {
     /**
      * The name of the bot that contains the session data.
@@ -166,10 +166,10 @@ declare namespace LexRuntime {
      */
     messageFormat?: MessageFormatType;
   }
-  export type DialogActionType = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Close"|"Delegate"|string;
-  export type DialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed"|string;
+  export type DialogActionType = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Close"|"Delegate";
+  export type DialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed";
   export type Double = number;
-  export type FulfillmentState = "Fulfilled"|"Failed"|"ReadyForFulfillment"|string;
+  export type FulfillmentState = "Fulfilled"|"Failed"|"ReadyForFulfillment";
   export interface GenericAttachment {
     /**
      * The title of the option.
@@ -273,7 +273,7 @@ declare namespace LexRuntime {
   }
   export type IntentSummaryCheckpointLabel = string;
   export type IntentSummaryList = IntentSummary[];
-  export type MessageFormatType = "PlainText"|"CustomPayload"|"SSML"|"Composite"|string;
+  export type MessageFormatType = "PlainText"|"CustomPayload"|"SSML"|"Composite";
   export type ParameterName = string;
   export interface PostContentRequest {
     /**

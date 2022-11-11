@@ -180,7 +180,7 @@ declare namespace CloudHSMV2 {
     TagList?: TagList;
   }
   export type BackupId = string;
-  export type BackupPolicy = "DEFAULT"|string;
+  export type BackupPolicy = "DEFAULT";
   export interface BackupRetentionPolicy {
     /**
      * The type of backup retention policy. For the DAYS type, the value is the number of days to retain backups.
@@ -191,9 +191,9 @@ declare namespace CloudHSMV2 {
      */
     Value?: BackupRetentionValue;
   }
-  export type BackupRetentionType = "DAYS"|string;
+  export type BackupRetentionType = "DAYS";
   export type BackupRetentionValue = string;
-  export type BackupState = "CREATE_IN_PROGRESS"|"READY"|"DELETED"|"PENDING_DELETION"|string;
+  export type BackupState = "CREATE_IN_PROGRESS"|"READY"|"DELETED"|"PENDING_DELETION";
   export type Backups = Backup[];
   export type BackupsMaxSize = number;
   export type Boolean = boolean;
@@ -283,7 +283,7 @@ declare namespace CloudHSMV2 {
     TagList?: TagList;
   }
   export type ClusterId = string;
-  export type ClusterState = "CREATE_IN_PROGRESS"|"UNINITIALIZED"|"INITIALIZE_IN_PROGRESS"|"INITIALIZED"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DEGRADED"|string;
+  export type ClusterState = "CREATE_IN_PROGRESS"|"UNINITIALIZED"|"INITIALIZE_IN_PROGRESS"|"INITIALIZED"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DEGRADED";
   export type Clusters = Cluster[];
   export type ClustersMaxSize = number;
   export interface CopyBackupToRegionRequest {
@@ -512,7 +512,7 @@ declare namespace CloudHSMV2 {
     StateMessage?: String;
   }
   export type HsmId = string;
-  export type HsmState = "CREATE_IN_PROGRESS"|"ACTIVE"|"DEGRADED"|"DELETE_IN_PROGRESS"|"DELETED"|string;
+  export type HsmState = "CREATE_IN_PROGRESS"|"ACTIVE"|"DEGRADED"|"DELETE_IN_PROGRESS"|"DELETED";
   export type HsmType = string;
   export type Hsms = Hsm[];
   export interface InitializeClusterRequest {

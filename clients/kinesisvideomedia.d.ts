@@ -69,7 +69,7 @@ declare namespace KinesisVideoMedia {
      */
     ContinuationToken?: ContinuationToken;
   }
-  export type StartSelectorType = "FRAGMENT_NUMBER"|"SERVER_TIMESTAMP"|"PRODUCER_TIMESTAMP"|"NOW"|"EARLIEST"|"CONTINUATION_TOKEN"|string;
+  export type StartSelectorType = "FRAGMENT_NUMBER"|"SERVER_TIMESTAMP"|"PRODUCER_TIMESTAMP"|"NOW"|"EARLIEST"|"CONTINUATION_TOKEN";
   export type StreamName = string;
   export type Timestamp = Date;
   /**

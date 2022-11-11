@@ -221,7 +221,7 @@ declare namespace PrivateNetworks {
      */
     order: Order;
   }
-  export type AcknowledgmentStatus = "ACKNOWLEDGING"|"ACKNOWLEDGED"|"UNACKNOWLEDGED"|string;
+  export type AcknowledgmentStatus = "ACKNOWLEDGING"|"ACKNOWLEDGED"|"UNACKNOWLEDGED";
   export interface ActivateDeviceIdentifierRequest {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
@@ -502,15 +502,15 @@ declare namespace PrivateNetworks {
      */
     vendor?: String;
   }
-  export type DeviceIdentifierFilterKeys = "STATUS"|"ORDER"|"TRAFFIC_GROUP"|string;
+  export type DeviceIdentifierFilterKeys = "STATUS"|"ORDER"|"TRAFFIC_GROUP";
   export type DeviceIdentifierFilterValues = String[];
   export type DeviceIdentifierFilters = {[key: string]: DeviceIdentifierFilterValues};
   export type DeviceIdentifierImsiString = string;
   export type DeviceIdentifierList = DeviceIdentifier[];
-  export type DeviceIdentifierStatus = "ACTIVE"|"INACTIVE"|string;
+  export type DeviceIdentifierStatus = "ACTIVE"|"INACTIVE";
   export type Double = number;
-  export type ElevationReference = "AGL"|"AMSL"|string;
-  export type ElevationUnit = "FEET"|string;
+  export type ElevationReference = "AGL"|"AMSL";
+  export type ElevationUnit = "FEET";
   export interface GetDeviceIdentifierRequest {
     /**
      * The Amazon Resource Name (ARN) of the device identifier.
@@ -591,7 +591,7 @@ declare namespace PrivateNetworks {
      */
     tags?: TagMap;
   }
-  export type HealthStatus = "INITIAL"|"HEALTHY"|"UNHEALTHY"|string;
+  export type HealthStatus = "INITIAL"|"HEALTHY"|"UNHEALTHY";
   export interface ListDeviceIdentifiersRequest {
     /**
      * The filters.    ORDER - The Amazon Resource Name (ARN) of the order.    STATUS - The status (ACTIVE | INACTIVE).    TRAFFIC_GROUP - The Amazon Resource Name (ARN) of the traffic group.   Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values.
@@ -783,7 +783,7 @@ declare namespace PrivateNetworks {
      */
     statusReason?: String;
   }
-  export type NetworkFilterKeys = "STATUS"|string;
+  export type NetworkFilterKeys = "STATUS";
   export type NetworkFilterValues = String[];
   export type NetworkFilters = {[key: string]: NetworkFilterValues};
   export type NetworkList = Network[];
@@ -864,14 +864,14 @@ declare namespace PrivateNetworks {
     type: NetworkResourceDefinitionType;
   }
   export type NetworkResourceDefinitionCountInteger = number;
-  export type NetworkResourceDefinitionType = "RADIO_UNIT"|"DEVICE_IDENTIFIER"|string;
+  export type NetworkResourceDefinitionType = "RADIO_UNIT"|"DEVICE_IDENTIFIER";
   export type NetworkResourceDefinitions = NetworkResourceDefinition[];
-  export type NetworkResourceFilterKeys = "ORDER"|"STATUS"|string;
+  export type NetworkResourceFilterKeys = "ORDER"|"STATUS";
   export type NetworkResourceFilterValues = String[];
   export type NetworkResourceFilters = {[key: string]: NetworkResourceFilterValues};
   export type NetworkResourceList = NetworkResource[];
-  export type NetworkResourceStatus = "PENDING"|"SHIPPED"|"PROVISIONING"|"PROVISIONED"|"AVAILABLE"|"DELETING"|"PENDING_RETURN"|"DELETED"|string;
-  export type NetworkResourceType = "RADIO_UNIT"|string;
+  export type NetworkResourceStatus = "PENDING"|"SHIPPED"|"PROVISIONING"|"PROVISIONED"|"AVAILABLE"|"DELETING"|"PENDING_RETURN"|"DELETED";
+  export type NetworkResourceType = "RADIO_UNIT";
   export interface NetworkSite {
     /**
      *  The parent Availability Zone for the network site. 
@@ -918,12 +918,12 @@ declare namespace PrivateNetworks {
      */
     statusReason?: String;
   }
-  export type NetworkSiteFilterKeys = "STATUS"|string;
+  export type NetworkSiteFilterKeys = "STATUS";
   export type NetworkSiteFilterValues = String[];
   export type NetworkSiteFilters = {[key: string]: NetworkSiteFilterValues};
   export type NetworkSiteList = NetworkSite[];
-  export type NetworkSiteStatus = "CREATED"|"PROVISIONING"|"AVAILABLE"|"DEPROVISIONING"|"DELETED"|string;
-  export type NetworkStatus = "CREATED"|"PROVISIONING"|"AVAILABLE"|"DEPROVISIONING"|"DELETED"|string;
+  export type NetworkSiteStatus = "CREATED"|"PROVISIONING"|"AVAILABLE"|"DEPROVISIONING"|"DELETED";
+  export type NetworkStatus = "CREATED"|"PROVISIONING"|"AVAILABLE"|"DEPROVISIONING"|"DELETED";
   export type Options = NameValuePair[];
   export interface Order {
     /**
@@ -955,7 +955,7 @@ declare namespace PrivateNetworks {
      */
     trackingInformation?: TrackingInformationList;
   }
-  export type OrderFilterKeys = "STATUS"|"NETWORK_SITE"|string;
+  export type OrderFilterKeys = "STATUS"|"NETWORK_SITE";
   export type OrderFilterValues = String[];
   export type OrderFilters = {[key: string]: OrderFilterValues};
   export type OrderList = Order[];

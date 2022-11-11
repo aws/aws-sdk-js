@@ -789,7 +789,7 @@ declare namespace GameLift {
   }
   export interface AcceptMatchOutput {
   }
-  export type AcceptanceType = "ACCEPT"|"REJECT"|string;
+  export type AcceptanceType = "ACCEPT"|"REJECT";
   export interface Alias {
     /**
      * A unique identifier for the alias. Alias IDs are unique within a Region.
@@ -859,8 +859,8 @@ declare namespace GameLift {
      */
     SessionToken?: NonEmptyString;
   }
-  export type BackfillMode = "AUTOMATIC"|"MANUAL"|string;
-  export type BalancingStrategy = "SPOT_ONLY"|"SPOT_PREFERRED"|"ON_DEMAND_ONLY"|string;
+  export type BackfillMode = "AUTOMATIC"|"MANUAL";
+  export type BalancingStrategy = "SPOT_ONLY"|"SPOT_PREFERRED"|"ON_DEMAND_ONLY";
   export type BooleanModel = boolean;
   export interface Build {
     /**
@@ -900,14 +900,14 @@ declare namespace GameLift {
   export type BuildId = string;
   export type BuildIdOrArn = string;
   export type BuildList = Build[];
-  export type BuildStatus = "INITIALIZED"|"READY"|"FAILED"|string;
+  export type BuildStatus = "INITIALIZED"|"READY"|"FAILED";
   export interface CertificateConfiguration {
     /**
      * Indicates whether a TLS/SSL certificate is generated for a fleet.  Valid values include:     GENERATED - Generate a TLS/SSL certificate for this fleet.    DISABLED - (default) Do not generate a TLS/SSL certificate for this fleet.   
      */
     CertificateType: CertificateType;
   }
-  export type CertificateType = "DISABLED"|"GENERATED"|string;
+  export type CertificateType = "DISABLED"|"GENERATED";
   export interface ClaimGameServerInput {
     /**
      * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value. If you are not specifying a game server to claim, this value identifies where you want GameLift FleetIQ to look for an available game server to claim. 
@@ -928,7 +928,7 @@ declare namespace GameLift {
      */
     GameServer?: GameServer;
   }
-  export type ComparisonOperatorType = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export type ComparisonOperatorType = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold";
   export interface CreateAliasInput {
     /**
      * A descriptive label that is associated with an alias. Alias names do not need to be unique.
@@ -2257,7 +2257,7 @@ declare namespace GameLift {
     Location?: LocationStringModel;
   }
   export type EC2InstanceLimitList = EC2InstanceLimit[];
-  export type EC2InstanceType = "t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|string;
+  export type EC2InstanceType = "t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge";
   export interface Event {
     /**
      * A unique identifier for a fleet event.
@@ -2284,7 +2284,7 @@ declare namespace GameLift {
      */
     PreSignedLogUrl?: NonZeroAndMaxString;
   }
-  export type EventCode = "GENERIC_EVENT"|"FLEET_CREATED"|"FLEET_DELETED"|"FLEET_SCALING_EVENT"|"FLEET_STATE_DOWNLOADING"|"FLEET_STATE_VALIDATING"|"FLEET_STATE_BUILDING"|"FLEET_STATE_ACTIVATING"|"FLEET_STATE_ACTIVE"|"FLEET_STATE_ERROR"|"FLEET_INITIALIZATION_FAILED"|"FLEET_BINARY_DOWNLOAD_FAILED"|"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"|"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"|"FLEET_VALIDATION_TIMED_OUT"|"FLEET_ACTIVATION_FAILED"|"FLEET_ACTIVATION_FAILED_NO_INSTANCES"|"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"|"SERVER_PROCESS_INVALID_PATH"|"SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"|"SERVER_PROCESS_PROCESS_READY_TIMEOUT"|"SERVER_PROCESS_CRASHED"|"SERVER_PROCESS_TERMINATED_UNHEALTHY"|"SERVER_PROCESS_FORCE_TERMINATED"|"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"|"GAME_SESSION_ACTIVATION_TIMEOUT"|"FLEET_CREATION_EXTRACTING_BUILD"|"FLEET_CREATION_RUNNING_INSTALLER"|"FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"|"FLEET_VPC_PEERING_SUCCEEDED"|"FLEET_VPC_PEERING_FAILED"|"FLEET_VPC_PEERING_DELETED"|"INSTANCE_INTERRUPTED"|string;
+  export type EventCode = "GENERIC_EVENT"|"FLEET_CREATED"|"FLEET_DELETED"|"FLEET_SCALING_EVENT"|"FLEET_STATE_DOWNLOADING"|"FLEET_STATE_VALIDATING"|"FLEET_STATE_BUILDING"|"FLEET_STATE_ACTIVATING"|"FLEET_STATE_ACTIVE"|"FLEET_STATE_ERROR"|"FLEET_INITIALIZATION_FAILED"|"FLEET_BINARY_DOWNLOAD_FAILED"|"FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"|"FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"|"FLEET_VALIDATION_TIMED_OUT"|"FLEET_ACTIVATION_FAILED"|"FLEET_ACTIVATION_FAILED_NO_INSTANCES"|"FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"|"SERVER_PROCESS_INVALID_PATH"|"SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"|"SERVER_PROCESS_PROCESS_READY_TIMEOUT"|"SERVER_PROCESS_CRASHED"|"SERVER_PROCESS_TERMINATED_UNHEALTHY"|"SERVER_PROCESS_FORCE_TERMINATED"|"SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"|"GAME_SESSION_ACTIVATION_TIMEOUT"|"FLEET_CREATION_EXTRACTING_BUILD"|"FLEET_CREATION_RUNNING_INSTALLER"|"FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"|"FLEET_VPC_PEERING_SUCCEEDED"|"FLEET_VPC_PEERING_FAILED"|"FLEET_VPC_PEERING_DELETED"|"INSTANCE_INTERRUPTED";
   export type EventList = Event[];
   export interface FilterConfiguration {
     /**
@@ -2292,7 +2292,7 @@ declare namespace GameLift {
      */
     AllowedLocations?: LocationList;
   }
-  export type FleetAction = "AUTO_SCALING"|string;
+  export type FleetAction = "AUTO_SCALING";
   export type FleetActionList = FleetAction[];
   export type FleetArn = string;
   export interface FleetAttributes {
@@ -2417,8 +2417,8 @@ declare namespace GameLift {
   export type FleetIdList = FleetId[];
   export type FleetIdOrArn = string;
   export type FleetIdOrArnList = FleetIdOrArn[];
-  export type FleetStatus = "NEW"|"DOWNLOADING"|"VALIDATING"|"BUILDING"|"ACTIVATING"|"ACTIVE"|"DELETING"|"ERROR"|"TERMINATED"|string;
-  export type FleetType = "ON_DEMAND"|"SPOT"|string;
+  export type FleetStatus = "NEW"|"DOWNLOADING"|"VALIDATING"|"BUILDING"|"ACTIVATING"|"ACTIVE"|"DELETING"|"ERROR"|"TERMINATED";
+  export type FleetType = "ON_DEMAND"|"SPOT";
   export interface FleetUtilization {
     /**
      * A unique identifier for the fleet associated with the location.
@@ -2450,7 +2450,7 @@ declare namespace GameLift {
     Location?: LocationStringModel;
   }
   export type FleetUtilizationList = FleetUtilization[];
-  export type FlexMatchMode = "STANDALONE"|"WITH_QUEUE"|string;
+  export type FlexMatchMode = "STANDALONE"|"WITH_QUEUE";
   export type Float = number;
   export type FreeText = string;
   export interface GameProperty {
@@ -2512,7 +2512,7 @@ declare namespace GameLift {
      */
     LastHealthCheckTime?: Timestamp;
   }
-  export type GameServerClaimStatus = "CLAIMED"|string;
+  export type GameServerClaimStatus = "CLAIMED";
   export type GameServerConnectionInfo = string;
   export type GameServerData = string;
   export interface GameServerGroup {
@@ -2565,7 +2565,7 @@ declare namespace GameLift {
      */
     LastUpdatedTime?: Timestamp;
   }
-  export type GameServerGroupAction = "REPLACE_INSTANCE_TYPES"|string;
+  export type GameServerGroupAction = "REPLACE_INSTANCE_TYPES";
   export type GameServerGroupActions = GameServerGroupAction[];
   export type GameServerGroupArn = string;
   export interface GameServerGroupAutoScalingPolicy {
@@ -2578,13 +2578,13 @@ declare namespace GameLift {
      */
     TargetTrackingConfiguration: TargetTrackingConfiguration;
   }
-  export type GameServerGroupDeleteOption = "SAFE_DELETE"|"FORCE_DELETE"|"RETAIN"|string;
-  export type GameServerGroupInstanceType = "c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|string;
+  export type GameServerGroupDeleteOption = "SAFE_DELETE"|"FORCE_DELETE"|"RETAIN";
+  export type GameServerGroupInstanceType = "c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge";
   export type GameServerGroupName = string;
   export type GameServerGroupNameOrArn = string;
-  export type GameServerGroupStatus = "NEW"|"ACTIVATING"|"ACTIVE"|"DELETE_SCHEDULED"|"DELETING"|"DELETED"|"ERROR"|string;
+  export type GameServerGroupStatus = "NEW"|"ACTIVATING"|"ACTIVE"|"DELETE_SCHEDULED"|"DELETING"|"DELETED"|"ERROR";
   export type GameServerGroups = GameServerGroup[];
-  export type GameServerHealthCheck = "HEALTHY"|string;
+  export type GameServerHealthCheck = "HEALTHY";
   export type GameServerId = string;
   export interface GameServerInstance {
     /**
@@ -2606,10 +2606,10 @@ declare namespace GameLift {
   }
   export type GameServerInstanceId = string;
   export type GameServerInstanceIds = GameServerInstanceId[];
-  export type GameServerInstanceStatus = "ACTIVE"|"DRAINING"|"SPOT_TERMINATING"|string;
+  export type GameServerInstanceStatus = "ACTIVE"|"DRAINING"|"SPOT_TERMINATING";
   export type GameServerInstances = GameServerInstance[];
-  export type GameServerProtectionPolicy = "NO_PROTECTION"|"FULL_PROTECTION"|string;
-  export type GameServerUtilizationStatus = "AVAILABLE"|"UTILIZED"|string;
+  export type GameServerProtectionPolicy = "NO_PROTECTION"|"FULL_PROTECTION";
+  export type GameServerUtilizationStatus = "AVAILABLE"|"UTILIZED";
   export type GameServers = GameServer[];
   export interface GameSession {
     /**
@@ -2799,7 +2799,7 @@ declare namespace GameLift {
      */
     MatchmakerData?: MatchmakerData;
   }
-  export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|"FAILED"|string;
+  export type GameSessionPlacementState = "PENDING"|"FULFILLED"|"CANCELLED"|"TIMED_OUT"|"FAILED";
   export interface GameSessionQueue {
     /**
      * A descriptive label that is associated with game session queue. Queue names must be unique within each Region.
@@ -2850,8 +2850,8 @@ declare namespace GameLift {
   export type GameSessionQueueName = string;
   export type GameSessionQueueNameOrArn = string;
   export type GameSessionQueueNameOrArnList = GameSessionQueueNameOrArn[];
-  export type GameSessionStatus = "ACTIVE"|"ACTIVATING"|"TERMINATED"|"TERMINATING"|"ERROR"|string;
-  export type GameSessionStatusReason = "INTERRUPTED"|string;
+  export type GameSessionStatus = "ACTIVE"|"ACTIVATING"|"TERMINATED"|"TERMINATING"|"ERROR";
+  export type GameSessionStatusReason = "INTERRUPTED";
   export interface GetGameSessionLogUrlInput {
     /**
      * A unique identifier for the game session to get logs for. 
@@ -2969,7 +2969,7 @@ declare namespace GameLift {
   export type InstanceDefinitions = InstanceDefinition[];
   export type InstanceId = string;
   export type InstanceList = Instance[];
-  export type InstanceStatus = "PENDING"|"ACTIVE"|"TERMINATING"|string;
+  export type InstanceStatus = "PENDING"|"ACTIVE"|"TERMINATING";
   export type Integer = number;
   export type IpAddress = string;
   export interface IpPermission {
@@ -2991,7 +2991,7 @@ declare namespace GameLift {
     Protocol: IpProtocol;
   }
   export type IpPermissionsList = IpPermission[];
-  export type IpProtocol = "TCP"|"UDP"|string;
+  export type IpProtocol = "TCP"|"UDP";
   export type LargeGameSessionData = string;
   export type LatencyMap = {[key: string]: PositiveInteger};
   export type LaunchParametersStringModel = string;
@@ -3208,7 +3208,7 @@ declare namespace GameLift {
   }
   export type LocationStateList = LocationState[];
   export type LocationStringModel = string;
-  export type LocationUpdateStatus = "PENDING_UPDATE"|string;
+  export type LocationUpdateStatus = "PENDING_UPDATE";
   export interface MatchedPlayerSession {
     /**
      * A unique identifier for a player 
@@ -3296,7 +3296,7 @@ declare namespace GameLift {
   export type MatchmakingConfigurationList = MatchmakingConfiguration[];
   export type MatchmakingConfigurationName = string;
   export type MatchmakingConfigurationNameList = MatchmakingConfigurationName[];
-  export type MatchmakingConfigurationStatus = "CANCELLED"|"COMPLETED"|"FAILED"|"PLACING"|"QUEUED"|"REQUIRES_ACCEPTANCE"|"SEARCHING"|"TIMED_OUT"|string;
+  export type MatchmakingConfigurationStatus = "CANCELLED"|"COMPLETED"|"FAILED"|"PLACING"|"QUEUED"|"REQUIRES_ACCEPTANCE"|"SEARCHING"|"TIMED_OUT";
   export type MatchmakingIdList = MatchmakingIdStringModel[];
   export type MatchmakingIdStringModel = string;
   export type MatchmakingRequestTimeoutInteger = number;
@@ -3372,13 +3372,13 @@ declare namespace GameLift {
   export type MaxConcurrentGameSessionActivations = number;
   export type MetricGroup = string;
   export type MetricGroupList = MetricGroup[];
-  export type MetricName = "ActivatingGameSessions"|"ActiveGameSessions"|"ActiveInstances"|"AvailableGameSessions"|"AvailablePlayerSessions"|"CurrentPlayerSessions"|"IdleInstances"|"PercentAvailableGameSessions"|"PercentIdleInstances"|"QueueDepth"|"WaitTime"|string;
+  export type MetricName = "ActivatingGameSessions"|"ActiveGameSessions"|"ActiveInstances"|"AvailableGameSessions"|"AvailablePlayerSessions"|"CurrentPlayerSessions"|"IdleInstances"|"PercentAvailableGameSessions"|"PercentIdleInstances"|"QueueDepth"|"WaitTime";
   export type NonBlankAndLengthConstraintString = string;
   export type NonBlankString = string;
   export type NonEmptyString = string;
   export type NonNegativeDouble = number;
   export type NonZeroAndMaxString = string;
-  export type OperatingSystem = "WINDOWS_2012"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|string;
+  export type OperatingSystem = "WINDOWS_2012"|"AMAZON_LINUX"|"AMAZON_LINUX_2";
   export interface PlacedPlayerSession {
     /**
      * A unique identifier for a player that is associated with this player session.
@@ -3489,11 +3489,11 @@ declare namespace GameLift {
      */
     PlayerData?: PlayerData;
   }
-  export type PlayerSessionCreationPolicy = "ACCEPT_ALL"|"DENY_ALL"|string;
+  export type PlayerSessionCreationPolicy = "ACCEPT_ALL"|"DENY_ALL";
   export type PlayerSessionId = string;
   export type PlayerSessionList = PlayerSession[];
-  export type PlayerSessionStatus = "RESERVED"|"ACTIVE"|"COMPLETED"|"TIMEDOUT"|string;
-  export type PolicyType = "RuleBased"|"TargetBased"|string;
+  export type PlayerSessionStatus = "RESERVED"|"ACTIVE"|"COMPLETED"|"TIMEDOUT";
+  export type PolicyType = "RuleBased"|"TargetBased";
   export type PortNumber = number;
   export type PositiveInteger = number;
   export type PositiveLong = number;
@@ -3507,9 +3507,9 @@ declare namespace GameLift {
      */
     LocationOrder?: LocationList;
   }
-  export type PriorityType = "LATENCY"|"COST"|"DESTINATION"|"LOCATION"|string;
+  export type PriorityType = "LATENCY"|"COST"|"DESTINATION"|"LOCATION";
   export type PriorityTypeList = PriorityType[];
-  export type ProtectionPolicy = "NoProtection"|"FullProtection"|string;
+  export type ProtectionPolicy = "NoProtection"|"FullProtection";
   export interface PutScalingPolicyInput {
     /**
      * A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique. A fleet can have only one scaling policy with the same name.
@@ -3661,7 +3661,7 @@ declare namespace GameLift {
      */
     Message?: FreeText;
   }
-  export type RoutingStrategyType = "SIMPLE"|"TERMINAL"|string;
+  export type RoutingStrategyType = "SIMPLE"|"TERMINAL";
   export type RuleSetBody = string;
   export type RuleSetLimit = number;
   export interface RuntimeConfiguration {
@@ -3696,7 +3696,7 @@ declare namespace GameLift {
      */
     ObjectVersion?: NonEmptyString;
   }
-  export type ScalingAdjustmentType = "ChangeInCapacity"|"ExactCapacity"|"PercentChangeInCapacity"|string;
+  export type ScalingAdjustmentType = "ChangeInCapacity"|"ExactCapacity"|"PercentChangeInCapacity";
   export interface ScalingPolicy {
     /**
      * A unique identifier for the fleet that is associated with this scaling policy.
@@ -3756,7 +3756,7 @@ declare namespace GameLift {
     Location?: LocationStringModel;
   }
   export type ScalingPolicyList = ScalingPolicy[];
-  export type ScalingStatusType = "ACTIVE"|"UPDATE_REQUESTED"|"UPDATING"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"ERROR"|string;
+  export type ScalingStatusType = "ACTIVE"|"UPDATE_REQUESTED"|"UPDATING"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"ERROR";
   export interface Script {
     /**
      * A unique identifier for the Realtime script
@@ -3844,7 +3844,7 @@ declare namespace GameLift {
   }
   export type ServerProcessList = ServerProcess[];
   export type SnsArnStringModel = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING";
   export interface StartFleetActionsInput {
     /**
      * A unique identifier for the fleet to restart actions on. You can use either the fleet ID or ARN value.

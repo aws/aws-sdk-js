@@ -567,7 +567,7 @@ declare namespace LakeFormation {
      */
     TransactionStatus?: TransactionStatus;
   }
-  export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|"IN"|"BETWEEN"|string;
+  export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|"IN"|"BETWEEN";
   export interface CreateDataCellsFilterRequest {
     /**
      * A DataCellsFilter structure containing information about the data cells filter.
@@ -650,7 +650,7 @@ declare namespace LakeFormation {
   }
   export type DataLakePrincipalList = DataLakePrincipal[];
   export type DataLakePrincipalString = string;
-  export type DataLakeResourceType = "CATALOG"|"DATABASE"|"TABLE"|"DATA_LOCATION"|"LF_TAG"|"LF_TAG_POLICY"|"LF_TAG_POLICY_DATABASE"|"LF_TAG_POLICY_TABLE"|string;
+  export type DataLakeResourceType = "CATALOG"|"DATABASE"|"TABLE"|"DATA_LOCATION"|"LF_TAG"|"LF_TAG_POLICY"|"LF_TAG_POLICY_DATABASE"|"LF_TAG_POLICY_TABLE";
   export interface DataLakeSettings {
     /**
      * A list of Lake Formation principals. Supported principals are IAM users or IAM roles.
@@ -848,7 +848,7 @@ declare namespace LakeFormation {
   }
   export interface ExtendTransactionResponse {
   }
-  export type FieldNameString = "RESOURCE_ARN"|"ROLE_ARN"|"LAST_MODIFIED"|string;
+  export type FieldNameString = "RESOURCE_ARN"|"ROLE_ARN"|"LAST_MODIFIED";
   export interface FilterCondition {
     /**
      * The field to filter in the filter condition.
@@ -1455,7 +1455,7 @@ declare namespace LakeFormation {
   export type NumberOfItems = number;
   export type NumberOfMilliseconds = number;
   export type ObjectSize = number;
-  export type OptimizerType = "COMPACTION"|"GARBAGE_COLLECTION"|"ALL"|string;
+  export type OptimizerType = "COMPACTION"|"GARBAGE_COLLECTION"|"ALL";
   export type PageSize = number;
   export interface PartitionObjects {
     /**
@@ -1476,9 +1476,9 @@ declare namespace LakeFormation {
   export type PartitionValueString = string;
   export type PartitionValuesList = PartitionValueString[];
   export type PartitionedTableObjectsList = PartitionObjects[];
-  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ASSOCIATE"|string;
+  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ASSOCIATE";
   export type PermissionList = Permission[];
-  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
+  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION";
   export type PermissionTypeList = PermissionType[];
   export interface PlanningStatistics {
     /**
@@ -1570,7 +1570,7 @@ declare namespace LakeFormation {
     TransactionId?: TransactionIdString;
   }
   export type QueryPlanningContextDatabaseNameString = string;
-  export type QueryStateString = "PENDING"|"WORKUNITS_AVAILABLE"|"ERROR"|"FINISHED"|"EXPIRED"|string;
+  export type QueryStateString = "PENDING"|"WORKUNITS_AVAILABLE"|"ERROR"|"FINISHED"|"EXPIRED";
   export type RAMResourceShareArn = string;
   export interface RegisterResourceRequest {
     /**
@@ -1659,8 +1659,8 @@ declare namespace LakeFormation {
   }
   export type ResourceInfoList = ResourceInfo[];
   export type ResourceShareList = RAMResourceShareArn[];
-  export type ResourceShareType = "FOREIGN"|"ALL"|string;
-  export type ResourceType = "DATABASE"|"TABLE"|string;
+  export type ResourceShareType = "FOREIGN"|"ALL";
+  export type ResourceType = "DATABASE"|"TABLE";
   export type Result = string;
   export type ResultStream = Buffer|Uint8Array|Blob|string|Readable;
   export interface RevokePermissionsRequest {
@@ -1926,9 +1926,9 @@ declare namespace LakeFormation {
   }
   export type TransactionDescriptionList = TransactionDescription[];
   export type TransactionIdString = string;
-  export type TransactionStatus = "ACTIVE"|"COMMITTED"|"ABORTED"|"COMMIT_IN_PROGRESS"|string;
-  export type TransactionStatusFilter = "ALL"|"COMPLETED"|"ACTIVE"|"COMMITTED"|"ABORTED"|string;
-  export type TransactionType = "READ_AND_WRITE"|"READ_ONLY"|string;
+  export type TransactionStatus = "ACTIVE"|"COMMITTED"|"ABORTED"|"COMMIT_IN_PROGRESS";
+  export type TransactionStatusFilter = "ALL"|"COMPLETED"|"ACTIVE"|"COMMITTED"|"ABORTED";
+  export type TransactionType = "READ_AND_WRITE"|"READ_ONLY";
   export type TrueFalseString = string;
   export type TrustedResourceOwners = CatalogIdString[];
   export type URI = string;

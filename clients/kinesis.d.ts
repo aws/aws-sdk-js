@@ -321,7 +321,7 @@ declare namespace Kinesis {
   }
   export type ConsumerList = Consumer[];
   export type ConsumerName = string;
-  export type ConsumerStatus = "CREATING"|"DELETING"|"ACTIVE"|string;
+  export type ConsumerStatus = "CREATING"|"DELETING"|"ACTIVE";
   export interface CreateStreamInput {
     /**
      * A name to identify the stream. The stream name is scoped to the Amazon Web Services account used by the application that creates the stream. It is also scoped by Amazon Web Services Region. That is, two streams in two different Amazon Web Services accounts can have the same name. Two streams in the same Amazon Web Services account but in two different Regions can also have the same name.
@@ -464,7 +464,7 @@ declare namespace Kinesis {
      */
     ShardLevelMetrics: MetricsNameList;
   }
-  export type EncryptionType = "NONE"|"KMS"|string;
+  export type EncryptionType = "NONE"|"KMS";
   export interface EnhancedMetrics {
     /**
      * List of shard-level metrics. The following are the valid shard-level metrics. The value "ALL" enhances every metric.    IncomingBytes     IncomingRecords     OutgoingBytes     OutgoingRecords     WriteProvisionedThroughputExceeded     ReadProvisionedThroughputExceeded     IteratorAgeMilliseconds     ALL    For more information, see Monitoring the Amazon Kinesis Data Streams Service with Amazon CloudWatch in the Amazon Kinesis Data Streams Developer Guide.
@@ -693,7 +693,7 @@ declare namespace Kinesis {
      */
     AdjacentShardToMerge: ShardId;
   }
-  export type MetricsName = "IncomingBytes"|"IncomingRecords"|"OutgoingBytes"|"OutgoingRecords"|"WriteProvisionedThroughputExceeded"|"ReadProvisionedThroughputExceeded"|"IteratorAgeMilliseconds"|"ALL"|string;
+  export type MetricsName = "IncomingBytes"|"IncomingRecords"|"OutgoingBytes"|"OutgoingRecords"|"WriteProvisionedThroughputExceeded"|"ReadProvisionedThroughputExceeded"|"IteratorAgeMilliseconds"|"ALL";
   export type MetricsNameList = MetricsName[];
   export type MillisBehindLatest = number;
   export type NextToken = string;
@@ -845,7 +845,7 @@ declare namespace Kinesis {
     TagKeys: TagKeyList;
   }
   export type RetentionPeriodHours = number;
-  export type ScalingType = "UNIFORM_SCALING"|string;
+  export type ScalingType = "UNIFORM_SCALING";
   export type SequenceNumber = string;
   export interface SequenceNumberRange {
     /**
@@ -894,11 +894,11 @@ declare namespace Kinesis {
      */
     Timestamp?: Timestamp;
   }
-  export type ShardFilterType = "AFTER_SHARD_ID"|"AT_TRIM_HORIZON"|"FROM_TRIM_HORIZON"|"AT_LATEST"|"AT_TIMESTAMP"|"FROM_TIMESTAMP"|string;
+  export type ShardFilterType = "AFTER_SHARD_ID"|"AT_TRIM_HORIZON"|"FROM_TRIM_HORIZON"|"AT_LATEST"|"AT_TIMESTAMP"|"FROM_TIMESTAMP";
   export type ShardId = string;
   export type ShardIdList = ShardId[];
   export type ShardIterator = string;
-  export type ShardIteratorType = "AT_SEQUENCE_NUMBER"|"AFTER_SEQUENCE_NUMBER"|"TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
+  export type ShardIteratorType = "AT_SEQUENCE_NUMBER"|"AFTER_SEQUENCE_NUMBER"|"TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP";
   export type ShardList = Shard[];
   export interface SplitShardInput {
     /**
@@ -1035,7 +1035,7 @@ declare namespace Kinesis {
      */
     ConsumerCount?: ConsumerCountObject;
   }
-  export type StreamMode = "PROVISIONED"|"ON_DEMAND"|string;
+  export type StreamMode = "PROVISIONED"|"ON_DEMAND";
   export interface StreamModeDetails {
     /**
      *  Specifies the capacity mode to which you want to set your data stream. Currently, in Kinesis Data Streams, you can choose between an on-demand capacity mode and a provisioned capacity mode for your data streams. 
@@ -1044,7 +1044,7 @@ declare namespace Kinesis {
   }
   export type StreamName = string;
   export type StreamNameList = StreamName[];
-  export type StreamStatus = "CREATING"|"DELETING"|"ACTIVE"|"UPDATING"|string;
+  export type StreamStatus = "CREATING"|"DELETING"|"ACTIVE"|"UPDATING";
   export interface Tag {
     /**
      * A unique identifier for the tag. Maximum length: 128 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @

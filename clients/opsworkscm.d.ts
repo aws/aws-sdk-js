@@ -312,8 +312,8 @@ declare namespace OpsWorksCM {
   }
   export type BackupId = string;
   export type BackupRetentionCountDefinition = number;
-  export type BackupStatus = "IN_PROGRESS"|"OK"|"FAILED"|"DELETING"|string;
-  export type BackupType = "AUTOMATED"|"MANUAL"|string;
+  export type BackupStatus = "IN_PROGRESS"|"OK"|"FAILED"|"DELETING";
+  export type BackupType = "AUTOMATED"|"MANUAL";
   export type Backups = Backup[];
   export type Boolean = boolean;
   export interface CreateBackupRequest {
@@ -635,10 +635,10 @@ declare namespace OpsWorksCM {
      */
     NextToken?: NextToken;
   }
-  export type MaintenanceStatus = "SUCCESS"|"FAILED"|string;
+  export type MaintenanceStatus = "SUCCESS"|"FAILED";
   export type MaxResults = number;
   export type NextToken = string;
-  export type NodeAssociationStatus = "SUCCESS"|"FAILED"|"IN_PROGRESS"|string;
+  export type NodeAssociationStatus = "SUCCESS"|"FAILED"|"IN_PROGRESS";
   export type NodeAssociationStatusToken = string;
   export type NodeName = string;
   export interface RestoreServerRequest {
@@ -780,7 +780,7 @@ declare namespace OpsWorksCM {
   }
   export type ServerEvents = ServerEvent[];
   export type ServerName = string;
-  export type ServerStatus = "BACKING_UP"|"CONNECTION_LOST"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|"HEALTHY"|"RUNNING"|"RESTORING"|"SETUP"|"UNDER_MAINTENANCE"|"UNHEALTHY"|"TERMINATED"|string;
+  export type ServerStatus = "BACKING_UP"|"CONNECTION_LOST"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|"HEALTHY"|"RUNNING"|"RESTORING"|"SETUP"|"UNDER_MAINTENANCE"|"UNHEALTHY"|"TERMINATED";
   export type Servers = Server[];
   export type ServiceRoleArn = string;
   export interface StartMaintenanceRequest {

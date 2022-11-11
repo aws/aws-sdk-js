@@ -367,7 +367,7 @@ declare namespace LookoutVision {
      */
     GroundTruthManifest?: DatasetGroundTruthManifest;
   }
-  export type DatasetStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_FAILED_ROLLBACK_IN_PROGRESS"|"UPDATE_FAILED_ROLLBACK_COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|string;
+  export type DatasetStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_FAILED_ROLLBACK_IN_PROGRESS"|"UPDATE_FAILED_ROLLBACK_COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED";
   export type DatasetStatusMessage = string;
   export type DatasetType = string;
   export type DateTime = Date;
@@ -791,7 +791,7 @@ declare namespace LookoutVision {
     MaxInferenceUnits?: InferenceUnits;
   }
   export type ModelDescriptionMessage = string;
-  export type ModelHostingStatus = "STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|string;
+  export type ModelHostingStatus = "STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING";
   export interface ModelMetadata {
     /**
      * The unix timestamp for the date and time that the model was created. 
@@ -915,7 +915,7 @@ declare namespace LookoutVision {
     LastUpdatedTimestamp?: DateTime;
   }
   export type ModelPackagingJobName = string;
-  export type ModelPackagingJobStatus = "CREATED"|"RUNNING"|"SUCCEEDED"|"FAILED"|string;
+  export type ModelPackagingJobStatus = "CREATED"|"RUNNING"|"SUCCEEDED"|"FAILED";
   export type ModelPackagingJobsList = ModelPackagingJobMetadata[];
   export type ModelPackagingMethod = string;
   export interface ModelPackagingOutputDetails {
@@ -939,7 +939,7 @@ declare namespace LookoutVision {
      */
     Precision?: Float;
   }
-  export type ModelStatus = "TRAINING"|"TRAINED"|"TRAINING_FAILED"|"STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|"DELETING"|string;
+  export type ModelStatus = "TRAINING"|"TRAINED"|"TRAINING_FAILED"|"STARTING_HOSTING"|"HOSTED"|"HOSTING_FAILED"|"STOPPING_HOSTING"|"SYSTEM_UPDATING"|"DELETING";
   export type ModelStatusMessage = string;
   export type ModelVersion = string;
   export type ModelVersionNoLatest = string;
@@ -1129,7 +1129,7 @@ declare namespace LookoutVision {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TargetDevice = "jetson_xavier"|string;
+  export type TargetDevice = "jetson_xavier";
   export interface TargetPlatform {
     /**
      * The target operating system for the model. Linux is the only operating system that is currently supported. 
@@ -1144,9 +1144,9 @@ declare namespace LookoutVision {
      */
     Accelerator?: TargetPlatformAccelerator;
   }
-  export type TargetPlatformAccelerator = "NVIDIA"|string;
-  export type TargetPlatformArch = "ARM64"|"X86_64"|string;
-  export type TargetPlatformOs = "LINUX"|string;
+  export type TargetPlatformAccelerator = "NVIDIA";
+  export type TargetPlatformArch = "ARM64"|"X86_64";
+  export type TargetPlatformOs = "LINUX";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the model from which you want to remove tags. 

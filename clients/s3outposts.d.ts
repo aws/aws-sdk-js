@@ -132,10 +132,10 @@ declare namespace S3Outposts {
      */
     CustomerOwnedIpv4Pool?: CustomerOwnedIpv4Pool;
   }
-  export type EndpointAccessType = "Private"|"CustomerOwnedIp"|string;
+  export type EndpointAccessType = "Private"|"CustomerOwnedIp";
   export type EndpointArn = string;
   export type EndpointId = string;
-  export type EndpointStatus = "Pending"|"Available"|"Deleting"|string;
+  export type EndpointStatus = "Pending"|"Available"|"Deleting";
   export type Endpoints = Endpoint[];
   export interface ListEndpointsRequest {
     /**

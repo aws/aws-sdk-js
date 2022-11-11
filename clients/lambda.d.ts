@@ -735,7 +735,7 @@ declare namespace Lambda {
      */
     ConsumerGroupId?: URI;
   }
-  export type Architecture = "x86_64"|"arm64"|string;
+  export type Architecture = "x86_64"|"arm64";
   export type ArchitecturesList = Architecture[];
   export type Arn = string;
   export type BatchSize = number;
@@ -778,7 +778,7 @@ declare namespace Lambda {
      */
     UntrustedArtifactOnDeployment?: CodeSigningPolicy;
   }
-  export type CodeSigningPolicy = "Warn"|"Enforce"|string;
+  export type CodeSigningPolicy = "Warn"|"Enforce";
   export type CompatibleArchitectures = Architecture[];
   export type CompatibleRuntimes = Runtime[];
   export interface Concurrency {
@@ -1177,7 +1177,7 @@ declare namespace Lambda {
     OnFailure?: OnFailure;
   }
   export type Enabled = boolean;
-  export type EndPointType = "KAFKA_BOOTSTRAP_SERVERS"|string;
+  export type EndPointType = "KAFKA_BOOTSTRAP_SERVERS";
   export type Endpoint = string;
   export type EndpointLists = Endpoint[];
   export type Endpoints = {[key: string]: EndpointLists};
@@ -1320,7 +1320,7 @@ declare namespace Lambda {
     SelfManagedKafkaEventSourceConfig?: SelfManagedKafkaEventSourceConfig;
   }
   export type EventSourceMappingsList = EventSourceMappingConfiguration[];
-  export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
+  export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP";
   export type EventSourceToken = string;
   export type FileSystemArn = string;
   export interface FileSystemConfig {
@@ -1548,10 +1548,10 @@ declare namespace Lambda {
   export type FunctionEventInvokeConfigList = FunctionEventInvokeConfig[];
   export type FunctionList = FunctionConfiguration[];
   export type FunctionName = string;
-  export type FunctionResponseType = "ReportBatchItemFailures"|string;
+  export type FunctionResponseType = "ReportBatchItemFailures";
   export type FunctionResponseTypeList = FunctionResponseType[];
   export type FunctionUrl = string;
-  export type FunctionUrlAuthType = "NONE"|"AWS_IAM"|string;
+  export type FunctionUrlAuthType = "NONE"|"AWS_IAM";
   export interface FunctionUrlConfig {
     /**
      * The HTTP URL endpoint for your function.
@@ -1580,7 +1580,7 @@ declare namespace Lambda {
   }
   export type FunctionUrlConfigList = FunctionUrlConfig[];
   export type FunctionUrlQualifier = string;
-  export type FunctionVersion = "ALL"|string;
+  export type FunctionVersion = "ALL";
   export interface GetAccountSettingsRequest {
   }
   export interface GetAccountSettingsResponse {
@@ -1950,7 +1950,7 @@ declare namespace Lambda {
      */
     ExecutedVersion?: Version;
   }
-  export type InvocationType = "Event"|"RequestResponse"|"DryRun"|string;
+  export type InvocationType = "Event"|"RequestResponse"|"DryRun";
   export interface InvokeAsyncRequest {
     /**
      * The name of the Lambda function.  Name formats     Function name - my-function.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN - 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
@@ -1968,9 +1968,9 @@ declare namespace Lambda {
     Status?: HttpStatus;
   }
   export type KMSKeyArn = string;
-  export type LastUpdateStatus = "Successful"|"Failed"|"InProgress"|string;
+  export type LastUpdateStatus = "Successful"|"Failed"|"InProgress";
   export type LastUpdateStatusReason = string;
-  export type LastUpdateStatusReasonCode = "EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|"ImageDeleted"|"ImageAccessDenied"|"InvalidImage"|string;
+  export type LastUpdateStatusReasonCode = "EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|"ImageDeleted"|"ImageAccessDenied"|"InvalidImage";
   export interface Layer {
     /**
      * The Amazon Resource Name (ARN) of the function layer.
@@ -2381,7 +2381,7 @@ declare namespace Lambda {
     Versions?: FunctionList;
   }
   export type LocalMountPath = string;
-  export type LogType = "None"|"Tail"|string;
+  export type LogType = "None"|"Tail";
   export type Long = number;
   export type MasterRegion = string;
   export type MaxAge = number;
@@ -2415,7 +2415,7 @@ declare namespace Lambda {
   }
   export type OrganizationId = string;
   export type Origin = string;
-  export type PackageType = "Zip"|"Image"|string;
+  export type PackageType = "Zip"|"Image";
   export type ParallelizationFactor = number;
   export type Pattern = string;
   export type PositiveInteger = number;
@@ -2452,7 +2452,7 @@ declare namespace Lambda {
      */
     LastModified?: Timestamp;
   }
-  export type ProvisionedConcurrencyStatusEnum = "IN_PROGRESS"|"READY"|"FAILED"|string;
+  export type ProvisionedConcurrencyStatusEnum = "IN_PROGRESS"|"READY"|"FAILED";
   export interface PublishLayerVersionRequest {
     /**
      * The name or Amazon Resource Name (ARN) of the layer.
@@ -2669,7 +2669,7 @@ declare namespace Lambda {
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2";
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -2700,11 +2700,11 @@ declare namespace Lambda {
     URI?: URI;
   }
   export type SourceAccessConfigurations = SourceAccessConfiguration[];
-  export type SourceAccessType = "BASIC_AUTH"|"VPC_SUBNET"|"VPC_SECURITY_GROUP"|"SASL_SCRAM_512_AUTH"|"SASL_SCRAM_256_AUTH"|"VIRTUAL_HOST"|"CLIENT_CERTIFICATE_TLS_AUTH"|"SERVER_ROOT_CA_CERTIFICATE"|string;
+  export type SourceAccessType = "BASIC_AUTH"|"VPC_SUBNET"|"VPC_SECURITY_GROUP"|"SASL_SCRAM_512_AUTH"|"SASL_SCRAM_256_AUTH"|"VIRTUAL_HOST"|"CLIENT_CERTIFICATE_TLS_AUTH"|"SERVER_ROOT_CA_CERTIFICATE";
   export type SourceOwner = string;
-  export type State = "Pending"|"Active"|"Inactive"|"Failed"|string;
+  export type State = "Pending"|"Active"|"Inactive"|"Failed";
   export type StateReason = string;
-  export type StateReasonCode = "Idle"|"Creating"|"Restoring"|"EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|"ImageDeleted"|"ImageAccessDenied"|"InvalidImage"|string;
+  export type StateReasonCode = "Idle"|"Creating"|"Restoring"|"EniLimitExceeded"|"InsufficientRolePermissions"|"InvalidConfiguration"|"InternalError"|"SubnetOutOfIPAddresses"|"InvalidSubnet"|"InvalidSecurityGroup"|"ImageDeleted"|"ImageAccessDenied"|"InvalidImage";
   export type StatementId = string;
   export type String = string;
   export type StringList = String[];
@@ -2740,7 +2740,7 @@ declare namespace Lambda {
      */
     Mode?: TracingMode;
   }
-  export type TracingMode = "Active"|"PassThrough"|string;
+  export type TracingMode = "Active"|"PassThrough";
   export type TumblingWindowInSeconds = number;
   export type URI = string;
   export type UnreservedConcurrentExecutions = number;

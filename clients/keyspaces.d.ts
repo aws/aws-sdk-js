@@ -274,7 +274,7 @@ declare namespace Keyspaces {
      */
     kmsKeyIdentifier?: kmsKeyARN;
   }
-  export type EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string;
+  export type EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY";
   export type GenericString = string;
   export interface GetKeyspaceRequest {
     /**
@@ -447,7 +447,7 @@ declare namespace Keyspaces {
      */
     status: PointInTimeRecoveryStatus;
   }
-  export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
+  export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED";
   export interface PointInTimeRecoverySummary {
     /**
      * Shows if point-in-time recovery is enabled or disabled for the specified table.
@@ -520,7 +520,7 @@ declare namespace Keyspaces {
      */
     staticColumns?: StaticColumnList;
   }
-  export type SortOrder = "ASC"|"DESC"|string;
+  export type SortOrder = "ASC"|"DESC";
   export interface StaticColumn {
     /**
      * The name of the static column.
@@ -530,7 +530,7 @@ declare namespace Keyspaces {
   export type StaticColumnList = StaticColumn[];
   export type String = string;
   export type TableName = string;
-  export type TableStatus = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"DELETED"|"RESTORING"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string;
+  export type TableStatus = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"DELETED"|"RESTORING"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS";
   export interface TableSummary {
     /**
      * The name of the keyspace that the table is stored in.
@@ -571,14 +571,14 @@ declare namespace Keyspaces {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type ThroughputMode = "PAY_PER_REQUEST"|"PROVISIONED"|string;
+  export type ThroughputMode = "PAY_PER_REQUEST"|"PROVISIONED";
   export interface TimeToLive {
     /**
      * Shows how to enable custom Time to Live (TTL) settings for the specified table.
      */
     status: TimeToLiveStatus;
   }
-  export type TimeToLiveStatus = "ENABLED"|string;
+  export type TimeToLiveStatus = "ENABLED";
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**

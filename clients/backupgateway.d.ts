@@ -301,7 +301,7 @@ declare namespace BackupGateway {
      */
     VpcEndpoint?: VpcEndpoint;
   }
-  export type GatewayType = "BACKUP_VM"|string;
+  export type GatewayType = "BACKUP_VM";
   export type Gateways = Gateway[];
   export interface GetGatewayInput {
     /**
@@ -352,7 +352,7 @@ declare namespace BackupGateway {
     State?: HypervisorState;
   }
   export type HypervisorId = string;
-  export type HypervisorState = "PENDING"|"ONLINE"|"OFFLINE"|"ERROR"|string;
+  export type HypervisorState = "PENDING"|"ONLINE"|"OFFLINE"|"ERROR";
   export type Hypervisors = Hypervisor[];
   export interface ImportHypervisorConfigurationInput {
     /**

@@ -149,7 +149,7 @@ declare class MediaPackageVod extends Service {
   updatePackagingGroup(callback?: (err: AWSError, data: MediaPackageVod.Types.UpdatePackagingGroupResponse) => void): Request<MediaPackageVod.Types.UpdatePackagingGroupResponse, AWSError>;
 }
 declare namespace MediaPackageVod {
-  export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;
+  export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH";
   export interface AssetShallow {
     /**
      * The ARN of the Asset.
@@ -561,7 +561,7 @@ rounded to the nearest multiple of the source segment duration.
      */
     PresetSpeke20Video: PresetSpeke20Video;
   }
-  export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
+  export type EncryptionMethod = "AES_128"|"SAMPLE_AES";
   export interface HlsEncryption {
     /**
      * A constant initialization vector for encryption (optional).
@@ -714,7 +714,7 @@ rounded to the nearest multiple of the source fragment duration.
      */
     Tags?: __mapOf__string;
   }
-  export type ManifestLayout = "FULL"|"COMPACT"|string;
+  export type ManifestLayout = "FULL"|"COMPACT";
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -773,11 +773,11 @@ rounded to the nearest multiple of the source fragment duration.
     Id?: __string;
     Tags?: Tags;
   }
-  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED"|string;
-  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED"|string;
-  export type Profile = "NONE"|"HBBTV_1_5"|string;
-  export type ScteMarkersSource = "SEGMENTS"|"MANIFEST"|string;
-  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|"PRESET-AUDIO-2"|"PRESET-AUDIO-3"|"SHARED"|"UNENCRYPTED";
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|"PRESET-VIDEO-2"|"PRESET-VIDEO-3"|"PRESET-VIDEO-4"|"PRESET-VIDEO-5"|"PRESET-VIDEO-6"|"PRESET-VIDEO-7"|"PRESET-VIDEO-8"|"SHARED"|"UNENCRYPTED";
+  export type Profile = "NONE"|"HBBTV_1_5";
+  export type ScteMarkersSource = "SEGMENTS"|"MANIFEST";
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION";
   export interface SpekeKeyProvider {
     EncryptionContractConfiguration?: EncryptionContractConfiguration;
     /**
@@ -795,7 +795,7 @@ MediaPackage will assume when accessing the key provider service.
      */
     Url: __string;
   }
-  export type StreamOrder = "ORIGINAL"|"VIDEO_BITRATE_ASCENDING"|"VIDEO_BITRATE_DESCENDING"|string;
+  export type StreamOrder = "ORIGINAL"|"VIDEO_BITRATE_ASCENDING"|"VIDEO_BITRATE_DESCENDING";
   export interface StreamSelection {
     /**
      * The maximum video bitrate (bps) to include in output.
@@ -855,7 +855,7 @@ MediaPackage will assume when accessing the key provider service.
     Id?: __string;
     Tags?: Tags;
   }
-  export type __PeriodTriggersElement = "ADS"|string;
+  export type __PeriodTriggersElement = "ADS";
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfAssetShallow = AssetShallow[];

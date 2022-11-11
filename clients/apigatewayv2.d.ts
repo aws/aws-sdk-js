@@ -685,7 +685,7 @@ declare namespace ApiGatewayV2 {
   }
   export type Arn = string;
   export type AuthorizationScopes = StringWithLengthBetween1And64[];
-  export type AuthorizationType = "NONE"|"AWS_IAM"|"CUSTOM"|"JWT"|string;
+  export type AuthorizationType = "NONE"|"AWS_IAM"|"CUSTOM"|"JWT";
   export interface Authorizer {
     /**
      * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, don't specify this parameter. Supported only for REQUEST authorizers.
@@ -733,9 +733,9 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
   }
-  export type AuthorizerType = "REQUEST"|"JWT"|string;
-  export type ConnectionType = "INTERNET"|"VPC_LINK"|string;
-  export type ContentHandlingStrategy = "CONVERT_TO_BINARY"|"CONVERT_TO_TEXT"|string;
+  export type AuthorizerType = "REQUEST"|"JWT";
+  export type ConnectionType = "INTERNET"|"VPC_LINK";
+  export type ContentHandlingStrategy = "CONVERT_TO_BINARY"|"CONVERT_TO_TEXT";
   export interface Cors {
     /**
      * Specifies whether credentials are included in the CORS request. Supported only for HTTP APIs.
@@ -1861,7 +1861,7 @@ declare namespace ApiGatewayV2 {
      */
     Description?: StringWithLengthBetween0And1024;
   }
-  export type DeploymentStatus = "PENDING"|"FAILED"|"DEPLOYED"|string;
+  export type DeploymentStatus = "PENDING"|"FAILED"|"DEPLOYED";
   export interface DomainName {
     /**
      * The API mapping selection expression.
@@ -1927,8 +1927,8 @@ declare namespace ApiGatewayV2 {
     OwnershipVerificationCertificateArn?: Arn;
   }
   export type DomainNameConfigurations = DomainNameConfiguration[];
-  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION"|string;
-  export type EndpointType = "REGIONAL"|"EDGE"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION";
+  export type EndpointType = "REGIONAL"|"EDGE";
   export interface ExportApiRequest {
     /**
      * The API identifier.
@@ -3079,7 +3079,7 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
   }
-  export type IntegrationType = "AWS"|"HTTP"|"MOCK"|"HTTP_PROXY"|"AWS_PROXY"|string;
+  export type IntegrationType = "AWS"|"HTTP"|"MOCK"|"HTTP_PROXY"|"AWS_PROXY";
   export interface JWTConfiguration {
     /**
      * A list of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list. See RFC 7519. Supported only for HTTP APIs.
@@ -3091,7 +3091,7 @@ declare namespace ApiGatewayV2 {
      */
     Issuer?: UriWithLengthBetween1And2048;
   }
-  export type LoggingLevel = "ERROR"|"INFO"|"OFF"|string;
+  export type LoggingLevel = "ERROR"|"INFO"|"OFF";
   export interface Model {
     /**
      * The content-type for the model, for example, "application/json".
@@ -3145,8 +3145,8 @@ declare namespace ApiGatewayV2 {
      */
     Required?: __boolean;
   }
-  export type PassthroughBehavior = "WHEN_NO_MATCH"|"NEVER"|"WHEN_NO_TEMPLATES"|string;
-  export type ProtocolType = "WEBSOCKET"|"HTTP"|string;
+  export type PassthroughBehavior = "WHEN_NO_MATCH"|"NEVER"|"WHEN_NO_TEMPLATES";
+  export type ProtocolType = "WEBSOCKET"|"HTTP";
   export interface ReimportApiRequest {
     /**
      * The API identifier.
@@ -3334,7 +3334,7 @@ declare namespace ApiGatewayV2 {
   }
   export type RouteSettingsMap = {[key: string]: RouteSettings};
   export type SecurityGroupIdList = __string[];
-  export type SecurityPolicy = "TLS_1_0"|"TLS_1_2"|string;
+  export type SecurityPolicy = "TLS_1_0"|"TLS_1_2";
   export type SelectionExpression = string;
   export type SelectionKey = string;
   export interface Stage {
@@ -4404,8 +4404,8 @@ declare namespace ApiGatewayV2 {
      */
     VpcLinkVersion?: VpcLinkVersion;
   }
-  export type VpcLinkStatus = "PENDING"|"AVAILABLE"|"DELETING"|"FAILED"|"INACTIVE"|string;
-  export type VpcLinkVersion = "V2"|string;
+  export type VpcLinkStatus = "PENDING"|"AVAILABLE"|"DELETING"|"FAILED"|"INACTIVE";
+  export type VpcLinkVersion = "V2";
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;

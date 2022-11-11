@@ -600,7 +600,7 @@ declare namespace Comprehend {
   export type AnyLengthString = string;
   export type AttributeNamesList = AttributeNamesListItem[];
   export type AttributeNamesListItem = string;
-  export type AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string;
+  export type AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT";
   export interface AugmentedManifestsListItem {
     /**
      * The Amazon S3 location of the augmented manifest file.
@@ -1464,7 +1464,7 @@ declare namespace Comprehend {
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
   export type DocumentClassifierAugmentedManifestsList = AugmentedManifestsListItem[];
-  export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
+  export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST";
   export type DocumentClassifierEndpointArn = string;
   export interface DocumentClassifierFilter {
     /**
@@ -1506,7 +1506,7 @@ declare namespace Comprehend {
      */
     AugmentedManifests?: DocumentClassifierAugmentedManifestsList;
   }
-  export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
+  export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL";
   export interface DocumentClassifierOutputDataConfig {
     /**
      * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
@@ -1625,9 +1625,9 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
-  export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT"|string;
-  export type DocumentReadFeatureTypes = "TABLES"|"FORMS"|string;
-  export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION"|string;
+  export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT";
+  export type DocumentReadFeatureTypes = "TABLES"|"FORMS";
+  export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION";
   export interface DocumentReaderConfig {
     /**
      * This enum field will start with two values which will apply to PDFs:    TEXTRACT_DETECT_DOCUMENT_TEXT - The service calls DetectDocumentText for PDF documents per page.    TEXTRACT_ANALYZE_DOCUMENT - The service calls AnalyzeDocument for PDF documents per page.  
@@ -1787,7 +1787,7 @@ declare namespace Comprehend {
     DesiredDataAccessRoleArn?: IamRoleArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
-  export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
+  export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING";
   export interface EntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -1909,7 +1909,7 @@ declare namespace Comprehend {
   }
   export type EntityRecognizerArn = string;
   export type EntityRecognizerAugmentedManifestsList = AugmentedManifestsListItem[];
-  export type EntityRecognizerDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
+  export type EntityRecognizerDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST";
   export interface EntityRecognizerDocuments {
     /**
      *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
@@ -2112,7 +2112,7 @@ declare namespace Comprehend {
      */
     LatestVersionStatus?: ModelStatus;
   }
-  export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
+  export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER";
   export type EntityTypeName = string;
   export interface EntityTypesEvaluationMetrics {
     /**
@@ -2254,11 +2254,11 @@ declare namespace Comprehend {
      */
     DocumentReaderConfig?: DocumentReaderConfig;
   }
-  export type InputFormat = "ONE_DOC_PER_FILE"|"ONE_DOC_PER_LINE"|string;
+  export type InputFormat = "ONE_DOC_PER_FILE"|"ONE_DOC_PER_LINE";
   export type Integer = number;
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED";
   export interface KeyPhrase {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
@@ -2352,7 +2352,7 @@ declare namespace Comprehend {
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type KmsKeyId = string;
   export type LabelDelimiter = string;
-  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string;
+  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW";
   export interface ListDocumentClassificationJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -2725,7 +2725,7 @@ declare namespace Comprehend {
     Sentiment?: SentimentType;
     SentimentScore?: SentimentScore;
   }
-  export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|string;
+  export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED";
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
     /**
@@ -2747,7 +2747,7 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
-  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
+  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB";
   export interface PiiEntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -2821,8 +2821,8 @@ declare namespace Comprehend {
     Mode?: PiiEntitiesDetectionMode;
   }
   export type PiiEntitiesDetectionJobPropertiesList = PiiEntitiesDetectionJobProperties[];
-  export type PiiEntitiesDetectionMaskMode = "MASK"|"REPLACE_WITH_PII_ENTITY_TYPE"|string;
-  export type PiiEntitiesDetectionMode = "ONLY_REDACTION"|"ONLY_OFFSETS"|string;
+  export type PiiEntitiesDetectionMaskMode = "MASK"|"REPLACE_WITH_PII_ENTITY_TYPE";
+  export type PiiEntitiesDetectionMode = "ONLY_REDACTION"|"ONLY_OFFSETS";
   export interface PiiEntity {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
@@ -2841,7 +2841,7 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
-  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|"LICENSE_PLATE"|"VEHICLE_IDENTIFICATION_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"IN_PERMANENT_ACCOUNT_NUMBER"|"IN_NREGA"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"CA_HEALTH_NUMBER"|"IN_AADHAAR"|"IN_VOTER_NUMBER"|string;
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|"LICENSE_PLATE"|"VEHICLE_IDENTIFICATION_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"IN_PERMANENT_ACCOUNT_NUMBER"|"IN_NREGA"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"CA_HEALTH_NUMBER"|"IN_AADHAAR"|"IN_VOTER_NUMBER";
   export interface PiiOutputDataConfig {
     /**
      * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data.   For a PII entity detection job, the output file is plain text, not a compressed archive. The output file name is the same as the input file, with .out appended at the end. 
@@ -2982,8 +2982,8 @@ declare namespace Comprehend {
      */
     Mixed?: Float;
   }
-  export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
-  export type Split = "TRAIN"|"TEST"|string;
+  export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED";
+  export type Split = "TRAIN"|"TEST";
   export interface StartDocumentClassificationJobRequest {
     /**
      * The identifier of the job.
@@ -3573,7 +3573,7 @@ declare namespace Comprehend {
   export type String = string;
   export type SubnetId = string;
   export type Subnets = SubnetId[];
-  export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
+  export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt";
   export interface SyntaxToken {
     /**
      * A unique identifier for a token.
@@ -3697,7 +3697,7 @@ declare namespace Comprehend {
      */
     Mentions?: ListOfMentions;
   }
-  export type TargetedSentimentEntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"FACILITY"|"BRAND"|"COMMERCIAL_ITEM"|"MOVIE"|"MUSIC"|"BOOK"|"SOFTWARE"|"GAME"|"PERSONAL_TITLE"|"EVENT"|"DATE"|"QUANTITY"|"ATTRIBUTE"|"OTHER"|string;
+  export type TargetedSentimentEntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"FACILITY"|"BRAND"|"COMMERCIAL_ITEM"|"MOVIE"|"MUSIC"|"BOOK"|"SOFTWARE"|"GAME"|"PERSONAL_TITLE"|"EVENT"|"DATE"|"QUANTITY"|"ATTRIBUTE"|"OTHER";
   export interface TargetedSentimentMention {
     /**
      * Model confidence that the entity is relevant. Value range is zero to one, where one is highest confidence.

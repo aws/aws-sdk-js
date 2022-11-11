@@ -222,7 +222,7 @@ declare namespace AutoScalingPlans {
   }
   export type DisableDynamicScaling = boolean;
   export type DisableScaleIn = boolean;
-  export type ForecastDataType = "CapacityForecast"|"LoadForecast"|"ScheduledActionMinCapacity"|"ScheduledActionMaxCapacity"|string;
+  export type ForecastDataType = "CapacityForecast"|"LoadForecast"|"ScheduledActionMinCapacity"|"ScheduledActionMaxCapacity";
   export interface GetScalingPlanResourceForecastDataRequest {
     /**
      * The name of the scaling plan.
@@ -263,7 +263,7 @@ declare namespace AutoScalingPlans {
      */
     Datapoints: Datapoints;
   }
-  export type LoadMetricType = "ASGTotalCPUUtilization"|"ASGTotalNetworkIn"|"ASGTotalNetworkOut"|"ALBTargetGroupRequestCount"|string;
+  export type LoadMetricType = "ASGTotalCPUUtilization"|"ASGTotalNetworkIn"|"ASGTotalNetworkOut"|"ALBTargetGroupRequestCount";
   export type MaxResults = number;
   export interface MetricDimension {
     /**
@@ -281,11 +281,11 @@ declare namespace AutoScalingPlans {
   export type MetricName = string;
   export type MetricNamespace = string;
   export type MetricScale = number;
-  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
+  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum";
   export type MetricUnit = string;
   export type NextToken = string;
   export type PolicyName = string;
-  export type PolicyType = "TargetTrackingScaling"|string;
+  export type PolicyType = "TargetTrackingScaling";
   export interface PredefinedLoadMetricSpecification {
     /**
      * The metric type.
@@ -306,12 +306,12 @@ declare namespace AutoScalingPlans {
      */
     ResourceLabel?: ResourceLabel;
   }
-  export type PredictiveScalingMaxCapacityBehavior = "SetForecastCapacityToMaxCapacity"|"SetMaxCapacityToForecastCapacity"|"SetMaxCapacityAboveForecastCapacity"|string;
-  export type PredictiveScalingMode = "ForecastAndScale"|"ForecastOnly"|string;
+  export type PredictiveScalingMaxCapacityBehavior = "SetForecastCapacityToMaxCapacity"|"SetMaxCapacityToForecastCapacity"|"SetMaxCapacityAboveForecastCapacity";
+  export type PredictiveScalingMode = "ForecastAndScale"|"ForecastOnly";
   export type ResourceCapacity = number;
   export type ResourceIdMaxLen1600 = string;
   export type ResourceLabel = string;
-  export type ScalableDimension = "autoscaling:autoScalingGroup:DesiredCapacity"|"ecs:service:DesiredCount"|"ec2:spot-fleet-request:TargetCapacity"|"rds:cluster:ReadReplicaCount"|"dynamodb:table:ReadCapacityUnits"|"dynamodb:table:WriteCapacityUnits"|"dynamodb:index:ReadCapacityUnits"|"dynamodb:index:WriteCapacityUnits"|string;
+  export type ScalableDimension = "autoscaling:autoScalingGroup:DesiredCapacity"|"ecs:service:DesiredCount"|"ec2:spot-fleet-request:TargetCapacity"|"rds:cluster:ReadReplicaCount"|"dynamodb:table:ReadCapacityUnits"|"dynamodb:table:WriteCapacityUnits"|"dynamodb:index:ReadCapacityUnits"|"dynamodb:index:WriteCapacityUnits";
   export interface ScalingInstruction {
     /**
      * The namespace of the AWS service.
@@ -371,7 +371,7 @@ declare namespace AutoScalingPlans {
     DisableDynamicScaling?: DisableDynamicScaling;
   }
   export type ScalingInstructions = ScalingInstruction[];
-  export type ScalingMetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"DynamoDBReadCapacityUtilization"|"DynamoDBWriteCapacityUtilization"|"ECSServiceAverageCPUUtilization"|"ECSServiceAverageMemoryUtilization"|"ALBRequestCountPerTarget"|"RDSReaderAverageCPUUtilization"|"RDSReaderAverageDatabaseConnections"|"EC2SpotFleetRequestAverageCPUUtilization"|"EC2SpotFleetRequestAverageNetworkIn"|"EC2SpotFleetRequestAverageNetworkOut"|string;
+  export type ScalingMetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"DynamoDBReadCapacityUtilization"|"DynamoDBWriteCapacityUtilization"|"ECSServiceAverageCPUUtilization"|"ECSServiceAverageMemoryUtilization"|"ALBRequestCountPerTarget"|"RDSReaderAverageCPUUtilization"|"RDSReaderAverageDatabaseConnections"|"EC2SpotFleetRequestAverageCPUUtilization"|"EC2SpotFleetRequestAverageNetworkIn"|"EC2SpotFleetRequestAverageNetworkOut";
   export interface ScalingPlan {
     /**
      * The name of the scaling plan.
@@ -443,7 +443,7 @@ declare namespace AutoScalingPlans {
     ScalingStatusMessage?: XmlString;
   }
   export type ScalingPlanResources = ScalingPlanResource[];
-  export type ScalingPlanStatusCode = "Active"|"ActiveWithProblems"|"CreationInProgress"|"CreationFailed"|"DeletionInProgress"|"DeletionFailed"|"UpdateInProgress"|"UpdateFailed"|string;
+  export type ScalingPlanStatusCode = "Active"|"ActiveWithProblems"|"CreationInProgress"|"CreationFailed"|"DeletionInProgress"|"DeletionFailed"|"UpdateInProgress"|"UpdateFailed";
   export type ScalingPlanVersion = number;
   export type ScalingPlans = ScalingPlan[];
   export type ScalingPolicies = ScalingPolicy[];
@@ -461,10 +461,10 @@ declare namespace AutoScalingPlans {
      */
     TargetTrackingConfiguration?: TargetTrackingConfiguration;
   }
-  export type ScalingPolicyUpdateBehavior = "KeepExternalPolicies"|"ReplaceExternalPolicies"|string;
-  export type ScalingStatusCode = "Inactive"|"PartiallyActive"|"Active"|string;
+  export type ScalingPolicyUpdateBehavior = "KeepExternalPolicies"|"ReplaceExternalPolicies";
+  export type ScalingStatusCode = "Inactive"|"PartiallyActive"|"Active";
   export type ScheduledActionBufferTime = number;
-  export type ServiceNamespace = "autoscaling"|"ecs"|"ec2"|"rds"|"dynamodb"|string;
+  export type ServiceNamespace = "autoscaling"|"ecs"|"ec2"|"rds"|"dynamodb";
   export interface TagFilter {
     /**
      * The tag key.

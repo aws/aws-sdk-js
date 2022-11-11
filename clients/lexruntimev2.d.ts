@@ -107,7 +107,7 @@ declare namespace LexRuntimeV2 {
      */
     score?: Double;
   }
-  export type ConfirmationState = "Confirmed"|"Denied"|"None"|string;
+  export type ConfirmationState = "Confirmed"|"Denied"|"None";
   export interface DeleteSessionRequest {
     /**
      * The identifier of the bot that contains the session data.
@@ -162,7 +162,7 @@ declare namespace LexRuntimeV2 {
      */
     subSlotToElicit?: ElicitSubSlot;
   }
-  export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|"None"|string;
+  export type DialogActionType = "Close"|"ConfirmIntent"|"Delegate"|"ElicitIntent"|"ElicitSlot"|"None";
   export type Double = number;
   export interface ElicitSubSlot {
     /**
@@ -246,7 +246,7 @@ declare namespace LexRuntimeV2 {
      */
     confirmationState?: ConfirmationState;
   }
-  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|"FulfillmentInProgress"|string;
+  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|"FulfillmentInProgress";
   export interface Interpretation {
     /**
      * Determines the threshold where Amazon Lex V2 will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
@@ -274,7 +274,7 @@ declare namespace LexRuntimeV2 {
     contentType: MessageContentType;
     imageResponseCard?: ImageResponseCard;
   }
-  export type MessageContentType = "CustomPayload"|"ImageResponseCard"|"PlainText"|"SSML"|string;
+  export type MessageContentType = "CustomPayload"|"ImageResponseCard"|"PlainText"|"SSML";
   export type Messages = Message[];
   export type Name = string;
   export type NonEmptyString = string;
@@ -517,7 +517,7 @@ declare namespace LexRuntimeV2 {
      */
     mixed?: Double;
   }
-  export type SentimentType = "MIXED"|"NEGATIVE"|"NEUTRAL"|"POSITIVE"|string;
+  export type SentimentType = "MIXED"|"NEGATIVE"|"NEUTRAL"|"POSITIVE";
   export type SessionId = string;
   export interface SessionState {
     /**
@@ -545,7 +545,7 @@ declare namespace LexRuntimeV2 {
      */
     runtimeHints?: RuntimeHints;
   }
-  export type Shape = "Scalar"|"List"|"Composite"|string;
+  export type Shape = "Scalar"|"List"|"Composite";
   export interface Slot {
     /**
      * The current value of the slot.
@@ -570,7 +570,7 @@ declare namespace LexRuntimeV2 {
   export type String = string;
   export type StringList = NonEmptyString[];
   export type StringMap = {[key: string]: String};
-  export type StyleType = "Default"|"SpellByLetter"|"SpellByWord"|string;
+  export type StyleType = "Default"|"SpellByLetter"|"SpellByWord";
   export type Text = string;
   export interface Value {
     /**

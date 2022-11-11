@@ -182,7 +182,7 @@ declare class DAX extends Service {
 }
 declare namespace DAX {
   export type AvailabilityZoneList = String[];
-  export type ChangeType = "IMMEDIATE"|"REQUIRES_REBOOT"|string;
+  export type ChangeType = "IMMEDIATE"|"REQUIRES_REBOOT";
   export interface Cluster {
     /**
      * The name of the DAX cluster.
@@ -257,7 +257,7 @@ declare namespace DAX {
      */
     ClusterEndpointEncryptionType?: ClusterEndpointEncryptionType;
   }
-  export type ClusterEndpointEncryptionType = "NONE"|"TLS"|string;
+  export type ClusterEndpointEncryptionType = "NONE"|"TLS";
   export type ClusterList = Cluster[];
   export type ClusterNameList = String[];
   export interface CreateClusterRequest {
@@ -635,7 +635,7 @@ declare namespace DAX {
   }
   export type Integer = number;
   export type IntegerOptional = number;
-  export type IsModifiable = "TRUE"|"FALSE"|"CONDITIONAL"|string;
+  export type IsModifiable = "TRUE"|"FALSE"|"CONDITIONAL";
   export type KeyList = String[];
   export interface ListTagsRequest {
     /**
@@ -786,7 +786,7 @@ declare namespace DAX {
     ParameterValue?: String;
   }
   export type ParameterNameValueList = ParameterNameValue[];
-  export type ParameterType = "DEFAULT"|"NODE_TYPE_SPECIFIC"|string;
+  export type ParameterType = "DEFAULT"|"NODE_TYPE_SPECIFIC";
   export interface RebootNodeRequest {
     /**
      * The name of the DAX cluster containing the node to be rebooted.
@@ -816,7 +816,7 @@ declare namespace DAX {
      */
     Enabled: SSEEnabled;
   }
-  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export type SSEStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED";
   export type SecurityGroupIdentifierList = String[];
   export interface SecurityGroupMembership {
     /**
@@ -829,7 +829,7 @@ declare namespace DAX {
     Status?: String;
   }
   export type SecurityGroupMembershipList = SecurityGroupMembership[];
-  export type SourceType = "CLUSTER"|"PARAMETER_GROUP"|"SUBNET_GROUP"|string;
+  export type SourceType = "CLUSTER"|"PARAMETER_GROUP"|"SUBNET_GROUP";
   export type String = string;
   export interface Subnet {
     /**

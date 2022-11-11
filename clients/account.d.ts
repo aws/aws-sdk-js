@@ -77,7 +77,7 @@ declare namespace Account {
      */
     Title?: Title;
   }
-  export type AlternateContactType = "BILLING"|"OPERATIONS"|"SECURITY"|string;
+  export type AlternateContactType = "BILLING"|"OPERATIONS"|"SECURITY";
   export type City = string;
   export type CompanyName = string;
   export interface ContactInformation {

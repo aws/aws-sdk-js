@@ -433,7 +433,7 @@ declare namespace LicenseManager {
      */
     Version?: String;
   }
-  export type AllowedOperation = "CreateGrant"|"CheckoutLicense"|"CheckoutBorrowLicense"|"CheckInLicense"|"ExtendConsumptionLicense"|"ListPurchasedLicenses"|"CreateToken"|string;
+  export type AllowedOperation = "CreateGrant"|"CheckoutLicense"|"CheckoutBorrowLicense"|"CheckInLicense"|"ExtendConsumptionLicense"|"ListPurchasedLicenses"|"CreateToken";
   export type AllowedOperationList = AllowedOperation[];
   export type Arn = string;
   export type ArnList = Arn[];
@@ -593,7 +593,7 @@ declare namespace LicenseManager {
      */
     LicenseArn?: String;
   }
-  export type CheckoutType = "PROVISIONAL"|"PERPETUAL"|string;
+  export type CheckoutType = "PROVISIONAL"|"PERPETUAL";
   export type ClientRequestToken = string;
   export type ClientToken = string;
   export interface ConsumedLicenseSummary {
@@ -1048,7 +1048,7 @@ declare namespace LicenseManager {
   }
   export interface DeleteTokenResponse {
   }
-  export type DigitalSignatureMethod = "JWT_PS384"|string;
+  export type DigitalSignatureMethod = "JWT_PS384";
   export interface Entitlement {
     /**
      * Entitlement name.
@@ -1090,9 +1090,9 @@ declare namespace LicenseManager {
     Unit: EntitlementDataUnit;
   }
   export type EntitlementDataList = EntitlementData[];
-  export type EntitlementDataUnit = "Count"|"None"|"Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|string;
+  export type EntitlementDataUnit = "Count"|"None"|"Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second";
   export type EntitlementList = Entitlement[];
-  export type EntitlementUnit = "Count"|"None"|"Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|string;
+  export type EntitlementUnit = "Count"|"None"|"Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second";
   export interface EntitlementUsage {
     /**
      * Entitlement usage name.
@@ -1406,7 +1406,7 @@ declare namespace LicenseManager {
     GrantedOperations: AllowedOperationList;
   }
   export type GrantList = Grant[];
-  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|"WORKFLOW_COMPLETED"|string;
+  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|"WORKFLOW_COMPLETED";
   export interface GrantedLicense {
     /**
      * Amazon Resource Name (ARN) of the license.
@@ -1486,7 +1486,7 @@ declare namespace LicenseManager {
      */
     Value?: String;
   }
-  export type InventoryFilterCondition = "EQUALS"|"NOT_EQUALS"|"BEGINS_WITH"|"CONTAINS"|string;
+  export type InventoryFilterCondition = "EQUALS"|"NOT_EQUALS"|"BEGINS_WITH"|"CONTAINS";
   export type InventoryFilterList = InventoryFilter[];
   export interface Issuer {
     /**
@@ -1659,7 +1659,7 @@ declare namespace LicenseManager {
     AmiAssociationScope?: String;
   }
   export type LicenseConfigurationAssociations = LicenseConfigurationAssociation[];
-  export type LicenseConfigurationStatus = "AVAILABLE"|"DISABLED"|string;
+  export type LicenseConfigurationStatus = "AVAILABLE"|"DISABLED";
   export interface LicenseConfigurationUsage {
     /**
      * Amazon Resource Name (ARN) of the resource.
@@ -1733,10 +1733,10 @@ declare namespace LicenseManager {
     EndTime?: DateTime;
   }
   export type LicenseConversionTaskId = string;
-  export type LicenseConversionTaskStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type LicenseConversionTaskStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED";
   export type LicenseConversionTasks = LicenseConversionTask[];
-  export type LicenseCountingType = "vCPU"|"Instance"|"Core"|"Socket"|string;
-  export type LicenseDeletionStatus = "PENDING_DELETE"|"DELETED"|string;
+  export type LicenseCountingType = "vCPU"|"Instance"|"Core"|"Socket";
+  export type LicenseDeletionStatus = "PENDING_DELETE"|"DELETED";
   export type LicenseList = License[];
   export interface LicenseOperationFailure {
     /**
@@ -1784,7 +1784,7 @@ declare namespace LicenseManager {
     AmiAssociationScope?: String;
   }
   export type LicenseSpecifications = LicenseSpecification[];
-  export type LicenseStatus = "AVAILABLE"|"PENDING_AVAILABLE"|"DEACTIVATED"|"SUSPENDED"|"EXPIRED"|"PENDING_DELETE"|"DELETED"|string;
+  export type LicenseStatus = "AVAILABLE"|"PENDING_AVAILABLE"|"DEACTIVATED"|"SUSPENDED"|"EXPIRED"|"PENDING_DELETE"|"DELETED";
   export interface LicenseUsage {
     /**
      * License entitlement usages.
@@ -2297,7 +2297,7 @@ declare namespace LicenseManager {
      */
     AllowedOperations?: AllowedOperationList;
   }
-  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|"WORKFLOW_COMPLETED"|string;
+  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|"WORKFLOW_COMPLETED";
   export interface RejectGrantRequest {
     /**
      * Amazon Resource Name (ARN) of the grant.
@@ -2318,7 +2318,7 @@ declare namespace LicenseManager {
      */
     Version?: String;
   }
-  export type RenewType = "None"|"Weekly"|"Monthly"|string;
+  export type RenewType = "None"|"Weekly"|"Monthly";
   export interface ReportContext {
     /**
      * Amazon Resource Name (ARN) of the license configuration that this generator reports on.
@@ -2335,7 +2335,7 @@ declare namespace LicenseManager {
      */
     period?: ReportFrequencyType;
   }
-  export type ReportFrequencyType = "DAY"|"WEEK"|"MONTH"|string;
+  export type ReportFrequencyType = "DAY"|"WEEK"|"MONTH";
   export interface ReportGenerator {
     /**
      * Name of the report generator.
@@ -2392,7 +2392,7 @@ declare namespace LicenseManager {
   }
   export type ReportGeneratorList = ReportGenerator[];
   export type ReportGeneratorName = string;
-  export type ReportType = "LicenseConfigurationSummaryReport"|"LicenseConfigurationUsageReport"|string;
+  export type ReportType = "LicenseConfigurationSummaryReport"|"LicenseConfigurationUsageReport";
   export type ReportTypeList = ReportType[];
   export interface ResourceInventory {
     /**
@@ -2421,7 +2421,7 @@ declare namespace LicenseManager {
     ResourceOwningAccountId?: String;
   }
   export type ResourceInventoryList = ResourceInventory[];
-  export type ResourceType = "EC2_INSTANCE"|"EC2_HOST"|"EC2_AMI"|"RDS"|"SYSTEMS_MANAGER_MANAGED_INSTANCE"|string;
+  export type ResourceType = "EC2_INSTANCE"|"EC2_HOST"|"EC2_AMI"|"RDS"|"SYSTEMS_MANAGER_MANAGED_INSTANCE";
   export interface S3Location {
     /**
      * Name of the S3 bucket reports are published to.
@@ -2492,7 +2492,7 @@ declare namespace LicenseManager {
   }
   export type TokenList = TokenData[];
   export type TokenString = string;
-  export type TokenType = "REFRESH_TOKEN"|string;
+  export type TokenType = "REFRESH_TOKEN";
   export interface UntagResourceRequest {
     /**
      * Amazon Resource Name (ARN) of the license configuration.

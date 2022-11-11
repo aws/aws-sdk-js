@@ -350,7 +350,7 @@ declare class EKS extends Service {
   waitFor(state: "fargateProfileDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
 }
 declare namespace EKS {
-  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|"BOTTLEROCKET_ARM_64"|"BOTTLEROCKET_x86_64"|"BOTTLEROCKET_ARM_64_NVIDIA"|"BOTTLEROCKET_x86_64_NVIDIA"|string;
+  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|"BOTTLEROCKET_ARM_64"|"BOTTLEROCKET_x86_64"|"BOTTLEROCKET_ARM_64_NVIDIA"|"BOTTLEROCKET_x86_64_NVIDIA";
   export interface Addon {
     /**
      * The name of the add-on.
@@ -427,9 +427,9 @@ declare namespace EKS {
      */
     resourceIds?: StringList;
   }
-  export type AddonIssueCode = "AccessDenied"|"InternalFailure"|"ClusterUnreachable"|"InsufficientNumberOfReplicas"|"ConfigurationConflict"|"AdmissionRequestDenied"|"UnsupportedAddonModification"|"K8sResourceNotFound"|string;
+  export type AddonIssueCode = "AccessDenied"|"InternalFailure"|"ClusterUnreachable"|"InsufficientNumberOfReplicas"|"ConfigurationConflict"|"AdmissionRequestDenied"|"UnsupportedAddonModification"|"K8sResourceNotFound";
   export type AddonIssueList = AddonIssue[];
-  export type AddonStatus = "CREATING"|"ACTIVE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETE_FAILED"|"DEGRADED"|"UPDATE_FAILED"|string;
+  export type AddonStatus = "CREATING"|"ACTIVE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETE_FAILED"|"DEGRADED"|"UPDATE_FAILED";
   export interface AddonVersionInfo {
     /**
      * The version of the add-on.
@@ -499,7 +499,7 @@ declare namespace EKS {
   export type BoxedBoolean = boolean;
   export type BoxedInteger = number;
   export type Capacity = number;
-  export type CapacityTypes = "ON_DEMAND"|"SPOT"|string;
+  export type CapacityTypes = "ON_DEMAND"|"SPOT";
   export interface Certificate {
     /**
      * The Base64-encoded certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
@@ -608,10 +608,10 @@ declare namespace EKS {
      */
     resourceIds?: StringList;
   }
-  export type ClusterIssueCode = "AccessDenied"|"ClusterUnreachable"|"ConfigurationConflict"|"InternalFailure"|"ResourceLimitExceeded"|"ResourceNotFound"|string;
+  export type ClusterIssueCode = "AccessDenied"|"ClusterUnreachable"|"ConfigurationConflict"|"InternalFailure"|"ResourceLimitExceeded"|"ResourceNotFound";
   export type ClusterIssueList = ClusterIssue[];
   export type ClusterName = string;
-  export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"PENDING"|string;
+  export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"PENDING";
   export type Compatibilities = Compatibility[];
   export interface Compatibility {
     /**
@@ -627,7 +627,7 @@ declare namespace EKS {
      */
     defaultVersion?: Boolean;
   }
-  export type ConnectorConfigProvider = "EKS_ANYWHERE"|"ANTHOS"|"GKE"|"AKS"|"OPENSHIFT"|"TANZU"|"RANCHER"|"EC2"|"OTHER"|string;
+  export type ConnectorConfigProvider = "EKS_ANYWHERE"|"ANTHOS"|"GKE"|"AKS"|"OPENSHIFT"|"TANZU"|"RANCHER"|"EC2"|"OTHER";
   export interface ConnectorConfigRequest {
     /**
      * The Amazon Resource Name (ARN) of the role that is authorized to request the connector configuration.
@@ -1081,7 +1081,7 @@ declare namespace EKS {
     provider?: Provider;
   }
   export type EncryptionConfigList = EncryptionConfig[];
-  export type ErrorCode = "SubnetNotFound"|"SecurityGroupNotFound"|"EniLimitReached"|"IpNotAvailable"|"AccessDenied"|"OperationNotPermitted"|"VpcIdNotFound"|"Unknown"|"NodeCreationFailure"|"PodEvictionFailure"|"InsufficientFreeAddresses"|"ClusterUnreachable"|"InsufficientNumberOfReplicas"|"ConfigurationConflict"|"AdmissionRequestDenied"|"UnsupportedAddonModification"|"K8sResourceNotFound"|string;
+  export type ErrorCode = "SubnetNotFound"|"SecurityGroupNotFound"|"EniLimitReached"|"IpNotAvailable"|"AccessDenied"|"OperationNotPermitted"|"VpcIdNotFound"|"Unknown"|"NodeCreationFailure"|"PodEvictionFailure"|"InsufficientFreeAddresses"|"ClusterUnreachable"|"InsufficientNumberOfReplicas"|"ConfigurationConflict"|"AdmissionRequestDenied"|"UnsupportedAddonModification"|"K8sResourceNotFound";
   export interface ErrorDetail {
     /**
      * A brief description of the error.     SubnetNotFound: We couldn't find one of the subnets associated with the cluster.    SecurityGroupNotFound: We couldn't find one of the security groups associated with the cluster.    EniLimitReached: You have reached the elastic network interface limit for your account.    IpNotAvailable: A subnet associated with the cluster doesn't have any free IP addresses.    AccessDenied: You don't have permissions to perform the specified operation.    OperationNotPermitted: The service role associated with the cluster doesn't have the required access permissions for Amazon EKS.    VpcIdNotFound: We couldn't find the VPC associated with the cluster.  
@@ -1147,7 +1147,7 @@ declare namespace EKS {
     labels?: FargateProfileLabel;
   }
   export type FargateProfileSelectors = FargateProfileSelector[];
-  export type FargateProfileStatus = "CREATING"|"ACTIVE"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type FargateProfileStatus = "CREATING"|"ACTIVE"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED";
   export type FargateProfilesRequestMaxResults = number;
   export interface Identity {
     /**
@@ -1173,7 +1173,7 @@ declare namespace EKS {
   }
   export type IdentityProviderConfigs = IdentityProviderConfig[];
   export type IncludeClustersList = String[];
-  export type IpFamily = "ipv4"|"ipv6"|string;
+  export type IpFamily = "ipv4"|"ipv6";
   export interface Issue {
     /**
      * A brief description of the error.    AccessDenied: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.    AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures while attempting to launch instances.    AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.    ClusterUnreachable: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests.     Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.    Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.    Ec2SecurityGroupDeletionFailure: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.    Ec2SecurityGroupNotFound: We couldn't find the cluster security group for the cluster. You must recreate your cluster.    Ec2SubnetInvalidConfiguration: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the auto-assign public IP address setting for the subnet. See Modifying the public IPv4 addressing attribute for your subnet in the Amazon VPC User Guide.    IamInstanceProfileNotFound: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.    IamNodeRoleNotFound: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.    InstanceLimitExceeded: Your Amazon Web Services account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.    InsufficientFreeAddresses: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.    InternalFailure: These errors are usually caused by an Amazon EKS server-side issue.    NodeCreationFailure: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient node IAM role permissions or lack of outbound internet access for the nodes.   
@@ -1407,7 +1407,7 @@ declare namespace EKS {
     enabled?: BoxedBoolean;
   }
   export type LogSetups = LogSetup[];
-  export type LogType = "api"|"audit"|"authenticator"|"controllerManager"|"scheduler"|string;
+  export type LogType = "api"|"audit"|"authenticator"|"controllerManager"|"scheduler";
   export type LogTypes = LogType[];
   export interface Logging {
     /**
@@ -1515,7 +1515,7 @@ declare namespace EKS {
      */
     issues?: IssueList;
   }
-  export type NodegroupIssueCode = "AutoScalingGroupNotFound"|"AutoScalingGroupInvalidConfiguration"|"Ec2SecurityGroupNotFound"|"Ec2SecurityGroupDeletionFailure"|"Ec2LaunchTemplateNotFound"|"Ec2LaunchTemplateVersionMismatch"|"Ec2SubnetNotFound"|"Ec2SubnetInvalidConfiguration"|"IamInstanceProfileNotFound"|"IamLimitExceeded"|"IamNodeRoleNotFound"|"NodeCreationFailure"|"AsgInstanceLaunchFailures"|"InstanceLimitExceeded"|"InsufficientFreeAddresses"|"AccessDenied"|"InternalFailure"|"ClusterUnreachable"|"Ec2SubnetMissingIpv6Assignment"|string;
+  export type NodegroupIssueCode = "AutoScalingGroupNotFound"|"AutoScalingGroupInvalidConfiguration"|"Ec2SecurityGroupNotFound"|"Ec2SecurityGroupDeletionFailure"|"Ec2LaunchTemplateNotFound"|"Ec2LaunchTemplateVersionMismatch"|"Ec2SubnetNotFound"|"Ec2SubnetInvalidConfiguration"|"IamInstanceProfileNotFound"|"IamLimitExceeded"|"IamNodeRoleNotFound"|"NodeCreationFailure"|"AsgInstanceLaunchFailures"|"InstanceLimitExceeded"|"InsufficientFreeAddresses"|"AccessDenied"|"InternalFailure"|"ClusterUnreachable"|"Ec2SubnetMissingIpv6Assignment";
   export interface NodegroupResources {
     /**
      * The Auto Scaling groups associated with the node group.
@@ -1540,7 +1540,7 @@ declare namespace EKS {
      */
     desiredSize?: ZeroCapacity;
   }
-  export type NodegroupStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|"DEGRADED"|string;
+  export type NodegroupStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|"DEGRADED";
   export interface NodegroupUpdateConfig {
     /**
      * The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100.
@@ -1700,7 +1700,7 @@ declare namespace EKS {
      */
     sourceSecurityGroups?: StringList;
   }
-  export type ResolveConflicts = "OVERWRITE"|"NONE"|"PRESERVE"|string;
+  export type ResolveConflicts = "OVERWRITE"|"NONE"|"PRESERVE";
   export type RoleArn = string;
   export type String = string;
   export type StringList = String[];
@@ -1734,7 +1734,7 @@ declare namespace EKS {
      */
     effect?: TaintEffect;
   }
-  export type TaintEffect = "NO_SCHEDULE"|"NO_EXECUTE"|"PREFER_NO_SCHEDULE"|string;
+  export type TaintEffect = "NO_SCHEDULE"|"NO_EXECUTE"|"PREFER_NO_SCHEDULE";
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -1927,9 +1927,9 @@ declare namespace EKS {
      */
     value?: String;
   }
-  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|string;
+  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage";
   export type UpdateParams = UpdateParam[];
-  export type UpdateStatus = "InProgress"|"Failed"|"Cancelled"|"Successful"|string;
+  export type UpdateStatus = "InProgress"|"Failed"|"Cancelled"|"Successful";
   export interface UpdateTaintsPayload {
     /**
      * Kubernetes taints to be added or updated.
@@ -1940,7 +1940,7 @@ declare namespace EKS {
      */
     removeTaints?: taintsList;
   }
-  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate"|string;
+  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate";
   export interface VpcConfigRequest {
     /**
      * Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
@@ -1994,7 +1994,7 @@ declare namespace EKS {
     publicAccessCidrs?: StringList;
   }
   export type ZeroCapacity = number;
-  export type configStatus = "CREATING"|"DELETING"|"ACTIVE"|string;
+  export type configStatus = "CREATING"|"DELETING"|"ACTIVE";
   export type labelKey = string;
   export type labelValue = string;
   export type labelsKeyList = String[];

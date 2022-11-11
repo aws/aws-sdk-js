@@ -404,7 +404,7 @@ declare namespace MTurk {
     RequesterFeedback?: String;
   }
   export type AssignmentList = Assignment[];
-  export type AssignmentStatus = "Submitted"|"Approved"|"Rejected"|string;
+  export type AssignmentStatus = "Submitted"|"Approved"|"Rejected";
   export type AssignmentStatusList = AssignmentStatus[];
   export interface AssociateQualificationWithWorkerRequest {
     /**
@@ -447,7 +447,7 @@ declare namespace MTurk {
   }
   export type BonusPaymentList = BonusPayment[];
   export type Boolean = boolean;
-  export type Comparator = "LessThan"|"LessThanOrEqualTo"|"GreaterThan"|"GreaterThanOrEqualTo"|"EqualTo"|"NotEqualTo"|"Exists"|"DoesNotExist"|"In"|"NotIn"|string;
+  export type Comparator = "LessThan"|"LessThanOrEqualTo"|"GreaterThan"|"GreaterThanOrEqualTo"|"EqualTo"|"NotEqualTo"|"Exists"|"DoesNotExist"|"In"|"NotIn";
   export type CountryParameters = string;
   export interface CreateAdditionalAssignmentsForHITRequest {
     /**
@@ -729,7 +729,7 @@ declare namespace MTurk {
   export interface DisassociateQualificationFromWorkerResponse {
   }
   export type EntityId = string;
-  export type EventType = "AssignmentAccepted"|"AssignmentAbandoned"|"AssignmentReturned"|"AssignmentSubmitted"|"AssignmentRejected"|"AssignmentApproved"|"HITCreated"|"HITExpired"|"HITReviewable"|"HITExtended"|"HITDisposed"|"Ping"|string;
+  export type EventType = "AssignmentAccepted"|"AssignmentAbandoned"|"AssignmentReturned"|"AssignmentSubmitted"|"AssignmentRejected"|"AssignmentApproved"|"HITCreated"|"HITExpired"|"HITReviewable"|"HITExtended"|"HITDisposed"|"Ping";
   export type EventTypeList = EventType[];
   export interface GetAccountBalanceRequest {
   }
@@ -892,7 +892,7 @@ declare namespace MTurk {
      */
     NumberOfAssignmentsCompleted?: Integer;
   }
-  export type HITAccessActions = "Accept"|"PreviewAndAccept"|"DiscoverPreviewAndAccept"|string;
+  export type HITAccessActions = "Accept"|"PreviewAndAccept"|"DiscoverPreviewAndAccept";
   export interface HITLayoutParameter {
     /**
      *  The name of the parameter in the HITLayout. 
@@ -905,8 +905,8 @@ declare namespace MTurk {
   }
   export type HITLayoutParameterList = HITLayoutParameter[];
   export type HITList = HIT[];
-  export type HITReviewStatus = "NotReviewed"|"MarkedForReview"|"ReviewedAppropriate"|"ReviewedInappropriate"|string;
-  export type HITStatus = "Assignable"|"Unassignable"|"Reviewable"|"Reviewing"|"Disposed"|string;
+  export type HITReviewStatus = "NotReviewed"|"MarkedForReview"|"ReviewedAppropriate"|"ReviewedInappropriate";
+  export type HITStatus = "Assignable"|"Unassignable"|"Reviewable"|"Reviewing"|"Disposed";
   export type IdempotencyToken = string;
   export type Integer = number;
   export type IntegerList = Integer[];
@@ -1212,8 +1212,8 @@ declare namespace MTurk {
      */
     EventTypes: EventTypeList;
   }
-  export type NotificationTransport = "Email"|"SQS"|"SNS"|string;
-  export type NotifyWorkersFailureCode = "SoftFailure"|"HardFailure"|string;
+  export type NotificationTransport = "Email"|"SQS"|"SNS";
+  export type NotifyWorkersFailureCode = "SoftFailure"|"HardFailure";
   export interface NotifyWorkersFailureStatus {
     /**
      *  Encoded value for the failure type. 
@@ -1354,7 +1354,7 @@ declare namespace MTurk {
     ActionsGuarded?: HITAccessActions;
   }
   export type QualificationRequirementList = QualificationRequirement[];
-  export type QualificationStatus = "Granted"|"Revoked"|string;
+  export type QualificationStatus = "Granted"|"Revoked";
   export interface QualificationType {
     /**
      *  A unique identifier for the Qualification type. A Qualification type is given a Qualification type ID when you call the CreateQualificationType operation. 
@@ -1410,7 +1410,7 @@ declare namespace MTurk {
     AutoGrantedValue?: Integer;
   }
   export type QualificationTypeList = QualificationType[];
-  export type QualificationTypeStatus = "Active"|"Inactive"|string;
+  export type QualificationTypeStatus = "Active"|"Inactive";
   export interface RejectAssignmentRequest {
     /**
      *  The ID of the assignment. The assignment must correspond to a HIT created by the Requester. 
@@ -1471,7 +1471,7 @@ declare namespace MTurk {
     ErrorCode?: String;
   }
   export type ReviewActionDetailList = ReviewActionDetail[];
-  export type ReviewActionStatus = "Intended"|"Succeeded"|"Failed"|"Cancelled"|string;
+  export type ReviewActionStatus = "Intended"|"Succeeded"|"Failed"|"Cancelled";
   export interface ReviewPolicy {
     /**
      *  Name of a Review Policy: SimplePlurality/2011-09-01 or ScoreMyKnownAnswers/2011-09-01 
@@ -1482,7 +1482,7 @@ declare namespace MTurk {
      */
     Parameters?: PolicyParameterList;
   }
-  export type ReviewPolicyLevel = "Assignment"|"HIT"|string;
+  export type ReviewPolicyLevel = "Assignment"|"HIT";
   export type ReviewPolicyLevelList = ReviewPolicyLevel[];
   export interface ReviewReport {
     /**
@@ -1521,7 +1521,7 @@ declare namespace MTurk {
     Value?: String;
   }
   export type ReviewResultDetailList = ReviewResultDetail[];
-  export type ReviewableHITStatus = "Reviewable"|"Reviewing"|string;
+  export type ReviewableHITStatus = "Reviewable"|"Reviewing";
   export interface SendBonusRequest {
     /**
      * The ID of the Worker being paid the bonus.

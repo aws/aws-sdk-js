@@ -632,7 +632,7 @@ declare namespace Backup {
      */
     BackupType?: string;
   }
-  export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|string;
+  export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED";
   export type BackupJobsList = BackupJob[];
   export type BackupOptionKey = string;
   export type BackupOptionValue = string;
@@ -854,7 +854,7 @@ declare namespace Backup {
      */
     IamRoleArn?: IAMRoleArn;
   }
-  export type BackupVaultEvent = "BACKUP_JOB_STARTED"|"BACKUP_JOB_COMPLETED"|"BACKUP_JOB_SUCCESSFUL"|"BACKUP_JOB_FAILED"|"BACKUP_JOB_EXPIRED"|"RESTORE_JOB_STARTED"|"RESTORE_JOB_COMPLETED"|"RESTORE_JOB_SUCCESSFUL"|"RESTORE_JOB_FAILED"|"COPY_JOB_STARTED"|"COPY_JOB_SUCCESSFUL"|"COPY_JOB_FAILED"|"RECOVERY_POINT_MODIFIED"|"BACKUP_PLAN_CREATED"|"BACKUP_PLAN_MODIFIED"|"S3_BACKUP_OBJECT_FAILED"|"S3_RESTORE_OBJECT_FAILED"|string;
+  export type BackupVaultEvent = "BACKUP_JOB_STARTED"|"BACKUP_JOB_COMPLETED"|"BACKUP_JOB_SUCCESSFUL"|"BACKUP_JOB_FAILED"|"BACKUP_JOB_EXPIRED"|"RESTORE_JOB_STARTED"|"RESTORE_JOB_COMPLETED"|"RESTORE_JOB_SUCCESSFUL"|"RESTORE_JOB_FAILED"|"COPY_JOB_STARTED"|"COPY_JOB_SUCCESSFUL"|"COPY_JOB_FAILED"|"RECOVERY_POINT_MODIFIED"|"BACKUP_PLAN_CREATED"|"BACKUP_PLAN_MODIFIED"|"S3_BACKUP_OBJECT_FAILED"|"S3_RESTORE_OBJECT_FAILED";
   export type BackupVaultEvents = BackupVaultEvent[];
   export type BackupVaultList = BackupVaultListMember[];
   export interface BackupVaultListMember {
@@ -938,7 +938,7 @@ declare namespace Backup {
     ConditionValue?: ConditionValue;
   }
   export type ConditionParameters = ConditionParameter[];
-  export type ConditionType = "STRINGEQUALS"|string;
+  export type ConditionType = "STRINGEQUALS";
   export type ConditionValue = string;
   export interface Conditions {
     /**
@@ -1051,7 +1051,7 @@ declare namespace Backup {
      */
     ResourceType?: ResourceType;
   }
-  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED";
   export type CopyJobsList = CopyJob[];
   export interface CreateBackupPlanInput {
     /**
@@ -2613,7 +2613,7 @@ declare namespace Backup {
      */
     BackupRuleId?: string;
   }
-  export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED"|string;
+  export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED";
   export interface ReportDeliveryChannel {
     /**
      * The unique name of the S3 bucket that receives your reports.
@@ -2736,7 +2736,7 @@ declare namespace Backup {
   export type ResourceTypeOptInPreference = {[key: string]: IsEnabled};
   export type ResourceTypes = ResourceType[];
   export type RestoreJobId = string;
-  export type RestoreJobStatus = "PENDING"|"RUNNING"|"COMPLETED"|"ABORTED"|"FAILED"|string;
+  export type RestoreJobStatus = "PENDING"|"RUNNING"|"COMPLETED"|"ABORTED"|"FAILED";
   export type RestoreJobsList = RestoreJobsListMember[];
   export interface RestoreJobsListMember {
     /**
@@ -2927,7 +2927,7 @@ declare namespace Backup {
      */
     BackupJobId: string;
   }
-  export type StorageClass = "WARM"|"COLD"|"DELETED"|string;
+  export type StorageClass = "WARM"|"COLD"|"DELETED";
   export type TagKey = string;
   export type TagKeyList = string[];
   export interface TagResourceInput {

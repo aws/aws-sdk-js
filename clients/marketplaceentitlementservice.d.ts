@@ -66,7 +66,7 @@ declare namespace MarketplaceEntitlementService {
   }
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
-  export type GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"|"DIMENSION"|string;
+  export type GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"|"DIMENSION";
   export type GetEntitlementFilters = {[key: string]: FilterValueList};
   export interface GetEntitlementsRequest {
     /**

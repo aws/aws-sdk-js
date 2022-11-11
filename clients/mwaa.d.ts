@@ -357,7 +357,7 @@ declare namespace MWAA {
   export type EnvironmentClass = string;
   export type EnvironmentList = EnvironmentName[];
   export type EnvironmentName = string;
-  export type EnvironmentStatus = "CREATING"|"CREATE_FAILED"|"AVAILABLE"|"UPDATING"|"DELETING"|"DELETED"|"UNAVAILABLE"|"UPDATE_FAILED"|string;
+  export type EnvironmentStatus = "CREATING"|"CREATE_FAILED"|"AVAILABLE"|"UPDATING"|"DELETING"|"DELETED"|"UNAVAILABLE"|"UPDATE_FAILED";
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export interface GetEnvironmentInput {
@@ -472,7 +472,7 @@ declare namespace MWAA {
     WorkerLogs?: ModuleLoggingConfigurationInput;
   }
   export type LoggingEnabled = boolean;
-  export type LoggingLevel = "CRITICAL"|"ERROR"|"WARNING"|"INFO"|"DEBUG"|string;
+  export type LoggingLevel = "CRITICAL"|"ERROR"|"WARNING"|"INFO"|"DEBUG";
   export type MaxWorkers = number;
   export type MetricData = MetricDatum[];
   export interface MetricDatum {
@@ -594,7 +594,7 @@ declare namespace MWAA {
   export type TagValue = string;
   export type Timestamp = Date;
   export type Token = string;
-  export type Unit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export type Unit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None";
   export interface UntagResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment.
@@ -705,8 +705,8 @@ declare namespace MWAA {
     SecurityGroupIds: SecurityGroupList;
   }
   export type UpdateSource = string;
-  export type UpdateStatus = "SUCCESS"|"PENDING"|"FAILED"|string;
-  export type WebserverAccessMode = "PRIVATE_ONLY"|"PUBLIC_ONLY"|string;
+  export type UpdateStatus = "SUCCESS"|"PENDING"|"FAILED";
+  export type WebserverAccessMode = "PRIVATE_ONLY"|"PUBLIC_ONLY";
   export type WebserverUrl = string;
   export type WeeklyMaintenanceWindowStart = string;
   /**

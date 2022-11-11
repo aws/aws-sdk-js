@@ -191,9 +191,9 @@ declare namespace Finspace {
   export type EnvironmentArn = string;
   export type EnvironmentList = Environment[];
   export type EnvironmentName = string;
-  export type EnvironmentStatus = "CREATE_REQUESTED"|"CREATING"|"CREATED"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"FAILED_CREATION"|"RETRY_DELETION"|"FAILED_DELETION"|"SUSPENDED"|string;
+  export type EnvironmentStatus = "CREATE_REQUESTED"|"CREATING"|"CREATED"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"FAILED_CREATION"|"RETRY_DELETION"|"FAILED_DELETION"|"SUSPENDED";
   export type FederationAttributeKey = string;
-  export type FederationMode = "FEDERATED"|"LOCAL"|string;
+  export type FederationMode = "FEDERATED"|"LOCAL";
   export interface FederationParameters {
     /**
      * SAML 2.0 Metadata document from identity provider (IdP).

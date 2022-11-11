@@ -566,7 +566,7 @@ declare class ElastiCache extends Service {
   waitFor(state: "replicationGroupDeleted", callback?: (err: AWSError, data: ElastiCache.Types.ReplicationGroupMessage) => void): Request<ElastiCache.Types.ReplicationGroupMessage, AWSError>;
 }
 declare namespace ElastiCache {
-  export type AZMode = "single-az"|"cross-az"|string;
+  export type AZMode = "single-az"|"cross-az";
   export type AccessString = string;
   export interface AddTagsToResourceMessage {
     /**
@@ -589,8 +589,8 @@ declare namespace ElastiCache {
      */
     ScaleDownModifications?: NodeTypeList;
   }
-  export type AuthTokenUpdateStatus = "SETTING"|"ROTATING"|string;
-  export type AuthTokenUpdateStrategyType = "SET"|"ROTATE"|"DELETE"|string;
+  export type AuthTokenUpdateStatus = "SETTING"|"ROTATING";
+  export type AuthTokenUpdateStrategyType = "SET"|"ROTATE"|"DELETE";
   export interface Authentication {
     /**
      * Indicates whether the user requires a password to authenticate.
@@ -601,7 +601,7 @@ declare namespace ElastiCache {
      */
     PasswordCount?: IntegerOptional;
   }
-  export type AuthenticationType = "password"|"no-password"|string;
+  export type AuthenticationType = "password"|"no-password";
   export interface AuthorizeCacheSecurityGroupIngressMessage {
     /**
      * The cache security group that allows network ingress.
@@ -619,7 +619,7 @@ declare namespace ElastiCache {
   export interface AuthorizeCacheSecurityGroupIngressResult {
     CacheSecurityGroup?: CacheSecurityGroup;
   }
-  export type AutomaticFailoverStatus = "enabled"|"disabled"|"enabling"|"disabling"|string;
+  export type AutomaticFailoverStatus = "enabled"|"disabled"|"enabling"|"disabling";
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -1099,7 +1099,7 @@ declare namespace ElastiCache {
     CacheSubnetGroups?: CacheSubnetGroups;
   }
   export type CacheSubnetGroups = CacheSubnetGroup[];
-  export type ChangeType = "immediate"|"requires-reboot"|string;
+  export type ChangeType = "immediate"|"requires-reboot";
   export interface CloudWatchLogsDestinationDetails {
     /**
      * The name of the CloudWatch Logs log group.
@@ -1597,7 +1597,7 @@ declare namespace ElastiCache {
     Port?: IntegerOptional;
   }
   export type CustomerNodeEndpointList = CustomerNodeEndpoint[];
-  export type DataTieringStatus = "enabled"|"disabled"|string;
+  export type DataTieringStatus = "enabled"|"disabled";
   export interface DecreaseNodeGroupsInGlobalReplicationGroupMessage {
     /**
      * The name of the Global datastore
@@ -2157,7 +2157,7 @@ declare namespace ElastiCache {
      */
     KinesisFirehoseDetails?: KinesisFirehoseDestinationDetails;
   }
-  export type DestinationType = "cloudwatch-logs"|"kinesis-firehose"|string;
+  export type DestinationType = "cloudwatch-logs"|"kinesis-firehose";
   export interface DisassociateGlobalReplicationGroupMessage {
     /**
      * The name of the Global datastore
@@ -2424,7 +2424,7 @@ declare namespace ElastiCache {
   }
   export type Integer = number;
   export type IntegerOptional = number;
-  export type IpDiscovery = "ipv4"|"ipv6"|string;
+  export type IpDiscovery = "ipv4"|"ipv6";
   export type KeyList = String[];
   export interface KinesisFirehoseDestinationDetails {
     /**
@@ -2498,9 +2498,9 @@ declare namespace ElastiCache {
     Enabled?: BooleanOptional;
   }
   export type LogDeliveryConfigurationRequestList = LogDeliveryConfigurationRequest[];
-  export type LogDeliveryConfigurationStatus = "active"|"enabling"|"modifying"|"disabling"|"error"|string;
-  export type LogFormat = "text"|"json"|string;
-  export type LogType = "slow-log"|"engine-log"|string;
+  export type LogDeliveryConfigurationStatus = "active"|"enabling"|"modifying"|"disabling"|"error";
+  export type LogFormat = "text"|"json";
+  export type LogType = "slow-log"|"engine-log";
   export interface ModifyCacheClusterMessage {
     /**
      * The cluster identifier. This value is stored as a lowercase string.
@@ -2824,8 +2824,8 @@ declare namespace ElastiCache {
      */
     NoPasswordRequired?: BooleanOptional;
   }
-  export type MultiAZStatus = "enabled"|"disabled"|string;
-  export type NetworkType = "ipv4"|"ipv6"|"dual_stack"|string;
+  export type MultiAZStatus = "enabled"|"disabled";
+  export type NetworkType = "ipv4"|"ipv6"|"dual_stack";
   export type NetworkTypeList = NetworkType[];
   export interface NodeGroup {
     /**
@@ -2996,8 +2996,8 @@ declare namespace ElastiCache {
   }
   export type NodeSnapshotList = NodeSnapshot[];
   export type NodeTypeList = String[];
-  export type NodeUpdateInitiatedBy = "system"|"customer"|string;
-  export type NodeUpdateStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|string;
+  export type NodeUpdateInitiatedBy = "system"|"customer";
+  export type NodeUpdateStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete";
   export interface NotificationConfiguration {
     /**
      * The Amazon Resource Name (ARN) that identifies the topic.
@@ -3009,7 +3009,7 @@ declare namespace ElastiCache {
     TopicStatus?: String;
   }
   export type OutpostArnsList = String[];
-  export type OutpostMode = "single-outpost"|"cross-outpost"|string;
+  export type OutpostMode = "single-outpost"|"cross-outpost";
   export interface Parameter {
     /**
      * The name of the parameter.
@@ -3061,7 +3061,7 @@ declare namespace ElastiCache {
   export type ParameterNameValueList = ParameterNameValue[];
   export type ParametersList = Parameter[];
   export type PasswordListInput = String[];
-  export type PendingAutomaticFailoverStatus = "enabled"|"disabled"|string;
+  export type PendingAutomaticFailoverStatus = "enabled"|"disabled";
   export interface PendingLogDeliveryConfiguration {
     /**
      * Refers to slow-log or engine-log..
@@ -3591,10 +3591,10 @@ declare namespace ElastiCache {
     EstimatedUpdateTime?: String;
   }
   export type ServiceUpdateList = ServiceUpdate[];
-  export type ServiceUpdateSeverity = "critical"|"important"|"medium"|"low"|string;
-  export type ServiceUpdateStatus = "available"|"cancelled"|"expired"|string;
+  export type ServiceUpdateSeverity = "critical"|"important"|"medium"|"low";
+  export type ServiceUpdateStatus = "available"|"cancelled"|"expired";
   export type ServiceUpdateStatusList = ServiceUpdateStatus[];
-  export type ServiceUpdateType = "security-update"|string;
+  export type ServiceUpdateType = "security-update";
   export interface ServiceUpdatesMessage {
     /**
      * An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -3605,7 +3605,7 @@ declare namespace ElastiCache {
      */
     ServiceUpdates?: ServiceUpdateList;
   }
-  export type SlaMet = "yes"|"no"|"n/a"|string;
+  export type SlaMet = "yes"|"no"|"n/a";
   export interface SlotMigration {
     /**
      * The percentage of the slot migration that is complete.
@@ -3728,7 +3728,7 @@ declare namespace ElastiCache {
   }
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];
-  export type SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|"user"|"user-group"|string;
+  export type SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|"user"|"user-group";
   export interface StartMigrationMessage {
     /**
      * The ID of the replication group to which data should be migrated.
@@ -3915,7 +3915,7 @@ declare namespace ElastiCache {
      */
     UnprocessedUpdateActions?: UnprocessedUpdateActionList;
   }
-  export type UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|"scheduling"|"scheduled"|"not-applicable"|string;
+  export type UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|"scheduling"|"scheduled"|"not-applicable";
   export type UpdateActionStatusList = UpdateActionStatus[];
   export interface UpdateActionsMessage {
     /**

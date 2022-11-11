@@ -545,7 +545,7 @@ declare namespace WorkSpacesWeb {
      */
     browserSettingsArn?: ARN;
   }
-  export type BrowserType = "Chrome"|string;
+  export type BrowserType = "Chrome";
   export interface Certificate {
     /**
      * The body of the certificate.
@@ -899,7 +899,7 @@ declare namespace WorkSpacesWeb {
   }
   export type DisconnectTimeoutInMinutes = number;
   export type DisplayName = string;
-  export type EnabledType = "Disabled"|"Enabled"|string;
+  export type EnabledType = "Disabled"|"Enabled";
   export type EncryptionContextMap = {[key: string]: StringType};
   export interface GetBrowserSettingsRequest {
     /**
@@ -1056,7 +1056,7 @@ declare namespace WorkSpacesWeb {
      */
     identityProviderType?: IdentityProviderType;
   }
-  export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
+  export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC";
   export type IdleDisconnectTimeoutInMinutes = number;
   export type KinesisStreamArn = string;
   export interface ListBrowserSettingsRequest {
@@ -1334,7 +1334,7 @@ declare namespace WorkSpacesWeb {
   }
   export type PortalEndpoint = string;
   export type PortalList = PortalSummary[];
-  export type PortalStatus = "Incomplete"|"Pending"|"Active"|string;
+  export type PortalStatus = "Incomplete"|"Pending"|"Active";
   export interface PortalSummary {
     /**
      * The ARN of the browser settings that is associated with the web portal.
@@ -1385,7 +1385,7 @@ declare namespace WorkSpacesWeb {
      */
     userSettingsArn?: ARN;
   }
-  export type RendererType = "AppStream"|string;
+  export type RendererType = "AppStream";
   export type SamlMetadata = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];

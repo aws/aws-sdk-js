@@ -311,7 +311,7 @@ declare namespace Shield {
      */
     Action: ResponseAction;
   }
-  export type ApplicationLayerAutomaticResponseStatus = "ENABLED"|"DISABLED"|string;
+  export type ApplicationLayerAutomaticResponseStatus = "ENABLED"|"DISABLED";
   export interface AssociateDRTLogBucketRequest {
     /**
      * The Amazon S3 bucket that contains the logs that you want to share.
@@ -383,7 +383,7 @@ declare namespace Shield {
     Mitigations?: MitigationList;
   }
   export type AttackId = string;
-  export type AttackLayer = "NETWORK"|"APPLICATION"|string;
+  export type AttackLayer = "NETWORK"|"APPLICATION";
   export type AttackProperties = AttackProperty[];
   export interface AttackProperty {
     /**
@@ -407,7 +407,7 @@ declare namespace Shield {
      */
     Total?: Long;
   }
-  export type AttackPropertyIdentifier = "DESTINATION_URL"|"REFERRER"|"SOURCE_ASN"|"SOURCE_COUNTRY"|"SOURCE_IP_ADDRESS"|"SOURCE_USER_AGENT"|"WORDPRESS_PINGBACK_REFLECTOR"|"WORDPRESS_PINGBACK_SOURCE"|string;
+  export type AttackPropertyIdentifier = "DESTINATION_URL"|"REFERRER"|"SOURCE_ASN"|"SOURCE_COUNTRY"|"SOURCE_IP_ADDRESS"|"SOURCE_USER_AGENT"|"WORDPRESS_PINGBACK_REFLECTOR"|"WORDPRESS_PINGBACK_SOURCE";
   export interface AttackStatisticsDataItem {
     /**
      * Information about the volume of attacks during the time period. If the accompanying AttackCount is zero, this setting might be empty.
@@ -470,7 +470,7 @@ declare namespace Shield {
      */
     Max: Double;
   }
-  export type AutoRenew = "ENABLED"|"DISABLED"|string;
+  export type AutoRenew = "ENABLED"|"DISABLED";
   export interface BlockAction {
   }
   export type ContactNotes = string;
@@ -891,8 +891,8 @@ declare namespace Shield {
   }
   export type MitigationList = Mitigation[];
   export type PhoneNumber = string;
-  export type ProactiveEngagementStatus = "ENABLED"|"DISABLED"|"PENDING"|string;
-  export type ProtectedResourceType = "CLOUDFRONT_DISTRIBUTION"|"ROUTE_53_HOSTED_ZONE"|"ELASTIC_IP_ALLOCATION"|"CLASSIC_LOAD_BALANCER"|"APPLICATION_LOAD_BALANCER"|"GLOBAL_ACCELERATOR"|string;
+  export type ProactiveEngagementStatus = "ENABLED"|"DISABLED"|"PENDING";
+  export type ProtectedResourceType = "CLOUDFRONT_DISTRIBUTION"|"ROUTE_53_HOSTED_ZONE"|"ELASTIC_IP_ALLOCATION"|"CLASSIC_LOAD_BALANCER"|"APPLICATION_LOAD_BALANCER"|"GLOBAL_ACCELERATOR";
   export type ProtectedResourceTypeFilters = ProtectedResourceType[];
   export interface Protection {
     /**
@@ -946,7 +946,7 @@ declare namespace Shield {
      */
     ProtectionGroupArn?: ResourceArn;
   }
-  export type ProtectionGroupAggregation = "SUM"|"MEAN"|"MAX"|string;
+  export type ProtectionGroupAggregation = "SUM"|"MEAN"|"MAX";
   export type ProtectionGroupAggregationFilters = ProtectionGroupAggregation[];
   export interface ProtectionGroupArbitraryPatternLimits {
     /**
@@ -967,7 +967,7 @@ declare namespace Shield {
     PatternTypeLimits: ProtectionGroupPatternTypeLimits;
   }
   export type ProtectionGroupMembers = ResourceArn[];
-  export type ProtectionGroupPattern = "ALL"|"ARBITRARY"|"BY_RESOURCE_TYPE"|string;
+  export type ProtectionGroupPattern = "ALL"|"ARBITRARY"|"BY_RESOURCE_TYPE";
   export type ProtectionGroupPatternFilters = ProtectionGroupPattern[];
   export interface ProtectionGroupPatternTypeLimits {
     /**
@@ -1021,7 +1021,7 @@ declare namespace Shield {
     Counters?: SummarizedCounterList;
   }
   export type SubResourceSummaryList = SubResourceSummary[];
-  export type SubResourceType = "IP"|"URL"|string;
+  export type SubResourceType = "IP"|"URL";
   export interface Subscription {
     /**
      * The start time of the subscription, in Unix time in seconds. 
@@ -1066,7 +1066,7 @@ declare namespace Shield {
      */
     ProtectionGroupLimits: ProtectionGroupLimits;
   }
-  export type SubscriptionState = "ACTIVE"|"INACTIVE"|string;
+  export type SubscriptionState = "ACTIVE"|"INACTIVE";
   export interface SummarizedAttackVector {
     /**
      * The attack type, for example, SNMP reflection or SYN flood.
@@ -1144,7 +1144,7 @@ declare namespace Shield {
   export type Timestamp = Date;
   export type Token = string;
   export type TopContributors = Contributor[];
-  export type Unit = "BITS"|"BYTES"|"PACKETS"|"REQUESTS"|string;
+  export type Unit = "BITS"|"BYTES"|"PACKETS"|"REQUESTS";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to remove tags from.

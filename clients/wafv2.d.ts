@@ -410,7 +410,7 @@ declare namespace WAFV2 {
      */
     Action: ActionValue;
   }
-  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|"CAPTCHA"|"CHALLENGE"|"EXCLUDED_AS_COUNT"|string;
+  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|"CAPTCHA"|"CHALLENGE"|"EXCLUDED_AS_COUNT";
   export interface All {
   }
   export interface AllQueryArguments {
@@ -451,7 +451,7 @@ declare namespace WAFV2 {
      */
     OversizeHandling?: OversizeHandling;
   }
-  export type BodyParsingFallbackBehavior = "MATCH"|"NO_MATCH"|"EVALUATE_AS_STRING"|string;
+  export type BodyParsingFallbackBehavior = "MATCH"|"NO_MATCH"|"EVALUATE_AS_STRING";
   export type Boolean = boolean;
   export interface ByteMatchStatement {
     /**
@@ -540,7 +540,7 @@ declare namespace WAFV2 {
      */
     Capacity?: ConsumedCapacity;
   }
-  export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|string;
+  export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT";
   export interface Condition {
     /**
      * A single action condition. This is the action setting that a log record must contain in order to meet the condition.
@@ -589,7 +589,7 @@ declare namespace WAFV2 {
     CustomRequestHandling?: CustomRequestHandling;
   }
   export type Country = string;
-  export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|"XK"|string;
+  export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|"XK";
   export type CountryCodes = CountryCode[];
   export interface CreateIPSetRequest {
     /**
@@ -976,8 +976,8 @@ declare namespace WAFV2 {
     Name: EntityName;
   }
   export type ExcludedRules = ExcludedRule[];
-  export type FailureReason = "TOKEN_MISSING"|"TOKEN_EXPIRED"|"TOKEN_INVALID"|"TOKEN_DOMAIN_MISMATCH"|string;
-  export type FallbackBehavior = "MATCH"|"NO_MATCH"|string;
+  export type FailureReason = "TOKEN_MISSING"|"TOKEN_EXPIRED"|"TOKEN_INVALID"|"TOKEN_DOMAIN_MISMATCH";
+  export type FallbackBehavior = "MATCH"|"NO_MATCH";
   export type FieldIdentifier = string;
   export interface FieldToMatch {
     /**
@@ -1036,8 +1036,8 @@ declare namespace WAFV2 {
      */
     Conditions: Conditions;
   }
-  export type FilterBehavior = "KEEP"|"DROP"|string;
-  export type FilterRequirement = "MEETS_ALL"|"MEETS_ANY"|string;
+  export type FilterBehavior = "KEEP"|"DROP";
+  export type FilterRequirement = "MEETS_ALL"|"MEETS_ANY";
   export type Filters = Filter[];
   export interface FirewallManagerRuleGroup {
     /**
@@ -1083,7 +1083,7 @@ declare namespace WAFV2 {
     FallbackBehavior: FallbackBehavior;
   }
   export type ForwardedIPHeaderName = string;
-  export type ForwardedIPPosition = "FIRST"|"LAST"|"ANY"|string;
+  export type ForwardedIPPosition = "FIRST"|"LAST"|"ANY";
   export interface GenerateMobileSdkReleaseUrlRequest {
     /**
      * The device platform.
@@ -1429,7 +1429,7 @@ declare namespace WAFV2 {
     OversizeHandling: OversizeHandling;
   }
   export type IPAddress = string;
-  export type IPAddressVersion = "IPV4"|"IPV6"|string;
+  export type IPAddressVersion = "IPV4"|"IPV6";
   export type IPAddresses = IPAddress[];
   export interface IPSet {
     /**
@@ -1511,7 +1511,7 @@ declare namespace WAFV2 {
      */
     ImmunityTime: TimeWindowSecond;
   }
-  export type InspectionLevel = "COMMON"|"TARGETED"|string;
+  export type InspectionLevel = "COMMON"|"TARGETED";
   export interface JsonBody {
     /**
      * The patterns to look for in the JSON body. WAF inspects the results of these pattern matches against the rule inspection criteria. 
@@ -1540,7 +1540,7 @@ declare namespace WAFV2 {
      */
     IncludedPaths?: JsonPointerPaths;
   }
-  export type JsonMatchScope = "ALL"|"KEY"|"VALUE"|string;
+  export type JsonMatchScope = "ALL"|"KEY"|"VALUE";
   export type JsonPointerPath = string;
   export type JsonPointerPaths = JsonPointerPath[];
   export interface Label {
@@ -1550,7 +1550,7 @@ declare namespace WAFV2 {
     Name: LabelName;
   }
   export type LabelMatchKey = string;
-  export type LabelMatchScope = "LABEL"|"NAMESPACE"|string;
+  export type LabelMatchScope = "LABEL"|"NAMESPACE";
   export interface LabelMatchStatement {
     /**
      * Specify whether you want to match using the label name or just the namespace. 
@@ -2047,7 +2047,7 @@ declare namespace WAFV2 {
      */
     ExpiryTimestamp?: Timestamp;
   }
-  export type MapMatchScope = "ALL"|"KEY"|"VALUE"|string;
+  export type MapMatchScope = "ALL"|"KEY"|"VALUE";
   export interface Method {
   }
   export type MetricName = string;
@@ -2095,7 +2095,7 @@ declare namespace WAFV2 {
      */
     None?: NoneAction;
   }
-  export type OversizeHandling = "CONTINUE"|"MATCH"|"NO_MATCH"|string;
+  export type OversizeHandling = "CONTINUE"|"MATCH"|"NO_MATCH";
   export type PaginationLimit = number;
   export interface PasswordField {
     /**
@@ -2103,11 +2103,11 @@ declare namespace WAFV2 {
      */
     Identifier: FieldIdentifier;
   }
-  export type PayloadType = "JSON"|"FORM_ENCODED"|string;
-  export type Platform = "IOS"|"ANDROID"|string;
+  export type PayloadType = "JSON"|"FORM_ENCODED";
+  export type Platform = "IOS"|"ANDROID";
   export type PolicyString = string;
   export type PopulationSize = number;
-  export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
+  export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD";
   export type PublishedVersions = {[key: string]: ManagedRuleSetVersion};
   export interface PutLoggingConfigurationRequest {
     /**
@@ -2185,7 +2185,7 @@ declare namespace WAFV2 {
      */
     ForwardedIPConfig?: ForwardedIPConfig;
   }
-  export type RateBasedStatementAggregateKeyType = "IP"|"FORWARDED_IP"|string;
+  export type RateBasedStatementAggregateKeyType = "IP"|"FORWARDED_IP";
   export interface RateBasedStatementManagedKeysIPSet {
     /**
      * The version of the IP addresses, either IPV4 or IPV6. 
@@ -2293,10 +2293,10 @@ declare namespace WAFV2 {
   }
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
-  export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|"APPSYNC"|"COGNITO_USER_POOL"|string;
+  export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|"APPSYNC"|"COGNITO_USER_POOL";
   export type ResponseCode = number;
   export type ResponseContent = string;
-  export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON"|string;
+  export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON";
   export type ResponseStatusCode = number;
   export interface Rule {
     /**
@@ -2513,9 +2513,9 @@ declare namespace WAFV2 {
     OverriddenAction?: Action;
   }
   export type SampledHTTPRequests = SampledHTTPRequest[];
-  export type Scope = "CLOUDFRONT"|"REGIONAL"|string;
+  export type Scope = "CLOUDFRONT"|"REGIONAL";
   export type SearchString = Buffer|Uint8Array|Blob|string;
-  export type SensitivityLevel = "LOW"|"HIGH"|string;
+  export type SensitivityLevel = "LOW"|"HIGH";
   export type SingleCookieName = string;
   export interface SingleHeader {
     /**
@@ -2673,7 +2673,7 @@ declare namespace WAFV2 {
     Type: TextTransformationType;
   }
   export type TextTransformationPriority = number;
-  export type TextTransformationType = "NONE"|"COMPRESS_WHITE_SPACE"|"HTML_ENTITY_DECODE"|"LOWERCASE"|"CMD_LINE"|"URL_DECODE"|"BASE64_DECODE"|"HEX_DECODE"|"MD5"|"REPLACE_COMMENTS"|"ESCAPE_SEQ_DECODE"|"SQL_HEX_DECODE"|"CSS_DECODE"|"JS_DECODE"|"NORMALIZE_PATH"|"NORMALIZE_PATH_WIN"|"REMOVE_NULLS"|"REPLACE_NULLS"|"BASE64_DECODE_EXT"|"URL_DECODE_UNI"|"UTF8_TO_UNICODE"|string;
+  export type TextTransformationType = "NONE"|"COMPRESS_WHITE_SPACE"|"HTML_ENTITY_DECODE"|"LOWERCASE"|"CMD_LINE"|"URL_DECODE"|"BASE64_DECODE"|"HEX_DECODE"|"MD5"|"REPLACE_COMMENTS"|"ESCAPE_SEQ_DECODE"|"SQL_HEX_DECODE"|"CSS_DECODE"|"JS_DECODE"|"NORMALIZE_PATH"|"NORMALIZE_PATH_WIN"|"REMOVE_NULLS"|"REPLACE_NULLS"|"BASE64_DECODE_EXT"|"URL_DECODE_UNI"|"UTF8_TO_UNICODE";
   export type TextTransformations = TextTransformation[];
   export interface TimeWindow {
     /**

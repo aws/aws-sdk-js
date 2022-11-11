@@ -205,7 +205,7 @@ declare class ChimeSDKIdentity extends Service {
   updateAppInstanceUserEndpoint(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse, AWSError>;
 }
 declare namespace ChimeSDKIdentity {
-  export type AllowMessages = "ALL"|"NONE"|string;
+  export type AllowMessages = "ALL"|"NONE";
   export interface AppInstance {
     /**
      * The ARN of the messaging instance.
@@ -361,7 +361,7 @@ declare namespace ChimeSDKIdentity {
     EndpointState?: EndpointState;
   }
   export type AppInstanceUserEndpointSummaryList = AppInstanceUserEndpointSummary[];
-  export type AppInstanceUserEndpointType = "APNS"|"APNS_SANDBOX"|"GCM"|string;
+  export type AppInstanceUserEndpointType = "APNS"|"APNS_SANDBOX"|"GCM";
   export type AppInstanceUserList = AppInstanceUserSummary[];
   export interface AppInstanceUserSummary {
     /**
@@ -569,8 +569,8 @@ declare namespace ChimeSDKIdentity {
      */
     StatusReason?: EndpointStatusReason;
   }
-  export type EndpointStatus = "ACTIVE"|"INACTIVE"|string;
-  export type EndpointStatusReason = "INVALID_DEVICE_TOKEN"|"INVALID_PINPOINT_ARN"|string;
+  export type EndpointStatus = "ACTIVE"|"INACTIVE";
+  export type EndpointStatusReason = "INVALID_DEVICE_TOKEN"|"INVALID_PINPOINT_ARN";
   export interface GetAppInstanceRetentionSettingsRequest {
     /**
      * The ARN of the AppInstance.

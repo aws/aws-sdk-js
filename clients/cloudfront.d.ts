@@ -1028,7 +1028,7 @@ declare namespace CloudFront {
      */
     ParametersInCacheKeyAndForwardedToOrigin?: ParametersInCacheKeyAndForwardedToOrigin;
   }
-  export type CachePolicyCookieBehavior = "none"|"whitelist"|"allExcept"|"all"|string;
+  export type CachePolicyCookieBehavior = "none"|"whitelist"|"allExcept"|"all";
   export interface CachePolicyCookiesConfig {
     /**
      * Determines whether any cookies in viewer requests are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are:    none – Cookies in viewer requests are not included in the cache key and are not automatically included in requests that CloudFront sends to the origin. Even when this field is set to none, any cookies that are listed in an OriginRequestPolicy are included in origin requests.    whitelist – The cookies in viewer requests that are listed in the CookieNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    allExcept – All cookies in viewer requests that are  not  listed in the CookieNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    all – All cookies in viewer requests are included in the cache key and are automatically included in requests that CloudFront sends to the origin.  
@@ -1036,7 +1036,7 @@ declare namespace CloudFront {
     CookieBehavior: CachePolicyCookieBehavior;
     Cookies?: CookieNames;
   }
-  export type CachePolicyHeaderBehavior = "none"|"whitelist"|string;
+  export type CachePolicyHeaderBehavior = "none"|"whitelist";
   export interface CachePolicyHeadersConfig {
     /**
      * Determines whether any HTTP headers are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are:    none – HTTP headers are not included in the cache key and are not automatically included in requests that CloudFront sends to the origin. Even when this field is set to none, any headers that are listed in an OriginRequestPolicy are included in origin requests.    whitelist – The HTTP headers that are listed in the Headers type are included in the cache key and are automatically included in requests that CloudFront sends to the origin.  
@@ -1062,7 +1062,7 @@ declare namespace CloudFront {
      */
     Items?: CachePolicySummaryList;
   }
-  export type CachePolicyQueryStringBehavior = "none"|"whitelist"|"allExcept"|"all"|string;
+  export type CachePolicyQueryStringBehavior = "none"|"whitelist"|"allExcept"|"all";
   export interface CachePolicyQueryStringsConfig {
     /**
      * Determines whether any URL query strings in viewer requests are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are:    none – Query strings in viewer requests are not included in the cache key and are not automatically included in requests that CloudFront sends to the origin. Even when this field is set to none, any query strings that are listed in an OriginRequestPolicy are included in origin requests.    whitelist – The query strings in viewer requests that are listed in the QueryStringNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    allExcept – All query strings in viewer requests that are  not  listed in the QueryStringNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    all – All query strings in viewer requests are included in the cache key and are automatically included in requests that CloudFront sends to the origin.  
@@ -1084,7 +1084,7 @@ declare namespace CloudFront {
     CachePolicy: CachePolicy;
   }
   export type CachePolicySummaryList = CachePolicySummary[];
-  export type CachePolicyType = "managed"|"custom"|string;
+  export type CachePolicyType = "managed"|"custom";
   export interface CachedMethods {
     /**
      * The number of HTTP methods for which you want CloudFront to cache responses. Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for caching responses to GET, HEAD, and OPTIONS requests).
@@ -1095,7 +1095,7 @@ declare namespace CloudFront {
      */
     Items: MethodsList;
   }
-  export type CertificateSource = "cloudfront"|"iam"|"acm"|string;
+  export type CertificateSource = "cloudfront"|"iam"|"acm";
   export interface CloudFrontOriginAccessIdentity {
     /**
      * The ID for the origin access identity, for example, E74FTE3AJFJ256A. 
@@ -2187,7 +2187,7 @@ declare namespace CloudFront {
     KinesisStreamConfig?: KinesisStreamConfig;
   }
   export type EndPointList = EndPoint[];
-  export type EventType = "viewer-request"|"viewer-response"|"origin-request"|"origin-response"|string;
+  export type EventType = "viewer-request"|"viewer-response"|"origin-request"|"origin-response";
   export interface FieldLevelEncryption {
     /**
      * The configuration ID for a field-level encryption configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
@@ -2346,7 +2346,7 @@ declare namespace CloudFront {
      */
     Items?: FieldPatternList;
   }
-  export type Format = "URLEncoded"|string;
+  export type Format = "URLEncoded";
   export interface ForwardedValues {
     /**
      * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include query strings in the cache key, use a cache policy. For more information, see Creating cache policies in the Amazon CloudFront Developer Guide. If you want to send query strings to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies in the Amazon CloudFront Developer Guide. Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of QueryString and on the values that you specify for QueryStringCacheKeys, if any: If you specify true for QueryString and you don't specify any values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin. If you specify true for QueryString and you specify one or more values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify. If you specify false for QueryString, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters. For more information, see Configuring CloudFront to Cache Based on Query String Parameters in the Amazon CloudFront Developer Guide.
@@ -2365,7 +2365,7 @@ declare namespace CloudFront {
      */
     QueryStringCacheKeys?: QueryStringCacheKeys;
   }
-  export type FrameOptionsList = "DENY"|"SAMEORIGIN"|string;
+  export type FrameOptionsList = "DENY"|"SAMEORIGIN";
   export type FunctionARN = string;
   export interface FunctionAssociation {
     /**
@@ -2438,8 +2438,8 @@ declare namespace CloudFront {
     LastModifiedTime: timestamp;
   }
   export type FunctionName = string;
-  export type FunctionRuntime = "cloudfront-js-1.0"|string;
-  export type FunctionStage = "DEVELOPMENT"|"LIVE"|string;
+  export type FunctionRuntime = "cloudfront-js-1.0";
+  export type FunctionStage = "DEVELOPMENT"|"LIVE";
   export interface FunctionSummary {
     /**
      * The name of the CloudFront function.
@@ -2473,7 +2473,7 @@ declare namespace CloudFront {
      */
     Items?: LocationList;
   }
-  export type GeoRestrictionType = "blacklist"|"whitelist"|"none"|string;
+  export type GeoRestrictionType = "blacklist"|"whitelist"|"none";
   export interface GetCachePolicyConfigRequest {
     /**
      * The unique identifier for the cache policy. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
@@ -2905,8 +2905,8 @@ declare namespace CloudFront {
      */
     Items?: HeaderList;
   }
-  export type HttpVersion = "http1.1"|"http2"|"http3"|"http2and3"|string;
-  export type ICPRecordalStatus = "APPROVED"|"SUSPENDED"|"PENDING"|string;
+  export type HttpVersion = "http1.1"|"http2"|"http3"|"http2and3";
+  export type ICPRecordalStatus = "APPROVED"|"SUSPENDED"|"PENDING";
   export interface Invalidation {
     /**
      * The identifier for the invalidation request. For example: IDFDVBD632BHDS5.
@@ -2976,7 +2976,7 @@ declare namespace CloudFront {
     Status: string;
   }
   export type InvalidationSummaryList = InvalidationSummary[];
-  export type ItemSelection = "none"|"whitelist"|"all"|string;
+  export type ItemSelection = "none"|"whitelist"|"all";
   export interface KGKeyPairIds {
     /**
      * The identifier of the key group that contains the public keys.
@@ -3499,9 +3499,9 @@ declare namespace CloudFront {
      */
     Prefix: string;
   }
-  export type Method = "GET"|"HEAD"|"POST"|"PUT"|"PATCH"|"OPTIONS"|"DELETE"|string;
+  export type Method = "GET"|"HEAD"|"POST"|"PUT"|"PATCH"|"OPTIONS"|"DELETE";
   export type MethodsList = Method[];
-  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|"TLSv1.2_2021"|string;
+  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|"TLSv1.2_2021";
   export interface MonitoringSubscription {
     /**
      * A subscription configuration for additional CloudWatch metrics.
@@ -3608,9 +3608,9 @@ declare namespace CloudFront {
      */
     Items?: OriginAccessControlSummaryList;
   }
-  export type OriginAccessControlOriginTypes = "s3"|string;
-  export type OriginAccessControlSigningBehaviors = "never"|"always"|"no-override"|string;
-  export type OriginAccessControlSigningProtocols = "sigv4"|string;
+  export type OriginAccessControlOriginTypes = "s3";
+  export type OriginAccessControlSigningBehaviors = "never"|"always"|"no-override";
+  export type OriginAccessControlSigningProtocols = "sigv4";
   export interface OriginAccessControlSummary {
     /**
      * The unique identifier of the origin access control.
@@ -3698,7 +3698,7 @@ declare namespace CloudFront {
     Items?: OriginGroupList;
   }
   export type OriginList = Origin[];
-  export type OriginProtocolPolicy = "http-only"|"match-viewer"|"https-only"|string;
+  export type OriginProtocolPolicy = "http-only"|"match-viewer"|"https-only";
   export interface OriginRequestPolicy {
     /**
      * The unique identifier for the origin request policy.
@@ -3735,7 +3735,7 @@ declare namespace CloudFront {
      */
     QueryStringsConfig: OriginRequestPolicyQueryStringsConfig;
   }
-  export type OriginRequestPolicyCookieBehavior = "none"|"whitelist"|"all"|string;
+  export type OriginRequestPolicyCookieBehavior = "none"|"whitelist"|"all";
   export interface OriginRequestPolicyCookiesConfig {
     /**
      * Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:    none – Cookies in viewer requests are not included in requests that CloudFront sends to the origin. Even when this field is set to none, any cookies that are listed in a CachePolicy are included in origin requests.    whitelist – The cookies in viewer requests that are listed in the CookieNames type are included in requests that CloudFront sends to the origin.    all – All cookies in viewer requests are included in requests that CloudFront sends to the origin.  
@@ -3743,7 +3743,7 @@ declare namespace CloudFront {
     CookieBehavior: OriginRequestPolicyCookieBehavior;
     Cookies?: CookieNames;
   }
-  export type OriginRequestPolicyHeaderBehavior = "none"|"whitelist"|"allViewer"|"allViewerAndWhitelistCloudFront"|string;
+  export type OriginRequestPolicyHeaderBehavior = "none"|"whitelist"|"allViewer"|"allViewerAndWhitelistCloudFront";
   export interface OriginRequestPolicyHeadersConfig {
     /**
      * Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:    none – HTTP headers are not included in requests that CloudFront sends to the origin. Even when this field is set to none, any headers that are listed in a CachePolicy are included in origin requests.    whitelist – The HTTP headers that are listed in the Headers type are included in requests that CloudFront sends to the origin.    allViewer – All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.    allViewerAndWhitelistCloudFront – All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the Headers type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.  
@@ -3769,7 +3769,7 @@ declare namespace CloudFront {
      */
     Items?: OriginRequestPolicySummaryList;
   }
-  export type OriginRequestPolicyQueryStringBehavior = "none"|"whitelist"|"all"|string;
+  export type OriginRequestPolicyQueryStringBehavior = "none"|"whitelist"|"all";
   export interface OriginRequestPolicyQueryStringsConfig {
     /**
      * Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:    none – Query strings in viewer requests are not included in requests that CloudFront sends to the origin. Even when this field is set to none, any query strings that are listed in a CachePolicy are included in origin requests.    whitelist – The query strings in viewer requests that are listed in the QueryStringNames type are included in requests that CloudFront sends to the origin.    all – All query strings in viewer requests are included in requests that CloudFront sends to the origin.  
@@ -3791,7 +3791,7 @@ declare namespace CloudFront {
     OriginRequestPolicy: OriginRequestPolicy;
   }
   export type OriginRequestPolicySummaryList = OriginRequestPolicySummary[];
-  export type OriginRequestPolicyType = "managed"|"custom"|string;
+  export type OriginRequestPolicyType = "managed"|"custom";
   export interface OriginShield {
     /**
      * A flag that specifies whether Origin Shield is enabled. When it’s enabled, CloudFront routes all requests through Origin Shield, which can help protect your origin. When it’s disabled, CloudFront might send requests directly to your origin from multiple edge locations or regional edge caches.
@@ -3856,7 +3856,7 @@ declare namespace CloudFront {
      */
     Items?: PathList;
   }
-  export type PriceClass = "PriceClass_100"|"PriceClass_200"|"PriceClass_All"|string;
+  export type PriceClass = "PriceClass_100"|"PriceClass_200"|"PriceClass_All";
   export interface PublicKey {
     /**
      * The identifier of the public key.
@@ -4051,8 +4051,8 @@ declare namespace CloudFront {
      */
     RealtimeMetricsSubscriptionStatus: RealtimeMetricsSubscriptionStatus;
   }
-  export type RealtimeMetricsSubscriptionStatus = "Enabled"|"Disabled"|string;
-  export type ReferrerPolicyList = "no-referrer"|"no-referrer-when-downgrade"|"origin"|"origin-when-cross-origin"|"same-origin"|"strict-origin"|"strict-origin-when-cross-origin"|"unsafe-url"|string;
+  export type RealtimeMetricsSubscriptionStatus = "Enabled"|"Disabled";
+  export type ReferrerPolicyList = "no-referrer"|"no-referrer-when-downgrade"|"origin"|"origin-when-cross-origin"|"same-origin"|"strict-origin"|"strict-origin-when-cross-origin"|"unsafe-url";
   export type ResourceARN = string;
   export interface ResponseHeadersPolicy {
     /**
@@ -4088,7 +4088,7 @@ declare namespace CloudFront {
      */
     Items: AccessControlAllowMethodsList;
   }
-  export type ResponseHeadersPolicyAccessControlAllowMethodsValues = "GET"|"POST"|"OPTIONS"|"PUT"|"DELETE"|"PATCH"|"HEAD"|"ALL"|string;
+  export type ResponseHeadersPolicyAccessControlAllowMethodsValues = "GET"|"POST"|"OPTIONS"|"PUT"|"DELETE"|"PATCH"|"HEAD"|"ALL";
   export interface ResponseHeadersPolicyAccessControlAllowOrigins {
     /**
      * The number of origins in the list.
@@ -4309,7 +4309,7 @@ declare namespace CloudFront {
     ResponseHeadersPolicy: ResponseHeadersPolicy;
   }
   export type ResponseHeadersPolicySummaryList = ResponseHeadersPolicySummary[];
-  export type ResponseHeadersPolicyType = "managed"|"custom"|string;
+  export type ResponseHeadersPolicyType = "managed"|"custom";
   export interface ResponseHeadersPolicyXSSProtection {
     /**
      * A Boolean that determines whether CloudFront overrides the X-XSS-Protection HTTP response header received from the origin with the one specified in this response headers policy.
@@ -4350,7 +4350,7 @@ declare namespace CloudFront {
      */
     OriginAccessIdentity: string;
   }
-  export type SSLSupportMethod = "sni-only"|"vip"|"static-ip"|string;
+  export type SSLSupportMethod = "sni-only"|"vip"|"static-ip";
   export type SamplingRate = number;
   export interface _Signer {
     /**
@@ -4363,7 +4363,7 @@ declare namespace CloudFront {
     KeyPairIds?: KeyPairIds;
   }
   export type SignerList = _Signer[];
-  export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2"|string;
+  export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2";
   export type SslProtocolsList = SslProtocol[];
   export type StatusCodeList = integer[];
   export interface StatusCodes {
@@ -5008,7 +5008,7 @@ declare namespace CloudFront {
      */
     CertificateSource?: CertificateSource;
   }
-  export type ViewerProtocolPolicy = "allow-all"|"https-only"|"redirect-to-https"|string;
+  export type ViewerProtocolPolicy = "allow-all"|"https-only"|"redirect-to-https";
   export type aliasString = string;
   export type distributionIdString = string;
   export type integer = number;

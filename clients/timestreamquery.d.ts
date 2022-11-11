@@ -251,7 +251,7 @@ declare namespace TimestreamQuery {
     DimensionValueType: DimensionValueType;
   }
   export type DimensionMappingList = DimensionMapping[];
-  export type DimensionValueType = "VARCHAR"|string;
+  export type DimensionValueType = "VARCHAR";
   export type Double = number;
   export interface Endpoint {
     /**
@@ -361,7 +361,7 @@ declare namespace TimestreamQuery {
   export type MaxQueryResults = number;
   export type MaxScheduledQueriesResults = number;
   export type MaxTagsForResourceResult = number;
-  export type MeasureValueType = "BIGINT"|"BOOLEAN"|"DOUBLE"|"VARCHAR"|"MULTI"|string;
+  export type MeasureValueType = "BIGINT"|"BOOLEAN"|"DOUBLE"|"VARCHAR"|"MULTI";
   export interface MixedMeasureMapping {
     /**
      * Refers to the value of measure_name in a result row. This field is required if MeasureNameColumn is provided.
@@ -531,7 +531,7 @@ declare namespace TimestreamQuery {
      */
     EncryptionOption?: S3EncryptionOption;
   }
-  export type S3EncryptionOption = "SSE_S3"|"SSE_KMS"|string;
+  export type S3EncryptionOption = "SSE_S3"|"SSE_KMS";
   export type S3ObjectKey = string;
   export type S3ObjectKeyPrefix = string;
   export interface S3ReportLocation {
@@ -544,8 +544,8 @@ declare namespace TimestreamQuery {
      */
     ObjectKey?: S3ObjectKey;
   }
-  export type ScalarMeasureValueType = "BIGINT"|"BOOLEAN"|"DOUBLE"|"VARCHAR"|"TIMESTAMP"|string;
-  export type ScalarType = "VARCHAR"|"BOOLEAN"|"BIGINT"|"DOUBLE"|"TIMESTAMP"|"DATE"|"TIME"|"INTERVAL_DAY_TO_SECOND"|"INTERVAL_YEAR_TO_MONTH"|"UNKNOWN"|"INTEGER"|string;
+  export type ScalarMeasureValueType = "BIGINT"|"BOOLEAN"|"DOUBLE"|"VARCHAR"|"TIMESTAMP";
+  export type ScalarType = "VARCHAR"|"BOOLEAN"|"BIGINT"|"DOUBLE"|"TIMESTAMP"|"DATE"|"TIME"|"INTERVAL_DAY_TO_SECOND"|"INTERVAL_YEAR_TO_MONTH"|"UNKNOWN"|"INTEGER";
   export type ScalarValue = string;
   export interface ScheduleConfiguration {
     /**
@@ -656,7 +656,7 @@ declare namespace TimestreamQuery {
   }
   export type ScheduledQueryList = ScheduledQuery[];
   export type ScheduledQueryName = string;
-  export type ScheduledQueryRunStatus = "AUTO_TRIGGER_SUCCESS"|"AUTO_TRIGGER_FAILURE"|"MANUAL_TRIGGER_SUCCESS"|"MANUAL_TRIGGER_FAILURE"|string;
+  export type ScheduledQueryRunStatus = "AUTO_TRIGGER_SUCCESS"|"AUTO_TRIGGER_FAILURE"|"MANUAL_TRIGGER_SUCCESS"|"MANUAL_TRIGGER_FAILURE";
   export interface ScheduledQueryRunSummary {
     /**
      * InvocationTime for this run. This is the time at which the query is scheduled to run. Parameter @scheduled_runtime can be used in the query to get the value. 
@@ -684,7 +684,7 @@ declare namespace TimestreamQuery {
     FailureReason?: ErrorMessage;
   }
   export type ScheduledQueryRunSummaryList = ScheduledQueryRunSummary[];
-  export type ScheduledQueryState = "ENABLED"|"DISABLED"|string;
+  export type ScheduledQueryState = "ENABLED"|"DISABLED";
   export type SchemaName = string;
   export interface SelectColumn {
     /**

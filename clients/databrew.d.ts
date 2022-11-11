@@ -374,7 +374,7 @@ declare namespace DataBrew {
      */
     Statistics: StatisticList;
   }
-  export type AnalyticsMode = "ENABLE"|"DISABLE"|string;
+  export type AnalyticsMode = "ENABLE"|"DISABLE";
   export type Arn = string;
   export type AssumeControl = boolean;
   export type Attempt = number;
@@ -427,7 +427,7 @@ declare namespace DataBrew {
     Statistics: StatisticsConfiguration;
   }
   export type ColumnStatisticsConfigurationList = ColumnStatisticsConfiguration[];
-  export type CompressionFormat = "GZIP"|"LZ4"|"SNAPPY"|"BZIP2"|"DEFLATE"|"LZO"|"BROTLI"|"ZSTD"|"ZLIB"|string;
+  export type CompressionFormat = "GZIP"|"LZ4"|"SNAPPY"|"BZIP2"|"DEFLATE"|"LZO"|"BROTLI"|"ZSTD"|"ZLIB";
   export type Condition = string;
   export interface ConditionExpression {
     /**
@@ -797,7 +797,7 @@ declare namespace DataBrew {
     DatabaseOutputMode?: DatabaseOutputMode;
   }
   export type DatabaseOutputList = DatabaseOutput[];
-  export type DatabaseOutputMode = "NEW_TABLE"|string;
+  export type DatabaseOutputMode = "NEW_TABLE";
   export type DatabaseTableName = string;
   export interface DatabaseTableOutputOptions {
     /**
@@ -1439,7 +1439,7 @@ declare namespace DataBrew {
   }
   export type Disabled = boolean;
   export type EncryptionKeyArn = string;
-  export type EncryptionMode = "SSE-KMS"|"SSE-S3"|string;
+  export type EncryptionMode = "SSE-KMS"|"SSE-S3";
   export interface EntityDetectorConfiguration {
     /**
      * Entity types to detect. Can be any of the following:   USA_SSN   EMAIL   USA_ITIN   USA_PASSPORT_NUMBER   PHONE_NUMBER   USA_DRIVING_LICENSE   BANK_ACCOUNT   CREDIT_CARD   IP_ADDRESS   MAC_ADDRESS   USA_DEA_NUMBER   USA_HCPCS_CODE   USA_NATIONAL_PROVIDER_IDENTIFIER   USA_NATIONAL_DRUG_CODE   USA_HEALTH_INSURANCE_CLAIM_NUMBER   USA_MEDICARE_BENEFICIARY_IDENTIFIER   USA_CPT_CODE   PERSON_NAME   DATE   The Entity type group USA_ALL is also supported, and includes all of the above entity types except PERSON_NAME and DATE.
@@ -1528,7 +1528,7 @@ declare namespace DataBrew {
      */
     Metadata?: Metadata;
   }
-  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|"ORC"|string;
+  export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|"ORC";
   export interface Job {
     /**
      * The ID of the Amazon Web Services account that owns the job.
@@ -1707,7 +1707,7 @@ declare namespace DataBrew {
   export type JobRunErrorMessage = string;
   export type JobRunId = string;
   export type JobRunList = JobRun[];
-  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
+  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT";
   export interface JobSample {
     /**
      * A value that determines whether the profile job is run on the entire dataset or a specified number of rows. This value must be one of the following:   FULL_DATASET - The profile job is run on the entire dataset.   CUSTOM_ROWS - The profile job is run on the number of rows specified in the Size parameter.  
@@ -1719,7 +1719,7 @@ declare namespace DataBrew {
     Size?: JobSize;
   }
   export type JobSize = number;
-  export type JobType = "PROFILE"|"RECIPE"|string;
+  export type JobType = "PROFILE"|"RECIPE";
   export interface JsonOptions {
     /**
      * A value that specifies whether JSON input contains embedded new line characters.
@@ -1930,7 +1930,7 @@ declare namespace DataBrew {
   }
   export type LocaleCode = string;
   export type LogGroupName = string;
-  export type LogSubscription = "ENABLE"|"DISABLE"|string;
+  export type LogSubscription = "ENABLE"|"DISABLE";
   export type MaxCapacity = number;
   export type MaxFiles = number;
   export type MaxOutputFiles = number;
@@ -1946,8 +1946,8 @@ declare namespace DataBrew {
   export type NextToken = string;
   export type OpenedBy = string;
   export type Operation = string;
-  export type Order = "DESCENDING"|"ASCENDING"|string;
-  export type OrderedBy = "LAST_MODIFIED_DATE"|string;
+  export type Order = "DESCENDING"|"ASCENDING";
+  export type OrderedBy = "LAST_MODIFIED_DATE";
   export interface Output {
     /**
      * The compression algorithm used to compress the output text of the job.
@@ -1978,7 +1978,7 @@ declare namespace DataBrew {
      */
     MaxOutputFiles?: MaxOutputFiles;
   }
-  export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|"TABLEAUHYPER"|string;
+  export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|"TABLEAUHYPER";
   export interface OutputFormatOptions {
     /**
      * Represents a set of options that define the structure of comma-separated value (CSV) job output.
@@ -1989,7 +1989,7 @@ declare namespace DataBrew {
   export type OverwriteOutput = boolean;
   export type ParameterMap = {[key: string]: ParameterValue};
   export type ParameterName = string;
-  export type ParameterType = "Datetime"|"Number"|"String"|string;
+  export type ParameterType = "Datetime"|"Number"|"String";
   export type ParameterValue = string;
   export interface PathOptions {
     /**
@@ -2320,9 +2320,9 @@ declare namespace DataBrew {
      */
     Type: SampleType;
   }
-  export type SampleMode = "FULL_DATASET"|"CUSTOM_ROWS"|string;
+  export type SampleMode = "FULL_DATASET"|"CUSTOM_ROWS";
   export type SampleSize = number;
-  export type SampleType = "FIRST_N"|"LAST_N"|"RANDOM"|string;
+  export type SampleType = "FIRST_N"|"LAST_N"|"RANDOM";
   export interface Schedule {
     /**
      * The ID of the Amazon Web Services account that owns the schedule.
@@ -2401,12 +2401,12 @@ declare namespace DataBrew {
      */
     ActionId?: ActionId;
   }
-  export type SessionStatus = "ASSIGNED"|"FAILED"|"INITIALIZING"|"PROVISIONING"|"READY"|"RECYCLING"|"ROTATING"|"TERMINATED"|"TERMINATING"|"UPDATING"|string;
+  export type SessionStatus = "ASSIGNED"|"FAILED"|"INITIALIZING"|"PROVISIONING"|"READY"|"RECYCLING"|"ROTATING"|"TERMINATED"|"TERMINATING"|"UPDATING";
   export type SheetIndex = number;
   export type SheetIndexList = SheetIndex[];
   export type SheetName = string;
   export type SheetNameList = SheetName[];
-  export type Source = "S3"|"DATA-CATALOG"|"DATABASE"|string;
+  export type Source = "S3"|"DATA-CATALOG"|"DATABASE";
   export type StartColumnIndex = number;
   export interface StartJobRunRequest {
     /**
@@ -2514,8 +2514,8 @@ declare namespace DataBrew {
      */
     Unit?: ThresholdUnit;
   }
-  export type ThresholdType = "GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|string;
-  export type ThresholdUnit = "COUNT"|"PERCENTAGE"|string;
+  export type ThresholdType = "GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN";
+  export type ThresholdUnit = "COUNT"|"PERCENTAGE";
   export type ThresholdValue = number;
   export type Timeout = number;
   export type TimezoneOffset = string;
@@ -2750,7 +2750,7 @@ declare namespace DataBrew {
     ValidationMode?: ValidationMode;
   }
   export type ValidationConfigurationList = ValidationConfiguration[];
-  export type ValidationMode = "CHECK_ALL"|string;
+  export type ValidationMode = "CHECK_ALL";
   export type ValueReference = string;
   export type ValuesMap = {[key: string]: ConditionValue};
   export interface ViewFrame {

@@ -112,7 +112,7 @@ declare namespace Ivschat {
   export type ChatToken = string;
   export type ChatTokenAttributes = {[key: string]: String};
   export type ChatTokenCapabilities = ChatTokenCapability[];
-  export type ChatTokenCapability = "SEND_MESSAGE"|"DISCONNECT_USER"|"DELETE_MESSAGE"|string;
+  export type ChatTokenCapability = "SEND_MESSAGE"|"DISCONNECT_USER"|"DELETE_MESSAGE";
   export interface CreateChatTokenRequest {
     /**
      * Application-provided attributes to encode into the token and attach to a chat session. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
@@ -253,7 +253,7 @@ declare namespace Ivschat {
   }
   export type EventAttributes = {[key: string]: String};
   export type EventName = string;
-  export type FallbackResult = "ALLOW"|"DENY"|string;
+  export type FallbackResult = "ALLOW"|"DENY";
   export interface GetRoomRequest {
     /**
      * Identifier of the room for which the configuration is to be retrieved. Currently this must be an ARN.

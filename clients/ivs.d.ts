@@ -343,7 +343,7 @@ declare namespace IVS {
   }
   export type ChannelArn = string;
   export type ChannelArnList = ChannelArn[];
-  export type ChannelLatencyMode = "NORMAL"|"LOW"|string;
+  export type ChannelLatencyMode = "NORMAL"|"LOW";
   export type ChannelList = ChannelSummary[];
   export type ChannelName = string;
   export type ChannelRecordingConfigurationArn = string;
@@ -373,7 +373,7 @@ declare namespace IVS {
      */
     tags?: Tags;
   }
-  export type ChannelType = "BASIC"|"STANDARD"|string;
+  export type ChannelType = "BASIC"|"STANDARD";
   export type Channels = Channel[];
   export interface CreateChannelRequest {
     /**
@@ -835,7 +835,7 @@ declare namespace IVS {
   export type RecordingConfigurationArn = string;
   export type RecordingConfigurationList = RecordingConfigurationSummary[];
   export type RecordingConfigurationName = string;
-  export type RecordingConfigurationState = "CREATING"|"CREATE_FAILED"|"ACTIVE"|string;
+  export type RecordingConfigurationState = "CREATING"|"CREATE_FAILED"|"ACTIVE";
   export interface RecordingConfigurationSummary {
     /**
      * Recording-configuration ARN.
@@ -858,7 +858,7 @@ declare namespace IVS {
      */
     tags?: Tags;
   }
-  export type RecordingMode = "DISABLED"|"INTERVAL"|string;
+  export type RecordingMode = "DISABLED"|"INTERVAL";
   export type RecordingReconnectWindowSeconds = number;
   export type ResourceArn = string;
   export type S3DestinationBucketName = string;
@@ -927,7 +927,7 @@ declare namespace IVS {
      */
     health?: StreamHealth;
   }
-  export type StreamHealth = "HEALTHY"|"STARVING"|"UNKNOWN"|string;
+  export type StreamHealth = "HEALTHY"|"STARVING"|"UNKNOWN";
   export type StreamId = string;
   export interface StreamKey {
     /**
@@ -1018,7 +1018,7 @@ declare namespace IVS {
     streamId?: StreamId;
   }
   export type StreamStartTime = Date;
-  export type StreamState = "LIVE"|"OFFLINE"|string;
+  export type StreamState = "LIVE"|"OFFLINE";
   export interface StreamSummary {
     /**
      * Channel ARN for the stream.

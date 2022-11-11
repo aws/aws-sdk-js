@@ -736,9 +736,9 @@ declare namespace ServiceCatalog {
      */
     Value?: AccessLevelFilterValue;
   }
-  export type AccessLevelFilterKey = "Account"|"Role"|"User"|string;
+  export type AccessLevelFilterKey = "Account"|"Role"|"User";
   export type AccessLevelFilterValue = string;
-  export type AccessStatus = "ENABLED"|"UNDER_CHANGE"|"DISABLED"|string;
+  export type AccessStatus = "ENABLED"|"UNDER_CHANGE"|"DISABLED";
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export type AddTags = Tag[];
@@ -871,7 +871,7 @@ declare namespace ServiceCatalog {
   export type BudgetName = string;
   export type Budgets = BudgetDetail[];
   export type CausingEntity = string;
-  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
+  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE";
   export interface CloudWatchDashboard {
     /**
      * The name of the CloudWatch dashboard.
@@ -921,7 +921,7 @@ declare namespace ServiceCatalog {
     Description?: ConstraintDescription;
   }
   export type ConstraintType = string;
-  export type CopyOption = "CopyTags"|string;
+  export type CopyOption = "CopyTags";
   export type CopyOptions = CopyOption[];
   export interface CopyProductInput {
     /**
@@ -959,7 +959,7 @@ declare namespace ServiceCatalog {
      */
     CopyProductToken?: Id;
   }
-  export type CopyProductStatus = "SUCCEEDED"|"IN_PROGRESS"|"FAILED"|string;
+  export type CopyProductStatus = "SUCCEEDED"|"IN_PROGRESS"|"FAILED";
   export interface CreateConstraintInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1499,7 +1499,7 @@ declare namespace ServiceCatalog {
      */
     ShareDetails?: ShareDetails;
   }
-  export type DescribePortfolioShareType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ORGANIZATION_MEMBER_ACCOUNT"|string;
+  export type DescribePortfolioShareType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ORGANIZATION_MEMBER_ACCOUNT";
   export interface DescribePortfolioSharesInput {
     /**
      * The unique identifier of the portfolio for which shares will be retrieved.
@@ -1945,7 +1945,7 @@ declare namespace ServiceCatalog {
   export type Error = string;
   export type ErrorCode = string;
   export type ErrorDescription = string;
-  export type EvaluationType = "STATIC"|"DYNAMIC"|string;
+  export type EvaluationType = "STATIC"|"DYNAMIC";
   export interface ExecuteProvisionedProductPlanInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -2696,7 +2696,7 @@ declare namespace ServiceCatalog {
      */
     Value?: OrganizationNodeValue;
   }
-  export type OrganizationNodeType = "ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ACCOUNT"|string;
+  export type OrganizationNodeType = "ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ACCOUNT";
   export type OrganizationNodeValue = string;
   export type OrganizationNodes = OrganizationNode[];
   export type OutputDescription = string;
@@ -2792,7 +2792,7 @@ declare namespace ServiceCatalog {
     ShareTagOptions?: Boolean;
   }
   export type PortfolioShareDetails = PortfolioShareDetail[];
-  export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
+  export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS";
   export interface Principal {
     /**
      * The ARN of the principal (IAM user, role, or group).
@@ -2804,11 +2804,11 @@ declare namespace ServiceCatalog {
     PrincipalType?: PrincipalType;
   }
   export type PrincipalARN = string;
-  export type PrincipalType = "IAM"|string;
+  export type PrincipalType = "IAM";
   export type Principals = Principal[];
   export type ProductArn = string;
-  export type ProductSource = "ACCOUNT"|string;
-  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|string;
+  export type ProductSource = "ACCOUNT";
+  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE";
   export type ProductViewAggregationType = string;
   export interface ProductViewAggregationValue {
     /**
@@ -2842,14 +2842,14 @@ declare namespace ServiceCatalog {
   }
   export type ProductViewDetails = ProductViewDetail[];
   export type ProductViewDistributor = string;
-  export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|"SourceProductId"|string;
+  export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|"SourceProductId";
   export type ProductViewFilterValue = string;
   export type ProductViewFilterValues = ProductViewFilterValue[];
   export type ProductViewFilters = {[key: string]: ProductViewFilterValues};
   export type ProductViewName = string;
   export type ProductViewOwner = string;
   export type ProductViewShortDescription = string;
-  export type ProductViewSortBy = "Title"|"VersionCount"|"CreationDate"|string;
+  export type ProductViewSortBy = "Title"|"VersionCount"|"CreationDate";
   export type ProductViewSummaries = ProductViewSummary[];
   export interface ProductViewSummary {
     /**
@@ -2897,7 +2897,7 @@ declare namespace ServiceCatalog {
      */
     SupportUrl?: SupportUrl;
   }
-  export type PropertyKey = "OWNER"|"LAUNCH_ROLE"|string;
+  export type PropertyKey = "OWNER"|"LAUNCH_ROLE";
   export type PropertyName = string;
   export type PropertyValue = string;
   export type ProviderName = string;
@@ -3166,7 +3166,7 @@ declare namespace ServiceCatalog {
     StatusMessage?: StatusMessage;
   }
   export type ProvisionedProductPlanName = string;
-  export type ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"|"CREATE_SUCCESS"|"CREATE_FAILED"|"EXECUTE_IN_PROGRESS"|"EXECUTE_SUCCESS"|"EXECUTE_FAILED"|string;
+  export type ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"|"CREATE_SUCCESS"|"CREATE_FAILED"|"EXECUTE_IN_PROGRESS"|"EXECUTE_SUCCESS"|"EXECUTE_FAILED";
   export interface ProvisionedProductPlanSummary {
     /**
      * The name of the plan.
@@ -3193,13 +3193,13 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactId?: Id;
   }
-  export type ProvisionedProductPlanType = "CLOUDFORMATION"|string;
+  export type ProvisionedProductPlanType = "CLOUDFORMATION";
   export type ProvisionedProductPlans = ProvisionedProductPlanSummary[];
   export type ProvisionedProductProperties = {[key: string]: PropertyValue};
-  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|"PLAN_IN_PROGRESS"|string;
+  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|"PLAN_IN_PROGRESS";
   export type ProvisionedProductStatusMessage = string;
   export type ProvisionedProductType = string;
-  export type ProvisionedProductViewFilterBy = "SearchQuery"|string;
+  export type ProvisionedProductViewFilterBy = "SearchQuery";
   export type ProvisionedProductViewFilterValue = string;
   export type ProvisionedProductViewFilterValues = ProvisionedProductViewFilterValue[];
   export interface ProvisioningArtifact {
@@ -3258,7 +3258,7 @@ declare namespace ServiceCatalog {
     Guidance?: ProvisioningArtifactGuidance;
   }
   export type ProvisioningArtifactDetails = ProvisioningArtifactDetail[];
-  export type ProvisioningArtifactGuidance = "DEFAULT"|"DEPRECATED"|string;
+  export type ProvisioningArtifactGuidance = "DEFAULT"|"DEPRECATED";
   export type ProvisioningArtifactInfo = {[key: string]: ProvisioningArtifactInfoValue};
   export type ProvisioningArtifactInfoKey = string;
   export type ProvisioningArtifactInfoValue = string;
@@ -3334,7 +3334,7 @@ declare namespace ServiceCatalog {
      */
     DisableTemplateValidation?: DisableTemplateValidation;
   }
-  export type ProvisioningArtifactPropertyName = "Id"|string;
+  export type ProvisioningArtifactPropertyName = "Id";
   export type ProvisioningArtifactPropertyValue = string;
   export type ProvisioningArtifactSummaries = ProvisioningArtifactSummary[];
   export interface ProvisioningArtifactSummary {
@@ -3359,7 +3359,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
   }
-  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|string;
+  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR";
   export interface ProvisioningArtifactView {
     /**
      * Summary information about a product view.
@@ -3494,7 +3494,7 @@ declare namespace ServiceCatalog {
     Description?: Description;
   }
   export type RecordOutputs = RecordOutput[];
-  export type RecordStatus = "CREATED"|"IN_PROGRESS"|"IN_PROGRESS_IN_ERROR"|"SUCCEEDED"|"FAILED"|string;
+  export type RecordStatus = "CREATED"|"IN_PROGRESS"|"IN_PROGRESS_IN_ERROR"|"SUCCEEDED"|"FAILED";
   export interface RecordTag {
     /**
      * The key for this tag.
@@ -3526,10 +3526,10 @@ declare namespace ServiceCatalog {
   }
   export interface RejectPortfolioShareOutput {
   }
-  export type Replacement = "TRUE"|"FALSE"|"CONDITIONAL"|string;
-  export type RequiresRecreation = "NEVER"|"CONDITIONALLY"|"ALWAYS"|string;
+  export type Replacement = "TRUE"|"FALSE"|"CONDITIONAL";
+  export type RequiresRecreation = "NEVER"|"CONDITIONALLY"|"ALWAYS";
   export type ResourceARN = string;
-  export type ResourceAttribute = "PROPERTIES"|"METADATA"|"CREATIONPOLICY"|"UPDATEPOLICY"|"DELETIONPOLICY"|"TAGS"|string;
+  export type ResourceAttribute = "PROPERTIES"|"METADATA"|"CREATIONPOLICY"|"UPDATEPOLICY"|"DELETIONPOLICY"|"TAGS";
   export interface ResourceChange {
     /**
      * The change action.
@@ -3796,12 +3796,12 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactId: Id;
   }
-  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|string;
+  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING";
   export type ServiceActionAssociationErrorMessage = string;
   export type ServiceActionAssociations = ServiceActionAssociation[];
-  export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters"|string;
+  export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters";
   export type ServiceActionDefinitionMap = {[key: string]: ServiceActionDefinitionValue};
-  export type ServiceActionDefinitionType = "SSM_AUTOMATION"|string;
+  export type ServiceActionDefinitionType = "SSM_AUTOMATION";
   export type ServiceActionDefinitionValue = string;
   export type ServiceActionDescription = string;
   export interface ServiceActionDetail {
@@ -3859,9 +3859,9 @@ declare namespace ServiceCatalog {
     Error?: Error;
   }
   export type ShareErrors = ShareError[];
-  export type ShareStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"ERROR"|string;
+  export type ShareStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"ERROR";
   export type SortField = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING";
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
   export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
   export interface StackInstance {
@@ -3878,16 +3878,16 @@ declare namespace ServiceCatalog {
      */
     StackInstanceStatus?: StackInstanceStatus;
   }
-  export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
+  export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE";
   export type StackInstances = StackInstance[];
   export type StackSetAccounts = AccountId[];
   export type StackSetFailureToleranceCount = number;
   export type StackSetFailureTolerancePercentage = number;
   export type StackSetMaxConcurrencyCount = number;
   export type StackSetMaxConcurrencyPercentage = number;
-  export type StackSetOperationType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type StackSetOperationType = "CREATE"|"UPDATE"|"DELETE";
   export type StackSetRegions = Region[];
-  export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
+  export type Status = "AVAILABLE"|"CREATING"|"FAILED";
   export type StatusDetail = string;
   export type StatusMessage = string;
   export type String = string;

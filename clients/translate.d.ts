@@ -239,8 +239,8 @@ declare namespace Translate {
     TextTranslationJobProperties?: TextTranslationJobProperties;
   }
   export type Description = string;
-  export type Directionality = "UNI"|"MULTI"|string;
-  export type DisplayLanguageCode = "de"|"en"|"es"|"fr"|"it"|"ja"|"ko"|"pt"|"zh"|"zh-TW"|string;
+  export type Directionality = "UNI"|"MULTI";
+  export type DisplayLanguageCode = "de"|"en"|"es"|"fr"|"it"|"ja"|"ko"|"pt"|"zh"|"zh-TW";
   export interface EncryptionKey {
     /**
      * The type of encryption key used by Amazon Translate to encrypt this object.
@@ -252,8 +252,8 @@ declare namespace Translate {
     Id: EncryptionKeyID;
   }
   export type EncryptionKeyID = string;
-  export type EncryptionKeyType = "KMS"|string;
-  export type Formality = "FORMAL"|"INFORMAL"|string;
+  export type EncryptionKeyType = "KMS";
+  export type Formality = "FORMAL"|"INFORMAL";
   export interface GetParallelDataRequest {
     /**
      * The name of the parallel data resource that is being retrieved.
@@ -366,7 +366,7 @@ declare namespace Translate {
   }
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED";
   export interface Language {
     /**
      * Language name of the supported language.
@@ -487,7 +487,7 @@ declare namespace Translate {
   export type LocalizedNameString = string;
   export type Long = number;
   export type MaxResultsInteger = number;
-  export type MergeStrategy = "OVERWRITE"|string;
+  export type MergeStrategy = "OVERWRITE";
   export type NextToken = string;
   export interface OutputDataConfig {
     /**
@@ -517,7 +517,7 @@ declare namespace Translate {
      */
     Location: String;
   }
-  export type ParallelDataFormat = "TSV"|"CSV"|"TMX"|string;
+  export type ParallelDataFormat = "TSV"|"CSV"|"TMX";
   export interface ParallelDataProperties {
     /**
      * The custom name assigned to the parallel data resource.
@@ -586,8 +586,8 @@ declare namespace Translate {
     LatestUpdateAttemptAt?: Timestamp;
   }
   export type ParallelDataPropertiesList = ParallelDataProperties[];
-  export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
-  export type Profanity = "MASK"|string;
+  export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED";
+  export type Profanity = "MASK";
   export type ResourceArn = string;
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
@@ -714,7 +714,7 @@ declare namespace Translate {
      */
     Directionality?: Directionality;
   }
-  export type TerminologyDataFormat = "CSV"|"TMX"|"TSV"|string;
+  export type TerminologyDataFormat = "CSV"|"TMX"|"TSV";
   export interface TerminologyDataLocation {
     /**
      * The repository type for the custom terminology data.

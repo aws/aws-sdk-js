@@ -277,7 +277,7 @@ declare namespace TimestreamWrite {
      */
     DimensionValueType?: DimensionValueType;
   }
-  export type DimensionValueType = "VARCHAR"|string;
+  export type DimensionValueType = "VARCHAR";
   export type Dimensions = Dimension[];
   export interface Endpoint {
     /**
@@ -379,7 +379,7 @@ declare namespace TimestreamWrite {
      */
     Type: MeasureValueType;
   }
-  export type MeasureValueType = "DOUBLE"|"BIGINT"|"VARCHAR"|"BOOLEAN"|"TIMESTAMP"|"MULTI"|string;
+  export type MeasureValueType = "DOUBLE"|"BIGINT"|"VARCHAR"|"BOOLEAN"|"TIMESTAMP"|"MULTI";
   export type MeasureValues = MeasureValue[];
   export type MemoryStoreRetentionPeriodInHours = number;
   export type PaginationLimit = number;
@@ -464,7 +464,7 @@ declare namespace TimestreamWrite {
      */
     KmsKeyId?: StringValue2048;
   }
-  export type S3EncryptionOption = "SSE_S3"|"SSE_KMS"|string;
+  export type S3EncryptionOption = "SSE_S3"|"SSE_KMS";
   export type S3ObjectKeyPrefix = string;
   export type SchemaName = string;
   export type SchemaValue = string;
@@ -506,7 +506,7 @@ declare namespace TimestreamWrite {
     MagneticStoreWriteProperties?: MagneticStoreWriteProperties;
   }
   export type TableList = Table[];
-  export type TableStatus = "ACTIVE"|"DELETING"|string;
+  export type TableStatus = "ACTIVE"|"DELETING";
   export interface Tag {
     /**
      *  The key of the tag. Tag keys are case sensitive. 
@@ -533,7 +533,7 @@ declare namespace TimestreamWrite {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TimeUnit = "MILLISECONDS"|"SECONDS"|"MICROSECONDS"|"NANOSECONDS"|string;
+  export type TimeUnit = "MILLISECONDS"|"SECONDS"|"MICROSECONDS"|"NANOSECONDS";
   export interface UntagResourceRequest {
     /**
      *  The Timestream resource that the tags will be removed from. This value is an Amazon Resource Name (ARN). 

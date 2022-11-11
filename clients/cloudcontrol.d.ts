@@ -189,7 +189,7 @@ declare namespace CloudControl {
      */
     ProgressEvent?: ProgressEvent;
   }
-  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"ServiceTimeout"|"NetworkFailure"|"InternalFailure"|string;
+  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"ServiceTimeout"|"NetworkFailure"|"InternalFailure";
   export type HandlerNextToken = string;
   export type Identifier = string;
   export interface ListResourceRequestsInput {
@@ -258,8 +258,8 @@ declare namespace CloudControl {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type Operation = "CREATE"|"DELETE"|"UPDATE"|string;
-  export type OperationStatus = "PENDING"|"IN_PROGRESS"|"SUCCESS"|"FAILED"|"CANCEL_IN_PROGRESS"|"CANCEL_COMPLETE"|string;
+  export type Operation = "CREATE"|"DELETE"|"UPDATE";
+  export type OperationStatus = "PENDING"|"IN_PROGRESS"|"SUCCESS"|"FAILED"|"CANCEL_IN_PROGRESS"|"CANCEL_COMPLETE";
   export type OperationStatuses = OperationStatus[];
   export type Operations = Operation[];
   export type PatchDocument = string;

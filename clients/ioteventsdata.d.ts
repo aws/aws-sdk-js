@@ -184,7 +184,7 @@ declare namespace IoTEventsData {
      */
     systemEvent?: SystemEvent;
   }
-  export type AlarmStateName = "DISABLED"|"NORMAL"|"ACTIVE"|"ACKNOWLEDGED"|"SNOOZE_DISABLED"|"LATCHED"|string;
+  export type AlarmStateName = "DISABLED"|"NORMAL"|"ACTIVE"|"ACKNOWLEDGED"|"SNOOZE_DISABLED"|"LATCHED";
   export type AlarmSummaries = AlarmSummary[];
   export interface AlarmSummary {
     /**
@@ -368,7 +368,7 @@ declare namespace IoTEventsData {
      */
     batchUpdateDetectorErrorEntries?: BatchUpdateDetectorErrorEntries;
   }
-  export type ComparisonOperator = "GREATER"|"GREATER_OR_EQUAL"|"LESS"|"LESS_OR_EQUAL"|"EQUAL"|"NOT_EQUAL"|string;
+  export type ComparisonOperator = "GREATER"|"GREATER_OR_EQUAL"|"LESS"|"LESS_OR_EQUAL"|"EQUAL"|"NOT_EQUAL";
   export interface CustomerAction {
     /**
      * The name of the action. The action name can be one of the following values:    SNOOZE - When you snooze the alarm, the alarm state changes to SNOOZE_DISABLED.    ENABLE - When you enable the alarm, the alarm state changes to NORMAL.    DISABLE - When you disable the alarm, the alarm state changes to DISABLED.    ACKNOWLEDGE - When you acknowledge the alarm, the alarm state changes to ACKNOWLEDGED.    RESET - When you reset the alarm, the alarm state changes to NORMAL.   For more information, see the AlarmState API.
@@ -395,7 +395,7 @@ declare namespace IoTEventsData {
      */
     resetActionConfiguration?: ResetActionConfiguration;
   }
-  export type CustomerActionName = "SNOOZE"|"ENABLE"|"DISABLE"|"ACKNOWLEDGE"|"RESET"|string;
+  export type CustomerActionName = "SNOOZE"|"ENABLE"|"DISABLE"|"ACKNOWLEDGE"|"RESET";
   export interface DeleteDetectorRequest {
     /**
      * The ID to assign to the DeleteDetectorRequest. Each "messageId" must be unique within each batch sent.
@@ -584,9 +584,9 @@ declare namespace IoTEventsData {
   export type EnableAlarmActionRequests = EnableAlarmActionRequest[];
   export type EphemeralInputName = string;
   export type EpochMilliTimestamp = number;
-  export type ErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|string;
+  export type ErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException";
   export type ErrorMessage = string;
-  export type EventType = "STATE_CHANGE"|string;
+  export type EventType = "STATE_CHANGE";
   export type InputPropertyValue = string;
   export type KeyValue = string;
   export interface ListAlarmsRequest {
@@ -795,7 +795,7 @@ declare namespace IoTEventsData {
      */
     timeInMillis?: EpochMilliTimestamp;
   }
-  export type TriggerType = "SNOOZE_TIMEOUT"|string;
+  export type TriggerType = "SNOOZE_TIMEOUT";
   export interface UpdateDetectorRequest {
     /**
      * The ID to assign to the detector update "message". Each "messageId" must be unique within each batch sent.

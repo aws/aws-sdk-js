@@ -414,9 +414,9 @@ declare namespace ElasticBeanstalk {
     EnvironmentName?: EnvironmentName;
   }
   export type AbortableOperationInProgress = boolean;
-  export type ActionHistoryStatus = "Completed"|"Failed"|"Unknown"|string;
-  export type ActionStatus = "Scheduled"|"Pending"|"Running"|"Unknown"|string;
-  export type ActionType = "InstanceRefresh"|"PlatformUpdate"|"Unknown"|string;
+  export type ActionHistoryStatus = "Completed"|"Failed"|"Unknown";
+  export type ActionStatus = "Scheduled"|"Pending"|"Running"|"Unknown";
+  export type ActionType = "InstanceRefresh"|"PlatformUpdate"|"Unknown";
   export type ApplicationArn = string;
   export interface ApplicationDescription {
     /**
@@ -576,7 +576,7 @@ declare namespace ElasticBeanstalk {
     MaxAgeRule?: MaxAgeRule;
   }
   export type ApplicationVersionProccess = boolean;
-  export type ApplicationVersionStatus = "Processed"|"Unprocessed"|"Failed"|"Processing"|"Building"|string;
+  export type ApplicationVersionStatus = "Processed"|"Unprocessed"|"Failed"|"Processing"|"Building";
   export interface ApplyEnvironmentManagedActionRequest {
     /**
      * The name of the target environment.
@@ -728,8 +728,8 @@ declare namespace ElasticBeanstalk {
      */
     VersionLabels?: VersionLabels;
   }
-  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|string;
-  export type ConfigurationDeploymentStatus = "deployed"|"pending"|"failed"|string;
+  export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE";
+  export type ConfigurationDeploymentStatus = "deployed"|"pending"|"failed";
   export type ConfigurationOptionDefaultValue = string;
   export interface ConfigurationOptionDescription {
     /**
@@ -802,7 +802,7 @@ declare namespace ElasticBeanstalk {
   export type ConfigurationOptionSettingsList = ConfigurationOptionSetting[];
   export type ConfigurationOptionSeverity = string;
   export type ConfigurationOptionValue = string;
-  export type ConfigurationOptionValueType = "Scalar"|"List"|string;
+  export type ConfigurationOptionValueType = "Scalar"|"List";
   export interface ConfigurationOptionsDescription {
     /**
      * The name of the solution stack these configuration options belong to.
@@ -1569,10 +1569,10 @@ declare namespace ElasticBeanstalk {
      */
     NextToken?: Token;
   }
-  export type EnvironmentHealth = "Green"|"Yellow"|"Red"|"Grey"|string;
-  export type EnvironmentHealthAttribute = "Status"|"Color"|"Causes"|"ApplicationMetrics"|"InstancesHealth"|"All"|"HealthStatus"|"RefreshedAt"|string;
+  export type EnvironmentHealth = "Green"|"Yellow"|"Red"|"Grey";
+  export type EnvironmentHealthAttribute = "Status"|"Color"|"Causes"|"ApplicationMetrics"|"InstancesHealth"|"All"|"HealthStatus"|"RefreshedAt";
   export type EnvironmentHealthAttributes = EnvironmentHealthAttribute[];
-  export type EnvironmentHealthStatus = "NoData"|"Unknown"|"Pending"|"Ok"|"Info"|"Warning"|"Degraded"|"Severe"|"Suspended"|string;
+  export type EnvironmentHealthStatus = "NoData"|"Unknown"|"Pending"|"Ok"|"Info"|"Warning"|"Degraded"|"Severe"|"Suspended";
   export type EnvironmentId = string;
   export type EnvironmentIdList = EnvironmentId[];
   export interface EnvironmentInfoDescription {
@@ -1594,7 +1594,7 @@ declare namespace ElasticBeanstalk {
     Message?: Message;
   }
   export type EnvironmentInfoDescriptionList = EnvironmentInfoDescription[];
-  export type EnvironmentInfoType = "tail"|"bundle"|string;
+  export type EnvironmentInfoType = "tail"|"bundle";
   export interface EnvironmentLink {
     /**
      * The name of the link.
@@ -1654,7 +1654,7 @@ declare namespace ElasticBeanstalk {
      */
     LoadBalancer?: LoadBalancerDescription;
   }
-  export type EnvironmentStatus = "Aborting"|"Launching"|"Updating"|"LinkingFrom"|"LinkingTo"|"Ready"|"Terminating"|"Terminated"|string;
+  export type EnvironmentStatus = "Aborting"|"Launching"|"Updating"|"LinkingFrom"|"LinkingTo"|"Ready"|"Terminating"|"Terminated";
   export interface EnvironmentTier {
     /**
      * The name of this environment tier. Valid values:   For Web server tier – WebServer    For Worker tier – Worker   
@@ -1720,8 +1720,8 @@ declare namespace ElasticBeanstalk {
     NextToken?: Token;
   }
   export type EventMessage = string;
-  export type EventSeverity = "TRACE"|"DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
-  export type FailureType = "UpdateCancelled"|"CancellationFailed"|"RollbackFailed"|"RollbackSuccessful"|"InternalFailure"|"InvalidEnvironmentState"|"PermissionsError"|string;
+  export type EventSeverity = "TRACE"|"DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL";
+  export type FailureType = "UpdateCancelled"|"CancellationFailed"|"RollbackFailed"|"RollbackSuccessful"|"InternalFailure"|"InvalidEnvironmentState"|"PermissionsError";
   export type FileTypeExtension = string;
   export type ForceTerminate = boolean;
   export type GroupName = string;
@@ -1771,7 +1771,7 @@ declare namespace ElasticBeanstalk {
   }
   export type InstanceId = string;
   export type InstanceList = Instance[];
-  export type InstancesHealthAttribute = "HealthStatus"|"Color"|"Causes"|"ApplicationMetrics"|"RefreshedAt"|"LaunchedAt"|"System"|"Deployment"|"AvailabilityZone"|"InstanceType"|"All"|string;
+  export type InstancesHealthAttribute = "HealthStatus"|"Color"|"Causes"|"ApplicationMetrics"|"RefreshedAt"|"LaunchedAt"|"System"|"Deployment"|"AvailabilityZone"|"InstanceType"|"All";
   export type InstancesHealthAttributes = InstancesHealthAttribute[];
   export type Integer = number;
   export interface Latency {
@@ -2206,7 +2206,7 @@ declare namespace ElasticBeanstalk {
     Version?: String;
   }
   export type PlatformProgrammingLanguages = PlatformProgrammingLanguage[];
-  export type PlatformStatus = "Creating"|"Failed"|"Ready"|"Deleting"|"Deleted"|string;
+  export type PlatformStatus = "Creating"|"Failed"|"Ready"|"Deleting"|"Deleted";
   export interface PlatformSummary {
     /**
      * The ARN of the platform version.
@@ -2481,8 +2481,8 @@ declare namespace ElasticBeanstalk {
     TemplateName?: ConfigurationTemplateName;
   }
   export type SourceLocation = string;
-  export type SourceRepository = "CodeCommit"|"S3"|string;
-  export type SourceType = "Git"|"Zip"|string;
+  export type SourceRepository = "CodeCommit"|"S3";
+  export type SourceType = "Git"|"Zip";
   export interface StatusCodes {
     /**
      * The percentage of requests over the last 10 seconds that resulted in a 2xx (200, 201, etc.) status code.
@@ -2740,7 +2740,7 @@ declare namespace ElasticBeanstalk {
   }
   export type ValidationMessageString = string;
   export type ValidationMessagesList = ValidationMessage[];
-  export type ValidationSeverity = "error"|"warning"|string;
+  export type ValidationSeverity = "error"|"warning";
   export type VersionLabel = string;
   export type VersionLabels = VersionLabel[];
   export type VersionLabelsList = VersionLabel[];

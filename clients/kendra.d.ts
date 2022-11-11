@@ -535,7 +535,7 @@ declare namespace Kendra {
      */
     TextWithHighlightsValue?: TextWithHighlights;
   }
-  export type AdditionalResultAttributeValueType = "TEXT_WITH_HIGHLIGHTS_VALUE"|string;
+  export type AdditionalResultAttributeValueType = "TEXT_WITH_HIGHLIGHTS_VALUE";
   export interface AlfrescoConfiguration {
     /**
      * The URL of the Alfresco site. For example, https://hostname:8080.
@@ -590,7 +590,7 @@ declare namespace Kendra {
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
   }
-  export type AlfrescoEntity = "wiki"|"blog"|"documentLibrary"|string;
+  export type AlfrescoEntity = "wiki"|"blog"|"documentLibrary";
   export type AmazonResourceName = string;
   export type AssociateEntitiesToExperienceFailedEntityList = FailedEntity[];
   export interface AssociateEntitiesToExperienceRequest {
@@ -913,7 +913,7 @@ declare namespace Kendra {
     ChangeDetectingColumns: ChangeDetectingColumns;
   }
   export type ColumnName = string;
-  export type ConditionOperator = "GreaterThan"|"GreaterThanOrEquals"|"LessThan"|"LessThanOrEquals"|"Equals"|"NotEquals"|"Contains"|"NotContains"|"Exists"|"NotExists"|"BeginsWith"|string;
+  export type ConditionOperator = "GreaterThan"|"GreaterThanOrEquals"|"LessThan"|"LessThanOrEquals"|"Equals"|"NotEquals"|"Contains"|"NotContains"|"Exists"|"NotExists"|"BeginsWith";
   export interface ConfluenceAttachmentConfiguration {
     /**
      *  TRUE to index attachments of pages and blogs in Confluence.
@@ -925,7 +925,7 @@ declare namespace Kendra {
     AttachmentFieldMappings?: ConfluenceAttachmentFieldMappingsList;
   }
   export type ConfluenceAttachmentFieldMappingsList = ConfluenceAttachmentToIndexFieldMapping[];
-  export type ConfluenceAttachmentFieldName = "AUTHOR"|"CONTENT_TYPE"|"CREATED_DATE"|"DISPLAY_URL"|"FILE_SIZE"|"ITEM_TYPE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION"|string;
+  export type ConfluenceAttachmentFieldName = "AUTHOR"|"CONTENT_TYPE"|"CREATED_DATE"|"DISPLAY_URL"|"FILE_SIZE"|"ITEM_TYPE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION";
   export interface ConfluenceAttachmentToIndexFieldMapping {
     /**
      * The name of the field in the data source.  You must first create the index field using the UpdateIndex API. 
@@ -940,7 +940,7 @@ declare namespace Kendra {
      */
     IndexFieldName?: IndexFieldName;
   }
-  export type ConfluenceAuthenticationType = "HTTP_BASIC"|"PAT"|string;
+  export type ConfluenceAuthenticationType = "HTTP_BASIC"|"PAT";
   export interface ConfluenceBlogConfiguration {
     /**
      * Maps attributes or field names of Confluence blogs to Amazon Kendra index field names. To create custom fields, use the UpdateIndex API before you map to Confluence fields. For more information, see Mapping data source fields. The Confluence data source field names must exist in your Confluence custom metadata. If you specify the BlogFieldMappings parameter, you must specify at least one field mapping.
@@ -948,7 +948,7 @@ declare namespace Kendra {
     BlogFieldMappings?: ConfluenceBlogFieldMappingsList;
   }
   export type ConfluenceBlogFieldMappingsList = ConfluenceBlogToIndexFieldMapping[];
-  export type ConfluenceBlogFieldName = "AUTHOR"|"DISPLAY_URL"|"ITEM_TYPE"|"LABELS"|"PUBLISH_DATE"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION"|string;
+  export type ConfluenceBlogFieldName = "AUTHOR"|"DISPLAY_URL"|"ITEM_TYPE"|"LABELS"|"PUBLISH_DATE"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION";
   export interface ConfluenceBlogToIndexFieldMapping {
     /**
      * The name of the field in the data source. 
@@ -1020,7 +1020,7 @@ declare namespace Kendra {
     PageFieldMappings?: ConfluencePageFieldMappingsList;
   }
   export type ConfluencePageFieldMappingsList = ConfluencePageToIndexFieldMapping[];
-  export type ConfluencePageFieldName = "AUTHOR"|"CONTENT_STATUS"|"CREATED_DATE"|"DISPLAY_URL"|"ITEM_TYPE"|"LABELS"|"MODIFIED_DATE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION"|string;
+  export type ConfluencePageFieldName = "AUTHOR"|"CONTENT_STATUS"|"CREATED_DATE"|"DISPLAY_URL"|"ITEM_TYPE"|"LABELS"|"MODIFIED_DATE"|"PARENT_ID"|"SPACE_KEY"|"SPACE_NAME"|"URL"|"VERSION";
   export interface ConfluencePageToIndexFieldMapping {
     /**
      * The name of the field in the data source.
@@ -1058,7 +1058,7 @@ declare namespace Kendra {
     SpaceFieldMappings?: ConfluenceSpaceFieldMappingsList;
   }
   export type ConfluenceSpaceFieldMappingsList = ConfluenceSpaceToIndexFieldMapping[];
-  export type ConfluenceSpaceFieldName = "DISPLAY_URL"|"ITEM_TYPE"|"SPACE_KEY"|"URL"|string;
+  export type ConfluenceSpaceFieldName = "DISPLAY_URL"|"ITEM_TYPE"|"SPACE_KEY"|"URL";
   export type ConfluenceSpaceIdentifier = string;
   export type ConfluenceSpaceList = ConfluenceSpaceIdentifier[];
   export interface ConfluenceSpaceToIndexFieldMapping {
@@ -1075,7 +1075,7 @@ declare namespace Kendra {
      */
     IndexFieldName?: IndexFieldName;
   }
-  export type ConfluenceVersion = "CLOUD"|"SERVER"|string;
+  export type ConfluenceVersion = "CLOUD"|"SERVER";
   export interface ConnectionConfiguration {
     /**
      * The name of the host for the database. Can be either a string (host.subdomain.domain.tld) or an IPv4 or IPv6 address.
@@ -1112,7 +1112,7 @@ declare namespace Kendra {
      */
     DirectPutContent?: Boolean;
   }
-  export type ContentType = "PDF"|"HTML"|"MS_WORD"|"PLAIN_TEXT"|"PPT"|string;
+  export type ContentType = "PDF"|"HTML"|"MS_WORD"|"PLAIN_TEXT"|"PPT";
   export interface Correction {
     /**
      * The zero-based location in the response string or text where the corrected word starts.
@@ -1524,7 +1524,7 @@ declare namespace Kendra {
   export type DataSourceInclusionsExclusionsStrings = DataSourceInclusionsExclusionsStringsMember[];
   export type DataSourceInclusionsExclusionsStringsMember = string;
   export type DataSourceName = string;
-  export type DataSourceStatus = "CREATING"|"DELETING"|"FAILED"|"UPDATING"|"ACTIVE"|string;
+  export type DataSourceStatus = "CREATING"|"DELETING"|"FAILED"|"UPDATING"|"ACTIVE";
   export interface DataSourceSummary {
     /**
      * The name of the data source.
@@ -1624,7 +1624,7 @@ declare namespace Kendra {
      */
     DocumentsScanned?: MetricValue;
   }
-  export type DataSourceSyncJobStatus = "FAILED"|"SUCCEEDED"|"SYNCING"|"INCOMPLETE"|"STOPPING"|"ABORTED"|"SYNCING_INDEXING"|string;
+  export type DataSourceSyncJobStatus = "FAILED"|"SUCCEEDED"|"SYNCING"|"INCOMPLETE"|"STOPPING"|"ABORTED"|"SYNCING_INDEXING";
   export interface DataSourceToIndexFieldMapping {
     /**
      * The name of the column or attribute in the data source.
@@ -1640,7 +1640,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|"GITHUB"|"ALFRESCO"|"TEMPLATE"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|"CONFLUENCE"|"GOOGLEDRIVE"|"WEBCRAWLER"|"WORKDOCS"|"FSX"|"SLACK"|"BOX"|"QUIP"|"JIRA"|"GITHUB"|"ALFRESCO"|"TEMPLATE";
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1674,7 +1674,7 @@ declare namespace Kendra {
      */
     SqlConfiguration?: SqlConfiguration;
   }
-  export type DatabaseEngineType = "RDS_AURORA_MYSQL"|"RDS_AURORA_POSTGRESQL"|"RDS_MYSQL"|"RDS_POSTGRESQL"|string;
+  export type DatabaseEngineType = "RDS_AURORA_MYSQL"|"RDS_AURORA_POSTGRESQL"|"RDS_MYSQL"|"RDS_POSTGRESQL";
   export type DatabaseHost = string;
   export type DatabaseName = string;
   export type DatabasePort = number;
@@ -2405,7 +2405,7 @@ declare namespace Kendra {
     FacetResults?: FacetResultList;
   }
   export type DocumentAttributeValueCountPairList = DocumentAttributeValueCountPair[];
-  export type DocumentAttributeValueType = "STRING_VALUE"|"STRING_LIST_VALUE"|"LONG_VALUE"|"DATE_VALUE"|string;
+  export type DocumentAttributeValueType = "STRING_VALUE"|"STRING_LIST_VALUE"|"LONG_VALUE"|"DATE_VALUE";
   export type DocumentId = string;
   export type DocumentIdList = DocumentId[];
   export interface DocumentInfo {
@@ -2452,7 +2452,7 @@ declare namespace Kendra {
     Relevance: Relevance;
   }
   export type DocumentRelevanceOverrideConfigurationList = DocumentRelevanceConfiguration[];
-  export type DocumentStatus = "NOT_FOUND"|"PROCESSING"|"INDEXED"|"UPDATED"|"FAILED"|"UPDATE_FAILED"|string;
+  export type DocumentStatus = "NOT_FOUND"|"PROCESSING"|"INDEXED"|"UPDATED"|"FAILED"|"UPDATE_FAILED";
   export type DocumentStatusList = Status[];
   export interface DocumentsMetadataConfiguration {
     /**
@@ -2463,7 +2463,7 @@ declare namespace Kendra {
   export type Domain = string;
   export type Duration = string;
   export type Endpoint = string;
-  export type EndpointType = "HOME"|string;
+  export type EndpointType = "HOME";
   export type EnterpriseId = string;
   export interface EntityConfiguration {
     /**
@@ -2511,8 +2511,8 @@ declare namespace Kendra {
     Persona: Persona;
   }
   export type EntityPersonaConfigurationList = EntityPersonaConfiguration[];
-  export type EntityType = "USER"|"GROUP"|string;
-  export type ErrorCode = "InternalError"|"InvalidRequest"|string;
+  export type EntityType = "USER"|"GROUP";
+  export type ErrorCode = "InternalError"|"InvalidRequest";
   export type ErrorMessage = string;
   export type ExcludeMimeTypesList = MimeType[];
   export type ExcludeSharedDrivesList = SharedDriveId[];
@@ -2555,7 +2555,7 @@ declare namespace Kendra {
   export type ExperienceEntitiesSummaryList = ExperienceEntitiesSummary[];
   export type ExperienceId = string;
   export type ExperienceName = string;
-  export type ExperienceStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
+  export type ExperienceStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED";
   export interface ExperiencesSummary {
     /**
      * The name of your Amazon Kendra experience.
@@ -2621,7 +2621,7 @@ declare namespace Kendra {
   }
   export type FailedEntityList = FailedEntity[];
   export type FailureReason = string;
-  export type FaqFileFormat = "CSV"|"CSV_WITH_HEADER"|"JSON"|string;
+  export type FaqFileFormat = "CSV"|"CSV_WITH_HEADER"|"JSON";
   export type FaqId = string;
   export type FaqIdsList = FaqId[];
   export type FaqName = string;
@@ -2631,7 +2631,7 @@ declare namespace Kendra {
      */
     IndexedQuestionAnswersCount: IndexedQuestionAnswersCount;
   }
-  export type FaqStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
+  export type FaqStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED";
   export interface FaqSummary {
     /**
      * The unique identifier of the FAQ.
@@ -2697,7 +2697,7 @@ declare namespace Kendra {
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
-  export type FsxFileSystemType = "WINDOWS"|string;
+  export type FsxFileSystemType = "WINDOWS";
   export interface GetQuerySuggestionsRequest {
     /**
      * The identifier of the index you want to get query suggestions from.
@@ -2988,7 +2988,7 @@ declare namespace Kendra {
     Type?: HighlightType;
   }
   export type HighlightList = Highlight[];
-  export type HighlightType = "STANDARD"|"THESAURUS_SYNONYM"|string;
+  export type HighlightType = "STANDARD"|"THESAURUS_SYNONYM";
   export interface HookConfiguration {
     /**
      * The condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time.
@@ -3033,7 +3033,7 @@ declare namespace Kendra {
     Status: IndexStatus;
   }
   export type IndexConfigurationSummaryList = IndexConfigurationSummary[];
-  export type IndexEdition = "DEVELOPER_EDITION"|"ENTERPRISE_EDITION"|string;
+  export type IndexEdition = "DEVELOPER_EDITION"|"ENTERPRISE_EDITION";
   export type IndexFieldName = string;
   export type IndexId = string;
   export type IndexName = string;
@@ -3047,7 +3047,7 @@ declare namespace Kendra {
      */
     TextDocumentStatistics: TextDocumentStatistics;
   }
-  export type IndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"SYSTEM_UPDATING"|string;
+  export type IndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"SYSTEM_UPDATING";
   export type IndexedQuestionAnswersCount = number;
   export type IndexedTextBytes = number;
   export type IndexedTextDocumentsCount = number;
@@ -3067,8 +3067,8 @@ declare namespace Kendra {
   }
   export type InlineCustomDocumentEnrichmentConfigurationList = InlineCustomDocumentEnrichmentConfiguration[];
   export type Integer = number;
-  export type Interval = "THIS_MONTH"|"THIS_WEEK"|"ONE_WEEK_AGO"|"TWO_WEEKS_AGO"|"ONE_MONTH_AGO"|"TWO_MONTHS_AGO"|string;
-  export type IssueSubEntity = "COMMENTS"|"ATTACHMENTS"|"WORKLOGS"|string;
+  export type Interval = "THIS_MONTH"|"THIS_WEEK"|"ONE_WEEK_AGO"|"TWO_WEEKS_AGO"|"ONE_MONTH_AGO"|"TWO_MONTHS_AGO";
+  export type IssueSubEntity = "COMMENTS"|"ATTACHMENTS"|"WORKLOGS";
   export type IssueSubEntityFilter = IssueSubEntity[];
   export type IssueType = String[];
   export type Issuer = string;
@@ -3176,7 +3176,7 @@ declare namespace Kendra {
      */
     ClaimRegex?: ClaimRegex;
   }
-  export type KeyLocation = "URL"|"SECRET_MANAGER"|string;
+  export type KeyLocation = "URL"|"SECRET_MANAGER";
   export type KmsKeyId = string;
   export type LambdaArn = string;
   export type LanguageCode = string;
@@ -3510,12 +3510,12 @@ declare namespace Kendra {
     UserId: UserId;
   }
   export type MemberUsers = MemberUser[];
-  export type MetricType = "QUERIES_BY_COUNT"|"QUERIES_BY_ZERO_CLICK_RATE"|"QUERIES_BY_ZERO_RESULT_RATE"|"DOCS_BY_CLICK_COUNT"|"AGG_QUERY_DOC_METRICS"|"TREND_QUERY_DOC_METRICS"|string;
+  export type MetricType = "QUERIES_BY_COUNT"|"QUERIES_BY_ZERO_CLICK_RATE"|"QUERIES_BY_ZERO_RESULT_RATE"|"DOCS_BY_CLICK_COUNT"|"AGG_QUERY_DOC_METRICS"|"TREND_QUERY_DOC_METRICS";
   export type MetricValue = string;
   export type MimeType = string;
   export type MinimumNumberOfQueryingUsers = number;
   export type MinimumQueryCount = number;
-  export type Mode = "ENABLED"|"LEARN_ONLY"|string;
+  export type Mode = "ENABLED"|"LEARN_ONLY";
   export type NameType = string;
   export type NextToken = string;
   export type ObjectBoolean = boolean;
@@ -3575,10 +3575,10 @@ declare namespace Kendra {
      */
     OneDriveUserS3Path?: S3Path;
   }
-  export type Order = "ASCENDING"|"DESCENDING"|string;
+  export type Order = "ASCENDING"|"DESCENDING";
   export type OrganizationId = string;
   export type OrganizationName = string;
-  export type Persona = "OWNER"|"VIEWER"|string;
+  export type Persona = "OWNER"|"VIEWER";
   export interface PersonasSummary {
     /**
      * The identifier of a user or group in your IAM Identity Center identity source. For example, a user ID could be an email.
@@ -3618,10 +3618,10 @@ declare namespace Kendra {
     DataSourceId?: DataSourceId;
   }
   export type PrincipalList = Principal[];
-  export type PrincipalMappingStatus = "FAILED"|"SUCCEEDED"|"PROCESSING"|"DELETING"|"DELETED"|string;
+  export type PrincipalMappingStatus = "FAILED"|"SUCCEEDED"|"PROCESSING"|"DELETING"|"DELETED";
   export type PrincipalName = string;
   export type PrincipalOrderingId = number;
-  export type PrincipalType = "USER"|"GROUP"|string;
+  export type PrincipalType = "USER"|"GROUP";
   export type PrivateChannelFilter = String[];
   export type Project = String[];
   export interface ProxyConfiguration {
@@ -3667,7 +3667,7 @@ declare namespace Kendra {
   }
   export type QueryCapacityUnit = number;
   export type QueryId = string;
-  export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
+  export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE";
   export interface QueryRequest {
     /**
      * The unique identifier of the index to search. The identifier is returned in the response from the CreateIndex API.
@@ -3791,10 +3791,10 @@ declare namespace Kendra {
     FeedbackToken?: FeedbackToken;
   }
   export type QueryResultItemList = QueryResultItem[];
-  export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER"|string;
+  export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER";
   export type QuerySuggestionsBlockListId = string;
   export type QuerySuggestionsBlockListName = string;
-  export type QuerySuggestionsBlockListStatus = "ACTIVE"|"CREATING"|"DELETING"|"UPDATING"|"ACTIVE_BUT_UPDATE_FAILED"|"FAILED"|string;
+  export type QuerySuggestionsBlockListStatus = "ACTIVE"|"CREATING"|"DELETING"|"UPDATING"|"ACTIVE_BUT_UPDATE_FAILED"|"FAILED";
   export interface QuerySuggestionsBlockListSummary {
     /**
      * The identifier of a block list.
@@ -3823,7 +3823,7 @@ declare namespace Kendra {
   }
   export type QuerySuggestionsBlockListSummaryItems = QuerySuggestionsBlockListSummary[];
   export type QuerySuggestionsId = string;
-  export type QuerySuggestionsStatus = "ACTIVE"|"UPDATING"|string;
+  export type QuerySuggestionsStatus = "ACTIVE"|"UPDATING";
   export type QueryText = string;
   export interface QuipConfiguration {
     /**
@@ -3875,7 +3875,7 @@ declare namespace Kendra {
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
   }
-  export type ReadAccessType = "ALLOW"|"DENY"|string;
+  export type ReadAccessType = "ALLOW"|"DENY";
   export interface Relevance {
     /**
      * Indicates that this field determines how "fresh" a document is. For example, if document 1 was created on November 5, and document 2 was created on October 31, document 1 is "fresher" than document 2. You can only set the Freshness field on one DATE type field. Only applies to DATE fields.
@@ -3909,7 +3909,7 @@ declare namespace Kendra {
     RelevanceValue: RelevanceType;
   }
   export type RelevanceFeedbackList = RelevanceFeedback[];
-  export type RelevanceType = "RELEVANT"|"NOT_RELEVANT"|string;
+  export type RelevanceType = "RELEVANT"|"NOT_RELEVANT";
   export type RepositoryName = string;
   export type RepositoryNames = RepositoryName[];
   export type ResultId = string;
@@ -3977,7 +3977,7 @@ declare namespace Kendra {
      */
     IncludeFilterTypes?: SalesforceChatterFeedIncludeFilterTypes;
   }
-  export type SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"|"STANDARD_USER"|string;
+  export type SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"|"STANDARD_USER";
   export type SalesforceChatterFeedIncludeFilterTypes = SalesforceChatterFeedIncludeFilterType[];
   export interface SalesforceConfiguration {
     /**
@@ -4051,7 +4051,7 @@ declare namespace Kendra {
      */
     CustomKnowledgeArticleTypeConfigurations?: SalesforceCustomKnowledgeArticleTypeConfigurationList;
   }
-  export type SalesforceKnowledgeArticleState = "DRAFT"|"PUBLISHED"|"ARCHIVED"|string;
+  export type SalesforceKnowledgeArticleState = "DRAFT"|"PUBLISHED"|"ARCHIVED";
   export type SalesforceKnowledgeArticleStateList = SalesforceKnowledgeArticleState[];
   export interface SalesforceStandardKnowledgeArticleTypeConfiguration {
     /**
@@ -4096,7 +4096,7 @@ declare namespace Kendra {
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
   export type SalesforceStandardObjectConfigurationList = SalesforceStandardObjectConfiguration[];
-  export type SalesforceStandardObjectName = "ACCOUNT"|"CAMPAIGN"|"CASE"|"CONTACT"|"CONTRACT"|"DOCUMENT"|"GROUP"|"IDEA"|"LEAD"|"OPPORTUNITY"|"PARTNER"|"PRICEBOOK"|"PRODUCT"|"PROFILE"|"SOLUTION"|"TASK"|"USER"|string;
+  export type SalesforceStandardObjectName = "ACCOUNT"|"CAMPAIGN"|"CASE"|"CONTACT"|"CONTRACT"|"DOCUMENT"|"GROUP"|"IDEA"|"LEAD"|"OPPORTUNITY"|"PARTNER"|"PRICEBOOK"|"PRODUCT"|"PROFILE"|"SOLUTION"|"TASK"|"USER";
   export type ScanSchedule = string;
   export interface ScoreAttributes {
     /**
@@ -4104,7 +4104,7 @@ declare namespace Kendra {
      */
     ScoreConfidence?: ScoreConfidence;
   }
-  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|"LOW"|"NOT_AVAILABLE"|string;
+  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|"LOW"|"NOT_AVAILABLE";
   export interface Search {
     /**
      * Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is false .
@@ -4143,8 +4143,8 @@ declare namespace Kendra {
      */
     KmsKeyId?: KmsKeyId;
   }
-  export type ServiceNowAuthenticationType = "HTTP_BASIC"|"OAUTH2"|string;
-  export type ServiceNowBuildVersionType = "LONDON"|"OTHERS"|string;
+  export type ServiceNowAuthenticationType = "HTTP_BASIC"|"OAUTH2";
+  export type ServiceNowBuildVersionType = "LONDON"|"OTHERS";
   export interface ServiceNowConfiguration {
     /**
      * The ServiceNow instance that the data source connects to. The host endpoint should look like the following: {instance}.service-now.com. 
@@ -4287,9 +4287,9 @@ declare namespace Kendra {
      */
     ProxyConfiguration?: ProxyConfiguration;
   }
-  export type SharePointOnlineAuthenticationType = "HTTP_BASIC"|"OAUTH2"|string;
+  export type SharePointOnlineAuthenticationType = "HTTP_BASIC"|"OAUTH2";
   export type SharePointUrlList = Url[];
-  export type SharePointVersion = "SHAREPOINT_2013"|"SHAREPOINT_2016"|"SHAREPOINT_ONLINE"|"SHAREPOINT_2019"|string;
+  export type SharePointVersion = "SHAREPOINT_2013"|"SHAREPOINT_2016"|"SHAREPOINT_ONLINE"|"SHAREPOINT_2019";
   export type SharedDriveId = string;
   export type SinceCrawlDate = string;
   export type SiteId = string;
@@ -4360,12 +4360,12 @@ declare namespace Kendra {
      */
     FieldMappings?: DataSourceToIndexFieldMappingList;
   }
-  export type SlackEntity = "PUBLIC_CHANNEL"|"PRIVATE_CHANNEL"|"GROUP_MESSAGE"|"DIRECT_MESSAGE"|string;
+  export type SlackEntity = "PUBLIC_CHANNEL"|"PRIVATE_CHANNEL"|"GROUP_MESSAGE"|"DIRECT_MESSAGE";
   export type SlackEntityList = SlackEntity[];
   export type SnapshotsDataHeaderFields = String[];
   export type SnapshotsDataRecord = String[];
   export type SnapshotsDataRecords = SnapshotsDataRecord[];
-  export type SortOrder = "DESC"|"ASC"|string;
+  export type SortOrder = "DESC"|"ASC";
   export interface SortingConfiguration {
     /**
      * The name of the document attribute used to sort the response. You can use any field that has the Sortable flag set to true. You can also sort by any of the following built-in attributes:   _category   _created_at   _last_updated_at   _version   _view_count  
@@ -4565,7 +4565,7 @@ declare namespace Kendra {
   }
   export type ThesaurusId = string;
   export type ThesaurusName = string;
-  export type ThesaurusStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"ACTIVE_BUT_UPDATE_FAILED"|"FAILED"|string;
+  export type ThesaurusStatus = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"ACTIVE_BUT_UPDATE_FAILED"|"FAILED";
   export interface ThesaurusSummary {
     /**
      * The identifier of the thesaurus.
@@ -4603,7 +4603,7 @@ declare namespace Kendra {
   export type Title = string;
   export type Token = string;
   export type TopDocumentAttributeValueCountPairsSize = number;
-  export type Type = "SAAS"|"ON_PREMISE"|string;
+  export type Type = "SAAS"|"ON_PREMISE";
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.
@@ -4855,14 +4855,14 @@ declare namespace Kendra {
      */
     DataSourceGroups?: DataSourceGroups;
   }
-  export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
+  export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN";
   export interface UserGroupResolutionConfiguration {
     /**
      * The identity store provider (mode) you want to use to fetch access levels of groups and users. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
      */
     UserGroupResolutionMode: UserGroupResolutionMode;
   }
-  export type UserGroupResolutionMode = "AWS_SSO"|"NONE"|string;
+  export type UserGroupResolutionMode = "AWS_SSO"|"NONE";
   export type UserId = string;
   export interface UserIdentityConfiguration {
     /**
@@ -4896,7 +4896,7 @@ declare namespace Kendra {
      */
     Code?: WarningCode;
   }
-  export type WarningCode = "QUERY_LANGUAGE_INVALID_SYNTAX"|string;
+  export type WarningCode = "QUERY_LANGUAGE_INVALID_SYNTAX";
   export type WarningList = Warning[];
   export type WarningMessage = string;
   export interface WebCrawlerConfiguration {
@@ -4937,7 +4937,7 @@ declare namespace Kendra {
      */
     AuthenticationConfiguration?: AuthenticationConfiguration;
   }
-  export type WebCrawlerMode = "HOST_ONLY"|"SUBDOMAINS"|"EVERYTHING"|string;
+  export type WebCrawlerMode = "HOST_ONLY"|"SUBDOMAINS"|"EVERYTHING";
   export interface WorkDocsConfiguration {
     /**
      * The identifier of the directory corresponding to your Amazon WorkDocs site repository. You can find the organization ID in the Directory Service by going to Active Directory, then Directories. Your Amazon WorkDocs site directory has an ID, which is the organization ID. You can also set up a new Amazon WorkDocs directory in the Directory Service console and enable a Amazon WorkDocs site for the directory in the Amazon WorkDocs console.

@@ -500,7 +500,7 @@ declare namespace CustomerProfiles {
      */
     SourceName?: string1To255;
   }
-  export type ConflictResolvingModel = "RECENCY"|"SOURCE"|string;
+  export type ConflictResolvingModel = "RECENCY"|"SOURCE";
   export interface ConnectorOperator {
     /**
      * The operation to be performed on the provided Marketo source fields.
@@ -722,7 +722,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
   }
-  export type DataPullMode = "Incremental"|"Complete"|string;
+  export type DataPullMode = "Incremental"|"Complete";
   export type _Date = Date;
   export type DatetimeTypeFieldName = string;
   export interface DeleteDomainRequest {
@@ -879,7 +879,7 @@ declare namespace CustomerProfiles {
      */
     S3Exporting?: S3ExportingLocation;
   }
-  export type FieldContentType = "STRING"|"NUMBER"|"PHONE_NUMBER"|"EMAIL_ADDRESS"|"NAME"|string;
+  export type FieldContentType = "STRING"|"NUMBER"|"PHONE_NUMBER"|"EMAIL_ADDRESS"|"NAME";
   export type FieldMap = {[key: string]: ObjectTypeField};
   export type FieldNameList = name[];
   export interface FieldSourceProfileIds {
@@ -996,7 +996,7 @@ declare namespace CustomerProfiles {
   }
   export type FlowDescription = string;
   export type FlowName = string;
-  export type Gender = "MALE"|"FEMALE"|"UNSPECIFIED"|string;
+  export type Gender = "MALE"|"FEMALE"|"UNSPECIFIED";
   export interface GetAutoMergingPreviewRequest {
     /**
      * The unique name of the domain.
@@ -1423,7 +1423,7 @@ declare namespace CustomerProfiles {
      */
     Message?: stringTo2048;
   }
-  export type IdentityResolutionJobStatus = "PENDING"|"PREPROCESSING"|"FIND_MATCHING"|"MERGING"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|string;
+  export type IdentityResolutionJobStatus = "PENDING"|"PREPROCESSING"|"FIND_MATCHING"|"MERGING"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED";
   export type IdentityResolutionJobsList = IdentityResolutionJob[];
   export interface IncrementalPullConfig {
     /**
@@ -1448,7 +1448,7 @@ declare namespace CustomerProfiles {
      */
     Time: JobScheduleTime;
   }
-  export type JobScheduleDayOfTheWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type JobScheduleDayOfTheWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY";
   export type JobScheduleTime = string;
   export interface JobStats {
     /**
@@ -1830,7 +1830,7 @@ declare namespace CustomerProfiles {
      */
     NextToken?: token;
   }
-  export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP";
   export interface MarketoSourceProperties {
     /**
      * The object specified in the Marketo flow source.
@@ -1951,8 +1951,8 @@ declare namespace CustomerProfiles {
   }
   export type ObjectTypeKeyList = ObjectTypeKey[];
   export type ObjectTypeNames = {[key: string]: typeName};
-  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
-  export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER"|string;
+  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP";
+  export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER";
   export interface Profile {
     /**
      * The unique identifier of a customer profile.
@@ -2231,7 +2231,7 @@ declare namespace CustomerProfiles {
     Tags?: TagMap;
   }
   export type RoleArn = string;
-  export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP";
   export interface S3ExportingConfig {
     /**
      * The name of the S3 bucket where Identity Resolution Jobs write result files.
@@ -2262,7 +2262,7 @@ declare namespace CustomerProfiles {
      */
     BucketPrefix?: BucketPrefix;
   }
-  export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP";
   export interface SalesforceSourceProperties {
     /**
      * The object specified in the Salesforce flow source.
@@ -2341,7 +2341,7 @@ declare namespace CustomerProfiles {
      */
     NextToken?: token;
   }
-  export type ServiceNowConnectorOperator = "PROJECTION"|"CONTAINS"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type ServiceNowConnectorOperator = "PROJECTION"|"CONTAINS"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP";
   export interface ServiceNowSourceProperties {
     /**
      * The object specified in the ServiceNow flow source.
@@ -2370,7 +2370,7 @@ declare namespace CustomerProfiles {
      */
     Zendesk?: ZendeskSourceProperties;
   }
-  export type SourceConnectorType = "Salesforce"|"Marketo"|"Zendesk"|"Servicenow"|"S3"|string;
+  export type SourceConnectorType = "Salesforce"|"Marketo"|"Zendesk"|"Servicenow"|"S3";
   export type SourceFields = stringTo2048[];
   export interface SourceFlowConfig {
     /**
@@ -2390,9 +2390,9 @@ declare namespace CustomerProfiles {
      */
     SourceConnectorProperties: SourceConnectorProperties;
   }
-  export type StandardIdentifier = "PROFILE"|"ASSET"|"CASE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|"ORDER"|string;
+  export type StandardIdentifier = "PROFILE"|"ASSET"|"CASE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|"ORDER";
   export type StandardIdentifierList = StandardIdentifier[];
-  export type Status = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|"SPLIT"|"RETRY"|"CANCELLED"|string;
+  export type Status = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|"SPLIT"|"RETRY"|"CANCELLED";
   export type TagArn = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -2433,7 +2433,7 @@ declare namespace CustomerProfiles {
     TaskType: TaskType;
   }
   export type TaskPropertiesMap = {[key: string]: Property};
-  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
+  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Mask"|"Merge"|"Truncate"|"Validate";
   export type Tasks = Task[];
   export type Timezone = string;
   export interface TriggerConfig {
@@ -2452,7 +2452,7 @@ declare namespace CustomerProfiles {
      */
     Scheduled?: ScheduledTriggerProperties;
   }
-  export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string;
+  export type TriggerType = "Scheduled"|"Event"|"OnDemand";
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which you are removing tags.
@@ -2688,8 +2688,8 @@ declare namespace CustomerProfiles {
     AppflowIntegration?: AppflowIntegrationWorkflowStep;
   }
   export type WorkflowStepsList = WorkflowStepItem[];
-  export type WorkflowType = "APPFLOW_INTEGRATION"|string;
-  export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type WorkflowType = "APPFLOW_INTEGRATION";
+  export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP";
   export interface ZendeskSourceProperties {
     /**
      * The object specified in the Zendesk flow source.

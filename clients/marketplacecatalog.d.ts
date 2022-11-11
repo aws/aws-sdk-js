@@ -167,7 +167,7 @@ declare namespace MarketplaceCatalog {
      */
     FailureCode?: FailureCode;
   }
-  export type ChangeStatus = "PREPARING"|"APPLYING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export type ChangeStatus = "PREPARING"|"APPLYING"|"SUCCEEDED"|"CANCELLED"|"FAILED";
   export interface ChangeSummary {
     /**
      * The type of the change.
@@ -325,7 +325,7 @@ declare namespace MarketplaceCatalog {
   }
   export type ErrorDetailList = ErrorDetail[];
   export type ExceptionMessageContent = string;
-  export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT"|string;
+  export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT";
   export interface Filter {
     /**
      * For ListEntities, the supported value for this is an EntityId. For ListChangeSets, the supported values are as follows:
@@ -442,7 +442,7 @@ declare namespace MarketplaceCatalog {
     SortOrder?: SortOrder;
   }
   export type SortBy = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING";
   export interface StartChangeSetRequest {
     /**
      * The catalog related to the request. Fixed value: AWSMarketplace 

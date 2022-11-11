@@ -233,7 +233,7 @@ declare namespace Textract {
     Query?: Query;
   }
   export type BlockList = Block[];
-  export type BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT"|"MERGED_CELL"|"TITLE"|"QUERY"|"QUERY_RESULT"|string;
+  export type BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT"|"MERGED_CELL"|"TITLE"|"QUERY"|"QUERY_RESULT";
   export interface BoundingBox {
     /**
      * The width of the bounding box as a ratio of the overall document page width.
@@ -253,7 +253,7 @@ declare namespace Textract {
     Top?: Float;
   }
   export type ClientRequestToken = string;
-  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
+  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent";
   export type ContentClassifiers = ContentClassifier[];
   export interface DetectDocumentTextRequest {
     /**
@@ -298,7 +298,7 @@ declare namespace Textract {
     Pages?: UInteger;
   }
   export type DocumentPages = Document[];
-  export type EntityType = "KEY"|"VALUE"|"COLUMN_HEADER"|string;
+  export type EntityType = "KEY"|"VALUE"|"COLUMN_HEADER";
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
   export interface ExpenseCurrency {
@@ -389,7 +389,7 @@ declare namespace Textract {
      */
     Confidence?: Percent;
   }
-  export type FeatureType = "TABLES"|"FORMS"|"QUERIES"|string;
+  export type FeatureType = "TABLES"|"FORMS"|"QUERIES";
   export type FeatureTypes = FeatureType[];
   export type Float = number;
   export type FlowDefinitionArn = string;
@@ -597,7 +597,7 @@ declare namespace Textract {
   export type IdentityDocumentList = IdentityDocument[];
   export type ImageBlob = Buffer|Uint8Array|Blob|string;
   export type JobId = string;
-  export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
+  export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS";
   export type JobTag = string;
   export type KMSKeyId = string;
   export interface LineItemFields {
@@ -699,7 +699,7 @@ declare namespace Textract {
     Ids?: IdList;
   }
   export type RelationshipList = Relationship[];
-  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|"MERGED_CELL"|"TITLE"|"ANSWER"|string;
+  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|"MERGED_CELL"|"TITLE"|"ANSWER";
   export type RoleArn = string;
   export type S3Bucket = string;
   export interface S3Object {
@@ -719,7 +719,7 @@ declare namespace Textract {
   export type S3ObjectName = string;
   export type S3ObjectVersion = string;
   export type SNSTopicArn = string;
-  export type SelectionStatus = "SELECTED"|"NOT_SELECTED"|string;
+  export type SelectionStatus = "SELECTED"|"NOT_SELECTED";
   export interface StartDocumentAnalysisRequest {
     /**
      * The location of the document to be processed.
@@ -824,9 +824,9 @@ declare namespace Textract {
   export type StatusMessage = string;
   export type String = string;
   export type StringList = String[];
-  export type TextType = "HANDWRITING"|"PRINTED"|string;
+  export type TextType = "HANDWRITING"|"PRINTED";
   export type UInteger = number;
-  export type ValueType = "DATE"|string;
+  export type ValueType = "DATE";
   export interface Warning {
     /**
      * The error code for the warning.

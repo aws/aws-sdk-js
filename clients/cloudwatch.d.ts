@@ -337,7 +337,7 @@ declare namespace CloudWatch {
   export type AccountId = string;
   export type ActionPrefix = string;
   export type ActionsEnabled = boolean;
-  export type ActionsSuppressedBy = "WaitPeriod"|"ExtensionPeriod"|"Alarm"|string;
+  export type ActionsSuppressedBy = "WaitPeriod"|"ExtensionPeriod"|"Alarm";
   export type ActionsSuppressedReason = string;
   export type AlarmArn = string;
   export type AlarmDescription = string;
@@ -372,7 +372,7 @@ declare namespace CloudWatch {
   export type AlarmNamePrefix = string;
   export type AlarmNames = AlarmName[];
   export type AlarmRule = string;
-  export type AlarmType = "CompositeAlarm"|"MetricAlarm"|string;
+  export type AlarmType = "CompositeAlarm"|"MetricAlarm";
   export type AlarmTypes = AlarmType[];
   export type AmazonResourceName = string;
   export interface AnomalyDetector {
@@ -422,12 +422,12 @@ declare namespace CloudWatch {
   export type AnomalyDetectorExcludedTimeRanges = Range[];
   export type AnomalyDetectorMetricStat = string;
   export type AnomalyDetectorMetricTimezone = string;
-  export type AnomalyDetectorStateValue = "PENDING_TRAINING"|"TRAINED_INSUFFICIENT_DATA"|"TRAINED"|string;
-  export type AnomalyDetectorType = "SINGLE_METRIC"|"METRIC_MATH"|string;
+  export type AnomalyDetectorStateValue = "PENDING_TRAINING"|"TRAINED_INSUFFICIENT_DATA"|"TRAINED";
+  export type AnomalyDetectorType = "SINGLE_METRIC"|"METRIC_MATH";
   export type AnomalyDetectorTypes = AnomalyDetectorType[];
   export type AnomalyDetectors = AnomalyDetector[];
   export type BatchFailures = PartialFailure[];
-  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|"LessThanLowerOrGreaterThanUpperThreshold"|"LessThanLowerThreshold"|"GreaterThanUpperThreshold"|string;
+  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|"LessThanLowerOrGreaterThanUpperThreshold"|"LessThanLowerThreshold"|"GreaterThanUpperThreshold";
   export interface CompositeAlarm {
     /**
      * Indicates whether actions should be executed during any changes to the alarm state.
@@ -1140,7 +1140,7 @@ declare namespace CloudWatch {
     MetricWidgetImage?: MetricWidgetImage;
   }
   export type HistoryData = string;
-  export type HistoryItemType = "ConfigurationUpdate"|"StateUpdate"|"Action"|string;
+  export type HistoryItemType = "ConfigurationUpdate"|"StateUpdate"|"Action";
   export type HistorySummary = string;
   export interface InsightRule {
     /**
@@ -1706,7 +1706,7 @@ declare namespace CloudWatch {
   export type MetricStreamFilters = MetricStreamFilter[];
   export type MetricStreamName = string;
   export type MetricStreamNames = MetricStreamName[];
-  export type MetricStreamOutputFormat = "json"|"opentelemetry0.7"|string;
+  export type MetricStreamOutputFormat = "json"|"opentelemetry0.7";
   export type MetricStreamState = string;
   export type MetricStreamStatistic = string;
   export type MetricStreamStatisticsAdditionalStatistics = MetricStreamStatistic[];
@@ -2033,11 +2033,11 @@ declare namespace CloudWatch {
      */
     EndTime: Timestamp;
   }
-  export type RecentlyActive = "PT3H"|string;
+  export type RecentlyActive = "PT3H";
   export type ResourceList = ResourceName[];
   export type ResourceName = string;
   export type ReturnData = boolean;
-  export type ScanBy = "TimestampDescending"|"TimestampAscending"|string;
+  export type ScanBy = "TimestampDescending"|"TimestampAscending";
   export interface SetAlarmStateInput {
     /**
      * The name of the alarm.
@@ -2075,7 +2075,7 @@ declare namespace CloudWatch {
     Stat?: AnomalyDetectorMetricStat;
   }
   export type Size = number;
-  export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None";
   export interface StartMetricStreamsInput {
     /**
      * The array of the names of metric streams to start streaming. This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will start streaming.
@@ -2087,8 +2087,8 @@ declare namespace CloudWatch {
   export type Stat = string;
   export type StateReason = string;
   export type StateReasonData = string;
-  export type StateValue = "OK"|"ALARM"|"INSUFFICIENT_DATA"|string;
-  export type Statistic = "SampleCount"|"Average"|"Sum"|"Minimum"|"Maximum"|string;
+  export type StateValue = "OK"|"ALARM"|"INSUFFICIENT_DATA";
+  export type Statistic = "SampleCount"|"Average"|"Sum"|"Minimum"|"Maximum";
   export interface StatisticSet {
     /**
      * The number of samples used for the statistic set.
@@ -2108,7 +2108,7 @@ declare namespace CloudWatch {
     Maximum: DatapointValue;
   }
   export type Statistics = Statistic[];
-  export type StatusCode = "Complete"|"InternalError"|"PartialData"|string;
+  export type StatusCode = "Complete"|"InternalError"|"PartialData";
   export interface StopMetricStreamsInput {
     /**
      * The array of the names of metric streams to stop streaming. This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will stop streaming.

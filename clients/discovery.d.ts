@@ -279,7 +279,7 @@ declare namespace Discovery {
     macAddress?: String;
   }
   export type AgentNetworkInfoList = AgentNetworkInfo[];
-  export type AgentStatus = "HEALTHY"|"UNHEALTHY"|"RUNNING"|"UNKNOWN"|"BLACKLISTED"|"SHUTDOWN"|string;
+  export type AgentStatus = "HEALTHY"|"UNHEALTHY"|"RUNNING"|"UNKNOWN"|"BLACKLISTED"|"SHUTDOWN";
   export type AgentsInfo = AgentInfo[];
   export type ApplicationDescription = string;
   export type ApplicationId = string;
@@ -311,7 +311,7 @@ declare namespace Discovery {
      */
     errorDescription?: BatchDeleteImportDataErrorDescription;
   }
-  export type BatchDeleteImportDataErrorCode = "NOT_FOUND"|"INTERNAL_SERVER_ERROR"|"OVER_LIMIT"|string;
+  export type BatchDeleteImportDataErrorCode = "NOT_FOUND"|"INTERNAL_SERVER_ERROR"|"OVER_LIMIT";
   export type BatchDeleteImportDataErrorDescription = string;
   export type BatchDeleteImportDataErrorList = BatchDeleteImportDataError[];
   export interface BatchDeleteImportDataRequest {
@@ -333,7 +333,7 @@ declare namespace Discovery {
   export type Configuration = {[key: string]: String};
   export type ConfigurationId = string;
   export type ConfigurationIdList = ConfigurationId[];
-  export type ConfigurationItemType = "SERVER"|"PROCESS"|"CONNECTION"|"APPLICATION"|string;
+  export type ConfigurationItemType = "SERVER"|"PROCESS"|"CONNECTION"|"APPLICATION";
   export interface ConfigurationTag {
     /**
      * A type of IT asset to tag.
@@ -396,7 +396,7 @@ declare namespace Discovery {
   }
   export type ContinuousExportDescriptions = ContinuousExportDescription[];
   export type ContinuousExportIds = ConfigurationsExportId[];
-  export type ContinuousExportStatus = "START_IN_PROGRESS"|"START_FAILED"|"ACTIVE"|"ERROR"|"STOP_IN_PROGRESS"|"STOP_FAILED"|"INACTIVE"|string;
+  export type ContinuousExportStatus = "START_IN_PROGRESS"|"START_FAILED"|"ACTIVE"|"ERROR"|"STOP_IN_PROGRESS"|"STOP_FAILED"|"INACTIVE";
   export interface CreateApplicationRequest {
     /**
      * Name of the application to be created.
@@ -524,7 +524,7 @@ declare namespace Discovery {
      */
     unknownMeCollectors: Integer;
   }
-  export type DataSource = "AGENT"|string;
+  export type DataSource = "AGENT";
   export type DatabaseName = string;
   export interface DeleteApplicationsRequest {
     /**
@@ -733,7 +733,7 @@ declare namespace Discovery {
      */
     exportId?: ConfigurationsExportId;
   }
-  export type ExportDataFormat = "CSV"|"GRAPHML"|string;
+  export type ExportDataFormat = "CSV"|"GRAPHML";
   export type ExportDataFormats = ExportDataFormat[];
   export interface ExportFilter {
     /**
@@ -786,7 +786,7 @@ declare namespace Discovery {
     requestedEndTime?: TimeStamp;
   }
   export type ExportRequestTime = Date;
-  export type ExportStatus = "FAILED"|"SUCCEEDED"|"IN_PROGRESS"|string;
+  export type ExportStatus = "FAILED"|"SUCCEEDED"|"IN_PROGRESS";
   export type ExportStatusMessage = string;
   export type ExportsInfo = ExportInfo[];
   export interface Filter {
@@ -840,7 +840,7 @@ declare namespace Discovery {
     meCollectorSummary?: CustomerMeCollectorInfo;
     agentlessCollectorSummary?: CustomerAgentlessCollectorInfo;
   }
-  export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_COMPLETE_WITH_ERRORS"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|"INTERNAL_ERROR"|string;
+  export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_COMPLETE_WITH_ERRORS"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|"INTERNAL_ERROR";
   export interface ImportTask {
     /**
      * The unique ID for a specific import task. These IDs aren't globally unique, but they are unique within an Amazon Web Services account.
@@ -905,7 +905,7 @@ declare namespace Discovery {
      */
     values?: ImportTaskFilterValueList;
   }
-  export type ImportTaskFilterName = "IMPORT_TASK_ID"|"STATUS"|"NAME"|string;
+  export type ImportTaskFilterName = "IMPORT_TASK_ID"|"STATUS"|"NAME";
   export type ImportTaskFilterValue = string;
   export type ImportTaskFilterValueList = ImportTaskFilterValue[];
   export type ImportTaskIdentifier = string;
@@ -1173,7 +1173,7 @@ declare namespace Discovery {
   }
   export interface UpdateApplicationResponse {
   }
-  export type orderString = "ASC"|"DESC"|string;
+  export type orderString = "ASC"|"DESC";
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

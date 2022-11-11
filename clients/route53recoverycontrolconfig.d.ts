@@ -791,8 +791,8 @@ declare namespace Route53RecoveryControlConfig {
      */
     Type: RuleType;
   }
-  export type RuleType = "ATLEAST"|"AND"|"OR"|string;
-  export type Status = "PENDING"|"DEPLOYED"|"PENDING_DELETION"|string;
+  export type RuleType = "ATLEAST"|"AND"|"OR";
+  export type Status = "PENDING"|"DEPLOYED"|"PENDING_DELETION";
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the resource that's tagged.
