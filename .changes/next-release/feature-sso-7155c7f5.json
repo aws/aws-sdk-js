@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "sso",
+  "description": "use sso token provider in sso credentials if sso session is set in config"
+}
