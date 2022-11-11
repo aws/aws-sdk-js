@@ -814,7 +814,7 @@ declare namespace MemoryDB {
      */
     User?: User;
   }
-  export type DataTieringStatus = "true"|"false"|string;
+  export type DataTieringStatus = "true"|"false";
   export interface DeleteACLRequest {
     /**
      * The name of the Access Control List to delete

@@ -109,7 +109,7 @@ declare class Scheduler extends Service {
   updateSchedule(callback?: (err: AWSError, data: Scheduler.Types.UpdateScheduleOutput) => void): Request<Scheduler.Types.UpdateScheduleOutput, AWSError>;
 }
 declare namespace Scheduler {
-  export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
+  export type AssignPublicIp = "ENABLED"|"DISABLED";
   export interface AwsVpcConfiguration {
     /**
      * Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE.
@@ -338,7 +338,7 @@ declare namespace Scheduler {
      */
     Mode: FlexibleTimeWindowMode;
   }
-  export type FlexibleTimeWindowMode = "OFF"|"FLEXIBLE"|string;
+  export type FlexibleTimeWindowMode = "OFF"|"FLEXIBLE";
   export interface GetScheduleGroupInput {
     /**
      * The name of the schedule group to retrieve.
@@ -444,7 +444,7 @@ declare namespace Scheduler {
   }
   export type KmsKeyArn = string;
   export type LastModificationDate = Date;
-  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string;
+  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL";
   export interface ListScheduleGroupsInput {
     /**
      * If specified, limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
@@ -538,7 +538,7 @@ declare namespace Scheduler {
     type?: PlacementConstraintType;
   }
   export type PlacementConstraintExpression = string;
-  export type PlacementConstraintType = "distinctInstance"|"memberOf"|string;
+  export type PlacementConstraintType = "distinctInstance"|"memberOf";
   export type PlacementConstraints = PlacementConstraint[];
   export type PlacementStrategies = PlacementStrategy[];
   export interface PlacementStrategy {
@@ -552,9 +552,9 @@ declare namespace Scheduler {
     type?: PlacementStrategyType;
   }
   export type PlacementStrategyField = string;
-  export type PlacementStrategyType = "random"|"spread"|"binpack"|string;
+  export type PlacementStrategyType = "random"|"spread"|"binpack";
   export type PlatformVersion = string;
-  export type PropagateTags = "TASK_DEFINITION"|string;
+  export type PropagateTags = "TASK_DEFINITION";
   export type ReferenceId = string;
   export interface RetryPolicy {
     /**
@@ -593,7 +593,7 @@ declare namespace Scheduler {
   export type ScheduleGroupList = ScheduleGroupSummary[];
   export type ScheduleGroupName = string;
   export type ScheduleGroupNamePrefix = string;
-  export type ScheduleGroupState = "ACTIVE"|"DELETING"|string;
+  export type ScheduleGroupState = "ACTIVE"|"DELETING";
   export interface ScheduleGroupSummary {
     /**
      * The Amazon Resource Name (ARN) of the schedule group.
@@ -617,7 +617,7 @@ declare namespace Scheduler {
     State?: ScheduleGroupState;
   }
   export type ScheduleList = ScheduleSummary[];
-  export type ScheduleState = "ENABLED"|"DISABLED"|string;
+  export type ScheduleState = "ENABLED"|"DISABLED";
   export interface ScheduleSummary {
     /**
      * The Amazon Resource Name (ARN) of the schedule.

@@ -1858,7 +1858,7 @@ declare namespace WorkSpaces {
   }
   export type OperatingSystemType = "WINDOWS"|"LINUX";
   export type PaginationToken = string;
-  export type Protocol = "PCOIP"|"WSP"|string;
+  export type Protocol = "PCOIP"|"WSP";
   export type ProtocolList = Protocol[];
   export interface RebootRequest {
     /**

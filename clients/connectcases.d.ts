@@ -1348,7 +1348,7 @@ declare namespace ConnectCases {
   export type TemplateDescription = string;
   export type TemplateId = string;
   export type TemplateName = string;
-  export type TemplateStatus = "Active"|"Inactive"|string;
+  export type TemplateStatus = "Active"|"Inactive";
   export type TemplateStatusFilters = TemplateStatus[];
   export interface TemplateSummary {
     /**
