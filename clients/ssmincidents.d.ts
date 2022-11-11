@@ -394,6 +394,10 @@ declare namespace SSMIncidents {
      */
     eventData: EventData;
     /**
+     * Adds one or more references to the TimelineEvent. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.
+     */
+    eventReferences?: EventReferenceList;
+    /**
      * The time that the event occurred.
      */
     eventTime: Timestamp;
@@ -483,11 +487,26 @@ declare namespace SSMIncidents {
   }
   export type EngagementSet = SsmContactsArn[];
   export type EventData = string;
+  export interface EventReference {
+    /**
+     * The ID of a RelatedItem referenced in a TimelineEvent.
+     */
+    relatedItemId?: GeneratedId;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in a TimelineEvent.
+     */
+    resource?: Arn;
+  }
+  export type EventReferenceList = EventReference[];
   export interface EventSummary {
     /**
      * The timeline event ID.
      */
     eventId: UUID;
+    /**
+     * A list of references in a TimelineEvent.
+     */
+    eventReferences?: EventReferenceList;
     /**
      * The time that the event occurred.
      */
@@ -518,6 +537,7 @@ declare namespace SSMIncidents {
   }
   export type FilterKeyString = string;
   export type FilterList = Filter[];
+  export type GeneratedId = string;
   export interface GetIncidentRecordInput {
     /**
      * The Amazon Resource Name (ARN) of the incident record.
@@ -978,6 +998,10 @@ declare namespace SSMIncidents {
   export type RegionStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|string;
   export interface RelatedItem {
     /**
+     * A unique ID for a RelatedItem.  Don't specify this parameter when you add a RelatedItem by using the UpdateRelatedItems API action. 
+     */
+    generatedId?: GeneratedId;
+    /**
      * Details about the related item.
      */
     identifier: ItemIdentifier;
@@ -1166,6 +1190,10 @@ declare namespace SSMIncidents {
      * The ID of the timeline event.
      */
     eventId: UUID;
+    /**
+     * A list of references in a TimelineEvent.
+     */
+    eventReferences?: EventReferenceList;
     /**
      * The time that the event occurred.
      */
@@ -1377,6 +1405,10 @@ declare namespace SSMIncidents {
      * The ID of the event you are updating. You can find this by using ListTimelineEvents.
      */
     eventId: UUID;
+    /**
+     * Updates all existing references in a TimelineEvent. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.  This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don't, this action removes them and enters only new references. 
+     */
+    eventReferences?: EventReferenceList;
     /**
      * The time that the event occurred.
      */

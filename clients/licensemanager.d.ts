@@ -36,11 +36,11 @@ declare class LicenseManager extends Service {
    */
   checkoutBorrowLicense(callback?: (err: AWSError, data: LicenseManager.Types.CheckoutBorrowLicenseResponse) => void): Request<LicenseManager.Types.CheckoutBorrowLicenseResponse, AWSError>;
   /**
-   * Checks out the specified license.
+   * Checks out the specified license.  If the account that created the license is the same that is performing the check out, you must specify the account as the beneficiary. 
    */
   checkoutLicense(params: LicenseManager.Types.CheckoutLicenseRequest, callback?: (err: AWSError, data: LicenseManager.Types.CheckoutLicenseResponse) => void): Request<LicenseManager.Types.CheckoutLicenseResponse, AWSError>;
   /**
-   * Checks out the specified license.
+   * Checks out the specified license.  If the account that created the license is the same that is performing the check out, you must specify the account as the beneficiary. 
    */
   checkoutLicense(callback?: (err: AWSError, data: LicenseManager.Types.CheckoutLicenseResponse) => void): Request<LicenseManager.Types.CheckoutLicenseResponse, AWSError>;
   /**
@@ -300,6 +300,14 @@ declare class LicenseManager extends Service {
    */
   listReceivedGrants(callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedGrantsResponse) => void): Request<LicenseManager.Types.ListReceivedGrantsResponse, AWSError>;
   /**
+   * Lists the grants received for all accounts in the organization.
+   */
+  listReceivedGrantsForOrganization(params: LicenseManager.Types.ListReceivedGrantsForOrganizationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedGrantsForOrganizationResponse) => void): Request<LicenseManager.Types.ListReceivedGrantsForOrganizationResponse, AWSError>;
+  /**
+   * Lists the grants received for all accounts in the organization.
+   */
+  listReceivedGrantsForOrganization(callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedGrantsForOrganizationResponse) => void): Request<LicenseManager.Types.ListReceivedGrantsForOrganizationResponse, AWSError>;
+  /**
    * Lists received licenses.
    */
   listReceivedLicenses(params: LicenseManager.Types.ListReceivedLicensesRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedLicensesResponse) => void): Request<LicenseManager.Types.ListReceivedLicensesResponse, AWSError>;
@@ -307,6 +315,14 @@ declare class LicenseManager extends Service {
    * Lists received licenses.
    */
   listReceivedLicenses(callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedLicensesResponse) => void): Request<LicenseManager.Types.ListReceivedLicensesResponse, AWSError>;
+  /**
+   * Lists the licenses received for all accounts in the organization.
+   */
+  listReceivedLicensesForOrganization(params: LicenseManager.Types.ListReceivedLicensesForOrganizationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedLicensesForOrganizationResponse) => void): Request<LicenseManager.Types.ListReceivedLicensesForOrganizationResponse, AWSError>;
+  /**
+   * Lists the licenses received for all accounts in the organization.
+   */
+  listReceivedLicensesForOrganization(callback?: (err: AWSError, data: LicenseManager.Types.ListReceivedLicensesForOrganizationResponse) => void): Request<LicenseManager.Types.ListReceivedLicensesForOrganizationResponse, AWSError>;
   /**
    * Lists resources managed using Systems Manager inventory.
    */
@@ -619,7 +635,7 @@ declare namespace LicenseManager {
      */
     LicenseArn: Arn;
     /**
-     * The grant principals.
+     * The grant principals. This value should be specified as an Amazon Resource Name (ARN).
      */
     Principals: PrincipalArnList;
     /**
@@ -739,11 +755,11 @@ declare namespace LicenseManager {
      */
     ResourceArn: Arn;
     /**
-     * Information that identifies the license type you are converting from. For the structure of the source license, see Convert a license type using the AWS CLI in the License Manager User Guide.
+     * Information that identifies the license type you are converting from. For the structure of the source license, see Convert a license type using the Amazon Web Services CLI in the License Manager User Guide.
      */
     SourceLicenseContext: LicenseConversionContext;
     /**
-     * Information that identifies the license type you are converting to. For the structure of the destination license, see Convert a license type using the AWS CLI in the License Manager User Guide.
+     * Information that identifies the license type you are converting to. For the structure of the destination license, see Convert a license type using the Amazon Web Services CLI in the License Manager User Guide.
      */
     DestinationLicenseContext: LicenseConversionContext;
   }
@@ -2003,6 +2019,34 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
   }
+  export interface ListReceivedGrantsForOrganizationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the received license.
+     */
+    LicenseArn: Arn;
+    /**
+     * Filters to scope the results. The following filters are supported:    ParentArn     GranteePrincipalArn   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListReceivedGrantsForOrganizationResponse {
+    /**
+     * Lists the grants the organization has received.
+     */
+    Grants?: GrantList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
   export interface ListReceivedGrantsRequest {
     /**
      * Amazon Resource Names (ARNs) of the grants.
@@ -2026,6 +2070,30 @@ declare namespace LicenseManager {
      * Received grant details.
      */
     Grants?: GrantList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListReceivedLicensesForOrganizationRequest {
+    /**
+     * Filters to scope the results. The following filters are supported:    Beneficiary     ProductSKU   
+     */
+    Filters?: FilterList;
+    /**
+     * Token for the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxSize100;
+  }
+  export interface ListReceivedLicensesForOrganizationResponse {
+    /**
+     * Lists the licenses the organization has received.
+     */
+    Licenses?: GrantedLicenseList;
     /**
      * Token for the next set of results.
      */

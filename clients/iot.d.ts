@@ -1340,6 +1340,14 @@ declare class Iot extends Service {
    */
   listProvisioningTemplates(callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplatesResponse) => void): Request<Iot.Types.ListProvisioningTemplatesResponse, AWSError>;
   /**
+   * The related resources of an Audit finding. The following resources can be returned from calling this API:   DEVICE_CERTIFICATE   CA_CERTIFICATE   IOT_POLICY   COGNITO_IDENTITY_POOL   CLIENT_ID   ACCOUNT_SETTINGS   ROLE_ALIAS   IAM_ROLE   ISSUER_CERTIFICATE    This API is similar to DescribeAuditFinding's RelatedResources but provides pagination and is not limited to 10 resources. When calling DescribeAuditFinding for the intermediate CA revoked for active device certificates check, RelatedResources will not be populated. You must use this API, ListRelatedResourcesForAuditFinding, to list the certificates. 
+   */
+  listRelatedResourcesForAuditFinding(params: Iot.Types.ListRelatedResourcesForAuditFindingRequest, callback?: (err: AWSError, data: Iot.Types.ListRelatedResourcesForAuditFindingResponse) => void): Request<Iot.Types.ListRelatedResourcesForAuditFindingResponse, AWSError>;
+  /**
+   * The related resources of an Audit finding. The following resources can be returned from calling this API:   DEVICE_CERTIFICATE   CA_CERTIFICATE   IOT_POLICY   COGNITO_IDENTITY_POOL   CLIENT_ID   ACCOUNT_SETTINGS   ROLE_ALIAS   IAM_ROLE   ISSUER_CERTIFICATE    This API is similar to DescribeAuditFinding's RelatedResources but provides pagination and is not limited to 10 resources. When calling DescribeAuditFinding for the intermediate CA revoked for active device certificates check, RelatedResources will not be populated. You must use this API, ListRelatedResourcesForAuditFinding, to list the certificates. 
+   */
+  listRelatedResourcesForAuditFinding(callback?: (err: AWSError, data: Iot.Types.ListRelatedResourcesForAuditFindingResponse) => void): Request<Iot.Types.ListRelatedResourcesForAuditFindingResponse, AWSError>;
+  /**
    * Lists the role aliases registered in your account. Requires permission to access the ListRoleAliases action.
    */
   listRoleAliases(params: Iot.Types.ListRoleAliasesRequest, callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
@@ -1452,11 +1460,11 @@ declare class Iot extends Service {
    */
   listThingTypes(callback?: (err: AWSError, data: Iot.Types.ListThingTypesResponse) => void): Request<Iot.Types.ListThingTypesResponse, AWSError>;
   /**
-   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.  Requires permission to access the ListThings action.  You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
+   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red. For more information, see List Things from the Amazon Web Services IoT Core Developer Guide. Requires permission to access the ListThings action.  You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
    */
   listThings(params: Iot.Types.ListThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
-   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.  Requires permission to access the ListThings action.  You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
+   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red. For more information, see List Things from the Amazon Web Services IoT Core Developer Guide. Requires permission to access the ListThings action.  You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
    */
   listThings(callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
@@ -6465,6 +6473,23 @@ declare namespace Iot {
   export type IsDefaultVersion = boolean;
   export type IsDisabled = boolean;
   export type IsSuppressed = boolean;
+  export interface IssuerCertificateIdentifier {
+    /**
+     * The subject of the issuer certificate.
+     */
+    issuerCertificateSubject?: IssuerCertificateSubject;
+    /**
+     * The issuer ID.
+     */
+    issuerId?: IssuerId;
+    /**
+     * The issuer certificate serial number.
+     */
+    issuerCertificateSerialNumber?: IssuerCertificateSerialNumber;
+  }
+  export type IssuerCertificateSerialNumber = string;
+  export type IssuerCertificateSubject = string;
+  export type IssuerId = string;
   export interface Job {
     /**
      * An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
@@ -7808,6 +7833,30 @@ declare namespace Iot {
     templates?: ProvisioningTemplateListing;
     /**
      * A token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListRelatedResourcesForAuditFindingRequest {
+    /**
+     * The finding Id.
+     */
+    findingId: FindingId;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListRelatedResourcesForAuditFindingResponse {
+    /**
+     * The related resources.
+     */
+    relatedResources?: RelatedResources;
+    /**
+     * A token that can be used to retrieve the next set of results, or null for the first API call.
      */
     nextToken?: NextToken;
   }
@@ -9314,9 +9363,17 @@ declare namespace Iot {
      * The ARN of the role alias that has overly permissive actions.
      */
     roleAliasArn?: RoleAliasArn;
+    /**
+     * The issuer certificate identifier.
+     */
+    issuerCertificateIdentifier?: IssuerCertificateIdentifier;
+    /**
+     * The ARN of the identified device certificate.
+     */
+    deviceCertificateArn?: CertificateArn;
   }
   export type ResourceLogicalId = string;
-  export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|"ROLE_ALIAS"|"IAM_ROLE"|string;
+  export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|"ROLE_ALIAS"|"IAM_ROLE"|"ISSUER_CERTIFICATE"|string;
   export type Resources = Resource[];
   export type RetryAttempt = number;
   export interface RetryCriteria {

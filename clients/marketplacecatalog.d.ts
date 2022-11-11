@@ -52,13 +52,37 @@ declare class MarketplaceCatalog extends Service {
    */
   listEntities(callback?: (err: AWSError, data: MarketplaceCatalog.Types.ListEntitiesResponse) => void): Request<MarketplaceCatalog.Types.ListEntitiesResponse, AWSError>;
   /**
-   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example later in this topic, because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets.
+   * Lists all tags that have been added to a resource (either an entity or change set).
+   */
+  listTagsForResource(params: MarketplaceCatalog.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.ListTagsForResourceResponse) => void): Request<MarketplaceCatalog.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags that have been added to a resource (either an entity or change set).
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MarketplaceCatalog.Types.ListTagsForResourceResponse) => void): Request<MarketplaceCatalog.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Allows you to request changes for your entities. Within a single ChangeSet, you can't start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a ResourceInUseException error. For example, you can't start the ChangeSet described in the example later in this topic because it contains two changes to run the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets.
    */
   startChangeSet(params: MarketplaceCatalog.Types.StartChangeSetRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
   /**
-   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example later in this topic, because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets.
+   * Allows you to request changes for your entities. Within a single ChangeSet, you can't start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a ResourceInUseException error. For example, you can't start the ChangeSet described in the example later in this topic because it contains two changes to run the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets.
    */
   startChangeSet(callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
+  /**
+   * Tags a resource (either an entity or change set).
+   */
+  tagResource(params: MarketplaceCatalog.Types.TagResourceRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.TagResourceResponse) => void): Request<MarketplaceCatalog.Types.TagResourceResponse, AWSError>;
+  /**
+   * Tags a resource (either an entity or change set).
+   */
+  tagResource(callback?: (err: AWSError, data: MarketplaceCatalog.Types.TagResourceResponse) => void): Request<MarketplaceCatalog.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes a tag or list of tags from a resource (either an entity or change set).
+   */
+  untagResource(params: MarketplaceCatalog.Types.UntagResourceRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.UntagResourceResponse) => void): Request<MarketplaceCatalog.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes a tag or list of tags from a resource (either an entity or change set).
+   */
+  untagResource(callback?: (err: AWSError, data: MarketplaceCatalog.Types.UntagResourceResponse) => void): Request<MarketplaceCatalog.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace MarketplaceCatalog {
   export type ARN = string;
@@ -92,6 +116,10 @@ declare namespace MarketplaceCatalog {
      * The entity to be changed.
      */
     Entity: Entity;
+    /**
+     * The tags associated with the change.
+     */
+    EntityTags?: TagList;
     /**
      * This object contains details specific to the change type of the requested change.
      */
@@ -381,9 +409,26 @@ declare namespace MarketplaceCatalog {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * Required. The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
+     */
+    ResourceArn: ResourceARN;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Required. The ARN associated with the resource you want to list tags on.
+     */
+    ResourceArn?: ResourceARN;
+    /**
+     * Required. A list of objects specifying each key name and value. Number of objects allowed: 1-50.
+     */
+    Tags?: TagList;
+  }
   export type MaxResultInteger = number;
   export type NextToken = string;
   export type RequestedChangeList = Change[];
+  export type ResourceARN = string;
   export type ResourceId = string;
   export type ResourceIdList = ResourceId[];
   export interface Sort {
@@ -415,6 +460,10 @@ declare namespace MarketplaceCatalog {
      * A unique token to identify the request to ensure idempotency.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * A list of objects specifying each key name and value for the ChangeSetTags property.
+     */
+    ChangeSetTags?: TagList;
   }
   export interface StartChangeSetResponse {
     /**
@@ -425,6 +474,44 @@ declare namespace MarketplaceCatalog {
      * The ARN associated to the unique identifier generated for the request.
      */
     ChangeSetArn?: ARN;
+  }
+  export interface Tag {
+    /**
+     * The key associated with the tag.
+     */
+    Key: TagKey;
+    /**
+     * The value associated with the tag.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * Required. The Amazon Resource Name (ARN) associated with the resource you want to tag.
+     */
+    ResourceArn: ResourceARN;
+    /**
+     * Required. A list of objects specifying each key name and value. Number of objects allowed: 1-50.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * Required. The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
+     */
+    ResourceArn: ResourceARN;
+    /**
+     * Required. A list of key names of tags to be removed. Number of strings allowed: 0-256.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
   }
   export type ValueList = FilterValueContent[];
   export type VisibilityValue = string;
