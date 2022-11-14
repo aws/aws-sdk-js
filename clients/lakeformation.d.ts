@@ -657,13 +657,17 @@ declare namespace LakeFormation {
      */
     DataLakeAdmins?: DataLakePrincipalList;
     /**
-     * Specifies whether access control on newly created database is managed by Lake Formation permissions or exclusively by IAM permissions. You can override this default setting when you create a database. A null value indicates access control by Lake Formation permissions. A value that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is referred to as the setting "Use only IAM access control," and is for backward compatibility with the Glue permission model implemented by IAM permissions. The only permitted values are an empty array or an array that contains a single JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see Changing the Default Security Settings for Your Data Lake.
+     * Specifies whether access control on newly created database is managed by Lake Formation permissions or exclusively by IAM permissions. A null value indicates access control by Lake Formation permissions. A value that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is referred to as the setting "Use only IAM access control," and is for backward compatibility with the Glue permission model implemented by IAM permissions. The only permitted values are an empty array or an array that contains a single JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see Changing the Default Security Settings for Your Data Lake.
      */
     CreateDatabaseDefaultPermissions?: PrincipalPermissionsList;
     /**
      * Specifies whether access control on newly created table is managed by Lake Formation permissions or exclusively by IAM permissions. A null value indicates access control by Lake Formation permissions. A value that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is referred to as the setting "Use only IAM access control," and is for backward compatibility with the Glue permission model implemented by IAM permissions. The only permitted values are an empty array or an array that contains a single JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see Changing the Default Security Settings for Your Data Lake.
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
+    /**
+     * A key-value map that provides an additional configuration on your data lake. CrossAccountVersion is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, and 3.
+     */
+    Parameters?: ParametersMap;
     /**
      * A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's CloudTrail log. You may want to specify this property when you are in a high-trust boundary, such as the same team or company. 
      */
@@ -1201,6 +1205,7 @@ declare namespace LakeFormation {
   export type IAMSAMLProviderArn = string;
   export type Identifier = string;
   export type Integer = number;
+  export type KeyString = string;
   export interface LFTag {
     /**
      * The key-name for the LF-tag.
@@ -1457,6 +1462,8 @@ declare namespace LakeFormation {
   export type ObjectSize = number;
   export type OptimizerType = "COMPACTION"|"GARBAGE_COLLECTION"|"ALL"|string;
   export type PageSize = number;
+  export type ParametersMap = {[key: string]: ParametersMapValue};
+  export type ParametersMapValue = string;
   export interface PartitionObjects {
     /**
      * A list of partition values.
@@ -1706,7 +1713,7 @@ declare namespace LakeFormation {
     /**
      * The maximum number of results to return.
      */
-    MaxResults?: PageSize;
+    MaxResults?: SearchPageSize;
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
      */
@@ -1726,6 +1733,7 @@ declare namespace LakeFormation {
      */
     DatabaseList?: DatabaseLFTagsList;
   }
+  export type SearchPageSize = number;
   export interface SearchTablesByLFTagsRequest {
     /**
      * A continuation token, if this is not the first call to retrieve this list.
@@ -1734,7 +1742,7 @@ declare namespace LakeFormation {
     /**
      * The maximum number of results to return.
      */
-    MaxResults?: PageSize;
+    MaxResults?: SearchPageSize;
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
      */

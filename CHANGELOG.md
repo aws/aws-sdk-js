@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1253.0-->
+<!--LATEST=2.1254.0-->
 <!--ENTRYINSERT-->
+
+## 2.1254.0
+* feature: CustomerProfiles: This release enhances the SearchProfiles API by providing functionality to search for profiles using multiple keys and logical operators.
+* feature: LakeFormation: This release adds a new parameter "Parameters" in the DataLakeSettings.
+* feature: Proton: Add support for CodeBuild Provisioning
+* feature: RDS: This release adds support for restoring an RDS Multi-AZ DB cluster snapshot to a Single-AZ deployment or a Multi-AZ DB instance deployment.
+* feature: WorkDocs: Added 2 new document related operations, DeleteDocumentVersion and RestoreDocumentVersions.
+* feature: XRay: This release enhances GetServiceGraph API to support new type of edge to represent links between SQS and Lambda in event-driven applications.
 
 ## 2.1253.0
 * feature: Iot: This release add new api listRelatedResourcesForAuditFinding and new member type IssuerCertificates for Iot device device defender Audit.

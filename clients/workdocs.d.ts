@@ -68,11 +68,11 @@ declare class WorkDocs extends Service {
    */
   createLabels(callback?: (err: AWSError, data: WorkDocs.Types.CreateLabelsResponse) => void): Request<WorkDocs.Types.CreateLabelsResponse, AWSError>;
   /**
-   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Setting up notifications for an IAM user or role in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(params: WorkDocs.Types.CreateNotificationSubscriptionRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
-   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Setting up notifications for an IAM user or role in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
@@ -115,6 +115,14 @@ declare class WorkDocs extends Service {
    * Permanently deletes the specified document and its associated metadata.
    */
   deleteDocument(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a version of an Amazon WorkDocs document. Use the DeletePriorVersions parameter to delete prior versions.
+   */
+  deleteDocumentVersion(params: WorkDocs.Types.DeleteDocumentVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a version of an Amazon WorkDocs document. Use the DeletePriorVersions parameter to delete prior versions.
+   */
+  deleteDocumentVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Permanently deletes the specified folder and its contents.
    */
@@ -307,6 +315,14 @@ declare class WorkDocs extends Service {
    * Removes the permission for the specified principal from the specified resource.
    */
   removeResourcePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Recovers a deleted version of an Amazon WorkDocs document.
+   */
+  restoreDocumentVersions(params: WorkDocs.Types.RestoreDocumentVersionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Recovers a deleted version of an Amazon WorkDocs document.
+   */
+  restoreDocumentVersions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.
    */
@@ -733,6 +749,24 @@ declare namespace WorkDocs {
      */
     DocumentId: ResourceIdType;
   }
+  export interface DeleteDocumentVersionRequest {
+    /**
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The ID of a document.
+     */
+    DocumentId: ResourceIdType;
+    /**
+     * The version ID of a document.
+     */
+    VersionId: DocumentVersionIdType;
+    /**
+     * When set to TRUE, deletes the specified version and all prior versions of a document.
+     */
+    DeletePriorVersions: BooleanType;
+  }
   export interface DeleteFolderContentsRequest {
     /**
      * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
@@ -833,7 +867,7 @@ declare namespace WorkDocs {
     /**
      * The marker for the next set of results.
      */
-    Marker?: MarkerType;
+    Marker?: SearchMarkerType;
   }
   export interface DescribeActivitiesResponse {
     /**
@@ -843,7 +877,7 @@ declare namespace WorkDocs {
     /**
      * The marker for the next set of results.
      */
-    Marker?: MarkerType;
+    Marker?: SearchMarkerType;
   }
   export interface DescribeCommentsRequest {
     /**
@@ -1087,7 +1121,7 @@ declare namespace WorkDocs {
      */
     UserIds?: UserIdsType;
     /**
-     * A query to filter users by user name.
+     * A query to filter users by user name. Remember the following about the Userids and Query parameters:   If you don't use either parameter, the API returns a paginated list of all users on the site.   If you use both parameters, the API ignores the Query parameter.   The Userid parameter only returns user names that match a corresponding user ID.   The Query parameter runs a "prefix" search for users by the GivenName, SurName, or UserName fields included in a CreateUser API call. For example, querying on Ma returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on Ma J only returns Mateo Jackson.  
      */
     Query?: SearchQueryType;
     /**
@@ -1509,7 +1543,7 @@ declare namespace WorkDocs {
     /**
      * The ID of the parent folder.
      */
-    ParentFolderId: ResourceIdType;
+    ParentFolderId?: ResourceIdType;
   }
   export interface InitiateDocumentVersionUploadResponse {
     /**
@@ -1659,8 +1693,19 @@ declare namespace WorkDocs {
   export type ResourceSortType = "DATE"|"NAME"|string;
   export type ResourceStateType = "ACTIVE"|"RESTORING"|"RECYCLING"|"RECYCLED"|string;
   export type ResourceType = "FOLDER"|"DOCUMENT"|string;
+  export interface RestoreDocumentVersionsRequest {
+    /**
+     * Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The ID of the document.
+     */
+    DocumentId: ResourceIdType;
+  }
   export type RolePermissionType = "DIRECT"|"INHERITED"|string;
   export type RoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
+  export type SearchMarkerType = string;
   export type SearchQueryType = string;
   export interface SharePrincipal {
     /**
@@ -1736,7 +1781,7 @@ declare namespace WorkDocs {
   }
   export type SubscriptionEndPointType = string;
   export type SubscriptionList = Subscription[];
-  export type SubscriptionProtocolType = "HTTPS"|string;
+  export type SubscriptionProtocolType = "HTTPS"|"SQS"|string;
   export type SubscriptionType = "ALL"|string;
   export type TimeZoneIdType = string;
   export type TimestampType = Date;

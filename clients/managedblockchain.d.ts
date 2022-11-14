@@ -52,11 +52,11 @@ declare class ManagedBlockchain extends Service {
    */
   createProposal(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateProposalOutput) => void): Request<ManagedBlockchain.Types.CreateProposalOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that are initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
+   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that were initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
    */
   deleteAccessor(params: ManagedBlockchain.Types.DeleteAccessorInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.DeleteAccessorOutput) => void): Request<ManagedBlockchain.Types.DeleteAccessorOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that are initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
+   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that were initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
    */
   deleteAccessor(callback?: (err: AWSError, data: ManagedBlockchain.Types.DeleteAccessorOutput) => void): Request<ManagedBlockchain.Types.DeleteAccessorOutput, AWSError>;
   /**
@@ -397,7 +397,7 @@ declare namespace ManagedBlockchain {
      */
     ClientRequestToken: ClientRequestTokenString;
     /**
-     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-rinkeby     n-ethereum-ropsten   
+     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby     n-ethereum-ropsten   
      */
     NetworkId: ResourceIdString;
     /**
@@ -473,7 +473,7 @@ declare namespace ManagedBlockchain {
   }
   export interface DeleteNodeInput {
     /**
-     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-rinkeby     n-ethereum-ropsten   
+     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby     n-ethereum-ropsten   
      */
     NetworkId: ResourceIdString;
     /**
@@ -1021,7 +1021,7 @@ declare namespace ManagedBlockchain {
   }
   export interface NetworkEthereumAttributes {
     /**
-     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    rinkeby = 4    ropsten = 3   
+     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    goerli = 5    rinkeby = 4    ropsten = 3   
      */
     ChainId?: String;
   }
@@ -1173,7 +1173,7 @@ declare namespace ManagedBlockchain {
      */
     HttpEndpoint?: String;
     /**
-     * The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSockets connections from a client. Use this endpoint in client code for smart contracts when using a WebSockets connection. Connections to this endpoint are authenticated using Signature Version 4.
+     * The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSocket connections from a client. Use this endpoint in client code for smart contracts when using a WebSocket connection. Connections to this endpoint are authenticated using Signature Version 4.
      */
     WebSocketEndpoint?: String;
   }

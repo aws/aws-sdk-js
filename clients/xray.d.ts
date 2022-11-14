@@ -416,13 +416,21 @@ declare namespace XRay {
      */
     SummaryStatistics?: EdgeStatistics;
     /**
-     * A histogram that maps the spread of client response times on an edge.
+     * A histogram that maps the spread of client response times on an edge. Only populated for synchronous edges.
      */
     ResponseTimeHistogram?: Histogram;
     /**
      * Aliases for the edge.
      */
     Aliases?: AliasList;
+    /**
+     * Describes an asynchronous connection, with a value of link.
+     */
+    EdgeType?: String;
+    /**
+     * A histogram that maps the spread of event age when received by consumers. Age is calculated each time an event is received. Only populated when EdgeType is link.
+     */
+    ReceivedEventAgeHistogram?: Histogram;
   }
   export type EdgeList = Edge[];
   export interface EdgeStatistics {
@@ -1802,7 +1810,7 @@ declare namespace XRay {
      */
     Duration?: NullableDouble;
     /**
-     * LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For more information about quotas, see Amazon Web Services X-Ray endpoints and quotas.
+     * LimitExceeded is set to true when the trace has exceeded the Trace document size limit. For more information about this limit and other X-Ray limits and quotas, see Amazon Web Services X-Ray endpoints and quotas.
      */
     LimitExceeded?: NullableBoolean;
     /**
