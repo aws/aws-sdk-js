@@ -580,7 +580,7 @@ declare namespace GreengrassV2 {
   }
   export interface CreateDeploymentRequest {
     /**
-     * The ARN of the target IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group. When creating a subdeployment, the targetARN can only be a thing group.
      */
     targetArn: TargetARN;
     /**
@@ -599,6 +599,10 @@ declare namespace GreengrassV2 {
      * The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
      */
     deploymentPolicies?: DeploymentPolicies;
+    /**
+     * The parent deployment's target ARN within a subdeployment.
+     */
+    parentTargetArn?: ThingGroupARN;
     /**
      * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
@@ -643,7 +647,7 @@ declare namespace GreengrassV2 {
   }
   export interface Deployment {
     /**
-     * The ARN of the target IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group. When creating a subdeployment, the targetARN can only be a thing group.
      */
     targetArn?: TargetARN;
     /**
@@ -670,6 +674,10 @@ declare namespace GreengrassV2 {
      * Whether or not the deployment is the latest revision for its target.
      */
     isLatestForTarget?: IsLatestForTarget;
+    /**
+     * The parent deployment's target ARN within a subdeployment.
+     */
+    parentTargetArn?: ThingGroupARN;
   }
   export interface DeploymentComponentUpdatePolicy {
     /**
@@ -1011,6 +1019,10 @@ declare namespace GreengrassV2 {
      * Whether or not the deployment is the latest revision for its target.
      */
     isLatestForTarget?: IsLatestForTarget;
+    /**
+     * The parent deployment's target ARN within a subdeployment.
+     */
+    parentTargetArn?: ThingGroupARN;
     /**
      * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
@@ -1412,6 +1424,10 @@ declare namespace GreengrassV2 {
      * The filter for the list of deployments. Choose one of the following options:    ALL – The list includes all deployments.    LATEST_ONLY – The list includes only the latest revision of each deployment.   Default: LATEST_ONLY 
      */
     historyFilter?: DeploymentHistoryFilter;
+    /**
+     * The parent deployment's target ARN within a subdeployment.
+     */
+    parentTargetArn?: ThingGroupARN;
     /**
      * The maximum number of results to be returned per paginated request.
      */

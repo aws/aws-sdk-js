@@ -356,6 +356,14 @@ declare class WorkSpaces extends Service {
    */
   modifyAccount(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
+   * Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
+   */
+  modifyCertificateBasedAuthProperties(params: WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult) => void): Request<WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult, AWSError>;
+  /**
+   * Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
+   */
+  modifyCertificateBasedAuthProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult) => void): Request<WorkSpaces.Types.ModifyCertificateBasedAuthPropertiesResult, AWSError>;
+  /**
    * Modifies the properties of the specified Amazon WorkSpaces clients.
    */
   modifyClientProperties(params: WorkSpaces.Types.ModifyClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
@@ -599,6 +607,18 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export type CertificateAuthorityArn = string;
+  export interface CertificateBasedAuthProperties {
+    /**
+     * The status of the certificate-based authentication properties.
+     */
+    Status?: CertificateBasedAuthStatusEnum;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager Private CA resource.
+     */
+    CertificateAuthorityArn?: CertificateAuthorityArn;
+  }
+  export type CertificateBasedAuthStatusEnum = "DISABLED"|"ENABLED"|string;
   export type ClientDeviceType = "DeviceTypeWindows"|"DeviceTypeOsx"|"DeviceTypeAndroid"|"DeviceTypeIos"|"DeviceTypeLinux"|"DeviceTypeWeb"|string;
   export type ClientDeviceTypeList = ClientDeviceType[];
   export type ClientEmail = string;
@@ -1005,6 +1025,8 @@ declare namespace WorkSpaces {
      */
     EnableMaintenanceMode?: BooleanObject;
   }
+  export type DeletableCertificateBasedAuthPropertiesList = DeletableCertificateBasedAuthProperty[];
+  export type DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"|string;
   export type DeletableSamlPropertiesList = DeletableSamlProperty[];
   export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string;
   export interface DeleteClientBrandingRequest {
@@ -1761,6 +1783,22 @@ declare namespace WorkSpaces {
   }
   export interface ModifyAccountResult {
   }
+  export interface ModifyCertificateBasedAuthPropertiesRequest {
+    /**
+     * The resource identifiers, in the form of directory IDs.
+     */
+    ResourceId: DirectoryId;
+    /**
+     * The properties of the certificate-based authentication.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
+    /**
+     * The properties of the certificate-based authentication you want to delete.
+     */
+    PropertiesToDelete?: DeletableCertificateBasedAuthPropertiesList;
+  }
+  export interface ModifyCertificateBasedAuthPropertiesResult {
+  }
   export interface ModifyClientPropertiesRequest {
     /**
      * The resource identifiers, in the form of directory IDs.
@@ -2427,6 +2465,10 @@ declare namespace WorkSpaces {
      * Describes the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
      */
     SamlProperties?: SamlProperties;
+    /**
+     * The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory for WorkSpaces login.
+     */
+    CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
   }
   export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
   export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;

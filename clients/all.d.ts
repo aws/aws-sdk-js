@@ -319,3 +319,4 @@ export import MigrationHubOrchestrator = require('./migrationhuborchestrator');
 export import ConnectCases = require('./connectcases');
 export import ResourceExplorer2 = require('./resourceexplorer2');
 export import Scheduler = require('./scheduler');
+export import SsmSap = require('./ssmsap');

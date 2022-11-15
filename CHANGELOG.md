@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1254.0-->
+<!--LATEST=2.1255.0-->
 <!--ENTRYINSERT-->
+
+## 2.1255.0
+* feature: Connect: This release updates the APIs: UpdateInstanceAttribute, DescribeInstanceAttribute, and ListInstanceAttributes. You can use it to programmatically enable/disable enhanced contact monitoring using attribute type ENHANCED_CONTACT_MONITORING on the specified Amazon Connect instance.
+* feature: GreengrassV2: Adds new parent target ARN paramater to CreateDeployment, GetDeployment, and ListDeployments APIs for the new subdeployments feature.
+* feature: Route53: Amazon Route 53 now supports the Europe (Spain) Region (eu-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* feature: SsmSap: AWS Systems Manager for SAP provides simplified operations and management of SAP applications such as SAP HANA. With this release, SAP customers and partners can automate and simplify their SAP system administration tasks such as backup/restore of SAP HANA.
+* feature: WorkSpaces: This release introduces ModifyCertificateBasedAuthProperties, a new API that allows control of certificate-based auth properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return certificate-based auth properties in its responses.
 
 ## 2.1254.0
 * feature: CustomerProfiles: This release enhances the SearchProfiles API by providing functionality to search for profiles using multiple keys and logical operators.
