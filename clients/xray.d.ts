@@ -44,6 +44,14 @@ declare class XRay extends Service {
    */
   deleteGroup(callback?: (err: AWSError, data: XRay.Types.DeleteGroupResult) => void): Request<XRay.Types.DeleteGroupResult, AWSError>;
   /**
+   * Deletes a resource policy from the target Amazon Web Services account.
+   */
+  deleteResourcePolicy(params: XRay.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: XRay.Types.DeleteResourcePolicyResult) => void): Request<XRay.Types.DeleteResourcePolicyResult, AWSError>;
+  /**
+   * Deletes a resource policy from the target Amazon Web Services account.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: XRay.Types.DeleteResourcePolicyResult) => void): Request<XRay.Types.DeleteResourcePolicyResult, AWSError>;
+  /**
    * Deletes a sampling rule.
    */
   deleteSamplingRule(params: XRay.Types.DeleteSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.DeleteSamplingRuleResult) => void): Request<XRay.Types.DeleteSamplingRuleResult, AWSError>;
@@ -164,6 +172,14 @@ declare class XRay extends Service {
    */
   getTraceSummaries(callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
+   * Returns the list of resource policies in the target Amazon Web Services account.
+   */
+  listResourcePolicies(params: XRay.Types.ListResourcePoliciesRequest, callback?: (err: AWSError, data: XRay.Types.ListResourcePoliciesResult) => void): Request<XRay.Types.ListResourcePoliciesResult, AWSError>;
+  /**
+   * Returns the list of resource policies in the target Amazon Web Services account.
+   */
+  listResourcePolicies(callback?: (err: AWSError, data: XRay.Types.ListResourcePoliciesResult) => void): Request<XRay.Types.ListResourcePoliciesResult, AWSError>;
+  /**
    * Returns a list of tags that are applied to the specified Amazon Web Services X-Ray group or sampling rule.
    */
   listTagsForResource(params: XRay.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
@@ -179,6 +195,14 @@ declare class XRay extends Service {
    * Updates the encryption configuration for X-Ray data.
    */
   putEncryptionConfig(callback?: (err: AWSError, data: XRay.Types.PutEncryptionConfigResult) => void): Request<XRay.Types.PutEncryptionConfigResult, AWSError>;
+  /**
+   *  Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray. Each resource policy will be associated with a specific Amazon Web Services account. Each Amazon Web Services account can have a maximum of 5 resource policies, and each policy name must be unique within that account. The maximum size of each resource policy is 5KB. 
+   */
+  putResourcePolicy(params: XRay.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: XRay.Types.PutResourcePolicyResult) => void): Request<XRay.Types.PutResourcePolicyResult, AWSError>;
+  /**
+   *  Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray. Each resource policy will be associated with a specific Amazon Web Services account. Each Amazon Web Services account can have a maximum of 5 resource policies, and each policy name must be unique within that account. The maximum size of each resource policy is 5KB. 
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: XRay.Types.PutResourcePolicyResult) => void): Request<XRay.Types.PutResourcePolicyResult, AWSError>;
   /**
    * Used by the Amazon Web Services X-Ray daemon to upload telemetry.
    */
@@ -338,7 +362,7 @@ declare namespace XRay {
      */
     FilterExpression?: FilterExpression;
     /**
-     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.  
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.   The NotificationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.  
      */
     InsightsConfiguration?: InsightsConfiguration;
     /**
@@ -379,6 +403,18 @@ declare namespace XRay {
     GroupARN?: GroupARN;
   }
   export interface DeleteGroupResult {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The name of the resource policy to delete.
+     */
+    PolicyName: PolicyName;
+    /**
+     * Specifies a specific policy revision to delete. Provide a PolicyRevisionId to ensure an atomic delete operation. If the provided revision id does not match the latest policy revision id, an InvalidPolicyRevisionIdException exception is returned. 
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export interface DeleteResourcePolicyResult {
   }
   export interface DeleteSamplingRuleRequest {
     /**
@@ -1249,6 +1285,22 @@ declare namespace XRay {
     Id?: String;
   }
   export type Integer = number;
+  export interface ListResourcePoliciesRequest {
+    /**
+     * Not currently supported.
+     */
+    NextToken?: ResourcePolicyNextToken;
+  }
+  export interface ListResourcePoliciesResult {
+    /**
+     * The list of resource policies in the target Amazon Web Services account.
+     */
+    ResourcePolicies?: ResourcePolicyList;
+    /**
+     * Pagination token. Not currently supported.
+     */
+    NextToken?: ResourcePolicyNextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
@@ -1273,6 +1325,9 @@ declare namespace XRay {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type NullableLong = number;
+  export type PolicyDocument = string;
+  export type PolicyName = string;
+  export type PolicyRevisionId = string;
   export type Priority = number;
   export interface PutEncryptionConfigRequest {
     /**
@@ -1289,6 +1344,30 @@ declare namespace XRay {
      * The new encryption configuration.
      */
     EncryptionConfig?: EncryptionConfig;
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+     */
+    PolicyName: PolicyName;
+    /**
+     * The resource policy document, which can be up to 5kb in size.
+     */
+    PolicyDocument: PolicyDocument;
+    /**
+     * Specifies a specific policy revision, to ensure an atomic create operation. By default the resource policy is created if it does not exist, or updated with an incremented revision id. The revision id is unique to each policy in the account. If the policy revision id does not match the latest revision id, the operation will fail with an InvalidPolicyRevisionIdException exception. You can also provide a PolicyRevisionId of 0. In this case, the operation will fail with an InvalidPolicyRevisionIdException exception if a resource policy with the same name already exists. 
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+    /**
+     * A flag to indicate whether to bypass the resource policy lockout safety check.  Setting this value to true increases the risk that the policy becomes unmanageable. Do not set this value to true indiscriminately.  Use this parameter only when you include a policy in the request and you intend to prevent the principal that is making the request from making a subsequent PutResourcePolicy request. The default value is false.
+     */
+    BypassPolicyLockoutCheck?: Boolean;
+  }
+  export interface PutResourcePolicyResult {
+    /**
+     * The resource policy document, as provided in the PutResourcePolicyRequest.
+     */
+    ResourcePolicy?: ResourcePolicy;
   }
   export interface PutTelemetryRecordsRequest {
     /**
@@ -1345,6 +1424,26 @@ declare namespace XRay {
      */
     ARN?: String;
   }
+  export interface ResourcePolicy {
+    /**
+     * The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+     */
+    PolicyName?: PolicyName;
+    /**
+     * The resource policy document, which can be up to 5kb in size.
+     */
+    PolicyDocument?: PolicyDocument;
+    /**
+     * Returns the current policy revision id for this policy name.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+    /**
+     * When the policy was last updated, in Unix time seconds.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
+  export type ResourcePolicyList = ResourcePolicy[];
+  export type ResourcePolicyNextToken = string;
   export interface ResponseTimeRootCause {
     /**
      * A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.
@@ -1978,7 +2077,7 @@ declare namespace XRay {
      */
     FilterExpression?: FilterExpression;
     /**
-     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.  
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotificationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.  
      */
     InsightsConfiguration?: InsightsConfiguration;
   }

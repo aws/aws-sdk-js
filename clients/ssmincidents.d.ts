@@ -370,6 +370,10 @@ declare namespace SSMIncidents {
      */
     incidentTemplate: IncidentTemplate;
     /**
+     * Information about third-party services integrated into the response plan.
+     */
+    integrations?: Integrations;
+    /**
      * The short format name of the response plan. Can't include spaces.
      */
     name: ResponsePlanName;
@@ -618,6 +622,10 @@ declare namespace SSMIncidents {
      */
     incidentTemplate: IncidentTemplate;
     /**
+     * Information about third-party services integrated into the Incident Manager response plan.
+     */
+    integrations?: Integrations;
+    /**
      * The short format name of the response plan. The name can't contain spaces.
      */
     name: ResponsePlanName;
@@ -778,6 +786,13 @@ declare namespace SSMIncidents {
   export type IncidentTitle = string;
   export type Integer = number;
   export type IntegerList = Integer[];
+  export interface Integration {
+    /**
+     * Information about the PagerDuty service where the response plan creates an incident.
+     */
+    pagerDutyConfiguration?: PagerDutyConfiguration;
+  }
+  export type Integrations = Integration[];
   export interface ItemIdentifier {
     /**
      * The type of related item. 
@@ -798,6 +813,10 @@ declare namespace SSMIncidents {
      * The metric definition, if the related item is a metric in Amazon CloudWatch.
      */
     metricDefinition?: MetricDefinition;
+    /**
+     * Details about an incident that is associated with a PagerDuty incident.
+     */
+    pagerDutyIncidentDetail?: PagerDutyIncidentDetail;
     /**
      * The URL, if the related item is a non-Amazon Web Services resource.
      */
@@ -949,6 +968,45 @@ declare namespace SSMIncidents {
     snsTopicArn?: Arn;
   }
   export type NotificationTargetSet = NotificationTargetItem[];
+  export interface PagerDutyConfiguration {
+    /**
+     * The name of the PagerDuty configuration.
+     */
+    name: PagerDutyConfigurationNameString;
+    /**
+     * Details about the PagerDuty service associated with the configuration.
+     */
+    pagerDutyIncidentConfiguration: PagerDutyIncidentConfiguration;
+    /**
+     * The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or User Token REST API Key, and other user credentials.
+     */
+    secretId: PagerDutyConfigurationSecretIdString;
+  }
+  export type PagerDutyConfigurationNameString = string;
+  export type PagerDutyConfigurationSecretIdString = string;
+  export interface PagerDutyIncidentConfiguration {
+    /**
+     * The ID of the PagerDuty service that the response plan associates with an incident when it launches.
+     */
+    serviceId: PagerDutyIncidentConfigurationServiceIdString;
+  }
+  export type PagerDutyIncidentConfigurationServiceIdString = string;
+  export interface PagerDutyIncidentDetail {
+    /**
+     * Indicates whether to resolve the PagerDuty incident when you resolve the associated Incident Manager incident.
+     */
+    autoResolve?: Boolean;
+    /**
+     * The ID of the incident associated with the PagerDuty service for the response plan.
+     */
+    id: PagerDutyIncidentDetailIdString;
+    /**
+     * The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or User Token REST API Key, and other user credentials.
+     */
+    secretId?: PagerDutyIncidentDetailSecretIdString;
+  }
+  export type PagerDutyIncidentDetailIdString = string;
+  export type PagerDutyIncidentDetailSecretIdString = string;
   export type Policy = string;
   export type PolicyId = string;
   export interface PutResourcePolicyInput {
@@ -1389,6 +1447,10 @@ declare namespace SSMIncidents {
      * The short format name of the incident. The title can't contain spaces.
      */
     incidentTemplateTitle?: IncidentTitle;
+    /**
+     * Information about third-party services integrated into the response plan.
+     */
+    integrations?: Integrations;
   }
   export interface UpdateResponsePlanOutput {
   }

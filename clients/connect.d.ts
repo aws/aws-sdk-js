@@ -860,6 +860,14 @@ declare class Connect extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
   /**
+   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
+   */
+  monitorContact(params: Connect.Types.MonitorContactRequest, callback?: (err: AWSError, data: Connect.Types.MonitorContactResponse) => void): Request<Connect.Types.MonitorContactResponse, AWSError>;
+  /**
+   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
+   */
+  monitorContact(callback?: (err: AWSError, data: Connect.Types.MonitorContactResponse) => void): Request<Connect.Types.MonitorContactResponse, AWSError>;
+  /**
    * Changes the current status of a user or agent in Amazon Connect. If the agent is currently handling a contact, this sets the agent's next status. For more information, see Agent status and Set your next status in the Amazon Connect Administrator Guide.
    */
   putUserStatus(params: Connect.Types.PutUserStatusRequest, callback?: (err: AWSError, data: Connect.Types.PutUserStatusResponse) => void): Request<Connect.Types.PutUserStatusResponse, AWSError>;
@@ -1424,6 +1432,7 @@ declare namespace Connect {
   export type AgentStatusTypes = AgentStatusType[];
   export type AgentUsername = string;
   export type AliasArn = string;
+  export type AllowedMonitorCapabilities = MonitorCapability[];
   export interface AnswerMachineDetectionConfig {
     /**
      * The flag to indicate if answer machine detection analysis needs to be performed for a voice call. If set to true, TrafficType must be set as CAMPAIGN. 
@@ -3234,7 +3243,7 @@ declare namespace Connect {
      */
     Filters: Filters;
     /**
-     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues. If you group by CHANNEL, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported. If no Grouping is included in the request, a summary of metrics is returned.
+     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues.    If you group by CHANNEL, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported.   If you group by ROUTING_PROFILE, you must include either a queue or routing profile filter.   If no Grouping is included in the request, a summary of metrics is returned.  
      */
     Groupings?: Groupings;
     /**
@@ -4822,6 +4831,39 @@ declare namespace Connect {
     Concurrency: Concurrency;
   }
   export type MinutesLimit60 = number;
+  export type MonitorCapability = "SILENT_MONITOR"|"BARGE"|string;
+  export interface MonitorContactRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact.
+     */
+    ContactId: ContactId;
+    /**
+     * The identifier of the user account.
+     */
+    UserId: AgentResourceId;
+    /**
+     * Specify which monitoring actions the user is allowed to take. For example, whether the user is allowed to escalate from silent monitoring to barge.
+     */
+    AllowedMonitorCapabilities?: AllowedMonitorCapabilities;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface MonitorContactResponse {
+    /**
+     * The identifier of the contact.
+     */
+    ContactId?: ContactId;
+    /**
+     * The ARN of the contact.
+     */
+    ContactArn?: ARN;
+  }
   export type Name = string;
   export type Name128 = string;
   export type NextToken = string;
@@ -5452,7 +5494,7 @@ declare namespace Connect {
      */
     SearchFilter?: QueueSearchFilter;
     /**
-     * The search criteria to be used to return queues.
+     * The search criteria to be used to return queues.  The name and description fields support "contains" queries with a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results.  
      */
     SearchCriteria?: QueueSearchCriteria;
   }
@@ -5488,7 +5530,7 @@ declare namespace Connect {
      */
     SearchFilter?: RoutingProfileSearchFilter;
     /**
-     * The search criteria to be used to return routing profiles.
+     * The search criteria to be used to return routing profiles.  The name and description fields support "contains" queries with a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results.  
      */
     SearchCriteria?: RoutingProfileSearchCriteria;
   }
@@ -5520,7 +5562,7 @@ declare namespace Connect {
      */
     MaxResults?: MaxResult100;
     /**
-     * The search criteria to be used to return security profiles.   The currently supported value for FieldName: name  
+     * The search criteria to be used to return security profiles.   The name field support "contains" queries with a minimum of 2 characters and maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results.   The currently supported value for FieldName: name  
      */
     SearchCriteria?: SecurityProfileSearchCriteria;
     /**

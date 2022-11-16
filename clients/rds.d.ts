@@ -1435,6 +1435,18 @@ declare namespace RDS {
      * The database engine version.
      */
     EngineVersion?: String;
+    /**
+     * The number of days for which automatic DB snapshots are retained.
+     */
+    BackupRetentionPeriod?: IntegerOptional;
+    /**
+     * The allocated storage size in gibibytes (GiB) for all database engines except Amazon Aurora. For Aurora, AllocatedStorage always returns 1, because Aurora DB cluster storage size isn't fixed, but instead automatically adjusts as needed.
+     */
+    AllocatedStorage?: IntegerOptional;
+    /**
+     * The Provisioned IOPS (I/O operations per second) value. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    Iops?: IntegerOptional;
   }
   export interface ConnectionPoolConfiguration {
     /**
@@ -1841,6 +1853,10 @@ declare namespace RDS {
      * The network type of the DB cluster. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon Aurora User Guide.  Valid for: Aurora DB clusters only
      */
     NetworkType?: String;
+    /**
+     * Reserved for future use.
+     */
+    DBSystemId?: String;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -2756,6 +2772,10 @@ declare namespace RDS {
      * The network type of the DB instance. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon Aurora User Guide.  This setting is only for Aurora DB clusters.
      */
     NetworkType?: String;
+    /**
+     * Reserved for future use.
+     */
+    DBSystemId?: String;
   }
   export interface DBClusterBacktrack {
     /**
@@ -3057,6 +3077,10 @@ declare namespace RDS {
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     TagList?: TagList;
+    /**
+     * Reserved for future use.
+     */
+    DBSystemId?: String;
   }
   export interface DBClusterSnapshotAttribute {
     /**
@@ -3192,6 +3216,10 @@ declare namespace RDS {
      * A value that indicates whether the engine version supports Babelfish for Aurora PostgreSQL.
      */
     SupportsBabelfish?: Boolean;
+    /**
+     * JSON string that lists the installation files and parameters that RDS Custom uses to create a custom engine version (CEV). RDS Custom applies the patches in the order in which they're listed in the manifest. You can set the Oracle home, Oracle base, and UNIX/Linux user and group using the installation parameters. For more information, see JSON fields in the CEV manifest in the Amazon RDS User Guide. 
+     */
+    CustomDBEngineVersionManifest?: CustomDBEngineVersionManifest;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -3510,6 +3538,10 @@ declare namespace RDS {
      * Specifies the storage throughput for the DB instance. This setting applies only to the gp3 storage type.
      */
     StorageThroughput?: IntegerOptional;
+    /**
+     * The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.
+     */
+    DBSystemId?: String;
   }
   export interface DBInstanceAutomatedBackup {
     /**

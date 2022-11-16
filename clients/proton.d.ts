@@ -61,11 +61,11 @@ declare class Proton extends Service {
    */
   createComponent(callback?: (err: AWSError, data: Proton.Types.CreateComponentOutput) => void): Request<Proton.Types.CreateComponentOutput, AWSError>;
   /**
-   * Deploy a new environment. An Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services.  You can provision environments using the following methods:     Amazon Web Services-managed provisioning – Proton makes direct calls to provision your resources.    Self-managed provisioning – Proton makes pull requests on your repository to provide compiled infrastructure as code (IaC) files that your IaC engine uses to provision resources.    CodeBuild-based provisioning – Proton uses CodeBuild to run shell commands that you provide. Your commands can read inputs that Proton provides, and are responsible for provisioning or deprovisioning infrastructure and generating output values.   For more information, see Environments and Provisioning methods in the Proton User Guide.
+   * Deploy a new environment. An Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services.  You can provision environments using the following methods:    Amazon Web Services-managed provisioning: Proton makes direct calls to provision your resources.   Self-managed provisioning: Proton makes pull requests on your repository to provide compiled infrastructure as code (IaC) files that your IaC engine uses to provision resources.   For more information, see Environments and Provisioning methods in the Proton User Guide.
    */
   createEnvironment(params: Proton.Types.CreateEnvironmentInput, callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentOutput) => void): Request<Proton.Types.CreateEnvironmentOutput, AWSError>;
   /**
-   * Deploy a new environment. An Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services.  You can provision environments using the following methods:     Amazon Web Services-managed provisioning – Proton makes direct calls to provision your resources.    Self-managed provisioning – Proton makes pull requests on your repository to provide compiled infrastructure as code (IaC) files that your IaC engine uses to provision resources.    CodeBuild-based provisioning – Proton uses CodeBuild to run shell commands that you provide. Your commands can read inputs that Proton provides, and are responsible for provisioning or deprovisioning infrastructure and generating output values.   For more information, see Environments and Provisioning methods in the Proton User Guide.
+   * Deploy a new environment. An Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services.  You can provision environments using the following methods:    Amazon Web Services-managed provisioning: Proton makes direct calls to provision your resources.   Self-managed provisioning: Proton makes pull requests on your repository to provide compiled infrastructure as code (IaC) files that your IaC engine uses to provision resources.   For more information, see Environments and Provisioning methods in the Proton User Guide.
    */
   createEnvironment(callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentOutput) => void): Request<Proton.Types.CreateEnvironmentOutput, AWSError>;
   /**
@@ -429,11 +429,11 @@ declare class Proton extends Service {
    */
   listServiceInstanceProvisionedResources(callback?: (err: AWSError, data: Proton.Types.ListServiceInstanceProvisionedResourcesOutput) => void): Request<Proton.Types.ListServiceInstanceProvisionedResourcesOutput, AWSError>;
   /**
-   * List service instances with summary data.
+   * List service instances with summary data. This action lists service instances of all services in the Amazon Web Services account.
    */
   listServiceInstances(params: Proton.Types.ListServiceInstancesInput, callback?: (err: AWSError, data: Proton.Types.ListServiceInstancesOutput) => void): Request<Proton.Types.ListServiceInstancesOutput, AWSError>;
   /**
-   * List service instances with summary data.
+   * List service instances with summary data. This action lists service instances of all services in the Amazon Web Services account.
    */
   listServiceInstances(callback?: (err: AWSError, data: Proton.Types.ListServiceInstancesOutput) => void): Request<Proton.Types.ListServiceInstancesOutput, AWSError>;
   /**
@@ -485,11 +485,11 @@ declare class Proton extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Proton.Types.ListTagsForResourceOutput) => void): Request<Proton.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Notify Proton of the following information related to a provisioned resource (environment, service instance, or service pipeline):   For CodeBuild-based provisioning, provide your provisioned resource output values to Proton.   For self-managed provisioning, notify Proton about the status of your provisioned resource. To disambiguate between different deployments of the same resource, set deploymentId to a unique deployment ID of your choice.  &lt;/li&gt; &lt;/ul&gt; 
+   * Notify Proton of status changes to a provisioned resource when you use self-managed provisioning. For more information, see Self-managed provisioning in the Proton User Guide.
    */
   notifyResourceDeploymentStatusChange(params: Proton.Types.NotifyResourceDeploymentStatusChangeInput, callback?: (err: AWSError, data: Proton.Types.NotifyResourceDeploymentStatusChangeOutput) => void): Request<Proton.Types.NotifyResourceDeploymentStatusChangeOutput, AWSError>;
   /**
-   * Notify Proton of the following information related to a provisioned resource (environment, service instance, or service pipeline):   For CodeBuild-based provisioning, provide your provisioned resource output values to Proton.   For self-managed provisioning, notify Proton about the status of your provisioned resource. To disambiguate between different deployments of the same resource, set deploymentId to a unique deployment ID of your choice.  &lt;/li&gt; &lt;/ul&gt; 
+   * Notify Proton of status changes to a provisioned resource when you use self-managed provisioning. For more information, see Self-managed provisioning in the Proton User Guide.
    */
   notifyResourceDeploymentStatusChange(callback?: (err: AWSError, data: Proton.Types.NotifyResourceDeploymentStatusChangeOutput) => void): Request<Proton.Types.NotifyResourceDeploymentStatusChangeOutput, AWSError>;
   /**
@@ -533,11 +533,11 @@ declare class Proton extends Service {
    */
   updateComponent(callback?: (err: AWSError, data: Proton.Types.UpdateComponentOutput) => void): Request<Proton.Types.UpdateComponentOutput, AWSError>;
   /**
-   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn, codebuildRoleArn, and provisioningRepository parameters. You can only update to a new environment account connection if that connection was created in the same environment account that the current environment account connection was created in. The account connection must also be associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter. You can't update or connect the environment to an environment account connection if it isn't already associated with an environment connection. You can update either environmentAccountConnectionId or one or more of protonServiceRoleArn, codebuildRoleArn, and provisioningRepository. If the environment was configured for Amazon Web Services-managed or CodeBuild-based provisioning, omit the provisioningRepository parameter. If the environment was configured for self-managed provisioning, specify the provisioningRepository parameter and omit the protonServiceRoleArn, codebuildRoleArn, and provisioningRepository parameters. For more information, see Environments and Provisioning methods in the Proton User Guide. There are four modes for updating an environment. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version.  
+   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn and provisioningRepository parameter to update or connect to an environment account connection. You can only update to a new environment account connection if that connection was created in the same environment account that the current environment account connection was created in. The account connection must also be associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter. You can't update or connect the environment to an environment account connection if it isn't already associated with an environment connection. You can update either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. You can’t update both. If the environment was configured for Amazon Web Services-managed provisioning, omit the provisioningRepository parameter. If the environment was configured for self-managed provisioning, specify the provisioningRepository parameter and omit the protonServiceRoleArn and environmentAccountConnectionId parameters. For more information, see Environments and Provisioning methods in the Proton User Guide. There are four modes for updating an environment. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version.  
    */
   updateEnvironment(params: Proton.Types.UpdateEnvironmentInput, callback?: (err: AWSError, data: Proton.Types.UpdateEnvironmentOutput) => void): Request<Proton.Types.UpdateEnvironmentOutput, AWSError>;
   /**
-   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn, codebuildRoleArn, and provisioningRepository parameters. You can only update to a new environment account connection if that connection was created in the same environment account that the current environment account connection was created in. The account connection must also be associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter. You can't update or connect the environment to an environment account connection if it isn't already associated with an environment connection. You can update either environmentAccountConnectionId or one or more of protonServiceRoleArn, codebuildRoleArn, and provisioningRepository. If the environment was configured for Amazon Web Services-managed or CodeBuild-based provisioning, omit the provisioningRepository parameter. If the environment was configured for self-managed provisioning, specify the provisioningRepository parameter and omit the protonServiceRoleArn, codebuildRoleArn, and provisioningRepository parameters. For more information, see Environments and Provisioning methods in the Proton User Guide. There are four modes for updating an environment. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version.  
+   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn and provisioningRepository parameter to update or connect to an environment account connection. You can only update to a new environment account connection if that connection was created in the same environment account that the current environment account connection was created in. The account connection must also be associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter. You can't update or connect the environment to an environment account connection if it isn't already associated with an environment connection. You can update either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. You can’t update both. If the environment was configured for Amazon Web Services-managed provisioning, omit the provisioningRepository parameter. If the environment was configured for self-managed provisioning, specify the provisioningRepository parameter and omit the protonServiceRoleArn and environmentAccountConnectionId parameters. For more information, see Environments and Provisioning methods in the Proton User Guide. There are four modes for updating an environment. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version.  
    */
   updateEnvironment(callback?: (err: AWSError, data: Proton.Types.UpdateEnvironmentOutput) => void): Request<Proton.Types.UpdateEnvironmentOutput, AWSError>;
   /**
@@ -716,7 +716,7 @@ declare namespace Proton {
      */
     pipelineProvisioningRepository?: RepositoryBranch;
     /**
-     * The Amazon Resource Name (ARN) of the service role that Proton uses for provisioning pipelines. Proton assumes this role for Amazon Web Services-managed provisioning.
+     * The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Assumed by Proton for Amazon Web Services-managed provisioning, and by customer-owned automation for self-managed provisioning.
      */
     pipelineServiceRoleArn?: RoleArnOrEmptyString;
   }
@@ -955,7 +955,7 @@ declare namespace Proton {
      */
     codebuildRoleArn?: RoleArn;
     /**
-     * The Amazon Resource Name (ARN) of an IAM service role in the environment account. Proton uses this role to provision directly defined components in the associated environment account. It determines the scope of infrastructure that a component can provision in the account. You must specify componentRoleArn to allow directly defined components to be associated with any environments running in this account. For more information about components, see Proton components in the Proton User Guide.
+     * The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated environment account. It determines the scope of infrastructure that a component can provision in the account. You must specify componentRoleArn to allow directly defined components to be associated with any environments running in this account. For more information about components, see Proton components in the Proton User Guide.
      */
     componentRoleArn?: RoleArn;
     /**
@@ -967,7 +967,7 @@ declare namespace Proton {
      */
     managementAccountId: AwsAccountId;
     /**
-     * The Amazon Resource Name (ARN) of an IAM service role in the environment account. Proton uses this role to provision infrastructure resources using Amazon Web Services-managed provisioning and CloudFormation in the associated environment account.
+     * The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. Proton uses this role to provision infrastructure resources in the associated environment account.
      */
     roleArn: RoleArn;
     /**
@@ -995,7 +995,7 @@ declare namespace Proton {
      */
     description?: Description;
     /**
-     * The ID of the environment account connection that you provide if you want Proton to provision infrastructure resources for your environment or for any of the service instances running in it in an environment account. For more information, see Environment account connections in the Proton User guide. If you specify the environmentAccountConnectionId parameter, don't specify protonServiceRoleArn, codebuildRoleArn, or provisioningRepository.
+     * The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account. For more information, see Environment account connections in the Proton User guide. To use Amazon Web Services-managed provisioning for the environment, specify either the environmentAccountConnectionId or protonServiceRoleArn parameter and omit the provisioningRepository parameter.
      */
     environmentAccountConnectionId?: EnvironmentAccountConnectionId;
     /**
@@ -1003,11 +1003,11 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using Amazon Web Services-managed provisioning and CloudFormation on your behalf. To use Amazon Web Services-managed provisioning for the environment or for any service instance running in the environment, specify either the environmentAccountConnectionId or protonServiceRoleArn parameter.
+     * The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make calls to other services on your behalf. To use Amazon Web Services-managed provisioning for the environment, specify either the environmentAccountConnectionId or protonServiceRoleArn parameter and omit the provisioningRepository parameter.
      */
     protonServiceRoleArn?: Arn;
     /**
-     * The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning. A linked repository is a repository that has been registered with Proton. For more information, see CreateRepository. To use self-managed provisioning for the environment or for any service instance running in the environment, specify this parameter.
+     * The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning. A linked repository is a repository that has been registered with Proton. For more information, see CreateRepository. To use self-managed provisioning for the environment, specify this parameter and omit the environmentAccountConnectionId and protonServiceRoleArn parameters.
      */
     provisioningRepository?: RepositoryBranchInput;
     /**
@@ -1461,7 +1461,7 @@ declare namespace Proton {
      */
     description?: Description;
     /**
-     * The ID of the environment account connection that Proton uses to provision infrastructure resources in an environment account.
+     * The ID of the environment account connection that's used to provision infrastructure resources in an environment account.
      */
     environmentAccountConnectionId?: EnvironmentAccountConnectionId;
     /**
@@ -1481,7 +1481,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using Amazon Web Services-managed provisioning and CloudFormation on your behalf.
+     * The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make calls to other services on your behalf.
      */
     protonServiceRoleArn?: Arn;
     /**
@@ -1547,7 +1547,7 @@ declare namespace Proton {
      */
     requestedAt: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) of an IAM service role in the environment account. Proton uses this role to provision infrastructure resources using Amazon Web Services-managed provisioning and CloudFormation in the associated environment account.
+     * The IAM service role that's associated with the environment account connection.
      */
     roleArn: Arn;
     /**
@@ -2380,7 +2380,24 @@ declare namespace Proton {
      */
     provisionedResources: ProvisionedResourceList;
   }
+  export interface ListServiceInstancesFilter {
+    /**
+     * The name of a filtering criterion.
+     */
+    key?: ListServiceInstancesFilterBy;
+    /**
+     * A value to filter by. With the date/time keys (*At{Before,After}), the value is a valid RFC 3339 string with no UTC offset and with an optional fractional precision (for example, 1985-04-12T23:20:50.52Z).
+     */
+    value?: ListServiceInstancesFilterValue;
+  }
+  export type ListServiceInstancesFilterBy = "name"|"deploymentStatus"|"templateName"|"serviceName"|"deployedTemplateVersionStatus"|"environmentName"|"lastDeploymentAttemptedAtBefore"|"lastDeploymentAttemptedAtAfter"|"createdAtBefore"|"createdAtAfter"|string;
+  export type ListServiceInstancesFilterList = ListServiceInstancesFilter[];
+  export type ListServiceInstancesFilterValue = string;
   export interface ListServiceInstancesInput {
+    /**
+     * An array of filtering criteria that scope down the result list. By default, all service instances in the Amazon Web Services account are returned.
+     */
+    filters?: ListServiceInstancesFilterList;
     /**
      * The maximum number of service instances to list.
      */
@@ -2393,6 +2410,14 @@ declare namespace Proton {
      * The name of the service that the service instance belongs to.
      */
     serviceName?: ResourceName;
+    /**
+     * The field that the result list is sorted by. When you choose to sort by serviceName, service instances within each service are sorted by service instance name. Default: serviceName 
+     */
+    sortBy?: ListServiceInstancesSortBy;
+    /**
+     * Result list sort order. Default: ASCENDING 
+     */
+    sortOrder?: SortOrder;
   }
   export interface ListServiceInstancesOutput {
     /**
@@ -2404,6 +2429,7 @@ declare namespace Proton {
      */
     serviceInstances: ServiceInstanceSummaryList;
   }
+  export type ListServiceInstancesSortBy = "name"|"deploymentStatus"|"templateName"|"serviceName"|"environmentName"|"lastDeploymentAttemptedAt"|"createdAt"|string;
   export interface ListServicePipelineOutputsInput {
     /**
      * A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
@@ -2540,15 +2566,15 @@ declare namespace Proton {
   export type NextToken = string;
   export interface NotifyResourceDeploymentStatusChangeInput {
     /**
-     * The deployment ID for your provisioned resource. Proton uses it to disambiguate different deployments of the resource. Applicable to self-managed provisioning.
+     * The deployment ID for your provisioned resource.
      */
     deploymentId?: DeploymentId;
     /**
-     * The output values generated by your provisioned resource.
+     * The provisioned resource state change detail data that's returned by Proton.
      */
     outputs?: NotifyResourceDeploymentStatusChangeInputOutputsList;
     /**
-     * The Amazon Resource Name (ARN) of your provisioned resource.
+     * The provisioned resource Amazon Resource Name (ARN).
      */
     resourceArn: Arn;
     /**
@@ -3233,6 +3259,7 @@ declare namespace Proton {
     templateName: ResourceName;
   }
   export type ServiceTemplateVersionSummaryList = ServiceTemplateVersionSummary[];
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SpecContents = string;
   export type StatusMessage = string;
   export type String = string;
@@ -3389,7 +3416,7 @@ declare namespace Proton {
      */
     id: EnvironmentAccountConnectionId;
     /**
-     * The Amazon Resource Name (ARN) of an IAM service role in the environment account. Proton uses this role to provision infrastructure resources using Amazon Web Services-managed provisioning and CloudFormation in the associated environment account.
+     * The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.
      */
     roleArn?: RoleArn;
   }
@@ -3417,7 +3444,7 @@ declare namespace Proton {
      */
     description?: Description;
     /**
-     * The ID of the environment account connection that you provide if you want Proton to provision infrastructure resources for your environment or for any of the service instances running in it in an environment account. For more information, see Environment account connections in the Proton User guide. You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment.
+     * The ID of the environment account connection. You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment.
      */
     environmentAccountConnectionId?: EnvironmentAccountConnectionId;
     /**
@@ -3425,7 +3452,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using Amazon Web Services-managed provisioning and CloudFormation on your behalf.
+     * The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make API calls to other services your behalf.
      */
     protonServiceRoleArn?: Arn;
     /**

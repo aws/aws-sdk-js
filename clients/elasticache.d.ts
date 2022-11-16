@@ -601,7 +601,17 @@ declare namespace ElastiCache {
      */
     PasswordCount?: IntegerOptional;
   }
-  export type AuthenticationType = "password"|"no-password"|string;
+  export interface AuthenticationMode {
+    /**
+     * Specifies the authentication type. Possible options are IAM authentication, password and no password.
+     */
+    Type?: InputAuthenticationType;
+    /**
+     * Specifies the passwords to use for authentication if Type is set to password.
+     */
+    Passwords?: PasswordListInput;
+  }
+  export type AuthenticationType = "password"|"no-password"|"iam"|string;
   export interface AuthorizeCacheSecurityGroupIngressMessage {
     /**
      * The cache security group that allows network ingress.
@@ -1585,6 +1595,10 @@ declare namespace ElastiCache {
      * A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.
      */
     Tags?: TagList;
+    /**
+     * Specifies how to authenticate the user.
+     */
+    AuthenticationMode?: AuthenticationMode;
   }
   export interface CustomerNodeEndpoint {
     /**
@@ -2422,6 +2436,7 @@ declare namespace ElastiCache {
   export interface IncreaseReplicaCountResult {
     ReplicationGroup?: ReplicationGroup;
   }
+  export type InputAuthenticationType = "password"|"no-password-required"|"iam"|string;
   export type Integer = number;
   export type IntegerOptional = number;
   export type IpDiscovery = "ipv4"|"ipv6"|string;
@@ -2823,6 +2838,10 @@ declare namespace ElastiCache {
      * Indicates no password is required for the user.
      */
     NoPasswordRequired?: BooleanOptional;
+    /**
+     * Specifies how to authenticate the user.
+     */
+    AuthenticationMode?: AuthenticationMode;
   }
   export type MultiAZStatus = "enabled"|"disabled"|string;
   export type NetworkType = "ipv4"|"ipv6"|"dual_stack"|string;

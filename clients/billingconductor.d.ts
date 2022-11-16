@@ -389,6 +389,7 @@ declare namespace Billingconductor {
      */
     FailedDisassociatedResources?: DisassociateResourcesResponseList;
   }
+  export type BillingEntity = string;
   export type BillingGroupArn = string;
   export type BillingGroupArnList = BillingGroupArn[];
   export interface BillingGroupCostReportElement {
@@ -604,6 +605,10 @@ declare namespace Billingconductor {
      *  A map that contains tag keys and tag values that are attached to a pricing rule. 
      */
     Tags?: TagMap;
+    /**
+     *  The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. 
+     */
+    BillingEntity?: BillingEntity;
   }
   export interface CreatePricingRuleOutput {
     /**
@@ -1372,9 +1377,13 @@ declare namespace Billingconductor {
      *  The most recent time when the pricing rule was modified. 
      */
     LastModifiedTime?: Instant;
+    /**
+     *  The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. 
+     */
+    BillingEntity?: BillingEntity;
   }
   export type PricingRuleName = string;
-  export type PricingRuleScope = "GLOBAL"|"SERVICE"|string;
+  export type PricingRuleScope = "GLOBAL"|"SERVICE"|"BILLING_ENTITY"|string;
   export type PricingRuleType = "MARKUP"|"DISCOUNT"|string;
   export type ProformaCost = string;
   export type Service = string;
@@ -1634,6 +1643,10 @@ declare namespace Billingconductor {
      *  The most recent time the pricing rule was modified. 
      */
     LastModifiedTime?: Instant;
+    /**
+     *  The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. 
+     */
+    BillingEntity?: BillingEntity;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

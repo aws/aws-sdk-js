@@ -29,11 +29,11 @@ declare class EKS extends Service {
    */
   associateIdentityProviderConfig(callback?: (err: AWSError, data: EKS.Types.AssociateIdentityProviderConfigResponse) => void): Request<EKS.Types.AssociateIdentityProviderConfigResponse, AWSError>;
   /**
-   * Creates an Amazon EKS add-on. Amazon EKS add-ons help to automate the provisioning and lifecycle management of common operational software for Amazon EKS clusters. Amazon EKS add-ons require clusters running version 1.18 or later because Amazon EKS add-ons rely on the Server-side Apply Kubernetes feature, which is only available in Kubernetes 1.18 and later. For more information, see Amazon EKS add-ons in the Amazon EKS User Guide.
+   * Creates an Amazon EKS add-on. Amazon EKS add-ons help to automate the provisioning and lifecycle management of common operational software for Amazon EKS clusters. For more information, see Amazon EKS add-ons in the Amazon EKS User Guide.
    */
   createAddon(params: EKS.Types.CreateAddonRequest, callback?: (err: AWSError, data: EKS.Types.CreateAddonResponse) => void): Request<EKS.Types.CreateAddonResponse, AWSError>;
   /**
-   * Creates an Amazon EKS add-on. Amazon EKS add-ons help to automate the provisioning and lifecycle management of common operational software for Amazon EKS clusters. Amazon EKS add-ons require clusters running version 1.18 or later because Amazon EKS add-ons rely on the Server-side Apply Kubernetes feature, which is only available in Kubernetes 1.18 and later. For more information, see Amazon EKS add-ons in the Amazon EKS User Guide.
+   * Creates an Amazon EKS add-on. Amazon EKS add-ons help to automate the provisioning and lifecycle management of common operational software for Amazon EKS clusters. For more information, see Amazon EKS add-ons in the Amazon EKS User Guide.
    */
   createAddon(callback?: (err: AWSError, data: EKS.Types.CreateAddonResponse) => void): Request<EKS.Types.CreateAddonResponse, AWSError>;
   /**
@@ -660,6 +660,18 @@ declare namespace EKS {
      */
     roleArn?: String;
   }
+  export interface ControlPlanePlacementRequest {
+    /**
+     * The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation. 
+     */
+    groupName?: String;
+  }
+  export interface ControlPlanePlacementResponse {
+    /**
+     * The name of the placement group for the Kubernetes control plane instances.
+     */
+    groupName?: String;
+  }
   export interface CreateAddonRequest {
     /**
      * The name of the cluster to create the add-on for.
@@ -731,7 +743,7 @@ declare namespace EKS {
      */
     encryptionConfig?: EncryptionConfigList;
     /**
-     * An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review Creating an Amazon EKS cluster on an Amazon Web Services Outpost in the Amazon EKS User Guide. This object isn't available for creating Amazon EKS clusters on the Amazon Web Services cloud.
+     * An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review Local clusters for Amazon EKS on Amazon Web Services Outposts in the Amazon EKS User Guide. This object isn't available for creating Amazon EKS clusters on the Amazon Web Services cloud.
      */
     outpostConfig?: OutpostConfigRequest;
   }
@@ -1219,7 +1231,7 @@ declare namespace EKS {
      */
     name?: String;
     /**
-     * The launch template version number, $Latest, or $Default. If the value is $Latest, Amazon EKS uses the latest version of the launch template. If the value is $Default, Amazon EKS uses the default version of the launch template. Default: The default version of the launch template.
+     * The version number of the launch template to use. If no version is specified, then the template's default version is used.
      */
     version?: String;
     /**
@@ -1648,9 +1660,13 @@ declare namespace EKS {
      */
     outpostArns: StringList;
     /**
-     * The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. Choose an instance type based on the number of nodes that your cluster will have. If your cluster will have:   1–20 nodes, then we recommend specifying a large instance type.   21–100 nodes, then we recommend specifying an xlarge instance type.   101–250 nodes, then we recommend specifying a 2xlarge instance type.   For a list of the available Amazon EC2 instance types, see Compute and storage in Outposts rack features. The control plane is not automatically scaled by Amazon EKS.
+     * The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. Choose an instance type based on the number of nodes that your cluster will have. For more information, see Capacity considerations in the Amazon EKS User Guide. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. The control plane is not automatically scaled by Amazon EKS.  
      */
     controlPlaneInstanceType: String;
+    /**
+     * An object representing the placement configuration for all the control plane instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see Capacity considerations in the Amazon EKS User Guide.
+     */
+    controlPlanePlacement?: ControlPlanePlacementRequest;
   }
   export interface OutpostConfigResponse {
     /**
@@ -1661,6 +1677,10 @@ declare namespace EKS {
      * The Amazon EC2 instance type used for the control plane. The instance type is the same for all control plane instances.
      */
     controlPlaneInstanceType: String;
+    /**
+     * An object representing the placement configuration for all the control plane instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see Capacity considerations in the Amazon EKS User Guide.
+     */
+    controlPlanePlacement?: ControlPlanePlacementResponse;
   }
   export type PercentCapacity = number;
   export interface Provider {
@@ -1947,7 +1967,7 @@ declare namespace EKS {
      */
     subnetIds?: StringList;
     /**
-     * Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don't specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:   1.14 Amazon EKS platform version eks.2 and earlier   1.14 Amazon EKS platform version eks.3 and later    For more information, see Amazon EKS security group considerations in the  Amazon EKS User Guide .
+     * Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use that allow communication between your nodes and the Kubernetes control plane. If you don't specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes. For more information, see Amazon EKS security group considerations in the  Amazon EKS User Guide .
      */
     securityGroupIds?: StringList;
     /**

@@ -197,6 +197,14 @@ declare class SSM extends Service {
    */
   deleteResourceDataSync(callback?: (err: AWSError, data: SSM.Types.DeleteResourceDataSyncResult) => void): Request<SSM.Types.DeleteResourceDataSyncResult, AWSError>;
   /**
+   * Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   */
+  deleteResourcePolicy(params: SSM.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: SSM.Types.DeleteResourcePolicyResponse) => void): Request<SSM.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: SSM.Types.DeleteResourcePolicyResponse) => void): Request<SSM.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
    * Removes the server or virtual machine from the list of registered servers. You can reregister the node again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
    */
   deregisterManagedInstance(params: SSM.Types.DeregisterManagedInstanceRequest, callback?: (err: AWSError, data: SSM.Types.DeregisterManagedInstanceResult) => void): Request<SSM.Types.DeregisterManagedInstanceResult, AWSError>;
@@ -677,6 +685,14 @@ declare class SSM extends Service {
    */
   getPatchBaselineForPatchGroup(callback?: (err: AWSError, data: SSM.Types.GetPatchBaselineForPatchGroupResult) => void): Request<SSM.Types.GetPatchBaselineForPatchGroupResult, AWSError>;
   /**
+   * Returns an array of the Policy object.
+   */
+  getResourcePolicies(params: SSM.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: SSM.Types.GetResourcePoliciesResponse) => void): Request<SSM.Types.GetResourcePoliciesResponse, AWSError>;
+  /**
+   * Returns an array of the Policy object.
+   */
+  getResourcePolicies(callback?: (err: AWSError, data: SSM.Types.GetResourcePoliciesResponse) => void): Request<SSM.Types.GetResourcePoliciesResponse, AWSError>;
+  /**
    *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the Amazon Web Services account. 
    */
   getServiceSetting(params: SSM.Types.GetServiceSettingRequest, callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
@@ -852,6 +868,14 @@ declare class SSM extends Service {
    * Add a parameter to the system.
    */
   putParameter(callback?: (err: AWSError, data: SSM.Types.PutParameterResult) => void): Request<SSM.Types.PutParameterResult, AWSError>;
+  /**
+   * Creates or updates a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   */
+  putResourcePolicy(params: SSM.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: SSM.Types.PutResourcePolicyResponse) => void): Request<SSM.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Creates or updates a Systems Manager resource policy. A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: SSM.Types.PutResourcePolicyResponse) => void): Request<SSM.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Defines the default patch baseline for the relevant operating system. To reset the Amazon Web Services-predefined patch baseline as the default, specify the full patch baseline Amazon Resource Name (ARN) as the baseline ID value. For example, for CentOS, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed instead of pb-0574b43a65ea646ed.
    */
@@ -2458,7 +2482,7 @@ declare namespace SSM {
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
-     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed node. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.
+     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed node. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.  You can't specify an IAM service-linked role for this parameter. You must create a unique role. 
      */
     IamRole: IamRole;
     /**
@@ -2775,7 +2799,7 @@ declare namespace SSM {
      */
     Description: OpsItemDescription;
     /**
-     * The type of OpsItem to create. Currently, the only valid values are /aws/changerequest and /aws/issue.
+     * The type of OpsItem to create. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insights  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
      */
     OpsItemType?: OpsItemType;
     /**
@@ -2830,12 +2854,20 @@ declare namespace SSM {
      * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
      */
     PlannedEndTime?: DateTime;
+    /**
+     * The target Amazon Web Services account where you want to create an OpsItem. To make this call, your account must be configured to work with OpsItems across accounts. For more information, see Setting up OpsCenter to work with OpsItems across accounts in the Amazon Web Services Systems Manager User Guide.
+     */
+    AccountId?: OpsItemAccountId;
   }
   export interface CreateOpsItemResponse {
     /**
      * The ID of the OpsItem.
      */
     OpsItemId?: String;
+    /**
+     * The OpsItem Amazon Resource Name (ARN).
+     */
+    OpsItemArn?: OpsItemArn;
   }
   export interface CreateOpsMetadataRequest {
     /**
@@ -3084,6 +3116,22 @@ declare namespace SSM {
     SyncType?: ResourceDataSyncType;
   }
   export interface DeleteResourceDataSyncResult {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * Amazon Resource Name (ARN) of the resource to which the policies are attached.
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * The policy ID.
+     */
+    PolicyId: PolicyId;
+    /**
+     * ID of the current policy version. The hash helps to prevent multiple calls from attempting to overwrite a policy.
+     */
+    PolicyHash: PolicyHash;
+  }
+  export interface DeleteResourcePolicyResponse {
   }
   export type DeliveryTimedOutCount = number;
   export interface DeregisterManagedInstanceRequest {
@@ -5137,6 +5185,10 @@ declare namespace SSM {
      * The ID of the OpsItem that you want to get.
      */
     OpsItemId: OpsItemId;
+    /**
+     * The OpsItem Amazon Resource Name (ARN).
+     */
+    OpsItemArn?: OpsItemArn;
   }
   export interface GetOpsItemResponse {
     /**
@@ -5401,6 +5453,45 @@ declare namespace SSM {
      * Information about the patches to use to update the managed nodes, including target operating systems and source repositories. Applies to Linux managed nodes only.
      */
     Sources?: PatchSourceList;
+  }
+  export interface GetResourcePoliciesRequest {
+    /**
+     * Amazon Resource Name (ARN) of the resource to which the policies are attached.
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: ResourcePolicyMaxResults;
+  }
+  export interface GetResourcePoliciesResponse {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * An array of the Policy object.
+     */
+    Policies?: GetResourcePoliciesResponseEntries;
+  }
+  export type GetResourcePoliciesResponseEntries = GetResourcePoliciesResponseEntry[];
+  export interface GetResourcePoliciesResponseEntry {
+    /**
+     * A policy ID.
+     */
+    PolicyId?: PolicyId;
+    /**
+     * ID of the current policy version. The hash helps to prevent a situation where multiple users attempt to overwrite a policy. You must provide this hash when updating or deleting a policy.
+     */
+    PolicyHash?: PolicyHash;
+    /**
+     * A resource policy helps you to define the IAM entity (for example, an Amazon Web Services account) that can manage your Systems Manager resources. Currently, OpsItemGroup is the only resource that supports Systems Manager resource policies. The resource policy for OpsItemGroup enables Amazon Web Services accounts to view and interact with OpsCenter operational work items (OpsItems).
+     */
+    Policy?: Policy;
   }
   export interface GetServiceSettingRequest {
     /**
@@ -7049,7 +7140,7 @@ declare namespace SSM {
      */
     CreatedBy?: String;
     /**
-     * The type of OpsItem. Currently, the only valid values are /aws/changerequest and /aws/issue.
+     * The type of OpsItem. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insights  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
      */
     OpsItemType?: OpsItemType;
     /**
@@ -7128,7 +7219,13 @@ declare namespace SSM {
      * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
      */
     PlannedEndTime?: DateTime;
+    /**
+     * The OpsItem Amazon Resource Name (ARN).
+     */
+    OpsItemArn?: OpsItemArn;
   }
+  export type OpsItemAccountId = string;
+  export type OpsItemArn = string;
   export type OpsItemCategory = string;
   export type OpsItemDataKey = string;
   export type OpsItemDataType = "SearchableString"|"String"|string;
@@ -7209,7 +7306,7 @@ declare namespace SSM {
      */
     Operator: OpsItemFilterOperator;
   }
-  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"ActualStartTime"|"ActualEndTime"|"PlannedStartTime"|"PlannedEndTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|"OpsItemType"|"ChangeRequestByRequesterArn"|"ChangeRequestByRequesterName"|"ChangeRequestByApproverArn"|"ChangeRequestByApproverName"|"ChangeRequestByTemplate"|"ChangeRequestByTargetsResourceGroup"|"InsightByType"|string;
+  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"ActualStartTime"|"ActualEndTime"|"PlannedStartTime"|"PlannedEndTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|"Category"|"Severity"|"OpsItemType"|"ChangeRequestByRequesterArn"|"ChangeRequestByRequesterName"|"ChangeRequestByApproverArn"|"ChangeRequestByApproverName"|"ChangeRequestByTemplate"|"ChangeRequestByTargetsResourceGroup"|"InsightByType"|"AccountId"|string;
   export type OpsItemFilterOperator = "Equal"|"Contains"|"GreaterThan"|"LessThan"|string;
   export type OpsItemFilterValue = string;
   export type OpsItemFilterValues = OpsItemFilterValue[];
@@ -7343,7 +7440,7 @@ declare namespace SSM {
      */
     Severity?: OpsItemSeverity;
     /**
-     * The type of OpsItem. Currently, the only valid values are /aws/changerequest and /aws/issue.
+     * The type of OpsItem. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insights  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
      */
     OpsItemType?: OpsItemType;
     /**
@@ -7941,6 +8038,9 @@ declare namespace SSM {
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
   export type PlatformType = "Windows"|"Linux"|"MacOS"|string;
   export type PlatformTypeList = PlatformType[];
+  export type Policy = string;
+  export type PolicyHash = string;
+  export type PolicyId = string;
   export type Product = string;
   export interface ProgressCounters {
     /**
@@ -8068,6 +8168,34 @@ declare namespace SSM {
      * The tier assigned to the parameter.
      */
     Tier?: ParameterTier;
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * Amazon Resource Name (ARN) of the resource to which the policies are attached.
+     */
+    ResourceArn: ResourceArnString;
+    /**
+     * A policy you want to associate with a resource.
+     */
+    Policy: Policy;
+    /**
+     * The policy ID.
+     */
+    PolicyId?: PolicyId;
+    /**
+     * ID of the current policy version. The hash helps to prevent a situation where multiple users attempt to overwrite a policy.
+     */
+    PolicyHash?: PolicyHash;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The policy ID. To update a policy, you must specify PolicyId and PolicyHash.
+     */
+    PolicyId?: PolicyId;
+    /**
+     * ID of the current policy version. The hash helps to prevent a situation where multiple users attempt to overwrite a policy. You must provide this hash when updating or deleting a policy.
+     */
+    PolicyHash?: PolicyHash;
   }
   export type RebootOption = "RebootIfNeeded"|"NoReboot"|string;
   export type Region = string;
@@ -8273,6 +8401,7 @@ declare namespace SSM {
      */
     Truncated?: Boolean;
   }
+  export type ResourceArnString = string;
   export interface ResourceComplianceSummaryItem {
     /**
      * The compliance type.
@@ -8469,6 +8598,7 @@ declare namespace SSM {
   export type ResourceDataSyncState = string;
   export type ResourceDataSyncType = string;
   export type ResourceId = string;
+  export type ResourcePolicyMaxResults = number;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
   export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|"OpsMetadata"|"Automation"|"Association"|string;
   export type ResponseCode = number;
@@ -9690,7 +9820,7 @@ declare namespace SSM {
      */
     InstanceId: ManagedInstanceId;
     /**
-     * The IAM role you want to assign or change.
+     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed node. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.  You can't specify an IAM service-linked role for this parameter. You must create a unique role. 
      */
     IamRole: IamRole;
   }
@@ -9757,6 +9887,10 @@ declare namespace SSM {
      * The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type /aws/changerequest.
      */
     PlannedEndTime?: DateTime;
+    /**
+     * The OpsItem Amazon Resource Name (ARN).
+     */
+    OpsItemArn?: OpsItemArn;
   }
   export interface UpdateOpsItemResponse {
   }
