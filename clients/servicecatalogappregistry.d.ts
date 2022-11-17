@@ -100,6 +100,10 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   getAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse, AWSError>;
   /**
+   *  Retrieves a TagKey configuration from an account. 
+   */
+  getConfiguration(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetConfigurationResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetConfigurationResponse, AWSError>;
+  /**
    * Retrieves a list of all of your applications. Results are paginated.
    */
   listApplications(params: ServiceCatalogAppRegistry.Types.ListApplicationsRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListApplicationsResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListApplicationsResponse, AWSError>;
@@ -116,11 +120,11 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   listAssociatedAttributeGroups(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAssociatedAttributeGroupsResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAssociatedAttributeGroupsResponse, AWSError>;
   /**
-   * Lists all resources that are associated with specified application. Results are paginated.
+   *  Lists all of the resources that are associated with the specified application. Results are paginated.    If you share an application, and a consumer account associates a tag query to the application, all of the users who can access the application can also view the tag values in all accounts that are associated with it using this API.  
    */
   listAssociatedResources(params: ServiceCatalogAppRegistry.Types.ListAssociatedResourcesRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAssociatedResourcesResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAssociatedResourcesResponse, AWSError>;
   /**
-   * Lists all resources that are associated with specified application. Results are paginated.
+   *  Lists all of the resources that are associated with the specified application. Results are paginated.    If you share an application, and a consumer account associates a tag query to the application, all of the users who can access the application can also view the tag values in all accounts that are associated with it using this API.  
    */
   listAssociatedResources(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListAssociatedResourcesResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListAssociatedResourcesResponse, AWSError>;
   /**
@@ -147,6 +151,14 @@ declare class ServiceCatalogAppRegistry extends Service {
    * Lists all of the tags on the resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  Associates a TagKey configuration to an account. 
+   */
+  putConfiguration(params: ServiceCatalogAppRegistry.Types.PutConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Associates a TagKey configuration to an account. 
+   */
+  putConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Syncs the resource with current AppRegistry records. Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.
    */
@@ -189,6 +201,12 @@ declare class ServiceCatalogAppRegistry extends Service {
   updateAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.UpdateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.UpdateAttributeGroupResponse, AWSError>;
 }
 declare namespace ServiceCatalogAppRegistry {
+  export interface AppRegistryConfiguration {
+    /**
+     *  Includes the definition of a tagQuery. 
+     */
+    tagQueryConfiguration?: TagQueryConfiguration;
+  }
   export interface Application {
     /**
      * The identifier of the application.
@@ -336,7 +354,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     arn?: AttributeGroupArn;
     /**
-     * The name of the attribute group. 
+     *   This field is no longer supported. We recommend you don't use the field when using ListAttributeGroupsForApplication.    The name of the attribute group. 
      */
     name?: Name;
   }
@@ -534,7 +552,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     tags?: Tags;
     /**
-     * The information about the integration of the application with other services, such as Resource Groups.
+     *  The information about the integration of the application with other services, such as Resource Groups. 
      */
     integrations?: Integrations;
   }
@@ -597,6 +615,12 @@ declare namespace ServiceCatalogAppRegistry {
      * Key-value pairs associated with the attribute group.
      */
     tags?: Tags;
+  }
+  export interface GetConfigurationResponse {
+    /**
+     *  Retrieves TagKey configuration from an account. 
+     */
+    configuration?: AppRegistryConfiguration;
   }
   export interface Integrations {
     /**
@@ -688,7 +712,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface ListAttributeGroupsForApplicationResponse {
     /**
-     *  The details related to a specific AttributeGroup. 
+     *  The details related to a specific attribute group. 
      */
     attributeGroupsDetails?: AttributeGroupDetailsList;
     /**
@@ -731,6 +755,12 @@ declare namespace ServiceCatalogAppRegistry {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
+  export interface PutConfigurationRequest {
+    /**
+     *  Associates a TagKey configuration to an account. 
+     */
+    configuration: AppRegistryConfiguration;
+  }
   export interface Resource {
     /**
      * The name of the resource.
@@ -748,6 +778,12 @@ declare namespace ServiceCatalogAppRegistry {
      * The service integration information about the resource. 
      */
     integrations?: ResourceIntegrations;
+  }
+  export interface ResourceDetails {
+    /**
+     * The value of the tag.
+     */
+    tagValue?: TagValue;
   }
   export interface ResourceGroup {
     /**
@@ -772,7 +808,15 @@ declare namespace ServiceCatalogAppRegistry {
     /**
      * The Amazon resource name (ARN) that specifies the resource across services.
      */
-    arn?: StackArn;
+    arn?: Arn;
+    /**
+     *  Provides information about the Service Catalog App Registry resource type. 
+     */
+    resourceType?: ResourceType;
+    /**
+     *  The details related to the resource. 
+     */
+    resourceDetails?: ResourceDetails;
   }
   export interface ResourceIntegrations {
     /**
@@ -781,7 +825,7 @@ declare namespace ServiceCatalogAppRegistry {
     resourceGroup?: ResourceGroup;
   }
   export type ResourceSpecifier = string;
-  export type ResourceType = "CFN_STACK"|string;
+  export type ResourceType = "CFN_STACK"|"RESOURCE_TAG_VALUE"|string;
   export type Resources = ResourceInfo[];
   export type StackArn = string;
   export type String = string;
@@ -811,7 +855,14 @@ declare namespace ServiceCatalogAppRegistry {
     actionTaken?: SyncAction;
   }
   export type TagKey = string;
+  export type TagKeyConfig = string;
   export type TagKeys = TagKey[];
+  export interface TagQueryConfiguration {
+    /**
+     *  Condition in the IAM policy that associates resources to an application. 
+     */
+    tagKey?: TagKeyConfig;
+  }
   export interface TagResourceRequest {
     /**
      * The Amazon resource name (ARN) that specifies the resource.

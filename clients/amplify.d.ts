@@ -337,7 +337,7 @@ declare namespace Amplify {
      */
     repository: Repository;
     /**
-     *  The platform for the Amplify app. 
+     *  The platform for the Amplify app. For a static app, set the platform type to WEB. For a dynamic server-side rendered (SSR) app, set the platform type to WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only, set the platform type to WEB_DYNAMIC.
      */
     platform: Platform;
     /**
@@ -639,7 +639,7 @@ declare namespace Amplify {
      */
     repository?: Repository;
     /**
-     *  The platform or framework for an Amplify app. 
+     *  The platform for the Amplify app. For a static app, set the platform type to WEB. For a dynamic server-side rendered (SSR) app, set the platform type to WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only, set the platform type to WEB_DYNAMIC.
      */
     platform?: Platform;
     /**
@@ -1438,7 +1438,7 @@ declare namespace Amplify {
   export type Name = string;
   export type NextToken = string;
   export type OauthToken = string;
-  export type Platform = "WEB"|"WEB_DYNAMIC"|string;
+  export type Platform = "WEB"|"WEB_DYNAMIC"|"WEB_COMPUTE"|string;
   export interface ProductionBranch {
     /**
      *  The last deploy time of the production branch. 
@@ -1677,7 +1677,7 @@ declare namespace Amplify {
      */
     description?: Description;
     /**
-     *  The platform for an Amplify app. 
+     *  The platform for the Amplify app. For a static app, set the platform type to WEB. For a dynamic server-side rendered (SSR) app, set the platform type to WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only, set the platform type to WEB_DYNAMIC.
      */
     platform?: Platform;
     /**

@@ -1,6 +1,24 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1256.0-->
+<!--LATEST=2.1257.0-->
 <!--ENTRYINSERT-->
+
+## 2.1257.0
+* feature: Amplify: Adds a new value (WEB_COMPUTE) to the Platform enum that allows customers to create Amplify Apps with Server-Side Rendering support.
+* feature: AppSync: This release introduces the APPSYNC_JS runtime, and adds support for JavaScript in AppSync functions and AppSync pipeline resolvers.
+* feature: Appflow: AppFlow simplifies the preparation and cataloging of SaaS data into the AWS Glue Data Catalog where your data can be discovered and accessed by AWS analytics and ML services. AppFlow now also supports data field partitioning and file size optimization to improve query performance and reduce cost.
+* feature: DMS: Adds support for Internet Protocol Version 6 (IPv6) on DMS Replication Instances
+* feature: EC2: This release adds a new optional parameter "privateIpAddress" for the CreateNatGateway API. PrivateIPAddress will allow customers to select a custom Private IPv4 address instead of having it be auto-assigned.
+* feature: EMRServerless: Adds support for AWS Graviton2 based applications. You can now select CPU architecture when creating new applications or updating existing ones.
+* feature: Ivschat: Adds LoggingConfiguration APIs for IVS Chat - a feature that allows customers to store and record sent messages in a chat room to S3 buckets, CloudWatch logs, or Kinesis firehose.
+* feature: Lambda: Add Node 18 (nodejs18.x) support to AWS Lambda.
+* feature: Personalize: This release provides support for creation and use of metric attributions in AWS Personalize
+* feature: Polly: Add two new neural voices - Ola (pl-PL) and Hala (ar-AE).
+* feature: RUM: CloudWatch RUM now supports custom events. To use custom events, create an app monitor or update an app monitor with CustomEvent Status as ENABLED.
+* feature: S3Control: Added 34 new S3 Storage Lens metrics to support additional customer use cases.
+* feature: SecurityHub: Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail
+* feature: ServiceCatalogAppRegistry: This release adds support for tagged resource associations, which allows you to associate a group of resources with a defined resource tag key and value to the application.
+* feature: Textract: This release adds support for specifying and extracting information from documents using the Signatures feature within Analyze Document API
+* feature: WorkSpaces: The release introduces CreateStandbyWorkspaces, an API that allows you to create standby WorkSpaces associated with a primary WorkSpace in another Region. DescribeWorkspaces now includes related WorkSpaces properties. DescribeWorkspaceBundles and CreateWorkspaceBundle now return more bundle details.
 
 ## 2.1256.0
 * feature: Billingconductor: This release adds a new feature BillingEntity pricing rule.

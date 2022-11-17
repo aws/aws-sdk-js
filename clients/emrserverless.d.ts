@@ -194,6 +194,10 @@ declare namespace EMRServerless {
      * The network configuration for customer VPC connectivity for the application.
      */
     networkConfiguration?: NetworkConfiguration;
+    /**
+     * The CPU architecture of an application.
+     */
+    architecture?: Architecture;
   }
   export type ApplicationArn = string;
   export type ApplicationId = string;
@@ -238,7 +242,12 @@ declare namespace EMRServerless {
      * The date and time when the application was last updated.
      */
     updatedAt: _Date;
+    /**
+     * The CPU architecture of an application.
+     */
+    architecture?: Architecture;
   }
+  export type Architecture = "ARM64"|"X86_64"|string;
   export interface AutoStartConfig {
     /**
      * Enables the application to automatically start on job submission. Defaults to true.
@@ -345,6 +354,10 @@ declare namespace EMRServerless {
      * The network configuration for customer VPC connectivity.
      */
     networkConfiguration?: NetworkConfiguration;
+    /**
+     * The CPU architecture of an application.
+     */
+    architecture?: Architecture;
   }
   export interface CreateApplicationResponse {
     /**
@@ -871,6 +884,10 @@ declare namespace EMRServerless {
      */
     autoStopConfiguration?: AutoStopConfig;
     networkConfiguration?: NetworkConfiguration;
+    /**
+     * The CPU architecture of an application.
+     */
+    architecture?: Architecture;
   }
   export interface UpdateApplicationResponse {
     /**

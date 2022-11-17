@@ -309,11 +309,11 @@ declare class S3Control extends Service {
    */
   getPublicAccessBlock(callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
-   * Gets the Amazon S3 Storage Lens configuration. For more information, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
+   * Gets the Amazon S3 Storage Lens configuration. For more information, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   getStorageLensConfiguration(params: S3Control.Types.GetStorageLensConfigurationRequest, callback?: (err: AWSError, data: S3Control.Types.GetStorageLensConfigurationResult) => void): Request<S3Control.Types.GetStorageLensConfigurationResult, AWSError>;
   /**
-   * Gets the Amazon S3 Storage Lens configuration. For more information, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
+   * Gets the Amazon S3 Storage Lens configuration. For more information, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   getStorageLensConfiguration(callback?: (err: AWSError, data: S3Control.Types.GetStorageLensConfigurationResult) => void): Request<S3Control.Types.GetStorageLensConfigurationResult, AWSError>;
   /**
@@ -453,11 +453,11 @@ declare class S3Control extends Service {
    */
   putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Working with Amazon S3 Storage Lens in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
+   * Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Working with Amazon S3 Storage Lens in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   putStorageLensConfiguration(params: S3Control.Types.PutStorageLensConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Working with Amazon S3 Storage Lens in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
+   * Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Working with Amazon S3 Storage Lens in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   putStorageLensConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -523,17 +523,41 @@ declare namespace S3Control {
   export type AccountId = string;
   export interface AccountLevel {
     /**
-     * A container for the S3 Storage Lens activity metrics.
+     * A container for S3 Storage Lens activity metrics.
      */
     ActivityMetrics?: ActivityMetrics;
     /**
      * A container for the S3 Storage Lens bucket-level configuration.
      */
     BucketLevel: BucketLevel;
+    /**
+     * A container for S3 Storage Lens advanced cost-optimization metrics.
+     */
+    AdvancedCostOptimizationMetrics?: AdvancedCostOptimizationMetrics;
+    /**
+     * A container for S3 Storage Lens advanced data-protection metrics.
+     */
+    AdvancedDataProtectionMetrics?: AdvancedDataProtectionMetrics;
+    /**
+     * A container for detailed status code metrics. 
+     */
+    DetailedStatusCodesMetrics?: DetailedStatusCodesMetrics;
   }
   export interface ActivityMetrics {
     /**
-     * A container for whether the activity metrics are enabled.
+     * A container that indicates whether activity metrics are enabled.
+     */
+    IsEnabled?: IsEnabled;
+  }
+  export interface AdvancedCostOptimizationMetrics {
+    /**
+     * A container that indicates whether advanced cost-optimization metrics are enabled.
+     */
+    IsEnabled?: IsEnabled;
+  }
+  export interface AdvancedDataProtectionMetrics {
+    /**
+     * A container that indicates whether advanced data-protection metrics are enabled.
      */
     IsEnabled?: IsEnabled;
   }
@@ -626,13 +650,25 @@ declare namespace S3Control {
   export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
   export interface BucketLevel {
     /**
-     * A container for the bucket-level activity metrics for Amazon S3 Storage Lens
+     * A container for the bucket-level activity metrics for S3 Storage Lens.
      */
     ActivityMetrics?: ActivityMetrics;
     /**
-     * A container for the bucket-level prefix-level metrics for S3 Storage Lens
+     * A container for the prefix-level metrics for S3 Storage Lens. 
      */
     PrefixLevel?: PrefixLevel;
+    /**
+     * A container for bucket-level advanced cost-optimization metrics for S3 Storage Lens.
+     */
+    AdvancedCostOptimizationMetrics?: AdvancedCostOptimizationMetrics;
+    /**
+     * A container for bucket-level advanced data-protection metrics for S3 Storage Lens.
+     */
+    AdvancedDataProtectionMetrics?: AdvancedDataProtectionMetrics;
+    /**
+     * A container for bucket-level detailed status code metrics for S3 Storage Lens.
+     */
+    DetailedStatusCodesMetrics?: DetailedStatusCodesMetrics;
   }
   export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
   export type BucketName = string;
@@ -1023,6 +1059,12 @@ declare namespace S3Control {
      * A container element containing the details of the asynchronous operation.
      */
     AsyncOperation?: AsyncOperation;
+  }
+  export interface DetailedStatusCodesMetrics {
+    /**
+     * A container that indicates whether detailed status code metrics are enabled.
+     */
+    IsEnabled?: IsEnabled;
   }
   export type Endpoints = {[key: string]: NonEmptyMaxLength1024String};
   export interface EstablishedMultiRegionAccessPointPolicy {
@@ -1620,7 +1662,7 @@ declare namespace S3Control {
      */
     S3PutObjectCopy?: S3CopyObjectOperation;
     /**
-     * Directs the specified job to run a PUT Object acl call on every object in the manifest.
+     * Directs the specified job to run a PutObjectAcl call on every object in the manifest.
      */
     S3PutObjectAcl?: S3SetObjectAclOperation;
     /**
@@ -2145,19 +2187,19 @@ declare namespace S3Control {
   }
   export interface PublicAccessBlockConfiguration {
     /**
-     * Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:   PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.   PUT Object calls fail if the request includes a public ACL.   PUT Bucket calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs. This is not supported for Amazon S3 on Outposts.
+     * Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:    PutBucketAcl and PutObjectAcl calls fail if the specified ACL is public.   PUT Object calls fail if the request includes a public ACL.   PUT Bucket calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs. This property is not supported for Amazon S3 on Outposts.
      */
     BlockPublicAcls?: Setting;
     /**
-     * Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain.  Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. This is not supported for Amazon S3 on Outposts.
+     * Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain.  Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set. This property is not supported for Amazon S3 on Outposts.
      */
     IgnorePublicAcls?: Setting;
     /**
-     * Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.  Enabling this setting doesn't affect existing bucket policies. This is not supported for Amazon S3 on Outposts.
+     * Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.  Enabling this setting doesn't affect existing bucket policies. This property is not supported for Amazon S3 on Outposts.
      */
     BlockPublicPolicy?: Setting;
     /**
-     * Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to TRUE restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account. Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. This is not supported for Amazon S3 on Outposts.
+     * Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to TRUE restricts access to buckets with public policies to only Amazon Web Service principals and authorized users within this account. Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked. This property is not supported for Amazon S3 on Outposts.
      */
     RestrictPublicBuckets?: Setting;
   }
@@ -2459,7 +2501,7 @@ declare namespace S3Control {
   export type S3ContentLength = number;
   export interface S3CopyObjectOperation {
     /**
-     * Specifies the destination bucket ARN for the batch copy operation. For example, to copy objects to a bucket named "destinationBucket", set the TargetResource to "arn:aws:s3:::destinationBucket".
+     * Specifies the destination bucket ARN for the batch copy operation. For example, to copy objects to a bucket named destinationBucket, set the TargetResource property to arn:aws:s3:::destinationBucket.
      */
     TargetResource?: S3BucketArnString;
     /**
@@ -2736,11 +2778,11 @@ declare namespace S3Control {
   export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"GLACIER"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"GLACIER_IR"|string;
   export interface S3Tag {
     /**
-     * 
+     * Key of the tag
      */
     Key: TagKeyString;
     /**
-     * 
+     * Value of the tag
      */
     Value: TagValueString;
   }

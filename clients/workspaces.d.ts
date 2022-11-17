@@ -68,6 +68,14 @@ declare class WorkSpaces extends Service {
    */
   createIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
   /**
+   * Creates a Standby WorkSpace in a secondary region.
+   */
+  createStandbyWorkspaces(params: WorkSpaces.Types.CreateStandbyWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateStandbyWorkspacesResult) => void): Request<WorkSpaces.Types.CreateStandbyWorkspacesResult, AWSError>;
+  /**
+   * Creates a Standby WorkSpace in a secondary region.
+   */
+  createStandbyWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateStandbyWorkspacesResult) => void): Request<WorkSpaces.Types.CreateStandbyWorkspacesResult, AWSError>;
+  /**
    * Creates the specified tags for the specified WorkSpaces resource.
    */
   createTags(params: WorkSpaces.Types.CreateTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
@@ -607,6 +615,7 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export type BundleType = "REGULAR"|"STANDBY"|string;
   export type CertificateAuthorityArn = string;
   export interface CertificateBasedAuthProperties {
     /**
@@ -819,6 +828,26 @@ declare namespace WorkSpaces {
      * The identifier of the group.
      */
     GroupId?: IpGroupId;
+  }
+  export interface CreateStandbyWorkspacesRequest {
+    /**
+     * The Region of the primary WorkSpace.
+     */
+    PrimaryRegion: Region;
+    /**
+     * Information about the Standby WorkSpace to be created.
+     */
+    StandbyWorkspaces: StandbyWorkspacesList;
+  }
+  export interface CreateStandbyWorkspacesResult {
+    /**
+     * Information about the Standby WorkSpace that could not be created. 
+     */
+    FailedStandbyRequests?: FailedCreateStandbyWorkspacesRequestList;
+    /**
+     * Information about the Standby WorkSpace that was created.
+     */
+    PendingStandbyRequests?: PendingCreateStandbyWorkspacesRequestList;
   }
   export interface CreateTagsRequest {
     /**
@@ -1497,6 +1526,21 @@ declare namespace WorkSpaces {
   export type DnsIpAddresses = IpAddress[];
   export type Ec2ImageId = string;
   export type ErrorType = string;
+  export interface FailedCreateStandbyWorkspacesRequest {
+    /**
+     * Information about the Standby WorkSpace that could not be created.
+     */
+    StandbyWorkspaceRequest?: StandbyWorkspace;
+    /**
+     * The error code that is returned if the Standby WorkSpace could not be created.
+     */
+    ErrorCode?: WorkspaceErrorCode;
+    /**
+     * The text of the error message that is returned if the Standby WorkSpace could not be created.
+     */
+    ErrorMessage?: Description;
+  }
+  export type FailedCreateStandbyWorkspacesRequestList = FailedCreateStandbyWorkspacesRequest[];
   export interface FailedCreateWorkspaceRequest {
     /**
      * Information about the WorkSpace.
@@ -1896,6 +1940,25 @@ declare namespace WorkSpaces {
   }
   export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
+  export interface PendingCreateStandbyWorkspacesRequest {
+    /**
+     * Describes the Standby WorkSpace that was created. Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call  DescribeWorkspaces before the WorkSpace is created, the information returned can be incomplete. 
+     */
+    UserName?: UserName;
+    /**
+     * The identifier of the directory for the Standby WorkSpace.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The operational state of the Standby WorkSpace.
+     */
+    State?: WorkspaceState;
+    /**
+     * The identifier of the Standby WorkSpace.
+     */
+    WorkspaceId?: WorkspaceId;
+  }
+  export type PendingCreateStandbyWorkspacesRequestList = PendingCreateStandbyWorkspacesRequest[];
   export type Protocol = "PCOIP"|"WSP"|string;
   export type ProtocolList = Protocol[];
   export interface RebootRequest {
@@ -1967,6 +2030,25 @@ declare namespace WorkSpaces {
   export interface RegisterWorkspaceDirectoryResult {
   }
   export type RegistrationCode = string;
+  export interface RelatedWorkspaceProperties {
+    /**
+     * The identifier of the related WorkSpace.
+     */
+    WorkspaceId?: WorkspaceId;
+    /**
+     * The Region of the related WorkSpace.
+     */
+    Region?: Region;
+    /**
+     * Indicates the state of the WorkSpace.
+     */
+    State?: WorkspaceState;
+    /**
+     * Indicates the type of WorkSpace.
+     */
+    Type?: StandbyWorkspaceRelationshipType;
+  }
+  export type RelatedWorkspaces = RelatedWorkspaceProperties[];
   export type ResourceIdList = NonEmptyString[];
   export interface RestoreWorkspaceRequest {
     /**
@@ -2043,6 +2125,26 @@ declare namespace WorkSpaces {
     SnapshotTime?: Timestamp;
   }
   export type SnapshotList = Snapshot[];
+  export interface StandbyWorkspace {
+    /**
+     * The identifier of the Standby WorkSpace.
+     */
+    PrimaryWorkspaceId: WorkspaceId;
+    /**
+     * The volume encryption key of the Standby WorkSpace.
+     */
+    VolumeEncryptionKey?: VolumeEncryptionKey;
+    /**
+     * The identifier of the directory for the Standby WorkSpace.
+     */
+    DirectoryId: DirectoryId;
+    /**
+     * The tags associated with the Standby WorkSpace.
+     */
+    Tags?: TagList;
+  }
+  export type StandbyWorkspaceRelationshipType = "PRIMARY"|"STANDBY"|string;
+  export type StandbyWorkspacesList = StandbyWorkspace[];
   export interface StartRequest {
     /**
      * The identifier of the WorkSpace.
@@ -2272,6 +2374,10 @@ declare namespace WorkSpaces {
      * The modification states of the WorkSpace.
      */
     ModificationStates?: ModificationStateList;
+    /**
+     * The Standby WorkSpace or Primary WorkSpace related to the specified WorkSpace.
+     */
+    RelatedWorkspaces?: RelatedWorkspaces;
   }
   export interface WorkspaceAccessProperties {
     /**
@@ -2348,9 +2454,18 @@ declare namespace WorkSpaces {
      * The time when the bundle was created.
      */
     CreationTime?: Timestamp;
+    /**
+     * The state of the WorkSpace bundle.
+     */
+    State?: WorkspaceBundleState;
+    /**
+     * The type of WorkSpace bundle.
+     */
+    BundleType?: BundleType;
   }
   export type WorkspaceBundleDescription = string;
   export type WorkspaceBundleName = string;
+  export type WorkspaceBundleState = "AVAILABLE"|"PENDING"|"ERROR"|string;
   export interface WorkspaceConnectionStatus {
     /**
      * The identifier of the WorkSpace.

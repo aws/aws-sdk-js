@@ -5824,6 +5824,14 @@ declare namespace SecurityHub {
      * The version of the Lambda function.
      */
     Version?: NonEmptyString;
+    /**
+     * The instruction set architecture that the function uses. Valid values are x86_64 or arm64.
+     */
+    Architectures?: NonEmptyStringList;
+    /**
+     * The type of deployment package that's used to deploy the function code to Lambda. Set to Image for a container image and Zip for a .zip file archive. 
+     */
+    PackageType?: NonEmptyString;
   }
   export interface AwsLambdaFunctionEnvironment {
     /**
@@ -11554,6 +11562,14 @@ declare namespace SecurityHub {
      * Describes the actions a customer can take to resolve the vulnerability in the software package. 
      */
     Remediation?: NonEmptyString;
+    /**
+     * The source layer hash of the vulnerable package. 
+     */
+    SourceLayerHash?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the source layer. 
+     */
+    SourceLayerArn?: NonEmptyString;
   }
   export type SoftwarePackageList = SoftwarePackage[];
   export type SortCriteria = SortCriterion[];

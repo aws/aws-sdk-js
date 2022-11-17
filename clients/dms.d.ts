@@ -828,7 +828,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", and "neptune".
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", "neptune", and "babelfish".
      */
     EngineName: String;
     /**
@@ -1093,6 +1093,10 @@ declare namespace DMS {
      * A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as Example-App-ARN1. For example, this value might result in the EndpointArn value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a ResourceIdentifier value, DMS generates a default identifier value for the end of EndpointArn.
      */
     ResourceIdentifier?: String;
+    /**
+     * The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
+     */
+    NetworkType?: String;
   }
   export interface CreateReplicationInstanceResponse {
     /**
@@ -2154,11 +2158,11 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and "babelfish".
      */
     EngineName?: String;
     /**
-     * The expanded name for the engine name. For example, if the EngineName parameter is "aurora," this value would be "Amazon Aurora MySQL."
+     * The expanded name for the engine name. For example, if the EngineName parameter is "aurora", this value would be "Amazon Aurora MySQL".
      */
     EngineDisplayName?: String;
     /**
@@ -2800,7 +2804,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and "babelfish".
      */
     EngineName?: String;
     /**
@@ -2996,6 +3000,10 @@ declare namespace DMS {
      * The replication instance identifier. This parameter is stored as a lowercase string.
      */
     ReplicationInstanceIdentifier?: String;
+    /**
+     * The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
+     */
+    NetworkType?: String;
   }
   export interface ModifyReplicationInstanceResponse {
     /**
@@ -3288,7 +3296,7 @@ declare namespace DMS {
      */
     DirectPathNoLog?: BooleanOptional;
     /**
-     * When this field is set to Y, DMS only accesses the archived redo logs. If the archived redo logs are stored on Oracle ASM only, the DMS user account needs to be granted ASM privileges.
+     * When this field is set to Y, DMS only accesses the archived redo logs. If the archived redo logs are stored on Automatic Storage Management (ASM) only, the DMS user account needs to be granted ASM privileges.
      */
     ArchivedLogsOnly?: BooleanOptional;
     /**
@@ -3384,11 +3392,11 @@ declare namespace DMS {
      */
     SecretsManagerSecretId?: String;
     /**
-     * Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the SecretsManagerOracleAsmSecret. This SecretsManagerOracleAsmSecret has the secret value that allows access to the Oracle ASM of the endpoint.  You can specify one of two sets of values for these permissions. You can specify the values for this setting and SecretsManagerOracleAsmSecretId. Or you can specify clear-text values for AsmUserName, AsmPassword, and AsmServerName. You can't specify both. For more information on creating this SecretsManagerOracleAsmSecret and the SecretsManagerOracleAsmAccessRoleArn and SecretsManagerOracleAsmSecretId required to access it, see Using secrets to access Database Migration Service resources in the Database Migration Service User Guide. 
+     * Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the SecretsManagerOracleAsmSecret. This SecretsManagerOracleAsmSecret has the secret value that allows access to the Oracle ASM of the endpoint.  You can specify one of two sets of values for these permissions. You can specify the values for this setting and SecretsManagerOracleAsmSecretId. Or you can specify clear-text values for AsmUserName, AsmPassword, and AsmServerName. You can't specify both. For more information on creating this SecretsManagerOracleAsmSecret and the SecretsManagerOracleAsmAccessRoleArn and SecretsManagerOracleAsmSecretId required to access it, see Using secrets to access Database Migration Service resources in the Database Migration Service User Guide. 
      */
     SecretsManagerOracleAsmAccessRoleArn?: String;
     /**
-     * Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret that contains the Oracle ASM connection details for the Oracle endpoint.
+     * Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret that contains the Oracle ASM connection details for the Oracle endpoint.
      */
     SecretsManagerOracleAsmSecretId?: String;
     /**
@@ -3868,6 +3876,10 @@ declare namespace DMS {
      */
     ReplicationInstancePrivateIpAddresses?: ReplicationInstancePrivateIpAddressList;
     /**
+     * One or more IPv6 addresses for the replication instance.
+     */
+    ReplicationInstanceIpv6Addresses?: ReplicationInstanceIpv6AddressList;
+    /**
      *  Specifies the accessibility options for the replication instance. A value of true represents an instance with a public IP address. A value of false represents an instance with a private IP address. The default value is true. 
      */
     PubliclyAccessible?: Boolean;
@@ -3883,7 +3895,12 @@ declare namespace DMS {
      * The DNS name servers supported for the replication instance to access your on-premise source or target database.
      */
     DnsNameServers?: String;
+    /**
+     * The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
+     */
+    NetworkType?: String;
   }
+  export type ReplicationInstanceIpv6AddressList = String[];
   export type ReplicationInstanceList = ReplicationInstance[];
   export type ReplicationInstancePrivateIpAddressList = String[];
   export type ReplicationInstancePublicIpAddressList = String[];
@@ -3919,6 +3936,10 @@ declare namespace DMS {
      * The engine version number of the replication instance.
      */
     EngineVersion?: String;
+    /**
+     * The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
+     */
+    NetworkType?: String;
   }
   export interface ReplicationSubnetGroup {
     /**
@@ -3941,6 +3962,10 @@ declare namespace DMS {
      * The subnets that are in the subnet group.
      */
     Subnets?: SubnetList;
+    /**
+     * The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
+     */
+    SupportedNetworkTypes?: StringList;
   }
   export type ReplicationSubnetGroups = ReplicationSubnetGroup[];
   export interface ReplicationTask {
@@ -4333,7 +4358,7 @@ declare namespace DMS {
      */
     CdcMaxBatchInterval?: IntegerOptional;
     /**
-     * Minimum file size, defined in megabytes, to reach for a file output to Amazon S3. When CdcMinFileSize and CdcMaxBatchInterval are both specified, the file write is triggered by whichever parameter condition is met first within an DMS CloudFormation template. The default value is 32 MB.
+     * Minimum file size, defined in kilobytes, to reach for a file output to Amazon S3. When CdcMinFileSize and CdcMaxBatchInterval are both specified, the file write is triggered by whichever parameter condition is met first within an DMS CloudFormation template. The default value is 32 MB.
      */
     CdcMinFileSize?: IntegerOptional;
     /**
@@ -4559,7 +4584,7 @@ declare namespace DMS {
   export type SubnetList = Subnet[];
   export interface SupportedEndpointType {
     /**
-     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and "babelfish".
      */
     EngineName?: String;
     /**
@@ -4575,7 +4600,7 @@ declare namespace DMS {
      */
     ReplicationInstanceEngineMinimumVersion?: String;
     /**
-     * The expanded name for the engine name. For example, if the EngineName parameter is "aurora," this value would be "Amazon Aurora MySQL."
+     * The expanded name for the engine name. For example, if the EngineName parameter is "aurora", this value would be "Amazon Aurora MySQL".
      */
     EngineDisplayName?: String;
   }
@@ -4637,6 +4662,22 @@ declare namespace DMS {
      * The data definition language (DDL) used to build and modify the structure of your tables.
      */
     Ddls?: Long;
+    /**
+     * The number of insert actions applied on a target table.
+     */
+    AppliedInserts?: LongOptional;
+    /**
+     * The number of delete actions applied on a target table.
+     */
+    AppliedDeletes?: LongOptional;
+    /**
+     * The number of update actions applied on a target table.
+     */
+    AppliedUpdates?: LongOptional;
+    /**
+     * The number of data definition language (DDL) statements used to build and modify the structure of your tables applied on the target.
+     */
+    AppliedDdls?: LongOptional;
     /**
      * The number of rows added during the full load operation.
      */

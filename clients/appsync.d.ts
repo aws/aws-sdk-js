@@ -156,6 +156,14 @@ declare class AppSync extends Service {
    */
   disassociateApi(callback?: (err: AWSError, data: AppSync.Types.DisassociateApiResponse) => void): Request<AppSync.Types.DisassociateApiResponse, AWSError>;
   /**
+   * Evaluates the given code and returns the response. The code definition requirements depend on the specified runtime. For APPSYNC_JS runtimes, the code defines the request and response functions. The request function takes the incoming request after a GraphQL operation is parsed and converts it into a request configuration for the selected data source operation. The response function interprets responses from the data source and maps it to the shape of the GraphQL field output type. 
+   */
+  evaluateCode(params: AppSync.Types.EvaluateCodeRequest, callback?: (err: AWSError, data: AppSync.Types.EvaluateCodeResponse) => void): Request<AppSync.Types.EvaluateCodeResponse, AWSError>;
+  /**
+   * Evaluates the given code and returns the response. The code definition requirements depend on the specified runtime. For APPSYNC_JS runtimes, the code defines the request and response functions. The request function takes the incoming request after a GraphQL operation is parsed and converts it into a request configuration for the selected data source operation. The response function interprets responses from the data source and maps it to the shape of the GraphQL field output type. 
+   */
+  evaluateCode(callback?: (err: AWSError, data: AppSync.Types.EvaluateCodeResponse) => void): Request<AppSync.Types.EvaluateCodeResponse, AWSError>;
+  /**
    * Evaluates a given template and returns the response. The mapping template can be a request or response template. Request templates take the incoming request after a GraphQL operation is parsed and convert it into a request configuration for the selected data source operation. Response templates interpret responses from the data source and map it to the shape of the GraphQL field output type. Mapping templates are written in the Apache Velocity Template Language (VTL).
    */
   evaluateMappingTemplate(params: AppSync.Types.EvaluateMappingTemplateRequest, callback?: (err: AWSError, data: AppSync.Types.EvaluateMappingTemplateResponse) => void): Request<AppSync.Types.EvaluateMappingTemplateResponse, AWSError>;
@@ -498,6 +506,16 @@ declare namespace AppSync {
     deletes?: Long;
   }
   export type ApiKeys = ApiKey[];
+  export interface AppSyncRuntime {
+    /**
+     * The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+     */
+    name: RuntimeName;
+    /**
+     * The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+     */
+    runtimeVersion: String;
+  }
   export interface AssociateApiRequest {
     /**
      * The domain name.
@@ -552,6 +570,39 @@ declare namespace AppSync {
   }
   export type CachingKeys = String[];
   export type CertificateArn = string;
+  export type Code = string;
+  export interface CodeError {
+    /**
+     * The type of code error.  Examples include, but aren't limited to: LINT_ERROR, PARSER_ERROR.
+     */
+    errorType?: String;
+    /**
+     * A user presentable error. Examples include, but aren't limited to: Parsing error: Unterminated string literal.
+     */
+    value?: String;
+    /**
+     * The line, column, and span location of the error in the code.
+     */
+    location?: CodeErrorLocation;
+  }
+  export type CodeErrorColumn = number;
+  export type CodeErrorLine = number;
+  export interface CodeErrorLocation {
+    /**
+     * The line number in the code. Defaults to 0 if unknown.
+     */
+    line?: CodeErrorLine;
+    /**
+     * The column number in the code. Defaults to 0 if unknown.
+     */
+    column?: CodeErrorColumn;
+    /**
+     * The span/length of the error. Defaults to -1 if unknown.
+     */
+    span?: CodeErrorSpan;
+  }
+  export type CodeErrorSpan = number;
+  export type CodeErrors = CodeError[];
   export interface CognitoUserPoolConfig {
     /**
      * The user pool ID.
@@ -719,14 +770,19 @@ declare namespace AppSync {
      */
     responseMappingTemplate?: MappingTemplate;
     /**
-     * The version of the request mapping template. Currently, the supported value is 2018-05-29.
+     * The version of the request mapping template. Currently, the supported value is 2018-05-29. Note that when using VTL and mapping templates, the functionVersion is required.
      */
-    functionVersion: String;
+    functionVersion?: String;
     syncConfig?: SyncConfig;
     /**
      * The maximum batching size for a resolver.
      */
     maxBatchSize?: MaxBatchSize;
+    runtime?: AppSyncRuntime;
+    /**
+     * The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+     */
+    code?: Code;
   }
   export interface CreateFunctionResponse {
     /**
@@ -823,6 +879,11 @@ declare namespace AppSync {
      * The maximum batching size for a resolver.
      */
     maxBatchSize?: MaxBatchSize;
+    runtime?: AppSyncRuntime;
+    /**
+     * The resolver code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+     */
+    code?: Code;
   }
   export interface CreateResolverResponse {
     /**
@@ -1073,6 +1134,48 @@ declare namespace AppSync {
     message?: ErrorMessage;
   }
   export type ErrorMessage = string;
+  export interface EvaluateCodeErrorDetail {
+    /**
+     * The error payload.
+     */
+    message?: ErrorMessage;
+    /**
+     * Contains the list of CodeError objects.
+     */
+    codeErrors?: CodeErrors;
+  }
+  export interface EvaluateCodeRequest {
+    /**
+     * The runtime to be used when evaluating the code. Currently, only the APPSYNC_JS runtime is supported.
+     */
+    runtime: AppSyncRuntime;
+    /**
+     * The code definition to be evaluated. Note that code and runtime are both required for this action. The runtime value must be APPSYNC_JS.
+     */
+    code: Code;
+    /**
+     * The map that holds all of the contextual information for your resolver invocation. A context is required for this action.
+     */
+    context: Context;
+    /**
+     * The function within the code to be evaluated. If provided, the valid values are request and response.
+     */
+    function?: String;
+  }
+  export interface EvaluateCodeResponse {
+    /**
+     * The result of the evaluation operation.
+     */
+    evaluationResult?: EvaluationResult;
+    /**
+     * Contains the payload of the response error.
+     */
+    error?: EvaluateCodeErrorDetail;
+    /**
+     * A list of logs that were generated by calls to util.log.info and util.log.error in the evaluated code.
+     */
+    logs?: Logs;
+  }
   export interface EvaluateMappingTemplateRequest {
     /**
      * The mapping template; this can be a request or response template. A template is required for this action.
@@ -1092,6 +1195,10 @@ declare namespace AppSync {
      * The ErrorDetail object.
      */
     error?: ErrorDetail;
+    /**
+     * A list of logs that were generated by calls to util.log.info and util.log.error in the evaluated code.
+     */
+    logs?: Logs;
   }
   export type EvaluationResult = string;
   export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
@@ -1141,6 +1248,11 @@ declare namespace AppSync {
      * The maximum batching size for a resolver.
      */
     maxBatchSize?: MaxBatchSize;
+    runtime?: AppSyncRuntime;
+    /**
+     * The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+     */
+    code?: Code;
   }
   export type Functions = FunctionConfiguration[];
   export type FunctionsIds = String[];
@@ -1613,6 +1725,7 @@ declare namespace AppSync {
      */
     excludeVerboseContent?: Boolean;
   }
+  export type Logs = String[];
   export type Long = number;
   export type MapOfStringToString = {[key: string]: String};
   export type MappingTemplate = string;
@@ -1732,11 +1845,17 @@ declare namespace AppSync {
      * The maximum batching size for a resolver.
      */
     maxBatchSize?: MaxBatchSize;
+    runtime?: AppSyncRuntime;
+    /**
+     * The resolver code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+     */
+    code?: Code;
   }
   export type ResolverKind = "UNIT"|"PIPELINE"|string;
   export type Resolvers = Resolver[];
   export type ResourceArn = string;
   export type ResourceName = string;
+  export type RuntimeName = "APPSYNC_JS"|string;
   export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE"|string;
   export interface StartSchemaCreationRequest {
     /**
@@ -1969,14 +2088,19 @@ declare namespace AppSync {
      */
     responseMappingTemplate?: MappingTemplate;
     /**
-     * The version of the request mapping template. Currently, the supported value is 2018-05-29.
+     * The version of the request mapping template. Currently, the supported value is 2018-05-29. Note that when using VTL and mapping templates, the functionVersion is required.
      */
-    functionVersion: String;
+    functionVersion?: String;
     syncConfig?: SyncConfig;
     /**
      * The maximum batching size for a resolver.
      */
     maxBatchSize?: MaxBatchSize;
+    runtime?: AppSyncRuntime;
+    /**
+     * The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+     */
+    code?: Code;
   }
   export interface UpdateFunctionResponse {
     /**
@@ -2073,6 +2197,11 @@ declare namespace AppSync {
      * The maximum batching size for a resolver.
      */
     maxBatchSize?: MaxBatchSize;
+    runtime?: AppSyncRuntime;
+    /**
+     * The resolver code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
+     */
+    code?: Code;
   }
   export interface UpdateResolverResponse {
     /**
