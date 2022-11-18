@@ -1210,8 +1210,5 @@
   },
   "scheduler": {
     "name": "Scheduler"
-  },
-  "ssmsap": {
-    "name": "SsmSap"
   }
 }
