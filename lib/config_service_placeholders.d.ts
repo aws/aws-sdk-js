@@ -321,7 +321,6 @@ export abstract class ConfigurationServicePlaceholders {
   connectcases?: AWS.ConnectCases.Types.ClientConfiguration;
   resourceexplorer2?: AWS.ResourceExplorer2.Types.ClientConfiguration;
   scheduler?: AWS.Scheduler.Types.ClientConfiguration;
-  ssmsap?: AWS.SsmSap.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -645,5 +644,4 @@ export interface ConfigurationServiceApiVersions {
   connectcases?: AWS.ConnectCases.Types.apiVersion;
   resourceexplorer2?: AWS.ResourceExplorer2.Types.apiVersion;
   scheduler?: AWS.Scheduler.Types.apiVersion;
-  ssmsap?: AWS.SsmSap.Types.apiVersion;
 }
