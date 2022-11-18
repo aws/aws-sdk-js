@@ -517,7 +517,7 @@ declare namespace Transfer {
      */
     Compression?: CompressionEnum;
     /**
-     * The algorithm that is used to encrypt the file.
+     * The algorithm that is used to encrypt the file.  You can only specify NONE if the URL for your connector uses HTTPS. This ensures that no traffic is sent in clear text. 
      */
     EncryptionAlgorithm?: EncryptionAlg;
     /**
@@ -525,7 +525,7 @@ declare namespace Transfer {
      */
     SigningAlgorithm?: SigningAlg;
     /**
-     * The signing algorithm for the MDN response.  If set to DEFAULT (or not set at all), the value for SigningAlogorithm is used. 
+     * The signing algorithm for the MDN response.  If set to DEFAULT (or not set at all), the value for SigningAlgorithm is used. 
      */
     MdnSigningAlgorithm?: MdnSigningAlg;
     /**
@@ -758,7 +758,7 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In additon to a workflow to execute when a file is uploaded completely, WorkflowDeatails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -798,7 +798,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and an optional &lt;comment&gt;, with spaces between each element. Transfer Family accepts RSA, ECDSA, and ED25519 keys.   For RSA keys, the key type is ssh-rsa.   For ED25519 keys, the key type is ssh-ed25519.   For ECDSA keys, the key type is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.  
      */
     SshPublicKeyBody?: SshPublicKeyBody;
     /**
@@ -1468,7 +1468,7 @@ declare namespace Transfer {
      */
     UserCount?: UserCount;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In additon to a workflow to execute when a file is uploaded completely, WorkflowDeatails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -1555,7 +1555,7 @@ declare namespace Transfer {
   }
   export type EfsFileSystemId = string;
   export type EfsPath = string;
-  export type EncryptionAlg = "AES128_CBC"|"AES192_CBC"|"AES256_CBC"|string;
+  export type EncryptionAlg = "AES128_CBC"|"AES192_CBC"|"AES256_CBC"|"NONE"|string;
   export interface EndpointDetails {
     /**
      * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.  This property can only be set when EndpointType is set to VPC and it is only valid in the UpdateServer API. 
@@ -2821,7 +2821,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In additon to a workflow to execute when a file is uploaded completely, WorkflowDeatails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     WorkflowDetails?: WorkflowDetails;
   }

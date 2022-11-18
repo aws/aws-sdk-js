@@ -7972,7 +7972,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude\">Include and Exclude Patterns</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Setting crawler configuration options</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -8332,7 +8332,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Setting crawler configuration options</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -10750,6 +10750,12 @@
       "type": "list",
       "member": {
         "shape": "Edge"
+      }
+    },
+    "EnableAdditionalMetadata": {
+      "type": "list",
+      "member": {
+        "shape": "JdbcMetadataEntry"
       }
     },
     "EnableHybridValues": {
@@ -13814,6 +13820,13 @@
         "shape": "GlueRecordType"
       }
     },
+    "JdbcMetadataEntry": {
+      "type": "string",
+      "enum": [
+        "COMMENTS",
+        "RAWTYPES"
+      ]
+    },
     "JdbcTarget": {
       "type": "structure",
       "members": {
@@ -13828,6 +13841,10 @@
         "Exclusions": {
           "shape": "PathList",
           "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
+        },
+        "EnableAdditionalMetadata": {
+          "shape": "EnableAdditionalMetadata",
+          "documentation": "<p>Specify a value of <code>RAWTYPES</code> or <code>COMMENTS</code> to enable additional metadata in table responses. <code>RAWTYPES</code> provides the native-level datatype. <code>COMMENTS</code> provides comments associated with a column or table in the database.</p> <p>If you do not need additional metadata, keep the field empty.</p>"
         }
       },
       "documentation": "<p>Specifies a JDBC data store to crawl.</p>"
@@ -20039,7 +20056,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Setting crawler configuration options</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",

@@ -22,6 +22,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   associateAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow. After you create a staging distribution, you can use UpdateDistribution to modify the staging distribution’s configuration. Then you can use CreateContinuousDeploymentPolicy to incrementally move traffic to the staging distribution.
+   */
+  copyDistribution(params: CloudFront.Types.CopyDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CopyDistributionResult) => void): Request<CloudFront.Types.CopyDistributionResult, AWSError>;
+  /**
+   * Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow. After you create a staging distribution, you can use UpdateDistribution to modify the staging distribution’s configuration. Then you can use CreateContinuousDeploymentPolicy to incrementally move traffic to the staging distribution.
+   */
+  copyDistribution(callback?: (err: AWSError, data: CloudFront.Types.CopyDistributionResult) => void): Request<CloudFront.Types.CopyDistributionResult, AWSError>;
+  /**
    * Creates a cache policy. After you create a cache policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the cache policy determines the following:   The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.   The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.   The headers, cookies, and query strings that are included in the cache key are automatically included in requests that CloudFront sends to the origin. CloudFront sends a request when it can’t find an object in its cache that matches the request’s cache key. If you want to send values to the origin but not include them in the cache key, use OriginRequestPolicy. For more information about cache policies, see Controlling the cache key in the Amazon CloudFront Developer Guide.
    */
   createCachePolicy(params: CloudFront.Types.CreateCachePolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateCachePolicyResult) => void): Request<CloudFront.Types.CreateCachePolicyResult, AWSError>;
@@ -38,11 +46,19 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
-   * Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.  When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using UpdateDistribution, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide. 
+   * Creates a continuous deployment policy that distributes traffic for a custom domain name to two different CloudFront distributions. To use a continuous deployment policy, first use CopyDistribution to create a staging distribution, then use UpdateDistribution to modify the staging distribution’s configuration. After you create and update a staging distribution, you can use a continuous deployment policy to incrementally move traffic to the staging distribution. This workflow enables you to test changes to a distribution’s configuration before moving all of your domain’s production traffic to the new configuration.
+   */
+  createContinuousDeploymentPolicy(params: CloudFront.Types.CreateContinuousDeploymentPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateContinuousDeploymentPolicyResult) => void): Request<CloudFront.Types.CreateContinuousDeploymentPolicyResult, AWSError>;
+  /**
+   * Creates a continuous deployment policy that distributes traffic for a custom domain name to two different CloudFront distributions. To use a continuous deployment policy, first use CopyDistribution to create a staging distribution, then use UpdateDistribution to modify the staging distribution’s configuration. After you create and update a staging distribution, you can use a continuous deployment policy to incrementally move traffic to the staging distribution. This workflow enables you to test changes to a distribution’s configuration before moving all of your domain’s production traffic to the new configuration.
+   */
+  createContinuousDeploymentPolicy(callback?: (err: AWSError, data: CloudFront.Types.CreateContinuousDeploymentPolicyResult) => void): Request<CloudFront.Types.CreateContinuousDeploymentPolicyResult, AWSError>;
+  /**
+   * Creates a CloudFront distribution.
    */
   createDistribution(params: CloudFront.Types.CreateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
-   * Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.  When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using UpdateDistribution, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide. 
+   * Creates a CloudFront distribution.
    */
   createDistribution(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
@@ -173,6 +189,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Delete an origin access identity. 
    */
   deleteCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a continuous deployment policy. You cannot delete a continuous deployment policy that’s attached to a primary distribution. First update your distribution to remove the continuous deployment policy, then you can delete the policy.
+   */
+  deleteContinuousDeploymentPolicy(params: CloudFront.Types.DeleteContinuousDeploymentPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a continuous deployment policy. You cannot delete a continuous deployment policy that’s attached to a primary distribution. First update your distribution to remove the continuous deployment policy, then you can delete the policy.
+   */
+  deleteContinuousDeploymentPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a distribution. 
    */
@@ -309,6 +333,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Get the configuration information about an origin access identity. 
    */
   getCloudFrontOriginAccessIdentityConfig(callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
+  /**
+   * Gets a continuous deployment policy, including metadata (the policy’s identifier and the date and time when the policy was last modified).
+   */
+  getContinuousDeploymentPolicy(params: CloudFront.Types.GetContinuousDeploymentPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetContinuousDeploymentPolicyResult) => void): Request<CloudFront.Types.GetContinuousDeploymentPolicyResult, AWSError>;
+  /**
+   * Gets a continuous deployment policy, including metadata (the policy’s identifier and the date and time when the policy was last modified).
+   */
+  getContinuousDeploymentPolicy(callback?: (err: AWSError, data: CloudFront.Types.GetContinuousDeploymentPolicyResult) => void): Request<CloudFront.Types.GetContinuousDeploymentPolicyResult, AWSError>;
+  /**
+   * Gets configuration information about a continuous deployment policy.
+   */
+  getContinuousDeploymentPolicyConfig(params: CloudFront.Types.GetContinuousDeploymentPolicyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetContinuousDeploymentPolicyConfigResult) => void): Request<CloudFront.Types.GetContinuousDeploymentPolicyConfigResult, AWSError>;
+  /**
+   * Gets configuration information about a continuous deployment policy.
+   */
+  getContinuousDeploymentPolicyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetContinuousDeploymentPolicyConfigResult) => void): Request<CloudFront.Types.GetContinuousDeploymentPolicyConfigResult, AWSError>;
   /**
    * Get the information about a distribution.
    */
@@ -510,6 +550,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listConflictingAliases(callback?: (err: AWSError, data: CloudFront.Types.ListConflictingAliasesResult) => void): Request<CloudFront.Types.ListConflictingAliasesResult, AWSError>;
   /**
+   * Gets a list of the continuous deployment policies in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listContinuousDeploymentPolicies(params: CloudFront.Types.ListContinuousDeploymentPoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListContinuousDeploymentPoliciesResult) => void): Request<CloudFront.Types.ListContinuousDeploymentPoliciesResult, AWSError>;
+  /**
+   * Gets a list of the continuous deployment policies in your Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listContinuousDeploymentPolicies(callback?: (err: AWSError, data: CloudFront.Types.ListContinuousDeploymentPoliciesResult) => void): Request<CloudFront.Types.ListContinuousDeploymentPoliciesResult, AWSError>;
+  /**
    * List CloudFront distributions.
    */
   listDistributions(params: CloudFront.Types.ListDistributionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsResult) => void): Request<CloudFront.Types.ListDistributionsResult, AWSError>;
@@ -710,11 +758,19 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
-   * Updates the configuration for a web distribution.   When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an UpdateDistribution request to make the updates. For information about updating a distribution using the CloudFront console instead, see Creating a Distribution in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you must get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include your changes.   When you edit the XML file, be aware of the following:   You must strip out the ETag parameter that is returned.   Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.   You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.    The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.      Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  
+   * Updates a continuous deployment policy. You can update a continuous deployment policy to enable or disable it, to change the percentage of traffic that it sends to the staging distribution, or to change the staging distribution that it sends traffic to. When you update a continuous deployment policy configuration, all the fields are updated with the values that are provided in the request. You cannot update some fields independent of others. To update a continuous deployment policy configuration:   Use GetContinuousDeploymentPolicyConfig to get the current configuration.   Locally modify the fields in the continuous deployment policy configuration that you want to update.   Use UpdateContinuousDeploymentPolicy, providing the entire continuous deployment policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateContinuousDeploymentPolicy(params: CloudFront.Types.UpdateContinuousDeploymentPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateContinuousDeploymentPolicyResult) => void): Request<CloudFront.Types.UpdateContinuousDeploymentPolicyResult, AWSError>;
+  /**
+   * Updates a continuous deployment policy. You can update a continuous deployment policy to enable or disable it, to change the percentage of traffic that it sends to the staging distribution, or to change the staging distribution that it sends traffic to. When you update a continuous deployment policy configuration, all the fields are updated with the values that are provided in the request. You cannot update some fields independent of others. To update a continuous deployment policy configuration:   Use GetContinuousDeploymentPolicyConfig to get the current configuration.   Locally modify the fields in the continuous deployment policy configuration that you want to update.   Use UpdateContinuousDeploymentPolicy, providing the entire continuous deployment policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateContinuousDeploymentPolicy(callback?: (err: AWSError, data: CloudFront.Types.UpdateContinuousDeploymentPolicyResult) => void): Request<CloudFront.Types.UpdateContinuousDeploymentPolicyResult, AWSError>;
+  /**
+   * Updates the configuration for a CloudFront distribution. The update process includes getting the current distribution configuration, updating it to make your changes, and then submitting an UpdateDistribution request to make the updates.  To update a web distribution using the CloudFront API    Use GetDistributionConfig to get the current configuration, including the version identifier (ETag).   Update the distribution configuration that was returned in the response. Note the following important requirements and restrictions:   You must rename the ETag field to IfMatch, leaving the value unchanged. (Set the value of IfMatch to the value of ETag, then remove the ETag field.)   You can’t change the value of CallerReference.     Submit an UpdateDistribution request, providing the distribution configuration. The new configuration replaces the existing configuration. The values that you specify in an UpdateDistribution request are not merged into your existing configuration. Make sure to include all fields: the ones that you modified and also the ones that you didn’t.  
    */
   updateDistribution(params: CloudFront.Types.UpdateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Updates the configuration for a web distribution.   When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an UpdateDistribution request to make the updates. For information about updating a distribution using the CloudFront console instead, see Creating a Distribution in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you must get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include your changes.   When you edit the XML file, be aware of the following:   You must strip out the ETag parameter that is returned.   Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.   You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.    The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.      Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  
+   * Updates the configuration for a CloudFront distribution. The update process includes getting the current distribution configuration, updating it to make your changes, and then submitting an UpdateDistribution request to make the updates.  To update a web distribution using the CloudFront API    Use GetDistributionConfig to get the current configuration, including the version identifier (ETag).   Update the distribution configuration that was returned in the response. Note the following important requirements and restrictions:   You must rename the ETag field to IfMatch, leaving the value unchanged. (Set the value of IfMatch to the value of ETag, then remove the ETag field.)   You can’t change the value of CallerReference.     Submit an UpdateDistribution request, providing the distribution configuration. The new configuration replaces the existing configuration. The values that you specify in an UpdateDistribution request are not merged into your existing configuration. Make sure to include all fields: the ones that you modified and also the ones that you didn’t.  
    */
   updateDistribution(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
@@ -1230,6 +1286,74 @@ declare namespace CloudFront {
      */
     Items?: ContentTypeProfileList;
   }
+  export interface ContinuousDeploymentPolicy {
+    /**
+     * The identifier of the continuous deployment policy.
+     */
+    Id: string;
+    /**
+     * The date and time the continuous deployment policy was last modified.
+     */
+    LastModifiedTime: timestamp;
+    ContinuousDeploymentPolicyConfig: ContinuousDeploymentPolicyConfig;
+  }
+  export interface ContinuousDeploymentPolicyConfig {
+    /**
+     * The CloudFront domain name of the staging distribution. For example: d111111abcdef8.cloudfront.net.
+     */
+    StagingDistributionDnsNames: StagingDistributionDnsNames;
+    /**
+     * A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is true, this policy is enabled and in effect. When this value is false, this policy is not enabled and has no effect.
+     */
+    Enabled: boolean;
+    /**
+     * Contains the parameters for routing production traffic from your primary to staging distributions.
+     */
+    TrafficConfig?: TrafficConfig;
+  }
+  export interface ContinuousDeploymentPolicyList {
+    /**
+     * Indicates the next page of continuous deployment policies. To get the next page of the list, use this value in the Marker field of your request.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of continuous deployment policies that were specified in your request.
+     */
+    MaxItems: integer;
+    /**
+     * The total number of continuous deployment policies in your Amazon Web Services account, regardless of the MaxItems value.
+     */
+    Quantity: integer;
+    /**
+     * A list of continuous deployment policy items.
+     */
+    Items?: ContinuousDeploymentPolicySummaryList;
+  }
+  export interface ContinuousDeploymentPolicySummary {
+    /**
+     * The continuous deployment policy.
+     */
+    ContinuousDeploymentPolicy: ContinuousDeploymentPolicy;
+  }
+  export type ContinuousDeploymentPolicySummaryList = ContinuousDeploymentPolicySummary[];
+  export type ContinuousDeploymentPolicyType = "SingleWeight"|"SingleHeader"|string;
+  export interface ContinuousDeploymentSingleHeaderConfig {
+    /**
+     * The request header name that you want CloudFront to send to your staging distribution.
+     */
+    Header: string;
+    /**
+     * The request header value.
+     */
+    Value: string;
+  }
+  export interface ContinuousDeploymentSingleWeightConfig {
+    /**
+     * The percentage of traffic to send to the staging distribution, expressed as a decimal number between 0 and 1.
+     */
+    Weight: float;
+    SessionStickinessConfig?: SessionStickinessConfig;
+  }
   export type CookieNameList = string[];
   export interface CookieNames {
     /**
@@ -1250,6 +1374,35 @@ declare namespace CloudFront {
      * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use a cache policy. For more information, see Creating cache policies in the Amazon CloudFront Developer Guide. If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies in the Amazon CloudFront Developer Guide. Required if you specify whitelist for the value of Forward. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the Amazon Web Services General Reference.
      */
     WhitelistedNames?: CookieNames;
+  }
+  export interface CopyDistributionRequest {
+    /**
+     * The identifier of the primary distribution whose configuration you are copying. To get a distribution ID, use ListDistributions.
+     */
+    PrimaryDistributionId: string;
+    /**
+     * The type of distribution that your primary distribution will be copied to. The only valid value is True, indicating that you are copying to a staging distribution.
+     */
+    Staging?: boolean;
+    /**
+     * The version identifier of the primary distribution whose configuration you are copying. This is the ETag value returned in the response to GetDistribution and GetDistributionConfig.
+     */
+    IfMatch?: string;
+    /**
+     * A value that uniquely identifies a request to create a resource. This helps to prevent CloudFront from creating a duplicate resource if you accidentally resubmit an identical request.
+     */
+    CallerReference: string;
+  }
+  export interface CopyDistributionResult {
+    Distribution?: Distribution;
+    /**
+     * The URL of the staging distribution.
+     */
+    Location?: string;
+    /**
+     * The version identifier for the current version of the staging distribution.
+     */
+    ETag?: string;
   }
   export interface CreateCachePolicyRequest {
     /**
@@ -1288,6 +1441,26 @@ declare namespace CloudFront {
     Location?: string;
     /**
      * The current version of the origin access identity created.
+     */
+    ETag?: string;
+  }
+  export interface CreateContinuousDeploymentPolicyRequest {
+    /**
+     * Contains the configuration for a continuous deployment policy.
+     */
+    ContinuousDeploymentPolicyConfig: ContinuousDeploymentPolicyConfig;
+  }
+  export interface CreateContinuousDeploymentPolicyResult {
+    /**
+     * A continuous deployment policy.
+     */
+    ContinuousDeploymentPolicy?: ContinuousDeploymentPolicy;
+    /**
+     * The location of the continuous deployment policy.
+     */
+    Location?: string;
+    /**
+     * The version identifier for the current version of the continuous deployment policy.
      */
     ETag?: string;
   }
@@ -1755,6 +1928,16 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
+  export interface DeleteContinuousDeploymentPolicyRequest {
+    /**
+     * The identifier of the continuous deployment policy that you are deleting.
+     */
+    Id: string;
+    /**
+     * The current version (ETag value) of the continuous deployment policy that you are deleting.
+     */
+    IfMatch?: string;
+  }
   export interface DeleteDistributionRequest {
     /**
      * The distribution ID. 
@@ -1895,19 +2078,19 @@ declare namespace CloudFront {
   }
   export interface Distribution {
     /**
-     * The identifier for the distribution. For example: EDFDVBD632BHDS5. 
+     * The distribution’s identifier. For example: E1U5RQF7T870K0.
      */
     Id: string;
     /**
-     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your Amazon Web Services account ID.
+     * The distribution’s Amazon Resource Name (ARN).
      */
     ARN: string;
     /**
-     * This response element indicates the current status of the distribution. When the status is Deployed, the distribution's information is fully propagated to all CloudFront edge locations. 
+     * The distribution’s status. When the status is Deployed, the distribution’s information is fully propagated to all CloudFront edge locations.
      */
     Status: string;
     /**
-     * The date and time the distribution was last modified. 
+     * The date and time when the distribution was last modified.
      */
     LastModifiedTime: timestamp;
     /**
@@ -1915,7 +2098,7 @@ declare namespace CloudFront {
      */
     InProgressInvalidationBatches: integer;
     /**
-     * The domain name corresponding to the distribution, for example, d111111abcdef8.cloudfront.net. 
+     * The distribution’s CloudFront domain name. For example: d111111abcdef8.cloudfront.net.
      */
     DomainName: string;
     /**
@@ -1927,7 +2110,7 @@ declare namespace CloudFront {
      */
     ActiveTrustedKeyGroups?: ActiveTrustedKeyGroups;
     /**
-     * The current configuration information for the distribution. Send a GET request to the /CloudFront API version/distribution ID/config resource.
+     * The distribution’s configuration.
      */
     DistributionConfig: DistributionConfig;
     /**
@@ -1945,7 +2128,7 @@ declare namespace CloudFront {
      */
     Aliases?: Aliases;
     /**
-     * The object that you want CloudFront to request from your origin (for example, index.html) when a viewer requests the root URL for your distribution (http://www.example.com) instead of an object in your distribution (http://www.example.com/product-description.html). Specifying a default root object avoids exposing the contents of your distribution. Specify only the object name, for example, index.html. Don't add a / before the object name. If you don't want to specify a default root object when you create a distribution, include an empty DefaultRootObject element. To delete the default root object from an existing distribution, update the distribution configuration and include an empty DefaultRootObject element. To replace the default root object, update the distribution configuration and specify the new object. For more information about the default root object, see Creating a Default Root Object in the Amazon CloudFront Developer Guide.
+     * The object that you want CloudFront to request from your origin (for example, index.html) when a viewer requests the root URL for your distribution (https://www.example.com) instead of an object in your distribution (https://www.example.com/product-description.html). Specifying a default root object avoids exposing the contents of your distribution. Specify only the object name, for example, index.html. Don't add a / before the object name. If you don't want to specify a default root object when you create a distribution, include an empty DefaultRootObject element. To delete the default root object from an existing distribution, update the distribution configuration and include an empty DefaultRootObject element. To replace the default root object, update the distribution configuration and specify the new object. For more information about the default root object, see Creating a Default Root Object in the Amazon CloudFront Developer Guide.
      */
     DefaultRootObject?: string;
     /**
@@ -2535,6 +2718,35 @@ declare namespace CloudFront {
     CloudFrontOriginAccessIdentity?: CloudFrontOriginAccessIdentity;
     /**
      * The current version of the origin access identity's information. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface GetContinuousDeploymentPolicyConfigRequest {
+    /**
+     * The identifier of the continuous deployment policy whose configuration you are getting.
+     */
+    Id: string;
+  }
+  export interface GetContinuousDeploymentPolicyConfigResult {
+    ContinuousDeploymentPolicyConfig?: ContinuousDeploymentPolicyConfig;
+    /**
+     * The version identifier for the current version of the continuous deployment policy.
+     */
+    ETag?: string;
+  }
+  export interface GetContinuousDeploymentPolicyRequest {
+    /**
+     * The identifier of the continuous deployment policy that you are getting.
+     */
+    Id: string;
+  }
+  export interface GetContinuousDeploymentPolicyResult {
+    /**
+     * A continuous deployment policy.
+     */
+    ContinuousDeploymentPolicy?: ContinuousDeploymentPolicy;
+    /**
+     * The version identifier for the current version of the continuous deployment policy.
      */
     ETag?: string;
   }
@@ -3145,6 +3357,22 @@ declare namespace CloudFront {
      */
     ConflictingAliasesList?: ConflictingAliasesList;
   }
+  export interface ListContinuousDeploymentPoliciesRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of continuous deployment policies. The response includes policies in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of continuous deployment policies that you want returned in the response.
+     */
+    MaxItems?: string;
+  }
+  export interface ListContinuousDeploymentPoliciesResult {
+    /**
+     * A list of continuous deployment policies.
+     */
+    ContinuousDeploymentPolicyList?: ContinuousDeploymentPolicyList;
+  }
   export interface ListDistributionsByCachePolicyIdRequest {
     /**
      * Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
@@ -3568,7 +3796,7 @@ declare namespace CloudFront {
     /**
      * A description of the origin access control.
      */
-    Description: string;
+    Description?: string;
     /**
      * The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is sigv4.
      */
@@ -4352,6 +4580,16 @@ declare namespace CloudFront {
   }
   export type SSLSupportMethod = "sni-only"|"vip"|"static-ip"|string;
   export type SamplingRate = number;
+  export interface SessionStickinessConfig {
+    /**
+     * The amount of time after which you want sessions to cease if no requests are received.&#x2028;Allowed values are 300–3600 seconds (5–60 minutes). The value must be less than or equal to MaximumTTL.
+     */
+    IdleTTL: integer;
+    /**
+     * The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300–3600 seconds (5–60 minutes). The value must be less than or equal to IdleTTL.
+     */
+    MaximumTTL: integer;
+  }
   export interface _Signer {
     /**
      * An Amazon Web Services account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the Amazon Web Services account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is self.
@@ -4365,6 +4603,17 @@ declare namespace CloudFront {
   export type SignerList = _Signer[];
   export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2"|string;
   export type SslProtocolsList = SslProtocol[];
+  export type StagingDistributionDnsNameList = string[];
+  export interface StagingDistributionDnsNames {
+    /**
+     * The number of CloudFront domain names in your staging distribution.
+     */
+    Quantity: integer;
+    /**
+     * The CloudFront domain name of the staging distribution.
+     */
+    Items?: StagingDistributionDnsNameList;
+  }
   export type StatusCodeList = integer[];
   export interface StatusCodes {
     /**
@@ -4619,6 +4868,20 @@ declare namespace CloudFront {
      */
     FunctionOutput?: sensitiveStringType;
   }
+  export interface TrafficConfig {
+    /**
+     * Contains the percentage of traffic to send to the staging distribution.
+     */
+    SingleWeightConfig?: ContinuousDeploymentSingleWeightConfig;
+    /**
+     * Determines which HTTP requests are sent to the staging distribution.
+     */
+    SingleHeaderConfig?: ContinuousDeploymentSingleHeaderConfig;
+    /**
+     * The type of traffic configuration.
+     */
+    Type: ContinuousDeploymentPolicyType;
+  }
   export type TrustedKeyGroupIdList = string[];
   export interface TrustedKeyGroups {
     /**
@@ -4703,6 +4966,30 @@ declare namespace CloudFront {
     CloudFrontOriginAccessIdentity?: CloudFrontOriginAccessIdentity;
     /**
      * The current version of the configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface UpdateContinuousDeploymentPolicyRequest {
+    /**
+     * The continuous deployment policy configuration.
+     */
+    ContinuousDeploymentPolicyConfig: ContinuousDeploymentPolicyConfig;
+    /**
+     * The identifier of the continuous deployment policy that you are updating.
+     */
+    Id: string;
+    /**
+     * The current version (ETag value) of the continuous deployment policy that you are updating.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateContinuousDeploymentPolicyResult {
+    /**
+     * A continuous deployment policy.
+     */
+    ContinuousDeploymentPolicy?: ContinuousDeploymentPolicy;
+    /**
+     * The version identifier for the current version of the continuous deployment policy.
      */
     ETag?: string;
   }
@@ -5011,6 +5298,7 @@ declare namespace CloudFront {
   export type ViewerProtocolPolicy = "allow-all"|"https-only"|"redirect-to-https"|string;
   export type aliasString = string;
   export type distributionIdString = string;
+  export type float = number;
   export type integer = number;
   export type listConflictingAliasesMaxItemsInteger = number;
   export type long = number;

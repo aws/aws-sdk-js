@@ -124,11 +124,11 @@ declare class Appflow extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Appflow.Types.ListTagsForResourceResponse) => void): Request<Appflow.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Registers a new connector with your Amazon Web Services account. Before you can register the connector, you must deploy lambda in your account.
+   * Registers a new custom connector with your Amazon Web Services account. Before you can register the connector, you must deploy the associated AWS lambda function in your account.
    */
   registerConnector(params: Appflow.Types.RegisterConnectorRequest, callback?: (err: AWSError, data: Appflow.Types.RegisterConnectorResponse) => void): Request<Appflow.Types.RegisterConnectorResponse, AWSError>;
   /**
-   * Registers a new connector with your Amazon Web Services account. Before you can register the connector, you must deploy lambda in your account.
+   * Registers a new custom connector with your Amazon Web Services account. Before you can register the connector, you must deploy the associated AWS lambda function in your account.
    */
   registerConnector(callback?: (err: AWSError, data: Appflow.Types.RegisterConnectorResponse) => void): Request<Appflow.Types.RegisterConnectorResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class Appflow extends Service {
    */
   tagResource(callback?: (err: AWSError, data: Appflow.Types.TagResourceResponse) => void): Request<Appflow.Types.TagResourceResponse, AWSError>;
   /**
-   * Unregisters the custom connector registered in your account that matches the connectorLabel provided in the request.
+   * Unregisters the custom connector registered in your account that matches the connector label provided in the request.
    */
   unregisterConnector(params: Appflow.Types.UnregisterConnectorRequest, callback?: (err: AWSError, data: Appflow.Types.UnregisterConnectorResponse) => void): Request<Appflow.Types.UnregisterConnectorResponse, AWSError>;
   /**
-   * Unregisters the custom connector registered in your account that matches the connectorLabel provided in the request.
+   * Unregisters the custom connector registered in your account that matches the connector label provided in the request.
    */
   unregisterConnector(callback?: (err: AWSError, data: Appflow.Types.UnregisterConnectorResponse) => void): Request<Appflow.Types.UnregisterConnectorResponse, AWSError>;
   /**
@@ -179,6 +179,14 @@ declare class Appflow extends Service {
    *  Updates a given connector profile associated with your account. 
    */
   updateConnectorProfile(callback?: (err: AWSError, data: Appflow.Types.UpdateConnectorProfileResponse) => void): Request<Appflow.Types.UpdateConnectorProfileResponse, AWSError>;
+  /**
+   * Updates a custom connector that you've previously registered. This operation updates the connector with one of the following:   The latest version of the AWS Lambda function that's assigned to the connector   A new AWS Lambda function that you specify  
+   */
+  updateConnectorRegistration(params: Appflow.Types.UpdateConnectorRegistrationRequest, callback?: (err: AWSError, data: Appflow.Types.UpdateConnectorRegistrationResponse) => void): Request<Appflow.Types.UpdateConnectorRegistrationResponse, AWSError>;
+  /**
+   * Updates a custom connector that you've previously registered. This operation updates the connector with one of the following:   The latest version of the AWS Lambda function that's assigned to the connector   A new AWS Lambda function that you specify  
+   */
+  updateConnectorRegistration(callback?: (err: AWSError, data: Appflow.Types.UpdateConnectorRegistrationResponse) => void): Request<Appflow.Types.UpdateConnectorRegistrationResponse, AWSError>;
   /**
    *  Updates an existing flow. 
    */
@@ -2462,7 +2470,7 @@ declare namespace Appflow {
      */
     includeDeletedRecords?: Boolean;
     /**
-     * Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data from Salesforce.  AUTOMATIC  The default. Amazon AppFlow selects which API to use based on the number of records that your flow transfers from Salesforce. If your flow transfers fewer than 1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0. Each of these Salesforce APIs structures data differently. If Amazon AppFlow selects the API automatically, be aware that, for recurring flows, the data output might vary from one flow run to the next. For example, if a flow runs daily, it might use REST API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next day to transfer 1,100,000 records. For each of these flow runs, the respective Salesforce API formats the data differently. Some of the differences include how dates are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer Salesforce compound fields. By choosing this option, you optimize flow performance for both small and large data transfers, but the tradeoff is inconsistent formatting in the output.  BULKV2  Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous data transfers, and it's optimal for large sets of data. By choosing this option, you ensure that your flow writes consistent output, but you optimize performance only for large data transfers. Note that Bulk API 2.0 does not transfer Salesforce compound fields.  REST_SYNC  Amazon AppFlow uses only Salesforce REST API. By choosing this option, you ensure that your flow writes consistent output, but you decrease performance for large data transfers that are better suited for Bulk API 2.0. In some cases, if your flow attempts to transfer a vary large set of data, it might fail with a timed out error.  
+     * Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data from Salesforce.  AUTOMATIC  The default. Amazon AppFlow selects which API to use based on the number of records that your flow transfers from Salesforce. If your flow transfers fewer than 1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0. Each of these Salesforce APIs structures data differently. If Amazon AppFlow selects the API automatically, be aware that, for recurring flows, the data output might vary from one flow run to the next. For example, if a flow runs daily, it might use REST API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next day to transfer 1,100,000 records. For each of these flow runs, the respective Salesforce API formats the data differently. Some of the differences include how dates are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer Salesforce compound fields. By choosing this option, you optimize flow performance for both small and large data transfers, but the tradeoff is inconsistent formatting in the output.  BULKV2  Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous data transfers, and it's optimal for large sets of data. By choosing this option, you ensure that your flow writes consistent output, but you optimize performance only for large data transfers. Note that Bulk API 2.0 does not transfer Salesforce compound fields.  REST_SYNC  Amazon AppFlow uses only Salesforce REST API. By choosing this option, you ensure that your flow writes consistent output, but you decrease performance for large data transfers that are better suited for Bulk API 2.0. In some cases, if your flow attempts to transfer a vary large set of data, it might fail wituh a timed out error.  
      */
     dataTransferApi?: SalesforceDataTransferApi;
   }
@@ -2927,6 +2935,23 @@ declare namespace Appflow {
      *  The Amazon Resource Name (ARN) of the connector profile. 
      */
     connectorProfileArn?: ConnectorProfileArn;
+  }
+  export interface UpdateConnectorRegistrationRequest {
+    /**
+     * The name of the connector. The name is unique for each connector registration in your AWS account.
+     */
+    connectorLabel: ConnectorLabel;
+    /**
+     * A description about the update that you're applying to the connector.
+     */
+    description?: Description;
+    connectorProvisioningConfig?: ConnectorProvisioningConfig;
+  }
+  export interface UpdateConnectorRegistrationResponse {
+    /**
+     * The ARN of the connector being updated.
+     */
+    connectorArn?: ARN;
   }
   export interface UpdateFlowRequest {
     /**

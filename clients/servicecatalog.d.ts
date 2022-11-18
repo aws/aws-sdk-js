@@ -28,11 +28,11 @@ declare class ServiceCatalog extends Service {
    */
   associateBudgetWithResource(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateBudgetWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateBudgetWithResourceOutput, AWSError>;
   /**
-   * Associates the specified principal ARN with the specified portfolio.
+   * Associates the specified principal ARN with the specified portfolio. If you share the portfolio with principal name sharing enabled, the PrincipalARN association is included in the share.  The PortfolioID, PrincipalARN, and PrincipalType parameters are required.  You can associate a maximum of 10 Principals with a portfolio using PrincipalType as IAM_PATTERN   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   associatePrincipalWithPortfolio(params: ServiceCatalog.Types.AssociatePrincipalWithPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
   /**
-   * Associates the specified principal ARN with the specified portfolio.
+   * Associates the specified principal ARN with the specified portfolio. If you share the portfolio with principal name sharing enabled, the PrincipalARN association is included in the share.  The PortfolioID, PrincipalARN, and PrincipalType parameters are required.  You can associate a maximum of 10 Principals with a portfolio using PrincipalType as IAM_PATTERN   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   associatePrincipalWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class ServiceCatalog extends Service {
    */
   createPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource, including portfolios that contain a shared product. If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the  UpdatePortfolioShare API instead.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource, including portfolios that contain a shared product. If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the  UpdatePortfolioShare API instead.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   createPortfolioShare(params: ServiceCatalog.Types.CreatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource, including portfolios that contain a shared product. If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the  UpdatePortfolioShare API instead.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource, including portfolios that contain a shared product. If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the  UpdatePortfolioShare API instead.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   createPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class ServiceCatalog extends Service {
    */
   disassociateBudgetFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateBudgetFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateBudgetFromResourceOutput, AWSError>;
   /**
-   * Disassociates a previously associated principal ARN from a specified portfolio.
+   * Disassociates a previously associated principal ARN from a specified portfolio. The PrincipalType and PrincipalARN must match the AssociatePrincipalWithPortfolio call request details. For example, to disassociate an association created with a PrincipalARN of PrincipalType IAM you must use the PrincipalType IAM when calling DisassociatePrincipalFromPortfolio.  For portfolios that have been shared with principal name sharing enabled: after disassociating a principal, share recipient accounts will no longer be able to provision products in this portfolio using a role matching the name of the associated principal. 
    */
   disassociatePrincipalFromPortfolio(params: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
   /**
-   * Disassociates a previously associated principal ARN from a specified portfolio.
+   * Disassociates a previously associated principal ARN from a specified portfolio. The PrincipalType and PrincipalARN must match the AssociatePrincipalWithPortfolio call request details. For example, to disassociate an association created with a PrincipalARN of PrincipalType IAM you must use the PrincipalType IAM when calling DisassociatePrincipalFromPortfolio.  For portfolios that have been shared with principal name sharing enabled: after disassociating a principal, share recipient accounts will no longer be able to provision products in this portfolio using a role matching the name of the associated principal. 
    */
   disassociatePrincipalFromPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
   /**
@@ -428,11 +428,11 @@ declare class ServiceCatalog extends Service {
    */
   getProvisionedProductOutputs(callback?: (err: AWSError, data: ServiceCatalog.Types.GetProvisionedProductOutputsOutput) => void): Request<ServiceCatalog.Types.GetProvisionedProductOutputsOutput, AWSError>;
   /**
-   * Requests the import of a resource as a Amazon Web Services Service Catalog provisioned product that is associated to a Amazon Web Services Service Catalog product and provisioning artifact. Once imported, all supported Amazon Web Services Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Amazon Web Services Service Catalog product provisioning artifact.  The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
+   * Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.  The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
    */
   importAsProvisionedProduct(params: ServiceCatalog.Types.ImportAsProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
   /**
-   * Requests the import of a resource as a Amazon Web Services Service Catalog provisioned product that is associated to a Amazon Web Services Service Catalog product and provisioning artifact. Once imported, all supported Amazon Web Services Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Amazon Web Services Service Catalog product provisioning artifact.  The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
+   * Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.  The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
    */
   importAsProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
   /**
@@ -500,11 +500,11 @@ declare class ServiceCatalog extends Service {
    */
   listPortfoliosForProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosForProductOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosForProductOutput, AWSError>;
   /**
-   * Lists all principal ARNs associated with the specified portfolio.
+   * Lists all PrincipalARNs and corresponding PrincipalTypes associated with the specified portfolio.
    */
   listPrincipalsForPortfolio(params: ServiceCatalog.Types.ListPrincipalsForPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
   /**
-   * Lists all principal ARNs associated with the specified portfolio.
+   * Lists all PrincipalARNs and corresponding PrincipalTypes associated with the specified portfolio.
    */
   listPrincipalsForPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
   /**
@@ -652,11 +652,11 @@ declare class ServiceCatalog extends Service {
    */
   updatePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
   /**
-   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing for an existing portfolio share.  The portfolio share cannot be updated if the  CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action. 
+   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing or Principal sharing for an existing portfolio share.  The portfolio share cannot be updated if the CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   updatePortfolioShare(params: ServiceCatalog.Types.UpdatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioShareOutput, AWSError>;
   /**
-   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing for an existing portfolio share.  The portfolio share cannot be updated if the  CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action. 
+   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing or Principal sharing for an existing portfolio share.  The portfolio share cannot be updated if the CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   updatePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioShareOutput, AWSError>;
   /**
@@ -766,11 +766,11 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The ARN of the principal (IAM user, role, or group).
+     * The ARN of the principal (IAM user, role, or group). This field allows an ARN with no accountID if PrincipalType is IAM_PATTERN.  You can associate multiple IAM patterns even if the account has no principal with that name. This is useful in Principal Name Sharing if you want to share a principal without creating it in the account that owns the portfolio. 
      */
     PrincipalARN: PrincipalARN;
     /**
-     * The principal type. The supported value is IAM.
+     * The principal type. The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if you use an ARN with no accountID. 
      */
     PrincipalType: PrincipalType;
   }
@@ -880,6 +880,25 @@ declare namespace ServiceCatalog {
   }
   export type CloudWatchDashboardName = string;
   export type CloudWatchDashboards = CloudWatchDashboard[];
+  export type CodeStarConnectionArn = string;
+  export interface CodeStarParameters {
+    /**
+     * The CodeStar ARN, which is the connection between Service Catalog and the external repository.
+     */
+    ConnectionArn: CodeStarConnectionArn;
+    /**
+     * The specific repository where the product’s artifact-to-be-synced resides, formatted as "Account/Repo." 
+     */
+    Repository: Repository;
+    /**
+     * The specific branch where the artifact resides. 
+     */
+    Branch: RepositoryBranch;
+    /**
+     * The absolute path wehre the artifact resides within the repo and branch, formatted as "folder/file.json." 
+     */
+    ArtifactPath: RepositoryArtifactPath;
+  }
   export type ConstraintDescription = string;
   export interface ConstraintDetail {
     /**
@@ -1061,6 +1080,10 @@ declare namespace ServiceCatalog {
      * Enables or disables TagOptions  sharing when creating the portfolio share. If this flag is not provided, TagOptions sharing is disabled.
      */
     ShareTagOptions?: Boolean;
+    /**
+     * Enables or disables Principal sharing when creating the portfolio share. If this flag is not provided, principal sharing is disabled.  When you enable Principal Name Sharing for a portfolio share, the share recipient account end users with a principal that matches any of the associated IAM patterns can provision products from the portfolio. Once shared, the share recipient can view associations of PrincipalType: IAM_PATTERN on their portfolio. You can create the principals in the recipient account before or after creating the share. 
+     */
+    SharePrincipals?: Boolean;
   }
   export interface CreatePortfolioShareOutput {
     /**
@@ -1112,11 +1135,15 @@ declare namespace ServiceCatalog {
     /**
      * The configuration of the provisioning artifact. 
      */
-    ProvisioningArtifactParameters: ProvisioningArtifactProperties;
+    ProvisioningArtifactParameters?: ProvisioningArtifactProperties;
     /**
      * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
      */
     IdempotencyToken: IdempotencyToken;
+    /**
+     * Specifies connection details for the created product and syncs the product to the connection source artifact. This automatically manages the product's artifacts based on changes to the source. The SourceConnection parameter consists of the following sub-fields.    Type     ConnectionParamters   
+     */
+    SourceConnection?: SourceConnection;
   }
   export interface CreateProductOutput {
     /**
@@ -1224,7 +1251,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
-     * Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ]. The URL of the CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub in JSON format.   LoadTemplateFromURL  Use the URL of the CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub in JSON format.  ImportFromPhysicalId  Use the physical id of the resource that contains the template; currently supports CloudFormation stack ARN.
+     * Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ]. Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.   LoadTemplateFromURL  Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.  ImportFromPhysicalId  Use the physical id of the resource that contains the template; currently supports CloudFormation stack ARN.
      */
     Info?: ProvisioningArtifactInfo;
     /**
@@ -1708,7 +1735,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
-     * The URL of the CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub in JSON format.
+     * The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.
      */
     Info?: ProvisioningArtifactInfo;
     /**
@@ -1884,9 +1911,13 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The ARN of the principal (IAM user, role, or group).
+     * The ARN of the principal (IAM user, role, or group). This field allows an ARN with no accountID if PrincipalType is IAM_PATTERN.
      */
     PrincipalARN: PrincipalARN;
+    /**
+     * The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if you use no accountID. 
+     */
+    PrincipalType?: PrincipalType;
   }
   export interface DisassociatePrincipalFromPortfolioOutput {
   }
@@ -2117,6 +2148,32 @@ declare namespace ServiceCatalog {
   export type InstructionType = string;
   export type InstructionValue = string;
   export type LastRequestId = string;
+  export type LastSuccessfulSyncTime = Date;
+  export interface LastSync {
+    /**
+     * The time of the last attempted sync from the repository to the Service Catalog product. 
+     */
+    LastSyncTime?: LastSyncTime;
+    /**
+     * The current status of the sync. Responses include SUCCEEDED or FAILED. 
+     */
+    LastSyncStatus?: LastSyncStatus;
+    /**
+     * The sync's status message. 
+     */
+    LastSyncStatusMessage?: LastSyncStatusMessage;
+    /**
+     * The time of the latest successful sync from the source repo artifact to the Service Catalog product.
+     */
+    LastSuccessfulSyncTime?: LastSuccessfulSyncTime;
+    /**
+     * The ProvisioningArtifactID of the ProvisioningArtifact created from the latest successful sync. 
+     */
+    LastSuccessfulSyncProvisioningArtifactId?: Id;
+  }
+  export type LastSyncStatus = "SUCCEEDED"|"FAILED"|string;
+  export type LastSyncStatusMessage = string;
+  export type LastSyncTime = Date;
   export interface LaunchPath {
     /**
      * The identifier of the launch path.
@@ -2399,7 +2456,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPrincipalsForPortfolioOutput {
     /**
-     * The IAM principals (users or roles) associated with the portfolio.
+     * The PrincipalARNs and corresponding PrincipalTypes associated with the portfolio.
      */
     Principals?: Principals;
     /**
@@ -2775,7 +2832,7 @@ declare namespace ServiceCatalog {
   export type PortfolioName = string;
   export interface PortfolioShareDetail {
     /**
-     * The identifier of the recipient entity that received the portfolio share. The recipient entities can be one of the following:  1. An external account. 2. An organziation member account. 3. An organzational unit (OU). 4. The organization itself. (This shares with every account in the organization).
+     * The identifier of the recipient entity that received the portfolio share. The recipient entity can be one of the following: 1. An external account. 2. An organziation member account. 3. An organzational unit (OU). 4. The organization itself. (This shares with every account in the organization).
      */
     PrincipalId?: Id;
     /**
@@ -2790,21 +2847,25 @@ declare namespace ServiceCatalog {
      * Indicates whether TagOptions sharing is enabled or disabled for the portfolio share.
      */
     ShareTagOptions?: Boolean;
+    /**
+     * Indicates if Principal sharing is enabled or disabled for the portfolio share. 
+     */
+    SharePrincipals?: Boolean;
   }
   export type PortfolioShareDetails = PortfolioShareDetail[];
   export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
   export interface Principal {
     /**
-     * The ARN of the principal (IAM user, role, or group).
+     * The ARN of the principal (IAM user, role, or group). This field allows for an ARN with no accountID if the PrincipalType is an IAM_PATTERN. 
      */
     PrincipalARN?: PrincipalARN;
     /**
-     * The principal type. The supported value is IAM.
+     * The principal type. The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if you use an ARN with no accountID. 
      */
     PrincipalType?: PrincipalType;
   }
   export type PrincipalARN = string;
-  export type PrincipalType = "IAM"|string;
+  export type PrincipalType = "IAM"|"IAM_PATTERN"|string;
   export type Principals = Principal[];
   export type ProductArn = string;
   export type ProductSource = "ACCOUNT"|string;
@@ -2839,6 +2900,10 @@ declare namespace ServiceCatalog {
      * The UTC time stamp of the creation time.
      */
     CreatedTime?: CreatedTime;
+    /**
+     * A top level ProductViewDetail response containing details about the product’s connection. Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response.
+     */
+    SourceConnection?: SourceConnectionDetail;
   }
   export type ProductViewDetails = ProductViewDetail[];
   export type ProductViewDistributor = string;
@@ -3145,7 +3210,7 @@ declare namespace ServiceCatalog {
      */
     Status?: ProvisionedProductPlanStatus;
     /**
-     * The time when the plan was last updated.
+     * The UTC time stamp when the plan was last updated.
      */
     UpdatedTime?: UpdatedTime;
     /**
@@ -3256,6 +3321,10 @@ declare namespace ServiceCatalog {
      * Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
      */
     Guidance?: ProvisioningArtifactGuidance;
+    /**
+     * Specifies the revision of the external artifact that was used to automatically sync the Service Catalog product and create the provisioning artifact. Service Catalog includes this response parameter as a high level field to the existing ProvisioningArtifactDetail type, which is returned as part of the response for CreateProduct, UpdateProduct, DescribeProductAsAdmin, DescribeProvisioningArtifact, ListProvisioningArtifact, and UpdateProvisioningArticat APIs.  This field only exists for Repo-Synced products. 
+     */
+    SourceRevision?: SourceRevision;
   }
   export type ProvisioningArtifactDetails = ProvisioningArtifactDetail[];
   export type ProvisioningArtifactGuidance = "DEFAULT"|"DEPRECATED"|string;
@@ -3322,15 +3391,15 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactDescription;
     /**
-     * Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub in JSON format. Specify the URL in JSON format as follows:  "LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."   ImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId] 
+     * Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format. Specify the URL in JSON format as follows:  "LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."   ImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId] 
      */
-    Info: ProvisioningArtifactInfo;
+    Info?: ProvisioningArtifactInfo;
     /**
      * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    MARKETPLACE_AMI - Amazon Web Services Marketplace AMI    MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources  
      */
     Type?: ProvisioningArtifactType;
     /**
-     * If set to true, Amazon Web Services Service Catalog stops validating the specified provisioning artifact even if it is invalid.
+     * If set to true, Service Catalog stops validating the specified provisioning artifact even if it is invalid.
      */
     DisableTemplateValidation?: DisableTemplateValidation;
   }
@@ -3527,6 +3596,9 @@ declare namespace ServiceCatalog {
   export interface RejectPortfolioShareOutput {
   }
   export type Replacement = "TRUE"|"FALSE"|"CONDITIONAL"|string;
+  export type Repository = string;
+  export type RepositoryArtifactPath = string;
+  export type RepositoryBranch = string;
   export type RequiresRecreation = "NEVER"|"CONDITIONALLY"|"ALWAYS"|string;
   export type ResourceARN = string;
   export type ResourceAttribute = "PROPERTIES"|"METADATA"|"CREATIONPOLICY"|"UPDATEPOLICY"|"DELETIONPOLICY"|"TAGS"|string;
@@ -3862,8 +3934,40 @@ declare namespace ServiceCatalog {
   export type ShareStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"ERROR"|string;
   export type SortField = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface SourceConnection {
+    /**
+     * The only supported SourceConnection type is Codestar. 
+     */
+    Type?: SourceType;
+    /**
+     * The connection details based on the connection Type. 
+     */
+    ConnectionParameters: SourceConnectionParameters;
+  }
+  export interface SourceConnectionDetail {
+    /**
+     * The only supported SourceConnection type is Codestar.
+     */
+    Type?: SourceType;
+    /**
+     * The connection details based on the connection Type.
+     */
+    ConnectionParameters?: SourceConnectionParameters;
+    /**
+     * Provides details about the product's connection sync and contains the following sub-fields.     LastSyncTime     LastSyncStatus     LastSyncStatusMessage     LastSuccessfulSyncTime     LastSuccessfulSyncProvisioningArtifactID   
+     */
+    LastSync?: LastSync;
+  }
+  export interface SourceConnectionParameters {
+    /**
+     * Provides ConnectionType details.
+     */
+    CodeStar?: CodeStarParameters;
+  }
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
   export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
+  export type SourceRevision = string;
+  export type SourceType = "CODESTAR"|string;
   export interface StackInstance {
     /**
      * The name of the Amazon Web Services account that the stack instance is associated with.
@@ -4068,9 +4172,13 @@ declare namespace ServiceCatalog {
     AccountId?: AccountId;
     OrganizationNode?: OrganizationNode;
     /**
-     * A flag to enable or disable TagOptions sharing for the portfolio share. If this field is not provided, the current state of TagOptions sharing on the portfolio share will not be modified.
+     * Enables or disables TagOptions sharing for the portfolio share. If this field is not provided, the current state of TagOptions sharing on the portfolio share will not be modified.
      */
     ShareTagOptions?: NullableBoolean;
+    /**
+     * A flag to enables or disables Principals sharing in the portfolio. If this field is not provided, the current state of the Principals sharing on the portfolio share will not be modified. 
+     */
+    SharePrincipals?: NullableBoolean;
   }
   export interface UpdatePortfolioShareOutput {
     /**
@@ -4127,6 +4235,10 @@ declare namespace ServiceCatalog {
      * The tags to remove from the product.
      */
     RemoveTags?: TagKeys;
+    /**
+     * Specifies connection details for the updated product and syncs the product to the connection source artifact. This automatically manages the product's artifacts based on changes to the source. The SourceConnection parameter consists of the following sub-fields.    Type     ConnectionParamters   
+     */
+    SourceConnection?: SourceConnection;
   }
   export interface UpdateProductOutput {
     /**
@@ -4270,7 +4382,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
-     * The URL of the CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub in JSON format.
+     * The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.
      */
     Info?: ProvisioningArtifactInfo;
     /**

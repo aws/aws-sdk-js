@@ -12,19 +12,19 @@ declare class StepFunctions extends Service {
   constructor(options?: StepFunctions.Types.ClientConfiguration)
   config: Config & StepFunctions.Types.ClientConfiguration;
   /**
-   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateActivity is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateActivity's idempotency check is based on the activity name. If a following request has different tags values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, tags will not be updated, even if they are different. 
+   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateActivity is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateActivity's idempotency check is based on the activity name. If a following request has different tags values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, tags will not be updated, even if they are different. 
    */
   createActivity(params: StepFunctions.Types.CreateActivityInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateActivity is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateActivity's idempotency check is based on the activity name. If a following request has different tags values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, tags will not be updated, even if they are different. 
+   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateActivity is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateActivity's idempotency check is based on the activity name. If a following request has different tags values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, tags will not be updated, even if they are different. 
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class StepFunctions extends Service {
    */
   deleteActivity(callback?: (err: AWSError, data: StepFunctions.Types.DeleteActivityOutput) => void): Request<StepFunctions.Types.DeleteActivityOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.   For EXPRESSstate machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
+   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.   For EXPRESS state machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
    */
   deleteStateMachine(params: StepFunctions.Types.DeleteStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.   For EXPRESSstate machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
+   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.   For EXPRESS state machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
    */
   deleteStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class StepFunctions extends Service {
    */
   describeStateMachineForExecution(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). Polling with GetActivityTask can cause latency in some implementations. See Avoid Latency When Polling for Activity Tasks in the Step Functions Developer Guide. 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  This API action isn't logged in CloudTrail.   Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). Polling with GetActivityTask can cause latency in some implementations. See Avoid Latency When Polling for Activity Tasks in the Step Functions Developer Guide. 
    */
   getActivityTask(params: StepFunctions.Types.GetActivityTaskInput, callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
-   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). Polling with GetActivityTask can cause latency in some implementations. See Avoid Latency When Polling for Activity Tasks in the Step Functions Developer Guide. 
+   * Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a taskToken with a null string.  This API action isn't logged in CloudTrail.   Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request). Polling with GetActivityTask can cause latency in some implementations. See Avoid Latency When Polling for Activity Tasks in the Step Functions Developer Guide. 
    */
   getActivityTask(callback?: (err: AWSError, data: StepFunctions.Types.GetActivityTaskOutput) => void): Request<StepFunctions.Types.GetActivityTaskOutput, AWSError>;
   /**
@@ -148,19 +148,19 @@ declare class StepFunctions extends Service {
    */
   sendTaskSuccess(callback?: (err: AWSError, data: StepFunctions.Types.SendTaskSuccessOutput) => void): Request<StepFunctions.Types.SendTaskSuccessOutput, AWSError>;
   /**
-   * Starts a state machine execution.   StartExecution is idempotent. If StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.  
+   * Starts a state machine execution.   StartExecution is idempotent for STANDARD workflows. For a STANDARD workflow, if StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.   StartExecution is not idempotent for EXPRESS workflows.  
    */
   startExecution(params: StepFunctions.Types.StartExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
-   * Starts a state machine execution.   StartExecution is idempotent. If StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.  
+   * Starts a state machine execution.   StartExecution is idempotent for STANDARD workflows. For a STANDARD workflow, if StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.   StartExecution is not idempotent for EXPRESS workflows.  
    */
   startExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
-   * Starts a Synchronous Express state machine execution.
+   * Starts a Synchronous Express state machine execution. StartSyncExecution is not available for STANDARD workflows.   StartSyncExecution will return a 200 OK response, even if your execution fails, because the status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your execution from running, such as permissions errors, limit errors, or issues with your state machine code and configuration.    This API action isn't logged in CloudTrail. 
    */
   startSyncExecution(params: StepFunctions.Types.StartSyncExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StartSyncExecutionOutput) => void): Request<StepFunctions.Types.StartSyncExecutionOutput, AWSError>;
   /**
-   * Starts a Synchronous Express state machine execution.
+   * Starts a Synchronous Express state machine execution. StartSyncExecution is not available for STANDARD workflows.   StartSyncExecution will return a 200 OK response, even if your execution fails, because the status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your execution from running, such as permissions errors, limit errors, or issues with your state machine code and configuration.    This API action isn't logged in CloudTrail. 
    */
   startSyncExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartSyncExecutionOutput) => void): Request<StepFunctions.Types.StartSyncExecutionOutput, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class StepFunctions extends Service {
    */
   stopExecution(callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
   /**
-   * Add a tag to a Step Functions resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
+   * Add a tag to a Step Functions resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
    */
   tagResource(params: StepFunctions.Types.TagResourceInput, callback?: (err: AWSError, data: StepFunctions.Types.TagResourceOutput) => void): Request<StepFunctions.Types.TagResourceOutput, AWSError>;
   /**
-   * Add a tag to a Step Functions resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
+   * Add a tag to a Step Functions resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
    */
   tagResource(callback?: (err: AWSError, data: StepFunctions.Types.TagResourceOutput) => void): Request<StepFunctions.Types.TagResourceOutput, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare namespace StepFunctions {
   export type ConnectorParameters = string;
   export interface CreateActivityInput {
     /**
-     * The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the Step Functions Developer Guide. A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
      */
     name: Name;
     /**
-     * The list of tags to add to a resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
+     * The list of tags to add to a resource. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
      */
     tags?: TagList;
   }
@@ -344,15 +344,15 @@ declare namespace StepFunctions {
      */
     type?: StateMachineType;
     /**
-     * Defines what execution history events are logged and where they are logged.  By default, the level is set to OFF. For more information see Log Levels in the AWS Step Functions User Guide. 
+     * Defines what execution history events are logged and where they are logged.  By default, the level is set to OFF. For more information see Log Levels in the Step Functions User Guide. 
      */
     loggingConfiguration?: LoggingConfiguration;
     /**
-     * Tags to be added when creating a state machine. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
+     * Tags to be added when creating a state machine. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
      */
     tags?: TagList;
     /**
-     * Selects whether AWS X-Ray tracing is enabled.
+     * Selects whether X-Ray tracing is enabled.
      */
     tracingConfiguration?: TracingConfiguration;
   }
@@ -445,7 +445,7 @@ declare namespace StepFunctions {
     output?: SensitiveData;
     outputDetails?: CloudWatchEventsExecutionDataDetails;
     /**
-     * The AWS X-Ray trace header that was passed to the execution.
+     * The X-Ray trace header that was passed to the execution.
      */
     traceHeader?: TraceHeader;
   }
@@ -478,7 +478,7 @@ declare namespace StepFunctions {
     updateDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
     /**
-     * Selects whether AWS X-Ray tracing is enabled.
+     * Selects whether X-Ray tracing is enabled.
      */
     tracingConfiguration?: TracingConfiguration;
   }
@@ -506,7 +506,7 @@ declare namespace StepFunctions {
      */
     definition: Definition;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
+     * The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to Amazon Web Services resources.)
      */
     roleArn: Arn;
     /**
@@ -519,7 +519,7 @@ declare namespace StepFunctions {
     creationDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
     /**
-     * Selects whether AWS X-Ray tracing is enabled.
+     * Selects whether X-Ray tracing is enabled.
      */
     tracingConfiguration?: TracingConfiguration;
   }
@@ -582,7 +582,7 @@ declare namespace StepFunctions {
      */
     inputDetails?: HistoryEventExecutionDataDetails;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
+     * The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks.
      */
     roleArn?: Arn;
   }
@@ -750,7 +750,7 @@ declare namespace StepFunctions {
      */
     lambdaFunctionStartFailedEventDetails?: LambdaFunctionStartFailedEventDetails;
     /**
-     * Contains details about a lambda function that terminated successfully during an execution.
+     * Contains details about a Lambda function that terminated successfully during an execution.
      */
     lambdaFunctionSucceededEventDetails?: LambdaFunctionSucceededEventDetails;
     lambdaFunctionTimedOutEventDetails?: LambdaFunctionTimedOutEventDetails;
@@ -790,11 +790,11 @@ declare namespace StepFunctions {
   }
   export interface LambdaFunctionScheduledEventDetails {
     /**
-     * The Amazon Resource Name (ARN) of the scheduled lambda function.
+     * The Amazon Resource Name (ARN) of the scheduled Lambda function.
      */
     resource: Arn;
     /**
-     * The JSON data input to the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     * The JSON data input to the Lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
     /**
@@ -802,9 +802,13 @@ declare namespace StepFunctions {
      */
     inputDetails?: HistoryEventExecutionDataDetails;
     /**
-     * The maximum allowed duration of the lambda function.
+     * The maximum allowed duration of the Lambda function.
      */
     timeoutInSeconds?: TimeoutInSeconds;
+    /**
+     * The credentials that Step Functions uses for the task.
+     */
+    taskCredentials?: TaskCredentials;
   }
   export interface LambdaFunctionStartFailedEventDetails {
     /**
@@ -818,7 +822,7 @@ declare namespace StepFunctions {
   }
   export interface LambdaFunctionSucceededEventDetails {
     /**
-     * The JSON data output by the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     * The JSON data output by the Lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
     /**
@@ -916,7 +920,7 @@ declare namespace StepFunctions {
   }
   export interface LogDestination {
     /**
-     * An object describing a CloudWatch log group. For more information, see AWS::Logs::LogGroup in the AWS CloudFormation User Guide.
+     * An object describing a CloudWatch log group. For more information, see AWS::Logs::LogGroup in the CloudFormation User Guide.
      */
     cloudWatchLogsLogGroup?: CloudWatchLogsLogGroup;
   }
@@ -936,6 +940,7 @@ declare namespace StepFunctions {
      */
     destinations?: LogDestinationList;
   }
+  export type LongArn = string;
   export interface MapIterationEventDetails {
     /**
      * The name of the iteration’s parent Map state.
@@ -1002,7 +1007,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * The name of the execution. This name must be unique for your Amazon Web Services account, region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the Step Functions Developer Guide. A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
      */
     name?: Name;
     /**
@@ -1010,7 +1015,7 @@ declare namespace StepFunctions {
      */
     input?: SensitiveData;
     /**
-     * Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+     * Passes the X-Ray trace header. The trace header can also be passed in the request payload.
      */
     traceHeader?: TraceHeader;
   }
@@ -1038,7 +1043,7 @@ declare namespace StepFunctions {
      */
     input?: SensitiveData;
     /**
-     * Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+     * Passes the X-Ray trace header. The trace header can also be passed in the request payload.
      */
     traceHeader?: TraceHeader;
   }
@@ -1086,7 +1091,7 @@ declare namespace StepFunctions {
     output?: SensitiveData;
     outputDetails?: CloudWatchEventsExecutionDataDetails;
     /**
-     * The AWS X-Ray trace header that was passed to the execution.
+     * The X-Ray trace header that was passed to the execution.
      */
     traceHeader?: TraceHeader;
     /**
@@ -1190,13 +1195,19 @@ declare namespace StepFunctions {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export interface TaskCredentials {
+    /**
+     * The ARN of an IAM role that Step Functions assumes for the task. The role can allow cross-account access to resources.
+     */
+    roleArn?: LongArn;
+  }
   export interface TaskFailedEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1210,11 +1221,11 @@ declare namespace StepFunctions {
   }
   export interface TaskScheduledEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1233,14 +1244,18 @@ declare namespace StepFunctions {
      * The maximum allowed duration between two heartbeats for the task.
      */
     heartbeatInSeconds?: TimeoutInSeconds;
+    /**
+     * The credentials that Step Functions uses for the task.
+     */
+    taskCredentials?: TaskCredentials;
   }
   export interface TaskStartFailedEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1254,21 +1269,21 @@ declare namespace StepFunctions {
   }
   export interface TaskStartedEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
   }
   export interface TaskSubmitFailedEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1282,11 +1297,11 @@ declare namespace StepFunctions {
   }
   export interface TaskSubmittedEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1300,11 +1315,11 @@ declare namespace StepFunctions {
   }
   export interface TaskSucceededEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1318,11 +1333,11 @@ declare namespace StepFunctions {
   }
   export interface TaskTimedOutEventDetails {
     /**
-     * The action of the resource called by a task state.
+     * The service name of the resource in a task state.
      */
     resourceType: Name;
     /**
-     * The service name of the resource in a task state.
+     * The action of the resource called by a task state.
      */
     resource: Name;
     /**
@@ -1340,7 +1355,7 @@ declare namespace StepFunctions {
   export type TraceHeader = string;
   export interface TracingConfiguration {
     /**
-     * When set to true, AWS X-Ray tracing is enabled.
+     * When set to true, X-Ray tracing is enabled.
      */
     enabled?: Enabled;
   }
@@ -1375,7 +1390,7 @@ declare namespace StepFunctions {
      */
     loggingConfiguration?: LoggingConfiguration;
     /**
-     * Selects whether AWS X-Ray tracing is enabled.
+     * Selects whether X-Ray tracing is enabled.
      */
     tracingConfiguration?: TracingConfiguration;
   }

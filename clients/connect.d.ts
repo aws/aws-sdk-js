@@ -1432,6 +1432,7 @@ declare namespace Connect {
   export type AgentStatusTypes = AgentStatusType[];
   export type AgentUsername = string;
   export type AliasArn = string;
+  export type AllowedAccessControlTags = {[key: string]: SecurityProfilePolicyValue};
   export type AllowedMonitorCapabilities = MonitorCapability[];
   export interface AnswerMachineDetectionConfig {
     /**
@@ -2268,11 +2269,12 @@ declare namespace Connect {
      */
     RoutingProfileId?: RoutingProfileId;
   }
+  export type CreateSecurityProfileName = string;
   export interface CreateSecurityProfileRequest {
     /**
      * The name of the security profile.
      */
-    SecurityProfileName: SecurityProfileName;
+    SecurityProfileName: CreateSecurityProfileName;
     /**
      * The description of the security profile.
      */
@@ -2289,6 +2291,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The list of tags that a security profile uses to restrict access to resources in Amazon Connect.
+     */
+    AllowedAccessControlTags?: AllowedAccessControlTags;
+    /**
+     * The list of resources that a security profile applies tag restrictions to in Amazon Connect.
+     */
+    TagRestrictedResources?: TagRestrictedResourceList;
   }
   export interface CreateSecurityProfileResponse {
     /**
@@ -5694,12 +5704,22 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The list of tags that a security profile uses to restrict access to resources in Amazon Connect.
+     */
+    AllowedAccessControlTags?: AllowedAccessControlTags;
+    /**
+     * The list of resources that a security profile applies tag restrictions to in Amazon Connect.
+     */
+    TagRestrictedResources?: TagRestrictedResourceList;
   }
   export type SecurityProfileDescription = string;
   export type SecurityProfileId = string;
   export type SecurityProfileIds = SecurityProfileId[];
   export type SecurityProfileName = string;
   export type SecurityProfilePermission = string;
+  export type SecurityProfilePolicyKey = string;
+  export type SecurityProfilePolicyValue = string;
   export type SecurityProfileSearchConditionList = SecurityProfileSearchCriteria[];
   export interface SecurityProfileSearchCriteria {
     /**
@@ -6070,6 +6090,8 @@ declare namespace Connect {
      */
     tags: TagMap;
   }
+  export type TagRestrictedResourceList = TagRestrictedResourceName[];
+  export type TagRestrictedResourceName = string;
   export type TagValue = string;
   export type TaskTemplateArn = string;
   export interface TaskTemplateConstraints {
@@ -6738,6 +6760,14 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
+    /**
+     * The list of tags that a security profile uses to restrict access to resources in Amazon Connect.
+     */
+    AllowedAccessControlTags?: AllowedAccessControlTags;
+    /**
+     * The list of resources that a security profile applies tag restrictions to in Amazon Connect.
+     */
+    TagRestrictedResources?: TagRestrictedResourceList;
   }
   export interface UpdateTaskTemplateRequest {
     /**

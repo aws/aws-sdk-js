@@ -16062,7 +16062,7 @@ declare namespace SageMaker {
     /**
      * Path to Amazon S3 storage location for system and framework metrics.
      */
-    S3OutputPath: S3Uri;
+    S3OutputPath?: S3Uri;
     /**
      * A time interval for capturing system metrics in milliseconds. Available values are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute) milliseconds. The default value is 500 milliseconds.
      */
@@ -16071,6 +16071,10 @@ declare namespace SageMaker {
      * Configuration information for capturing framework metrics. Available key strings for different profiling options are DetailedProfilingConfig, PythonProfilingConfig, and DataLoaderProfilingConfig. The following codes are configuration structures for the ProfilingParameters parameter. To learn more about how to configure the ProfilingParameters parameter, see Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job. 
      */
     ProfilingParameters?: ProfilingParameters;
+    /**
+     * To disable system monitoring and profiling, set to True.
+     */
+    DisableProfiler?: DisableProfiler;
   }
   export interface ProfilerConfigForUpdate {
     /**

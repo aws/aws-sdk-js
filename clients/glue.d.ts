@@ -2984,7 +2984,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Include and Exclude Patterns.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Setting crawler configuration options.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -3238,7 +3238,7 @@ declare namespace Glue {
      */
     LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Setting crawler configuration options.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -4950,6 +4950,7 @@ declare namespace Glue {
     DestinationId?: NameString;
   }
   export type EdgeList = Edge[];
+  export type EnableAdditionalMetadata = JdbcMetadataEntry[];
   export type EnableHybridValues = "TRUE"|"FALSE"|string;
   export type EnclosedInStringProperties = EnclosedInStringProperty[];
   export type EnclosedInStringPropertiesMinOne = EnclosedInStringProperty[];
@@ -6946,6 +6947,7 @@ declare namespace Glue {
   }
   export type JDBCDataType = "ARRAY"|"BIGINT"|"BINARY"|"BIT"|"BLOB"|"BOOLEAN"|"CHAR"|"CLOB"|"DATALINK"|"DATE"|"DECIMAL"|"DISTINCT"|"DOUBLE"|"FLOAT"|"INTEGER"|"JAVA_OBJECT"|"LONGNVARCHAR"|"LONGVARBINARY"|"LONGVARCHAR"|"NCHAR"|"NCLOB"|"NULL"|"NUMERIC"|"NVARCHAR"|"OTHER"|"REAL"|"REF"|"REF_CURSOR"|"ROWID"|"SMALLINT"|"SQLXML"|"STRUCT"|"TIME"|"TIME_WITH_TIMEZONE"|"TIMESTAMP"|"TIMESTAMP_WITH_TIMEZONE"|"TINYINT"|"VARBINARY"|"VARCHAR"|string;
   export type JDBCDataTypeMapping = {[key: string]: GlueRecordType};
+  export type JdbcMetadataEntry = "COMMENTS"|"RAWTYPES"|string;
   export interface JdbcTarget {
     /**
      * The name of the connection to use to connect to the JDBC target.
@@ -6959,6 +6961,10 @@ declare namespace Glue {
      * A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.
      */
     Exclusions?: PathList;
+    /**
+     * Specify a value of RAWTYPES or COMMENTS to enable additional metadata in table responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database. If you do not need additional metadata, keep the field empty.
+     */
+    EnableAdditionalMetadata?: EnableAdditionalMetadata;
   }
   export type JdbcTargetList = JdbcTarget[];
   export interface Job {
@@ -10995,7 +11001,7 @@ declare namespace Glue {
      */
     LakeFormationConfiguration?: LakeFormationConfiguration;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Setting crawler configuration options.
      */
     Configuration?: CrawlerConfiguration;
     /**
