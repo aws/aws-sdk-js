@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ssmsap",
+  "description": "remove ssmsap client"
+}
