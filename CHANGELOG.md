@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1258.0-->
+<!--LATEST=2.1259.0-->
 <!--ENTRYINSERT-->
+
+## 2.1259.0
+* feature: Route53: Amazon Route 53 now supports the Asia Pacific (Hyderabad) Region (ap-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
 
 ## 2.1258.0
 * bugfix: ssmsap: remove ssmsap client
