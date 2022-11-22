@@ -326,6 +326,7 @@ declare namespace Appflow {
   export type ClientId = string;
   export type ClientNumber = string;
   export type ClientSecret = string;
+  export type ClusterIdentifier = string;
   export type ConnectionMode = "Public"|"Private"|string;
   export interface ConnectorConfiguration {
     /**
@@ -760,7 +761,7 @@ declare namespace Appflow {
     /**
      *  The connector-specific credentials required by each connector. 
      */
-    connectorProfileCredentials: ConnectorProfileCredentials;
+    connectorProfileCredentials?: ConnectorProfileCredentials;
   }
   export interface ConnectorProfileCredentials {
     /**
@@ -1132,7 +1133,9 @@ declare namespace Appflow {
   }
   export interface CustomerProfilesMetadata {
   }
+  export type DataApiRoleArn = string;
   export type DataPullMode = "Incremental"|"Complete"|string;
+  export type DatabaseName = string;
   export type DatabaseUrl = string;
   export type DatadogConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface DatadogConnectorProfileCredentials {
@@ -2197,17 +2200,17 @@ declare namespace Appflow {
     /**
      *  The name of the user. 
      */
-    username: Username;
+    username?: String;
     /**
      *  The password that corresponds to the user name. 
      */
-    password: Password;
+    password?: Password;
   }
   export interface RedshiftConnectorProfileProperties {
     /**
      *  The JDBC URL of the Amazon Redshift cluster. 
      */
-    databaseUrl: DatabaseUrl;
+    databaseUrl?: DatabaseUrl;
     /**
      *  A name for the associated Amazon S3 bucket. 
      */
@@ -2217,9 +2220,29 @@ declare namespace Appflow {
      */
     bucketPrefix?: BucketPrefix;
     /**
-     *  The Amazon Resource Name (ARN) of the IAM role. 
+     *  The Amazon Resource Name (ARN) of IAM role that grants Amazon Redshift read-only access to Amazon S3. For more information, and for the polices that you attach to this role, see Allow Amazon Redshift to access your Amazon AppFlow data in Amazon S3.
      */
     roleArn: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that permits Amazon AppFlow to access your Amazon Redshift database through the Data API. For more information, and for the polices that you attach to this role, see Allow Amazon AppFlow to access Amazon Redshift databases with the Data API.
+     */
+    dataApiRoleArn?: DataApiRoleArn;
+    /**
+     * Indicates whether the connector profile defines a connection to an Amazon Redshift Serverless data warehouse.
+     */
+    isRedshiftServerless?: Boolean;
+    /**
+     * The unique ID that's assigned to an Amazon Redshift cluster.
+     */
+    clusterIdentifier?: ClusterIdentifier;
+    /**
+     * The name of an Amazon Redshift workgroup.
+     */
+    workgroupName?: WorkgroupName;
+    /**
+     * The name of an Amazon Redshift database.
+     */
+    databaseName?: DatabaseName;
   }
   export interface RedshiftDestinationProperties {
     /**
@@ -3056,6 +3079,7 @@ declare namespace Appflow {
     includeAllVersions?: Boolean;
   }
   export type Warehouse = string;
+  export type WorkgroupName = string;
   export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|"DELETE"|string;
   export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface ZendeskConnectorProfileCredentials {
