@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1260.0-->
+<!--LATEST=2.1261.0-->
 <!--ENTRYINSERT-->
+
+## 2.1261.0
+* feature: Grafana: This release includes support for configuring a Grafana workspace to connect to a datasource within a VPC as well as new APIs for configuring Grafana settings.
+* feature: Rbin: This release adds support for Rule Lock for Recycle Bin, which allows you to lock retention rules so that they can no longer be modified or deleted.
 
 ## 2.1260.0
 * feature: Appflow: Adding support for Amazon AppFlow to transfer the data to Amazon Redshift databases through Amazon Redshift Data API service. This feature will support the Redshift destination connector on both public and private accessible Amazon Redshift Clusters and Amazon Redshift Serverless.
