@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Endpoint",
+  "description": "Add pattern global dualstack by default"
+}
