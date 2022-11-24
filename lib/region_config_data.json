@@ -128,7 +128,8 @@
     "us-gov-west-1/organizations": "fipsWithServiceOnly",
     "us-gov-west-1/route53": {
       "endpoint": "route53.us-gov.amazonaws.com"
-    }
+    },
+    "*/resource-explorer-2": "fipsDualstackByDefault"
   },
 
   "dualstackRules": {
@@ -227,6 +228,9 @@
     },
     "dualstackByDefault": {
       "endpoint": "{service}.{region}.api.aws"
+    },
+    "fipsDualstackByDefault": {
+      "endpoint": "{service}-fips.{region}.api.aws"
     }
   }
 }
