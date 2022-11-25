@@ -15,6 +15,30 @@ or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.
 
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
+## Version 2.x Support
+We are formalizing our plans to enter **AWS SDK for JavaScript v2** into maintenance mode in 2023.
+
+[**AWS SDK for JavaScript v3**][aws-sdk-js-v3] is the latest and recommended version, 
+which has been GA since December 2020. Please refer to [this blog][v3-recommended-blog]
+on why and how you should use [**AWS SDK for JavaScript v3**][aws-sdk-js-v3] and 
+the experimental codemod scripts you can use to migrate your application from v2 to v3. 
+To get help with your migration, please follow our general guidelines to 
+[open an issue](https://github.com/aws/aws-sdk-js/issues/new/choose) 
+and choose [guidance][open-issue-v2-guidance]. To give feedback on and 
+report issues in the v3 repo, please refer to 
+[Giving feedback and contributing](https://github.com/aws/aws-sdk-js-v3#giving-feedback-and-contributing).
+Watch this README and the 
+[AWS Developer Tools Blog][aws-devtools-blog] for updates and announcements
+regarding the maintenance plans and timelines. Please refer to the
+[AWS SDKs and Tools maintenance policy][aws-sdks-maintenance-policy]
+for further details.
+
+[v3-recommended-blog]: https://aws.amazon.com/blogs/developer/why-and-how-you-should-use-aws-sdk-for-javascript-v3-on-node-js-18/
+[aws-sdk-js-v3]: https://github.com/aws/aws-sdk-js-v3
+[aws-devtools-blog]: https://aws.amazon.com/blogs/developer/
+[aws-sdks-maintenance-policy]: https://docs.aws.amazon.com/sdkref/latest/guide/maint-policy.html
+[open-issue-v2-guidance]: https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=
+
 ## Table of Contents:
 * [Getting Started](#getting-Started)
 * [Getting Help](#getting-help)
