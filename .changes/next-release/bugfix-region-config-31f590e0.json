@@ -1,5 +1,5 @@
 {
   "type": "bugfix",
   "category": "region_config",
-  "description": "avoid mutation in global object signatureVersion"
+  "description": "Set signatureVersion to bearer explcitly when defined in service API"
 }
