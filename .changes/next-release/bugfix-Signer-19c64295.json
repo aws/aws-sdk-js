@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Signer",
-  "description": "Set Authorization header correctly in Bearer Signer"
-}

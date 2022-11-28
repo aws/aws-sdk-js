@@ -188,6 +188,14 @@ declare class Drs extends Service {
    */
   retryDataReplication(callback?: (err: AWSError, data: Drs.Types.SourceServer) => void): Request<Drs.Types.SourceServer, AWSError>;
   /**
+   * Start replication to origin / target region - applies only to protected instances that originated in EC2. For recovery instances on target region - starts replication back to origin region. For failback instances on origin region - starts replication to target region to re-protect them. 
+   */
+  reverseReplication(params: Drs.Types.ReverseReplicationRequest, callback?: (err: AWSError, data: Drs.Types.ReverseReplicationResponse) => void): Request<Drs.Types.ReverseReplicationResponse, AWSError>;
+  /**
+   * Start replication to origin / target region - applies only to protected instances that originated in EC2. For recovery instances on target region - starts replication back to origin region. For failback instances on origin region - starts replication to target region to re-protect them. 
+   */
+  reverseReplication(callback?: (err: AWSError, data: Drs.Types.ReverseReplicationResponse) => void): Request<Drs.Types.ReverseReplicationResponse, AWSError>;
+  /**
    * Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance. This will run conversion on the failback client and will reboot your machine, thus completing the failback process.
    */
   startFailbackLaunch(params: Drs.Types.StartFailbackLaunchRequest, callback?: (err: AWSError, data: Drs.Types.StartFailbackLaunchResponse) => void): Request<Drs.Types.StartFailbackLaunchResponse, AWSError>;
@@ -204,6 +212,14 @@ declare class Drs extends Service {
    */
   startRecovery(callback?: (err: AWSError, data: Drs.Types.StartRecoveryResponse) => void): Request<Drs.Types.StartRecoveryResponse, AWSError>;
   /**
+   * Starts replication for a stopped Source Server. This action would make the Source Server protected again and restart billing for it.
+   */
+  startReplication(params: Drs.Types.StartReplicationRequest, callback?: (err: AWSError, data: Drs.Types.StartReplicationResponse) => void): Request<Drs.Types.StartReplicationResponse, AWSError>;
+  /**
+   * Starts replication for a stopped Source Server. This action would make the Source Server protected again and restart billing for it.
+   */
+  startReplication(callback?: (err: AWSError, data: Drs.Types.StartReplicationResponse) => void): Request<Drs.Types.StartReplicationResponse, AWSError>;
+  /**
    * Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK_NOT_STARTED.
    */
   stopFailback(params: Drs.Types.StopFailbackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -211,6 +227,14 @@ declare class Drs extends Service {
    * Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK_NOT_STARTED.
    */
   stopFailback(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops replication for a Source Server. This action would make the Source Server unprotected, delete its existing snapshots and stop billing for it.
+   */
+  stopReplication(params: Drs.Types.StopReplicationRequest, callback?: (err: AWSError, data: Drs.Types.StopReplicationResponse) => void): Request<Drs.Types.StopReplicationResponse, AWSError>;
+  /**
+   * Stops replication for a Source Server. This action would make the Source Server unprotected, delete its existing snapshots and stop billing for it.
+   */
+  stopReplication(callback?: (err: AWSError, data: Drs.Types.StopReplicationResponse) => void): Request<Drs.Types.StopReplicationResponse, AWSError>;
   /**
    * Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.
    */
@@ -279,6 +303,8 @@ declare namespace Drs {
   export type AccountID = string;
   export type AccountIDs = AccountID[];
   export type Accounts = Account[];
+  export type AwsAvailabilityZone = string;
+  export type AwsRegion = string;
   export type Boolean = boolean;
   export type BoundedString = string;
   export interface CPU {
@@ -739,8 +765,9 @@ declare namespace Drs {
   export type EbsSnapshotsList = ebsSnapshot[];
   export type EbsVolumeID = string;
   export type ExtensionStatus = "EXTENDED"|"EXTENSION_ERROR"|"NOT_EXTENDED"|string;
-  export type FailbackReplicationError = "AGENT_NOT_SEEN"|"FAILBACK_CLIENT_NOT_SEEN"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"|"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|string;
-  export type FailbackState = "FAILBACK_NOT_STARTED"|"FAILBACK_IN_PROGRESS"|"FAILBACK_READY_FOR_LAUNCH"|"FAILBACK_COMPLETED"|"FAILBACK_ERROR"|string;
+  export type FailbackLaunchType = "RECOVERY"|"DRILL"|string;
+  export type FailbackReplicationError = "AGENT_NOT_SEEN"|"FAILBACK_CLIENT_NOT_SEEN"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"|"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"FAILED_GETTING_REPLICATION_STATE"|"SNAPSHOTS_FAILURE"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string;
+  export type FailbackState = "FAILBACK_NOT_STARTED"|"FAILBACK_IN_PROGRESS"|"FAILBACK_READY_FOR_LAUNCH"|"FAILBACK_COMPLETED"|"FAILBACK_ERROR"|"FAILBACK_NOT_READY_FOR_LAUNCH"|"FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"|string;
   export interface GetFailbackReplicationConfigurationRequest {
     /**
      * The ID of the Recovery Instance whose failback replication configuration should be returned.
@@ -1049,6 +1076,7 @@ declare namespace Drs {
      */
     fullString?: BoundedString;
   }
+  export type OriginEnvironment = "ON_PREMISES"|"AWS"|string;
   export type PITPolicy = PITPolicyRule[];
   export interface PITPolicyRule {
     /**
@@ -1119,6 +1147,10 @@ declare namespace Drs {
      * The ID of the Job that created the Recovery Instance.
      */
     jobID?: JobID;
+    /**
+     * Environment (On Premises / AWS) of the instance that the recovery instance originated from. 
+     */
+    originEnvironment?: OriginEnvironment;
     /**
      * The date and time of the Point in Time (PIT) snapshot that this Recovery Instance was launched from.
      */
@@ -1219,10 +1251,10 @@ declare namespace Drs {
      */
     status?: RecoveryInstanceDataReplicationInitiationStepStatus;
   }
-  export type RecoveryInstanceDataReplicationInitiationStepName = "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE"|"COMPLETE_VOLUME_MAPPING"|"ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"CONFIGURE_REPLICATION_SOFTWARE"|"PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|string;
+  export type RecoveryInstanceDataReplicationInitiationStepName = "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE"|"COMPLETE_VOLUME_MAPPING"|"ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"CONFIGURE_REPLICATION_SOFTWARE"|"PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string;
   export type RecoveryInstanceDataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
   export type RecoveryInstanceDataReplicationInitiationSteps = RecoveryInstanceDataReplicationInitiationStep[];
-  export type RecoveryInstanceDataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|string;
+  export type RecoveryInstanceDataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"REPLICATION_STATE_NOT_AVAILABLE"|"NOT_STARTED"|string;
   export interface RecoveryInstanceDisk {
     /**
      * The amount of storage on the disk in bytes.
@@ -1263,6 +1295,10 @@ declare namespace Drs {
      * The Job ID of the last failback log for this Recovery Instance.
      */
     failbackJobID?: JobID;
+    /**
+     * The launch type (Recovery / Drill) of the last launch for the failback replication of this recovery instance.
+     */
+    failbackLaunchType?: FailbackLaunchType;
     /**
      * Whether we are failing back to the original Source Server for this Recovery Instance.
      */
@@ -1417,7 +1453,7 @@ declare namespace Drs {
      */
     isBootDisk?: Boolean;
     /**
-     * The Staging Disk EBS volume type to be used during replication when stagingDiskType is set to Auto. This is a read-only field.
+     * When stagingDiskType is set to Auto, this field shows the current staging disk EBS volume type as it is constantly updated by the service. This is a read-only field.
      */
     optimizedStagingDiskType?: ReplicationConfigurationReplicatedDiskStagingDiskType;
     /**
@@ -1500,6 +1536,7 @@ declare namespace Drs {
   export type ReplicationConfigurationTemplateID = string;
   export type ReplicationConfigurationTemplateIDs = ReplicationConfigurationTemplateID[];
   export type ReplicationConfigurationTemplates = ReplicationConfigurationTemplate[];
+  export type ReplicationDirection = "FAILOVER"|"FAILBACK"|string;
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
   export interface RetryDataReplicationRequest {
     /**
@@ -1507,8 +1544,34 @@ declare namespace Drs {
      */
     sourceServerID: SourceServerID;
   }
+  export interface ReverseReplicationRequest {
+    /**
+     * The ID of the Recovery Instance that we want to reverse the replication for.
+     */
+    recoveryInstanceID: RecoveryInstanceID;
+  }
+  export interface ReverseReplicationResponse {
+    /**
+     * ARN of created SourceServer.
+     */
+    reversedDirectionSourceServerArn?: SourceServerARN;
+  }
   export type SecurityGroupID = string;
   export type SmallBoundedString = string;
+  export interface SourceCloudProperties {
+    /**
+     * AWS Account ID for an EC2-originated Source Server.
+     */
+    originAccountID?: AccountID;
+    /**
+     * AWS Availability Zone for an EC2-originated Source Server.
+     */
+    originAvailabilityZone?: AwsAvailabilityZone;
+    /**
+     * AWS Region for an EC2-originated Source Server.
+     */
+    originRegion?: AwsRegion;
+  }
   export interface SourceProperties {
     /**
      * An array of CPUs.
@@ -1564,6 +1627,18 @@ declare namespace Drs {
      * The ID of the Recovery Instance associated with this Source Server.
      */
     recoveryInstanceId?: RecoveryInstanceID;
+    /**
+     * Replication direction of the Source Server.
+     */
+    replicationDirection?: ReplicationDirection;
+    /**
+     * For EC2-originated Source Servers which have been failed over and then failed back, this value will mean the ARN of the Source Server on the opposite replication direction.
+     */
+    reversedDirectionSourceServerArn?: SourceServerARN;
+    /**
+     * Source cloud properties of the Source Server.
+     */
+    sourceCloudProperties?: SourceCloudProperties;
     /**
      * The source properties of the Source Server.
      */
@@ -1666,11 +1741,35 @@ declare namespace Drs {
      */
     job?: Job;
   }
+  export interface StartReplicationRequest {
+    /**
+     * The ID of the Source Server to start replication for.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface StartReplicationResponse {
+    /**
+     * The Source Server that this action was targeted on.
+     */
+    sourceServer?: SourceServer;
+  }
   export interface StopFailbackRequest {
     /**
      * The ID of the Recovery Instance we want to stop failback for.
      */
     recoveryInstanceID: RecoveryInstanceID;
+  }
+  export interface StopReplicationRequest {
+    /**
+     * The ID of the Source Server to stop replication for.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface StopReplicationResponse {
+    /**
+     * The Source Server that this action was targeted on.
+     */
+    sourceServer?: SourceServer;
   }
   export type StrictlyPositiveInteger = number;
   export type SubnetID = string;

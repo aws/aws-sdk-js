@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Signer",
-  "description": "Read identity type from service.api.signatureVersion"
-}

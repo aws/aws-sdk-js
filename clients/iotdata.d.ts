@@ -69,6 +69,8 @@ declare class IotData extends Service {
   updateThingShadow(callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
 }
 declare namespace IotData {
+  export type ContentType = string;
+  export type CorrelationData = string;
   export interface DeleteThingShadowRequest {
     /**
      * The name of the thing.
@@ -175,10 +177,12 @@ declare namespace IotData {
     nextToken?: NextToken;
   }
   export type MaxResults = number;
+  export type MessageExpiry = number;
   export type NamedShadowList = ShadowName[];
   export type NextToken = string;
   export type PageSize = number;
   export type Payload = Buffer|Uint8Array|Blob|string;
+  export type PayloadFormatIndicator = "UNSPECIFIED_BYTES"|"UTF8_DATA"|string;
   export type PayloadSize = number;
   export interface PublishRequest {
     /**
@@ -186,7 +190,7 @@ declare namespace IotData {
      */
     topic: Topic;
     /**
-     * The Quality of Service (QoS) level.
+     * The Quality of Service (QoS) level. The default QoS level is 0.
      */
     qos?: Qos;
     /**
@@ -197,8 +201,33 @@ declare namespace IotData {
      * The message body. MQTT accepts text, binary, and empty (null) message payloads. Publishing an empty (null) payload with retain = true deletes the retained message identified by topic from Amazon Web Services IoT Core.
      */
     payload?: Payload;
+    /**
+     * A JSON string that contains an array of JSON objects. If you don’t use Amazon Web Services SDK or CLI, you must encode the JSON string to base64 format before adding it to the HTTP header. userProperties is an HTTP header value in the API. The following example userProperties parameter is a JSON string which represents two User Properties. Note that it needs to be base64-encoded:  [{"deviceName": "alpha"}, {"deviceCnt": "45"}] 
+     */
+    userProperties?: UserProperties;
+    /**
+     * An Enum string value that indicates whether the payload is formatted as UTF-8. payloadFormatIndicator is an HTTP header value in the API.
+     */
+    payloadFormatIndicator?: PayloadFormatIndicator;
+    /**
+     * A UTF-8 encoded string that describes the content of the publishing message.
+     */
+    contentType?: ContentType;
+    /**
+     * A UTF-8 encoded string that's used as the topic name for a response message. The response topic is used to describe the topic which the receiver should publish to as part of the request-response flow. The topic must not contain wildcard characters.
+     */
+    responseTopic?: ResponseTopic;
+    /**
+     * The base64-encoded binary data used by the sender of the request message to identify which request the response message is for when it's received. correlationData is an HTTP header value in the API.
+     */
+    correlationData?: CorrelationData;
+    /**
+     * A user-defined integer value that represents the message expiry interval in seconds. If absent, the message doesn't expire. For more information about the limits of messageExpiry, see Amazon Web Services IoT Core message broker and protocol limits and quotas  from the Amazon Web Services Reference Guide.
+     */
+    messageExpiry?: MessageExpiry;
   }
   export type Qos = number;
+  export type ResponseTopic = string;
   export type Retain = boolean;
   export type RetainedMessageList = RetainedMessageSummary[];
   export interface RetainedMessageSummary {
@@ -243,6 +272,7 @@ declare namespace IotData {
      */
     payload?: JsonDocument;
   }
+  export type UserProperties = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

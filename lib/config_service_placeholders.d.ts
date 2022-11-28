@@ -324,6 +324,7 @@ export abstract class ConfigurationServicePlaceholders {
   chimesdkvoice?: AWS.ChimeSDKVoice.Types.ClientConfiguration;
   iotroborunner?: AWS.IoTRoboRunner.Types.ClientConfiguration;
   ssmsap?: AWS.SsmSap.Types.ClientConfiguration;
+  oam?: AWS.OAM.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -650,4 +651,5 @@ export interface ConfigurationServiceApiVersions {
   chimesdkvoice?: AWS.ChimeSDKVoice.Types.apiVersion;
   iotroborunner?: AWS.IoTRoboRunner.Types.apiVersion;
   ssmsap?: AWS.SsmSap.Types.apiVersion;
+  oam?: AWS.OAM.Types.apiVersion;
 }

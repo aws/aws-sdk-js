@@ -68,6 +68,22 @@ declare class Textract extends Service {
    */
   getExpenseAnalysis(callback?: (err: AWSError, data: Textract.Types.GetExpenseAnalysisResponse) => void): Request<Textract.Types.GetExpenseAnalysisResponse, AWSError>;
   /**
+   * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a lending document.  You start asynchronous text analysis by calling StartLendingAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartLendingAnalysis.  To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetLendingAnalysis, and pass the job identifier (JobId) from the initial call to StartLendingAnalysis.
+   */
+  getLendingAnalysis(params: Textract.Types.GetLendingAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.GetLendingAnalysisResponse) => void): Request<Textract.Types.GetLendingAnalysisResponse, AWSError>;
+  /**
+   * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a lending document.  You start asynchronous text analysis by calling StartLendingAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartLendingAnalysis.  To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetLendingAnalysis, and pass the job identifier (JobId) from the initial call to StartLendingAnalysis.
+   */
+  getLendingAnalysis(callback?: (err: AWSError, data: Textract.Types.GetLendingAnalysisResponse) => void): Request<Textract.Types.GetLendingAnalysisResponse, AWSError>;
+  /**
+   * Gets summarized results for the StartLendingAnalysis operation, which analyzes text in a lending document. The returned summary consists of information about documents grouped together by a common document type. Information like detected signatures, page numbers, and split documents is returned with respect to the type of grouped document.  You start asynchronous text analysis by calling StartLendingAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartLendingAnalysis.  To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetLendingAnalysisSummary, and pass the job identifier (JobId) from the initial call to StartLendingAnalysis.
+   */
+  getLendingAnalysisSummary(params: Textract.Types.GetLendingAnalysisSummaryRequest, callback?: (err: AWSError, data: Textract.Types.GetLendingAnalysisSummaryResponse) => void): Request<Textract.Types.GetLendingAnalysisSummaryResponse, AWSError>;
+  /**
+   * Gets summarized results for the StartLendingAnalysis operation, which analyzes text in a lending document. The returned summary consists of information about documents grouped together by a common document type. Information like detected signatures, page numbers, and split documents is returned with respect to the type of grouped document.  You start asynchronous text analysis by calling StartLendingAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartLendingAnalysis.  To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetLendingAnalysisSummary, and pass the job identifier (JobId) from the initial call to StartLendingAnalysis.
+   */
+  getLendingAnalysisSummary(callback?: (err: AWSError, data: Textract.Types.GetLendingAnalysisSummaryResponse) => void): Request<Textract.Types.GetLendingAnalysisSummaryResponse, AWSError>;
+  /**
    * Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.  StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartDocumentAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis. For more information, see Document Text Analysis.
    */
   startDocumentAnalysis(params: Textract.Types.StartDocumentAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.StartDocumentAnalysisResponse) => void): Request<Textract.Types.StartDocumentAnalysisResponse, AWSError>;
@@ -91,6 +107,14 @@ declare class Textract extends Service {
    * Starts the asynchronous analysis of invoices or receipts for data like contact information, items purchased, and vendor names.  StartExpenseAnalysis can analyze text in documents that are in JPEG, PNG, and PDF format. The documents must be stored in an Amazon S3 bucket. Use the DocumentLocation parameter to specify the name of your S3 bucket and the name of the document in that bucket.   StartExpenseAnalysis returns a job identifier (JobId) that you will provide to GetExpenseAnalysis to retrieve the results of the operation. When the analysis of the input invoices/receipts is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you provide to the NotificationChannel. To obtain the results of the invoice and receipt analysis operation, ensure that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetExpenseAnalysis, and pass the job identifier (JobId) that was returned by your call to StartExpenseAnalysis. For more information, see Analyzing Invoices and Receipts.
    */
   startExpenseAnalysis(callback?: (err: AWSError, data: Textract.Types.StartExpenseAnalysisResponse) => void): Request<Textract.Types.StartExpenseAnalysisResponse, AWSError>;
+  /**
+   * Starts the classification and analysis of an input document. StartLendingAnalysis initiates the classification and analysis of a packet of lending documents. StartLendingAnalysis operates on a document file located in an Amazon S3 bucket.  StartLendingAnalysis can analyze text in documents that are in one of the following formats: JPEG, PNG, TIFF, PDF. Use DocumentLocation to specify the bucket name and the file name of the document.   StartLendingAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When the text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If the status is SUCCEEDED you can call either GetLendingAnalysis or GetLendingAnalysisSummary and provide the JobId to obtain the results of the analysis. If using OutputConfig to specify an Amazon S3 bucket, the output will be contained within the specified prefix in a directory labeled with the job-id. In the directory there are 3 sub-directories:    detailedResponse (contains the GetLendingAnalysis response)   summaryResponse (for the GetLendingAnalysisSummary response)   splitDocuments (documents split across logical boundaries)  
+   */
+  startLendingAnalysis(params: Textract.Types.StartLendingAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.StartLendingAnalysisResponse) => void): Request<Textract.Types.StartLendingAnalysisResponse, AWSError>;
+  /**
+   * Starts the classification and analysis of an input document. StartLendingAnalysis initiates the classification and analysis of a packet of lending documents. StartLendingAnalysis operates on a document file located in an Amazon S3 bucket.  StartLendingAnalysis can analyze text in documents that are in one of the following formats: JPEG, PNG, TIFF, PDF. Use DocumentLocation to specify the bucket name and the file name of the document.   StartLendingAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When the text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If the status is SUCCEEDED you can call either GetLendingAnalysis or GetLendingAnalysisSummary and provide the JobId to obtain the results of the analysis. If using OutputConfig to specify an Amazon S3 bucket, the output will be contained within the specified prefix in a directory labeled with the job-id. In the directory there are 3 sub-directories:    detailedResponse (contains the GetLendingAnalysis response)   summaryResponse (for the GetLendingAnalysisSummary response)   splitDocuments (documents split across logical boundaries)  
+   */
+  startLendingAnalysis(callback?: (err: AWSError, data: Textract.Types.StartLendingAnalysisResponse) => void): Request<Textract.Types.StartLendingAnalysisResponse, AWSError>;
 }
 declare namespace Textract {
   export interface AnalyzeDocumentRequest {
@@ -275,6 +299,13 @@ declare namespace Textract {
      */
     DetectDocumentTextModelVersion?: String;
   }
+  export interface DetectedSignature {
+    /**
+     * The page a detected signature was found on.
+     */
+    Page?: UInteger;
+  }
+  export type DetectedSignatureList = DetectedSignature[];
   export interface Document {
     /**
      * A blob of base64-encoded document bytes. The maximum size of a document that's provided in a blob of bytes is 5 MB. The document bytes must be in PNG or JPEG format. If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode image bytes passed using the Bytes field. 
@@ -285,6 +316,25 @@ declare namespace Textract {
      */
     S3Object?: S3Object;
   }
+  export interface DocumentGroup {
+    /**
+     * The type of document that Amazon Textract has detected. See LINK for a list of all types returned by Textract.
+     */
+    Type?: NonEmptyString;
+    /**
+     * An array that contains information about the pages of a document, defined by logical boundary.
+     */
+    SplitDocuments?: SplitDocumentList;
+    /**
+     * A list of the detected signatures found in a document group.
+     */
+    DetectedSignatures?: DetectedSignatureList;
+    /**
+     * A list of any expected signatures not found in a document group.
+     */
+    UndetectedSignatures?: UndetectedSignatureList;
+  }
+  export type DocumentGroupList = DocumentGroup[];
   export interface DocumentLocation {
     /**
      * The Amazon S3 bucket that contains the input document.
@@ -389,6 +439,15 @@ declare namespace Textract {
      */
     Confidence?: Percent;
   }
+  export interface Extraction {
+    /**
+     * Holds the structured data returned by AnalyzeDocument for lending documents.
+     */
+    LendingDocument?: LendingDocument;
+    ExpenseDocument?: ExpenseDocument;
+    IdentityDocument?: IdentityDocument;
+  }
+  export type ExtractionList = Extraction[];
   export type FeatureType = "TABLES"|"FORMS"|"QUERIES"|"SIGNATURES"|string;
   export type FeatureTypes = FeatureType[];
   export type Float = number;
@@ -535,6 +594,76 @@ declare namespace Textract {
      */
     AnalyzeExpenseModelVersion?: String;
   }
+  export interface GetLendingAnalysisRequest {
+    /**
+     * A unique identifier for the lending or text-detection job. The JobId is returned from StartLendingAnalysis. A JobId value is only valid for 7 days.
+     */
+    JobId: JobId;
+    /**
+     * The maximum number of results to return per paginated call. The largest value that you can specify is 30. If you specify a value greater than 30, a maximum of 30 results is returned. The default value is 30.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous response was incomplete, Amazon Textract returns a pagination token in the response. You can use this pagination token to retrieve the next set of lending results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface GetLendingAnalysisResponse {
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     *  The current status of the lending analysis job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * If the response is truncated, Amazon Textract returns this token. You can use this token in the subsequent request to retrieve the next set of lending results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     *  Holds the information returned by one of AmazonTextract's document analysis operations for the pinstripe.
+     */
+    Results?: LendingResultList;
+    /**
+     *  A list of warnings that occurred during the lending analysis operation. 
+     */
+    Warnings?: Warnings;
+    /**
+     *  Returns if the lending analysis job could not be completed. Contains explanation for what error occurred. 
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     *  The current model version of the Analyze Lending API.
+     */
+    AnalyzeLendingModelVersion?: String;
+  }
+  export interface GetLendingAnalysisSummaryRequest {
+    /**
+     *  A unique identifier for the lending or text-detection job. The JobId is returned from StartLendingAnalysis. A JobId value is only valid for 7 days.
+     */
+    JobId: JobId;
+  }
+  export interface GetLendingAnalysisSummaryResponse {
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     *  The current status of the lending analysis job. 
+     */
+    JobStatus?: JobStatus;
+    /**
+     *  Contains summary information for documents grouped by type.
+     */
+    Summary?: LendingSummary;
+    /**
+     * A list of warnings that occurred during the lending analysis operation.
+     */
+    Warnings?: Warnings;
+    /**
+     * Returns if the lending analysis could not be completed. Contains explanation for what error occurred.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * The current model version of the Analyze Lending API.
+     */
+    AnalyzeLendingModelVersion?: String;
+  }
   export type HumanLoopActivationConditionsEvaluationResults = string;
   export interface HumanLoopActivationOutput {
     /**
@@ -600,6 +729,69 @@ declare namespace Textract {
   export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
   export type JobTag = string;
   export type KMSKeyId = string;
+  export interface LendingDetection {
+    /**
+     * The text extracted for a detected value in a lending document.
+     */
+    Text?: String;
+    /**
+     * The selection status of a selection element, such as an option button or check box.
+     */
+    SelectionStatus?: SelectionStatus;
+    Geometry?: Geometry;
+    /**
+     * The confidence level for the text of a detected value in a lending document.
+     */
+    Confidence?: Percent;
+  }
+  export type LendingDetectionList = LendingDetection[];
+  export interface LendingDocument {
+    /**
+     * An array of LendingField objects.
+     */
+    LendingFields?: LendingFieldList;
+    /**
+     * A list of signatures detected in a lending document.
+     */
+    SignatureDetections?: SignatureDetectionList;
+  }
+  export interface LendingField {
+    /**
+     * The type of the lending document.
+     */
+    Type?: String;
+    KeyDetection?: LendingDetection;
+    /**
+     * An array of LendingDetection objects.
+     */
+    ValueDetections?: LendingDetectionList;
+  }
+  export type LendingFieldList = LendingField[];
+  export interface LendingResult {
+    /**
+     * The page number for a page, with regard to whole submission.
+     */
+    Page?: UInteger;
+    /**
+     * The classifier result for a given page.
+     */
+    PageClassification?: PageClassification;
+    /**
+     * An array of Extraction to hold structured data. e.g. normalized key value pairs instead of raw OCR detections .
+     */
+    Extractions?: ExtractionList;
+  }
+  export type LendingResultList = LendingResult[];
+  export interface LendingSummary {
+    /**
+     * Contains an array of all DocumentGroup objects.
+     */
+    DocumentGroups?: DocumentGroupList;
+    /**
+     * UndetectedDocumentTypes.
+     */
+    UndetectedDocumentTypes?: UndetectedDocumentTypeList;
+  }
   export interface LineItemFields {
     /**
      * ExpenseFields used to show information from detected lines on a table.
@@ -650,6 +842,17 @@ declare namespace Textract {
      */
     S3Prefix?: S3ObjectName;
   }
+  export interface PageClassification {
+    /**
+     * The class, or document type, assigned to a detected Page object. The class, or document type, assigned to a detected Page object.
+     */
+    PageType: PredictionList;
+    /**
+     *  The page number the value was detected on, relative to Amazon Textract's starting position.
+     */
+    PageNumber: PredictionList;
+  }
+  export type PageList = UInteger[];
   export type Pages = UInteger[];
   export type PaginationToken = string;
   export type Percent = number;
@@ -664,6 +867,17 @@ declare namespace Textract {
     Y?: Float;
   }
   export type Polygon = Point[];
+  export interface Prediction {
+    /**
+     * The predicted value of a detected object.
+     */
+    Value?: NonEmptyString;
+    /**
+     * Amazon Textract's confidence in its predicted value.
+     */
+    Confidence?: Percent;
+  }
+  export type PredictionList = Prediction[];
   export type Queries = Query[];
   export interface QueriesConfig {
     /**
@@ -720,6 +934,25 @@ declare namespace Textract {
   export type S3ObjectVersion = string;
   export type SNSTopicArn = string;
   export type SelectionStatus = "SELECTED"|"NOT_SELECTED"|string;
+  export interface SignatureDetection {
+    /**
+     * The confidence, from 0 to 100, in the predicted values for a detected signature.
+     */
+    Confidence?: Percent;
+    Geometry?: Geometry;
+  }
+  export type SignatureDetectionList = SignatureDetection[];
+  export interface SplitDocument {
+    /**
+     * The index for a given document in a DocumentGroup of a specific Type.
+     */
+    Index?: UInteger;
+    /**
+     * An array of page numbers for a for a given document, ordered by logical boundary.
+     */
+    Pages?: PageList;
+  }
+  export type SplitDocumentList = SplitDocument[];
   export interface StartDocumentAnalysisRequest {
     /**
      * The location of the document to be processed.
@@ -821,11 +1054,42 @@ declare namespace Textract {
      */
     JobId?: JobId;
   }
+  export interface StartLendingAnalysisRequest {
+    DocumentLocation: DocumentLocation;
+    /**
+     * The idempotent token that you use to identify the start request. If you use the same token with multiple StartLendingAnalysis requests, the same JobId is returned. Use ClientRequestToken to prevent the same job from being accidentally started more than once. For more information, see Calling Amazon Textract Asynchronous Operations.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * An identifier that you specify to be included in the completion notification published to the Amazon SNS topic. For example, you can use JobTag to identify the type of document that the completion notification corresponds to (such as a tax form or a receipt).
+     */
+    JobTag?: JobTag;
+    NotificationChannel?: NotificationChannel;
+    OutputConfig?: OutputConfig;
+    /**
+     * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side, using SSE-S3. 
+     */
+    KMSKeyId?: KMSKeyId;
+  }
+  export interface StartLendingAnalysisResponse {
+    /**
+     * A unique identifier for the lending or text-detection job. The JobId is returned from StartLendingAnalysis. A JobId value is only valid for 7 days.
+     */
+    JobId?: JobId;
+  }
   export type StatusMessage = string;
   export type String = string;
   export type StringList = String[];
   export type TextType = "HANDWRITING"|"PRINTED"|string;
   export type UInteger = number;
+  export type UndetectedDocumentTypeList = NonEmptyString[];
+  export interface UndetectedSignature {
+    /**
+     * The page where a signature was expected but not found.
+     */
+    Page?: UInteger;
+  }
+  export type UndetectedSignatureList = UndetectedSignature[];
   export type ValueType = "DATE"|string;
   export interface Warning {
     /**

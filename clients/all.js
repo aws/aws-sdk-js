@@ -323,5 +323,6 @@ module.exports = {
   Scheduler: require('./scheduler'),
   ChimeSDKVoice: require('./chimesdkvoice'),
   IoTRoboRunner: require('./iotroborunner'),
-  SsmSap: require('./ssmsap')
+  SsmSap: require('./ssmsap'),
+  OAM: require('./oam')
 };

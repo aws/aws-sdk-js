@@ -12,11 +12,11 @@ declare class EFS extends Service {
   constructor(options?: EFS.Types.ClientConfiguration)
   config: Config & EFS.Types.ClientConfiguration;
   /**
-   * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in the application's own directory and any subdirectories. To learn more, see Mounting a file system using EFS access points. This operation requires permissions for the elasticfilesystem:CreateAccessPoint action.
+   * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in the application's own directory and any subdirectories. To learn more, see Mounting a file system using EFS access points.  If multiple requests to create access points on the same file system are sent in quick succession, and the file system is near the limit of 120 access points, you may experience a throttling response for these requests. This is to ensure that the file system does not exceed the stated access point limit.  This operation requires permissions for the elasticfilesystem:CreateAccessPoint action.
    */
   createAccessPoint(params: EFS.Types.CreateAccessPointRequest, callback?: (err: AWSError, data: EFS.Types.AccessPointDescription) => void): Request<EFS.Types.AccessPointDescription, AWSError>;
   /**
-   * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in the application's own directory and any subdirectories. To learn more, see Mounting a file system using EFS access points. This operation requires permissions for the elasticfilesystem:CreateAccessPoint action.
+   * Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in the application's own directory and any subdirectories. To learn more, see Mounting a file system using EFS access points.  If multiple requests to create access points on the same file system are sent in quick succession, and the file system is near the limit of 120 access points, you may experience a throttling response for these requests. This is to ensure that the file system does not exceed the stated access point limit.  This operation requires permissions for the elasticfilesystem:CreateAccessPoint action.
    */
   createAccessPoint(callback?: (err: AWSError, data: EFS.Types.AccessPointDescription) => void): Request<EFS.Types.AccessPointDescription, AWSError>;
   /**
@@ -356,7 +356,7 @@ declare namespace EFS {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * Specifies the throughput mode for the file system, either bursting or provisioned. If you set ThroughputMode to provisioned, you must also set a value for ProvisionedThroughputInMibps. After you create the file system, you can decrease your file system's throughput in Provisioned Throughput mode or change between the throughput modes, as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more information, see Specifying throughput with provisioned mode in the Amazon EFS User Guide.  Default is bursting.
+     * Specifies the throughput mode for the file system. The mode can be bursting, provisioned, or elastic. If you set ThroughputMode to provisioned, you must also set a value for ProvisionedThroughputInMibps. After you create the file system, you can decrease your file system's throughput in Provisioned Throughput mode or change between the throughput modes, with certain time restrictions. For more information, see Specifying throughput with provisioned mode in the Amazon EFS User Guide.  Default is bursting.
      */
     ThroughputMode?: ThroughputMode;
     /**
@@ -1056,10 +1056,10 @@ declare namespace EFS {
   }
   export type TagValue = string;
   export type Tags = Tag[];
-  export type ThroughputMode = "bursting"|"provisioned"|string;
+  export type ThroughputMode = "bursting"|"provisioned"|"elastic"|string;
   export type Timestamp = Date;
   export type Token = string;
-  export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|string;
+  export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|"AFTER_1_DAY"|string;
   export type TransitionToPrimaryStorageClassRules = "AFTER_1_ACCESS"|string;
   export type Uid = number;
   export interface UntagResourceRequest {

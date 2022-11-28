@@ -752,7 +752,7 @@ declare namespace Kendra {
   }
   export interface BatchGetDocumentStatusResponseError {
     /**
-     * The unique identifier of the document whose status could not be retrieved.
+     * The identifier of the document whose status could not be retrieved.
      */
     DocumentId?: DocumentId;
     /**
@@ -791,7 +791,7 @@ declare namespace Kendra {
   }
   export interface BatchPutDocumentResponseFailedDocument {
     /**
-     * The unique identifier of the document.
+     * The identifier of the document.
      */
     Id?: DocumentId;
     /**
@@ -812,7 +812,7 @@ declare namespace Kendra {
      */
     EnterpriseId: EnterpriseId;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Box platform. The secret must contain a JSON structure with the following keys:   clientID—The identifier of the client OAuth 2.0 authentication application created in Box.   clientSecret—A set of characters known only to the OAuth 2.0 authentication application created in Box.   publicKeyId—The identifier of the public key contained within an identity certificate.   privateKey—A set of characters that make up an encryption key.   passphrase—A set of characters that act like a password.   You create an application in Box to generate the keys or credentials required for the secret. For more information, see Authentication for a Box data source.
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your Box platform. The secret must contain a JSON structure with the following keys:   clientID—The identifier of the client OAuth 2.0 authentication application created in Box.   clientSecret—A set of characters known only to the OAuth 2.0 authentication application created in Box.   publicKeyId—The identifier of the public key contained within an identity certificate.   privateKey—A set of characters that make up an encryption key.   passphrase—A set of characters that act like a password.   You create an application in Box to generate the keys or credentials required for the secret. For more information, see Using a Box data source.
      */
     SecretArn: SecretArn;
     /**
@@ -880,7 +880,7 @@ declare namespace Kendra {
   }
   export interface ClickFeedback {
     /**
-     * The unique identifier of the search result that was clicked.
+     * The identifier of the search result that was clicked.
      */
     ResultId: ResultId;
     /**
@@ -892,7 +892,7 @@ declare namespace Kendra {
   export type ClientTokenName = string;
   export interface ColumnConfiguration {
     /**
-     * The column that provides the document's unique identifier.
+     * The column that provides the document's identifier.
      */
     DocumentIdColumnName: ColumnName;
     /**
@@ -969,7 +969,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the Confluence instance. If you use Confluence Cloud, you use a generated API token as the password. For more information, see Using a Confluence data source. You can also provide authentication credentials in the form of a personal access token. For more information, see Authentication for a Confluence data source.
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the Confluence instance. If you use Confluence Cloud, you use a generated API token as the password. You can also provide authentication credentials in the form of a personal access token. For more information, see Using a Confluence data source.
      */
     SecretArn: SecretArn;
     /**
@@ -1293,7 +1293,7 @@ declare namespace Kendra {
   }
   export interface CreateFaqResponse {
     /**
-     * The unique identifier of the FAQ.
+     * The identifier of the FAQ.
      */
     Id?: FaqId;
   }
@@ -1341,7 +1341,7 @@ declare namespace Kendra {
   }
   export interface CreateIndexResponse {
     /**
-     * The unique identifier of the index. Use this identifier when you query an index, set up a data source, or index a document.
+     * The identifier of the index. Use this identifier when you query an index, set up a data source, or index a document.
      */
     Id?: IndexId;
   }
@@ -1377,7 +1377,7 @@ declare namespace Kendra {
   }
   export interface CreateQuerySuggestionsBlockListResponse {
     /**
-     * The unique identifier of the created block list.
+     * The identifier of the created block list.
      */
     Id?: QuerySuggestionsBlockListId;
   }
@@ -1413,7 +1413,7 @@ declare namespace Kendra {
   }
   export interface CreateThesaurusResponse {
     /**
-     * The unique identifier of the thesaurus. 
+     * The identifier of the thesaurus. 
      */
     Id?: ThesaurusId;
   }
@@ -1531,7 +1531,7 @@ declare namespace Kendra {
      */
     Name?: DataSourceName;
     /**
-     * The unique identifier for the data source.
+     * The identifier for the data source.
      */
     Id?: DataSourceId;
     /**
@@ -1558,7 +1558,7 @@ declare namespace Kendra {
   export type DataSourceSummaryList = DataSourceSummary[];
   export interface DataSourceSyncJob {
     /**
-     * A unique identifier for the synchronization job.
+     * A identifier for the synchronization job.
      */
     ExecutionId?: String;
     /**
@@ -2296,7 +2296,7 @@ declare namespace Kendra {
   }
   export interface Document {
     /**
-     * A unique identifier of the document in the index. Note, each document ID must be unique per index. You cannot create a data source to index your documents with their unique IDs and then use the BatchPutDocument API to index the same documents, or vice versa. You can delete a data source and then use the BatchPutDocument API to index the same documents, or vice versa.
+     * A identifier of the document in the index. Note, each document ID must be unique per index. You cannot create a data source to index your documents with their unique IDs and then use the BatchPutDocument API to index the same documents, or vice versa. You can delete a data source and then use the BatchPutDocument API to index the same documents, or vice versa.
      */
     Id: DocumentId;
     /**
@@ -2378,7 +2378,7 @@ declare namespace Kendra {
      */
     StringValue?: DocumentAttributeStringValue;
     /**
-     * A list of strings. 
+     * A list of strings. The default maximum length or number of strings is 10.
      */
     StringListValue?: DocumentAttributeStringListValue;
     /**
@@ -2410,7 +2410,7 @@ declare namespace Kendra {
   export type DocumentIdList = DocumentId[];
   export interface DocumentInfo {
     /**
-     * The unique identifier of the document.
+     * The identifier of the document.
      */
     DocumentId: DocumentId;
     /**
@@ -2634,7 +2634,7 @@ declare namespace Kendra {
   export type FaqStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
   export interface FaqSummary {
     /**
-     * The unique identifier of the FAQ.
+     * The identifier of the FAQ.
      */
     Id?: FaqId;
     /**
@@ -2714,7 +2714,7 @@ declare namespace Kendra {
   }
   export interface GetQuerySuggestionsResponse {
     /**
-     * The unique identifier for a list of query suggestions for an index.
+     * The identifier for a list of query suggestions for an index.
      */
     QuerySuggestionsId?: QuerySuggestionsId;
     /**
@@ -2776,7 +2776,7 @@ declare namespace Kendra {
      */
     Type?: Type;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your GitHub. The secret must contain a JSON structure with the following keys:   githubToken—The access token created in GitHub. For more information on creating a token in GitHub, see Authentication for a GitHub data source.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs required to connect to your GitHub. The secret must contain a JSON structure with the following keys:   personalToken—The access token created in GitHub. For more information on creating a token in GitHub, see Using a GitHub data source.  
      */
     SecretArn: SecretArn;
     /**
@@ -3008,15 +3008,15 @@ declare namespace Kendra {
   export type Importance = number;
   export interface IndexConfigurationSummary {
     /**
-     * The identifier of the index.
+     * The name of the index.
      */
     Name?: IndexName;
     /**
-     * A unique identifier for the index. Use this to identify the index when you are using APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
+     * A identifier for the index. Use this to identify the index when you are using APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
      */
     Id?: IndexId;
     /**
-     * Indicates whether the index is a enterprise edition index or a developer edition index. 
+     * Indicates whether the index is a Enterprise Edition index or a Developer Edition index. 
      */
     Edition?: IndexEdition;
     /**
@@ -3079,7 +3079,7 @@ declare namespace Kendra {
      */
     JiraAccountUrl: JiraAccountUrl;
     /**
-     * The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the key-value pairs required to connect to your Jira data source. The secret must contain a JSON structure with the following keys:   jiraId—The Jira username.   jiraCredentials—The Jira API token. For more information on creating an API token in Jira, see  Authentication for a Jira data source.  
+     * The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the key-value pairs required to connect to your Jira data source. The secret must contain a JSON structure with the following keys:   jiraId—The Jira username.   jiraCredentials—The Jira API token. For more information on creating an API token in Jira, see  Using a Jira data source.  
      */
     SecretArn: SecretArn;
     /**
@@ -3246,7 +3246,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of data source connectors (DataSourceSummaryItems). 
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of data source connectors. 
      */
     NextToken?: NextToken;
     /**
@@ -3398,11 +3398,11 @@ declare namespace Kendra {
   }
   export interface ListIndicesRequest {
     /**
-     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of indexes (DataSourceSummaryItems). 
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of indexes. 
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of data sources to return.
+     * The maximum number of indices to return.
      */
     MaxResults?: MaxResultsIntegerForListIndicesRequest;
   }
@@ -3670,11 +3670,11 @@ declare namespace Kendra {
   export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
   export interface QueryRequest {
     /**
-     * The unique identifier of the index to search. The identifier is returned in the response from the CreateIndex API.
+     * The identifier of the index to search. The identifier is returned in the response from the CreateIndex API.
      */
     IndexId: IndexId;
     /**
-     * The text to search for.
+     * The input query text for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries. 
      */
     QueryText?: QueryText;
     /**
@@ -3724,7 +3724,7 @@ declare namespace Kendra {
   }
   export interface QueryResult {
     /**
-     * The unique identifier for the search. You use QueryId to identify the search when using the feedback API.
+     * The identifier for the search. You use QueryId to identify the search when using the feedback API.
      */
     QueryId?: QueryId;
     /**
@@ -3748,21 +3748,26 @@ declare namespace Kendra {
      */
     SpellCorrectedQueries?: SpellCorrectedQueryList;
   }
+  export type QueryResultFormat = "TABLE"|"TEXT"|string;
   export interface QueryResultItem {
     /**
-     * The unique identifier for the query result.
+     * The identifier for the query result.
      */
     Id?: ResultId;
     /**
-     * The type of document. 
+     * The type of document within the response. For example, a response could include a question-answer that's relevant to the query.
      */
     Type?: QueryResultType;
+    /**
+     * If the Type of document within the response is ANSWER, then it is either a TABLE answer or TEXT answer. If it's a table answer, a table excerpt is returned in TableExcerpt. If it's a text answer, a text excerpt is returned in DocumentExcerpt.
+     */
+    Format?: QueryResultFormat;
     /**
      * One or more additional attributes associated with the query result.
      */
     AdditionalAttributes?: AdditionalResultAttributeList;
     /**
-     * The unique identifier for the document.
+     * The identifier for the document.
      */
     DocumentId?: DocumentId;
     /**
@@ -3786,9 +3791,13 @@ declare namespace Kendra {
      */
     ScoreAttributes?: ScoreAttributes;
     /**
-     * A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see  Submitting feedback .
+     * A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see Submitting feedback .
      */
     FeedbackToken?: FeedbackToken;
+    /**
+     * An excerpt from a table within a document.
+     */
+    TableExcerpt?: TableExcerpt;
   }
   export type QueryResultItemList = QueryResultItem[];
   export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER"|string;
@@ -3831,7 +3840,7 @@ declare namespace Kendra {
      */
     Domain: Domain;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip. The secret must contain a JSON structure with the following keys:   accessToken—The token created in Quip. For more information, see Authentication for a Quip data source.  
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the key-value pairs that are required to connect to your Quip. The secret must contain a JSON structure with the following keys:   accessToken—The token created in Quip. For more information, see Using a Quip data source.  
      */
     SecretArn: SecretArn;
     /**
@@ -3900,7 +3909,7 @@ declare namespace Kendra {
   }
   export interface RelevanceFeedback {
     /**
-     * The unique identifier of the search result that the user provided relevance feedback for.
+     * The identifier of the search result that the user provided relevance feedback for.
      */
     ResultId: ResultId;
     /**
@@ -4151,7 +4160,7 @@ declare namespace Kendra {
      */
     HostUrl: ServiceNowHostUrl;
     /**
-     * The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the user name and password required to connect to the ServiceNow instance. You can also provide OAuth authentication credentials of user name, password, client ID, and client secret. For more information, see Authentication for a ServiceNow data source.
+     * The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the user name and password required to connect to the ServiceNow instance. You can also provide OAuth authentication credentials of user name, password, client ID, and client secret. For more information, see Using a ServiceNow data source.
      */
     SecretArn: SecretArn;
     /**
@@ -4239,7 +4248,7 @@ declare namespace Kendra {
      */
     Urls: SharePointUrlList;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the SharePoint instance. If you use SharePoint Server, you also need to provide the sever domain name as part of the credentials. For more information, see Using a Microsoft SharePoint Data Source. You can also provide OAuth authentication credentials of user name, password, client ID, and client secret. For more information, see Authentication for a SharePoint data source.
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the SharePoint instance. If you use SharePoint Server, you also need to provide the sever domain name as part of the credentials. For more information, see Using a Microsoft SharePoint Data Source. You can also provide OAuth authentication credentials of user name, password, client ID, and client secret. For more information, see Using a SharePoint data source.
      */
     SecretArn: SecretArn;
     /**
@@ -4417,7 +4426,7 @@ declare namespace Kendra {
   }
   export interface Status {
     /**
-     * The unique identifier of the document.
+     * The identifier of the document.
      */
     DocumentId?: DocumentId;
     /**
@@ -4469,11 +4478,11 @@ declare namespace Kendra {
   export type SuggestedQueryText = string;
   export interface Suggestion {
     /**
-     * The unique UUID (universally unique identifier) of a single query suggestion.
+     * The UUID (universally unique identifier) of a single query suggestion.
      */
     Id?: ResultId;
     /**
-     * The value for the unique UUID (universally unique identifier) of a single query suggestion. The value is the text string of a suggestion.
+     * The value for the UUID (universally unique identifier) of a single query suggestion. The value is the text string of a suggestion.
      */
     Value?: SuggestionValue;
   }
@@ -4506,7 +4515,43 @@ declare namespace Kendra {
      */
     Text?: SuggestionTextWithHighlights;
   }
+  export interface TableCell {
+    /**
+     * The actual value or content within a table cell. A table cell could contain a date value of a year, or a string value of text, for example.
+     */
+    Value?: String;
+    /**
+     *  TRUE if the response of the table cell is the top answer. This is the cell value or content with the highest confidence score or is the most relevant to the query.
+     */
+    TopAnswer?: Boolean;
+    /**
+     *  TRUE means that the table cell has a high enough confidence and is relevant to the query, so the value or content should be highlighted.
+     */
+    Highlighted?: Boolean;
+    /**
+     *  TRUE means that the table cell should be treated as a header.
+     */
+    Header?: Boolean;
+  }
+  export type TableCellList = TableCell[];
+  export interface TableExcerpt {
+    /**
+     * A list of rows in the table excerpt.
+     */
+    Rows?: TableRowList;
+    /**
+     * A count of the number of rows in the original table within the document.
+     */
+    TotalNumberOfRows?: Integer;
+  }
   export type TableName = string;
+  export interface TableRow {
+    /**
+     * A list of table cells in a row.
+     */
+    Cells?: TableCellList;
+  }
+  export type TableRowList = TableRow[];
   export interface Tag {
     /**
      * The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, or data source.

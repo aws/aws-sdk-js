@@ -173,11 +173,11 @@ declare class ECS extends Service {
    */
   discoverPollEndpoint(callback?: (err: AWSError, data: ECS.Types.DiscoverPollEndpointResponse) => void): Request<ECS.Types.DiscoverPollEndpointResponse, AWSError>;
   /**
-   * Runs a command remotely on a container within a task. If you use a condition key in your IAM policy to refine the conditions for the policy statement, for example limit the actions to a specific cluster, you recevie an AccessDeniedException when there is a mismatch between the condition key value and the corresponding parameter value.
+   * Runs a command remotely on a container within a task. If you use a condition key in your IAM policy to refine the conditions for the policy statement, for example limit the actions to a specific cluster, you receive an AccessDeniedException when there is a mismatch between the condition key value and the corresponding parameter value.
    */
   executeCommand(params: ECS.Types.ExecuteCommandRequest, callback?: (err: AWSError, data: ECS.Types.ExecuteCommandResponse) => void): Request<ECS.Types.ExecuteCommandResponse, AWSError>;
   /**
-   * Runs a command remotely on a container within a task. If you use a condition key in your IAM policy to refine the conditions for the policy statement, for example limit the actions to a specific cluster, you recevie an AccessDeniedException when there is a mismatch between the condition key value and the corresponding parameter value.
+   * Runs a command remotely on a container within a task. If you use a condition key in your IAM policy to refine the conditions for the policy statement, for example limit the actions to a specific cluster, you receive an AccessDeniedException when there is a mismatch between the condition key value and the corresponding parameter value.
    */
   executeCommand(callback?: (err: AWSError, data: ECS.Types.ExecuteCommandResponse) => void): Request<ECS.Types.ExecuteCommandResponse, AWSError>;
   /**
@@ -228,6 +228,14 @@ declare class ECS extends Service {
    * Returns a list of services. You can filter the results by cluster, launch type, and scheduling strategy.
    */
   listServices(callback?: (err: AWSError, data: ECS.Types.ListServicesResponse) => void): Request<ECS.Types.ListServicesResponse, AWSError>;
+  /**
+   * This operation lists all of the services that are associated with a Cloud Map namespace. This list might include services in different clusters. In contrast, ListServices can only list services in one cluster at a time. If you need to filter the list of services in a single cluster by various parameters, use ListServices. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+   */
+  listServicesByNamespace(params: ECS.Types.ListServicesByNamespaceRequest, callback?: (err: AWSError, data: ECS.Types.ListServicesByNamespaceResponse) => void): Request<ECS.Types.ListServicesByNamespaceResponse, AWSError>;
+  /**
+   * This operation lists all of the services that are associated with a Cloud Map namespace. This list might include services in different clusters. In contrast, ListServices can only list services in one cluster at a time. If you need to filter the list of services in a single cluster by various parameters, use ListServices. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+   */
+  listServicesByNamespace(callback?: (err: AWSError, data: ECS.Types.ListServicesByNamespaceResponse) => void): Request<ECS.Types.ListServicesByNamespaceResponse, AWSError>;
   /**
    * List the tags for an Amazon ECS resource.
    */
@@ -397,11 +405,11 @@ declare class ECS extends Service {
    */
   updateClusterSettings(callback?: (err: AWSError, data: ECS.Types.UpdateClusterSettingsResponse) => void): Request<ECS.Types.UpdateClusterSettingsResponse, AWSError>;
   /**
-   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent doesn't interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  The UpdateContainerAgent API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init package. This updates the agent. For more information, see Updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.  The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.
+   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent doesn't interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  The UpdateContainerAgent API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init package. This updates the agent. For more information, see Updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.   Agent updates with the UpdateContainerAgent API operation do not apply to Windows container instances. We recommend that you launch new container instances to update the agent version in your Windows clusters.  The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.
    */
   updateContainerAgent(params: ECS.Types.UpdateContainerAgentRequest, callback?: (err: AWSError, data: ECS.Types.UpdateContainerAgentResponse) => void): Request<ECS.Types.UpdateContainerAgentResponse, AWSError>;
   /**
-   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent doesn't interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  The UpdateContainerAgent API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init package. This updates the agent. For more information, see Updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.  The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.
+   * Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent doesn't interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.  The UpdateContainerAgent API isn't supported for container instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init package. This updates the agent. For more information, see Updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.   Agent updates with the UpdateContainerAgent API operation do not apply to Windows container instances. We recommend that you launch new container instances to update the agent version in your Windows clusters.  The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and running. For help updating the Amazon ECS container agent on other operating systems, see Manually updating the Amazon ECS container agent in the Amazon Elastic Container Service Developer Guide.
    */
   updateContainerAgent(callback?: (err: AWSError, data: ECS.Types.UpdateContainerAgentResponse) => void): Request<ECS.Types.UpdateContainerAgentResponse, AWSError>;
   /**
@@ -429,11 +437,11 @@ declare class ECS extends Service {
    */
   updateServicePrimaryTaskSet(callback?: (err: AWSError, data: ECS.Types.UpdateServicePrimaryTaskSetResponse) => void): Request<ECS.Types.UpdateServicePrimaryTaskSetResponse, AWSError>;
   /**
-   * Updates the protection status of a task. You can set protectionEnabled to true to protect your task from termination during scale-in events from Service Autoscaling or deployments. Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the protectionEnabled property making the task eligible for termination by a subsequent scale-in event. You can specify a custom expiration period for task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the custom expiration period, set the expiresInMinutes property. The expiresInMinutes property is always reset when you invoke this operation for a task that already has protectionEnabled set to true. You can keep extending the protection expiration period of a task by invoking this operation repeatedly. To learn more about Amazon ECS task protection, see Task scale-in protection in the Amazon Elastic Container Service Developer Guide.  This operation is only supported for tasks belonging to an Amazon ECS service. Invoking this operation for a standalone task will result in an TASK_NOT_VALID failure. For more information, see API failure reasons.   If you prefer to set task protection from within the container, we recommend using the Amazon ECS container agent endpoint. 
+   * Updates the protection status of a task. You can set protectionEnabled to true to protect your task from termination during scale-in events from Service Autoscaling or deployments. Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the protectionEnabled property making the task eligible for termination by a subsequent scale-in event. You can specify a custom expiration period for task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the custom expiration period, set the expiresInMinutes property. The expiresInMinutes property is always reset when you invoke this operation for a task that already has protectionEnabled set to true. You can keep extending the protection expiration period of a task by invoking this operation repeatedly. To learn more about Amazon ECS task protection, see Task scale-in protection in the  Amazon Elastic Container Service Developer Guide .  This operation is only supported for tasks belonging to an Amazon ECS service. Invoking this operation for a standalone task will result in an TASK_NOT_VALID failure. For more information, see API failure reasons.   If you prefer to set task protection from within the container, we recommend using the Task scale-in protection endpoint. 
    */
   updateTaskProtection(params: ECS.Types.UpdateTaskProtectionRequest, callback?: (err: AWSError, data: ECS.Types.UpdateTaskProtectionResponse) => void): Request<ECS.Types.UpdateTaskProtectionResponse, AWSError>;
   /**
-   * Updates the protection status of a task. You can set protectionEnabled to true to protect your task from termination during scale-in events from Service Autoscaling or deployments. Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the protectionEnabled property making the task eligible for termination by a subsequent scale-in event. You can specify a custom expiration period for task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the custom expiration period, set the expiresInMinutes property. The expiresInMinutes property is always reset when you invoke this operation for a task that already has protectionEnabled set to true. You can keep extending the protection expiration period of a task by invoking this operation repeatedly. To learn more about Amazon ECS task protection, see Task scale-in protection in the Amazon Elastic Container Service Developer Guide.  This operation is only supported for tasks belonging to an Amazon ECS service. Invoking this operation for a standalone task will result in an TASK_NOT_VALID failure. For more information, see API failure reasons.   If you prefer to set task protection from within the container, we recommend using the Amazon ECS container agent endpoint. 
+   * Updates the protection status of a task. You can set protectionEnabled to true to protect your task from termination during scale-in events from Service Autoscaling or deployments. Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the protectionEnabled property making the task eligible for termination by a subsequent scale-in event. You can specify a custom expiration period for task protection from 1 minute to up to 2,880 minutes (48 hours). To specify the custom expiration period, set the expiresInMinutes property. The expiresInMinutes property is always reset when you invoke this operation for a task that already has protectionEnabled set to true. You can keep extending the protection expiration period of a task by invoking this operation repeatedly. To learn more about Amazon ECS task protection, see Task scale-in protection in the  Amazon Elastic Container Service Developer Guide .  This operation is only supported for tasks belonging to an Amazon ECS service. Invoking this operation for a standalone task will result in an TASK_NOT_VALID failure. For more information, see API failure reasons.   If you prefer to set task protection from within the container, we recommend using the Task scale-in protection endpoint. 
    */
   updateTaskProtection(callback?: (err: AWSError, data: ECS.Types.UpdateTaskProtectionResponse) => void): Request<ECS.Types.UpdateTaskProtectionResponse, AWSError>;
   /**
@@ -479,6 +487,7 @@ declare class ECS extends Service {
 }
 declare namespace ECS {
   export type AgentUpdateStatus = "PENDING"|"STAGING"|"STAGED"|"UPDATING"|"UPDATED"|"FAILED"|string;
+  export type ApplicationProtocol = "http"|"http2"|"grpc"|string;
   export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
   export interface Attachment {
     /**
@@ -517,7 +526,7 @@ declare namespace ECS {
      */
     name: String;
     /**
-     * The value of the attribute. The value must contain between 1 and 128 characters. It can contain letters (uppercase and lowercase), numbers, hyphens (-), underscores (_), periods (.), at signs (@), forward slashes (/), back slashes (\), colons (:), or spaces. The value can't can't start or end with a space.
+     * The value of the attribute. The value must contain between 1 and 128 characters. It can contain letters (uppercase and lowercase), numbers, hyphens (-), underscores (_), periods (.), at signs (@), forward slashes (/), back slashes (\), colons (:), or spaces. The value can't start or end with a space.
      */
     value?: String;
     /**
@@ -685,6 +694,10 @@ declare namespace ECS {
      * The status of the capacity providers associated with the cluster. The following are the states that are returned.  UPDATE_IN_PROGRESS  The available capacity providers for the cluster are updating.  UPDATE_COMPLETE  The capacity providers have successfully updated.  UPDATE_FAILED  The capacity provider updates failed.  
      */
     attachmentsStatus?: String;
+    /**
+     * Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the enabled parameter to true in the ServiceConnectConfiguration. You can set the namespace of each service individually in the ServiceConnectConfiguration to override this default parameter. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectDefaults?: ClusterServiceConnectDefaults;
   }
   export interface ClusterConfiguration {
     /**
@@ -694,6 +707,18 @@ declare namespace ECS {
   }
   export type ClusterField = "ATTACHMENTS"|"CONFIGURATIONS"|"SETTINGS"|"STATISTICS"|"TAGS"|string;
   export type ClusterFieldList = ClusterField[];
+  export interface ClusterServiceConnectDefaults {
+    /**
+     * The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace. When you create a service and don't specify a Service Connect configuration, this namespace is used.
+     */
+    namespace?: String;
+  }
+  export interface ClusterServiceConnectDefaultsRequest {
+    /**
+     * The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify a Service Connect configuration. Up to 1024 characters are allowed. The name is case-sensitive. The characters can't include hyphens (-), tilde (~), greater than (&gt;), less than (&lt;), or slash (/). If you enter an existing namespace name or ARN, then that namespace will be used. Any namespace type is supported. The namespace must be in this account and this Amazon Web Services Region. If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a Cloud Map namespace with the "API calls" method of instance discovery only. This instance discovery method is the "HTTP" namespace type in the Command Line Interface. Other types of instance discovery aren't used by Service Connect. If you update the service with an empty string "" for the namespace name, the cluster configuration for Service Connect is removed. Note that the namespace will remain in Cloud Map and must be deleted separately. For more information about Cloud Map, see Working with Services in the Cloud Map Developer Guide.
+     */
+    namespace: String;
+  }
   export interface ClusterSetting {
     /**
      * The name of the cluster setting. The only supported value is containerInsights.
@@ -1151,6 +1176,10 @@ declare namespace ECS {
      * The capacity provider strategy to set as the default for the cluster. After a default capacity provider strategy is set for a cluster, when you call the RunTask or CreateService APIs with no capacity provider strategy or launch type specified, the default capacity provider strategy for the cluster is used. If a default capacity provider strategy isn't defined for a cluster when it was created, it can be defined later with the PutClusterCapacityProviders API operation.
      */
     defaultCapacityProviderStrategy?: CapacityProviderStrategy;
+    /**
+     * Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the enabled parameter to true in the ServiceConnectConfiguration. You can set the namespace of each service individually in the ServiceConnectConfiguration to override this default parameter. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectDefaults?: ClusterServiceConnectDefaultsRequest;
   }
   export interface CreateClusterResponse {
     /**
@@ -1220,7 +1249,7 @@ declare namespace ECS {
      */
     networkConfiguration?: NetworkConfiguration;
     /**
-     * The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks after a task has first started. This is only used when your service is configured to use a load balancer. If your service has a load balancer defined and you don't specify a health check grace period value, the default value of 0 is used. If you do not use an Elastic Load Balancing, we recomend that you use the startPeriod in the task definition healtch check parameters. For more information, see Health check. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service scheduler ignores health check status. This grace period can prevent the service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
+     * The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks after a task has first started. This is only used when your service is configured to use a load balancer. If your service has a load balancer defined and you don't specify a health check grace period value, the default value of 0 is used. If you do not use an Elastic Load Balancing, we recommend that you use the startPeriod in the task definition health check parameters. For more information, see Health check. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service scheduler ignores health check status. This grace period can prevent the service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
      */
     healthCheckGracePeriodSeconds?: BoxedInteger;
     /**
@@ -1247,6 +1276,10 @@ declare namespace ECS {
      * Determines whether the execute command functionality is enabled for the service. If true, this enables execute command functionality on all containers in the service tasks.
      */
     enableExecuteCommand?: Boolean;
+    /**
+     * The configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectConfiguration?: ServiceConnectConfiguration;
   }
   export interface CreateServiceResponse {
     /**
@@ -1479,6 +1512,14 @@ declare namespace ECS {
      * A description of the rollout state of a deployment.
      */
     rolloutStateReason?: String;
+    /**
+     * The details of the Service Connect configuration that's used by this deployment. Compare the configuration between multiple deployments when troubleshooting issues with new deployments. The configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectConfiguration?: ServiceConnectConfiguration;
+    /**
+     * The list of Service Connect resources that are associated with this deployment. Each list entry maps a discovery name to a Cloud Map service name.
+     */
+    serviceConnectResources?: ServiceConnectServiceResourceList;
   }
   export interface DeploymentCircuitBreaker {
     /**
@@ -1583,7 +1624,7 @@ declare namespace ECS {
      */
     clusters?: StringList;
     /**
-     * Determines whether to include additional information about the clusters in the response. If this field is omitted, this information isn't included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included. If SETTINGS is specified, the settings for the cluster are included. If CONFIGURATIONS is specified, the configuration for the cluster is included. If STATISTICS is specified, the task and service count is included, separated by launch type. If TAGS is specified, the metadata tags associated with the cluster are included.
+     * Determines whether to include additional information about the clusters in the response. If this field is omitted, this information isn't included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included, for example the capacity providers. If SETTINGS is specified, the settings for the cluster are included. If CONFIGURATIONS is specified, the configuration for the cluster is included. If STATISTICS is specified, the task and service count is included, separated by launch type. If TAGS is specified, the metadata tags associated with the cluster are included.
      */
     include?: ClusterFieldList;
   }
@@ -1754,6 +1795,10 @@ declare namespace ECS {
      * The telemetry endpoint for the Amazon ECS agent.
      */
     telemetryEndpoint?: String;
+    /**
+     * The endpoint for the Amazon ECS agent to poll for Service Connect configuration. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectEndpoint?: String;
   }
   export type DockerLabelsMap = {[key: string]: String};
   export interface DockerVolumeConfiguration {
@@ -2249,6 +2294,30 @@ declare namespace ECS {
      */
     nextToken?: String;
   }
+  export interface ListServicesByNamespaceRequest {
+    /**
+     * The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace to list the services in. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    namespace: String;
+    /**
+     * The nextToken value that's returned from a ListServicesByNamespace request. It indicates that more results are available to fulfill the request and further calls are needed. If maxResults is returned, it is possible the number of results is less than maxResults.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of service results that ListServicesByNamespace returns in paginated output. When this parameter is used, ListServicesByNamespace only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListServicesByNamespace request with the returned nextToken value. This value can be between 1 and 100. If this parameter isn't used, then ListServicesByNamespace returns up to 10 results and a nextToken value if applicable.
+     */
+    maxResults?: BoxedInteger;
+  }
+  export interface ListServicesByNamespaceResponse {
+    /**
+     * The list of full ARN entries for each service that's associated with the specified namespace.
+     */
+    serviceArns?: StringList;
+    /**
+     * The nextToken value to include in a future ListServicesByNamespace request. When the results of a ListServicesByNamespace request exceed maxResults, this value can be used to retrieve the next page of results. When there are no more results to return, this value is null.
+     */
+    nextToken?: String;
+  }
   export interface ListServicesRequest {
     /**
      * The short name or full Amazon Resource Name (ARN) of the cluster to use when filtering the ListServices results. If you do not specify a cluster, the default cluster is assumed.
@@ -2375,7 +2444,7 @@ declare namespace ECS {
      */
     maxResults?: BoxedInteger;
     /**
-     * The startedBy value to filter the task results with. Specifying a startedBy value limits the results to tasks that were started with that value.
+     * The startedBy value to filter the task results with. Specifying a startedBy value limits the results to tasks that were started with that value. When you specify startedBy as the filter, it must be the only filter that you use.
      */
     startedBy?: String;
     /**
@@ -2490,7 +2559,7 @@ declare namespace ECS {
      */
     minimumScalingStepSize?: ManagedScalingStepSize;
     /**
-     * The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale in process is not affected by this parameter. If this parameter is omitted, the default value of 10000 is used.
+     * The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale in process is not affected by this parameter. If this parameter is omitted, the default value of 1 is used.
      */
     maximumScalingStepSize?: ManagedScalingStepSize;
     /**
@@ -2610,8 +2679,17 @@ declare namespace ECS {
      * The protocol used for the port mapping. Valid values are tcp and udp. The default is tcp.
      */
     protocol?: TransportProtocol;
+    /**
+     * The name that's used for the port mapping. This parameter only applies to Service Connect. This parameter is the name that you use in the serviceConnectConfiguration of a service. Up to 64 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). A hyphen can't be the first character. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    name?: String;
+    /**
+     * The application protocol that's used for the port mapping. This parameter only applies to Service Connect. We recommend that you set this parameter to be consistent with the protocol that your application uses. If you set this parameter, Amazon ECS adds protocol-specific connection handling to the Service Connect proxy. If you set this parameter, Amazon ECS adds protocol-specific telemetry in the Amazon ECS console and CloudWatch. If you don't set a value for this parameter, then TCP is used. However, Amazon ECS doesn't add protocol-specific telemetry for TCP. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    appProtocol?: ApplicationProtocol;
   }
   export type PortMappingList = PortMapping[];
+  export type PortNumber = number;
   export type PropagateTags = "TASK_DEFINITION"|"SERVICE"|"NONE"|string;
   export interface ProtectedTask {
     /**
@@ -2968,7 +3046,7 @@ declare namespace ECS {
   }
   export interface RuntimePlatform {
     /**
-     * The CPU architecture. You can run your Linux tasks on an ARM-based platform by setting the value to ARM64. This option is avaiable for tasks that run on Linux Amazon EC2 instance or Linux containers on Fargate.
+     * The CPU architecture. You can run your Linux tasks on an ARM-based platform by setting the value to ARM64. This option is available for tasks that run on Linux Amazon EC2 instance or Linux containers on Fargate.
      */
     cpuArchitecture?: CPUArchitecture;
     /**
@@ -3127,6 +3205,62 @@ declare namespace ECS {
      */
     enableExecuteCommand?: Boolean;
   }
+  export interface ServiceConnectClientAlias {
+    /**
+     * The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace. To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    port: PortNumber;
+    /**
+     * The dnsName is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. Up to 127 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). A hyphen can't be the first character. If this parameter isn't specified, the default value of discoveryName.namespace is used. If the discoveryName isn't specified, the portName.namespace from the task definition is used. To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are database, db, or the lowercase name of a database, such as mysql or redis. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    dnsName?: String;
+  }
+  export type ServiceConnectClientAliasList = ServiceConnectClientAlias[];
+  export interface ServiceConnectConfiguration {
+    /**
+     * Specifies whether to use Service Connect with this service.
+     */
+    enabled: Boolean;
+    /**
+     * The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace for use with Service Connect. The namespace must be in the same Amazon Web Services Region as the Amazon ECS service and cluster. The type of namespace doesn't affect Service Connect. For more information about Cloud Map, see Working with Services in the Cloud Map Developer Guide.
+     */
+    namespace?: String;
+    /**
+     * The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service. You can specify up to X (30?) objects per Amazon ECS service. This field is not required for a "client" Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means. An object selects a port from the task definition, assigns a name for the Cloud Map service, and a list of aliases (endpoints) and ports for client applications to refer to this service.
+     */
+    services?: ServiceConnectServiceList;
+    logConfiguration?: LogConfiguration;
+  }
+  export interface ServiceConnectService {
+    /**
+     * The portName must match the name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
+     */
+    portName: String;
+    /**
+     * The discoveryName is the name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS service. This must be unique within the Cloud Map namespace. Up to 64 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). A hyphen can't be the first character. If this field isn't specified, portName is used.
+     */
+    discoveryName?: String;
+    /**
+     * The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. Each alias ("endpoint") is a fully-qualified name and port number that other Amazon ECS tasks ("clients") can use to connect to this service. Each name and port mapping must be unique within the namespace. For each ServiceConnectService, you must provide at least one clientAlias with one port.
+     */
+    clientAliases?: ServiceConnectClientAliasList;
+    /**
+     * The port number for the Service Connect proxy to listen on. Use the value of this field to bypass the proxy for traffic on the port number specified in the named portMapping in the task definition of this application, and then use it in your VPC security groups to allow traffic into the proxy for this Amazon ECS service. In awsvpc mode and Fargate, the default value is the container port number. The container port number is in the portMapping in the task definition. In bridge mode, the default value is the ephemeral port of the Service Connect proxy.
+     */
+    ingressPortOverride?: PortNumber;
+  }
+  export type ServiceConnectServiceList = ServiceConnectService[];
+  export interface ServiceConnectServiceResource {
+    /**
+     * The discovery name of this Service Connect resource. The discoveryName is the name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS service. This must be unique within the Cloud Map namespace. Up to 64 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). A hyphen can't be the first character. If this field isn't specified, portName is used.
+     */
+    discoveryName?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the namespace in Cloud Map that matches the discovery name for this Service Connect resource. You can use this ARN in other integrations with Cloud Map. However, Service Connect can't ensure connectivity outside of Amazon ECS.
+     */
+    discoveryArn?: String;
+  }
+  export type ServiceConnectServiceResourceList = ServiceConnectServiceResource[];
   export interface ServiceEvent {
     /**
      * The ID string for the event.
@@ -3690,7 +3824,7 @@ declare namespace ECS {
      */
     containerOverrides?: ContainerOverrides;
     /**
-     * The cpu override for the task.
+     * The CPU override for the task.
      */
     cpu?: String;
     /**
@@ -3800,7 +3934,7 @@ declare namespace ECS {
      */
     scale?: Scale;
     /**
-     * The stability status. This indicates whether the task set has reached a steady state. If the following conditions are met, the task set sre in STEADY_STATE:   The task runningCount is equal to the computedDesiredCount.   The pendingCount is 0.   There are no tasks that are running on container instances in the DRAINING status.   All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.   If any of those conditions aren't met, the stability status returns STABILIZING.
+     * The stability status. This indicates whether the task set has reached a steady state. If the following conditions are met, the task set are in STEADY_STATE:   The task runningCount is equal to the computedDesiredCount.   The pendingCount is 0.   There are no tasks that are running on container instances in the DRAINING status.   All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.   If any of those conditions aren't met, the stability status returns STABILIZING.
      */
     stabilityStatus?: StabilityStatus;
     /**
@@ -3815,7 +3949,7 @@ declare namespace ECS {
   export type TaskSetField = "TAGS"|string;
   export type TaskSetFieldList = TaskSetField[];
   export type TaskSets = TaskSet[];
-  export type TaskStopCode = "TaskFailedToStart"|"EssentialContainerExited"|"UserInitiated"|string;
+  export type TaskStopCode = "TaskFailedToStart"|"EssentialContainerExited"|"UserInitiated"|"ServiceSchedulerInitiated"|"SpotInterruption"|"TerminationNotice"|string;
   export type Tasks = Task[];
   export type Timestamp = Date;
   export interface Tmpfs {
@@ -3891,6 +4025,10 @@ declare namespace ECS {
      * The execute command configuration for the cluster.
      */
     configuration?: ClusterConfiguration;
+    /**
+     * Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the enabled parameter to true in the ServiceConnectConfiguration. You can set the namespace of each service individually in the ServiceConnectConfiguration to override this default parameter. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectDefaults?: ClusterServiceConnectDefaultsRequest;
   }
   export interface UpdateClusterResponse {
     /**
@@ -3904,7 +4042,7 @@ declare namespace ECS {
      */
     cluster: String;
     /**
-     * The setting to use by default for a cluster. This parameter is used to turn on CloudWatch Container Insights for a cluster. If this value is specified, it overrides the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.
+     * The setting to use by default for a cluster. This parameter is used to turn on CloudWatch Container Insights for a cluster. If this value is specified, it overrides the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.  Currently, if you delete an existing cluster that does not have Container Insights turned on, and then create a new cluster with the same name with Container Insights tuned on, Container Insights will not actually be turned on. If you want to preserve the same name for your existing cluster and turn on Container Insights, you must wait 7 days before you can re-create it. 
      */
     settings: ClusterSettings;
   }
@@ -3970,7 +4108,7 @@ declare namespace ECS {
   }
   export interface UpdateServicePrimaryTaskSetResponse {
     /**
-     * etails about the task set.
+     * The details about the task set.
      */
     taskSet?: TaskSet;
   }
@@ -4043,6 +4181,10 @@ declare namespace ECS {
      * The details for the service discovery registries to assign to this service. For more information, see Service Discovery. When you add, update, or remove the service registries configuration, Amazon ECS starts new tasks with the updated service registries configuration, and then stops the old tasks when the new tasks are running. You can remove existing serviceRegistries by passing an empty list.
      */
     serviceRegistries?: ServiceRegistries;
+    /**
+     * The configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     */
+    serviceConnectConfiguration?: ServiceConnectConfiguration;
   }
   export interface UpdateServiceResponse {
     /**

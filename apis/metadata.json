@@ -1222,5 +1222,8 @@
   "ssmsap": {
     "prefix": "ssm-sap",
     "name": "SsmSap"
+  },
+  "oam": {
+    "name": "OAM"
   }
 }

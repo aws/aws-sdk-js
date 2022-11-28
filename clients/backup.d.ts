@@ -12,6 +12,14 @@ declare class Backup extends Service {
   constructor(options?: Backup.Types.ClientConfiguration)
   config: Config & Backup.Types.ClientConfiguration;
   /**
+   * This action removes the specified legal hold on a recovery point. This action can only be performed by a user with sufficient permissions.
+   */
+  cancelLegalHold(params: Backup.Types.CancelLegalHoldInput, callback?: (err: AWSError, data: Backup.Types.CancelLegalHoldOutput) => void): Request<Backup.Types.CancelLegalHoldOutput, AWSError>;
+  /**
+   * This action removes the specified legal hold on a recovery point. This action can only be performed by a user with sufficient permissions.
+   */
+  cancelLegalHold(callback?: (err: AWSError, data: Backup.Types.CancelLegalHoldOutput) => void): Request<Backup.Types.CancelLegalHoldOutput, AWSError>;
+  /**
    * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, you receive an AlreadyExistsException exception.
    */
   createBackupPlan(params: Backup.Types.CreateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
@@ -43,6 +51,14 @@ declare class Backup extends Service {
    * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies and which resources are not yet in compliance.
    */
   createFramework(callback?: (err: AWSError, data: Backup.Types.CreateFrameworkOutput) => void): Request<Backup.Types.CreateFrameworkOutput, AWSError>;
+  /**
+   * This action creates a legal hold on a recovery point (backup). A legal hold is a restraint on altering or deleting a backup until an authorized user cancels the legal hold. Any actions to delete or disassociate a recovery point will fail with an error if one or more active legal holds are on the recovery point.
+   */
+  createLegalHold(params: Backup.Types.CreateLegalHoldInput, callback?: (err: AWSError, data: Backup.Types.CreateLegalHoldOutput) => void): Request<Backup.Types.CreateLegalHoldOutput, AWSError>;
+  /**
+   * This action creates a legal hold on a recovery point (backup). A legal hold is a restraint on altering or deleting a backup until an authorized user cancels the legal hold. Any actions to delete or disassociate a recovery point will fail with an error if one or more active legal holds are on the recovery point.
+   */
+  createLegalHold(callback?: (err: AWSError, data: Backup.Types.CreateLegalHoldOutput) => void): Request<Backup.Types.CreateLegalHoldOutput, AWSError>;
   /**
    * Creates a report plan. A report plan is a document that contains information about the contents of the report and where Backup will deliver it. If you call CreateReportPlan with a plan that already exists, you receive an AlreadyExistsException exception.
    */
@@ -108,11 +124,11 @@ declare class Backup extends Service {
    */
   deleteFramework(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.
+   * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup. When an IAM role's permissions are insufficient to call this API, the service sends back an HTTP 200 response with an empty HTTP body, but the recovery point is not deleted. Instead, it enters an EXPIRED state.  EXPIRED recovery points can be deleted with this API once the IAM role has the iam:CreateServiceLinkedRole action. To learn more about adding this role, see  Troubleshooting manual deletions. If the user or role is deleted or the permission within the role is removed, the deletion will not be successful and will enter an EXPIRED state.
    */
   deleteRecoveryPoint(params: Backup.Types.DeleteRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.
+   * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup. When an IAM role's permissions are insufficient to call this API, the service sends back an HTTP 200 response with an empty HTTP body, but the recovery point is not deleted. Instead, it enters an EXPIRED state.  EXPIRED recovery points can be deleted with this API once the IAM role has the iam:CreateServiceLinkedRole action. To learn more about adding this role, see  Troubleshooting manual deletions. If the user or role is deleted or the permission within the role is removed, the deletion will not be successful and will enter an EXPIRED state.
    */
   deleteRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -220,6 +236,14 @@ declare class Backup extends Service {
    */
   disassociateRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This action to a specific child (nested) recovery point removes the relationship between the specified recovery point and its parent (composite) recovery point.
+   */
+  disassociateRecoveryPointFromParent(params: Backup.Types.DisassociateRecoveryPointFromParentInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This action to a specific child (nested) recovery point removes the relationship between the specified recovery point and its parent (composite) recovery point.
+   */
+  disassociateRecoveryPointFromParent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns the backup plan that is specified by the plan ID as a backup template.
    */
   exportBackupPlanTemplate(params: Backup.Types.ExportBackupPlanTemplateInput, callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
@@ -275,6 +299,14 @@ declare class Backup extends Service {
    * Returns event notifications for the specified backup vault.
    */
   getBackupVaultNotifications(callback?: (err: AWSError, data: Backup.Types.GetBackupVaultNotificationsOutput) => void): Request<Backup.Types.GetBackupVaultNotificationsOutput, AWSError>;
+  /**
+   * This action returns details for a specified legal hold. The details are the body of a legal hold in JSON format, in addition to metadata.
+   */
+  getLegalHold(params: Backup.Types.GetLegalHoldInput, callback?: (err: AWSError, data: Backup.Types.GetLegalHoldOutput) => void): Request<Backup.Types.GetLegalHoldOutput, AWSError>;
+  /**
+   * This action returns details for a specified legal hold. The details are the body of a legal hold in JSON format, in addition to metadata.
+   */
+  getLegalHold(callback?: (err: AWSError, data: Backup.Types.GetLegalHoldOutput) => void): Request<Backup.Types.GetLegalHoldOutput, AWSError>;
   /**
    * Returns a set of metadata key-value pairs that were used to create the backup.
    */
@@ -352,6 +384,14 @@ declare class Backup extends Service {
    */
   listFrameworks(callback?: (err: AWSError, data: Backup.Types.ListFrameworksOutput) => void): Request<Backup.Types.ListFrameworksOutput, AWSError>;
   /**
+   * This action returns metadata about active and previous legal holds.
+   */
+  listLegalHolds(params: Backup.Types.ListLegalHoldsInput, callback?: (err: AWSError, data: Backup.Types.ListLegalHoldsOutput) => void): Request<Backup.Types.ListLegalHoldsOutput, AWSError>;
+  /**
+   * This action returns metadata about active and previous legal holds.
+   */
+  listLegalHolds(callback?: (err: AWSError, data: Backup.Types.ListLegalHoldsOutput) => void): Request<Backup.Types.ListLegalHoldsOutput, AWSError>;
+  /**
    * Returns an array of resources successfully backed up by Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
    */
   listProtectedResources(params: Backup.Types.ListProtectedResourcesInput, callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
@@ -367,6 +407,14 @@ declare class Backup extends Service {
    * Returns detailed information about the recovery points stored in a backup vault.
    */
   listRecoveryPointsByBackupVault(callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByBackupVaultOutput) => void): Request<Backup.Types.ListRecoveryPointsByBackupVaultOutput, AWSError>;
+  /**
+   * This action returns recovery point ARNs (Amazon Resource Names) of the specified legal hold.
+   */
+  listRecoveryPointsByLegalHold(params: Backup.Types.ListRecoveryPointsByLegalHoldInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByLegalHoldOutput) => void): Request<Backup.Types.ListRecoveryPointsByLegalHoldOutput, AWSError>;
+  /**
+   * This action returns recovery point ARNs (Amazon Resource Names) of the specified legal hold.
+   */
+  listRecoveryPointsByLegalHold(callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByLegalHoldOutput) => void): Request<Backup.Types.ListRecoveryPointsByLegalHoldOutput, AWSError>;
   /**
    * Returns detailed information about all the recovery points of the type specified by a resource Amazon Resource Name (ARN).  For Amazon EFS and Amazon EC2, this action only lists recovery points created by Backup. 
    */
@@ -464,11 +512,11 @@ declare class Backup extends Service {
    */
   startRestoreJob(callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
-   * Attempts to cancel a job to create a one-time backup of a resource.
+   * Attempts to cancel a job to create a one-time backup of a resource. This action is not supported for the following services: Amazon FSx for Windows File Server, Amazon FSx for Lustre, FSx for ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
    */
   stopBackupJob(params: Backup.Types.StopBackupJobInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attempts to cancel a job to create a one-time backup of a resource.
+   * Attempts to cancel a job to create a one-time backup of a resource. This action is not supported for the following services: Amazon FSx for Windows File Server, Amazon FSx for Lustre, FSx for ONTAP , Amazon FSx for OpenZFS, Amazon DocumentDB (with MongoDB compatibility), Amazon RDS, Amazon Aurora, and Amazon Neptune.
    */
   stopBackupJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -631,8 +679,17 @@ declare namespace Backup {
      * Represents the type of backup for a backup job.
      */
     BackupType?: string;
+    /**
+     * This uniquely identifies a request to Backup to back up a resource. The return will be the parent (composite) job ID.
+     */
+    ParentJobId?: string;
+    /**
+     * This is a boolean value indicating this is a parent (composite) backup job.
+     */
+    IsParent?: boolean;
   }
-  export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|string;
+  export type BackupJobChildJobsInState = {[key: string]: Long};
+  export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|"PARTIAL"|string;
   export type BackupJobsList = BackupJob[];
   export type BackupOptionKey = string;
   export type BackupOptionValue = string;
@@ -731,7 +788,7 @@ declare namespace Backup {
      */
     ScheduleExpression?: CronExpression;
     /**
-     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
+     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors.
      */
     StartWindowMinutes?: WindowMinutes;
     /**
@@ -773,7 +830,7 @@ declare namespace Backup {
      */
     ScheduleExpression?: CronExpression;
     /**
-     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
+     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors.
      */
     StartWindowMinutes?: WindowMinutes;
     /**
@@ -910,6 +967,22 @@ declare namespace Backup {
      * A timestamp that specifies when to delete a recovery point.
      */
     DeleteAt?: timestamp;
+  }
+  export interface CancelLegalHoldInput {
+    /**
+     * Legal hold ID required to remove the specified legal hold on a recovery point.
+     */
+    LegalHoldId: string;
+    /**
+     * String describing the reason for removing the legal hold.
+     */
+    CancelDescription: string;
+    /**
+     * The integer amount in days specifying amount of days after this API operation to remove legal hold.
+     */
+    RetainRecordInDays?: Long;
+  }
+  export interface CancelLegalHoldOutput {
   }
   export type ComplianceResourceIdList = string[];
   export interface Condition {
@@ -1050,8 +1123,29 @@ declare namespace Backup {
      * The type of Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
      */
     ResourceType?: ResourceType;
+    /**
+     * This uniquely identifies a request to Backup to copy a resource. The return will be the parent (composite) job ID.
+     */
+    ParentJobId?: string;
+    /**
+     * This is a boolean value indicating this is a parent (composite) copy job.
+     */
+    IsParent?: boolean;
+    /**
+     * This is the identifier of a resource within a composite group, such as nested (child) recovery point belonging to a composite (parent) stack. The ID is transferred from the  logical ID within a stack.
+     */
+    CompositeMemberIdentifier?: string;
+    /**
+     * This is the number of child (nested) copy jobs.
+     */
+    NumberOfChildJobs?: Long;
+    /**
+     * This returns the statistics of the included child (nested) copy jobs.
+     */
+    ChildJobsInState?: CopyJobChildJobsInState;
   }
-  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type CopyJobChildJobsInState = {[key: string]: Long};
+  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|"PARTIAL"|string;
   export type CopyJobsList = CopyJob[];
   export interface CreateBackupPlanInput {
     /**
@@ -1181,6 +1275,58 @@ declare namespace Backup {
      */
     FrameworkArn?: ARN;
   }
+  export interface CreateLegalHoldInput {
+    /**
+     * This is the string title of the legal hold.
+     */
+    Title: string;
+    /**
+     * This is the string description of the legal hold.
+     */
+    Description: string;
+    /**
+     * This is a user-chosen string used to distinguish between otherwise identical calls. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+    /**
+     * This specifies criteria to assign a set of resources, such as resource types or backup vaults.
+     */
+    RecoveryPointSelection?: RecoveryPointSelection;
+    /**
+     * Optional tags to include. A tag is a key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ : /. 
+     */
+    Tags?: Tags;
+  }
+  export interface CreateLegalHoldOutput {
+    /**
+     * This is the string title of the legal hold returned after creating the legal hold.
+     */
+    Title?: string;
+    /**
+     * This displays the status of the legal hold returned after creating the legal hold. Statuses can be ACTIVE, PENDING, CANCELED, CANCELING, or FAILED.
+     */
+    Status?: LegalHoldStatus;
+    /**
+     * This is the returned string description of the legal hold.
+     */
+    Description?: string;
+    /**
+     * Legal hold ID returned for the specified legal hold on a recovery point.
+     */
+    LegalHoldId?: string;
+    /**
+     * This is the ARN (Amazon Resource Number) of the created legal hold.
+     */
+    LegalHoldArn?: ARN;
+    /**
+     * Time in number format when legal hold was created.
+     */
+    CreationDate?: timestamp;
+    /**
+     * This specifies criteria to assign a set of resources, such as resource types or backup vaults.
+     */
+    RecoveryPointSelection?: RecoveryPointSelection;
+  }
   export interface CreateReportPlanInput {
     /**
      * The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
@@ -1222,6 +1368,16 @@ declare namespace Backup {
     CreationTime?: timestamp;
   }
   export type CronExpression = string;
+  export interface DateRange {
+    /**
+     * This value is the beginning date, inclusive. The date and time are in Unix format and Coordinated Universal Time (UTC), and it is accurate to milliseconds (milliseconds are optional).
+     */
+    FromDate: timestamp;
+    /**
+     * This value is the end date, inclusive. The date and time are in Unix format and Coordinated Universal Time (UTC), and it is accurate to milliseconds (milliseconds are optional).
+     */
+    ToDate: timestamp;
+  }
   export interface DeleteBackupPlanInput {
     /**
      * Uniquely identifies a backup plan.
@@ -1389,6 +1545,22 @@ declare namespace Backup {
      * Represents the actual backup type selected for a backup job. For example, if a successful Windows Volume Shadow Copy Service (VSS) backup was taken, BackupType returns "WindowsVSS". If BackupType is empty, then the backup type was a regular backup.
      */
     BackupType?: string;
+    /**
+     * This returns the parent (composite) resource backup job ID.
+     */
+    ParentJobId?: string;
+    /**
+     * This returns the boolean value that a backup job is a parent (composite) job.
+     */
+    IsParent?: boolean;
+    /**
+     * This returns the number of child (nested) backup jobs.
+     */
+    NumberOfChildJobs?: Long;
+    /**
+     * This returns the statistics of the included child (nested) backup jobs.
+     */
+    ChildJobsInState?: BackupJobChildJobsInState;
   }
   export interface DescribeBackupVaultInput {
     /**
@@ -1474,7 +1646,7 @@ declare namespace Backup {
      */
     FrameworkControls?: FrameworkControls;
     /**
-     * The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time that a framework is created, in ISO 8601 representation. The value of CreationTime is accurate to milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind UTC.
      */
     CreationTime?: timestamp;
     /**
@@ -1566,7 +1738,7 @@ declare namespace Backup {
      */
     IamRoleArn?: IAMRoleArn;
     /**
-     * A status code specifying the state of the recovery point.  PARTIAL status indicates Backup could not create the recovery point before the backup window closed. To increase your backup plan window using the API, see UpdateBackupPlan. You can also increase your backup plan window using the Console by choosing and editing your backup plan.  EXPIRED status indicates that the recovery point has exceeded its retention period, but Backup lacks permission or is otherwise unable to delete it. To manually delete these recovery points, see  Step 3: Delete the recovery points in the Clean up resources section of Getting started.
+     * A status code specifying the state of the recovery point.  PARTIAL status indicates Backup could not create the recovery point before the backup window closed. To increase your backup plan window using the API, see UpdateBackupPlan. You can also increase your backup plan window using the Console by choosing and editing your backup plan.  EXPIRED status indicates that the recovery point has exceeded its retention period, but Backup lacks permission or is otherwise unable to delete it. To manually delete these recovery points, see  Step 3: Delete the recovery points in the Clean up resources section of Getting started.  STOPPED status occurs on a continuous backup where a user has taken some action that causes the continuous backup to be disabled. This can be caused by the removal of permissions, turning off versioning, turning off events being sent to EventBridge, or disabling the EventBridge rules that are put in place by Backup. To resolve STOPPED status, ensure that all requested permissions are in place and that versioning is enabled on the S3 bucket. Once these conditions are met, the next instance of a backup rule running will result in a new continuous recovery point being created. The recovery points with STOPPED status do not need to be deleted.
      */
     Status?: RecoveryPointStatus;
     /**
@@ -1609,6 +1781,18 @@ declare namespace Backup {
      * The date and time that a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastRestoreTime?: timestamp;
+    /**
+     * This is an ARN that uniquely identifies a parent (composite) recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+     */
+    ParentRecoveryPointArn?: ARN;
+    /**
+     * This is the identifier of a resource within a composite group, such as nested (child) recovery point belonging to a composite (parent) stack. The ID is transferred from the  logical ID within a stack.
+     */
+    CompositeMemberIdentifier?: string;
+    /**
+     * This returns the boolean value that a recovery point is a parent (composite) job.
+     */
+    IsParent?: boolean;
   }
   export interface DescribeRegionSettingsInput {
   }
@@ -1706,6 +1890,16 @@ declare namespace Backup {
      */
     ResourceType?: ResourceType;
   }
+  export interface DisassociateRecoveryPointFromParentInput {
+    /**
+     * This is the name of a logical container where the child (nested) recovery point is stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     */
+    BackupVaultName: BackupVaultName;
+    /**
+     * This is the Amazon Resource Name (ARN) that uniquely identifies the child (nested) recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. 
+     */
+    RecoveryPointArn: ARN;
+  }
   export interface DisassociateRecoveryPointInput {
     /**
      * The unique name of an Backup vault.
@@ -1747,7 +1941,7 @@ declare namespace Backup {
      */
     NumberOfControls?: integer;
     /**
-     * The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time that a framework is created, in ISO 8601 representation. The value of CreationTime is accurate to milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind UTC.
      */
     CreationTime?: timestamp;
     /**
@@ -1921,6 +2115,54 @@ declare namespace Backup {
      */
     BackupVaultEvents?: BackupVaultEvents;
   }
+  export interface GetLegalHoldInput {
+    /**
+     * This is the ID required to use GetLegalHold. This unique ID is associated with a specific legal hold.
+     */
+    LegalHoldId: string;
+  }
+  export interface GetLegalHoldOutput {
+    /**
+     * This is the string title of the legal hold.
+     */
+    Title?: string;
+    /**
+     * This is the status of the legal hold. Statuses can be ACTIVE, CREATING, CANCELED, and CANCELING.
+     */
+    Status?: LegalHoldStatus;
+    /**
+     * This is the returned string description of the legal hold.
+     */
+    Description?: string;
+    /**
+     * String describing the reason for removing the legal hold.
+     */
+    CancelDescription?: string;
+    /**
+     * This is the returned ID associated with a specified legal hold.
+     */
+    LegalHoldId?: string;
+    /**
+     * This is the returned framework ARN for the specified legal hold. An Amazon Resource Name (ARN) uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    LegalHoldArn?: ARN;
+    /**
+     * Time in number format when legal hold was created.
+     */
+    CreationDate?: timestamp;
+    /**
+     * Time in number when legal hold was cancelled.
+     */
+    CancellationDate?: timestamp;
+    /**
+     * This is the date and time until which the legal hold record will be retained.
+     */
+    RetainRecordUntil?: timestamp;
+    /**
+     * This specifies criteria to assign a set of resources, such as resource types or backup vaults.
+     */
+    RecoveryPointSelection?: RecoveryPointSelection;
+  }
   export interface GetRecoveryPointRestoreMetadataInput {
     /**
      * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
@@ -1957,6 +2199,38 @@ declare namespace Backup {
   export type IAMPolicy = string;
   export type IAMRoleArn = string;
   export type IsEnabled = boolean;
+  export interface LegalHold {
+    /**
+     * This is the title of a legal hold.
+     */
+    Title?: string;
+    /**
+     * This is the status of the legal hold. Statuses can be ACTIVE, CREATING, CANCELED, and CANCELING.
+     */
+    Status?: LegalHoldStatus;
+    /**
+     * This is the description of a legal hold.
+     */
+    Description?: string;
+    /**
+     * ID of specific legal hold on one or more recovery points.
+     */
+    LegalHoldId?: string;
+    /**
+     * This is an Amazon Resource Number (ARN) that uniquely identifies the legal hold; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+     */
+    LegalHoldArn?: ARN;
+    /**
+     * This is the time in number format when legal hold was created.
+     */
+    CreationDate?: timestamp;
+    /**
+     * This is the time in number format when legal hold was cancelled.
+     */
+    CancellationDate?: timestamp;
+  }
+  export type LegalHoldStatus = "CREATING"|"ACTIVE"|"CANCELING"|"CANCELED"|string;
+  export type LegalHoldsList = LegalHold[];
   export interface Lifecycle {
     /**
      * Specifies the number of days after creation that a recovery point is moved to cold storage.
@@ -2012,6 +2286,10 @@ declare namespace Backup {
      * Returns only backup jobs completed before a date expressed in Unix format and Coordinated Universal Time (UTC).
      */
     ByCompleteBefore?: timestamp;
+    /**
+     * This is a filter to list child (nested) jobs based on parent job ID.
+     */
+    ByParentJobId?: string;
   }
   export interface ListBackupJobsOutput {
     /**
@@ -2180,6 +2458,10 @@ declare namespace Backup {
      * Returns only copy jobs completed after a date expressed in Unix format and Coordinated Universal Time (UTC).
      */
     ByCompleteAfter?: timestamp;
+    /**
+     * This is a filter to list child (nested) jobs based on parent job ID.
+     */
+    ByParentJobId?: string;
   }
   export interface ListCopyJobsOutput {
     /**
@@ -2210,6 +2492,26 @@ declare namespace Backup {
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     NextToken?: string;
+  }
+  export interface ListLegalHoldsInput {
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+    /**
+     * The maximum number of resource list items to be returned.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListLegalHoldsOutput {
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+    /**
+     * This is an array of returned legal holds, both active and previous.
+     */
+    LegalHolds?: LegalHoldsList;
   }
   export type ListOfTags = Condition[];
   export interface ListProtectedResourcesInput {
@@ -2265,6 +2567,10 @@ declare namespace Backup {
      * Returns only recovery points that were created after the specified timestamp.
      */
     ByCreatedAfter?: timestamp;
+    /**
+     * This returns only recovery points that match the specified parent (composite) recovery point Amazon Resource Name (ARN).
+     */
+    ByParentRecoveryPointArn?: ARN;
   }
   export interface ListRecoveryPointsByBackupVaultOutput {
     /**
@@ -2275,6 +2581,30 @@ declare namespace Backup {
      * An array of objects that contain detailed information about recovery points saved in a backup vault.
      */
     RecoveryPoints?: RecoveryPointByBackupVaultList;
+  }
+  export interface ListRecoveryPointsByLegalHoldInput {
+    /**
+     * This is the ID of the legal hold.
+     */
+    LegalHoldId: string;
+    /**
+     * This is the next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+    /**
+     * This is the maximum number of resource list items to be returned.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListRecoveryPointsByLegalHoldOutput {
+    /**
+     * This is a list of the recovery points returned by ListRecoveryPointsByLegalHold.
+     */
+    RecoveryPoints?: RecoveryPointsList;
+    /**
+     * This return is the next item following a partial list of returned resources.
+     */
+    NextToken?: string;
   }
   export interface ListRecoveryPointsByResourceInput {
     /**
@@ -2485,7 +2815,7 @@ declare namespace Backup {
      */
     SNSTopicArn: ARN;
     /**
-     * An array of events that indicate the status of jobs to back up resources to the backup vault. For common use cases and code samples, see Using Amazon SNS to track Backup events. The following events are supported:    BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED     COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED     RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED     S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED     Ignore the list below because it includes deprecated events. Refer to the list above. 
+     * An array of events that indicate the status of jobs to back up resources to the backup vault. For common use cases and code samples, see Using Amazon SNS to track Backup events. The following events are supported:    BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED     COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED     RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED     S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED     The list below shows items that are deprecated events (for reference) and are no longer in use. They are no longer supported and will not return statuses or notifications. Refer to the list above for current supported events. 
      */
     BackupVaultEvents: BackupVaultEvents;
   }
@@ -2562,6 +2892,18 @@ declare namespace Backup {
      * The date and time a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastRestoreTime?: timestamp;
+    /**
+     * This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
+     */
+    ParentRecoveryPointArn?: ARN;
+    /**
+     * This is the identifier of a resource within a composite group, such as nested (child) recovery point belonging to a composite (parent) stack. The ID is transferred from the  logical ID within a stack.
+     */
+    CompositeMemberIdentifier?: string;
+    /**
+     * This is a boolean value indicating this is a parent (composite) recovery point.
+     */
+    IsParent?: boolean;
   }
   export type RecoveryPointByBackupVaultList = RecoveryPointByBackupVault[];
   export interface RecoveryPointByResource {
@@ -2593,6 +2935,14 @@ declare namespace Backup {
      * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName?: BackupVaultName;
+    /**
+     * This is a boolean value indicating this is a parent (composite) recovery point.
+     */
+    IsParent?: boolean;
+    /**
+     * This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
+     */
+    ParentRecoveryPointArn?: ARN;
   }
   export type RecoveryPointByResourceList = RecoveryPointByResource[];
   export interface RecoveryPointCreator {
@@ -2613,7 +2963,25 @@ declare namespace Backup {
      */
     BackupRuleId?: string;
   }
+  export interface RecoveryPointMember {
+    /**
+     * This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
+     */
+    RecoveryPointArn?: ARN;
+  }
+  export interface RecoveryPointSelection {
+    /**
+     * These are the names of the vaults in which the selected recovery points are contained.
+     */
+    VaultNames?: VaultNames;
+    /**
+     * These are the resources included in the resource selection (including type of resources and vaults).
+     */
+    ResourceIdentifiers?: ResourceIdentifiers;
+    DateRange?: DateRange;
+  }
   export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED"|string;
+  export type RecoveryPointsList = RecoveryPointMember[];
   export interface ReportDeliveryChannel {
     /**
      * The unique name of the S3 bucket that receives your reports.
@@ -2728,8 +3096,21 @@ declare namespace Backup {
      * The number of frameworks a report covers.
      */
     NumberOfFrameworks?: integer;
+    /**
+     * These are the accounts to be included in the report.
+     */
+    Accounts?: stringList;
+    /**
+     * These are the Organizational Units to be included in the report.
+     */
+    OrganizationUnits?: stringList;
+    /**
+     * These are the Regions to be included in the report.
+     */
+    Regions?: stringList;
   }
   export type ResourceArns = ARN[];
+  export type ResourceIdentifiers = string[];
   export type ResourceType = string;
   export type ResourceTypeList = ARN[];
   export type ResourceTypeManagementPreference = {[key: string]: IsEnabled};
@@ -2810,7 +3191,7 @@ declare namespace Backup {
      */
     IdempotencyToken?: string;
     /**
-     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours.
+     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors.
      */
     StartWindowMinutes?: WindowMinutes;
     /**
@@ -2843,6 +3224,10 @@ declare namespace Backup {
      * The date and time that a backup job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationDate?: timestamp;
+    /**
+     * This is a returned boolean value indicating this is a parent (composite) backup job.
+     */
+    IsParent?: boolean;
   }
   export interface StartCopyJobInput {
     /**
@@ -2876,6 +3261,10 @@ declare namespace Backup {
      * The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationDate?: timestamp;
+    /**
+     * This is a returned boolean value indicating this is a parent (composite) copy job.
+     */
+    IsParent?: boolean;
   }
   export interface StartReportJobInput {
     /**
@@ -2903,7 +3292,7 @@ declare namespace Backup {
      */
     Metadata: Metadata;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example: arn:aws:iam::123456789012:role/S3Access.
      */
     IamRoleArn?: IAMRoleArn;
     /**
@@ -3012,7 +3401,7 @@ declare namespace Backup {
      */
     FrameworkArn?: ARN;
     /**
-     * The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time that a framework is created, in ISO 8601 representation. The value of CreationTime is accurate to milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind UTC.
      */
     CreationTime?: timestamp;
   }
@@ -3100,6 +3489,7 @@ declare namespace Backup {
      */
     CreationTime?: timestamp;
   }
+  export type VaultNames = string[];
   export type WindowMinutes = number;
   export type integer = number;
   export type long = number;

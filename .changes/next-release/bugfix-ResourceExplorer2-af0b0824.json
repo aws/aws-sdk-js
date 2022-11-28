@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ResourceExplorer2",
-  "description": "Add dualstack by default for FIPS"
-}

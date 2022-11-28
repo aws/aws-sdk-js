@@ -1,6 +1,28 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1261.0-->
+<!--LATEST=2.1262.0-->
 <!--ENTRYINSERT-->
+
+## 2.1262.0
+* bugfix: ResourceExplorer2: Add dualstack by default for FIPS
+* bugfix: Signer: Set Authorization header correctly in Bearer Signer
+* bugfix: Signer: Read identity type from service.api.signatureVersion
+* feature: Backup: AWS Backup introduces support for legal hold and application stack backups. AWS Backup Audit Manager introduces support for cross-Region, cross-account reports.
+* feature: CloudWatch: Adds cross-account support to the GetMetricData API. Adds cross-account support to the ListMetrics API through the usage of the IncludeLinkedAccounts flag and the new OwningAccounts field.
+* feature: CloudWatchLogs: Updates to support CloudWatch Logs data protection and CloudWatch cross-account observability
+* feature: Drs: Non breaking changes to existing APIs, and additional APIs added to support in-AWS failing back using AWS Elastic Disaster Recovery.
+* feature: ECS: This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.
+* feature: EFS: This release adds elastic as a new ThroughputMode value for EFS file systems and adds AFTER_1_DAY as a value for TransitionToIARules.
+* feature: Endpoint: Add pattern global dualstack by default
+* feature: IoTWireless: This release includes a new feature for customers to calculate the position of their devices by adding three new APIs: UpdateResourcePosition, GetResourcePosition, and GetPositionEstimate.
+* feature: Iot: Job scheduling enables the scheduled rollout of a Job with start and end times and a customizable end behavior when end time is reached. This is available for continuous and snapshot jobs. Added support for MQTT5 properties to AWS IoT TopicRule Republish Action.
+* feature: IotData: This release adds support for MQTT5 properties to AWS IoT HTTP Publish API.
+* feature: Kendra: Amazon Kendra now supports preview of table information from HTML tables in the search results. The most relevant cells with their corresponding rows, columns are displayed as a preview in the search result. The most relevant table cell or cells are also highlighted in table preview.
+* feature: Mgn: This release adds support for Application and Wave management. We also now support custom post-launch actions.
+* feature: OAM: Amazon CloudWatch Observability Access Manager is a new service that allows configuration of the CloudWatch cross-account observability feature.
+* feature: Organizations: This release introduces delegated administrator for AWS Organizations, a new feature to help you delegate the management of your Organizations policies, enabling you to govern your AWS organization in a decentralized way. You can now allow member accounts to manage Organizations policies.
+* feature: RDS: This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.
+* feature: Textract: This release adds support for classifying and splitting lending documents by type, and extracting information by using the Analyze Lending APIs. This release also includes support for summarized information of the processed lending document package, in addition to per document results.
+* feature: TranscribeService: This release adds support for 'inputType' for post-call and real-time (streaming) Call Analytics within Amazon Transcribe.
 
 ## 2.1261.0
 * feature: Grafana: This release includes support for configuring a Grafana workspace to connect to a datasource within a VPC as well as new APIs for configuring Grafana settings.

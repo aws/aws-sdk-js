@@ -118,6 +118,14 @@ declare class RDS extends Service {
    */
   copyOptionGroup(callback?: (err: AWSError, data: RDS.Types.CopyOptionGroupResult) => void): Request<RDS.Types.CopyOptionGroupResult, AWSError>;
   /**
+   * Creates a blue/green deployment. A blue/green deployment creates a staging environment that copies the production environment. In a blue/green deployment, the blue environment is the current production environment. The green environment is the staging environment. The staging environment stays in sync with the current production environment using logical replication. You can make changes to the databases in the green environment without affecting production workloads. For example, you can upgrade the major or minor DB engine version, change database parameters, or make schema changes in the staging environment. You can thoroughly test changes in the green environment. When ready, you can switch over the environments to promote the green environment to be the new production environment. The switchover typically takes under a minute. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  createBlueGreenDeployment(params: RDS.Types.CreateBlueGreenDeploymentRequest, callback?: (err: AWSError, data: RDS.Types.CreateBlueGreenDeploymentResponse) => void): Request<RDS.Types.CreateBlueGreenDeploymentResponse, AWSError>;
+  /**
+   * Creates a blue/green deployment. A blue/green deployment creates a staging environment that copies the production environment. In a blue/green deployment, the blue environment is the current production environment. The green environment is the staging environment. The staging environment stays in sync with the current production environment using logical replication. You can make changes to the databases in the green environment without affecting production workloads. For example, you can upgrade the major or minor DB engine version, change database parameters, or make schema changes in the staging environment. You can thoroughly test changes in the green environment. When ready, you can switch over the environments to promote the green environment to be the new production environment. The switchover typically takes under a minute. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  createBlueGreenDeployment(callback?: (err: AWSError, data: RDS.Types.CreateBlueGreenDeploymentResponse) => void): Request<RDS.Types.CreateBlueGreenDeploymentResponse, AWSError>;
+  /**
    * Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a database engine and specific AMI. The supported engines are the following:   Oracle Database 12.1 Enterprise Edition with the January 2021 or later RU/RUR   Oracle Database 19c Enterprise Edition with the January 2021 or later RU/RUR   Amazon RDS, which is a fully managed service, supplies the Amazon Machine Image (AMI) and database software. The Amazon RDS database software is preinstalled, so you need only select a DB engine and version, and create your database. With Amazon RDS Custom for Oracle, you upload your database installation files in Amazon S3. When you create a custom engine version, you specify the files in a JSON document called a CEV manifest. This document describes installation .zip files stored in Amazon S3. RDS Custom creates your CEV from the installation files that you provided. This service model is called Bring Your Own Media (BYOM). Creation takes approximately two hours. If creation fails, RDS Custom issues RDS-EVENT-0196 with the message Creation failed for custom engine version, and includes details about the failure. For example, the event prints missing files. After you create the CEV, it is available for use. You can create multiple CEVs, and create multiple RDS Custom instances from any CEV. You can also change the status of a CEV to make it available or inactive.  The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the CreateCustomDbEngineVersion event aren't logged. However, you might see calls from the API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for the CreateCustomDbEngineVersion event.  For more information, see  Creating a CEV in the Amazon RDS User Guide.
    */
   createCustomDBEngineVersion(params: RDS.Types.CreateCustomDBEngineVersionMessage, callback?: (err: AWSError, data: RDS.Types.DBEngineVersion) => void): Request<RDS.Types.DBEngineVersion, AWSError>;
@@ -245,6 +253,14 @@ declare class RDS extends Service {
    * Creates a new option group. You can create up to 20 option groups. This command doesn't apply to RDS Custom.
    */
   createOptionGroup(callback?: (err: AWSError, data: RDS.Types.CreateOptionGroupResult) => void): Request<RDS.Types.CreateOptionGroupResult, AWSError>;
+  /**
+   * Deletes a blue/green deployment. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  deleteBlueGreenDeployment(params: RDS.Types.DeleteBlueGreenDeploymentRequest, callback?: (err: AWSError, data: RDS.Types.DeleteBlueGreenDeploymentResponse) => void): Request<RDS.Types.DeleteBlueGreenDeploymentResponse, AWSError>;
+  /**
+   * Deletes a blue/green deployment. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  deleteBlueGreenDeployment(callback?: (err: AWSError, data: RDS.Types.DeleteBlueGreenDeploymentResponse) => void): Request<RDS.Types.DeleteBlueGreenDeploymentResponse, AWSError>;
   /**
    * Deletes a custom engine version. To run this command, make sure you meet the following prerequisites:   The CEV must not be the default for RDS Custom. If it is, change the default before running this command.   The CEV must not be associated with an RDS Custom DB instance, RDS Custom instance snapshot, or automated backup of your RDS Custom instance.   Typically, deletion takes a few minutes.  The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the DeleteCustomDbEngineVersion event aren't logged. However, you might see calls from the API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for the DeleteCustomDbEngineVersion event.  For more information, see  Deleting a CEV in the Amazon RDS User Guide.
    */
@@ -389,6 +405,14 @@ declare class RDS extends Service {
    * Lists all of the attributes for a customer account. The attributes include Amazon RDS quotas for the account, such as the number of DB instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This command doesn't take any parameters.
    */
   describeAccountAttributes(callback?: (err: AWSError, data: RDS.Types.AccountAttributesMessage) => void): Request<RDS.Types.AccountAttributesMessage, AWSError>;
+  /**
+   * Returns information about blue/green deployments. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  describeBlueGreenDeployments(params: RDS.Types.DescribeBlueGreenDeploymentsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeBlueGreenDeploymentsResponse) => void): Request<RDS.Types.DescribeBlueGreenDeploymentsResponse, AWSError>;
+  /**
+   * Returns information about blue/green deployments. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  describeBlueGreenDeployments(callback?: (err: AWSError, data: RDS.Types.DescribeBlueGreenDeploymentsResponse) => void): Request<RDS.Types.DescribeBlueGreenDeploymentsResponse, AWSError>;
   /**
    * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account.
    */
@@ -1102,6 +1126,14 @@ declare class RDS extends Service {
    */
   stopDBInstanceAutomatedBackupsReplication(callback?: (err: AWSError, data: RDS.Types.StopDBInstanceAutomatedBackupsReplicationResult) => void): Request<RDS.Types.StopDBInstanceAutomatedBackupsReplicationResult, AWSError>;
   /**
+   * Switches over a blue/green deployment. Before you switch over, production traffic is routed to the databases in the blue environment. After you switch over, production traffic is routed to the databases in the green environment. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  switchoverBlueGreenDeployment(params: RDS.Types.SwitchoverBlueGreenDeploymentRequest, callback?: (err: AWSError, data: RDS.Types.SwitchoverBlueGreenDeploymentResponse) => void): Request<RDS.Types.SwitchoverBlueGreenDeploymentResponse, AWSError>;
+  /**
+   * Switches over a blue/green deployment. Before you switch over, production traffic is routed to the databases in the blue environment. After you switch over, production traffic is routed to the databases in the green environment. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
+   */
+  switchoverBlueGreenDeployment(callback?: (err: AWSError, data: RDS.Types.SwitchoverBlueGreenDeploymentResponse) => void): Request<RDS.Types.SwitchoverBlueGreenDeploymentResponse, AWSError>;
+  /**
    * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the Region that hosts the current standby database.
    */
   switchoverReadReplica(params: RDS.Types.SwitchoverReadReplicaMessage, callback?: (err: AWSError, data: RDS.Types.SwitchoverReadReplicaResult) => void): Request<RDS.Types.SwitchoverReadReplicaResult, AWSError>;
@@ -1343,6 +1375,67 @@ declare namespace RDS {
      */
     UseEarliestTimeOnPointInTimeUnavailable?: BooleanOptional;
   }
+  export interface BlueGreenDeployment {
+    /**
+     * The system-generated identifier of the blue/green deployment.
+     */
+    BlueGreenDeploymentIdentifier?: BlueGreenDeploymentIdentifier;
+    /**
+     * The user-supplied name of the blue/green deployment.
+     */
+    BlueGreenDeploymentName?: BlueGreenDeploymentName;
+    /**
+     * The source database for the blue/green deployment. Before switchover, the source database is the production database in the blue environment.
+     */
+    Source?: DatabaseArn;
+    /**
+     * The target database for the blue/green deployment. Before switchover, the target database is the clone database in the green environment.
+     */
+    Target?: DatabaseArn;
+    /**
+     * The details about each source and target resource in the blue/green deployment.
+     */
+    SwitchoverDetails?: SwitchoverDetailList;
+    /**
+     * Either tasks to be performed or tasks that have been completed on the target database before switchover.
+     */
+    Tasks?: BlueGreenDeploymentTaskList;
+    /**
+     * The status of the blue/green deployment. Values:    PROVISIONING - Resources are being created in the green environment.    AVAILABLE - Resources are available in the green environment.    SWITCHOVER_IN_PROGRESS - The deployment is being switched from the blue environment to the green environment.    SWITCHOVER_COMPLETED - Switchover from the blue environment to the green environment is complete.    INVALID_CONFIGURATION - Resources in the green environment are invalid, so switchover isn't possible.    SWITCHOVER_FAILED - Switchover was attempted but failed.    DELETING - The blue/green deployment is being deleted.  
+     */
+    Status?: BlueGreenDeploymentStatus;
+    /**
+     * Additional information about the status of the blue/green deployment.
+     */
+    StatusDetails?: BlueGreenDeploymentStatusDetails;
+    /**
+     * Specifies the time when the blue/green deployment was created, in Universal Coordinated Time (UTC).
+     */
+    CreateTime?: TStamp;
+    /**
+     * Specifies the time when the blue/green deployment was deleted, in Universal Coordinated Time (UTC).
+     */
+    DeleteTime?: TStamp;
+    TagList?: TagList;
+  }
+  export type BlueGreenDeploymentIdentifier = string;
+  export type BlueGreenDeploymentList = BlueGreenDeployment[];
+  export type BlueGreenDeploymentName = string;
+  export type BlueGreenDeploymentStatus = string;
+  export type BlueGreenDeploymentStatusDetails = string;
+  export interface BlueGreenDeploymentTask {
+    /**
+     * The name of the blue/green deployment task.
+     */
+    Name?: BlueGreenDeploymentTaskName;
+    /**
+     * The status of the blue/green deployment task. Values:    PENDING - The resources are being prepared for deployment.    IN_PROGRESS - The resource is being deployed.    COMPLETED - The resource has been deployed.    FAILED - Deployment of the resource failed.  
+     */
+    Status?: BlueGreenDeploymentTaskStatus;
+  }
+  export type BlueGreenDeploymentTaskList = BlueGreenDeploymentTask[];
+  export type BlueGreenDeploymentTaskName = string;
+  export type BlueGreenDeploymentTaskStatus = string;
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
   export type BucketName = string;
@@ -1614,13 +1707,42 @@ declare namespace RDS {
   export interface CopyOptionGroupResult {
     OptionGroup?: OptionGroup;
   }
+  export interface CreateBlueGreenDeploymentRequest {
+    /**
+     * The name of the blue/green deployment. Constraints:   Can't be the same as an existing blue/green deployment name in the same account and Amazon Web Services Region.  
+     */
+    BlueGreenDeploymentName: BlueGreenDeploymentName;
+    /**
+     * The Amazon Resource Name (ARN) of the source production database. Specify the database that you want to clone. The blue/green deployment creates this database in the green environment. You can make updates to the database in the green environment, such as an engine version upgrade. When you are ready, you can switch the database in the green environment to be the production database.
+     */
+    Source: DatabaseArn;
+    /**
+     * The engine version of the database in the green environment. Specify the engine version to upgrade to in the green environment.
+     */
+    TargetEngineVersion?: TargetEngineVersion;
+    /**
+     * The DB parameter group associated with the DB instance in the green environment. To test parameter changes, specify a DB parameter group that is different from the one associated with the source DB instance.
+     */
+    TargetDBParameterGroupName?: TargetDBParameterGroupName;
+    /**
+     * The DB cluster parameter group associated with the Aurora DB cluster in the green environment. To test parameter changes, specify a DB cluster parameter group that is different from the one associated with the source DB cluster.
+     */
+    TargetDBClusterParameterGroupName?: TargetDBClusterParameterGroupName;
+    /**
+     * Tags to assign to the blue/green deployment.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateBlueGreenDeploymentResponse {
+    BlueGreenDeployment?: BlueGreenDeployment;
+  }
   export interface CreateCustomDBEngineVersionMessage {
     /**
      * The database engine to use for your custom engine version (CEV). The only supported value is custom-oracle-ee.
      */
     Engine: CustomEngineName;
     /**
-     * The name of your CEV. The name format is 19.customized_string . For example, a valid name is 19.my_cev1. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion is unique per customer per Region.
+     * The name of your CEV. The name format is 19.customized_string. For example, a valid CEV name is 19.my_cev1. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion is unique per customer per Region.
      */
     EngineVersion: CustomEngineVersion;
     /**
@@ -1973,7 +2095,7 @@ declare namespace RDS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The version number of the database engine to use. For a list of valid engine versions, use the DescribeDBEngineVersions operation. The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every Amazon Web Services Region.  Amazon Aurora  Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.  Amazon RDS Custom for Oracle  A custom engine version (CEV) that you have previously created. This setting is required for RDS Custom for Oracle. The CEV name has the following format: 19.customized_string . An example identifier is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB instance in the Amazon RDS User Guide.  Amazon RDS Custom for SQL Server  See RDS Custom for SQL Server general requirements in the Amazon RDS User Guide.  MariaDB  For information, see MariaDB on Amazon RDS Versions in the Amazon RDS User Guide.  Microsoft SQL Server  For information, see Microsoft SQL Server Versions on Amazon RDS in the Amazon RDS User Guide.  MySQL  For information, see MySQL on Amazon RDS Versions in the Amazon RDS User Guide.  Oracle  For information, see Oracle Database Engine Release Notes in the Amazon RDS User Guide.  PostgreSQL  For information, see Amazon RDS for PostgreSQL versions and extensions in the Amazon RDS User Guide.
+     * The version number of the database engine to use. For a list of valid engine versions, use the DescribeDBEngineVersions operation. The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every Amazon Web Services Region.  Amazon Aurora  Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.  Amazon RDS Custom for Oracle  A custom engine version (CEV) that you have previously created. This setting is required for RDS Custom for Oracle. The CEV name has the following format: 19.customized_string. A valid CEV name is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB instance in the Amazon RDS User Guide.  Amazon RDS Custom for SQL Server  See RDS Custom for SQL Server general requirements in the Amazon RDS User Guide.  MariaDB  For information, see MariaDB on Amazon RDS Versions in the Amazon RDS User Guide.  Microsoft SQL Server  For information, see Microsoft SQL Server Versions on Amazon RDS in the Amazon RDS User Guide.  MySQL  For information, see MySQL on Amazon RDS Versions in the Amazon RDS User Guide.  Oracle  For information, see Oracle Database Engine Release Notes in the Amazon RDS User Guide.  PostgreSQL  For information, see Amazon RDS for PostgreSQL versions and extensions in the Amazon RDS User Guide.
      */
     EngineVersion?: String;
     /**
@@ -4216,6 +4338,20 @@ declare namespace RDS {
     DBSubnetGroups?: DBSubnetGroups;
   }
   export type DBSubnetGroups = DBSubnetGroup[];
+  export type DatabaseArn = string;
+  export interface DeleteBlueGreenDeploymentRequest {
+    /**
+     * The blue/green deployment identifier of the deployment to be deleted. This parameter isn't case-sensitive. Constraints:    Must match an existing blue/green deployment identifier.  
+     */
+    BlueGreenDeploymentIdentifier: BlueGreenDeploymentIdentifier;
+    /**
+     * A value that indicates whether to delete the resources in the green environment.
+     */
+    DeleteTarget?: BooleanOptional;
+  }
+  export interface DeleteBlueGreenDeploymentResponse {
+    BlueGreenDeployment?: BlueGreenDeployment;
+  }
   export interface DeleteCustomDBEngineVersionMessage {
     /**
      * The database engine. The only supported engine is custom-oracle-ee.
@@ -4394,6 +4530,34 @@ declare namespace RDS {
   export interface DeregisterDBProxyTargetsResponse {
   }
   export interface DescribeAccountAttributesMessage {
+  }
+  export interface DescribeBlueGreenDeploymentsRequest {
+    /**
+     * The blue/green deployment identifier. If this parameter is specified, information from only the specific blue/green deployment is returned. This parameter isn't case-sensitive. Constraints:   If supplied, must match an existing blue/green deployment identifier.  
+     */
+    BlueGreenDeploymentIdentifier?: BlueGreenDeploymentIdentifier;
+    /**
+     * A filter that specifies one or more blue/green deployments to describe. Supported filters:    blue-green-deployment-identifier - Accepts system-generated identifiers for blue/green deployments. The results list only includes information about the blue/green deployments with the specified identifiers.    blue-green-deployment-name - Accepts user-supplied names for blue/green deployments. The results list only includes information about the blue/green deployments with the specified names.    source - Accepts source databases for a blue/green deployment. The results list only includes information about the blue/green deployments with the specified source databases.    target - Accepts target databases for a blue/green deployment. The results list only includes information about the blue/green deployments with the specified target databases.  
+     */
+    Filters?: FilterList;
+    /**
+     * An optional pagination token provided by a previous DescribeBlueGreenDeployments request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeBlueGreenDeploymentsResponse {
+    /**
+     * Contains a list of blue/green deployments for the user.
+     */
+    BlueGreenDeployments?: BlueGreenDeploymentList;
+    /**
+     * A pagination token that can be used in a later DescribeBlueGreenDeployments request.
+     */
+    Marker?: String;
   }
   export interface DescribeCertificatesMessage {
     /**
@@ -8633,6 +8797,35 @@ declare namespace RDS {
   export type SubnetList = Subnet[];
   export type SupportedCharacterSetsList = CharacterSet[];
   export type SupportedTimezonesList = Timezone[];
+  export interface SwitchoverBlueGreenDeploymentRequest {
+    /**
+     * The blue/green deployment identifier. Constraints:   Must match an existing blue/green deployment identifier.  
+     */
+    BlueGreenDeploymentIdentifier: BlueGreenDeploymentIdentifier;
+    /**
+     * The amount of time, in seconds, for the switchover to complete. The default is 300. If the switchover takes longer than the specified duration, then any changes are rolled back, and no changes are made to the environments.
+     */
+    SwitchoverTimeout?: SwitchoverTimeout;
+  }
+  export interface SwitchoverBlueGreenDeploymentResponse {
+    BlueGreenDeployment?: BlueGreenDeployment;
+  }
+  export interface SwitchoverDetail {
+    /**
+     * The Amazon Resource Name (ARN) of a resource in the blue environment.
+     */
+    SourceMember?: DatabaseArn;
+    /**
+     * The Amazon Resource Name (ARN) of a resource in the green environment.
+     */
+    TargetMember?: DatabaseArn;
+    /**
+     * The switchover status of a resource in a blue/green deployment. Values:    preparing-for-switchover - The resource is being prepared to switch over.    ready-for-switchover - The resource is ready to switch over.    switchover-in-progress - The resource is being switched over.    switchover-completed - The resource has been switched over.    switchover-failed - The resource attempted to switch over but failed.  
+     */
+    Status?: SwitchoverDetailStatus;
+  }
+  export type SwitchoverDetailList = SwitchoverDetail[];
+  export type SwitchoverDetailStatus = string;
   export interface SwitchoverReadReplicaMessage {
     /**
      * The DB instance identifier of the current standby database. This value is stored as a lowercase string. Constraints:   Must match the identiﬁer of an existing Oracle read replica DB instance.  
@@ -8642,6 +8835,7 @@ declare namespace RDS {
   export interface SwitchoverReadReplicaResult {
     DBInstance?: DBInstance;
   }
+  export type SwitchoverTimeout = number;
   export type TStamp = Date;
   export interface Tag {
     /**
@@ -8660,6 +8854,9 @@ declare namespace RDS {
      */
     TagList?: TagList;
   }
+  export type TargetDBClusterParameterGroupName = string;
+  export type TargetDBParameterGroupName = string;
+  export type TargetEngineVersion = string;
   export type TargetGroupList = DBProxyTargetGroup[];
   export interface TargetHealth {
     /**

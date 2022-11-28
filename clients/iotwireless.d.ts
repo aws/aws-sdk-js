@@ -372,21 +372,29 @@ declare class IoTWireless extends Service {
    */
   getPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
   /**
-   * Get the position information for a given resource.
+   * Get the position information for a given resource.  This action is no longer supported. Calls to retrieve the position information should use the GetResourcePosition API operation instead. 
    */
   getPosition(params: IoTWireless.Types.GetPositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPositionResponse) => void): Request<IoTWireless.Types.GetPositionResponse, AWSError>;
   /**
-   * Get the position information for a given resource.
+   * Get the position information for a given resource.  This action is no longer supported. Calls to retrieve the position information should use the GetResourcePosition API operation instead. 
    */
   getPosition(callback?: (err: AWSError, data: IoTWireless.Types.GetPositionResponse) => void): Request<IoTWireless.Types.GetPositionResponse, AWSError>;
   /**
-   * Get position configuration for a given resource.
+   * Get position configuration for a given resource.  This action is no longer supported. Calls to retrieve the position configuration should use the GetResourcePosition API operation instead. 
    */
   getPositionConfiguration(params: IoTWireless.Types.GetPositionConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPositionConfigurationResponse) => void): Request<IoTWireless.Types.GetPositionConfigurationResponse, AWSError>;
   /**
-   * Get position configuration for a given resource.
+   * Get position configuration for a given resource.  This action is no longer supported. Calls to retrieve the position configuration should use the GetResourcePosition API operation instead. 
    */
   getPositionConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.GetPositionConfigurationResponse) => void): Request<IoTWireless.Types.GetPositionConfigurationResponse, AWSError>;
+  /**
+   * Get estimated position information as a payload in GeoJSON format. The payload measurement data is resolved using solvers that are provided by third-party vendors.
+   */
+  getPositionEstimate(params: IoTWireless.Types.GetPositionEstimateRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPositionEstimateResponse) => void): Request<IoTWireless.Types.GetPositionEstimateResponse, AWSError>;
+  /**
+   * Get estimated position information as a payload in GeoJSON format. The payload measurement data is resolved using solvers that are provided by third-party vendors.
+   */
+  getPositionEstimate(callback?: (err: AWSError, data: IoTWireless.Types.GetPositionEstimateResponse) => void): Request<IoTWireless.Types.GetPositionEstimateResponse, AWSError>;
   /**
    * Get the event configuration for a particular resource identifier.
    */
@@ -403,6 +411,14 @@ declare class IoTWireless extends Service {
    * Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.
    */
   getResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.GetResourceLogLevelResponse) => void): Request<IoTWireless.Types.GetResourceLogLevelResponse, AWSError>;
+  /**
+   * Get the position information for a given wireless device or a wireless gateway resource. The postion information uses the  World Geodetic System (WGS84).
+   */
+  getResourcePosition(params: IoTWireless.Types.GetResourcePositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetResourcePositionResponse) => void): Request<IoTWireless.Types.GetResourcePositionResponse, AWSError>;
+  /**
+   * Get the position information for a given wireless device or a wireless gateway resource. The postion information uses the  World Geodetic System (WGS84).
+   */
+  getResourcePosition(callback?: (err: AWSError, data: IoTWireless.Types.GetResourcePositionResponse) => void): Request<IoTWireless.Types.GetResourcePositionResponse, AWSError>;
   /**
    * Gets the account-specific endpoint for Configuration and Update Server (CUPS) protocol or LoRaWAN Network Server (LNS) connections.
    */
@@ -548,11 +564,11 @@ declare class IoTWireless extends Service {
    */
   listPartnerAccounts(callback?: (err: AWSError, data: IoTWireless.Types.ListPartnerAccountsResponse) => void): Request<IoTWireless.Types.ListPartnerAccountsResponse, AWSError>;
   /**
-   * List position configurations for a given resource, such as positioning solvers.
+   * List position configurations for a given resource, such as positioning solvers.  This action is no longer supported. Calls to retrieve position information should use the GetResourcePosition API operation instead. 
    */
   listPositionConfigurations(params: IoTWireless.Types.ListPositionConfigurationsRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListPositionConfigurationsResponse) => void): Request<IoTWireless.Types.ListPositionConfigurationsResponse, AWSError>;
   /**
-   * List position configurations for a given resource, such as positioning solvers.
+   * List position configurations for a given resource, such as positioning solvers.  This action is no longer supported. Calls to retrieve position information should use the GetResourcePosition API operation instead. 
    */
   listPositionConfigurations(callback?: (err: AWSError, data: IoTWireless.Types.ListPositionConfigurationsResponse) => void): Request<IoTWireless.Types.ListPositionConfigurationsResponse, AWSError>;
   /**
@@ -604,11 +620,11 @@ declare class IoTWireless extends Service {
    */
   listWirelessGateways(callback?: (err: AWSError, data: IoTWireless.Types.ListWirelessGatewaysResponse) => void): Request<IoTWireless.Types.ListWirelessGatewaysResponse, AWSError>;
   /**
-   * Put position configuration for a given resource.
+   * Put position configuration for a given resource.  This action is no longer supported. Calls to update the position configuration should use the UpdateResourcePosition API operation instead. 
    */
   putPositionConfiguration(params: IoTWireless.Types.PutPositionConfigurationRequest, callback?: (err: AWSError, data: IoTWireless.Types.PutPositionConfigurationResponse) => void): Request<IoTWireless.Types.PutPositionConfigurationResponse, AWSError>;
   /**
-   * Put position configuration for a given resource.
+   * Put position configuration for a given resource.  This action is no longer supported. Calls to update the position configuration should use the UpdateResourcePosition API operation instead. 
    */
   putPositionConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.PutPositionConfigurationResponse) => void): Request<IoTWireless.Types.PutPositionConfigurationResponse, AWSError>;
   /**
@@ -764,11 +780,11 @@ declare class IoTWireless extends Service {
    */
   updatePartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.UpdatePartnerAccountResponse) => void): Request<IoTWireless.Types.UpdatePartnerAccountResponse, AWSError>;
   /**
-   * Update the position information of a resource.
+   * Update the position information of a resource.  This action is no longer supported. Calls to update the position information should use the UpdateResourcePosition API operation instead. 
    */
   updatePosition(params: IoTWireless.Types.UpdatePositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdatePositionResponse) => void): Request<IoTWireless.Types.UpdatePositionResponse, AWSError>;
   /**
-   * Update the position information of a resource.
+   * Update the position information of a resource.  This action is no longer supported. Calls to update the position information should use the UpdateResourcePosition API operation instead. 
    */
   updatePosition(callback?: (err: AWSError, data: IoTWireless.Types.UpdatePositionResponse) => void): Request<IoTWireless.Types.UpdatePositionResponse, AWSError>;
   /**
@@ -779,6 +795,14 @@ declare class IoTWireless extends Service {
    * Update the event configuration for a particular resource identifier.
    */
   updateResourceEventConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourceEventConfigurationResponse) => void): Request<IoTWireless.Types.UpdateResourceEventConfigurationResponse, AWSError>;
+  /**
+   * Update the position information of a given wireless device or a wireless gateway resource. The postion coordinates are based on the  World Geodetic System (WGS84).
+   */
+  updateResourcePosition(params: IoTWireless.Types.UpdateResourcePositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourcePositionResponse) => void): Request<IoTWireless.Types.UpdateResourcePositionResponse, AWSError>;
+  /**
+   * Update the position information of a given wireless device or a wireless gateway resource. The postion coordinates are based on the  World Geodetic System (WGS84).
+   */
+  updateResourcePosition(callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourcePositionResponse) => void): Request<IoTWireless.Types.UpdateResourcePositionResponse, AWSError>;
   /**
    * Updates properties of a wireless device.
    */
@@ -828,11 +852,11 @@ declare namespace IoTWireless {
   export type AccountLinked = boolean;
   export interface Accuracy {
     /**
-     * The horizontal accuracy of the estimated position in meters.
+     * The horizontal accuracy of the estimated position, which is the difference between the estimated location and the actual device location.
      */
     HorizontalAccuracy?: HorizontalAccuracy;
     /**
-     * The vertical accuracy of the estimated position in meters.
+     * The vertical accuracy of the estimated position, which is the difference between the estimated altitude and actual device latitude in meters.
      */
     VerticalAccuracy?: VerticalAccuracy;
   }
@@ -844,6 +868,20 @@ declare namespace IoTWireless {
   export type AppKey = string;
   export type AppSKey = string;
   export type AppServerPrivateKey = string;
+  export interface ApplicationConfig {
+    FPort?: FPort;
+    /**
+     * Application type, which can be specified to obtain real-time position information of your LoRaWAN device.
+     */
+    Type?: ApplicationConfigType;
+    /**
+     * The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+     */
+    DestinationName?: DestinationName;
+  }
+  export type ApplicationConfigType = "SemtechGeolocation"|string;
+  export type Applications = ApplicationConfig[];
+  export type AssistPosition = Coordinate[];
   export interface AssociateAwsAccountWithPartnerAccountRequest {
     /**
      * The Sidewalk account credentials.
@@ -927,6 +965,11 @@ declare namespace IoTWireless {
   export interface AssociateWirelessGatewayWithThingResponse {
   }
   export type AutoCreateTasks = boolean;
+  export type BCCH = number;
+  export type BSIC = number;
+  export type BaseLat = number;
+  export type BaseLng = number;
+  export type BaseStationId = number;
   export type BatteryLevel = "normal"|"low"|"critical"|string;
   export interface Beaconing {
     /**
@@ -945,6 +988,99 @@ declare namespace IoTWireless {
     Id: MulticastGroupId;
   }
   export interface CancelMulticastGroupSessionResponse {
+  }
+  export type CaptureTimeAccuracy = number;
+  export type CdmaChannel = number;
+  export type CdmaList = CdmaObj[];
+  export interface CdmaLocalId {
+    /**
+     * Pseudo-noise offset, which is a characteristic of the signal from a cell on a radio tower.
+     */
+    PnOffset: PnOffset;
+    /**
+     * CDMA channel information.
+     */
+    CdmaChannel: CdmaChannel;
+  }
+  export type CdmaNmrList = CdmaNmrObj[];
+  export interface CdmaNmrObj {
+    /**
+     * Pseudo-noise offset, which is a characteristic of the signal from a cell on a radio tower.
+     */
+    PnOffset: PnOffset;
+    /**
+     * CDMA channel information.
+     */
+    CdmaChannel: CdmaChannel;
+    /**
+     * Transmit power level of the pilot signal, measured in dBm (decibel-milliwatts).
+     */
+    PilotPower?: PilotPower;
+    /**
+     * CDMA base station ID (BSID).
+     */
+    BaseStationId?: BaseStationId;
+  }
+  export interface CdmaObj {
+    /**
+     * CDMA system ID (SID).
+     */
+    SystemId: SystemId;
+    /**
+     * CDMA network ID (NID).
+     */
+    NetworkId: NetworkId;
+    /**
+     * CDMA base station ID (BSID).
+     */
+    BaseStationId: BaseStationId;
+    /**
+     * CDMA registration zone (RZ).
+     */
+    RegistrationZone?: RegistrationZone;
+    /**
+     * CDMA local identification (local ID) parameters.
+     */
+    CdmaLocalId?: CdmaLocalId;
+    /**
+     * Transmit power level of the pilot signal, measured in dBm (decibel-milliwatts).
+     */
+    PilotPower?: PilotPower;
+    /**
+     * CDMA base station latitude in degrees.
+     */
+    BaseLat?: BaseLat;
+    /**
+     * CDMA base station longtitude in degrees.
+     */
+    BaseLng?: BaseLng;
+    /**
+     * CDMA network measurement reports.
+     */
+    CdmaNmr?: CdmaNmrList;
+  }
+  export type CellParams = number;
+  export interface CellTowers {
+    /**
+     * GSM object information.
+     */
+    Gsm?: GsmList;
+    /**
+     * WCDMA object information.
+     */
+    Wcdma?: WcdmaList;
+    /**
+     * TD-SCDMA object information.
+     */
+    Tdscdma?: TdscdmaList;
+    /**
+     * LTE object information.
+     */
+    Lte?: LteList;
+    /**
+     * CDMA object information.
+     */
+    Cdma?: CdmaList;
   }
   export interface CertificateList {
     /**
@@ -979,6 +1115,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANConnectionStatusResourceTypeEventConfiguration;
   }
+  export type Coordinate = number;
   export type Crc = number;
   export interface CreateDestinationRequest {
     /**
@@ -1157,6 +1294,10 @@ declare namespace IoTWireless {
      * The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
+    /**
+     * FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
+     */
+    Positioning?: PositioningConfigStatus;
   }
   export interface CreateWirelessDeviceResponse {
     /**
@@ -1253,6 +1394,7 @@ declare namespace IoTWireless {
     Status?: WirelessGatewayTaskStatus;
   }
   export type CreatedAt = Date;
+  export type CreationDate = Date;
   export interface DeleteDestinationRequest {
     /**
      * The name of the resource to delete.
@@ -1492,7 +1634,9 @@ declare namespace IoTWireless {
   export type DrMaxBox = number;
   export type DrMin = number;
   export type DrMinBox = number;
+  export type EARFCN = number;
   export type EndPoint = string;
+  export type EutranCid = number;
   export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string;
   export interface EventConfigurationItem {
     /**
@@ -1548,6 +1692,10 @@ declare namespace IoTWireless {
      * FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
      */
     Positioning?: Positioning;
+    /**
+     * Optional LoRaWAN application information, which can be used for geolocation.
+     */
+    Applications?: Applications;
   }
   export type FactoryPresetFreqsList = PresetFreq[];
   export type Fingerprint = string;
@@ -1564,6 +1712,7 @@ declare namespace IoTWireless {
   export type FuotaTaskList = FuotaTask[];
   export type FuotaTaskName = string;
   export type FuotaTaskStatus = "Pending"|"FuotaSession_Waiting"|"In_FuotaSession"|"FuotaDone"|"Delete_Waiting"|string;
+  export type GPST = number;
   export type GatewayEui = string;
   export type GatewayList = GatewayListItem[];
   export interface GatewayListItem {
@@ -1577,6 +1726,8 @@ declare namespace IoTWireless {
     DownlinkFrequency: DownlinkFrequency;
   }
   export type GenAppKey = string;
+  export type GeoJsonPayload = Buffer|Uint8Array|Blob|string;
+  export type GeranCid = number;
   export interface GetDestinationRequest {
     /**
      * The name of the resource to get.
@@ -1756,6 +1907,34 @@ declare namespace IoTWireless {
      */
     Destination?: DestinationName;
   }
+  export interface GetPositionEstimateRequest {
+    /**
+     * Retrieves an estimated device position by resolving WLAN measurement data. The position is resolved using HERE's Wi-Fi based solver.
+     */
+    WiFiAccessPoints?: WiFiAccessPoints;
+    /**
+     * Retrieves an estimated device position by resolving measurement data from cellular radio towers. The position is resolved using HERE's cellular-based solver.
+     */
+    CellTowers?: CellTowers;
+    /**
+     * Retrieves an estimated device position by resolving the IP address information from the device. The position is resolved using MaxMind's IP-based solver.
+     */
+    Ip?: Ip;
+    /**
+     * Retrieves an estimated device position by resolving the global navigation satellite system (GNSS) scan data. The position is resolved using the GNSS solver powered by LoRa Cloud.
+     */
+    Gnss?: Gnss;
+    /**
+     * Optional information that specifies the time when the position information will be resolved. It uses the UNIX timestamp format. If not specified, the time at which the request was received will be used.
+     */
+    Timestamp?: CreationDate;
+  }
+  export interface GetPositionEstimateResponse {
+    /**
+     * The position information of the resource, displayed as a JSON payload. The payload uses the GeoJSON format, which a format that's used to encode geographic data structures. For more information, see GeoJSON.
+     */
+    GeoJsonPayload?: GeoJsonPayload;
+  }
   export interface GetPositionRequest {
     /**
      * Resource identifier used to retrieve the position information.
@@ -1837,6 +2016,22 @@ declare namespace IoTWireless {
   }
   export interface GetResourceLogLevelResponse {
     LogLevel?: LogLevel;
+  }
+  export interface GetResourcePositionRequest {
+    /**
+     * The identifier of the resource for which position information is retrieved. It can be the wireless device ID or the wireless gateway ID depending on the resource type.
+     */
+    ResourceIdentifier: PositionResourceIdentifier;
+    /**
+     * The type of resource for which position information is retrieved, which can be a wireless device or a wireless gateway.
+     */
+    ResourceType: PositionResourceType;
+  }
+  export interface GetResourcePositionResponse {
+    /**
+     * The position information of the resource, displayed as a JSON payload. The payload uses the GeoJSON format, which a format that's used to encode geographic data structures. For more information, see GeoJSON.
+     */
+    GeoJsonPayload?: GeoJsonPayload;
   }
   export interface GetServiceEndpointRequest {
     /**
@@ -1933,6 +2128,10 @@ declare namespace IoTWireless {
      * Sidewalk device object.
      */
     Sidewalk?: SidewalkDevice;
+    /**
+     * FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
+     */
+    Positioning?: PositioningConfigStatus;
   }
   export interface GetWirelessDeviceStatisticsRequest {
     /**
@@ -2098,13 +2297,122 @@ declare namespace IoTWireless {
      */
     Status?: WirelessGatewayTaskStatus;
   }
+  export interface GlobalIdentity {
+    /**
+     * Location area code of the global identity.
+     */
+    Lac: LAC;
+    /**
+     * GERAN (GSM EDGE Radio Access Network) cell global identifier.
+     */
+    GeranCid: GeranCid;
+  }
+  export interface Gnss {
+    /**
+     * Payload that contains the GNSS scan result, or NAV message, in hexadecimal notation.
+     */
+    Payload: GnssNav;
+    /**
+     * Optional parameter that gives an estimate of the time when the GNSS scan information is taken, in seconds GPS time (GPST). If capture time is not specified, the local server time is used.
+     */
+    CaptureTime?: GPST;
+    /**
+     * Optional value that gives the capture time estimate accuracy, in seconds. If capture time accuracy is not specified, default value of 300 is used.
+     */
+    CaptureTimeAccuracy?: CaptureTimeAccuracy;
+    /**
+     * Optional assistance position information, specified using latitude and longitude values in degrees. The co-ordinates are inside the WGS84 reference frame.
+     */
+    AssistPosition?: AssistPosition;
+    /**
+     * Optional assistance altitude, which is the altitude of the device at capture time, specified in meters above the WGS84 reference ellipsoid.
+     */
+    AssistAltitude?: Coordinate;
+    /**
+     * Optional parameter that forces 2D solve, which modifies the positioning algorithm to a 2D solution problem. When this parameter is specified, the assistance altitude should have an accuracy of at least 10 meters.
+     */
+    Use2DSolver?: Use2DSolver;
+  }
+  export type GnssNav = string;
+  export type GsmList = GsmObj[];
+  export interface GsmLocalId {
+    /**
+     * GSM base station identity code (BSIC).
+     */
+    Bsic: BSIC;
+    /**
+     * GSM broadcast control channel.
+     */
+    Bcch: BCCH;
+  }
+  export type GsmNmrList = GsmNmrObj[];
+  export interface GsmNmrObj {
+    /**
+     * GSM base station identity code (BSIC).
+     */
+    Bsic: BSIC;
+    /**
+     * GSM broadcast control channel.
+     */
+    Bcch: BCCH;
+    /**
+     * Rx level, which is the received signal power, measured in dBm (decibel-milliwatts).
+     */
+    RxLevel?: RxLevel;
+    /**
+     * Global identity information of the GSM object.
+     */
+    GlobalIdentity?: GlobalIdentity;
+  }
+  export interface GsmObj {
+    /**
+     * Mobile Country Code.
+     */
+    Mcc: MCC;
+    /**
+     * Mobile Network Code.
+     */
+    Mnc: MNC;
+    /**
+     * Location area code.
+     */
+    Lac: LAC;
+    /**
+     * GERAN (GSM EDGE Radio Access Network) Cell Global Identifier.
+     */
+    GeranCid: GeranCid;
+    /**
+     * GSM local identification (local ID) information.
+     */
+    GsmLocalId?: GsmLocalId;
+    /**
+     * Timing advance value, which corresponds to the length of time a signal takes to reach the base station from a mobile phone.
+     */
+    GsmTimingAdvance?: GsmTimingAdvance;
+    /**
+     * Rx level, which is the received signal power, measured in dBm (decibel-milliwatts).
+     */
+    RxLevel?: RxLevel;
+    /**
+     * GSM object for network measurement reports.
+     */
+    GsmNmr?: GsmNmrList;
+  }
+  export type GsmTimingAdvance = number;
   export type HorizontalAccuracy = number;
   export type HrAllowed = boolean;
+  export type IPAddress = string;
   export type ISODateTimeString = string;
   export type Identifier = string;
   export type IdentifierType = "PartnerAccountId"|"DevEui"|"GatewayEui"|"WirelessDeviceId"|"WirelessGatewayId"|string;
   export type Integer = number;
   export type IotCertificateId = string;
+  export interface Ip {
+    /**
+     * IP address information.
+     */
+    IpAddress: IPAddress;
+  }
   export type JoinEui = string;
   export type JoinEuiFilters = JoinEuiRange[];
   export type JoinEuiRange = JoinEui[];
@@ -2124,6 +2432,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANJoinResourceTypeEventConfiguration;
   }
+  export type LAC = number;
   export interface ListDestinationsRequest {
     /**
      * The maximum number of results to return in this operation.
@@ -2824,6 +3133,86 @@ declare namespace IoTWireless {
     UpdateVersion?: LoRaWANGatewayVersion;
   }
   export type LogLevel = "INFO"|"ERROR"|"DISABLED"|string;
+  export type LteList = LteObj[];
+  export interface LteLocalId {
+    /**
+     * Physical cell ID.
+     */
+    Pci: PCI;
+    /**
+     * Evolved universal terrestrial radio access (E-UTRA) absolute radio frequency channel number (FCN).
+     */
+    Earfcn: EARFCN;
+  }
+  export type LteNmrList = LteNmrObj[];
+  export interface LteNmrObj {
+    /**
+     * Physical cell ID.
+     */
+    Pci: PCI;
+    /**
+     * E-UTRA (Evolved universal terrestrial Radio Access) absolute radio frequency channel Number (EARFCN).
+     */
+    Earfcn: EARFCN;
+    /**
+     * E-UTRAN (Evolved Universal Terrestrial Radio Access Network) cell global identifier (EUTRANCID).
+     */
+    EutranCid: EutranCid;
+    /**
+     * Signal power of the reference signal received, measured in dBm (decibel-milliwatts).
+     */
+    Rsrp?: RSRP;
+    /**
+     * Signal quality of the reference Signal received, measured in decibels (dB).
+     */
+    Rsrq?: RSRQ;
+  }
+  export interface LteObj {
+    /**
+     * Mobile Country Code.
+     */
+    Mcc: MCC;
+    /**
+     * Mobile Network Code.
+     */
+    Mnc: MNC;
+    /**
+     * E-UTRAN (Evolved Universal Terrestrial Radio Access Network) Cell Global Identifier.
+     */
+    EutranCid: EutranCid;
+    /**
+     * LTE tracking area code.
+     */
+    Tac?: TAC;
+    /**
+     * LTE local identification (local ID) information.
+     */
+    LteLocalId?: LteLocalId;
+    /**
+     * LTE timing advance.
+     */
+    LteTimingAdvance?: LteTimingAdvance;
+    /**
+     * Signal power of the reference signal received, measured in dBm (decibel-milliwatts).
+     */
+    Rsrp?: RSRP;
+    /**
+     * Signal quality of the reference Signal received, measured in decibels (dB).
+     */
+    Rsrq?: RSRQ;
+    /**
+     * Parameter that determines whether the LTE object is capable of supporting NR (new radio).
+     */
+    NrCapable?: NRCapable;
+    /**
+     * LTE object for network measurement reports.
+     */
+    LteNmr?: LteNmrList;
+  }
+  export type LteTimingAdvance = number;
+  export type MCC = number;
+  export type MNC = number;
+  export type MacAddress = string;
   export type MacVersion = string;
   export type MaxDutyCycle = number;
   export type MaxEirp = number;
@@ -2832,7 +3221,7 @@ declare namespace IoTWireless {
   export interface MessageDeliveryStatusEventConfiguration {
     Sidewalk?: SidewalkEventNotificationConfigurations;
     /**
-     * Denotes whether the wireless device ID device registration state event topic is enabled or disabled.
+     * Denotes whether the wireless device ID message delivery status event topic is enabled or disabled.
      */
     WirelessDeviceIdEventTopic?: EventNotificationTopicStatus;
   }
@@ -2862,6 +3251,7 @@ declare namespace IoTWireless {
   export interface MulticastWirelessMetadata {
     LoRaWAN?: LoRaWANMulticastMetadata;
   }
+  export type NRCapable = boolean;
   export type NetId = string;
   export type NetIdFilters = NetId[];
   export type NetworkAnalyzerConfigurationArn = string;
@@ -2874,6 +3264,7 @@ declare namespace IoTWireless {
     Arn?: NetworkAnalyzerConfigurationArn;
     Name?: NetworkAnalyzerConfigurationName;
   }
+  export type NetworkId = number;
   export type NextToken = string;
   export type NumberOfDevicesInGroup = number;
   export type NumberOfDevicesRequested = number;
@@ -2909,6 +3300,8 @@ declare namespace IoTWireless {
      */
     JoinEui?: JoinEui;
   }
+  export type PCI = number;
+  export type PSC = number;
   export type PackageVersion = string;
   export interface ParticipatingGateways {
     /**
@@ -2927,10 +3320,13 @@ declare namespace IoTWireless {
   export type PartnerAccountArn = string;
   export type PartnerAccountId = string;
   export type PartnerType = "Sidewalk"|string;
+  export type PathLoss = number;
   export type PayloadData = string;
+  export type PilotPower = number;
   export type PingSlotDr = number;
   export type PingSlotFreq = number;
   export type PingSlotPeriod = number;
+  export type PnOffset = number;
   export type PositionConfigurationFec = "ROSE"|"NONE"|string;
   export interface PositionConfigurationItem {
     /**
@@ -2976,6 +3372,7 @@ declare namespace IoTWireless {
     Stream?: FPort;
     Gnss?: FPort;
   }
+  export type PositioningConfigStatus = "Enabled"|"Disabled"|string;
   export type PrAllowed = boolean;
   export type PresetFreq = number;
   export interface ProximityEventConfiguration {
@@ -3025,8 +3422,13 @@ declare namespace IoTWireless {
   export interface PutResourceLogLevelResponse {
   }
   export type QueryString = string;
+  export type RSCP = number;
+  export type RSRP = number;
+  export type RSRQ = number;
+  export type RSS = number;
   export type RaAllowed = boolean;
   export type RegParamsRevision = string;
+  export type RegistrationZone = number;
   export type ReportDevStatusBattery = boolean;
   export type ReportDevStatusMargin = boolean;
   export interface ResetAllResourceLogLevelsRequest {
@@ -3051,6 +3453,7 @@ declare namespace IoTWireless {
   export type RxDelay1 = number;
   export type RxDrOffset1 = number;
   export type RxFreq2 = number;
+  export type RxLevel = number;
   export type SNwkSIntKey = string;
   export interface SemtechGnssConfiguration {
     /**
@@ -3255,7 +3658,7 @@ declare namespace IoTWireless {
     Seq?: Seq;
     MessageType?: MessageType;
     /**
-     * The duration of time in seconds for which you want to retry sending the ACK.
+     * The duration of time in seconds to retry sending the ACK.
      */
     AckModeRetryDurationSecs?: AckModeRetryDurationSecs;
   }
@@ -3301,6 +3704,8 @@ declare namespace IoTWireless {
   export type SupportsClassB = boolean;
   export type SupportsClassC = boolean;
   export type SupportsJoin = boolean;
+  export type SystemId = number;
+  export type TAC = number;
   export interface Tag {
     /**
      * The tag's key value.
@@ -3328,6 +3733,79 @@ declare namespace IoTWireless {
   }
   export type TagValue = string;
   export type TargetPer = number;
+  export type TdscdmaList = TdscdmaObj[];
+  export interface TdscdmaLocalId {
+    /**
+     * TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute RF channel number (UARFCN).
+     */
+    Uarfcn: UARFCN;
+    /**
+     * Cell parameters for TD-SCDMA.
+     */
+    CellParams: CellParams;
+  }
+  export type TdscdmaNmrList = TdscdmaNmrObj[];
+  export interface TdscdmaNmrObj {
+    /**
+     * TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute RF channel number.
+     */
+    Uarfcn: UARFCN;
+    /**
+     * Cell parameters for TD-SCDMA network measurement reports object.
+     */
+    CellParams: CellParams;
+    /**
+     * UTRAN (UMTS Terrestrial Radio Access Network) cell global identifier.
+     */
+    UtranCid?: UtranCid;
+    /**
+     * Code power of the received signal, measured in decibel-milliwatts (dBm).
+     */
+    Rscp?: RSCP;
+    /**
+     * Path loss, or path attenuation, is the reduction in power density of an electromagnetic wave as it propagates through space.
+     */
+    PathLoss?: PathLoss;
+  }
+  export interface TdscdmaObj {
+    /**
+     * Mobile Country Code.
+     */
+    Mcc: MCC;
+    /**
+     * Mobile Network Code.
+     */
+    Mnc: MNC;
+    /**
+     * Location Area Code.
+     */
+    Lac?: LAC;
+    /**
+     * UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
+     */
+    UtranCid: UtranCid;
+    /**
+     * TD-SCDMA local identification (local ID) information.
+     */
+    TdscdmaLocalId?: TdscdmaLocalId;
+    /**
+     * TD-SCDMA Timing advance.
+     */
+    TdscdmaTimingAdvance?: TdscdmaTimingAdvance;
+    /**
+     * Signal power of the received signal (Received Signal Code Power), measured in decibel-milliwatts (dBm).
+     */
+    Rscp?: RSCP;
+    /**
+     * Path loss, or path attenuation, is the reduction in power density of an electromagnetic wave as it propagates through space.
+     */
+    PathLoss?: PathLoss;
+    /**
+     * TD-SCDMA object for network measurement reports.
+     */
+    TdscdmaNmr?: TdscdmaNmrList;
+  }
+  export type TdscdmaTimingAdvance = number;
   export interface TestWirelessDeviceRequest {
     /**
      * The ID of the wireless device to test.
@@ -3348,6 +3826,8 @@ declare namespace IoTWireless {
   }
   export type TransmissionInterval = number;
   export type TransmitMode = number;
+  export type UARFCN = number;
+  export type UARFCNDL = number;
   export type UlBucketSize = number;
   export type UlRate = number;
   export type UlRatePolicy = string;
@@ -3429,6 +3909,10 @@ declare namespace IoTWireless {
      * Positioning FPorts for the ClockSync, Stream, and GNSS functions.
      */
     Positioning?: Positioning;
+    /**
+     * LoRaWAN application, which can be used for geolocation by activating positioning.
+     */
+    Applications?: Applications;
   }
   export interface UpdateFuotaTaskRequest {
     Id: FuotaTaskId;
@@ -3546,6 +4030,22 @@ declare namespace IoTWireless {
   }
   export interface UpdateResourceEventConfigurationResponse {
   }
+  export interface UpdateResourcePositionRequest {
+    /**
+     * The identifier of the resource for which position information is updated. It can be the wireless device ID or the wireless gateway ID depending on the resource type.
+     */
+    ResourceIdentifier: PositionResourceIdentifier;
+    /**
+     * The type of resource for which position information is updated, which can be a wireless device or a wireless gateway.
+     */
+    ResourceType: PositionResourceType;
+    /**
+     * The position information of the resource, displayed as a JSON payload. The payload uses the GeoJSON format, which a format that's used to encode geographic data structures. For more information, see GeoJSON.
+     */
+    GeoJsonPayload?: GeoJsonPayload;
+  }
+  export interface UpdateResourcePositionResponse {
+  }
   export type UpdateSignature = string;
   export interface UpdateWirelessDeviceRequest {
     /**
@@ -3568,6 +4068,10 @@ declare namespace IoTWireless {
      * The updated wireless device's configuration.
      */
     LoRaWAN?: LoRaWANUpdateDevice;
+    /**
+     * FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
+     */
+    Positioning?: PositioningConfigStatus;
   }
   export interface UpdateWirelessDeviceResponse {
   }
@@ -3617,7 +4121,88 @@ declare namespace IoTWireless {
      */
     Arn?: WirelessGatewayTaskDefinitionArn;
   }
+  export type Use2DSolver = boolean;
+  export type UtranCid = number;
   export type VerticalAccuracy = number;
+  export type WcdmaList = WcdmaObj[];
+  export interface WcdmaLocalId {
+    /**
+     * WCDMA UTRA Absolute RF Channel Number downlink.
+     */
+    Uarfcndl: UARFCNDL;
+    /**
+     * Primary Scrambling Code.
+     */
+    Psc: PSC;
+  }
+  export type WcdmaNmrList = WcdmaNmrObj[];
+  export interface WcdmaNmrObj {
+    /**
+     * WCDMA UTRA Absolute RF Channel Number downlink.
+     */
+    Uarfcndl: UARFCNDL;
+    /**
+     * Primary Scrambling Code.
+     */
+    Psc: PSC;
+    /**
+     * UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
+     */
+    UtranCid: UtranCid;
+    /**
+     * Received Signal Code Power (signal power) (dBm)
+     */
+    Rscp?: RSCP;
+    /**
+     * Path loss, or path attenuation, is the reduction in power density of an electromagnetic wave as it propagates through space.
+     */
+    PathLoss?: PathLoss;
+  }
+  export interface WcdmaObj {
+    /**
+     * Mobile Country Code.
+     */
+    Mcc: MCC;
+    /**
+     * Mobile Network Code.
+     */
+    Mnc: MNC;
+    /**
+     * Location Area Code.
+     */
+    Lac?: LAC;
+    /**
+     * UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
+     */
+    UtranCid: UtranCid;
+    /**
+     * WCDMA local ID information.
+     */
+    WcdmaLocalId?: WcdmaLocalId;
+    /**
+     * Received Signal Code Power (signal power) (dBm).
+     */
+    Rscp?: RSCP;
+    /**
+     * Path loss, or path attenuation, is the reduction in power density of an electromagnetic wave as it propagates through space.
+     */
+    PathLoss?: PathLoss;
+    /**
+     * WCDMA object for network measurement reports.
+     */
+    WcdmaNmr?: WcdmaNmrList;
+  }
+  export interface WiFiAccessPoint {
+    /**
+     * Wi-Fi MAC Address.
+     */
+    MacAddress: MacAddress;
+    /**
+     * Recived signal strength of the WLAN measurement data.
+     */
+    Rss: RSS;
+  }
+  export type WiFiAccessPoints = WiFiAccessPoint[];
   export type WirelessDeviceArn = string;
   export type WirelessDeviceEvent = "Join"|"Rejoin"|"Uplink_Data"|"Downlink_Data"|"Registration"|string;
   export interface WirelessDeviceEventLogOption {

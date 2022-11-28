@@ -12,6 +12,38 @@ declare class Mgn extends Service {
   constructor(options?: Mgn.Types.ClientConfiguration)
   config: Config & Mgn.Types.ClientConfiguration;
   /**
+   * Archive application.
+   */
+  archiveApplication(params: Mgn.Types.ArchiveApplicationRequest, callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Archive application.
+   */
+  archiveApplication(callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Archive wave.
+   */
+  archiveWave(params: Mgn.Types.ArchiveWaveRequest, callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
+   * Archive wave.
+   */
+  archiveWave(callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
+   * Associate applications to wave.
+   */
+  associateApplications(params: Mgn.Types.AssociateApplicationsRequest, callback?: (err: AWSError, data: Mgn.Types.AssociateApplicationsResponse) => void): Request<Mgn.Types.AssociateApplicationsResponse, AWSError>;
+  /**
+   * Associate applications to wave.
+   */
+  associateApplications(callback?: (err: AWSError, data: Mgn.Types.AssociateApplicationsResponse) => void): Request<Mgn.Types.AssociateApplicationsResponse, AWSError>;
+  /**
+   * Associate source servers to application.
+   */
+  associateSourceServers(params: Mgn.Types.AssociateSourceServersRequest, callback?: (err: AWSError, data: Mgn.Types.AssociateSourceServersResponse) => void): Request<Mgn.Types.AssociateSourceServersResponse, AWSError>;
+  /**
+   * Associate source servers to application.
+   */
+  associateSourceServers(callback?: (err: AWSError, data: Mgn.Types.AssociateSourceServersResponse) => void): Request<Mgn.Types.AssociateSourceServersResponse, AWSError>;
+  /**
    * Allows the user to set the SourceServer.LifeCycle.state property for specific Source Server IDs to one of the following: READY_FOR_TEST or READY_FOR_CUTOVER. This command only works if the Source Server is already launchable (dataReplicationInfo.lagDuration is not null.)
    */
   changeServerLifeCycleState(params: Mgn.Types.ChangeServerLifeCycleStateRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
@@ -20,11 +52,19 @@ declare class Mgn extends Service {
    */
   changeServerLifeCycleState(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Create application.
+   */
+  createApplication(params: Mgn.Types.CreateApplicationRequest, callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Create application.
+   */
+  createApplication(callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Creates a new Launch Configuration Template.
    */
   createLaunchConfigurationTemplate(params: Mgn.Types.CreateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Creates a new Launch Configuration Template.
    */
   createLaunchConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
   /**
@@ -36,6 +76,22 @@ declare class Mgn extends Service {
    */
   createReplicationConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.ReplicationConfigurationTemplate) => void): Request<Mgn.Types.ReplicationConfigurationTemplate, AWSError>;
   /**
+   * Create wave.
+   */
+  createWave(params: Mgn.Types.CreateWaveRequest, callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
+   * Create wave.
+   */
+  createWave(callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
+   * Delete application.
+   */
+  deleteApplication(params: Mgn.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: Mgn.Types.DeleteApplicationResponse) => void): Request<Mgn.Types.DeleteApplicationResponse, AWSError>;
+  /**
+   * Delete application.
+   */
+  deleteApplication(callback?: (err: AWSError, data: Mgn.Types.DeleteApplicationResponse) => void): Request<Mgn.Types.DeleteApplicationResponse, AWSError>;
+  /**
    * Deletes a single Job by ID.
    */
   deleteJob(params: Mgn.Types.DeleteJobRequest, callback?: (err: AWSError, data: Mgn.Types.DeleteJobResponse) => void): Request<Mgn.Types.DeleteJobResponse, AWSError>;
@@ -44,11 +100,11 @@ declare class Mgn extends Service {
    */
   deleteJob(callback?: (err: AWSError, data: Mgn.Types.DeleteJobResponse) => void): Request<Mgn.Types.DeleteJobResponse, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Deletes a single Launch Configuration Template by ID.
    */
   deleteLaunchConfigurationTemplate(params: Mgn.Types.DeleteLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.DeleteLaunchConfigurationTemplateResponse) => void): Request<Mgn.Types.DeleteLaunchConfigurationTemplateResponse, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Deletes a single Launch Configuration Template by ID.
    */
   deleteLaunchConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.DeleteLaunchConfigurationTemplateResponse) => void): Request<Mgn.Types.DeleteLaunchConfigurationTemplateResponse, AWSError>;
   /**
@@ -76,6 +132,14 @@ declare class Mgn extends Service {
    */
   deleteVcenterClient(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Delete wave.
+   */
+  deleteWave(params: Mgn.Types.DeleteWaveRequest, callback?: (err: AWSError, data: Mgn.Types.DeleteWaveResponse) => void): Request<Mgn.Types.DeleteWaveResponse, AWSError>;
+  /**
+   * Delete wave.
+   */
+  deleteWave(callback?: (err: AWSError, data: Mgn.Types.DeleteWaveResponse) => void): Request<Mgn.Types.DeleteWaveResponse, AWSError>;
+  /**
    * Retrieves detailed job log items with paging.
    */
   describeJobLogItems(params: Mgn.Types.DescribeJobLogItemsRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeJobLogItemsResponse) => void): Request<Mgn.Types.DescribeJobLogItemsResponse, AWSError>;
@@ -92,11 +156,11 @@ declare class Mgn extends Service {
    */
   describeJobs(callback?: (err: AWSError, data: Mgn.Types.DescribeJobsResponse) => void): Request<Mgn.Types.DescribeJobsResponse, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
    */
   describeLaunchConfigurationTemplates(params: Mgn.Types.DescribeLaunchConfigurationTemplatesRequest, callback?: (err: AWSError, data: Mgn.Types.DescribeLaunchConfigurationTemplatesResponse) => void): Request<Mgn.Types.DescribeLaunchConfigurationTemplatesResponse, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
    */
   describeLaunchConfigurationTemplates(callback?: (err: AWSError, data: Mgn.Types.DescribeLaunchConfigurationTemplatesResponse) => void): Request<Mgn.Types.DescribeLaunchConfigurationTemplatesResponse, AWSError>;
   /**
@@ -123,6 +187,22 @@ declare class Mgn extends Service {
    * Returns a list of the installed vCenter clients.
    */
   describeVcenterClients(callback?: (err: AWSError, data: Mgn.Types.DescribeVcenterClientsResponse) => void): Request<Mgn.Types.DescribeVcenterClientsResponse, AWSError>;
+  /**
+   * Disassociate applications from wave.
+   */
+  disassociateApplications(params: Mgn.Types.DisassociateApplicationsRequest, callback?: (err: AWSError, data: Mgn.Types.DisassociateApplicationsResponse) => void): Request<Mgn.Types.DisassociateApplicationsResponse, AWSError>;
+  /**
+   * Disassociate applications from wave.
+   */
+  disassociateApplications(callback?: (err: AWSError, data: Mgn.Types.DisassociateApplicationsResponse) => void): Request<Mgn.Types.DisassociateApplicationsResponse, AWSError>;
+  /**
+   * Disassociate source servers from application.
+   */
+  disassociateSourceServers(params: Mgn.Types.DisassociateSourceServersRequest, callback?: (err: AWSError, data: Mgn.Types.DisassociateSourceServersResponse) => void): Request<Mgn.Types.DisassociateSourceServersResponse, AWSError>;
+  /**
+   * Disassociate source servers from application.
+   */
+  disassociateSourceServers(callback?: (err: AWSError, data: Mgn.Types.DisassociateSourceServersResponse) => void): Request<Mgn.Types.DisassociateSourceServersResponse, AWSError>;
   /**
    * Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.
    */
@@ -164,6 +244,22 @@ declare class Mgn extends Service {
    */
   initializeService(callback?: (err: AWSError, data: Mgn.Types.InitializeServiceResponse) => void): Request<Mgn.Types.InitializeServiceResponse, AWSError>;
   /**
+   * Retrieves all applications or multiple applications by ID.
+   */
+  listApplications(params: Mgn.Types.ListApplicationsRequest, callback?: (err: AWSError, data: Mgn.Types.ListApplicationsResponse) => void): Request<Mgn.Types.ListApplicationsResponse, AWSError>;
+  /**
+   * Retrieves all applications or multiple applications by ID.
+   */
+  listApplications(callback?: (err: AWSError, data: Mgn.Types.ListApplicationsResponse) => void): Request<Mgn.Types.ListApplicationsResponse, AWSError>;
+  /**
+   * List source server post migration custom actions.
+   */
+  listSourceServerActions(params: Mgn.Types.ListSourceServerActionsRequest, callback?: (err: AWSError, data: Mgn.Types.ListSourceServerActionsResponse) => void): Request<Mgn.Types.ListSourceServerActionsResponse, AWSError>;
+  /**
+   * List source server post migration custom actions.
+   */
+  listSourceServerActions(callback?: (err: AWSError, data: Mgn.Types.ListSourceServerActionsResponse) => void): Request<Mgn.Types.ListSourceServerActionsResponse, AWSError>;
+  /**
    * List all tags for your Application Migration Service resources.
    */
   listTagsForResource(params: Mgn.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Mgn.Types.ListTagsForResourceResponse) => void): Request<Mgn.Types.ListTagsForResourceResponse, AWSError>;
@@ -172,6 +268,22 @@ declare class Mgn extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Mgn.Types.ListTagsForResourceResponse) => void): Request<Mgn.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * List template post migration custom actions.
+   */
+  listTemplateActions(params: Mgn.Types.ListTemplateActionsRequest, callback?: (err: AWSError, data: Mgn.Types.ListTemplateActionsResponse) => void): Request<Mgn.Types.ListTemplateActionsResponse, AWSError>;
+  /**
+   * List template post migration custom actions.
+   */
+  listTemplateActions(callback?: (err: AWSError, data: Mgn.Types.ListTemplateActionsResponse) => void): Request<Mgn.Types.ListTemplateActionsResponse, AWSError>;
+  /**
+   * Retrieves all waves or multiple waves by ID.
+   */
+  listWaves(params: Mgn.Types.ListWavesRequest, callback?: (err: AWSError, data: Mgn.Types.ListWavesResponse) => void): Request<Mgn.Types.ListWavesResponse, AWSError>;
+  /**
+   * Retrieves all waves or multiple waves by ID.
+   */
+  listWaves(callback?: (err: AWSError, data: Mgn.Types.ListWavesResponse) => void): Request<Mgn.Types.ListWavesResponse, AWSError>;
+  /**
    * Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.
    */
   markAsArchived(params: Mgn.Types.MarkAsArchivedRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
@@ -179,6 +291,38 @@ declare class Mgn extends Service {
    * Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.
    */
   markAsArchived(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Put source server post migration custom action.
+   */
+  putSourceServerAction(params: Mgn.Types.PutSourceServerActionRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServerActionDocument) => void): Request<Mgn.Types.SourceServerActionDocument, AWSError>;
+  /**
+   * Put source server post migration custom action.
+   */
+  putSourceServerAction(callback?: (err: AWSError, data: Mgn.Types.SourceServerActionDocument) => void): Request<Mgn.Types.SourceServerActionDocument, AWSError>;
+  /**
+   * Put template post migration custom action.
+   */
+  putTemplateAction(params: Mgn.Types.PutTemplateActionRequest, callback?: (err: AWSError, data: Mgn.Types.TemplateActionDocument) => void): Request<Mgn.Types.TemplateActionDocument, AWSError>;
+  /**
+   * Put template post migration custom action.
+   */
+  putTemplateAction(callback?: (err: AWSError, data: Mgn.Types.TemplateActionDocument) => void): Request<Mgn.Types.TemplateActionDocument, AWSError>;
+  /**
+   * Remove source server post migration custom action.
+   */
+  removeSourceServerAction(params: Mgn.Types.RemoveSourceServerActionRequest, callback?: (err: AWSError, data: Mgn.Types.RemoveSourceServerActionResponse) => void): Request<Mgn.Types.RemoveSourceServerActionResponse, AWSError>;
+  /**
+   * Remove source server post migration custom action.
+   */
+  removeSourceServerAction(callback?: (err: AWSError, data: Mgn.Types.RemoveSourceServerActionResponse) => void): Request<Mgn.Types.RemoveSourceServerActionResponse, AWSError>;
+  /**
+   * Remove template post migration custom action.
+   */
+  removeTemplateAction(params: Mgn.Types.RemoveTemplateActionRequest, callback?: (err: AWSError, data: Mgn.Types.RemoveTemplateActionResponse) => void): Request<Mgn.Types.RemoveTemplateActionResponse, AWSError>;
+  /**
+   * Remove template post migration custom action.
+   */
+  removeTemplateAction(callback?: (err: AWSError, data: Mgn.Types.RemoveTemplateActionResponse) => void): Request<Mgn.Types.RemoveTemplateActionResponse, AWSError>;
   /**
    * Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started. This command will not work if the SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.
    */
@@ -228,6 +372,22 @@ declare class Mgn extends Service {
    */
   terminateTargetInstances(callback?: (err: AWSError, data: Mgn.Types.TerminateTargetInstancesResponse) => void): Request<Mgn.Types.TerminateTargetInstancesResponse, AWSError>;
   /**
+   * Unarchive application.
+   */
+  unarchiveApplication(params: Mgn.Types.UnarchiveApplicationRequest, callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Unarchive application.
+   */
+  unarchiveApplication(callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Unarchive wave.
+   */
+  unarchiveWave(params: Mgn.Types.UnarchiveWaveRequest, callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
+   * Unarchive wave.
+   */
+  unarchiveWave(callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
    * Deletes the specified set of tags from the specified set of Application Migration Service resources.
    */
   untagResource(params: Mgn.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -235,6 +395,14 @@ declare class Mgn extends Service {
    * Deletes the specified set of tags from the specified set of Application Migration Service resources.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Update application.
+   */
+  updateApplication(params: Mgn.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
+  /**
+   * Update application.
+   */
+  updateApplication(callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
   /**
    * Updates multiple LaunchConfigurations by Source Server ID.
    */
@@ -244,11 +412,11 @@ declare class Mgn extends Service {
    */
   updateLaunchConfiguration(callback?: (err: AWSError, data: Mgn.Types.LaunchConfiguration) => void): Request<Mgn.Types.LaunchConfiguration, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Updates an existing Launch Configuration Template by ID.
    */
   updateLaunchConfigurationTemplate(params: Mgn.Types.UpdateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
   /**
-   * Creates a new ReplicationConfigurationTemplate.
+   * Updates an existing Launch Configuration Template by ID.
    */
   updateLaunchConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
   /**
@@ -275,9 +443,125 @@ declare class Mgn extends Service {
    * Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.
    */
   updateSourceServerReplicationType(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Update wave.
+   */
+  updateWave(params: Mgn.Types.UpdateWaveRequest, callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
+  /**
+   * Update wave.
+   */
+  updateWave(callback?: (err: AWSError, data: Mgn.Types.Wave) => void): Request<Mgn.Types.Wave, AWSError>;
 }
 declare namespace Mgn {
   export type ARN = string;
+  export type ActionID = string;
+  export type ActionIDs = ActionID[];
+  export type ActionName = string;
+  export interface Application {
+    /**
+     * Application aggregated status.
+     */
+    applicationAggregatedStatus?: ApplicationAggregatedStatus;
+    /**
+     * Application ID.
+     */
+    applicationID?: ApplicationID;
+    /**
+     * Application ARN.
+     */
+    arn?: ARN;
+    /**
+     * Application creation dateTime.
+     */
+    creationDateTime?: ISO8601DatetimeString;
+    /**
+     * Application description.
+     */
+    description?: ApplicationDescription;
+    /**
+     * Application archival status.
+     */
+    isArchived?: Boolean;
+    /**
+     * Application last modified dateTime.
+     */
+    lastModifiedDateTime?: ISO8601DatetimeString;
+    /**
+     * Application name.
+     */
+    name?: ApplicationName;
+    /**
+     * Application tags.
+     */
+    tags?: TagsMap;
+    /**
+     * Application wave ID.
+     */
+    waveID?: WaveID;
+  }
+  export interface ApplicationAggregatedStatus {
+    /**
+     * Application aggregated status health status.
+     */
+    healthStatus?: ApplicationHealthStatus;
+    /**
+     * Application aggregated status last update dateTime.
+     */
+    lastUpdateDateTime?: ISO8601DatetimeString;
+    /**
+     * Application aggregated status progress status.
+     */
+    progressStatus?: ApplicationProgressStatus;
+    /**
+     * Application aggregated status total source servers amount.
+     */
+    totalSourceServers?: PositiveInteger;
+  }
+  export type ApplicationDescription = string;
+  export type ApplicationHealthStatus = "HEALTHY"|"LAGGING"|"ERROR"|string;
+  export type ApplicationID = string;
+  export type ApplicationIDs = ApplicationID[];
+  export type ApplicationIDsFilter = ApplicationID[];
+  export type ApplicationName = string;
+  export type ApplicationProgressStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string;
+  export type ApplicationsList = Application[];
+  export interface ArchiveApplicationRequest {
+    /**
+     * Application ID.
+     */
+    applicationID: ApplicationID;
+  }
+  export interface ArchiveWaveRequest {
+    /**
+     * Wave ID.
+     */
+    waveID: WaveID;
+  }
+  export interface AssociateApplicationsRequest {
+    /**
+     * Application IDs list.
+     */
+    applicationIDs: ApplicationIDs;
+    /**
+     * Wave ID.
+     */
+    waveID: WaveID;
+  }
+  export interface AssociateApplicationsResponse {
+  }
+  export interface AssociateSourceServersRequest {
+    /**
+     * Application ID.
+     */
+    applicationID: ApplicationID;
+    /**
+     * Source server IDs list.
+     */
+    sourceServerIDs: AssociateSourceServersRequestSourceServerIDs;
+  }
+  export type AssociateSourceServersRequestSourceServerIDs = SourceServerID[];
+  export interface AssociateSourceServersResponse {
+  }
   export type Boolean = boolean;
   export type BootMode = "LEGACY_BIOS"|"UEFI"|string;
   export type BoundedString = string;
@@ -310,15 +594,74 @@ declare namespace Mgn {
   export type ChangeServerLifeCycleStateSourceServerLifecycleState = "READY_FOR_TEST"|"READY_FOR_CUTOVER"|"CUTOVER"|string;
   export type CloudWatchLogGroupName = string;
   export type Cpus = CPU[];
+  export interface CreateApplicationRequest {
+    /**
+     * Application description.
+     */
+    description?: ApplicationDescription;
+    /**
+     * Application name.
+     */
+    name: ApplicationName;
+    /**
+     * Application tags.
+     */
+    tags?: TagsMap;
+  }
   export interface CreateLaunchConfigurationTemplateRequest {
     /**
-     * Request to associate the default Application Migration Service Security group with the Replication Settings template.
+     * Associate public Ip address.
+     */
+    associatePublicIpAddress?: Boolean;
+    /**
+     * Launch configuration template boot mode.
+     */
+    bootMode?: BootMode;
+    /**
+     * Copy private Ip.
+     */
+    copyPrivateIp?: Boolean;
+    /**
+     * Copy tags.
+     */
+    copyTags?: Boolean;
+    /**
+     * Enable map auto tagging.
+     */
+    enableMapAutoTagging?: Boolean;
+    /**
+     * Large volume config.
+     */
+    largeVolumeConf?: LaunchTemplateDiskConf;
+    /**
+     * Launch disposition.
+     */
+    launchDisposition?: LaunchDisposition;
+    licensing?: Licensing;
+    /**
+     * Launch configuration template map auto tagging MPE ID.
+     */
+    mapAutoTaggingMpeID?: TagValue;
+    /**
+     * Launch configuration template post launch actions.
      */
     postLaunchActions?: PostLaunchActions;
     /**
-     * Request to associate the default Application Migration Service Security group with the Replication Settings template.
+     * Small volume config.
+     */
+    smallVolumeConf?: LaunchTemplateDiskConf;
+    /**
+     * Small volume maximum size.
+     */
+    smallVolumeMaxSize?: PositiveInteger;
+    /**
+     * Request to associate tags during creation of a Launch Configuration Template.
      */
     tags?: TagsMap;
+    /**
+     * Target instance type right-sizing method.
+     */
+    targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
   }
   export interface CreateReplicationConfigurationTemplateRequest {
     /**
@@ -373,6 +716,20 @@ declare namespace Mgn {
      * Request to use Dedicated Replication Servers during Replication Settings template creation.
      */
     useDedicatedReplicationServer: Boolean;
+  }
+  export interface CreateWaveRequest {
+    /**
+     * Wave description.
+     */
+    description?: WaveDescription;
+    /**
+     * Wave name.
+     */
+    name: WaveName;
+    /**
+     * Wave tags.
+     */
+    tags?: TagsMap;
   }
   export interface DataReplicationError {
     /**
@@ -466,6 +823,14 @@ declare namespace Mgn {
   export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
   export type DataReplicationInitiationSteps = DataReplicationInitiationStep[];
   export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"PENDING_SNAPSHOT_SHIPPING"|"SHIPPING_SNAPSHOT"|string;
+  export interface DeleteApplicationRequest {
+    /**
+     * Application ID.
+     */
+    applicationID: ApplicationID;
+  }
+  export interface DeleteApplicationResponse {
+  }
   export interface DeleteJobRequest {
     /**
      * Request to delete Job from service by Job ID.
@@ -504,6 +869,14 @@ declare namespace Mgn {
      */
     vcenterClientID: VcenterClientID;
   }
+  export interface DeleteWaveRequest {
+    /**
+     * Wave ID.
+     */
+    waveID: WaveID;
+  }
+  export interface DeleteWaveResponse {
+  }
   export interface DescribeJobLogItemsRequest {
     /**
      * Request to describe Job log job ID.
@@ -512,7 +885,7 @@ declare namespace Mgn {
     /**
      * Request to describe Job log item maximum results.
      */
-    maxResults?: StrictlyPositiveInteger;
+    maxResults?: MaxResultsType;
     /**
      * Request to describe Job log next token.
      */
@@ -536,7 +909,7 @@ declare namespace Mgn {
     /**
      * Request to describe job log items by max results.
      */
-    maxResults?: StrictlyPositiveInteger;
+    maxResults?: MaxResultsType;
     /**
      * Request to describe job log items by next token.
      */
@@ -569,25 +942,25 @@ declare namespace Mgn {
   }
   export interface DescribeLaunchConfigurationTemplatesRequest {
     /**
-     * Request to disconnect Source Server from service by Server ID.
+     * Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
      */
     launchConfigurationTemplateIDs?: LaunchConfigurationTemplateIDs;
     /**
-     * Request to disconnect Source Server from service by Server ID.
+     * Maximum results to be returned in DescribeLaunchConfigurationTemplates.
      */
-    maxResults?: StrictlyPositiveInteger;
+    maxResults?: MaxResultsType;
     /**
-     * Request to disconnect Source Server from service by Server ID.
+     * Next pagination token returned from DescribeLaunchConfigurationTemplates.
      */
     nextToken?: PaginationToken;
   }
   export interface DescribeLaunchConfigurationTemplatesResponse {
     /**
-     * Request to disconnect Source Server from service by Server ID.
+     * List of items returned by DescribeLaunchConfigurationTemplates.
      */
     items?: LaunchConfigurationTemplates;
     /**
-     * Request to disconnect Source Server from service by Server ID.
+     * Next pagination token returned from DescribeLaunchConfigurationTemplates.
      */
     nextToken?: PaginationToken;
   }
@@ -595,7 +968,7 @@ declare namespace Mgn {
     /**
      * Request to describe Replication Configuration template by max results.
      */
-    maxResults?: StrictlyPositiveInteger;
+    maxResults?: MaxResultsType;
     /**
      * Request to describe Replication Configuration template by next token.
      */
@@ -623,13 +996,18 @@ declare namespace Mgn {
     /**
      * Request to filter Source Servers list by maximum results.
      */
-    maxResults?: StrictlyPositiveInteger;
+    maxResults?: MaxResultsType;
     /**
      * Request to filter Source Servers list by next token.
      */
     nextToken?: PaginationToken;
   }
+  export type DescribeSourceServersRequestApplicationIDs = ApplicationID[];
   export interface DescribeSourceServersRequestFilters {
+    /**
+     * Request to filter Source Servers list by application IDs.
+     */
+    applicationIDs?: DescribeSourceServersRequestApplicationIDs;
     /**
      * Request to filter Source Servers list by archived.
      */
@@ -662,7 +1040,7 @@ declare namespace Mgn {
     /**
      * Maximum results to be returned in DescribeVcenterClients.
      */
-    maxResults?: StrictlyPositiveInteger;
+    maxResults?: MaxResultsType;
     /**
      * Next pagination token to be provided for DescribeVcenterClients.
      */
@@ -677,6 +1055,31 @@ declare namespace Mgn {
      * Next pagination token returned from DescribeVcenterClients.
      */
     nextToken?: PaginationToken;
+  }
+  export interface DisassociateApplicationsRequest {
+    /**
+     * Application IDs list.
+     */
+    applicationIDs: ApplicationIDs;
+    /**
+     * Wave ID.
+     */
+    waveID: WaveID;
+  }
+  export interface DisassociateApplicationsResponse {
+  }
+  export interface DisassociateSourceServersRequest {
+    /**
+     * Application ID.
+     */
+    applicationID: ApplicationID;
+    /**
+     * Source server IDs list.
+     */
+    sourceServerIDs: DisassociateSourceServersRequestSourceServerIDs;
+  }
+  export type DisassociateSourceServersRequestSourceServerIDs = SourceServerID[];
+  export interface DisassociateSourceServersResponse {
   }
   export interface DisconnectFromServiceRequest {
     /**
@@ -695,8 +1098,10 @@ declare namespace Mgn {
     deviceName?: BoundedString;
   }
   export type Disks = Disk[];
+  export type DocumentVersion = string;
   export type EC2InstanceID = string;
   export type EC2InstanceType = string;
+  export type EC2LaunchConfigurationTemplateID = string;
   export interface FinalizeCutoverRequest {
     /**
      * Request to finalize Cutover by Source Server ID.
@@ -821,23 +1226,23 @@ declare namespace Mgn {
   export type JobLogs = JobLog[];
   export interface JobPostLaunchActionsLaunchStatus {
     /**
-     * Job type.
+     * AWS Systems Manager Document's execution ID of the of the Job Post Launch Actions.
      */
     executionID?: BoundedString;
     /**
-     * Job type.
+     * AWS Systems Manager Document's execution status.
      */
     executionStatus?: PostLaunchActionExecutionStatus;
     /**
-     * Job type.
+     * AWS Systems Manager Document's failure reason.
      */
     failureReason?: BoundedString;
     /**
-     * Job type.
+     * AWS Systems Manager's Document of the of the Job Post Launch Actions.
      */
     ssmDocument?: SsmDocument;
     /**
-     * Job type.
+     * AWS Systems Manager Document type.
      */
     ssmDocumentType?: SsmDocumentType;
   }
@@ -863,6 +1268,10 @@ declare namespace Mgn {
      */
     ec2LaunchTemplateID?: BoundedString;
     /**
+     * Enable map auto tagging.
+     */
+    enableMapAutoTagging?: Boolean;
+    /**
      * Launch disposition for launch configuration.
      */
     launchDisposition?: LaunchDisposition;
@@ -870,6 +1279,10 @@ declare namespace Mgn {
      * Launch configuration OS licensing.
      */
     licensing?: Licensing;
+    /**
+     * Map auto tagging MPE ID.
+     */
+    mapAutoTaggingMpeID?: TagValue;
     /**
      * Launch configuration name.
      */
@@ -886,27 +1299,90 @@ declare namespace Mgn {
   }
   export interface LaunchConfigurationTemplate {
     /**
-     * Copy Private IP during Launch Configuration.
+     * ARN of the Launch Configuration Template.
      */
     arn?: ARN;
     /**
-     * Copy Private IP during Launch Configuration.
+     * Associate public Ip address.
+     */
+    associatePublicIpAddress?: Boolean;
+    /**
+     * Launch configuration template boot mode.
+     */
+    bootMode?: BootMode;
+    /**
+     * Copy private Ip.
+     */
+    copyPrivateIp?: Boolean;
+    /**
+     * Copy tags.
+     */
+    copyTags?: Boolean;
+    /**
+     * EC2 launch template ID.
+     */
+    ec2LaunchTemplateID?: EC2LaunchConfigurationTemplateID;
+    /**
+     * Enable map auto tagging.
+     */
+    enableMapAutoTagging?: Boolean;
+    /**
+     * Large volume config.
+     */
+    largeVolumeConf?: LaunchTemplateDiskConf;
+    /**
+     * ID of the Launch Configuration Template.
      */
     launchConfigurationTemplateID: LaunchConfigurationTemplateID;
     /**
-     * Copy Private IP during Launch Configuration.
+     * Launch disposition.
+     */
+    launchDisposition?: LaunchDisposition;
+    licensing?: Licensing;
+    /**
+     * Launch configuration template map auto tagging MPE ID.
+     */
+    mapAutoTaggingMpeID?: TagValue;
+    /**
+     * Post Launch Actions of the Launch Configuration Template.
      */
     postLaunchActions?: PostLaunchActions;
     /**
-     * Copy Private IP during Launch Configuration.
+     * Small volume config.
+     */
+    smallVolumeConf?: LaunchTemplateDiskConf;
+    /**
+     * Small volume maximum size.
+     */
+    smallVolumeMaxSize?: PositiveInteger;
+    /**
+     * Tags of the Launch Configuration Template.
      */
     tags?: TagsMap;
+    /**
+     * Target instance type right-sizing method.
+     */
+    targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
   }
   export type LaunchConfigurationTemplateID = string;
   export type LaunchConfigurationTemplateIDs = LaunchConfigurationTemplateID[];
   export type LaunchConfigurationTemplates = LaunchConfigurationTemplate[];
   export type LaunchDisposition = "STOPPED"|"STARTED"|string;
   export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
+  export interface LaunchTemplateDiskConf {
+    /**
+     * Launch template disk iops configuration.
+     */
+    iops?: PositiveInteger;
+    /**
+     * Launch template disk throughput configuration.
+     */
+    throughput?: PositiveInteger;
+    /**
+     * Launch template disk volume type configuration.
+     */
+    volumeType?: VolumeType;
+  }
   export interface LaunchedInstance {
     /**
      * Launched instance EC2 ID.
@@ -1031,6 +1507,72 @@ declare namespace Mgn {
   }
   export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|string;
   export type LifeCycleStates = LifeCycleState[];
+  export interface ListApplicationsRequest {
+    /**
+     * Applications list filters.
+     */
+    filters?: ListApplicationsRequestFilters;
+    /**
+     * Maximum results to return when listing applications.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * Request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListApplicationsRequestFilters {
+    /**
+     * Filter applications list by application ID.
+     */
+    applicationIDs?: ApplicationIDsFilter;
+    /**
+     * Filter applications list by archival status.
+     */
+    isArchived?: Boolean;
+    /**
+     * Filter applications list by wave ID.
+     */
+    waveIDs?: WaveIDsFilter;
+  }
+  export interface ListApplicationsResponse {
+    /**
+     * Applications list.
+     */
+    items?: ApplicationsList;
+    /**
+     * Response next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListSourceServerActionsRequest {
+    /**
+     * Filters to apply when listing source server post migration custom actions.
+     */
+    filters?: SourceServerActionsRequestFilters;
+    /**
+     * Maximum amount of items to return when listing source server post migration custom actions.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * Next token to use when listing source server post migration custom actions.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Source server ID.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface ListSourceServerActionsResponse {
+    /**
+     * List of source server post migration custom actions.
+     */
+    items?: SourceServerActionDocuments;
+    /**
+     * Next token returned when listing source server post migration custom actions.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * List tags for resource request by ARN.
@@ -1043,12 +1585,75 @@ declare namespace Mgn {
      */
     tags?: TagsMap;
   }
+  export interface ListTemplateActionsRequest {
+    /**
+     * Filters to apply when listing template post migration custom actions.
+     */
+    filters?: TemplateActionsRequestFilters;
+    /**
+     * Launch configuration template ID.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+    /**
+     * Maximum amount of items to return when listing template post migration custom actions.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * Next token to use when listing template post migration custom actions.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListTemplateActionsResponse {
+    /**
+     * List of template post migration custom actions.
+     */
+    items?: TemplateActionDocuments;
+    /**
+     * Next token returned when listing template post migration custom actions.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWavesRequest {
+    /**
+     * Waves list filters.
+     */
+    filters?: ListWavesRequestFilters;
+    /**
+     * Maximum results to return when listing waves.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * Request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWavesRequestFilters {
+    /**
+     * Filter waves list by archival status.
+     */
+    isArchived?: Boolean;
+    /**
+     * Filter waves list by wave ID.
+     */
+    waveIDs?: WaveIDsFilter;
+  }
+  export interface ListWavesResponse {
+    /**
+     * Waves list.
+     */
+    items?: WavesList;
+    /**
+     * Response next token.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface MarkAsArchivedRequest {
     /**
      * Mark as archived by Source Server ID.
      */
     sourceServerID: SourceServerID;
   }
+  export type MaxResultsType = number;
   export interface NetworkInterface {
     /**
      * Network interface IPs.
@@ -1070,6 +1675,8 @@ declare namespace Mgn {
      */
     fullString?: BoundedString;
   }
+  export type OperatingSystemString = string;
+  export type OrderType = number;
   export type PaginationToken = string;
   export interface ParticipatingServer {
     /**
@@ -1077,11 +1684,11 @@ declare namespace Mgn {
      */
     launchStatus?: LaunchStatus;
     /**
-     * Participating server Source Server ID.
+     * Participating server's launched ec2 instance ID.
      */
     launchedEc2InstanceID?: EC2InstanceID;
     /**
-     * Participating server Source Server ID.
+     * Participating server's Post Launch Actions Status.
      */
     postLaunchActionsStatus?: PostLaunchActionsStatus;
     /**
@@ -1094,37 +1701,149 @@ declare namespace Mgn {
   export type PostLaunchActionExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
   export interface PostLaunchActions {
     /**
-     * Server participating in Job.
+     * AWS Systems Manager Command's CloudWatch log group name.
      */
     cloudWatchLogGroupName?: CloudWatchLogGroupName;
     /**
-     * Server participating in Job.
+     * Deployment type in which AWS Systems Manager Documents will be executed.
      */
     deployment?: PostLaunchActionsDeploymentType;
     /**
-     * Server participating in Job.
+     * AWS Systems Manager Command's logs S3 log bucket.
      */
     s3LogBucket?: S3LogBucketName;
     /**
-     * Server participating in Job.
+     * AWS Systems Manager Command's logs S3 output key prefix.
      */
     s3OutputKeyPrefix?: BoundedString;
     /**
-     * Server participating in Job.
+     * AWS Systems Manager Documents.
      */
     ssmDocuments?: SsmDocuments;
   }
-  export type PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"|"CUTOVER_ONLY"|string;
+  export type PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"|"CUTOVER_ONLY"|"TEST_ONLY"|string;
   export type PostLaunchActionsLaunchStatusList = JobPostLaunchActionsLaunchStatus[];
   export interface PostLaunchActionsStatus {
     /**
-     * Server participating in Job.
+     * List of Post Launch Action status.
      */
     postLaunchActionsLaunchStatusList?: PostLaunchActionsLaunchStatusList;
     /**
-     * Server participating in Job.
+     * Time where the AWS Systems Manager was detected as running on the Test or Cutover instance.
      */
     ssmAgentDiscoveryDatetime?: ISO8601DatetimeString;
+  }
+  export interface PutSourceServerActionRequest {
+    /**
+     * Source server post migration custom action ID.
+     */
+    actionID: ActionID;
+    /**
+     * Source server post migration custom action name.
+     */
+    actionName: ActionName;
+    /**
+     * Source server post migration custom action active status.
+     */
+    active?: Boolean;
+    /**
+     * Source server post migration custom action document identifier.
+     */
+    documentIdentifier: BoundedString;
+    /**
+     * Source server post migration custom action document version.
+     */
+    documentVersion?: DocumentVersion;
+    /**
+     * Source server post migration custom action must succeed for cutover.
+     */
+    mustSucceedForCutover?: Boolean;
+    /**
+     * Source server post migration custom action order.
+     */
+    order: OrderType;
+    /**
+     * Source server post migration custom action parameters.
+     */
+    parameters?: SsmDocumentParameters;
+    /**
+     * Source server ID.
+     */
+    sourceServerID: SourceServerID;
+    /**
+     * Source server post migration custom action timeout in seconds.
+     */
+    timeoutSeconds?: StrictlyPositiveInteger;
+  }
+  export interface PutTemplateActionRequest {
+    /**
+     * Template post migration custom action ID.
+     */
+    actionID: ActionID;
+    /**
+     * Template post migration custom action name.
+     */
+    actionName: BoundedString;
+    /**
+     * Template post migration custom action active status.
+     */
+    active?: Boolean;
+    /**
+     * Template post migration custom action document identifier.
+     */
+    documentIdentifier: BoundedString;
+    /**
+     * Template post migration custom action document version.
+     */
+    documentVersion?: DocumentVersion;
+    /**
+     * Launch configuration template ID.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+    /**
+     * Template post migration custom action must succeed for cutover.
+     */
+    mustSucceedForCutover?: Boolean;
+    /**
+     * Operating system eligible for this template post migration custom action.
+     */
+    operatingSystem?: OperatingSystemString;
+    /**
+     * Template post migration custom action order.
+     */
+    order: OrderType;
+    /**
+     * Template post migration custom action parameters.
+     */
+    parameters?: SsmDocumentParameters;
+    /**
+     * Template post migration custom action timeout in seconds.
+     */
+    timeoutSeconds?: StrictlyPositiveInteger;
+  }
+  export interface RemoveSourceServerActionRequest {
+    /**
+     * Source server post migration custom action ID to remove.
+     */
+    actionID: ActionID;
+    /**
+     * Source server ID of the post migration custom action to remove.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface RemoveSourceServerActionResponse {
+  }
+  export interface RemoveTemplateActionRequest {
+    /**
+     * Template post migration custom action ID to remove.
+     */
+    actionID: ActionID;
+    /**
+     * Launch configuration template ID of the post migration custom action to remove.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+  }
+  export interface RemoveTemplateActionResponse {
   }
   export interface ReplicationConfiguration {
     /**
@@ -1328,6 +2047,10 @@ declare namespace Mgn {
   }
   export interface SourceServer {
     /**
+     * Source server application ID.
+     */
+    applicationID?: ApplicationID;
+    /**
      * Source server ARN.
      */
     arn?: ARN;
@@ -1368,27 +2091,72 @@ declare namespace Mgn {
      */
     vcenterClientID?: VcenterClientID;
   }
+  export interface SourceServerActionDocument {
+    /**
+     * Source server post migration custom action ID.
+     */
+    actionID?: ActionID;
+    /**
+     * Source server post migration custom action name.
+     */
+    actionName?: ActionName;
+    /**
+     * Source server post migration custom action active status.
+     */
+    active?: Boolean;
+    /**
+     * Source server post migration custom action document identifier.
+     */
+    documentIdentifier?: BoundedString;
+    /**
+     * Source server post migration custom action document version.
+     */
+    documentVersion?: DocumentVersion;
+    /**
+     * Source server post migration custom action must succeed for cutover.
+     */
+    mustSucceedForCutover?: Boolean;
+    /**
+     * Source server post migration custom action order.
+     */
+    order?: OrderType;
+    /**
+     * Source server post migration custom action parameters.
+     */
+    parameters?: SsmDocumentParameters;
+    /**
+     * Source server post migration custom action timeout in seconds.
+     */
+    timeoutSeconds?: StrictlyPositiveInteger;
+  }
+  export type SourceServerActionDocuments = SourceServerActionDocument[];
+  export interface SourceServerActionsRequestFilters {
+    /**
+     * Action IDs to filter source server post migration custom actions by.
+     */
+    actionIDs?: ActionIDs;
+  }
   export type SourceServerID = string;
   export type SourceServersList = SourceServer[];
   export interface SsmDocument {
     /**
-     * Source server replication type.
+     * User-friendly name for the AWS Systems Manager Document.
      */
     actionName: BoundedString;
     /**
-     * Source server replication type.
+     * If true, Cutover will not be enabled if the document has failed.
      */
     mustSucceedForCutover?: Boolean;
     /**
-     * Source server replication type.
+     * AWS Systems Manager Document parameters.
      */
     parameters?: SsmDocumentParameters;
     /**
-     * Source server replication type.
+     * AWS Systems Manager Document name or full ARN.
      */
     ssmDocumentName: SsmDocumentName;
     /**
-     * Source server replication type.
+     * AWS Systems Manager Document timeout seconds.
      */
     timeoutSeconds?: StrictlyPositiveInteger;
   }
@@ -1399,11 +2167,11 @@ declare namespace Mgn {
   export type SsmDocuments = SsmDocument[];
   export interface SsmParameterStoreParameter {
     /**
-     * Source server replication type.
+     * AWS Systems Manager Parameter Store parameter name.
      */
     parameterName: SsmParameterStoreParameterName;
     /**
-     * Source server replication type.
+     * AWS Systems Manager Parameter Store parameter type.
      */
     parameterType: SsmParameterStoreParameterType;
   }
@@ -1467,6 +2235,55 @@ declare namespace Mgn {
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
   export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC"|string;
+  export interface TemplateActionDocument {
+    /**
+     * Template post migration custom action ID.
+     */
+    actionID?: ActionID;
+    /**
+     * Template post migration custom action name.
+     */
+    actionName?: BoundedString;
+    /**
+     * Template post migration custom action active status.
+     */
+    active?: Boolean;
+    /**
+     * Template post migration custom action document identifier.
+     */
+    documentIdentifier?: BoundedString;
+    /**
+     * Template post migration custom action document version.
+     */
+    documentVersion?: DocumentVersion;
+    /**
+     * Template post migration custom action must succeed for cutover.
+     */
+    mustSucceedForCutover?: Boolean;
+    /**
+     * Operating system eligible for this template post migration custom action.
+     */
+    operatingSystem?: OperatingSystemString;
+    /**
+     * Template post migration custom action order.
+     */
+    order?: OrderType;
+    /**
+     * Template post migration custom action parameters.
+     */
+    parameters?: SsmDocumentParameters;
+    /**
+     * Template post migration custom action timeout in seconds.
+     */
+    timeoutSeconds?: StrictlyPositiveInteger;
+  }
+  export type TemplateActionDocuments = TemplateActionDocument[];
+  export interface TemplateActionsRequestFilters {
+    /**
+     * Action IDs to filter template post migration custom actions by.
+     */
+    actionIDs?: ActionIDs;
+  }
   export interface TerminateTargetInstancesRequest {
     /**
      * Terminate Target instance by Source Server IDs.
@@ -1484,6 +2301,18 @@ declare namespace Mgn {
      */
     job?: Job;
   }
+  export interface UnarchiveApplicationRequest {
+    /**
+     * Application ID.
+     */
+    applicationID: ApplicationID;
+  }
+  export interface UnarchiveWaveRequest {
+    /**
+     * Wave ID.
+     */
+    waveID: WaveID;
+  }
   export interface UntagResourceRequest {
     /**
      * Untag resource by ARN.
@@ -1493,6 +2322,20 @@ declare namespace Mgn {
      * Untag resource by Keys.
      */
     tagKeys: TagKeys;
+  }
+  export interface UpdateApplicationRequest {
+    /**
+     * Application ID.
+     */
+    applicationID: ApplicationID;
+    /**
+     * Application description.
+     */
+    description?: ApplicationDescription;
+    /**
+     * Application name.
+     */
+    name?: ApplicationName;
   }
   export interface UpdateLaunchConfigurationRequest {
     /**
@@ -1508,6 +2351,10 @@ declare namespace Mgn {
      */
     copyTags?: Boolean;
     /**
+     * Enable map auto tagging.
+     */
+    enableMapAutoTagging?: Boolean;
+    /**
      * Update Launch configuration launch disposition request.
      */
     launchDisposition?: LaunchDisposition;
@@ -1515,6 +2362,10 @@ declare namespace Mgn {
      * Update Launch configuration licensing request.
      */
     licensing?: Licensing;
+    /**
+     * Launch configuration map auto tagging MPE ID.
+     */
+    mapAutoTaggingMpeID?: TagValue;
     /**
      * Update Launch configuration name request.
      */
@@ -1531,13 +2382,58 @@ declare namespace Mgn {
   }
   export interface UpdateLaunchConfigurationTemplateRequest {
     /**
-     * Update Launch configuration Target instance right sizing request.
+     * Associate public Ip address.
+     */
+    associatePublicIpAddress?: Boolean;
+    /**
+     * Launch configuration template boot mode.
+     */
+    bootMode?: BootMode;
+    /**
+     * Copy private Ip.
+     */
+    copyPrivateIp?: Boolean;
+    /**
+     * Copy tags.
+     */
+    copyTags?: Boolean;
+    /**
+     * Enable map auto tagging.
+     */
+    enableMapAutoTagging?: Boolean;
+    /**
+     * Large volume config.
+     */
+    largeVolumeConf?: LaunchTemplateDiskConf;
+    /**
+     * Launch Configuration Template ID.
      */
     launchConfigurationTemplateID: LaunchConfigurationTemplateID;
     /**
-     * Update Launch configuration Target instance right sizing request.
+     * Launch disposition.
+     */
+    launchDisposition?: LaunchDisposition;
+    licensing?: Licensing;
+    /**
+     * Launch configuration template map auto tagging MPE ID.
+     */
+    mapAutoTaggingMpeID?: TagValue;
+    /**
+     * Post Launch Action to execute on the Test or Cutover instance.
      */
     postLaunchActions?: PostLaunchActions;
+    /**
+     * Small volume config.
+     */
+    smallVolumeConf?: LaunchTemplateDiskConf;
+    /**
+     * Small volume maximum size.
+     */
+    smallVolumeMaxSize?: PositiveInteger;
+    /**
+     * Target instance type right-sizing method.
+     */
+    targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
   }
   export interface UpdateReplicationConfigurationRequest {
     /**
@@ -1669,6 +2565,20 @@ declare namespace Mgn {
      */
     sourceServerID: SourceServerID;
   }
+  export interface UpdateWaveRequest {
+    /**
+     * Wave description.
+     */
+    description?: WaveDescription;
+    /**
+     * Wave name.
+     */
+    name?: WaveName;
+    /**
+     * Wave ID.
+     */
+    waveID: WaveID;
+  }
   export interface VcenterClient {
     /**
      * Arn of vCenter client.
@@ -1705,6 +2615,74 @@ declare namespace Mgn {
   }
   export type VcenterClientID = string;
   export type VcenterClientList = VcenterClient[];
+  export type VolumeType = "io1"|"io2"|"gp3"|"gp2"|"st1"|"sc1"|"standard"|string;
+  export interface Wave {
+    /**
+     * Wave ARN.
+     */
+    arn?: ARN;
+    /**
+     * Wave creation dateTime.
+     */
+    creationDateTime?: ISO8601DatetimeString;
+    /**
+     * Wave description.
+     */
+    description?: WaveDescription;
+    /**
+     * Wave archival status.
+     */
+    isArchived?: Boolean;
+    /**
+     * Wave last modified dateTime.
+     */
+    lastModifiedDateTime?: ISO8601DatetimeString;
+    /**
+     * Wave name.
+     */
+    name?: WaveName;
+    /**
+     * Wave tags.
+     */
+    tags?: TagsMap;
+    /**
+     * Wave aggregated status.
+     */
+    waveAggregatedStatus?: WaveAggregatedStatus;
+    /**
+     * Wave ID.
+     */
+    waveID?: WaveID;
+  }
+  export interface WaveAggregatedStatus {
+    /**
+     * Wave aggregated status health status.
+     */
+    healthStatus?: WaveHealthStatus;
+    /**
+     * Wave aggregated status last update dateTime.
+     */
+    lastUpdateDateTime?: ISO8601DatetimeString;
+    /**
+     * Wave aggregated status progress status.
+     */
+    progressStatus?: WaveProgressStatus;
+    /**
+     * DateTime marking when the first source server in the wave started replication.
+     */
+    replicationStartedDateTime?: ISO8601DatetimeString;
+    /**
+     * Wave aggregated status total applications amount.
+     */
+    totalApplications?: PositiveInteger;
+  }
+  export type WaveDescription = string;
+  export type WaveHealthStatus = "HEALTHY"|"LAGGING"|"ERROR"|string;
+  export type WaveID = string;
+  export type WaveIDsFilter = WaveID[];
+  export type WaveName = string;
+  export type WaveProgressStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string;
+  export type WavesList = Wave[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

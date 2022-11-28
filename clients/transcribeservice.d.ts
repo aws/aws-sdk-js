@@ -12,43 +12,43 @@ declare class TranscribeService extends Service {
   constructor(options?: TranscribeService.Types.ClientConfiguration)
   config: Config & TranscribeService.Types.ClientConfiguration;
   /**
-   * Creates a new Call Analytics category. All categories are automatically applied to your Call Analytics jobs. Note that in order to apply your categories to your jobs, you must create them before submitting your job request, as categories cannot be applied retroactively. Call Analytics categories are composed of rules. For each category, you must create between 1 and 20 rules. Rules can include these parameters: , , , and . To update an existing category, see . To learn more about:   Call Analytics categories, see Creating categories    Using rules, see Rule criteria and refer to the data type   Call Analytics, see Analyzing call center audio with Call Analytics   
+   * Creates a new Call Analytics category. All categories are automatically applied to your Call Analytics transcriptions. Note that in order to apply categories to your transcriptions, you must create them before submitting your transcription request, as categories cannot be applied retroactively. When creating a new category, you can use the InputType parameter to label the category as a batch category (POST_CALL) or a streaming category (REAL_TIME). Batch categories can only be applied to batch transcriptions and streaming categories can only be applied to streaming transcriptions. If you do not include InputType, your category is created as a batch category by default. Call Analytics categories are composed of rules. For each category, you must create between 1 and 20 rules. Rules can include these parameters: , , , and . To update an existing category, see . To learn more about Call Analytics categories, see Creating categories for batch transcriptions and Creating categories for streaming transcriptions.
    */
   createCallAnalyticsCategory(params: TranscribeService.Types.CreateCallAnalyticsCategoryRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.CreateCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Creates a new Call Analytics category. All categories are automatically applied to your Call Analytics jobs. Note that in order to apply your categories to your jobs, you must create them before submitting your job request, as categories cannot be applied retroactively. Call Analytics categories are composed of rules. For each category, you must create between 1 and 20 rules. Rules can include these parameters: , , , and . To update an existing category, see . To learn more about:   Call Analytics categories, see Creating categories    Using rules, see Rule criteria and refer to the data type   Call Analytics, see Analyzing call center audio with Call Analytics   
+   * Creates a new Call Analytics category. All categories are automatically applied to your Call Analytics transcriptions. Note that in order to apply categories to your transcriptions, you must create them before submitting your transcription request, as categories cannot be applied retroactively. When creating a new category, you can use the InputType parameter to label the category as a batch category (POST_CALL) or a streaming category (REAL_TIME). Batch categories can only be applied to batch transcriptions and streaming categories can only be applied to streaming transcriptions. If you do not include InputType, your category is created as a batch category by default. Call Analytics categories are composed of rules. For each category, you must create between 1 and 20 rules. Rules can include these parameters: , , , and . To update an existing category, see . To learn more about Call Analytics categories, see Creating categories for batch transcriptions and Creating categories for streaming transcriptions.
    */
   createCallAnalyticsCategory(callback?: (err: AWSError, data: TranscribeService.Types.CreateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.CreateCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Creates a new custom language model. When creating a new language model, you must specify:   If you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz) base model   The location of your training and tuning files (this must be an Amazon S3 URI)   The language of your model   A unique name for your model   For more information, see Custom language models.
+   * Creates a new custom language model. When creating a new custom language model, you must specify:   If you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz) base model   The location of your training and tuning files (this must be an Amazon S3 URI)   The language of your model   A unique name for your model  
    */
   createLanguageModel(params: TranscribeService.Types.CreateLanguageModelRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateLanguageModelResponse) => void): Request<TranscribeService.Types.CreateLanguageModelResponse, AWSError>;
   /**
-   * Creates a new custom language model. When creating a new language model, you must specify:   If you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz) base model   The location of your training and tuning files (this must be an Amazon S3 URI)   The language of your model   A unique name for your model   For more information, see Custom language models.
+   * Creates a new custom language model. When creating a new custom language model, you must specify:   If you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample rates under 16,000 Hz) base model   The location of your training and tuning files (this must be an Amazon S3 URI)   The language of your model   A unique name for your model  
    */
   createLanguageModel(callback?: (err: AWSError, data: TranscribeService.Types.CreateLanguageModelResponse) => void): Request<TranscribeService.Types.CreateLanguageModelResponse, AWSError>;
   /**
-   * Creates a new custom medical vocabulary. Prior to creating a new medical vocabulary, you must first upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket. Note that this differs from , where you can include a list of terms within your request using the Phrases flag; CreateMedicalVocabulary does not support the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Creating a custom vocabulary.
+   * Creates a new custom medical vocabulary. Before creating a new custom medical vocabulary, you must first upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket. Note that this differs from , where you can include a list of terms within your request using the Phrases flag; CreateMedicalVocabulary does not support the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Custom vocabularies.
    */
   createMedicalVocabulary(params: TranscribeService.Types.CreateMedicalVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.CreateMedicalVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom medical vocabulary. Prior to creating a new medical vocabulary, you must first upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket. Note that this differs from , where you can include a list of terms within your request using the Phrases flag; CreateMedicalVocabulary does not support the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Creating a custom vocabulary.
+   * Creates a new custom medical vocabulary. Before creating a new custom medical vocabulary, you must first upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket. Note that this differs from , where you can include a list of terms within your request using the Phrases flag; CreateMedicalVocabulary does not support the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Custom vocabularies.
    */
   createMedicalVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.CreateMedicalVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary. When creating a new vocabulary, you can either upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket and include the URI in your request, or you can include a list of terms directly in your request using the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Creating a custom vocabulary.
+   * Creates a new custom vocabulary. When creating a new custom vocabulary, you can either upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket and include the URI in your request. Or you can include a list of terms directly in your request using the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Custom vocabularies.
    */
   createVocabulary(params: TranscribeService.Types.CreateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary. When creating a new vocabulary, you can either upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket and include the URI in your request, or you can include a list of terms directly in your request using the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Creating a custom vocabulary.
+   * Creates a new custom vocabulary. When creating a new custom vocabulary, you can either upload a text file that contains your new entries, phrases, and terms into an Amazon S3 bucket and include the URI in your request. Or you can include a list of terms directly in your request using the Phrases flag. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Custom vocabularies.
    */
   createVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary filter. You can use vocabulary filters to mask, delete, or flag specific words from your transcript. Vocabulary filters are commonly used to mask profanity in transcripts. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Using vocabulary filtering with unwanted words.
+   * Creates a new custom vocabulary filter. You can use custom vocabulary filters to mask, delete, or flag specific words from your transcript. Custom vocabulary filters are commonly used to mask profanity in transcripts. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Vocabulary filtering.
    */
   createVocabularyFilter(params: TranscribeService.Types.CreateVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyFilterResponse) => void): Request<TranscribeService.Types.CreateVocabularyFilterResponse, AWSError>;
   /**
-   * Creates a new custom vocabulary filter. You can use vocabulary filters to mask, delete, or flag specific words from your transcript. Vocabulary filters are commonly used to mask profanity in transcripts. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Using vocabulary filtering with unwanted words.
+   * Creates a new custom vocabulary filter. You can use custom vocabulary filters to mask, delete, or flag specific words from your transcript. Custom vocabulary filters are commonly used to mask profanity in transcripts. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language. For more information, see Vocabulary filtering.
    */
   createVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyFilterResponse) => void): Request<TranscribeService.Types.CreateVocabularyFilterResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class TranscribeService extends Service {
    */
   deleteCallAnalyticsJob(callback?: (err: AWSError, data: TranscribeService.Types.DeleteCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.DeleteCallAnalyticsJobResponse, AWSError>;
   /**
-   * Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using ModelName. Language model names are case sensitive.
+   * Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using ModelName. custom language model names are case sensitive.
    */
   deleteLanguageModel(params: TranscribeService.Types.DeleteLanguageModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using ModelName. Language model names are case sensitive.
+   * Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using ModelName. custom language model names are case sensitive.
    */
   deleteLanguageModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class TranscribeService extends Service {
    */
   deleteMedicalTranscriptionJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a custom medical vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName. Vocabulary names are case sensitive.
+   * Deletes a custom medical vocabulary. To use this operation, specify the name of the custom vocabulary you want to delete using VocabularyName. Custom vocabulary names are case sensitive.
    */
   deleteMedicalVocabulary(params: TranscribeService.Types.DeleteMedicalVocabularyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a custom medical vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName. Vocabulary names are case sensitive.
+   * Deletes a custom medical vocabulary. To use this operation, specify the name of the custom vocabulary you want to delete using VocabularyName. Custom vocabulary names are case sensitive.
    */
   deleteMedicalVocabulary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -100,27 +100,27 @@ declare class TranscribeService extends Service {
    */
   deleteTranscriptionJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a custom vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName. Vocabulary names are case sensitive.
+   * Deletes a custom vocabulary. To use this operation, specify the name of the custom vocabulary you want to delete using VocabularyName. Custom vocabulary names are case sensitive.
    */
   deleteVocabulary(params: TranscribeService.Types.DeleteVocabularyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a custom vocabulary. To use this operation, specify the name of the vocabulary you want to delete using VocabularyName. Vocabulary names are case sensitive.
+   * Deletes a custom vocabulary. To use this operation, specify the name of the custom vocabulary you want to delete using VocabularyName. Custom vocabulary names are case sensitive.
    */
   deleteVocabulary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a vocabulary filter. To use this operation, specify the name of the vocabulary filter you want to delete using VocabularyFilterName. Vocabulary filter names are case sensitive.
+   * Deletes a custom vocabulary filter. To use this operation, specify the name of the custom vocabulary filter you want to delete using VocabularyFilterName. Custom vocabulary filter names are case sensitive.
    */
   deleteVocabularyFilter(params: TranscribeService.Types.DeleteVocabularyFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a vocabulary filter. To use this operation, specify the name of the vocabulary filter you want to delete using VocabularyFilterName. Vocabulary filter names are case sensitive.
+   * Deletes a custom vocabulary filter. To use this operation, specify the name of the custom vocabulary filter you want to delete using VocabularyFilterName. Custom vocabulary filter names are case sensitive.
    */
   deleteVocabularyFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Provides information about the specified custom language model. This operation also shows if the base language model you used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If you tried to create a new custom language model and the request wasn't successful, you can use DescribeLanguageModel to help identify the reason for this failure. To get a list of your custom language models, use the operation.
+   * Provides information about the specified custom language model. This operation also shows if the base language model that you used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If you tried to create a new custom language model and the request wasn't successful, you can use DescribeLanguageModel to help identify the reason for this failure.
    */
   describeLanguageModel(params: TranscribeService.Types.DescribeLanguageModelRequest, callback?: (err: AWSError, data: TranscribeService.Types.DescribeLanguageModelResponse) => void): Request<TranscribeService.Types.DescribeLanguageModelResponse, AWSError>;
   /**
-   * Provides information about the specified custom language model. This operation also shows if the base language model you used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If you tried to create a new custom language model and the request wasn't successful, you can use DescribeLanguageModel to help identify the reason for this failure. To get a list of your custom language models, use the operation.
+   * Provides information about the specified custom language model. This operation also shows if the base language model that you used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If you tried to create a new custom language model and the request wasn't successful, you can use DescribeLanguageModel to help identify the reason for this failure.
    */
   describeLanguageModel(callback?: (err: AWSError, data: TranscribeService.Types.DescribeLanguageModelResponse) => void): Request<TranscribeService.Types.DescribeLanguageModelResponse, AWSError>;
   /**
@@ -140,43 +140,43 @@ declare class TranscribeService extends Service {
    */
   getCallAnalyticsJob(callback?: (err: AWSError, data: TranscribeService.Types.GetCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.GetCallAnalyticsJobResponse, AWSError>;
   /**
-   * Provides information about the specified medical transcription job. To view the status of the specified medical transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. To get a list of your medical transcription jobs, use the operation.
+   * Provides information about the specified medical transcription job. To view the status of the specified medical transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. To get a list of your medical transcription jobs, use the operation.
    */
   getMedicalTranscriptionJob(params: TranscribeService.Types.GetMedicalTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetMedicalTranscriptionJobResponse, AWSError>;
   /**
-   * Provides information about the specified medical transcription job. To view the status of the specified medical transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. To get a list of your medical transcription jobs, use the operation.
+   * Provides information about the specified medical transcription job. To view the status of the specified medical transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. To get a list of your medical transcription jobs, use the operation.
    */
   getMedicalTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.GetMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetMedicalTranscriptionJobResponse, AWSError>;
   /**
-   * Provides information about the specified custom medical vocabulary. To view the status of the specified medical vocabulary, check the VocabularyState field. If the status is READY, your vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary failed. To get a list of your custom medical vocabularies, use the operation.
+   * Provides information about the specified custom medical vocabulary. To view the status of the specified custom medical vocabulary, check the VocabularyState field. If the status is READY, your custom vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary failed. To get a list of your custom medical vocabularies, use the operation.
    */
   getMedicalVocabulary(params: TranscribeService.Types.GetMedicalVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetMedicalVocabularyResponse) => void): Request<TranscribeService.Types.GetMedicalVocabularyResponse, AWSError>;
   /**
-   * Provides information about the specified custom medical vocabulary. To view the status of the specified medical vocabulary, check the VocabularyState field. If the status is READY, your vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary failed. To get a list of your custom medical vocabularies, use the operation.
+   * Provides information about the specified custom medical vocabulary. To view the status of the specified custom medical vocabulary, check the VocabularyState field. If the status is READY, your custom vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary failed. To get a list of your custom medical vocabularies, use the operation.
    */
   getMedicalVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.GetMedicalVocabularyResponse) => void): Request<TranscribeService.Types.GetMedicalVocabularyResponse, AWSError>;
   /**
-   * Provides information about the specified transcription job. To view the status of the specified transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. If you enabled content redaction, the redacted transcript can be found at the location specified in RedactedTranscriptFileUri. To get a list of your transcription jobs, use the operation.
+   * Provides information about the specified transcription job. To view the status of the specified transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. If you enabled content redaction, the redacted transcript can be found at the location specified in RedactedTranscriptFileUri. To get a list of your transcription jobs, use the operation.
    */
   getTranscriptionJob(params: TranscribeService.Types.GetTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetTranscriptionJobResponse, AWSError>;
   /**
-   * Provides information about the specified transcription job. To view the status of the specified transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. If you enabled content redaction, the redacted transcript can be found at the location specified in RedactedTranscriptFileUri. To get a list of your transcription jobs, use the operation.
+   * Provides information about the specified transcription job. To view the status of the specified transcription job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished. You can find the results at the location specified in TranscriptFileUri. If the status is FAILED, FailureReason provides details on why your transcription job failed. If you enabled content redaction, the redacted transcript can be found at the location specified in RedactedTranscriptFileUri. To get a list of your transcription jobs, use the operation.
    */
   getTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.GetTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetTranscriptionJobResponse, AWSError>;
   /**
-   * Provides information about the specified custom vocabulary. To view the status of the specified vocabulary, check the VocabularyState field. If the status is READY, your vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary failed. To get a list of your custom vocabularies, use the operation.
+   * Provides information about the specified custom vocabulary. To view the status of the specified custom vocabulary, check the VocabularyState field. If the status is READY, your custom vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your custom vocabulary failed. To get a list of your custom vocabularies, use the operation.
    */
   getVocabulary(params: TranscribeService.Types.GetVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyResponse) => void): Request<TranscribeService.Types.GetVocabularyResponse, AWSError>;
   /**
-   * Provides information about the specified custom vocabulary. To view the status of the specified vocabulary, check the VocabularyState field. If the status is READY, your vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary failed. To get a list of your custom vocabularies, use the operation.
+   * Provides information about the specified custom vocabulary. To view the status of the specified custom vocabulary, check the VocabularyState field. If the status is READY, your custom vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your custom vocabulary failed. To get a list of your custom vocabularies, use the operation.
    */
   getVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyResponse) => void): Request<TranscribeService.Types.GetVocabularyResponse, AWSError>;
   /**
-   * Provides information about the specified custom vocabulary filter. To view the status of the specified vocabulary filter, check the VocabularyState field. If the status is READY, your vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary filter failed. To get a list of your custom vocabulary filters, use the operation.
+   * Provides information about the specified custom vocabulary filter. To get a list of your custom vocabulary filters, use the operation.
    */
   getVocabularyFilter(params: TranscribeService.Types.GetVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyFilterResponse) => void): Request<TranscribeService.Types.GetVocabularyFilterResponse, AWSError>;
   /**
-   * Provides information about the specified custom vocabulary filter. To view the status of the specified vocabulary filter, check the VocabularyState field. If the status is READY, your vocabulary is available to use. If the status is FAILED, FailureReason provides details on why your vocabulary filter failed. To get a list of your custom vocabulary filters, use the operation.
+   * Provides information about the specified custom vocabulary filter. To get a list of your custom vocabulary filters, use the operation.
    */
   getVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyFilterResponse) => void): Request<TranscribeService.Types.GetVocabularyFilterResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class TranscribeService extends Service {
    */
   listCallAnalyticsJobs(callback?: (err: AWSError, data: TranscribeService.Types.ListCallAnalyticsJobsResponse) => void): Request<TranscribeService.Types.ListCallAnalyticsJobsResponse, AWSError>;
   /**
-   * Provides a list of custom language models that match the specified criteria. If no criteria are specified, all language models are returned. To get detailed information about a specific custom language model, use the operation.
+   * Provides a list of custom language models that match the specified criteria. If no criteria are specified, all custom language models are returned. To get detailed information about a specific custom language model, use the operation.
    */
   listLanguageModels(params: TranscribeService.Types.ListLanguageModelsRequest, callback?: (err: AWSError, data: TranscribeService.Types.ListLanguageModelsResponse) => void): Request<TranscribeService.Types.ListLanguageModelsResponse, AWSError>;
   /**
-   * Provides a list of custom language models that match the specified criteria. If no criteria are specified, all language models are returned. To get detailed information about a specific custom language model, use the operation.
+   * Provides a list of custom language models that match the specified criteria. If no criteria are specified, all custom language models are returned. To get detailed information about a specific custom language model, use the operation.
    */
   listLanguageModels(callback?: (err: AWSError, data: TranscribeService.Types.ListLanguageModelsResponse) => void): Request<TranscribeService.Types.ListLanguageModelsResponse, AWSError>;
   /**
@@ -252,19 +252,19 @@ declare class TranscribeService extends Service {
    */
   listVocabularyFilters(callback?: (err: AWSError, data: TranscribeService.Types.ListVocabularyFiltersResponse) => void): Request<TranscribeService.Types.ListVocabularyFiltersResponse, AWSError>;
   /**
-   * Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request. In addition to many of the standard transcription features, Call Analytics provides you with call characteristics, call summarization, speaker sentiment, and optional redaction of your text transcript and your audio file. You can also apply custom categories to flag specified conditions. To learn more about these features and insights, refer to Analyzing call center audio with Call Analytics. If you want to apply categories to your Call Analytics job, you must create them before submitting your job request. Categories cannot be retroactively applied to a job. To create a new category, use the operation. To learn more about Call Analytics categories, see Creating categories. To make a StartCallAnalyticsJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the Amazon S3 location of the file using the Media parameter. You must include the following parameters in your StartCallAnalyticsJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    CallAnalyticsJobName: A custom name you create for your transcription job that is unique within your Amazon Web Services account.    DataAccessRoleArn: The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files.    Media (MediaFileUri or RedactedMediaFileUri): The Amazon S3 location of your media file.    With Call Analytics, you can redact the audio contained in your media file by including RedactedMediaFileUri, instead of MediaFileUri, to specify the location of your input audio. If you choose to redact your audio, you can find your redacted media at the location specified in the RedactedMediaFileUri field of your response. 
+   * Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request. In addition to many standard transcription features, Call Analytics provides you with call characteristics, call summarization, speaker sentiment, and optional redaction of your text transcript and your audio file. You can also apply custom categories to flag specified conditions. To learn more about these features and insights, refer to Analyzing call center audio with Call Analytics. If you want to apply categories to your Call Analytics job, you must create them before submitting your job request. Categories cannot be retroactively applied to a job. To create a new category, use the operation. To learn more about Call Analytics categories, see Creating categories for batch transcriptions and Creating categories for streaming transcriptions. To make a StartCallAnalyticsJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the Amazon S3 location of the file using the Media parameter. You must include the following parameters in your StartCallAnalyticsJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    CallAnalyticsJobName: A custom name that you create for your transcription job that's unique within your Amazon Web Services account.    DataAccessRoleArn: The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files.    Media (MediaFileUri or RedactedMediaFileUri): The Amazon S3 location of your media file.    With Call Analytics, you can redact the audio contained in your media file by including RedactedMediaFileUri, instead of MediaFileUri, to specify the location of your input audio. If you choose to redact your audio, you can find your redacted media at the location specified in the RedactedMediaFileUri field of your response. 
    */
   startCallAnalyticsJob(params: TranscribeService.Types.StartCallAnalyticsJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.StartCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.StartCallAnalyticsJobResponse, AWSError>;
   /**
-   * Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request. In addition to many of the standard transcription features, Call Analytics provides you with call characteristics, call summarization, speaker sentiment, and optional redaction of your text transcript and your audio file. You can also apply custom categories to flag specified conditions. To learn more about these features and insights, refer to Analyzing call center audio with Call Analytics. If you want to apply categories to your Call Analytics job, you must create them before submitting your job request. Categories cannot be retroactively applied to a job. To create a new category, use the operation. To learn more about Call Analytics categories, see Creating categories. To make a StartCallAnalyticsJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the Amazon S3 location of the file using the Media parameter. You must include the following parameters in your StartCallAnalyticsJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    CallAnalyticsJobName: A custom name you create for your transcription job that is unique within your Amazon Web Services account.    DataAccessRoleArn: The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files.    Media (MediaFileUri or RedactedMediaFileUri): The Amazon S3 location of your media file.    With Call Analytics, you can redact the audio contained in your media file by including RedactedMediaFileUri, instead of MediaFileUri, to specify the location of your input audio. If you choose to redact your audio, you can find your redacted media at the location specified in the RedactedMediaFileUri field of your response. 
+   * Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request. In addition to many standard transcription features, Call Analytics provides you with call characteristics, call summarization, speaker sentiment, and optional redaction of your text transcript and your audio file. You can also apply custom categories to flag specified conditions. To learn more about these features and insights, refer to Analyzing call center audio with Call Analytics. If you want to apply categories to your Call Analytics job, you must create them before submitting your job request. Categories cannot be retroactively applied to a job. To create a new category, use the operation. To learn more about Call Analytics categories, see Creating categories for batch transcriptions and Creating categories for streaming transcriptions. To make a StartCallAnalyticsJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the Amazon S3 location of the file using the Media parameter. You must include the following parameters in your StartCallAnalyticsJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    CallAnalyticsJobName: A custom name that you create for your transcription job that's unique within your Amazon Web Services account.    DataAccessRoleArn: The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files.    Media (MediaFileUri or RedactedMediaFileUri): The Amazon S3 location of your media file.    With Call Analytics, you can redact the audio contained in your media file by including RedactedMediaFileUri, instead of MediaFileUri, to specify the location of your input audio. If you choose to redact your audio, you can find your redacted media at the location specified in the RedactedMediaFileUri field of your response. 
    */
   startCallAnalyticsJob(callback?: (err: AWSError, data: TranscribeService.Types.StartCallAnalyticsJobResponse) => void): Request<TranscribeService.Types.StartCallAnalyticsJobResponse, AWSError>;
   /**
-   * Transcribes the audio from a medical dictation or conversation and applies any additional Request Parameters you choose to include in your request. In addition to many of the standard transcription features, Amazon Transcribe Medical provides you with a robust medical vocabulary and, optionally, content identification, which adds flags to personal health information (PHI). To learn more about these features, refer to How Amazon Transcribe Medical works. To make a StartMedicalTranscriptionJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the S3 location of the file using the Media parameter. You must include the following parameters in your StartMedicalTranscriptionJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    MedicalTranscriptionJobName: A custom name you create for your transcription job that is unique within your Amazon Web Services account.    Media (MediaFileUri): The Amazon S3 location of your media file.    LanguageCode: This must be en-US.    OutputBucketName: The Amazon S3 bucket where you want your transcript stored. If you want your output stored in a sub-folder of this bucket, you must also include OutputKey.    Specialty: This must be PRIMARYCARE.    Type: Choose whether your audio is a conversation or a dictation.  
+   * Transcribes the audio from a medical dictation or conversation and applies any additional Request Parameters you choose to include in your request. In addition to many standard transcription features, Amazon Transcribe Medical provides you with a robust medical vocabulary and, optionally, content identification, which adds flags to personal health information (PHI). To learn more about these features, refer to How Amazon Transcribe Medical works. To make a StartMedicalTranscriptionJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the S3 location of the file using the Media parameter. You must include the following parameters in your StartMedicalTranscriptionJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    MedicalTranscriptionJobName: A custom name you create for your transcription job that is unique within your Amazon Web Services account.    Media (MediaFileUri): The Amazon S3 location of your media file.    LanguageCode: This must be en-US.    OutputBucketName: The Amazon S3 bucket where you want your transcript stored. If you want your output stored in a sub-folder of this bucket, you must also include OutputKey.    Specialty: This must be PRIMARYCARE.    Type: Choose whether your audio is a conversation or a dictation.  
    */
   startMedicalTranscriptionJob(params: TranscribeService.Types.StartMedicalTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.StartMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartMedicalTranscriptionJobResponse, AWSError>;
   /**
-   * Transcribes the audio from a medical dictation or conversation and applies any additional Request Parameters you choose to include in your request. In addition to many of the standard transcription features, Amazon Transcribe Medical provides you with a robust medical vocabulary and, optionally, content identification, which adds flags to personal health information (PHI). To learn more about these features, refer to How Amazon Transcribe Medical works. To make a StartMedicalTranscriptionJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the S3 location of the file using the Media parameter. You must include the following parameters in your StartMedicalTranscriptionJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    MedicalTranscriptionJobName: A custom name you create for your transcription job that is unique within your Amazon Web Services account.    Media (MediaFileUri): The Amazon S3 location of your media file.    LanguageCode: This must be en-US.    OutputBucketName: The Amazon S3 bucket where you want your transcript stored. If you want your output stored in a sub-folder of this bucket, you must also include OutputKey.    Specialty: This must be PRIMARYCARE.    Type: Choose whether your audio is a conversation or a dictation.  
+   * Transcribes the audio from a medical dictation or conversation and applies any additional Request Parameters you choose to include in your request. In addition to many standard transcription features, Amazon Transcribe Medical provides you with a robust medical vocabulary and, optionally, content identification, which adds flags to personal health information (PHI). To learn more about these features, refer to How Amazon Transcribe Medical works. To make a StartMedicalTranscriptionJob request, you must first upload your media file into an Amazon S3 bucket; you can then specify the S3 location of the file using the Media parameter. You must include the following parameters in your StartMedicalTranscriptionJob request:    region: The Amazon Web Services Region where you are making your request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas.    MedicalTranscriptionJobName: A custom name you create for your transcription job that is unique within your Amazon Web Services account.    Media (MediaFileUri): The Amazon S3 location of your media file.    LanguageCode: This must be en-US.    OutputBucketName: The Amazon S3 bucket where you want your transcript stored. If you want your output stored in a sub-folder of this bucket, you must also include OutputKey.    Specialty: This must be PRIMARYCARE.    Type: Choose whether your audio is a conversation or a dictation.  
    */
   startMedicalTranscriptionJob(callback?: (err: AWSError, data: TranscribeService.Types.StartMedicalTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartMedicalTranscriptionJobResponse, AWSError>;
   /**
@@ -300,27 +300,27 @@ declare class TranscribeService extends Service {
    */
   updateCallAnalyticsCategory(callback?: (err: AWSError, data: TranscribeService.Types.UpdateCallAnalyticsCategoryResponse) => void): Request<TranscribeService.Types.UpdateCallAnalyticsCategoryResponse, AWSError>;
   /**
-   * Updates an existing custom medical vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing vocabulary.
+   * Updates an existing custom medical vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing custom vocabulary.
    */
   updateMedicalVocabulary(params: TranscribeService.Types.UpdateMedicalVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.UpdateMedicalVocabularyResponse, AWSError>;
   /**
-   * Updates an existing custom medical vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing vocabulary.
+   * Updates an existing custom medical vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing custom vocabulary.
    */
   updateMedicalVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.UpdateMedicalVocabularyResponse) => void): Request<TranscribeService.Types.UpdateMedicalVocabularyResponse, AWSError>;
   /**
-   * Updates an existing custom vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing vocabulary.
+   * Updates an existing custom vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing custom vocabulary.
    */
   updateVocabulary(params: TranscribeService.Types.UpdateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
   /**
-   * Updates an existing custom vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing vocabulary.
+   * Updates an existing custom vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing custom vocabulary.
    */
   updateVocabulary(callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
   /**
-   * Updates an existing custom vocabulary filter with a new list of words. The new list you provide overwrites all previous entries; you cannot append new terms onto an existing vocabulary filter.
+   * Updates an existing custom vocabulary filter with a new list of words. The new list you provide overwrites all previous entries; you cannot append new terms onto an existing custom vocabulary filter.
    */
   updateVocabularyFilter(params: TranscribeService.Types.UpdateVocabularyFilterRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyFilterResponse) => void): Request<TranscribeService.Types.UpdateVocabularyFilterResponse, AWSError>;
   /**
-   * Updates an existing custom vocabulary filter with a new list of words. The new list you provide overwrites all previous entries; you cannot append new terms onto an existing vocabulary filter.
+   * Updates an existing custom vocabulary filter with a new list of words. The new list you provide overwrites all previous entries; you cannot append new terms onto an existing custom vocabulary filter.
    */
   updateVocabularyFilter(callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyFilterResponse) => void): Request<TranscribeService.Types.UpdateVocabularyFilterResponse, AWSError>;
 }
@@ -335,11 +335,11 @@ declare namespace TranscribeService {
      */
     EndTime?: TimestampMilliseconds;
     /**
-     * The time, in milliseconds, from the start of your media file until the value you specify in which Amazon Transcribe searches for your specified criteria.
+     * The time, in milliseconds, from the start of your media file until the specified value. Amazon Transcribe searches for your specified criteria in this time segment.
      */
     First?: TimestampMilliseconds;
     /**
-     * The time, in milliseconds, from the value you specify until the end of your media file in which Amazon Transcribe searches for your specified criteria.
+     * The time, in milliseconds, from the specified value until the end of your media file. Amazon Transcribe searches for your specified criteria in this time segment.
      */
     Last?: TimestampMilliseconds;
   }
@@ -360,13 +360,16 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in your input media file.
+     * The sample rate, in hertz, of the audio track in your input media file.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
      * The format of the input media file.
      */
     MediaFormat?: MediaFormat;
+    /**
+     * Provides the Amazon S3 location of the media file you used in your Call Analytics request.
+     */
     Media?: Media;
     Transcript?: Transcript;
     /**
@@ -382,11 +385,11 @@ declare namespace TranscribeService {
      */
     CompletionTime?: DateTime;
     /**
-     * If CallAnalyticsJobStatus is FAILED, FailureReason contains information about why the Call Analytics job request failed. The FailureReason field contains one of the following values:    Unsupported media format. The media format specified in MediaFormat isn't valid. Refer to MediaFormat for a list of supported formats.    The media format provided does not match the detected media format. The media format specified in MediaFormat doesn't match the format of the input file. Check the media format of your media file and correct the specified value.    Invalid sample rate for audio file. The sample rate specified in MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and 48,000 Hertz.    The sample rate provided does not match the detected sample rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample rate detected in your input media file. Check the sample rate of your media file and correct the specified value.    Invalid file size: file size too large. The size of your media file is larger than what Amazon Transcribe can process. For more information, refer to Guidelines and quotas.    Invalid number of channels: number of channels too large. Your audio contains more channels than Amazon Transcribe is able to process. For more information, refer to Guidelines and quotas.  
+     * If CallAnalyticsJobStatus is FAILED, FailureReason contains information about why the Call Analytics job request failed. The FailureReason field contains one of the following values:    Unsupported media format. The media format specified in MediaFormat isn't valid. Refer to MediaFormat for a list of supported formats.    The media format provided does not match the detected media format. The media format specified in MediaFormat doesn't match the format of the input file. Check the media format of your media file and correct the specified value.    Invalid sample rate for audio file. The sample rate specified in MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and 48,000 hertz.    The sample rate provided does not match the detected sample rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample rate detected in your input media file. Check the sample rate of your media file and correct the specified value.    Invalid file size: file size too large. The size of your media file is larger than what Amazon Transcribe can process. For more information, refer to Guidelines and quotas.    Invalid number of channels: number of channels too large. Your audio contains more channels than Amazon Transcribe is able to process. For more information, refer to Guidelines and quotas.  
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs.
+     * The Amazon Resource Name (ARN) you included in your request.
      */
     DataAccessRoleArn?: DataAccessRoleArn;
     /**
@@ -394,39 +397,39 @@ declare namespace TranscribeService {
      */
     IdentifiedLanguageScore?: IdentifiedLanguageScore;
     /**
-     * Allows additional optional settings in your request, including content redaction; allows you to apply custom language models, vocabulary filters, and custom vocabularies to your Call Analytics job.
+     * Provides information on any additional settings that were included in your request. Additional settings include content redaction and language identification settings.
      */
     Settings?: CallAnalyticsJobSettings;
     /**
-     * Allows you to specify which speaker is on which channel in your Call Analytics job request. For example, if your agent is the first participant to speak, you would set ChannelId to 0 (to indicate the first channel) and ParticipantRole to AGENT (to indicate that it's the agent speaking).
+     * Indicates which speaker is on which channel.
      */
     ChannelDefinitions?: ChannelDefinitions;
   }
   export type CallAnalyticsJobName = string;
   export interface CallAnalyticsJobSettings {
     /**
-     * The name of the custom vocabulary you want to include in your Call Analytics transcription request. Vocabulary names are case sensitive.
+     * The name of the custom vocabulary you want to include in your Call Analytics transcription request. Custom vocabulary names are case sensitive.
      */
     VocabularyName?: VocabularyName;
     /**
-     * The name of the custom vocabulary filter you want to include in your Call Analytics transcription request. Vocabulary filter names are case sensitive. Note that if you include VocabularyFilterName in your request, you must also include VocabularyFilterMethod.
+     * The name of the custom vocabulary filter you want to include in your Call Analytics transcription request. Custom vocabulary filter names are case sensitive. Note that if you include VocabularyFilterName in your request, you must also include VocabularyFilterMethod.
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * Specify how you want your vocabulary filter applied to your transcript. To replace words with ***, choose mask. To delete words, choose remove. To flag words without changing them, choose tag.
+     * Specify how you want your custom vocabulary filter applied to your transcript. To replace words with ***, choose mask. To delete words, choose remove. To flag words without changing them, choose tag.
      */
     VocabularyFilterMethod?: VocabularyFilterMethod;
     /**
-     * The name of the custom language model you want to use when processing your Call Analytics job. Note that language model names are case sensitive. The language of the specified language model must match the language code you specify in your transcription request. If the languages don't match, the language model isn't applied. There are no errors or warnings associated with a language mismatch.
+     * The name of the custom language model you want to use when processing your Call Analytics job. Note that custom language model names are case sensitive. The language of the specified custom language model must match the language code that you specify in your transcription request. If the languages don't match, the custom language model isn't applied. There are no errors or warnings associated with a language mismatch.
      */
     LanguageModelName?: ModelName;
     ContentRedaction?: ContentRedaction;
     /**
-     * You can specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. If you're unsure what languages are present, do not include this parameter. Including language options can improve the accuracy of language identification. For a list of languages supported with Call Analytics, refer to the Supported languages table.
+     * You can specify two or more language codes that represent the languages you think may be present in your media. Including more than five is not recommended. If you're unsure what languages are present, do not include this parameter. Including language options can improve the accuracy of language identification. For a list of languages supported with Call Analytics, refer to the Supported languages table. To transcribe speech in Modern Standard Arabic (ar-SA), your media file must be encoded at a sample rate of 16,000 Hz or higher.
      */
     LanguageOptions?: LanguageOptions;
     /**
-     * If using automatic language identification (IdentifyLanguage) in your request and you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. Each language code you include can have an associated custom language model, custom vocabulary, and custom vocabulary filter. The languages you specify must match the languages of the specified custom language models, custom vocabularies, and custom vocabulary filters. To include language options using IdentifyLanguage without including a custom language model, a custom vocabulary, or a custom vocabulary filter, use LanguageOptions instead of LanguageIdSettings. Including language options can improve the accuracy of automatic language identification. If you want to include a custom language model with your request but do not want to use automatic language identification, use instead the  parameter with the LanguageModelName sub-parameter. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use instead the  parameter with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
+     * If using automatic language identification in your request and you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName).  LanguageIdSettings supports two to five language codes. Each language code you include can have an associated custom language model, custom vocabulary, and custom vocabulary filter. The language codes that you specify must match the languages of the associated custom language models, custom vocabularies, and custom vocabulary filters. It's recommended that you include LanguageOptions when using LanguageIdSettings to ensure that the correct language dialect is identified. For example, if you specify a custom vocabulary that is in en-US but Amazon Transcribe determines that the language spoken in your media is en-AU, your custom vocabulary is not applied to your transcription. If you include LanguageOptions and include en-US as the only English language dialect, your custom vocabulary is applied to your transcription. If you want to include a custom language model, custom vocabulary, or custom vocabulary filter with your request but do not want to use automatic language identification, use instead the  parameter with the LanguageModelName, VocabularyName, or VocabularyFilterName sub-parameters. For a list of languages supported with Call Analytics, refer to Supported languages and language-specific features.
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
   }
@@ -480,6 +483,10 @@ declare namespace TranscribeService {
      * The date and time the specified Call Analytics category was last updated. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-05T12:45:32.691000-07:00 represents 12:45 PM UTC-7 on May 5, 2022.
      */
     LastUpdateTime?: DateTime;
+    /**
+     * The input type associated with the specified category. POST_CALL refers to a category that is applied to batch transcriptions; REAL_TIME refers to a category that is applied to streaming transcriptions.
+     */
+    InputType?: InputType;
   }
   export type CategoryPropertiesList = CategoryProperties[];
   export interface ChannelDefinition {
@@ -514,9 +521,13 @@ declare namespace TranscribeService {
      */
     CategoryName: CategoryName;
     /**
-     * Rules define a Call Analytics category. When creating a new Call Analytics category, you must create between 1 and 20 rules for that category. For each rule, you specify a filter you want applied to the attributes of a call. For example, you can choose a sentiment filter that detects if a customer's sentiment was positive during the last 30 seconds of the call.
+     * Rules define a Call Analytics category. When creating a new category, you must create between 1 and 20 rules for that category. For each rule, you specify a filter you want applied to the attributes of a call. For example, you can choose a sentiment filter that detects if a customer's sentiment was positive during the last 30 seconds of the call.
      */
     Rules: RuleList;
+    /**
+     * Choose whether you want to create a streaming or a batch category for your Call Analytics transcription. Specifying POST_CALL assigns your category to batch transcriptions; categories with this input type cannot be applied to streaming (real-time) transcriptions. Specifying REAL_TIME assigns your category to streaming transcriptions; categories with this input type cannot be applied to batch (post-call) transcriptions. If you do not include InputType, your category is created as a batch category by default.
+     */
+    InputType?: InputType;
   }
   export interface CreateCallAnalyticsCategoryResponse {
     /**
@@ -526,7 +537,7 @@ declare namespace TranscribeService {
   }
   export interface CreateLanguageModelRequest {
     /**
-     * The language code that represents the language of your model. Each language model must contain terms in only one language, and the language you select for your model must match the language of your training and tuning data. For a list of supported languages and their associated language codes, refer to the Supported languages table. Note that U.S. English (en-US) is the only language supported with Amazon Transcribe Medical. A custom language model can only be used to transcribe files in the same language as the model. For example, if you create a language model using US English (en-US), you can only apply this model to files that contain English audio.
+     * The language code that represents the language of your model. Each custom language model must contain terms in only one language, and the language you select for your custom language model must match the language of your training and tuning data. For a list of supported languages and their associated language codes, refer to the Supported languages table. Note that US English (en-US) is the only language supported with Amazon Transcribe Medical. A custom language model can only be used to transcribe files in the same language as the model. For example, if you create a custom language model using US English (en-US), you can only apply this model to files that contain English audio.
      */
     LanguageCode: CLMLanguageCode;
     /**
@@ -534,7 +545,7 @@ declare namespace TranscribeService {
      */
     BaseModelName: BaseModelName;
     /**
-     * A unique name, chosen by you, for your custom language model. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new language model with the same name as an existing language model, you get a ConflictException error.
+     * A unique name, chosen by you, for your custom language model. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new custom language model with the same name as an existing custom language model, you get a ConflictException error.
      */
     ModelName: ModelName;
     /**
@@ -570,7 +581,7 @@ declare namespace TranscribeService {
   }
   export interface CreateMedicalVocabularyRequest {
     /**
-     * A unique name, chosen by you, for your new custom medical vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new medical vocabulary with the same name as an existing medical vocabulary, you get a ConflictException error.
+     * A unique name, chosen by you, for your new custom medical vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new custom medical vocabulary with the same name as an existing custom medical vocabulary, you get a ConflictException error.
      */
     VocabularyName: VocabularyName;
     /**
@@ -582,7 +593,7 @@ declare namespace TranscribeService {
      */
     VocabularyFileUri: Uri;
     /**
-     * Adds one or more custom tags, each in the form of a key:value pair, to a new medical vocabulary at the time you create this new vocabulary. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
+     * Adds one or more custom tags, each in the form of a key:value pair, to a new custom medical vocabulary at the time you create this new custom vocabulary. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
      */
     Tags?: TagList;
   }
@@ -592,11 +603,11 @@ declare namespace TranscribeService {
      */
     VocabularyName?: VocabularyName;
     /**
-     * The language code you selected for your medical vocabulary. US English (en-US) is the only language supported with Amazon Transcribe Medical.
+     * The language code you selected for your custom medical vocabulary. US English (en-US) is the only language supported with Amazon Transcribe Medical.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The processing state of your custom medical vocabulary. If the state is READY, you can use the vocabulary in a StartMedicalTranscriptionJob request.
+     * The processing state of your custom medical vocabulary. If the state is READY, you can use the custom vocabulary in a StartMedicalTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
     /**
@@ -610,15 +621,15 @@ declare namespace TranscribeService {
   }
   export interface CreateVocabularyFilterRequest {
     /**
-     * A unique name, chosen by you, for your new custom vocabulary filter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new vocabulary filter with the same name as an existing vocabulary filter, you get a ConflictException error.
+     * A unique name, chosen by you, for your new custom vocabulary filter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new custom vocabulary filter with the same name as an existing custom vocabulary filter, you get a ConflictException error.
      */
     VocabularyFilterName: VocabularyFilterName;
     /**
-     * The language code that represents the language of the entries in your vocabulary filter. Each vocabulary filter must contain terms in only one language. A vocabulary filter can only be used to transcribe files in the same language as the filter. For example, if you create a vocabulary filter using US English (en-US), you can only apply this filter to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
+     * The language code that represents the language of the entries in your vocabulary filter. Each custom vocabulary filter must contain terms in only one language. A custom vocabulary filter can only be used to transcribe files in the same language as the filter. For example, if you create a custom vocabulary filter using US English (en-US), you can only apply this filter to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
      */
     LanguageCode: LanguageCode;
     /**
-     * Use this parameter if you want to create your vocabulary filter by including all desired terms, as comma-separated values, within your request. The other option for creating your vocabulary filter is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFilterFileUri parameter. Note that if you include Words in your request, you cannot use VocabularyFilterFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
+     * Use this parameter if you want to create your custom vocabulary filter by including all desired terms, as comma-separated values, within your request. The other option for creating your vocabulary filter is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFilterFileUri parameter. Note that if you include Words in your request, you cannot use VocabularyFilterFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
      */
     Words?: Words;
     /**
@@ -626,7 +637,7 @@ declare namespace TranscribeService {
      */
     VocabularyFilterFileUri?: Uri;
     /**
-     * Adds one or more custom tags, each in the form of a key:value pair, to a new custom vocabulary filter at the time you create this new filter. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
+     * Adds one or more custom tags, each in the form of a key:value pair, to a new custom vocabulary filter at the time you create this new vocabulary filter. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
      */
     Tags?: TagList;
   }
@@ -636,25 +647,25 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The language code you selected for your vocabulary filter.
+     * The language code you selected for your custom vocabulary filter.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time you created your vocabulary filter. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time you created your custom vocabulary filter. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
   }
   export interface CreateVocabularyRequest {
     /**
-     * A unique name, chosen by you, for your new custom vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new vocabulary with the same name as an existing vocabulary, you get a ConflictException error.
+     * A unique name, chosen by you, for your new custom vocabulary. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new custom vocabulary with the same name as an existing custom vocabulary, you get a ConflictException error.
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code that represents the language of the entries in your custom vocabulary. Each vocabulary must contain terms in only one language. A custom vocabulary can only be used to transcribe files in the same language as the vocabulary. For example, if you create a vocabulary using US English (en-US), you can only apply this vocabulary to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
+     * The language code that represents the language of the entries in your custom vocabulary. Each custom vocabulary must contain terms in only one language. A custom vocabulary can only be used to transcribe files in the same language as the custom vocabulary. For example, if you create a custom vocabulary using US English (en-US), you can only apply this custom vocabulary to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
      */
     LanguageCode: LanguageCode;
     /**
-     * Use this parameter if you want to create your vocabulary by including all desired terms, as comma-separated values, within your request. The other option for creating your vocabulary is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFileUri parameter. Note that if you include Phrases in your request, you cannot use VocabularyFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
+     * Use this parameter if you want to create your custom vocabulary by including all desired terms, as comma-separated values, within your request. The other option for creating your custom vocabulary is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFileUri parameter. Note that if you include Phrases in your request, you cannot use VocabularyFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
      */
     Phrases?: Phrases;
     /**
@@ -662,7 +673,7 @@ declare namespace TranscribeService {
      */
     VocabularyFileUri?: Uri;
     /**
-     * Adds one or more custom tags, each in the form of a key:value pair, to a new custom vocabulary at the time you create this new vocabulary. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
+     * Adds one or more custom tags, each in the form of a key:value pair, to a new custom vocabulary at the time you create this new custom vocabulary. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
      */
     Tags?: TagList;
   }
@@ -676,7 +687,7 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The processing state of your custom vocabulary. If the state is READY, you can use the vocabulary in a StartTranscriptionJob request.
+     * The processing state of your custom vocabulary. If the state is READY, you can use the custom vocabulary in a StartTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
     /**
@@ -684,7 +695,7 @@ declare namespace TranscribeService {
      */
     LastModifiedTime?: DateTime;
     /**
-     * If VocabularyState is FAILED, FailureReason contains information about why the vocabulary request failed. See also: Common Errors.
+     * If VocabularyState is FAILED, FailureReason contains information about why the custom vocabulary request failed. See also: Common Errors.
      */
     FailureReason?: FailureReason;
   }
@@ -720,7 +731,7 @@ declare namespace TranscribeService {
   }
   export interface DeleteMedicalVocabularyRequest {
     /**
-     * The name of the custom medical vocabulary you want to delete. Vocabulary names are case sensitive.
+     * The name of the custom medical vocabulary you want to delete. Custom medical vocabulary names are case sensitive.
      */
     VocabularyName: VocabularyName;
   }
@@ -732,13 +743,13 @@ declare namespace TranscribeService {
   }
   export interface DeleteVocabularyFilterRequest {
     /**
-     * The name of the custom vocabulary filter you want to delete. Vocabulary filter names are case sensitive.
+     * The name of the custom vocabulary filter you want to delete. Custom vocabulary filter names are case sensitive.
      */
     VocabularyFilterName: VocabularyFilterName;
   }
   export interface DeleteVocabularyRequest {
     /**
-     * The name of the custom vocabulary you want to delete. Vocabulary names are case sensitive.
+     * The name of the custom vocabulary you want to delete. Custom vocabulary names are case sensitive.
      */
     VocabularyName: VocabularyName;
   }
@@ -794,7 +805,7 @@ declare namespace TranscribeService {
   }
   export interface GetMedicalVocabularyRequest {
     /**
-     * The name of the custom medical vocabulary you want information about. Vocabulary names are case sensitive.
+     * The name of the custom medical vocabulary you want information about. Custom medical vocabulary names are case sensitive.
      */
     VocabularyName: VocabularyName;
   }
@@ -804,11 +815,11 @@ declare namespace TranscribeService {
      */
     VocabularyName?: VocabularyName;
     /**
-     * The language code you selected for your medical vocabulary. US English (en-US) is the only language supported with Amazon Transcribe Medical.
+     * The language code you selected for your custom medical vocabulary. US English (en-US) is the only language supported with Amazon Transcribe Medical.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The processing state of your custom medical vocabulary. If the state is READY, you can use the vocabulary in a StartMedicalTranscriptionJob request.
+     * The processing state of your custom medical vocabulary. If the state is READY, you can use the custom vocabulary in a StartMedicalTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
     /**
@@ -816,11 +827,11 @@ declare namespace TranscribeService {
      */
     LastModifiedTime?: DateTime;
     /**
-     * If VocabularyState is FAILED, FailureReason contains information about why the medical vocabulary request failed. See also: Common Errors.
+     * If VocabularyState is FAILED, FailureReason contains information about why the custom medical vocabulary request failed. See also: Common Errors.
      */
     FailureReason?: FailureReason;
     /**
-     * The S3 location where the specified medical vocabulary is stored; use this URI to view or download the vocabulary.
+     * The S3 location where the specified custom medical vocabulary is stored; use this URI to view or download the custom vocabulary.
      */
     DownloadUri?: Uri;
   }
@@ -838,7 +849,7 @@ declare namespace TranscribeService {
   }
   export interface GetVocabularyFilterRequest {
     /**
-     * The name of the custom vocabulary filter you want information about. Vocabulary filter names are case sensitive.
+     * The name of the custom vocabulary filter you want information about. Custom vocabulary filter names are case sensitive.
      */
     VocabularyFilterName: VocabularyFilterName;
   }
@@ -848,21 +859,21 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The language code you selected for your vocabulary filter.
+     * The language code you selected for your custom vocabulary filter.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time the specified vocabulary filter was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom vocabulary filter was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
     /**
-     * The Amazon S3 location where the vocabulary filter is stored; use this URI to view or download the vocabulary filter.
+     * The Amazon S3 location where the custom vocabulary filter is stored; use this URI to view or download the custom vocabulary filter.
      */
     DownloadUri?: Uri;
   }
   export interface GetVocabularyRequest {
     /**
-     * The name of the custom vocabulary you want information about. Vocabulary names are case sensitive.
+     * The name of the custom vocabulary you want information about. Custom vocabulary names are case sensitive.
      */
     VocabularyName: VocabularyName;
   }
@@ -876,19 +887,19 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The processing state of your custom vocabulary. If the state is READY, you can use the vocabulary in a StartTranscriptionJob request.
+     * The processing state of your custom vocabulary. If the state is READY, you can use the custom vocabulary in a StartTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
     /**
-     * The date and time the specified vocabulary was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom vocabulary was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
     /**
-     * If VocabularyState is FAILED, FailureReason contains information about why the vocabulary request failed. See also: Common Errors.
+     * If VocabularyState is FAILED, FailureReason contains information about why the custom vocabulary request failed. See also: Common Errors.
      */
     FailureReason?: FailureReason;
     /**
-     * The S3 location where the vocabulary is stored; use this URI to view or download the vocabulary.
+     * The S3 location where the custom vocabulary is stored; use this URI to view or download the custom vocabulary.
      */
     DownloadUri?: Uri;
   }
@@ -903,25 +914,26 @@ declare namespace TranscribeService {
      */
     TuningDataS3Uri?: Uri;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs.
+     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role that you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs.
      */
     DataAccessRoleArn: DataAccessRoleArn;
   }
+  export type InputType = "REAL_TIME"|"POST_CALL"|string;
   export interface InterruptionFilter {
     /**
-     * Specify the duration of the interruptions in milliseconds. For example, you can flag speech that contains more than 10000 milliseconds of interruptions.
+     * Specify the duration of the interruptions in milliseconds. For example, you can flag speech that contains more than 10,000 milliseconds of interruptions.
      */
     Threshold?: TimestampMilliseconds;
     /**
-     * Specify the interrupter you want to flag. Omitting this parameter is equivalent to specifying both participants.
+     * Specify the interrupter that you want to flag. Omitting this parameter is equivalent to specifying both participants.
      */
     ParticipantRole?: ParticipantRole;
     /**
-     * Allows you to specify a time range (in milliseconds) in your audio, during which you want to search for an interruption. See for more detail.
+     * Makes it possible to specify a time range (in milliseconds) in your audio, during which you want to search for an interruption. See for more detail.
      */
     AbsoluteTimeRange?: AbsoluteTimeRange;
     /**
-     * Allows you to specify a time range (in percentage) in your media file, during which you want to search for an interruption. See for more detail.
+     * Makes it possible to specify a time range (in percentage) in your media file, during which you want to search for an interruption. See for more detail.
      */
     RelativeTimeRange?: RelativeTimeRange;
     /**
@@ -931,11 +943,11 @@ declare namespace TranscribeService {
   }
   export interface JobExecutionSettings {
     /**
-     * Allows you to enable job queuing when your concurrent request limit is exceeded. When AllowDeferredExecution is set to true, transcription job requests are placed in a queue until the number of jobs falls below the concurrent request limit. If AllowDeferredExecution is set to false and the number of transcription job requests exceed the concurrent request limit, you get a LimitExceededException error. Note that job queuing is enabled by default for Call Analytics jobs. If you include AllowDeferredExecution in your request, you must also include DataAccessRoleArn.
+     * Makes it possible to enable job queuing when your concurrent request limit is exceeded. When AllowDeferredExecution is set to true, transcription job requests are placed in a queue until the number of jobs falls below the concurrent request limit. If AllowDeferredExecution is set to false and the number of transcription job requests exceed the concurrent request limit, you get a LimitExceededException error. Note that job queuing is enabled by default for Call Analytics jobs. If you include AllowDeferredExecution in your request, you must also include DataAccessRoleArn.
      */
     AllowDeferredExecution?: Boolean;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs. Note that if you include DataAccessRoleArn in your request, you must also include AllowDeferredExecution.
+     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role that you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs. Note that if you include DataAccessRoleArn in your request, you must also include AllowDeferredExecution.
      */
     DataAccessRoleArn?: DataAccessRoleArn;
   }
@@ -955,15 +967,15 @@ declare namespace TranscribeService {
   export type LanguageCodeList = LanguageCodeItem[];
   export interface LanguageIdSettings {
     /**
-     * The name of the custom vocabulary you want to use when processing your transcription job. Vocabulary names are case sensitive. The language of the specified vocabulary must match the language code you specify in your transcription request. If the languages don't match, the vocabulary isn't applied. There are no errors or warnings associated with a language mismatch.
+     * The name of the custom vocabulary you want to use when processing your transcription job. Custom vocabulary names are case sensitive. The language of the specified custom vocabulary must match the language code that you specify in your transcription request. If the languages don't match, the custom vocabulary isn't applied. There are no errors or warnings associated with a language mismatch.
      */
     VocabularyName?: VocabularyName;
     /**
-     * The name of the custom vocabulary filter you want to use when processing your transcription job. Vocabulary filter names are case sensitive. The language of the specified vocabulary filter must match the language code you specify in your transcription request. If the languages don't match, the vocabulary filter isn't applied. There are no errors or warnings associated with a language mismatch. Note that if you include VocabularyFilterName in your request, you must also include VocabularyFilterMethod.
+     * The name of the custom vocabulary filter you want to use when processing your transcription job. Custom vocabulary filter names are case sensitive. The language of the specified custom vocabulary filter must match the language code that you specify in your transcription request. If the languages don't match, the custom vocabulary filter isn't applied. There are no errors or warnings associated with a language mismatch. Note that if you include VocabularyFilterName in your request, you must also include VocabularyFilterMethod.
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The name of the custom language model you want to use when processing your transcription job. Note that language model names are case sensitive. The language of the specified language model must match the language code you specify in your transcription request. If the languages don't match, the language model isn't applied. There are no errors or warnings associated with a language mismatch.
+     * The name of the custom language model you want to use when processing your transcription job. Note that custom language model names are case sensitive. The language of the specified custom language model must match the language code that you specify in your transcription request. If the languages don't match, the custom language model isn't applied. There are no errors or warnings associated with a language mismatch.
      */
     LanguageModelName?: ModelName;
   }
@@ -978,11 +990,11 @@ declare namespace TranscribeService {
      */
     CreateTime?: DateTime;
     /**
-     * The date and time the specified language model was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom language model was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
     /**
-     * The language code used to create your custom language model. Each language model must contain terms in only one language, and the language you select for your model must match the language of your training and tuning data. For a list of supported languages and their associated language codes, refer to the Supported languages table. Note that U.S. English (en-US) is the only language supported with Amazon Transcribe Medical.
+     * The language code used to create your custom language model. Each custom language model must contain terms in only one language, and the language you select for your custom language model must match the language of your training and tuning data. For a list of supported languages and their associated language codes, refer to the Supported languages table. Note that U.S. English (en-US) is the only language supported with Amazon Transcribe Medical.
      */
     LanguageCode?: CLMLanguageCode;
     /**
@@ -994,7 +1006,7 @@ declare namespace TranscribeService {
      */
     ModelStatus?: ModelStatus;
     /**
-     * Shows if a more current base model is available for use with the specified custom language model. If false, your language model is using the most up-to-date base model. If true, there is a newer base model available than the one your language model is using. Note that to update a base model, you must recreate the custom language model using the new base model. Base model upgrades for existing custom language models are not supported.
+     * Shows if a more current base model is available for use with the specified custom language model. If false, your custom language model is using the most up-to-date base model. If true, there is a newer base model available than the one your language model is using. Note that to update a base model, you must recreate the custom language model using the new base model. Base model upgrades for existing custom language models are not supported.
      */
     UpgradeAvailability?: Boolean;
     /**
@@ -1013,7 +1025,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of Call Analytics categories to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of Call Analytics categories to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
   }
@@ -1041,7 +1053,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of Call Analytics jobs to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of Call Analytics jobs to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
   }
@@ -1073,7 +1085,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of custom language models to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of custom language models to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
   }
@@ -1101,7 +1113,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of medical transcription jobs to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of medical transcription jobs to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
   }
@@ -1125,11 +1137,11 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of custom medical vocabularies to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of custom medical vocabularies to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
     /**
-     * Returns only custom medical vocabularies with the specified state. Vocabularies are ordered by creation date, with the newest vocabulary first. If you don't include StateEquals, all custom medical vocabularies are returned.
+     * Returns only custom medical vocabularies with the specified state. Custom vocabularies are ordered by creation date, with the newest vocabulary first. If you don't include StateEquals, all custom medical vocabularies are returned.
      */
     StateEquals?: VocabularyState;
     /**
@@ -1139,7 +1151,7 @@ declare namespace TranscribeService {
   }
   export interface ListMedicalVocabulariesResponse {
     /**
-     * Lists all custom medical vocabularies that have the status specified in your request. Vocabularies are ordered by creation date, with the newest vocabulary first.
+     * Lists all custom medical vocabularies that have the status specified in your request. Custom vocabularies are ordered by creation date, with the newest vocabulary first.
      */
     Status?: VocabularyState;
     /**
@@ -1153,7 +1165,7 @@ declare namespace TranscribeService {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * Returns a list of all tags associated with the specified Amazon Resource Name (ARN). ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
+     * Returns a list of all tags associated with the specified Amazon Resource Name (ARN). ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
      */
     ResourceArn: TranscribeArn;
   }
@@ -1181,7 +1193,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of transcription jobs to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of transcription jobs to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
   }
@@ -1205,7 +1217,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of custom vocabularies to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of custom vocabularies to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
     /**
@@ -1237,7 +1249,7 @@ declare namespace TranscribeService {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of custom vocabulary filters to return in each page of results. If there are fewer results than the value you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
+     * The maximum number of custom vocabulary filters to return in each page of results. If there are fewer results than the value that you specify, only the actual results are returned. If you don't specify a value, a default of 5 is used.
      */
     MaxResults?: MaxResults;
     /**
@@ -1264,7 +1276,7 @@ declare namespace TranscribeService {
      */
     MediaFileUri?: Uri;
     /**
-     * The Amazon S3 location of the media file you want to redact. For example:    s3://DOC-EXAMPLE-BUCKET/my-media-file.flac     s3://DOC-EXAMPLE-BUCKET/media-files/my-media-file.flac    Note that the Amazon S3 bucket that contains your input media must be located in the same Amazon Web Services Region where you're making your transcription request.   RedactedMediaFileUri is only supported for Call Analytics (StartCallAnalyticsJob) transcription requests. 
+     * The Amazon S3 location of the media file you want to redact. For example:    s3://DOC-EXAMPLE-BUCKET/my-media-file.flac     s3://DOC-EXAMPLE-BUCKET/media-files/my-media-file.flac    Note that the Amazon S3 bucket that contains your input media must be located in the same Amazon Web Services Region where you're making your transcription request.   RedactedMediaFileUri produces a redacted audio file in addition to a redacted transcript. It is only supported for Call Analytics (StartCallAnalyticsJob) transcription requests. 
      */
     RedactedMediaFileUri?: Uri;
   }
@@ -1274,7 +1286,7 @@ declare namespace TranscribeService {
   export type MedicalMediaSampleRateHertz = number;
   export interface MedicalTranscript {
     /**
-     * The Amazon S3 location of your transcript. You can use this URI to access or download your transcript. If you included OutputBucketName in your transcription job request, this is the URI of that bucket. If you also included OutputKey in your request, your output is located in the path you specified in your request. If you didn't include OutputBucketName in your transcription job request, your transcript is stored in a service-managed bucket, and TranscriptFileUri provides you with a temporary URI you can use for secure access to your transcript.  Temporary URIs for service-managed Amazon S3 buckets are only valid for 15 minutes. If you get an AccesDenied error, you can get a new temporary URI by running a GetTranscriptionJob or ListTranscriptionJob request. 
+     * The Amazon S3 location of your transcript. You can use this URI to access or download your transcript. Note that this is the Amazon S3 location you specified in your request using the OutputBucketName parameter.
      */
     TranscriptFileUri?: Uri;
   }
@@ -1292,7 +1304,7 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in your input media file.
+     * The sample rate, in hertz, of the audio track in your input media file.
      */
     MediaSampleRateHertz?: MedicalMediaSampleRateHertz;
     /**
@@ -1317,15 +1329,15 @@ declare namespace TranscribeService {
      */
     CompletionTime?: DateTime;
     /**
-     * If TranscriptionJobStatus is FAILED, FailureReason contains information about why the transcription job request failed. The FailureReason field contains one of the following values:    Unsupported media format. The media format specified in MediaFormat isn't valid. Refer to MediaFormat for a list of supported formats.    The media format provided does not match the detected media format. The media format specified in MediaFormat doesn't match the format of the input file. Check the media format of your media file and correct the specified value.    Invalid sample rate for audio file. The sample rate specified in MediaSampleRateHertz isn't valid. The sample rate must be between 16,000 and 48,000 Hertz.    The sample rate provided does not match the detected sample rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample rate detected in your input media file. Check the sample rate of your media file and correct the specified value.    Invalid file size: file size too large. The size of your media file is larger than what Amazon Transcribe can process. For more information, refer to Guidelines and quotas.    Invalid number of channels: number of channels too large. Your audio contains more channels than Amazon Transcribe is able to process. For more information, refer to Guidelines and quotas.  
+     * If TranscriptionJobStatus is FAILED, FailureReason contains information about why the transcription job request failed. The FailureReason field contains one of the following values:    Unsupported media format. The media format specified in MediaFormat isn't valid. Refer to MediaFormat for a list of supported formats.    The media format provided does not match the detected media format. The media format specified in MediaFormat doesn't match the format of the input file. Check the media format of your media file and correct the specified value.    Invalid sample rate for audio file. The sample rate specified in MediaSampleRateHertz isn't valid. The sample rate must be between 16,000 and 48,000 hertz.    The sample rate provided does not match the detected sample rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample rate detected in your input media file. Check the sample rate of your media file and correct the specified value.    Invalid file size: file size too large. The size of your media file is larger than what Amazon Transcribe can process. For more information, refer to Guidelines and quotas.    Invalid number of channels: number of channels too large. Your audio contains more channels than Amazon Transcribe is able to process. For more information, refer to Guidelines and quotas.  
      */
     FailureReason?: FailureReason;
     /**
-     * Specify additional optional settings in your request, including channel identification, alternative transcriptions, and speaker labeling; allows you to apply custom vocabularies to your medical transcription job.
+     * Provides information on any additional settings that were included in your request. Additional settings include channel identification, alternative transcriptions, speaker partitioning, custom vocabularies, and custom vocabulary filters.
      */
     Settings?: MedicalTranscriptionSetting;
     /**
-     * Labels all personal health information (PHI) identified in your transcript. For more information, see Identifying personal health information (PHI) in a transcription.
+     * Indicates whether content identification was enabled for your transcription request.
      */
     ContentIdentificationType?: MedicalContentIdentificationType;
     /**
@@ -1390,11 +1402,11 @@ declare namespace TranscribeService {
   }
   export interface MedicalTranscriptionSetting {
     /**
-     * Enables speaker identification (diarization) in your transcription output. Speaker identification labels the speech from individual speakers in your media file. If you enable ShowSpeakerLabels in your request, you must also include MaxSpeakerLabels. You can't include both ShowSpeakerLabels and ChannelIdentification in the same request. Including both parameters returns a BadRequestException. For more information, see Identifying speakers (diarization).
+     * Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning labels the speech from individual speakers in your media file. If you enable ShowSpeakerLabels in your request, you must also include MaxSpeakerLabels. You can't include ShowSpeakerLabels and ChannelIdentification in the same request. Including both parameters returns a BadRequestException. For more information, see Partitioning speakers (diarization).
      */
     ShowSpeakerLabels?: Boolean;
     /**
-     * Specify the maximum number of speakers you want to identify in your media. Note that if your media contains more speakers than the specified number, multiple speakers will be identified as a single speaker. If you specify the MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
+     * Specify the maximum number of speakers you want to partition in your media. Note that if your media contains more speakers than the specified number, multiple speakers are treated as a single speaker. If you specify the MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
      */
     MaxSpeakerLabels?: MaxSpeakers;
     /**
@@ -1410,14 +1422,14 @@ declare namespace TranscribeService {
      */
     MaxAlternatives?: MaxAlternatives;
     /**
-     * The name of the custom vocabulary you want to use when processing your medical transcription job. Vocabulary names are case sensitive. The language of the specified vocabulary must match the language code you specify in your transcription request. If the languages don't match, the vocabulary isn't applied. There are no errors or warnings associated with a language mismatch. US English (en-US) is the only valid language for Amazon Transcribe Medical.
+     * The name of the custom vocabulary you want to use when processing your medical transcription job. Custom vocabulary names are case sensitive. The language of the specified custom vocabulary must match the language code that you specify in your transcription request. If the languages don't match, the custom vocabulary isn't applied. There are no errors or warnings associated with a language mismatch. US English (en-US) is the only valid language for Amazon Transcribe Medical.
      */
     VocabularyName?: VocabularyName;
   }
   export type ModelName = string;
   export interface ModelSettings {
     /**
-     * The name of the custom language model you want to use when processing your transcription job. Note that language model names are case sensitive. The language of the specified language model must match the language code you specify in your transcription request. If the languages don't match, the language model isn't applied. There are no errors or warnings associated with a language mismatch.
+     * The name of the custom language model you want to use when processing your transcription job. Note that custom language model names are case sensitive. The language of the specified custom language model must match the language code that you specify in your transcription request. If the languages don't match, the custom language model isn't applied. There are no errors or warnings associated with a language mismatch.
      */
     LanguageModelName?: ModelName;
   }
@@ -1427,15 +1439,15 @@ declare namespace TranscribeService {
   export type NonEmptyString = string;
   export interface NonTalkTimeFilter {
     /**
-     * Specify the duration, in milliseconds, of the period of silence you want to flag. For example, you can flag a silent period that lasts 30000 milliseconds.
+     * Specify the duration, in milliseconds, of the period of silence that you want to flag. For example, you can flag a silent period that lasts 30,000 milliseconds.
      */
     Threshold?: TimestampMilliseconds;
     /**
-     * Allows you to specify a time range (in milliseconds) in your audio, during which you want to search for a period of silence. See for more detail.
+     * Makes it possible to specify a time range (in milliseconds) in your audio, during which you want to search for a period of silence. See for more detail.
      */
     AbsoluteTimeRange?: AbsoluteTimeRange;
     /**
-     * Allows you to specify a time range (in percentage) in your media file, during which you want to search for a period of silence. See for more detail.
+     * Makes it possible to specify a time range (in percentage) in your media file, during which you want to search for a period of silence. See for more detail.
      */
     RelativeTimeRange?: RelativeTimeRange;
     /**
@@ -1464,11 +1476,11 @@ declare namespace TranscribeService {
      */
     EndPercentage?: Percentage;
     /**
-     * The time, in percentage, from the start of your media file until the value you specify in which Amazon Transcribe searches for your specified criteria.
+     * The time, in percentage, from the start of your media file until the specified value. Amazon Transcribe searches for your specified criteria in this time segment.
      */
     First?: Percentage;
     /**
-     * The time, in percentage, from the value you specify until the end of your media file in which Amazon Transcribe searches for your specified criteria.
+     * The time, in percentage, from the specified value until the end of your media file. Amazon Transcribe searches for your specified criteria in this time segment.
      */
     Last?: Percentage;
   }
@@ -1493,23 +1505,23 @@ declare namespace TranscribeService {
   export type RuleList = Rule[];
   export interface SentimentFilter {
     /**
-     * Specify the sentiments you want to flag.
+     * Specify the sentiments that you want to flag.
      */
     Sentiments: SentimentValueList;
     /**
-     * Allows you to specify a time range (in milliseconds) in your audio, during which you want to search for the specified sentiments. See for more detail.
+     * Makes it possible to specify a time range (in milliseconds) in your audio, during which you want to search for the specified sentiments. See for more detail.
      */
     AbsoluteTimeRange?: AbsoluteTimeRange;
     /**
-     * Allows you to specify a time range (in percentage) in your media file, during which you want to search for the specified sentiments. See for more detail.
+     * Makes it possible to specify a time range (in percentage) in your media file, during which you want to search for the specified sentiments. See for more detail.
      */
     RelativeTimeRange?: RelativeTimeRange;
     /**
-     * Specify the participant you want to flag. Omitting this parameter is equivalent to specifying both participants.
+     * Specify the participant that you want to flag. Omitting this parameter is equivalent to specifying both participants.
      */
     ParticipantRole?: ParticipantRole;
     /**
-     * Set to TRUE to flag the sentiments you didn't include in your request. Set to FALSE to flag the sentiments you specified in your request.
+     * Set to TRUE to flag the sentiments that you didn't include in your request. Set to FALSE to flag the sentiments that you specified in your request.
      */
     Negate?: Boolean;
   }
@@ -1521,11 +1533,11 @@ declare namespace TranscribeService {
      */
     VocabularyName?: VocabularyName;
     /**
-     * Enables speaker identification (diarization) in your transcription output. Speaker identification labels the speech from individual speakers in your media file. If you enable ShowSpeakerLabels in your request, you must also include MaxSpeakerLabels. You can't include both ShowSpeakerLabels and ChannelIdentification in the same request. Including both parameters returns a BadRequestException. For more information, see Identifying speakers (diarization).
+     * Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning labels the speech from individual speakers in your media file. If you enable ShowSpeakerLabels in your request, you must also include MaxSpeakerLabels. You can't include both ShowSpeakerLabels and ChannelIdentification in the same request. Including both parameters returns a BadRequestException. For more information, see Partitioning speakers (diarization).
      */
     ShowSpeakerLabels?: Boolean;
     /**
-     * Specify the maximum number of speakers you want to identify in your media. Note that if your media contains more speakers than the specified number, multiple speakers will be identified as a single speaker. If you specify the MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
+     * Specify the maximum number of speakers you want to partition in your media. Note that if your media contains more speakers than the specified number, multiple speakers are treated as a single speaker. If you specify the MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
      */
     MaxSpeakerLabels?: MaxSpeakers;
     /**
@@ -1545,7 +1557,7 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * Specify how you want your vocabulary filter applied to your transcript. To replace words with ***, choose mask. To delete words, choose remove. To flag words without changing them, choose tag.
+     * Specify how you want your custom vocabulary filter applied to your transcript. To replace words with ***, choose mask. To delete words, choose remove. To flag words without changing them, choose tag.
      */
     VocabularyFilterMethod?: VocabularyFilterMethod;
   }
@@ -1555,6 +1567,9 @@ declare namespace TranscribeService {
      * A unique name, chosen by you, for your Call Analytics job. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a ConflictException error.
      */
     CallAnalyticsJobName: CallAnalyticsJobName;
+    /**
+     * Describes the Amazon S3 location of the media file you want to use in your Call Analytics request.
+     */
     Media: Media;
     /**
      * The Amazon S3 location where you want your Call Analytics transcription output stored. You can use any of the following formats to specify the output location:   s3://DOC-EXAMPLE-BUCKET   s3://DOC-EXAMPLE-BUCKET/my-output-folder/   s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json   Unless you specify a file name (option 3), the name of your output file has a default value that matches the name you specified for your transcription job using the CallAnalyticsJobName parameter. You can specify a KMS key to encrypt your output using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption. If you don't specify OutputLocation, your transcript is placed in a service-managed Amazon S3 bucket and you are provided with a URI to access your transcript.
@@ -1565,7 +1580,7 @@ declare namespace TranscribeService {
      */
     OutputEncryptionKMSKeyId?: KMSKeyId;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs.
+     * The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role that you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails. IAM role ARNs have the format arn:partition:iam::account:role/role-name-with-path. For example: arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs.
      */
     DataAccessRoleArn?: DataAccessRoleArn;
     /**
@@ -1573,7 +1588,7 @@ declare namespace TranscribeService {
      */
     Settings?: CallAnalyticsJobSettings;
     /**
-     * Allows you to specify which speaker is on which channel. For example, if your agent is the first participant to speak, you would set ChannelId to 0 (to indicate the first channel) and ParticipantRole to AGENT (to indicate that it's the agent speaking).
+     * Makes it possible to specify which speaker is on which channel. For example, if your agent is the first participant to speak, you would set ChannelId to 0 (to indicate the first channel) and ParticipantRole to AGENT (to indicate that it's the agent speaking).
      */
     ChannelDefinitions?: ChannelDefinitions;
   }
@@ -1585,7 +1600,7 @@ declare namespace TranscribeService {
   }
   export interface StartMedicalTranscriptionJobRequest {
     /**
-     * A unique name, chosen by you, for your medical transcription job. The name you specify is also used as the default name of your transcription output file. If you want to specify a different name for your transcription output, use the OutputKey parameter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a ConflictException error.
+     * A unique name, chosen by you, for your medical transcription job. The name that you specify is also used as the default name of your transcription output file. If you want to specify a different name for your transcription output, use the OutputKey parameter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a ConflictException error.
      */
     MedicalTranscriptionJobName: TranscriptionJobName;
     /**
@@ -1593,7 +1608,7 @@ declare namespace TranscribeService {
      */
     LanguageCode: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in your input media file. If you don't specify the media sample rate, Amazon Transcribe Medical determines it for you. If you specify the sample rate, it must match the rate detected by Amazon Transcribe Medical; if there's a mismatch between the value you specify and the value detected, your job fails. Therefore, in most cases, it's advised to omit MediaSampleRateHertz and let Amazon Transcribe Medical determine the sample rate.
+     * The sample rate, in hertz, of the audio track in your input media file. If you don't specify the media sample rate, Amazon Transcribe Medical determines it for you. If you specify the sample rate, it must match the rate detected by Amazon Transcribe Medical; if there's a mismatch between the value that you specify and the value detected, your job fails. Therefore, in most cases, it's advised to omit MediaSampleRateHertz and let Amazon Transcribe Medical determine the sample rate.
      */
     MediaSampleRateHertz?: MedicalMediaSampleRateHertz;
     /**
@@ -1602,7 +1617,7 @@ declare namespace TranscribeService {
     MediaFormat?: MediaFormat;
     Media: Media;
     /**
-     * The name of the Amazon S3 bucket where you want your medical transcription output stored. Do not include the S3:// prefix of the specified bucket. If you want your output to go to a sub-folder of this bucket, specify it using the OutputKey parameter; OutputBucketName only accepts the name of a bucket. For example, if you want your output stored in S3://DOC-EXAMPLE-BUCKET, set OutputBucketName to DOC-EXAMPLE-BUCKET. However, if you want your output stored in S3://DOC-EXAMPLE-BUCKET/test-files/, set OutputBucketName to DOC-EXAMPLE-BUCKET and OutputKey to test-files/. Note that Amazon Transcribe must have permission to use the specified location. You can change Amazon S3 permissions using the Amazon Web Services Management Console. See also Permissions Required for IAM User Roles. If you don't specify OutputBucketName, your transcript is placed in a service-managed Amazon S3 bucket and you are provided with a URI to access your transcript.
+     * The name of the Amazon S3 bucket where you want your medical transcription output stored. Do not include the S3:// prefix of the specified bucket. If you want your output to go to a sub-folder of this bucket, specify it using the OutputKey parameter; OutputBucketName only accepts the name of a bucket. For example, if you want your output stored in S3://DOC-EXAMPLE-BUCKET, set OutputBucketName to DOC-EXAMPLE-BUCKET. However, if you want your output stored in S3://DOC-EXAMPLE-BUCKET/test-files/, set OutputBucketName to DOC-EXAMPLE-BUCKET and OutputKey to test-files/. Note that Amazon Transcribe must have permission to use the specified location. You can change Amazon S3 permissions using the Amazon Web Services Management Console. See also Permissions Required for IAM User Roles.
      */
     OutputBucketName: OutputBucketName;
     /**
@@ -1618,7 +1633,7 @@ declare namespace TranscribeService {
      */
     KMSEncryptionContext?: KMSEncryptionContextMap;
     /**
-     * Specify additional optional settings in your request, including channel identification, alternative transcriptions, and speaker labeling; allows you to apply custom vocabularies to your transcription job.
+     * Specify additional optional settings in your request, including channel identification, alternative transcriptions, and speaker partitioning. You can use that to apply custom vocabularies to your transcription job.
      */
     Settings?: MedicalTranscriptionSetting;
     /**
@@ -1646,7 +1661,7 @@ declare namespace TranscribeService {
   }
   export interface StartTranscriptionJobRequest {
     /**
-     * A unique name, chosen by you, for your transcription job. The name you specify is also used as the default name of your transcription output file. If you want to specify a different name for your transcription output, use the OutputKey parameter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a ConflictException error.
+     * A unique name, chosen by you, for your transcription job. The name that you specify is also used as the default name of your transcription output file. If you want to specify a different name for your transcription output, use the OutputKey parameter. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a ConflictException error.
      */
     TranscriptionJobName: TranscriptionJobName;
     /**
@@ -1654,7 +1669,7 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in your input media file. If you don't specify the media sample rate, Amazon Transcribe determines it for you. If you specify the sample rate, it must match the rate detected by Amazon Transcribe; if there's a mismatch between the value you specify and the value detected, your job fails. Therefore, in most cases, it's advised to omit MediaSampleRateHertz and let Amazon Transcribe determine the sample rate.
+     * The sample rate, in hertz, of the audio track in your input media file. If you don't specify the media sample rate, Amazon Transcribe determines it for you. If you specify the sample rate, it must match the rate detected by Amazon Transcribe. If there's a mismatch between the value that you specify and the value detected, your job fails. In most cases, you can omit MediaSampleRateHertz and let Amazon Transcribe determine the sample rate.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
@@ -1682,7 +1697,7 @@ declare namespace TranscribeService {
      */
     KMSEncryptionContext?: KMSEncryptionContextMap;
     /**
-     * Specify additional optional settings in your request, including channel identification, alternative transcriptions, speaker labeling; allows you to apply custom vocabularies and vocabulary filters. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use Settings with the VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using automatic language identification with your request and want to include a custom language model, a custom vocabulary, or a custom vocabulary filter, use instead the  parameter with the LanguageModelName, VocabularyName or VocabularyFilterName sub-parameters.
+     * Specify additional optional settings in your request, including channel identification, alternative transcriptions, speaker partitioning. You can use that to apply custom vocabularies and vocabulary filters. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use Settings with the VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using automatic language identification with your request and want to include a custom language model, a custom vocabulary, or a custom vocabulary filter, use instead the  parameter with the LanguageModelName, VocabularyName or VocabularyFilterName sub-parameters.
      */
     Settings?: Settings;
     /**
@@ -1690,23 +1705,23 @@ declare namespace TranscribeService {
      */
     ModelSettings?: ModelSettings;
     /**
-     * Allows you to control how your transcription job is processed. Currently, the only JobExecutionSettings modification you can choose is enabling job queueing using the AllowDeferredExecution sub-parameter. If you include JobExecutionSettings in your request, you must also include the sub-parameters: AllowDeferredExecution and DataAccessRoleArn.
+     * Makes it possible to control how your transcription job is processed. Currently, the only JobExecutionSettings modification you can choose is enabling job queueing using the AllowDeferredExecution sub-parameter. If you include JobExecutionSettings in your request, you must also include the sub-parameters: AllowDeferredExecution and DataAccessRoleArn.
      */
     JobExecutionSettings?: JobExecutionSettings;
     /**
-     * Allows you to redact or flag specified personally identifiable information (PII) in your transcript. If you use ContentRedaction, you must also include the sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
+     * Makes it possible to redact or flag specified personally identifiable information (PII) in your transcript. If you use ContentRedaction, you must also include the sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
      */
     ContentRedaction?: ContentRedaction;
     /**
-     * Enables automatic language identification in your transcription job request. If you include IdentifyLanguage, you can optionally include a list of language codes, using LanguageOptions, that you think may be present in your media file. Including language options can improve transcription accuracy. If you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter to your automatic language identification request, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). Note that you must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails.
+     * Enables automatic language identification in your transcription job request. Use this parameter if your media file contains only one language. If your media contains multiple languages, use IdentifyMultipleLanguages instead. If you include IdentifyLanguage, you can optionally include a list of language codes, using LanguageOptions, that you think may be present in your media file. Including LanguageOptions restricts IdentifyLanguage to only the language options that you specify, which can improve transcription accuracy. If you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter to your automatic language identification request, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). If you include LanguageIdSettings, also include LanguageOptions. Note that you must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails.
      */
     IdentifyLanguage?: Boolean;
     /**
-     * Enables automatic multi-language identification in your transcription job request. Use this parameter if your media file contains more than one language. If you include IdentifyMultipleLanguages, you can optionally include a list of language codes, using LanguageOptions, that you think may be present in your media file. Including language options can improve transcription accuracy. If you want to apply a custom vocabulary or a custom vocabulary filter to your automatic language identification request, include LanguageIdSettings with the relevant sub-parameters (VocabularyName and VocabularyFilterName). Note that you must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails.
+     * Enables automatic multi-language identification in your transcription job request. Use this parameter if your media file contains more than one language. If your media contains only one language, use IdentifyLanguage instead. If you include IdentifyMultipleLanguages, you can optionally include a list of language codes, using LanguageOptions, that you think may be present in your media file. Including LanguageOptions restricts IdentifyLanguage to only the language options that you specify, which can improve transcription accuracy. If you want to apply a custom vocabulary or a custom vocabulary filter to your automatic language identification request, include LanguageIdSettings with the relevant sub-parameters (VocabularyName and VocabularyFilterName). If you include LanguageIdSettings, also include LanguageOptions. Note that you must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails.
      */
     IdentifyMultipleLanguages?: Boolean;
     /**
-     * You can specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. If you're unsure what languages are present, do not include this parameter. If you include LanguageOptions in your request, you must also include IdentifyLanguage. For more information, refer to Supported languages. To transcribe speech in Modern Standard Arabic (ar-SA), your media file must be encoded at a sample rate of 16,000 Hz or higher.
+     * You can specify two or more language codes that represent the languages you think may be present in your media. Including more than five is not recommended. If you're unsure what languages are present, do not include this parameter. If you include LanguageOptions in your request, you must also include IdentifyLanguage. For more information, refer to Supported languages. To transcribe speech in Modern Standard Arabic (ar-SA), your media file must be encoded at a sample rate of 16,000 Hz or higher.
      */
     LanguageOptions?: LanguageOptions;
     /**
@@ -1718,7 +1733,7 @@ declare namespace TranscribeService {
      */
     Tags?: TagList;
     /**
-     * If using automatic language identification (IdentifyLanguage) in your request and you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. Each language code you include can have an associated custom language model, custom vocabulary, and custom vocabulary filter. The languages you specify must match the languages of the specified custom language models, custom vocabularies, and custom vocabulary filters. To include language options using IdentifyLanguage without including a custom language model, a custom vocabulary, or a custom vocabulary filter, use LanguageOptions instead of LanguageIdSettings. Including language options can improve the accuracy of automatic language identification. If you want to include a custom language model with your request but do not want to use automatic language identification, use instead the  parameter with the LanguageModelName sub-parameter. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use instead the  parameter with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
+     * If using automatic language identification in your request and you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). Note that multi-language identification (IdentifyMultipleLanguages) doesn't support custom language models.  LanguageIdSettings supports two to five language codes. Each language code you include can have an associated custom language model, custom vocabulary, and custom vocabulary filter. The language codes that you specify must match the languages of the associated custom language models, custom vocabularies, and custom vocabulary filters. It's recommended that you include LanguageOptions when using LanguageIdSettings to ensure that the correct language dialect is identified. For example, if you specify a custom vocabulary that is in en-US but Amazon Transcribe determines that the language spoken in your media is en-AU, your custom vocabulary is not applied to your transcription. If you include LanguageOptions and include en-US as the only English language dialect, your custom vocabulary is applied to your transcription. If you want to include a custom language model with your request but do not want to use automatic language identification, use instead the  parameter with the LanguageModelName sub-parameter. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use instead the  parameter with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
   }
@@ -1772,7 +1787,7 @@ declare namespace TranscribeService {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource you want to tag. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
+     * The Amazon Resource Name (ARN) of the resource you want to tag. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
      */
     ResourceArn: TranscribeArn;
     /**
@@ -1797,27 +1812,27 @@ declare namespace TranscribeService {
   }
   export interface TranscriptFilter {
     /**
-     * Flag the presence or absence of an exact match to the phrases you specify. For example, if you specify the phrase "speak to a manager" as your Targets value, only that exact phrase is flagged. Note that semantic matching is not supported. For example, if your customer says "speak to the manager", instead of "speak to a manager", your content is not flagged.
+     * Flag the presence or absence of an exact match to the phrases that you specify. For example, if you specify the phrase "speak to a manager" as your Targets value, only that exact phrase is flagged. Note that semantic matching is not supported. For example, if your customer says "speak to the manager", instead of "speak to a manager", your content is not flagged.
      */
     TranscriptFilterType: TranscriptFilterType;
     /**
-     * Allows you to specify a time range (in milliseconds) in your audio, during which you want to search for the specified key words or phrases. See for more detail.
+     * Makes it possible to specify a time range (in milliseconds) in your audio, during which you want to search for the specified key words or phrases. See for more detail.
      */
     AbsoluteTimeRange?: AbsoluteTimeRange;
     /**
-     * Allows you to specify a time range (in percentage) in your media file, during which you want to search for the specified key words or phrases. See for more detail.
+     * Makes it possible to specify a time range (in percentage) in your media file, during which you want to search for the specified key words or phrases. See for more detail.
      */
     RelativeTimeRange?: RelativeTimeRange;
     /**
-     * Specify the participant you want to flag. Omitting this parameter is equivalent to specifying both participants.
+     * Specify the participant that you want to flag. Omitting this parameter is equivalent to specifying both participants.
      */
     ParticipantRole?: ParticipantRole;
     /**
-     * Set to TRUE to flag the absence of the phrase you specified in your request. Set to FALSE to flag the presence of the phrase you specified in your request.
+     * Set to TRUE to flag the absence of the phrase that you specified in your request. Set to FALSE to flag the presence of the phrase that you specified in your request.
      */
     Negate?: Boolean;
     /**
-     * Specify the phrases you want to flag.
+     * Specify the phrases that you want to flag.
      */
     Targets: StringTargetList;
   }
@@ -1832,11 +1847,11 @@ declare namespace TranscribeService {
      */
     TranscriptionJobStatus?: TranscriptionJobStatus;
     /**
-     * The language code used to create your transcription job. For a list of supported languages and their associated language codes, refer to the Supported languages table. Note that you must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails.
+     * The language code used to create your transcription job. This parameter is used with single-language identification. For multi-language identification requests, refer to the plural version of this parameter, LanguageCodes.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The sample rate, in Hertz, of the audio track in your input media file.
+     * The sample rate, in hertz, of the audio track in your input media file.
      */
     MediaSampleRateHertz?: MediaSampleRateHertz;
     /**
@@ -1844,7 +1859,7 @@ declare namespace TranscribeService {
      */
     MediaFormat?: MediaFormat;
     /**
-     * Describes the Amazon S3 location of the media file you want to use in your request.
+     * Provides the Amazon S3 location of the media file you used in your request.
      */
     Media?: Media;
     /**
@@ -1864,23 +1879,23 @@ declare namespace TranscribeService {
      */
     CompletionTime?: DateTime;
     /**
-     * If TranscriptionJobStatus is FAILED, FailureReason contains information about why the transcription job request failed. The FailureReason field contains one of the following values:    Unsupported media format. The media format specified in MediaFormat isn't valid. Refer to MediaFormat for a list of supported formats.    The media format provided does not match the detected media format. The media format specified in MediaFormat doesn't match the format of the input file. Check the media format of your media file and correct the specified value.    Invalid sample rate for audio file. The sample rate specified in MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and 48,000 Hertz.    The sample rate provided does not match the detected sample rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample rate detected in your input media file. Check the sample rate of your media file and correct the specified value.    Invalid file size: file size too large. The size of your media file is larger than what Amazon Transcribe can process. For more information, refer to Guidelines and quotas.    Invalid number of channels: number of channels too large. Your audio contains more channels than Amazon Transcribe is able to process. For more information, refer to Guidelines and quotas.  
+     * If TranscriptionJobStatus is FAILED, FailureReason contains information about why the transcription job request failed. The FailureReason field contains one of the following values:    Unsupported media format. The media format specified in MediaFormat isn't valid. Refer to MediaFormat for a list of supported formats.    The media format provided does not match the detected media format. The media format specified in MediaFormat doesn't match the format of the input file. Check the media format of your media file and correct the specified value.    Invalid sample rate for audio file. The sample rate specified in MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and 48,000 hertz.    The sample rate provided does not match the detected sample rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample rate detected in your input media file. Check the sample rate of your media file and correct the specified value.    Invalid file size: file size too large. The size of your media file is larger than what Amazon Transcribe can process. For more information, refer to Guidelines and quotas.    Invalid number of channels: number of channels too large. Your audio contains more channels than Amazon Transcribe is able to process. For more information, refer to Guidelines and quotas.  
      */
     FailureReason?: FailureReason;
     /**
-     * Specify additional optional settings in your request, including channel identification, alternative transcriptions, speaker labeling; allows you to apply custom vocabularies and vocabulary filters. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use Settings with the VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using automatic language identification with your request and want to include a custom language model, a custom vocabulary, or a custom vocabulary filter, do not use the Settings parameter; use instead the  parameter with the LanguageModelName, VocabularyName or VocabularyFilterName sub-parameters.
+     * Provides information on any additional settings that were included in your request. Additional settings include channel identification, alternative transcriptions, speaker partitioning, custom vocabularies, and custom vocabulary filters.
      */
     Settings?: Settings;
     /**
-     * The custom language model you want to include with your transcription job. If you include ModelSettings in your request, you must include the LanguageModelName sub-parameter.
+     * Provides information on the custom language model you included in your request.
      */
     ModelSettings?: ModelSettings;
     /**
-     * Provides information about how your transcription job is being processed. This parameter shows if your request is queued and what data access role is being used.
+     * Provides information about how your transcription job was processed. This parameter shows if your request was queued and what data access role was used.
      */
     JobExecutionSettings?: JobExecutionSettings;
     /**
-     * Redacts or flags specified personally identifiable information (PII) in your transcript.
+     * Indicates whether redaction was enabled in your transcript.
      */
     ContentRedaction?: ContentRedaction;
     /**
@@ -1892,7 +1907,7 @@ declare namespace TranscribeService {
      */
     IdentifyMultipleLanguages?: Boolean;
     /**
-     * You can specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. If you're unsure what languages are present, do not include this parameter. If you include LanguageOptions in your request, you must also include IdentifyLanguage. For more information, refer to Supported languages. To transcribe speech in Modern Standard Arabic (ar-SA), your media file must be encoded at a sample rate of 16,000 Hz or higher.
+     * Provides the language codes you specified in your request.
      */
     LanguageOptions?: LanguageOptions;
     /**
@@ -1900,19 +1915,19 @@ declare namespace TranscribeService {
      */
     IdentifiedLanguageScore?: IdentifiedLanguageScore;
     /**
-     * The language codes used to create your transcription job. This parameter is used with multi-language identification. For single-language identification requests, refer to the singular version of this parameter, LanguageCode. For a list of supported languages and their associated language codes, refer to the Supported languages table.
+     * The language codes used to create your transcription job. This parameter is used with multi-language identification. For single-language identification requests, refer to the singular version of this parameter, LanguageCode.
      */
     LanguageCodes?: LanguageCodeList;
     /**
-     * Adds one or more custom tags, each in the form of a key:value pair, to a new transcription job at the time you start this new job. To learn more about using tags with Amazon Transcribe, refer to Tagging resources.
+     * The tags, each in the form of a key:value pair, assigned to the specified transcription job.
      */
     Tags?: TagList;
     /**
-     * Generate subtitles for your media file with your transcription request.
+     * Indicates whether subtitles were generated with your transcription.
      */
     Subtitles?: SubtitlesOutput;
     /**
-     * If using automatic language identification (IdentifyLanguage) in your request and you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify two or more language codes that represent the languages you think may be present in your media; including more than five is not recommended. Each language code you include can have an associated custom language model, custom vocabulary, and custom vocabulary filter. The languages you specify must match the languages of the specified custom language models, custom vocabularies, and custom vocabulary filters. To include language options using IdentifyLanguage without including a custom language model, a custom vocabulary, or a custom vocabulary filter, use LanguageOptions instead of LanguageIdSettings. Including language options can improve the accuracy of automatic language identification. If you want to include a custom language model with your request but do not want to use automatic language identification, use instead the  parameter with the LanguageModelName sub-parameter. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use instead the  parameter with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
+     * Provides the name and language of all custom language models, custom vocabularies, and custom vocabulary filters that you included in your request.
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
   }
@@ -1977,7 +1992,7 @@ declare namespace TranscribeService {
   export type Type = "CONVERSATION"|"DICTATION"|string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
+     * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
      */
     ResourceArn: TranscribeArn;
     /**
@@ -1996,6 +2011,10 @@ declare namespace TranscribeService {
      * The rules used for the updated Call Analytics category. The rules you provide in this field replace the ones that are currently being used in the specified category.
      */
     Rules: RuleList;
+    /**
+     * Choose whether you want to update a streaming or a batch Call Analytics category. The input type you specify must match the input type specified when the category was created. For example, if you created a category with the POST_CALL input type, you must use POST_CALL as the input type when updating this category.
+     */
+    InputType?: InputType;
   }
   export interface UpdateCallAnalyticsCategoryResponse {
     /**
@@ -2005,7 +2024,7 @@ declare namespace TranscribeService {
   }
   export interface UpdateMedicalVocabularyRequest {
     /**
-     * The name of the custom medical vocabulary you want to update. Vocabulary names are case sensitive.
+     * The name of the custom medical vocabulary you want to update. Custom medical vocabulary names are case sensitive.
      */
     VocabularyName: VocabularyName;
     /**
@@ -2023,7 +2042,7 @@ declare namespace TranscribeService {
      */
     VocabularyName?: VocabularyName;
     /**
-     * The language code you selected for your medical vocabulary. US English (en-US) is the only language supported with Amazon Transcribe Medical.
+     * The language code you selected for your custom medical vocabulary. US English (en-US) is the only language supported with Amazon Transcribe Medical.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -2031,17 +2050,17 @@ declare namespace TranscribeService {
      */
     LastModifiedTime?: DateTime;
     /**
-     * The processing state of your custom medical vocabulary. If the state is READY, you can use the vocabulary in a StartMedicalTranscriptionJob request.
+     * The processing state of your custom medical vocabulary. If the state is READY, you can use the custom vocabulary in a StartMedicalTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
   }
   export interface UpdateVocabularyFilterRequest {
     /**
-     * The name of the custom vocabulary filter you want to update. Vocabulary filter names are case sensitive.
+     * The name of the custom vocabulary filter you want to update. Custom vocabulary filter names are case sensitive.
      */
     VocabularyFilterName: VocabularyFilterName;
     /**
-     * Use this parameter if you want to update your vocabulary filter by including all desired terms, as comma-separated values, within your request. The other option for updating your vocabulary filter is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFilterFileUri parameter. Note that if you include Words in your request, you cannot use VocabularyFilterFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
+     * Use this parameter if you want to update your custom vocabulary filter by including all desired terms, as comma-separated values, within your request. The other option for updating your vocabulary filter is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFilterFileUri parameter. Note that if you include Words in your request, you cannot use VocabularyFilterFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
      */
     Words?: Words;
     /**
@@ -2055,25 +2074,25 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The language code you selected for your vocabulary filter.
+     * The language code you selected for your custom vocabulary filter.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time the specified vocabulary filter was last updated. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom vocabulary filter was last updated. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
   }
   export interface UpdateVocabularyRequest {
     /**
-     * The name of the custom vocabulary you want to update. Vocabulary names are case sensitive.
+     * The name of the custom vocabulary you want to update. Custom vocabulary names are case sensitive.
      */
     VocabularyName: VocabularyName;
     /**
-     * The language code that represents the language of the entries in the custom vocabulary you want to update. Each vocabulary must contain terms in only one language. A custom vocabulary can only be used to transcribe files in the same language as the vocabulary. For example, if you create a vocabulary using US English (en-US), you can only apply this vocabulary to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
+     * The language code that represents the language of the entries in the custom vocabulary you want to update. Each custom vocabulary must contain terms in only one language. A custom vocabulary can only be used to transcribe files in the same language as the custom vocabulary. For example, if you create a custom vocabulary using US English (en-US), you can only apply this custom vocabulary to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
      */
     LanguageCode: LanguageCode;
     /**
-     * Use this parameter if you want to update your vocabulary by including all desired terms, as comma-separated values, within your request. The other option for updating your vocabulary is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFileUri parameter. Note that if you include Phrases in your request, you cannot use VocabularyFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
+     * Use this parameter if you want to update your custom vocabulary by including all desired terms, as comma-separated values, within your request. The other option for updating your custom vocabulary is to save your entries in a text file and upload them to an Amazon S3 bucket, then specify the location of your file using the VocabularyFileUri parameter. Note that if you include Phrases in your request, you cannot use VocabularyFileUri; you must choose one or the other. Each language has a character set that contains all allowed characters for that specific language. If you use unsupported characters, your custom vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies to get the character set for your language.
      */
     Phrases?: Phrases;
     /**
@@ -2091,11 +2110,11 @@ declare namespace TranscribeService {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time the specified vocabulary was last updated. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom vocabulary was last updated. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
     /**
-     * The processing state of your custom vocabulary. If the state is READY, you can use the vocabulary in a StartTranscriptionJob request.
+     * The processing state of your custom vocabulary. If the state is READY, you can use the custom vocabulary in a StartTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
   }
@@ -2107,11 +2126,11 @@ declare namespace TranscribeService {
      */
     VocabularyFilterName?: VocabularyFilterName;
     /**
-     * The language code that represents the language of the entries in your vocabulary filter. Each vocabulary filter must contain terms in only one language. A vocabulary filter can only be used to transcribe files in the same language as the filter. For example, if you create a vocabulary filter using US English (en-US), you can only apply this filter to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
+     * The language code that represents the language of the entries in your vocabulary filter. Each custom vocabulary filter must contain terms in only one language. A custom vocabulary filter can only be used to transcribe files in the same language as the filter. For example, if you create a custom vocabulary filter using US English (en-US), you can only apply this filter to files that contain English audio. For a list of supported languages and their associated language codes, refer to the Supported languages table.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time the specified vocabulary filter was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom vocabulary filter was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
   }
@@ -2124,15 +2143,15 @@ declare namespace TranscribeService {
      */
     VocabularyName?: VocabularyName;
     /**
-     * The language code used to create your custom vocabulary. Each vocabulary must contain terms in only one language. A custom vocabulary can only be used to transcribe files in the same language as the vocabulary. For example, if you create a vocabulary using US English (en-US), you can only apply this vocabulary to files that contain English audio.
+     * The language code used to create your custom vocabulary. Each custom vocabulary must contain terms in only one language. A custom vocabulary can only be used to transcribe files in the same language as the custom vocabulary. For example, if you create a custom vocabulary using US English (en-US), you can only apply this custom vocabulary to files that contain English audio.
      */
     LanguageCode?: LanguageCode;
     /**
-     * The date and time the specified vocabulary was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+     * The date and time the specified custom vocabulary was last modified. Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example, 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
      */
     LastModifiedTime?: DateTime;
     /**
-     * The processing state of your custom vocabulary. If the state is READY, you can use the vocabulary in a StartTranscriptionJob request.
+     * The processing state of your custom vocabulary. If the state is READY, you can use the custom vocabulary in a StartTranscriptionJob request.
      */
     VocabularyState?: VocabularyState;
   }

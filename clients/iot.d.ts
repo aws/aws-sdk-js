@@ -68,11 +68,11 @@ declare class Iot extends Service {
    */
   attachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. Requires permission to access the AttachThingPrincipal action.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, Amazon Cognito identities or federated identities. Requires permission to access the AttachThingPrincipal action.
    */
   attachThingPrincipal(params: Iot.Types.AttachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. Requires permission to access the AttachThingPrincipal action.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, Amazon Cognito identities or federated identities. Requires permission to access the AttachThingPrincipal action.
    */
   attachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
@@ -3236,6 +3236,8 @@ declare namespace Iot {
   export type ConnectivityTimestamp = number;
   export type ConsecutiveDatapointsToAlarm = number;
   export type ConsecutiveDatapointsToClear = number;
+  export type ContentType = string;
+  export type CorrelationData = string;
   export type Count = number;
   export interface CreateAuditSuppressionRequest {
     checkName: AuditCheckName;
@@ -3624,6 +3626,10 @@ declare namespace Iot {
      * Parameters of an Amazon Web Services managed template that you can specify to create the job document.   documentParameters can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them. 
      */
     documentParameters?: ParameterMap;
+    /**
+     * The configuration that allows you to schedule a job for a future date and time in addition to specifying the end behavior for each job execution.
+     */
+    schedulingConfig?: SchedulingConfig;
   }
   export interface CreateJobResponse {
     /**
@@ -6579,11 +6585,16 @@ declare namespace Iot {
      * Indicates whether a job is concurrent. Will be true when a job is rolling out new job executions or canceling previously created executions, otherwise false.
      */
     isConcurrent?: BooleanWrapperObject;
+    /**
+     * The configuration that allows you to schedule a job for a future date and time in addition to specifying the end behavior for each job execution.
+     */
+    schedulingConfig?: SchedulingConfig;
   }
   export type JobArn = string;
   export type JobDescription = string;
   export type JobDocument = string;
   export type JobDocumentSource = string;
+  export type JobEndBehavior = "STOP_ROLLOUT"|"CANCEL"|"FORCE_CANCEL"|string;
   export interface JobExecution {
     /**
      * The unique identifier you assigned to the job when it was created.
@@ -6741,7 +6752,7 @@ declare namespace Iot {
      */
     numberOfTimedOutThings?: TimedOutThings;
   }
-  export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|"DELETION_IN_PROGRESS"|string;
+  export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|"DELETION_IN_PROGRESS"|"SCHEDULED"|string;
   export interface JobSummary {
     /**
      * The job ARN.
@@ -8531,6 +8542,7 @@ declare namespace Iot {
   export type Maximum = number;
   export type MaximumPerMinute = number;
   export type Message = string;
+  export type MessageExpiry = string;
   export type MessageFormat = "RAW"|"JSON"|string;
   export type MessageId = string;
   export interface MetricDatum {
@@ -8677,6 +8689,32 @@ declare namespace Iot {
      * The value of the clientId key in an MQTT authorization request.
      */
     clientId?: MqttClientId;
+  }
+  export interface MqttHeaders {
+    /**
+     * An Enum string value that indicates whether the payload is formatted as UTF-8. Valid values are UNSPECIFIED_BYTES and UTF8_DATA. For more information, see  Payload Format Indicator from the MQTT Version 5.0 specification. Supports substitution templates.
+     */
+    payloadFormatIndicator?: PayloadFormatIndicator;
+    /**
+     * A UTF-8 encoded string that describes the content of the publishing message. For more information, see  Content Type from the MQTT Version 5.0 specification. Supports substitution templates.
+     */
+    contentType?: ContentType;
+    /**
+     * A UTF-8 encoded string that's used as the topic name for a response message. The response topic is used to describe the topic which the receiver should publish to as part of the request-response flow. The topic must not contain wildcard characters. For more information, see  Response Topic from the MQTT Version 5.0 specification. Supports substitution templates.
+     */
+    responseTopic?: ResponseTopic;
+    /**
+     * The base64-encoded binary data used by the sender of the request message to identify which request the response message is for when it's received. For more information, see  Correlation Data from the MQTT Version 5.0 specification.   This binary data must be based64-encoded.   Supports substitution templates.
+     */
+    correlationData?: CorrelationData;
+    /**
+     * A user-defined integer value that will persist a message at the message broker for a specified amount of time to ensure that the message will expire if it's no longer relevant to the subscriber. The value of messageExpiry represents the number of seconds before it expires. For more information about the limits of messageExpiry, see Amazon Web Services IoT Core message broker and protocol limits and quotas  from the Amazon Web Services Reference Guide. Supports substitution templates.
+     */
+    messageExpiry?: MessageExpiry;
+    /**
+     * An array of key-value pairs that you define in the MQTT5 header.
+     */
+    userProperties?: UserProperties;
   }
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
   export type MqttUsername = string;
@@ -8879,6 +8917,7 @@ declare namespace Iot {
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
+  export type PayloadFormatIndicator = string;
   export type PayloadVersion = string;
   export type Percent = number;
   export type PercentList = Percent[];
@@ -9325,6 +9364,10 @@ declare namespace Iot {
      * The Quality of Service (QoS) level to use when republishing messages. The default value is 0.
      */
     qos?: Qos;
+    /**
+     * MQTT Version 5.0 headers information. For more information, see  MQTT from the Amazon Web Services IoT Core Developer Guide.
+     */
+    headers?: MqttHeaders;
   }
   export type ReservedDomainConfigurationName = string;
   export type Resource = string;
@@ -9375,6 +9418,7 @@ declare namespace Iot {
   export type ResourceLogicalId = string;
   export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|"ROLE_ALIAS"|"IAM_ROLE"|"ISSUER_CERTIFICATE"|string;
   export type Resources = Resource[];
+  export type ResponseTopic = string;
   export type RetryAttempt = number;
   export interface RetryCriteria {
     /**
@@ -9510,6 +9554,20 @@ declare namespace Iot {
   }
   export type ScheduledAuditMetadataList = ScheduledAuditMetadata[];
   export type ScheduledAuditName = string;
+  export interface SchedulingConfig {
+    /**
+     * The time a job will begin rollout of the job document to all devices in the target group for a job. The startTime can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time.
+     */
+    startTime?: StringDateTime;
+    /**
+     * The time a job will stop rollout of the job document to all devices in the target group for a job. The endTime must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between startTime and endTime is thirty minutes. The maximum duration between startTime and endTime is two years. 
+     */
+    endTime?: StringDateTime;
+    /**
+     * Specifies the end behavior for all job executions after a job reaches the selected endTime. If endTime is not selected when creating the job, then endBehavior does not apply.
+     */
+    endBehavior?: JobEndBehavior;
+  }
   export interface SearchIndexRequest {
     /**
      * The search index name.
@@ -9985,6 +10043,7 @@ declare namespace Iot {
   export type StreamVersion = number;
   export type StreamsSummary = StreamSummary[];
   export type String = string;
+  export type StringDateTime = string;
   export type StringList = stringValue[];
   export type StringMap = {[key: string]: String};
   export type SubnetId = string;
@@ -10281,7 +10340,7 @@ declare namespace Iot {
      */
     thingGroupIndexingMode: ThingGroupIndexingMode;
     /**
-     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.
      */
     managedFields?: Fields;
     /**
@@ -11353,6 +11412,19 @@ declare namespace Iot {
   }
   export type Url = string;
   export type UseBase64 = boolean;
+  export type UserProperties = UserProperty[];
+  export interface UserProperty {
+    /**
+     * A key to be specified in UserProperty.
+     */
+    key: UserPropertyKey;
+    /**
+     * A value to be specified in UserProperty.
+     */
+    value: UserPropertyValue;
+  }
+  export type UserPropertyKey = string;
+  export type UserPropertyValue = string;
   export type Valid = boolean;
   export interface ValidateSecurityProfileBehaviorsRequest {
     /**
