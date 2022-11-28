@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "event_listeners",
+  "description": "differentiate identity type in VALIDATE_CREDENTIALS listener"
+}
