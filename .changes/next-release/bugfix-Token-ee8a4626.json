@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Token",
+  "description": "Export Token types from core.d.ts"
+}
