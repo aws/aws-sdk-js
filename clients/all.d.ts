@@ -324,3 +324,7 @@ export import IoTRoboRunner = require('./iotroborunner');
 export import SsmSap = require('./ssmsap');
 export import OAM = require('./oam');
 export import ARCZonalShift = require('./arczonalshift');
+export import Omics = require('./omics');
+export import OpenSearchServerless = require('./opensearchserverless');
+export import SecurityLake = require('./securitylake');
+export import SimSpaceWeaver = require('./simspaceweaver');

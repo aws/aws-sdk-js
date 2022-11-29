@@ -253,6 +253,14 @@ declare class EC2 extends Service {
    */
   attachNetworkInterface(callback?: (err: AWSError, data: EC2.Types.AttachNetworkInterfaceResult) => void): Request<EC2.Types.AttachNetworkInterfaceResult, AWSError>;
   /**
+   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. One or more trust providers can be attached to an Amazon Web Services Verified Access instance.
+   */
+  attachVerifiedAccessTrustProvider(params: EC2.Types.AttachVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.AttachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.AttachVerifiedAccessTrustProviderResult, AWSError>;
+  /**
+   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. One or more trust providers can be attached to an Amazon Web Services Verified Access instance.
+   */
+  attachVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.AttachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.AttachVerifiedAccessTrustProviderResult, AWSError>;
+  /**
    * Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you must make it available. For more information, see Make an EBS volume available for use. If a volume has an Amazon Web Services Marketplace product code:   The volume can be attached only to a stopped instance.   Amazon Web Services Marketplace product codes are copied from the volume to the instance.   You must be subscribed to the product.   The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.   For more information, see Attach an Amazon EBS volume to an instance in the Amazon Elastic Compute Cloud User Guide.
    */
   attachVolume(params: EC2.Types.AttachVolumeRequest, callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
@@ -949,6 +957,38 @@ declare class EC2 extends Service {
    */
   createTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayVpcAttachmentResult, AWSError>;
   /**
+   * An Amazon Web Services Verified Access endpoint is where you define your application along with an optional endpoint-level access policy.
+   */
+  createVerifiedAccessEndpoint(params: EC2.Types.CreateVerifiedAccessEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessEndpointResult) => void): Request<EC2.Types.CreateVerifiedAccessEndpointResult, AWSError>;
+  /**
+   * An Amazon Web Services Verified Access endpoint is where you define your application along with an optional endpoint-level access policy.
+   */
+  createVerifiedAccessEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessEndpointResult) => void): Request<EC2.Types.CreateVerifiedAccessEndpointResult, AWSError>;
+  /**
+   * An Amazon Web Services Verified Access group is a collection of Amazon Web Services Verified Access endpoints who's associated applications have similar security requirements. Each instance within an Amazon Web Services Verified Access group shares an Amazon Web Services Verified Access policy. For example, you can group all Amazon Web Services Verified Access instances associated with “sales” applications together and use one common Amazon Web Services Verified Access policy.
+   */
+  createVerifiedAccessGroup(params: EC2.Types.CreateVerifiedAccessGroupRequest, callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessGroupResult) => void): Request<EC2.Types.CreateVerifiedAccessGroupResult, AWSError>;
+  /**
+   * An Amazon Web Services Verified Access group is a collection of Amazon Web Services Verified Access endpoints who's associated applications have similar security requirements. Each instance within an Amazon Web Services Verified Access group shares an Amazon Web Services Verified Access policy. For example, you can group all Amazon Web Services Verified Access instances associated with “sales” applications together and use one common Amazon Web Services Verified Access policy.
+   */
+  createVerifiedAccessGroup(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessGroupResult) => void): Request<EC2.Types.CreateVerifiedAccessGroupResult, AWSError>;
+  /**
+   * An Amazon Web Services Verified Access instance is a regional entity that evaluates application requests and grants access only when your security requirements are met.
+   */
+  createVerifiedAccessInstance(params: EC2.Types.CreateVerifiedAccessInstanceRequest, callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessInstanceResult) => void): Request<EC2.Types.CreateVerifiedAccessInstanceResult, AWSError>;
+  /**
+   * An Amazon Web Services Verified Access instance is a regional entity that evaluates application requests and grants access only when your security requirements are met.
+   */
+  createVerifiedAccessInstance(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessInstanceResult) => void): Request<EC2.Types.CreateVerifiedAccessInstanceResult, AWSError>;
+  /**
+   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. When an application request is made, the identity information sent by the trust provider will be evaluated by Amazon Web Services Verified Access, before allowing or denying the application request.
+   */
+  createVerifiedAccessTrustProvider(params: EC2.Types.CreateVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.CreateVerifiedAccessTrustProviderResult, AWSError>;
+  /**
+   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. When an application request is made, the identity information sent by the trust provider will be evaluated by Amazon Web Services Verified Access, before allowing or denying the application request.
+   */
+  createVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.CreateVerifiedAccessTrustProviderResult, AWSError>;
+  /**
    * Creates an EBS volume that can be attached to an instance in the same Availability Zone. You can create a new empty volume or restore a volume from an EBS snapshot. Any Amazon Web Services Marketplace product codes from the snapshot are propagated to the volume. You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can tag your volumes during creation. For more information, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Create an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   createVolume(params: EC2.Types.CreateVolumeRequest, callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
@@ -1492,6 +1532,38 @@ declare class EC2 extends Service {
    * Deletes the specified VPC attachment.
    */
   deleteTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.DeleteTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access endpoint.
+   */
+  deleteVerifiedAccessEndpoint(params: EC2.Types.DeleteVerifiedAccessEndpointRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessEndpointResult) => void): Request<EC2.Types.DeleteVerifiedAccessEndpointResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access endpoint.
+   */
+  deleteVerifiedAccessEndpoint(callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessEndpointResult) => void): Request<EC2.Types.DeleteVerifiedAccessEndpointResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access group.
+   */
+  deleteVerifiedAccessGroup(params: EC2.Types.DeleteVerifiedAccessGroupRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessGroupResult) => void): Request<EC2.Types.DeleteVerifiedAccessGroupResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access group.
+   */
+  deleteVerifiedAccessGroup(callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessGroupResult) => void): Request<EC2.Types.DeleteVerifiedAccessGroupResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access instance.
+   */
+  deleteVerifiedAccessInstance(params: EC2.Types.DeleteVerifiedAccessInstanceRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessInstanceResult) => void): Request<EC2.Types.DeleteVerifiedAccessInstanceResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access instance.
+   */
+  deleteVerifiedAccessInstance(callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessInstanceResult) => void): Request<EC2.Types.DeleteVerifiedAccessInstanceResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access trust provider.
+   */
+  deleteVerifiedAccessTrustProvider(params: EC2.Types.DeleteVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DeleteVerifiedAccessTrustProviderResult, AWSError>;
+  /**
+   * Delete an Amazon Web Services Verified Access trust provider.
+   */
+  deleteVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.DeleteVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DeleteVerifiedAccessTrustProviderResult, AWSError>;
   /**
    * Deletes the specified EBS volume. The volume must be in the available state (not attached to an instance). The volume can remain in the deleting state for several minutes. For more information, see Delete an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -2581,6 +2653,46 @@ declare class EC2 extends Service {
    */
   describeTrunkInterfaceAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
+   * Describe Amazon Web Services Verified Access endpoints.
+   */
+  describeVerifiedAccessEndpoints(params: EC2.Types.DescribeVerifiedAccessEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessEndpointsResult) => void): Request<EC2.Types.DescribeVerifiedAccessEndpointsResult, AWSError>;
+  /**
+   * Describe Amazon Web Services Verified Access endpoints.
+   */
+  describeVerifiedAccessEndpoints(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessEndpointsResult) => void): Request<EC2.Types.DescribeVerifiedAccessEndpointsResult, AWSError>;
+  /**
+   * Describe details of existing Verified Access groups.
+   */
+  describeVerifiedAccessGroups(params: EC2.Types.DescribeVerifiedAccessGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessGroupsResult) => void): Request<EC2.Types.DescribeVerifiedAccessGroupsResult, AWSError>;
+  /**
+   * Describe details of existing Verified Access groups.
+   */
+  describeVerifiedAccessGroups(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessGroupsResult) => void): Request<EC2.Types.DescribeVerifiedAccessGroupsResult, AWSError>;
+  /**
+   * Describes the current logging configuration for the Amazon Web Services Verified Access instances.
+   */
+  describeVerifiedAccessInstanceLoggingConfigurations(params: EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult, AWSError>;
+  /**
+   * Describes the current logging configuration for the Amazon Web Services Verified Access instances.
+   */
+  describeVerifiedAccessInstanceLoggingConfigurations(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult, AWSError>;
+  /**
+   * Describe Verified Access instances.
+   */
+  describeVerifiedAccessInstances(params: EC2.Types.DescribeVerifiedAccessInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstancesResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstancesResult, AWSError>;
+  /**
+   * Describe Verified Access instances.
+   */
+  describeVerifiedAccessInstances(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstancesResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstancesResult, AWSError>;
+  /**
+   * Describe details of existing Verified Access trust providers.
+   */
+  describeVerifiedAccessTrustProviders(params: EC2.Types.DescribeVerifiedAccessTrustProvidersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessTrustProvidersResult) => void): Request<EC2.Types.DescribeVerifiedAccessTrustProvidersResult, AWSError>;
+  /**
+   * Describe details of existing Verified Access trust providers.
+   */
+  describeVerifiedAccessTrustProviders(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessTrustProvidersResult) => void): Request<EC2.Types.DescribeVerifiedAccessTrustProvidersResult, AWSError>;
+  /**
    * Describes the specified attribute of the specified volume. You can specify only one attribute at a time. For more information about EBS volumes, see Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   describeVolumeAttribute(params: EC2.Types.DescribeVolumeAttributeRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumeAttributeResult) => void): Request<EC2.Types.DescribeVolumeAttributeResult, AWSError>;
@@ -2740,6 +2852,14 @@ declare class EC2 extends Service {
    * Detaches a network interface from an instance.
    */
   detachNetworkInterface(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Detach a trust provider from an Amazon Web Services Verified Access instance.
+   */
+  detachVerifiedAccessTrustProvider(params: EC2.Types.DetachVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.DetachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DetachVerifiedAccessTrustProviderResult, AWSError>;
+  /**
+   * Detach a trust provider from an Amazon Web Services Verified Access instance.
+   */
+  detachVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.DetachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DetachVerifiedAccessTrustProviderResult, AWSError>;
   /**
    * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an Amazon Web Services Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detach an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -3381,6 +3501,22 @@ declare class EC2 extends Service {
    */
   getTransitGatewayRouteTablePropagations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTablePropagationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTablePropagationsResult, AWSError>;
   /**
+   * Get the Verified Access policy associated with the endpoint.
+   */
+  getVerifiedAccessEndpointPolicy(params: EC2.Types.GetVerifiedAccessEndpointPolicyRequest, callback?: (err: AWSError, data: EC2.Types.GetVerifiedAccessEndpointPolicyResult) => void): Request<EC2.Types.GetVerifiedAccessEndpointPolicyResult, AWSError>;
+  /**
+   * Get the Verified Access policy associated with the endpoint.
+   */
+  getVerifiedAccessEndpointPolicy(callback?: (err: AWSError, data: EC2.Types.GetVerifiedAccessEndpointPolicyResult) => void): Request<EC2.Types.GetVerifiedAccessEndpointPolicyResult, AWSError>;
+  /**
+   * Shows the contents of the Verified Access policy associated with the group.
+   */
+  getVerifiedAccessGroupPolicy(params: EC2.Types.GetVerifiedAccessGroupPolicyRequest, callback?: (err: AWSError, data: EC2.Types.GetVerifiedAccessGroupPolicyResult) => void): Request<EC2.Types.GetVerifiedAccessGroupPolicyResult, AWSError>;
+  /**
+   * Shows the contents of the Verified Access policy associated with the group.
+   */
+  getVerifiedAccessGroupPolicy(callback?: (err: AWSError, data: EC2.Types.GetVerifiedAccessGroupPolicyResult) => void): Request<EC2.Types.GetVerifiedAccessGroupPolicyResult, AWSError>;
+  /**
    * Download an Amazon Web Services-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
    */
   getVpnConnectionDeviceSampleConfiguration(params: EC2.Types.GetVpnConnectionDeviceSampleConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult) => void): Request<EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult, AWSError>;
@@ -3796,6 +3932,62 @@ declare class EC2 extends Service {
    * Modifies the specified VPC attachment.
    */
   modifyTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
+  /**
+   * Modifies the configuration of an Amazon Web Services Verified Access endpoint.
+   */
+  modifyVerifiedAccessEndpoint(params: EC2.Types.ModifyVerifiedAccessEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointResult, AWSError>;
+  /**
+   * Modifies the configuration of an Amazon Web Services Verified Access endpoint.
+   */
+  modifyVerifiedAccessEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointResult, AWSError>;
+  /**
+   * Modifies the specified Verified Access endpoint policy.
+   */
+  modifyVerifiedAccessEndpointPolicy(params: EC2.Types.ModifyVerifiedAccessEndpointPolicyRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointPolicyResult, AWSError>;
+  /**
+   * Modifies the specified Verified Access endpoint policy.
+   */
+  modifyVerifiedAccessEndpointPolicy(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointPolicyResult, AWSError>;
+  /**
+   * Modifies the specified Verified Access group configuration.
+   */
+  modifyVerifiedAccessGroup(params: EC2.Types.ModifyVerifiedAccessGroupRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupResult, AWSError>;
+  /**
+   * Modifies the specified Verified Access group configuration.
+   */
+  modifyVerifiedAccessGroup(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupResult, AWSError>;
+  /**
+   * Modifies the specified Verified Access group policy.
+   */
+  modifyVerifiedAccessGroupPolicy(params: EC2.Types.ModifyVerifiedAccessGroupPolicyRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupPolicyResult, AWSError>;
+  /**
+   * Modifies the specified Verified Access group policy.
+   */
+  modifyVerifiedAccessGroupPolicy(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupPolicyResult, AWSError>;
+  /**
+   * Modifies the configuration of the specified Verified Access instance.
+   */
+  modifyVerifiedAccessInstance(params: EC2.Types.ModifyVerifiedAccessInstanceRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessInstanceResult) => void): Request<EC2.Types.ModifyVerifiedAccessInstanceResult, AWSError>;
+  /**
+   * Modifies the configuration of the specified Verified Access instance.
+   */
+  modifyVerifiedAccessInstance(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessInstanceResult) => void): Request<EC2.Types.ModifyVerifiedAccessInstanceResult, AWSError>;
+  /**
+   * Modifies the logging configuration for the specified Amazon Web Services Verified Access instance.
+   */
+  modifyVerifiedAccessInstanceLoggingConfiguration(params: EC2.Types.ModifyVerifiedAccessInstanceLoggingConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessInstanceLoggingConfigurationResult) => void): Request<EC2.Types.ModifyVerifiedAccessInstanceLoggingConfigurationResult, AWSError>;
+  /**
+   * Modifies the logging configuration for the specified Amazon Web Services Verified Access instance.
+   */
+  modifyVerifiedAccessInstanceLoggingConfiguration(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessInstanceLoggingConfigurationResult) => void): Request<EC2.Types.ModifyVerifiedAccessInstanceLoggingConfigurationResult, AWSError>;
+  /**
+   * Modifies the configuration of the specified Amazon Web Services Verified Access trust provider.
+   */
+  modifyVerifiedAccessTrustProvider(params: EC2.Types.ModifyVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.ModifyVerifiedAccessTrustProviderResult, AWSError>;
+  /**
+   * Modifies the configuration of the specified Amazon Web Services Verified Access trust provider.
+   */
+  modifyVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.ModifyVerifiedAccessTrustProviderResult, AWSError>;
   /**
    * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you might be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying EBS volumes, see Amazon EBS Elastic Volumes (Linux instances) or Amazon EBS Elastic Volumes (Windows instances). When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For more information, see Extend a Linux file system or Extend a Windows file system.  You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitor the progress of volume modifications. With previous-generation instance types, resizing an EBS volume might require detaching and reattaching the volume or stopping and restarting the instance. After modifying a volume, you must wait at least six hours and ensure that the volume is in the in-use or available state before you can modify the same volume. This is sometimes referred to as a cooldown period.
    */
@@ -6093,6 +6285,34 @@ declare namespace EC2 {
      */
     NetworkCardIndex?: Integer;
   }
+  export interface AttachVerifiedAccessTrustProviderRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId: VerifiedAccessInstanceId;
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AttachVerifiedAccessTrustProviderResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstance?: VerifiedAccessInstance;
+  }
   export interface AttachVolumeRequest {
     /**
      * The device name (for example, /dev/sdh or xvdh).
@@ -7050,6 +7270,7 @@ declare namespace EC2 {
   export type CarrierGatewayMaxResults = number;
   export type CarrierGatewaySet = CarrierGateway[];
   export type CarrierGatewayState = "pending"|"available"|"deleting"|"deleted"|string;
+  export type CertificateArn = string;
   export interface CertificateAuthentication {
     /**
      * The ARN of the client certificate. 
@@ -10245,6 +10466,243 @@ declare namespace EC2 {
      */
     TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
   }
+  export interface CreateVerifiedAccessEndpointEniOptions {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: NetworkInterfaceId;
+    /**
+     * The IP protocol.
+     */
+    Protocol?: VerifiedAccessEndpointProtocol;
+    /**
+     * The IP port number.
+     */
+    Port?: VerifiedAccessEndpointPortNumber;
+  }
+  export interface CreateVerifiedAccessEndpointLoadBalancerOptions {
+    /**
+     * The IP protocol.
+     */
+    Protocol?: VerifiedAccessEndpointProtocol;
+    /**
+     * The IP port number.
+     */
+    Port?: VerifiedAccessEndpointPortNumber;
+    /**
+     * The ARN of the load balancer.
+     */
+    LoadBalancerArn?: LoadBalancerArn;
+    /**
+     * The IDs of the subnets.
+     */
+    SubnetIds?: CreateVerifiedAccessEndpointSubnetIdList;
+  }
+  export interface CreateVerifiedAccessEndpointRequest {
+    /**
+     * The ID of the Verified Access group to associate the endpoint with.
+     */
+    VerifiedAccessGroupId: VerifiedAccessGroupId;
+    /**
+     * The type of Amazon Web Services Verified Access endpoint to create.
+     */
+    EndpointType: VerifiedAccessEndpointType;
+    /**
+     * The Amazon Web Services network component Verified Access attaches to.
+     */
+    AttachmentType: VerifiedAccessEndpointAttachmentType;
+    /**
+     * The ARN of the public TLS/SSL certificate in Amazon Web Services Certificate Manager to associate with the endpoint. The CN in the certificate must match the DNS name your end users will use to reach your application.
+     */
+    DomainCertificateArn: CertificateArn;
+    /**
+     * The DNS name for users to reach your application.
+     */
+    ApplicationDomain: String;
+    /**
+     * A custom identifier that gets prepended to a DNS name that is generated for the endpoint.
+     */
+    EndpointDomainPrefix: String;
+    /**
+     * The Amazon EC2 security groups to associate with the Amazon Web Services Verified Access endpoint.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * The load balancer details if creating the Amazon Web Services Verified Access endpoint as load-balancertype.
+     */
+    LoadBalancerOptions?: CreateVerifiedAccessEndpointLoadBalancerOptions;
+    /**
+     * The network interface details if creating the Amazon Web Services Verified Access endpoint as network-interfacetype.
+     */
+    NetworkInterfaceOptions?: CreateVerifiedAccessEndpointEniOptions;
+    /**
+     * A description for the Amazon Web Services Verified Access endpoint.
+     */
+    Description?: String;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+    /**
+     * The tags to assign to the Amazon Web Services Verified Access endpoint.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateVerifiedAccessEndpointResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
+  }
+  export type CreateVerifiedAccessEndpointSubnetIdList = SubnetId[];
+  export interface CreateVerifiedAccessGroupRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId: VerifiedAccessInstanceId;
+    /**
+     * A description for the Amazon Web Services Verified Access group.
+     */
+    Description?: String;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+    /**
+     * The tags to assign to the Amazon Web Services Verified Access group.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateVerifiedAccessGroupResult {
+    /**
+     * The ID of the Verified Access group.
+     */
+    VerifiedAccessGroup?: VerifiedAccessGroup;
+  }
+  export interface CreateVerifiedAccessInstanceRequest {
+    /**
+     * A description for the Amazon Web Services Verified Access instance.
+     */
+    Description?: String;
+    /**
+     * The tags to assign to the Amazon Web Services Verified Access instance.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateVerifiedAccessInstanceResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstance?: VerifiedAccessInstance;
+  }
+  export interface CreateVerifiedAccessTrustProviderDeviceOptions {
+    /**
+     * The ID of the tenant application with the device-identity provider.
+     */
+    TenantId?: String;
+  }
+  export interface CreateVerifiedAccessTrustProviderOidcOptions {
+    /**
+     * The OIDC issuer.
+     */
+    Issuer?: String;
+    /**
+     * The OIDC authorization endpoint.
+     */
+    AuthorizationEndpoint?: String;
+    /**
+     * The OIDC token endpoint.
+     */
+    TokenEndpoint?: String;
+    /**
+     * The OIDC user info endpoint.
+     */
+    UserInfoEndpoint?: String;
+    /**
+     * The client identifier.
+     */
+    ClientId?: String;
+    /**
+     * The client secret.
+     */
+    ClientSecret?: String;
+    /**
+     * OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to a user's details. Each scope returns a specific set of user attributes.
+     */
+    Scope?: String;
+  }
+  export interface CreateVerifiedAccessTrustProviderRequest {
+    /**
+     * The type of trust provider can be either user or device-based.
+     */
+    TrustProviderType: TrustProviderType;
+    /**
+     * The type of user-based trust provider.
+     */
+    UserTrustProviderType?: UserTrustProviderType;
+    /**
+     * The type of device-based trust provider.
+     */
+    DeviceTrustProviderType?: DeviceTrustProviderType;
+    /**
+     * The OpenID Connect details for an oidc-type, user-identity based trust provider.
+     */
+    OidcOptions?: CreateVerifiedAccessTrustProviderOidcOptions;
+    /**
+     * The options for device identity based trust providers.
+     */
+    DeviceOptions?: CreateVerifiedAccessTrustProviderDeviceOptions;
+    /**
+     * The identifier to be used when working with policy rules.
+     */
+    PolicyReferenceName: String;
+    /**
+     * A description for the Amazon Web Services Verified Access trust provider.
+     */
+    Description?: String;
+    /**
+     * The tags to assign to the Amazon Web Services Verified Access trust provider.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateVerifiedAccessTrustProviderResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
+  }
   export interface CreateVolumePermission {
     /**
      * The group to be added or removed. The possible value is all.
@@ -11775,6 +12233,86 @@ declare namespace EC2 {
      * Information about the deleted VPC attachment.
      */
     TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
+  }
+  export interface DeleteVerifiedAccessEndpointRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpointId: VerifiedAccessEndpointId;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteVerifiedAccessEndpointResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
+  }
+  export interface DeleteVerifiedAccessGroupRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId: VerifiedAccessGroupId;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteVerifiedAccessGroupResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroup?: VerifiedAccessGroup;
+  }
+  export interface DeleteVerifiedAccessInstanceRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId: VerifiedAccessInstanceId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface DeleteVerifiedAccessInstanceResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstance?: VerifiedAccessInstance;
+  }
+  export interface DeleteVerifiedAccessTrustProviderRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface DeleteVerifiedAccessTrustProviderResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
   export interface DeleteVolumeRequest {
     /**
@@ -15885,6 +16423,183 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeVerifiedAccessEndpointsMaxResults = number;
+  export interface DescribeVerifiedAccessEndpointsRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpointIds?: VerifiedAccessEndpointIdList;
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: VerifiedAccessInstanceId;
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId?: VerifiedAccessGroupId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeVerifiedAccessEndpointsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeVerifiedAccessEndpointsResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpoints?: VerifiedAccessEndpointList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export type DescribeVerifiedAccessGroupMaxResults = number;
+  export interface DescribeVerifiedAccessGroupsRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access groups.
+     */
+    VerifiedAccessGroupIds?: VerifiedAccessGroupIdList;
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: VerifiedAccessInstanceId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeVerifiedAccessGroupMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeVerifiedAccessGroupsResult {
+    /**
+     * The ID of the Verified Access group.
+     */
+    VerifiedAccessGroups?: VerifiedAccessGroupList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export type DescribeVerifiedAccessInstanceLoggingConfigurationsMaxResults = number;
+  export interface DescribeVerifiedAccessInstanceLoggingConfigurationsRequest {
+    /**
+     * The IDs of the Amazon Web Services Verified Access instances.
+     */
+    VerifiedAccessInstanceIds?: VerifiedAccessInstanceIdList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeVerifiedAccessInstanceLoggingConfigurationsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeVerifiedAccessInstanceLoggingConfigurationsResult {
+    /**
+     * The current logging configuration for the Amazon Web Services Verified Access instances.
+     */
+    LoggingConfigurations?: VerifiedAccessInstanceLoggingConfigurationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export type DescribeVerifiedAccessInstancesMaxResults = number;
+  export interface DescribeVerifiedAccessInstancesRequest {
+    /**
+     * The IDs of the Amazon Web Services Verified Access instances.
+     */
+    VerifiedAccessInstanceIds?: VerifiedAccessInstanceIdList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeVerifiedAccessInstancesMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeVerifiedAccessInstancesResult {
+    /**
+     * The IDs of the Amazon Web Services Verified Access instances.
+     */
+    VerifiedAccessInstances?: VerifiedAccessInstanceList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export type DescribeVerifiedAccessTrustProvidersMaxResults = number;
+  export interface DescribeVerifiedAccessTrustProvidersRequest {
+    /**
+     * The IDs of the Amazon Web Services Verified Access trust providers.
+     */
+    VerifiedAccessTrustProviderIds?: VerifiedAccessTrustProviderIdList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeVerifiedAccessTrustProvidersMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters. Filter names and values are case-sensitive.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeVerifiedAccessTrustProvidersResult {
+    /**
+     * The IDs of the Amazon Web Services Verified Access trust providers.
+     */
+    VerifiedAccessTrustProviders?: VerifiedAccessTrustProviderList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface DescribeVolumeAttributeRequest {
     /**
      * The attribute of the volume. This parameter is required.
@@ -16462,6 +17177,34 @@ declare namespace EC2 {
      */
     Force?: Boolean;
   }
+  export interface DetachVerifiedAccessTrustProviderRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId: VerifiedAccessInstanceId;
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DetachVerifiedAccessTrustProviderResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstance?: VerifiedAccessInstance;
+  }
   export interface DetachVolumeRequest {
     /**
      * The device name.
@@ -16498,6 +17241,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface DeviceOptions {
+    /**
+     * The ID of the tenant application with the device-identity provider.
+     */
+    TenantId?: String;
+  }
+  export type DeviceTrustProviderType = "jamf"|"crowdstrike"|string;
   export type DeviceType = "ebs"|"instance-store"|string;
   export interface DhcpConfiguration {
     /**
@@ -20032,6 +20782,46 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface GetVerifiedAccessEndpointPolicyRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpointId: VerifiedAccessEndpointId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetVerifiedAccessEndpointPolicyResult {
+    /**
+     * The status of the Verified Access policy.
+     */
+    PolicyEnabled?: Boolean;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+  }
+  export interface GetVerifiedAccessGroupPolicyRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId: VerifiedAccessGroupId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetVerifiedAccessGroupPolicyResult {
+    /**
+     * The status of the Verified Access policy.
+     */
+    PolicyEnabled?: Boolean;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+  }
   export interface GetVpnConnectionDeviceSampleConfigurationRequest {
     /**
      * The VpnConnectionId specifies the Site-to-Site VPN connection used for the sample configuration.
@@ -22481,7 +23271,7 @@ declare namespace EC2 {
      */
     IncludeAllTagsOfInstance?: Boolean;
   }
-  export type InstanceType = "a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6g.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gd.metal"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"c6i.32xlarge"|"c6i.metal"|"cc1.4xlarge"|"cc2.8xlarge"|"cg1.4xlarge"|"cr1.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"dl1.24xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.12xlarge"|"g5.16xlarge"|"g5.24xlarge"|"g5.48xlarge"|"g5g.xlarge"|"g5g.2xlarge"|"g5g.4xlarge"|"g5g.8xlarge"|"g5g.16xlarge"|"g5g.metal"|"hi1.4xlarge"|"hpc6a.48xlarge"|"hs1.8xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"im4gn.large"|"im4gn.xlarge"|"im4gn.2xlarge"|"im4gn.4xlarge"|"im4gn.8xlarge"|"im4gn.16xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"is4gen.medium"|"is4gen.large"|"is4gen.xlarge"|"is4gen.2xlarge"|"is4gen.4xlarge"|"is4gen.8xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"m6a.large"|"m6a.xlarge"|"m6a.2xlarge"|"m6a.4xlarge"|"m6a.8xlarge"|"m6a.12xlarge"|"m6a.16xlarge"|"m6a.24xlarge"|"m6a.32xlarge"|"m6a.48xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"m6i.metal"|"mac1.metal"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6g.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"r6gd.metal"|"r6i.large"|"r6i.xlarge"|"r6i.2xlarge"|"r6i.4xlarge"|"r6i.8xlarge"|"r6i.12xlarge"|"r6i.16xlarge"|"r6i.24xlarge"|"r6i.32xlarge"|"r6i.metal"|"t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"x2iezn.2xlarge"|"x2iezn.4xlarge"|"x2iezn.6xlarge"|"x2iezn.8xlarge"|"x2iezn.12xlarge"|"x2iezn.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"x2idn.16xlarge"|"x2idn.24xlarge"|"x2idn.32xlarge"|"x2iedn.xlarge"|"x2iedn.2xlarge"|"x2iedn.4xlarge"|"x2iedn.8xlarge"|"x2iedn.16xlarge"|"x2iedn.24xlarge"|"x2iedn.32xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6a.32xlarge"|"c6a.48xlarge"|"c6a.metal"|"m6a.metal"|"i4i.large"|"i4i.xlarge"|"i4i.2xlarge"|"i4i.4xlarge"|"i4i.8xlarge"|"i4i.16xlarge"|"i4i.32xlarge"|"i4i.metal"|"x2idn.metal"|"x2iedn.metal"|"c7g.medium"|"c7g.large"|"c7g.xlarge"|"c7g.2xlarge"|"c7g.4xlarge"|"c7g.8xlarge"|"c7g.12xlarge"|"c7g.16xlarge"|"mac2.metal"|"c6id.large"|"c6id.xlarge"|"c6id.2xlarge"|"c6id.4xlarge"|"c6id.8xlarge"|"c6id.12xlarge"|"c6id.16xlarge"|"c6id.24xlarge"|"c6id.32xlarge"|"c6id.metal"|"m6id.large"|"m6id.xlarge"|"m6id.2xlarge"|"m6id.4xlarge"|"m6id.8xlarge"|"m6id.12xlarge"|"m6id.16xlarge"|"m6id.24xlarge"|"m6id.32xlarge"|"m6id.metal"|"r6id.large"|"r6id.xlarge"|"r6id.2xlarge"|"r6id.4xlarge"|"r6id.8xlarge"|"r6id.12xlarge"|"r6id.16xlarge"|"r6id.24xlarge"|"r6id.32xlarge"|"r6id.metal"|"r6a.large"|"r6a.xlarge"|"r6a.2xlarge"|"r6a.4xlarge"|"r6a.8xlarge"|"r6a.12xlarge"|"r6a.16xlarge"|"r6a.24xlarge"|"r6a.32xlarge"|"r6a.48xlarge"|"r6a.metal"|"p4de.24xlarge"|"u-3tb1.56xlarge"|"u-18tb1.112xlarge"|"u-24tb1.112xlarge"|"trn1.2xlarge"|"trn1.32xlarge"|string;
+  export type InstanceType = "a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6g.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gd.metal"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"c6i.32xlarge"|"c6i.metal"|"cc1.4xlarge"|"cc2.8xlarge"|"cg1.4xlarge"|"cr1.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"dl1.24xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.12xlarge"|"g5.16xlarge"|"g5.24xlarge"|"g5.48xlarge"|"g5g.xlarge"|"g5g.2xlarge"|"g5g.4xlarge"|"g5g.8xlarge"|"g5g.16xlarge"|"g5g.metal"|"hi1.4xlarge"|"hpc6a.48xlarge"|"hs1.8xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"im4gn.large"|"im4gn.xlarge"|"im4gn.2xlarge"|"im4gn.4xlarge"|"im4gn.8xlarge"|"im4gn.16xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"is4gen.medium"|"is4gen.large"|"is4gen.xlarge"|"is4gen.2xlarge"|"is4gen.4xlarge"|"is4gen.8xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"m6a.large"|"m6a.xlarge"|"m6a.2xlarge"|"m6a.4xlarge"|"m6a.8xlarge"|"m6a.12xlarge"|"m6a.16xlarge"|"m6a.24xlarge"|"m6a.32xlarge"|"m6a.48xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"m6i.metal"|"mac1.metal"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6g.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"r6gd.metal"|"r6i.large"|"r6i.xlarge"|"r6i.2xlarge"|"r6i.4xlarge"|"r6i.8xlarge"|"r6i.12xlarge"|"r6i.16xlarge"|"r6i.24xlarge"|"r6i.32xlarge"|"r6i.metal"|"t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"x2iezn.2xlarge"|"x2iezn.4xlarge"|"x2iezn.6xlarge"|"x2iezn.8xlarge"|"x2iezn.12xlarge"|"x2iezn.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"x2idn.16xlarge"|"x2idn.24xlarge"|"x2idn.32xlarge"|"x2iedn.xlarge"|"x2iedn.2xlarge"|"x2iedn.4xlarge"|"x2iedn.8xlarge"|"x2iedn.16xlarge"|"x2iedn.24xlarge"|"x2iedn.32xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6a.32xlarge"|"c6a.48xlarge"|"c6a.metal"|"m6a.metal"|"i4i.large"|"i4i.xlarge"|"i4i.2xlarge"|"i4i.4xlarge"|"i4i.8xlarge"|"i4i.16xlarge"|"i4i.32xlarge"|"i4i.metal"|"x2idn.metal"|"x2iedn.metal"|"c7g.medium"|"c7g.large"|"c7g.xlarge"|"c7g.2xlarge"|"c7g.4xlarge"|"c7g.8xlarge"|"c7g.12xlarge"|"c7g.16xlarge"|"mac2.metal"|"c6id.large"|"c6id.xlarge"|"c6id.2xlarge"|"c6id.4xlarge"|"c6id.8xlarge"|"c6id.12xlarge"|"c6id.16xlarge"|"c6id.24xlarge"|"c6id.32xlarge"|"c6id.metal"|"m6id.large"|"m6id.xlarge"|"m6id.2xlarge"|"m6id.4xlarge"|"m6id.8xlarge"|"m6id.12xlarge"|"m6id.16xlarge"|"m6id.24xlarge"|"m6id.32xlarge"|"m6id.metal"|"r6id.large"|"r6id.xlarge"|"r6id.2xlarge"|"r6id.4xlarge"|"r6id.8xlarge"|"r6id.12xlarge"|"r6id.16xlarge"|"r6id.24xlarge"|"r6id.32xlarge"|"r6id.metal"|"r6a.large"|"r6a.xlarge"|"r6a.2xlarge"|"r6a.4xlarge"|"r6a.8xlarge"|"r6a.12xlarge"|"r6a.16xlarge"|"r6a.24xlarge"|"r6a.32xlarge"|"r6a.48xlarge"|"r6a.metal"|"p4de.24xlarge"|"u-3tb1.56xlarge"|"u-18tb1.112xlarge"|"u-24tb1.112xlarge"|"trn1.2xlarge"|"trn1.32xlarge"|"hpc6id.32xlarge"|string;
   export type InstanceTypeHypervisor = "nitro"|"xen"|string;
   export interface InstanceTypeInfo {
     /**
@@ -24229,6 +25019,7 @@ declare namespace EC2 {
   }
   export type ListingState = "available"|"sold"|"cancelled"|"pending"|string;
   export type ListingStatus = "active"|"pending"|"cancelled"|"closed"|string;
+  export type LoadBalancerArn = string;
   export interface LoadBalancersConfig {
     /**
      * The Classic Load Balancers.
@@ -26026,6 +26817,241 @@ declare namespace EC2 {
      */
     TransitGatewayVpcAttachment?: TransitGatewayVpcAttachment;
   }
+  export interface ModifyVerifiedAccessEndpointEniOptions {
+    /**
+     * The IP protocol.
+     */
+    Protocol?: VerifiedAccessEndpointProtocol;
+    /**
+     * The IP port number.
+     */
+    Port?: VerifiedAccessEndpointPortNumber;
+  }
+  export interface ModifyVerifiedAccessEndpointLoadBalancerOptions {
+    /**
+     * The IDs of the subnets.
+     */
+    SubnetIds?: ModifyVerifiedAccessEndpointSubnetIdList;
+    /**
+     * The IP protocol.
+     */
+    Protocol?: VerifiedAccessEndpointProtocol;
+    /**
+     * The IP port number.
+     */
+    Port?: VerifiedAccessEndpointPortNumber;
+  }
+  export interface ModifyVerifiedAccessEndpointPolicyRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpointId: VerifiedAccessEndpointId;
+    /**
+     * The status of the Verified Access policy.
+     */
+    PolicyEnabled: Boolean;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVerifiedAccessEndpointPolicyResult {
+    /**
+     * The status of the Verified Access policy.
+     */
+    PolicyEnabled?: Boolean;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+  }
+  export interface ModifyVerifiedAccessEndpointRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpointId: VerifiedAccessEndpointId;
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId?: VerifiedAccessGroupId;
+    /**
+     * The load balancer details if creating the Amazon Web Services Verified Access endpoint as load-balancertype.
+     */
+    LoadBalancerOptions?: ModifyVerifiedAccessEndpointLoadBalancerOptions;
+    /**
+     * The network interface options.
+     */
+    NetworkInterfaceOptions?: ModifyVerifiedAccessEndpointEniOptions;
+    /**
+     * A description for the Amazon Web Services Verified Access endpoint.
+     */
+    Description?: String;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVerifiedAccessEndpointResult {
+    /**
+     * The Amazon Web Services Verified Access endpoint details.
+     */
+    VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
+  }
+  export type ModifyVerifiedAccessEndpointSubnetIdList = SubnetId[];
+  export interface ModifyVerifiedAccessGroupPolicyRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId: VerifiedAccessGroupId;
+    /**
+     * The status of the Verified Access policy.
+     */
+    PolicyEnabled: Boolean;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVerifiedAccessGroupPolicyResult {
+    /**
+     * The status of the Verified Access policy.
+     */
+    PolicyEnabled?: Boolean;
+    /**
+     * The Amazon Web Services Verified Access policy document.
+     */
+    PolicyDocument?: String;
+  }
+  export interface ModifyVerifiedAccessGroupRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId: VerifiedAccessGroupId;
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: VerifiedAccessInstanceId;
+    /**
+     * A description for the Amazon Web Services Verified Access group.
+     */
+    Description?: String;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyVerifiedAccessGroupResult {
+    /**
+     * Details of Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroup?: VerifiedAccessGroup;
+  }
+  export interface ModifyVerifiedAccessInstanceLoggingConfigurationRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId: VerifiedAccessInstanceId;
+    /**
+     * The configuration options for Amazon Web Services Verified Access instances.
+     */
+    AccessLogs: VerifiedAccessLogOptions;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface ModifyVerifiedAccessInstanceLoggingConfigurationResult {
+    /**
+     * The logging configuration for Amazon Web Services Verified Access instance.
+     */
+    LoggingConfiguration?: VerifiedAccessInstanceLoggingConfiguration;
+  }
+  export interface ModifyVerifiedAccessInstanceRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId: VerifiedAccessInstanceId;
+    /**
+     * A description for the Amazon Web Services Verified Access instance.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface ModifyVerifiedAccessInstanceResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstance?: VerifiedAccessInstance;
+  }
+  export interface ModifyVerifiedAccessTrustProviderOidcOptions {
+    /**
+     * OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to a user's details. Each scope returns a specific set of user attributes.
+     */
+    Scope?: String;
+  }
+  export interface ModifyVerifiedAccessTrustProviderRequest {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
+    /**
+     * The OpenID Connect details for an oidc-type, user-identity based trust provider.
+     */
+    OidcOptions?: ModifyVerifiedAccessTrustProviderOidcOptions;
+    /**
+     * A description for the Amazon Web Services Verified Access trust provider.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface ModifyVerifiedAccessTrustProviderResult {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
+  }
   export interface ModifyVolumeAttributeRequest {
     /**
      * Indicates whether the volume should be auto-enabled for I/O operations.
@@ -27326,6 +28352,36 @@ declare namespace EC2 {
   export type OfferingClassType = "standard"|"convertible"|string;
   export type OfferingId = string;
   export type OfferingTypeValues = "Heavy Utilization"|"Medium Utilization"|"Light Utilization"|"No Upfront"|"Partial Upfront"|"All Upfront"|string;
+  export interface OidcOptions {
+    /**
+     * The OIDC issuer.
+     */
+    Issuer?: String;
+    /**
+     * The OIDC authorization endpoint.
+     */
+    AuthorizationEndpoint?: String;
+    /**
+     * The OIDC token endpoint.
+     */
+    TokenEndpoint?: String;
+    /**
+     * The OIDC user info endpoint.
+     */
+    UserInfoEndpoint?: String;
+    /**
+     * The client identifier.
+     */
+    ClientId?: String;
+    /**
+     * The client secret.
+     */
+    ClientSecret?: String;
+    /**
+     * The OpenID Connect (OIDC) scope specified.
+     */
+    Scope?: String;
+  }
   export type OnDemandAllocationStrategy = "lowestPrice"|"prioritized"|string;
   export interface OnDemandOptions {
     /**
@@ -29788,7 +30844,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"vpn-connection-device-type"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -31078,6 +32134,7 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type SecurityGroupId = string;
+  export type SecurityGroupIdList = SecurityGroupId[];
   export type SecurityGroupIdStringList = SecurityGroupId[];
   export interface SecurityGroupIdentifier {
     /**
@@ -34135,6 +35192,7 @@ declare namespace EC2 {
   export type TrunkInterfaceAssociationId = string;
   export type TrunkInterfaceAssociationIdList = TrunkInterfaceAssociationId[];
   export type TrunkInterfaceAssociationList = TrunkInterfaceAssociation[];
+  export type TrustProviderType = "user"|"device"|string;
   export type TunnelInsideIpVersion = "ipv4"|"ipv6"|string;
   export interface TunnelOption {
     /**
@@ -34440,6 +35498,7 @@ declare namespace EC2 {
   export type UserIdGroupPairList = UserIdGroupPair[];
   export type UserIdGroupPairSet = UserIdGroupPair[];
   export type UserIdStringList = String[];
+  export type UserTrustProviderType = "iam-identity-center"|"oidc"|string;
   export type VCpuCount = number;
   export interface VCpuCountRange {
     /**
@@ -34500,6 +35559,411 @@ declare namespace EC2 {
     Errors?: ErrorSet;
   }
   export type ValueStringList = String[];
+  export interface VerifiedAccessEndpoint {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: String;
+    /**
+     * The ID of the Amazon Web Services Verified Access group.
+     */
+    VerifiedAccessGroupId?: String;
+    /**
+     * The ID of the Amazon Web Services Verified Access endpoint.
+     */
+    VerifiedAccessEndpointId?: String;
+    /**
+     * The DNS name for users to reach your application.
+     */
+    ApplicationDomain?: String;
+    /**
+     * The type of Amazon Web Services Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.
+     */
+    EndpointType?: VerifiedAccessEndpointType;
+    /**
+     * The type of attachment used to provide connectivity between the Amazon Web Services Verified Access endpoint and the application.
+     */
+    AttachmentType?: VerifiedAccessEndpointAttachmentType;
+    /**
+     * The ARN of a public TLS/SSL certificate imported into or created with ACM.
+     */
+    DomainCertificateArn?: String;
+    /**
+     * A DNS name that is generated for the endpoint.
+     */
+    EndpointDomain?: String;
+    /**
+     * Returned if endpoint has a device trust provider attached.
+     */
+    DeviceValidationDomain?: String;
+    /**
+     * The IDs of the security groups for the endpoint.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * The load balancer details if creating the Amazon Web Services Verified Access endpoint as load-balancertype.
+     */
+    LoadBalancerOptions?: VerifiedAccessEndpointLoadBalancerOptions;
+    /**
+     * The options for network-interface type endpoint.
+     */
+    NetworkInterfaceOptions?: VerifiedAccessEndpointEniOptions;
+    /**
+     * The endpoint status.
+     */
+    Status?: VerifiedAccessEndpointStatus;
+    /**
+     * A description for the Amazon Web Services Verified Access endpoint.
+     */
+    Description?: String;
+    /**
+     * The creation time.
+     */
+    CreationTime?: String;
+    /**
+     * The last updated time.
+     */
+    LastUpdatedTime?: String;
+    /**
+     * The deletion time.
+     */
+    DeletionTime?: String;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type VerifiedAccessEndpointAttachmentType = "vpc"|string;
+  export interface VerifiedAccessEndpointEniOptions {
+    /**
+     * The ID of the network interface.
+     */
+    NetworkInterfaceId?: NetworkInterfaceId;
+    /**
+     * The IP protocol.
+     */
+    Protocol?: VerifiedAccessEndpointProtocol;
+    /**
+     * The IP port number.
+     */
+    Port?: VerifiedAccessEndpointPortNumber;
+  }
+  export type VerifiedAccessEndpointId = string;
+  export type VerifiedAccessEndpointIdList = VerifiedAccessEndpointId[];
+  export type VerifiedAccessEndpointList = VerifiedAccessEndpoint[];
+  export interface VerifiedAccessEndpointLoadBalancerOptions {
+    /**
+     * The IP protocol.
+     */
+    Protocol?: VerifiedAccessEndpointProtocol;
+    /**
+     * The IP port number.
+     */
+    Port?: VerifiedAccessEndpointPortNumber;
+    /**
+     * The ARN of the load balancer.
+     */
+    LoadBalancerArn?: String;
+    /**
+     * The IDs of the subnets.
+     */
+    SubnetIds?: VerifiedAccessEndpointSubnetIdList;
+  }
+  export type VerifiedAccessEndpointPortNumber = number;
+  export type VerifiedAccessEndpointProtocol = "http"|"https"|string;
+  export interface VerifiedAccessEndpointStatus {
+    /**
+     * The status code of the Verified Access endpoint.
+     */
+    Code?: VerifiedAccessEndpointStatusCode;
+    /**
+     * The status message of the Verified Access endpoint.
+     */
+    Message?: String;
+  }
+  export type VerifiedAccessEndpointStatusCode = "pending"|"active"|"updating"|"deleting"|"deleted"|string;
+  export type VerifiedAccessEndpointSubnetIdList = SubnetId[];
+  export type VerifiedAccessEndpointType = "load-balancer"|"network-interface"|string;
+  export interface VerifiedAccessGroup {
+    /**
+     * The ID of the Verified Access group.
+     */
+    VerifiedAccessGroupId?: String;
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: String;
+    /**
+     * A description for the Amazon Web Services Verified Access group.
+     */
+    Description?: String;
+    /**
+     * The Amazon Web Services account number that owns the group.
+     */
+    Owner?: String;
+    /**
+     * The ARN of the Verified Access group.
+     */
+    VerifiedAccessGroupArn?: String;
+    /**
+     * The creation time.
+     */
+    CreationTime?: String;
+    /**
+     * The last updated time.
+     */
+    LastUpdatedTime?: String;
+    /**
+     * The deletion time.
+     */
+    DeletionTime?: String;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type VerifiedAccessGroupId = string;
+  export type VerifiedAccessGroupIdList = VerifiedAccessGroupId[];
+  export type VerifiedAccessGroupList = VerifiedAccessGroup[];
+  export interface VerifiedAccessInstance {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: String;
+    /**
+     * A description for the Amazon Web Services Verified Access instance.
+     */
+    Description?: String;
+    /**
+     * The IDs of the Amazon Web Services Verified Access trust providers.
+     */
+    VerifiedAccessTrustProviders?: VerifiedAccessTrustProviderCondensedList;
+    /**
+     * The creation time.
+     */
+    CreationTime?: String;
+    /**
+     * The last updated time.
+     */
+    LastUpdatedTime?: String;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export type VerifiedAccessInstanceId = string;
+  export type VerifiedAccessInstanceIdList = VerifiedAccessInstanceId[];
+  export type VerifiedAccessInstanceList = VerifiedAccessInstance[];
+  export interface VerifiedAccessInstanceLoggingConfiguration {
+    /**
+     * The ID of the Amazon Web Services Verified Access instance.
+     */
+    VerifiedAccessInstanceId?: String;
+    /**
+     * Details about the logging options.
+     */
+    AccessLogs?: VerifiedAccessLogs;
+  }
+  export type VerifiedAccessInstanceLoggingConfigurationList = VerifiedAccessInstanceLoggingConfiguration[];
+  export interface VerifiedAccessLogCloudWatchLogsDestination {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The delivery status for access logs.
+     */
+    DeliveryStatus?: VerifiedAccessLogDeliveryStatus;
+    /**
+     * The ID of the CloudWatch Logs log group.
+     */
+    LogGroup?: String;
+  }
+  export interface VerifiedAccessLogCloudWatchLogsDestinationOptions {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled: Boolean;
+    /**
+     * The ID of the CloudWatch Logs log group.
+     */
+    LogGroup?: String;
+  }
+  export interface VerifiedAccessLogDeliveryStatus {
+    /**
+     * The status code.
+     */
+    Code?: VerifiedAccessLogDeliveryStatusCode;
+    /**
+     * The status message.
+     */
+    Message?: String;
+  }
+  export type VerifiedAccessLogDeliveryStatusCode = "success"|"failed"|string;
+  export interface VerifiedAccessLogKinesisDataFirehoseDestination {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The delivery status.
+     */
+    DeliveryStatus?: VerifiedAccessLogDeliveryStatus;
+    /**
+     * The ID of the delivery stream.
+     */
+    DeliveryStream?: String;
+  }
+  export interface VerifiedAccessLogKinesisDataFirehoseDestinationOptions {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled: Boolean;
+    /**
+     * The ID of the delivery stream.
+     */
+    DeliveryStream?: String;
+  }
+  export interface VerifiedAccessLogOptions {
+    /**
+     * Sends Verified Access logs to Amazon S3.
+     */
+    S3?: VerifiedAccessLogS3DestinationOptions;
+    /**
+     * Sends Verified Access logs to CloudWatch Logs.
+     */
+    CloudWatchLogs?: VerifiedAccessLogCloudWatchLogsDestinationOptions;
+    /**
+     * Sends Verified Access logs to Kinesis.
+     */
+    KinesisDataFirehose?: VerifiedAccessLogKinesisDataFirehoseDestinationOptions;
+  }
+  export interface VerifiedAccessLogS3Destination {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The delivery status.
+     */
+    DeliveryStatus?: VerifiedAccessLogDeliveryStatus;
+    /**
+     * The bucket name.
+     */
+    BucketName?: String;
+    /**
+     * The bucket prefix.
+     */
+    Prefix?: String;
+    /**
+     * The Amazon Web Services account number that owns the bucket.
+     */
+    BucketOwner?: String;
+  }
+  export interface VerifiedAccessLogS3DestinationOptions {
+    /**
+     * Indicates whether logging is enabled.
+     */
+    Enabled: Boolean;
+    /**
+     * The bucket name.
+     */
+    BucketName?: String;
+    /**
+     * The bucket prefix.
+     */
+    Prefix?: String;
+    /**
+     * The ID of the Amazon Web Services account that owns the Amazon S3 bucket.
+     */
+    BucketOwner?: String;
+  }
+  export interface VerifiedAccessLogs {
+    /**
+     * Amazon S3 logging options.
+     */
+    S3?: VerifiedAccessLogS3Destination;
+    /**
+     * CloudWatch Logs logging destination.
+     */
+    CloudWatchLogs?: VerifiedAccessLogCloudWatchLogsDestination;
+    /**
+     * Kinesis logging destination.
+     */
+    KinesisDataFirehose?: VerifiedAccessLogKinesisDataFirehoseDestination;
+  }
+  export interface VerifiedAccessTrustProvider {
+    /**
+     * The ID of the Amazon Web Services Verified Access trust provider.
+     */
+    VerifiedAccessTrustProviderId?: String;
+    /**
+     * A description for the Amazon Web Services Verified Access trust provider.
+     */
+    Description?: String;
+    /**
+     * The type of Verified Access trust provider.
+     */
+    TrustProviderType?: TrustProviderType;
+    /**
+     * The type of user-based trust provider.
+     */
+    UserTrustProviderType?: UserTrustProviderType;
+    /**
+     * The type of device-based trust provider.
+     */
+    DeviceTrustProviderType?: DeviceTrustProviderType;
+    /**
+     * The OpenID Connect details for an oidc-type, user-identity based trust provider.
+     */
+    OidcOptions?: OidcOptions;
+    /**
+     * The options for device-identity type trust provider.
+     */
+    DeviceOptions?: DeviceOptions;
+    /**
+     * The identifier to be used when working with policy rules.
+     */
+    PolicyReferenceName?: String;
+    /**
+     * The creation time.
+     */
+    CreationTime?: String;
+    /**
+     * The last updated time.
+     */
+    LastUpdatedTime?: String;
+    /**
+     * The tags.
+     */
+    Tags?: TagList;
+  }
+  export interface VerifiedAccessTrustProviderCondensed {
+    /**
+     * The ID of the trust provider.
+     */
+    VerifiedAccessTrustProviderId?: String;
+    /**
+     * The description of trust provider.
+     */
+    Description?: String;
+    /**
+     * The type of trust provider (user- or device-based).
+     */
+    TrustProviderType?: TrustProviderType;
+    /**
+     * The type of user-based trust provider.
+     */
+    UserTrustProviderType?: UserTrustProviderType;
+    /**
+     * The type of device-based trust provider.
+     */
+    DeviceTrustProviderType?: DeviceTrustProviderType;
+  }
+  export type VerifiedAccessTrustProviderCondensedList = VerifiedAccessTrustProviderCondensed[];
+  export type VerifiedAccessTrustProviderId = string;
+  export type VerifiedAccessTrustProviderIdList = VerifiedAccessTrustProviderId[];
+  export type VerifiedAccessTrustProviderList = VerifiedAccessTrustProvider[];
   export type VersionDescription = string;
   export type VersionStringList = String[];
   export interface VgwTelemetry {

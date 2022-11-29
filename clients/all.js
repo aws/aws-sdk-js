@@ -325,5 +325,9 @@ module.exports = {
   IoTRoboRunner: require('./iotroborunner'),
   SsmSap: require('./ssmsap'),
   OAM: require('./oam'),
-  ARCZonalShift: require('./arczonalshift')
+  ARCZonalShift: require('./arczonalshift'),
+  Omics: require('./omics'),
+  OpenSearchServerless: require('./opensearchserverless'),
+  SecurityLake: require('./securitylake'),
+  SimSpaceWeaver: require('./simspaceweaver')
 };

@@ -326,6 +326,10 @@ export abstract class ConfigurationServicePlaceholders {
   ssmsap?: AWS.SsmSap.Types.ClientConfiguration;
   oam?: AWS.OAM.Types.ClientConfiguration;
   arczonalshift?: AWS.ARCZonalShift.Types.ClientConfiguration;
+  omics?: AWS.Omics.Types.ClientConfiguration;
+  opensearchserverless?: AWS.OpenSearchServerless.Types.ClientConfiguration;
+  securitylake?: AWS.SecurityLake.Types.ClientConfiguration;
+  simspaceweaver?: AWS.SimSpaceWeaver.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -654,4 +658,8 @@ export interface ConfigurationServiceApiVersions {
   ssmsap?: AWS.SsmSap.Types.apiVersion;
   oam?: AWS.OAM.Types.apiVersion;
   arczonalshift?: AWS.ARCZonalShift.Types.apiVersion;
+  omics?: AWS.Omics.Types.apiVersion;
+  opensearchserverless?: AWS.OpenSearchServerless.Types.apiVersion;
+  securitylake?: AWS.SecurityLake.Types.apiVersion;
+  simspaceweaver?: AWS.SimSpaceWeaver.Types.apiVersion;
 }

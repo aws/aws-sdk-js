@@ -12,11 +12,11 @@ declare class Firehose extends Service {
   constructor(options?: Firehose.Types.ClientConfiguration)
   config: Config & Firehose.Types.ClientConfiguration;
   /**
-   * Creates a Kinesis Data Firehose delivery stream. By default, you can create up to 50 delivery streams per AWS Region. This is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. If the delivery stream creation fails, the status transitions to CREATING_FAILED. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. If the status of a delivery stream is CREATING_FAILED, this status doesn't change, and you can't invoke CreateDeliveryStream again on it. However, you can invoke the DeleteDeliveryStream operation to delete it. A Kinesis Data Firehose delivery stream can be configured to receive records directly from providers using PutRecord or PutRecordBatch, or it can be configured to use an existing Kinesis stream as its source. To specify a Kinesis data stream as input, set the DeliveryStreamType parameter to KinesisStreamAsSource, and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in the KinesisStreamSourceConfiguration parameter. To create a delivery stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput in your request. This is optional. You can also invoke StartDeliveryStreamEncryption to turn on SSE for an existing delivery stream that doesn't have SSE enabled. A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. You must specify only one of the following destination configuration parameters: ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration, RedshiftDestinationConfiguration, or SplunkDestinationConfiguration. When you specify S3DestinationConfiguration, you can also provide the following optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat. By default, if no BufferingHints value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries might be such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a destination:   An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that you use the user name and password you provide exclusively with Kinesis Data Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination in the Amazon Kinesis Data Firehose Developer Guide.
+   * Creates a Kinesis Data Firehose delivery stream. By default, you can create up to 50 delivery streams per Amazon Web Services Region. This is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. If the delivery stream creation fails, the status transitions to CREATING_FAILED. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. If the status of a delivery stream is CREATING_FAILED, this status doesn't change, and you can't invoke CreateDeliveryStream again on it. However, you can invoke the DeleteDeliveryStream operation to delete it. A Kinesis Data Firehose delivery stream can be configured to receive records directly from providers using PutRecord or PutRecordBatch, or it can be configured to use an existing Kinesis stream as its source. To specify a Kinesis data stream as input, set the DeliveryStreamType parameter to KinesisStreamAsSource, and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in the KinesisStreamSourceConfiguration parameter. To create a delivery stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput in your request. This is optional. You can also invoke StartDeliveryStreamEncryption to turn on SSE for an existing delivery stream that doesn't have SSE enabled. A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. You must specify only one of the following destination configuration parameters: ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration, RedshiftDestinationConfiguration, or SplunkDestinationConfiguration. When you specify S3DestinationConfiguration, you can also provide the following optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat. By default, if no BufferingHints value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries might be such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a destination:   An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that you use the user name and password you provide exclusively with Kinesis Data Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination in the Amazon Kinesis Data Firehose Developer Guide.
    */
   createDeliveryStream(params: Firehose.Types.CreateDeliveryStreamInput, callback?: (err: AWSError, data: Firehose.Types.CreateDeliveryStreamOutput) => void): Request<Firehose.Types.CreateDeliveryStreamOutput, AWSError>;
   /**
-   * Creates a Kinesis Data Firehose delivery stream. By default, you can create up to 50 delivery streams per AWS Region. This is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. If the delivery stream creation fails, the status transitions to CREATING_FAILED. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. If the status of a delivery stream is CREATING_FAILED, this status doesn't change, and you can't invoke CreateDeliveryStream again on it. However, you can invoke the DeleteDeliveryStream operation to delete it. A Kinesis Data Firehose delivery stream can be configured to receive records directly from providers using PutRecord or PutRecordBatch, or it can be configured to use an existing Kinesis stream as its source. To specify a Kinesis data stream as input, set the DeliveryStreamType parameter to KinesisStreamAsSource, and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in the KinesisStreamSourceConfiguration parameter. To create a delivery stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput in your request. This is optional. You can also invoke StartDeliveryStreamEncryption to turn on SSE for an existing delivery stream that doesn't have SSE enabled. A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. You must specify only one of the following destination configuration parameters: ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration, RedshiftDestinationConfiguration, or SplunkDestinationConfiguration. When you specify S3DestinationConfiguration, you can also provide the following optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat. By default, if no BufferingHints value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries might be such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a destination:   An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that you use the user name and password you provide exclusively with Kinesis Data Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination in the Amazon Kinesis Data Firehose Developer Guide.
+   * Creates a Kinesis Data Firehose delivery stream. By default, you can create up to 50 delivery streams per Amazon Web Services Region. This is an asynchronous operation that immediately returns. The initial status of the delivery stream is CREATING. After the delivery stream is created, its status is ACTIVE and it now accepts data. If the delivery stream creation fails, the status transitions to CREATING_FAILED. Attempts to send data to a delivery stream that is not in the ACTIVE state cause an exception. To check the state of a delivery stream, use DescribeDeliveryStream. If the status of a delivery stream is CREATING_FAILED, this status doesn't change, and you can't invoke CreateDeliveryStream again on it. However, you can invoke the DeleteDeliveryStream operation to delete it. A Kinesis Data Firehose delivery stream can be configured to receive records directly from providers using PutRecord or PutRecordBatch, or it can be configured to use an existing Kinesis stream as its source. To specify a Kinesis data stream as input, set the DeliveryStreamType parameter to KinesisStreamAsSource, and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in the KinesisStreamSourceConfiguration parameter. To create a delivery stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput in your request. This is optional. You can also invoke StartDeliveryStreamEncryption to turn on SSE for an existing delivery stream that doesn't have SSE enabled. A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. You must specify only one of the following destination configuration parameters: ExtendedS3DestinationConfiguration, S3DestinationConfiguration, ElasticsearchDestinationConfiguration, RedshiftDestinationConfiguration, or SplunkDestinationConfiguration. When you specify S3DestinationConfiguration, you can also provide the following optional values: BufferingHints, EncryptionConfiguration, and CompressionFormat. By default, if no BufferingHints value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. BufferingHints is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries might be such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3. A few notes about Amazon Redshift as a destination:   An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses COPY syntax to load data into an Amazon Redshift table. This is specified in the RedshiftDestinationConfiguration.S3Configuration parameter.   The compression formats SNAPPY or ZIP cannot be specified in RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift COPY operation that reads from the S3 bucket doesn't support these compression formats.   We strongly recommend that you use the user name and password you provide exclusively with Kinesis Data Firehose, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.   Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination in the Amazon Kinesis Data Firehose Developer Guide.
    */
   createDeliveryStream(callback?: (err: AWSError, data: Firehose.Types.CreateDeliveryStreamOutput) => void): Request<Firehose.Types.CreateDeliveryStreamOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Firehose extends Service {
    */
   stopDeliveryStreamEncryption(callback?: (err: AWSError, data: Firehose.Types.StopDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StopDeliveryStreamEncryptionOutput, AWSError>;
   /**
-   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  Each delivery stream can have up to 50 tags.  This operation has a limit of five transactions per second per account. 
+   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.  Each delivery stream can have up to 50 tags.  This operation has a limit of five transactions per second per account. 
    */
   tagDeliveryStream(params: Firehose.Types.TagDeliveryStreamInput, callback?: (err: AWSError, data: Firehose.Types.TagDeliveryStreamOutput) => void): Request<Firehose.Types.TagDeliveryStreamOutput, AWSError>;
   /**
-   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  Each delivery stream can have up to 50 tags.  This operation has a limit of five transactions per second per account. 
+   * Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.  Each delivery stream can have up to 50 tags.  This operation has a limit of five transactions per second per account. 
    */
   tagDeliveryStream(callback?: (err: AWSError, data: Firehose.Types.TagDeliveryStreamOutput) => void): Request<Firehose.Types.TagDeliveryStreamOutput, AWSError>;
   /**
@@ -110,22 +110,162 @@ declare class Firehose extends Service {
 }
 declare namespace Firehose {
   export type AWSKMSKeyARN = string;
+  export interface AmazonOpenSearchServerlessBufferingHints {
+    /**
+     * Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
+     */
+    IntervalInSeconds?: AmazonOpenSearchServerlessBufferingIntervalInSeconds;
+    /**
+     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.  We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.
+     */
+    SizeInMBs?: AmazonOpenSearchServerlessBufferingSizeInMBs;
+  }
+  export type AmazonOpenSearchServerlessBufferingIntervalInSeconds = number;
+  export type AmazonOpenSearchServerlessBufferingSizeInMBs = number;
+  export type AmazonOpenSearchServerlessCollectionEndpoint = string;
+  export interface AmazonOpenSearchServerlessDestinationConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.
+     */
+    RoleARN: RoleARN;
+    /**
+     * The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+     */
+    CollectionEndpoint?: AmazonOpenSearchServerlessCollectionEndpoint;
+    /**
+     * The Serverless offering for Amazon OpenSearch Service index name.
+     */
+    IndexName: AmazonOpenSearchServerlessIndexName;
+    /**
+     * The buffering options. If no value is specified, the default values for AmazonopensearchserviceBufferingHints are used.
+     */
+    BufferingHints?: AmazonOpenSearchServerlessBufferingHints;
+    /**
+     * The retry behavior in case Kinesis Data Firehose is unable to deliver documents to the Serverless offering for Amazon OpenSearch Service. The default value is 300 (5 minutes).
+     */
+    RetryOptions?: AmazonOpenSearchServerlessRetryOptions;
+    /**
+     * Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with AmazonOpenSearchService-failed/ appended to the prefix.
+     */
+    S3BackupMode?: AmazonOpenSearchServerlessS3BackupMode;
+    S3Configuration: S3DestinationConfiguration;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    VpcConfiguration?: VpcConfiguration;
+  }
+  export interface AmazonOpenSearchServerlessDestinationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS credentials.
+     */
+    RoleARN?: RoleARN;
+    /**
+     * The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+     */
+    CollectionEndpoint?: AmazonOpenSearchServerlessCollectionEndpoint;
+    /**
+     * The Serverless offering for Amazon OpenSearch Service index name.
+     */
+    IndexName?: AmazonOpenSearchServerlessIndexName;
+    /**
+     * The buffering options.
+     */
+    BufferingHints?: AmazonOpenSearchServerlessBufferingHints;
+    /**
+     * The Serverless offering for Amazon OpenSearch Service retry options.
+     */
+    RetryOptions?: AmazonOpenSearchServerlessRetryOptions;
+    /**
+     * The Amazon S3 backup mode.
+     */
+    S3BackupMode?: AmazonOpenSearchServerlessS3BackupMode;
+    S3DestinationDescription?: S3DestinationDescription;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    VpcConfigurationDescription?: VpcConfigurationDescription;
+  }
+  export interface AmazonOpenSearchServerlessDestinationUpdate {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.
+     */
+    RoleARN?: RoleARN;
+    /**
+     * The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+     */
+    CollectionEndpoint?: AmazonOpenSearchServerlessCollectionEndpoint;
+    /**
+     * The Serverless offering for Amazon OpenSearch Service index name.
+     */
+    IndexName?: AmazonOpenSearchServerlessIndexName;
+    /**
+     * The buffering options. If no value is specified, AmazonopensearchBufferingHints object default values are used.
+     */
+    BufferingHints?: AmazonOpenSearchServerlessBufferingHints;
+    /**
+     * The retry behavior in case Kinesis Data Firehose is unable to deliver documents to the Serverless offering for Amazon OpenSearch Service. The default value is 300 (5 minutes).
+     */
+    RetryOptions?: AmazonOpenSearchServerlessRetryOptions;
+    S3Update?: S3DestinationUpdate;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+  }
+  export type AmazonOpenSearchServerlessIndexName = string;
+  export type AmazonOpenSearchServerlessRetryDurationInSeconds = number;
+  export interface AmazonOpenSearchServerlessRetryOptions {
+    /**
+     * After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time during which Kinesis Data Firehose retries delivery (including the first attempt). After this time has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results in no retries.
+     */
+    DurationInSeconds?: AmazonOpenSearchServerlessRetryDurationInSeconds;
+  }
+  export type AmazonOpenSearchServerlessS3BackupMode = "FailedDocumentsOnly"|"AllDocuments"|string;
   export interface AmazonopensearchserviceBufferingHints {
+    /**
+     * Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes). 
+     */
     IntervalInSeconds?: AmazonopensearchserviceBufferingIntervalInSeconds;
+    /**
+     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher. 
+     */
     SizeInMBs?: AmazonopensearchserviceBufferingSizeInMBs;
   }
   export type AmazonopensearchserviceBufferingIntervalInSeconds = number;
   export type AmazonopensearchserviceBufferingSizeInMBs = number;
   export type AmazonopensearchserviceClusterEndpoint = string;
   export interface AmazonopensearchserviceDestinationConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon OpenSearch Service Configuration API and for indexing documents.
+     */
     RoleARN: RoleARN;
+    /**
+     * The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN. 
+     */
     DomainARN?: AmazonopensearchserviceDomainARN;
+    /**
+     * The endpoint to use when communicating with the cluster. Specify either this ClusterEndpoint or the DomainARN field. 
+     */
     ClusterEndpoint?: AmazonopensearchserviceClusterEndpoint;
+    /**
+     * The ElasticsearAmazon OpenSearch Service index name.
+     */
     IndexName: AmazonopensearchserviceIndexName;
+    /**
+     * The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time. 
+     */
     TypeName?: AmazonopensearchserviceTypeName;
+    /**
+     * The Amazon OpenSearch Service index rotation period. Index rotation appends a timestamp to the IndexName to facilitate the expiration of old data.
+     */
     IndexRotationPeriod?: AmazonopensearchserviceIndexRotationPeriod;
+    /**
+     * The buffering options. If no value is specified, the default values for AmazonopensearchserviceBufferingHints are used. 
+     */
     BufferingHints?: AmazonopensearchserviceBufferingHints;
+    /**
+     * The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon OpenSearch Service. The default value is 300 (5 minutes). 
+     */
     RetryOptions?: AmazonopensearchserviceRetryOptions;
+    /**
+     * Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with AmazonOpenSearchService-failed/ appended to the prefix. 
+     */
     S3BackupMode?: AmazonopensearchserviceS3BackupMode;
     S3Configuration: S3DestinationConfiguration;
     ProcessingConfiguration?: ProcessingConfiguration;
@@ -133,14 +273,41 @@ declare namespace Firehose {
     VpcConfiguration?: VpcConfiguration;
   }
   export interface AmazonopensearchserviceDestinationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. 
+     */
     RoleARN?: RoleARN;
+    /**
+     * The ARN of the Amazon OpenSearch Service domain.
+     */
     DomainARN?: AmazonopensearchserviceDomainARN;
+    /**
+     * The endpoint to use when communicating with the cluster. Kinesis Data Firehose uses either this ClusterEndpoint or the DomainARN field to send data to Amazon OpenSearch Service. 
+     */
     ClusterEndpoint?: AmazonopensearchserviceClusterEndpoint;
+    /**
+     * The Amazon OpenSearch Service index name.
+     */
     IndexName?: AmazonopensearchserviceIndexName;
+    /**
+     * The Amazon OpenSearch Service type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value for TypeName. 
+     */
     TypeName?: AmazonopensearchserviceTypeName;
+    /**
+     * The Amazon OpenSearch Service index rotation period
+     */
     IndexRotationPeriod?: AmazonopensearchserviceIndexRotationPeriod;
+    /**
+     * The buffering options.
+     */
     BufferingHints?: AmazonopensearchserviceBufferingHints;
+    /**
+     * The Amazon OpenSearch Service retry options.
+     */
     RetryOptions?: AmazonopensearchserviceRetryOptions;
+    /**
+     * The Amazon S3 backup mode.
+     */
     S3BackupMode?: AmazonopensearchserviceS3BackupMode;
     S3DestinationDescription?: S3DestinationDescription;
     ProcessingConfiguration?: ProcessingConfiguration;
@@ -148,13 +315,37 @@ declare namespace Firehose {
     VpcConfigurationDescription?: VpcConfigurationDescription;
   }
   export interface AmazonopensearchserviceDestinationUpdate {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon OpenSearch Service Configuration API and for indexing documents. 
+     */
     RoleARN?: RoleARN;
+    /**
+     * The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions for DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming the IAM role specified in RoleARN.
+     */
     DomainARN?: AmazonopensearchserviceDomainARN;
+    /**
+     * The endpoint to use when communicating with the cluster. Specify either this ClusterEndpoint or the DomainARN field. 
+     */
     ClusterEndpoint?: AmazonopensearchserviceClusterEndpoint;
+    /**
+     * The Amazon OpenSearch Service index name.
+     */
     IndexName?: AmazonopensearchserviceIndexName;
+    /**
+     * The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime.  If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream, Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type name. If you want to update your delivery stream with a new index name, provide an empty string for TypeName. 
+     */
     TypeName?: AmazonopensearchserviceTypeName;
+    /**
+     * The Amazon OpenSearch Service index rotation period. Index rotation appends a timestamp to IndexName to facilitate the expiration of old data.
+     */
     IndexRotationPeriod?: AmazonopensearchserviceIndexRotationPeriod;
+    /**
+     * The buffering options. If no value is specified, AmazonopensearchBufferingHints object default values are used. 
+     */
     BufferingHints?: AmazonopensearchserviceBufferingHints;
+    /**
+     * The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon OpenSearch Service. The default value is 300 (5 minutes). 
+     */
     RetryOptions?: AmazonopensearchserviceRetryOptions;
     S3Update?: S3DestinationUpdate;
     ProcessingConfiguration?: ProcessingConfiguration;
@@ -165,6 +356,9 @@ declare namespace Firehose {
   export type AmazonopensearchserviceIndexRotationPeriod = "NoRotation"|"OneHour"|"OneDay"|"OneWeek"|"OneMonth"|string;
   export type AmazonopensearchserviceRetryDurationInSeconds = number;
   export interface AmazonopensearchserviceRetryOptions {
+    /**
+     * After an initial failure to deliver to Amazon OpenSearch Service, the total amount of time during which Kinesis Data Firehose retries delivery (including the first attempt). After this time has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results in no retries. 
+     */
     DurationInSeconds?: AmazonopensearchserviceRetryDurationInSeconds;
   }
   export type AmazonopensearchserviceS3BackupMode = "FailedDocumentsOnly"|"AllDocuments"|string;
@@ -217,7 +411,7 @@ declare namespace Firehose {
   export type CopyOptions = string;
   export interface CreateDeliveryStreamInput {
     /**
-     * The name of the delivery stream. This name must be unique per AWS account in the same AWS Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.
+     * The name of the delivery stream. This name must be unique per Amazon Web Services account in the same Amazon Web Services Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.
      */
     DeliveryStreamName: DeliveryStreamName;
     /**
@@ -248,6 +442,9 @@ declare namespace Firehose {
      * The destination in Amazon ES. You can specify only one destination.
      */
     ElasticsearchDestinationConfiguration?: ElasticsearchDestinationConfiguration;
+    /**
+     * The destination in Amazon OpenSearch Service. You can specify only one destination.
+     */
     AmazonopensearchserviceDestinationConfiguration?: AmazonopensearchserviceDestinationConfiguration;
     /**
      * The destination in Splunk. You can specify only one destination.
@@ -258,9 +455,13 @@ declare namespace Firehose {
      */
     HttpEndpointDestinationConfiguration?: HttpEndpointDestinationConfiguration;
     /**
-     * A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags when creating a delivery stream.
+     * A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to Amazon Web Services resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide. You can specify up to 50 tags when creating a delivery stream.
      */
     Tags?: TagDeliveryStreamInputTagList;
+    /**
+     * The destination in the Serverless offering for Amazon OpenSearch Service. You can specify only one destination.
+     */
+    AmazonOpenSearchServerlessDestinationConfiguration?: AmazonOpenSearchServerlessDestinationConfiguration;
   }
   export interface CreateDeliveryStreamOutput {
     /**
@@ -271,7 +472,7 @@ declare namespace Firehose {
   export type Data = Buffer|Uint8Array|Blob|string;
   export interface DataFormatConversionConfiguration {
     /**
-     * Specifies the AWS Glue Data Catalog table that contains the column information. This parameter is required if Enabled is set to true.
+     * Specifies the Amazon Web Services Glue Data Catalog table that contains the column information. This parameter is required if Enabled is set to true.
      */
     SchemaConfiguration?: SchemaConfiguration;
     /**
@@ -295,7 +496,7 @@ declare namespace Firehose {
      */
     DeliveryStreamName: DeliveryStreamName;
     /**
-     * Set this to true if you want to delete the delivery stream even if Kinesis Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose might be unable to retire the grant due to a customer error, such as when the CMK or the grant are in an invalid state. If you force deletion, you can then use the RevokeGrant operation to revoke the grant you gave to Kinesis Data Firehose. If a failure to retire the grant happens due to an AWS KMS issue, Kinesis Data Firehose keeps retrying the delete operation. The default value is false.
+     * Set this to true if you want to delete the delivery stream even if Kinesis Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose might be unable to retire the grant due to a customer error, such as when the CMK or the grant are in an invalid state. If you force deletion, you can then use the RevokeGrant operation to revoke the grant you gave to Kinesis Data Firehose. If a failure to retire the grant happens due to an Amazon Web Services KMS issue, Kinesis Data Firehose keeps retrying the delete operation. The default value is false.
      */
     AllowForceDelete?: BooleanObject;
   }
@@ -309,7 +510,7 @@ declare namespace Firehose {
      */
     DeliveryStreamName: DeliveryStreamName;
     /**
-     * The Amazon Resource Name (ARN) of the delivery stream. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the delivery stream. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     DeliveryStreamARN: DeliveryStreamARN;
     /**
@@ -355,11 +556,11 @@ declare namespace Firehose {
   }
   export interface DeliveryStreamEncryptionConfiguration {
     /**
-     * If KeyType is CUSTOMER_MANAGED_CMK, this field contains the ARN of the customer managed CMK. If KeyType is AWS_OWNED_CMK, DeliveryStreamEncryptionConfiguration doesn't contain a value for KeyARN.
+     * If KeyType is CUSTOMER_MANAGED_CMK, this field contains the ARN of the customer managed CMK. If KeyType is Amazon Web Services_OWNED_CMK, DeliveryStreamEncryptionConfiguration doesn't contain a value for KeyARN.
      */
     KeyARN?: AWSKMSKeyARN;
     /**
-     * Indicates the type of customer master key (CMK) that is used for encryption. The default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer Master Keys (CMKs).
+     * Indicates the type of customer master key (CMK) that is used for encryption. The default setting is Amazon Web Services_OWNED_CMK. For more information about CMKs, see Customer Master Keys (CMKs).
      */
     KeyType?: KeyType;
     /**
@@ -373,11 +574,11 @@ declare namespace Firehose {
   }
   export interface DeliveryStreamEncryptionConfigurationInput {
     /**
-     * If you set KeyType to CUSTOMER_MANAGED_CMK, you must specify the Amazon Resource Name (ARN) of the CMK. If you set KeyType to AWS_OWNED_CMK, Kinesis Data Firehose uses a service-account CMK.
+     * If you set KeyType to CUSTOMER_MANAGED_CMK, you must specify the Amazon Resource Name (ARN) of the CMK. If you set KeyType to Amazon Web Services_OWNED_CMK, Kinesis Data Firehose uses a service-account CMK.
      */
     KeyARN?: AWSKMSKeyARN;
     /**
-     * Indicates the type of customer master key (CMK) to use for encryption. The default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer Master Keys (CMKs). When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation CreateGrant to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant.  When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream that is encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a CreateDeliveryStream or StartDeliveryStreamEncryption operation exceeds this limit, Kinesis Data Firehose throws a LimitExceededException.   To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see About Symmetric and Asymmetric CMKs in the AWS Key Management Service developer guide. 
+     * Indicates the type of customer master key (CMK) to use for encryption. The default setting is Amazon Web Services_OWNED_CMK. For more information about CMKs, see Customer Master Keys (CMKs). When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation CreateGrant to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant.  When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream that is encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a CreateDeliveryStream or StartDeliveryStreamEncryption operation exceeds this limit, Kinesis Data Firehose throws a LimitExceededException.   To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see About Symmetric and Asymmetric CMKs in the Amazon Web Services Key Management Service developer guide. 
      */
     KeyType: KeyType;
   }
@@ -440,6 +641,9 @@ declare namespace Firehose {
      * The destination in Amazon ES.
      */
     ElasticsearchDestinationDescription?: ElasticsearchDestinationDescription;
+    /**
+     * The destination in Amazon OpenSearch Service.
+     */
     AmazonopensearchserviceDestinationDescription?: AmazonopensearchserviceDestinationDescription;
     /**
      * The destination in Splunk.
@@ -449,6 +653,10 @@ declare namespace Firehose {
      * Describes the specified HTTP endpoint destination.
      */
     HttpEndpointDestinationDescription?: HttpEndpointDestinationDescription;
+    /**
+     * The destination in the Serverless offering for Amazon OpenSearch Service.
+     */
+    AmazonOpenSearchServerlessDestinationDescription?: AmazonOpenSearchServerlessDestinationDescription;
   }
   export type DestinationDescriptionList = DestinationDescription[];
   export type DestinationId = string;
@@ -477,11 +685,11 @@ declare namespace Firehose {
   export type ElasticsearchClusterEndpoint = string;
   export interface ElasticsearchDestinationConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination and Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
-     * The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces. Specify either ClusterEndpoint or DomainARN.
+     * The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming the role specified in RoleARN. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces. Specify either ClusterEndpoint or DomainARN.
      */
     DomainARN?: ElasticsearchDomainARN;
     /**
@@ -509,7 +717,7 @@ declare namespace Firehose {
      */
     RetryOptions?: ElasticsearchRetryOptions;
     /**
-     * Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with elasticsearch-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with elasticsearch-failed/ appended to the prefix. For more information, see Amazon S3 Backup for the Amazon ES Destination. Default value is FailedDocumentsOnly. You can't change this backup mode after you create the delivery stream. 
+     * Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with AmazonOpenSearchService-failed/ appended to the prefix. For more information, see Amazon S3 Backup for the Amazon ES Destination. Default value is FailedDocumentsOnly. You can't change this backup mode after you create the delivery stream. 
      */
     S3BackupMode?: ElasticsearchS3BackupMode;
     /**
@@ -531,11 +739,11 @@ declare namespace Firehose {
   }
   export interface ElasticsearchDestinationDescription {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN?: RoleARN;
     /**
-     * The ARN of the Amazon ES domain. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces. Kinesis Data Firehose uses either ClusterEndpoint or DomainARN to send data to Amazon ES.
+     * The ARN of the Amazon ES domain. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces. Kinesis Data Firehose uses either ClusterEndpoint or DomainARN to send data to Amazon ES.
      */
     DomainARN?: ElasticsearchDomainARN;
     /**
@@ -547,7 +755,7 @@ declare namespace Firehose {
      */
     IndexName?: ElasticsearchIndexName;
     /**
-     * The Elasticsearch type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x, there's no value for TypeName.
+     * The Elasticsearch type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value for TypeName.
      */
     TypeName?: ElasticsearchTypeName;
     /**
@@ -585,11 +793,11 @@ declare namespace Firehose {
   }
   export interface ElasticsearchDestinationUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination and Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see Grant Kinesis Data Firehose Access to an Amazon S3 Destination and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN?: RoleARN;
     /**
-     * The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming the IAM role specified in RoleARN. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces. Specify either ClusterEndpoint or DomainARN.
+     * The ARN of the Amazon ES domain. The IAM role must have permissions for DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming the IAM role specified in RoleARN. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces. Specify either ClusterEndpoint or DomainARN.
      */
     DomainARN?: ElasticsearchDomainARN;
     /**
@@ -656,11 +864,11 @@ declare namespace Firehose {
   export type ErrorOutputPrefix = string;
   export interface ExtendedS3DestinationConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
-     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     BucketARN: BucketARN;
     /**
@@ -704,17 +912,17 @@ declare namespace Firehose {
      */
     DataFormatConversionConfiguration?: DataFormatConversionConfiguration;
     /**
-     * The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html 
+     * The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. 
      */
     DynamicPartitioningConfiguration?: DynamicPartitioningConfiguration;
   }
   export interface ExtendedS3DestinationDescription {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
-     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     BucketARN: BucketARN;
     /**
@@ -758,17 +966,17 @@ declare namespace Firehose {
      */
     DataFormatConversionConfiguration?: DataFormatConversionConfiguration;
     /**
-     * The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html 
+     * The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. 
      */
     DynamicPartitioningConfiguration?: DynamicPartitioningConfiguration;
   }
   export interface ExtendedS3DestinationUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN?: RoleARN;
     /**
-     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     BucketARN?: BucketARN;
     /**
@@ -812,7 +1020,7 @@ declare namespace Firehose {
      */
     DataFormatConversionConfiguration?: DataFormatConversionConfiguration;
     /**
-     * The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html 
+     * The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. 
      */
     DynamicPartitioningConfiguration?: DynamicPartitioningConfiguration;
   }
@@ -1002,7 +1210,7 @@ declare namespace Firehose {
   export type IntervalInSeconds = number;
   export interface KMSEncryptionConfig {
     /**
-     * The Amazon Resource Name (ARN) of the encryption key. Must belong to the same AWS Region as the destination Amazon S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the encryption key. Must belong to the same Amazon Web Services Region as the destination Amazon S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     AWSKMSKeyARN: AWSKMSKeyARN;
   }
@@ -1014,7 +1222,7 @@ declare namespace Firehose {
      */
     KinesisStreamARN: KinesisStreamARN;
     /**
-     * The ARN of the role that provides access to the source Kinesis data stream. For more information, see AWS Identity and Access Management (IAM) ARN Format.
+     * The ARN of the role that provides access to the source Kinesis data stream. For more information, see Amazon Web Services Identity and Access Management (IAM) ARN Format.
      */
     RoleARN: RoleARN;
   }
@@ -1024,7 +1232,7 @@ declare namespace Firehose {
      */
     KinesisStreamARN?: KinesisStreamARN;
     /**
-     * The ARN of the role used by the source Kinesis data stream. For more information, see AWS Identity and Access Management (IAM) ARN Format.
+     * The ARN of the role used by the source Kinesis data stream. For more information, see Amazon Web Services Identity and Access Management (IAM) ARN Format.
      */
     RoleARN?: RoleARN;
     /**
@@ -1211,7 +1419,7 @@ declare namespace Firehose {
   export type ProcessorList = Processor[];
   export interface ProcessorParameter {
     /**
-     * The name of the parameter.
+     * The name of the parameter. Currently the following default values are supported: 3 for NumberOfRetries and 60 for the BufferIntervalInSeconds. The BufferSizeInMBs ranges between 0.2 MB and up to 3MB. The default buffering hint is 1MB for all destinations, except Splunk. For Splunk, the default buffering hint is 256 KB. 
      */
     ParameterName: ProcessorParameterName;
     /**
@@ -1293,7 +1501,7 @@ declare namespace Firehose {
   }
   export interface RedshiftDestinationConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
@@ -1339,7 +1547,7 @@ declare namespace Firehose {
   }
   export interface RedshiftDestinationDescription {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
@@ -1381,7 +1589,7 @@ declare namespace Firehose {
   }
   export interface RedshiftDestinationUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN?: RoleARN;
     /**
@@ -1444,11 +1652,11 @@ declare namespace Firehose {
   export type S3BackupMode = "Disabled"|"Enabled"|string;
   export interface S3DestinationConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
-     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     BucketARN: BucketARN;
     /**
@@ -1478,11 +1686,11 @@ declare namespace Firehose {
   }
   export interface S3DestinationDescription {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN: RoleARN;
     /**
-     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     BucketARN: BucketARN;
     /**
@@ -1512,11 +1720,11 @@ declare namespace Firehose {
   }
   export interface S3DestinationUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the AWS credentials. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     RoleARN?: RoleARN;
     /**
-     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
+     * The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces.
      */
     BucketARN?: BucketARN;
     /**
@@ -1546,23 +1754,23 @@ declare namespace Firehose {
   }
   export interface SchemaConfiguration {
     /**
-     * The role that Kinesis Data Firehose can use to access AWS Glue. This role must be in the same account you use for Kinesis Data Firehose. Cross-account roles aren't allowed.  If the SchemaConfiguration request parameter is used as part of invoking the CreateDeliveryStream API, then the RoleARN property is required and its value must be specified. 
+     * The role that Kinesis Data Firehose can use to access Amazon Web Services Glue. This role must be in the same account you use for Kinesis Data Firehose. Cross-account roles aren't allowed.  If the SchemaConfiguration request parameter is used as part of invoking the CreateDeliveryStream API, then the RoleARN property is required and its value must be specified. 
      */
     RoleARN?: NonEmptyStringWithoutWhitespace;
     /**
-     * The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.
+     * The ID of the Amazon Web Services Glue Data Catalog. If you don't supply this, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: NonEmptyStringWithoutWhitespace;
     /**
-     * Specifies the name of the AWS Glue database that contains the schema for the output data.  If the SchemaConfiguration request parameter is used as part of invoking the CreateDeliveryStream API, then the DatabaseName property is required and its value must be specified. 
+     * Specifies the name of the Amazon Web Services Glue database that contains the schema for the output data.  If the SchemaConfiguration request parameter is used as part of invoking the CreateDeliveryStream API, then the DatabaseName property is required and its value must be specified. 
      */
     DatabaseName?: NonEmptyStringWithoutWhitespace;
     /**
-     * Specifies the AWS Glue table that contains the column information that constitutes your data schema.  If the SchemaConfiguration request parameter is used as part of invoking the CreateDeliveryStream API, then the TableName property is required and its value must be specified. 
+     * Specifies the Amazon Web Services Glue table that contains the column information that constitutes your data schema.  If the SchemaConfiguration request parameter is used as part of invoking the CreateDeliveryStream API, then the TableName property is required and its value must be specified. 
      */
     TableName?: NonEmptyStringWithoutWhitespace;
     /**
-     * If you don't specify an AWS Region, the default is the current Region.
+     * If you don't specify an Amazon Web Services Region, the default is the current Region.
      */
     Region?: NonEmptyStringWithoutWhitespace;
     /**
@@ -1799,6 +2007,9 @@ declare namespace Firehose {
      * Describes an update for a destination in Amazon ES.
      */
     ElasticsearchDestinationUpdate?: ElasticsearchDestinationUpdate;
+    /**
+     * Describes an update for a destination in Amazon OpenSearch Service.
+     */
     AmazonopensearchserviceDestinationUpdate?: AmazonopensearchserviceDestinationUpdate;
     /**
      * Describes an update for a destination in Splunk.
@@ -1808,6 +2019,10 @@ declare namespace Firehose {
      * Describes an update to the specified HTTP endpoint destination.
      */
     HttpEndpointDestinationUpdate?: HttpEndpointDestinationUpdate;
+    /**
+     * Describes an update for a destination in the Serverless offering for Amazon OpenSearch Service.
+     */
+    AmazonOpenSearchServerlessDestinationUpdate?: AmazonOpenSearchServerlessDestinationUpdate;
   }
   export interface UpdateDestinationOutput {
   }
