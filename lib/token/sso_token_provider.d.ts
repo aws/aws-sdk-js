@@ -7,6 +7,7 @@ export class SSOTokenProvider extends Token {
     constructor(options?: SSOTokenProviderOptions);
 }
 
-export interface SSOTokenProviderOptions {
-  profile?: string
+// Needed to expose interfaces on the class
+declare namespace SSOTokenProviderOptions {
+  export type profile = string;
 }
