@@ -325,6 +325,7 @@ export abstract class ConfigurationServicePlaceholders {
   iotroborunner?: AWS.IoTRoboRunner.Types.ClientConfiguration;
   ssmsap?: AWS.SsmSap.Types.ClientConfiguration;
   oam?: AWS.OAM.Types.ClientConfiguration;
+  arczonalshift?: AWS.ARCZonalShift.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -652,4 +653,5 @@ export interface ConfigurationServiceApiVersions {
   iotroborunner?: AWS.IoTRoboRunner.Types.apiVersion;
   ssmsap?: AWS.SsmSap.Types.apiVersion;
   oam?: AWS.OAM.Types.apiVersion;
+  arczonalshift?: AWS.ARCZonalShift.Types.apiVersion;
 }

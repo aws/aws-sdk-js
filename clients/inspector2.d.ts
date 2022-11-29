@@ -68,11 +68,11 @@ declare class Inspector2 extends Service {
    */
   deleteFilter(callback?: (err: AWSError, data: Inspector2.Types.DeleteFilterResponse) => void): Request<Inspector2.Types.DeleteFilterResponse, AWSError>;
   /**
-   * Describe Amazon Inspector configuration settings for an Amazon Web Services organization
+   * Describe Amazon Inspector configuration settings for an Amazon Web Services organization.
    */
   describeOrganizationConfiguration(params: Inspector2.Types.DescribeOrganizationConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Inspector2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Describe Amazon Inspector configuration settings for an Amazon Web Services organization
+   * Describe Amazon Inspector configuration settings for an Amazon Web Services organization.
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: Inspector2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Inspector2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
@@ -358,6 +358,14 @@ declare namespace Inspector2 {
      */
     imageLayerAggregation?: ImageLayerAggregation;
     /**
+     * Returns an object with findings aggregated by AWS Lambda function.
+     */
+    lambdaFunctionAggregation?: LambdaFunctionAggregation;
+    /**
+     * Returns an object with findings aggregated by AWS Lambda layer.
+     */
+    lambdaLayerAggregation?: LambdaLayerAggregation;
+    /**
      * An object that contains details about an aggregation request based on operating system package type.
      */
     packageAggregation?: PackageAggregation;
@@ -370,7 +378,7 @@ declare namespace Inspector2 {
      */
     titleAggregation?: TitleAggregation;
   }
-  export type AggregationResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|string;
+  export type AggregationResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_LAMBDA_FUNCTION"|string;
   export interface AggregationResponse {
     /**
      * An object that contains details about an aggregation response based on Amazon Web Services account IDs.
@@ -397,6 +405,14 @@ declare namespace Inspector2 {
      */
     imageLayerAggregation?: ImageLayerAggregationResponse;
     /**
+     * An aggregation of findings by AWS Lambda function.
+     */
+    lambdaFunctionAggregation?: LambdaFunctionAggregationResponse;
+    /**
+     * An aggregation of findings by AWS Lambda layer.
+     */
+    lambdaLayerAggregation?: LambdaLayerAggregationResponse;
+    /**
      * An object that contains details about an aggregation response based on operating system package type.
      */
     packageAggregation?: PackageAggregationResponse;
@@ -410,7 +426,7 @@ declare namespace Inspector2 {
     titleAggregation?: TitleAggregationResponse;
   }
   export type AggregationResponseList = AggregationResponse[];
-  export type AggregationType = "FINDING_TYPE"|"PACKAGE"|"TITLE"|"REPOSITORY"|"AMI"|"AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER"|"IMAGE_LAYER"|"ACCOUNT"|string;
+  export type AggregationType = "FINDING_TYPE"|"PACKAGE"|"TITLE"|"REPOSITORY"|"AMI"|"AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER"|"IMAGE_LAYER"|"ACCOUNT"|"AWS_LAMBDA_FUNCTION"|"LAMBDA_LAYER"|string;
   export interface AmiAggregation {
     /**
      * The IDs of AMIs to aggregate findings for.
@@ -427,7 +443,7 @@ declare namespace Inspector2 {
   }
   export interface AmiAggregationResponse {
     /**
-     * The Amazon Web Services account ID that the AMI belongs.
+     * The Amazon Web Services account ID for the AMI.
      */
     accountId?: AccountId;
     /**
@@ -445,6 +461,8 @@ declare namespace Inspector2 {
   }
   export type AmiId = string;
   export type AmiSortBy = "CRITICAL"|"HIGH"|"ALL"|"AFFECTED_INSTANCES"|string;
+  export type Architecture = "X86_64"|"ARM64"|string;
+  export type ArchitectureList = Architecture[];
   export type Arn = string;
   export interface AssociateMemberRequest {
     /**
@@ -467,6 +485,10 @@ declare namespace Inspector2 {
      * Represents whether Amazon ECR scans are automatically enabled for new members of your Amazon Inspector organization.
      */
     ecr: Boolean;
+    /**
+     * Represents whether AWS Lambda scans are automatically enabled for new members of your Amazon Inspector organization. 
+     */
+    lambda?: Boolean;
   }
   export interface AwsEc2InstanceDetails {
     /**
@@ -596,7 +618,7 @@ declare namespace Inspector2 {
      */
     pushedAt?: DateTimeTimestamp;
     /**
-     * The registry the Amazon ECR container image belongs to.
+     * The registry for the Amazon ECR container image.
      */
     registry: NonEmptyString;
     /**
@@ -605,6 +627,48 @@ declare namespace Inspector2 {
     repositoryName: NonEmptyString;
   }
   export type AwsEcrContainerSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export interface AwsLambdaFunctionDetails {
+    /**
+     * The instruction set architecture that the AWS Lambda function supports. Architecture is a string array with one of the valid values. The default architecture value is x86_64.
+     */
+    architectures?: ArchitectureList;
+    /**
+     * The SHA256 hash of the AWS Lambda function's deployment package.
+     */
+    codeSha256: NonEmptyString;
+    /**
+     * The AWS Lambda function's execution role.
+     */
+    executionRoleArn: ExecutionRoleArn;
+    /**
+     * The name of the AWS Lambda function.
+     */
+    functionName: FunctionName;
+    /**
+     * The date and time that a user last updated the configuration, in ISO 8601 format 
+     */
+    lastModifiedAt?: Timestamp;
+    /**
+     * The AWS Lambda function's  layers. A Lambda function can have up to five layers.
+     */
+    layers?: LayerList;
+    /**
+     * The type of deployment package. Set to Image for container image and set Zip for .zip file archive.
+     */
+    packageType?: PackageType;
+    /**
+     * The runtime environment for the AWS Lambda function.
+     */
+    runtime: Runtime;
+    /**
+     * The version of the AWS Lambda function.
+     */
+    version: Version;
+    /**
+     * The AWS Lambda function's networking configuration.
+     */
+    vpcConfig?: LambdaVpcConfig;
+  }
   export interface BatchGetAccountStatusRequest {
     /**
      * The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.
@@ -683,6 +747,18 @@ declare namespace Inspector2 {
      */
     ecrRepositoryName?: CoverageStringFilterList;
     /**
+     * Returns coverage statistics for AWS Lambda functions filtered by function names.
+     */
+    lambdaFunctionName?: CoverageStringFilterList;
+    /**
+     * Returns coverage statistics for AWS Lambda functions filtered by runtime.
+     */
+    lambdaFunctionRuntime?: CoverageStringFilterList;
+    /**
+     * Returns coverage statistics for AWS Lambda functions filtered by tag.
+     */
+    lambdaFunctionTags?: CoverageMapFilterList;
+    /**
      * An array of Amazon Web Services resource IDs to return coverage statistics for.
      */
     resourceId?: CoverageStringFilterList;
@@ -719,7 +795,7 @@ declare namespace Inspector2 {
     value?: NonEmptyString;
   }
   export type CoverageMapFilterList = CoverageMapFilter[];
-  export type CoverageResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|string;
+  export type CoverageResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|"AWS_LAMBDA_FUNCTION"|string;
   export type CoverageStringComparison = "EQUALS"|"NOT_EQUALS"|string;
   export interface CoverageStringFilter {
     /**
@@ -1015,7 +1091,7 @@ declare namespace Inspector2 {
   }
   export interface Ec2InstanceAggregationResponse {
     /**
-     * The Amazon Web Services account the Amazon EC2 instance belongs to.
+     * The Amazon Web Services account for the Amazon EC2 instance.
      */
     accountId?: String;
     /**
@@ -1147,6 +1223,14 @@ declare namespace Inspector2 {
   }
   export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED"|string;
   export type ErrorMessage = string;
+  export type ExecutionRoleArn = string;
+  export type ExploitAvailable = "YES"|"NO"|string;
+  export interface ExploitabilityDetails {
+    /**
+     * The date and time of the last exploit associated with a finding discovered in your environment.
+     */
+    lastKnownExploitAt?: DateTimeTimestamp;
+  }
   export type ExternalReportStatus = "SUCCEEDED"|"IN_PROGRESS"|"CANCELLED"|"FAILED"|string;
   export interface FailedAccount {
     /**
@@ -1267,6 +1351,10 @@ declare namespace Inspector2 {
      */
     ecrImageTags?: StringFilterList;
     /**
+     * Filters the list of AWS Lambda findings by the availability of exploits.
+     */
+    exploitAvailable?: StringFilterList;
+    /**
      * Details on the finding ARNs used to filter findings.
      */
     findingArn?: StringFilterList;
@@ -1290,6 +1378,26 @@ declare namespace Inspector2 {
      * The Amazon Inspector score to filter on.
      */
     inspectorScore?: NumberFilterList;
+    /**
+     * Filters the list of AWS Lambda functions by execution role.
+     */
+    lambdaFunctionExecutionRoleArn?: StringFilterList;
+    /**
+     * Filters the list of AWS Lambda functions by the date and time that a user last updated the configuration, in ISO 8601 format 
+     */
+    lambdaFunctionLastModifiedAt?: DateFilterList;
+    /**
+     * Filters the list of AWS Lambda functions by the function's  layers. A Lambda function can have up to five layers.
+     */
+    lambdaFunctionLayers?: StringFilterList;
+    /**
+     * Filters the list of AWS Lambda functions by the name of the function.
+     */
+    lambdaFunctionName?: StringFilterList;
+    /**
+     * Filters the list of AWS Lambda functions by the runtime environment for the Lambda function.
+     */
+    lambdaFunctionRuntime?: StringFilterList;
     /**
      * Details on the date and time a finding was last seen used to filter findings.
      */
@@ -1360,6 +1468,14 @@ declare namespace Inspector2 {
      * The description of the finding.
      */
     description: FindingDescription;
+    /**
+     * If a finding discovered in your environment has an exploit available.
+     */
+    exploitAvailable?: ExploitAvailable;
+    /**
+     * The details of an exploit available for a finding discovered in your environment.
+     */
+    exploitabilityDetails?: ExploitabilityDetails;
     /**
      * The Amazon Resource Number (ARN) of the finding.
      */
@@ -1504,7 +1620,8 @@ declare namespace Inspector2 {
   export type FreeTrialInfoErrorList = FreeTrialInfoError[];
   export type FreeTrialInfoList = FreeTrialInfo[];
   export type FreeTrialStatus = "ACTIVE"|"INACTIVE"|string;
-  export type FreeTrialType = "EC2"|"ECR"|string;
+  export type FreeTrialType = "EC2"|"ECR"|"LAMBDA"|string;
+  export type FunctionName = string;
   export interface GetConfigurationRequest {
   }
   export interface GetConfigurationResponse {
@@ -1623,6 +1740,137 @@ declare namespace Inspector2 {
   export type IpV4AddressList = IpV4Address[];
   export type IpV6Address = string;
   export type IpV6AddressList = IpV6Address[];
+  export interface LambdaFunctionAggregation {
+    /**
+     * The AWS Lambda function names to include in the aggregation results.
+     */
+    functionNames?: StringFilterList;
+    /**
+     * The tags to include in the aggregation results.
+     */
+    functionTags?: MapFilterList;
+    /**
+     * The resource IDs to include in the aggregation results.
+     */
+    resourceIds?: StringFilterList;
+    /**
+     * Returns findings aggregated by AWS Lambda function runtime environments.
+     */
+    runtimes?: StringFilterList;
+    /**
+     * The finding severity to use for sorting the results.
+     */
+    sortBy?: LambdaFunctionSortBy;
+    /**
+     * The order to use for sorting the results.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface LambdaFunctionAggregationResponse {
+    /**
+     * The ID of the AWS account that owns the AWS Lambda function. 
+     */
+    accountId?: AccountId;
+    /**
+     * The AWS Lambda function names included in the aggregation results.
+     */
+    functionName?: String;
+    /**
+     * The tags included in the aggregation results.
+     */
+    lambdaTags?: TagMap;
+    /**
+     * The date that the AWS Lambda function included in the aggregation results was last changed.
+     */
+    lastModifiedAt?: DateTimeTimestamp;
+    /**
+     * The resource IDs included in the aggregation results.
+     */
+    resourceId: NonEmptyString;
+    /**
+     * The runtimes included in the aggregation results.
+     */
+    runtime?: String;
+    severityCounts?: SeverityCounts;
+  }
+  export interface LambdaFunctionMetadata {
+    /**
+     * The name of a function.
+     */
+    functionName?: String;
+    /**
+     * The resource tags on an AWS Lambda function.
+     */
+    functionTags?: TagMap;
+    /**
+     * The layers for an AWS Lambda function. A Lambda function can have up to five layers.
+     */
+    layers?: LambdaLayerList;
+    /**
+     * An AWS Lambda function's runtime.
+     */
+    runtime?: Runtime;
+  }
+  export type LambdaFunctionSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export interface LambdaLayerAggregation {
+    /**
+     * The names of the AWS Lambda functions associated with the layers.
+     */
+    functionNames?: StringFilterList;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Lambda function layer. 
+     */
+    layerArns?: StringFilterList;
+    /**
+     * The resource IDs for the AWS Lambda function layers.
+     */
+    resourceIds?: StringFilterList;
+    /**
+     * The finding severity to use for sorting the results.
+     */
+    sortBy?: LambdaLayerSortBy;
+    /**
+     * The order to use for sorting the results.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface LambdaLayerAggregationResponse {
+    /**
+     * The account ID of the AWS Lambda function layer.
+     */
+    accountId: AccountId;
+    /**
+     * The names of the AWS Lambda functions associated with the layers.
+     */
+    functionName: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+     */
+    layerArn: NonEmptyString;
+    /**
+     * The Resource ID of the AWS Lambda function layer.
+     */
+    resourceId: NonEmptyString;
+    severityCounts?: SeverityCounts;
+  }
+  export type LambdaLayerArn = string;
+  export type LambdaLayerList = String[];
+  export type LambdaLayerSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export interface LambdaVpcConfig {
+    /**
+     * The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see VPC Settings.
+     */
+    securityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of VPC subnet IDs.
+     */
+    subnetIds?: SubnetIdList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId?: VpcId;
+  }
+  export type LayerList = LambdaLayerArn[];
   export type ListAccountPermissionsMaxResults = number;
   export interface ListAccountPermissionsRequest {
     /**
@@ -2004,6 +2252,7 @@ declare namespace Inspector2 {
      * An object that contains details on the package release to filter on.
      */
     release?: StringFilter;
+    sourceLambdaLayerArn?: StringFilter;
     /**
      * An object that contains details on the source layer hash to filter on.
      */
@@ -2018,6 +2267,7 @@ declare namespace Inspector2 {
   export type PackageName = string;
   export type PackageRelease = string;
   export type PackageSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type PackageType = "IMAGE"|"ZIP"|string;
   export type PackageVersion = string;
   export interface PackageVulnerabilityDetails {
     /**
@@ -2183,6 +2433,10 @@ declare namespace Inspector2 {
      * An object that contains details about the Amazon ECR container image involved in the finding.
      */
     awsEcrContainerImage?: AwsEcrContainerImageDetails;
+    /**
+     * A summary of the information about an AWS Lambda function affected by a finding.
+     */
+    awsLambdaFunction?: AwsLambdaFunctionDetails;
   }
   export type ResourceId = string;
   export type ResourceList = Resource[];
@@ -2199,8 +2453,12 @@ declare namespace Inspector2 {
      * An object that contains details about the repository an Amazon ECR image resides in.
      */
     ecrRepository?: EcrRepositoryMetadata;
+    /**
+     * An object that contains metadata details for an AWS Lambda function.
+     */
+    lambdaFunction?: LambdaFunctionMetadata;
   }
-  export type ResourceScanType = "EC2"|"ECR"|string;
+  export type ResourceScanType = "EC2"|"ECR"|"LAMBDA"|string;
   export interface ResourceState {
     /**
      * An object detailing the state of Amazon Inspector scanning for Amazon EC2 resources.
@@ -2210,6 +2468,7 @@ declare namespace Inspector2 {
      * An object detailing the state of Amazon Inspector scanning for Amazon ECR resources.
      */
     ecr: State;
+    lambda?: State;
   }
   export interface ResourceStatus {
     /**
@@ -2220,8 +2479,13 @@ declare namespace Inspector2 {
      * The status of Amazon Inspector scanning for Amazon ECR resources.
      */
     ecr: Status;
+    /**
+     * The status of Amazon Inspector scanning for AWS Lambda function resources.
+     */
+    lambda?: Status;
   }
-  export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|string;
+  export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|"AWS_LAMBDA_FUNCTION"|string;
+  export type Runtime = "NODEJS"|"NODEJS_12_X"|"NODEJS_14_X"|"NODEJS_16_X"|"JAVA_8"|"JAVA_8_AL2"|"JAVA_11"|"PYTHON_3_7"|"PYTHON_3_8"|"PYTHON_3_9"|"UNSUPPORTED"|string;
   export interface ScanStatus {
     /**
      * The reason for the scan.
@@ -2233,9 +2497,11 @@ declare namespace Inspector2 {
     statusCode: ScanStatusCode;
   }
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
-  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|string;
+  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|"EXCLUDED_BY_TAG"|"UNSUPPORTED_RUNTIME"|string;
   export type ScanType = "NETWORK"|"PACKAGE"|string;
-  export type Service = "EC2"|"ECR"|string;
+  export type SecurityGroupId = string;
+  export type SecurityGroupIdList = SecurityGroupId[];
+  export type Service = "EC2"|"ECR"|"LAMBDA"|string;
   export type Severity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNTRIAGED"|string;
   export interface SeverityCounts {
     /**
@@ -2298,7 +2564,7 @@ declare namespace Inspector2 {
   export type StringComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|string;
   export interface StringFilter {
     /**
-     * The operator to use when comparing values in the filter
+     * The operator to use when comparing values in the filter.
      */
     comparison: StringComparison;
     /**
@@ -2309,6 +2575,8 @@ declare namespace Inspector2 {
   export type StringFilterList = StringFilter[];
   export type StringInput = string;
   export type StringList = NonEmptyString[];
+  export type SubnetId = string;
+  export type SubnetIdList = SubnetId[];
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = String[];
@@ -2463,8 +2731,10 @@ declare namespace Inspector2 {
     usage?: UsageList;
   }
   export type UsageTotalList = UsageTotal[];
-  export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|string;
+  export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|"LAMBDA_FUNCTION_HOURS"|string;
   export type UsageValue = number;
+  export type Version = string;
+  export type VpcId = string;
   export type VulnerabilityId = string;
   export type VulnerabilityIdList = VulnerabilityId[];
   export interface VulnerablePackage {
@@ -2500,6 +2770,10 @@ declare namespace Inspector2 {
      * The code to run in your environment to update packages with a fix available.
      */
     remediation?: VulnerablePackageRemediation;
+    /**
+     * The Amazon Resource Number (ARN) of the AWS Lambda function affected by a finding.
+     */
+    sourceLambdaLayerArn?: LambdaLayerArn;
     /**
      * The source layer hash of the vulnerable package.
      */

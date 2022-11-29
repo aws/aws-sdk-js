@@ -1669,6 +1669,14 @@ declare class EC2 extends Service {
    */
   describeAvailabilityZones(callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
   /**
+   * Describes the curent Infrastructure Performance metric subscriptions.
+   */
+  describeAwsNetworkPerformanceMetricSubscriptions(params: EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult) => void): Request<EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult, AWSError>;
+  /**
+   * Describes the curent Infrastructure Performance metric subscriptions.
+   */
+  describeAwsNetworkPerformanceMetricSubscriptions(callback?: (err: AWSError, data: EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult) => void): Request<EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult, AWSError>;
+  /**
    * Describes the specified bundle tasks or all of your bundle tasks.  Completed bundle tasks are listed for only a limited time. If your bundle task is no longer in the list, you can still register an AMI from it. Just use RegisterImage with the Amazon S3 bucket name and image manifest name you provided to the bundle task. 
    */
   describeBundleTasks(params: EC2.Types.DescribeBundleTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeBundleTasksResult) => void): Request<EC2.Types.DescribeBundleTasksResult, AWSError>;
@@ -2757,6 +2765,14 @@ declare class EC2 extends Service {
    */
   disableAddressTransfer(callback?: (err: AWSError, data: EC2.Types.DisableAddressTransferResult) => void): Request<EC2.Types.DisableAddressTransferResult, AWSError>;
   /**
+   * Disables Infrastructure Performance metric subscriptions.
+   */
+  disableAwsNetworkPerformanceMetricSubscription(params: EC2.Types.DisableAwsNetworkPerformanceMetricSubscriptionRequest, callback?: (err: AWSError, data: EC2.Types.DisableAwsNetworkPerformanceMetricSubscriptionResult) => void): Request<EC2.Types.DisableAwsNetworkPerformanceMetricSubscriptionResult, AWSError>;
+  /**
+   * Disables Infrastructure Performance metric subscriptions.
+   */
+  disableAwsNetworkPerformanceMetricSubscription(callback?: (err: AWSError, data: EC2.Types.DisableAwsNetworkPerformanceMetricSubscriptionResult) => void): Request<EC2.Types.DisableAwsNetworkPerformanceMetricSubscriptionResult, AWSError>;
+  /**
    * Disables EBS encryption by default for your account in the current Region. After you disable encryption by default, you can still create encrypted volumes by enabling encryption when you create each volume. Disabling encryption by default does not change the encryption status of your existing volumes. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   disableEbsEncryptionByDefault(params: EC2.Types.DisableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
@@ -2941,6 +2957,14 @@ declare class EC2 extends Service {
    */
   enableAddressTransfer(callback?: (err: AWSError, data: EC2.Types.EnableAddressTransferResult) => void): Request<EC2.Types.EnableAddressTransferResult, AWSError>;
   /**
+   * Enables Infrastructure Performance subscriptions.
+   */
+  enableAwsNetworkPerformanceMetricSubscription(params: EC2.Types.EnableAwsNetworkPerformanceMetricSubscriptionRequest, callback?: (err: AWSError, data: EC2.Types.EnableAwsNetworkPerformanceMetricSubscriptionResult) => void): Request<EC2.Types.EnableAwsNetworkPerformanceMetricSubscriptionResult, AWSError>;
+  /**
+   * Enables Infrastructure Performance subscriptions.
+   */
+  enableAwsNetworkPerformanceMetricSubscription(callback?: (err: AWSError, data: EC2.Types.EnableAwsNetworkPerformanceMetricSubscriptionResult) => void): Request<EC2.Types.EnableAwsNetworkPerformanceMetricSubscriptionResult, AWSError>;
+  /**
    * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default KMS key or the KMS key that you specified when you created each volume. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default KMS key for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
   enableEbsEncryptionByDefault(params: EC2.Types.EnableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
@@ -2980,6 +3004,14 @@ declare class EC2 extends Service {
    * Enable an Organizations member account as the IPAM admin account. You cannot select the Organizations management account as the IPAM admin account. For more information, see Enable integration with Organizations in the Amazon VPC IPAM User Guide. 
    */
   enableIpamOrganizationAdminAccount(callback?: (err: AWSError, data: EC2.Types.EnableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.EnableIpamOrganizationAdminAccountResult, AWSError>;
+  /**
+   * 
+   */
+  enableReachabilityAnalyzerOrganizationSharing(params: EC2.Types.EnableReachabilityAnalyzerOrganizationSharingRequest, callback?: (err: AWSError, data: EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult) => void): Request<EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult, AWSError>;
+  /**
+   * 
+   */
+  enableReachabilityAnalyzerOrganizationSharing(callback?: (err: AWSError, data: EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult) => void): Request<EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult, AWSError>;
   /**
    * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
@@ -3076,6 +3108,14 @@ declare class EC2 extends Service {
    * Gets information about the IPv6 CIDR block associations for a specified IPv6 address pool.
    */
   getAssociatedIpv6PoolCidrs(callback?: (err: AWSError, data: EC2.Types.GetAssociatedIpv6PoolCidrsResult) => void): Request<EC2.Types.GetAssociatedIpv6PoolCidrsResult, AWSError>;
+  /**
+   * Gets network performance data.
+   */
+  getAwsNetworkPerformanceData(params: EC2.Types.GetAwsNetworkPerformanceDataRequest, callback?: (err: AWSError, data: EC2.Types.GetAwsNetworkPerformanceDataResult) => void): Request<EC2.Types.GetAwsNetworkPerformanceDataResult, AWSError>;
+  /**
+   * Gets network performance data.
+   */
+  getAwsNetworkPerformanceData(callback?: (err: AWSError, data: EC2.Types.GetAwsNetworkPerformanceDataResult) => void): Request<EC2.Types.GetAwsNetworkPerformanceDataResult, AWSError>;
   /**
    * Gets usage information about a Capacity Reservation. If the Capacity Reservation is shared, it shows usage information for the Capacity Reservation owner and each Amazon Web Services account that is currently using the shared capacity. If the Capacity Reservation is not shared, it shows only the Capacity Reservation owner's usage.
    */
@@ -4767,6 +4807,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface AcceptTransitGatewayMulticastDomainAssociationsResult {
+    /**
+     * Information about the multicast domain associations.
+     */
     Associations?: TransitGatewayMulticastDomainAssociations;
   }
   export interface AcceptTransitGatewayPeeringAttachmentRequest {
@@ -4829,7 +4872,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC peering connection. You must specify this parameter in the request.
      */
-    VpcPeeringConnectionId?: VpcPeeringConnectionId;
+    VpcPeeringConnectionId?: VpcPeeringConnectionIdWithResolver;
   }
   export interface AcceptVpcPeeringConnectionResult {
     /**
@@ -6035,6 +6078,10 @@ declare namespace EC2 {
      * The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
      */
     NetworkCardIndex?: Integer;
+    /**
+     * Configures ENA Express for the network interface that this action attaches to the instance.
+     */
+    EnaSrdSpecification?: EnaSrdSpecification;
   }
   export interface AttachNetworkInterfaceResult {
     /**
@@ -6083,6 +6130,22 @@ declare namespace EC2 {
      * Information about the attachment.
      */
     VpcAttachment?: VpcAttachment;
+  }
+  export interface AttachmentEnaSrdSpecification {
+    /**
+     * Indicates whether ENA Express is enabled for the network interface that's attached to the instance.
+     */
+    EnaSrdEnabled?: Boolean;
+    /**
+     * ENA Express configuration for UDP network traffic.
+     */
+    EnaSrdUdpSpecification?: AttachmentEnaSrdUdpSpecification;
+  }
+  export interface AttachmentEnaSrdUdpSpecification {
+    /**
+     * Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.
+     */
+    EnaSrdUdpEnabled?: Boolean;
   }
   export type AttachmentStatus = "attaching"|"attached"|"detaching"|"detached"|string;
   export interface AttributeBooleanValue {
@@ -8119,6 +8182,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface CreateCoipPoolResult {
+    /**
+     * Information about the CoIP address pool.
+     */
     CoipPool?: CoipPool;
   }
   export interface CreateCustomerGatewayRequest {
@@ -8844,6 +8910,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface CreateLocalGatewayRouteTableResult {
+    /**
+     * Information about the local gateway route table.
+     */
     LocalGatewayRouteTable?: LocalGatewayRouteTable;
   }
   export interface CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest {
@@ -8865,6 +8934,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult {
+    /**
+     * Information about the local gateway route table virtual interface group association.
+     */
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation?: LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
   }
   export interface CreateLocalGatewayRouteTableVpcAssociationRequest {
@@ -10607,6 +10679,64 @@ declare namespace EC2 {
   export type CustomerGatewayList = CustomerGateway[];
   export type DITMaxResults = number;
   export type DITOMaxResults = number;
+  export type DataQueries = DataQuery[];
+  export interface DataQuery {
+    /**
+     * A user-defined ID associated with a data query that's returned in the dataResponse identifying the query. For example, if you set the Id to MyQuery01in the query, the dataResponse identifies the query as MyQuery01.
+     */
+    Id?: String;
+    /**
+     * The Region or Availability Zone that's the source for the data query. For example, us-east-1.
+     */
+    Source?: String;
+    /**
+     * The Region or Availability Zone that's the target for the data query. For example, eu-north-1.
+     */
+    Destination?: String;
+    /**
+     * The aggregation metric used for the data query. Currently only aggregation-latency is supported, indicating network latency.
+     */
+    Metric?: MetricType;
+    /**
+     * Metric data aggregations over specified periods of time. The following are the supported Infrastructure Performance statistics:    p50 - The median value of the metric aggregated over a specified start and end time. For example, a metric of five_minutes is the median of all the data points gathered within those five minutes.  
+     */
+    Statistic?: StatisticType;
+    /**
+     * The aggregation period used for the data query.
+     */
+    Period?: PeriodType;
+  }
+  export interface DataResponse {
+    /**
+     * The ID passed in the DataQuery.
+     */
+    Id?: String;
+    /**
+     * The Region or Availability Zone that's the source for the data query. For example, us-east-1.
+     */
+    Source?: String;
+    /**
+     * The Region or Availability Zone that's the destination for the data query. For example, eu-west-1.
+     */
+    Destination?: String;
+    /**
+     * The metric used for the network performance request. Currently only aggregate-latency is supported, showing network latency during a specified period. 
+     */
+    Metric?: MetricType;
+    /**
+     * The statistic used for the network performance request.
+     */
+    Statistic?: StatisticType;
+    /**
+     * The period used for the network performance request.
+     */
+    Period?: PeriodType;
+    /**
+     * A list of MetricPoint objects.
+     */
+    MetricPoints?: MetricPoints;
+  }
+  export type DataResponses = DataResponse[];
   export type DatafeedSubscriptionState = "Active"|"Inactive"|string;
   export type DateTime = Date;
   export type DedicatedHostFlag = boolean;
@@ -10704,6 +10834,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface DeleteCoipPoolResult {
+    /**
+     * Information about the CoIP address pool.
+     */
     CoipPool?: CoipPool;
   }
   export interface DeleteCustomerGatewayRequest {
@@ -11044,6 +11177,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface DeleteLocalGatewayRouteTableResult {
+    /**
+     * Information about the local gateway route table.
+     */
     LocalGatewayRouteTable?: LocalGatewayRouteTable;
   }
   export interface DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationRequest {
@@ -11057,6 +11193,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult {
+    /**
+     * Information about the association.
+     */
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation?: LocalGatewayRouteTableVirtualInterfaceGroupAssociation;
   }
   export interface DeleteLocalGatewayRouteTableVpcAssociationRequest {
@@ -12040,6 +12179,34 @@ declare namespace EC2 {
      * Information about the Availability Zones, Local Zones, and Wavelength Zones.
      */
     AvailabilityZones?: AvailabilityZoneList;
+  }
+  export interface DescribeAwsNetworkPerformanceMetricSubscriptionsRequest {
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: MaxResultsParam;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * One or more filters.
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeAwsNetworkPerformanceMetricSubscriptionsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+    /**
+     * Describes the current Infrastructure Performance subscriptions.
+     */
+    Subscriptions?: SubscriptionList;
   }
   export interface DescribeBundleTasksRequest {
     /**
@@ -16054,7 +16221,7 @@ declare namespace EC2 {
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    owner - The ID or alias of the Amazon Web Services account that owns the service.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway | GatewayLoadBalancer).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -16090,7 +16257,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: VpcEndpointIdList;
     /**
-     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).  
      */
     Filters?: FilterList;
     /**
@@ -16392,6 +16559,34 @@ declare namespace EC2 {
      * An Elastic IP address transfer.
      */
     AddressTransfer?: AddressTransfer;
+  }
+  export interface DisableAwsNetworkPerformanceMetricSubscriptionRequest {
+    /**
+     * The source Region or Availability Zone that the metric subscription is disabled for. For example, us-east-1.
+     */
+    Source?: String;
+    /**
+     * The target Region or Availability Zone that the metric subscription is disabled for. For example, eu-north-1.
+     */
+    Destination?: String;
+    /**
+     * The metric used for the disabled subscription.
+     */
+    Metric?: MetricType;
+    /**
+     * The statistic used for the disabled subscription. 
+     */
+    Statistic?: StatisticType;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableAwsNetworkPerformanceMetricSubscriptionResult {
+    /**
+     * Indicates whether the unsubscribe action was successful.
+     */
+    Output?: Boolean;
   }
   export interface DisableEbsEncryptionByDefaultRequest {
     /**
@@ -17254,6 +17449,23 @@ declare namespace EC2 {
   export type ElasticInferenceAcceleratorCount = number;
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
   export type ElasticIpAssociationId = string;
+  export interface EnaSrdSpecification {
+    /**
+     * Indicates whether ENA Express is enabled for the network interface.
+     */
+    EnaSrdEnabled?: Boolean;
+    /**
+     * Configures ENA Express for UDP network traffic.
+     */
+    EnaSrdUdpSpecification?: EnaSrdUdpSpecification;
+  }
+  export type EnaSrdSupported = boolean;
+  export interface EnaSrdUdpSpecification {
+    /**
+     * Indicates whether UDP traffic uses ENA Express. To specify this setting, you must first enable ENA Express.
+     */
+    EnaSrdUdpEnabled?: Boolean;
+  }
   export type EnaSupport = "unsupported"|"supported"|"required"|string;
   export interface EnableAddressTransferRequest {
     /**
@@ -17274,6 +17486,34 @@ declare namespace EC2 {
      * An Elastic IP address transfer.
      */
     AddressTransfer?: AddressTransfer;
+  }
+  export interface EnableAwsNetworkPerformanceMetricSubscriptionRequest {
+    /**
+     * The source Region or Availability Zone that the metric subscription is enabled for. For example, us-east-1.
+     */
+    Source?: String;
+    /**
+     * The target Region or Availability Zone that the metric subscription is enabled for. For example, eu-west-1.
+     */
+    Destination?: String;
+    /**
+     * The metric used for the enabled subscription.
+     */
+    Metric?: MetricType;
+    /**
+     * The statistic used for the enabled subscription.
+     */
+    Statistic?: StatisticType;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableAwsNetworkPerformanceMetricSubscriptionResult {
+    /**
+     * Indicates whether the subscribe action was successful.
+     */
+    Output?: Boolean;
   }
   export interface EnableEbsEncryptionByDefaultRequest {
     /**
@@ -17489,6 +17729,12 @@ declare namespace EC2 {
      * The result of enabling the IPAM account.
      */
     Success?: Boolean;
+  }
+  export interface EnableReachabilityAnalyzerOrganizationSharingRequest {
+    DryRun?: Boolean;
+  }
+  export interface EnableReachabilityAnalyzerOrganizationSharingResult {
+    ReturnValue?: Boolean;
   }
   export interface EnableSerialConsoleAccessRequest {
     /**
@@ -18744,6 +18990,42 @@ declare namespace EC2 {
      * Information about the IPv6 CIDR block associations.
      */
     Ipv6CidrAssociations?: Ipv6CidrAssociationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface GetAwsNetworkPerformanceDataRequest {
+    /**
+     * A list of network performance data queries.
+     */
+    DataQueries?: DataQueries;
+    /**
+     * The starting time for the performance data request. The starting time must be formatted as yyyy-mm-ddThh:mm:ss. For example, 2022-06-10T12:00:00.000Z.
+     */
+    StartTime?: MillisecondDateTime;
+    /**
+     * The ending time for the performance data request. The end time must be formatted as yyyy-mm-ddThh:mm:ss. For example, 2022-06-12T12:00:00.000Z.
+     */
+    EndTime?: MillisecondDateTime;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetAwsNetworkPerformanceDataResult {
+    /**
+     * The list of data responses.
+     */
+    DataResponses?: DataResponses;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -24091,6 +24373,9 @@ declare namespace EC2 {
      * The mode of the local gateway route table.
      */
     Mode?: LocalGatewayRouteTableMode;
+    /**
+     * Information about the state change.
+     */
     StateReason?: StateReason;
   }
   export type LocalGatewayRouteTableIdSet = LocalGatewayRoutetableId[];
@@ -24294,6 +24579,7 @@ declare namespace EC2 {
   export type MaxIpv6AddrPerInterface = number;
   export type MaxNetworkInterfaces = number;
   export type MaxResults = number;
+  export type MaxResultsParam = number;
   export type MaximumBandwidthInMbps = number;
   export type MaximumEfaInterfaces = number;
   export type MaximumIops = number;
@@ -24347,6 +24633,23 @@ declare namespace EC2 {
     Max?: Integer;
   }
   export type MemorySize = number;
+  export interface MetricPoint {
+    /**
+     * The start date for the metric point. The starting date for the metric point. The starting time must be formatted as yyyy-mm-ddThh:mm:ss. For example, 2022-06-10T12:00:00.000Z.
+     */
+    StartDate?: MillisecondDateTime;
+    /**
+     * The end date for the metric point. The ending time must be formatted as yyyy-mm-ddThh:mm:ss. For example, 2022-06-12T12:00:00.000Z.
+     */
+    EndDate?: MillisecondDateTime;
+    Value?: Float;
+    /**
+     * The status of the metric point.
+     */
+    Status?: String;
+  }
+  export type MetricPoints = MetricPoint[];
+  export type MetricType = "aggregate-latency"|string;
   export type MillisecondDateTime = Date;
   export interface ModifyAddressAttributeRequest {
     /**
@@ -25192,6 +25495,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyLocalGatewayRouteResult {
+    /**
+     * Information about the local gateway route table.
+     */
     Route?: LocalGatewayRoute;
   }
   export interface ModifyManagedPrefixListRequest {
@@ -25232,7 +25538,7 @@ declare namespace EC2 {
   }
   export interface ModifyNetworkInterfaceAttributeRequest {
     /**
-     * Information about the interface attachment. If modifying the 'delete on termination' attribute, you must specify the ID of the interface attachment.
+     * Information about the interface attachment. If modifying the delete on termination attribute, you must specify the ID of the interface attachment.
      */
     Attachment?: NetworkInterfaceAttachmentChanges;
     /**
@@ -25255,6 +25561,10 @@ declare namespace EC2 {
      * Enable or disable source/destination checks, which ensure that the instance is either the source or the destination of any traffic that it receives. If the value is true, source/destination checks are enabled; otherwise, they are disabled. The default value is true. You must disable source/destination checks if the instance runs services such as network address translation, routing, or firewalls.
      */
     SourceDestCheck?: AttributeBooleanValue;
+    /**
+     * Updates the ENA Express configuration for the network interface that’s attached to the instance.
+     */
+    EnaSrdSpecification?: EnaSrdSpecification;
   }
   export interface ModifyPrivateDnsNameOptionsRequest {
     /**
@@ -25669,6 +25979,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyTransitGatewayResult {
+    /**
+     * Information about the transit gateway.
+     */
     TransitGateway?: TransitGateway;
   }
   export interface ModifyTransitGatewayVpcAttachmentRequest {
@@ -26040,6 +26353,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyVpnConnectionOptionsResult {
+    /**
+     * Information about the VPN connection.
+     */
     VpnConnection?: VpnConnection;
   }
   export interface ModifyVpnConnectionRequest {
@@ -26065,6 +26381,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyVpnConnectionResult {
+    /**
+     * Information about the VPN connection.
+     */
     VpnConnection?: VpnConnection;
   }
   export interface ModifyVpnTunnelCertificateRequest {
@@ -26082,6 +26401,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyVpnTunnelCertificateResult {
+    /**
+     * Information about the VPN connection.
+     */
     VpnConnection?: VpnConnection;
   }
   export interface ModifyVpnTunnelOptionsRequest {
@@ -26103,6 +26425,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface ModifyVpnTunnelOptionsResult {
+    /**
+     * Information about the VPN connection.
+     */
     VpnConnection?: VpnConnection;
   }
   export interface ModifyVpnTunnelOptionsSpecification {
@@ -26506,6 +26831,10 @@ declare namespace EC2 {
      * Indicates whether the instance type automatically encrypts in-transit traffic between instances.
      */
     EncryptionInTransitSupported?: EncryptionInTransitSupported;
+    /**
+     * Indicates whether the instance type supports ENA Express. ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the maximum bandwidth used per stream and minimize tail latency of network traffic between EC2 instances.
+     */
+    EnaSrdSupported?: EnaSrdSupported;
   }
   export interface NetworkInsightsAccessScope {
     /**
@@ -26608,6 +26937,7 @@ declare namespace EC2 {
      * The ID of the path.
      */
     NetworkInsightsPathId?: NetworkInsightsPathId;
+    AdditionalAccounts?: ValueStringList;
     /**
      * The Amazon Resource Names (ARN) of the Amazon Web Services resources that the path must traverse.
      */
@@ -26648,6 +26978,7 @@ declare namespace EC2 {
      * Potential intermediate components.
      */
     AlternatePathHints?: AlternatePathHintList;
+    SuggestedAccounts?: ValueStringList;
     /**
      * The tags.
      */
@@ -26678,6 +27009,8 @@ declare namespace EC2 {
      * The Amazon Web Services resource that is the destination of the path.
      */
     Destination?: String;
+    SourceArn?: ResourceArn;
+    DestinationArn?: ResourceArn;
     /**
      * The IP address of the Amazon Web Services resource that is the source of the path.
      */
@@ -26872,6 +27205,10 @@ declare namespace EC2 {
      * The attachment state.
      */
     Status?: AttachmentStatus;
+    /**
+     * Configures ENA Express for the network interface that this action attaches to the instance.
+     */
+    EnaSrdSpecification?: AttachmentEnaSrdSpecification;
   }
   export interface NetworkInterfaceAttachmentChanges {
     /**
@@ -27275,6 +27612,7 @@ declare namespace EC2 {
      */
     Region?: String;
   }
+  export type PeriodType = "five-minutes"|"fifteen-minutes"|"one-hour"|"three-hours"|"one-day"|"one-week"|string;
   export type PermissionGroup = "all"|string;
   export type Phase1DHGroupNumbersList = Phase1DHGroupNumbersListValue[];
   export interface Phase1DHGroupNumbersListValue {
@@ -27362,39 +27700,39 @@ declare namespace EC2 {
   }
   export interface Placement {
     /**
-     * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region. This parameter is not supported by CreateFleet.
+     * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region. This parameter is not supported for CreateFleet.
      */
     AvailabilityZone?: String;
     /**
-     * The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the ImportInstance command. This parameter is not supported by CreateFleet.
+     * The affinity setting for the instance on the Dedicated Host. This parameter is not supported for CreateFleet or ImportInstance.
      */
     Affinity?: String;
     /**
-     * The name of the placement group the instance is in.
+     * The name of the placement group that the instance is in. If you specify GroupName, you can't specify GroupId.
      */
     GroupName?: PlacementGroupName;
     /**
-     * The number of the partition that the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
+     * The number of the partition that the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported for CreateFleet.
      */
     PartitionNumber?: Integer;
     /**
-     * The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the ImportInstance command. This parameter is not supported by CreateFleet.
+     * The ID of the Dedicated Host on which the instance resides. This parameter is not supported for CreateFleet or ImportInstance.
      */
     HostId?: String;
     /**
-     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the ImportInstance command. This parameter is not supported by CreateFleet. T3 instances that use the unlimited CPU credit option do not support host tenancy.
+     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. This parameter is not supported for CreateFleet. The host tenancy is not supported for ImportInstance or for T3 instances that are configured for the unlimited CPU credit option.
      */
     Tenancy?: Tenancy;
     /**
-     * Reserved for future use. This parameter is not supported by CreateFleet.
+     * Reserved for future use.
      */
     SpreadDomain?: String;
     /**
-     * The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host. This parameter is not supported by CreateFleet.
+     * The ARN of the host resource group in which to launch the instances. If you specify this parameter, either omit the Tenancy parameter or set it to host. This parameter is not supported for CreateFleet.
      */
     HostResourceGroupArn?: String;
     /**
-     * The Group Id of the placement group.
+     * The ID of the placement group that the instance is in. If you specify GroupId, you can't specify GroupName.
      */
     GroupId?: PlacementGroupId;
   }
@@ -27428,7 +27766,7 @@ declare namespace EC2 {
      */
     GroupArn?: String;
     /**
-     *  The spread level for the placement group. Only Outpost placement groups can be spread across hosts. 
+     * The spread level for the placement group. Only Outpost placement groups can be spread across hosts.
      */
     SpreadLevel?: SpreadLevel;
   }
@@ -28253,6 +28591,9 @@ declare namespace EC2 {
     DryRun?: Boolean;
   }
   export interface RejectTransitGatewayMulticastDomainAssociationsResult {
+    /**
+     * Information about the multicast domain associations.
+     */
     Associations?: TransitGatewayMulticastDomainAssociations;
   }
   export interface RejectTransitGatewayPeeringAttachmentRequest {
@@ -31495,7 +31836,7 @@ declare namespace EC2 {
   }
   export interface SpotFleetRequestConfigData {
     /**
-     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet launch configuration. For more information, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide.  lowestPrice - Spot Fleet launches instances from the lowest-price Spot Instance pool that has available capacity. If the cheapest pool doesn't have available capacity, the Spot Instances come from the next cheapest pool that has available capacity. If a pool runs out of capacity before fulfilling your desired capacity, Spot Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your desired capacity is met, you might receive Spot Instances from several pools.  diversified - Spot Fleet launches instances from all of the Spot Instance pools that you specify.  capacityOptimized (recommended) - Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacityOptimizedPrioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacityOptimizedPrioritized is supported only if your Spot Fleet uses a launch template. Note that if the OnDemandAllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowestPrice 
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet launch configuration. For more information, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide.  priceCapacityOptimized (recommended)  Spot Fleet identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. Spot Fleet then requests Spot Instances from the lowest priced of these pools.  capacityOptimized  Spot Fleet identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. To give certain instance types a higher chance of launching first, use capacityOptimizedPrioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacityOptimizedPrioritized is supported only if your Spot Fleet uses a launch template. Note that if the OnDemandAllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.  diversified  Spot Fleet requests instances from all of the Spot Instance pools that you specify.  lowestPrice  Spot Fleet requests instances from the lowest priced Spot Instance pool that has available capacity. If the lowest priced pool doesn't have available capacity, the Spot Instances come from the next lowest priced pool that has available capacity. If a pool runs out of capacity before fulfilling your desired capacity, Spot Fleet will continue to fulfill your request by drawing from the next lowest priced pool. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. Because this strategy only considers instance price and not capacity availability, it might lead to high interruption rates.   Default: lowestPrice 
      */
     AllocationStrategy?: AllocationStrategy;
     /**
@@ -31751,7 +32092,7 @@ declare namespace EC2 {
   }
   export interface SpotOptions {
     /**
-     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet launch configuration. For more information, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide.  lowest-price - EC2 Fleet launches instances from the lowest-price Spot Instance pool that has available capacity. If the cheapest pool doesn't have available capacity, the Spot Instances come from the next cheapest pool that has available capacity. If a pool runs out of capacity before fulfilling your desired capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your desired capacity is met, you might receive Spot Instances from several pools.  diversified - EC2 Fleet launches instances from all of the Spot Instance pools that you specify.  capacity-optimized (recommended) - EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowest-price 
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet launch configuration. For more information, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide.  price-capacity-optimized (recommended)  EC2 Fleet identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. EC2 Fleet then requests Spot Instances from the lowest priced of these pools.  capacity-optimized  EC2 Fleet identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your EC2 Fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.  diversified  EC2 Fleet requests instances from all of the Spot Instance pools that you specify.  lowest-price  EC2 Fleet requests instances from the lowest priced Spot Instance pool that has available capacity. If the lowest priced pool doesn't have available capacity, the Spot Instances come from the next lowest priced pool that has available capacity. If a pool runs out of capacity before fulfilling your desired capacity, EC2 Fleet will continue to fulfill your request by drawing from the next lowest priced pool. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. Because this strategy only considers instance price and not capacity availability, it might lead to high interruption rates.   Default: lowest-price 
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -31785,7 +32126,7 @@ declare namespace EC2 {
   }
   export interface SpotOptionsRequest {
     /**
-     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet launch configuration. For more information, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide.  lowest-price - EC2 Fleet launches instances from the lowest-price Spot Instance pool that has available capacity. If the cheapest pool doesn't have available capacity, the Spot Instances come from the next cheapest pool that has available capacity. If a pool runs out of capacity before fulfilling your desired capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest pool. To ensure that your desired capacity is met, you might receive Spot Instances from several pools.  diversified - EC2 Fleet launches instances from all of the Spot Instance pools that you specify.  capacity-optimized (recommended) - EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. Default: lowest-price 
+     * The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet launch configuration. For more information, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide.  price-capacity-optimized (recommended)  EC2 Fleet identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. EC2 Fleet then requests Spot Instances from the lowest priced of these pools.  capacity-optimized  EC2 Fleet identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized. Set a priority for each instance type by using the Priority parameter for LaunchTemplateOverrides. You can assign the same priority to different LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. capacity-optimized-prioritized is supported only if your EC2 Fleet uses a launch template. Note that if the On-Demand AllocationStrategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity.  diversified  EC2 Fleet requests instances from all of the Spot Instance pools that you specify.  lowest-price  EC2 Fleet requests instances from the lowest priced Spot Instance pool that has available capacity. If the lowest priced pool doesn't have available capacity, the Spot Instances come from the next lowest priced pool that has available capacity. If a pool runs out of capacity before fulfilling your desired capacity, EC2 Fleet will continue to fulfill your request by drawing from the next lowest priced pool. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. Because this strategy only considers instance price and not capacity availability, it might lead to high interruption rates.   Default: lowest-price 
      */
     AllocationStrategy?: SpotAllocationStrategy;
     /**
@@ -31975,6 +32316,7 @@ declare namespace EC2 {
      * The ID of the path.
      */
     NetworkInsightsPathId: NetworkInsightsPathId;
+    AdditionalAccounts?: ValueStringList;
     /**
      * The Amazon Resource Names (ARN) of the resources that the path must traverse.
      */
@@ -32026,6 +32368,7 @@ declare namespace EC2 {
     Message?: String;
   }
   export type StaticSourcesSupportValue = "enable"|"disable"|string;
+  export type StatisticType = "p50"|string;
   export type Status = "MoveInProgress"|"InVpc"|"InClassic"|string;
   export type StatusName = "reachability"|string;
   export type StatusType = "passed"|"failed"|"insufficient-data"|"initializing"|string;
@@ -32265,6 +32608,29 @@ declare namespace EC2 {
   export type SubnetIpv6CidrBlockAssociationSet = SubnetIpv6CidrBlockAssociation[];
   export type SubnetList = Subnet[];
   export type SubnetState = "pending"|"available"|string;
+  export interface Subscription {
+    /**
+     * The Region or Availability Zone that's the source for the subscription. For example, us-east-1.
+     */
+    Source?: String;
+    /**
+     * The Region or Availability Zone that's the target for the subscription. For example, eu-west-1.
+     */
+    Destination?: String;
+    /**
+     * The metric used for the subscription.
+     */
+    Metric?: MetricType;
+    /**
+     * The statistic used for the subscription.
+     */
+    Statistic?: StatisticType;
+    /**
+     * The data aggregation time for the subscription.
+     */
+    Period?: PeriodType;
+  }
+  export type SubscriptionList = Subscription[];
   export interface SuccessfulInstanceCreditSpecificationItem {
     /**
      * The ID of the instance.
@@ -34113,7 +34479,7 @@ declare namespace EC2 {
      */
     ValidCores?: CoreCountList;
     /**
-     * The valid number of threads per core that can be configured for the instance type. 
+     * The valid number of threads per core that can be configured for the instance type.
      */
     ValidThreadsPerCore?: ThreadsPerCoreList;
   }
@@ -34737,6 +35103,7 @@ declare namespace EC2 {
   }
   export type VpcPeeringConnectionId = string;
   export type VpcPeeringConnectionIdList = VpcPeeringConnectionId[];
+  export type VpcPeeringConnectionIdWithResolver = string;
   export type VpcPeeringConnectionList = VpcPeeringConnection[];
   export interface VpcPeeringConnectionOptionsDescription {
     /**

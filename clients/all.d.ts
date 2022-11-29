@@ -323,3 +323,4 @@ export import ChimeSDKVoice = require('./chimesdkvoice');
 export import IoTRoboRunner = require('./iotroborunner');
 export import SsmSap = require('./ssmsap');
 export import OAM = require('./oam');
+export import ARCZonalShift = require('./arczonalshift');

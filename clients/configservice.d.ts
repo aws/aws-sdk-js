@@ -404,11 +404,11 @@ declare class ConfigService extends Service {
    */
   getComplianceDetailsByConfigRule(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByConfigRuleResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified Amazon Web Services resource. The results indicate which Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.
+   * Returns the evaluation results for the specified Amazon Web Services resource. The results indicate which Config rules were used to evaluate the resource, when each rule was last invoked, and whether the resource complies with each rule.
    */
   getComplianceDetailsByResource(params: ConfigService.Types.GetComplianceDetailsByResourceRequest, callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByResourceResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByResourceResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified Amazon Web Services resource. The results indicate which Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.
+   * Returns the evaluation results for the specified Amazon Web Services resource. The results indicate which Config rules were used to evaluate the resource, when each rule was last invoked, and whether the resource complies with each rule.
    */
   getComplianceDetailsByResource(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByResourceResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByResourceResponse, AWSError>;
   /**
@@ -488,6 +488,14 @@ declare class ConfigService extends Service {
    */
   getResourceConfigHistory(callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
   /**
+   * Returns a summary of resource evaluation for the specified resource evaluation ID from the proactive rules that were run. The results indicate which evaluation context was used to evaluate the rules, which resource details were evaluated, the evaluation mode that was run, and whether the resource details comply with the configuration of the proactive rules. 
+   */
+  getResourceEvaluationSummary(params: ConfigService.Types.GetResourceEvaluationSummaryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetResourceEvaluationSummaryResponse) => void): Request<ConfigService.Types.GetResourceEvaluationSummaryResponse, AWSError>;
+  /**
+   * Returns a summary of resource evaluation for the specified resource evaluation ID from the proactive rules that were run. The results indicate which evaluation context was used to evaluate the rules, which resource details were evaluated, the evaluation mode that was run, and whether the resource details comply with the configuration of the proactive rules. 
+   */
+  getResourceEvaluationSummary(callback?: (err: AWSError, data: ConfigService.Types.GetResourceEvaluationSummaryResponse) => void): Request<ConfigService.Types.GetResourceEvaluationSummaryResponse, AWSError>;
+  /**
    * Returns the details of a specific stored query.
    */
   getStoredQuery(params: ConfigService.Types.GetStoredQueryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetStoredQueryResponse) => void): Request<ConfigService.Types.GetStoredQueryResponse, AWSError>;
@@ -519,6 +527,14 @@ declare class ConfigService extends Service {
    * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that Config has discovered, including those that Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
    */
   listDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListDiscoveredResourcesResponse, AWSError>;
+  /**
+   * Returns a list of proactive resource evaluations.
+   */
+  listResourceEvaluations(params: ConfigService.Types.ListResourceEvaluationsRequest, callback?: (err: AWSError, data: ConfigService.Types.ListResourceEvaluationsResponse) => void): Request<ConfigService.Types.ListResourceEvaluationsResponse, AWSError>;
+  /**
+   * Returns a list of proactive resource evaluations.
+   */
+  listResourceEvaluations(callback?: (err: AWSError, data: ConfigService.Types.ListResourceEvaluationsResponse) => void): Request<ConfigService.Types.ListResourceEvaluationsResponse, AWSError>;
   /**
    * Lists the stored queries for a single Amazon Web Services account and a single Amazon Web Services Region. The default is 100. 
    */
@@ -624,11 +640,11 @@ declare class ConfigService extends Service {
    */
   putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific Config rule.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific Config rule.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.   To place an exception on an Amazon Web Services resource, ensure remediation is set as manual remediation. 
    */
   putRemediationExceptions(params: ConfigService.Types.PutRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific Config rule.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific Config rule.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.   To place an exception on an Amazon Web Services resource, ensure remediation is set as manual remediation. 
    */
   putRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
@@ -695,6 +711,14 @@ declare class ConfigService extends Service {
    * Runs an on-demand remediation for the specified Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
    */
   startRemediationExecution(callback?: (err: AWSError, data: ConfigService.Types.StartRemediationExecutionResponse) => void): Request<ConfigService.Types.StartRemediationExecutionResponse, AWSError>;
+  /**
+   * Runs an on-demand evaluation for the specified resource to determine whether the resource details will comply with configured Config rules. You can also use it for evaluation purposes. Config recommends using an evaluation context. It runs an execution against the resource details with all of the Config rules in your account that match with the specified proactive mode and resource type.  Ensure you have the cloudformation:DescribeType role setup to validate the resource type schema.  
+   */
+  startResourceEvaluation(params: ConfigService.Types.StartResourceEvaluationRequest, callback?: (err: AWSError, data: ConfigService.Types.StartResourceEvaluationResponse) => void): Request<ConfigService.Types.StartResourceEvaluationResponse, AWSError>;
+  /**
+   * Runs an on-demand evaluation for the specified resource to determine whether the resource details will comply with configured Config rules. You can also use it for evaluation purposes. Config recommends using an evaluation context. It runs an execution against the resource details with all of the Config rules in your account that match with the specified proactive mode and resource type.  Ensure you have the cloudformation:DescribeType role setup to validate the resource type schema.  
+   */
+  startResourceEvaluation(callback?: (err: AWSError, data: ConfigService.Types.StartResourceEvaluationResponse) => void): Request<ConfigService.Types.StartResourceEvaluationResponse, AWSError>;
   /**
    * Stops recording configurations of the Amazon Web Services resources you have selected to record in your Amazon Web Services account.
    */
@@ -1069,6 +1093,7 @@ declare namespace ConfigService {
   export type Boolean = boolean;
   export type ChannelName = string;
   export type ChronologicalOrder = "Reverse"|"Forward"|string;
+  export type ClientToken = string;
   export interface Compliance {
     /**
      * Indicates whether an Amazon Web Services resource or Config rule is compliant. A resource is compliant if it complies with all of the Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules. A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply. Config returns the INSUFFICIENT_DATA value when no evaluation results are available for the Amazon Web Services resource or Config rule. For the Compliance data type, Config supports only COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA values. Config does not support the NOT_APPLICABLE value for the Compliance data type.
@@ -1211,6 +1236,10 @@ declare namespace ConfigService {
      * Service principal name of the service that created the rule.  The field is populated only if the service-linked rule is created by a service. The field is empty if you create your own rule. 
      */
     CreatedBy?: StringWithCharLimit256;
+    /**
+     * The modes the Config rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.
+     */
+    EvaluationModes?: EvaluationModes;
   }
   export interface ConfigRuleComplianceFilters {
     /**
@@ -2046,6 +2075,12 @@ declare namespace ConfigService {
      */
     NextToken?: String;
   }
+  export interface DescribeConfigRulesFilters {
+    /**
+     * The mode of an evaluation. The valid values are Detective or Proactive.
+     */
+    EvaluationMode?: EvaluationMode;
+  }
   export interface DescribeConfigRulesRequest {
     /**
      * The names of the Config rules for which you want details. If you do not specify any names, Config returns details for all your rules.
@@ -2055,6 +2090,10 @@ declare namespace ConfigService {
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
+    /**
+     * Returns a list of Detecive or Proactive Config rules. By default, this API returns an unfiltered list.
+     */
+    Filters?: DescribeConfigRulesFilters;
   }
   export interface DescribeConfigRulesResponse {
     /**
@@ -2477,6 +2516,21 @@ declare namespace ConfigService {
      */
     OrderingTimestamp: OrderingTimestamp;
   }
+  export interface EvaluationContext {
+    /**
+     * A unique EvaluationContextIdentifier ID for an EvaluationContext.
+     */
+    EvaluationContextIdentifier?: EvaluationContextIdentifier;
+  }
+  export type EvaluationContextIdentifier = string;
+  export type EvaluationMode = "DETECTIVE"|"PROACTIVE"|string;
+  export interface EvaluationModeConfiguration {
+    /**
+     * The mode of an evaluation. The valid values are Detective or Proactive.
+     */
+    Mode?: EvaluationMode;
+  }
+  export type EvaluationModes = EvaluationModeConfiguration[];
   export interface EvaluationResult {
     /**
      * Uniquely identifies the evaluation result.
@@ -2512,6 +2566,10 @@ declare namespace ConfigService {
      * The time of the event that triggered the evaluation of your Amazon Web Services resources. The time can indicate when Config delivered a configuration item change notification, or it can indicate when Config delivered the configuration snapshot, depending on which event triggered the evaluation.
      */
     OrderingTimestamp?: _Date;
+    /**
+     * A Unique ID for an evaluation result.
+     */
+    ResourceEvaluationId?: ResourceEvaluationId;
   }
   export interface EvaluationResultQualifier {
     /**
@@ -2526,8 +2584,23 @@ declare namespace ConfigService {
      * The ID of the evaluated Amazon Web Services resource.
      */
     ResourceId?: BaseResourceId;
+    /**
+     * The mode of an evaluation. The valid values are Detective or Proactive.
+     */
+    EvaluationMode?: EvaluationMode;
   }
   export type EvaluationResults = EvaluationResult[];
+  export interface EvaluationStatus {
+    /**
+     * The status of an execution. The valid values are In_Progress, Succeeded or Failed. 
+     */
+    Status: ResourceEvaluationStatus;
+    /**
+     * An explanation for failed execution status.
+     */
+    FailureReason?: StringWithCharLimit1024;
+  }
+  export type EvaluationTimeout = number;
   export type Evaluations = Evaluation[];
   export type EventSource = "aws.config"|string;
   export type ExcludedAccounts = AccountId[];
@@ -2801,11 +2874,11 @@ declare namespace ConfigService {
     /**
      * The type of the Amazon Web Services resource for which you want compliance information.
      */
-    ResourceType: StringWithCharLimit256;
+    ResourceType?: StringWithCharLimit256;
     /**
      * The ID of the Amazon Web Services resource for which you want compliance information.
      */
-    ResourceId: BaseResourceId;
+    ResourceId?: BaseResourceId;
     /**
      * Filters the results by compliance. The allowed values are COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE.
      */
@@ -2814,6 +2887,10 @@ declare namespace ConfigService {
      * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
      */
     NextToken?: String;
+    /**
+     * The unique ID of Amazon Web Services resource execution for which you want to retrieve evaluation results.   You need to only provide either a ResourceEvaluationID or a ResourceID and ResourceType. 
+     */
+    ResourceEvaluationId?: ResourceEvaluationId;
   }
   export interface GetComplianceDetailsByResourceResponse {
     /**
@@ -3048,6 +3125,42 @@ declare namespace ConfigService {
      */
     nextToken?: NextToken;
   }
+  export interface GetResourceEvaluationSummaryRequest {
+    /**
+     * The unique ResourceEvaluationId of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.
+     */
+    ResourceEvaluationId: ResourceEvaluationId;
+  }
+  export interface GetResourceEvaluationSummaryResponse {
+    /**
+     * The unique ResourceEvaluationId of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.
+     */
+    ResourceEvaluationId?: ResourceEvaluationId;
+    /**
+     * Lists results of the mode that you requested to retrieve the resource evaluation summary. The valid values are Detective or Proactive.
+     */
+    EvaluationMode?: EvaluationMode;
+    /**
+     * Returns an EvaluationStatus object.
+     */
+    EvaluationStatus?: EvaluationStatus;
+    /**
+     * The start timestamp when Config rule starts evaluating compliance for the provided resource details.
+     */
+    EvaluationStartTimestamp?: _Date;
+    /**
+     * The compliance status of the resource evaluation summary.
+     */
+    Compliance?: ComplianceType;
+    /**
+     * Returns an EvaluationContext object.
+     */
+    EvaluationContext?: EvaluationContext;
+    /**
+     * Returns a ResourceDetails object.
+     */
+    ResourceDetails?: ResourceDetails;
+  }
   export interface GetStoredQueryRequest {
     /**
      * The name of the query.
@@ -3176,6 +3289,31 @@ declare namespace ConfigService {
      * The string that you use in a subsequent request to get the next page of results in a paginated response.
      */
     nextToken?: NextToken;
+  }
+  export type ListResourceEvaluationsPageItemLimit = number;
+  export interface ListResourceEvaluationsRequest {
+    /**
+     * Returns a ResourceEvaluationFilters object.
+     */
+    Filters?: ResourceEvaluationFilters;
+    /**
+     * The maximum number of evaluations returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
+     */
+    Limit?: ListResourceEvaluationsPageItemLimit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: String;
+  }
+  export interface ListResourceEvaluationsResponse {
+    /**
+     * Returns a ResourceEvaluations object.
+     */
+    ResourceEvaluations?: ResourceEvaluations;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: String;
   }
   export interface ListStoredQueriesRequest {
     /**
@@ -4083,6 +4221,8 @@ declare namespace ConfigService {
   }
   export type RemediationParameters = {[key: string]: RemediationParameterValue};
   export type RemediationTargetType = "SSM_DOCUMENT"|string;
+  export type ResourceConfiguration = string;
+  export type ResourceConfigurationSchemaType = "CFN_RESOURCE_SCHEMA"|string;
   export interface ResourceCount {
     /**
      * The resource type (for example, "AWS::EC2::Instance").
@@ -4111,6 +4251,55 @@ declare namespace ConfigService {
   export type ResourceCounts = ResourceCount[];
   export type ResourceCreationTime = Date;
   export type ResourceDeletionTime = Date;
+  export interface ResourceDetails {
+    /**
+     * A unique resource ID for an evaluation.
+     */
+    ResourceId: BaseResourceId;
+    /**
+     * The type of resource being evaluated.
+     */
+    ResourceType: StringWithCharLimit256;
+    /**
+     * The resource definition to be evaluated as per the resource configuration schema type.
+     */
+    ResourceConfiguration: ResourceConfiguration;
+    /**
+     * The schema type of the resource configuration.
+     */
+    ResourceConfigurationSchemaType?: ResourceConfigurationSchemaType;
+  }
+  export interface ResourceEvaluation {
+    /**
+     * The ResourceEvaluationId of a evaluation.
+     */
+    ResourceEvaluationId?: ResourceEvaluationId;
+    /**
+     * The mode of an evaluation. The valid values are Detective or Proactive.
+     */
+    EvaluationMode?: EvaluationMode;
+    /**
+     * The starting time of an execution.
+     */
+    EvaluationStartTimestamp?: _Date;
+  }
+  export interface ResourceEvaluationFilters {
+    /**
+     * Filters all resource evaluations results based on an evaluation mode. the valid value for this API is Proactive.
+     */
+    EvaluationMode?: EvaluationMode;
+    /**
+     * Returns a TimeWindow object.
+     */
+    TimeWindow?: TimeWindow;
+    /**
+     * Filters evaluations for a given infrastructure deployment. For example: CFN Stack.
+     */
+    EvaluationContextIdentifier?: EvaluationContextIdentifier;
+  }
+  export type ResourceEvaluationId = string;
+  export type ResourceEvaluationStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string;
+  export type ResourceEvaluations = ResourceEvaluation[];
   export interface ResourceFilters {
     /**
      * The 12-digit source account ID.
@@ -4353,6 +4542,34 @@ declare namespace ConfigService {
      */
     FailedItems?: ResourceKeys;
   }
+  export interface StartResourceEvaluationRequest {
+    /**
+     * Returns a ResourceDetails object.
+     */
+    ResourceDetails: ResourceDetails;
+    /**
+     * Returns an EvaluationContext object.
+     */
+    EvaluationContext?: EvaluationContext;
+    /**
+     * The mode of an evaluation. The valid value for this API is Proactive.
+     */
+    EvaluationMode: EvaluationMode;
+    /**
+     * The timeout for an evaluation. The default is 900 seconds. You cannot specify a number greater than 3600. If you specify 0, Config uses the default.
+     */
+    EvaluationTimeout?: EvaluationTimeout;
+    /**
+     * A client token is a unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request using one of these actions, specify a client token in the request.  Avoid reusing the same client token for other API requests. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, other than the Region or Availability Zone, the retry fails with an IdempotentParameterMismatch error. 
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface StartResourceEvaluationResponse {
+    /**
+     * A unique ResourceEvaluationId that is associated with a single execution.
+     */
+    ResourceEvaluationId?: ResourceEvaluationId;
+  }
   export type StaticParameterValues = StringWithCharLimit256[];
   export interface StaticValue {
     /**
@@ -4465,6 +4682,16 @@ declare namespace ConfigService {
      * The version of the SSM document to use to create a conformance pack. By default, Config uses the latest version.  This field is optional. 
      */
     DocumentVersion?: SSMDocumentVersion;
+  }
+  export interface TimeWindow {
+    /**
+     * The start time of an execution.
+     */
+    StartTime?: _Date;
+    /**
+     * The end time of an execution. The end time must be after the start date.
+     */
+    EndTime?: _Date;
   }
   export type UnprocessedResourceIdentifierList = AggregateResourceIdentifier[];
   export interface UntagResourceRequest {

@@ -11601,6 +11601,10 @@ declare namespace SecurityHub {
      * Whether the standard is enabled by default. When Security Hub is enabled from the console, if a standard is enabled by default, the check box for that standard is selected by default. When Security Hub is enabled using the EnableSecurityHub API operation, the standard is enabled by default unless EnableDefaultStandards is set to false.
      */
     EnabledByDefault?: Boolean;
+    /**
+     * Provides details about the management of a standard. 
+     */
+    StandardsManagedBy?: StandardsManagedBy;
   }
   export type Standards = Standard[];
   export interface StandardsControl {
@@ -11647,6 +11651,16 @@ declare namespace SecurityHub {
   }
   export type StandardsControls = StandardsControl[];
   export type StandardsInputParameterMap = {[key: string]: NonEmptyString};
+  export interface StandardsManagedBy {
+    /**
+     * An identifier for the company that manages a specific security standard. For existing standards, the value is equal to Amazon Web Services.
+     */
+    Company?: NonEmptyString;
+    /**
+     * An identifier for the product that manages a specific security standard. For existing standards, the value is equal to the Amazon Web Services service that manages the standard.
+     */
+    Product?: NonEmptyString;
+  }
   export type StandardsStatus = "PENDING"|"READY"|"FAILED"|"DELETING"|"INCOMPLETE"|string;
   export interface StandardsStatusReason {
     /**

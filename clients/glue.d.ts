@@ -2587,6 +2587,10 @@ declare namespace Glue {
      * Specifies a target that uses Postgres SQL.
      */
     PostgreSQLCatalogTarget?: PostgreSQLCatalogTarget;
+    /**
+     * Specifies a custom visual transform created by a user.
+     */
+    DynamicTransform?: DynamicTransform;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -4909,6 +4913,36 @@ declare namespace Glue {
      * A structure that specifies a list of NullValueField structures that represent a custom null value such as zero or other value being used as a null placeholder unique to the dataset. The DropNullFields transform removes custom null values only if both the value of the null placeholder and the datatype match the data.
      */
     NullTextList?: NullValueFields;
+  }
+  export interface DynamicTransform {
+    /**
+     * Specifies the name of the dynamic transform.
+     */
+    Name: EnclosedInStringProperty;
+    /**
+     * Specifies the name of the dynamic transform as it appears in the Glue Studio visual editor.
+     */
+    TransformName: EnclosedInStringProperty;
+    /**
+     * Specifies the inputs for the dynamic transform that are required.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies the parameters of the dynamic transform.
+     */
+    Parameters?: TransformConfigParameterList;
+    /**
+     * Specifies the name of the function of the dynamic transform.
+     */
+    FunctionName: EnclosedInStringProperty;
+    /**
+     * Specifies the path of the dynamic transform source and config files.
+     */
+    Path: EnclosedInStringProperty;
+    /**
+     * This field is not used and will be deprecated in future release.
+     */
+    Version?: EnclosedInStringProperty;
   }
   export interface DynamoDBCatalogSource {
     /**
@@ -8426,6 +8460,7 @@ declare namespace Glue {
   }
   export type PageSize = number;
   export type PaginationToken = string;
+  export type ParamType = "str"|"int"|"float"|"complex"|"bool"|"list"|"null"|string;
   export type ParametersMap = {[key: string]: ParametersMapValue};
   export type ParametersMapValue = string;
   export type ParquetCompressionType = "snappy"|"lzo"|"gzip"|"uncompressed"|"none"|string;
@@ -10652,6 +10687,37 @@ declare namespace Glue {
   export type Topk = number;
   export type TotalSegmentsInteger = number;
   export type TransactionIdString = string;
+  export interface TransformConfigParameter {
+    /**
+     * Specifies the name of the parameter in the config file of the dynamic transform.
+     */
+    Name: EnclosedInStringProperty;
+    /**
+     * Specifies the parameter type in the config file of the dynamic transform.
+     */
+    Type: ParamType;
+    /**
+     * Specifies the validation rule in the config file of the dynamic transform.
+     */
+    ValidationRule?: EnclosedInStringProperty;
+    /**
+     * Specifies the validation message in the config file of the dynamic transform.
+     */
+    ValidationMessage?: EnclosedInStringProperty;
+    /**
+     * Specifies the value of the parameter in the config file of the dynamic transform.
+     */
+    Value?: EnclosedInStringProperties;
+    /**
+     * Specifies the list type of the parameter in the config file of the dynamic transform.
+     */
+    ListType?: ParamType;
+    /**
+     * Specifies whether the parameter is optional or not in the config file of the dynamic transform.
+     */
+    IsOptional?: BoxedBoolean;
+  }
+  export type TransformConfigParameterList = TransformConfigParameter[];
   export interface TransformEncryption {
     /**
      * An MLUserDataEncryption object containing the encryption mode and customer-provided KMS key ID.

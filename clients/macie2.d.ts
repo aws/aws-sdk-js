@@ -133,11 +133,11 @@ declare class Macie2 extends Service {
    */
   deleteMember(callback?: (err: AWSError, data: Macie2.Types.DeleteMemberResponse) => void): Request<Macie2.Types.DeleteMemberResponse, AWSError>;
   /**
-   *  Retrieves (queries) statistical data and other information about one or more S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) statistical data and other information about one or more S3 buckets that Amazon Macie monitors and analyzes for an account.
    */
   describeBuckets(params: Macie2.Types.DescribeBucketsRequest, callback?: (err: AWSError, data: Macie2.Types.DescribeBucketsResponse) => void): Request<Macie2.Types.DescribeBucketsResponse, AWSError>;
   /**
-   *  Retrieves (queries) statistical data and other information about one or more S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) statistical data and other information about one or more S3 buckets that Amazon Macie monitors and analyzes for an account.
    */
   describeBuckets(callback?: (err: AWSError, data: Macie2.Types.DescribeBucketsResponse) => void): Request<Macie2.Types.DescribeBucketsResponse, AWSError>;
   /**
@@ -229,11 +229,19 @@ declare class Macie2 extends Service {
    */
   getAllowList(callback?: (err: AWSError, data: Macie2.Types.GetAllowListResponse) => void): Request<Macie2.Types.GetAllowListResponse, AWSError>;
   /**
-   * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves the configuration settings and status of automated sensitive data discovery for an account.
+   */
+  getAutomatedDiscoveryConfiguration(params: Macie2.Types.GetAutomatedDiscoveryConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.GetAutomatedDiscoveryConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the configuration settings and status of automated sensitive data discovery for an account.
+   */
+  getAutomatedDiscoveryConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.GetAutomatedDiscoveryConfigurationResponse, AWSError>;
+  /**
+   * Retrieves (queries) aggregated statistical data about all the S3 buckets that Amazon Macie monitors and analyzes for an account.
    */
   getBucketStatistics(params: Macie2.Types.GetBucketStatisticsRequest, callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
-   * Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.
+   * Retrieves (queries) aggregated statistical data about all the S3 buckets that Amazon Macie monitors and analyzes for an account.
    */
   getBucketStatistics(callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
@@ -244,6 +252,14 @@ declare class Macie2 extends Service {
    * Retrieves the configuration settings for storing data classification results.
    */
   getClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetClassificationExportConfigurationResponse) => void): Request<Macie2.Types.GetClassificationExportConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the classification scope settings for an account.
+   */
+  getClassificationScope(params: Macie2.Types.GetClassificationScopeRequest, callback?: (err: AWSError, data: Macie2.Types.GetClassificationScopeResponse) => void): Request<Macie2.Types.GetClassificationScopeResponse, AWSError>;
+  /**
+   * Retrieves the classification scope settings for an account.
+   */
+  getClassificationScope(callback?: (err: AWSError, data: Macie2.Types.GetClassificationScopeResponse) => void): Request<Macie2.Types.GetClassificationScopeResponse, AWSError>;
   /**
    * Retrieves the criteria and other settings for a custom data identifier.
    */
@@ -293,11 +309,11 @@ declare class Macie2 extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: Macie2.Types.GetInvitationsCountResponse) => void): Request<Macie2.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * Retrieves the current status and configuration settings for an Amazon Macie account.
+   * Retrieves the status and configuration settings for an Amazon Macie account.
    */
   getMacieSession(params: Macie2.Types.GetMacieSessionRequest, callback?: (err: AWSError, data: Macie2.Types.GetMacieSessionResponse) => void): Request<Macie2.Types.GetMacieSessionResponse, AWSError>;
   /**
-   * Retrieves the current status and configuration settings for an Amazon Macie account.
+   * Retrieves the status and configuration settings for an Amazon Macie account.
    */
   getMacieSession(callback?: (err: AWSError, data: Macie2.Types.GetMacieSessionResponse) => void): Request<Macie2.Types.GetMacieSessionResponse, AWSError>;
   /**
@@ -316,6 +332,14 @@ declare class Macie2 extends Service {
    * Retrieves information about an account that's associated with an Amazon Macie administrator account.
    */
   getMember(callback?: (err: AWSError, data: Macie2.Types.GetMemberResponse) => void): Request<Macie2.Types.GetMemberResponse, AWSError>;
+  /**
+   * Retrieves (queries) sensitive data discovery statistics and the sensitivity score for an S3 bucket.
+   */
+  getResourceProfile(params: Macie2.Types.GetResourceProfileRequest, callback?: (err: AWSError, data: Macie2.Types.GetResourceProfileResponse) => void): Request<Macie2.Types.GetResourceProfileResponse, AWSError>;
+  /**
+   * Retrieves (queries) sensitive data discovery statistics and the sensitivity score for an S3 bucket.
+   */
+  getResourceProfile(callback?: (err: AWSError, data: Macie2.Types.GetResourceProfileResponse) => void): Request<Macie2.Types.GetResourceProfileResponse, AWSError>;
   /**
    * Retrieves the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
@@ -340,6 +364,14 @@ declare class Macie2 extends Service {
    * Checks whether occurrences of sensitive data can be retrieved for a finding.
    */
   getSensitiveDataOccurrencesAvailability(callback?: (err: AWSError, data: Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse) => void): Request<Macie2.Types.GetSensitiveDataOccurrencesAvailabilityResponse, AWSError>;
+  /**
+   *  Retrieves the settings for the sensitivity inspection template for an account.
+   */
+  getSensitivityInspectionTemplate(params: Macie2.Types.GetSensitivityInspectionTemplateRequest, callback?: (err: AWSError, data: Macie2.Types.GetSensitivityInspectionTemplateResponse) => void): Request<Macie2.Types.GetSensitivityInspectionTemplateResponse, AWSError>;
+  /**
+   *  Retrieves the settings for the sensitivity inspection template for an account.
+   */
+  getSensitivityInspectionTemplate(callback?: (err: AWSError, data: Macie2.Types.GetSensitivityInspectionTemplateResponse) => void): Request<Macie2.Types.GetSensitivityInspectionTemplateResponse, AWSError>;
   /**
    * Retrieves (queries) quotas and aggregated usage data for one or more accounts.
    */
@@ -372,6 +404,14 @@ declare class Macie2 extends Service {
    * Retrieves a subset of information about one or more classification jobs.
    */
   listClassificationJobs(callback?: (err: AWSError, data: Macie2.Types.ListClassificationJobsResponse) => void): Request<Macie2.Types.ListClassificationJobsResponse, AWSError>;
+  /**
+   * Retrieves a subset of information about the classification scope for an account.
+   */
+  listClassificationScopes(params: Macie2.Types.ListClassificationScopesRequest, callback?: (err: AWSError, data: Macie2.Types.ListClassificationScopesResponse) => void): Request<Macie2.Types.ListClassificationScopesResponse, AWSError>;
+  /**
+   * Retrieves a subset of information about the classification scope for an account.
+   */
+  listClassificationScopes(callback?: (err: AWSError, data: Macie2.Types.ListClassificationScopesResponse) => void): Request<Macie2.Types.ListClassificationScopesResponse, AWSError>;
   /**
    * Retrieves a subset of information about all the custom data identifiers for an account.
    */
@@ -428,6 +468,30 @@ declare class Macie2 extends Service {
    * Retrieves information about the delegated Amazon Macie administrator account for an organization in Organizations.
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: Macie2.Types.ListOrganizationAdminAccountsResponse) => void): Request<Macie2.Types.ListOrganizationAdminAccountsResponse, AWSError>;
+  /**
+   * Retrieves information about objects that were selected from an S3 bucket for automated sensitive data discovery.
+   */
+  listResourceProfileArtifacts(params: Macie2.Types.ListResourceProfileArtifactsRequest, callback?: (err: AWSError, data: Macie2.Types.ListResourceProfileArtifactsResponse) => void): Request<Macie2.Types.ListResourceProfileArtifactsResponse, AWSError>;
+  /**
+   * Retrieves information about objects that were selected from an S3 bucket for automated sensitive data discovery.
+   */
+  listResourceProfileArtifacts(callback?: (err: AWSError, data: Macie2.Types.ListResourceProfileArtifactsResponse) => void): Request<Macie2.Types.ListResourceProfileArtifactsResponse, AWSError>;
+  /**
+   * Retrieves information about the types and amount of sensitive data that Amazon Macie found in an S3 bucket.
+   */
+  listResourceProfileDetections(params: Macie2.Types.ListResourceProfileDetectionsRequest, callback?: (err: AWSError, data: Macie2.Types.ListResourceProfileDetectionsResponse) => void): Request<Macie2.Types.ListResourceProfileDetectionsResponse, AWSError>;
+  /**
+   * Retrieves information about the types and amount of sensitive data that Amazon Macie found in an S3 bucket.
+   */
+  listResourceProfileDetections(callback?: (err: AWSError, data: Macie2.Types.ListResourceProfileDetectionsResponse) => void): Request<Macie2.Types.ListResourceProfileDetectionsResponse, AWSError>;
+  /**
+   *  Retrieves a subset of information about the sensitivity inspection template for an account.
+   */
+  listSensitivityInspectionTemplates(params: Macie2.Types.ListSensitivityInspectionTemplatesRequest, callback?: (err: AWSError, data: Macie2.Types.ListSensitivityInspectionTemplatesResponse) => void): Request<Macie2.Types.ListSensitivityInspectionTemplatesResponse, AWSError>;
+  /**
+   *  Retrieves a subset of information about the sensitivity inspection template for an account.
+   */
+  listSensitivityInspectionTemplates(callback?: (err: AWSError, data: Macie2.Types.ListSensitivityInspectionTemplatesResponse) => void): Request<Macie2.Types.ListSensitivityInspectionTemplatesResponse, AWSError>;
   /**
    * Retrieves the tags (keys and values) that are associated with an Amazon Macie resource.
    */
@@ -493,6 +557,14 @@ declare class Macie2 extends Service {
    */
   updateAllowList(callback?: (err: AWSError, data: Macie2.Types.UpdateAllowListResponse) => void): Request<Macie2.Types.UpdateAllowListResponse, AWSError>;
   /**
+   * Enables or disables automated sensitive data discovery for an account.
+   */
+  updateAutomatedDiscoveryConfiguration(params: Macie2.Types.UpdateAutomatedDiscoveryConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse, AWSError>;
+  /**
+   * Enables or disables automated sensitive data discovery for an account.
+   */
+  updateAutomatedDiscoveryConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse) => void): Request<Macie2.Types.UpdateAutomatedDiscoveryConfigurationResponse, AWSError>;
+  /**
    * Changes the status of a classification job.
    */
   updateClassificationJob(params: Macie2.Types.UpdateClassificationJobRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateClassificationJobResponse) => void): Request<Macie2.Types.UpdateClassificationJobResponse, AWSError>;
@@ -500,6 +572,14 @@ declare class Macie2 extends Service {
    * Changes the status of a classification job.
    */
   updateClassificationJob(callback?: (err: AWSError, data: Macie2.Types.UpdateClassificationJobResponse) => void): Request<Macie2.Types.UpdateClassificationJobResponse, AWSError>;
+  /**
+   * Updates the classification scope settings for an account.
+   */
+  updateClassificationScope(params: Macie2.Types.UpdateClassificationScopeRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateClassificationScopeResponse) => void): Request<Macie2.Types.UpdateClassificationScopeResponse, AWSError>;
+  /**
+   * Updates the classification scope settings for an account.
+   */
+  updateClassificationScope(callback?: (err: AWSError, data: Macie2.Types.UpdateClassificationScopeResponse) => void): Request<Macie2.Types.UpdateClassificationScopeResponse, AWSError>;
   /**
    * Updates the criteria and other settings for a findings filter.
    */
@@ -533,6 +613,22 @@ declare class Macie2 extends Service {
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateOrganizationConfigurationResponse) => void): Request<Macie2.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
+   * Updates the sensitivity score for an S3 bucket.
+   */
+  updateResourceProfile(params: Macie2.Types.UpdateResourceProfileRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateResourceProfileResponse) => void): Request<Macie2.Types.UpdateResourceProfileResponse, AWSError>;
+  /**
+   * Updates the sensitivity score for an S3 bucket.
+   */
+  updateResourceProfile(callback?: (err: AWSError, data: Macie2.Types.UpdateResourceProfileResponse) => void): Request<Macie2.Types.UpdateResourceProfileResponse, AWSError>;
+  /**
+   * Updates the sensitivity scoring settings for an S3 bucket.
+   */
+  updateResourceProfileDetections(params: Macie2.Types.UpdateResourceProfileDetectionsRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateResourceProfileDetectionsResponse) => void): Request<Macie2.Types.UpdateResourceProfileDetectionsResponse, AWSError>;
+  /**
+   * Updates the sensitivity scoring settings for an S3 bucket.
+   */
+  updateResourceProfileDetections(callback?: (err: AWSError, data: Macie2.Types.UpdateResourceProfileDetectionsResponse) => void): Request<Macie2.Types.UpdateResourceProfileDetectionsResponse, AWSError>;
+  /**
    * Updates the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
   updateRevealConfiguration(params: Macie2.Types.UpdateRevealConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateRevealConfigurationResponse) => void): Request<Macie2.Types.UpdateRevealConfigurationResponse, AWSError>;
@@ -540,6 +636,14 @@ declare class Macie2 extends Service {
    * Updates the status and configuration settings for retrieving occurrences of sensitive data reported by findings.
    */
   updateRevealConfiguration(callback?: (err: AWSError, data: Macie2.Types.UpdateRevealConfigurationResponse) => void): Request<Macie2.Types.UpdateRevealConfigurationResponse, AWSError>;
+  /**
+   *  Updates the settings for the sensitivity inspection template for an account.
+   */
+  updateSensitivityInspectionTemplate(params: Macie2.Types.UpdateSensitivityInspectionTemplateRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateSensitivityInspectionTemplateResponse) => void): Request<Macie2.Types.UpdateSensitivityInspectionTemplateResponse, AWSError>;
+  /**
+   *  Updates the settings for the sensitivity inspection template for an account.
+   */
+  updateSensitivityInspectionTemplate(callback?: (err: AWSError, data: Macie2.Types.UpdateSensitivityInspectionTemplateResponse) => void): Request<Macie2.Types.UpdateSensitivityInspectionTemplateResponse, AWSError>;
   /**
    * Waits for the findingRevealed state by periodically calling the underlying Macie2.getSensitiveDataOccurrencesoperation every 2 seconds (at most 60 times). Wait until the sensitive data occurrences are ready.
    */
@@ -691,6 +795,7 @@ declare namespace Macie2 {
      */
     sessionContext?: SessionContext;
   }
+  export type AutomatedDiscoveryStatus = "ENABLED"|"DISABLED"|string;
   export type AvailabilityCode = "AVAILABLE"|"UNAVAILABLE"|string;
   export interface AwsAccount {
     /**
@@ -742,7 +847,7 @@ declare namespace Macie2 {
   }
   export interface BatchGetCustomDataIdentifiersResponse {
     /**
-     * An array of objects, one for each custom data identifier that meets the criteria specified in the request.
+     * An array of objects, one for each custom data identifier that matches the criteria specified in the request.
      */
     customDataIdentifiers?: __listOfBatchGetCustomDataIdentifierSummary;
     /**
@@ -824,11 +929,11 @@ declare namespace Macie2 {
   }
   export interface BucketCountPolicyAllowsUnencryptedObjectUploads {
     /**
-     * The total number of buckets that don't have a bucket policy or have a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, the policy doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms.
+     * The total number of buckets that don't have a bucket policy or have a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, the policy doesn't require PutObject requests to include a valid server-side encryption header: the x-amz-server-side-encryption header with a value of AES256 or aws:kms, or the x-amz-server-side-encryption-customer-algorithm header with a value of AES256.
      */
     allowsUnencryptedObjectUploads?: __long;
     /**
-     * The total number of buckets whose bucket policies require server-side encryption of new objects. PutObject requests for these buckets must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms.
+     * The total number of buckets whose bucket policies require server-side encryption of new objects. PutObject requests for these buckets must include a valid server-side encryption header: the x-amz-server-side-encryption header with a value of AES256 or aws:kms, or the x-amz-server-side-encryption-customer-algorithm header with a value of AES256.
      */
     deniesUnencryptedObjectUploads?: __long;
     /**
@@ -887,7 +992,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects.
+     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
      */
     allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
     /**
@@ -895,7 +1000,7 @@ declare namespace Macie2 {
      */
     bucketArn?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the bucket was created.
+     * The date and time, in UTC and extended ISO 8601 format, when the bucket was created, or changes such as edits to the bucket's policy were most recently made to the bucket.
      */
     bucketCreatedAt?: __timestampIso8601;
     /**
@@ -923,6 +1028,10 @@ declare namespace Macie2 {
      */
     jobDetails?: JobDetails;
     /**
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently performed automated sensitive data discovery for the bucket. This value is null if automated sensitive data discovery is currently disabled for your account.
+     */
+    lastAutomatedDiscoveryTime?: __timestampIso8601;
+    /**
      * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the bucket.
      */
     lastUpdated?: __timestampIso8601;
@@ -946,6 +1055,10 @@ declare namespace Macie2 {
      * Specifies whether the bucket is configured to replicate one or more objects to buckets for other Amazon Web Services accounts and, if so, which accounts.
      */
     replicationDetails?: ReplicationDetails;
+    /**
+     * The sensitivity score for the bucket, ranging from -1 (no analysis due to an error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
+     */
+    sensitivityScore?: __integer;
     /**
      * Specifies whether the bucket encrypts new objects by default and, if so, the type of server-side encryption that's used.
      */
@@ -1022,13 +1135,31 @@ declare namespace Macie2 {
   }
   export interface BucketSortCriteria {
     /**
-     * The name of the bucket property to sort the results by. This value can be one of the following properties that Amazon Macie defines as bucket metadata: accountId, bucketName, classifiableObjectCount, classifiableSizeInBytes, objectCount, or sizeInBytes.
+     * The name of the bucket property to sort the results by. This value can be one of the following properties that Amazon Macie defines as bucket metadata: accountId, bucketName, classifiableObjectCount, classifiableSizeInBytes, objectCount, sensitivityScore, or sizeInBytes.
      */
     attributeName?: __string;
     /**
      * The sort order to apply to the results, based on the value specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.
      */
     orderBy?: OrderBy;
+  }
+  export interface BucketStatisticsBySensitivity {
+    /**
+     * The aggregated statistical data for all buckets that have a sensitivity score of -1.
+     */
+    classificationError?: SensitivityAggregations;
+    /**
+     * The aggregated statistical data for all buckets that have a sensitivity score of 50.
+     */
+    notClassified?: SensitivityAggregations;
+    /**
+     * The aggregated statistical data for all buckets that have a sensitivity score of 0-49.
+     */
+    notSensitive?: SensitivityAggregations;
+    /**
+     * The aggregated statistical data for all buckets that have a sensitivity score of 51-100.
+     */
+    sensitive?: SensitivityAggregations;
   }
   export interface Cell {
     /**
@@ -1051,19 +1182,19 @@ declare namespace Macie2 {
   export type Cells = Cell[];
   export interface ClassificationDetails {
     /**
-     * The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery result for the finding. If a finding applies to a large archive or compressed file, this value is the path to a folder. Otherwise, this value is the path to a file.
+     * The path to the folder or file in Amazon S3 that contains the corresponding sensitive data discovery result for the finding. If a finding applies to a large archive or compressed file, this value is the path to a folder. Otherwise, this value is the path to a file.
      */
     detailedResultsLocation?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the classification job that produced the finding.
+     * The Amazon Resource Name (ARN) of the classification job that produced the finding. This value is null if the origin of the finding (originType) is AUTOMATED_SENSITIVE_DATA_DISCOVERY.
      */
     jobArn?: __string;
     /**
-     * The unique identifier for the classification job that produced the finding.
+     * The unique identifier for the classification job that produced the finding. This value is null if the origin of the finding (originType) is AUTOMATED_SENSITIVE_DATA_DISCOVERY.
      */
     jobId?: __string;
     /**
-     * Specifies how Amazon Macie found the sensitive data that produced the finding: SENSITIVE_DATA_DISCOVERY_JOB, for a classification job.
+     * Specifies how Amazon Macie found the sensitive data that produced the finding. Possible values are: SENSITIVE_DATA_DISCOVERY_JOB, for a classification job; and, AUTOMATED_SENSITIVE_DATA_DISCOVERY, for automated sensitive data discovery.
      */
     originType?: OriginType;
     /**
@@ -1113,6 +1244,19 @@ declare namespace Macie2 {
      */
     reason?: __string;
   }
+  export type ClassificationScopeId = string;
+  export type ClassificationScopeName = string;
+  export interface ClassificationScopeSummary {
+    /**
+     * The unique identifier for the classification scope.
+     */
+    id?: ClassificationScopeId;
+    /**
+     * The name of the classification scope.
+     */
+    name?: ClassificationScopeName;
+  }
+  export type ClassificationScopeUpdateOperation = "ADD"|"REPLACE"|"REMOVE"|string;
   export interface CreateAllowListRequest {
     /**
      * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
@@ -1255,7 +1399,7 @@ declare namespace Macie2 {
   }
   export interface CreateFindingsFilterRequest {
     /**
-     * The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+     * The action to perform on findings that match the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action: FindingsFilterAction;
     /**
@@ -1439,6 +1583,7 @@ declare namespace Macie2 {
   export interface DailySchedule {
   }
   export type DataIdentifierSeverity = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type DataIdentifierType = "CUSTOM"|"MANAGED"|string;
   export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export interface DeclineInvitationsRequest {
     /**
@@ -1535,7 +1680,7 @@ declare namespace Macie2 {
   }
   export interface DescribeBucketsResponse {
     /**
-     * An array of objects, one for each bucket that meets the filter criteria specified in the request.
+     * An array of objects, one for each bucket that matches the filter criteria specified in the request.
      */
     buckets?: __listOfBucketMetadata;
     /**
@@ -1653,6 +1798,32 @@ declare namespace Macie2 {
      */
     value: __stringMin1Max128;
   }
+  export interface Detection {
+    /**
+     * If the sensitive data was detected by a custom data identifier, the Amazon Resource Name (ARN) of the custom data identifier that detected the data. Otherwise, this value is null.
+     */
+    arn?: __string;
+    /**
+     * The total number of occurrences of the sensitive data.
+     */
+    count?: __long;
+    /**
+     * The unique identifier for the custom data identifier or managed data identifier that detected the sensitive data. For additional details about a specified managed data identifier, see Using managed data identifiers in the Amazon Macie User Guide.
+     */
+    id?: __string;
+    /**
+     * The name of the custom data identifier or managed data identifier that detected the sensitive data. For a managed data identifier, this value is the same as the unique identifier (id).
+     */
+    name?: __string;
+    /**
+     * Specifies whether occurrences of this type of sensitive data are excluded (true) or included (false) in the bucket's sensitivity score.
+     */
+    suppressed?: __boolean;
+    /**
+     * The type of data identifier that detected the sensitive data. Possible values are: CUSTOM, for a custom data identifier; and, MANAGED, for a managed data identifier.
+     */
+    type?: DataIdentifierType;
+  }
   export interface DisableMacieRequest {
   }
   export interface DisableMacieResponse {
@@ -1758,11 +1929,11 @@ declare namespace Macie2 {
      */
     classificationDetails?: ClassificationDetails;
     /**
-     * The total number of occurrences of the finding. For sensitive data findings, this value is always 1. All sensitive data findings are considered new (unique) because they derive from individual classification jobs.
+     * The total number of occurrences of the finding. For sensitive data findings, this value is always 1. All sensitive data findings are considered unique.
      */
     count?: __long;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the finding was created.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie created the finding.
      */
     createdAt?: __timestampIso8601;
     /**
@@ -1810,7 +1981,7 @@ declare namespace Macie2 {
      */
     type?: FindingType;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the finding was last updated. For sensitive data findings, this value is the same as the value for the createdAt property. All sensitive data findings are considered new (unique) because they derive from individual classification jobs.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last updated the finding. For sensitive data findings, this value is the same as the value for the createdAt property. All sensitive data findings are considered new.
      */
     updatedAt?: __timestampIso8601;
   }
@@ -1862,7 +2033,7 @@ declare namespace Macie2 {
   export type FindingsFilterAction = "ARCHIVE"|"NOOP"|string;
   export interface FindingsFilterListItem {
     /**
-     * The action that's performed on findings that meet the filter criteria. Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+     * The action that's performed on findings that match the filter criteria. Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action?: FindingsFilterAction;
     /**
@@ -1934,6 +2105,34 @@ declare namespace Macie2 {
      */
     updatedAt?: __timestampIso8601;
   }
+  export interface GetAutomatedDiscoveryConfigurationRequest {
+  }
+  export interface GetAutomatedDiscoveryConfigurationResponse {
+    /**
+     * The unique identifier for the classification scope that's used when performing automated sensitive data discovery for the account. The classification scope specifies S3 buckets to exclude from automated sensitive data discovery.
+     */
+    classificationScopeId?: ClassificationScopeId;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently disabled for the account. This value is null if automated sensitive data discovery wasn't enabled and subsequently disabled for the account.
+     */
+    disabledAt?: Timestamp;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was initially enabled for the account. This value is null if automated sensitive data discovery has never been enabled for the account.
+     */
+    firstEnabledAt?: Timestamp;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when automated sensitive data discovery was most recently enabled or disabled for the account.
+     */
+    lastUpdatedAt?: Timestamp;
+    /**
+     * The unique identifier for the sensitivity inspection template that's used when performing automated sensitive data discovery for the account. The template specifies which allow lists, custom data identifiers, and managed data identifiers to use when analyzing data.
+     */
+    sensitivityInspectionTemplateId?: SensitivityInspectionTemplateId;
+    /**
+     * The current status of the automated sensitive data discovery configuration for the account. Possible values are: ENABLED, use the specified settings to perform automated sensitive data discovery activities for the account; and, DISABLED, don't perform automated sensitive data discovery activities for the account.
+     */
+    status?: AutomatedDiscoveryStatus;
+  }
   export interface GetBucketStatisticsRequest {
     /**
      * The unique identifier for the Amazon Web Services account.
@@ -1962,11 +2161,15 @@ declare namespace Macie2 {
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
+     * The aggregated sensitive data discovery statistics for the buckets. If automated sensitive data discovery is currently disabled for your account, the value for each statistic is 0.
+     */
+    bucketStatisticsBySensitivity?: BucketStatisticsBySensitivity;
+    /**
      * The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.
      */
     classifiableObjectCount?: __long;
     /**
-     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of all applicable objects in the buckets.
+     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each applicable object in the buckets. This value doesn't reflect the storage size of all versions of all applicable objects in the buckets.
      */
     classifiableSizeInBytes?: __long;
     /**
@@ -1978,11 +2181,11 @@ declare namespace Macie2 {
      */
     objectCount?: __long;
     /**
-     * The total storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, Amazon Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
+     * The total storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each object in the buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
      */
     sizeInBytes?: __long;
     /**
-     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets. If versioning is enabled for any of the buckets, Amazon Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.
+     * The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets. If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each applicable object in the buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.
      */
     sizeInBytesCompressed?: __long;
     /**
@@ -2001,6 +2204,26 @@ declare namespace Macie2 {
      * The location where data classification results are stored, and the encryption settings that are used when storing results in that location.
      */
     configuration?: ClassificationExportConfiguration;
+  }
+  export interface GetClassificationScopeRequest {
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+  }
+  export interface GetClassificationScopeResponse {
+    /**
+     * The unique identifier for the classification scope.
+     */
+    id?: ClassificationScopeId;
+    /**
+     * The name of the classification scope.
+     */
+    name?: ClassificationScopeName;
+    /**
+     * The S3 buckets that are excluded from automated sensitive data discovery.
+     */
+    s3?: S3ClassificationScope;
   }
   export interface GetCustomDataIdentifierRequest {
     /**
@@ -2078,7 +2301,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingStatisticsResponse {
     /**
-     * An array of objects, one for each group of findings that meet the filter criteria specified in the request.
+     * An array of objects, one for each group of findings that matches the filter criteria specified in the request.
      */
     countsByGroup?: __listOfGroupCount;
   }
@@ -2090,7 +2313,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsFilterResponse {
     /**
-     * The action that's performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+     * The action that's performed on findings that match the filter criteria (findingCriteria). Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action?: FindingsFilterAction;
     /**
@@ -2142,7 +2365,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsResponse {
     /**
-     * An array of objects, one for each finding that meets the criteria specified in the request.
+     * An array of objects, one for each finding that matches the criteria specified in the request.
      */
     findings?: __listOfFinding;
   }
@@ -2230,6 +2453,30 @@ declare namespace Macie2 {
      */
     updatedAt?: __timestampIso8601;
   }
+  export interface GetResourceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.
+     */
+    resourceArn: __string;
+  }
+  export interface GetResourceProfileResponse {
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently recalculated sensitive data discovery statistics and details for the bucket. If the bucket's sensitivity score is calculated automatically, this includes the score.
+     */
+    profileUpdatedAt?: __timestampIso8601;
+    /**
+     * The current sensitivity score for the bucket, ranging from -1 (no analysis due to an error) to 100 (sensitive). By default, this score is calculated automatically based on the amount of data that Amazon Macie has analyzed in the bucket and the amount of sensitive data that Macie has found in the bucket.
+     */
+    sensitivityScore?: __integer;
+    /**
+     * Specifies whether the bucket's current sensitivity score was set manually. If this value is true, the score was manually changed to 100. If this value is false, the score was calculated automatically by Amazon Macie.
+     */
+    sensitivityScoreOverridden?: __boolean;
+    /**
+     * The sensitive data discovery statistics for the bucket. The statistics capture the results of automated sensitive data discovery activities that Amazon Macie has performed for the bucket.
+     */
+    statistics?: ResourceStatistics;
+  }
   export interface GetRevealConfigurationRequest {
   }
   export interface GetRevealConfigurationResponse {
@@ -2274,6 +2521,34 @@ declare namespace Macie2 {
      */
     status?: RevealRequestStatus;
   }
+  export interface GetSensitivityInspectionTemplateRequest {
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+  }
+  export interface GetSensitivityInspectionTemplateResponse {
+    /**
+     * The custom description of the template.
+     */
+    description?: __string;
+    /**
+     *  The managed data identifiers that are explicitly excluded (not used) when analyzing data.
+     */
+    excludes?: SensitivityInspectionTemplateExcludes;
+    /**
+     * The allow lists, custom data identifiers, and managed data identifiers that are included (used) when analyzing data.
+     */
+    includes?: SensitivityInspectionTemplateIncludes;
+    /**
+     * The name of the template.
+     */
+    name?: __string;
+    /**
+     * The unique identifier for the template.
+     */
+    sensitivityInspectionTemplateId?: SensitivityInspectionTemplateId;
+  }
   export interface GetUsageStatisticsRequest {
     /**
      * An array of objects, one for each condition to use to filter the query results. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.
@@ -2302,7 +2577,7 @@ declare namespace Macie2 {
      */
     nextToken?: __string;
     /**
-     * An array of objects that contains the results of the query. Each object contains the data for an account that meets the filter criteria specified in the request.
+     * An array of objects that contains the results of the query. Each object contains the data for an account that matches the filter criteria specified in the request.
      */
     records?: __listOfUsageRecord;
     /**
@@ -2493,6 +2768,10 @@ declare namespace Macie2 {
   export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|"USER_PAUSED"|string;
   export interface JobSummary {
     /**
+     * The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
+     */
+    bucketCriteria?: S3BucketCriteriaForJob;
+    /**
      * An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
@@ -2524,10 +2803,6 @@ declare namespace Macie2 {
      * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
      */
     userPausedDetails?: UserPausedDetails;
-    /**
-     * The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
-     */
-    bucketCriteria?: S3BucketCriteriaForJob;
   }
   export type JobType = "ONE_TIME"|"SCHEDULED"|string;
   export interface KeyValuePair {
@@ -2588,13 +2863,33 @@ declare namespace Macie2 {
   }
   export interface ListClassificationJobsResponse {
     /**
-     * An array of objects, one for each job that meets the filter criteria specified in the request.
+     * An array of objects, one for each job that matches the filter criteria specified in the request.
      */
     items?: __listOfJobSummary;
     /**
      * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     nextToken?: __string;
+  }
+  export interface ListClassificationScopesRequest {
+    /**
+     * The name of the classification scope to retrieve the unique identifier for.
+     */
+    name?: __string;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+  }
+  export interface ListClassificationScopesResponse {
+    /**
+     * An array that specifies the unique identifier and name of the classification scope for the account.
+     */
+    classificationScopes?: __listOfClassificationScopeSummary;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: NextToken;
   }
   export interface ListCustomDataIdentifiersRequest {
     /**
@@ -2656,7 +2951,7 @@ declare namespace Macie2 {
   }
   export interface ListFindingsResponse {
     /**
-     * An array of strings, where each string is the unique identifier for a finding that meets the filter criteria specified in the request.
+     * An array of strings, where each string is the unique identifier for a finding that matches the filter criteria specified in the request.
      */
     findingIds?: __listOf__string;
     /**
@@ -2752,7 +3047,7 @@ declare namespace Macie2 {
   }
   export interface ListMembersResponse {
     /**
-     * An array of objects, one for each account that's associated with the administrator account and meets the criteria specified in the request.
+     * An array of objects, one for each account that's associated with the administrator account and matches the criteria specified in the request.
      */
     members?: __listOfMember;
     /**
@@ -2779,6 +3074,70 @@ declare namespace Macie2 {
      * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
      */
     nextToken?: __string;
+  }
+  export interface ListResourceProfileArtifactsRequest {
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.
+     */
+    resourceArn: __string;
+  }
+  export interface ListResourceProfileArtifactsResponse {
+    /**
+     * An array of objects, one for each S3 object that Amazon Macie selected for analysis.
+     */
+    artifacts?: __listOfResourceProfileArtifact;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
+  export interface ListResourceProfileDetectionsRequest {
+    /**
+     * The maximum number of items to include in each page of a paginated response.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.
+     */
+    resourceArn: __string;
+  }
+  export interface ListResourceProfileDetectionsResponse {
+    /**
+     * An array of objects, one for each type of sensitive data that Amazon Macie found in the bucket. Each object reports the number of occurrences of the specified type and provides information about the custom data identifier or managed data identifier that detected the data.
+     */
+    detections?: __listOfDetection;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
+  export interface ListSensitivityInspectionTemplatesRequest {
+    /**
+     * The maximum number of items to include in each page of a paginated response.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+  }
+  export interface ListSensitivityInspectionTemplatesResponse {
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+    /**
+     * An array that specifies the unique identifier and name of the sensitivity inspection template for the account.
+     */
+    sensitivityInspectionTemplates?: __listOfSensitivityInspectionTemplatesEntry;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -2834,13 +3193,21 @@ declare namespace Macie2 {
      */
     jobDetails?: JobDetails;
     /**
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently performed automated sensitive data discovery for the bucket. This value is null if automated sensitive data discovery is currently disabled for your account.
+     */
+    lastAutomatedDiscoveryTime?: __timestampIso8601;
+    /**
      * The total number of objects in the bucket.
      */
     objectCount?: __long;
     /**
-     * The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
+     * The total number of objects in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
+    /**
+     * The current sensitivity score for the bucket, ranging from -1 (no analysis due to an error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
+     */
+    sensitivityScore?: __integer;
     /**
      * The total storage size, in bytes, of the bucket. If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.
      */
@@ -2909,6 +3276,7 @@ declare namespace Macie2 {
      */
     dayOfMonth?: __integer;
   }
+  export type NextToken = string;
   export interface ObjectCountByEncryptionType {
     /**
      * The total number of objects that are encrypted with a customer-provided key. The objects use customer-provided server-side encryption (SSE-C).
@@ -2968,7 +3336,7 @@ declare namespace Macie2 {
     records?: Records;
   }
   export type OrderBy = "ASC"|"DESC"|string;
-  export type OriginType = "SENSITIVE_DATA_DISCOVERY_JOB"|string;
+  export type OriginType = "SENSITIVE_DATA_DISCOVERY_JOB"|"AUTOMATED_SENSITIVE_DATA_DISCOVERY"|string;
   export interface Page {
     /**
      *  Reserved for future use.
@@ -3059,6 +3427,58 @@ declare namespace Macie2 {
      */
     replicationAccounts?: __listOf__string;
   }
+  export interface ResourceProfileArtifact {
+    /**
+     * The Amazon Resource Name (ARN) of the object.
+     */
+    arn: __string;
+    /**
+     * The status of the analysis. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object. PARTIAL - Macie analyzed only a subset of data in the object. For example, the object is an archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object. For example, the object is a malformed file.
+     */
+    classificationResultStatus: __string;
+    /**
+     * Specifies whether Amazon Macie found sensitive data in the object.
+     */
+    sensitive?: __boolean;
+  }
+  export interface ResourceStatistics {
+    /**
+     * The total amount of data, in bytes, that Amazon Macie has analyzed in the bucket.
+     */
+    totalBytesClassified?: __long;
+    /**
+     * The total number of occurrences of sensitive data that Amazon Macie has found in the bucket's objects. This includes occurrences that are currently suppressed by the sensitivity scoring settings for the bucket (totalDetectionsSuppressed).
+     */
+    totalDetections?: __long;
+    /**
+     * The total number of occurrences of sensitive data that are currently suppressed by the sensitivity scoring settings for the bucket. These represent occurrences of sensitive data that Amazon Macie found in the bucket's objects, but the occurrences were manually suppressed. By default, suppressed occurrences are excluded from the bucket's sensitivity score.
+     */
+    totalDetectionsSuppressed?: __long;
+    /**
+     * The total number of objects that Amazon Macie has analyzed in the bucket.
+     */
+    totalItemsClassified?: __long;
+    /**
+     * The total number of the bucket's objects that Amazon Macie has found sensitive data in.
+     */
+    totalItemsSensitive?: __long;
+    /**
+     * The total number of objects that Amazon Macie hasn't analyzed in the bucket due to an error or issue. For example, the object is a malformed file. This value includes objects that Macie hasn't analyzed for reasons reported by other statistics in the ResourceStatistics object. 
+     */
+    totalItemsSkipped?: __long;
+    /**
+     * The total number of objects that Amazon Macie hasn't analyzed in the bucket because the objects are encrypted with a key that Macie isn't allowed to use.
+     */
+    totalItemsSkippedInvalidEncryption?: __long;
+    /**
+     * The total number of objects that Amazon Macie hasn't analyzed in the bucket because the objects are encrypted with an KMS key that was disabled or deleted.
+     */
+    totalItemsSkippedInvalidKms?: __long;
+    /**
+     * The total number of objects that Amazon Macie hasn't analyzed in the bucket because Macie isn't allowed to access the objects.
+     */
+    totalItemsSkippedPermissionDenied?: __long;
+  }
   export interface ResourcesAffected {
     /**
      * The details of the S3 bucket that the finding applies to.
@@ -3083,7 +3503,7 @@ declare namespace Macie2 {
   export type RevealStatus = "ENABLED"|"DISABLED"|string;
   export interface S3Bucket {
     /**
-     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of objects.
+     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
      */
     allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
     /**
@@ -3135,6 +3555,7 @@ declare namespace Macie2 {
      */
     buckets: __listOf__string;
   }
+  export type S3BucketName = string;
   export interface S3BucketOwner {
     /**
      * The display name of the account that owns the bucket.
@@ -3144,6 +3565,34 @@ declare namespace Macie2 {
      * The canonical user ID for the account that owns the bucket.
      */
     id?: __string;
+  }
+  export interface S3ClassificationScope {
+    /**
+     * The S3 buckets that are excluded.
+     */
+    excludes: S3ClassificationScopeExclusion;
+  }
+  export interface S3ClassificationScopeExclusion {
+    /**
+     * An array of strings, one for each S3 bucket that is excluded. Each string is the full name of an excluded bucket.
+     */
+    bucketNames: __listOfS3BucketName;
+  }
+  export interface S3ClassificationScopeExclusionUpdate {
+    /**
+     * Depending on the value specified for the update operation (ClassificationScopeUpdateOperation), an array of strings that: lists the names of buckets to add or remove from the list, or specifies a new set of bucket names that overwrites all existing names in the list. Each string must be the full name of an S3 bucket. Values are case sensitive.
+     */
+    bucketNames: __listOfS3BucketName;
+    /**
+     * Specifies how to apply the changes to the exclusion list. Valid values are: ADD - Append the specified bucket names to the current list. REMOVE - Remove the specified bucket names from the current list. REPLACE - Overwrite the current list with the specified list of bucket names. If you specify this value, Amazon Macie removes all existing names from the list and adds all the specified names to the list.
+     */
+    operation: ClassificationScopeUpdateOperation;
+  }
+  export interface S3ClassificationScopeUpdate {
+    /**
+     * The names of the S3 buckets to add or remove from the list.
+     */
+    excludes: S3ClassificationScopeExclusionUpdate;
   }
   export interface S3Destination {
     /**
@@ -3161,6 +3610,10 @@ declare namespace Macie2 {
   }
   export interface S3JobDefinition {
     /**
+     * The property- and tag-based conditions that determine which S3 buckets to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which buckets contain objects to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
+     */
+    bucketCriteria?: S3BucketCriteriaForJob;
+    /**
      * An array of objects, one for each Amazon Web Services account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
@@ -3168,10 +3621,6 @@ declare namespace Macie2 {
      * The property- and tag-based conditions that determine which S3 objects to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which objects to analyze.
      */
     scoping?: Scoping;
-    /**
-     * The property- and tag-based conditions that determine which S3 buckets to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which buckets contain objects to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
-     */
-    bucketCriteria?: S3BucketCriteriaForJob;
   }
   export interface S3Object {
     /**
@@ -3291,7 +3740,7 @@ declare namespace Macie2 {
   }
   export interface SearchResourcesResponse {
     /**
-     * An array of objects, one for each resource that meets the filter criteria specified in the request.
+     * An array of objects, one for each resource that matches the filter criteria specified in the request.
      */
     matchingResources?: __listOfMatchingResource;
     /**
@@ -3372,6 +3821,55 @@ declare namespace Macie2 {
   }
   export type SensitiveDataItemCategory = "FINANCIAL_INFORMATION"|"PERSONAL_INFORMATION"|"CREDENTIALS"|"CUSTOM_IDENTIFIER"|string;
   export type SensitiveDataOccurrences = {[key: string]: __listOfDetectedDataDetails};
+  export interface SensitivityAggregations {
+    /**
+     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format. If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each applicable object in the buckets. This value doesn't reflect the storage size of all versions of all applicable objects in the buckets.
+     */
+    classifiableSizeInBytes?: __long;
+    /**
+     * The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.
+     */
+    publiclyAccessibleCount?: __long;
+    /**
+     * The total number of buckets.
+     */
+    totalCount?: __long;
+    /**
+     * The total storage size, in bytes, of the buckets. If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each object in the buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.
+     */
+    totalSizeInBytes?: __long;
+  }
+  export interface SensitivityInspectionTemplateExcludes {
+    /**
+     * An array of unique identifiers, one for each managed data identifier to exclude. To retrieve a list of valid values, use the ListManagedDataIdentifiers operation.
+     */
+    managedDataIdentifierIds?: __listOf__string;
+  }
+  export type SensitivityInspectionTemplateId = string;
+  export interface SensitivityInspectionTemplateIncludes {
+    /**
+     * An array of unique identifiers, one for each allow list to include.
+     */
+    allowListIds?: __listOf__string;
+    /**
+     * An array of unique identifiers, one for each custom data identifier to include.
+     */
+    customDataIdentifierIds?: __listOf__string;
+    /**
+     * An array of unique identifiers, one for each managed data identifier to include. Amazon Macie uses these managed data identifiers in addition to managed data identifiers that are subsequently released and recommended for automated sensitive data discovery. To retrieve a list of valid values for the managed data identifiers that are currently available, use the ListManagedDataIdentifiers operation. 
+     */
+    managedDataIdentifierIds?: __listOf__string;
+  }
+  export interface SensitivityInspectionTemplatesEntry {
+    /**
+     * The unique identifier for the sensitivity inspection template for the account.
+     */
+    id?: __string;
+    /**
+     * The name of the sensitivity inspection template for the account.
+     */
+    name?: __string;
+  }
   export interface ServerSideEncryption {
     /**
      * The server-side encryption algorithm that's used when storing data in the bucket or object. If default encryption is disabled for the bucket or the object isn't encrypted using server-side encryption, this value is NONE.
@@ -3511,6 +4009,16 @@ declare namespace Macie2 {
     numberOfRuns?: __double;
   }
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|string;
+  export interface SuppressDataIdentifier {
+    /**
+     * The unique identifier for the custom data identifier or managed data identifier that detected the type of sensitive data to exclude or include in the score.
+     */
+    id?: __string;
+    /**
+     * The type of data identifier that detected the sensitive data. Possible values are: CUSTOM, for a custom data identifier; and, MANAGED, for a managed data identifier.
+     */
+    type?: DataIdentifierType;
+  }
   export interface TagCriterionForJob {
     /**
      * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
@@ -3602,6 +4110,7 @@ declare namespace Macie2 {
     matchCount?: __integer;
   }
   export type TimeRange = "MONTH_TO_DATE"|"PAST_30_DAYS"|string;
+  export type Timestamp = Date;
   export type Type = "NONE"|"AES256"|"aws:kms"|string;
   export type UnavailabilityReasonCode = "OBJECT_EXCEEDS_SIZE_QUOTA"|"UNSUPPORTED_OBJECT_TYPE"|"UNSUPPORTED_FINDING_TYPE"|"INVALID_CLASSIFICATION_RESULT"|"OBJECT_UNAVAILABLE"|string;
   export type Unit = "TERABYTES"|string;
@@ -3659,6 +4168,14 @@ declare namespace Macie2 {
      */
     id?: __stringMin22Max22PatternAZ0922;
   }
+  export interface UpdateAutomatedDiscoveryConfigurationRequest {
+    /**
+     * The new status of automated sensitive data discovery for the account. Valid values are: ENABLED, start or resume automated sensitive data discovery activities for the account; and, DISABLED, stop performing automated sensitive data discovery activities for the account. When you enable automated sensitive data discovery for the first time, Amazon Macie uses default configuration settings to determine which data sources to analyze and which managed data identifiers to use. To change these settings, use the UpdateClassificationScope and UpdateSensitivityInspectionTemplate operations, respectively. If you change the settings and subsequently disable the configuration, Amazon Macie retains your changes.
+     */
+    status: AutomatedDiscoveryStatus;
+  }
+  export interface UpdateAutomatedDiscoveryConfigurationResponse {
+  }
   export interface UpdateClassificationJobRequest {
     /**
      * The unique identifier for the classification job.
@@ -3671,11 +4188,27 @@ declare namespace Macie2 {
   }
   export interface UpdateClassificationJobResponse {
   }
+  export interface UpdateClassificationScopeRequest {
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+    /**
+     * The S3 buckets to add or remove from the exclusion list defined by the classification scope.
+     */
+    s3?: S3ClassificationScopeUpdate;
+  }
+  export interface UpdateClassificationScopeResponse {
+  }
   export interface UpdateFindingsFilterRequest {
     /**
-     * The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+     * The action to perform on findings that match the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action?: FindingsFilterAction;
+    /**
+     * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
+     */
+    clientToken?: __string;
     /**
      * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
@@ -3696,10 +4229,6 @@ declare namespace Macie2 {
      * The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.
      */
     position?: __integer;
-    /**
-     * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
-     */
-    clientToken?: __string;
   }
   export interface UpdateFindingsFilterResponse {
     /**
@@ -3743,6 +4272,30 @@ declare namespace Macie2 {
   }
   export interface UpdateOrganizationConfigurationResponse {
   }
+  export interface UpdateResourceProfileDetectionsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.
+     */
+    resourceArn: __string;
+    /**
+     * An array of objects, one for each custom data identifier or managed data identifier that detected the type of sensitive data to start excluding or including in the bucket's score. To start including all sensitive data types in the score, don't specify any values for this array.
+     */
+    suppressDataIdentifiers?: __listOfSuppressDataIdentifier;
+  }
+  export interface UpdateResourceProfileDetectionsResponse {
+  }
+  export interface UpdateResourceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.
+     */
+    resourceArn: __string;
+    /**
+     * The new sensitivity score for the bucket. Valid values are: 100, assign the maximum score and apply the Sensitive label to the bucket; and, null (empty), assign a score that Amazon Macie calculates automatically after you submit the request.
+     */
+    sensitivityScoreOverride?: __integer;
+  }
+  export interface UpdateResourceProfileResponse {
+  }
   export interface UpdateRevealConfigurationRequest {
     /**
      * The new configuration settings and the status of the configuration for the account.
@@ -3754,6 +4307,26 @@ declare namespace Macie2 {
      * The new configuration settings and the status of the configuration for the account.
      */
     configuration?: RevealConfiguration;
+  }
+  export interface UpdateSensitivityInspectionTemplateRequest {
+    /**
+     * A custom description of the template.
+     */
+    description?: __string;
+    /**
+     *  The managed data identifiers to explicitly exclude (not use) when analyzing data. To exclude an allow list or custom data identifier that's currently included by the template, update the values for the SensitivityInspectionTemplateIncludes.allowListIds and SensitivityInspectionTemplateIncludes.customDataIdentifierIds properties, respectively.
+     */
+    excludes?: SensitivityInspectionTemplateExcludes;
+    /**
+     * The unique identifier for the Amazon Macie resource that the request applies to.
+     */
+    id: __string;
+    /**
+     * The allow lists, custom data identifiers, and managed data identifiers to include (use) when analyzing data.
+     */
+    includes?: SensitivityInspectionTemplateIncludes;
+  }
+  export interface UpdateSensitivityInspectionTemplateResponse {
   }
   export interface UsageByAccount {
     /**
@@ -3769,7 +4342,7 @@ declare namespace Macie2 {
      */
     serviceLimit?: ServiceLimit;
     /**
-     * The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects to detect sensitive data.
+     * The name of the metric. Possible values are: AUTOMATED_OBJECT_MONITORING, to monitor S3 objects for automated sensitive data discovery; AUTOMATED_SENSITIVE_DATA_DISCOVERY, to analyze S3 objects for automated sensitive data discovery; DATA_INVENTORY_EVALUATION, to monitor S3 buckets; and, SENSITIVE_DATA_DISCOVERY, to run classification jobs.
      */
     type?: UsageType;
   }
@@ -3779,7 +4352,11 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the free trial started for the account.
+     * The date and time, in UTC and extended ISO 8601 format, when the free trial of automated sensitive data discovery started for the account. If the account is a member account in an organization, this value is the same as the value for the organization's Amazon Macie administrator account.
+     */
+    automatedDiscoveryFreeTrialStartDate?: __timestampIso8601;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when the Amazon Macie free trial started for the account.
      */
     freeTrialStartDate?: __timestampIso8601;
     /**
@@ -3797,7 +4374,7 @@ declare namespace Macie2 {
      */
     key?: UsageStatisticsFilterKey;
     /**
-     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an Amazon Web Services account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current estimated cost for an account.
+     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an Amazon Web Services account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the Amazon Macie free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current estimated cost for an account.
      */
     values?: __listOf__string;
   }
@@ -3824,11 +4401,11 @@ declare namespace Macie2 {
      */
     estimatedCost?: __string;
     /**
-     * The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects to detect sensitive data.
+     * The name of the metric. Possible values are: AUTOMATED_OBJECT_MONITORING, to monitor S3 objects for automated sensitive data discovery; AUTOMATED_SENSITIVE_DATA_DISCOVERY, to analyze S3 objects for automated sensitive data discovery; DATA_INVENTORY_EVALUATION, to monitor S3 buckets; and, SENSITIVE_DATA_DISCOVERY, to run classification jobs.
      */
     type?: UsageType;
   }
-  export type UsageType = "DATA_INVENTORY_EVALUATION"|"SENSITIVE_DATA_DISCOVERY"|string;
+  export type UsageType = "DATA_INVENTORY_EVALUATION"|"SENSITIVE_DATA_DISCOVERY"|"AUTOMATED_SENSITIVE_DATA_DISCOVERY"|"AUTOMATED_OBJECT_MONITORING"|string;
   export interface UserIdentity {
     /**
      * If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.
@@ -3901,9 +4478,11 @@ declare namespace Macie2 {
   export type __listOfAllowListSummary = AllowListSummary[];
   export type __listOfBatchGetCustomDataIdentifierSummary = BatchGetCustomDataIdentifierSummary[];
   export type __listOfBucketMetadata = BucketMetadata[];
+  export type __listOfClassificationScopeSummary = ClassificationScopeSummary[];
   export type __listOfCriteriaForJob = CriteriaForJob[];
   export type __listOfCustomDataIdentifierSummary = CustomDataIdentifierSummary[];
   export type __listOfDetectedDataDetails = DetectedDataDetails[];
+  export type __listOfDetection = Detection[];
   export type __listOfFinding = Finding[];
   export type __listOfFindingType = FindingType[];
   export type __listOfFindingsFilterListItem = FindingsFilterListItem[];
@@ -3916,9 +4495,13 @@ declare namespace Macie2 {
   export type __listOfManagedDataIdentifierSummary = ManagedDataIdentifierSummary[];
   export type __listOfMatchingResource = MatchingResource[];
   export type __listOfMember = Member[];
+  export type __listOfResourceProfileArtifact = ResourceProfileArtifact[];
   export type __listOfS3BucketDefinitionForJob = S3BucketDefinitionForJob[];
+  export type __listOfS3BucketName = S3BucketName[];
   export type __listOfSearchResourcesCriteria = SearchResourcesCriteria[];
   export type __listOfSearchResourcesTagCriterionPair = SearchResourcesTagCriterionPair[];
+  export type __listOfSensitivityInspectionTemplatesEntry = SensitivityInspectionTemplatesEntry[];
+  export type __listOfSuppressDataIdentifier = SuppressDataIdentifier[];
   export type __listOfTagCriterionPairForJob = TagCriterionPairForJob[];
   export type __listOfTagValuePair = TagValuePair[];
   export type __listOfUnavailabilityReasonCode = UnavailabilityReasonCode[];

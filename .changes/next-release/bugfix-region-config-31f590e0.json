@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "region_config",
-  "description": "Set signatureVersion to bearer explcitly when defined in service API"
-}

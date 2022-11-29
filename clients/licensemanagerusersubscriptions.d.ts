@@ -12,11 +12,11 @@ declare class LicenseManagerUserSubscriptions extends Service {
   constructor(options?: LicenseManagerUserSubscriptions.Types.ClientConfiguration)
   config: Config & LicenseManagerUserSubscriptions.Types.ClientConfiguration;
   /**
-   * Associates the user to an EC2 instance to utilize user-based subscriptions.
+   * Associates the user to an EC2 instance to utilize user-based subscriptions.  Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven't closed (marked as Pending billing status) in Amazon Web Services Billing. For more information, see Viewing your monthly charges in the Amazon Web Services Billing User Guide. 
    */
   associateUser(params: LicenseManagerUserSubscriptions.Types.AssociateUserRequest, callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.AssociateUserResponse) => void): Request<LicenseManagerUserSubscriptions.Types.AssociateUserResponse, AWSError>;
   /**
-   * Associates the user to an EC2 instance to utilize user-based subscriptions.
+   * Associates the user to an EC2 instance to utilize user-based subscriptions.  Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven't closed (marked as Pending billing status) in Amazon Web Services Billing. For more information, see Viewing your monthly charges in the Amazon Web Services Billing User Guide. 
    */
   associateUser(callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.AssociateUserResponse) => void): Request<LicenseManagerUserSubscriptions.Types.AssociateUserResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class LicenseManagerUserSubscriptions extends Service {
    */
   registerIdentityProvider(callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.RegisterIdentityProviderResponse) => void): Request<LicenseManagerUserSubscriptions.Types.RegisterIdentityProviderResponse, AWSError>;
   /**
-   * Starts a product subscription for a user with the specified identity provider.
+   * Starts a product subscription for a user with the specified identity provider.  Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven't closed (marked as Pending billing status) in Amazon Web Services Billing. For more information, see Viewing your monthly charges in the Amazon Web Services Billing User Guide. 
    */
   startProductSubscription(params: LicenseManagerUserSubscriptions.Types.StartProductSubscriptionRequest, callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.StartProductSubscriptionResponse) => void): Request<LicenseManagerUserSubscriptions.Types.StartProductSubscriptionResponse, AWSError>;
   /**
-   * Starts a product subscription for a user with the specified identity provider.
+   * Starts a product subscription for a user with the specified identity provider.  Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven't closed (marked as Pending billing status) in Amazon Web Services Billing. For more information, see Viewing your monthly charges in the Amazon Web Services Billing User Guide. 
    */
   startProductSubscription(callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.StartProductSubscriptionResponse) => void): Request<LicenseManagerUserSubscriptions.Types.StartProductSubscriptionResponse, AWSError>;
   /**
@@ -91,6 +91,14 @@ declare class LicenseManagerUserSubscriptions extends Service {
    * Stops a product subscription for a user with the specified identity provider.
    */
   stopProductSubscription(callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.StopProductSubscriptionResponse) => void): Request<LicenseManagerUserSubscriptions.Types.StopProductSubscriptionResponse, AWSError>;
+  /**
+   * Updates additional product configuration settings for the registered identity provider.
+   */
+  updateIdentityProviderSettings(params: LicenseManagerUserSubscriptions.Types.UpdateIdentityProviderSettingsRequest, callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.UpdateIdentityProviderSettingsResponse) => void): Request<LicenseManagerUserSubscriptions.Types.UpdateIdentityProviderSettingsResponse, AWSError>;
+  /**
+   * Updates additional product configuration settings for the registered identity provider.
+   */
+  updateIdentityProviderSettings(callback?: (err: AWSError, data: LicenseManagerUserSubscriptions.Types.UpdateIdentityProviderSettingsResponse) => void): Request<LicenseManagerUserSubscriptions.Types.UpdateIdentityProviderSettingsResponse, AWSError>;
 }
 declare namespace LicenseManagerUserSubscriptions {
   export interface ActiveDirectoryIdentityProvider {
@@ -198,6 +206,10 @@ declare namespace LicenseManagerUserSubscriptions {
      * The name of the user-based subscription product.
      */
     Product: String;
+    /**
+     * An object that details the registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
+     */
+    Settings: Settings;
     /**
      * The status of an identity provider.
      */
@@ -414,6 +426,10 @@ declare namespace LicenseManagerUserSubscriptions {
      * The name of the user-based subscription product.
      */
     Product: String;
+    /**
+     * The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
+     */
+    Settings?: Settings;
   }
   export interface RegisterIdentityProviderResponse {
     /**
@@ -421,6 +437,18 @@ declare namespace LicenseManagerUserSubscriptions {
      */
     IdentityProviderSummary: IdentityProviderSummary;
   }
+  export type SecurityGroup = string;
+  export interface Settings {
+    /**
+     * A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoint for activation servers.
+     */
+    SecurityGroupId: SecurityGroup;
+    /**
+     * The subnets defined for the registered identity provider.
+     */
+    Subnets: SettingsSubnetsList;
+  }
+  export type SettingsSubnetsList = Subnet[];
   export interface StartProductSubscriptionRequest {
     /**
      * The domain name of the user.
@@ -471,6 +499,36 @@ declare namespace LicenseManagerUserSubscriptions {
   }
   export type String = string;
   export type StringList = String[];
+  export type Subnet = string;
+  export type Subnets = Subnet[];
+  export interface UpdateIdentityProviderSettingsRequest {
+    IdentityProvider: IdentityProvider;
+    /**
+     * The name of the user-based subscription product.
+     */
+    Product: String;
+    /**
+     * Updates the registered identity provider’s product related configuration settings. You can update any combination of settings in a single operation such as the:   Subnets which you want to add to provision VPC endpoints.   Subnets which you want to remove the VPC endpoints from.   Security group ID which permits traffic to the VPC endpoints.  
+     */
+    UpdateSettings: UpdateSettings;
+  }
+  export interface UpdateIdentityProviderSettingsResponse {
+    IdentityProviderSummary: IdentityProviderSummary;
+  }
+  export interface UpdateSettings {
+    /**
+     * The ID of one or more subnets in which License Manager will create a VPC endpoint for products that require connectivity to activation servers.
+     */
+    AddSubnets: Subnets;
+    /**
+     * The ID of one or more subnets to remove.
+     */
+    RemoveSubnets: Subnets;
+    /**
+     * A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoints for activation servers.
+     */
+    SecurityGroupId?: SecurityGroup;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

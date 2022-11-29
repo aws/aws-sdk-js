@@ -301,6 +301,14 @@ declare class S3Control extends Service {
    */
   getMultiRegionAccessPointPolicyStatus(callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointPolicyStatusResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointPolicyStatusResult, AWSError>;
   /**
+   * Returns the routing configuration for a Multi-Region Access Point, indicating which Regions are active or passive. To obtain routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions. 
+   */
+  getMultiRegionAccessPointRoutes(params: S3Control.Types.GetMultiRegionAccessPointRoutesRequest, callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointRoutesResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointRoutesResult, AWSError>;
+  /**
+   * Returns the routing configuration for a Multi-Region Access Point, indicating which Regions are active or passive. To obtain routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions. 
+   */
+  getMultiRegionAccessPointRoutes(callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointRoutesResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointRoutesResult, AWSError>;
+  /**
    * Retrieves the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock   
    */
   getPublicAccessBlock(params: S3Control.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
@@ -468,6 +476,14 @@ declare class S3Control extends Service {
    * Put or replace tags on an existing Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   putStorageLensConfigurationTagging(callback?: (err: AWSError, data: S3Control.Types.PutStorageLensConfigurationTaggingResult) => void): Request<S3Control.Types.PutStorageLensConfigurationTaggingResult, AWSError>;
+  /**
+   * Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the routing status for the specified Regions from active to passive, or from passive to active. A value of 0 indicates a passive status, which means that traffic won't be routed to the specified Region. A value of 100 indicates an active status, which means that traffic will be routed to the specified Region. At least one Region must be active at all times. When the routing configuration is changed, any in-progress operations (uploads, copies, deletes, and so on) to formerly active Regions will continue to run to their final completion state (success or failure). The routing configurations of any Regions that aren’t specified remain unchanged.  Updated routing configurations might not be immediately applied. It can take up to 2 minutes for your changes to take effect.  To submit routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions. 
+   */
+  submitMultiRegionAccessPointRoutes(params: S3Control.Types.SubmitMultiRegionAccessPointRoutesRequest, callback?: (err: AWSError, data: S3Control.Types.SubmitMultiRegionAccessPointRoutesResult) => void): Request<S3Control.Types.SubmitMultiRegionAccessPointRoutesResult, AWSError>;
+  /**
+   * Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the routing status for the specified Regions from active to passive, or from passive to active. A value of 0 indicates a passive status, which means that traffic won't be routed to the specified Region. A value of 100 indicates an active status, which means that traffic will be routed to the specified Region. At least one Region must be active at all times. When the routing configuration is changed, any in-progress operations (uploads, copies, deletes, and so on) to formerly active Regions will continue to run to their final completion state (success or failure). The routing configurations of any Regions that aren’t specified remain unchanged.  Updated routing configurations might not be immediately applied. It can take up to 2 minutes for your changes to take effect.  To submit routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions. 
+   */
+  submitMultiRegionAccessPointRoutes(callback?: (err: AWSError, data: S3Control.Types.SubmitMultiRegionAccessPointRoutesResult) => void): Request<S3Control.Types.SubmitMultiRegionAccessPointRoutesResult, AWSError>;
   /**
    * Updates an existing S3 Batch Operations job's priority. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
@@ -1397,6 +1413,26 @@ declare namespace S3Control {
      */
     AccessPoint?: MultiRegionAccessPointReport;
   }
+  export interface GetMultiRegionAccessPointRoutesRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The Multi-Region Access Point ARN.
+     */
+    Mrap: MultiRegionAccessPointId;
+  }
+  export interface GetMultiRegionAccessPointRoutesResult {
+    /**
+     * The Multi-Region Access Point ARN.
+     */
+    Mrap?: MultiRegionAccessPointId;
+    /**
+     * The different routes that make up the route configuration. Active routes return a value of 100, and passive routes return a value of 0.
+     */
+    Routes?: RouteList;
+  }
   export interface GetPublicAccessBlockOutput {
     /**
      * The PublicAccessBlock configuration currently in effect for this Amazon Web Services account.
@@ -2018,6 +2054,7 @@ declare namespace S3Control {
   export type MinStorageBytesPercentage = number;
   export type MultiRegionAccessPointAlias = string;
   export type MultiRegionAccessPointClientToken = string;
+  export type MultiRegionAccessPointId = string;
   export type MultiRegionAccessPointName = string;
   export interface MultiRegionAccessPointPolicyDocument {
     /**
@@ -2064,6 +2101,20 @@ declare namespace S3Control {
     Regions?: RegionReportList;
   }
   export type MultiRegionAccessPointReportList = MultiRegionAccessPointReport[];
+  export interface MultiRegionAccessPointRoute {
+    /**
+     * The name of the Amazon S3 bucket for which you'll submit a routing configuration change. Either the Bucket or the Region value must be provided. If both are provided, the bucket must be in the specified Region.
+     */
+    Bucket?: BucketName;
+    /**
+     * The Amazon Web Services Region to which you'll be submitting a routing configuration change. Either the Bucket or the Region value must be provided. If both are provided, the bucket must be in the specified Region.
+     */
+    Region?: RegionName;
+    /**
+     * The traffic state for the specified bucket or Amazon Web Services Region.  A value of 0 indicates a passive state, which means that no new traffic will be routed to the Region.  A value of 100 indicates an active state, which means that traffic will be routed to the specified Region.  When the routing configuration for a Region is changed from active to passive, any in-progress operations (uploads, copies, deletes, and so on) to the formerly active Region will continue to run to until a final success or failure status is reached. If all Regions in the routing configuration are designated as passive, you'll receive an InvalidRequest error. 
+     */
+    TrafficDialPercentage: TrafficDialPercentage;
+  }
   export type MultiRegionAccessPointStatus = "READY"|"INCONSISTENT_ACROSS_REGIONS"|"CREATING"|"PARTIALLY_CREATED"|"PARTIALLY_DELETED"|"DELETING"|string;
   export interface MultiRegionAccessPointsAsyncResponse {
     /**
@@ -2447,6 +2498,7 @@ declare namespace S3Control {
   export type ReplicationStatusFilterList = ReplicationStatus[];
   export type ReportPrefixString = string;
   export type RequestedJobStatus = "Cancelled"|"Ready"|string;
+  export type RouteList = MultiRegionAccessPointRoute[];
   export type S3AWSRegion = string;
   export interface S3AccessControlList {
     /**
@@ -2896,6 +2948,22 @@ declare namespace S3Control {
   }
   export type StorageLensTags = StorageLensTag[];
   export type StringForNextToken = string;
+  export interface SubmitMultiRegionAccessPointRoutesRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The Multi-Region Access Point ARN.
+     */
+    Mrap: MultiRegionAccessPointId;
+    /**
+     * The different routes that make up the new route configuration. Active routes return a value of 100, and passive routes return a value of 0.
+     */
+    RouteUpdates: RouteList;
+  }
+  export interface SubmitMultiRegionAccessPointRoutesResult {
+  }
   export type SuspendedCause = string;
   export type SuspendedDate = Date;
   export type TagKeyString = string;
@@ -2907,6 +2975,7 @@ declare namespace S3Control {
     TagSet: S3TagSet;
   }
   export type TimeStamp = Date;
+  export type TrafficDialPercentage = number;
   export interface Transition {
     /**
      * Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.

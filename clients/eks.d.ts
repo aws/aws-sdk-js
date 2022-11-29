@@ -109,11 +109,11 @@ declare class EKS extends Service {
    */
   describeAddon(callback?: (err: AWSError, data: EKS.Types.DescribeAddonResponse) => void): Request<EKS.Types.DescribeAddonResponse, AWSError>;
   /**
-   * Describes the Kubernetes versions that the add-on can be used with.
+   * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned. 
    */
   describeAddonVersions(params: EKS.Types.DescribeAddonVersionsRequest, callback?: (err: AWSError, data: EKS.Types.DescribeAddonVersionsResponse) => void): Request<EKS.Types.DescribeAddonVersionsResponse, AWSError>;
   /**
-   * Describes the Kubernetes versions that the add-on can be used with.
+   * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned. 
    */
   describeAddonVersions(callback?: (err: AWSError, data: EKS.Types.DescribeAddonVersionsResponse) => void): Request<EKS.Types.DescribeAddonVersionsResponse, AWSError>;
   /**
@@ -392,6 +392,18 @@ declare namespace EKS {
      * The metadata that you apply to the add-on to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Add-on tags do not propagate to any other resources associated with the cluster. 
      */
     tags?: TagMap;
+    /**
+     * The publisher of the add-on.
+     */
+    publisher?: String;
+    /**
+     * The owner of the add-on.
+     */
+    owner?: String;
+    /**
+     * Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+     */
+    marketplaceInformation?: MarketplaceInformation;
   }
   export interface AddonHealth {
     /**
@@ -412,6 +424,18 @@ declare namespace EKS {
      * An object representing information about available add-on versions and compatible Kubernetes versions.
      */
     addonVersions?: AddonVersionInfoList;
+    /**
+     * The publisher of the add-on.
+     */
+    publisher?: String;
+    /**
+     * The owner of the add-on.
+     */
+    owner?: String;
+    /**
+     * Information about the add-on from the Amazon Web Services Marketplace.
+     */
+    marketplaceInformation?: MarketplaceInformation;
   }
   export interface AddonIssue {
     /**
@@ -443,6 +467,10 @@ declare namespace EKS {
      * An object representing the compatibilities of a version.
      */
     compatibilities?: Compatibilities;
+    /**
+     * Whether the add-on requires configuration.
+     */
+    requiresConfiguration?: Boolean;
   }
   export type AddonVersionInfoList = AddonVersionInfo[];
   export type Addons = AddonInfo[];
@@ -879,7 +907,7 @@ declare namespace EKS {
      */
     addonName: String;
     /**
-     * Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on. If an IAM account is associated with the add-on, it is not removed.
+     * Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on. If an IAM account is associated with the add-on, it isn't removed.
      */
     preserve?: Boolean;
   }
@@ -954,7 +982,7 @@ declare namespace EKS {
   }
   export interface DescribeAddonVersionsRequest {
     /**
-     * The Kubernetes versions that the add-on can be used with.
+     * The Kubernetes versions that you can use the add-on with.
      */
     kubernetesVersion?: String;
     /**
@@ -969,11 +997,23 @@ declare namespace EKS {
      * The name of the add-on. The name must match one of the names returned by  ListAddons .
      */
     addonName?: String;
+    /**
+     * The type of the add-on. For valid types, don't specify a value for this property.
+     */
+    types?: StringList;
+    /**
+     * The publisher of the add-on. For valid publishers, don't specify a value for this property.
+     */
+    publishers?: StringList;
+    /**
+     * The owner of the add-on. For valid owners, don't specify a value for this property.
+     */
+    owners?: StringList;
   }
   export type DescribeAddonVersionsRequestMaxResults = number;
   export interface DescribeAddonVersionsResponse {
     /**
-     * The list of available versions with Kubernetes version compatibility.
+     * The list of available versions with Kubernetes version compatibility and other properties.
      */
     addons?: Addons;
     /**
@@ -1427,6 +1467,16 @@ declare namespace EKS {
      */
     clusterLogging?: LogSetups;
   }
+  export interface MarketplaceInformation {
+    /**
+     * The product ID from the Amazon Web Services Marketplace.
+     */
+    productId?: String;
+    /**
+     * The product URL from the Amazon Web Services Marketplace.
+     */
+    productUrl?: String;
+  }
   export interface Nodegroup {
     /**
      * The name associated with an Amazon EKS managed node group.
@@ -1664,7 +1714,7 @@ declare namespace EKS {
      */
     controlPlaneInstanceType: String;
     /**
-     * An object representing the placement configuration for all the control plane instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see Capacity considerations in the Amazon EKS User Guide.
+     * An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see Capacity considerations in the Amazon EKS User Guide.
      */
     controlPlanePlacement?: ControlPlanePlacementRequest;
   }
@@ -1678,7 +1728,7 @@ declare namespace EKS {
      */
     controlPlaneInstanceType: String;
     /**
-     * An object representing the placement configuration for all the control plane instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see Capacity considerations in the Amazon EKS User Guide.
+     * An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see Capacity considerations in the Amazon EKS User Guide.
      */
     controlPlanePlacement?: ControlPlanePlacementResponse;
   }
@@ -1956,7 +2006,7 @@ declare namespace EKS {
      */
     addOrUpdateTaints?: taintsList;
     /**
-     * Kubernetes taints to be removed.
+     * Kubernetes taints to remove.
      */
     removeTaints?: taintsList;
   }

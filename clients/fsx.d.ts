@@ -268,11 +268,11 @@ declare class FSx extends Service {
    */
   releaseFileSystemNfsV3Locks(callback?: (err: AWSError, data: FSx.Types.ReleaseFileSystemNfsV3LocksResponse) => void): Request<FSx.Types.ReleaseFileSystemNfsV3LocksResponse, AWSError>;
   /**
-   * Returns an Amazon FSx for OpenZFS volume to the state saved by the specified snapshot. 
+   * Returns an Amazon FSx for OpenZFS volume to the state saved by the specified snapshot.
    */
   restoreVolumeFromSnapshot(params: FSx.Types.RestoreVolumeFromSnapshotRequest, callback?: (err: AWSError, data: FSx.Types.RestoreVolumeFromSnapshotResponse) => void): Request<FSx.Types.RestoreVolumeFromSnapshotResponse, AWSError>;
   /**
-   * Returns an Amazon FSx for OpenZFS volume to the state saved by the specified snapshot. 
+   * Returns an Amazon FSx for OpenZFS volume to the state saved by the specified snapshot.
    */
   restoreVolumeFromSnapshot(callback?: (err: AWSError, data: FSx.Types.RestoreVolumeFromSnapshotResponse) => void): Request<FSx.Types.RestoreVolumeFromSnapshotResponse, AWSError>;
   /**
@@ -383,7 +383,7 @@ declare namespace FSx {
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|string;
   export type AdministrativeActions = AdministrativeAction[];
   export interface Alias {
     /**
@@ -806,7 +806,7 @@ declare namespace FSx {
      */
     DeploymentType: OntapDeploymentType;
     /**
-     * (Multi-AZ only) Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.  The Endpoint IP address range you select for your file system must exist outside the VPC's CIDR range and must be at least /30 or larger. 
+     * (Multi-AZ only) Specifies the IP address range in which the endpoints to access your file system will be created. By default in the Amazon FSx API, Amazon FSx selects an unused IP address range for you from the 198.19.* range. By default in the Amazon FSx console, Amazon FSx chooses the last 64 IP addresses from the VPC’s primary CIDR range to use as the endpoint IP address range for the file system. You can have overlapping endpoint IP addresses for file systems deployed in the same VPC/route tables.
      */
     EndpointIpAddressRange?: IpAddressRange;
     /**
@@ -826,7 +826,7 @@ declare namespace FSx {
      */
     RouteTableIds?: RouteTableIds;
     /**
-     * Sets the throughput capacity for the file system that you're creating. Valid values are 128, 256, 512, 1024, and 2048 MBps.
+     * Sets the throughput capacity for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps.
      */
     ThroughputCapacity: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -843,11 +843,11 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file system deployment type. Amazon FSx for OpenZFS supports SINGLE_AZ_1. SINGLE_AZ_1 deployment type is configured for redundancy within a single Availability Zone.
+     * Specifies the file system deployment type. Single AZ deployment types are configured for redundancy within a single Availability Zone in an Amazon Web Services Region . Valid values are the following:    SINGLE_AZ_1- (Default) Creates file systems with throughput capacities of 64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is available, except US West (Oregon).    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.   For more information, see: Deployment type availability and  File system performancein theAmazon FSx for OpenZFS User Guide.
      */
     DeploymentType: OpenZFSDeploymentType;
     /**
-     * Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in megabytes per second (MB/s). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s. You pay for additional throughput capacity that you provision.
+     * Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in megabytes per second (MB/s). Valid values depend on the DeploymentType you choose, as follows:   For SINGLE_AZ_1, valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.   For SINGLE_AZ_2, valid values are 160, 320, 640, 1280, 2560, 3840, 5120, 7680, or 10240 MB/s.   You pay for additional throughput capacity that you provision.
      */
     ThroughputCapacity: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -955,7 +955,7 @@ declare namespace FSx {
     /**
      * Specifies the location in the SVM's namespace where the volume is mounted. The JunctionPath must have a leading forward slash, such as /vol3.
      */
-    JunctionPath: JunctionPath;
+    JunctionPath?: JunctionPath;
     /**
      * Specifies the security style for the volume. If a volume's security style is not specified, it is automatically set to the root volume's security style. The security style determines the type of permissions that FSx for ONTAP uses to control data access. For more information, see Volume security style in the Amazon FSx for NetApp ONTAP User Guide. Specify one of the following values:    UNIX if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.     NTFS if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.    MIXED if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.  
      */
@@ -967,12 +967,24 @@ declare namespace FSx {
     /**
      * Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume.
      */
-    StorageEfficiencyEnabled: Flag;
+    StorageEfficiencyEnabled?: Flag;
     /**
      * Specifies the ONTAP SVM in which to create the volume.
      */
     StorageVirtualMachineId: StorageVirtualMachineId;
     TieringPolicy?: TieringPolicy;
+    /**
+     * Specifies the type of volume you are creating. Valid values are the following:    RW specifies a read/write volume. RW is the default.    DP specifies a data-protection volume. A DP volume is read-only and can be used as the destination of a NetApp SnapMirror relationship.   For more information, see Volume types in the Amazon FSx for NetApp ONTAP User Guide.
+     */
+    OntapVolumeType?: InputOntapVolumeType;
+    /**
+     * Specifies the snapshot policy for the volume. There are three built-in snapshot policies:    default: This is the default policy. A maximum of six hourly snapshots taken five minutes past the hour. A maximum of two daily snapshots taken Monday through Saturday at 10 minutes after midnight. A maximum of two weekly snapshots taken every Sunday at 15 minutes after midnight.    default-1weekly: This policy is the same as the default policy except that it only retains one snapshot from the weekly schedule.    none: This policy does not take any snapshots. This policy can be assigned to volumes to prevent automatic snapshots from being taken.   You can also provide the name of a custom policy that you created with the ONTAP CLI or REST API. For more information, see Snapshot policies in the Amazon FSx for NetApp ONTAP User Guide.
+     */
+    SnapshotPolicy?: SnapshotPolicy;
+    /**
+     * A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to false. If it's set to true, all tags for the volume are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the volume, regardless of this value.
+     */
+    CopyTagsToBackups?: Flag;
   }
   export interface CreateOpenZFSOriginSnapshotConfiguration {
     SnapshotARN: ResourceARN;
@@ -2060,6 +2072,7 @@ declare namespace FSx {
   export type Flag = boolean;
   export type FlexCacheEndpointType = "NONE"|"ORIGIN"|"CACHE"|string;
   export type GeneralARN = string;
+  export type InputOntapVolumeType = "RW"|"DP"|string;
   export type IntegerNoMax = number;
   export type IntegerNoMaxFromNegativeOne = number;
   export type IntegerRecordSizeKiB = number;
@@ -2268,6 +2281,14 @@ declare namespace FSx {
      * Specifies the type of volume. Valid values are the following:    RW specifies a read/write volume. RW is the default.    DP specifies a data-protection volume. You can protect data by replicating it to data-protection mirror copies. If a disaster occurs, you can use these data-protection mirror copies to recover data.    LS specifies a load-sharing mirror volume. A load-sharing mirror reduces the network traffic to a FlexVol volume by providing additional read-only access to clients.  
      */
     OntapVolumeType?: OntapVolumeType;
+    /**
+     * Specifies the snapshot policy for the volume. There are three built-in snapshot policies:    default: This is the default policy. A maximum of six hourly snapshots taken five minutes past the hour. A maximum of two daily snapshots taken Monday through Saturday at 10 minutes after midnight. A maximum of two weekly snapshots taken every Sunday at 15 minutes after midnight.    default-1weekly: This policy is the same as the default policy except that it only retains one snapshot from the weekly schedule.    none: This policy does not take any snapshots. This policy can be assigned to volumes to prevent automatic snapshots from being taken.   You can also provide the name of a custom policy that you created with the ONTAP CLI or REST API. For more information, see Snapshot policies in the Amazon FSx for NetApp ONTAP User Guide.
+     */
+    SnapshotPolicy?: SnapshotPolicy;
+    /**
+     * A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to false. If it's set to true, all tags for the volume are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the volume, regardless of this value.
+     */
+    CopyTagsToBackups?: Flag;
   }
   export type OntapVolumeType = "RW"|"DP"|"LS"|string;
   export interface OpenZFSClientConfiguration {
@@ -2310,7 +2331,7 @@ declare namespace FSx {
     ReadOnly?: ReadOnly;
   }
   export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|"LZ4"|string;
-  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|string;
+  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|"SINGLE_AZ_2"|string;
   export interface OpenZFSFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
@@ -2323,11 +2344,11 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file-system deployment type. Amazon FSx for OpenZFS supports SINGLE_AZ_1. SINGLE_AZ_1 is a file system configured for a single Availability Zone (AZ) of redundancy. 
+     * Specifies the file-system deployment type. Amazon FSx for OpenZFS supports&#x2028; SINGLE_AZ_1 and SINGLE_AZ_2.
      */
     DeploymentType?: OpenZFSDeploymentType;
     /**
-     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.
+     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps).
      */
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -2414,6 +2435,18 @@ declare namespace FSx {
      * An object specifying how much storage users or groups can use on the volume.
      */
     UserAndGroupQuotas?: OpenZFSUserAndGroupQuotas;
+    /**
+     * Specifies the ID of the snapshot to which the volume was restored.
+     */
+    RestoreToSnapshot?: SnapshotId;
+    /**
+     * A Boolean value indicating whether snapshots between the current state and the specified snapshot should be deleted when a volume is restored from snapshot.
+     */
+    DeleteIntermediateSnaphots?: Flag;
+    /**
+     * A Boolean value indicating whether dependent clone volumes created from intermediate snapshots should be deleted when a volume is restored from snapshot.
+     */
+    DeleteClonedVolumes?: Flag;
   }
   export type OrganizationalUnitDistinguishedName = string;
   export type PerUnitStorageThroughput = number;
@@ -2447,7 +2480,7 @@ declare namespace FSx {
      */
     SnapshotId: SnapshotId;
     /**
-     * The settings used when restoring the specified volume from snapshot.     DELETE_INTERMEDIATE_SNAPSHOTS - Deletes snapshots between the current state and the specified snapshot. If there are intermediate snapshots and this option isn't used, RestoreVolumeFromSnapshot fails.    DELETE_CLONED_VOLUMES - Deletes any dependent clone volumes created from intermediate snapshots. If there are any dependent clone volumes and this option isn't used, RestoreVolumeFromSnapshot fails.  
+     * The settings used when restoring the specified volume from snapshot.    DELETE_INTERMEDIATE_SNAPSHOTS - Deletes snapshots between the current state and the specified snapshot. If there are intermediate snapshots and this option isn't used, RestoreVolumeFromSnapshot fails.    DELETE_CLONED_VOLUMES - Deletes any dependent clone volumes created from intermediate snapshots. If there are any dependent clone volumes and this option isn't used, RestoreVolumeFromSnapshot fails.  
      */
     Options?: RestoreOpenZFSVolumeOptions;
   }
@@ -2460,6 +2493,10 @@ declare namespace FSx {
      * The lifecycle state of the volume being restored.
      */
     Lifecycle?: VolumeLifecycle;
+    /**
+     * A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Amazon FSx system.
+     */
+    AdministrativeActions?: AdministrativeActions;
   }
   export type RouteTableId = string;
   export type RouteTableIds = RouteTableId[];
@@ -2582,6 +2619,7 @@ declare namespace FSx {
   export type SnapshotIds = SnapshotId[];
   export type SnapshotLifecycle = "PENDING"|"CREATING"|"DELETING"|"AVAILABLE"|string;
   export type SnapshotName = string;
+  export type SnapshotPolicy = string;
   export type Snapshots = Snapshot[];
   export type SourceBackupId = string;
   export type StartTime = Date;
@@ -2612,10 +2650,6 @@ declare namespace FSx {
      * The SVM's system generated unique ID.
      */
     StorageVirtualMachineId?: StorageVirtualMachineId;
-    /**
-     * Describes the SVM's subtype.
-     */
-    Subtype?: StorageVirtualMachineSubtype;
     /**
      * The SVM's UUID (universally unique identifier).
      */
@@ -2649,7 +2683,6 @@ declare namespace FSx {
   export type StorageVirtualMachineLifecycle = "CREATED"|"CREATING"|"DELETING"|"FAILED"|"MISCONFIGURED"|"PENDING"|string;
   export type StorageVirtualMachineName = string;
   export type StorageVirtualMachineRootVolumeSecurityStyle = "UNIX"|"NTFS"|"MIXED"|string;
-  export type StorageVirtualMachineSubtype = "DEFAULT"|"DP_DESTINATION"|"SYNC_DESTINATION"|"SYNC_SOURCE"|string;
   export type StorageVirtualMachines = StorageVirtualMachine[];
   export type SubDirectoriesPaths = Namespace[];
   export type SubnetId = string;
@@ -2818,9 +2851,17 @@ declare namespace FSx {
      */
     DiskIopsConfiguration?: DiskIopsConfiguration;
     /**
-     * Specifies the throughput of an FSx for NetApp ONTAP file system, measured in megabytes per second (MBps). Valid values are 128, 256, 512, 1024, or 2048 MB/s.
+     * Specifies the throughput of an FSx for NetApp ONTAP file system, measured in megabytes per second (MBps). Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps.
      */
     ThroughputCapacity?: MegabytesPerSecond;
+    /**
+     * (Multi-AZ only) A list of IDs of new virtual private cloud (VPC) route tables to associate (add) with your Amazon FSx for NetApp ONTAP file system.
+     */
+    AddRouteTableIds?: RouteTableIds;
+    /**
+     * (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route tables to disassociate (remove) from your Amazon FSx for NetApp ONTAP file system. You can use the API operation to retrieve the list of VPC route table IDs for a file system.
+     */
+    RemoveRouteTableIds?: RouteTableIds;
   }
   export interface UpdateFileSystemOpenZFSConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
@@ -2834,7 +2875,7 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The throughput of an Amazon FSx file system, measured in megabytes per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.
+     * The throughput of an Amazon FSx for OpenZFS file system, measured in megabytes per second&#x2028; (MB/s). Valid values depend on the DeploymentType you choose, as follows:   For SINGLE_AZ_1, valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.   For SINGLE_AZ_2, valid values are 160, 320, 640, 1280, 2560, 3840, 5120, 7680, or 10240 MB/s.  
      */
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -2917,6 +2958,14 @@ declare namespace FSx {
      * Update the volume's data tiering policy.
      */
     TieringPolicy?: TieringPolicy;
+    /**
+     * Specifies the snapshot policy for the volume. There are three built-in snapshot policies:    default: This is the default policy. A maximum of six hourly snapshots taken five minutes past the hour. A maximum of two daily snapshots taken Monday through Saturday at 10 minutes after midnight. A maximum of two weekly snapshots taken every Sunday at 15 minutes after midnight.    default-1weekly: This policy is the same as the default policy except that it only retains one snapshot from the weekly schedule.    none: This policy does not take any snapshots. This policy can be assigned to volumes to prevent automatic snapshots from being taken.   You can also provide the name of a custom policy that you created with the ONTAP CLI or REST API. For more information, see Snapshot policies in the Amazon FSx for NetApp ONTAP User Guide.
+     */
+    SnapshotPolicy?: SnapshotPolicy;
+    /**
+     * A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to false. If it's set to true, all tags for the volume are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the volume, regardless of this value.
+     */
+    CopyTagsToBackups?: Flag;
   }
   export interface UpdateOpenZFSVolumeConfiguration {
     /**
@@ -3038,7 +3087,7 @@ declare namespace FSx {
      */
     LifecycleTransitionReason?: LifecycleTransitionReason;
     /**
-     * A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Amazon FSx system that you initiated.
+     * A list of administrative actions for the volume that are in process or waiting to be processed. Administrative actions describe changes to the volume that you have initiated using the UpdateVolume action.
      */
     AdministrativeActions?: AdministrativeActions;
     /**
