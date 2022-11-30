@@ -76,6 +76,14 @@ declare class Glue extends Service {
    */
   batchGetCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.BatchGetCustomEntityTypesResponse) => void): Request<Glue.Types.BatchGetCustomEntityTypesResponse, AWSError>;
   /**
+   * Retrieves a list of data quality results for the specified result IDs.
+   */
+  batchGetDataQualityResult(params: Glue.Types.BatchGetDataQualityResultRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDataQualityResultResponse) => void): Request<Glue.Types.BatchGetDataQualityResultResponse, AWSError>;
+  /**
+   * Retrieves a list of data quality results for the specified result IDs.
+   */
+  batchGetDataQualityResult(callback?: (err: AWSError, data: Glue.Types.BatchGetDataQualityResultResponse) => void): Request<Glue.Types.BatchGetDataQualityResultResponse, AWSError>;
+  /**
    * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
@@ -131,6 +139,22 @@ declare class Glue extends Service {
    * Updates one or more partitions in a batch operation.
    */
   batchUpdatePartition(callback?: (err: AWSError, data: Glue.Types.BatchUpdatePartitionResponse) => void): Request<Glue.Types.BatchUpdatePartitionResponse, AWSError>;
+  /**
+   * Cancels the specified recommendation run that was being used to generate rules.
+   */
+  cancelDataQualityRuleRecommendationRun(params: Glue.Types.CancelDataQualityRuleRecommendationRunRequest, callback?: (err: AWSError, data: Glue.Types.CancelDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.CancelDataQualityRuleRecommendationRunResponse, AWSError>;
+  /**
+   * Cancels the specified recommendation run that was being used to generate rules.
+   */
+  cancelDataQualityRuleRecommendationRun(callback?: (err: AWSError, data: Glue.Types.CancelDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.CancelDataQualityRuleRecommendationRunResponse, AWSError>;
+  /**
+   * Cancels a run where a ruleset is being evaluated against a data source.
+   */
+  cancelDataQualityRulesetEvaluationRun(params: Glue.Types.CancelDataQualityRulesetEvaluationRunRequest, callback?: (err: AWSError, data: Glue.Types.CancelDataQualityRulesetEvaluationRunResponse) => void): Request<Glue.Types.CancelDataQualityRulesetEvaluationRunResponse, AWSError>;
+  /**
+   * Cancels a run where a ruleset is being evaluated against a data source.
+   */
+  cancelDataQualityRulesetEvaluationRun(callback?: (err: AWSError, data: Glue.Types.CancelDataQualityRulesetEvaluationRunResponse) => void): Request<Glue.Types.CancelDataQualityRulesetEvaluationRunResponse, AWSError>;
   /**
    * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
    */
@@ -195,6 +219,14 @@ declare class Glue extends Service {
    * Creates a custom pattern that is used to detect sensitive data across the columns and rows of your structured data. Each custom pattern you create specifies a regular expression and an optional list of context words. If no context words are passed only a regular expression is checked.
    */
   createCustomEntityType(callback?: (err: AWSError, data: Glue.Types.CreateCustomEntityTypeResponse) => void): Request<Glue.Types.CreateCustomEntityTypeResponse, AWSError>;
+  /**
+   * Creates a data quality ruleset with DQDL rules applied to a specified Glue table. You create the ruleset using the Data Quality Definition Language (DQDL). For more information, see the Glue developer guide.
+   */
+  createDataQualityRuleset(params: Glue.Types.CreateDataQualityRulesetRequest, callback?: (err: AWSError, data: Glue.Types.CreateDataQualityRulesetResponse) => void): Request<Glue.Types.CreateDataQualityRulesetResponse, AWSError>;
+  /**
+   * Creates a data quality ruleset with DQDL rules applied to a specified Glue table. You create the ruleset using the Data Quality Definition Language (DQDL). For more information, see the Glue developer guide.
+   */
+  createDataQualityRuleset(callback?: (err: AWSError, data: Glue.Types.CreateDataQualityRulesetResponse) => void): Request<Glue.Types.CreateDataQualityRulesetResponse, AWSError>;
   /**
    * Creates a new database in a Data Catalog.
    */
@@ -371,6 +403,14 @@ declare class Glue extends Service {
    * Deletes a custom pattern by specifying its name.
    */
   deleteCustomEntityType(callback?: (err: AWSError, data: Glue.Types.DeleteCustomEntityTypeResponse) => void): Request<Glue.Types.DeleteCustomEntityTypeResponse, AWSError>;
+  /**
+   * Deletes a data quality ruleset.
+   */
+  deleteDataQualityRuleset(params: Glue.Types.DeleteDataQualityRulesetRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDataQualityRulesetResponse) => void): Request<Glue.Types.DeleteDataQualityRulesetResponse, AWSError>;
+  /**
+   * Deletes a data quality ruleset.
+   */
+  deleteDataQualityRuleset(callback?: (err: AWSError, data: Glue.Types.DeleteDataQualityRulesetResponse) => void): Request<Glue.Types.DeleteDataQualityRulesetResponse, AWSError>;
   /**
    * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
@@ -627,6 +667,38 @@ declare class Glue extends Service {
    * Retrieves the security configuration for a specified catalog.
    */
   getDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Retrieves the result of a data quality rule evaluation.
+   */
+  getDataQualityResult(params: Glue.Types.GetDataQualityResultRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityResultResponse) => void): Request<Glue.Types.GetDataQualityResultResponse, AWSError>;
+  /**
+   * Retrieves the result of a data quality rule evaluation.
+   */
+  getDataQualityResult(callback?: (err: AWSError, data: Glue.Types.GetDataQualityResultResponse) => void): Request<Glue.Types.GetDataQualityResultResponse, AWSError>;
+  /**
+   * Gets the specified recommendation run that was used to generate rules.
+   */
+  getDataQualityRuleRecommendationRun(params: Glue.Types.GetDataQualityRuleRecommendationRunRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.GetDataQualityRuleRecommendationRunResponse, AWSError>;
+  /**
+   * Gets the specified recommendation run that was used to generate rules.
+   */
+  getDataQualityRuleRecommendationRun(callback?: (err: AWSError, data: Glue.Types.GetDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.GetDataQualityRuleRecommendationRunResponse, AWSError>;
+  /**
+   * Returns an existing ruleset by identifier or name.
+   */
+  getDataQualityRuleset(params: Glue.Types.GetDataQualityRulesetRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityRulesetResponse) => void): Request<Glue.Types.GetDataQualityRulesetResponse, AWSError>;
+  /**
+   * Returns an existing ruleset by identifier or name.
+   */
+  getDataQualityRuleset(callback?: (err: AWSError, data: Glue.Types.GetDataQualityRulesetResponse) => void): Request<Glue.Types.GetDataQualityRulesetResponse, AWSError>;
+  /**
+   * Retrieves a specific run where a ruleset is evaluated against a data source.
+   */
+  getDataQualityRulesetEvaluationRun(params: Glue.Types.GetDataQualityRulesetEvaluationRunRequest, callback?: (err: AWSError, data: Glue.Types.GetDataQualityRulesetEvaluationRunResponse) => void): Request<Glue.Types.GetDataQualityRulesetEvaluationRunResponse, AWSError>;
+  /**
+   * Retrieves a specific run where a ruleset is evaluated against a data source.
+   */
+  getDataQualityRulesetEvaluationRun(callback?: (err: AWSError, data: Glue.Types.GetDataQualityRulesetEvaluationRunResponse) => void): Request<Glue.Types.GetDataQualityRulesetEvaluationRunResponse, AWSError>;
   /**
    * Retrieves the definition of a specified database.
    */
@@ -1036,6 +1108,38 @@ declare class Glue extends Service {
    */
   listCustomEntityTypes(callback?: (err: AWSError, data: Glue.Types.ListCustomEntityTypesResponse) => void): Request<Glue.Types.ListCustomEntityTypesResponse, AWSError>;
   /**
+   * Returns all data quality execution results for your account.
+   */
+  listDataQualityResults(params: Glue.Types.ListDataQualityResultsRequest, callback?: (err: AWSError, data: Glue.Types.ListDataQualityResultsResponse) => void): Request<Glue.Types.ListDataQualityResultsResponse, AWSError>;
+  /**
+   * Returns all data quality execution results for your account.
+   */
+  listDataQualityResults(callback?: (err: AWSError, data: Glue.Types.ListDataQualityResultsResponse) => void): Request<Glue.Types.ListDataQualityResultsResponse, AWSError>;
+  /**
+   * Lists the recommendation runs meeting the filter criteria.
+   */
+  listDataQualityRuleRecommendationRuns(params: Glue.Types.ListDataQualityRuleRecommendationRunsRequest, callback?: (err: AWSError, data: Glue.Types.ListDataQualityRuleRecommendationRunsResponse) => void): Request<Glue.Types.ListDataQualityRuleRecommendationRunsResponse, AWSError>;
+  /**
+   * Lists the recommendation runs meeting the filter criteria.
+   */
+  listDataQualityRuleRecommendationRuns(callback?: (err: AWSError, data: Glue.Types.ListDataQualityRuleRecommendationRunsResponse) => void): Request<Glue.Types.ListDataQualityRuleRecommendationRunsResponse, AWSError>;
+  /**
+   * Lists all the runs meeting the filter criteria, where a ruleset is evaluated against a data source.
+   */
+  listDataQualityRulesetEvaluationRuns(params: Glue.Types.ListDataQualityRulesetEvaluationRunsRequest, callback?: (err: AWSError, data: Glue.Types.ListDataQualityRulesetEvaluationRunsResponse) => void): Request<Glue.Types.ListDataQualityRulesetEvaluationRunsResponse, AWSError>;
+  /**
+   * Lists all the runs meeting the filter criteria, where a ruleset is evaluated against a data source.
+   */
+  listDataQualityRulesetEvaluationRuns(callback?: (err: AWSError, data: Glue.Types.ListDataQualityRulesetEvaluationRunsResponse) => void): Request<Glue.Types.ListDataQualityRulesetEvaluationRunsResponse, AWSError>;
+  /**
+   * Returns a paginated list of rulesets for the specified list of Glue tables.
+   */
+  listDataQualityRulesets(params: Glue.Types.ListDataQualityRulesetsRequest, callback?: (err: AWSError, data: Glue.Types.ListDataQualityRulesetsResponse) => void): Request<Glue.Types.ListDataQualityRulesetsResponse, AWSError>;
+  /**
+   * Returns a paginated list of rulesets for the specified list of Glue tables.
+   */
+  listDataQualityRulesets(callback?: (err: AWSError, data: Glue.Types.ListDataQualityRulesetsResponse) => void): Request<Glue.Types.ListDataQualityRulesetsResponse, AWSError>;
+  /**
    * Retrieves the names of all DevEndpoint resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
@@ -1228,6 +1332,22 @@ declare class Glue extends Service {
    */
   startCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
   /**
+   * Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.
+   */
+  startDataQualityRuleRecommendationRun(params: Glue.Types.StartDataQualityRuleRecommendationRunRequest, callback?: (err: AWSError, data: Glue.Types.StartDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.StartDataQualityRuleRecommendationRunResponse, AWSError>;
+  /**
+   * Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.
+   */
+  startDataQualityRuleRecommendationRun(callback?: (err: AWSError, data: Glue.Types.StartDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.StartDataQualityRuleRecommendationRunResponse, AWSError>;
+  /**
+   * Once you have a ruleset definition (either recommended or your own), you call this operation to evaluate the ruleset against a data source (Glue table). The evaluation computes results which you can retrieve with the GetDataQualityResult API.
+   */
+  startDataQualityRulesetEvaluationRun(params: Glue.Types.StartDataQualityRulesetEvaluationRunRequest, callback?: (err: AWSError, data: Glue.Types.StartDataQualityRulesetEvaluationRunResponse) => void): Request<Glue.Types.StartDataQualityRulesetEvaluationRunResponse, AWSError>;
+  /**
+   * Once you have a ruleset definition (either recommended or your own), you call this operation to evaluate the ruleset against a data source (Glue table). The evaluation computes results which you can retrieve with the GetDataQualityResult API.
+   */
+  startDataQualityRulesetEvaluationRun(callback?: (err: AWSError, data: Glue.Types.StartDataQualityRulesetEvaluationRunResponse) => void): Request<Glue.Types.StartDataQualityRulesetEvaluationRunResponse, AWSError>;
+  /**
    * Begins an asynchronous task to export all labeled data for a particular transform. This task is the only label-related API call that is not part of the typical active learning workflow. You typically use StartExportLabelsTaskRun when you want to work with all of your existing labels at the same time, such as when you want to remove or change labels that were previously submitted as truth. This API operation accepts the TransformId whose labels you want to export and an Amazon Simple Storage Service (Amazon S3) path to export the labels to. The operation returns a TaskRunId. You can check on the status of your task run by calling the GetMLTaskRun API.
    */
   startExportLabelsTaskRun(params: Glue.Types.StartExportLabelsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartExportLabelsTaskRunResponse) => void): Request<Glue.Types.StartExportLabelsTaskRunResponse, AWSError>;
@@ -1395,6 +1515,14 @@ declare class Glue extends Service {
    * Updates the schedule of a crawler using a cron expression. 
    */
   updateCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerScheduleResponse) => void): Request<Glue.Types.UpdateCrawlerScheduleResponse, AWSError>;
+  /**
+   * Updates the specified data quality ruleset.
+   */
+  updateDataQualityRuleset(params: Glue.Types.UpdateDataQualityRulesetRequest, callback?: (err: AWSError, data: Glue.Types.UpdateDataQualityRulesetResponse) => void): Request<Glue.Types.UpdateDataQualityRulesetResponse, AWSError>;
+  /**
+   * Updates the specified data quality ruleset.
+   */
+  updateDataQualityRuleset(callback?: (err: AWSError, data: Glue.Types.UpdateDataQualityRulesetResponse) => void): Request<Glue.Types.UpdateDataQualityRulesetResponse, AWSError>;
   /**
    * Updates an existing database definition in a Data Catalog.
    */
@@ -1830,6 +1958,22 @@ declare namespace Glue {
      */
     CustomEntityTypesNotFound?: CustomEntityTypeNames;
   }
+  export interface BatchGetDataQualityResultRequest {
+    /**
+     * A list of unique result IDs for the data quality results.
+     */
+    ResultIds: DataQualityResultIds;
+  }
+  export interface BatchGetDataQualityResultResponse {
+    /**
+     * A list of DataQualityResult objects representing the data quality results.
+     */
+    Results: DataQualityResultsList;
+    /**
+     * A list of result IDs for which results were not found.
+     */
+    ResultsNotFound?: DataQualityResultIds;
+  }
   export interface BatchGetDevEndpointsRequest {
     /**
      * The list of DevEndpoint names, which might be the names returned from the ListDevEndpoint operation.
@@ -2162,6 +2306,22 @@ declare namespace Glue {
   export type BoxedNonNegativeInt = number;
   export type BoxedNonNegativeLong = number;
   export type BoxedPositiveInt = number;
+  export interface CancelDataQualityRuleRecommendationRunRequest {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId: HashString;
+  }
+  export interface CancelDataQualityRuleRecommendationRunResponse {
+  }
+  export interface CancelDataQualityRulesetEvaluationRunRequest {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId: HashString;
+  }
+  export interface CancelDataQualityRulesetEvaluationRunResponse {
+  }
   export interface CancelMLTaskRunRequest {
     /**
      * The unique identifier of the machine learning transform.
@@ -2591,6 +2751,10 @@ declare namespace Glue {
      * Specifies a custom visual transform created by a user.
      */
     DynamicTransform?: DynamicTransform;
+    /**
+     * Specifies your data quality evaluation criteria.
+     */
+    EvaluateDataQuality?: EvaluateDataQuality;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -3311,6 +3475,38 @@ declare namespace Glue {
   export interface CreateCustomEntityTypeResponse {
     /**
      * The name of the custom pattern you created.
+     */
+    Name?: NameString;
+  }
+  export interface CreateDataQualityRulesetRequest {
+    /**
+     * A unique name for the data quality ruleset.
+     */
+    Name: NameString;
+    /**
+     * A description of the data quality ruleset.
+     */
+    Description?: DescriptionString;
+    /**
+     * A Data Quality Definition Language (DQDL) ruleset. For more information, see the Glue developer guide.
+     */
+    Ruleset: DataQualityRulesetString;
+    /**
+     * A list of tags applied to the data quality ruleset.
+     */
+    Tags?: TagsMap;
+    /**
+     * A target table associated with the data quality ruleset.
+     */
+    TargetTable?: DataQualityTargetTable;
+    /**
+     * Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.
+     */
+    ClientToken?: HashString;
+  }
+  export interface CreateDataQualityRulesetResponse {
+    /**
+     * A unique name for the data quality ruleset.
      */
     Name?: NameString;
   }
@@ -4152,6 +4348,33 @@ declare namespace Glue {
   export type CustomEntityTypeNames = NameString[];
   export type CustomEntityTypes = CustomEntityType[];
   export type CustomPatterns = string;
+  export type DQDLString = string;
+  export interface DQResultsPublishingOptions {
+    /**
+     * The context of the evaluation.
+     */
+    EvaluationContext?: GenericLimitedString;
+    /**
+     * The Amazon S3 prefix prepended to the results.
+     */
+    ResultsS3Prefix?: EnclosedInStringProperty;
+    /**
+     * Enable metrics for your data quality results.
+     */
+    CloudWatchMetricsEnabled?: BoxedBoolean;
+    /**
+     * Enable publishing for your data quality results.
+     */
+    ResultsPublishingEnabled?: BoxedBoolean;
+  }
+  export interface DQStopJobOnFailureOptions {
+    /**
+     * When to stop job if your data quality evaluation fails. Options are Immediate or AfterDataLoad.
+     */
+    StopJobOnFailureTiming?: DQStopJobOnFailureTiming;
+  }
+  export type DQStopJobOnFailureTiming = "Immediate"|"AfterDataLoad"|string;
+  export type DQTransformOutput = "PrimaryInput"|"EvaluationResults"|string;
   export type DagEdges = CodeGenEdge[];
   export type DagNodes = CodeGenNode[];
   export interface DataCatalogEncryptionSettings {
@@ -4172,6 +4395,274 @@ declare namespace Glue {
     DataLakePrincipalIdentifier?: DataLakePrincipalString;
   }
   export type DataLakePrincipalString = string;
+  export interface DataQualityEvaluationRunAdditionalRunOptions {
+    /**
+     * Whether or not to enable CloudWatch metrics.
+     */
+    CloudWatchMetricsEnabled?: NullableBoolean;
+    /**
+     * Prefix for Amazon S3 to store results.
+     */
+    ResultsS3Prefix?: UriString;
+  }
+  export interface DataQualityResult {
+    /**
+     * A unique result ID for the data quality result.
+     */
+    ResultId?: HashString;
+    /**
+     * An aggregate data quality score. Represents the ratio of rules that passed to the total number of rules.
+     */
+    Score?: GenericBoundedDouble;
+    /**
+     * The table associated with the data quality result, if any.
+     */
+    DataSource?: DataSource;
+    /**
+     * The name of the ruleset associated with the data quality result.
+     */
+    RulesetName?: NameString;
+    /**
+     * In the context of a job in Glue Studio, each node in the canvas is typically assigned some sort of name and data quality nodes will have names. In the case of multiple nodes, the evaluationContext can differentiate the nodes.
+     */
+    EvaluationContext?: GenericString;
+    /**
+     * The date and time when this data quality run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The date and time when this data quality run completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The job name associated with the data quality result, if any.
+     */
+    JobName?: NameString;
+    /**
+     * The job run ID associated with the data quality result, if any.
+     */
+    JobRunId?: HashString;
+    /**
+     * The unique run ID for the ruleset evaluation for this data quality result.
+     */
+    RulesetEvaluationRunId?: HashString;
+    /**
+     * A list of DataQualityRuleResult objects representing the results for each rule. 
+     */
+    RuleResults?: DataQualityRuleResults;
+  }
+  export interface DataQualityResultDescription {
+    /**
+     * The unique result ID for this data quality result.
+     */
+    ResultId?: HashString;
+    /**
+     * The table name associated with the data quality result.
+     */
+    DataSource?: DataSource;
+    /**
+     * The job name associated with the data quality result.
+     */
+    JobName?: NameString;
+    /**
+     * The job run ID associated with the data quality result.
+     */
+    JobRunId?: HashString;
+    /**
+     * The time that the run started for this data quality result.
+     */
+    StartedOn?: Timestamp;
+  }
+  export type DataQualityResultDescriptionList = DataQualityResultDescription[];
+  export interface DataQualityResultFilterCriteria {
+    /**
+     * Filter results by the specified data source. For example, retrieving all results for an Glue table.
+     */
+    DataSource?: DataSource;
+    /**
+     * Filter results by the specified job name.
+     */
+    JobName?: NameString;
+    /**
+     * Filter results by the specified job run ID.
+     */
+    JobRunId?: HashString;
+    /**
+     * Filter results by runs that started after this time.
+     */
+    StartedAfter?: Timestamp;
+    /**
+     * Filter results by runs that started before this time.
+     */
+    StartedBefore?: Timestamp;
+  }
+  export type DataQualityResultIdList = HashString[];
+  export type DataQualityResultIds = HashString[];
+  export type DataQualityResultsList = DataQualityResult[];
+  export interface DataQualityRuleRecommendationRunDescription {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId?: HashString;
+    /**
+     * The status for this run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * The date and time when this run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The data source (Glue table) associated with the recommendation run.
+     */
+    DataSource?: DataSource;
+  }
+  export interface DataQualityRuleRecommendationRunFilter {
+    /**
+     * Filter based on a specified data source (Glue table).
+     */
+    DataSource: DataSource;
+    /**
+     * Filter based on time for results started before provided time.
+     */
+    StartedBefore?: Timestamp;
+    /**
+     * Filter based on time for results started after provided time.
+     */
+    StartedAfter?: Timestamp;
+  }
+  export type DataQualityRuleRecommendationRunList = DataQualityRuleRecommendationRunDescription[];
+  export interface DataQualityRuleResult {
+    /**
+     * The name of the data quality rule.
+     */
+    Name?: NameString;
+    /**
+     * A description of the data quality rule.
+     */
+    Description?: DescriptionString;
+    /**
+     * An evaluation message.
+     */
+    EvaluationMessage?: DescriptionString;
+    /**
+     * A pass or fail status for the rule.
+     */
+    Result?: DataQualityRuleResultStatus;
+  }
+  export type DataQualityRuleResultStatus = "PASS"|"FAIL"|"ERROR"|string;
+  export type DataQualityRuleResults = DataQualityRuleResult[];
+  export interface DataQualityRulesetEvaluationRunDescription {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId?: HashString;
+    /**
+     * The status for this run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * The date and time when the run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The data source (an Glue table) associated with the run.
+     */
+    DataSource?: DataSource;
+  }
+  export interface DataQualityRulesetEvaluationRunFilter {
+    /**
+     * Filter based on a data source (an Glue table) associated with the run.
+     */
+    DataSource: DataSource;
+    /**
+     * Filter results by runs that started before this time.
+     */
+    StartedBefore?: Timestamp;
+    /**
+     * Filter results by runs that started after this time.
+     */
+    StartedAfter?: Timestamp;
+  }
+  export type DataQualityRulesetEvaluationRunList = DataQualityRulesetEvaluationRunDescription[];
+  export interface DataQualityRulesetFilterCriteria {
+    /**
+     * The name of the ruleset filter criteria.
+     */
+    Name?: NameString;
+    /**
+     * The description of the ruleset filter criteria.
+     */
+    Description?: DescriptionString;
+    /**
+     * Filter on rulesets created before this date.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * Filter on rulesets created after this date.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * Filter on rulesets last modified before this date.
+     */
+    LastModifiedBefore?: Timestamp;
+    /**
+     * Filter on rulesets last modified after this date.
+     */
+    LastModifiedAfter?: Timestamp;
+    /**
+     * The name and database name of the target table.
+     */
+    TargetTable?: DataQualityTargetTable;
+  }
+  export type DataQualityRulesetList = DataQualityRulesetListDetails[];
+  export interface DataQualityRulesetListDetails {
+    /**
+     * The name of the data quality ruleset.
+     */
+    Name?: NameString;
+    /**
+     * A description of the data quality ruleset.
+     */
+    Description?: DescriptionString;
+    /**
+     * The date and time the data quality ruleset was created.
+     */
+    CreatedOn?: Timestamp;
+    /**
+     * The date and time the data quality ruleset was last modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * An object representing an Glue table.
+     */
+    TargetTable?: DataQualityTargetTable;
+    /**
+     * When a ruleset was created from a recommendation run, this run ID is generated to link the two together.
+     */
+    RecommendationRunId?: HashString;
+    /**
+     * The number of rules in the ruleset.
+     */
+    RuleCount?: NullableInteger;
+  }
+  export type DataQualityRulesetString = string;
+  export interface DataQualityTargetTable {
+    /**
+     * The name of the Glue table.
+     */
+    TableName: NameString;
+    /**
+     * The name of the database where the Glue table exists.
+     */
+    DatabaseName: NameString;
+  }
+  export interface DataSource {
+    /**
+     * An Glue table.
+     */
+    GlueTable: GlueTable;
+  }
   export interface Database {
     /**
      * The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
@@ -4397,6 +4888,14 @@ declare namespace Glue {
      * The name of the custom pattern you deleted.
      */
     Name?: NameString;
+  }
+  export interface DeleteDataQualityRulesetRequest {
+    /**
+     * A name for the data quality ruleset.
+     */
+    Name: NameString;
+  }
+  export interface DeleteDataQualityRulesetResponse {
   }
   export interface DeleteDatabaseRequest {
     /**
@@ -5038,6 +5537,32 @@ declare namespace Glue {
   }
   export type ErrorMessageString = string;
   export type ErrorString = string;
+  export interface EvaluateDataQuality {
+    /**
+     * The name of the data quality evaluation.
+     */
+    Name: NodeName;
+    /**
+     * The inputs of your data quality evaluation.
+     */
+    Inputs: OneInput;
+    /**
+     * The ruleset for your data quality evaluation.
+     */
+    Ruleset: DQDLString;
+    /**
+     * The output of your data quality evaluation.
+     */
+    Output?: DQTransformOutput;
+    /**
+     * Options to configure how your results are published.
+     */
+    PublishingOptions?: DQResultsPublishingOptions;
+    /**
+     * Options to configure how your job will stop if your data quality evaluation fails.
+     */
+    StopJobOnFailureOptions?: DQStopJobOnFailureOptions;
+  }
   export interface EvaluationMetrics {
     /**
      * The type of machine learning transform.
@@ -5522,6 +6047,218 @@ declare namespace Glue {
      * The requested security configuration.
      */
     DataCatalogEncryptionSettings?: DataCatalogEncryptionSettings;
+  }
+  export interface GetDataQualityResultRequest {
+    /**
+     * A unique result ID for the data quality result.
+     */
+    ResultId: HashString;
+  }
+  export interface GetDataQualityResultResponse {
+    /**
+     * A unique result ID for the data quality result.
+     */
+    ResultId?: HashString;
+    /**
+     * An aggregate data quality score. Represents the ratio of rules that passed to the total number of rules.
+     */
+    Score?: GenericBoundedDouble;
+    /**
+     * The table associated with the data quality result, if any.
+     */
+    DataSource?: DataSource;
+    /**
+     * The name of the ruleset associated with the data quality result.
+     */
+    RulesetName?: NameString;
+    /**
+     * In the context of a job in Glue Studio, each node in the canvas is typically assigned some sort of name and data quality nodes will have names. In the case of multiple nodes, the evaluationContext can differentiate the nodes.
+     */
+    EvaluationContext?: GenericString;
+    /**
+     * The date and time when the run for this data quality result started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The date and time when the run for this data quality result was completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The job name associated with the data quality result, if any.
+     */
+    JobName?: NameString;
+    /**
+     * The job run ID associated with the data quality result, if any.
+     */
+    JobRunId?: HashString;
+    /**
+     * The unique run ID associated with the ruleset evaluation.
+     */
+    RulesetEvaluationRunId?: HashString;
+    /**
+     * A list of DataQualityRuleResult objects representing the results for each rule. 
+     */
+    RuleResults?: DataQualityRuleResults;
+  }
+  export interface GetDataQualityRuleRecommendationRunRequest {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId: HashString;
+  }
+  export interface GetDataQualityRuleRecommendationRunResponse {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId?: HashString;
+    /**
+     * The data source (an Glue table) associated with this run.
+     */
+    DataSource?: DataSource;
+    /**
+     * An IAM role supplied to encrypt the results of the run.
+     */
+    Role?: RoleString;
+    /**
+     * The number of G.1X workers to be used in the run. The default is 5.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout for a run in minutes. This is the maximum time that a run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The status for this run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * The error strings that are associated with the run.
+     */
+    ErrorString?: GenericString;
+    /**
+     * The date and time when this run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * A timestamp. The last point in time when this data quality rule recommendation run was modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * The date and time when this run was completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The amount of time (in seconds) that the run consumed resources.
+     */
+    ExecutionTime?: ExecutionTime;
+    /**
+     * When a start rule recommendation run completes, it creates a recommended ruleset (a set of rules). This member has those rules in Data Quality Definition Language (DQDL) format.
+     */
+    RecommendedRuleset?: DataQualityRulesetString;
+    /**
+     * The name of the ruleset that was created by the run.
+     */
+    CreatedRulesetName?: NameString;
+  }
+  export interface GetDataQualityRulesetEvaluationRunRequest {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId: HashString;
+  }
+  export interface GetDataQualityRulesetEvaluationRunResponse {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId?: HashString;
+    /**
+     * The data source (an Glue table) associated with this evaluation run.
+     */
+    DataSource?: DataSource;
+    /**
+     * An IAM role supplied to encrypt the results of the run.
+     */
+    Role?: RoleString;
+    /**
+     * The number of G.1X workers to be used in the run. The default is 5.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout for a run in minutes. This is the maximum time that a run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * Additional run options you can specify for an evaluation run.
+     */
+    AdditionalRunOptions?: DataQualityEvaluationRunAdditionalRunOptions;
+    /**
+     * The status for this run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * The error strings that are associated with the run.
+     */
+    ErrorString?: GenericString;
+    /**
+     * The date and time when this run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * A timestamp. The last point in time when this data quality rule recommendation run was modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * The date and time when this run was completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The amount of time (in seconds) that the run consumed resources.
+     */
+    ExecutionTime?: ExecutionTime;
+    /**
+     * A list of ruleset names for the run.
+     */
+    RulesetNames?: RulesetNames;
+    /**
+     * A list of result IDs for the data quality results for the run.
+     */
+    ResultIds?: DataQualityResultIdList;
+  }
+  export interface GetDataQualityRulesetRequest {
+    /**
+     * The name of the ruleset.
+     */
+    Name: NameString;
+  }
+  export interface GetDataQualityRulesetResponse {
+    /**
+     * The name of the ruleset.
+     */
+    Name?: NameString;
+    /**
+     * A description of the ruleset.
+     */
+    Description?: DescriptionString;
+    /**
+     * A Data Quality Definition Language (DQDL) ruleset. For more information, see the Glue developer guide.
+     */
+    Ruleset?: DataQualityRulesetString;
+    /**
+     * The name and database name of the target table.
+     */
+    TargetTable?: DataQualityTargetTable;
+    /**
+     * A timestamp. The time and date that this data quality ruleset was created.
+     */
+    CreatedOn?: Timestamp;
+    /**
+     * A timestamp. The last point in time when this data quality ruleset was modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * When a ruleset was created from a recommendation run, this run ID is generated to link the two together.
+     */
+    RecommendationRunId?: HashString;
   }
   export interface GetDatabaseRequest {
     /**
@@ -6771,7 +7508,12 @@ declare namespace Glue {
      * The name of the connection to the Glue Data Catalog.
      */
     ConnectionName?: NameString;
+    /**
+     * Additional options for the table. Currently there are two keys supported:    pushDownPredicate: to filter on partitions without having to list and read all the files in your dataset.    catalogPartitionPredicate: to use server-side partition pruning using partition indexes in the Glue Data Catalog.  
+     */
+    AdditionalOptions?: GlueTableAdditionalOptions;
   }
+  export type GlueTableAdditionalOptions = {[key: string]: DescriptionString};
   export type GlueTables = GlueTable[];
   export type GlueVersionString = string;
   export interface GovernedCatalogSource {
@@ -7712,6 +8454,106 @@ declare namespace Glue {
      * A list of CustomEntityType objects representing custom patterns.
      */
     CustomEntityTypes?: CustomEntityTypes;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityResultsRequest {
+    /**
+     * The filter criteria.
+     */
+    Filter?: DataQualityResultFilterCriteria;
+    /**
+     * A paginated token to offset the results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListDataQualityResultsResponse {
+    /**
+     * A list of DataQualityResultDescription objects.
+     */
+    Results: DataQualityResultDescriptionList;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityRuleRecommendationRunsRequest {
+    /**
+     * The filter criteria.
+     */
+    Filter?: DataQualityRuleRecommendationRunFilter;
+    /**
+     * A paginated token to offset the results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListDataQualityRuleRecommendationRunsResponse {
+    /**
+     * A list of DataQualityRuleRecommendationRunDescription objects.
+     */
+    Runs?: DataQualityRuleRecommendationRunList;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityRulesetEvaluationRunsRequest {
+    /**
+     * The filter criteria.
+     */
+    Filter?: DataQualityRulesetEvaluationRunFilter;
+    /**
+     * A paginated token to offset the results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListDataQualityRulesetEvaluationRunsResponse {
+    /**
+     * A list of DataQualityRulesetEvaluationRunDescription objects representing data quality ruleset runs.
+     */
+    Runs?: DataQualityRulesetEvaluationRunList;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListDataQualityRulesetsRequest {
+    /**
+     * A paginated token to offset the results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * The filter criteria. 
+     */
+    Filter?: DataQualityRulesetFilterCriteria;
+    /**
+     * A list of key-value pair tags.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListDataQualityRulesetsResponse {
+    /**
+     * A paginated list of rulesets for the specified list of Glue tables.
+     */
+    Rulesets?: DataQualityRulesetList;
     /**
      * A pagination token, if more results are available.
      */
@@ -9096,6 +9938,7 @@ declare namespace Glue {
   export type RoleArn = string;
   export type RoleString = string;
   export type RowTag = string;
+  export type RulesetNames = NameString[];
   export type RunId = string;
   export interface RunStatementRequest {
     /**
@@ -10014,6 +10857,74 @@ declare namespace Glue {
     CrawlerName: NameString;
   }
   export interface StartCrawlerScheduleResponse {
+  }
+  export interface StartDataQualityRuleRecommendationRunRequest {
+    /**
+     * The data source (Glue table) associated with this run.
+     */
+    DataSource: DataSource;
+    /**
+     * An IAM role supplied to encrypt the results of the run.
+     */
+    Role: RoleString;
+    /**
+     * The number of G.1X workers to be used in the run. The default is 5.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout for a run in minutes. This is the maximum time that a run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * A name for the ruleset.
+     */
+    CreatedRulesetName?: NameString;
+    /**
+     * Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.
+     */
+    ClientToken?: HashString;
+  }
+  export interface StartDataQualityRuleRecommendationRunResponse {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId?: HashString;
+  }
+  export interface StartDataQualityRulesetEvaluationRunRequest {
+    /**
+     * The data source (Glue table) associated with this run.
+     */
+    DataSource: DataSource;
+    /**
+     * An IAM role supplied to encrypt the results of the run.
+     */
+    Role: RoleString;
+    /**
+     * The number of G.1X workers to be used in the run. The default is 5.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout for a run in minutes. This is the maximum time that a run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.
+     */
+    ClientToken?: HashString;
+    /**
+     * Additional run options you can specify for an evaluation run.
+     */
+    AdditionalRunOptions?: DataQualityEvaluationRunAdditionalRunOptions;
+    /**
+     * A list of ruleset names.
+     */
+    RulesetNames: RulesetNames;
+  }
+  export interface StartDataQualityRulesetEvaluationRunResponse {
+    /**
+     * The unique run identifier associated with this run.
+     */
+    RunId?: HashString;
   }
   export interface StartExportLabelsTaskRunRequest {
     /**
@@ -11126,6 +12037,38 @@ declare namespace Glue {
      * Specifies a list of supported custom datatypes.
      */
     CustomDatatypes?: CustomDatatypes;
+  }
+  export interface UpdateDataQualityRulesetRequest {
+    /**
+     * The name of the data quality ruleset.
+     */
+    Name: NameString;
+    /**
+     * The new name of the ruleset, if you are renaming it.
+     */
+    UpdatedName?: NameString;
+    /**
+     * A description of the ruleset.
+     */
+    Description?: DescriptionString;
+    /**
+     * A Data Quality Definition Language (DQDL) ruleset. For more information, see the Glue developer guide.
+     */
+    Ruleset?: DataQualityRulesetString;
+  }
+  export interface UpdateDataQualityRulesetResponse {
+    /**
+     * The name of the data quality ruleset.
+     */
+    Name?: NameString;
+    /**
+     * A description of the ruleset.
+     */
+    Description?: DescriptionString;
+    /**
+     * A Data Quality Definition Language (DQDL) ruleset. For more information, see the Glue developer guide.
+     */
+    Ruleset?: DataQualityRulesetString;
   }
   export interface UpdateDatabaseRequest {
     /**

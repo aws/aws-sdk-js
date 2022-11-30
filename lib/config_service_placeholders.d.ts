@@ -330,6 +330,8 @@ export abstract class ConfigurationServicePlaceholders {
   opensearchserverless?: AWS.OpenSearchServerless.Types.ClientConfiguration;
   securitylake?: AWS.SecurityLake.Types.ClientConfiguration;
   simspaceweaver?: AWS.SimSpaceWeaver.Types.ClientConfiguration;
+  docdbelastic?: AWS.DocDBElastic.Types.ClientConfiguration;
+  sagemakergeospatial?: AWS.SageMakerGeospatial.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -662,4 +664,6 @@ export interface ConfigurationServiceApiVersions {
   opensearchserverless?: AWS.OpenSearchServerless.Types.apiVersion;
   securitylake?: AWS.SecurityLake.Types.apiVersion;
   simspaceweaver?: AWS.SimSpaceWeaver.Types.apiVersion;
+  docdbelastic?: AWS.DocDBElastic.Types.apiVersion;
+  sagemakergeospatial?: AWS.SageMakerGeospatial.Types.apiVersion;
 }

@@ -816,9 +816,13 @@ declare namespace AccessAnalyzer {
      * The ARN of the access point that generated the finding. The ARN format depends on whether the ARN represents an access point or a multi-region access point.
      */
     accessPointArn?: String;
+    /**
+     * The account of the cross-account access point that generated the finding.
+     */
+    accessPointAccount?: String;
   }
   export type FindingSourceList = FindingSource[];
-  export type FindingSourceType = "POLICY"|"BUCKET_ACL"|"S3_ACCESS_POINT"|string;
+  export type FindingSourceType = "POLICY"|"BUCKET_ACL"|"S3_ACCESS_POINT"|"S3_ACCESS_POINT_ACCOUNT"|string;
   export type FindingStatus = "ACTIVE"|"ARCHIVED"|"RESOLVED"|string;
   export type FindingStatusUpdate = "ACTIVE"|"ARCHIVED"|string;
   export interface FindingSummary {

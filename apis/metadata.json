@@ -1241,5 +1241,13 @@
   },
   "simspaceweaver": {
     "name": "SimSpaceWeaver"
+  },
+  "docdbelastic": {
+    "prefix": "docdb-elastic",
+    "name": "DocDBElastic"
+  },
+  "sagemakergeospatial": {
+    "prefix": "sagemaker-geospatial",
+    "name": "SageMakerGeospatial"
   }
 }

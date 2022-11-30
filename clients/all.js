@@ -329,5 +329,7 @@ module.exports = {
   Omics: require('./omics'),
   OpenSearchServerless: require('./opensearchserverless'),
   SecurityLake: require('./securitylake'),
-  SimSpaceWeaver: require('./simspaceweaver')
+  SimSpaceWeaver: require('./simspaceweaver'),
+  DocDBElastic: require('./docdbelastic'),
+  SageMakerGeospatial: require('./sagemakergeospatial')
 };

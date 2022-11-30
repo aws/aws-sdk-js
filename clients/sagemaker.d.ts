@@ -205,6 +205,14 @@ declare class SageMaker extends Service {
    */
   createFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateFlowDefinitionResponse) => void): Request<SageMaker.Types.CreateFlowDefinitionResponse, AWSError>;
   /**
+   * Create a hub.
+   */
+  createHub(params: SageMaker.Types.CreateHubRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHubResponse) => void): Request<SageMaker.Types.CreateHubResponse, AWSError>;
+  /**
+   * Create a hub.
+   */
+  createHub(callback?: (err: AWSError, data: SageMaker.Types.CreateHubResponse) => void): Request<SageMaker.Types.CreateHubResponse, AWSError>;
+  /**
    * Defines the settings you will use for the human review workflow user interface. Reviewers will see a three-panel interface with an instruction area, the item to review, and an input area.
    */
   createHumanTaskUi(params: SageMaker.Types.CreateHumanTaskUiRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHumanTaskUiResponse) => void): Request<SageMaker.Types.CreateHumanTaskUiResponse, AWSError>;
@@ -237,6 +245,14 @@ declare class SageMaker extends Service {
    */
   createImageVersion(callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
   /**
+   *  Creates an inference experiment using the configurations specified in the request.   Use this API to schedule an experiment to compare model variants on a Amazon SageMaker inference endpoint. For more information about inference experiments, see Shadow tests.   Amazon SageMaker begins your experiment at the scheduled time and routes traffic to your endpoint's model variants based on your specified configuration.   While the experiment is in progress or after it has concluded, you can view metrics that compare your model variants. For more information, see View, monitor, and edit shadow tests. 
+   */
+  createInferenceExperiment(params: SageMaker.Types.CreateInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceExperimentResponse) => void): Request<SageMaker.Types.CreateInferenceExperimentResponse, AWSError>;
+  /**
+   *  Creates an inference experiment using the configurations specified in the request.   Use this API to schedule an experiment to compare model variants on a Amazon SageMaker inference endpoint. For more information about inference experiments, see Shadow tests.   Amazon SageMaker begins your experiment at the scheduled time and routes traffic to your endpoint's model variants based on your specified configuration.   While the experiment is in progress or after it has concluded, you can view metrics that compare your model variants. For more information, see View, monitor, and edit shadow tests. 
+   */
+  createInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceExperimentResponse) => void): Request<SageMaker.Types.CreateInferenceExperimentResponse, AWSError>;
+  /**
    * Starts a recommendation job. You can create either an instance recommendation or load test job.
    */
   createInferenceRecommendationsJob(params: SageMaker.Types.CreateInferenceRecommendationsJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceRecommendationsJobResponse) => void): Request<SageMaker.Types.CreateInferenceRecommendationsJobResponse, AWSError>;
@@ -268,6 +284,22 @@ declare class SageMaker extends Service {
    * Creates the definition for a model bias job.
    */
   createModelBiasJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateModelBiasJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelBiasJobDefinitionResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker Model Card. For information about how to use model cards, see Amazon SageMaker Model Card.
+   */
+  createModelCard(params: SageMaker.Types.CreateModelCardRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateModelCardResponse) => void): Request<SageMaker.Types.CreateModelCardResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker Model Card. For information about how to use model cards, see Amazon SageMaker Model Card.
+   */
+  createModelCard(callback?: (err: AWSError, data: SageMaker.Types.CreateModelCardResponse) => void): Request<SageMaker.Types.CreateModelCardResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker Model Card export job.
+   */
+  createModelCardExportJob(params: SageMaker.Types.CreateModelCardExportJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateModelCardExportJobResponse) => void): Request<SageMaker.Types.CreateModelCardExportJobResponse, AWSError>;
+  /**
+   * Creates an Amazon SageMaker Model Card export job.
+   */
+  createModelCardExportJob(callback?: (err: AWSError, data: SageMaker.Types.CreateModelCardExportJobResponse) => void): Request<SageMaker.Types.CreateModelCardExportJobResponse, AWSError>;
   /**
    * Creates the definition for a model explainability job.
    */
@@ -364,6 +396,14 @@ declare class SageMaker extends Service {
    * Creates a machine learning (ML) project that can contain one or more templates that set up an ML pipeline from training to deploying an approved model.
    */
   createProject(callback?: (err: AWSError, data: SageMaker.Types.CreateProjectOutput) => void): Request<SageMaker.Types.CreateProjectOutput, AWSError>;
+  /**
+   * Creates a space used for real time collaboration in a Domain.
+   */
+  createSpace(params: SageMaker.Types.CreateSpaceRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateSpaceResponse) => void): Request<SageMaker.Types.CreateSpaceResponse, AWSError>;
+  /**
+   * Creates a space used for real time collaboration in a Domain.
+   */
+  createSpace(callback?: (err: AWSError, data: SageMaker.Types.CreateSpaceResponse) => void): Request<SageMaker.Types.CreateSpaceResponse, AWSError>;
   /**
    * Creates a new Studio Lifecycle Configuration.
    */
@@ -573,6 +613,22 @@ declare class SageMaker extends Service {
    */
   deleteFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DeleteFlowDefinitionResponse) => void): Request<SageMaker.Types.DeleteFlowDefinitionResponse, AWSError>;
   /**
+   * Delete a hub.
+   */
+  deleteHub(params: SageMaker.Types.DeleteHubRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a hub.
+   */
+  deleteHub(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the contents of a hub.
+   */
+  deleteHubContent(params: SageMaker.Types.DeleteHubContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the contents of a hub.
+   */
+  deleteHubContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Use this operation to delete a human task user interface (worker task template).  To see a list of human task user interfaces (work task templates) in your account, use . When you delete a worker task template, it no longer appears when you call ListHumanTaskUis.
    */
   deleteHumanTaskUi(params: SageMaker.Types.DeleteHumanTaskUiRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteHumanTaskUiResponse) => void): Request<SageMaker.Types.DeleteHumanTaskUiResponse, AWSError>;
@@ -597,6 +653,14 @@ declare class SageMaker extends Service {
    */
   deleteImageVersion(callback?: (err: AWSError, data: SageMaker.Types.DeleteImageVersionResponse) => void): Request<SageMaker.Types.DeleteImageVersionResponse, AWSError>;
   /**
+   * Deletes an inference experiment.   This operation does not delete your endpoint, variants, or any underlying resources. This operation only deletes the metadata of your experiment.  
+   */
+  deleteInferenceExperiment(params: SageMaker.Types.DeleteInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteInferenceExperimentResponse) => void): Request<SageMaker.Types.DeleteInferenceExperimentResponse, AWSError>;
+  /**
+   * Deletes an inference experiment.   This operation does not delete your endpoint, variants, or any underlying resources. This operation only deletes the metadata of your experiment.  
+   */
+  deleteInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.DeleteInferenceExperimentResponse) => void): Request<SageMaker.Types.DeleteInferenceExperimentResponse, AWSError>;
+  /**
    * Deletes a model. The DeleteModel API deletes only the model entry that was created in SageMaker when you called the CreateModel API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. 
    */
   deleteModel(params: SageMaker.Types.DeleteModelInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -612,6 +676,14 @@ declare class SageMaker extends Service {
    * Deletes an Amazon SageMaker model bias job definition.
    */
   deleteModelBiasJobDefinition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon SageMaker Model Card.
+   */
+  deleteModelCard(params: SageMaker.Types.DeleteModelCardRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon SageMaker Model Card.
+   */
+  deleteModelCard(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Amazon SageMaker model explainability job definition.
    */
@@ -692,6 +764,14 @@ declare class SageMaker extends Service {
    * Delete the specified project.
    */
   deleteProject(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to delete a space.
+   */
+  deleteSpace(params: SageMaker.Types.DeleteSpaceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Used to delete a space.
+   */
+  deleteSpace(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the Studio Lifecycle Configuration. In order to delete the Lifecycle Configuration, there must be no running apps using the Lifecycle Configuration. You must also remove the Lifecycle Configuration from UserSettings in all Domains and UserProfiles.
    */
@@ -925,6 +1005,22 @@ declare class SageMaker extends Service {
    */
   describeFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeFlowDefinitionResponse) => void): Request<SageMaker.Types.DescribeFlowDefinitionResponse, AWSError>;
   /**
+   * Describe a hub.
+   */
+  describeHub(params: SageMaker.Types.DescribeHubRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHubResponse) => void): Request<SageMaker.Types.DescribeHubResponse, AWSError>;
+  /**
+   * Describe a hub.
+   */
+  describeHub(callback?: (err: AWSError, data: SageMaker.Types.DescribeHubResponse) => void): Request<SageMaker.Types.DescribeHubResponse, AWSError>;
+  /**
+   * Describe the content of a hub.
+   */
+  describeHubContent(params: SageMaker.Types.DescribeHubContentRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHubContentResponse) => void): Request<SageMaker.Types.DescribeHubContentResponse, AWSError>;
+  /**
+   * Describe the content of a hub.
+   */
+  describeHubContent(callback?: (err: AWSError, data: SageMaker.Types.DescribeHubContentResponse) => void): Request<SageMaker.Types.DescribeHubContentResponse, AWSError>;
+  /**
    * Returns information about the requested human task user interface (worker task template).
    */
   describeHumanTaskUi(params: SageMaker.Types.DescribeHumanTaskUiRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHumanTaskUiResponse) => void): Request<SageMaker.Types.DescribeHumanTaskUiResponse, AWSError>;
@@ -956,6 +1052,14 @@ declare class SageMaker extends Service {
    * Describes a version of a SageMaker image.
    */
   describeImageVersion(callback?: (err: AWSError, data: SageMaker.Types.DescribeImageVersionResponse) => void): Request<SageMaker.Types.DescribeImageVersionResponse, AWSError>;
+  /**
+   * Returns details about an inference experiment.
+   */
+  describeInferenceExperiment(params: SageMaker.Types.DescribeInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeInferenceExperimentResponse) => void): Request<SageMaker.Types.DescribeInferenceExperimentResponse, AWSError>;
+  /**
+   * Returns details about an inference experiment.
+   */
+  describeInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.DescribeInferenceExperimentResponse) => void): Request<SageMaker.Types.DescribeInferenceExperimentResponse, AWSError>;
   /**
    * Provides the results of the Inference Recommender job. One or more recommendation jobs are returned.
    */
@@ -996,6 +1100,22 @@ declare class SageMaker extends Service {
    * Returns a description of a model bias job definition.
    */
   describeModelBiasJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelBiasJobDefinitionResponse) => void): Request<SageMaker.Types.DescribeModelBiasJobDefinitionResponse, AWSError>;
+  /**
+   * Describes the content, creation time, and security configuration of an Amazon SageMaker Model Card.
+   */
+  describeModelCard(params: SageMaker.Types.DescribeModelCardRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelCardResponse) => void): Request<SageMaker.Types.DescribeModelCardResponse, AWSError>;
+  /**
+   * Describes the content, creation time, and security configuration of an Amazon SageMaker Model Card.
+   */
+  describeModelCard(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelCardResponse) => void): Request<SageMaker.Types.DescribeModelCardResponse, AWSError>;
+  /**
+   * Describes an Amazon SageMaker Model Card export job.
+   */
+  describeModelCardExportJob(params: SageMaker.Types.DescribeModelCardExportJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeModelCardExportJobResponse) => void): Request<SageMaker.Types.DescribeModelCardExportJobResponse, AWSError>;
+  /**
+   * Describes an Amazon SageMaker Model Card export job.
+   */
+  describeModelCardExportJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeModelCardExportJobResponse) => void): Request<SageMaker.Types.DescribeModelCardExportJobResponse, AWSError>;
   /**
    * Returns a description of a model explainability job definition.
    */
@@ -1092,6 +1212,14 @@ declare class SageMaker extends Service {
    * Describes the details of a project.
    */
   describeProject(callback?: (err: AWSError, data: SageMaker.Types.DescribeProjectOutput) => void): Request<SageMaker.Types.DescribeProjectOutput, AWSError>;
+  /**
+   * Describes the space.
+   */
+  describeSpace(params: SageMaker.Types.DescribeSpaceRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeSpaceResponse) => void): Request<SageMaker.Types.DescribeSpaceResponse, AWSError>;
+  /**
+   * Describes the space.
+   */
+  describeSpace(callback?: (err: AWSError, data: SageMaker.Types.DescribeSpaceResponse) => void): Request<SageMaker.Types.DescribeSpaceResponse, AWSError>;
   /**
    * Describes the Studio Lifecycle Configuration.
    */
@@ -1228,6 +1356,14 @@ declare class SageMaker extends Service {
    * An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
   getSearchSuggestions(callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
+  /**
+   * Import hub content.
+   */
+  importHubContent(params: SageMaker.Types.ImportHubContentRequest, callback?: (err: AWSError, data: SageMaker.Types.ImportHubContentResponse) => void): Request<SageMaker.Types.ImportHubContentResponse, AWSError>;
+  /**
+   * Import hub content.
+   */
+  importHubContent(callback?: (err: AWSError, data: SageMaker.Types.ImportHubContentResponse) => void): Request<SageMaker.Types.ImportHubContentResponse, AWSError>;
   /**
    * Lists the actions in your account and their properties.
    */
@@ -1405,6 +1541,30 @@ declare class SageMaker extends Service {
    */
   listFlowDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListFlowDefinitionsResponse) => void): Request<SageMaker.Types.ListFlowDefinitionsResponse, AWSError>;
   /**
+   * List hub content versions.
+   */
+  listHubContentVersions(params: SageMaker.Types.ListHubContentVersionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubContentVersionsResponse) => void): Request<SageMaker.Types.ListHubContentVersionsResponse, AWSError>;
+  /**
+   * List hub content versions.
+   */
+  listHubContentVersions(callback?: (err: AWSError, data: SageMaker.Types.ListHubContentVersionsResponse) => void): Request<SageMaker.Types.ListHubContentVersionsResponse, AWSError>;
+  /**
+   * List the contents of a hub.
+   */
+  listHubContents(params: SageMaker.Types.ListHubContentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubContentsResponse) => void): Request<SageMaker.Types.ListHubContentsResponse, AWSError>;
+  /**
+   * List the contents of a hub.
+   */
+  listHubContents(callback?: (err: AWSError, data: SageMaker.Types.ListHubContentsResponse) => void): Request<SageMaker.Types.ListHubContentsResponse, AWSError>;
+  /**
+   * List all existing hubs.
+   */
+  listHubs(params: SageMaker.Types.ListHubsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubsResponse) => void): Request<SageMaker.Types.ListHubsResponse, AWSError>;
+  /**
+   * List all existing hubs.
+   */
+  listHubs(callback?: (err: AWSError, data: SageMaker.Types.ListHubsResponse) => void): Request<SageMaker.Types.ListHubsResponse, AWSError>;
+  /**
    * Returns information about the human task user interfaces in your account.
    */
   listHumanTaskUis(params: SageMaker.Types.ListHumanTaskUisRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHumanTaskUisResponse) => void): Request<SageMaker.Types.ListHumanTaskUisResponse, AWSError>;
@@ -1436,6 +1596,14 @@ declare class SageMaker extends Service {
    * Lists the images in your account and their properties. The list can be filtered by creation time or modified time, and whether the image name contains a specified string.
    */
   listImages(callback?: (err: AWSError, data: SageMaker.Types.ListImagesResponse) => void): Request<SageMaker.Types.ListImagesResponse, AWSError>;
+  /**
+   * Returns the list of all inference experiments.
+   */
+  listInferenceExperiments(params: SageMaker.Types.ListInferenceExperimentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListInferenceExperimentsResponse) => void): Request<SageMaker.Types.ListInferenceExperimentsResponse, AWSError>;
+  /**
+   * Returns the list of all inference experiments.
+   */
+  listInferenceExperiments(callback?: (err: AWSError, data: SageMaker.Types.ListInferenceExperimentsResponse) => void): Request<SageMaker.Types.ListInferenceExperimentsResponse, AWSError>;
   /**
    * Returns a list of the subtasks for an Inference Recommender job. The supported subtasks are benchmarks, which evaluate the performance of your model on different instance types.
    */
@@ -1485,6 +1653,30 @@ declare class SageMaker extends Service {
    */
   listModelBiasJobDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListModelBiasJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelBiasJobDefinitionsResponse, AWSError>;
   /**
+   * List the export jobs for the Amazon SageMaker Model Card.
+   */
+  listModelCardExportJobs(params: SageMaker.Types.ListModelCardExportJobsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelCardExportJobsResponse) => void): Request<SageMaker.Types.ListModelCardExportJobsResponse, AWSError>;
+  /**
+   * List the export jobs for the Amazon SageMaker Model Card.
+   */
+  listModelCardExportJobs(callback?: (err: AWSError, data: SageMaker.Types.ListModelCardExportJobsResponse) => void): Request<SageMaker.Types.ListModelCardExportJobsResponse, AWSError>;
+  /**
+   * List existing versions of an Amazon SageMaker Model Card.
+   */
+  listModelCardVersions(params: SageMaker.Types.ListModelCardVersionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelCardVersionsResponse) => void): Request<SageMaker.Types.ListModelCardVersionsResponse, AWSError>;
+  /**
+   * List existing versions of an Amazon SageMaker Model Card.
+   */
+  listModelCardVersions(callback?: (err: AWSError, data: SageMaker.Types.ListModelCardVersionsResponse) => void): Request<SageMaker.Types.ListModelCardVersionsResponse, AWSError>;
+  /**
+   * List existing model cards.
+   */
+  listModelCards(params: SageMaker.Types.ListModelCardsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelCardsResponse) => void): Request<SageMaker.Types.ListModelCardsResponse, AWSError>;
+  /**
+   * List existing model cards.
+   */
+  listModelCards(callback?: (err: AWSError, data: SageMaker.Types.ListModelCardsResponse) => void): Request<SageMaker.Types.ListModelCardsResponse, AWSError>;
+  /**
    * Lists model explainability job definitions that satisfy various filters.
    */
   listModelExplainabilityJobDefinitions(params: SageMaker.Types.ListModelExplainabilityJobDefinitionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse) => void): Request<SageMaker.Types.ListModelExplainabilityJobDefinitionsResponse, AWSError>;
@@ -1532,6 +1724,22 @@ declare class SageMaker extends Service {
    * Lists models created with the CreateModel API.
    */
   listModels(callback?: (err: AWSError, data: SageMaker.Types.ListModelsOutput) => void): Request<SageMaker.Types.ListModelsOutput, AWSError>;
+  /**
+   * Gets a list of past alerts in a model monitoring schedule.
+   */
+  listMonitoringAlertHistory(params: SageMaker.Types.ListMonitoringAlertHistoryRequest, callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringAlertHistoryResponse) => void): Request<SageMaker.Types.ListMonitoringAlertHistoryResponse, AWSError>;
+  /**
+   * Gets a list of past alerts in a model monitoring schedule.
+   */
+  listMonitoringAlertHistory(callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringAlertHistoryResponse) => void): Request<SageMaker.Types.ListMonitoringAlertHistoryResponse, AWSError>;
+  /**
+   * Gets the alerts for a single monitoring schedule.
+   */
+  listMonitoringAlerts(params: SageMaker.Types.ListMonitoringAlertsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringAlertsResponse) => void): Request<SageMaker.Types.ListMonitoringAlertsResponse, AWSError>;
+  /**
+   * Gets the alerts for a single monitoring schedule.
+   */
+  listMonitoringAlerts(callback?: (err: AWSError, data: SageMaker.Types.ListMonitoringAlertsResponse) => void): Request<SageMaker.Types.ListMonitoringAlertsResponse, AWSError>;
   /**
    * Returns list of all monitoring job executions.
    */
@@ -1612,6 +1820,14 @@ declare class SageMaker extends Service {
    * Gets a list of the projects in an Amazon Web Services account.
    */
   listProjects(callback?: (err: AWSError, data: SageMaker.Types.ListProjectsOutput) => void): Request<SageMaker.Types.ListProjectsOutput, AWSError>;
+  /**
+   * Lists spaces.
+   */
+  listSpaces(params: SageMaker.Types.ListSpacesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListSpacesResponse) => void): Request<SageMaker.Types.ListSpacesResponse, AWSError>;
+  /**
+   * Lists spaces.
+   */
+  listSpaces(callback?: (err: AWSError, data: SageMaker.Types.ListSpacesResponse) => void): Request<SageMaker.Types.ListSpacesResponse, AWSError>;
   /**
    * Lists devices allocated to the stage, containing detailed device information and deployment status.
    */
@@ -1781,6 +1997,14 @@ declare class SageMaker extends Service {
    */
   startEdgeDeploymentStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Starts an inference experiment.
+   */
+  startInferenceExperiment(params: SageMaker.Types.StartInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.StartInferenceExperimentResponse) => void): Request<SageMaker.Types.StartInferenceExperimentResponse, AWSError>;
+  /**
+   * Starts an inference experiment.
+   */
+  startInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.StartInferenceExperimentResponse) => void): Request<SageMaker.Types.StartInferenceExperimentResponse, AWSError>;
+  /**
    * Starts a previously stopped monitoring schedule.  By default, when you successfully create a new schedule, the status of a monitoring schedule is scheduled. 
    */
   startMonitoringSchedule(params: SageMaker.Types.StartMonitoringScheduleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1844,6 +2068,14 @@ declare class SageMaker extends Service {
    * Stops a running hyperparameter tuning job and all running training jobs that the tuning job launched. All model artifacts output from the training jobs are stored in Amazon Simple Storage Service (Amazon S3). All data that the training jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After the tuning job moves to the Stopped state, it releases all reserved resources for the tuning job.
    */
   stopHyperParameterTuningJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops an inference experiment.
+   */
+  stopInferenceExperiment(params: SageMaker.Types.StopInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.StopInferenceExperimentResponse) => void): Request<SageMaker.Types.StopInferenceExperimentResponse, AWSError>;
+  /**
+   * Stops an inference experiment.
+   */
+  stopInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.StopInferenceExperimentResponse) => void): Request<SageMaker.Types.StopInferenceExperimentResponse, AWSError>;
   /**
    * Stops an Inference Recommender job.
    */
@@ -2013,6 +2245,14 @@ declare class SageMaker extends Service {
    */
   updateFeatureMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Update a hub.
+   */
+  updateHub(params: SageMaker.Types.UpdateHubRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateHubResponse) => void): Request<SageMaker.Types.UpdateHubResponse, AWSError>;
+  /**
+   * Update a hub.
+   */
+  updateHub(callback?: (err: AWSError, data: SageMaker.Types.UpdateHubResponse) => void): Request<SageMaker.Types.UpdateHubResponse, AWSError>;
+  /**
    * Updates the properties of a SageMaker image. To change the image's tags, use the AddTags and DeleteTags APIs.
    */
   updateImage(params: SageMaker.Types.UpdateImageRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateImageResponse) => void): Request<SageMaker.Types.UpdateImageResponse, AWSError>;
@@ -2021,6 +2261,22 @@ declare class SageMaker extends Service {
    */
   updateImage(callback?: (err: AWSError, data: SageMaker.Types.UpdateImageResponse) => void): Request<SageMaker.Types.UpdateImageResponse, AWSError>;
   /**
+   *  Updates an inference experiment that you created. The status of the inference experiment has to be either Created, Running. For more information on the status of an inference experiment, see DescribeInferenceExperimentResponse$Status. 
+   */
+  updateInferenceExperiment(params: SageMaker.Types.UpdateInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateInferenceExperimentResponse) => void): Request<SageMaker.Types.UpdateInferenceExperimentResponse, AWSError>;
+  /**
+   *  Updates an inference experiment that you created. The status of the inference experiment has to be either Created, Running. For more information on the status of an inference experiment, see DescribeInferenceExperimentResponse$Status. 
+   */
+  updateInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateInferenceExperimentResponse) => void): Request<SageMaker.Types.UpdateInferenceExperimentResponse, AWSError>;
+  /**
+   * Update an Amazon SageMaker Model Card.  You cannot update both model card content and model card status in a single call. 
+   */
+  updateModelCard(params: SageMaker.Types.UpdateModelCardRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateModelCardResponse) => void): Request<SageMaker.Types.UpdateModelCardResponse, AWSError>;
+  /**
+   * Update an Amazon SageMaker Model Card.  You cannot update both model card content and model card status in a single call. 
+   */
+  updateModelCard(callback?: (err: AWSError, data: SageMaker.Types.UpdateModelCardResponse) => void): Request<SageMaker.Types.UpdateModelCardResponse, AWSError>;
+  /**
    * Updates a versioned model.
    */
   updateModelPackage(params: SageMaker.Types.UpdateModelPackageInput, callback?: (err: AWSError, data: SageMaker.Types.UpdateModelPackageOutput) => void): Request<SageMaker.Types.UpdateModelPackageOutput, AWSError>;
@@ -2028,6 +2284,14 @@ declare class SageMaker extends Service {
    * Updates a versioned model.
    */
   updateModelPackage(callback?: (err: AWSError, data: SageMaker.Types.UpdateModelPackageOutput) => void): Request<SageMaker.Types.UpdateModelPackageOutput, AWSError>;
+  /**
+   * Update the parameters of a model monitor alert.
+   */
+  updateMonitoringAlert(params: SageMaker.Types.UpdateMonitoringAlertRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateMonitoringAlertResponse) => void): Request<SageMaker.Types.UpdateMonitoringAlertResponse, AWSError>;
+  /**
+   * Update the parameters of a model monitor alert.
+   */
+  updateMonitoringAlert(callback?: (err: AWSError, data: SageMaker.Types.UpdateMonitoringAlertResponse) => void): Request<SageMaker.Types.UpdateMonitoringAlertResponse, AWSError>;
   /**
    * Updates a previously created schedule.
    */
@@ -2076,6 +2340,14 @@ declare class SageMaker extends Service {
    * Updates a machine learning (ML) project that is created from a template that sets up an ML pipeline from training to deploying an approved model.  You must not update a project that is in use. If you update the ServiceCatalogProvisioningUpdateDetails of a project that is active or being created, or updated, you may lose resources already created by the project. 
    */
   updateProject(callback?: (err: AWSError, data: SageMaker.Types.UpdateProjectOutput) => void): Request<SageMaker.Types.UpdateProjectOutput, AWSError>;
+  /**
+   * Updates the settings of a space.
+   */
+  updateSpace(params: SageMaker.Types.UpdateSpaceRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateSpaceResponse) => void): Request<SageMaker.Types.UpdateSpaceResponse, AWSError>;
+  /**
+   * Updates the settings of a space.
+   */
+  updateSpace(callback?: (err: AWSError, data: SageMaker.Types.UpdateSpaceResponse) => void): Request<SageMaker.Types.UpdateSpaceResponse, AWSError>;
   /**
    * Update a model training job to request a new Debugger profiling configuration or to change warm pool retention length.
    */
@@ -2506,6 +2778,10 @@ declare namespace SageMaker {
      * The creation time.
      */
     CreationTime?: CreationTime;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
   }
   export type AppImageConfigArn = string;
   export interface AppImageConfigDetails {
@@ -2622,7 +2898,7 @@ declare namespace SageMaker {
   }
   export interface AssociateTrialComponentResponse {
     /**
-     * The ARN of the trial component.
+     * The Amazon Resource Name (ARN) of the trial component.
      */
     TrialComponentArn?: TrialComponentArn;
     /**
@@ -2907,6 +3183,12 @@ declare namespace SageMaker {
   export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
   export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|string;
   export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
+  export interface AutoMLJobStepMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the AutoML job.
+     */
+    Arn?: AutoMLJobArn;
+  }
   export type AutoMLJobSummaries = AutoMLJobSummary[];
   export interface AutoMLJobSummary {
     /**
@@ -2953,7 +3235,7 @@ declare namespace SageMaker {
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
     /**
-     * The Amazon Web Services KMS encryption key ID.
+     * The Key Management Service (KMS) encryption key ID.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -3507,6 +3789,13 @@ declare namespace SageMaker {
   export type ClientId = string;
   export type ClientSecret = string;
   export type ClientToken = string;
+  export type CodeRepositories = CodeRepository[];
+  export interface CodeRepository {
+    /**
+     * The URL of the Git repository.
+     */
+    RepositoryUrl: RepositoryUrl;
+  }
   export type CodeRepositoryArn = string;
   export type CodeRepositoryContains = string;
   export type CodeRepositoryNameContains = string;
@@ -3859,7 +4148,7 @@ declare namespace SageMaker {
     /**
      * The user profile name.
      */
-    UserProfileName: UserProfileName;
+    UserProfileName?: UserProfileName;
     /**
      * The type of app.
      */
@@ -3876,6 +4165,10 @@ declare namespace SageMaker {
      * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.  The value of InstanceType passed as part of the ResourceSpec in the CreateApp call overrides the value passed as part of the ResourceSpec configured for the user profile or the domain. If InstanceType is not specified in any of those three ResourceSpec values for a KernelGateway app, the CreateApp call fails with a request validation error. 
      */
     ResourceSpec?: ResourceSpec;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
   }
   export interface CreateAppResponse {
     /**
@@ -4162,6 +4455,10 @@ declare namespace SageMaker {
      * A collection of Domain settings.
      */
     DomainSettings?: DomainSettings;
+    /**
+     * The default settings used to create a space.
+     */
+    DefaultSpaceSettings?: DefaultSpaceSettings;
   }
   export interface CreateDomainResponse {
     /**
@@ -4271,6 +4568,10 @@ declare namespace SageMaker {
      * A member of CreateEndpointConfig that enables explainers.
      */
     ExplainerConfig?: ExplainerConfig;
+    /**
+     *  Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     */
+    ShadowProductionVariants?: ProductionVariantList;
   }
   export interface CreateEndpointConfigOutput {
     /**
@@ -4403,6 +4704,38 @@ declare namespace SageMaker {
      */
     FlowDefinitionArn: FlowDefinitionArn;
   }
+  export interface CreateHubRequest {
+    /**
+     * The name of the hub to create.
+     */
+    HubName: HubName;
+    /**
+     * A description of the hub.
+     */
+    HubDescription: HubDescription;
+    /**
+     * The display name of the hub.
+     */
+    HubDisplayName?: HubDisplayName;
+    /**
+     * The searchable keywords for the hub.
+     */
+    HubSearchKeywords?: HubSearchKeywordList;
+    /**
+     * The Amazon S3 storage configuration for the hub.
+     */
+    S3StorageConfig?: HubS3StorageConfig;
+    /**
+     * Any tags to associate with the hub.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateHubResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the hub.
+     */
+    HubArn: HubArn;
+  }
   export interface CreateHumanTaskUiRequest {
     /**
      * The name of the user interface you are creating.
@@ -4499,6 +4832,58 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the image version.
      */
     ImageVersionArn?: ImageVersionArn;
+  }
+  export interface CreateInferenceExperimentRequest {
+    /**
+     * The name for the inference experiment.
+     */
+    Name: InferenceExperimentName;
+    /**
+     *  The type of the inference experiment that you want to run. The following types of experiments are possible:     ShadowMode: You can use this type to validate a shadow variant. For more information, see Shadow tests.   
+     */
+    Type: InferenceExperimentType;
+    /**
+     *  The duration for which you want the inference experiment to run. If you don't specify this field, the experiment automatically concludes after 7 days. 
+     */
+    Schedule?: InferenceExperimentSchedule;
+    /**
+     * A description for the inference experiment.
+     */
+    Description?: InferenceExperimentDescription;
+    /**
+     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images. 
+     */
+    RoleArn: RoleArn;
+    /**
+     *  The name of the Amazon SageMaker endpoint on which you want to run the inference experiment. 
+     */
+    EndpointName: EndpointName;
+    /**
+     *  Array of ModelVariantConfigSummary objects. There is one for each variant in the inference experiment. Each ModelVariantConfigSummary object in the array describes the infrastructure configuration for the corresponding variant. 
+     */
+    ModelVariants: ModelVariantConfigList;
+    /**
+     *  The storage configuration for the inference experiment. This is an optional parameter that you can use for data capture. For more information, see Capture data. 
+     */
+    DataStorageConfig?: InferenceExperimentDataStorageConfig;
+    /**
+     *  Shows which variant is the production variant and which variant is the shadow variant. For the shadow variant, also shows the sampling percentage. 
+     */
+    ShadowModeConfig: ShadowModeConfig;
+    /**
+     *  The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKey can be any of the following formats:    KMS key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS key  "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    KMS key Alias  "alias/ExampleAlias"    Amazon Resource Name (ARN) of a KMS key Alias  "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"     If you use a KMS key ID or an alias of your KMS key, the Amazon SageMaker execution role must include permissions to call kms:Encrypt. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side encryption with KMS managed keys for OutputDataConfig. If you use a bucket policy with an s3:PutObject permission that only allows objects with server-side encryption, set the condition key of s3:x-amz-server-side-encryption to "aws:kms". For more information, see KMS managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.   The KMS key policy must grant permission to the IAM role that you specify in your CreateEndpoint and UpdateEndpoint requests. For more information, see Using Key Policies in Amazon Web Services KMS in the Amazon Web Services Key Management Service Developer Guide. 
+     */
+    KmsKey?: KmsKeyId;
+    /**
+     *  Array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging your Amazon Web Services Resources. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateInferenceExperimentResponse {
+    /**
+     * The ARN for your inference experiment.
+     */
+    InferenceExperimentArn: InferenceExperimentArn;
   }
   export interface CreateInferenceRecommendationsJobRequest {
     /**
@@ -4626,6 +5011,58 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the model bias job.
      */
     JobDefinitionArn: MonitoringJobDefinitionArn;
+  }
+  export interface CreateModelCardExportJobRequest {
+    /**
+     * The name of the model card to export.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The version of the model card to export. If a version is not provided, then the latest version of the model card is exported.
+     */
+    ModelCardVersion?: Integer;
+    /**
+     * The name of the model card export job.
+     */
+    ModelCardExportJobName: EntityName;
+    /**
+     * The model card output configuration that specifies the Amazon S3 path for exporting.
+     */
+    OutputConfig: ModelCardExportOutputConfig;
+  }
+  export interface CreateModelCardExportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model card export job.
+     */
+    ModelCardExportJobArn: ModelCardExportJobArn;
+  }
+  export interface CreateModelCardRequest {
+    /**
+     * The unique name of the model card.
+     */
+    ModelCardName: EntityName;
+    /**
+     * An optional Key Management Service key to encrypt, decrypt, and re-encrypt model card content for regulated workloads with highly sensitive data.
+     */
+    SecurityConfig?: ModelCardSecurityConfig;
+    /**
+     * The content of the model card. Content must be in model card JSON schema and provided as a string.
+     */
+    Content: ModelCardContent;
+    /**
+     * The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates should be made to the model card, but it can still be exported.  
+     */
+    ModelCardStatus: ModelCardStatus;
+    /**
+     * Key-value pairs used to manage metadata for model cards.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateModelCardResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the successfully created model card.
+     */
+    ModelCardArn: ModelCardArn;
   }
   export interface CreateModelExplainabilityJobDefinitionRequest {
     /**
@@ -5015,6 +5452,10 @@ declare namespace SageMaker {
      * The number of seconds until the pre-signed URL expires. This value defaults to 300.
      */
     ExpiresInSeconds?: ExpiresInSeconds;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
   }
   export interface CreatePresignedDomainUrlResponse {
     /**
@@ -5115,6 +5556,30 @@ declare namespace SageMaker {
      */
     ProjectId: ProjectId;
   }
+  export interface CreateSpaceRequest {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the space.
+     */
+    SpaceName: SpaceName;
+    /**
+     * Tags to associated with the space. Each tag consists of a key and an optional value. Tag keys must be unique for each resource. Tags are searchable using the Search API.
+     */
+    Tags?: TagList;
+    /**
+     * A collection of space settings.
+     */
+    SpaceSettings?: SpaceSettings;
+  }
+  export interface CreateSpaceResponse {
+    /**
+     * The space's Amazon Resource Name (ARN).
+     */
+    SpaceArn?: SpaceArn;
+  }
   export interface CreateStudioLifecycleConfigRequest {
     /**
      * The name of the Studio Lifecycle Configuration to create.
@@ -5198,14 +5663,14 @@ declare namespace SageMaker {
     CheckpointConfig?: CheckpointConfig;
     DebugHookConfig?: DebugHookConfig;
     /**
-     * Configuration information for Debugger rules for debugging output tensors.
+     * Configuration information for Amazon SageMaker Debugger rules for debugging output tensors.
      */
     DebugRuleConfigurations?: DebugRuleConfigurations;
     TensorBoardOutputConfig?: TensorBoardOutputConfig;
     ExperimentConfig?: ExperimentConfig;
     ProfilerConfig?: ProfilerConfig;
     /**
-     * Configuration information for Debugger rules for profiling system and framework metrics.
+     * Configuration information for Amazon SageMaker Debugger rules for profiling system and framework metrics.
      */
     ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
     /**
@@ -5626,11 +6091,11 @@ declare namespace SageMaker {
      */
     S3OutputPath: S3Uri;
     /**
-     * Configuration information for the Debugger hook parameters.
+     * Configuration information for the Amazon SageMaker Debugger hook parameters.
      */
     HookParameters?: HookParameters;
     /**
-     * Configuration information for Debugger tensor collections. To learn more about how to configure the CollectionConfiguration parameter, see Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job. 
+     * Configuration information for Amazon SageMaker Debugger tensor collections. To learn more about how to configure the CollectionConfiguration parameter, see Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job. 
      */
     CollectionConfigurations?: CollectionConfigurations;
   }
@@ -5652,7 +6117,7 @@ declare namespace SageMaker {
      */
     RuleEvaluatorImage: AlgorithmImage;
     /**
-     * The instance type to deploy a Debugger custom rule for debugging a training job.
+     * The instance type to deploy a custom rule for debugging a training job.
      */
     InstanceType?: ProcessingInstanceType;
     /**
@@ -5689,6 +6154,18 @@ declare namespace SageMaker {
   }
   export type DebugRuleEvaluationStatuses = DebugRuleEvaluationStatus[];
   export type DefaultGid = number;
+  export interface DefaultSpaceSettings {
+    /**
+     * The execution role for the space.
+     */
+    ExecutionRole?: RoleArn;
+    /**
+     * The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
+     */
+    SecurityGroups?: SecurityGroupIds;
+    JupyterServerAppSettings?: JupyterServerAppSettings;
+    KernelGatewayAppSettings?: KernelGatewayAppSettings;
+  }
   export type DefaultUid = number;
   export interface DeleteActionRequest {
     /**
@@ -5722,7 +6199,7 @@ declare namespace SageMaker {
     /**
      * The user profile name.
      */
-    UserProfileName: UserProfileName;
+    UserProfileName?: UserProfileName;
     /**
      * The type of app.
      */
@@ -5731,6 +6208,10 @@ declare namespace SageMaker {
      * The name of the app.
      */
     AppName: AppName;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
   }
   export interface DeleteArtifactRequest {
     /**
@@ -5862,6 +6343,30 @@ declare namespace SageMaker {
   }
   export interface DeleteFlowDefinitionResponse {
   }
+  export interface DeleteHubContentRequest {
+    /**
+     * The name of the hub that you want to delete content in.
+     */
+    HubName: HubName;
+    /**
+     * The type of content that you want to delete from a hub.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The name of the content that you want to delete from a hub.
+     */
+    HubContentName: HubContentName;
+    /**
+     * The version of the content that you want to delete from a hub.
+     */
+    HubContentVersion: HubContentVersion;
+  }
+  export interface DeleteHubRequest {
+    /**
+     * The name of the hub to delete.
+     */
+    HubName: HubName;
+  }
   export interface DeleteHumanTaskUiRequest {
     /**
      * The name of the human task user interface (work task template) you want to delete.
@@ -5890,11 +6395,29 @@ declare namespace SageMaker {
   }
   export interface DeleteImageVersionResponse {
   }
+  export interface DeleteInferenceExperimentRequest {
+    /**
+     * The name of the inference experiment you want to delete.
+     */
+    Name: InferenceExperimentName;
+  }
+  export interface DeleteInferenceExperimentResponse {
+    /**
+     * The ARN of the deleted inference experiment.
+     */
+    InferenceExperimentArn: InferenceExperimentArn;
+  }
   export interface DeleteModelBiasJobDefinitionRequest {
     /**
      * The name of the model bias job definition to delete.
      */
     JobDefinitionName: MonitoringJobDefinitionName;
+  }
+  export interface DeleteModelCardRequest {
+    /**
+     * The name of the model card to delete.
+     */
+    ModelCardName: EntityName;
   }
   export interface DeleteModelExplainabilityJobDefinitionRequest {
     /**
@@ -5972,6 +6495,16 @@ declare namespace SageMaker {
      */
     ProjectName: ProjectEntityName;
   }
+  export interface DeleteSpaceRequest {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the space.
+     */
+    SpaceName: SpaceName;
+  }
   export interface DeleteStudioLifecycleConfigRequest {
     /**
      * The name of the Studio Lifecycle Configuration to delete.
@@ -6044,6 +6577,8 @@ declare namespace SageMaker {
      */
     Success: Success;
   }
+  export type DependencyCopyPath = string;
+  export type DependencyOriginPath = string;
   export interface DeployedImage {
     /**
      * The image path you specified when you created the model.
@@ -6253,7 +6788,7 @@ declare namespace SageMaker {
     /**
      * The user profile name.
      */
-    UserProfileName: UserProfileName;
+    UserProfileName?: UserProfileName;
     /**
      * The type of app.
      */
@@ -6262,6 +6797,10 @@ declare namespace SageMaker {
      * The name of the app.
      */
     AppName: AppName;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
   }
   export interface DescribeAppResponse {
     /**
@@ -6308,6 +6847,10 @@ declare namespace SageMaker {
      * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     ResourceSpec?: ResourceSpec;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
   }
   export interface DescribeArtifactRequest {
     /**
@@ -6376,7 +6919,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
      */
     RoleArn: RoleArn;
     /**
@@ -6824,6 +7367,10 @@ declare namespace SageMaker {
      * The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
      */
     SecurityGroupIdForDomainBoundary?: SecurityGroupId;
+    /**
+     * The default settings used to create a space.
+     */
+    DefaultSpaceSettings?: DefaultSpaceSettings;
   }
   export interface DescribeEdgeDeploymentPlanRequest {
     /**
@@ -6989,6 +7536,10 @@ declare namespace SageMaker {
      * The configuration parameters for an explainer.
      */
     ExplainerConfig?: ExplainerConfig;
+    /**
+     *  Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     */
+    ShadowProductionVariants?: ProductionVariantList;
   }
   export interface DescribeEndpointInput {
     /**
@@ -7046,6 +7597,10 @@ declare namespace SageMaker {
      * The configuration parameters for an explainer.
      */
     ExplainerConfig?: ExplainerConfig;
+    /**
+     *  Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     */
+    ShadowProductionVariants?: ProductionVariantSummaryList;
   }
   export interface DescribeExperimentRequest {
     /**
@@ -7067,7 +7622,7 @@ declare namespace SageMaker {
      */
     DisplayName?: ExperimentEntityName;
     /**
-     * The ARN of the source and, optionally, the type.
+     * The Amazon Resource Name (ARN) of the source and, optionally, the type.
      */
     Source?: ExperimentSource;
     /**
@@ -7263,6 +7818,138 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
   }
+  export interface DescribeHubContentRequest {
+    /**
+     * The name of the hub that contains the content to describe.
+     */
+    HubName: HubName;
+    /**
+     * The type of content in the hub.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The name of the content to describe.
+     */
+    HubContentName: HubContentName;
+    /**
+     * The version of the content to describe.
+     */
+    HubContentVersion?: HubContentVersion;
+  }
+  export interface DescribeHubContentResponse {
+    /**
+     * The name of the hub content.
+     */
+    HubContentName: HubContentName;
+    /**
+     * The Amazon Resource Name (ARN) of the hub content.
+     */
+    HubContentArn: HubContentArn;
+    /**
+     * The version of the hub content.
+     */
+    HubContentVersion: HubContentVersion;
+    /**
+     * The type of hub content.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The document schema version for the hub content.
+     */
+    DocumentSchemaVersion: DocumentSchemaVersion;
+    /**
+     * The name of the hub that contains the content.
+     */
+    HubName: HubName;
+    /**
+     * The Amazon Resource Name (ARN) of the hub that contains the content. 
+     */
+    HubArn: HubArn;
+    /**
+     * The display name of the hub content.
+     */
+    HubContentDisplayName?: HubContentDisplayName;
+    /**
+     * A description of the hub content.
+     */
+    HubContentDescription?: HubContentDescription;
+    /**
+     * Markdown files associated with the hub content to import.
+     */
+    HubContentMarkdown?: HubContentMarkdown;
+    /**
+     * The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.
+     */
+    HubContentDocument: HubContentDocument;
+    /**
+     * The searchable keywords for the hub content.
+     */
+    HubContentSearchKeywords?: HubContentSearchKeywordList;
+    /**
+     * The location of any dependencies that the hub content has, such as scripts, model artifacts, datasets, or notebooks.
+     */
+    HubContentDependencies?: HubContentDependencyList;
+    /**
+     * The status of the hub content.
+     */
+    HubContentStatus: HubContentStatus;
+    /**
+     * The failure reason if importing hub content failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The date and time that hub content was created.
+     */
+    CreationTime: Timestamp;
+  }
+  export interface DescribeHubRequest {
+    /**
+     * The name of the hub to describe.
+     */
+    HubName: HubName;
+  }
+  export interface DescribeHubResponse {
+    /**
+     * The name of the hub.
+     */
+    HubName: HubName;
+    /**
+     * The Amazon Resource Name (ARN) of the hub.
+     */
+    HubArn: HubArn;
+    /**
+     * The display name of the hub.
+     */
+    HubDisplayName?: HubDisplayName;
+    /**
+     * A description of the hub.
+     */
+    HubDescription?: HubDescription;
+    /**
+     * The searchable keywords for the hub.
+     */
+    HubSearchKeywords?: HubSearchKeywordList;
+    /**
+     * The Amazon S3 storage configuration for the hub.
+     */
+    S3StorageConfig?: HubS3StorageConfig;
+    /**
+     * The status of the hub.
+     */
+    HubStatus: HubStatus;
+    /**
+     * The failure reason if importing hub content failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The date and time that the hub was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The date and time that the hub was last modified.
+     */
+    LastModifiedTime: Timestamp;
+  }
   export interface DescribeHumanTaskUiRequest {
     /**
      * The name of the human task user interface (worker task template) you want information about.
@@ -7447,6 +8134,78 @@ declare namespace SageMaker {
      * The version number.
      */
     Version?: ImageVersionNumber;
+  }
+  export interface DescribeInferenceExperimentRequest {
+    /**
+     * The name of the inference experiment to describe.
+     */
+    Name: InferenceExperimentName;
+  }
+  export interface DescribeInferenceExperimentResponse {
+    /**
+     * The ARN of the inference experiment being described.
+     */
+    Arn: InferenceExperimentArn;
+    /**
+     * The name of the inference experiment.
+     */
+    Name: InferenceExperimentName;
+    /**
+     * The type of the inference experiment.
+     */
+    Type: InferenceExperimentType;
+    /**
+     * The duration for which the inference experiment ran or will run.
+     */
+    Schedule?: InferenceExperimentSchedule;
+    /**
+     *  The status of the inference experiment. The following are the possible statuses for an inference experiment:     Creating - Amazon SageMaker is creating your experiment.     Created - Amazon SageMaker has finished creating your experiment and it will begin at the scheduled time.     Updating - When you make changes to your experiment, your experiment shows as updating.     Starting - Amazon SageMaker is beginning your experiment.     Running - Your experiment is in progress.     Stopping - Amazon SageMaker is stopping your experiment.     Completed - Your experiment has completed.     Cancelled - When you conclude your experiment early, it shows as canceled.   
+     */
+    Status: InferenceExperimentStatus;
+    /**
+     * The error message for the inference experiment status result.
+     */
+    StatusReason?: InferenceExperimentStatusReason;
+    /**
+     * The description of the inference experiment.
+     */
+    Description?: InferenceExperimentDescription;
+    /**
+     * The timestamp at which you created the inference experiment.
+     */
+    CreationTime?: Timestamp;
+    /**
+     *  The timestamp at which the inference experiment was completed or will complete. 
+     */
+    CompletionTime?: Timestamp;
+    /**
+     * The timestamp at which you last modified the inference experiment.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images. 
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The metadata of the endpoint on which the inference experiment ran.
+     */
+    EndpointMetadata: EndpointMetadata;
+    /**
+     *  Array of ModelVariantConfigSummary objects. There is one for each variant in the inference experiment. Each ModelVariantConfigSummary object in the array describes the infrastructure configuration for deploying the corresponding variant. 
+     */
+    ModelVariants: ModelVariantConfigSummaryList;
+    /**
+     * The Amazon S3 storage configuration for the inference experiment.
+     */
+    DataStorageConfig?: InferenceExperimentDataStorageConfig;
+    /**
+     *  Shows which variant is a production variant and which variant is a shadow variant. For shadow variants, also shows the sampling percentage. 
+     */
+    ShadowModeConfig?: ShadowModeConfig;
+    /**
+     *  The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. For more information, see CreateInferenceExperimentRequest$KmsKey. 
+     */
+    KmsKey?: KmsKeyId;
   }
   export interface DescribeInferenceRecommendationsJobRequest {
     /**
@@ -7668,6 +8427,104 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
+  }
+  export interface DescribeModelCardExportJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model card export job to describe.
+     */
+    ModelCardExportJobArn: ModelCardExportJobArn;
+  }
+  export interface DescribeModelCardExportJobResponse {
+    /**
+     * The name of the model card export job to describe.
+     */
+    ModelCardExportJobName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model card export job.
+     */
+    ModelCardExportJobArn: ModelCardExportJobArn;
+    /**
+     * The completion status of the model card export job.    InProgress: The model card export job is in progress.    Completed: The model card export job is complete.    Failed: The model card export job failed. To see the reason for the failure, see the FailureReason field in the response to a DescribeModelCardExportJob call.  
+     */
+    Status: ModelCardExportJobStatus;
+    /**
+     * The name of the model card that the model export job exports.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The version of the model card that the model export job exports.
+     */
+    ModelCardVersion: Integer;
+    /**
+     * The export output details for the model card.
+     */
+    OutputConfig: ModelCardExportOutputConfig;
+    /**
+     * The date and time that the model export job was created.
+     */
+    CreatedAt: Timestamp;
+    /**
+     * The date and time that the model export job was last modified.
+     */
+    LastModifiedAt: Timestamp;
+    /**
+     * The failure reason if the model export job fails.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The exported model card artifacts.
+     */
+    ExportArtifacts?: ModelCardExportArtifacts;
+  }
+  export interface DescribeModelCardRequest {
+    /**
+     * The name of the model card to describe.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The version of the model card to describe. If a version is not provided, then the latest version of the model card is described.
+     */
+    ModelCardVersion?: Integer;
+  }
+  export interface DescribeModelCardResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the model card.
+     */
+    ModelCardArn: ModelCardArn;
+    /**
+     * The name of the model card.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The version of the model card.
+     */
+    ModelCardVersion: Integer;
+    /**
+     * The content of the model card.
+     */
+    Content: ModelCardContent;
+    /**
+     * The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates should be made to the model card, but it can still be exported.  
+     */
+    ModelCardStatus: ModelCardStatus;
+    /**
+     * The security configuration used to protect model card content.
+     */
+    SecurityConfig?: ModelCardSecurityConfig;
+    /**
+     * The date and time the model card was created.
+     */
+    CreationTime: Timestamp;
+    CreatedBy: UserContext;
+    /**
+     * The date and time the model card was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * The processing status of model card deletion. The ModelCardProcessingStatus updates throughout the different deletion steps.    DeletePending: Model card deletion request received.    DeleteInProgress: Model card deletion is in progress.    ContentDeleted: Deleted model card content.    ExportJobsDeleted: Deleted all export jobs associated with the model card.    DeleteCompleted: Successfully deleted the model card.    DeleteFailed: The model card failed to delete.  
+     */
+    ModelCardProcessingStatus?: ModelCardProcessingStatus;
   }
   export interface DescribeModelExplainabilityJobDefinitionRequest {
     /**
@@ -8170,7 +9027,7 @@ declare namespace SageMaker {
     /**
      * The name of the pipeline to describe.
      */
-    PipelineName: PipelineName;
+    PipelineName: PipelineNameOrArn;
   }
   export interface DescribePipelineResponse {
     /**
@@ -8358,6 +9215,54 @@ declare namespace SageMaker {
     LastModifiedTime?: Timestamp;
     LastModifiedBy?: UserContext;
   }
+  export interface DescribeSpaceRequest {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the space.
+     */
+    SpaceName: SpaceName;
+  }
+  export interface DescribeSpaceResponse {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId?: DomainId;
+    /**
+     * The space's Amazon Resource Name (ARN).
+     */
+    SpaceArn?: SpaceArn;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
+    /**
+     * The ID of the space's profile in the Amazon Elastic File System volume.
+     */
+    HomeEfsFileSystemUid?: EfsUid;
+    /**
+     * The status.
+     */
+    Status?: SpaceStatus;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime?: LastModifiedTime;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The failure reason.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * A collection of space settings.
+     */
+    SpaceSettings?: SpaceSettings;
+  }
   export interface DescribeStudioLifecycleConfigRequest {
     /**
      * The name of the Studio Lifecycle Configuration to describe.
@@ -8525,21 +9430,21 @@ declare namespace SageMaker {
     DebugHookConfig?: DebugHookConfig;
     ExperimentConfig?: ExperimentConfig;
     /**
-     * Configuration information for Debugger rules for debugging output tensors.
+     * Configuration information for Amazon SageMaker Debugger rules for debugging output tensors.
      */
     DebugRuleConfigurations?: DebugRuleConfigurations;
     TensorBoardOutputConfig?: TensorBoardOutputConfig;
     /**
-     * Evaluation status of Debugger rules for debugging on a training job.
+     * Evaluation status of Amazon SageMaker Debugger rules for debugging on a training job.
      */
     DebugRuleEvaluationStatuses?: DebugRuleEvaluationStatuses;
     ProfilerConfig?: ProfilerConfig;
     /**
-     * Configuration information for Debugger rules for profiling system and framework metrics.
+     * Configuration information for Amazon SageMaker Debugger rules for profiling system and framework metrics.
      */
     ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
     /**
-     * Evaluation status of Debugger rules for profiling on a training job.
+     * Evaluation status of Amazon SageMaker Debugger rules for profiling on a training job.
      */
     ProfilerRuleEvaluationStatuses?: ProfilerRuleEvaluationStatuses;
     /**
@@ -8717,6 +9622,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the lineage group.
      */
     LineageGroupArn?: LineageGroupArn;
+    /**
+     * A list of the Amazon Resource Name (ARN) and, if applicable, job type for multiple sources of an experiment run.
+     */
+    Sources?: TrialComponentSources;
   }
   export interface DescribeTrialRequest {
     /**
@@ -9042,7 +9951,7 @@ declare namespace SageMaker {
   }
   export interface DisassociateTrialComponentResponse {
     /**
-     * The ARN of the trial component.
+     * The Amazon Resource Name (ARN) of the trial component.
      */
     TrialComponentArn?: TrialComponentArn;
     /**
@@ -9050,6 +9959,7 @@ declare namespace SageMaker {
      */
     TrialArn?: TrialArn;
   }
+  export type DocumentSchemaVersion = string;
   export type Dollars = number;
   export type DomainArn = string;
   export interface DomainDetails {
@@ -9469,6 +10379,10 @@ declare namespace SageMaker {
      * A list of the tags associated with the endpoint. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: TagList;
+    /**
+     *  Array of ProductionVariant objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     */
+    ShadowProductionVariants?: ProductionVariantSummaryList;
   }
   export type EndpointArn = string;
   export type EndpointConfigArn = string;
@@ -9553,6 +10467,24 @@ declare namespace SageMaker {
     EnvironmentParameterRanges?: EnvironmentParameterRanges;
   }
   export type EndpointInputConfigurations = EndpointInputConfiguration[];
+  export interface EndpointMetadata {
+    /**
+     * The name of the endpoint.
+     */
+    EndpointName: EndpointName;
+    /**
+     * The name of the endpoint configuration.
+     */
+    EndpointConfigName?: EndpointConfigName;
+    /**
+     *  The status of the endpoint. For possible values of the status of an endpoint, see EndpointSummary$EndpointStatus. 
+     */
+    EndpointStatus?: EndpointStatus;
+    /**
+     *  If the status of the endpoint is Failed, this provides the reason why it failed. 
+     */
+    FailureReason?: FailureReason;
+  }
   export type EndpointName = string;
   export type EndpointNameContains = string;
   export interface EndpointOutputConfiguration {
@@ -9686,6 +10618,10 @@ declare namespace SageMaker {
      * The display name for the trial component. If this key isn't specified, the display name is the trial component name.
      */
     TrialComponentDisplayName?: ExperimentEntityName;
+    /**
+     * The name of the experiment run to associate the trial component with.
+     */
+    RunName?: ExperimentEntityName;
   }
   export type ExperimentDescription = string;
   export type ExperimentEntityName = string;
@@ -10156,6 +11092,120 @@ declare namespace SageMaker {
   export type Group = string;
   export type Groups = Group[];
   export type HookParameters = {[key: string]: ConfigValue};
+  export type HubArn = string;
+  export type HubContentArn = string;
+  export interface HubContentDependency {
+    /**
+     * The hub content dependency origin path.
+     */
+    DependencyOriginPath?: DependencyOriginPath;
+    /**
+     * The hub content dependency copy path.
+     */
+    DependencyCopyPath?: DependencyCopyPath;
+  }
+  export type HubContentDependencyList = HubContentDependency[];
+  export type HubContentDescription = string;
+  export type HubContentDisplayName = string;
+  export type HubContentDocument = string;
+  export interface HubContentInfo {
+    /**
+     * The name of the hub content.
+     */
+    HubContentName: HubContentName;
+    /**
+     * The Amazon Resource Name (ARN) of the hub content.
+     */
+    HubContentArn: HubContentArn;
+    /**
+     * The version of the hub content.
+     */
+    HubContentVersion: HubContentVersion;
+    /**
+     * The type of hub content.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The version of the hub content document schema.
+     */
+    DocumentSchemaVersion: DocumentSchemaVersion;
+    /**
+     * The display name of the hub content.
+     */
+    HubContentDisplayName?: HubContentDisplayName;
+    /**
+     * A description of the hub content.
+     */
+    HubContentDescription?: HubContentDescription;
+    /**
+     * The searchable keywords for the hub content.
+     */
+    HubContentSearchKeywords?: HubContentSearchKeywordList;
+    /**
+     * The status of the hub content.
+     */
+    HubContentStatus: HubContentStatus;
+    /**
+     * The date and time that the hub content was created.
+     */
+    CreationTime: Timestamp;
+  }
+  export type HubContentInfoList = HubContentInfo[];
+  export type HubContentMarkdown = string;
+  export type HubContentName = string;
+  export type HubContentSearchKeywordList = HubSearchKeyword[];
+  export type HubContentSortBy = "HubContentName"|"CreationTime"|"HubContentStatus"|string;
+  export type HubContentStatus = "Available"|"Importing"|"Deleting"|"ImportFailed"|"DeleteFailed"|string;
+  export type HubContentType = "Model"|"Notebook"|string;
+  export type HubContentVersion = string;
+  export type HubDescription = string;
+  export type HubDisplayName = string;
+  export interface HubInfo {
+    /**
+     * The name of the hub.
+     */
+    HubName: HubName;
+    /**
+     * The Amazon Resource Name (ARN) of the hub.
+     */
+    HubArn: HubArn;
+    /**
+     * The display name of the hub.
+     */
+    HubDisplayName?: HubDisplayName;
+    /**
+     * A description of the hub.
+     */
+    HubDescription?: HubDescription;
+    /**
+     * The searchable keywords for the hub.
+     */
+    HubSearchKeywords?: HubSearchKeywordList;
+    /**
+     * The status of the hub.
+     */
+    HubStatus: HubStatus;
+    /**
+     * The date and time that the hub was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The date and time that the hub was last modified.
+     */
+    LastModifiedTime: Timestamp;
+  }
+  export type HubInfoList = HubInfo[];
+  export type HubName = string;
+  export interface HubS3StorageConfig {
+    /**
+     * The Amazon S3 output path for the hub.
+     */
+    S3OutputPath?: S3OutputPath;
+  }
+  export type HubSearchKeyword = string;
+  export type HubSearchKeywordList = HubSearchKeyword[];
+  export type HubSortBy = "HubName"|"CreationTime"|"HubStatus"|"AccountIdOwner"|string;
+  export type HubStatus = "InService"|"Creating"|"Updating"|"Deleting"|"CreateFailed"|"UpdateFailed"|"DeleteFailed"|string;
   export type HumanLoopActivationConditions = string;
   export interface HumanLoopActivationConditionsConfig {
     /**
@@ -10744,6 +11794,62 @@ declare namespace SageMaker {
   export type ImageVersionStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
   export type ImageVersions = ImageVersion[];
   export type Images = Image[];
+  export interface ImportHubContentRequest {
+    /**
+     * The name of the hub content to import.
+     */
+    HubContentName: HubContentName;
+    /**
+     * The version of the hub content to import.
+     */
+    HubContentVersion?: HubContentVersion;
+    /**
+     * The type of hub content to import.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The version of the hub content schema to import.
+     */
+    DocumentSchemaVersion: DocumentSchemaVersion;
+    /**
+     * The name of the hub to import content into.
+     */
+    HubName: HubName;
+    /**
+     * The display name of the hub content to import.
+     */
+    HubContentDisplayName?: HubContentDisplayName;
+    /**
+     * A description of the hub content to import.
+     */
+    HubContentDescription?: HubContentDescription;
+    /**
+     * Markdown files associated with the hub content to import.
+     */
+    HubContentMarkdown?: HubContentMarkdown;
+    /**
+     * The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.
+     */
+    HubContentDocument: HubContentDocument;
+    /**
+     * The searchable keywords of the hub content.
+     */
+    HubContentSearchKeywords?: HubContentSearchKeywordList;
+    /**
+     * Any tags associated with the hub content.
+     */
+    Tags?: TagList;
+  }
+  export interface ImportHubContentResponse {
+    /**
+     * The ARN of the hub that the content was imported into.
+     */
+    HubArn: HubArn;
+    /**
+     * The ARN of the hub content that was imported.
+     */
+    HubContentArn: HubContentArn;
+  }
   export interface InferenceExecutionConfig {
     /**
      * How containers in a multi-container are run. The following values are valid.    SERIAL - Containers run as a serial pipeline.    DIRECT - Only the individual container that you specify is run.  
@@ -10751,6 +11857,77 @@ declare namespace SageMaker {
     Mode: InferenceExecutionMode;
   }
   export type InferenceExecutionMode = "Serial"|"Direct"|string;
+  export type InferenceExperimentArn = string;
+  export interface InferenceExperimentDataStorageConfig {
+    /**
+     * The Amazon S3 bucket where the inference experiment data is stored. 
+     */
+    Destination: DestinationS3Uri;
+    /**
+     *  The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt captured data when uploading to Amazon S3. 
+     */
+    KmsKey?: KmsKeyId;
+    ContentType?: CaptureContentTypeHeader;
+  }
+  export type InferenceExperimentDescription = string;
+  export type InferenceExperimentList = InferenceExperimentSummary[];
+  export type InferenceExperimentName = string;
+  export interface InferenceExperimentSchedule {
+    /**
+     * The timestamp at which the inference experiment started or will start.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The timestamp at which the inference experiment ended or will end.
+     */
+    EndTime?: Timestamp;
+  }
+  export type InferenceExperimentStatus = "Creating"|"Created"|"Updating"|"Running"|"Starting"|"Stopping"|"Completed"|"Cancelled"|string;
+  export type InferenceExperimentStatusReason = string;
+  export type InferenceExperimentStopDesiredState = "Completed"|"Cancelled"|string;
+  export interface InferenceExperimentSummary {
+    /**
+     * The name of the inference experiment.
+     */
+    Name: InferenceExperimentName;
+    /**
+     * The type of the inference experiment.
+     */
+    Type: InferenceExperimentType;
+    /**
+     * The duration for which the inference experiment ran or will run. The maximum duration that you can set for an inference experiment is 30 days.
+     */
+    Schedule?: InferenceExperimentSchedule;
+    /**
+     * The status of the inference experiment.
+     */
+    Status: InferenceExperimentStatus;
+    /**
+     * The error message for the inference experiment status result.
+     */
+    StatusReason?: InferenceExperimentStatusReason;
+    /**
+     * The description of the inference experiment.
+     */
+    Description?: InferenceExperimentDescription;
+    /**
+     * The timestamp at which the inference experiment was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The timestamp at which the inference experiment was completed.
+     */
+    CompletionTime?: Timestamp;
+    /**
+     * The timestamp when you last modified the inference experiment.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images. 
+     */
+    RoleArn?: RoleArn;
+  }
+  export type InferenceExperimentType = "ShadowMode"|string;
   export type InferenceImage = string;
   export interface InferenceMetrics {
     /**
@@ -10959,6 +12136,10 @@ declare namespace SageMaker {
      *  The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the JupyterServerApp. If you use this parameter, the DefaultResourceSpec parameter is also required.  To remove a Lifecycle Config, you must set LifecycleConfigArns to an empty list. 
      */
     LifecycleConfigArns?: LifecycleConfigArns;
+    /**
+     * A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application.
+     */
+    CodeRepositories?: CodeRepositories;
   }
   export type KeepAlivePeriodInSeconds = number;
   export type KernelDisplayName = string;
@@ -11421,6 +12602,10 @@ declare namespace SageMaker {
      * A parameter to search by user profile name.
      */
     UserProfileNameEquals?: UserProfileName;
+    /**
+     * A parameter to search by space name.
+     */
+    SpaceNameEquals?: SpaceName;
   }
   export interface ListAppsResponse {
     /**
@@ -12232,6 +13417,162 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListHubContentVersionsRequest {
+    /**
+     * The name of the hub to list the content versions of.
+     */
+    HubName: HubName;
+    /**
+     * The type of hub content to list versions of.
+     */
+    HubContentType: HubContentType;
+    /**
+     * The name of the hub content.
+     */
+    HubContentName: HubContentName;
+    /**
+     * The lower bound of the hub content versions to list.
+     */
+    MinVersion?: HubContentVersion;
+    /**
+     * The upper bound of the hub content schema version.
+     */
+    MaxSchemaVersion?: DocumentSchemaVersion;
+    /**
+     * Only list hub content versions that were created before the time specified.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Only list hub content versions that were created after the time specified.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Sort hub content versions by either name or creation time.
+     */
+    SortBy?: HubContentSortBy;
+    /**
+     * Sort hub content versions by ascending or descending order.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The maximum number of hub content versions to list.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the response to a previous ListHubContentVersions request was truncated, the response includes a NextToken. To retrieve the next set of hub content versions, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHubContentVersionsResponse {
+    /**
+     * The summaries of the listed hub content versions.
+     */
+    HubContentSummaries: HubContentInfoList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of hub content versions, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHubContentsRequest {
+    /**
+     * The name of the hub to list the contents of.
+     */
+    HubName: HubName;
+    /**
+     * The type of hub content to list.
+     */
+    HubContentType: HubContentType;
+    /**
+     * Only list hub content if the name contains the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * The upper bound of the hub content schema verion.
+     */
+    MaxSchemaVersion?: DocumentSchemaVersion;
+    /**
+     * Only list hub content that was created before the time specified.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Only list hub content that was created after the time specified.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Sort hub content versions by either name or creation time.
+     */
+    SortBy?: HubContentSortBy;
+    /**
+     * Sort hubs by ascending or descending order.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The maximum amount of hub content to list.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the response to a previous ListHubContents request was truncated, the response includes a NextToken. To retrieve the next set of hub content, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHubContentsResponse {
+    /**
+     * The summaries of the listed hub content.
+     */
+    HubContentSummaries: HubContentInfoList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of hub content, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHubsRequest {
+    /**
+     * Only list hubs with names that contain the specified string.
+     */
+    NameContains?: NameContains;
+    /**
+     * Only list hubs that were created before the time specified.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Only list hubs that were created after the time specified.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Only list hubs that were last modified before the time specified.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * Only list hubs that were last modified after the time specified.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * Sort hubs by either name or creation time.
+     */
+    SortBy?: HubSortBy;
+    /**
+     * Sort hubs by ascending or descending order.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The maximum number of hubs to list.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the response to a previous ListHubs request was truncated, the response includes a NextToken. To retrieve the next set of hubs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHubsResponse {
+    /**
+     * The summaries of the listed hubs.
+     */
+    HubSummaries: HubInfoList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of hubs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListHumanTaskUisRequest {
     /**
      * A filter that returns only human task user interfaces with a creation time greater than or equal to the specified timestamp.
@@ -12409,6 +13750,62 @@ declare namespace SageMaker {
     Images?: Images;
     /**
      * A token for getting the next set of images, if there are any.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListInferenceExperimentsRequest {
+    /**
+     * Selects inference experiments whose names contain this name.
+     */
+    NameContains?: NameContains;
+    /**
+     *  Selects inference experiments of this type. For the possible types of inference experiments, see CreateInferenceExperimentRequest$Type. 
+     */
+    Type?: InferenceExperimentType;
+    /**
+     *  Selects inference experiments which are in this status. For the possible statuses, see DescribeInferenceExperimentResponse$Status. 
+     */
+    StatusEquals?: InferenceExperimentStatus;
+    /**
+     * Selects inference experiments which were created after this timestamp.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Selects inference experiments which were created before this timestamp.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Selects inference experiments which were last modified after this timestamp.
+     */
+    LastModifiedTimeAfter?: Timestamp;
+    /**
+     * Selects inference experiments which were last modified before this timestamp.
+     */
+    LastModifiedTimeBefore?: Timestamp;
+    /**
+     * The column by which to sort the listed inference experiments.
+     */
+    SortBy?: SortInferenceExperimentsBy;
+    /**
+     * The direction of sorting (ascending or descending).
+     */
+    SortOrder?: SortOrder;
+    /**
+     *  The response from the last list when returning a list large enough to need tokening. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to select.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListInferenceExperimentsResponse {
+    /**
+     * List of inference experiments.
+     */
+    InferenceExperiments?: InferenceExperimentList;
+    /**
+     * The token to use when calling the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -12676,6 +14073,146 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListModelCardExportJobsRequest {
+    /**
+     * List export jobs for the model card with the specified name.
+     */
+    ModelCardName: EntityName;
+    /**
+     * List export jobs for the model card with the specified version.
+     */
+    ModelCardVersion?: Integer;
+    /**
+     * Only list model card export jobs that were created after the time specified.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Only list model card export jobs that were created before the time specified.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Only list model card export jobs with names that contain the specified string.
+     */
+    ModelCardExportJobNameContains?: EntityName;
+    /**
+     * Only list model card export jobs with the specified status.
+     */
+    StatusEquals?: ModelCardExportJobStatus;
+    /**
+     * Sort model card export jobs by either name or creation time. Sorts by creation time by default.
+     */
+    SortBy?: ModelCardExportJobSortBy;
+    /**
+     * Sort model card export jobs by ascending or descending order.
+     */
+    SortOrder?: ModelCardExportJobSortOrder;
+    /**
+     * If the response to a previous ListModelCardExportJobs request was truncated, the response includes a NextToken. To retrieve the next set of model card export jobs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of model card export jobs to list.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListModelCardExportJobsResponse {
+    /**
+     * The summaries of the listed model card export jobs.
+     */
+    ModelCardExportJobSummaries: ModelCardExportJobSummaryList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of model card export jobs, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListModelCardVersionsRequest {
+    /**
+     * Only list model card versions that were created after the time specified.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Only list model card versions that were created before the time specified.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * The maximum number of model card versions to list.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * List model card versions for the model card with the specified name.
+     */
+    ModelCardName: EntityName;
+    /**
+     * Only list model card versions with the specified approval status.
+     */
+    ModelCardStatus?: ModelCardStatus;
+    /**
+     * If the response to a previous ListModelCardVersions request was truncated, the response includes a NextToken. To retrieve the next set of model card versions, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * Sort listed model card versions by version. Sorts by version by default.
+     */
+    SortBy?: ModelCardVersionSortBy;
+    /**
+     * Sort model card versions by ascending or descending order.
+     */
+    SortOrder?: ModelCardSortOrder;
+  }
+  export interface ListModelCardVersionsResponse {
+    /**
+     * The summaries of the listed versions of the model card.
+     */
+    ModelCardVersionSummaryList: ModelCardVersionSummaryList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of model card versions, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListModelCardsRequest {
+    /**
+     * Only list model cards that were created after the time specified.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Only list model cards that were created before the time specified.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * The maximum number of model cards to list.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Only list model cards with names that contain the specified string.
+     */
+    NameContains?: EntityName;
+    /**
+     * Only list model cards with the specified approval status.
+     */
+    ModelCardStatus?: ModelCardStatus;
+    /**
+     * If the response to a previous ListModelCards request was truncated, the response includes a NextToken. To retrieve the next set of model cards, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * Sort model cards by either name or creation time. Sorts by creation time by default.
+     */
+    SortBy?: ModelCardSortBy;
+    /**
+     * Sort model cards by ascending or descending order.
+     */
+    SortOrder?: ModelCardSortOrder;
+  }
+  export interface ListModelCardsResponse {
+    /**
+     * The summaries of the listed model cards.
+     */
+    ModelCardSummaries: ModelCardSummaryList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of model cards, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListModelExplainabilityJobDefinitionsRequest {
     /**
      * Name of the endpoint to monitor for model explainability.
@@ -12919,6 +14456,78 @@ declare namespace SageMaker {
      *  If the response is truncated, SageMaker returns this token. To retrieve the next set of models, use it in the subsequent request. 
      */
     NextToken?: PaginationToken;
+  }
+  export interface ListMonitoringAlertHistoryRequest {
+    /**
+     * The name of a monitoring schedule.
+     */
+    MonitoringScheduleName?: MonitoringScheduleName;
+    /**
+     * The name of a monitoring alert.
+     */
+    MonitoringAlertName?: MonitoringAlertName;
+    /**
+     * The field used to sort results. The default is CreationTime.
+     */
+    SortBy?: MonitoringAlertHistorySortKey;
+    /**
+     * The sort order, whether Ascending or Descending, of the alert history. The default is Descending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * If the result of the previous ListMonitoringAlertHistory request was truncated, the response includes a NextToken. To retrieve the next set of alerts in the history, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to display. The default is 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A filter that returns only alerts created on or before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only alerts created on or after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that retrieves only alerts with a specific status.
+     */
+    StatusEquals?: MonitoringAlertStatus;
+  }
+  export interface ListMonitoringAlertHistoryResponse {
+    /**
+     * An alert history for a model monitoring schedule.
+     */
+    MonitoringAlertHistory?: MonitoringAlertHistoryList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of alerts, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMonitoringAlertsRequest {
+    /**
+     * The name of a monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * If the result of the previous ListMonitoringAlerts request was truncated, the response includes a NextToken. To retrieve the next set of alerts in the history, use the token in the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to display. The default is 100.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMonitoringAlertsResponse {
+    /**
+     * A JSON array where each element is a summary for a monitoring alert.
+     */
+    MonitoringAlertSummaries?: MonitoringAlertSummaryList;
+    /**
+     * If the response is truncated, SageMaker returns this token. To retrieve the next set of alerts, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
   }
   export interface ListMonitoringExecutionsRequest {
     /**
@@ -13200,7 +14809,7 @@ declare namespace SageMaker {
     /**
      * The name of the pipeline.
      */
-    PipelineName: PipelineName;
+    PipelineName: PipelineNameOrArn;
     /**
      * A filter that returns the pipeline executions that were created after a specified time.
      */
@@ -13389,6 +14998,42 @@ declare namespace SageMaker {
     ProjectSummaryList: ProjectSummaryList;
     /**
      * If the result of the previous ListCompilationJobs request was truncated, the response includes a NextToken. To retrieve the next set of model compilation jobs, use the token in the next request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSpacesRequest {
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Returns a list up to a specified limit.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The sort order for the results. The default is Ascending.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The parameter by which to sort the results. The default is CreationTime.
+     */
+    SortBy?: SpaceSortKey;
+    /**
+     * A parameter to search for the Domain ID.
+     */
+    DomainIdEquals?: DomainId;
+    /**
+     * A parameter by which to filter the results.
+     */
+    SpaceNameContains?: SpaceName;
+  }
+  export interface ListSpacesResponse {
+    /**
+     * The list of spaces.
+     */
+    Spaces?: SpaceList;
+    /**
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -13978,6 +15623,39 @@ declare namespace SageMaker {
     S3Uri: S3Uri;
   }
   export type MinimumInstanceMetadataServiceVersion = string;
+  export interface Model {
+    /**
+     * The name of the model.
+     */
+    ModelName?: ModelName;
+    PrimaryContainer?: ContainerDefinition;
+    /**
+     * The containers in the inference pipeline.
+     */
+    Containers?: ContainerDefinitionList;
+    InferenceExecutionConfig?: InferenceExecutionConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
+     */
+    ExecutionRoleArn?: RoleArn;
+    VpcConfig?: VpcConfig;
+    /**
+     * A timestamp that indicates when the model was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the model.
+     */
+    ModelArn?: ModelArn;
+    /**
+     * Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
+     */
+    EnableNetworkIsolation?: Boolean;
+    /**
+     * A list of key-value pairs associated with the model. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
+     */
+    Tags?: TagList;
+  }
   export type ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval"|string;
   export type ModelArn = string;
   export interface ModelArtifacts {
@@ -14019,6 +15697,164 @@ declare namespace SageMaker {
     GroundTruthS3Input: MonitoringGroundTruthS3Input;
   }
   export type ModelCacheSetting = "Enabled"|"Disabled"|string;
+  export interface ModelCard {
+    /**
+     * The Amazon Resource Name (ARN) of the model card.
+     */
+    ModelCardArn?: ModelCardArn;
+    /**
+     * The unique name of the model card.
+     */
+    ModelCardName?: EntityName;
+    /**
+     * The version of the model card.
+     */
+    ModelCardVersion?: Integer;
+    /**
+     * The content of the model card. Content uses the model card JSON schema and provided as a string.
+     */
+    Content?: ModelCardContent;
+    /**
+     * The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates should be made to the model card, but it can still be exported.  
+     */
+    ModelCardStatus?: ModelCardStatus;
+    /**
+     * The security configuration used to protect model card data.
+     */
+    SecurityConfig?: ModelCardSecurityConfig;
+    /**
+     * The date and time that the model card was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * The date and time that the model card was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * Key-value pairs used to manage metadata for the model card.
+     */
+    Tags?: TagList;
+    /**
+     * The unique name (ID) of the model.
+     */
+    ModelId?: String;
+    /**
+     * The risk rating of the model. Different organizations might have different criteria for model card risk ratings. For more information, see Risk ratings.
+     */
+    RiskRating?: String;
+  }
+  export type ModelCardArn = string;
+  export type ModelCardContent = string;
+  export interface ModelCardExportArtifacts {
+    /**
+     * The Amazon S3 URI of the exported model artifacts.
+     */
+    S3ExportArtifacts: S3Uri;
+  }
+  export type ModelCardExportJobArn = string;
+  export type ModelCardExportJobSortBy = "Name"|"CreationTime"|"Status"|string;
+  export type ModelCardExportJobSortOrder = "Ascending"|"Descending"|string;
+  export type ModelCardExportJobStatus = "InProgress"|"Completed"|"Failed"|string;
+  export interface ModelCardExportJobSummary {
+    /**
+     * The name of the model card export job.
+     */
+    ModelCardExportJobName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model card export job.
+     */
+    ModelCardExportJobArn: ModelCardExportJobArn;
+    /**
+     * The completion status of the model card export job.
+     */
+    Status: ModelCardExportJobStatus;
+    /**
+     * The name of the model card that the export job exports.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The version of the model card that the export job exports.
+     */
+    ModelCardVersion: Integer;
+    /**
+     * The date and time that the model card export job was created.
+     */
+    CreatedAt: Timestamp;
+    /**
+     * The date and time that the model card export job was last modified..
+     */
+    LastModifiedAt: Timestamp;
+  }
+  export type ModelCardExportJobSummaryList = ModelCardExportJobSummary[];
+  export interface ModelCardExportOutputConfig {
+    /**
+     * The Amazon S3 output path to export your model card PDF.
+     */
+    S3OutputPath: S3Uri;
+  }
+  export type ModelCardProcessingStatus = "DeleteInProgress"|"DeletePending"|"ContentDeleted"|"ExportJobsDeleted"|"DeleteCompleted"|"DeleteFailed"|string;
+  export interface ModelCardSecurityConfig {
+    /**
+     * A Key Management Service key ID to use for encrypting a model card.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export type ModelCardSortBy = "Name"|"CreationTime"|string;
+  export type ModelCardSortOrder = "Ascending"|"Descending"|string;
+  export type ModelCardStatus = "Draft"|"PendingReview"|"Approved"|"Archived"|string;
+  export interface ModelCardSummary {
+    /**
+     * The name of the model card.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model card.
+     */
+    ModelCardArn: ModelCardArn;
+    /**
+     * The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates should be made to the model card, but it can still be exported.  
+     */
+    ModelCardStatus: ModelCardStatus;
+    /**
+     * The date and time that the model card was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The date and time that the model card was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type ModelCardSummaryList = ModelCardSummary[];
+  export type ModelCardVersionSortBy = "Version"|string;
+  export interface ModelCardVersionSummary {
+    /**
+     * The name of the model card.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the model card.
+     */
+    ModelCardArn: ModelCardArn;
+    /**
+     * The approval status of the model card version within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates should be made to the model card, but it can still be exported.  
+     */
+    ModelCardStatus: ModelCardStatus;
+    /**
+     * A version of the model card.
+     */
+    ModelCardVersion: Integer;
+    /**
+     * The date and time that the model card version was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The time date and time that the model card version was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type ModelCardVersionSummaryList = ModelCardVersionSummary[];
   export interface ModelClientConfig {
     /**
      * The timeout value in seconds for an invocation request. The default value is 600.
@@ -14039,6 +15875,139 @@ declare namespace SageMaker {
      */
     EnvironmentParameters?: EnvironmentParameters;
   }
+  export interface ModelDashboardEndpoint {
+    /**
+     * The endpoint name.
+     */
+    EndpointName: EndpointName;
+    /**
+     * The Amazon Resource Name (ARN) of the endpoint.
+     */
+    EndpointArn: EndpointArn;
+    /**
+     * A timestamp that indicates when the endpoint was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The last time the endpoint was modified.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The endpoint status.
+     */
+    EndpointStatus: EndpointStatus;
+  }
+  export type ModelDashboardEndpoints = ModelDashboardEndpoint[];
+  export interface ModelDashboardIndicatorAction {
+    /**
+     * Indicates whether the alert action is turned on.
+     */
+    Enabled?: Boolean;
+  }
+  export interface ModelDashboardModel {
+    /**
+     * A model displayed in the Model Dashboard.
+     */
+    Model?: Model;
+    /**
+     * The endpoints that host a model.
+     */
+    Endpoints?: ModelDashboardEndpoints;
+    LastBatchTransformJob?: TransformJob;
+    /**
+     * The monitoring schedules for a model.
+     */
+    MonitoringSchedules?: ModelDashboardMonitoringSchedules;
+    /**
+     * The model card for a model.
+     */
+    ModelCard?: ModelDashboardModelCard;
+  }
+  export interface ModelDashboardModelCard {
+    /**
+     * The Amazon Resource Name (ARN) for a model card.
+     */
+    ModelCardArn?: ModelCardArn;
+    /**
+     * The name of a model card.
+     */
+    ModelCardName?: EntityName;
+    /**
+     * The model card version.
+     */
+    ModelCardVersion?: Integer;
+    /**
+     * The model card status.
+     */
+    ModelCardStatus?: ModelCardStatus;
+    /**
+     * The KMS Key ID (KMSKeyId) for encryption of model card information.
+     */
+    SecurityConfig?: ModelCardSecurityConfig;
+    /**
+     * A timestamp that indicates when the model card was created.
+     */
+    CreationTime?: Timestamp;
+    CreatedBy?: UserContext;
+    /**
+     * A timestamp that indicates when the model card was last updated.
+     */
+    LastModifiedTime?: Timestamp;
+    LastModifiedBy?: UserContext;
+    /**
+     * The tags associated with a model card.
+     */
+    Tags?: TagList;
+    /**
+     * For models created in SageMaker, this is the model ARN. For models created outside of SageMaker, this is a user-customized string.
+     */
+    ModelId?: String;
+    /**
+     * A model card's risk rating. Can be low, medium, or high.
+     */
+    RiskRating?: String;
+  }
+  export interface ModelDashboardMonitoringSchedule {
+    /**
+     * The Amazon Resource Name (ARN) of a monitoring schedule.
+     */
+    MonitoringScheduleArn?: MonitoringScheduleArn;
+    /**
+     * The name of a monitoring schedule.
+     */
+    MonitoringScheduleName?: MonitoringScheduleName;
+    /**
+     * The status of the monitoring schedule.
+     */
+    MonitoringScheduleStatus?: ScheduleStatus;
+    /**
+     * The monitor type of a model monitor.
+     */
+    MonitoringType?: MonitoringType;
+    /**
+     * If a monitoring job failed, provides the reason.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * A timestamp that indicates when the monitoring schedule was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * A timestamp that indicates when the monitoring schedule was last updated.
+     */
+    LastModifiedTime?: Timestamp;
+    MonitoringScheduleConfig?: MonitoringScheduleConfig;
+    /**
+     * The endpoint which is monitored.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * A JSON array where each element is a summary for a monitoring alert.
+     */
+    MonitoringAlertSummaries?: MonitoringAlertSummaryList;
+    LastMonitoringExecutionSummary?: MonitoringExecutionSummary;
+  }
+  export type ModelDashboardMonitoringSchedules = ModelDashboardMonitoringSchedule[];
   export interface ModelDataQuality {
     /**
      * Data quality statistics for a model.
@@ -14099,6 +16068,17 @@ declare namespace SageMaker {
      */
     BatchTransformInput?: BatchTransformInput;
   }
+  export interface ModelInfrastructureConfig {
+    /**
+     * The inference option to which to deploy your model. Possible values are the following:    RealTime: Deploy to real-time inference.  
+     */
+    InfrastructureType: ModelInfrastructureType;
+    /**
+     * The infrastructure configuration for deploying the model to real-time inference.
+     */
+    RealTimeInferenceConfig: RealTimeInferenceConfig;
+  }
+  export type ModelInfrastructureType = "RealTimeInference"|string;
   export interface ModelInput {
     /**
      * The input configuration object for the model.
@@ -14549,6 +16529,103 @@ declare namespace SageMaker {
     CreationTime: Timestamp;
   }
   export type ModelSummaryList = ModelSummary[];
+  export type ModelVariantAction = "Retain"|"Remove"|"Promote"|string;
+  export type ModelVariantActionMap = {[key: string]: ModelVariantAction};
+  export interface ModelVariantConfig {
+    /**
+     * The name of the model.
+     */
+    ModelName: ModelName;
+    /**
+     * The name of the variant.
+     */
+    VariantName: ModelVariantName;
+    /**
+     * The configuration for the infrastructure that the model will be deployed to.
+     */
+    InfrastructureConfig: ModelInfrastructureConfig;
+  }
+  export type ModelVariantConfigList = ModelVariantConfig[];
+  export interface ModelVariantConfigSummary {
+    /**
+     * The name of the model.
+     */
+    ModelName: ModelName;
+    /**
+     * The name of the variant.
+     */
+    VariantName: ModelVariantName;
+    /**
+     * The configuration of the infrastructure that the model has been deployed to.
+     */
+    InfrastructureConfig: ModelInfrastructureConfig;
+    /**
+     * The status of the deployment.
+     */
+    Status: ModelVariantStatus;
+  }
+  export type ModelVariantConfigSummaryList = ModelVariantConfigSummary[];
+  export type ModelVariantName = string;
+  export type ModelVariantStatus = "Creating"|"Updating"|"InService"|"Deleting"|"Deleted"|string;
+  export interface MonitoringAlertActions {
+    /**
+     * An alert action taken to light up an icon on the Model Dashboard when an alert goes into InAlert status.
+     */
+    ModelDashboardIndicator?: ModelDashboardIndicatorAction;
+  }
+  export type MonitoringAlertHistoryList = MonitoringAlertHistorySummary[];
+  export type MonitoringAlertHistorySortKey = "CreationTime"|"Status"|string;
+  export interface MonitoringAlertHistorySummary {
+    /**
+     * The name of a monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The name of a monitoring alert.
+     */
+    MonitoringAlertName: MonitoringAlertName;
+    /**
+     * A timestamp that indicates when the first alert transition occurred in an alert history. An alert transition can be from status InAlert to OK, or from OK to InAlert.
+     */
+    CreationTime: Timestamp;
+    /**
+     * The current alert status of an alert.
+     */
+    AlertStatus: MonitoringAlertStatus;
+  }
+  export type MonitoringAlertName = string;
+  export type MonitoringAlertStatus = "InAlert"|"OK"|string;
+  export interface MonitoringAlertSummary {
+    /**
+     * The name of a monitoring alert.
+     */
+    MonitoringAlertName: MonitoringAlertName;
+    /**
+     * A timestamp that indicates when a monitor alert was created.
+     */
+    CreationTime: Timestamp;
+    /**
+     * A timestamp that indicates when a monitor alert was last updated.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The current status of an alert.
+     */
+    AlertStatus: MonitoringAlertStatus;
+    /**
+     * Within EvaluationPeriod, how many execution failures will raise an alert.
+     */
+    DatapointsToAlert: MonitoringDatapointsToAlert;
+    /**
+     * The number of most recent monitoring executions to consider when evaluating alert status.
+     */
+    EvaluationPeriod: MonitoringEvaluationPeriod;
+    /**
+     * A list of alert actions taken in response to an alert going into InAlert status.
+     */
+    Actions: MonitoringAlertActions;
+  }
+  export type MonitoringAlertSummaryList = MonitoringAlertSummary[];
   export interface MonitoringAppSpecification {
     /**
      * The container image to be run by the monitoring job.
@@ -14616,6 +16693,7 @@ declare namespace SageMaker {
      */
     Header?: Boolean;
   }
+  export type MonitoringDatapointsToAlert = number;
   export interface MonitoringDatasetFormat {
     /**
      * The CSV dataset used in the monitoring job.
@@ -14631,6 +16709,7 @@ declare namespace SageMaker {
     Parquet?: MonitoringParquetDatasetFormat;
   }
   export type MonitoringEnvironmentMap = {[key: string]: ProcessingEnvironmentValue};
+  export type MonitoringEvaluationPeriod = number;
   export type MonitoringExecutionSortKey = "CreationTime"|"ScheduledTime"|"Status"|string;
   export interface MonitoringExecutionSummary {
     /**
@@ -15091,6 +17170,10 @@ declare namespace SageMaker {
      * The meta data of the Glue table that is autogenerated when an OfflineStore is created. 
      */
     DataCatalogConfig?: DataCatalogConfig;
+    /**
+     * Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.
+     */
+    TableFormat?: TableFormat;
   }
   export interface OfflineStoreStatus {
     /**
@@ -15321,6 +17404,10 @@ declare namespace SageMaker {
      * The start time of the deployment.
      */
     StartTime?: Timestamp;
+    /**
+     *  Array of ProductionVariant objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     */
+    ShadowProductionVariants?: PendingProductionVariantSummaryList;
   }
   export interface PendingProductionVariantSummary {
     /**
@@ -15538,7 +17625,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * Metadata for the step execution.
+     * Metadata to run the pipeline step.
      */
     Metadata?: PipelineExecutionStepMetadata;
   }
@@ -15565,7 +17652,7 @@ declare namespace SageMaker {
      */
     Model?: ModelStepMetadata;
     /**
-     * The Amazon Resource Name (ARN) of the model package the model was registered to by this step execution.
+     * The Amazon Resource Name (ARN) of the model package that the model was registered to by this step execution.
      */
     RegisterModel?: RegisterModelStepMetadata;
     /**
@@ -15581,7 +17668,7 @@ declare namespace SageMaker {
      */
     Lambda?: LambdaStepMetadata;
     /**
-     * The configurations and outcomes of the check step execution. This includes:    The type of the check conducted,   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
+     * The configurations and outcomes of the check step execution. This includes:    The type of the check conducted.   The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.   The Amazon S3 URIs of newly calculated baseline constraints and statistics.   The model package group name provided.   The Amazon S3 URI of the violation report if violations detected.   The Amazon Resource Name (ARN) of check processing job initiated by the step execution.   The Boolean flags indicating if the drift check is skipped.   If step property BaselineUsedForDriftCheck is set the same as CalculatedBaseline.  
      */
     QualityCheck?: QualityCheckStepMetadata;
     /**
@@ -15589,13 +17676,17 @@ declare namespace SageMaker {
      */
     ClarifyCheck?: ClarifyCheckStepMetadata;
     /**
-     * The configurations and outcomes of an EMR step execution.
+     * The configurations and outcomes of an Amazon EMR step execution.
      */
     EMR?: EMRStepMetadata;
     /**
      * The configurations and outcomes of a Fail step execution.
      */
     Fail?: FailStepMetadata;
+    /**
+     * The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
+     */
+    AutoMLJob?: AutoMLJobStepMetadata;
   }
   export interface PipelineExecutionSummary {
     /**
@@ -15635,6 +17726,7 @@ declare namespace SageMaker {
     TrialName?: ExperimentEntityName;
   }
   export type PipelineName = string;
+  export type PipelineNameOrArn = string;
   export type PipelineParameterName = string;
   export type PipelineStatus = "Active"|string;
   export interface PipelineSummary {
@@ -16072,7 +18164,7 @@ declare namespace SageMaker {
      */
     ProfilingParameters?: ProfilingParameters;
     /**
-     * To disable system monitoring and profiling, set to True.
+     * Configuration to turn off Amazon SageMaker Debugger's system monitoring and profiling functionality. To turn it off, set to True.
      */
     DisableProfiler?: DisableProfiler;
   }
@@ -16090,7 +18182,7 @@ declare namespace SageMaker {
      */
     ProfilingParameters?: ProfilingParameters;
     /**
-     * To disable Debugger monitoring and profiling, set to True.
+     * To turn off Amazon SageMaker Debugger monitoring and profiling while a training job is in progress, set to True.
      */
     DisableProfiler?: DisableProfiler;
   }
@@ -16108,11 +18200,11 @@ declare namespace SageMaker {
      */
     S3OutputPath?: S3Uri;
     /**
-     * The Amazon Elastic Container (ECR) Image for the managed rule evaluation.
+     * The Amazon Elastic Container Registry Image for the managed rule evaluation.
      */
     RuleEvaluatorImage: AlgorithmImage;
     /**
-     * The instance type to deploy a Debugger custom rule for profiling a training job.
+     * The instance type to deploy a custom rule for profiling a training job.
      */
     InstanceType?: ProcessingInstanceType;
     /**
@@ -16438,6 +18530,16 @@ declare namespace SageMaker {
     DefaultResourceSpec?: ResourceSpec;
   }
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
+  export interface RealTimeInferenceConfig {
+    /**
+     * The number of instances of the type specified by InstanceType.
+     */
+    InstanceType: InstanceType;
+    /**
+     * The instance type the model is deployed to.
+     */
+    InstanceCount: TaskCount;
+  }
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
   export type RecommendationFailureReason = string;
   export type RecommendationJobArn = string;
@@ -16685,6 +18787,7 @@ declare namespace SageMaker {
     RepositoryCredentialsProviderArn: RepositoryCredentialsProviderArn;
   }
   export type RepositoryCredentialsProviderArn = string;
+  export type RepositoryUrl = string;
   export interface ResolvedAttributes {
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -16758,7 +18861,7 @@ declare namespace SageMaker {
      */
     LifecycleConfigArn?: StudioLifecycleConfigArn;
   }
-  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|"FeatureMetadata"|"HyperParameterTuningJob"|string;
+  export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|"Project"|"FeatureMetadata"|"HyperParameterTuningJob"|"ModelCard"|"Model"|string;
   export type ResponseMIMEType = string;
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
@@ -16823,6 +18926,7 @@ declare namespace SageMaker {
     InstanceGroupNames?: InstanceGroupNames;
   }
   export type S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile"|string;
+  export type S3OutputPath = string;
   export interface S3StorageConfig {
     /**
      * The S3 URI, or location in Amazon S3, of OfflineStore. S3 URIs have a format similar to the following: s3://example-bucket/prefix/.
@@ -16902,6 +19006,11 @@ declare namespace SageMaker {
      * The properties of a hyperparameter tuning job.
      */
     HyperParameterTuningJob?: HyperParameterTuningJobSearchEntity;
+    Model?: ModelDashboardModel;
+    /**
+     * An Amazon SageMaker Model Card that documents details about a machine learning model.
+     */
+    ModelCard?: ModelCard;
   }
   export interface SearchRequest {
     /**
@@ -17047,6 +19156,27 @@ declare namespace SageMaker {
     ProvisioningParameters?: ProvisioningParameters;
   }
   export type SessionExpirationDurationInSeconds = number;
+  export interface ShadowModeConfig {
+    /**
+     *  The name of the production variant. 
+     */
+    SourceModelVariantName: ModelVariantName;
+    /**
+     * List of shadow variant configurations.
+     */
+    ShadowModelVariants: ShadowModelVariantConfigList;
+  }
+  export interface ShadowModelVariantConfig {
+    /**
+     * The name of the shadow variant.
+     */
+    ShadowModelVariantName: ModelVariantName;
+    /**
+     * The percentage of inference requests that are replicated to the shadow variant.
+     */
+    SamplingPercentage: Percentage;
+  }
+  export type ShadowModelVariantConfigList = ShadowModelVariantConfig[];
   export interface SharingSettings {
     /**
      * Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
@@ -17075,6 +19205,7 @@ declare namespace SageMaker {
   export type SortBy = "Name"|"CreationTime"|"Status"|string;
   export type SortContextsBy = "Name"|"CreationTime"|string;
   export type SortExperimentsBy = "Name"|"CreationTime"|string;
+  export type SortInferenceExperimentsBy = "Name"|"CreationTime"|"Status"|string;
   export type SortLineageGroupsBy = "Name"|"CreationTime"|string;
   export type SortOrder = "Ascending"|"Descending"|string;
   export type SortPipelineExecutionsBy = "CreationTime"|"PipelineExecutionArn"|string;
@@ -17106,6 +19237,37 @@ declare namespace SageMaker {
   }
   export type SourceType = string;
   export type SourceUri = string;
+  export type SpaceArn = string;
+  export interface SpaceDetails {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId?: DomainId;
+    /**
+     * The name of the space.
+     */
+    SpaceName?: SpaceName;
+    /**
+     * The status.
+     */
+    Status?: SpaceStatus;
+    /**
+     * The creation time.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The last modified time.
+     */
+    LastModifiedTime?: LastModifiedTime;
+  }
+  export type SpaceList = SpaceDetails[];
+  export type SpaceName = string;
+  export interface SpaceSettings {
+    JupyterServerAppSettings?: JupyterServerAppSettings;
+    KernelGatewayAppSettings?: KernelGatewayAppSettings;
+  }
+  export type SpaceSortKey = "CreationTime"|"LastModifiedTime"|string;
+  export type SpaceStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type SpawnRate = number;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
   export type StageStatus = "CREATING"|"READYTODEPLOY"|"STARTING"|"INPROGRESS"|"DEPLOYED"|"FAILED"|"STOPPING"|"STOPPED"|string;
@@ -17118,6 +19280,18 @@ declare namespace SageMaker {
      * The name of the stage to start.
      */
     StageName: EntityName;
+  }
+  export interface StartInferenceExperimentRequest {
+    /**
+     * The name of the inference experiment to start.
+     */
+    Name: InferenceExperimentName;
+  }
+  export interface StartInferenceExperimentResponse {
+    /**
+     * The ARN of the started inference experiment to start.
+     */
+    InferenceExperimentArn: InferenceExperimentArn;
   }
   export interface StartMonitoringScheduleRequest {
     /**
@@ -17135,7 +19309,7 @@ declare namespace SageMaker {
     /**
      * The name of the pipeline.
      */
-    PipelineName: PipelineName;
+    PipelineName: PipelineNameOrArn;
     /**
      * The display name of the pipeline execution.
      */
@@ -17202,6 +19376,34 @@ declare namespace SageMaker {
      * The name of the tuning job to stop.
      */
     HyperParameterTuningJobName: HyperParameterTuningJobName;
+  }
+  export interface StopInferenceExperimentRequest {
+    /**
+     * The name of the inference experiment to stop.
+     */
+    Name: InferenceExperimentName;
+    /**
+     *  Array of key-value pairs, with names of variants mapped to actions. The possible actions are the following:     Promote - Promote the shadow variant to a production variant    Remove - Delete the variant    Retain - Keep the variant as it is  
+     */
+    ModelVariantActions: ModelVariantActionMap;
+    /**
+     *  Array of ModelVariantConfig objects. There is one for each variant that you want to deploy after the inference experiment stops. Each ModelVariantConfig describes the infrastructure configuration for deploying the corresponding variant. 
+     */
+    DesiredModelVariants?: ModelVariantConfigList;
+    /**
+     *  The desired state of the experiment after stopping. The possible states are the following:     Completed: The experiment completed successfully    Cancelled: The experiment was canceled  
+     */
+    DesiredState?: InferenceExperimentStopDesiredState;
+    /**
+     * The reason for stopping the experiment.
+     */
+    Reason?: InferenceExperimentStatusReason;
+  }
+  export interface StopInferenceExperimentResponse {
+    /**
+     * The ARN of the stopped inference experiment.
+     */
+    InferenceExperimentArn: InferenceExperimentArn;
   }
   export interface StopInferenceRecommendationsJobRequest {
     /**
@@ -17342,6 +19544,7 @@ declare namespace SageMaker {
      */
     PropertyNameQuery?: PropertyNameQuery;
   }
+  export type TableFormat = "Glue"|"Iceberg"|string;
   export type TableName = string;
   export interface Tag {
     /**
@@ -18045,6 +20248,10 @@ declare namespace SageMaker {
      * An array of the parents of the component. A parent is a trial the component is associated with and the experiment the trial is part of. A component might not have any parents.
      */
     Parents?: Parents;
+    /**
+     * The name of the experiment run.
+     */
+    RunName?: ExperimentEntityName;
   }
   export type TrialComponentArn = string;
   export interface TrialComponentArtifact {
@@ -18131,7 +20338,7 @@ declare namespace SageMaker {
   }
   export interface TrialComponentSource {
     /**
-     * The source ARN.
+     * The source Amazon Resource Name (ARN).
      */
     SourceArn: TrialComponentSourceArn;
     /**
@@ -18158,6 +20365,7 @@ declare namespace SageMaker {
      */
     TransformJob?: TransformJob;
   }
+  export type TrialComponentSources = TrialComponentSource[];
   export interface TrialComponentStatus {
     /**
      * The status of the trial component.
@@ -18176,7 +20384,7 @@ declare namespace SageMaker {
      */
     TrialComponentName?: ExperimentEntityName;
     /**
-     * The ARN of the trial component.
+     * The Amazon Resource Name (ARN) of the trial component.
      */
     TrialComponentArn?: TrialComponentArn;
     /**
@@ -18453,6 +20661,10 @@ declare namespace SageMaker {
      * A collection of DomainSettings configuration values to update.
      */
     DomainSettingsForUpdate?: DomainSettingsForUpdate;
+    /**
+     * The default settings used to create a space within the Domain.
+     */
+    DefaultSpaceSettings?: DefaultSpaceSettings;
   }
   export interface UpdateDomainResponse {
     /**
@@ -18566,6 +20778,30 @@ declare namespace SageMaker {
      */
     ParameterRemovals?: FeatureParameterRemovals;
   }
+  export interface UpdateHubRequest {
+    /**
+     * The name of the hub to update.
+     */
+    HubName: HubName;
+    /**
+     * A description of the updated hub.
+     */
+    HubDescription?: HubDescription;
+    /**
+     * The display name of the hub.
+     */
+    HubDisplayName?: HubDisplayName;
+    /**
+     * The searchable keywords for the hub.
+     */
+    HubSearchKeywords?: HubSearchKeywordList;
+  }
+  export interface UpdateHubResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated hub.
+     */
+    HubArn: HubArn;
+  }
   export interface UpdateImageRequest {
     /**
      * A list of properties to delete. Only the Description and DisplayName properties can be deleted.
@@ -18593,6 +20829,58 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the image.
      */
     ImageArn?: ImageArn;
+  }
+  export interface UpdateInferenceExperimentRequest {
+    /**
+     * The name of the inference experiment to be updated.
+     */
+    Name: InferenceExperimentName;
+    /**
+     *  The duration for which the inference experiment will run. If the status of the inference experiment is Created, then you can update both the start and end dates. If the status of the inference experiment is Running, then you can update only the end date. 
+     */
+    Schedule?: InferenceExperimentSchedule;
+    /**
+     * The description of the inference experiment.
+     */
+    Description?: InferenceExperimentDescription;
+    /**
+     *  Array of ModelVariantConfigSummary objects. There is one for each variant, whose infrastructure configuration you want to update. 
+     */
+    ModelVariants?: ModelVariantConfigList;
+    /**
+     * The Amazon S3 storage configuration for the inference experiment.
+     */
+    DataStorageConfig?: InferenceExperimentDataStorageConfig;
+    /**
+     * The Amazon S3 storage configuration for the inference experiment.
+     */
+    ShadowModeConfig?: ShadowModeConfig;
+  }
+  export interface UpdateInferenceExperimentResponse {
+    /**
+     * The ARN of the updated inference experiment.
+     */
+    InferenceExperimentArn: InferenceExperimentArn;
+  }
+  export interface UpdateModelCardRequest {
+    /**
+     * The name of the model card to update.
+     */
+    ModelCardName: EntityName;
+    /**
+     * The updated model card content. Content must be in model card JSON schema and provided as a string. When updating model card content, be sure to include the full content and not just updated content.
+     */
+    Content?: ModelCardContent;
+    /**
+     * The approval status of the model card within your organization. Different organizations might have different criteria for model card review and approval.    Draft: The model card is a work in progress.    PendingReview: The model card is pending review.    Approved: The model card is approved.    Archived: The model card is archived. No more updates should be made to the model card, but it can still be exported.  
+     */
+    ModelCardStatus?: ModelCardStatus;
+  }
+  export interface UpdateModelCardResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated model card.
+     */
+    ModelCardArn: ModelCardArn;
   }
   export interface UpdateModelPackageInput {
     /**
@@ -18625,6 +20913,34 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the model.
      */
     ModelPackageArn: ModelPackageArn;
+  }
+  export interface UpdateMonitoringAlertRequest {
+    /**
+     * The name of a monitoring schedule.
+     */
+    MonitoringScheduleName: MonitoringScheduleName;
+    /**
+     * The name of a monitoring alert.
+     */
+    MonitoringAlertName: MonitoringAlertName;
+    /**
+     * Within EvaluationPeriod, how many execution failures will raise an alert.
+     */
+    DatapointsToAlert: MonitoringDatapointsToAlert;
+    /**
+     * The number of most recent monitoring executions to consider when evaluating alert status.
+     */
+    EvaluationPeriod: MonitoringEvaluationPeriod;
+  }
+  export interface UpdateMonitoringAlertResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the monitoring schedule.
+     */
+    MonitoringScheduleArn: MonitoringScheduleArn;
+    /**
+     * The name of a monitoring alert.
+     */
+    MonitoringAlertName?: MonitoringAlertName;
   }
   export interface UpdateMonitoringScheduleRequest {
     /**
@@ -18802,17 +21118,37 @@ declare namespace SageMaker {
      */
     ProjectArn: ProjectArn;
   }
+  export interface UpdateSpaceRequest {
+    /**
+     * The ID of the associated Domain.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the space.
+     */
+    SpaceName: SpaceName;
+    /**
+     * A collection of space settings.
+     */
+    SpaceSettings?: SpaceSettings;
+  }
+  export interface UpdateSpaceResponse {
+    /**
+     * The space's Amazon Resource Name (ARN).
+     */
+    SpaceArn?: SpaceArn;
+  }
   export interface UpdateTrainingJobRequest {
     /**
      * The name of a training job to update the Debugger profiling configuration.
      */
     TrainingJobName: TrainingJobName;
     /**
-     * Configuration information for Debugger system monitoring, framework profiling, and storage paths.
+     * Configuration information for Amazon SageMaker Debugger system monitoring, framework profiling, and storage paths.
      */
     ProfilerConfig?: ProfilerConfigForUpdate;
     /**
-     * Configuration information for Debugger rules for profiling system and framework metrics.
+     * Configuration information for Amazon SageMaker Debugger rules for profiling system and framework metrics.
      */
     ProfilerRuleConfigurations?: ProfilerRuleConfigurations;
     /**

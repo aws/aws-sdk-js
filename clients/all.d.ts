@@ -328,3 +328,5 @@ export import Omics = require('./omics');
 export import OpenSearchServerless = require('./opensearchserverless');
 export import SecurityLake = require('./securitylake');
 export import SimSpaceWeaver = require('./simspaceweaver');
+export import DocDBElastic = require('./docdbelastic');
+export import SageMakerGeospatial = require('./sagemakergeospatial');

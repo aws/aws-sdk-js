@@ -333,11 +333,11 @@ declare class S3Control extends Service {
    */
   getStorageLensConfigurationTagging(callback?: (err: AWSError, data: S3Control.Types.GetStorageLensConfigurationTaggingResult) => void): Request<S3Control.Types.GetStorageLensConfigurationTaggingResult, AWSError>;
   /**
-   * Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint   
+   * Returns a list of the access points owned by the current account associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint   
    */
   listAccessPoints(params: S3Control.Types.ListAccessPointsRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
-   * Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint   
+   * Returns a list of the access points owned by the current account associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint   
    */
   listAccessPoints(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
@@ -533,6 +533,10 @@ declare namespace S3Control {
      * The name or alias of the access point.
      */
     Alias?: Alias;
+    /**
+     * The Amazon Web Services account ID associated with the S3 bucket associated with this access point.
+     */
+    BucketAccountId?: AccountId;
   }
   export type AccessPointList = AccessPoint[];
   export type AccessPointName = string;
@@ -722,7 +726,7 @@ declare namespace S3Control {
   }
   export interface CreateAccessPointRequest {
     /**
-     * The Amazon Web Services account ID for the owner of the bucket for which you want to create an access point.
+     * The Amazon Web Services account ID for the account that owns the specified access point.
      */
     AccountId: AccountId;
     /**
@@ -741,6 +745,10 @@ declare namespace S3Control {
      *  The PublicAccessBlock configuration that you want to apply to the access point. 
      */
     PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
+    /**
+     * The Amazon Web Services account ID associated with the S3 bucket associated with this access point.
+     */
+    BucketAccountId?: AccountId;
   }
   export interface CreateAccessPointResult {
     /**
@@ -930,7 +938,7 @@ declare namespace S3Control {
   }
   export interface DeleteAccessPointRequest {
     /**
-     * The account ID for the account that owns the specified access point.
+     * The Amazon Web Services account ID for the account that owns the specified access point.
      */
     AccountId: AccountId;
     /**
@@ -1217,7 +1225,7 @@ declare namespace S3Control {
   }
   export interface GetAccessPointRequest {
     /**
-     * The account ID for the account that owns the specified access point.
+     * The Amazon Web Services account ID for the account that owns the specified access point.
      */
     AccountId: AccountId;
     /**
@@ -1259,6 +1267,10 @@ declare namespace S3Control {
      * The VPC endpoint for the access point.
      */
     Endpoints?: Endpoints;
+    /**
+     * The Amazon Web Services account ID associated with the S3 bucket associated with this access point.
+     */
+    BucketAccountId?: AccountId;
   }
   export interface GetBucketLifecycleConfigurationRequest {
     /**
@@ -1900,7 +1912,7 @@ declare namespace S3Control {
   }
   export interface ListAccessPointsRequest {
     /**
-     * The Amazon Web Services account ID for owner of the bucket whose access points you want to list.
+     * The Amazon Web Services account ID for the account that owns the specified access points.
      */
     AccountId: AccountId;
     /**
