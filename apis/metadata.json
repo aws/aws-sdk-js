@@ -1249,5 +1249,11 @@
   "sagemakergeospatial": {
     "prefix": "sagemaker-geospatial",
     "name": "SageMakerGeospatial"
+  },
+  "codecatalyst": {
+    "name": "CodeCatalyst"
+  },
+  "pipes": {
+    "name": "Pipes"
   }
 }

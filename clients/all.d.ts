@@ -330,3 +330,5 @@ export import SecurityLake = require('./securitylake');
 export import SimSpaceWeaver = require('./simspaceweaver');
 export import DocDBElastic = require('./docdbelastic');
 export import SageMakerGeospatial = require('./sagemakergeospatial');
+export import CodeCatalyst = require('./codecatalyst');
+export import Pipes = require('./pipes');

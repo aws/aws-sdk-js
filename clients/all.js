@@ -331,5 +331,7 @@ module.exports = {
   SecurityLake: require('./securitylake'),
   SimSpaceWeaver: require('./simspaceweaver'),
   DocDBElastic: require('./docdbelastic'),
-  SageMakerGeospatial: require('./sagemakergeospatial')
+  SageMakerGeospatial: require('./sagemakergeospatial'),
+  CodeCatalyst: require('./codecatalyst'),
+  Pipes: require('./pipes')
 };

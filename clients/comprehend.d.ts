@@ -60,11 +60,11 @@ declare class Comprehend extends Service {
    */
   batchDetectTargetedSentiment(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectTargetedSentimentResponse) => void): Request<Comprehend.Types.BatchDetectTargetedSentimentResponse, AWSError>;
   /**
-   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
+   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint. You can input plain text or you can upload a single-page input document (text, PDF, Word, or image).  If the system detects errors while processing a page in the input document, the API response includes an entry in Errors that describes the errors. If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
    */
   classifyDocument(params: Comprehend.Types.ClassifyDocumentRequest, callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
-   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
+   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint. You can input plain text or you can upload a single-page input document (text, PDF, Word, or image).  If the system detects errors while processing a page in the input document, the API response includes an entry in Errors that describes the errors. If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
    */
   classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Comprehend extends Service {
    */
   detectDominantLanguage(callback?: (err: AWSError, data: Comprehend.Types.DetectDominantLanguageResponse) => void): Request<Comprehend.Types.DetectDominantLanguageResponse, AWSError>;
   /**
-   * Inspects text for named entities, and returns information about them. For more information, about named entities, see Entities in the Comprehend Developer Guide.
+   * Detects named entities in input text when you use the pre-trained model. Detects custom entities if you have a custom entity recognition model.   When detecting named entities using the pre-trained model, use plain text as the input. For more information about named entities, see Entities in the Comprehend Developer Guide. When you use a custom entity recognition model, you can input plain text or you can upload a single-page input document (text, PDF, Word, or image).  If the system detects errors while processing a page in the input document, the API response includes an entry in Errors for each error.  If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
    */
   detectEntities(params: Comprehend.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
-   * Inspects text for named entities, and returns information about them. For more information, about named entities, see Entities in the Comprehend Developer Guide.
+   * Detects named entities in input text when you use the pre-trained model. Detects custom entities if you have a custom entity recognition model.   When detecting named entities using the pre-trained model, use plain text as the input. For more information about named entities, see Entities in the Comprehend Developer Guide. When you use a custom entity recognition model, you can input plain text or you can upload a single-page input document (text, PDF, Word, or image).  If the system detects errors while processing a page in the input document, the API response includes an entry in Errors for each error.  If the system detects a document-level error in your input document, the API returns an InvalidRequestException error response. For details about this exception, see  Errors in semi-structured documents in the Comprehend Developer Guide. 
    */
   detectEntities(callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
@@ -822,6 +822,83 @@ declare namespace Comprehend {
     ErrorMessage?: String;
   }
   export type BatchItemErrorList = BatchItemError[];
+  export interface Block {
+    /**
+     * Unique identifier for the block.
+     */
+    Id?: String;
+    /**
+     * The block represents a line of text or one word of text.   WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.   LINE - A string of tab-delimited, contiguous words that are detected on a document page  
+     */
+    BlockType?: BlockType;
+    /**
+     * The word or line of text extracted from the block.
+     */
+    Text?: String;
+    /**
+     * Page number where the block appears.
+     */
+    Page?: Integer;
+    /**
+     * Co-ordinates of the rectangle or polygon that contains the text.
+     */
+    Geometry?: Geometry;
+    /**
+     * A list of child blocks of the current block. For example, a LINE object has child blocks for each WORD block that's part of the line of text. 
+     */
+    Relationships?: ListOfRelationships;
+  }
+  export interface BlockReference {
+    /**
+     * Unique identifier for the block.
+     */
+    BlockId?: String;
+    /**
+     * Offset of the start of the block within its parent block.
+     */
+    BeginOffset?: Integer;
+    /**
+     * Offset of the end of the block within its parent block.
+     */
+    EndOffset?: Integer;
+    /**
+     * List of child blocks within this block.
+     */
+    ChildBlocks?: ListOfChildBlocks;
+  }
+  export type BlockType = "LINE"|"WORD"|string;
+  export interface BoundingBox {
+    /**
+     * The height of the bounding box as a ratio of the overall document page height.
+     */
+    Height?: Float;
+    /**
+     * The left coordinate of the bounding box as a ratio of overall document page width.
+     */
+    Left?: Float;
+    /**
+     * The top coordinate of the bounding box as a ratio of overall document page height.
+     */
+    Top?: Float;
+    /**
+     * The width of the bounding box as a ratio of the overall document page width.
+     */
+    Width?: Float;
+  }
+  export interface ChildBlock {
+    /**
+     * Unique identifier for the child block.
+     */
+    ChildBlockId?: String;
+    /**
+     * Offset of the start of the child block within its parent block.
+     */
+    BeginOffset?: Integer;
+    /**
+     * Offset of the end of the child block within its parent block.
+     */
+    EndOffset?: Integer;
+  }
   export interface ClassifierEvaluationMetrics {
     /**
      * The fraction of the labels that were correct recognized. It is computed by dividing the number of labels in the test documents that were correctly recognized by the total number of labels in the test documents.
@@ -876,13 +953,21 @@ declare namespace Comprehend {
   }
   export interface ClassifyDocumentRequest {
     /**
-     * The document text to be analyzed.
+     * The document text to be analyzed. If you enter text using this parameter, do not use the Bytes parameter.
      */
-    Text: CustomerInputString;
+    Text?: CustomerInputString;
     /**
      * The Amazon Resource Number (ARN) of the endpoint. For information about endpoints, see Managing endpoints.
      */
     EndpointArn: DocumentClassifierEndpointArn;
+    /**
+     * Use the Bytes parameter to input a text, PDF, Word or image file. You can also use the Bytes parameter to input an Amazon Textract DetectDocumentText or AnalyzeDocument output file. Provide the input document as a sequence of base64-encoded bytes. If your code uses an Amazon Web Services SDK to classify documents, the SDK may encode the document file bytes for you.  The maximum length of this field depends on the input document type. For details, see  Inputs for real-time custom analysis in the Comprehend Developer Guide.  If you use the Bytes parameter, do not use the Text parameter.
+     */
+    Bytes?: SemiStructuredDocumentBlob;
+    /**
+     * Provides configuration parameters to override the default actions for extracting text from PDF documents and image files.
+     */
+    DocumentReaderConfig?: DocumentReaderConfig;
   }
   export interface ClassifyDocumentResponse {
     /**
@@ -893,6 +978,18 @@ declare namespace Comprehend {
      * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
      */
     Labels?: ListOfLabels;
+    /**
+     * Extraction information about the document. This field is present in the response only if your request includes the Byte parameter. 
+     */
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The document type for each page in the input document. This field is present in the response only if your request includes the Byte parameter. 
+     */
+    DocumentType?: ListOfDocumentType;
+    /**
+     * Page-level errors that the system detected while processing the input document. The field is empty if the system encountered no errors.
+     */
+    Errors?: ListOfErrors;
   }
   export type ClientRequestTokenString = string;
   export type ComprehendArn = string;
@@ -1034,7 +1131,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     *  You can specify any of the following languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), German ("de"), or Portuguese ("pt"). All documents must be in the same language.
+     *  You can specify any of the following languages: English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), German ("de"), or Portuguese ("pt"). If you plan to use this entity recognizer with PDF, Word, or image input files, you must specify English as the language. All training documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1205,7 +1302,7 @@ declare namespace Comprehend {
   }
   export interface DescribeResourcePolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the policy to describe.
+     * The Amazon Resource Name (ARN) of the custom model version that has the resource policy.
      */
     ResourceArn: ComprehendModelArn;
   }
@@ -1277,23 +1374,47 @@ declare namespace Comprehend {
   }
   export interface DetectEntitiesRequest {
     /**
-     * A UTF-8 text string. The maximum string size is 100 KB.
+     * A UTF-8 text string. The maximum string size is 100 KB. If you enter text using this parameter, do not use the Bytes parameter.
      */
-    Text: CustomerInputString;
+    Text?: CustomerInputString;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language. If your request includes the endpoint for a custom entity recognition model, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you specify here.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. If your request includes the endpoint for a custom entity recognition model, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you specify here. All input documents must be in the same language.
      */
     LanguageCode?: LanguageCode;
     /**
      * The Amazon Resource Name of an endpoint that is associated with a custom entity recognition model. Provide an endpoint if you want to detect entities by using your own custom model instead of the default model that is used by Amazon Comprehend. If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you provide in your request. For information about endpoints, see Managing endpoints.
      */
     EndpointArn?: EntityRecognizerEndpointArn;
+    /**
+     * This field applies only when you use a custom entity recognition model that was trained with PDF annotations. For other cases, enter your text input in the Text field.  Use the Bytes parameter to input a text, PDF, Word or image file. Using a plain-text file in the Bytes parameter is equivelent to using the Text parameter (the Entities field in the response is identical). You can also use the Bytes parameter to input an Amazon Textract DetectDocumentText or AnalyzeDocument output file. Provide the input document as a sequence of base64-encoded bytes. If your code uses an Amazon Web Services SDK to detect entities, the SDK may encode the document file bytes for you.  The maximum length of this field depends on the input document type. For details, see  Inputs for real-time custom analysis in the Comprehend Developer Guide.  If you use the Bytes parameter, do not use the Text parameter.
+     */
+    Bytes?: SemiStructuredDocumentBlob;
+    /**
+     * Provides configuration parameters to override the default actions for extracting text from PDF documents and image files.
+     */
+    DocumentReaderConfig?: DocumentReaderConfig;
   }
   export interface DetectEntitiesResponse {
     /**
      * A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.  If your request uses a custom entity recognition model, Amazon Comprehend detects the entities that the model is trained to recognize. Otherwise, it detects the default entity types. For a list of default entity types, see Entities in the Comprehend Developer Guide. 
      */
     Entities?: ListOfEntities;
+    /**
+     * Information about the document, discovered during text extraction. This field is present in the response only if your request used the Byte parameter. 
+     */
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The document type for each page in the input document. This field is present in the response only if your request used the Byte parameter. 
+     */
+    DocumentType?: ListOfDocumentType;
+    /**
+     * Information about each block of text in the input document. Blocks are nested. A page block contains a block for each line of text, which contains a block for each word.  The Block content for a Word input document does not include a Geometry field. The Block field is not present in the response for plain-text inputs.
+     */
+    Blocks?: ListOfBlocks;
+    /**
+     * Page-level errors that the system detected while processing the input document. The field is empty if the system encountered no errors.
+     */
+    Errors?: ListOfErrors;
   }
   export interface DetectKeyPhrasesRequest {
     /**
@@ -1388,6 +1509,10 @@ declare namespace Comprehend {
      * The confidence score that Amazon Comprehend has this class correctly attributed.
      */
     Score?: Float;
+    /**
+     * Page number in the input document. This field is present in the response only if your request includes the Byte parameter. 
+     */
+    Page?: Integer;
   }
   export interface DocumentClassificationJobFilter {
     /**
@@ -1624,23 +1749,48 @@ declare namespace Comprehend {
      * The confidence score that Amazon Comprehend has this label correctly attributed.
      */
     Score?: Float;
+    /**
+     * Page number where the label occurs. This field is present in the response only if your request includes the Byte parameter. 
+     */
+    Page?: Integer;
+  }
+  export interface DocumentMetadata {
+    /**
+     * Number of pages in the document.
+     */
+    Pages?: Integer;
+    /**
+     * List of pages in the document, with the number of characters extracted from each page.
+     */
+    ExtractedCharacters?: ListOfExtractedCharacters;
   }
   export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT"|string;
   export type DocumentReadFeatureTypes = "TABLES"|"FORMS"|string;
   export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION"|string;
   export interface DocumentReaderConfig {
     /**
-     * This enum field will start with two values which will apply to PDFs:    TEXTRACT_DETECT_DOCUMENT_TEXT - The service calls DetectDocumentText for PDF documents per page.    TEXTRACT_ANALYZE_DOCUMENT - The service calls AnalyzeDocument for PDF documents per page.  
+     * This field defines the Amazon Textract API operation that Amazon Comprehend uses to extract text from PDF files and image files. Enter one of the following values:    TEXTRACT_DETECT_DOCUMENT_TEXT - The Amazon Comprehend service uses the DetectDocumentText API operation.     TEXTRACT_ANALYZE_DOCUMENT - The Amazon Comprehend service uses the AnalyzeDocument API operation.   
      */
     DocumentReadAction: DocumentReadAction;
     /**
-     * This enum field provides two values:    SERVICE_DEFAULT - use service defaults for Document reading. For Digital PDF it would mean using an internal parser instead of Textract APIs    FORCE_DOCUMENT_READ_ACTION - Always use specified action for DocumentReadAction, including Digital PDF.   
+     * Determines the text extraction actions for PDF files. Enter one of the following values:    SERVICE_DEFAULT - use the Amazon Comprehend service defaults for PDF files.    FORCE_DOCUMENT_READ_ACTION - Amazon Comprehend uses the Textract API specified by DocumentReadAction for all PDF files, including digital PDF files.   
      */
     DocumentReadMode?: DocumentReadMode;
     /**
-     * Specifies how the text in an input file should be processed:
+     * Specifies the type of Amazon Textract features to apply. If you chose TEXTRACT_ANALYZE_DOCUMENT as the read action, you must specify one or both of the following values:    TABLES - Returns information about any tables that are detected in the input document.     FORMS - Returns information and the data from any forms that are detected in the input document.   
      */
     FeatureTypes?: ListOfDocumentReadFeatureTypes;
+  }
+  export type DocumentType = "NATIVE_PDF"|"SCANNED_PDF"|"MS_WORD"|"IMAGE"|"PLAIN_TEXT"|"TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"|"TEXTRACT_ANALYZE_DOCUMENT_JSON"|string;
+  export interface DocumentTypeListItem {
+    /**
+     * Page number.
+     */
+    Page?: Integer;
+    /**
+     * Document type.
+     */
+    Type?: DocumentType;
   }
   export interface DominantLanguage {
     /**
@@ -1871,7 +2021,7 @@ declare namespace Comprehend {
      */
     Score?: Float;
     /**
-     * The entity's type.
+     * The entity type. For entity detection using the built-in model, this field contains one of the standard entity types listed below. For custom entity detection, this field contains one of the entity types that you specified when you trained your custom model.
      */
     Type?: EntityType;
     /**
@@ -1879,13 +2029,17 @@ declare namespace Comprehend {
      */
     Text?: String;
     /**
-     * The zero-based offset from the beginning of the source text to the first character in the entity.
+     * The zero-based offset from the beginning of the source text to the first character in the entity. This field is empty for non-text input.
      */
     BeginOffset?: Integer;
     /**
-     * The zero-based offset from the beginning of the source text to the last character in the entity.
+     * The zero-based offset from the beginning of the source text to the last character in the entity. This field is empty for non-text input.
      */
     EndOffset?: Integer;
+    /**
+     * A reference to each block for this entity. This field is empty for plain-text input.
+     */
+    BlockReferences?: ListOfBlockReferences;
   }
   export interface EntityLabel {
     /**
@@ -2135,6 +2289,20 @@ declare namespace Comprehend {
      */
     Type: EntityTypeName;
   }
+  export interface ErrorsListItem {
+    /**
+     * Page number where the error occurred.
+     */
+    Page?: Integer;
+    /**
+     * Error code for the cause of the error.
+     */
+    ErrorCode?: PageBasedErrorCode;
+    /**
+     * Text message explaining the reason for the error.
+     */
+    ErrorMessage?: String;
+  }
   export type EventTypeString = string;
   export interface EventsDetectionJobFilter {
     /**
@@ -2205,7 +2373,27 @@ declare namespace Comprehend {
     TargetEventTypes?: TargetEventTypes;
   }
   export type EventsDetectionJobPropertiesList = EventsDetectionJobProperties[];
+  export interface ExtractedCharactersListItem {
+    /**
+     * Page number.
+     */
+    Page?: Integer;
+    /**
+     * Number of characters extracted from each page.
+     */
+    Count?: Integer;
+  }
   export type Float = number;
+  export interface Geometry {
+    /**
+     * An axis-aligned coarse representation of the location of the recognized item on the document page.
+     */
+    BoundingBox?: BoundingBox;
+    /**
+     * Within the bounding box, a fine-grained polygon around the recognized item.
+     */
+    Polygon?: Polygon;
+  }
   export type IamRoleArn = string;
   export interface ImportModelRequest {
     /**
@@ -2250,7 +2438,7 @@ declare namespace Comprehend {
      */
     InputFormat?: InputFormat;
     /**
-     * The document reader config field applies only for InputDataConfig of StartEntitiesDetectionJob.  Use DocumentReaderConfig to provide specifications about how you want your inference documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom inference.
+     * Provides configuration parameters to override the default actions for extracting text from PDF documents and image files.
      */
     DocumentReaderConfig?: DocumentReaderConfig;
   }
@@ -2585,6 +2773,9 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export type ListOfBlockReferences = BlockReference[];
+  export type ListOfBlocks = Block[];
+  export type ListOfChildBlocks = ChildBlock[];
   export type ListOfClasses = DocumentClass[];
   export type ListOfDescriptiveMentionIndices = Integer[];
   export type ListOfDetectDominantLanguageResult = BatchDetectDominantLanguageItemResult[];
@@ -2594,14 +2785,18 @@ declare namespace Comprehend {
   export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
   export type ListOfDetectTargetedSentimentResult = BatchDetectTargetedSentimentItemResult[];
   export type ListOfDocumentReadFeatureTypes = DocumentReadFeatureTypes[];
+  export type ListOfDocumentType = DocumentTypeListItem[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfEntityLabels = EntityLabel[];
+  export type ListOfErrors = ErrorsListItem[];
+  export type ListOfExtractedCharacters = ExtractedCharactersListItem[];
   export type ListOfKeyPhrases = KeyPhrase[];
   export type ListOfLabels = DocumentLabel[];
   export type ListOfMentions = TargetedSentimentMention[];
   export type ListOfPiiEntities = PiiEntity[];
   export type ListOfPiiEntityTypes = PiiEntityType[];
+  export type ListOfRelationships = RelationshipsListItem[];
   export type ListOfSyntaxTokens = SyntaxToken[];
   export type ListOfTargetedSentimentEntities = TargetedSentimentEntity[];
   export interface ListPiiEntitiesDetectionJobsRequest {
@@ -2737,6 +2932,7 @@ declare namespace Comprehend {
      */
     KmsKeyId?: KmsKeyId;
   }
+  export type PageBasedErrorCode = "TEXTRACT_BAD_PAGE"|"TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"|"PAGE_CHARACTERS_EXCEEDED"|"PAGE_SIZE_EXCEEDED"|"INTERNAL_SERVER_ERROR"|string;
   export interface PartOfSpeechTag {
     /**
      * Identifies the part of speech that the token represents.
@@ -2852,8 +3048,19 @@ declare namespace Comprehend {
      */
     KmsKeyId?: KmsKeyId;
   }
+  export interface Point {
+    /**
+     * The value of the X coordinate for a point on a polygon
+     */
+    X?: Float;
+    /**
+     * The value of the Y coordinate for a point on a polygon
+     */
+    Y?: Float;
+  }
   export type Policy = string;
   export type PolicyRevisionId = string;
+  export type Polygon = Point[];
   export interface PutResourcePolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the custom model to attach the policy to.
@@ -2888,9 +3095,21 @@ declare namespace Comprehend {
      */
     MaskCharacter?: MaskCharacter;
   }
+  export type RelationshipType = "CHILD"|string;
+  export interface RelationshipsListItem {
+    /**
+     * Identifers of the child blocks.
+     */
+    Ids?: StringList;
+    /**
+     * Only supported relationship is a child relationship.
+     */
+    Type?: RelationshipType;
+  }
   export type S3Uri = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export type SemiStructuredDocumentBlob = Buffer|Uint8Array|Blob|string;
   export interface SentimentDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -3571,6 +3790,7 @@ declare namespace Comprehend {
   export interface StopTrainingEntityRecognizerResponse {
   }
   export type String = string;
+  export type StringList = String[];
   export type SubnetId = string;
   export type Subnets = SubnetId[];
   export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;

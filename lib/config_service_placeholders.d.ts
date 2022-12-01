@@ -332,6 +332,8 @@ export abstract class ConfigurationServicePlaceholders {
   simspaceweaver?: AWS.SimSpaceWeaver.Types.ClientConfiguration;
   docdbelastic?: AWS.DocDBElastic.Types.ClientConfiguration;
   sagemakergeospatial?: AWS.SageMakerGeospatial.Types.ClientConfiguration;
+  codecatalyst?: AWS.CodeCatalyst.Types.ClientConfiguration;
+  pipes?: AWS.Pipes.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -666,4 +668,6 @@ export interface ConfigurationServiceApiVersions {
   simspaceweaver?: AWS.SimSpaceWeaver.Types.apiVersion;
   docdbelastic?: AWS.DocDBElastic.Types.apiVersion;
   sagemakergeospatial?: AWS.SageMakerGeospatial.Types.apiVersion;
+  codecatalyst?: AWS.CodeCatalyst.Types.apiVersion;
+  pipes?: AWS.Pipes.Types.apiVersion;
 }
