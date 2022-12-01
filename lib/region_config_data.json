@@ -68,7 +68,8 @@
       "endpoint": "{service}.{region}.amazonaws.com",
       "signatureVersion": "v2"
     },
-    "*/resource-explorer-2": "dualstackByDefault"
+    "*/resource-explorer-2": "dualstackByDefault",
+    "*/codecatalyst": "globalDualstackByDefault"
   },
 
   "fipsRules": {
@@ -129,7 +130,8 @@
     "us-gov-west-1/route53": {
       "endpoint": "route53.us-gov.amazonaws.com"
     },
-    "*/resource-explorer-2": "fipsDualstackByDefault"
+    "*/resource-explorer-2": "fipsDualstackByDefault",
+    "*/codecatalyst": "fipsGlobalDualstackByDefault"
   },
 
   "dualstackRules": {
