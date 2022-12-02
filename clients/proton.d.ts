@@ -969,7 +969,7 @@ declare namespace Proton {
     /**
      * The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. Proton uses this role to provision infrastructure resources in the associated environment account.
      */
-    roleArn: RoleArn;
+    roleArn?: RoleArn;
     /**
      * An optional list of metadata items that you can associate with the Proton environment account connection. A tag is a key-value pair. For more information, see Proton resources and tagging in the Proton User Guide.
      */

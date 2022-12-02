@@ -4245,7 +4245,8 @@
     "ThirdPartyFirewall": {
       "type": "string",
       "enum": [
-        "PALO_ALTO_NETWORKS_CLOUD_NGFW"
+        "PALO_ALTO_NETWORKS_CLOUD_NGFW",
+        "FORTIGATE_CLOUD_NATIVE_FIREWALL"
       ]
     },
     "ThirdPartyFirewallAssociationStatus": {

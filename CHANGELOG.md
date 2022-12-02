@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1266.0-->
+<!--LATEST=2.1267.0-->
 <!--ENTRYINSERT-->
+
+## 2.1267.0
+* feature: AppSync: Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. "/v1/dataplane-evaluatecode").
+* feature: FMS: AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type.
+* feature: MediaConvert: The AWS Elemental MediaConvert SDK has added support for configurable ID3 eMSG box attributes and the ability to signal them with InbandEventStream tags in DASH and CMAF outputs.
+* feature: MediaLive: Updates to Event Signaling and Management (ESAM) API and documentation.
+* feature: Polly: Add language code for Finnish (fi-FI)
+* feature: Proton: CreateEnvironmentAccountConnection RoleArn input is now optional
+* feature: RedshiftServerless: Add Table Level Restore operations for Amazon Redshift Serverless. Add multi-port support for Amazon Redshift Serverless endpoints. Add Tagging support to Snapshots and Recovery Points in Amazon Redshift Serverless.
 
 ## 2.1266.0
 * feature: CodeCatalyst: This release adds operations that support customers using the AWS Toolkits and Amazon CodeCatalyst, a unified software development service that helps developers develop, deploy, and maintain applications in the cloud. For more information, see the documentation.

@@ -2820,7 +2820,7 @@ You specify only the font family. All other style information (color, bold, posi
     /**
      * The URL of the signal conditioner endpoint on the Placement Opportunity Information System (POIS). MediaLive sends SignalProcessingEvents here when SCTE-35 messages are read.
      */
-    PoisEndpoint: __string;
+    PoisEndpoint: __stringMax2048;
     /**
      * Username if credentials are required to access the POIS endpoint.  This can be either a plaintext username, or a reference to an AWS parameter store name from which the username can be retrieved.  AWS Parameter store format: "ssm://"
      */

@@ -715,7 +715,7 @@ declare namespace ECS {
   }
   export interface ClusterServiceConnectDefaultsRequest {
     /**
-     * The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify a Service Connect configuration. Up to 1024 characters are allowed. The name is case-sensitive. The characters can't include hyphens (-), tilde (~), greater than (&gt;), less than (&lt;), or slash (/). If you enter an existing namespace name or ARN, then that namespace will be used. Any namespace type is supported. The namespace must be in this account and this Amazon Web Services Region. If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a Cloud Map namespace with the "API calls" method of instance discovery only. This instance discovery method is the "HTTP" namespace type in the Command Line Interface. Other types of instance discovery aren't used by Service Connect. If you update the service with an empty string "" for the namespace name, the cluster configuration for Service Connect is removed. Note that the namespace will remain in Cloud Map and must be deleted separately. For more information about Cloud Map, see Working with Services in the Cloud Map Developer Guide.
+     * The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service and don't specify a Service Connect configuration. The namespace name can include up to 1024 characters. The name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than (&gt;), less than (&lt;), or slash (/). If you enter an existing namespace name or ARN, then that namespace will be used. Any namespace type is supported. The namespace must be in this account and this Amazon Web Services Region. If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a Cloud Map namespace with the "API calls" method of instance discovery only. This instance discovery method is the "HTTP" namespace type in the Command Line Interface. Other types of instance discovery aren't used by Service Connect. If you update the service with an empty string "" for the namespace name, the cluster configuration for Service Connect is removed. Note that the namespace will remain in Cloud Map and must be deleted separately. For more information about Cloud Map, see Working with Services in the Cloud Map Developer Guide.
      */
     namespace: String;
   }
@@ -2680,7 +2680,7 @@ declare namespace ECS {
      */
     protocol?: TransportProtocol;
     /**
-     * The name that's used for the port mapping. This parameter only applies to Service Connect. This parameter is the name that you use in the serviceConnectConfiguration of a service. Up to 64 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). A hyphen can't be the first character. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     * The name that's used for the port mapping. This parameter only applies to Service Connect. This parameter is the name that you use in the serviceConnectConfiguration of a service. The name can include up to 64 characters. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). The name can't start with a hyphen. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
      */
     name?: String;
     /**
@@ -3211,7 +3211,7 @@ declare namespace ECS {
      */
     port: PortNumber;
     /**
-     * The dnsName is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. Up to 127 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). A hyphen can't be the first character. If this parameter isn't specified, the default value of discoveryName.namespace is used. If the discoveryName isn't specified, the portName.namespace from the task definition is used. To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are database, db, or the lowercase name of a database, such as mysql or redis. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
+     * The dnsName is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. The name can include up to 127 characters. The name can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name can't start with a hyphen. If this parameter isn't specified, the default value of discoveryName.namespace is used. If the discoveryName isn't specified, the port mapping name from the task definition is used in portName.namespace. To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are database, db, or the lowercase name of a database, such as mysql or redis. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
      */
     dnsName?: String;
   }
@@ -3226,7 +3226,7 @@ declare namespace ECS {
      */
     namespace?: String;
     /**
-     * The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service. You can specify up to X (30?) objects per Amazon ECS service. This field is not required for a "client" Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means. An object selects a port from the task definition, assigns a name for the Cloud Map service, and a list of aliases (endpoints) and ports for client applications to refer to this service.
+     * The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service.  This field is not required for a "client" Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means. An object selects a port from the task definition, assigns a name for the Cloud Map service, and a list of aliases (endpoints) and ports for client applications to refer to this service.
      */
     services?: ServiceConnectServiceList;
     logConfiguration?: LogConfiguration;
@@ -3237,7 +3237,7 @@ declare namespace ECS {
      */
     portName: String;
     /**
-     * The discoveryName is the name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS service. This must be unique within the Cloud Map namespace. Up to 64 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). A hyphen can't be the first character. If this field isn't specified, portName is used.
+     * The discoveryName is the name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters, numbers, underscores (_), and hyphens (-). The name can't start with a hyphen. If this parameter isn't specified, the default value of discoveryName.namespace is used. If the discoveryName isn't specified, the port mapping name from the task definition is used in portName.namespace.
      */
     discoveryName?: String;
     /**
@@ -3252,7 +3252,7 @@ declare namespace ECS {
   export type ServiceConnectServiceList = ServiceConnectService[];
   export interface ServiceConnectServiceResource {
     /**
-     * The discovery name of this Service Connect resource. The discoveryName is the name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS service. This must be unique within the Cloud Map namespace. Up to 64 characters are allowed. The characters can include lowercase letters, numbers, underscores (_), and hyphens (-). A hyphen can't be the first character. If this field isn't specified, portName is used.
+     * The discovery name of this Service Connect resource. The discoveryName is the name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS service. This must be unique within the Cloud Map namespace. The name can contain up to 64 characters. The name can include lowercase letters, numbers, underscores (_), and hyphens (-). The name can't start with a hyphen. If this parameter isn't specified, the default value of discoveryName.namespace is used. If the discoveryName isn't specified, the port mapping name from the task definition is used in portName.namespace.
      */
     discoveryName?: String;
     /**

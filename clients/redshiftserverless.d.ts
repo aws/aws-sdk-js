@@ -108,11 +108,11 @@ declare class RedshiftServerless extends Service {
    */
   deleteWorkgroup(callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteWorkgroupResponse) => void): Request<RedshiftServerless.Types.DeleteWorkgroupResponse, AWSError>;
   /**
-   * Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).  &lt;p&gt; The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources. &lt;/p&gt; &lt;p&gt; If the &lt;code&gt;DbName&lt;/code&gt; parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.&lt;/p&gt; 
+   * Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).  &lt;p&gt;The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.&lt;/p&gt; &lt;p&gt;If the &lt;code&gt;DbName&lt;/code&gt; parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.&lt;/p&gt; 
    */
   getCredentials(params: RedshiftServerless.Types.GetCredentialsRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.GetCredentialsResponse) => void): Request<RedshiftServerless.Types.GetCredentialsResponse, AWSError>;
   /**
-   * Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).  &lt;p&gt; The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources. &lt;/p&gt; &lt;p&gt; If the &lt;code&gt;DbName&lt;/code&gt; parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.&lt;/p&gt; 
+   * Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).  &lt;p&gt;The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.&lt;/p&gt; &lt;p&gt;If the &lt;code&gt;DbName&lt;/code&gt; parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.&lt;/p&gt; 
    */
   getCredentials(callback?: (err: AWSError, data: RedshiftServerless.Types.GetCredentialsResponse) => void): Request<RedshiftServerless.Types.GetCredentialsResponse, AWSError>;
   /**
@@ -155,6 +155,14 @@ declare class RedshiftServerless extends Service {
    * Returns information about a specific snapshot.
    */
   getSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.GetSnapshotResponse) => void): Request<RedshiftServerless.Types.GetSnapshotResponse, AWSError>;
+  /**
+   * Returns information about a TableRestoreStatus object.
+   */
+  getTableRestoreStatus(params: RedshiftServerless.Types.GetTableRestoreStatusRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.GetTableRestoreStatusResponse) => void): Request<RedshiftServerless.Types.GetTableRestoreStatusResponse, AWSError>;
+  /**
+   * Returns information about a TableRestoreStatus object.
+   */
+  getTableRestoreStatus(callback?: (err: AWSError, data: RedshiftServerless.Types.GetTableRestoreStatusResponse) => void): Request<RedshiftServerless.Types.GetTableRestoreStatusResponse, AWSError>;
   /**
    * Returns information about a usage limit.
    */
@@ -204,6 +212,14 @@ declare class RedshiftServerless extends Service {
    */
   listSnapshots(callback?: (err: AWSError, data: RedshiftServerless.Types.ListSnapshotsResponse) => void): Request<RedshiftServerless.Types.ListSnapshotsResponse, AWSError>;
   /**
+   * Returns information about an array of TableRestoreStatus objects.
+   */
+  listTableRestoreStatus(params: RedshiftServerless.Types.ListTableRestoreStatusRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.ListTableRestoreStatusResponse) => void): Request<RedshiftServerless.Types.ListTableRestoreStatusResponse, AWSError>;
+  /**
+   * Returns information about an array of TableRestoreStatus objects.
+   */
+  listTableRestoreStatus(callback?: (err: AWSError, data: RedshiftServerless.Types.ListTableRestoreStatusResponse) => void): Request<RedshiftServerless.Types.ListTableRestoreStatusResponse, AWSError>;
+  /**
    * Lists the tags assigned to a resource.
    */
   listTagsForResource(params: RedshiftServerless.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.ListTagsForResourceResponse) => void): Request<RedshiftServerless.Types.ListTagsForResourceResponse, AWSError>;
@@ -251,6 +267,14 @@ declare class RedshiftServerless extends Service {
    * Restores a namespace from a snapshot.
    */
   restoreFromSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreFromSnapshotResponse, AWSError>;
+  /**
+   * Restores a table from a snapshot to your Amazon Redshift Serverless instance.
+   */
+  restoreTableFromSnapshot(params: RedshiftServerless.Types.RestoreTableFromSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromSnapshotResponse, AWSError>;
+  /**
+   * Restores a table from a snapshot to your Amazon Redshift Serverless instance.
+   */
+  restoreTableFromSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromSnapshotResponse, AWSError>;
   /**
    * Assigns one or more tags to a resource.
    */
@@ -336,6 +360,10 @@ declare namespace RedshiftServerless {
      * The name of the snapshot.
      */
     snapshotName: String;
+    /**
+     * An array of Tag objects to associate with the created snapshot.
+     */
+    tags?: TagList;
   }
   export interface ConvertRecoveryPointToSnapshotResponse {
     /**
@@ -424,6 +452,10 @@ declare namespace RedshiftServerless {
      * The name of the snapshot.
      */
     snapshotName: String;
+    /**
+     * An array of Tag objects to associate with the snapshot.
+     */
+    tags?: TagList;
   }
   export interface CreateSnapshotResponse {
     /**
@@ -476,6 +508,10 @@ declare namespace RedshiftServerless {
      * The name of the namespace to associate with the workgroup.
      */
     namespaceName: NamespaceName;
+    /**
+     * The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
+     */
+    port?: Integer;
     /**
      * A value that specifies whether the workgroup can be accessed from a public network.
      */
@@ -642,7 +678,7 @@ declare namespace RedshiftServerless {
   export type EndpointAccessList = EndpointAccess[];
   export interface GetCredentialsRequest {
     /**
-     * The name of the database to get temporary authorization to log on to. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens.   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   The first character must be a letter.   Must not contain a colon ( : ) or slash ( / ).   Cannot be a reserved word. A list of reserved words can be found in Reserved Words  in the Amazon Redshift Database Developer Guide  
+     * The name of the database to get temporary authorization to log on to. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens.   Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   The first character must be a letter.   Must not contain a colon ( : ) or slash ( / ).   Cannot be a reserved word. A list of reserved words can be found in Reserved Words  in the Amazon Redshift Database Developer Guide  
      */
     dbName?: DbName;
     /**
@@ -740,6 +776,18 @@ declare namespace RedshiftServerless {
      */
     snapshot?: Snapshot;
   }
+  export interface GetTableRestoreStatusRequest {
+    /**
+     * The ID of the RestoreTableFromSnapshot request to return status for.
+     */
+    tableRestoreRequestId: String;
+  }
+  export interface GetTableRestoreStatusResponse {
+    /**
+     * The returned TableRestoreStatus object that contains information about the status of your RestoreTableFromSnapshot request.
+     */
+    tableRestoreStatus?: TableRestoreStatus;
+  }
   export interface GetUsageLimitRequest {
     /**
      * The unique identifier of the usage limit to return information for.
@@ -770,11 +818,11 @@ declare namespace RedshiftServerless {
   export type KmsKeyId = string;
   export interface ListEndpointAccessRequest {
     /**
-     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
      */
     maxResults?: ListEndpointAccessRequestMaxResultsInteger;
     /**
-     * If your initial ListEndpointAccess operation returns a nextToken, you can include the returned nextToken in subsequent ListEndpointAccess operations, which returns results in the next page.
+     * If your initial ListEndpointAccess operation returns a nextToken, you can include the returned nextToken in following ListEndpointAccess operations, which returns results in the next page.
      */
     nextToken?: String;
     /**
@@ -799,11 +847,11 @@ declare namespace RedshiftServerless {
   }
   export interface ListNamespacesRequest {
     /**
-     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
      */
     maxResults?: ListNamespacesRequestMaxResultsInteger;
     /**
-     * If your initial ListNamespaces operation returns a nextToken, you can include the returned nextToken in subsequent ListNamespaces operations, which returns results in the next page.
+     * If your initial ListNamespaces operation returns a nextToken, you can include the returned nextToken in following ListNamespaces operations, which returns results in the next page.
      */
     nextToken?: String;
   }
@@ -824,15 +872,19 @@ declare namespace RedshiftServerless {
      */
     endTime?: Timestamp;
     /**
-     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
      */
     maxResults?: ListRecoveryPointsRequestMaxResultsInteger;
+    /**
+     * The Amazon Resource Name (ARN) of the namespace from which to list recovery points.
+     */
+    namespaceArn?: String;
     /**
      * The name of the namespace to list recovery points for.
      */
     namespaceName?: NamespaceName;
     /**
-     * If your initial ListRecoveryPoints operation returns a nextToken, you can include the returned nextToken in subsequent ListRecoveryPoints operations, which returns results in the next page.
+     * If your initial ListRecoveryPoints operation returns a nextToken, you can include the returned nextToken in following ListRecoveryPoints operations, which returns results in the next page.
      */
     nextToken?: String;
     /**
@@ -857,7 +909,7 @@ declare namespace RedshiftServerless {
      */
     endTime?: Timestamp;
     /**
-     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
      */
     maxResults?: ListSnapshotsRequestMaxResultsInteger;
     /**
@@ -892,6 +944,35 @@ declare namespace RedshiftServerless {
      */
     snapshots?: SnapshotList;
   }
+  export interface ListTableRestoreStatusRequest {
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
+     */
+    maxResults?: ListTableRestoreStatusRequestMaxResultsInteger;
+    /**
+     * The namespace from which to list all of the statuses of RestoreTableFromSnapshot operations .
+     */
+    namespaceName?: String;
+    /**
+     * If your initial ListTableRestoreStatus operation returns a nextToken, you can include the returned nextToken in following ListTableRestoreStatus operations. This will return results on the next page.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The workgroup from which to list all of the statuses of RestoreTableFromSnapshot operations.
+     */
+    workgroupName?: String;
+  }
+  export type ListTableRestoreStatusRequestMaxResultsInteger = number;
+  export interface ListTableRestoreStatusResponse {
+    /**
+     * If your initial ListTableRestoreStatus operation returns a nextToken, you can include the returned nextToken in following ListTableRestoreStatus operations. This will returns results on the next page.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The array of returned TableRestoreStatus objects.
+     */
+    tableRestoreStatuses?: TableRestoreStatusList;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource to list tags for.
@@ -910,7 +991,7 @@ declare namespace RedshiftServerless {
      */
     maxResults?: ListUsageLimitsRequestMaxResultsInteger;
     /**
-     * If your initial ListUsageLimits operation returns a nextToken, you can include the returned nextToken in subsequent ListUsageLimits operations, which returns results in the next page. 
+     * If your initial ListUsageLimits operation returns a nextToken, you can include the returned nextToken in following ListUsageLimits operations, which returns results in the next page. 
      */
     nextToken?: PaginationToken;
     /**
@@ -935,11 +1016,11 @@ declare namespace RedshiftServerless {
   }
   export interface ListWorkgroupsRequest {
     /**
-     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
      */
     maxResults?: ListWorkgroupsRequestMaxResultsInteger;
     /**
-     * If your initial ListWorkgroups operation returns a nextToken, you can include the returned nextToken in subsequent ListNamespaces operations, which returns results in the next page.
+     * If your initial ListWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListNamespaces operations, which returns results in the next page.
      */
     nextToken?: String;
   }
@@ -1046,6 +1127,10 @@ declare namespace RedshiftServerless {
   }
   export interface RecoveryPoint {
     /**
+     * The Amazon Resource Name (ARN) of the namespace the recovery point is associated with.
+     */
+    namespaceArn?: String;
+    /**
      * The name of the namespace the recovery point is associated with.
      */
     namespaceName?: NamespaceName;
@@ -1111,11 +1196,11 @@ declare namespace RedshiftServerless {
      */
     ownerAccount?: String;
     /**
-     * The Amazon Resource Name (ARN) of the snapshot to restore from.
+     * The Amazon Resource Name (ARN) of the snapshot to restore from. Required if restoring from Amazon Redshift Serverless to a provisioned cluster. Must not be specified at the same time as snapshotName. The format of the ARN is arn:aws:redshift:&lt;region&gt;:&lt;account_id&gt;:snapshot:&lt;cluster_identifier&gt;/&lt;snapshot_identifier&gt;.
      */
     snapshotArn?: String;
     /**
-     * The name of the snapshot to restore from.
+     * The name of the snapshot to restore from. Must not be specified at the same time as snapshotArn.
      */
     snapshotName?: String;
     /**
@@ -1133,6 +1218,54 @@ declare namespace RedshiftServerless {
      * The name of the snapshot used to restore the namespace.
      */
     snapshotName?: String;
+  }
+  export interface RestoreTableFromSnapshotRequest {
+    /**
+     * Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false, the names are not case sensitive. The default is false.
+     */
+    activateCaseSensitiveIdentifier?: Boolean;
+    /**
+     * The namespace of the snapshot to restore from.
+     */
+    namespaceName: String;
+    /**
+     * The name of the table to create from the restore operation.
+     */
+    newTableName: String;
+    /**
+     * The name of the snapshot to restore the table from.
+     */
+    snapshotName: String;
+    /**
+     * The name of the source database that contains the table being restored.
+     */
+    sourceDatabaseName: String;
+    /**
+     * The name of the source schema that contains the table being restored.
+     */
+    sourceSchemaName?: String;
+    /**
+     * The name of the source table being restored.
+     */
+    sourceTableName: String;
+    /**
+     * The name of the database to restore the table to.
+     */
+    targetDatabaseName?: String;
+    /**
+     * The name of the schema to restore the table to.
+     */
+    targetSchemaName?: String;
+    /**
+     * The workgroup to restore the table to.
+     */
+    workgroupName: String;
+  }
+  export interface RestoreTableFromSnapshotResponse {
+    /**
+     * The TableRestoreStatus object that contains the status of the restore operation.
+     */
+    tableRestoreStatus?: TableRestoreStatus;
   }
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
@@ -1224,6 +1357,69 @@ declare namespace RedshiftServerless {
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export type SyntheticTimestamp_date_time = Date;
+  export interface TableRestoreStatus {
+    /**
+     * A description of the status of the table restore request. Status values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+     */
+    message?: String;
+    /**
+     * The namespace of the table being restored from.
+     */
+    namespaceName?: String;
+    /**
+     * The name of the table to create from the restore operation.
+     */
+    newTableName?: String;
+    /**
+     * The amount of data restored to the new table so far, in megabytes (MB).
+     */
+    progressInMegaBytes?: Long;
+    /**
+     * The time that the table restore request was made, in Universal Coordinated Time (UTC).
+     */
+    requestTime?: Timestamp;
+    /**
+     * The name of the snapshot being restored from.
+     */
+    snapshotName?: String;
+    /**
+     * The name of the source database being restored from.
+     */
+    sourceDatabaseName?: String;
+    /**
+     * The name of the source schema being restored from.
+     */
+    sourceSchemaName?: String;
+    /**
+     * The name of the source table being restored from.
+     */
+    sourceTableName?: String;
+    /**
+     * A value that describes the current state of the table restore request. Possible values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+     */
+    status?: String;
+    /**
+     * The ID of the RestoreTableFromSnapshot request.
+     */
+    tableRestoreRequestId?: String;
+    /**
+     * The name of the database to restore to.
+     */
+    targetDatabaseName?: String;
+    /**
+     * The name of the schema to restore to.
+     */
+    targetSchemaName?: String;
+    /**
+     * The total amount of data to restore to the new table, in megabytes (MB).
+     */
+    totalDataInMegaBytes?: Long;
+    /**
+     * The name of the workgroup being restored from.
+     */
+    workgroupName?: String;
+  }
+  export type TableRestoreStatusList = TableRestoreStatus[];
   export interface Tag {
     /**
      * The key to use in the tag.
@@ -1333,7 +1529,7 @@ declare namespace RedshiftServerless {
   }
   export interface UpdateUsageLimitRequest {
     /**
-     * The new limit amount. For more information about this parameter.
+     * The new limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
      */
     amount?: Long;
     /**
@@ -1364,6 +1560,10 @@ declare namespace RedshiftServerless {
      * The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.
      */
     enhancedVpcRouting?: Boolean;
+    /**
+     * The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
+     */
+    port?: Integer;
     /**
      * A value that specifies whether the workgroup can be accessible from a public network.
      */
@@ -1474,6 +1674,10 @@ declare namespace RedshiftServerless {
      * The namespace the workgroup is associated with.
      */
     namespaceName?: String;
+    /**
+     * The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
+     */
+    port?: Integer;
     /**
      * A value that specifies whether the workgroup can be accessible from a public network
      */

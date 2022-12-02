@@ -2389,7 +2389,7 @@ declare namespace FMS {
   export type TargetType = "GATEWAY"|"CARRIER_GATEWAY"|"INSTANCE"|"LOCAL_GATEWAY"|"NAT_GATEWAY"|"NETWORK_INTERFACE"|"VPC_ENDPOINT"|"VPC_PEERING_CONNECTION"|"EGRESS_ONLY_INTERNET_GATEWAY"|"TRANSIT_GATEWAY"|string;
   export type TargetViolationReason = string;
   export type TargetViolationReasons = TargetViolationReason[];
-  export type ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"|string;
+  export type ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"|"FORTIGATE_CLOUD_NATIVE_FIREWALL"|string;
   export type ThirdPartyFirewallAssociationStatus = "ONBOARDING"|"ONBOARD_COMPLETE"|"OFFBOARDING"|"OFFBOARD_COMPLETE"|"NOT_EXIST"|string;
   export type ThirdPartyFirewallFirewallPolicies = ThirdPartyFirewallFirewallPolicy[];
   export interface ThirdPartyFirewallFirewallPolicy {
