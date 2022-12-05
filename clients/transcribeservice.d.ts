@@ -345,7 +345,7 @@ declare namespace TranscribeService {
   }
   export type BaseModelName = "NarrowBand"|"WideBand"|string;
   export type Boolean = boolean;
-  export type CLMLanguageCode = "en-US"|"hi-IN"|"es-US"|"en-GB"|"en-AU"|string;
+  export type CLMLanguageCode = "en-US"|"hi-IN"|"es-US"|"en-GB"|"en-AU"|"de-DE"|"ja-JP"|string;
   export interface CallAnalyticsJob {
     /**
      * The name of the Call Analytics job. Job names are case sensitive and must be unique within an Amazon Web Services account.

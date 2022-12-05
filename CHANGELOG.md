@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1267.0-->
+<!--LATEST=2.1268.0-->
 <!--ENTRYINSERT-->
+
+## 2.1268.0
+* feature: CostExplorer: This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.
+* feature: EC2: Documentation updates for EC2.
+* feature: Ivschat: Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent.
+* feature: RDS: This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.
+* feature: TranscribeService: Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE).
 
 ## 2.1267.0
 * feature: AppSync: Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. "/v1/dataplane-evaluatecode").

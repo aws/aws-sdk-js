@@ -1741,11 +1741,11 @@ declare class EC2 extends Service {
    */
   describeAvailabilityZones(callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
   /**
-   * Describes the curent Infrastructure Performance metric subscriptions.
+   * Describes the current Infrastructure Performance metric subscriptions.
    */
   describeAwsNetworkPerformanceMetricSubscriptions(params: EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult) => void): Request<EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult, AWSError>;
   /**
-   * Describes the curent Infrastructure Performance metric subscriptions.
+   * Describes the current Infrastructure Performance metric subscriptions.
    */
   describeAwsNetworkPerformanceMetricSubscriptions(callback?: (err: AWSError, data: EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult) => void): Request<EC2.Types.DescribeAwsNetworkPerformanceMetricSubscriptionsResult, AWSError>;
   /**
@@ -3125,11 +3125,11 @@ declare class EC2 extends Service {
    */
   enableIpamOrganizationAdminAccount(callback?: (err: AWSError, data: EC2.Types.EnableIpamOrganizationAdminAccountResult) => void): Request<EC2.Types.EnableIpamOrganizationAdminAccountResult, AWSError>;
   /**
-   * 
+   * Establishes a trust relationship between Reachability Analyzer and Organizations. This operation must be performed by the management account for the organization. After you establish a trust relationship, a user in the management account or a delegated administrator account can run a cross-account analysis using resources from the member accounts.
    */
   enableReachabilityAnalyzerOrganizationSharing(params: EC2.Types.EnableReachabilityAnalyzerOrganizationSharingRequest, callback?: (err: AWSError, data: EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult) => void): Request<EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult, AWSError>;
   /**
-   * 
+   * Establishes a trust relationship between Reachability Analyzer and Organizations. This operation must be performed by the management account for the organization. After you establish a trust relationship, a user in the management account or a delegated administrator account can run a cross-account analysis using resources from the member accounts.
    */
   enableReachabilityAnalyzerOrganizationSharing(callback?: (err: AWSError, data: EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult) => void): Request<EC2.Types.EnableReachabilityAnalyzerOrganizationSharingResult, AWSError>;
   /**
@@ -18481,9 +18481,15 @@ declare namespace EC2 {
     Success?: Boolean;
   }
   export interface EnableReachabilityAnalyzerOrganizationSharingRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
     DryRun?: Boolean;
   }
   export interface EnableReachabilityAnalyzerOrganizationSharingResult {
+    /**
+     * Returns true if the request succeeds; otherwise, returns an error.
+     */
     ReturnValue?: Boolean;
   }
   export interface EnableSerialConsoleAccessRequest {
@@ -27963,6 +27969,9 @@ declare namespace EC2 {
      * The ID of the path.
      */
     NetworkInsightsPathId?: NetworkInsightsPathId;
+    /**
+     * The member accounts that contain resources that the path can traverse.
+     */
     AdditionalAccounts?: ValueStringList;
     /**
      * The Amazon Resource Names (ARN) of the Amazon Web Services resources that the path must traverse.
@@ -28004,6 +28013,9 @@ declare namespace EC2 {
      * Potential intermediate components.
      */
     AlternatePathHints?: AlternatePathHintList;
+    /**
+     * Potential intermediate accounts.
+     */
     SuggestedAccounts?: ValueStringList;
     /**
      * The tags.
@@ -28035,7 +28047,13 @@ declare namespace EC2 {
      * The Amazon Web Services resource that is the destination of the path.
      */
     Destination?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the source.
+     */
     SourceArn?: ResourceArn;
+    /**
+     * The Amazon Resource Name (ARN) of the destination.
+     */
     DestinationArn?: ResourceArn;
     /**
      * The IP address of the Amazon Web Services resource that is the source of the path.
@@ -33373,6 +33391,9 @@ declare namespace EC2 {
      * The ID of the path.
      */
     NetworkInsightsPathId: NetworkInsightsPathId;
+    /**
+     * The member accounts that contain resources that the path can traverse.
+     */
     AdditionalAccounts?: ValueStringList;
     /**
      * The Amazon Resource Names (ARN) of the resources that the path must traverse.

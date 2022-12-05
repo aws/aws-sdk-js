@@ -165,6 +165,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "PendingVerification"
+        },
+        {
           "shape": "ValidationException"
         }
       ],
@@ -218,6 +221,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "PendingVerification"
         },
         {
           "shape": "ValidationException"
@@ -374,6 +380,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "PendingVerification"
         },
         {
           "shape": "ValidationException"
@@ -787,15 +796,15 @@
       "members": {
         "cloudWatchLogs": {
           "shape": "CloudWatchLogsDestinationConfiguration",
-          "documentation": "<p>Name of the Amazon CloudWatch Logs destination where chat activity will be logged.</p>"
+          "documentation": "<p>An Amazon CloudWatch Logs destination configuration where chat activity will be logged.</p>"
         },
         "firehose": {
           "shape": "FirehoseDestinationConfiguration",
-          "documentation": "<p>Name of the Amazon Kinesis Data Firehose destination where chat activity will be logged</p>"
+          "documentation": "<p>An Amazon Kinesis Data Firehose destination configuration where chat activity will be logged.</p>"
         },
         "s3": {
           "shape": "S3DestinationConfiguration",
-          "documentation": "<p>Name of the Amazon S3 bucket where chat activity will be logged.</p>"
+          "documentation": "<p>An Amazon S3 destination configuration where chat activity will be logged.</p>"
         }
       },
       "documentation": "<p>A complex type that describes a location where chat logs will be stored. Each member represents the configuration of one log destination. For logging, you define only one type of destination (for CloudWatch Logs, Kinesis Firehose, or S3).</p>",

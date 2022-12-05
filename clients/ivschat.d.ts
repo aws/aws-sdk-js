@@ -348,15 +348,15 @@ declare namespace Ivschat {
   export type DeliveryStreamName = string;
   export interface DestinationConfiguration {
     /**
-     * Name of the Amazon CloudWatch Logs destination where chat activity will be logged.
+     * An Amazon CloudWatch Logs destination configuration where chat activity will be logged.
      */
     cloudWatchLogs?: CloudWatchLogsDestinationConfiguration;
     /**
-     * Name of the Amazon Kinesis Data Firehose destination where chat activity will be logged
+     * An Amazon Kinesis Data Firehose destination configuration where chat activity will be logged.
      */
     firehose?: FirehoseDestinationConfiguration;
     /**
-     * Name of the Amazon S3 bucket where chat activity will be logged.
+     * An Amazon S3 destination configuration where chat activity will be logged.
      */
     s3?: S3DestinationConfiguration;
   }

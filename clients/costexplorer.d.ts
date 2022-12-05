@@ -172,11 +172,11 @@ declare class CostExplorer extends Service {
    */
   getSavingsPlansCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
   /**
-   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details. 
+   * Retrieves the Savings Plans recommendations for your account. First use StartSavingsPlansPurchaseRecommendationGeneration to generate a new set of recommendations, and then use GetSavingsPlansPurchaseRecommendation to retrieve them.
    */
   getSavingsPlansPurchaseRecommendation(params: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
   /**
-   * Retrieves your request parameters, Savings Plan Recommendations Summary and Details. 
+   * Retrieves the Savings Plans recommendations for your account. First use StartSavingsPlansPurchaseRecommendationGeneration to generate a new set of recommendations, and then use GetSavingsPlansPurchaseRecommendation to retrieve them.
    */
   getSavingsPlansPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
   /**
@@ -228,6 +228,14 @@ declare class CostExplorer extends Service {
    */
   listCostCategoryDefinitions(callback?: (err: AWSError, data: CostExplorer.Types.ListCostCategoryDefinitionsResponse) => void): Request<CostExplorer.Types.ListCostCategoryDefinitionsResponse, AWSError>;
   /**
+   * Retrieves a list of your historical recommendation generations within the past 30 days.
+   */
+  listSavingsPlansPurchaseRecommendationGeneration(params: CostExplorer.Types.ListSavingsPlansPurchaseRecommendationGenerationRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListSavingsPlansPurchaseRecommendationGenerationResponse) => void): Request<CostExplorer.Types.ListSavingsPlansPurchaseRecommendationGenerationResponse, AWSError>;
+  /**
+   * Retrieves a list of your historical recommendation generations within the past 30 days.
+   */
+  listSavingsPlansPurchaseRecommendationGeneration(callback?: (err: AWSError, data: CostExplorer.Types.ListSavingsPlansPurchaseRecommendationGenerationResponse) => void): Request<CostExplorer.Types.ListSavingsPlansPurchaseRecommendationGenerationResponse, AWSError>;
+  /**
    * Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN). 
    */
   listTagsForResource(params: CostExplorer.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CostExplorer.Types.ListTagsForResourceResponse) => void): Request<CostExplorer.Types.ListTagsForResourceResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class CostExplorer extends Service {
    * Modifies the feedback property of a given cost anomaly. 
    */
   provideAnomalyFeedback(callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
+  /**
+   * Requests a Savings Plans recommendation generation. This enables you to calculate a fresh set of Savings Plans recommendations that takes your latest usage data and current Savings Plans inventory into account. You can refresh Savings Plans recommendations up to three times daily for a consolidated billing family.   StartSavingsPlansPurchaseRecommendationGeneration has no request syntax because no input parameters are needed to support this operation. 
+   */
+  startSavingsPlansPurchaseRecommendationGeneration(params: CostExplorer.Types.StartSavingsPlansPurchaseRecommendationGenerationRequest, callback?: (err: AWSError, data: CostExplorer.Types.StartSavingsPlansPurchaseRecommendationGenerationResponse) => void): Request<CostExplorer.Types.StartSavingsPlansPurchaseRecommendationGenerationResponse, AWSError>;
+  /**
+   * Requests a Savings Plans recommendation generation. This enables you to calculate a fresh set of Savings Plans recommendations that takes your latest usage data and current Savings Plans inventory into account. You can refresh Savings Plans recommendations up to three times daily for a consolidated billing family.   StartSavingsPlansPurchaseRecommendationGeneration has no request syntax because no input parameters are needed to support this operation. 
+   */
+  startSavingsPlansPurchaseRecommendationGeneration(callback?: (err: AWSError, data: CostExplorer.Types.StartSavingsPlansPurchaseRecommendationGenerationResponse) => void): Request<CostExplorer.Types.StartSavingsPlansPurchaseRecommendationGenerationResponse, AWSError>;
   /**
    * An API operation for adding one or more tags (key-value pairs) to a resource. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value you specify replaces the previous value for that tag. Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.
    */
@@ -1111,6 +1127,30 @@ declare namespace CostExplorer {
     PredictionIntervalUpperBound?: GenericString;
   }
   export type ForecastResultsByTime = ForecastResult[];
+  export type GenerationStatus = "SUCCEEDED"|"PROCESSING"|"FAILED"|string;
+  export interface GenerationSummary {
+    /**
+     * Indicates the ID for this specific recommendation.
+     */
+    RecommendationId?: RecommendationId;
+    /**
+     * Indicates whether the recommendation generation succeeded, is processing, or failed.
+     */
+    GenerationStatus?: GenerationStatus;
+    /**
+     * Indicates the start time of the recommendation generation.
+     */
+    GenerationStartedTime?: ZonedDateTime;
+    /**
+     * Indicates the completion time of the recommendation generation.
+     */
+    GenerationCompletionTime?: ZonedDateTime;
+    /**
+     * Indicates the estimated time for when the recommendation generation will complete.
+     */
+    EstimatedCompletionTime?: ZonedDateTime;
+  }
+  export type GenerationSummaryList = GenerationSummary[];
   export type GenericBoolean = boolean;
   export type GenericDouble = number;
   export type GenericString = string;
@@ -1953,6 +1993,34 @@ declare namespace CostExplorer {
      */
     NextToken?: NextPageToken;
   }
+  export interface ListSavingsPlansPurchaseRecommendationGenerationRequest {
+    /**
+     * The status of the recommendation generation.
+     */
+    GenerationStatus?: GenerationStatus;
+    /**
+     * The IDs for each specific recommendation.
+     */
+    RecommendationIds?: RecommendationIdList;
+    /**
+     * The number of recommendations that you want returned in a single response object.
+     */
+    PageSize?: NonNegativeInteger;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface ListSavingsPlansPurchaseRecommendationGenerationResponse {
+    /**
+     * The list of historical recommendation generations.
+     */
+    GenerationSummaryList?: GenerationSummaryList;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    NextPageToken?: NextPageToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see ResourceTag.
@@ -2085,6 +2153,8 @@ declare namespace CostExplorer {
   }
   export type RICostForUnusedHours = string;
   export type RealizedSavings = string;
+  export type RecommendationId = string;
+  export type RecommendationIdList = RecommendationId[];
   export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string;
   export interface RedshiftInstanceDetails {
     /**
@@ -2803,6 +2873,22 @@ declare namespace CostExplorer {
   export type SortDefinitionKey = string;
   export type SortDefinitions = SortDefinition[];
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface StartSavingsPlansPurchaseRecommendationGenerationRequest {
+  }
+  export interface StartSavingsPlansPurchaseRecommendationGenerationResponse {
+    /**
+     * The ID for this specific recommendation.
+     */
+    RecommendationId?: RecommendationId;
+    /**
+     * The start time of the recommendation generation.
+     */
+    GenerationStartedTime?: ZonedDateTime;
+    /**
+     * The estimated time for when the recommendation generation will complete.
+     */
+    EstimatedCompletionTime?: ZonedDateTime;
+  }
   export interface Subscriber {
     /**
      * The email address or SNS Amazon Resource Name (ARN). This depends on the Type. 
