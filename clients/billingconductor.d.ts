@@ -544,6 +544,12 @@ declare namespace Billingconductor {
      */
     Arn?: CustomLineItemArn;
   }
+  export interface CreateFreeTierConfig {
+    /**
+     *  Activate or deactivate Amazon Web Services Free Tier. 
+     */
+    Activated: TieringActivated;
+  }
   export interface CreatePricingPlanInput {
     /**
      *  The token that is needed to support idempotency. Idempotency isn't currently supported, but will be implemented in a future update. 
@@ -596,7 +602,7 @@ declare namespace Billingconductor {
     /**
      *  A percentage modifier that's applied on the public pricing rates. 
      */
-    ModifierPercentage: ModifierPercentage;
+    ModifierPercentage?: ModifierPercentage;
     /**
      *  If the Scope attribute is set to SERVICE, the attribute indicates which service the PricingRule is applicable for. 
      */
@@ -609,12 +615,22 @@ declare namespace Billingconductor {
      *  The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. 
      */
     BillingEntity?: BillingEntity;
+    /**
+     *  The set of tiering configurations for the pricing rule. 
+     */
+    Tiering?: CreateTieringInput;
   }
   export interface CreatePricingRuleOutput {
     /**
      *  The Amazon Resource Name (ARN) of the created pricing rule. 
      */
     Arn?: PricingRuleArn;
+  }
+  export interface CreateTieringInput {
+    /**
+     *  The possible Amazon Web Services Free Tier configurations. 
+     */
+    FreeTier: CreateFreeTierConfig;
   }
   export type Currency = string;
   export type CurrencyCode = "USD"|"CNY"|string;
@@ -851,6 +867,12 @@ declare namespace Billingconductor {
     Error?: AssociateResourceError;
   }
   export type DisassociateResourcesResponseList = DisassociateResourceResponseElement[];
+  export interface FreeTierConfig {
+    /**
+     *  Activate or deactivate Amazon Web Services Free Tier application. 
+     */
+    Activated: TieringActivated;
+  }
   export type Instant = number;
   export interface ListAccountAssociationsFilter {
     /**
@@ -1381,10 +1403,14 @@ declare namespace Billingconductor {
      *  The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. 
      */
     BillingEntity?: BillingEntity;
+    /**
+     *  The set of tiering configurations for the pricing rule. 
+     */
+    Tiering?: Tiering;
   }
   export type PricingRuleName = string;
   export type PricingRuleScope = "GLOBAL"|"SERVICE"|"BILLING_ENTITY"|string;
-  export type PricingRuleType = "MARKUP"|"DISCOUNT"|string;
+  export type PricingRuleType = "MARKUP"|"DISCOUNT"|"TIERING"|string;
   export type ProformaCost = string;
   export type Service = string;
   export type String = string;
@@ -1404,6 +1430,13 @@ declare namespace Billingconductor {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface Tiering {
+    /**
+     *  The possible Amazon Web Services Free Tier configurations. 
+     */
+    FreeTier: FreeTierConfig;
+  }
+  export type TieringActivated = boolean;
   export type Token = string;
   export interface UntagResourceRequest {
     /**
@@ -1548,6 +1581,12 @@ declare namespace Billingconductor {
      */
     PercentageValue: CustomLineItemPercentageChargeValue;
   }
+  export interface UpdateFreeTierConfig {
+    /**
+     *  Activate or deactivate application of Amazon Web Services Free Tier. 
+     */
+    Activated: TieringActivated;
+  }
   export interface UpdatePricingPlanInput {
     /**
      * The Amazon Resource Name (ARN) of the pricing plan that you're updating. 
@@ -1605,6 +1644,10 @@ declare namespace Billingconductor {
      *  The new modifier to show pricing plan rates as a percentage. 
      */
     ModifierPercentage?: ModifierPercentage;
+    /**
+     *  The set of tiering configurations for the pricing rule. 
+     */
+    Tiering?: UpdateTieringInput;
   }
   export interface UpdatePricingRuleOutput {
     /**
@@ -1647,6 +1690,16 @@ declare namespace Billingconductor {
      *  The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. 
      */
     BillingEntity?: BillingEntity;
+    /**
+     *  The set of tiering configurations for the pricing rule. 
+     */
+    Tiering?: UpdateTieringInput;
+  }
+  export interface UpdateTieringInput {
+    /**
+     *  The possible Amazon Web Services Free Tier configurations. 
+     */
+    FreeTier: UpdateFreeTierConfig;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

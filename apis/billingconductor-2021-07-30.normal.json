@@ -1552,6 +1552,19 @@
         }
       }
     },
+    "CreateFreeTierConfig": {
+      "type": "structure",
+      "required": [
+        "Activated"
+      ],
+      "members": {
+        "Activated": {
+          "shape": "TieringActivated",
+          "documentation": "<p> Activate or deactivate Amazon Web Services Free Tier. </p>"
+        }
+      },
+      "documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+    },
     "CreatePricingPlanInput": {
       "type": "structure",
       "required": [
@@ -1597,8 +1610,7 @@
       "required": [
         "Name",
         "Scope",
-        "Type",
-        "ModifierPercentage"
+        "Type"
       ],
       "members": {
         "ClientToken": {
@@ -1639,6 +1651,10 @@
         "BillingEntity": {
           "shape": "BillingEntity",
           "documentation": "<p> The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. </p>"
+        },
+        "Tiering": {
+          "shape": "CreateTieringInput",
+          "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
         }
       }
     },
@@ -1650,6 +1666,19 @@
           "documentation": "<p> The Amazon Resource Name (ARN) of the created pricing rule. </p>"
         }
       }
+    },
+    "CreateTieringInput": {
+      "type": "structure",
+      "required": [
+        "FreeTier"
+      ],
+      "members": {
+        "FreeTier": {
+          "shape": "CreateFreeTierConfig",
+          "documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+        }
+      },
+      "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
     },
     "Currency": {
       "type": "string"
@@ -2086,6 +2115,19 @@
       "member": {
         "shape": "DisassociateResourceResponseElement"
       }
+    },
+    "FreeTierConfig": {
+      "type": "structure",
+      "required": [
+        "Activated"
+      ],
+      "members": {
+        "Activated": {
+          "shape": "TieringActivated",
+          "documentation": "<p> Activate or deactivate Amazon Web Services Free Tier application. </p>"
+        }
+      },
+      "documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
     },
     "Instant": {
       "type": "long"
@@ -2876,6 +2918,10 @@
         "BillingEntity": {
           "shape": "BillingEntity",
           "documentation": "<p> The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. </p>"
+        },
+        "Tiering": {
+          "shape": "Tiering",
+          "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
         }
       },
       "documentation": "<p> A representation of a pricing rule. </p>"
@@ -2899,7 +2945,8 @@
       "type": "string",
       "enum": [
         "MARKUP",
-        "DISCOUNT"
+        "DISCOUNT",
+        "TIERING"
       ]
     },
     "ProformaCost": {
@@ -2965,6 +3012,23 @@
       "type": "string",
       "max": 256,
       "min": 0
+    },
+    "Tiering": {
+      "type": "structure",
+      "required": [
+        "FreeTier"
+      ],
+      "members": {
+        "FreeTier": {
+          "shape": "FreeTierConfig",
+          "documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+        }
+      },
+      "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
+    },
+    "TieringActivated": {
+      "type": "boolean",
+      "box": true
     },
     "Token": {
       "type": "string"
@@ -3163,6 +3227,19 @@
       },
       "documentation": "<p> A representation of the new charge details that are associated with a percentage custom line item. </p>"
     },
+    "UpdateFreeTierConfig": {
+      "type": "structure",
+      "required": [
+        "Activated"
+      ],
+      "members": {
+        "Activated": {
+          "shape": "TieringActivated",
+          "documentation": "<p> Activate or deactivate application of Amazon Web Services Free Tier. </p>"
+        }
+      },
+      "documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+    },
     "UpdatePricingPlanInput": {
       "type": "structure",
       "required": [
@@ -3233,6 +3310,10 @@
         "ModifierPercentage": {
           "shape": "ModifierPercentage",
           "documentation": "<p> The new modifier to show pricing plan rates as a percentage. </p>"
+        },
+        "Tiering": {
+          "shape": "UpdateTieringInput",
+          "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
         }
       }
     },
@@ -3278,8 +3359,25 @@
         "BillingEntity": {
           "shape": "BillingEntity",
           "documentation": "<p> The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace. </p>"
+        },
+        "Tiering": {
+          "shape": "UpdateTieringInput",
+          "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
         }
       }
+    },
+    "UpdateTieringInput": {
+      "type": "structure",
+      "required": [
+        "FreeTier"
+      ],
+      "members": {
+        "FreeTier": {
+          "shape": "UpdateFreeTierConfig",
+          "documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+        }
+      },
+      "documentation": "<p> The set of tiering configurations for the pricing rule. </p>"
     }
   },
   "documentation": "<p>Amazon Web Services Billing Conductor is a fully managed service that you can use to customize a <a href=\"https://docs.aws.amazon.com/billingconductor/latest/userguide/understanding-eb.html#eb-other-definitions\">pro forma</a> version of your billing data each month, to accurately show or chargeback your end customers. Amazon Web Services Billing Conductor doesn't change the way you're billed by Amazon Web Services each month by design. Instead, it provides you with a mechanism to configure, generate, and display rates to certain customers over a given billing period. You can also analyze the difference between the rates you apply to your accounting groupings relative to your actual rates from Amazon Web Services. As a result of your Amazon Web Services Billing Conductor configuration, the payer account can also see the custom rate applied on the billing details page of the <a href=\"https://console.aws.amazon.com/billing\">Amazon Web Services Billing console</a>, or configure a cost and usage report per billing group.</p> <p>This documentation shows how you can configure Amazon Web Services Billing Conductor using its API. For more information about using the <a href=\"https://console.aws.amazon.com/billingconductor/\">Amazon Web Services Billing Conductor</a> user interface, see the <a href=\"https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html\"> Amazon Web Services Billing Conductor User Guide</a>.</p>"

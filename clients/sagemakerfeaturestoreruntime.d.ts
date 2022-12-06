@@ -20,11 +20,11 @@ declare class SageMakerFeatureStoreRuntime extends Service {
    */
   batchGetRecord(callback?: (err: AWSError, data: SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse) => void): Request<SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse, AWSError>;
   /**
-   * Deletes a Record from a FeatureGroup. A new record will show up in the OfflineStore when the DeleteRecord API is called. This record will have a value of True in the is_deleted column.
+   * Deletes a Record from a FeatureGroup. When the DeleteRecord API is called a new record will be added to the OfflineStore and the Record will be removed from the OnlineStore. This record will have a value of True in the is_deleted column.
    */
   deleteRecord(params: SageMakerFeatureStoreRuntime.Types.DeleteRecordRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Record from a FeatureGroup. A new record will show up in the OfflineStore when the DeleteRecord API is called. This record will have a value of True in the is_deleted column.
+   * Deletes a Record from a FeatureGroup. When the DeleteRecord API is called a new record will be added to the OfflineStore and the Record will be removed from the OnlineStore. This record will have a value of True in the is_deleted column.
    */
   deleteRecord(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -55,7 +55,7 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     RecordIdentifierValueAsString: ValueAsString;
     /**
-     * The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see  Errors.
+     * The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see Errors.
      */
     ErrorCode: ValueAsString;
     /**
@@ -91,7 +91,7 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     Records: BatchGetRecordResultDetails;
     /**
-     * A list of errors that have occured when retrieving a batch of Records.
+     * A list of errors that have occurred when retrieving a batch of Records.
      */
     Errors: BatchGetRecordErrors;
     /**
@@ -127,6 +127,10 @@ declare namespace SageMakerFeatureStoreRuntime {
      * Timestamp indicating when the deletion event occurred. EventTime can be used to query data at a certain point in time.
      */
     EventTime: ValueAsString;
+    /**
+     * A list of stores from which you're deleting the record. By default, Feature Store deletes the record from all of the stores that you're using for the FeatureGroup.
+     */
+    TargetStores?: TargetStores;
   }
   export type FeatureGroupName = string;
   export type FeatureName = string;
@@ -143,7 +147,7 @@ declare namespace SageMakerFeatureStoreRuntime {
   }
   export interface GetRecordRequest {
     /**
-     * The name of the feature group in which you want to put the records.
+     * The name of the feature group from which you want to retrieve a record.
      */
     FeatureGroupName: FeatureGroupName;
     /**
@@ -171,9 +175,15 @@ declare namespace SageMakerFeatureStoreRuntime {
      * List of FeatureValues to be inserted. This will be a full over-write. If you only want to update few of the feature values, do the following:   Use GetRecord to retrieve the latest record.   Update the record returned from GetRecord.    Use PutRecord to update feature values.  
      */
     Record: Record;
+    /**
+     * A list of stores to which you're adding the record. By default, Feature Store adds the record to all of the stores that you're using for the FeatureGroup.
+     */
+    TargetStores?: TargetStores;
   }
   export type Record = FeatureValue[];
   export type RecordIdentifiers = ValueAsString[];
+  export type TargetStore = "OnlineStore"|"OfflineStore"|string;
+  export type TargetStores = TargetStore[];
   export type UnprocessedIdentifiers = BatchGetRecordIdentifier[];
   export type ValueAsString = string;
   /**

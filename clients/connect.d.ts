@@ -92,11 +92,11 @@ declare class Connect extends Service {
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.  You can call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.  You can call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
    */
   claimPhoneNumber(callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
@@ -171,6 +171,14 @@ declare class Connect extends Service {
    * Creates a new routing profile.
    */
   createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
+  /**
+   * Creates a rule for the specified Amazon Connect instance.
+   */
+  createRule(params: Connect.Types.CreateRuleRequest, callback?: (err: AWSError, data: Connect.Types.CreateRuleResponse) => void): Request<Connect.Types.CreateRuleResponse, AWSError>;
+  /**
+   * Creates a rule for the specified Amazon Connect instance.
+   */
+  createRule(callback?: (err: AWSError, data: Connect.Types.CreateRuleResponse) => void): Request<Connect.Types.CreateRuleResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Creates a security profile.
    */
@@ -275,6 +283,14 @@ declare class Connect extends Service {
    * Deletes a quick connect.
    */
   deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a rule for the specified Amazon Connect instance.
+   */
+  deleteRule(params: Connect.Types.DeleteRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a rule for the specified Amazon Connect instance.
+   */
+  deleteRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Deletes a security profile.
    */
@@ -427,6 +443,14 @@ declare class Connect extends Service {
    * Describes the specified routing profile.
    */
   describeRoutingProfile(callback?: (err: AWSError, data: Connect.Types.DescribeRoutingProfileResponse) => void): Request<Connect.Types.DescribeRoutingProfileResponse, AWSError>;
+  /**
+   * Describes a rule for the specified Amazon Connect instance.
+   */
+  describeRule(params: Connect.Types.DescribeRuleRequest, callback?: (err: AWSError, data: Connect.Types.DescribeRuleResponse) => void): Request<Connect.Types.DescribeRuleResponse, AWSError>;
+  /**
+   * Describes a rule for the specified Amazon Connect instance.
+   */
+  describeRule(callback?: (err: AWSError, data: Connect.Types.DescribeRuleResponse) => void): Request<Connect.Types.DescribeRuleResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Gets basic information about the security profle.
    */
@@ -787,6 +811,14 @@ declare class Connect extends Service {
    * Provides summary information about the routing profiles for the specified Amazon Connect instance. For more information about routing profiles, see Routing Profiles and Create a Routing Profile in the Amazon Connect Administrator Guide.
    */
   listRoutingProfiles(callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
+  /**
+   * List all rules for the specified Amazon Connect instance.
+   */
+  listRules(params: Connect.Types.ListRulesRequest, callback?: (err: AWSError, data: Connect.Types.ListRulesResponse) => void): Request<Connect.Types.ListRulesResponse, AWSError>;
+  /**
+   * List all rules for the specified Amazon Connect instance.
+   */
+  listRules(callback?: (err: AWSError, data: Connect.Types.ListRulesResponse) => void): Request<Connect.Types.ListRulesResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all security keys associated with the instance.
    */
@@ -1236,6 +1268,14 @@ declare class Connect extends Service {
    */
   updateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates a rule for the specified Amazon Connect instance.
+   */
+  updateRule(params: Connect.Types.UpdateRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a rule for the specified Amazon Connect instance.
+   */
+  updateRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Updates a security profile.
    */
   updateSecurityProfile(params: Connect.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1318,6 +1358,14 @@ declare class Connect extends Service {
 }
 declare namespace Connect {
   export type ARN = string;
+  export type ActionSummaries = ActionSummary[];
+  export interface ActionSummary {
+    /**
+     * The action type.
+     */
+    ActionType: ActionType;
+  }
+  export type ActionType = "CREATE_TASK"|"ASSIGN_CONTACT_CATEGORY"|"GENERATE_EVENTBRIDGE_EVENT"|"SEND_NOTIFICATION"|string;
   export type AfterContactWorkTimeLimit = number;
   export interface AgentContactReference {
     /**
@@ -1445,6 +1493,8 @@ declare namespace Connect {
     AwaitAnswerMachinePrompt?: Boolean;
   }
   export type ApproximateTotalCount = number;
+  export interface AssignContactCategoryActionDefinition {
+  }
   export interface AssociateApprovedOriginRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1919,6 +1969,7 @@ declare namespace Connect {
   export type ContactReferences = {[key: string]: Reference};
   export type ContactState = "INCOMING"|"PENDING"|"CONNECTING"|"CONNECTED"|"CONNECTED_ONHOLD"|"MISSED"|"ERROR"|"ENDED"|"REJECTED"|string;
   export type ContactStates = ContactState[];
+  export type Content = string;
   export interface ControlPlaneTagFilter {
     /**
      * A list of conditions which would be applied together with an OR condition. 
@@ -2268,6 +2319,46 @@ declare namespace Connect {
      * The identifier of the routing profile.
      */
     RoutingProfileId?: RoutingProfileId;
+  }
+  export interface CreateRuleRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique name for the rule.
+     */
+    Name: RuleName;
+    /**
+     * The event source to trigger the rule.
+     */
+    TriggerEventSource: RuleTriggerEventSource;
+    /**
+     * The conditions of the rule.
+     */
+    Function: RuleFunction;
+    /**
+     * A list of actions to be run when the rule is triggered.
+     */
+    Actions: RuleActions;
+    /**
+     * The publish status of the rule.
+     */
+    PublishStatus: RulePublishStatus;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateRuleResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the rule.
+     */
+    RuleArn: ARN;
+    /**
+     * A unique identifier for the rule.
+     */
+    RuleId: RuleId;
   }
   export type CreateSecurityProfileName = string;
   export interface CreateSecurityProfileRequest {
@@ -2678,6 +2769,16 @@ declare namespace Connect {
      */
     QuickConnectId: QuickConnectId;
   }
+  export interface DeleteRuleRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the rule.
+     */
+    RuleId: RuleId;
+  }
   export interface DeleteSecurityProfileRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -2954,6 +3055,22 @@ declare namespace Connect {
      */
     RoutingProfile?: RoutingProfile;
   }
+  export interface DescribeRuleRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the rule.
+     */
+    RuleId: RuleId;
+  }
+  export interface DescribeRuleResponse {
+    /**
+     * Information about the rule.
+     */
+    Rule: Rule;
+  }
   export interface DescribeSecurityProfileRequest {
     /**
      * The identifier for the security profle.
@@ -3215,6 +3332,14 @@ declare namespace Connect {
     KeyId: KeyId;
   }
   export type EncryptionType = "KMS"|string;
+  export interface EventBridgeActionDefinition {
+    /**
+     * The name.
+     */
+    Name: EventBridgeActionName;
+  }
+  export type EventBridgeActionName = string;
+  export type EventSourceName = "OnPostCallAnalysisAvailable"|"OnRealTimeCallAnalysisAvailable"|"OnPostChatAnalysisAvailable"|"OnZendeskTicketCreate"|"OnZendeskTicketStatusUpdate"|"OnSalesforceCaseCreate"|string;
   export interface Filters {
     /**
      * The queues to use to filter the metrics. You should specify at least one queue, and can specify up to 100 queues per request. The GetCurrentMetricsData API in particular requires a queue when you include a Filter in your request. 
@@ -4602,6 +4727,38 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListRulesRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The publish status of the rule.
+     */
+    PublishStatus?: RulePublishStatus;
+    /**
+     * The name of the event source.
+     */
+    EventSourceName?: EventSourceName;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult200;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListRulesResponse {
+    /**
+     * Summary information about a rule.
+     */
+    RuleSummaryList: RuleSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSecurityKeysRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -4827,6 +4984,7 @@ declare namespace Connect {
   export type MaxResult100 = number;
   export type MaxResult1000 = number;
   export type MaxResult2 = number;
+  export type MaxResult200 = number;
   export type MaxResult25 = number;
   export type MaxResult7 = number;
   export type MediaConcurrencies = MediaConcurrency[];
@@ -4878,6 +5036,18 @@ declare namespace Connect {
   export type Name128 = string;
   export type NextToken = string;
   export type NextToken2500 = string;
+  export type NotificationContentType = "PLAIN_TEXT"|string;
+  export type NotificationDeliveryType = "EMAIL"|string;
+  export interface NotificationRecipientType {
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users with the specified tags will be notified.
+     */
+    UserTags?: UserTagMap;
+    /**
+     * A list of user IDs.
+     */
+    UserIds?: UserIdList;
+  }
   export interface NumberReference {
     /**
      * Identifier of the number reference.
@@ -5436,6 +5606,124 @@ declare namespace Connect {
     Name?: RoutingProfileName;
   }
   export type RoutingProfileSummaryList = RoutingProfileSummary[];
+  export interface Rule {
+    /**
+     * The name of the rule.
+     */
+    Name: RuleName;
+    /**
+     * A unique identifier for the rule.
+     */
+    RuleId: RuleId;
+    /**
+     * The Amazon Resource Name (ARN) of the rule.
+     */
+    RuleArn: ARN;
+    /**
+     * The event source to trigger the rule.
+     */
+    TriggerEventSource: RuleTriggerEventSource;
+    /**
+     * The conditions of the rule.
+     */
+    Function: RuleFunction;
+    /**
+     * A list of actions to be run when the rule is triggered.
+     */
+    Actions: RuleActions;
+    /**
+     * The publish status of the rule.
+     */
+    PublishStatus: RulePublishStatus;
+    /**
+     * The timestamp for when the rule was created.
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The timestamp for the when the rule was last updated.
+     */
+    LastUpdatedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the rule.
+     */
+    LastUpdatedBy: ARN;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export interface RuleAction {
+    /**
+     * The type of action that creates a rule.
+     */
+    ActionType: ActionType;
+    /**
+     * Information about the task action. This field is required if TriggerEventSource is one of the following values: OnZendeskTicketCreate | OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate 
+     */
+    TaskAction?: TaskActionDefinition;
+    /**
+     * Information about the EventBridge action.
+     */
+    EventBridgeAction?: EventBridgeActionDefinition;
+    /**
+     * Information about the contact category action.
+     */
+    AssignContactCategoryAction?: AssignContactCategoryActionDefinition;
+    /**
+     * Information about the send notification action.
+     */
+    SendNotificationAction?: SendNotificationActionDefinition;
+  }
+  export type RuleActions = RuleAction[];
+  export type RuleFunction = string;
+  export type RuleId = string;
+  export type RuleName = string;
+  export type RulePublishStatus = "DRAFT"|"PUBLISHED"|string;
+  export interface RuleSummary {
+    /**
+     * The name of the rule.
+     */
+    Name: RuleName;
+    /**
+     * A unique identifier for the rule.
+     */
+    RuleId: RuleId;
+    /**
+     * The Amazon Resource Name (ARN) of the rule.
+     */
+    RuleArn: ARN;
+    /**
+     * The name of the event source.
+     */
+    EventSourceName: EventSourceName;
+    /**
+     * The publish status of the rule.
+     */
+    PublishStatus: RulePublishStatus;
+    /**
+     * A list of ActionTypes associated with a rule. 
+     */
+    ActionSummaries: ActionSummaries;
+    /**
+     * The timestamp for when the rule was created. 
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The timestamp for when the rule was last updated.
+     */
+    LastUpdatedTime: Timestamp;
+  }
+  export type RuleSummaryList = RuleSummary[];
+  export interface RuleTriggerEventSource {
+    /**
+     * The name of the event source.
+     */
+    EventSourceName: EventSourceName;
+    /**
+     * The identifier for the integration association.
+     */
+    IntegrationAssociationId?: IntegrationAssociationId;
+  }
   export interface S3Config {
     /**
      * The S3 bucket name.
@@ -5778,6 +6066,28 @@ declare namespace Connect {
   }
   export type SecurityProfilesSearchSummaryList = SecurityProfileSearchSummary[];
   export type SecurityToken = string;
+  export interface SendNotificationActionDefinition {
+    /**
+     * Notification delivery method.
+     */
+    DeliveryMethod: NotificationDeliveryType;
+    /**
+     * The subject of the email if the delivery method is EMAIL. Supports variable injection. For more information, see JSONPath reference in the Amazon Connect Administrators Guide.
+     */
+    Subject?: Subject;
+    /**
+     * Notification content. Supports variable injection. For more information, see JSONPath reference in the Amazon Connect Administrators Guide.
+     */
+    Content: Content;
+    /**
+     * Content type format.
+     */
+    ContentType: NotificationContentType;
+    /**
+     * Notification recipient.
+     */
+    Recipient: NotificationRecipientType;
+  }
   export type SingleSelectOptions = TaskTemplateSingleSelectOption[];
   export type SnapshotVersion = string;
   export type SourceApplicationName = string;
@@ -6047,6 +6357,7 @@ declare namespace Connect {
      */
     Value?: ReferenceValue;
   }
+  export type Subject = string;
   export type SupportedMessagingContentType = string;
   export type SupportedMessagingContentTypes = SupportedMessagingContentType[];
   export interface SuspendContactRecordingRequest {
@@ -6093,6 +6404,26 @@ declare namespace Connect {
   export type TagRestrictedResourceList = TagRestrictedResourceName[];
   export type TagRestrictedResourceName = string;
   export type TagValue = string;
+  export interface TaskActionDefinition {
+    /**
+     * The name. Supports variable injection. For more information, see JSONPath reference in the Amazon Connect Administrators Guide.
+     */
+    Name: TaskNameExpression;
+    /**
+     * The description. Supports variable injection. For more information, see JSONPath reference in the Amazon Connect Administrators Guide.
+     */
+    Description?: TaskDescriptionExpression;
+    /**
+     * The identifier of the flow.
+     */
+    ContactFlowId: ContactFlowId;
+    /**
+     * Information about the reference when the referenceType is URL. Otherwise, null. (Supports variable injection in the Value field.)
+     */
+    References?: ContactReferences;
+  }
+  export type TaskDescriptionExpression = string;
+  export type TaskNameExpression = string;
   export type TaskTemplateArn = string;
   export interface TaskTemplateConstraints {
     /**
@@ -6743,6 +7074,32 @@ declare namespace Connect {
      */
     QueueConfigs: RoutingProfileQueueConfigList;
   }
+  export interface UpdateRuleRequest {
+    /**
+     * A unique identifier for the rule.
+     */
+    RuleId: RuleId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the rule. You can change the name only if TriggerEventSource is one of the following values: OnZendeskTicketCreate | OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate 
+     */
+    Name: RuleName;
+    /**
+     * The conditions of the rule.
+     */
+    Function: RuleFunction;
+    /**
+     * A list of actions to be run when the rule is triggered.
+     */
+    Actions: RuleActions;
+    /**
+     * The publish status of the rule.
+     */
+    PublishStatus: RulePublishStatus;
+  }
   export interface UpdateSecurityProfileRequest {
     /**
      * The description of the security profile.
@@ -7079,6 +7436,7 @@ declare namespace Connect {
   }
   export type UserDataList = UserData[];
   export type UserId = string;
+  export type UserIdList = UserId[];
   export interface UserIdentityInfo {
     /**
      * The first name. This is required if you are using Amazon Connect or SAML for identity management.
@@ -7226,6 +7584,7 @@ declare namespace Connect {
     Username?: AgentUsername;
   }
   export type UserSummaryList = UserSummary[];
+  export type UserTagMap = {[key: string]: String};
   export type Value = number;
   export interface Vocabulary {
     /**

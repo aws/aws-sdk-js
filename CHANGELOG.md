@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1268.0-->
+<!--LATEST=2.1269.0-->
 <!--ENTRYINSERT-->
+
+## 2.1269.0
+* feature: Billingconductor: This release adds the Tiering Pricing Rule feature.
+* feature: Connect: This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html
+* feature: DynamoDB: Endpoint Ruleset update: Use http instead of https for the "local" region.
+* feature: DynamoDBStreams: Endpoint Ruleset update: Use http instead of https for the "local" region.
+* feature: RDS: This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.
+* feature: SageMakerFeatureStoreRuntime: For online + offline Feature Groups, added ability to target PutRecord and DeleteRecord actions to only online store, or only offline store. If target store parameter is not specified, actions will apply to both stores.
 
 ## 2.1268.0
 * feature: CostExplorer: This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.

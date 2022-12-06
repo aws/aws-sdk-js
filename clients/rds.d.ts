@@ -8602,7 +8602,7 @@ declare namespace RDS {
      */
     SourceRegions?: SourceRegionList;
   }
-  export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|"custom-engine-version"|"db-proxy"|string;
+  export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|"custom-engine-version"|"db-proxy"|"blue-green-deployment"|string;
   export interface StartActivityStreamRequest {
     /**
      * The Amazon Resource Name (ARN) of the DB cluster, for example, arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
