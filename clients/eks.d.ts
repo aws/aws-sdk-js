@@ -109,6 +109,14 @@ declare class EKS extends Service {
    */
   describeAddon(callback?: (err: AWSError, data: EKS.Types.DescribeAddonResponse) => void): Request<EKS.Types.DescribeAddonResponse, AWSError>;
   /**
+   * Returns configuration options.
+   */
+  describeAddonConfiguration(params: EKS.Types.DescribeAddonConfigurationRequest, callback?: (err: AWSError, data: EKS.Types.DescribeAddonConfigurationResponse) => void): Request<EKS.Types.DescribeAddonConfigurationResponse, AWSError>;
+  /**
+   * Returns configuration options.
+   */
+  describeAddonConfiguration(callback?: (err: AWSError, data: EKS.Types.DescribeAddonConfigurationResponse) => void): Request<EKS.Types.DescribeAddonConfigurationResponse, AWSError>;
+  /**
    * Describes the versions for an add-on. Information such as the Kubernetes versions that you can use the add-on with, the owner, publisher, and the type of the add-on are returned. 
    */
   describeAddonVersions(params: EKS.Types.DescribeAddonVersionsRequest, callback?: (err: AWSError, data: EKS.Types.DescribeAddonVersionsResponse) => void): Request<EKS.Types.DescribeAddonVersionsResponse, AWSError>;
@@ -404,6 +412,10 @@ declare namespace EKS {
      * Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
      */
     marketplaceInformation?: MarketplaceInformation;
+    /**
+     * The provided configuration values.
+     */
+    configurationValues?: String;
   }
   export interface AddonHealth {
     /**
@@ -729,6 +741,10 @@ declare namespace EKS {
      * The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.
      */
     tags?: TagMap;
+    /**
+     *  The set of configuration values for the add-on being created. Whatever values provided here are validated against the schema from  DescribeAddonConfiguration .
+     */
+    configurationValues?: String;
   }
   export interface CreateAddonResponse {
     addon?: Addon;
@@ -966,6 +982,30 @@ declare namespace EKS {
   }
   export interface DeregisterClusterResponse {
     cluster?: Cluster;
+  }
+  export interface DescribeAddonConfigurationRequest {
+    /**
+     * The name of the add-on. The name must match one of the names returned by  DescribeAddonVersions .
+     */
+    addonName: String;
+    /**
+     * The version of the add-on. The version must match one of the versions returned by  DescribeAddonVersions .
+     */
+    addonVersion: String;
+  }
+  export interface DescribeAddonConfigurationResponse {
+    /**
+     * The name of the add-on.
+     */
+    addonName?: String;
+    /**
+     * The version of the add-on. The version must match one of the versions returned by  DescribeAddonVersions .
+     */
+    addonVersion?: String;
+    /**
+     * A JSON schema used to validate provided configuration values when creating or updating an addon.
+     */
+    configurationSchema?: String;
   }
   export interface DescribeAddonRequest {
     /**
@@ -1762,11 +1802,11 @@ declare namespace EKS {
   }
   export interface RemoteAccessConfig {
     /**
-     * The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see Amazon EC2 key pairs and Linux instances in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
+     * The Amazon EC2 SSH key name that provides access for SSH communication with the nodes in the managed node group. For more information, see Amazon EC2 key pairs and Linux instances in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
      */
     ec2SshKey?: String;
     /**
-     * The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.
+     * The security group ids that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.
      */
     sourceSecurityGroups?: StringList;
   }
@@ -1869,6 +1909,10 @@ declare namespace EKS {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientRequestToken?: String;
+    /**
+     * The set of configuration values for the add-on being created. Whatever values provided here are validated against the schema from DescribeAddonConfiguration 
+     */
+    configurationValues?: String;
   }
   export interface UpdateAddonResponse {
     update?: Update;

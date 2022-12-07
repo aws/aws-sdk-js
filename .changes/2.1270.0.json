@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause"
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function"
+    }
+]

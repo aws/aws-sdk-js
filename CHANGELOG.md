@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1269.0-->
+<!--LATEST=2.1270.0-->
 <!--ENTRYINSERT-->
+
+## 2.1270.0
+* feature: CloudFront: Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.
+* feature: CostExplorer: This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause
+* feature: EKS: Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function
 
 ## 2.1269.0
 * feature: Billingconductor: This release adds the Tiering Pricing Rule feature.

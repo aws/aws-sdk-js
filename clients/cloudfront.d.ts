@@ -774,6 +774,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateDistribution(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
+   * Copies the staging distribution's configuration to its corresponding primary distribution. The primary distribution retains its Aliases (also known as alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but otherwise its configuration is overwritten to match the staging distribution. You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name’s traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution’s configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain’s traffic back to the primary distribution.
+   */
+  updateDistributionWithStagingConfig(params: CloudFront.Types.UpdateDistributionWithStagingConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionWithStagingConfigResult) => void): Request<CloudFront.Types.UpdateDistributionWithStagingConfigResult, AWSError>;
+  /**
+   * Copies the staging distribution's configuration to its corresponding primary distribution. The primary distribution retains its Aliases (also known as alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but otherwise its configuration is overwritten to match the staging distribution. You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name’s traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution’s configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain’s traffic back to the primary distribution.
+   */
+  updateDistributionWithStagingConfig(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionWithStagingConfigResult) => void): Request<CloudFront.Types.UpdateDistributionWithStagingConfigResult, AWSError>;
+  /**
    * Update a field-level encryption configuration. 
    */
   updateFieldLevelEncryptionConfig(params: CloudFront.Types.UpdateFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionConfigResult, AWSError>;
@@ -1349,7 +1357,7 @@ declare namespace CloudFront {
   }
   export interface ContinuousDeploymentSingleWeightConfig {
     /**
-     * The percentage of traffic to send to the staging distribution, expressed as a decimal number between 0 and 1.
+     * The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and .15.
      */
     Weight: float;
     SessionStickinessConfig?: SessionStickinessConfig;
@@ -2187,6 +2195,14 @@ declare namespace CloudFront {
      * If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address for your distribution, specify true. If you specify false, CloudFront responds to IPv6 DNS requests with the DNS response code NOERROR and with no IP addresses. This allows viewers to submit a second request, for an IPv4 address for your distribution.  In general, you should enable IPv6 if you have users on IPv6 networks who want to access your content. However, if you're using signed URLs or signed cookies to restrict access to your content, and if you're using a custom policy that includes the IpAddress parameter to restrict the IP addresses that can access your content, don't enable IPv6. If you want to restrict access to some content by IP address and not restrict access to other content (or restrict access but not by IP address), you can create two distributions. For more information, see Creating a Signed URL Using a Custom Policy in the Amazon CloudFront Developer Guide. If you're using an Route 53 Amazon Web Services Integration alias resource record set to route traffic to your CloudFront distribution, you need to create a second alias resource record set when both of the following are true:   You enable IPv6 for the distribution   You're using alternate domain names in the URLs for your objects   For more information, see Routing Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name in the Route 53 Amazon Web Services Integration Developer Guide. If you created a CNAME resource record set, either with Route 53 Amazon Web Services Integration or with another DNS service, you don't need to make any changes. A CNAME record will route traffic to your distribution regardless of the IP address format of the viewer request.
      */
     IsIPV6Enabled?: boolean;
+    /**
+     * The identifier of a continuous deployment policy. For more information, see CreateContinuousDeploymentPolicy.
+     */
+    ContinuousDeploymentPolicyId?: string;
+    /**
+     * A Boolean that indicates whether this is a staging distribution. When this value is true, this is a staging distribution. When this value is false, this is not a staging distribution.
+     */
+    Staging?: boolean;
   }
   export interface DistributionConfigWithTags {
     /**
@@ -2332,6 +2348,10 @@ declare namespace CloudFront {
      * Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions. For more information about ICP recordals, see  Signup, Accounts, and Credentials in Getting Started with Amazon Web Services services in China.
      */
     AliasICPRecordals?: AliasICPRecordals;
+    /**
+     * Whether the primary distribution has a staging distribution enabled.
+     */
+    Staging: boolean;
   }
   export type DistributionSummaryList = DistributionSummary[];
   export interface EncryptionEntities {
@@ -5014,6 +5034,27 @@ declare namespace CloudFront {
     Distribution?: Distribution;
     /**
      * The current version of the configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface UpdateDistributionWithStagingConfigRequest {
+    /**
+     * The identifier of the primary distribution to which you are copying a staging distribution's configuration.
+     */
+    Id: string;
+    /**
+     * The identifier of the staging distribution whose configuration you are copying to the primary distribution.
+     */
+    StagingDistributionId?: string;
+    /**
+     * The current versions (ETag values) of both primary and staging distributions. Provide these in the following format:  &lt;primary ETag&gt;, &lt;staging ETag&gt; 
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateDistributionWithStagingConfigResult {
+    Distribution?: Distribution;
+    /**
+     * The current version of the primary distribution (after it’s updated).
      */
     ETag?: string;
   }

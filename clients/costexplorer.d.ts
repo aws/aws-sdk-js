@@ -2552,6 +2552,10 @@ declare namespace CostExplorer {
      * The UsageType value that's associated with the cost anomaly. 
      */
     UsageType?: GenericString;
+    /**
+     * The member account name value that's associated with the cost anomaly.
+     */
+    LinkedAccountName?: GenericString;
   }
   export type RootCauses = RootCause[];
   export type SavingsPlanArn = string;
