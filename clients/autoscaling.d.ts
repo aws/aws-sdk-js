@@ -36,6 +36,14 @@ declare class AutoScaling extends Service {
    */
   attachLoadBalancers(callback?: (err: AWSError, data: AutoScaling.Types.AttachLoadBalancersResultType) => void): Request<AutoScaling.Types.AttachLoadBalancersResultType, AWSError>;
   /**
+   *  Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.  Attaches one or more traffic sources to the specified Auto Scaling group. To describe the traffic sources for an Auto Scaling group, call the DescribeTrafficSources API. To detach a traffic source from the Auto Scaling group, call the DetachTrafficSources API. This operation is additive and does not detach existing traffic sources from the Auto Scaling group.
+   */
+  attachTrafficSources(params: AutoScaling.Types.AttachTrafficSourcesType, callback?: (err: AWSError, data: AutoScaling.Types.AttachTrafficSourcesResultType) => void): Request<AutoScaling.Types.AttachTrafficSourcesResultType, AWSError>;
+  /**
+   *  Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.  Attaches one or more traffic sources to the specified Auto Scaling group. To describe the traffic sources for an Auto Scaling group, call the DescribeTrafficSources API. To detach a traffic source from the Auto Scaling group, call the DetachTrafficSources API. This operation is additive and does not detach existing traffic sources from the Auto Scaling group.
+   */
+  attachTrafficSources(callback?: (err: AWSError, data: AutoScaling.Types.AttachTrafficSourcesResultType) => void): Request<AutoScaling.Types.AttachTrafficSourcesResultType, AWSError>;
+  /**
    * Deletes one or more scheduled actions for the specified Auto Scaling group.
    */
   batchDeleteScheduledAction(params: AutoScaling.Types.BatchDeleteScheduledActionType, callback?: (err: AWSError, data: AutoScaling.Types.BatchDeleteScheduledActionAnswer) => void): Request<AutoScaling.Types.BatchDeleteScheduledActionAnswer, AWSError>;
@@ -212,11 +220,11 @@ declare class AutoScaling extends Service {
    */
   describeLifecycleHooks(callback?: (err: AWSError, data: AutoScaling.Types.DescribeLifecycleHooksAnswer) => void): Request<AutoScaling.Types.DescribeLifecycleHooksAnswer, AWSError>;
   /**
-   * Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group. To determine the attachment status of the target group, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. 
+   * Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group. To determine the attachment status of the target group, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.   You can use this operation to describe target groups that were attached by using AttachLoadBalancerTargetGroups, but not for target groups that were attached by using AttachTrafficSources. 
    */
   describeLoadBalancerTargetGroups(params: AutoScaling.Types.DescribeLoadBalancerTargetGroupsRequest, callback?: (err: AWSError, data: AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse) => void): Request<AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse, AWSError>;
   /**
-   * Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group. To determine the attachment status of the target group, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. 
+   * Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group. To determine the attachment status of the target group, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.   You can use this operation to describe target groups that were attached by using AttachLoadBalancerTargetGroups, but not for target groups that were attached by using AttachTrafficSources. 
    */
   describeLoadBalancerTargetGroups(callback?: (err: AWSError, data: AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse) => void): Request<AutoScaling.Types.DescribeLoadBalancerTargetGroupsResponse, AWSError>;
   /**
@@ -280,6 +288,14 @@ declare class AutoScaling extends Service {
    */
   describeTerminationPolicyTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeTerminationPolicyTypesAnswer) => void): Request<AutoScaling.Types.DescribeTerminationPolicyTypesAnswer, AWSError>;
   /**
+   *  Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.  Gets information about the traffic sources for the specified Auto Scaling group.
+   */
+  describeTrafficSources(params: AutoScaling.Types.DescribeTrafficSourcesRequest, callback?: (err: AWSError, data: AutoScaling.Types.DescribeTrafficSourcesResponse) => void): Request<AutoScaling.Types.DescribeTrafficSourcesResponse, AWSError>;
+  /**
+   *  Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.  Gets information about the traffic sources for the specified Auto Scaling group.
+   */
+  describeTrafficSources(callback?: (err: AWSError, data: AutoScaling.Types.DescribeTrafficSourcesResponse) => void): Request<AutoScaling.Types.DescribeTrafficSourcesResponse, AWSError>;
+  /**
    * Gets information about a warm pool and its instances. For more information, see Warm pools for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
    */
   describeWarmPool(params: AutoScaling.Types.DescribeWarmPoolType, callback?: (err: AWSError, data: AutoScaling.Types.DescribeWarmPoolAnswer) => void): Request<AutoScaling.Types.DescribeWarmPoolAnswer, AWSError>;
@@ -296,11 +312,11 @@ declare class AutoScaling extends Service {
    */
   detachInstances(callback?: (err: AWSError, data: AutoScaling.Types.DetachInstancesAnswer) => void): Request<AutoScaling.Types.DetachInstancesAnswer, AWSError>;
   /**
-   * Detaches one or more target groups from the specified Auto Scaling group. When you detach a target group, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the DescribeLoadBalancerTargetGroups API call. The instances remain running.
+   * Detaches one or more target groups from the specified Auto Scaling group. When you detach a target group, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the DescribeLoadBalancerTargetGroups API call. The instances remain running.  You can use this operation to detach target groups that were attached by using AttachLoadBalancerTargetGroups, but not for target groups that were attached by using AttachTrafficSources. 
    */
   detachLoadBalancerTargetGroups(params: AutoScaling.Types.DetachLoadBalancerTargetGroupsType, callback?: (err: AWSError, data: AutoScaling.Types.DetachLoadBalancerTargetGroupsResultType) => void): Request<AutoScaling.Types.DetachLoadBalancerTargetGroupsResultType, AWSError>;
   /**
-   * Detaches one or more target groups from the specified Auto Scaling group. When you detach a target group, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the DescribeLoadBalancerTargetGroups API call. The instances remain running.
+   * Detaches one or more target groups from the specified Auto Scaling group. When you detach a target group, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the DescribeLoadBalancerTargetGroups API call. The instances remain running.  You can use this operation to detach target groups that were attached by using AttachLoadBalancerTargetGroups, but not for target groups that were attached by using AttachTrafficSources. 
    */
   detachLoadBalancerTargetGroups(callback?: (err: AWSError, data: AutoScaling.Types.DetachLoadBalancerTargetGroupsResultType) => void): Request<AutoScaling.Types.DetachLoadBalancerTargetGroupsResultType, AWSError>;
   /**
@@ -311,6 +327,14 @@ declare class AutoScaling extends Service {
    * Detaches one or more Classic Load Balancers from the specified Auto Scaling group. This operation detaches only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the DetachLoadBalancerTargetGroups API instead. When you detach a load balancer, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using the DescribeLoadBalancers API call. The instances remain running.
    */
   detachLoadBalancers(callback?: (err: AWSError, data: AutoScaling.Types.DetachLoadBalancersResultType) => void): Request<AutoScaling.Types.DetachLoadBalancersResultType, AWSError>;
+  /**
+   *  Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.  Detaches one or more traffic sources from the specified Auto Scaling group.
+   */
+  detachTrafficSources(params: AutoScaling.Types.DetachTrafficSourcesType, callback?: (err: AWSError, data: AutoScaling.Types.DetachTrafficSourcesResultType) => void): Request<AutoScaling.Types.DetachTrafficSourcesResultType, AWSError>;
+  /**
+   *  Reserved for use with Amazon VPC Lattice, which is in preview and subject to change. Do not use this API for production workloads. This API is also subject to change.  Detaches one or more traffic sources from the specified Auto Scaling group.
+   */
+  detachTrafficSources(callback?: (err: AWSError, data: AutoScaling.Types.DetachTrafficSourcesResultType) => void): Request<AutoScaling.Types.DetachTrafficSourcesResultType, AWSError>;
   /**
    * Disables group metrics collection for the specified Auto Scaling group.
    */
@@ -607,7 +631,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: XmlStringMaxLen255;
     /**
-     * The Amazon Resource Names (ARN) of the target groups. You can specify up to 10 target groups. To get the ARN of a target group, use the Elastic Load Balancing DescribeTargetGroups API operation.
+     * The Amazon Resource Names (ARNs) of the target groups. You can specify up to 10 target groups. To get the ARN of a target group, use the Elastic Load Balancing DescribeTargetGroups API operation.
      */
     TargetGroupARNs: TargetGroupARNs;
   }
@@ -622,6 +646,18 @@ declare namespace AutoScaling {
      * The names of the load balancers. You can specify up to 10 load balancers.
      */
     LoadBalancerNames: LoadBalancerNames;
+  }
+  export interface AttachTrafficSourcesResultType {
+  }
+  export interface AttachTrafficSourcesType {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+    /**
+     * The unique identifiers of one or more traffic sources. You can specify up to 10 traffic sources. Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups. The target groups receive incoming traffic and route requests to one or more registered targets.
+     */
+    TrafficSources: TrafficSources;
   }
   export interface AutoScalingGroup {
     /**
@@ -677,7 +713,7 @@ declare namespace AutoScaling {
      */
     TargetGroupARNs?: TargetGroupARNs;
     /**
-     * The service to use for the health checks. The valid values are EC2 and ELB. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.
+     * Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on. The valid values are EC2 (default), ELB, and VPC_LATTICE. The VPC_LATTICE health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.
      */
     HealthCheckType: XmlStringMaxLen32;
     /**
@@ -756,6 +792,10 @@ declare namespace AutoScaling {
      * The duration of the default instance warmup, in seconds.
      */
     DefaultInstanceWarmup?: DefaultInstanceWarmup;
+    /**
+     * The unique identifiers of the traffic sources.
+     */
+    TrafficSources?: TrafficSources;
   }
   export type AutoScalingGroupDesiredCapacity = number;
   export type AutoScalingGroupMaxSize = number;
@@ -1016,15 +1056,15 @@ declare namespace AutoScaling {
      */
     LoadBalancerNames?: LoadBalancerNames;
     /**
-     * The Amazon Resource Names (ARN) of the target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
+     * The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
      */
     TargetGroupARNs?: TargetGroupARNs;
     /**
-     * The service to use for the health checks. The valid values are EC2 (default) and ELB. If you configure an Auto Scaling group to use load balancer (ELB) health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks. For more information, see Health checks for Auto Scaling instances in the Amazon EC2 Auto Scaling User Guide.
+     * Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on. For more information, see Health checks for Auto Scaling instances in the Amazon EC2 Auto Scaling User Guide. The valid values are EC2 (default), ELB, and VPC_LATTICE. The VPC_LATTICE health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.
      */
     HealthCheckType?: XmlStringMaxLen32;
     /**
-     * The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service and marking it unhealthy due to a failed Elastic Load Balancing or custom health check. This is useful if your instances do not immediately pass these health checks after they enter the InService state. For more information, see Set the health check grace period for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
+     * The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service and marking it unhealthy due to a failed health check. This is useful if your instances do not immediately pass their health checks after they enter the InService state. For more information, see Set the health check grace period for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
      */
     HealthCheckGracePeriod?: HealthCheckGracePeriod;
     /**
@@ -1075,6 +1115,10 @@ declare namespace AutoScaling {
      * The amount of time, in seconds, until a newly launched instance can contribute to the Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling aggregates instance metrics, resulting in more reliable usage data. Set this value equal to the amount of time that it takes for resource consumption to become stable after an instance reaches the InService state. For more information, see Set the default instance warmup for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.  To manage your warm-up settings at the group level, we recommend that you set the default instance warmup, even if its value is set to 0 seconds. This also optimizes the performance of scaling policies that scale continuously, such as target tracking and step scaling policies.  If you need to remove a value that you previously set, include the property but specify -1 for the value. However, we strongly recommend keeping the default instance warmup enabled by specifying a minimum value of 0.  Default: None 
      */
     DefaultInstanceWarmup?: DefaultInstanceWarmup;
+    /**
+     *  Reserved for use with Amazon VPC Lattice, which is in preview release and is subject to change. Do not use this parameter for production workloads. It is also subject to change.  The unique identifiers of one or more traffic sources. Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the running instances with the attached target groups. The target groups receive incoming traffic and route requests to one or more registered targets.
+     */
+    TrafficSources?: TrafficSources;
   }
   export interface CreateLaunchConfigurationType {
     /**
@@ -1164,11 +1208,11 @@ declare namespace AutoScaling {
     /**
      * The name of the metric. To get the exact metric name, namespace, and dimensions, inspect the Metric object that is returned by a call to ListMetrics.
      */
-    MetricName: MetricName;
+    MetricName?: MetricName;
     /**
      * The namespace of the metric.
      */
-    Namespace: MetricNamespace;
+    Namespace?: MetricNamespace;
     /**
      * The dimensions of the metric. Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.
      */
@@ -1176,11 +1220,15 @@ declare namespace AutoScaling {
     /**
      * The statistic of the metric.
      */
-    Statistic: MetricStatistic;
+    Statistic?: MetricStatistic;
     /**
      * The unit of the metric. For a complete list of the units that CloudWatch supports, see the MetricDatum data type in the Amazon CloudWatch API Reference.
      */
     Unit?: MetricUnit;
+    /**
+     * The metrics to include in the target tracking scaling policy, as a metric data query. This can include both raw metric and metric math expressions.
+     */
+    Metrics?: TargetTrackingMetricDataQueries;
   }
   export type DefaultInstanceWarmup = number;
   export interface DeleteAutoScalingGroupType {
@@ -1519,6 +1567,34 @@ declare namespace AutoScaling {
      */
     TerminationPolicyTypes?: TerminationPolicies;
   }
+  export interface DescribeTrafficSourcesRequest {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+    /**
+     * The type of traffic source you are describing. Currently, the only valid value is vpc-lattice.
+     */
+    TrafficSourceType: XmlStringMaxLen255;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: XmlString;
+    /**
+     * The maximum number of items to return with this call. The maximum value is 50.
+     */
+    MaxRecords?: MaxRecords;
+  }
+  export interface DescribeTrafficSourcesResponse {
+    /**
+     * Information about the traffic sources.
+     */
+    TrafficSources?: TrafficSourceStates;
+    /**
+     * This string indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the NextToken value when requesting the next set of items. This value is null when there are no more items to return.
+     */
+    NextToken?: XmlString;
+  }
   export interface DescribeWarmPoolAnswer {
     /**
      * The warm pool configuration details. 
@@ -1529,7 +1605,7 @@ declare namespace AutoScaling {
      */
     Instances?: Instances;
     /**
-     * The token for the next set of items to return. (You received this token from a previous call.)
+     * This string indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the NextToken value when requesting the next set of items. This value is null when there are no more items to return.
      */
     NextToken?: XmlString;
   }
@@ -1594,6 +1670,18 @@ declare namespace AutoScaling {
      * The names of the load balancers. You can specify up to 10 load balancers.
      */
     LoadBalancerNames: LoadBalancerNames;
+  }
+  export interface DetachTrafficSourcesResultType {
+  }
+  export interface DetachTrafficSourcesType {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+    /**
+     * The unique identifiers of one or more traffic sources you are detaching. You can specify up to 10 traffic sources. Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC Lattice target group. When you detach a target group, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the target group using the DescribeTrafficSources API call. The instances continue to run.
+     */
+    TrafficSources: TrafficSources;
   }
   export interface DisableMetricsCollectionQuery {
     /**
@@ -2043,7 +2131,7 @@ declare namespace AutoScaling {
      */
     OnDemandPercentageAboveBaseCapacity?: OnDemandPercentageAboveBaseCapacity;
     /**
-     * The allocation strategy to apply to your Spot Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify. The following lists the valid values:  capacity-optimized  Requests Spot Instances using pools that are optimally chosen based on the available Spot capacity. This strategy has the lowest risk of interruption. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized.  capacity-optimized-prioritized  You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best effort basis but optimizes for capacity first. Note that if the On-Demand allocation strategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. This is not a valid value for Auto Scaling groups that specify InstanceRequirements.  lowest-price  Requests Spot Instances using the lowest priced pools within an Availability Zone, across the number of Spot pools that you specify for the SpotInstancePools property. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. This is the default value, but it might lead to high interruption rates because this strategy only considers instance price and not available capacity.  price-capacity-optimized (recommended)  Amazon EC2 Auto Scaling identifies the pools with the highest capacity availability for the number of instances that are launching. This means that we will request Spot Instances from the pools that we believe have the lowest chance of interruption in the near term. Amazon EC2 Auto Scaling then requests Spot Instances from the lowest priced of these pools.  
+     * The allocation strategy to apply to your Spot Instances when they are launched. Possible instance types are determined by the launch template overrides that you specify. The following lists the valid values:  capacity-optimized  Requests Spot Instances using pools that are optimally chosen based on the available Spot capacity. This strategy has the lowest risk of interruption. To give certain instance types a higher chance of launching first, use capacity-optimized-prioritized.  capacity-optimized-prioritized  You set the order of instance types for the launch template overrides from highest to lowest priority (from first to last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best effort basis but optimizes for capacity first. Note that if the On-Demand allocation strategy is set to prioritized, the same priority is applied when fulfilling On-Demand capacity. This is not a valid value for Auto Scaling groups that specify InstanceRequirements.  lowest-price  Requests Spot Instances using the lowest priced pools within an Availability Zone, across the number of Spot pools that you specify for the SpotInstancePools property. To ensure that your desired capacity is met, you might receive Spot Instances from several pools. This is the default value, but it might lead to high interruption rates because this strategy only considers instance price and not available capacity.  price-capacity-optimized (recommended)  The price and capacity optimized allocation strategy looks at both price and capacity to select the Spot Instance pools that are the least likely to be interrupted and have the lowest possible price.  
      */
     SpotAllocationStrategy?: XmlString;
     /**
@@ -3230,6 +3318,40 @@ declare namespace AutoScaling {
      */
     DisableScaleIn?: DisableScaleIn;
   }
+  export type TargetTrackingMetricDataQueries = TargetTrackingMetricDataQuery[];
+  export interface TargetTrackingMetricDataQuery {
+    /**
+     * A short name that identifies the object's results in the response. This name must be unique among all TargetTrackingMetricDataQuery objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter. 
+     */
+    Id: XmlStringMaxLen255;
+    /**
+     * The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the Id of the other metrics to refer to those metrics, and can also use the Id of other expressions to use the result of those expressions.  Conditional: Within each TargetTrackingMetricDataQuery object, you must specify either Expression or MetricStat, but not both.
+     */
+    Expression?: XmlStringMaxLen2047;
+    /**
+     * Information about the metric data to return. Conditional: Within each TargetTrackingMetricDataQuery object, you must specify either Expression or MetricStat, but not both.
+     */
+    MetricStat?: TargetTrackingMetricStat;
+    /**
+     * A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.
+     */
+    Label?: XmlStringMetricLabel;
+    /**
+     * Indicates whether to return the timestamps and raw data values of this metric.  If you use any math expressions, specify true for this value for only the final math expression that the metric specification is based on. You must specify false for ReturnData for all the other metrics and expressions used in the metric specification. If you are only retrieving metrics and not performing any math expressions, do not specify anything for ReturnData. This sets it to its default (true).
+     */
+    ReturnData?: ReturnData;
+  }
+  export interface TargetTrackingMetricStat {
+    Metric: Metric;
+    /**
+     * The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in Statistics in the Amazon CloudWatch User Guide. The most commonly used metrics for scaling is Average 
+     */
+    Stat: XmlStringMetricStat;
+    /**
+     * The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the MetricDatum data type in the Amazon CloudWatch API Reference.
+     */
+    Unit?: MetricUnit;
+  }
   export interface TerminateInstanceInAutoScalingGroupType {
     /**
      * The ID of the instance.
@@ -3252,6 +3374,24 @@ declare namespace AutoScaling {
      */
     Max?: NullablePositiveDouble;
   }
+  export interface TrafficSourceIdentifier {
+    /**
+     * The unique identifier of the traffic source.
+     */
+    Identifier?: XmlStringMaxLen511;
+  }
+  export interface TrafficSourceState {
+    /**
+     * The unique identifier of the traffic source. Currently, this is the Amazon Resource Name (ARN) for a VPC Lattice target group.
+     */
+    TrafficSource?: XmlStringMaxLen511;
+    /**
+     * The following are the possible states for a VPC Lattice target group:    Adding - The Auto Scaling instances are being registered with the target group.    Added - All Auto Scaling instances are registered with the target group.    InService - At least one Auto Scaling instance passed the VPC_LATTICE health check.    Removing - The Auto Scaling instances are being deregistered from the target group. If connection draining is enabled, VPC Lattice waits for in-flight requests to complete before deregistering the instances.    Removed - All Auto Scaling instances are deregistered from the target group.  
+     */
+    State?: XmlStringMaxLen255;
+  }
+  export type TrafficSourceStates = TrafficSourceState[];
+  export type TrafficSources = TrafficSourceIdentifier[];
   export interface UpdateAutoScalingGroupType {
     /**
      * The name of the Auto Scaling group.
@@ -3290,11 +3430,11 @@ declare namespace AutoScaling {
      */
     AvailabilityZones?: AvailabilityZones;
     /**
-     * The service to use for the health checks. The valid values are EC2 and ELB. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.
+     * Determines whether any additional health checks are performed on the instances in this group. Amazon EC2 health checks are always on. The valid values are EC2 (default), ELB, and VPC_LATTICE. The VPC_LATTICE health check type is reserved for use with VPC Lattice, which is in preview release and is subject to change.
      */
     HealthCheckType?: XmlStringMaxLen32;
     /**
-     * The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service and marking it unhealthy due to a failed Elastic Load Balancing or custom health check. This is useful if your instances do not immediately pass these health checks after they enter the InService state. For more information, see Set the health check grace period for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
+     * The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service and marking it unhealthy due to a failed health check. This is useful if your instances do not immediately pass their health checks after they enter the InService state. For more information, see Set the health check grace period for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
      */
     HealthCheckGracePeriod?: HealthCheckGracePeriod;
     /**

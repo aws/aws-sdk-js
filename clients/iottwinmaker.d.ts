@@ -44,6 +44,14 @@ declare class IoTTwinMaker extends Service {
    */
   createScene(callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateSceneResponse) => void): Request<IoTTwinMaker.Types.CreateSceneResponse, AWSError>;
   /**
+   * This action creates a SyncJob.
+   */
+  createSyncJob(params: IoTTwinMaker.Types.CreateSyncJobRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateSyncJobResponse) => void): Request<IoTTwinMaker.Types.CreateSyncJobResponse, AWSError>;
+  /**
+   * This action creates a SyncJob.
+   */
+  createSyncJob(callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateSyncJobResponse) => void): Request<IoTTwinMaker.Types.CreateSyncJobResponse, AWSError>;
+  /**
    * Creates a workplace.
    */
   createWorkspace(params: IoTTwinMaker.Types.CreateWorkspaceRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateWorkspaceResponse) => void): Request<IoTTwinMaker.Types.CreateWorkspaceResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class IoTTwinMaker extends Service {
    * Deletes a scene.
    */
   deleteScene(callback?: (err: AWSError, data: IoTTwinMaker.Types.DeleteSceneResponse) => void): Request<IoTTwinMaker.Types.DeleteSceneResponse, AWSError>;
+  /**
+   * Delete the SyncJob.
+   */
+  deleteSyncJob(params: IoTTwinMaker.Types.DeleteSyncJobRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.DeleteSyncJobResponse) => void): Request<IoTTwinMaker.Types.DeleteSyncJobResponse, AWSError>;
+  /**
+   * Delete the SyncJob.
+   */
+  deleteSyncJob(callback?: (err: AWSError, data: IoTTwinMaker.Types.DeleteSyncJobResponse) => void): Request<IoTTwinMaker.Types.DeleteSyncJobResponse, AWSError>;
   /**
    * Deletes a workspace.
    */
@@ -140,6 +156,14 @@ declare class IoTTwinMaker extends Service {
    */
   getScene(callback?: (err: AWSError, data: IoTTwinMaker.Types.GetSceneResponse) => void): Request<IoTTwinMaker.Types.GetSceneResponse, AWSError>;
   /**
+   * Gets the SyncJob.
+   */
+  getSyncJob(params: IoTTwinMaker.Types.GetSyncJobRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.GetSyncJobResponse) => void): Request<IoTTwinMaker.Types.GetSyncJobResponse, AWSError>;
+  /**
+   * Gets the SyncJob.
+   */
+  getSyncJob(callback?: (err: AWSError, data: IoTTwinMaker.Types.GetSyncJobResponse) => void): Request<IoTTwinMaker.Types.GetSyncJobResponse, AWSError>;
+  /**
    * Retrieves information about a workspace.
    */
   getWorkspace(params: IoTTwinMaker.Types.GetWorkspaceRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.GetWorkspaceResponse) => void): Request<IoTTwinMaker.Types.GetWorkspaceResponse, AWSError>;
@@ -171,6 +195,22 @@ declare class IoTTwinMaker extends Service {
    * Lists all scenes in a workspace.
    */
   listScenes(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListScenesResponse) => void): Request<IoTTwinMaker.Types.ListScenesResponse, AWSError>;
+  /**
+   * List all SyncJobs.
+   */
+  listSyncJobs(params: IoTTwinMaker.Types.ListSyncJobsRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ListSyncJobsResponse) => void): Request<IoTTwinMaker.Types.ListSyncJobsResponse, AWSError>;
+  /**
+   * List all SyncJobs.
+   */
+  listSyncJobs(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListSyncJobsResponse) => void): Request<IoTTwinMaker.Types.ListSyncJobsResponse, AWSError>;
+  /**
+   * Lists the sync resources.
+   */
+  listSyncResources(params: IoTTwinMaker.Types.ListSyncResourcesRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ListSyncResourcesResponse) => void): Request<IoTTwinMaker.Types.ListSyncResourcesResponse, AWSError>;
+  /**
+   * Lists the sync resources.
+   */
+  listSyncResources(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListSyncResourcesResponse) => void): Request<IoTTwinMaker.Types.ListSyncResourcesResponse, AWSError>;
   /**
    * Lists all tags associated with a resource.
    */
@@ -383,8 +423,13 @@ declare namespace IoTTwinMaker {
      * The property groups.
      */
     propertyGroups?: ComponentPropertyGroupResponses;
+    /**
+     * The syncSource of the sync job, if this entity was created by a sync job.
+     */
+    syncSource?: SyncSource;
   }
   export type ComponentTypeId = string;
+  export type ComponentTypeName = string;
   export type ComponentTypeSummaries = ComponentTypeSummary[];
   export interface ComponentTypeSummary {
     /**
@@ -411,6 +456,10 @@ declare namespace IoTTwinMaker {
      * The current status of the component type.
      */
     status?: Status;
+    /**
+     * The component type name.
+     */
+    componentTypeName?: ComponentTypeName;
   }
   export interface ComponentUpdateRequest {
     /**
@@ -476,6 +525,10 @@ declare namespace IoTTwinMaker {
      * 
      */
     propertyGroups?: PropertyGroupsRequest;
+    /**
+     * A friendly name for the component type.
+     */
+    componentTypeName?: ComponentTypeName;
   }
   export interface CreateComponentTypeResponse {
     /**
@@ -574,6 +627,38 @@ declare namespace IoTTwinMaker {
      * The date and time when the scene was created.
      */
     creationDateTime: Timestamp;
+  }
+  export interface CreateSyncJobRequest {
+    /**
+     * The workspace Id.
+     */
+    workspaceId: Id;
+    /**
+     * The sync source.  Currently the only supported syncSoucre is SITEWISE . 
+     */
+    syncSource: SyncSource;
+    /**
+     * The SyncJob IAM role. This IAM role is used by the sync job to read from the syncSource, and create, update or delete the corresponding resources.
+     */
+    syncRole: RoleArn;
+    /**
+     * The SyncJob tags.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateSyncJobResponse {
+    /**
+     * The SyncJob ARN.
+     */
+    arn: TwinMakerArn;
+    /**
+     * The date and time for the SyncJob creation.
+     */
+    creationDateTime: Timestamp;
+    /**
+     * The SyncJob response state.
+     */
+    state: SyncJobState;
   }
   export interface CreateWorkspaceRequest {
     /**
@@ -727,6 +812,22 @@ declare namespace IoTTwinMaker {
   }
   export interface DeleteSceneResponse {
   }
+  export interface DeleteSyncJobRequest {
+    /**
+     * The workspace Id.
+     */
+    workspaceId: Id;
+    /**
+     * The sync source.  Currently the only supported syncSoucre is SITEWISE . 
+     */
+    syncSource: SyncSource;
+  }
+  export interface DeleteSyncJobResponse {
+    /**
+     * The SyncJob response state.
+     */
+    state: SyncJobState;
+  }
   export interface DeleteWorkspaceRequest {
     /**
      * The ID of the workspace to delete.
@@ -797,7 +898,7 @@ declare namespace IoTTwinMaker {
     updateDateTime: Timestamp;
   }
   export type Entries = PropertyValueEntry[];
-  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|string;
+  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|"SYNC_INITIALIZING_ERROR"|"SYNC_CREATING_ERROR"|"SYNC_PROCESSING_ERROR"|string;
   export interface ErrorDetails {
     /**
      * The error code.
@@ -947,6 +1048,14 @@ declare namespace IoTTwinMaker {
      * The maximum number of results to return at one time. The default is 25. Valid Range: Minimum value of 1. Maximum value of 250.
      */
     propertyGroups?: PropertyGroupsResponse;
+    /**
+     * The syncSource of the sync job, if this entity was created by a sync job.
+     */
+    syncSource?: SyncSource;
+    /**
+     * The component type name.
+     */
+    componentTypeName?: ComponentTypeName;
   }
   export interface GetEntityRequest {
     /**
@@ -1003,6 +1112,10 @@ declare namespace IoTTwinMaker {
      * The date and time when the entity was last updated.
      */
     updateDateTime: Timestamp;
+    /**
+     * The syncSource of the sync job, if this entity was created by a sync job.
+     */
+    syncSource?: SyncSource;
   }
   export interface GetPricingPlanRequest {
   }
@@ -1179,6 +1292,46 @@ declare namespace IoTTwinMaker {
      * A list of capabilities that the scene uses to render.
      */
     capabilities?: SceneCapabilities;
+  }
+  export interface GetSyncJobRequest {
+    /**
+     * The sync soucre.  Currently the only supported syncSoucre is SITEWISE . 
+     */
+    syncSource: SyncSource;
+    /**
+     * The workspace Id.
+     */
+    workspaceId?: Id;
+  }
+  export interface GetSyncJobResponse {
+    /**
+     * The sync job ARN.
+     */
+    arn: TwinMakerArn;
+    /**
+     * The ID of the workspace that contains the sync job.
+     */
+    workspaceId: Id;
+    /**
+     * The sync soucre.  Currently the only supported syncSoucre is SITEWISE . 
+     */
+    syncSource: SyncSource;
+    /**
+     * The sync IAM role.
+     */
+    syncRole: RoleArn;
+    /**
+     * The SyncJob response status.
+     */
+    status: SyncJobStatus;
+    /**
+     * The creation date and time.
+     */
+    creationDateTime: Timestamp;
+    /**
+     * The update date and time.
+     */
+    updateDateTime: Timestamp;
   }
   export interface GetWorkspaceRequest {
     /**
@@ -1357,6 +1510,62 @@ declare namespace IoTTwinMaker {
      */
     nextToken?: NextToken;
   }
+  export interface ListSyncJobsRequest {
+    /**
+     * The ID of the workspace that contains the sync job.
+     */
+    workspaceId: Id;
+    /**
+     * The maximum number of results to return at one time. The default is 50. Valid Range: Minimum value of 0. Maximum value of 200.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSyncJobsResponse {
+    /**
+     * The listed SyncJob summaries.
+     */
+    syncJobSummaries?: SyncJobSummaries;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSyncResourcesRequest {
+    /**
+     * The ID of the workspace that contains the sync job.
+     */
+    workspaceId: Id;
+    /**
+     * The sync soucre.  Currently the only supported syncSoucre is SITEWISE . 
+     */
+    syncSource: SyncSource;
+    /**
+     * A list of objects that filter the request.
+     */
+    filters?: SyncResourceFilters;
+    /**
+     * The maximum number of results to return at one time. The default is 50. Valid Range: Minimum value of 0. Maximum value of 200.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSyncResourcesResponse {
+    /**
+     * The sync resources.
+     */
+    syncResources?: SyncResourceSummaries;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource.
@@ -1488,6 +1697,10 @@ declare namespace IoTTwinMaker {
      * A mapping that specifies configuration information about the property. Use this field to specify information that you read from and write to an external source.
      */
     configuration?: Configuration;
+    /**
+     * A friendly name for the property.
+     */
+    displayName?: PropertyDisplayName;
   }
   export interface PropertyDefinitionResponse {
     /**
@@ -1530,9 +1743,14 @@ declare namespace IoTTwinMaker {
      * A mapping that specifies configuration information about the property.
      */
     configuration?: Configuration;
+    /**
+     * A friendly name for the property.
+     */
+    displayName?: PropertyDisplayName;
   }
   export type PropertyDefinitionsRequest = {[key: string]: PropertyDefinitionRequest};
   export type PropertyDefinitionsResponse = {[key: string]: PropertyDefinitionResponse};
+  export type PropertyDisplayName = string;
   export interface PropertyFilter {
     /**
      * The property name associated with this property filter.
@@ -1730,6 +1948,99 @@ declare namespace IoTTwinMaker {
     error?: ErrorDetails;
   }
   export type String = string;
+  export type SyncJobState = "CREATING"|"INITIALIZING"|"ACTIVE"|"DELETING"|"ERROR"|string;
+  export interface SyncJobStatus {
+    /**
+     * The SyncJob status state.
+     */
+    state?: SyncJobState;
+    /**
+     * The SyncJob error.
+     */
+    error?: ErrorDetails;
+  }
+  export type SyncJobSummaries = SyncJobSummary[];
+  export interface SyncJobSummary {
+    /**
+     * The SyncJob summary ARN.
+     */
+    arn?: TwinMakerArn;
+    /**
+     * The ID of the workspace that contains the sync job.
+     */
+    workspaceId?: Id;
+    /**
+     * The sync source.
+     */
+    syncSource?: SyncSource;
+    /**
+     * The SyncJob summaries status.
+     */
+    status?: SyncJobStatus;
+    /**
+     * The creation date and time.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The update date and time.
+     */
+    updateDateTime?: Timestamp;
+  }
+  export interface SyncResourceFilter {
+    /**
+     * The sync resource filter's state.
+     */
+    state?: SyncResourceState;
+    /**
+     * The sync resource filter resoucre type
+     */
+    resourceType?: SyncResourceType;
+    /**
+     * The sync resource filter resource Id.
+     */
+    resourceId?: Id;
+    /**
+     * The external Id.
+     */
+    externalId?: Id;
+  }
+  export type SyncResourceFilters = SyncResourceFilter[];
+  export type SyncResourceState = "INITIALIZING"|"PROCESSING"|"DELETED"|"IN_SYNC"|"ERROR"|string;
+  export interface SyncResourceStatus {
+    /**
+     * The sync resource status state.
+     */
+    state?: SyncResourceState;
+    /**
+     * The status error.
+     */
+    error?: ErrorDetails;
+  }
+  export type SyncResourceSummaries = SyncResourceSummary[];
+  export interface SyncResourceSummary {
+    /**
+     * The resource type.
+     */
+    resourceType?: SyncResourceType;
+    /**
+     * The external Id.
+     */
+    externalId?: Id;
+    /**
+     * The resource Id.
+     */
+    resourceId?: Id;
+    /**
+     * The sync resource summary status.
+     */
+    status?: SyncResourceStatus;
+    /**
+     * The update date and time.
+     */
+    updateDateTime?: Timestamp;
+  }
+  export type SyncResourceType = "ENTITY"|"COMPONENT_TYPE"|string;
+  export type SyncSource = string;
   export interface TabularConditions {
     /**
      * Filter criteria that orders the output. It can be sorted in ascending or descending order.
@@ -1776,7 +2087,7 @@ declare namespace IoTTwinMaker {
   }
   export interface UpdateComponentTypeRequest {
     /**
-     * The ID of the workspace that contains the component type.
+     * The ID of the workspace.
      */
     workspaceId: Id;
     /**
@@ -1807,6 +2118,10 @@ declare namespace IoTTwinMaker {
      * The property groups
      */
     propertyGroups?: PropertyGroupsRequest;
+    /**
+     * The component type name.
+     */
+    componentTypeName?: ComponentTypeName;
   }
   export interface UpdateComponentTypeResponse {
     /**
