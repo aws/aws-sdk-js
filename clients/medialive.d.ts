@@ -3941,6 +3941,10 @@ to.
      * The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
      */
     MaxBitrate?: __integer;
+    /**
+     * The Link device's buffer size (latency) in milliseconds (ms).
+     */
+    LatencyMs?: __integer;
   }
   export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string;
   export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string;
@@ -3977,6 +3981,10 @@ to.
      * The width of the video source, in pixels.
      */
     Width?: __integer;
+    /**
+     * The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
+     */
+    LatencyMs?: __integer;
   }
   export type InputDeviceIpScheme = "STATIC"|"DHCP"|string;
   export interface InputDeviceNetworkSettings {
@@ -4066,7 +4074,7 @@ to.
     UhdDeviceSettings?: InputDeviceUhdSettings;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
-  export type InputDeviceType = "HD"|string;
+  export type InputDeviceType = "HD"|"UHD"|string;
   export interface InputDeviceUhdSettings {
     /**
      * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
@@ -4100,6 +4108,10 @@ to.
      * The width of the video source, in pixels.
      */
     Width?: __integer;
+    /**
+     * The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
+     */
+    LatencyMs?: __integer;
   }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {

@@ -379,7 +379,7 @@ rounded to the nearest multiple of the source fragment duration.
      */
     Profile?: Profile;
     /**
-     * The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.
+     * The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content. The MANIFEST value is compatible with source HLS playlists using the SCTE-35 Enhanced syntax (#EXT-OATCLS-SCTE35 tags). SCTE-35 Elemental and SCTE-35 Daterange syntaxes are not supported with this option.
      */
     ScteMarkersSource?: ScteMarkersSource;
     StreamSelection?: StreamSelection;
@@ -515,6 +515,10 @@ rounded to the nearest multiple of the source segment duration.
     Id: __string;
   }
   export interface DescribePackagingGroupResponse {
+    /**
+     * The approximate asset count of the PackagingGroup.
+     */
+    ApproximateAssetCount?: __integer;
     /**
      * The ARN of the PackagingGroup.
      */
@@ -758,6 +762,10 @@ rounded to the nearest multiple of the source fragment duration.
   }
   export interface PackagingGroup {
     /**
+     * The approximate asset count of the PackagingGroup.
+     */
+    ApproximateAssetCount?: __integer;
+    /**
      * The ARN of the PackagingGroup.
      */
     Arn?: __string;
@@ -839,6 +847,10 @@ MediaPackage will assume when accessing the key provider service.
     Id: __string;
   }
   export interface UpdatePackagingGroupResponse {
+    /**
+     * The approximate asset count of the PackagingGroup.
+     */
+    ApproximateAssetCount?: __integer;
     /**
      * The ARN of the PackagingGroup.
      */

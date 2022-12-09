@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1271.0-->
+<!--LATEST=2.1272.0-->
 <!--ENTRYINSERT-->
+
+## 2.1272.0
+* feature: IoTFleetWise: Deprecated assignedValue property for actuators and attributes.  Added a message to invalid nodes and invalid decoder manifest exceptions.
+* feature: MediaLive: Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.
+* feature: MediaPackageVod: This release provides the approximate number of assets in a packaging group.
 
 ## 2.1271.0
 * feature: AutoScaling: Adds support for metric math for target tracking scaling policies, saving you the cost and effort of publishing a custom metric to CloudWatch. Also adds support for VPC Lattice by adding the Attach/Detach/DescribeTrafficSources APIs and a new health check type to the CreateAutoScalingGroup API.
