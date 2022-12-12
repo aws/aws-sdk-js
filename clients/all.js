@@ -333,5 +333,6 @@ module.exports = {
   DocDBElastic: require('./docdbelastic'),
   SageMakerGeospatial: require('./sagemakergeospatial'),
   CodeCatalyst: require('./codecatalyst'),
-  Pipes: require('./pipes')
+  Pipes: require('./pipes'),
+  SageMakerMetrics: require('./sagemakermetrics')
 };

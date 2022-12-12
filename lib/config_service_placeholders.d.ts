@@ -334,6 +334,7 @@ export abstract class ConfigurationServicePlaceholders {
   sagemakergeospatial?: AWS.SageMakerGeospatial.Types.ClientConfiguration;
   codecatalyst?: AWS.CodeCatalyst.Types.ClientConfiguration;
   pipes?: AWS.Pipes.Types.ClientConfiguration;
+  sagemakermetrics?: AWS.SageMakerMetrics.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -670,4 +671,5 @@ export interface ConfigurationServiceApiVersions {
   sagemakergeospatial?: AWS.SageMakerGeospatial.Types.apiVersion;
   codecatalyst?: AWS.CodeCatalyst.Types.apiVersion;
   pipes?: AWS.Pipes.Types.apiVersion;
+  sagemakermetrics?: AWS.SageMakerMetrics.Types.apiVersion;
 }

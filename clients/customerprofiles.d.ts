@@ -725,6 +725,14 @@ declare namespace CustomerProfiles {
      * A key value pair of attributes of a customer profile.
      */
     Attributes?: Attributes;
+    /**
+     * An alternative to PartyType which accepts any string as input.
+     */
+    PartyTypeString?: string1To255;
+    /**
+     * An alternative to Gender which accepts any string as input.
+     */
+    GenderString?: string1To255;
   }
   export interface CreateProfileResponse {
     /**
@@ -2693,6 +2701,14 @@ declare namespace CustomerProfiles {
      * A key value pair of attributes of a customer profile.
      */
     Attributes?: UpdateAttributes;
+    /**
+     * An alternative to PartyType which accepts any string as input.
+     */
+    PartyTypeString?: string0To255;
+    /**
+     * An alternative to Gender which accepts any string as input.
+     */
+    GenderString?: string0To255;
   }
   export interface UpdateProfileResponse {
     /**

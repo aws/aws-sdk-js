@@ -1255,5 +1255,9 @@
   },
   "pipes": {
     "name": "Pipes"
+  },
+  "sagemakermetrics": {
+    "prefix": "sagemaker-metrics",
+    "name": "SageMakerMetrics"
   }
 }

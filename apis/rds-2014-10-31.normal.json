@@ -4821,7 +4821,7 @@
         },
         "CopyTags": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether to copy all tags from the source DB snapshot to the target DB snapshot. By default, tags are not copied.</p>"
+          "documentation": "<p>A value that indicates whether to copy all tags from the source DB snapshot to the target DB snapshot. By default, tags aren't copied.</p>"
         },
         "PreSignedUrl": {
           "shape": "String",
@@ -4834,6 +4834,10 @@
         "TargetCustomAvailabilityZone": {
           "shape": "String",
           "documentation": "<p>The external custom Availability Zone (CAZ) identifier for the target CAZ.</p> <p>Example: <code>rds-caz-aiqhTgQv</code>.</p>"
+        },
+        "CopyOptionGroup": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that indicates whether to copy the DB option group associated with the source DB snapshot to the target Amazon Web Services account and associate with the target DB snapshot. The associated option group can be copied only with cross-account snapshot copy calls.</p>"
         },
         "SourceRegion": {
           "shape": "String",
@@ -11473,7 +11477,19 @@
         },
         "OptionGroupArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the option group.</p>"
+          "documentation": "<p>Specifies the Amazon Resource Name (ARN) for the option group.</p>"
+        },
+        "SourceOptionGroup": {
+          "shape": "String",
+          "documentation": "<p>Specifies the name of the option group from which this option group is copied.</p>"
+        },
+        "SourceAccountId": {
+          "shape": "String",
+          "documentation": "<p>Specifies the Amazon Web Services account ID for the option group from which this option group is copied.</p>"
+        },
+        "CopyTimestamp": {
+          "shape": "TStamp",
+          "documentation": "<p>Indicates when the option group was copied.</p>"
         }
       },
       "documentation": "<p/>",
@@ -11566,6 +11582,10 @@
         "OptionGroupOptionVersions": {
           "shape": "OptionGroupOptionVersionsList",
           "documentation": "<p>The versions that are available for the option.</p>"
+        },
+        "CopyableCrossAccount": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether the option can be copied across Amazon Web Services accounts.</p>"
         }
       },
       "documentation": "<p>Available option.</p>"

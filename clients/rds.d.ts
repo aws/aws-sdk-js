@@ -1666,7 +1666,7 @@ declare namespace RDS {
     KmsKeyId?: String;
     Tags?: TagList;
     /**
-     * A value that indicates whether to copy all tags from the source DB snapshot to the target DB snapshot. By default, tags are not copied.
+     * A value that indicates whether to copy all tags from the source DB snapshot to the target DB snapshot. By default, tags aren't copied.
      */
     CopyTags?: BooleanOptional;
     /**
@@ -1681,6 +1681,10 @@ declare namespace RDS {
      * The external custom Availability Zone (CAZ) identifier for the target CAZ. Example: rds-caz-aiqhTgQv.
      */
     TargetCustomAvailabilityZone?: String;
+    /**
+     * A value that indicates whether to copy the DB option group associated with the source DB snapshot to the target Amazon Web Services account and associate with the target DB snapshot. The associated option group can be copied only with cross-account snapshot copy calls.
+     */
+    CopyOptionGroup?: BooleanOptional;
     /**
      * The ID of the region that contains the snapshot to be copied.
      */
@@ -6749,9 +6753,21 @@ declare namespace RDS {
      */
     VpcId?: String;
     /**
-     * The Amazon Resource Name (ARN) for the option group.
+     * Specifies the Amazon Resource Name (ARN) for the option group.
      */
     OptionGroupArn?: String;
+    /**
+     * Specifies the name of the option group from which this option group is copied.
+     */
+    SourceOptionGroup?: String;
+    /**
+     * Specifies the Amazon Web Services account ID for the option group from which this option group is copied.
+     */
+    SourceAccountId?: String;
+    /**
+     * Indicates when the option group was copied.
+     */
+    CopyTimestamp?: TStamp;
   }
   export interface OptionGroupMembership {
     /**
@@ -6829,6 +6845,10 @@ declare namespace RDS {
      * The versions that are available for the option.
      */
     OptionGroupOptionVersions?: OptionGroupOptionVersionsList;
+    /**
+     * Specifies whether the option can be copied across Amazon Web Services accounts.
+     */
+    CopyableCrossAccount?: BooleanOptional;
   }
   export interface OptionGroupOptionSetting {
     /**

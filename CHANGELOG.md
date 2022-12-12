@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1272.0-->
+<!--LATEST=2.1273.0-->
 <!--ENTRYINSERT-->
+
+## 2.1273.0
+* feature: CustomerProfiles: This release allows custom strings in PartyType and Gender through 2 new attributes in the CreateProfile and UpdateProfile APIs: PartyTypeString and GenderString.
+* feature: EC2: This release updates DescribeFpgaImages to show supported instance types of AFIs in its response.
+* feature: KinesisVideo: This release adds support for public preview of Kinesis Video Stream at Edge enabling customers to provide configuration for the Kinesis Video Stream EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on configured schedule.
+* feature: MigrationHubRefactorSpaces: This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.
+* feature: RDS: Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
+* feature: Rekognition: Adds support for "aliases" and "categories", inclusion and exclusion filters for labels and label categories, and aggregating labels by video segment timestamps for Stored Video Label Detection APIs.
+* feature: SageMakerMetrics: This release introduces support SageMaker Metrics APIs.
 
 ## 2.1272.0
 * feature: IoTFleetWise: Deprecated assignedValue property for actuators and attributes.  Added a message to invalid nodes and invalid decoder manifest exceptions.
