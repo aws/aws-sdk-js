@@ -1500,6 +1500,7 @@ declare namespace RDS {
      */
     CharacterSetDescription?: String;
   }
+  export type ClientPasswordAuthType = "MYSQL_NATIVE_PASSWORD"|"POSTGRES_SCRAM_SHA_256"|"POSTGRES_MD5"|"SQL_SERVER_AUTHENTICATION"|string;
   export interface CloudwatchLogsExportConfiguration {
     /**
      * The list of log types to enable.
@@ -8962,6 +8963,10 @@ declare namespace RDS {
      * Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.
      */
     IAMAuth?: IAMAuthMode;
+    /**
+     * The type of authentication the proxy uses for connections from clients.
+     */
+    ClientPasswordAuthType?: ClientPasswordAuthType;
   }
   export interface UserAuthConfigInfo {
     /**
@@ -8984,6 +8989,10 @@ declare namespace RDS {
      * Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.
      */
     IAMAuth?: IAMAuthMode;
+    /**
+     * The type of authentication the proxy uses for connections from clients.
+     */
+    ClientPasswordAuthType?: ClientPasswordAuthType;
   }
   export type UserAuthConfigInfoList = UserAuthConfigInfo[];
   export type UserAuthConfigList = UserAuthConfig[];

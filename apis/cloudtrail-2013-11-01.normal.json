@@ -136,6 +136,9 @@
           "shape": "EventDataStoreMaxLimitExceededException"
         },
         {
+          "shape": "InvalidEventSelectorsException"
+        },
+        {
           "shape": "InvalidParameterException"
         },
         {
@@ -233,6 +236,9 @@
           "shape": "TrailNotProvidedException"
         },
         {
+          "shape": "TagsLimitExceededException"
+        },
+        {
           "shape": "InvalidParameterCombinationException"
         },
         {
@@ -316,6 +322,9 @@
           "shape": "EventDataStoreHasOngoingImportException"
         },
         {
+          "shape": "InactiveEventDataStoreException"
+        },
+        {
           "shape": "InvalidParameterException"
         },
         {
@@ -354,6 +363,9 @@
         },
         {
           "shape": "InvalidTrailNameException"
+        },
+        {
+          "shape": "CloudTrailARNInvalidException"
         },
         {
           "shape": "InvalidHomeRegionException"
@@ -581,6 +593,9 @@
           "shape": "InvalidTrailNameException"
         },
         {
+          "shape": "CloudTrailARNInvalidException"
+        },
+        {
           "shape": "UnsupportedOperationException"
         },
         {
@@ -639,6 +654,9 @@
         },
         {
           "shape": "InvalidTrailNameException"
+        },
+        {
+          "shape": "CloudTrailARNInvalidException"
         },
         {
           "shape": "UnsupportedOperationException"
@@ -719,6 +737,9 @@
       },
       "errors": [
         {
+          "shape": "CloudTrailARNInvalidException"
+        },
+        {
           "shape": "TrailNotFoundException"
         },
         {
@@ -747,6 +768,9 @@
         "shape": "GetTrailStatusResponse"
       },
       "errors": [
+        {
+          "shape": "CloudTrailARNInvalidException"
+        },
         {
           "shape": "TrailNotFoundException"
         },
@@ -1086,6 +1110,9 @@
           "shape": "InvalidTrailNameException"
         },
         {
+          "shape": "CloudTrailARNInvalidException"
+        },
+        {
           "shape": "InvalidHomeRegionException"
         },
         {
@@ -1128,6 +1155,9 @@
         },
         {
           "shape": "InvalidTrailNameException"
+        },
+        {
+          "shape": "CloudTrailARNInvalidException"
         },
         {
           "shape": "InvalidHomeRegionException"
@@ -1390,6 +1420,9 @@
       },
       "errors": [
         {
+          "shape": "CloudTrailARNInvalidException"
+        },
+        {
           "shape": "TrailNotFoundException"
         },
         {
@@ -1524,6 +1557,9 @@
           "shape": "InvalidTrailNameException"
         },
         {
+          "shape": "CloudTrailARNInvalidException"
+        },
+        {
           "shape": "InvalidHomeRegionException"
         },
         {
@@ -1563,6 +1599,9 @@
         },
         {
           "shape": "EventDataStoreNotFoundException"
+        },
+        {
+          "shape": "InvalidEventSelectorsException"
         },
         {
           "shape": "EventDataStoreHasOngoingImportException"
@@ -1661,6 +1700,9 @@
         },
         {
           "shape": "InvalidEventSelectorsException"
+        },
+        {
+          "shape": "CloudTrailARNInvalidException"
         },
         {
           "shape": "InvalidParameterCombinationException"
@@ -3307,7 +3349,7 @@
           "documentation": "<p>Specifies an attribute on which to filter the events returned.</p>"
         },
         "AttributeValue": {
-          "shape": "String",
+          "shape": "LookupAttributeValue",
           "documentation": "<p>Specifies a value for the specified AttributeKey.</p>"
         }
       },
@@ -3325,6 +3367,11 @@
         "EventSource",
         "AccessKeyId"
       ]
+    },
+    "LookupAttributeValue": {
+      "type": "string",
+      "max": 2000,
+      "min": 1
     },
     "LookupAttributesList": {
       "type": "list",

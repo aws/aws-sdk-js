@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1273.0-->
+<!--LATEST=2.1274.0-->
 <!--ENTRYINSERT-->
+
+## 2.1274.0
+* feature: CloudTrail: Merging mainline branch for service model into mainline release branch. There are no new APIs.
+* feature: RDS: This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.
 
 ## 2.1273.0
 * feature: CustomerProfiles: This release allows custom strings in PartyType and Gender through 2 new attributes in the CreateProfile and UpdateProfile APIs: PartyTypeString and GenderString.

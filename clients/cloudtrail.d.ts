@@ -1375,9 +1375,10 @@ declare namespace CloudTrail {
     /**
      * Specifies a value for the specified AttributeKey.
      */
-    AttributeValue: String;
+    AttributeValue: LookupAttributeValue;
   }
   export type LookupAttributeKey = "EventId"|"EventName"|"ReadOnly"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|"AccessKeyId"|string;
+  export type LookupAttributeValue = string;
   export type LookupAttributesList = LookupAttribute[];
   export interface LookupEventsRequest {
     /**
