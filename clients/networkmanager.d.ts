@@ -596,11 +596,11 @@ declare class NetworkManager extends Service {
    */
   restoreCoreNetworkPolicyVersion(callback?: (err: AWSError, data: NetworkManager.Types.RestoreCoreNetworkPolicyVersionResponse) => void): Request<NetworkManager.Types.RestoreCoreNetworkPolicyVersionResponse, AWSError>;
   /**
-   * Enables for the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. 
+   * Enables the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. 
    */
   startOrganizationServiceAccessUpdate(params: NetworkManager.Types.StartOrganizationServiceAccessUpdateRequest, callback?: (err: AWSError, data: NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse) => void): Request<NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse, AWSError>;
   /**
-   * Enables for the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. 
+   * Enables the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. 
    */
   startOrganizationServiceAccessUpdate(callback?: (err: AWSError, data: NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse) => void): Request<NetworkManager.Types.StartOrganizationServiceAccessUpdateResponse, AWSError>;
   /**
@@ -4069,6 +4069,10 @@ declare namespace NetworkManager {
      * Indicates whether IPv6 is supported.
      */
     Ipv6Support?: Boolean;
+    /**
+     * Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. The default value is false.
+     */
+    ApplianceModeSupport?: Boolean;
   }
   export type VpnConnectionArn = string;
   /**

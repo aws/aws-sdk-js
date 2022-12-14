@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Adding support for Metrics Insights Alarms"
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkManager",
+        "description": "Appliance Mode support for AWS Cloud WAN."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftData",
+        "description": "This release adds a new --client-token field to ExecuteStatement and BatchExecuteStatement operations. Customers can now run queries with the additional client token parameter to ensures idempotency."
+    }
+]

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1274.0-->
+<!--LATEST=2.1275.0-->
 <!--ENTRYINSERT-->
+
+## 2.1275.0
+* feature: CloudWatch: Adding support for Metrics Insights Alarms
+* feature: CostExplorer: This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.
+* feature: NetworkManager: Appliance Mode support for AWS Cloud WAN.
+* feature: RedshiftData: This release adds a new --client-token field to ExecuteStatement and BatchExecuteStatement operations. Customers can now run queries with the additional client token parameter to ensures idempotency.
 
 ## 2.1274.0
 * feature: CloudTrail: Merging mainline branch for service model into mainline release branch. There are no new APIs.

@@ -20,11 +20,11 @@ declare class CostExplorer extends Service {
    */
   createAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.CreateAnomalyMonitorResponse, AWSError>;
   /**
-   * Adds a subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set a dollar threshold and a time frequency for receiving notifications. 
+   * Adds an alert subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set an absolute or percentage threshold and a time frequency for receiving notifications. 
    */
   createAnomalySubscription(params: CostExplorer.Types.CreateAnomalySubscriptionRequest, callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.CreateAnomalySubscriptionResponse, AWSError>;
   /**
-   * Adds a subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set a dollar threshold and a time frequency for receiving notifications. 
+   * Adds an alert subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set an absolute or percentage threshold and a time frequency for receiving notifications. 
    */
   createAnomalySubscription(callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.CreateAnomalySubscriptionResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class CostExplorer extends Service {
    */
   describeCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.DescribeCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.DescribeCostCategoryDefinitionResponse, AWSError>;
   /**
-   * Retrieves all of the cost anomalies detected on your account during the time period that's specified by the DateInterval object. 
+   * Retrieves all of the cost anomalies detected on your account during the time period that's specified by the DateInterval object. Anomalies are available for up to 90 days.
    */
   getAnomalies(params: CostExplorer.Types.GetAnomaliesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetAnomaliesResponse) => void): Request<CostExplorer.Types.GetAnomaliesResponse, AWSError>;
   /**
-   * Retrieves all of the cost anomalies detected on your account during the time period that's specified by the DateInterval object. 
+   * Retrieves all of the cost anomalies detected on your account during the time period that's specified by the DateInterval object. Anomalies are available for up to 90 days.
    */
   getAnomalies(callback?: (err: AWSError, data: CostExplorer.Types.GetAnomaliesResponse) => void): Request<CostExplorer.Types.GetAnomaliesResponse, AWSError>;
   /**
@@ -426,9 +426,9 @@ declare namespace CostExplorer {
      */
     Subscribers: Subscribers;
     /**
-     * The dollar value that triggers a notification if the threshold is exceeded. 
+     * (deprecated) The dollar value that triggers a notification if the threshold is exceeded.  This field has been deprecated. To specify a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression. One of Threshold or ThresholdExpression is required for this resource.
      */
-    Threshold: NullableNonNegativeDouble;
+    Threshold?: NullableNonNegativeDouble;
     /**
      * The frequency that anomaly reports are sent over email. 
      */
@@ -437,6 +437,10 @@ declare namespace CostExplorer {
      * The name for the subscription. 
      */
     SubscriptionName: GenericString;
+    /**
+     * An Expression object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE. The supported nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and 10,000,000,000. One of Threshold or ThresholdExpression is required for this resource. The following are examples of valid ThresholdExpressions:   Absolute threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }    Percentage threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }     AND two thresholds together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }     OR two thresholds together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }   
+     */
+    ThresholdExpression?: Expression;
   }
   export type AnomalySubscriptionFrequency = "DAILY"|"IMMEDIATE"|"WEEKLY"|string;
   export type AnomalySubscriptions = AnomalySubscription[];
@@ -862,10 +866,10 @@ declare namespace CostExplorer {
   export interface DescribeCostCategoryDefinitionResponse {
     CostCategory?: CostCategory;
   }
-  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|"INVOICING_ENTITY"|string;
+  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|"INVOICING_ENTITY"|"ANOMALY_TOTAL_IMPACT_ABSOLUTE"|"ANOMALY_TOTAL_IMPACT_PERCENTAGE"|string;
   export interface DimensionValues {
     /**
-     * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones. LINK_ACCOUNT_NAME and SERVICE_CODE can only be used in CostCategoryRule.
+     * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones. Not all dimensions are supported in each API. Refer to the documentation for each specific API to see what is supported.  LINK_ACCOUNT_NAME and SERVICE_CODE can only be used in CostCategoryRule.  ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE can only be used in AnomalySubscriptions.
      */
     Key?: Dimension;
     /**
@@ -873,7 +877,7 @@ declare namespace CostExplorer {
      */
     Values?: Values;
     /**
-     * The match options that you can use to filter your results. MatchOptions is only applicable for actions related to Cost Category. The default values for MatchOptions are EQUALS and CASE_SENSITIVE.
+     * The match options that you can use to filter your results.  MatchOptions is only applicable for actions related to Cost Category and Anomaly Subscriptions. Refer to the documentation for each specific API to see what is supported. The default values for MatchOptions are EQUALS and CASE_SENSITIVE.
      */
     MatchOptions?: MatchOptions;
   }
@@ -1905,13 +1909,25 @@ declare namespace CostExplorer {
   export type Groups = Group[];
   export interface Impact {
     /**
-     * The maximum dollar value that's observed for an anomaly. 
+     * The maximum dollar value that's observed for an anomaly.
      */
     MaxImpact: GenericDouble;
     /**
-     * The cumulative dollar value that's observed for an anomaly. 
+     * The cumulative dollar difference between the total actual spend and total expected spend. It is calculated as TotalActualSpend - TotalExpectedSpend.
      */
     TotalImpact?: GenericDouble;
+    /**
+     * The cumulative dollar amount that was actually spent during the anomaly.
+     */
+    TotalActualSpend?: NullableNonNegativeDouble;
+    /**
+     * The cumulative dollar amount that was expected to be spent during the anomaly. It is calculated using advanced machine learning models to determine the typical spending pattern based on historical data for a customer.
+     */
+    TotalExpectedSpend?: NullableNonNegativeDouble;
+    /**
+     * The cumulative percentage difference between the total actual spend and total expected spend. It is calculated as (TotalImpact / TotalExpectedSpend) * 100. When TotalExpectedSpend is zero, this field is omitted. Expected spend can be zero in situations such as when you start to use a service for the first time.
+     */
+    TotalImpactPercentage?: NullableNonNegativeDouble;
   }
   export interface InstanceDetails {
     /**
@@ -2034,7 +2050,7 @@ declare namespace CostExplorer {
     ResourceTags?: ResourceTagList;
   }
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
-  export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
+  export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|"GREATER_THAN_OR_EQUAL"|string;
   export type MatchOptions = MatchOption[];
   export type MaxResults = number;
   export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
@@ -3040,7 +3056,7 @@ declare namespace CostExplorer {
      */
     SubscriptionArn: GenericString;
     /**
-     * The update to the threshold value for receiving notifications. 
+     * (deprecated) The update to the threshold value for receiving notifications.  This field has been deprecated. To update a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.
      */
     Threshold?: NullableNonNegativeDouble;
     /**
@@ -3059,6 +3075,10 @@ declare namespace CostExplorer {
      * The new name of the subscription. 
      */
     SubscriptionName?: GenericString;
+    /**
+     * The update to the Expression object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE. The supported nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and 10,000,000,000. The following are examples of valid ThresholdExpressions:   Absolute threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }    Percentage threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }     AND two thresholds together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }     OR two thresholds together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }   
+     */
+    ThresholdExpression?: Expression;
   }
   export interface UpdateAnomalySubscriptionResponse {
     /**

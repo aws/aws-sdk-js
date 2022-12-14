@@ -12,18 +12,18 @@ declare class SageMakerMetrics extends Service {
   constructor(options?: SageMakerMetrics.Types.ClientConfiguration)
   config: Config & SageMakerMetrics.Types.ClientConfiguration;
   /**
-   * Used to ingest training metrics into SageMaker which can be visualized in SageMaker Studio and retrieved with the GetMetrics API. 
+   * Used to ingest training metrics into SageMaker. These metrics can be visualized in SageMaker Studio and retrieved with the GetMetrics API. 
    */
   batchPutMetrics(params: SageMakerMetrics.Types.BatchPutMetricsRequest, callback?: (err: AWSError, data: SageMakerMetrics.Types.BatchPutMetricsResponse) => void): Request<SageMakerMetrics.Types.BatchPutMetricsResponse, AWSError>;
   /**
-   * Used to ingest training metrics into SageMaker which can be visualized in SageMaker Studio and retrieved with the GetMetrics API. 
+   * Used to ingest training metrics into SageMaker. These metrics can be visualized in SageMaker Studio and retrieved with the GetMetrics API. 
    */
   batchPutMetrics(callback?: (err: AWSError, data: SageMakerMetrics.Types.BatchPutMetricsResponse) => void): Request<SageMakerMetrics.Types.BatchPutMetricsResponse, AWSError>;
 }
 declare namespace SageMakerMetrics {
   export interface BatchPutMetricsError {
     /**
-     * The error code of an error that occured when attempting to put metrics.    METRIC_LIMIT_EXCEEDED - The max amount of metrics per resource has been exceeded.    INTERNAL_ERROR - An internal error occured.    VALIDATION_ERROR - The metric data failed validation.    CONFLICT_ERROR - Multiple requests attempted to modify the same data simultaneously.  
+     * The error code of an error that occured when attempting to put metrics.    METRIC_LIMIT_EXCEEDED: The maximum amount of metrics per resource is exceeded.    INTERNAL_ERROR: An internal error occured.    VALIDATION_ERROR: The metric data failed validation.    CONFLICT_ERROR: Multiple requests attempted to modify the same data simultaneously.  
      */
     Code?: PutMetricsErrorCode;
     /**
@@ -34,7 +34,7 @@ declare namespace SageMakerMetrics {
   export type BatchPutMetricsErrorList = BatchPutMetricsError[];
   export interface BatchPutMetricsRequest {
     /**
-     * The name of Trial Component to associate the metrics with.
+     * The name of the Trial Component to associate with the metrics.
      */
     TrialComponentName: ExperimentEntityName;
     /**
@@ -44,7 +44,7 @@ declare namespace SageMakerMetrics {
   }
   export interface BatchPutMetricsResponse {
     /**
-     * Any errors that occur when inserting metric data will appear in this.
+     * Lists any errors that occur when inserting metric data.
      */
     Errors?: BatchPutMetricsErrorList;
   }
@@ -59,11 +59,11 @@ declare namespace SageMakerMetrics {
      */
     MetricName: MetricName;
     /**
-     * The time when the metric was recorded.
+     * The time that the metric was recorded.
      */
     Timestamp: Timestamp;
     /**
-     * Metric step (aka Epoch). 
+     * The metric step (epoch). 
      */
     Step?: Step;
     /**
