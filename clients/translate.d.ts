@@ -108,11 +108,11 @@ declare class Translate extends Service {
    */
   listTextTranslationJobs(callback?: (err: AWSError, data: Translate.Types.ListTextTranslationJobsResponse) => void): Request<Translate.Types.ListTextTranslationJobsResponse, AWSError>;
   /**
-   * Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, the input documents must share the same source language. You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see Asynchronous batch processing  Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.  Amazon Translate does not support batch translation of multiple source languages at once. 
+   * Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, you can input documents with different source languages (specify auto as the source language). You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see Asynchronous batch processing. Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.
    */
   startTextTranslationJob(params: Translate.Types.StartTextTranslationJobRequest, callback?: (err: AWSError, data: Translate.Types.StartTextTranslationJobResponse) => void): Request<Translate.Types.StartTextTranslationJobResponse, AWSError>;
   /**
-   * Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, the input documents must share the same source language. You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see Asynchronous batch processing  Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.  Amazon Translate does not support batch translation of multiple source languages at once. 
+   * Starts an asynchronous batch translation job. Use batch translation jobs to translate large volumes of text across multiple documents at once. For batch translation, you can input documents with different source languages (specify auto as the source language). You can specify one or more target languages. Batch translation translates each input document into each of the target languages. For more information, see Asynchronous batch processing. Batch translation jobs can be described with the DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs operation, and stopped with the StopTextTranslationJob operation.
    */
   startTextTranslationJob(callback?: (err: AWSError, data: Translate.Types.StartTextTranslationJobResponse) => void): Request<Translate.Types.StartTextTranslationJobResponse, AWSError>;
   /**
@@ -341,7 +341,7 @@ declare namespace Translate {
   }
   export interface InputDataConfig {
     /**
-     * The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the files in the folder. The folder must be in the same Region as the API endpoint you are calling.  The URI can also point to a single input document, or it can provide the prefix for a collection of input documents. For example. if you use the URI S3://bucketName/prefix and the prefix is a single file, Amazon Translate uses that files as input. If more than one file begins with the prefix, Amazon Translate uses all of them as input. 
+     * The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the files in the folder and all its sub-folders. The folder must be in the same Region as the API endpoint you are calling.
      */
     S3Uri: S3Uri;
     /**
@@ -610,11 +610,11 @@ declare namespace Translate {
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * The language code of the input language. For a list of language codes, see Supported languages. Amazon Translate does not automatically detect a source language during batch translation jobs.
+     * The language code of the input language. Specify the language if all input documents share the same language. If you don't know the language of the source files, or your input documents contains different source languages, select auto. Amazon Translate auto detects the source language for each input document. For a list of supported language codes, see Supported languages.
      */
     SourceLanguageCode: LanguageCodeString;
     /**
-     * The target languages of the translation job. Enter up to 10 language codes. Each input file is translated into each target language. Each language code is two or five characters long. For a list of language codes, see Supported languages.
+     * The target languages of the translation job. Enter up to 10 language codes. Each input file is translated into each target language. Each language code is 2 or 5 characters long. For a list of language codes, see Supported languages.
      */
     TargetLanguageCodes: TargetLanguageCodeStringList;
     /**
@@ -869,7 +869,7 @@ declare namespace Translate {
   export type Timestamp = Date;
   export interface TranslateTextRequest {
     /**
-     * The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.
+     * The text to translate. The text string can be a maximum of 10,000 bytes long. Depending on your character set, this may be fewer than 10,000 characters.
      */
     Text: BoundedLengthString;
     /**
@@ -893,7 +893,7 @@ declare namespace Translate {
     /**
      * The translated text.
      */
-    TranslatedText: String;
+    TranslatedText: TranslatedTextString;
     /**
      * The language code for the language of the source text.
      */
@@ -911,13 +911,14 @@ declare namespace Translate {
      */
     AppliedSettings?: TranslationSettings;
   }
+  export type TranslatedTextString = string;
   export interface TranslationSettings {
     /**
-     * You can optionally specify the desired level of formality for translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting.  If you specify multiple target languages for the job, translate ignores the formality setting for any unsupported target language. For a list of target languages that support formality, see Setting Formality in the Amazon Translate Developer Guide.
+     * You can optionally specify the desired level of formality for translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting.  If you specify multiple target languages for the job, translate ignores the formality setting for any unsupported target language. For a list of target languages that support formality, see Supported languages in the Amazon Translate Developer Guide.
      */
     Formality?: Formality;
     /**
-     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that support profanity detection, see Masking profanity in the Amazon Translate Developer Guide. If you specify multiple target languages for the job, all the target languages must support profanity masking. If any of the target languages don't support profanity masking, the translation job won't mask profanity for any target language.
+     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that don't support profanity detection, see Unsupported languages in the Amazon Translate Developer Guide. If you specify multiple target languages for the job, all the target languages must support profanity masking. If any of the target languages don't support profanity masking, the translation job won't mask profanity for any target language.
      */
     Profanity?: Profanity;
   }

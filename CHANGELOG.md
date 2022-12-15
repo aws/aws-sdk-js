@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1275.0-->
+<!--LATEST=2.1276.0-->
 <!--ENTRYINSERT-->
+
+## 2.1276.0
+* feature: BackupGateway: This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule.
+* feature: Connect: Added support for "English - New Zealand" and "English - South African" to be used with Amazon Connect Custom Vocabulary APIs.
+* feature: ECS: This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.
+* feature: EKS: Add support for Windows managed nodes groups.
+* feature: Glue: This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against.
+* feature: Kinesis: Updates API to latest version.
+* feature: M2: Adds an optional create-only `KmsKeyId` property to Environment and Application resources.
+* feature: SageMaker: SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.
+* feature: SecurityHub: Added new resource details objects to ASFF, including resources for AwsEc2LaunchTemplate, AwsSageMakerNotebookInstance, AwsWafv2WebAcl and AwsWafv2RuleGroup.
+* feature: Translate: Raised the input byte size limit of the Text field in the TranslateText API to 10000 bytes.
 
 ## 2.1275.0
 * feature: CloudWatch: Adding support for Metrics Insights Alarms

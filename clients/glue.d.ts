@@ -5166,6 +5166,10 @@ declare namespace Glue {
      * Specifies whether to write the manifest files to the Delta table path.
      */
     WriteManifest?: NullableBoolean;
+    /**
+     * Specifies whether the crawler will create native tables, to allow integration with query engines that support querying of the Delta transaction log directly.
+     */
+    CreateNativeDeltaTable?: NullableBoolean;
   }
   export type DeltaTargetList = DeltaTarget[];
   export type DescriptionString = string;

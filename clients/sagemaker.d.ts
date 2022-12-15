@@ -245,11 +245,11 @@ declare class SageMaker extends Service {
    */
   createImageVersion(callback?: (err: AWSError, data: SageMaker.Types.CreateImageVersionResponse) => void): Request<SageMaker.Types.CreateImageVersionResponse, AWSError>;
   /**
-   *  Creates an inference experiment using the configurations specified in the request.   Use this API to schedule an experiment to compare model variants on a Amazon SageMaker inference endpoint. For more information about inference experiments, see Shadow tests.   Amazon SageMaker begins your experiment at the scheduled time and routes traffic to your endpoint's model variants based on your specified configuration.   While the experiment is in progress or after it has concluded, you can view metrics that compare your model variants. For more information, see View, monitor, and edit shadow tests. 
+   *  Creates an inference experiment using the configurations specified in the request.   Use this API to setup and schedule an experiment to compare model variants on a Amazon SageMaker inference endpoint. For more information about inference experiments, see Shadow tests.   Amazon SageMaker begins your experiment at the scheduled time and routes traffic to your endpoint's model variants based on your specified configuration.   While the experiment is in progress or after it has concluded, you can view metrics that compare your model variants. For more information, see View, monitor, and edit shadow tests. 
    */
   createInferenceExperiment(params: SageMaker.Types.CreateInferenceExperimentRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceExperimentResponse) => void): Request<SageMaker.Types.CreateInferenceExperimentResponse, AWSError>;
   /**
-   *  Creates an inference experiment using the configurations specified in the request.   Use this API to schedule an experiment to compare model variants on a Amazon SageMaker inference endpoint. For more information about inference experiments, see Shadow tests.   Amazon SageMaker begins your experiment at the scheduled time and routes traffic to your endpoint's model variants based on your specified configuration.   While the experiment is in progress or after it has concluded, you can view metrics that compare your model variants. For more information, see View, monitor, and edit shadow tests. 
+   *  Creates an inference experiment using the configurations specified in the request.   Use this API to setup and schedule an experiment to compare model variants on a Amazon SageMaker inference endpoint. For more information about inference experiments, see Shadow tests.   Amazon SageMaker begins your experiment at the scheduled time and routes traffic to your endpoint's model variants based on your specified configuration.   While the experiment is in progress or after it has concluded, you can view metrics that compare your model variants. For more information, see View, monitor, and edit shadow tests. 
    */
   createInferenceExperiment(callback?: (err: AWSError, data: SageMaker.Types.CreateInferenceExperimentResponse) => void): Request<SageMaker.Types.CreateInferenceExperimentResponse, AWSError>;
   /**
@@ -4548,7 +4548,7 @@ declare namespace SageMaker {
      */
     EndpointConfigName: EndpointConfigName;
     /**
-     * An list of ProductionVariant objects, one for each model that you want to host at this endpoint.
+     * An array of ProductionVariant objects, one for each model that you want to host at this endpoint.
      */
     ProductionVariants: ProductionVariantList;
     DataCaptureConfig?: DataCaptureConfig;
@@ -4569,7 +4569,7 @@ declare namespace SageMaker {
      */
     ExplainerConfig?: ExplainerConfig;
     /**
-     *  Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     * An array of ProductionVariant objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants. If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants.
      */
     ShadowProductionVariants?: ProductionVariantList;
   }
@@ -4646,7 +4646,7 @@ declare namespace SageMaker {
      */
     OnlineStoreConfig?: OnlineStoreConfig;
     /**
-     * Use this to configure an OfflineFeatureStore. This parameter allows you to specify:   The Amazon Simple Storage Service (Amazon S3) location of an OfflineStore.   A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data catalog.    An KMS encryption key to encrypt the Amazon S3 location used for OfflineStore. If KMS encryption key is not specified, by default we encrypt all data at rest using Amazon Web Services KMS key. By defining your bucket-level key for SSE, you can reduce Amazon Web Services KMS requests costs by up to 99 percent.   To learn more about this parameter, see OfflineStoreConfig.
+     * Use this to configure an OfflineFeatureStore. This parameter allows you to specify:   The Amazon Simple Storage Service (Amazon S3) location of an OfflineStore.   A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data catalog.    An KMS encryption key to encrypt the Amazon S3 location used for OfflineStore. If KMS encryption key is not specified, by default we encrypt all data at rest using Amazon Web Services KMS key. By defining your bucket-level key for SSE, you can reduce Amazon Web Services KMS requests costs by up to 99 percent.   Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg.   To learn more about this parameter, see OfflineStoreConfig.
      */
     OfflineStoreConfig?: OfflineStoreConfig;
     /**
@@ -4843,7 +4843,7 @@ declare namespace SageMaker {
      */
     Type: InferenceExperimentType;
     /**
-     *  The duration for which you want the inference experiment to run. If you don't specify this field, the experiment automatically concludes after 7 days. 
+     *  The duration for which you want the inference experiment to run. If you don't specify this field, the experiment automatically starts immediately upon creation and concludes after 7 days. 
      */
     Schedule?: InferenceExperimentSchedule;
     /**
@@ -4851,7 +4851,7 @@ declare namespace SageMaker {
      */
     Description?: InferenceExperimentDescription;
     /**
-     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images. 
+     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment. 
      */
     RoleArn: RoleArn;
     /**
@@ -4859,15 +4859,15 @@ declare namespace SageMaker {
      */
     EndpointName: EndpointName;
     /**
-     *  Array of ModelVariantConfigSummary objects. There is one for each variant in the inference experiment. Each ModelVariantConfigSummary object in the array describes the infrastructure configuration for the corresponding variant. 
+     *  An array of ModelVariantConfig objects. There is one for each variant in the inference experiment. Each ModelVariantConfig object in the array describes the infrastructure configuration for the corresponding variant. 
      */
     ModelVariants: ModelVariantConfigList;
     /**
-     *  The storage configuration for the inference experiment. This is an optional parameter that you can use for data capture. For more information, see Capture data. 
+     *  The Amazon S3 location and configuration for storing inference request and response data.   This is an optional parameter that you can use for data capture. For more information, see Capture data. 
      */
     DataStorageConfig?: InferenceExperimentDataStorageConfig;
     /**
-     *  Shows which variant is the production variant and which variant is the shadow variant. For the shadow variant, also shows the sampling percentage. 
+     *  The configuration of ShadowMode inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates. 
      */
     ShadowModeConfig: ShadowModeConfig;
     /**
@@ -5948,7 +5948,7 @@ declare namespace SageMaker {
      */
     DestinationS3Uri: DestinationS3Uri;
     /**
-     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
+     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt the captured data at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -7537,7 +7537,7 @@ declare namespace SageMaker {
      */
     ExplainerConfig?: ExplainerConfig;
     /**
-     *  Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     * An array of ProductionVariant objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.
      */
     ShadowProductionVariants?: ProductionVariantList;
   }
@@ -7561,7 +7561,7 @@ declare namespace SageMaker {
      */
     EndpointConfigName: EndpointConfigName;
     /**
-     *  An array of ProductionVariantSummary objects, one for each model hosted behind this endpoint. 
+     * An array of ProductionVariantSummary objects, one for each model hosted behind this endpoint.
      */
     ProductionVariants?: ProductionVariantSummaryList;
     DataCaptureConfig?: DataCaptureConfigSummary;
@@ -7598,7 +7598,7 @@ declare namespace SageMaker {
      */
     ExplainerConfig?: ExplainerConfig;
     /**
-     *  Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     * An array of ProductionVariantSummary objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.
      */
     ShadowProductionVariants?: ProductionVariantSummaryList;
   }
@@ -7690,7 +7690,7 @@ declare namespace SageMaker {
      */
     OnlineStoreConfig?: OnlineStoreConfig;
     /**
-     * The configuration of the OfflineStore, inducing the S3 location of the OfflineStore, Amazon Web Services Glue or Amazon Web Services Hive data catalogue configurations, and the security configuration.
+     * The configuration of the offline store. It includes the following configurations:   Amazon S3 location of the offline store.   Configuration of the Glue data catalog.   Table format of the offline store.   Option to disable the automatic creation of a Glue table for the offline store.   Encryption configuration.  
      */
     OfflineStoreConfig?: OfflineStoreConfig;
     /**
@@ -8159,11 +8159,11 @@ declare namespace SageMaker {
      */
     Schedule?: InferenceExperimentSchedule;
     /**
-     *  The status of the inference experiment. The following are the possible statuses for an inference experiment:     Creating - Amazon SageMaker is creating your experiment.     Created - Amazon SageMaker has finished creating your experiment and it will begin at the scheduled time.     Updating - When you make changes to your experiment, your experiment shows as updating.     Starting - Amazon SageMaker is beginning your experiment.     Running - Your experiment is in progress.     Stopping - Amazon SageMaker is stopping your experiment.     Completed - Your experiment has completed.     Cancelled - When you conclude your experiment early, it shows as canceled.   
+     *  The status of the inference experiment. The following are the possible statuses for an inference experiment:     Creating - Amazon SageMaker is creating your experiment.     Created - Amazon SageMaker has finished the creation of your experiment and will begin the experiment at the scheduled time.     Updating - When you make changes to your experiment, your experiment shows as updating.     Starting - Amazon SageMaker is beginning your experiment.     Running - Your experiment is in progress.     Stopping - Amazon SageMaker is stopping your experiment.     Completed - Your experiment has completed.     Cancelled - When you conclude your experiment early using the StopInferenceExperiment API, or if any operation fails with an unexpected error, it shows as cancelled.   
      */
     Status: InferenceExperimentStatus;
     /**
-     * The error message for the inference experiment status result.
+     *  The error message or client-specified Reason from the StopInferenceExperiment API, that explains the status of the inference experiment. 
      */
     StatusReason?: InferenceExperimentStatusReason;
     /**
@@ -8175,7 +8175,7 @@ declare namespace SageMaker {
      */
     CreationTime?: Timestamp;
     /**
-     *  The timestamp at which the inference experiment was completed or will complete. 
+     *  The timestamp at which the inference experiment was completed. 
      */
     CompletionTime?: Timestamp;
     /**
@@ -8183,7 +8183,7 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     /**
-     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images. 
+     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment. 
      */
     RoleArn?: RoleArn;
     /**
@@ -8191,15 +8191,15 @@ declare namespace SageMaker {
      */
     EndpointMetadata: EndpointMetadata;
     /**
-     *  Array of ModelVariantConfigSummary objects. There is one for each variant in the inference experiment. Each ModelVariantConfigSummary object in the array describes the infrastructure configuration for deploying the corresponding variant. 
+     *  An array of ModelVariantConfigSummary objects. There is one for each variant in the inference experiment. Each ModelVariantConfigSummary object in the array describes the infrastructure configuration for deploying the corresponding variant. 
      */
     ModelVariants: ModelVariantConfigSummaryList;
     /**
-     * The Amazon S3 storage configuration for the inference experiment.
+     * The Amazon S3 location and configuration for storing inference request and response data.
      */
     DataStorageConfig?: InferenceExperimentDataStorageConfig;
     /**
-     *  Shows which variant is a production variant and which variant is a shadow variant. For shadow variants, also shows the sampling percentage. 
+     *  The configuration of ShadowMode inference experiment type, which shows the production variant that takes all the inference requests, and the shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant it also shows the percentage of requests that Amazon SageMaker replicates. 
      */
     ShadowModeConfig?: ShadowModeConfig;
     /**
@@ -10380,7 +10380,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     *  Array of ProductionVariant objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     * A list of the shadow variants hosted on the endpoint. Each shadow variant is a model in shadow mode with production traffic replicated from the proudction variant.
      */
     ShadowProductionVariants?: ProductionVariantSummaryList;
   }
@@ -10481,7 +10481,7 @@ declare namespace SageMaker {
      */
     EndpointStatus?: EndpointStatus;
     /**
-     *  If the status of the endpoint is Failed, this provides the reason why it failed. 
+     *  If the status of the endpoint is Failed, or the status is InService but update operation fails, this provides the reason why it failed. 
      */
     FailureReason?: FailureReason;
   }
@@ -11860,11 +11860,11 @@ declare namespace SageMaker {
   export type InferenceExperimentArn = string;
   export interface InferenceExperimentDataStorageConfig {
     /**
-     * The Amazon S3 bucket where the inference experiment data is stored. 
+     * The Amazon S3 bucket where the inference request and response data is stored. 
      */
     Destination: DestinationS3Uri;
     /**
-     *  The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt captured data when uploading to Amazon S3. 
+     *  The Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt captured data at rest using Amazon S3 server-side encryption. 
      */
     KmsKey?: KmsKeyId;
     ContentType?: CaptureContentTypeHeader;
@@ -11923,7 +11923,7 @@ declare namespace SageMaker {
      */
     LastModifiedTime: Timestamp;
     /**
-     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images. 
+     *  The ARN of the IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment. 
      */
     RoleArn?: RoleArn;
   }
@@ -16533,7 +16533,7 @@ declare namespace SageMaker {
   export type ModelVariantActionMap = {[key: string]: ModelVariantAction};
   export interface ModelVariantConfig {
     /**
-     * The name of the model.
+     * The name of the Amazon SageMaker Model entity.
      */
     ModelName: ModelName;
     /**
@@ -16548,7 +16548,7 @@ declare namespace SageMaker {
   export type ModelVariantConfigList = ModelVariantConfig[];
   export interface ModelVariantConfigSummary {
     /**
-     * The name of the model.
+     * The name of the Amazon SageMaker Model entity.
      */
     ModelName: ModelName;
     /**
@@ -16560,7 +16560,7 @@ declare namespace SageMaker {
      */
     InfrastructureConfig: ModelInfrastructureConfig;
     /**
-     * The status of the deployment.
+     * The status of deployment for the model variant on the hosted inference endpoint.    Creating - Amazon SageMaker is preparing the model variant on the hosted inference endpoint.     InService - The model variant is running on the hosted inference endpoint.     Updating - Amazon SageMaker is updating the model variant on the hosted inference endpoint.     Deleting - Amazon SageMaker is deleting the model variant on the hosted inference endpoint.     Deleted - The model variant has been deleted on the hosted inference endpoint. This can only happen after stopping the experiment.   
      */
     Status: ModelVariantStatus;
   }
@@ -17171,7 +17171,7 @@ declare namespace SageMaker {
      */
     DataCatalogConfig?: DataCatalogConfig;
     /**
-     * Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.
+     * Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg.
      */
     TableFormat?: TableFormat;
   }
@@ -17397,7 +17397,7 @@ declare namespace SageMaker {
      */
     EndpointConfigName: EndpointConfigName;
     /**
-     * List of PendingProductionVariantSummary objects.
+     * An array of PendingProductionVariantSummary objects, one for each model hosted behind this endpoint for the in-progress deployment.
      */
     ProductionVariants?: PendingProductionVariantSummaryList;
     /**
@@ -17405,7 +17405,7 @@ declare namespace SageMaker {
      */
     StartTime?: Timestamp;
     /**
-     *  Array of ProductionVariant objects, one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. 
+     * An array of PendingProductionVariantSummary objects, one for each model hosted behind this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants for the in-progress deployment.
      */
     ShadowProductionVariants?: PendingProductionVariantSummaryList;
   }
@@ -18532,11 +18532,11 @@ declare namespace SageMaker {
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
   export interface RealTimeInferenceConfig {
     /**
-     * The number of instances of the type specified by InstanceType.
+     * The instance type the model is deployed to.
      */
     InstanceType: InstanceType;
     /**
-     * The instance type the model is deployed to.
+     * The number of instances of the type specified by InstanceType.
      */
     InstanceCount: TaskCount;
   }
@@ -18622,6 +18622,10 @@ declare namespace SageMaker {
      * Existing customer endpoints on which to run an Inference Recommender job.
      */
     Endpoints?: Endpoints;
+    /**
+     * Inference Recommender provisions SageMaker endpoints with access to VPC in the inference recommendation job.
+     */
+    VpcConfig?: RecommendationJobVpcConfig;
   }
   export type RecommendationJobName = string;
   export interface RecommendationJobOutputConfig {
@@ -18668,6 +18672,20 @@ declare namespace SageMaker {
   export type RecommendationJobSupportedContentTypes = String[];
   export type RecommendationJobSupportedInstanceTypes = String[];
   export type RecommendationJobType = "Default"|"Advanced"|string;
+  export interface RecommendationJobVpcConfig {
+    /**
+     * The VPC security group IDs. IDs have the form of sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
+     */
+    SecurityGroupIds: RecommendationJobVpcSecurityGroupIds;
+    /**
+     * The ID of the subnets in the VPC to which you want to connect your model.
+     */
+    Subnets: RecommendationJobVpcSubnets;
+  }
+  export type RecommendationJobVpcSecurityGroupId = string;
+  export type RecommendationJobVpcSecurityGroupIds = RecommendationJobVpcSecurityGroupId[];
+  export type RecommendationJobVpcSubnetId = string;
+  export type RecommendationJobVpcSubnets = RecommendationJobVpcSubnetId[];
   export interface RecommendationMetrics {
     /**
      * Defines the cost per hour for the instance. 
@@ -18799,7 +18817,7 @@ declare namespace SageMaker {
   export type ResourceArn = string;
   export interface ResourceConfig {
     /**
-     * The ML compute instance type. 
+     * The ML compute instance type.   SageMaker Training on Amazon Elastic Compute Cloud (EC2) P4de instances is in preview release starting December 9th, 2022.   Amazon EC2 P4de instances (currently in preview) are powered by 8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU memory, which accelerate the speed of training ML models that need to be trained on large datasets of high-resolution data. In this preview release, Amazon SageMaker supports ML training jobs on P4de instances (ml.p4de.24xlarge) to reduce model training time. The ml.p4de.24xlarge instances are available in the following Amazon Web Services Regions.    US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   To request quota limit increase and start using P4de instances, contact the SageMaker Training service team through your account team. 
      */
     InstanceType?: TrainingInstanceType;
     /**
@@ -19158,7 +19176,7 @@ declare namespace SageMaker {
   export type SessionExpirationDurationInSeconds = number;
   export interface ShadowModeConfig {
     /**
-     *  The name of the production variant. 
+     *  The name of the production variant, which takes all the inference requests. 
      */
     SourceModelVariantName: ModelVariantName;
     /**
@@ -19172,7 +19190,7 @@ declare namespace SageMaker {
      */
     ShadowModelVariantName: ModelVariantName;
     /**
-     * The percentage of inference requests that are replicated to the shadow variant.
+     *  The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant. 
      */
     SamplingPercentage: Percentage;
   }
@@ -19387,7 +19405,7 @@ declare namespace SageMaker {
      */
     ModelVariantActions: ModelVariantActionMap;
     /**
-     *  Array of ModelVariantConfig objects. There is one for each variant that you want to deploy after the inference experiment stops. Each ModelVariantConfig describes the infrastructure configuration for deploying the corresponding variant. 
+     *  An array of ModelVariantConfig objects. There is one for each variant that you want to deploy after the inference experiment stops. Each ModelVariantConfig describes the infrastructure configuration for deploying the corresponding variant. 
      */
     DesiredModelVariants?: ModelVariantConfigList;
     /**
@@ -20844,15 +20862,15 @@ declare namespace SageMaker {
      */
     Description?: InferenceExperimentDescription;
     /**
-     *  Array of ModelVariantConfigSummary objects. There is one for each variant, whose infrastructure configuration you want to update. 
+     *  An array of ModelVariantConfig objects. There is one for each variant, whose infrastructure configuration you want to update. 
      */
     ModelVariants?: ModelVariantConfigList;
     /**
-     * The Amazon S3 storage configuration for the inference experiment.
+     * The Amazon S3 location and configuration for storing inference request and response data.
      */
     DataStorageConfig?: InferenceExperimentDataStorageConfig;
     /**
-     * The Amazon S3 storage configuration for the inference experiment.
+     *  The configuration of ShadowMode inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates. 
      */
     ShadowModeConfig?: ShadowModeConfig;
   }

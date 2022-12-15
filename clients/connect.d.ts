@@ -172,11 +172,11 @@ declare class Connect extends Service {
    */
   createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
   /**
-   * Creates a rule for the specified Amazon Connect instance.
+   * Creates a rule for the specified Amazon Connect instance. Use the Rules Function language to code conditions for the rule. 
    */
   createRule(params: Connect.Types.CreateRuleRequest, callback?: (err: AWSError, data: Connect.Types.CreateRuleResponse) => void): Request<Connect.Types.CreateRuleResponse, AWSError>;
   /**
-   * Creates a rule for the specified Amazon Connect instance.
+   * Creates a rule for the specified Amazon Connect instance. Use the Rules Function language to code conditions for the rule. 
    */
   createRule(callback?: (err: AWSError, data: Connect.Types.CreateRuleResponse) => void): Request<Connect.Types.CreateRuleResponse, AWSError>;
   /**
@@ -1268,11 +1268,11 @@ declare class Connect extends Service {
    */
   updateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a rule for the specified Amazon Connect instance.
+   * Updates a rule for the specified Amazon Connect instance. Use the Rules Function language to code conditions for the rule. 
    */
   updateRule(params: Connect.Types.UpdateRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a rule for the specified Amazon Connect instance.
+   * Updates a rule for the specified Amazon Connect instance. Use the Rules Function language to code conditions for the rule. 
    */
   updateRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2387,7 +2387,7 @@ declare namespace Connect {
      */
     AllowedAccessControlTags?: AllowedAccessControlTags;
     /**
-     * The list of resources that a security profile applies tag restrictions to in Amazon Connect.
+     * The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: User | SecurityProfile | Queue | RoutingProfile 
      */
     TagRestrictedResources?: TagRestrictedResourceList;
   }
@@ -6703,7 +6703,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The JSON string that represents flow's content. For an example, see Example contact flow in Amazon Connect Flow language in the Amazon Connect Administrator Guide. 
+     * The JSON string that represents flow's content. For an example, see Example contact flow in Amazon Connect Flow language. 
      */
     Content: ContactFlowContent;
   }
@@ -7627,7 +7627,7 @@ declare namespace Connect {
   export type VocabularyContent = string;
   export type VocabularyFailureReason = string;
   export type VocabularyId = string;
-  export type VocabularyLanguageCode = "ar-AE"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"hi-IN"|"it-IT"|"ja-JP"|"ko-KR"|"pt-BR"|"pt-PT"|"zh-CN"|string;
+  export type VocabularyLanguageCode = "ar-AE"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"hi-IN"|"it-IT"|"ja-JP"|"ko-KR"|"pt-BR"|"pt-PT"|"zh-CN"|"en-NZ"|"en-ZA"|string;
   export type VocabularyLastModifiedTime = Date;
   export type VocabularyName = string;
   export type VocabularyNextToken = string;

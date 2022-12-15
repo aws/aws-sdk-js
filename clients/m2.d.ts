@@ -20,11 +20,11 @@ declare class M2 extends Service {
    */
   cancelBatchJobExecution(callback?: (err: AWSError, data: M2.Types.CancelBatchJobExecutionResponse) => void): Request<M2.Types.CancelBatchJobExecutionResponse, AWSError>;
   /**
-   * Creates a new application with given parameters. Requires an existing environment and application definition file.
+   * Creates a new application with given parameters. Requires an existing runtime environment and application definition file.
    */
   createApplication(params: M2.Types.CreateApplicationRequest, callback?: (err: AWSError, data: M2.Types.CreateApplicationResponse) => void): Request<M2.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates a new application with given parameters. Requires an existing environment and application definition file.
+   * Creates a new application with given parameters. Requires an existing runtime environment and application definition file.
    */
   createApplication(callback?: (err: AWSError, data: M2.Types.CreateApplicationResponse) => void): Request<M2.Types.CreateApplicationResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class M2 extends Service {
    */
   createDataSetImportTask(callback?: (err: AWSError, data: M2.Types.CreateDataSetImportTaskResponse) => void): Request<M2.Types.CreateDataSetImportTaskResponse, AWSError>;
   /**
-   * Creates and starts a deployment to deploy an application into an environment.
+   * Creates and starts a deployment to deploy an application into a runtime environment.
    */
   createDeployment(params: M2.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: M2.Types.CreateDeploymentResponse) => void): Request<M2.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates and starts a deployment to deploy an application into an environment.
+   * Creates and starts a deployment to deploy an application into a runtime environment.
    */
   createDeployment(callback?: (err: AWSError, data: M2.Types.CreateDeploymentResponse) => void): Request<M2.Types.CreateDeploymentResponse, AWSError>;
   /**
@@ -60,19 +60,19 @@ declare class M2 extends Service {
    */
   deleteApplication(callback?: (err: AWSError, data: M2.Types.DeleteApplicationResponse) => void): Request<M2.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes a specific application from a specified environment where it has been previously deployed. You cannot delete an environment using DeleteEnvironment, if any application has ever been deployed to it. This API removes the association of the application with the environment so you can delete the environment smoothly.
+   * Deletes a specific application from the specific runtime environment where it was previously deployed. You cannot delete a runtime environment using DeleteEnvironment if any application has ever been deployed to it. This API removes the association of the application with the runtime environment so you can delete the environment smoothly.
    */
   deleteApplicationFromEnvironment(params: M2.Types.DeleteApplicationFromEnvironmentRequest, callback?: (err: AWSError, data: M2.Types.DeleteApplicationFromEnvironmentResponse) => void): Request<M2.Types.DeleteApplicationFromEnvironmentResponse, AWSError>;
   /**
-   * Deletes a specific application from a specified environment where it has been previously deployed. You cannot delete an environment using DeleteEnvironment, if any application has ever been deployed to it. This API removes the association of the application with the environment so you can delete the environment smoothly.
+   * Deletes a specific application from the specific runtime environment where it was previously deployed. You cannot delete a runtime environment using DeleteEnvironment if any application has ever been deployed to it. This API removes the association of the application with the runtime environment so you can delete the environment smoothly.
    */
   deleteApplicationFromEnvironment(callback?: (err: AWSError, data: M2.Types.DeleteApplicationFromEnvironmentResponse) => void): Request<M2.Types.DeleteApplicationFromEnvironmentResponse, AWSError>;
   /**
-   * Deletes a specific environment. The environment cannot contain deployed applications. If it does, you must delete those applications before you delete the environment.
+   * Deletes a specific runtime environment. The environment cannot contain deployed applications. If it does, you must delete those applications before you delete the environment.
    */
   deleteEnvironment(params: M2.Types.DeleteEnvironmentRequest, callback?: (err: AWSError, data: M2.Types.DeleteEnvironmentResponse) => void): Request<M2.Types.DeleteEnvironmentResponse, AWSError>;
   /**
-   * Deletes a specific environment. The environment cannot contain deployed applications. If it does, you must delete those applications before you delete the environment.
+   * Deletes a specific runtime environment. The environment cannot contain deployed applications. If it does, you must delete those applications before you delete the environment.
    */
   deleteEnvironment(callback?: (err: AWSError, data: M2.Types.DeleteEnvironmentResponse) => void): Request<M2.Types.DeleteEnvironmentResponse, AWSError>;
   /**
@@ -140,19 +140,19 @@ declare class M2 extends Service {
    */
   listApplicationVersions(callback?: (err: AWSError, data: M2.Types.ListApplicationVersionsResponse) => void): Request<M2.Types.ListApplicationVersionsResponse, AWSError>;
   /**
-   * Lists the applications associated with a specific Amazon Web Services account. You can provide the unique identifier of a specific environment in a query parameter to see all applications associated with that environment.
+   * Lists the applications associated with a specific Amazon Web Services account. You can provide the unique identifier of a specific runtime environment in a query parameter to see all applications associated with that environment.
    */
   listApplications(params: M2.Types.ListApplicationsRequest, callback?: (err: AWSError, data: M2.Types.ListApplicationsResponse) => void): Request<M2.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Lists the applications associated with a specific Amazon Web Services account. You can provide the unique identifier of a specific environment in a query parameter to see all applications associated with that environment.
+   * Lists the applications associated with a specific Amazon Web Services account. You can provide the unique identifier of a specific runtime environment in a query parameter to see all applications associated with that environment.
    */
   listApplications(callback?: (err: AWSError, data: M2.Types.ListApplicationsResponse) => void): Request<M2.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Lists all the available batch job definitions based on the batch job resources uploaded during the application creation. The listed batch job definitions can then be used to start a batch job.
+   * Lists all the available batch job definitions based on the batch job resources uploaded during the application creation. You can use the batch job definitions in the list to start a batch job.
    */
   listBatchJobDefinitions(params: M2.Types.ListBatchJobDefinitionsRequest, callback?: (err: AWSError, data: M2.Types.ListBatchJobDefinitionsResponse) => void): Request<M2.Types.ListBatchJobDefinitionsResponse, AWSError>;
   /**
-   * Lists all the available batch job definitions based on the batch job resources uploaded during the application creation. The listed batch job definitions can then be used to start a batch job.
+   * Lists all the available batch job definitions based on the batch job resources uploaded during the application creation. You can use the batch job definitions in the list to start a batch job.
    */
   listBatchJobDefinitions(callback?: (err: AWSError, data: M2.Types.ListBatchJobDefinitionsResponse) => void): Request<M2.Types.ListBatchJobDefinitionsResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class M2 extends Service {
    */
   listDataSetImportHistory(callback?: (err: AWSError, data: M2.Types.ListDataSetImportHistoryResponse) => void): Request<M2.Types.ListDataSetImportHistoryResponse, AWSError>;
   /**
-   * Lists the data sets imported for a specific application. In Amazon Web Services Mainframe Modernization, data sets are associated with applications deployed on environments. This is known as importing data sets. Currently, Amazon Web Services Mainframe Modernization can import data sets into catalogs using CreateDataSetImportTask.
+   * Lists the data sets imported for a specific application. In Amazon Web Services Mainframe Modernization, data sets are associated with applications deployed on runtime environments. This is known as importing data sets. Currently, Amazon Web Services Mainframe Modernization can import data sets into catalogs using CreateDataSetImportTask.
    */
   listDataSets(params: M2.Types.ListDataSetsRequest, callback?: (err: AWSError, data: M2.Types.ListDataSetsResponse) => void): Request<M2.Types.ListDataSetsResponse, AWSError>;
   /**
-   * Lists the data sets imported for a specific application. In Amazon Web Services Mainframe Modernization, data sets are associated with applications deployed on environments. This is known as importing data sets. Currently, Amazon Web Services Mainframe Modernization can import data sets into catalogs using CreateDataSetImportTask.
+   * Lists the data sets imported for a specific application. In Amazon Web Services Mainframe Modernization, data sets are associated with applications deployed on runtime environments. This is known as importing data sets. Currently, Amazon Web Services Mainframe Modernization can import data sets into catalogs using CreateDataSetImportTask.
    */
   listDataSets(callback?: (err: AWSError, data: M2.Types.ListDataSetsResponse) => void): Request<M2.Types.ListDataSetsResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class M2 extends Service {
    */
   updateApplication(callback?: (err: AWSError, data: M2.Types.UpdateApplicationResponse) => void): Request<M2.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates the configuration details for a specific environment.
+   * Updates the configuration details for a specific runtime environment.
    */
   updateEnvironment(params: M2.Types.UpdateEnvironmentRequest, callback?: (err: AWSError, data: M2.Types.UpdateEnvironmentResponse) => void): Request<M2.Types.UpdateEnvironmentResponse, AWSError>;
   /**
-   * Updates the configuration details for a specific environment.
+   * Updates the configuration details for a specific runtime environment.
    */
   updateEnvironment(callback?: (err: AWSError, data: M2.Types.UpdateEnvironmentResponse) => void): Request<M2.Types.UpdateEnvironmentResponse, AWSError>;
 }
@@ -289,7 +289,7 @@ declare namespace M2 {
   }
   export type AlternateKeyList = AlternateKey[];
   export type ApplicationDeploymentLifecycle = "Deploying"|"Deployed"|string;
-  export type ApplicationLifecycle = "Creating"|"Created"|"Available"|"Ready"|"Starting"|"Running"|"Stopping"|"Stopped"|"Failed"|"Deleting"|string;
+  export type ApplicationLifecycle = "Creating"|"Created"|"Available"|"Ready"|"Starting"|"Running"|"Stopping"|"Stopped"|"Failed"|"Deleting"|"Deleting From Environment"|string;
   export interface ApplicationSummary {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -308,7 +308,7 @@ declare namespace M2 {
      */
     creationTime: Timestamp;
     /**
-     * Indicates whether there is an ongoing deployment or if the application has ever deployed successfully.
+     * Indicates either an ongoing deployment or if the application has ever deployed successfully.
      */
     deploymentStatus?: ApplicationDeploymentLifecycle;
     /**
@@ -324,7 +324,7 @@ declare namespace M2 {
      */
     environmentId?: Identifier;
     /**
-     * The timestamp when the application was last started. Null until the application has started running for the first time.
+     * The timestamp when you last started the application. Null until the application runs for the first time.
      */
     lastStartTime?: Timestamp;
     /**
@@ -456,6 +456,10 @@ declare namespace M2 {
      */
     engineType: EngineType;
     /**
+     * The identifier of a customer managed key.
+     */
+    kmsKeyId?: String;
+    /**
      * The unique identifier of the application.
      */
     name: EntityName;
@@ -512,7 +516,7 @@ declare namespace M2 {
      */
     clientToken?: String;
     /**
-     * The identifier of the environment where this application will be deployed.
+     * The identifier of the runtime environment where you want to deploy this application.
      */
     environmentId: Identifier;
   }
@@ -528,15 +532,15 @@ declare namespace M2 {
      */
     clientToken?: String;
     /**
-     * The description of the environment.
+     * The description of the runtime environment.
      */
     description?: EntityDescription;
     /**
-     * The engine type for the environment.
+     * The engine type for the runtime environment.
      */
     engineType: EngineType;
     /**
-     * The version of the engine type for the environment.
+     * The version of the engine type for the runtime environment.
      */
     engineVersion?: EngineVersion;
     /**
@@ -544,41 +548,45 @@ declare namespace M2 {
      */
     highAvailabilityConfig?: HighAvailabilityConfig;
     /**
-     * The type of instance for the environment.
+     * The type of instance for the runtime environment.
      */
     instanceType: String20;
     /**
-     * The unique identifier of the environment.
+     * The identifier of a customer managed key.
+     */
+    kmsKeyId?: String;
+    /**
+     * The name of the runtime environment. Must be unique within the account.
      */
     name: EntityName;
     /**
-     * Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
+     * Configures the maintenance window you want for the runtime environment. If you do not provide a value, a random system-generated value will be assigned.
      */
     preferredMaintenanceWindow?: String50;
     /**
-     * Specifies whether the environment is publicly accessible.
+     * Specifies whether the runtime environment is publicly accessible.
      */
     publiclyAccessible?: Boolean;
     /**
-     * The list of security groups for the VPC associated with this environment.
+     * The list of security groups for the VPC associated with this runtime environment.
      */
     securityGroupIds?: String50List;
     /**
-     * Optional. The storage configurations for this environment.
+     * Optional. The storage configurations for this runtime environment.
      */
     storageConfigurations?: StorageConfigurationList;
     /**
-     * The list of subnets associated with the VPC for this environment.
+     * The list of subnets associated with the VPC for this runtime environment.
      */
     subnetIds?: String50List;
     /**
-     * The tags for the environment.
+     * The tags for the runtime environment.
      */
     tags?: TagMap;
   }
   export interface CreateEnvironmentResponse {
     /**
-     * The identifier of this environment.
+     * The unique identifier of the runtime environment.
      */
     environmentId: Identifier;
   }
@@ -588,7 +596,7 @@ declare namespace M2 {
      */
     datasetName: String;
     /**
-     * The type of dataset. Possible values include VSAM, IS, PS, GDG, PO, PS, UNKNOWN etc.
+     * The type of dataset. The only supported value is VSAM.
      */
     datasetOrg: DatasetOrgAttributes;
     /**
@@ -672,7 +680,7 @@ declare namespace M2 {
      */
     dataSetName: String200;
     /**
-     * The type of data set. Possible values include VSAM, IS, PS, GDG, PO, PS, or unknown.
+     * The type of data set. The only supported value is VSAM.
      */
     dataSetOrg?: String20;
     /**
@@ -782,7 +790,7 @@ declare namespace M2 {
      */
     deploymentId: Identifier;
     /**
-     * The unique identifier of the environment.
+     * The unique identifier of the runtime environment.
      */
     environmentId: Identifier;
     /**
@@ -820,14 +828,14 @@ declare namespace M2 {
   export type EntityDescription = string;
   export type EntityName = string;
   export type EntityNameList = EntityName[];
-  export type EnvironmentLifecycle = "Creating"|"Available"|"Deleting"|"Failed"|string;
+  export type EnvironmentLifecycle = "Creating"|"Available"|"Deleting"|"Failed"|"Updating"|string;
   export interface EnvironmentSummary {
     /**
-     * The timestamp when the environment was created.
+     * The timestamp when the runtime environment was created.
      */
     creationTime: Timestamp;
     /**
-     * The target platform for the environment.
+     * The target platform for the runtime environment.
      */
     engineType: EngineType;
     /**
@@ -843,15 +851,15 @@ declare namespace M2 {
      */
     environmentId: Identifier;
     /**
-     * The instance type of the environment.
+     * The instance type of the runtime environment.
      */
     instanceType: String20;
     /**
-     * The name of the environment.
+     * The name of the runtime environment.
      */
     name: EntityName;
     /**
-     * The status of the environment
+     * The status of the runtime environment
      */
     status: EnvironmentLifecycle;
   }
@@ -944,11 +952,15 @@ declare namespace M2 {
      */
     engineType: EngineType;
     /**
-     * The identifier of the environment where the application will be deployed.
+     * The identifier of the runtime environment where you want to deploy the application.
      */
     environmentId?: Identifier;
     /**
-     * The timestamp when the application was last started. Null until the application has started running for the first time.
+     * The identifier of a customer managed key.
+     */
+    kmsKeyId?: String;
+    /**
+     * The timestamp when you last started the application. Null until the application runs for the first time.
      */
     lastStartTime?: Timestamp;
     /**
@@ -956,7 +968,7 @@ declare namespace M2 {
      */
     latestVersion: ApplicationVersionSummary;
     /**
-     * The Amazon Resource Name (ARN) for the network load balancer listener created in your Amazon Web Services account. Amazon Web Services Mainframe Modernization creates this listener on your behalf the first time you deploy an application.
+     * The Amazon Resource Name (ARN) for the network load balancer listener created in your Amazon Web Services account. Amazon Web Services Mainframe Modernization creates this listener for you the first time you deploy an application.
      */
     listenerArns?: ArnList;
     /**
@@ -968,7 +980,7 @@ declare namespace M2 {
      */
     loadBalancerDnsName?: String100;
     /**
-     * The list of log summaries. Each log summary includes the log type as well as the log group identifier. These are CloudWatch logs. The Amazon Web Services Mainframe Modernization application log is pushed to CloudWatch under the customer's account.
+     * The list of log summaries. Each log summary includes the log type as well as the log group identifier. These are CloudWatch logs. Amazon Web Services Mainframe Modernization pushes the application log to CloudWatch under the customer's account.
      */
     logGroups?: LogGroupSummaries;
     /**
@@ -1012,7 +1024,7 @@ declare namespace M2 {
      */
     creationTime: Timestamp;
     /**
-     * The content of the application definition. This is a JSON object that contains the resource configuration/definitions that identify an application.
+     * The content of the application definition. This is a JSON object that contains the resource configuration and definitions that identify an application.
      */
     definitionContent: StringFree65000;
     /**
@@ -1108,7 +1120,7 @@ declare namespace M2 {
      */
     dataSetName: String200;
     /**
-     * The type of data set. Possible values include VSAM, IS, PS, GDG, PO, PS, or unknown.
+     * The type of data set. The only supported value is VSAM.
      */
     dataSetOrg?: DatasetDetailOrgAttributes;
     /**
@@ -1120,7 +1132,7 @@ declare namespace M2 {
      */
     lastUpdatedTime?: Timestamp;
     /**
-     * The locaion where the data set is stored.
+     * The location where the data set is stored.
      */
     location?: String2000;
     /**
@@ -1236,11 +1248,15 @@ declare namespace M2 {
      */
     instanceType: String20;
     /**
+     * The identifier of a customer managed key.
+     */
+    kmsKeyId?: String;
+    /**
      * The Amazon Resource Name (ARN) for the load balancer used with the runtime environment.
      */
     loadBalancerArn?: String;
     /**
-     * The name of the runtime environment. 
+     * The name of the runtime environment. Must be unique within the account.
      */
     name: EntityName;
     /**
@@ -1248,9 +1264,9 @@ declare namespace M2 {
      */
     pendingMaintenance?: PendingMaintenance;
     /**
-     * Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
+     * Configures the maintenance window you want for the runtime environment. If you do not provide a value, a random system-generated value will be assigned.
      */
-    preferredMaintenanceWindow?: String;
+    preferredMaintenanceWindow?: String50;
     /**
      * Whether applications running in this runtime environment are publicly accessible. 
      */
@@ -1337,7 +1353,7 @@ declare namespace M2 {
   }
   export interface ListApplicationsResponse {
     /**
-     * Returns a list of summary details for all the applications in an environment.
+     * Returns a list of summary details for all the applications in a runtime environment.
      */
     applications: ApplicationSummaryList;
     /**
@@ -1461,7 +1477,7 @@ declare namespace M2 {
   }
   export interface ListDataSetsResponse {
     /**
-     * The list of data sets, containing ionformation including the creating time, the data set name, the data set organization, the data set format, and the last time the data set was referenced or updated.
+     * The list of data sets, containing information including the creation time, the data set name, the data set organization, the data set format, and the last time the data set was referenced or updated.
      */
     dataSets: DataSetsSummaryList;
     /**
@@ -1519,29 +1535,29 @@ declare namespace M2 {
   }
   export interface ListEnvironmentsRequest {
     /**
-     * The engine type for the environment.
+     * The engine type for the runtime environment.
      */
     engineType?: EngineType;
     /**
-     * The maximum number of environments to return.
+     * The maximum number of runtime environments to return.
      */
     maxResults?: MaxResults;
     /**
-     * The name of the environment.
+     * The names of the runtime environments. Must be unique within the account.
      */
     names?: EntityNameList;
     /**
-     * A pagination token to control the number of environments displayed in the list.
+     * A pagination token to control the number of runtime environments displayed in the list.
      */
     nextToken?: NextToken;
   }
   export interface ListEnvironmentsResponse {
     /**
-     * Returns a list of summary details for all the environments in your account. 
+     * Returns a list of summary details for all the runtime environments in your account. 
      */
     environments: EnvironmentSummaryList;
     /**
-     * A pagination token that's returned when the response doesn't contain all the environments.
+     * A pagination token that's returned when the response doesn't contain all the runtime environments.
      */
     nextToken?: NextToken;
   }
@@ -1587,7 +1603,7 @@ declare namespace M2 {
      */
     engineVersion?: String;
     /**
-     * The maintenance schedule for the engine version.
+     * The maintenance schedule for the runtime engine version.
      */
     schedule?: MaintenanceSchedule;
   }
@@ -1742,15 +1758,15 @@ declare namespace M2 {
   }
   export interface UpdateEnvironmentRequest {
     /**
-     * Indicates whether to update the environment during the maintenance window. The default is false. Currently, Amazon Web Services Mainframe Modernization accepts the engineVersion parameter only if applyDuringMaintenanceWindow is true. If any parameter other than engineVersion is provided in UpdateEnvironmentRequest, it will fail if applyDuringMaintenanceWindow is set to true.
+     * Indicates whether to update the runtime environment during the maintenance window. The default is false. Currently, Amazon Web Services Mainframe Modernization accepts the engineVersion parameter only if applyDuringMaintenanceWindow is true. If any parameter other than engineVersion is provided in UpdateEnvironmentRequest, it will fail if applyDuringMaintenanceWindow is set to true.
      */
     applyDuringMaintenanceWindow?: Boolean;
     /**
-     * The desired capacity for the environment to update.
+     * The desired capacity for the runtime environment to update.
      */
     desiredCapacity?: CapacityValue;
     /**
-     * The version of the runtime engine for the environment.
+     * The version of the runtime engine for the runtime environment.
      */
     engineVersion?: EngineVersion;
     /**
@@ -1758,11 +1774,11 @@ declare namespace M2 {
      */
     environmentId: Identifier;
     /**
-     * The instance type for the environment to update.
+     * The instance type for the runtime environment to update.
      */
     instanceType?: String20;
     /**
-     * Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
+     * Configures the maintenance window you want for the runtime environment. If you do not provide a value, a random system-generated value will be assigned.
      */
     preferredMaintenanceWindow?: String;
   }

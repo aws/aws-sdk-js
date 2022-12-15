@@ -52,6 +52,14 @@ declare class BackupGateway extends Service {
    */
   disassociateGatewayFromServer(callback?: (err: AWSError, data: BackupGateway.Types.DisassociateGatewayFromServerOutput) => void): Request<BackupGateway.Types.DisassociateGatewayFromServerOutput, AWSError>;
   /**
+   * Retrieves the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to get a gateway's bandwidth rate limit schedule.
+   */
+  getBandwidthRateLimitSchedule(params: BackupGateway.Types.GetBandwidthRateLimitScheduleInput, callback?: (err: AWSError, data: BackupGateway.Types.GetBandwidthRateLimitScheduleOutput) => void): Request<BackupGateway.Types.GetBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
+   * Retrieves the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to get a gateway's bandwidth rate limit schedule.
+   */
+  getBandwidthRateLimitSchedule(callback?: (err: AWSError, data: BackupGateway.Types.GetBandwidthRateLimitScheduleOutput) => void): Request<BackupGateway.Types.GetBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
    * By providing the ARN (Amazon Resource Name), this API returns the gateway.
    */
   getGateway(params: BackupGateway.Types.GetGatewayInput, callback?: (err: AWSError, data: BackupGateway.Types.GetGatewayOutput) => void): Request<BackupGateway.Types.GetGatewayOutput, AWSError>;
@@ -59,6 +67,22 @@ declare class BackupGateway extends Service {
    * By providing the ARN (Amazon Resource Name), this API returns the gateway.
    */
   getGateway(callback?: (err: AWSError, data: BackupGateway.Types.GetGatewayOutput) => void): Request<BackupGateway.Types.GetGatewayOutput, AWSError>;
+  /**
+   * This action requests information about the specified hypervisor to which the gateway will connect. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.
+   */
+  getHypervisor(params: BackupGateway.Types.GetHypervisorInput, callback?: (err: AWSError, data: BackupGateway.Types.GetHypervisorOutput) => void): Request<BackupGateway.Types.GetHypervisorOutput, AWSError>;
+  /**
+   * This action requests information about the specified hypervisor to which the gateway will connect. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.
+   */
+  getHypervisor(callback?: (err: AWSError, data: BackupGateway.Types.GetHypervisorOutput) => void): Request<BackupGateway.Types.GetHypervisorOutput, AWSError>;
+  /**
+   * This action retrieves the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the on-premises hypervisor to the properties available in Amazon Web Services.
+   */
+  getHypervisorPropertyMappings(params: BackupGateway.Types.GetHypervisorPropertyMappingsInput, callback?: (err: AWSError, data: BackupGateway.Types.GetHypervisorPropertyMappingsOutput) => void): Request<BackupGateway.Types.GetHypervisorPropertyMappingsOutput, AWSError>;
+  /**
+   * This action retrieves the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the on-premises hypervisor to the properties available in Amazon Web Services.
+   */
+  getHypervisorPropertyMappings(callback?: (err: AWSError, data: BackupGateway.Types.GetHypervisorPropertyMappingsOutput) => void): Request<BackupGateway.Types.GetHypervisorPropertyMappingsOutput, AWSError>;
   /**
    * By providing the ARN (Amazon Resource Name), this API returns the virtual machine.
    */
@@ -108,6 +132,22 @@ declare class BackupGateway extends Service {
    */
   listVirtualMachines(callback?: (err: AWSError, data: BackupGateway.Types.ListVirtualMachinesOutput) => void): Request<BackupGateway.Types.ListVirtualMachinesOutput, AWSError>;
   /**
+   * This action sets the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have a bandwidth rate limit schedule, which means no bandwidth rate limiting is in effect. Use this to initiate a gateway's bandwidth rate limit schedule.
+   */
+  putBandwidthRateLimitSchedule(params: BackupGateway.Types.PutBandwidthRateLimitScheduleInput, callback?: (err: AWSError, data: BackupGateway.Types.PutBandwidthRateLimitScheduleOutput) => void): Request<BackupGateway.Types.PutBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
+   * This action sets the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have a bandwidth rate limit schedule, which means no bandwidth rate limiting is in effect. Use this to initiate a gateway's bandwidth rate limit schedule.
+   */
+  putBandwidthRateLimitSchedule(callback?: (err: AWSError, data: BackupGateway.Types.PutBandwidthRateLimitScheduleOutput) => void): Request<BackupGateway.Types.PutBandwidthRateLimitScheduleOutput, AWSError>;
+  /**
+   * This action sets the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the on-premises hypervisor to the properties available in Amazon Web Services.
+   */
+  putHypervisorPropertyMappings(params: BackupGateway.Types.PutHypervisorPropertyMappingsInput, callback?: (err: AWSError, data: BackupGateway.Types.PutHypervisorPropertyMappingsOutput) => void): Request<BackupGateway.Types.PutHypervisorPropertyMappingsOutput, AWSError>;
+  /**
+   * This action sets the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the on-premises hypervisor to the properties available in Amazon Web Services.
+   */
+  putHypervisorPropertyMappings(callback?: (err: AWSError, data: BackupGateway.Types.PutHypervisorPropertyMappingsOutput) => void): Request<BackupGateway.Types.PutHypervisorPropertyMappingsOutput, AWSError>;
+  /**
    * Set the maintenance start time for a gateway.
    */
   putMaintenanceStartTime(params: BackupGateway.Types.PutMaintenanceStartTimeInput, callback?: (err: AWSError, data: BackupGateway.Types.PutMaintenanceStartTimeOutput) => void): Request<BackupGateway.Types.PutMaintenanceStartTimeOutput, AWSError>;
@@ -115,6 +155,14 @@ declare class BackupGateway extends Service {
    * Set the maintenance start time for a gateway.
    */
   putMaintenanceStartTime(callback?: (err: AWSError, data: BackupGateway.Types.PutMaintenanceStartTimeOutput) => void): Request<BackupGateway.Types.PutMaintenanceStartTimeOutput, AWSError>;
+  /**
+   * This action sends a request to sync metadata across the specified virtual machines.
+   */
+  startVirtualMachinesMetadataSync(params: BackupGateway.Types.StartVirtualMachinesMetadataSyncInput, callback?: (err: AWSError, data: BackupGateway.Types.StartVirtualMachinesMetadataSyncOutput) => void): Request<BackupGateway.Types.StartVirtualMachinesMetadataSyncOutput, AWSError>;
+  /**
+   * This action sends a request to sync metadata across the specified virtual machines.
+   */
+  startVirtualMachinesMetadataSync(callback?: (err: AWSError, data: BackupGateway.Types.StartVirtualMachinesMetadataSyncOutput) => void): Request<BackupGateway.Types.StartVirtualMachinesMetadataSyncOutput, AWSError>;
   /**
    * Tag the resource.
    */
@@ -182,6 +230,34 @@ declare namespace BackupGateway {
      */
     GatewayArn?: GatewayArn;
   }
+  export type AverageUploadRateLimit = number;
+  export interface BandwidthRateLimitInterval {
+    /**
+     * The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set.  For Backup Gateway, the minimum value is (Value). 
+     */
+    AverageUploadRateLimitInBitsPerSec?: AverageUploadRateLimit;
+    /**
+     * The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday.
+     */
+    DaysOfWeek: DaysOfWeek;
+    /**
+     * The hour of the day to end the bandwidth rate limit interval.
+     */
+    EndHourOfDay: HourOfDay;
+    /**
+     * The minute of the hour to end the bandwidth rate limit interval.  The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value 59. 
+     */
+    EndMinuteOfHour: MinuteOfHour;
+    /**
+     * The hour of the day to start the bandwidth rate limit interval.
+     */
+    StartHourOfDay: HourOfDay;
+    /**
+     * The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value 0.
+     */
+    StartMinuteOfHour: MinuteOfHour;
+  }
+  export type BandwidthRateLimitIntervals = BandwidthRateLimitInterval[];
   export interface CreateGatewayInput {
     /**
      * The activation key of the created gateway.
@@ -208,6 +284,7 @@ declare namespace BackupGateway {
   }
   export type DayOfMonth = number;
   export type DayOfWeek = number;
+  export type DaysOfWeek = DayOfWeek[];
   export interface DeleteGatewayInput {
     /**
      * The Amazon Resource Name (ARN) of the gateway to delete.
@@ -303,6 +380,22 @@ declare namespace BackupGateway {
   }
   export type GatewayType = "BACKUP_VM"|string;
   export type Gateways = Gateway[];
+  export interface GetBandwidthRateLimitScheduleInput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway. Use the  ListGateways  operation to return a list of gateways for your account and Amazon Web Services Region.
+     */
+    GatewayArn: GatewayArn;
+  }
+  export interface GetBandwidthRateLimitScheduleOutput {
+    /**
+     * An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.
+     */
+    BandwidthRateLimitIntervals?: BandwidthRateLimitIntervals;
+    /**
+     * The Amazon Resource Name (ARN) of the gateway. Use the  ListGateways  operation to return a list of gateways for your account and Amazon Web Services Region.
+     */
+    GatewayArn?: GatewayArn;
+  }
   export interface GetGatewayInput {
     /**
      * The Amazon Resource Name (ARN) of the gateway.
@@ -314,6 +407,38 @@ declare namespace BackupGateway {
      * By providing the ARN (Amazon Resource Name), this API returns the gateway.
      */
     Gateway?: GatewayDetails;
+  }
+  export interface GetHypervisorInput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn: ServerArn;
+  }
+  export interface GetHypervisorOutput {
+    /**
+     * Details about the requested hypervisor.
+     */
+    Hypervisor?: HypervisorDetails;
+  }
+  export interface GetHypervisorPropertyMappingsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn: ServerArn;
+  }
+  export interface GetHypervisorPropertyMappingsOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn?: ServerArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role.
+     */
+    IamRoleArn?: IamRoleArn;
+    /**
+     * This is a display of the mappings of on-premises VMware tags to the Amazon Web Services tags.
+     */
+    VmwareToAwsTagMappings?: VmwareToAwsTagMappings;
   }
   export interface GetVirtualMachineInput {
     /**
@@ -351,9 +476,48 @@ declare namespace BackupGateway {
      */
     State?: HypervisorState;
   }
+  export interface HypervisorDetails {
+    /**
+     * The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
+     */
+    Host?: Host;
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn?: ServerArn;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS used to encrypt the hypervisor.
+     */
+    KmsKeyArn?: KmsKeyArn;
+    /**
+     * This is the time when the most recent successful sync of metadata occurred.
+     */
+    LastSuccessfulMetadataSyncTime?: Time;
+    /**
+     * This is the most recent status for the indicated metadata sync.
+     */
+    LatestMetadataSyncStatus?: SyncMetadataStatus;
+    /**
+     * This is the most recent status for the indicated metadata sync.
+     */
+    LatestMetadataSyncStatusMessage?: string;
+    /**
+     * The Amazon Resource Name (ARN) of the group of gateways within the requested log.
+     */
+    LogGroupArn?: LogGroupArn;
+    /**
+     * This is the name of the specified hypervisor.
+     */
+    Name?: Name;
+    /**
+     * This is the current state of the specified hypervisor. The possible states are PENDING, ONLINE, OFFLINE, or ERROR.
+     */
+    State?: HypervisorState;
+  }
   export type HypervisorId = string;
   export type HypervisorState = "PENDING"|"ONLINE"|"OFFLINE"|"ERROR"|string;
   export type Hypervisors = Hypervisor[];
+  export type IamRoleArn = string;
   export interface ImportHypervisorConfigurationInput {
     /**
      * The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
@@ -467,6 +631,7 @@ declare namespace BackupGateway {
      */
     VirtualMachines?: VirtualMachines;
   }
+  export type LogGroupArn = string;
   export interface MaintenanceStartTime {
     /**
      * The day of the month component of the maintenance start time represented as an ordinal number from 1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.
@@ -491,6 +656,42 @@ declare namespace BackupGateway {
   export type NextToken = string;
   export type Password = string;
   export type Path = string;
+  export interface PutBandwidthRateLimitScheduleInput {
+    /**
+     * An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.
+     */
+    BandwidthRateLimitIntervals: BandwidthRateLimitIntervals;
+    /**
+     * The Amazon Resource Name (ARN) of the gateway. Use the  ListGateways  operation to return a list of gateways for your account and Amazon Web Services Region.
+     */
+    GatewayArn: GatewayArn;
+  }
+  export interface PutBandwidthRateLimitScheduleOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway. Use the  ListGateways  operation to return a list of gateways for your account and Amazon Web Services Region.
+     */
+    GatewayArn?: GatewayArn;
+  }
+  export interface PutHypervisorPropertyMappingsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn: ServerArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role.
+     */
+    IamRoleArn: IamRoleArn;
+    /**
+     * This action requests the mappings of on-premises VMware tags to the Amazon Web Services tags.
+     */
+    VmwareToAwsTagMappings: VmwareToAwsTagMappings;
+  }
+  export interface PutHypervisorPropertyMappingsOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn?: ServerArn;
+  }
   export interface PutMaintenanceStartTimeInput {
     /**
      * The day of the month start maintenance on a gateway. Valid values range from Sunday to Saturday.
@@ -521,6 +722,19 @@ declare namespace BackupGateway {
   }
   export type ResourceArn = string;
   export type ServerArn = string;
+  export interface StartVirtualMachinesMetadataSyncInput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn: ServerArn;
+  }
+  export interface StartVirtualMachinesMetadataSyncOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the hypervisor.
+     */
+    HypervisorArn?: ServerArn;
+  }
+  export type SyncMetadataStatus = "CREATED"|"RUNNING"|"FAILED"|"PARTIALLY_FAILED"|"SUCCEEDED"|string;
   export interface Tag {
     /**
      * The key part of a tag's key-value pair. The key can't start with aws:.
@@ -626,6 +840,10 @@ declare namespace BackupGateway {
      */
     HypervisorArn: ServerArn;
     /**
+     * The Amazon Resource Name (ARN) of the group of gateways within the requested log.
+     */
+    LogGroupArn?: LogGroupArn;
+    /**
      * The updated name for the hypervisor
      */
     Name?: Name;
@@ -696,8 +914,48 @@ declare namespace BackupGateway {
      * The Amazon Resource Name (ARN) of the virtual machine. For example, arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
      */
     ResourceArn?: ResourceArn;
+    /**
+     * These are the details of the VMware tags associated with the specified virtual machine.
+     */
+    VmwareTags?: VmwareTags;
   }
   export type VirtualMachines = VirtualMachine[];
+  export type VmwareCategory = string;
+  export interface VmwareTag {
+    /**
+     * The is the category of VMware.
+     */
+    VmwareCategory?: VmwareCategory;
+    /**
+     * This is a user-defined description of a VMware tag.
+     */
+    VmwareTagDescription?: string;
+    /**
+     * This is the user-defined name of a VMware tag.
+     */
+    VmwareTagName?: VmwareTagName;
+  }
+  export type VmwareTagName = string;
+  export type VmwareTags = VmwareTag[];
+  export interface VmwareToAwsTagMapping {
+    /**
+     * The key part of the Amazon Web Services tag's key-value pair.
+     */
+    AwsTagKey: TagKey;
+    /**
+     * The value part of the Amazon Web Services tag's key-value pair.
+     */
+    AwsTagValue: TagValue;
+    /**
+     * The is the category of VMware.
+     */
+    VmwareCategory: VmwareCategory;
+    /**
+     * This is the user-defined name of a VMware tag.
+     */
+    VmwareTagName: VmwareTagName;
+  }
+  export type VmwareToAwsTagMappings = VmwareToAwsTagMapping[];
   export type VpcEndpoint = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -2767,6 +2767,677 @@ declare namespace SecurityHub {
     NetworkInterfaceId?: NonEmptyString;
   }
   export type AwsEc2InstanceNetworkInterfacesList = AwsEc2InstanceNetworkInterfacesDetails[];
+  export interface AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails {
+    /**
+     *  The device name. 
+     */
+    DeviceName?: NonEmptyString;
+    /**
+     *  Parameters used to automatically set up Amazon EBS volumes when the instance is launched. 
+     */
+    Ebs?: AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails;
+    /**
+     *  Omits the device from the block device mapping when an empty string is specified. 
+     */
+    NoDevice?: NonEmptyString;
+    /**
+     *  The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. 
+     */
+    VirtualName?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails {
+    /**
+     *  Indicates whether the EBS volume is deleted on instance termination. 
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     *  Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you're creating a volume from a snapshot, you can't specify an encryption value. 
+     */
+    Encrypted?: Boolean;
+    /**
+     *  The number of I/O operations per second (IOPS). 
+     */
+    Iops?: Integer;
+    /**
+     *  The Amazon Resource Name (ARN) of the symmetric Key Management Service (KMS) customer managed key used for encryption. 
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     *  The ID of the EBS snapshot. 
+     */
+    SnapshotId?: NonEmptyString;
+    /**
+     *  The throughput to provision for a gp3 volume, with a maximum of 1,000 MiB/s. 
+     */
+    Throughput?: Integer;
+    /**
+     *  The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. 
+     */
+    VolumeSize?: Integer;
+    /**
+     *  The volume type. 
+     */
+    VolumeType?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataBlockDeviceMappingSetList = AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails[];
+  export interface AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails {
+    /**
+     *  The ID of the Capacity Reservation in which to run the instance. 
+     */
+    CapacityReservationId?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the Capacity Reservation resource group in which to run the instance. 
+     */
+    CapacityReservationResourceGroupArn?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails {
+    /**
+     *  Indicates the instance's Capacity Reservation preferences. If equal to open, the instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). If equal to none, the instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity. 
+     */
+    CapacityReservationPreference?: NonEmptyString;
+    /**
+     *  Specifies a target Capacity Reservation. 
+     */
+    CapacityReservationTarget?: AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails;
+  }
+  export interface AwsEc2LaunchTemplateDataCpuOptionsDetails {
+    /**
+     *  The number of CPU cores for the instance. 
+     */
+    CoreCount?: Integer;
+    /**
+     *  The number of threads per CPU core. A value of 1 disables multithreading for the instance, The default value is 2. 
+     */
+    ThreadsPerCore?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataCreditSpecificationDetails {
+    /**
+     *  The credit option for CPU usage of a T instance. 
+     */
+    CpuCredits?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataDetails {
+    /**
+     *  Information about a block device mapping for an Amazon EC2 launch template. 
+     */
+    BlockDeviceMappingSet?: AwsEc2LaunchTemplateDataBlockDeviceMappingSetList;
+    /**
+     *  Specifies an instance's Capacity Reservation targeting option. You can specify only one option at a time. 
+     */
+    CapacityReservationSpecification?: AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails;
+    /**
+     *  Specifies the CPU options for an instance. For more information, see Optimize CPU options in the Amazon Elastic Compute Cloud User Guide. 
+     */
+    CpuOptions?: AwsEc2LaunchTemplateDataCpuOptionsDetails;
+    /**
+     *  Specifies the credit option for CPU usage of a T2, T3, or T3a instance. 
+     */
+    CreditSpecification?: AwsEc2LaunchTemplateDataCreditSpecificationDetails;
+    /**
+     *  Indicates whether to enable the instance for stop protection. For more information, see Enable stop protection in the Amazon EC2 User Guide. 
+     */
+    DisableApiStop?: Boolean;
+    /**
+     *  If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API. If set to true, you can. 
+     */
+    DisableApiTermination?: Boolean;
+    /**
+     *  Indicates whether the instance is optimized for Amazon EBS I/O. 
+     */
+    EbsOptimized?: Boolean;
+    /**
+     *  Provides details about Elastic Graphics accelerators to associate with the instance. 
+     */
+    ElasticGpuSpecificationSet?: AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList;
+    /**
+     *  The Amazon Elastic Inference accelerator for the instance. 
+     */
+    ElasticInferenceAcceleratorSet?: AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList;
+    /**
+     *  Indicates whether the Amazon EC2 instance is enabled for Amazon Web Services Nitro Enclaves. 
+     */
+    EnclaveOptions?: AwsEc2LaunchTemplateDataEnclaveOptionsDetails;
+    /**
+     *  Specifies whether your Amazon EC2 instance is configured for hibernation. 
+     */
+    HibernationOptions?: AwsEc2LaunchTemplateDataHibernationOptionsDetails;
+    /**
+     *  The name or Amazon Resource Name (ARN) of an IAM instance profile. 
+     */
+    IamInstanceProfile?: AwsEc2LaunchTemplateDataIamInstanceProfileDetails;
+    /**
+     *  The ID of the Amazon Machine Image (AMI). 
+     */
+    ImageId?: NonEmptyString;
+    /**
+     *  Provides the options for specifying the instance initiated shutdown behavior. 
+     */
+    InstanceInitiatedShutdownBehavior?: NonEmptyString;
+    /**
+     *  Specifies the market (purchasing) option for an instance. 
+     */
+    InstanceMarketOptions?: AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails;
+    /**
+     *  The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes. If you specify InstanceRequirements, you can't specify InstanceType. 
+     */
+    InstanceRequirements?: AwsEc2LaunchTemplateDataInstanceRequirementsDetails;
+    /**
+     *  The instance type. For more information, see Instance types in the Amazon EC2 User Guide. If you specify InstanceType, you can't specify InstanceRequirements. 
+     */
+    InstanceType?: NonEmptyString;
+    /**
+     *  The ID of the kernel. 
+     */
+    KernelId?: NonEmptyString;
+    /**
+     *  The name of the key pair that allows users to connect to the instance. 
+     */
+    KeyName?: NonEmptyString;
+    /**
+     *  Specifies a license configuration for an instance. 
+     */
+    LicenseSet?: AwsEc2LaunchTemplateDataLicenseSetList;
+    /**
+     *  The maintenance options of your instance. 
+     */
+    MaintenanceOptions?: AwsEc2LaunchTemplateDataMaintenanceOptionsDetails;
+    /**
+     *  The metadata options for the instance. For more information, see Instance metadata and user data in the Amazon EC2 User Guide. 
+     */
+    MetadataOptions?: AwsEc2LaunchTemplateDataMetadataOptionsDetails;
+    /**
+     *  The monitoring for the instance. 
+     */
+    Monitoring?: AwsEc2LaunchTemplateDataMonitoringDetails;
+    /**
+     *  Specifies the parameters for a network interface that is attached to the instance. 
+     */
+    NetworkInterfaceSet?: AwsEc2LaunchTemplateDataNetworkInterfaceSetList;
+    /**
+     *  Specifies the placement of an instance. 
+     */
+    Placement?: AwsEc2LaunchTemplateDataPlacementDetails;
+    /**
+     *  The options for the instance hostname. 
+     */
+    PrivateDnsNameOptions?: AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails;
+    /**
+     *  The ID of the RAM disk. 
+     */
+    RamDiskId?: NonEmptyString;
+    /**
+     *  One or more security group IDs. 
+     */
+    SecurityGroupIdSet?: NonEmptyStringList;
+    /**
+     *  One or more security group names. For a nondefault VPC, you must use security group IDs instead. You cannot specify both a security group ID and security name in the same request. 
+     */
+    SecurityGroupSet?: NonEmptyStringList;
+    /**
+     *  The user data to make available to the instance. 
+     */
+    UserData?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails {
+    /**
+     *  The type of Elastic Graphics accelerator. 
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataElasticGpuSpecificationSetList = AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails[];
+  export interface AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails {
+    /**
+     *  The number of Elastic Inference accelerators to attach to the instance. 
+     */
+    Count?: Integer;
+    /**
+     *  The type of Elastic Inference accelerator. 
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList = AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails[];
+  export interface AwsEc2LaunchTemplateDataEnclaveOptionsDetails {
+    /**
+     *  If this parameter is set to true, the instance is enabled for Amazon Web Services Nitro Enclaves. 
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsEc2LaunchTemplateDataHibernationOptionsDetails {
+    /**
+     *  If you set this parameter to true, the instance is enabled for hibernation. 
+     */
+    Configured?: Boolean;
+  }
+  export interface AwsEc2LaunchTemplateDataIamInstanceProfileDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the instance profile. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The name of the instance profile. 
+     */
+    Name?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails {
+    /**
+     *  The market type. 
+     */
+    MarketType?: NonEmptyString;
+    /**
+     *  The options for Spot Instances. 
+     */
+    SpotOptions?: AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails {
+    /**
+     *  Deprecated. 
+     */
+    BlockDurationMinutes?: Integer;
+    /**
+     *  The behavior when a Spot Instance is interrupted. 
+     */
+    InstanceInterruptionBehavior?: NonEmptyString;
+    /**
+     *  The maximum hourly price you're willing to pay for the Spot Instances. 
+     */
+    MaxPrice?: NonEmptyString;
+    /**
+     *  The Spot Instance request type. 
+     */
+    SpotInstanceType?: NonEmptyString;
+    /**
+     *  The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ), for persistent requests. 
+     */
+    ValidUntil?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails {
+    /**
+     *  The maximum number of accelerators. If this parameter isn't specified, there's no maximum limit. To exclude accelerator-enabled instance types, set Max to 0. 
+     */
+    Max?: Integer;
+    /**
+     *  The minimum number of accelerators. If this parameter isn't specified, there's no minimum limit. 
+     */
+    Min?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails {
+    /**
+     *  The maximum amount of memory, in MiB. If this parameter isn't specified, there's no maximum limit. 
+     */
+    Max?: Integer;
+    /**
+     *  The minimum amount of memory, in MiB. If 0 is specified, there's no maximum limit. 
+     */
+    Min?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails {
+    /**
+     *  The maximum baseline bandwidth, in Mbps. If this parameter is omitted, there's no maximum limit. 
+     */
+    Max?: Integer;
+    /**
+     *  The minimum baseline bandwidth, in Mbps. If this parameter is omitted, there's no minimum limit. 
+     */
+    Min?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsDetails {
+    /**
+     *  The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on an instance. 
+     */
+    AcceleratorCount?: AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails;
+    /**
+     * Indicates whether instance types must have accelerators by specific manufacturers. 
+     */
+    AcceleratorManufacturers?: NonEmptyStringList;
+    /**
+     *  The accelerators that must be on the instance type. 
+     */
+    AcceleratorNames?: NonEmptyStringList;
+    /**
+     *  The minimum and maximum amount of total accelerator memory, in MiB. 
+     */
+    AcceleratorTotalMemoryMiB?: AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails;
+    /**
+     * The accelerator types that must be on the instance type. 
+     */
+    AcceleratorTypes?: NonEmptyStringList;
+    /**
+     * Indicates whether bare metal instance types must be included, excluded, or required. 
+     */
+    BareMetal?: NonEmptyString;
+    /**
+     *  The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see Amazon EBS optimized instances in the Amazon EC2 User Guide. 
+     */
+    BaselineEbsBandwidthMbps?: AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails;
+    /**
+     *  Indicates whether burstable performance T instance types are included, excluded, or required. For more information, Burstable performance instances in the Amazon EC2 User Guide. 
+     */
+    BurstablePerformance?: NonEmptyString;
+    /**
+     *  The CPU manufacturers to include. 
+     */
+    CpuManufacturers?: NonEmptyStringList;
+    /**
+     *  The instance types to exclude. 
+     */
+    ExcludedInstanceTypes?: NonEmptyStringList;
+    /**
+     *  Indicates whether current or previous generation instance types are included. 
+     */
+    InstanceGenerations?: NonEmptyStringList;
+    /**
+     *  Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see Amazon EC2 instance store in the Amazon EC2 User Guide. 
+     */
+    LocalStorage?: NonEmptyString;
+    /**
+     *  The type of local storage that is required. 
+     */
+    LocalStorageTypes?: NonEmptyStringList;
+    /**
+     *  The minimum and maximum amount of memory per vCPU, in GiB. 
+     */
+    MemoryGiBPerVCpu?: AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails;
+    /**
+     *  The minimum and maximum amount of memory, in MiB. 
+     */
+    MemoryMiB?: AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails;
+    /**
+     *  The minimum and maximum number of network interfaces. 
+     */
+    NetworkInterfaceCount?: AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails;
+    /**
+     *  The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold. The parameter accepts an integer, which Amazon EC2 interprets as a percentage. A high value, such as 999999, turns off price protection.
+     */
+    OnDemandMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     *  Indicates whether instance types must support hibernation for On-Demand Instances. 
+     */
+    RequireHibernateSupport?: Boolean;
+    /**
+     *  The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage above the least expensive current generation M, C, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance types priced above your threshold.  The parameter accepts an integer, which Amazon EC2 interprets as a percentage. A high value, such as 999999, turns off price protection.
+     */
+    SpotMaxPricePercentageOverLowestPrice?: Integer;
+    /**
+     *  The minimum and maximum amount of total local storage, in GB. 
+     */
+    TotalLocalStorageGB?: AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails;
+    /**
+     *  The minimum and maximum number of vCPUs. 
+     */
+    VCpuCount?: AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails {
+    /**
+     *  The maximum amount of memory per vCPU, in GiB. If this parameter is omitted, there's no maximum limit. 
+     */
+    Max?: Double;
+    /**
+     *  The minimum amount of memory per vCPU, in GiB. If this parameter is omitted, there's no maximum limit. 
+     */
+    Min?: Double;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails {
+    /**
+     *  The maximum amount of memory, in MiB. 
+     */
+    Max?: Integer;
+    /**
+     *  The minimum amount of memory, in MiB. 
+     */
+    Min?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails {
+    /**
+     *  The maximum number of network interfaces. 
+     */
+    Max?: Integer;
+    /**
+     *  The minimum number of network interfaces. 
+     */
+    Min?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails {
+    /**
+     *  The maximum amount of total local storage, in GB. 
+     */
+    Max?: Double;
+    /**
+     *  The minimum amount of total local storage, in GB. 
+     */
+    Min?: Double;
+  }
+  export interface AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails {
+    /**
+     *  The maximum number of vCPUs. 
+     */
+    Max?: Integer;
+    /**
+     *  The minimum number of vCPUs. 
+     */
+    Min?: Integer;
+  }
+  export interface AwsEc2LaunchTemplateDataLicenseSetDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the license configuration. 
+     */
+    LicenseConfigurationArn?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataLicenseSetList = AwsEc2LaunchTemplateDataLicenseSetDetails[];
+  export interface AwsEc2LaunchTemplateDataMaintenanceOptionsDetails {
+    /**
+     *  Disables the automatic recovery behavior of your instance or sets it to default. 
+     */
+    AutoRecovery?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataMetadataOptionsDetails {
+    /**
+     *  Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled, and you won’t be able to access your instance metadata. 
+     */
+    HttpEndpoint?: NonEmptyString;
+    /**
+     *  Enables or disables the IPv6 endpoint for the instance metadata service. 
+     */
+    HttpProtocolIpv6?: NonEmptyString;
+    /**
+     *  The state of token usage for your instance metadata requests. 
+     */
+    HttpTokens?: NonEmptyString;
+    /**
+     *  The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. 
+     */
+    HttpPutResponseHopLimit?: Integer;
+    /**
+     *  When set to enabled, this parameter allows access to instance tags from the instance metadata. When set to disabled, it turns off access to instance tags from the instance metadata. For more information, see Work with instance tags in instance metadata in the Amazon EC2 User Guide. 
+     */
+    InstanceMetadataTags?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataMonitoringDetails {
+    /**
+     *  Enables detailed monitoring when true is specified. Otherwise, basic monitoring is enabled. For more information about detailed monitoring, see Enable or turn off detailed monitoring for your instances in the Amazon EC2 User Guide. 
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails {
+    /**
+     *  Indicates whether to associate a Carrier IP address with eth0 for a new network interface. You use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information, see Carrier IP address in the Wavelength Developer Guide. 
+     */
+    AssociateCarrierIpAddress?: Boolean;
+    /**
+     *  Associates a public IPv4 address with eth0 for a new network interface. 
+     */
+    AssociatePublicIpAddress?: Boolean;
+    /**
+     *  Indicates whether the network interface is deleted when the instance is terminated. 
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     *  A description for the network interface. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The device index for the network interface attachment. 
+     */
+    DeviceIndex?: Integer;
+    /**
+     *  The IDs of one or more security groups. 
+     */
+    Groups?: NonEmptyStringList;
+    /**
+     *  The type of network interface. 
+     */
+    InterfaceType?: NonEmptyString;
+    /**
+     *  The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the Ipv4Prefixes option. 
+     */
+    Ipv4PrefixCount?: Integer;
+    /**
+     *  One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option. 
+     */
+    Ipv4Prefixes?: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList;
+    /**
+     *  The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if you use Ipv6Addresses. 
+     */
+    Ipv6AddressCount?: Integer;
+    /**
+     *  One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you use Ipv6AddressCount. 
+     */
+    Ipv6Addresses?: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList;
+    /**
+     *  The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the Ipv6Prefix option. 
+     */
+    Ipv6PrefixCount?: Integer;
+    /**
+     *  One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option. 
+     */
+    Ipv6Prefixes?: AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList;
+    /**
+     *  The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0. 
+     */
+    NetworkCardIndex?: Integer;
+    /**
+     *  The ID of the network interface. 
+     */
+    NetworkInterfaceId?: NonEmptyString;
+    /**
+     *  The primary private IPv4 address of the network interface. 
+     */
+    PrivateIpAddress?: NonEmptyString;
+    /**
+     *  One or more private IPv4 addresses. 
+     */
+    PrivateIpAddresses?: AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList;
+    /**
+     *  The number of secondary private IPv4 addresses to assign to a network interface. 
+     */
+    SecondaryPrivateIpAddressCount?: Integer;
+    /**
+     *  The ID of the subnet for the network interface. 
+     */
+    SubnetId?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails {
+    /**
+     *  The IPv4 prefix. For more information, see Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide. 
+     */
+    Ipv4Prefix?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList = AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails[];
+  export interface AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails {
+    /**
+     *  One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. 
+     */
+    Ipv6Address?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList = AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails[];
+  export interface AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails {
+    /**
+     *  The IPv6 prefix. 
+     */
+    Ipv6Prefix?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList = AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails[];
+  export type AwsEc2LaunchTemplateDataNetworkInterfaceSetList = AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails[];
+  export interface AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails {
+    /**
+     *  Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary. 
+     */
+    Primary?: Boolean;
+    /**
+     *  The private IPv4 address. 
+     */
+    PrivateIpAddress?: NonEmptyString;
+  }
+  export type AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList = AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails[];
+  export interface AwsEc2LaunchTemplateDataPlacementDetails {
+    /**
+     *  The affinity setting for an instance on an EC2 Dedicated Host. 
+     */
+    Affinity?: NonEmptyString;
+    /**
+     *  The Availability Zone for the instance. 
+     */
+    AvailabilityZone?: NonEmptyString;
+    /**
+     *  The name of the placement group for the instance. 
+     */
+    GroupName?: NonEmptyString;
+    /**
+     *  The ID of the Dedicated Host for the instance. 
+     */
+    HostId?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the host resource group in which to launch the instances. 
+     */
+    HostResourceGroupArn?: NonEmptyString;
+    /**
+     *  The number of the partition the instance should launch in. 
+     */
+    PartitionNumber?: Integer;
+    /**
+     *  Reserved for future use. 
+     */
+    SpreadDomain?: NonEmptyString;
+    /**
+     *  The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. 
+     */
+    Tenancy?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails {
+    /**
+     *  Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records. 
+     */
+    EnableResourceNameDnsAAAARecord?: Boolean;
+    /**
+     *  Indicates whether to respond to DNS queries for instance hostnames with DNS A records. 
+     */
+    EnableResourceNameDnsARecord?: Boolean;
+    /**
+     *  The type of hostname for EC2 instances. 
+     */
+    HostnameType?: NonEmptyString;
+  }
+  export interface AwsEc2LaunchTemplateDetails {
+    /**
+     *  A name for the launch template. 
+     */
+    LaunchTemplateName?: NonEmptyString;
+    /**
+     *  An ID for the launch template. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The information to include in the launch template. 
+     */
+    LaunchTemplateData?: AwsEc2LaunchTemplateDataDetails;
+    /**
+     *  The default version of the launch template. 
+     */
+    DefaultVersionNumber?: Long;
+    /**
+     *  The latest version of the launch template. 
+     */
+    LatestVersionNumber?: Long;
+  }
   export interface AwsEc2NetworkAclAssociation {
     /**
      * The identifier of the association between the network ACL and the subnet.
@@ -8022,6 +8693,94 @@ declare namespace SecurityHub {
      */
     SSEKMSKeyId?: NonEmptyString;
   }
+  export interface AwsSageMakerNotebookInstanceDetails {
+    /**
+     *  A list of Amazon Elastic Inference instance types to associate with the notebook instance. Currently, only one instance type can be associated with a notebook instance. 
+     */
+    AcceleratorTypes?: NonEmptyStringList;
+    /**
+     *  An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see Associating Git repositories with SageMaker notebook instances in the Amazon SageMaker Developer Guide. 
+     */
+    AdditionalCodeRepositories?: NonEmptyStringList;
+    /**
+     *  The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository. For more information, see Associating Git repositories with SageMaker notebook instances in the Amazon SageMaker Developer Guide. 
+     */
+    DefaultCodeRepository?: NonEmptyString;
+    /**
+     *  Sets whether SageMaker provides internet access to the notebook instance. If you set this to Disabled, this notebook instance is able to access resources only in your VPC, and is not be able to connect to SageMaker training and endpoint services unless you configure a Network Address Translation (NAT) Gateway in your VPC. 
+     */
+    DirectInternetAccess?: NonEmptyString;
+    /**
+     *  If status of the instance is Failed, the reason it failed. 
+     */
+    FailureReason?: NonEmptyString;
+    /**
+     *  Information on the IMDS configuration of the notebook instance. 
+     */
+    InstanceMetadataServiceConfiguration?: AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails;
+    /**
+     *  The type of machine learning (ML) compute instance to launch for the notebook instance. 
+     */
+    InstanceType?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of an Key Management Service (KMS) key that SageMaker uses to encrypt data on the storage volume attached to your notebook instance. The KMS key you provide must be enabled. For information, see Enabling and disabling keys in the Key Management Service Developer Guide. 
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     *  The network interface ID that SageMaker created when the instance was created. 
+     */
+    NetworkInterfaceId?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the notebook instance. 
+     */
+    NotebookInstanceArn?: NonEmptyString;
+    /**
+     *  The name of a notebook instance lifecycle configuration. 
+     */
+    NotebookInstanceLifecycleConfigName?: NonEmptyString;
+    /**
+     *  The name of the new notebook instance. 
+     */
+    NotebookInstanceName?: NonEmptyString;
+    /**
+     *  The status of the notebook instance. 
+     */
+    NotebookInstanceStatus?: NonEmptyString;
+    /**
+     *  The platform identifier of the notebook instance runtime environment. 
+     */
+    PlatformIdentifier?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the IAM role associated with the instance. 
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     *  Whether root access is enabled or disabled for users of the notebook instance. 
+     */
+    RootAccess?: NonEmptyString;
+    /**
+     *  The VPC security group IDs. 
+     */
+    SecurityGroups?: NonEmptyStringList;
+    /**
+     *  The ID of the VPC subnet to which you have a connectivity from your ML compute instance. 
+     */
+    SubnetId?: NonEmptyString;
+    /**
+     *  The URL that you use to connect to the Jupyter notebook that is running in your notebook instance. 
+     */
+    Url?: NonEmptyString;
+    /**
+     *  The size, in GB, of the ML storage volume to attach to the notebook instance. 
+     */
+    VolumeSizeInGB?: Integer;
+  }
+  export interface AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails {
+    /**
+     *  Indicates the minimum IMDS version that the notebook instance supports. 
+     */
+    MinimumInstanceMetadataServiceVersion?: NonEmptyString;
+  }
   export interface AwsSecretsManagerSecretDetails {
     /**
      * Defines the rotation schedule for the secret.
@@ -9119,6 +9878,214 @@ declare namespace SecurityHub {
     Type?: NonEmptyString;
   }
   export type AwsWafWebAclRuleList = AwsWafWebAclRule[];
+  export interface AwsWafv2ActionAllowDetails {
+    /**
+     *  Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in WAF in the WAF Developer Guide.. 
+     */
+    CustomRequestHandling?: AwsWafv2CustomRequestHandlingDetails;
+  }
+  export interface AwsWafv2ActionBlockDetails {
+    /**
+     *  Defines a custom response for the web request. For information, see Customizing web requests and responses in WAF in the WAF Developer Guide.. 
+     */
+    CustomResponse?: AwsWafv2CustomResponseDetails;
+  }
+  export interface AwsWafv2CustomHttpHeader {
+    /**
+     *  The name of the custom header. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The value of the custom header. 
+     */
+    Value?: NonEmptyString;
+  }
+  export interface AwsWafv2CustomRequestHandlingDetails {
+    /**
+     *  The HTTP headers to insert into the request. 
+     */
+    InsertHeaders?: AwsWafv2InsertHeadersList;
+  }
+  export interface AwsWafv2CustomResponseDetails {
+    /**
+     *  References the response body that you want WAF to return to the web request client. You can define a custom response for a rule action or a default web ACL action that is set to block. 
+     */
+    CustomResponseBodyKey?: NonEmptyString;
+    /**
+     *  The HTTP status code to return to the client. For a list of status codes that you can use in your custom responses, see Supported status codes for custom response in the WAF Developer Guide. 
+     */
+    ResponseCode?: Integer;
+    /**
+     *  The HTTP headers to use in the response. 
+     */
+    ResponseHeaders?: AwsWafv2InsertHeadersList;
+  }
+  export type AwsWafv2InsertHeadersList = AwsWafv2CustomHttpHeader[];
+  export interface AwsWafv2RuleGroupDetails {
+    /**
+     *  The web ACL capacity units (WCUs) required for this rule group. 
+     */
+    Capacity?: Long;
+    /**
+     *  A description of the rule group that helps with identification. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  A unique identifier for the rule group. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The name of the rule group. You cannot change the name of a rule group after you create it. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the entity. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The Rule statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that WAF uses to identify matching web requests, and parameters that govern how WAF handles them. 
+     */
+    Rules?: AwsWafv2RulesList;
+    /**
+     *  Specifies whether the rule group is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. 
+     */
+    Scope?: NonEmptyString;
+    /**
+     *  Defines and enables Amazon CloudWatch metrics and web request sample collection. 
+     */
+    VisibilityConfig?: AwsWafv2VisibilityConfigDetails;
+  }
+  export interface AwsWafv2RulesActionCaptchaDetails {
+    /**
+     *  Defines custom handling for the web request, used when the CAPTCHA inspection determines that the request's token is valid and unexpired. For more information, see Customizing web requests and responses in WAF in the WAF Developer Guide.. 
+     */
+    CustomRequestHandling?: AwsWafv2CustomRequestHandlingDetails;
+  }
+  export interface AwsWafv2RulesActionCountDetails {
+    /**
+     *  Defines custom handling for the web request. For more information, see Customizing web requests and responses in WAF in the WAF Developer Guide.. 
+     */
+    CustomRequestHandling?: AwsWafv2CustomRequestHandlingDetails;
+  }
+  export interface AwsWafv2RulesActionDetails {
+    /**
+     *  Instructs WAF to allow the web request. 
+     */
+    Allow?: AwsWafv2ActionAllowDetails;
+    /**
+     *  Instructs WAF to block the web request. 
+     */
+    Block?: AwsWafv2ActionBlockDetails;
+    /**
+     *  Instructs WAF to run a CAPTCHA check against the web request. 
+     */
+    Captcha?: AwsWafv2RulesActionCaptchaDetails;
+    /**
+     *  Instructs WAF to count the web request and then continue evaluating the request using the remaining rules in the web ACL. 
+     */
+    Count?: AwsWafv2RulesActionCountDetails;
+  }
+  export interface AwsWafv2RulesDetails {
+    /**
+     *  The action that WAF should take on a web request when it matches the rule statement. Settings at the web ACL level can override the rule action setting. 
+     */
+    Action?: AwsWafv2RulesActionDetails;
+    /**
+     *  The name of the rule. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The action to use in the place of the action that results from the rule group evaluation. 
+     */
+    OverrideAction?: NonEmptyString;
+    /**
+     *  If you define more than one Rule in a WebACL, WAF evaluates each request against the Rules in order based on the value of Priority. WAF processes rules with lower priority first. The priorities don't need to be consecutive, but they must all be different. 
+     */
+    Priority?: Integer;
+    /**
+     *  Defines and enables Amazon CloudWatch metrics and web request sample collection. 
+     */
+    VisibilityConfig?: AwsWafv2VisibilityConfigDetails;
+  }
+  export type AwsWafv2RulesList = AwsWafv2RulesDetails[];
+  export interface AwsWafv2VisibilityConfigDetails {
+    /**
+     *  A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the list of available metrics, see WAF metrics and dimensions in the WAF Developer Guide. 
+     */
+    CloudWatchMetricsEnabled?: Boolean;
+    /**
+     *  A name of the Amazon CloudWatch metric. 
+     */
+    MetricName?: NonEmptyString;
+    /**
+     *  A boolean indicating whether WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the WAF console. 
+     */
+    SampledRequestsEnabled?: Boolean;
+  }
+  export interface AwsWafv2WebAclActionDetails {
+    /**
+     *  Specifies that WAF should allow requests by default. 
+     */
+    Allow?: AwsWafv2ActionAllowDetails;
+    /**
+     *  Specifies that WAF should block requests by default. 
+     */
+    Block?: AwsWafv2ActionBlockDetails;
+  }
+  export interface AwsWafv2WebAclCaptchaConfigDetails {
+    /**
+     *  Determines how long a CAPTCHA timestamp in the token remains valid after the client successfully solves a CAPTCHA puzzle. 
+     */
+    ImmunityTimeProperty?: AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails;
+  }
+  export interface AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails {
+    /**
+     *  The amount of time, in seconds, that a CAPTCHA or challenge timestamp is considered valid by WAF. 
+     */
+    ImmunityTime?: Long;
+  }
+  export interface AwsWafv2WebAclDetails {
+    /**
+     *  The name of the web ACL. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the web ACL that you want to associate with the resource. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  Indicates whether this web ACL is managed by Firewall Manager. 
+     */
+    ManagedbyFirewallManager?: Boolean;
+    /**
+     *  A unique identifier for the web ACL. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The web ACL capacity units (WCUs) currently being used by this web ACL. 
+     */
+    Capacity?: Long;
+    /**
+     *  Specifies how WAF should handle CAPTCHA evaluations for rules that don't have their own CaptchaConfig settings. 
+     */
+    CaptchaConfig?: AwsWafv2WebAclCaptchaConfigDetails;
+    /**
+     *  The action to perform if none of the Rules contained in the web ACL match. 
+     */
+    DefaultAction?: AwsWafv2WebAclActionDetails;
+    /**
+     *  A description of the web ACL that helps with identification. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The Rule statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that WAF uses to identify matching web requests, and parameters that govern how WAF handles them. 
+     */
+    Rules?: AwsWafv2RulesList;
+    /**
+     *  Defines and enables Amazon CloudWatch metrics and web request sample collection. 
+     */
+    VisibilityConfig?: AwsWafv2VisibilityConfigDetails;
+  }
   export interface AwsXrayEncryptionConfigDetails {
     /**
      * The identifier of the KMS key that is used for encryption. Provided if Type is KMS.
@@ -11213,6 +12180,10 @@ declare namespace SecurityHub {
      * Provides details about an Backup backup, or recovery point. 
      */
     AwsBackupRecoveryPoint?: AwsBackupRecoveryPointDetails;
+    AwsEc2LaunchTemplate?: AwsEc2LaunchTemplateDetails;
+    AwsSageMakerNotebookInstance?: AwsSageMakerNotebookInstanceDetails;
+    AwsWafv2WebAcl?: AwsWafv2WebAclDetails;
+    AwsWafv2RuleGroup?: AwsWafv2RuleGroupDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
