@@ -108,11 +108,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options). When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of your locations must reside in the Region where you're using DataSync. For more information, see the following topics:    Working with DataSync locations     Configure DataSync task settings   
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options). When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of your locations must reside in the Region where you're using DataSync. For more information, see the following topics:    Working with DataSync locations     Configure DataSync task settings   
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class DataSync extends Service {
    */
   deleteLocation(callback?: (err: AWSError, data: DataSync.Types.DeleteLocationResponse) => void): Request<DataSync.Types.DeleteLocationResponse, AWSError>;
   /**
-   * Deletes a task.
+   * Deletes an DataSync task.
    */
   deleteTask(params: DataSync.Types.DeleteTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
-   * Deletes a task.
+   * Deletes an DataSync task.
    */
   deleteTask(callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class DataSync extends Service {
    */
   listLocations(callback?: (err: AWSError, data: DataSync.Types.ListLocationsResponse) => void): Request<DataSync.Types.ListLocationsResponse, AWSError>;
   /**
-   * Returns all the tags associated with a specified resource. 
+   * Returns all the tags associated with an Amazon Web Services resource.
    */
   listTagsForResource(params: DataSync.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DataSync.Types.ListTagsForResourceResponse) => void): Request<DataSync.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns all the tags associated with a specified resource. 
+   * Returns all the tags associated with an Amazon Web Services resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: DataSync.Types.ListTagsForResourceResponse) => void): Request<DataSync.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -284,27 +284,27 @@ declare class DataSync extends Service {
    */
   listTasks(callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
-   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see the Task Execution section in the Components and Terminology topic in the DataSync User Guide.
+   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.
    */
   startTaskExecution(params: DataSync.Types.StartTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Starts a specific invocation of a task. A TaskExecution value represents an individual run of a task. Each task can have at most one TaskExecution at a time.  TaskExecution has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.  For detailed information, see the Task Execution section in the Components and Terminology topic in the DataSync User Guide.
+   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.
    */
   startTaskExecution(callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Applies a key-value pair to an Amazon Web Services resource.
+   * Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that can help you manage, filter, and search for your resources. These include DataSync resources, such as locations, tasks, and task executions.
    */
   tagResource(params: DataSync.Types.TagResourceRequest, callback?: (err: AWSError, data: DataSync.Types.TagResourceResponse) => void): Request<DataSync.Types.TagResourceResponse, AWSError>;
   /**
-   * Applies a key-value pair to an Amazon Web Services resource.
+   * Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that can help you manage, filter, and search for your resources. These include DataSync resources, such as locations, tasks, and task executions.
    */
   tagResource(callback?: (err: AWSError, data: DataSync.Types.TagResourceResponse) => void): Request<DataSync.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an Amazon Web Services resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(params: DataSync.Types.UntagResourceRequest, callback?: (err: AWSError, data: DataSync.Types.UntagResourceResponse) => void): Request<DataSync.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an Amazon Web Services resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(callback?: (err: AWSError, data: DataSync.Types.UntagResourceResponse) => void): Request<DataSync.Types.UntagResourceResponse, AWSError>;
   /**
@@ -798,11 +798,11 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the OverrideOptions before starting the task execution. For more information, see the StartTaskExecution operation. 
+     * Specifies the configuration options for a task. Some options include preserving file or object metadata and verifying data integrity. You can also override these options before starting an individual run of a task (also known as a task execution). For more information, see StartTaskExecution.
      */
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".   
+     * Specifies a list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Excludes?: FilterList;
     /**
@@ -810,11 +810,11 @@ declare namespace DataSync {
      */
     Schedule?: TaskSchedule;
     /**
-     * The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. 
+     * Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
      */
     Tags?: InputTagList;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".
+     * Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
   }
@@ -842,7 +842,7 @@ declare namespace DataSync {
   }
   export interface DeleteTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task to delete.
+     * Specifies the Amazon Resource Name (ARN) of the task that you want to delete.
      */
     TaskArn: TaskArn;
   }
@@ -1237,11 +1237,11 @@ declare namespace DataSync {
     Status?: TaskExecutionStatus;
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2" 
+     * A list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Excludes?: FilterList;
     /**
-     * A list of filter rules that determines which files to include when running a task. The list should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example: "/folder1|/folder2" 
+     * A list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
     /**
@@ -1249,7 +1249,7 @@ declare namespace DataSync {
      */
     StartTime?: Time;
     /**
-     * The expected number of files that is to be transferred over the network. This value is calculated during the PREPARING phase, before the TRANSFERRING phase. This value is the expected number of files to be transferred. It's calculated based on comparing the content of the source and destination locations and finding the delta that needs to be transferred. 
+     * The expected number of files that is to be transferred over the network. This value is calculated during the PREPARING phase before the TRANSFERRING phase of the task execution. This value is the expected number of files to be transferred. It's calculated based on comparing the content of the source and destination locations and finding the delta that needs to be transferred. 
      */
     EstimatedFilesToTransfer?: long;
     /**
@@ -1257,7 +1257,7 @@ declare namespace DataSync {
      */
     EstimatedBytesToTransfer?: long;
     /**
-     * The actual number of files that was transferred over the network. This value is calculated and updated on an ongoing basis during the TRANSFERRING phase. It's updated periodically when each file is read from the source and sent over the network.  If failures occur during a transfer, this value can be less than EstimatedFilesToTransfer. This value can also be greater than EstimatedFilesTransferred in some cases. This element is implementation-specific for some location types, so don't use it as an indicator for a correct file number or to monitor your task execution.
+     * The actual number of files that was transferred over the network. This value is calculated and updated on an ongoing basis during the TRANSFERRING phase of the task execution. It's updated periodically when each file is read from the source and sent over the network.  If failures occur during a transfer, this value can be less than EstimatedFilesToTransfer. In some cases, this value can also be greater than EstimatedFilesToTransfer. This element is implementation-specific for some location types, so don't use it as an indicator for a correct file number or to monitor your task execution.
      */
     FilesTransferred?: long;
     /**
@@ -1265,7 +1265,7 @@ declare namespace DataSync {
      */
     BytesWritten?: long;
     /**
-     * The physical number of bytes transferred over the network.
+     * The total number of bytes that are involved in the transfer. For the number of bytes sent over the network, see BytesCompressed. 
      */
     BytesTransferred?: long;
     /**
@@ -1273,7 +1273,7 @@ declare namespace DataSync {
      */
     Result?: TaskExecutionResultDetail;
     /**
-     * The physical number of bytes transferred over the network after compression was applied. In most cases, this number is less than BytesTransferred.
+     * The physical number of bytes transferred over the network after compression was applied. In most cases, this number is less than BytesTransferred unless the data isn't compressible.
      */
     BytesCompressed?: long;
   }
@@ -1297,7 +1297,7 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The Amazon Resource Name (ARN) of the task execution that is syncing files.
+     * The Amazon Resource Name (ARN) of the task execution that is transferring files.
      */
     CurrentTaskExecutionArn?: TaskExecutionArn;
     /**
@@ -1313,19 +1313,19 @@ declare namespace DataSync {
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs) that were created for your subnet.
+     * The Amazon Resource Names (ARNs) of the network interfaces created for your source location. For more information, see Network interface requirements.
      */
     SourceNetworkInterfaceArns?: SourceNetworkInterfaceArns;
     /**
-     * The Amazon Resource Names (ARNs) of the destination elastic network interfaces (ENIs) that were created for your subnet.
+     * The Amazon Resource Names (ARNs) of the network interfaces created for your destination location. For more information, see Network interface requirements.
      */
     DestinationNetworkInterfaceArns?: DestinationNetworkInterfaceArns;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the overriding OverrideOptions value to StartTaskExecution operation. 
+     * The configuration options that control the behavior of the StartTaskExecution operation. Some options include preserving file or object metadata and verifying data integrity. You can override these options for each task execution. For more information, see StartTaskExecution.
      */
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".   
+     * A list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Excludes?: FilterList;
     /**
@@ -1345,7 +1345,7 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".
+     * A list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
   }
@@ -1491,25 +1491,25 @@ declare namespace DataSync {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource whose tags to list.
+     * Specifies the Amazon Resource Name (ARN) of the resource that you want tag information on.
      */
     ResourceArn: TaggableResourceArn;
     /**
-     * The maximum number of locations to return.
+     * Specifies how many results that you want in the response.
      */
     MaxResults?: MaxResults;
     /**
-     * An opaque string that indicates the position at which to begin the next list of locations.
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * Array of resource tags.
+     * An array of tags applied to the specified resource.
      */
     Tags?: OutputTagList;
     /**
-     * An opaque string that indicates the position at which to begin returning the next list of resource tags.
+     * The opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
@@ -1620,63 +1620,63 @@ declare namespace DataSync {
   export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
   export interface Options {
     /**
-     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see Configure task settings.  Default value: POINT_IN_TIME_CONSISTENT   ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.   POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes.  NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
+     * Specifies how and when DataSync checks the integrity of your data during a transfer.  Default value: POINT_IN_TIME_CONSISTENT   ONLY_FILES_TRANSFERRED (recommended): DataSync calculates the checksum of transferred files and metadata at the source location. At the end of the transfer, DataSync then compares this checksum to the checksum calculated on those files at the destination. We recommend this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.  POINT_IN_TIME_CONSISTENT: At the end of the transfer, DataSync scans the entire source and destination to verify that both locations are fully synchronized. You can't use this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.  NONE: DataSync doesn't run additional verification at the end of the transfer. All data transmissions are still integrity-checked with checksum verification during the transfer.
      */
     VerifyMode?: VerifyMode;
     /**
-     * A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to NEVER a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync  in the DataSync User Guide.
+     * Specifies whether data at the destination location should be overwritten or preserved. If set to NEVER, a destination file for example will not be replaced by a source file (even if the destination file differs from the source file). If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your Amazon S3 storage cost. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync .
      */
     OverwriteMode?: OverwriteMode;
     /**
-     * A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set Atime to BEST_EFFORT, DataSync attempts to preserve the original Atime attribute on all source files (that is, the version before the PREPARING phase). However, Atime's behavior is not fully standard across platforms, so DataSync can only do this on a best-effort basis.  Default value: BEST_EFFORT   BEST_EFFORT: Attempt to preserve the per-file Atime value (recommended).  NONE: Ignore Atime.  If Atime is set to BEST_EFFORT, Mtime must be set to PRESERVE.  If Atime is set to NONE, Mtime must also be NONE.  
+     * Specifies whether to preserve metadata indicating the last time a file was read or written to. If you set Atime to BEST_EFFORT, DataSync attempts to preserve the original Atime attribute on all source files (that is, the version before the PREPARING phase of the task execution).  The behavior of Atime isn't fully standard across platforms, so DataSync can only do this on a best-effort basis.  Default value: BEST_EFFORT   BEST_EFFORT: Attempt to preserve the per-file Atime value (recommended).  NONE: Ignore Atime.  If Atime is set to BEST_EFFORT, Mtime must be set to PRESERVE.  If Atime is set to NONE, Mtime must also be NONE.  
      */
     Atime?: Atime;
     /**
-     * A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. This option is required for cases when you need to run the same task more than one time.  Default Value: PRESERVE   PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
+     * Specifies whether to preserve metadata indicating the last time that a file was written to before the PREPARING phase of your task execution. This option is required when you need to run the a task more than once. Default Value: PRESERVE   PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
      */
     Mtime?: Mtime;
     /**
-     * The POSIX user ID (UID) of the file's owner. For more information, see Metadata copied by DataSync. Default value: INT_VALUE. This preserves the integer value of the ID.  INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended).  NONE: Ignore UID and GID. 
+     * Specifies the POSIX user ID (UID) of the file's owner. For more information, see Metadata copied by DataSync. Default value: INT_VALUE. This preserves the integer value of the ID.  INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended).  NONE: Ignore UID and GID. 
      */
     Uid?: Uid;
     /**
-     * The POSIX group ID (GID) of the file's owners. For more information, see Metadata copied by DataSync. Default value: INT_VALUE. This preserves the integer value of the ID.  INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).  NONE: Ignore UID and GID.
+     * Specifies the POSIX group ID (GID) of the file's owners. For more information, see Metadata copied by DataSync. Default value: INT_VALUE. This preserves the integer value of the ID.  INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended).  NONE: Ignore UID and GID.
      */
     Gid?: Gid;
     /**
-     * A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync  in the DataSync User Guide. Default value: PRESERVE   PRESERVE: Ignore such destination files (recommended).   REMOVE: Delete destination files that aren’t present in the source.
+     * Specifies whether files in the destination location that don't exist in the source should be preserved. This option can affect your Amazon S3 storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync . Default value: PRESERVE   PRESERVE: Ignore such destination files (recommended).   REMOVE: Delete destination files that aren’t present in the source.
      */
     PreserveDeletedFiles?: PreserveDeletedFiles;
     /**
-     * A value that determines whether DataSync should preserve the metadata of block and character devices in the source file system, and re-create the files with that device name and metadata on the destination. DataSync does not copy the contents of such devices, only the name and metadata.   DataSync can't sync the actual contents of such devices, because they are nonterminal and don't return an end-of-file (EOF) marker.  Default value: NONE   NONE: Ignore special devices (recommended).   PRESERVE: Preserve character and block device metadata. This option isn't currently supported for Amazon EFS. 
+     * Specifies whether DataSync should preserve the metadata of block and character devices in the source location and recreate the files with that device name and metadata on the destination. DataSync copies only the name and metadata of such devices.  DataSync can't copy the actual contents of these devices because they're nonterminal and don't return an end-of-file (EOF) marker.  Default value: NONE   NONE: Ignore special devices (recommended).   PRESERVE: Preserve character and block device metadata. This option currently isn't supported for Amazon EFS. 
      */
     PreserveDevices?: PreserveDevices;
     /**
-     * A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. For more information, see Metadata copied by DataSync. Default value: PRESERVE   PRESERVE: Preserve POSIX-style permissions (recommended).  NONE: Ignore permissions.   DataSync can preserve extant permissions of a source location. 
+     * Specifies which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. For more information, see Metadata copied by DataSync. Default value: PRESERVE   PRESERVE: Preserve POSIX-style permissions (recommended).  NONE: Ignore permissions.   DataSync can preserve extant permissions of a source location. 
      */
     PosixPermissions?: PosixPermissions;
     /**
-     * A value that limits the bandwidth used by DataSync. For example, if you want DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
+     * Limits the bandwidth used by a DataSync task. For example, if you want DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
      */
     BytesPerSecond?: BytesPerSecond;
     /**
-     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see Queueing task executions.
+     * Specifies whether tasks should be queued before executing the tasks. The default is ENABLED, which means the tasks will be queued. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see Queueing task executions.
      */
     TaskQueueing?: TaskQueueing;
     /**
-     * A value that determines the type of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide. For more information about providing a log group for DataSync, see CloudWatchLogGroupArn. If set to OFF, no logs are published. BASIC publishes logs on errors for individual files transferred, and TRANSFER publishes logs for every file or object that is transferred and integrity checked.
+     * Specifies the type of logs that DataSync publishes to a Amazon CloudWatch Logs log group. To specify the log group, see CloudWatchLogGroupArn. If you set LogLevel to OFF, no logs are published. BASIC publishes logs on errors for individual files transferred. TRANSFER publishes logs for every file or object that is transferred and integrity checked.
      */
     LogLevel?: LogLevel;
     /**
-     * A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.   CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the destination location.  ALL: DataSync copies all source location content to the destination, without comparing to existing content on the destination.
+     * Determines whether DataSync transfers only the data and metadata that differ between the source and the destination location or transfers all the content from the source (without comparing what's in the destination).  CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the destination location.  ALL: DataSync copies all source location content to the destination (without comparing what's in the destination).
      */
     TransferMode?: TransferMode;
     /**
-     * A value that determines which components of the SMB security descriptor are copied from source to destination objects.  This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. For more information about how DataSync handles metadata, see How DataSync Handles Metadata and Special Files.  Default value: OWNER_DACL   OWNER_DACL: For each copied object, DataSync copies the following metadata:   Object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   When choosing this option, DataSync does NOT copy the NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.  OWNER_DACL_SACL: For each copied object, DataSync copies the following metadata:   Object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.   Copying SACLs requires granting additional permissions to the Windows user that DataSync uses to access your SMB location. For information about choosing a user that ensures sufficient permissions to files, folders, and metadata, see user.  NONE: None of the SMB security descriptor components are copied. Destination objects are owned by the user that was provided for accessing the destination location. DACLs and SACLs are set based on the destination server’s configuration. 
+     * Specifies which components of the SMB security descriptor are copied from source to destination objects.  This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations or between two FSx for Windows File Server locations. For more information, see how DataSync handles metadata. Default value: OWNER_DACL   OWNER_DACL: For each copied object, DataSync copies the following metadata:   The object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object. DataSync won't copy NTFS system access control lists (SACLs) with this option.    OWNER_DACL_SACL: For each copied object, DataSync copies the following metadata:   The object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   SACLs, which are used by administrators to log attempts to access a secured object. Copying SACLs requires granting additional permissions to the Windows user that DataSync uses to access your SMB location. For information about choosing a user that ensures sufficient permissions to files, folders, and metadata, see user.    NONE: None of the SMB security descriptor components are copied. Destination objects are owned by the user that was provided for accessing the destination location. DACLs and SACLs are set based on the destination server’s configuration. 
      */
     SecurityDescriptorCopyFlags?: SmbSecurityDescriptorCopyFlags;
     /**
-     * Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Default Value: PRESERVE 
+     * Specifies whether object tags are preserved when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Default Value: PRESERVE 
      */
     ObjectTags?: ObjectTags;
   }
@@ -1723,7 +1723,7 @@ declare namespace DataSync {
      */
     BucketAccessRoleArn: IamRoleArn;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_INSTANT_RETRIEVAL"|string;
   export type S3Subdirectory = string;
   export type ScheduleExpressionCron = string;
   export type ServerHostname = string;
@@ -1742,22 +1742,26 @@ declare namespace DataSync {
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
   export interface StartTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task to start.
+     * Specifies the Amazon Resource Name (ARN) of the task that you want to start.
      */
     TaskArn: TaskArn;
     OverrideOptions?: Options;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".   
+     * Specifies a list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
      */
     Includes?: FilterList;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list contains a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
+     * Specifies a list of filter rules that determines which files to exclude from a task. The list contains a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2". 
      */
     Excludes?: FilterList;
+    /**
+     * Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
+     */
+    Tags?: InputTagList;
   }
   export interface StartTaskExecutionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the specific task execution that was started.
+     * The ARN of the running task execution.
      */
     TaskExecutionArn?: TaskExecutionArn;
   }
@@ -1776,11 +1780,11 @@ declare namespace DataSync {
   }
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to apply the tag to.
+     * Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.
      */
     ResourceArn: TaggableResourceArn;
     /**
-     * The tags to apply.
+     * Specifies the tags that you want to apply to the resource.
      */
     Tags: InputTagList;
   }
@@ -1884,11 +1888,11 @@ declare namespace DataSync {
   export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to remove the tag from.
+     * Specifies the Amazon Resource Name (ARN) of the resource to remove the tags from.
      */
     ResourceArn: TaggableResourceArn;
     /**
-     * The keys in the key-value pair in the tag to remove.
+     * Specifies the keys in the tags that you want to remove.
      */
     Keys: TagKeyList;
   }
@@ -2057,7 +2061,7 @@ declare namespace DataSync {
     TaskArn: TaskArn;
     Options?: Options;
     /**
-     * A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".  
+     * Specifies a list of filter rules that exclude specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Excludes?: FilterList;
     /**
@@ -2073,7 +2077,7 @@ declare namespace DataSync {
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
-     * A list of filter rules that determines which files to include when running a task. The pattern contains a single filter string that consists of the patterns to include. The patterns are delimited by "|" (that is, a pipe), for example, "/folder1|/folder2".
+     * Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
   }

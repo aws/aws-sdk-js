@@ -8584,7 +8584,7 @@
         },
         "UserProfileName": {
           "shape": "UserProfileName",
-          "documentation": "<p>The user profile name.</p>"
+          "documentation": "<p>The user profile name. If this value is not set, then <code>SpaceName</code> must be set.</p>"
         },
         "AppType": {
           "shape": "AppType",
@@ -8604,7 +8604,7 @@
         },
         "SpaceName": {
           "shape": "SpaceName",
-          "documentation": "<p>The name of the space.</p>"
+          "documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code> must be set.</p>"
         }
       }
     },
@@ -11530,7 +11530,7 @@
         },
         "UserProfileName": {
           "shape": "UserProfileName",
-          "documentation": "<p>The user profile name.</p>"
+          "documentation": "<p>The user profile name. If this value is not set, then <code>SpaceName</code> must be set.</p>"
         },
         "AppType": {
           "shape": "AppType",
@@ -11542,7 +11542,7 @@
         },
         "SpaceName": {
           "shape": "SpaceName",
-          "documentation": "<p>The name of the space.</p>"
+          "documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code> must be set.</p>"
         }
       }
     },
@@ -12529,7 +12529,7 @@
         },
         "UserProfileName": {
           "shape": "UserProfileName",
-          "documentation": "<p>The user profile name.</p>"
+          "documentation": "<p>The user profile name. If this value is not set, then <code>SpaceName</code> must be set.</p>"
         },
         "AppType": {
           "shape": "AppType",
@@ -12594,7 +12594,7 @@
         },
         "SpaceName": {
           "shape": "SpaceName",
-          "documentation": "<p>The name of the space.</p>"
+          "documentation": "<p>The name of the space. If this value is not set, then <code>UserProfileName</code> must be set.</p>"
         }
       }
     },
@@ -19632,15 +19632,15 @@
         },
         "HyperParameterTuningJobObjective": {
           "shape": "HyperParameterTuningJobObjective",
-          "documentation": "<p>The <a>HyperParameterTuningJobObjective</a> object that specifies the objective metric for this tuning job.</p>"
+          "documentation": "<p>The <a>HyperParameterTuningJobObjective</a> specifies the objective metric used to evaluate the performance of training jobs launched by this tuning job.</p>"
         },
         "ResourceLimits": {
           "shape": "ResourceLimits",
-          "documentation": "<p>The <a>ResourceLimits</a> object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.</p>"
+          "documentation": "<p>The <a>ResourceLimits</a> object that specifies the maximum number of training and parallel training jobs that can be used for this hyperparameter tuning job.</p>"
         },
         "ParameterRanges": {
           "shape": "ParameterRanges",
-          "documentation": "<p>The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches.</p>"
+          "documentation": "<p>The <a>ParameterRanges</a> object that specifies the ranges of hyperparameters that this tuning job searches over to find the optimal configuration for the highest model performance against .your chosen objective metric. </p>"
         },
         "TrainingJobEarlyStoppingType": {
           "shape": "TrainingJobEarlyStoppingType",
@@ -19649,6 +19649,10 @@
         "TuningJobCompletionCriteria": {
           "shape": "TuningJobCompletionCriteria",
           "documentation": "<p>The tuning job's completion criteria.</p>"
+        },
+        "RandomSeed": {
+          "shape": "RandomSeed",
+          "documentation": "<p>A value used to initialize a pseudo-random number generator. Setting a random seed and using the same seed later for the same tuning job will allow hyperparameter optimization to find more a consistent hyperparameter configuration between the two runs.</p>"
         }
       },
       "documentation": "<p>Configures a hyperparameter tuning job.</p>"
@@ -21648,11 +21652,11 @@
         },
         "UserProfileNameEquals": {
           "shape": "UserProfileName",
-          "documentation": "<p>A parameter to search by user profile name.</p>"
+          "documentation": "<p>A parameter to search by user profile name. If <code>SpaceNameEquals</code> is set, then this value cannot be set.</p>"
         },
         "SpaceNameEquals": {
           "shape": "SpaceName",
-          "documentation": "<p>A parameter to search by space name.</p>"
+          "documentation": "<p>A parameter to search by space name. If <code>UserProfileNameEquals</code> is set, then this value cannot be set.</p>"
         }
       }
     },
@@ -30717,6 +30721,10 @@
         "R_STUDIO_ADMIN",
         "R_STUDIO_USER"
       ]
+    },
+    "RandomSeed": {
+      "type": "integer",
+      "min": 0
     },
     "RealTimeInferenceConfig": {
       "type": "structure",

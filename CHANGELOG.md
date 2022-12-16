@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1276.0-->
+<!--LATEST=2.1277.0-->
 <!--ENTRYINSERT-->
+
+## 2.1277.0
+* feature: Appflow: This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.
+* feature: DataSync: AWS DataSync now supports the use of tags with task executions. With this new feature, you can apply tags each time you execute a task, giving you greater control and management over your task executions.
+* feature: IoTFleetWise: Updated error handling for empty resource names in "UpdateSignalCatalog" and "GetModelManifest" operations.
+* feature: SageMaker: AWS sagemaker - Features: This release adds support for random seed, it's an integer value used to initialize a pseudo-random number generator. Setting a random seed will allow the hyperparameter tuning search strategies to produce more consistent configurations for the same tuning job.
 
 ## 2.1276.0
 * feature: BackupGateway: This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule.

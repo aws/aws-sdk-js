@@ -916,11 +916,11 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * The name of the filter. Minimum length of 3. Maximum length of 64. Valid characters include alphanumeric characters, dot (.), underscore (_), and dash (-). Spaces are not allowed.
+     * The name of the filter. Valid characters include period (.), underscore (_), dash (-), and alphanumeric characters. A whitespace is considered to be an invalid character.
      */
     Name: FilterName;
     /**
-     * The description of the filter.
+     * The description of the filter. Valid special characters include period (.), underscore (_), dash (-), and whitespace. The new line character is considered to be an invalid input for description.
      */
     Description?: FilterDescription;
     /**
@@ -3067,7 +3067,7 @@ declare namespace GuardDuty {
      */
     ScanEndTime?: Timestamp;
     /**
-     * Represents the reason the scan was triggered.
+     * Specifies the reason why the scan was initiated.
      */
     TriggerDetails?: TriggerDetails;
     /**
@@ -3494,7 +3494,7 @@ declare namespace GuardDuty {
      */
     FilterName: String;
     /**
-     * The description of the filter.
+     * The description of the filter. Valid special characters include period (.), underscore (_), dash (-), and whitespace. The new line character is considered to be an invalid input for description.
      */
     Description?: FilterDescription;
     /**

@@ -4146,7 +4146,7 @@ declare namespace SageMaker {
      */
     DomainId: DomainId;
     /**
-     * The user profile name.
+     * The user profile name. If this value is not set, then SpaceName must be set.
      */
     UserProfileName?: UserProfileName;
     /**
@@ -4166,7 +4166,7 @@ declare namespace SageMaker {
      */
     ResourceSpec?: ResourceSpec;
     /**
-     * The name of the space.
+     * The name of the space. If this value is not set, then UserProfileName must be set.
      */
     SpaceName?: SpaceName;
   }
@@ -6197,7 +6197,7 @@ declare namespace SageMaker {
      */
     DomainId: DomainId;
     /**
-     * The user profile name.
+     * The user profile name. If this value is not set, then SpaceName must be set.
      */
     UserProfileName?: UserProfileName;
     /**
@@ -6209,7 +6209,7 @@ declare namespace SageMaker {
      */
     AppName: AppName;
     /**
-     * The name of the space.
+     * The name of the space. If this value is not set, then UserProfileName must be set.
      */
     SpaceName?: SpaceName;
   }
@@ -6786,7 +6786,7 @@ declare namespace SageMaker {
      */
     DomainId: DomainId;
     /**
-     * The user profile name.
+     * The user profile name. If this value is not set, then SpaceName must be set.
      */
     UserProfileName?: UserProfileName;
     /**
@@ -6848,7 +6848,7 @@ declare namespace SageMaker {
      */
     ResourceSpec?: ResourceSpec;
     /**
-     * The name of the space.
+     * The name of the space. If this value is not set, then UserProfileName must be set.
      */
     SpaceName?: SpaceName;
   }
@@ -11517,15 +11517,15 @@ declare namespace SageMaker {
      */
     StrategyConfig?: HyperParameterTuningJobStrategyConfig;
     /**
-     * The HyperParameterTuningJobObjective object that specifies the objective metric for this tuning job.
+     * The HyperParameterTuningJobObjective specifies the objective metric used to evaluate the performance of training jobs launched by this tuning job.
      */
     HyperParameterTuningJobObjective?: HyperParameterTuningJobObjective;
     /**
-     * The ResourceLimits object that specifies the maximum number of training jobs and parallel training jobs for this tuning job.
+     * The ResourceLimits object that specifies the maximum number of training and parallel training jobs that can be used for this hyperparameter tuning job.
      */
     ResourceLimits: ResourceLimits;
     /**
-     * The ParameterRanges object that specifies the ranges of hyperparameters that this tuning job searches.
+     * The ParameterRanges object that specifies the ranges of hyperparameters that this tuning job searches over to find the optimal configuration for the highest model performance against .your chosen objective metric. 
      */
     ParameterRanges?: ParameterRanges;
     /**
@@ -11536,6 +11536,10 @@ declare namespace SageMaker {
      * The tuning job's completion criteria.
      */
     TuningJobCompletionCriteria?: TuningJobCompletionCriteria;
+    /**
+     * A value used to initialize a pseudo-random number generator. Setting a random seed and using the same seed later for the same tuning job will allow hyperparameter optimization to find more a consistent hyperparameter configuration between the two runs.
+     */
+    RandomSeed?: RandomSeed;
   }
   export type HyperParameterTuningJobName = string;
   export interface HyperParameterTuningJobObjective {
@@ -12599,11 +12603,11 @@ declare namespace SageMaker {
      */
     DomainIdEquals?: DomainId;
     /**
-     * A parameter to search by user profile name.
+     * A parameter to search by user profile name. If SpaceNameEquals is set, then this value cannot be set.
      */
     UserProfileNameEquals?: UserProfileName;
     /**
-     * A parameter to search by space name.
+     * A parameter to search by space name. If UserProfileNameEquals is set, then this value cannot be set.
      */
     SpaceNameEquals?: SpaceName;
   }
@@ -18530,6 +18534,7 @@ declare namespace SageMaker {
     DefaultResourceSpec?: ResourceSpec;
   }
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
+  export type RandomSeed = number;
   export interface RealTimeInferenceConfig {
     /**
      * The instance type the model is deployed to.

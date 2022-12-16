@@ -698,6 +698,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "ValidationException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -1612,6 +1615,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
         },
         {
           "shape": "InvalidSignalsException"

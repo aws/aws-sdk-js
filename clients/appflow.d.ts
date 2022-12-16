@@ -1878,12 +1878,24 @@ declare namespace Appflow {
      * The version of the API that's used by the connector.
      */
     apiVersion?: ApiVersion;
+    /**
+     * The maximum number of items that the operation returns in the response.
+     */
+    maxResults?: ListEntitiesMaxResults;
+    /**
+     * A token that was provided by your prior ListConnectorEntities operation if the response was too big for the page size. You specify this token to get the next page of results in paginated response.
+     */
+    nextToken?: NextToken;
   }
   export interface ListConnectorEntitiesResponse {
     /**
      *  The response of ListConnectorEntities lists entities grouped by category. This map's key represents the group name, and its value contains the list of entities belonging to that group. 
      */
     connectorEntityMap: ConnectorEntityMap;
+    /**
+     * A token that you specify in your next ListConnectorEntities operation to get the next page of results in paginated response. The ListConnectorEntities operation provides this token if the response is too big for the page size.
+     */
+    nextToken?: NextToken;
   }
   export interface ListConnectorsRequest {
     /**
@@ -1905,6 +1917,7 @@ declare namespace Appflow {
      */
     nextToken?: NextToken;
   }
+  export type ListEntitiesMaxResults = number;
   export interface ListFlowsRequest {
     /**
      *  Specifies the maximum number of items that should be returned in the result set. 
