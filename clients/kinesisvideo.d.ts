@@ -60,6 +60,22 @@ declare class KinesisVideo extends Service {
    */
   describeImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeImageGenerationConfigurationOutput, AWSError>;
   /**
+   * Returns the most current information about the stream. Either streamName or streamARN should be provided in the input. Returns the most current information about the stream. The streamName or streamARN should be provided in the input.
+   */
+  describeMappedResourceConfiguration(params: KinesisVideo.Types.DescribeMappedResourceConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMappedResourceConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMappedResourceConfigurationOutput, AWSError>;
+  /**
+   * Returns the most current information about the stream. Either streamName or streamARN should be provided in the input. Returns the most current information about the stream. The streamName or streamARN should be provided in the input.
+   */
+  describeMappedResourceConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMappedResourceConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMappedResourceConfigurationOutput, AWSError>;
+  /**
+   * Returns the most current information about the channel. Specify the ChannelName or ChannelARN in the input.
+   */
+  describeMediaStorageConfiguration(params: KinesisVideo.Types.DescribeMediaStorageConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMediaStorageConfigurationOutput, AWSError>;
+  /**
+   * Returns the most current information about the channel. Specify the ChannelName or ChannelARN in the input.
+   */
+  describeMediaStorageConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMediaStorageConfigurationOutput, AWSError>;
+  /**
    * Gets the NotificationConfiguration for a given Kinesis video stream.
    */
   describeNotificationConfiguration(params: KinesisVideo.Types.DescribeNotificationConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeNotificationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeNotificationConfigurationOutput, AWSError>;
@@ -132,11 +148,11 @@ declare class KinesisVideo extends Service {
    */
   listTagsForStream(callback?: (err: AWSError, data: KinesisVideo.Types.ListTagsForStreamOutput) => void): Request<KinesisVideo.Types.ListTagsForStreamOutput, AWSError>;
   /**
-   * An asynchronous API that updates a stream’s existing edge configuration. If this API is invoked for the first time, a new edge configuration will be created for the stream, and the sync status will be set to SYNCING.  The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass component that runs on an IoT Hub Device setup at your premise. The time to sync can vary and depends on the connectivity of the Hub Device. The SyncStatus will be updated as the edge configuration is acknowledged, and synced with the Edge Agent. You will have to wait for the sync status to reach a terminal state such as: IN_SYNC and SYNC_FAILED, before using this API again. If you invoke this API during the syncing process, a ResourceInUseException will be thrown. The connectivity of the stream's edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes, the status will transition into the SYNC_FAILED state. 
+   * An asynchronous API that updates a stream’s existing edge configuration. The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass component that runs on an IoT Hub Device, setup at your premise. The time to sync can vary and depends on the connectivity of the Hub Device. The SyncStatus will be updated as the edge configuration is acknowledged, and synced with the Edge Agent.  If this API is invoked for the first time, a new edge configuration will be created for the stream, and the sync status will be set to SYNCING. You will have to wait for the sync status to reach a terminal state such as: IN_SYNC, or SYNC_FAILED, before using this API again. If you invoke this API during the syncing process, a ResourceInUseException will be thrown. The connectivity of the stream’s edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes, the status will transition into the SYNC_FAILED state.
    */
   startEdgeConfigurationUpdate(params: KinesisVideo.Types.StartEdgeConfigurationUpdateInput, callback?: (err: AWSError, data: KinesisVideo.Types.StartEdgeConfigurationUpdateOutput) => void): Request<KinesisVideo.Types.StartEdgeConfigurationUpdateOutput, AWSError>;
   /**
-   * An asynchronous API that updates a stream’s existing edge configuration. If this API is invoked for the first time, a new edge configuration will be created for the stream, and the sync status will be set to SYNCING.  The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass component that runs on an IoT Hub Device setup at your premise. The time to sync can vary and depends on the connectivity of the Hub Device. The SyncStatus will be updated as the edge configuration is acknowledged, and synced with the Edge Agent. You will have to wait for the sync status to reach a terminal state such as: IN_SYNC and SYNC_FAILED, before using this API again. If you invoke this API during the syncing process, a ResourceInUseException will be thrown. The connectivity of the stream's edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes, the status will transition into the SYNC_FAILED state. 
+   * An asynchronous API that updates a stream’s existing edge configuration. The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass component that runs on an IoT Hub Device, setup at your premise. The time to sync can vary and depends on the connectivity of the Hub Device. The SyncStatus will be updated as the edge configuration is acknowledged, and synced with the Edge Agent.  If this API is invoked for the first time, a new edge configuration will be created for the stream, and the sync status will be set to SYNCING. You will have to wait for the sync status to reach a terminal state such as: IN_SYNC, or SYNC_FAILED, before using this API again. If you invoke this API during the syncing process, a ResourceInUseException will be thrown. The connectivity of the stream’s edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes, the status will transition into the SYNC_FAILED state.
    */
   startEdgeConfigurationUpdate(callback?: (err: AWSError, data: KinesisVideo.Types.StartEdgeConfigurationUpdateOutput) => void): Request<KinesisVideo.Types.StartEdgeConfigurationUpdateOutput, AWSError>;
   /**
@@ -187,6 +203,14 @@ declare class KinesisVideo extends Service {
    * Updates the StreamInfo and ImageProcessingConfiguration fields.
    */
   updateImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateImageGenerationConfigurationOutput, AWSError>;
+  /**
+   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.   
+   */
+  updateMediaStorageConfiguration(params: KinesisVideo.Types.UpdateMediaStorageConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateMediaStorageConfigurationOutput, AWSError>;
+  /**
+   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.   
+   */
+  updateMediaStorageConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateMediaStorageConfigurationOutput, AWSError>;
   /**
    * Updates the notification information for a stream.
    */
@@ -256,7 +280,7 @@ declare namespace KinesisVideo {
      */
     ComparisonValue?: ChannelName;
   }
-  export type ChannelProtocol = "WSS"|"HTTPS"|string;
+  export type ChannelProtocol = "WSS"|"HTTPS"|"WEBRTC"|string;
   export type ChannelRole = "MASTER"|"VIEWER"|string;
   export type ChannelType = "SINGLE_MASTER"|"FULL_MESH"|string;
   export type ComparisonOperator = "BEGINS_WITH"|string;
@@ -415,6 +439,50 @@ declare namespace KinesisVideo {
      */
     ImageGenerationConfiguration?: ImageGenerationConfiguration;
   }
+  export interface DescribeMappedResourceConfigurationInput {
+    /**
+     * The name of the stream.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the stream.
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    MaxResults?: MappedResourceConfigurationListLimit;
+    /**
+     * The token to provide in your next request, to get another batch of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeMappedResourceConfigurationOutput {
+    /**
+     * A structure that encapsulates, or contains, the media storage configuration properties.
+     */
+    MappedResourceConfigurationList?: MappedResourceConfigurationList;
+    /**
+     * The token that was used in the NextTokenrequest to fetch the next set of results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeMediaStorageConfigurationInput {
+    /**
+     * The name of the channel.
+     */
+    ChannelName?: ChannelName;
+    /**
+     * The Amazon Resource Name (ARN) of the channel.
+     */
+    ChannelARN?: ResourceARN;
+  }
+  export interface DescribeMediaStorageConfigurationOutput {
+    /**
+     * A structure that encapsulates, or contains, the media storage configuration properties.
+     */
+    MediaStorageConfiguration?: MediaStorageConfiguration;
+  }
   export interface DescribeNotificationConfigurationInput {
     /**
      * The name of the stream from which to retrieve the notification configuration. You must specify either the StreamName or the StreamARN.
@@ -477,7 +545,7 @@ declare namespace KinesisVideo {
      */
     RecorderConfig: RecorderConfig;
     /**
-     * The uploader configuration contains the ScheduleExpression details that are used, to schedule upload jobs for the recorded media files from the Edge Agent, to a Kinesis Video Stream.
+     * The uploader configuration contains the ScheduleExpression details that are used to schedule upload jobs for the recorded media files from the Edge Agent to a Kinesis Video Stream.
      */
     UploaderConfig?: UploaderConfig;
     /**
@@ -679,6 +747,18 @@ declare namespace KinesisVideo {
      */
     StrategyOnFullSize?: StrategyOnFullSize;
   }
+  export type MappedResourceConfigurationList = MappedResourceConfigurationListItem[];
+  export interface MappedResourceConfigurationListItem {
+    /**
+     * The type of the associated resource for the kinesis video stream.
+     */
+    Type?: Type;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated with the stream.
+     */
+    ARN?: ResourceARN;
+  }
+  export type MappedResourceConfigurationListLimit = number;
   export type MaxLocalMediaSizeInMB = number;
   export interface MediaSourceConfig {
     /**
@@ -686,10 +766,21 @@ declare namespace KinesisVideo {
      */
     MediaUriSecretArn: MediaUriSecretArn;
     /**
-     * The Uniform Resource Identifier (Uri) type. The FILE_URI value can be used to stream local media files.
+     * The Uniform Resource Identifier (URI) type. The FILE_URI value can be used to stream local media files.  Preview only supports the RTSP_URI media source URI format . 
      */
     MediaUriType: MediaUriType;
   }
+  export interface MediaStorageConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the stream 
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The status of the media storage configuration.
+     */
+    Status: MediaStorageConfigurationStatus;
+  }
+  export type MediaStorageConfigurationStatus = "ENABLED"|"DISABLED"|string;
   export type MediaType = string;
   export type MediaUriSecretArn = string;
   export type MediaUriType = "RTSP_URI"|"FILE_URI"|string;
@@ -904,6 +995,7 @@ declare namespace KinesisVideo {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export type Type = string;
   export interface UntagResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
@@ -972,6 +1064,18 @@ declare namespace KinesisVideo {
     ImageGenerationConfiguration?: ImageGenerationConfiguration;
   }
   export interface UpdateImageGenerationConfigurationOutput {
+  }
+  export interface UpdateMediaStorageConfigurationInput {
+    /**
+     * The Amazon Resource Name (ARN) of the channel.
+     */
+    ChannelARN: ResourceARN;
+    /**
+     * A structure that encapsulates, or contains, the media storage configuration properties.
+     */
+    MediaStorageConfiguration: MediaStorageConfiguration;
+  }
+  export interface UpdateMediaStorageConfigurationOutput {
   }
   export interface UpdateNotificationConfigurationInput {
     /**

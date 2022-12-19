@@ -212,11 +212,11 @@ declare class Athena extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
-   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Query execution runtime statistics are returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state. Stage-level input and output row count and data size statistics are not shown when a query has row-level filters defined in Lake Formation.
    */
   getQueryRuntimeStatistics(params: Athena.Types.GetQueryRuntimeStatisticsInput, callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
   /**
-   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
+   * Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Query execution runtime statistics are returned only when QueryExecutionStatus$State is in a SUCCEEDED or FAILED state. Stage-level input and output row count and data size statistics are not shown when a query has row-level filters defined in Lake Formation.
    */
   getQueryRuntimeStatistics(callback?: (err: AWSError, data: Athena.Types.GetQueryRuntimeStatisticsOutput) => void): Request<Athena.Types.GetQueryRuntimeStatisticsOutput, AWSError>;
   /**
@@ -2577,11 +2577,11 @@ declare namespace Athena {
     /**
      * The updated content for the notebook.
      */
-    Payload?: Payload;
+    Payload: Payload;
     /**
      * The notebook content type. Currently, the only valid type is IPYNB.
      */
-    Type?: NotebookType;
+    Type: NotebookType;
     /**
      * The ID of the session in which the notebook will be updated.
      */

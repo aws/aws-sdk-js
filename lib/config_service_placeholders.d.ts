@@ -335,6 +335,7 @@ export abstract class ConfigurationServicePlaceholders {
   codecatalyst?: AWS.CodeCatalyst.Types.ClientConfiguration;
   pipes?: AWS.Pipes.Types.ClientConfiguration;
   sagemakermetrics?: AWS.SageMakerMetrics.Types.ClientConfiguration;
+  kinesisvideowebrtcstorage?: AWS.KinesisVideoWebRTCStorage.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -672,4 +673,5 @@ export interface ConfigurationServiceApiVersions {
   codecatalyst?: AWS.CodeCatalyst.Types.apiVersion;
   pipes?: AWS.Pipes.Types.apiVersion;
   sagemakermetrics?: AWS.SageMakerMetrics.Types.apiVersion;
+  kinesisvideowebrtcstorage?: AWS.KinesisVideoWebRTCStorage.Types.apiVersion;
 }

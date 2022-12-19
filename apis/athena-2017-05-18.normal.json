@@ -402,6 +402,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "InvalidRequestException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         }
       ],
@@ -618,7 +621,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. The query execution runtime statistics is returned only when <a>QueryExecutionStatus$State</a> is in a SUCCEEDED or FAILED state.</p>"
+      "documentation": "<p>Returns query execution runtime statistics related to a single execution of a query if you have access to the workgroup in which the query ran. Query execution runtime statistics are returned only when <a>QueryExecutionStatus$State</a> is in a SUCCEEDED or FAILED state. Stage-level input and output row count and data size statistics are not shown when a query has row-level filters defined in Lake Formation.</p>"
     },
     "GetSession": {
       "name": "GetSession",
@@ -1196,6 +1199,9 @@
       "errors": [
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -3691,7 +3697,7 @@
     },
     "Payload": {
       "type": "string",
-      "max": 15728640,
+      "max": 10485760,
       "min": 1
     },
     "PreparedStatement": {
@@ -4836,7 +4842,9 @@
     "UpdateNotebookInput": {
       "type": "structure",
       "required": [
-        "NotebookId"
+        "NotebookId",
+        "Payload",
+        "Type"
       ],
       "members": {
         "NotebookId": {

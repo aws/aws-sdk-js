@@ -1259,5 +1259,9 @@
   "sagemakermetrics": {
     "prefix": "sagemaker-metrics",
     "name": "SageMakerMetrics"
+  },
+  "kinesisvideowebrtcstorage": {
+    "prefix": "kinesis-video-webrtc-storage",
+    "name": "KinesisVideoWebRTCStorage"
   }
 }

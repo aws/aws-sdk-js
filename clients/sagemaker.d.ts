@@ -1381,6 +1381,14 @@ declare class SageMaker extends Service {
    */
   listAlgorithms(callback?: (err: AWSError, data: SageMaker.Types.ListAlgorithmsOutput) => void): Request<SageMaker.Types.ListAlgorithmsOutput, AWSError>;
   /**
+   * Lists the aliases of a specified image or image version.
+   */
+  listAliases(params: SageMaker.Types.ListAliasesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAliasesResponse) => void): Request<SageMaker.Types.ListAliasesResponse, AWSError>;
+  /**
+   * Lists the aliases of a specified image or image version.
+   */
+  listAliases(callback?: (err: AWSError, data: SageMaker.Types.ListAliasesResponse) => void): Request<SageMaker.Types.ListAliasesResponse, AWSError>;
+  /**
    * Lists the AppImageConfigs in your account and their properties. The list can be filtered by creation time or modified time, and whether the AppImageConfig name contains a specified string.
    */
   listAppImageConfigs(params: SageMaker.Types.ListAppImageConfigsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListAppImageConfigsResponse) => void): Request<SageMaker.Types.ListAppImageConfigsResponse, AWSError>;
@@ -2260,6 +2268,14 @@ declare class SageMaker extends Service {
    * Updates the properties of a SageMaker image. To change the image's tags, use the AddTags and DeleteTags APIs.
    */
   updateImage(callback?: (err: AWSError, data: SageMaker.Types.UpdateImageResponse) => void): Request<SageMaker.Types.UpdateImageResponse, AWSError>;
+  /**
+   * Updates the properties of a SageMaker image version.
+   */
+  updateImageVersion(params: SageMaker.Types.UpdateImageVersionRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateImageVersionResponse) => void): Request<SageMaker.Types.UpdateImageVersionResponse, AWSError>;
+  /**
+   * Updates the properties of a SageMaker image version.
+   */
+  updateImageVersion(callback?: (err: AWSError, data: SageMaker.Types.UpdateImageVersionResponse) => void): Request<SageMaker.Types.UpdateImageVersionResponse, AWSError>;
   /**
    *  Updates an inference experiment that you created. The status of the inference experiment has to be either Created, Running. For more information on the status of an inference experiment, see DescribeInferenceExperimentResponse$Status. 
    */
@@ -4799,7 +4815,7 @@ declare namespace SageMaker {
      */
     ImageName: ImageName;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     * The ARN of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
      */
     RoleArn: RoleArn;
     /**
@@ -4809,7 +4825,7 @@ declare namespace SageMaker {
   }
   export interface CreateImageResponse {
     /**
-     * The Amazon Resource Name (ARN) of the image.
+     * The ARN of the image.
      */
     ImageArn?: ImageArn;
   }
@@ -4826,10 +4842,42 @@ declare namespace SageMaker {
      * The ImageName of the Image to create a version of.
      */
     ImageName: ImageName;
+    /**
+     * A list of aliases created with the image version.
+     */
+    Aliases?: SageMakerImageVersionAliases;
+    /**
+     * The stability of the image version, specified by the maintainer.    NOT_PROVIDED: The maintainers did not provide a status for image version stability.    STABLE: The image version is stable.    TO_BE_ARCHIVED: The image version is set to be archived. Custom image versions that are set to be archived are automatically archived after three months.    ARCHIVED: The image version is archived. Archived image versions are not searchable and are no longer actively supported.   
+     */
+    VendorGuidance?: VendorGuidance;
+    /**
+     * Indicates SageMaker job type compatibility.    TRAINING: The image version is compatible with SageMaker training jobs.    INFERENCE: The image version is compatible with SageMaker inference jobs.    NOTEBOOK_KERNEL: The image version is compatible with SageMaker notebook kernels.  
+     */
+    JobType?: JobType;
+    /**
+     * The machine learning framework vended in the image version.
+     */
+    MLFramework?: MLFramework;
+    /**
+     * The supported programming language and its version.
+     */
+    ProgrammingLang?: ProgrammingLang;
+    /**
+     * Indicates CPU or GPU compatibility.    CPU: The image version is compatible with CPU.    GPU: The image version is compatible with GPU.  
+     */
+    Processor?: Processor;
+    /**
+     * Indicates Horovod compatibility.
+     */
+    Horovod?: Horovod;
+    /**
+     * The maintainer description of the image version.
+     */
+    ReleaseNotes?: ReleaseNotes;
   }
   export interface CreateImageVersionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the image version.
+     * The ARN of the image version.
      */
     ImageVersionArn?: ImageVersionArn;
   }
@@ -6385,13 +6433,17 @@ declare namespace SageMaker {
   }
   export interface DeleteImageVersionRequest {
     /**
-     * The name of the image.
+     * The name of the image to delete.
      */
     ImageName: ImageName;
     /**
      * The version to delete.
      */
-    Version: ImageVersionNumber;
+    Version?: ImageVersionNumber;
+    /**
+     * The alias of the image to delete.
+     */
+    Alias?: SageMakerImageVersionAlias;
   }
   export interface DeleteImageVersionResponse {
   }
@@ -8067,7 +8119,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Name (ARN) of the image.
+     * The ARN of the image.
      */
     ImageArn?: ImageArn;
     /**
@@ -8083,7 +8135,7 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     * The ARN of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
      */
     RoleArn?: RoleArn;
   }
@@ -8096,6 +8148,10 @@ declare namespace SageMaker {
      * The version of the image. If not specified, the latest version is described.
      */
     Version?: ImageVersionNumber;
+    /**
+     * The alias of the image version.
+     */
+    Alias?: SageMakerImageVersionAlias;
   }
   export interface DescribeImageVersionResponse {
     /**
@@ -8115,7 +8171,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Name (ARN) of the image the version is based on.
+     * The ARN of the image the version is based on.
      */
     ImageArn?: ImageArn;
     /**
@@ -8134,6 +8190,34 @@ declare namespace SageMaker {
      * The version number.
      */
     Version?: ImageVersionNumber;
+    /**
+     * The stability of the image version specified by the maintainer.    NOT_PROVIDED: The maintainers did not provide a status for image version stability.    STABLE: The image version is stable.    TO_BE_ARCHIVED: The image version is set to be archived. Custom image versions that are set to be archived are automatically archived after three months.    ARCHIVED: The image version is archived. Archived image versions are not searchable and are no longer actively supported.   
+     */
+    VendorGuidance?: VendorGuidance;
+    /**
+     * Indicates SageMaker job type compatibility.    TRAINING: The image version is compatible with SageMaker training jobs.    INFERENCE: The image version is compatible with SageMaker inference jobs.    NOTEBOOK_KERNEL: The image version is compatible with SageMaker notebook kernels.  
+     */
+    JobType?: JobType;
+    /**
+     * The machine learning framework vended in the image version.
+     */
+    MLFramework?: MLFramework;
+    /**
+     * The supported programming language and its version.
+     */
+    ProgrammingLang?: ProgrammingLang;
+    /**
+     * Indicates CPU or GPU compatibility.    CPU: The image version is compatible with CPU.    GPU: The image version is compatible with GPU.  
+     */
+    Processor?: Processor;
+    /**
+     * Indicates Horovod compatibility.
+     */
+    Horovod?: Horovod;
+    /**
+     * The maintainer description of the image version.
+     */
+    ReleaseNotes?: ReleaseNotes;
   }
   export interface DescribeInferenceExperimentRequest {
     /**
@@ -11092,6 +11176,7 @@ declare namespace SageMaker {
   export type Group = string;
   export type Groups = Group[];
   export type HookParameters = {[key: string]: ConfigValue};
+  export type Horovod = boolean;
   export type HubArn = string;
   export type HubContentArn = string;
   export interface HubContentDependency {
@@ -11721,7 +11806,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Name (ARN) of the image.
+     * The ARN of the image.
      */
     ImageArn: ImageArn;
     /**
@@ -11771,7 +11856,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Name (ARN) of the image the version is based on.
+     * The ARN of the image the version is based on.
      */
     ImageArn: ImageArn;
     /**
@@ -12127,6 +12212,7 @@ declare namespace SageMaker {
   export type JobDurationInSeconds = number;
   export type JobReferenceCode = string;
   export type JobReferenceCodeContains = string;
+  export type JobType = "TRAINING"|"INFERENCE"|"NOTEBOOK_KERNEL"|string;
   export type JoinSource = "Input"|"None"|string;
   export type JsonContentType = string;
   export type JsonContentTypes = JsonContentType[];
@@ -12530,6 +12616,38 @@ declare namespace SageMaker {
     AlgorithmSummaryList: AlgorithmSummaryList;
     /**
      * If the response is truncated, SageMaker returns this token. To retrieve the next set of algorithms, use it in the subsequent request.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAliasesRequest {
+    /**
+     * The name of the image.
+     */
+    ImageName: ImageName;
+    /**
+     * The alias of the image version.
+     */
+    Alias?: SageMakerImageVersionAlias;
+    /**
+     * The version of the image. If image version is not specified, the aliases of all versions of the image are listed.
+     */
+    Version?: ImageVersionNumber;
+    /**
+     * The maximum number of aliases to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous call to ListAliases didn't return the full set of aliases, the call returns a token for retrieving the next set of aliases.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAliasesResponse {
+    /**
+     * A list of SageMaker image version aliases.
+     */
+    SageMakerImageVersionAliases?: SageMakerImageVersionAliases;
+    /**
+     * A token for getting the next set of aliases, if more aliases exist.
      */
     NextToken?: NextToken;
   }
@@ -15514,6 +15632,7 @@ declare namespace SageMaker {
   }
   export type ListWorkteamsSortByOptions = "Name"|"CreateDate"|string;
   export type Long = number;
+  export type MLFramework = string;
   export type MaxAutoMLJobRuntimeInSeconds = number;
   export type MaxCandidates = number;
   export type MaxConcurrentInvocationsPerInstance = number;
@@ -18026,6 +18145,7 @@ declare namespace SageMaker {
     MaxRuntimeInSeconds: ProcessingMaxRuntimeInSeconds;
   }
   export type ProcessingVolumeSizeInGB = number;
+  export type Processor = "CPU"|"GPU"|string;
   export type ProductId = string;
   export type ProductListings = String[];
   export interface ProductionVariant {
@@ -18247,6 +18367,7 @@ declare namespace SageMaker {
   export type ProfilingIntervalInMilliseconds = number;
   export type ProfilingParameters = {[key: string]: ConfigValue};
   export type ProfilingStatus = "Enabled"|"Disabled"|string;
+  export type ProgrammingLang = string;
   export interface Project {
     /**
      * The Amazon Resource Name (ARN) of the project.
@@ -18757,6 +18878,7 @@ declare namespace SageMaker {
      */
     Arn?: String256;
   }
+  export type ReleaseNotes = string;
   export interface RenderUiTemplateRequest {
     /**
      * A Template object containing the worker UI template to render.
@@ -18965,6 +19087,8 @@ declare namespace SageMaker {
     ResolvedOutputS3Uri?: S3Uri;
   }
   export type S3Uri = string;
+  export type SageMakerImageVersionAlias = string;
+  export type SageMakerImageVersionAliases = SageMakerImageVersionAlias[];
   export type SagemakerServicecatalogStatus = "Enabled"|"Disabled"|string;
   export type SamplingPercentage = number;
   export interface ScheduleConfig {
@@ -20843,15 +20967,71 @@ declare namespace SageMaker {
      */
     ImageName: ImageName;
     /**
-     * The new Amazon Resource Name (ARN) for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+     * The new ARN for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
      */
     RoleArn?: RoleArn;
   }
   export interface UpdateImageResponse {
     /**
-     * The Amazon Resource Name (ARN) of the image.
+     * The ARN of the image.
      */
     ImageArn?: ImageArn;
+  }
+  export interface UpdateImageVersionRequest {
+    /**
+     * The name of the image.
+     */
+    ImageName: ImageName;
+    /**
+     * The alias of the image version.
+     */
+    Alias?: SageMakerImageVersionAlias;
+    /**
+     * The version of the image.
+     */
+    Version?: ImageVersionNumber;
+    /**
+     * A list of aliases to add.
+     */
+    AliasesToAdd?: SageMakerImageVersionAliases;
+    /**
+     * A list of aliases to delete.
+     */
+    AliasesToDelete?: SageMakerImageVersionAliases;
+    /**
+     * The availability of the image version specified by the maintainer.    NOT_PROVIDED: The maintainers did not provide a status for image version stability.    STABLE: The image version is stable.    TO_BE_ARCHIVED: The image version is set to be archived. Custom image versions that are set to be archived are automatically archived after three months.    ARCHIVED: The image version is archived. Archived image versions are not searchable and are no longer actively supported.   
+     */
+    VendorGuidance?: VendorGuidance;
+    /**
+     * Indicates SageMaker job type compatibility.    TRAINING: The image version is compatible with SageMaker training jobs.    INFERENCE: The image version is compatible with SageMaker inference jobs.    NOTEBOOK_KERNEL: The image version is compatible with SageMaker notebook kernels.  
+     */
+    JobType?: JobType;
+    /**
+     * The machine learning framework vended in the image version.
+     */
+    MLFramework?: MLFramework;
+    /**
+     * The supported programming language and its version.
+     */
+    ProgrammingLang?: ProgrammingLang;
+    /**
+     * Indicates CPU or GPU compatibility.    CPU: The image version is compatible with CPU.    GPU: The image version is compatible with GPU.  
+     */
+    Processor?: Processor;
+    /**
+     * Indicates Horovod compatibility.
+     */
+    Horovod?: Horovod;
+    /**
+     * The maintainer description of the image version.
+     */
+    ReleaseNotes?: ReleaseNotes;
+  }
+  export interface UpdateImageVersionResponse {
+    /**
+     * The ARN of the image version.
+     */
+    ImageVersionArn?: ImageVersionArn;
   }
   export interface UpdateInferenceExperimentRequest {
     /**
@@ -21414,6 +21594,7 @@ declare namespace SageMaker {
   export type VariantStatus = "Creating"|"Updating"|"Deleting"|"ActivatingTraffic"|"Baking"|string;
   export type VariantStatusMessage = string;
   export type VariantWeight = number;
+  export type VendorGuidance = "NOT_PROVIDED"|"STABLE"|"TO_BE_ARCHIVED"|"ARCHIVED"|string;
   export type VersionId = string;
   export type VersionedArnOrName = string;
   export interface Vertex {

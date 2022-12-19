@@ -1521,13 +1521,27 @@ declare namespace ECS {
      */
     serviceConnectResources?: ServiceConnectServiceResourceList;
   }
+  export interface DeploymentAlarms {
+    /**
+     * One or more CloudWatch alarm names. Use a "," to separate the alarms.
+     */
+    alarmNames: StringList;
+    /**
+     * Determines whether to use the CloudWatch alarm option in the service deployment process.
+     */
+    enable: Boolean;
+    /**
+     * Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+     */
+    rollback: Boolean;
+  }
   export interface DeploymentCircuitBreaker {
     /**
      * Determines whether to use the deployment circuit breaker logic for the service.
      */
     enable: Boolean;
     /**
-     * Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+     * Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
      */
     rollback: Boolean;
   }
@@ -1544,6 +1558,10 @@ declare namespace ECS {
      * If a service is using the rolling update (ECS) deployment type, the minimumHealthyPercent represents a lower limit on the number of your service's tasks that must remain in the RUNNING state during a deployment, as a percentage of the desiredCount (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a desiredCount of four tasks and a minimumHealthyPercent of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks.  For services that do not use a load balancer, the following should be noted:   A service is considered healthy if all essential containers within the tasks in the service pass their health checks.   If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a RUNNING state before the task is counted towards the minimum healthy percent total.   If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings.    For services are that do use a load balancer, the following should be noted:   If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.   If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.   If a service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks that use the EC2 launch type, the minimum healthy percent value is set to the default value and is used to define the lower limit on the number of the tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. If a service is using either the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
      */
     minimumHealthyPercent?: BoxedInteger;
+    /**
+     * Information about the CloudWatch alarms.
+     */
+    alarms?: DeploymentAlarms;
   }
   export interface DeploymentController {
     /**

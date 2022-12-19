@@ -334,5 +334,6 @@ module.exports = {
   SageMakerGeospatial: require('./sagemakergeospatial'),
   CodeCatalyst: require('./codecatalyst'),
   Pipes: require('./pipes'),
-  SageMakerMetrics: require('./sagemakermetrics')
+  SageMakerMetrics: require('./sagemakermetrics'),
+  KinesisVideoWebRTCStorage: require('./kinesisvideowebrtcstorage')
 };
