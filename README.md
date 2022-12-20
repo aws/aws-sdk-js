@@ -111,7 +111,7 @@ Our goal is to keep these TypeScript definition files updated with each release 
 ### Pre-requisites
 Before you can begin using these TypeScript definitions with your project, you need to make sure your project meets a few of these requirements:
 
- * Use TypeScript v2.x
+ * Use latest version of TypeScript. We recommend 4.x+
  * Includes the TypeScript definitions for node. You can use npm to install this by typing the following into a terminal window:
 
     ```sh
