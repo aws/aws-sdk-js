@@ -406,7 +406,7 @@ declare namespace Batch {
      */
     imageId?: String;
     /**
-     * The VPC subnets where the compute resources are launched. These subnets must be within the same VPC. Fargate compute resources can contain up to 16 subnets. For more information, see VPCs and subnets in the Amazon VPC User Guide.
+     * The VPC subnets where the compute resources are launched. These subnets must be within the same VPC. Fargate compute resources can contain up to 16 subnets. For more information, see VPCs and subnets in the Amazon VPC User Guide.  Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more information, see  Local Zones in the Amazon EC2 User Guide for Linux Instances, Amazon EKS and Amazon Web Services Local Zones in the Amazon EKS User Guide and  Amazon ECS clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts in the Amazon ECS Developer Guide. Batch on Fargate doesn't currently support Local Zones. 
      */
     subnets: StringList;
     /**
@@ -430,7 +430,7 @@ declare namespace Batch {
      */
     placementGroup?: String;
     /**
-     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be less than 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
+     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be less than 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price. For most use cases, we recommend leaving this field empty.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
      */
     bidPercentage?: Integer;
     /**
@@ -460,7 +460,7 @@ declare namespace Batch {
      */
     desiredvCpus?: Integer;
     /**
-     * The VPC subnets where the compute resources are launched. Fargate compute resources can contain up to 16 subnets. For Fargate compute resources, providing an empty list will be handled as if this parameter wasn't specified and no change is made. For EC2 compute resources, providing an empty list removes the VPC subnets from the compute resource. For more information, see VPCs and subnets in the Amazon VPC User Guide. When updating a compute environment, changing the VPC subnets requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide.
+     * The VPC subnets where the compute resources are launched. Fargate compute resources can contain up to 16 subnets. For Fargate compute resources, providing an empty list will be handled as if this parameter wasn't specified and no change is made. For EC2 compute resources, providing an empty list removes the VPC subnets from the compute resource. For more information, see VPCs and subnets in the Amazon VPC User Guide. When updating a compute environment, changing the VPC subnets requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide.  Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more information, see  Local Zones in the Amazon EC2 User Guide for Linux Instances, Amazon EKS and Amazon Web Services Local Zones in the Amazon EKS User Guide and  Amazon ECS clusters in Local Zones, Wavelength Zones, and Amazon Web Services Outposts in the Amazon ECS Developer Guide. Batch on Fargate doesn't currently support Local Zones. 
      */
     subnets?: StringList;
     /**
@@ -492,7 +492,7 @@ declare namespace Batch {
      */
     placementGroup?: String;
     /**
-     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, the Spot price must be less than 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. When updating a compute environment, changing the bid percentage requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
+     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, the Spot price must be less than 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. For most use cases, we recommend leaving this field empty. When updating a compute environment, changing the bid percentage requires an infrastructure update of the compute environment. For more information, see Updating compute environments in the Batch User Guide.  This parameter isn't applicable to jobs that are running on Fargate resources. Don't specify it. 
      */
     bidPercentage?: Integer;
     /**
@@ -1620,6 +1620,14 @@ declare namespace Batch {
      * A list of job attempts that are associated with this job.
      */
     eksAttempts?: EksAttemptDetails;
+    /**
+     * Indicates whether the job is canceled.
+     */
+    isCancelled?: Boolean;
+    /**
+     * Indicates whether the job is terminated.
+     */
+    isTerminated?: Boolean;
   }
   export type JobDetailList = JobDetail[];
   export type JobExecutionTimeoutMinutes = number;
@@ -1716,7 +1724,7 @@ declare namespace Batch {
   export type JobSummaryList = JobSummary[];
   export interface JobTimeout {
     /**
-     * The job timeout time (in seconds) that's measured from the job attempt's startedAt timestamp. After this time passes, Batch terminates your jobs if they aren't finished. The minimum value for the timeout is 60 seconds.
+     * The job timeout time (in seconds) that's measured from the job attempt's startedAt timestamp. After this time passes, Batch terminates your jobs if they aren't finished. The minimum value for the timeout is 60 seconds. For array jobs, the timeout applies to the child jobs, not to the parent array job. For multi-node parallel (MNP) jobs, the timeout applies to the whole job, not to the individual nodes.
      */
     attemptDurationSeconds?: Integer;
   }

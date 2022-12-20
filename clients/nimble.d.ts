@@ -37,27 +37,27 @@ declare class Nimble extends Service {
    */
   createStreamingImage(callback?: (err: AWSError, data: Nimble.Types.CreateStreamingImageResponse) => void): Request<Nimble.Types.CreateStreamingImageResponse, AWSError>;
   /**
-   * Creates a streaming session in a studio. After invoking this operation, you must poll GetStreamingSession until the streaming session is in state READY.
+   * Creates a streaming session in a studio. After invoking this operation, you must poll GetStreamingSession until the streaming session is in the READY state.
    */
   createStreamingSession(params: Nimble.Types.CreateStreamingSessionRequest, callback?: (err: AWSError, data: Nimble.Types.CreateStreamingSessionResponse) => void): Request<Nimble.Types.CreateStreamingSessionResponse, AWSError>;
   /**
-   * Creates a streaming session in a studio. After invoking this operation, you must poll GetStreamingSession until the streaming session is in state READY.
+   * Creates a streaming session in a studio. After invoking this operation, you must poll GetStreamingSession until the streaming session is in the READY state.
    */
   createStreamingSession(callback?: (err: AWSError, data: Nimble.Types.CreateStreamingSessionResponse) => void): Request<Nimble.Types.CreateStreamingSessionResponse, AWSError>;
   /**
-   * Creates a streaming session stream for a streaming session. After invoking this API, invoke GetStreamingSessionStream with the returned streamId to poll the resource until it is in state READY.
+   * Creates a streaming session stream for a streaming session. After invoking this API, invoke GetStreamingSessionStream with the returned streamId to poll the resource until it is in the READY state.
    */
   createStreamingSessionStream(params: Nimble.Types.CreateStreamingSessionStreamRequest, callback?: (err: AWSError, data: Nimble.Types.CreateStreamingSessionStreamResponse) => void): Request<Nimble.Types.CreateStreamingSessionStreamResponse, AWSError>;
   /**
-   * Creates a streaming session stream for a streaming session. After invoking this API, invoke GetStreamingSessionStream with the returned streamId to poll the resource until it is in state READY.
+   * Creates a streaming session stream for a streaming session. After invoking this API, invoke GetStreamingSessionStream with the returned streamId to poll the resource until it is in the READY state.
    */
   createStreamingSessionStream(callback?: (err: AWSError, data: Nimble.Types.CreateStreamingSessionStreamResponse) => void): Request<Nimble.Types.CreateStreamingSessionStreamResponse, AWSError>;
   /**
-   * Create a new Studio. When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
+   * Create a new studio. When creating a studio, two IAM roles must be provided: the admin role and the user role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The admin role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
    */
   createStudio(params: Nimble.Types.CreateStudioRequest, callback?: (err: AWSError, data: Nimble.Types.CreateStudioResponse) => void): Request<Nimble.Types.CreateStudioResponse, AWSError>;
   /**
-   * Create a new Studio. When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
+   * Create a new studio. When creating a studio, two IAM roles must be provided: the admin role and the user role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The admin role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
    */
   createStudio(callback?: (err: AWSError, data: Nimble.Types.CreateStudioResponse) => void): Request<Nimble.Types.CreateStudioResponse, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class Nimble extends Service {
    */
   deleteStudioMember(callback?: (err: AWSError, data: Nimble.Types.DeleteStudioMemberResponse) => void): Request<Nimble.Types.DeleteStudioMemberResponse, AWSError>;
   /**
-   * Get Eula.
+   * Get EULA.
    */
   getEula(params: Nimble.Types.GetEulaRequest, callback?: (err: AWSError, data: Nimble.Types.GetEulaResponse) => void): Request<Nimble.Types.GetEulaResponse, AWSError>;
   /**
-   * Get Eula.
+   * Get EULA.
    */
   getEula(callback?: (err: AWSError, data: Nimble.Types.GetEulaResponse) => void): Request<Nimble.Types.GetEulaResponse, AWSError>;
   /**
@@ -181,19 +181,27 @@ declare class Nimble extends Service {
    */
   getStreamingSession(callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionResponse) => void): Request<Nimble.Types.GetStreamingSessionResponse, AWSError>;
   /**
-   * Gets a StreamingSessionStream for a streaming session. Invoke this operation to poll the resource after invoking CreateStreamingSessionStream. After the StreamingSessionStream changes to the state READY, the url property will contain a stream to be used with the DCV streaming client.
+   * Gets StreamingSessionBackup resource. Invoke this operation to poll for a streaming session backup while stopping a streaming session.
+   */
+  getStreamingSessionBackup(params: Nimble.Types.GetStreamingSessionBackupRequest, callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionBackupResponse) => void): Request<Nimble.Types.GetStreamingSessionBackupResponse, AWSError>;
+  /**
+   * Gets StreamingSessionBackup resource. Invoke this operation to poll for a streaming session backup while stopping a streaming session.
+   */
+  getStreamingSessionBackup(callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionBackupResponse) => void): Request<Nimble.Types.GetStreamingSessionBackupResponse, AWSError>;
+  /**
+   * Gets a StreamingSessionStream for a streaming session. Invoke this operation to poll the resource after invoking CreateStreamingSessionStream. After the StreamingSessionStream changes to the READY state, the url property will contain a stream to be used with the DCV streaming client.
    */
   getStreamingSessionStream(params: Nimble.Types.GetStreamingSessionStreamRequest, callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionStreamResponse) => void): Request<Nimble.Types.GetStreamingSessionStreamResponse, AWSError>;
   /**
-   * Gets a StreamingSessionStream for a streaming session. Invoke this operation to poll the resource after invoking CreateStreamingSessionStream. After the StreamingSessionStream changes to the state READY, the url property will contain a stream to be used with the DCV streaming client.
+   * Gets a StreamingSessionStream for a streaming session. Invoke this operation to poll the resource after invoking CreateStreamingSessionStream. After the StreamingSessionStream changes to the READY state, the url property will contain a stream to be used with the DCV streaming client.
    */
   getStreamingSessionStream(callback?: (err: AWSError, data: Nimble.Types.GetStreamingSessionStreamResponse) => void): Request<Nimble.Types.GetStreamingSessionStreamResponse, AWSError>;
   /**
-   * Get a Studio resource.
+   * Get a studio resource.
    */
   getStudio(params: Nimble.Types.GetStudioRequest, callback?: (err: AWSError, data: Nimble.Types.GetStudioResponse) => void): Request<Nimble.Types.GetStudioResponse, AWSError>;
   /**
-   * Get a Studio resource.
+   * Get a studio resource.
    */
   getStudio(callback?: (err: AWSError, data: Nimble.Types.GetStudioResponse) => void): Request<Nimble.Types.GetStudioResponse, AWSError>;
   /**
@@ -213,19 +221,19 @@ declare class Nimble extends Service {
    */
   getStudioMember(callback?: (err: AWSError, data: Nimble.Types.GetStudioMemberResponse) => void): Request<Nimble.Types.GetStudioMemberResponse, AWSError>;
   /**
-   * List Eula Acceptances.
+   * List EULA acceptances.
    */
   listEulaAcceptances(params: Nimble.Types.ListEulaAcceptancesRequest, callback?: (err: AWSError, data: Nimble.Types.ListEulaAcceptancesResponse) => void): Request<Nimble.Types.ListEulaAcceptancesResponse, AWSError>;
   /**
-   * List Eula Acceptances.
+   * List EULA acceptances.
    */
   listEulaAcceptances(callback?: (err: AWSError, data: Nimble.Types.ListEulaAcceptancesResponse) => void): Request<Nimble.Types.ListEulaAcceptancesResponse, AWSError>;
   /**
-   * List Eulas.
+   * List EULAs.
    */
   listEulas(params: Nimble.Types.ListEulasRequest, callback?: (err: AWSError, data: Nimble.Types.ListEulasResponse) => void): Request<Nimble.Types.ListEulasResponse, AWSError>;
   /**
-   * List Eulas.
+   * List EULAs.
    */
   listEulas(callback?: (err: AWSError, data: Nimble.Types.ListEulasResponse) => void): Request<Nimble.Types.ListEulasResponse, AWSError>;
   /**
@@ -253,6 +261,14 @@ declare class Nimble extends Service {
    */
   listStreamingImages(callback?: (err: AWSError, data: Nimble.Types.ListStreamingImagesResponse) => void): Request<Nimble.Types.ListStreamingImagesResponse, AWSError>;
   /**
+   * Lists the backups of a streaming session in a studio.
+   */
+  listStreamingSessionBackups(params: Nimble.Types.ListStreamingSessionBackupsRequest, callback?: (err: AWSError, data: Nimble.Types.ListStreamingSessionBackupsResponse) => void): Request<Nimble.Types.ListStreamingSessionBackupsResponse, AWSError>;
+  /**
+   * Lists the backups of a streaming session in a studio.
+   */
+  listStreamingSessionBackups(callback?: (err: AWSError, data: Nimble.Types.ListStreamingSessionBackupsResponse) => void): Request<Nimble.Types.ListStreamingSessionBackupsResponse, AWSError>;
+  /**
    * Lists the streaming sessions in a studio.
    */
   listStreamingSessions(params: Nimble.Types.ListStreamingSessionsRequest, callback?: (err: AWSError, data: Nimble.Types.ListStreamingSessionsResponse) => void): Request<Nimble.Types.ListStreamingSessionsResponse, AWSError>;
@@ -277,11 +293,11 @@ declare class Nimble extends Service {
    */
   listStudioMembers(callback?: (err: AWSError, data: Nimble.Types.ListStudioMembersResponse) => void): Request<Nimble.Types.ListStudioMembersResponse, AWSError>;
   /**
-   * List studios in your Amazon Web Services account in the requested Amazon Web Services Region.
+   * List studios in your Amazon Web Services accounts in the requested Amazon Web Services Region.
    */
   listStudios(params: Nimble.Types.ListStudiosRequest, callback?: (err: AWSError, data: Nimble.Types.ListStudiosResponse) => void): Request<Nimble.Types.ListStudiosResponse, AWSError>;
   /**
-   * List studios in your Amazon Web Services account in the requested Amazon Web Services Region.
+   * List studios in your Amazon Web Services accounts in the requested Amazon Web Services Region.
    */
   listStudios(callback?: (err: AWSError, data: Nimble.Types.ListStudiosResponse) => void): Request<Nimble.Types.ListStudiosResponse, AWSError>;
   /**
@@ -309,11 +325,11 @@ declare class Nimble extends Service {
    */
   putStudioMembers(callback?: (err: AWSError, data: Nimble.Types.PutStudioMembersResponse) => void): Request<Nimble.Types.PutStudioMembersResponse, AWSError>;
   /**
-   *  Transitions sessions from the STOPPED state into the READY state. The START_IN_PROGRESS state is the intermediate state between the STOPPED and READY states.
+   * Transitions sessions from the STOPPED state into the READY state. The START_IN_PROGRESS state is the intermediate state between the STOPPED and READY states.
    */
   startStreamingSession(params: Nimble.Types.StartStreamingSessionRequest, callback?: (err: AWSError, data: Nimble.Types.StartStreamingSessionResponse) => void): Request<Nimble.Types.StartStreamingSessionResponse, AWSError>;
   /**
-   *  Transitions sessions from the STOPPED state into the READY state. The START_IN_PROGRESS state is the intermediate state between the STOPPED and READY states.
+   * Transitions sessions from the STOPPED state into the READY state. The START_IN_PROGRESS state is the intermediate state between the STOPPED and READY states.
    */
   startStreamingSession(callback?: (err: AWSError, data: Nimble.Types.StartStreamingSessionResponse) => void): Request<Nimble.Types.StartStreamingSessionResponse, AWSError>;
   /**
@@ -488,7 +504,7 @@ declare class Nimble extends Service {
 declare namespace Nimble {
   export interface AcceptEulasRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -536,6 +552,7 @@ declare namespace Nimble {
   export type ActiveDirectoryDnsIpAddress = string;
   export type ActiveDirectoryDnsIpAddressList = ActiveDirectoryDnsIpAddress[];
   export type ActiveDirectoryOrganizationalUnitDistinguishedName = string;
+  export type AutomaticTerminationMode = "DEACTIVATED"|"ACTIVATED"|string;
   export type ClientToken = string;
   export interface ComputeFarmConfiguration {
     /**
@@ -549,7 +566,7 @@ declare namespace Nimble {
   }
   export interface CreateLaunchProfileRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -581,7 +598,7 @@ declare namespace Nimble {
      */
     studioId: String;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
   }
@@ -593,7 +610,7 @@ declare namespace Nimble {
   }
   export interface CreateStreamingImageRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -613,7 +630,7 @@ declare namespace Nimble {
      */
     studioId: String;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
   }
@@ -625,7 +642,7 @@ declare namespace Nimble {
   }
   export interface CreateStreamingSessionRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -633,9 +650,9 @@ declare namespace Nimble {
      */
     ec2InstanceType?: StreamingInstanceType;
     /**
-     * The launch profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
-    launchProfileId?: String;
+    launchProfileId: String;
     /**
      * The user ID of the user that owns the streaming session. The user that owns the session will be logging into the session and interacting with the virtual workstation.
      */
@@ -649,7 +666,7 @@ declare namespace Nimble {
      */
     studioId: String;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
   }
@@ -661,7 +678,7 @@ declare namespace Nimble {
   }
   export interface CreateStreamingSessionStreamRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -685,7 +702,7 @@ declare namespace Nimble {
   }
   export interface CreateStudioComponentRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -709,7 +726,7 @@ declare namespace Nimble {
      */
     name: StudioComponentName;
     /**
-     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     * An IAM role attached to a Studio Component that gives the studio component access to Amazon Web Services resources at anytime while the instance is running. 
      */
     runtimeRoleArn?: RoleArn;
     /**
@@ -717,7 +734,7 @@ declare namespace Nimble {
      */
     scriptParameters?: StudioComponentScriptParameterKeyValueList;
     /**
-     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to Amazon Web Services resources when the system initialization script runs.
      */
     secureInitializationRoleArn?: RoleArn;
     /**
@@ -729,7 +746,7 @@ declare namespace Nimble {
      */
     subtype?: StudioComponentSubtype;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
     /**
@@ -745,11 +762,11 @@ declare namespace Nimble {
   }
   export interface CreateStudioRequest {
     /**
-     * The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.
+     * The IAM role that studio admins will assume when logging in to the Nimble Studio portal.
      */
     adminRoleArn: RoleArn;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -765,11 +782,11 @@ declare namespace Nimble {
      */
     studioName: StudioName;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
     /**
-     * The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.
+     * The IAM role that studio users will assume when logging in to the Nimble Studio portal.
      */
     userRoleArn: RoleArn;
   }
@@ -781,11 +798,11 @@ declare namespace Nimble {
   }
   export interface DeleteLaunchProfileMemberRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -801,11 +818,11 @@ declare namespace Nimble {
   }
   export interface DeleteLaunchProfileRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -821,7 +838,7 @@ declare namespace Nimble {
   }
   export interface DeleteStreamingImageRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -841,7 +858,7 @@ declare namespace Nimble {
   }
   export interface DeleteStreamingSessionRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -861,7 +878,7 @@ declare namespace Nimble {
   }
   export interface DeleteStudioComponentRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -881,7 +898,7 @@ declare namespace Nimble {
   }
   export interface DeleteStudioMemberRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -897,7 +914,7 @@ declare namespace Nimble {
   }
   export interface DeleteStudioRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -921,7 +938,7 @@ declare namespace Nimble {
      */
     content?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -933,13 +950,13 @@ declare namespace Nimble {
      */
     name?: EulaName;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was updated.
+     * The ISO timestamp in seconds for when the resource was updated.
      */
     updatedAt?: Timestamp;
   }
   export interface EulaAcceptance {
     /**
-     * The Unix epoch timestamp in seconds for when the EULA was accepted.
+     * The ISO timestamp in seconds for when the EULA was accepted.
      */
     acceptedAt?: Timestamp;
     /**
@@ -979,7 +996,7 @@ declare namespace Nimble {
   }
   export interface GetLaunchProfileDetailsRequest {
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -1003,7 +1020,7 @@ declare namespace Nimble {
   }
   export interface GetLaunchProfileInitializationRequest {
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -1015,7 +1032,7 @@ declare namespace Nimble {
      */
     launchPurpose: String;
     /**
-     * The platform where this Launch Profile will be used, either WINDOWS or LINUX.
+     * The platform where this Launch Profile will be used, either Windows or Linux.
      */
     platform: String;
     /**
@@ -1031,7 +1048,7 @@ declare namespace Nimble {
   }
   export interface GetLaunchProfileMemberRequest {
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -1051,7 +1068,7 @@ declare namespace Nimble {
   }
   export interface GetLaunchProfileRequest {
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -1080,6 +1097,22 @@ declare namespace Nimble {
      * The streaming image.
      */
     streamingImage?: StreamingImage;
+  }
+  export interface GetStreamingSessionBackupRequest {
+    /**
+     * The ID of the backup.
+     */
+    backupId: String;
+    /**
+     * The studio ID. 
+     */
+    studioId: String;
+  }
+  export interface GetStreamingSessionBackupResponse {
+    /**
+     * Information about the streaming session backup.
+     */
+    streamingSessionBackup?: StreamingSessionBackup;
   }
   export interface GetStreamingSessionRequest {
     /**
@@ -1163,11 +1196,11 @@ declare namespace Nimble {
   }
   export interface LaunchProfile {
     /**
-     * The ARN of the resource.
+     * The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
      */
     arn?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -1183,7 +1216,7 @@ declare namespace Nimble {
      */
     ec2SubnetIds?: EC2SubnetIdList;
     /**
-     * The launch profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId?: LaunchProfileId;
     /**
@@ -1215,11 +1248,11 @@ declare namespace Nimble {
      */
     studioComponentIds?: LaunchProfileStudioComponentIdList;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was updated.
+     * The ISO timestamp in seconds for when the resource was updated.
      */
     updatedAt?: Timestamp;
     /**
@@ -1243,7 +1276,7 @@ declare namespace Nimble {
      */
     ec2SecurityGroupIds?: LaunchProfileSecurityGroupIdList;
     /**
-     * The launch profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId?: LaunchProfileId;
     /**
@@ -1259,7 +1292,7 @@ declare namespace Nimble {
      */
     name?: LaunchProfileName;
     /**
-     * The platform of the launch platform, either WINDOWS or LINUX.
+     * The platform of the launch platform, either Windows or Linux.
      */
     platform?: LaunchProfilePlatform;
     /**
@@ -1303,7 +1336,7 @@ declare namespace Nimble {
   }
   export interface LaunchProfileInitializationScript {
     /**
-     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     * An IAM role attached to a Studio Component that gives the studio component access to Amazon Web Services resources at anytime while the instance is running. 
      */
     runtimeRoleArn?: RoleArn;
     /**
@@ -1311,7 +1344,7 @@ declare namespace Nimble {
      */
     script?: StudioComponentInitializationScriptContent;
     /**
-     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to Amazon Web Services resources when the system initialization script runs.
      */
     secureInitializationRoleArn?: RoleArn;
     /**
@@ -1372,7 +1405,7 @@ declare namespace Nimble {
      */
     eulaIds?: StringList;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1396,7 +1429,7 @@ declare namespace Nimble {
      */
     eulaIds?: StringList;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
   }
@@ -1412,7 +1445,7 @@ declare namespace Nimble {
   }
   export interface ListLaunchProfileMembersRequest {
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -1420,7 +1453,7 @@ declare namespace Nimble {
      */
     maxResults?: MaxResults;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1444,7 +1477,7 @@ declare namespace Nimble {
      */
     maxResults?: MaxResults;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1472,7 +1505,7 @@ declare namespace Nimble {
   }
   export interface ListStreamingImagesRequest {
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1494,13 +1527,37 @@ declare namespace Nimble {
      */
     streamingImages?: StreamingImageList;
   }
+  export interface ListStreamingSessionBackupsRequest {
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    nextToken?: String;
+    /**
+     * The user ID of the user that owns the streaming session.
+     */
+    ownedBy?: String;
+    /**
+     * The studio ID. 
+     */
+    studioId: String;
+  }
+  export interface ListStreamingSessionBackupsResponse {
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    nextToken?: String;
+    /**
+     * Information about the streaming session backups.
+     */
+    streamingSessionBackups?: StreamingSessionBackupList;
+  }
   export interface ListStreamingSessionsRequest {
     /**
      * Filters the request to streaming sessions created by the given user.
      */
     createdBy?: String;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1532,7 +1589,7 @@ declare namespace Nimble {
      */
     maxResults?: MaxResults;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1564,7 +1621,7 @@ declare namespace Nimble {
      */
     maxResults?: MaxResults;
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
     /**
@@ -1584,7 +1641,7 @@ declare namespace Nimble {
   }
   export interface ListStudiosRequest {
     /**
-     * The token to request the next page of results. 
+     * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: String;
   }
@@ -1606,7 +1663,7 @@ declare namespace Nimble {
   }
   export interface ListTagsForResourceResponse {
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
   }
@@ -1635,7 +1692,7 @@ declare namespace Nimble {
   export type NewStudioMemberList = NewStudioMember[];
   export interface PutLaunchProfileMembersRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -1643,7 +1700,7 @@ declare namespace Nimble {
      */
     identityStoreId: String;
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -1659,7 +1716,7 @@ declare namespace Nimble {
   }
   export interface PutStudioMembersRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -1693,6 +1750,8 @@ declare namespace Nimble {
   export type ScriptParameterValue = string;
   export type SecurityGroupId = string;
   export type SensitiveString = string;
+  export type SessionBackupMode = "AUTOMATIC"|"DEACTIVATED"|string;
+  export type SessionPersistenceMode = "DEACTIVATED"|"ACTIVATED"|string;
   export interface SharedFileSystemConfiguration {
     /**
      * The endpoint of the shared file system that is accessed by the studio component resource.
@@ -1717,7 +1776,11 @@ declare namespace Nimble {
   }
   export interface StartStreamingSessionRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * The ID of the backup.
+     */
+    backupId?: String;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -1734,7 +1797,7 @@ declare namespace Nimble {
   }
   export interface StartStudioSSOConfigurationRepairRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -1750,7 +1813,7 @@ declare namespace Nimble {
   }
   export interface StopStreamingSessionRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -1761,13 +1824,21 @@ declare namespace Nimble {
      * The studioId for the StopStreamingSessionRequest.
      */
     studioId: String;
+    /**
+     * Adds additional instructions to a streaming session stop action to either retain the EBS volumes or delete the EBS volumes.
+     */
+    volumeRetentionMode?: VolumeRetentionMode;
   }
   export interface StopStreamingSessionResponse {
     session?: StreamingSession;
   }
   export interface StreamConfiguration {
     /**
-     * Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
+     * Indicates if a streaming session created from this launch profile should be terminated automatically or retained without termination after being in a STOPPED state.   When ACTIVATED, the streaming session is scheduled for termination after being in the STOPPED state for the time specified in maxStoppedSessionLengthInMinutes.   When DEACTIVATED, the streaming session can remain in the STOPPED state indefinitely.   This parameter is only allowed when sessionPersistenceMode is ACTIVATED. When allowed, the default value for this parameter is DEACTIVATED.
+     */
+    automaticTerminationMode?: AutomaticTerminationMode;
+    /**
+     * Allows or deactivates the use of the system clipboard to copy and paste between the streaming session and streaming client.
      */
     clipboardMode: StreamingClipboardMode;
     /**
@@ -1779,21 +1850,37 @@ declare namespace Nimble {
      */
     maxSessionLengthInMinutes?: StreamConfigurationMaxSessionLengthInMinutes;
     /**
-     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped (instead of terminated).
+     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. This field is allowed only when sessionPersistenceMode is ACTIVATED and automaticTerminationMode is ACTIVATED. If the value is set to 0, your sessions can’t be STOPPED. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated (instead of STOPPED). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped (instead of terminated).
      */
     maxStoppedSessionLengthInMinutes?: StreamConfigurationMaxStoppedSessionLengthInMinutes;
     /**
-     * (Optional) The upload storage for a streaming session.
+     * Information about the streaming session backup.
+     */
+    sessionBackup?: StreamConfigurationSessionBackup;
+    /**
+     * Determine if a streaming session created from this launch profile can configure persistent storage. This means that volumeConfiguration and automaticTerminationMode are configured.
+     */
+    sessionPersistenceMode?: SessionPersistenceMode;
+    /**
+     * The upload storage for a streaming session.
      */
     sessionStorage?: StreamConfigurationSessionStorage;
     /**
      * The streaming images that users can select from when launching a streaming session with this launch profile.
      */
     streamingImageIds: StreamingImageIdList;
+    /**
+     * Custom volume configuration for the root volumes that are attached to streaming sessions. This parameter is only allowed when sessionPersistenceMode is ACTIVATED.
+     */
+    volumeConfiguration?: VolumeConfiguration;
   }
   export interface StreamConfigurationCreate {
     /**
-     * Enable or disable the use of the system clipboard to copy and paste between the streaming session and streaming client.
+     * Indicates if a streaming session created from this launch profile should be terminated automatically or retained without termination after being in a STOPPED state.   When ACTIVATED, the streaming session is scheduled for termination after being in the STOPPED state for the time specified in maxStoppedSessionLengthInMinutes.   When DEACTIVATED, the streaming session can remain in the STOPPED state indefinitely.   This parameter is only allowed when sessionPersistenceMode is ACTIVATED. When allowed, the default value for this parameter is DEACTIVATED.
+     */
+    automaticTerminationMode?: AutomaticTerminationMode;
+    /**
+     * Allows or deactivates the use of the system clipboard to copy and paste between the streaming session and streaming client.
      */
     clipboardMode: StreamingClipboardMode;
     /**
@@ -1805,20 +1892,43 @@ declare namespace Nimble {
      */
     maxSessionLengthInMinutes?: StreamConfigurationMaxSessionLengthInMinutes;
     /**
-     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated (instead of stopped). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped (instead of terminated).
+     * Integer that determines if you can start and stop your sessions and how long a session can stay in the STOPPED state. The default value is 0. The maximum value is 5760. This field is allowed only when sessionPersistenceMode is ACTIVATED and automaticTerminationMode is ACTIVATED. If the value is set to 0, your sessions can’t be STOPPED. If you then call StopStreamingSession, the session fails. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be terminated (instead of STOPPED). If the value is set to a positive number, the session can be stopped. You can call StopStreamingSession to stop sessions in the READY state. If the time that a session stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will automatically be stopped (instead of terminated).
      */
     maxStoppedSessionLengthInMinutes?: StreamConfigurationMaxStoppedSessionLengthInMinutes;
     /**
-     * (Optional) The upload storage for a streaming workstation that is created using this launch profile.
+     * Configures how streaming sessions are backed up when launched from this launch profile.
+     */
+    sessionBackup?: StreamConfigurationSessionBackup;
+    /**
+     * Determine if a streaming session created from this launch profile can configure persistent storage. This means that volumeConfiguration and automaticTerminationMode are configured.
+     */
+    sessionPersistenceMode?: SessionPersistenceMode;
+    /**
+     * The upload storage for a streaming workstation that is created using this launch profile.
      */
     sessionStorage?: StreamConfigurationSessionStorage;
     /**
      * The streaming images that users can select from when launching a streaming session with this launch profile.
      */
     streamingImageIds: StreamingImageIdList;
+    /**
+     * Custom volume configuration for the root volumes that are attached to streaming sessions. This parameter is only allowed when sessionPersistenceMode is ACTIVATED.
+     */
+    volumeConfiguration?: VolumeConfiguration;
   }
+  export type StreamConfigurationMaxBackupsToRetain = number;
   export type StreamConfigurationMaxSessionLengthInMinutes = number;
   export type StreamConfigurationMaxStoppedSessionLengthInMinutes = number;
+  export interface StreamConfigurationSessionBackup {
+    /**
+     * The maximum number of backups that each streaming session created from this launch profile can have.
+     */
+    maxBackupsToRetain?: StreamConfigurationMaxBackupsToRetain;
+    /**
+     * Specifies how artists sessions are backed up. Configures backups for streaming sessions launched with this launch profile. The default value is DEACTIVATED, which means that backups are deactivated. To allow backups, set this value to AUTOMATIC.
+     */
+    mode?: SessionBackupMode;
+  }
   export interface StreamConfigurationSessionStorage {
     /**
      * Allows artists to upload files to their workstations. The only valid option is UPLOAD.
@@ -1832,7 +1942,7 @@ declare namespace Nimble {
   export type StreamingClipboardMode = "ENABLED"|"DISABLED"|string;
   export interface StreamingImage {
     /**
-     * The ARN of the resource.
+     * The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
      */
     arn?: String;
     /**
@@ -1856,11 +1966,11 @@ declare namespace Nimble {
      */
     name?: StreamingImageName;
     /**
-     * The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.
+     * The owner of the streaming image, either the studioId that contains the streaming image, or amazon for images that are provided by Amazon Nimble Studio.
      */
     owner?: StreamingImageOwner;
     /**
-     * The platform of the streaming image, either WINDOWS or LINUX.
+     * The platform of the streaming image, either Windows or Linux.
      */
     platform?: StreamingImagePlatform;
     /**
@@ -1880,7 +1990,7 @@ declare namespace Nimble {
      */
     streamingImageId?: StreamingImageId;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
   }
@@ -1909,11 +2019,19 @@ declare namespace Nimble {
   export type StreamingInstanceTypeList = StreamingInstanceType[];
   export interface StreamingSession {
     /**
-     * The ARN of the resource.
+     * The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
      */
     arn?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * Indicates if a streaming session created from this launch profile should be terminated automatically or retained without termination after being in a STOPPED state.   When ACTIVATED, the streaming session is scheduled for termination after being in the STOPPED state for the time specified in maxStoppedSessionLengthInMinutes.   When DEACTIVATED, the streaming session can remain in the STOPPED state indefinitely.   This parameter is only allowed when sessionPersistenceMode is ACTIVATED. When allowed, the default value for this parameter is DEACTIVATED.
+     */
+    automaticTerminationMode?: AutomaticTerminationMode;
+    /**
+     * Shows the current backup setting of the session.
+     */
+    backupMode?: SessionBackupMode;
+    /**
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -1929,6 +2047,10 @@ declare namespace Nimble {
      */
     launchProfileId?: String;
     /**
+     * The maximum number of backups of a streaming session that you can have. When the maximum number of backups is reached, the oldest backup is deleted.
+     */
+    maxBackupsToRetain?: StreamConfigurationMaxBackupsToRetain;
+    /**
      * The user ID of the user that owns the streaming session. The user that owns the session will be logging into the session and interacting with the virtual workstation.
      */
     ownedBy?: String;
@@ -1937,6 +2059,10 @@ declare namespace Nimble {
      */
     sessionId?: StreamingSessionId;
     /**
+     * Determine if a streaming session created from this launch profile can configure persistent storage. This means that volumeConfiguration and automaticTerminationMode are configured.
+     */
+    sessionPersistenceMode?: SessionPersistenceMode;
+    /**
      * The time the session entered START_IN_PROGRESS state.
      */
     startedAt?: Timestamp;
@@ -1944,6 +2070,10 @@ declare namespace Nimble {
      * The user ID of the user that started the streaming session.
      */
     startedBy?: String;
+    /**
+     * The backup ID used to restore a streaming session.
+     */
+    startedFromBackupId?: String;
     /**
      * The current state.
      */
@@ -1973,7 +2103,7 @@ declare namespace Nimble {
      */
     streamingImageId?: StreamingImageId;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
     /**
@@ -1981,14 +2111,62 @@ declare namespace Nimble {
      */
     terminateAt?: Timestamp;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was updated.
+     * The ISO timestamp in seconds for when the resource was updated.
      */
     updatedAt?: Timestamp;
     /**
      * The user ID of the user that most recently updated the resource.
      */
     updatedBy?: String;
+    /**
+     * Custom volume configuration for the root volumes that are attached to streaming sessions. This parameter is only allowed when sessionPersistenceMode is ACTIVATED.
+     */
+    volumeConfiguration?: VolumeConfiguration;
+    /**
+     * Determine if an EBS volume created from this streaming session will be backed up.
+     */
+    volumeRetentionMode?: VolumeRetentionMode;
   }
+  export interface StreamingSessionBackup {
+    /**
+     * The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
+     */
+    arn?: String;
+    /**
+     * The ID of the backup.
+     */
+    backupId?: String;
+    /**
+     * The ISO timestamp in for when the resource was created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The ID of the launch profile which allowed the backups for the streaming session.
+     */
+    launchProfileId?: String;
+    /**
+     * The user ID of the user that owns the streaming session.
+     */
+    ownedBy?: String;
+    /**
+     * The streaming session ID for the StreamingSessionBackup.
+     */
+    sessionId?: StreamingSessionId;
+    state?: StreamingSessionState;
+    /**
+     * The status code.
+     */
+    statusCode?: StreamingSessionStatusCode;
+    /**
+     * The status message for the streaming session backup.
+     */
+    statusMessage?: String;
+    /**
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
+     */
+    tags?: Tags;
+  }
+  export type StreamingSessionBackupList = StreamingSessionBackup[];
   export type StreamingSessionId = string;
   export type StreamingSessionList = StreamingSession[];
   export type StreamingSessionState = "CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"READY"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|"STOP_IN_PROGRESS"|"START_IN_PROGRESS"|"STOPPED"|"STOP_FAILED"|"START_FAILED"|string;
@@ -2009,7 +2187,7 @@ declare namespace Nimble {
   export type StreamingSessionStorageRootPathWindows = string;
   export interface StreamingSessionStream {
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -2017,7 +2195,7 @@ declare namespace Nimble {
      */
     createdBy?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the resource expires.
+     * The ISO timestamp in seconds for when the resource expires.
      */
     expiresAt?: Timestamp;
     /**
@@ -2056,7 +2234,7 @@ declare namespace Nimble {
      */
     arn?: String;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -2068,7 +2246,7 @@ declare namespace Nimble {
      */
     homeRegion?: Region;
     /**
-     * The IAM Identity Center application client ID used to integrate with IAM Identity Center to enable IAM Identity Center users to log in to Nimble Studio portal.
+     * The IAM Identity Center application client ID used to integrate with IAM Identity Center. This ID allows IAM Identity Center users to log in to Nimble Studio portal.
      */
     ssoClientId?: String;
     /**
@@ -2100,11 +2278,11 @@ declare namespace Nimble {
      */
     studioUrl?: String;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was updated.
+     * The ISO timestamp in seconds for when the resource was updated.
      */
     updatedAt?: Timestamp;
     /**
@@ -2114,7 +2292,7 @@ declare namespace Nimble {
   }
   export interface StudioComponent {
     /**
-     * The ARN of the resource.
+     * The Amazon Resource Name (ARN) that is assigned to a studio resource and uniquely identifies it. ARNs are unique across all Regions.
      */
     arn?: String;
     /**
@@ -2122,7 +2300,7 @@ declare namespace Nimble {
      */
     configuration?: StudioComponentConfiguration;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -2146,7 +2324,7 @@ declare namespace Nimble {
      */
     name?: StudioComponentName;
     /**
-     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     * An IAM role attached to a Studio Component that gives the studio component access to Amazon Web Services resources at anytime while the instance is running. 
      */
     runtimeRoleArn?: RoleArn;
     /**
@@ -2154,7 +2332,7 @@ declare namespace Nimble {
      */
     scriptParameters?: StudioComponentScriptParameterKeyValueList;
     /**
-     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to Amazon Web Services resources when the system initialization script runs.
      */
     secureInitializationRoleArn?: RoleArn;
     /**
@@ -2178,7 +2356,7 @@ declare namespace Nimble {
      */
     subtype?: StudioComponentSubtype;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
     /**
@@ -2186,7 +2364,7 @@ declare namespace Nimble {
      */
     type?: StudioComponentType;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was updated.
+     * The ISO timestamp in seconds for when the resource was updated.
      */
     updatedAt?: Timestamp;
     /**
@@ -2196,7 +2374,7 @@ declare namespace Nimble {
   }
   export interface StudioComponentConfiguration {
     /**
-     * The configuration for a Microsoft Active Directory (Microsoft AD) studio resource.
+     * The configuration for a Directory Service for Microsoft Active Directory studio resource.
      */
     activeDirectoryConfiguration?: ActiveDirectoryConfiguration;
     /**
@@ -2220,7 +2398,7 @@ declare namespace Nimble {
      */
     launchProfileProtocolVersion?: LaunchProfileProtocolVersion;
     /**
-     * The platform of the initialization script, either WINDOWS or LINUX.
+     * The platform of the initialization script, either Windows or Linux.
      */
     platform?: LaunchProfilePlatform;
     /**
@@ -2245,7 +2423,7 @@ declare namespace Nimble {
   export type StudioComponentSubtype = "AWS_MANAGED_MICROSOFT_AD"|"AMAZON_FSX_FOR_WINDOWS"|"AMAZON_FSX_FOR_LUSTRE"|"CUSTOM"|string;
   export interface StudioComponentSummary {
     /**
-     * The Unix epoch timestamp in seconds for when the resource was created.
+     * The ISO timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
@@ -2273,7 +2451,7 @@ declare namespace Nimble {
      */
     type?: StudioComponentType;
     /**
-     * The Unix epoch timestamp in seconds for when the resource was updated.
+     * The ISO timestamp in seconds for when the resource was updated.
      */
     updatedAt?: Timestamp;
     /**
@@ -2320,14 +2498,14 @@ declare namespace Nimble {
   export type StudioName = string;
   export type StudioPersona = "ADMINISTRATOR"|string;
   export type StudioState = "CREATE_IN_PROGRESS"|"READY"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"DELETED"|"DELETE_FAILED"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
-  export type StudioStatusCode = "STUDIO_CREATED"|"STUDIO_DELETED"|"STUDIO_UPDATED"|"STUDIO_CREATE_IN_PROGRESS"|"STUDIO_UPDATE_IN_PROGRESS"|"STUDIO_DELETE_IN_PROGRESS"|"STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED"|"STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED"|"STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED"|"AWS_SSO_NOT_ENABLED"|"AWS_SSO_ACCESS_DENIED"|"ROLE_NOT_OWNED_BY_STUDIO_OWNER"|"ROLE_COULD_NOT_BE_ASSUMED"|"INTERNAL_ERROR"|"ENCRYPTION_KEY_NOT_FOUND"|"ENCRYPTION_KEY_ACCESS_DENIED"|"AWS_SSO_CONFIGURATION_REPAIRED"|"AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"|string;
+  export type StudioStatusCode = "STUDIO_CREATED"|"STUDIO_DELETED"|"STUDIO_UPDATED"|"STUDIO_CREATE_IN_PROGRESS"|"STUDIO_UPDATE_IN_PROGRESS"|"STUDIO_DELETE_IN_PROGRESS"|"STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED"|"STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED"|"STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED"|"AWS_SSO_NOT_ENABLED"|"AWS_SSO_ACCESS_DENIED"|"ROLE_NOT_OWNED_BY_STUDIO_OWNER"|"ROLE_COULD_NOT_BE_ASSUMED"|"INTERNAL_ERROR"|"ENCRYPTION_KEY_NOT_FOUND"|"ENCRYPTION_KEY_ACCESS_DENIED"|"AWS_SSO_CONFIGURATION_REPAIRED"|"AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"|"AWS_STS_REGION_DISABLED"|string;
   export interface TagResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) of the resource you want to add tags to. 
+     * The Amazon Resource Name (ARN) of the resource you want to add tags to. 
      */
     resourceArn: String;
     /**
-     * A collection of labels, in the form of key:value pairs, that apply to this resource.
+     * A collection of labels, in the form of key-value pairs, that apply to this resource.
      */
     tags?: Tags;
   }
@@ -2349,11 +2527,11 @@ declare namespace Nimble {
   }
   export interface UpdateLaunchProfileMemberRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -2377,7 +2555,7 @@ declare namespace Nimble {
   }
   export interface UpdateLaunchProfileRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -2385,7 +2563,7 @@ declare namespace Nimble {
      */
     description?: LaunchProfileDescription;
     /**
-     * The Launch Profile ID.
+     * The ID of the launch profile used to control access from the streaming session.
      */
     launchProfileId: String;
     /**
@@ -2417,7 +2595,7 @@ declare namespace Nimble {
   }
   export interface UpdateStreamingImageRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -2442,7 +2620,7 @@ declare namespace Nimble {
   }
   export interface UpdateStudioComponentRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -2466,7 +2644,7 @@ declare namespace Nimble {
      */
     name?: StudioComponentName;
     /**
-     * An IAM role attached to a Studio Component that gives the studio component access to AWS resources at anytime while the instance is running. 
+     * An IAM role attached to a Studio Component that gives the studio component access to Amazon Web Services resources at anytime while the instance is running. 
      */
     runtimeRoleArn?: RoleArn;
     /**
@@ -2474,7 +2652,7 @@ declare namespace Nimble {
      */
     scriptParameters?: StudioComponentScriptParameterKeyValueList;
     /**
-     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to AWS resources when the system initialization script runs.
+     * An IAM role attached to Studio Component when the system initialization script runs which give the studio component access to Amazon Web Services resources when the system initialization script runs.
      */
     secureInitializationRoleArn?: RoleArn;
     /**
@@ -2506,7 +2684,7 @@ declare namespace Nimble {
      */
     adminRoleArn?: RoleArn;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the AWS SDK automatically generates a client token and uses it for the request to ensure idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency.
      */
     clientToken?: ClientToken;
     /**
@@ -2547,6 +2725,24 @@ declare namespace Nimble {
     type: LaunchProfileValidationType;
   }
   export type ValidationResults = ValidationResult[];
+  export interface VolumeConfiguration {
+    /**
+     * The number of I/O operations per second for the root volume that is attached to streaming session.
+     */
+    iops?: VolumeIops;
+    /**
+     * The size of the root volume that is attached to the streaming session. The root volume size is measured in GiBs.
+     */
+    size?: VolumeSizeInGiB;
+    /**
+     * The throughput to provision for the root volume that is attached to the streaming session. The throughput is measured in MiB/s.
+     */
+    throughput?: VolumeThroughputInMiBs;
+  }
+  export type VolumeIops = number;
+  export type VolumeRetentionMode = "RETAIN"|"DELETE"|string;
+  export type VolumeSizeInGiB = number;
+  export type VolumeThroughputInMiBs = number;
   export type WindowsMountDrive = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

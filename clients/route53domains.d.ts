@@ -20,6 +20,14 @@ declare class Route53Domains extends Service {
    */
   acceptDomainTransferFromAnotherAwsAccount(callback?: (err: AWSError, data: Route53Domains.Types.AcceptDomainTransferFromAnotherAwsAccountResponse) => void): Request<Route53Domains.Types.AcceptDomainTransferFromAnotherAwsAccountResponse, AWSError>;
   /**
+   *  Creates a delegation signer (DS) record in the registry zone for this domain name. Note that creating DS record at the registry impacts DNSSEC validation of your DNS records. This action may render your domain name unavailable on the internet if the steps are completed in the wrong order, or with incorrect timing. For more information about DNSSEC signing, see Configuring DNSSEC signing in the Route 53 developer guide.
+   */
+  associateDelegationSignerToDomain(params: Route53Domains.Types.AssociateDelegationSignerToDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.AssociateDelegationSignerToDomainResponse) => void): Request<Route53Domains.Types.AssociateDelegationSignerToDomainResponse, AWSError>;
+  /**
+   *  Creates a delegation signer (DS) record in the registry zone for this domain name. Note that creating DS record at the registry impacts DNSSEC validation of your DNS records. This action may render your domain name unavailable on the internet if the steps are completed in the wrong order, or with incorrect timing. For more information about DNSSEC signing, see Configuring DNSSEC signing in the Route 53 developer guide.
+   */
+  associateDelegationSignerToDomain(callback?: (err: AWSError, data: Route53Domains.Types.AssociateDelegationSignerToDomainResponse) => void): Request<Route53Domains.Types.AssociateDelegationSignerToDomainResponse, AWSError>;
+  /**
    * Cancels the transfer of a domain from the current Amazon Web Services account to another Amazon Web Services account. You initiate a transfer betweenAmazon Web Services accounts using TransferDomainToAnotherAwsAccount.   You must cancel the transfer before the other Amazon Web Services account accepts the transfer using AcceptDomainTransferFromAnotherAwsAccount.  Use either ListOperations or GetOperationDetail to determine whether the operation succeeded. GetOperationDetail provides additional information, for example, Domain Transfer from Aws Account 111122223333 has been cancelled. 
    */
   cancelDomainTransferToAnotherAwsAccount(params: Route53Domains.Types.CancelDomainTransferToAnotherAwsAccountRequest, callback?: (err: AWSError, data: Route53Domains.Types.CancelDomainTransferToAnotherAwsAccountResponse) => void): Request<Route53Domains.Types.CancelDomainTransferToAnotherAwsAccountResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class Route53Domains extends Service {
    * This operation removes the transfer lock on the domain (specifically the clientTransferProhibited status) to allow domain transfers. We recommend you refrain from performing this action unless you intend to transfer the domain to a different registrar. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   disableDomainTransferLock(callback?: (err: AWSError, data: Route53Domains.Types.DisableDomainTransferLockResponse) => void): Request<Route53Domains.Types.DisableDomainTransferLockResponse, AWSError>;
+  /**
+   * Deletes a delegation signer (DS) record in the registry zone for this domain name.
+   */
+  disassociateDelegationSignerFromDomain(params: Route53Domains.Types.DisassociateDelegationSignerFromDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.DisassociateDelegationSignerFromDomainResponse) => void): Request<Route53Domains.Types.DisassociateDelegationSignerFromDomainResponse, AWSError>;
+  /**
+   * Deletes a delegation signer (DS) record in the registry zone for this domain name.
+   */
+  disassociateDelegationSignerFromDomain(callback?: (err: AWSError, data: Route53Domains.Types.DisassociateDelegationSignerFromDomainResponse) => void): Request<Route53Domains.Types.DisassociateDelegationSignerFromDomainResponse, AWSError>;
   /**
    * This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your Amazon Web Services account. The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see Domains That You Can Register with Amazon Route 53 in the Amazon Route 53 Developer Guide. Route 53 requires that you renew before the end of the renewal period so we can complete processing before the deadline.
    */
@@ -156,11 +172,19 @@ declare class Route53Domains extends Service {
    */
   listTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.ListTagsForDomainResponse) => void): Request<Route53Domains.Types.ListTagsForDomainResponse, AWSError>;
   /**
-   * This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Route 53 hosted zone that has the same name as the domain. Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don't enable privacy protection, WHOIS queries return the information that you entered for the administrative, registrant, and technical contacts.  You must specify the same privacy setting for the administrative, registrant, and technical contacts.    If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your Amazon Web Services account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
+   *  Moves a domain from Amazon Web Services to another registrar.  Supported actions:   Changes the IPS tags of a .uk domain, and pushes it to transit. Transit means that the domain is ready to be transferred to another registrar.  
+   */
+  pushDomain(params: Route53Domains.Types.PushDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Moves a domain from Amazon Web Services to another registrar.  Supported actions:   Changes the IPS tags of a .uk domain, and pushes it to transit. Transit means that the domain is ready to be transferred to another registrar.  
+   */
+  pushDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Route 53 hosted zone that has the same name as the domain. Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables auto renew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don't enable privacy protection, WHOIS queries return the information that you entered for the administrative, registrant, and technical contacts.  You must specify the same privacy setting for the administrative, registrant, and technical contacts.    If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your Amazon Web Services account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
    */
   registerDomain(params: Route53Domains.Types.RegisterDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.RegisterDomainResponse) => void): Request<Route53Domains.Types.RegisterDomainResponse, AWSError>;
   /**
-   * This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Route 53 hosted zone that has the same name as the domain. Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don't enable privacy protection, WHOIS queries return the information that you entered for the administrative, registrant, and technical contacts.  You must specify the same privacy setting for the administrative, registrant, and technical contacts.    If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your Amazon Web Services account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
+   * This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Route 53 hosted zone that has the same name as the domain. Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables auto renew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don't enable privacy protection, WHOIS queries return the information that you entered for the administrative, registrant, and technical contacts.  You must specify the same privacy setting for the administrative, registrant, and technical contacts.    If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your Amazon Web Services account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
    */
   registerDomain(callback?: (err: AWSError, data: Route53Domains.Types.RegisterDomainResponse) => void): Request<Route53Domains.Types.RegisterDomainResponse, AWSError>;
   /**
@@ -188,11 +212,19 @@ declare class Route53Domains extends Service {
    */
   resendContactReachabilityEmail(callback?: (err: AWSError, data: Route53Domains.Types.ResendContactReachabilityEmailResponse) => void): Request<Route53Domains.Types.ResendContactReachabilityEmailResponse, AWSError>;
   /**
-   * This operation returns the AuthCode for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.
+   *  Resend the form of authorization email for this operation. 
+   */
+  resendOperationAuthorization(params: Route53Domains.Types.ResendOperationAuthorizationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Resend the form of authorization email for this operation. 
+   */
+  resendOperationAuthorization(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This operation returns the authorization code for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.
    */
   retrieveDomainAuthCode(params: Route53Domains.Types.RetrieveDomainAuthCodeRequest, callback?: (err: AWSError, data: Route53Domains.Types.RetrieveDomainAuthCodeResponse) => void): Request<Route53Domains.Types.RetrieveDomainAuthCodeResponse, AWSError>;
   /**
-   * This operation returns the AuthCode for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.
+   * This operation returns the authorization code for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.
    */
   retrieveDomainAuthCode(callback?: (err: AWSError, data: Route53Domains.Types.RetrieveDomainAuthCodeResponse) => void): Request<Route53Domains.Types.RetrieveDomainAuthCodeResponse, AWSError>;
   /**
@@ -212,11 +244,11 @@ declare class Route53Domains extends Service {
    */
   transferDomainToAnotherAwsAccount(callback?: (err: AWSError, data: Route53Domains.Types.TransferDomainToAnotherAwsAccountResponse) => void): Request<Route53Domains.Types.TransferDomainToAnotherAwsAccountResponse, AWSError>;
   /**
-   * This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the operation. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   updateDomainContact(params: Route53Domains.Types.UpdateDomainContactRequest, callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactResponse) => void): Request<Route53Domains.Types.UpdateDomainContactResponse, AWSError>;
   /**
-   * This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the operation. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   updateDomainContact(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactResponse) => void): Request<Route53Domains.Types.UpdateDomainContactResponse, AWSError>;
   /**
@@ -271,6 +303,22 @@ declare namespace Route53Domains {
   }
   export type AccountId = string;
   export type AddressLine = string;
+  export interface AssociateDelegationSignerToDomainRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The information about a key, including the algorithm, public key-value, and flags.
+     */
+    SigningAttributes: DnssecSigningAttributes;
+  }
+  export interface AssociateDelegationSignerToDomainResponse {
+    /**
+     * The identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
+     */
+    OperationId?: OperationId;
+  }
   export interface BillingRecord {
     /**
      * The name of the domain that the billing record applies to. If the domain name contains characters other than a-z, 0-9, and - (hyphen), such as an internationalized domain name, then this value is in Punycode. For more information, see DNS Domain Name Format in the Amazon Route 53 Developer Guide.
@@ -321,7 +369,7 @@ declare namespace Route53Domains {
     /**
      * Whether the domain name is available for registering.  You can register only domains designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
      */
-    Availability: DomainAvailability;
+    Availability?: DomainAvailability;
   }
   export interface CheckDomainTransferabilityRequest {
     /**
@@ -337,9 +385,19 @@ declare namespace Route53Domains {
     /**
      * A complex type that contains information about whether the specified domain can be transferred to Route 53.
      */
-    Transferability: DomainTransferability;
+    Transferability?: DomainTransferability;
   }
   export type City = string;
+  export interface Consent {
+    /**
+     *  Maximum amount the customer agreed to accept. 
+     */
+    MaxPrice: Price;
+    /**
+     *  Currency for the MaxPrice. 
+     */
+    Currency: Currency;
+  }
   export interface ContactDetail {
     /**
      * First name of contact.
@@ -447,7 +505,69 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
+  }
+  export interface DisassociateDelegationSignerFromDomainRequest {
+    /**
+     * Name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * An internal identification number assigned to each DS record after it’s created. You can retrieve it as part of DNSSEC information returned by GetDomainDetail.
+     */
+    Id: String;
+  }
+  export interface DisassociateDelegationSignerFromDomainResponse {
+    /**
+     * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
+     */
+    OperationId?: OperationId;
+  }
+  export interface DnssecKey {
+    /**
+     * The number of the public key’s cryptographic algorithm according to an IANA assignment.  If Route 53 is your DNS service, set this to 13. For more information about enabling DNSSEC signing, see Enabling DNSSEC signing and establishing a chain of trust.
+     */
+    Algorithm?: NullableInteger;
+    /**
+     * Defines the type of key. It can be either a KSK (key-signing-key, value 257) or ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK if your DNS provider isn't Route 53 and you don’t have KSK available. If you have KSK and ZSK keys, always use KSK to create a delegations signer (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
+     */
+    Flags?: NullableInteger;
+    /**
+     * The base64-encoded public key part of the key pair that is passed to the registry .
+     */
+    PublicKey?: DnssecPublicKey;
+    /**
+     *  The number of the DS digest algorithm according to an IANA assignment. For more information, see IANA for DNSSEC Delegation Signer (DS) Resource Record (RR) Type Digest Algorithms. 
+     */
+    DigestType?: NullableInteger;
+    /**
+     *  The delegation signer digest. Digest is calculated from the public key provided using specified digest algorithm and this digest is the actual value returned from the registry nameservers as the value of DS records. 
+     */
+    Digest?: String;
+    /**
+     *  A numeric identification of the DNSKEY record referred to by this DS record. 
+     */
+    KeyTag?: NullableInteger;
+    /**
+     *  An ID assigned to each DS record created by AssociateDelegationSignerToDomain. 
+     */
+    Id?: String;
+  }
+  export type DnssecKeyList = DnssecKey[];
+  export type DnssecPublicKey = string;
+  export interface DnssecSigningAttributes {
+    /**
+     *  Algorithm which was used to generate the digest from the public key. 
+     */
+    Algorithm?: NullableInteger;
+    /**
+     * Defines the type of key. It can be either a KSK (key-signing-key, value 257) or ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK if your DNS provider isn't Route 53 and you don’t have KSK available. If you have KSK and ZSK keys, always use KSK to create a delegations signer (DS) record. If you have ZSK keys only – use ZSK to create a DS record.
+     */
+    Flags?: NullableInteger;
+    /**
+     *  The base64-encoded public key part of the key pair that is passed to the registry. 
+     */
+    PublicKey?: DnssecPublicKey;
   }
   export type DomainAuthCode = string;
   export type DomainAvailability = "AVAILABLE"|"AVAILABLE_RESERVED"|"AVAILABLE_PREORDER"|"UNAVAILABLE"|"UNAVAILABLE_PREMIUM"|"UNAVAILABLE_RESTRICTED"|"RESERVED"|"DONT_KNOW"|string;
@@ -497,7 +617,7 @@ declare namespace Route53Domains {
     /**
      * The name of the domain that the summary information applies to.
      */
-    DomainName: DomainName;
+    DomainName?: DomainName;
     /**
      * Indicates whether the domain is automatically renewed upon expiration.
      */
@@ -535,12 +655,12 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export type ErrorMessage = string;
   export interface ExtraParam {
     /**
-     * The name of an additional parameter that is required by a top-level domain. Here are the top-level domains that require additional parameters and the names of the parameters that they require:  .com.au and .net.au     AU_ID_NUMBER     AU_ID_TYPE  Valid values include the following:    ABN (Australian business number)    ACN (Australian company number)    TM (Trademark number)      .ca     BRAND_NUMBER     CA_BUSINESS_ENTITY_TYPE  Valid values include the following:    BANK (Bank)    COMMERCIAL_COMPANY (Commercial company)    COMPANY (Company)    COOPERATION (Cooperation)    COOPERATIVE (Cooperative)    COOPRIX (Cooprix)    CORP (Corporation)    CREDIT_UNION (Credit union)    FOMIA (Federation of mutual insurance associations)    INC (Incorporated)    LTD (Limited)    LTEE (Limitée)    LLC (Limited liability corporation)    LLP (Limited liability partnership)    LTE (Lte.)    MBA (Mutual benefit association)    MIC (Mutual insurance company)    NFP (Not-for-profit corporation)    SA (S.A.)    SAVINGS_COMPANY (Savings company)    SAVINGS_UNION (Savings union)    SARL (Société à responsabilité limitée)    TRUST (Trust)    ULC (Unlimited liability corporation)      CA_LEGAL_TYPE  When ContactType is PERSON, valid values include the following:    ABO (Aboriginal Peoples indigenous to Canada)    CCT (Canadian citizen)    LGR (Legal Representative of a Canadian Citizen or Permanent Resident)    RES (Permanent resident of Canada)   When ContactType is a value other than PERSON, valid values include the following:    ASS (Canadian unincorporated association)    CCO (Canadian corporation)    EDU (Canadian educational institution)    GOV (Government or government entity in Canada)    HOP (Canadian Hospital)    INB (Indian Band recognized by the Indian Act of Canada)    LAM (Canadian Library, Archive, or Museum)    MAJ (Her/His Majesty the Queen/King)    OMK (Official mark registered in Canada)    PLT (Canadian Political Party)    PRT (Partnership Registered in Canada)    TDM (Trademark registered in Canada)    TRD (Canadian Trade Union)    TRS (Trust established in Canada)      .es     ES_IDENTIFICATION  The value of ES_IDENTIFICATION depends on the following values:   The value of ES_LEGAL_FORM    The value of ES_IDENTIFICATION_TYPE     If ES_LEGAL_FORM is any value other than INDIVIDUAL:    Specify 1 letter + 8 numbers (CIF [Certificado de Identificación Fiscal])   Example: B12345678    If ES_LEGAL_FORM is INDIVIDUAL, the value that you specify for ES_IDENTIFICATION depends on the value of ES_IDENTIFICATION_TYPE:    If ES_IDENTIFICATION_TYPE is DNI_AND_NIF (for Spanish contacts):   Specify 8 numbers + 1 letter (DNI [Documento Nacional de Identidad], NIF [Número de Identificación Fiscal])   Example: 12345678M     If ES_IDENTIFICATION_TYPE is NIE (for foreigners with legal residence):   Specify 1 letter + 7 numbers + 1 letter ( NIE [Número de Identidad de Extranjero])   Example: Y1234567X     If ES_IDENTIFICATION_TYPE is OTHER (for contacts outside of Spain):   Specify a passport number, drivers license number, or national identity card number        ES_IDENTIFICATION_TYPE  Valid values include the following:    DNI_AND_NIF (For Spanish contacts)    NIE (For foreigners with legal residence)    OTHER (For contacts outside of Spain)      ES_LEGAL_FORM  Valid values include the following:    ASSOCIATION     CENTRAL_GOVERNMENT_BODY     CIVIL_SOCIETY     COMMUNITY_OF_OWNERS     COMMUNITY_PROPERTY     CONSULATE     COOPERATIVE     DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL     ECONOMIC_INTEREST_GROUP     EMBASSY     ENTITY_MANAGING_NATURAL_AREAS     FARM_PARTNERSHIP     FOUNDATION     GENERAL_AND_LIMITED_PARTNERSHIP     GENERAL_PARTNERSHIP     INDIVIDUAL     LIMITED_COMPANY     LOCAL_AUTHORITY     LOCAL_PUBLIC_ENTITY     MUTUAL_INSURANCE_COMPANY     NATIONAL_PUBLIC_ENTITY     ORDER_OR_RELIGIOUS_INSTITUTION     OTHERS (Only for contacts outside of Spain)     POLITICAL_PARTY     PROFESSIONAL_ASSOCIATION     PUBLIC_LAW_ASSOCIATION     PUBLIC_LIMITED_COMPANY     REGIONAL_GOVERNMENT_BODY     REGIONAL_PUBLIC_ENTITY     SAVINGS_BANK     SPANISH_OFFICE     SPORTS_ASSOCIATION     SPORTS_FEDERATION     SPORTS_LIMITED_COMPANY     TEMPORARY_ALLIANCE_OF_ENTERPRISES     TRADE_UNION     WORKER_OWNED_COMPANY     WORKER_OWNED_LIMITED_COMPANY       .eu      EU_COUNTRY_OF_CITIZENSHIP     .fi     BIRTH_DATE_IN_YYYY_MM_DD     FI_BUSINESS_NUMBER     FI_ID_NUMBER     FI_NATIONALITY  Valid values include the following:    FINNISH     NOT_FINNISH       FI_ORGANIZATION_TYPE  Valid values include the following:    COMPANY     CORPORATION     GOVERNMENT     INSTITUTION     POLITICAL_PARTY     PUBLIC_COMMUNITY     TOWNSHIP       .fr     BIRTH_CITY     BIRTH_COUNTRY     BIRTH_DATE_IN_YYYY_MM_DD     BIRTH_DEPARTMENT: Specify the INSEE code that corresponds with the department where the contact was born. If the contact was born somewhere other than France or its overseas departments, specify 99. For more information, including a list of departments and the corresponding INSEE numbers, see the Wikipedia entry Departments of France.    BRAND_NUMBER     .it     IT_NATIONALITY     IT_PIN     IT_REGISTRANT_ENTITY_TYPE  Valid values include the following:    FOREIGNERS     FREELANCE_WORKERS (Freelance workers and professionals)    ITALIAN_COMPANIES (Italian companies and one-person companies)    NON_PROFIT_ORGANIZATIONS     OTHER_SUBJECTS     PUBLIC_ORGANIZATIONS       .ru     BIRTH_DATE_IN_YYYY_MM_DD     RU_PASSPORT_DATA     .se     BIRTH_COUNTRY     SE_ID_NUMBER     .sg     SG_ID_NUMBER     .co.uk, .me.uk, and .org.uk     UK_CONTACT_TYPE  Valid values include the following:    CRC (UK Corporation by Royal Charter)    FCORP (Non-UK Corporation)    FIND (Non-UK Individual, representing self)    FOTHER (Non-UK Entity that does not fit into any other category)    GOV (UK Government Body)    IND (UK Individual (representing self))    IP (UK Industrial/Provident Registered Company)    LLP (UK Limited Liability Partnership)    LTD (UK Limited Company)    OTHER (UK Entity that does not fit into any other category)    PLC (UK Public Limited Company)    PTNR (UK Partnership)    RCHAR (UK Registered Charity)    SCH (UK School)    STAT (UK Statutory Body)    STRA (UK Sole Trader)      UK_COMPANY_NUMBER      In addition, many TLDs require a VAT_NUMBER.
+     * The name of an additional parameter that is required by a top-level domain. Here are the top-level domains that require additional parameters and the names of the parameters that they require:  .com.au and .net.au     AU_ID_NUMBER     AU_ID_TYPE  Valid values include the following:    ABN (Australian business number)    ACN (Australian company number)    TM (Trademark number)      .ca     BRAND_NUMBER     CA_BUSINESS_ENTITY_TYPE  Valid values include the following:    BANK (Bank)    COMMERCIAL_COMPANY (Commercial company)    COMPANY (Company)    COOPERATION (Cooperation)    COOPERATIVE (Cooperative)    COOPRIX (Cooprix)    CORP (Corporation)    CREDIT_UNION (Credit union)    FOMIA (Federation of mutual insurance associations)    INC (Incorporated)    LTD (Limited)    LTEE (Limitée)    LLC (Limited liability corporation)    LLP (Limited liability partnership)    LTE (Lte.)    MBA (Mutual benefit association)    MIC (Mutual insurance company)    NFP (Not-for-profit corporation)    SA (S.A.)    SAVINGS_COMPANY (Savings company)    SAVINGS_UNION (Savings union)    SARL (Société à responsabilité limitée)    TRUST (Trust)    ULC (Unlimited liability corporation)      CA_LEGAL_TYPE  When ContactType is PERSON, valid values include the following:    ABO (Aboriginal Peoples indigenous to Canada)    CCT (Canadian citizen)    LGR (Legal Representative of a Canadian Citizen or Permanent Resident)    RES (Permanent resident of Canada)   When ContactType is a value other than PERSON, valid values include the following:    ASS (Canadian unincorporated association)    CCO (Canadian corporation)    EDU (Canadian educational institution)    GOV (Government or government entity in Canada)    HOP (Canadian Hospital)    INB (Indian Band recognized by the Indian Act of Canada)    LAM (Canadian Library, Archive, or Museum)    MAJ (Her/His Majesty the Queen/King)    OMK (Official mark registered in Canada)    PLT (Canadian Political Party)    PRT (Partnership Registered in Canada)    TDM (Trademark registered in Canada)    TRD (Canadian Trade Union)    TRS (Trust established in Canada)      .es     ES_IDENTIFICATION  The value of ES_IDENTIFICATION depends on the following values:   The value of ES_LEGAL_FORM    The value of ES_IDENTIFICATION_TYPE     If ES_LEGAL_FORM is any value other than INDIVIDUAL:    Specify 1 letter + 8 numbers (CIF [Certificado de Identificación Fiscal])   Example: B12345678    If ES_LEGAL_FORM is INDIVIDUAL, the value that you specify for ES_IDENTIFICATION depends on the value of ES_IDENTIFICATION_TYPE:    If ES_IDENTIFICATION_TYPE is DNI_AND_NIF (for Spanish contacts):   Specify 8 numbers + 1 letter (DNI [Documento Nacional de Identidad], NIF [Número de Identificación Fiscal])   Example: 12345678M     If ES_IDENTIFICATION_TYPE is NIE (for foreigners with legal residence):   Specify 1 letter + 7 numbers + 1 letter ( NIE [Número de Identidad de Extranjero])   Example: Y1234567X     If ES_IDENTIFICATION_TYPE is OTHER (for contacts outside of Spain):   Specify a passport number, drivers license number, or national identity card number        ES_IDENTIFICATION_TYPE  Valid values include the following:    DNI_AND_NIF (For Spanish contacts)    NIE (For foreigners with legal residence)    OTHER (For contacts outside of Spain)      ES_LEGAL_FORM  Valid values include the following:    ASSOCIATION     CENTRAL_GOVERNMENT_BODY     CIVIL_SOCIETY     COMMUNITY_OF_OWNERS     COMMUNITY_PROPERTY     CONSULATE     COOPERATIVE     DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL     ECONOMIC_INTEREST_GROUP     EMBASSY     ENTITY_MANAGING_NATURAL_AREAS     FARM_PARTNERSHIP     FOUNDATION     GENERAL_AND_LIMITED_PARTNERSHIP     GENERAL_PARTNERSHIP     INDIVIDUAL     LIMITED_COMPANY     LOCAL_AUTHORITY     LOCAL_PUBLIC_ENTITY     MUTUAL_INSURANCE_COMPANY     NATIONAL_PUBLIC_ENTITY     ORDER_OR_RELIGIOUS_INSTITUTION     OTHERS (Only for contacts outside of Spain)     POLITICAL_PARTY     PROFESSIONAL_ASSOCIATION     PUBLIC_LAW_ASSOCIATION     PUBLIC_LIMITED_COMPANY     REGIONAL_GOVERNMENT_BODY     REGIONAL_PUBLIC_ENTITY     SAVINGS_BANK     SPANISH_OFFICE     SPORTS_ASSOCIATION     SPORTS_FEDERATION     SPORTS_LIMITED_COMPANY     TEMPORARY_ALLIANCE_OF_ENTERPRISES     TRADE_UNION     WORKER_OWNED_COMPANY     WORKER_OWNED_LIMITED_COMPANY       .eu      EU_COUNTRY_OF_CITIZENSHIP     .fi     BIRTH_DATE_IN_YYYY_MM_DD     FI_BUSINESS_NUMBER     FI_ID_NUMBER     FI_NATIONALITY  Valid values include the following:    FINNISH     NOT_FINNISH       FI_ORGANIZATION_TYPE  Valid values include the following:    COMPANY     CORPORATION     GOVERNMENT     INSTITUTION     POLITICAL_PARTY     PUBLIC_COMMUNITY     TOWNSHIP       .fr     BIRTH_CITY     BIRTH_COUNTRY     BIRTH_DATE_IN_YYYY_MM_DD     BIRTH_DEPARTMENT: Specify the INSEE code that corresponds with the department where the contact was born. If the contact was born somewhere other than France or its overseas departments, specify 99. For more information, including a list of departments and the corresponding INSEE numbers, see the Wikipedia entry Departments of France.    BRAND_NUMBER     .it     IT_NATIONALITY     IT_PIN     IT_REGISTRANT_ENTITY_TYPE  Valid values include the following:    FOREIGNERS     FREELANCE_WORKERS (Freelance workers and professionals)    ITALIAN_COMPANIES (Italian companies and one-person companies)    NON_PROFIT_ORGANIZATIONS     OTHER_SUBJECTS     PUBLIC_ORGANIZATIONS       .ru     BIRTH_DATE_IN_YYYY_MM_DD     RU_PASSPORT_DATA     .se     BIRTH_COUNTRY     SE_ID_NUMBER     .sg     SG_ID_NUMBER     .uk, .co.uk, .me.uk, and .org.uk     UK_CONTACT_TYPE  Valid values include the following:    CRC (UK Corporation by Royal Charter)    FCORP (Non-UK Corporation)    FIND (Non-UK Individual, representing self)    FOTHER (Non-UK Entity that does not fit into any other category)    GOV (UK Government Body)    IND (UK Individual (representing self))    IP (UK Industrial/Provident Registered Company)    LLP (UK Limited Liability Partnership)    LTD (UK Limited Company)    OTHER (UK Entity that does not fit into any other category)    PLC (UK Public Limited Company)    PTNR (UK Partnership)    RCHAR (UK Registered Charity)    SCH (UK School)    STAT (UK Statutory Body)    STRA (UK Sole Trader)      UK_COMPANY_NUMBER      In addition, many TLDs require a VAT_NUMBER.
      */
     Name: ExtraParamName;
     /**
@@ -549,7 +669,7 @@ declare namespace Route53Domains {
     Value: ExtraParamValue;
   }
   export type ExtraParamList = ExtraParam[];
-  export type ExtraParamName = "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"CA_LEGAL_REPRESENTATIVE"|"CA_LEGAL_REPRESENTATIVE_CAPACITY"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"FI_NATIONALITY"|"FI_ORGANIZATION_TYPE"|"IT_NATIONALITY"|"IT_PIN"|"IT_REGISTRANT_ENTITY_TYPE"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER"|"UK_CONTACT_TYPE"|"UK_COMPANY_NUMBER"|"EU_COUNTRY_OF_CITIZENSHIP"|string;
+  export type ExtraParamName = "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"CA_LEGAL_REPRESENTATIVE"|"CA_LEGAL_REPRESENTATIVE_CAPACITY"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"FI_NATIONALITY"|"FI_ORGANIZATION_TYPE"|"IT_NATIONALITY"|"IT_PIN"|"IT_REGISTRANT_ENTITY_TYPE"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER"|"UK_CONTACT_TYPE"|"UK_COMPANY_NUMBER"|"EU_COUNTRY_OF_CITIZENSHIP"|"AU_PRIORITY_TOKEN"|string;
   export type ExtraParamValue = string;
   export type FIAuthKey = string;
   export interface FilterCondition {
@@ -593,11 +713,11 @@ declare namespace Route53Domains {
     /**
      * The name of a domain.
      */
-    DomainName: DomainName;
+    DomainName?: DomainName;
     /**
-     * The name of the domain.
+     * The name servers of the domain.
      */
-    Nameservers: NameserverList;
+    Nameservers?: NameserverList;
     /**
      * Specifies whether the domain registration is set to renew automatically.
      */
@@ -605,15 +725,15 @@ declare namespace Route53Domains {
     /**
      * Provides details about the domain administrative contact.
      */
-    AdminContact: ContactDetail;
+    AdminContact?: ContactDetail;
     /**
      * Provides details about the domain registrant.
      */
-    RegistrantContact: ContactDetail;
+    RegistrantContact?: ContactDetail;
     /**
      * Provides details about the domain technical contact.
      */
-    TechContact: ContactDetail;
+    TechContact?: ContactDetail;
     /**
      * Specifies whether contact information is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If the value is false, WHOIS queries return the information that you entered for the admin contact.
      */
@@ -674,6 +794,10 @@ declare namespace Route53Domains {
      * An array of domain name status codes, also known as Extensible Provisioning Protocol (EPP) status codes. ICANN, the organization that maintains a central database of domain names, has developed a set of domain name status codes that tell you the status of a variety of operations on a domain name, for example, registering a domain name, transferring a domain name to another registrar, renewing the registration for a domain name, and so on. All registrars use this same set of status codes. For a current list of domain name status codes and an explanation of what each code means, go to the ICANN website and search for epp status codes. (Search on the ICANN website; web searches sometimes return an old version of the document.)
      */
     StatusList?: DomainStatusList;
+    /**
+     * A complex type that contains information about the DNSSEC configuration.
+     */
+    DnssecKeys?: DnssecKeyList;
   }
   export interface GetDomainSuggestionsRequest {
     /**
@@ -726,12 +850,21 @@ declare namespace Route53Domains {
      * The date when the request was submitted.
      */
     SubmittedDate?: Timestamp;
+    /**
+     *  The date when the operation was last updated. 
+     */
+    LastUpdatedDate?: Timestamp;
+    /**
+     *  Lists any outstanding operations that require customer action. Valid values are:    PENDING_ACCEPTANCE: The operation is waiting for acceptance from the account that is receiving the domain.    PENDING_CUSTOMER_ACTION: The operation is waiting for customer action, for example, returning an email.    PENDING_AUTHORIZATION: The operation is waiting for the form of authorization. For more information, see ResendOperationAuthorization.    PENDING_PAYMENT_VERIFICATION: The operation is waiting for the payment method to validate.    PENDING_SUPPORT_CASE: The operation includes a support case and is waiting for its resolution.  
+     */
+    StatusFlag?: StatusFlag;
   }
   export type GlueIp = string;
   export type GlueIpList = GlueIp[];
   export type HostName = string;
   export type Integer = number;
   export type InvoiceId = string;
+  export type Label = string;
   export type LangCode = string;
   export type ListDomainsAttributeName = "DomainName"|"Expiry"|string;
   export interface ListDomainsRequest {
@@ -756,7 +889,7 @@ declare namespace Route53Domains {
     /**
      * A list of domains.
      */
-    Domains: DomainSummaryList;
+    Domains?: DomainSummaryList;
     /**
      * If there are more domains than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker.
      */
@@ -775,17 +908,34 @@ declare namespace Route53Domains {
      * Number of domains to be returned. Default: 20
      */
     MaxItems?: PageMaxItems;
+    /**
+     *  The status of the operations. 
+     */
+    Status?: OperationStatusList;
+    /**
+     *  An arrays of the domains operation types. 
+     */
+    Type?: OperationTypeList;
+    /**
+     *  The sort type for returned values. 
+     */
+    SortBy?: ListOperationsSortAttributeName;
+    /**
+     *  The sort order ofr returned values, either ascending or descending. 
+     */
+    SortOrder?: SortOrder;
   }
   export interface ListOperationsResponse {
     /**
      * Lists summaries of the operations.
      */
-    Operations: OperationSummaryList;
+    Operations?: OperationSummaryList;
     /**
      * If there are more operations than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker.
      */
     NextPageMarker?: PageMarker;
   }
+  export type ListOperationsSortAttributeName = "SubmittedDate"|string;
   export interface ListPricesRequest {
     /**
      * The TLD for which you want to receive the pricing information. For example. .net. If a Tld value is not provided, a list of prices for all TLDs supported by Route 53 is returned.
@@ -804,7 +954,7 @@ declare namespace Route53Domains {
     /**
      * A complex type that includes all the pricing information. If you specify a TLD, this array contains only the pricing for that TLD.
      */
-    Prices: DomainPriceList;
+    Prices?: DomainPriceList;
     /**
      * If there are more prices than you specified for MaxItems in the request, submit another request and include the value of NextPageMarker in the value of Marker.  Used only for all TLDs. If you specify a TLD, don't specify a NextPageMarker.
      */
@@ -820,7 +970,7 @@ declare namespace Route53Domains {
     /**
      * A list of the tags that are associated with the specified domain.
      */
-    TagList: TagList;
+    TagList?: TagList;
   }
   export interface Nameserver {
     /**
@@ -833,28 +983,47 @@ declare namespace Route53Domains {
     GlueIps?: GlueIpList;
   }
   export type NameserverList = Nameserver[];
+  export type NullableInteger = number;
   export type OperationId = string;
   export type OperationStatus = "SUBMITTED"|"IN_PROGRESS"|"ERROR"|"SUCCESSFUL"|"FAILED"|string;
+  export type OperationStatusList = OperationStatus[];
   export interface OperationSummary {
     /**
      * Identifier returned to track the requested action.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
     /**
      * The current status of the requested operation in the system.
      */
-    Status: OperationStatus;
+    Status?: OperationStatus;
     /**
      * Type of the action requested.
      */
-    Type: OperationType;
+    Type?: OperationType;
     /**
      * The date when the request was submitted.
      */
-    SubmittedDate: Timestamp;
+    SubmittedDate?: Timestamp;
+    /**
+     *  Name of the domain. 
+     */
+    DomainName?: DomainName;
+    /**
+     *  Message about the operation. 
+     */
+    Message?: ErrorMessage;
+    /**
+     *  Automatically checks whether there are no outstanding operations on domains that need customer attention.   Valid values are:    PENDING_ACCEPTANCE: The operation is waiting for acceptance from the account that is receiving the domain.    PENDING_CUSTOMER_ACTION: The operation is waiting for customer action, for example, returning an email.    PENDING_AUTHORIZATION: The operation is waiting for the form of authorization. For more information, see ResendOperationAuthorization.    PENDING_PAYMENT_VERIFICATION: The operation is waiting for the payment method to validate.    PENDING_SUPPORT_CASE: The operation includes a support case and is waiting for its resolution.  
+     */
+    StatusFlag?: StatusFlag;
+    /**
+     *  The date when the last change was made in Unix time format and Coordinated Universal Time (UTC). 
+     */
+    LastUpdatedDate?: Timestamp;
   }
   export type OperationSummaryList = OperationSummary[];
   export type OperationType = "REGISTER_DOMAIN"|"DELETE_DOMAIN"|"TRANSFER_IN_DOMAIN"|"UPDATE_DOMAIN_CONTACT"|"UPDATE_NAMESERVER"|"CHANGE_PRIVACY_PROTECTION"|"DOMAIN_LOCK"|"ENABLE_AUTORENEW"|"DISABLE_AUTORENEW"|"ADD_DNSSEC"|"REMOVE_DNSSEC"|"EXPIRE_DOMAIN"|"TRANSFER_OUT_DOMAIN"|"CHANGE_DOMAIN_OWNER"|"RENEW_DOMAIN"|"PUSH_DOMAIN"|"INTERNAL_TRANSFER_OUT_DOMAIN"|"INTERNAL_TRANSFER_IN_DOMAIN"|string;
+  export type OperationTypeList = OperationType[];
   export type Operator = "LE"|"GE"|"BEGINS_WITH"|string;
   export type PageMarker = string;
   export type PageMaxItems = number;
@@ -868,6 +1037,16 @@ declare namespace Route53Domains {
      * The currency specifier.
      */
     Currency: Currency;
+  }
+  export interface PushDomainRequest {
+    /**
+     *  Name of the domain. 
+     */
+    DomainName: DomainName;
+    /**
+     *  New IPS tag for the domain. 
+     */
+    Target: Label;
   }
   export type ReachabilityStatus = "PENDING"|"DONE"|"EXPIRED"|string;
   export interface RegisterDomainRequest {
@@ -884,7 +1063,7 @@ declare namespace Route53Domains {
      */
     DurationInYears: DurationInYears;
     /**
-     * Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect after the account is charged. Default: true 
+     * Indicates whether the domain will be automatically renewed (true) or not (false). Auto renewal only takes effect after the account is charged. Default: true 
      */
     AutoRenew?: Boolean;
     /**
@@ -916,7 +1095,7 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export type RegistrarName = string;
   export type RegistrarUrl = string;
@@ -952,7 +1131,7 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export type Reseller = string;
   export interface ResendContactReachabilityEmailRequest {
@@ -975,6 +1154,12 @@ declare namespace Route53Domains {
      */
     isAlreadyVerified?: Boolean;
   }
+  export interface ResendOperationAuthorizationRequest {
+    /**
+     *  Operation ID. 
+     */
+    OperationId: OperationId;
+  }
   export interface RetrieveDomainAuthCodeRequest {
     /**
      * The name of the domain that you want to get an authorization code for.
@@ -985,7 +1170,7 @@ declare namespace Route53Domains {
     /**
      * The authorization code for the domain.
      */
-    AuthCode: DomainAuthCode;
+    AuthCode?: DomainAuthCode;
   }
   export interface SortCondition {
     /**
@@ -999,6 +1184,7 @@ declare namespace Route53Domains {
   }
   export type SortOrder = "ASC"|"DESC"|string;
   export type State = string;
+  export type StatusFlag = "PENDING_ACCEPTANCE"|"PENDING_CUSTOMER_ACTION"|"PENDING_AUTHORIZATION"|"PENDING_PAYMENT_VERIFICATION"|"PENDING_SUPPORT_CASE"|string;
   export type String = string;
   export interface Tag {
     /**
@@ -1038,7 +1224,7 @@ declare namespace Route53Domains {
      */
     AuthCode?: DomainAuthCode;
     /**
-     * Indicates whether the domain will be automatically renewed (true) or not (false). Autorenewal only takes effect after the account is charged. Default: true
+     * Indicates whether the domain will be automatically renewed (true) or not (false). Auto renewal only takes effect after the account is charged. Default: true
      */
     AutoRenew?: Boolean;
     /**
@@ -1070,7 +1256,7 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export interface TransferDomainToAnotherAwsAccountRequest {
     /**
@@ -1092,7 +1278,7 @@ declare namespace Route53Domains {
      */
     Password?: String;
   }
-  export type Transferable = "TRANSFERABLE"|"UNTRANSFERABLE"|"DONT_KNOW"|string;
+  export type Transferable = "TRANSFERABLE"|"UNTRANSFERABLE"|"DONT_KNOW"|"DOMAIN_IN_OWN_ACCOUNT"|"DOMAIN_IN_ANOTHER_ACCOUNT"|"PREMIUM_DOMAIN"|string;
   export interface UpdateDomainContactPrivacyRequest {
     /**
      * The name of the domain that you want to update the privacy setting for.
@@ -1115,7 +1301,7 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To use this ID to query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export interface UpdateDomainContactRequest {
     /**
@@ -1134,12 +1320,16 @@ declare namespace Route53Domains {
      * Provides detailed contact information.
      */
     TechContact?: ContactDetail;
+    /**
+     *  Customer's consent for the owner change request. 
+     */
+    Consent?: Consent;
   }
   export interface UpdateDomainContactResponse {
     /**
      * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export interface UpdateDomainNameserversRequest {
     /**
@@ -1159,7 +1349,7 @@ declare namespace Route53Domains {
     /**
      * Identifier for tracking the progress of the request. To query the operation status, use GetOperationDetail.
      */
-    OperationId: OperationId;
+    OperationId?: OperationId;
   }
   export interface UpdateTagsForDomainRequest {
     /**

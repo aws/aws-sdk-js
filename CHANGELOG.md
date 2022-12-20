@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1278.0-->
+<!--LATEST=2.1279.0-->
 <!--ENTRYINSERT-->
+
+## 2.1279.0
+* feature: Batch: Adds isCancelled and isTerminated to DescribeJobs response.
+* feature: EC2: Adds support for pagination in the EC2 DescribeImages API.
+* feature: LookoutEquipment: This release adds support for listing inference schedulers by status.
+* feature: MediaLive: This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.
+* feature: Nimble: Amazon Nimble Studio now supports configuring session storage volumes and persistence, as well as backup and restore sessions through launch profiles.
+* feature: ResourceExplorer2: Documentation updates for AWS Resource Explorer.
+* feature: Route53Domains: Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability.
+* feature: SageMaker: Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.
+* feature: TranscribeService: Enable our batch transcription jobs for Swedish and Vietnamese.
 
 ## 2.1278.0
 * feature: Athena: Add missed InvalidRequestException in GetCalculationExecutionCode,StopCalculationExecution APIs. Correct required parameters (Payload and Type) in UpdateNotebook API. Change Notebook size from 15 Mb to 10 Mb.

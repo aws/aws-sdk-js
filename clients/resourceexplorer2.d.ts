@@ -44,11 +44,11 @@ declare class ResourceExplorer2 extends Service {
    */
   createView(callback?: (err: AWSError, data: ResourceExplorer2.Types.CreateViewOutput) => void): Request<ResourceExplorer2.Types.CreateViewOutput, AWSError>;
   /**
-   * Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region. When you delete an index, Resource Explorer stops discovering and indexing resources in that Region. Resource Explorer also deletes all views in that Region. These actions occur as asynchronous background tasks. You can check to see when the actions are complete by using the GetIndex operation and checking the Status response value.
+   * Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region. When you delete an index, Resource Explorer stops discovering and indexing resources in that Region. Resource Explorer also deletes all views in that Region. These actions occur as asynchronous background tasks. You can check to see when the actions are complete by using the GetIndex operation and checking the Status response value.  If the index you delete is the aggregator index for the Amazon Web Services account, you must wait 24 hours before you can promote another local index to be the aggregator index for the account. Users can't perform account-wide searches using Resource Explorer until another aggregator index is configured. 
    */
   deleteIndex(params: ResourceExplorer2.Types.DeleteIndexInput, callback?: (err: AWSError, data: ResourceExplorer2.Types.DeleteIndexOutput) => void): Request<ResourceExplorer2.Types.DeleteIndexOutput, AWSError>;
   /**
-   * Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region. When you delete an index, Resource Explorer stops discovering and indexing resources in that Region. Resource Explorer also deletes all views in that Region. These actions occur as asynchronous background tasks. You can check to see when the actions are complete by using the GetIndex operation and checking the Status response value.
+   * Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region. When you delete an index, Resource Explorer stops discovering and indexing resources in that Region. Resource Explorer also deletes all views in that Region. These actions occur as asynchronous background tasks. You can check to see when the actions are complete by using the GetIndex operation and checking the Status response value.  If the index you delete is the aggregator index for the Amazon Web Services account, you must wait 24 hours before you can promote another local index to be the aggregator index for the account. Users can't perform account-wide searches using Resource Explorer until another aggregator index is configured. 
    */
   deleteIndex(callback?: (err: AWSError, data: ResourceExplorer2.Types.DeleteIndexOutput) => void): Request<ResourceExplorer2.Types.DeleteIndexOutput, AWSError>;
   /**
@@ -303,15 +303,15 @@ declare namespace ResourceExplorer2 {
      */
     LastUpdatedAt?: SyntheticTimestamp_date_time;
     /**
-     * If this index is Type=AGGREGATOR, then this response value contains a list of the Amazon Web Services Regions that replicate their content to the index in this Region. Not present for a local index.
+     * This response value is present only if this index is Type=AGGREGATOR. A list of the Amazon Web Services Regions that replicate their content to the index in this Region.
      */
     ReplicatingFrom?: RegionList;
     /**
-     * Identifies the Amazon Web Services Region that has an index set to Type=AGGREGATOR, if one exists. If it does, then the Region you called this operation in replicates its index information to the Region specified in this response value. Not present if there isn't an aggregator index in the account.
+     * This response value is present only if this index is Type=LOCAL. The Amazon Web Services Region that contains the aggregator index, if one exists. If an aggregator index does exist then the Region in which you called this operation replicates its index information to the Region specified in this response value. 
      */
     ReplicatingTo?: RegionList;
     /**
-     * Indicates the current state of the index in this Amazon Web Services Region.
+     * The current state of the index in this Amazon Web Services Region.
      */
     State?: IndexState;
     /**
@@ -319,7 +319,7 @@ declare namespace ResourceExplorer2 {
      */
     Tags?: TagMap;
     /**
-     * Specifies the type of the index in this Region. For information about the aggregator index and how it differs from a local index, see Turning on cross-Region search by creating an aggregator index.
+     * The type of the index in this Region. For information about the aggregator index and how it differs from a local index, see Turning on cross-Region search by creating an aggregator index.
      */
     Type?: IndexType;
   }

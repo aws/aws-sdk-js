@@ -349,11 +349,11 @@ declare class EC2 extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel having an AMI shared with your Amazon Web Services account in the Amazon Elastic Compute Cloud User Guide.
+   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel having an AMI shared with your Amazon Web Services account in the Amazon EC2 User Guide.
    */
   cancelImageLaunchPermission(params: EC2.Types.CancelImageLaunchPermissionRequest, callback?: (err: AWSError, data: EC2.Types.CancelImageLaunchPermissionResult) => void): Request<EC2.Types.CancelImageLaunchPermissionResult, AWSError>;
   /**
-   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel having an AMI shared with your Amazon Web Services account in the Amazon Elastic Compute Cloud User Guide.
+   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel having an AMI shared with your Amazon Web Services account in the Amazon EC2 User Guide.
    */
   cancelImageLaunchPermission(callback?: (err: AWSError, data: EC2.Types.CancelImageLaunchPermissionResult) => void): Request<EC2.Types.CancelImageLaunchPermissionResult, AWSError>;
   /**
@@ -405,11 +405,11 @@ declare class EC2 extends Service {
    */
   copyFpgaImage(callback?: (err: AWSError, data: EC2.Types.CopyFpgaImageResult) => void): Request<EC2.Types.CopyFpgaImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copy an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon EC2 User Guide. For more information about the prerequisites and limits when copying an AMI, see Copy an AMI in the Amazon EC2 User Guide.
    */
   copyImage(params: EC2.Types.CopyImageRequest, callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copy an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon EC2 User Guide. For more information about the prerequisites and limits when copying an AMI, see Copy an AMI in the Amazon EC2 User Guide.
    */
   copyImage(callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
@@ -749,11 +749,11 @@ declare class EC2 extends Service {
    */
   createReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
-   * Starts a task that restores an AMI from an Amazon S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Starts a task that restores an AMI from an Amazon S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon EC2 User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon EC2 User Guide.
    */
   createRestoreImageTask(params: EC2.Types.CreateRestoreImageTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateRestoreImageTaskResult) => void): Request<EC2.Types.CreateRestoreImageTaskResult, AWSError>;
   /**
-   * Starts a task that restores an AMI from an Amazon S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Starts a task that restores an AMI from an Amazon S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon EC2 User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon EC2 User Guide.
    */
   createRestoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateRestoreImageTaskResult) => void): Request<EC2.Types.CreateRestoreImageTaskResult, AWSError>;
   /**
@@ -805,11 +805,11 @@ declare class EC2 extends Service {
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Stores an AMI as a single object in an Amazon S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Stores an AMI as a single object in an Amazon S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon EC2 User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon EC2 User Guide.
    */
   createStoreImageTask(params: EC2.Types.CreateStoreImageTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
-   * Stores an AMI as a single object in an Amazon S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Stores an AMI as a single object in an Amazon S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon EC2 User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon EC2 User Guide.
    */
   createStoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
@@ -1661,11 +1661,11 @@ declare class EC2 extends Service {
    */
   deprovisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.DeprovisionPublicIpv4PoolCidrResult, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon EC2 User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(params: EC2.Types.DeregisterImageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
+   * Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch new instances. If you deregister an AMI that matches a Recycle Bin retention rule, the AMI is retained in the Recycle Bin for the specified retention period. For more information, see Recycle Bin in the Amazon EC2 User Guide. When you deregister an AMI, it doesn't affect any instances that you've already launched from the AMI. You'll continue to incur usage costs for those instances until you terminate them. When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was created for the root volume of the instance during the AMI creation process. When you deregister an instance store-backed AMI, it doesn't affect the files that you uploaded to Amazon S3 when you created the AMI.
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2517,11 +2517,11 @@ declare class EC2 extends Service {
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon EC2 User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon EC2 User Guide.
    */
   describeStoreImageTasks(params: EC2.Types.DescribeStoreImageTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
   /**
-   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon EC2 User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon EC2 User Guide.
    */
   describeStoreImageTasks(callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
   /**
@@ -2917,11 +2917,11 @@ declare class EC2 extends Service {
    */
   disableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
   /**
-   * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon EC2 User Guide.
    */
   disableImageDeprecation(params: EC2.Types.DisableImageDeprecationRequest, callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
   /**
-   * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon EC2 User Guide.
    */
   disableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
   /**
@@ -3109,11 +3109,11 @@ declare class EC2 extends Service {
    */
   enableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
   /**
-   * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon EC2 User Guide.
    */
   enableImageDeprecation(params: EC2.Types.EnableImageDeprecationRequest, callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
   /**
-   * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon EC2 User Guide.
    */
   enableImageDeprecation(callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
   /**
@@ -3581,11 +3581,11 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
-   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon EC2 User Guide.
    */
   listImagesInRecycleBin(params: EC2.Types.ListImagesInRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.ListImagesInRecycleBinResult) => void): Request<EC2.Types.ListImagesInRecycleBinResult, AWSError>;
   /**
-   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   * Lists one or more AMIs that are currently in the Recycle Bin. For more information, see Recycle Bin in the Amazon EC2 User Guide.
    */
   listImagesInRecycleBin(callback?: (err: AWSError, data: EC2.Types.ListImagesInRecycleBinResult) => void): Request<EC2.Types.ListImagesInRecycleBinResult, AWSError>;
   /**
@@ -4181,11 +4181,11 @@ declare class EC2 extends Service {
    */
   rebootInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Create your own AMI in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself. We recommend that you always use CreateImage unless you have a specific reason to use RegisterImage.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understand AMI billing information in the Amazon Elastic Compute Cloud User Guide.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Create your own AMI in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself. We recommend that you always use CreateImage unless you have a specific reason to use RegisterImage.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understand AMI billing information in the Amazon EC2 User Guide.
    */
   registerImage(params: EC2.Types.RegisterImageRequest, callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Create your own AMI in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself. We recommend that you always use CreateImage unless you have a specific reason to use RegisterImage.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understand AMI billing information in the Amazon Elastic Compute Cloud User Guide.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Create your own AMI in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself. We recommend that you always use CreateImage unless you have a specific reason to use RegisterImage.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understand AMI billing information in the Amazon EC2 User Guide.
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
@@ -4413,11 +4413,11 @@ declare class EC2 extends Service {
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
   /**
-   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon EC2 User Guide.
    */
   restoreImageFromRecycleBin(params: EC2.Types.RestoreImageFromRecycleBinRequest, callback?: (err: AWSError, data: EC2.Types.RestoreImageFromRecycleBinResult) => void): Request<EC2.Types.RestoreImageFromRecycleBinResult, AWSError>;
   /**
-   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon Elastic Compute Cloud User Guide.
+   * Restores an AMI from the Recycle Bin. For more information, see Recycle Bin in the Amazon EC2 User Guide.
    */
   restoreImageFromRecycleBin(callback?: (err: AWSError, data: EC2.Types.RestoreImageFromRecycleBinResult) => void): Request<EC2.Types.RestoreImageFromRecycleBinResult, AWSError>;
   /**
@@ -7952,7 +7952,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default Key Management Service (KMS) KMS key using KmsKeyId. For more information, see Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
+     * Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default Key Management Service (KMS) KMS key using KmsKeyId. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide.
      */
     Encrypted?: Boolean;
     /**
@@ -7972,7 +7972,7 @@ declare namespace EC2 {
      */
     SourceRegion: String;
     /**
-     * The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The AMI must be in the Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. For more information, see  Copy AMIs from an Amazon Web Services Region to an Outpost in the Amazon Elastic Compute Cloud User Guide.
+     * The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The AMI must be in the Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. For more information, see  Copy AMIs from an Amazon Web Services Region to an Outpost in the Amazon EC2 User Guide.
      */
     DestinationOutpostArn?: String;
     /**
@@ -13896,12 +13896,24 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: Integer;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
   }
   export interface DescribeImagesResult {
     /**
      * Information about the images.
      */
     Images?: ImageList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeImportImageTasksRequest {
     /**
@@ -17217,11 +17229,11 @@ declare namespace EC2 {
     /**
      * The ID of the instance. If you are detaching a Multi-Attach enabled volume, you must specify an instance ID.
      */
-    InstanceId?: InstanceId;
+    InstanceId?: InstanceIdForResolver;
     /**
      * The ID of the volume.
      */
-    VolumeId: VolumeId;
+    VolumeId: VolumeIdWithResolver;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -21307,7 +21319,7 @@ declare namespace EC2 {
      */
     Platform?: PlatformValues;
     /**
-     * The platform details associated with the billing code of the AMI. For more information, see Understand AMI billing information in the Amazon Elastic Compute Cloud User Guide.
+     * The platform details associated with the billing code of the AMI. For more information, see Understand AMI billing information in the Amazon EC2 User Guide.
      */
     PlatformDetails?: String;
     /**
@@ -21375,11 +21387,11 @@ declare namespace EC2 {
      */
     VirtualizationType?: VirtualizationType;
     /**
-     * The boot mode of the image. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
+     * The boot mode of the image. For more information, see Boot modes in the Amazon EC2 User Guide.
      */
     BootMode?: BootModeValues;
     /**
-     * If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     * If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon EC2 User Guide.
      */
     TpmSupport?: TpmSupportValues;
     /**
@@ -21387,7 +21399,7 @@ declare namespace EC2 {
      */
     DeprecationTime?: String;
     /**
-     * If v2.0, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon Elastic Compute Cloud User Guide.
+     * If v2.0, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon EC2 User Guide.
      */
     ImdsSupport?: ImdsSupportValues;
   }
@@ -21433,7 +21445,7 @@ declare namespace EC2 {
      */
     TpmSupport?: AttributeValue;
     /**
-     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
      */
     UefiData?: AttributeValue;
     /**
@@ -21441,7 +21453,7 @@ declare namespace EC2 {
      */
     LastLaunchedTime?: AttributeValue;
     /**
-     * If v2.0, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon Elastic Compute Cloud User Guide.
+     * If v2.0, it indicates that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon EC2 User Guide.
      */
     ImdsSupport?: AttributeValue;
   }
@@ -22579,6 +22591,7 @@ declare namespace EC2 {
   export type InstanceGenerationSet = InstanceGeneration[];
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceId = string;
+  export type InstanceIdForResolver = string;
   export type InstanceIdList = InstanceId[];
   export type InstanceIdSet = InstanceId[];
   export type InstanceIdStringList = InstanceId[];
@@ -29508,7 +29521,7 @@ declare namespace EC2 {
      */
     Architecture?: ArchitectureValues;
     /**
-     * The block device mapping entries. If you specify an Amazon EBS volume using the ID of an Amazon EBS snapshot, you can't specify the encryption state of the volume. If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost only. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.
+     * The block device mapping entries. If you specify an Amazon EBS volume using the ID of an Amazon EBS snapshot, you can't specify the encryption state of the volume. If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost only. For more information, Amazon EBS local snapshots on Outposts in the Amazon EC2 User Guide.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -29532,7 +29545,7 @@ declare namespace EC2 {
      */
     Name: String;
     /**
-     * The billing product codes. Your account must be authorized to specify billing product codes. Otherwise, you can use the Amazon Web Services Marketplace to bill for the use of an AMI.
+     * The billing product codes. Your account must be authorized to specify billing product codes. If your account is not authorized to specify billing product codes, you can publish AMIs that include billable software and list them on the Amazon Web Services Marketplace. You must first register as a seller on the Amazon Web Services Marketplace. For more information, see Getting started as a seller and AMI-based products in the Amazon Web Services Marketplace Seller Guide.
      */
     BillingProducts?: BillingProductList;
     /**
@@ -29552,19 +29565,19 @@ declare namespace EC2 {
      */
     VirtualizationType?: String;
     /**
-     * The boot mode of the AMI. For more information, see Boot modes in the Amazon Elastic Compute Cloud User Guide.
+     * The boot mode of the AMI. For more information, see Boot modes in the Amazon EC2 User Guide.
      */
     BootMode?: BootModeValues;
     /**
-     * Set to v2.0 to enable Trusted Platform Module (TPM) support. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
+     * Set to v2.0 to enable Trusted Platform Module (TPM) support. For more information, see NitroTPM in the Amazon EC2 User Guide.
      */
     TpmSupport?: TpmSupportValues;
     /**
-     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon Elastic Compute Cloud User Guide.
+     * Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the GetInstanceUefiData command. You can inspect and modify the UEFI data by using the python-uefivars tool on GitHub. For more information, see UEFI Secure Boot in the Amazon EC2 User Guide.
      */
     UefiData?: StringType;
     /**
-     * Set to v2.0 to indicate that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon Elastic Compute Cloud User Guide.  If you set the value to v2.0, make sure that your AMI software can support IMDSv2. 
+     * Set to v2.0 to indicate that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon EC2 User Guide.  If you set the value to v2.0, make sure that your AMI software can support IMDSv2. 
      */
     ImdsSupport?: ImdsSupportValues;
   }
@@ -36122,6 +36135,7 @@ declare namespace EC2 {
   }
   export type VolumeId = string;
   export type VolumeIdStringList = VolumeId[];
+  export type VolumeIdWithResolver = string;
   export type VolumeList = Volume[];
   export interface VolumeModification {
     /**

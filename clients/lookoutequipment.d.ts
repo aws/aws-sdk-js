@@ -1481,6 +1481,10 @@ declare namespace LookoutEquipment {
      * The name of the ML model used by the inference scheduler to be listed. 
      */
     ModelName?: ModelName;
+    /**
+     * Specifies the current status of the inference schedulers to list.
+     */
+    Status?: InferenceSchedulerStatus;
   }
   export interface ListInferenceSchedulersResponse {
     /**

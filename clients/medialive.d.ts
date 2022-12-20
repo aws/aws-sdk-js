@@ -788,6 +788,12 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
   }
   export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export interface AudioDolbyEDecode {
+    /**
+     * Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
+     */
+    ProgramSelection: DolbyEProgramSelection;
+  }
   export interface AudioHlsRenditionSelection {
     /**
      * Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
@@ -902,6 +908,10 @@ Alternate rendition that the client will not try to play back by default. Repres
      * Selects one or more unique audio tracks from within a source.
      */
     Tracks: __listOfAudioTrack;
+    /**
+     * Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337
+     */
+    DolbyEDecode?: AudioDolbyEDecode;
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
   export interface AudioWatermarkSettings {
@@ -2449,6 +2459,7 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
   export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
+  export type DolbyEProgramSelection = "ALL_CHANNELS"|"PROGRAM_1"|"PROGRAM_2"|"PROGRAM_3"|"PROGRAM_4"|"PROGRAM_5"|"PROGRAM_6"|"PROGRAM_7"|"PROGRAM_8"|string;
   export interface DolbyVision81Settings {
   }
   export interface DvbNitSettings {
@@ -2814,7 +2825,7 @@ You specify only the font family. All other style information (color, bold, posi
      */
     AdAvailOffset?: __integerMinNegative1000Max1000;
     /**
-     * Password if credentials are required to access the POIS endpoint.  This is a reference to an AWS parameter store name from which the password can be retrieved.  AWS Parameter store format: "ssm://"
+     * Documentation update needed
      */
     PasswordParam?: __string;
     /**
@@ -2822,7 +2833,7 @@ You specify only the font family. All other style information (color, bold, posi
      */
     PoisEndpoint: __stringMax2048;
     /**
-     * Username if credentials are required to access the POIS endpoint.  This can be either a plaintext username, or a reference to an AWS parameter store name from which the username can be retrieved.  AWS Parameter store format: "ssm://"
+     * Documentation update needed
      */
     Username?: __string;
     /**
@@ -2944,6 +2955,10 @@ If you disable the feature on an existing schedule, make sure that you first del
      * Unit for the frame capture interval.
      */
     CaptureIntervalUnits?: FrameCaptureIntervalUnit;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
   }
   export interface GlobalConfiguration {
     /**
@@ -3198,6 +3213,10 @@ This field is optional; when no value is specified the encoder will choose the n
 - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
      */
     TimecodeInsertion?: H264TimecodeInsertionBehavior;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
   }
   export type H264SpatialAq = "DISABLED"|"ENABLED"|string;
   export type H264SubGopLength = "DYNAMIC"|"FIXED"|string;
@@ -3360,6 +3379,10 @@ This field is optional; when no value is specified the encoder will choose the n
 - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
      */
     TimecodeInsertion?: H265TimecodeInsertionBehavior;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
   }
   export type H265Tier = "HIGH"|"MAIN"|string;
   export type H265TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
@@ -3573,7 +3596,7 @@ If this "keep segments" number is too low, the following might happen: the playe
      */
     ManifestDurationFormat?: HlsManifestDurationFormat;
     /**
-     * When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
+     * Minimum length of MPEG-2 Transport Stream segments in seconds. When set, minimum segment length is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.
      */
     MinSegmentLength?: __integerMin0;
     /**
@@ -3615,7 +3638,7 @@ For an HLS output group with MediaPackage as the destination, the DISABLED behav
      */
     RedundantManifest?: HlsRedundantManifest;
     /**
-     * Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.
+     * Length of MPEG-2 Transport Stream segments to create in seconds. Note that segments will end on the next keyframe after this duration, so actual segment length may be longer.
      */
     SegmentLength?: __integerMin1;
     /**
@@ -5057,6 +5080,10 @@ DISABLED: do not include timecodes.
 GOP_TIMECODE: Include timecode metadata in the GOP header.
      */
     TimecodeInsertion?: Mpeg2TimecodeInsertionBehavior;
+    /**
+     * Timecode burn-in settings
+     */
+    TimecodeBurninSettings?: TimecodeBurninSettings;
   }
   export type Mpeg2SubGopLength = "DYNAMIC"|"FIXED"|string;
   export type Mpeg2TimecodeInsertionBehavior = "DISABLED"|"GOP_TIMECODE"|string;
@@ -6552,6 +6579,22 @@ one destination per packager.
     Strength?: TemporalFilterStrength;
   }
   export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|string;
+  export type TimecodeBurninFontSize = "EXTRA_SMALL_10"|"LARGE_48"|"MEDIUM_32"|"SMALL_16"|string;
+  export type TimecodeBurninPosition = "BOTTOM_CENTER"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|"MIDDLE_CENTER"|"MIDDLE_LEFT"|"MIDDLE_RIGHT"|"TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|string;
+  export interface TimecodeBurninSettings {
+    /**
+     * Choose a timecode burn-in font size
+     */
+    FontSize: TimecodeBurninFontSize;
+    /**
+     * Choose a timecode burn-in output position
+     */
+    Position: TimecodeBurninPosition;
+    /**
+     * Create a timecode burn-in prefix (optional)
+     */
+    Prefix?: __stringMax255;
+  }
   export interface TimecodeConfig {
     /**
      * Identifies the source for the timecode that will be associated with the events outputs.
