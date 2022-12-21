@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1279.0-->
+<!--LATEST=2.1280.0-->
 <!--ENTRYINSERT-->
+
+## 2.1280.0
+* feature: Connect: Amazon Connect Chat now allows for JSON (application/json) message types to be sent as part of the initial message in the StartChatContact API.
+* feature: ConnectParticipant: Amazon Connect Chat now allows for JSON (application/json) message types to be sent in the SendMessage API.
+* feature: LicenseManagerLinuxSubscriptions: AWS License Manager now offers cross-region, cross-account tracking of commercial Linux subscriptions on AWS. This includes subscriptions purchased as part of EC2 subscription-included AMIs, on the AWS Marketplace, or brought to AWS via Red Hat Cloud Access Program.
+* feature: Macie2: This release adds support for analyzing Amazon S3 objects that use the S3 Glacier Instant Retrieval (Glacier_IR) storage class.
+* feature: SageMaker: This release enables adding RStudio Workbench support to an existing Amazon SageMaker Studio domain. It allows setting your RStudio on SageMaker environment configuration parameters and also updating the RStudioConnectUrl and RStudioPackageManagerUrl parameters for existing domains
+* feature: Scheduler: Updated the ListSchedules and ListScheduleGroups APIs to allow the NamePrefix field to start with a number. Updated the validation for executionRole field to support any role name.
+* feature: Transfer: This release adds support for Decrypt as a workflow step type.
 
 ## 2.1279.0
 * feature: Batch: Adds isCancelled and isTerminated to DescribeJobs response.

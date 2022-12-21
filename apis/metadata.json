@@ -1263,5 +1263,9 @@
   "kinesisvideowebrtcstorage": {
     "prefix": "kinesis-video-webrtc-storage",
     "name": "KinesisVideoWebRTCStorage"
+  },
+  "licensemanagerlinuxsubscriptions": {
+    "prefix": "license-manager-linux-subscriptions",
+    "name": "LicenseManagerLinuxSubscriptions"
   }
 }

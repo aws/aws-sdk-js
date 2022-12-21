@@ -335,5 +335,6 @@ module.exports = {
   CodeCatalyst: require('./codecatalyst'),
   Pipes: require('./pipes'),
   SageMakerMetrics: require('./sagemakermetrics'),
-  KinesisVideoWebRTCStorage: require('./kinesisvideowebrtcstorage')
+  KinesisVideoWebRTCStorage: require('./kinesisvideowebrtcstorage'),
+  LicenseManagerLinuxSubscriptions: require('./licensemanagerlinuxsubscriptions')
 };

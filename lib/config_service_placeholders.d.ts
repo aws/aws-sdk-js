@@ -336,6 +336,7 @@ export abstract class ConfigurationServicePlaceholders {
   pipes?: AWS.Pipes.Types.ClientConfiguration;
   sagemakermetrics?: AWS.SageMakerMetrics.Types.ClientConfiguration;
   kinesisvideowebrtcstorage?: AWS.KinesisVideoWebRTCStorage.Types.ClientConfiguration;
+  licensemanagerlinuxsubscriptions?: AWS.LicenseManagerLinuxSubscriptions.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -674,4 +675,5 @@ export interface ConfigurationServiceApiVersions {
   pipes?: AWS.Pipes.Types.apiVersion;
   sagemakermetrics?: AWS.SageMakerMetrics.Types.apiVersion;
   kinesisvideowebrtcstorage?: AWS.KinesisVideoWebRTCStorage.Types.apiVersion;
+  licensemanagerlinuxsubscriptions?: AWS.LicenseManagerLinuxSubscriptions.Types.apiVersion;
 }

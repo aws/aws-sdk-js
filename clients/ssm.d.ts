@@ -8171,7 +8171,7 @@ declare namespace SSM {
   }
   export interface PutResourcePolicyRequest {
     /**
-     * Amazon Resource Name (ARN) of the resource to which the policies are attached.
+     * Amazon Resource Name (ARN) of the resource to which you want to attach a policy.
      */
     ResourceArn: ResourceArnString;
     /**
@@ -8183,7 +8183,7 @@ declare namespace SSM {
      */
     PolicyId?: PolicyId;
     /**
-     * ID of the current policy version. The hash helps to prevent a situation where multiple users attempt to overwrite a policy.
+     * ID of the current policy version. The hash helps to prevent a situation where multiple users attempt to overwrite a policy. You must provide this hash when updating or deleting a policy.
      */
     PolicyHash?: PolicyHash;
   }
@@ -8193,7 +8193,7 @@ declare namespace SSM {
      */
     PolicyId?: PolicyId;
     /**
-     * ID of the current policy version. The hash helps to prevent a situation where multiple users attempt to overwrite a policy. You must provide this hash when updating or deleting a policy.
+     * ID of the current policy version.
      */
     PolicyHash?: PolicyHash;
   }

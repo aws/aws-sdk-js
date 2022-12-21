@@ -10103,6 +10103,10 @@ declare namespace SageMaker {
      * The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key. This configuration can only be modified if there are no apps in the InService or Pending state.
      */
     ExecutionRoleIdentityConfig?: ExecutionRoleIdentityConfig;
+    /**
+     * The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+     */
+    SecurityGroupIds?: DomainSecurityGroupIds;
   }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
   export type DoubleParameterValue = number;
@@ -11582,7 +11586,7 @@ declare namespace SageMaker {
      */
     InstanceType: TrainingInstanceType;
     /**
-     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See SageMaker distributed training jobs for more information.
+     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See SageMaker distributed training jobs for more informcration.
      */
     InstanceCount: TrainingInstanceCount;
     /**
@@ -18653,6 +18657,14 @@ declare namespace SageMaker {
      */
     DomainExecutionRoleArn: RoleArn;
     DefaultResourceSpec?: ResourceSpec;
+    /**
+     * A URL pointing to an RStudio Connect server.
+     */
+    RStudioConnectUrl?: String;
+    /**
+     * A URL pointing to an RStudio Package Manager server.
+     */
+    RStudioPackageManagerUrl?: String;
   }
   export type RStudioServerProUserGroup = "R_STUDIO_ADMIN"|"R_STUDIO_USER"|string;
   export type RandomSeed = number;
@@ -20812,6 +20824,10 @@ declare namespace SageMaker {
      * The default settings used to create a space within the Domain.
      */
     DefaultSpaceSettings?: DefaultSpaceSettings;
+    /**
+     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+     */
+    AppSecurityGroupManagement?: AppSecurityGroupManagement;
   }
   export interface UpdateDomainResponse {
     /**

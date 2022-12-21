@@ -4008,7 +4008,7 @@ declare namespace Macie2 {
      */
     numberOfRuns?: __double;
   }
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|string;
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|"GLACIER_IR"|"OUTPOSTS"|string;
   export interface SuppressDataIdentifier {
     /**
      * The unique identifier for the custom data identifier or managed data identifier that detected the type of sensitive data to exclude or include in the score.
