@@ -19,28 +19,9 @@ declare class KinesisVideoWebRTCStorage extends Service {
    *  Join the ongoing one way-video and/or multi-way audio WebRTC session as a video producing device for an input channel. If there’s no existing session for the channel, a new streaming session needs to be created, and the Amazon Resource Name (ARN) of the signaling channel must be provided.  Currently for the SINGLE_MASTER type, a video producing device is able to ingest both audio and video media into a stream, while viewers can only ingest audio. Both a video producing device and viewers can join the session first, and wait for other participants. While participants are having peer to peer conversations through webRTC, the ingested media session will be stored into the Kinesis Video Stream. Multiple viewers are able to playback real-time media. Customers can also use existing Kinesis Video Streams features like HLS or DASH playback, Image generation, and more with ingested WebRTC media.  Assume that only one video producing device client can be associated with a session for the channel. If more than one client joins the session of a specific channel as a video producing device, the most recent client request takes precedence.  
    */
   joinStorageSession(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   *  Join the ongoing one way-video and/or multi-way audio WebRTC session as a viewer for an input channel. If there’s no existing session for the channel, create a new streaming session and provide the Amazon Resource Name (ARN) of the signaling channel (channelArn) and client id (clientId).  Currently for SINGLE_MASTER type, a video producing device is able to ingest both audio and video media into a stream, while viewers can only ingest audio. Both a video producing device and viewers can join a session first and wait for other participants. While participants are having peer to peer conversations through webRTC, the ingested media session will be stored into the Kinesis Video Stream. Multiple viewers are able to playback real-time media.  Customers can also use existing Kinesis Video Streams features like HLS or DASH playback, Image generation, and more with ingested WebRTC media. If there’s an existing session with the same clientId that's found in the join session request, the new request takes precedence.
-   */
-  joinStorageSessionAsViewer(params: KinesisVideoWebRTCStorage.Types.JoinStorageSessionAsViewerInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   *  Join the ongoing one way-video and/or multi-way audio WebRTC session as a viewer for an input channel. If there’s no existing session for the channel, create a new streaming session and provide the Amazon Resource Name (ARN) of the signaling channel (channelArn) and client id (clientId).  Currently for SINGLE_MASTER type, a video producing device is able to ingest both audio and video media into a stream, while viewers can only ingest audio. Both a video producing device and viewers can join a session first and wait for other participants. While participants are having peer to peer conversations through webRTC, the ingested media session will be stored into the Kinesis Video Stream. Multiple viewers are able to playback real-time media.  Customers can also use existing Kinesis Video Streams features like HLS or DASH playback, Image generation, and more with ingested WebRTC media. If there’s an existing session with the same clientId that's found in the join session request, the new request takes precedence.
-   */
-  joinStorageSessionAsViewer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace KinesisVideoWebRTCStorage {
   export type ChannelArn = string;
-  export type ClientId = string;
-  export interface JoinStorageSessionAsViewerInput {
-    /**
-     *  The Amazon Resource Name (ARN) of the signaling channel. 
-     */
-    channelArn: ChannelArn;
-    /**
-     *  The unique identifier for the sender client. 
-     */
-    clientId: ClientId;
-  }
   export interface JoinStorageSessionInput {
     /**
      *  The Amazon Resource Name (ARN) of the signaling channel. 

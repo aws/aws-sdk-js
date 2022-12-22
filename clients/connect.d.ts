@@ -892,11 +892,11 @@ declare class Connect extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
   /**
-   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
+   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact. Supports voice and chat contacts.
    */
   monitorContact(params: Connect.Types.MonitorContactRequest, callback?: (err: AWSError, data: Connect.Types.MonitorContactResponse) => void): Request<Connect.Types.MonitorContactResponse, AWSError>;
   /**
-   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
+   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact. Supports voice and chat contacts.
    */
   monitorContact(callback?: (err: AWSError, data: Connect.Types.MonitorContactResponse) => void): Request<Connect.Types.MonitorContactResponse, AWSError>;
   /**
@@ -1171,6 +1171,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Updates an existing configuration for a resource type. This API is idempotent.
    */
   updateInstanceStorageConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates timeouts for when human chat participants are to be considered idle, and when agents are automatically disconnected from a chat due to idleness. You can set four timers:   Customer idle timeout   Customer auto-disconnect timeout   Agent idle timeout   Agent auto-disconnect timeout   For more information about how chat timeouts work, see Set up chat timeouts for human participants. 
+   */
+  updateParticipantRoleConfig(params: Connect.Types.UpdateParticipantRoleConfigRequest, callback?: (err: AWSError, data: Connect.Types.UpdateParticipantRoleConfigResponse) => void): Request<Connect.Types.UpdateParticipantRoleConfigResponse, AWSError>;
+  /**
+   * Updates timeouts for when human chat participants are to be considered idle, and when agents are automatically disconnected from a chat due to idleness. You can set four timers:   Customer idle timeout   Customer auto-disconnect timeout   Agent idle timeout   Agent auto-disconnect timeout   For more information about how chat timeouts work, see Set up chat timeouts for human participants. 
+   */
+  updateParticipantRoleConfig(callback?: (err: AWSError, data: Connect.Types.UpdateParticipantRoleConfigResponse) => void): Request<Connect.Types.UpdateParticipantRoleConfigResponse, AWSError>;
   /**
    * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
    */
@@ -1688,13 +1696,19 @@ declare namespace Connect {
   export type ChatDurationInMinutes = number;
   export interface ChatMessage {
     /**
-     * The type of the content. Supported types are text/plain.
+     * The type of the content. Supported types are text/plain, text/markdown, and application/json.
      */
     ContentType: ChatContentType;
     /**
-     * The content of the chat message.
+     * The content of the chat message.    For text/plain and text/markdown, the Length Constraints are Minimum of 1, Maximum of 1024.    For application/json, the Length Constraints are Minimum of 1, Maximum of 12000.   
      */
     Content: ChatContent;
+  }
+  export interface ChatParticipantRoleConfig {
+    /**
+     * A list of participant timers. You can specify any unique combination of role and timer type. Duplicate entries error out the request with a 400.
+     */
+    ParticipantTimerConfigList: ParticipantTimerConfigList;
   }
   export interface ChatStreamingConfiguration {
     /**
@@ -5084,6 +5098,34 @@ declare namespace Connect {
     DisplayName: DisplayName;
   }
   export type ParticipantId = string;
+  export type ParticipantTimerAction = "Unset"|string;
+  export type ParticipantTimerConfigList = ParticipantTimerConfiguration[];
+  export interface ParticipantTimerConfiguration {
+    /**
+     * The role of the participant in the chat conversation.
+     */
+    ParticipantRole: TimerEligibleParticipantRoles;
+    /**
+     * The type of timer. IDLE indicates the timer applies for considering a human chat participant as idle. DISCONNECT_NONCUSTOMER indicates the timer applies to automatically disconnecting a chat participant due to idleness.
+     */
+    TimerType: ParticipantTimerType;
+    /**
+     * The value of the timer. Either the timer action (Unset to delete the timer), or the duration of the timer in minutes. Only one value can be set.
+     */
+    TimerValue: ParticipantTimerValue;
+  }
+  export type ParticipantTimerDurationInMinutes = number;
+  export type ParticipantTimerType = "IDLE"|"DISCONNECT_NONCUSTOMER"|string;
+  export interface ParticipantTimerValue {
+    /**
+     * The timer action. Currently only one value is allowed: Unset. It deletes a timer.
+     */
+    ParticipantTimerAction?: ParticipantTimerAction;
+    /**
+     * The duration of a timer, in minutes. 
+     */
+    ParticipantTimerDurationInMinutes?: ParticipantTimerDurationInMinutes;
+  }
   export type ParticipantToken = string;
   export type Password = string;
   export type Percentage = number;
@@ -6122,7 +6164,7 @@ declare namespace Connect {
      */
     ChatDurationInMinutes?: ChatDurationInMinutes;
     /**
-     * The supported chat message content types. Content types can be text/plain or both text/plain and text/markdown.
+     * The supported chat message content types. Content types must always contain text/plain. You can then put any other supported type in the list. For example, all the following lists are valid because they contain text/plain: [text/plain, text/markdown, application/json], [text/markdown, text/plain], [text/plain, application/json].
      */
     SupportedMessagingContentTypes?: SupportedMessagingContentTypes;
   }
@@ -6539,6 +6581,7 @@ declare namespace Connect {
   }
   export type ThresholdValue = number;
   export type TimeZone = string;
+  export type TimerEligibleParticipantRoles = "CUSTOMER"|"AGENT"|string;
   export type Timestamp = Date;
   export interface TrafficDistributionGroup {
     /**
@@ -6882,6 +6925,28 @@ declare namespace Connect {
      */
     ResourceType: InstanceStorageResourceType;
     StorageConfig: InstanceStorageConfig;
+  }
+  export interface UpdateParticipantRoleConfigChannelInfo {
+    /**
+     * Configuration information for the chat participant role.
+     */
+    Chat?: ChatParticipantRoleConfig;
+  }
+  export interface UpdateParticipantRoleConfigRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId: ContactId;
+    /**
+     * The Amazon Connect channel you want to configure.
+     */
+    ChannelConfiguration: UpdateParticipantRoleConfigChannelInfo;
+  }
+  export interface UpdateParticipantRoleConfigResponse {
   }
   export interface UpdatePhoneNumberRequest {
     /**

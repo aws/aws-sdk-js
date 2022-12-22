@@ -52,6 +52,14 @@ declare class ComputeOptimizer extends Service {
    */
   exportEC2InstanceRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportEC2InstanceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportEC2InstanceRecommendationsResponse, AWSError>;
   /**
+   *  Exports optimization recommendations for Amazon ECS services on Fargate.  Recommendations are exported in a CSV file, and its metadata in a JSON file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can only have one Amazon ECS service export job in progress per Amazon Web Services Region.
+   */
+  exportECSServiceRecommendations(params: ComputeOptimizer.Types.ExportECSServiceRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportECSServiceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportECSServiceRecommendationsResponse, AWSError>;
+  /**
+   *  Exports optimization recommendations for Amazon ECS services on Fargate.  Recommendations are exported in a CSV file, and its metadata in a JSON file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can only have one Amazon ECS service export job in progress per Amazon Web Services Region.
+   */
+  exportECSServiceRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportECSServiceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportECSServiceRecommendationsResponse, AWSError>;
+  /**
    * Exports optimization recommendations for Lambda functions. Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Lambda function export job in progress per Amazon Web Services Region.
    */
   exportLambdaFunctionRecommendations(params: ComputeOptimizer.Types.ExportLambdaFunctionRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportLambdaFunctionRecommendationsResponse, AWSError>;
@@ -91,6 +99,22 @@ declare class ComputeOptimizer extends Service {
    * Returns the projected utilization metrics of Amazon EC2 instance recommendations.  The Cpu and Memory metrics are the only projected utilization metrics returned when you run this action. Additionally, the Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent. 
    */
   getEC2RecommendationProjectedMetrics(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse, AWSError>;
+  /**
+   *  Returns the projected metrics of Amazon ECS service recommendations. 
+   */
+  getECSServiceRecommendationProjectedMetrics(params: ComputeOptimizer.Types.GetECSServiceRecommendationProjectedMetricsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetECSServiceRecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetECSServiceRecommendationProjectedMetricsResponse, AWSError>;
+  /**
+   *  Returns the projected metrics of Amazon ECS service recommendations. 
+   */
+  getECSServiceRecommendationProjectedMetrics(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetECSServiceRecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetECSServiceRecommendationProjectedMetricsResponse, AWSError>;
+  /**
+   *  Returns Amazon ECS service recommendations.   Compute Optimizer generates recommendations for Amazon ECS services on Fargate that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide. 
+   */
+  getECSServiceRecommendations(params: ComputeOptimizer.Types.GetECSServiceRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetECSServiceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetECSServiceRecommendationsResponse, AWSError>;
+  /**
+   *  Returns Amazon ECS service recommendations.   Compute Optimizer generates recommendations for Amazon ECS services on Fargate that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide. 
+   */
+  getECSServiceRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetECSServiceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetECSServiceRecommendationsResponse, AWSError>;
   /**
    * Returns the recommendation preferences that are in effect for a given resource, such as enhanced infrastructure metrics. Considers all applicable preferences that you might have set at the resource, account, and organization level. When you create a recommendation preference, you can set its status to Active or Inactive. Use this action to view the recommendation preferences that are in effect, or Active.
    */
@@ -132,11 +156,11 @@ declare class ComputeOptimizer extends Service {
    */
   getRecommendationPreferences(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationPreferencesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationPreferencesResponse, AWSError>;
   /**
-   * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.  
+   * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.   Amazon ECS services in an account that are Underprovisioned, Overprovisioned, or Optimized.  
    */
   getRecommendationSummaries(params: ComputeOptimizer.Types.GetRecommendationSummariesRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
   /**
-   * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.  
+   * Returns the optimization findings for an account. It returns the number of:   Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned, or Optimized.   Auto Scaling groups in an account that are NotOptimized, or Optimized.   Amazon EBS volumes in an account that are NotOptimized, or Optimized.   Lambda functions in an account that are NotOptimized, or Optimized.   Amazon ECS services in an account that are Underprovisioned, Overprovisioned, or Optimized.  
    */
   getRecommendationSummaries(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
   /**
@@ -178,6 +202,7 @@ declare namespace ComputeOptimizer {
   export type AccountEnrollmentStatuses = AccountEnrollmentStatus[];
   export type AccountId = string;
   export type AccountIds = AccountId[];
+  export type AutoScalingConfiguration = "TargetTrackingScalingCpu"|"TargetTrackingScalingMemory"|string;
   export type AutoScalingGroupArn = string;
   export type AutoScalingGroupArns = AutoScalingGroupArn[];
   export interface AutoScalingGroupConfiguration {
@@ -278,6 +303,38 @@ declare namespace ComputeOptimizer {
   export type AutoScalingGroupRecommendationOptions = AutoScalingGroupRecommendationOption[];
   export type AutoScalingGroupRecommendations = AutoScalingGroupRecommendation[];
   export type Code = string;
+  export interface ContainerConfiguration {
+    /**
+     *  The name of the container. 
+     */
+    containerName?: ContainerName;
+    /**
+     *  The memory size configurations for the container. 
+     */
+    memorySizeConfiguration?: MemorySizeConfiguration;
+    /**
+     *  The number of CPU units reserved for the container. 
+     */
+    cpu?: NullableCpu;
+  }
+  export type ContainerConfigurations = ContainerConfiguration[];
+  export type ContainerName = string;
+  export interface ContainerRecommendation {
+    /**
+     *  The name of the container. 
+     */
+    containerName?: ContainerName;
+    /**
+     *  The recommended memory size configurations for the container. 
+     */
+    memorySizeConfiguration?: MemorySizeConfiguration;
+    /**
+     *  The recommended number of CPU units reserved for the container. 
+     */
+    cpu?: NullableCpu;
+  }
+  export type ContainerRecommendations = ContainerRecommendation[];
+  export type CpuSize = number;
   export type CpuVendorArchitecture = "AWS_ARM64"|"CURRENT"|string;
   export type CpuVendorArchitectures = CpuVendorArchitecture[];
   export type CreationTimestamp = Date;
@@ -379,6 +436,159 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type EBSUtilizationMetrics = EBSUtilizationMetric[];
+  export type ECSServiceLaunchType = "EC2"|"Fargate"|string;
+  export type ECSServiceMetricName = "Cpu"|"Memory"|string;
+  export type ECSServiceMetricStatistic = "Maximum"|"Average"|string;
+  export interface ECSServiceProjectedMetric {
+    /**
+     *  The name of the projected metric.  The following metrics are available:    CPU — The percentage of allocated compute units that are currently in use on the ECS service tasks.    Memory — The percentage of memory that is currently in use on the ECS service tasks.  
+     */
+    name?: ECSServiceMetricName;
+    /**
+     *  The timestamps of the projected metric. 
+     */
+    timestamps?: Timestamps;
+    /**
+     *  The upper bound values for the projected metric. 
+     */
+    upperBoundValues?: MetricValues;
+    /**
+     *  The lower bound values for the projected metric. 
+     */
+    lowerBoundValues?: MetricValues;
+  }
+  export type ECSServiceProjectedMetrics = ECSServiceProjectedMetric[];
+  export interface ECSServiceProjectedUtilizationMetric {
+    /**
+     *  The name of the projected utilization metric.  The following utilization metrics are available:    CPU — The percentage of allocated compute units that are currently in use on the ECS service tasks.    Memory — The percentage of memory that is currently in use on the ECS service tasks.  
+     */
+    name?: ECSServiceMetricName;
+    /**
+     * The statistic of the projected utilization metric. The Compute Optimizer API, Command Line Interface (CLI), and SDKs return utilization metrics using only the Maximum statistic, which is the highest value observed during the specified period. The Compute Optimizer console displays graphs for some utilization metrics using the Average statistic, which is the value of Sum / SampleCount during the specified period. For more information, see Viewing resource recommendations in the Compute Optimizer User Guide. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the Amazon CloudWatch User Guide.
+     */
+    statistic?: ECSServiceMetricStatistic;
+    /**
+     *  The lower bound values for the projected utilization metrics. 
+     */
+    lowerBoundValue?: LowerBoundValue;
+    /**
+     *  The upper bound values for the projected utilization metrics. 
+     */
+    upperBoundValue?: UpperBoundValue;
+  }
+  export type ECSServiceProjectedUtilizationMetrics = ECSServiceProjectedUtilizationMetric[];
+  export interface ECSServiceRecommendation {
+    /**
+     *  The Amazon Resource Name (ARN) of the current ECS service.   The following is the format of the ARN:   arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name 
+     */
+    serviceArn?: ServiceArn;
+    /**
+     *  The Amazon Web Services account ID of the ECS service. 
+     */
+    accountId?: AccountId;
+    /**
+     *  The configuration of the current ECS service. 
+     */
+    currentServiceConfiguration?: ServiceConfiguration;
+    /**
+     *  An array of objects that describe the utilization metrics of the ECS service. 
+     */
+    utilizationMetrics?: ECSServiceUtilizationMetrics;
+    /**
+     *  The number of days the ECS service utilization metrics were analyzed. 
+     */
+    lookbackPeriodInDays?: LookBackPeriodInDays;
+    /**
+     *  The launch type the ECS service is using.   Compute Optimizer only supports the Fargate launch type. 
+     */
+    launchType?: ECSServiceLaunchType;
+    /**
+     *  The timestamp of when the ECS service recommendation was last generated. 
+     */
+    lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     *  The finding classification of an ECS service.  Findings for ECS services include:     Underprovisioned  — When Compute Optimizer detects that there’s not enough memory or CPU, an ECS service is considered under-provisioned. An under-provisioned ECS service might result in poor application performance.     Overprovisioned  — When Compute Optimizer detects that there’s excessive memory or CPU, an ECS service is considered over-provisioned. An over-provisioned ECS service might result in additional infrastructure costs.      Optimized  — When both the CPU and memory of your ECS service meet the performance requirements of your workload, the service is considered optimized.  
+     */
+    finding?: ECSServiceRecommendationFinding;
+    /**
+     *  The reason for the finding classification of an ECS service.  Finding reason codes for ECS services include:     CPUUnderprovisioned  — The ECS service CPU configuration can be sized up to enhance the performance of your workload. This is identified by analyzing the CPUUtilization metric of the current service during the look-back period.     CPUOverprovisioned  — The ECS service CPU configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the CPUUtilization metric of the current service during the look-back period.      MemoryUnderprovisioned  — The ECS service memory configuration can be sized up to enhance the performance of your workload. This is identified by analyzing the MemoryUtilization metric of the current service during the look-back period.     MemoryOverprovisioned  — The ECS service memory configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the MemoryUtilization metric of the current service during the look-back period.  
+     */
+    findingReasonCodes?: ECSServiceRecommendationFindingReasonCodes;
+    /**
+     *  An array of objects that describe the recommendation options for the ECS service. 
+     */
+    serviceRecommendationOptions?: ECSServiceRecommendationOptions;
+    /**
+     *  The risk of the current ECS service not meeting the performance needs of its workloads. The higher the risk, the more likely the current service can't meet the performance requirements of its workload. 
+     */
+    currentPerformanceRisk?: CurrentPerformanceRisk;
+  }
+  export interface ECSServiceRecommendationFilter {
+    /**
+     *  The name of the filter.   Specify Finding to return recommendations with a specific finding classification.   Specify FindingReasonCode to return recommendations with a specific finding reason code. 
+     */
+    name?: ECSServiceRecommendationFilterName;
+    /**
+     *  The value of the filter.  The valid values for this parameter are as follows:   If you specify the name parameter as Finding, specify Optimized, NotOptimized, or Unavailable.   If you specify the name parameter as FindingReasonCode, specify CPUUnderprovisioned, CPUOverprovisioned, MemoryUnderprovisioned, or MemoryOverprovisioned.  
+     */
+    values?: FilterValues;
+  }
+  export type ECSServiceRecommendationFilterName = "Finding"|"FindingReasonCode"|string;
+  export type ECSServiceRecommendationFilters = ECSServiceRecommendationFilter[];
+  export type ECSServiceRecommendationFinding = "Optimized"|"Underprovisioned"|"Overprovisioned"|string;
+  export type ECSServiceRecommendationFindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|"CPUOverprovisioned"|"CPUUnderprovisioned"|string;
+  export type ECSServiceRecommendationFindingReasonCodes = ECSServiceRecommendationFindingReasonCode[];
+  export interface ECSServiceRecommendationOption {
+    /**
+     *  The memory size of the ECS service recommendation option. 
+     */
+    memory?: NullableMemory;
+    /**
+     *  The CPU size of the ECS service recommendation option. 
+     */
+    cpu?: NullableCpu;
+    savingsOpportunity?: SavingsOpportunity;
+    /**
+     *  An array of objects that describe the projected utilization metrics of the ECS service recommendation option. 
+     */
+    projectedUtilizationMetrics?: ECSServiceProjectedUtilizationMetrics;
+    /**
+     *  The CPU and memory size recommendations for the containers within the task of your ECS service. 
+     */
+    containerRecommendations?: ContainerRecommendations;
+  }
+  export type ECSServiceRecommendationOptions = ECSServiceRecommendationOption[];
+  export type ECSServiceRecommendations = ECSServiceRecommendation[];
+  export interface ECSServiceRecommendedOptionProjectedMetric {
+    /**
+     *  The recommended CPU size for the ECS service. 
+     */
+    recommendedCpuUnits?: CpuSize;
+    /**
+     *  The recommended memory size for the ECS service. 
+     */
+    recommendedMemorySize?: MemorySize;
+    /**
+     *  An array of objects that describe the projected metric. 
+     */
+    projectedMetrics?: ECSServiceProjectedMetrics;
+  }
+  export type ECSServiceRecommendedOptionProjectedMetrics = ECSServiceRecommendedOptionProjectedMetric[];
+  export interface ECSServiceUtilizationMetric {
+    /**
+     *  The name of the utilization metric.  The following utilization metrics are available:    Cpu — The amount of CPU units that are used in the service.    Memory — The amount of memory that is used in the service.  
+     */
+    name?: ECSServiceMetricName;
+    /**
+     * The statistic of the utilization metric. The Compute Optimizer API, Command Line Interface (CLI), and SDKs return utilization metrics using only the Maximum statistic, which is the highest value observed during the specified period. The Compute Optimizer console displays graphs for some utilization metrics using the Average statistic, which is the value of Sum / SampleCount during the specified period. For more information, see Viewing resource recommendations in the Compute Optimizer User Guide. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the Amazon CloudWatch User Guide.
+     */
+    statistic?: ECSServiceMetricStatistic;
+    /**
+     *  The value of the utilization metric. 
+     */
+    value?: MetricValue;
+  }
+  export type ECSServiceUtilizationMetrics = ECSServiceUtilizationMetric[];
   export interface EffectiveRecommendationPreferences {
     /**
      * Describes the CPU vendor and architecture for an instance or Auto Scaling group recommendations. For example, when you specify AWS_ARM64 with:   A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.   A GetEC2RecommendationProjectedMetrics request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.   A ExportEC2InstanceRecommendations or ExportAutoScalingGroupRecommendations request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.  
@@ -536,6 +746,36 @@ declare namespace ComputeOptimizer {
      */
     s3Destination?: S3Destination;
   }
+  export interface ExportECSServiceRecommendationsRequest {
+    /**
+     *  The Amazon Web Services account IDs for the export ECS service recommendations.  If your account is the management account or the delegated administrator of an organization, use this parameter to specify the member account you want to export recommendations to. This parameter can't be specified together with the include member accounts parameter. The parameters are mutually exclusive. If this parameter or the include member accounts parameter is omitted, the recommendations for member accounts aren't included in the export. You can specify multiple account IDs per request.
+     */
+    accountIds?: AccountIds;
+    /**
+     *  An array of objects to specify a filter that exports a more specific set of ECS service recommendations. 
+     */
+    filters?: ECSServiceRecommendationFilters;
+    /**
+     * The recommendations data to include in the export file. For more information about the fields that can be exported, see Exported files in the Compute Optimizer User Guide.
+     */
+    fieldsToExport?: ExportableECSServiceFields;
+    s3DestinationConfig: S3DestinationConfig;
+    /**
+     *  The format of the export file.  The CSV file is the only export file format currently supported.
+     */
+    fileFormat?: FileFormat;
+    /**
+     * If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization. The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see Compute Optimizer and Amazon Web Services Organizations trusted access in the Compute Optimizer User Guide. If this parameter is omitted, recommendations for member accounts of the organization aren't included in the export file. If this parameter or the account ID parameter is omitted, recommendations for member accounts aren't included in the export.
+     */
+    includeMemberAccounts?: IncludeMemberAccounts;
+  }
+  export interface ExportECSServiceRecommendationsResponse {
+    /**
+     *  The identification number of the export job.  To view the status of an export job, use the DescribeRecommendationExportJobs action and specify the job ID. 
+     */
+    jobId?: JobId;
+    s3Destination?: S3Destination;
+  }
   export interface ExportLambdaFunctionRecommendationsRequest {
     /**
      * The IDs of the Amazon Web Services accounts for which to export Lambda function recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
@@ -568,6 +808,8 @@ declare namespace ComputeOptimizer {
   }
   export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|string;
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
+  export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|string;
+  export type ExportableECSServiceFields = ExportableECSServiceField[];
   export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|string;
   export type ExportableInstanceFields = ExportableInstanceField[];
   export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|string;
@@ -749,6 +991,70 @@ declare namespace ComputeOptimizer {
      * An array of objects that describes projected metrics.
      */
     recommendedOptionProjectedMetrics?: RecommendedOptionProjectedMetrics;
+  }
+  export interface GetECSServiceRecommendationProjectedMetricsRequest {
+    /**
+     *  The ARN that identifies the ECS service.   The following is the format of the ARN:   arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name 
+     */
+    serviceArn: ServiceArn;
+    /**
+     *  The statistic of the projected metrics. 
+     */
+    stat: MetricStatistic;
+    /**
+     *  The granularity, in seconds, of the projected metrics data points. 
+     */
+    period: Period;
+    /**
+     *  The timestamp of the first projected metrics data point to return. 
+     */
+    startTime: Timestamp;
+    /**
+     *  The timestamp of the last projected metrics data point to return. 
+     */
+    endTime: Timestamp;
+  }
+  export interface GetECSServiceRecommendationProjectedMetricsResponse {
+    /**
+     *  An array of objects that describes the projected metrics. 
+     */
+    recommendedOptionProjectedMetrics?: ECSServiceRecommendedOptionProjectedMetrics;
+  }
+  export interface GetECSServiceRecommendationsRequest {
+    /**
+     *  The ARN that identifies the ECS service.   The following is the format of the ARN:   arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name 
+     */
+    serviceArns?: ServiceArns;
+    /**
+     *  The token to advance to the next page of ECS service recommendations. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  The maximum number of ECS service recommendations to return with a single request.  To retrieve the remaining results, make another request with the returned nextToken value.
+     */
+    maxResults?: MaxResults;
+    /**
+     *  An array of objects to specify a filter that returns a more specific list of ECS service recommendations. 
+     */
+    filters?: ECSServiceRecommendationFilters;
+    /**
+     *  Return the ECS service recommendations to the specified Amazon Web Services account IDs.  If your account is the management account or the delegated administrator of an organization, use this parameter to return the ECS service recommendations to specific member accounts. You can only specify one account ID per request.
+     */
+    accountIds?: AccountIds;
+  }
+  export interface GetECSServiceRecommendationsResponse {
+    /**
+     *  The token to advance to the next page of ECS service recommendations. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  An array of objects that describe the ECS service recommendations. 
+     */
+    ecsServiceRecommendations?: ECSServiceRecommendations;
+    /**
+     *  An array of objects that describe errors of the request. 
+     */
+    errors?: GetRecommendationErrors;
   }
   export interface GetEffectiveRecommendationPreferencesRequest {
     /**
@@ -1152,11 +1458,22 @@ declare namespace ComputeOptimizer {
   export type LastUpdatedTimestamp = Date;
   export type LookBackPeriodInDays = number;
   export type Low = number;
+  export type LowerBoundValue = number;
   export type MaxResults = number;
   export type MaxSize = number;
   export type Medium = number;
   export type MemberAccountsEnrolled = boolean;
   export type MemorySize = number;
+  export interface MemorySizeConfiguration {
+    /**
+     *  The amount of memory in the container. 
+     */
+    memory?: NullableMemory;
+    /**
+     *  The limit of memory reserve for the container. 
+     */
+    memoryReservation?: NullableMemoryReservation;
+  }
   export type Message = string;
   export type MetadataKey = string;
   export type MetricName = "Cpu"|"Memory"|"EBS_READ_OPS_PER_SECOND"|"EBS_WRITE_OPS_PER_SECOND"|"EBS_READ_BYTES_PER_SECOND"|"EBS_WRITE_BYTES_PER_SECOND"|"DISK_READ_OPS_PER_SECOND"|"DISK_WRITE_OPS_PER_SECOND"|"DISK_READ_BYTES_PER_SECOND"|"DISK_WRITE_BYTES_PER_SECOND"|"NETWORK_IN_BYTES_PER_SECOND"|"NETWORK_OUT_BYTES_PER_SECOND"|"NETWORK_PACKETS_IN_PER_SECOND"|"NETWORK_PACKETS_OUT_PER_SECOND"|string;
@@ -1166,6 +1483,9 @@ declare namespace ComputeOptimizer {
   export type MigrationEffort = "VeryLow"|"Low"|"Medium"|"High"|string;
   export type MinSize = number;
   export type NextToken = string;
+  export type NullableCpu = number;
+  export type NullableMemory = number;
+  export type NullableMemoryReservation = number;
   export type NumberOfInvocations = number;
   export type NumberOfMemberAccountsOptedIn = number;
   export type PerformanceRisk = number;
@@ -1298,7 +1618,7 @@ declare namespace ComputeOptimizer {
     recommendationSourceType?: RecommendationSourceType;
   }
   export type RecommendationSourceArn = string;
-  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|string;
+  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|string;
   export type RecommendationSources = RecommendationSource[];
   export type RecommendationSummaries = RecommendationSummary[];
   export interface RecommendationSummary {
@@ -1340,7 +1660,7 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
   export type ResourceArn = string;
-  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|string;
+  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|string;
   export interface S3Destination {
     /**
      * The name of the Amazon S3 bucket used as the destination of an export file.
@@ -1388,6 +1708,30 @@ declare namespace ComputeOptimizer {
   }
   export type ScopeName = "Organization"|"AccountId"|"ResourceArn"|string;
   export type ScopeValue = string;
+  export type ServiceArn = string;
+  export type ServiceArns = ServiceArn[];
+  export interface ServiceConfiguration {
+    /**
+     *  The amount of memory used by the tasks in the ECS service. 
+     */
+    memory?: NullableMemory;
+    /**
+     *  The number of CPU units used by the tasks in the ECS service. 
+     */
+    cpu?: NullableCpu;
+    /**
+     *  The container configurations within a task of an ECS service. 
+     */
+    containerConfigurations?: ContainerConfigurations;
+    /**
+     *  Describes the Auto Scaling configuration methods for an Amazon ECS service. This affects the generated recommendations. For example, if Auto Scaling is configured on a ECS service’s CPU, then Compute Optimizer doesn’t generate CPU size recommendations.  The Auto Scaling configuration methods include:    TARGET_TRACKING_SCALING_CPU — If the ECS service is configured to use target scaling on CPU, Compute Optimizer doesn't generate CPU recommendations.    TARGET_TRACKING_SCALING_MEMORY — If the ECS service is configured to use target scaling on memory, Compute Optimizer doesn't generate memory recommendations.   For more information about step scaling and target scaling, see  Step scaling policies for Application Auto Scaling and  Target tracking scaling policies for Application Auto Scaling in the Application Auto Scaling User Guide.
+     */
+    autoScalingConfiguration?: AutoScalingConfiguration;
+    /**
+     *  The task definition ARN used by the tasks in the ECS service. 
+     */
+    taskDefinitionArn?: TaskDefinitionArn;
+  }
   export type Status = "Active"|"Inactive"|"Pending"|"Failed"|string;
   export type StatusReason = string;
   export type Summaries = Summary[];
@@ -1406,6 +1750,7 @@ declare namespace ComputeOptimizer {
     reasonCodeSummaries?: ReasonCodeSummaries;
   }
   export type SummaryValue = number;
+  export type TaskDefinitionArn = string;
   export type Timestamp = Date;
   export type Timestamps = Timestamp[];
   export interface UpdateEnrollmentStatusRequest {
@@ -1428,6 +1773,7 @@ declare namespace ComputeOptimizer {
      */
     statusReason?: StatusReason;
   }
+  export type UpperBoundValue = number;
   export interface UtilizationMetric {
     /**
      * The name of the utilization metric. The following utilization metrics are available:    Cpu - The percentage of allocated EC2 compute units that are currently in use on the instance. This metric identifies the processing power required to run an application on the instance. Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core. Units: Percent    Memory - The percentage of memory that is currently in use on the instance. This metric identifies the amount of memory required to run an application on the instance. Units: Percent  The Memory metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see Enabling Memory Utilization with the CloudWatch Agent.     EBS_READ_OPS_PER_SECOND - The completed read operations from all EBS volumes attached to the instance in a specified period of time. Unit: Count    EBS_WRITE_OPS_PER_SECOND - The completed write operations to all EBS volumes attached to the instance in a specified period of time. Unit: Count    EBS_READ_BYTES_PER_SECOND - The bytes read from all EBS volumes attached to the instance in a specified period of time. Unit: Bytes    EBS_WRITE_BYTES_PER_SECOND - The bytes written to all EBS volumes attached to the instance in a specified period of time. Unit: Bytes    DISK_READ_OPS_PER_SECOND - The completed read operations from all instance store volumes available to the instance in a specified period of time. If there are no instance store volumes, either the value is 0 or the metric is not reported.    DISK_WRITE_OPS_PER_SECOND - The completed write operations from all instance store volumes available to the instance in a specified period of time. If there are no instance store volumes, either the value is 0 or the metric is not reported.    DISK_READ_BYTES_PER_SECOND - The bytes read from all instance store volumes available to the instance. This metric is used to determine the volume of the data the application reads from the disk of the instance. This can be used to determine the speed of the application. If there are no instance store volumes, either the value is 0 or the metric is not reported.    DISK_WRITE_BYTES_PER_SECOND - The bytes written to all instance store volumes available to the instance. This metric is used to determine the volume of the data the application writes onto the disk of the instance. This can be used to determine the speed of the application. If there are no instance store volumes, either the value is 0 or the metric is not reported.    NETWORK_IN_BYTES_PER_SECOND - The number of bytes received by the instance on all network interfaces. This metric identifies the volume of incoming network traffic to a single instance.    NETWORK_OUT_BYTES_PER_SECOND - The number of bytes sent out by the instance on all network interfaces. This metric identifies the volume of outgoing network traffic from a single instance.    NETWORK_PACKETS_IN_PER_SECOND - The number of packets received by the instance on all network interfaces. This metric identifies the volume of incoming traffic in terms of the number of packets on a single instance.    NETWORK_PACKETS_OUT_PER_SECOND - The number of packets sent out by the instance on all network interfaces. This metric identifies the volume of outgoing traffic in terms of the number of packets on a single instance.  
