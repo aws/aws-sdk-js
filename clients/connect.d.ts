@@ -892,11 +892,11 @@ declare class Connect extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
   /**
-   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact. Supports voice and chat contacts.
+   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
    */
   monitorContact(params: Connect.Types.MonitorContactRequest, callback?: (err: AWSError, data: Connect.Types.MonitorContactResponse) => void): Request<Connect.Types.MonitorContactResponse, AWSError>;
   /**
-   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact. Supports voice and chat contacts.
+   * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
    */
   monitorContact(callback?: (err: AWSError, data: Connect.Types.MonitorContactResponse) => void): Request<Connect.Types.MonitorContactResponse, AWSError>;
   /**
@@ -1463,6 +1463,10 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the agent's status.
      */
     StatusArn?: ARN;
+    /**
+     * The name of the agent status.
+     */
+    StatusName?: AgentStatusName;
   }
   export type AgentStatusState = "ENABLED"|"DISABLED"|string;
   export interface AgentStatusSummary {
@@ -1487,6 +1491,7 @@ declare namespace Connect {
   export type AgentStatusType = "ROUTABLE"|"CUSTOM"|"OFFLINE"|string;
   export type AgentStatusTypes = AgentStatusType[];
   export type AgentUsername = string;
+  export type AgentsMinOneMaxHundred = UserId[];
   export type AliasArn = string;
   export type AllowedAccessControlTags = {[key: string]: SecurityProfilePolicyValue};
   export type AllowedMonitorCapabilities = MonitorCapability[];
@@ -2694,6 +2699,14 @@ declare namespace Connect {
     Collections?: CurrentMetricDataCollections;
   }
   export type CurrentMetricResults = CurrentMetricResult[];
+  export interface CurrentMetricSortCriteria {
+    SortByMetric?: CurrentMetricName;
+    /**
+     * The way to sort.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type CurrentMetricSortCriteriaMaxOne = CurrentMetricSortCriteria[];
   export type CurrentMetrics = CurrentMetric[];
   export interface DateReference {
     /**
@@ -3184,6 +3197,7 @@ declare namespace Connect {
      * The channel used for grouping and filters.
      */
     Channel?: Channel;
+    RoutingProfile?: RoutingProfileReference;
   }
   export type DirectoryAlias = string;
   export type DirectoryId = string;
@@ -3363,6 +3377,10 @@ declare namespace Connect {
      * The channel to use to filter the metrics.
      */
     Channels?: Channels;
+    /**
+     * A list of up to 100 routing profile IDs or ARNs.
+     */
+    RoutingProfiles?: RoutingProfiles;
   }
   export type FunctionArn = string;
   export type FunctionArnsList = FunctionArn[];
@@ -3388,11 +3406,11 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.
+     * The filters to apply to returned metrics. You can filter up to the following limits:   Queues: 100   Routing profiles: 100   Channels: 3 (VOICE, CHAT, and TASK channels are supported.)   Metric data is retrieved only for the resources associated with the queues or routing profiles, and by any channels included in the filter. (You cannot filter by both queue AND routing profile.) You can include both resource IDs and resource ARNs in the same request.  Currently tagging is only supported on the resources that are passed in the filter.
      */
     Filters: Filters;
     /**
-     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues.    If you group by CHANNEL, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported.   If you group by ROUTING_PROFILE, you must include either a queue or routing profile filter.   If no Grouping is included in the request, a summary of metrics is returned.  
+     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues.    If you group by CHANNEL, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported.   If you group by ROUTING_PROFILE, you must include either a queue or routing profile filter. In addition, a routing profile filter is required for metrics CONTACTS_SCHEDULED, CONTACTS_IN_QUEUE, and  OLDEST_CONTACT_AGE.   If no Grouping is included in the request, a summary of metrics is returned.  
      */
     Groupings?: Groupings;
     /**
@@ -3407,6 +3425,10 @@ declare namespace Connect {
      * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
+    /**
+     * The way to sort the resulting response based on metrics. You can enter one sort criteria. By default resources are sorted based on AGENTS_ONLINE, DESCENDING. The metric collection is sorted based on the input metrics. Note the following:   Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.  
+     */
+    SortCriteria?: CurrentMetricSortCriteriaMaxOne;
   }
   export interface GetCurrentMetricDataResponse {
     /**
@@ -3421,6 +3443,10 @@ declare namespace Connect {
      * The time at which the metrics were retrieved and cached for pagination.
      */
     DataSnapshotTime?: timestamp;
+    /**
+     * The total count of the result, regardless of the current page size. 
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
   }
   export interface GetCurrentUserDataRequest {
     /**
@@ -3428,7 +3454,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * Filters up to 100 Queues, or up to 9 ContactStates. The user data is retrieved only for those users who are associated with the queues and have contacts that are in the specified ContactState. 
+     * The filters to apply to returned user data. You can filter up to the following limits:   Queues: 100   Routing profiles: 100   Agents: 100   Contact states: 9   User hierarchy groups: 1    The user data is retrieved for only the specified values/resources in the filter. A maximum of one filter can be passed from queues, routing profiles, agents, and user hierarchy groups.  Currently tagging is only supported on the resources that are passed in the filter.
      */
     Filters: UserDataFilters;
     /**
@@ -3449,6 +3475,10 @@ declare namespace Connect {
      * A list of the user data that is returned.
      */
     UserDataList?: UserDataList;
+    /**
+     * The total count of the result, regardless of the current page size.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
   }
   export interface GetFederationTokenRequest {
     /**
@@ -3606,7 +3636,7 @@ declare namespace Connect {
      */
     Arn?: TrafficDistributionGroupArn;
   }
-  export type Grouping = "QUEUE"|"CHANNEL"|string;
+  export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|string;
   export type Groupings = Grouping[];
   export interface HierarchyGroup {
     /**
@@ -5648,6 +5678,7 @@ declare namespace Connect {
     Name?: RoutingProfileName;
   }
   export type RoutingProfileSummaryList = RoutingProfileSummary[];
+  export type RoutingProfiles = RoutingProfileId[];
   export interface Rule {
     /**
      * The name of the rule.
@@ -6132,6 +6163,7 @@ declare namespace Connect {
   }
   export type SingleSelectOptions = TaskTemplateSingleSelectOption[];
   export type SnapshotVersion = string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SourceApplicationName = string;
   export type SourceType = "SALESFORCE"|"ZENDESK"|string;
   export interface StartChatContactRequest {
@@ -7488,17 +7520,34 @@ declare namespace Connect {
      * A list of contact reference information.
      */
     Contacts?: AgentContactReferenceList;
+    /**
+     * The Next status of the agent.
+     */
+    NextStatus?: AgentStatusName;
   }
   export interface UserDataFilters {
     /**
-     * Contains information about a queue resource for which metrics are returned.
+     * A list of up to 100 queues or ARNs.
      */
     Queues?: Queues;
     /**
      * A filter for the user data based on the contact information that is associated to the user. It contains a list of contact states. 
      */
     ContactFilter?: ContactFilter;
+    /**
+     * A list of up to 100 routing profile IDs or ARNs.
+     */
+    RoutingProfiles?: RoutingProfiles;
+    /**
+     * A list of up to 100 agent IDs or ARNs.
+     */
+    Agents?: AgentsMinOneMaxHundred;
+    /**
+     * A UserHierarchyGroup ID or ARN.
+     */
+    UserHierarchyGroups?: UserDataHierarchyGroups;
   }
+  export type UserDataHierarchyGroups = HierarchyGroupId[];
   export type UserDataList = UserData[];
   export type UserId = string;
   export type UserIdList = UserId[];

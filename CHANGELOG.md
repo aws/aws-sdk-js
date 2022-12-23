@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1281.0-->
+<!--LATEST=2.1282.0-->
 <!--ENTRYINSERT-->
+
+## 2.1282.0
+* feature: Connect: Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.
+* feature: ConnectParticipant: Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message.
+* feature: Detective: This release adds a missed AccessDeniedException type to several endpoints.
+* feature: FSx: Fix a bug where a recent release might break certain existing SDKs.
+* feature: Inspector2: Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.
 
 ## 2.1281.0
 * feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.

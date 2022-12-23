@@ -23,6 +23,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ConflictException"
         },
         {
@@ -51,6 +54,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -75,6 +81,9 @@
         "shape": "BatchGetMembershipDatasourcesResponse"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -101,6 +110,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ConflictException"
         },
         {
@@ -125,6 +137,9 @@
         "shape": "CreateMembersResponse"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -151,6 +166,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -175,6 +193,9 @@
         "shape": "DeleteMembersResponse"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "ConflictException"
         },
@@ -204,6 +225,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -222,6 +246,9 @@
         "requestUri": "/orgs/disableAdminAccount"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -244,6 +271,9 @@
         "shape": "DisassociateMembershipRequest"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "ConflictException"
         },
@@ -270,6 +300,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -294,6 +327,9 @@
         "shape": "GetMembersResponse"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -320,6 +356,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -345,6 +384,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -367,6 +409,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -388,6 +433,9 @@
         "shape": "ListMembersResponse"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -413,6 +461,9 @@
         "shape": "ListOrganizationAdminAccountsResponse"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -440,6 +491,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -461,6 +515,9 @@
         "shape": "RejectInvitationRequest"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "ConflictException"
         },
@@ -486,6 +543,9 @@
         "shape": "StartMonitoringMemberRequest"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "ConflictException"
         },
@@ -519,6 +579,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -545,6 +608,9 @@
       },
       "errors": [
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -566,6 +632,9 @@
         "shape": "UpdateDatasourcePackagesRequest"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -591,6 +660,9 @@
         "shape": "UpdateOrganizationConfigurationRequest"
       },
       "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
         {
           "shape": "InternalServerException"
         },
@@ -963,7 +1035,7 @@
       "type": "string",
       "max": 64,
       "min": 1,
-      "pattern": "^.+@.+$"
+      "pattern": "^.+@(?:(?:(?!-)[A-Za-z0-9-]{1,62})?[A-Za-z0-9]{1}\\.)+[A-Za-z]{2,6}$"
     },
     "EmailMessage": {
       "type": "string",

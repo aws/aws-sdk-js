@@ -12,67 +12,67 @@ declare class ConnectParticipant extends Service {
   constructor(options?: ConnectParticipant.Types.ClientConfiguration)
   config: Config & ConnectParticipant.Types.ClientConfiguration;
   /**
-   * Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   completeAttachmentUpload(params: ConnectParticipant.Types.CompleteAttachmentUploadRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.CompleteAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.CompleteAttachmentUploadResponse, AWSError>;
   /**
-   * Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   completeAttachmentUpload(callback?: (err: AWSError, data: ConnectParticipant.Types.CompleteAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.CompleteAttachmentUploadResponse, AWSError>;
   /**
-   * Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken. The participant token is valid for the lifetime of the participant – until they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.  Message streaming support: This API can also be used together with the StartContactStreaming API to create a participant connection for chat contacts that are not using a websocket. For more information about message streaming, Enable real-time chat message streaming in the Amazon Connect Administrator Guide.  Feature specifications: For information about feature specifications, such as the allowed number of open websocket connections per participant, see Feature specifications in the Amazon Connect Administrator Guide.   The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
+   * Creates the participant's connection.    ParticipantToken is used for invoking this API instead of ConnectionToken.  The participant token is valid for the lifetime of the participant – until they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.  Message streaming support: This API can also be used together with the StartContactStreaming API to create a participant connection for chat contacts that are not using a websocket. For more information about message streaming, Enable real-time chat message streaming in the Amazon Connect Administrator Guide.  Feature specifications: For information about feature specifications, such as the allowed number of open websocket connections per participant, see Feature specifications in the Amazon Connect Administrator Guide.   The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
    */
   createParticipantConnection(params: ConnectParticipant.Types.CreateParticipantConnectionRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.CreateParticipantConnectionResponse) => void): Request<ConnectParticipant.Types.CreateParticipantConnectionResponse, AWSError>;
   /**
-   * Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken. The participant token is valid for the lifetime of the participant – until they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.  Message streaming support: This API can also be used together with the StartContactStreaming API to create a participant connection for chat contacts that are not using a websocket. For more information about message streaming, Enable real-time chat message streaming in the Amazon Connect Administrator Guide.  Feature specifications: For information about feature specifications, such as the allowed number of open websocket connections per participant, see Feature specifications in the Amazon Connect Administrator Guide.   The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
+   * Creates the participant's connection.    ParticipantToken is used for invoking this API instead of ConnectionToken.  The participant token is valid for the lifetime of the participant – until they are part of a contact. The response URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.  For chat, you need to publish the following on the established websocket connection:  {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}  Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.  Message streaming support: This API can also be used together with the StartContactStreaming API to create a participant connection for chat contacts that are not using a websocket. For more information about message streaming, Enable real-time chat message streaming in the Amazon Connect Administrator Guide.  Feature specifications: For information about feature specifications, such as the allowed number of open websocket connections per participant, see Feature specifications in the Amazon Connect Administrator Guide.   The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication. 
    */
   createParticipantConnection(callback?: (err: AWSError, data: ConnectParticipant.Types.CreateParticipantConnectionResponse) => void): Request<ConnectParticipant.Types.CreateParticipantConnectionResponse, AWSError>;
   /**
-   * Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Disconnects a participant.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   disconnectParticipant(params: ConnectParticipant.Types.DisconnectParticipantRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.DisconnectParticipantResponse) => void): Request<ConnectParticipant.Types.DisconnectParticipantResponse, AWSError>;
   /**
-   * Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Disconnects a participant.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   disconnectParticipant(callback?: (err: AWSError, data: ConnectParticipant.Types.DisconnectParticipantResponse) => void): Request<ConnectParticipant.Types.DisconnectParticipantResponse, AWSError>;
   /**
-   * Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.   ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getAttachment(params: ConnectParticipant.Types.GetAttachmentRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.GetAttachmentResponse) => void): Request<ConnectParticipant.Types.GetAttachmentResponse, AWSError>;
   /**
-   * Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.   ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getAttachment(callback?: (err: AWSError, data: ConnectParticipant.Types.GetAttachmentResponse) => void): Request<ConnectParticipant.Types.GetAttachmentResponse, AWSError>;
   /**
-   * Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Retrieves a transcript of the session, including details about any attachments.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getTranscript(params: ConnectParticipant.Types.GetTranscriptRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.GetTranscriptResponse) => void): Request<ConnectParticipant.Types.GetTranscriptResponse, AWSError>;
   /**
-   * Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Retrieves a transcript of the session, including details about any attachments.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getTranscript(callback?: (err: AWSError, data: ConnectParticipant.Types.GetTranscriptResponse) => void): Request<ConnectParticipant.Types.GetTranscriptResponse, AWSError>;
   /**
-   * Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Sends an event.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   sendEvent(params: ConnectParticipant.Types.SendEventRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.SendEventResponse) => void): Request<ConnectParticipant.Types.SendEventResponse, AWSError>;
   /**
-   * Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Sends an event.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   sendEvent(callback?: (err: AWSError, data: ConnectParticipant.Types.SendEventResponse) => void): Request<ConnectParticipant.Types.SendEventResponse, AWSError>;
   /**
-   * Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Sends a message.   ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   sendMessage(params: ConnectParticipant.Types.SendMessageRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.SendMessageResponse) => void): Request<ConnectParticipant.Types.SendMessageResponse, AWSError>;
   /**
-   * Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Sends a message.   ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   sendMessage(callback?: (err: AWSError, data: ConnectParticipant.Types.SendMessageResponse) => void): Request<ConnectParticipant.Types.SendMessageResponse, AWSError>;
   /**
-   * Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.   ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   startAttachmentUpload(params: ConnectParticipant.Types.StartAttachmentUploadRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.StartAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.StartAttachmentUploadResponse, AWSError>;
   /**
-   * Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3. The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.   ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   startAttachmentUpload(callback?: (err: AWSError, data: ConnectParticipant.Types.StartAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.StartAttachmentUploadResponse, AWSError>;
 }
@@ -105,7 +105,7 @@ declare namespace ConnectParticipant {
   export type ChatContent = string;
   export type ChatContentType = string;
   export type ChatItemId = string;
-  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK"|string;
+  export type ChatItemType = "TYPING"|"PARTICIPANT_JOINED"|"PARTICIPANT_LEFT"|"CHAT_ENDED"|"TRANSFER_SUCCEEDED"|"TRANSFER_FAILED"|"MESSAGE"|"EVENT"|"ATTACHMENT"|"CONNECTION_ACK"|"MESSAGE_DELIVERED"|"MESSAGE_READ"|string;
   export type ClientToken = string;
   export interface CompleteAttachmentUploadRequest {
     /**
@@ -113,7 +113,7 @@ declare namespace ConnectParticipant {
      */
     AttachmentIds: AttachmentIdList;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken: NonEmptyClientToken;
     /**
@@ -139,9 +139,9 @@ declare namespace ConnectParticipant {
   export type ContentType = string;
   export interface CreateParticipantConnectionRequest {
     /**
-     * Type of connection information required.
+     * Type of connection information required. This can be omitted if ConnectParticipant is true.
      */
-    Type: ConnectionTypeList;
+    Type?: ConnectionTypeList;
     /**
      * This is a header parameter. The ParticipantToken as obtained from StartChatContact API response.
      */
@@ -163,7 +163,7 @@ declare namespace ConnectParticipant {
   }
   export interface DisconnectParticipantRequest {
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
     /**
@@ -277,8 +277,22 @@ declare namespace ConnectParticipant {
      * Provides information about the attachments.
      */
     Attachments?: Attachments;
+    /**
+     * The metadata related to the message. Currently this supports only information related to message receipts.
+     */
+    MessageMetadata?: MessageMetadata;
   }
   export type MaxResults = number;
+  export interface MessageMetadata {
+    /**
+     * The identifier of the message that contains the metadata information. 
+     */
+    MessageId?: ChatItemId;
+    /**
+     * The list of receipt information for a message for different recipients.
+     */
+    Receipts?: Receipts;
+  }
   export type MostRecent = number;
   export type NextToken = string;
   export type NonEmptyClientToken = string;
@@ -287,18 +301,33 @@ declare namespace ConnectParticipant {
   export type ParticipantToken = string;
   export type PreSignedAttachmentUrl = string;
   export type PreSignedConnectionUrl = string;
+  export interface Receipt {
+    /**
+     * The time when the message was delivered to the recipient.
+     */
+    DeliveredTimestamp?: Instant;
+    /**
+     * The time when the message was read by the recipient.
+     */
+    ReadTimestamp?: Instant;
+    /**
+     * The identifier of the recipient of the message. 
+     */
+    RecipientParticipantId?: ParticipantId;
+  }
+  export type Receipts = Receipt[];
   export type ScanDirection = "FORWARD"|"BACKWARD"|string;
   export interface SendEventRequest {
     /**
-     * The content type of the request. Supported types are:   application/vnd.amazonaws.connect.event.typing   application/vnd.amazonaws.connect.event.connection.acknowledged  
+     * The content type of the request. Supported types are:   application/vnd.amazonaws.connect.event.typing   application/vnd.amazonaws.connect.event.connection.acknowledged   application/vnd.amazonaws.connect.event.message.delivered   application/vnd.amazonaws.connect.event.message.read  
      */
     ContentType: ChatContentType;
     /**
-     * The content of the event to be sent (for example, message text). This is not yet supported.
+     * The content of the event to be sent (for example, message text). For content related to message receipts, this is supported in the form of a JSON string. Sample Content: "{\"messageId\":\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\"}"
      */
     Content?: ChatContent;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
     /**
@@ -318,15 +347,15 @@ declare namespace ConnectParticipant {
   }
   export interface SendMessageRequest {
     /**
-     * The type of the content. Supported types are text/plain.
+     * The type of the content. Supported types are text/plain, text/markdown, and application/json.
      */
     ContentType: ChatContentType;
     /**
-     * The content of the message.
+     * The content of the message.    For text/plain and text/markdown, the Length Constraints are Minimum of 1, Maximum of 1024.    For application/json, the Length Constraints are Minimum of 1, Maximum of 12000.   
      */
     Content: ChatContent;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientToken;
     /**
@@ -359,7 +388,7 @@ declare namespace ConnectParticipant {
      */
     AttachmentName: AttachmentName;
     /**
-     * A unique case sensitive identifier to support idempotency of request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken: NonEmptyClientToken;
     /**
