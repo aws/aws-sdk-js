@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1282.0-->
+<!--LATEST=2.1283.0-->
 <!--ENTRYINSERT-->
+
+## 2.1283.0
+* feature: MemoryDB: This release adds support for MemoryDB Reserved nodes which provides a significant discount compared to on-demand node pricing. Reserved nodes are not physical nodes, but rather a billing discount applied to the use of on-demand nodes in your account.
+* feature: Transfer: Add additional operations to throw ThrottlingExceptions
 
 ## 2.1282.0
 * feature: Connect: Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.
