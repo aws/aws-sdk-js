@@ -766,7 +766,7 @@ declare namespace ElastiCache {
      */
     AuthTokenLastModifiedDate?: TStamp;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
+     * A flag that enables in-transit encryption when set to true.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
@@ -793,6 +793,10 @@ declare namespace ElastiCache {
      * The network type associated with the cluster, either ipv4 | ipv6. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.
      */
     IpDiscovery?: IpDiscovery;
+    /**
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
+     */
+    TransitEncryptionMode?: TransitEncryptionMode;
   }
   export type CacheClusterIdList = String[];
   export type CacheClusterList = CacheCluster[];
@@ -1283,7 +1287,7 @@ declare namespace ElastiCache {
      */
     LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Only available when creating a cache cluster in an Amazon VPC using Memcached version 1.6.12 or later.
+     * A flag that enables in-transit encryption when set to true.  Only available when creating a cache cluster in an Amazon VPC using Memcached version 1.6.12 or later.
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
@@ -1424,7 +1428,7 @@ declare namespace ElastiCache {
      */
     CacheNodeType?: String;
     /**
-     * The name of the cache engine to be used for the clusters in this replication group. Must be Redis.
+     * The name of the cache engine to be used for the clusters in this replication group. The value must be set to Redis.
      */
     Engine?: String;
     /**
@@ -1488,7 +1492,7 @@ declare namespace ElastiCache {
      */
     AuthToken?: String;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster. This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6, 4.x or later, and the cluster is being created in an Amazon VPC. If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false   For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup. 
+     * A flag that enables in-transit encryption when set to true. This parameter is valid only if the Engine parameter is redis, the EngineVersion parameter is 3.2.6, 4.x or later, and the cluster is being created in an Amazon VPC. If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false   For HIPAA compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup. 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
@@ -1519,6 +1523,10 @@ declare namespace ElastiCache {
      * The network type you choose when creating a replication group, either ipv4 | ipv6. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.
      */
     IpDiscovery?: IpDiscovery;
+    /**
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. When setting TransitEncryptionEnabled to true, you can set your TransitEncryptionMode to preferred in the same request, to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can modify the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred first, after that you can set TransitEncryptionMode to required. 
+     */
+    TransitEncryptionMode?: TransitEncryptionMode;
   }
   export interface CreateReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -1776,7 +1784,7 @@ declare namespace ElastiCache {
      */
     EngineVersion?: String;
     /**
-     * The name of a specific cache parameter group family to return details for. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2  Constraints:   Must be 1 to 255 alphanumeric characters   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens  
+     * The name of a specific cache parameter group family to return details for. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 | redis7  Constraints:   Must be 1 to 255 alphanumeric characters   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens  
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -1854,7 +1862,7 @@ declare namespace ElastiCache {
   }
   export interface DescribeEngineDefaultParametersMessage {
     /**
-     * The name of the cache parameter group family. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 
+     * The name of the cache parameter group family. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 | redis7 
      */
     CacheParameterGroupFamily: String;
     /**
@@ -2348,7 +2356,7 @@ declare namespace ElastiCache {
      */
     AuthTokenEnabled?: BooleanOptional;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.   Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later.
+     * A flag that enables in-transit encryption when set to true.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later.
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
@@ -2770,6 +2778,14 @@ declare namespace ElastiCache {
      * The network type you choose when modifying a cluster, either ipv4 | ipv6. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.
      */
     IpDiscovery?: IpDiscovery;
+    /**
+     * A flag that enables in-transit encryption when set to true. If you are enabling in-transit encryption for an existing cluster, you must also set TransitEncryptionMode to preferred.
+     */
+    TransitEncryptionEnabled?: BooleanOptional;
+    /**
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. You must set TransitEncryptionEnabled to true, for your existing cluster, and set TransitEncryptionMode to preferred in the same request to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can set the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred first, after that you can set TransitEncryptionMode to required. 
+     */
+    TransitEncryptionMode?: TransitEncryptionMode;
   }
   export interface ModifyReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -3125,6 +3141,14 @@ declare namespace ElastiCache {
      * The log delivery configurations being modified 
      */
     LogDeliveryConfigurations?: PendingLogDeliveryConfigurationList;
+    /**
+     * A flag that enables in-transit encryption when set to true.
+     */
+    TransitEncryptionEnabled?: BooleanOptional;
+    /**
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
+     */
+    TransitEncryptionMode?: TransitEncryptionMode;
   }
   export type PreferredAvailabilityZoneList = String[];
   export type PreferredOutpostArnList = String[];
@@ -3302,7 +3326,7 @@ declare namespace ElastiCache {
      */
     AuthTokenLastModifiedDate?: TStamp;
     /**
-     * A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created. To enable in-transit encryption on a cluster you must set TransitEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
+     * A flag that enables in-transit encryption when set to true.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
@@ -3338,7 +3362,7 @@ declare namespace ElastiCache {
      */
     DataTiering?: DataTieringStatus;
     /**
-     *  If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+     *  If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions.  
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
@@ -3349,6 +3373,10 @@ declare namespace ElastiCache {
      * The network type you choose when modifying a cluster, either ipv4 | ipv6. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.
      */
     IpDiscovery?: IpDiscovery;
+    /**
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
+     */
+    TransitEncryptionMode?: TransitEncryptionMode;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];
@@ -3388,6 +3416,14 @@ declare namespace ElastiCache {
      * The log delivery configurations being modified 
      */
     LogDeliveryConfigurations?: PendingLogDeliveryConfigurationList;
+    /**
+     * A flag that enables in-transit encryption when set to true.
+     */
+    TransitEncryptionEnabled?: BooleanOptional;
+    /**
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
+     */
+    TransitEncryptionMode?: TransitEncryptionMode;
   }
   export interface ReservedCacheNode {
     /**
@@ -3829,6 +3865,7 @@ declare namespace ElastiCache {
      */
     EndTime?: TStamp;
   }
+  export type TransitEncryptionMode = "preferred"|"required"|string;
   export type UGReplicationGroupIdList = String[];
   export interface UnprocessedUpdateAction {
     /**

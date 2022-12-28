@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1283.0-->
+<!--LATEST=2.1284.0-->
 <!--ENTRYINSERT-->
+
+## 2.1284.0
+* feature: ElastiCache: This release allows you to modify the encryption in transit setting, for existing Redis clusters. You can now change the TLS configuration of your Redis clusters without the need to re-build or re-provision the clusters or impact application availability.
+* feature: NetworkFirewall: AWS Network Firewall now provides status messages for firewalls to help you troubleshoot when your endpoint fails.
+* feature: RDS: This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.
+* feature: Route53RecoveryControlConfig: Added support for Python paginators in the route53-recovery-control-config List* APIs.
 
 ## 2.1283.0
 * feature: MemoryDB: This release adds support for MemoryDB Reserved nodes which provides a significant discount compared to on-demand node pricing. Reserved nodes are not physical nodes, but rather a billing discount applied to the use of on-demand nodes in your account.

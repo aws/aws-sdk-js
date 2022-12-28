@@ -126,11 +126,11 @@ declare class RDS extends Service {
    */
   createBlueGreenDeployment(callback?: (err: AWSError, data: RDS.Types.CreateBlueGreenDeploymentResponse) => void): Request<RDS.Types.CreateBlueGreenDeploymentResponse, AWSError>;
   /**
-   * Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a database engine and specific AMI. The supported engines are the following:   Oracle Database 12.1 Enterprise Edition with the January 2021 or later RU/RUR   Oracle Database 19c Enterprise Edition with the January 2021 or later RU/RUR   Amazon RDS, which is a fully managed service, supplies the Amazon Machine Image (AMI) and database software. The Amazon RDS database software is preinstalled, so you need only select a DB engine and version, and create your database. With Amazon RDS Custom for Oracle, you upload your database installation files in Amazon S3. When you create a custom engine version, you specify the files in a JSON document called a CEV manifest. This document describes installation .zip files stored in Amazon S3. RDS Custom creates your CEV from the installation files that you provided. This service model is called Bring Your Own Media (BYOM). Creation takes approximately two hours. If creation fails, RDS Custom issues RDS-EVENT-0196 with the message Creation failed for custom engine version, and includes details about the failure. For example, the event prints missing files. After you create the CEV, it is available for use. You can create multiple CEVs, and create multiple RDS Custom instances from any CEV. You can also change the status of a CEV to make it available or inactive.  The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the CreateCustomDbEngineVersion event aren't logged. However, you might see calls from the API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for the CreateCustomDbEngineVersion event.  For more information, see  Creating a CEV in the Amazon RDS User Guide.
+   * Creates a custom DB engine version (CEV).
    */
   createCustomDBEngineVersion(params: RDS.Types.CreateCustomDBEngineVersionMessage, callback?: (err: AWSError, data: RDS.Types.DBEngineVersion) => void): Request<RDS.Types.DBEngineVersion, AWSError>;
   /**
-   * Creates a custom DB engine version (CEV). A CEV is a binary volume snapshot of a database engine and specific AMI. The supported engines are the following:   Oracle Database 12.1 Enterprise Edition with the January 2021 or later RU/RUR   Oracle Database 19c Enterprise Edition with the January 2021 or later RU/RUR   Amazon RDS, which is a fully managed service, supplies the Amazon Machine Image (AMI) and database software. The Amazon RDS database software is preinstalled, so you need only select a DB engine and version, and create your database. With Amazon RDS Custom for Oracle, you upload your database installation files in Amazon S3. When you create a custom engine version, you specify the files in a JSON document called a CEV manifest. This document describes installation .zip files stored in Amazon S3. RDS Custom creates your CEV from the installation files that you provided. This service model is called Bring Your Own Media (BYOM). Creation takes approximately two hours. If creation fails, RDS Custom issues RDS-EVENT-0196 with the message Creation failed for custom engine version, and includes details about the failure. For example, the event prints missing files. After you create the CEV, it is available for use. You can create multiple CEVs, and create multiple RDS Custom instances from any CEV. You can also change the status of a CEV to make it available or inactive.  The MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with Amazon Web Services CloudTrail. If you turn on data logging for Amazon RDS in CloudTrail, calls to the CreateCustomDbEngineVersion event aren't logged. However, you might see calls from the API gateway that accesses your Amazon S3 bucket. These calls originate from the MediaImport service for the CreateCustomDbEngineVersion event.  For more information, see  Creating a CEV in the Amazon RDS User Guide.
+   * Creates a custom DB engine version (CEV).
    */
   createCustomDBEngineVersion(callback?: (err: AWSError, data: RDS.Types.DBEngineVersion) => void): Request<RDS.Types.DBEngineVersion, AWSError>;
   /**
@@ -1753,15 +1753,19 @@ declare namespace RDS {
     /**
      * The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is my-custom-installation-files.
      */
-    DatabaseInstallationFilesS3BucketName: BucketName;
+    DatabaseInstallationFilesS3BucketName?: BucketName;
     /**
      * The Amazon S3 directory that contains the database installation files for your CEV. For example, a valid bucket name is 123456789012/cev1. If this setting isn't specified, no prefix is assumed.
      */
     DatabaseInstallationFilesS3Prefix?: String255;
     /**
+     * The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for SQL Server.
+     */
+    ImageId?: String255;
+    /**
      * The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric encryption KMS key is required for RDS Custom, but optional for Amazon RDS. If you have an existing symmetric encryption KMS key in your account, you can use it with RDS Custom. No further action is necessary. If you don't already have a symmetric encryption KMS key in your account, follow the instructions in  Creating a symmetric encryption KMS key in the Amazon Web Services Key Management Service Developer Guide. You can choose the same symmetric encryption key when you create a CEV and a DB instance, or choose different keys.
      */
-    KMSKeyId: KmsKeyIdOrArn;
+    KMSKeyId?: KmsKeyIdOrArn;
     /**
      * An optional description of your CEV.
      */
@@ -1769,7 +1773,7 @@ declare namespace RDS {
     /**
      * The CEV manifest, which is a JSON document that describes the installation .zip files stored in Amazon S3. Specify the name/value pairs in a file or a quoted string. RDS Custom applies the patches in the order in which they are listed. The following JSON fields are valid:  MediaImportTemplateVersion  Version of the CEV manifest. The date is in the format YYYY-MM-DD.  databaseInstallationFileNames  Ordered list of installation files for the CEV.  opatchFileNames  Ordered list of OPatch installers used for the Oracle DB engine.  psuRuPatchFileNames  The PSU and RU patches for this CEV.  OtherPatchFileNames  The patches that are not in the list of PSU and RU patches. Amazon RDS applies these patches after applying the PSU and RU patches.   For more information, see  Creating the CEV manifest in the Amazon RDS User Guide.
      */
-    Manifest: CustomDBEngineVersionManifest;
+    Manifest?: CustomDBEngineVersionManifest;
     Tags?: TagList;
   }
   export interface CreateDBClusterEndpointMessage {
@@ -2647,6 +2651,16 @@ declare namespace RDS {
   export interface CreateOptionGroupResult {
     OptionGroup?: OptionGroup;
   }
+  export interface CustomDBEngineVersionAMI {
+    /**
+     * A value that indicates the ID of the AMI.
+     */
+    ImageId?: String;
+    /**
+     * A value that indicates the status of a custom engine version (CEV).
+     */
+    Status?: String;
+  }
   export type CustomDBEngineVersionManifest = string;
   export type CustomEngineName = string;
   export type CustomEngineVersion = string;
@@ -3290,6 +3304,14 @@ declare namespace RDS {
      * The default character set for new instances of this engine version, if the CharacterSetName parameter of the CreateDBInstance API isn't specified.
      */
     DefaultCharacterSet?: CharacterSet;
+    /**
+     * The EC2 image
+     */
+    Image?: CustomDBEngineVersionAMI;
+    /**
+     * A value that indicates the source media provider of the AMI based on the usage operation. Applicable for RDS Custom for SQL Server.
+     */
+    DBEngineMediaType?: String;
     /**
      * A list of the character sets supported by this engine for the CharacterSetName parameter of the CreateDBInstance operation.
      */

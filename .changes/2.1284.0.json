@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "This release allows you to modify the encryption in transit setting, for existing Redis clusters. You can now change the TLS configuration of your Redis clusters without the need to re-build or re-provision the clusters or impact application availability."
+    },
+    {
+        "type": "feature",
+        "category": "NetworkFirewall",
+        "description": "AWS Network Firewall now provides status messages for firewalls to help you troubleshoot when your endpoint fails."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server."
+    },
+    {
+        "type": "feature",
+        "category": "Route53RecoveryControlConfig",
+        "description": "Added support for Python paginators in the route53-recovery-control-config List* APIs."
+    }
+]

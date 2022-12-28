@@ -358,9 +358,13 @@ declare namespace NetworkFirewall {
      */
     EndpointId?: EndpointId;
     /**
-     * The current status of the firewall endpoint in the subnet. This value reflects both the instantiation of the endpoint in the VPC subnet and the sync states that are reported in the Config settings. When this value is READY, the endpoint is available and configured properly to handle network traffic. When the endpoint isn't available for traffic, this value will reflect its state, for example CREATING, DELETING, or FAILED.
+     * The current status of the firewall endpoint in the subnet. This value reflects both the instantiation of the endpoint in the VPC subnet and the sync states that are reported in the Config settings. When this value is READY, the endpoint is available and configured properly to handle network traffic. When the endpoint isn't available for traffic, this value will reflect its state, for example CREATING or DELETING.
      */
     Status?: AttachmentStatus;
+    /**
+     * If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the failure and how to resolve it. Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the errors and solutions available for this field, see Troubleshooting firewall endpoint failures in the Network Firewall Developer Guide.
+     */
+    StatusMessage?: StatusMessage;
   }
   export type AttachmentStatus = "CREATING"|"DELETING"|"SCALING"|"READY"|string;
   export type AvailabilityZone = string;
@@ -1503,6 +1507,7 @@ declare namespace NetworkFirewall {
      */
     CustomActions?: CustomActions;
   }
+  export type StatusMessage = string;
   export type StreamExceptionPolicy = "DROP"|"CONTINUE"|string;
   export interface SubnetMapping {
     /**
