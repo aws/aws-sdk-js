@@ -638,7 +638,7 @@ declare namespace Wisdom {
     /**
      * A pointer to the uploaded asset. This value is returned by StartContentUpload.
      */
-    uploadId: NonEmptyString;
+    uploadId: UploadId;
   }
   export interface CreateContentResponse {
     /**
@@ -1424,7 +1424,7 @@ declare namespace Wisdom {
     /**
      * The identifier of the upload.
      */
-    uploadId: NonEmptyString;
+    uploadId: UploadId;
     /**
      * The URL of the upload.
      */
@@ -1496,7 +1496,7 @@ declare namespace Wisdom {
     /**
      * A pointer to the uploaded asset. This value is returned by StartContentUpload. 
      */
-    uploadId?: NonEmptyString;
+    uploadId?: UploadId;
   }
   export interface UpdateContentResponse {
     /**
@@ -1520,6 +1520,7 @@ declare namespace Wisdom {
      */
     knowledgeBase?: KnowledgeBaseData;
   }
+  export type UploadId = string;
   export type Uri = string;
   export type Url = string;
   export type Uuid = string;

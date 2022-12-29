@@ -1324,7 +1324,7 @@ declare namespace APIGateway {
      */
     cacheClusterEnabled?: NullableBoolean;
     /**
-     * Specifies the cache cluster size for the Stage resource specified in the input, if a cache cluster is enabled.
+     * The stage's cache capacity in GB. For more information about choosing a cache size, see Enabling API caching to enhance responsiveness.
      */
     cacheClusterSize?: CacheClusterSize;
     /**
@@ -1545,7 +1545,7 @@ declare namespace APIGateway {
      */
     cacheClusterEnabled?: Boolean;
     /**
-     * The stage's cache cluster size.
+     * The stage's cache capacity in GB. For more information about choosing a cache size, see Enabling API caching to enhance responsiveness.
      */
     cacheClusterSize?: CacheClusterSize;
     /**
@@ -3491,7 +3491,7 @@ declare namespace APIGateway {
      */
     cacheClusterEnabled?: Boolean;
     /**
-     * The size of the cache cluster for the stage, if enabled.
+     * The stage's cache capacity in GB. For more information about choosing a cache size, see Enabling API caching to enhance responsiveness.
      */
     cacheClusterSize?: CacheClusterSize;
     /**

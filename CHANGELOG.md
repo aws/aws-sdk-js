@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1284.0-->
+<!--LATEST=2.1285.0-->
 <!--ENTRYINSERT-->
+
+## 2.1285.0
+* feature: EMR: Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries.
+* feature: SecretsManager: Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.
+* feature: Wisdom: This release extends Wisdom CreateContent and StartContentUpload APIs to support PDF and MicrosoftWord docx document uploading.
 
 ## 2.1284.0
 * feature: ElastiCache: This release allows you to modify the encryption in transit setting, for existing Redis clusters. You can now change the TLS configuration of your Redis clusters without the need to re-build or re-provision the clusters or impact application availability.
