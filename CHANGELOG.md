@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1285.0-->
+<!--LATEST=2.1286.0-->
 <!--ENTRYINSERT-->
+
+## 2.1286.0
+* feature: CloudFront: Extend response headers policy to support removing headers from viewer responses
 
 ## 2.1285.0
 * feature: EMR: Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries.

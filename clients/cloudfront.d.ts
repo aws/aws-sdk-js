@@ -150,11 +150,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.CreateRealtimeLogConfigResult) => void): Request<CloudFront.Types.CreateRealtimeLogConfigResult, AWSError>;
   /**
-   * Creates a response headers policy. A response headers policy contains information about a set of HTTP response headers and their values. To create a response headers policy, you provide some metadata about the policy, and a set of configurations that specify the response headers. After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it's attached to a cache behavior, CloudFront adds the headers in the policy to HTTP responses that it sends for requests that match the cache behavior.
+   * Creates a response headers policy. A response headers policy contains information about a set of HTTP headers. To create a response headers policy, you provide some metadata about the policy and a set of configurations that specify the headers. After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it's attached to a cache behavior, the response headers policy affects the HTTP headers that CloudFront includes in HTTP responses to requests that match the cache behavior. CloudFront adds or removes response headers according to the configuration of the response headers policy. For more information, see Adding or removing HTTP headers in CloudFront responses in the Amazon CloudFront Developer Guide.
    */
   createResponseHeadersPolicy(params: CloudFront.Types.CreateResponseHeadersPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateResponseHeadersPolicyResult) => void): Request<CloudFront.Types.CreateResponseHeadersPolicyResult, AWSError>;
   /**
-   * Creates a response headers policy. A response headers policy contains information about a set of HTTP response headers and their values. To create a response headers policy, you provide some metadata about the policy, and a set of configurations that specify the response headers. After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it's attached to a cache behavior, CloudFront adds the headers in the policy to HTTP responses that it sends for requests that match the cache behavior.
+   * Creates a response headers policy. A response headers policy contains information about a set of HTTP headers. To create a response headers policy, you provide some metadata about the policy and a set of configurations that specify the headers. After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it's attached to a cache behavior, the response headers policy affects the HTTP headers that CloudFront includes in HTTP responses to requests that match the cache behavior. CloudFront adds or removes response headers according to the configuration of the response headers policy. For more information, see Adding or removing HTTP headers in CloudFront responses in the Amazon CloudFront Developer Guide.
    */
   createResponseHeadersPolicy(callback?: (err: AWSError, data: CloudFront.Types.CreateResponseHeadersPolicyResult) => void): Request<CloudFront.Types.CreateResponseHeadersPolicyResult, AWSError>;
   /**
@@ -1722,7 +1722,7 @@ declare namespace CloudFront {
   }
   export interface CreateResponseHeadersPolicyRequest {
     /**
-     * Contains metadata about the response headers policy, and a set of configurations that specify the response headers.
+     * Contains metadata about the response headers policy, and a set of configurations that specify the HTTP headers.
      */
     ResponseHeadersPolicyConfig: ResponseHeadersPolicyConfig;
   }
@@ -4312,7 +4312,7 @@ declare namespace CloudFront {
      */
     LastModifiedTime: timestamp;
     /**
-     * A response headers policy configuration. A response headers policy contains information about a set of HTTP response headers and their values. CloudFront adds the headers in the policy to HTTP responses that it sends for requests that match a cache behavior that's associated with the policy.
+     * A response headers policy configuration.
      */
     ResponseHeadersPolicyConfig: ResponseHeadersPolicyConfig;
   }
@@ -4382,6 +4382,10 @@ declare namespace CloudFront {
      * A configuration for a set of custom HTTP response headers.
      */
     CustomHeadersConfig?: ResponseHeadersPolicyCustomHeadersConfig;
+    /**
+     * A configuration for a set of HTTP headers to remove from the HTTP response.
+     */
+    RemoveHeadersConfig?: ResponseHeadersPolicyRemoveHeadersConfig;
   }
   export interface ResponseHeadersPolicyContentSecurityPolicy {
     /**
@@ -4491,6 +4495,23 @@ declare namespace CloudFront {
      * The value of the Referrer-Policy HTTP response header. Valid values are:    no-referrer     no-referrer-when-downgrade     origin     origin-when-cross-origin     same-origin     strict-origin     strict-origin-when-cross-origin     unsafe-url    For more information about these values, see Referrer-Policy in the MDN Web Docs.
      */
     ReferrerPolicy: ReferrerPolicyList;
+  }
+  export interface ResponseHeadersPolicyRemoveHeader {
+    /**
+     * The HTTP header name.
+     */
+    Header: string;
+  }
+  export type ResponseHeadersPolicyRemoveHeaderList = ResponseHeadersPolicyRemoveHeader[];
+  export interface ResponseHeadersPolicyRemoveHeadersConfig {
+    /**
+     * The number of HTTP header names in the list.
+     */
+    Quantity: integer;
+    /**
+     * The list of HTTP header names.
+     */
+    Items?: ResponseHeadersPolicyRemoveHeaderList;
   }
   export interface ResponseHeadersPolicySecurityHeadersConfig {
     /**
