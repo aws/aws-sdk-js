@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ecs",
+  "description": "adds the missing appProtocol and name parameters to the AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails type definition in order to support Service Connect."
+}
