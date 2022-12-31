@@ -7364,9 +7364,21 @@
         "shape": "AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails"
       }
     },
+    "AppProtocol": {
+      "type": "string",
+      "enum": [
+        "http",
+        "http2",
+        "grpc"
+      ]
+    },
     "AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails": {
       "type": "structure",
       "members": {
+        "AppProtocol": {
+          "shape": "AppProtocol",
+          "documentation": "<p>The application protocol that's used for the port mapping. This parameter only applies to Service Connect.</p>"
+        },
         "ContainerPort": {
           "shape": "Integer",
           "documentation": "<p>The port number on the container that is bound to the user-specified or automatically assigned host port.</p>"
@@ -7374,6 +7386,10 @@
         "HostPort": {
           "shape": "Integer",
           "documentation": "<p>The port number on the container instance to reserve for the container.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name that's used for the port mapping. This parameter only applies to Service Connect.</p>"
         },
         "Protocol": {
           "shape": "NonEmptyString",
