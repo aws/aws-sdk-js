@@ -4932,7 +4932,12 @@ declare namespace SecurityHub {
     SourceVolume?: NonEmptyString;
   }
   export type AwsEcsTaskDefinitionContainerDefinitionsMountPointsList = AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails[];
+  export type AppProtocol = "http" | "http2" | "grpc";
   export interface AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails {
+    /**
+     * The application protocol that's used for the port mapping. This parameter only applies to Service Connect.
+     */
+    AppProtocol?: AppProtocol;
     /**
      * The port number on the container that is bound to the user-specified or automatically assigned host port.
      */
@@ -4941,6 +4946,10 @@ declare namespace SecurityHub {
      * The port number on the container instance to reserve for the container.
      */
     HostPort?: Integer;
+    /**
+     * The name that's used for the port mapping. This parameter only applies to Service Connect.
+     */
+    Name?: NonEmptyString;
     /**
      * The protocol used for the port mapping. The default is tcp.
      */
