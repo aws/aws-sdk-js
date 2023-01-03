@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1286.0-->
+<!--LATEST=2.1287.0-->
 <!--ENTRYINSERT-->
+
+## 2.1287.0
+* feature: SecurityLake: Allow CreateSubscriber API to take string input that allows setting more descriptive SubscriberDescription field. Make souceTypes field required in model level for UpdateSubscriberRequest as it is required for every API call on the backend. Allow ListSubscribers take any String as nextToken param.
 
 ## 2.1286.0
 * feature: CloudFront: Extend response headers policy to support removing headers from viewer responses
