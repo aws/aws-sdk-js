@@ -4399,6 +4399,14 @@ declare namespace SSM {
      * The document version required by the current document.
      */
     Version?: DocumentVersion;
+    /**
+     * The document type of the required SSM document.
+     */
+    RequireType?: RequireType;
+    /**
+     * An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and can't be changed.
+     */
+    VersionName?: DocumentVersionName;
   }
   export type DocumentRequiresList = DocumentRequires[];
   export type DocumentReviewAction = "SendForReview"|"UpdateReview"|"Approve"|"Reject"|string;
@@ -4452,7 +4460,7 @@ declare namespace SSM {
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|"CloudFormation"|"ConformancePackTemplate"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|"CloudFormation"|"ConformancePackTemplate"|"QuickSetup"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
@@ -8379,6 +8387,7 @@ declare namespace SSM {
   }
   export interface RemoveTagsFromResourceResult {
   }
+  export type RequireType = string;
   export interface ResetServiceSettingRequest {
     /**
      * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/managed-instance/activation-tier     /ssm/opsinsights/opscenter     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled   

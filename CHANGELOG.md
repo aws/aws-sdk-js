@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1287.0-->
+<!--LATEST=2.1288.0-->
 <!--ENTRYINSERT-->
+
+## 2.1288.0
+* feature: ApplicationAutoScaling: Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions.
+* feature: SSM: Adding support for QuickSetup Document Type in Systems Manager
 
 ## 2.1287.0
 * feature: SecurityLake: Allow CreateSubscriber API to take string input that allows setting more descriptive SubscriberDescription field. Make souceTypes field required in model level for UpdateSubscriberRequest as it is required for every API call on the backend. Allow ListSubscribers take any String as nextToken param.
