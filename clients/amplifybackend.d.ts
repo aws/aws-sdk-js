@@ -132,11 +132,11 @@ declare class AmplifyBackend extends Service {
    */
   getBackendAPI(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIResponse, AWSError>;
   /**
-   * Generates a model schema for existing backend API resource.
+   * Gets a model introspection schema for an existing backend API resource.
    */
   getBackendAPIModels(params: AmplifyBackend.Types.GetBackendAPIModelsRequest, callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIModelsResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIModelsResponse, AWSError>;
   /**
-   * Generates a model schema for existing backend API resource.
+   * Gets a model introspection schema for an existing backend API resource.
    */
   getBackendAPIModels(callback?: (err: AWSError, data: AmplifyBackend.Types.GetBackendAPIModelsResponse) => void): Request<AmplifyBackend.Types.GetBackendAPIModelsResponse, AWSError>;
   /**
@@ -1070,6 +1070,10 @@ declare namespace AmplifyBackend {
      * The current status of the request.
      */
     Status?: Status;
+    /**
+     * Stringified JSON of the model introspection schema for an existing backend API resource.
+     */
+    ModelIntrospectionSchema?: __string;
   }
   export interface GetBackendAPIRequest {
     /**

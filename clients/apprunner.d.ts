@@ -448,9 +448,13 @@ declare namespace AppRunner {
      */
     Port?: String;
     /**
-     * The environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+     * The environment variables that are available to your running App Runner service. An array of key-value pairs.
      */
     RuntimeEnvironmentVariables?: RuntimeEnvironmentVariables;
+    /**
+     * An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable. The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.     If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.     Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.    
+     */
+    RuntimeEnvironmentSecrets?: RuntimeEnvironmentSecrets;
   }
   export interface CodeRepository {
     /**
@@ -953,7 +957,7 @@ declare namespace AppRunner {
   export type HealthCheckUnhealthyThreshold = number;
   export interface ImageConfiguration {
     /**
-     * Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+     * Environment variables that are available to your running App Runner service. An array of key-value pairs.
      */
     RuntimeEnvironmentVariables?: RuntimeEnvironmentVariables;
     /**
@@ -964,6 +968,10 @@ declare namespace AppRunner {
      * The port that your application listens to in the container. Default: 8080 
      */
     Port?: String;
+    /**
+     * An array of key-value pairs representing the secrets and parameters that get referenced to your service as an environment variable. The supported values are either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the full ARN of the parameter in the Amazon Web Services Systems Manager Parameter Store.     If the Amazon Web Services Systems Manager Parameter Store parameter exists in the same Amazon Web Services Region as the service that you're launching, you can use either the full ARN or name of the secret. If the parameter exists in a different Region, then the full ARN must be specified.     Currently, cross account referencing of Amazon Web Services Systems Manager Parameter Store parameter is not supported.    
+     */
+    RuntimeEnvironmentSecrets?: RuntimeEnvironmentSecrets;
   }
   export type ImageIdentifier = string;
   export interface ImageRepository {
@@ -1337,6 +1345,9 @@ declare namespace AppRunner {
   }
   export type RoleArn = string;
   export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|"GO_1"|"DOTNET_6"|"PHP_81"|"RUBY_31"|string;
+  export type RuntimeEnvironmentSecrets = {[key: string]: RuntimeEnvironmentSecretsValue};
+  export type RuntimeEnvironmentSecretsName = string;
+  export type RuntimeEnvironmentSecretsValue = string;
   export type RuntimeEnvironmentVariables = {[key: string]: RuntimeEnvironmentVariablesValue};
   export type RuntimeEnvironmentVariablesKey = string;
   export type RuntimeEnvironmentVariablesValue = string;

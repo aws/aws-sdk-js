@@ -128,7 +128,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2. To learn more, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA).
+     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values: 1.10.12, 2.0.2, 2.2.2, and 2.4.3. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA).
      */
     AirflowVersion?: AirflowVersion;
     /**
@@ -253,7 +253,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, and 2.2.2.
+     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, 2.2.2, and 2.4.3.
      */
     AirflowVersion?: AirflowVersion;
     /**
@@ -614,7 +614,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2.
+     * The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: 1.10.12, 2.0.2, 2.2.2, and 2.4.3.
      */
     AirflowVersion?: AirflowVersion;
     /**

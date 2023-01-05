@@ -414,11 +414,11 @@ declare class RDS extends Service {
    */
   describeBlueGreenDeployments(callback?: (err: AWSError, data: RDS.Types.DescribeBlueGreenDeploymentsResponse) => void): Request<RDS.Types.DescribeBlueGreenDeploymentsResponse, AWSError>;
   /**
-   * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account.
+   * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
    */
   describeCertificates(params: RDS.Types.DescribeCertificatesMessage, callback?: (err: AWSError, data: RDS.Types.CertificateMessage) => void): Request<RDS.Types.CertificateMessage, AWSError>;
   /**
-   * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account.
+   * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
    */
   describeCertificates(callback?: (err: AWSError, data: RDS.Types.CertificateMessage) => void): Request<RDS.Types.CertificateMessage, AWSError>;
   /**
@@ -1439,6 +1439,7 @@ declare namespace RDS {
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
   export type BucketName = string;
+  export type CACertificateIdentifiersList = String[];
   export interface CancelExportTaskMessage {
     /**
      * The identifier of the snapshot export task to cancel.
@@ -1478,6 +1479,16 @@ declare namespace RDS {
      * If there is an override for the default certificate identifier, when the override expires.
      */
     CustomerOverrideValidTill?: TStamp;
+  }
+  export interface CertificateDetails {
+    /**
+     * The CA identifier of the CA certificate used for the DB instance's server certificate.
+     */
+    CAIdentifier?: String;
+    /**
+     * The expiration date of the DB instance’s server certificate.
+     */
+    ValidTill?: TStamp;
   }
   export type CertificateList = Certificate[];
   export interface CertificateMessage {
@@ -2259,6 +2270,10 @@ declare namespace RDS {
      * The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager. This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets Manager for the DB instance. The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If you don't specify MasterUserSecretKmsKeyId, then the aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't use the aws/secretsmanager KMS key to encrypt the secret, and you must use a customer managed KMS key. There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.
      */
     MasterUserSecretKmsKeyId?: String;
+    /**
+     * Specifies the CA certificate identifier to use for the DB instance’s server certificate. This setting doesn't apply to RDS Custom. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     */
+    CACertificateIdentifier?: String;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -3393,6 +3408,14 @@ declare namespace RDS {
      * JSON string that lists the installation files and parameters that RDS Custom uses to create a custom engine version (CEV). RDS Custom applies the patches in the order in which they're listed in the manifest. You can set the Oracle home, Oracle base, and UNIX/Linux user and group using the installation parameters. For more information, see JSON fields in the CEV manifest in the Amazon RDS User Guide. 
      */
     CustomDBEngineVersionManifest?: CustomDBEngineVersionManifest;
+    /**
+     * A value that indicates whether the engine version supports rotating the server certificate without rebooting the DB instance.
+     */
+    SupportsCertificateRotationWithoutRestart?: BooleanOptional;
+    /**
+     * A list of the supported CA certificate identifiers. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     */
+    SupportedCACertificateIdentifiers?: CACertificateIdentifiersList;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -3575,7 +3598,7 @@ declare namespace RDS {
      */
     DbiResourceId?: String;
     /**
-     * The identifier of the CA certificate for this DB instance.
+     * The identifier of the CA certificate for this DB instance. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
     /**
@@ -3719,6 +3742,10 @@ declare namespace RDS {
      * Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password. For more information, see Password management with Amazon Web Services Secrets Manager in the Amazon RDS User Guide. 
      */
     MasterUserSecret?: MasterUserSecret;
+    /**
+     * The details of the DB instance's server certificate.
+     */
+    CertificateDetails?: CertificateDetails;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -6131,7 +6158,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier: String;
     /**
-     * The new DB cluster identifier for the DB cluster when renaming a DB cluster. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens   The first character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2  Valid for: Aurora DB clusters only
+     * The new DB cluster identifier for the DB cluster when renaming a DB cluster. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens   The first character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2  Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
     NewDBClusterIdentifier?: String;
     /**
@@ -6408,7 +6435,7 @@ declare namespace RDS {
      */
     TdeCredentialPassword?: String;
     /**
-     * Specifies the certificate to associate with the DB instance. This setting doesn't apply to RDS Custom.
+     * Specifies the CA certificate identifier to use for the DB instance’s server certificate. This setting doesn't apply to RDS Custom. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
     /**
@@ -7348,7 +7375,7 @@ declare namespace RDS {
      */
     StorageType?: String;
     /**
-     * The identifier of the CA certificate for the DB instance.
+     * The identifier of the CA certificate for the DB instance. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
     /**
@@ -8833,7 +8860,7 @@ declare namespace RDS {
      */
     IamRoleArn: String;
     /**
-     * The ID of the Amazon Web Services KMS key to use to encrypt the snapshot exported to Amazon S3. The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. The caller of this operation must be authorized to execute the following operations. These can be set in the Amazon Web Services KMS key policy:   GrantOperation.Encrypt   GrantOperation.Decrypt   GrantOperation.GenerateDataKey   GrantOperation.GenerateDataKeyWithoutPlaintext   GrantOperation.ReEncryptFrom   GrantOperation.ReEncryptTo   GrantOperation.CreateGrant   GrantOperation.DescribeKey   GrantOperation.RetireGrant  
+     * The ID of the Amazon Web Services KMS key to use to encrypt the snapshot exported to Amazon S3. The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. The caller of this operation must be authorized to run the following operations. These can be set in the Amazon Web Services KMS key policy:   kms:Encrypt   kms:Decrypt   kms:GenerateDataKey   kms:GenerateDataKeyWithoutPlaintext   kms:ReEncryptFrom   kms:ReEncryptTo   kms:CreateGrant   kms:DescribeKey   kms:RetireGrant  
      */
     KmsKeyId: String;
     /**

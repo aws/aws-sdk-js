@@ -147,7 +147,7 @@ declare namespace EMRServerless {
      */
     arn: ApplicationArn;
     /**
-     * The EMR release version associated with the application.
+     * The EMR release associated with the application.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -198,6 +198,14 @@ declare namespace EMRServerless {
      * The CPU architecture of an application.
      */
     architecture?: Architecture;
+    /**
+     * The image configuration applied to all worker types.
+     */
+    imageConfiguration?: ImageConfiguration;
+    /**
+     * The specification applied to each worker type.
+     */
+    workerTypeSpecifications?: WorkerTypeSpecificationMap;
   }
   export type ApplicationArn = string;
   export type ApplicationId = string;
@@ -219,7 +227,7 @@ declare namespace EMRServerless {
      */
     arn: ApplicationArn;
     /**
-     * The EMR release version associated with the application.
+     * The EMR release associated with the application.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -319,7 +327,7 @@ declare namespace EMRServerless {
      */
     name?: ApplicationName;
     /**
-     * The EMR release version associated with the application.
+     * The EMR release associated with the application.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -358,6 +366,14 @@ declare namespace EMRServerless {
      * The CPU architecture of an application.
      */
     architecture?: Architecture;
+    /**
+     * The image configuration for all worker types. You can either set this parameter or imageConfiguration for each worker type in workerTypeSpecifications.
+     */
+    imageConfiguration?: ImageConfigurationInput;
+    /**
+     * The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.
+     */
+    workerTypeSpecifications?: WorkerTypeSpecificationInputMap;
   }
   export interface CreateApplicationResponse {
     /**
@@ -450,6 +466,24 @@ declare namespace EMRServerless {
   }
   export type HiveCliParameters = string;
   export type IAMRoleArn = string;
+  export interface ImageConfiguration {
+    /**
+     * The image URI.
+     */
+    imageUri: ImageUri;
+    /**
+     * The SHA256 digest of the image URI. This indicates which specific image the application is configured for. The image digest doesn't exist until an application has started.
+     */
+    resolvedImageDigest?: ImageDigest;
+  }
+  export interface ImageConfigurationInput {
+    /**
+     * The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.
+     */
+    imageUri?: ImageUri;
+  }
+  export type ImageDigest = string;
+  export type ImageUri = string;
   export type InitScriptPath = string;
   export interface InitialCapacityConfig {
     /**
@@ -516,7 +550,7 @@ declare namespace EMRServerless {
      */
     stateDetails: String256;
     /**
-     * The EMR release version associated with the application your job is running on.
+     * The EMR release associated with the application your job is running on.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -586,7 +620,7 @@ declare namespace EMRServerless {
      */
     stateDetails: String256;
     /**
-     * The EMR release version associated with the application your job is running on.
+     * The EMR release associated with the application your job is running on.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -888,6 +922,14 @@ declare namespace EMRServerless {
      * The CPU architecture of an application.
      */
     architecture?: Architecture;
+    /**
+     * The image configuration to be used for all worker types. You can either set this parameter or imageConfiguration for each worker type in WorkerTypeSpecificationInput.
+     */
+    imageConfiguration?: ImageConfigurationInput;
+    /**
+     * The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.
+     */
+    workerTypeSpecifications?: WorkerTypeSpecificationInputMap;
   }
   export interface UpdateApplicationResponse {
     /**
@@ -912,6 +954,20 @@ declare namespace EMRServerless {
      */
     disk?: DiskSize;
   }
+  export interface WorkerTypeSpecification {
+    /**
+     * The image configuration for a worker type.
+     */
+    imageConfiguration?: ImageConfiguration;
+  }
+  export interface WorkerTypeSpecificationInput {
+    /**
+     * The image configuration for a worker type.
+     */
+    imageConfiguration?: ImageConfigurationInput;
+  }
+  export type WorkerTypeSpecificationInputMap = {[key: string]: WorkerTypeSpecificationInput};
+  export type WorkerTypeSpecificationMap = {[key: string]: WorkerTypeSpecification};
   export type WorkerTypeString = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

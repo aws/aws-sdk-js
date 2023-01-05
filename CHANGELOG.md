@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1288.0-->
+<!--LATEST=2.1289.0-->
 <!--ENTRYINSERT-->
+
+## 2.1289.0
+* feature: AmplifyBackend: Updated GetBackendAPIModels response to include ModelIntrospectionSchema json string
+* feature: AppRunner: This release adds support of securely referencing secrets and configuration data that are stored in Secrets Manager and SSM Parameter Store by adding them as environment secrets in your App Runner service.
+* feature: Connect: Documentation update for a new Initiation Method value in DescribeContact API
+* feature: EMRServerless: Adds support for customized images. You can now provide runtime images when creating or updating EMR Serverless Applications.
+* feature: RDS: This release adds support for specifying which certificate authority (CA) to use for a DB instance's server certificate during DB instance creation, as well as other CA enhancements.
 
 ## 2.1288.0
 * feature: ApplicationAutoScaling: Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions.
