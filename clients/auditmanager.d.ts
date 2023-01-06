@@ -12,11 +12,11 @@ declare class AuditManager extends Service {
   constructor(options?: AuditManager.Types.ClientConfiguration)
   config: Config & AuditManager.Types.ClientConfiguration;
   /**
-   *  Associates an evidence folder to an assessment report in a Audit Manager assessment. 
+   *  Associates an evidence folder to an assessment report in an Audit Manager assessment. 
    */
   associateAssessmentReportEvidenceFolder(params: AuditManager.Types.AssociateAssessmentReportEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Associates an evidence folder to an assessment report in a Audit Manager assessment. 
+   *  Associates an evidence folder to an assessment report in an Audit Manager assessment. 
    */
   associateAssessmentReportEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
@@ -132,19 +132,19 @@ declare class AuditManager extends Service {
    */
   deleteControl(callback?: (err: AWSError, data: AuditManager.Types.DeleteControlResponse) => void): Request<AuditManager.Types.DeleteControlResponse, AWSError>;
   /**
-   *  Deregisters an account in Audit Manager.   When you deregister your account from Audit Manager, your data isn’t deleted. If you want to delete your resource data, you must perform that task separately before you deregister your account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above. 
+   *  Deregisters an account in Audit Manager.   Before you deregister, you can use the UpdateSettings API operation to set your preferred data retention policy. By default, Audit Manager retains your data. If you want to delete your data, you can use the DeregistrationPolicy attribute to request the deletion of your data.  For more information about data retention, see Data Protection in the Audit Manager User Guide.  
    */
   deregisterAccount(params: AuditManager.Types.DeregisterAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   *  Deregisters an account in Audit Manager.   When you deregister your account from Audit Manager, your data isn’t deleted. If you want to delete your resource data, you must perform that task separately before you deregister your account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above. 
+   *  Deregisters an account in Audit Manager.   Before you deregister, you can use the UpdateSettings API operation to set your preferred data retention policy. By default, Audit Manager retains your data. If you want to delete your data, you can use the DeregistrationPolicy attribute to request the deletion of your data.  For more information about data retention, see Data Protection in the Audit Manager User Guide.  
    */
   deregisterAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   * Removes the specified Amazon Web Services account as a delegated administrator for Audit Manager.  When you remove a delegated administrator from your Audit Manager settings, you continue to have access to the evidence that you previously collected under that account. This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.  Keep in mind the following cleanup task if you use evidence finder: Before you use your management account to remove a delegated administrator, make sure that the current delegated administrator account signs in to Audit Manager and disables evidence finder first. Disabling evidence finder automatically deletes the event data store that was created in their account when they enabled evidence finder. If this task isn’t completed, the event data store remains in their account. In this case, we recommend that the original delegated administrator goes to CloudTrail Lake and manually deletes the event data store. This cleanup task is necessary to ensure that you don't end up with multiple event data stores. Audit Manager will ignore an unused event data store after you remove or change a delegated administrator account. However, the unused event data store continues to incur storage costs from CloudTrail Lake if you don't delete it.  When you deregister a delegated administrator account for Audit Manager, the data for that account isn’t deleted. If you want to delete resource data for a delegated administrator account, you must perform that task separately before you deregister the account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above.
+   * Removes the specified Amazon Web Services account as a delegated administrator for Audit Manager.  When you remove a delegated administrator from your Audit Manager settings, you continue to have access to the evidence that you previously collected under that account. This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager stops collecting and attaching evidence to that delegated administrator account moving forward.  Keep in mind the following cleanup task if you use evidence finder: Before you use your management account to remove a delegated administrator, make sure that the current delegated administrator account signs in to Audit Manager and disables evidence finder first. Disabling evidence finder automatically deletes the event data store that was created in their account when they enabled evidence finder. If this task isn’t completed, the event data store remains in their account. In this case, we recommend that the original delegated administrator goes to CloudTrail Lake and manually deletes the event data store. This cleanup task is necessary to ensure that you don't end up with multiple event data stores. Audit Manager ignores an unused event data store after you remove or change a delegated administrator account. However, the unused event data store continues to incur storage costs from CloudTrail Lake if you don't delete it.  When you deregister a delegated administrator account for Audit Manager, the data for that account isn’t deleted. If you want to delete resource data for a delegated administrator account, you must perform that task separately before you deregister the account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence for a specific delegated administrator. Instead, when your management account deregisters Audit Manager, we perform a cleanup for the current delegated administrator account at the time of deregistration.
    */
   deregisterOrganizationAdminAccount(params: AuditManager.Types.DeregisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Removes the specified Amazon Web Services account as a delegated administrator for Audit Manager.  When you remove a delegated administrator from your Audit Manager settings, you continue to have access to the evidence that you previously collected under that account. This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.  Keep in mind the following cleanup task if you use evidence finder: Before you use your management account to remove a delegated administrator, make sure that the current delegated administrator account signs in to Audit Manager and disables evidence finder first. Disabling evidence finder automatically deletes the event data store that was created in their account when they enabled evidence finder. If this task isn’t completed, the event data store remains in their account. In this case, we recommend that the original delegated administrator goes to CloudTrail Lake and manually deletes the event data store. This cleanup task is necessary to ensure that you don't end up with multiple event data stores. Audit Manager will ignore an unused event data store after you remove or change a delegated administrator account. However, the unused event data store continues to incur storage costs from CloudTrail Lake if you don't delete it.  When you deregister a delegated administrator account for Audit Manager, the data for that account isn’t deleted. If you want to delete resource data for a delegated administrator account, you must perform that task separately before you deregister the account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence. All available delete operations are listed above.
+   * Removes the specified Amazon Web Services account as a delegated administrator for Audit Manager.  When you remove a delegated administrator from your Audit Manager settings, you continue to have access to the evidence that you previously collected under that account. This is also the case when you deregister a delegated administrator from Organizations. However, Audit Manager stops collecting and attaching evidence to that delegated administrator account moving forward.  Keep in mind the following cleanup task if you use evidence finder: Before you use your management account to remove a delegated administrator, make sure that the current delegated administrator account signs in to Audit Manager and disables evidence finder first. Disabling evidence finder automatically deletes the event data store that was created in their account when they enabled evidence finder. If this task isn’t completed, the event data store remains in their account. In this case, we recommend that the original delegated administrator goes to CloudTrail Lake and manually deletes the event data store. This cleanup task is necessary to ensure that you don't end up with multiple event data stores. Audit Manager ignores an unused event data store after you remove or change a delegated administrator account. However, the unused event data store continues to incur storage costs from CloudTrail Lake if you don't delete it.  When you deregister a delegated administrator account for Audit Manager, the data for that account isn’t deleted. If you want to delete resource data for a delegated administrator account, you must perform that task separately before you deregister the account. Either, you can do this in the Audit Manager console. Or, you can use one of the delete API operations that are provided by Audit Manager.  To delete your Audit Manager resource data, see the following instructions:     DeleteAssessment (see also: Deleting an assessment in the Audit Manager User Guide)    DeleteAssessmentFramework (see also: Deleting a custom framework in the Audit Manager User Guide)    DeleteAssessmentFrameworkShare (see also: Deleting a share request in the Audit Manager User Guide)    DeleteAssessmentReport (see also: Deleting an assessment report in the Audit Manager User Guide)    DeleteControl (see also: Deleting a custom control in the Audit Manager User Guide)   At this time, Audit Manager doesn't provide an option to delete evidence for a specific delegated administrator. Instead, when your management account deregisters Audit Manager, we perform a cleanup for the current delegated administrator account at the time of deregistration.
    */
   deregisterOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class AuditManager extends Service {
    */
   getEvidenceFoldersByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders that are associated with a specified control of an assessment in Audit Manager. 
+   *  Returns a list of evidence folders that are associated with a specified control in an Audit Manager assessment. 
    */
   getEvidenceFoldersByAssessmentControl(params: AuditManager.Types.GetEvidenceFoldersByAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders that are associated with a specified control of an assessment in Audit Manager. 
+   *  Returns a list of evidence folders that are associated with a specified control in an Audit Manager assessment. 
    */
   getEvidenceFoldersByAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
@@ -582,7 +582,7 @@ declare namespace AuditManager {
      */
     evidenceSources?: EvidenceSources;
     /**
-     *  The amount of evidence that's generated for the control. 
+     *  The amount of evidence that's collected for the control. 
      */
     evidenceCount?: Integer;
     /**
@@ -600,7 +600,7 @@ declare namespace AuditManager {
      */
     description?: NonEmptyString;
     /**
-     *  Specifies the current status of the control set. 
+     *  The current status of the control set. 
      */
     status?: ControlSetStatus;
     /**
@@ -757,11 +757,11 @@ declare namespace AuditManager {
      */
     controlSetsCount?: ControlSetsCount;
     /**
-     *  Specifies when the framework was created. 
+     *  The time when the framework was created. 
      */
     createdAt?: Timestamp;
     /**
-     *  Specifies when the framework was most recently updated. 
+     *  The time when the framework was most recently updated. 
      */
     lastUpdatedAt?: Timestamp;
   }
@@ -1246,11 +1246,11 @@ declare namespace AuditManager {
      */
     controlMappingSources?: ControlMappingSources;
     /**
-     *  Specifies when the control was created. 
+     *  The time when the control was created. 
      */
     createdAt?: Timestamp;
     /**
-     *  Specifies when the control was most recently updated. 
+     *  The time when the control was most recently updated. 
      */
     lastUpdatedAt?: Timestamp;
     /**
@@ -1370,7 +1370,7 @@ declare namespace AuditManager {
      */
     sourceSetUpOption?: SourceSetUpOption;
     /**
-     *  Specifies one of the five types of data sources for evidence collection. 
+     *  Specifies one of the five data source types for evidence collection. 
      */
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
@@ -1402,11 +1402,11 @@ declare namespace AuditManager {
      */
     controlSources?: ControlSources;
     /**
-     *  Specifies when the control was created. 
+     *  The time when the control was created. 
      */
     createdAt?: Timestamp;
     /**
-     *  Specifies when the control was most recently updated. 
+     *  The time when the control was most recently updated. 
      */
     lastUpdatedAt?: Timestamp;
   }
@@ -1497,7 +1497,7 @@ declare namespace AuditManager {
      */
     assessmentId: UUID;
     /**
-     * A SQL statement that represents an evidence finder query. Provide this parameter when you want to generate an assessment report from the results of an evidence finder search query. When you use this parameter, Audit Manager generates a one-time report using only the evidence from the query output. This report does not include any assessment evidence that was manually added to a report using the console, or associated with a report using the API.  To use this parameter, the enablementStatus of evidence finder must be ENABLED.   For examples and help resolving queryStatement validation exceptions, see Troubleshooting evidence finder issues in the AWS Audit Manager User Guide. 
+     * A SQL statement that represents an evidence finder query. Provide this parameter when you want to generate an assessment report from the results of an evidence finder search query. When you use this parameter, Audit Manager generates a one-time report using only the evidence from the query output. This report does not include any assessment evidence that was manually added to a report using the console, or associated with a report using the API.  To use this parameter, the enablementStatus of evidence finder must be ENABLED.   For examples and help resolving queryStatement validation exceptions, see Troubleshooting evidence finder issues in the Audit Manager User Guide. 
      */
     queryStatement?: QueryStatement;
   }
@@ -1750,6 +1750,7 @@ declare namespace AuditManager {
   }
   export interface DeleteControlResponse {
   }
+  export type DeleteResources = "ALL"|"DEFAULT"|string;
   export interface DeregisterAccountRequest {
   }
   export interface DeregisterAccountResponse {
@@ -1765,6 +1766,12 @@ declare namespace AuditManager {
     adminAccountId?: AccountId;
   }
   export interface DeregisterOrganizationAdminAccountResponse {
+  }
+  export interface DeregistrationPolicy {
+    /**
+     * Specifies which Audit Manager data will be deleted when you deregister Audit Manager.   If you set the value to ALL, all of your data is deleted within seven days of deregistration.   If you set the value to DEFAULT, none of your data is deleted at the time of deregistration. However, keep in mind that the Audit Manager data retention policy still applies. As a result, any evidence data will be deleted two years after its creation date. Your other Audit Manager resources will continue to exist indefinitely.  
+     */
+    deleteResources?: DeleteResources;
   }
   export interface DisassociateAssessmentReportEvidenceFolderRequest {
     /**
@@ -1854,11 +1861,11 @@ declare namespace AuditManager {
      */
     eventDataStoreArn?: CloudTrailArn;
     /**
-     * The current status of the evidence finder feature and the related event data store.     ENABLE_IN_PROGRESS means that you requested to enable evidence finder. An event data store is currently being created to support evidence finder queries.    ENABLED means that an event data store was successfully created and evidence finder is enabled. We recommend that you wait 24 hours until the event data store is backfilled with your past evidence data. You can use evidence finder in the meantime, but not all data might be available until the backfill is complete.    DISABLE_IN_PROGRESS means that you requested to disable evidence finder, and your request is pending the deletion of the event data store.    DISABLED means that you have permanently disabled evidence finder and the event data store has been deleted. You can't re-enable evidence finder after this point.  
+     * The current status of the evidence finder feature and the related event data store.     ENABLE_IN_PROGRESS means that you requested to enable evidence finder. An event data store is currently being created to support evidence finder queries.    ENABLED means that an event data store was successfully created and evidence finder is enabled. We recommend that you wait 7 days until the event data store is backfilled with your past two years’ worth of evidence data. You can use evidence finder in the meantime, but not all data might be available until the backfill is complete.    DISABLE_IN_PROGRESS means that you requested to disable evidence finder, and your request is pending the deletion of the event data store.    DISABLED means that you have permanently disabled evidence finder and the event data store has been deleted. You can't re-enable evidence finder after this point.  
      */
     enablementStatus?: EvidenceFinderEnablementStatus;
     /**
-     * The current status of the evidence data backfill process.  The backfill starts after you enable evidence finder. During this task, Audit Manager populates an event data store with your past evidence data so that your evidence can be queried.    NOT_STARTED means that the backfill hasn’t started yet.     IN_PROGRESS means that the backfill is in progress. This can take up to 24 hours to complete, depending on the amount of evidence data.     COMPLETED means that the backfill is complete. All of your past evidence is now queryable.   
+     * The current status of the evidence data backfill process.  The backfill starts after you enable evidence finder. During this task, Audit Manager populates an event data store with your past two years’ worth of evidence data so that your evidence can be queried.    NOT_STARTED means that the backfill hasn’t started yet.     IN_PROGRESS means that the backfill is in progress. This can take up to 7 days to complete, depending on the amount of evidence data.     COMPLETED means that the backfill is complete. All of your past evidence is now queryable.   
      */
     backfillStatus?: EvidenceFinderBackfillStatus;
     /**
@@ -1923,11 +1930,11 @@ declare namespace AuditManager {
      */
     controlSets?: ControlSets;
     /**
-     *  Specifies when the framework was created. 
+     *  The time when the framework was created. 
      */
     createdAt?: Timestamp;
     /**
-     *  Specifies when the framework was most recently updated. 
+     *  The time when the framework was most recently updated. 
      */
     lastUpdatedAt?: Timestamp;
     /**
@@ -2201,7 +2208,7 @@ declare namespace AuditManager {
   }
   export interface GetEvidenceResponse {
     /**
-     *  The evidence that the GetEvidenceResponse API returned. 
+     *  The evidence that the GetEvidence API returned. 
      */
     evidence?: Evidence;
   }
@@ -2247,7 +2254,7 @@ declare namespace AuditManager {
   }
   export interface GetSettingsRequest {
     /**
-     *  The list of SettingAttribute enum values. 
+     *  The list of setting attribute enum values. 
      */
     attribute: SettingAttribute;
   }
@@ -2728,7 +2735,7 @@ declare namespace AuditManager {
     category?: NonEmptyString;
   }
   export type ServiceMetadataList = ServiceMetadata[];
-  export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|"EVIDENCE_FINDER_ENABLEMENT"|string;
+  export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|"EVIDENCE_FINDER_ENABLEMENT"|"DEREGISTRATION_POLICY"|string;
   export interface Settings {
     /**
      *  Specifies whether Organizations is enabled. 
@@ -2754,6 +2761,10 @@ declare namespace AuditManager {
      * The current evidence finder status and event data store details.
      */
     evidenceFinderEnablement?: EvidenceFinderEnablement;
+    /**
+     * The deregistration policy for your Audit Manager data. You can use this attribute to determine how your data is handled when you deregister Audit Manager.
+     */
+    deregistrationPolicy?: DeregistrationPolicy;
   }
   export type ShareRequestAction = "ACCEPT"|"DECLINE"|"REVOKE"|string;
   export type ShareRequestComment = string;
@@ -2987,7 +2998,7 @@ declare namespace AuditManager {
   }
   export interface UpdateAssessmentResponse {
     /**
-     *  The response object for the UpdateAssessmentRequest API. This is the name of the updated assessment.
+     *  The response object for the UpdateAssessment API. This is the name of the updated assessment.
      */
     assessment?: Assessment;
   }
@@ -3061,9 +3072,13 @@ declare namespace AuditManager {
      */
     kmsKey?: KmsKey;
     /**
-     * Specifies whether the evidence finder feature is enabled. Change this attribute to enable or disable evidence finder.  When you use this attribute to disable evidence finder, Audit Manager deletes the event data store that’s used to query your evidence data. As a result, you can’t re-enable evidence finder and use the feature again. Your only alternative is to deregister and then re-register Audit Manager.  Disabling evidence finder is permanent, so consider this decision carefully before you proceed. If you’re using Audit Manager as a delegated administrator, keep in mind that this action applies to all member accounts in your organization. 
+     * Specifies whether the evidence finder feature is enabled. Change this attribute to enable or disable evidence finder.  When you use this attribute to disable evidence finder, Audit Manager deletes the event data store that’s used to query your evidence data. As a result, you can’t re-enable evidence finder and use the feature again. Your only alternative is to deregister and then re-register Audit Manager.  
      */
     evidenceFinderEnabled?: Boolean;
+    /**
+     * The deregistration policy for your Audit Manager data. You can use this attribute to determine how your data is handled when you deregister Audit Manager.
+     */
+    deregistrationPolicy?: DeregistrationPolicy;
   }
   export interface UpdateSettingsResponse {
     /**

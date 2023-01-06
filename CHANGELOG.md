@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1289.0-->
+<!--LATEST=2.1290.0-->
 <!--ENTRYINSERT-->
+
+## 2.1290.0
+* feature: ACMPCA: Added revocation parameter validation: bucket names must match S3 bucket naming rules and CNAMEs conform to RFC2396 restrictions on the use of special characters in URIs.
+* feature: AuditManager: This release introduces a new data retention option in your Audit Manager settings. You can now use the DeregistrationPolicy parameter to specify if you want to delete your data when you deregister Audit Manager.
 
 ## 2.1289.0
 * feature: AmplifyBackend: Updated GetBackendAPIModels response to include ModelIntrospectionSchema json string
