@@ -69,6 +69,7 @@
       "signatureVersion": "v2"
     },
     "*/resource-explorer-2": "dualstackByDefault",
+    "*/kendra-ranking": "dualstackByDefault",
     "*/codecatalyst": "globalDualstackByDefault"
   },
 
@@ -131,6 +132,7 @@
       "endpoint": "route53.us-gov.amazonaws.com"
     },
     "*/resource-explorer-2": "fipsDualstackByDefault",
+    "*/kendra-ranking": "dualstackByDefault",
     "*/codecatalyst": "fipsGlobalDualstackByDefault"
   },
 
