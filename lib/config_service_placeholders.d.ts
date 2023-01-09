@@ -337,6 +337,7 @@ export abstract class ConfigurationServicePlaceholders {
   sagemakermetrics?: AWS.SageMakerMetrics.Types.ClientConfiguration;
   kinesisvideowebrtcstorage?: AWS.KinesisVideoWebRTCStorage.Types.ClientConfiguration;
   licensemanagerlinuxsubscriptions?: AWS.LicenseManagerLinuxSubscriptions.Types.ClientConfiguration;
+  kendraranking?: AWS.KendraRanking.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -676,4 +677,5 @@ export interface ConfigurationServiceApiVersions {
   sagemakermetrics?: AWS.SageMakerMetrics.Types.apiVersion;
   kinesisvideowebrtcstorage?: AWS.KinesisVideoWebRTCStorage.Types.apiVersion;
   licensemanagerlinuxsubscriptions?: AWS.LicenseManagerLinuxSubscriptions.Types.apiVersion;
+  kendraranking?: AWS.KendraRanking.Types.apiVersion;
 }

@@ -1267,5 +1267,9 @@
   "licensemanagerlinuxsubscriptions": {
     "prefix": "license-manager-linux-subscriptions",
     "name": "LicenseManagerLinuxSubscriptions"
+  },
+  "kendraranking": {
+    "prefix": "kendra-ranking",
+    "name": "KendraRanking"
   }
 }

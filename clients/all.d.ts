@@ -335,3 +335,4 @@ export import Pipes = require('./pipes');
 export import SageMakerMetrics = require('./sagemakermetrics');
 export import KinesisVideoWebRTCStorage = require('./kinesisvideowebrtcstorage');
 export import LicenseManagerLinuxSubscriptions = require('./licensemanagerlinuxsubscriptions');
+export import KendraRanking = require('./kendraranking');
