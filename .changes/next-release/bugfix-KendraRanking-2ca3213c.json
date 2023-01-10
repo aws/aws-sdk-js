@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "KendraRanking",
-  "description": "Set endpoint to dualstack by default"
-}

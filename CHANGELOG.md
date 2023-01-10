@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1291.0-->
+<!--LATEST=2.1292.0-->
 <!--ENTRYINSERT-->
+
+## 2.1292.0
+* bugfix: KendraRanking: Set endpoint to dualstack by default
+* feature: Location: This release adds support for two new route travel models, Bicycle and Motorcycle which can be used with Grab data source.
+* feature: RDS: This release adds support for configuring allocated storage on the CreateDBInstanceReadReplica, RestoreDBInstanceFromDBSnapshot, and RestoreDBInstanceToPointInTime APIs.
 
 ## 2.1291.0
 * feature: ECRPUBLIC: This release for Amazon ECR Public makes several change to bring the SDK into sync with the API.
