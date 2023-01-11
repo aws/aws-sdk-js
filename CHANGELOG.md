@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1292.0-->
+<!--LATEST=2.1293.0-->
 <!--ENTRYINSERT-->
+
+## 2.1293.0
+* feature: Kendra: This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD
 
 ## 2.1292.0
 * bugfix: KendraRanking: Set endpoint to dualstack by default
