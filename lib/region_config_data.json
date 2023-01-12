@@ -108,6 +108,7 @@
     "us-gov-*/runtime.lex": "fips.runtime.lex",
     "us-gov-*/acm-pca": "fipsWithServiceOnly",
     "us-gov-*/batch": "fipsWithServiceOnly",
+    "us-gov-*/cloudformation": "fipsWithServiceOnly",
     "us-gov-*/config": "fipsWithServiceOnly",
     "us-gov-*/eks": "fipsWithServiceOnly",
     "us-gov-*/elasticmapreduce": "fipsWithServiceOnly",
