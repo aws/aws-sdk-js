@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1293.0-->
+<!--LATEST=2.1294.0-->
 <!--ENTRYINSERT-->
+
+## 2.1294.0
+* feature: CleanRooms: Initial release of AWS Clean Rooms
+* feature: CloudWatchLogs: Bug fix: logGroupName is now not a required field in GetLogEvents, FilterLogEvents, GetLogGroupFields, and DescribeLogStreams APIs as logGroupIdentifier can be provided instead
+* feature: Lambda: Add support for MaximumConcurrency parameter for SQS event source. Customers can now limit the maximum concurrent invocations for their SQS Event Source Mapping.
+* feature: MediaConvert: The AWS Elemental MediaConvert SDK has added support for compact DASH manifest generation, audio normalization using TruePeak measurements, and the ability to clip the sample range in the color corrector.
 
 ## 2.1293.0
 * feature: Kendra: This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD

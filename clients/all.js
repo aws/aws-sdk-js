@@ -337,5 +337,6 @@ module.exports = {
   SageMakerMetrics: require('./sagemakermetrics'),
   KinesisVideoWebRTCStorage: require('./kinesisvideowebrtcstorage'),
   LicenseManagerLinuxSubscriptions: require('./licensemanagerlinuxsubscriptions'),
-  KendraRanking: require('./kendraranking')
+  KendraRanking: require('./kendraranking'),
+  CleanRooms: require('./cleanrooms')
 };
