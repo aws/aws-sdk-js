@@ -4575,7 +4575,7 @@ declare namespace CognitoIdentityServiceProvider {
     /**
      * A container with information about the user type attributes.
      */
-    Attributes?: AttributeListType;
+    UserAttributes?: AttributeListType;
     /**
      * The creation date of the user.
      */
