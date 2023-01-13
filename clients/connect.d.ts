@@ -238,11 +238,11 @@ declare class Connect extends Service {
   /**
    * Deletes a flow for the specified Amazon Connect instance.
    */
-  deleteContactFlow(params: Connect.Types.DeleteContactFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteContactFlow(params: Connect.Types.DeleteContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.DeleteContactFlowResponse) => void): Request<Connect.Types.DeleteContactFlowResponse, AWSError>;
   /**
    * Deletes a flow for the specified Amazon Connect instance.
    */
-  deleteContactFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteContactFlow(callback?: (err: AWSError, data: Connect.Types.DeleteContactFlowResponse) => void): Request<Connect.Types.DeleteContactFlowResponse, AWSError>;
   /**
    * Deletes the specified flow module.
    */
@@ -1102,19 +1102,19 @@ declare class Connect extends Service {
   /**
    * Updates the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
-  updateContactFlowContent(params: Connect.Types.UpdateContactFlowContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateContactFlowContent(params: Connect.Types.UpdateContactFlowContentRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowContentResponse) => void): Request<Connect.Types.UpdateContactFlowContentResponse, AWSError>;
   /**
    * Updates the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
-  updateContactFlowContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateContactFlowContent(callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowContentResponse) => void): Request<Connect.Types.UpdateContactFlowContentResponse, AWSError>;
   /**
    * Updates metadata about specified flow.
    */
-  updateContactFlowMetadata(params: Connect.Types.UpdateContactFlowMetadataRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateContactFlowMetadata(params: Connect.Types.UpdateContactFlowMetadataRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowMetadataResponse) => void): Request<Connect.Types.UpdateContactFlowMetadataResponse, AWSError>;
   /**
    * Updates metadata about specified flow.
    */
-  updateContactFlowMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateContactFlowMetadata(callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowMetadataResponse) => void): Request<Connect.Types.UpdateContactFlowMetadataResponse, AWSError>;
   /**
    * Updates specified flow module for the specified Amazon Connect instance. 
    */
@@ -1134,11 +1134,11 @@ declare class Connect extends Service {
   /**
    * The name of the flow. You can also create and update flows using the Amazon Connect Flow language.
    */
-  updateContactFlowName(params: Connect.Types.UpdateContactFlowNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateContactFlowName(params: Connect.Types.UpdateContactFlowNameRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowNameResponse) => void): Request<Connect.Types.UpdateContactFlowNameResponse, AWSError>;
   /**
    * The name of the flow. You can also create and update flows using the Amazon Connect Flow language.
    */
-  updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateContactFlowName(callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowNameResponse) => void): Request<Connect.Types.UpdateContactFlowNameResponse, AWSError>;
   /**
    * Updates the scheduled time of a task contact that is already scheduled.
    */
@@ -2759,6 +2759,8 @@ declare namespace Connect {
      * The identifier of the flow.
      */
     ContactFlowId: ContactFlowId;
+  }
+  export interface DeleteContactFlowResponse {
   }
   export interface DeleteHoursOfOperationRequest {
     /**
@@ -6782,6 +6784,8 @@ declare namespace Connect {
      */
     Content: ContactFlowContent;
   }
+  export interface UpdateContactFlowContentResponse {
+  }
   export interface UpdateContactFlowMetadataRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -6803,6 +6807,8 @@ declare namespace Connect {
      * The state of flow.
      */
     ContactFlowState?: ContactFlowState;
+  }
+  export interface UpdateContactFlowMetadataResponse {
   }
   export interface UpdateContactFlowModuleContentRequest {
     /**
@@ -6861,6 +6867,8 @@ declare namespace Connect {
      * The description of the flow.
      */
     Description?: ContactFlowDescription;
+  }
+  export interface UpdateContactFlowNameResponse {
   }
   export interface UpdateContactRequest {
     /**

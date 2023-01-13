@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Endpoints",
-  "description": "Use correct FIPS endpoint for CloudFormation in GovCloud"
-}

@@ -882,7 +882,7 @@ declare namespace Outposts {
   export type PaymentTerm = "THREE_YEARS"|"ONE_YEAR"|string;
   export type PostalCode = string;
   export type PowerConnector = "L6_30P"|"IEC309"|"AH530P7W"|"AH532P6W"|string;
-  export type PowerDrawKva = "POWER_5_KVA"|"POWER_10_KVA"|"POWER_15_KVA"|string;
+  export type PowerDrawKva = "POWER_5_KVA"|"POWER_10_KVA"|"POWER_15_KVA"|"POWER_30_KVA"|string;
   export type PowerFeedDrop = "ABOVE_RACK"|"BELOW_RACK"|string;
   export type PowerPhase = "SINGLE_PHASE"|"THREE_PHASE"|string;
   export type Quantity = string;

@@ -53,11 +53,11 @@ declare class EC2 extends Service {
    */
   acceptTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.AcceptTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.AcceptTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
+   * Accepts connection requests to your VPC endpoint service.
    */
   acceptVpcEndpointConnections(params: EC2.Types.AcceptVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.AcceptVpcEndpointConnectionsResult) => void): Request<EC2.Types.AcceptVpcEndpointConnectionsResult, AWSError>;
   /**
-   * Accepts one or more interface VPC endpoint connection requests to your VPC endpoint service.
+   * Accepts connection requests to your VPC endpoint service.
    */
   acceptVpcEndpointConnections(callback?: (err: AWSError, data: EC2.Types.AcceptVpcEndpointConnectionsResult) => void): Request<EC2.Types.AcceptVpcEndpointConnectionsResult, AWSError>;
   /**
@@ -813,11 +813,11 @@ declare class EC2 extends Service {
    */
   createStoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
-   * Creates a subnet in a specified VPC. You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC. If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it. The allowed block size for an IPv6 subnet is a /64 netmask. If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(params: EC2.Types.CreateSubnetRequest, callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
-   * Creates a subnet in a specified VPC. You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC. If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it. The allowed block size for an IPv6 subnet is a /64 netmask. If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
@@ -997,11 +997,11 @@ declare class EC2 extends Service {
    */
   createVolume(callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
   /**
-   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see Your VPC and subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP options sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a VPC with the specified CIDR blocks. For more information, see VPC CIDR blocks in the Amazon Virtual Private Cloud User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP option sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   createVpc(params: EC2.Types.CreateVpcRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see Your VPC and subnets in the Amazon Virtual Private Cloud User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP options sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a VPC with the specified CIDR blocks. For more information, see VPC CIDR blocks in the Amazon Virtual Private Cloud User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP option sets in the Amazon Virtual Private Cloud User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
@@ -1021,11 +1021,11 @@ declare class EC2 extends Service {
    */
   createVpcEndpointConnectionNotification(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointConnectionNotificationResult) => void): Request<EC2.Types.CreateVpcEndpointConnectionNotificationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. Before you create an endpoint service, you must create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see the Amazon Web Services PrivateLink Guide.
+   * Creates a VPC endpoint service to which service consumers (Amazon Web Services accounts, users, and IAM roles) can connect. Before you create an endpoint service, you must create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see the Amazon Web Services PrivateLink Guide.
    */
   createVpcEndpointServiceConfiguration(params: EC2.Types.CreateVpcEndpointServiceConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
-   * Creates a VPC endpoint service to which service consumers (Amazon Web Services accounts, IAM users, and IAM roles) can connect. Before you create an endpoint service, you must create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see the Amazon Web Services PrivateLink Guide.
+   * Creates a VPC endpoint service to which service consumers (Amazon Web Services accounts, users, and IAM roles) can connect. Before you create an endpoint service, you must create one of the following for your service:   A Network Load Balancer. Service consumers connect to your service using an interface endpoint.   A Gateway Load Balancer. Service consumers connect to your service using a Gateway Load Balancer endpoint.   If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see the Amazon Web Services PrivateLink Guide.
    */
   createVpcEndpointServiceConfiguration(callback?: (err: AWSError, data: EC2.Types.CreateVpcEndpointServiceConfigurationResult) => void): Request<EC2.Types.CreateVpcEndpointServiceConfigurationResult, AWSError>;
   /**
@@ -1581,27 +1581,27 @@ declare class EC2 extends Service {
    */
   deleteVpc(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes one or more VPC endpoint connection notifications.
+   * Deletes the specified VPC endpoint connection notifications.
    */
   deleteVpcEndpointConnectionNotifications(params: EC2.Types.DeleteVpcEndpointConnectionNotificationsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointConnectionNotificationsResult) => void): Request<EC2.Types.DeleteVpcEndpointConnectionNotificationsResult, AWSError>;
   /**
-   * Deletes one or more VPC endpoint connection notifications.
+   * Deletes the specified VPC endpoint connection notifications.
    */
   deleteVpcEndpointConnectionNotifications(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointConnectionNotificationsResult) => void): Request<EC2.Types.DeleteVpcEndpointConnectionNotificationsResult, AWSError>;
   /**
-   * Deletes one or more VPC endpoint service configurations in your account. Before you delete the endpoint service configuration, you must reject any Available or PendingAcceptance interface endpoint connections that are attached to the service.
+   * Deletes the specified VPC endpoint service configurations. Before you can delete an endpoint service configuration, you must reject any Available or PendingAcceptance interface endpoint connections that are attached to the service.
    */
   deleteVpcEndpointServiceConfigurations(params: EC2.Types.DeleteVpcEndpointServiceConfigurationsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DeleteVpcEndpointServiceConfigurationsResult, AWSError>;
   /**
-   * Deletes one or more VPC endpoint service configurations in your account. Before you delete the endpoint service configuration, you must reject any Available or PendingAcceptance interface endpoint connections that are attached to the service.
+   * Deletes the specified VPC endpoint service configurations. Before you can delete an endpoint service configuration, you must reject any Available or PendingAcceptance interface endpoint connections that are attached to the service.
    */
   deleteVpcEndpointServiceConfigurations(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointServiceConfigurationsResult) => void): Request<EC2.Types.DeleteVpcEndpointServiceConfigurationsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints.    Gateway endpoint,   Gateway Load Balancer endpoint,   Interface endpoint   The following rules apply when you delete a VPC endpoint:   When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.   When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces.  You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.   When you delete an interface endpoint, we delete the endpoint network interfaces.  
+   * Deletes the specified VPC endpoints. When you delete a gateway endpoint, we delete the endpoint routes in the route tables for the endpoint. When you delete a Gateway Load Balancer endpoint, we delete its endpoint network interfaces. You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted. When you delete an interface endpoint, we delete its endpoint network interfaces.
    */
   deleteVpcEndpoints(params: EC2.Types.DeleteVpcEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
-   * Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints.    Gateway endpoint,   Gateway Load Balancer endpoint,   Interface endpoint   The following rules apply when you delete a VPC endpoint:   When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.   When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces.  You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.   When you delete an interface endpoint, we delete the endpoint network interfaces.  
+   * Deletes the specified VPC endpoints. When you delete a gateway endpoint, we delete the endpoint routes in the route tables for the endpoint. When you delete a Gateway Load Balancer endpoint, we delete its endpoint network interfaces. You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted. When you delete an interface endpoint, we delete its endpoint network interfaces.
    */
   deleteVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
@@ -2789,11 +2789,11 @@ declare class EC2 extends Service {
    */
   describeVpcEndpointServices(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointServicesResult) => void): Request<EC2.Types.DescribeVpcEndpointServicesResult, AWSError>;
   /**
-   * Describes one or more of your VPC endpoints.
+   * Describes your VPC endpoints.
    */
   describeVpcEndpoints(params: EC2.Types.DescribeVpcEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointsResult) => void): Request<EC2.Types.DescribeVpcEndpointsResult, AWSError>;
   /**
-   * Describes one or more of your VPC endpoints.
+   * Describes your VPC endpoints.
    */
   describeVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DescribeVpcEndpointsResult) => void): Request<EC2.Types.DescribeVpcEndpointsResult, AWSError>;
   /**
@@ -4045,11 +4045,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointServicePayerResponsibility(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePayerResponsibilityResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(params: EC2.Types.ModifyVpcEndpointServicePermissionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
-   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (IAM users, IAM roles, and Amazon Web Services accounts) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
+   * Modifies the permissions for your VPC endpoint service. You can add or remove permissions for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to your endpoint service. If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.
    */
   modifyVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
@@ -4237,11 +4237,11 @@ declare class EC2 extends Service {
    */
   rejectTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.RejectTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.RejectTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
+   * Rejects VPC endpoint connection requests to your VPC endpoint service.
    */
   rejectVpcEndpointConnections(params: EC2.Types.RejectVpcEndpointConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.RejectVpcEndpointConnectionsResult) => void): Request<EC2.Types.RejectVpcEndpointConnectionsResult, AWSError>;
   /**
-   * Rejects one or more VPC endpoint connection requests to your VPC endpoint service.
+   * Rejects VPC endpoint connection requests to your VPC endpoint service.
    */
   rejectVpcEndpointConnections(callback?: (err: AWSError, data: EC2.Types.RejectVpcEndpointConnectionsResult) => void): Request<EC2.Types.RejectVpcEndpointConnectionsResult, AWSError>;
   /**
@@ -5046,7 +5046,7 @@ declare namespace EC2 {
      */
     ServiceId: VpcEndpointServiceId;
     /**
-     * The IDs of one or more interface VPC endpoints.
+     * The IDs of the interface VPC endpoints.
      */
     VpcEndpointIds: VpcEndpointIdList;
   }
@@ -6501,7 +6501,7 @@ declare namespace EC2 {
      */
     CidrIp?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use -1 to specify all types. If you specify all ICMP types, you must specify all codes. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
+     * If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP, this is the type number. A value of -1 indicates all ICMP types. If you specify all ICMP types, you must specify all ICMP codes. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     FromPort?: Integer;
     /**
@@ -6529,7 +6529,7 @@ declare namespace EC2 {
      */
     SourceSecurityGroupOwnerId?: String;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP code number. For the ICMP code number, use -1 to specify all codes. If you specify all ICMP types, you must specify all codes. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
+     * If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP, this is the code. A value of -1 indicates all ICMP codes. If you specify all ICMP types, you must specify all ICMP codes. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     ToPort?: Integer;
     /**
@@ -8250,7 +8250,7 @@ declare namespace EC2 {
   }
   export interface CreateClientVpnEndpointRequest {
     /**
-     * The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. The CIDR block should be /22 or greater.
+     * The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. Client CIDR range must have a size of at least /22 and must not be greater than /12.
      */
     ClientCidrBlock: String;
     /**
@@ -10796,7 +10796,7 @@ declare namespace EC2 {
      */
     ConnectionNotificationArn: String;
     /**
-     * One or more endpoint events for which to receive notifications. Valid values are Accept, Connect, Delete, and Reject.
+     * The endpoint events for which to receive notifications. Valid values are Accept, Connect, Delete, and Reject.
      */
     ConnectionEvents: ValueStringList;
     /**
@@ -10824,11 +10824,11 @@ declare namespace EC2 {
      */
     VpcEndpointType?: VpcEndpointType;
     /**
-     * The ID of the VPC in which the endpoint will be used.
+     * The ID of the VPC for the endpoint.
      */
     VpcId: VpcId;
     /**
-     * The service name. To get a list of available services, use the DescribeVpcEndpointServices request, or get the name from the service provider.
+     * The service name.
      */
     ServiceName: String;
     /**
@@ -10836,15 +10836,15 @@ declare namespace EC2 {
      */
     PolicyDocument?: String;
     /**
-     * (Gateway endpoint) One or more route table IDs.
+     * (Gateway endpoint) The route table IDs.
      */
     RouteTableIds?: VpcEndpointRouteTableIdList;
     /**
-     * (Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in which to create an endpoint network interface. For a Gateway Load Balancer endpoint, you can specify one subnet only.
+     * (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to create an endpoint network interface. For a Gateway Load Balancer endpoint, you can specify only one subnet.
      */
     SubnetIds?: VpcEndpointSubnetIdList;
     /**
-     * (Interface endpoint) The ID of one or more security groups to associate with the endpoint network interface.
+     * (Interface endpoint) The IDs of the security groups to associate with the endpoint network interface. If this parameter is not specified, we use the default security group for the VPC.
      */
     SecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
@@ -10892,11 +10892,11 @@ declare namespace EC2 {
      */
     PrivateDnsName?: String;
     /**
-     * The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your service.
+     * The Amazon Resource Names (ARNs) of the Network Load Balancers.
      */
     NetworkLoadBalancerArns?: ValueStringList;
     /**
-     * The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
+     * The Amazon Resource Names (ARNs) of the Gateway Load Balancers.
      */
     GatewayLoadBalancerArns?: ValueStringList;
     /**
@@ -11152,11 +11152,11 @@ declare namespace EC2 {
      */
     Destination?: String;
     /**
-     * The aggregation metric used for the data query. Currently only aggregation-latency is supported, indicating network latency.
+     * The metric, aggregation-latency, indicating that network latency is aggregated for the query. This is the only supported metric.
      */
     Metric?: MetricType;
     /**
-     * Metric data aggregations over specified periods of time. The following are the supported Infrastructure Performance statistics:    p50 - The median value of the metric aggregated over a specified start and end time. For example, a metric of five_minutes is the median of all the data points gathered within those five minutes.  
+     * The metric data aggregation period, p50, between the specified startDate and endDate. For example, a metric of five_minutes is the median of all the data points gathered within those five minutes. p50 is the only supported metric.
      */
     Statistic?: StatisticType;
     /**
@@ -11178,7 +11178,7 @@ declare namespace EC2 {
      */
     Destination?: String;
     /**
-     * The metric used for the network performance request. Currently only aggregate-latency is supported, showing network latency during a specified period. 
+     * The metric used for the network performance request. Only aggregate-latency is supported, which shows network latency during a specified period. 
      */
     Metric?: MetricType;
     /**
@@ -12330,7 +12330,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more notification IDs.
+     * The IDs of the notifications.
      */
     ConnectionNotificationIds: ConnectionNotificationIdsList;
   }
@@ -12346,7 +12346,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of one or more services.
+     * The IDs of the services.
      */
     ServiceIds: VpcEndpointServiceIdList;
   }
@@ -12362,7 +12362,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more VPC endpoint IDs.
+     * The IDs of the VPC endpoints.
      */
     VpcEndpointIds: VpcEndpointIdList;
   }
@@ -14172,7 +14172,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstancesRequest {
     /**
-     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64 | arm64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    capacity-reservation-id - The ID of the Capacity Reservation into which the instance was launched.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen). The value xen is used for both Xen and Nitro hypervisors.    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched, in the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example, 2021-09-29T11:04:43.305Z. You can use a wildcard (*), for example, 2021-09-29T*, which matches an entire day.    metadata-options.http-tokens - The metadata request authorization state (optional | required)    metadata-options.http-put-response-hop-limit - The http metadata request put response hop limit (integer, possible values 1 to 64)    metadata-options.http-endpoint - Enable or disable metadata access on http endpoint (enabled | disabled)    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by Amazon Web Services.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The Amazon Web Services account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
+     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64 | arm64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    capacity-reservation-id - The ID of the Capacity Reservation into which the instance was launched.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen). The value xen is used for both Xen and Nitro hypervisors.    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched, in the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example, 2021-09-29T11:04:43.305Z. You can use a wildcard (*), for example, 2021-09-29T*, which matches an entire day.    metadata-options.http-tokens - The metadata request authorization state (optional | required)    metadata-options.http-put-response-hop-limit - The HTTP metadata request put response hop limit (integer, possible values 1 to 64)    metadata-options.http-endpoint - The status of access to the HTTP metadata endpoint on your instance (enabled | disabled)    metadata-options.instance-metadata-tags - The status of access to instance tags from the instance metadata (enabled | disabled)    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by Amazon Web Services.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    owner-id - The Amazon Web Services account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
      */
     Filters?: FilterList;
     /**
@@ -16824,7 +16824,7 @@ declare namespace EC2 {
      */
     ConnectionNotificationId?: ConnectionNotificationId;
     /**
-     * One or more filters.    connection-notification-arn - The ARN of the SNS topic for the notification.    connection-notification-id - The ID of the notification.    connection-notification-state - The state of the notification (Enabled | Disabled).    connection-notification-type - The type of notification (Topic).    service-id - The ID of the endpoint service.    vpc-endpoint-id - The ID of the VPC endpoint.  
+     * The filters.    connection-notification-arn - The ARN of the SNS topic for the notification.    connection-notification-id - The ID of the notification.    connection-notification-state - The state of the notification (Enabled | Disabled).    connection-notification-type - The type of notification (Topic).    service-id - The ID of the endpoint service.    vpc-endpoint-id - The ID of the VPC endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -16838,7 +16838,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointConnectionNotificationsResult {
     /**
-     * One or more notifications.
+     * The notifications.
      */
     ConnectionNotificationSet?: ConnectionNotificationSet;
     /**
@@ -16852,7 +16852,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
+     * The filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-id - The ID of the service.    vpc-endpoint-owner - The ID of the Amazon Web Services account ID that owns the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-id - The ID of the endpoint.  
      */
     Filters?: FilterList;
     /**
@@ -16866,7 +16866,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointConnectionsResult {
     /**
-     * Information about one or more VPC endpoint connections.
+     * Information about the VPC endpoint connections.
      */
     VpcEndpointConnections?: VpcEndpointConnectionSet;
     /**
@@ -16880,11 +16880,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The IDs of one or more services.
+     * The IDs of the endpoint services.
      */
     ServiceIds?: VpcEndpointServiceIdList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * The filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -16898,7 +16898,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointServiceConfigurationsResult {
     /**
-     * Information about one or more services.
+     * Information about the services.
      */
     ServiceConfigurations?: ServiceConfigurationSet;
     /**
@@ -16916,7 +16916,7 @@ declare namespace EC2 {
      */
     ServiceId: VpcEndpointServiceId;
     /**
-     * One or more filters.    principal - The ARN of the principal.    principal-type - The principal type (All | Service | OrganizationUnit | Account | User | Role).  
+     * The filters.    principal - The ARN of the principal.    principal-type - The principal type (All | Service | OrganizationUnit | Account | User | Role).  
      */
     Filters?: FilterList;
     /**
@@ -16930,7 +16930,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointServicePermissionsResult {
     /**
-     * Information about one or more allowed principals.
+     * Information about the allowed principals.
      */
     AllowedPrincipals?: AllowedPrincipalSet;
     /**
@@ -16944,11 +16944,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more service names.
+     * The service names.
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    owner - The ID or alias of the Amazon Web Services account that owns the service.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway | GatewayLoadBalancer).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * The filters.    owner - The ID or alias of the Amazon Web Services account that owns the service.    service-name - The name of the service.    service-type - The type of service (Interface | Gateway | GatewayLoadBalancer).    supported-ip-address-types - The IP address type (ipv4 | ipv6).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -16962,7 +16962,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcEndpointServicesResult {
     /**
-     * A list of supported services.
+     * The supported services.
      */
     ServiceNames?: ValueStringList;
     /**
@@ -16980,11 +16980,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more endpoint IDs.
+     * The IDs of the VPC endpoints.
      */
     VpcEndpointIds?: VpcEndpointIdList;
     /**
-     * One or more filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).  
+     * The filters.    ip-address-type - The IP address type (ipv4 | ipv6).    service-name - The name of the service.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC in which the endpoint resides.    vpc-endpoint-id - The ID of the endpoint.    vpc-endpoint-state - The state of the endpoint (pendingAcceptance | pending | available | deleting | deleted | rejected | failed).    vpc-endpoint-type - The type of VPC endpoint (Interface | Gateway | GatewayLoadBalancer).  
      */
     Filters?: FilterList;
     /**
@@ -19667,6 +19667,9 @@ declare namespace EC2 {
      * Indicates whether data retention support is enabled for the AFI.
      */
     DataRetentionSupport?: Boolean;
+    /**
+     * The instance types supported by the AFI.
+     */
     InstanceTypes?: InstanceTypesList;
   }
   export interface FpgaImageAttribute {
@@ -22654,7 +22657,7 @@ declare namespace EC2 {
   export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
   export interface InstanceMetadataOptionsRequest {
     /**
-     * The state of token usage for your instance metadata requests. If the state is optional, you can choose to retrieve instance metadata with or without a session token on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the version 2.0 role credentials are returned. If the state is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available. Default: optional 
+     * IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in other words, set the use of IMDSv2 to optional) or required (in other words, set the use of IMDSv2 to required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -22680,7 +22683,7 @@ declare namespace EC2 {
      */
     State?: InstanceMetadataOptionsState;
     /**
-     * The state of token usage for your instance metadata requests. If the state is optional, you can choose to retrieve instance metadata with or without a session token on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the version 2.0 role credentials are returned. If the state is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available. Default: optional 
+     * IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is optional (in other words, indicates whether the use of IMDSv2 is optional) or required (in other words, indicates whether the use of IMDSv2 is required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -23475,7 +23478,7 @@ declare namespace EC2 {
   export type IpAddressType = "ipv4"|"dualstack"|"ipv6"|string;
   export interface IpPermission {
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
      */
     FromPort?: Integer;
     /**
@@ -23495,7 +23498,7 @@ declare namespace EC2 {
      */
     PrefixListIds?: PrefixListIdList;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
      */
     ToPort?: Integer;
     /**
@@ -24484,7 +24487,7 @@ declare namespace EC2 {
      */
     State?: LaunchTemplateInstanceMetadataOptionsState;
     /**
-     * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available.
+     * Indicates whether IMDSv2 is optional or required.  optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.  required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available. Default: optional 
      */
     HttpTokens?: LaunchTemplateHttpTokensState;
     /**
@@ -24506,7 +24509,7 @@ declare namespace EC2 {
   }
   export interface LaunchTemplateInstanceMetadataOptionsRequest {
     /**
-     * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available.
+     * IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in other words, set the use of IMDSv2 to optional) or required (in other words, set the use of IMDSv2 to required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
      */
     HttpTokens?: LaunchTemplateHttpTokensState;
     /**
@@ -26050,7 +26053,7 @@ declare namespace EC2 {
      */
     InstanceId: InstanceId;
     /**
-     * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose to retrieve instance metadata with or without a session token on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the version 2.0 role credentials are returned. If the state is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available.
+     * IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in other words, set the use of IMDSv2 to optional) or required (in other words, set the use of IMDSv2 to required).    optional - When IMDSv2 is optional, you can choose to retrieve instance metadata with or without a session token in your request. If you retrieve the IAM role credentials without a token, the IMDSv1 role credentials are returned. If you retrieve the IAM role credentials using a valid session token, the IMDSv2 role credentials are returned.    required - When IMDSv2 is required, you must send a session token with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.   Default: optional 
      */
     HttpTokens?: HttpTokensState;
     /**
@@ -27155,7 +27158,7 @@ declare namespace EC2 {
      */
     ConnectionNotificationArn?: String;
     /**
-     * One or more events for the endpoint. Valid values are Accept, Connect, Delete, and Reject.
+     * The events for the endpoint. Valid values are Accept, Connect, Delete, and Reject.
      */
     ConnectionEvents?: ValueStringList;
   }
@@ -27183,27 +27186,27 @@ declare namespace EC2 {
      */
     PolicyDocument?: String;
     /**
-     * (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
+     * (Gateway endpoint) The IDs of the route tables to associate with the endpoint.
      */
     AddRouteTableIds?: VpcEndpointRouteTableIdList;
     /**
-     * (Gateway endpoint) One or more route table IDs to disassociate from the endpoint.
+     * (Gateway endpoint) The IDs of the route tables to disassociate from the endpoint.
      */
     RemoveRouteTableIds?: VpcEndpointRouteTableIdList;
     /**
-     * (Interface and Gateway Load Balancer endpoints) One or more subnet IDs in which to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
+     * (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
      */
     AddSubnetIds?: VpcEndpointSubnetIdList;
     /**
-     * (Interface endpoint) One or more subnets IDs in which to remove the endpoint.
+     * (Interface endpoint) The IDs of the subnets from which to remove the endpoint.
      */
     RemoveSubnetIds?: VpcEndpointSubnetIdList;
     /**
-     * (Interface endpoint) One or more security group IDs to associate with the network interface.
+     * (Interface endpoint) The IDs of the security groups to associate with the network interface.
      */
     AddSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
-     * (Interface endpoint) One or more security group IDs to disassociate from the network interface.
+     * (Interface endpoint) The IDs of the security groups to disassociate from the network interface.
      */
     RemoveSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
@@ -27307,11 +27310,11 @@ declare namespace EC2 {
      */
     ServiceId: VpcEndpointServiceId;
     /**
-     * The Amazon Resource Names (ARN) of one or more principals. Permissions are granted to the principals in this list. To grant permissions to all principals, specify an asterisk (*).
+     * The Amazon Resource Names (ARN) of the principals. Permissions are granted to the principals in this list. To grant permissions to all principals, specify an asterisk (*).
      */
     AddAllowedPrincipals?: ValueStringList;
     /**
-     * The Amazon Resource Names (ARN) of one or more principals. Permissions are revoked for principals in this list.
+     * The Amazon Resource Names (ARN) of the principals. Permissions are revoked for principals in this list.
      */
     RemoveAllowedPrincipals?: ValueStringList;
   }
@@ -29727,7 +29730,7 @@ declare namespace EC2 {
      */
     ServiceId: VpcEndpointServiceId;
     /**
-     * The IDs of one or more VPC endpoints.
+     * The IDs of the VPC endpoints.
      */
     VpcEndpointIds: VpcEndpointIdList;
   }
@@ -30236,7 +30239,7 @@ declare namespace EC2 {
      */
     MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptionsRequest;
     /**
-     * Indicates whether to enable the instance for stop protection. For more information, see Stop Protection.
+     * Indicates whether to enable the instance for stop protection. For more information, see Stop protection in the Amazon Elastic Compute Cloud User Guide.
      */
     DisableApiStop?: Boolean;
   }
@@ -31012,7 +31015,7 @@ declare namespace EC2 {
      */
     MaintenanceOptions?: LaunchTemplateInstanceMaintenanceOptions;
     /**
-     * Indicates whether the instance is enabled for stop protection. For more information, see Stop Protection.
+     * Indicates whether the instance is enabled for stop protection. For more information, see Stop protection in the Amazon Elastic Compute Cloud User Guide.
      */
     DisableApiStop?: Boolean;
   }
@@ -31253,7 +31256,7 @@ declare namespace EC2 {
      */
     CidrIp?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use -1 to specify all ICMP types.
+     * If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP, this is the type number. A value of -1 indicates all ICMP types.
      */
     FromPort?: Integer;
     /**
@@ -31281,7 +31284,7 @@ declare namespace EC2 {
      */
     SourceSecurityGroupOwnerId?: String;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP code number. For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
+     * If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP, this is the code. A value of -1 indicates all ICMP codes.
      */
     ToPort?: Integer;
     /**
@@ -31508,7 +31511,7 @@ declare namespace EC2 {
      */
     SecurityGroupIds?: SecurityGroupIdStringList;
     /**
-     * [EC2-Classic, default VPC] The names of the security groups. For a nondefault VPC, you must use security group IDs instead. If you specify a network interface, you must specify any security groups as part of the network interface. Default: Amazon EC2 uses the default security group.
+     * [EC2-Classic, default VPC] The names of the security groups. If you specify a network interface, you must specify any security groups as part of the network interface. Default: Amazon EC2 uses the default security group.
      */
     SecurityGroups?: SecurityGroupStringList;
     /**
@@ -32218,11 +32221,11 @@ declare namespace EC2 {
      */
     IpProtocol?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
      */
     FromPort?: Integer;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes. 
+     * If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
      */
     ToPort?: Integer;
     /**
@@ -32270,11 +32273,11 @@ declare namespace EC2 {
      */
     IpProtocol?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
      */
     FromPort?: Integer;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes. 
+     * If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
      */
     ToPort?: Integer;
     /**
@@ -32380,7 +32383,7 @@ declare namespace EC2 {
      */
     PayerResponsibility?: PayerResponsibility;
     /**
-     * Any tags assigned to the service.
+     * The tags assigned to the service.
      */
     Tags?: TagList;
   }
@@ -32436,7 +32439,7 @@ declare namespace EC2 {
      */
     PayerResponsibility?: PayerResponsibility;
     /**
-     * Any tags assigned to the service.
+     * The tags assigned to the service.
      */
     Tags?: TagList;
     /**
@@ -33022,7 +33025,7 @@ declare namespace EC2 {
      */
     Context?: String;
     /**
-     * The unit for the target capacity. Default: units (translates to number of instances)
+     * The unit for the target capacity. TargetCapacityUnitType can only be specified when InstanceRequirements is specified. Default: units (translates to number of instances)
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
     /**
@@ -33800,7 +33803,7 @@ declare namespace EC2 {
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
     /**
-     * The unit for the target capacity. Default: units (translates to number of instances)
+     * The unit for the target capacity. TargetCapacityUnitType can only be specified when InstanceRequirements is specified. Default: units (translates to number of instances)
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
   }
@@ -33822,7 +33825,7 @@ declare namespace EC2 {
      */
     DefaultTargetCapacityType?: DefaultTargetCapacityType;
     /**
-     * The unit for the target capacity. Default: units (translates to number of instances)
+     * The unit for the target capacity. TargetCapacityUnitType can only be specified when InstanceRequirements is specified. Default: units (translates to number of instances)
      */
     TargetCapacityUnitType?: TargetCapacityUnitType;
   }
@@ -36441,7 +36444,7 @@ declare namespace EC2 {
      */
     PolicyDocument?: String;
     /**
-     * (Gateway endpoint) One or more route tables associated with the endpoint.
+     * (Gateway endpoint) The IDs of the route tables associated with the endpoint.
      */
     RouteTableIds?: ValueStringList;
     /**
@@ -36469,7 +36472,7 @@ declare namespace EC2 {
      */
     RequesterManaged?: Boolean;
     /**
-     * (Interface endpoint) One or more network interfaces for the endpoint.
+     * (Interface endpoint) The network interfaces for the endpoint.
      */
     NetworkInterfaceIds?: ValueStringList;
     /**
@@ -36481,7 +36484,7 @@ declare namespace EC2 {
      */
     CreationTimestamp?: MillisecondDateTime;
     /**
-     * Any tags assigned to the endpoint.
+     * The tags assigned to the endpoint.
      */
     Tags?: TagList;
     /**

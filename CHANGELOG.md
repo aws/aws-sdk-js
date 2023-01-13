@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1294.0-->
+<!--LATEST=2.1295.0-->
 <!--ENTRYINSERT-->
+
+## 2.1295.0
+* bugfix: Endpoints: Use correct FIPS endpoint for CloudFormation in GovCloud
+* feature: Connect: This release updates the responses of UpdateContactFlowContent, UpdateContactFlowMetadata, UpdateContactFlowName and DeleteContactFlow API with empty responses.
+* feature: EC2: Documentation updates for EC2.
+* feature: Outposts: This release adds POWER_30_KVA as an option for PowerDrawKva. PowerDrawKva is part of the RackPhysicalProperties structure in the CreateSite request.
+* feature: ResourceGroups: AWS Resource Groups customers can now turn on Group Lifecycle Events in their AWS account. When you turn this on, Resource Groups monitors your groups for changes to group state or membership. Those changes are sent to Amazon EventBridge as events that you can respond to using rules you create.
 
 ## 2.1294.0
 * feature: CleanRooms: Initial release of AWS Clean Rooms

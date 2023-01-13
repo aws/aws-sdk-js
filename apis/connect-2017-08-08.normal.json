@@ -1004,6 +1004,9 @@
       "input": {
         "shape": "DeleteContactFlowRequest"
       },
+      "output": {
+        "shape": "DeleteContactFlowResponse"
+      },
       "errors": [
         {
           "shape": "AccessDeniedException"
@@ -4277,6 +4280,9 @@
       "input": {
         "shape": "UpdateContactFlowContentRequest"
       },
+      "output": {
+        "shape": "UpdateContactFlowContentResponse"
+      },
       "errors": [
         {
           "shape": "InvalidRequestException"
@@ -4307,6 +4313,9 @@
       },
       "input": {
         "shape": "UpdateContactFlowMetadataRequest"
+      },
+      "output": {
+        "shape": "UpdateContactFlowMetadataResponse"
       },
       "errors": [
         {
@@ -4409,6 +4418,9 @@
       },
       "input": {
         "shape": "UpdateContactFlowNameRequest"
+      },
+      "output": {
+        "shape": "UpdateContactFlowNameResponse"
       },
       "errors": [
         {
@@ -7576,6 +7588,10 @@
           "locationName": "ContactFlowId"
         }
       }
+    },
+    "DeleteContactFlowResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteHoursOfOperationRequest": {
       "type": "structure",
@@ -14837,6 +14853,10 @@
         }
       }
     },
+    "UpdateContactFlowContentResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateContactFlowMetadataRequest": {
       "type": "structure",
       "required": [
@@ -14869,6 +14889,10 @@
           "documentation": "<p>The state of flow.</p>"
         }
       }
+    },
+    "UpdateContactFlowMetadataResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateContactFlowModuleContentRequest": {
       "type": "structure",
@@ -14965,6 +14989,10 @@
           "documentation": "<p>The description of the flow.</p>"
         }
       }
+    },
+    "UpdateContactFlowNameResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateContactRequest": {
       "type": "structure",
