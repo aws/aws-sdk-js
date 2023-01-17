@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1295.0-->
+<!--LATEST=2.1296.0-->
 <!--ENTRYINSERT-->
+
+## 2.1296.0
+* feature: Billingconductor: This release adds support for SKU Scope for pricing plans.
+* feature: Cloud9: Added minimum value to AutomaticStopTimeMinutes parameter.
+* feature: Imagebuilder: Add support for AWS Marketplace product IDs as input during CreateImageRecipe for the parent-image parameter. Add support for listing third-party components.
+* feature: NetworkFirewall: Network Firewall now allows creation of dual stack endpoints, enabling inspection of IPv6 traffic.
 
 ## 2.1295.0
 * bugfix: Endpoints: Use correct FIPS endpoint for CloudFormation in GovCloud

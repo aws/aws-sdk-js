@@ -604,7 +604,7 @@ declare namespace Billingconductor {
      */
     ModifierPercentage?: ModifierPercentage;
     /**
-     *  If the Scope attribute is set to SERVICE, the attribute indicates which service the PricingRule is applicable for. 
+     *  If the Scope attribute is set to SERVICE or SKU, the attribute indicates which service the PricingRule is applicable for. 
      */
     Service?: Service;
     /**
@@ -619,6 +619,14 @@ declare namespace Billingconductor {
      *  The set of tiering configurations for the pricing rule. 
      */
     Tiering?: CreateTieringInput;
+    /**
+     *  Usage type is the unit that each service uses to measure the usage of a specific type of resource. If the Scope attribute is set to SKU, this attribute indicates which usage type the PricingRule is modifying. For example, USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large instance in the US West (Oregon) Region. &lt;/p&gt; 
+     */
+    UsageType?: UsageType;
+    /**
+     *  Operation is the specific Amazon Web Services action covered by this line item. This describes the specific usage of the line item.  If the Scope attribute is set to SKU, this attribute indicates which operation the PricingRule is modifying. For example, a value of RunInstances:0202 indicates the operation of running an Amazon EC2 instance.
+     */
+    Operation?: Operation;
   }
   export interface CreatePricingRuleOutput {
     /**
@@ -1320,6 +1328,7 @@ declare namespace Billingconductor {
   export type NumberOfAssociatedPricingRules = number;
   export type NumberOfAssociations = number;
   export type NumberOfPricingPlansAssociatedWith = number;
+  export type Operation = string;
   export type PricingPlanArn = string;
   export type PricingPlanArns = PricingPlanArn[];
   export type PricingPlanDescription = string;
@@ -1694,6 +1703,14 @@ declare namespace Billingconductor {
      *  The set of tiering configurations for the pricing rule. 
      */
     Tiering?: UpdateTieringInput;
+    /**
+     * Usage type is the unit that each service uses to measure the usage of a specific type of resource. If the Scope attribute is set to SKU, this attribute indicates which usage type the PricingRule is modifying. For example, USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large instance in the US West (Oregon) Region. 
+     */
+    UsageType?: UsageType;
+    /**
+     * Operation refers to the specific Amazon Web Services covered by this line item. This describes the specific usage of the line item.  If the Scope attribute is set to SKU, this attribute indicates which operation the PricingRule is modifying. For example, a value of RunInstances:0202 indicates the operation of running an Amazon EC2 instance.
+     */
+    Operation?: Operation;
   }
   export interface UpdateTieringInput {
     /**
@@ -1701,6 +1718,7 @@ declare namespace Billingconductor {
      */
     FreeTier: UpdateFreeTierConfig;
   }
+  export type UsageType = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

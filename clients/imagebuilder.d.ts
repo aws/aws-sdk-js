@@ -244,11 +244,11 @@ declare class Imagebuilder extends Service {
    */
   listComponentBuildVersions(callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListComponentBuildVersionsResponse, AWSError>;
   /**
-   * Returns the list of component build versions for the specified semantic version.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Filtering: With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. 
+   * Returns the list of components that can be filtered by name, or by using the listed filters to streamline results. Newly created components can take up to two minutes to appear in the ListComponents API Results.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Filtering: With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. 
    */
   listComponents(params: Imagebuilder.Types.ListComponentsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentsResponse) => void): Request<Imagebuilder.Types.ListComponentsResponse, AWSError>;
   /**
-   * Returns the list of component build versions for the specified semantic version.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Filtering: With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. 
+   * Returns the list of components that can be filtered by name, or by using the listed filters to streamline results. Newly created components can take up to two minutes to appear in the ListComponents API Results.  The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.  Filtering: With semantic versioning, you have the flexibility to use wildcards (x) to specify the most recent versions or nodes when selecting the base image or components for your recipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. 
    */
   listComponents(callback?: (err: AWSError, data: Imagebuilder.Types.ListComponentsResponse) => void): Request<Imagebuilder.Types.ListComponentsResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class Imagebuilder extends Service {
    */
   listImagePackages(callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePackagesResponse) => void): Request<Imagebuilder.Types.ListImagePackagesResponse, AWSError>;
   /**
-   *  Returns a list of images created by the specified pipeline.
+   * Returns a list of images created by the specified pipeline.
    */
   listImagePipelineImages(params: Imagebuilder.Types.ListImagePipelineImagesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePipelineImagesResponse) => void): Request<Imagebuilder.Types.ListImagePipelineImagesResponse, AWSError>;
   /**
-   *  Returns a list of images created by the specified pipeline.
+   * Returns a list of images created by the specified pipeline.
    */
   listImagePipelineImages(callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePipelineImagesResponse) => void): Request<Imagebuilder.Types.ListImagePipelineImagesResponse, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class Imagebuilder extends Service {
    */
   listImageRecipes(callback?: (err: AWSError, data: Imagebuilder.Types.ListImageRecipesResponse) => void): Request<Imagebuilder.Types.ListImageRecipesResponse, AWSError>;
   /**
-   *  Returns the list of images that you have access to.
+   * Returns the list of images that you have access to. Newly created images can take up to two minutes to appear in the ListImages API Results.
    */
   listImages(params: Imagebuilder.Types.ListImagesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImagesResponse) => void): Request<Imagebuilder.Types.ListImagesResponse, AWSError>;
   /**
-   *  Returns the list of images that you have access to.
+   * Returns the list of images that you have access to. Newly created images can take up to two minutes to appear in the ListImages API Results.
    */
   listImages(callback?: (err: AWSError, data: Imagebuilder.Types.ListImagesResponse) => void): Request<Imagebuilder.Types.ListImagesResponse, AWSError>;
   /**
@@ -526,15 +526,15 @@ declare namespace Imagebuilder {
      */
     changeDescription?: NonEmptyString;
     /**
-     * The type of the component denotes whether the component is used to build the image or only to test it.
+     * The component type specifies whether Image Builder uses the component to build the image or only to test it.
      */
     type?: ComponentType;
     /**
-     * The platform of the component.
+     * The operating system platform of the component.
      */
     platform?: Platform;
     /**
-     * The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation.
+     * The operating system (OS) version supported by the component. If the OS information is available, Image Builder performs a prefix match against the base image OS version during image recipe creation.
      */
     supportedOsVersions?: OsVersionList;
     /**
@@ -542,7 +542,7 @@ declare namespace Imagebuilder {
      */
     state?: ComponentState;
     /**
-     * Contains parameter details for each of the parameters that are defined for the component.
+     * Contains parameter details for each of the parameters that the component document defined for the component.
      */
     parameters?: ComponentParameterDetailList;
     /**
@@ -562,13 +562,21 @@ declare namespace Imagebuilder {
      */
     encrypted?: NullableBoolean;
     /**
-     * The date that the component was created.
+     * The date that Image Builder created the component.
      */
     dateCreated?: DateTime;
     /**
-     * The tags associated with the component.
+     * The tags that apply to the component.
      */
     tags?: TagMap;
+    /**
+     * Contains the name of the publisher if this is a third-party component. Otherwise, this property is empty.
+     */
+    publisher?: NonEmptyString;
+    /**
+     * Indicates whether component source is hidden from view in the console, and from component detail results for API, CLI, or SDK operations.
+     */
+    obfuscate?: Boolean;
   }
   export type ComponentBuildVersionArn = string;
   export interface ComponentConfiguration {
@@ -577,7 +585,7 @@ declare namespace Imagebuilder {
      */
     componentArn: ComponentVersionArnOrBuildVersionArn;
     /**
-     * A group of parameter settings that are used to configure the component for a specific recipe.
+     * A group of parameter settings that Image Builder uses to configure the component for a specific recipe.
      */
     parameters?: ComponentParameterList;
   }
@@ -644,11 +652,11 @@ declare namespace Imagebuilder {
      */
     version?: VersionNumber;
     /**
-     * The platform of the component.
+     * The operating system platform of the component.
      */
     platform?: Platform;
     /**
-     * The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation.
+     * The operating system (OS) version that the component supports. If the OS information is available, Image Builder performs a prefix match against the base image OS version during image recipe creation.
      */
     supportedOsVersions?: OsVersionList;
     /**
@@ -656,7 +664,7 @@ declare namespace Imagebuilder {
      */
     state?: ComponentState;
     /**
-     * The type of the component denotes whether the component is used to build the image or only to test it.
+     * The component type specifies whether Image Builder uses the component to build the image or only to test it.
      */
     type?: ComponentType;
     /**
@@ -668,17 +676,25 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     /**
-     * The change description of the component.
+     * The change description for the current version of the component.
      */
     changeDescription?: NonEmptyString;
     /**
-     * The date that the component was created.
+     * The original creation date of the component.
      */
     dateCreated?: DateTime;
     /**
-     * The tags associated with the component.
+     * The tags that apply to the component.
      */
     tags?: TagMap;
+    /**
+     * Contains the name of the publisher if this is a third-party component. Otherwise, this property is empty.
+     */
+    publisher?: NonEmptyString;
+    /**
+     * Indicates whether component source is hidden from view in the console, and from component detail results for API, CLI, or SDK operations.
+     */
+    obfuscate?: Boolean;
   }
   export type ComponentSummaryList = ComponentSummary[];
   export type ComponentType = "BUILD"|"TEST"|string;
@@ -778,7 +794,7 @@ declare namespace Imagebuilder {
      */
     version?: VersionNumber;
     /**
-     * Components for build and test that are included in the container recipe.
+     * Build and test components that are included in the container recipe. Recipes require a minimum of one build component, and can have a maximum of 20 build and test components in any combination.
      */
     components?: ComponentConfigurationList;
     /**
@@ -866,7 +882,7 @@ declare namespace Imagebuilder {
      */
     semanticVersion: VersionNumber;
     /**
-     * The description of the component. Describes the contents of the component.
+     * Describes the contents of the component.
      */
     description?: NonEmptyString;
     /**
@@ -874,7 +890,7 @@ declare namespace Imagebuilder {
      */
     changeDescription?: NonEmptyString;
     /**
-     * The platform of the component.
+     * The operating system platform of the component.
      */
     platform: Platform;
     /**
@@ -890,11 +906,11 @@ declare namespace Imagebuilder {
      */
     uri?: Uri;
     /**
-     * The ID of the KMS key that should be used to encrypt this component.
+     * The ID of the KMS key that is used to encrypt this component.
      */
     kmsKeyId?: NonEmptyString;
     /**
-     * The tags of the component.
+     * The tags that apply to the component.
      */
     tags?: TagMap;
     /**
@@ -934,7 +950,7 @@ declare namespace Imagebuilder {
      */
     semanticVersion: VersionNumber;
     /**
-     * Components for build and test that are included in the container recipe.
+     * Components for build and test that are included in the container recipe. Recipes require a minimum of one build component, and can have a maximum of 20 build and test components in any combination.
      */
     components: ComponentConfigurationList;
     /**
@@ -1110,7 +1126,7 @@ declare namespace Imagebuilder {
      */
     semanticVersion: VersionNumber;
     /**
-     * The components of the image recipe.
+     * The components included in the image recipe.
      */
     components: ComponentConfigurationList;
     /**
@@ -1765,7 +1781,7 @@ declare namespace Imagebuilder {
      */
     arn?: ImageBuilderArn;
     /**
-     * Specifies whether this is an AMI or container image.
+     * Specifies whether this image produces an AMI or a container image.
      */
     type?: ImageType;
     /**
@@ -1777,15 +1793,15 @@ declare namespace Imagebuilder {
      */
     version?: VersionNumber;
     /**
-     * The platform of the image.
+     * The image operating system platform, such as Linux or Windows.
      */
     platform?: Platform;
     /**
-     *  Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.
+     * Indicates whether Image Builder collects additional information about the image, such as the operating system (OS) version and package list.
      */
     enhancedImageMetadataEnabled?: NullableBoolean;
     /**
-     * The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+     * The operating system version for instances that launch from this image. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
      */
     osVersion?: OsVersion;
     /**
@@ -1793,11 +1809,11 @@ declare namespace Imagebuilder {
      */
     state?: ImageState;
     /**
-     * The image recipe used when creating the image.
+     * For images that distribute an AMI, this is the image recipe that Image Builder used to create the image. For container images, this is empty.
      */
     imageRecipe?: ImageRecipe;
     /**
-     * The recipe that is used to create an Image Builder container image.
+     * For container images, this is the container recipe that Image Builder used to create the image. For images that distribute an AMI, this is empty.
      */
     containerRecipe?: ContainerRecipe;
     /**
@@ -1809,33 +1825,37 @@ declare namespace Imagebuilder {
      */
     sourcePipelineArn?: Arn;
     /**
-     * The infrastructure used when creating this image.
+     * The infrastructure that Image Builder used to create this image.
      */
     infrastructureConfiguration?: InfrastructureConfiguration;
     /**
-     * The distribution configuration used when creating this image.
+     * The distribution configuration that Image Builder used to create this image.
      */
     distributionConfiguration?: DistributionConfiguration;
     /**
-     * The image tests configuration used when creating this image.
+     * The image tests that ran when that Image Builder created this image.
      */
     imageTestsConfiguration?: ImageTestsConfiguration;
     /**
-     * The date on which this image was created.
+     * The date on which Image Builder created this image.
      */
     dateCreated?: DateTime;
     /**
-     * The output resources produced when creating this image.
+     * The output resources that Image Builder produces for this image.
      */
     outputResources?: OutputResources;
     /**
-     * The tags of the image.
+     * The tags that apply to this image.
      */
     tags?: TagMap;
     /**
      * Indicates the type of build that created this image. The build can be initiated in the following ways:    USER_INITIATED – A manual pipeline build request.    SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.    IMPORT – A VM import created the image to use as the base image for the recipe.  
      */
     buildType?: BuildType;
+    /**
+     * The origin of the base image that Image Builder used to build this image.
+     */
+    imageSource?: ImageSource;
   }
   export type ImageBuildVersionArn = string;
   export type ImageBuilderArn = string;
@@ -1908,11 +1928,11 @@ declare namespace Imagebuilder {
      */
     dateUpdated?: DateTime;
     /**
-     * The date on which this image pipeline was last run.
+     * This is no longer supported, and does not return a value.
      */
     dateLastRun?: DateTime;
     /**
-     * The date on which this image pipeline will next be run.
+     * This is no longer supported, and does not return a value.
      */
     dateNextRun?: DateTime;
     /**
@@ -1952,7 +1972,7 @@ declare namespace Imagebuilder {
      */
     version?: VersionNumber;
     /**
-     * The components of the image recipe.
+     * The components that are included in the image recipe. Recipes require a minimum of one build component, and can have a maximum of 20 build and test components in any combination.
      */
     components?: ComponentConfigurationList;
     /**
@@ -2012,6 +2032,7 @@ declare namespace Imagebuilder {
     tags?: TagMap;
   }
   export type ImageRecipeSummaryList = ImageRecipeSummary[];
+  export type ImageSource = "AMAZON_MANAGED"|"AWS_MARKETPLACE"|"IMPORTED"|"CUSTOM"|string;
   export interface ImageState {
     /**
      * The status of the image.
@@ -2033,7 +2054,7 @@ declare namespace Imagebuilder {
      */
     name?: ResourceName;
     /**
-     * Specifies whether this is an AMI or container image.
+     * Specifies whether this image produces an AMI or a container image.
      */
     type?: ImageType;
     /**
@@ -2041,11 +2062,11 @@ declare namespace Imagebuilder {
      */
     version?: VersionNumber;
     /**
-     * The platform of the image.
+     * The image operating system platform, such as Linux or Windows.
      */
     platform?: Platform;
     /**
-     * The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+     * The operating system version of the instances that launch from this image. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
      */
     osVersion?: OsVersion;
     /**
@@ -2057,21 +2078,25 @@ declare namespace Imagebuilder {
      */
     owner?: NonEmptyString;
     /**
-     * The date on which this image was created.
+     * The date on which Image Builder created this image.
      */
     dateCreated?: DateTime;
     /**
-     * The output resources produced when creating this image.
+     * The output resources that Image Builder produced when it created this image.
      */
     outputResources?: OutputResources;
     /**
-     * The tags of the image.
+     * The tags that apply to this image.
      */
     tags?: TagMap;
     /**
      * Indicates the type of build that created this image. The build can be initiated in the following ways:    USER_INITIATED – A manual pipeline build request.    SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.    IMPORT – A VM import created the image to use as the base image for the recipe.  
      */
     buildType?: BuildType;
+    /**
+     * The origin of the base image that Image Builder used to build this image.
+     */
+    imageSource?: ImageSource;
   }
   export type ImageSummaryList = ImageSummary[];
   export interface ImageTestsConfiguration {
@@ -2080,7 +2105,7 @@ declare namespace Imagebuilder {
      */
     imageTestsEnabled?: NullableBoolean;
     /**
-     * The maximum time in minutes that tests are permitted to run.
+     * The maximum time in minutes that tests are permitted to run.  The timeoutMinutes attribute is not currently active. This value is ignored. 
      */
     timeoutMinutes?: ImageTestsTimeoutMinutes;
   }
@@ -2096,7 +2121,7 @@ declare namespace Imagebuilder {
      */
     name?: ResourceName;
     /**
-     * Specifies whether this image is an AMI or a container image.
+     * Specifies whether this image produces an AMI or a container image.
      */
     type?: ImageType;
     /**
@@ -2104,7 +2129,7 @@ declare namespace Imagebuilder {
      */
     version?: VersionNumber;
     /**
-     * The platform of the image version, for example "Windows" or "Linux".
+     * The operating system platform of the image version, for example "Windows" or "Linux".
      */
     platform?: Platform;
     /**
@@ -2123,6 +2148,10 @@ declare namespace Imagebuilder {
      * Indicates the type of build that created this image. The build can be initiated in the following ways:    USER_INITIATED – A manual pipeline build request.    SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder pipeline, or from EventBridge.    IMPORT – A VM import created the image to use as the base image for the recipe.  
      */
     buildType?: BuildType;
+    /**
+     * The origin of the base image that Image Builder used to build this image.
+     */
+    imageSource?: ImageSource;
   }
   export type ImageVersionArn = string;
   export type ImageVersionArnOrBuildVersionArn = string;
@@ -2382,7 +2411,7 @@ declare namespace Imagebuilder {
      */
     httpTokens?: HttpTokens;
     /**
-     * Limit the number of hops that an instance metadata request can traverse to reach its destination.
+     * Limit the number of hops that an instance metadata request can traverse to reach its destination. The default is one hop. However, if HTTP tokens are required, container image builds need a minimum of two hops.
      */
     httpPutResponseHopLimit?: HttpPutResponseHopLimit;
   }
@@ -2455,7 +2484,7 @@ declare namespace Imagebuilder {
   }
   export interface ListComponentsRequest {
     /**
-     * The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers.
+     * Filters results based on the type of owner for the component. By default, this request returns a list of components that your account owns. To see results for other types of owners, you can specify components that Amazon manages, third party components, or components that other accounts have shared with you.
      */
     owner?: Ownership;
     /**
@@ -2463,7 +2492,7 @@ declare namespace Imagebuilder {
      */
     filters?: FilterList;
     /**
-     * Returns the list of component build versions for the specified name.
+     * Returns the list of components for the specified name.
      */
     byName?: Boolean;
     /**
@@ -2806,7 +2835,7 @@ declare namespace Imagebuilder {
      */
     containers?: ContainerList;
   }
-  export type Ownership = "Self"|"Shared"|"Amazon"|string;
+  export type Ownership = "Self"|"Shared"|"Amazon"|"ThirdParty"|string;
   export type PaginationToken = string;
   export type PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"|"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"|string;
   export type PipelineStatus = "DISABLED"|"ENABLED"|string;
