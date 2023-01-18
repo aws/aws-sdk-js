@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1296.0-->
+<!--LATEST=2.1297.0-->
 <!--ENTRYINSERT-->
+
+## 2.1297.0
+* feature: CloudWatch: Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.
+* feature: Ivschat: Updates the range for a Chat Room's maximumMessageRatePerSecond field.
 
 ## 2.1296.0
 * feature: Billingconductor: This release adds support for SKU Scope for pricing plans.
