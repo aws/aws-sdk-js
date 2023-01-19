@@ -20,11 +20,11 @@ declare class Panorama extends Service {
    */
   createApplicationInstance(callback?: (err: AWSError, data: Panorama.Types.CreateApplicationInstanceResponse) => void): Request<Panorama.Types.CreateApplicationInstanceResponse, AWSError>;
   /**
-   * Creates a job to run on one or more devices. A job can update a device's software or reboot it.
+   * Creates a job to run on a device. A job can update a device's software or reboot it.
    */
   createJobForDevices(params: Panorama.Types.CreateJobForDevicesRequest, callback?: (err: AWSError, data: Panorama.Types.CreateJobForDevicesResponse) => void): Request<Panorama.Types.CreateJobForDevicesResponse, AWSError>;
   /**
-   * Creates a job to run on one or more devices. A job can update a device's software or reboot it.
+   * Creates a job to run on a device. A job can update a device's software or reboot it.
    */
   createJobForDevices(callback?: (err: AWSError, data: Panorama.Types.CreateJobForDevicesResponse) => void): Request<Panorama.Types.CreateJobForDevicesResponse, AWSError>;
   /**
@@ -397,7 +397,7 @@ declare namespace Panorama {
   }
   export interface CreateJobForDevicesRequest {
     /**
-     * IDs of target devices.
+     * ID of target device.
      */
     DeviceIds: DeviceIdList;
     /**
@@ -1744,6 +1744,10 @@ declare namespace Panorama {
     NtpServerName?: NtpServerName;
   }
   export interface OTAJobConfig {
+    /**
+     * Whether to apply the update if it is a major version change.
+     */
+    AllowMajorVersionUpdate?: Boolean;
     /**
      * The target version of the device software.
      */

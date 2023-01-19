@@ -20,11 +20,11 @@ declare class OpenSearch extends Service {
    */
   acceptInboundConnection(callback?: (err: AWSError, data: OpenSearch.Types.AcceptInboundConnectionResponse) => void): Request<OpenSearch.Types.AcceptInboundConnectionResponse, AWSError>;
   /**
-   * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. An domain can have up to 10 tags. For more information, see  Tagging Amazon OpenSearch Service domains.
+   * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see Tagging Amazon OpenSearch Service domains.
    */
   addTags(params: OpenSearch.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. An domain can have up to 10 tags. For more information, see  Tagging Amazon OpenSearch Service domains.
+   * Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see Tagging Amazon OpenSearch Service domains.
    */
   addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -163,6 +163,14 @@ declare class OpenSearch extends Service {
    * Returns domain configuration information about the specified Amazon OpenSearch Service domains.
    */
   describeDomains(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainsResponse) => void): Request<OpenSearch.Types.DescribeDomainsResponse, AWSError>;
+  /**
+   * Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch Service domain. For more information, see Determining whether a change will cause a blue/green deployment.
+   */
+  describeDryRunProgress(params: OpenSearch.Types.DescribeDryRunProgressRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDryRunProgressResponse) => void): Request<OpenSearch.Types.DescribeDryRunProgressResponse, AWSError>;
+  /**
+   * Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch Service domain. For more information, see Determining whether a change will cause a blue/green deployment.
+   */
+  describeDryRunProgress(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDryRunProgressResponse) => void): Request<OpenSearch.Types.DescribeDryRunProgressResponse, AWSError>;
   /**
    * Lists all the inbound cross-cluster search connections for a destination (remote) Amazon OpenSearch Service domain. For more information, see Cross-cluster search for Amazon OpenSearch Service.
    */
@@ -994,7 +1002,7 @@ declare namespace OpenSearch {
   }
   export interface CreateVpcEndpointRequest {
     /**
-     * The Amazon Resource Name (ARN) of the domain to grant access to.
+     * The Amazon Resource Name (ARN) of the domain to create the endpoint for.
      */
     DomainArn: DomainArn;
     /**
@@ -1151,6 +1159,34 @@ declare namespace OpenSearch {
      * The status of the requested domains.
      */
     DomainStatusList: DomainStatusList;
+  }
+  export interface DescribeDryRunProgressRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The unique identifier of the dry run.
+     */
+    DryRunId?: GUID;
+    /**
+     * Whether to include the configuration of the dry run in the response. The configuration specifies the updates that you're planning to make on the domain.
+     */
+    LoadDryRunConfig?: Boolean;
+  }
+  export interface DescribeDryRunProgressResponse {
+    /**
+     * The current status of the dry run, including any validation errors.
+     */
+    DryRunProgressStatus?: DryRunProgressStatus;
+    /**
+     * Details about the changes you're planning to make on the domain.
+     */
+    DryRunConfig?: DomainStatus;
+    /**
+     * The results of the dry run. 
+     */
+    DryRunResults?: DryRunResults;
   }
   export interface DescribeInboundConnectionsRequest {
     /**
@@ -1601,6 +1637,29 @@ declare namespace OpenSearch {
   export type DomainStatusList = DomainStatus[];
   export type Double = number;
   export type DryRun = boolean;
+  export type DryRunMode = "Basic"|"Verbose"|string;
+  export interface DryRunProgressStatus {
+    /**
+     * The unique identifier of the dry run.
+     */
+    DryRunId: GUID;
+    /**
+     * The current status of the dry run.
+     */
+    DryRunStatus: String;
+    /**
+     * The timestamp when the dry run was initiated.
+     */
+    CreationDate: String;
+    /**
+     * The timestamp when the dry run was last updated.
+     */
+    UpdateDate: String;
+    /**
+     * Any validation failures that occurred as a result of the dry run.
+     */
+    ValidationFailures?: ValidationFailures;
+  }
   export interface DryRunResults {
     /**
      *  Specifies the way in which OpenSearch Service will apply an update. Possible values are:    Blue/Green - The update requires a blue/green deployment.    DynamicUpdate - No blue/green deployment required    Undetermined - The domain is in the middle of an update and can't predict the deployment type. Try again after the update is complete.    None - The request doesn't include any configuration changes.  
@@ -2685,9 +2744,13 @@ declare namespace OpenSearch {
      */
     AutoTuneOptions?: AutoTuneOptions;
     /**
-     * This flag, when set to True, specifies whether the UpdateDomain request should return the results of validation check without actually applying the change.
+     * This flag, when set to True, specifies whether the UpdateDomain request should return the results of a dry run analysis without actually applying the change. A dry run determines what type of deployment the update will cause.
      */
     DryRun?: DryRun;
+    /**
+     * The type of dry run to perform.    Basic only returns the type of deployment (blue/green or dynamic) that the update will cause.    Verbose runs an additional check to validate the changes you're making. For more information, see Validating a domain update.  
+     */
+    DryRunMode?: DryRunMode;
   }
   export interface UpdateDomainConfigResponse {
     /**
@@ -2695,9 +2758,13 @@ declare namespace OpenSearch {
      */
     DomainConfig: DomainConfig;
     /**
-     * Results of a dry run performed in an update domain request.
+     * Results of the dry run performed in the update domain request.
      */
     DryRunResults?: DryRunResults;
+    /**
+     * The status of the dry run being performed on the domain, if any.
+     */
+    DryRunProgressStatus?: DryRunProgressStatus;
   }
   export interface UpdatePackageRequest {
     /**
@@ -2865,6 +2932,17 @@ declare namespace OpenSearch {
      */
     SecurityGroupIds?: StringList;
   }
+  export interface ValidationFailure {
+    /**
+     * The error code of the failure.
+     */
+    Code?: String;
+    /**
+     * A message corresponding to the failure.
+     */
+    Message?: String;
+  }
+  export type ValidationFailures = ValidationFailure[];
   export type ValueStringList = NonEmptyString[];
   export type VersionList = VersionString[];
   export interface VersionStatus {

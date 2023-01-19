@@ -4801,6 +4801,10 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
      */
     VideoPid?: __string;
+    /**
+     * Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.
+     */
+    Scte35PrerollPullupMilliseconds?: __doubleMin0Max5000;
   }
   export type M2tsTimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M3u8NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
@@ -7092,6 +7096,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
   export type __doubleMin0Max100 = number;
+  export type __doubleMin0Max5000 = number;
   export type __doubleMin1 = number;
   export type __doubleMin1Max65535 = number;
   export type __doubleMinNegative59Max0 = number;

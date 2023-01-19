@@ -44,11 +44,11 @@ declare class ConnectParticipant extends Service {
    */
   getAttachment(callback?: (err: AWSError, data: ConnectParticipant.Types.GetAttachmentResponse) => void): Request<ConnectParticipant.Types.GetAttachmentResponse, AWSError>;
   /**
-   * Retrieves a transcript of the session, including details about any attachments.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Retrieves a transcript of the session, including details about any attachments. For information about accessing past chat contact transcripts for a persistent chat, see Enable persistent chat.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getTranscript(params: ConnectParticipant.Types.GetTranscriptRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.GetTranscriptResponse) => void): Request<ConnectParticipant.Types.GetTranscriptResponse, AWSError>;
   /**
-   * Retrieves a transcript of the session, including details about any attachments.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
+   * Retrieves a transcript of the session, including details about any attachments. For information about accessing past chat contact transcripts for a persistent chat, see Enable persistent chat.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   getTranscript(callback?: (err: AWSError, data: ConnectParticipant.Types.GetTranscriptResponse) => void): Request<ConnectParticipant.Types.GetTranscriptResponse, AWSError>;
   /**
@@ -281,6 +281,14 @@ declare namespace ConnectParticipant {
      * The metadata related to the message. Currently this supports only information related to message receipts.
      */
     MessageMetadata?: MessageMetadata;
+    /**
+     * The contactId on which the transcript item was originally sent. This field is only populated for persistent chats when the transcript item is from the past chat session. For more information, see Enable persistent chat.
+     */
+    RelatedContactId?: ContactId;
+    /**
+     * The contactId on which the transcript item was originally sent. This field is populated only when the transcript item is from the current chat session.
+     */
+    ContactId?: ContactId;
   }
   export type MaxResults = number;
   export interface MessageMetadata {

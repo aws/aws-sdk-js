@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -251,6 +252,14 @@ declare class GroundStation extends Service {
    * Updates a mission profile. Updating a mission profile will not update the execution parameters for existing future contacts.
    */
   updateMissionProfile(callback?: (err: AWSError, data: GroundStation.Types.MissionProfileIdResponse) => void): Request<GroundStation.Types.MissionProfileIdResponse, AWSError>;
+  /**
+   * Waits for the contactScheduled state by periodically calling the underlying GroundStation.describeContactoperation every 5 seconds (at most 180 times). Waits until a contact has been scheduled
+   */
+  waitFor(state: "contactScheduled", params: GroundStation.Types.DescribeContactRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: GroundStation.Types.DescribeContactResponse) => void): Request<GroundStation.Types.DescribeContactResponse, AWSError>;
+  /**
+   * Waits for the contactScheduled state by periodically calling the underlying GroundStation.describeContactoperation every 5 seconds (at most 180 times). Waits until a contact has been scheduled
+   */
+  waitFor(state: "contactScheduled", callback?: (err: AWSError, data: GroundStation.Types.DescribeContactResponse) => void): Request<GroundStation.Types.DescribeContactResponse, AWSError>;
 }
 declare namespace GroundStation {
   export type AWSRegion = string;
@@ -459,6 +468,14 @@ declare namespace GroundStation {
   }
   export interface CreateDataflowEndpointGroupRequest {
     /**
+     * Amount of time, in seconds, after a contact ends for the contact to remain in a POSTPASS state. A CloudWatch event is emitted when the contact enters and exits the POSTPASS state.
+     */
+    contactPostPassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
+    /**
+     * Amount of time, in seconds, prior to contact start for the contact to remain in a PREPASS state. A CloudWatch event is emitted when the contact enters and exits the PREPASS state.
+     */
+    contactPrePassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
+    /**
      * Endpoint details of each endpoint in the dataflow endpoint group.
      */
     endpointDetails: EndpointDetailsList;
@@ -572,6 +589,7 @@ declare namespace GroundStation {
     dataflowEndpointRegion?: String;
   }
   export type DataflowEndpointGroupArn = string;
+  export type DataflowEndpointGroupDurationInSeconds = number;
   export interface DataflowEndpointGroupIdResponse {
     /**
      * UUID of a dataflow endpoint group.
@@ -938,6 +956,14 @@ declare namespace GroundStation {
     dataflowEndpointGroupId: Uuid;
   }
   export interface GetDataflowEndpointGroupResponse {
+    /**
+     * Amount of time, in seconds, after a contact ends for the contact to remain in a POSTPASS state. A CloudWatch event is emitted when the contact enters and exits the POSTPASS state.
+     */
+    contactPostPassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
+    /**
+     * Amount of time, in seconds, prior to contact start for the contact to remain in a PREPASS state. A CloudWatch event is emitted when the contact enters and exits the PREPASS state.
+     */
+    contactPrePassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
     /**
      * ARN of a dataflow endpoint group.
      */

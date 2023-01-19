@@ -2375,6 +2375,28 @@ declare namespace Glue {
     TableName: NameString;
   }
   export type CatalogGetterPageSize = number;
+  export interface CatalogHudiSource {
+    /**
+     * The name of the Hudi data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalHudiOptions?: AdditionalOptions;
+    /**
+     * Specifies the data schema for the Hudi source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
   export type CatalogIdString = string;
   export interface CatalogImportStatus {
     /**
@@ -2755,6 +2777,26 @@ declare namespace Glue {
      * Specifies your data quality evaluation criteria.
      */
     EvaluateDataQuality?: EvaluateDataQuality;
+    /**
+     * Specifies a Hudi data source that is registered in the Glue Data Catalog. The Hudi data source must be stored in Amazon S3.
+     */
+    S3CatalogHudiSource?: S3CatalogHudiSource;
+    /**
+     * Specifies a Hudi data source that is registered in the Glue Data Catalog.
+     */
+    CatalogHudiSource?: CatalogHudiSource;
+    /**
+     * Specifies a Hudi data source stored in Amazon S3.
+     */
+    S3HudiSource?: S3HudiSource;
+    /**
+     * Specifies a target that writes to a Hudi data source in the Glue Data Catalog.
+     */
+    S3HudiCatalogTarget?: S3HudiCatalogTarget;
+    /**
+     * Specifies a target that writes to a Hudi data source in Amazon S3.
+     */
+    S3HudiDirectTarget?: S3HudiDirectTarget;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -7600,6 +7642,7 @@ declare namespace Glue {
   }
   export type GrokPattern = string;
   export type HashString = string;
+  export type HudiTargetCompressionType = "gzip"|"lzo"|"uncompressed"|"snappy"|string;
   export type IdString = string;
   export interface ImportCatalogToGlueRequest {
     /**
@@ -9964,6 +10007,28 @@ declare namespace Glue {
      */
     Id?: IntegerValue;
   }
+  export interface S3CatalogHudiSource {
+    /**
+     * The name of the Hudi data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalHudiOptions?: AdditionalOptions;
+    /**
+     * Specifies the data schema for the Hudi source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
   export interface S3CatalogSource {
     /**
      * The name of the data store.
@@ -10175,6 +10240,80 @@ declare namespace Glue {
      * A policy that specifies update behavior for the crawler.
      */
     SchemaChangePolicy?: DirectSchemaChangePolicy;
+  }
+  export interface S3HudiCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options for the connector.
+     */
+    AdditionalOptions: AdditionalOptions;
+    SchemaChangePolicy?: CatalogSchemaChangePolicy;
+  }
+  export interface S3HudiDirectTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * The Amazon S3 path of your Hudi data source to write to.
+     */
+    Path: EnclosedInStringProperty;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    Compression: HudiTargetCompressionType;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * Specifies the data output format for the target.
+     */
+    Format: TargetFormat;
+    AdditionalOptions: AdditionalOptions;
+    SchemaChangePolicy?: DirectSchemaChangePolicy;
+  }
+  export interface S3HudiSource {
+    /**
+     * The name of the Hudi source.
+     */
+    Name: NodeName;
+    /**
+     * A list of the Amazon S3 paths to read from.
+     */
+    Paths: EnclosedInStringProperties;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalHudiOptions?: AdditionalOptions;
+    AdditionalOptions?: S3DirectSourceAdditionalOptions;
+    /**
+     * Specifies the data schema for the Hudi source.
+     */
+    OutputSchemas?: GlueSchemas;
   }
   export interface S3JsonSource {
     /**
@@ -11498,7 +11637,7 @@ declare namespace Glue {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
-  export type TargetFormat = "json"|"csv"|"avro"|"orc"|"parquet"|string;
+  export type TargetFormat = "json"|"csv"|"avro"|"orc"|"parquet"|"hudi"|string;
   export interface TaskRun {
     /**
      * The unique identifier for the transform.

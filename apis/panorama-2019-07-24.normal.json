@@ -72,7 +72,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a job to run on one or more devices. A job can update a device's software or reboot it.</p>"
+      "documentation": "<p>Creates a job to run on a device. A job can update a device's software or reboot it.</p>"
     },
     "CreateNodeFromTemplateJob": {
       "name": "CreateNodeFromTemplateJob",
@@ -1228,7 +1228,7 @@
       "members": {
         "DeviceIds": {
           "shape": "DeviceIdList",
-          "documentation": "<p>IDs of target devices.</p>"
+          "documentation": "<p>ID of target device.</p>"
         },
         "DeviceJobConfig": {
           "shape": "DeviceJobConfig",
@@ -3445,6 +3445,10 @@
         "ImageVersion"
       ],
       "members": {
+        "AllowMajorVersionUpdate": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to apply the update if it is a major version change.</p>"
+        },
         "ImageVersion": {
           "shape": "ImageVersion",
           "documentation": "<p>The target version of the device software.</p>"

@@ -1853,6 +1853,10 @@ declare namespace Connect {
      * The timestamp, in Unix epoch time format, at which to start running the inbound flow. 
      */
     ScheduledTimestamp?: timestamp;
+    /**
+     * The contactId that is related to this contact.
+     */
+    RelatedContactId?: ContactId;
   }
   export interface ContactFilter {
     /**
@@ -5162,6 +5166,16 @@ declare namespace Connect {
   export type Password = string;
   export type Percentage = number;
   export type PermissionsList = SecurityProfilePermission[];
+  export interface PersistentChat {
+    /**
+     * The contactId that is used for rehydration depends on the rehydration type. RehydrationType is required for persistent chat.     ENTIRE_PAST_SESSION: Rehydrates a chat from the most recently terminated past chat contact of the specified past ended chat session. To use this type, provide the initialContactId of the past ended chat session in the sourceContactId field. In this type, Amazon Connect determines the most recent chat contact on the specified chat session that has ended, and uses it to start a persistent chat.     FROM_SEGMENT: Rehydrates a chat from the past chat contact that is specified in the sourceContactId field.    The actual contactId used for rehydration is provided in the response of this API. 
+     */
+    RehydrationType?: RehydrationType;
+    /**
+     * The contactId from which a persistent chat session must be started.
+     */
+    SourceContactId?: ContactId;
+  }
   export type PhoneNumber = string;
   export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
   export type PhoneNumberCountryCodes = PhoneNumberCountryCode[];
@@ -5480,6 +5494,7 @@ declare namespace Connect {
   export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
   export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
+  export type RehydrationType = "ENTIRE_PAST_SESSION"|"FROM_SEGMENT"|string;
   export interface ReleasePhoneNumberRequest {
     /**
      * A unique identifier for the phone number.
@@ -6201,6 +6216,10 @@ declare namespace Connect {
      * The supported chat message content types. Content types must always contain text/plain. You can then put any other supported type in the list. For example, all the following lists are valid because they contain text/plain: [text/plain, text/markdown, application/json], [text/markdown, text/plain], [text/plain, application/json].
      */
     SupportedMessagingContentTypes?: SupportedMessagingContentTypes;
+    /**
+     * Enable persistent chats. For more information about enabling persistent chat, and for example use cases and how to configure for them, see Enable persistent chat.
+     */
+    PersistentChat?: PersistentChat;
   }
   export interface StartChatContactResponse {
     /**
@@ -6215,6 +6234,10 @@ declare namespace Connect {
      * The token used by the chat participant to call CreateParticipantConnection. The participant token is valid for the lifetime of a chat participant.
      */
     ParticipantToken?: ParticipantToken;
+    /**
+     * The contactId from which a persistent chat session is started. This field is populated only for persistent chats.
+     */
+    ContinuedFromContactId?: ContactId;
   }
   export interface StartContactRecordingRequest {
     /**

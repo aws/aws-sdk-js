@@ -637,11 +637,11 @@ declare namespace CloudWatchLogs {
   }
   export interface DescribeLogStreamsRequest {
     /**
-     * The name of the log group.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * The name of the log group.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupName?: LogGroupName;
     /**
-     * Specify either the name or ARN of the log group to view. If the log group is in a source account and you are using a monitoring account, you must use the log group ARN.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * Specify either the name or ARN of the log group to view. If the log group is in a source account and you are using a monitoring account, you must use the log group ARN.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupIdentifier?: LogGroupIdentifier;
     /**
@@ -898,11 +898,11 @@ declare namespace CloudWatchLogs {
   export type FilterCount = number;
   export interface FilterLogEventsRequest {
     /**
-     * The name of the log group to search.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * The name of the log group to search.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupName?: LogGroupName;
     /**
-     * Specify either the name or ARN of the log group to view log events from. If the log group is in a source account and you are using a monitoring account, you must use the log group ARN.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * Specify either the name or ARN of the log group to view log events from. If the log group is in a source account and you are using a monitoring account, you must use the log group ARN.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupIdentifier?: LogGroupIdentifier;
     /**
@@ -1004,11 +1004,11 @@ declare namespace CloudWatchLogs {
   }
   export interface GetLogEventsRequest {
     /**
-     * The name of the log group.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * The name of the log group.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupName?: LogGroupName;
     /**
-     * Specify either the name or ARN of the log group to view events from. If the log group is in a source account and you are using a monitoring account, you must use the log group ARN.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * Specify either the name or ARN of the log group to view events from. If the log group is in a source account and you are using a monitoring account, you must use the log group ARN.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupIdentifier?: LogGroupIdentifier;
     /**
@@ -1056,7 +1056,7 @@ declare namespace CloudWatchLogs {
   }
   export interface GetLogGroupFieldsRequest {
     /**
-     * The name of the log group to search.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * The name of the log group to search.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupName?: LogGroupName;
     /**
@@ -1064,7 +1064,7 @@ declare namespace CloudWatchLogs {
      */
     time?: Timestamp;
     /**
-     * Specify either the name or ARN of the log group to view. If the log group is in a source account and you are using a monitoring account, you must specify the ARN.   If you specify values for both logGroupName and logGroupIdentifier, the action returns an InvalidParameterException error.  
+     * Specify either the name or ARN of the log group to view. If the log group is in a source account and you are using a monitoring account, you must specify the ARN.   You must include either logGroupIdentifier or logGroupName, but not both.  
      */
     logGroupIdentifier?: LogGroupIdentifier;
   }

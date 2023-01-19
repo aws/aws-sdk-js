@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1297.0-->
+<!--LATEST=2.1298.0-->
 <!--ENTRYINSERT-->
+
+## 2.1298.0
+* feature: Appflow: Adding support for Salesforce Pardot connector in Amazon AppFlow.
+* feature: CloudWatchLogs: Bug fix - Removed the regex pattern validation from CoralModel to avoid potential security issue.
+* feature: CodeArtifact: Documentation updates for CodeArtifact
+* feature: Connect: Amazon Connect Chat introduces Persistent Chat, allowing customers to resume previous conversations with context and transcripts carried over from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+* feature: ConnectParticipant: This release updates Amazon Connect Participant's GetTranscript api to provide transcripts of past chats on a persistent chat session.
+* feature: EC2: Adds SSM Parameter Resource Aliasing support to EC2 Launch Templates. Launch Templates can now store parameter aliases in place of AMI Resource IDs. CreateLaunchTemplateVersion and DescribeLaunchTemplateVersions now support a convenience flag, ResolveAlias, to return the resolved parameter value.
+* feature: Glue: Release Glue Studio Hudi Data Lake Format for SDK/CLI
+* feature: GroundStation: Add configurable prepass and postpass times for DataflowEndpointGroup. Add Waiter to allow customers to wait for a contact that was reserved through ReserveContact
+* feature: MediaLive: AWS Elemental MediaLive adds support for SCTE 35 preRollMilliSeconds.
+* feature: OpenSearch: This release adds the enhanced dry run option, that checks for validation errors that might occur when deploying configuration changes and provides a summary of these errors, if any. The feature will also indicate whether a blue/green deployment will be required to apply a change.
+* feature: Panorama: Added AllowMajorVersionUpdate option to OTAJobConfig to make appliance software major version updates opt-in.
+* feature: SageMaker: HyperParameterTuningJobs now allow passing environment variables into the corresponding TrainingJobs
 
 ## 2.1297.0
 * feature: CloudWatch: Enable cross-account streams in CloudWatch Metric Streams via Observability Access Manager.

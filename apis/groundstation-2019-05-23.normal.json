@@ -1157,6 +1157,14 @@
         "endpointDetails"
       ],
       "members": {
+        "contactPostPassDurationSeconds": {
+          "shape": "DataflowEndpointGroupDurationInSeconds",
+          "documentation": "<p>Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.</p>"
+        },
+        "contactPrePassDurationSeconds": {
+          "shape": "DataflowEndpointGroupDurationInSeconds",
+          "documentation": "<p>Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.</p>"
+        },
         "endpointDetails": {
           "shape": "EndpointDetailsList",
           "documentation": "<p>Endpoint details of each endpoint in the dataflow endpoint group.</p>"
@@ -1336,6 +1344,12 @@
     },
     "DataflowEndpointGroupArn": {
       "type": "string"
+    },
+    "DataflowEndpointGroupDurationInSeconds": {
+      "type": "integer",
+      "box": true,
+      "max": 480,
+      "min": 120
     },
     "DataflowEndpointGroupIdResponse": {
       "type": "structure",
@@ -1991,6 +2005,14 @@
     "GetDataflowEndpointGroupResponse": {
       "type": "structure",
       "members": {
+        "contactPostPassDurationSeconds": {
+          "shape": "DataflowEndpointGroupDurationInSeconds",
+          "documentation": "<p>Amount of time, in seconds, after a contact ends for the contact to remain in a <code>POSTPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>POSTPASS</code> state.</p>"
+        },
+        "contactPrePassDurationSeconds": {
+          "shape": "DataflowEndpointGroupDurationInSeconds",
+          "documentation": "<p>Amount of time, in seconds, prior to contact start for the contact to remain in a <code>PREPASS</code> state. A CloudWatch event is emitted when the contact enters and exits the <code>PREPASS</code> state.</p>"
+        },
         "dataflowEndpointGroupArn": {
           "shape": "DataflowEndpointGroupArn",
           "documentation": "<p>ARN of a dataflow endpoint group.</p>"

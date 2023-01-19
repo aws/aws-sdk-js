@@ -11525,9 +11525,16 @@ declare namespace SageMaker {
      * The configuration for the hyperparameter tuning resources, including the compute instances and storage volumes, used for training jobs launched by the tuning job. By default, storage volumes hold model artifacts and incremental states. Choose File for TrainingInputMode in the AlgorithmSpecification parameter to additionally store training data in the storage volume (optional).
      */
     HyperParameterTuningResourceConfig?: HyperParameterTuningResourceConfig;
+    /**
+     * An environment variable that you can pass into the SageMaker CreateTrainingJob API. You can use an existing environment variable from the training container or use your own. See Define metrics and variables for more information.  The maximum number of items specified for Map Entries refers to the maximum number of environment variables for each TrainingJobDefinition and also the maximum for the hyperparameter tuning job itself. That is, the sum of the number of environment variables for all the training job definitions can't exceed the maximum number specified. 
+     */
+    Environment?: HyperParameterTrainingJobEnvironmentMap;
   }
   export type HyperParameterTrainingJobDefinitionName = string;
   export type HyperParameterTrainingJobDefinitions = HyperParameterTrainingJobDefinition[];
+  export type HyperParameterTrainingJobEnvironmentKey = string;
+  export type HyperParameterTrainingJobEnvironmentMap = {[key: string]: HyperParameterTrainingJobEnvironmentValue};
+  export type HyperParameterTrainingJobEnvironmentValue = string;
   export type HyperParameterTrainingJobSummaries = HyperParameterTrainingJobSummary[];
   export interface HyperParameterTrainingJobSummary {
     /**
@@ -11586,7 +11593,7 @@ declare namespace SageMaker {
      */
     InstanceType: TrainingInstanceType;
     /**
-     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See SageMaker distributed training jobs for more informcration.
+     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See SageMaker distributed training jobs for more information.
      */
     InstanceCount: TrainingInstanceCount;
     /**
@@ -20849,7 +20856,7 @@ declare namespace SageMaker {
      */
     RetainAllVariantProperties?: Boolean;
     /**
-     * When you are updating endpoint resources with UpdateEndpointInput$RetainAllVariantProperties, whose value is set to true, ExcludeRetainedVariantProperties specifies the list of type VariantProperty to override with the values provided by EndpointConfig. If you don't specify a value for ExcludeAllVariantProperties, no variant properties are overridden. 
+     * When you are updating endpoint resources with UpdateEndpointInput$RetainAllVariantProperties, whose value is set to true, ExcludeRetainedVariantProperties specifies the list of type VariantProperty to override with the values provided by EndpointConfig. If you don't specify a value for ExcludeRetainedVariantProperties, no variant properties are overridden. 
      */
     ExcludeRetainedVariantProperties?: VariantPropertyList;
     /**

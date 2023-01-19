@@ -321,6 +321,7 @@ declare namespace Appflow {
   export type Boolean = boolean;
   export type BucketName = string;
   export type BucketPrefix = string;
+  export type BusinessUnitId = string;
   export type CatalogType = "GLUE"|string;
   export type ClientCredentialsArn = string;
   export type ClientId = string;
@@ -629,6 +630,10 @@ declare namespace Appflow {
      */
     Honeycode?: HoneycodeMetadata;
     SAPOData?: SAPODataMetadata;
+    /**
+     * The connector metadata specific to Salesforce Pardot.
+     */
+    Pardot?: PardotMetadata;
   }
   export type ConnectorMode = string;
   export type ConnectorModeList = ConnectorMode[];
@@ -708,6 +713,10 @@ declare namespace Appflow {
      * Operators supported by the custom connector.
      */
     CustomConnector?: Operator;
+    /**
+     * The operation to be performed on the provided Salesforce Pardot source fields.
+     */
+    Pardot?: PardotConnectorOperator;
   }
   export type ConnectorOwner = string;
   export interface ConnectorProfile {
@@ -830,6 +839,10 @@ declare namespace Appflow {
     Zendesk?: ZendeskConnectorProfileCredentials;
     SAPOData?: SAPODataConnectorProfileCredentials;
     CustomConnector?: CustomConnectorProfileCredentials;
+    /**
+     * The connector-specific credentials required when using Salesforce Pardot.
+     */
+    Pardot?: PardotConnectorProfileCredentials;
   }
   export type ConnectorProfileDetailList = ConnectorProfile[];
   export type ConnectorProfileName = string;
@@ -904,6 +917,10 @@ declare namespace Appflow {
      * The properties required by the custom connector.
      */
     CustomConnector?: CustomConnectorProfileProperties;
+    /**
+     * The connector-specific properties required by Salesforce Pardot.
+     */
+    Pardot?: PardotConnectorProfileProperties;
   }
   export interface ConnectorProvisioningConfig {
     /**
@@ -948,7 +965,7 @@ declare namespace Appflow {
   export type ConnectorSuppliedValue = string;
   export type ConnectorSuppliedValueList = ConnectorSuppliedValue[];
   export type ConnectorSuppliedValueOptionList = ConnectorSuppliedValue[];
-  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|"SAPOData"|"CustomConnector"|string;
+  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|"SAPOData"|"CustomConnector"|"Pardot"|string;
   export type ConnectorTypeList = ConnectorType[];
   export type ConnectorVersion = string;
   export interface CreateConnectorProfileRequest {
@@ -2156,6 +2173,44 @@ declare namespace Appflow {
   export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|"EXCLUDE_SOURCE_FIELDS_LIST"|"INCLUDE_NEW_FIELDS"|"ORDERED_PARTITION_KEYS_LIST"|string;
   export type Operators = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type PardotConnectorOperator = "PROJECTION"|"EQUAL_TO"|"NO_OP"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|string;
+  export interface PardotConnectorProfileCredentials {
+    /**
+     * The credentials used to access protected Salesforce Pardot resources.
+     */
+    accessToken?: AccessToken;
+    /**
+     * The credentials used to acquire new access tokens.
+     */
+    refreshToken?: RefreshToken;
+    oAuthRequest?: ConnectorOAuthRequest;
+    /**
+     * The secret manager ARN, which contains the client ID and client secret of the connected app.
+     */
+    clientCredentialsArn?: ClientCredentialsArn;
+  }
+  export interface PardotConnectorProfileProperties {
+    /**
+     * The location of the Salesforce Pardot resource.
+     */
+    instanceUrl?: InstanceUrl;
+    /**
+     * Indicates whether the connector profile applies to a sandbox or production environment.
+     */
+    isSandboxEnvironment?: Boolean;
+    /**
+     * The business unit id of Salesforce Pardot instance.
+     */
+    businessUnitId?: BusinessUnitId;
+  }
+  export interface PardotMetadata {
+  }
+  export interface PardotSourceProperties {
+    /**
+     * The object specified in the Salesforce Pardot flow source.
+     */
+    object: Object;
+  }
   export type Password = string;
   export type PathPrefix = "EXECUTION_ID"|"SCHEMA_VERSION"|string;
   export type PathPrefixHierarchy = PathPrefix[];
@@ -2751,6 +2806,10 @@ declare namespace Appflow {
     Zendesk?: ZendeskSourceProperties;
     SAPOData?: SAPODataSourceProperties;
     CustomConnector?: CustomConnectorSourceProperties;
+    /**
+     * Specifies the information that is required for querying Salesforce Pardot.
+     */
+    Pardot?: PardotSourceProperties;
   }
   export interface SourceFieldProperties {
     /**
