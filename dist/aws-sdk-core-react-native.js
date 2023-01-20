@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1298.0',
+	  VERSION: '2.1299.0',
 
 	  /**
 	   * @api private
@@ -9504,6 +9504,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		'%AsyncIteratorPrototype%': needsEval,
 		'%Atomics%': typeof Atomics === 'undefined' ? undefined : Atomics,
 		'%BigInt%': typeof BigInt === 'undefined' ? undefined : BigInt,
+		'%BigInt64Array%': typeof BigInt64Array === 'undefined' ? undefined : BigInt64Array,
+		'%BigUint64Array%': typeof BigUint64Array === 'undefined' ? undefined : BigUint64Array,
 		'%Boolean%': Boolean,
 		'%DataView%': typeof DataView === 'undefined' ? undefined : DataView,
 		'%Date%': Date,
@@ -9558,6 +9560,14 @@ return /******/ (function(modules) { // webpackBootstrap
 		'%WeakRef%': typeof WeakRef === 'undefined' ? undefined : WeakRef,
 		'%WeakSet%': typeof WeakSet === 'undefined' ? undefined : WeakSet
 	};
+
+	try {
+		null.error; // eslint-disable-line no-unused-expressions
+	} catch (e) {
+		// https://github.com/tc39/proposal-shadowrealm/pull/384#issuecomment-1364264229
+		var errorProto = getProto(getProto(e));
+		INTRINSICS['%Error.prototype%'] = errorProto;
+	}
 
 	var doEval = function doEval(name) {
 		var value;
