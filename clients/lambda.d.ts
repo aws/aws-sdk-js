@@ -270,6 +270,14 @@ declare class Lambda extends Service {
    */
   getProvisionedConcurrencyConfig(callback?: (err: AWSError, data: Lambda.Types.GetProvisionedConcurrencyConfigResponse) => void): Request<Lambda.Types.GetProvisionedConcurrencyConfigResponse, AWSError>;
   /**
+   * Retrieves the runtime management configuration for a function's version. If the runtime update mode is Manual, this includes the ARN of the runtime version and the runtime update mode. If the runtime update mode is Auto or Function update, this includes the runtime update mode and null is returned for the ARN. For more information, see Runtime updates.
+   */
+  getRuntimeManagementConfig(params: Lambda.Types.GetRuntimeManagementConfigRequest, callback?: (err: AWSError, data: Lambda.Types.GetRuntimeManagementConfigResponse) => void): Request<Lambda.Types.GetRuntimeManagementConfigResponse, AWSError>;
+  /**
+   * Retrieves the runtime management configuration for a function's version. If the runtime update mode is Manual, this includes the ARN of the runtime version and the runtime update mode. If the runtime update mode is Auto or Function update, this includes the runtime update mode and null is returned for the ARN. For more information, see Runtime updates.
+   */
+  getRuntimeManagementConfig(callback?: (err: AWSError, data: Lambda.Types.GetRuntimeManagementConfigResponse) => void): Request<Lambda.Types.GetRuntimeManagementConfigResponse, AWSError>;
+  /**
    * Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the execution log and trace. When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see Error handling and automatic retries in Lambda. For asynchronous invocation, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a dead-letter queue. The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, quota errors, or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if running the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client might disconnect during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action. For details on how to set up permissions for cross-account invocations, see Granting function access to other accounts.
    */
   invoke(params: Lambda.Types.InvocationRequest, callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
@@ -326,11 +334,11 @@ declare class Lambda extends Service {
    */
   listFunctionUrlConfigs(callback?: (err: AWSError, data: Lambda.Types.ListFunctionUrlConfigsResponse) => void): Request<Lambda.Types.ListFunctionUrlConfigsResponse, AWSError>;
   /**
-   * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.  The ListFunctions operation returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or version, use GetFunction. 
+   * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.  The ListFunctions operation returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode, RuntimeVersionConfig) for a function or version, use GetFunction. 
    */
   listFunctions(params: Lambda.Types.ListFunctionsRequest, callback?: (err: AWSError, data: Lambda.Types.ListFunctionsResponse) => void): Request<Lambda.Types.ListFunctionsResponse, AWSError>;
   /**
-   * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.  The ListFunctions operation returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or version, use GetFunction. 
+   * Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version.  The ListFunctions operation returns a subset of the FunctionConfiguration fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode, RuntimeVersionConfig) for a function or version, use GetFunction. 
    */
   listFunctions(callback?: (err: AWSError, data: Lambda.Types.ListFunctionsResponse) => void): Request<Lambda.Types.ListFunctionsResponse, AWSError>;
   /**
@@ -429,6 +437,14 @@ declare class Lambda extends Service {
    * Adds a provisioned concurrency configuration to a function's alias or version.
    */
   putProvisionedConcurrencyConfig(callback?: (err: AWSError, data: Lambda.Types.PutProvisionedConcurrencyConfigResponse) => void): Request<Lambda.Types.PutProvisionedConcurrencyConfigResponse, AWSError>;
+  /**
+   * Sets the runtime management configuration for a function's version. For more information, see Runtime updates.
+   */
+  putRuntimeManagementConfig(params: Lambda.Types.PutRuntimeManagementConfigRequest, callback?: (err: AWSError, data: Lambda.Types.PutRuntimeManagementConfigResponse) => void): Request<Lambda.Types.PutRuntimeManagementConfigResponse, AWSError>;
+  /**
+   * Sets the runtime management configuration for a function's version. For more information, see Runtime updates.
+   */
+  putRuntimeManagementConfig(callback?: (err: AWSError, data: Lambda.Types.PutRuntimeManagementConfigResponse) => void): Request<Lambda.Types.PutRuntimeManagementConfigResponse, AWSError>;
   /**
    * Removes a statement from the permissions policy for a version of an Lambda layer. For more information, see AddLayerVersionPermission.
    */
@@ -1546,6 +1562,10 @@ declare namespace Lambda {
      * Set ApplyOn to PublishedVersions to create a snapshot of the initialized execution environment when you publish a function version. For more information, see Improving startup performance with Lambda SnapStart.
      */
     SnapStart?: SnapStartResponse;
+    /**
+     * The ARN of the runtime and any errors that occured.
+     */
+    RuntimeVersionConfig?: RuntimeVersionConfig;
   }
   export interface FunctionEventInvokeConfig {
     /**
@@ -1886,6 +1906,26 @@ declare namespace Lambda {
      * The date and time that a user last updated the configuration, in ISO 8601 format.
      */
     LastModified?: Timestamp;
+  }
+  export interface GetRuntimeManagementConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name – my-function.    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * Specify a version of the function. This can be $LATEST or a published version number. If no value is specified, the configuration for the $LATEST version is returned.
+     */
+    Qualifier?: Qualifier;
+  }
+  export interface GetRuntimeManagementConfigResponse {
+    /**
+     * The current runtime update mode of the function.
+     */
+    UpdateRuntimeOn?: UpdateRuntimeOn;
+    /**
+     * The ARN of the runtime the function is configured to use. If the runtime update mode is Manual, the ARN is returned, otherwise null is returned.
+     */
+    RuntimeVersionArn?: RuntimeVersionArn;
   }
   export type Handler = string;
   export type Header = string;
@@ -2652,6 +2692,38 @@ declare namespace Lambda {
      */
     LastModified?: Timestamp;
   }
+  export interface PutRuntimeManagementConfigRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name – my-function.    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: FunctionName;
+    /**
+     * Specify a version of the function. This can be $LATEST or a published version number. If no value is specified, the configuration for the $LATEST version is returned.
+     */
+    Qualifier?: Qualifier;
+    /**
+     * Specify the runtime update mode.    Auto (default) - Automatically update to the most recent and secure runtime version using a Two-phase runtime version rollout. This is the best choice for most customers to ensure they always benefit from runtime updates.    Function update - Lambda updates the runtime of your function to the most recent and secure runtime version when you update your function. This approach synchronizes runtime updates with function deployments, giving you control over when runtime updates are applied and allowing you to detect and mitigate rare runtime update incompatibilities early. When using this setting, you need to regularly update your functions to keep their runtime up-to-date.    Manual - You specify a runtime version in your function configuration. The function will use this runtime version indefinitely. In the rare case where a new runtime version is incompatible with an existing function, this allows you to roll back your function to an earlier runtime version. For more information, see Roll back a runtime version.  
+     */
+    UpdateRuntimeOn: UpdateRuntimeOn;
+    /**
+     * The ARN of the runtime version you want the function to use.  This is only required if you're using the Manual runtime update mode. 
+     */
+    RuntimeVersionArn?: RuntimeVersionArn;
+  }
+  export interface PutRuntimeManagementConfigResponse {
+    /**
+     * The runtime update mode.
+     */
+    UpdateRuntimeOn: UpdateRuntimeOn;
+    /**
+     * The ARN of the function
+     */
+    FunctionArn: FunctionArn;
+    /**
+     * The ARN of the runtime the function is configured to use. If the runtime update mode is manual, the ARN is returned, otherwise null is returned.
+     */
+    RuntimeVersionArn?: RuntimeVersionArn;
+  }
   export type Qualifier = string;
   export type Queue = string;
   export type Queues = Queue[];
@@ -2695,6 +2767,27 @@ declare namespace Lambda {
   export type ResourceArn = string;
   export type RoleArn = string;
   export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|"nodejs18.x"|string;
+  export type RuntimeVersionArn = string;
+  export interface RuntimeVersionConfig {
+    /**
+     * The ARN of the runtime version you want the function to use.
+     */
+    RuntimeVersionArn?: RuntimeVersionArn;
+    /**
+     * Error response when Lambda is unable to retrieve the runtime version for a function.
+     */
+    Error?: RuntimeVersionError;
+  }
+  export interface RuntimeVersionError {
+    /**
+     * The error code.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message.
+     */
+    Message?: SensitiveString;
+  }
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -3097,6 +3190,7 @@ declare namespace Lambda {
      */
     LastModifiedTime: Timestamp;
   }
+  export type UpdateRuntimeOn = "Auto"|"Manual"|"FunctionUpdate"|string;
   export type Version = string;
   export interface VpcConfig {
     /**

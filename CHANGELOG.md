@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1299.0-->
+<!--LATEST=2.1300.0-->
 <!--ENTRYINSERT-->
+
+## 2.1300.0
+* feature: Lambda: Release Lambda RuntimeManagementConfig, enabling customers to better manage runtime updates to their Lambda functions. This release adds two new APIs, GetRuntimeManagementConfig and PutRuntimeManagementConfig, as well as support on existing Create/Get/Update function APIs.
+* feature: SageMaker: Amazon SageMaker Inference now supports P4de instance types.
 
 ## 2.1299.0
 * feature: EC2: C6in, M6in, M6idn, R6in and R6idn instances are powered by 3rd Generation Intel Xeon Scalable processors (code named Ice Lake) with an all-core turbo frequency of 3.5 GHz.
