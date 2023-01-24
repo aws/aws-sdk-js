@@ -92,6 +92,14 @@ declare class SsmSap extends Service {
    */
   listDatabases(callback?: (err: AWSError, data: SsmSap.Types.ListDatabasesOutput) => void): Request<SsmSap.Types.ListDatabasesOutput, AWSError>;
   /**
+   * Lists the operations performed by AWS Systems Manager for SAP.
+   */
+  listOperations(params: SsmSap.Types.ListOperationsInput, callback?: (err: AWSError, data: SsmSap.Types.ListOperationsOutput) => void): Request<SsmSap.Types.ListOperationsOutput, AWSError>;
+  /**
+   * Lists the operations performed by AWS Systems Manager for SAP.
+   */
+  listOperations(callback?: (err: AWSError, data: SsmSap.Types.ListOperationsOutput) => void): Request<SsmSap.Types.ListOperationsOutput, AWSError>;
+  /**
    * Lists all tags on an SAP HANA application and/or database registered with AWS Systems Manager for SAP.
    */
   listTagsForResource(params: SsmSap.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: SsmSap.Types.ListTagsForResourceResponse) => void): Request<SsmSap.Types.ListTagsForResourceResponse, AWSError>;
@@ -132,11 +140,11 @@ declare class SsmSap extends Service {
    */
   untagResource(callback?: (err: AWSError, data: SsmSap.Types.UntagResourceResponse) => void): Request<SsmSap.Types.UntagResourceResponse, AWSError>;
   /**
-   * 
+   * Updates the settings of an application registered with AWS Systems Manager for SAP.
    */
   updateApplicationSettings(params: SsmSap.Types.UpdateApplicationSettingsInput, callback?: (err: AWSError, data: SsmSap.Types.UpdateApplicationSettingsOutput) => void): Request<SsmSap.Types.UpdateApplicationSettingsOutput, AWSError>;
   /**
-   * 
+   * Updates the settings of an application registered with AWS Systems Manager for SAP.
    */
   updateApplicationSettings(callback?: (err: AWSError, data: SsmSap.Types.UpdateApplicationSettingsOutput) => void): Request<SsmSap.Types.UpdateApplicationSettingsOutput, AWSError>;
 }
@@ -144,49 +152,49 @@ declare namespace SsmSap {
   export type AppRegistryArn = string;
   export interface Application {
     /**
-     * 
+     * The ID of the application.
      */
     Id?: ApplicationId;
     /**
-     * 
+     * The type of the application.
      */
     Type?: ApplicationType;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the application.
      */
     Arn?: SsmSapArn;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the Application Registry.
      */
     AppRegistryArn?: AppRegistryArn;
     /**
-     * 
+     * The status of the application.
      */
     Status?: ApplicationStatus;
     /**
-     * 
+     * The components of the application.
      */
     Components?: ComponentIdList;
     /**
-     * 
+     * The time at which the application was last updated.
      */
     LastUpdated?: Timestamp;
     /**
-     * 
+     * The status message.
      */
     StatusMessage?: String;
   }
   export interface ApplicationCredential {
     /**
-     * 
+     * The name of the SAP HANA database.
      */
     DatabaseName: DatabaseName;
     /**
-     * 
+     * The type of the application credentials. 
      */
     CredentialType: CredentialType;
     /**
-     * 
+     * The secret ID created in AWS Secrets Manager to store the credentials of the SAP application. 
      */
     SecretId: SecretId;
   }
@@ -195,19 +203,19 @@ declare namespace SsmSap {
   export type ApplicationStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"FAILED"|"REGISTERING"|"DELETING"|"UNKNOWN"|string;
   export interface ApplicationSummary {
     /**
-     * 
+     * The ID of the application.
      */
     Id?: ApplicationId;
     /**
-     * 
+     * The type of the application.
      */
     Type?: ApplicationType;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the application.
      */
     Arn?: SsmSapArn;
     /**
-     * 
+     * The tags on the application.
      */
     Tags?: TagMap;
   }
@@ -216,35 +224,35 @@ declare namespace SsmSap {
   export type Arn = string;
   export interface Component {
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId?: ComponentId;
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The type of the component.
      */
     ComponentType?: ComponentType;
     /**
-     * 
+     * The status of the component.
      */
     Status?: ComponentStatus;
     /**
-     * 
+     * The SAP HANA databases of the component.
      */
     Databases?: DatabaseIdList;
     /**
-     * 
+     * The hosts of the component.
      */
     Hosts?: HostList;
     /**
-     * 
+     * The primary host of the component.
      */
     PrimaryHost?: String;
     /**
-     * 
+     * The time at which the component was last updated.
      */
     LastUpdated?: Timestamp;
   }
@@ -253,19 +261,19 @@ declare namespace SsmSap {
   export type ComponentStatus = "ACTIVATED"|string;
   export interface ComponentSummary {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId?: ComponentId;
     /**
-     * 
+     * The type of the component.
      */
     ComponentType?: ComponentType;
     /**
-     * 
+     * The tags of the component.
      */
     Tags?: TagMap;
   }
@@ -274,47 +282,47 @@ declare namespace SsmSap {
   export type CredentialType = "ADMIN"|string;
   export interface Database {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId?: ComponentId;
     /**
-     * 
+     * The credentials of the database.
      */
     Credentials?: ApplicationCredentialList;
     /**
-     * 
+     * The ID of the SAP HANA database.
      */
     DatabaseId?: DatabaseId;
     /**
-     * 
+     * The name of the database.
      */
     DatabaseName?: String;
     /**
-     * 
+     * The type of the database.
      */
     DatabaseType?: DatabaseType;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the database.
      */
     Arn?: SsmSapArn;
     /**
-     * 
+     * The status of the database.
      */
     Status?: DatabaseStatus;
     /**
-     * 
+     * The primary host of the database.
      */
     PrimaryHost?: String;
     /**
-     * 
+     * The SQL port of the database.
      */
     SQLPort?: Integer;
     /**
-     * 
+     * The time at which the database was last updated.
      */
     LastUpdated?: Timestamp;
   }
@@ -324,27 +332,27 @@ declare namespace SsmSap {
   export type DatabaseStatus = "RUNNING"|"STARTING"|"STOPPED"|"WARNING"|"UNKNOWN"|string;
   export interface DatabaseSummary {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId?: ComponentId;
     /**
-     * 
+     * The ID of the database.
      */
     DatabaseId?: DatabaseId;
     /**
-     * 
+     * The type of the database.
      */
     DatabaseType?: DatabaseType;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the database.
      */
     Arn?: SsmSapArn;
     /**
-     * 
+     * The tags of the database.
      */
     Tags?: TagMap;
   }
@@ -352,105 +360,127 @@ declare namespace SsmSap {
   export type DatabaseType = "SYSTEM"|"TENANT"|string;
   export interface DeleteResourcePermissionInput {
     /**
-     * 
+     * Delete or restore the permissions on the target database.
      */
     ActionType?: PermissionActionType;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the source resource.
      */
     SourceResourceArn?: Arn;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn: Arn;
   }
   export interface DeleteResourcePermissionOutput {
     /**
-     * 
+     * The policy that removes permissions on the target database.
      */
     Policy?: String;
   }
   export interface DeregisterApplicationInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId: ApplicationId;
   }
   export interface DeregisterApplicationOutput {
   }
+  export interface Filter {
+    /**
+     * The name of the filter. Filter names are case-sensitive. 
+     */
+    Name: FilterName;
+    /**
+     * The filter values. Filter values are case-sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values
+     */
+    Value: FilterValue;
+    /**
+     * The operator for the filter. 
+     */
+    Operator: FilterOperator;
+  }
+  export type FilterList = Filter[];
+  export type FilterName = string;
+  export type FilterOperator = "Equals"|"GreaterThanOrEquals"|"LessThanOrEquals"|string;
+  export type FilterValue = string;
   export interface GetApplicationInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the application. 
      */
     ApplicationArn?: SsmSapArn;
+    /**
+     * The Amazon Resource Name (ARN) of the application registry.
+     */
+    AppRegistryArn?: AppRegistryArn;
   }
   export interface GetApplicationOutput {
     /**
-     * 
+     * Returns all of the metadata of an application registered with AWS Systems Manager for SAP.
      */
     Application?: Application;
     /**
-     * 
+     * The tags of a registered application.
      */
     Tags?: TagMap;
   }
   export interface GetComponentInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId: ApplicationId;
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId: ComponentId;
   }
   export interface GetComponentOutput {
     /**
-     * 
+     * The component of an application registered with AWS Systems Manager for SAP.
      */
     Component?: Component;
   }
   export interface GetDatabaseInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId?: ComponentId;
     /**
-     * 
+     * The ID of the database.
      */
     DatabaseId?: DatabaseId;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the database.
      */
     DatabaseArn?: SsmSapArn;
   }
   export interface GetDatabaseOutput {
     /**
-     * 
+     * The SAP HANA database of an application registered with AWS Systems Manager for SAP.
      */
     Database?: Database;
     /**
-     * 
+     * The tags of a database.
      */
     Tags?: TagMap;
   }
   export interface GetOperationInput {
     /**
-     * 
+     * The ID of the operation.
      */
     OperationId: OperationId;
   }
   export interface GetOperationOutput {
     /**
-     * 
+     * Returns the details of an operation.
      */
     Operation?: Operation;
   }
@@ -460,7 +490,7 @@ declare namespace SsmSap {
      */
     ActionType?: PermissionActionType;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the resource.
      */
     ResourceArn: Arn;
   }
@@ -472,19 +502,19 @@ declare namespace SsmSap {
   }
   export interface Host {
     /**
-     * 
+     * The name of the Dedicated Host.
      */
     HostName?: String;
     /**
-     * 
+     * The role of the Dedicated Host.
      */
     HostRole?: HostRole;
     /**
-     * 
+     * The IP address of the Dedicated Host. 
      */
     HostIp?: String;
     /**
-     * 
+     * The instance ID of the instance on the Dedicated Host.
      */
     InstanceId?: String;
   }
@@ -495,79 +525,107 @@ declare namespace SsmSap {
   export type Integer = number;
   export interface ListApplicationsInput {
     /**
-     * 
+     * The token for the next page of results.
      */
     NextToken?: NextToken;
     /**
-     * 
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. 
      */
     MaxResults?: MaxResults;
   }
   export interface ListApplicationsOutput {
     /**
-     * 
+     * The applications registered with AWS Systems Manager for SAP.
      */
     Applications?: ApplicationSummaryList;
     /**
-     * 
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
   }
   export interface ListComponentsInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The token for the next page of results.
      */
     NextToken?: NextToken;
     /**
-     * 
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.
      */
     MaxResults?: MaxResults;
   }
   export interface ListComponentsOutput {
     /**
-     * 
+     * List of components registered with AWS System Manager for SAP.
      */
     Components?: ComponentSummaryList;
     /**
-     * 
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
   }
   export interface ListDatabasesInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId?: ApplicationId;
     /**
-     * 
+     * The ID of the component.
      */
     ComponentId?: ComponentId;
     /**
-     * 
+     * The token for the next page of results. 
      */
     NextToken?: NextToken;
     /**
-     * 
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.
      */
     MaxResults?: MaxResults;
   }
   export interface ListDatabasesOutput {
     /**
-     * 
+     * The SAP HANA databases of an application.
      */
     Databases?: DatabaseSummaryList;
     /**
-     * 
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListOperationsInput {
+    /**
+     * The ID of the application.
+     */
+    ApplicationId: ApplicationId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next page of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The filters of an operation.
+     */
+    Filters?: FilterList;
+  }
+  export interface ListOperationsOutput {
+    /**
+     * List of operations performed by AWS Systems Manager for SAP.
+     */
+    Operations?: OperationList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
   }
   export interface ListTagsForResourceRequest {
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the resource.
      */
     resourceArn: SsmSapArn;
   }
@@ -581,52 +639,53 @@ declare namespace SsmSap {
   export type NextToken = string;
   export interface Operation {
     /**
-     * 
+     * The ID of the operation.
      */
     Id?: OperationId;
     /**
-     * 
+     * The type of the operation.
      */
     Type?: OperationType;
     /**
-     * 
+     * The status of the operation.
      */
     Status?: OperationStatus;
     /**
-     * 
+     * The status message of the operation.
      */
     StatusMessage?: String;
     /**
-     * 
+     * The properties of the operation.
      */
     Properties?: OperationProperties;
     /**
-     * 
+     * The resource type of the operation.
      */
     ResourceType?: ResourceType;
     /**
-     * 
+     * The resource ID of the operation.
      */
     ResourceId?: ResourceId;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the operation.
      */
     ResourceArn?: Arn;
     /**
-     * 
+     * The start time of the operation.
      */
     StartTime?: Timestamp;
     /**
-     * 
+     * The end time of the operation.
      */
     EndTime?: Timestamp;
     /**
-     * 
+     * The time at which the operation was last updated.
      */
     LastUpdatedTime?: Timestamp;
   }
   export type OperationId = string;
   export type OperationIdList = OperationId[];
+  export type OperationList = Operation[];
   export type OperationProperties = {[key: string]: String};
   export type OperationStatus = "INPROGRESS"|"SUCCESS"|"ERROR"|string;
   export type OperationType = string;
@@ -653,41 +712,41 @@ declare namespace SsmSap {
   }
   export interface RegisterApplicationInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId: ApplicationId;
     /**
-     * 
+     * The type of the application.
      */
     ApplicationType: ApplicationType;
     /**
-     * 
+     * The Amazon EC2 instances on which your SAP application is running.
      */
     Instances: InstanceList;
     /**
-     * 
+     * The SAP instance number of the application.
      */
     SapInstanceNumber?: SAPInstanceNumber;
     /**
-     * 
+     * The System ID of the application.
      */
     Sid?: SID;
     /**
-     * 
+     * The tags to be attached to the SAP application.
      */
     Tags?: TagMap;
     /**
-     * 
+     * The credentials of the SAP application.
      */
     Credentials: ApplicationCredentialList;
   }
   export interface RegisterApplicationOutput {
     /**
-     * 
+     * The application registered with AWS Systems Manager for SAP.
      */
     Application?: Application;
     /**
-     * 
+     * The ID of the operation.
      */
     OperationId?: OperationId;
   }
@@ -703,11 +762,11 @@ declare namespace SsmSap {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the resource.
      */
     resourceArn: SsmSapArn;
     /**
-     * 
+     * The tags on a resource.
      */
     tags: TagMap;
   }
@@ -717,7 +776,7 @@ declare namespace SsmSap {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the resource.
      */
     resourceArn: SsmSapArn;
     /**
@@ -729,25 +788,25 @@ declare namespace SsmSap {
   }
   export interface UpdateApplicationSettingsInput {
     /**
-     * 
+     * The ID of the application.
      */
     ApplicationId: ApplicationId;
     /**
-     * 
+     * The credentials to be added or updated.
      */
     CredentialsToAddOrUpdate?: ApplicationCredentialList;
     /**
-     * 
+     * The credentials to be removed.
      */
     CredentialsToRemove?: ApplicationCredentialList;
   }
   export interface UpdateApplicationSettingsOutput {
     /**
-     * 
+     * The update message.
      */
     Message?: String;
     /**
-     * 
+     * The IDs of the operations.
      */
     OperationIds?: OperationIdList;
   }

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1300.0-->
+<!--LATEST=2.1301.0-->
 <!--ENTRYINSERT-->
+
+## 2.1301.0
+* feature: DataBrew: Enabled FIPS us-gov-west-1 endpoints in SDK.
+* feature: Route53: Amazon Route 53 now supports the Asia Pacific (Melbourne) Region (ap-southeast-4) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* feature: SsmSap: This release provides updates to documentation and support for listing operations performed by AWS Systems Manager for SAP.
 
 ## 2.1300.0
 * feature: Lambda: Release Lambda RuntimeManagementConfig, enabling customers to better manage runtime updates to their Lambda functions. This release adds two new APIs, GetRuntimeManagementConfig and PutRuntimeManagementConfig, as well as support on existing Create/Get/Update function APIs.
