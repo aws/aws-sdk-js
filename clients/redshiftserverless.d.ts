@@ -268,11 +268,11 @@ declare class RedshiftServerless extends Service {
    */
   restoreFromSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreFromSnapshotResponse, AWSError>;
   /**
-   * Restores a table from a snapshot to your Amazon Redshift Serverless instance.
+   * Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
    */
   restoreTableFromSnapshot(params: RedshiftServerless.Types.RestoreTableFromSnapshotRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromSnapshotResponse, AWSError>;
   /**
-   * Restores a table from a snapshot to your Amazon Redshift Serverless instance.
+   * Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
    */
   restoreTableFromSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.RestoreTableFromSnapshotResponse) => void): Request<RedshiftServerless.Types.RestoreTableFromSnapshotResponse, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class RedshiftServerless extends Service {
    */
   updateEndpointAccess(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateEndpointAccessResponse) => void): Request<RedshiftServerless.Types.UpdateEndpointAccessResponse, AWSError>;
   /**
-   * Updates a namespace with the specified settings.
+   * Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example, you must specify both adminUsername and adminUserPassword to update either field, but you can't update both kmsKeyId and logExports in a single request.
    */
   updateNamespace(params: RedshiftServerless.Types.UpdateNamespaceRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateNamespaceResponse) => void): Request<RedshiftServerless.Types.UpdateNamespaceResponse, AWSError>;
   /**
-   * Updates a namespace with the specified settings.
+   * Updates a namespace with the specified settings. Unless required, you can't update multiple parameters in one request. For example, you must specify both adminUsername and adminUserPassword to update either field, but you can't update both kmsKeyId and logExports in a single request.
    */
   updateNamespace(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateNamespaceResponse) => void): Request<RedshiftServerless.Types.UpdateNamespaceResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class RedshiftServerless extends Service {
    */
   updateUsageLimit(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateUsageLimitResponse) => void): Request<RedshiftServerless.Types.UpdateUsageLimitResponse, AWSError>;
   /**
-   * Updates a workgroup with the specified configuration settings.
+   * Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example, you can update baseCapacity or port in a single request, but you can't update both in the same request.
    */
   updateWorkgroup(params: RedshiftServerless.Types.UpdateWorkgroupRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateWorkgroupResponse) => void): Request<RedshiftServerless.Types.UpdateWorkgroupResponse, AWSError>;
   /**
-   * Updates a workgroup with the specified configuration settings.
+   * Updates a workgroup with the specified configuration settings. You can't update multiple parameters in one request. For example, you can update baseCapacity or port in a single request, but you can't update both in the same request.
    */
   updateWorkgroup(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateWorkgroupResponse) => void): Request<RedshiftServerless.Types.UpdateWorkgroupResponse, AWSError>;
 }
@@ -338,7 +338,7 @@ declare namespace RedshiftServerless {
   export type Boolean = boolean;
   export interface ConfigParameter {
     /**
-     * The key of the parameter. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
+     * The key of the parameter. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see Query monitoring metrics for Amazon Redshift Serverless.
      */
     parameterKey?: ParameterKey;
     /**
@@ -497,7 +497,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for more control over a serverless database. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -1477,19 +1477,19 @@ declare namespace RedshiftServerless {
   }
   export interface UpdateNamespaceRequest {
     /**
-     * The password of the administrator for the first database created in the namespace.
+     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername.
      */
     adminUserPassword?: DbPassword;
     /**
-     * The username of the administrator for the first database created in the namespace.
+     * The username of the administrator for the first database created in the namespace. This parameter must be updated together with adminUserPassword.
      */
     adminUsername?: DbUser;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
+     * The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. This parameter must be updated together with iamRoles.
      */
     defaultIamRoleArn?: String;
     /**
-     * A list of IAM roles to associate with the namespace.
+     * A list of IAM roles to associate with the namespace. This parameter must be updated together with defaultIamRoleArn.
      */
     iamRoles?: IamRoleArnList;
     /**
@@ -1501,7 +1501,7 @@ declare namespace RedshiftServerless {
      */
     logExports?: LogExportList;
     /**
-     * The name of the namespace.
+     * The name of the namespace to update. You can't update the name of a namespace once it is created.
      */
     namespaceName: NamespaceName;
   }
@@ -1553,7 +1553,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for advanced control over a database. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**
@@ -1577,7 +1577,7 @@ declare namespace RedshiftServerless {
      */
     subnetIds?: SubnetIdList;
     /**
-     * The name of the workgroup to update.
+     * The name of the workgroup to update. You can't update the name of a workgroup once it is created.
      */
     workgroupName: WorkgroupName;
   }
@@ -1655,7 +1655,7 @@ declare namespace RedshiftServerless {
      */
     baseCapacity?: Integer;
     /**
-     * An array of parameters to set for finer control over a database. The options are datestyle, enable_user_activity_logging, query_group, search_path, and max_query_execution_time.
+     * An array of parameters to set for advanced control over a database. The options are auto_mv, datestyle, enable_case_sensitivity_identifier, enable_user_activity_logging, query_group, , search_path, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see  Query monitoring metrics for Amazon Redshift Serverless.
      */
     configParameters?: ConfigParameterList;
     /**

@@ -12052,6 +12052,10 @@ declare namespace SageMaker {
      * Defines the model configuration.
      */
     ModelConfiguration: ModelConfiguration;
+    /**
+     * The recommendation ID which uniquely identifies each recommendation.
+     */
+    RecommendationId?: String;
   }
   export type InferenceRecommendations = InferenceRecommendation[];
   export interface InferenceRecommendationsJob {
@@ -16008,6 +16012,10 @@ declare namespace SageMaker {
      * Defines the environment parameters that includes key, value types, and values.
      */
     EnvironmentParameters?: EnvironmentParameters;
+    /**
+     * The name of the compilation job used to create the recommended model artifacts.
+     */
+    CompilationJobName?: RecommendationJobCompilationJobName;
   }
   export interface ModelDashboardEndpoint {
     /**
@@ -18688,6 +18696,7 @@ declare namespace SageMaker {
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
   export type RecommendationFailureReason = string;
   export type RecommendationJobArn = string;
+  export type RecommendationJobCompilationJobName = string;
   export interface RecommendationJobCompiledOutputConfig {
     /**
      * Identifies the Amazon S3 bucket where you want SageMaker to store the compiled model artifacts.
@@ -18723,7 +18732,12 @@ declare namespace SageMaker {
      * A list of the instance types that are used to generate inferences in real-time.
      */
     SupportedInstanceTypes?: RecommendationJobSupportedInstanceTypes;
+    /**
+     * Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. This field is used for optimizing your model using SageMaker Neo. For more information, see DataInputConfig.
+     */
+    DataInputConfig?: RecommendationJobDataInputConfig;
   }
+  export type RecommendationJobDataInputConfig = string;
   export type RecommendationJobDescription = string;
   export interface RecommendationJobInferenceBenchmark {
     Metrics?: RecommendationMetrics;
@@ -18738,7 +18752,7 @@ declare namespace SageMaker {
     /**
      * The Amazon Resource Name (ARN) of a versioned model package.
      */
-    ModelPackageVersionArn: ModelPackageArn;
+    ModelPackageVersionArn?: ModelPackageArn;
     /**
      * Specifies the maximum duration of the job, in seconds.&gt;
      */
@@ -18771,6 +18785,10 @@ declare namespace SageMaker {
      * Inference Recommender provisions SageMaker endpoints with access to VPC in the inference recommendation job.
      */
     VpcConfig?: RecommendationJobVpcConfig;
+    /**
+     * The name of the created model.
+     */
+    ModelName?: ModelName;
   }
   export type RecommendationJobName = string;
   export interface RecommendationJobOutputConfig {
@@ -18848,6 +18866,14 @@ declare namespace SageMaker {
      * The expected model latency at maximum invocation per minute for the instance.
      */
     ModelLatency: Integer;
+    /**
+     * The expected CPU utilization at maximum invocations per minute for the instance.  NaN indicates that the value is not available.
+     */
+    CpuUtilization?: UtilizationMetric;
+    /**
+     * The expected memory utilization at maximum invocations per minute for the instance.  NaN indicates that the value is not available.
+     */
+    MemoryUtilization?: UtilizationMetric;
   }
   export type RecommendationStepType = "BENCHMARK"|string;
   export type RecordWrapper = "None"|"RecordIO"|string;
@@ -21604,6 +21630,7 @@ declare namespace SageMaker {
      */
     CanvasAppSettings?: CanvasAppSettings;
   }
+  export type UtilizationMetric = number;
   export type ValidationFraction = number;
   export type VariantName = string;
   export interface VariantProperty {

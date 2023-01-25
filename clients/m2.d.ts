@@ -380,6 +380,7 @@ declare namespace M2 {
      * The unique identifier of the application that hosts this batch job.
      */
     applicationId: Identifier;
+    batchJobIdentifier?: BatchJobIdentifier;
     /**
      * The timestamp when this batch job execution ended.
      */
@@ -400,6 +401,10 @@ declare namespace M2 {
      * The type of a particular batch job execution.
      */
     jobType?: BatchJobType;
+    /**
+     * 
+     */
+    returnCode?: String;
     /**
      * The timestamp when a particular batch job execution started.
      */
@@ -1059,6 +1064,7 @@ declare namespace M2 {
      * The identifier of the application.
      */
     applicationId: Identifier;
+    batchJobIdentifier?: BatchJobIdentifier;
     /**
      * The timestamp when the batch job execution ended.
      */
@@ -1083,6 +1089,10 @@ declare namespace M2 {
      * The user for the job.
      */
     jobUser?: String100;
+    /**
+     * 
+     */
+    returnCode?: String;
     /**
      * The timestamp when the batch job execution started.
      */

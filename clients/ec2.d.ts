@@ -93,11 +93,11 @@ declare class EC2 extends Service {
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
-   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another resource or IPAM pool. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
    */
   allocateIpamPoolCidr(params: EC2.Types.AllocateIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
   /**
-   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another resource or IPAM pool. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
    */
   allocateIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
   /**
@@ -172,6 +172,14 @@ declare class EC2 extends Service {
    * Associates one or more targets with an event window. Only one type of target (instance IDs, Dedicated Host IDs, or tags) can be specified with an event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
    */
   associateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.AssociateInstanceEventWindowResult) => void): Request<EC2.Types.AssociateInstanceEventWindowResult, AWSError>;
+  /**
+   * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  associateIpamResourceDiscovery(params: EC2.Types.AssociateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.AssociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.AssociateIpamResourceDiscoveryResult, AWSError>;
+  /**
+   * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  associateIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.AssociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.AssociateIpamResourceDiscoveryResult, AWSError>;
   /**
    * Associates a subnet in your VPC or an internet gateway or virtual private gateway attached to your VPC with a route table in your VPC. This association causes traffic from the subnet or gateway to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table later. A route table can be associated with multiple subnets. For more information, see Route tables in the Amazon Virtual Private Cloud User Guide.
    */
@@ -588,6 +596,14 @@ declare class EC2 extends Service {
    * Create an IP address pool for Amazon VPC IP Address Manager (IPAM). In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each. For more information, see Create a top-level pool in the Amazon VPC IPAM User Guide. 
    */
   createIpamPool(callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
+  /**
+   * Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  createIpamResourceDiscovery(params: EC2.Types.CreateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamResourceDiscoveryResult) => void): Request<EC2.Types.CreateIpamResourceDiscoveryResult, AWSError>;
+  /**
+   * Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  createIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.CreateIpamResourceDiscoveryResult) => void): Request<EC2.Types.CreateIpamResourceDiscoveryResult, AWSError>;
   /**
    * Create an IPAM scope. In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict. For more information, see Add a scope in the Amazon VPC IPAM User Guide.
    */
@@ -1180,6 +1196,14 @@ declare class EC2 extends Service {
    * Delete an IPAM pool.  You cannot delete an IPAM pool if there are allocations in it or CIDRs provisioned to it. To release allocations, see ReleaseIpamPoolAllocation. To deprovision pool CIDRs, see DeprovisionIpamPoolCidr.  For more information, see Delete a pool in the Amazon VPC IPAM User Guide. 
    */
   deleteIpamPool(callback?: (err: AWSError, data: EC2.Types.DeleteIpamPoolResult) => void): Request<EC2.Types.DeleteIpamPoolResult, AWSError>;
+  /**
+   * Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  deleteIpamResourceDiscovery(params: EC2.Types.DeleteIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamResourceDiscoveryResult) => void): Request<EC2.Types.DeleteIpamResourceDiscoveryResult, AWSError>;
+  /**
+   * Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  deleteIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.DeleteIpamResourceDiscoveryResult) => void): Request<EC2.Types.DeleteIpamResourceDiscoveryResult, AWSError>;
   /**
    * Delete the scope for an IPAM. You cannot delete the default scopes. For more information, see Delete a scope in the Amazon VPC IPAM User Guide. 
    */
@@ -2125,6 +2149,22 @@ declare class EC2 extends Service {
    */
   describeIpamPools(callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
   /**
+   * Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  describeIpamResourceDiscoveries(params: EC2.Types.DescribeIpamResourceDiscoveriesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamResourceDiscoveriesResult) => void): Request<EC2.Types.DescribeIpamResourceDiscoveriesResult, AWSError>;
+  /**
+   * Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  describeIpamResourceDiscoveries(callback?: (err: AWSError, data: EC2.Types.DescribeIpamResourceDiscoveriesResult) => void): Request<EC2.Types.DescribeIpamResourceDiscoveriesResult, AWSError>;
+  /**
+   * Describes resource discovery association with an Amazon VPC IPAM. An associated resource discovery is a resource discovery that has been associated with an IPAM..
+   */
+  describeIpamResourceDiscoveryAssociations(params: EC2.Types.DescribeIpamResourceDiscoveryAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamResourceDiscoveryAssociationsResult) => void): Request<EC2.Types.DescribeIpamResourceDiscoveryAssociationsResult, AWSError>;
+  /**
+   * Describes resource discovery association with an Amazon VPC IPAM. An associated resource discovery is a resource discovery that has been associated with an IPAM..
+   */
+  describeIpamResourceDiscoveryAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeIpamResourceDiscoveryAssociationsResult) => void): Request<EC2.Types.DescribeIpamResourceDiscoveryAssociationsResult, AWSError>;
+  /**
    * Get information about your IPAM scopes.
    */
   describeIpamScopes(params: EC2.Types.DescribeIpamScopesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamScopesResult) => void): Request<EC2.Types.DescribeIpamScopesResult, AWSError>;
@@ -3013,6 +3053,14 @@ declare class EC2 extends Service {
    */
   disassociateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.DisassociateInstanceEventWindowResult) => void): Request<EC2.Types.DisassociateInstanceEventWindowResult, AWSError>;
   /**
+   * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  disassociateIpamResourceDiscovery(params: EC2.Types.DisassociateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.DisassociateIpamResourceDiscoveryResult, AWSError>;
+  /**
+   * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  disassociateIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.DisassociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.DisassociateIpamResourceDiscoveryResult, AWSError>;
+  /**
    * Disassociates a subnet or gateway from a route table. After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see Route tables in the Amazon Virtual Private Cloud User Guide.
    */
   disassociateRouteTable(params: EC2.Types.DisassociateRouteTableRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -3341,6 +3389,22 @@ declare class EC2 extends Service {
    */
   getIpamAddressHistory(callback?: (err: AWSError, data: EC2.Types.GetIpamAddressHistoryResult) => void): Request<EC2.Types.GetIpamAddressHistoryResult, AWSError>;
   /**
+   * Gets IPAM discovered accounts. A discovered account is an Amazon Web Services account that is monitored under a resource discovery. If you have integrated IPAM with Amazon Web Services Organizations, all accounts in the organization are discovered accounts. Only the IPAM account can get all discovered accounts in the organization.
+   */
+  getIpamDiscoveredAccounts(params: EC2.Types.GetIpamDiscoveredAccountsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredAccountsResult) => void): Request<EC2.Types.GetIpamDiscoveredAccountsResult, AWSError>;
+  /**
+   * Gets IPAM discovered accounts. A discovered account is an Amazon Web Services account that is monitored under a resource discovery. If you have integrated IPAM with Amazon Web Services Organizations, all accounts in the organization are discovered accounts. Only the IPAM account can get all discovered accounts in the organization.
+   */
+  getIpamDiscoveredAccounts(callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredAccountsResult) => void): Request<EC2.Types.GetIpamDiscoveredAccountsResult, AWSError>;
+  /**
+   * Returns the resource CIDRs that are monitored as part of a resource discovery. A discovered resource is a resource CIDR monitored under a resource discovery. The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. 
+   */
+  getIpamDiscoveredResourceCidrs(params: EC2.Types.GetIpamDiscoveredResourceCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredResourceCidrsResult) => void): Request<EC2.Types.GetIpamDiscoveredResourceCidrsResult, AWSError>;
+  /**
+   * Returns the resource CIDRs that are monitored as part of a resource discovery. A discovered resource is a resource CIDR monitored under a resource discovery. The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. 
+   */
+  getIpamDiscoveredResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredResourceCidrsResult) => void): Request<EC2.Types.GetIpamDiscoveredResourceCidrsResult, AWSError>;
+  /**
    * Get a list of all the CIDR allocations in an IPAM pool.
    */
   getIpamPoolAllocations(params: EC2.Types.GetIpamPoolAllocationsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
@@ -3357,11 +3421,11 @@ declare class EC2 extends Service {
    */
   getIpamPoolCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolCidrsResult) => void): Request<EC2.Types.GetIpamPoolCidrsResult, AWSError>;
   /**
-   * Get information about the resources in a scope.
+   * Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
    */
   getIpamResourceCidrs(params: EC2.Types.GetIpamResourceCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
   /**
-   * Get information about the resources in a scope.
+   * Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
    */
   getIpamResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
   /**
@@ -3789,6 +3853,14 @@ declare class EC2 extends Service {
    */
   modifyIpamResourceCidr(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceCidrResult) => void): Request<EC2.Types.ModifyIpamResourceCidrResult, AWSError>;
   /**
+   * Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  modifyIpamResourceDiscovery(params: EC2.Types.ModifyIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceDiscoveryResult) => void): Request<EC2.Types.ModifyIpamResourceDiscoveryResult, AWSError>;
+  /**
+   * Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   */
+  modifyIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceDiscoveryResult) => void): Request<EC2.Types.ModifyIpamResourceDiscoveryResult, AWSError>;
+  /**
    * Modify an IPAM scope.
    */
   modifyIpamScope(params: EC2.Types.ModifyIpamScopeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamScopeResult) => void): Request<EC2.Types.ModifyIpamScopeResult, AWSError>;
@@ -4117,11 +4189,11 @@ declare class EC2 extends Service {
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
-   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool. If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
+   * Move a BYOIPv4 CIDR to IPAM from a public IPv4 pool. If you already have a BYOIPv4 CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
    */
   moveByoipCidrToIpam(params: EC2.Types.MoveByoipCidrToIpamRequest, callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
   /**
-   * Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool. If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
+   * Move a BYOIPv4 CIDR to IPAM from a public IPv4 pool. If you already have a BYOIPv4 CIDR with Amazon Web Services, you can move the CIDR to IPAM from a public IPv4 pool. You cannot move an IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web Services for the first time, complete the steps in Tutorial: BYOIP address CIDRs to IPAM.
    */
   moveByoipCidrToIpam(callback?: (err: AWSError, data: EC2.Types.MoveByoipCidrToIpamResult) => void): Request<EC2.Types.MoveByoipCidrToIpamResult, AWSError>;
   /**
@@ -5944,6 +6016,34 @@ declare namespace EC2 {
      * Information about the event window.
      */
     InstanceEventWindow?: InstanceEventWindow;
+  }
+  export interface AssociateIpamResourceDiscoveryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * An IPAM ID.
+     */
+    IpamId: IpamId;
+    /**
+     * A resource discovery ID.
+     */
+    IpamResourceDiscoveryId: IpamResourceDiscoveryId;
+    /**
+     * Tag specifications.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A client token.
+     */
+    ClientToken?: String;
+  }
+  export interface AssociateIpamResourceDiscoveryResult {
+    /**
+     * A resource discovery association. An associated resource discovery is a resource discovery that has been associated with an IPAM.
+     */
+    IpamResourceDiscoveryAssociation?: IpamResourceDiscoveryAssociation;
   }
   export interface AssociateRouteTableRequest {
     /**
@@ -8923,6 +9023,10 @@ declare namespace EC2 {
      * Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
      */
     AwsService?: IpamPoolAwsService;
+    /**
+     * The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is byoip. For more information, see Create IPv6 pools in the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is amazon. For information on increasing the default limit, see  Quotas for your IPAM in the Amazon VPC IPAM User Guide.
+     */
+    PublicIpSource?: IpamPoolPublicIpSource;
   }
   export interface CreateIpamPoolResult {
     /**
@@ -8940,7 +9044,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * The operating Regions for the IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions. For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide. 
+     * The operating Regions for the IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.  For more information about operating Regions, see Create an IPAM in the Amazon VPC IPAM User Guide. 
      */
     OperatingRegions?: AddIpamOperatingRegionSet;
     /**
@@ -8951,6 +9055,34 @@ declare namespace EC2 {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
      */
     ClientToken?: String;
+  }
+  export interface CreateIpamResourceDiscoveryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A description for the IPAM resource discovery.
+     */
+    Description?: String;
+    /**
+     * Operating Regions for the IPAM resource discovery. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.
+     */
+    OperatingRegions?: AddIpamOperatingRegionSet;
+    /**
+     * Tag specifications for the IPAM resource discovery.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * A client token for the IPAM resource discovery.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateIpamResourceDiscoveryResult {
+    /**
+     * An IPAM resource discovery.
+     */
+    IpamResourceDiscovery?: IpamResourceDiscovery;
   }
   export interface CreateIpamResult {
     /**
@@ -11489,6 +11621,22 @@ declare namespace EC2 {
      * Enables you to quickly delete an IPAM, private scopes, pools in private scopes, and any allocations in the pools in private scopes. You cannot delete the IPAM with this option if there is a pool in your public scope. If you use this option, IPAM does the following:   Deallocates any CIDRs allocated to VPC resources (such as VPCs) in pools in private scopes.  No VPC resources are deleted as a result of enabling this option. The CIDR associated with the resource will no longer be allocated from an IPAM pool, but the CIDR itself will remain unchanged.    Deprovisions all IPv4 CIDRs provisioned to IPAM pools in private scopes.   Deletes all IPAM pools in private scopes.   Deletes all non-default private scopes in the IPAM.   Deletes the default public and private scopes and the IPAM.  
      */
     Cascade?: Boolean;
+  }
+  export interface DeleteIpamResourceDiscoveryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IPAM resource discovery ID.
+     */
+    IpamResourceDiscoveryId: IpamResourceDiscoveryId;
+  }
+  export interface DeleteIpamResourceDiscoveryResult {
+    /**
+     * The IPAM resource discovery.
+     */
+    IpamResourceDiscovery?: IpamResourceDiscovery;
   }
   export interface DeleteIpamResult {
     /**
@@ -14270,6 +14418,70 @@ declare namespace EC2 {
      * Information about the IPAM pools.
      */
     IpamPools?: IpamPoolSet;
+  }
+  export interface DescribeIpamResourceDiscoveriesRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IPAM resource discovery IDs.
+     */
+    IpamResourceDiscoveryIds?: ValueStringList;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of resource discoveries to return in one page of results.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The resource discovery filters.
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeIpamResourceDiscoveriesResult {
+    /**
+     * The resource discoveries.
+     */
+    IpamResourceDiscoveries?: IpamResourceDiscoverySet;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeIpamResourceDiscoveryAssociationsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The resource discovery association IDs.
+     */
+    IpamResourceDiscoveryAssociationIds?: ValueStringList;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of resource discovery associations to return in one page of results.
+     */
+    MaxResults?: IpamMaxResults;
+    /**
+     * The resource discovery association filters.
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeIpamResourceDiscoveryAssociationsResult {
+    /**
+     * The resource discovery associations.
+     */
+    IpamResourceDiscoveryAssociations?: IpamResourceDiscoveryAssociationSet;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
   }
   export interface DescribeIpamScopesRequest {
     /**
@@ -17725,6 +17937,22 @@ declare namespace EC2 {
      */
     InstanceEventWindow?: InstanceEventWindow;
   }
+  export interface DisassociateIpamResourceDiscoveryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A resource discovery association ID.
+     */
+    IpamResourceDiscoveryAssociationId: IpamResourceDiscoveryAssociationId;
+  }
+  export interface DisassociateIpamResourceDiscoveryResult {
+    /**
+     * A resource discovery association.
+     */
+    IpamResourceDiscoveryAssociation?: IpamResourceDiscoveryAssociation;
+  }
   export interface DisassociateRouteTableRequest {
     /**
      * The association ID representing the current association between the route table and subnet or gateway.
@@ -20166,6 +20394,78 @@ declare namespace EC2 {
     HistoryRecords?: IpamAddressHistoryRecordSet;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamDiscoveredAccountsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A resource discovery ID.
+     */
+    IpamResourceDiscoveryId: IpamResourceDiscoveryId;
+    /**
+     * The Amazon Web Services Region that the account information is returned from.
+     */
+    DiscoveryRegion: String;
+    /**
+     * Discovered account filters.
+     */
+    Filters?: FilterList;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of discovered accounts to return in one page of results.
+     */
+    MaxResults?: IpamMaxResults;
+  }
+  export interface GetIpamDiscoveredAccountsResult {
+    /**
+     * Discovered accounts.
+     */
+    IpamDiscoveredAccounts?: IpamDiscoveredAccountSet;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetIpamDiscoveredResourceCidrsRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A resource discovery ID.
+     */
+    IpamResourceDiscoveryId: IpamResourceDiscoveryId;
+    /**
+     * A resource Region.
+     */
+    ResourceRegion: String;
+    /**
+     * Filters.
+     */
+    Filters?: FilterList;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of discovered resource CIDRs to return in one page of results.
+     */
+    MaxResults?: IpamMaxResults;
+  }
+  export interface GetIpamDiscoveredResourceCidrsResult {
+    /**
+     * Discovered resource CIDRs.
+     */
+    IpamDiscoveredResourceCidrs?: IpamDiscoveredResourceCidrSet;
+    /**
+     * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -23538,7 +23838,7 @@ declare namespace EC2 {
      */
     IpamId?: IpamId;
     /**
-     * The ARN of the IPAM.
+     * The Amazon Resource Name (ARN) of the IPAM.
      */
     IpamArn?: ResourceArn;
     /**
@@ -23573,6 +23873,18 @@ declare namespace EC2 {
      * The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
      */
     Tags?: TagList;
+    /**
+     * The IPAM's default resource discovery ID.
+     */
+    DefaultResourceDiscoveryId?: IpamResourceDiscoveryId;
+    /**
+     * The IPAM's default resource discovery association ID.
+     */
+    DefaultResourceDiscoveryAssociationId?: IpamResourceDiscoveryAssociationId;
+    /**
+     * The IPAM's resource discovery association count.
+     */
+    ResourceDiscoveryAssociationCount?: Integer;
   }
   export type IpamAddressHistoryMaxResults = number;
   export interface IpamAddressHistoryRecord {
@@ -23623,6 +23935,7 @@ declare namespace EC2 {
   }
   export type IpamAddressHistoryRecordSet = IpamAddressHistoryRecord[];
   export type IpamAddressHistoryResourceType = "eip"|"vpc"|"subnet"|"network-interface"|"instance"|string;
+  export type IpamAssociatedResourceDiscoveryStatus = "active"|"not-found"|string;
   export interface IpamCidrAuthorizationContext {
     /**
      * The plain-text authorization message for the prefix and account.
@@ -23634,6 +23947,83 @@ declare namespace EC2 {
     Signature?: String;
   }
   export type IpamComplianceStatus = "compliant"|"noncompliant"|"unmanaged"|"ignored"|string;
+  export interface IpamDiscoveredAccount {
+    /**
+     * The account ID.
+     */
+    AccountId?: String;
+    /**
+     * The Amazon Web Services Region that the account information is returned from. An account can be discovered in multiple regions and will have a separate discovered account for each Region.
+     */
+    DiscoveryRegion?: String;
+    /**
+     * The resource discovery failure reason.
+     */
+    FailureReason?: IpamDiscoveryFailureReason;
+    /**
+     * The last attempted resource discovery time.
+     */
+    LastAttemptedDiscoveryTime?: MillisecondDateTime;
+    /**
+     * The last successful resource discovery time.
+     */
+    LastSuccessfulDiscoveryTime?: MillisecondDateTime;
+  }
+  export type IpamDiscoveredAccountSet = IpamDiscoveredAccount[];
+  export interface IpamDiscoveredResourceCidr {
+    /**
+     * The resource discovery ID.
+     */
+    IpamResourceDiscoveryId?: IpamResourceDiscoveryId;
+    /**
+     * The resource Region.
+     */
+    ResourceRegion?: String;
+    /**
+     * The resource ID.
+     */
+    ResourceId?: String;
+    /**
+     * The resource owner ID.
+     */
+    ResourceOwnerId?: String;
+    /**
+     * The resource CIDR.
+     */
+    ResourceCidr?: String;
+    /**
+     * The resource type.
+     */
+    ResourceType?: IpamResourceType;
+    /**
+     * The resource tags.
+     */
+    ResourceTags?: IpamResourceTagList;
+    /**
+     * The percentage of IP address space in use. To convert the decimal to a percentage, multiply the decimal by 100. Note the following:   For resources that are VPCs, this is the percentage of IP address space in the VPC that's taken up by subnet CIDRs.    For resources that are subnets, if the subnet has an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the percentage of IPv6 address space in use is not represented. The percentage of IPv6 address space in use cannot currently be calculated.    For resources that are public IPv4 pools, this is the percentage of IP address space in the pool that's been allocated to Elastic IP addresses (EIPs).   
+     */
+    IpUsage?: BoxedDouble;
+    /**
+     * The VPC ID.
+     */
+    VpcId?: String;
+    /**
+     * The last successful resource discovery time.
+     */
+    SampleTime?: MillisecondDateTime;
+  }
+  export type IpamDiscoveredResourceCidrSet = IpamDiscoveredResourceCidr[];
+  export type IpamDiscoveryFailureCode = "assume-role-failure"|"throttling-failure"|"unauthorized-failure"|string;
+  export interface IpamDiscoveryFailureReason {
+    /**
+     * The discovery failure code.    assume-role-failure - IPAM could not assume the Amazon Web Services IAM service-linked role. This could be because of any of the following:   SLR has not been created yet and IPAM is still creating it.   You have opted-out of the IPAM home Region.   Account you are using as your IPAM account has been suspended.      throttling-failure - IPAM account is already using the allotted transactions per second and IPAM is receiving a throttling error when assuming the Amazon Web Services IAM SLR.    unauthorized-failure - Amazon Web Services account making the request is not authorized. For more information, see AuthFailure in the Amazon Elastic Compute Cloud API Reference.  
+     */
+    Code?: IpamDiscoveryFailureCode;
+    /**
+     * The discovery failure message.
+     */
+    Message?: String;
+  }
   export type IpamId = string;
   export type IpamManagementState = "managed"|"unmanaged"|"ignored"|string;
   export type IpamMaxResults = number;
@@ -23660,7 +24050,7 @@ declare namespace EC2 {
      */
     SourceIpamPoolId?: IpamPoolId;
     /**
-     * The ARN of the IPAM pool.
+     * The Amazon Resource Name (ARN) of the IPAM pool.
      */
     IpamPoolArn?: ResourceArn;
     /**
@@ -23735,6 +24125,10 @@ declare namespace EC2 {
      * Limits which service in Amazon Web Services that the pool can be used in. "ec2", for example, allows users to use space for Elastic IP addresses and VPCs.
      */
     AwsService?: IpamPoolAwsService;
+    /**
+     * The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is BYOIP. For more information, see Create IPv6 pools in the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the default limit, see  Quotas for your IPAM in the Amazon VPC IPAM User Guide.
+     */
+    PublicIpSource?: IpamPoolPublicIpSource;
   }
   export interface IpamPoolAllocation {
     /**
@@ -23784,8 +24178,16 @@ declare namespace EC2 {
      * Details related to why an IPAM pool CIDR failed to be provisioned.
      */
     FailureReason?: IpamPoolCidrFailureReason;
+    /**
+     * The IPAM pool CIDR ID.
+     */
+    IpamPoolCidrId?: IpamPoolCidrId;
+    /**
+     * The netmask length of the CIDR you'd like to provision to a pool. Can be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools and for provisioning CIDRs to pools with source pools. Cannot be used to provision BYOIP CIDRs to top-level pools. "NetmaskLength" or "Cidr" is required.
+     */
+    NetmaskLength?: Integer;
   }
-  export type IpamPoolCidrFailureCode = "cidr-not-available"|string;
+  export type IpamPoolCidrFailureCode = "cidr-not-available"|"limit-exceeded"|string;
   export interface IpamPoolCidrFailureReason {
     /**
      * An error code related to why an IPAM pool CIDR failed to be provisioned.
@@ -23796,9 +24198,11 @@ declare namespace EC2 {
      */
     Message?: String;
   }
+  export type IpamPoolCidrId = string;
   export type IpamPoolCidrSet = IpamPoolCidr[];
   export type IpamPoolCidrState = "pending-provision"|"provisioned"|"failed-provision"|"pending-deprovision"|"deprovisioned"|"failed-deprovision"|"pending-import"|"failed-import"|string;
   export type IpamPoolId = string;
+  export type IpamPoolPublicIpSource = "amazon"|"byoip"|string;
   export type IpamPoolSet = IpamPool[];
   export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export interface IpamResourceCidr {
@@ -23843,7 +24247,7 @@ declare namespace EC2 {
      */
     ResourceTags?: IpamResourceTagList;
     /**
-     * The percentage of IP address space in use. To convert the decimal to a percentage, multiply the decimal by 100. Note the following:   For a resources that are VPCs, this is the percentage of IP address space in the VPC that's taken up by subnet CIDRs.    For resources that are subnets, if the subnet has an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the percentage of IPv6 address space in use is not represented. The percentage of IPv6 address space in use cannot currently be calculated.    For resources that are public IPv4 pools, this is the percentage of IP address space in the pool that's been allocated to Elastic IP addresses (EIPs).   
+     * The percentage of IP address space in use. To convert the decimal to a percentage, multiply the decimal by 100. Note the following:   For resources that are VPCs, this is the percentage of IP address space in the VPC that's taken up by subnet CIDRs.    For resources that are subnets, if the subnet has an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the percentage of IPv6 address space in use is not represented. The percentage of IPv6 address space in use cannot currently be calculated.    For resources that are public IPv4 pools, this is the percentage of IP address space in the pool that's been allocated to Elastic IP addresses (EIPs).   
      */
     IpUsage?: BoxedDouble;
     /**
@@ -23864,6 +24268,96 @@ declare namespace EC2 {
     VpcId?: String;
   }
   export type IpamResourceCidrSet = IpamResourceCidr[];
+  export interface IpamResourceDiscovery {
+    /**
+     * The ID of the owner.
+     */
+    OwnerId?: String;
+    /**
+     * The resource discovery ID.
+     */
+    IpamResourceDiscoveryId?: IpamResourceDiscoveryId;
+    /**
+     * The resource discovery Amazon Resource Name (ARN).
+     */
+    IpamResourceDiscoveryArn?: String;
+    /**
+     * The resource discovery Region.
+     */
+    IpamResourceDiscoveryRegion?: String;
+    /**
+     * The resource discovery description.
+     */
+    Description?: String;
+    /**
+     * The operating Regions for the resource discovery. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.
+     */
+    OperatingRegions?: IpamOperatingRegionSet;
+    /**
+     * Defines if the resource discovery is the default. The default resource discovery is the resource discovery automatically created when you create an IPAM.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The lifecycle state of the resource discovery.    create-in-progress - Resource discovery is being created.    create-complete - Resource discovery creation is complete.    create-failed - Resource discovery creation has failed.    modify-in-progress - Resource discovery is being modified.    modify-complete - Resource discovery modification is complete.    modify-failed - Resource discovery modification has failed.    delete-in-progress - Resource discovery is being deleted.    delete-complete - Resource discovery deletion is complete.    delete-failed - Resource discovery deletion has failed.    isolate-in-progress - Amazon Web Services account that created the resource discovery has been removed and the resource discovery is being isolated.    isolate-complete - Resource discovery isolation is complete.    restore-in-progress - Amazon Web Services account that created the resource discovery and was isolated has been restored.  
+     */
+    State?: IpamResourceDiscoveryState;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    Tags?: TagList;
+  }
+  export interface IpamResourceDiscoveryAssociation {
+    /**
+     * The Amazon Web Services account ID of the resource discovery owner.
+     */
+    OwnerId?: String;
+    /**
+     * The resource discovery association ID.
+     */
+    IpamResourceDiscoveryAssociationId?: IpamResourceDiscoveryAssociationId;
+    /**
+     * The resource discovery association Amazon Resource Name (ARN).
+     */
+    IpamResourceDiscoveryAssociationArn?: String;
+    /**
+     * The resource discovery ID.
+     */
+    IpamResourceDiscoveryId?: IpamResourceDiscoveryId;
+    /**
+     * The IPAM ID.
+     */
+    IpamId?: IpamId;
+    /**
+     * The IPAM ARN.
+     */
+    IpamArn?: ResourceArn;
+    /**
+     * The IPAM home Region.
+     */
+    IpamRegion?: String;
+    /**
+     * Defines if the resource discovery is the default. When you create an IPAM, a default resource discovery is created for your IPAM and it's associated with your IPAM.
+     */
+    IsDefault?: Boolean;
+    /**
+     * The resource discovery status.    active - Connection or permissions required to read the results of the resource discovery are intact.    not-found - Connection or permissions required to read the results of the resource discovery are broken. This may happen if the owner of the resource discovery stopped sharing it or deleted the resource discovery. Verify the resource discovery still exists and the Amazon Web Services RAM resource share is still intact.  
+     */
+    ResourceDiscoveryStatus?: IpamAssociatedResourceDiscoveryStatus;
+    /**
+     * The lifecycle state of the association when you associate or disassociate a resource discovery.    associate-in-progress - Resource discovery is being associated.    associate-complete - Resource discovery association is complete.    associate-failed - Resource discovery association has failed.    disassociate-in-progress - Resource discovery is being disassociated.    disassociate-complete - Resource discovery disassociation is complete.    disassociate-failed  - Resource discovery disassociation has failed.    isolate-in-progress - Amazon Web Services account that created the resource discovery association has been removed and the resource discovery associatation is being isolated.    isolate-complete - Resource discovery isolation is complete..    restore-in-progress - Resource discovery is being restored.  
+     */
+    State?: IpamResourceDiscoveryAssociationState;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    Tags?: TagList;
+  }
+  export type IpamResourceDiscoveryAssociationId = string;
+  export type IpamResourceDiscoveryAssociationSet = IpamResourceDiscoveryAssociation[];
+  export type IpamResourceDiscoveryAssociationState = "associate-in-progress"|"associate-complete"|"associate-failed"|"disassociate-in-progress"|"disassociate-complete"|"disassociate-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
+  export type IpamResourceDiscoveryId = string;
+  export type IpamResourceDiscoverySet = IpamResourceDiscovery[];
+  export type IpamResourceDiscoveryState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
   export interface IpamResourceTag {
     /**
      * The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
@@ -23886,7 +24380,7 @@ declare namespace EC2 {
      */
     IpamScopeId?: IpamScopeId;
     /**
-     * The ARN of the scope.
+     * The Amazon Resource Name (ARN) of the scope.
      */
     IpamScopeArn?: ResourceArn;
     /**
@@ -26240,6 +26734,34 @@ declare namespace EC2 {
      * The CIDR of the resource.
      */
     IpamResourceCidr?: IpamResourceCidr;
+  }
+  export interface ModifyIpamResourceDiscoveryRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A resource discovery ID.
+     */
+    IpamResourceDiscoveryId: IpamResourceDiscoveryId;
+    /**
+     * A resource discovery description.
+     */
+    Description?: String;
+    /**
+     * Add operating Regions to the resource discovery. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.
+     */
+    AddOperatingRegions?: AddIpamOperatingRegionSet;
+    /**
+     * Remove operating Regions.
+     */
+    RemoveOperatingRegions?: RemoveIpamOperatingRegionSet;
+  }
+  export interface ModifyIpamResourceDiscoveryResult {
+    /**
+     * A resource discovery.
+     */
+    IpamResourceDiscovery?: IpamResourceDiscovery;
   }
   export interface ModifyIpamResult {
     /**
@@ -29184,13 +29706,21 @@ declare namespace EC2 {
      */
     IpamPoolId: IpamPoolId;
     /**
-     * The CIDR you want to assign to the IPAM pool.
+     * The CIDR you want to assign to the IPAM pool. Either "NetmaskLength" or "Cidr" is required. This value will be null if you specify "NetmaskLength" and will be filled in during the provisioning process.
      */
     Cidr?: String;
     /**
      * A signed document that proves that you are authorized to bring a specified IP address range to Amazon using BYOIP. This option applies to public pools only.
      */
     CidrAuthorizationContext?: IpamCidrAuthorizationContext;
+    /**
+     * The netmask length of the CIDR you'd like to provision to a pool. Can be used for provisioning Amazon-provided IPv6 CIDRs to top-level pools and for provisioning CIDRs to pools with source pools. Cannot be used to provision BYOIP CIDRs to top-level pools. Either "NetmaskLength" or "Cidr" is required.
+     */
+    NetmaskLength?: Integer;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
+     */
+    ClientToken?: String;
   }
   export interface ProvisionIpamPoolCidrResult {
     /**
@@ -30888,7 +31418,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|string;
   export interface ResponseError {
     /**
      * The error code.

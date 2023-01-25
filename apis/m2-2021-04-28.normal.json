@@ -1304,6 +1304,9 @@
           "shape": "Identifier",
           "documentation": "<p>The unique identifier of the application that hosts this batch job.</p>"
         },
+        "batchJobIdentifier": {
+          "shape": "BatchJobIdentifier"
+        },
         "endTime": {
           "shape": "Timestamp",
           "documentation": "<p>The timestamp when this batch job execution ended.</p>"
@@ -1323,6 +1326,10 @@
         "jobType": {
           "shape": "BatchJobType",
           "documentation": "<p>The type of a particular batch job execution.</p>"
+        },
+        "returnCode": {
+          "shape": "String",
+          "documentation": "<p/>"
         },
         "startTime": {
           "shape": "Timestamp",
@@ -2433,6 +2440,9 @@
           "shape": "Identifier",
           "documentation": "<p>The identifier of the application.</p>"
         },
+        "batchJobIdentifier": {
+          "shape": "BatchJobIdentifier"
+        },
         "endTime": {
           "shape": "Timestamp",
           "documentation": "<p>The timestamp when the batch job execution ended.</p>"
@@ -2456,6 +2466,10 @@
         "jobUser": {
           "shape": "String100",
           "documentation": "<p>The user for the job.</p>"
+        },
+        "returnCode": {
+          "shape": "String",
+          "documentation": "<p/>"
         },
         "startTime": {
           "shape": "Timestamp",
