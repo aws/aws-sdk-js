@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EventBridge",
+        "description": "Minor comments for Redshift Serverless workgroup target support."
+    },
+    {
+        "type": "feature",
+        "category": "IoTFleetWise",
+        "description": "Add model validation to BatchCreateVehicle and BatchUpdateVehicle operations that invalidate requests with an empty vehicles list."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Allow FIPS to be used with path-style URLs."
+    }
+]

@@ -372,11 +372,11 @@ declare class EventBridge extends Service {
    */
   putRule(callback?: (err: AWSError, data: EventBridge.Types.PutRuleResponse) => void): Request<EventBridge.Types.PutRuleResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   Redshift Serverless workgroup   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(params: EventBridge.Types.PutTargetsRequest, callback?: (err: AWSError, data: EventBridge.Types.PutTargetsResponse) => void): Request<EventBridge.Types.PutTargetsResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   Redshift Serverless workgroup   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(callback?: (err: AWSError, data: EventBridge.Types.PutTargetsResponse) => void): Request<EventBridge.Types.PutTargetsResponse, AWSError>;
   /**
@@ -672,7 +672,7 @@ declare namespace EventBridge {
      */
     StateReason?: ConnectionStateReason;
     /**
-     * The authorization type specified for the connection.
+     * The authorization type specified for the connection.  OAUTH tokens are refreshed when a 401 or 407 response is returned. 
      */
     AuthorizationType?: ConnectionAuthorizationType;
     /**
@@ -969,7 +969,7 @@ declare namespace EventBridge {
      */
     Description?: ConnectionDescription;
     /**
-     * The type of authorization to use for the connection.
+     * The type of authorization to use for the connection.  OAUTH tokens are refreshed when a 401 or 407 response is returned. 
      */
     AuthorizationType: ConnectionAuthorizationType;
     /**
@@ -1009,7 +1009,7 @@ declare namespace EventBridge {
      */
     RoutingConfig: RoutingConfig;
     /**
-     * Enable or disable event replication.
+     * Enable or disable event replication. The default state is ENABLED which means you must supply a RoleArn. If you don't have a RoleArn or you don't want event replication enabled, set the state to DISABLED.
      */
     ReplicationConfig?: ReplicationConfig;
     /**
@@ -1053,7 +1053,7 @@ declare namespace EventBridge {
   }
   export interface CreateEventBusRequest {
     /**
-     * The name of the new event bus.  Event bus names cannot contain the / character. You can't use the name default for a custom event bus, as this name is already used for your account's default event bus. If this is a partner event bus, the name must exactly match the name of the partner event source that this event bus is matched to.
+     * The name of the new event bus.  Custom event bus names can't contain the / character, but you can use the / character in partner event bus names. In addition, for partner event buses, the name must exactly match the name of the partner event source that this event bus is matched to. You can't use the name default for a custom event bus, as this name is already used for your account's default event bus.
      */
     Name: EventBusName;
     /**
@@ -1700,7 +1700,7 @@ declare namespace EventBridge {
      */
     RoutingConfig?: RoutingConfig;
     /**
-     * Whether event replication was enabled or disabled for this endpoint.
+     * Whether event replication was enabled or disabled for this endpoint. The default state is ENABLED which means you must supply a RoleArn. If you don't have a RoleArn or you don't want event replication enabled, set the state to DISABLED.
      */
     ReplicationConfig?: ReplicationConfig;
     /**
@@ -1712,7 +1712,7 @@ declare namespace EventBridge {
      */
     RoleArn?: IamRoleArn;
     /**
-     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
      */
     EndpointId?: EndpointId;
     /**
@@ -1822,15 +1822,15 @@ declare namespace EventBridge {
   export type HomeRegion = string;
   export interface HttpParameters {
     /**
-     * The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+     * The path parameter values to be used to populate API Gateway API or EventBridge ApiDestination path wildcards ("*").
      */
     PathParameterValues?: PathParameterList;
     /**
-     * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+     * The headers that need to be sent as part of request invoking the API Gateway API or EventBridge ApiDestination.
      */
     HeaderParameters?: HeaderParametersMap;
     /**
-     * The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+     * The query string keys/values that need to be sent as part of request invoking the API Gateway API or EventBridge ApiDestination.
      */
     QueryStringParameters?: QueryStringParametersMap;
   }
@@ -1842,7 +1842,7 @@ declare namespace EventBridge {
      */
     InputPathsMap?: TransformerPaths;
     /**
-     * Input template where you specify placeholders that will be filled with the values of the keys from InputPathsMap to customize the data sent to the target. Enclose each InputPathsMaps value in brackets: &lt;value&gt; The InputTemplate must be valid JSON. If InputTemplate is a JSON object (surrounded by curly braces), the following restrictions apply:   The placeholder cannot be used as an object key.   The following example shows the syntax for using InputPathsMap and InputTemplate.   "InputTransformer":   {   "InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},   "InputTemplate": "&lt;instance&gt; is in state &lt;status&gt;"   }  To have the InputTemplate include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:   "InputTransformer":   {   "InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},   "InputTemplate": "&lt;instance&gt; is in state \"&lt;status&gt;\""   }  The InputTemplate can also be valid JSON with varibles in quotes or out, as in the following example:   "InputTransformer":   {   "InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},   "InputTemplate": '{"myInstance": &lt;instance&gt;,"myStatus": "&lt;instance&gt; is in state \"&lt;status&gt;\""}'   } 
+     * Input template where you specify placeholders that will be filled with the values of the keys from InputPathsMap to customize the data sent to the target. Enclose each InputPathsMaps value in brackets: &lt;value&gt;  If InputTemplate is a JSON object (surrounded by curly braces), the following restrictions apply:   The placeholder cannot be used as an object key.   The following example shows the syntax for using InputPathsMap and InputTemplate.   "InputTransformer":   {   "InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},   "InputTemplate": "&lt;instance&gt; is in state &lt;status&gt;"   }  To have the InputTemplate include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:   "InputTransformer":   {   "InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},   "InputTemplate": "&lt;instance&gt; is in state \"&lt;status&gt;\""   }  The InputTemplate can also be valid JSON with varibles in quotes or out, as in the following example:   "InputTransformer":   {   "InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},   "InputTemplate": '{"myInstance": &lt;instance&gt;,"myStatus": "&lt;instance&gt; is in state \"&lt;status&gt;\""}'   } 
      */
     InputTemplate: TransformerInput;
   }
@@ -2285,7 +2285,7 @@ declare namespace EventBridge {
      */
     Entries: PutEventsRequestEntryList;
     /**
-     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.  When using Java, you must include auth-crt on the class path. 
+     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.  When using Java, you must include auth-crt on the class path. 
      */
     EndpointId?: EndpointId;
   }
@@ -2303,7 +2303,7 @@ declare namespace EventBridge {
      */
     Resources?: EventResourceList;
     /**
-     * Free-form string used to decide what fields to expect in the event detail.
+     * Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
      */
     DetailType?: String;
     /**
@@ -2326,7 +2326,7 @@ declare namespace EventBridge {
      */
     FailedEntryCount?: Integer;
     /**
-     * The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.
+     * The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry. For each record, the index of the response element is the same as the index in the request array.
      */
     Entries?: PutEventsResultEntryList;
   }
@@ -2365,7 +2365,7 @@ declare namespace EventBridge {
      */
     Resources?: EventResourceList;
     /**
-     * A free-form string used to decide what fields to expect in the event detail.
+     * A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
      */
     DetailType?: String;
     /**
@@ -2435,7 +2435,7 @@ declare namespace EventBridge {
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * The event pattern. For more information, see EventBridge event patterns in the Amazon EventBridge User Guide.
+     * The event pattern. For more information, see Amazon EventBridge event patterns in the Amazon EventBridge User Guide.
      */
     EventPattern?: EventPattern;
     /**
@@ -2517,7 +2517,7 @@ declare namespace EventBridge {
      */
     Database: Database;
     /**
-     * The database user name. Required when authenticating using temporary credentials.
+     * The database user name. Required when authenticating using temporary credentials. Do not provide this parameter when connecting to a Redshift Serverless workgroup.
      */
     DbUser?: DbUser;
     /**
@@ -2864,7 +2864,7 @@ declare namespace EventBridge {
      */
     Input?: TargetInput;
     /**
-     * The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. You must use JSON dot notation, not bracket notation. For more information about JSON paths, see JSONPath.
+     * The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. You may use JSON dot notation or bracket notation. For more information about JSON paths, see JSONPath.
      */
     InputPath?: TargetInputPath;
     /**
@@ -2892,7 +2892,7 @@ declare namespace EventBridge {
      */
     SqsParameters?: SqsParameters;
     /**
-     * Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.
+     * Contains the HTTP parameters to use when the target is a API Gateway endpoint or EventBridge ApiDestination. If you specify an API Gateway API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you're using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.
      */
     HttpParameters?: HttpParameters;
     /**
@@ -3147,7 +3147,7 @@ declare namespace EventBridge {
      */
     Description?: EndpointDescription;
     /**
-     * Configure the routing policy, including the health check and secondary Region..
+     * Configure the routing policy, including the health check and secondary Region.
      */
     RoutingConfig?: RoutingConfig;
     /**

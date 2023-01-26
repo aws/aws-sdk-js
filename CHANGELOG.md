@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1302.0-->
+<!--LATEST=2.1303.0-->
 <!--ENTRYINSERT-->
+
+## 2.1303.0
+* feature: EventBridge: Minor comments for Redshift Serverless workgroup target support.
+* feature: IoTFleetWise: Add model validation to BatchCreateVehicle and BatchUpdateVehicle operations that invalidate requests with an empty vehicles list.
+* feature: S3: Allow FIPS to be used with path-style URLs.
 
 ## 2.1302.0
 * feature: CloudFormation: Enabled FIPS aws-us-gov endpoints in SDK.

@@ -4910,7 +4910,8 @@
       "type": "list",
       "member": {
         "shape": "CreateVehicleRequestItem"
-      }
+      },
+      "min": 1
     },
     "createVehicleResponses": {
       "type": "list",
@@ -5056,7 +5057,8 @@
       "type": "list",
       "member": {
         "shape": "UpdateVehicleRequestItem"
-      }
+      },
+      "min": 1
     },
     "updateVehicleResponseItems": {
       "type": "list",
