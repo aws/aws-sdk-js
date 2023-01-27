@@ -813,6 +813,10 @@ declare namespace Outposts {
      * The fulfillment date of the order.
      */
     OrderFulfilledDate?: ISO8601Timestamp;
+    /**
+     * The payment term.
+     */
+    PaymentTerm?: PaymentTerm;
   }
   export type OrderId = string;
   export type OrderStatus = "RECEIVED"|"PENDING"|"PROCESSING"|"INSTALLING"|"FULFILLED"|"CANCELLED"|"PREPARING"|"IN_PROGRESS"|"COMPLETED"|"ERROR"|string;

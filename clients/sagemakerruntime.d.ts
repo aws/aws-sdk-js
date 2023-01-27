@@ -20,11 +20,11 @@ declare class SageMakerRuntime extends Service {
    */
   invokeEndpoint(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointOutput, AWSError>;
   /**
-   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner. Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before the you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. Calls to InvokeEndpointAsync are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
+   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner. Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. Calls to InvokeEndpointAsync are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
    */
   invokeEndpointAsync(params: SageMakerRuntime.Types.InvokeEndpointAsyncInput, callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointAsyncOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointAsyncOutput, AWSError>;
   /**
-   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner. Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before the you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. Calls to InvokeEndpointAsync are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
+   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner. Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. Calls to InvokeEndpointAsync are authenticated by using Amazon Web Services Signature Version 4. For information, see Authenticating Requests (Amazon Web Services Signature Version 4) in the Amazon S3 API Reference.
    */
   invokeEndpointAsync(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointAsyncOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointAsyncOutput, AWSError>;
 }
@@ -36,6 +36,7 @@ declare namespace SageMakerRuntime {
   export type Header = string;
   export type InferenceId = string;
   export type InputLocationHeader = string;
+  export type InvocationTimeoutSecondsHeader = number;
   export interface InvokeEndpointAsyncInput {
     /**
      * The name of the endpoint that you specified when you created the endpoint using the  CreateEndpoint  API.
@@ -65,6 +66,10 @@ declare namespace SageMakerRuntime {
      * Maximum age in seconds a request can be in the queue before it is marked as expired.
      */
     RequestTTLSeconds?: RequestTTLSecondsHeader;
+    /**
+     * Maximum amount of time in seconds a request can be processed before it is marked as expired.
+     */
+    InvocationTimeoutSeconds?: InvocationTimeoutSecondsHeader;
   }
   export interface InvokeEndpointAsyncOutput {
     /**

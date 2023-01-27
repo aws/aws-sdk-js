@@ -5611,6 +5611,10 @@
         "ContainerArguments": {
           "shape": "TrainingContainerArguments",
           "documentation": "<p>The arguments for a container used to run a training job. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html\">How Amazon SageMaker Runs Your Training Image</a> for additional information.</p>"
+        },
+        "TrainingImageConfig": {
+          "shape": "TrainingImageConfig",
+          "documentation": "<p>The configuration to use an image from a private Docker registry for a training job.</p>"
         }
       },
       "documentation": "<p>Specifies the training algorithm to use in a <a>CreateTrainingJob</a> request.</p> <p>For more information about algorithms provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. For information about using your own algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>. </p>"
@@ -33549,6 +33553,23 @@
       "max": 512,
       "pattern": "[\\S\\s]*"
     },
+    "TrainingImageConfig": {
+      "type": "structure",
+      "required": [
+        "TrainingRepositoryAccessMode"
+      ],
+      "members": {
+        "TrainingRepositoryAccessMode": {
+          "shape": "TrainingRepositoryAccessMode",
+          "documentation": "<p>The method that your training job will use to gain access to the images in your private Docker registry. For access to an image in a private Docker registry, set to <code>Vpc</code>.</p>"
+        },
+        "TrainingRepositoryAuthConfig": {
+          "shape": "TrainingRepositoryAuthConfig",
+          "documentation": "<p>An object containing authentication information for a private Docker registry containing your training images.</p>"
+        }
+      },
+      "documentation": "<p>The configuration to use an image from a private Docker registry for a training job.</p>"
+    },
     "TrainingInputMode": {
       "type": "string",
       "documentation": "<p>The training input mode that the algorithm supports. For more information about input modes, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>.</p> <p> <b>Pipe mode</b> </p> <p>If an algorithm supports <code>Pipe</code> mode, Amazon SageMaker streams data directly from Amazon S3 to the container.</p> <p> <b>File mode</b> </p> <p>If an algorithm supports <code>File</code> mode, SageMaker downloads the training data from S3 to the provisioned ML storage volume, and mounts the directory to the Docker volume for the training container.</p> <p>You must provision the ML storage volume with sufficient capacity to accommodate the data downloaded from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container uses the ML storage volume to also store intermediate information, if any.</p> <p>For distributed algorithms, training data is distributed uniformly. Your training duration is predictable if the input data objects sizes are approximately the same. SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed when one host in a training cluster is overloaded, thus becoming a bottleneck in training.</p> <p> <b>FastFile mode</b> </p> <p>If an algorithm supports <code>FastFile</code> mode, SageMaker streams data directly from S3 to the container with no code changes, and provides file system access to the data. Users can author their training script to interact with these files as if they were stored on disk.</p> <p> <code>FastFile</code> mode works best when the data is read sequentially. Augmented manifest files aren't supported. The startup time is lower when there are fewer files in the S3 bucket provided.</p>",
@@ -33930,6 +33951,32 @@
         }
       },
       "documentation": "<p>Provides summary information about a training job.</p>"
+    },
+    "TrainingRepositoryAccessMode": {
+      "type": "string",
+      "enum": [
+        "Platform",
+        "Vpc"
+      ]
+    },
+    "TrainingRepositoryAuthConfig": {
+      "type": "structure",
+      "required": [
+        "TrainingRepositoryCredentialsProviderArn"
+      ],
+      "members": {
+        "TrainingRepositoryCredentialsProviderArn": {
+          "shape": "TrainingRepositoryCredentialsProviderArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function used to give SageMaker access credentials to your private Docker registry.</p>"
+        }
+      },
+      "documentation": "<p>An object containing authentication information for a private Docker registry.</p>"
+    },
+    "TrainingRepositoryCredentialsProviderArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:[\\p{Alnum}\\-]+:lambda:[\\p{Alnum}\\-]+:[0-9]{12}:function:.*"
     },
     "TrainingSpecification": {
       "type": "structure",

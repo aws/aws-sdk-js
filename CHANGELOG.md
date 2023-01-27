@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1303.0-->
+<!--LATEST=2.1304.0-->
 <!--ENTRYINSERT-->
+
+## 2.1304.0
+* feature: AppStream: Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.
+* feature: ApplicationAutoScaling: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: ElasticBeanstalk: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Fis: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Glacier: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Greengrass: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: GreengrassV2: Enabled FIPS endpoints for GovCloud (US) in SDK.
+* feature: MediaTailor: This release introduces the As Run logging type, along with API and documentation updates.
+* feature: Outposts: Adding support for payment term in GetOrder, CreateOrder responses.
+* feature: SageMaker: This release supports running SageMaker Training jobs with container images that are in a private Docker registry.
+* feature: SageMakerRuntime: Amazon SageMaker Runtime which supports InvokeEndpointAsync asynchronously can now invoke endpoints with custom timeout values. Asynchronous invocations support longer processing times.
+* feature: ServerlessApplicationRepository: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
 
 ## 2.1303.0
 * feature: EventBridge: Minor comments for Redshift Serverless workgroup target support.

@@ -12,6 +12,14 @@ declare class MediaTailor extends Service {
   constructor(options?: MediaTailor.Types.ClientConfiguration)
   config: Config & MediaTailor.Types.ClientConfiguration;
   /**
+   * Configures Amazon CloudWatch log settings for a channel.
+   */
+  configureLogsForChannel(params: MediaTailor.Types.ConfigureLogsForChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForChannelResponse) => void): Request<MediaTailor.Types.ConfigureLogsForChannelResponse, AWSError>;
+  /**
+   * Configures Amazon CloudWatch log settings for a channel.
+   */
+  configureLogsForChannel(callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForChannelResponse) => void): Request<MediaTailor.Types.ConfigureLogsForChannelResponse, AWSError>;
+  /**
    * Amazon CloudWatch log settings for a playback configuration.
    */
   configureLogsForPlaybackConfiguration(params: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
@@ -476,6 +484,10 @@ declare namespace MediaTailor {
      */
     LastModifiedTime?: __timestampUnix;
     /**
+     * The log configuration.
+     */
+    LogConfiguration: LogConfigurationForChannel;
+    /**
      * The channel's output properties.
      */
     Outputs: ResponseOutputs;
@@ -495,6 +507,26 @@ declare namespace MediaTailor {
   export type ChannelState = "RUNNING"|"STOPPED"|string;
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
+  export interface ConfigureLogsForChannelRequest {
+    /**
+     * The name of the channel.
+     */
+    ChannelName: __string;
+    /**
+     * The types of logs to collect.
+     */
+    LogTypes: LogTypes;
+  }
+  export interface ConfigureLogsForChannelResponse {
+    /**
+     * The name of the channel.
+     */
+    ChannelName?: __string;
+    /**
+     * The types of logs collected.
+     */
+    LogTypes?: LogTypes;
+  }
   export interface ConfigureLogsForPlaybackConfigurationRequest {
     /**
      * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100 
@@ -1018,6 +1050,10 @@ declare namespace MediaTailor {
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
+    /**
+     * The log configuration for the channel.
+     */
+    LogConfiguration: LogConfigurationForChannel;
     /**
      * The channel's output properties.
      */
@@ -1619,6 +1655,14 @@ declare namespace MediaTailor {
      */
     PercentEnabled: __integer;
   }
+  export interface LogConfigurationForChannel {
+    /**
+     * The log types.
+     */
+    LogTypes?: LogTypes;
+  }
+  export type LogType = "AS_RUN"|string;
+  export type LogTypes = LogType[];
   export interface ManifestProcessingRules {
     /**
      * For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest to the MediaTailor personalized manifest. No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad break, MediaTailor will not set the value to 0.
