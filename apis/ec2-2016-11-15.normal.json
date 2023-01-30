@@ -9746,11 +9746,11 @@
       "type": "structure",
       "members": {
         "CertificateArn": {
-          "shape": "ResourceArn",
+          "shape": "CertificateId",
           "documentation": "<p>The ARN of the ACM certificate with which to associate the IAM role.</p>"
         },
         "RoleArn": {
-          "shape": "ResourceArn",
+          "shape": "RoleId",
           "documentation": "<p>The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.</p>"
         },
         "DryRun": {
@@ -12232,6 +12232,9 @@
         }
       },
       "documentation": "<p>Information about the client certificate to be used for authentication.</p>"
+    },
+    "CertificateId": {
+      "type": "string"
     },
     "CidrAuthorizationContext": {
       "type": "structure",
@@ -14963,7 +14966,6 @@
     "CreateLocalGatewayRouteRequest": {
       "type": "structure",
       "required": [
-        "DestinationCidrBlock",
         "LocalGatewayRouteTableId"
       ],
       "members": {
@@ -14986,6 +14988,10 @@
         "NetworkInterfaceId": {
           "shape": "NetworkInterfaceId",
           "documentation": "<p>The ID of the network interface.</p>"
+        },
+        "DestinationPrefixListId": {
+          "shape": "PrefixListResourceId",
+          "documentation": "<p> The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request. </p>"
         }
       }
     },
@@ -18639,7 +18645,6 @@
     "DeleteLocalGatewayRouteRequest": {
       "type": "structure",
       "required": [
-        "DestinationCidrBlock",
         "LocalGatewayRouteTableId"
       ],
       "members": {
@@ -18654,6 +18659,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "DestinationPrefixListId": {
+          "shape": "PrefixListResourceId",
+          "documentation": "<p> Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request. </p>"
         }
       }
     },
@@ -19304,7 +19313,7 @@
       ],
       "members": {
         "TrafficMirrorFilterRuleId": {
-          "shape": "TrafficMirrorFilterRuleId",
+          "shape": "TrafficMirrorFilterRuleIdWithResolver",
           "documentation": "<p>The ID of the Traffic Mirror rule.</p>"
         },
         "DryRun": {
@@ -27539,11 +27548,11 @@
       "type": "structure",
       "members": {
         "CertificateArn": {
-          "shape": "ResourceArn",
+          "shape": "CertificateId",
           "documentation": "<p>The ARN of the ACM certificate from which to disassociate the IAM role.</p>"
         },
         "RoleArn": {
-          "shape": "ResourceArn",
+          "shape": "RoleId",
           "documentation": "<p>The ARN of the IAM role to disassociate.</p>"
         },
         "DryRun": {
@@ -31049,7 +31058,7 @@
       "type": "structure",
       "members": {
         "CertificateArn": {
-          "shape": "ResourceArn",
+          "shape": "CertificateId",
           "documentation": "<p>The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon S3 object information.</p>"
         },
         "DryRun": {
@@ -35523,6 +35532,9 @@
         "locationName": "InstanceId"
       }
     },
+    "InstanceIdWithVolumeResolver": {
+      "type": "string"
+    },
     "InstanceIdsSet": {
       "type": "list",
       "member": {
@@ -36346,9 +36358,12 @@
     },
     "InstanceSpecification": {
       "type": "structure",
+      "required": [
+        "InstanceId"
+      ],
       "members": {
         "InstanceId": {
-          "shape": "InstanceId",
+          "shape": "InstanceIdWithVolumeResolver",
           "documentation": "<p>The instance to specify which volumes should be snapshotted.</p>"
         },
         "ExcludeBootVolume": {
@@ -40778,6 +40793,11 @@
           "shape": "NetworkInterfaceId",
           "documentation": "<p>The ID of the network interface.</p>",
           "locationName": "networkInterfaceId"
+        },
+        "DestinationPrefixListId": {
+          "shape": "PrefixListResourceId",
+          "documentation": "<p> The ID of the prefix list. </p>",
+          "locationName": "destinationPrefixListId"
         }
       },
       "documentation": "<p>Describes a route for a local gateway route table.</p>"
@@ -42570,7 +42590,6 @@
     "ModifyLocalGatewayRouteRequest": {
       "type": "structure",
       "required": [
-        "DestinationCidrBlock",
         "LocalGatewayRouteTableId"
       ],
       "members": {
@@ -42593,6 +42612,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "DestinationPrefixListId": {
+          "shape": "PrefixListResourceId",
+          "documentation": "<p> The ID of the prefix list. Use a prefix list in place of <code>DestinationCidrBlock</code>. You cannot use <code>DestinationPrefixListId</code> and <code>DestinationCidrBlock</code> in the same request. </p>"
         }
       }
     },
@@ -43018,7 +43041,7 @@
       ],
       "members": {
         "TrafficMirrorFilterRuleId": {
-          "shape": "TrafficMirrorFilterRuleId",
+          "shape": "TrafficMirrorFilterRuleIdWithResolver",
           "documentation": "<p>The ID of the Traffic Mirror rule.</p>"
         },
         "TrafficDirection": {
@@ -50621,6 +50644,9 @@
         }
       }
     },
+    "RoleId": {
+      "type": "string"
+    },
     "RootDeviceType": {
       "type": "string",
       "enum": [
@@ -51693,7 +51719,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify <code>supernet-of-match</code> as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route.</p> </li> <li> <p> <code>type</code> - The route type.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify <code>supernet-of-match</code> as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route.</p> </li> <li> <p> <code>type</code> - The route type.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -55041,7 +55067,7 @@
         "shape": "TrafficMirrorFilterRuleField"
       }
     },
-    "TrafficMirrorFilterRuleId": {
+    "TrafficMirrorFilterRuleIdWithResolver": {
       "type": "string"
     },
     "TrafficMirrorFilterRuleList": {

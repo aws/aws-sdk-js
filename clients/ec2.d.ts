@@ -5957,11 +5957,11 @@ declare namespace EC2 {
     /**
      * The ARN of the ACM certificate with which to associate the IAM role.
      */
-    CertificateArn?: ResourceArn;
+    CertificateArn?: CertificateId;
     /**
      * The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
      */
-    RoleArn?: ResourceArn;
+    RoleArn?: RoleId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -7383,6 +7383,7 @@ declare namespace EC2 {
      */
     ClientRootCertificateChainArn?: String;
   }
+  export type CertificateId = string;
   export interface CidrAuthorizationContext {
     /**
      * The plain-text authorization message for the prefix and account.
@@ -9224,7 +9225,7 @@ declare namespace EC2 {
     /**
      * The CIDR range used for destination matches. Routing decisions are based on the most specific match.
      */
-    DestinationCidrBlock: String;
+    DestinationCidrBlock?: String;
     /**
      * The ID of the local gateway route table.
      */
@@ -9241,6 +9242,10 @@ declare namespace EC2 {
      * The ID of the network interface.
      */
     NetworkInterfaceId?: NetworkInterfaceId;
+    /**
+     *  The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock. You cannot use DestinationPrefixListId and DestinationCidrBlock in the same request. 
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
   }
   export interface CreateLocalGatewayRouteResult {
     /**
@@ -11760,7 +11765,7 @@ declare namespace EC2 {
     /**
      * The CIDR range for the route. This must match the CIDR for the route exactly.
      */
-    DestinationCidrBlock: String;
+    DestinationCidrBlock?: String;
     /**
      * The ID of the local gateway route table.
      */
@@ -11769,6 +11774,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  Use a prefix list in place of DestinationCidrBlock. You cannot use DestinationPrefixListId and DestinationCidrBlock in the same request. 
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
   }
   export interface DeleteLocalGatewayRouteResult {
     /**
@@ -12158,7 +12167,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror rule.
      */
-    TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleId;
+    TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleIdWithResolver;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -17889,11 +17898,11 @@ declare namespace EC2 {
     /**
      * The ARN of the ACM certificate from which to disassociate the IAM role.
      */
-    CertificateArn?: ResourceArn;
+    CertificateArn?: CertificateId;
     /**
      * The ARN of the IAM role to disassociate.
      */
-    RoleArn?: ResourceArn;
+    RoleArn?: RoleId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -19963,7 +19972,7 @@ declare namespace EC2 {
     /**
      * The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon S3 object information.
      */
-    CertificateArn?: ResourceArn;
+    CertificateArn?: CertificateId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -22906,6 +22915,7 @@ declare namespace EC2 {
   export type InstanceIdList = InstanceId[];
   export type InstanceIdSet = InstanceId[];
   export type InstanceIdStringList = InstanceId[];
+  export type InstanceIdWithVolumeResolver = string;
   export type InstanceIdsSet = InstanceId[];
   export type InstanceInterruptionBehavior = "hibernate"|"stop"|"terminate"|string;
   export interface InstanceIpv4Prefix {
@@ -23452,7 +23462,7 @@ declare namespace EC2 {
     /**
      * The instance to specify which volumes should be snapshotted.
      */
-    InstanceId?: InstanceId;
+    InstanceId: InstanceIdWithVolumeResolver;
     /**
      * Excludes the root volume from being snapshotted.
      */
@@ -25654,6 +25664,10 @@ declare namespace EC2 {
      * The ID of the network interface.
      */
     NetworkInterfaceId?: NetworkInterfaceId;
+    /**
+     *  The ID of the prefix list. 
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
   }
   export type LocalGatewayRouteList = LocalGatewayRoute[];
   export type LocalGatewayRouteState = "pending"|"active"|"blackhole"|"deleting"|"deleted"|string;
@@ -26821,7 +26835,7 @@ declare namespace EC2 {
     /**
      * The CIDR block used for destination matches. The value that you provide must match the CIDR of an existing route in the table.
      */
-    DestinationCidrBlock: String;
+    DestinationCidrBlock?: String;
     /**
      * The ID of the local gateway route table.
      */
@@ -26838,6 +26852,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock. You cannot use DestinationPrefixListId and DestinationCidrBlock in the same request. 
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
   }
   export interface ModifyLocalGatewayRouteResult {
     /**
@@ -27139,7 +27157,7 @@ declare namespace EC2 {
     /**
      * The ID of the Traffic Mirror rule.
      */
-    TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleId;
+    TrafficMirrorFilterRuleId: TrafficMirrorFilterRuleIdWithResolver;
     /**
      * The type of traffic to assign to the rule.
      */
@@ -31844,6 +31862,7 @@ declare namespace EC2 {
      */
     UnknownIpPermissions?: IpPermissionList;
   }
+  export type RoleId = string;
   export type RootDeviceType = "ebs"|"instance-store"|string;
   export type RootDeviceTypeList = RootDeviceType[];
   export interface Route {
@@ -32587,7 +32606,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
-     * One or more filters.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route.    type - The route type.  
+     * One or more filters.    prefix-list-id - The ID of the prefix list.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route.    type - The route type.  
      */
     Filters?: FilterList;
     /**
@@ -34621,7 +34640,7 @@ declare namespace EC2 {
   }
   export type TrafficMirrorFilterRuleField = "destination-port-range"|"source-port-range"|"protocol"|"description"|string;
   export type TrafficMirrorFilterRuleFieldList = TrafficMirrorFilterRuleField[];
-  export type TrafficMirrorFilterRuleId = string;
+  export type TrafficMirrorFilterRuleIdWithResolver = string;
   export type TrafficMirrorFilterRuleList = TrafficMirrorFilterRule[];
   export type TrafficMirrorFilterSet = TrafficMirrorFilter[];
   export type TrafficMirrorNetworkService = "amazon-dns"|string;

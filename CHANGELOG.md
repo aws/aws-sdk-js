@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1304.0-->
+<!--LATEST=2.1305.0-->
 <!--ENTRYINSERT-->
+
+## 2.1305.0
+* feature: CloudDirectory: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: CloudFormation: This feature provides a method of obtaining which regions a stackset has stack instances deployed in.
+* feature: DLM: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Discovery: Update ImportName validation to 255 from the current length of 100
+* feature: EC2: We add Prefix Lists as a new route destination option for LocalGatewayRoutes. This will allow customers to create routes to Prefix Lists. Prefix List routes will allow customers to group individual CIDR routes with the same target into a single route.
+* feature: Imagebuilder: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Kafka: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: MediaConvert: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: SWF: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
 
 ## 2.1304.0
 * feature: AppStream: Fixing the issue where Appstream waiters hang for fleet_started and fleet_stopped.

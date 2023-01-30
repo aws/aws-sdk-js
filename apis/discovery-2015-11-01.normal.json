@@ -2031,7 +2031,7 @@
     },
     "ImportTaskFilterValue": {
       "type": "string",
-      "max": 100,
+      "max": 255,
       "min": 1
     },
     "ImportTaskFilterValueList": {
@@ -2055,7 +2055,7 @@
     },
     "ImportTaskName": {
       "type": "string",
-      "max": 100,
+      "max": 255,
       "min": 1,
       "pattern": "[\\s\\S]*\\S[\\s\\S]*"
     },

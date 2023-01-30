@@ -3591,6 +3591,7 @@ declare namespace CloudFormation {
      * Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.
      */
     ManagedExecution?: ManagedExecution;
+    Regions?: RegionList;
   }
   export type StackSetARN = string;
   export interface StackSetDriftDetectionDetails {
