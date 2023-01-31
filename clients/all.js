@@ -338,5 +338,6 @@ module.exports = {
   KinesisVideoWebRTCStorage: require('./kinesisvideowebrtcstorage'),
   LicenseManagerLinuxSubscriptions: require('./licensemanagerlinuxsubscriptions'),
   KendraRanking: require('./kendraranking'),
-  CleanRooms: require('./cleanrooms')
+  CleanRooms: require('./cleanrooms'),
+  CloudTrailData: require('./cloudtraildata')
 };

@@ -867,6 +867,13 @@ declare namespace OpenSearch {
   }
   export type ConnectionAlias = string;
   export type ConnectionId = string;
+  export type ConnectionMode = "DIRECT"|"VPC_ENDPOINT"|string;
+  export interface ConnectionProperties {
+    /**
+     * The endpoint of the remote domain.
+     */
+    Endpoint?: Endpoint;
+  }
   export type ConnectionStatusMessage = string;
   export interface CreateDomainRequest {
     /**
@@ -953,6 +960,10 @@ declare namespace OpenSearch {
      * Name of the connection.
      */
     ConnectionAlias: ConnectionAlias;
+    /**
+     * The connection mode.
+     */
+    ConnectionMode?: ConnectionMode;
   }
   export interface CreateOutboundConnectionResponse {
     /**
@@ -975,6 +986,14 @@ declare namespace OpenSearch {
      * The unique identifier for the created outbound connection, which is used for subsequent operations on the connection.
      */
     ConnectionId?: ConnectionId;
+    /**
+     * The connection mode.
+     */
+    ConnectionMode?: ConnectionMode;
+    /**
+     * The ConnectionProperties for the newly created connection.
+     */
+    ConnectionProperties?: ConnectionProperties;
   }
   export interface CreatePackageRequest {
     /**
@@ -1862,6 +1881,10 @@ declare namespace OpenSearch {
      * The current status of the connection.
      */
     ConnectionStatus?: InboundConnectionStatus;
+    /**
+     * The connection mode.
+     */
+    ConnectionMode?: ConnectionMode;
   }
   export interface InboundConnectionStatus {
     /**
@@ -2230,6 +2253,14 @@ declare namespace OpenSearch {
      * Status of the connection.
      */
     ConnectionStatus?: OutboundConnectionStatus;
+    /**
+     * The connection mode.
+     */
+    ConnectionMode?: ConnectionMode;
+    /**
+     * Properties for the outbound connection.
+     */
+    ConnectionProperties?: ConnectionProperties;
   }
   export interface OutboundConnectionStatus {
     /**

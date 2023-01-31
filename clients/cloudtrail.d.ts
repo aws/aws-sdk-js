@@ -12,11 +12,11 @@ declare class CloudTrail extends Service {
   constructor(options?: CloudTrail.Types.ClientConfiguration)
   config: Config & CloudTrail.Types.ClientConfiguration;
   /**
-   * Adds one or more tags to a trail or event data store, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
+   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
    */
   addTags(params: CloudTrail.Types.AddTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Adds one or more tags to a trail or event data store, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
+   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
@@ -27,6 +27,14 @@ declare class CloudTrail extends Service {
    * Cancels a query if the query is not in a terminated state, such as CANCELLED, FAILED, TIMED_OUT, or FINISHED. You must specify an ARN value for EventDataStore. The ID of the query that you want to cancel is also required. When you run CancelQuery, the query status might show as CANCELLED even if the operation is not yet finished.
    */
   cancelQuery(callback?: (err: AWSError, data: CloudTrail.Types.CancelQueryResponse) => void): Request<CloudTrail.Types.CancelQueryResponse, AWSError>;
+  /**
+   * Creates a channel for CloudTrail to ingest events from a partner or external source. After you create a channel, a CloudTrail Lake event data store can log events from the partner or source that you specify.
+   */
+  createChannel(params: CloudTrail.Types.CreateChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateChannelResponse) => void): Request<CloudTrail.Types.CreateChannelResponse, AWSError>;
+  /**
+   * Creates a channel for CloudTrail to ingest events from a partner or external source. After you create a channel, a CloudTrail Lake event data store can log events from the partner or source that you specify.
+   */
+  createChannel(callback?: (err: AWSError, data: CloudTrail.Types.CreateChannelResponse) => void): Request<CloudTrail.Types.CreateChannelResponse, AWSError>;
   /**
    * Creates a new event data store.
    */
@@ -44,6 +52,14 @@ declare class CloudTrail extends Service {
    */
   createTrail(callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
   /**
+   * Deletes a channel.
+   */
+  deleteChannel(params: CloudTrail.Types.DeleteChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteChannelResponse) => void): Request<CloudTrail.Types.DeleteChannelResponse, AWSError>;
+  /**
+   * Deletes a channel.
+   */
+  deleteChannel(callback?: (err: AWSError, data: CloudTrail.Types.DeleteChannelResponse) => void): Request<CloudTrail.Types.DeleteChannelResponse, AWSError>;
+  /**
    * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store; this operation cannot work if TerminationProtectionEnabled is True. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
    */
   deleteEventDataStore(params: CloudTrail.Types.DeleteEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
@@ -51,6 +67,14 @@ declare class CloudTrail extends Service {
    * Disables the event data store specified by EventDataStore, which accepts an event data store ARN. After you run DeleteEventDataStore, the event data store enters a PENDING_DELETION state, and is automatically deleted after a wait period of seven days. TerminationProtectionEnabled must be set to False on the event data store; this operation cannot work if TerminationProtectionEnabled is True. After you run DeleteEventDataStore on an event data store, you cannot run ListQueries, DescribeQuery, or GetQueryResults on queries that are using an event data store in a PENDING_DELETION state. An event data store in the PENDING_DELETION state does not incur costs.
    */
   deleteEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.DeleteEventDataStoreResponse) => void): Request<CloudTrail.Types.DeleteEventDataStoreResponse, AWSError>;
+  /**
+   *  Deletes the resource-based policy attached to the CloudTrail channel. 
+   */
+  deleteResourcePolicy(params: CloudTrail.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteResourcePolicyResponse) => void): Request<CloudTrail.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   *  Deletes the resource-based policy attached to the CloudTrail channel. 
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.DeleteResourcePolicyResponse) => void): Request<CloudTrail.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
    * Deletes a trail. This operation must be called from the region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
    */
@@ -84,11 +108,11 @@ declare class CloudTrail extends Service {
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
+   *  Returns information about a specific channel. 
    */
   getChannel(params: CloudTrail.Types.GetChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
   /**
-   *  Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
+   *  Returns information about a specific channel. 
    */
   getChannel(callback?: (err: AWSError, data: CloudTrail.Types.GetChannelResponse) => void): Request<CloudTrail.Types.GetChannelResponse, AWSError>;
   /**
@@ -132,6 +156,14 @@ declare class CloudTrail extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: CloudTrail.Types.GetQueryResultsResponse) => void): Request<CloudTrail.Types.GetQueryResultsResponse, AWSError>;
   /**
+   *  Retrieves the JSON text of the resource-based policy document attached to the CloudTrail channel. 
+   */
+  getResourcePolicy(params: CloudTrail.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetResourcePolicyResponse) => void): Request<CloudTrail.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   *  Retrieves the JSON text of the resource-based policy document attached to the CloudTrail channel. 
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.GetResourcePolicyResponse) => void): Request<CloudTrail.Types.GetResourcePolicyResponse, AWSError>;
+  /**
    * Returns settings information for a specified trail.
    */
   getTrail(params: CloudTrail.Types.GetTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
@@ -148,11 +180,11 @@ declare class CloudTrail extends Service {
    */
   getTrailStatus(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
-   *  Lists the channels in the current account, and their source names. Amazon Web Services services create service-linked channels get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
+   *  Lists the channels in the current account, and their source names. 
    */
   listChannels(params: CloudTrail.Types.ListChannelsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
   /**
-   *  Lists the channels in the current account, and their source names. Amazon Web Services services create service-linked channels get information about CloudTrail events on your behalf. For more information about service-linked channels, see Viewing service-linked channels for CloudTrail by using the CLI. 
+   *  Lists the channels in the current account, and their source names. 
    */
   listChannels(callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
   /**
@@ -196,11 +228,11 @@ declare class CloudTrail extends Service {
    */
   listQueries(callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
   /**
-   * Lists the tags for the trail or event data store in the current region.
+   * Lists the tags for the trail, event data store, or channel in the current region.
    */
   listTags(params: CloudTrail.Types.ListTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
-   * Lists the tags for the trail or event data store in the current region.
+   * Lists the tags for the trail, event data store, or channel in the current region.
    */
   listTags(callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
@@ -236,6 +268,14 @@ declare class CloudTrail extends Service {
    */
   putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
+   *  Attaches a resource-based permission policy to a CloudTrail channel that is used for an integration with an event source outside of Amazon Web Services. For more information about resource-based policies, see CloudTrail resource-based policy examples in the CloudTrail User Guide. 
+   */
+  putResourcePolicy(params: CloudTrail.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutResourcePolicyResponse) => void): Request<CloudTrail.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   *  Attaches a resource-based permission policy to a CloudTrail channel that is used for an integration with an event source outside of Amazon Web Services. For more information about resource-based policies, see CloudTrail resource-based policy examples in the CloudTrail User Guide. 
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.PutResourcePolicyResponse) => void): Request<CloudTrail.Types.PutResourcePolicyResponse, AWSError>;
+  /**
    * Registers an organization’s member account as the CloudTrail delegated administrator.
    */
   registerOrganizationDelegatedAdmin(params: CloudTrail.Types.RegisterOrganizationDelegatedAdminRequest, callback?: (err: AWSError, data: CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse, AWSError>;
@@ -244,11 +284,11 @@ declare class CloudTrail extends Service {
    */
   registerOrganizationDelegatedAdmin(callback?: (err: AWSError, data: CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse) => void): Request<CloudTrail.Types.RegisterOrganizationDelegatedAdminResponse, AWSError>;
   /**
-   * Removes the specified tags from a trail or event data store.
+   * Removes the specified tags from a trail, event data store, or channel.
    */
   removeTags(params: CloudTrail.Types.RemoveTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
-   * Removes the specified tags from a trail or event data store.
+   * Removes the specified tags from a trail, event data store, or channel.
    */
   removeTags(callback?: (err: AWSError, data: CloudTrail.Types.RemoveTagsResponse) => void): Request<CloudTrail.Types.RemoveTagsResponse, AWSError>;
   /**
@@ -260,11 +300,11 @@ declare class CloudTrail extends Service {
    */
   restoreEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
   /**
-   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required.    If the destination event data store is for an organization, you must use the management account to import trail events. You cannot use the delegated administrator account for the organization.  
    */
   startImport(params: CloudTrail.Types.StartImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
   /**
-   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required. 
+   *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required.    If the destination event data store is for an organization, you must use the management account to import trail events. You cannot use the delegated administrator account for the organization.  
    */
   startImport(callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
   /**
@@ -300,11 +340,19 @@ declare class CloudTrail extends Service {
    */
   stopLogging(callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
   /**
-   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+   * Updates a channel specified by a required channel ARN or UUID.
+   */
+  updateChannel(params: CloudTrail.Types.UpdateChannelRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateChannelResponse) => void): Request<CloudTrail.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates a channel specified by a required channel ARN or UUID.
+   */
+  updateChannel(callback?: (err: AWSError, data: CloudTrail.Types.UpdateChannelResponse) => void): Request<CloudTrail.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management and data events in your event data store. For more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.   For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
    */
   updateEventDataStore(params: CloudTrail.Types.UpdateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
-   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. AdvancedEventSelectors includes or excludes management and data events in your event data store; for more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management and data events in your event data store. For more information about AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.   For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
    */
   updateEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
@@ -320,7 +368,7 @@ declare namespace CloudTrail {
   export type AccountId = string;
   export interface AddTagsRequest {
     /**
-     * Specifies the ARN of the trail or event data store to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail, event data store, or channel to which one or more tags will be added. The format of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  The format of an event data store ARN is: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  The format of a channel ARN is: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceId: String;
     /**
@@ -343,7 +391,7 @@ declare namespace CloudTrail {
   export type AdvancedEventSelectors = AdvancedEventSelector[];
   export interface AdvancedFieldSelector {
     /**
-     *  A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.      readOnly  - Optional. Can be set to Equals a value of true or false. If you do not add this field, CloudTrail logs both read and write events. A value of true logs only read events. A value of false logs only write events.     eventSource  - For filtering management events only. This can be set only to NotEquals kms.amazonaws.com.     eventName  - Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld, separated by commas.     eventCategory  - This is required. It must be set to Equals, and the value must be Management or Data.     resources.type  - This ﬁeld is required. resources.type can only use the Equals operator, and the value can be one of the following:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table     AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table     You can have only one resources.type ﬁeld per selector. To log data events on more than one resource type, add another selector.     resources.ARN  - You can use any operator with resources.ARN, but if you use Equals or NotEquals, the value must exactly match the ARN of a valid resource of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals AWS::S3::Object, the ARN must be in one of the following formats. To log all data events for all objects in a specific S3 bucket, use the StartsWith operator, and include only the bucket ARN as the matching value. The trailing slash is intentional; do not exclude it. Replace the text between less than and greater than symbols (&lt;&gt;) with resource-specific information.     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/&lt;object_path&gt;/    When resources.type equals AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in one of the following formats. To log events on all objects in an S3 access point, we recommend that you use only the access point ARN, don’t include the object path, and use the StartsWith or NotStartsWith operators.    arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;     arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;/object/&lt;object_path&gt;    When resources.type equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:lambda:&lt;region&gt;:&lt;account_ID&gt;:function:&lt;function_name&gt;    When resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;    When resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-outposts:&lt;region&gt;:&lt;account_ID&gt;:&lt;object_path&gt;    When resources.type equals AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:managedblockchain:&lt;region&gt;:&lt;account_ID&gt;:nodes/&lt;node_ID&gt;    When resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-object-lambda:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;    When resources.type equals AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:ec2:&lt;region&gt;::snapshot/&lt;snapshot_ID&gt;    When resources.type equals AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;/stream/&lt;date_time&gt;    When resources.type equals AWS::Glue::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:glue:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;database_name&gt;/&lt;table_name&gt;     
+     *  A field in a CloudTrail event record on which to filter events to be logged. For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, the field is used only for selecting events as filtering is not supported.   For CloudTrail event records, supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.   For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, the only supported field is eventCategory.      readOnly  - Optional. Can be set to Equals a value of true or false. If you do not add this field, CloudTrail logs both read and write events. A value of true logs only read events. A value of false logs only write events.     eventSource  - For filtering management events only. This can be set only to NotEquals kms.amazonaws.com.     eventName  - Can use any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld, separated by commas.     eventCategory  - This is required and must be set to Equals.     For CloudTrail event records, the value must be Management or Data.     For Config configuration items, the value must be ConfigurationItem.     For Audit Manager evidence, the value must be Evidence.     For non-Amazon Web Services events, the value must be ActivityAuditLog.        resources.type  - This ﬁeld is required for CloudTrail data events. resources.type can only use the Equals operator, and the value can be one of the following:    AWS::CloudTrail::Channel     AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table     AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table     AWS::FinSpace::Environment     AWS::SageMaker::ExperimentTrialComponent     AWS::SageMaker::FeatureGroup     You can have only one resources.type ﬁeld per selector. To log data events on more than one resource type, add another selector.     resources.ARN  - You can use any operator with resources.ARN, but if you use Equals or NotEquals, the value must exactly match the ARN of a valid resource of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals AWS::S3::Object, the ARN must be in one of the following formats. To log all data events for all objects in a specific S3 bucket, use the StartsWith operator, and include only the bucket ARN as the matching value. The trailing slash is intentional; do not exclude it. Replace the text between less than and greater than symbols (&lt;&gt;) with resource-specific information.     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/     arn:&lt;partition&gt;:s3:::&lt;bucket_name&gt;/&lt;object_path&gt;/    When resources.type equals AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in one of the following formats. To log events on all objects in an S3 access point, we recommend that you use only the access point ARN, don’t include the object path, and use the StartsWith or NotStartsWith operators.    arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;     arn:&lt;partition&gt;:s3:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;/object/&lt;object_path&gt;    When resources.type equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:lambda:&lt;region&gt;:&lt;account_ID&gt;:function:&lt;function_name&gt;    When resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;    When resources.type equals AWS::CloudTrail::Channel, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:cloudtrail:&lt;region&gt;:&lt;account_ID&gt;:channel/&lt;channel_UUID&gt;    When resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-outposts:&lt;region&gt;:&lt;account_ID&gt;:&lt;object_path&gt;    When resources.type equals AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:managedblockchain:&lt;region&gt;:&lt;account_ID&gt;:nodes/&lt;node_ID&gt;    When resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:s3-object-lambda:&lt;region&gt;:&lt;account_ID&gt;:accesspoint/&lt;access_point_name&gt;    When resources.type equals AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:ec2:&lt;region&gt;::snapshot/&lt;snapshot_ID&gt;    When resources.type equals AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:dynamodb:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;table_name&gt;/stream/&lt;date_time&gt;    When resources.type equals AWS::Glue::Table, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:glue:&lt;region&gt;:&lt;account_ID&gt;:table/&lt;database_name&gt;/&lt;table_name&gt;    When resources.type equals AWS::FinSpace::Environment, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:finspace:&lt;region&gt;:&lt;account_ID&gt;:environment/&lt;environment_ID&gt;    When resources.type equals AWS::SageMaker::ExperimentTrialComponent, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sagemaker:&lt;region&gt;:&lt;account_ID&gt;:experiment-trial-component/&lt;experiment_trial_component_name&gt;    When resources.type equals AWS::SageMaker::FeatureGroup, and the operator is set to Equals or NotEquals, the ARN must be in the following format:    arn:&lt;partition&gt;:sagemaker:&lt;region&gt;:&lt;account_ID&gt;:feature-group/&lt;feature_group_name&gt;     
      */
     Field: SelectorField;
     /**
@@ -407,13 +455,47 @@ declare namespace CloudTrail {
   export type ChannelArn = string;
   export type ChannelName = string;
   export type Channels = Channel[];
+  export interface CreateChannelRequest {
+    /**
+     * The name of the channel.
+     */
+    Name: ChannelName;
+    /**
+     * The name of the partner or external event source. You cannot change this name after you create the channel. A maximum of one channel is allowed per source.  A source can be either Custom for all valid non-Amazon Web Services events, or the name of a partner event source. For information about the source names for available partners, see Additional information about integration partners in the CloudTrail User Guide. 
+     */
+    Source: Source;
+    /**
+     * One or more event data stores to which events arriving through a channel will be logged.
+     */
+    Destinations: Destinations;
+    Tags?: TagsList;
+  }
+  export interface CreateChannelResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the new channel.
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     * The name of the new channel.
+     */
+    Name?: ChannelName;
+    /**
+     * The partner or external event source name.
+     */
+    Source?: Source;
+    /**
+     * The event data stores that log the events arriving through the channel.
+     */
+    Destinations?: Destinations;
+    Tags?: TagsList;
+  }
   export interface CreateEventDataStoreRequest {
     /**
      * The name of the event data store.
      */
     Name: EventDataStoreName;
     /**
-     * The advanced event selectors to use to select the events for the data store. For more information about how to use advanced event selectors, see Log events by using advanced event selectors in the CloudTrail User Guide.
+     * The advanced event selectors to use to select the events for the data store. You can configure up to five advanced event selectors for each event data store.  For more information about how to use advanced event selectors to log CloudTrail events, see Log events by using advanced event selectors in the CloudTrail User Guide. For more information about how to use advanced event selectors to include Config configuration items in your event data store, see Create an event data store for Config configuration items in the CloudTrail User Guide. For more information about how to use advanced event selectors to include non-Amazon Web Services events in your event data store, see Create an integration to log events from outside Amazon Web Services in the CloudTrail User Guide.
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
@@ -515,11 +597,11 @@ declare namespace CloudTrail {
      */
     EnableLogFileValidation?: Boolean;
     /**
-     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
+     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. You must use a log group that exists in your account. Not required unless you specify CloudWatchLogsRoleArn.
      */
     CloudWatchLogsLogGroupArn?: String;
     /**
-     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group. You must use a role that exists in your account.
      */
     CloudWatchLogsRoleArn?: String;
     /**
@@ -527,7 +609,7 @@ declare namespace CloudTrail {
      */
     KmsKeyId?: String;
     /**
-     * Specifies whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account. The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in Organizations.
+     * Specifies whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account. The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account or delegated administrator account for an organization in Organizations.
      */
     IsOrganizationTrail?: Boolean;
     TagsList?: TagsList;
@@ -588,7 +670,7 @@ declare namespace CloudTrail {
   }
   export interface DataResource {
     /**
-     * The resource type in which you want to log data events. You can specify the following basic event selector resource types:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table    The following resource types are also available through advanced event selectors. Basic event selector resource types are valid in advanced event selectors, but advanced event selector resource types are not valid in basic event selectors. For more information, see AdvancedFieldSelector$Field.    AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table   
+     * The resource type in which you want to log data events. You can specify the following basic event selector resource types:    AWS::S3::Object     AWS::Lambda::Function     AWS::DynamoDB::Table    The following resource types are also available through advanced event selectors. Basic event selector resource types are valid in advanced event selectors, but advanced event selector resource types are not valid in basic event selectors. For more information, see AdvancedFieldSelector$Field.    AWS::CloudTrail::Channel     AWS::S3Outposts::Object     AWS::ManagedBlockchain::Node     AWS::S3ObjectLambda::AccessPoint     AWS::EC2::Snapshot     AWS::S3::AccessPoint     AWS::DynamoDB::Stream     AWS::Glue::Table     AWS::FinSpace::Environment     AWS::SageMaker::ExperimentTrialComponent     AWS::SageMaker::FeatureGroup   
      */
     Type?: String;
     /**
@@ -599,6 +681,14 @@ declare namespace CloudTrail {
   export type DataResourceValues = String[];
   export type DataResources = DataResource[];
   export type _Date = Date;
+  export interface DeleteChannelRequest {
+    /**
+     * The ARN or the UUID value of the channel that you want to delete.
+     */
+    Channel: ChannelArn;
+  }
+  export interface DeleteChannelResponse {
+  }
   export interface DeleteEventDataStoreRequest {
     /**
      * The ARN (or the ID suffix of the ARN) of the event data store to delete.
@@ -606,6 +696,14 @@ declare namespace CloudTrail {
     EventDataStore: EventDataStoreArn;
   }
   export interface DeleteEventDataStoreResponse {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel you're deleting the resource-based policy from. The following is the format of a resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel. 
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DeleteResourcePolicyResponse {
   }
   export interface DeleteTrailRequest {
     /**
@@ -667,7 +765,7 @@ declare namespace CloudTrail {
   }
   export interface DescribeTrailsRequest {
     /**
-     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN. 
+     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region and current account. To return information about a trail in another region, you must specify its trail ARN. 
      */
     trailNameList?: TrailNameList;
     /**
@@ -683,11 +781,11 @@ declare namespace CloudTrail {
   }
   export interface Destination {
     /**
-     * The type of destination for events arriving from a channel. For service-linked channels, the value is AWS_SERVICE.
+     * The type of destination for events arriving from a channel. For channels used for a CloudTrail Lake integration, the value is EventDataStore. For service-linked channels, the value is AWS_SERVICE. 
      */
     Type: DestinationType;
     /**
-     * For service-linked channels, the value is the name of the Amazon Web Services service.
+     *  For channels used for a CloudTrail Lake integration, the location is the ARN of an event data store that receives events from a channel. For service-linked channels, the location is the name of the Amazon Web Services service.
      */
     Location: Location;
   }
@@ -743,35 +841,35 @@ declare namespace CloudTrail {
      */
     Name?: EventDataStoreName;
     /**
-     * This field is being deprecated. Indicates whether the event data store is protected from termination.
+     * Indicates whether the event data store is protected from termination.
      */
     TerminationProtectionEnabled?: TerminationProtectionEnabled;
     /**
-     * This field is being deprecated. The status of an event data store. Values are ENABLED and PENDING_DELETION.
+     * The status of an event data store. Values are ENABLED and PENDING_DELETION.
      */
     Status?: EventDataStoreStatus;
     /**
-     * This field is being deprecated. The advanced event selectors that were used to select events for the data store.
+     * The advanced event selectors that were used to select events for the data store.
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * This field is being deprecated. Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
-     * This field is being deprecated. Indicates that an event data store is collecting logged events for an organization.
+     * Indicates that an event data store is collecting logged events for an organization.
      */
     OrganizationEnabled?: Boolean;
     /**
-     * This field is being deprecated. The retention period, in days.
+     * The retention period, in days.
      */
     RetentionPeriod?: RetentionPeriod;
     /**
-     * This field is being deprecated. The timestamp of the event data store's creation.
+     * The timestamp of the event data store's creation.
      */
     CreatedTimestamp?: _Date;
     /**
-     * This field is being deprecated. The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
+     * The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
      */
     UpdatedTimestamp?: _Date;
   }
@@ -813,11 +911,11 @@ declare namespace CloudTrail {
      */
     ChannelArn?: ChannelArn;
     /**
-     *  The name of the CloudTrail channel. For service-linked channels, the value is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix generated by the Amazon Web Services service. 
+     *  The name of the CloudTrail channel. For service-linked channels, the name is aws-service-channel/service-name/custom-suffix where service-name represents the name of the Amazon Web Services service that created the channel and custom-suffix represents the suffix generated by the Amazon Web Services service. 
      */
     Name?: ChannelName;
     /**
-     * The event source for the CloudTrail channel.
+     * The source for the CloudTrail channel.
      */
     Source?: Source;
     /**
@@ -825,9 +923,13 @@ declare namespace CloudTrail {
      */
     SourceConfig?: SourceConfig;
     /**
-     * The Amazon Web Services service that created the service-linked channel.
+     * The destinations for the channel. For channels created for integrations, the destinations are the event data stores that log events arriving through the channel. For service-linked channels, the destination is the Amazon Web Services service that created the service-linked channel to receive events.
      */
     Destinations?: Destinations;
+    /**
+     * A table showing information about the most recent successful and failed attempts to ingest events.
+     */
+    IngestionStatus?: IngestionStatus;
   }
   export interface GetEventDataStoreRequest {
     /**
@@ -1001,6 +1103,22 @@ declare namespace CloudTrail {
      */
     ErrorMessage?: ErrorMessage;
   }
+  export interface GetResourcePolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. The following is the format of a resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel. 
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to resource-based policy. 
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     *  A JSON-formatted string that contains the resource-based policy attached to the CloudTrail channel. 
+     */
+    ResourcePolicy?: ResourcePolicy;
+  }
   export interface GetTrailRequest {
     /**
      * The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.
@@ -1162,6 +1280,28 @@ declare namespace CloudTrail {
      *  The timestamp of the import's last update. 
      */
     UpdatedTimestamp?: _Date;
+  }
+  export interface IngestionStatus {
+    /**
+     * The time stamp of the most recent successful ingestion of events for the channel.
+     */
+    LatestIngestionSuccessTime?: _Date;
+    /**
+     * The event ID of the most recent successful ingestion of events.
+     */
+    LatestIngestionSuccessEventID?: UUID;
+    /**
+     * The error code for the most recent failure to ingest events.
+     */
+    LatestIngestionErrorCode?: ErrorMessage;
+    /**
+     * The time stamp of the most recent attempt to ingest events on the channel.
+     */
+    LatestIngestionAttemptTime?: _Date;
+    /**
+     * The event ID of the most recent attempt to ingest events.
+     */
+    LatestIngestionAttemptEventID?: UUID;
   }
   export interface InsightSelector {
     /**
@@ -1331,7 +1471,7 @@ declare namespace CloudTrail {
   }
   export interface ListTagsRequest {
     /**
-     * Specifies a list of trail and event data store ARNs whose tags will be listed. The list has a limit of 20 ARNs.
+     * Specifies a list of trail, event data store, or channel ARNs whose tags will be listed. The list has a limit of 20 ARNs.
      */
     ResourceIdList: ResourceIdList;
     /**
@@ -1489,6 +1629,26 @@ declare namespace CloudTrail {
      */
     InsightSelectors?: InsightSelectors;
   }
+  export interface PutResourcePolicyRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. The following is the format of a resource ARN: arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel. 
+     */
+    ResourceArn: ResourceArn;
+    /**
+     *  A JSON-formatted string for an Amazon Web Services resource-based policy.  The following are requirements for the resource policy:    Contains only one action: cloudtrail-data:PutAuditEvents     Contains at least one statement. The policy can have a maximum of 20 statements.     Each statement contains at least one principal. A statement can have a maximum of 50 principals.   
+     */
+    ResourcePolicy: ResourcePolicy;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     *  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the resource-based policy. 
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     *  The JSON-formatted string of the Amazon Web Services resource-based policy attached to the CloudTrail channel. 
+     */
+    ResourcePolicy?: ResourcePolicy;
+  }
   export type Queries = Query[];
   export interface Query {
     /**
@@ -1558,7 +1718,7 @@ declare namespace CloudTrail {
   }
   export interface RemoveTagsRequest {
     /**
-     * Specifies the ARN of the trail or event data store from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE 
+     * Specifies the ARN of the trail, event data store, or channel from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  Example channel ARN format: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceId: String;
     /**
@@ -1578,8 +1738,10 @@ declare namespace CloudTrail {
      */
     ResourceName?: String;
   }
+  export type ResourceArn = string;
   export type ResourceIdList = String[];
   export type ResourceList = Resource[];
+  export type ResourcePolicy = string;
   export interface ResourceTag {
     /**
      * Specifies the ARN of the resource.
@@ -1902,6 +2064,38 @@ declare namespace CloudTrail {
   export type TrailNameList = String[];
   export type Trails = TrailInfo[];
   export type UUID = string;
+  export interface UpdateChannelRequest {
+    /**
+     * The ARN or ID (the ARN suffix) of the channel that you want to update.
+     */
+    Channel: ChannelArn;
+    /**
+     * The ARNs of event data stores that you want to log events arriving through the channel.
+     */
+    Destinations?: Destinations;
+    /**
+     *  Changes the name of the channel. 
+     */
+    Name?: ChannelName;
+  }
+  export interface UpdateChannelResponse {
+    /**
+     * The ARN of the channel that was updated.
+     */
+    ChannelArn?: ChannelArn;
+    /**
+     * The name of the channel that was updated.
+     */
+    Name?: ChannelName;
+    /**
+     * The event source of the channel that was updated.
+     */
+    Source?: Source;
+    /**
+     * The event data stores that log events arriving through the channel.
+     */
+    Destinations?: Destinations;
+  }
   export interface UpdateEventDataStoreRequest {
     /**
      * The ARN (or the ID suffix of the ARN) of the event data store that you want to update.
@@ -2012,11 +2206,11 @@ declare namespace CloudTrail {
      */
     EnableLogFileValidation?: Boolean;
     /**
-     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs are delivered. Not required unless you specify CloudWatchLogsRoleArn.
+     * Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs are delivered. You must use a log group that exists in your account. Not required unless you specify CloudWatchLogsRoleArn.
      */
     CloudWatchLogsLogGroupArn?: String;
     /**
-     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+     * Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group. You must use a role that exists in your account.
      */
     CloudWatchLogsRoleArn?: String;
     /**
@@ -2024,7 +2218,7 @@ declare namespace CloudTrail {
      */
     KmsKeyId?: String;
     /**
-     * Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account. The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all Amazon Web Services accounts that belong to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current Amazon Web Services account but be deleted from all member accounts in the organization.
+     * Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account. The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account or delegated administrator account for an organization in Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all Amazon Web Services accounts that belong to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current Amazon Web Services account but be deleted from all member accounts in the organization.
      */
     IsOrganizationTrail?: Boolean;
   }

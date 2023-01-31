@@ -3423,6 +3423,12 @@ declare namespace SageMaker {
      */
     EndTimeOffset?: MonitoringTimeOffsetString;
   }
+  export interface BestObjectiveNotImproving {
+    /**
+     * The number of training jobs that have failed to improve model performance by 1% or greater over prior training jobs as evaluated against an objective function.
+     */
+    MaxNumberOfTrainingJobsNotImproving?: MaxNumberOfTrainingJobsNotImproving;
+  }
   export interface Bias {
     /**
      * The bias report for a model
@@ -3934,6 +3940,7 @@ declare namespace SageMaker {
     CompilationJobStatus: CompilationJobStatus;
   }
   export type CompilerOptions = string;
+  export type CompleteOnConvergence = "Disabled"|"Enabled"|string;
   export type CompressionType = "None"|"Gzip"|string;
   export type CompressionTypes = CompressionType[];
   export type ConditionOutcome = "True"|"False"|string;
@@ -4067,6 +4074,12 @@ declare namespace SageMaker {
     MaxValue: ParameterValue;
   }
   export type ContinuousParameterRanges = ContinuousParameterRange[];
+  export interface ConvergenceDetected {
+    /**
+     * A flag to stop a tuning job once AMT has detected that the job has converged.
+     */
+    CompleteOnConvergence?: CompleteOnConvergence;
+  }
   export interface CreateActionRequest {
     /**
      * The name of the action. Must be unique to your account in an Amazon Web Services Region.
@@ -8098,6 +8111,11 @@ declare namespace SageMaker {
      * If the tuning job failed, the reason it failed.
      */
     FailureReason?: FailureReason;
+    /**
+     * Tuning job completion information returned as the response from a hyperparameter tuning job. This information tells if your tuning job has or has not converged. It also includes the number of training jobs that have not improved model performance as evaluated against the objective function.
+     */
+    TuningJobCompletionDetails?: HyperParameterTuningJobCompletionDetails;
+    ConsumedResources?: HyperParameterTuningJobConsumedResources;
   }
   export interface DescribeImageRequest {
     /**
@@ -11607,6 +11625,16 @@ declare namespace SageMaker {
   }
   export type HyperParameterTuningInstanceConfigs = HyperParameterTuningInstanceConfig[];
   export type HyperParameterTuningJobArn = string;
+  export interface HyperParameterTuningJobCompletionDetails {
+    /**
+     * The number of training jobs launched by a tuning job that are not improving (1% or less) as measured by model performance evaluated against an objective function.
+     */
+    NumberOfTrainingJobsObjectiveNotImproving?: Integer;
+    /**
+     * The time in timestamp format that AMT detected model convergence, as defined by a lack of significant improvement over time based on criteria developed over a wide range of diverse benchmarking tests.
+     */
+    ConvergenceDetectedTime?: Timestamp;
+  }
   export interface HyperParameterTuningJobConfig {
     /**
      * Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. For information about search strategies, see How Hyperparameter Tuning Works.
@@ -11640,6 +11668,12 @@ declare namespace SageMaker {
      * A value used to initialize a pseudo-random number generator. Setting a random seed and using the same seed later for the same tuning job will allow hyperparameter optimization to find more a consistent hyperparameter configuration between the two runs.
      */
     RandomSeed?: RandomSeed;
+  }
+  export interface HyperParameterTuningJobConsumedResources {
+    /**
+     * The wall clock runtime in seconds used by your hyperparameter tuning job.
+     */
+    RuntimeInSeconds?: Integer;
   }
   export type HyperParameterTuningJobName = string;
   export interface HyperParameterTuningJobObjective {
@@ -11698,6 +11732,14 @@ declare namespace SageMaker {
      * The tags associated with a hyperparameter tuning job. For more information see Tagging Amazon Web Services resources.
      */
     Tags?: TagList;
+    /**
+     * Information about either a current or completed hyperparameter tuning job.
+     */
+    TuningJobCompletionDetails?: HyperParameterTuningJobCompletionDetails;
+    /**
+     * The total amount of resources consumed by a hyperparameter tuning job.
+     */
+    ConsumedResources?: HyperParameterTuningJobConsumedResources;
   }
   export type HyperParameterTuningJobSortByOptions = "Name"|"Status"|"CreationTime"|string;
   export type HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
@@ -11762,6 +11804,7 @@ declare namespace SageMaker {
     WarmStartType: HyperParameterTuningJobWarmStartType;
   }
   export type HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"|string;
+  export type HyperParameterTuningMaxRuntimeInSeconds = number;
   export interface HyperParameterTuningResourceConfig {
     /**
      * The instance type used to run hyperparameter optimization tuning jobs. See  descriptions of instance types for more information.
@@ -15660,6 +15703,7 @@ declare namespace SageMaker {
   export type MaxHumanLabeledObjectCount = number;
   export type MaxNumberOfTests = number;
   export type MaxNumberOfTrainingJobs = number;
+  export type MaxNumberOfTrainingJobsNotImproving = number;
   export type MaxParallelExecutionSteps = number;
   export type MaxParallelOfTests = number;
   export type MaxParallelTrainingJobs = number;
@@ -19033,6 +19077,10 @@ declare namespace SageMaker {
      * The maximum number of concurrent training jobs that a hyperparameter tuning job can launch.
      */
     MaxParallelTrainingJobs: MaxParallelTrainingJobs;
+    /**
+     * The maximum time in seconds that a training job launched by a hyperparameter tuning job can run.
+     */
+    MaxRuntimeInSeconds?: HyperParameterTuningMaxRuntimeInSeconds;
   }
   export type ResourcePolicyString = string;
   export type ResourcePropertyName = string;
@@ -20674,7 +20722,15 @@ declare namespace SageMaker {
     /**
      * The value of the objective metric.
      */
-    TargetObjectiveMetricValue: TargetObjectiveMetricValue;
+    TargetObjectiveMetricValue?: TargetObjectiveMetricValue;
+    /**
+     * A flag to stop your hyperparameter tuning job if model performance fails to improve as evaluated against an objective function.
+     */
+    BestObjectiveNotImproving?: BestObjectiveNotImproving;
+    /**
+     * A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has detected that your model has converged as evaluated against your objective function.
+     */
+    ConvergenceDetected?: ConvergenceDetected;
   }
   export interface TuningJobStepMetaData {
     /**

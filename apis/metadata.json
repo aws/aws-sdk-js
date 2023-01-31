@@ -1274,5 +1274,9 @@
   },
   "cleanrooms": {
     "name": "CleanRooms"
+  },
+  "cloudtraildata": {
+    "prefix": "cloudtrail-data",
+    "name": "CloudTrailData"
   }
 }

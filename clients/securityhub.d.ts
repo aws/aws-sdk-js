@@ -608,6 +608,13 @@ declare namespace SecurityHub {
   export type AdminStatus = "ENABLED"|"DISABLE_IN_PROGRESS"|string;
   export type AdminsMaxResults = number;
   export type ArnList = NonEmptyString[];
+  export interface AssociatedStandard {
+    /**
+     * The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the Amazon Resource Name (ARN) returned for a standard in the DescribeStandards API response. 
+     */
+    StandardsId?: NonEmptyString;
+  }
+  export type AssociatedStandardsList = AssociatedStandard[];
   export type AutoEnableStandards = "NONE"|"DEFAULT"|string;
   export interface AvailabilityZone {
     /**
@@ -8699,11 +8706,11 @@ declare namespace SecurityHub {
      */
     AcceleratorTypes?: NonEmptyStringList;
     /**
-     *  An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see Associating Git repositories with SageMaker notebook instances in the Amazon SageMaker Developer Guide. 
+     *  An array of up to three Git repositories associated with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see Associating Git repositories with SageMaker notebook instances in the Amazon SageMaker Developer Guide. 
      */
     AdditionalCodeRepositories?: NonEmptyStringList;
     /**
-     *  The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository. For more information, see Associating Git repositories with SageMaker notebook instances in the Amazon SageMaker Developer Guide. 
+     *  The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in CodeCommit or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository. For more information, see Associating Git repositories with SageMaker notebook instances in the Amazon SageMaker Developer Guide. 
      */
     DefaultCodeRepository?: NonEmptyString;
     /**
@@ -9368,6 +9375,14 @@ declare namespace SecurityHub {
      * Indicates whether or not sample findings are included in the filter results.
      */
     Sample?: BooleanFilterList;
+    /**
+     *  The unique identifier of a control across standards. Values for this field typically consist of an Amazon Web Service and a number, such as APIGateway.5. 
+     */
+    ComplianceSecurityControlId?: StringFilterList;
+    /**
+     *  The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the Amazon Resource Name (ARN) returned for a standard in the DescribeStandards API response. 
+     */
+    ComplianceAssociatedStandardsId?: StringFilterList;
   }
   export interface AwsSecurityFindingIdentifier {
     /**
@@ -10307,6 +10322,14 @@ declare namespace SecurityHub {
      * For findings generated from controls, a list of reasons behind the value of Status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the Security Hub User Guide. 
      */
     StatusReasons?: StatusReasonsList;
+    /**
+     *  The unique identifier of a control across standards. Values for this field typically consist of an Amazon Web Service and a number, such as APIGateway.5. 
+     */
+    SecurityControlId?: NonEmptyString;
+    /**
+     * The enabled security standards in which a security control is currently enabled. 
+     */
+    AssociatedStandards?: AssociatedStandardsList;
   }
   export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE"|string;
   export interface ContainerDetails {
@@ -11401,7 +11424,7 @@ declare namespace SecurityHub {
      */
     AdministratorId?: NonEmptyString;
     /**
-     * The status of the relationship between the member account and its administrator account.  The status can have one of the following values:    CREATED - Indicates that the administrator account added the member account, but has not yet invited the member account.    INVITED - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.    ENABLED - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.    REMOVED - Indicates that the administrator account disassociated the member account.    RESIGNED - Indicates that the member account disassociated themselves from the administrator account.    DELETED - Indicates that the administrator account deleted the member account.    ACCOUNT_SUSPENDED - Indicates that an organization account was suspended from Amazon Web Services at the same time that the administrator account tried to enable the organization account as a member account.  
+     * The status of the relationship between the member account and its administrator account.  The status can have one of the following values:    Created - Indicates that the administrator account added the member account, but has not yet invited the member account.    Invited - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.    Enabled - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.    Removed - Indicates that the administrator account disassociated the member account.    Resigned - Indicates that the member account disassociated themselves from the administrator account.    Deleted - Indicates that the administrator account deleted the member account.    AccountSuspended - Indicates that an organization account was suspended from Amazon Web Services at the same time that the administrator account tried to enable the organization account as a member account.  
      */
     MemberStatus?: NonEmptyString;
     /**

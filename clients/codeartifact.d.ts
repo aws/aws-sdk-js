@@ -61,11 +61,19 @@ declare class CodeArtifact extends Service {
    */
   deleteDomainPermissionsPolicy(callback?: (err: AWSError, data: CodeArtifact.Types.DeleteDomainPermissionsPolicyResult) => void): Request<CodeArtifact.Types.DeleteDomainPermissionsPolicyResult, AWSError>;
   /**
-   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListPackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
+   * Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the DeletePackageVersions API.
+   */
+  deletePackage(params: CodeArtifact.Types.DeletePackageRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageResult) => void): Request<CodeArtifact.Types.DeletePackageResult, AWSError>;
+  /**
+   * Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the DeletePackageVersions API.
+   */
+  deletePackage(callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageResult) => void): Request<CodeArtifact.Types.DeletePackageResult, AWSError>;
+  /**
+   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
    */
   deletePackageVersions(params: CodeArtifact.Types.DeletePackageVersionsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageVersionsResult) => void): Request<CodeArtifact.Types.DeletePackageVersionsResult, AWSError>;
   /**
-   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListPackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
+   *  Deletes one or more versions of a package. A deleted package version cannot be restored in your repository. If you want to remove a package version from your repository and be able to restore it later, set its status to Archived. Archived packages cannot be downloaded from a repository and don't show up with list package APIs (for example, ListackageVersions), but you can restore them using UpdatePackageVersionsStatus. 
    */
   deletePackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.DeletePackageVersionsResult) => void): Request<CodeArtifact.Types.DeletePackageVersionsResult, AWSError>;
   /**
@@ -205,11 +213,11 @@ declare class CodeArtifact extends Service {
    */
   listPackageVersionDependencies(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionDependenciesResult) => void): Request<CodeArtifact.Types.ListPackageVersionDependenciesResult, AWSError>;
   /**
-   *  Returns a list of PackageVersionSummary objects for package versions in a repository that match the request parameters. 
+   *  Returns a list of PackageVersionSummary objects for package versions in a repository that match the request parameters. Package versions of all statuses will be returned by default when calling list-package-versions with no --status parameter. 
    */
   listPackageVersions(params: CodeArtifact.Types.ListPackageVersionsRequest, callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionsResult) => void): Request<CodeArtifact.Types.ListPackageVersionsResult, AWSError>;
   /**
-   *  Returns a list of PackageVersionSummary objects for package versions in a repository that match the request parameters. 
+   *  Returns a list of PackageVersionSummary objects for package versions in a repository that match the request parameters. Package versions of all statuses will be returned by default when calling list-package-versions with no --status parameter. 
    */
   listPackageVersions(callback?: (err: AWSError, data: CodeArtifact.Types.ListPackageVersionsResult) => void): Request<CodeArtifact.Types.ListPackageVersionsResult, AWSError>;
   /**
@@ -493,6 +501,35 @@ declare namespace CodeArtifact {
      *  Contains information about the deleted domain after processing the request. 
      */
     domain?: DomainDescription;
+  }
+  export interface DeletePackageRequest {
+    /**
+     * The name of the domain that contains the package to delete.
+     */
+    domain: DomainName;
+    /**
+     *  The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. 
+     */
+    domainOwner?: AccountId;
+    /**
+     * The name of the repository that contains the package to delete.
+     */
+    repository: RepositoryName;
+    /**
+     * The format of the requested package to delete.
+     */
+    format: PackageFormat;
+    /**
+     * The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.   
+     */
+    namespace?: PackageNamespace;
+    /**
+     * The name of the package to delete.
+     */
+    package: PackageName;
+  }
+  export interface DeletePackageResult {
+    deletedPackage?: PackageSummary;
   }
   export interface DeletePackageVersionsRequest {
     /**
@@ -1292,7 +1329,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called --namespace and not --namespace-prefix, it has prefix-matching behavior. Each package format uses namespace as follows:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.   
+     * The namespace used to filter requested packages. Only packages with the provided namespace will be returned. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1412,7 +1449,7 @@ declare namespace CodeArtifact {
      */
     package?: PackageName;
     /**
-     *  The type of a package dependency. The possible values depend on the package type.   npm: regular, dev, peer, optional    maven: optional, parent, compile, runtime, test, system, provided.  Note that parent is not a regular Maven dependency type; instead this is extracted from the &lt;parent&gt; element if one is defined in the package version's POM file.    nuget: The dependencyType field is never set for NuGet packages.   pypi: Requires-Dist   
+     *  The type of a package dependency. The possible values depend on the package type. Example types are compile, runtime, and test for Maven packages, and dev, prod, and optional for npm packages. 
      */
     dependencyType?: String;
     /**

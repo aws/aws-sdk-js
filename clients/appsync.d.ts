@@ -717,6 +717,10 @@ declare namespace AppSync {
      * Relational database settings.
      */
     relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
+    /**
+     * Amazon EventBridge settings.
+     */
+    eventBridgeConfig?: EventBridgeDataSourceConfig;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -925,7 +929,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AWS_LAMBDA: The data source is an Lambda function.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch Service domain.    AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service domain.    NONE: There is no data source. Use this type when you want to invoke a GraphQL operation without connecting to a data source, such as when you're performing data transformation with resolvers or invoking a subscription from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
+     * The type of the data source.    AWS_LAMBDA: The data source is an Lambda function.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch Service domain.    AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service domain.    AMAZON_EVENTBRIDGE: The data source is an Amazon EventBridge configuration.    NONE: There is no data source. Use this type when you want to invoke a GraphQL operation without connecting to a data source, such as when you're performing data transformation with resolvers or invoking a subscription from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
      */
     type?: DataSourceType;
     /**
@@ -956,8 +960,12 @@ declare namespace AppSync {
      * Relational database settings.
      */
     relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
+    /**
+     * Amazon EventBridge settings.
+     */
+    eventBridgeConfig?: EventBridgeDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|"AMAZON_EVENTBRIDGE"|string;
   export type DataSources = DataSource[];
   export type DefaultAction = "ALLOW"|"DENY"|string;
   export interface DeleteApiCacheRequest {
@@ -1201,6 +1209,12 @@ declare namespace AppSync {
     logs?: Logs;
   }
   export type EvaluationResult = string;
+  export interface EventBridgeDataSourceConfig {
+    /**
+     * The ARN of the event bus. For more information about event buses, see Amazon EventBridge event buses.
+     */
+    eventBusArn: String;
+  }
   export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
   export interface FlushApiCacheRequest {
     /**
@@ -2035,6 +2049,10 @@ declare namespace AppSync {
      * The new relational database configuration.
      */
     relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
+    /**
+     * The new Amazon EventBridge settings.
+     */
+    eventBridgeConfig?: EventBridgeDataSourceConfig;
   }
   export interface UpdateDataSourceResponse {
     /**

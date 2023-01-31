@@ -7102,6 +7102,16 @@
       },
       "documentation": "<p>Input object for the batch transform job.</p>"
     },
+    "BestObjectiveNotImproving": {
+      "type": "structure",
+      "members": {
+        "MaxNumberOfTrainingJobsNotImproving": {
+          "shape": "MaxNumberOfTrainingJobsNotImproving",
+          "documentation": "<p>The number of training jobs that have failed to improve model performance by 1% or greater over prior training jobs as evaluated against an objective function.</p>"
+        }
+      },
+      "documentation": "<p>A structure that keeps track of which training jobs launched by your hyperparameter tuning job are not improving model performance as evaluated against an objective function.</p>"
+    },
     "Bias": {
       "type": "structure",
       "members": {
@@ -8222,6 +8232,13 @@
       "min": 3,
       "pattern": ".*"
     },
+    "CompleteOnConvergence": {
+      "type": "string",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ]
+    },
     "CompressionType": {
       "type": "string",
       "enum": [
@@ -8499,6 +8516,16 @@
       },
       "max": 30,
       "min": 0
+    },
+    "ConvergenceDetected": {
+      "type": "structure",
+      "members": {
+        "CompleteOnConvergence": {
+          "shape": "CompleteOnConvergence",
+          "documentation": "<p>A flag to stop a tuning job once AMT has detected that the job has converged.</p>"
+        }
+      },
+      "documentation": "<p>A flag to indicating that automatic model tuning (AMT) has detected model convergence, defined as a lack of significant improvement (1% or less) against an objective metric.</p>"
     },
     "CreateActionRequest": {
       "type": "structure",
@@ -14234,6 +14261,13 @@
         "FailureReason": {
           "shape": "FailureReason",
           "documentation": "<p>If the tuning job failed, the reason it failed.</p>"
+        },
+        "TuningJobCompletionDetails": {
+          "shape": "HyperParameterTuningJobCompletionDetails",
+          "documentation": "<p>Tuning job completion information returned as the response from a hyperparameter tuning job. This information tells if your tuning job has or has not converged. It also includes the number of training jobs that have not improved model performance as evaluated against the objective function.</p>"
+        },
+        "ConsumedResources": {
+          "shape": "HyperParameterTuningJobConsumedResources"
         }
       }
     },
@@ -19771,6 +19805,20 @@
       "max": 256,
       "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*"
     },
+    "HyperParameterTuningJobCompletionDetails": {
+      "type": "structure",
+      "members": {
+        "NumberOfTrainingJobsObjectiveNotImproving": {
+          "shape": "Integer",
+          "documentation": "<p>The number of training jobs launched by a tuning job that are not improving (1% or less) as measured by model performance evaluated against an objective function.</p>"
+        },
+        "ConvergenceDetectedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time in timestamp format that AMT detected model convergence, as defined by a lack of significant improvement over time based on criteria developed over a wide range of diverse benchmarking tests.</p>"
+        }
+      },
+      "documentation": "<p>A structure that contains runtime information about both current and completed hyperparameter tuning jobs.</p>"
+    },
     "HyperParameterTuningJobConfig": {
       "type": "structure",
       "required": [
@@ -19812,6 +19860,16 @@
         }
       },
       "documentation": "<p>Configures a hyperparameter tuning job.</p>"
+    },
+    "HyperParameterTuningJobConsumedResources": {
+      "type": "structure",
+      "members": {
+        "RuntimeInSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The wall clock runtime in seconds used by your hyperparameter tuning job.</p>"
+        }
+      },
+      "documentation": "<p>The total resources consumed by your hyperparameter tuning job.</p>"
     },
     "HyperParameterTuningJobName": {
       "type": "string",
@@ -19909,6 +19967,14 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>The tags associated with a hyperparameter tuning job. For more information see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+        },
+        "TuningJobCompletionDetails": {
+          "shape": "HyperParameterTuningJobCompletionDetails",
+          "documentation": "<p>Information about either a current or completed hyperparameter tuning job.</p>"
+        },
+        "ConsumedResources": {
+          "shape": "HyperParameterTuningJobConsumedResources",
+          "documentation": "<p>The total amount of resources consumed by a hyperparameter tuning job.</p>"
         }
       },
       "documentation": "<p>An entity returned by the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html\">SearchRecord</a> API containing the properties of a hyperparameter tuning job.</p>"
@@ -19943,7 +20009,7 @@
     },
     "HyperParameterTuningJobStrategyType": {
       "type": "string",
-      "documentation": "<p>The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. Currently, the only supported value is <code>Bayesian</code>.</p>",
+      "documentation": "<p>The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. </p>",
       "enum": [
         "Bayesian",
         "Random",
@@ -20036,6 +20102,11 @@
         "IdenticalDataAndAlgorithm",
         "TransferLearning"
       ]
+    },
+    "HyperParameterTuningMaxRuntimeInSeconds": {
+      "type": "integer",
+      "max": 15768000,
+      "min": 120
     },
     "HyperParameterTuningResourceConfig": {
       "type": "structure",
@@ -25470,6 +25541,10 @@
     "MaxNumberOfTrainingJobs": {
       "type": "integer",
       "min": 1
+    },
+    "MaxNumberOfTrainingJobsNotImproving": {
+      "type": "integer",
+      "min": 3
     },
     "MaxParallelExecutionSteps": {
       "type": "integer",
@@ -31639,6 +31714,10 @@
         "MaxParallelTrainingJobs": {
           "shape": "MaxParallelTrainingJobs",
           "documentation": "<p>The maximum number of concurrent training jobs that a hyperparameter tuning job can launch.</p>"
+        },
+        "MaxRuntimeInSeconds": {
+          "shape": "HyperParameterTuningMaxRuntimeInSeconds",
+          "documentation": "<p>The maximum time in seconds that a training job launched by a hyperparameter tuning job can run.</p>"
         }
       },
       "documentation": "<p>Specifies the maximum number of training jobs and parallel training jobs that a hyperparameter tuning job can launch.</p>"
@@ -34881,13 +34960,18 @@
     },
     "TuningJobCompletionCriteria": {
       "type": "structure",
-      "required": [
-        "TargetObjectiveMetricValue"
-      ],
       "members": {
         "TargetObjectiveMetricValue": {
           "shape": "TargetObjectiveMetricValue",
           "documentation": "<p>The value of the objective metric.</p>"
+        },
+        "BestObjectiveNotImproving": {
+          "shape": "BestObjectiveNotImproving",
+          "documentation": "<p>A flag to stop your hyperparameter tuning job if model performance fails to improve as evaluated against an objective function.</p>"
+        },
+        "ConvergenceDetected": {
+          "shape": "ConvergenceDetected",
+          "documentation": "<p>A flag to top your hyperparameter tuning job if automatic model tuning (AMT) has detected that your model has converged as evaluated against your objective function.</p>"
         }
       },
       "documentation": "<p>The job completion criteria.</p>"

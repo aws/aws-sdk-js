@@ -3155,6 +3155,10 @@ declare namespace Iot {
      * The CloudWatch log group to which the action sends data.
      */
     logGroupName: LogGroupName;
+    /**
+     * Indicates whether batches of log records will be extracted and uploaded into CloudWatch. Values include true or false (default).
+     */
+    batchMode?: BatchMode;
   }
   export interface CloudwatchMetricAction {
     /**

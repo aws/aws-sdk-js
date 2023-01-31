@@ -339,6 +339,7 @@ export abstract class ConfigurationServicePlaceholders {
   licensemanagerlinuxsubscriptions?: AWS.LicenseManagerLinuxSubscriptions.Types.ClientConfiguration;
   kendraranking?: AWS.KendraRanking.Types.ClientConfiguration;
   cleanrooms?: AWS.CleanRooms.Types.ClientConfiguration;
+  cloudtraildata?: AWS.CloudTrailData.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -680,4 +681,5 @@ export interface ConfigurationServiceApiVersions {
   licensemanagerlinuxsubscriptions?: AWS.LicenseManagerLinuxSubscriptions.Types.apiVersion;
   kendraranking?: AWS.KendraRanking.Types.apiVersion;
   cleanrooms?: AWS.CleanRooms.Types.apiVersion;
+  cloudtraildata?: AWS.CloudTrailData.Types.apiVersion;
 }

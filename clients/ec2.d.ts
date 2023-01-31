@@ -125,6 +125,14 @@ declare class EC2 extends Service {
    */
   assignPrivateIpAddresses(callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
+   * Assigns one or more private IPv4 addresses to a private NAT gateway. For more information, see Work with NAT gateways in the Amazon Virtual Private Cloud User Guide.
+   */
+  assignPrivateNatGatewayAddress(params: EC2.Types.AssignPrivateNatGatewayAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.AssignPrivateNatGatewayAddressResult, AWSError>;
+  /**
+   * Assigns one or more private IPv4 addresses to a private NAT gateway. For more information, see Work with NAT gateways in the Amazon Virtual Private Cloud User Guide.
+   */
+  assignPrivateNatGatewayAddress(callback?: (err: AWSError, data: EC2.Types.AssignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.AssignPrivateNatGatewayAddressResult, AWSError>;
+  /**
    * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing.   We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
    */
   associateAddress(params: EC2.Types.AssociateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
@@ -180,6 +188,14 @@ declare class EC2 extends Service {
    * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
    */
   associateIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.AssociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.AssociateIpamResourceDiscoveryResult, AWSError>;
+  /**
+   * Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information, see Work with NAT gateways in the Amazon Virtual Private Cloud User Guide. By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment. For more information, see Elastic IP address quotas in the Amazon Virtual Private Cloud User Guide.
+   */
+  associateNatGatewayAddress(params: EC2.Types.AssociateNatGatewayAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssociateNatGatewayAddressResult) => void): Request<EC2.Types.AssociateNatGatewayAddressResult, AWSError>;
+  /**
+   * Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information, see Work with NAT gateways in the Amazon Virtual Private Cloud User Guide. By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment. For more information, see Elastic IP address quotas in the Amazon Virtual Private Cloud User Guide.
+   */
+  associateNatGatewayAddress(callback?: (err: AWSError, data: EC2.Types.AssociateNatGatewayAddressResult) => void): Request<EC2.Types.AssociateNatGatewayAddressResult, AWSError>;
   /**
    * Associates a subnet in your VPC or an internet gateway or virtual private gateway attached to your VPC with a route table in your VPC. This association causes traffic from the subnet or gateway to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table later. A route table can be associated with multiple subnets. For more information, see Route tables in the Amazon Virtual Private Cloud User Guide.
    */
@@ -3061,6 +3077,14 @@ declare class EC2 extends Service {
    */
   disassociateIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.DisassociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.DisassociateIpamResourceDiscoveryResult, AWSError>;
   /**
+   * Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway. You cannot disassociate your primary EIP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While disassociating is in progress, you cannot associate/disassociate additional EIPs while the connections are being drained. You are, however, allowed to delete the NAT gateway. An EIP will only be released at the end of MaxDrainDurationSeconds. The EIPs stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining associated EIPs). As the existing connections drain out, the EIPs (and the corresponding private IPs mapped to them) get released.
+   */
+  disassociateNatGatewayAddress(params: EC2.Types.DisassociateNatGatewayAddressRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateNatGatewayAddressResult) => void): Request<EC2.Types.DisassociateNatGatewayAddressResult, AWSError>;
+  /**
+   * Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway. You cannot disassociate your primary EIP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While disassociating is in progress, you cannot associate/disassociate additional EIPs while the connections are being drained. You are, however, allowed to delete the NAT gateway. An EIP will only be released at the end of MaxDrainDurationSeconds. The EIPs stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining associated EIPs). As the existing connections drain out, the EIPs (and the corresponding private IPs mapped to them) get released.
+   */
+  disassociateNatGatewayAddress(callback?: (err: AWSError, data: EC2.Types.DisassociateNatGatewayAddressResult) => void): Request<EC2.Types.DisassociateNatGatewayAddressResult, AWSError>;
+  /**
    * Disassociates a subnet or gateway from a route table. After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see Route tables in the Amazon Virtual Private Cloud User Guide.
    */
   disassociateRouteTable(params: EC2.Types.DisassociateRouteTableRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -4661,6 +4685,14 @@ declare class EC2 extends Service {
    */
   unassignPrivateIpAddresses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Unassigns secondary private NAT gateway IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway. A private IP address will only be released at the end of MaxDrainDurationSeconds. The private IP addresses stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining assigned private IP address). After the existing connections drain out, the private IP addresses get released.   
+   */
+  unassignPrivateNatGatewayAddress(params: EC2.Types.UnassignPrivateNatGatewayAddressRequest, callback?: (err: AWSError, data: EC2.Types.UnassignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.UnassignPrivateNatGatewayAddressResult, AWSError>;
+  /**
+   * Unassigns secondary private NAT gateway IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway. A private IP address will only be released at the end of MaxDrainDurationSeconds. The private IP addresses stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining assigned private IP address). After the existing connections drain out, the private IP addresses get released.   
+   */
+  unassignPrivateNatGatewayAddress(callback?: (err: AWSError, data: EC2.Types.UnassignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.UnassignPrivateNatGatewayAddressResult, AWSError>;
+  /**
    * Disables detailed monitoring for a running instance. For more information, see Monitoring your instances and volumes in the Amazon EC2 User Guide.
    */
   unmonitorInstances(params: EC2.Types.UnmonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.UnmonitorInstancesResult) => void): Request<EC2.Types.UnmonitorInstancesResult, AWSError>;
@@ -5868,6 +5900,34 @@ declare namespace EC2 {
      */
     AssignedIpv4Prefixes?: Ipv4PrefixesList;
   }
+  export interface AssignPrivateNatGatewayAddressRequest {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId: NatGatewayId;
+    /**
+     * The private IPv4 addresses you want to assign to the private NAT gateway.
+     */
+    PrivateIpAddresses?: IpList;
+    /**
+     * The number of private IP addresses to assign to the NAT gateway. You can't specify this parameter when also specifying private IP addresses.
+     */
+    PrivateIpAddressCount?: PrivateIpAddressCount;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssignPrivateNatGatewayAddressResult {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId?: NatGatewayId;
+    /**
+     * NAT gateway IP addresses.
+     */
+    NatGatewayAddresses?: NatGatewayAddressList;
+  }
   export interface AssignedPrivateIpAddress {
     /**
      * The private IP address assigned to the network interface.
@@ -6044,6 +6104,34 @@ declare namespace EC2 {
      * A resource discovery association. An associated resource discovery is a resource discovery that has been associated with an IPAM.
      */
     IpamResourceDiscoveryAssociation?: IpamResourceDiscoveryAssociation;
+  }
+  export interface AssociateNatGatewayAddressRequest {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId: NatGatewayId;
+    /**
+     * The allocation IDs of EIPs that you want to associate with your NAT gateway.
+     */
+    AllocationIds: AllocationIdList;
+    /**
+     * The private IPv4 addresses that you want to assign to the NAT gateway.
+     */
+    PrivateIpAddresses?: IpList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface AssociateNatGatewayAddressResult {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId?: NatGatewayId;
+    /**
+     * The IP addresses.
+     */
+    NatGatewayAddresses?: NatGatewayAddressList;
   }
   export interface AssociateRouteTableRequest {
     /**
@@ -8115,7 +8203,7 @@ declare namespace EC2 {
     /**
      * When you copy an encrypted source snapshot using the Amazon EC2 Query API, you must supply a pre-signed URL. This parameter is optional for unencrypted snapshots. For more information, see Query requests. The PresignedUrl should use the snapshot source endpoint, the CopySnapshot action, and include the SourceRegion, SourceSnapshotId, and DestinationRegion parameters. The PresignedUrl must be signed using Amazon Web Services Signature Version 4. Because EBS snapshots are stored in Amazon S3, the signing algorithm for this parameter uses the same logic that is described in Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4) in the Amazon Simple Storage Service API Reference. An invalid or improperly signed PresignedUrl will cause the copy operation to fail asynchronously, and the snapshot will move to an error state.
      */
-    PresignedUrl?: String;
+    PresignedUrl?: CopySnapshotRequestPSU;
     /**
      * The ID of the Region that contains the snapshot to be copied.
      */
@@ -8133,6 +8221,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export type CopySnapshotRequestPSU = string;
   export interface CopySnapshotResult {
     /**
      * The ID of the new snapshot.
@@ -9375,7 +9464,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The subnet in which to create the NAT gateway.
+     * The ID of the subnet in which to create the NAT gateway.
      */
     SubnetId: SubnetId;
     /**
@@ -9390,6 +9479,18 @@ declare namespace EC2 {
      * The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
      */
     PrivateIpAddress?: String;
+    /**
+     * Secondary EIP allocation IDs. For more information about secondary addresses, see Create a NAT gateway in the Amazon Virtual Private Cloud User Guide.
+     */
+    SecondaryAllocationIds?: AllocationIdList;
+    /**
+     * Secondary private IPv4 addresses. For more information about secondary addresses, see Create a NAT gateway in the Amazon Virtual Private Cloud User Guide.
+     */
+    SecondaryPrivateIpAddresses?: IpList;
+    /**
+     * [Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see Create a NAT gateway in the Amazon Virtual Private Cloud User Guide.
+     */
+    SecondaryPrivateIpAddressCount?: PrivateIpAddressCount;
   }
   export interface CreateNatGatewayResult {
     /**
@@ -17962,6 +18063,34 @@ declare namespace EC2 {
      */
     IpamResourceDiscoveryAssociation?: IpamResourceDiscoveryAssociation;
   }
+  export interface DisassociateNatGatewayAddressRequest {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId: NatGatewayId;
+    /**
+     * The association IDs of EIPs that have been associated with the NAT gateway.
+     */
+    AssociationIds: EipAssociationIdList;
+    /**
+     * The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.
+     */
+    MaxDrainDurationSeconds?: DrainSeconds;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisassociateNatGatewayAddressResult {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId?: NatGatewayId;
+    /**
+     * Information about the NAT gateway IP addresses.
+     */
+    NatGatewayAddresses?: NatGatewayAddressList;
+  }
   export interface DisassociateRouteTableRequest {
     /**
      * The association ID representing the current association between the route table and subnet or gateway.
@@ -18211,6 +18340,7 @@ declare namespace EC2 {
   export type DomainType = "vpc"|"standard"|string;
   export type Double = number;
   export type DoubleWithConstraints = number;
+  export type DrainSeconds = number;
   export type DynamicRoutingValue = "enable"|"disable"|string;
   export interface EbsBlockDevice {
     /**
@@ -18349,6 +18479,7 @@ declare namespace EC2 {
   export type EgressOnlyInternetGatewayId = string;
   export type EgressOnlyInternetGatewayIdList = EgressOnlyInternetGatewayId[];
   export type EgressOnlyInternetGatewayList = EgressOnlyInternetGateway[];
+  export type EipAssociationIdList = ElasticIpAssociationId[];
   export interface ElasticGpuAssociation {
     /**
      * The ID of the Elastic Graphics accelerator.
@@ -23794,6 +23925,7 @@ declare namespace EC2 {
   export type IpAddress = string;
   export type IpAddressList = IpAddress[];
   export type IpAddressType = "ipv4"|"dualstack"|"ipv6"|string;
+  export type IpList = String[];
   export interface IpPermission {
     /**
      * If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
@@ -28253,8 +28385,25 @@ declare namespace EC2 {
      * [Public NAT gateway only] The Elastic IP address associated with the NAT gateway.
      */
     PublicIp?: String;
+    /**
+     * [Public NAT gateway only] The association ID of the Elastic IP address that's associated with the NAT gateway.
+     */
+    AssociationId?: String;
+    /**
+     * Defines if the IP address is the primary address.
+     */
+    IsPrimary?: Boolean;
+    /**
+     * The address failure message.
+     */
+    FailureMessage?: String;
+    /**
+     * The address status.
+     */
+    Status?: NatGatewayAddressStatus;
   }
   export type NatGatewayAddressList = NatGatewayAddress[];
+  export type NatGatewayAddressStatus = "assigning"|"unassigning"|"associating"|"disassociating"|"succeeded"|"failed"|string;
   export type NatGatewayId = string;
   export type NatGatewayIdStringList = NatGatewayId[];
   export type NatGatewayList = NatGateway[];
@@ -29631,6 +29780,7 @@ declare namespace EC2 {
     EnableResourceNameDnsAAAARecord?: Boolean;
   }
   export type PrivateIpAddressConfigSet = ScheduledInstancesPrivateIpAddressConfig[];
+  export type PrivateIpAddressCount = number;
   export interface PrivateIpAddressSpecification {
     /**
      * Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.
@@ -35914,6 +36064,34 @@ declare namespace EC2 {
      * The IPv4 prefixes to unassign from the network interface.
      */
     Ipv4Prefixes?: IpPrefixList;
+  }
+  export interface UnassignPrivateNatGatewayAddressRequest {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId: NatGatewayId;
+    /**
+     * The private IPv4 addresses you want to unassign.
+     */
+    PrivateIpAddresses: IpList;
+    /**
+     * The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.
+     */
+    MaxDrainDurationSeconds?: DrainSeconds;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface UnassignPrivateNatGatewayAddressResult {
+    /**
+     * The NAT gateway ID.
+     */
+    NatGatewayId?: NatGatewayId;
+    /**
+     * Information about the NAT gateway IP addresses.
+     */
+    NatGatewayAddresses?: NatGatewayAddressList;
   }
   export type UnlimitedSupportedInstanceFamily = "t2"|"t3"|"t3a"|"t4g"|string;
   export interface UnmonitorInstancesRequest {

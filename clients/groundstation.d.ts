@@ -101,6 +101,14 @@ declare class GroundStation extends Service {
    */
   describeEphemeris(callback?: (err: AWSError, data: GroundStation.Types.DescribeEphemerisResponse) => void): Request<GroundStation.Types.DescribeEphemerisResponse, AWSError>;
   /**
+   * Gets the latest configuration information for a registered agent.
+   */
+  getAgentConfiguration(params: GroundStation.Types.GetAgentConfigurationRequest, callback?: (err: AWSError, data: GroundStation.Types.GetAgentConfigurationResponse) => void): Request<GroundStation.Types.GetAgentConfigurationResponse, AWSError>;
+  /**
+   * Gets the latest configuration information for a registered agent.
+   */
+  getAgentConfiguration(callback?: (err: AWSError, data: GroundStation.Types.GetAgentConfigurationResponse) => void): Request<GroundStation.Types.GetAgentConfigurationResponse, AWSError>;
+  /**
    * Returns Config information. Only one Config response can be returned.
    */
   getConfig(params: GroundStation.Types.GetConfigRequest, callback?: (err: AWSError, data: GroundStation.Types.GetConfigResponse) => void): Request<GroundStation.Types.GetConfigResponse, AWSError>;
@@ -205,6 +213,14 @@ declare class GroundStation extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: GroundStation.Types.ListTagsForResourceResponse) => void): Request<GroundStation.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Registers a new agent with AWS Groundstation.
+   */
+  registerAgent(params: GroundStation.Types.RegisterAgentRequest, callback?: (err: AWSError, data: GroundStation.Types.RegisterAgentResponse) => void): Request<GroundStation.Types.RegisterAgentResponse, AWSError>;
+  /**
+   * Registers a new agent with AWS Groundstation.
+   */
+  registerAgent(callback?: (err: AWSError, data: GroundStation.Types.RegisterAgentResponse) => void): Request<GroundStation.Types.RegisterAgentResponse, AWSError>;
+  /**
    * Reserves a contact using specified parameters.
    */
   reserveContact(params: GroundStation.Types.ReserveContactRequest, callback?: (err: AWSError, data: GroundStation.Types.ContactIdResponse) => void): Request<GroundStation.Types.ContactIdResponse, AWSError>;
@@ -228,6 +244,14 @@ declare class GroundStation extends Service {
    * Deassigns a resource tag.
    */
   untagResource(callback?: (err: AWSError, data: GroundStation.Types.UntagResourceResponse) => void): Request<GroundStation.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Update the status of the agent.
+   */
+  updateAgentStatus(params: GroundStation.Types.UpdateAgentStatusRequest, callback?: (err: AWSError, data: GroundStation.Types.UpdateAgentStatusResponse) => void): Request<GroundStation.Types.UpdateAgentStatusResponse, AWSError>;
+  /**
+   * Update the status of the agent.
+   */
+  updateAgentStatus(callback?: (err: AWSError, data: GroundStation.Types.UpdateAgentStatusResponse) => void): Request<GroundStation.Types.UpdateAgentStatusResponse, AWSError>;
   /**
    * Updates the Config used when scheduling contacts. Updating a Config will not update the execution parameters for existing future contacts scheduled with this Config.
    */
@@ -263,6 +287,39 @@ declare class GroundStation extends Service {
 }
 declare namespace GroundStation {
   export type AWSRegion = string;
+  export interface AgentDetails {
+    /**
+     * Current agent version.
+     */
+    agentVersion: VersionString;
+    /**
+     * List of versions being used by agent components.
+     */
+    componentVersions: ComponentVersionList;
+    /**
+     * ID of EC2 instance agent is running on.
+     */
+    instanceId: InstanceId;
+    /**
+     * Type of EC2 instance agent is running on.
+     */
+    instanceType: InstanceType;
+    /**
+     * Number of Cpu cores reserved for agent.
+     */
+    reservedCpuCores: ReservedCpuCoresList;
+  }
+  export type AgentStatus = "SUCCESS"|"FAILED"|"ACTIVE"|"INACTIVE"|string;
+  export interface AggregateStatus {
+    /**
+     * Sparse map of failure signatures.
+     */
+    signatureMap?: SignatureMap;
+    /**
+     * Aggregate status.
+     */
+    status: AgentStatus;
+  }
   export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string;
   export interface AntennaDemodDecodeDetails {
     /**
@@ -305,6 +362,29 @@ declare namespace GroundStation {
     transmitDisabled?: Boolean;
   }
   export type AnyArn = string;
+  export type AuditResults = "HEALTHY"|"UNHEALTHY"|string;
+  export interface AwsGroundStationAgentEndpoint {
+    /**
+     * The status of AgentEndpoint.
+     */
+    agentStatus?: AgentStatus;
+    /**
+     * The results of the audit.
+     */
+    auditResults?: AuditResults;
+    /**
+     * The egress address of AgentEndpoint.
+     */
+    egressAddress: ConnectionDetails;
+    /**
+     * The ingress address of AgentEndpoint.
+     */
+    ingressAddress: RangedConnectionDetails;
+    /**
+     * Name string associated with AgentEndpoint. Used as a human-readable identifier for AgentEndpoint.
+     */
+    name: SafeName;
+  }
   export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
   export type Boolean = boolean;
   export type BucketArn = string;
@@ -314,6 +394,51 @@ declare namespace GroundStation {
      */
     contactId: Uuid;
   }
+  export type CapabilityArn = string;
+  export type CapabilityArnList = CapabilityArn[];
+  export interface ComponentStatusData {
+    /**
+     * Bytes received by the component.
+     */
+    bytesReceived?: Long;
+    /**
+     * Bytes sent by the component.
+     */
+    bytesSent?: Long;
+    /**
+     * Capability ARN of the component.
+     */
+    capabilityArn: CapabilityArn;
+    /**
+     * The Component type.
+     */
+    componentType: ComponentType;
+    /**
+     * Dataflow UUID associated with the component.
+     */
+    dataflowId: Uuid;
+    /**
+     * Packets dropped by component.
+     */
+    packetsDropped?: Long;
+    /**
+     * Component status.
+     */
+    status: AgentStatus;
+  }
+  export type ComponentStatusList = ComponentStatusData[];
+  export type ComponentType = "LAMINAR_FLOW"|"PRISM"|"DIGITIZER"|string;
+  export interface ComponentVersion {
+    /**
+     * Component type.
+     */
+    componentType: ComponentType;
+    /**
+     * List of versions.
+     */
+    versions: VersionStringList;
+  }
+  export type ComponentVersionList = ComponentVersion[];
   export type ConfigArn = string;
   export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|"s3-recording"|string;
   export interface ConfigDetails {
@@ -389,6 +514,16 @@ declare namespace GroundStation {
      * Information about an uplink echo Config. Parameters from the AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are used when this UplinkEchoConfig is used in a contact.
      */
     uplinkEchoConfig?: UplinkEchoConfig;
+  }
+  export interface ConnectionDetails {
+    /**
+     * Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+     */
+    mtu?: Integer;
+    /**
+     * A socket address.
+     */
+    socketAddress: SocketAddress;
   }
   export interface ContactData {
     /**
@@ -539,6 +674,14 @@ declare namespace GroundStation {
      * Name of a mission profile.
      */
     name: SafeName;
+    /**
+     * KMS key to use for encrypting streams.
+     */
+    streamsKmsKey?: KmsKey;
+    /**
+     * Role to use for encrypting streams with KMS key.
+     */
+    streamsKmsRole?: RoleArn;
     /**
      * Tags assigned to a mission profile.
      */
@@ -779,6 +922,20 @@ declare namespace GroundStation {
      */
     dataflowDestinationRegion?: String;
   }
+  export interface DiscoveryData {
+    /**
+     * List of capabilities to associate with agent.
+     */
+    capabilityArns: CapabilityArnList;
+    /**
+     * List of private IP addresses to associate with agent.
+     */
+    privateIpAddresses: IpAddressList;
+    /**
+     * List of public IP addresses to associate with agent.
+     */
+    publicIpAddresses: IpAddressList;
+  }
   export type Double = number;
   export type DurationInSeconds = number;
   export interface Eirp {
@@ -803,6 +960,10 @@ declare namespace GroundStation {
     value: Double;
   }
   export interface EndpointDetails {
+    /**
+     * An agent endpoint.
+     */
+    awsGroundStationAgentEndpoint?: AwsGroundStationAgentEndpoint;
     /**
      * A dataflow endpoint.
      */
@@ -913,6 +1074,22 @@ declare namespace GroundStation {
     value: Double;
   }
   export type FrequencyUnits = "GHz"|"MHz"|"kHz"|string;
+  export interface GetAgentConfigurationRequest {
+    /**
+     * UUID of agent to get configuration information for.
+     */
+    agentId: Uuid;
+  }
+  export interface GetAgentConfigurationResponse {
+    /**
+     * UUID of agent.
+     */
+    agentId?: Uuid;
+    /**
+     * Tasking document for agent.
+     */
+    taskingDocument?: String;
+  }
   export interface GetConfigRequest {
     /**
      * UUID of a Config.
@@ -1053,6 +1230,14 @@ declare namespace GroundStation {
      */
     region?: AWSRegion;
     /**
+     * KMS key to use for encrypting streams.
+     */
+    streamsKmsKey?: KmsKey;
+    /**
+     * Role to use for encrypting streams with KMS key.
+     */
+    streamsKmsRole?: RoleArn;
+    /**
      * Tags assigned to a mission profile.
      */
     tags?: TagsMap;
@@ -1106,9 +1291,34 @@ declare namespace GroundStation {
   export type GroundStationIdList = GroundStationName[];
   export type GroundStationList = GroundStationData[];
   export type GroundStationName = string;
+  export type InstanceId = string;
+  export type InstanceType = string;
   export type Integer = number;
+  export interface IntegerRange {
+    /**
+     * A maximum value.
+     */
+    maximum: Integer;
+    /**
+     * A minimum value.
+     */
+    minimum: Integer;
+  }
+  export type IpAddressList = IpV4Address[];
+  export type IpV4Address = string;
   export type JsonString = string;
+  export type KeyAliasArn = string;
   export type KeyArn = string;
+  export interface KmsKey {
+    /**
+     * KMS Alias Arn.
+     */
+    kmsAliasArn?: KeyAliasArn;
+    /**
+     * KMS Key Arn.
+     */
+    kmsKeyArn?: KeyArn;
+  }
   export interface ListConfigsRequest {
     /**
      * Maximum number of Configs returned.
@@ -1305,6 +1515,7 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
+  export type Long = number;
   export type MissionProfileArn = string;
   export interface MissionProfileIdResponse {
     /**
@@ -1346,6 +1557,43 @@ declare namespace GroundStation {
   export type PaginationToken = string;
   export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND"|string;
   export type PositiveDurationInSeconds = number;
+  export interface RangedConnectionDetails {
+    /**
+     * Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+     */
+    mtu?: RangedConnectionDetailsMtuInteger;
+    /**
+     * A ranged socket address.
+     */
+    socketAddress: RangedSocketAddress;
+  }
+  export type RangedConnectionDetailsMtuInteger = number;
+  export interface RangedSocketAddress {
+    /**
+     * IPv4 socket address.
+     */
+    name: IpV4Address;
+    /**
+     * Port range of a socket address.
+     */
+    portRange: IntegerRange;
+  }
+  export interface RegisterAgentRequest {
+    /**
+     * Detailed information about the agent being registered.
+     */
+    agentDetails: AgentDetails;
+    /**
+     * Data for associating and agent with the capabilities it is managing.
+     */
+    discoveryData: DiscoveryData;
+  }
+  export interface RegisterAgentResponse {
+    /**
+     * UUID of registered agent.
+     */
+    agentId?: Uuid;
+  }
   export interface ReserveContactRequest {
     /**
      * End time of a contact in UTC.
@@ -1372,6 +1620,7 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
+  export type ReservedCpuCoresList = Integer[];
   export type RoleArn = string;
   export type S3BucketName = string;
   export type S3KeyPrefix = string;
@@ -1454,6 +1703,7 @@ declare namespace GroundStation {
     subnetIds: SubnetList;
   }
   export type SecurityGroupIdList = String[];
+  export type SignatureMap = {[key: string]: Boolean};
   export interface SocketAddress {
     /**
      * Name of a socket address.
@@ -1570,6 +1820,30 @@ declare namespace GroundStation {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateAgentStatusRequest {
+    /**
+     * UUID of agent to update.
+     */
+    agentId: Uuid;
+    /**
+     * Aggregate status for agent.
+     */
+    aggregateStatus: AggregateStatus;
+    /**
+     * List of component statuses for agent.
+     */
+    componentStatuses: ComponentStatusList;
+    /**
+     * GUID of agent task.
+     */
+    taskId: Uuid;
+  }
+  export interface UpdateAgentStatusResponse {
+    /**
+     * UUID of updated agent.
+     */
+    agentId: Uuid;
+  }
   export interface UpdateConfigRequest {
     /**
      * Parameters of a Config.
@@ -1632,6 +1906,14 @@ declare namespace GroundStation {
      */
     name?: SafeName;
     /**
+     * KMS key to use for encrypting streams.
+     */
+    streamsKmsKey?: KmsKey;
+    /**
+     * Role to use for encrypting streams with KMS key.
+     */
+    streamsKmsRole?: RoleArn;
+    /**
      * ARN of a tracking Config.
      */
     trackingConfigArn?: ConfigArn;
@@ -1657,6 +1939,8 @@ declare namespace GroundStation {
     polarization?: Polarization;
   }
   export type Uuid = string;
+  export type VersionString = string;
+  export type VersionStringList = VersionString[];
   export type Year = number;
   export type noradSatelliteID = number;
   export type satelliteArn = string;

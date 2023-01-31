@@ -2234,6 +2234,24 @@
       "min": 10,
       "pattern": "[a-z][a-z0-9\\-]+"
     },
+    "ConnectionMode": {
+      "type": "string",
+      "documentation": "<p>The connection mode for the cross-cluster connection.</p> <ul> <li> <p> <b>DIRECT</b> - Used for cross-cluster search or cross-cluster replication.</p> </li> <li> <p> <b>VPC_ENDPOINT</b> - Used for remote reindex between Amazon OpenSearch Service VPC domains.</p> </li> </ul>",
+      "enum": [
+        "DIRECT",
+        "VPC_ENDPOINT"
+      ]
+    },
+    "ConnectionProperties": {
+      "type": "structure",
+      "members": {
+        "Endpoint": {
+          "shape": "Endpoint",
+          "documentation": "<p>The endpoint of the remote domain.</p>"
+        }
+      },
+      "documentation": "<p>The connection properties of an outbound connection.</p>"
+    },
     "ConnectionStatusMessage": {
       "type": "string"
     },
@@ -2338,6 +2356,10 @@
         "ConnectionAlias": {
           "shape": "ConnectionAlias",
           "documentation": "<p>Name of the connection.</p>"
+        },
+        "ConnectionMode": {
+          "shape": "ConnectionMode",
+          "documentation": "<p>The connection mode.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code>CreateOutboundConnection</code> operation.</p>"
@@ -2364,6 +2386,14 @@
         "ConnectionId": {
           "shape": "ConnectionId",
           "documentation": "<p>The unique identifier for the created outbound connection, which is used for subsequent operations on the connection.</p>"
+        },
+        "ConnectionMode": {
+          "shape": "ConnectionMode",
+          "documentation": "<p>The connection mode.</p>"
+        },
+        "ConnectionProperties": {
+          "shape": "ConnectionProperties",
+          "documentation": "<p>The <code>ConnectionProperties</code> for the newly created connection.</p>"
         }
       },
       "documentation": "<p>The result of a <code>CreateOutboundConnection</code> request. Contains details about the newly created cross-cluster connection.</p>"
@@ -3830,6 +3860,10 @@
         "ConnectionStatus": {
           "shape": "InboundConnectionStatus",
           "documentation": "<p>The current status of the connection.</p>"
+        },
+        "ConnectionMode": {
+          "shape": "ConnectionMode",
+          "documentation": "<p>The connection mode.</p>"
         }
       },
       "documentation": "<p>Describes an inbound cross-cluster connection for Amazon OpenSearch Service. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html\">Cross-cluster search for Amazon OpenSearch Service</a>.</p>"
@@ -4611,6 +4645,14 @@
         "ConnectionStatus": {
           "shape": "OutboundConnectionStatus",
           "documentation": "<p>Status of the connection.</p>"
+        },
+        "ConnectionMode": {
+          "shape": "ConnectionMode",
+          "documentation": "<p>The connection mode.</p>"
+        },
+        "ConnectionProperties": {
+          "shape": "ConnectionProperties",
+          "documentation": "<p>Properties for the outbound connection.</p>"
         }
       },
       "documentation": "<p>Specifies details about an outbound cross-cluster connection.</p>"

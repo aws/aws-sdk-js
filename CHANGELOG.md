@@ -1,6 +1,24 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1305.0-->
+<!--LATEST=2.1306.0-->
 <!--ENTRYINSERT-->
+
+## 2.1306.0
+* feature: AccessAnalyzer: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: AppSync: This release introduces the feature to support EventBridge as AppSync data source.
+* feature: CloudTrail: Add new "Channel" APIs to enable users to manage channels used for CloudTrail Lake integrations, and "Resource Policy" APIs to enable users to manage the resource-based permissions policy attached to a channel.
+* feature: CloudTrailData: Add CloudTrail Data Service to enable users to ingest activity events from non-AWS sources into CloudTrail Lake.
+* feature: CodeArtifact: This release introduces a new DeletePackage API, which enables deletion of a package and all of its versions from a repository.
+* feature: ConnectParticipant: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: EC2: This launch allows customers to associate up to 8 IP addresses to their NAT Gateways to increase the limit on concurrent connections to a single destination by eight times from 55K to 440K.
+* feature: GroundStation: DigIF Expansion changes to the Customer APIs.
+* feature: Iot: Added support for IoT Rules Engine Cloudwatch Logs action batch mode.
+* feature: Kinesis: Updates API to latest version.
+* feature: OpenSearch: Amazon OpenSearch Service adds the option for a VPC endpoint connection between two domains when the local domain uses OpenSearch version 1.3 or 2.3. You can now use remote reindex to copy indices from one VPC domain to another without a reverse proxy.
+* feature: Outposts: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Polly: Amazon Polly adds two new neural American English voices - Ruth, Stephen
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now supports more completion criteria for Hyperparameter Optimization.
+* feature: SecurityHub: New fields have been added to the AWS Security Finding Format. Compliance.SecurityControlId is a unique identifier for a security control across standards. Compliance.AssociatedStandards contains all enabled standards in which a security control is enabled.
+* feature: Support: This fixes incorrect endpoint construction when a customer is explicitly setting a region.
 
 ## 2.1305.0
 * feature: CloudDirectory: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
