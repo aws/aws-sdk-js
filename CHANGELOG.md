@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1306.0-->
+<!--LATEST=2.1307.0-->
 <!--ENTRYINSERT-->
+
+## 2.1307.0
+* feature: DevOpsGuru: This release adds filter support ListAnomalyForInsight API.
+* feature: ForecastService: This release will enable customer select INCREMENTAL as ImportModel in Forecast's CreateDatasetImportJob API. Verified latest SDK containing required attribute, following https://w.amazon.com/bin/view/AWS-Seer/Launch/Trebuchet/
+* feature: MediaTailor: The AWS Elemental MediaTailor SDK for Channel Assembly has added support for program updates, and the ability to clip the end of VOD sources in programs.
+* feature: SNS: Additional attributes added for set-topic-attributes.
 
 ## 2.1306.0
 * feature: AccessAnalyzer: Enabled FIPS endpoints for GovCloud (US) regions in SDK.

@@ -340,6 +340,14 @@ declare class MediaTailor extends Service {
    */
   updateLiveSource(callback?: (err: AWSError, data: MediaTailor.Types.UpdateLiveSourceResponse) => void): Request<MediaTailor.Types.UpdateLiveSourceResponse, AWSError>;
   /**
+   * Updates a program within a channel.
+   */
+  updateProgram(params: MediaTailor.Types.UpdateProgramRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateProgramResponse) => void): Request<MediaTailor.Types.UpdateProgramResponse, AWSError>;
+  /**
+   * Updates a program within a channel.
+   */
+  updateProgram(callback?: (err: AWSError, data: MediaTailor.Types.UpdateProgramResponse) => void): Request<MediaTailor.Types.UpdateProgramResponse, AWSError>;
+  /**
    * Updates a source location. A source location is a container for sources. For more information about source locations, see Working with source locations in the MediaTailor User Guide.
    */
   updateSourceLocation(params: MediaTailor.Types.UpdateSourceLocationRequest, callback?: (err: AWSError, data: MediaTailor.Types.UpdateSourceLocationResponse) => void): Request<MediaTailor.Types.UpdateSourceLocationResponse, AWSError>;
@@ -505,6 +513,12 @@ declare namespace MediaTailor {
     Tier: __string;
   }
   export type ChannelState = "RUNNING"|"STOPPED"|string;
+  export interface ClipRange {
+    /**
+     * The end offset of the clip range, in milliseconds, starting from the beginning of the VOD source associated with the program.
+     */
+    EndOffsetMillis: __long;
+  }
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
   export interface ConfigureLogsForChannelRequest {
@@ -755,9 +769,17 @@ declare namespace MediaTailor {
      */
     ChannelName?: __string;
     /**
+     * The clip range configuration settings.
+     */
+    ClipRange?: ClipRange;
+    /**
      * The time the program was created.
      */
     CreationTime?: __timestampUnix;
+    /**
+     * The duration of the live program in milliseconds.
+     */
+    DurationMillis?: __long;
     /**
      * The name of the LiveSource for this Program.
      */
@@ -1135,9 +1157,17 @@ declare namespace MediaTailor {
      */
     ChannelName?: __string;
     /**
+     * The clip range configuration settings.
+     */
+    ClipRange?: ClipRange;
+    /**
      * The timestamp of when the program was created.
      */
     CreationTime?: __timestampUnix;
+    /**
+     * The duration of the live program in milliseconds.
+     */
+    DurationMillis?: Long;
     /**
      * The name of the LiveSource for this Program.
      */
@@ -1663,6 +1693,7 @@ declare namespace MediaTailor {
   }
   export type LogType = "AS_RUN"|string;
   export type LogTypes = LogType[];
+  export type Long = number;
   export interface ManifestProcessingRules {
     /**
      * For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest to the MediaTailor personalized manifest. No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad break, MediaTailor will not set the value to 0.
@@ -2018,6 +2049,10 @@ declare namespace MediaTailor {
   }
   export interface ScheduleConfiguration {
     /**
+     * Program clip range configuration.
+     */
+    ClipRange?: ClipRange;
+    /**
      * Program transition configurations.
      */
     Transition: Transition;
@@ -2356,6 +2391,90 @@ declare namespace MediaTailor {
      * The tags to assign to the live source. Tags are key-value pairs that you can associate with Amazon resources to help with organization, access control, and cost tracking. For more information, see Tagging AWS Elemental MediaTailor Resources.
      */
     Tags?: __mapOf__string;
+  }
+  export interface UpdateProgramRequest {
+    /**
+     * The ad break configuration settings.
+     */
+    AdBreaks?: __listOfAdBreak;
+    /**
+     * The name of the channel for this Program.
+     */
+    ChannelName: __string;
+    /**
+     * The name of the Program.
+     */
+    ProgramName: __string;
+    /**
+     * The schedule configuration settings.
+     */
+    ScheduleConfiguration: UpdateProgramScheduleConfiguration;
+  }
+  export interface UpdateProgramResponse {
+    /**
+     * The ad break configuration settings.
+     */
+    AdBreaks?: __listOfAdBreak;
+    /**
+     * The ARN to assign to the program.
+     */
+    Arn?: __string;
+    /**
+     * The name to assign to the channel for this program.
+     */
+    ChannelName?: __string;
+    /**
+     * The clip range configuration settings.
+     */
+    ClipRange?: ClipRange;
+    /**
+     * The time the program was created.
+     */
+    CreationTime?: __timestampUnix;
+    /**
+     * The duration of the live program in milliseconds.
+     */
+    DurationMillis?: __long;
+    /**
+     * The name of the LiveSource for this Program.
+     */
+    LiveSourceName?: __string;
+    /**
+     * The name to assign to this program.
+     */
+    ProgramName?: __string;
+    /**
+     * The scheduled start time for this Program.
+     */
+    ScheduledStartTime?: __timestampUnix;
+    /**
+     * The name to assign to the source location for this program.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The name that's used to refer to a VOD source.
+     */
+    VodSourceName?: __string;
+  }
+  export interface UpdateProgramScheduleConfiguration {
+    /**
+     * Program clip range configuration.
+     */
+    ClipRange?: ClipRange;
+    /**
+     * Program transition configuration.
+     */
+    Transition?: UpdateProgramTransition;
+  }
+  export interface UpdateProgramTransition {
+    /**
+     * The duration of the live program in seconds.
+     */
+    DurationMillis?: __long;
+    /**
+     * The date and time that the program is scheduled to start, in epoch milliseconds.
+     */
+    ScheduledStartTimeMillis?: __long;
   }
   export interface UpdateSourceLocationRequest {
     /**

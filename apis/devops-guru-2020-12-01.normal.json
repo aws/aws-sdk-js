@@ -2210,6 +2210,15 @@
         "PROACTIVE"
       ]
     },
+    "ListAnomaliesForInsightFilters": {
+      "type": "structure",
+      "members": {
+        "ServiceCollection": {
+          "shape": "ServiceCollection"
+        }
+      },
+      "documentation": "<p> Specifies one or more service names that are used to list anomalies. </p>"
+    },
     "ListAnomaliesForInsightMaxResults": {
       "type": "integer",
       "max": 500,
@@ -2242,6 +2251,10 @@
         "AccountId": {
           "shape": "AwsAccountId",
           "documentation": "<p>The ID of the Amazon Web Services account. </p>"
+        },
+        "Filters": {
+          "shape": "ListAnomaliesForInsightFilters",
+          "documentation": "<p> Specifies one or more service names that are used to list anomalies. </p>"
         }
       }
     },

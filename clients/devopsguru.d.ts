@@ -936,6 +936,9 @@ declare namespace DevOpsGuru {
     EndTime?: Timestamp;
   }
   export type InsightType = "REACTIVE"|"PROACTIVE"|string;
+  export interface ListAnomaliesForInsightFilters {
+    ServiceCollection?: ServiceCollection;
+  }
   export type ListAnomaliesForInsightMaxResults = number;
   export interface ListAnomaliesForInsightRequest {
     /**
@@ -958,6 +961,10 @@ declare namespace DevOpsGuru {
      * The ID of the Amazon Web Services account. 
      */
     AccountId?: AwsAccountId;
+    /**
+     *  Specifies one or more service names that are used to list anomalies. 
+     */
+    Filters?: ListAnomaliesForInsightFilters;
   }
   export interface ListAnomaliesForInsightResponse {
     /**
