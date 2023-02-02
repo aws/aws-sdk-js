@@ -36,19 +36,19 @@ declare class QuickSight extends Service {
    */
   createAccountSubscription(callback?: (err: AWSError, data: QuickSight.Types.CreateAccountSubscriptionResponse) => void): Request<QuickSight.Types.CreateAccountSubscriptionResponse, AWSError>;
   /**
-   * Creates an analysis in Amazon QuickSight.
+   * Creates an analysis in Amazon QuickSight. Analyses can be created either from a template or from an AnalysisDefinition.
    */
   createAnalysis(params: QuickSight.Types.CreateAnalysisRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateAnalysisResponse) => void): Request<QuickSight.Types.CreateAnalysisResponse, AWSError>;
   /**
-   * Creates an analysis in Amazon QuickSight.
+   * Creates an analysis in Amazon QuickSight. Analyses can be created either from a template or from an AnalysisDefinition.
    */
   createAnalysis(callback?: (err: AWSError, data: QuickSight.Types.CreateAnalysisResponse) => void): Request<QuickSight.Types.CreateAnalysisResponse, AWSError>;
   /**
-   * Creates a dashboard from a template. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different Amazon Web Services account.
+   * Creates a dashboard from either a template or directly with a DashboardDefinition. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different Amazon Web Services account.
    */
   createDashboard(params: QuickSight.Types.CreateDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
   /**
-   * Creates a dashboard from a template. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different Amazon Web Services account.
+   * Creates a dashboard from either a template or directly with a DashboardDefinition. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different Amazon Web Services account.
    */
   createDashboard(callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class QuickSight extends Service {
    */
   createNamespace(callback?: (err: AWSError, data: QuickSight.Types.CreateNamespaceResponse) => void): Request<QuickSight.Types.CreateNamespaceResponse, AWSError>;
   /**
-   * Creates a template from an existing Amazon QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in Amazon QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
+   * Creates a template either from a TemplateDefinition or from an existing Amazon QuickSight analysis or template. You can use the resulting template to create additional dashboards, templates, or analyses. A template is an entity in Amazon QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(params: QuickSight.Types.CreateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
   /**
-   * Creates a template from an existing Amazon QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in Amazon QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
+   * Creates a template either from a TemplateDefinition or from an existing Amazon QuickSight analysis or template. You can use the resulting template to create additional dashboards, templates, or analyses. A template is an entity in Amazon QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
   /**
@@ -2021,7 +2021,7 @@ declare namespace QuickSight {
     /**
      * The configuration for a CategoryFilter.
      */
-    Configuration?: CategoryFilterConfiguration;
+    Configuration: CategoryFilterConfiguration;
   }
   export interface CategoryFilterConfiguration {
     /**
@@ -2671,7 +2671,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * A source entity to use for the analysis that you're creating. This metadata structure contains details that describe a source template and one or more datasets.
+     * A source entity to use for the analysis that you're creating. This metadata structure contains details that describe a source template and one or more datasets. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     SourceEntity?: AnalysisSourceEntity;
     /**
@@ -2683,7 +2683,7 @@ declare namespace QuickSight {
      */
     Tags?: TagList;
     /**
-     * The definition of an analysis. A definition is the data model of all features in a Dashboard, Template, or Analysis.
+     * The definition of an analysis. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     Definition?: AnalysisDefinition;
   }
@@ -2737,7 +2737,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The entity that you are using as a source when you create the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a SourceTemplate entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the  CreateTemplate  API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you create the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a SourceTemplate entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the  CreateTemplate  API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder.  Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     SourceEntity?: DashboardSourceEntity;
     /**
@@ -2757,7 +2757,7 @@ declare namespace QuickSight {
      */
     ThemeArn?: Arn;
     /**
-     * The definition of a dashboard. A definition is the data model of all features in a Dashboard, Template, or Analysis.
+     * The definition of a dashboard. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     Definition?: DashboardVersionDefinition;
   }
@@ -3270,7 +3270,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The entity that you are using as a source when you create the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you create the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder.  Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     SourceEntity?: TemplateSourceEntity;
     /**
@@ -3282,7 +3282,7 @@ declare namespace QuickSight {
      */
     VersionDescription?: VersionDescription;
     /**
-     * The definition of a template. A definition is the data model of all features in a Dashboard, Template, or Analysis.
+     * The definition of a template. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     Definition?: TemplateVersionDefinition;
   }
@@ -3660,7 +3660,7 @@ declare namespace QuickSight {
      */
     Message?: NonEmptyString;
     /**
-     * 
+     * Lists the violated entities that caused the dashboard error.
      */
     ViolatedEntities?: EntityList;
   }
@@ -3682,9 +3682,37 @@ declare namespace QuickSight {
      */
     SheetControlsOption?: SheetControlsOption;
     /**
-     * 
+     * The visual publish options of a visual in a dashboard.
      */
     VisualPublishOptions?: DashboardVisualPublishOptions;
+    /**
+     * The sheet layout maximization options of a dashbaord.
+     */
+    SheetLayoutElementMaximizationOption?: SheetLayoutElementMaximizationOption;
+    /**
+     * The menu options of a visual in a dashboard.
+     */
+    VisualMenuOption?: VisualMenuOption;
+    /**
+     * The axis sort options of a dashboard.
+     */
+    VisualAxisSortOption?: VisualAxisSortOption;
+    /**
+     * Determines if hidden fields are exported with a dashboard.
+     */
+    ExportWithHiddenFieldsOption?: ExportWithHiddenFieldsOption;
+    /**
+     * The drill-down options of data points in a dashboard.
+     */
+    DataPointDrillUpDownOption?: DataPointDrillUpDownOption;
+    /**
+     * The data point menu label options of a dashboard.
+     */
+    DataPointMenuLabelOption?: DataPointMenuLabelOption;
+    /**
+     * The data point tool tip options of a dashboard.
+     */
+    DataPointTooltipOption?: DataPointTooltipOption;
   }
   export interface DashboardSearchFilter {
     /**
@@ -3861,7 +3889,7 @@ declare namespace QuickSight {
   }
   export interface DashboardVisualPublishOptions {
     /**
-     * 
+     * Determines if hidden fields are included in an exported dashboard.
      */
     ExportHiddenFieldsOption?: ExportHiddenFieldsOption;
   }
@@ -4035,6 +4063,24 @@ declare namespace QuickSight {
     FieldValue: FieldValue;
   }
   export type DataPathValueList = DataPathValue[];
+  export interface DataPointDrillUpDownOption {
+    /**
+     * The status of the drill down options of data points.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
+  export interface DataPointMenuLabelOption {
+    /**
+     * The status of the data point menu options.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
+  export interface DataPointTooltipOption {
+    /**
+     * The status of the data point tool tip options.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
   export interface DataSet {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -5424,6 +5470,10 @@ declare namespace QuickSight {
      * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
+    /**
+     * Options for publishing the dashboard:    AvailabilityStatus for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When this is set to DISABLED, Amazon QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is ENABLED by default.     AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual option to export data to .CSV format isn't enabled when this is set to DISABLED. This option is ENABLED by default.     VisibilityState for SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.   
+     */
+    DashboardPublishOptions?: DashboardPublishOptions;
   }
   export interface DescribeDashboardPermissionsRequest {
     /**
@@ -6289,13 +6339,19 @@ declare namespace QuickSight {
   export type ExplicitHierarchyColumnList = ColumnIdentifier[];
   export interface ExportHiddenFieldsOption {
     /**
-     * 
+     * The status of the export hidden fields options of a dashbaord.
      */
     AvailabilityStatus?: DashboardBehavior;
   }
   export interface ExportToCSVOption {
     /**
      * Availability status.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
+  export interface ExportWithHiddenFieldsOption {
+    /**
+     * The status of the export with hidden fields options.
      */
     AvailabilityStatus?: DashboardBehavior;
   }
@@ -10828,6 +10884,145 @@ declare namespace QuickSight {
      */
     QueuedIngestion: String;
   }
+  export interface RadarChartAggregatedFieldWells {
+    /**
+     * The aggregated field well categories of a radar chart.
+     */
+    Category?: RadarChartCategoryFieldList;
+    /**
+     * The color that are assigned to the aggregated field wells of a radar chart.
+     */
+    Color?: RadarChartColorFieldList;
+    /**
+     * The values that are assigned to the aggregated field wells of a radar chart.
+     */
+    Values?: RadarChartValuesFieldList;
+  }
+  export interface RadarChartAreaStyleSettings {
+    /**
+     * The visibility settings of a radar chart.
+     */
+    Visibility?: Visibility;
+  }
+  export type RadarChartCategoryFieldList = DimensionField[];
+  export type RadarChartColorFieldList = DimensionField[];
+  export interface RadarChartConfiguration {
+    /**
+     * The field well configuration of a RadarChartVisual.
+     */
+    FieldWells?: RadarChartFieldWells;
+    /**
+     * The sort configuration of a RadarChartVisual.
+     */
+    SortConfiguration?: RadarChartSortConfiguration;
+    /**
+     * The shape of the radar chart.
+     */
+    Shape?: RadarChartShape;
+    /**
+     * The base sreies settings of a radar chart.
+     */
+    BaseSeriesSettings?: RadarChartSeriesSettings;
+    /**
+     * The start angle of a radar chart's axis.
+     */
+    StartAngle?: RadarChartStartAngle;
+    /**
+     * The palette (chart color) display setup of the visual.
+     */
+    VisualPalette?: VisualPalette;
+    /**
+     * Determines the visibility of the colors of alternatign bands in a radar chart.
+     */
+    AlternateBandColorsVisibility?: Visibility;
+    /**
+     * The color of the even-numbered alternate bands of a radar chart.
+     */
+    AlternateBandEvenColor?: HexColor;
+    /**
+     * The color of the odd-numbered alternate bands of a radar chart.
+     */
+    AlternateBandOddColor?: HexColor;
+    /**
+     * The category axis of a radar chart.
+     */
+    CategoryAxis?: AxisDisplayOptions;
+    /**
+     * The category label options of a radar chart.
+     */
+    CategoryLabelOptions?: ChartAxisLabelOptions;
+    /**
+     * The color axis of a radar chart.
+     */
+    ColorAxis?: AxisDisplayOptions;
+    /**
+     * The color label options of a radar chart.
+     */
+    ColorLabelOptions?: ChartAxisLabelOptions;
+    /**
+     * The legend display setup of the visual.
+     */
+    Legend?: LegendOptions;
+  }
+  export interface RadarChartFieldWells {
+    /**
+     * The aggregated field wells of a radar chart visual.
+     */
+    RadarChartAggregatedFieldWells?: RadarChartAggregatedFieldWells;
+  }
+  export interface RadarChartSeriesSettings {
+    /**
+     * The area style settings of a radar chart.
+     */
+    AreaStyleSettings?: RadarChartAreaStyleSettings;
+  }
+  export type RadarChartShape = "CIRCLE"|"POLYGON"|string;
+  export interface RadarChartSortConfiguration {
+    /**
+     * The category sort options of a radar chart.
+     */
+    CategorySort?: FieldSortOptionsList;
+    /**
+     * The category items limit for a radar chart.
+     */
+    CategoryItemsLimit?: ItemsLimitConfiguration;
+    /**
+     * The color sort configuration of a radar chart.
+     */
+    ColorSort?: FieldSortOptionsList;
+    /**
+     * The color items limit of a radar chart.
+     */
+    ColorItemsLimit?: ItemsLimitConfiguration;
+  }
+  export type RadarChartStartAngle = number;
+  export type RadarChartValuesFieldList = MeasureField[];
+  export interface RadarChartVisual {
+    /**
+     * The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.
+     */
+    VisualId: ShortRestrictiveResourceId;
+    /**
+     * The title that is displayed on the visual.
+     */
+    Title?: VisualTitleLabelOptions;
+    /**
+     * The subtitle that is displayed on the visual.
+     */
+    Subtitle?: VisualSubtitleLabelOptions;
+    /**
+     * The configuration settings of the visual.
+     */
+    ChartConfiguration?: RadarChartConfiguration;
+    /**
+     * The list of custom actions that are configured for a visual.
+     */
+    Actions?: VisualCustomActionList;
+    /**
+     * The column hierarchy that is used during drill-downs and drill-ups.
+     */
+    ColumnHierarchies?: ColumnHierarchyList;
+  }
   export interface RangeEndsLabelType {
     /**
      * The visibility of the range ends label.
@@ -11986,6 +12181,12 @@ declare namespace QuickSight {
     ConfigurationOverrides: SheetElementConfigurationOverrides;
   }
   export type SheetElementRenderingRuleList = SheetElementRenderingRule[];
+  export interface SheetLayoutElementMaximizationOption {
+    /**
+     * The status of the sheet layout maximization options of a dashbaord.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
   export type SheetList = Sheet[];
   export type SheetName = string;
   export interface SheetStyle {
@@ -14807,6 +15008,16 @@ declare namespace QuickSight {
      * An empty visual.
      */
     EmptyVisual?: EmptyVisual;
+    /**
+     * A radar chart visual. For more information, see Using radar charts in the Amazon QuickSight User Guide.
+     */
+    RadarChartVisual?: RadarChartVisual;
+  }
+  export interface VisualAxisSortOption {
+    /**
+     * The availaiblity status of a visual's axis sort options.
+     */
+    AvailabilityStatus?: DashboardBehavior;
   }
   export interface VisualCustomAction {
     /**
@@ -14853,6 +15064,12 @@ declare namespace QuickSight {
   export type VisualCustomActionOperationList = VisualCustomActionOperation[];
   export type VisualCustomActionTrigger = "DATA_POINT_CLICK"|"DATA_POINT_MENU"|string;
   export type VisualList = Visual[];
+  export interface VisualMenuOption {
+    /**
+     * The availaiblity status of a visual's menu options.
+     */
+    AvailabilityStatus?: DashboardBehavior;
+  }
   export interface VisualPalette {
     /**
      * The chart color options for the visual palette.

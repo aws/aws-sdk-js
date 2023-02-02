@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1307.0-->
+<!--LATEST=2.1308.0-->
 <!--ENTRYINSERT-->
+
+## 2.1308.0
+* feature: AppConfig: AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported.
+* feature: Connect: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: EC2: Documentation updates for EC2.
+* feature: Keyspaces: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: QuickSight: QuickSight support for Radar Chart and Dashboard Publish Options
+* feature: Redshift: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: SSOAdmin: Enabled FIPS endpoints for GovCloud (US) regions in SDK.
 
 ## 2.1307.0
 * feature: DevOpsGuru: This release adds filter support ListAnomalyForInsight API.

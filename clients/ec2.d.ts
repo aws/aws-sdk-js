@@ -181,11 +181,11 @@ declare class EC2 extends Service {
    */
   associateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.AssociateInstanceEventWindowResult) => void): Request<EC2.Types.AssociateInstanceEventWindowResult, AWSError>;
   /**
-   * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   associateIpamResourceDiscovery(params: EC2.Types.AssociateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.AssociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.AssociateIpamResourceDiscoveryResult, AWSError>;
   /**
-   * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   associateIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.AssociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.AssociateIpamResourceDiscoveryResult, AWSError>;
   /**
@@ -613,11 +613,11 @@ declare class EC2 extends Service {
    */
   createIpamPool(callback?: (err: AWSError, data: EC2.Types.CreateIpamPoolResult) => void): Request<EC2.Types.CreateIpamPoolResult, AWSError>;
   /**
-   * Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   createIpamResourceDiscovery(params: EC2.Types.CreateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.CreateIpamResourceDiscoveryResult) => void): Request<EC2.Types.CreateIpamResourceDiscoveryResult, AWSError>;
   /**
-   * Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Creates an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   createIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.CreateIpamResourceDiscoveryResult) => void): Request<EC2.Types.CreateIpamResourceDiscoveryResult, AWSError>;
   /**
@@ -1213,11 +1213,11 @@ declare class EC2 extends Service {
    */
   deleteIpamPool(callback?: (err: AWSError, data: EC2.Types.DeleteIpamPoolResult) => void): Request<EC2.Types.DeleteIpamPoolResult, AWSError>;
   /**
-   * Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   deleteIpamResourceDiscovery(params: EC2.Types.DeleteIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.DeleteIpamResourceDiscoveryResult) => void): Request<EC2.Types.DeleteIpamResourceDiscoveryResult, AWSError>;
   /**
-   * Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Deletes an IPAM resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   deleteIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.DeleteIpamResourceDiscoveryResult) => void): Request<EC2.Types.DeleteIpamResourceDiscoveryResult, AWSError>;
   /**
@@ -2165,11 +2165,11 @@ declare class EC2 extends Service {
    */
   describeIpamPools(callback?: (err: AWSError, data: EC2.Types.DescribeIpamPoolsResult) => void): Request<EC2.Types.DescribeIpamPoolsResult, AWSError>;
   /**
-   * Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   describeIpamResourceDiscoveries(params: EC2.Types.DescribeIpamResourceDiscoveriesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamResourceDiscoveriesResult) => void): Request<EC2.Types.DescribeIpamResourceDiscoveriesResult, AWSError>;
   /**
-   * Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Describes IPAM resource discoveries. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   describeIpamResourceDiscoveries(callback?: (err: AWSError, data: EC2.Types.DescribeIpamResourceDiscoveriesResult) => void): Request<EC2.Types.DescribeIpamResourceDiscoveriesResult, AWSError>;
   /**
@@ -3069,11 +3069,11 @@ declare class EC2 extends Service {
    */
   disassociateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.DisassociateInstanceEventWindowResult) => void): Request<EC2.Types.DisassociateInstanceEventWindowResult, AWSError>;
   /**
-   * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   disassociateIpamResourceDiscovery(params: EC2.Types.DisassociateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.DisassociateIpamResourceDiscoveryResult, AWSError>;
   /**
-   * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   disassociateIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.DisassociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.DisassociateIpamResourceDiscoveryResult, AWSError>;
   /**
@@ -3445,11 +3445,11 @@ declare class EC2 extends Service {
    */
   getIpamPoolCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolCidrsResult) => void): Request<EC2.Types.GetIpamPoolCidrsResult, AWSError>;
   /**
-   * Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   getIpamResourceCidrs(params: EC2.Types.GetIpamResourceCidrsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
   /**
-   * Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Returns resource CIDRs managed by IPAM in a given scope. If an IPAM is associated with more than one resource discovery, the resource CIDRs across all of the resource discoveries is returned. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   getIpamResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamResourceCidrsResult) => void): Request<EC2.Types.GetIpamResourceCidrsResult, AWSError>;
   /**
@@ -3877,11 +3877,11 @@ declare class EC2 extends Service {
    */
   modifyIpamResourceCidr(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceCidrResult) => void): Request<EC2.Types.ModifyIpamResourceCidrResult, AWSError>;
   /**
-   * Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   modifyIpamResourceDiscovery(params: EC2.Types.ModifyIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceDiscoveryResult) => void): Request<EC2.Types.ModifyIpamResourceDiscoveryResult, AWSError>;
   /**
-   * Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM Service to manage and monitor resources that belong to the owning account.
+   * Modifies a resource discovery. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   modifyIpamResourceDiscovery(callback?: (err: AWSError, data: EC2.Types.ModifyIpamResourceDiscoveryResult) => void): Request<EC2.Types.ModifyIpamResourceDiscoveryResult, AWSError>;
   /**
@@ -5168,7 +5168,7 @@ declare namespace EC2 {
     /**
      * The ID of the VPC peering connection. You must specify this parameter in the request.
      */
-    VpcPeeringConnectionId?: VpcPeeringConnectionIdWithResolver;
+    VpcPeeringConnectionId: VpcPeeringConnectionIdWithResolver;
   }
   export interface AcceptVpcPeeringConnectionResult {
     /**
@@ -6017,11 +6017,11 @@ declare namespace EC2 {
     /**
      * The ARN of the ACM certificate with which to associate the IAM role.
      */
-    CertificateArn?: CertificateId;
+    CertificateArn: CertificateId;
     /**
      * The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
      */
-    RoleArn?: RoleId;
+    RoleArn: RoleId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6185,15 +6185,15 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway multicast domain.
      */
-    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    TransitGatewayMulticastDomainId: TransitGatewayMulticastDomainId;
     /**
      * The ID of the transit gateway attachment to associate with the transit gateway multicast domain.
      */
-    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * The IDs of the subnets to associate with the transit gateway multicast domain.
      */
-    SubnetIds?: TransitGatewaySubnetIdList;
+    SubnetIds: TransitGatewaySubnetIdList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -8778,7 +8778,7 @@ declare namespace EC2 {
      */
     OnDemandOptions?: OnDemandOptionsRequest;
     /**
-     * Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+     * Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet. Supported only for fleets of type maintain.
      */
     ExcessCapacityTerminationPolicy?: FleetExcessCapacityTerminationPolicy;
     /**
@@ -10996,7 +10996,7 @@ declare namespace EC2 {
      */
     SnapshotId?: SnapshotId;
     /**
-     * The volume type. This parameter can be one of the following values:   General Purpose SSD: gp2 | gp3    Provisioned IOPS SSD: io1 | io2    Throughput Optimized HDD: st1    Cold HDD: sc1    Magnetic: standard    For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Default: gp2 
+     * The volume type. This parameter can be one of the following values:   General Purpose SSD: gp2 | gp3    Provisioned IOPS SSD: io1 | io2    Throughput Optimized HDD: st1    Cold HDD: sc1    Magnetic: standard     Throughput Optimized HDD (st1) and Cold HDD (sc1) volumes can't be used as boot volumes.  For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Default: gp2 
      */
     VolumeType?: VolumeType;
     /**
@@ -11180,7 +11180,7 @@ declare namespace EC2 {
     /**
      * The ID of the requester VPC. You must specify this parameter in the request.
      */
-    VpcId?: VpcId;
+    VpcId: VpcId;
     /**
      * The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request. Default: The Region in which you make the request.
      */
@@ -17999,11 +17999,11 @@ declare namespace EC2 {
     /**
      * The ARN of the ACM certificate from which to disassociate the IAM role.
      */
-    CertificateArn?: CertificateId;
+    CertificateArn: CertificateId;
     /**
      * The ARN of the IAM role to disassociate.
      */
-    RoleArn?: RoleId;
+    RoleArn: RoleId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -18121,15 +18121,15 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway multicast domain.
      */
-    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    TransitGatewayMulticastDomainId: TransitGatewayMulticastDomainId;
     /**
      * The ID of the attachment.
      */
-    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    TransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
      * The IDs of the subnets;
      */
-    SubnetIds?: TransitGatewaySubnetIdList;
+    SubnetIds: TransitGatewaySubnetIdList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -18376,7 +18376,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by DescribeImageAttribute.
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by DescribeImageAttribute. For CreateImage and RegisterImage, you can specify this parameter only for block device mappings that result in new, empty volumes when instances are launched from the image. Omit this parameter on block device mappings that include an existing volume or snapshot. If you include this parameter, and specify an encryption setting that is different from the existing volume or snapshot, the request will fail.
      */
     Encrypted?: Boolean;
   }
@@ -19647,7 +19647,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * Indicates whether running instances should be terminated if the target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+     * Indicates whether running instances should be terminated if the target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet. Supported only for fleets of type maintain.
      */
     ExcessCapacityTerminationPolicy?: FleetExcessCapacityTerminationPolicy;
     /**
@@ -20103,7 +20103,7 @@ declare namespace EC2 {
     /**
      * The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon S3 object information.
      */
-    CertificateArn?: CertificateId;
+    CertificateArn: CertificateId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -21068,7 +21068,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway multicast domain.
      */
-    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    TransitGatewayMulticastDomainId: TransitGatewayMulticastDomainId;
     /**
      * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The type of resource. The valid value is: vpc.    state - The state of the subnet association. Valid values are associated | associating | disassociated | disassociating.    subnet-id - The ID of the subnet.    transit-gateway-attachment-id - The id of the transit gateway attachment.  
      */
@@ -22886,7 +22886,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId?: InstanceId;
+    InstanceId: InstanceId;
     /**
      * The credit option for CPU usage of the instance. Valid values: standard | unlimited  T3 instances with host tenancy do not support the unlimited CPU credit option.
      */
@@ -26325,7 +26325,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+     * Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet. Supported only for fleets of type maintain.
      */
     ExcessCapacityTerminationPolicy?: FleetExcessCapacityTerminationPolicy;
     /**
@@ -27069,7 +27069,7 @@ declare namespace EC2 {
     /**
      * The ID of the instance.
      */
-    InstanceId?: InstanceId;
+    InstanceId: InstanceId;
     /**
      * The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.
      */
@@ -27185,7 +27185,7 @@ declare namespace EC2 {
   }
   export interface ModifySpotFleetRequestRequest {
     /**
-     * Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
+     * Indicates whether running instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet. Supported only for fleets of type maintain.
      */
     ExcessCapacityTerminationPolicy?: ExcessCapacityTerminationPolicy;
     /**
@@ -30326,7 +30326,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway multicast domain.
      */
-    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    TransitGatewayMulticastDomainId: TransitGatewayMulticastDomainId;
     /**
      * The IP address assigned to the transit gateway multicast group.
      */
@@ -30334,7 +30334,7 @@ declare namespace EC2 {
     /**
      * The group members' network interface IDs to register with the transit gateway multicast group.
      */
-    NetworkInterfaceIds?: TransitGatewayNetworkInterfaceIdList;
+    NetworkInterfaceIds: TransitGatewayNetworkInterfaceIdList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -30350,7 +30350,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway multicast domain.
      */
-    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    TransitGatewayMulticastDomainId: TransitGatewayMulticastDomainId;
     /**
      * The IP address assigned to the transit gateway multicast group.
      */
@@ -30358,7 +30358,7 @@ declare namespace EC2 {
     /**
      * The group sources' network interface IDs to register with the transit gateway multicast group.
      */
-    NetworkInterfaceIds?: TransitGatewayNetworkInterfaceIdList;
+    NetworkInterfaceIds: TransitGatewayNetworkInterfaceIdList;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -30845,7 +30845,7 @@ declare namespace EC2 {
      */
     NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList;
     /**
-     * The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch. Valid formats:    ami-17characters00000     resolve:ssm:parameter-name     resolve:ssm:parameter-name:version-number     resolve:ssm:parameter-name:label    For more information, see Use a Systems Manager parameter instead of an AMI ID in the Amazon Elastic Compute Cloud User Guide.
+     * The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch. Valid formats:    ami-17characters00000     resolve:ssm:parameter-name     resolve:ssm:parameter-name:version-number     resolve:ssm:parameter-name:label    For more information, see Use a Systems Manager parameter to find an AMI in the Amazon Elastic Compute Cloud User Guide.
      */
     ImageId?: ImageId;
     /**
@@ -32368,7 +32368,7 @@ declare namespace EC2 {
   export type S3ObjectTagList = S3ObjectTag[];
   export interface S3Storage {
     /**
-     * The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in Best practices for managing Amazon Web Services access keys.
+     * The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in Best Practices for Amazon Web Services accounts in the Account ManagementReference Guide.
      */
     AWSAccessKeyId?: String;
     /**
@@ -32786,7 +32786,7 @@ declare namespace EC2 {
     /**
      * The ID of the transit gateway multicast domain.
      */
-    TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
+    TransitGatewayMulticastDomainId: TransitGatewayMulticastDomainId;
     /**
      * One or more filters. The possible values are:    group-ip-address - The IP address of the transit gateway multicast group.    is-group-member - The resource is a group member. Valid values are true | false.    is-group-source - The resource is a group source. Valid values are true | false.    member-type - The member type. Valid values are igmp | static.    resource-id - The ID of the resource.    resource-type - The type of resource. Valid values are vpc | vpn | direct-connect-gateway | tgw-peering.    source-type - The source type. Valid values are igmp | static.    subnet-id - The ID of the subnet.    transit-gateway-attachment-id - The id of the transit gateway attachment.  
      */
@@ -33012,7 +33012,7 @@ declare namespace EC2 {
     /**
      * The ID of the security group rule.
      */
-    SecurityGroupRuleId?: SecurityGroupRuleId;
+    SecurityGroupRuleId: SecurityGroupRuleId;
     /**
      * Information about the security group rule.
      */
@@ -33652,7 +33652,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * Indicates whether running Spot Instances should be terminated if you decrease the target capacity of the Spot Fleet request below the current size of the Spot Fleet.
+     * Indicates whether running instances should be terminated if you decrease the target capacity of the Spot Fleet request below the current size of the Spot Fleet. Supported only for fleets of type maintain.
      */
     ExcessCapacityTerminationPolicy?: ExcessCapacityTerminationPolicy;
     /**
