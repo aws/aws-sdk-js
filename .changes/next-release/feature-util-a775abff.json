@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "util",
+  "description": "Use custom Md5 checksum calculation instead of one based on crypto modules as the latter won't work in a FIPS-compliant environment"
+}
