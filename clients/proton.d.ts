@@ -277,6 +277,14 @@ declare class Proton extends Service {
    */
   getRepositorySyncStatus(callback?: (err: AWSError, data: Proton.Types.GetRepositorySyncStatusOutput) => void): Request<Proton.Types.GetRepositorySyncStatusOutput, AWSError>;
   /**
+   * Get counts of Proton resources. For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current. The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates are exceptions—see the components, environments, and serviceTemplates field descriptions. For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account. For more information, see Proton dashboard in the Proton User Guide.
+   */
+  getResourcesSummary(params: Proton.Types.GetResourcesSummaryInput, callback?: (err: AWSError, data: Proton.Types.GetResourcesSummaryOutput) => void): Request<Proton.Types.GetResourcesSummaryOutput, AWSError>;
+  /**
+   * Get counts of Proton resources. For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current. The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates are exceptions—see the components, environments, and serviceTemplates field descriptions. For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account. For more information, see Proton dashboard in the Proton User Guide.
+   */
+  getResourcesSummary(callback?: (err: AWSError, data: Proton.Types.GetResourcesSummaryOutput) => void): Request<Proton.Types.GetResourcesSummaryOutput, AWSError>;
+  /**
    * Get detailed data for a service.
    */
   getService(params: Proton.Types.GetServiceInput, callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
@@ -901,6 +909,36 @@ declare namespace Proton {
     serviceName?: ResourceName;
   }
   export type ComponentSummaryList = ComponentSummary[];
+  export interface CountsSummary {
+    /**
+     * The total number of components in the Amazon Web Services account. The semantics of the components field are different from the semantics of results for other infrastructure-provisioning resources. That's because at this time components don't have associated templates, therefore they don't have the concept of staleness. The components object will only contain total and failed members.
+     */
+    components?: ResourceCountsSummary;
+    /**
+     * The total number of environment templates in the Amazon Web Services account.
+     */
+    environmentTemplates?: ResourceCountsSummary;
+    /**
+     * The staleness counts for Proton environments in the Amazon Web Services account. The environments object will only contain total members.
+     */
+    environments?: ResourceCountsSummary;
+    /**
+     * The staleness counts for Proton pipelines in the Amazon Web Services account.
+     */
+    pipelines?: ResourceCountsSummary;
+    /**
+     * The staleness counts for Proton service instances in the Amazon Web Services account.
+     */
+    serviceInstances?: ResourceCountsSummary;
+    /**
+     * The total number of service templates in the Amazon Web Services account. The serviceTemplates object will only contain total members.
+     */
+    serviceTemplates?: ResourceCountsSummary;
+    /**
+     * The staleness counts for Proton services in the Amazon Web Services account.
+     */
+    services?: ResourceCountsSummary;
+  }
   export interface CreateComponentInput {
     /**
      * An optional customer-provided description of the component.
@@ -1963,6 +2001,14 @@ declare namespace Proton {
      */
     latestSync?: RepositorySyncAttempt;
   }
+  export interface GetResourcesSummaryInput {
+  }
+  export interface GetResourcesSummaryOutput {
+    /**
+     * Summary counts of each Proton resource type.
+     */
+    counts: CountsSummary;
+  }
   export interface GetServiceInput {
     /**
      * The name of the service that you want to get the detailed data for.
@@ -2068,6 +2114,7 @@ declare namespace Proton {
     latestSync?: ResourceSyncAttempt;
   }
   export type GitBranchName = string;
+  export type Integer = number;
   export interface ListComponentOutputsInput {
     /**
      * The name of the component whose outputs you want.
@@ -2760,6 +2807,28 @@ declare namespace Proton {
   }
   export type RepositorySyncEvents = RepositorySyncEvent[];
   export type RepositorySyncStatus = "INITIATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"QUEUED"|string;
+  export interface ResourceCountsSummary {
+    /**
+     * The number of resources of this type in the Amazon Web Services account that need a major template version update.
+     */
+    behindMajor?: Integer;
+    /**
+     * The number of resources of this type in the Amazon Web Services account that need a minor template version update.
+     */
+    behindMinor?: Integer;
+    /**
+     * The number of resources of this type in the Amazon Web Services account that failed to deploy.
+     */
+    failed?: Integer;
+    /**
+     * The total number of resources of this type in the Amazon Web Services account.
+     */
+    total: Integer;
+    /**
+     * The number of resources of this type in the Amazon Web Services account that are up-to-date with their template.
+     */
+    upToDate?: Integer;
+  }
   export type ResourceDeploymentStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string;
   export type ResourceName = string;
   export type ResourceNameOrEmpty = string;

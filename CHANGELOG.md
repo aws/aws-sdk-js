@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1308.0-->
+<!--LATEST=2.1309.0-->
 <!--ENTRYINSERT-->
+
+## 2.1309.0
+* feature: Proton: Add new GetResourcesSummary API
 
 ## 2.1308.0
 * feature: AppConfig: AWS AppConfig introduces KMS customer-managed key (CMK) encryption of configuration data, along with AWS Secrets Manager as a new configuration data source. S3 objects using SSE-KMS encryption and SSM Parameter Store SecureStrings are also now supported.
