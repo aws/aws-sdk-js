@@ -2298,7 +2298,7 @@ declare namespace FraudDetector {
      */
     labelMapper?: labelMapper;
     /**
-     * The action to take for unlabeled events.
+     * The action to take for unlabeled events.   Use IGNORE if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.   Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.   Use LEGIT f you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.   Use AUTO if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.   By default, Amazon Fraud Detector ignores the unlabeled data.
      */
     unlabeledEventsTreatment?: UnlabeledEventsTreatment;
   }
@@ -2619,6 +2619,10 @@ declare namespace FraudDetector {
      *  The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. 
      */
     auc?: float;
+    /**
+     *  Indicates the range of area under curve (auc) expected from the OFI model. A range greater than 0.1 indicates higher model uncertainity. 
+     */
+    uncertaintyRange?: UncertaintyRange;
   }
   export interface OFITrainingMetricsValue {
     /**
@@ -2940,6 +2944,10 @@ declare namespace FraudDetector {
      *  The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. 
      */
     auc?: float;
+    /**
+     *  Indicates the range of area under curve (auc) expected from the TFI model. A range greater than 0.1 indicates higher model uncertainity. 
+     */
+    uncertaintyRange?: UncertaintyRange;
   }
   export interface TFITrainingMetricsValue {
     /**
@@ -3032,7 +3040,17 @@ declare namespace FraudDetector {
      */
     aggregatedVariablesImportanceMetrics?: AggregatedVariablesImportanceMetrics;
   }
-  export type UnlabeledEventsTreatment = "IGNORE"|"FRAUD"|"LEGIT"|string;
+  export interface UncertaintyRange {
+    /**
+     *  The lower bound value of the area under curve (auc). 
+     */
+    lowerBoundValue: float;
+    /**
+     *  The lower bound value of the area under curve (auc). 
+     */
+    upperBoundValue: float;
+  }
+  export type UnlabeledEventsTreatment = "IGNORE"|"FRAUD"|"LEGIT"|"AUTO"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which to remove the tag.

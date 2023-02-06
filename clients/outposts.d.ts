@@ -635,6 +635,14 @@ declare namespace Outposts {
      *  Information about assets. 
      */
     AssetInformationList?: LineItemAssetInformationList;
+    /**
+     * The ID of the previous line item.
+     */
+    PreviousLineItemId?: LineItemId;
+    /**
+     * The ID of the previous order.
+     */
+    PreviousOrderId?: OrderId;
   }
   export interface LineItemAssetInformation {
     /**
@@ -661,7 +669,7 @@ declare namespace Outposts {
     Quantity?: LineItemQuantity;
   }
   export type LineItemRequestListDefinition = LineItemRequest[];
-  export type LineItemStatus = "PREPARING"|"BUILDING"|"SHIPPED"|"DELIVERED"|"INSTALLING"|"INSTALLED"|"ERROR"|"CANCELLED"|string;
+  export type LineItemStatus = "PREPARING"|"BUILDING"|"SHIPPED"|"DELIVERED"|"INSTALLING"|"INSTALLED"|"ERROR"|"CANCELLED"|"REPLACED"|string;
   export type LineItemStatusCounts = {[key: string]: LineItemQuantity};
   export interface ListAssetsInput {
     /**
@@ -817,6 +825,10 @@ declare namespace Outposts {
      * The payment term.
      */
     PaymentTerm?: PaymentTerm;
+    /**
+     * The type of order.
+     */
+    OrderType?: OrderType;
   }
   export type OrderId = string;
   export type OrderStatus = "RECEIVED"|"PENDING"|"PROCESSING"|"INSTALLING"|"FULFILLED"|"CANCELLED"|"PREPARING"|"IN_PROGRESS"|"COMPLETED"|"ERROR"|string;
@@ -830,7 +842,7 @@ declare namespace Outposts {
      */
     OrderId?: OrderId;
     /**
-     *  The type of order. 
+     * The type of order.
      */
     OrderType?: OrderType;
     /**

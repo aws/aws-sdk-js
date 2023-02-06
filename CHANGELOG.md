@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1309.0-->
+<!--LATEST=2.1310.0-->
 <!--ENTRYINSERT-->
+
+## 2.1310.0
+* feature: ComputeOptimizer: AWS Compute optimizer can now infer if Kafka is running on an instance.
+* feature: CustomerProfiles: This release deprecates the PartyType and Gender enum data types from the Profile model and replaces them with new PartyTypeString and GenderString attributes, which accept any string of length up to 255.
+* feature: FraudDetector: My AWS Service (Amazon Fraud Detector) - This release introduces Cold Start Model Training which optimizes training for small datasets and adds intelligent methods for treating unlabeled data. You can now train Online Fraud Insights or Transaction Fraud Insights models with minimal historical-data.
+* feature: MediaConvert: The AWS Elemental MediaConvert SDK has added improved scene change detection capabilities and a bandwidth reduction filter, along with video quality enhancements, to the AVC encoder.
+* feature: Outposts: Adds OrderType to Order structure. Adds PreviousOrderId and PreviousLineItemId to LineItem structure. Adds new line item status REPLACED. Increases maximum length of pagination token.
 
 ## 2.1309.0
 * feature: Proton: Add new GetResourcesSummary API

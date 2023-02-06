@@ -1205,7 +1205,7 @@ declare namespace CustomerProfiles {
      */
     WorkflowId?: string1To255;
     /**
-     * Boolean to indicate if the Flow associated with the Integration is created via Appflow console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition
+     * Boolean that shows if the Flow that's associated with the Integration is created in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.
      */
     IsUnstructured?: optionalBoolean;
   }
@@ -1618,7 +1618,7 @@ declare namespace CustomerProfiles {
      */
     WorkflowId?: string1To255;
     /**
-     * Boolean to indicate if the Flow associated with the Integration is created via Appflow console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition
+     * Boolean that shows if the Flow that's associated with the Integration is created in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.
      */
     IsUnstructured?: optionalBoolean;
   }
@@ -2074,6 +2074,14 @@ declare namespace CustomerProfiles {
      * A list of items used to find a profile returned in a SearchProfiles response. An item is a key-value(s) pair that matches an attribute in the profile. If the optional AdditionalSearchKeys parameter was included in the SearchProfiles request, the FoundByItems list should be interpreted based on the LogicalOperator used in the request:    AND - The profile included in the response matched all of the search keys specified in the request. The FoundByItems will include all of the key-value(s) pairs that were specified in the request (as this is a requirement of AND search logic).    OR - The profile included in the response matched at least one of the search keys specified in the request. The FoundByItems will include each of the key-value(s) pairs that the profile was found by.   The OR relationship is the default behavior if the LogicalOperator parameter is not included in the SearchProfiles request.
      */
     FoundByItems?: foundByList;
+    /**
+     * An alternative to PartyType which accepts any string as input.
+     */
+    PartyTypeString?: string1To255;
+    /**
+     * An alternative to Gender which accepts any string as input.
+     */
+    GenderString?: string1To255;
   }
   export type ProfileIdList = uuid[];
   export type ProfileIdToBeMergedList = uuid[];
@@ -2142,7 +2150,7 @@ declare namespace CustomerProfiles {
      */
     WorkflowId?: string1To255;
     /**
-     * Boolean to indicate if the Flow associated with the Integration is created via Appflow console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition
+     * Boolean that shows if the Flow that's associated with the Integration is created in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.
      */
     IsUnstructured?: optionalBoolean;
   }
