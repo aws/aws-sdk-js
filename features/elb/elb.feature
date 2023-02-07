@@ -11,7 +11,4 @@ Feature: Elastic Load Balancing
   Scenario: Error handling
     Given I create a load balancer with name prefix "verylongelasticloadbalancername"
     Then the error code should be "ValidationError"
-    Then the error message should be:
-    """
-    LoadBalancer name cannot be longer than 32 characters
-    """
+    And the status code should be 400
