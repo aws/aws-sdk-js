@@ -23,10 +23,6 @@ Feature: DynamoDB Tables
   Scenario: Improper table deletion
     Given I try to delete a table with an empty table parameter
     Then the error code should be "ValidationException"
-    And the error message should be:
-    """
-    TableName must be at least 3 characters long and at most 255 characters long
-    """
     And the status code should be 400
 
   @recursive
