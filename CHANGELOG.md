@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1310.0-->
+<!--LATEST=2.1311.0-->
 <!--ENTRYINSERT-->
+
+## 2.1311.0
+* feature: Backup: This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.
+* feature: CloudFront: CloudFront Origin Access Control extends support to AWS Elemental MediaStore origins.
+* feature: Glue: DirectJDBCSource + Glue 4.0 streaming options
+* feature: LakeFormation: This release removes the LFTagpolicyResource expression limits.
 
 ## 2.1310.0
 * feature: ComputeOptimizer: AWS Compute optimizer can now infer if Kafka is running on an instance.

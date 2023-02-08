@@ -464,11 +464,11 @@ declare class Backup extends Service {
    */
   putBackupVaultAccessPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.  Backup Vault Lock has yet to receive a third-party assessment for SEC 17a-4(f) and CFTC. 
+   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.  Backup Vault Lock has been assessed by Cohasset Associates for use in environments that are subject to SEC 17a-4, CFTC, and FINRA regulations. For more information about how Backup Vault Lock relates to these regulations, see the Cohasset Associates Compliance Assessment.  
    */
   putBackupVaultLockConfiguration(params: Backup.Types.PutBackupVaultLockConfigurationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.  Backup Vault Lock has yet to receive a third-party assessment for SEC 17a-4(f) and CFTC. 
+   * Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault. Vault Lock also prevents attempts to update the lifecycle policy that controls the retention period of any recovery point currently stored in a backup vault. If specified, Vault Lock enforces a minimum and maximum retention period for future backup and copy jobs that target a backup vault.  Backup Vault Lock has been assessed by Cohasset Associates for use in environments that are subject to SEC 17a-4, CFTC, and FINRA regulations. For more information about how Backup Vault Lock relates to these regulations, see the Cohasset Associates Compliance Assessment.  
    */
   putBackupVaultLockConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -687,6 +687,10 @@ declare namespace Backup {
      * This is a boolean value indicating this is a parent (composite) backup job.
      */
     IsParent?: boolean;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export type BackupJobChildJobsInState = {[key: string]: Long};
   export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|"PARTIAL"|string;
@@ -1143,6 +1147,10 @@ declare namespace Backup {
      * This returns the statistics of the included child (nested) copy jobs.
      */
     ChildJobsInState?: CopyJobChildJobsInState;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export type CopyJobChildJobsInState = {[key: string]: Long};
   export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|"PARTIAL"|string;
@@ -1561,6 +1569,10 @@ declare namespace Backup {
      * This returns the statistics of the included child (nested) backup jobs.
      */
     ChildJobsInState?: BackupJobChildJobsInState;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export interface DescribeBackupVaultInput {
     /**
@@ -1693,6 +1705,10 @@ declare namespace Backup {
      * The date and time that a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of LastBackupTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastBackupTime?: timestamp;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export interface DescribeRecoveryPointInput {
     /**
@@ -1793,6 +1809,10 @@ declare namespace Backup {
      * This returns the boolean value that a recovery point is a parent (composite) job.
      */
     IsParent?: boolean;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export interface DescribeRegionSettingsInput {
   }
@@ -2775,6 +2795,10 @@ declare namespace Backup {
      * The date and time a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of LastBackupTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastBackupTime?: timestamp;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export type ProtectedResourcesList = ProtectedResource[];
   export interface PutBackupVaultAccessPolicyInput {
@@ -2904,6 +2928,10 @@ declare namespace Backup {
      * This is a boolean value indicating this is a parent (composite) recovery point.
      */
     IsParent?: boolean;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export type RecoveryPointByBackupVaultList = RecoveryPointByBackupVault[];
   export interface RecoveryPointByResource {
@@ -2943,6 +2971,10 @@ declare namespace Backup {
      * This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
      */
     ParentRecoveryPointArn?: ARN;
+    /**
+     * This is the non-unique name of the resource that belongs to the specified backup.
+     */
+    ResourceName?: string;
   }
   export type RecoveryPointByResourceList = RecoveryPointByResource[];
   export interface RecoveryPointCreator {
@@ -3217,7 +3249,7 @@ declare namespace Backup {
      */
     BackupJobId?: string;
     /**
-     * An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+     *  Note: This field is only returned for Amazon EFS and Advanced DynamoDB resources.  An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
      */
     RecoveryPointArn?: ARN;
     /**

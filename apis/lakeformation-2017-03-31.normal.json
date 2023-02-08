@@ -2209,9 +2209,7 @@
       "type": "list",
       "member": {
         "shape": "LFTag"
-      },
-      "max": 5,
-      "min": 1
+      }
     },
     "ExtendTransactionRequest": {
       "type": "structure",

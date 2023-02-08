@@ -517,7 +517,7 @@ declare namespace Transfer {
      */
     Compression?: CompressionEnum;
     /**
-     * The algorithm that is used to encrypt the file.
+     * The algorithm that is used to encrypt the file.  You can only specify NONE if the URL for your connector uses HTTPS. This ensures that no traffic is sent in clear text. 
      */
     EncryptionAlgorithm?: EncryptionAlg;
     /**
@@ -525,7 +525,7 @@ declare namespace Transfer {
      */
     SigningAlgorithm?: SigningAlg;
     /**
-     * The signing algorithm for the MDN response.  If set to DEFAULT (or not set at all), the value for SigningAlogorithm is used. 
+     * The signing algorithm for the MDN response.  If set to DEFAULT (or not set at all), the value for SigningAlgorithm is used. 
      */
     MdnSigningAlgorithm?: MdnSigningAlg;
     /**
@@ -555,15 +555,15 @@ declare namespace Transfer {
      */
     Name?: WorkflowStepName;
     /**
-     * Specifies the location for the file being copied. Only applicable for Copy type workflow steps. Use ${Transfer:username} in this field to parametrize the destination prefix by username.
+     * Specifies the location for the file being copied. Use ${Transfer:username} or ${Transfer:UploadDate} in this field to parametrize the destination prefix by username or uploaded date.   Set the value of DestinationFileLocation to ${Transfer:username} to copy uploaded files to an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.   Set the value of DestinationFileLocation to ${Transfer:UploadDate} to copy uploaded files to an Amazon S3 bucket that is prefixed with the date of the upload.  The system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the file is uploaded.   
      */
     DestinationFileLocation?: InputFileLocation;
     /**
-     * A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+     * A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE.
      */
     OverwriteExisting?: OverwriteExisting;
     /**
-     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   To use the previous file as the input, enter ${previous.file}. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   To use the originally uploaded file location as input for this step, enter ${original.file}.  
      */
     SourceFileLocation?: SourceFileLocation;
   }
@@ -626,7 +626,7 @@ declare namespace Transfer {
      */
     PartnerProfileId: ProfileId;
     /**
-     * The landing directory (folder) for files transferred by using the AS2 protocol. A BaseDirectory example is DOC-EXAMPLE-BUCKET/home/mydirectory.
+     * The landing directory (folder) for files transferred by using the AS2 protocol. A BaseDirectory example is /DOC-EXAMPLE-BUCKET/home/mydirectory.
      */
     BaseDirectory: HomeDirectory;
     /**
@@ -718,7 +718,7 @@ declare namespace Transfer {
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want to rotate keys, or have a set of active keys that use different algorithms. Use the following command to generate an RSA 2048 bit key with no passphrase:  ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b option. You can create a stronger key by using 3072 or 4096. Use the following command to generate an ECDSA 256 bit key with no passphrase:  ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are 256, 384, and 521. Use the following command to generate an ED25519 key with no passphrase:  ssh-keygen -t ed25519 -N "" -f my-new-server-key. For all of these commands, you can replace my-new-server-key with a string of your choice.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Update host keys for your SFTP-enabled server in the Transfer Family User Guide.
+     * The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want to rotate keys, or have a set of active keys that use different algorithms. Use the following command to generate an RSA 2048 bit key with no passphrase:  ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b option. You can create a stronger key by using 3072 or 4096. Use the following command to generate an ECDSA 256 bit key with no passphrase:  ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are 256, 384, and 521. Use the following command to generate an ED25519 key with no passphrase:  ssh-keygen -t ed25519 -N "" -f my-new-server-key. For all of these commands, you can replace my-new-server-key with a string of your choice.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Manage host keys for your SFTP-enabled server in the Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
@@ -742,7 +742,7 @@ declare namespace Transfer {
      */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
      */
     Protocols?: Protocols;
     /**
@@ -758,7 +758,7 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In additon to a workflow to execute when a file is uploaded completely, WorkflowDeatails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -798,7 +798,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and an optional &lt;comment&gt;, with spaces between each element. Transfer Family accepts RSA, ECDSA, and ED25519 keys.   For RSA keys, the key type is ssh-rsa.   For ED25519 keys, the key type is ssh-ed25519.   For ECDSA keys, the key type is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.  
      */
     SshPublicKeyBody?: SshPublicKeyBody;
     /**
@@ -826,7 +826,7 @@ declare namespace Transfer {
      */
     Description?: WorkflowDescription;
     /**
-     * Specifies the details for the steps that are in the specified workflow.  The TYPE specifies which of the following actions is being taken for this step.     COPY: Copy the file to another location.    CUSTOM: Perform a custom step with an Lambda function target.    DELETE: Delete the file.    TAG: Add a tag to the file.     Currently, copying and tagging are supported only on S3.    For file location, you specify either the S3 bucket and key, or the EFS file system ID and path. 
+     * Specifies the details for the steps that are in the specified workflow.  The TYPE specifies which of the following actions is being taken for this step.      COPY  - Copy the file to another location.     CUSTOM  - Perform a custom step with an Lambda function target.     DECRYPT  - Decrypt a file that was encrypted before it was uploaded.     DELETE  - Delete the file.     TAG  - Add a tag to the file.     Currently, copying and tagging are supported only on S3.    For file location, you specify either the Amazon S3 bucket and key, or the Amazon EFS file system ID and path. 
      */
     Steps: WorkflowSteps;
     /**
@@ -858,7 +858,7 @@ declare namespace Transfer {
      */
     TimeoutSeconds?: CustomStepTimeoutSeconds;
     /**
-     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   To use the previous file as the input, enter ${previous.file}. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   To use the originally uploaded file location as input for this step, enter ${original.file}.  
      */
     SourceFileLocation?: SourceFileLocation;
   }
@@ -867,9 +867,21 @@ declare namespace Transfer {
   export type CustomStepTimeoutSeconds = number;
   export type DateImported = Date;
   export interface DecryptStepDetails {
+    /**
+     * The name of the step, used as an identifier.
+     */
     Name?: WorkflowStepName;
+    /**
+     * The type of encryption used. Currently, this value must be PGP.
+     */
     Type: EncryptionType;
+    /**
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   To use the previous file as the input, enter ${previous.file}. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   To use the originally uploaded file location as input for this step, enter ${original.file}.  
+     */
     SourceFileLocation?: SourceFileLocation;
+    /**
+     * A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE.
+     */
     OverwriteExisting?: OverwriteExisting;
     DestinationFileLocation: InputFileLocation;
   }
@@ -947,7 +959,7 @@ declare namespace Transfer {
      */
     Name?: WorkflowStepName;
     /**
-     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   To use the previous file as the input, enter ${previous.file}. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   To use the originally uploaded file location as input for this step, enter ${original.file}.  
      */
     SourceFileLocation?: SourceFileLocation;
   }
@@ -1451,7 +1463,7 @@ declare namespace Transfer {
      */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
      */
     Protocols?: Protocols;
     /**
@@ -1475,7 +1487,7 @@ declare namespace Transfer {
      */
     UserCount?: UserCount;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In additon to a workflow to execute when a file is uploaded completely, WorkflowDeatails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -1613,7 +1625,7 @@ declare namespace Transfer {
   export type ExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"EXCEPTION"|"HANDLING_EXCEPTION"|string;
   export interface ExecutionStepResult {
     /**
-     * One of the available step types.    COPY: Copy the file to another location.    CUSTOM: Perform a custom step with an Lambda function target.    DELETE: Delete the file.    TAG: Add a tag to the file.  
+     * One of the available step types.     COPY  - Copy the file to another location.     CUSTOM  - Perform a custom step with an Lambda function target.     DECRYPT  - Decrypt a file that was encrypted before it was uploaded.     DELETE  - Delete the file.     TAG  - Add a tag to the file.  
      */
     StepType?: WorkflowStepType;
     /**
@@ -1684,7 +1696,7 @@ declare namespace Transfer {
      */
     Usage: CertificateUsageType;
     /**
-     * The file that contains the certificate to import.
+     *   For the CLI, provide a file path for a certificate in URI format. For example, --certificate file://encryption-cert.pem. Alternatively, you can provide the raw content.   For the SDK, specify the raw content of a certificate file. For example, --certificate "`cat encryption-cert.pem`".  
      */
     Certificate: CertificateBodyType;
     /**
@@ -1692,7 +1704,7 @@ declare namespace Transfer {
      */
     CertificateChain?: CertificateChainType;
     /**
-     * The file that contains the private key for the certificate that's being imported.
+     *   For the CLI, provide a file path for a private key in URI format.For example, --private-key file://encryption-key.pem. Alternatively, you can provide the raw content of the private key file.   For the SDK, specify the raw content of a private key file. For example, --private-key "`cat encryption-key.pem`"   
      */
     PrivateKey?: PrivateKeyType;
     /**
@@ -1724,7 +1736,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * The public key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
+     * The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
      */
     HostKeyBody: HostKey;
     /**
@@ -1776,11 +1788,11 @@ declare namespace Transfer {
   }
   export interface InputFileLocation {
     /**
-     * Specifies the details for the S3 file being copied.
+     * Specifies the details for the Amazon S3 file that's being copied or decrypted.
      */
     S3FileLocation?: S3InputFileLocation;
     /**
-     * Reserved for future use.
+     * Specifies the details for the Amazon Elastic File System (Amazon EFS) file that's being decrypted.
      */
     EfsFileLocation?: EfsFileLocation;
   }
@@ -2548,7 +2560,7 @@ declare namespace Transfer {
      */
     Tags?: S3Tags;
     /**
-     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   Enter ${original.file} to use the originally-uploaded file location as input for this step.  
+     * Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow.   To use the previous file as the input, enter ${previous.file}. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value.   To use the originally uploaded file location as input for this step, enter ${original.file}.  
      */
     SourceFileLocation?: SourceFileLocation;
   }
@@ -2797,7 +2809,7 @@ declare namespace Transfer {
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want to rotate keys, or have a set of active keys that use different algorithms. Use the following command to generate an RSA 2048 bit key with no passphrase:  ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b option. You can create a stronger key by using 3072 or 4096. Use the following command to generate an ECDSA 256 bit key with no passphrase:  ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are 256, 384, and 521. Use the following command to generate an ED25519 key with no passphrase:  ssh-keygen -t ed25519 -N "" -f my-new-server-key. For all of these commands, you can replace my-new-server-key with a string of your choice.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Update host keys for your SFTP-enabled server in the Transfer Family User Guide.
+     * The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want to rotate keys, or have a set of active keys that use different algorithms. Use the following command to generate an RSA 2048 bit key with no passphrase:  ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b option. You can create a stronger key by using 3072 or 4096. Use the following command to generate an ECDSA 256 bit key with no passphrase:  ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are 256, 384, and 521. Use the following command to generate an ED25519 key with no passphrase:  ssh-keygen -t ed25519 -N "" -f my-new-server-key. For all of these commands, you can replace my-new-server-key with a string of your choice.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Manage host keys for your SFTP-enabled server in the Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
@@ -2817,7 +2829,7 @@ declare namespace Transfer {
      */
     PreAuthenticationLoginBanner?: PreAuthenticationLoginBanner;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM) which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.   
      */
     Protocols?: Protocols;
     /**
@@ -2829,7 +2841,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In additon to a workflow to execute when a file is uploaded completely, WorkflowDeatails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -2927,15 +2939,15 @@ declare namespace Transfer {
   export type WorkflowId = string;
   export interface WorkflowStep {
     /**
-     *  Currently, the following step types are supported.     COPY: Copy the file to another location.    CUSTOM: Perform a custom step with an Lambda function target.    DELETE: Delete the file.    TAG: Add a tag to the file.  
+     *  Currently, the following step types are supported.      COPY  - Copy the file to another location.     CUSTOM  - Perform a custom step with an Lambda function target.     DECRYPT  - Decrypt a file that was encrypted before it was uploaded.     DELETE  - Delete the file.     TAG  - Add a tag to the file.  
      */
     Type?: WorkflowStepType;
     /**
-     * Details for a step that performs a file copy.  Consists of the following values:    A description   An S3 location for the destination of the file copy.   A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.  
+     * Details for a step that performs a file copy.  Consists of the following values:    A description   An Amazon S3 location for the destination of the file copy.   A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE.  
      */
     CopyStepDetails?: CopyStepDetails;
     /**
-     * Details for a step that invokes a lambda function.  Consists of the lambda function name, target, and timeout (in seconds). 
+     * Details for a step that invokes an Lambda function. Consists of the Lambda function's name, target, and timeout (in seconds). 
      */
     CustomStepDetails?: CustomStepDetails;
     /**
@@ -2943,9 +2955,12 @@ declare namespace Transfer {
      */
     DeleteStepDetails?: DeleteStepDetails;
     /**
-     * Details for a step that creates one or more tags. You specify one or more tags: each tag contains a key/value pair.
+     * Details for a step that creates one or more tags. You specify one or more tags. Each tag contains a key-value pair.
      */
     TagStepDetails?: TagStepDetails;
+    /**
+     * Details for a step that decrypts an encrypted file. Consists of the following values:   A descriptive name   An Amazon S3 or Amazon Elastic File System (Amazon EFS) location for the source file to decrypt.   An S3 or Amazon EFS location for the destination of the file decryption.   A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE.   The type of encryption that's used. Currently, only PGP encryption is supported.  
+     */
     DecryptStepDetails?: DecryptStepDetails;
   }
   export type WorkflowStepName = string;

@@ -2611,7 +2611,13 @@ declare namespace Glue {
      * Specifies an Apache Parquet data store stored in Amazon S3.
      */
     S3ParquetSource?: S3ParquetSource;
+    /**
+     * Specifies a relational catalog data store in the Glue Data Catalog.
+     */
     RelationalCatalogSource?: RelationalCatalogSource;
+    /**
+     * Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.
+     */
     DynamoDBCatalogSource?: DynamoDBCatalogSource;
     /**
      * Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.
@@ -8245,6 +8251,18 @@ declare namespace Glue {
      * The desired minimum number of partitions to read from Kafka. The default value is null, which means that the number of spark partitions is equal to the number of Kafka partitions.
      */
     MinPartitions?: BoxedNonNegativeInt;
+    /**
+     * Whether to include the Kafka headers. When the option is set to "true", the data output will contain an additional column named "glue_streaming_kafka_headers" with type Array[Struct(key: String, value: String)]. The default value is "false". This option is available in Glue version 3.0 or later only.
+     */
+    IncludeHeaders?: BoxedBoolean;
+    /**
+     * When this option is set to 'true', the data output will contain an additional column named "__src_timestamp" that indicates the time when the corresponding record received by the topic. The default value is 'false'. This option is supported in Glue version 4.0 or later.
+     */
+    AddRecordTimestamp?: EnclosedInStringProperty;
+    /**
+     * When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the topic and the time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This option is supported in Glue version 4.0 or later.
+     */
+    EmitConsumerLagMetrics?: EnclosedInStringProperty;
   }
   export type KeyList = NameString[];
   export interface KeySchemaElement {
@@ -8332,6 +8350,14 @@ declare namespace Glue {
      * An identifier for the session assuming the role using AWS STS. You must use this parameter when accessing a data stream in a different account. Used in conjunction with "awsSTSRoleARN".
      */
     RoleSessionName?: EnclosedInStringProperty;
+    /**
+     * When this option is set to 'true', the data output will contain an additional column named "__src_timestamp" that indicates the time when the corresponding record received by the stream. The default value is 'false'. This option is supported in Glue version 4.0 or later.
+     */
+    AddRecordTimestamp?: EnclosedInStringProperty;
+    /**
+     * When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the stream and the time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This option is supported in Glue version 4.0 or later.
+     */
+    EmitConsumerLagMetrics?: EnclosedInStringProperty;
   }
   export type KmsKeyArn = string;
   export type LabelCount = number;
@@ -10266,6 +10292,9 @@ declare namespace Glue {
      * Specifies additional connection options for the connector.
      */
     AdditionalOptions: AdditionalOptions;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
     SchemaChangePolicy?: CatalogSchemaChangePolicy;
   }
   export interface S3HudiDirectTarget {
@@ -10293,7 +10322,13 @@ declare namespace Glue {
      * Specifies the data output format for the target.
      */
     Format: TargetFormat;
+    /**
+     * Specifies additional connection options for the connector.
+     */
     AdditionalOptions: AdditionalOptions;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
     SchemaChangePolicy?: DirectSchemaChangePolicy;
   }
   export interface S3HudiSource {
@@ -10309,6 +10344,9 @@ declare namespace Glue {
      * Specifies additional connection options.
      */
     AdditionalHudiOptions?: AdditionalOptions;
+    /**
+     * Specifies additional options for the connector.
+     */
     AdditionalOptions?: S3DirectSourceAdditionalOptions;
     /**
      * Specifies the data schema for the Hudi source.

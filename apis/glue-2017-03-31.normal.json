@@ -7639,10 +7639,12 @@
           "documentation": "<p>Specifies an Apache Parquet data store stored in Amazon S3.</p>"
         },
         "RelationalCatalogSource": {
-          "shape": "RelationalCatalogSource"
+          "shape": "RelationalCatalogSource",
+          "documentation": "<p>Specifies a relational catalog data store in the Glue Data Catalog.</p>"
         },
         "DynamoDBCatalogSource": {
-          "shape": "DynamoDBCatalogSource"
+          "shape": "DynamoDBCatalogSource",
+          "documentation": "<p>Specifies a DynamoDBC Catalog data store in the Glue Data Catalog.</p>"
         },
         "JDBCConnectorTarget": {
           "shape": "JDBCConnectorTarget",
@@ -15853,6 +15855,18 @@
         "MinPartitions": {
           "shape": "BoxedNonNegativeInt",
           "documentation": "<p>The desired minimum number of partitions to read from Kafka. The default value is null, which means that the number of spark partitions is equal to the number of Kafka partitions.</p>"
+        },
+        "IncludeHeaders": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Whether to include the Kafka headers. When the option is set to \"true\", the data output will contain an additional column named \"glue_streaming_kafka_headers\" with type <code>Array[Struct(key: String, value: String)]</code>. The default value is \"false\". This option is available in Glue version 3.0 or later only.</p>"
+        },
+        "AddRecordTimestamp": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>When this option is set to 'true', the data output will contain an additional column named \"__src_timestamp\" that indicates the time when the corresponding record received by the topic. The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
+        },
+        "EmitConsumerLagMetrics": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the topic and the time it arrives in Glue to CloudWatch. The metric's name is \"glue.driver.streaming.maxConsumerLagInMs\". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
         }
       },
       "documentation": "<p>Additional options for streaming.</p>"
@@ -15969,6 +15983,14 @@
         "RoleSessionName": {
           "shape": "EnclosedInStringProperty",
           "documentation": "<p>An identifier for the session assuming the role using AWS STS. You must use this parameter when accessing a data stream in a different account. Used in conjunction with <code>\"awsSTSRoleARN\"</code>.</p>"
+        },
+        "AddRecordTimestamp": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>When this option is set to 'true', the data output will contain an additional column named \"__src_timestamp\" that indicates the time when the corresponding record received by the stream. The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
+        },
+        "EmitConsumerLagMetrics": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the stream and the time it arrives in Glue to CloudWatch. The metric's name is \"glue.driver.streaming.maxConsumerLagInMs\". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
         }
       },
       "documentation": "<p>Additional options for the Amazon Kinesis streaming data source.</p>"
@@ -19040,7 +19062,8 @@
           "documentation": "<p>Specifies additional connection options for the connector.</p>"
         },
         "SchemaChangePolicy": {
-          "shape": "CatalogSchemaChangePolicy"
+          "shape": "CatalogSchemaChangePolicy",
+          "documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
         }
       },
       "documentation": "<p>Specifies a target that writes to a Hudi data source in the Glue Data Catalog.</p>"
@@ -19081,10 +19104,12 @@
           "documentation": "<p>Specifies the data output format for the target.</p>"
         },
         "AdditionalOptions": {
-          "shape": "AdditionalOptions"
+          "shape": "AdditionalOptions",
+          "documentation": "<p>Specifies additional connection options for the connector.</p>"
         },
         "SchemaChangePolicy": {
-          "shape": "DirectSchemaChangePolicy"
+          "shape": "DirectSchemaChangePolicy",
+          "documentation": "<p>A policy that specifies update behavior for the crawler.</p>"
         }
       },
       "documentation": "<p>Specifies a target that writes to a Hudi data source in Amazon S3.</p>"
@@ -19109,7 +19134,8 @@
           "documentation": "<p>Specifies additional connection options.</p>"
         },
         "AdditionalOptions": {
-          "shape": "S3DirectSourceAdditionalOptions"
+          "shape": "S3DirectSourceAdditionalOptions",
+          "documentation": "<p>Specifies additional options for the connector.</p>"
         },
         "OutputSchemas": {
           "shape": "GlueSchemas",

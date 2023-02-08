@@ -118,11 +118,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.CreateMonitoringSubscriptionResult) => void): Request<CloudFront.Types.CreateMonitoringSubscriptionResult, AWSError>;
   /**
-   * Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin. For an Amazon S3 origin, this makes it possible to block public access to the Amazon S3 bucket so that viewers (users) can access the content in the bucket only through CloudFront. For more information about using a CloudFront origin access control, see Restricting access to an Amazon S3 origin in the Amazon CloudFront Developer Guide.
+   * Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin. This makes it possible to block public access to the origin, allowing viewers (users) to access the origin's content only through CloudFront. For more information about using a CloudFront origin access control, see Restricting access to an Amazon Web Services origin in the Amazon CloudFront Developer Guide.
    */
   createOriginAccessControl(params: CloudFront.Types.CreateOriginAccessControlRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateOriginAccessControlResult) => void): Request<CloudFront.Types.CreateOriginAccessControlResult, AWSError>;
   /**
-   * Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin. For an Amazon S3 origin, this makes it possible to block public access to the Amazon S3 bucket so that viewers (users) can access the content in the bucket only through CloudFront. For more information about using a CloudFront origin access control, see Restricting access to an Amazon S3 origin in the Amazon CloudFront Developer Guide.
+   * Creates a new origin access control in CloudFront. After you create an origin access control, you can add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed) requests to the origin. This makes it possible to block public access to the origin, allowing viewers (users) to access the origin's content only through CloudFront. For more information about using a CloudFront origin access control, see Restricting access to an Amazon Web Services origin in the Amazon CloudFront Developer Guide.
    */
   createOriginAccessControl(callback?: (err: AWSError, data: CloudFront.Types.CreateOriginAccessControlResult) => void): Request<CloudFront.Types.CreateOriginAccessControlResult, AWSError>;
   /**
@@ -3826,7 +3826,7 @@ declare namespace CloudFront {
      */
     SigningBehavior: OriginAccessControlSigningBehaviors;
     /**
-     * The type of origin that this origin access control is for. The only valid value is s3.
+     * The type of origin that this origin access control is for.
      */
     OriginAccessControlOriginType: OriginAccessControlOriginTypes;
   }
@@ -3856,7 +3856,7 @@ declare namespace CloudFront {
      */
     Items?: OriginAccessControlSummaryList;
   }
-  export type OriginAccessControlOriginTypes = "s3"|string;
+  export type OriginAccessControlOriginTypes = "s3"|"mediastore"|string;
   export type OriginAccessControlSigningBehaviors = "never"|"always"|"no-override"|string;
   export type OriginAccessControlSigningProtocols = "sigv4"|string;
   export interface OriginAccessControlSummary {
@@ -3881,7 +3881,7 @@ declare namespace CloudFront {
      */
     SigningBehavior: OriginAccessControlSigningBehaviors;
     /**
-     * The type of origin that this origin access control is for. The only valid value is s3.
+     * The type of origin that this origin access control is for.
      */
     OriginAccessControlOriginType: OriginAccessControlOriginTypes;
   }
