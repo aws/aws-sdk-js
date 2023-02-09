@@ -20,11 +20,11 @@ declare class MigrationHubRefactorSpaces extends Service {
    */
   createApplication(callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.CreateApplicationResponse) => void): Request<MigrationHubRefactorSpaces.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all Refactor Spaces applications, services, and routes created within the environment. They are referred to as the environment owner. The environment owner has cross-account visibility and control of Refactor Spaces resources that are added to the environment by other accounts that the environment is shared with. When creating an environment, Refactor Spaces provisions a transit gateway in your account.
+   * Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all Refactor Spaces applications, services, and routes created within the environment. They are referred to as the environment owner. The environment owner has cross-account visibility and control of Refactor Spaces resources that are added to the environment by other accounts that the environment is shared with. When creating an environment with a network fabric type of TRANSIT_GATEWAY, Refactor Spaces provisions a transit gateway in your account.
    */
   createEnvironment(params: MigrationHubRefactorSpaces.Types.CreateEnvironmentRequest, callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.CreateEnvironmentResponse) => void): Request<MigrationHubRefactorSpaces.Types.CreateEnvironmentResponse, AWSError>;
   /**
-   * Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all Refactor Spaces applications, services, and routes created within the environment. They are referred to as the environment owner. The environment owner has cross-account visibility and control of Refactor Spaces resources that are added to the environment by other accounts that the environment is shared with. When creating an environment, Refactor Spaces provisions a transit gateway in your account.
+   * Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all Refactor Spaces applications, services, and routes created within the environment. They are referred to as the environment owner. The environment owner has cross-account visibility and control of Refactor Spaces resources that are added to the environment by other accounts that the environment is shared with. When creating an environment with a network fabric type of TRANSIT_GATEWAY, Refactor Spaces provisions a transit gateway in your account.
    */
   createEnvironment(callback?: (err: AWSError, data: MigrationHubRefactorSpaces.Types.CreateEnvironmentResponse) => void): Request<MigrationHubRefactorSpaces.Types.CreateEnvironmentResponse, AWSError>;
   /**
@@ -1427,7 +1427,7 @@ declare namespace MigrationHubRefactorSpaces {
     Tags?: TagMap;
   }
   export type MaxResults = number;
-  export type NetworkFabricType = "TRANSIT_GATEWAY"|string;
+  export type NetworkFabricType = "TRANSIT_GATEWAY"|"NONE"|string;
   export type NextToken = string;
   export type NlbArn = string;
   export type NlbName = string;

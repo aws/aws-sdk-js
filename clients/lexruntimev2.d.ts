@@ -390,6 +390,10 @@ declare namespace LexRuntimeV2 {
      * The identifier of the session in use.
      */
     sessionId?: SessionId;
+    /**
+     * The bot member that recognized the text.
+     */
+    recognizedBotMember?: RecognizedBotMember;
   }
   export interface RecognizeUtteranceRequest {
     /**
@@ -421,7 +425,7 @@ declare namespace LexRuntimeV2 {
      */
     requestContentType: NonEmptyString;
     /**
-     * The message that Amazon Lex V2 returns in the response can be either text or speech based on the responseContentType value.   If the value is text/plain;charset=utf-8, Amazon Lex V2 returns text in the response.   If the value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the requestContentType parameter. For example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.   If the value is audio/pcm, the speech returned is audio/pcm at 16 KHz in 16-bit, little-endian format.   The following are the accepted values:   audio/mpeg   audio/ogg   audio/pcm (16 KHz)   audio/* (defaults to mpeg)   text/plain; charset=utf-8    
+     * The message that Amazon Lex V2 returns in the response can be either text or speech based on the responseContentType value.   If the value is text/plain;charset=utf-8, Amazon Lex V2 returns text in the response.   If the value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the responseContentType parameter. For example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.   If the value is audio/pcm, the speech returned is audio/pcm at 16 KHz in 16-bit, little-endian format.   The following are the accepted values:   audio/mpeg   audio/ogg   audio/pcm (16 KHz)   audio/* (defaults to mpeg)   text/plain; charset=utf-8    
      */
     responseContentType?: NonEmptyString;
     /**
@@ -466,6 +470,20 @@ declare namespace LexRuntimeV2 {
      * The prompt or statement to send to the user. This is based on the bot configuration and context. For example, if Amazon Lex V2 did not understand the user intent, it sends the clarificationPrompt configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the confirmationPrompt. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex V2 sends that message in the response.
      */
     audioStream?: BlobStream;
+    /**
+     * The bot member that recognized the utterance.
+     */
+    recognizedBotMember?: NonEmptyString;
+  }
+  export interface RecognizedBotMember {
+    /**
+     * The identifier of the bot member that processes the request.
+     */
+    botId: BotIdentifier;
+    /**
+     * The name of the bot member that processes the request.
+     */
+    botName?: Name;
   }
   export interface RuntimeHintDetails {
     /**

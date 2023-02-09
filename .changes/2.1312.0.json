@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "EMRcontainers",
+        "description": "EMR on EKS allows configuring retry policies for job runs through the StartJobRun API. Using retry policies, a job cause a driver pod to be restarted automatically if it fails or is deleted. The job's status can be seen in the DescribeJobRun and ListJobRun APIs and monitored using CloudWatch events."
+    },
+    {
+        "type": "feature",
+        "category": "Evidently",
+        "description": "Updated entity overrides parameter to accept up to 2500 overrides or a total of 40KB."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "AWS Lex now supports Network of Bots."
+    },
+    {
+        "type": "feature",
+        "category": "LexRuntimeV2",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHubRefactorSpaces",
+        "description": "This release adds support for creating environments with a network fabric type of NONE"
+    }
+]

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1311.0-->
+<!--LATEST=2.1312.0-->
 <!--ENTRYINSERT-->
+
+## 2.1312.0
+* feature: EMRcontainers: EMR on EKS allows configuring retry policies for job runs through the StartJobRun API. Using retry policies, a job cause a driver pod to be restarted automatically if it fails or is deleted. The job's status can be seen in the DescribeJobRun and ListJobRun APIs and monitored using CloudWatch events.
+* feature: Evidently: Updated entity overrides parameter to accept up to 2500 overrides or a total of 40KB.
+* feature: LexModelsV2: AWS Lex now supports Network of Bots.
+* feature: LexRuntimeV2: Updates API to latest version.
+* feature: MigrationHubRefactorSpaces: This release adds support for creating environments with a network fabric type of NONE
 
 ## 2.1311.0
 * feature: Backup: This release added one attribute (resource name) in the output model of our 9 existing APIs in AWS backup so that customers will see the resource name at the output. No input required from Customers.

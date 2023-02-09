@@ -68,11 +68,11 @@ declare class WorkSpaces extends Service {
    */
   createIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
   /**
-   * Creates a Standby WorkSpace in a secondary region.
+   * Creates a standby WorkSpace in a secondary Region.
    */
   createStandbyWorkspaces(params: WorkSpaces.Types.CreateStandbyWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateStandbyWorkspacesResult) => void): Request<WorkSpaces.Types.CreateStandbyWorkspacesResult, AWSError>;
   /**
-   * Creates a Standby WorkSpace in a secondary region.
+   * Creates a standby WorkSpace in a secondary Region.
    */
   createStandbyWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateStandbyWorkspacesResult) => void): Request<WorkSpaces.Types.CreateStandbyWorkspacesResult, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class WorkSpaces extends Service {
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
+   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
    */
   createUpdatedWorkspaceImage(params: WorkSpaces.Types.CreateUpdatedWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateUpdatedWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateUpdatedWorkspaceImageResult, AWSError>;
   /**
-   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
+   * Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components. To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use  DescribeWorkspaceImages.    Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.   Microsoft Windows updates and other application updates are not included in the update process.   The source WorkSpace image is not deleted. You can delete the source image after you've verified your new updated image and created a new bundle.    
    */
   createUpdatedWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateUpdatedWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateUpdatedWorkspaceImageResult, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class WorkSpaces extends Service {
    */
   importClientBranding(callback?: (err: AWSError, data: WorkSpaces.Types.ImportClientBrandingResult) => void): Request<WorkSpaces.Types.ImportClientBrandingResult, AWSError>;
   /**
-   * Imports the specified Windows 10 Bring Your Own License (BYOL) or Windows Server 2016 BYOL image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Imports the specified Windows 10 Bring Your Own License (BYOL) or Windows Server 2016 BYOL image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
@@ -835,17 +835,17 @@ declare namespace WorkSpaces {
      */
     PrimaryRegion: Region;
     /**
-     * Information about the Standby WorkSpace to be created.
+     * Information about the standby WorkSpace to be created.
      */
     StandbyWorkspaces: StandbyWorkspacesList;
   }
   export interface CreateStandbyWorkspacesResult {
     /**
-     * Information about the Standby WorkSpace that could not be created. 
+     * Information about the standby WorkSpace that could not be created. 
      */
     FailedStandbyRequests?: FailedCreateStandbyWorkspacesRequestList;
     /**
-     * Information about the Standby WorkSpace that was created.
+     * Information about the standby WorkSpace that was created.
      */
     PendingStandbyRequests?: PendingCreateStandbyWorkspacesRequestList;
   }
@@ -1528,15 +1528,15 @@ declare namespace WorkSpaces {
   export type ErrorType = string;
   export interface FailedCreateStandbyWorkspacesRequest {
     /**
-     * Information about the Standby WorkSpace that could not be created.
+     * Information about the standby WorkSpace that could not be created.
      */
     StandbyWorkspaceRequest?: StandbyWorkspace;
     /**
-     * The error code that is returned if the Standby WorkSpace could not be created.
+     * The error code that is returned if the standby WorkSpace could not be created.
      */
     ErrorCode?: WorkspaceErrorCode;
     /**
-     * The text of the error message that is returned if the Standby WorkSpace could not be created.
+     * The text of the error message that is returned if the standby WorkSpace could not be created.
      */
     ErrorMessage?: Description;
   }
@@ -1942,19 +1942,19 @@ declare namespace WorkSpaces {
   export type PaginationToken = string;
   export interface PendingCreateStandbyWorkspacesRequest {
     /**
-     * Describes the Standby WorkSpace that was created. Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call  DescribeWorkspaces before the WorkSpace is created, the information returned can be incomplete. 
+     * Describes the standby WorkSpace that was created. Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call  DescribeWorkspaces before the WorkSpace is created, the information returned can be incomplete. 
      */
     UserName?: UserName;
     /**
-     * The identifier of the directory for the Standby WorkSpace.
+     * The identifier of the directory for the standby WorkSpace.
      */
     DirectoryId?: DirectoryId;
     /**
-     * The operational state of the Standby WorkSpace.
+     * The operational state of the standby WorkSpace.
      */
     State?: WorkspaceState;
     /**
-     * The identifier of the Standby WorkSpace.
+     * The identifier of the standby WorkSpace.
      */
     WorkspaceId?: WorkspaceId;
   }
@@ -2127,19 +2127,19 @@ declare namespace WorkSpaces {
   export type SnapshotList = Snapshot[];
   export interface StandbyWorkspace {
     /**
-     * The identifier of the Standby WorkSpace.
+     * The identifier of the standby WorkSpace.
      */
     PrimaryWorkspaceId: WorkspaceId;
     /**
-     * The volume encryption key of the Standby WorkSpace.
+     * The volume encryption key of the standby WorkSpace.
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
-     * The identifier of the directory for the Standby WorkSpace.
+     * The identifier of the directory for the standby WorkSpace.
      */
     DirectoryId: DirectoryId;
     /**
-     * The tags associated with the Standby WorkSpace.
+     * The tags associated with the standby WorkSpace.
      */
     Tags?: TagList;
   }
@@ -2375,7 +2375,7 @@ declare namespace WorkSpaces {
      */
     ModificationStates?: ModificationStateList;
     /**
-     * The Standby WorkSpace or Primary WorkSpace related to the specified WorkSpace.
+     * The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
      */
     RelatedWorkspaces?: RelatedWorkspaces;
   }

@@ -28,11 +28,11 @@ declare class EMRcontainers extends Service {
    */
   createJobTemplate(callback?: (err: AWSError, data: EMRcontainers.Types.CreateJobTemplateResponse) => void): Request<EMRcontainers.Types.CreateJobTemplateResponse, AWSError>;
   /**
-   * Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   createManagedEndpoint(params: EMRcontainers.Types.CreateManagedEndpointRequest, callback?: (err: AWSError, data: EMRcontainers.Types.CreateManagedEndpointResponse) => void): Request<EMRcontainers.Types.CreateManagedEndpointResponse, AWSError>;
   /**
-   * Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   createManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.CreateManagedEndpointResponse) => void): Request<EMRcontainers.Types.CreateManagedEndpointResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class EMRcontainers extends Service {
    */
   deleteJobTemplate(callback?: (err: AWSError, data: EMRcontainers.Types.DeleteJobTemplateResponse) => void): Request<EMRcontainers.Types.DeleteJobTemplateResponse, AWSError>;
   /**
-   * Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   deleteManagedEndpoint(params: EMRcontainers.Types.DeleteManagedEndpointRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DeleteManagedEndpointResponse) => void): Request<EMRcontainers.Types.DeleteManagedEndpointResponse, AWSError>;
   /**
-   * Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   deleteManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.DeleteManagedEndpointResponse) => void): Request<EMRcontainers.Types.DeleteManagedEndpointResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class EMRcontainers extends Service {
    */
   describeJobTemplate(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeJobTemplateResponse) => void): Request<EMRcontainers.Types.DescribeJobTemplateResponse, AWSError>;
   /**
-   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   describeManagedEndpoint(params: EMRcontainers.Types.DescribeManagedEndpointRequest, callback?: (err: AWSError, data: EMRcontainers.Types.DescribeManagedEndpointResponse) => void): Request<EMRcontainers.Types.DescribeManagedEndpointResponse, AWSError>;
   /**
-   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   describeManagedEndpoint(callback?: (err: AWSError, data: EMRcontainers.Types.DescribeManagedEndpointResponse) => void): Request<EMRcontainers.Types.DescribeManagedEndpointResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class EMRcontainers extends Service {
    */
   listJobTemplates(callback?: (err: AWSError, data: EMRcontainers.Types.ListJobTemplatesResponse) => void): Request<EMRcontainers.Types.ListJobTemplatesResponse, AWSError>;
   /**
-   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   listManagedEndpoints(params: EMRcontainers.Types.ListManagedEndpointsRequest, callback?: (err: AWSError, data: EMRcontainers.Types.ListManagedEndpointsResponse) => void): Request<EMRcontainers.Types.ListManagedEndpointsResponse, AWSError>;
   /**
-   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+   * Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
    */
   listManagedEndpoints(callback?: (err: AWSError, data: EMRcontainers.Types.ListManagedEndpointsResponse) => void): Request<EMRcontainers.Types.ListManagedEndpointsResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class EMRcontainers extends Service {
    */
   startJobRun(callback?: (err: AWSError, data: EMRcontainers.Types.StartJobRunResponse) => void): Request<EMRcontainers.Types.StartJobRunResponse, AWSError>;
   /**
-   * Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
+   * Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
    */
   tagResource(params: EMRcontainers.Types.TagResourceRequest, callback?: (err: AWSError, data: EMRcontainers.Types.TagResourceResponse) => void): Request<EMRcontainers.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
+   * Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
    */
   tagResource(callback?: (err: AWSError, data: EMRcontainers.Types.TagResourceResponse) => void): Request<EMRcontainers.Types.TagResourceResponse, AWSError>;
   /**
@@ -236,13 +236,13 @@ declare namespace EMRcontainers {
   }
   export interface ContainerInfo {
     /**
-     * The information about the EKS cluster.
+     * The information about the Amazon EKS cluster.
      */
     eksInfo?: EksInfo;
   }
   export interface ContainerProvider {
     /**
-     * The type of the container provider. EKS is the only supported type as of now.
+     * The type of the container provider. Amazon EKS is the only supported type as of now.
      */
     type: ContainerProviderType;
     /**
@@ -486,7 +486,7 @@ declare namespace EMRcontainers {
   }
   export interface EksInfo {
     /**
-     * The namespaces of the EKS cluster.
+     * The namespaces of the Amazon EKS cluster.
      */
     namespace?: KubernetesNamespace;
   }
@@ -652,6 +652,14 @@ declare namespace EMRcontainers {
      * The assigned tags of the job run.
      */
     tags?: TagMap;
+    /**
+     * The configuration of the retry policy that the job runs on.
+     */
+    retryPolicyConfiguration?: RetryPolicyConfiguration;
+    /**
+     * The current status of the retry policy executed on the job.
+     */
+    retryPolicyExecution?: RetryPolicyExecution;
   }
   export type JobRunState = "PENDING"|"SUBMITTED"|"RUNNING"|"FAILED"|"CANCELLED"|"CANCEL_PENDING"|"COMPLETED"|string;
   export type JobRunStates = JobRunState[];
@@ -847,7 +855,7 @@ declare namespace EMRcontainers {
      */
     containerProviderId?: String1024;
     /**
-     * The container provider type of the virtual cluster. EKS is the only supported type as of now.
+     * The container provider type of the virtual cluster. Amazon EKS is the only supported type as of now.
      */
     containerProviderType?: ContainerProviderType;
     /**
@@ -944,6 +952,18 @@ declare namespace EMRcontainers {
   export type RequestIdentityUserArn = string;
   export type ResourceIdString = string;
   export type ResourceNameString = string;
+  export interface RetryPolicyConfiguration {
+    /**
+     * The maximum number of attempts on the job's driver.
+     */
+    maxAttempts: JavaInteger;
+  }
+  export interface RetryPolicyExecution {
+    /**
+     * The current number of attempts made on the driver of the job.
+     */
+    currentAttemptCount: JavaInteger;
+  }
   export type RsiArn = string;
   export interface S3MonitoringConfiguration {
     /**
@@ -1019,6 +1039,10 @@ declare namespace EMRcontainers {
      * The values of job template parameters to start a job run.
      */
     jobTemplateParameters?: TemplateParameterInputMap;
+    /**
+     * The retry policy configuration for the job run.
+     */
+    retryPolicyConfiguration?: RetryPolicyConfiguration;
   }
   export interface StartJobRunResponse {
     /**
@@ -1061,7 +1085,7 @@ declare namespace EMRcontainers {
   export type TemplateParameter = string;
   export interface TemplateParameterConfiguration {
     /**
-     * The type of the job template parameter. Allowed values are: ‘String’, ‘Number’.
+     * The type of the job template parameter. Allowed values are: ‘STRING’, ‘NUMBER’.
      */
     type?: TemplateParameterDataType;
     /**

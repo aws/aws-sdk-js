@@ -2342,7 +2342,7 @@ declare namespace Lightsail {
      */
     password?: string;
     /**
-     * The timestamp of when the container image registry username and password expire. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the CreateContainerServiceRegistryLogin action.
+     * The timestamp of when the container image registry sign-in credentials expire. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the CreateContainerServiceRegistryLogin action.
      */
     expiresAt?: IsoDate;
     /**
@@ -3721,7 +3721,7 @@ declare namespace Lightsail {
      */
     target?: string;
     /**
-     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer.
+     * When true, specifies whether the domain entry is an alias used by the Lightsail load balancer, Lightsail container service, Lightsail content delivery network (CDN) distribution, or another Amazon Web Services resource. You can include an alias (A type) record in your request, which points to the DNS name of a load balancer, container service, CDN distribution, or other Amazon Web Services resource and routes traffic to that resource.
      */
     isAlias?: boolean;
     /**
@@ -6355,6 +6355,9 @@ declare namespace Lightsail {
      * An object that describes the state of the name server records that are automatically added to the Route 53 domain by Lightsail.
      */
     nameServersUpdateState?: NameServersUpdateState;
+    /**
+     * Describes the deletion state of an Amazon Route 53 hosted zone for a domain that is being automatically delegated to an Amazon Lightsail DNS zone.
+     */
     r53HostedZoneDeletionState?: R53HostedZoneDeletionState;
   }
   export interface RelationalDatabase {
@@ -7167,6 +7170,9 @@ declare namespace Lightsail {
     httpProtocolIpv6?: HttpProtocolIpv6;
   }
   export interface UpdateInstanceMetadataOptionsResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
     operation?: Operation;
   }
   export interface UpdateLoadBalancerAttributeRequest {

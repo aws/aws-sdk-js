@@ -100,19 +100,19 @@ declare class ChimeSDKMeetings extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMeetings.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMeetings.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Starts transcription for the specified meetingId.
+   * Starts transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services. 
    */
   startMeetingTranscription(params: ChimeSDKMeetings.Types.StartMeetingTranscriptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts transcription for the specified meetingId.
+   * Starts transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services. 
    */
   startMeetingTranscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops transcription for the specified meetingId.
+   * Stops transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services. 
    */
   stopMeetingTranscription(params: ChimeSDKMeetings.Types.StopMeetingTranscriptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops transcription for the specified meetingId.
+   * Stops transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services. 
    */
   stopMeetingTranscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -145,7 +145,7 @@ declare namespace ChimeSDKMeetings {
   export type Arn = string;
   export interface Attendee {
     /**
-     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix. Case insensitive.
      */
     ExternalUserId?: ExternalUserId;
     /**
@@ -228,7 +228,7 @@ declare namespace ChimeSDKMeetings {
   export type ClientRequestToken = string;
   export interface CreateAttendeeError {
     /**
-     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix. Case insensitive.
      */
     ExternalUserId?: ExternalUserId;
     /**
@@ -246,7 +246,7 @@ declare namespace ChimeSDKMeetings {
      */
     MeetingId: GuidString;
     /**
-     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix.
      */
     ExternalUserId: ExternalUserId;
     /**
@@ -256,7 +256,7 @@ declare namespace ChimeSDKMeetings {
   }
   export interface CreateAttendeeRequestItem {
     /**
-     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix. Case insensitive.
      */
     ExternalUserId: ExternalUserId;
     /**
@@ -285,7 +285,7 @@ declare namespace ChimeSDKMeetings {
      */
     MeetingHostId?: ExternalUserId;
     /**
-     * The external meeting ID.
+     * The external meeting ID. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix. Case insensitive.
      */
     ExternalMeetingId: ExternalMeetingId;
     /**
@@ -305,7 +305,7 @@ declare namespace ChimeSDKMeetings {
      */
     TenantIds?: TenantIdList;
     /**
-     * Applies one or more tags to an Amazon Chime SDK meeting. Note the following:   Not all resources have tags. For a list of services with resources that support tagging using this operation, see Services that support the Resource Groups Tagging API. If the resource doesn't yet support this operation, the resource's service might support tagging using its own API operations. For more information, refer to the documentation for that service.   Each resource can have up to 50 tags. For other limits, see Tag Naming and Usage Conventions in the AWS General Reference.   You can only tag resources that are located in the specified AWS Region for the AWS account.   To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see the documentation for each service.    Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.   Minimum permissions   In addition to the tag:TagResources permission required by this operation, you must also have the tagging permission defined by the service that created the resource. For example, to tag a ChimeSDKMeetings instance using the TagResources operation, you must have both of the following permissions:  tag:TagResources   ChimeSDKMeetings:CreateTags   Some services might have specific requirements for tagging some resources. For example, to tag an Amazon S3 bucket, you must also have the s3:GetBucketTagging permission. If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information. 
+     * Applies one or more tags to an Amazon Chime SDK meeting. Note the following:   Not all resources have tags. For a list of services with resources that support tagging using this operation, see Services that support the Resource Groups Tagging API. If the resource doesn't yet support this operation, the resource's service might support tagging using its own API operations. For more information, refer to the documentation for that service.   Each resource can have up to 50 tags. For other limits, see Tag Naming and Usage Conventions in the AWS General Reference.   You can only tag resources that are located in the specified AWS Region for the AWS account.   To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see the documentation for each service.    Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.   Minimum permissions  In addition to the tag:TagResources permission required by this operation, you must also have the tagging permission defined by the service that created the resource. For example, to tag a ChimeSDKMeetings instance using the TagResources operation, you must have both of the following permissions:  tag:TagResources   ChimeSDKMeetings:CreateTags   Some services might have specific requirements for tagging some resources. For example, to tag an Amazon S3 bucket, you must also have the s3:GetBucketTagging permission. If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information. 
      */
     Tags?: TagList;
   }
@@ -329,7 +329,7 @@ declare namespace ChimeSDKMeetings {
      */
     MeetingHostId?: ExternalUserId;
     /**
-     * The external meeting ID.
+     * The external meeting ID. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix. Case insensitive.
      */
     ExternalMeetingId: ExternalMeetingId;
     /**
@@ -586,7 +586,7 @@ declare namespace ChimeSDKMeetings {
      */
     MeetingHostId?: ExternalUserId;
     /**
-     * The external meeting ID.
+     * The external meeting ID. Pattern: [-_&amp;@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*  Values that begin with aws: are reserved. You can't configure a value that uses this prefix. Case insensitive.
      */
     ExternalMeetingId?: ExternalMeetingId;
     /**
@@ -598,7 +598,7 @@ declare namespace ChimeSDKMeetings {
      */
     MediaPlacement?: MediaPlacement;
     /**
-     * The features available to a meeting, such as Amazon Voice Focus.
+     * The features available to a meeting, such as echo reduction.
      */
     MeetingFeatures?: MeetingFeaturesConfiguration;
     /**
@@ -617,7 +617,7 @@ declare namespace ChimeSDKMeetings {
   export type MeetingFeatureStatus = "AVAILABLE"|"UNAVAILABLE"|string;
   export interface MeetingFeaturesConfiguration {
     /**
-     * The configuration settings for the audio features available to a meeting. 
+     * The configuration settings for the audio features available to a meeting.
      */
     Audio?: AudioFeatures;
   }
