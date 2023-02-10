@@ -52,11 +52,11 @@ declare class Connect extends Service {
    */
   associateLambdaFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex V1 bot. This API only supports the association of Amazon Lex V1 bots.
    */
   associateLexBot(params: Connect.Types.AssociateLexBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex V1 bot. This API only supports the association of Amazon Lex V1 bots.
    */
   associateLexBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1857,6 +1857,10 @@ declare namespace Connect {
      * The contactId that is related to this contact.
      */
     RelatedContactId?: ContactId;
+    /**
+     * Information about Amazon Connect Wisdom.
+     */
+    WisdomInfo?: WisdomInfo;
   }
   export interface ContactFilter {
     /**
@@ -2321,7 +2325,7 @@ declare namespace Connect {
      */
     DefaultOutboundQueueId: QueueId;
     /**
-     * The inbound queues associated with the routing profile. If no queue is added, the agent can make only outbound calls.
+     * The inbound queues associated with the routing profile. If no queue is added, the agent can make only outbound calls. The limit of 10 array members applies to the maximum number of RoutingProfileQueueConfig objects that can be passed during a CreateRoutingProfile API request. It is different from the quota of 50 queues per routing profile per instance that is listed in Amazon Connect service quotas. 
      */
     QueueConfigs?: RoutingProfileQueueConfigList;
     /**
@@ -7815,6 +7819,12 @@ declare namespace Connect {
     VoiceRecordingTrack?: VoiceRecordingTrack;
   }
   export type VoiceRecordingTrack = "FROM_AGENT"|"TO_AGENT"|"ALL"|string;
+  export interface WisdomInfo {
+    /**
+     * The Amazon Resource Name (ARN) of the Wisdom session.
+     */
+    SessionArn?: ARN;
+  }
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

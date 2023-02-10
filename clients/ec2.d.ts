@@ -373,11 +373,11 @@ declare class EC2 extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel having an AMI shared with your Amazon Web Services account in the Amazon EC2 User Guide.
+   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see  Cancel having an AMI shared with your Amazon Web Services account in the Amazon EC2 User Guide.
    */
   cancelImageLaunchPermission(params: EC2.Types.CancelImageLaunchPermissionRequest, callback?: (err: AWSError, data: EC2.Types.CancelImageLaunchPermissionResult) => void): Request<EC2.Types.CancelImageLaunchPermissionResult, AWSError>;
   /**
-   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see Cancel having an AMI shared with your Amazon Web Services account in the Amazon EC2 User Guide.
+   * Removes your Amazon Web Services account from the launch permissions for the specified AMI. For more information, see  Cancel having an AMI shared with your Amazon Web Services account in the Amazon EC2 User Guide.
    */
   cancelImageLaunchPermission(callback?: (err: AWSError, data: EC2.Types.CancelImageLaunchPermissionResult) => void): Request<EC2.Types.CancelImageLaunchPermissionResult, AWSError>;
   /**
@@ -2509,11 +2509,11 @@ declare class EC2 extends Service {
    */
   describeSnapshotTierStatus(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotTierStatusResult) => void): Request<EC2.Types.DescribeSnapshotTierStatusResult, AWSError>;
   /**
-   * Describes the specified EBS snapshots available to you or all of the EBS snapshots available to you. The snapshots available to you include public snapshots, private snapshots that you own, and private snapshots owned by other Amazon Web Services accounts for which you have explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All Amazon Web Services accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.    implicit: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the Amazon Web Services account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify Amazon Web Services account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, we recommend that you paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. To get the state of fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores. For more information about EBS snapshots, see Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the specified EBS snapshots available to you or all of the EBS snapshots available to you. The snapshots available to you include public snapshots, private snapshots that you own, and private snapshots owned by other Amazon Web Services accounts for which you have explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All Amazon Web Services accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.    implicit: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the Amazon Web Services account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify Amazon Web Services account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, we recommend that you paginate the output to make the list more manageable. For more information, see Pagination. To get the state of fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores. For more information about EBS snapshots, see Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSnapshots(params: EC2.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
-   * Describes the specified EBS snapshots available to you or all of the EBS snapshots available to you. The snapshots available to you include public snapshots, private snapshots that you own, and private snapshots owned by other Amazon Web Services accounts for which you have explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All Amazon Web Services accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.    implicit: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the Amazon Web Services account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify Amazon Web Services account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, we recommend that you paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. To get the state of fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores. For more information about EBS snapshots, see Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the specified EBS snapshots available to you or all of the EBS snapshots available to you. The snapshots available to you include public snapshots, private snapshots that you own, and private snapshots owned by other Amazon Web Services accounts for which you have explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All Amazon Web Services accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific Amazon Web Services account.    implicit: An Amazon Web Services account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be filtered by specifying snapshot IDs, snapshot owners, or Amazon Web Services accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the Amazon Web Services account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify Amazon Web Services account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, we recommend that you paginate the output to make the list more manageable. For more information, see Pagination. To get the state of fast snapshot restores for a snapshot, use DescribeFastSnapshotRestores. For more information about EBS snapshots, see Amazon EBS snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSnapshots(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
@@ -2765,11 +2765,11 @@ declare class EC2 extends Service {
    */
   describeVolumeStatus(callback?: (err: AWSError, data: EC2.Types.DescribeVolumeStatusResult) => void): Request<EC2.Types.DescribeVolumeStatusResult, AWSError>;
   /**
-   * Describes the specified EBS volumes or all of your EBS volumes. If you are describing a long list of volumes, we recommend that you paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeVolumes request to retrieve the remaining results. For more information about EBS volumes, see Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the specified EBS volumes or all of your EBS volumes. If you are describing a long list of volumes, we recommend that you paginate the output to make the list more manageable. For more information, see Pagination. For more information about EBS volumes, see Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   describeVolumes(params: EC2.Types.DescribeVolumesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
-   * Describes the specified EBS volumes or all of your EBS volumes. If you are describing a long list of volumes, we recommend that you paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeVolumes request to retrieve the remaining results. For more information about EBS volumes, see Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the specified EBS volumes or all of your EBS volumes. If you are describing a long list of volumes, we recommend that you paginate the output to make the list more manageable. For more information, see Pagination. For more information about EBS volumes, see Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   describeVolumes(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
@@ -4685,11 +4685,11 @@ declare class EC2 extends Service {
    */
   unassignPrivateIpAddresses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Unassigns secondary private NAT gateway IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway. A private IP address will only be released at the end of MaxDrainDurationSeconds. The private IP addresses stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining assigned private IP address). After the existing connections drain out, the private IP addresses get released.   
+   * Unassigns secondary private IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway. A private IP address will only be released at the end of MaxDrainDurationSeconds. The private IP addresses stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining assigned private IP address). After the existing connections drain out, the private IP addresses get released.   
    */
   unassignPrivateNatGatewayAddress(params: EC2.Types.UnassignPrivateNatGatewayAddressRequest, callback?: (err: AWSError, data: EC2.Types.UnassignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.UnassignPrivateNatGatewayAddressResult, AWSError>;
   /**
-   * Unassigns secondary private NAT gateway IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway. A private IP address will only be released at the end of MaxDrainDurationSeconds. The private IP addresses stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining assigned private IP address). After the existing connections drain out, the private IP addresses get released.   
+   * Unassigns secondary private IPv4 addresses from a private NAT gateway. You cannot unassign your primary private IP. For more information, see Edit secondary IP address associations in the Amazon Virtual Private Cloud User Guide. While unassigning is in progress, you cannot assign/unassign additional IP addresses while the connections are being drained. You are, however, allowed to delete the NAT gateway. A private IP address will only be released at the end of MaxDrainDurationSeconds. The private IP addresses stay associated and support the existing connections but do not support any new connections (new connections are distributed across the remaining assigned private IP address). After the existing connections drain out, the private IP addresses get released.   
    */
   unassignPrivateNatGatewayAddress(callback?: (err: AWSError, data: EC2.Types.UnassignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.UnassignPrivateNatGatewayAddressResult, AWSError>;
   /**
@@ -4892,6 +4892,14 @@ declare class EC2 extends Service {
    * Waits for the snapshotCompleted state by periodically calling the underlying EC2.describeSnapshotsoperation every 15 seconds (at most 40 times).
    */
   waitFor(state: "snapshotCompleted", callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
+  /**
+   * Waits for the snapshotImported state by periodically calling the underlying EC2.describeImportSnapshotTasksoperation every 15 seconds (at most 40 times).
+   */
+  waitFor(state: "snapshotImported", params: EC2.Types.DescribeImportSnapshotTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeImportSnapshotTasksResult) => void): Request<EC2.Types.DescribeImportSnapshotTasksResult, AWSError>;
+  /**
+   * Waits for the snapshotImported state by periodically calling the underlying EC2.describeImportSnapshotTasksoperation every 15 seconds (at most 40 times).
+   */
+  waitFor(state: "snapshotImported", callback?: (err: AWSError, data: EC2.Types.DescribeImportSnapshotTasksResult) => void): Request<EC2.Types.DescribeImportSnapshotTasksResult, AWSError>;
   /**
    * Waits for the securityGroupExists state by periodically calling the underlying EC2.describeSecurityGroupsoperation every 5 seconds (at most 6 times).
    */
@@ -12954,7 +12962,7 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesRequest {
     /**
-     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in, and not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.  
+     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in | not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone (availability-zone | local-zone | wavelength-zone).  
      */
     Filters?: FilterList;
     /**
@@ -13166,11 +13174,11 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. Constraint: If the value is greater than 1000, we return only 1000 items.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination. Constraint: If the value is greater than 1000, we return only 1000 items.
      */
     MaxResults?: DescribeClassicLinkInstancesMaxResults;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -13180,7 +13188,7 @@ declare namespace EC2 {
      */
     Instances?: ClassicLinkInstanceList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -13437,11 +13445,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeDhcpOptionsMaxResults;
   }
@@ -13451,7 +13459,7 @@ declare namespace EC2 {
      */
     DhcpOptions?: DhcpOptionsList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -13466,11 +13474,11 @@ declare namespace EC2 {
      */
     EgressOnlyInternetGatewayIds?: EgressOnlyInternetGatewayIdList;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeEgressOnlyInternetGatewaysMaxResults;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -13484,7 +13492,7 @@ declare namespace EC2 {
      */
     EgressOnlyInternetGateways?: EgressOnlyInternetGatewayList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -13700,11 +13708,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeFastSnapshotRestoresMaxResults;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: NextToken;
     /**
@@ -13718,7 +13726,7 @@ declare namespace EC2 {
      */
     FastSnapshotRestores?: DescribeFastSnapshotRestoreSuccessSet;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: NextToken;
   }
@@ -13894,11 +13902,11 @@ declare namespace EC2 {
      */
     FlowLogIds?: FlowLogIdList;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next page of results.
+     * The token to request the next page of items. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -13908,7 +13916,7 @@ declare namespace EC2 {
      */
     FlowLogs?: FlowLogSet;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to request the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -14073,11 +14081,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeIamInstanceProfileAssociationsMaxResults;
     /**
-     * The token to request the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: NextToken;
   }
@@ -14087,7 +14095,7 @@ declare namespace EC2 {
      */
     IamInstanceProfileAssociations?: IamInstanceProfileAssociationSet;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: NextToken;
   }
@@ -14270,11 +14278,11 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call. For more information, see Pagination.
      */
     MaxResults?: DescribeInstanceCreditSpecificationsMaxResults;
     /**
-     * The token to retrieve the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -14284,7 +14292,7 @@ declare namespace EC2 {
      */
     InstanceCreditSpecifications?: InstanceCreditSpecificationList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -14342,11 +14350,11 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
+     * The maximum number of items to return for this request. To retrieve the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token to retrieve the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -14364,7 +14372,7 @@ declare namespace EC2 {
      */
     InstanceStatuses?: InstanceStatusList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -14382,11 +14390,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the next token value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DITOMaxResults;
     /**
-     * The token to retrieve the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: NextToken;
   }
@@ -14396,7 +14404,7 @@ declare namespace EC2 {
      */
     InstanceTypeOfferings?: InstanceTypeOfferingsList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: NextToken;
   }
@@ -14414,11 +14422,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the next token value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DITMaxResults;
     /**
-     * The token to retrieve the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: NextToken;
   }
@@ -14428,7 +14436,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: InstanceTypeInfoList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: NextToken;
   }
@@ -14446,11 +14454,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same request. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token to request the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -14460,7 +14468,7 @@ declare namespace EC2 {
      */
     Reservations?: ReservationList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -14479,11 +14487,11 @@ declare namespace EC2 {
      */
     InternetGatewayIds?: InternetGatewayIdList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeInternetGatewaysMaxResults;
   }
@@ -14493,7 +14501,7 @@ declare namespace EC2 {
      */
     InternetGateways?: InternetGatewayList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15074,7 +15082,7 @@ declare namespace EC2 {
      */
     Filter?: FilterList;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeNatGatewaysMaxResults;
     /**
@@ -15082,7 +15090,7 @@ declare namespace EC2 {
      */
     NatGatewayIds?: NatGatewayIdStringList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -15092,7 +15100,7 @@ declare namespace EC2 {
      */
     NatGateways?: NatGatewayList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15111,11 +15119,11 @@ declare namespace EC2 {
      */
     NetworkAclIds?: NetworkAclIdStringList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeNetworkAclsMaxResults;
   }
@@ -15125,7 +15133,7 @@ declare namespace EC2 {
      */
     NetworkAcls?: NetworkAclList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15328,11 +15336,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The token to request the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. If this parameter is not specified, up to 50 results are returned by default.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. If this parameter is not specified, up to 50 results are returned by default. For more information, see Pagination.
      */
     MaxResults?: DescribeNetworkInterfacePermissionsMaxResults;
   }
@@ -15342,7 +15350,7 @@ declare namespace EC2 {
      */
     NetworkInterfacePermissions?: NetworkInterfacePermissionList;
     /**
-     * The token to use to retrieve the next page of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15361,11 +15369,11 @@ declare namespace EC2 {
      */
     NetworkInterfaceIds?: NetworkInterfaceIdList;
     /**
-     * The token to retrieve the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. You cannot specify this parameter and the network interface IDs parameter in the same request.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. You cannot specify this parameter and the network interface IDs parameter in the same request. For more information, see Pagination.
      */
     MaxResults?: DescribeNetworkInterfacesMaxResults;
   }
@@ -15375,7 +15383,7 @@ declare namespace EC2 {
      */
     NetworkInterfaces?: NetworkInterfaceList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15527,11 +15535,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeReplaceRootVolumeTasksMaxResults;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: NextToken;
     /**
@@ -15545,7 +15553,7 @@ declare namespace EC2 {
      */
     ReplaceRootVolumeTasks?: ReplaceRootVolumeTasks;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15708,11 +15716,11 @@ declare namespace EC2 {
      */
     RouteTableIds?: RouteTableIdStringList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeRouteTablesMaxResults;
   }
@@ -15722,7 +15730,7 @@ declare namespace EC2 {
      */
     RouteTables?: RouteTableList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15838,11 +15846,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. If this parameter is not specified, then all items are returned. For more information, see Pagination.
      */
     MaxResults?: DescribeSecurityGroupRulesMaxResults;
   }
@@ -15852,7 +15860,7 @@ declare namespace EC2 {
      */
     SecurityGroupRules?: SecurityGroupRuleList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15875,11 +15883,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The token to request the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. If this parameter is not specified, then all items are returned. For more information, see Pagination.
      */
     MaxResults?: DescribeSecurityGroupsMaxResults;
   }
@@ -15889,7 +15897,7 @@ declare namespace EC2 {
      */
     SecurityGroups?: SecurityGroupList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15932,11 +15940,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeSnapshotTierStatusMaxResults;
   }
@@ -15946,7 +15954,7 @@ declare namespace EC2 {
      */
     SnapshotTierStatuses?: snapshotTierStatusSet;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -15956,11 +15964,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of snapshot results returned by DescribeSnapshots in paginated output. When this parameter is used, DescribeSnapshots only returns MaxResults results in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another DescribeSnapshots request with the returned NextToken value. This value can be between 5 and 1,000; if MaxResults is given a value larger than 1,000, only 1,000 results are returned. If this parameter is not used, then DescribeSnapshots returns all results. You cannot specify this parameter and the snapshot IDs parameter in the same request.
+     * The maximum number of snapshots to return for this request. This value can be between 5 and 1,000; if this value is larger than 1,000, only 1,000 results are returned. If this parameter is not used, then the request returns all snapshots. You cannot specify this parameter and the snapshot IDs parameter in the same request. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The NextToken value returned from a previous paginated DescribeSnapshots request where MaxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the NextToken value. This value is null when there are no more results to return.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -15986,7 +15994,7 @@ declare namespace EC2 {
      */
     Snapshots?: SnapshotList;
     /**
-     * The NextToken value to include in a future DescribeSnapshots request. When the results of a DescribeSnapshots request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to return the next page of snapshots. This value is null when there are no more snapshots to return.
      */
     NextToken?: String;
   }
@@ -16200,11 +16208,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeStaleSecurityGroupsMaxResults;
     /**
-     * The token for the next set of items to return. (You received this token from a prior call.)
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: DescribeStaleSecurityGroupsNextToken;
     /**
@@ -16214,7 +16222,7 @@ declare namespace EC2 {
   }
   export interface DescribeStaleSecurityGroupsResult {
     /**
-     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     * The token to include in another request to get the next page of items. If there are no additional items to return, the string is empty.
      */
     NextToken?: String;
     /**
@@ -16270,11 +16278,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeSubnetsMaxResults;
   }
@@ -16284,7 +16292,7 @@ declare namespace EC2 {
      */
     Subnets?: SubnetList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -16298,17 +16306,17 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return in a single call. This value can be between 5 and 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. This value can be between 5 and 1000. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token to retrieve the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
   export interface DescribeTagsResult {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16976,11 +16984,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of volume results returned by DescribeVolumeStatus in paginated output. When this parameter is used, the request only returns MaxResults results in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1,000; if MaxResults is given a value larger than 1,000, only 1,000 results are returned. If this parameter is not used, then DescribeVolumeStatus returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1,000; if the value is larger than 1,000, only 1,000 results are returned. If this parameter is not used, then all items are returned. You cannot specify this parameter and the volume IDs parameter in the same request. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The NextToken value to include in a future DescribeVolumeStatus request. When the results of the request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -16994,7 +17002,7 @@ declare namespace EC2 {
   }
   export interface DescribeVolumeStatusResult {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -17016,11 +17024,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The nextToken value returned by a previous paginated request.
+     * The token returned by a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results (up to a limit of 500) to be returned in a paginated request.
+     * The maximum number of results (up to a limit of 500) to be returned in a paginated request. For more information, see Pagination.
      */
     MaxResults?: Integer;
   }
@@ -17030,7 +17038,7 @@ declare namespace EC2 {
      */
     VolumesModifications?: VolumeModificationList;
     /**
-     * Token for pagination, null if there are no more results 
+     * The token to include in another request to get the next page of items. This value is null if there are no more items to return.
      */
     NextToken?: String;
   }
@@ -17048,11 +17056,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of volume results returned by DescribeVolumes in paginated output. When this parameter is used, DescribeVolumes only returns MaxResults results in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another DescribeVolumes request with the returned NextToken value. This value can be between 5 and 500; if MaxResults is given a value larger than 500, only 500 results are returned. If this parameter is not used, then DescribeVolumes returns all results. You cannot specify this parameter and the volume IDs parameter in the same request.
+     * The maximum number of volumes to return for this request. This value can be between 5 and 500; if you specify a value larger than 500, only 500 items are returned. If this parameter is not used, then all items are returned. You cannot specify this parameter and the volume IDs parameter in the same request. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The NextToken value returned from a previous paginated DescribeVolumes request where MaxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the NextToken value. This value is null when there are no more results to return.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned from the previous request.
      */
     NextToken?: String;
   }
@@ -17062,7 +17070,7 @@ declare namespace EC2 {
      */
     Volumes?: VolumeList;
     /**
-     * The NextToken value to include in a future DescribeVolumes request. When the results of a DescribeVolumes request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -17102,11 +17110,11 @@ declare namespace EC2 {
   export type DescribeVpcClassicLinkDnsSupportNextToken = string;
   export interface DescribeVpcClassicLinkDnsSupportRequest {
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeVpcClassicLinkDnsSupportMaxResults;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: DescribeVpcClassicLinkDnsSupportNextToken;
     /**
@@ -17116,7 +17124,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcClassicLinkDnsSupportResult {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: DescribeVpcClassicLinkDnsSupportNextToken;
     /**
@@ -17351,11 +17359,11 @@ declare namespace EC2 {
      */
     VpcPeeringConnectionIds?: VpcPeeringConnectionIdList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeVpcPeeringConnectionsMaxResults;
   }
@@ -17365,7 +17373,7 @@ declare namespace EC2 {
      */
     VpcPeeringConnections?: VpcPeeringConnectionList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -17384,11 +17392,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeVpcsMaxResults;
   }
@@ -17398,7 +17406,7 @@ declare namespace EC2 {
      */
     Vpcs?: VpcList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -18376,7 +18384,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by DescribeImageAttribute. For CreateImage and RegisterImage, you can specify this parameter only for block device mappings that result in new, empty volumes when instances are launched from the image. Omit this parameter on block device mappings that include an existing volume or snapshot. If you include this parameter, and specify an encryption setting that is different from the existing volume or snapshot, the request will fail.
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS encryption in the Amazon EC2 User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types. This parameter is not returned by DescribeImageAttribute. For CreateImage and RegisterImage, whether you can include this parameter, and the allowed values differ depending on the type of block device mapping you are creating.   If you are creating a block device mapping for a new (empty) volume, you can include this parameter, and specify either true for an encrypted volume, or false for an unencrypted volume. If you omit this parameter, it defaults to false (unencrypted).   If you are creating a block device mapping from an existing encrypted or unencrypted snapshot, you must omit this parameter. If you include this parameter, the request will fail, regardless of the value that you specify.   If you are creating a block device mapping from an existing unencrypted volume, you can include this parameter, but you must specify false. If you specify true, the request will fail. In this case, we recommend that you omit the parameter.   If you are creating a block device mapping from an existing encrypted volume, you can include this parameter, and specify either true or false. However, if you specify false, the parameter is ignored and the block device mapping is always encrypted. In this case, we recommend that you omit the parameter.  
      */
     Encrypted?: Boolean;
   }
@@ -24767,7 +24775,7 @@ declare namespace EC2 {
     /**
      * The Base64-encoded user data for the instance.
      */
-    UserData?: String;
+    UserData?: SensitiveUserData;
     /**
      * One or more security groups. When requesting instances in a VPC, you must specify the IDs of the security groups. When requesting instances in EC2-Classic, you can specify the names or the IDs of the security groups.
      */
@@ -25659,11 +25667,11 @@ declare namespace EC2 {
   export type ListSnapshotsInRecycleBinMaxResults = number;
   export interface ListSnapshotsInRecycleBinRequest {
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: ListSnapshotsInRecycleBinMaxResults;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -25681,7 +25689,7 @@ declare namespace EC2 {
      */
     Snapshots?: SnapshotRecycleBinInfoList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -31089,7 +31097,7 @@ declare namespace EC2 {
     /**
      * The Base64-encoded user data for the instance. User data is limited to 16 KB.
      */
-    UserData?: String;
+    UserData?: SensitiveUserData;
   }
   export type RequestSpotLaunchSpecificationSecurityGroupIdList = SecurityGroupId[];
   export type RequestSpotLaunchSpecificationSecurityGroupList = String[];
@@ -31655,7 +31663,7 @@ declare namespace EC2 {
     /**
      * The user data for the instance. 
      */
-    UserData?: String;
+    UserData?: SensitiveUserData;
     /**
      * The tags that are applied to the resources that are created during instance launch.
      */
@@ -33588,7 +33596,7 @@ declare namespace EC2 {
     /**
      * The Base64-encoded user data that instances use when starting up.
      */
-    UserData?: String;
+    UserData?: SensitiveUserData;
     /**
      * The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms of instances, or a performance characteristic such as vCPUs, memory, or I/O. If the target capacity divided by this value is not a whole number, Amazon EC2 rounds the number of instances to the next whole number. If this value is not specified, the default is 1.
      */

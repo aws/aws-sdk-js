@@ -133,11 +133,11 @@ declare class SageMaker extends Service {
    */
   createDeviceFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An Amazon Web Services account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, you can specify a customer managed key. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.    NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully.  For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, you can specify a customer managed key. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.    NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully.  For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An Amazon Web Services account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, you can specify a customer managed key. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.    NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully.  For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. Users within a domain can share notebook files and other artifacts with each other.  EFS storage  When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files. SageMaker uses the Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt the EFS volume attached to the domain with an Amazon Web Services managed key by default. For more control, you can specify a customer managed key. For more information, see Protect Data at Rest Using Encryption.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network access type that you choose when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.    NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully.  For more information, see Connect SageMaker Studio Notebooks to Resources in a VPC.
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
@@ -165,11 +165,11 @@ declare class SageMaker extends Service {
    */
   createEdgePackagingJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an endpoint using the endpoint configuration specified in the request. SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.   Use this API to deploy models using SageMaker hosting services.  For an example that calls this method when deploying a model to SageMaker hosting services, see the Create Endpoint example notebook.    You must not delete an EndpointConfig that is in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account.  When it receives the request, SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read.  When SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. If any of the models hosted at this endpoint get model data from an Amazon S3 location, SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you provided. Amazon Web Services STS is activated in your IAM user account by default. If you previously deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see Activating and Deactivating Amazon Web Services STS in an Amazon Web Services Region in the Amazon Web Services Identity and Access Management User Guide.   To add the IAM role policies for using this API operation, go to the IAM console, and choose Roles in the left navigation pane. Search the IAM role that you want to grant access to use the CreateEndpoint and CreateEndpointConfig API operations, add the following policies to the role.    Option 1: For a full SageMaker access, search and attach the AmazonSageMakerFullAccess policy.   Option 2: For granting a limited access to an IAM role, paste the following Action elements manually into the JSON file of the IAM role:   "Action": ["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"]   "Resource": [   "arn:aws:sagemaker:region:account-id:endpoint/endpointName"   "arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"   ]  For more information, see SageMaker API Permissions: Actions, Permissions, and Resources Reference.   
+   * Creates an endpoint using the endpoint configuration specified in the request. SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.   Use this API to deploy models using SageMaker hosting services.  For an example that calls this method when deploying a model to SageMaker hosting services, see the Create Endpoint example notebook.    You must not delete an EndpointConfig that is in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account.  When it receives the request, SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read.  When SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. If any of the models hosted at this endpoint get model data from an Amazon S3 location, SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you provided. Amazon Web Services STS is activated in your Amazon Web Services account by default. If you previously deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see Activating and Deactivating Amazon Web Services STS in an Amazon Web Services Region in the Amazon Web Services Identity and Access Management User Guide.   To add the IAM role policies for using this API operation, go to the IAM console, and choose Roles in the left navigation pane. Search the IAM role that you want to grant access to use the CreateEndpoint and CreateEndpointConfig API operations, add the following policies to the role.    Option 1: For a full SageMaker access, search and attach the AmazonSageMakerFullAccess policy.   Option 2: For granting a limited access to an IAM role, paste the following Action elements manually into the JSON file of the IAM role:   "Action": ["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"]   "Resource": [   "arn:aws:sagemaker:region:account-id:endpoint/endpointName"   "arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"   ]  For more information, see SageMaker API Permissions: Actions, Permissions, and Resources Reference.   
    */
   createEndpoint(params: SageMaker.Types.CreateEndpointInput, callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
-   * Creates an endpoint using the endpoint configuration specified in the request. SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.   Use this API to deploy models using SageMaker hosting services.  For an example that calls this method when deploying a model to SageMaker hosting services, see the Create Endpoint example notebook.    You must not delete an EndpointConfig that is in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account.  When it receives the request, SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read.  When SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. If any of the models hosted at this endpoint get model data from an Amazon S3 location, SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you provided. Amazon Web Services STS is activated in your IAM user account by default. If you previously deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see Activating and Deactivating Amazon Web Services STS in an Amazon Web Services Region in the Amazon Web Services Identity and Access Management User Guide.   To add the IAM role policies for using this API operation, go to the IAM console, and choose Roles in the left navigation pane. Search the IAM role that you want to grant access to use the CreateEndpoint and CreateEndpointConfig API operations, add the following policies to the role.    Option 1: For a full SageMaker access, search and attach the AmazonSageMakerFullAccess policy.   Option 2: For granting a limited access to an IAM role, paste the following Action elements manually into the JSON file of the IAM role:   "Action": ["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"]   "Resource": [   "arn:aws:sagemaker:region:account-id:endpoint/endpointName"   "arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"   ]  For more information, see SageMaker API Permissions: Actions, Permissions, and Resources Reference.   
+   * Creates an endpoint using the endpoint configuration specified in the request. SageMaker uses the endpoint to provision resources and deploy models. You create the endpoint configuration with the CreateEndpointConfig API.   Use this API to deploy models using SageMaker hosting services.  For an example that calls this method when deploying a model to SageMaker hosting services, see the Create Endpoint example notebook.    You must not delete an EndpointConfig that is in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint operations are being performed on the endpoint. To update an endpoint, you must create a new EndpointConfig.  The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account.  When it receives the request, SageMaker creates the endpoint, launches the resources (ML compute instances), and deploys the model(s) on them.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read.  When SageMaker receives the request, it sets the endpoint status to Creating. After it creates the endpoint, it sets the status to InService. SageMaker can then process incoming requests for inferences. To check the status of an endpoint, use the DescribeEndpoint API. If any of the models hosted at this endpoint get model data from an Amazon S3 location, SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you provided. Amazon Web Services STS is activated in your Amazon Web Services account by default. If you previously deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see Activating and Deactivating Amazon Web Services STS in an Amazon Web Services Region in the Amazon Web Services Identity and Access Management User Guide.   To add the IAM role policies for using this API operation, go to the IAM console, and choose Roles in the left navigation pane. Search the IAM role that you want to grant access to use the CreateEndpoint and CreateEndpointConfig API operations, add the following policies to the role.    Option 1: For a full SageMaker access, search and attach the AmazonSageMakerFullAccess policy.   Option 2: For granting a limited access to an IAM role, paste the following Action elements manually into the JSON file of the IAM role:   "Action": ["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"]   "Resource": [   "arn:aws:sagemaker:region:account-id:endpoint/endpointName"   "arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"   ]  For more information, see SageMaker API Permissions: Actions, Permissions, and Resources Reference.   
    */
   createEndpoint(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
@@ -205,11 +205,11 @@ declare class SageMaker extends Service {
    */
   createFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateFlowDefinitionResponse) => void): Request<SageMaker.Types.CreateFlowDefinitionResponse, AWSError>;
   /**
-   * Create a hub.
+   * Create a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   createHub(params: SageMaker.Types.CreateHubRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateHubResponse) => void): Request<SageMaker.Types.CreateHubResponse, AWSError>;
   /**
-   * Create a hub.
+   * Create a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   createHub(callback?: (err: AWSError, data: SageMaker.Types.CreateHubResponse) => void): Request<SageMaker.Types.CreateHubResponse, AWSError>;
   /**
@@ -613,19 +613,19 @@ declare class SageMaker extends Service {
    */
   deleteFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DeleteFlowDefinitionResponse) => void): Request<SageMaker.Types.DeleteFlowDefinitionResponse, AWSError>;
   /**
-   * Delete a hub.
+   * Delete a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   deleteHub(params: SageMaker.Types.DeleteHubRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a hub.
+   * Delete a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   deleteHub(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete the contents of a hub.
+   * Delete the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   deleteHubContent(params: SageMaker.Types.DeleteHubContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete the contents of a hub.
+   * Delete the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   deleteHubContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1005,19 +1005,19 @@ declare class SageMaker extends Service {
    */
   describeFlowDefinition(callback?: (err: AWSError, data: SageMaker.Types.DescribeFlowDefinitionResponse) => void): Request<SageMaker.Types.DescribeFlowDefinitionResponse, AWSError>;
   /**
-   * Describe a hub.
+   * Describe a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   describeHub(params: SageMaker.Types.DescribeHubRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHubResponse) => void): Request<SageMaker.Types.DescribeHubResponse, AWSError>;
   /**
-   * Describe a hub.
+   * Describe a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   describeHub(callback?: (err: AWSError, data: SageMaker.Types.DescribeHubResponse) => void): Request<SageMaker.Types.DescribeHubResponse, AWSError>;
   /**
-   * Describe the content of a hub.
+   * Describe the content of a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   describeHubContent(params: SageMaker.Types.DescribeHubContentRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHubContentResponse) => void): Request<SageMaker.Types.DescribeHubContentResponse, AWSError>;
   /**
-   * Describe the content of a hub.
+   * Describe the content of a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   describeHubContent(callback?: (err: AWSError, data: SageMaker.Types.DescribeHubContentResponse) => void): Request<SageMaker.Types.DescribeHubContentResponse, AWSError>;
   /**
@@ -1357,11 +1357,11 @@ declare class SageMaker extends Service {
    */
   getSearchSuggestions(callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
   /**
-   * Import hub content.
+   * Import hub content.  Hub APIs are only callable through SageMaker Studio. 
    */
   importHubContent(params: SageMaker.Types.ImportHubContentRequest, callback?: (err: AWSError, data: SageMaker.Types.ImportHubContentResponse) => void): Request<SageMaker.Types.ImportHubContentResponse, AWSError>;
   /**
-   * Import hub content.
+   * Import hub content.  Hub APIs are only callable through SageMaker Studio. 
    */
   importHubContent(callback?: (err: AWSError, data: SageMaker.Types.ImportHubContentResponse) => void): Request<SageMaker.Types.ImportHubContentResponse, AWSError>;
   /**
@@ -1549,27 +1549,27 @@ declare class SageMaker extends Service {
    */
   listFlowDefinitions(callback?: (err: AWSError, data: SageMaker.Types.ListFlowDefinitionsResponse) => void): Request<SageMaker.Types.ListFlowDefinitionsResponse, AWSError>;
   /**
-   * List hub content versions.
+   * List hub content versions.  Hub APIs are only callable through SageMaker Studio. 
    */
   listHubContentVersions(params: SageMaker.Types.ListHubContentVersionsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubContentVersionsResponse) => void): Request<SageMaker.Types.ListHubContentVersionsResponse, AWSError>;
   /**
-   * List hub content versions.
+   * List hub content versions.  Hub APIs are only callable through SageMaker Studio. 
    */
   listHubContentVersions(callback?: (err: AWSError, data: SageMaker.Types.ListHubContentVersionsResponse) => void): Request<SageMaker.Types.ListHubContentVersionsResponse, AWSError>;
   /**
-   * List the contents of a hub.
+   * List the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   listHubContents(params: SageMaker.Types.ListHubContentsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubContentsResponse) => void): Request<SageMaker.Types.ListHubContentsResponse, AWSError>;
   /**
-   * List the contents of a hub.
+   * List the contents of a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   listHubContents(callback?: (err: AWSError, data: SageMaker.Types.ListHubContentsResponse) => void): Request<SageMaker.Types.ListHubContentsResponse, AWSError>;
   /**
-   * List all existing hubs.
+   * List all existing hubs.  Hub APIs are only callable through SageMaker Studio. 
    */
   listHubs(params: SageMaker.Types.ListHubsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListHubsResponse) => void): Request<SageMaker.Types.ListHubsResponse, AWSError>;
   /**
-   * List all existing hubs.
+   * List all existing hubs.  Hub APIs are only callable through SageMaker Studio. 
    */
   listHubs(callback?: (err: AWSError, data: SageMaker.Types.ListHubsResponse) => void): Request<SageMaker.Types.ListHubsResponse, AWSError>;
   /**
@@ -2037,11 +2037,11 @@ declare class SageMaker extends Service {
    */
   startPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.StartPipelineExecutionResponse) => void): Request<SageMaker.Types.StartPipelineExecutionResponse, AWSError>;
   /**
-   * A method for forcing the termination of a running job.
+   * A method for forcing a running job to shut down.
    */
   stopAutoMLJob(params: SageMaker.Types.StopAutoMLJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * A method for forcing the termination of a running job.
+   * A method for forcing a running job to shut down.
    */
   stopAutoMLJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2253,11 +2253,11 @@ declare class SageMaker extends Service {
    */
   updateFeatureMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update a hub.
+   * Update a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   updateHub(params: SageMaker.Types.UpdateHubRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateHubResponse) => void): Request<SageMaker.Types.UpdateHubResponse, AWSError>;
   /**
-   * Update a hub.
+   * Update a hub.  Hub APIs are only callable through SageMaker Studio. 
    */
   updateHub(callback?: (err: AWSError, data: SageMaker.Types.UpdateHubResponse) => void): Request<SageMaker.Types.UpdateHubResponse, AWSError>;
   /**
@@ -3030,6 +3030,15 @@ declare namespace SageMaker {
   export type AttributeNames = AttributeName[];
   export type AuthMode = "SSO"|"IAM"|string;
   export type AutoGenerateEndpointName = boolean;
+  export type AutoMLAlgorithm = "xgboost"|"linear-learner"|"mlp"|"lightgbm"|"catboost"|"randomforest"|"extra-trees"|"nn-torch"|"fastai"|string;
+  export interface AutoMLAlgorithmConfig {
+    /**
+     * The selection of algorithms run on a dataset to train the model candidates of an Autopilot job.   Selected algorithms must belong to the list corresponding to the training mode set in  AutoMLJobConfig.Mode  (ENSEMBLING or HYPERPARAMETER_TUNING). Choose a minimum of 1 algorithm.     In ENSEMBLING mode:   "catboost"   "extra-trees"   "fastai"   "lightgbm"   "linear-learner"   "nn-torch"   "randomforest"   "xgboost"     In HYPERPARAMETER_TUNING mode:   "linear-learner"   "mlp"   "xgboost"    
+     */
+    AutoMLAlgorithms: AutoMLAlgorithms;
+  }
+  export type AutoMLAlgorithms = AutoMLAlgorithm[];
+  export type AutoMLAlgorithmsConfig = AutoMLAlgorithmConfig[];
   export interface AutoMLCandidate {
     /**
      * The name of the candidate.
@@ -3075,9 +3084,13 @@ declare namespace SageMaker {
   }
   export interface AutoMLCandidateGenerationConfig {
     /**
-     * A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job. You can input FeatureAttributeNames (optional) in JSON format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. You can also specify the data type of the feature (optional) in the format shown below:  { "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }   These column keys may not include the target column.  In ensembling mode, Autopilot will only support the following data types: numeric, categorical, text and datetime. In HPO mode, Autopilot can support numeric, categorical, text, datetime and sequence. If only FeatureDataTypes is provided, the column keys (col1, col2,..) should be a subset of the column names in the input data.  If both FeatureDataTypes and FeatureAttributeNames are provided, then the column keys should be a subset of the column names provided in FeatureAttributeNames.  The key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] is case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.
+     * A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job. You can input FeatureAttributeNames (optional) in JSON format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. You can also specify the data type of the feature (optional) in the format shown below:  { "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }   These column keys may not include the target column.  In ensembling mode, Autopilot only supports the following data types: numeric, categorical, text, and datetime. In HPO mode, Autopilot can support numeric, categorical, text, datetime, and sequence. If only FeatureDataTypes is provided, the column keys (col1, col2,..) should be a subset of the column names in the input data.  If both FeatureDataTypes and FeatureAttributeNames are provided, then the column keys should be a subset of the column names provided in FeatureAttributeNames.  The key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] are case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.
      */
     FeatureSpecificationS3Uri?: S3Uri;
+    /**
+     * Stores the configuration information for the selection of algorithms used to train the model candidates. The list of available algorithms to choose from depends on the training mode set in  AutoMLJobConfig.Mode .    AlgorithmsConfig should not be set in AUTO training mode.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per training mode, see . For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
+     */
+    AlgorithmsConfig?: AutoMLAlgorithmsConfig;
   }
   export interface AutoMLCandidateStep {
     /**
@@ -3167,7 +3180,7 @@ declare namespace SageMaker {
      */
     MaxRuntimePerTrainingJobInSeconds?: MaxRuntimePerTrainingJobInSeconds;
     /**
-     * The maximum runtime, in seconds, an AutoML job has to complete. If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its processing is ended gracefully. The AutoML job identifies the best model whose training was completed and marks it as the best-performing model. Any unfinished steps of the job, such as automatic one-click Autopilot model deployment, will not be completed. 
+     * The maximum runtime, in seconds, an AutoML job has to complete. If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its processing is ended gracefully. The AutoML job identifies the best model whose training was completed and marks it as the best-performing model. Any unfinished steps of the job, such as automatic one-click Autopilot model deployment, are not completed. 
      */
     MaxAutoMLJobRuntimeInSeconds?: MaxAutoMLJobRuntimeInSeconds;
   }
@@ -3189,14 +3202,14 @@ declare namespace SageMaker {
      */
     CandidateGenerationConfig?: AutoMLCandidateGenerationConfig;
     /**
-     * The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting AUTO. In AUTO mode, Autopilot chooses ENSEMBLING for datasets smaller than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See Autopilot algorithm support for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING (HPO) mode uses the best hyperparameters to train the best version of a model. HPO will automatically select an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See Autopilot algorithm support for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
+     * The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting AUTO. In AUTO mode, Autopilot chooses ENSEMBLING for datasets smaller than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See Autopilot algorithm support for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See Autopilot algorithm support for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
      */
     Mode?: AutoMLMode;
   }
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data. Here are the options:  Accuracy   The ratio of the number of correctly classified items to the total number of (correctly and incorrectly) classified items. It is used for both binary and multiclass classification. Accuracy measures how close the predicted class values are to the actual values. Values for accuracy metrics vary between zero (0) and one (1). A value of 1 indicates perfect accuracy, and 0 indicates perfect inaccuracy.  AUC  The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms that return probabilities, such as logistic regression. To map the probabilities into classifications, these are compared against a threshold value.  The relevant curve is the receiver operating characteristic curve (ROC curve). The ROC curve plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives, but more false negatives.  AUC is the area under this ROC curve. Therefore, AUC provides an aggregated measure of the model performance across all possible classification thresholds. AUC scores vary between 0 and 1. A score of 1 indicates perfect accuracy, and a score of one half (0.5) indicates that the prediction is not better than a random classifier.   BalancedAccuracy   BalancedAccuracy is a metric that measures the ratio of accurate predictions to all predictions. This ratio is calculated after normalizing true positives (TP) and true negatives (TN) by the total number of positive (P) and negative (N) values. It is used in both binary and multiclass classification and is defined as follows: 0.5*((TP/P)+(TN/N)), with values ranging from 0 to 1. BalancedAccuracy gives a better measure of accuracy when the number of positives or negatives differ greatly from each other in an imbalanced dataset. For example, when only 1% of email is spam.   F1  The F1 score is the harmonic mean of the precision and recall, defined as follows: F1 = 2 * (precision * recall) / (precision + recall). It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class, and false when they do not.  Precision is the ratio of the true positive predictions to all positive predictions, and it includes the false positives in a dataset. Precision measures the quality of the prediction when it predicts the positive class.  Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances. Recall measures how completely a model predicts the actual class members in a dataset.  F1 scores vary between 0 and 1. A score of 1 indicates the best possible performance, and 0 indicates the worst.  F1macro  The F1macro score applies F1 scoring to multiclass classification problems. It does this by calculating the precision and recall, and then taking their harmonic mean to calculate the F1 score for each class. Lastly, the F1macro averages the individual scores to obtain the F1macro score. F1macro scores vary between 0 and 1. A score of 1 indicates the best possible performance, and 0 indicates the worst.  MAE  The mean absolute error (MAE) is a measure of how different the predicted and actual values are, when they're averaged over all values. MAE is commonly used in regression analysis to understand model prediction error. If there is linear regression, MAE represents the average distance from a predicted line to the actual value. MAE is defined as the sum of absolute errors divided by the number of observations. Values range from 0 to infinity, with smaller numbers indicating a better model fit to the data.  MSE  The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive. The better a model is at predicting the actual values, the smaller the MSE value is  Precision  Precision measures how well an algorithm predicts the true positives (TP) out of all of the positives that it identifies. It is defined as follows: Precision = TP/(TP+FP), with values ranging from zero (0) to one (1), and is used in binary classification. Precision is an important metric when the cost of a false positive is high. For example, the cost of a false positive is very high if an airplane safety system is falsely deemed safe to fly. A false positive (FP) reflects a positive prediction that is actually negative in the data.  PrecisionMacro  The precision macro computes precision for multiclass classification problems. It does this by calculating precision for each class and averaging scores to obtain precision for several classes. PrecisionMacro scores range from zero (0) to one (1). Higher scores reflect the model's ability to predict true positives (TP) out of all of the positives that it identifies, averaged across multiple classes.  R2  R2, also known as the coefficient of determination, is used in regression to quantify how much a model can explain the variance of a dependent variable. Values range from one (1) to negative one (-1). Higher numbers indicate a higher fraction of explained variability. R2 values close to zero (0) indicate that very little of the dependent variable can be explained by the model. Negative values indicate a poor fit and that the model is outperformed by a constant function. For linear regression, this is a horizontal line.  Recall  Recall measures how well an algorithm correctly predicts all of the true positives (TP) in a dataset. A true positive is a positive prediction that is also an actual positive value in the data. Recall is defined as follows: Recall = TP/(TP+FN), with values ranging from 0 to 1. Higher scores reflect a better ability of the model to predict true positives (TP) in the data, and is used in binary classification.  Recall is important when testing for cancer because it's used to find all of the true positives. A false positive (FP) reflects a positive prediction that is actually negative in the data. It is often insufficient to measure only recall, because predicting every output as a true positive will yield a perfect recall score.  RecallMacro  The RecallMacro computes recall for multiclass classification problems by calculating recall for each class and averaging scores to obtain recall for several classes. RecallMacro scores range from 0 to 1. Higher scores reflect the model's ability to predict true positives (TP) in a dataset. Whereas, a true positive reflects a positive prediction that is also an actual positive value in the data. It is often insufficient to measure only recall, because predicting every output as a true positive will yield a perfect recall score.  RMSE  Root mean squared error (RMSE) measures the square root of the squared difference between predicted and actual values, and it's averaged over all values. It is used in regression analysis to understand model prediction error. It's an important metric to indicate the presence of large model errors and outliers. Values range from zero (0) to infinity, with smaller numbers indicating a better model fit to the data. RMSE is dependent on scale, and should not be used to compare datasets of different sizes.   If you do not specify a metric explicitly, the default behavior is to automatically use:    MSE: for regression.    F1: for binary classification    Accuracy: for multiclass classification.  
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data. Here are the options:  Accuracy  The ratio of the number of correctly classified items to the total number of (correctly and incorrectly) classified items. It is used for both binary and multiclass classification. Accuracy measures how close the predicted class values are to the actual values. Values for accuracy metrics vary between zero (0) and one (1). A value of 1 indicates perfect accuracy, and 0 indicates perfect inaccuracy.  AUC  The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms that return probabilities, such as logistic regression. To map the probabilities into classifications, these are compared against a threshold value.  The relevant curve is the receiver operating characteristic curve (ROC curve). The ROC curve plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives, but more false negatives.  AUC is the area under this ROC curve. Therefore, AUC provides an aggregated measure of the model performance across all possible classification thresholds. AUC scores vary between 0 and 1. A score of 1 indicates perfect accuracy, and a score of one half (0.5) indicates that the prediction is not better than a random classifier.   BalancedAccuracy   BalancedAccuracy is a metric that measures the ratio of accurate predictions to all predictions. This ratio is calculated after normalizing true positives (TP) and true negatives (TN) by the total number of positive (P) and negative (N) values. It is used in both binary and multiclass classification and is defined as follows: 0.5*((TP/P)+(TN/N)), with values ranging from 0 to 1. BalancedAccuracy gives a better measure of accuracy when the number of positives or negatives differ greatly from each other in an imbalanced dataset. For example, when only 1% of email is spam.   F1  The F1 score is the harmonic mean of the precision and recall, defined as follows: F1 = 2 * (precision * recall) / (precision + recall). It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class, and false when they do not.  Precision is the ratio of the true positive predictions to all positive predictions, and it includes the false positives in a dataset. Precision measures the quality of the prediction when it predicts the positive class.  Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances. Recall measures how completely a model predicts the actual class members in a dataset.  F1 scores vary between 0 and 1. A score of 1 indicates the best possible performance, and 0 indicates the worst.  F1macro  The F1macro score applies F1 scoring to multiclass classification problems. It does this by calculating the precision and recall, and then taking their harmonic mean to calculate the F1 score for each class. Lastly, the F1macro averages the individual scores to obtain the F1macro score. F1macro scores vary between 0 and 1. A score of 1 indicates the best possible performance, and 0 indicates the worst.  MAE  The mean absolute error (MAE) is a measure of how different the predicted and actual values are, when they're averaged over all values. MAE is commonly used in regression analysis to understand model prediction error. If there is linear regression, MAE represents the average distance from a predicted line to the actual value. MAE is defined as the sum of absolute errors divided by the number of observations. Values range from 0 to infinity, with smaller numbers indicating a better model fit to the data.  MSE  The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive. The better a model is at predicting the actual values, the smaller the MSE value is  Precision  Precision measures how well an algorithm predicts the true positives (TP) out of all of the positives that it identifies. It is defined as follows: Precision = TP/(TP+FP), with values ranging from zero (0) to one (1), and is used in binary classification. Precision is an important metric when the cost of a false positive is high. For example, the cost of a false positive is very high if an airplane safety system is falsely deemed safe to fly. A false positive (FP) reflects a positive prediction that is actually negative in the data.  PrecisionMacro  The precision macro computes precision for multiclass classification problems. It does this by calculating precision for each class and averaging scores to obtain precision for several classes. PrecisionMacro scores range from zero (0) to one (1). Higher scores reflect the model's ability to predict true positives (TP) out of all of the positives that it identifies, averaged across multiple classes.  R2  R2, also known as the coefficient of determination, is used in regression to quantify how much a model can explain the variance of a dependent variable. Values range from one (1) to negative one (-1). Higher numbers indicate a higher fraction of explained variability. R2 values close to zero (0) indicate that very little of the dependent variable can be explained by the model. Negative values indicate a poor fit and that the model is outperformed by a constant function. For linear regression, this is a horizontal line.  Recall  Recall measures how well an algorithm correctly predicts all of the true positives (TP) in a dataset. A true positive is a positive prediction that is also an actual positive value in the data. Recall is defined as follows: Recall = TP/(TP+FN), with values ranging from 0 to 1. Higher scores reflect a better ability of the model to predict true positives (TP) in the data, and is used in binary classification.  Recall is important when testing for cancer because it's used to find all of the true positives. A false positive (FP) reflects a positive prediction that is actually negative in the data. It is often insufficient to measure only recall, because predicting every output as a true positive yield a perfect recall score.  RecallMacro  The RecallMacro computes recall for multiclass classification problems by calculating recall for each class and averaging scores to obtain recall for several classes. RecallMacro scores range from 0 to 1. Higher scores reflect the model's ability to predict true positives (TP) in a dataset. Whereas, a true positive reflects a positive prediction that is also an actual positive value in the data. It is often insufficient to measure only recall, because predicting every output as a true positive yields a perfect recall score.  RMSE  Root mean squared error (RMSE) measures the square root of the squared difference between predicted and actual values, and it's averaged over all values. It is used in regression analysis to understand model prediction error. It's an important metric to indicate the presence of large model errors and outliers. Values range from zero (0) to infinity, with smaller numbers indicating a better model fit to the data. RMSE is dependent on scale, and should not be used to compare datasets of different sizes.   If you do not specify a metric explicitly, the default behavior is to automatically use:    MSE: for regression.    F1: for binary classification    Accuracy: for multiclass classification.  
      */
     MetricName: AutoMLMetricEnum;
   }
@@ -3972,7 +3985,7 @@ declare namespace SageMaker {
      */
     Mode?: ContainerMode;
     /**
-     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see Common Parameters.   The model artifacts must be in an S3 bucket that is in the same region as the model or endpoint you are creating.  If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you provide. Amazon Web Services STS is activated in your IAM user account by default. If you previously deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see Activating and Deactivating Amazon Web Services STS in an Amazon Web Services Region in the Amazon Web Services Identity and Access Management User Guide.  If you use a built-in algorithm to create a model, SageMaker requires that you provide a S3 path to the model artifacts in ModelDataUrl. 
+     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see Common Parameters.   The model artifacts must be in an S3 bucket that is in the same region as the model or endpoint you are creating.  If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you provide. Amazon Web Services STS is activated in your Amazon Web Services account by default. If you previously deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For more information, see Activating and Deactivating Amazon Web Services STS in an Amazon Web Services Region in the Amazon Web Services Identity and Access Management User Guide.  If you use a built-in algorithm to create a model, SageMaker requires that you provide a S3 path to the model artifacts in ModelDataUrl. 
      */
     ModelDataUrl?: Url;
     /**
@@ -4240,7 +4253,7 @@ declare namespace SageMaker {
   }
   export interface CreateAutoMLJobRequest {
     /**
-     * Identifies an Autopilot job. The name must be unique to your account and is case-insensitive.
+     * Identifies an Autopilot job. The name must be unique to your account and is case insensitive.
      */
     AutoMLJobName: AutoMLJobName;
     /**
@@ -6980,7 +6993,7 @@ declare namespace SageMaker {
      */
     AutoMLJobArn: AutoMLJobArn;
     /**
-     * Returns the input data configuration for the AutoML job..
+     * Returns the input data configuration for the AutoML job.
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
@@ -7044,7 +7057,7 @@ declare namespace SageMaker {
      */
     AutoMLJobArtifacts?: AutoMLJobArtifacts;
     /**
-     * This contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, the values used are the ones you provide.
+     * Contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, the values used are the ones you provide.
      */
     ResolvedAttributes?: ResolvedAttributes;
     /**
@@ -7943,7 +7956,7 @@ declare namespace SageMaker {
      */
     HubContentDescription?: HubContentDescription;
     /**
-     * Markdown files associated with the hub content to import.
+     * A string that provides a description of the hub content. This string can include links, tables, and standard markdown formating.
      */
     HubContentMarkdown?: HubContentMarkdown;
     /**
@@ -11023,6 +11036,10 @@ declare namespace SageMaker {
      * The value of the metric with the best result.
      */
     Value: MetricValue;
+    /**
+     * The name of the standard metric. For a description of the standard metrics, see Autopilot candidate metrics.
+     */
+    StandardMetricName?: AutoMLMetricEnum;
   }
   export interface FinalHyperParameterTuningJobObjectiveMetric {
     /**
@@ -11309,7 +11326,7 @@ declare namespace SageMaker {
   export type HubName = string;
   export interface HubS3StorageConfig {
     /**
-     * The Amazon S3 output path for the hub.
+     * The Amazon S3 bucket prefix for hosting hub content.
      */
     S3OutputPath?: S3OutputPath;
   }
@@ -11835,7 +11852,7 @@ declare namespace SageMaker {
   export type HyperParameters = {[key: string]: HyperParameterValue};
   export interface HyperbandStrategyConfig {
     /**
-     * The minimum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. If the value for MinResource has not been reached, the training job will not be stopped by Hyperband.
+     * The minimum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. If the value for MinResource has not been reached, the training job is not stopped by Hyperband.
      */
     MinResource?: HyperbandStrategyMinResource;
     /**
@@ -11971,7 +11988,7 @@ declare namespace SageMaker {
      */
     HubContentDescription?: HubContentDescription;
     /**
-     * Markdown files associated with the hub content to import.
+     * A string that provides a description of the hub content. This string can include links, tables, and standard markdown formating.
      */
     HubContentMarkdown?: HubContentMarkdown;
     /**
@@ -17459,7 +17476,7 @@ declare namespace SageMaker {
   }
   export interface OnlineStoreSecurityConfig {
     /**
-     * The ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption. The caller (either IAM user or IAM role) of CreateFeatureGroup must have below permissions to the OnlineStore KmsKeyId:    "kms:Encrypt"     "kms:Decrypt"     "kms:DescribeKey"     "kms:CreateGrant"     "kms:RetireGrant"     "kms:ReEncryptFrom"     "kms:ReEncryptTo"     "kms:GenerateDataKey"     "kms:ListAliases"     "kms:ListGrants"     "kms:RevokeGrant"    The caller (either IAM user or IAM role) to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the following permissions to the KmsKeyId:    "kms:Decrypt"   
+     * The ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption. The caller (either IAM user or IAM role) of CreateFeatureGroup must have below permissions to the OnlineStore KmsKeyId:    "kms:Encrypt"     "kms:Decrypt"     "kms:DescribeKey"     "kms:CreateGrant"     "kms:RetireGrant"     "kms:ReEncryptFrom"     "kms:ReEncryptTo"     "kms:GenerateDataKey"     "kms:ListAliases"     "kms:ListGrants"     "kms:RevokeGrant"    The caller (either user or IAM role) to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the following permissions to the KmsKeyId:    "kms:Decrypt"   
      */
     KmsKeyId?: KmsKeyId;
   }

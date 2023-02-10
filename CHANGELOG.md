@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1312.0-->
+<!--LATEST=2.1313.0-->
 <!--ENTRYINSERT-->
+
+## 2.1313.0
+* feature: AutoScaling: You can now either terminate/replace, ignore, or wait for EC2 Auto Scaling instances on standby or protected from scale in. Also, you can also roll back changes from a failed instance refresh.
+* feature: Connect: This update provides the Wisdom session ARN for contacts enabled for Wisdom in the chat channel.
+* feature: EC2: Adds support for waiters that automatically poll for an imported snapshot until it reaches the completed state.
+* feature: Polly: Amazon Polly adds two new neural Japanese voices - Kazuha, Tomoko
+* feature: SageMaker: Amazon SageMaker Autopilot adds support for selecting algorithms in CreateAutoMLJob API.
 
 ## 2.1312.0
 * feature: EMRcontainers: EMR on EKS allows configuring retry policies for job runs through the StartJobRun API. Using retry policies, a job cause a driver pod to be restarted automatically if it fails or is deleted. The job's status can be seen in the DescribeJobRun and ListJobRun APIs and monitored using CloudWatch events.
