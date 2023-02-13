@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1313.0',
+	  VERSION: '2.1314.0',
 
 	  /**
 	   * @api private
@@ -148,6 +148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	__webpack_require__(77);
 	__webpack_require__(78);
 	__webpack_require__(87);
+	__webpack_require__(88);
 
 	/**
 	 * @readonly
@@ -14492,6 +14493,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var warning = [
+	  'The AWS SDK for JavaScript (v2) will be put into maintenance mode in 2023.\n',
+	  'Please migrate your code to use AWS SDK for JavaScript (v3).',
+	  'For more information, check the migration guide at https://a.co/7PzMCcy'
+	].join('\n');
+
+	module.exports = {
+	  suppress: false
+	};
+
+	/**
+	 * To suppress this message:
+	 * @example
+	 * require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+	 */
+	function emitWarning() {
+	  if (
+	    typeof process !== 'undefined' &&
+	    typeof process.emitWarning === 'function'
+	  ) {
+	    process.emitWarning(warning, {
+	      type: 'NOTE'
+	    });
+	  }
+	}
+
+	setTimeout(function () {
+	  if (!module.exports.suppress) {
+	    emitWarning();
+	  }
+	}, 0);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ })
 /******/ ])

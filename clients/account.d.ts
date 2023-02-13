@@ -20,6 +20,22 @@ declare class Account extends Service {
    */
   deleteAlternateContact(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disables (opts-out) a particular Region for an account.
+   */
+  disableRegion(params: Account.Types.DisableRegionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disables (opts-out) a particular Region for an account.
+   */
+  disableRegion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Enables (opts-in) a particular Region for an account.
+   */
+  enableRegion(params: Account.Types.EnableRegionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Enables (opts-in) a particular Region for an account.
+   */
+  enableRegion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Retrieves the specified alternate contact attached to an Amazon Web Services account. For complete details about how to use the alternate contact operations, see Access or updating the alternate contacts.  Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see Enabling trusted access for Amazon Web Services Account Management. 
    */
   getAlternateContact(params: Account.Types.GetAlternateContactRequest, callback?: (err: AWSError, data: Account.Types.GetAlternateContactResponse) => void): Request<Account.Types.GetAlternateContactResponse, AWSError>;
@@ -35,6 +51,22 @@ declare class Account extends Service {
    * Retrieves the primary contact information of an Amazon Web Services account. For complete details about how to use the primary contact operations, see Update the primary and alternate contact information.
    */
   getContactInformation(callback?: (err: AWSError, data: Account.Types.GetContactInformationResponse) => void): Request<Account.Types.GetContactInformationResponse, AWSError>;
+  /**
+   * Retrieves the opt-in status of a particular Region.
+   */
+  getRegionOptStatus(params: Account.Types.GetRegionOptStatusRequest, callback?: (err: AWSError, data: Account.Types.GetRegionOptStatusResponse) => void): Request<Account.Types.GetRegionOptStatusResponse, AWSError>;
+  /**
+   * Retrieves the opt-in status of a particular Region.
+   */
+  getRegionOptStatus(callback?: (err: AWSError, data: Account.Types.GetRegionOptStatusResponse) => void): Request<Account.Types.GetRegionOptStatusResponse, AWSError>;
+  /**
+   * Lists all the Regions for a given account and their respective opt-in statuses. Optionally, this list can be filtered by the region-opt-status-contains parameter. 
+   */
+  listRegions(params: Account.Types.ListRegionsRequest, callback?: (err: AWSError, data: Account.Types.ListRegionsResponse) => void): Request<Account.Types.ListRegionsResponse, AWSError>;
+  /**
+   * Lists all the Regions for a given account and their respective opt-in statuses. Optionally, this list can be filtered by the region-opt-status-contains parameter. 
+   */
+  listRegions(callback?: (err: AWSError, data: Account.Types.ListRegionsResponse) => void): Request<Account.Types.ListRegionsResponse, AWSError>;
   /**
    * Modifies the specified alternate contact attached to an Amazon Web Services account. For complete details about how to use the alternate contact operations, see Access or updating the alternate contacts.  Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see Enabling trusted access for Amazon Web Services Account Management. 
    */
@@ -142,8 +174,28 @@ declare namespace Account {
      */
     AlternateContactType: AlternateContactType;
   }
+  export interface DisableRegionRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     */
+    AccountId?: AccountId;
+    /**
+     * Specifies the Region-code for a given Region name (for example, af-south-1). When you disable a Region, AWS performs actions to deactivate that Region in your account, such as destroying IAM resources in the Region. This process takes a few minutes for most accounts, but this can take several hours. You cannot enable the Region until the disabling process is fully completed.
+     */
+    RegionName: RegionName;
+  }
   export type DistrictOrCounty = string;
   export type EmailAddress = string;
+  export interface EnableRegionRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     */
+    AccountId?: AccountId;
+    /**
+     * Specifies the Region-code for a given Region name (for example, af-south-1). When you enable a Region, AWS performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region. This process takes a few minutes for most accounts, but it can take several hours. You cannot use the Region until this process is complete. Furthermore, you cannot disable the Region until the enabling process is fully completed.
+     */
+    RegionName: RegionName;
+  }
   export type FullName = string;
   export interface GetAlternateContactRequest {
     /**
@@ -172,6 +224,56 @@ declare namespace Account {
      * Contains the details of the primary contact information associated with an Amazon Web Services account.
      */
     ContactInformation?: ContactInformation;
+  }
+  export interface GetRegionOptStatusRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     */
+    AccountId?: AccountId;
+    /**
+     * Specifies the Region-code for a given Region name (for example, af-south-1). This function will return the status of whatever Region you pass into this parameter. 
+     */
+    RegionName: RegionName;
+  }
+  export interface GetRegionOptStatusResponse {
+    /**
+     * The Region code that was passed in.
+     */
+    RegionName?: RegionName;
+    /**
+     * One of the potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).
+     */
+    RegionOptStatus?: RegionOptStatus;
+  }
+  export interface ListRegionsRequest {
+    /**
+     * Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the organization's management account or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have all features enabled, and the organization must have trusted access enabled for the Account Management service, and optionally a delegated admin account assigned.  The management account can't specify its own AccountId. It must call the operation in standalone context by not including the AccountId parameter.  To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.
+     */
+    AccountId?: AccountId;
+    /**
+     * The total number of items to return in the command’s output. If the total number of items available is more than the value specified, a NextToken is provided in the command’s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. Do not use the NextToken response element directly outside of the Amazon Web Services CLI. For usage examples, see Pagination in the Amazon Web Services Command Line Interface User Guide. 
+     */
+    MaxResults?: ListRegionsRequestMaxResultsInteger;
+    /**
+     * A token used to specify where to start paginating. This is the NextToken from a previously truncated response. For usage examples, see Pagination in the Amazon Web Services Command Line Interface User Guide.
+     */
+    NextToken?: ListRegionsRequestNextTokenString;
+    /**
+     * A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled_by_default) to use to filter the list of Regions for a given account. For example, passing in a value of ENABLING will only return a list of Regions with a Region status of ENABLING.
+     */
+    RegionOptStatusContains?: RegionOptStatusList;
+  }
+  export type ListRegionsRequestMaxResultsInteger = number;
+  export type ListRegionsRequestNextTokenString = string;
+  export interface ListRegionsResponse {
+    /**
+     * If there is more data to be returned, this will be populated. It should be passed into the next-token request parameter of list-regions.
+     */
+    NextToken?: String;
+    /**
+     * This is a list of Regions for a given account, or if the filtered parameter was used, a list of Regions that match the filter criteria set in the filter parameter.
+     */
+    Regions?: RegionOptList;
   }
   export type Name = string;
   export type PhoneNumber = string;
@@ -212,7 +314,22 @@ declare namespace Account {
      */
     ContactInformation: ContactInformation;
   }
+  export interface Region {
+    /**
+     * The Region code of a given Region (for example, us-east-1).
+     */
+    RegionName?: RegionName;
+    /**
+     * One of potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).
+     */
+    RegionOptStatus?: RegionOptStatus;
+  }
+  export type RegionName = string;
+  export type RegionOptList = Region[];
+  export type RegionOptStatus = "ENABLED"|"ENABLING"|"DISABLING"|"DISABLED"|"ENABLED_BY_DEFAULT"|string;
+  export type RegionOptStatusList = RegionOptStatus[];
   export type StateOrRegion = string;
+  export type String = string;
   export type Title = string;
   export type WebsiteUrl = string;
   /**
