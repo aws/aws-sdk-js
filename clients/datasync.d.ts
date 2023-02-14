@@ -92,19 +92,19 @@ declare class DataSync extends Service {
    */
   createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location in the DataSync User Guide.
+   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location.
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location in the DataSync User Guide.
+   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location.
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
+   * Creates an endpoint for a Server Message Block (SMB) file server that DataSync can access for a transfer. For more information, see Creating an SMB location.
    */
   createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
+   * Creates an endpoint for a Server Message Block (SMB) file server that DataSync can access for a transfer. For more information, see Creating an SMB location.
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class DataSync extends Service {
    */
   deleteTask(callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
-   * Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. 
+   * Returns metadata about an DataSync agent, such as its name, endpoint type, and status.
    */
   describeAgent(params: DataSync.Types.DescribeAgentRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
   /**
-   * Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. 
+   * Returns metadata about an DataSync agent, such as its name, endpoint type, and status.
    */
   describeAgent(callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class DataSync extends Service {
    */
   describeTaskExecution(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
-   * Returns a list of agents owned by an Amazon Web Services account in the Amazon Web Services Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN). By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response. If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.
+   * Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request. With pagination, you can reduce the number of agents returned in a response. If you get a truncated list of agents in a response, the response contains a marker that you can specify in your next request to fetch the next page of agents.  ListAgents is eventually consistent. This means the result of running the operation might not reflect that you just created or deleted an agent. For example, if you create an agent with CreateAgent and then immediately run ListAgents, that agent might not show up in the list right away. In situations like this, you can always confirm whether an agent has been created (or deleted) by using DescribeAgent.
    */
   listAgents(params: DataSync.Types.ListAgentsRequest, callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
   /**
-   * Returns a list of agents owned by an Amazon Web Services account in the Amazon Web Services Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN). By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response. If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.
+   * Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request. With pagination, you can reduce the number of agents returned in a response. If you get a truncated list of agents in a response, the response contains a marker that you can specify in your next request to fetch the next page of agents.  ListAgents is eventually consistent. This means the result of running the operation might not reflect that you just created or deleted an agent. For example, if you create an agent with CreateAgent and then immediately run ListAgents, that agent might not show up in the list right away. In situations like this, you can always confirm whether an agent has been created (or deleted) by using DescribeAgent.
    */
   listAgents(callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
   /**
@@ -371,15 +371,15 @@ declare namespace DataSync {
   export type AgentList = AgentListEntry[];
   export interface AgentListEntry {
     /**
-     * The Amazon Resource Name (ARN) of the agent.
+     * The Amazon Resource Name (ARN) of a DataSync agent.
      */
     AgentArn?: AgentArn;
     /**
-     * The name of the agent.
+     * The name of an agent.
      */
     Name?: TagValue;
     /**
-     * The status of the agent.
+     * The status of an agent. For more information, see DataSync agent statuses.
      */
     Status?: AgentStatus;
   }
@@ -493,11 +493,11 @@ declare namespace DataSync {
      */
     SecurityGroupArns: Ec2SecurityGroupArnList;
     /**
-     * Specifies the ARN of the storage virtual machine (SVM) on your file system where you're copying data to or from.
+     * Specifies the ARN of the storage virtual machine (SVM) in your file system where you want to copy data to or from.
      */
     StorageVirtualMachineArn: StorageVirtualMachineArn;
     /**
-     * Specifies the junction path (also known as a mount point) in the SVM volume where you're copying data to or from (for example, /vol1).  Don't specify a junction path in the SVM's root volume. For more information, see Managing FSx for ONTAP storage virtual machines in the Amazon FSx for NetApp ONTAP User Guide. 
+     * Specifies a path to the file share in the SVM where you'll copy your data. You can specify a junction path (also known as a mount point), qtree path (for NFS file shares), or share name (for SMB file shares). For example, your mount path might be /vol1, /vol1/tree1, or /share1.  Don't specify a junction path in the SVM's root volume. For more information, see Managing FSx for ONTAP storage virtual machines in the Amazon FSx for NetApp ONTAP User Guide. 
      */
     Subdirectory?: FsxOntapSubdirectory;
     /**
@@ -742,41 +742,41 @@ declare namespace DataSync {
   }
   export interface CreateLocationSmbRequest {
     /**
-     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example, /path/to/folder.  To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
+     * Specifies the name of the share exported by your SMB file server where DataSync will read or write data. You can include a subdirectory in the share path (for example, /path/to/subdirectory). Make sure that other SMB clients in your network can also mount this path. To copy all data in the specified subdirectory, DataSync must be able to mount the SMB share and access all of its data. For more information, see required permissions for SMB locations.
      */
     Subdirectory: SmbSubdirectory;
     /**
-     * The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server. An agent that is installed on-premises uses this hostname to mount the SMB server in a network.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * Specifies the Domain Name Service (DNS) name or IP address of the SMB file server that your DataSync agent will mount.  You can't specify an IP version 6 (IPv6) address. 
      */
     ServerHostname: ServerHostname;
     /**
-     * The user who can mount the share, has the permissions to access files and folders in the SMB share. For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see the User setting for SMB locations.
+     * Specifies the user name that can mount your SMB file server and has permission to access the files and folders involved in your transfer. For information about choosing a user with the right level of access for your transfer, see required permissions for SMB locations.
      */
     User: SmbUser;
     /**
-     * The name of the Windows domain that the SMB server belongs to.
+     * Specifies the Windows domain name that your SMB file server belongs to.  For more information, see required permissions for SMB locations.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who can mount the share, has the permissions to access files and folders in the SMB share.
+     * Specifies the password of the user who can mount your SMB file server and has permission to access the files and folders involved in your transfer. For more information, see required permissions for SMB locations.
      */
     Password: SmbPassword;
     /**
-     * The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location. 
+     * Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).
      */
     AgentArns: AgentArnList;
     /**
-     * The mount options used by DataSync to access the SMB server.
+     * Specifies the version of the SMB protocol that DataSync uses to access your SMB file server.
      */
     MountOptions?: SmbMountOptions;
     /**
-     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
      */
     Tags?: InputTagList;
   }
   export interface CreateLocationSmbResponse {
     /**
-     * The Amazon Resource Name (ARN) of the source SMB file system location that is created.
+     * The ARN of the SMB location that you created.
      */
     LocationArn?: LocationArn;
   }
@@ -850,13 +850,13 @@ declare namespace DataSync {
   }
   export interface DescribeAgentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the agent to describe.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent to describe.
      */
     AgentArn: AgentArn;
   }
   export interface DescribeAgentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the agent.
+     * The ARN of the agent.
      */
     AgentArn?: AgentArn;
     /**
@@ -1447,21 +1447,21 @@ declare namespace DataSync {
   export type KmsKeyProviderUri = string;
   export interface ListAgentsRequest {
     /**
-     * The maximum number of agents to list.
+     * Specifies the maximum number of DataSync agents to list in a response. By default, a response shows a maximum of 100 agents.
      */
     MaxResults?: MaxResults;
     /**
-     * An opaque string that indicates the position at which to begin the next list of agents.
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
   export interface ListAgentsResponse {
     /**
-     * A list of agents in your account.
+     * A list of DataSync agents in your Amazon Web Services account in the Amazon Web Services Region specified in the request. The list is ordered by the agents' Amazon Resource Names (ARNs).
      */
     Agents?: AgentList;
     /**
-     * An opaque string that indicates the position at which to begin returning the next list of agents.
+     * The opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
   }
@@ -1624,7 +1624,7 @@ declare namespace DataSync {
      */
     VerifyMode?: VerifyMode;
     /**
-     * Specifies whether data at the destination location should be overwritten or preserved. If set to NEVER, a destination file for example will not be replaced by a source file (even if the destination file differs from the source file). If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your Amazon S3 storage cost. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync .
+     * Specifies whether data at the destination location should be overwritten or preserved. If set to NEVER, a destination file for example will not be replaced by a source file (even if the destination file differs from the source file). If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your Amazon S3 storage cost. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync.
      */
     OverwriteMode?: OverwriteMode;
     /**
@@ -1644,7 +1644,7 @@ declare namespace DataSync {
      */
     Gid?: Gid;
     /**
-     * Specifies whether files in the destination location that don't exist in the source should be preserved. This option can affect your Amazon S3 storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync . Default value: PRESERVE   PRESERVE: Ignore such destination files (recommended).   REMOVE: Delete destination files that aren’t present in the source.
+     * Specifies whether files in the destination location that don't exist in the source should be preserved. This option can affect your Amazon S3 storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync. Default value: PRESERVE   PRESERVE: Ignore such destination files (recommended).   REMOVE: Delete destination files that aren’t present in the source.  If you set this parameter to REMOVE, you can't set TransferMode to ALL. When you transfer all data, DataSync doesn't scan your destination location and doesn't know what to delete. 
      */
     PreserveDeletedFiles?: PreserveDeletedFiles;
     /**
@@ -1730,7 +1730,7 @@ declare namespace DataSync {
   export type SmbDomain = string;
   export interface SmbMountOptions {
     /**
-     * Specifies the SMB version that you want DataSync to use when mounting your SMB share. If you don't specify a version, DataSync defaults to AUTOMATIC and chooses a version based on negotiation with the SMB server.
+     * By default, DataSync automatically chooses an SMB protocol version based on negotiation with your SMB file server. You also can configure DataSync to use a specific SMB version, but we recommend doing this only if DataSync has trouble negotiating with the SMB file server automatically. These are the following options for configuring the SMB version:    AUTOMATIC (default): DataSync and the SMB file server negotiate a protocol version that they mutually support. (DataSync supports SMB versions 1.0 and later.) This is the recommended option. If you instead choose a specific version that your file server doesn't support, you may get an Operation Not Supported error.    SMB3: Restricts the protocol negotiation to only SMB version 3.0.2.    SMB2: Restricts the protocol negotiation to only SMB version 2.1.    SMB2_0: Restricts the protocol negotiation to only SMB version 2.0.    SMB1: Restricts the protocol negotiation to only SMB version 1.0.  The SMB1 option isn't available when creating an Amazon FSx for NetApp ONTAP location.   
      */
     Version?: SmbVersion;
   }
@@ -1738,7 +1738,7 @@ declare namespace DataSync {
   export type SmbSecurityDescriptorCopyFlags = "NONE"|"OWNER_DACL"|"OWNER_DACL_SACL"|string;
   export type SmbSubdirectory = string;
   export type SmbUser = string;
-  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|string;
+  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|"SMB1"|"SMB2_0"|string;
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
   export interface StartTaskExecutionRequest {
     /**

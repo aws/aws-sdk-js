@@ -5548,6 +5548,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.
      */
     OutpostArn?: String;
+    /**
+     * Indicates whether to enable or disable host maintenance for the Dedicated Host. For more information, see  Host maintenance in the Amazon EC2 User Guide. Default: on 
+     */
+    HostMaintenance?: HostMaintenance;
   }
   export interface AllocateHostsResult {
     /**
@@ -21518,6 +21522,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which the Dedicated Host is allocated.
      */
     OutpostArn?: String;
+    /**
+     * Indicates whether host maintenance is enabled or disabled for the Dedicated Host.
+     */
+    HostMaintenance?: HostMaintenance;
   }
   export interface HostInstance {
     /**
@@ -21535,6 +21543,7 @@ declare namespace EC2 {
   }
   export type HostInstanceList = HostInstance[];
   export type HostList = Host[];
+  export type HostMaintenance = "on"|"off"|string;
   export interface HostOffering {
     /**
      * The currency of the offering.
@@ -26428,6 +26437,10 @@ declare namespace EC2 {
      * Specifies the instance family to be supported by the Dedicated Host. Specify this parameter to modify a Dedicated Host to support multiple instance types within its current instance family. If you want to modify a Dedicated Host to support a specific instance type only, omit this parameter and specify InstanceType instead. You cannot specify InstanceFamily and InstanceType in the same request.
      */
     InstanceFamily?: String;
+    /**
+     * Indicates whether to enable or disable host maintenance for the Dedicated Host. For more information, see  Host maintenance in the Amazon EC2 User Guide.
+     */
+    HostMaintenance?: HostMaintenance;
   }
   export interface ModifyHostsResult {
     /**

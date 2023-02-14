@@ -719,6 +719,10 @@ declare namespace AppConfig {
      * An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version number of the latest hosted configuration version.
      */
     LatestVersionNumber?: Integer;
+    /**
+     * An optional, user-defined label for the AppConfig hosted configuration version. This value must contain at least one non-numeric character. For example, "v2.2.0".
+     */
+    VersionLabel?: VersionLabel;
   }
   export interface DeleteApplicationRequest {
     /**
@@ -1274,6 +1278,10 @@ declare namespace AppConfig {
      * A standard MIME type describing the format of the configuration content. For more information, see Content-Type.
      */
     ContentType?: StringWithLengthBetween1And255;
+    /**
+     * A user-defined label for an AppConfig hosted configuration version.
+     */
+    VersionLabel?: VersionLabel;
   }
   export interface HostedConfigurationVersionSummary {
     /**
@@ -1296,6 +1304,10 @@ declare namespace AppConfig {
      * A standard MIME type describing the format of the configuration content. For more information, see Content-Type.
      */
     ContentType?: StringWithLengthBetween1And255;
+    /**
+     * A user-defined label for an AppConfig hosted configuration version.
+     */
+    VersionLabel?: VersionLabel;
   }
   export type HostedConfigurationVersionSummaryList = HostedConfigurationVersionSummary[];
   export interface HostedConfigurationVersions {
@@ -1435,6 +1447,10 @@ declare namespace AppConfig {
      * A token to start the list. Use this token to get the next set of results. 
      */
     NextToken?: NextToken;
+    /**
+     * An optional filter that can be used to specify the version label of an AppConfig hosted configuration version. This parameter supports filtering by prefix using a wildcard, for example "v2*". If you don't specify an asterisk at the end of the value, only an exact match is returned.
+     */
+    VersionLabel?: QueryName;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -1498,7 +1514,7 @@ declare namespace AppConfig {
      */
     ConfigurationProfileId: Id;
     /**
-     * The configuration version to deploy.
+     * The configuration version to deploy. If deploying an AppConfig hosted configuration version, you can specify either the version number or version label.
      */
     ConfigurationVersion: Version;
     /**
@@ -1707,6 +1723,7 @@ declare namespace AppConfig {
   export type ValidatorType = "JSON_SCHEMA"|"LAMBDA"|string;
   export type ValidatorTypeList = ValidatorType[];
   export type Version = string;
+  export type VersionLabel = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
