@@ -68,6 +68,14 @@ declare class FraudDetector extends Service {
    */
   createDetectorVersion(callback?: (err: AWSError, data: FraudDetector.Types.CreateDetectorVersionResult) => void): Request<FraudDetector.Types.CreateDetectorVersionResult, AWSError>;
   /**
+   *  Creates a list.  List is a set of input data for a variable in your event dataset. You use the input data in a rule that's associated with your detector. For more information, see Lists.
+   */
+  createList(params: FraudDetector.Types.CreateListRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateListResult) => void): Request<FraudDetector.Types.CreateListResult, AWSError>;
+  /**
+   *  Creates a list.  List is a set of input data for a variable in your event dataset. You use the input data in a rule that's associated with your detector. For more information, see Lists.
+   */
+  createList(callback?: (err: AWSError, data: FraudDetector.Types.CreateListResult) => void): Request<FraudDetector.Types.CreateListResult, AWSError>;
+  /**
    * Creates a model using the specified model type.
    */
   createModel(params: FraudDetector.Types.CreateModelRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateModelResult) => void): Request<FraudDetector.Types.CreateModelResult, AWSError>;
@@ -179,6 +187,14 @@ declare class FraudDetector extends Service {
    * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteLabel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteLabelResult) => void): Request<FraudDetector.Types.DeleteLabelResult, AWSError>;
+  /**
+   *  Deletes the list, provided it is not used in a rule.   When you delete a list, Amazon Fraud Detector permanently deletes that list and the elements in the list.
+   */
+  deleteList(params: FraudDetector.Types.DeleteListRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteListResult) => void): Request<FraudDetector.Types.DeleteListResult, AWSError>;
+  /**
+   *  Deletes the list, provided it is not used in a rule.   When you delete a list, Amazon Fraud Detector permanently deletes that list and the elements in the list.
+   */
+  deleteList(callback?: (err: AWSError, data: FraudDetector.Types.DeleteListResult) => void): Request<FraudDetector.Types.DeleteListResult, AWSError>;
   /**
    * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model and the data is no longer stored in Amazon Fraud Detector.
    */
@@ -335,6 +351,22 @@ declare class FraudDetector extends Service {
    * Gets all labels or a specific label if name is provided. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 10 and 50. To get the next page results, provide the pagination token from the GetGetLabelsResponse as part of your request. A null pagination token fetches the records from the beginning. 
    */
   getLabels(callback?: (err: AWSError, data: FraudDetector.Types.GetLabelsResult) => void): Request<FraudDetector.Types.GetLabelsResult, AWSError>;
+  /**
+   *  Gets all the elements in the specified list. 
+   */
+  getListElements(params: FraudDetector.Types.GetListElementsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetListElementsResult) => void): Request<FraudDetector.Types.GetListElementsResult, AWSError>;
+  /**
+   *  Gets all the elements in the specified list. 
+   */
+  getListElements(callback?: (err: AWSError, data: FraudDetector.Types.GetListElementsResult) => void): Request<FraudDetector.Types.GetListElementsResult, AWSError>;
+  /**
+   *  Gets the metadata of either all the lists under the account or the specified list. 
+   */
+  getListsMetadata(params: FraudDetector.Types.GetListsMetadataRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetListsMetadataResult) => void): Request<FraudDetector.Types.GetListsMetadataResult, AWSError>;
+  /**
+   *  Gets the metadata of either all the lists under the account or the specified list. 
+   */
+  getListsMetadata(callback?: (err: AWSError, data: FraudDetector.Types.GetListsMetadataResult) => void): Request<FraudDetector.Types.GetListsMetadataResult, AWSError>;
   /**
    * Gets the details of the specified model version.
    */
@@ -504,6 +536,14 @@ declare class FraudDetector extends Service {
    */
   updateEventLabel(callback?: (err: AWSError, data: FraudDetector.Types.UpdateEventLabelResult) => void): Request<FraudDetector.Types.UpdateEventLabelResult, AWSError>;
   /**
+   *  Updates a list. 
+   */
+  updateList(params: FraudDetector.Types.UpdateListRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateListResult) => void): Request<FraudDetector.Types.UpdateListResult, AWSError>;
+  /**
+   *  Updates a list. 
+   */
+  updateList(callback?: (err: AWSError, data: FraudDetector.Types.UpdateListResult) => void): Request<FraudDetector.Types.UpdateListResult, AWSError>;
+  /**
    * Updates model description.
    */
   updateModel(params: FraudDetector.Types.UpdateModelRequest, callback?: (err: AWSError, data: FraudDetector.Types.UpdateModelResult) => void): Request<FraudDetector.Types.UpdateModelResult, AWSError>;
@@ -618,6 +658,33 @@ declare namespace FraudDetector {
      */
     logOddsMetrics?: ListOfAggregatedLogOddsMetrics;
   }
+  export interface AllowDenyList {
+    /**
+     *  The name of the list. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  The description of the list. 
+     */
+    description?: description;
+    /**
+     *  The variable type of the list. 
+     */
+    variableType?: variableType;
+    /**
+     *  The time the list was created. 
+     */
+    createdTime?: time;
+    /**
+     *  The time the list was last updated. 
+     */
+    updatedTime?: time;
+    /**
+     *  The ARN of the list. 
+     */
+    arn?: fraudDetectorArn;
+  }
+  export type AllowDenyLists = AllowDenyList[];
   export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED"|string;
   export interface BatchCreateVariableError {
     /**
@@ -924,6 +991,30 @@ declare namespace FraudDetector {
      */
     status?: DetectorVersionStatus;
   }
+  export interface CreateListRequest {
+    /**
+     *  The name of the list. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  The names of the elements, if providing. You can also create an empty list and add elements later using the UpdateList API. 
+     */
+    elements?: ElementsList;
+    /**
+     *  The variable type of the list. You can only assign the variable type with String data type. For more information, see Variable types. 
+     */
+    variableType?: variableType;
+    /**
+     *  The description of the list. 
+     */
+    description?: description;
+    /**
+     *  A collection of the key and value pairs. 
+     */
+    tags?: tagList;
+  }
+  export interface CreateListResult {
+  }
   export interface CreateModelRequest {
     /**
      * The model ID.
@@ -1178,6 +1269,14 @@ declare namespace FraudDetector {
   }
   export interface DeleteLabelResult {
   }
+  export interface DeleteListRequest {
+    /**
+     *  The name of the list to delete. 
+     */
+    name: noDashIdentifier;
+  }
+  export interface DeleteListResult {
+  }
   export interface DeleteModelRequest {
     /**
      * The model ID of the model to delete.
@@ -1340,6 +1439,8 @@ declare namespace FraudDetector {
   }
   export type DetectorVersionSummaryList = DetectorVersionSummary[];
   export type DetectorsMaxResults = number;
+  export type Elements = string;
+  export type ElementsList = Elements[];
   export interface Entity {
     /**
      * The entity type.
@@ -2063,6 +2164,54 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export interface GetListElementsRequest {
+    /**
+     *  The name of the list. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  The next token for the subsequent request. 
+     */
+    nextToken?: nextToken;
+    /**
+     *  The maximum number of objects to return for the request. 
+     */
+    maxResults?: ListsElementsMaxResults;
+  }
+  export interface GetListElementsResult {
+    /**
+     *  The list elements. 
+     */
+    elements?: ElementsList;
+    /**
+     *  The next page token. 
+     */
+    nextToken?: nextToken;
+  }
+  export interface GetListsMetadataRequest {
+    /**
+     *  The name of the list. 
+     */
+    name?: noDashIdentifier;
+    /**
+     *  The next token for the subsequent request. 
+     */
+    nextToken?: nextToken;
+    /**
+     *  The maximum number of objects to return for the request. 
+     */
+    maxResults?: ListsMetadataMaxResults;
+  }
+  export interface GetListsMetadataResult {
+    /**
+     *  The metadata of the specified list or all lists under the account. 
+     */
+    lists?: AllowDenyLists;
+    /**
+     *  The next page token. 
+     */
+    nextToken?: nextToken;
+  }
   export interface GetModelVersionRequest {
     /**
      * The model ID.
@@ -2380,6 +2529,9 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export type ListUpdateMode = "REPLACE"|"APPEND"|"REMOVE"|string;
+  export type ListsElementsMaxResults = number;
+  export type ListsMetadataMaxResults = number;
   export interface LogOddsMetric {
     /**
      * The name of the variable.
@@ -3147,6 +3299,30 @@ declare namespace FraudDetector {
   }
   export interface UpdateEventLabelResult {
   }
+  export interface UpdateListRequest {
+    /**
+     *  The name of the list to update. 
+     */
+    name: noDashIdentifier;
+    /**
+     *  One or more list elements to add or replace. If you are providing the elements, make sure to specify the updateMode to use.  If you are deleting all elements from the list, use REPLACE for the updateMode and provide an empty list (0 elements).
+     */
+    elements?: ElementsList;
+    /**
+     *  The new description. 
+     */
+    description?: description;
+    /**
+     *  The update mode (type).    Use APPEND if you are adding elements to the list.   Use REPLACE if you replacing existing elements in the list.   Use REMOVE if you are removing elements from the list.  
+     */
+    updateMode?: ListUpdateMode;
+    /**
+     *  The variable type you want to assign to the list.   You cannot update a variable type of a list that already has a variable type assigned to it. You can assign a variable type to a list only if the list does not already have a variable type. 
+     */
+    variableType?: variableType;
+  }
+  export interface UpdateListResult {
+  }
   export interface UpdateModelRequest {
     /**
      * The model ID.
@@ -3411,6 +3587,8 @@ declare namespace FraudDetector {
   export type modelList = Model[];
   export type modelVersionDetailList = ModelVersionDetail[];
   export type modelsMaxPageSize = number;
+  export type nextToken = string;
+  export type noDashIdentifier = string;
   export type ruleExpression = string;
   export type s3BucketLocation = string;
   export type sageMakerEndpointIdentifier = string;
@@ -3422,6 +3600,7 @@ declare namespace FraudDetector {
   export type time = string;
   export type utcTimestampISO8601 = string;
   export type variableName = string;
+  export type variableType = string;
   export type variableValue = string;
   export type wholeNumberVersionString = string;
   /**

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1315.0-->
+<!--LATEST=2.1316.0-->
 <!--ENTRYINSERT-->
+
+## 2.1316.0
+* feature: CloudTrail: This release adds an InsufficientEncryptionPolicyException type to the StartImport endpoint
+* feature: FraudDetector: This release introduces Lists feature which allows customers to reference a set of values in Fraud Detector's rules. With Lists, customers can dynamically manage these attributes in real time. Lists can be created/deleted and its contents can be modified using the Fraud Detector API.
+* feature: Glue: Fix DirectJDBCSource not showing up in CLI code gen
+* feature: PrivateNetworks: This release introduces a new StartNetworkResourceUpdate API, which enables return/replacement of hardware from a NetworkSite.
+* feature: WAFV2: For protected CloudFront distributions, you can now use the AWS WAF Fraud Control account takeover prevention (ATP) managed rule group to block new login attempts from clients that have recently submitted too many failed login attempts.
 
 ## 2.1315.0
 * feature: AppConfig: AWS AppConfig now offers the option to set a version label on hosted configuration versions. Version labels allow you to identify specific hosted configuration versions based on an alternate versioning scheme that you define.

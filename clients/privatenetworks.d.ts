@@ -124,11 +124,11 @@ declare class PrivateNetworks extends Service {
    */
   getOrder(callback?: (err: AWSError, data: PrivateNetworks.Types.GetOrderResponse) => void): Request<PrivateNetworks.Types.GetOrderResponse, AWSError>;
   /**
-   * Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group.  &lt;p&gt;If you specify multiple filters, filters are joined with an OR, and the request  returns results that match all of the specified filters.
+   * Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group. If you specify multiple filters, filters are joined with an OR, and the request returns results that match all of the specified filters.
    */
   listDeviceIdentifiers(params: PrivateNetworks.Types.ListDeviceIdentifiersRequest, callback?: (err: AWSError, data: PrivateNetworks.Types.ListDeviceIdentifiersResponse) => void): Request<PrivateNetworks.Types.ListDeviceIdentifiersResponse, AWSError>;
   /**
-   * Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group.  &lt;p&gt;If you specify multiple filters, filters are joined with an OR, and the request  returns results that match all of the specified filters.
+   * Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group. If you specify multiple filters, filters are joined with an OR, and the request returns results that match all of the specified filters.
    */
   listDeviceIdentifiers(callback?: (err: AWSError, data: PrivateNetworks.Types.ListDeviceIdentifiersResponse) => void): Request<PrivateNetworks.Types.ListDeviceIdentifiersResponse, AWSError>;
   /**
@@ -175,6 +175,14 @@ declare class PrivateNetworks extends Service {
    * Checks the health of the service.
    */
   ping(callback?: (err: AWSError, data: PrivateNetworks.Types.PingResponse) => void): Request<PrivateNetworks.Types.PingResponse, AWSError>;
+  /**
+   * Starts an update of the specified network resource. After you submit a request to replace or return a network resource, the status of the network resource is CREATING_SHIPPING_LABEL. The shipping label is available when the status of the network resource is PENDING_RETURN. After the network resource is successfully returned, its status is DELETED. For more information, see Return a radio unit.
+   */
+  startNetworkResourceUpdate(params: PrivateNetworks.Types.StartNetworkResourceUpdateRequest, callback?: (err: AWSError, data: PrivateNetworks.Types.StartNetworkResourceUpdateResponse) => void): Request<PrivateNetworks.Types.StartNetworkResourceUpdateResponse, AWSError>;
+  /**
+   * Starts an update of the specified network resource. After you submit a request to replace or return a network resource, the status of the network resource is CREATING_SHIPPING_LABEL. The shipping label is available when the status of the network resource is PENDING_RETURN. After the network resource is successfully returned, its status is DELETED. For more information, see Return a radio unit.
+   */
+  startNetworkResourceUpdate(callback?: (err: AWSError, data: PrivateNetworks.Types.StartNetworkResourceUpdateResponse) => void): Request<PrivateNetworks.Types.StartNetworkResourceUpdateResponse, AWSError>;
   /**
    *  Adds tags to the specified resource. 
    */
@@ -829,6 +837,10 @@ declare namespace PrivateNetworks {
      */
     position?: Position;
     /**
+     * Information about a request to return the network resource.
+     */
+    returnInformation?: ReturnInformation;
+    /**
      * The serial number of the network resource.
      */
     serialNumber?: String;
@@ -870,7 +882,7 @@ declare namespace PrivateNetworks {
   export type NetworkResourceFilterValues = String[];
   export type NetworkResourceFilters = {[key: string]: NetworkResourceFilterValues};
   export type NetworkResourceList = NetworkResource[];
-  export type NetworkResourceStatus = "PENDING"|"SHIPPED"|"PROVISIONING"|"PROVISIONED"|"AVAILABLE"|"DELETING"|"PENDING_RETURN"|"DELETED"|string;
+  export type NetworkResourceStatus = "PENDING"|"SHIPPED"|"PROVISIONING"|"PROVISIONED"|"AVAILABLE"|"DELETING"|"PENDING_RETURN"|"DELETED"|"CREATING_SHIPPING_LABEL"|string;
   export type NetworkResourceType = "RADIO_UNIT"|string;
   export interface NetworkSite {
     /**
@@ -988,6 +1000,24 @@ declare namespace PrivateNetworks {
      */
     longitude?: Double;
   }
+  export interface ReturnInformation {
+    /**
+     * The Amazon Resource Name (ARN) of the replacement order.
+     */
+    replacementOrderArn?: Arn;
+    /**
+     * The reason for the return. If the return request did not include a reason for the return, this value is null.
+     */
+    returnReason?: String;
+    /**
+     * The shipping address.
+     */
+    shippingAddress?: Address;
+    /**
+     * The URL of the shipping label. The shipping label is available for download only if the status of the network resource is PENDING_RETURN. For more information, see Return a radio unit.
+     */
+    shippingLabel?: String;
+  }
   export interface SitePlan {
     /**
      * The options of the plan.
@@ -997,6 +1027,31 @@ declare namespace PrivateNetworks {
      * The resource definitions of the plan.
      */
     resourceDefinitions?: NetworkResourceDefinitions;
+  }
+  export interface StartNetworkResourceUpdateRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the network resource.
+     */
+    networkResourceArn: Arn;
+    /**
+     * The reason for the return. Providing a reason for a return is optional.
+     */
+    returnReason?: StartNetworkResourceUpdateRequestReturnReasonString;
+    /**
+     * The shipping address. If you don't provide a shipping address when replacing or returning a network resource, we use the address from the original order for the network resource.
+     */
+    shippingAddress?: Address;
+    /**
+     * The update type.    REPLACE - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.    RETURN - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.  
+     */
+    updateType: UpdateType;
+  }
+  export type StartNetworkResourceUpdateRequestReturnReasonString = string;
+  export interface StartNetworkResourceUpdateResponse {
+    /**
+     * The network resource.
+     */
+    networkResource?: NetworkResource;
   }
   export type String = string;
   export type TagKey = string;
@@ -1073,6 +1128,7 @@ declare namespace PrivateNetworks {
      */
     tags?: TagMap;
   }
+  export type UpdateType = "REPLACE"|"RETURN"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

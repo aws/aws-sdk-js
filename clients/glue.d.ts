@@ -2803,6 +2803,7 @@ declare namespace Glue {
      * Specifies a target that writes to a Hudi data source in Amazon S3.
      */
     S3HudiDirectTarget?: S3HudiDirectTarget;
+    DirectJDBCSource?: DirectJDBCSource;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -5337,6 +5338,32 @@ declare namespace Glue {
   export type DevEndpointList = DevEndpoint[];
   export type DevEndpointNameList = NameString[];
   export type DevEndpointNames = GenericString[];
+  export interface DirectJDBCSource {
+    /**
+     * The name of the JDBC source connection.
+     */
+    Name: NodeName;
+    /**
+     * The database of the JDBC source connection.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The table of the JDBC source connection.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The connection name of the JDBC source.
+     */
+    ConnectionName: EnclosedInStringProperty;
+    /**
+     * The connection type of the JDBC source.
+     */
+    ConnectionType: JDBCConnectionType;
+    /**
+     * The temp directory of the JDBC Redshift source.
+     */
+    RedshiftTmpDir?: EnclosedInStringProperty;
+  }
   export interface DirectKafkaSource {
     /**
      * The name of the data store.
@@ -7672,6 +7699,7 @@ declare namespace Glue {
   export type IntegerFlag = number;
   export type IntegerValue = number;
   export type IsVersionValid = boolean;
+  export type JDBCConnectionType = "sqlserver"|"mysql"|"oracle"|"postgresql"|"redshift"|string;
   export interface JDBCConnectorOptions {
     /**
      * Extra condition clause to filter data from source. For example:  BillingCity='Mountain View'  When using a query instead of a table name, you should validate that the query works with the specified filterPredicate.

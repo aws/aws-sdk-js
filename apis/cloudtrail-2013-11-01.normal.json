@@ -1592,6 +1592,9 @@
           "shape": "InvalidParameterException"
         },
         {
+          "shape": "InsufficientEncryptionPolicyException"
+        },
+        {
           "shape": "OperationNotPermittedException"
         },
         {

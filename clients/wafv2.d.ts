@@ -397,6 +397,20 @@ declare class WAFV2 extends Service {
   updateWebACL(callback?: (err: AWSError, data: WAFV2.Types.UpdateWebACLResponse) => void): Request<WAFV2.Types.UpdateWebACLResponse, AWSError>;
 }
 declare namespace WAFV2 {
+  export interface AWSManagedRulesATPRuleSet {
+    /**
+     * The path of the login endpoint for your application. For example, for the URL https://example.com/web/login, you would provide the path /web/login. The rule group inspects only HTTP POST requests to your specified login endpoint.
+     */
+    LoginPath: String;
+    /**
+     * The criteria for inspecting login requests, used by the ATP rule group to validate credentials usage. 
+     */
+    RequestInspection?: RequestInspection;
+    /**
+     * The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates.  The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time.   Response inspection is available only in web ACLs that protect Amazon CloudFront distributions. 
+     */
+    ResponseInspection?: ResponseInspection;
+  }
   export interface AWSManagedRulesBotControlRuleSet {
     /**
      * The inspection level to use for the Bot Control rule group. The common level is the least expensive. The targeted level includes all common level rules and adds rules with more advanced inspection criteria. For details, see WAF Bot Control rule group.
@@ -455,7 +469,7 @@ declare namespace WAFV2 {
   export type Boolean = boolean;
   export interface ByteMatchStatement {
     /**
-     * A string value that you want WAF to search for. WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 50 bytes. Valid values depend on the component that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want WAF to search for in the URI path, for example, /images/daily-ad.jpg.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the CLI or one of the Amazon Web Services SDKs  The value that you want WAF to search for. The SDK automatically base64 encodes the value.
+     * A string value that you want WAF to search for. WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 200 bytes. Valid values depend on the component that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want WAF to search for in the URI path, for example, /images/daily-ad.jpg.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 200 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the CLI or one of the Amazon Web Services SDKs  The value that you want WAF to search for. The SDK automatically base64 encodes the value.
      */
     SearchString: SearchString;
     /**
@@ -976,7 +990,9 @@ declare namespace WAFV2 {
     Name: EntityName;
   }
   export type ExcludedRules = ExcludedRule[];
+  export type FailureCode = number;
   export type FailureReason = "TOKEN_MISSING"|"TOKEN_EXPIRED"|"TOKEN_INVALID"|"TOKEN_DOMAIN_MISMATCH"|string;
+  export type FailureValue = string;
   export type FallbackBehavior = "MATCH"|"NO_MATCH"|string;
   export type FieldIdentifier = string;
   export interface FieldToMatch {
@@ -1883,25 +1899,29 @@ declare namespace WAFV2 {
   export type LoginPathString = string;
   export interface ManagedRuleGroupConfig {
     /**
-     * The path of the login endpoint for your application. For example, for the URL https://example.com/web/login, you would provide the path /web/login.
+     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet.  
      */
     LoginPath?: LoginPathString;
     /**
-     * The payload type for your login endpoint, either JSON or form encoded.
+     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet RequestInspection.  
      */
     PayloadType?: PayloadType;
     /**
-     * Details about your login page username field. 
+     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet RequestInspection.  
      */
     UsernameField?: UsernameField;
     /**
-     * Details about your login page password field. 
+     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet RequestInspection.  
      */
     PasswordField?: PasswordField;
     /**
      * Additional configuration for using the Bot Control managed rule group. Use this to specify the inspection level that you want to use. For information about using the Bot Control managed rule group, see WAF Bot Control rule group and WAF Bot Control in the WAF Developer Guide.
      */
     AWSManagedRulesBotControlRuleSet?: AWSManagedRulesBotControlRuleSet;
+    /**
+     * Additional configuration for using the account takeover prevention (ATP) managed rule group, AWSManagedRulesATPRuleSet. Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide the information about how your distribution responds to login requests. This configuration replaces the individual configuration fields in ManagedRuleGroupConfig and provides additional feature configuration.  For information about using the ATP managed rule group, see WAF Fraud Control account takeover prevention (ATP) rule group and WAF Fraud Control account takeover prevention (ATP) in the WAF Developer Guide.
+     */
+    AWSManagedRulesATPRuleSet?: AWSManagedRulesATPRuleSet;
   }
   export type ManagedRuleGroupConfigs = ManagedRuleGroupConfig[];
   export interface ManagedRuleGroupStatement {
@@ -1926,7 +1946,7 @@ declare namespace WAFV2 {
      */
     ScopeDownStatement?: Statement;
     /**
-     * Additional information that's used by a managed rule group. Many managed rule groups don't require this. Use the AWSManagedRulesBotControlRuleSet configuration object to configure the protection level that you want the Bot Control rule group to use. 
+     * Additional information that's used by a managed rule group. Many managed rule groups don't require this. Use the AWSManagedRulesATPRuleSet configuration object for the account takeover prevention managed rule group, to provide information such as the sign-in page of your application and the type of content to accept or reject from the client.  Use the AWSManagedRulesBotControlRuleSet configuration object to configure the protection level that you want the Bot Control rule group to use. 
      */
     ManagedRuleGroupConfigs?: ManagedRuleGroupConfigs;
     /**
@@ -2291,12 +2311,101 @@ declare namespace WAFV2 {
      */
     Timestamp?: Timestamp;
   }
+  export interface RequestInspection {
+    /**
+     * The payload type for your login endpoint, either JSON or form encoded.
+     */
+    PayloadType: PayloadType;
+    /**
+     * Details about your login page username field.  How you specify this depends on the payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" } }, the username field specification is /login/username and the password field specification is /login/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named username1 and password1, the username field specification is username1 and the password field specification is password1.  
+     */
+    UsernameField: UsernameField;
+    /**
+     * Details about your login page password field.  How you specify this depends on the payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" } }, the username field specification is /login/username and the password field specification is /login/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named username1 and password1, the username field specification is username1 and the password field specification is password1.  
+     */
+    PasswordField: PasswordField;
+  }
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
   export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|"APPSYNC"|"COGNITO_USER_POOL"|string;
   export type ResponseCode = number;
   export type ResponseContent = string;
   export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON"|string;
+  export interface ResponseInspection {
+    /**
+     * Configures inspection of the response status code. 
+     */
+    StatusCode?: ResponseInspectionStatusCode;
+    /**
+     * Configures inspection of the response header. 
+     */
+    Header?: ResponseInspectionHeader;
+    /**
+     * Configures inspection of the response body. 
+     */
+    BodyContains?: ResponseInspectionBodyContains;
+    /**
+     * Configures inspection of the response JSON. 
+     */
+    Json?: ResponseInspectionJson;
+  }
+  export interface ResponseInspectionBodyContains {
+    /**
+     * Strings in the body of the response that indicate a successful login attempt. To be counted as a successful login, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings.  JSON example: "SuccessStrings": [ "Login successful", "Welcome to our site!" ] 
+     */
+    SuccessStrings: ResponseInspectionBodyContainsSuccessStrings;
+    /**
+     * Strings in the body of the response that indicate a failed login attempt. To be counted as a failed login, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings.  JSON example: "FailureStrings": [ "Login failed" ] 
+     */
+    FailureStrings: ResponseInspectionBodyContainsFailureStrings;
+  }
+  export type ResponseInspectionBodyContainsFailureStrings = FailureValue[];
+  export type ResponseInspectionBodyContainsSuccessStrings = SuccessValue[];
+  export interface ResponseInspectionHeader {
+    /**
+     * The name of the header to match against. The name must be an exact match, including case. JSON example: "Name": [ "LoginResult" ] 
+     */
+    Name: ResponseInspectionHeaderName;
+    /**
+     * Values in the response header with the specified name that indicate a successful login attempt. To be counted as a successful login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "SuccessValues": [ "LoginPassed", "Successful login" ] 
+     */
+    SuccessValues: ResponseInspectionHeaderSuccessValues;
+    /**
+     * Values in the response header with the specified name that indicate a failed login attempt. To be counted as a failed login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "FailureValues": [ "LoginFailed", "Failed login" ] 
+     */
+    FailureValues: ResponseInspectionHeaderFailureValues;
+  }
+  export type ResponseInspectionHeaderFailureValues = FailureValue[];
+  export type ResponseInspectionHeaderName = string;
+  export type ResponseInspectionHeaderSuccessValues = SuccessValue[];
+  export interface ResponseInspectionJson {
+    /**
+     * The identifier for the value to match against in the JSON. The identifier must be an exact match, including case. JSON example: "Identifier": [ "/login/success" ] 
+     */
+    Identifier: FieldIdentifier;
+    /**
+     * Values for the specified identifier in the response JSON that indicate a successful login attempt. To be counted as a successful login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "SuccessValues": [ "True", "Succeeded" ] 
+     */
+    SuccessValues: ResponseInspectionJsonSuccessValues;
+    /**
+     * Values for the specified identifier in the response JSON that indicate a failed login attempt. To be counted as a failed login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "FailureValues": [ "False", "Failed" ] 
+     */
+    FailureValues: ResponseInspectionJsonFailureValues;
+  }
+  export type ResponseInspectionJsonFailureValues = FailureValue[];
+  export type ResponseInspectionJsonSuccessValues = SuccessValue[];
+  export interface ResponseInspectionStatusCode {
+    /**
+     * Status codes in the response that indicate a successful login attempt. To be counted as a successful login, the response status code must match one of these. Each code must be unique among the success and failure status codes.  JSON example: "SuccessCodes": [ 200, 201 ] 
+     */
+    SuccessCodes: ResponseInspectionStatusCodeSuccessCodes;
+    /**
+     * Status codes in the response that indicate a failed login attempt. To be counted as a failed login, the response status code must match one of these. Each code must be unique among the success and failure status codes.  JSON example: "FailureCodes": [ 400, 404 ] 
+     */
+    FailureCodes: ResponseInspectionStatusCodeFailureCodes;
+  }
+  export type ResponseInspectionStatusCodeFailureCodes = FailureCode[];
+  export type ResponseInspectionStatusCodeSuccessCodes = SuccessCode[];
   export type ResponseStatusCode = number;
   export interface Rule {
     /**
@@ -2597,7 +2706,7 @@ declare namespace WAFV2 {
      */
     RegexPatternSetReferenceStatement?: RegexPatternSetReferenceStatement;
     /**
-     * A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests.  WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF.  When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit. You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:   An IP match statement with an IP set that specified the address 192.0.2.44.   A string match statement that searches in the User-Agent header for the string BadBot.   In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet the criteria of both of the nested statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet the criteria of both of the nested statements are not counted towards the rate limit and are not affected by this rule. You cannot nest a RateBasedStatement inside another statement, for example inside a NotStatement or OrStatement. You can define a RateBasedStatement inside a web ACL and inside a rule group. 
+     * A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests.  WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF.  When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit. You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:   An IP match statement with an IP set that specifies the address 192.0.2.44.   A string match statement that searches in the User-Agent header for the string BadBot.   In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet the criteria of both of the nested statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet the criteria of both of the nested statements are not counted towards the rate limit and are not affected by this rule. You cannot nest a RateBasedStatement inside another statement, for example inside a NotStatement or OrStatement. You can define a RateBasedStatement inside a web ACL and inside a rule group. 
      */
     RateBasedStatement?: RateBasedStatement;
     /**
@@ -2626,6 +2735,9 @@ declare namespace WAFV2 {
     RegexMatchStatement?: RegexMatchStatement;
   }
   export type Statements = Statement[];
+  export type String = string;
+  export type SuccessCode = number;
+  export type SuccessValue = string;
   export interface Tag {
     /**
      * Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.
