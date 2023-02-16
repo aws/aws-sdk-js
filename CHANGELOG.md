@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1316.0-->
+<!--LATEST=2.1317.0-->
 <!--ENTRYINSERT-->
+
+## 2.1317.0
+* feature: EMR: This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs.
+* feature: Grafana: With this release Amazon Managed Grafana now supports inbound Network Access Control that helps you to restrict user access to your Grafana workspaces
 
 ## 2.1316.0
 * feature: CloudTrail: This release adds an InsufficientEncryptionPolicyException type to the StartImport endpoint

@@ -173,11 +173,11 @@ declare class EMR extends Service {
    */
   getBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
   /**
-   * Provides Temporary, basic HTTP credentials that are associated with a given runtime IAM role and used by a cluster with fine-grained access control activated. You can use these credentials to connect to cluster endpoints that support username-based and password-based authentication.
+   * Provides temporary, HTTP basic credentials that are associated with a given runtime IAM role and used by a cluster with fine-grained access control activated. You can use these credentials to connect to cluster endpoints that support username and password authentication.
    */
   getClusterSessionCredentials(params: EMR.Types.GetClusterSessionCredentialsInput, callback?: (err: AWSError, data: EMR.Types.GetClusterSessionCredentialsOutput) => void): Request<EMR.Types.GetClusterSessionCredentialsOutput, AWSError>;
   /**
-   * Provides Temporary, basic HTTP credentials that are associated with a given runtime IAM role and used by a cluster with fine-grained access control activated. You can use these credentials to connect to cluster endpoints that support username-based and password-based authentication.
+   * Provides temporary, HTTP basic credentials that are associated with a given runtime IAM role and used by a cluster with fine-grained access control activated. You can use these credentials to connect to cluster endpoints that support username and password authentication.
    */
   getClusterSessionCredentials(callback?: (err: AWSError, data: EMR.Types.GetClusterSessionCredentialsOutput) => void): Request<EMR.Types.GetClusterSessionCredentialsOutput, AWSError>;
   /**
@@ -1409,7 +1409,7 @@ declare namespace EMR {
   }
   export interface GetClusterSessionCredentialsOutput {
     /**
-     * The credentials that you can use to connect to cluster endpoints that support username-based and password-based authentication.
+     * The credentials that you can use to connect to cluster endpoints that support username and password authentication.
      */
     Credentials?: Credentials;
     /**
@@ -1582,6 +1582,10 @@ declare namespace EMR {
      * Describes the launch specification for an instance fleet. 
      */
     LaunchSpecifications?: InstanceFleetProvisioningSpecifications;
+    /**
+     * The resize specification for the instance fleet.
+     */
+    ResizeSpecifications?: InstanceFleetResizingSpecifications;
   }
   export interface InstanceFleetConfig {
     /**
@@ -1608,6 +1612,10 @@ declare namespace EMR {
      * The launch specification for the instance fleet.
      */
     LaunchSpecifications?: InstanceFleetProvisioningSpecifications;
+    /**
+     * The resize specification for the instance fleet.
+     */
+    ResizeSpecifications?: InstanceFleetResizingSpecifications;
   }
   export type InstanceFleetConfigList = InstanceFleetConfig[];
   export type InstanceFleetId = string;
@@ -1625,16 +1633,30 @@ declare namespace EMR {
      * The target capacity of Spot units for the instance fleet. For more information, see InstanceFleetConfig$TargetSpotCapacity.
      */
     TargetSpotCapacity?: WholeNumber;
+    /**
+     * The resize specification for the instance fleet.
+     */
+    ResizeSpecifications?: InstanceFleetResizingSpecifications;
   }
   export interface InstanceFleetProvisioningSpecifications {
     /**
-     * The launch specification for Spot Instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.
+     * The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.
      */
     SpotSpecification?: SpotProvisioningSpecification;
     /**
      *  The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy.   The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR version 5.12.1 and later. 
      */
     OnDemandSpecification?: OnDemandProvisioningSpecification;
+  }
+  export interface InstanceFleetResizingSpecifications {
+    /**
+     * The resize specification for Spot Instances in the instance fleet, which contains the resize timeout period. 
+     */
+    SpotResizeSpecification?: SpotResizingSpecification;
+    /**
+     * The resize specification for On-Demand Instances in the instance fleet, which contains the resize timeout period. 
+     */
+    OnDemandResizeSpecification?: OnDemandResizingSpecification;
   }
   export type InstanceFleetState = "PROVISIONING"|"BOOTSTRAPPING"|"RUNNING"|"RESIZING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|string;
   export interface InstanceFleetStateChangeReason {
@@ -2746,6 +2768,12 @@ declare namespace EMR {
      */
     CapacityReservationOptions?: OnDemandCapacityReservationOptions;
   }
+  export interface OnDemandResizingSpecification {
+    /**
+     * On-Demand resize timeout in minutes. If On-Demand Instances are not provisioned within this time, the resize workflow stops. The minimum value is 5 minutes, and the maximum value is 10,080 minutes (7 days). The timeout applies to all resize workflows on the Instance Fleet. The resize could be triggered by Amazon EMR Managed Scaling or by the customer (via Amazon EMR Console, Amazon EMR CLI modify-instance-fleet or Amazon EMR SDK ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2 Spot Reclamation.
+     */
+    TimeoutDurationMinutes: WholeNumber;
+  }
   export type OptionalArnType = string;
   export interface PlacementGroupConfig {
     /**
@@ -3206,7 +3234,7 @@ declare namespace EMR {
   export type SpotProvisioningAllocationStrategy = "capacity-optimized"|string;
   export interface SpotProvisioningSpecification {
     /**
-     * The spot provisioning timeout period in minutes. If Spot Instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
+     * The Spot provisioning timeout period in minutes. If Spot Instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
      */
     TimeoutDurationMinutes: WholeNumber;
     /**
@@ -3223,6 +3251,12 @@ declare namespace EMR {
     AllocationStrategy?: SpotProvisioningAllocationStrategy;
   }
   export type SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"|"TERMINATE_CLUSTER"|string;
+  export interface SpotResizingSpecification {
+    /**
+     * Spot resize timeout in minutes. If Spot Instances are not provisioned within this time, the resize workflow will stop provisioning of Spot instances. Minimum value is 5 minutes and maximum value is 10,080 minutes (7 days). The timeout applies to all resize workflows on the Instance Fleet. The resize could be triggered by Amazon EMR Managed Scaling or by the customer (via Amazon EMR Console, Amazon EMR CLI modify-instance-fleet or Amazon EMR SDK ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2 Spot Reclamation.
+     */
+    TimeoutDurationMinutes: WholeNumber;
+  }
   export interface StartNotebookExecutionInput {
     /**
      * The unique identifier of the EMR Notebook to use for notebook execution.

@@ -407,7 +407,7 @@ declare namespace WAFV2 {
      */
     RequestInspection?: RequestInspection;
     /**
-     * The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates.  The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time.   Response inspection is available only in web ACLs that protect Amazon CloudFront distributions. 
+     * The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates.  The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time.   Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.   For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions. 
      */
     ResponseInspection?: ResponseInspection;
   }
@@ -1919,7 +1919,7 @@ declare namespace WAFV2 {
      */
     AWSManagedRulesBotControlRuleSet?: AWSManagedRulesBotControlRuleSet;
     /**
-     * Additional configuration for using the account takeover prevention (ATP) managed rule group, AWSManagedRulesATPRuleSet. Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide the information about how your distribution responds to login requests. This configuration replaces the individual configuration fields in ManagedRuleGroupConfig and provides additional feature configuration.  For information about using the ATP managed rule group, see WAF Fraud Control account takeover prevention (ATP) rule group and WAF Fraud Control account takeover prevention (ATP) in the WAF Developer Guide.
+     * Additional configuration for using the account takeover prevention (ATP) managed rule group, AWSManagedRulesATPRuleSet. Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide the information about how your distribution responds to login requests.   For regional web ACLs in Region US East (N. Virginia) us-east-1, it's possible to configure response inspection through the APIs, but ATP response inspection will not be enabled. You can only use the response inspection capabilities of the ATP managed rule group in web ACLs that protect CloudFront distributions.  This configuration replaces the individual configuration fields in ManagedRuleGroupConfig and provides additional feature configuration.  For information about using the ATP managed rule group, see WAF Fraud Control account takeover prevention (ATP) rule group and WAF Fraud Control account takeover prevention (ATP) in the WAF Developer Guide.
      */
     AWSManagedRulesATPRuleSet?: AWSManagedRulesATPRuleSet;
   }

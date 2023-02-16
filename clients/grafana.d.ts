@@ -290,6 +290,10 @@ declare namespace Grafana {
      */
     configuration?: OverridableConfigurationJson;
     /**
+     * Configuration for network access to your workspace. When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required. If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.
+     */
+    networkAccessControl?: NetworkAccessConfiguration;
+    /**
      * The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.
      */
     organizationRoleName?: OrganizationRoleName;
@@ -513,6 +517,16 @@ declare namespace Grafana {
     workspaces: WorkspaceList;
   }
   export type LoginValidityDuration = number;
+  export interface NetworkAccessConfiguration {
+    /**
+     * An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace. You create a prefix list using the Amazon VPC console. Prefix list IDs have the format pl-1a2b3c4d . For more information about prefix lists, see Group CIDR blocks using managed prefix listsin the Amazon Virtual Private Cloud User Guide.
+     */
+    prefixListIds: PrefixListIds;
+    /**
+     * An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace. VPC endpoint IDs have the format vpce-1a2b3c4d . For more information about creating an interface VPC endpoint, see Interface VPC endpoints in the Amazon Managed Grafana User Guide.  The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored. 
+     */
+    vpceIds: VpceIds;
+  }
   export type NotificationDestinationType = "SNS"|string;
   export type NotificationDestinationsList = NotificationDestinationType[];
   export type OrganizationRoleName = string;
@@ -532,6 +546,8 @@ declare namespace Grafana {
   }
   export type PermissionEntryList = PermissionEntry[];
   export type PermissionType = "CUSTOMER_MANAGED"|"SERVICE_MANAGED"|string;
+  export type PrefixListId = string;
+  export type PrefixListIds = PrefixListId[];
   export type Role = "ADMIN"|"EDITOR"|"VIEWER"|string;
   export type RoleValue = string;
   export type RoleValueList = RoleValue[];
@@ -701,13 +717,21 @@ declare namespace Grafana {
      */
     accountAccessType?: AccountAccessType;
     /**
+     * The configuration settings for network access to your workspace. When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required. If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.
+     */
+    networkAccessControl?: NetworkAccessConfiguration;
+    /**
      * The name of an IAM role that already exists to use to access resources through Organizations.
      */
     organizationRoleName?: OrganizationRoleName;
     /**
-     * If you specify Service Managed, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. If you specify CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels 
+     * If you specify SERVICE_MANAGED, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. If you specify CUSTOMER_MANAGED, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels 
      */
     permissionType?: PermissionType;
+    /**
+     * Whether to remove the network access configuration from the workspace. Setting this to true and providing a networkAccessControl to set will return an error. If you remove this configuration by setting this to true, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.
+     */
+    removeNetworkAccessConfiguration?: Boolean;
     /**
      * Whether to remove the VPC configuration from the workspace. Setting this to true and providing a vpcConfiguration to set will return an error.
      */
@@ -769,14 +793,16 @@ declare namespace Grafana {
   export type UserType = "SSO_USER"|"SSO_GROUP"|string;
   export interface VpcConfiguration {
     /**
-     * The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+     * The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
      */
     securityGroupIds: SecurityGroupIds;
     /**
-     * The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+     * The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
      */
     subnetIds: SubnetIds;
   }
+  export type VpceId = string;
+  export type VpceIds = VpceId[];
   export interface WorkspaceDescription {
     /**
      * Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If this is ORGANIZATION, the workspaceOrganizationalUnits parameter specifies which organizational units the workspace can access.
@@ -835,6 +861,10 @@ declare namespace Grafana {
      */
     name?: WorkspaceName;
     /**
+     * The configuration settings for network access to your workspace.
+     */
+    networkAccessControl?: NetworkAccessConfiguration;
+    /**
      * The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, to allow Amazon Managed Grafana to use these channels.
      */
     notificationDestinations?: NotificationDestinationsList;
@@ -847,7 +877,7 @@ declare namespace Grafana {
      */
     organizationalUnits?: OrganizationalUnitList;
     /**
-     * If this is Service Managed, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. If this is CUSTOMER_MANAGED, you manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels 
+     * If this is SERVICE_MANAGED, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. If this is CUSTOMER_MANAGED, you manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose CUSTOMER_MANAGED. For more information, see Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels 
      */
     permissionType?: PermissionType;
     /**
