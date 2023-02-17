@@ -1309,7 +1309,7 @@ declare namespace AppRunner {
     UpdatedAt?: Timestamp;
   }
   export type OperationSummaryList = OperationSummary[];
-  export type OperationType = "START_DEPLOYMENT"|"CREATE_SERVICE"|"PAUSE_SERVICE"|"RESUME_SERVICE"|"DELETE_SERVICE"|string;
+  export type OperationType = "START_DEPLOYMENT"|"CREATE_SERVICE"|"PAUSE_SERVICE"|"RESUME_SERVICE"|"DELETE_SERVICE"|"UPDATE_SERVICE"|string;
   export interface PauseServiceRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner service that you want to pause.

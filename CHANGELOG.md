@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1317.0-->
+<!--LATEST=2.1318.0-->
 <!--ENTRYINSERT-->
+
+## 2.1318.0
+* feature: AppRunner: This release supports removing MaxSize limit for AutoScalingConfiguration.
+* feature: Glue: Release of Delta Lake Data Lake Format for Glue Studio Service
 
 ## 2.1317.0
 * feature: EMR: This release provides customers the ability to define a timeout period for procuring capacity during a resize operation for Instance Fleet clusters. Customers can specify this timeout using the ResizeSpecifications parameter supported by RunJobFlow, ModifyInstanceFleet and AddInstanceFleet APIs.

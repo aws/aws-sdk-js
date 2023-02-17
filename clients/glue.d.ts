@@ -996,27 +996,27 @@ declare class Glue extends Service {
    */
   getTriggers(callback?: (err: AWSError, data: Glue.Types.GetTriggersResponse) => void): Request<Glue.Types.GetTriggersResponse, AWSError>;
   /**
-   * 
+   * Retrieves partition metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetPartition.
    */
   getUnfilteredPartitionMetadata(params: Glue.Types.GetUnfilteredPartitionMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionMetadataResponse, AWSError>;
   /**
-   * 
+   * Retrieves partition metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetPartition.
    */
   getUnfilteredPartitionMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionMetadataResponse, AWSError>;
   /**
-   * 
+   * Retrieves partition metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetPartitions.
    */
   getUnfilteredPartitionsMetadata(params: Glue.Types.GetUnfilteredPartitionsMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
   /**
-   * 
+   * Retrieves partition metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetPartitions.
    */
   getUnfilteredPartitionsMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredPartitionsMetadataResponse) => void): Request<Glue.Types.GetUnfilteredPartitionsMetadataResponse, AWSError>;
   /**
-   * 
+   * Retrieves table metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetTable.
    */
   getUnfilteredTableMetadata(params: Glue.Types.GetUnfilteredTableMetadataRequest, callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
   /**
-   * 
+   * Retrieves table metadata from the Data Catalog that contains unfiltered metadata. For IAM authorization, the public IAM action associated with this API is glue:GetTable.
    */
   getUnfilteredTableMetadata(callback?: (err: AWSError, data: Glue.Types.GetUnfilteredTableMetadataResponse) => void): Request<Glue.Types.GetUnfilteredTableMetadataResponse, AWSError>;
   /**
@@ -2362,6 +2362,28 @@ declare namespace Glue {
   }
   export interface CancelStatementResponse {
   }
+  export interface CatalogDeltaSource {
+    /**
+     * The name of the Delta Lake data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalDeltaOptions?: AdditionalOptions;
+    /**
+     * Specifies the data schema for the Delta Lake source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
   export type CatalogEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CatalogEntries = CatalogEntry[];
   export interface CatalogEntry {
@@ -2784,7 +2806,7 @@ declare namespace Glue {
      */
     EvaluateDataQuality?: EvaluateDataQuality;
     /**
-     * Specifies a Hudi data source that is registered in the Glue Data Catalog. The Hudi data source must be stored in Amazon S3.
+     * Specifies a Hudi data source that is registered in the Glue Data Catalog. The data source must be stored in Amazon S3.
      */
     S3CatalogHudiSource?: S3CatalogHudiSource;
     /**
@@ -2804,6 +2826,26 @@ declare namespace Glue {
      */
     S3HudiDirectTarget?: S3HudiDirectTarget;
     DirectJDBCSource?: DirectJDBCSource;
+    /**
+     * Specifies a Delta Lake data source that is registered in the Glue Data Catalog. The data source must be stored in Amazon S3.
+     */
+    S3CatalogDeltaSource?: S3CatalogDeltaSource;
+    /**
+     * Specifies a Delta Lake data source that is registered in the Glue Data Catalog.
+     */
+    CatalogDeltaSource?: CatalogDeltaSource;
+    /**
+     * Specifies a Delta Lake data source stored in Amazon S3.
+     */
+    S3DeltaSource?: S3DeltaSource;
+    /**
+     * Specifies a target that writes to a Delta Lake data source in the Glue Data Catalog.
+     */
+    S3DeltaCatalogTarget?: S3DeltaCatalogTarget;
+    /**
+     * Specifies a target that writes to a Delta Lake data source in Amazon S3.
+     */
+    S3DeltaDirectTarget?: S3DeltaDirectTarget;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -2898,7 +2940,13 @@ declare namespace Glue {
   export type ColumnList = Column[];
   export type ColumnNameString = string;
   export interface ColumnRowFilter {
+    /**
+     * A string containing the name of the column.
+     */
     ColumnName?: NameString;
+    /**
+     * A string containing the row-level filter expression.
+     */
     RowFilterExpression?: PredicateString;
   }
   export type ColumnRowFilterList = ColumnRowFilter[];
@@ -3034,7 +3082,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    SECRET_ID - The secret ID used for the secret manager of credentials.    CONNECTOR_URL - The connector URL for a MARKETPLACE or CUSTOM connection.    CONNECTOR_TYPE - The connector type for a MARKETPLACE or CUSTOM connection.    CONNECTOR_CLASS_NAME - The connector class name for a MARKETPLACE or CUSTOM connection.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.    KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".    KAFKA_CUSTOM_CERT - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.    KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA cert file or not. Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".    KAFKA_CLIENT_KEYSTORE - The Amazon S3 location of the client keystore file for Kafka client side authentication (Optional).    KAFKA_CLIENT_KEYSTORE_PASSWORD - The password to access the provided keystore (Optional).    KAFKA_CLIENT_KEY_PASSWORD - A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key (Optional).    ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version of the Kafka client keystore password (if the user has the Glue encrypt passwords setting selected).    ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The encrypted version of the Kafka client key password (if the user has the Glue encrypt passwords setting selected).    KAFKA_SASL_MECHANISM - "SCRAM-SHA-512" or "GSSAPI". These are the two supported SASL Mechanisms.    KAFKA_SASL_SCRAM_USERNAME - A plaintext username used to authenticate with the "SCRAM-SHA-512" mechanism.    KAFKA_SASL_SCRAM_PASSWORD - A plaintext password used to authenticate with the "SCRAM-SHA-512" mechanism.    ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD - The encrypted version of the Kafka SASL SCRAM password (if the user has the Glue encrypt passwords setting selected).    KAFKA_SASL_GSSAPI_KEYTAB - The S3 location of a Kerberos keytab file. A keytab stores long-term keys for one or more principals. For more information, see MIT Kerberos Documentation: Keytab.    KAFKA_SASL_GSSAPI_KRB5_CONF - The S3 location of a Kerberos krb5.conf file. A krb5.conf stores Kerberos configuration information, such as the location of the KDC server. For more information, see MIT Kerberos Documentation: krb5.conf.    KAFKA_SASL_GSSAPI_SERVICE - The Kerberos service name, as set with sasl.kerberos.service.name in your Kafka Configuration.    KAFKA_SASL_GSSAPI_PRINCIPAL - The name of the Kerberos princial used by Glue. For more information, see Kafka Documentation: Configuring Kafka Brokers.  
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    SECRET_ID - The secret ID used for the secret manager of credentials.    CONNECTOR_URL - The connector URL for a MARKETPLACE or CUSTOM connection.    CONNECTOR_TYPE - The connector type for a MARKETPLACE or CUSTOM connection.    CONNECTOR_CLASS_NAME - The connector class name for a MARKETPLACE or CUSTOM connection.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.    KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".    KAFKA_CUSTOM_CERT - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.    KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA cert file or not. Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".    KAFKA_CLIENT_KEYSTORE - The Amazon S3 location of the client keystore file for Kafka client side authentication (Optional).    KAFKA_CLIENT_KEYSTORE_PASSWORD - The password to access the provided keystore (Optional).    KAFKA_CLIENT_KEY_PASSWORD - A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key (Optional).    ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version of the Kafka client keystore password (if the user has the Glue encrypt passwords setting selected).    ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The encrypted version of the Kafka client key password (if the user has the Glue encrypt passwords setting selected).    KAFKA_SASL_MECHANISM - "SCRAM-SHA-512", "GSSAPI", or "AWS_MSK_IAM". These are the supported SASL Mechanisms.    KAFKA_SASL_SCRAM_USERNAME - A plaintext username used to authenticate with the "SCRAM-SHA-512" mechanism.    KAFKA_SASL_SCRAM_PASSWORD - A plaintext password used to authenticate with the "SCRAM-SHA-512" mechanism.    ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD - The encrypted version of the Kafka SASL SCRAM password (if the user has the Glue encrypt passwords setting selected).    KAFKA_SASL_GSSAPI_KEYTAB - The S3 location of a Kerberos keytab file. A keytab stores long-term keys for one or more principals. For more information, see MIT Kerberos Documentation: Keytab.    KAFKA_SASL_GSSAPI_KRB5_CONF - The S3 location of a Kerberos krb5.conf file. A krb5.conf stores Kerberos configuration information, such as the location of the KDC server. For more information, see MIT Kerberos Documentation: krb5.conf.    KAFKA_SASL_GSSAPI_SERVICE - The Kerberos service name, as set with sasl.kerberos.service.name in your Kafka Configuration.    KAFKA_SASL_GSSAPI_PRINCIPAL - The name of the Kerberos princial used by Glue. For more information, see Kafka Documentation: Configuring Kafka Brokers.  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
@@ -3056,7 +3104,7 @@ declare namespace Glue {
   }
   export interface ConnectionInput {
     /**
-     * The name of the connection.
+     * The name of the connection. Connection will not function as expected without a name.
      */
     Name: NameString;
     /**
@@ -3064,7 +3112,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.    NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).    MARKETPLACE - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.    CUSTOM - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.   SFTP is not supported.
+     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).  JDBC Connections use the following ConnectionParameters.   Required: All of (HOST, PORT, JDBC_ENGINE) or JDBC_CONNECTION_URL.   Required: All of (USERNAME, PASSWORD) or SECRET_ID.   Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT, CUSTOM_JDBC_CERT_STRING, SKIP_CUSTOM_JDBC_CERT_VALIDATION. These parameters are used to configure SSL with JDBC.      KAFKA - Designates a connection to an Apache Kafka streaming platform.  KAFKA Connections use the following ConnectionParameters.   Required: KAFKA_BOOTSTRAP_SERVERS.   Optional: KAFKA_SSL_ENABLED, KAFKA_CUSTOM_CERT, KAFKA_SKIP_CUSTOM_CERT_VALIDATION. These parameters are used to configure SSL with KAFKA.   Optional: KAFKA_CLIENT_KEYSTORE, KAFKA_CLIENT_KEYSTORE_PASSWORD, KAFKA_CLIENT_KEY_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD. These parameters are used to configure TLS client configuration with SSL in KAFKA.   Optional: KAFKA_SASL_MECHANISM. Can be specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM.   Optional: KAFKA_SASL_SCRAM_USERNAME, KAFKA_SASL_SCRAM_PASSWORD, ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD. These parameters are used to configure SASL/SCRAM-SHA-512 authentication with KAFKA.   Optional: KAFKA_SASL_GSSAPI_KEYTAB, KAFKA_SASL_GSSAPI_KRB5_CONF, KAFKA_SASL_GSSAPI_SERVICE, KAFKA_SASL_GSSAPI_PRINCIPAL. These parameters are used to configure SASL/GSSAPI authentication with KAFKA.      MONGODB - Designates a connection to a MongoDB document database.  MONGODB Connections use the following ConnectionParameters.   Required: CONNECTION_URL.   Required: All of (USERNAME, PASSWORD) or SECRET_ID.      NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).  NETWORK Connections do not require ConnectionParameters. Instead, provide a PhysicalConnectionRequirements.    MARKETPLACE - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.  MARKETPLACE Connections use the following ConnectionParameters.   Required: CONNECTOR_TYPE, CONNECTOR_URL, CONNECTOR_CLASS_NAME, CONNECTION_URL.   Required for JDBC CONNECTOR_TYPE connections: All of (USERNAME, PASSWORD) or SECRET_ID.      CUSTOM - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.    SFTP is not supported. For more information about how optional ConnectionProperties are used to configure features in Glue, consult Glue connection properties. For more information about how optional ConnectionProperties are used to configure features in Glue Studio, consult Using connectors and connections.
      */
     ConnectionType: ConnectionType;
     /**
@@ -4734,7 +4782,7 @@ declare namespace Glue {
      */
     CreateTime?: Timestamp;
     /**
-     * Creates a set of default permissions on the table for principals. 
+     * Creates a set of default permissions on the table for principals. Used by Lake Formation. Not used in the normal course of Glue operations.
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
     /**
@@ -4774,7 +4822,7 @@ declare namespace Glue {
      */
     Parameters?: ParametersMap;
     /**
-     * Creates a set of default permissions on the table for principals. 
+     * Creates a set of default permissions on the table for principals. Used by Lake Formation. Not used in the normal course of Glue operations.
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
     /**
@@ -5220,6 +5268,7 @@ declare namespace Glue {
      */
     CreateNativeDeltaTable?: NullableBoolean;
   }
+  export type DeltaTargetCompressionType = "uncompressed"|"snappy"|string;
   export type DeltaTargetList = DeltaTarget[];
   export type DescriptionString = string;
   export type DescriptionStringRemovable = string;
@@ -7358,44 +7407,131 @@ declare namespace Glue {
     NextToken?: GenericString;
   }
   export interface GetUnfilteredPartitionMetadataRequest {
+    /**
+     * The catalog ID where the partition resides.
+     */
     CatalogId: CatalogIdString;
+    /**
+     * (Required) Specifies the name of a database that contains the partition.
+     */
     DatabaseName: NameString;
+    /**
+     * (Required) Specifies the name of a table that contains the partition.
+     */
     TableName: NameString;
+    /**
+     * (Required) A list of partition key values.
+     */
     PartitionValues: ValueStringList;
+    /**
+     * A structure containing Lake Formation audit context information.
+     */
     AuditContext?: AuditContext;
+    /**
+     * (Required) A list of supported permission types. 
+     */
     SupportedPermissionTypes: PermissionTypeList;
   }
   export interface GetUnfilteredPartitionMetadataResponse {
+    /**
+     * A Partition object containing the partition metadata.
+     */
     Partition?: Partition;
+    /**
+     * A list of column names that the user has been granted access to.
+     */
     AuthorizedColumns?: NameStringList;
+    /**
+     * A Boolean value that indicates whether the partition location is registered with Lake Formation.
+     */
     IsRegisteredWithLakeFormation?: Boolean;
   }
   export interface GetUnfilteredPartitionsMetadataRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is provided, the AWS account ID is used by default. 
+     */
     CatalogId: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
     DatabaseName: NameString;
+    /**
+     * The name of the table that contains the partition.
+     */
     TableName: NameString;
+    /**
+     * An expression that filters the partitions to be returned. The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser JSQLParser parses the expression.   Operators: The following are the operators that you can use in the Expression API call:  =  Checks whether the values of the two operands are equal; if yes, then the condition becomes true. Example: Assume 'variable a' holds 10 and 'variable b' holds 20.  (a = b) is not true.  &lt; &gt;  Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true. Example: (a &lt; &gt; b) is true.  &gt;  Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true. Example: (a &gt; b) is not true.  &lt;  Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true. Example: (a &lt; b) is true.  &gt;=  Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &gt;= b) is not true.  &lt;=  Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &lt;= b) is true.  AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  Logical operators.    Supported Partition Key Types: The following are the supported partition keys.    string     date     timestamp     int     bigint     long     tinyint     smallint     decimal    If an type is encountered that is not valid, an exception is thrown. 
+     */
     Expression?: PredicateString;
+    /**
+     * A structure containing Lake Formation audit context information.
+     */
     AuditContext?: AuditContext;
+    /**
+     * A list of supported permission types. 
+     */
     SupportedPermissionTypes: PermissionTypeList;
+    /**
+     * A continuation token, if this is not the first call to retrieve these partitions.
+     */
     NextToken?: Token;
+    /**
+     * The segment of the table's partitions to scan in this request.
+     */
     Segment?: Segment;
+    /**
+     * The maximum number of partitions to return in a single response.
+     */
     MaxResults?: PageSize;
   }
   export interface GetUnfilteredPartitionsMetadataResponse {
+    /**
+     * A list of requested partitions.
+     */
     UnfilteredPartitions?: UnfilteredPartitionList;
+    /**
+     * A continuation token, if the returned list of partitions does not include the last one.
+     */
     NextToken?: Token;
   }
   export interface GetUnfilteredTableMetadataRequest {
+    /**
+     * The catalog ID where the table resides.
+     */
     CatalogId: CatalogIdString;
+    /**
+     * (Required) Specifies the name of a database that contains the table.
+     */
     DatabaseName: NameString;
+    /**
+     * (Required) Specifies the name of a table for which you are requesting metadata.
+     */
     Name: NameString;
+    /**
+     * A structure containing Lake Formation audit context information.
+     */
     AuditContext?: AuditContext;
+    /**
+     * (Required) A list of supported permission types. 
+     */
     SupportedPermissionTypes: PermissionTypeList;
   }
   export interface GetUnfilteredTableMetadataResponse {
+    /**
+     * A Table object containing the table metadata.
+     */
     Table?: Table;
+    /**
+     * A list of column names that the user has been granted access to.
+     */
     AuthorizedColumns?: NameStringList;
+    /**
+     * A Boolean value that indicates whether the partition location is registered with Lake Formation.
+     */
     IsRegisteredWithLakeFormation?: Boolean;
+    /**
+     * A list of column row filters.
+     */
     CellFilters?: ColumnRowFilterList;
   }
   export interface GetUserDefinedFunctionRequest {
@@ -10061,6 +10197,28 @@ declare namespace Glue {
      */
     Id?: IntegerValue;
   }
+  export interface S3CatalogDeltaSource {
+    /**
+     * The name of the Delta Lake data source.
+     */
+    Name: NodeName;
+    /**
+     * The name of the database to read from.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * The name of the table in the database to read from.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalDeltaOptions?: AdditionalOptions;
+    /**
+     * Specifies the data schema for the Delta Lake source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
   export interface S3CatalogHudiSource {
     /**
      * The name of the Hudi data source.
@@ -10206,6 +10364,92 @@ declare namespace Glue {
     OptimizePerformance?: BooleanValue;
     /**
      * Specifies the data schema for the S3 CSV source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface S3DeltaCatalogTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * The name of the table in the database to write to.
+     */
+    Table: EnclosedInStringProperty;
+    /**
+     * The name of the database to write to.
+     */
+    Database: EnclosedInStringProperty;
+    /**
+     * Specifies additional connection options for the connector.
+     */
+    AdditionalOptions?: AdditionalOptions;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
+    SchemaChangePolicy?: CatalogSchemaChangePolicy;
+  }
+  export interface S3DeltaDirectTarget {
+    /**
+     * The name of the data target.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs: OneInput;
+    /**
+     * Specifies native partitioning using a sequence of keys.
+     */
+    PartitionKeys?: GlueStudioPathList;
+    /**
+     * The Amazon S3 path of your Delta Lake data source to write to.
+     */
+    Path: EnclosedInStringProperty;
+    /**
+     * Specifies how the data is compressed. This is generally not necessary if the data has a standard file extension. Possible values are "gzip" and "bzip").
+     */
+    Compression: DeltaTargetCompressionType;
+    /**
+     * Specifies the data output format for the target.
+     */
+    Format: TargetFormat;
+    /**
+     * Specifies additional connection options for the connector.
+     */
+    AdditionalOptions?: AdditionalOptions;
+    /**
+     * A policy that specifies update behavior for the crawler.
+     */
+    SchemaChangePolicy?: DirectSchemaChangePolicy;
+  }
+  export interface S3DeltaSource {
+    /**
+     * The name of the Delta Lake source.
+     */
+    Name: NodeName;
+    /**
+     * A list of the Amazon S3 paths to read from.
+     */
+    Paths: EnclosedInStringProperties;
+    /**
+     * Specifies additional connection options.
+     */
+    AdditionalDeltaOptions?: AdditionalOptions;
+    /**
+     * Specifies additional options for the connector.
+     */
+    AdditionalOptions?: S3DirectSourceAdditionalOptions;
+    /**
+     * Specifies the data schema for the Delta Lake source.
      */
     OutputSchemas?: GlueSchemas;
   }
@@ -11543,15 +11787,15 @@ declare namespace Glue {
      */
     PartitionKeys?: ColumnList;
     /**
-     * If the table is a view, the original text of the view; otherwise null.
+     * Included for Apache Hive compatibility. Not used in the normal course of Glue operations. If the table is a VIRTUAL_VIEW, certain Athena configuration encoded in base64.
      */
     ViewOriginalText?: ViewTextString;
     /**
-     * If the table is a view, the expanded text of the view; otherwise null.
+     * Included for Apache Hive compatibility. Not used in the normal course of Glue operations.
      */
     ViewExpandedText?: ViewTextString;
     /**
-     * The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+     * The type of this table. Glue will create tables with the EXTERNAL_TABLE type. Other services, such as Athena, may create tables with additional table types.  Glue related table types:  EXTERNAL_TABLE  Hive compatible attribute - indicates a non-Hive managed table.  GOVERNED  Used by Lake Formation. The Glue Data Catalog understands GOVERNED.  
      */
     TableType?: TableTypeString;
     /**
@@ -11614,7 +11858,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The table owner.
+     * The table owner. Included for Apache Hive compatibility. Not used in the normal course of Glue operations.
      */
     Owner?: NameString;
     /**
@@ -11638,15 +11882,15 @@ declare namespace Glue {
      */
     PartitionKeys?: ColumnList;
     /**
-     * If the table is a view, the original text of the view; otherwise null.
+     * Included for Apache Hive compatibility. Not used in the normal course of Glue operations. If the table is a VIRTUAL_VIEW, certain Athena configuration encoded in base64.
      */
     ViewOriginalText?: ViewTextString;
     /**
-     * If the table is a view, the expanded text of the view; otherwise null.
+     * Included for Apache Hive compatibility. Not used in the normal course of Glue operations.
      */
     ViewExpandedText?: ViewTextString;
     /**
-     * The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+     * The type of this table. Glue will create tables with the EXTERNAL_TABLE type. Other services, such as Athena, may create tables with additional table types.  Glue related table types:  EXTERNAL_TABLE  Hive compatible attribute - indicates a non-Hive managed table.  GOVERNED  Used by Lake Formation. The Glue Data Catalog understands GOVERNED.  
      */
     TableType?: TableTypeString;
     /**
@@ -11703,7 +11947,7 @@ declare namespace Glue {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
-  export type TargetFormat = "json"|"csv"|"avro"|"orc"|"parquet"|"hudi"|string;
+  export type TargetFormat = "json"|"csv"|"avro"|"orc"|"parquet"|"hudi"|"delta"|string;
   export interface TaskRun {
     /**
      * The unique identifier for the transform.
@@ -11994,8 +12238,17 @@ declare namespace Glue {
   export type TypeString = string;
   export type URI = string;
   export interface UnfilteredPartition {
+    /**
+     * The partition object.
+     */
     Partition?: Partition;
+    /**
+     * The list of columns the user has permissions to access.
+     */
     AuthorizedColumns?: NameStringList;
+    /**
+     * A Boolean value indicating that the partition location is registered with Lake Formation.
+     */
     IsRegisteredWithLakeFormation?: Boolean;
   }
   export type UnfilteredPartitionList = UnfilteredPartition[];
