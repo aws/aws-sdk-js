@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1318.0-->
+<!--LATEST=2.1319.0-->
 <!--ENTRYINSERT-->
+
+## 2.1319.0
+* feature: AuditManager: This release introduces a ServiceQuotaExceededException to the UpdateAssessmentFrameworkShare API operation.
+* feature: Connect: Reasons for failed diff has been approved by SDK Reviewer
 
 ## 2.1318.0
 * feature: AppRunner: This release supports removing MaxSize limit for AutoScalingConfiguration.

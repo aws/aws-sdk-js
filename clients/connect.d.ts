@@ -468,11 +468,11 @@ declare class Connect extends Service {
    */
   describeTrafficDistributionGroup(callback?: (err: AWSError, data: Connect.Types.DescribeTrafficDistributionGroupResponse) => void): Request<Connect.Types.DescribeTrafficDistributionGroupResponse, AWSError>;
   /**
-   * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
+   * Describes the specified user account. You can find the instance ID in the Amazon Connect console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
   describeUser(params: Connect.Types.DescribeUserRequest, callback?: (err: AWSError, data: Connect.Types.DescribeUserResponse) => void): Request<Connect.Types.DescribeUserResponse, AWSError>;
   /**
-   * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
+   * Describes the specified user account. You can find the instance ID in the Amazon Connect console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
   describeUser(callback?: (err: AWSError, data: Connect.Types.DescribeUserResponse) => void): Request<Connect.Types.DescribeUserResponse, AWSError>;
   /**
@@ -1510,7 +1510,7 @@ declare namespace Connect {
   }
   export interface AssociateApprovedOriginRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1520,7 +1520,7 @@ declare namespace Connect {
   }
   export interface AssociateBotRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     LexBot?: LexBot;
@@ -1531,7 +1531,7 @@ declare namespace Connect {
   }
   export interface AssociateDefaultVocabularyRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1547,7 +1547,7 @@ declare namespace Connect {
   }
   export interface AssociateInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1567,7 +1567,7 @@ declare namespace Connect {
   }
   export interface AssociateLambdaFunctionRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1577,7 +1577,7 @@ declare namespace Connect {
   }
   export interface AssociateLexBotRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1591,7 +1591,7 @@ declare namespace Connect {
      */
     PhoneNumberId: PhoneNumberId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1601,7 +1601,7 @@ declare namespace Connect {
   }
   export interface AssociateQueueQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1615,7 +1615,7 @@ declare namespace Connect {
   }
   export interface AssociateRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1629,7 +1629,7 @@ declare namespace Connect {
   }
   export interface AssociateSecurityKeyRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2013,7 +2013,7 @@ declare namespace Connect {
   }
   export interface CreateAgentStatusRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2049,7 +2049,7 @@ declare namespace Connect {
   }
   export interface CreateContactFlowModuleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2121,7 +2121,7 @@ declare namespace Connect {
   }
   export interface CreateHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2193,7 +2193,7 @@ declare namespace Connect {
   }
   export interface CreateIntegrationAssociationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2233,7 +2233,7 @@ declare namespace Connect {
   }
   export interface CreateQueueRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2277,7 +2277,7 @@ declare namespace Connect {
   }
   export interface CreateQuickConnectRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2309,7 +2309,7 @@ declare namespace Connect {
   }
   export interface CreateRoutingProfileRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2349,7 +2349,7 @@ declare namespace Connect {
   }
   export interface CreateRuleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2402,7 +2402,7 @@ declare namespace Connect {
      */
     Permissions?: PermissionsList;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2430,7 +2430,7 @@ declare namespace Connect {
   }
   export interface CreateTaskTemplateRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2510,7 +2510,7 @@ declare namespace Connect {
   }
   export interface CreateUseCaseRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2546,7 +2546,7 @@ declare namespace Connect {
      */
     ParentGroupId?: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2598,7 +2598,7 @@ declare namespace Connect {
      */
     HierarchyGroupId?: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2622,7 +2622,7 @@ declare namespace Connect {
      */
     ClientToken?: ClientToken;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2728,7 +2728,7 @@ declare namespace Connect {
   }
   export interface DefaultVocabulary {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2748,7 +2748,7 @@ declare namespace Connect {
   export type Delay = number;
   export interface DeleteContactFlowModuleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2760,7 +2760,7 @@ declare namespace Connect {
   }
   export interface DeleteContactFlowRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2772,7 +2772,7 @@ declare namespace Connect {
   }
   export interface DeleteHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2782,13 +2782,13 @@ declare namespace Connect {
   }
   export interface DeleteInstanceRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
   export interface DeleteIntegrationAssociationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2798,7 +2798,7 @@ declare namespace Connect {
   }
   export interface DeleteQuickConnectRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2808,7 +2808,7 @@ declare namespace Connect {
   }
   export interface DeleteRuleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2818,7 +2818,7 @@ declare namespace Connect {
   }
   export interface DeleteSecurityProfileRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2828,7 +2828,7 @@ declare namespace Connect {
   }
   export interface DeleteTaskTemplateRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2848,7 +2848,7 @@ declare namespace Connect {
   }
   export interface DeleteUseCaseRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2866,13 +2866,13 @@ declare namespace Connect {
      */
     HierarchyGroupId: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
   export interface DeleteUserRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2882,7 +2882,7 @@ declare namespace Connect {
   }
   export interface DeleteVocabularyRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2906,7 +2906,7 @@ declare namespace Connect {
   }
   export interface DescribeAgentStatusRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2922,7 +2922,7 @@ declare namespace Connect {
   }
   export interface DescribeContactFlowModuleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2954,7 +2954,7 @@ declare namespace Connect {
   }
   export interface DescribeContactRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2970,7 +2970,7 @@ declare namespace Connect {
   }
   export interface DescribeHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2986,7 +2986,7 @@ declare namespace Connect {
   }
   export interface DescribeInstanceAttributeRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3002,7 +3002,7 @@ declare namespace Connect {
   }
   export interface DescribeInstanceRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3014,7 +3014,7 @@ declare namespace Connect {
   }
   export interface DescribeInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3046,7 +3046,7 @@ declare namespace Connect {
   }
   export interface DescribeQueueRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3062,7 +3062,7 @@ declare namespace Connect {
   }
   export interface DescribeQuickConnectRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3078,7 +3078,7 @@ declare namespace Connect {
   }
   export interface DescribeRoutingProfileRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3094,7 +3094,7 @@ declare namespace Connect {
   }
   export interface DescribeRuleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3114,7 +3114,7 @@ declare namespace Connect {
      */
     SecurityProfileId: SecurityProfileId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3142,7 +3142,7 @@ declare namespace Connect {
      */
     HierarchyGroupId: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3154,7 +3154,7 @@ declare namespace Connect {
   }
   export interface DescribeUserHierarchyStructureRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3170,7 +3170,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3182,7 +3182,7 @@ declare namespace Connect {
   }
   export interface DescribeVocabularyRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3215,7 +3215,7 @@ declare namespace Connect {
   export type DirectoryUserId = string;
   export interface DisassociateApprovedOriginRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3225,7 +3225,7 @@ declare namespace Connect {
   }
   export interface DisassociateBotRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     LexBot?: LexBot;
@@ -3236,7 +3236,7 @@ declare namespace Connect {
   }
   export interface DisassociateInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3250,7 +3250,7 @@ declare namespace Connect {
   }
   export interface DisassociateLambdaFunctionRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance..
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance..
      */
     InstanceId: InstanceId;
     /**
@@ -3260,7 +3260,7 @@ declare namespace Connect {
   }
   export interface DisassociateLexBotRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3278,13 +3278,13 @@ declare namespace Connect {
      */
     PhoneNumberId: PhoneNumberId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
   export interface DisassociateQueueQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3298,7 +3298,7 @@ declare namespace Connect {
   }
   export interface DisassociateRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3312,7 +3312,7 @@ declare namespace Connect {
   }
   export interface DisassociateSecurityKeyRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3365,7 +3365,7 @@ declare namespace Connect {
      */
     EncryptionType: EncryptionType;
     /**
-     * The full ARN of the encryption key.   Be sure to provide the full ARN of the encryption key, not just the ID. 
+     * The full ARN of the encryption key.   Be sure to provide the full ARN of the encryption key, not just the ID. Amazon Connect supports only KMS keys with the default key spec of  SYMMETRIC_DEFAULT .  
      */
     KeyId: KeyId;
   }
@@ -3412,7 +3412,7 @@ declare namespace Connect {
   }
   export interface GetCurrentMetricDataRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3460,7 +3460,7 @@ declare namespace Connect {
   }
   export interface GetCurrentUserDataRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3492,7 +3492,7 @@ declare namespace Connect {
   }
   export interface GetFederationTokenRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3516,7 +3516,7 @@ declare namespace Connect {
   }
   export interface GetMetricDataRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3560,7 +3560,7 @@ declare namespace Connect {
   }
   export interface GetTaskTemplateRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3574,7 +3574,7 @@ declare namespace Connect {
   }
   export interface GetTaskTemplateResponse {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -3943,7 +3943,7 @@ declare namespace Connect {
   export type InboundCallsEnabled = boolean;
   export interface Instance {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     Id?: InstanceId;
     /**
@@ -4022,7 +4022,7 @@ declare namespace Connect {
     KinesisFirehoseConfig?: KinesisFirehoseConfig;
   }
   export type InstanceStorageConfigs = InstanceStorageConfig[];
-  export type InstanceStorageResourceType = "CHAT_TRANSCRIPTS"|"CALL_RECORDINGS"|"SCHEDULED_REPORTS"|"MEDIA_STREAMS"|"CONTACT_TRACE_RECORDS"|"AGENT_EVENTS"|"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"|string;
+  export type InstanceStorageResourceType = "CHAT_TRANSCRIPTS"|"CALL_RECORDINGS"|"SCHEDULED_REPORTS"|"MEDIA_STREAMS"|"CONTACT_TRACE_RECORDS"|"AGENT_EVENTS"|"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"|"ATTACHMENTS"|"CONTACT_EVALUATIONS"|string;
   export interface InstanceSummary {
     /**
      * The identifier of the instance.
@@ -4074,7 +4074,7 @@ declare namespace Connect {
      */
     IntegrationAssociationArn?: ARN;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -4139,11 +4139,11 @@ declare namespace Connect {
     /**
      * The name of the Amazon Lex bot.
      */
-    Name?: BotName;
+    Name: BotName;
     /**
      * The Amazon Web Services Region where the Amazon Lex bot was created.
      */
-    LexRegion?: LexRegion;
+    LexRegion: LexRegion;
   }
   export interface LexBotConfig {
     LexBot?: LexBot;
@@ -4164,7 +4164,7 @@ declare namespace Connect {
   export type LexVersion = "V1"|"V2"|string;
   export interface ListAgentStatusRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4192,7 +4192,7 @@ declare namespace Connect {
   }
   export interface ListApprovedOriginsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4216,7 +4216,7 @@ declare namespace Connect {
   }
   export interface ListBotsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4244,7 +4244,7 @@ declare namespace Connect {
   }
   export interface ListContactFlowModulesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4272,7 +4272,7 @@ declare namespace Connect {
   }
   export interface ListContactFlowsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4300,7 +4300,7 @@ declare namespace Connect {
   }
   export interface ListContactReferencesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4328,7 +4328,7 @@ declare namespace Connect {
   }
   export interface ListDefaultVocabulariesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4356,7 +4356,7 @@ declare namespace Connect {
   }
   export interface ListHoursOfOperationsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4380,7 +4380,7 @@ declare namespace Connect {
   }
   export interface ListInstanceAttributesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4404,7 +4404,7 @@ declare namespace Connect {
   }
   export interface ListInstanceStorageConfigsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4452,7 +4452,7 @@ declare namespace Connect {
   }
   export interface ListIntegrationAssociationsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4480,7 +4480,7 @@ declare namespace Connect {
   }
   export interface ListLambdaFunctionsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4504,7 +4504,7 @@ declare namespace Connect {
   }
   export interface ListLexBotsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4528,7 +4528,7 @@ declare namespace Connect {
   }
   export interface ListPhoneNumbersRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4647,7 +4647,7 @@ declare namespace Connect {
   }
   export interface ListQueueQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4675,7 +4675,7 @@ declare namespace Connect {
   }
   export interface ListQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4703,7 +4703,7 @@ declare namespace Connect {
   }
   export interface ListQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4731,7 +4731,7 @@ declare namespace Connect {
   }
   export interface ListRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4759,7 +4759,7 @@ declare namespace Connect {
   }
   export interface ListRoutingProfilesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4783,7 +4783,7 @@ declare namespace Connect {
   }
   export interface ListRulesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4815,7 +4815,7 @@ declare namespace Connect {
   }
   export interface ListSecurityKeysRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4843,7 +4843,7 @@ declare namespace Connect {
      */
     SecurityProfileId: SecurityProfileId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4867,7 +4867,7 @@ declare namespace Connect {
   }
   export interface ListSecurityProfilesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4891,7 +4891,7 @@ declare namespace Connect {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource.
+     * The Amazon Resource Name (ARN) of the resource. All Amazon Connect resources (instances, queues, flows, routing profiles, etc) have an ARN. To locate the ARN for an instance, for example, see Find your Amazon Connect instance ID/ARN. 
      */
     resourceArn: ARN;
   }
@@ -4903,7 +4903,7 @@ declare namespace Connect {
   }
   export interface ListTaskTemplatesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4943,7 +4943,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId?: InstanceIdOrArn;
   }
@@ -4959,7 +4959,7 @@ declare namespace Connect {
   }
   export interface ListUseCasesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -4987,7 +4987,7 @@ declare namespace Connect {
   }
   export interface ListUserHierarchyGroupsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5011,7 +5011,7 @@ declare namespace Connect {
   }
   export interface ListUsersRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5255,7 +5255,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5511,7 +5511,7 @@ declare namespace Connect {
   }
   export interface ReplicateInstanceRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance. You can provide the InstanceId, or the entire ARN.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. You can provide the InstanceId, or the entire ARN.
      */
     InstanceId: InstanceIdOrArn;
     /**
@@ -5546,7 +5546,7 @@ declare namespace Connect {
   export type RequiredTaskTemplateFields = RequiredFieldInfo[];
   export interface ResumeContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5562,7 +5562,7 @@ declare namespace Connect {
   }
   export interface RoutingProfile {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -5870,7 +5870,7 @@ declare namespace Connect {
   }
   export interface SearchQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5906,7 +5906,7 @@ declare namespace Connect {
   }
   export interface SearchRoutingProfilesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5942,7 +5942,7 @@ declare namespace Connect {
   }
   export interface SearchSecurityProfilesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -5978,7 +5978,7 @@ declare namespace Connect {
   }
   export interface SearchUsersRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -6011,7 +6011,7 @@ declare namespace Connect {
   }
   export interface SearchVocabulariesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6189,7 +6189,7 @@ declare namespace Connect {
   export type SourceType = "SALESFORCE"|"ZENDESK"|string;
   export interface StartChatContactRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6245,7 +6245,7 @@ declare namespace Connect {
   }
   export interface StartContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6265,7 +6265,7 @@ declare namespace Connect {
   }
   export interface StartContactStreamingRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6297,7 +6297,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6337,7 +6337,7 @@ declare namespace Connect {
   }
   export interface StartTaskContactRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6390,7 +6390,7 @@ declare namespace Connect {
   export type Statistic = "SUM"|"MAX"|"AVG"|string;
   export interface StopContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6410,7 +6410,7 @@ declare namespace Connect {
      */
     ContactId: ContactId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -6418,7 +6418,7 @@ declare namespace Connect {
   }
   export interface StopContactStreamingRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6465,7 +6465,7 @@ declare namespace Connect {
   export type SupportedMessagingContentTypes = SupportedMessagingContentType[];
   export interface SuspendContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6704,7 +6704,7 @@ declare namespace Connect {
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export interface TransferContactRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6753,7 +6753,7 @@ declare namespace Connect {
   export type UpdateAgentStatusDescription = string;
   export interface UpdateAgentStatusRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6787,7 +6787,7 @@ declare namespace Connect {
      */
     InitialContactId: ContactId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6815,7 +6815,7 @@ declare namespace Connect {
   }
   export interface UpdateContactFlowMetadataRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6839,7 +6839,7 @@ declare namespace Connect {
   }
   export interface UpdateContactFlowModuleContentRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6855,7 +6855,7 @@ declare namespace Connect {
   }
   export interface UpdateContactFlowModuleMetadataRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6899,7 +6899,7 @@ declare namespace Connect {
   }
   export interface UpdateContactRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6923,7 +6923,7 @@ declare namespace Connect {
   }
   export interface UpdateContactScheduleRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6940,7 +6940,7 @@ declare namespace Connect {
   export type UpdateHoursOfOperationDescription = string;
   export interface UpdateHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6966,7 +6966,7 @@ declare namespace Connect {
   }
   export interface UpdateInstanceAttributeRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -6980,7 +6980,7 @@ declare namespace Connect {
   }
   export interface UpdateInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7001,7 +7001,7 @@ declare namespace Connect {
   }
   export interface UpdateParticipantRoleConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7041,7 +7041,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7055,7 +7055,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueMaxContactsRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7069,7 +7069,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueNameRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7087,7 +7087,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueOutboundCallerConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7101,7 +7101,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueStatusRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7115,7 +7115,7 @@ declare namespace Connect {
   }
   export interface UpdateQuickConnectConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7130,7 +7130,7 @@ declare namespace Connect {
   export type UpdateQuickConnectDescription = string;
   export interface UpdateQuickConnectNameRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7148,7 +7148,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileConcurrencyRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7162,7 +7162,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileDefaultOutboundQueueRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7176,7 +7176,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileNameRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7194,7 +7194,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7212,7 +7212,7 @@ declare namespace Connect {
      */
     RuleId: RuleId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7246,7 +7246,7 @@ declare namespace Connect {
      */
     SecurityProfileId: SecurityProfileId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7264,7 +7264,7 @@ declare namespace Connect {
      */
     TaskTemplateId: TaskTemplateId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -7298,7 +7298,7 @@ declare namespace Connect {
   }
   export interface UpdateTaskTemplateResponse {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -7368,7 +7368,7 @@ declare namespace Connect {
      */
     HierarchyGroupId: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -7382,7 +7382,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -7392,7 +7392,7 @@ declare namespace Connect {
      */
     HierarchyStructure: HierarchyStructureUpdate;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -7406,7 +7406,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -7420,7 +7420,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -7434,7 +7434,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -7448,7 +7448,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
   }

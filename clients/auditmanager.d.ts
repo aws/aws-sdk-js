@@ -484,11 +484,11 @@ declare class AuditManager extends Service {
    */
   updateControl(callback?: (err: AWSError, data: AuditManager.Types.UpdateControlResponse) => void): Request<AuditManager.Types.UpdateControlResponse, AWSError>;
   /**
-   *  Updates Audit Manager settings for the current user account. 
+   *  Updates Audit Manager settings for the current account. 
    */
   updateSettings(params: AuditManager.Types.UpdateSettingsRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateSettingsResponse) => void): Request<AuditManager.Types.UpdateSettingsResponse, AWSError>;
   /**
-   *  Updates Audit Manager settings for the current user account. 
+   *  Updates Audit Manager settings for the current account. 
    */
   updateSettings(callback?: (err: AWSError, data: AuditManager.Types.UpdateSettingsResponse) => void): Request<AuditManager.Types.UpdateSettingsResponse, AWSError>;
   /**
@@ -1197,7 +1197,7 @@ declare namespace AuditManager {
      */
     createdAt?: Timestamp;
     /**
-     *  The IAM user or role that performed the action. 
+     *  The user or role that performed the action. 
      */
     createdBy?: IamArn;
   }
@@ -1254,11 +1254,11 @@ declare namespace AuditManager {
      */
     lastUpdatedAt?: Timestamp;
     /**
-     *  The IAM user or role that created the control. 
+     *  The user or role that created the control. 
      */
     createdBy?: CreatedBy;
     /**
-     *  The IAM user or role that most recently updated the control. 
+     *  The user or role that most recently updated the control. 
      */
     lastUpdatedBy?: LastUpdatedBy;
     /**
@@ -1663,7 +1663,7 @@ declare namespace AuditManager {
      */
     comment?: DelegationComment;
     /**
-     *  The IAM user or role that created the delegation. 
+     *  The user or role that created the delegation. 
      */
     createdBy?: CreatedBy;
   }
@@ -1823,7 +1823,7 @@ declare namespace AuditManager {
      */
     attributes?: EvidenceAttributes;
     /**
-     *  The unique identifier for the IAM user or role that's associated with the evidence. 
+     *  The unique identifier for the user or role that's associated with the evidence. 
      */
     iamId?: IamArn;
     /**
@@ -1938,11 +1938,11 @@ declare namespace AuditManager {
      */
     lastUpdatedAt?: Timestamp;
     /**
-     *  The IAM user or role that created the framework. 
+     *  The user or role that created the framework. 
      */
     createdBy?: CreatedBy;
     /**
-     *  The IAM user or role that most recently updated the framework. 
+     *  The user or role that most recently updated the framework. 
      */
     lastUpdatedBy?: LastUpdatedBy;
     /**
