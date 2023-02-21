@@ -339,5 +339,6 @@ module.exports = {
   LicenseManagerLinuxSubscriptions: require('./licensemanagerlinuxsubscriptions'),
   KendraRanking: require('./kendraranking'),
   CleanRooms: require('./cleanrooms'),
-  CloudTrailData: require('./cloudtraildata')
+  CloudTrailData: require('./cloudtraildata'),
+  Tnb: require('./tnb')
 };

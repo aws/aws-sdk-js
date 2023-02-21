@@ -340,6 +340,7 @@ export abstract class ConfigurationServicePlaceholders {
   kendraranking?: AWS.KendraRanking.Types.ClientConfiguration;
   cleanrooms?: AWS.CleanRooms.Types.ClientConfiguration;
   cloudtraildata?: AWS.CloudTrailData.Types.ClientConfiguration;
+  tnb?: AWS.Tnb.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -682,4 +683,5 @@ export interface ConfigurationServiceApiVersions {
   kendraranking?: AWS.KendraRanking.Types.apiVersion;
   cleanrooms?: AWS.CleanRooms.Types.apiVersion;
   cloudtraildata?: AWS.CloudTrailData.Types.apiVersion;
+  tnb?: AWS.Tnb.Types.apiVersion;
 }

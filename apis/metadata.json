@@ -1278,5 +1278,8 @@
   "cloudtraildata": {
     "prefix": "cloudtrail-data",
     "name": "CloudTrailData"
+  },
+  "tnb": {
+    "name": "Tnb"
   }
 }

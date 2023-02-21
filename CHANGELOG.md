@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1319.0-->
+<!--LATEST=2.1320.0-->
 <!--ENTRYINSERT-->
+
+## 2.1320.0
+* feature: QuickSight: S3 data sources now accept a custom IAM role.
+* feature: Resiliencehub: In this release we improved resilience hub application creation and maintenance by introducing new resource and app component crud APIs, improving visibility and maintenance of application input sources and added support for additional information attributes to be provided by customers.
+* feature: Tnb: This is the initial SDK release for AWS Telco Network Builder (TNB). AWS Telco Network Builder is a network automation service that helps you deploy and manage telecom networks.
 
 ## 2.1319.0
 * feature: AuditManager: This release introduces a ServiceQuotaExceededException to the UpdateAssessmentFrameworkShare API operation.

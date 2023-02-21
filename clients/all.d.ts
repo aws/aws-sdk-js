@@ -338,3 +338,4 @@ export import LicenseManagerLinuxSubscriptions = require('./licensemanagerlinuxs
 export import KendraRanking = require('./kendraranking');
 export import CleanRooms = require('./cleanrooms');
 export import CloudTrailData = require('./cloudtraildata');
+export import Tnb = require('./tnb');

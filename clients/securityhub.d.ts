@@ -252,11 +252,11 @@ declare class SecurityHub extends Service {
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: SecurityHub.Types.EnableOrganizationAdminAccountResponse) => void): Request<SecurityHub.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS Amazon Web Services Foundations   Amazon Web Services Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the BatchEnableStandards operation. To disable a standard, use the BatchDisableStandards operation. To learn more, see the setup information in the Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards:   Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark v1.2.0   Amazon Web Services Foundational Security Best Practices   Other standards are not automatically enabled.  To opt out of automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the BatchEnableStandards operation. To disable a standard, use the BatchDisableStandards operation. To learn more, see the setup information in the Security Hub User Guide.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS Amazon Web Services Foundations   Amazon Web Services Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the BatchEnableStandards operation. To disable a standard, use the BatchDisableStandards operation. To learn more, see the setup information in the Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards:   Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark v1.2.0   Amazon Web Services Foundational Security Best Practices   Other standards are not automatically enabled.  To opt out of automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the BatchEnableStandards operation. To disable a standard, use the BatchDisableStandards operation. To learn more, see the setup information in the Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -653,11 +653,11 @@ declare namespace SecurityHub {
      */
     AffectedResources?: FieldMap;
     /**
-     * An ISO8601-formatted timestamp that indicates when the API call was first observed.
+     * An ISO8601-formatted timestamp that indicates when the API call was first observed. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     FirstSeen?: NonEmptyString;
     /**
-     * An ISO8601-formatted timestamp that indicates when the API call was most recently observed.
+     * An ISO8601-formatted timestamp that indicates when the API call was most recently observed. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     LastSeen?: NonEmptyString;
   }
@@ -766,7 +766,7 @@ declare namespace SecurityHub {
      */
     Description?: NonEmptyString;
     /**
-     * Indicates when the API was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the API was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
     /**
@@ -844,11 +844,11 @@ declare namespace SecurityHub {
      */
     TracingEnabled?: Boolean;
     /**
-     * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
     /**
-     * Indicates when the stage was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the stage was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastUpdatedDate?: NonEmptyString;
     /**
@@ -870,7 +870,7 @@ declare namespace SecurityHub {
      */
     ApiKeySelectionExpression?: NonEmptyString;
     /**
-     * Indicates when the API was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the API was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
     /**
@@ -926,7 +926,7 @@ declare namespace SecurityHub {
      */
     ClientCertificateId?: NonEmptyString;
     /**
-     * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
     /**
@@ -942,7 +942,7 @@ declare namespace SecurityHub {
      */
     DeploymentId?: NonEmptyString;
     /**
-     * Indicates when the stage was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the stage was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastUpdatedDate?: NonEmptyString;
     /**
@@ -999,7 +999,7 @@ declare namespace SecurityHub {
      */
     HealthCheckGracePeriod?: Integer;
     /**
-     * Indicates when the auto scaling group was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the auto scaling group was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedTime?: NonEmptyString;
     /**
@@ -1167,7 +1167,7 @@ declare namespace SecurityHub {
      */
     ClassicLinkVpcSecurityGroups?: NonEmptyStringList;
     /**
-     * The creation date and time for the launch configuration. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The creation date and time for the launch configuration. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedTime?: NonEmptyString;
     /**
@@ -1504,7 +1504,7 @@ declare namespace SecurityHub {
      */
     CertificateAuthorityArn?: NonEmptyString;
     /**
-     * Indicates when the certificate was requested. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the certificate was requested. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt?: NonEmptyString;
     /**
@@ -1524,7 +1524,7 @@ declare namespace SecurityHub {
      */
     FailureReason?: NonEmptyString;
     /**
-     * Indicates when the certificate was imported. Provided if the certificate type is IMPORTED. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the certificate was imported. Provided if the certificate type is IMPORTED. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ImportedAt?: NonEmptyString;
     /**
@@ -1532,7 +1532,7 @@ declare namespace SecurityHub {
      */
     InUseBy?: StringList;
     /**
-     * Indicates when the certificate was issued. Provided if the certificate type is AMAZON_ISSUED. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the certificate was issued. Provided if the certificate type is AMAZON_ISSUED. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     IssuedAt?: NonEmptyString;
     /**
@@ -1548,11 +1548,11 @@ declare namespace SecurityHub {
      */
     KeyUsages?: AwsCertificateManagerCertificateKeyUsages;
     /**
-     * The time after which the certificate becomes invalid. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The time after which the certificate becomes invalid. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     NotAfter?: NonEmptyString;
     /**
-     * The time before which the certificate is not valid. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The time before which the certificate is not valid. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     NotBefore?: NonEmptyString;
     /**
@@ -1657,7 +1657,7 @@ declare namespace SecurityHub {
      */
     RenewalStatusReason?: NonEmptyString;
     /**
-     * Indicates when the renewal summary was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the renewal summary was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdatedAt?: NonEmptyString;
   }
@@ -1799,7 +1799,7 @@ declare namespace SecurityHub {
      */
     ETag?: NonEmptyString;
     /**
-     * Indicates when that the distribution was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when that the distribution was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastModifiedTime?: NonEmptyString;
     /**
@@ -2380,7 +2380,7 @@ declare namespace SecurityHub {
      */
     BillingMode?: NonEmptyString;
     /**
-     * If the billing mode is PAY_PER_REQUEST, indicates when the billing mode was set to that value. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * If the billing mode is PAY_PER_REQUEST, indicates when the billing mode was set to that value. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastUpdateToPayPerRequestDateTime?: NonEmptyString;
   }
@@ -2394,7 +2394,7 @@ declare namespace SecurityHub {
      */
     BillingModeSummary?: AwsDynamoDbTableBillingModeSummary;
     /**
-     * Indicates when the table was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the table was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreationDateTime?: NonEmptyString;
     /**
@@ -2543,11 +2543,11 @@ declare namespace SecurityHub {
   }
   export interface AwsDynamoDbTableProvisionedThroughput {
     /**
-     * Indicates when the provisioned throughput was last decreased. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the provisioned throughput was last decreased. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastDecreaseDateTime?: NonEmptyString;
     /**
-     * Indicates when the provisioned throughput was last increased. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the provisioned throughput was last increased. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastIncreaseDateTime?: NonEmptyString;
     /**
@@ -2617,7 +2617,7 @@ declare namespace SecurityHub {
      */
     SourceTableArn?: NonEmptyString;
     /**
-     * Indicates the point in time that the table was restored to. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates the point in time that the table was restored to. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     RestoreDateTime?: NonEmptyString;
     /**
@@ -2627,7 +2627,7 @@ declare namespace SecurityHub {
   }
   export interface AwsDynamoDbTableSseDescription {
     /**
-     * If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     InaccessibleEncryptionDateTime?: NonEmptyString;
     /**
@@ -2729,7 +2729,7 @@ declare namespace SecurityHub {
      */
     SubnetId?: NonEmptyString;
     /**
-     * Indicates when the instance was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the instance was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
     /**
@@ -3523,7 +3523,7 @@ declare namespace SecurityHub {
   export type AwsEc2NetworkAclEntryList = AwsEc2NetworkAclEntry[];
   export interface AwsEc2NetworkInterfaceAttachment {
     /**
-     * Indicates when the attachment initiated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the attachment initiated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     AttachTime?: NonEmptyString;
     /**
@@ -3844,7 +3844,7 @@ declare namespace SecurityHub {
   export type AwsEc2VolumeAttachmentList = AwsEc2VolumeAttachment[];
   export interface AwsEc2VolumeDetails {
     /**
-     * Indicates when the volume was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the volume was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateTime?: NonEmptyString;
     /**
@@ -4165,7 +4165,7 @@ declare namespace SecurityHub {
      */
     CertificateArn?: NonEmptyString;
     /**
-     * The date and time of the last change in status. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The date and time of the last change in status. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastStatusChange?: NonEmptyString;
     /**
@@ -4204,7 +4204,7 @@ declare namespace SecurityHub {
      */
     ImageTags?: NonEmptyStringList;
     /**
-     * The date and time when the image was pushed to the repository. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The date and time when the image was pushed to the repository. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ImagePublishedAt?: NonEmptyString;
   }
@@ -5806,7 +5806,7 @@ declare namespace SecurityHub {
      */
     CanonicalHostedZoneNameID?: NonEmptyString;
     /**
-     * Indicates when the load balancer was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the load balancer was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedTime?: NonEmptyString;
     /**
@@ -5965,7 +5965,7 @@ declare namespace SecurityHub {
      */
     CanonicalHostedZoneId?: NonEmptyString;
     /**
-     * Indicates when the load balancer was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the load balancer was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedTime?: NonEmptyString;
     /**
@@ -6011,7 +6011,7 @@ declare namespace SecurityHub {
      */
     Status?: AwsIamAccessKeyStatus;
     /**
-     * Indicates when the IAM access key was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the IAM access key was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt?: NonEmptyString;
     /**
@@ -6055,7 +6055,7 @@ declare namespace SecurityHub {
      */
     MfaAuthenticated?: Boolean;
     /**
-     * Indicates when the session was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the session was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreationDate?: NonEmptyString;
   }
@@ -6099,7 +6099,7 @@ declare namespace SecurityHub {
      */
     AttachedManagedPolicies?: AwsIamAttachedManagedPolicyList;
     /**
-     * Indicates when the IAM group was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the IAM group was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -6132,7 +6132,7 @@ declare namespace SecurityHub {
      */
     Arn?: NonEmptyString;
     /**
-     * Indicates when the instance profile was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the instance profile was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -6163,7 +6163,7 @@ declare namespace SecurityHub {
      */
     AssumeRolePolicyDocument?: AwsIamRoleAssumeRolePolicyDocument;
     /**
-     * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -6196,7 +6196,7 @@ declare namespace SecurityHub {
      */
     AttachmentCount?: Integer;
     /**
-     * When the policy was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * When the policy was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -6232,7 +6232,7 @@ declare namespace SecurityHub {
      */
     PolicyVersionList?: AwsIamPolicyVersionList;
     /**
-     * When the policy was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * When the policy was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdateDate?: NonEmptyString;
   }
@@ -6246,7 +6246,7 @@ declare namespace SecurityHub {
      */
     IsDefaultVersion?: Boolean;
     /**
-     * Indicates when the version was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the version was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
   }
@@ -6262,7 +6262,7 @@ declare namespace SecurityHub {
      */
     AttachedManagedPolicies?: AwsIamAttachedManagedPolicyList;
     /**
-     * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -6304,7 +6304,7 @@ declare namespace SecurityHub {
      */
     AttachedManagedPolicies?: AwsIamAttachedManagedPolicyList;
     /**
-     * Indicates when the user was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the user was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -6377,7 +6377,7 @@ declare namespace SecurityHub {
      */
     AWSAccountId?: NonEmptyString;
     /**
-     * Indicates when the KMS key was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the KMS key was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreationDate?: Double;
     /**
@@ -6459,7 +6459,7 @@ declare namespace SecurityHub {
      */
     KmsKeyArn?: NonEmptyString;
     /**
-     * Indicates when the function was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the function was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastModified?: NonEmptyString;
     /**
@@ -6572,7 +6572,7 @@ declare namespace SecurityHub {
      */
     CompatibleRuntimes?: NonEmptyStringList;
     /**
-     * Indicates when the version was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the version was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
   }
@@ -7034,7 +7034,7 @@ declare namespace SecurityHub {
      */
     AssociatedRoles?: AwsRdsDbClusterAssociatedRoles;
     /**
-     * Indicates when the DB cluster was created, in Universal Coordinated Time (UTC). Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the DB cluster was created, in Universal Coordinated Time (UTC). Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ClusterCreateTime?: NonEmptyString;
     /**
@@ -7130,7 +7130,7 @@ declare namespace SecurityHub {
      */
     AvailabilityZones?: StringList;
     /**
-     * Indicates when the snapshot was taken. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the snapshot was taken. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     SnapshotCreateTime?: NonEmptyString;
     /**
@@ -7154,7 +7154,7 @@ declare namespace SecurityHub {
      */
     VpcId?: NonEmptyString;
     /**
-     * Indicates when the DB cluster was created, in Universal Coordinated Time (UTC). Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the DB cluster was created, in Universal Coordinated Time (UTC). Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ClusterCreateTime?: NonEmptyString;
     /**
@@ -7286,7 +7286,7 @@ declare namespace SecurityHub {
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
-     * Indicates when the DB instance was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the DB instance was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     InstanceCreateTime?: NonEmptyString;
     /**
@@ -7362,7 +7362,7 @@ declare namespace SecurityHub {
      */
     PendingModifiedValues?: AwsRdsDbPendingModifiedValues;
     /**
-     * Specifies the latest time to which a database can be restored with point-in-time restore. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Specifies the latest time to which a database can be restored with point-in-time restore. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LatestRestorableTime?: NonEmptyString;
     /**
@@ -7853,7 +7853,7 @@ declare namespace SecurityHub {
      */
     Status?: NonEmptyString;
     /**
-     * The datetime when the event notification subscription was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The datetime when the event notification subscription was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     SubscriptionCreationTime?: NonEmptyString;
   }
@@ -7943,7 +7943,7 @@ declare namespace SecurityHub {
   }
   export interface AwsRedshiftClusterDeferredMaintenanceWindow {
     /**
-     * The end of the time window for which maintenance was deferred. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The end of the time window for which maintenance was deferred. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     DeferMaintenanceEndTime?: NonEmptyString;
     /**
@@ -7951,7 +7951,7 @@ declare namespace SecurityHub {
      */
     DeferMaintenanceIdentifier?: NonEmptyString;
     /**
-     * The start of the time window for which maintenance was deferred. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The start of the time window for which maintenance was deferred. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     DeferMaintenanceStartTime?: NonEmptyString;
   }
@@ -7974,7 +7974,7 @@ declare namespace SecurityHub {
      */
     ClusterAvailabilityStatus?: NonEmptyString;
     /**
-     * Indicates when the cluster was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the cluster was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ClusterCreateTime?: NonEmptyString;
     /**
@@ -8046,7 +8046,7 @@ declare namespace SecurityHub {
      */
     EnhancedVpcRouting?: Boolean;
     /**
-     * Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ExpectedNextSnapshotScheduleTime?: NonEmptyString;
     /**
@@ -8078,7 +8078,7 @@ declare namespace SecurityHub {
      */
     MasterUsername?: NonEmptyString;
     /**
-     * Indicates the start of the next maintenance window. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates the start of the next maintenance window. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     NextMaintenanceWindowStartTime?: NonEmptyString;
     /**
@@ -8189,11 +8189,11 @@ declare namespace SecurityHub {
      */
     LastFailureMessage?: NonEmptyString;
     /**
-     * The last time when logs failed to be delivered. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The last time when logs failed to be delivered. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastFailureTime?: NonEmptyString;
     /**
-     * The last time that logs were delivered successfully. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The last time that logs were delivered successfully. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastSuccessfulDeliveryTime?: NonEmptyString;
     /**
@@ -8334,7 +8334,7 @@ declare namespace SecurityHub {
      */
     AbortIncompleteMultipartUpload?: AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails;
     /**
-     * The date when objects are moved or deleted. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The date when objects are moved or deleted. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     ExpirationDate?: NonEmptyString;
     /**
@@ -8447,7 +8447,7 @@ declare namespace SecurityHub {
   export type AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList = AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails[];
   export interface AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails {
     /**
-     * A date on which to transition objects to the specified storage class. If you provide Date, you cannot provide Days. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * A date on which to transition objects to the specified storage class. If you provide Date, you cannot provide Days. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     Date?: NonEmptyString;
     /**
@@ -8484,7 +8484,7 @@ declare namespace SecurityHub {
      */
     OwnerAccountId?: NonEmptyString;
     /**
-     * Indicates when the S3 bucket was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the S3 bucket was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt?: NonEmptyString;
     /**
@@ -8676,7 +8676,7 @@ declare namespace SecurityHub {
   export type AwsS3BucketWebsiteConfigurationRoutingRules = AwsS3BucketWebsiteConfigurationRoutingRule[];
   export interface AwsS3ObjectDetails {
     /**
-     * Indicates when the object was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the object was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastModified?: NonEmptyString;
     /**
@@ -8866,19 +8866,19 @@ declare namespace SecurityHub {
      */
     Types?: TypeList;
     /**
-     * Indicates when the security-findings provider first observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security-findings provider first observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     FirstObservedAt?: NonEmptyString;
     /**
-     * Indicates when the security-findings provider most recently observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security-findings provider most recently observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastObservedAt?: NonEmptyString;
     /**
-     * Indicates when the security-findings provider created the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security-findings provider created the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt: NonEmptyString;
     /**
-     * Indicates when the security-findings provider last updated the finding record. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security-findings provider last updated the finding record. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdatedAt: NonEmptyString;
     /**
@@ -9020,19 +9020,19 @@ declare namespace SecurityHub {
      */
     Type?: StringFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+     * An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     FirstObservedAt?: DateFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+     * An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     LastObservedAt?: DateFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured.
+     * An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     CreatedAt?: DateFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. 
+     * An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record.  A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     UpdatedAt?: DateFilterList;
     /**
@@ -9164,11 +9164,11 @@ declare namespace SecurityHub {
      */
     ProcessParentPid?: NumberFilterList;
     /**
-     * The date/time that the process was launched.
+     * A timestamp that identifies when the process was launched. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     ProcessLaunchedAt?: DateFilterList;
     /**
-     * The date/time that the process was terminated.
+     * A timestamp that identifies when the process was terminated. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     ProcessTerminatedAt?: DateFilterList;
     /**
@@ -9184,7 +9184,7 @@ declare namespace SecurityHub {
      */
     ThreatIntelIndicatorCategory?: StringFilterList;
     /**
-     * The date/time of the last observation of a threat intelligence indicator.
+     * A timestamp that identifies the last observation of a threat intelligence indicator.
      */
     ThreatIntelIndicatorLastObservedAt?: DateFilterList;
     /**
@@ -9292,7 +9292,7 @@ declare namespace SecurityHub {
      */
     ResourceContainerImageName?: StringFilterList;
     /**
-     * The date/time that the container was started.
+     * A timestamp that identifies when the container was started. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     ResourceContainerLaunchedAt?: DateFilterList;
     /**
@@ -10350,7 +10350,7 @@ declare namespace SecurityHub {
      */
     ImageName?: NonEmptyString;
     /**
-     * Indicates when the container started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the container started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
     /**
@@ -10518,11 +10518,11 @@ declare namespace SecurityHub {
   }
   export interface DateFilter {
     /**
-     * A start date for the date filter.
+     * A timestamp that provides the start date for the date filter. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     Start?: NonEmptyString;
     /**
-     * An end date for the date filter.
+     * A timestamp that provides the end date for the date filter. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     End?: NonEmptyString;
     /**
@@ -11570,7 +11570,7 @@ declare namespace SecurityHub {
      */
     UpdatedBy: NonEmptyString;
     /**
-     * The timestamp of when the note was updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * The timestamp of when the note was updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdatedAt: NonEmptyString;
   }
@@ -11667,11 +11667,11 @@ declare namespace SecurityHub {
      */
     InstalledPendingReboot?: Integer;
     /**
-     * Indicates when the operation started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the operation started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     OperationStartTime?: NonEmptyString;
     /**
-     * Indicates when the operation completed. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the operation completed. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     OperationEndTime?: NonEmptyString;
     /**
@@ -11747,11 +11747,11 @@ declare namespace SecurityHub {
      */
     ParentPid?: Integer;
     /**
-     * Indicates when the process was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the process was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
     /**
-     * Indicates when the process was terminated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the process was terminated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     TerminatedAt?: NonEmptyString;
   }
@@ -12789,7 +12789,7 @@ declare namespace SecurityHub {
      */
     Category?: ThreatIntelIndicatorCategory;
     /**
-     * Indicates when the most recent instance of a threat intelligence indicator was observed. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the most recent instance of a threat intelligence indicator was observed. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastObservedAt?: NonEmptyString;
     /**
@@ -13025,11 +13025,11 @@ declare namespace SecurityHub {
      */
     VendorSeverity?: NonEmptyString;
     /**
-     * Indicates when the vulnerability advisory was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the vulnerability advisory was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     VendorCreatedAt?: NonEmptyString;
     /**
-     * Indicates when the vulnerability advisory was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the vulnerability advisory was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     VendorUpdatedAt?: NonEmptyString;
   }
