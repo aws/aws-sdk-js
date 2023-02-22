@@ -984,6 +984,7 @@ declare namespace ChimeSDKVoice {
   }
   export interface LoggingConfiguration {
     EnableSIPLogs?: Boolean;
+    EnableMediaMetricLogs?: Boolean;
   }
   export type NextTokenString = string;
   export type NonEmptyString = string;

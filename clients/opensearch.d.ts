@@ -300,6 +300,14 @@ declare class OpenSearch extends Service {
    */
   listPackagesForDomain(callback?: (err: AWSError, data: OpenSearch.Types.ListPackagesForDomainResponse) => void): Request<OpenSearch.Types.ListPackagesForDomainResponse, AWSError>;
   /**
+   * Retrieves a list of configuration changes that are scheduled for a domain. These changes can be service software updates or blue/green Auto-Tune enhancements.
+   */
+  listScheduledActions(params: OpenSearch.Types.ListScheduledActionsRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListScheduledActionsResponse) => void): Request<OpenSearch.Types.ListScheduledActionsResponse, AWSError>;
+  /**
+   * Retrieves a list of configuration changes that are scheduled for a domain. These changes can be service software updates or blue/green Auto-Tune enhancements.
+   */
+  listScheduledActions(callback?: (err: AWSError, data: OpenSearch.Types.ListScheduledActionsResponse) => void): Request<OpenSearch.Types.ListScheduledActionsResponse, AWSError>;
+  /**
    * Returns all resource tags for an Amazon OpenSearch Service domain. For more information, see Tagging Amazon OpenSearch Service domains.
    */
   listTags(params: OpenSearch.Types.ListTagsRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListTagsResponse) => void): Request<OpenSearch.Types.ListTagsResponse, AWSError>;
@@ -396,6 +404,14 @@ declare class OpenSearch extends Service {
    */
   updatePackage(callback?: (err: AWSError, data: OpenSearch.Types.UpdatePackageResponse) => void): Request<OpenSearch.Types.UpdatePackageResponse, AWSError>;
   /**
+   * Reschedules a planned domain configuration change for a later time. This change can be a scheduled service software update or a blue/green Auto-Tune enhancement.
+   */
+  updateScheduledAction(params: OpenSearch.Types.UpdateScheduledActionRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateScheduledActionResponse) => void): Request<OpenSearch.Types.UpdateScheduledActionResponse, AWSError>;
+  /**
+   * Reschedules a planned domain configuration change for a later time. This change can be a scheduled service software update or a blue/green Auto-Tune enhancement.
+   */
+  updateScheduledAction(callback?: (err: AWSError, data: OpenSearch.Types.UpdateScheduledActionResponse) => void): Request<OpenSearch.Types.UpdateScheduledActionResponse, AWSError>;
+  /**
    * Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
    */
   updateVpcEndpoint(params: OpenSearch.Types.UpdateVpcEndpointRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateVpcEndpointResponse) => void): Request<OpenSearch.Types.UpdateVpcEndpointResponse, AWSError>;
@@ -451,6 +467,9 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
+  export type ActionSeverity = "HIGH"|"MEDIUM"|"LOW"|string;
+  export type ActionStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type ActionType = "SERVICE_SOFTWARE_UPDATE"|"JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
   export interface AddTagsRequest {
     /**
      * Amazon Resource Name (ARN) for the OpenSearch Service domain to which you want to attach resource tags.
@@ -624,9 +643,13 @@ declare namespace OpenSearch {
      */
     RollbackOnDisable?: RollbackOnDisable;
     /**
-     * A list of maintenance schedules during which Auto-Tune can deploy changes.
+     * DEPRECATED. Use off-peak window instead. A list of maintenance schedules during which Auto-Tune can deploy changes.
      */
     MaintenanceSchedules?: AutoTuneMaintenanceScheduleList;
+    /**
+     * Whether to use the domain's off-peak window to deploy configuration changes on the domain rather than a maintenance schedule.
+     */
+    UseOffPeakWindow?: Boolean;
   }
   export interface AutoTuneOptionsInput {
     /**
@@ -634,9 +657,13 @@ declare namespace OpenSearch {
      */
     DesiredState?: AutoTuneDesiredState;
     /**
-     * A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance schedules are overwrite, not append. If your request includes no schedules, the request deletes all existing schedules. To preserve existing schedules, make a call to DescribeDomainConfig first and use the MaintenanceSchedules portion of the response as the basis for this section.
+     * A list of maintenance schedules during which Auto-Tune can deploy changes. Maintenance windows are deprecated and have been replaced with off-peak windows.
      */
     MaintenanceSchedules?: AutoTuneMaintenanceScheduleList;
+    /**
+     * Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window.
+     */
+    UseOffPeakWindow?: Boolean;
   }
   export interface AutoTuneOptionsOutput {
     /**
@@ -647,6 +674,10 @@ declare namespace OpenSearch {
      * Any errors that occurred while enabling or disabling Auto-Tune.
      */
     ErrorMessage?: String;
+    /**
+     * Whether the domain's off-peak window will be used to deploy Auto-Tune changes rather than a maintenance schedule.
+     */
+    UseOffPeakWindow?: Boolean;
   }
   export interface AutoTuneOptionsStatus {
     /**
@@ -940,6 +971,14 @@ declare namespace OpenSearch {
      * Options for Auto-Tune.
      */
     AutoTuneOptions?: AutoTuneOptionsInput;
+    /**
+     * Specifies a daily 10-hour time block during which OpenSearch Service can perform configuration changes on the domain, including service software updates and Auto-Tune enhancements that require a blue/green deployment. If no options are specified, the default start time of 10:00 P.M. local time (for the Region that the domain is created in) is used.
+     */
+    OffPeakWindowOptions?: OffPeakWindowOptions;
+    /**
+     * Software update options for the domain.
+     */
+    SoftwareUpdateOptions?: SoftwareUpdateOptions;
   }
   export interface CreateDomainResponse {
     /**
@@ -1406,7 +1445,7 @@ declare namespace OpenSearch {
      */
     ClusterConfig?: ClusterConfigStatus;
     /**
-     * Container for EBS options configured for an OpenSearch Service domain.
+     * Container for EBS options configured for the domain.
      */
     EBSOptions?: EBSOptionsStatus;
     /**
@@ -1457,6 +1496,14 @@ declare namespace OpenSearch {
      * Container for information about the progress of an existing configuration change.
      */
     ChangeProgressDetails?: ChangeProgressDetails;
+    /**
+     * Container for off-peak window options for the domain.
+     */
+    OffPeakWindowOptions?: OffPeakWindowOptionsStatus;
+    /**
+     * Software update options for the domain.
+     */
+    SoftwareUpdateOptions?: SoftwareUpdateOptionsStatus;
   }
   export interface DomainEndpointOptions {
     /**
@@ -1652,6 +1699,14 @@ declare namespace OpenSearch {
      * Information about a configuration change happening on the domain.
      */
     ChangeProgressDetails?: ChangeProgressDetails;
+    /**
+     * Options that specify a custom 10-hour window during which OpenSearch Service can perform configuration changes on the domain.
+     */
+    OffPeakWindowOptions?: OffPeakWindowOptions;
+    /**
+     * Service software update options for the domain.
+     */
+    SoftwareUpdateOptions?: SoftwareUpdateOptions;
   }
   export type DomainStatusList = DomainStatus[];
   export type Double = number;
@@ -2060,6 +2115,30 @@ declare namespace OpenSearch {
      */
     NextToken?: String;
   }
+  export interface ListScheduledActionsRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If your initial ListScheduledActions operation returns a nextToken, you can include the returned nextToken in subsequent ListScheduledActions operations, which returns results in the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListScheduledActionsResponse {
+    /**
+     * A list of actions that are scheduled for the domain.
+     */
+    ScheduledActions?: ScheduledActionsList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTagsRequest {
     /**
      * Amazon Resource Name (ARN) for the domain to view tags for.
@@ -2207,6 +2286,32 @@ declare namespace OpenSearch {
     Status: OptionStatus;
   }
   export type NonEmptyString = string;
+  export interface OffPeakWindow {
+    /**
+     * A custom start time for the off-peak window, in Coordinated Universal Time (UTC). The window length will always be 10 hours, so you can't specify an end time. For example, if you specify 11:00 P.M. UTC as a start time, the end time will automatically be set to 9:00 A.M.
+     */
+    WindowStartTime?: WindowStartTime;
+  }
+  export interface OffPeakWindowOptions {
+    /**
+     * Whether to enable an off-peak window. This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can't disable the off-peak window after it's enabled for a domain.
+     */
+    Enabled?: Boolean;
+    /**
+     * Off-peak window settings for the domain.
+     */
+    OffPeakWindow?: OffPeakWindow;
+  }
+  export interface OffPeakWindowOptionsStatus {
+    /**
+     * The domain's off-peak window configuration.
+     */
+    Options?: OffPeakWindowOptions;
+    /**
+     * The current status of off-peak window options.
+     */
+    Status?: OptionStatus;
+  }
   export type OpenSearchPartitionInstanceType = "m3.medium.search"|"m3.large.search"|"m3.xlarge.search"|"m3.2xlarge.search"|"m4.large.search"|"m4.xlarge.search"|"m4.2xlarge.search"|"m4.4xlarge.search"|"m4.10xlarge.search"|"m5.large.search"|"m5.xlarge.search"|"m5.2xlarge.search"|"m5.4xlarge.search"|"m5.12xlarge.search"|"m5.24xlarge.search"|"r5.large.search"|"r5.xlarge.search"|"r5.2xlarge.search"|"r5.4xlarge.search"|"r5.12xlarge.search"|"r5.24xlarge.search"|"c5.large.search"|"c5.xlarge.search"|"c5.2xlarge.search"|"c5.4xlarge.search"|"c5.9xlarge.search"|"c5.18xlarge.search"|"t3.nano.search"|"t3.micro.search"|"t3.small.search"|"t3.medium.search"|"t3.large.search"|"t3.xlarge.search"|"t3.2xlarge.search"|"ultrawarm1.medium.search"|"ultrawarm1.large.search"|"ultrawarm1.xlarge.search"|"t2.micro.search"|"t2.small.search"|"t2.medium.search"|"r3.large.search"|"r3.xlarge.search"|"r3.2xlarge.search"|"r3.4xlarge.search"|"r3.8xlarge.search"|"i2.xlarge.search"|"i2.2xlarge.search"|"d2.xlarge.search"|"d2.2xlarge.search"|"d2.4xlarge.search"|"d2.8xlarge.search"|"c4.large.search"|"c4.xlarge.search"|"c4.2xlarge.search"|"c4.4xlarge.search"|"c4.8xlarge.search"|"r4.large.search"|"r4.xlarge.search"|"r4.2xlarge.search"|"r4.4xlarge.search"|"r4.8xlarge.search"|"r4.16xlarge.search"|"i3.large.search"|"i3.xlarge.search"|"i3.2xlarge.search"|"i3.4xlarge.search"|"i3.8xlarge.search"|"i3.16xlarge.search"|"r6g.large.search"|"r6g.xlarge.search"|"r6g.2xlarge.search"|"r6g.4xlarge.search"|"r6g.8xlarge.search"|"r6g.12xlarge.search"|"m6g.large.search"|"m6g.xlarge.search"|"m6g.2xlarge.search"|"m6g.4xlarge.search"|"m6g.8xlarge.search"|"m6g.12xlarge.search"|"c6g.large.search"|"c6g.xlarge.search"|"c6g.2xlarge.search"|"c6g.4xlarge.search"|"c6g.8xlarge.search"|"c6g.12xlarge.search"|"r6gd.large.search"|"r6gd.xlarge.search"|"r6gd.2xlarge.search"|"r6gd.4xlarge.search"|"r6gd.8xlarge.search"|"r6gd.12xlarge.search"|"r6gd.16xlarge.search"|"t4g.small.search"|"t4g.medium.search"|string;
   export type OpenSearchWarmPartitionInstanceType = "ultrawarm1.medium.search"|"ultrawarm1.large.search"|"ultrawarm1.xlarge.search"|string;
   export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
@@ -2584,6 +2689,46 @@ declare namespace OpenSearch {
      */
     SessionTimeoutMinutes?: IntegerClass;
   }
+  export type ScheduleAt = "NOW"|"TIMESTAMP"|"OFF_PEAK_WINDOW"|string;
+  export interface ScheduledAction {
+    /**
+     * The unique identifier of the scheduled action.
+     */
+    Id: String;
+    /**
+     * The type of action that will be taken on the domain.
+     */
+    Type: ActionType;
+    /**
+     * The severity of the action.
+     */
+    Severity: ActionSeverity;
+    /**
+     * The time when the change is scheduled to happen.
+     */
+    ScheduledTime: Long;
+    /**
+     * A description of the action to be taken.
+     */
+    Description?: String;
+    /**
+     * Whether the action was scheduled manually (CUSTOMER, or by OpenSearch Service automatically (SYSTEM).
+     */
+    ScheduledBy?: ScheduledBy;
+    /**
+     * The current status of the scheduled action.
+     */
+    Status?: ActionStatus;
+    /**
+     * Whether the action is required or optional.
+     */
+    Mandatory?: Boolean;
+    /**
+     * Whether or not the scheduled action is cancellable.
+     */
+    Cancellable?: Boolean;
+  }
+  export type ScheduledActionsList = ScheduledAction[];
   export type ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
   export type ScheduledAutoTuneDescription = string;
   export interface ScheduledAutoTuneDetails {
@@ -2605,6 +2750,7 @@ declare namespace OpenSearch {
     Severity?: ScheduledAutoTuneSeverityType;
   }
   export type ScheduledAutoTuneSeverityType = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type ScheduledBy = "CUSTOMER"|"SYSTEM"|string;
   export interface ServiceSoftwareOptions {
     /**
      * The current service software version present on the domain.
@@ -2656,12 +2802,36 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
+  export interface SoftwareUpdateOptions {
+    /**
+     * Whether automatic service software updates are enabled for the domain.
+     */
+    AutoSoftwareUpdateEnabled?: Boolean;
+  }
+  export interface SoftwareUpdateOptionsStatus {
+    /**
+     * The service software update options for a domain.
+     */
+    Options?: SoftwareUpdateOptions;
+    /**
+     * The status of service software update options, including creation date and last updated date.
+     */
+    Status?: OptionStatus;
+  }
   export type StartAt = Date;
   export interface StartServiceSoftwareUpdateRequest {
     /**
      * The name of the domain that you want to update to the latest service software.
      */
     DomainName: DomainName;
+    /**
+     * When to start the service software update.    NOW - Immediately schedules the update to happen in the current hour if there's capacity available.    TIMESTAMP - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for DesiredStartTime.    OFF_PEAK_WINDOW - Marks the update to be picked up during an upcoming off-peak window. There's no guarantee that the update will happen during the next immediate window. Depending on capacity, it might happen in subsequent days.   Default: NOW if you don't specify a value for DesiredStartTime, and TIMESTAMP if you do.
+     */
+    ScheduleAt?: ScheduleAt;
+    /**
+     * The Epoch timestamp when you want the service software update to start. You only need to specify this parameter if you set ScheduleAt to TIMESTAMP.
+     */
+    DesiredStartTime?: Long;
   }
   export interface StartServiceSoftwareUpdateResponse {
     /**
@@ -2669,6 +2839,8 @@ declare namespace OpenSearch {
      */
     ServiceSoftwareOptions?: ServiceSoftwareOptions;
   }
+  export type StartTimeHours = number;
+  export type StartTimeMinutes = number;
   export type StartTimestamp = Date;
   export type StorageSubTypeName = string;
   export interface StorageType {
@@ -2751,7 +2923,7 @@ declare namespace OpenSearch {
      */
     AccessPolicies?: PolicyDocument;
     /**
-     * Options to publish OpenSearch lots to Amazon CloudWatch Logs.
+     * Options to publish OpenSearch logs to Amazon CloudWatch Logs.
      */
     LogPublishingOptions?: LogPublishingOptions;
     /**
@@ -2763,7 +2935,7 @@ declare namespace OpenSearch {
      */
     DomainEndpointOptions?: DomainEndpointOptions;
     /**
-     * Node-To-Node Encryption options for the domain.
+     * Node-to-node encryption options for the domain.
      */
     NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
     /**
@@ -2782,6 +2954,14 @@ declare namespace OpenSearch {
      * The type of dry run to perform.    Basic only returns the type of deployment (blue/green or dynamic) that the update will cause.    Verbose runs an additional check to validate the changes you're making. For more information, see Validating a domain update.  
      */
     DryRunMode?: DryRunMode;
+    /**
+     * Off-peak window options for the domain.
+     */
+    OffPeakWindowOptions?: OffPeakWindowOptions;
+    /**
+     * Service software update options for the domain.
+     */
+    SoftwareUpdateOptions?: SoftwareUpdateOptions;
   }
   export interface UpdateDomainConfigResponse {
     /**
@@ -2820,6 +3000,34 @@ declare namespace OpenSearch {
      * Information about a package.
      */
     PackageDetails?: PackageDetails;
+  }
+  export interface UpdateScheduledActionRequest {
+    /**
+     * The name of the domain to reschedule an action for.
+     */
+    DomainName: DomainName;
+    /**
+     * The unique identifier of the action to reschedule. To retrieve this ID, send a ListScheduledActions request.
+     */
+    ActionID: String;
+    /**
+     * The type of action to reschedule. Can be one of SERVICE_SOFTWARE_UPDATE, JVM_HEAP_SIZE_TUNING, or JVM_YOUNG_GEN_TUNING. To retrieve this value, send a ListScheduledActions request.
+     */
+    ActionType: ActionType;
+    /**
+     * When to schedule the action.    NOW - Immediately schedules the update to happen in the current hour if there's capacity available.    TIMESTAMP - Lets you specify a custom date and time to apply the update. If you specify this value, you must also provide a value for DesiredStartTime.    OFF_PEAK_WINDOW - Marks the action to be picked up during an upcoming off-peak window. There's no guarantee that the change will be implemented during the next immediate window. Depending on capacity, it might happen in subsequent days.  
+     */
+    ScheduleAt: ScheduleAt;
+    /**
+     * The time to implement the change, in Coordinated Universal Time (UTC). Only specify this parameter if you set ScheduleAt to TIMESTAMP.
+     */
+    DesiredStartTime?: Long;
+  }
+  export interface UpdateScheduledActionResponse {
+    /**
+     * Information about the rescheduled action.
+     */
+    ScheduledAction?: ScheduledAction;
   }
   export type UpdateTimestamp = Date;
   export interface UpdateVpcEndpointRequest {
@@ -3053,6 +3261,16 @@ declare namespace OpenSearch {
   }
   export type VpcEndpointSummaryList = VpcEndpointSummary[];
   export type VpcEndpoints = VpcEndpoint[];
+  export interface WindowStartTime {
+    /**
+     * The start hour of the window in Coordinated Universal Time (UTC), using 24-hour time. For example, 17 refers to 5:00 P.M. UTC.
+     */
+    Hours: StartTimeHours;
+    /**
+     * The start minute of the window, in UTC.
+     */
+    Minutes: StartTimeMinutes;
+  }
   export interface ZoneAwarenessConfig {
     /**
      * If you enabled multiple Availability Zones, this value is the number of zones that you want the domain to use. Valid values are 2 and 3. If your domain is provisioned within a VPC, this value be equal to number of subnets.

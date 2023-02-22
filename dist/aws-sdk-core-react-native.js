@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1320.0',
+	  VERSION: '2.1321.0',
 
 	  /**
 	   * @api private
@@ -14499,7 +14499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var warning = [
-	  'The AWS SDK for JavaScript (v2) will be put into maintenance mode in 2023.\n',
+	  'We are formalizing our plans to enter AWS SDK for JavaScript (v2) into maintenance mode in 2023.\n',
 	  'Please migrate your code to use AWS SDK for JavaScript (v3).',
 	  'For more information, check the migration guide at https://a.co/7PzMCcy'
 	].join('\n');

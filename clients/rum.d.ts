@@ -12,11 +12,11 @@ declare class RUM extends Service {
   constructor(options?: RUM.Types.ClientConfiguration)
   config: Config & RUM.Types.ClientConfiguration;
   /**
-   * Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently. By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in CloudWatch metrics that you can collect with CloudWatch RUM. If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also optionally send the metrics with additional dimensions. The valid dimension names for the additional dimensions are BrowserName, CountryCode, DeviceType, FileType, OSName, and PageId. For more information, see  Extended metrics that you can send to CloudWatch and CloudWatch Evidently. The maximum number of metric definitions that you can specify in one BatchCreateRumMetricDefinitions operation is 200. The maximum number of metric definitions that one destination can contain is 2000. Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see Amazon CloudWatch Pricing. You must have already created a destination for the metrics before you send them. For more information, see PutRumMetricsDestination. If some metric definitions specified in a BatchCreateRumMetricDefinitions operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.
+   * Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently. By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in CloudWatch metrics that you can collect with CloudWatch RUM. In addition to these default metrics, you can choose to send extended metrics or custom metrics or both.   Extended metrics enable you to send metrics with additional dimensions not included in the default metrics. You can also send extended metrics to Evidently as well as CloudWatch. The valid dimension names for the additional dimensions for extended metrics are BrowserName, CountryCode, DeviceType, FileType, OSName, and PageId. For more information, see  Extended metrics that you can send to CloudWatch and CloudWatch Evidently.   Custom metrics are metrics that you define. You can send custom metrics to CloudWatch or to CloudWatch Evidently or to both. With custom metrics, you can use any metric name and namespace, and to derive the metrics you can use any custom events, built-in events, custom attributes, or default attributes.  You can't send custom metrics to the AWS/RUM namespace. You must send custom metrics to a custom namespace that you define. The namespace that you use can't start with AWS/. CloudWatch RUM prepends RUM/CustomMetrics/ to the custom namespace that you define, so the final namespace for your metrics in CloudWatch is RUM/CustomMetrics/your-custom-namespace .   The maximum number of metric definitions that you can specify in one BatchCreateRumMetricDefinitions operation is 200. The maximum number of metric definitions that one destination can contain is 2000. Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see Amazon CloudWatch Pricing. You must have already created a destination for the metrics before you send them. For more information, see PutRumMetricsDestination. If some metric definitions specified in a BatchCreateRumMetricDefinitions operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.
    */
   batchCreateRumMetricDefinitions(params: RUM.Types.BatchCreateRumMetricDefinitionsRequest, callback?: (err: AWSError, data: RUM.Types.BatchCreateRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchCreateRumMetricDefinitionsResponse, AWSError>;
   /**
-   * Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently. By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in CloudWatch metrics that you can collect with CloudWatch RUM. If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also optionally send the metrics with additional dimensions. The valid dimension names for the additional dimensions are BrowserName, CountryCode, DeviceType, FileType, OSName, and PageId. For more information, see  Extended metrics that you can send to CloudWatch and CloudWatch Evidently. The maximum number of metric definitions that you can specify in one BatchCreateRumMetricDefinitions operation is 200. The maximum number of metric definitions that one destination can contain is 2000. Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see Amazon CloudWatch Pricing. You must have already created a destination for the metrics before you send them. For more information, see PutRumMetricsDestination. If some metric definitions specified in a BatchCreateRumMetricDefinitions operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.
+   * Specifies the extended metrics and custom metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid destinations include CloudWatch and Evidently. By default, RUM app monitors send some metrics to CloudWatch. These default metrics are listed in CloudWatch metrics that you can collect with CloudWatch RUM. In addition to these default metrics, you can choose to send extended metrics or custom metrics or both.   Extended metrics enable you to send metrics with additional dimensions not included in the default metrics. You can also send extended metrics to Evidently as well as CloudWatch. The valid dimension names for the additional dimensions for extended metrics are BrowserName, CountryCode, DeviceType, FileType, OSName, and PageId. For more information, see  Extended metrics that you can send to CloudWatch and CloudWatch Evidently.   Custom metrics are metrics that you define. You can send custom metrics to CloudWatch or to CloudWatch Evidently or to both. With custom metrics, you can use any metric name and namespace, and to derive the metrics you can use any custom events, built-in events, custom attributes, or default attributes.  You can't send custom metrics to the AWS/RUM namespace. You must send custom metrics to a custom namespace that you define. The namespace that you use can't start with AWS/. CloudWatch RUM prepends RUM/CustomMetrics/ to the custom namespace that you define, so the final namespace for your metrics in CloudWatch is RUM/CustomMetrics/your-custom-namespace .   The maximum number of metric definitions that you can specify in one BatchCreateRumMetricDefinitions operation is 200. The maximum number of metric definitions that one destination can contain is 2000. Extended metrics sent to CloudWatch and RUM custom metrics are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension value counts as a custom metric. For more information, see Amazon CloudWatch Pricing. You must have already created a destination for the metrics before you send them. For more information, see PutRumMetricsDestination. If some metric definitions specified in a BatchCreateRumMetricDefinitions operations are not valid, those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.
    */
   batchCreateRumMetricDefinitions(callback?: (err: AWSError, data: RUM.Types.BatchCreateRumMetricDefinitionsResponse) => void): Request<RUM.Types.BatchCreateRumMetricDefinitionsResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class RUM extends Service {
    */
   putRumEvents(callback?: (err: AWSError, data: RUM.Types.PutRumEventsResponse) => void): Request<RUM.Types.PutRumEventsResponse, AWSError>;
   /**
-   * Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment. For more information about extended metrics, see AddRumMetrics.
+   * Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment. For more information about extended metrics, see BatchCreateRumMetricDefinitions.
    */
   putRumMetricsDestination(params: RUM.Types.PutRumMetricsDestinationRequest, callback?: (err: AWSError, data: RUM.Types.PutRumMetricsDestinationResponse) => void): Request<RUM.Types.PutRumMetricsDestinationResponse, AWSError>;
   /**
-   * Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment. For more information about extended metrics, see AddRumMetrics.
+   * Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently experiment. For more information about extended metrics, see BatchCreateRumMetricDefinitions.
    */
   putRumMetricsDestination(callback?: (err: AWSError, data: RUM.Types.PutRumMetricsDestinationResponse) => void): Request<RUM.Types.PutRumMetricsDestinationResponse, AWSError>;
   /**
@@ -604,6 +604,10 @@ declare namespace RUM {
      */
     Name: MetricName;
     /**
+     * If this metric definition is for a custom metric instead of an extended metric, this field displays the metric namespace that the custom metric is published to.
+     */
+    Namespace?: Namespace;
+    /**
      * Use this field only if you are sending this metric to CloudWatch. It defines the CloudWatch metric unit that this metric is measured in. 
      */
     UnitLabel?: UnitLabel;
@@ -616,7 +620,7 @@ declare namespace RUM {
   export type MetricDefinitionIds = MetricDefinitionId[];
   export interface MetricDefinitionRequest {
     /**
-     * Use this field only if you are sending the metric to CloudWatch. This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:    "metadata.pageId": "PageId"     "metadata.browserName": "BrowserName"     "metadata.deviceType": "DeviceType"     "metadata.osName": "OSName"     "metadata.countryCode": "CountryCode"     "event_details.fileType": "FileType"     All dimensions listed in this field must also be included in EventPattern.
+     * Use this field only if you are sending the metric to CloudWatch. This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:    "metadata.pageId": "PageId"     "metadata.browserName": "BrowserName"     "metadata.deviceType": "DeviceType"     "metadata.osName": "OSName"     "metadata.countryCode": "CountryCode"     "event_details.fileType": "FileType"     For both extended metrics and custom metrics, all dimensions listed in this field must also be included in EventPattern.
      */
     DimensionKeys?: DimensionKeysMap;
     /**
@@ -624,9 +628,13 @@ declare namespace RUM {
      */
     EventPattern?: EventPattern;
     /**
-     * The name for the metric that is defined in this structure. Valid values are the following:    PerformanceNavigationDuration     PerformanceResourceDuration      NavigationSatisfiedTransaction     NavigationToleratedTransaction     NavigationFrustratedTransaction     WebVitalsCumulativeLayoutShift     WebVitalsFirstInputDelay     WebVitalsLargestContentfulPaint     JsErrorCount     HttpErrorCount     SessionCount   
+     * The name for the metric that is defined in this structure. For custom metrics, you can specify any name that you like. For extended metrics, valid values are the following:    PerformanceNavigationDuration     PerformanceResourceDuration      NavigationSatisfiedTransaction     NavigationToleratedTransaction     NavigationFrustratedTransaction     WebVitalsCumulativeLayoutShift     WebVitalsFirstInputDelay     WebVitalsLargestContentfulPaint     JsErrorCount     HttpErrorCount     SessionCount   
      */
     Name: MetricName;
+    /**
+     * If this structure is for a custom metric instead of an extended metrics, use this parameter to define the metric namespace for that custom metric. Do not specify this parameter if this structure is for an extended metric. You cannot use any string that starts with AWS/ for your namespace.
+     */
+    Namespace?: Namespace;
     /**
      * The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.
      */
@@ -655,6 +663,7 @@ declare namespace RUM {
   }
   export type MetricDestinationSummaryList = MetricDestinationSummary[];
   export type MetricName = string;
+  export type Namespace = string;
   export type Pages = Url[];
   export interface PutRumEventsRequest {
     /**
@@ -664,11 +673,11 @@ declare namespace RUM {
     /**
      * A unique identifier for this batch of RUM event data.
      */
-    BatchId: String;
+    BatchId: PutRumEventsRequestBatchIdString;
     /**
      * The ID of the app monitor that is sending this data.
      */
-    Id: AppMonitorId;
+    Id: PutRumEventsRequestIdString;
     /**
      * An array of structures that contain the telemetry event data.
      */
@@ -678,6 +687,8 @@ declare namespace RUM {
      */
     UserDetails: UserDetails;
   }
+  export type PutRumEventsRequestBatchIdString = string;
+  export type PutRumEventsRequestIdString = string;
   export interface PutRumEventsResponse {
   }
   export interface PutRumMetricsDestinationRequest {
@@ -723,7 +734,7 @@ declare namespace RUM {
     /**
      * A unique ID for this event.
      */
-    id: String;
+    id: RumEventIdString;
     /**
      * Metadata about this event, which contains a JSON serialization of the identity of the user for this session. The user information comes from information such as the HTTP user-agent request header and document interface.
      */
@@ -737,6 +748,7 @@ declare namespace RUM {
      */
     type: String;
   }
+  export type RumEventIdString = string;
   export type RumEventList = RumEvent[];
   export type SessionSampleRate = number;
   export type StateEnum = "CREATED"|"DELETING"|"ACTIVE"|string;
@@ -837,12 +849,14 @@ declare namespace RUM {
     /**
      * The session ID that the performance events are from.
      */
-    sessionId?: String;
+    sessionId?: UserDetailsSessionIdString;
     /**
      * The ID of the user for this user session. This ID is generated by RUM and does not include any personally identifiable information about the user.
      */
-    userId?: String;
+    userId?: UserDetailsUserIdString;
   }
+  export type UserDetailsSessionIdString = string;
+  export type UserDetailsUserIdString = string;
   export type ValueKey = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

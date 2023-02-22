@@ -4163,6 +4163,9 @@
       "members": {
         "EnableSIPLogs": {
           "shape": "Boolean"
+        },
+        "EnableMediaMetricLogs": {
+          "shape": "Boolean"
         }
       }
     },
