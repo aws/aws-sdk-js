@@ -412,11 +412,11 @@ declare class IoTWireless extends Service {
    */
   getResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.GetResourceLogLevelResponse) => void): Request<IoTWireless.Types.GetResourceLogLevelResponse, AWSError>;
   /**
-   * Get the position information for a given wireless device or a wireless gateway resource. The postion information uses the  World Geodetic System (WGS84).
+   * Get the position information for a given wireless device or a wireless gateway resource. The position information uses the  World Geodetic System (WGS84).
    */
   getResourcePosition(params: IoTWireless.Types.GetResourcePositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetResourcePositionResponse) => void): Request<IoTWireless.Types.GetResourcePositionResponse, AWSError>;
   /**
-   * Get the position information for a given wireless device or a wireless gateway resource. The postion information uses the  World Geodetic System (WGS84).
+   * Get the position information for a given wireless device or a wireless gateway resource. The position information uses the  World Geodetic System (WGS84).
    */
   getResourcePosition(callback?: (err: AWSError, data: IoTWireless.Types.GetResourcePositionResponse) => void): Request<IoTWireless.Types.GetResourcePositionResponse, AWSError>;
   /**
@@ -796,11 +796,11 @@ declare class IoTWireless extends Service {
    */
   updateResourceEventConfiguration(callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourceEventConfigurationResponse) => void): Request<IoTWireless.Types.UpdateResourceEventConfigurationResponse, AWSError>;
   /**
-   * Update the position information of a given wireless device or a wireless gateway resource. The postion coordinates are based on the  World Geodetic System (WGS84).
+   * Update the position information of a given wireless device or a wireless gateway resource. The position coordinates are based on the  World Geodetic System (WGS84).
    */
   updateResourcePosition(params: IoTWireless.Types.UpdateResourcePositionRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourcePositionResponse) => void): Request<IoTWireless.Types.UpdateResourcePositionResponse, AWSError>;
   /**
-   * Update the position information of a given wireless device or a wireless gateway resource. The postion coordinates are based on the  World Geodetic System (WGS84).
+   * Update the position information of a given wireless device or a wireless gateway resource. The position coordinates are based on the  World Geodetic System (WGS84).
    */
   updateResourcePosition(callback?: (err: AWSError, data: IoTWireless.Types.UpdateResourcePositionResponse) => void): Request<IoTWireless.Types.UpdateResourcePositionResponse, AWSError>;
   /**
@@ -1051,7 +1051,7 @@ declare namespace IoTWireless {
      */
     BaseLat?: BaseLat;
     /**
-     * CDMA base station longtitude in degrees.
+     * CDMA base station longitude in degrees.
      */
     BaseLng?: BaseLng;
     /**
@@ -1193,6 +1193,9 @@ declare namespace IoTWireless {
     FirmwareUpdateImage: FirmwareUpdateImage;
     FirmwareUpdateRole: FirmwareUpdateRole;
     Tags?: TagList;
+    RedundancyPercent?: RedundancyPercent;
+    FragmentSizeBytes?: FragmentSizeBytes;
+    FragmentIntervalMS?: FragmentIntervalMS;
   }
   export interface CreateFuotaTaskResponse {
     Arn?: FuotaTaskArn;
@@ -1701,6 +1704,8 @@ declare namespace IoTWireless {
   export type Fingerprint = string;
   export type FirmwareUpdateImage = string;
   export type FirmwareUpdateRole = string;
+  export type FragmentIntervalMS = number;
+  export type FragmentSizeBytes = number;
   export type FuotaDeviceStatus = "Initial"|"Package_Not_Supported"|"FragAlgo_unsupported"|"Not_enough_memory"|"FragIndex_unsupported"|"Wrong_descriptor"|"SessionCnt_replay"|"MissingFrag"|"MemoryError"|"MICError"|"Successful"|string;
   export interface FuotaTask {
     Id?: FuotaTaskId;
@@ -1821,6 +1826,9 @@ declare namespace IoTWireless {
     FirmwareUpdateImage?: FirmwareUpdateImage;
     FirmwareUpdateRole?: FirmwareUpdateRole;
     CreatedAt?: CreatedAt;
+    RedundancyPercent?: RedundancyPercent;
+    FragmentSizeBytes?: FragmentSizeBytes;
+    FragmentIntervalMS?: FragmentIntervalMS;
   }
   export interface GetLogLevelsByResourceTypesRequest {
   }
@@ -1925,7 +1933,7 @@ declare namespace IoTWireless {
      */
     Gnss?: Gnss;
     /**
-     * Optional information that specifies the time when the position information will be resolved. It uses the UNIX timestamp format. If not specified, the time at which the request was received will be used.
+     * Optional information that specifies the time when the position information will be resolved. It uses the Unix timestamp format. If not specified, the time at which the request was received will be used.
      */
     Timestamp?: CreationDate;
   }
@@ -2019,7 +2027,7 @@ declare namespace IoTWireless {
   }
   export interface GetResourcePositionRequest {
     /**
-     * The identifier of the resource for which position information is retrieved. It can be the wireless device ID or the wireless gateway ID depending on the resource type.
+     * The identifier of the resource for which position information is retrieved. It can be the wireless device ID or the wireless gateway ID, depending on the resource type.
      */
     ResourceIdentifier: PositionResourceIdentifier;
     /**
@@ -2321,7 +2329,7 @@ declare namespace IoTWireless {
      */
     CaptureTimeAccuracy?: CaptureTimeAccuracy;
     /**
-     * Optional assistance position information, specified using latitude and longitude values in degrees. The co-ordinates are inside the WGS84 reference frame.
+     * Optional assistance position information, specified using latitude and longitude values in degrees. The coordinates are inside the WGS84 reference frame.
      */
     AssistPosition?: AssistPosition;
     /**
@@ -3427,6 +3435,7 @@ declare namespace IoTWireless {
   export type RSRQ = number;
   export type RSS = number;
   export type RaAllowed = boolean;
+  export type RedundancyPercent = number;
   export type RegParamsRevision = string;
   export type RegistrationZone = number;
   export type ReportDevStatusBattery = boolean;
@@ -3921,6 +3930,9 @@ declare namespace IoTWireless {
     LoRaWAN?: LoRaWANFuotaTask;
     FirmwareUpdateImage?: FirmwareUpdateImage;
     FirmwareUpdateRole?: FirmwareUpdateRole;
+    RedundancyPercent?: RedundancyPercent;
+    FragmentSizeBytes?: FragmentSizeBytes;
+    FragmentIntervalMS?: FragmentIntervalMS;
   }
   export interface UpdateFuotaTaskResponse {
   }
@@ -4032,7 +4044,7 @@ declare namespace IoTWireless {
   }
   export interface UpdateResourcePositionRequest {
     /**
-     * The identifier of the resource for which position information is updated. It can be the wireless device ID or the wireless gateway ID depending on the resource type.
+     * The identifier of the resource for which position information is updated. It can be the wireless device ID or the wireless gateway ID, depending on the resource type.
      */
     ResourceIdentifier: PositionResourceIdentifier;
     /**

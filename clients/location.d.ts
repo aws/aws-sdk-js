@@ -92,75 +92,91 @@ declare class Location extends Service {
    */
   createGeofenceCollection(callback?: (err: AWSError, data: Location.Types.CreateGeofenceCollectionResponse) => void): Request<Location.Types.CreateGeofenceCollectionResponse, AWSError>;
   /**
-   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the AWS service terms for more details. 
+   * Creates an API key resource in your Amazon Web Services account, which lets you grant geo:GetMap* actions for Amazon Location Map resources to the API key bearer.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  createKey(params: Location.Types.CreateKeyRequest, callback?: (err: AWSError, data: Location.Types.CreateKeyResponse) => void): Request<Location.Types.CreateKeyResponse, AWSError>;
+  /**
+   * Creates an API key resource in your Amazon Web Services account, which lets you grant geo:GetMap* actions for Amazon Location Map resources to the API key bearer.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  createKey(callback?: (err: AWSError, data: Location.Types.CreateKeyResponse) => void): Request<Location.Types.CreateKeyResponse, AWSError>;
+  /**
+   * Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the Amazon Web Services service terms for more details. 
    */
   createMap(params: Location.Types.CreateMapRequest, callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the AWS service terms for more details. 
+   * Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the Amazon Web Services service terms for more details. 
    */
   createMap(callback?: (err: AWSError, data: Location.Types.CreateMapResponse) => void): Request<Location.Types.CreateMapResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the AWS service terms for more details. 
+   * Creates a place index resource in your Amazon Web Services account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the Amazon Web Services service terms for more details. 
    */
   createPlaceIndex(params: Location.Types.CreatePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the AWS service terms for more details. 
+   * Creates a place index resource in your Amazon Web Services account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the Amazon Web Services service terms for more details. 
    */
   createPlaceIndex(callback?: (err: AWSError, data: Location.Types.CreatePlaceIndexResponse) => void): Request<Location.Types.CreatePlaceIndexResponse, AWSError>;
   /**
-   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the AWS service terms for more details. 
+   * Creates a route calculator resource in your Amazon Web Services account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the Amazon Web Services service terms for more details. 
    */
   createRouteCalculator(params: Location.Types.CreateRouteCalculatorRequest, callback?: (err: AWSError, data: Location.Types.CreateRouteCalculatorResponse) => void): Request<Location.Types.CreateRouteCalculatorResponse, AWSError>;
   /**
-   * Creates a route calculator resource in your AWS account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the AWS service terms for more details. 
+   * Creates a route calculator resource in your Amazon Web Services account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the Amazon Web Services service terms for more details. 
    */
   createRouteCalculator(callback?: (err: AWSError, data: Location.Types.CreateRouteCalculatorResponse) => void): Request<Location.Types.CreateRouteCalculatorResponse, AWSError>;
   /**
-   * Creates a tracker resource in your AWS account, which lets you retrieve current and historical location of devices.
+   * Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.
    */
   createTracker(params: Location.Types.CreateTrackerRequest, callback?: (err: AWSError, data: Location.Types.CreateTrackerResponse) => void): Request<Location.Types.CreateTrackerResponse, AWSError>;
   /**
-   * Creates a tracker resource in your AWS account, which lets you retrieve current and historical location of devices.
+   * Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.
    */
   createTracker(callback?: (err: AWSError, data: Location.Types.CreateTrackerResponse) => void): Request<Location.Types.CreateTrackerResponse, AWSError>;
   /**
-   * Deletes a geofence collection from your AWS account.  This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored. 
+   * Deletes a geofence collection from your Amazon Web Services account.  This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored. 
    */
   deleteGeofenceCollection(params: Location.Types.DeleteGeofenceCollectionRequest, callback?: (err: AWSError, data: Location.Types.DeleteGeofenceCollectionResponse) => void): Request<Location.Types.DeleteGeofenceCollectionResponse, AWSError>;
   /**
-   * Deletes a geofence collection from your AWS account.  This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored. 
+   * Deletes a geofence collection from your Amazon Web Services account.  This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored. 
    */
   deleteGeofenceCollection(callback?: (err: AWSError, data: Location.Types.DeleteGeofenceCollectionResponse) => void): Request<Location.Types.DeleteGeofenceCollectionResponse, AWSError>;
   /**
-   * Deletes a map resource from your AWS account.  This operation deletes the resource permanently. If the map is being used in an application, the map may not render. 
+   * Deletes the specified API key. The API key must have been deactivated more than 90 days previously.
+   */
+  deleteKey(params: Location.Types.DeleteKeyRequest, callback?: (err: AWSError, data: Location.Types.DeleteKeyResponse) => void): Request<Location.Types.DeleteKeyResponse, AWSError>;
+  /**
+   * Deletes the specified API key. The API key must have been deactivated more than 90 days previously.
+   */
+  deleteKey(callback?: (err: AWSError, data: Location.Types.DeleteKeyResponse) => void): Request<Location.Types.DeleteKeyResponse, AWSError>;
+  /**
+   * Deletes a map resource from your Amazon Web Services account.  This operation deletes the resource permanently. If the map is being used in an application, the map may not render. 
    */
   deleteMap(params: Location.Types.DeleteMapRequest, callback?: (err: AWSError, data: Location.Types.DeleteMapResponse) => void): Request<Location.Types.DeleteMapResponse, AWSError>;
   /**
-   * Deletes a map resource from your AWS account.  This operation deletes the resource permanently. If the map is being used in an application, the map may not render. 
+   * Deletes a map resource from your Amazon Web Services account.  This operation deletes the resource permanently. If the map is being used in an application, the map may not render. 
    */
   deleteMap(callback?: (err: AWSError, data: Location.Types.DeleteMapResponse) => void): Request<Location.Types.DeleteMapResponse, AWSError>;
   /**
-   * Deletes a place index resource from your AWS account.  This operation deletes the resource permanently. 
+   * Deletes a place index resource from your Amazon Web Services account.  This operation deletes the resource permanently. 
    */
   deletePlaceIndex(params: Location.Types.DeletePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.DeletePlaceIndexResponse) => void): Request<Location.Types.DeletePlaceIndexResponse, AWSError>;
   /**
-   * Deletes a place index resource from your AWS account.  This operation deletes the resource permanently. 
+   * Deletes a place index resource from your Amazon Web Services account.  This operation deletes the resource permanently. 
    */
   deletePlaceIndex(callback?: (err: AWSError, data: Location.Types.DeletePlaceIndexResponse) => void): Request<Location.Types.DeletePlaceIndexResponse, AWSError>;
   /**
-   * Deletes a route calculator resource from your AWS account.  This operation deletes the resource permanently. 
+   * Deletes a route calculator resource from your Amazon Web Services account.  This operation deletes the resource permanently. 
    */
   deleteRouteCalculator(params: Location.Types.DeleteRouteCalculatorRequest, callback?: (err: AWSError, data: Location.Types.DeleteRouteCalculatorResponse) => void): Request<Location.Types.DeleteRouteCalculatorResponse, AWSError>;
   /**
-   * Deletes a route calculator resource from your AWS account.  This operation deletes the resource permanently. 
+   * Deletes a route calculator resource from your Amazon Web Services account.  This operation deletes the resource permanently. 
    */
   deleteRouteCalculator(callback?: (err: AWSError, data: Location.Types.DeleteRouteCalculatorResponse) => void): Request<Location.Types.DeleteRouteCalculatorResponse, AWSError>;
   /**
-   * Deletes a tracker resource from your AWS account.  This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications. 
+   * Deletes a tracker resource from your Amazon Web Services account.  This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications. 
    */
   deleteTracker(params: Location.Types.DeleteTrackerRequest, callback?: (err: AWSError, data: Location.Types.DeleteTrackerResponse) => void): Request<Location.Types.DeleteTrackerResponse, AWSError>;
   /**
-   * Deletes a tracker resource from your AWS account.  This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications. 
+   * Deletes a tracker resource from your Amazon Web Services account.  This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications. 
    */
   deleteTracker(callback?: (err: AWSError, data: Location.Types.DeleteTrackerResponse) => void): Request<Location.Types.DeleteTrackerResponse, AWSError>;
   /**
@@ -171,6 +187,14 @@ declare class Location extends Service {
    * Retrieves the geofence collection details.
    */
   describeGeofenceCollection(callback?: (err: AWSError, data: Location.Types.DescribeGeofenceCollectionResponse) => void): Request<Location.Types.DescribeGeofenceCollectionResponse, AWSError>;
+  /**
+   * Retrieves the API key resource details.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  describeKey(params: Location.Types.DescribeKeyRequest, callback?: (err: AWSError, data: Location.Types.DescribeKeyResponse) => void): Request<Location.Types.DescribeKeyResponse, AWSError>;
+  /**
+   * Retrieves the API key resource details.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  describeKey(callback?: (err: AWSError, data: Location.Types.DescribeKeyResponse) => void): Request<Location.Types.DescribeKeyResponse, AWSError>;
   /**
    * Retrieves the map resource details.
    */
@@ -268,11 +292,11 @@ declare class Location extends Service {
    */
   getMapTile(callback?: (err: AWSError, data: Location.Types.GetMapTileResponse) => void): Request<Location.Types.GetMapTileResponse, AWSError>;
   /**
-   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer AWS account   AWS Region   Data provider specified in the place index resource   
+   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer Amazon Web Services account   Amazon Web Services Region   Data provider specified in the place index resource   
    */
   getPlace(params: Location.Types.GetPlaceRequest, callback?: (err: AWSError, data: Location.Types.GetPlaceResponse) => void): Request<Location.Types.GetPlaceResponse, AWSError>;
   /**
-   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer AWS account   AWS Region   Data provider specified in the place index resource   
+   * Finds a place by its unique ID. A PlaceId is returned by other search operations.  A PlaceId is valid only if all of the following are the same in the original search request and the call to GetPlace.   Customer Amazon Web Services account   Amazon Web Services Region   Data provider specified in the place index resource   
    */
   getPlace(callback?: (err: AWSError, data: Location.Types.GetPlaceResponse) => void): Request<Location.Types.GetPlaceResponse, AWSError>;
   /**
@@ -284,11 +308,11 @@ declare class Location extends Service {
    */
   listDevicePositions(callback?: (err: AWSError, data: Location.Types.ListDevicePositionsResponse) => void): Request<Location.Types.ListDevicePositionsResponse, AWSError>;
   /**
-   * Lists geofence collections in your AWS account.
+   * Lists geofence collections in your Amazon Web Services account.
    */
   listGeofenceCollections(params: Location.Types.ListGeofenceCollectionsRequest, callback?: (err: AWSError, data: Location.Types.ListGeofenceCollectionsResponse) => void): Request<Location.Types.ListGeofenceCollectionsResponse, AWSError>;
   /**
-   * Lists geofence collections in your AWS account.
+   * Lists geofence collections in your Amazon Web Services account.
    */
   listGeofenceCollections(callback?: (err: AWSError, data: Location.Types.ListGeofenceCollectionsResponse) => void): Request<Location.Types.ListGeofenceCollectionsResponse, AWSError>;
   /**
@@ -300,27 +324,35 @@ declare class Location extends Service {
    */
   listGeofences(callback?: (err: AWSError, data: Location.Types.ListGeofencesResponse) => void): Request<Location.Types.ListGeofencesResponse, AWSError>;
   /**
-   * Lists map resources in your AWS account.
+   * Lists API key resources in your Amazon Web Services account.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  listKeys(params: Location.Types.ListKeysRequest, callback?: (err: AWSError, data: Location.Types.ListKeysResponse) => void): Request<Location.Types.ListKeysResponse, AWSError>;
+  /**
+   * Lists API key resources in your Amazon Web Services account.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  listKeys(callback?: (err: AWSError, data: Location.Types.ListKeysResponse) => void): Request<Location.Types.ListKeysResponse, AWSError>;
+  /**
+   * Lists map resources in your Amazon Web Services account.
    */
   listMaps(params: Location.Types.ListMapsRequest, callback?: (err: AWSError, data: Location.Types.ListMapsResponse) => void): Request<Location.Types.ListMapsResponse, AWSError>;
   /**
-   * Lists map resources in your AWS account.
+   * Lists map resources in your Amazon Web Services account.
    */
   listMaps(callback?: (err: AWSError, data: Location.Types.ListMapsResponse) => void): Request<Location.Types.ListMapsResponse, AWSError>;
   /**
-   * Lists place index resources in your AWS account.
+   * Lists place index resources in your Amazon Web Services account.
    */
   listPlaceIndexes(params: Location.Types.ListPlaceIndexesRequest, callback?: (err: AWSError, data: Location.Types.ListPlaceIndexesResponse) => void): Request<Location.Types.ListPlaceIndexesResponse, AWSError>;
   /**
-   * Lists place index resources in your AWS account.
+   * Lists place index resources in your Amazon Web Services account.
    */
   listPlaceIndexes(callback?: (err: AWSError, data: Location.Types.ListPlaceIndexesResponse) => void): Request<Location.Types.ListPlaceIndexesResponse, AWSError>;
   /**
-   * Lists route calculator resources in your AWS account.
+   * Lists route calculator resources in your Amazon Web Services account.
    */
   listRouteCalculators(params: Location.Types.ListRouteCalculatorsRequest, callback?: (err: AWSError, data: Location.Types.ListRouteCalculatorsResponse) => void): Request<Location.Types.ListRouteCalculatorsResponse, AWSError>;
   /**
-   * Lists route calculator resources in your AWS account.
+   * Lists route calculator resources in your Amazon Web Services account.
    */
   listRouteCalculators(callback?: (err: AWSError, data: Location.Types.ListRouteCalculatorsResponse) => void): Request<Location.Types.ListRouteCalculatorsResponse, AWSError>;
   /**
@@ -340,11 +372,11 @@ declare class Location extends Service {
    */
   listTrackerConsumers(callback?: (err: AWSError, data: Location.Types.ListTrackerConsumersResponse) => void): Request<Location.Types.ListTrackerConsumersResponse, AWSError>;
   /**
-   * Lists tracker resources in your AWS account.
+   * Lists tracker resources in your Amazon Web Services account.
    */
   listTrackers(params: Location.Types.ListTrackersRequest, callback?: (err: AWSError, data: Location.Types.ListTrackersResponse) => void): Request<Location.Types.ListTrackersResponse, AWSError>;
   /**
-   * Lists tracker resources in your AWS account.
+   * Lists tracker resources in your Amazon Web Services account.
    */
   listTrackers(callback?: (err: AWSError, data: Location.Types.ListTrackersResponse) => void): Request<Location.Types.ListTrackersResponse, AWSError>;
   /**
@@ -404,6 +436,14 @@ declare class Location extends Service {
    */
   updateGeofenceCollection(callback?: (err: AWSError, data: Location.Types.UpdateGeofenceCollectionResponse) => void): Request<Location.Types.UpdateGeofenceCollectionResponse, AWSError>;
   /**
+   * Updates the specified properties of a given API key resource.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  updateKey(params: Location.Types.UpdateKeyRequest, callback?: (err: AWSError, data: Location.Types.UpdateKeyResponse) => void): Request<Location.Types.UpdateKeyResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given API key resource.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   */
+  updateKey(callback?: (err: AWSError, data: Location.Types.UpdateKeyResponse) => void): Request<Location.Types.UpdateKeyResponse, AWSError>;
+  /**
    * Updates the specified properties of a given map resource.
    */
   updateMap(params: Location.Types.UpdateMapRequest, callback?: (err: AWSError, data: Location.Types.UpdateMapResponse) => void): Request<Location.Types.UpdateMapResponse, AWSError>;
@@ -437,11 +477,36 @@ declare class Location extends Service {
   updateTracker(callback?: (err: AWSError, data: Location.Types.UpdateTrackerResponse) => void): Request<Location.Types.UpdateTrackerResponse, AWSError>;
 }
 declare namespace Location {
+  export type ApiKey = string;
+  export type ApiKeyAction = string;
+  export interface ApiKeyFilter {
+    /**
+     * Filter on Active or Expired API keys.
+     */
+    KeyStatus?: Status;
+  }
+  export interface ApiKeyRestrictions {
+    /**
+     * A list of allowed actions that an API key resource grants permissions to perform  Currently, the only valid action is geo:GetMap* as an input to the list. For example, ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not. 
+     */
+    AllowActions: ApiKeyRestrictionsAllowActionsList;
+    /**
+     * An optional list of allowed HTTP referers for which requests must originate from. Requests using this API key from other domains will not be allowed. Requirements:   Contain only alphanumeric characters (A–Z, a–z, 0–9) or any symbols in this list $\-._+!*`(),;/?:@=&amp;    May contain a percent (%) if followed by 2 hexadecimal digits (A-F, a-f, 0-9); this is used for URL encoding purposes.   May contain wildcard characters question mark (?) and asterisk (*). Question mark (?) will replace any single character (including hexadecimal digits). Asterisk (*) will replace any multiple characters (including multiple hexadecimal digits).   No spaces allowed. For example, https://example.com.  
+     */
+    AllowReferers?: ApiKeyRestrictionsAllowReferersList;
+    /**
+     * A list of allowed resource ARNs that a API key bearer can perform actions on For more information about ARN format, see Amazon Resource Names (ARNs).  In this preview, you can allow only map resources.  Requirements:   Must be prefixed with arn.    partition and service must not be empty and should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).    region and account-id can be empty or should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).    resource-id can begin with any character except for forward slash (/) and contain any characters after, including forward slashes to form a path.  resource-id can also include wildcard characters, denoted by an asterisk (*).    arn, partition, service, region, account-id and resource-id must be delimited by a colon (:).   No spaces allowed. For example, arn:aws:geo:region:account-id:map/ExampleMap*.  
+     */
+    AllowResources: ApiKeyRestrictionsAllowResourcesList;
+  }
+  export type ApiKeyRestrictionsAllowActionsList = ApiKeyAction[];
+  export type ApiKeyRestrictionsAllowReferersList = RefererPattern[];
+  export type ApiKeyRestrictionsAllowResourcesList = GeoArn[];
   export type Arn = string;
   export type ArnList = Arn[];
   export interface AssociateTrackerConsumerRequest {
     /**
-     * The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer   
+     * The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer   
      */
     ConsumerArn: Arn;
     /**
@@ -883,7 +948,7 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * A key identifier for an AWS KMS customer managed key. Enter a key ID, key ARN, alias name, or alias ARN. 
+     * A key identifier for an Amazon Web Services KMS customer managed key. Enter a key ID, key ARN, alias name, or alias ARN. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -901,7 +966,7 @@ declare namespace Location {
   }
   export interface CreateGeofenceCollectionResponse {
     /**
-     * The Amazon Resource Name (ARN) for the geofence collection resource. Used when you need to specify a resource across all AWS.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
+     * The Amazon Resource Name (ARN) for the geofence collection resource. Used when you need to specify a resource across all Amazon Web Services.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
      */
     CollectionArn: Arn;
     /**
@@ -912,6 +977,50 @@ declare namespace Location {
      * The timestamp for when the geofence collection was created in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
      */
     CreateTime: Timestamp;
+  }
+  export interface CreateKeyRequest {
+    /**
+     * An optional description for the API key resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * The optional timestamp for when the API key resource will expire in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. One of NoExpiry or ExpireTime must be set.
+     */
+    ExpireTime?: Timestamp;
+    /**
+     * A custom name for the API key resource. Requirements:   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).    Must be a unique API key name.   No spaces allowed. For example, ExampleAPIKey.  
+     */
+    KeyName: ResourceName;
+    /**
+     * Optionally set to true to set no expiration time for the API key. One of NoExpiry or ExpireTime must be set.
+     */
+    NoExpiry?: Boolean;
+    /**
+     * The API key restrictions for the API key resource.
+     */
+    Restrictions: ApiKeyRestrictions;
+    /**
+     * Applies one or more tags to the map resource. A tag is a key-value pair that helps manage, identify, search, and filter your resources by labelling them. Format: "key" : "value"  Restrictions:   Maximum 50 tags per resource   Each resource tag must be unique with a maximum of one value.   Maximum key length: 128 Unicode characters in UTF-8   Maximum value length: 256 Unicode characters in UTF-8   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.    Cannot use "aws:" as a prefix for a key.  
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateKeyResponse {
+    /**
+     * The timestamp for when the API key resource was created in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    CreateTime: Timestamp;
+    /**
+     * The key value/string of an API key. This value is used when making API calls to authorize the call. For example, see GetMapGlyphs.
+     */
+    Key: ApiKey;
+    /**
+     * The Amazon Resource Name (ARN) for the API key resource. Used when you need to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:key/ExampleKey   
+     */
+    KeyArn: Arn;
+    /**
+     * The name of the API key resource.
+     */
+    KeyName: ResourceName;
   }
   export interface CreateMapRequest {
     /**
@@ -941,7 +1050,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:map/ExampleMap   
+     * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:map/ExampleMap   
      */
     MapArn: GeoArn;
     /**
@@ -951,7 +1060,7 @@ declare namespace Location {
   }
   export interface CreatePlaceIndexRequest {
     /**
-     * Specifies the geospatial data provider for the new place index.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Grab – Grab provides place index functionality for Southeast Asia. For additional information about GrabMaps' coverage, see GrabMaps countries and areas covered.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  If you specify HERE Technologies (Here) as the data provider, you may not store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
+     * Specifies the geospatial data provider for the new place index.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Grab – Grab provides place index functionality for Southeast Asia. For additional information about GrabMaps' coverage, see GrabMaps countries and areas covered.    Here – For additional information about HERE Technologies' coverage in your region of interest, see HERE details on goecoding coverage.  If you specify HERE Technologies (Here) as the data provider, you may not store results for locations in Japan. For more information, see the Amazon Web Services Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
@@ -981,7 +1090,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
+     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across Amazon Web Services.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
      */
     IndexArn: Arn;
     /**
@@ -1013,7 +1122,7 @@ declare namespace Location {
   }
   export interface CreateRouteCalculatorResponse {
     /**
-     * The Amazon Resource Name (ARN) for the route calculator resource. Use the ARN when you specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:route-calculator/ExampleCalculator   
+     * The Amazon Resource Name (ARN) for the route calculator resource. Use the ARN when you specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:route-calculator/ExampleCalculator   
      */
     CalculatorArn: Arn;
     /**
@@ -1031,7 +1140,7 @@ declare namespace Location {
      */
     Description?: ResourceDescription;
     /**
-     * A key identifier for an AWS KMS customer managed key. Enter a key ID, key ARN, alias name, or alias ARN.
+     * A key identifier for an Amazon Web Services KMS customer managed key. Enter a key ID, key ARN, alias name, or alias ARN.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -1061,7 +1170,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker   
+     * The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker   
      */
     TrackerArn: Arn;
     /**
@@ -1082,6 +1191,14 @@ declare namespace Location {
     CollectionName: ResourceName;
   }
   export interface DeleteGeofenceCollectionResponse {
+  }
+  export interface DeleteKeyRequest {
+    /**
+     * The name of the API key to delete.
+     */
+    KeyName: ResourceName;
+  }
+  export interface DeleteKeyResponse {
   }
   export interface DeleteMapRequest {
     /**
@@ -1123,7 +1240,7 @@ declare namespace Location {
   }
   export interface DescribeGeofenceCollectionResponse {
     /**
-     * The Amazon Resource Name (ARN) for the geofence collection resource. Used when you need to specify a resource across all AWS.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
+     * The Amazon Resource Name (ARN) for the geofence collection resource. Used when you need to specify a resource across all Amazon Web Services.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
      */
     CollectionArn: Arn;
     /**
@@ -1139,7 +1256,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * A key identifier for an AWS KMS customer managed key assigned to the Amazon Location resource
+     * A key identifier for an Amazon Web Services KMS customer managed key assigned to the Amazon Location resource
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -1156,6 +1273,47 @@ declare namespace Location {
     Tags?: TagMap;
     /**
      * The timestamp for when the geofence collection was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface DescribeKeyRequest {
+    /**
+     * The name of the API key resource.
+     */
+    KeyName: ResourceName;
+  }
+  export interface DescribeKeyResponse {
+    /**
+     * The timestamp for when the API key resource was created in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    CreateTime: Timestamp;
+    /**
+     * The optional description for the API key resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * The timestamp for when the API key resource will expire in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    ExpireTime: Timestamp;
+    /**
+     * The key value/string of an API key.
+     */
+    Key: ApiKey;
+    /**
+     * The Amazon Resource Name (ARN) for the API key resource. Used when you need to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:key/ExampleKey   
+     */
+    KeyArn: Arn;
+    /**
+     * The name of the API key resource.
+     */
+    KeyName: ResourceName;
+    Restrictions: ApiKeyRestrictions;
+    /**
+     * Tags associated with the API key resource.
+     */
+    Tags?: TagMap;
+    /**
+     * The timestamp for when the API key resource was last updated in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     UpdateTime: Timestamp;
   }
@@ -1183,7 +1341,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:map/ExampleMap   
+     * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:map/ExampleMap   
      */
     MapArn: GeoArn;
     /**
@@ -1227,7 +1385,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
+     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across Amazon Web Services.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
      */
     IndexArn: Arn;
     /**
@@ -1255,7 +1413,7 @@ declare namespace Location {
   }
   export interface DescribeRouteCalculatorResponse {
     /**
-     * The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:route-calculator/ExampleCalculator   
+     * The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you specify a resource across Amazon Web Services.   Format example: arn:aws:geo:region:account-id:route-calculator/ExampleCalculator   
      */
     CalculatorArn: Arn;
     /**
@@ -1303,7 +1461,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * A key identifier for an AWS KMS customer managed key assigned to the Amazon Location resource.
+     * A key identifier for an Amazon Web Services KMS customer managed key assigned to the Amazon Location resource.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -1323,7 +1481,7 @@ declare namespace Location {
      */
     Tags?: TagMap;
     /**
-     * The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker   
+     * The Amazon Resource Name (ARN) for the tracker resource. Used when you need to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker   
      */
     TrackerArn: Arn;
     /**
@@ -1387,7 +1545,7 @@ declare namespace Location {
   export type DimensionUnit = "Meters"|"Feet"|string;
   export interface DisassociateTrackerConsumerRequest {
     /**
-     * The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource. Used when you need to specify a resource across all AWS.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer   
+     * The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource. Used when you need to specify a resource across all Amazon Web Services.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer   
      */
     ConsumerArn: Arn;
     /**
@@ -1525,6 +1683,10 @@ declare namespace Location {
      */
     FontUnicodeRange: GetMapGlyphsRequestFontUnicodeRangeString;
     /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
+    /**
      * The map resource associated with the glyph ﬁle.
      */
     MapName: ResourceName;
@@ -1532,9 +1694,13 @@ declare namespace Location {
   export type GetMapGlyphsRequestFontUnicodeRangeString = string;
   export interface GetMapGlyphsResponse {
     /**
-     * The blob's content type.
+     * The glyph, as binary blob.
      */
     Blob?: _Blob;
+    /**
+     * The HTTP Cache-Control directive for the value.
+     */
+    CacheControl?: String;
     /**
      * The map glyph content type. For example, application/octet-stream.
      */
@@ -1545,6 +1711,10 @@ declare namespace Location {
      * The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:    sprites.png     sprites@2x.png for high pixel density displays   For the JSON document containing image offsets. Use the following ﬁle names:    sprites.json     sprites@2x.json for high pixel density displays  
      */
     FileName: GetMapSpritesRequestFileNameString;
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * The map resource associated with the sprite ﬁle.
      */
@@ -1557,11 +1727,19 @@ declare namespace Location {
      */
     Blob?: _Blob;
     /**
+     * The HTTP Cache-Control directive for the value.
+     */
+    CacheControl?: String;
+    /**
      * The content type of the sprite sheet and offsets. For example, the sprite sheet content type is image/png, and the sprite offset JSON document is application/json. 
      */
     ContentType?: String;
   }
   export interface GetMapStyleDescriptorRequest {
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * The map resource to retrieve the style descriptor from.
      */
@@ -1573,11 +1751,19 @@ declare namespace Location {
      */
     Blob?: _Blob;
     /**
+     * The HTTP Cache-Control directive for the value.
+     */
+    CacheControl?: String;
+    /**
      * The style descriptor's content type. For example, application/json.
      */
     ContentType?: String;
   }
   export interface GetMapTileRequest {
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * The map resource to retrieve the map tiles from.
      */
@@ -1603,6 +1789,10 @@ declare namespace Location {
      * Contains Mapbox Vector Tile (MVT) data.
      */
     Blob?: _Blob;
+    /**
+     * The HTTP Cache-Control directive for the value.
+     */
+    CacheControl?: String;
     /**
      * The map tile's content type. For example, application/vnd.mapbox-vector-tile.
      */
@@ -1732,7 +1922,7 @@ declare namespace Location {
   export type ListGeofenceCollectionsRequestMaxResultsInteger = number;
   export interface ListGeofenceCollectionsResponse {
     /**
-     * Lists the geofence collections that exist in your AWS account.
+     * Lists the geofence collections that exist in your Amazon Web Services account.
      */
     Entries: ListGeofenceCollectionsResponseEntryList;
     /**
@@ -1815,6 +2005,55 @@ declare namespace Location {
      */
     NextToken?: Token;
   }
+  export interface ListKeysRequest {
+    /**
+     * Optionally filter the list to only Active or Expired API keys.
+     */
+    Filter?: ApiKeyFilter;
+    /**
+     * An optional limit for the number of resources returned in a single call.  Default value: 100 
+     */
+    MaxResults?: ListKeysRequestMaxResultsInteger;
+    /**
+     * The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.  Default value: null 
+     */
+    NextToken?: Token;
+  }
+  export type ListKeysRequestMaxResultsInteger = number;
+  export interface ListKeysResponse {
+    /**
+     * Contains API key resources in your Amazon Web Services account. Details include API key name, allowed referers and timestamp for when the API key will expire.
+     */
+    Entries: ListKeysResponseEntryList;
+    /**
+     * A pagination token indicating there are additional pages available. You can use the token in a following request to fetch the next set of results. 
+     */
+    NextToken?: Token;
+  }
+  export interface ListKeysResponseEntry {
+    /**
+     * The timestamp of when the API key was created, in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
+     */
+    CreateTime: Timestamp;
+    /**
+     * The optional description for the API key resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * The timestamp for when the API key resource will expire, in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
+     */
+    ExpireTime: Timestamp;
+    /**
+     * The name of the API key resource.
+     */
+    KeyName: ResourceName;
+    Restrictions: ApiKeyRestrictions;
+    /**
+     * The timestamp of when the API key was last updated, in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ.
+     */
+    UpdateTime: Timestamp;
+  }
+  export type ListKeysResponseEntryList = ListKeysResponseEntry[];
   export interface ListMapsRequest {
     /**
      * An optional limit for the number of resources returned in a single call.  Default value: 100 
@@ -1828,7 +2067,7 @@ declare namespace Location {
   export type ListMapsRequestMaxResultsInteger = number;
   export interface ListMapsResponse {
     /**
-     * Contains a list of maps in your AWS account
+     * Contains a list of maps in your Amazon Web Services account
      */
     Entries: ListMapsResponseEntryList;
     /**
@@ -1876,7 +2115,7 @@ declare namespace Location {
   export type ListPlaceIndexesRequestMaxResultsInteger = number;
   export interface ListPlaceIndexesResponse {
     /**
-     * Lists the place index resources that exist in your AWS account
+     * Lists the place index resources that exist in your Amazon Web Services account
      */
     Entries: ListPlaceIndexesResponseEntryList;
     /**
@@ -1924,7 +2163,7 @@ declare namespace Location {
   export type ListRouteCalculatorsRequestMaxResultsInteger = number;
   export interface ListRouteCalculatorsResponse {
     /**
-     * Lists the route calculator resources that exist in your AWS account
+     * Lists the route calculator resources that exist in your Amazon Web Services account
      */
     Entries: ListRouteCalculatorsResponseEntryList;
     /**
@@ -2009,7 +2248,7 @@ declare namespace Location {
   export type ListTrackersRequestMaxResultsInteger = number;
   export interface ListTrackersResponse {
     /**
-     * Contains tracker resources in your AWS account. Details include tracker name, description and timestamps for when the tracker was created and last updated.
+     * Contains tracker resources in your Amazon Web Services account. Details include tracker name, description and timestamps for when the tracker was created and last updated.
      */
     Entries: ListTrackersResponseEntryList;
     /**
@@ -2155,6 +2394,7 @@ declare namespace Location {
      */
     UpdateTime: Timestamp;
   }
+  export type RefererPattern = string;
   export type ResourceDescription = string;
   export type ResourceName = string;
   export type RouteMatrix = RouteMatrixRow[];
@@ -2428,6 +2668,7 @@ declare namespace Location {
     Text: SensitiveString;
   }
   export type SensitiveString = string;
+  export type Status = "Active"|"Expired"|string;
   export interface Step {
     /**
      * The travel distance between the step's StartPosition and EndPosition.
@@ -2548,7 +2789,7 @@ declare namespace Location {
   }
   export interface UpdateGeofenceCollectionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the updated geofence collection. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
+     * The Amazon Resource Name (ARN) of the updated geofence collection. Used to specify a resource across Amazon Web Services.   Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
      */
     CollectionArn: Arn;
     /**
@@ -2557,6 +2798,46 @@ declare namespace Location {
     CollectionName: ResourceName;
     /**
      * The time when the geofence collection was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface UpdateKeyRequest {
+    /**
+     * Updates the description for the API key resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * Updates the timestamp for when the API key resource will expire in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    ExpireTime?: Timestamp;
+    /**
+     * The boolean flag to be included for updating ExpireTime or Restrictions details. Must be set to true to update an API key resource that has been used in the past 7 days.  False if force update is not preferred Default value: False 
+     */
+    ForceUpdate?: Boolean;
+    /**
+     * The name of the API key resource to update.
+     */
+    KeyName: ResourceName;
+    /**
+     * Whether the API key should expire. Set to true to set the API key to have no expiration time.
+     */
+    NoExpiry?: Boolean;
+    /**
+     * Updates the API key restrictions for the API key resource.
+     */
+    Restrictions?: ApiKeyRestrictions;
+  }
+  export interface UpdateKeyResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the API key resource. Used when you need to specify a resource across all Amazon Web Services.   Format example: arn:aws:geo:region:account-id:key/ExampleKey   
+     */
+    KeyArn: Arn;
+    /**
+     * The name of the API key resource.
+     */
+    KeyName: ResourceName;
+    /**
+     * The timestamp for when the API key resource was last updated in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
      */
     UpdateTime: Timestamp;
   }
@@ -2608,7 +2889,7 @@ declare namespace Location {
   }
   export interface UpdatePlaceIndexResponse {
     /**
-     * The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex   
+     * The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a resource across Amazon Web Services.   Format example: arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex   
      */
     IndexArn: Arn;
     /**

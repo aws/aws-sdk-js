@@ -911,19 +911,19 @@ declare namespace Macie2 {
   }
   export interface BucketCountBySharedAccessType {
     /**
-     * The total number of buckets that are shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization.
+     * The total number of buckets that are shared with one or more of the following or any combination of the following: an Amazon Web Services account that isn't in the same Amazon Macie organization, an Amazon CloudFront OAI, or a CloudFront OAC.
      */
     external?: __long;
     /**
-     * The total number of buckets that are shared with an Amazon Web Services account that's part of the same Amazon Macie organization.
+     * The total number of buckets that are shared with one or more Amazon Web Services accounts in the same Amazon Macie organization. These buckets aren't shared with Amazon CloudFront OAIs or OACs.
      */
     internal?: __long;
     /**
-     * The total number of buckets that aren't shared with other Amazon Web Services accounts.
+     * The total number of buckets that aren't shared with other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.
      */
     notShared?: __long;
     /**
-     * The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other Amazon Web Services accounts.
+     * The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.
      */
     unknown?: __long;
   }
@@ -1000,7 +1000,7 @@ declare namespace Macie2 {
      */
     bucketArn?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the bucket was created, or changes such as edits to the bucket's policy were most recently made to the bucket.
+     * The date and time, in UTC and extended ISO 8601 format, when the bucket was created. This value can also indicate when changes such as edits to the bucket's policy were most recently made to the bucket.
      */
     bucketCreatedAt?: __timestampIso8601;
     /**
@@ -1016,7 +1016,7 @@ declare namespace Macie2 {
      */
     classifiableSizeInBytes?: __long;
     /**
-     * Specifies the error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.
+     * The error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.
      */
     errorCode?: BucketMetadataErrorCode;
     /**
@@ -1028,11 +1028,11 @@ declare namespace Macie2 {
      */
     jobDetails?: JobDetails;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently performed automated sensitive data discovery for the bucket. This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed data in the bucket while performing automated sensitive data discovery for your account. This value is null if automated sensitive data discovery is currently disabled for your account.
      */
     lastAutomatedDiscoveryTime?: __timestampIso8601;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the bucket.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved bucket or object metadata from Amazon S3 for the bucket.
      */
     lastUpdated?: __timestampIso8601;
     /**
@@ -1040,7 +1040,7 @@ declare namespace Macie2 {
      */
     objectCount?: __long;
     /**
-     * The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
+     * The total number of objects in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
     /**
@@ -1056,7 +1056,7 @@ declare namespace Macie2 {
      */
     replicationDetails?: ReplicationDetails;
     /**
-     * The sensitivity score for the bucket, ranging from -1 (no analysis due to an error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
      */
     sensitivityScore?: __integer;
     /**
@@ -1064,7 +1064,7 @@ declare namespace Macie2 {
      */
     serverSideEncryption?: BucketServerSideEncryption;
     /**
-     *  Specifies whether the bucket is shared with another Amazon Web Services account. Possible values are: EXTERNAL - The bucket is shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an Amazon Web Services account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other Amazon Web Services accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
+     * Specifies whether the bucket is shared with another Amazon Web Services account, an Amazon CloudFront origin access identity (OAI), or a CloudFront origin access control (OAC). Possible values are: EXTERNAL - The bucket is shared with one or more of the following or any combination of the following: an Amazon Web Services account that isn't part of your Amazon Macie organization, a CloudFront OAI, or a CloudFront OAC. INTERNAL - The bucket is shared with one or more Amazon Web Services accounts that are part of your Amazon Macie organization. It isn't shared with a CloudFront OAI or OAC. NOT_SHARED - The bucket isn't shared with another Amazon Web Services account, a CloudFront OAI, or a CloudFront OAC. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket. An Amazon Macie organization is a set of Macie accounts that are centrally managed as a group of related accounts through Organizations or by Macie invitation.
      */
     sharedAccess?: SharedAccess;
     /**
@@ -1153,7 +1153,7 @@ declare namespace Macie2 {
      */
     notClassified?: SensitivityAggregations;
     /**
-     * The aggregated statistical data for all buckets that have a sensitivity score of 0-49.
+     * The aggregated statistical data for all buckets that have a sensitivity score of 1-49.
      */
     notSensitive?: SensitivityAggregations;
     /**
@@ -1240,7 +1240,7 @@ declare namespace Macie2 {
      */
     code?: __string;
     /**
-     * A brief description of the status of the finding. This value is null if the status (code) of the finding is COMPLETE. Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding and the affected S3 object. Possible values are: ARCHIVE_CONTAINS_UNPROCESSED_FILES - The object is an archive file and Macie extracted and analyzed only some or none of the files in the archive. To determine which files Macie analyzed, if any, you can refer to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation). ARCHIVE_EXCEEDS_SIZE_LIMIT - The object is an archive file whose total storage size exceeds the size quota for this type of archive. ARCHIVE_NESTING_LEVEL_OVER_LIMIT - The object is an archive file whose nested depth exceeds the quota for the maximum number of nested levels that Macie analyzes for this type of archive. ARCHIVE_TOTAL_BYTES_EXTRACTED_OVER_LIMIT - The object is an archive file that exceeds the quota for the maximum amount of data that Macie extracts and analyzes for this type of archive. ARCHIVE_TOTAL_DOCUMENTS_PROCESSED_OVER_LIMIT - The object is an archive file that contains more than the maximum number of files that Macie extracts and analyzes for this type of archive. FILE_EXCEEDS_SIZE_LIMIT - The storage size of the object exceeds the size quota for this type of file. INVALID_ENCRYPTION - The object is encrypted using server-side encryption but Macie isn’t allowed to use the key. Macie can’t decrypt and analyze the object. INVALID_KMS_KEY - The object is encrypted with an KMS key that was disabled or is being deleted. Macie can’t decrypt and analyze the object. INVALID_OBJECT_STATE - The object doesn’t use a supported Amazon S3 storage class. For more information, see Discovering sensitive data in the Amazon Macie User Guide. JSON_NESTING_LEVEL_OVER_LIMIT - The object contains JSON data and the nested depth of the data exceeds the quota for the number of nested levels that Macie analyzes for this type of file. MALFORMED_FILE - The object is a malformed or corrupted file. An error occurred when Macie attempted to detect the file’s type or extract data from the file. OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing it. NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted shortly before or when Macie attempted to analyze the object. MALFORMED_OR_FILE_SIZE_EXCEEDS_LIMIT - The object is a Microsoft Office file that is malformed or exceeds the size quota for this type of file. If the file is malformed, an error occurred when Macie attempted to extract data from the file. OOXML_UNCOMPRESSED_SIZE_EXCEEDS_LIMIT - The object is an Office Open XML file that exceeds the size quota for this type of file. OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML file whose compression ratio exceeds the compression quota for this type of file. PERMISSION_DENIED - Macie isn’t allowed to access the object. The object’s permissions settings prevent Macie from analyzing the object. SOURCE_OBJECT_NO_LONGER_AVAILABLE - The object was deleted shortly before or when Macie attempted to analyze it. UNABLE_TO_PARSE_FILE - The object is a file that contains structured data and an error occurred when Macie attempted to parse the data. UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that uses an unsupported file or storage format. For more information, see Supported file and storage formats in the Amazon Macie User Guide. For information about sensitive data discovery quotas for files, see Amazon Macie quotas in the Amazon Macie User Guide.
+     * A brief description of the status of the finding. This value is null if the status (code) of the finding is COMPLETE. Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding and the affected S3 object. Possible values are: ARCHIVE_CONTAINS_UNPROCESSED_FILES - The object is an archive file and Macie extracted and analyzed only some or none of the files in the archive. To determine which files Macie analyzed, if any, refer to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation). ARCHIVE_EXCEEDS_SIZE_LIMIT - The object is an archive file whose total storage size exceeds the size quota for this type of archive. ARCHIVE_NESTING_LEVEL_OVER_LIMIT - The object is an archive file whose nested depth exceeds the quota for the maximum number of nested levels that Macie analyzes for this type of archive. ARCHIVE_TOTAL_BYTES_EXTRACTED_OVER_LIMIT - The object is an archive file that exceeds the quota for the maximum amount of data that Macie extracts and analyzes for this type of archive. ARCHIVE_TOTAL_DOCUMENTS_PROCESSED_OVER_LIMIT - The object is an archive file that contains more than the maximum number of files that Macie extracts and analyzes for this type of archive. FILE_EXCEEDS_SIZE_LIMIT - The storage size of the object exceeds the size quota for this type of file. INVALID_ENCRYPTION - The object is encrypted using server-side encryption but Macie isn't allowed to use the key. Macie can't decrypt and analyze the object. INVALID_KMS_KEY - The object is encrypted with an KMS key that was disabled or is being deleted. Macie can't decrypt and analyze the object. INVALID_OBJECT_STATE - The object doesn't use a supported Amazon S3 storage class. JSON_NESTING_LEVEL_OVER_LIMIT - The object contains JSON data and the nested depth of the data exceeds the quota for the number of nested levels that Macie analyzes for this type of file. MALFORMED_FILE - The object is a malformed or corrupted file. An error occurred when Macie attempted to detect the file's type or extract data from the file. MALFORMED_OR_FILE_SIZE_EXCEEDS_LIMIT - The object is a Microsoft Office file that is malformed or exceeds the size quota for this type of file. If the file is malformed, an error occurred when Macie attempted to extract data from the file. NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted shortly before or when Macie attempted to analyze the object. OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing it. OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML file whose compression ratio exceeds the compression quota for this type of file. OOXML_UNCOMPRESSED_SIZE_EXCEEDS_LIMIT - The object is an Office Open XML file that exceeds the size quota for this type of file. PERMISSION_DENIED - Macie isn't allowed to access the object. The object's permissions settings prevent Macie from analyzing the object. SOURCE_OBJECT_NO_LONGER_AVAILABLE - The object was deleted shortly before or when Macie attempted to analyze it. TIME_CUT_OFF_REACHED - Macie started analyzing the object but additional analysis would exceed the time quota for analyzing an object. UNABLE_TO_PARSE_FILE - The object is a file that contains structured data and an error occurred when Macie attempted to parse the data. UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that uses an unsupported file or storage format. For information about quotas, supported storage classes, and supported file and storage formats, see Quotas and Supported storage classes and formats in the Amazon Macie User Guide.
      */
     reason?: __string;
   }
@@ -1252,7 +1252,7 @@ declare namespace Macie2 {
      */
     id?: ClassificationScopeId;
     /**
-     * The name of the classification scope.
+     * The name of the classification scope: automated-sensitive-data-discovery.
      */
     name?: ClassificationScopeName;
   }
@@ -1563,7 +1563,7 @@ declare namespace Macie2 {
   }
   export interface CustomDetection {
     /**
-     * The Amazon Resource Name (ARN) of the custom data identifier.
+     * The unique identifier for the custom data identifier.
      */
     arn?: __string;
     /**
@@ -2029,7 +2029,7 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
-  export type FindingType = "SensitiveData:S3Object/Multiple"|"SensitiveData:S3Object/Financial"|"SensitiveData:S3Object/Personal"|"SensitiveData:S3Object/Credentials"|"SensitiveData:S3Object/CustomIdentifier"|"Policy:IAMUser/S3BucketPublic"|"Policy:IAMUser/S3BucketSharedExternally"|"Policy:IAMUser/S3BucketReplicatedExternally"|"Policy:IAMUser/S3BucketEncryptionDisabled"|"Policy:IAMUser/S3BlockPublicAccessDisabled"|string;
+  export type FindingType = "SensitiveData:S3Object/Multiple"|"SensitiveData:S3Object/Financial"|"SensitiveData:S3Object/Personal"|"SensitiveData:S3Object/Credentials"|"SensitiveData:S3Object/CustomIdentifier"|"Policy:IAMUser/S3BucketPublic"|"Policy:IAMUser/S3BucketSharedExternally"|"Policy:IAMUser/S3BucketReplicatedExternally"|"Policy:IAMUser/S3BucketEncryptionDisabled"|"Policy:IAMUser/S3BlockPublicAccessDisabled"|"Policy:IAMUser/S3BucketSharedWithCloudFront"|string;
   export type FindingsFilterAction = "ARCHIVE"|"NOOP"|string;
   export interface FindingsFilterListItem {
     /**
@@ -2145,7 +2145,7 @@ declare namespace Macie2 {
      */
     bucketCount?: __long;
     /**
-     * The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.
+     * The total number of buckets that are publicly accessible due to a combination of permissions settings for each bucket.
      */
     bucketCountByEffectivePermission?: BucketCountByEffectivePermission;
     /**
@@ -2157,7 +2157,7 @@ declare namespace Macie2 {
      */
     bucketCountByObjectEncryptionRequirement?: BucketCountPolicyAllowsUnencryptedObjectUploads;
     /**
-     * The total number of buckets that are or aren't shared with another Amazon Web Services account.
+     * The total number of buckets that are or aren't shared with other Amazon Web Services accounts, Amazon CloudFront origin access identities (OAIs), or CloudFront origin access controls (OACs).
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
@@ -2173,7 +2173,7 @@ declare namespace Macie2 {
      */
     classifiableSizeInBytes?: __long;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the buckets.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved bucket or object metadata from Amazon S3 for the buckets.
      */
     lastUpdated?: __timestampIso8601;
     /**
@@ -2217,7 +2217,7 @@ declare namespace Macie2 {
      */
     id?: ClassificationScopeId;
     /**
-     * The name of the classification scope.
+     * The name of the classification scope: automated-sensitive-data-discovery.
      */
     name?: ClassificationScopeName;
     /**
@@ -2429,11 +2429,11 @@ declare namespace Macie2 {
      */
     arn?: __string;
     /**
-     * The email address for the account.
+     * The email address for the account. This value is null if the account is associated with the administrator account through Organizations.
      */
     email?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.
+     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie membership invitation hasn't been sent to the account.
      */
     invitedAt?: __timestampIso8601;
     /**
@@ -2465,7 +2465,7 @@ declare namespace Macie2 {
      */
     profileUpdatedAt?: __timestampIso8601;
     /**
-     * The current sensitivity score for the bucket, ranging from -1 (no analysis due to an error) to 100 (sensitive). By default, this score is calculated automatically based on the amount of data that Amazon Macie has analyzed in the bucket and the amount of sensitive data that Macie has found in the bucket.
+     * The current sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). By default, this score is calculated automatically based on the amount of data that Amazon Macie has analyzed in the bucket and the amount of sensitive data that Macie has found in the bucket.
      */
     sensitivityScore?: __integer;
     /**
@@ -2541,7 +2541,7 @@ declare namespace Macie2 {
      */
     includes?: SensitivityInspectionTemplateIncludes;
     /**
-     * The name of the template.
+     * The name of the template: automated-sensitive-data-discovery.
      */
     name?: __string;
     /**
@@ -3087,7 +3087,7 @@ declare namespace Macie2 {
   }
   export interface ListResourceProfileArtifactsResponse {
     /**
-     * An array of objects, one for each S3 object that Amazon Macie selected for analysis.
+     * An array of objects, one for each of 1-100 S3 objects that Amazon Macie selected for analysis. If Macie has analyzed more than 100 objects in the bucket, Macie populates the array based on the value for the ResourceProfileArtifact.sensitive field for an object: true (sensitive), followed by false (not sensitive). Macie then populates any remaining items in the array with information about objects where the value for the ResourceProfileArtifact.classificationResultStatus field is SKIPPED.
      */
     artifacts?: __listOfResourceProfileArtifact;
     /**
@@ -3181,7 +3181,7 @@ declare namespace Macie2 {
      */
     classifiableSizeInBytes?: __long;
     /**
-     * Specifies the error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.
+     * The error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.
      */
     errorCode?: BucketMetadataErrorCode;
     /**
@@ -3193,7 +3193,7 @@ declare namespace Macie2 {
      */
     jobDetails?: JobDetails;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently performed automated sensitive data discovery for the bucket. This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently analyzed data in the bucket while performing automated sensitive data discovery for your account. This value is null if automated sensitive data discovery is currently disabled for your account.
      */
     lastAutomatedDiscoveryTime?: __timestampIso8601;
     /**
@@ -3205,7 +3205,7 @@ declare namespace Macie2 {
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
     /**
-     * The current sensitivity score for the bucket, ranging from -1 (no analysis due to an error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
+     * The current sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.
      */
     sensitivityScore?: __integer;
     /**
@@ -3246,11 +3246,11 @@ declare namespace Macie2 {
      */
     arn?: __string;
     /**
-     * The email address for the account.
+     * The email address for the account. This value is null if the account is associated with the administrator account through Organizations.
      */
     email?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.
+     * The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie membership invitation hasn't been sent to the account.
      */
     invitedAt?: __timestampIso8601;
     /**
@@ -3319,7 +3319,7 @@ declare namespace Macie2 {
      */
     cells?: Cells;
     /**
-     * An array of objects, one for each occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file. Each Range object specifies a line or inclusive range of lines that contains the sensitive data, and the position of the data on the specified line or lines. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the location of sensitive data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.
+     * An array of objects, one for each occurrence of sensitive data in an email message or a non-binary text file such as an HTML, TXT, or XML file. Each Range object specifies a line or inclusive range of lines that contains the sensitive data, and the position of the data on the specified line or lines. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the location of sensitive data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.
      */
     lineRanges?: Ranges;
     /**
@@ -3419,11 +3419,11 @@ declare namespace Macie2 {
      */
     replicated?: __boolean;
     /**
-     * Specifies whether the bucket is configured to replicate one or more objects to an Amazon Web Services account that isn't part of the same Amazon Macie organization.
+     * Specifies whether the bucket is configured to replicate one or more objects to a bucket for an Amazon Web Services account that isn't part of your Amazon Macie organization. An Amazon Macie organization is a set of Macie accounts that are centrally managed as a group of related accounts through Organizations or by Macie invitation.
      */
     replicatedExternally?: __boolean;
     /**
-     * An array of Amazon Web Services account IDs, one for each Amazon Web Services account that the bucket is configured to replicate one or more objects to.
+     * An array of Amazon Web Services account IDs, one for each Amazon Web Services account that owns a bucket that the bucket is configured to replicate one or more objects to.
      */
     replicationAccounts?: __listOf__string;
   }
@@ -3511,7 +3511,7 @@ declare namespace Macie2 {
      */
     arn?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the bucket was created.
+     * The date and time, in UTC and extended ISO 8601 format, when the bucket was created. This value can also indicate when changes such as edits to the bucket's policy were most recently made to the bucket, relative to when the finding was created or last updated.
      */
     createdAt?: __timestampIso8601;
     /**
@@ -3827,7 +3827,7 @@ declare namespace Macie2 {
      */
     classifiableSizeInBytes?: __long;
     /**
-     * The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.
+     * The total number of buckets that are publicly accessible due to a combination of permissions settings for each bucket.
      */
     publiclyAccessibleCount?: __long;
     /**
@@ -3866,7 +3866,7 @@ declare namespace Macie2 {
      */
     id?: __string;
     /**
-     * The name of the sensitivity inspection template for the account.
+     * The name of the sensitivity inspection template for the account: automated-sensitive-data-discovery.
      */
     name?: __string;
   }
@@ -3920,7 +3920,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the source account, IAM user, or role that was used to get the credentials.
+     * The Amazon Resource Name (ARN) of the source account, Identity and Access Management (IAM) user, or role that was used to get the credentials.
      */
     arn?: __string;
     /**
@@ -4210,7 +4210,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the filter. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -4222,7 +4222,7 @@ declare namespace Macie2 {
      */
     id: __string;
     /**
-     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters. We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name?: __string;
     /**
@@ -4310,7 +4310,7 @@ declare namespace Macie2 {
   }
   export interface UpdateSensitivityInspectionTemplateRequest {
     /**
-     * A custom description of the template.
+     * A custom description of the template. The description can contain as many as 200 characters.
      */
     description?: __string;
     /**

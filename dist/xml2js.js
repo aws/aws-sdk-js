@@ -7483,7 +7483,7 @@ module.exports =
 	/*<replacement>*/
 
 	var Buffer = __webpack_require__(40).Buffer;
-	var OurUint8Array = global.Uint8Array || function () {};
+	var OurUint8Array = (typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {}).Uint8Array || function () {};
 	function _uint8ArrayToBuffer(chunk) {
 	  return Buffer.from(chunk);
 	}
@@ -8053,8 +8053,8 @@ module.exports =
 	      // also returned false.
 	      // => Check whether `dest` is still a piping destination.
 	      if ((state.pipesCount === 1 && state.pipes === dest || state.pipesCount > 1 && indexOf(state.pipes, dest) !== -1) && !cleanedUp) {
-	        debug('false write response, pause', src._readableState.awaitDrain);
-	        src._readableState.awaitDrain++;
+	        debug('false write response, pause', state.awaitDrain);
+	        state.awaitDrain++;
 	        increasedAwaitDrain = true;
 	      }
 	      src.pause();
@@ -8148,7 +8148,7 @@ module.exports =
 	    state.flowing = false;
 
 	    for (var i = 0; i < len; i++) {
-	      dests[i].emit('unpipe', this, unpipeInfo);
+	      dests[i].emit('unpipe', this, { hasUnpiped: false });
 	    }return this;
 	  }
 
@@ -8947,7 +8947,6 @@ module.exports =
 
 	  BufferList.prototype.concat = function concat(n) {
 	    if (this.length === 0) return Buffer.alloc(0);
-	    if (this.length === 1) return this.head.data;
 	    var ret = Buffer.allocUnsafe(n >>> 0);
 	    var p = this.head;
 	    var i = 0;
@@ -8996,9 +8995,15 @@ module.exports =
 	  if (readableDestroyed || writableDestroyed) {
 	    if (cb) {
 	      cb(err);
-	    } else if (err && (!this._writableState || !this._writableState.errorEmitted)) {
-	      pna.nextTick(emitErrorNT, this, err);
+	    } else if (err) {
+	      if (!this._writableState) {
+	        pna.nextTick(emitErrorNT, this, err);
+	      } else if (!this._writableState.errorEmitted) {
+	        this._writableState.errorEmitted = true;
+	        pna.nextTick(emitErrorNT, this, err);
+	      }
 	    }
+
 	    return this;
 	  }
 
@@ -9016,9 +9021,11 @@ module.exports =
 
 	  this._destroy(err || null, function (err) {
 	    if (!cb && err) {
-	      pna.nextTick(emitErrorNT, _this, err);
-	      if (_this._writableState) {
+	      if (!_this._writableState) {
+	        pna.nextTick(emitErrorNT, _this, err);
+	      } else if (!_this._writableState.errorEmitted) {
 	        _this._writableState.errorEmitted = true;
+	        pna.nextTick(emitErrorNT, _this, err);
 	      }
 	    } else if (cb) {
 	      cb(err);
@@ -9040,6 +9047,8 @@ module.exports =
 	    this._writableState.destroyed = false;
 	    this._writableState.ended = false;
 	    this._writableState.ending = false;
+	    this._writableState.finalCalled = false;
+	    this._writableState.prefinished = false;
 	    this._writableState.finished = false;
 	    this._writableState.errorEmitted = false;
 	  }
@@ -9277,7 +9286,7 @@ module.exports =
 	/*<replacement>*/
 
 	var Buffer = __webpack_require__(40).Buffer;
-	var OurUint8Array = global.Uint8Array || function () {};
+	var OurUint8Array = (typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : typeof self !== 'undefined' ? self : {}).Uint8Array || function () {};
 	function _uint8ArrayToBuffer(chunk) {
 	  return Buffer.from(chunk);
 	}
@@ -9545,7 +9554,7 @@ module.exports =
 	  if (state.corked) {
 	    state.corked--;
 
-	    if (!state.writing && !state.corked && !state.finished && !state.bufferProcessing && state.bufferedRequest) clearBuffer(this, state);
+	    if (!state.writing && !state.corked && !state.bufferProcessing && state.bufferedRequest) clearBuffer(this, state);
 	  }
 	};
 
@@ -9787,7 +9796,7 @@ module.exports =
 	  }
 
 	  // ignore unnecessary end() calls.
-	  if (!state.ending && !state.finished) endWritable(this, state, cb);
+	  if (!state.ending) endWritable(this, state, cb);
 	};
 
 	function needFinish(state) {
@@ -9848,11 +9857,9 @@ module.exports =
 	    cb(err);
 	    entry = entry.next;
 	  }
-	  if (state.corkedRequestsFree) {
-	    state.corkedRequestsFree.next = corkReq;
-	  } else {
-	    state.corkedRequestsFree = corkReq;
-	  }
+
+	  // reuse the free corkReq.
+	  state.corkedRequestsFree.next = corkReq;
 	}
 
 	Object.defineProperty(Writable.prototype, 'destroyed', {
