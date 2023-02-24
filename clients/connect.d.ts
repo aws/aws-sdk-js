@@ -6380,6 +6380,10 @@ declare namespace Connect {
      * The identifier for the quick connect.
      */
     QuickConnectId?: QuickConnectId;
+    /**
+     * The contactId that is related to this contact.
+     */
+    RelatedContactId?: ContactId;
   }
   export interface StartTaskContactResponse {
     /**

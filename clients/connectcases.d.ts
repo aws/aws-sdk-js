@@ -28,19 +28,19 @@ declare class ConnectCases extends Service {
    */
   batchPutFieldOptions(callback?: (err: AWSError, data: ConnectCases.Types.BatchPutFieldOptionsResponse) => void): Request<ConnectCases.Types.BatchPutFieldOptionsResponse, AWSError>;
   /**
-   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.   customer_id is a required field when creating a case. 
+   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.  The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/note&gt; 
    */
   createCase(params: ConnectCases.Types.CreateCaseRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.   customer_id is a required field when creating a case. 
+   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.  The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/note&gt; 
    */
   createCase(callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. 
+   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see Onboard to Cases. 
    */
   createDomain(params: ConnectCases.Types.CreateDomainRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateDomainResponse) => void): Request<ConnectCases.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. 
+   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see Onboard to Cases. 
    */
   createDomain(callback?: (err: AWSError, data: ConnectCases.Types.CreateDomainResponse) => void): Request<ConnectCases.Types.CreateDomainResponse, AWSError>;
   /**
@@ -75,6 +75,14 @@ declare class ConnectCases extends Service {
    * Creates a template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs. Additionally, multiple fields with same IDs are not allowed within the same Template. A template can be either Active or Inactive, as indicated by its status. Inactive templates cannot be used to create cases.
    */
   createTemplate(callback?: (err: AWSError, data: ConnectCases.Types.CreateTemplateResponse) => void): Request<ConnectCases.Types.CreateTemplateResponse, AWSError>;
+  /**
+   * Deletes a domain.
+   */
+  deleteDomain(params: ConnectCases.Types.DeleteDomainRequest, callback?: (err: AWSError, data: ConnectCases.Types.DeleteDomainResponse) => void): Request<ConnectCases.Types.DeleteDomainResponse, AWSError>;
+  /**
+   * Deletes a domain.
+   */
+  deleteDomain(callback?: (err: AWSError, data: ConnectCases.Types.DeleteDomainResponse) => void): Request<ConnectCases.Types.DeleteDomainResponse, AWSError>;
   /**
    * Returns information about a specific case if it exists. 
    */
@@ -180,11 +188,11 @@ declare class ConnectCases extends Service {
    */
   putCaseEventConfiguration(callback?: (err: AWSError, data: ConnectCases.Types.PutCaseEventConfigurationResponse) => void): Request<ConnectCases.Types.PutCaseEventConfigurationResponse, AWSError>;
   /**
-   * Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.
+   * Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.  For customer_id you must provide the full customer profile ARN in this format:  arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID.  
    */
   searchCases(params: ConnectCases.Types.SearchCasesRequest, callback?: (err: AWSError, data: ConnectCases.Types.SearchCasesResponse) => void): Request<ConnectCases.Types.SearchCasesResponse, AWSError>;
   /**
-   * Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.
+   * Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.  For customer_id you must provide the full customer profile ARN in this format:  arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID.  
    */
   searchCases(callback?: (err: AWSError, data: ConnectCases.Types.SearchCasesResponse) => void): Request<ConnectCases.Types.SearchCasesResponse, AWSError>;
   /**
@@ -549,6 +557,14 @@ declare namespace ConnectCases {
     templateId: TemplateId;
   }
   export type CreatedTime = Date;
+  export interface DeleteDomainRequest {
+    /**
+     * The unique identifier of the Cases domain. 
+     */
+    domainId: DomainId;
+  }
+  export interface DeleteDomainResponse {
+  }
   export type DomainArn = string;
   export type DomainId = string;
   export type DomainName = string;

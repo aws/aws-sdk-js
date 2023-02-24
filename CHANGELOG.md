@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1322.0-->
+<!--LATEST=2.1323.0-->
 <!--ENTRYINSERT-->
+
+## 2.1323.0
+* feature: Connect: StartTaskContact API now supports linked task creation with a new optional RelatedContactId parameter
+* feature: ConnectCases: This release adds the ability to delete domains through the DeleteDomain API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* feature: SecurityHub: New Security Hub APIs and updates to existing APIs that help you consolidate control findings and enable and disable controls across all supported standards
 
 ## 2.1322.0
 * feature: Appflow: This release enables the customers to choose whether to use Private Link for Metadata and Authorization call when using a private Salesforce connections
