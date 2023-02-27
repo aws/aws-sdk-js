@@ -70,6 +70,7 @@
     },
     "*/resource-explorer-2": "dualstackByDefault",
     "*/kendra-ranking": "dualstackByDefault",
+    "*/internetmonitor": "dualstackByDefault",
     "*/codecatalyst": "globalDualstackByDefault"
   },
 
@@ -134,6 +135,7 @@
     },
     "*/resource-explorer-2": "fipsDualstackByDefault",
     "*/kendra-ranking": "dualstackByDefault",
+    "*/internetmonitor": "dualstackByDefault",
     "*/codecatalyst": "fipsGlobalDualstackByDefault"
   },
 
