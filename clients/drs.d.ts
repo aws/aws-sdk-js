@@ -451,6 +451,10 @@ declare namespace Drs {
      * The disks that should be replicated.
      */
     replicatedDisks?: DataReplicationInfoReplicatedDisks;
+    /**
+     * AWS Availability zone into which data is being replicated.
+     */
+    stagingAvailabilityZone?: AwsAvailabilityZone;
   }
   export interface DataReplicationInfoReplicatedDisk {
     /**
@@ -982,6 +986,10 @@ declare namespace Drs {
      * An object containing information regarding the initiation of the last launch of a Source Server.
      */
     initiated?: LifeCycleLastLaunchInitiated;
+    /**
+     * Status of Source Server's last launch.
+     */
+    status?: LaunchStatus;
   }
   export interface LifeCycleLastLaunchInitiated {
     /**
@@ -1148,7 +1156,11 @@ declare namespace Drs {
      */
     jobID?: JobID;
     /**
-     * Environment (On Premises / AWS) of the instance that the recovery instance originated from. 
+     * AWS availability zone associated with the recovery instance.
+     */
+    originAvailabilityZone?: AwsAvailabilityZone;
+    /**
+     * Environment (On Premises / AWS) of the instance that the recovery instance originated from.
      */
     originEnvironment?: OriginEnvironment;
     /**
@@ -1207,6 +1219,10 @@ declare namespace Drs {
      * The disks that should be replicated.
      */
     replicatedDisks?: RecoveryInstanceDataReplicationInfoReplicatedDisks;
+    /**
+     * AWS Availability zone into which data is being replicated.
+     */
+    stagingAvailabilityZone?: AwsAvailabilityZone;
   }
   export interface RecoveryInstanceDataReplicationInfoReplicatedDisk {
     /**
@@ -1453,7 +1469,7 @@ declare namespace Drs {
      */
     isBootDisk?: Boolean;
     /**
-     * When stagingDiskType is set to Auto, this field shows the current staging disk EBS volume type as it is constantly updated by the service. This is a read-only field.
+     * The Staging Disk EBS volume type to be used during replication when stagingDiskType is set to Auto. This is a read-only field.
      */
     optimizedStagingDiskType?: ReplicationConfigurationReplicatedDiskStagingDiskType;
     /**

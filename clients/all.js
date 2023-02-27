@@ -340,5 +340,6 @@ module.exports = {
   KendraRanking: require('./kendraranking'),
   CleanRooms: require('./cleanrooms'),
   CloudTrailData: require('./cloudtraildata'),
-  Tnb: require('./tnb')
+  Tnb: require('./tnb'),
+  InternetMonitor: require('./internetmonitor')
 };

@@ -1281,5 +1281,8 @@
   },
   "tnb": {
     "name": "Tnb"
+  },
+  "internetmonitor": {
+    "name": "InternetMonitor"
   }
 }

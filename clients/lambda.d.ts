@@ -698,7 +698,7 @@ declare namespace Lambda {
      */
     PrincipalOrgID?: PrincipalOrgID;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     FunctionUrlAuthType?: FunctionUrlAuthType;
   }
@@ -803,6 +803,7 @@ declare namespace Lambda {
     UntrustedArtifactOnDeployment?: CodeSigningPolicy;
   }
   export type CodeSigningPolicy = "Warn"|"Enforce"|string;
+  export type CollectionName = string;
   export type CompatibleArchitectures = Architecture[];
   export type CompatibleRuntimes = Runtime[];
   export interface Concurrency {
@@ -968,6 +969,10 @@ declare namespace Lambda {
      * (Amazon SQS only) The scaling configuration for the event source. For more information, see Configuring maximum concurrency for Amazon SQS event sources.
      */
     ScalingConfig?: ScalingConfig;
+    /**
+     * Specific configuration settings for a DocumentDB event source.
+     */
+    DocumentDBEventSourceConfig?: DocumentDBEventSourceConfig;
   }
   export interface CreateFunctionRequest {
     /**
@@ -975,7 +980,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. 
+     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     Runtime?: Runtime;
     /**
@@ -1023,7 +1028,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The ARN of the Key Management Service (KMS) key that's used to encrypt your function's environment variables. If it's not provided, Lambda uses a default service key.
+     * The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's environment variables. When Lambda SnapStart is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -1073,7 +1078,7 @@ declare namespace Lambda {
      */
     Qualifier?: FunctionUrlQualifier;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType: FunctionUrlAuthType;
     /**
@@ -1091,7 +1096,7 @@ declare namespace Lambda {
      */
     FunctionArn: FunctionArn;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType: FunctionUrlAuthType;
     /**
@@ -1103,6 +1108,7 @@ declare namespace Lambda {
      */
     CreationTime: Timestamp;
   }
+  export type DatabaseName = string;
   export type _Date = Date;
   export interface DeadLetterConfig {
     /**
@@ -1207,6 +1213,20 @@ declare namespace Lambda {
      * The destination configuration for failed invocations.
      */
     OnFailure?: OnFailure;
+  }
+  export interface DocumentDBEventSourceConfig {
+    /**
+     *  The name of the database to consume within the DocumentDB cluster. 
+     */
+    DatabaseName?: DatabaseName;
+    /**
+     *  The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections. 
+     */
+    CollectionName?: CollectionName;
+    /**
+     *  Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. 
+     */
+    FullDocument?: FullDocument;
   }
   export type Enabled = boolean;
   export type EndPointType = "KAFKA_BOOTSTRAP_SERVERS"|string;
@@ -1354,6 +1374,10 @@ declare namespace Lambda {
      * (Amazon SQS only) The scaling configuration for the event source. For more information, see Configuring maximum concurrency for Amazon SQS event sources.
      */
     ScalingConfig?: ScalingConfig;
+    /**
+     * Specific configuration settings for a DocumentDB event source.
+     */
+    DocumentDBEventSourceConfig?: DocumentDBEventSourceConfig;
   }
   export type EventSourceMappingsList = EventSourceMappingConfiguration[];
   export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
@@ -1383,6 +1407,7 @@ declare namespace Lambda {
     Filters?: FilterList;
   }
   export type FilterList = Filter[];
+  export type FullDocument = "UpdateLookup"|"Default"|string;
   export type FunctionArn = string;
   export type FunctionArnList = FunctionArn[];
   export interface FunctionCode {
@@ -1487,7 +1512,7 @@ declare namespace Lambda {
      */
     Environment?: EnvironmentResponse;
     /**
-     * The KMS key that's used to encrypt the function's environment variables. This key is returned only if you've configured a customer managed key.
+     * The KMS key that's used to encrypt the function's environment variables. When Lambda SnapStart is activated, this key is also used to encrypt the function's snapshot. This key is returned only if you've configured a customer managed key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -1618,7 +1643,7 @@ declare namespace Lambda {
      */
     Cors?: Cors;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType: FunctionUrlAuthType;
   }
@@ -1761,7 +1786,7 @@ declare namespace Lambda {
      */
     FunctionArn: FunctionArn;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType: FunctionUrlAuthType;
     /**
@@ -1911,7 +1936,7 @@ declare namespace Lambda {
     /**
      * The name of the Lambda function.  Name formats     Function name – my-function.    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
-    FunctionName: FunctionName;
+    FunctionName: NamespacedFunctionName;
     /**
      * Specify a version of the function. This can be $LATEST or a published version number. If no value is specified, the configuration for the $LATEST version is returned.
      */
@@ -1926,6 +1951,10 @@ declare namespace Lambda {
      * The ARN of the runtime the function is configured to use. If the runtime update mode is Manual, the ARN is returned, otherwise null is returned.
      */
     RuntimeVersionArn?: RuntimeVersionArn;
+    /**
+     * The Amazon Resource Name (ARN) of your function.
+     */
+    FunctionArn?: NameSpacedFunctionArn;
   }
   export type Handler = string;
   export type Header = string;
@@ -3007,6 +3036,10 @@ declare namespace Lambda {
      * (Amazon SQS only) The scaling configuration for the event source. For more information, see Configuring maximum concurrency for Amazon SQS event sources.
      */
     ScalingConfig?: ScalingConfig;
+    /**
+     * Specific configuration settings for a DocumentDB event source.
+     */
+    DocumentDBEventSourceConfig?: DocumentDBEventSourceConfig;
   }
   export interface UpdateFunctionCodeRequest {
     /**
@@ -3084,7 +3117,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. 
+     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     Runtime?: Runtime;
     /**
@@ -3092,7 +3125,7 @@ declare namespace Lambda {
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
-     * The ARN of the Key Management Service (KMS) key that's used to encrypt your function's environment variables. If it's not provided, Lambda uses a default service key.
+     * The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's environment variables. When Lambda SnapStart is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -3156,7 +3189,7 @@ declare namespace Lambda {
      */
     Qualifier?: FunctionUrlQualifier;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType?: FunctionUrlAuthType;
     /**
@@ -3174,7 +3207,7 @@ declare namespace Lambda {
      */
     FunctionArn: FunctionArn;
     /**
-     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated IAM users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
+     * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType: FunctionUrlAuthType;
     /**

@@ -1547,6 +1547,10 @@ declare namespace DevOpsGuru {
      * Information about a resource in which DevOps Guru detected anomalous behavior.
      */
     AnomalyResources?: AnomalyResources;
+    /**
+     *  A description of the proactive anomaly. 
+     */
+    Description?: AnomalyDescription;
   }
   export interface ProactiveAnomalySummary {
     /**
@@ -1592,6 +1596,10 @@ declare namespace DevOpsGuru {
      * Information about a resource in which DevOps Guru detected anomalous behavior.
      */
     AnomalyResources?: AnomalyResources;
+    /**
+     *  A description of the proactive anomaly. 
+     */
+    Description?: AnomalyDescription;
   }
   export interface ProactiveInsight {
     /**

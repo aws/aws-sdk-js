@@ -341,6 +341,7 @@ export abstract class ConfigurationServicePlaceholders {
   cleanrooms?: AWS.CleanRooms.Types.ClientConfiguration;
   cloudtraildata?: AWS.CloudTrailData.Types.ClientConfiguration;
   tnb?: AWS.Tnb.Types.ClientConfiguration;
+  internetmonitor?: AWS.InternetMonitor.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -684,4 +685,5 @@ export interface ConfigurationServiceApiVersions {
   cleanrooms?: AWS.CleanRooms.Types.apiVersion;
   cloudtraildata?: AWS.CloudTrailData.Types.apiVersion;
   tnb?: AWS.Tnb.Types.apiVersion;
+  internetmonitor?: AWS.InternetMonitor.Types.apiVersion;
 }
