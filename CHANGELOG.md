@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1324.0-->
+<!--LATEST=2.1325.0-->
 <!--ENTRYINSERT-->
+
+## 2.1325.0
+* feature: Comprehend: Amazon Comprehend now supports flywheels to help you train and manage new model versions for custom models.
+* feature: EC2: This release allows IMDS support to be set to v2-only on an existing AMI, so that all future instances launched from that AMI will use IMDSv2 by default.
+* feature: Lightsail: This release adds Lightsail for Research feature support, such as GUI session access, cost estimates, stop instance on idle, and disk auto mount.
+* feature: ManagedBlockchain: This release adds support for tagging to the accessor resource in Amazon Managed Blockchain
+* feature: Omics: Minor model changes to accomodate batch imports feature
 
 ## 2.1324.0
 * feature: DevOpsGuru: This release adds the description field on ListAnomaliesForInsight and DescribeAnomaly API responses for proactive anomalies.

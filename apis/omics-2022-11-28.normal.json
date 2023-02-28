@@ -2177,7 +2177,7 @@
           "shape": "RequestTimeoutException"
         }
       ],
-      "documentation": "<p>Starts a read set activation job.</p>",
+      "documentation": "<p>Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.</p>",
       "endpoint": {
         "hostPrefix": "control-storage-"
       }
@@ -2218,7 +2218,7 @@
           "shape": "RequestTimeoutException"
         }
       ],
-      "documentation": "<p>Starts a read set export job.</p>",
+      "documentation": "<p>Exports a read set to Amazon S3.</p>",
       "endpoint": {
         "hostPrefix": "control-storage-"
       }
@@ -2764,7 +2764,6 @@
       "member": {
         "shape": "AnnotationImportItemSource"
       },
-      "max": 1,
       "min": 1
     },
     "AnnotationImportJobItem": {
@@ -3074,7 +3073,7 @@
         },
         "reference": {
           "shape": "ReferenceItem",
-          "documentation": "<p>The store's genome reference.</p>"
+          "documentation": "<p>The store's genome reference. Required for all stores except TSV format with generic annotations.</p>"
         },
         "status": {
           "shape": "StoreStatus",
@@ -3164,7 +3163,7 @@
         },
         "maxDuration": {
           "shape": "CreateRunGroupRequestMaxDurationInteger",
-          "documentation": "<p>A max duration for the group.</p>"
+          "documentation": "<p>A maximum run time for the group in minutes.</p>"
         },
         "maxRuns": {
           "shape": "CreateRunGroupRequestMaxRunsInteger",
@@ -3176,7 +3175,7 @@
         },
         "requestId": {
           "shape": "RunGroupRequestId",
-          "documentation": "<p>A request ID for the group.</p>",
+          "documentation": "<p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>",
           "idempotencyToken": true
         },
         "tags": {
@@ -3381,12 +3380,12 @@
         },
         "requestId": {
           "shape": "WorkflowRequestId",
-          "documentation": "<p>A request ID for the workflow.</p>",
+          "documentation": "<p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>",
           "idempotencyToken": true
         },
         "storageCapacity": {
           "shape": "CreateWorkflowRequestStorageCapacityInteger",
-          "documentation": "<p>A storage capacity for the workflow.</p>"
+          "documentation": "<p>A storage capacity for the workflow in gigabytes.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -4021,7 +4020,7 @@
         },
         "sources": {
           "shape": "ActivateReadSetSourceList",
-          "documentation": "<p>The job's sources.</p>"
+          "documentation": "<p>The job's source files.</p>"
         },
         "status": {
           "shape": "ReadSetActivationJobStatus",
@@ -4152,7 +4151,7 @@
         },
         "sources": {
           "shape": "ImportReadSetSourceList",
-          "documentation": "<p>The job's sources.</p>"
+          "documentation": "<p>The job's source files.</p>"
         },
         "status": {
           "shape": "ReadSetImportJobStatus",
@@ -4354,7 +4353,7 @@
         },
         "sources": {
           "shape": "ImportReferenceSourceList",
-          "documentation": "<p>The job's sources.</p>"
+          "documentation": "<p>The job's source files.</p>"
         },
         "status": {
           "shape": "ReferenceImportJobStatus",
@@ -4579,7 +4578,7 @@
         },
         "maxDuration": {
           "shape": "GetRunGroupResponseMaxDurationInteger",
-          "documentation": "<p>The group's maximum run duration.</p>"
+          "documentation": "<p>The group's maximum run time in minutes.</p>"
         },
         "maxRuns": {
           "shape": "GetRunGroupResponseMaxRunsInteger",
@@ -4714,7 +4713,7 @@
         },
         "storageCapacity": {
           "shape": "GetRunResponseStorageCapacityInteger",
-          "documentation": "<p>The run's storage capacity.</p>"
+          "documentation": "<p>The run's storage capacity in gigabytes.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -4780,7 +4779,7 @@
         },
         "memory": {
           "shape": "GetRunTaskResponseMemoryInteger",
-          "documentation": "<p>The task's memory setting.</p>"
+          "documentation": "<p>The task's memory use in gigabytes.</p>"
         },
         "name": {
           "shape": "TaskName",
@@ -5096,7 +5095,7 @@
         },
         "storageCapacity": {
           "shape": "GetWorkflowResponseStorageCapacityInteger",
-          "documentation": "<p>The workflow's storage capacity.</p>"
+          "documentation": "<p>The workflow's storage capacity in gigabytes.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -5354,7 +5353,8 @@
         "IN_PROGRESS",
         "CANCELLED",
         "COMPLETED",
-        "FAILED"
+        "FAILED",
+        "COMPLETED_WITH_FAILURES"
       ]
     },
     "JobStatusMessage": {
@@ -6906,7 +6906,7 @@
         },
         "maxDuration": {
           "shape": "RunGroupListItemMaxDurationInteger",
-          "documentation": "<p>The group's maximum duration setting.</p>"
+          "documentation": "<p>The group's maximum duration setting in minutes.</p>"
         },
         "maxRuns": {
           "shape": "RunGroupListItemMaxRunsInteger",
@@ -7144,13 +7144,17 @@
     "SchemaItem": {
       "type": "map",
       "key": {
-        "shape": "String"
+        "shape": "SchemaItemKeyString"
       },
       "value": {
         "shape": "SchemaValueType"
       },
       "max": 1,
       "min": 1
+    },
+    "SchemaItemKeyString": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]{1,255}$"
     },
     "SchemaValueType": {
       "type": "string",
@@ -7374,7 +7378,7 @@
         },
         "sources": {
           "shape": "StartReadSetActivationJobRequestSourcesList",
-          "documentation": "<p>The job's sources.</p>"
+          "documentation": "<p>The job's source files.</p>"
         }
       }
     },
@@ -7455,7 +7459,7 @@
         },
         "sources": {
           "shape": "StartReadSetExportJobRequestSourcesList",
-          "documentation": "<p>Sources for the job.</p>"
+          "documentation": "<p>The job's source files.</p>"
         }
       }
     },
@@ -7523,7 +7527,7 @@
         },
         "sources": {
           "shape": "StartReadSetImportJobRequestSourcesList",
-          "documentation": "<p>Source files to import.</p>"
+          "documentation": "<p>The job's source files.</p>"
         }
       }
     },
@@ -7640,7 +7644,7 @@
         },
         "sources": {
           "shape": "StartReferenceImportJobRequestSourcesList",
-          "documentation": "<p>Sources for the job.</p>"
+          "documentation": "<p>The job's source files.</p>"
         }
       }
     },
@@ -7739,7 +7743,7 @@
         },
         "requestId": {
           "shape": "RunRequestId",
-          "documentation": "<p>A request ID for the run.</p>",
+          "documentation": "<p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>",
           "idempotencyToken": true
         },
         "roleArn": {
@@ -7756,7 +7760,7 @@
         },
         "storageCapacity": {
           "shape": "StartRunRequestStorageCapacityInteger",
-          "documentation": "<p>A storage capacity for the run.</p>"
+          "documentation": "<p>A storage capacity for the run in gigabytes.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -7993,7 +7997,7 @@
         },
         "memory": {
           "shape": "TaskListItemMemoryInteger",
-          "documentation": "<p>The task's memory.</p>"
+          "documentation": "<p>The task's memory use in gigabyes.</p>"
         },
         "name": {
           "shape": "TaskName",
@@ -8212,7 +8216,7 @@
         },
         "maxDuration": {
           "shape": "UpdateRunGroupRequestMaxDurationInteger",
-          "documentation": "<p>The maximum amount of time to run.</p>"
+          "documentation": "<p>A maximum run time for the group in minutes.</p>"
         },
         "maxRuns": {
           "shape": "UpdateRunGroupRequestMaxRunsInteger",
@@ -8342,6 +8346,10 @@
         "source": {
           "shape": "S3Uri",
           "documentation": "<p>The source file's location in Amazon S3.</p>"
+        },
+        "statusMessage": {
+          "shape": "JobStatusMsg",
+          "documentation": "<p> A message that provides additional context about a job </p>"
         }
       },
       "documentation": "<p>Details about an imported variant item.</p>"
@@ -8351,7 +8359,6 @@
       "member": {
         "shape": "VariantImportItemDetail"
       },
-      "max": 1,
       "min": 1
     },
     "VariantImportItemSource": {
@@ -8372,7 +8379,6 @@
       "member": {
         "shape": "VariantImportItemSource"
       },
-      "max": 1,
       "min": 1
     },
     "VariantImportJobItem": {
@@ -8672,7 +8678,8 @@
         "ACTIVE",
         "UPDATING",
         "DELETED",
-        "FAILED"
+        "FAILED",
+        "INACTIVE"
       ],
       "max": 64,
       "min": 1
@@ -8688,7 +8695,8 @@
     "WorkflowType": {
       "type": "string",
       "enum": [
-        "PRIVATE"
+        "PRIVATE",
+        "SERVICE"
       ],
       "max": 64,
       "min": 1

@@ -397,11 +397,11 @@ declare class EC2 extends Service {
    */
   cancelReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CancelReservedInstancesListingResult) => void): Request<EC2.Types.CancelReservedInstancesListingResult, AWSError>;
   /**
-   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new Spot Instances. You must specify whether the Spot Fleet should also terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
+   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new instances. You must also specify whether a canceled Spot Fleet request should terminate its instances. If you choose to terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
    */
   cancelSpotFleetRequests(params: EC2.Types.CancelSpotFleetRequestsRequest, callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
-   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new Spot Instances. You must specify whether the Spot Fleet should also terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
+   * Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet request, the Spot Fleet launches no new instances. You must also specify whether a canceled Spot Fleet request should terminate its instances. If you choose to terminate the instances, the Spot Fleet request enters the cancelled_terminating state. Otherwise, the Spot Fleet request enters the cancelled_running state and the instances continue to run until they are interrupted or you terminate them manually.
    */
   cancelSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.CancelSpotFleetRequestsResponse) => void): Request<EC2.Types.CancelSpotFleetRequestsResponse, AWSError>;
   /**
@@ -1157,11 +1157,11 @@ declare class EC2 extends Service {
    */
   deleteEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.DeleteEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.DeleteEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleets. After you delete an EC2 Fleet, it launches no new instances. You must also specify whether a deleted EC2 Fleet should terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(params: EC2.Types.DeleteFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
-   * Deletes the specified EC2 Fleet. After you delete an EC2 Fleet, it launches no new instances. You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
+   * Deletes the specified EC2 Fleets. After you delete an EC2 Fleet, it launches no new instances. You must also specify whether a deleted EC2 Fleet should terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the deleted_terminating state. Otherwise, the EC2 Fleet enters the deleted_running state, and the instances continue to run until they are interrupted or you terminate them manually. For instant fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted instant fleet with running instances is not supported.  Restrictions    You can delete up to 25 instant fleets in a single request. If you exceed this number, no instant fleets are deleted and an error is returned. There is no restriction on the number of fleets of type maintain or request that can be deleted in a single request.   Up to 1000 instances can be terminated in a single request to delete instant fleets.   For more information, see Delete an EC2 Fleet in the Amazon EC2 User Guide.
    */
   deleteFleets(callback?: (err: AWSError, data: EC2.Types.DeleteFleetsResult) => void): Request<EC2.Types.DeleteFleetsResult, AWSError>;
   /**
@@ -2549,11 +2549,11 @@ declare class EC2 extends Service {
    */
   describeSpotFleetRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotFleetRequestsResponse) => void): Request<EC2.Types.DescribeSpotFleetRequestsResponse, AWSError>;
   /**
-   * Describes the specified Spot Instance requests. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. We recommend that you set MaxResults to a value between 5 and 1000 to limit the number of results returned. This paginates the output, which makes the list more manageable and returns the results faster. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSpotInstanceRequests request to retrieve the remaining results. Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.
+   * Describes the specified Spot Instance requests. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. We recommend that you set MaxResults to a value between 5 and 1000 to limit the number of items returned. This paginates the output, which makes the list more manageable and returns the items faster. If the list of items exceeds your MaxResults value, then that number of items is returned along with a NextToken value that can be passed to a subsequent DescribeSpotInstanceRequests request to retrieve the remaining items. Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.
    */
   describeSpotInstanceRequests(params: EC2.Types.DescribeSpotInstanceRequestsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
-   * Describes the specified Spot Instance requests. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. We recommend that you set MaxResults to a value between 5 and 1000 to limit the number of results returned. This paginates the output, which makes the list more manageable and returns the results faster. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSpotInstanceRequests request to retrieve the remaining results. Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.
+   * Describes the specified Spot Instance requests. You can use DescribeSpotInstanceRequests to find a running Spot Instance by examining the response. If the status of the Spot Instance is fulfilled, the instance ID appears in the response and contains the identifier of the instance. Alternatively, you can use DescribeInstances with a filter to look for instances where the instance lifecycle is spot. We recommend that you set MaxResults to a value between 5 and 1000 to limit the number of items returned. This paginates the output, which makes the list more manageable and returns the items faster. If the list of items exceeds your MaxResults value, then that number of items is returned along with a NextToken value that can be passed to a subsequent DescribeSpotInstanceRequests request to retrieve the remaining items. Spot Instance requests are deleted four hours after they are canceled and their instances are terminated.
    */
   describeSpotInstanceRequests(callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
@@ -3629,11 +3629,11 @@ declare class EC2 extends Service {
    */
   importClientVpnClientCertificateRevocationList(callback?: (err: AWSError, data: EC2.Types.ImportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ImportClientVpnClientCertificateRevocationListResult, AWSError>;
   /**
-   * Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).  Amazon Web Services VM Import/Export strongly recommends specifying a value for either the --license-type or --usage-operation parameter when you create a new VM Import task. This ensures your operating system is licensed appropriately and your billing is optimized.  For more information, see Importing a VM as an image using VM Import/Export in the VM Import/Export User Guide.
+   *  To import your virtual machines (VMs) with a console-based experience, you can use the Import virtual machine images to Amazon Web Services template in the Migration Hub Orchestrator console. For more information, see the  Migration Hub Orchestrator User Guide .  Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).  Amazon Web Services VM Import/Export strongly recommends specifying a value for either the --license-type or --usage-operation parameter when you create a new VM Import task. This ensures your operating system is licensed appropriately and your billing is optimized.  For more information, see Importing a VM as an image using VM Import/Export in the VM Import/Export User Guide.
    */
   importImage(params: EC2.Types.ImportImageRequest, callback?: (err: AWSError, data: EC2.Types.ImportImageResult) => void): Request<EC2.Types.ImportImageResult, AWSError>;
   /**
-   * Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).  Amazon Web Services VM Import/Export strongly recommends specifying a value for either the --license-type or --usage-operation parameter when you create a new VM Import task. This ensures your operating system is licensed appropriately and your billing is optimized.  For more information, see Importing a VM as an image using VM Import/Export in the VM Import/Export User Guide.
+   *  To import your virtual machines (VMs) with a console-based experience, you can use the Import virtual machine images to Amazon Web Services template in the Migration Hub Orchestrator console. For more information, see the  Migration Hub Orchestrator User Guide .  Import single or multi-volume disk images or EBS snapshots into an Amazon Machine Image (AMI).  Amazon Web Services VM Import/Export strongly recommends specifying a value for either the --license-type or --usage-operation parameter when you create a new VM Import task. This ensures your operating system is licensed appropriately and your billing is optimized.  For more information, see Importing a VM as an image using VM Import/Export in the VM Import/Export User Guide.
    */
   importImage(callback?: (err: AWSError, data: EC2.Types.ImportImageResult) => void): Request<EC2.Types.ImportImageResult, AWSError>;
   /**
@@ -3781,11 +3781,11 @@ declare class EC2 extends Service {
    */
   modifyIdentityIdFormat(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description or LaunchPermission. Images with an Amazon Web Services Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
+   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. To specify the attribute, you can use the Attribute parameter, or one of the following parameters: Description, ImdsSupport, or LaunchPermission. Images with an Amazon Web Services Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
    */
   modifyImageAttribute(params: EC2.Types.ModifyImageAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description or LaunchPermission. Images with an Amazon Web Services Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
+   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. To specify the attribute, you can use the Attribute parameter, or one of the following parameters: Description, ImdsSupport, or LaunchPermission. Images with an Amazon Web Services Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
    */
   modifyImageAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -4149,11 +4149,11 @@ declare class EC2 extends Service {
    */
   modifyVpcEndpointServicePermissions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcEndpointServicePermissionsResult) => void): Request<EC2.Types.ModifyVpcEndpointServicePermissionsResult, AWSError>;
   /**
-   *  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:   Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.   Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.   Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.   If the peered VPCs are in the same Amazon Web Services account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different different Amazon Web Services accounts or different Regions. For peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the Region for the requester VPC to modify the requester VPC peering options and the Region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the DescribeVpcPeeringConnections command.
+   *  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:   Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.   Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.   Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.   If the peered VPCs are in the same Amazon Web Services account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different Amazon Web Services accounts or different Regions. For peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the Region for the requester VPC to modify the requester VPC peering options and the Region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the DescribeVpcPeeringConnections command.
    */
   modifyVpcPeeringConnectionOptions(params: EC2.Types.ModifyVpcPeeringConnectionOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpcPeeringConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpcPeeringConnectionOptionsResult, AWSError>;
   /**
-   *  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:   Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.   Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.   Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.   If the peered VPCs are in the same Amazon Web Services account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different different Amazon Web Services accounts or different Regions. For peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the Region for the requester VPC to modify the requester VPC peering options and the Region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the DescribeVpcPeeringConnections command.
+   *  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  Modifies the VPC peering connection options on one side of a VPC peering connection. You can do the following:   Enable/disable communication over the peering connection between an EC2-Classic instance that's linked to your VPC (using ClassicLink) and instances in the peer VPC.   Enable/disable communication over the peering connection between instances in your VPC and an EC2-Classic instance that's linked to the peer VPC.   Enable/disable the ability to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.   If the peered VPCs are in the same Amazon Web Services account, you can enable DNS resolution for queries from the local VPC. This ensures that queries from the local VPC resolve to private IP addresses in the peer VPC. This option is not available if the peered VPCs are in different Amazon Web Services accounts or different Regions. For peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account owner must initiate a separate request to modify the peering connection options. For inter-region peering connections, you must use the Region for the requester VPC to modify the requester VPC peering options and the Region for the accepter VPC to modify the accepter VPC peering options. To verify which VPCs are the accepter and the requester for a VPC peering connection, use the DescribeVpcPeeringConnections command.
    */
   modifyVpcPeeringConnectionOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpcPeeringConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpcPeeringConnectionOptionsResult, AWSError>;
   /**
@@ -5549,7 +5549,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * Indicates whether to enable or disable host maintenance for the Dedicated Host. For more information, see  Host maintenance in the Amazon EC2 User Guide. Default: on 
+     * Indicates whether to enable or disable host maintenance for the Dedicated Host. For more information, see Host maintenance in the Amazon EC2 User Guide.
      */
     HostMaintenance?: HostMaintenance;
   }
@@ -5959,7 +5959,7 @@ declare namespace EC2 {
     /**
      * [EC2-Classic] The Elastic IP address to associate with the instance. This is required for EC2-Classic.
      */
-    PublicIp?: String;
+    PublicIp?: EipAllocationPublicIp;
     /**
      * [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic IP address that is already associated with an instance or network interface to be reassociated with the specified instance or network interface. Otherwise, the operation fails. In a VPC in an EC2-VPC-only account, reassociation is automatic, therefore you can specify false to ensure the operation fails if the Elastic IP address is already associated with another resource.
      */
@@ -7142,7 +7142,7 @@ declare namespace EC2 {
      */
     SpotFleetRequestIds: SpotFleetRequestIdList;
     /**
-     * Indicates whether to terminate instances for a Spot Fleet request if it is canceled successfully.
+     * Indicates whether to terminate the associated instances when the Spot Fleet request is canceled. The default is to terminate the instances. To let the instances continue to run after the Spot Fleet request is canceled, specify no-terminate-instances.
      */
     TerminateInstances: Boolean;
   }
@@ -11634,7 +11634,7 @@ declare namespace EC2 {
      */
     FleetIds: FleetIdSet;
     /**
-     * Indicates whether to terminate the instances when the EC2 Fleet is deleted. The default is to terminate the instances. To let the instances continue to run after the EC2 Fleet is deleted, specify NoTerminateInstances. Supported only for fleets of type maintain and request. For instant fleets, you cannot specify NoTerminateInstances. A deleted instant fleet with running instances is not supported.
+     * Indicates whether to terminate the associated instances when the EC2 Fleet is deleted. The default is to terminate the instances. To let the instances continue to run after the EC2 Fleet is deleted, specify no-terminate-instances. Supported only for fleets of type maintain and request. For instant fleets, you cannot specify NoTerminateInstances. A deleted instant fleet with running instances is not supported.
      */
     TerminateInstances: Boolean;
   }
@@ -12748,7 +12748,7 @@ declare namespace EC2 {
      */
     PoolId: Ipv4PoolEc2Id;
     /**
-     * The CIDR you want to deprovision from the pool.
+     * The CIDR you want to deprovision from the pool. Enter the CIDR you want to deprovision with a netmask of /32. You must rerun this command for each IP address in the CIDR range. If your CIDR is a /24, you will have to run this command to deprovision each of the 256 IP addresses in the /24 CIDR.
      */
     Cidr: String;
   }
@@ -13596,11 +13596,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. If this parameter is not specified, then all results are returned.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeFastLaunchImagesRequestMaxResults;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: NextToken;
     /**
@@ -13615,7 +13615,7 @@ declare namespace EC2 {
      */
     FastLaunchImages?: DescribeFastLaunchImagesSuccessSet;
     /**
-     * The token to use for the next set of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: NextToken;
   }
@@ -13637,7 +13637,7 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
     /**
-     * The maximum number of parallel instances that are launched for creating resources.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching.
      */
     MaxParallelLaunches?: Integer;
     /**
@@ -13762,11 +13762,11 @@ declare namespace EC2 {
      */
     EventType?: FleetEventType;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -13784,11 +13784,11 @@ declare namespace EC2 {
      */
     HistoryRecords?: HistoryRecordSet;
     /**
-     * The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken indicates that there are more results, this value is not present.
+     * The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken indicates that there are more items, this value is not present.
      */
     LastEvaluatedTime?: DateTime;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -13806,11 +13806,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -13828,7 +13828,7 @@ declare namespace EC2 {
      */
     ActiveInstances?: ActiveInstanceSet;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -13866,11 +13866,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -13884,7 +13884,7 @@ declare namespace EC2 {
   }
   export interface DescribeFleetsResult {
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -14171,11 +14171,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -14185,7 +14185,7 @@ declare namespace EC2 {
      */
     Images?: ImageList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -14282,7 +14282,7 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call. For more information, see Pagination.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination. You cannot specify this parameter and the instance IDs parameter in the same call.
      */
     MaxResults?: DescribeInstanceCreditSpecificationsMaxResults;
     /**
@@ -14354,7 +14354,7 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of items to return for this request. To retrieve the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call. For more information, see Pagination.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination. You cannot specify this parameter and the instance IDs parameter in the same request.
      */
     MaxResults?: Integer;
     /**
@@ -14458,7 +14458,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same request. For more information, see Pagination.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination. You cannot specify this parameter and the instance IDs parameter in the same request.
      */
     MaxResults?: Integer;
     /**
@@ -16021,11 +16021,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeSpotFleetInstancesMaxResults;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16039,7 +16039,7 @@ declare namespace EC2 {
      */
     ActiveInstances?: ActiveInstanceSet;
     /**
-     * The token required to retrieve the next set of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16058,11 +16058,11 @@ declare namespace EC2 {
      */
     EventType?: EventType;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: DescribeSpotFleetRequestHistoryMaxResults;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16080,11 +16080,11 @@ declare namespace EC2 {
      */
     HistoryRecords?: HistoryRecords;
     /**
-     * The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken indicates that there are more results, this value is not present.
+     * The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken indicates that there are more items, this value is not present.
      */
     LastEvaluatedTime?: DateTime;
     /**
-     * The token required to retrieve the next set of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16102,11 +16102,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16116,7 +16116,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotFleetRequestsResponse {
     /**
-     * The token required to retrieve the next set of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16138,11 +16138,11 @@ declare namespace EC2 {
      */
     SpotInstanceRequestIds?: SpotInstanceRequestIdList;
     /**
-     * The token to request the next set of results. This value is null when there are no more results to return.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 5 and 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
   }
@@ -16152,7 +16152,7 @@ declare namespace EC2 {
      */
     SpotInstanceRequests?: SpotInstanceRequestList;
     /**
-     * The token to use to retrieve the next set of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -16178,11 +16178,11 @@ declare namespace EC2 {
      */
     InstanceTypes?: InstanceTypeList;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
@@ -16196,7 +16196,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotPriceHistoryResult {
     /**
-     * The token required to retrieve the next set of results. This value is null or an empty string when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
     /**
@@ -16248,11 +16248,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 1 and 200. You cannot specify this parameter and the ImageIDs parameter in the same call.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination. You cannot specify this parameter and the ImageIDs parameter in the same call.
      */
     MaxResults?: DescribeStoreImageTasksRequestMaxResults;
   }
@@ -16263,7 +16263,7 @@ declare namespace EC2 {
      */
     StoreImageTaskResults?: StoreImageTaskResultSet;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -17736,7 +17736,7 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
     /**
-     * The maximum number of parallel instances to launch for creating resources.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching.
      */
     MaxParallelLaunches?: Integer;
     /**
@@ -17977,7 +17977,7 @@ declare namespace EC2 {
     /**
      * [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
      */
-    PublicIp?: String;
+    PublicIp?: EipAllocationPublicIp;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -18491,6 +18491,7 @@ declare namespace EC2 {
   export type EgressOnlyInternetGatewayId = string;
   export type EgressOnlyInternetGatewayIdList = EgressOnlyInternetGatewayId[];
   export type EgressOnlyInternetGatewayList = EgressOnlyInternetGateway[];
+  export type EipAllocationPublicIp = string;
   export type EipAssociationIdList = ElasticIpAssociationId[];
   export interface ElasticGpuAssociation {
     /**
@@ -18695,7 +18696,7 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationRequest;
     /**
-     * The maximum number of parallel instances to launch for creating resources. Value must be 6 or greater. 
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching. Value must be 6 or greater.
      */
     MaxParallelLaunches?: Integer;
     /**
@@ -18713,7 +18714,7 @@ declare namespace EC2 {
      */
     ResourceType?: FastLaunchResourceType;
     /**
-     * The configuration settings that were defined for creating and managing the pre-provisioned snapshots for faster launching of the Windows AMI. This property is returned when the associated resourceType is snapshot.
+     * Settings to create and manage the pre-provisioned snapshots that Amazon EC2 uses for faster launches from the Windows AMI. This property is returned when the associated resourceType is snapshot.
      */
     SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
     /**
@@ -18721,7 +18722,7 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
     /**
-     * The maximum number of parallel instances to launch for creating resources.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching.
      */
     MaxParallelLaunches?: Integer;
     /**
@@ -19752,7 +19753,7 @@ declare namespace EC2 {
   }
   export interface FleetLaunchTemplateOverrides {
     /**
-     * The instance type.  If you specify InstanceType, you can't specify InstanceRequirements. 
+     * The instance type.  mac1.metal is not supported as a launch template override.  If you specify InstanceType, you can't specify InstanceRequirements. 
      */
     InstanceType?: InstanceType;
     /**
@@ -19792,7 +19793,7 @@ declare namespace EC2 {
   export type FleetLaunchTemplateOverridesListRequest = FleetLaunchTemplateOverridesRequest[];
   export interface FleetLaunchTemplateOverridesRequest {
     /**
-     * The instance type.  If you specify InstanceType, you can't specify InstanceRequirements. 
+     * The instance type.  mac1.metal is not supported as a launch template override.  If you specify InstanceType, you can't specify InstanceRequirements. 
      */
     InstanceType?: InstanceType;
     /**
@@ -20467,11 +20468,11 @@ declare namespace EC2 {
      */
     InstanceRequirements: InstanceRequirementsRequest;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and&#x2028; 1000. The default value is 1000. To retrieve the remaining results, make another call with&#x2028; the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -20481,7 +20482,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: InstanceTypeInfoFromInstanceRequirementsSet;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -20989,11 +20990,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The maximum number of results to return in a single call. Specify a value between 1 and&#x2028; 1000. The default value is 1000. To retrieve the remaining results, make another call with&#x2028; the returned NextToken value.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: SpotPlacementScoresMaxResults;
     /**
-     * The token for the next set of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
   }
@@ -21003,7 +21004,7 @@ declare namespace EC2 {
      */
     SpotPlacementScores?: SpotPlacementScores;
     /**
-     * The token for the next set of results.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -24782,7 +24783,7 @@ declare namespace EC2 {
   }
   export interface LaunchSpecification {
     /**
-     * The Base64-encoded user data for the instance.
+     * The base64-encoded user data that instances use when starting up. User data is limited to 16 KB.
      */
     UserData?: SensitiveUserData;
     /**
@@ -25651,11 +25652,11 @@ declare namespace EC2 {
      */
     ImageIds?: ImageIdStringList;
     /**
-     * The token for the next page of results.
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 1,000 items per page by default. For more information, see  Pagination.
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
      */
     MaxResults?: ListImagesInRecycleBinMaxResults;
     /**
@@ -25669,7 +25670,7 @@ declare namespace EC2 {
      */
     Images?: ImageRecycleBinInfoList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
     NextToken?: String;
   }
@@ -26478,7 +26479,7 @@ declare namespace EC2 {
   }
   export interface ModifyImageAttributeRequest {
     /**
-     * The name of the attribute to modify. Valid values: description | launchPermission 
+     * The name of the attribute to modify. Valid values: description | imdsSupport | launchPermission 
      */
     Attribute?: String;
     /**
@@ -26510,7 +26511,7 @@ declare namespace EC2 {
      */
     UserIds?: UserIdStringList;
     /**
-     * The value of the attribute being modified. This parameter can be used only when the Attribute parameter is description.
+     * The value of the attribute being modified. This parameter can be used only when the Attribute parameter is description or imdsSupport.
      */
     Value?: String;
     /**
@@ -26525,6 +26526,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of an organizational unit (OU). This parameter can be used only when the Attribute parameter is launchPermission.
      */
     OrganizationalUnitArns?: OrganizationalUnitArnStringList;
+    /**
+     * Set to v2.0 to indicate that IMDSv2 is specified in the AMI. Instances launched from this AMI will have HttpTokens automatically set to required so that, by default, the instance requires that IMDSv2 is used when requesting instance metadata. In addition, HttpPutResponseHopLimit is set to 2. For more information, see Configure the AMI in the Amazon EC2 User Guide.  Do not use this parameter unless your AMI software supports IMDSv2. After you set the value to v2.0, you can't undo it. The only way to “reset” your AMI is to create a new AMI from the underlying snapshot. 
+     */
+    ImdsSupport?: AttributeValue;
   }
   export interface ModifyInstanceAttributeRequest {
     /**
@@ -31108,7 +31113,7 @@ declare namespace EC2 {
      */
     SubnetId?: SubnetId;
     /**
-     * The Base64-encoded user data for the instance. User data is limited to 16 KB.
+     * The base64-encoded user data that instances use when starting up. User data is limited to 16 KB.
      */
     UserData?: SensitiveUserData;
   }
@@ -33607,7 +33612,7 @@ declare namespace EC2 {
      */
     SubnetId?: SubnetId;
     /**
-     * The Base64-encoded user data that instances use when starting up.
+     * The base64-encoded user data that instances use when starting up. User data is limited to 16 KB.
      */
     UserData?: SensitiveUserData;
     /**

@@ -12,11 +12,11 @@ declare class ManagedBlockchain extends Service {
   constructor(options?: ManagedBlockchain.Types.ClientConfiguration)
   config: Config & ManagedBlockchain.Types.ClientConfiguration;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor object is a container that has the information required for token based access to your Ethereum nodes.
+   * Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor contains information required for token based access to your Ethereum nodes.
    */
   createAccessor(params: ManagedBlockchain.Types.CreateAccessorInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateAccessorOutput) => void): Request<ManagedBlockchain.Types.CreateAccessorOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor object is a container that has the information required for token based access to your Ethereum nodes.
+   * Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor contains information required for token based access to your Ethereum nodes.
    */
   createAccessor(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateAccessorOutput) => void): Request<ManagedBlockchain.Types.CreateAccessorOutput, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class ManagedBlockchain extends Service {
    */
   createProposal(callback?: (err: AWSError, data: ManagedBlockchain.Types.CreateProposalOutput) => void): Request<ManagedBlockchain.Types.CreateProposalOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that were initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
+   * Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that were initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
    */
   deleteAccessor(params: ManagedBlockchain.Types.DeleteAccessorInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.DeleteAccessorOutput) => void): Request<ManagedBlockchain.Types.DeleteAccessorOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that were initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
+   * Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the information required for token based access to your Ethereum nodes including, the BILLING_TOKEN. After an accessor is deleted, the status of the accessor changes from AVAILABLE to PENDING_DELETION. An accessor in the PENDING_DELETION state can’t be used for new WebSocket requests or HTTP requests. However, WebSocket connections that were initiated while the accessor was in the AVAILABLE state remain open until they expire (up to 2 hours).
    */
   deleteAccessor(callback?: (err: AWSError, data: ManagedBlockchain.Types.DeleteAccessorOutput) => void): Request<ManagedBlockchain.Types.DeleteAccessorOutput, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class ManagedBlockchain extends Service {
    */
   deleteNode(callback?: (err: AWSError, data: ManagedBlockchain.Types.DeleteNodeOutput) => void): Request<ManagedBlockchain.Types.DeleteNodeOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Returns detailed information about an accessor. An accessor object is a container that has the information required for token based access to your Ethereum nodes.
+   * Returns detailed information about an accessor. An accessor object is a container that has the information required for token based access to your Ethereum nodes.
    */
   getAccessor(params: ManagedBlockchain.Types.GetAccessorInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.GetAccessorOutput) => void): Request<ManagedBlockchain.Types.GetAccessorOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Returns detailed information about an accessor. An accessor object is a container that has the information required for token based access to your Ethereum nodes.
+   * Returns detailed information about an accessor. An accessor object is a container that has the information required for token based access to your Ethereum nodes.
    */
   getAccessor(callback?: (err: AWSError, data: ManagedBlockchain.Types.GetAccessorOutput) => void): Request<ManagedBlockchain.Types.GetAccessorOutput, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class ManagedBlockchain extends Service {
    */
   getProposal(callback?: (err: AWSError, data: ManagedBlockchain.Types.GetProposalOutput) => void): Request<ManagedBlockchain.Types.GetProposalOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Returns a list of the accessors and their properties. Accessor objects are containers that have the information required for token based access to your Ethereum nodes.
+   * Returns a list of the accessors and their properties. Accessor objects are containers that have the information required for token based access to your Ethereum nodes.
    */
   listAccessors(params: ManagedBlockchain.Types.ListAccessorsInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.ListAccessorsOutput) => void): Request<ManagedBlockchain.Types.ListAccessorsOutput, AWSError>;
   /**
-   *  The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is subject to change. We recommend that you use this feature only with test scenarios, and not in production environments.  Returns a list of the accessors and their properties. Accessor objects are containers that have the information required for token based access to your Ethereum nodes.
+   * Returns a list of the accessors and their properties. Accessor objects are containers that have the information required for token based access to your Ethereum nodes.
    */
   listAccessors(callback?: (err: AWSError, data: ManagedBlockchain.Types.ListAccessorsOutput) => void): Request<ManagedBlockchain.Types.ListAccessorsOutput, AWSError>;
   /**
@@ -254,6 +254,10 @@ declare namespace ManagedBlockchain {
      * The Amazon Resource Name (ARN) of the accessor. For more information about ARNs and their format, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.
      */
     Arn?: ArnString;
+    /**
+     * The tags assigned to the Accessor. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: OutputTagMap;
   }
   export type AccessorBillingTokenString = string;
   export type AccessorListMaxResults = number;
@@ -308,6 +312,10 @@ declare namespace ManagedBlockchain {
      * The type of accessor.  Currently accessor type is restricted to BILLING_TOKEN. 
      */
     AccessorType: AccessorType;
+    /**
+     * Tags to assign to the Accessor.  Each tag consists of a key and an optional value. You can specify multiple key-value pairs in a single request with an overall maximum of 50 tags allowed per resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     */
+    Tags?: InputTagMap;
   }
   export interface CreateAccessorOutput {
     /**
@@ -377,7 +385,7 @@ declare namespace ManagedBlockchain {
      */
     MemberConfiguration: MemberConfiguration;
     /**
-     * Tags to assign to the network. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags to assign to the network.  Each tag consists of a key and an optional value. You can specify multiple key-value pairs in a single request with an overall maximum of 50 tags allowed per resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
   }
@@ -409,7 +417,7 @@ declare namespace ManagedBlockchain {
      */
     NodeConfiguration: NodeConfiguration;
     /**
-     * Tags to assign to the node. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags to assign to the node.  Each tag consists of a key and an optional value. You can specify multiple key-value pairs in a single request with an overall maximum of 50 tags allowed per resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
   }
@@ -441,7 +449,7 @@ declare namespace ManagedBlockchain {
      */
     Description?: DescriptionString;
     /**
-     * Tags to assign to the proposal. Each tag consists of a key and optional value. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags to assign to the proposal.  Each tag consists of a key and an optional value. You can specify multiple key-value pairs in a single request with an overall maximum of 50 tags allowed per resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
   }
@@ -853,7 +861,7 @@ declare namespace ManagedBlockchain {
      */
     CreationDate?: Timestamp;
     /**
-     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: OutputTagMap;
     /**
@@ -883,7 +891,7 @@ declare namespace ManagedBlockchain {
      */
     LogPublishingConfiguration?: MemberLogPublishingConfiguration;
     /**
-     * Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.
+     * Tags assigned to the member. Tags consist of a key and optional value.  When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. For more information about tags, see Tagging Resources in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
      */
     Tags?: InputTagMap;
     /**

@@ -76,6 +76,14 @@ declare class Comprehend extends Service {
    */
   containsPiiEntities(callback?: (err: AWSError, data: Comprehend.Types.ContainsPiiEntitiesResponse) => void): Request<Comprehend.Types.ContainsPiiEntitiesResponse, AWSError>;
   /**
+   * Creates a dataset to upload training or test data for a model associated with a flywheel. For more information about datasets, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  createDataset(params: Comprehend.Types.CreateDatasetRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDatasetResponse) => void): Request<Comprehend.Types.CreateDatasetResponse, AWSError>;
+  /**
+   * Creates a dataset to upload training or test data for a model associated with a flywheel. For more information about datasets, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  createDataset(callback?: (err: AWSError, data: Comprehend.Types.CreateDatasetResponse) => void): Request<Comprehend.Types.CreateDatasetResponse, AWSError>;
+  /**
    * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see Document Classification in the Comprehend Developer Guide. 
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
@@ -92,13 +100,21 @@ declare class Comprehend extends Service {
    */
   createEndpoint(callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
   /**
-   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
+   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the DescribeEntityRecognizer API. 
    */
   createEntityRecognizer(params: Comprehend.Types.CreateEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
   /**
-   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
+   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the DescribeEntityRecognizer API. 
    */
   createEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
+  /**
+   * A flywheel is an AWS resource that orchestrates the ongoing training of a model for custom classification or custom entity recognition. You can create a flywheel to start with an existing trained model, or Comprehend can create and train a new model. When you create the flywheel, Comprehend creates a data lake in your account. The data lake holds the training data and test data for all versions of the model. To use a flywheel with an existing trained model, you specify the active model version. Comprehend copies the model's training data and test data into the flywheel's data lake. To use the flywheel with a new model, you need to provide a dataset for training data (and optional test data) when you create the flywheel. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  createFlywheel(params: Comprehend.Types.CreateFlywheelRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateFlywheelResponse) => void): Request<Comprehend.Types.CreateFlywheelResponse, AWSError>;
+  /**
+   * A flywheel is an AWS resource that orchestrates the ongoing training of a model for custom classification or custom entity recognition. You can create a flywheel to start with an existing trained model, or Comprehend can create and train a new model. When you create the flywheel, Comprehend creates a data lake in your account. The data lake holds the training data and test data for all versions of the model. To use a flywheel with an existing trained model, you specify the active model version. Comprehend copies the model's training data and test data into the flywheel's data lake. To use the flywheel with a new model, you need to provide a dataset for training data (and optional test data) when you create the flywheel. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  createFlywheel(callback?: (err: AWSError, data: Comprehend.Types.CreateFlywheelResponse) => void): Request<Comprehend.Types.CreateFlywheelResponse, AWSError>;
   /**
    * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
    */
@@ -124,6 +140,14 @@ declare class Comprehend extends Service {
    */
   deleteEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
   /**
+   * Deletes a flywheel. When you delete the flywheel, Amazon Comprehend does not delete the data lake or the model associated with the flywheel. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  deleteFlywheel(params: Comprehend.Types.DeleteFlywheelRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteFlywheelResponse) => void): Request<Comprehend.Types.DeleteFlywheelResponse, AWSError>;
+  /**
+   * Deletes a flywheel. When you delete the flywheel, Amazon Comprehend does not delete the data lake or the model associated with the flywheel. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  deleteFlywheel(callback?: (err: AWSError, data: Comprehend.Types.DeleteFlywheelResponse) => void): Request<Comprehend.Types.DeleteFlywheelResponse, AWSError>;
+  /**
    * Deletes a resource-based policy that is attached to a custom model.
    */
   deleteResourcePolicy(params: Comprehend.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteResourcePolicyResponse) => void): Request<Comprehend.Types.DeleteResourcePolicyResponse, AWSError>;
@@ -131,6 +155,14 @@ declare class Comprehend extends Service {
    * Deletes a resource-based policy that is attached to a custom model.
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.DeleteResourcePolicyResponse) => void): Request<Comprehend.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Returns information about the dataset that you specify. For more information about datasets, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  describeDataset(params: Comprehend.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDatasetResponse) => void): Request<Comprehend.Types.DescribeDatasetResponse, AWSError>;
+  /**
+   * Returns information about the dataset that you specify. For more information about datasets, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  describeDataset(callback?: (err: AWSError, data: Comprehend.Types.DescribeDatasetResponse) => void): Request<Comprehend.Types.DescribeDatasetResponse, AWSError>;
   /**
    * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
    */
@@ -187,6 +219,22 @@ declare class Comprehend extends Service {
    * Gets the status and details of an events detection job.
    */
   describeEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeEventsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEventsDetectionJobResponse, AWSError>;
+  /**
+   * Provides configuration information about the flywheel. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  describeFlywheel(params: Comprehend.Types.DescribeFlywheelRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeFlywheelResponse) => void): Request<Comprehend.Types.DescribeFlywheelResponse, AWSError>;
+  /**
+   * Provides configuration information about the flywheel. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  describeFlywheel(callback?: (err: AWSError, data: Comprehend.Types.DescribeFlywheelResponse) => void): Request<Comprehend.Types.DescribeFlywheelResponse, AWSError>;
+  /**
+   * Retrieve the configuration properties of a flywheel iteration. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  describeFlywheelIteration(params: Comprehend.Types.DescribeFlywheelIterationRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeFlywheelIterationResponse) => void): Request<Comprehend.Types.DescribeFlywheelIterationResponse, AWSError>;
+  /**
+   * Retrieve the configuration properties of a flywheel iteration. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  describeFlywheelIteration(callback?: (err: AWSError, data: Comprehend.Types.DescribeFlywheelIterationResponse) => void): Request<Comprehend.Types.DescribeFlywheelIterationResponse, AWSError>;
   /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
@@ -300,6 +348,14 @@ declare class Comprehend extends Service {
    */
   importModel(callback?: (err: AWSError, data: Comprehend.Types.ImportModelResponse) => void): Request<Comprehend.Types.ImportModelResponse, AWSError>;
   /**
+   * List the datasets that you have configured in this region. For more information about datasets, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  listDatasets(params: Comprehend.Types.ListDatasetsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDatasetsResponse) => void): Request<Comprehend.Types.ListDatasetsResponse, AWSError>;
+  /**
+   * List the datasets that you have configured in this region. For more information about datasets, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  listDatasets(callback?: (err: AWSError, data: Comprehend.Types.ListDatasetsResponse) => void): Request<Comprehend.Types.ListDatasetsResponse, AWSError>;
+  /**
    * Gets a list of the documentation classification jobs that you have submitted.
    */
   listDocumentClassificationJobs(params: Comprehend.Types.ListDocumentClassificationJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
@@ -372,6 +428,22 @@ declare class Comprehend extends Service {
    */
   listEventsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEventsDetectionJobsResponse) => void): Request<Comprehend.Types.ListEventsDetectionJobsResponse, AWSError>;
   /**
+   * Information about the history of a flywheel iteration. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  listFlywheelIterationHistory(params: Comprehend.Types.ListFlywheelIterationHistoryRequest, callback?: (err: AWSError, data: Comprehend.Types.ListFlywheelIterationHistoryResponse) => void): Request<Comprehend.Types.ListFlywheelIterationHistoryResponse, AWSError>;
+  /**
+   * Information about the history of a flywheel iteration. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  listFlywheelIterationHistory(callback?: (err: AWSError, data: Comprehend.Types.ListFlywheelIterationHistoryResponse) => void): Request<Comprehend.Types.ListFlywheelIterationHistoryResponse, AWSError>;
+  /**
+   * Gets a list of the flywheels that you have created.
+   */
+  listFlywheels(params: Comprehend.Types.ListFlywheelsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListFlywheelsResponse) => void): Request<Comprehend.Types.ListFlywheelsResponse, AWSError>;
+  /**
+   * Gets a list of the flywheels that you have created.
+   */
+  listFlywheels(callback?: (err: AWSError, data: Comprehend.Types.ListFlywheelsResponse) => void): Request<Comprehend.Types.ListFlywheelsResponse, AWSError>;
+  /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
   listKeyPhrasesDetectionJobs(params: Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
@@ -428,11 +500,11 @@ declare class Comprehend extends Service {
    */
   putResourcePolicy(callback?: (err: AWSError, data: Comprehend.Types.PutResourcePolicyResponse) => void): Request<Comprehend.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+   * Starts an asynchronous document classification job. Use the DescribeDocumentClassificationJob operation to track the progress of the job.
    */
   startDocumentClassificationJob(params: Comprehend.Types.StartDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
-   * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+   * Starts an asynchronous document classification job. Use the DescribeDocumentClassificationJob operation to track the progress of the job.
    */
   startDocumentClassificationJob(callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
@@ -460,6 +532,14 @@ declare class Comprehend extends Service {
    */
   startEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEventsDetectionJobResponse) => void): Request<Comprehend.Types.StartEventsDetectionJobResponse, AWSError>;
   /**
+   * Start the flywheel iteration.This operation uses any new datasets to train a new model version. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  startFlywheelIteration(params: Comprehend.Types.StartFlywheelIterationRequest, callback?: (err: AWSError, data: Comprehend.Types.StartFlywheelIterationResponse) => void): Request<Comprehend.Types.StartFlywheelIterationResponse, AWSError>;
+  /**
+   * Start the flywheel iteration.This operation uses any new datasets to train a new model version. For more information about flywheels, see  Flywheel overview in the Amazon Comprehend Developer Guide.
+   */
+  startFlywheelIteration(callback?: (err: AWSError, data: Comprehend.Types.StartFlywheelIterationResponse) => void): Request<Comprehend.Types.StartFlywheelIterationResponse, AWSError>;
+  /**
    * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
    */
   startKeyPhrasesDetectionJob(params: Comprehend.Types.StartKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
@@ -484,11 +564,11 @@ declare class Comprehend extends Service {
    */
   startSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the operation to track the status of a job.
+   * Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the DescribeTargetedSentimentDetectionJob operation to track the status of a job.
    */
   startTargetedSentimentDetectionJob(params: Comprehend.Types.StartTargetedSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartTargetedSentimentDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the operation to track the status of a job.
+   * Starts an asynchronous targeted sentiment detection job for a collection of documents. Use the DescribeTargetedSentimentDetectionJob operation to track the status of a job.
    */
   startTargetedSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartTargetedSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartTargetedSentimentDetectionJobResponse, AWSError>;
   /**
@@ -595,6 +675,14 @@ declare class Comprehend extends Service {
    * Updates information about the specified endpoint. For information about endpoints, see Managing endpoints.
    */
   updateEndpoint(callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
+  /**
+   * Update the configuration information for an existing flywheel.
+   */
+  updateFlywheel(params: Comprehend.Types.UpdateFlywheelRequest, callback?: (err: AWSError, data: Comprehend.Types.UpdateFlywheelResponse) => void): Request<Comprehend.Types.UpdateFlywheelResponse, AWSError>;
+  /**
+   * Update the configuration information for an existing flywheel.
+   */
+  updateFlywheel(callback?: (err: AWSError, data: Comprehend.Types.UpdateFlywheelResponse) => void): Request<Comprehend.Types.UpdateFlywheelResponse, AWSError>;
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
@@ -994,8 +1082,10 @@ declare namespace Comprehend {
   export type ClientRequestTokenString = string;
   export type ComprehendArn = string;
   export type ComprehendArnName = string;
+  export type ComprehendDatasetArn = string;
   export type ComprehendEndpointArn = string;
   export type ComprehendEndpointName = string;
+  export type ComprehendFlywheelArn = string;
   export type ComprehendModelArn = string;
   export interface ContainsPiiEntitiesRequest {
     /**
@@ -1013,6 +1103,42 @@ declare namespace Comprehend {
      */
     Labels?: ListOfEntityLabels;
   }
+  export interface CreateDatasetRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel of the flywheel to receive the data.
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+    /**
+     * Name of the dataset.
+     */
+    DatasetName: ComprehendArnName;
+    /**
+     * The dataset type. You can specify that the data in a dataset is for training the model or for testing the model.
+     */
+    DatasetType?: DatasetType;
+    /**
+     * Description of the dataset.
+     */
+    Description?: Description;
+    /**
+     * Information about the input data configuration. The type of input data varies based on the format of the input and whether the data is for a classifier model or an entity recognition model.
+     */
+    InputDataConfig: DatasetInputDataConfig;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * Tags for the dataset.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateDatasetResponse {
+    /**
+     * The ARN of the dataset.
+     */
+    DatasetArn?: ComprehendDatasetArn;
+  }
   export interface CreateDocumentClassifierRequest {
     /**
      * The name of the document classifier.
@@ -1023,11 +1149,11 @@ declare namespace Comprehend {
      */
     VersionName?: VersionName;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+     * Tags to associate with the document classifier. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
      */
     Tags?: TagList;
     /**
@@ -1043,7 +1169,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     * The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1081,7 +1207,7 @@ declare namespace Comprehend {
     /**
      * The Amazon Resource Number (ARN) of the model to which the endpoint will be attached.
      */
-    ModelArn: ComprehendModelArn;
+    ModelArn?: ComprehendModelArn;
     /**
      *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
      */
@@ -1091,19 +1217,27 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     * Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. 
+     * Tags to associate with the endpoint. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. 
      */
     Tags?: TagList;
     /**
-     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel to which the endpoint will be attached.
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export interface CreateEndpointResponse {
     /**
      * The Amazon Resource Number (ARN) of the endpoint being created.
      */
     EndpointArn?: ComprehendEndpointArn;
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+     */
+    ModelArn?: ComprehendModelArn;
   }
   export interface CreateEntityRecognizerRequest {
     /**
@@ -1115,11 +1249,11 @@ declare namespace Comprehend {
      */
     VersionName?: VersionName;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+     * Tags to associate with the entity recognizer. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
      */
     Tags?: TagList;
     /**
@@ -1143,7 +1277,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
     /**
@@ -1157,8 +1291,222 @@ declare namespace Comprehend {
      */
     EntityRecognizerArn?: EntityRecognizerArn;
   }
+  export interface CreateFlywheelRequest {
+    /**
+     * Name for the flywheel.
+     */
+    FlywheelName: ComprehendArnName;
+    /**
+     * To associate an existing model with the flywheel, specify the Amazon Resource Number (ARN) of the model version.
+     */
+    ActiveModelArn?: ComprehendModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend the permissions required to access the flywheel data in the data lake.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * Configuration about the custom classifier associated with the flywheel.
+     */
+    TaskConfig?: TaskConfig;
+    /**
+     * The model type.
+     */
+    ModelType?: ModelType;
+    /**
+     * Enter the S3 location for the data lake. You can specify a new S3 bucket or a new folder of an existing S3 bucket. The flywheel creates the data lake at this location.
+     */
+    DataLakeS3Uri: FlywheelS3Uri;
+    /**
+     * Data security configurations.
+     */
+    DataSecurityConfig?: DataSecurityConfig;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * The tags to associate with this flywheel.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFlywheelResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel.
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * The Amazon Resource Number (ARN) of the active model version.
+     */
+    ActiveModelArn?: ComprehendModelArn;
+  }
   export type CustomerInputString = string;
   export type CustomerInputStringList = CustomerInputString[];
+  export interface DataSecurityConfig {
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
+    /**
+     * ID for the KMS key that Amazon Comprehend uses to encrypt the volume.
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * ID for the KMS key that Amazon Comprehend uses to encrypt the data in the data lake.
+     */
+    DataLakeKmsKeyId?: KmsKeyId;
+    VpcConfig?: VpcConfig;
+  }
+  export type DatasetAugmentedManifestsList = DatasetAugmentedManifestsListItem[];
+  export interface DatasetAugmentedManifestsListItem {
+    /**
+     * The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job. If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth. If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.
+     */
+    AttributeNames: AttributeNamesList;
+    /**
+     * The Amazon S3 location of the augmented manifest file.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The S3 prefix to the annotation files that are referred in the augmented manifest file.
+     */
+    AnnotationDataS3Uri?: S3Uri;
+    /**
+     * The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.
+     */
+    SourceDocumentsS3Uri?: S3Uri;
+    /**
+     * The type of augmented manifest. If you don't specify, the default is PlainTextDocument.   PLAIN_TEXT_DOCUMENT A document type that represents any unicode text that is encoded in UTF-8.
+     */
+    DocumentType?: AugmentedManifestsDocumentTypeFormat;
+  }
+  export type DatasetDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
+  export interface DatasetDocumentClassifierInputDataConfig {
+    /**
+     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input. This parameter is required if you set DataFormat to COMPREHEND_CSV.
+     */
+    S3Uri: S3Uri;
+    /**
+     * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
+     */
+    LabelDelimiter?: LabelDelimiter;
+  }
+  export interface DatasetEntityRecognizerAnnotations {
+    /**
+     *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface DatasetEntityRecognizerDocuments {
+    /**
+     *  Specifies the Amazon S3 location where the documents for the dataset are located. 
+     */
+    S3Uri: S3Uri;
+    /**
+     *  Specifies how the text in an input file should be processed. This is optional, and the default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers. ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.
+     */
+    InputFormat?: InputFormat;
+  }
+  export interface DatasetEntityRecognizerEntityList {
+    /**
+     * Specifies the Amazon S3 location where the entity list is located.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface DatasetEntityRecognizerInputDataConfig {
+    /**
+     * The S3 location of the annotation documents for your custom entity recognizer.
+     */
+    Annotations?: DatasetEntityRecognizerAnnotations;
+    /**
+     * The format and location of the training documents for your custom entity recognizer.
+     */
+    Documents: DatasetEntityRecognizerDocuments;
+    /**
+     * The S3 location of the entity list for your custom entity recognizer.
+     */
+    EntityList?: DatasetEntityRecognizerEntityList;
+  }
+  export interface DatasetFilter {
+    /**
+     * Filter the datasets based on the dataset status.
+     */
+    Status?: DatasetStatus;
+    /**
+     * Filter the datasets based on the dataset type.
+     */
+    DatasetType?: DatasetType;
+    /**
+     * Filter the datasets to include datasets created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Filter the datasets to include datasets created before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+  }
+  export interface DatasetInputDataConfig {
+    /**
+     * A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. 
+     */
+    AugmentedManifests?: DatasetAugmentedManifestsList;
+    /**
+     *  COMPREHEND_CSV: The data format is a two-column CSV file, where the first column contains labels and the second column contains documents.  AUGMENTED_MANIFEST: The data format 
+     */
+    DataFormat?: DatasetDataFormat;
+    /**
+     * The input properties for training a document classifier model.  For more information on how the input file is formatted, see Preparing training data in the Comprehend Developer Guide. 
+     */
+    DocumentClassifierInputDataConfig?: DatasetDocumentClassifierInputDataConfig;
+    /**
+     * The input properties for training an entity recognizer model.
+     */
+    EntityRecognizerInputDataConfig?: DatasetEntityRecognizerInputDataConfig;
+  }
+  export interface DatasetProperties {
+    /**
+     * The ARN of the dataset.
+     */
+    DatasetArn?: ComprehendDatasetArn;
+    /**
+     * The name of the dataset.
+     */
+    DatasetName?: ComprehendArnName;
+    /**
+     * The dataset type (training data or test data).
+     */
+    DatasetType?: DatasetType;
+    /**
+     * The S3 URI where the dataset is stored.
+     */
+    DatasetS3Uri?: S3Uri;
+    /**
+     * Description of the dataset.
+     */
+    Description?: Description;
+    /**
+     * The dataset status. While the system creates the dataset, the status is CREATING. When the dataset is ready to use, the status changes to COMPLETED. 
+     */
+    Status?: DatasetStatus;
+    /**
+     * A description of the status of the dataset.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The number of documents in the dataset.
+     */
+    NumberOfDocuments?: NumberOfDocuments;
+    /**
+     * Creation time of the dataset.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Time when the data from the dataset becomes available in the data lake.
+     */
+    EndTime?: Timestamp;
+  }
+  export type DatasetPropertiesList = DatasetProperties[];
+  export type DatasetStatus = "CREATING"|"COMPLETED"|"FAILED"|string;
+  export type DatasetType = "TRAIN"|"TEST"|string;
   export interface DeleteDocumentClassifierRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the document classifier. 
@@ -1183,6 +1531,14 @@ declare namespace Comprehend {
   }
   export interface DeleteEntityRecognizerResponse {
   }
+  export interface DeleteFlywheelRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel to delete.
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+  }
+  export interface DeleteFlywheelResponse {
+  }
   export interface DeleteResourcePolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.
@@ -1195,9 +1551,21 @@ declare namespace Comprehend {
   }
   export interface DeleteResourcePolicyResponse {
   }
+  export interface DescribeDatasetRequest {
+    /**
+     * The ARN of the dataset.
+     */
+    DatasetArn: ComprehendDatasetArn;
+  }
+  export interface DescribeDatasetResponse {
+    /**
+     * The dataset properties.
+     */
+    DatasetProperties?: DatasetProperties;
+  }
   export interface DescribeDocumentClassificationJobRequest {
     /**
-     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend generated for the job. The StartDocumentClassificationJob operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -1209,7 +1577,7 @@ declare namespace Comprehend {
   }
   export interface DescribeDocumentClassifierRequest {
     /**
-     * The Amazon Resource Name (ARN) that identifies the document classifier. The operation returns this identifier in its response.
+     * The Amazon Resource Name (ARN) that identifies the document classifier. The CreateDocumentClassifier operation returns this identifier in its response.
      */
     DocumentClassifierArn: DocumentClassifierArn;
   }
@@ -1221,7 +1589,7 @@ declare namespace Comprehend {
   }
   export interface DescribeDominantLanguageDetectionJobRequest {
     /**
-     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend generated for the job. The StartDominantLanguageDetectionJob operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -1245,7 +1613,7 @@ declare namespace Comprehend {
   }
   export interface DescribeEntitiesDetectionJobRequest {
     /**
-     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend generated for the job. The StartEntitiesDetectionJob operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -1279,9 +1647,37 @@ declare namespace Comprehend {
      */
     EventsDetectionJobProperties?: EventsDetectionJobProperties;
   }
+  export interface DescribeFlywheelIterationRequest {
+    /**
+     * 
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+    /**
+     * 
+     */
+    FlywheelIterationId: FlywheelIterationId;
+  }
+  export interface DescribeFlywheelIterationResponse {
+    /**
+     * The configuration properties of a flywheel iteration.
+     */
+    FlywheelIterationProperties?: FlywheelIterationProperties;
+  }
+  export interface DescribeFlywheelRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel.
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+  }
+  export interface DescribeFlywheelResponse {
+    /**
+     * The flywheel properties.
+     */
+    FlywheelProperties?: FlywheelProperties;
+  }
   export interface DescribeKeyPhrasesDetectionJobRequest {
     /**
-     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend generated for the job. The StartKeyPhrasesDetectionJob operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -1338,7 +1734,7 @@ declare namespace Comprehend {
   }
   export interface DescribeTargetedSentimentDetectionJobRequest {
     /**
-     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend generated for the job. The StartTargetedSentimentDetectionJob operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -1360,6 +1756,7 @@ declare namespace Comprehend {
      */
     TopicsDetectionJobProperties?: TopicsDetectionJobProperties;
   }
+  export type Description = string;
   export interface DetectDominantLanguageRequest {
     /**
      * A UTF-8 text string. The string must contain at least 20 characters. The maximum string size is 100 KB.
@@ -1514,6 +1911,16 @@ declare namespace Comprehend {
      */
     Page?: Integer;
   }
+  export interface DocumentClassificationConfig {
+    /**
+     * Classification mode indicates whether the documents are MULTI_CLASS or MULTI_LABEL.
+     */
+    Mode: DocumentClassifierMode;
+    /**
+     * One or more labels to associate with the custom classifier.
+     */
+    Labels?: LabelsList;
+  }
   export interface DocumentClassificationJobFilter {
     /**
      * Filters on the name of the job.
@@ -1574,7 +1981,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig?: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -1585,6 +1992,10 @@ declare namespace Comprehend {
      *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
@@ -1641,6 +2052,10 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId can be one of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    KMS Key Alias: "alias/ExampleAlias"    ARN of a KMS Key Alias: "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * The Amazon S3 prefix for the data lake location of the flywheel statistics.
+     */
+    FlywheelStatsS3Prefix?: S3Uri;
   }
   export interface DocumentClassifierProperties {
     /**
@@ -1688,7 +2103,7 @@ declare namespace Comprehend {
      */
     ClassifierMetadata?: ClassifierMetadata;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -1715,6 +2130,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the document classifier model in your AWS account.
      */
     SourceModelArn?: DocumentClassifierArn;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
   export type DocumentClassifierSummariesList = DocumentClassifierSummary[];
@@ -1858,7 +2277,7 @@ declare namespace Comprehend {
      */
     OutputDataConfig?: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -1928,13 +2347,17 @@ declare namespace Comprehend {
      */
     LastModifiedTime?: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
      * Data access role ARN to use in case the new model is encrypted with a customer KMS key.
      */
     DesiredDataAccessRoleArn?: IamRoleArn;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
   export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
@@ -2002,7 +2425,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -2050,6 +2473,12 @@ declare namespace Comprehend {
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
      */
     Score?: Float;
+  }
+  export interface EntityRecognitionConfig {
+    /**
+     * Up to 25 entity types that the model is trained to recognize.
+     */
+    EntityTypes: EntityTypesList;
   }
   export interface EntityRecognizerAnnotations {
     /**
@@ -2176,6 +2605,12 @@ declare namespace Comprehend {
      */
     NumberOfTrainMentions?: Integer;
   }
+  export interface EntityRecognizerOutputDataConfig {
+    /**
+     * The Amazon S3 prefix for the data lake location of the flywheel statistics.
+     */
+    FlywheelStatsS3Prefix?: S3Uri;
+  }
   export interface EntityRecognizerProperties {
     /**
      * The Amazon Resource Name (ARN) that identifies the entity recognizer.
@@ -2218,7 +2653,7 @@ declare namespace Comprehend {
      */
     RecognizerMetadata?: EntityRecognizerMetadata;
     /**
-     *  The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     *  The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -2230,7 +2665,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:    KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
     /**
@@ -2241,6 +2676,14 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the source model. This model was imported from a different AWS account to create the entity recognizer model in your AWS account.
      */
     SourceModelArn?: EntityRecognizerArn;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * Output data configuration.
+     */
+    OutputDataConfig?: EntityRecognizerOutputDataConfig;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityRecognizerSummariesList = EntityRecognizerSummary[];
@@ -2364,7 +2807,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -2384,6 +2827,185 @@ declare namespace Comprehend {
     Count?: Integer;
   }
   export type Float = number;
+  export interface FlywheelFilter {
+    /**
+     * Filter the flywheels based on the flywheel status.
+     */
+    Status?: FlywheelStatus;
+    /**
+     * Filter the flywheels to include flywheels created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Filter the flywheels to include flywheels created before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+  }
+  export interface FlywheelIterationFilter {
+    /**
+     * Filter the flywheel iterations to include iterations created after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * Filter the flywheel iterations to include iterations created before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+  }
+  export type FlywheelIterationId = string;
+  export interface FlywheelIterationProperties {
+    /**
+     * 
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * 
+     */
+    FlywheelIterationId?: FlywheelIterationId;
+    /**
+     * The creation start time of the flywheel iteration.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The completion time of this flywheel iteration.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The status of the flywheel iteration.
+     */
+    Status?: FlywheelIterationStatus;
+    /**
+     * A description of the status of the flywheel iteration.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The ARN of the evaluated model associated with this flywheel iteration.
+     */
+    EvaluatedModelArn?: ComprehendModelArn;
+    EvaluatedModelMetrics?: FlywheelModelEvaluationMetrics;
+    /**
+     * The ARN of the trained model associated with this flywheel iteration.
+     */
+    TrainedModelArn?: ComprehendModelArn;
+    /**
+     * The metrics associated with the trained model.
+     */
+    TrainedModelMetrics?: FlywheelModelEvaluationMetrics;
+    /**
+     * 
+     */
+    EvaluationManifestS3Prefix?: S3Uri;
+  }
+  export type FlywheelIterationPropertiesList = FlywheelIterationProperties[];
+  export type FlywheelIterationStatus = "TRAINING"|"EVALUATING"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export interface FlywheelModelEvaluationMetrics {
+    /**
+     * The average F1 score from the evaluation metrics.
+     */
+    AverageF1Score?: Double;
+    /**
+     * Average precision metric for the model.
+     */
+    AveragePrecision?: Double;
+    /**
+     * Average recall metric for the model.
+     */
+    AverageRecall?: Double;
+    /**
+     * Average accuracy metric for the model.
+     */
+    AverageAccuracy?: Double;
+  }
+  export interface FlywheelProperties {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel.
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * The Amazon Resource Number (ARN) of the active model version.
+     */
+    ActiveModelArn?: ComprehendModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend permission to access the flywheel data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Configuration about the custom classifier associated with the flywheel.
+     */
+    TaskConfig?: TaskConfig;
+    /**
+     * Amazon S3 URI of the data lake location. 
+     */
+    DataLakeS3Uri?: S3Uri;
+    /**
+     * Data security configuration.
+     */
+    DataSecurityConfig?: DataSecurityConfig;
+    /**
+     * The status of the flywheel.
+     */
+    Status?: FlywheelStatus;
+    /**
+     * Model type of the flywheel's model.
+     */
+    ModelType?: ModelType;
+    /**
+     * A description of the status of the flywheel.
+     */
+    Message?: AnyLengthString;
+    /**
+     * Creation time of the flywheel.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Last modified time for the flywheel.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The most recent flywheel iteration.
+     */
+    LatestFlywheelIteration?: FlywheelIterationId;
+  }
+  export type FlywheelS3Uri = string;
+  export type FlywheelStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export interface FlywheelSummary {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * ARN of the active model version for the flywheel.
+     */
+    ActiveModelArn?: ComprehendModelArn;
+    /**
+     * Amazon S3 URI of the data lake location. 
+     */
+    DataLakeS3Uri?: S3Uri;
+    /**
+     * The status of the flywheel.
+     */
+    Status?: FlywheelStatus;
+    /**
+     * Model type of the flywheel's model.
+     */
+    ModelType?: ModelType;
+    /**
+     * A description of the status of the flywheel.
+     */
+    Message?: AnyLengthString;
+    /**
+     * Creation time of the flywheel.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * Last modified time for the flywheel.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The most recent flywheel iteration.
+     */
+    LatestFlywheelIteration?: FlywheelIterationId;
+  }
+  export type FlywheelSummaryList = FlywheelSummary[];
   export interface Geometry {
     /**
      * An axis-aligned coarse representation of the location of the recognized item on the document page.
@@ -2413,11 +3035,11 @@ declare namespace Comprehend {
      */
     ModelKmsKeyId?: KmsKeyId;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that allows Amazon Comprehend to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend permission to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
-     * Tags to be associated with the custom model that is created by this import. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the custom model that is created by this import. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -2525,7 +3147,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -2540,7 +3162,37 @@ declare namespace Comprehend {
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
   export type KmsKeyId = string;
   export type LabelDelimiter = string;
+  export type LabelListItem = string;
+  export type LabelsList = LabelListItem[];
   export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string;
+  export interface ListDatasetsRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel.
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * Filters the datasets to be returned in the response.
+     */
+    Filter?: DatasetFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a response. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDatasetsResponse {
+    /**
+     * The dataset properties list.
+     */
+    DatasetPropertiesList?: DatasetPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListDocumentClassificationJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -2697,7 +3349,7 @@ declare namespace Comprehend {
      */
     EntityRecognizerSummariesList?: EntityRecognizerSummariesList;
     /**
-     * The list entity recognizer summaries.
+     * Identifies the next page of results to return.
      */
     NextToken?: String;
   }
@@ -2744,6 +3396,58 @@ declare namespace Comprehend {
      * A list containing the properties of each job that is returned.
      */
     EventsDetectionJobPropertiesList?: EventsDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListFlywheelIterationHistoryRequest {
+    /**
+     * The ARN of the flywheel.
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+    /**
+     * Filter the flywheel iteration history based on creation time.
+     */
+    Filter?: FlywheelIterationFilter;
+    /**
+     * Next token
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of iteration history results to return
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListFlywheelIterationHistoryResponse {
+    /**
+     * List of flywheel iteration properties
+     */
+    FlywheelIterationPropertiesList?: FlywheelIterationPropertiesList;
+    /**
+     * Next token
+     */
+    NextToken?: String;
+  }
+  export interface ListFlywheelsRequest {
+    /**
+     * Filters the flywheels that are returned. You can filter flywheels on their status, or the date and time that they were submitted. You can only set one filter at a time. 
+     */
+    Filter?: FlywheelFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * Maximum number of results to return in a response. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListFlywheelsResponse {
+    /**
+     * A list of flywheel properties retrieved by the service in response to the request. 
+     */
+    FlywheelSummaryList?: FlywheelSummaryList;
     /**
      * Identifies the next page of results to return.
      */
@@ -2921,6 +3625,8 @@ declare namespace Comprehend {
     SentimentScore?: SentimentScore;
   }
   export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|string;
+  export type ModelType = "DOCUMENT_CLASSIFIER"|"ENTITY_RECOGNIZER"|string;
+  export type NumberOfDocuments = number;
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
     /**
@@ -3008,7 +3714,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -3170,7 +3876,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -3211,7 +3917,7 @@ declare namespace Comprehend {
     /**
      * The Amazon Resource Name (ARN) of the document classifier to use to process the job.
      */
-    DocumentClassifierArn: DocumentClassifierArn;
+    DocumentClassifierArn?: DocumentClassifierArn;
     /**
      * Specifies the format and location of the input data for the job.
      */
@@ -3237,13 +3943,17 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel associated with the model to use.
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export interface StartDocumentClassificationJobResponse {
     /**
-     * The identifier generated for the job. To get the status of the job, use this identifier with the operation.
+     * The identifier generated for the job. To get the status of the job, use this identifier with the DescribeDocumentClassificationJob operation.
      */
     JobId?: JobId;
     /**
@@ -3251,9 +3961,13 @@ declare namespace Comprehend {
      */
     JobArn?: ComprehendArn;
     /**
-     * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
+     * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the DescribeDocumentClassificationJob operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
     JobStatus?: JobStatus;
+    /**
+     * The ARN of the custom classification model.
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
   }
   export interface StartDominantLanguageDetectionJobRequest {
     /**
@@ -3285,7 +3999,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -3341,9 +4055,13 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel associated with the model to use.
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export interface StartEntitiesDetectionJobResponse {
     /**
@@ -3358,6 +4076,10 @@ declare namespace Comprehend {
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
     JobStatus?: JobStatus;
+    /**
+     * The ARN of the custom entity recognition model.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
   }
   export interface StartEventsDetectionJobRequest {
     /**
@@ -3389,7 +4111,7 @@ declare namespace Comprehend {
      */
     TargetEventTypes: TargetEventTypes;
     /**
-     * Tags to be associated with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -3406,6 +4128,26 @@ declare namespace Comprehend {
      * The status of the events detection job.
      */
     JobStatus?: JobStatus;
+  }
+  export interface StartFlywheelIterationRequest {
+    /**
+     * The ARN of the flywheel.
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartFlywheelIterationResponse {
+    /**
+     * 
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
+    /**
+     * 
+     */
+    FlywheelIterationId?: FlywheelIterationId;
   }
   export interface StartKeyPhrasesDetectionJobRequest {
     /**
@@ -3441,7 +4183,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -3493,7 +4235,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     * Tags to be associated with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -3545,7 +4287,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -3591,13 +4333,13 @@ declare namespace Comprehend {
     VolumeKmsKeyId?: KmsKeyId;
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the targeted sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the targeted sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
   export interface StartTargetedSentimentDetectionJobResponse {
     /**
-     * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
+     * The identifier generated for the job. To get the status of a job, use this identifier with the DescribeTargetedSentimentDetectionJob operation.
      */
     JobId?: JobId;
     /**
@@ -3605,7 +4347,7 @@ declare namespace Comprehend {
      */
     JobArn?: ComprehendArn;
     /**
-     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the DescribeTargetedSentimentDetectionJob operation.  
      */
     JobStatus?: JobStatus;
   }
@@ -3643,7 +4385,7 @@ declare namespace Comprehend {
      */
     VpcConfig?: VpcConfig;
     /**
-     * Tags to be associated with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     * Tags to associate with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
      */
     Tags?: TagList;
   }
@@ -3897,11 +4639,11 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
-     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     * ID for the KMS key that Amazon Comprehend uses to encrypt the data on the storage volume attached to the ML compute instance(s) that process the targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     VolumeKmsKeyId?: KmsKeyId;
     VpcConfig?: VpcConfig;
@@ -3947,6 +4689,20 @@ declare namespace Comprehend {
      * The offset into the document text where the mention ends.
      */
     EndOffset?: Integer;
+  }
+  export interface TaskConfig {
+    /**
+     * Language code for the language that the model supports.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * Configuration required for a classification model.
+     */
+    DocumentClassificationConfig?: DocumentClassificationConfig;
+    /**
+     * Configuration required for an entity recognition model.
+     */
+    EntityRecognitionConfig?: EntityRecognitionConfig;
   }
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
@@ -4009,7 +4765,7 @@ declare namespace Comprehend {
      */
     NumberOfTopics?: Integer;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your job data. 
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your job data. 
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -4034,6 +4790,17 @@ declare namespace Comprehend {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateDataSecurityConfig {
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
+    /**
+     * ID for the KMS key that Amazon Comprehend uses to encrypt the volume.
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    VpcConfig?: VpcConfig;
+  }
   export interface UpdateEndpointRequest {
     /**
      * The Amazon Resource Number (ARN) of the endpoint being updated.
@@ -4051,8 +4818,40 @@ declare namespace Comprehend {
      * Data access role ARN to use in case the new model is encrypted with a customer CMK.
      */
     DesiredDataAccessRoleArn?: IamRoleArn;
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel
+     */
+    FlywheelArn?: ComprehendFlywheelArn;
   }
   export interface UpdateEndpointResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the new model.
+     */
+    DesiredModelArn?: ComprehendModelArn;
+  }
+  export interface UpdateFlywheelRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the flywheel to update.
+     */
+    FlywheelArn: ComprehendFlywheelArn;
+    /**
+     * The Amazon Resource Number (ARN) of the active model version.
+     */
+    ActiveModelArn?: ComprehendModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend permission to access the flywheel data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Flywheel data security configuration.
+     */
+    DataSecurityConfig?: UpdateDataSecurityConfig;
+  }
+  export interface UpdateFlywheelResponse {
+    /**
+     * The flywheel properties.
+     */
+    FlywheelProperties?: FlywheelProperties;
   }
   export type VersionName = string;
   export interface VpcConfig {

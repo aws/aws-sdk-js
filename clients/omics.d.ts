@@ -446,19 +446,19 @@ declare class Omics extends Service {
    */
   startAnnotationImportJob(callback?: (err: AWSError, data: Omics.Types.StartAnnotationImportResponse) => void): Request<Omics.Types.StartAnnotationImportResponse, AWSError>;
   /**
-   * Starts a read set activation job.
+   * Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.
    */
   startReadSetActivationJob(params: Omics.Types.StartReadSetActivationJobRequest, callback?: (err: AWSError, data: Omics.Types.StartReadSetActivationJobResponse) => void): Request<Omics.Types.StartReadSetActivationJobResponse, AWSError>;
   /**
-   * Starts a read set activation job.
+   * Activates an archived read set. To reduce storage charges, Amazon Omics archives unused read sets after 30 days.
    */
   startReadSetActivationJob(callback?: (err: AWSError, data: Omics.Types.StartReadSetActivationJobResponse) => void): Request<Omics.Types.StartReadSetActivationJobResponse, AWSError>;
   /**
-   * Starts a read set export job.
+   * Exports a read set to Amazon S3.
    */
   startReadSetExportJob(params: Omics.Types.StartReadSetExportJobRequest, callback?: (err: AWSError, data: Omics.Types.StartReadSetExportJobResponse) => void): Request<Omics.Types.StartReadSetExportJobResponse, AWSError>;
   /**
-   * Starts a read set export job.
+   * Exports a read set to Amazon S3.
    */
   startReadSetExportJob(callback?: (err: AWSError, data: Omics.Types.StartReadSetExportJobResponse) => void): Request<Omics.Types.StartReadSetExportJobResponse, AWSError>;
   /**
@@ -910,7 +910,7 @@ declare namespace Omics {
      */
     name: String;
     /**
-     * The store's genome reference.
+     * The store's genome reference. Required for all stores except TSV format with generic annotations.
      */
     reference?: ReferenceItem;
     /**
@@ -980,7 +980,7 @@ declare namespace Omics {
      */
     maxCpus?: CreateRunGroupRequestMaxCpusInteger;
     /**
-     * A max duration for the group.
+     * A maximum run time for the group in minutes.
      */
     maxDuration?: CreateRunGroupRequestMaxDurationInteger;
     /**
@@ -992,7 +992,7 @@ declare namespace Omics {
      */
     name?: RunGroupName;
     /**
-     * A request ID for the group.
+     * To ensure that requests don't run multiple times, specify a unique ID for each request.
      */
     requestId: RunGroupRequestId;
     /**
@@ -1140,11 +1140,11 @@ declare namespace Omics {
      */
     parameterTemplate?: WorkflowParameterTemplate;
     /**
-     * A request ID for the workflow.
+     * To ensure that requests don't run multiple times, specify a unique ID for each request.
      */
     requestId: WorkflowRequestId;
     /**
-     * A storage capacity for the workflow.
+     * A storage capacity for the workflow in gigabytes.
      */
     storageCapacity?: CreateWorkflowRequestStorageCapacityInteger;
     /**
@@ -1490,7 +1490,7 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * The job's sources.
+     * The job's source files.
      */
     sources?: ActivateReadSetSourceList;
     /**
@@ -1578,7 +1578,7 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * The job's sources.
+     * The job's source files.
      */
     sources: ImportReadSetSourceList;
     /**
@@ -1711,7 +1711,7 @@ declare namespace Omics {
      */
     roleArn: RoleArn;
     /**
-     * The job's sources.
+     * The job's source files.
      */
     sources: ImportReferenceSourceList;
     /**
@@ -1860,7 +1860,7 @@ declare namespace Omics {
      */
     maxCpus?: GetRunGroupResponseMaxCpusInteger;
     /**
-     * The group's maximum run duration.
+     * The group's maximum run time in minutes.
      */
     maxDuration?: GetRunGroupResponseMaxDurationInteger;
     /**
@@ -1967,7 +1967,7 @@ declare namespace Omics {
      */
     stopTime?: RunTimestamp;
     /**
-     * The run's storage capacity.
+     * The run's storage capacity in gigabytes.
      */
     storageCapacity?: GetRunResponseStorageCapacityInteger;
     /**
@@ -2009,7 +2009,7 @@ declare namespace Omics {
      */
     logStream?: TaskLogStream;
     /**
-     * The task's memory setting.
+     * The task's memory use in gigabytes.
      */
     memory?: GetRunTaskResponseMemoryInteger;
     /**
@@ -2239,7 +2239,7 @@ declare namespace Omics {
      */
     statusMessage?: WorkflowStatusMessage;
     /**
-     * The workflow's storage capacity.
+     * The workflow's storage capacity in gigabytes.
      */
     storageCapacity?: GetWorkflowResponseStorageCapacityInteger;
     /**
@@ -2410,7 +2410,7 @@ declare namespace Omics {
     tags?: TagMap;
   }
   export type ImportReferenceSourceList = ImportReferenceSourceItem[];
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLED"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLED"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string;
   export type JobStatusMessage = string;
   export type JobStatusMsg = string;
   export type LineSep = string;
@@ -3230,7 +3230,7 @@ declare namespace Omics {
      */
     maxCpus?: RunGroupListItemMaxCpusInteger;
     /**
-     * The group's maximum duration setting.
+     * The group's maximum duration setting in minutes.
      */
     maxDuration?: RunGroupListItemMaxDurationInteger;
     /**
@@ -3315,6 +3315,7 @@ declare namespace Omics {
   export type S3Uri = string;
   export type SampleId = string;
   export type SchemaItem = {[key: string]: SchemaValueType};
+  export type SchemaItemKeyString = string;
   export type SchemaValueType = "LONG"|"INT"|"STRING"|"FLOAT"|"DOUBLE"|"BOOLEAN"|string;
   export type Separator = string;
   export interface SequenceInformation {
@@ -3439,7 +3440,7 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * The job's sources.
+     * The job's source files.
      */
     sources: StartReadSetActivationJobRequestSourcesList;
   }
@@ -3486,7 +3487,7 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * Sources for the job.
+     * The job's source files.
      */
     sources: StartReadSetExportJobRequestSourcesList;
   }
@@ -3527,7 +3528,7 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * Source files to import.
+     * The job's source files.
      */
     sources: StartReadSetImportJobRequestSourcesList;
   }
@@ -3606,7 +3607,7 @@ declare namespace Omics {
      */
     roleArn: RoleArn;
     /**
-     * Sources for the job.
+     * The job's source files.
      */
     sources: StartReferenceImportJobRequestSourcesList;
   }
@@ -3673,7 +3674,7 @@ declare namespace Omics {
      */
     priority?: StartRunRequestPriorityInteger;
     /**
-     * A request ID for the run.
+     * To ensure that requests don't run multiple times, specify a unique ID for each request.
      */
     requestId: RunRequestId;
     /**
@@ -3689,7 +3690,7 @@ declare namespace Omics {
      */
     runId?: RunId;
     /**
-     * A storage capacity for the run.
+     * A storage capacity for the run in gigabytes.
      */
     storageCapacity?: StartRunRequestStorageCapacityInteger;
     /**
@@ -3793,7 +3794,7 @@ declare namespace Omics {
      */
     creationTime?: TaskTimestamp;
     /**
-     * The task's memory.
+     * The task's memory use in gigabyes.
      */
     memory?: TaskListItemMemoryInteger;
     /**
@@ -3916,7 +3917,7 @@ declare namespace Omics {
      */
     maxCpus?: UpdateRunGroupRequestMaxCpusInteger;
     /**
-     * The maximum amount of time to run.
+     * A maximum run time for the group in minutes.
      */
     maxDuration?: UpdateRunGroupRequestMaxDurationInteger;
     /**
@@ -3995,6 +3996,10 @@ declare namespace Omics {
      * The source file's location in Amazon S3.
      */
     source: S3Uri;
+    /**
+     *  A message that provides additional context about a job 
+     */
+    statusMessage?: JobStatusMsg;
   }
   export type VariantImportItemDetails = VariantImportItemDetail[];
   export interface VariantImportItemSource {
@@ -4152,10 +4157,10 @@ declare namespace Omics {
   export type WorkflowParameterName = string;
   export type WorkflowParameterTemplate = {[key: string]: WorkflowParameter};
   export type WorkflowRequestId = string;
-  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|string;
+  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|"INACTIVE"|string;
   export type WorkflowStatusMessage = string;
   export type WorkflowTimestamp = Date;
-  export type WorkflowType = "PRIVATE"|string;
+  export type WorkflowType = "PRIVATE"|"SERVICE"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

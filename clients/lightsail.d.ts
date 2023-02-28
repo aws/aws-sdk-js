@@ -188,6 +188,14 @@ declare class Lightsail extends Service {
    */
   createDomainEntry(callback?: (err: AWSError, data: Lightsail.Types.CreateDomainEntryResult) => void): Request<Lightsail.Types.CreateDomainEntryResult, AWSError>;
   /**
+   * Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI) session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session.  Use StartGUISession to open the session.
+   */
+  createGUISessionAccessDetails(params: Lightsail.Types.CreateGUISessionAccessDetailsRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateGUISessionAccessDetailsResult) => void): Request<Lightsail.Types.CreateGUISessionAccessDetailsResult, AWSError>;
+  /**
+   * Creates two URLs that are used to access a virtual computer’s graphical user interface (GUI) session. The primary URL initiates a web-based NICE DCV session to the virtual computer's application. The secondary URL initiates a web-based NICE DCV session to the virtual computer's operating session.  Use StartGUISession to open the session.
+   */
+  createGUISessionAccessDetails(callback?: (err: AWSError, data: Lightsail.Types.CreateGUISessionAccessDetailsResult) => void): Request<Lightsail.Types.CreateGUISessionAccessDetailsResult, AWSError>;
+  /**
    * Creates a snapshot of a specific virtual private server, or instance. You can use a snapshot to create a new instance that is based on that snapshot. The create instance snapshot operation supports tag-based access control via request tags. For more information, see the Amazon Lightsail Developer Guide.
    */
   createInstanceSnapshot(params: Lightsail.Types.CreateInstanceSnapshotRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateInstanceSnapshotResult) => void): Request<Lightsail.Types.CreateInstanceSnapshotResult, AWSError>;
@@ -643,6 +651,14 @@ declare class Lightsail extends Service {
    * Returns information about one or more of your Amazon Lightsail container services.
    */
   getContainerServices(callback?: (err: AWSError, data: Lightsail.Types.ContainerServicesListResult) => void): Request<Lightsail.Types.ContainerServicesListResult, AWSError>;
+  /**
+   * Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.
+   */
+  getCostEstimate(params: Lightsail.Types.GetCostEstimateRequest, callback?: (err: AWSError, data: Lightsail.Types.GetCostEstimateResult) => void): Request<Lightsail.Types.GetCostEstimateResult, AWSError>;
+  /**
+   * Retrieves information about the cost estimate for a specified resource. A cost estimate will not generate for a resource that has been deleted.
+   */
+  getCostEstimate(callback?: (err: AWSError, data: Lightsail.Types.GetCostEstimateResult) => void): Request<Lightsail.Types.GetCostEstimateResult, AWSError>;
   /**
    * Returns information about a specific block storage disk.
    */
@@ -1108,6 +1124,14 @@ declare class Lightsail extends Service {
    */
   setResourceAccessForBucket(callback?: (err: AWSError, data: Lightsail.Types.SetResourceAccessForBucketResult) => void): Request<Lightsail.Types.SetResourceAccessForBucketResult, AWSError>;
   /**
+   * Initiates a graphical user interface (GUI) session that’s used to access a virtual computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. 
+   */
+  startGUISession(params: Lightsail.Types.StartGUISessionRequest, callback?: (err: AWSError, data: Lightsail.Types.StartGUISessionResult) => void): Request<Lightsail.Types.StartGUISessionResult, AWSError>;
+  /**
+   * Initiates a graphical user interface (GUI) session that’s used to access a virtual computer’s operating system and application. The session will be active for 1 hour. Use this action to resume the session after it expires. 
+   */
+  startGUISession(callback?: (err: AWSError, data: Lightsail.Types.StartGUISessionResult) => void): Request<Lightsail.Types.StartGUISessionResult, AWSError>;
+  /**
    * Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Amazon Lightsail Developer Guide.  The start instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
   startInstance(params: Lightsail.Types.StartInstanceRequest, callback?: (err: AWSError, data: Lightsail.Types.StartInstanceResult) => void): Request<Lightsail.Types.StartInstanceResult, AWSError>;
@@ -1123,6 +1147,14 @@ declare class Lightsail extends Service {
    * Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the reboot relational database operation. The start relational database operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Amazon Lightsail Developer Guide.
    */
   startRelationalDatabase(callback?: (err: AWSError, data: Lightsail.Types.StartRelationalDatabaseResult) => void): Request<Lightsail.Types.StartRelationalDatabaseResult, AWSError>;
+  /**
+   * Terminates a web-based NICE DCV session that’s used to access a virtual computer’s operating system or application. The session will close and any unsaved data will be lost.
+   */
+  stopGUISession(params: Lightsail.Types.StopGUISessionRequest, callback?: (err: AWSError, data: Lightsail.Types.StopGUISessionResult) => void): Request<Lightsail.Types.StopGUISessionResult, AWSError>;
+  /**
+   * Terminates a web-based NICE DCV session that’s used to access a virtual computer’s operating system or application. The session will close and any unsaved data will be lost.
+   */
+  stopGUISession(callback?: (err: AWSError, data: Lightsail.Types.StopGUISessionResult) => void): Request<Lightsail.Types.StopGUISessionResult, AWSError>;
   /**
    * Stops a specific Amazon Lightsail instance that is currently running.  When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the Amazon Lightsail Developer Guide.  The stop instance operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Amazon Lightsail Developer Guide.
    */
@@ -1339,6 +1371,14 @@ declare namespace Lightsail {
      * The next daily time an automatic snapshot will be created. The time shown is in HH:00 format, and in Coordinated Universal Time (UTC). The snapshot is automatically created between the time shown and up to 45 minutes after.
      */
     nextSnapshotTimeOfDay?: TimeOfDay;
+    /**
+     * The trigger threshold of the action.  This add-on only applies to Lightsail for Research resources. 
+     */
+    threshold?: string;
+    /**
+     * The amount of idle time in minutes after which your virtual computer will automatically stop.  This add-on only applies to Lightsail for Research resources. 
+     */
+    duration?: string;
   }
   export type AddOnList = AddOn[];
   export interface AddOnRequest {
@@ -1350,9 +1390,13 @@ declare namespace Lightsail {
      * An object that represents additional parameters when enabling or modifying the automatic snapshot add-on.
      */
     autoSnapshotAddOnRequest?: AutoSnapshotAddOnRequest;
+    /**
+     * An object that represents additional parameters when enabling or modifying the StopInstanceOnIdle add-on.  This object only applies to Lightsail for Research resources. 
+     */
+    stopInstanceOnIdleRequest?: StopInstanceOnIdleRequest;
   }
   export type AddOnRequestList = AddOnRequest[];
-  export type AddOnType = "AutoSnapshot"|string;
+  export type AddOnType = "AutoSnapshot"|"StopInstanceOnIdle"|string;
   export interface Alarm {
     /**
      * The name of the alarm.
@@ -1449,6 +1493,8 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type AppCategory = "LfR"|string;
+  export type AppCategoryList = AppCategory[];
   export interface AttachCertificateToDistributionRequest {
     /**
      * The name of the distribution that the certificate will be attached to. Use the GetDistributions action to get a list of distribution names that you can specify.
@@ -1478,6 +1524,10 @@ declare namespace Lightsail {
      * The disk path to expose to the instance (e.g., /dev/xvdf).
      */
     diskPath: NonEmptyString;
+    /**
+     * A Boolean value used to determine the automatic mounting of a storage volume to a virtual computer. The default value is False.  This value only applies to Lightsail for Research resources. 
+     */
+    autoMounting?: boolean;
   }
   export interface AttachDiskResult {
     /**
@@ -1545,6 +1595,7 @@ declare namespace Lightsail {
   }
   export type AttachedDiskList = AttachedDisk[];
   export type AttachedDiskMap = {[key: string]: DiskMapList};
+  export type AutoMountStatus = "Failed"|"Pending"|"Mounted"|"NotMounted"|string;
   export interface AutoSnapshotAddOnRequest {
     /**
      * The daily time when an automatic snapshot will be created. Constraints:   Must be in HH:00 format, and in an hourly increment.   Specified in Coordinated Universal Time (UTC).   The snapshot will be automatically created between the time specified and up to 45 minutes after.  
@@ -1635,6 +1686,10 @@ declare namespace Lightsail {
      * The operating system platform (either Linux/Unix-based or Windows Server-based) of the blueprint.
      */
     platform?: InstancePlatform;
+    /**
+     * Virtual computer blueprints that are supported by Lightsail for Research.  This parameter only applies to Lightsail for Research resources. 
+     */
+    appCategory?: AppCategory;
   }
   export type BlueprintList = Blueprint[];
   export type BlueprintType = "os"|"app"|string;
@@ -1804,6 +1859,10 @@ declare namespace Lightsail {
      * The operating system platform (Linux/Unix-based or Windows Server-based) that the bundle supports. You can only launch a WINDOWS bundle on a blueprint that supports the WINDOWS platform. LINUX_UNIX blueprints require a LINUX_UNIX bundle.
      */
     supportedPlatforms?: InstancePlatformList;
+    /**
+     * Virtual computer blueprints that are supported by a Lightsail for Research bundle.  This parameter only applies to Lightsail for Research resources. 
+     */
+    supportedAppCategories?: AppCategoryList;
   }
   export type BundleList = Bundle[];
   export interface CacheBehavior {
@@ -2411,6 +2470,17 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface CostEstimate {
+    /**
+     * The types of usage that are included in the estimate, such as costs, usage, or data transfer.
+     */
+    usageType?: NonEmptyString;
+    /**
+     * The cost estimate result that's associated with a time period.
+     */
+    resultsByTime?: EstimatesByTime;
+  }
+  export type CostEstimates = CostEstimate[];
   export interface CreateBucketAccessKeyRequest {
     /**
      * The name of the bucket that the new access key will belong to, and grant access to.
@@ -2746,6 +2816,34 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
+  }
+  export interface CreateGUISessionAccessDetailsRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+  }
+  export interface CreateGUISessionAccessDetailsResult {
+    /**
+     * The resource name.
+     */
+    resourceName?: ResourceName;
+    /**
+     * The status of the operation.
+     */
+    status?: Status;
+    /**
+     * The percentage of completion for the operation.
+     */
+    percentageComplete?: integer;
+    /**
+     * The reason the operation failed.
+     */
+    failureReason?: string;
+    /**
+     * Returns information about the specified NICE DCV GUI session.
+     */
+    sessions?: Sessions;
   }
   export interface CreateInstanceSnapshotRequest {
     /**
@@ -3091,6 +3189,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type Currency = "USD"|string;
   export interface DeleteAlarmRequest {
     /**
      * The name of the alarm to delete.
@@ -3530,6 +3629,10 @@ declare namespace Lightsail {
      * (Deprecated) The number of GB in use by the disk.  In releases prior to November 14, 2017, this parameter was not included in the API response. It is now deprecated. 
      */
     gbInUse?: integer;
+    /**
+     * The status of automatically mounting a storage disk to a virtual computer.  This parameter only applies to Lightsail for Research resources. 
+     */
+    autoMountStatus?: AutoMountStatus;
   }
   export interface DiskInfo {
     /**
@@ -3807,6 +3910,29 @@ declare namespace Lightsail {
     healthCheck?: ContainerServiceHealthCheckConfig;
   }
   export type Environment = {[key: string]: string};
+  export interface EstimateByTime {
+    /**
+     * The amount of cost or usage that's measured for the cost estimate.
+     */
+    usageCost?: double;
+    /**
+     * The unit of measurement that's used for the cost estimate.
+     */
+    pricingUnit?: PricingUnit;
+    /**
+     * The number of pricing units used to calculate the total number of hours. For example, 1 unit equals 1 hour.
+     */
+    unit?: double;
+    /**
+     * The currency of the estimate in USD.
+     */
+    currency?: Currency;
+    /**
+     * The period of time, in days, that an estimate covers. The period has a start date and an end date. The start date must come before the end date.
+     */
+    timePeriod?: TimePeriod;
+  }
+  export type EstimatesByTime = EstimateByTime[];
   export interface ExportSnapshotRecord {
     /**
      * The export snapshot record name.
@@ -3959,6 +4085,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBlueprints request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * Returns a list of blueprints that are specific to Lightsail for Research.  You must use this parameter to view Lightsail for Research blueprints. 
+     */
+    appCategory?: AppCategory;
   }
   export interface GetBlueprintsResult {
     /**
@@ -4071,6 +4201,10 @@ declare namespace Lightsail {
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetBundles request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
      */
     pageToken?: string;
+    /**
+     * Returns a list of bundles that are specific to Lightsail for Research.  You must use this parameter to view Lightsail for Research bundles. 
+     */
+    appCategory?: AppCategory;
   }
   export interface GetBundlesResult {
     /**
@@ -4247,6 +4381,26 @@ declare namespace Lightsail {
      * The name of the container service for which to return information. When omitted, the response includes all of your container services in the Amazon Web Services Region where the request is made.
      */
     serviceName?: ContainerServiceName;
+  }
+  export interface GetCostEstimateRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+    /**
+     * The cost estimate start time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    startTime: IsoDate;
+    /**
+     * The cost estimate end time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    endTime: IsoDate;
+  }
+  export interface GetCostEstimateResult {
+    /**
+     * Returns the estimate's forecasted cost or usage.
+     */
+    resourcesBudgetEstimate?: ResourcesBudgetEstimate;
   }
   export interface GetDiskRequest {
     /**
@@ -6075,7 +6229,7 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"SetIpAddressType"|"CreateCertificate"|"DeleteCertificate"|"CreateContainerService"|"UpdateContainerService"|"DeleteContainerService"|"CreateContainerServiceDeployment"|"CreateContainerServiceRegistryLogin"|"RegisterContainerImage"|"DeleteContainerImage"|"CreateBucket"|"DeleteBucket"|"CreateBucketAccessKey"|"DeleteBucketAccessKey"|"UpdateBucketBundle"|"UpdateBucket"|"SetResourceAccessForBucket"|"UpdateInstanceMetadataOptions"|"StartGUISession"|"StopGUISession"|string;
   export interface Origin {
     /**
      * The name of the origin resource.
@@ -6176,6 +6330,7 @@ declare namespace Lightsail {
   export type PortList = Port[];
   export type PortMap = {[key: string]: ContainerServiceProtocol};
   export type PortState = "open"|"closed"|string;
+  export type PricingUnit = "GB"|"Hrs"|"GB-Mo"|"Bundles"|"Queries"|string;
   export interface PrivateRegistryAccess {
     /**
      * An object that describes the activation status of the role that you can use to grant a Lightsail container service access to Amazon ECR private repositories. If the role is activated, the Amazon Resource Name (ARN) of the role is also listed.
@@ -6732,6 +6887,28 @@ declare namespace Lightsail {
   }
   export type ResourceArn = string;
   export type ResourceBucketAccess = "allow"|"deny"|string;
+  export interface ResourceBudgetEstimate {
+    /**
+     * The resource name.
+     */
+    resourceName?: ResourceName;
+    /**
+     * The type of resource the budget will track.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The cost estimate for the specified budget.
+     */
+    costEstimates?: CostEstimates;
+    /**
+     * The estimate start time.
+     */
+    startTime?: IsoDate;
+    /**
+     * The estimate end time.
+     */
+    endTime?: IsoDate;
+  }
   export interface ResourceLocation {
     /**
      * The Availability Zone. Follows the format us-east-2a (case-sensitive).
@@ -6769,6 +6946,7 @@ declare namespace Lightsail {
     value?: string;
   }
   export type ResourceType = "ContainerService"|"Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|"Bucket"|string;
+  export type ResourcesBudgetEstimate = ResourceBudgetEstimate[];
   export type RevocationReason = string;
   export interface SendContactMethodVerificationRequest {
     /**
@@ -6782,8 +6960,24 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type SensitiveNonEmptyString = string;
   export type SensitiveString = string;
   export type SerialNumber = string;
+  export interface Session {
+    /**
+     * The session name.
+     */
+    name?: NonEmptyString;
+    /**
+     * The session URL.
+     */
+    url?: SensitiveNonEmptyString;
+    /**
+     * When true, this Boolean value indicates the primary session for the specified resource.
+     */
+    isPrimary?: boolean;
+  }
+  export type Sessions = Session[];
   export interface SetIpAddressTypeRequest {
     /**
      * The resource type. The possible values are Distribution, Instance, and LoadBalancer.  Distribution-related APIs are available only in the N. Virginia (us-east-1) Amazon Web Services Region. Set your Amazon Web Services Region configuration to us-east-1 to create, view, or edit distributions. 
@@ -6821,6 +7015,18 @@ declare namespace Lightsail {
   export interface SetResourceAccessForBucketResult {
     /**
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface StartGUISessionRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+  }
+  export interface StartGUISessionResult {
+    /**
+     * The available API operations.
      */
     operations?: OperationList;
   }
@@ -6887,7 +7093,30 @@ declare namespace Lightsail {
     isAttached?: boolean;
   }
   export type StaticIpList = StaticIp[];
+  export type Status = "startExpired"|"notStarted"|"started"|"starting"|"stopped"|"stopping"|"settingUpInstance"|"failedInstanceCreation"|"failedStartingGUISession"|"failedStoppingGUISession"|string;
   export type StatusType = "Active"|"Inactive"|string;
+  export interface StopGUISessionRequest {
+    /**
+     * The resource name.
+     */
+    resourceName: ResourceName;
+  }
+  export interface StopGUISessionResult {
+    /**
+     * The available API operations.
+     */
+    operations?: OperationList;
+  }
+  export interface StopInstanceOnIdleRequest {
+    /**
+     * The value to compare with the duration.
+     */
+    threshold?: string;
+    /**
+     * The amount of idle time in minutes after which your virtual computer will automatically stop.
+     */
+    duration?: string;
+  }
   export interface StopInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to stop.
@@ -6974,6 +7203,16 @@ declare namespace Lightsail {
     operations?: OperationList;
   }
   export type TimeOfDay = string;
+  export interface TimePeriod {
+    /**
+     * The beginning of the time period. The start date is inclusive. For example, if start is 2017-01-01, Lightsail for Research retrieves cost and usage data starting at 2017-01-01 up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.
+     */
+    start?: IsoDate;
+    /**
+     * The end of the time period. The end date is exclusive. For example, if end is 2017-05-01, Lightsail for Research retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
+     */
+    end?: IsoDate;
+  }
   export type TreatMissingData = "breaching"|"notBreaching"|"ignore"|"missing"|string;
   export interface UnpeerVpcRequest {
   }
