@@ -20,11 +20,11 @@ declare class CodeCatalyst extends Service {
    */
   createAccessToken(callback?: (err: AWSError, data: CodeCatalyst.Types.CreateAccessTokenResponse) => void): Request<CodeCatalyst.Types.CreateAccessTokenResponse, AWSError>;
   /**
-   * Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project. By default, a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. 
+   * Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project.   When created in the Amazon CodeCatalyst console, by default a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. None of these defaults apply to a Dev Environment created programmatically. 
    */
   createDevEnvironment(params: CodeCatalyst.Types.CreateDevEnvironmentRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.CreateDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.CreateDevEnvironmentResponse, AWSError>;
   /**
-   * Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project. By default, a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. 
+   * Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project.   When created in the Amazon CodeCatalyst console, by default a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. None of these defaults apply to a Dev Environment created programmatically. 
    */
   createDevEnvironment(callback?: (err: AWSError, data: CodeCatalyst.Types.CreateDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.CreateDevEnvironmentResponse, AWSError>;
   /**
@@ -188,6 +188,14 @@ declare class CodeCatalyst extends Service {
    */
   stopDevEnvironment(callback?: (err: AWSError, data: CodeCatalyst.Types.StopDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.StopDevEnvironmentResponse, AWSError>;
   /**
+   * Stops a session for a specified Dev Environment.
+   */
+  stopDevEnvironmentSession(params: CodeCatalyst.Types.StopDevEnvironmentSessionRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.StopDevEnvironmentSessionResponse) => void): Request<CodeCatalyst.Types.StopDevEnvironmentSessionResponse, AWSError>;
+  /**
+   * Stops a session for a specified Dev Environment.
+   */
+  stopDevEnvironmentSession(callback?: (err: AWSError, data: CodeCatalyst.Types.StopDevEnvironmentSessionResponse) => void): Request<CodeCatalyst.Types.StopDevEnvironmentSessionResponse, AWSError>;
+  /**
    * Changes one or more values for a Dev Environment. Updating certain values of the Dev Environment will cause a restart.
    */
   updateDevEnvironment(params: CodeCatalyst.Types.UpdateDevEnvironmentRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.UpdateDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.UpdateDevEnvironmentResponse, AWSError>;
@@ -240,11 +248,15 @@ declare namespace CodeCatalyst {
     /**
      * The friendly name of the personal access token.
      */
-    name?: AccessTokenName;
+    name: AccessTokenName;
     /**
      * The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in RFC 3339. If not specified, the default is one year from creation.
      */
-    expiresTime?: SyntheticTimestamp_date_time;
+    expiresTime: SyntheticTimestamp_date_time;
+    /**
+     * The system-generated unique ID of the access token.
+     */
+    accessTokenId: AccessTokenId;
   }
   export interface CreateDevEnvironmentRequest {
     /**
@@ -280,7 +292,7 @@ declare namespace CodeCatalyst {
      */
     inactivityTimeoutMinutes?: InactivityTimeoutMinutes;
     /**
-     * Information about the amount of storage allocated to the Dev Environment. By default, a Dev Environment is configured to have 16GB of persistent storage.  Valid values for persistent storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64. 
+     * Information about the amount of storage allocated to the Dev Environment.   By default, a Dev Environment is configured to have 16GB of persistent storage when created from the Amazon CodeCatalyst console, but there is no default when programmatically creating a Dev Environment. Valid values for persistent storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64. 
      */
     persistentStorage: PersistentStorageConfiguration;
   }
@@ -813,11 +825,11 @@ declare namespace CodeCatalyst {
   }
   export interface IdeConfiguration {
     /**
-     * A link to the IDE runtime image.
+     * A link to the IDE runtime image.   This parameter is not required for VSCode. 
      */
     runtime?: IdeConfigurationRuntimeString;
     /**
-     * The name of the IDE.
+     * The name of the IDE. Valid values include Cloud9, IntelliJ, PyCharm, GoLand, and VSCode.
      */
     name?: IdeConfigurationNameString;
   }
@@ -1057,7 +1069,7 @@ declare namespace CodeCatalyst {
     /**
      * Information about the source branches.
      */
-    items?: ListSourceRepositoryBranchesItems;
+    items: ListSourceRepositoryBranchesItems;
   }
   export interface ListSpacesRequest {
     /**
@@ -1155,7 +1167,7 @@ declare namespace CodeCatalyst {
   export type SpaceSummaries = SpaceSummary[];
   export interface SpaceSummary {
     /**
-     *  We need to know what this is and the basic usage information so that third-party developers know how to use this data type. 
+     * The name of the space.
      */
     name: NameString;
     /**
@@ -1283,6 +1295,44 @@ declare namespace CodeCatalyst {
      */
     status: DevEnvironmentStatus;
   }
+  export interface StopDevEnvironmentSessionRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The system-generated unique ID of the Dev Environment. To obtain this ID, use ListDevEnvironments.
+     */
+    id: Uuid;
+    /**
+     * The system-generated unique ID of the Dev Environment session. This ID is returned by StartDevEnvironmentSession.
+     */
+    sessionId: StopDevEnvironmentSessionRequestSessionIdString;
+  }
+  export type StopDevEnvironmentSessionRequestSessionIdString = string;
+  export interface StopDevEnvironmentSessionResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The system-generated unique ID of the Dev Environment.
+     */
+    id: Uuid;
+    /**
+     * The system-generated unique ID of the Dev Environment session.
+     */
+    sessionId: StopDevEnvironmentSessionResponseSessionIdString;
+  }
+  export type StopDevEnvironmentSessionResponseSessionIdString = string;
   export type String = string;
   export type StringList = String[];
   export type SyntheticTimestamp_date_time = Date;

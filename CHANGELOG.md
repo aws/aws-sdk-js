@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1325.0-->
+<!--LATEST=2.1326.0-->
 <!--ENTRYINSERT-->
+
+## 2.1326.0
+* feature: CodeCatalyst: Published Dev Environments StopDevEnvironmentSession API
+* feature: Pricing: This release adds 2 new APIs - ListPriceLists which returns a list of applicable price lists, and GetPriceListFileUrl which outputs a URL to retrieve your price lists from the generated file from ListPriceLists
+* feature: S3Outposts: S3 on Outposts introduces a new API ListOutpostsWithS3, with this API you can list all your Outposts with S3 capacity.
 
 ## 2.1325.0
 * feature: Comprehend: Amazon Comprehend now supports flywheels to help you train and manage new model versions for custom models.
