@@ -333,11 +333,11 @@ declare class SageMaker extends Service {
    */
   createModelQualityJobDefinition(callback?: (err: AWSError, data: SageMaker.Types.CreateModelQualityJobDefinitionResponse) => void): Request<SageMaker.Types.CreateModelQualityJobDefinitionResponse, AWSError>;
   /**
-   * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
+   * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endpoint.
    */
   createMonitoringSchedule(params: SageMaker.Types.CreateMonitoringScheduleRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateMonitoringScheduleResponse) => void): Request<SageMaker.Types.CreateMonitoringScheduleResponse, AWSError>;
   /**
-   * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endoint.
+   * Creates a schedule that regularly starts Amazon SageMaker Processing Jobs to monitor the data captured for an Amazon SageMaker Endpoint.
    */
   createMonitoringSchedule(callback?: (err: AWSError, data: SageMaker.Types.CreateMonitoringScheduleResponse) => void): Request<SageMaker.Types.CreateMonitoringScheduleResponse, AWSError>;
   /**
@@ -1349,11 +1349,11 @@ declare class SageMaker extends Service {
    */
   getSagemakerServicecatalogPortfolioStatus(callback?: (err: AWSError, data: SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput) => void): Request<SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput, AWSError>;
   /**
-   * An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
+   * An auto-complete API for the search functionality in the SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
   getSearchSuggestions(params: SageMaker.Types.GetSearchSuggestionsRequest, callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
   /**
-   * An auto-complete API for the search functionality in the Amazon SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
+   * An auto-complete API for the search functionality in the SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
   getSearchSuggestions(callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
   /**
@@ -1973,11 +1973,11 @@ declare class SageMaker extends Service {
    */
   retryPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.RetryPipelineExecutionResponse) => void): Request<SageMaker.Types.RetryPipelineExecutionResponse, AWSError>;
   /**
-   * Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
+   * Finds SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.  The Search API may provide access to otherwise restricted data. See Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference for more information. 
    */
   search(params: SageMaker.Types.SearchRequest, callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
-   * Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
+   * Finds SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.  The Search API may provide access to otherwise restricted data. See Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference for more information. 
    */
   search(callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
@@ -5304,7 +5304,7 @@ declare namespace SageMaker {
      */
     Task?: String;
     /**
-     * The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+     * The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). This archive can hold multiple files that are all equally used in the load test. Each file in the archive must satisfy the size constraints of the InvokeEndpoint call.
      */
     SamplePayloadUrl?: S3Uri;
     /**
@@ -11181,7 +11181,7 @@ declare namespace SageMaker {
   }
   export interface GetSearchSuggestionsRequest {
     /**
-     * The name of the Amazon SageMaker resource to search for.
+     * The name of the SageMaker resource to search for.
      */
     Resource: ResourceType;
     /**
@@ -18535,7 +18535,7 @@ declare namespace SageMaker {
   }
   export interface PropertyNameSuggestion {
     /**
-     * A suggested property name based on what you entered in the search textbox in the Amazon SageMaker console.
+     * A suggested property name based on what you entered in the search textbox in the SageMaker console.
      */
     PropertyName?: ResourcePropertyName;
   }
@@ -18812,6 +18812,7 @@ declare namespace SageMaker {
      * The reason why a benchmark failed.
      */
     FailureReason?: RecommendationFailureReason;
+    EndpointMetrics?: InferenceMetrics;
   }
   export interface RecommendationJobInputConfig {
     /**
@@ -19095,7 +19096,7 @@ declare namespace SageMaker {
      */
     MaxParallelTrainingJobs: MaxParallelTrainingJobs;
     /**
-     * The maximum time in seconds that a training job launched by a hyperparameter tuning job can run.
+     * The maximum time in seconds that a hyperparameter tuning job can run.
      */
     MaxRuntimeInSeconds?: HyperParameterTuningMaxRuntimeInSeconds;
   }
@@ -19275,7 +19276,7 @@ declare namespace SageMaker {
   }
   export interface SearchRequest {
     /**
-     * The name of the Amazon SageMaker resource to search for.
+     * The name of the SageMaker resource to search for.
      */
     Resource: ResourceType;
     /**
@@ -21531,7 +21532,7 @@ declare namespace SageMaker {
      */
     EndTime?: Timestamp;
     /**
-     * Replaces all of the component's hyperparameters with the specified hyperparameters.
+     * Replaces all of the component's hyperparameters with the specified hyperparameters or add new hyperparameters. Existing hyperparameters are replaced if the trial component is updated with an identical hyperparameter key.
      */
     Parameters?: TrialComponentParameters;
     /**
@@ -21539,7 +21540,7 @@ declare namespace SageMaker {
      */
     ParametersToRemove?: ListTrialComponentKey256;
     /**
-     * Replaces all of the component's input artifacts with the specified artifacts.
+     * Replaces all of the component's input artifacts with the specified artifacts or adds new input artifacts. Existing input artifacts are replaced if the trial component is updated with an identical input artifact key.
      */
     InputArtifacts?: TrialComponentArtifacts;
     /**
@@ -21547,7 +21548,7 @@ declare namespace SageMaker {
      */
     InputArtifactsToRemove?: ListTrialComponentKey256;
     /**
-     * Replaces all of the component's output artifacts with the specified artifacts.
+     * Replaces all of the component's output artifacts with the specified artifacts or adds new output artifacts. Existing output artifacts are replaced if the trial component is updated with an identical output artifact key.
      */
     OutputArtifacts?: TrialComponentArtifacts;
     /**

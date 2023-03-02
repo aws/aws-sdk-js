@@ -1224,7 +1224,8 @@
       "type": "string",
       "enum": [
         "ApplicationDiscoveryService",
-        "MPA"
+        "MPA",
+        "Import"
       ]
     },
     "DatabaseConfigDetail": {
@@ -1597,7 +1598,8 @@
     "GroupName": {
       "type": "string",
       "enum": [
-        "ExternalId"
+        "ExternalId",
+        "ExternalSourceType"
       ]
     },
     "Heterogeneous": {

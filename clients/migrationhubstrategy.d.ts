@@ -534,7 +534,7 @@ declare namespace MigrationHubStrategy {
      */
     success?: Integer;
   }
-  export type DataSourceType = "ApplicationDiscoveryService"|"MPA"|string;
+  export type DataSourceType = "ApplicationDiscoveryService"|"MPA"|"Import"|string;
   export interface DatabaseConfigDetail {
     /**
      *  AWS Secrets Manager key that holds the credentials that you use to connect to a database. 
@@ -777,7 +777,7 @@ declare namespace MigrationHubStrategy {
     value?: String;
   }
   export type GroupIds = Group[];
-  export type GroupName = "ExternalId"|string;
+  export type GroupName = "ExternalId"|"ExternalSourceType"|string;
   export interface Heterogeneous {
     /**
      *  The target database engine for heterogeneous database migration preference. 

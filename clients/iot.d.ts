@@ -164,11 +164,11 @@ declare class Iot extends Service {
    */
   createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.  Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.  Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
@@ -3682,6 +3682,10 @@ declare namespace Iot {
      * Allows you to create the criteria to retry a job.
      */
     jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
+    /**
+     * Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
+     */
+    maintenanceWindows?: MaintenanceWindows;
   }
   export interface CreateJobTemplateResponse {
     /**
@@ -4250,6 +4254,7 @@ declare namespace Iot {
   export type CreatedAtDate = Date;
   export type CreationDate = Date;
   export type CredentialDurationSeconds = number;
+  export type CronExpression = string;
   export interface CustomCodeSigning {
     /**
      * The signature for the file.
@@ -5097,6 +5102,10 @@ declare namespace Iot {
      * The configuration that determines how many retries are allowed for each failure type for a job.
      */
     jobExecutionsRetryConfig?: JobExecutionsRetryConfig;
+    /**
+     * Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
+     */
+    maintenanceWindows?: MaintenanceWindows;
   }
   export interface DescribeManagedJobTemplateRequest {
     /**
@@ -5763,6 +5772,7 @@ declare namespace Iot {
   export type DomainConfigurations = DomainConfigurationSummary[];
   export type DomainName = string;
   export type DomainType = "ENDPOINT"|"AWS_MANAGED"|"CUSTOMER_MANAGED"|string;
+  export type DurationInMinutes = number;
   export type DurationSeconds = number;
   export type DynamicGroupStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export interface DynamoDBAction {
@@ -6593,6 +6603,10 @@ declare namespace Iot {
      * The configuration that allows you to schedule a job for a future date and time in addition to specifying the end behavior for each job execution.
      */
     schedulingConfig?: SchedulingConfig;
+    /**
+     * Displays the next seven maintenance window occurrences and their start times.
+     */
+    scheduledJobRollouts?: ScheduledJobRolloutList;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -8514,6 +8528,17 @@ declare namespace Iot {
      */
     confidenceLevel: ConfidenceLevel;
   }
+  export interface MaintenanceWindow {
+    /**
+     * Displays the start time of the next maintenance window.
+     */
+    startTime: CronExpression;
+    /**
+     * Displays the duration of the next maintenance window.
+     */
+    durationInMinutes: DurationInMinutes;
+  }
+  export type MaintenanceWindows = MaintenanceWindow[];
   export type ManagedJobTemplateName = string;
   export interface ManagedJobTemplateSummary {
     /**
@@ -9558,19 +9583,30 @@ declare namespace Iot {
   }
   export type ScheduledAuditMetadataList = ScheduledAuditMetadata[];
   export type ScheduledAuditName = string;
+  export interface ScheduledJobRollout {
+    /**
+     * Displays the start times of the next seven maintenance window occurrences.
+     */
+    startTime?: StringDateTime;
+  }
+  export type ScheduledJobRolloutList = ScheduledJobRollout[];
   export interface SchedulingConfig {
     /**
-     * The time a job will begin rollout of the job document to all devices in the target group for a job. The startTime can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time.
+     * The time a job will begin rollout of the job document to all devices in the target group for a job. The startTime can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time. The date and time format for the startTime is YYYY-MM-DD for the date and HH:MM for the time.
      */
     startTime?: StringDateTime;
     /**
-     * The time a job will stop rollout of the job document to all devices in the target group for a job. The endTime must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between startTime and endTime is thirty minutes. The maximum duration between startTime and endTime is two years. 
+     * The time a job will stop rollout of the job document to all devices in the target group for a job. The endTime must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between startTime and endTime is thirty minutes. The maximum duration between startTime and endTime is two years. The date and time format for the endTime is YYYY-MM-DD for the date and HH:MM for the time.
      */
     endTime?: StringDateTime;
     /**
      * Specifies the end behavior for all job executions after a job reaches the selected endTime. If endTime is not selected when creating the job, then endBehavior does not apply.
      */
     endBehavior?: JobEndBehavior;
+    /**
+     * An optional configuration within the SchedulingConfig to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.
+     */
+    maintenanceWindows?: MaintenanceWindows;
   }
   export interface SearchIndexRequest {
     /**

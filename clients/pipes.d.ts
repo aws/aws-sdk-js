@@ -84,11 +84,11 @@ declare class Pipes extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Pipes.Types.UntagResourceResponse) => void): Request<Pipes.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update an existing pipe. When you call UpdatePipe, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.  &lt;p&gt;For more information about pipes, see &lt;a href=&quot;https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html&quot;&gt; Amazon EventBridge Pipes&lt;/a&gt; in the Amazon EventBridge User Guide.&lt;/p&gt; 
+   * Update an existing pipe. When you call UpdatePipe, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update. For more information about pipes, see  Amazon EventBridge Pipes in the Amazon EventBridge User Guide.
    */
   updatePipe(params: Pipes.Types.UpdatePipeRequest, callback?: (err: AWSError, data: Pipes.Types.UpdatePipeResponse) => void): Request<Pipes.Types.UpdatePipeResponse, AWSError>;
   /**
-   * Update an existing pipe. When you call UpdatePipe, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update.  &lt;p&gt;For more information about pipes, see &lt;a href=&quot;https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html&quot;&gt; Amazon EventBridge Pipes&lt;/a&gt; in the Amazon EventBridge User Guide.&lt;/p&gt; 
+   * Update an existing pipe. When you call UpdatePipe, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update. For more information about pipes, see  Amazon EventBridge Pipes in the Amazon EventBridge User Guide.
    */
   updatePipe(callback?: (err: AWSError, data: Pipes.Types.UpdatePipeResponse) => void): Request<Pipes.Types.UpdatePipeResponse, AWSError>;
 }
@@ -533,7 +533,6 @@ declare namespace Pipes {
   export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string;
   export type LimitMax10 = number;
   export type LimitMax100 = number;
-  export type LimitMax1000 = number;
   export type LimitMax10000 = number;
   export type LimitMin1 = number;
   export interface ListPipesRequest {
@@ -715,7 +714,7 @@ declare namespace Pipes {
     /**
      * The maximum number of records to include in each batch.
      */
-    BatchSize?: LimitMax1000;
+    BatchSize?: LimitMax10000;
     /**
      * Define the target queue to send dead-letter queue events to.
      */
@@ -1443,7 +1442,7 @@ declare namespace Pipes {
     /**
      * The maximum number of records to include in each batch.
      */
-    BatchSize?: LimitMax1000;
+    BatchSize?: LimitMax10000;
     /**
      * Define the target queue to send dead-letter queue events to.
      */

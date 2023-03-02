@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1326.0-->
+<!--LATEST=2.1327.0-->
 <!--ENTRYINSERT-->
+
+## 2.1327.0
+* feature: Iot: A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.
+* feature: MigrationHubStrategy: This release updates the File Import API to allow importing servers already discovered by customers with reduced pre-requisites.
+* feature: Organizations: This release introduces a new reason code, ACCOUNT_CREATION_NOT_COMPLETE, to ConstraintViolationException in CreateOrganization API.
+* feature: PI: This release adds a new field PeriodAlignment to allow the customer specifying the returned timestamp of time periods to be either the start or end time.
+* feature: Pipes: This release fixes some input parameter range and patterns.
+* feature: SageMaker: Add a new field "EndpointMetrics" in SageMaker Inference Recommender "ListInferenceRecommendationsJobSteps" API response.
 
 ## 2.1326.0
 * feature: CodeCatalyst: Published Dev Environments StopDevEnvironmentSession API

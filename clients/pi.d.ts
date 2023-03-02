@@ -306,6 +306,10 @@ declare namespace PI {
      * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by MaxRecords.
      */
     NextToken?: NextToken;
+    /**
+     * The returned timestamp which is the start or end time of the time periods. The default value is END_TIME.
+     */
+    PeriodAlignment?: PeriodAlignment;
   }
   export interface GetResourceMetricsResponse {
     /**
@@ -439,6 +443,7 @@ declare namespace PI {
   export type MetricTypeList = RequestString[];
   export type MetricValuesList = Double[];
   export type NextToken = string;
+  export type PeriodAlignment = "END_TIME"|"START_TIME"|string;
   export type RequestString = string;
   export type RequestStringList = RequestString[];
   export type RequestedDimensionList = RequestString[];
