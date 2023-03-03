@@ -773,7 +773,7 @@ declare namespace MediaConvert {
      */
     Sharpening?: BandwidthReductionFilterSharpening;
     /**
-     * Specify the strength of the Bandwidth reduction filter. For most workflows, we recommend that you choose Auto. Your output bandwidth will be reduced by at least 8 percent with no perceptual decrease in video quality. If your output bandwidth isn't constrained, set Filter strength to Low or Medium. Low results in minimal to no impact in perceptual quality. For more bandwidth reduction, choose High. The filter helps equalize quality between all scenes and increases video softness. We recommend that you choose High for low bitrate outputs.
+     * Specify the strength of the Bandwidth reduction filter. For most workflows, we recommend that you choose Auto to reduce the bandwidth of your output with little to no perceptual decrease in video quality. For high quality and high bitrate outputs, choose Low. For the most bandwidth reduction, choose High. We recommend that you choose High for low bitrate outputs. Note that High may incur a slight increase in the softness of your output.
      */
     Strength?: BandwidthReductionFilterStrength;
   }
@@ -1322,7 +1322,12 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
      */
     ClipLimits?: ClipLimits;
     /**
-     * Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses Elemental tone mapping technology to approximate the outcome of manually regrading from HDR to SDR. Select Force P3D65 (SDR) to set the output color space metadata to the following: * Color primaries: Display P3 * Transfer characteristics: SMPTE 428M * Matrix coefficients: BT.709
+     * Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses tone mapping to approximate the outcome of manually regrading from HDR to SDR. When you specify an output color space, MediaConvert uses the following color space metadata, which includes color primaries, transfer characteristics, and matrix coefficients:
+  * HDR 10: BT.2020, PQ, BT.2020 non-constant
+  * HLG 2020: BT.2020, HLG, BT.2020 non-constant
+  * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
+  * P3D65 (SDR): Display P3, sRGB, BT.709
+  * P3D65 (HDR): Display P3, PQ, BT.709
      */
     ColorSpaceConversion?: ColorSpaceConversion;
     /**
@@ -1355,8 +1360,8 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
     SdrReferenceWhiteLevel?: __integerMin100Max1000;
   }
   export type ColorMetadata = "IGNORE"|"INSERT"|string;
-  export type ColorSpace = "FOLLOW"|"REC_601"|"REC_709"|"HDR10"|"HLG_2020"|"P3DCI"|"P3D65_SDR"|string;
-  export type ColorSpaceConversion = "NONE"|"FORCE_601"|"FORCE_709"|"FORCE_HDR10"|"FORCE_HLG_2020"|"FORCE_P3DCI"|"FORCE_P3D65_SDR"|string;
+  export type ColorSpace = "FOLLOW"|"REC_601"|"REC_709"|"HDR10"|"HLG_2020"|"P3DCI"|"P3D65_SDR"|"P3D65_HDR"|string;
+  export type ColorSpaceConversion = "NONE"|"FORCE_601"|"FORCE_709"|"FORCE_HDR10"|"FORCE_HLG_2020"|"FORCE_P3DCI"|"FORCE_P3D65_SDR"|"FORCE_P3D65_HDR"|string;
   export type ColorSpaceUsage = "FORCE"|"FALLBACK"|string;
   export type Commitment = "ONE_YEAR"|string;
   export interface ContainerSettings {
@@ -2413,7 +2418,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     AdaptiveQuantization?: H264AdaptiveQuantization;
     /**
-     * The Bandwidth reduction filter increases the video quality of your output relative to its bitrate. Use to lower the bitrate of your constant quality QVBR output, with little or no perceptual decrease in quality. Or, use to increase the video quality of outputs with other rate control modes relative to the bitrate that you specify. Bandwidth reduction increases further when your input is low quality or noisy.Outputs that use this feature incur pro-tier pricing.When you include Bandwidth reduction filter, you cannot include the Noise reducer preprocessor.
+     * The Bandwidth reduction filter increases the video quality of your output relative to its bitrate. Use to lower the bitrate of your constant quality QVBR output, with little or no perceptual decrease in quality. Or, use to increase the video quality of outputs with other rate control modes relative to the bitrate that you specify. Bandwidth reduction increases further when your input is low quality or noisy. Outputs that use this feature incur pro-tier pricing. When you include Bandwidth reduction filter, you cannot include the Noise reducer preprocessor.
      */
     BandwidthReductionFilter?: BandwidthReductionFilter;
     /**
@@ -5692,10 +5697,12 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
      */
     AlphaBehavior?: AlphaBehavior;
     /**
-     * If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value Follow. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate, choose Force HDR 10 here and specify correct values in the input HDR 10 metadata settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr. Select P3D65 (SDR) to set the input color space metadata to the following:
- * Color primaries: Display P3
- * Transfer characteristics: SMPTE 428M
- * Matrix coefficients: BT.709
+     * If your input video has accurate color space metadata, or if you don't know about color space: Keep the default value, Follow. MediaConvert will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or has missing metadata: Specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate: Choose Force HDR 10. Specify correct values in the input HDR 10 metadata settings. For more information about HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr. When you specify an input color space, MediaConvert uses the following color space metadata, which includes color primaries, transfer characteristics, and matrix coefficients:
+ * HDR 10: BT.2020, PQ, BT.2020 non-constant
+ * HLG 2020: BT.2020, HLG, BT.2020 non-constant
+ * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
+ * P3D65 (SDR): Display P3, sRGB, BT.709
+ * P3D65 (HDR): Display P3, PQ, BT.709
      */
     ColorSpace?: ColorSpace;
     /**

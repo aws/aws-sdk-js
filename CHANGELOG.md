@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1327.0-->
+<!--LATEST=2.1328.0-->
 <!--ENTRYINSERT-->
+
+## 2.1328.0
+* feature: EC2: This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
+* feature: MediaConvert: The AWS Elemental MediaConvert SDK has improved handling for different input and output color space combinations.
+* feature: MediaLive: AWS Elemental MediaLive adds support for Nielsen watermark timezones.
+* feature: TranscribeService: Amazon Transcribe now supports role access for these API operations: CreateVocabulary, UpdateVocabulary, CreateVocabularyFilter, and UpdateVocabularyFilter.
 
 ## 2.1327.0
 * feature: Iot: A recurring maintenance window is an optional configuration used for rolling out the job document to all devices in the target group observing a predetermined start time, duration, and frequency that the maintenance window occurs.

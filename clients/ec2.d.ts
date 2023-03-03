@@ -6878,7 +6878,7 @@ declare namespace EC2 {
   export type Boolean = boolean;
   export type BootModeType = "legacy-bios"|"uefi"|string;
   export type BootModeTypeList = BootModeType[];
-  export type BootModeValues = "legacy-bios"|"uefi"|string;
+  export type BootModeValues = "legacy-bios"|"uefi"|"uefi-preferred"|string;
   export type BoxedDouble = number;
   export type BundleId = string;
   export type BundleIdStringList = BundleId[];
@@ -8614,7 +8614,7 @@ declare namespace EC2 {
     /**
      * For devices that support BGP, the customer gateway's BGP ASN. Default: 65000
      */
-    BgpAsn: Integer;
+    BgpAsn?: Integer;
     /**
      *  This member has been deprecated. The Internet-routable IP address for the customer gateway's outside interface. The address must be static.
      */
@@ -22729,7 +22729,7 @@ declare namespace EC2 {
      */
     EnclaveOptions?: EnclaveOptions;
     /**
-     * The boot mode of the instance. For more information, see Boot modes in the Amazon EC2 User Guide.
+     * The boot mode that was specified by the AMI. If the value is uefi-preferred, the AMI supports both UEFI and Legacy BIOS. The currentInstanceBootMode parameter is the boot mode that is used to boot the instance at launch or start.  The operating system contained in the AMI must be configured to support the specified boot mode.  For more information, see Boot modes in the Amazon EC2 User Guide.
      */
     BootMode?: BootModeValues;
     /**
@@ -22760,6 +22760,10 @@ declare namespace EC2 {
      * Provides information on the recovery and maintenance options of your instance.
      */
     MaintenanceOptions?: InstanceMaintenanceOptions;
+    /**
+     * The boot mode that is used to boot the instance at launch or start. For more information, see Boot modes in the Amazon EC2 User Guide.
+     */
+    CurrentInstanceBootMode?: InstanceBootModeValues;
   }
   export interface InstanceAttribute {
     /**
@@ -22863,6 +22867,7 @@ declare namespace EC2 {
     VirtualName?: String;
   }
   export type InstanceBlockDeviceMappingSpecificationList = InstanceBlockDeviceMappingSpecification[];
+  export type InstanceBootModeValues = "legacy-bios"|"uefi"|string;
   export interface InstanceCapacity {
     /**
      * The number of instances that can be launched onto the Dedicated Host based on the host's available capacity.
@@ -30300,7 +30305,7 @@ declare namespace EC2 {
      */
     VirtualizationType?: String;
     /**
-     * The boot mode of the AMI. For more information, see Boot modes in the Amazon EC2 User Guide.
+     * The boot mode of the AMI. A value of uefi-preferred indicates that the AMI supports both UEFI and Legacy BIOS.  The operating system contained in the AMI must be configured to support the specified boot mode.  For more information, see Boot modes in the Amazon EC2 User Guide.
      */
     BootMode?: BootModeValues;
     /**

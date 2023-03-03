@@ -952,7 +952,7 @@ Alternate rendition that the client will not try to play back by default. Repres
   export type AvailBlankingState = "DISABLED"|"ENABLED"|string;
   export interface AvailConfiguration {
     /**
-     * Ad avail settings.
+     * Controls how SCTE-35 messages create cues. Splice Insert mode treats all segmentation signals traditionally. With Time Signal APOS mode only Time Signal Placement Opportunity and Break messages create segment breaks. With ESAM mode, signals are forwarded to an ESAM server for possible update.
      */
     AvailSettings?: AvailSettings;
   }
@@ -3416,7 +3416,7 @@ for any single frame within an encoded HDR video stream or file.
      */
     HttpTransferMode?: HlsAkamaiHttpTransferMode;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3442,7 +3442,7 @@ for any single frame within an encoded HDR video stream or file.
      */
     FilecacheDuration?: __integerMin0Max600;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3721,7 +3721,7 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      */
     MediaStoreStorageClass?: HlsMediaStoreStorageClass;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -3792,7 +3792,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     HttpTransferMode?: HlsWebdavHttpTransferMode;
     /**
-     * Number of retry attempts that will be made before the Live Event is put into an error state.
+     * Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with "s3" or "mediastore". For other URIs, the value is always 3.
      */
     NumRetries?: __integerMin0;
     /**
@@ -5484,8 +5484,14 @@ When this field is defined, ConstantBitrate must be undefined.
      * Enter the Nielsen Source ID (SID) to include in the watermark
      */
     Sid: __doubleMin1Max65535;
+    /**
+     * Choose the timezone for the time stamps in the watermark. If not provided,
+the timestamps will be in Coordinated Universal Time (UTC)
+     */
+    Timezone?: NielsenWatermarkTimezones;
   }
   export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string;
+  export type NielsenWatermarkTimezones = "AMERICA_PUERTO_RICO"|"US_ALASKA"|"US_ARIZONA"|"US_CENTRAL"|"US_EASTERN"|"US_HAWAII"|"US_MOUNTAIN"|"US_PACIFIC"|"US_SAMOA"|"UTC"|string;
   export type NielsenWatermarksCbetStepaside = "DISABLED"|"ENABLED"|string;
   export type NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"|"PROGRAM_CONTENT"|string;
   export interface NielsenWatermarksSettings {

@@ -893,15 +893,15 @@ declare namespace Macie2 {
   }
   export interface BucketCountByEncryptionType {
     /**
-     *  The total number of buckets that use an KMS key to encrypt new objects by default, either an Amazon Web Services managed key or a customer managed key. These buckets use KMS encryption (SSE-KMS) by default.
+     *  The total number of buckets whose default encryption settings are configured to encrypt new objects with an Amazon Web Services managed KMS key or a customer managed KMS key. By default, these buckets encrypt new objects automatically using SSE-KMS encryption.
      */
     kmsManaged?: __long;
     /**
-     * The total number of buckets that use an Amazon S3 managed key to encrypt new objects by default. These buckets use Amazon S3 managed encryption (SSE-S3) by default.
+     * The total number of buckets whose default encryption settings are configured to encrypt new objects with an Amazon S3 managed key. By default, these buckets encrypt new objects automatically using SSE-S3 encryption.
      */
     s3Managed?: __long;
     /**
-     * The total number of buckets that don't encrypt new objects by default. Default encryption is disabled for these buckets.
+     * The total number of buckets that don't specify default server-side encryption behavior for new objects. Default encryption settings aren't configured for these buckets.
      */
     unencrypted?: __long;
     /**
@@ -911,7 +911,7 @@ declare namespace Macie2 {
   }
   export interface BucketCountBySharedAccessType {
     /**
-     * The total number of buckets that are shared with one or more of the following or any combination of the following: an Amazon Web Services account that isn't in the same Amazon Macie organization, an Amazon CloudFront OAI, or a CloudFront OAC.
+     * The total number of buckets that are shared with one or more of the following or any combination of the following: an Amazon CloudFront OAI, a CloudFront OAC, or an Amazon Web Services account that isn't in the same Amazon Macie organization.
      */
     external?: __long;
     /**
@@ -992,7 +992,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
+     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are added to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
      */
     allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
     /**
@@ -1060,11 +1060,11 @@ declare namespace Macie2 {
      */
     sensitivityScore?: __integer;
     /**
-     * Specifies whether the bucket encrypts new objects by default and, if so, the type of server-side encryption that's used.
+     * The default server-side encryption settings for the bucket.
      */
     serverSideEncryption?: BucketServerSideEncryption;
     /**
-     * Specifies whether the bucket is shared with another Amazon Web Services account, an Amazon CloudFront origin access identity (OAI), or a CloudFront origin access control (OAC). Possible values are: EXTERNAL - The bucket is shared with one or more of the following or any combination of the following: an Amazon Web Services account that isn't part of your Amazon Macie organization, a CloudFront OAI, or a CloudFront OAC. INTERNAL - The bucket is shared with one or more Amazon Web Services accounts that are part of your Amazon Macie organization. It isn't shared with a CloudFront OAI or OAC. NOT_SHARED - The bucket isn't shared with another Amazon Web Services account, a CloudFront OAI, or a CloudFront OAC. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket. An Amazon Macie organization is a set of Macie accounts that are centrally managed as a group of related accounts through Organizations or by Macie invitation.
+     * Specifies whether the bucket is shared with another Amazon Web Services account, an Amazon CloudFront origin access identity (OAI), or a CloudFront origin access control (OAC). Possible values are: EXTERNAL - The bucket is shared with one or more of the following or any combination of the following: a CloudFront OAI, a CloudFront OAC, or an Amazon Web Services account that isn't part of your Amazon Macie organization. INTERNAL - The bucket is shared with one or more Amazon Web Services accounts that are part of your Amazon Macie organization. It isn't shared with a CloudFront OAI or OAC. NOT_SHARED - The bucket isn't shared with another Amazon Web Services account, a CloudFront OAI, or a CloudFront OAC. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket. An Amazon Macie organization is a set of Macie accounts that are centrally managed as a group of related accounts through Organizations or by Macie invitation.
      */
     sharedAccess?: SharedAccess;
     /**
@@ -1125,11 +1125,11 @@ declare namespace Macie2 {
   }
   export interface BucketServerSideEncryption {
     /**
-     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.
+     * The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket is configured to use an Amazon S3 managed key to encrypt new objects.
      */
     kmsMasterKeyId?: __string;
     /**
-     * The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are: AES256 - New objects are encrypted with an Amazon S3 managed key. They use SSE-S3 encryption. aws:kms - New objects are encrypted with an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer managed key. They use SSE-KMS encryption. NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.
+     * The server-side encryption algorithm that's used by default to encrypt objects that are added to the bucket. Possible values are: AES256 - New objects are encrypted with an Amazon S3 managed key. They use SSE-S3 encryption. aws:kms - New objects are encrypted with an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer managed key. They use SSE-KMS encryption. NONE - The bucket's default encryption settings don't specify server-side encryption behavior for new objects.
      */
     type?: Type;
   }
@@ -2149,11 +2149,11 @@ declare namespace Macie2 {
      */
     bucketCountByEffectivePermission?: BucketCountByEffectivePermission;
     /**
-     * The total number of buckets that use certain types of server-side encryption to encrypt new objects by default. This object also reports the total number of buckets that don't encrypt new objects by default.
+     * The total number of buckets whose settings do or don't specify default server-side encryption behavior for objects that are added to the buckets.
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
-     * The total number of buckets whose bucket policies do or don't require server-side encryption of objects when objects are uploaded to the buckets.
+     * The total number of buckets whose bucket policies do or don't require server-side encryption of objects when objects are added to the buckets.
      */
     bucketCountByObjectEncryptionRequirement?: BucketCountPolicyAllowsUnencryptedObjectUploads;
     /**
@@ -2626,7 +2626,7 @@ declare namespace Macie2 {
      */
     principalId?: __string;
     /**
-     * The user name of the IAM user who performed the action.
+     * The username of the IAM user who performed the action.
      */
     userName?: __string;
   }
@@ -3291,7 +3291,7 @@ declare namespace Macie2 {
      */
     s3Managed?: __long;
     /**
-     * The total number of objects that aren't encrypted or use client-side encryption.
+     * The total number of objects that use client-side encryption or aren't encrypted.
      */
     unencrypted?: __long;
     /**
@@ -3503,7 +3503,7 @@ declare namespace Macie2 {
   export type RevealStatus = "ENABLED"|"DISABLED"|string;
   export interface S3Bucket {
     /**
-     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
+     * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are added to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
      */
     allowsUnencryptedObjectUploads?: AllowsUnencryptedObjectUploads;
     /**
@@ -3515,7 +3515,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The type of server-side encryption that's used by default to encrypt objects in the bucket.
+     * The default server-side encryption settings for the bucket.
      */
     defaultServerSideEncryption?: ServerSideEncryption;
     /**
@@ -3652,7 +3652,7 @@ declare namespace Macie2 {
      */
     publicAccess?: __boolean;
     /**
-     * The type of server-side encryption that's used to encrypt the object.
+     * The type of server-side encryption that was used to encrypt the object.
      */
     serverSideEncryption?: ServerSideEncryption;
     /**
@@ -3862,17 +3862,17 @@ declare namespace Macie2 {
   }
   export interface SensitivityInspectionTemplatesEntry {
     /**
-     * The unique identifier for the sensitivity inspection template for the account.
+     * The unique identifier for the sensitivity inspection template.
      */
     id?: __string;
     /**
-     * The name of the sensitivity inspection template for the account: automated-sensitive-data-discovery.
+     * The name of the sensitivity inspection template: automated-sensitive-data-discovery.
      */
     name?: __string;
   }
   export interface ServerSideEncryption {
     /**
-     * The server-side encryption algorithm that's used when storing data in the bucket or object. If default encryption is disabled for the bucket or the object isn't encrypted using server-side encryption, this value is NONE.
+     * The server-side encryption algorithm that's used when storing data in the bucket or object. If default encryption settings aren't configured for the bucket or the object isn't encrypted using server-side encryption, this value is NONE.
      */
     encryptionType?: EncryptionType;
     /**
