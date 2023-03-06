@@ -52,11 +52,11 @@ declare class IVS extends Service {
    */
   createStreamKey(callback?: (err: AWSError, data: IVS.Types.CreateStreamKeyResponse) => void): Request<IVS.Types.CreateStreamKeyResponse, AWSError>;
   /**
-   * Deletes the specified channel and its associated stream keys. If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call StopStream, wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state was changed from Live to Offline), then call DeleteChannel. (See  Using EventBridge with Amazon IVS.) 
+   * Deletes the specified channel and its associated stream keys. If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call StopStream, wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state is no longer Live), then call DeleteChannel. (See  Using EventBridge with Amazon IVS.) 
    */
   deleteChannel(params: IVS.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified channel and its associated stream keys. If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call StopStream, wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state was changed from Live to Offline), then call DeleteChannel. (See  Using EventBridge with Amazon IVS.) 
+   * Deletes the specified channel and its associated stream keys. If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call StopStream, wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state is no longer Live), then call DeleteChannel. (See  Using EventBridge with Amazon IVS.) 
    */
   deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -894,7 +894,7 @@ declare namespace IVS {
      */
     startTime?: StreamStartTime;
     /**
-     * The stream’s state.
+     * The stream’s state. Do not rely on the OFFLINE state, as the API may not return it; instead, a "NotBroadcasting" error will indicate that the stream is not live.
      */
     state?: StreamState;
     /**
@@ -1033,7 +1033,7 @@ declare namespace IVS {
      */
     startTime?: StreamStartTime;
     /**
-     * The stream’s state.
+     * The stream’s state. Do not rely on the OFFLINE state, as the API may not return it; instead, a "NotBroadcasting" error will indicate that the stream is not live.
      */
     state?: StreamState;
     /**

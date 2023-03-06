@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1328.0-->
+<!--LATEST=2.1329.0-->
 <!--ENTRYINSERT-->
+
+## 2.1329.0
+* feature: Account: AWS Account alternate contact email addresses can now have a length of 254 characters and contain the character "|".
 
 ## 2.1328.0
 * feature: EC2: This release adds support for a new boot mode for EC2 instances called 'UEFI Preferred'.
