@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1329.0-->
+<!--LATEST=2.1330.0-->
 <!--ENTRYINSERT-->
+
+## 2.1330.0
+* feature: DMS: This release adds DMS Fleet Advisor Target Recommendation APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to start Target Recommendation calculation.
 
 ## 2.1329.0
 * feature: Account: AWS Account alternate contact email addresses can now have a length of 254 characters and contain the character "|".

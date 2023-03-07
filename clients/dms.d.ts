@@ -13,11 +13,11 @@ declare class DMS extends Service {
   constructor(options?: DMS.Types.ClientConfiguration)
   config: Config & DMS.Types.ClientConfiguration;
   /**
-   * Adds metadata tags to an DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see  Tag  data type description.
+   * Adds metadata tags to an DMS resource, including replication instance, endpoint, subnet group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see  Tag  data type description.
    */
   addTagsToResource(params: DMS.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
-   * Adds metadata tags to an DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see  Tag  data type description.
+   * Adds metadata tags to an DMS resource, including replication instance, endpoint, subnet group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see  Tag  data type description.
    */
   addTagsToResource(callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
@@ -28,6 +28,14 @@ declare class DMS extends Service {
    * Applies a pending maintenance action to a resource (for example, to a replication instance).
    */
   applyPendingMaintenanceAction(callback?: (err: AWSError, data: DMS.Types.ApplyPendingMaintenanceActionResponse) => void): Request<DMS.Types.ApplyPendingMaintenanceActionResponse, AWSError>;
+  /**
+   * Starts the analysis of up to 20 source databases to recommend target engines for each source database. This is a batch version of StartRecommendations. The result of analysis of each source database is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.
+   */
+  batchStartRecommendations(params: DMS.Types.BatchStartRecommendationsRequest, callback?: (err: AWSError, data: DMS.Types.BatchStartRecommendationsResponse) => void): Request<DMS.Types.BatchStartRecommendationsResponse, AWSError>;
+  /**
+   * Starts the analysis of up to 20 source databases to recommend target engines for each source database. This is a batch version of StartRecommendations. The result of analysis of each source database is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of 200.
+   */
+  batchStartRecommendations(callback?: (err: AWSError, data: DMS.Types.BatchStartRecommendationsResponse) => void): Request<DMS.Types.BatchStartRecommendationsResponse, AWSError>;
   /**
    * Cancels a single premigration assessment run. This operation prevents any individual assessments from running if they haven't started running. It also attempts to cancel any individual assessments that are currently running.
    */
@@ -301,6 +309,22 @@ declare class DMS extends Service {
    */
   describePendingMaintenanceActions(callback?: (err: AWSError, data: DMS.Types.DescribePendingMaintenanceActionsResponse) => void): Request<DMS.Types.DescribePendingMaintenanceActionsResponse, AWSError>;
   /**
+   * Returns a paginated list of limitations for recommendations of target Amazon Web Services engines.
+   */
+  describeRecommendationLimitations(params: DMS.Types.DescribeRecommendationLimitationsRequest, callback?: (err: AWSError, data: DMS.Types.DescribeRecommendationLimitationsResponse) => void): Request<DMS.Types.DescribeRecommendationLimitationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of limitations for recommendations of target Amazon Web Services engines.
+   */
+  describeRecommendationLimitations(callback?: (err: AWSError, data: DMS.Types.DescribeRecommendationLimitationsResponse) => void): Request<DMS.Types.DescribeRecommendationLimitationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of target engine recommendations for your source databases.
+   */
+  describeRecommendations(params: DMS.Types.DescribeRecommendationsRequest, callback?: (err: AWSError, data: DMS.Types.DescribeRecommendationsResponse) => void): Request<DMS.Types.DescribeRecommendationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of target engine recommendations for your source databases.
+   */
+  describeRecommendations(callback?: (err: AWSError, data: DMS.Types.DescribeRecommendationsResponse) => void): Request<DMS.Types.DescribeRecommendationsResponse, AWSError>;
+  /**
    * Returns the status of the RefreshSchemas operation.
    */
   describeRefreshSchemasStatus(params: DMS.Types.DescribeRefreshSchemasStatusMessage, callback?: (err: AWSError, data: DMS.Types.DescribeRefreshSchemasStatusResponse) => void): Request<DMS.Types.DescribeRefreshSchemasStatusResponse, AWSError>;
@@ -389,11 +413,11 @@ declare class DMS extends Service {
    */
   importCertificate(callback?: (err: AWSError, data: DMS.Types.ImportCertificateResponse) => void): Request<DMS.Types.ImportCertificateResponse, AWSError>;
   /**
-   * Lists all metadata tags attached to an DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
+   * Lists all metadata tags attached to an DMS resource, including replication instance, endpoint, subnet group, and migration task. For more information, see  Tag  data type description.
    */
   listTagsForResource(params: DMS.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all metadata tags attached to an DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
+   * Lists all metadata tags attached to an DMS resource, including replication instance, endpoint, subnet group, and migration task. For more information, see  Tag  data type description.
    */
   listTagsForResource(callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -469,17 +493,25 @@ declare class DMS extends Service {
    */
   reloadTables(callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
   /**
-   * Removes metadata tags from an DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
+   * Removes metadata tags from an DMS resource, including replication instance, endpoint, subnet group, and migration task. For more information, see  Tag  data type description.
    */
   removeTagsFromResource(params: DMS.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
-   * Removes metadata tags from an DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
+   * Removes metadata tags from an DMS resource, including replication instance, endpoint, subnet group, and migration task. For more information, see  Tag  data type description.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
    * Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.
    */
   runFleetAdvisorLsaAnalysis(callback?: (err: AWSError, data: DMS.Types.RunFleetAdvisorLsaAnalysisResponse) => void): Request<DMS.Types.RunFleetAdvisorLsaAnalysisResponse, AWSError>;
+  /**
+   * Starts the analysis of your source database to provide recommendations of target engines. You can create recommendations for multiple source databases using BatchStartRecommendations.
+   */
+  startRecommendations(params: DMS.Types.StartRecommendationsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts the analysis of your source database to provide recommendations of target engines. You can create recommendations for multiple source databases using BatchStartRecommendations.
+   */
+  startRecommendations(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Starts the replication task. For more information about DMS tasks, see Working with Migration Tasks  in the Database Migration Service User Guide. 
    */
@@ -651,6 +683,33 @@ declare namespace DMS {
     Name?: String;
   }
   export type AvailabilityZonesList = String[];
+  export interface BatchStartRecommendationsErrorEntry {
+    /**
+     * The identifier of the source database.
+     */
+    DatabaseId?: String;
+    /**
+     * The information about the error.
+     */
+    Message?: String;
+    /**
+     * The code of an error that occurred during the analysis of the source database.
+     */
+    Code?: String;
+  }
+  export type BatchStartRecommendationsErrorEntryList = BatchStartRecommendationsErrorEntry[];
+  export interface BatchStartRecommendationsRequest {
+    /**
+     * Provides information about source databases to analyze. After this analysis, Fleet Advisor recommends target engines for each source database.
+     */
+    Data?: StartRecommendationsRequestEntryList;
+  }
+  export interface BatchStartRecommendationsResponse {
+    /**
+     * A list with error details about the analysis of each source database.
+     */
+    ErrorEntries?: BatchStartRecommendationsErrorEntryList;
+  }
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
   export interface CancelReplicationTaskAssessmentRunMessage {
@@ -1070,7 +1129,7 @@ declare namespace DMS {
      */
     EngineVersion?: String;
     /**
-     * A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true 
+     * A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true  When AutoMinorVersionUpgrade is enabled, DMS uses the current default engine version when you create a replication instance. For example, if you set EngineVersion to a lower version number than the current default version, DMS uses the default version. If AutoMinorVersionUpgrade isn’t enabled when you create a replication instance, DMS uses the engine version specified by the EngineVersion parameter. 
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -1166,7 +1225,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
     /**
@@ -1811,6 +1870,54 @@ declare namespace DMS {
      *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
+  }
+  export interface DescribeRecommendationLimitationsRequest {
+    /**
+     * Filters applied to the limitations described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, Fleet Advisor includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeRecommendationLimitationsResponse {
+    /**
+     * The unique pagination token returned for you to pass to a subsequent request. Fleet Advisor returns this token when the number of records in the response is greater than the MaxRecords value. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    NextToken?: String;
+    /**
+     * The list of limitations for recommendations of target Amazon Web Services engines.
+     */
+    Limitations?: LimitationList;
+  }
+  export interface DescribeRecommendationsRequest {
+    /**
+     * Filters applied to the target engine recommendations described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, Fleet Advisor includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If NextToken is returned by a previous response, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeRecommendationsResponse {
+    /**
+     * The unique pagination token returned for you to pass to a subsequent request. Fleet Advisor returns this token when the number of records in the response is greater than the MaxRecords value. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    NextToken?: String;
+    /**
+     * The list of recommendations of target engines that Fleet Advisor created for the source database.
+     */
+    Recommendations?: RecommendationList;
   }
   export interface DescribeRefreshSchemasStatusMessage {
     /**
@@ -2457,7 +2564,7 @@ declare namespace DMS {
      */
     AfterConnectScript?: String;
     /**
-     * Adjusts the behavior of DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false. 
+     * Cleans and recreates table metadata information on the replication instance when a mismatch occurs. For example, in a situation where running an alter DDL on the table could result in different information about the table cached in the replication instance. 
      */
     CleanSourceMetadataOnMismatch?: BooleanOptional;
     /**
@@ -2485,11 +2592,11 @@ declare namespace DMS {
      */
     Password?: SecretString;
     /**
-     * 
+     * Endpoint TCP port.
      */
     Port?: IntegerOptional;
     /**
-     * Endpoint TCP port.
+     * The MySQL host name.
      */
     ServerName?: String;
     /**
@@ -2708,6 +2815,33 @@ declare namespace DMS {
      */
     NoHexPrefix?: BooleanOptional;
   }
+  export interface Limitation {
+    /**
+     * The identifier of the source database.
+     */
+    DatabaseId?: String;
+    /**
+     * The name of the target engine that Fleet Advisor should use in the target engine recommendation. Valid values include "rds-aurora-mysql", "rds-aurora-postgresql", "rds-mysql", "rds-oracle", "rds-sql-server", and "rds-postgresql".
+     */
+    EngineName?: String;
+    /**
+     * The name of the limitation. Describes unsupported database features, migration action items, and other limitations.
+     */
+    Name?: String;
+    /**
+     * A description of the limitation. Provides additional information about the limitation, and includes recommended actions that you can take to address or avoid this limitation.
+     */
+    Description?: String;
+    /**
+     * The impact of the limitation. You can use this parameter to prioritize limitations that you want to address. Valid values include "Blocker", "High", "Medium", and "Low".
+     */
+    Impact?: String;
+    /**
+     * The type of the limitation, such as action required, upgrade required, and limited feature.
+     */
+    Type?: String;
+  }
+  export type LimitationList = Limitation[];
   export interface ListTagsForResourceMessage {
     /**
      * The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for. This returns a list of keys (names of tags) created for the resource and their associated tag values.
@@ -2761,7 +2895,7 @@ declare namespace DMS {
      */
     SafeguardPolicy?: SafeguardPolicy;
     /**
-     * Fully qualified domain name of the endpoint.
+     * Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server instance, this is the output of DescribeDBInstances, in the  Endpoint.Address field.
      */
     ServerName?: String;
     /**
@@ -2993,7 +3127,7 @@ declare namespace DMS {
      */
     AllowMajorVersionUpgrade?: Boolean;
     /**
-     * A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn't result in an outage, except in the case described following. The change is asynchronously applied as soon as possible.  An outage does result if these factors apply:    This parameter is set to true during the maintenance window.   A newer minor version is available.    DMS has enabled automatic patching for the given engine version.   
+     * A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn't result in an outage, except in the case described following. The change is asynchronously applied as soon as possible.  An outage does result if these factors apply:    This parameter is set to true during the maintenance window.   A newer minor version is available.    DMS has enabled automatic patching for the given engine version.    When AutoMinorVersionUpgrade is enabled, DMS uses the current default engine version when you modify a replication instance. For example, if you set EngineVersion to a lower version number than the current default version, DMS uses the default version. If AutoMinorVersionUpgrade isn’t enabled when you modify a replication instance, DMS uses the engine version specified by the EngineVersion parameter.
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -3061,7 +3195,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
     /**
@@ -3155,7 +3289,7 @@ declare namespace DMS {
      */
     AfterConnectScript?: String;
     /**
-     * Adjusts the behavior of DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false.
+     * Cleans and recreates table metadata information on the replication instance when a mismatch occurs. For example, in a situation where running an alter DDL on the table could result in different information about the table cached in the replication instance. 
      */
     CleanSourceMetadataOnMismatch?: BooleanOptional;
     /**
@@ -3187,7 +3321,7 @@ declare namespace DMS {
      */
     Port?: IntegerOptional;
     /**
-     * Fully qualified domain name of the endpoint.
+     * The host name of the endpoint database.  For an Amazon RDS MySQL instance, this is the output of DescribeDBInstances, in the  Endpoint.Address field. For an Aurora MySQL instance, this is the output of DescribeDBClusters, in the Endpoint field.
      */
     ServerName?: String;
     /**
@@ -3356,7 +3490,7 @@ declare namespace DMS {
      */
     SecurityDbEncryptionName?: String;
     /**
-     * Fully qualified domain name of the endpoint.
+     * Fully qualified domain name of the endpoint. For an Amazon RDS Oracle instance, this is the output of DescribeDBInstances, in the  Endpoint.Address field.
      */
     ServerName?: String;
     /**
@@ -3523,7 +3657,7 @@ declare namespace DMS {
      */
     Port?: IntegerOptional;
     /**
-     * Fully qualified domain name of the endpoint.
+     * The host name of the endpoint database.  For an Amazon RDS PostgreSQL instance, this is the output of DescribeDBInstances, in the  Endpoint.Address field. For an Aurora PostgreSQL instance, this is the output of DescribeDBClusters, in the Endpoint field.
      */
     ServerName?: String;
     /**
@@ -3551,6 +3685,76 @@ declare namespace DMS {
      */
     TrimSpaceInChar?: BooleanOptional;
   }
+  export interface RdsConfiguration {
+    /**
+     * Describes the recommended target Amazon RDS engine edition.
+     */
+    EngineEdition?: String;
+    /**
+     * Describes the recommended target Amazon RDS instance type.
+     */
+    InstanceType?: String;
+    /**
+     * Describes the number of virtual CPUs (vCPU) on the recommended Amazon RDS DB instance that meets your requirements.
+     */
+    InstanceVcpu?: DoubleOptional;
+    /**
+     * Describes the memory on the recommended Amazon RDS DB instance that meets your requirements.
+     */
+    InstanceMemory?: DoubleOptional;
+    /**
+     * Describes the storage type of the recommended Amazon RDS DB instance that meets your requirements. Amazon RDS provides three storage types: General Purpose SSD (also known as gp2 and gp3), Provisioned IOPS SSD (also known as io1), and magnetic (also known as standard).
+     */
+    StorageType?: String;
+    /**
+     * Describes the storage size of the recommended Amazon RDS DB instance that meets your requirements.
+     */
+    StorageSize?: IntegerOptional;
+    /**
+     * Describes the number of I/O operations completed each second (IOPS) on the recommended Amazon RDS DB instance that meets your requirements.
+     */
+    StorageIops?: IntegerOptional;
+    /**
+     * Describes the deployment option for the recommended Amazon RDS DB instance. The deployment options include Multi-AZ and Single-AZ deployments. Valid values include "MULTI_AZ" and "SINGLE_AZ".
+     */
+    DeploymentOption?: String;
+  }
+  export interface RdsRecommendation {
+    /**
+     * Supplemental information about the requirements to the recommended target database on Amazon RDS.
+     */
+    RequirementsToTarget?: RdsRequirements;
+    /**
+     * Supplemental information about the configuration of the recommended target database on Amazon RDS.
+     */
+    TargetConfiguration?: RdsConfiguration;
+  }
+  export interface RdsRequirements {
+    /**
+     * The required target Amazon RDS engine edition.
+     */
+    EngineEdition?: String;
+    /**
+     * The required number of virtual CPUs (vCPU) on the Amazon RDS DB instance.
+     */
+    InstanceVcpu?: DoubleOptional;
+    /**
+     * The required memory on the Amazon RDS DB instance.
+     */
+    InstanceMemory?: DoubleOptional;
+    /**
+     * The required Amazon RDS DB instance storage size.
+     */
+    StorageSize?: IntegerOptional;
+    /**
+     * The required number of I/O operations completed each second (IOPS) on your Amazon RDS DB instance.
+     */
+    StorageIops?: IntegerOptional;
+    /**
+     * The required deployment option for the Amazon RDS DB instance. Valid values include "MULTI_AZ" for Multi-AZ deployments and "SINGLE_AZ" for Single-AZ deployments.
+     */
+    DeploymentOption?: String;
+  }
   export interface RebootReplicationInstanceMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -3570,6 +3774,53 @@ declare namespace DMS {
      * The replication instance that is being rebooted. 
      */
     ReplicationInstance?: ReplicationInstance;
+  }
+  export interface Recommendation {
+    /**
+     * The identifier of the source database for which Fleet Advisor provided this recommendation.
+     */
+    DatabaseId?: String;
+    /**
+     * The name of the target engine. Valid values include "rds-aurora-mysql", "rds-aurora-postgresql", "rds-mysql", "rds-oracle", "rds-sql-server", and "rds-postgresql".
+     */
+    EngineName?: String;
+    /**
+     * The date when Fleet Advisor created the target engine recommendation.
+     */
+    CreatedDate?: String;
+    /**
+     * The status of the target engine recommendation. Valid values include "alternate", "in-progress", "not-viable", and "recommended".
+     */
+    Status?: String;
+    /**
+     * Indicates that this target is the rightsized migration destination.
+     */
+    Preferred?: BooleanOptional;
+    /**
+     * The settings in JSON format for the preferred target engine parameters. These parameters include capacity, resource utilization, and the usage type (production, development, or testing).
+     */
+    Settings?: RecommendationSettings;
+    /**
+     * The recommendation of a target engine for the specified source database.
+     */
+    Data?: RecommendationData;
+  }
+  export interface RecommendationData {
+    /**
+     * The recommendation of a target Amazon RDS database engine.
+     */
+    RdsEngine?: RdsRecommendation;
+  }
+  export type RecommendationList = Recommendation[];
+  export interface RecommendationSettings {
+    /**
+     * The size of your target instance. Fleet Advisor calculates this value based on your data collection type, such as total capacity and resource utilization. Valid values include "total-capacity" and "utilization".
+     */
+    InstanceSizingType: String;
+    /**
+     * The deployment option for your target engine. For production databases, Fleet Advisor chooses Multi-AZ deployment. For development or test databases, Fleet Advisor chooses Single-AZ deployment. Valid values include "development" and "production".
+     */
+    WorkloadType: String;
   }
   export type RedisAuthTypeValue = "none"|"auth-role"|"auth-token"|string;
   export interface RedisSettings {
@@ -3763,7 +4014,7 @@ declare namespace DMS {
     LastFailureMessage?: String;
   }
   export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string;
-  export type ReleaseStatusValues = "beta"|string;
+  export type ReleaseStatusValues = "beta"|"prod"|string;
   export type ReloadOptionValue = "data-reload"|"validate-only"|string;
   export interface ReloadTablesMessage {
     /**
@@ -4022,7 +4273,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
     /**
@@ -4467,6 +4718,27 @@ declare namespace DMS {
   export type SourceIdsList = String[];
   export type SourceType = "replication-instance"|string;
   export type SslSecurityProtocolValue = "plaintext"|"ssl-encryption"|string;
+  export interface StartRecommendationsRequest {
+    /**
+     * The identifier of the source database to analyze and provide recommendations for.
+     */
+    DatabaseId: String;
+    /**
+     * The settings in JSON format that Fleet Advisor uses to determine target engine recommendations. These parameters include target instance sizing and availability and durability settings. For target instance sizing, Fleet Advisor supports the following two options: total capacity and resource utilization. For availability and durability, Fleet Advisor supports the following two options: production (Multi-AZ deployments) and Dev/Test (Single-AZ deployments).
+     */
+    Settings: RecommendationSettings;
+  }
+  export interface StartRecommendationsRequestEntry {
+    /**
+     * The identifier of the source database.
+     */
+    DatabaseId: String;
+    /**
+     * The required target engine settings.
+     */
+    Settings: RecommendationSettings;
+  }
+  export type StartRecommendationsRequestEntryList = StartRecommendationsRequestEntry[];
   export interface StartReplicationTaskAssessmentMessage {
     /**
      *  The Amazon Resource Name (ARN) of the replication task. 
@@ -4529,7 +4801,7 @@ declare namespace DMS {
      */
     ReplicationTaskArn: String;
     /**
-     * The type of replication task to start. When the migration type is full-load or full-load-and-cdc, the only valid value for the first run of the task is start-replication. You use reload-target to restart the task and resume-processing to resume the task. When the migration type is cdc, you use start-replication to start or restart the task, and resume-processing to resume the task. reload-target is not a valid value for a task with migration type of cdc.
+     * The type of replication task to start. When the migration type is full-load or full-load-and-cdc, the only valid value for the first run of the task is start-replication. This option will start the migration. You can also use ReloadTables to reload specific tables that failed during migration instead of restarting the task. The resume-processing option isn't applicable for a full-load task, because you can't resume partially loaded tables during the full load phase. For a full-load-and-cdc task, DMS migrates table data, and then applies data changes that occur on the source. To load all the tables again, and start capturing source changes, use reload-target. Otherwise use resume-processing, to replicate the changes from the last stop position.
      */
     StartReplicationTaskType: StartReplicationTaskTypeValue;
     /**
@@ -4541,7 +4813,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
   }
