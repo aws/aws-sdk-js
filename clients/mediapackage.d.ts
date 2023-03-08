@@ -186,6 +186,10 @@ declare namespace MediaPackage {
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -261,6 +265,10 @@ rounded to the nearest multiple of the source segment duration.
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -291,6 +299,10 @@ cannot be changed after a Channel is created.
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */
     Arn?: __string;
+    /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
     /**
      * A short text description of the Channel.
      */
@@ -341,7 +353,7 @@ This cannot be changed after the HarvestJob is submitted.
      */
     ChannelId?: __string;
     /**
-     * The time the HarvestJob was submitted
+     * The date and time the HarvestJob was submitted.
 
      */
     CreatedAt?: __string;
@@ -438,6 +450,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -577,6 +593,10 @@ rounded to the nearest multiple of the source segment duration.
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -607,7 +627,7 @@ rounded to the nearest multiple of the source segment duration.
      */
     ChannelId?: __string;
     /**
-     * The time the HarvestJob was submitted
+     * The date and time the HarvestJob was submitted.
 
      */
     CreatedAt?: __string;
@@ -659,6 +679,10 @@ include an explanation of why the HarvestJob failed.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -732,7 +756,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ChannelId?: __string;
     /**
-     * The time the HarvestJob was submitted
+     * The date and time the HarvestJob was submitted.
 
      */
     CreatedAt?: __string;
@@ -1095,6 +1119,10 @@ rounded to the nearest multiple of the source fragment duration.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -1156,6 +1184,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -1183,6 +1215,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the Channel.
      */
     Arn?: __string;
+    /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
     /**
      * A short text description of the Channel.
      */
@@ -1286,6 +1322,10 @@ MediaPackage will assume when accessing the key provider service.
      */
     Arn?: __string;
     /**
+     * The date and time the Channel was created.
+     */
+    CreatedAt?: __string;
+    /**
      * A short text description of the Channel.
      */
     Description?: __string;
@@ -1351,6 +1391,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     ChannelId?: __string;
     CmafPackage?: CmafPackage;
+    /**
+     * The date and time the OriginEndpoint was created.
+     */
+    CreatedAt?: __string;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.

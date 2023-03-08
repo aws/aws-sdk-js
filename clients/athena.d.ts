@@ -276,11 +276,11 @@ declare class Athena extends Service {
    */
   listCalculationExecutions(callback?: (err: AWSError, data: Athena.Types.ListCalculationExecutionsResponse) => void): Request<Athena.Types.ListCalculationExecutionsResponse, AWSError>;
   /**
-   * Lists the data catalogs in the current Amazon Web Services account.
+   * Lists the data catalogs in the current Amazon Web Services account.  In the Athena console, data catalogs are listed as "data sources" on the Data sources page under the Data source name column. 
    */
   listDataCatalogs(params: Athena.Types.ListDataCatalogsInput, callback?: (err: AWSError, data: Athena.Types.ListDataCatalogsOutput) => void): Request<Athena.Types.ListDataCatalogsOutput, AWSError>;
   /**
-   * Lists the data catalogs in the current Amazon Web Services account.
+   * Lists the data catalogs in the current Amazon Web Services account.  In the Athena console, data catalogs are listed as "data sources" on the Data sources page under the Data source name column. 
    */
   listDataCatalogs(callback?: (err: AWSError, data: Athena.Types.ListDataCatalogsOutput) => void): Request<Athena.Types.ListDataCatalogsOutput, AWSError>;
   /**
@@ -997,7 +997,7 @@ declare namespace Athena {
   }
   export interface EngineVersion {
     /**
-     * The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.
+     * The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including AUTO. The default is AUTO.
      */
     SelectedEngineVersion?: NameString;
     /**
@@ -1917,6 +1917,10 @@ declare namespace Athena {
      * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
      */
     ExecutionParameters?: ExecutionParameters;
+    /**
+     * The kind of query statement that was run.
+     */
+    SubstatementType?: String;
   }
   export interface QueryExecutionContext {
     /**

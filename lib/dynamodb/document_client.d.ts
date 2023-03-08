@@ -256,7 +256,7 @@ export namespace DocumentClient {
     /**
      * The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
      */
-    TargetValue: Double;
+    TargetValue: DoubleObject;
   }
   export interface AutoScalingTargetTrackingScalingPolicyConfigurationUpdate {
     /**
@@ -274,7 +274,7 @@ export namespace DocumentClient {
     /**
      * The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2).
      */
-    TargetValue: Double;
+    TargetValue: DoubleObject;
   }
   export type Backfilling = boolean;
   export type BackupArn = string;
@@ -735,6 +735,10 @@ export namespace DocumentClient {
      * The table class of the new table. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
      */
     TableClass?: TableClass;
+    /**
+     * Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+     */
+    DeletionProtectionEnabled?: DeletionProtectionEnabled;
   }
   export interface CreateTableOutput {
     /**
@@ -883,6 +887,7 @@ export namespace DocumentClient {
      */
     TableDescription?: TableDescription;
   }
+  export type DeletionProtectionEnabled = boolean;
   export interface DescribeBackupInput {
     /**
      * The Amazon Resource Name (ARN) associated with the backup.
@@ -1076,7 +1081,7 @@ export namespace DocumentClient {
     TimeToLiveDescription?: TimeToLiveDescription;
   }
   export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
-  export type Double = number;
+  export type DoubleObject = number;
   export interface Endpoint {
     /**
      * IP address of the endpoint.
@@ -1439,11 +1444,11 @@ export namespace DocumentClient {
     /**
      * The total size of the specified index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    IndexSizeBytes?: Long;
+    IndexSizeBytes?: LongObject;
     /**
      * The number of items in the specified index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    ItemCount?: Long;
+    ItemCount?: LongObject;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the index.
      */
@@ -1635,7 +1640,7 @@ export namespace DocumentClient {
     /**
      *  The total size of data processed from the source file, in Bytes. 
      */
-    ProcessedSizeBytes?: Long;
+    ProcessedSizeBytes?: LongObject;
     /**
      *  The total number of items processed from the source file. 
      */
@@ -2010,11 +2015,11 @@ export namespace DocumentClient {
     /**
      * The total size of the specified index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    IndexSizeBytes?: Long;
+    IndexSizeBytes?: LongObject;
     /**
      * The number of items in the specified index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    ItemCount?: Long;
+    ItemCount?: LongObject;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the index.
      */
@@ -2038,6 +2043,7 @@ export namespace DocumentClient {
   export type LocalSecondaryIndexList = LocalSecondaryIndex[];
   export type LocalSecondaryIndexes = LocalSecondaryIndexInfo[];
   export type Long = number;
+  export type LongObject = number;
   export type MapAttributeValue = {[key: string]: AttributeValue};
   export type NextTokenString = string;
   export type NonKeyAttributeName = string;
@@ -2825,7 +2831,7 @@ export namespace DocumentClient {
     /**
      * Size of the table in bytes. Note that this is an approximate value.
      */
-    TableSizeBytes?: Long;
+    TableSizeBytes?: LongObject;
     /**
      * Schema of the table. 
      */
@@ -2964,11 +2970,11 @@ export namespace DocumentClient {
     /**
      * The total size of the specified table, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    TableSizeBytes?: Long;
+    TableSizeBytes?: LongObject;
     /**
      * The number of items in the specified table. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.
      */
-    ItemCount?: Long;
+    ItemCount?: LongObject;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the table.
      */
@@ -3025,6 +3031,10 @@ export namespace DocumentClient {
      * Contains details of the table class.
      */
     TableClassSummary?: TableClassSummary;
+    /**
+     * Indicates whether deletion protection is enabled (true) or disabled (false) on the table.
+     */
+    DeletionProtectionEnabled?: DeletionProtectionEnabled;
   }
   export type TableId = string;
   export type TableName = string;
@@ -3417,6 +3427,10 @@ export namespace DocumentClient {
      * The table class of the table to be updated. Valid values are STANDARD and STANDARD_INFREQUENT_ACCESS.
      */
     TableClass?: TableClass;
+    /**
+     * Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+     */
+    DeletionProtectionEnabled?: DeletionProtectionEnabled;
   }
   export interface UpdateTableOutput {
     /**

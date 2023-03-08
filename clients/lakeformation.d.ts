@@ -133,6 +133,14 @@ declare class LakeFormation extends Service {
    */
   extendTransaction(callback?: (err: AWSError, data: LakeFormation.Types.ExtendTransactionResponse) => void): Request<LakeFormation.Types.ExtendTransactionResponse, AWSError>;
   /**
+   * Returns a data cells filter.
+   */
+  getDataCellsFilter(params: LakeFormation.Types.GetDataCellsFilterRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetDataCellsFilterResponse) => void): Request<LakeFormation.Types.GetDataCellsFilterResponse, AWSError>;
+  /**
+   * Returns a data cells filter.
+   */
+  getDataCellsFilter(callback?: (err: AWSError, data: LakeFormation.Types.GetDataCellsFilterResponse) => void): Request<LakeFormation.Types.GetDataCellsFilterResponse, AWSError>;
+  /**
    * Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. 
    */
   getDataLakeSettings(params: LakeFormation.Types.GetDataLakeSettingsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetDataLakeSettingsResponse) => void): Request<LakeFormation.Types.GetDataLakeSettingsResponse, AWSError>;
@@ -340,6 +348,14 @@ declare class LakeFormation extends Service {
    * Starts a new transaction and returns its transaction ID. Transaction IDs are opaque objects that you can use to identify a transaction.
    */
   startTransaction(callback?: (err: AWSError, data: LakeFormation.Types.StartTransactionResponse) => void): Request<LakeFormation.Types.StartTransactionResponse, AWSError>;
+  /**
+   * Updates a data cell filter.
+   */
+  updateDataCellsFilter(params: LakeFormation.Types.UpdateDataCellsFilterRequest, callback?: (err: AWSError, data: LakeFormation.Types.UpdateDataCellsFilterResponse) => void): Request<LakeFormation.Types.UpdateDataCellsFilterResponse, AWSError>;
+  /**
+   * Updates a data cell filter.
+   */
+  updateDataCellsFilter(callback?: (err: AWSError, data: LakeFormation.Types.UpdateDataCellsFilterResponse) => void): Request<LakeFormation.Types.UpdateDataCellsFilterResponse, AWSError>;
   /**
    * Updates the list of possible values for the specified LF-tag key. If the LF-tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - "Update not allowed". Untag the attribute before deleting the LF-tag key's value. 
    */
@@ -622,6 +638,7 @@ declare namespace LakeFormation {
      * A wildcard with exclusions. You must specify either a ColumnNames list or the ColumnWildCard. 
      */
     ColumnWildcard?: ColumnWildcard;
+    VersionId?: VersionString;
   }
   export type DataCellsFilterList = DataCellsFilter[];
   export interface DataCellsFilterResource {
@@ -868,6 +885,30 @@ declare namespace LakeFormation {
     StringValueList?: StringValueList;
   }
   export type FilterConditionList = FilterCondition[];
+  export interface GetDataCellsFilterRequest {
+    /**
+     * The ID of the catalog to which the table belongs.
+     */
+    TableCatalogId: CatalogIdString;
+    /**
+     * A database in the Glue Data Catalog.
+     */
+    DatabaseName: NameString;
+    /**
+     * A table in the database.
+     */
+    TableName: NameString;
+    /**
+     * The name given by the user to the data filter cell.
+     */
+    Name: NameString;
+  }
+  export interface GetDataCellsFilterResponse {
+    /**
+     * A structure that describes certain columns on certain rows.
+     */
+    DataCellsFilter?: DataCellsFilter;
+  }
   export interface GetDataLakeSettingsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
@@ -1940,6 +1981,14 @@ declare namespace LakeFormation {
   export type TrueFalseString = string;
   export type TrustedResourceOwners = CatalogIdString[];
   export type URI = string;
+  export interface UpdateDataCellsFilterRequest {
+    /**
+     * A DataCellsFilter structure containing information about the data cells filter.
+     */
+    TableData: DataCellsFilter;
+  }
+  export interface UpdateDataCellsFilterResponse {
+  }
   export interface UpdateLFTagRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. 
@@ -2022,6 +2071,7 @@ declare namespace LakeFormation {
   }
   export type ValueString = string;
   export type ValueStringList = ValueString[];
+  export type VersionString = string;
   export interface VirtualObject {
     /**
      * The path to the Amazon S3 object. Must start with s3://

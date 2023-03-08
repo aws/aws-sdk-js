@@ -212,11 +212,11 @@ declare class Route53Resolver extends Service {
    */
   getFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
-   * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
    */
   getResolverConfig(params: Route53Resolver.Types.GetResolverConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverConfigResponse) => void): Request<Route53Resolver.Types.GetResolverConfigResponse, AWSError>;
   /**
-   * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
    */
   getResolverConfig(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverConfigResponse) => void): Request<Route53Resolver.Types.GetResolverConfigResponse, AWSError>;
   /**
@@ -340,11 +340,11 @@ declare class Route53Resolver extends Service {
    */
   listFirewallRules(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRulesResponse) => void): Request<Route53Resolver.Types.ListFirewallRulesResponse, AWSError>;
   /**
-   * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
+   * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
    */
   listResolverConfigs(params: Route53Resolver.Types.ListResolverConfigsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverConfigsResponse, AWSError>;
   /**
-   * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
+   * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
    */
   listResolverConfigs(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverConfigsResponse, AWSError>;
   /**
@@ -484,11 +484,11 @@ declare class Route53Resolver extends Service {
    */
   updateFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse, AWSError>;
   /**
-   * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
    */
   updateResolverConfig(params: Route53Resolver.Types.UpdateResolverConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverConfigResponse, AWSError>;
   /**
-   * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+   * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
    */
   updateResolverConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverConfigResponse, AWSError>;
   /**
@@ -500,11 +500,11 @@ declare class Route53Resolver extends Service {
    */
   updateResolverDnssecConfig(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverDnssecConfigResponse) => void): Request<Route53Resolver.Types.UpdateResolverDnssecConfigResponse, AWSError>;
   /**
-   * Updates the name of an inbound or an outbound Resolver endpoint. 
+   * Updates the name, or enpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. 
    */
   updateResolverEndpoint(params: Route53Resolver.Types.UpdateResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverEndpointResponse) => void): Request<Route53Resolver.Types.UpdateResolverEndpointResponse, AWSError>;
   /**
-   * Updates the name of an inbound or an outbound Resolver endpoint. 
+   * Updates the name, or enpoint type for an inbound or an outbound Resolver endpoint. You can only update between IPV4 and DUALSTACK, IPV6 endpoint type can't be updated to other type. 
    */
   updateResolverEndpoint(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverEndpointResponse) => void): Request<Route53Resolver.Types.UpdateResolverEndpointResponse, AWSError>;
   /**
@@ -608,7 +608,7 @@ declare namespace Route53Resolver {
      */
     ResolverRuleAssociation?: ResolverRuleAssociation;
   }
-  export type AutodefinedReverseFlag = "ENABLE"|"DISABLE"|string;
+  export type AutodefinedReverseFlag = "ENABLE"|"DISABLE"|"USE_LOCAL_RESOURCE_SETTING"|string;
   export type BlockOverrideDnsType = "CNAME"|string;
   export type BlockOverrideDomain = string;
   export type BlockOverrideTtl = number;
@@ -728,6 +728,10 @@ declare namespace Route53Resolver {
      * A list of the tag keys and values that you want to associate with the endpoint.
      */
     Tags?: TagList;
+    /**
+     *  For the endpoint type you can choose either IPv4, IPv6. or dual-stack. A dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This endpoint type is applied to all IP addresses. 
+     */
+    ResolverEndpointType?: ResolverEndpointType;
   }
   export interface CreateResolverEndpointResponse {
     /**
@@ -1038,7 +1042,7 @@ declare namespace Route53Resolver {
   export type FirewallDomainName = string;
   export type FirewallDomainUpdateOperation = "ADD"|"REMOVE"|"REPLACE"|string;
   export type FirewallDomains = FirewallDomainName[];
-  export type FirewallFailOpenStatus = "ENABLED"|"DISABLED"|string;
+  export type FirewallFailOpenStatus = "ENABLED"|"DISABLED"|"USE_LOCAL_RESOURCE_SETTING"|string;
   export interface FirewallRule {
     /**
      * The unique identifier of the firewall rule group of the rule. 
@@ -1289,7 +1293,7 @@ declare namespace Route53Resolver {
   }
   export interface GetResolverConfigResponse {
     /**
-     * Information about the behavior configuration of Route 53 Resolver behavior for the VPC you specified in the GetResolverConfig request.
+     * Information about the behavior configuration of Route 53 Resolver behavior for the VPC you specified in the GetResolverConfig request.
      */
     ResolverConfig?: ResolverConfig;
   }
@@ -1413,7 +1417,7 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     *  
+     * Status of the import request.
      */
     Status?: FirewallDomainListStatus;
     /**
@@ -1429,9 +1433,13 @@ declare namespace Route53Resolver {
      */
     SubnetId: SubnetId;
     /**
-     * The IP address that you want to use for DNS queries.
+     * The IPv4 address that you want to use for DNS queries.
      */
     Ip?: Ip;
+    /**
+     *  The IPv6 address that you want to use for DNS queries. 
+     */
+    Ipv6?: Ipv6;
   }
   export interface IpAddressResponse {
     /**
@@ -1443,9 +1451,13 @@ declare namespace Route53Resolver {
      */
     SubnetId?: SubnetId;
     /**
-     * One IP address that the Resolver endpoint uses for DNS queries.
+     * One IPv4 address that the Resolver endpoint uses for DNS queries.
      */
     Ip?: Ip;
+    /**
+     *  One IPv6 address that the Resolver endpoint uses for DNS queries. 
+     */
+    Ipv6?: Ipv6;
     /**
      * A status code that gives the current status of the request.
      */
@@ -1463,7 +1475,7 @@ declare namespace Route53Resolver {
      */
     ModificationTime?: Rfc3339TimeString;
   }
-  export type IpAddressStatus = "CREATING"|"FAILED_CREATION"|"ATTACHING"|"ATTACHED"|"REMAP_DETACHING"|"REMAP_ATTACHING"|"DETACHING"|"FAILED_RESOURCE_GONE"|"DELETING"|"DELETE_FAILED_FAS_EXPIRED"|string;
+  export type IpAddressStatus = "CREATING"|"FAILED_CREATION"|"ATTACHING"|"ATTACHED"|"REMAP_DETACHING"|"REMAP_ATTACHING"|"DETACHING"|"FAILED_RESOURCE_GONE"|"DELETING"|"DELETE_FAILED_FAS_EXPIRED"|"UPDATING"|string;
   export interface IpAddressUpdate {
     /**
      *  Only when removing an IP address from a Resolver endpoint: The ID of the IP address that you want to remove. To get this ID, use GetResolverEndpoint.
@@ -1474,12 +1486,17 @@ declare namespace Route53Resolver {
      */
     SubnetId?: SubnetId;
     /**
-     * The new IP address.
+     * The new IPv4 address.
      */
     Ip?: Ip;
+    /**
+     *  The new IPv6 address. 
+     */
+    Ipv6?: Ipv6;
   }
   export type IpAddressesRequest = IpAddressRequest[];
   export type IpAddressesResponse = IpAddressResponse[];
+  export type Ipv6 = string;
   export type ListDomainMaxResults = number;
   export type ListFirewallConfigsMaxResult = number;
   export interface ListFirewallConfigsRequest {
@@ -1647,7 +1664,7 @@ declare namespace Route53Resolver {
   }
   export interface ListResolverConfigsResponse {
     /**
-     * If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListResolverConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
+     * If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListResolverConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
      */
     NextToken?: NextToken;
     /**
@@ -1949,7 +1966,7 @@ declare namespace Route53Resolver {
      */
     ReturnValue?: Boolean;
   }
-  export type ResolverAutodefinedReverseStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export type ResolverAutodefinedReverseStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string;
   export interface ResolverConfig {
     /**
      * ID for the Resolver configuration.
@@ -1964,12 +1981,12 @@ declare namespace Route53Resolver {
      */
     OwnerId?: AccountId;
     /**
-     *  The status of whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. The status can be one of following:  Status of the rules generated by VPCs based on CIDR/Region for reverse DNS resolution. The status can be one of following:    ENABLING: Autodefined rules for reverse DNS lookups are being enabled but are not complete.    ENABLED: Autodefined rules for reverse DNS lookups are enabled.    DISABLING: Autodefined rules for reverse DNS lookups are being disabled but are not complete.    DISABLED: Autodefined rules for reverse DNS lookups are disabled.  
+     *  The status of whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. The status can be one of following:    ENABLING: Autodefined rules for reverse DNS lookups are being enabled but are not complete.    ENABLED: Autodefined rules for reverse DNS lookups are enabled.    DISABLING: Autodefined rules for reverse DNS lookups are being disabled but are not complete.    DISABLED: Autodefined rules for reverse DNS lookups are disabled.  
      */
     AutodefinedReverse?: ResolverAutodefinedReverseStatus;
   }
   export type ResolverConfigList = ResolverConfig[];
-  export type ResolverDNSSECValidationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|string;
+  export type ResolverDNSSECValidationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string;
   export interface ResolverDnssecConfig {
     /**
      * The ID for a configuration for DNSSEC validation.
@@ -2038,9 +2055,14 @@ declare namespace Route53Resolver {
      * The date and time that the endpoint was last modified, in Unix time format and Coordinated Universal Time (UTC).
      */
     ModificationTime?: Rfc3339TimeString;
+    /**
+     *  The Resolver endpoint IP address type. 
+     */
+    ResolverEndpointType?: ResolverEndpointType;
   }
   export type ResolverEndpointDirection = "INBOUND"|"OUTBOUND"|string;
   export type ResolverEndpointStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"AUTO_RECOVERING"|"ACTION_NEEDED"|"DELETING"|string;
+  export type ResolverEndpointType = "IPV6"|"IPV4"|"DUALSTACK"|string;
   export type ResolverEndpoints = ResolverEndpoint[];
   export interface ResolverQueryLogConfig {
     /**
@@ -2263,13 +2285,17 @@ declare namespace Route53Resolver {
   export type TagValue = string;
   export interface TargetAddress {
     /**
-     * One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+     * One IPv4 address that you want to forward DNS queries to.
      */
-    Ip: Ip;
+    Ip?: Ip;
     /**
      * The port at Ip that you want to forward DNS queries to.
      */
     Port?: Port;
+    /**
+     *  One IPv6 address that you want to forward DNS queries to. 
+     */
+    Ipv6?: Ipv6;
   }
   export type TargetList = TargetAddress[];
   export type Unsigned = number;
@@ -2311,7 +2337,7 @@ declare namespace Route53Resolver {
      */
     Operation: FirewallDomainUpdateOperation;
     /**
-     * A list of domains to use in the update operation. Each domain specification in your domain list must satisfy the following requirements:    It can optionally start with * (asterisk).   With the exception of the optional starting asterisk, it must only contain the following characters: A-Z, a-z, 0-9, - (hyphen).   It must be from 1-255 characters in length.   
+     * A list of domains to use in the update operation.  There is a limit of 1000 domains per request.  Each domain specification in your domain list must satisfy the following requirements:    It can optionally start with * (asterisk).   With the exception of the optional starting asterisk, it must only contain the following characters: A-Z, a-z, 0-9, - (hyphen).   It must be from 1-255 characters in length.   
      */
     Domains: FirewallDomains;
   }
@@ -2325,7 +2351,7 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     *  
+     * Status of the UpdateFirewallDomains request.
      */
     Status?: FirewallDomainListStatus;
     /**
@@ -2401,13 +2427,24 @@ declare namespace Route53Resolver {
      */
     FirewallRule?: FirewallRule;
   }
+  export interface UpdateIpAddress {
+    /**
+     *  The ID of the IP address, specified by the ResolverEndpointId. 
+     */
+    IpId: ResourceId;
+    /**
+     *  The IPv6 address that you want to use for DNS queries. 
+     */
+    Ipv6: Ipv6;
+  }
+  export type UpdateIpAddresses = UpdateIpAddress[];
   export interface UpdateResolverConfigRequest {
     /**
      * Resource ID of the Amazon VPC that you want to update the Resolver configuration for.
      */
     ResourceId: ResourceId;
     /**
-     * Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. Disabling this option will also affect EC2-Classic instances using ClassicLink. For more information, see ClassicLink in the Amazon EC2 guide.  It can take some time for the status change to be completed.  
+     * Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. Disabling this option will also affect EC2-Classic instances using ClassicLink. For more information, see ClassicLink in the Amazon EC2 guide.  We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 guide and the blog EC2-Classic Networking is Retiring – Here’s How to Prepare.   It can take some time for the status change to be completed.  
      */
     AutodefinedReverseFlag: AutodefinedReverseFlag;
   }
@@ -2442,6 +2479,14 @@ declare namespace Route53Resolver {
      * The name of the Resolver endpoint that you want to update.
      */
     Name?: Name;
+    /**
+     *  Specifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries. 
+     */
+    ResolverEndpointType?: ResolverEndpointType;
+    /**
+     *  Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack. 
+     */
+    UpdateIpAddresses?: UpdateIpAddresses;
   }
   export interface UpdateResolverEndpointResponse {
     /**
@@ -2465,7 +2510,7 @@ declare namespace Route53Resolver {
      */
     ResolverRule?: ResolverRule;
   }
-  export type Validation = "ENABLE"|"DISABLE"|string;
+  export type Validation = "ENABLE"|"DISABLE"|"USE_LOCAL_RESOURCE_SETTING"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -711,6 +711,11 @@
           "locationName": "authorization",
           "shape": "Authorization"
         },
+        "CreatedAt": {
+          "documentation": "The time the PackagingGroup was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DomainName": {
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
           "locationName": "domainName",
@@ -873,6 +878,11 @@
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
         },
+        "CreatedAt": {
+          "documentation": "The time the PackagingConfiguration was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DashPackage": {
           "locationName": "dashPackage",
           "shape": "DashPackage"
@@ -939,6 +949,11 @@
           "locationName": "authorization",
           "shape": "Authorization"
         },
+        "CreatedAt": {
+          "documentation": "The time the PackagingGroup was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DomainName": {
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
           "locationName": "domainName",
@@ -997,7 +1012,7 @@
           "shape": "Profile"
         },
         "ScteMarkersSource": {
-          "documentation": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content. The MANIFEST value is compatible with source HLS playlists using the SCTE-35 Enhanced syntax (#EXT-OATCLS-SCTE35 tags). SCTE-35 Elemental and SCTE-35 Daterange syntaxes are not supported with this option.",
+          "documentation": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
           "locationName": "scteMarkersSource",
           "shape": "ScteMarkersSource"
         },
@@ -1193,6 +1208,11 @@
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
         },
+        "CreatedAt": {
+          "documentation": "The time the PackagingConfiguration was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DashPackage": {
           "locationName": "dashPackage",
           "shape": "DashPackage"
@@ -1251,6 +1271,11 @@
         "Authorization": {
           "locationName": "authorization",
           "shape": "Authorization"
+        },
+        "CreatedAt": {
+          "documentation": "The time the PackagingGroup was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
         },
         "DomainName": {
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
@@ -1630,6 +1655,11 @@
           "locationName": "cmafPackage",
           "shape": "CmafPackage"
         },
+        "CreatedAt": {
+          "documentation": "The time the PackagingConfiguration was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
+        },
         "DashPackage": {
           "locationName": "dashPackage",
           "shape": "DashPackage"
@@ -1675,6 +1705,11 @@
         "Authorization": {
           "locationName": "authorization",
           "shape": "Authorization"
+        },
+        "CreatedAt": {
+          "documentation": "The time the PackagingGroup was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
         },
         "DomainName": {
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
@@ -1888,6 +1923,11 @@
         "Authorization": {
           "locationName": "authorization",
           "shape": "Authorization"
+        },
+        "CreatedAt": {
+          "documentation": "The time the PackagingGroup was created.",
+          "locationName": "createdAt",
+          "shape": "__string"
         },
         "DomainName": {
           "documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
