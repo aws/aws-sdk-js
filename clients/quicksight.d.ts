@@ -284,11 +284,11 @@ declare class QuickSight extends Service {
    */
   deleteThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeAliasResponse) => void): Request<QuickSight.Types.DeleteThemeAliasResponse, AWSError>;
   /**
-   * Deletes the Amazon QuickSight user that is associated with the identity of the Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
+   * Deletes the Amazon QuickSight user that is associated with the identity of the IAM user or role that's making the call. The IAM user isn't deleted as a result of this call. 
    */
   deleteUser(params: QuickSight.Types.DeleteUserRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
   /**
-   * Deletes the Amazon QuickSight user that is associated with the identity of the Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
+   * Deletes the Amazon QuickSight user that is associated with the identity of the IAM user or role that's making the call. The IAM user isn't deleted as a result of this call. 
    */
   deleteUser(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
   /**
@@ -1225,7 +1225,7 @@ declare namespace QuickSight {
      */
     Message?: NonEmptyString;
     /**
-     * 
+     * Lists the violated entities that caused the analysis error
      */
     ViolatedEntities?: EntityList;
   }
@@ -7686,7 +7686,7 @@ declare namespace QuickSight {
      */
     SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
     /**
-     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group, IAM users and IAM role-based sessions.
+     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group, IAM users and IAM role-based sessions.
      */
     UserArn?: Arn;
   }
@@ -10703,6 +10703,10 @@ declare namespace QuickSight {
      * The row alternate color options (widget status, row alternate colors).
      */
     RowAlternateColorOptions?: RowAlternateColorOptions;
+    /**
+     * The visibility setting of a pivot table's collapsed row dimension fields. If the value of this structure is HIDDEN, all collapsed columns in a pivot table are automatically hidden. The default value is VISIBLE.
+     */
+    CollapsedRowDimensionsVisibility?: Visibility;
   }
   export interface PivotTablePaginatedReportOptions {
     /**
@@ -11235,11 +11239,27 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface RegisteredUserConsoleFeatureConfigurations {
+    /**
+     * The state persistence configurations of an embedded Amazon QuickSight console.
+     */
+    StatePersistence?: StatePersistenceConfigurations;
+  }
   export interface RegisteredUserDashboardEmbeddingConfiguration {
     /**
      * The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard if the user has permissions to view it. If the user does not have permission to view this dashboard, they see a permissions error message.
      */
     InitialDashboardId: ShortRestrictiveResourceId;
+    /**
+     * The feature configurations of an embbedded Amazon QuickSight dashboard.
+     */
+    FeatureConfigurations?: RegisteredUserDashboardFeatureConfigurations;
+  }
+  export interface RegisteredUserDashboardFeatureConfigurations {
+    /**
+     * The state persistence settings of an embedded dashboard.
+     */
+    StatePersistence?: StatePersistenceConfigurations;
   }
   export interface RegisteredUserDashboardVisualEmbeddingConfiguration {
     /**
@@ -11276,6 +11296,10 @@ declare namespace QuickSight {
      * The initial URL path for the Amazon QuickSight console. InitialPath is required. The entry point URL is constrained to the following paths:    /start     /start/analyses     /start/dashboards     /start/favorites     /dashboards/DashboardId. DashboardId is the actual ID key from the Amazon QuickSight console URL of the dashboard.    /analyses/AnalysisId. AnalysisId is the actual ID key from the Amazon QuickSight console URL of the analysis.  
      */
     InitialPath?: EntryPath;
+    /**
+     * The embedding configuration of an embedded Amazon QuickSight console.
+     */
+    FeatureConfigurations?: RegisteredUserConsoleFeatureConfigurations;
   }
   export interface RelationalTable {
     /**
@@ -12355,6 +12379,12 @@ declare namespace QuickSight {
      * A Boolean option to control whether SSL should be disabled.
      */
     DisableSsl?: Boolean;
+  }
+  export interface StatePersistenceConfigurations {
+    /**
+     * Determines if a Amazon QuickSight dashboard's state persistence settings are turned on or off.
+     */
+    Enabled: Boolean;
   }
   export type Status = "ENABLED"|"DISABLED"|string;
   export type StatusCode = number;
@@ -13865,7 +13895,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The default namespace for this Amazon Web Services account. Currently, the default is default. Identity and Access Management (IAM) users that register for the first time with Amazon QuickSight provide an email address that becomes associated with the default namespace. 
+     * The default namespace for this Amazon Web Services account. Currently, the default is default. IAM users that register for the first time with Amazon QuickSight provide an email address that becomes associated with the default namespace. 
      */
     DefaultNamespace: Namespace;
     /**
@@ -14882,7 +14912,7 @@ declare namespace QuickSight {
      */
     IdentityType?: IdentityType;
     /**
-     * The active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.
+     * The active status of user. When you create an Amazon QuickSight user that's not an IAM user or an Active Directory user, that user is inactive until they sign in and provide a password.
      */
     Active?: Boolean;
     /**

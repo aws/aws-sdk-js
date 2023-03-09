@@ -620,6 +620,14 @@ declare class Connect extends Service {
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
+   * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for last the 14 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
+   */
+  getMetricDataV2(params: Connect.Types.GetMetricDataV2Request, callback?: (err: AWSError, data: Connect.Types.GetMetricDataV2Response) => void): Request<Connect.Types.GetMetricDataV2Response, AWSError>;
+  /**
+   * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for last the 14 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
+   */
+  getMetricDataV2(callback?: (err: AWSError, data: Connect.Types.GetMetricDataV2Response) => void): Request<Connect.Types.GetMetricDataV2Response, AWSError>;
+  /**
    * Gets details about a specific task template in the specified Amazon Connect instance.
    */
   getTaskTemplate(params: Connect.Types.GetTaskTemplateRequest, callback?: (err: AWSError, data: Connect.Types.GetTaskTemplateResponse) => void): Request<Connect.Types.GetTaskTemplateResponse, AWSError>;
@@ -3209,6 +3217,9 @@ declare namespace Connect {
     Channel?: Channel;
     RoutingProfile?: RoutingProfileReference;
   }
+  export type DimensionsV2Key = string;
+  export type DimensionsV2Map = {[key: string]: DimensionsV2Value};
+  export type DimensionsV2Value = string;
   export type DirectoryAlias = string;
   export type DirectoryId = string;
   export type DirectoryType = "SAML"|"CONNECT_MANAGED"|"EXISTING_DIRECTORY"|string;
@@ -3378,6 +3389,17 @@ declare namespace Connect {
   }
   export type EventBridgeActionName = string;
   export type EventSourceName = "OnPostCallAnalysisAvailable"|"OnRealTimeCallAnalysisAvailable"|"OnPostChatAnalysisAvailable"|"OnZendeskTicketCreate"|"OnZendeskTicketStatusUpdate"|"OnSalesforceCaseCreate"|string;
+  export interface FilterV2 {
+    /**
+     * The key to use for filtering data. For example, QUEUE, ROUTING_PROFILE, AGENT, CHANNEL, AGENT_HIERARCHY_LEVEL_ONE, AGENT_HIERARCHY_LEVEL_TWO, AGENT_HIERARCHY_LEVEL_THREE, AGENT_HIERARCHY_LEVEL_FOUR, AGENT_HIERARCHY_LEVEL_FIVE. There must be at least 1 key and a maximum 5 keys. 
+     */
+    FilterKey?: ResourceArnOrId;
+    /**
+     * The identifiers to use for filtering data. For example, if you have a filter key of QUEUE, you would add queue IDs or ARNs in FilterValues. 
+     */
+    FilterValues?: FilterValueList;
+  }
+  export type FilterValueList = ResourceArnOrId[];
   export interface Filters {
     /**
      * The queues to use to filter the metrics. You should specify at least one queue, and can specify up to 100 queues per request. The GetCurrentMetricsData API in particular requires a queue when you include a Filter in your request. 
@@ -3392,6 +3414,7 @@ declare namespace Connect {
      */
     RoutingProfiles?: RoutingProfiles;
   }
+  export type FiltersV2List = FilterV2[];
   export type FunctionArn = string;
   export type FunctionArnsList = FunctionArn[];
   export interface GetContactAttributesRequest {
@@ -3558,6 +3581,50 @@ declare namespace Connect {
      */
     MetricResults?: HistoricalMetricResults;
   }
+  export interface GetMetricDataV2Request {
+    /**
+     * The Amazon Resource Name (ARN) of the resource. This includes the instanceId an Amazon Connect instance.
+     */
+    ResourceArn: ARN;
+    /**
+     * The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 14 days before the time of the request. Historical metrics are available for 14 days.
+     */
+    StartTime: Timestamp;
+    /**
+     * The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the retrieval of historical metrics data. The time must be later than the start time timestamp. The time range between the start and end time must be less than 24 hours.
+     */
+    EndTime: Timestamp;
+    /**
+     * The filters to apply to returned metrics. You can filter on the following resources:   Queues   Routing profiles   Agents   Channels   User hierarchy groups   At least one filter must be passed from queues, routing profiles, agents, or user hierarchy groups. To filter by phone number, see Create a historical metrics report in the Amazon Connect Administrator's Guide. Note the following limits:    Filter keys: A maximum of 5 filter keys are supported in a single request. Valid filter keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL | AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE     Filter values: A maximum of 100 filter values are supported in a single request. For example, a GetMetricDataV2 request can filter by 50 queues, 35 agents, and 15 routing profiles for a total of 100 filter values. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter key.  
+     */
+    Filters: FiltersV2List;
+    /**
+     * The grouping applied to the metrics that are returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values that are returned apply to the metrics for each queue. They are not aggregated for all queues. If no grouping is specified, a summary of all metrics is returned. Valid grouping keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL | AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE 
+     */
+    Groupings?: GroupingsV2;
+    /**
+     * The metrics to retrieve. Specify the name, groupings, and filters for each metric. The following historical metrics are available. For a description of each metric, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  AGENT_ADHERENT_TIME  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy   AGENT_NON_RESPONSE  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy   AGENT_OCCUPANCY  Unit: Percentage Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy   AGENT_SCHEDULE_ADHERENCE  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AGENT_SCHEDULED_TIME  This metric is available only in Amazon Web Services Regions where Forecasting, capacity planning, and scheduling is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_ABANDON_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_AFTER_CONTACT_WORK_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_AGENT_CONNECTING_TIME  Unit: Seconds Valid metric filter key: INITIATION_METHOD. For now, this metric only supports the following as INITIATION_METHOD: INBOUND | OUTBOUND | CALLBACK | API  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_HANDLE_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_INTERACTION_AND_HOLD_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  AVG_INTERACTION_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile  AVG_QUEUE_ANSWER_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile  CONTACTS_ABANDONED  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  CONTACTS_CREATED  Unit: Count Valid metric filter key: INITIATION_METHOD  Valid groupings and filters: Queue, Channel, Routing Profile  CONTACTS_HANDLED  Unit: Count Valid metric filter key: INITIATION_METHOD, DISCONNECT_REASON  Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  CONTACTS_HOLD_ABANDONS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  CONTACTS_QUEUED  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  CONTACTS_TRANSFERRED_OUT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  CONTACTS_TRANSFERRED_OUT_BY_AGENT  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  CONTACTS_TRANSFERRED_OUT_FROM_QUEUE  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  MAX_QUEUED_TIME  Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy  SERVICE_LEVEL  You can include up to 20 SERVICE_LEVEL metrics in a request. Unit: Percent Valid groupings and filters: Queue, Channel, Routing Profile Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").   SUM_CONTACTS_ANSWERED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile  SUM_CONTACTS_ABANDONED_IN_X  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile  SUM_CONTACTS_DISCONNECTED   Valid metric filter key: DISCONNECT_REASON  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile  SUM_RETRY_CALLBACK_ATTEMPTS  Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile  
+     */
+    Metrics: MetricsV2;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+  }
+  export interface GetMetricDataV2Response {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * Information about the metrics requested in the API request If no grouping is specified, a summary of metric data is returned. 
+     */
+    MetricResults?: MetricResultsV2;
+  }
   export interface GetTaskTemplateRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3647,7 +3714,9 @@ declare namespace Connect {
     Arn?: TrafficDistributionGroupArn;
   }
   export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|string;
+  export type GroupingV2 = string;
   export type Groupings = Grouping[];
+  export type GroupingsV2 = GroupingV2[];
   export interface HierarchyGroup {
     /**
      * The identifier of the hierarchy group.
@@ -5052,6 +5121,56 @@ declare namespace Connect {
      */
     Concurrency: Concurrency;
   }
+  export type MetricDataCollectionsV2 = MetricDataV2[];
+  export interface MetricDataV2 {
+    /**
+     * The metric name, thresholds, and metric filters of the returned metric.
+     */
+    Metric?: MetricV2;
+    /**
+     * The corresponding value of the metric returned in the response.
+     */
+    Value?: Value;
+  }
+  export interface MetricFilterV2 {
+    /**
+     * The key to use for filtering data.  Valid metric filter keys: INITIATION_METHOD, DISCONNECT_REASON 
+     */
+    MetricFilterKey?: String;
+    /**
+     * The values to use for filtering data.  Valid metric filter values for INITIATION_METHOD: INBOUND | OUTBOUND | TRANSFER | QUEUE_TRANSFER | CALLBACK | API  Valid metric filter values for DISCONNECT_REASON: CUSTOMER_DISCONNECT | AGENT_DISCONNECT | THIRD_PARTY_DISCONNECT | TELECOM_PROBLEM | BARGED | CONTACT_FLOW_DISCONNECT | OTHER | EXPIRED | API 
+     */
+    MetricFilterValues?: MetricFilterValueList;
+  }
+  export type MetricFilterValueList = String[];
+  export type MetricFiltersV2List = MetricFilterV2[];
+  export type MetricNameV2 = string;
+  export interface MetricResultV2 {
+    /**
+     * The dimension for the metrics.
+     */
+    Dimensions?: DimensionsV2Map;
+    /**
+     * The set of metrics.
+     */
+    Collections?: MetricDataCollectionsV2;
+  }
+  export type MetricResultsV2 = MetricResultV2[];
+  export interface MetricV2 {
+    /**
+     * The name of the metric.
+     */
+    Name?: MetricNameV2;
+    /**
+     * Contains information about the threshold for service level metrics.
+     */
+    Threshold?: ThresholdCollections;
+    /**
+     * Contains the filters to be used when returning data.
+     */
+    MetricFilters?: MetricFiltersV2List;
+  }
+  export type MetricsV2 = MetricV2[];
   export type MinutesLimit60 = number;
   export type MonitorCapability = "SILENT_MONITOR"|"BARGE"|string;
   export interface MonitorContactRequest {
@@ -5544,6 +5663,7 @@ declare namespace Connect {
     Id?: TaskTemplateFieldIdentifier;
   }
   export type RequiredTaskTemplateFields = RequiredFieldInfo[];
+  export type ResourceArnOrId = string;
   export interface ResumeContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -6639,6 +6759,17 @@ declare namespace Connect {
      * The type of comparison. Only "less than" (LT) comparisons are supported.
      */
     Comparison?: Comparison;
+    /**
+     * The threshold value to compare.
+     */
+    ThresholdValue?: ThresholdValue;
+  }
+  export type ThresholdCollections = ThresholdV2[];
+  export interface ThresholdV2 {
+    /**
+     * The type of comparison. Only "less than" (LT) comparisons are supported.
+     */
+    Comparison?: ResourceArnOrId;
     /**
      * The threshold value to compare.
      */

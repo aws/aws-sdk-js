@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1331.0-->
+<!--LATEST=2.1332.0-->
 <!--ENTRYINSERT-->
+
+## 2.1332.0
+* feature: CodeArtifact: This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.
+* feature: Connect: This release adds a new API, GetMetricDataV2, which returns metric data for Amazon Connect.
+* feature: Evidently: Updated entity override documentation
+* feature: QuickSight: This release has two changes: add state persistence feature for embedded dashboard and console in GenerateEmbedUrlForRegisteredUser API; add properties for hidden collapsed row dimensions in PivotTableOptions.
+* feature: RedshiftData: Added support for Redshift Serverless workgroup-arn wherever the WorkgroupName parameter is available.
+* feature: SESV2: This release introduces a new recommendation in Virtual Deliverability Manager Advisor, which detects missing or misconfigured Brand Indicator for Message Identification (BIMI) DNS records for customer sending identities.
+* feature: SageMaker: Amazon SageMaker Inference now allows SSM access to customer's model container by setting the "EnableSSMAccess" parameter for a ProductionVariant in CreateEndpointConfig API.
+* feature: ServiceDiscovery: Updated all AWS Cloud Map APIs to provide consistent throttling exception (RequestLimitExceeded)
 
 ## 2.1331.0
 * feature: Athena: A new field SubstatementType is added to GetQueryExecution API, so customers have an error free way to detect the query type and interpret the result.

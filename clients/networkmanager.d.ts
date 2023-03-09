@@ -572,11 +572,11 @@ declare class NetworkManager extends Service {
    */
   putResourcePolicy(callback?: (err: AWSError, data: NetworkManager.Types.PutResourcePolicyResponse) => void): Request<NetworkManager.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Registers a transit gateway in your global network. The transit gateway can be in any Amazon Web Services Region, but it must be owned by the same Amazon Web Services account that owns the global network. You cannot register a transit gateway in more than one global network.
+   * Registers a transit gateway in your global network. Not all Regions support transit gateways for global networks. For a list of the supported Regions, see Region Availability in the Amazon Web Services Transit Gateways for Global Networks User Guide. The transit gateway can be in any of the supported Amazon Web Services Regions, but it must be owned by the same Amazon Web Services account that owns the global network. You cannot register a transit gateway in more than one global network.
    */
   registerTransitGateway(params: NetworkManager.Types.RegisterTransitGatewayRequest, callback?: (err: AWSError, data: NetworkManager.Types.RegisterTransitGatewayResponse) => void): Request<NetworkManager.Types.RegisterTransitGatewayResponse, AWSError>;
   /**
-   * Registers a transit gateway in your global network. The transit gateway can be in any Amazon Web Services Region, but it must be owned by the same Amazon Web Services account that owns the global network. You cannot register a transit gateway in more than one global network.
+   * Registers a transit gateway in your global network. Not all Regions support transit gateways for global networks. For a list of the supported Regions, see Region Availability in the Amazon Web Services Transit Gateways for Global Networks User Guide. The transit gateway can be in any of the supported Amazon Web Services Regions, but it must be owned by the same Amazon Web Services account that owns the global network. You cannot register a transit gateway in more than one global network.
    */
   registerTransitGateway(callback?: (err: AWSError, data: NetworkManager.Types.RegisterTransitGatewayResponse) => void): Request<NetworkManager.Types.RegisterTransitGatewayResponse, AWSError>;
   /**
@@ -3823,7 +3823,7 @@ declare namespace NetworkManager {
      */
     PeeringId?: PeeringId;
     /**
-     * The ARN of the transit gateway attachment route table.
+     * The ARN of the transit gateway attachment route table. For example, "TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456".
      */
     TransitGatewayRouteTableArn?: TransitGatewayRouteTableArn;
   }

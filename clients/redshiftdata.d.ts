@@ -127,7 +127,7 @@ declare namespace RedshiftData {
      */
     WithEvent?: Boolean;
     /**
-     * The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -157,7 +157,7 @@ declare namespace RedshiftData {
      */
     SecretArn?: SecretArn;
     /**
-     * The serverless workgroup name. This element is not returned when connecting to a provisioned cluster.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This element is not returned when connecting to a provisioned cluster.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -316,7 +316,7 @@ declare namespace RedshiftData {
      */
     UpdatedAt?: Timestamp;
     /**
-     * The serverless workgroup name.
+     * The serverless workgroup name or Amazon Resource Name (ARN).
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -358,7 +358,7 @@ declare namespace RedshiftData {
      */
     Table?: String;
     /**
-     * The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -414,7 +414,7 @@ declare namespace RedshiftData {
      */
     WithEvent?: Boolean;
     /**
-     * The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -444,7 +444,7 @@ declare namespace RedshiftData {
      */
     SecretArn?: SecretArn;
     /**
-     * The serverless workgroup name. This element is not returned when connecting to a provisioned cluster.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This element is not returned when connecting to a provisioned cluster.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -530,7 +530,7 @@ declare namespace RedshiftData {
      */
     SecretArn?: SecretArn;
     /**
-     * The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -578,7 +578,7 @@ declare namespace RedshiftData {
      */
     SecretArn?: SecretArn;
     /**
-     * The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
      */
     WorkgroupName?: WorkgroupNameString;
   }
@@ -663,7 +663,7 @@ declare namespace RedshiftData {
      */
     TablePattern?: String;
     /**
-     * The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+     * The serverless workgroup name or Amazon Resource Name (ARN). This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
      */
     WorkgroupName?: WorkgroupNameString;
   }
