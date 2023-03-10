@@ -458,6 +458,9 @@
       },
       "errors": [
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "AccessDeniedException"
         },
         {

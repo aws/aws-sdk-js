@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1332.0',
+	  VERSION: '2.1333.0',
 
 	  /**
 	   * @api private
@@ -14514,10 +14514,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 	 */
 	function emitWarning() {
+	  if (typeof process === 'undefined')
+	    return;
+
+	  // Skip maintenance mode message in Lambda environments
 	  if (
-	    typeof process !== 'undefined' &&
-	    typeof process.emitWarning === 'function'
+	    typeof process.env === 'object' &&
+	    typeof process.env.AWS_EXECUTION_ENV !== 'undefined' &&
+	    process.env.AWS_EXECUTION_ENV.indexOf('AWS_Lambda_') === 0
 	  ) {
+	    return;
+	  }
+
+	  if (typeof process.emitWarning === 'function') {
 	    process.emitWarning(warning, {
 	      type: 'NOTE'
 	    });

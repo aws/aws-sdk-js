@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1332.0-->
+<!--LATEST=2.1333.0-->
 <!--ENTRYINSERT-->
+
+## 2.1333.0
+* bugfix: maintenance mode message: supress maintenance mode message in Lambda environment
+* feature: Ivschat: This release adds a new exception returned when calling AWS IVS chat UpdateLoggingConfiguration. Now UpdateLoggingConfiguration can return ConflictException when invalid updates are made in sequence to Logging Configurations.
+* feature: SecretsManager: The type definitions of SecretString and SecretBinary now have a minimum length of 1 in the model to match the exception thrown when you pass in empty values.
 
 ## 2.1332.0
 * feature: CodeArtifact: This release introduces the generic package format, a mechanism for storing arbitrary binary assets. It also adds a new API, PublishPackageVersion, to allow for publishing generic packages.

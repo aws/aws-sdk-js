@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "maintenance mode message",
-  "description": "supress maintenance mode message in Lambda environment"
-}
