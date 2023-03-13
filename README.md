@@ -34,6 +34,19 @@ for updates and announcements regarding the maintenance plans and timelines.
 Please refer to the [AWS SDKs and Tools maintenance policy][aws-sdks-maintenance-policy]
 for further details.
 
+A maintenance mode message may be emitted by this package on startup. 
+To suppress this message, use an environment variable:
+
+```sh
+AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=1 node my_program.js
+```
+
+or a JavaScript setting as follows:
+```js
+var SDK = require('aws-sdk');
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+```
+
 [v2-new-issue]: https://github.com/aws/aws-sdk-js/issues/new/choose
 [v3-recommended-blog]: https://aws.amazon.com/blogs/developer/why-and-how-you-should-use-aws-sdk-for-javascript-v3-on-node-js-18/
 [v3-contributing]: https://github.com/aws/aws-sdk-js-v3#giving-feedback-and-contributing
