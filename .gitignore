@@ -10,3 +10,4 @@ dist/aws-sdk-all.js
 yarn.lock
 package-lock.json
 workspace
+Makefile
